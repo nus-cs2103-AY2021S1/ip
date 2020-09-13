@@ -33,8 +33,8 @@ A JavaFX-Powered Task Manager App
 This is a java project created for CS2103T Software Engineering for AY2020/2021 Semester 1.
 
 Author: Lum Jian Yang Sean <br/>
-Version: 0 <br/>
-Release Date: 11 Sepetember 2020 <br/>
+Version: 0.1.3 <br/>
+Release Date: 14 Sepetember 2020 <br/>
 Github: <a href="http://github.com/seanjyjy">https://github.com/seanjyjy</a> <br />
 
 ### Getting Started
