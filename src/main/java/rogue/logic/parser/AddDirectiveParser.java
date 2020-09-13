@@ -34,6 +34,10 @@ public class AddDirectiveParser {
     private static final String ERROR_INCORRECT_DATE_FORMAT = "sToP TrYiNg tO FoOl mE."
             + " dAtE MuSt bE In yEaR-MoNtH-DaY FoRmAt.";
 
+    /** Message for when the action does not match any valid task. */
+    private static final String ERROR_INVALID_TASK = "sToP TrYiNg tO FoOl mE."
+            + " sUcH A TaSk cAnNoT Be aDdEd.";
+
     public AddDirective parse(Argument args) throws IncorrectInputException {
         String description = args.getOptionValue(OPTION_DESCRIPTION);
 
@@ -42,6 +46,9 @@ public class AddDirectiveParser {
         }
 
         switch (args.getAction()) {
+        case ADD_TODO:
+            return new AddDirective(Action.ADD_TODO, description);
+
         case ADD_DEADLINE:
             return parseDeadline(description, args);
 
@@ -49,7 +56,7 @@ public class AddDirectiveParser {
             return parseEvent(description, args);
 
         default:
-            return new AddDirective(Action.ADD_TODO, description);
+            throw new IncorrectInputException(ERROR_INVALID_TASK); // Should not be reached
         }
     }
 
@@ -61,7 +68,7 @@ public class AddDirectiveParser {
         }
 
         try {
-            LocalDate by = DateTimeUtil.stringAsDate(dateString);
+            LocalDate by = DateTimeUtil.convertStringToDate(dateString);
 
             return new AddDirective(Action.ADD_DEADLINE, description, by);
         } catch (DateTimeParseException e) {
@@ -77,7 +84,7 @@ public class AddDirectiveParser {
         }
 
         try {
-            LocalDate at = DateTimeUtil.stringAsDate(dateString);
+            LocalDate at = DateTimeUtil.convertStringToDate(dateString);
 
             return new AddDirective(Action.ADD_EVENT, description, at);
         } catch (DateTimeParseException e) {

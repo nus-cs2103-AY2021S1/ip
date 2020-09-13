@@ -1,5 +1,6 @@
 package rogue.logic.directives;
 
+import rogue.logic.directives.exceptions.ExecutionException;
 import rogue.model.report.Report;
 import rogue.model.argument.Action;
 import rogue.model.task.*;
@@ -13,6 +14,10 @@ import java.time.LocalDate;
  * Adds a {@code Task} to the {@code TaskList}.
  */
 public class AddDirective implements Executable {
+    /** Message for when the action does not match any valid task. */
+    private static final String ERROR_INVALID_TASK = "sToP TrYiNg tO FoOl mE."
+            + " sUcH A TaSk cAnNoT Be aDdEd.";
+
     /** Message upon adding a {@code Task} successfully. */
     private static final String MESSAGE_ADD_SUCCESS = "sInCe yOu'rE So hElPlEsS, i'lL ReMeMbEr \"%s\" FoR YoU.\n"
             + "yOu hAvE MaDe mE ReMeMbEr %d tAsK(s).";
@@ -60,10 +65,15 @@ public class AddDirective implements Executable {
      * @throws StorageException if data cannot be saved to file.
      */
     @Override
-    public Report execute(Storage storage, TaskList tasks, Ui ui) throws StorageException {
+    public Report execute(Storage storage, TaskList tasks, Ui ui)
+            throws ExecutionException, StorageException {
         Task task;
 
         switch (action) {
+        case ADD_TODO:
+            task = new Todo(description);
+            break;
+
         case ADD_DEADLINE:
             task = new Deadline(description, date);
             break;
@@ -73,8 +83,7 @@ public class AddDirective implements Executable {
             break;
 
         default:
-            task = new Todo(description);
-            break;
+            throw new ExecutionException(ERROR_INVALID_TASK); // Should not be reached
         }
 
         tasks.add(task);
