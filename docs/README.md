@@ -1,9 +1,11 @@
-# User Guide
+# Mrs Dino User Guide
+![Mrs Dino Example](/Ui.png)
+Format: ![Alt Text](url)
 
 ## Features 
 
-### Feature 1 
-Description of feature.
+### Add Todo Task
+> todo [Task]
 
 ## Usage
 
