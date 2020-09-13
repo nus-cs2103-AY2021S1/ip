@@ -130,7 +130,7 @@ Here are the tasks in your list:
  4:00:00 PM)
  ```
 
-### 6) `find`
+### 7) `find`
 - This command displays tasks that contains a given keyword.
 - A keyword is required.
 - The keyword can match the item only partially.
@@ -147,7 +147,7 @@ Here are the tasks in your list:
 These are the tasks with your keyword:
  1.[E][✘] exam (at: 23 Sep 2020, 4:00:00 PM)
  ```
-### 7) `schedule`
+### 8) `schedule`
 - This command displays tasks that are scheduled on the given date.
 - A date with the format **dd/mm/yyyy** is required.
  
@@ -163,7 +163,7 @@ Here are the tasks scheduled for this date:
  1.[E][✘] exam (at: 23 Sep 2020, 4:00:00 PM)
  ```
 
-### 7) `bye`
+### 9) `bye`
 - This command quits the application immediately.
  
  Usage format:
