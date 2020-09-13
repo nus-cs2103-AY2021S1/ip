@@ -12,8 +12,15 @@ then
     rm ACTUAL.TXT
 fi
 
+set JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF-8
+
 # compile the code into the bin folder, terminates if error occurred
-if ! javac -cp ../src -Xlint:none -d ../bin ../src/main/java/Duke.java
+
+if
+  ! (
+    find ../src/main/java -name "*.java" >sources.txt
+    javac -cp ../src -Xlint:none -d ../bin @sources.txt
+  )
 then
     echo "********** BUILD FAILURE **********"
     exit 1
