@@ -174,6 +174,19 @@ public class Storage {
         return result;
     }
 
+    protected static String processTasks(Task task) {
+        String result = "";
+        int isDone = task.getIsDone().equals("[\u2713] ") ? 1 : 0;
+        if (task instanceof Todo) {
+            result = "T | " + isDone + " | " + task.getTaskName();
+        } else if (task instanceof Deadline) {
+            result = "D | " + isDone + " | " + task.getTaskName() + " | " + ((Deadline) task).getByDate();
+        } else if (task instanceof Event) {
+            result = "E | " + isDone + " | " + task.getTaskName() + " | " + ((Event) task).getAtDate();
+        }
+        return result;
+    }
+
     /**
      * Writes data to the data file.
      * @param text the data to be written to the data file
@@ -229,14 +242,38 @@ public class Storage {
 
             lineNumber = lineNumber - 1;
             String lineToRemove = Files.readAllLines(Paths.get(this.fileName)).get(lineNumber);
-            String currLine;
 
-            while ((currLine = reader.readLine()) != null) {
+            String lineToRemoveSecondPass = processTasks(this.load().get(lineNumber));
+            String currLine;
+            lineToRemove = lineToRemove.trim();
+
+            /*while ((currLine = reader.readLine()) != null) {
                 String trimLine = currLine.trim();
                 if (trimLine.equals(lineToRemove)) {
                     continue;
                 }
                 writer.write(currLine + '\n');
+            }*/
+
+            String currLineSecondPass;
+
+            /*while ((currLineSecondPass = reader.readLine()) != null) {
+                String trimLine = currLineSecondPass.trim();
+                if (trimLine.equals(lineToRemoveSecondPass)) {
+                    continue;
+                }
+                writer.write(currLineSecondPass + '\n');
+            }*/
+
+            int count = 0;
+            while ((currLine = reader.readLine()) != null) {
+                String trimLine = currLine.trim();
+                if (count == lineNumber) {
+                    ;
+                } else {
+                    writer.write(currLine + '\n');
+                }
+                count++;
             }
 
             writer.close();
@@ -275,15 +312,43 @@ public class Storage {
             String[] taskInfo = lineToUpdate.trim().split(" [|] ");
             taskInfo[1] = String.valueOf(1);
             String doneLine = String.join(" | ", taskInfo);
-            String currLine;
 
-            while ((currLine = reader.readLine()) != null) {
+            String currLine;
+            lineToUpdate = lineToUpdate.trim();
+
+            /*while ((currLine = reader.readLine()) != null) {
                 String trimLine = currLine.trim();
                 if (trimLine.equals(lineToUpdate)) {
                     writer.write(doneLine + '\n');
                 } else {
                     writer.write(currLine + '\n');
                 }
+            }*/
+
+            String currLineSecondPass;
+
+            Task doneTask = this.load().get(lineNumber);
+            doneTask.markAsDone();
+            doneLine = processTasks(doneTask).trim();
+
+            /*while ((currLineSecondPass = reader.readLine()) != null) {
+                String trimLine = currLineSecondPass.trim();
+                if (trimLine.equals(lineToUpdate)) {
+                    writer.write(doneLine + '\n');
+                } else {
+                    writer.write(currLineSecondPass + '\n');
+                }
+            }*/
+
+            int count = 0;
+            while ((currLine = reader.readLine()) != null) {
+                String trimLine = currLine.trim();
+                if (count == lineNumber) {
+                    writer.write(doneLine + '\n');
+                } else {
+                    writer.write(currLine + '\n');
+                }
+                count++;
             }
 
             writer.close();
