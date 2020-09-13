@@ -131,10 +131,8 @@ public class Parser {
             String outputLine = stringedIndex + ". " + task;
             output = output + outputLine + "\n";
         }
-        return ui.LINE + "\n"
-                        + ui.findMsg() + "\n"
-                        + output
-                        + ui.LINE;
+        return ui.findMsg() + "\n"
+                        + output;
     }
 
     /**
@@ -151,7 +149,7 @@ public class Parser {
             items = items + outputLine + "\n";
         }
         storage.saveListToData(tasks.get());
-        return ui.lines() + "\n" + ui.listMsg() + "\n" + items + ui.lines();
+        return ui.listMsg() + "\n" + items;
     }
 
     /**
