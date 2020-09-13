@@ -56,6 +56,9 @@ public class DialogBox extends HBox {
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
+        if (text.contains("☹ OOPS!!!")) {
+            db.dialog.setStyle("-fx-text-fill: #AB4642");
+        }
         return db;
     }
 }
