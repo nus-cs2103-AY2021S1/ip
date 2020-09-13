@@ -1,5 +1,7 @@
 package task;
 
+import duke.Parser;
+
 /**
  * This class creates the task as a Todo_task. This task has no set date to occur.
  *
@@ -30,6 +32,13 @@ public class Todo extends Task {
         }
         base = base + taskDescription;
         return base;
+    }
+
+    /**
+     *
+     */
+    public void setRepeated(Parser.FrequencyOfRecurrence frequency) {
+        isRepeated = false;
     }
 
     /**

@@ -2,6 +2,8 @@ package task;
 
 import java.time.LocalDateTime;
 
+import duke.Parser;
+
 /**
  * Task is the main functionality of Duke. It is the unit that information given by the user
  * is stored as in Duke and is also how information from Duke is read to the user. It is an
@@ -11,15 +13,15 @@ import java.time.LocalDateTime;
  */
 public abstract class Task {
     /**
-     * position is the location of the task in the TaskList.
      * taskDescription is the contents of the task.
      * isCompleted is the indicator of whether the task has been done or not.
      * date is the scheduled time for the task to occur.
      */
-    protected int position;
     protected String taskDescription;
     protected boolean isCompleted;
     protected LocalDateTime date;
+    protected boolean isRepeated = false;
+    protected Parser.FrequencyOfRecurrence frequency;
 
     /**
      * Creates the task with the given taskDescription. Initializes the task as incomplete.
@@ -29,6 +31,16 @@ public abstract class Task {
     public Task(String taskDescription) {
         this.taskDescription = taskDescription;
         isCompleted = false;
+    }
+
+    public abstract void setRepeated(Parser.FrequencyOfRecurrence frequency);
+
+    public LocalDateTime getTime() {
+        return date;
+    }
+
+    public Parser.FrequencyOfRecurrence getFrequency() {
+        return frequency;
     }
 
     /**

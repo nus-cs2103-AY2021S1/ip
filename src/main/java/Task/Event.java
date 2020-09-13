@@ -3,6 +3,8 @@ package task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import duke.Parser;
+
 /**
  * Event is the type of Task where a scheduled event is to take place at a specific time.
  *
@@ -17,7 +19,6 @@ public class Event extends Task {
     private static final DateTimeFormatter SAVE_READ_DATETIME_FORMAT = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
     private static final DateTimeFormatter NEW_DATETIME_FORMAT = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mma");
 
-
     /**
      * Creates the Event with the given task description.
      *
@@ -27,7 +28,6 @@ public class Event extends Task {
         super(taskDescription);
     }
 
-
     /**
      * Sets the time for the event.
      *
@@ -35,6 +35,14 @@ public class Event extends Task {
      */
     public void setTime(LocalDateTime givenDate) {
         date = givenDate;
+    }
+
+    /**
+     * Sets the task to be recurring at the specified frequency.
+     */
+    public void setRepeated(Parser.FrequencyOfRecurrence frequency) {
+        isRepeated = true;
+        this.frequency = frequency;
     }
 
     /**
@@ -49,6 +57,23 @@ public class Event extends Task {
             base = base + "[O]";
         } else {
             base = base + "[X]";
+        }
+        if (isRepeated) {
+            switch (frequency.toString()) {
+            case "daily":
+                base = base + "[DRP]";
+                break;
+            case "weekly":
+                base = base + "[WRP]";
+                break;
+            case "monthly":
+                base = base + "[MRP]";
+                break;
+            default:
+                assert false;
+            }
+        } else {
+            base = base + "[NRP]";
         }
         base = base + taskDescription + "at:" + date.format(SAVE_READ_DATETIME_FORMAT);
         return base;
@@ -66,6 +91,9 @@ public class Event extends Task {
             base = base + "[O]";
         } else {
             base = base + "[X]";
+        }
+        if (isRepeated) {
+            base = base + "[" + frequency.toString() + "]";
         }
         base = base + taskDescription + "(at:" + date.format(NEW_DATETIME_FORMAT) + ")";
         return base;

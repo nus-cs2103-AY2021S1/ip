@@ -12,6 +12,7 @@ import command.ExitCommand;
 import command.FindCommand;
 import command.IncorrectCommand;
 import command.ListCommand;
+import command.RepeatCommand;
 import task.Deadline;
 import task.Event;
 import task.Todo;
@@ -30,8 +31,10 @@ public class Parser {
     private static final String COMMAND_ADD_EVENT = "event";
     private static final String COMMAND_DELETE_EVENT = "delete";
     private static final String COMMAND_FIND = "find";
+    private static final String COMMAND_REPEAT = "repeat";
     private static final String DATE_DEADLINE = "/by";
     private static final String DATE_EVENT = "/at";
+
 
     private static final DateTimeFormatter SAVE_READ_DATETIME_FORMAT = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 
@@ -79,6 +82,8 @@ public class Parser {
             return handleDelete(restOfCommand);
         case COMMAND_FIND:
             return new FindCommand(restOfCommand);
+        case COMMAND_REPEAT:
+            return handleRepeat(restOfCommand);
         default:
             return new IncorrectCommand("OOPS !!! Lo siento, pero no sé qué significa eso :-(");
         }
@@ -180,5 +185,42 @@ public class Parser {
         Event newEvent = new Event(taskDescription);
         newEvent.setTime(date);
         return new AddCommand(newEvent);
+    }
+
+    public enum FrequencyOfRecurrence {
+        daily,
+        weekly,
+        monthly
+    }
+
+    /**
+     * Creates a RepeatCommand and sets the task in that position to be recurring.
+     *
+     * @param restOfCommand the position of the task to act on and the frequency of recurrence.
+     * @return the RepeatCommand that will carry out the changing of the task.
+     */
+    private static Command handleRepeat(String restOfCommand) {
+        int positionRepeat;
+        if (restOfCommand.isEmpty()) {
+            return new IncorrectCommand("☹ OOPS !!! La descripción de una tarea no puede estar vacía.");
+        }
+        String[] splitWords = restOfCommand.split(" ");
+        if (splitWords.length < 2) {
+            return new IncorrectCommand("☹ OOPS !!! No entiendo lo que estás diciendo, ¡inténtalo de nuevo!");
+        }
+        try {
+            positionRepeat = Integer.parseInt(splitWords[0]);
+        } catch (NumberFormatException e) {
+            return new IncorrectCommand("☹ OOPS !!! No entiendo lo que estás diciendo, ¡inténtalo de nuevo!");
+        }
+        for (FrequencyOfRecurrence frequency : FrequencyOfRecurrence.values()) {
+            if (splitWords[1].equals(frequency.toString())) {
+                return new RepeatCommand(positionRepeat - 1, frequency);
+            }
+        }
+        assert !restOfCommand.contains(FrequencyOfRecurrence.daily.toString());
+        assert !restOfCommand.contains(FrequencyOfRecurrence.weekly.toString());
+        assert !restOfCommand.contains(FrequencyOfRecurrence.monthly.toString());
+        return new IncorrectCommand("☹ OOPS !!! No entiendo lo que estás diciendo, ¡inténtalo de nuevo!");
     }
 }

@@ -3,6 +3,8 @@ package task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import duke.Parser;
+
 /**
  * Deadline is a type of Task that can be added to the TaskList.
  *
@@ -27,6 +29,14 @@ public class Deadline extends Task {
     }
 
     /**
+     *
+     */
+    public void setRepeated(Parser.FrequencyOfRecurrence frequency) {
+        isRepeated = true;
+        this.frequency = frequency;
+    }
+
+    /**
      * Sets the deadline for the task.
      *
      * @param givenDate the deadline the task should be completed by.
@@ -48,6 +58,23 @@ public class Deadline extends Task {
         } else {
             base = base + "[X]";
         }
+        if (isRepeated) {
+            switch (frequency.toString()) {
+            case "daily":
+                base = base + "[DRP]";
+                break;
+            case "weekly":
+                base = base + "[WRP]";
+                break;
+            case "monthly":
+                base = base + "[MRP]";
+                break;
+            default:
+                assert false;
+            }
+        } else {
+            base = base + "[NRP]";
+        }
         base = base + taskDescription + "by:" + date.format(SAVE_READ_DATETIME_FORMAT);
         return base;
     }
@@ -64,6 +91,9 @@ public class Deadline extends Task {
             base = base + "[O]";
         } else {
             base = base + "[X]";
+        }
+        if (isRepeated) {
+            base = base + "[" + frequency.toString() + "]";
         }
         base = base + taskDescription + "(by:" + date.format(NEW_DATETIME_FORMAT) + ")";
         return base;
