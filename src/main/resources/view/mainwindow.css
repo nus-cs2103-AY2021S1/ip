@@ -29,13 +29,12 @@
     -fx-font-size: 18px;
     -fx-font-weight: bold;
     -fx-text-fill: white;
-    -fx-effect: dropshadow( three-pass-box , rgba(255,255,255,0.2) , 1, 0.0 , 0 , 1);
 }
 
 .userInput {
-    -fx-background-color:  #f8f8ff;
+    -fx-background-color:  #B8E7FE;
     -fx-text-fill: #2A1A93;
     -fx-font-size: 15px;
-    -fx-font-family: "Courier New";
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0.5, 0.0, 0.0);
+    -fx-font-family: "Consolas";
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0.5, 0.0, 0.0);
 }
