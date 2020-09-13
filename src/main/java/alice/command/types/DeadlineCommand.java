@@ -56,18 +56,24 @@ public class DeadlineCommand implements Command {
      * @throws InvalidCommandException if the user gives an invalid description and/or datetime.
      */
     public static DeadlineCommand createCommand(String argument) throws InvalidCommandException {
+        if (argument.isBlank() || argument.startsWith("/by")) {
+            // Empty description
+            throw new InvalidCommandException("The deadline description cannot be left empty.");
+        }
+
+        if (argument.endsWith("/by")) {
+            // Empty date
+            throw new InvalidCommandException("You cannot create an deadline without the date.");
+        }
+
+
         String[] arguments = argument.split(" /by ", 2);
         if (arguments.length == 2 && !arguments[1].isBlank()) {
             String description = arguments[0];
             String dateTime = arguments[1];
+
             TaskDateTime deadlineDt = TaskDateTime.parseDateTime(dateTime);
             return new DeadlineCommand(description, deadlineDt);
-        } else if (argument.isBlank()) {
-            // Empty description
-            throw new InvalidCommandException("The deadline description cannot be left empty.");
-        } else if (argument.endsWith("/by")) {
-            // Empty date
-            throw new InvalidCommandException("You cannot create an deadline without the date.");
         } else {
             // No /by marker
             throw new InvalidCommandException("I can't find the deadline date.\n"

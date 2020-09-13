@@ -51,11 +51,11 @@ public class TodoCommand implements Command {
      * @throws InvalidCommandException if the user gives an empty description.
      */
     public static TodoCommand createCommand(String description) throws InvalidCommandException {
-        if (!description.isBlank()) {
-            return new TodoCommand(description);
-        } else {
+        if (description.isBlank()) {
             throw new InvalidCommandException("The todo description cannot be left empty.");
         }
+
+        return new TodoCommand(description);
     }
 
     @Override

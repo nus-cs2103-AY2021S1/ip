@@ -20,6 +20,7 @@ public class Parser {
         String[] arr = userInput.strip().split(" ", 2);
         String cmd = arr[0];
         String argument = arr.length == 2 ? arr[1] : "";
+        argument = argument.strip();
 
         // Iterate through the command types
         CommandType[] commands = CommandType.values();

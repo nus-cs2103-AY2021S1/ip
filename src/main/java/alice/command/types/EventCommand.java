@@ -56,6 +56,16 @@ public class EventCommand implements Command {
      * @throws InvalidCommandException if the user gives an invalid description and/or datetime.
      */
     public static EventCommand createCommand(String argument) throws InvalidCommandException {
+        if (argument.isBlank() || argument.startsWith("/at")) {
+            // Empty event description
+            throw new InvalidCommandException("The event description cannot be left empty.");
+        }
+
+        if (argument.endsWith("/at")) {
+            // Empty start-end time
+            throw new InvalidCommandException("You cannot create an event without a date/time.");
+        }
+
         String[] arguments = argument.split(" /at ", 2);
         if (arguments.length == 2 && !arguments[1].isBlank()) {
             String description = arguments[0];
@@ -63,14 +73,8 @@ public class EventCommand implements Command {
 
             TaskDateTime eventDateTime = TaskDateTime.parseDateTime(dateTime);
             return new EventCommand(description, eventDateTime);
-        } else if (argument.isBlank()) {
-            // Empty event description
-            throw new InvalidCommandException("The event description cannot be left empty.");
-        } else if (argument.endsWith("/at")) {
-            // Empty start-end time
-            throw new InvalidCommandException("You cannot create an event without a date/time.");
         } else {
-            // No /on marker
+            // No /at marker
             throw new InvalidCommandException("I can't find the date/time of the event.\n"
                     + "Did you forget to add '/at'?");
         }
