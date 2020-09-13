@@ -39,7 +39,6 @@ public class FindCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeKeywordException {
         String keyword = Parser.findKeywordParser(this.command);
-        System.out.println(keyword.equals(""));
         StringBuilder sb = new StringBuilder();
         int i = 1;
 

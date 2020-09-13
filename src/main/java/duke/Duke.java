@@ -63,7 +63,8 @@ public class Duke {
             String command = ui.readCommand();
             try {
                 Command c = Parser.parseCommand(command);
-                c.execute(tasks, ui, storage);
+                String output = c.execute(tasks, ui, storage);
+                System.out.println(output);
                 isExit = c.isExit();
             } catch (FileNotFoundException e) {
                 ui.getExceptionTemplate(new DukeFileNotFoundException());
@@ -100,9 +101,8 @@ public class Duke {
      * @param args String[] arbitrary arguments.
      */
     public static void main (String[]args) {
-        //duke.Duke duke = new duke.Duke("data/data.txt");
-        //Duke duke = new Duke();
-        //duke.mainProgram();
+        Duke duke = new Duke("data/data.txt");
+        duke.mainProgram();
 
     }
 }
