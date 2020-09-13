@@ -12,6 +12,9 @@
          <buttons>
               <Label fx:id="dialog" text="Label" wrapText="true" />
          </buttons>
+         <HBox.margin>
+            <Insets />
+         </HBox.margin>
       </ButtonBar>
         <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" />
     </children>

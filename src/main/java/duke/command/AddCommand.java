@@ -76,17 +76,25 @@ public class AddCommand extends Command {
     }
 
     private String addEventTask(String userInput, TaskList taskList, Storage storage) throws DukeException {
-        String taskDescription = userInput.substring(6, userInput.indexOf("/at") - 1);
-        String eventDateTime = userInput.substring(userInput.indexOf("/at") + 4);
-        Event newEventItem = new Event(taskDescription, eventDateTime);
-        return addItem(newEventItem, taskList, storage);
+        try {
+            String taskDescription = userInput.substring(6, userInput.indexOf("/at") - 1);
+            String eventDateTime = userInput.substring(userInput.indexOf("/at") + 4);
+            Event newEventItem = new Event(taskDescription, eventDateTime);
+            return addItem(newEventItem, taskList, storage);
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new DukeException("Please refer to help instructions on how to add event task");
+        }
     }
 
     private String addDeadlineTask(String userInput, TaskList taskList, Storage storage) throws DukeException {
-        String taskDescription = userInput.substring(9, userInput.indexOf("/by") - 1);
-        String deadlineBy = userInput.substring(userInput.indexOf("/by") + 4);
-        Deadline newDeadlineItem = new Deadline(taskDescription, deadlineBy);
-        return addItem(newDeadlineItem, taskList, storage);
+        try {
+            String taskDescription = userInput.substring(9, userInput.indexOf("/by") - 1);
+            String deadlineBy = userInput.substring(userInput.indexOf("/by") + 4);
+            Deadline newDeadlineItem = new Deadline(taskDescription, deadlineBy);
+            return addItem(newDeadlineItem, taskList, storage);
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new DukeException("Please refer to help instructions on how to add deadline task");
+        }
     }
 
     /**

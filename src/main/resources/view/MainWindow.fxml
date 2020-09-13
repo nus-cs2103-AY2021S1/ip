@@ -20,7 +20,7 @@
     </ScrollPane>
    <ImageView fitHeight="557.0" fitWidth="389.0" opacity="0.3">
       <image>
-         <Image url="@../../../../../Siri.jpg" />
+         <Image url="@../images/Background.jpg" />
       </image>
    </ImageView>
 </AnchorPane>
