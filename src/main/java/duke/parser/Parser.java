@@ -44,7 +44,7 @@ public class Parser {
             case "schedule":
                 return new ScheduleCommand(args, tasks).execute();
             default:
-                return new ErrorCommand("☹ OOPS!!! I'm sorry, but I don't know what that means :-(").execute();
+                return new ErrorCommand("OOPS!!! I'm sorry, but I don't know what that means :-(").execute();
             }
         } catch (DukeException e) {
             return e.getMessage();

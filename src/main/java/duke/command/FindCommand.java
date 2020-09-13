@@ -14,14 +14,14 @@ public class FindCommand extends Command {
     @Override
     public String execute() throws DukeException {
         if (args.length < 2) {
-            return new ErrorCommand("☹ OOPS!!! The description of a find cannot be empty.").execute();
+            return new ErrorCommand("OOPS!!! The description of a find cannot be empty.").execute();
         }
 
         String searchString = args[1];
         TaskList matchedTasks = tasks.find(searchString);
 
         if (matchedTasks.isEmpty()) {
-            return new ErrorCommand("☹ OOPS!!! There is no such task in the list.").execute();
+            return new ErrorCommand("OOPS!!! There is no such task in the list.").execute();
         }
 
         StringBuilder concat = new StringBuilder();

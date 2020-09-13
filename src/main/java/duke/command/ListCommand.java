@@ -13,7 +13,7 @@ public class ListCommand extends Command {
     @Override
     public String execute() throws DukeException {
         if (tasks.isEmpty()) {
-            throw new DukeException("☹ OOPS!!! There is no task in the list.");
+            throw new DukeException("OOPS!!! There is no task in the list.");
         }
         
         StringBuilder concat = new StringBuilder();

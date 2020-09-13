@@ -18,7 +18,7 @@ public class DeleteCommand extends Command {
     @Override
     public String execute() throws DukeException {
         if (args.length < 2) {
-            return new ErrorCommand("☹ OOPS!!! The description of a delete cannot be empty.").execute();
+            return new ErrorCommand("OOPS!!! The description of a delete cannot be empty.").execute();
         }
 
         int inputNumber;
@@ -26,15 +26,15 @@ public class DeleteCommand extends Command {
         try {
             inputNumber = Integer.parseInt(args[1]);
         } catch(NumberFormatException e) {
-            return new ErrorCommand("☹ OOPS!!! Argument must be an integer.").execute();
+            return new ErrorCommand("OOPS!!! Argument must be an integer.").execute();
         }
 
         if (inputNumber <= 0) {
-            return new ErrorCommand(("☹ OOPS!!! Invalid argument.")).execute();
+            return new ErrorCommand(("OOPS!!! Invalid argument.")).execute();
         }
 
         if (inputNumber > tasks.size()) {
-            return new ErrorCommand("☹ OOPS!!! There is only " + tasks.size() + " tasks in the list.").execute();
+            return new ErrorCommand("OOPS!!! There is only " + tasks.size() + " tasks in the list.").execute();
         }
 
         int index = inputNumber - 1;
