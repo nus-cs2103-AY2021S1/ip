@@ -32,7 +32,7 @@ public class DoneCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidFormatDoneException {
         checkDoneFormat(tasks, inputArr);
-        return marking(parseInt(inputArr[1]), ui, tasks);
+        return mark(parseInt(inputArr[1]), ui, tasks);
     }
 
     /**
@@ -45,7 +45,7 @@ public class DoneCommand extends Command {
      * @return If index is valid, a String message will be displayed notifying which task has been marked, else there
      * will be a message notifying about the invalid input.
      */
-    private String marking(int pos, Ui ui, TaskList tasks) {
+    private String mark(int pos, Ui ui, TaskList tasks) {
         assert isNumber(Integer.toString(pos)) : "pos is not a number";
         Task task = tasks.get(pos - 1);
         return ui.messageFormatter(task.markAsDone());

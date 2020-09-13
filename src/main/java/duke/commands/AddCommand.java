@@ -68,20 +68,20 @@ public class AddCommand extends Command {
     private String addTask(String type, String message, Ui ui, TaskList tasks) throws InvalidFormatDeadlineException,
             InvalidFormatEventException, InvalidFormatDateException, DuplicateException {
         Task task = null;
-        String[] dateTime;
+        String[] descriptionAndDateTime;
         switch (type) {
         case KEYWORD_TODO:
             task = new ToDo(message);
             break;
         case KEYWORD_DEADLINE:
-            dateTime = message.split(KEYWORD_DEADLINE_FORMAT, 2);
-            checkDeadlineFormat(dateTime);
-            task = new Deadline(dateTime[0], formatDateTime(dateTime[1]));
+            descriptionAndDateTime = message.split(KEYWORD_DEADLINE_FORMAT, 2);
+            checkDeadlineFormat(descriptionAndDateTime);
+            task = new Deadline(descriptionAndDateTime[0], formatDateTime(descriptionAndDateTime[1]));
             break;
         case KEYWORD_EVENT:
-            dateTime = message.split(KEYWORD_EVENT_FORMAT, 2);
-            checkEventFormat(dateTime);
-            task = new Event(dateTime[0], formatDateTime(dateTime[1]));
+            descriptionAndDateTime = message.split(KEYWORD_EVENT_FORMAT, 2);
+            checkEventFormat(descriptionAndDateTime);
+            task = new Event(descriptionAndDateTime[0], formatDateTime(descriptionAndDateTime[1]));
             break;
         default:
             assert false : "Invalid task";

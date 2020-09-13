@@ -30,7 +30,7 @@ public class FormatChecker {
      * @throws InvalidFormatEventException When description is missing.
      */
     public static void checkEventFormat(String ... command) throws InvalidFormatEventException {
-        if (checkLengthEqualsOne(command)) {
+        if (!checkLengthEqualsTwo(command)) {
             throw new InvalidFormatEventException();
         }
     }

@@ -13,9 +13,7 @@ public class UnknownCommand extends Command {
     /**
      * Initialize an UnknownCommand object.
      *
-     * @param inputArr Array of length 2 that contains information of the user input
-     *                 At index 0, contains the type of command
-     *                 At index 1, contains the message of the command.
+     * @param inputArr Array of containing user's input.
      */
     public UnknownCommand(String[] inputArr) {
         super(inputArr);

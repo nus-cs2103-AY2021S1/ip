@@ -8,15 +8,15 @@ import org.junit.jupiter.api.Test;
 public class IntegerCheckerTest {
 
     @Test
-    @DisplayName("Check if input is not a number")
-    public void checkIfNotANumber() {
+    @DisplayName("Check if value is not a number")
+    public void checkIfNotANumberTest() {
         IntegerChecker integerChecker = new IntegerChecker();
         assertEquals(false, integerChecker.isNumber("b"));
     }
 
     @Test
-    @DisplayName("Check if input is number")
-    public void checkIfNumber() {
+    @DisplayName("Check if value is a number")
+    public void checkIfNumberTest() {
         IntegerChecker integerChecker = new IntegerChecker();
         assertEquals(true, integerChecker.isNumber("2"));
     }

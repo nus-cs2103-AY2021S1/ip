@@ -22,24 +22,30 @@ public class DateFormatterTest {
     }
 
     @Test
-    public void testFormatDateTime() {
-        try {
-            LocalDateTime obj = LocalDateTime.of(2020, 8, 25, 16, 23);
-            assertEquals(obj, dateFormatter.formatDateTime("2020-08-25 1623"));
-        } catch (InvalidFormatDateException e) {
-            System.out.println(e);
-        }
+    @DisplayName("Check invalid date format (2020/10/13 2700)")
+    public void writeInvalidTimeExceptionTest() {
+        assertThrows(InvalidFormatDateException.class, () ->
+                dateFormatter.formatDateTime("2020/10/13 2700"));
     }
 
     @Test
-    @DisplayName("Testing if user did not input in a correct date format")
-    public void writeInvalidFormatDateException() {
-        assertThrows(InvalidFormatDateException.class, () -> dateFormatter.formatDateTime("2020/20/13 1600"));
+    @DisplayName("Check impossible dates (2020-30-30 1600)")
+    public void writeInvalidDateExceptionTest() {
+        assertThrows(InvalidFormatDateException.class, () ->
+                dateFormatter.formatDateTime("2020-30-30 1600"));
     }
 
     @Test
-    @DisplayName("Test if the user input in impossible dates")
-    public void writeInvalidDateTimeException() {
-        assertThrows(InvalidFormatDateException.class, () -> dateFormatter.formatDateTime("2020-30-30 1600"));
+    @DisplayName("Check valid date without time(2020-12-12)")
+    public void writeValidDateTest() throws InvalidFormatDateException {
+        LocalDateTime localDateTime = LocalDateTime.of(2020, 12, 12, 23, 59);
+        assertEquals(localDateTime, dateFormatter.formatDateTime("2020-12-12"));
+    }
+
+    @Test
+    @DisplayName("Check valid date with time(2020-12-12 1600)")
+    public void writeValidDateAndTimeTest() throws InvalidFormatDateException {
+        LocalDateTime localDateTime = LocalDateTime.of(2020, 12, 12, 16, 0);
+        assertEquals(localDateTime, dateFormatter.formatDateTime("2020-12-12 1600"));
     }
 }
