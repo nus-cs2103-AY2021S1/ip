@@ -24,12 +24,12 @@ import javafx.scene.shape.Circle;
  */
 public class DialogBox extends HBox {
     private static final String USER_BACKGROUND =
-            "-fx-background-color: rgba(114, 205, 247, 0.5); -fx-background-radius: 15;";
+            "-fx-background-color: rgba(114, 205, 247, 0.9); -fx-background-radius: 15; -fx-font-weight: bold;";
     private static final String DUKE_BACKGROUND =
-            "-fx-background-color: rgba(77, 214, 116, 0.5); -fx-background-radius: 15;";
+            "-fx-background-color: rgba(68, 242, 117, 0.9); -fx-background-radius: 15; -fx-font-weight: bold;";
     private static final String ERROR_STYLE =
-            "-fx-background-color: rgba(242, 66, 54, 0.5); -fx-background-radius: 15;"
-                    + "-fx-font-size: 16px; -fx-font-weight: bold; -fx-color: red;";
+            "-fx-background-color: rgba(243, 156, 150, 0.9); -fx-background-radius: 15;"
+                    + "-fx-font-size: 16px; -fx-font-weight: bold;";
     @FXML
     private Label dialog;
     @FXML

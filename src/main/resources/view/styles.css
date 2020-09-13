@@ -25,3 +25,9 @@
     -fx-padding: 30, 10, 10, 10;
 }
 
+.scrollPane {
+     -fx-background-image: url('../images/background.jpg');
+     -fx-background-position: bottom center;
+     -fx-background: transparent;
+     -fx-background-size: cover;
+}

@@ -1,1 +1,4 @@
-T | 0 | x
+E | 0 | Math exam | 20-11-2020 1900
+T | 0 | Clean room
+D | 0 | Homework | 14-09-2020 2359
+T | 0 | Buy groceriesbye
