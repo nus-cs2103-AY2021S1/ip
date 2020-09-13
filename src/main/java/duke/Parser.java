@@ -22,6 +22,7 @@ public class Parser {
     private static final String COMMAND_TAG = "tag";
     private static final String COMMAND_LOGIN = "login";
     private static final String COMMAND_ADDUSER = "adduser";
+    private static final String COMMAND_LOVE = "love";
 
     public static Command parse(String input) throws DukeException {
         if (input.length() == 0) {
@@ -37,6 +38,8 @@ public class Parser {
             return new ByeCommand();
         } else if (commandType.equals(COMMAND_LIST)) {
             return new ListCommand();
+        } else if (commandType.equals(COMMAND_LOVE)) {
+            return new LoveCommand();
         }
         assert inputArr.length == 2 : "No Available Condition for Operation!";
         

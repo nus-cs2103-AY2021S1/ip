@@ -4,13 +4,13 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
-public class LoginCommand extends Command{
-    public LoginCommand() {
+public class LoveCommand extends Command {
+    public LoveCommand() {
+
     }
 
     @Override
     public String run(TaskList taskList, Storage storage) {
-        return Ui.login();
+        return Ui.love();
     }
-
 }
