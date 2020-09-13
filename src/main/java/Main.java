@@ -13,20 +13,27 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
     private Duke duke = new Duke();
+    private Stage window;
 
     @Override
     public void start(Stage stage) {
         try {
+            window = stage;
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
-            stage.setScene(scene);
-            stage.setTitle("Duke");
-            stage.getIcons().add(new Image(Main.class.getResourceAsStream("/images/userIcon.png")));
+            window.setScene(scene);
+            window.setTitle("Duke");
+            window.getIcons().add(new Image(Main.class.getResourceAsStream("/images/userIcon.png")));
             fxmlLoader.<MainWindow>getController().setDuke(duke);
-            stage.show();
+            fxmlLoader.<MainWindow>getController().setWindow(window);
+            window.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    
+    public void close() {
+        window.close();
     }
 }
