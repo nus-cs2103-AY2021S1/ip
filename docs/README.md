@@ -29,6 +29,10 @@ User is able to delete a task from the task list.
 
 User is able to find all tasks in the task list that contain a certain keyword.
 
+### Feature 8: Detect duplicates
+
+Duke is able to detect whether the task entered by the user is already a task in the task list. If so, the user will be alerted and this task will not be added again.
+
 ## Usage
 
 ### `todo` - Adds a todo into the task list
