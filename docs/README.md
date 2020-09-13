@@ -13,7 +13,7 @@ a chatbot with a fun personality can help make task management more appealing, h
 4. Double click `TebbyGUI.jar`. You should see a GUI with a welcome message from Tebby.
 5. You can start with the `help` command to get a list of commands.
 
-![sample image](sampleimage.PNG)
+![sample image](samplegui.png)
 
 Alternatively, you can start Tebby in CLI mode (for advanced users) with the following steps
 
