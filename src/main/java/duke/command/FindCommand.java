@@ -37,6 +37,7 @@ public class FindCommand extends Command {
         }
 
         String keyword = this.userInput.substring(5);
-        return taskList.showSpecifiedItems(keyword);
+
+        return "I've found these tasks that matches your keyword:\n" + taskList.showSpecifiedItems(keyword);
     }
 }

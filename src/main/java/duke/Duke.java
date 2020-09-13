@@ -53,7 +53,7 @@ public class Duke {
     }
 
     public String greet() {
-        return "Hello! How can I help you today?";
+        return "Hello! How can I help you today? Use the 'help' command to see what I can do!";
     }
 
     /**

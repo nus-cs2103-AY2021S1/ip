@@ -7,6 +7,7 @@ import duke.command.Commands;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.FindCommand;
+import duke.command.HelpCommand;
 import duke.command.ListCommand;
 import duke.command.UndoCommand;
 
@@ -48,6 +49,8 @@ public class Parser {
             return new DeleteCommand(fullCommand);
         case UNDO:
             return new UndoCommand(fullCommand);
+        case HELP:
+            return new HelpCommand();
         default:
             throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
