@@ -1,14 +1,13 @@
 package duke.task;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 /**
- * Represents a TimedTask. A <code>TimedTask</code> object contains a description,
+ * An abstract class TimedTask. A <code>TimedTask</code> object contains a description,
  * keeps track of whether it has been completed, stores a type as well as time.
  */
 public abstract class TimedTask extends Task {
-    protected static final String TIME_FORMAT = "d MMM yyyy";
+    // protected static final String TIME_FORMAT = "d MMM yyyy";
 
     protected LocalDate date;
 
@@ -20,8 +19,11 @@ public abstract class TimedTask extends Task {
     @Override
     public String toString() {
         return this.getTypeIcon() + this.getStatusIcon() + " " + description + " - " +
-                date;//.format(DateTimeFormatter.ofPattern(TIME_FORMAT));
+                date;
     }
 
+    /**
+     * Snooze this task. Currently postpones the task by one day.
+     */
     protected abstract void snooze();
 }
