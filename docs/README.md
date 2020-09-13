@@ -120,6 +120,7 @@ Exits the program.
 Format: `exit`
 
 ## Feature Summary 
+Command Types: 
 
 Command | Format/ Examples
 --------|-----------------
