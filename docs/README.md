@@ -4,6 +4,7 @@
 * The txt file stored on hard disk will be updated after any change to the collection of all *Task*
 * Although the program has taken care of some format issue such as preceding white space, following the format specification is necessary to make the command useful. 
 * Not understandable command will result in customized error message being shown. 
+
 #### Add 
 Fundamental command used for adding new *Task* into the collection.
 #### Exit
@@ -26,13 +27,13 @@ Advanced Command used for sorting all the *Task* according to the date and time.
 Advanced Command used for updating a *Deadline* or *Event* with a new date and time. 
 
 ## Usage
-- **<day>** should be expressed from the range of 1 to last date of the month, note that no 0 is needed for signle digit day
-- **<month>** should be expressed from the range of 01(January) to 12(December). note that **0** is needed for single digit month
-- **<year>** can be any four digit number, preceding 0s are also counted, however it doesn't make much sense in this case
-- **<content>** can be any text regardless of the white space in between
-- **<num>** can be any numeric value
+- **day** should be expressed from the range of 1 to last date of the month, note that no 0 is needed for signle digit day
+- **month** should be expressed from the range of 01(January) to 12(December). note that **0** is needed for single digit month
+- **year** can be any four digit number, preceding 0s are also counted, however it doesn't make much sense in this case
+- **content** can be any text regardless of the white space in between
+- **num** can be any numeric value
 - note the white space between text 
-- note the <num> for Delete, Done and Update represents the index of that specific task in the list
+- note the **num** for Delete, Done and Update represents the index of that specific task in the list
 ### `Add` 
 Example of usage: 
 ```
