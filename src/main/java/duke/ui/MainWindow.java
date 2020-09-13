@@ -2,6 +2,7 @@ package duke.ui;
 
 import duke.Duke;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -45,9 +46,14 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
+        DialogBox userDialog = DialogBox.getUserDialog(input, userImage);
+        DialogBox dukeDialog = DialogBox.getDukeDialog(response, dukeImage);
+
+        VBox.setMargin(userDialog, new Insets(10, 5, 10, 5));
+
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                userDialog,
+                dukeDialog
         );
         userInput.clear();
     }
