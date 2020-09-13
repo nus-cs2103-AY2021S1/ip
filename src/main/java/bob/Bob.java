@@ -53,7 +53,7 @@ public class Bob {
                 : ifPathDirIsIp
                 ? "data/bob.txt"
                 // Creates a save file on the user's home directory if user is not in ip directory
-                : System.getProperty("user.home") + "/bob.txt";
+                : System.getProperty("user.dir") + "/bob.txt";
     }
 
     private void setStateOfTasklist(Command c) throws BobInvalidUndoException {
