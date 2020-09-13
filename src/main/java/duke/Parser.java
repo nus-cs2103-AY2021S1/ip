@@ -69,8 +69,8 @@ public class Parser {
      */
     public static boolean checkInputForPriority(String input) {
         String[] inputWords = input.split(" ");
-        if (inputWords[0].equals("priority") && inputWords[2].matches("[0-9]+")
-                && inputWords.length == 3) {
+        if (inputWords.length == 3 && inputWords[0].equals("priority")
+                && inputWords[2].matches("[0-9]+")) {
             String priority = inputWords[1];
             switch (priority) {
             case "high":

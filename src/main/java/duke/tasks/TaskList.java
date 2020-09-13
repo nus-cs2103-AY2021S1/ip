@@ -3,7 +3,6 @@ package duke.tasks;
 import java.util.ArrayList;
 import java.util.List;
 
-import duke.DukeAction;
 import duke.DukeException;
 import duke.storage.Storage;
 
@@ -47,7 +46,7 @@ public class TaskList {
         } else {
             throw new DukeException("Rawr! Dino could not find any items in your task list."
                     + "\nGet started by entering a task. "
-                    + "Formats for a task can be found by entering 'format'.");
+                    + "Formats for a task can be found by entering 'help'.");
         }
     }
 
@@ -72,7 +71,8 @@ public class TaskList {
             Task toDelete = this.taskList.get(taskIndex);
             this.taskList.remove(taskIndex);
 
-            storage.writeToFile(toDelete, DukeAction.DELETE);
+            // update the storage task file
+            storage.writeToFile(taskList, taskList.size());
 
             return "Rawr! Dino has deleted " + "Task " + taskNumber
                     + " from your list:\n" + toDelete
@@ -114,14 +114,14 @@ public class TaskList {
                 // when input is not a deadline, event or todo
                 throw new DukeException("Rawr! Dino could not add your task. "
                         + "Make sure your format is correct."
-                        + "\nFormats to input a task can be found by entering 'format'.");
+                        + "\nFormats to input a task can be found by entering 'help'.");
             }
             return successStatement;
         } catch (IndexOutOfBoundsException e) {
             // invalid task format entered
             throw new DukeException("Rawr! Dino could not add your task. "
                     + "Make sure your format is correct."
-                    + "\nFormats to input a task can be found by entering 'format'.");
+                    + "\nFormats to input a task can be found by entering 'help'.");
         }
     }
 
@@ -136,7 +136,10 @@ public class TaskList {
         String task = input.substring(5);
         Todo todo = new Todo(task);
         this.taskList.add(todo);
-        storage.writeToFile(todo, DukeAction.ADD);
+
+        // update the storage task file
+        storage.writeToFile(taskList, taskList.size());
+
         return "Dino has added to your list of tasks:\n"
                 + todo
                 + "\nNumber of tasks in list: " + this.taskList.size();
@@ -156,14 +159,17 @@ public class TaskList {
             // task deadline taken as string after first '/by'
             Deadline deadline = Deadline.createDeadline(taskBy[0], taskBy[1].substring(1));
             this.taskList.add(deadline);
-            storage.writeToFile(deadline, DukeAction.ADD);
+
+            // update the storage task file
+            storage.writeToFile(taskList, taskList.size());
+
             return "Dino has added to your list of tasks:\n"
                     + deadline
                     + "\nNumber of tasks in list: " + this.taskList.size();
         } else {
             throw new DukeException("Rawr! Dino could not add your task. "
                     + "Make sure your format is correct."
-                    + "\nFormats to input a task can be found by entering 'format'.");
+                    + "\nFormats to input a task can be found by entering 'help'.");
         }
     }
 
@@ -181,14 +187,17 @@ public class TaskList {
             // task deadline taken as string after first '/at'
             Event event = Event.createEvent(eventAt[0], eventAt[1].substring(1));
             this.taskList.add(event);
-            storage.writeToFile(event, DukeAction.ADD);
+
+            // update the storage task file
+            storage.writeToFile(taskList, taskList.size());
+
             return "Dino has added to your list of tasks:\n"
                     + event
                     + "\nNumber of tasks in list: " + this.taskList.size();
         } else {
             throw new DukeException("Rawr! Dino could not add your task. "
                     + "Make sure your format is correct."
-                    + "\nFormats to input a task can be found by entering 'format'.");
+                    + "\nFormats to input a task can be found by entering 'help'.");
         }
     }
 
@@ -212,9 +221,12 @@ public class TaskList {
             int taskIndex = taskNumber - 1;
             Task doneTask = this.taskList.get(taskIndex);
 
-            storage.writeToFile(doneTask, DukeAction.MARK_DONE);
-
+            // mark task as done
             doneTask.markAsDone();
+
+            // update the storage task file
+            storage.writeToFile(taskList, taskList.size());
+
             return "Great! Dino has marked " + "Task " + taskNumber
                     + " as done:\n" + doneTask;
         } else {
@@ -282,7 +294,8 @@ public class TaskList {
                         + "high/mid/low for priority status.");
             }
 
-            storage.writeToFile(taskToSetPriority, DukeAction.SET_PRIORITY);
+            /// update the storage task file
+            storage.writeToFile(taskList, taskList.size());
 
             return "Great! Dino has set " + taskToSetPriority.priority.name()
                     + " priority for " + "Task " + taskNumber

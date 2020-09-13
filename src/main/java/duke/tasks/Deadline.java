@@ -85,8 +85,13 @@ public class Deadline extends Task {
 
             StringBuilder formattedTime = new StringBuilder();
             if (hour >= 12 && hour < 24 && min < 60 && min >= 0) {
-                formattedTime.append(hour - 12).append(".")
-                        .append(String.format("%02d", min)).append("pm");
+                if (hour == 12) {
+                    formattedTime.append(hour).append(".")
+                            .append(String.format("%02d", min)).append("pm");
+                } else {
+                    formattedTime.append(hour - 12).append(".")
+                            .append(String.format("%02d", min)).append("pm");
+                }
             } else if (hour > 0 && hour < 12 && min < 60 && min >= 0) {
                 formattedTime.append(hour).append(".")
                         .append(String.format("%02d", min)).append("am");

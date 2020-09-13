@@ -1,16 +1,13 @@
 package duke.storage;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import duke.DukeAction;
 import duke.DukeException;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
@@ -226,149 +223,6 @@ public class Storage {
     }
 
     /**
-     * Writes action done to task into hard disk.
-     * If action is ADD, Dino adds task to hard disk.
-     * If action is DELETE, Dino deletes task from hard disk.
-     * If action is MARK_DONE, Dino marks the specific task in hard disk as done.
-     *
-     * @param task Task to be acted upon.
-     * @param action DukeAction action done to task.
-     * @throws DukeException If Dino could not write to hard disk.
-     */
-    public void writeToFile(Task task, DukeAction action) throws DukeException {
-        try {
-            File inputFile = new File(this.filepath);
-            File tempFile = new File("./data/myTempFile.txt");
-            BufferedReader reader = new BufferedReader(new FileReader(this.filepath));
-            BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
-
-            switch (action) {
-
-            case ADD:
-                FileWriter fw = new FileWriter(this.filepath, true);
-                fw.write(task.storedTaskString() + "\n");
-                fw.close();
-                System.out.println("Success!");
-                break;
-
-            case DELETE:
-                deleteTaskFromFile(task, reader, writer);
-                deleteAndReplaceFile(inputFile, tempFile);
-                break;
-
-            case MARK_DONE:
-                markTaskDoneInFile(task, reader, writer);
-                deleteAndReplaceFile(inputFile, tempFile);
-                break;
-
-            case SET_PRIORITY:
-                setTaskPriorityInFile(task, reader, writer);
-                deleteAndReplaceFile(inputFile, tempFile);
-                break;
-
-            default:
-                throw new DukeException("Not a valid action.");
-            }
-
-        } catch (IOException e) {
-            throw new DukeException("Dino could not write task data to hard disk.");
-        }
-    }
-
-    /**
-     * Deletes task from the file.
-     * @param task task to be deleted
-     * @param reader reader to read file
-     * @param writer writer to write to file
-     * @throws IOException If I/O operation interrupted.
-     */
-    public void deleteTaskFromFile(Task task, BufferedReader reader, BufferedWriter writer)
-            throws IOException {
-        String lineToRemove = task.storedTaskString();
-        String currentLine;
-
-        while ((currentLine = reader.readLine()) != null) {
-            if (!currentLine.equals(lineToRemove)) {
-                writer.write(currentLine);
-                writer.newLine();
-            }
-        }
-
-        writer.close();
-        reader.close();
-        System.gc();
-    }
-
-    /**
-     * Marks task in file as done.
-     * @param task task to be marked done
-     * @param reader reader to read file
-     * @param writer writer to write to file
-     * @throws IOException If I/O operation interrupted.
-     */
-    public void markTaskDoneInFile(Task task, BufferedReader reader, BufferedWriter writer)
-            throws IOException {
-        String lineToMarkDone = task.storedTaskString();
-        String currentL;
-
-        while ((currentL = reader.readLine()) != null) {
-            if (!currentL.equals(lineToMarkDone)) {
-                writer.write(currentL);
-            } else {
-                String taskType = currentL.substring(0, 4);
-                String taskDesc = currentL.substring(5);
-                writer.write(taskType + "1" + taskDesc);
-            }
-            writer.newLine();
-        }
-
-        writer.close();
-        reader.close();
-        System.gc();
-    }
-
-    /**
-     * Sets priority of task in file.
-     * @param task Task to set priority
-     * @param reader reader to read file
-     * @param writer writer to write to file
-     * @throws IOException If I/O operation interrupted.
-     * @throws DukeException If priority is not valid.
-     */
-    public void setTaskPriorityInFile(Task task, BufferedReader reader, BufferedWriter writer)
-            throws IOException, DukeException {
-        Priority priority = task.getPriority();
-        String currentTask = task.storedTaskString();
-        String taskToSetPriority;
-
-        switch (priority) {
-        case HIGH:
-            taskToSetPriority = currentTask.substring(0, currentTask.length() - 7);
-            break;
-        case MID:
-        case LOW:
-            taskToSetPriority = currentTask.substring(0, currentTask.length() - 6);
-            break;
-        default:
-            throw new DukeException("Something went wrong in setting priority to task in file.");
-        }
-
-        String currentL;
-        while ((currentL = reader.readLine()) != null) {
-            if (!currentL.contains(taskToSetPriority)) {
-                writer.write(currentL);
-            } else {
-                writer.write(task.storedTaskString());
-            }
-            writer.newLine();
-        }
-
-        writer.close();
-        reader.close();
-        System.gc();
-    }
-
-    /**
      * Deletes input file and renames temporary file as the input file.
      * @param inputFile file to be deleted
      * @param tempFile file to be renamed
@@ -386,6 +240,36 @@ public class Storage {
             }
         } else {
             throw new DukeException("Dino could not write task data to hard disk.");
+        }
+    }
+
+    /**
+     * Updates the tasklist.txt file in hard disk with the new task list.
+     *
+     * @param taskList the new task list used to update tasklist.txt.
+     * @param size size of the new task list.
+     */
+    public void writeToFile(List<Task> taskList, int size) {
+        try {
+
+            File inputFile = new File(this.filepath);
+            File tempFile = new File("./data/myTempFile.txt");
+            BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile, true));
+
+            // iterate through the tasks to be written to temp file
+            for (int i = 0; i < size; i++) {
+                Task currTask = taskList.get(i);
+                writer.write(currTask.storedTaskString());
+                writer.newLine();
+            }
+            writer.close();
+            System.gc();
+
+            //delete original tasklist.txt file and rename temp file to tasklist.txt
+            deleteAndReplaceFile(inputFile, tempFile);
+
+        } catch (IOException | DukeException e) {
+            System.out.println(e.getMessage());
         }
     }
 }
