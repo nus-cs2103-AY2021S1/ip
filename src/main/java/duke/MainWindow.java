@@ -29,7 +29,12 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Oshawott.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Piplup.png"));
 
-    public void setDukeAndDisplayWelcome(Duke d) {
+    /**
+     * Sets duke object and displays welcome.
+     *
+     * @param d Main driver of application.
+     */
+    void setDukeAndDisplayWelcome(Duke d) {
         duke = d;
 
         String response = duke.getWelcome();
@@ -39,7 +44,7 @@ public class MainWindow extends AnchorPane {
     }
 
     @FXML
-    public void initialize() {
+    void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 

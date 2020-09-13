@@ -13,6 +13,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
+    /** Driver of application. */
     private Duke duke = new Duke("data/tasks.txt");
 
     @Override

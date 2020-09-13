@@ -6,18 +6,18 @@ package duke;
 class Todo extends Task {
 
     /**
-     * Constructor of Todo class.
+     * Constructs a to do.
      *
-     * @param description Todo description.
+     * @param description Description for to do.
      */
     Todo(String description) {
         super(description);
     }
 
     /**
-     * Constructor of Todo class.
+     * Constructs a to do.
      *
-     * @param description Todo description.
+     * @param description Description for to do.
      * @param isDone Describes if task is completed.
      */
     Todo(String description, boolean isDone) {
@@ -25,9 +25,9 @@ class Todo extends Task {
     }
 
     /**
-     * Returns simple string format for file.
+     * Returns string format for file storage.
      *
-     * @return Simple string description.
+     * @return String description.
      */
     @Override
     String toStringForStorage() {

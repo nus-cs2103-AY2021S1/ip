@@ -94,13 +94,6 @@ class Parser {
         return new SortCommand(sortOrderOptionEnum);
     }
 
-    /**
-     * Takes in task info and command and calls respective handler (e.g. handle event).
-     *
-     * @param inputs Task info, after removing first word from user input.
-     * @param commandName CommandName (e.g. Event), first word from user input.
-     * @throws DukeException If deadline date not input for deadline, or event date not input for event.
-     */
     private static Command handleTask(String[] inputs, CommandName commandName) throws DukeException {
         String errorMessage = ErrorMessage.getErrorMessage(
                 ErrorType.TASK_MISSING_DESCRIPTION,

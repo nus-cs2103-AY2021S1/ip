@@ -4,13 +4,14 @@ package duke;
  * Class representing generic tasks.
  */
 class Task {
+
     /** Variable to store task description. */
     protected String description;
     /** Variable to store if the task is completed. */
     protected boolean isDone;
 
     /**
-     * Constructor used to create tasks.
+     * Constructs tasks.
      *
      * @param description Task description.
      */
@@ -20,7 +21,7 @@ class Task {
     }
 
     /**
-     * Constructor used to create tasks.
+     * Constructs tasks.
      *
      * @param description Task description.
      * @param isDone Describes if task is completed.
@@ -58,9 +59,9 @@ class Task {
     }
 
     /**
-     * Returns simple string format for file.
+     * Returns string format for file storage.
      *
-     * @return Simple string description.
+     * @return String description.
      */
     String toStringForStorage() {
         int intDone = isDone ? 1 : 0;

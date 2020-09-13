@@ -14,11 +14,24 @@ class AddCommand extends Command {
     /** Date in string format. */
     private String date;
 
+    /**
+     * Constructs a add command.
+     *
+     * @param commandName Name of command to add.
+     * @param description Task description.
+     */
     AddCommand(CommandName commandName, String description) {
         this.commandName = commandName;
         this.description = description;
     }
 
+    /**
+     * Constructs a add command.
+     *
+     * @param commandName Name of command to add.
+     * @param description Task description.
+     * @param date Date of deadline or event.
+     */
     AddCommand(CommandName commandName, String description, String date) {
         this.commandName = commandName;
         this.description = description;

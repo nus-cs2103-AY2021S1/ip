@@ -10,6 +10,11 @@ class DoneCommand extends Command {
     /** Index of task to be done. */
     private int index;
 
+    /**
+     * Constructs done command.
+     *
+     * @param index Index of task to do.
+     */
     DoneCommand(int index) {
         this.index = index;
     }

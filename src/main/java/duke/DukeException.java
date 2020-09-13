@@ -5,9 +5,9 @@ package duke;
  */
 class DukeException extends Exception {
     /**
-     * Constructor of duke-specific exception.
+     * Constructs duke-specific exception.
      *
-     * @param s string input of exception.
+     * @param s String input of exception.
      */
     DukeException(String s) {
         super(s);

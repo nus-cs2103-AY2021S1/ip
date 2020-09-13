@@ -10,13 +10,11 @@ import java.time.format.FormatStyle;
  */
 class Event extends Task {
 
-    /**
-     * Variable to store event time.
-     */
+    /** Variable to store event time. */
     protected LocalDate eventDate;
 
     /**
-     * Constructor used to create Event.
+     * Constructs event.
      *
      * @param description Event description.
      * @param eventDate Event time.
@@ -27,7 +25,7 @@ class Event extends Task {
     }
 
     /**
-     * Constructor used to create Event.
+     * Constructs event.
      *
      * @param description Event description.
      * @param eventDate Event time.
@@ -39,9 +37,9 @@ class Event extends Task {
     }
 
     /**
-     * Returns simple string format for file.
+     * Returns string format for file storage.
      *
-     * @return Simple string description.
+     * @return String description.
      */
     @Override
     String toStringForStorage() {

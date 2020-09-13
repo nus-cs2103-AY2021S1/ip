@@ -11,7 +11,7 @@ class SortCommand extends Command {
     private SortOrderOption sortOrderOptionEnum;
 
     /**
-     * Constructs SortCommand object, which handles logic of sorting tasks.
+     * Constructs sort command, which handles logic of sorting tasks.
      *
      * @param sortOrderOptionEnum Option to order ascending or descending.
      */

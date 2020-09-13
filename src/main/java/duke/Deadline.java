@@ -10,13 +10,11 @@ import java.time.format.FormatStyle;
  */
 class Deadline extends Task {
 
-    /**
-     *  String used to store deadline.
-     */
+    /** String used to store deadline. */
     protected LocalDate deadlineDate;
 
     /**
-     * Constructor for deadline class.
+     * Constructs deadline.
      *
      * @param description Task description.
      * @param deadlineDate Deadline.
@@ -27,7 +25,7 @@ class Deadline extends Task {
     }
 
     /**
-     * Constructor for deadline class.
+     * Constructs deadline.
      *
      * @param description Task description.
      * @param deadlineDate Deadline.
@@ -39,9 +37,9 @@ class Deadline extends Task {
     }
 
     /**
-     * Returns simple string format for file.
+     * Returns string format for file storage.
      *
-     * @return Simple string description.
+     * @return String description.
      */
     @Override
     String toStringForStorage() {
