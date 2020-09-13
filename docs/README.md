@@ -13,7 +13,7 @@ With a simple interface and easy-to-use commands, you would be able to use Focus
 
 ## Getting Started
 1. Ensure that you have at least **Java 11** installed in your laptop.
-2. Download the **latest version of focus.jar** file here.
+2. Download **v0.2 focus.jar** file [here](https://github.com/ruilingk/ip/releases/tag/A-Release).
 3. Once downloaded, double-click it to run.
 4. You should see something like this:  
 ![Image of Starting Screen](./images/startingScreen.png)
