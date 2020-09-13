@@ -61,7 +61,6 @@ public class DialogBox extends HBox {
     }
     
     public static DialogBox initDukeDialog(Image img) {
-        System.out.println(Ui.LOGO);
         String welcomeMsg = "Welcome to Duke!!!";
         return getDukeDialog(welcomeMsg, img);
     }
