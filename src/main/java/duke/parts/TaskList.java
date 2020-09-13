@@ -82,6 +82,12 @@ public class TaskList {
         return temp;
     }
 
+    public Task markDone(int index, Storage storage) {
+        tasks.get(index).setDone();
+        this.updateList(storage);
+        return tasks.get(index);
+    }
+
     public void sort(Storage storage) {
         Collections.sort(tasks, new TaskComparator());
         this.updateList(storage);

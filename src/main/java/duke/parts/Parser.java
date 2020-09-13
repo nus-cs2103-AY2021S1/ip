@@ -33,6 +33,10 @@ public class Parser {
             int space = input.indexOf(" ") + 1;
             String word = input.substring(space, input.length());
             return new FindCommand(word);
+        } else if (input.indexOf("done") == 0) {
+            int space = input.indexOf(" ") + 1;
+            String index = input.substring(space, input.length());
+            return new DoneCommand(index);
         } else {
             throw new UnknownAction();
         }

@@ -11,6 +11,9 @@ public class TaskComparator implements Comparator<Task> {
 
     @Override
     public int compare(Task t1, Task t2) {
+            if(t1 instanceof ToDo && t2 instanceof ToDo) {
+                return 1;
+            }
             if (t1 instanceof ToDo) {
                 return -1;
             } else if (t2 instanceof ToDo) {

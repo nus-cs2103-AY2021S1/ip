@@ -31,19 +31,22 @@ public class Ui {
         return sc.nextLine();
     }
 
-    public String printNumTask(int numTask) {
-        return String.format("%syou have %d tasks in the list.", INDENT, numTask);
+    private String printNumTask(int numTask) {
+        if(numTask == 1) {
+            return String.format("%sYou have %d task in the list.", INDENT, numTask);
+        }
+        return String.format("%sYou have %d tasks in the list.", INDENT, numTask);
     }
 
     /**
      * Shows the response after an item is deleted.
      * @param removed Task that have been removed.
      * @param numLeft Remaining number of tasks in the system
-     * @return The appropriate response.
+     * @return The message for the user
      */
     public String showDelete(Task removed, int numLeft) {
         String taskLeft = printNumTask(numLeft);
-        String output = INDENT + "Tasked removed: " + "\n"
+        String output = INDENT + "Task removed: " + "\n"
                                 + INDENT + removed.getOutput() + "\n"
                                 + taskLeft;
         System.out.println(output);
@@ -53,7 +56,7 @@ public class Ui {
     /**
      * Prints the list of task in the system
      * @param storage Storage of the system.
-     * @return The appropriate response.
+     * @return The message for the user
      * @throws IOException
      */
     public String printList(Storage storage) throws IOException {
@@ -75,11 +78,11 @@ public class Ui {
      * @param task Task that is added.
      * @param type The type of task.
      * @param numTask Number of task in the system before adding this task.
-     * @return The appropriate response.
+     * @return The message for the user
      */
     public String printNew(Task task, String type, int numTask) {
         String output = String.format("%sAdding %s to the list:\n", INDENT, type)
-                        + String.format("%s %s\n", INDENT, task.getOutput())
+                        + String.format("%s%s\n", INDENT, task.getOutput())
                                 + printNumTask(numTask);
         System.out.println(output);
         return output;
@@ -88,14 +91,14 @@ public class Ui {
     /**
      * Shows the tasks that macthes the search criteria.
      * @param arr Arraylist of items that has been found.
-     * @return The appropriate response.
+     * @return The message for the user
      */
     public String printFind(ArrayList<Task> arr) {
         if (arr.isEmpty()) {
             System.out.println(INDENT + "There are no items");
             return INDENT + "There are no items";
         } else {
-            String output = INDENT + "Here are the items that match the search request\n";
+            String output = INDENT + "Here are the items that match\n";
             for (int i = 0; i < arr.size(); i++) {
                 output += String.format("%s%d) %s", INDENT, i + 1,
                         arr.get(i).getOutput()) + "\n";
@@ -114,7 +117,16 @@ public class Ui {
         return INDENT + "Bye. Hope to see you again soon";
     }
 
-    public String printSort() {
-        return "";
+    /**
+     * Prints the message when task is marked as done
+     * @param task
+     * @return Message for the user
+     */
+    public String printDone(Task task) {
+        String output = INDENT + "Nice! I've marked this task as done: \n";
+        output += INDENT;
+        output += task.getOutput();
+        System.out.println(output);
+        return output;
     }
 }
