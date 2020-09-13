@@ -27,9 +27,9 @@ public class ListCommand extends Command {
      * @return Resultant string with all the tasks in the list
      */
     public String executeToString(TaskList tasks, Ui ui, Storage storage) {
-        String result = "    Here are the tasks in your list:";
+        String result = "Here are the tasks in your list:";
         for (int i = 0; i < tasks.size(); i++) {
-            result += "\n    " + (i + 1) + ". " + tasks.get(i);
+            result += "\n" + (i + 1) + ". " + tasks.get(i);
 
         }
         return result;
