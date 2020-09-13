@@ -52,10 +52,10 @@ class Task {
     /**
      * Gets task done status.
      *
-     * @param done Task done status.
+     * @param isDone Task done status.
      */
-    void setDone(boolean done) {
-        isDone = done;
+    void setDone(boolean isDone) {
+        this.isDone = isDone;
     }
 
     /**

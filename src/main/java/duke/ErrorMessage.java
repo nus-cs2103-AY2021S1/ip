@@ -52,7 +52,7 @@ class ErrorMessage {
         case DEADLINE_AND_EVENT_MISSING_DATE:
             return "PIII!!! The date of a/n " + taskType + " cannot be empty. \uD83D\uDC80";
         case TASK_MISSING_DESCRIPTION:
-            return "PIII!!! The description of a " + taskType + " cannot be empty. \uD83D\uDC80";
+            return "PIII!!! The description of a/n " + taskType + " cannot be empty. \uD83D\uDC80";
         default:
             assert false : "Should not reach here, this should be called by other "
                     + "classes only with the enumerations above";

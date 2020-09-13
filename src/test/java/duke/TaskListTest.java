@@ -1,9 +1,9 @@
 package duke;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
+
+import org.junit.jupiter.api.Test;
 
 class TaskListTest {
 
@@ -12,11 +12,10 @@ class TaskListTest {
         try {
             TaskList tasks = new TaskList();
             CommandName deadline = CommandName.DEADLINE;
-            Ui ui = new Ui();
             tasks.addTask(deadline, "desc", "2020/10/10");
             fail();
         } catch (DukeException e) {
-            assertEquals("OOPS!!! Pass in a date in yyyy-mm-dd :-(", e.getMessage());
+            assertEquals("PIII!!! Pass in a date in yyyy-mm-dd. \uD83D\uDC80", e.getMessage());
         }
     }
 }
