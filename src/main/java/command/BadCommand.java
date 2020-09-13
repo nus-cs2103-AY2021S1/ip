@@ -17,7 +17,7 @@ public class BadCommand extends Command {
             + "5. done - marks task as done\n"
             + "6. delete - deletes task from the list\n"
             + "7. find - finds tasks containing keyword\n"
-            + "8. tag - tags tasks with given tag";
+            + "8. tag - tags tasks with given tag\n";
     }
 
 }

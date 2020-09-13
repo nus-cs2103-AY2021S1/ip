@@ -22,4 +22,14 @@ public class Ui {
         String goodbye = "Sayonara.\n";
         return goodbye;
     }
+
+    /**
+     * Adds dashed lines to improve separation between user and Duke responses.
+     * @return String to be displayed for response.
+     */
+    public String formatResponse(String input) {
+        return "- - - - - - - - - - - - Dark Side: - - - - - - - - - - - -\n\n"
+                + input
+                + "\n- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n";
+    }
 }

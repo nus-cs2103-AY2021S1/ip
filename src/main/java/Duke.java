@@ -63,9 +63,8 @@ public class Duke {
      * Replace this stub with your completed method.
      */
     String getResponse(String input) throws DukeException {
-        return "- - - - - - - - - - - - Dark Side: - - - - - - - - - - - -\n\n"
-            + this.run(input)
-            + "\n- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n";
+        String response = this.run(input);
+        return this.ui.formatResponse(response);
     }
 
     /**
