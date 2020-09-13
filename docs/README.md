@@ -18,7 +18,7 @@ With a simple interface and easy-to-use commands, you would be able to use Focus
 4. You should see something like this:  
 ![Image of Starting Screen](./images/startingScreen.png)
 5. Start by typing in your name!  
-![Image of Starting Screen](./images/homeScreen.png)
+![Image of Home Screen](./images/newHomeScreen.png)
 6. Next, start talking to Pocus and manage your tasks!
 
 ## Features 
