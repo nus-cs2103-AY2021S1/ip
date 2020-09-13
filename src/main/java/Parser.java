@@ -144,7 +144,7 @@ public class Parser {
         String items = "";
         for (int i = 0; i < tasks.length(); i++) {
             Task task = tasks.get(i);
-            String stringedIndex = Integer.toString(tasks.getIndex(task) + 1);
+            String stringedIndex = Integer.toString(i + 1);
             String outputLine = stringedIndex + ". " + task;
             items = items + outputLine + "\n";
         }

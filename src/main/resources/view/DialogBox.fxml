@@ -2,12 +2,14 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 
-<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label fx:id="dialog" text="Label" wrapText="true" />
+        <Label fx:id="dialog" graphicTextGap="10.0" style="-fx-background-color: #08364E; -fx-padding: 7px; -fx-border-radius: 3px; -fx-background-radius: 5px; -fx-background-insets: 0,1; -fx-effect: innershadow(three-pass-box, rgba(0,0,0,0.75),1,0,1,1);" text="Label" textFill="#e1e0e0" wrapText="true" />
+      <Separator opacity="0.0" orientation="VERTICAL" prefHeight="200.0" prefWidth="24.0" />
         <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" />
     </children>
     <padding>

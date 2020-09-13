@@ -1,10 +1,15 @@
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.CycleMethod;
+import javafx.scene.paint.LinearGradient;
+import javafx.scene.paint.Stop;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -40,6 +45,9 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = null;
+        if (input.equals("bye")) {
+            System.exit(0);
+        }
         try {
             response = duke.getResponse(input);
             dialogContainer.getChildren().addAll(
@@ -50,5 +58,15 @@ public class MainWindow extends AnchorPane {
         } catch (DukeException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * the dialog container. Clears the user input after processing.
+     */
+    @FXML
+    protected void sayHi() {
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog("Hi! What can i do for you?", dukeImage));
     }
 }

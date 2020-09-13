@@ -11,10 +11,6 @@ public class EmptyDescriptionException extends DukeException {
      * @return a String
      */
     public String toString() {
-        return "______________________________________________________"
-                + "\n"
-                + " OOPS!!! The description of a " + type + " cannot be empty."
-                + "\n"
-                + "______________________________________________________";
+        return " OOPS!!! The description of a " + type + " cannot be empty.";
     }
 }

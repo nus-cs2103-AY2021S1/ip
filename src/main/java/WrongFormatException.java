@@ -12,25 +12,15 @@ public class WrongFormatException extends DukeException {
      */
     public String toString() {
         if (type.equals("todo")) {
-            return "______________________________________________________"
-                    + "\n"
-                    + " OOPS!!! Proper input format required! Proper format: todo{space}{description}"
-                    + "\n"
-                    + "______________________________________________________";
+            return " OOPS!!! Proper input format required! Proper format: todo{space}{description} ";
         } else if (type.equals("deadline")) {
-            return "______________________________________________________"
+            return " OOPS!!! Proper input format required!"
                     + "\n"
-                    + " OOPS!!! Proper input format required!"
-                    + " Proper format: deadline{space}{description}{space}/by{space}{YYYY-MM-DD} ."
-                    + "\n"
-                    + "______________________________________________________";
+                    + " Proper format: deadline{space}{description}{space}/by{space}{YYYY-MM-DD} .";
         } else if (type.equals("event")) {
-            return "______________________________________________________"
+            return " OOPS!!! Proper input format required!"
                     + "\n"
-                    + " OOPS!!! Proper input format required!"
-                    + " Proper format: deadline{space}{description}{space}/at{space}{time-slot}."
-                    + "\n"
-                    + "______________________________________________________";
+                    + " Proper format: deadline{space}{description}{space}/at{space}{time-slot}.";
         } else {
             return "No such Task type";
         }

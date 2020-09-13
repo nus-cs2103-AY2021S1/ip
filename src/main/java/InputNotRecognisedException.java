@@ -6,10 +6,6 @@ public class InputNotRecognisedException extends DukeException {
      * @return a String
      */
     public String toString() {
-        return "______________________________________________________"
-                + "\n"
-                + " OOPS!!! I'm sorry, but I don't know what that means :-("
-                + "\n"
-                + "______________________________________________________";
+        return " OOPS!!! I'm sorry, but I don't know what that means :-(";
     }
 }
