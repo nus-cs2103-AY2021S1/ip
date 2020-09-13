@@ -18,7 +18,6 @@ public class Ui {
 
     /**
      * Reads the user input and return it.
-     *
      * @return user input.
      */
     public String receiveUserInput() {
@@ -89,7 +88,6 @@ public class Ui {
 
     /**
      * Lists down all tasks in the current task list.
-     *
      * @param currentList Current task list.
      */
     public String sayCurrentList(String currentList) {
@@ -110,7 +108,6 @@ public class Ui {
 
     /**
      * Informs the user task has been deleted, and inform new task list size.
-     *
      * @param task The task deleted.
      * @param listSize Current task list size.
      */
@@ -123,7 +120,6 @@ public class Ui {
 
     /**
      * Inform the user task has been added, and inform new task list size.
-     *
      * @param task The task added.
      * @param listSize Current task list size.
      */
@@ -136,7 +132,6 @@ public class Ui {
 
     /**
      * Lists down all found tasks, if any.
-     *
      * @param foundTasks Found tasks.
      */
     public String sayFoundTasks(String foundTasks) {

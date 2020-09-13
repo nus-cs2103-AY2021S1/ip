@@ -34,7 +34,6 @@ public class Storage {
 
     /**
      * Reads the user's saved file and returns a list of all the tasks found in the file.
-     *
      * @return A list of task.
      * @throws FileNotFoundException When no file is found.
      * @throws DukeException When no file is found.
@@ -53,7 +52,6 @@ public class Storage {
 
     /**
      * Writes what is in the task list into the user's safe file.
-     *
      * @param tasks duke.task.TaskList to be read.
      * @throws IOException When no file is found.
      */

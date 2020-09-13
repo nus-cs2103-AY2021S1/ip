@@ -39,7 +39,6 @@ public class Parser {
 
     /**
      * Parses the user input and process the user's command.
-     *
      * @param input User input.
      * @param ui User interface.
      * @param tasks TaskList.
@@ -87,7 +86,6 @@ public class Parser {
 
     /**
      * Checks if user input is bye.
-     *
      * @param input User input.
      * @return A boolean stating if command is bye.
      */

@@ -36,7 +36,6 @@ public class TaskList {
 
     /**
      * Returns the user's tasks in the task list as a String.
-     *
      * @param ui User interface.
      * @return A String containing all the tasks in the task list.
      */
@@ -55,7 +54,6 @@ public class TaskList {
 
     /**
      * Marks the specified task number in task list as done, and writes the new task list into Storage.
-     *
      * @param ui User interface.
      * @param taskNumber Specified task to be marked done.
      * @param storage Storage.
@@ -72,7 +70,6 @@ public class TaskList {
 
     /**
      * Deletes the specified task number in task list, and writes the new task list into Storage.
-     *
      * @param ui User interface.
      * @param taskNumber Specified task to be deleted.
      * @param storage Storage.
@@ -89,7 +86,6 @@ public class TaskList {
 
     /**
      * Snoozes the specified task number in task list, and write the new task list into Storage.
-     *
      * @param ui User interface.
      * @param taskNumber Specified task to be snoozed.
      * @param storage Storage.
@@ -112,7 +108,6 @@ public class TaskList {
 
     /**
      * Adds a task to the back of the list.
-     *
      * @param task The Task to be added.
      * @param ui User interface.
      * @param storage Storage.
@@ -127,7 +122,6 @@ public class TaskList {
 
     /**
      * Searches the task list for tasks that contains the specified String input.
-     *
      * @param ui User interface.
      * @param parsedInput User input.
      * @return A String of all found tasks.
@@ -154,7 +148,6 @@ public class TaskList {
 
     /**
      * Gets the size of the list.
-     *
      * @return The list size.
      */
     public int getListSize() {
