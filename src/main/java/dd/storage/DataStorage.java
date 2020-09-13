@@ -26,7 +26,9 @@ public class DataStorage {
      * @throws IOException When file is not successfully created.
      */
     public File loadData() throws IOException {
-        File f = new File("./src/data/duke.txt"); // create a File for the given file path
+        // create a File for the given file path
+        File f = new File("data/duke.txt");
+        f.getParentFile().mkdirs();
 
         if (f.createNewFile()) {
             loadResults = ui.dataCreate(f.getName());
@@ -53,7 +55,7 @@ public class DataStorage {
      * @throws RuntimeException when taskList is empty.
      */
     private void convertData(ArrayList<Task> taskList) throws IOException, RuntimeException {
-        FileWriter fw = new FileWriter("./src/data/duke.txt");
+        FileWriter fw = new FileWriter("data/duke.txt");
         String input = taskList.get(0).saveString();
         taskList.remove(0);
 
