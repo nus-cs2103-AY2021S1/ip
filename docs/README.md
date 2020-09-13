@@ -134,7 +134,7 @@ Expected outcome:
 <br/>
 
 ### `list`
-Shows all saved taskd
+Shows all saved tasks
 
 ## Usage
 
@@ -157,7 +157,7 @@ Undo for command(**todo**, **deadline**, **event**, **delete**, **done**)
 
 ## Usage
 
-### `undo` - Undo
+### `undo` - Undo command
 
 undo the previous command
 
