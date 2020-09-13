@@ -11,7 +11,7 @@ public class Tag implements Serializable {
     private final String tagName;
     private final List<Taggable> taggedItems = new ArrayList<>();
     
-    Tag(String tagName) {
+    public Tag(String tagName) {
         this.tagName = tagName;
     }
     
@@ -20,7 +20,7 @@ public class Tag implements Serializable {
      *
      * @param taggable The taggable to add.
      */
-    void addItem(Taggable taggable) {
+    public void addItem(Taggable taggable) {
         taggedItems.add(taggable);
     }
     

@@ -42,7 +42,7 @@ public class TagList implements Serializable {
      * @return The tag object corresponding to the tag name (after adding the taggable).
      * @throws DukeException if an invalid tag is given.
      */
-    Tag addTaggableToTag(String tagName, Taggable taggable) throws DukeException {
+    public Tag addTaggableToTag(String tagName, Taggable taggable) throws DukeException {
         Tag tag;
         if (doesTagExistInList(tagName)) {
             tag = getTagByName(tagName);
@@ -60,7 +60,7 @@ public class TagList implements Serializable {
      * @param tag The tag to remove the taggable from.
      * @param taggable The taggable to remove.
      */
-    void untag(Tag tag, Taggable taggable) {
+    public void untag(Tag tag, Taggable taggable) {
         tag.removeItem(taggable);
         //we don't keep tags that have no Taggables inside
         if (tag.isTagEmpty()) {
