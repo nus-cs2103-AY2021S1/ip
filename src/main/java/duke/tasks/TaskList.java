@@ -1,7 +1,10 @@
-package duke;
+package duke.tasks;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import duke.QueryOnTasks;
+import duke.Ui;
 
 public class TaskList {
     private List<Task> tasks;
@@ -39,12 +42,10 @@ public class TaskList {
      * @return the reply to display all the tasks as string.
      */
     public String showTasksAsString() {
-        String result = "___________________________________________\n";
-        result += "        Here are the tasks in your list:\n";
+        String result = "Here are the tasks in your list:\n";
         for (int i = 0; i < tasks.size(); i++) {
-            result += "            " + (i + 1) + "." + tasks.get(i) + "\n";
+            result += "     " + (i + 1) + "." + tasks.get(i) + "\n";
         }
-        result += "___________________________________________";
         return result;
     }
     /**
@@ -166,25 +167,23 @@ public class TaskList {
      */
     public String filterTask(String[] inputArray) {
         QueryOnTasks queryOnTasks = new QueryOnTasks();
-        String response = "___________________________________________\n";
-        response += "        Here are the tasks in your query list:\n";
+        String response = "Here are the tasks in your query list:\n";
         if (inputArray[1].equals("date")) {
             List<Task> queryList = queryOnTasks.filterByDate(tasks, inputArray[2]);
             for (int i = 0; i < queryList.size(); i++) {
-                response += "            " + (i + 1) + "." + queryList.get(i) + "\n";
+                response += "     " + (i + 1) + "." + queryList.get(i) + "\n";
             }
         } else if (inputArray[1].equals("month")) {
             List<Task> queryList = queryOnTasks.filterByMonth(tasks, inputArray[2]);
             for (int i = 0; i < queryList.size(); i++) {
-                response += "            " + (i + 1) + "." + queryList.get(i) + "\n";
+                response += "     " + (i + 1) + "." + queryList.get(i) + "\n";
             }
         } else if (inputArray[1].equals("year")) {
             List<Task> queryList = queryOnTasks.filterByYear(tasks, inputArray[2]);
             for (int i = 0; i < queryList.size(); i++) {
-                response += "            " + (i + 1) + "." + queryList.get(i) + "\n";
+                response += "     " + (i + 1) + "." + queryList.get(i) + "\n";
             }
         }
-        response += "___________________________________________\n";
         return response;
     }
 
@@ -194,14 +193,12 @@ public class TaskList {
      * @param keyword keyword to find the tasks.
      */
     public String findTasks(String keyword) {
-        String response = "___________________________________________\n";
-        response += "        Here are the matching tasks in your list:\n";
+        String response = "Here are the matching tasks in your list:\n";
         for (int i = 0; i < tasks.size(); i++) {
             if (tasks.get(i).getDescription().contains(keyword)) {
-                response += "        " + (i + 1) + "." + tasks.get(i) + "\n";
+                response += "     " + (i + 1) + "." + tasks.get(i) + "\n";
             }
         }
-        response += "___________________________________________\n";
         return response;
     }
 }

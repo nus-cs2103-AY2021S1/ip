@@ -1,8 +1,11 @@
 package duke;
 
+
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import duke.tasks.Event;
 
 public class EventTest {
     @Test
@@ -16,6 +19,6 @@ public class EventTest {
     @Test
     public void testingStringFileConversion() {
         Event event = new Event("return book", "2020-05-24");
-        assertEquals("E | 0 | return book | 2020-05-24", event.toStringFile()); 
+        assertEquals("E | 0 | return book | 2020-05-24", event.toStringFile());
     }
 }

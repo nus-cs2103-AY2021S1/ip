@@ -3,6 +3,10 @@ package duke;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+import duke.exceptions.DukeException;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.tasks.TaskList;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -59,7 +63,7 @@ public class Duke extends Application {
     /**
      * Gets message to UI display.
      *
-     * @param input users' input
+     * @param input the input of user
      * @return the reply to the specific command of users.
      * @throws FileNotFoundException If the file path cannot be found
      */

@@ -1,4 +1,4 @@
-package duke;
+package duke.tasks;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -8,7 +8,7 @@ import java.time.format.DateTimeParseException;
  * Task represents a task by client.
  * Task is an abstract class for Todo, Deadline and Event to inherit.
  */
-abstract class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
     protected String time;

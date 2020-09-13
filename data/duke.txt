@@ -1,2 +1,3 @@
 D | 0 | return book | 2019-11-10
-E | 0 | project meeting | 2019-10-23
+E | 1 | project meeting | 2019-10-23
+D | 0 | take book | 2019-10-15

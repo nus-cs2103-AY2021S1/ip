@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import duke.tasks.Task;
+
 // Use of Streams
 public class QueryOnTasks {
     /**

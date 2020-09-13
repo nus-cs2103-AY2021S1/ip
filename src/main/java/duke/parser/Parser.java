@@ -1,6 +1,10 @@
-package duke;
+package duke.parser;
 
 import java.io.FileNotFoundException;
+
+import duke.Ui;
+import duke.storage.Storage;
+import duke.tasks.TaskList;
 
 /**
  * Parser deals with users' commands, differentiates each type of task.

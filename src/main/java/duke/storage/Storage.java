@@ -1,4 +1,4 @@
-package duke;
+package duke.storage;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -8,11 +8,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.Todo;
+
 
 /**
  * Storage is used to store data in hardware and displays available data in client's server.
  */
-class Storage {
+public class Storage {
     private String filePath;
     private Scanner inputSource;
 
