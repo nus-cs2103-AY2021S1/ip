@@ -51,8 +51,7 @@ Add Functions
 
 ![Event](./Images/event.png)
 </details>
-<br>
-<br>
+<hr>
 </details>
 
 <details>
