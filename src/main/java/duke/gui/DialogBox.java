@@ -48,7 +48,9 @@ public class DialogBox extends HBox {
      * @return User input dialog box.
      */
     public static DialogBox getUserDialog(Label l, ImageView iv) {
-        return new DialogBox(l, iv);
+        var db = new DialogBox(l, iv);
+        db.setStyle("-fx-background-color: #FAFD7C99;");
+        return db;
     }
 
     /**
@@ -60,6 +62,7 @@ public class DialogBox extends HBox {
     public static DialogBox getDukeDialog(Label l, ImageView iv) {
         var db = new DialogBox(l, iv);
         db.flip();
+        db.setStyle("-fx-background-color: #69C8EC99;");
         return db;
     }
 }
