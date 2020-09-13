@@ -243,27 +243,8 @@ public class Storage {
             lineNumber = lineNumber - 1;
             String lineToRemove = Files.readAllLines(Paths.get(this.fileName)).get(lineNumber);
 
-            String lineToRemoveSecondPass = processTasks(this.load().get(lineNumber));
             String currLine;
             lineToRemove = lineToRemove.trim();
-
-            /*while ((currLine = reader.readLine()) != null) {
-                String trimLine = currLine.trim();
-                if (trimLine.equals(lineToRemove)) {
-                    continue;
-                }
-                writer.write(currLine + '\n');
-            }*/
-
-            String currLineSecondPass;
-
-            /*while ((currLineSecondPass = reader.readLine()) != null) {
-                String trimLine = currLineSecondPass.trim();
-                if (trimLine.equals(lineToRemoveSecondPass)) {
-                    continue;
-                }
-                writer.write(currLineSecondPass + '\n');
-            }*/
 
             int count = 0;
             while ((currLine = reader.readLine()) != null) {
@@ -316,29 +297,9 @@ public class Storage {
             String currLine;
             lineToUpdate = lineToUpdate.trim();
 
-            /*while ((currLine = reader.readLine()) != null) {
-                String trimLine = currLine.trim();
-                if (trimLine.equals(lineToUpdate)) {
-                    writer.write(doneLine + '\n');
-                } else {
-                    writer.write(currLine + '\n');
-                }
-            }*/
-
-            String currLineSecondPass;
-
             Task doneTask = this.load().get(lineNumber);
             doneTask.markAsDone();
             doneLine = processTasks(doneTask).trim();
-
-            /*while ((currLineSecondPass = reader.readLine()) != null) {
-                String trimLine = currLineSecondPass.trim();
-                if (trimLine.equals(lineToUpdate)) {
-                    writer.write(doneLine + '\n');
-                } else {
-                    writer.write(currLineSecondPass + '\n');
-                }
-            }*/
 
             int count = 0;
             while ((currLine = reader.readLine()) != null) {
