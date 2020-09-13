@@ -418,13 +418,13 @@ public class Ui {
             } else if (Parser.isFind(input)) {
                 String item = input.split(" ", 2)[1];
                 return handleFindCommand(item);
-            } else if (Parser.isRecurringTask(input)) {
-                return handleRecurringTaskCommand(input);
             } else if (Parser.isAddTask(input)) {
                 //pull type of task and the task
                 String taskType = Parser.getTaskType(input);
                 String task = Parser.getTask(input);
                 return this.handleTaskCommand(taskType, task);
+            } else if (Parser.isRecurringTask(input)) {
+                return handleRecurringTaskCommand(input);
             } else {
                 throw new DukeException(ERROR_MESSAGE);
             }
