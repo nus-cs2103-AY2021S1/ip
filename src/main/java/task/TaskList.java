@@ -2,6 +2,7 @@ package task;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.PriorityQueue;
 
 /**
  * <h1>TaskList class</h1>
@@ -10,12 +11,14 @@ import java.util.List;
 public class TaskList {
     private List<Task> list;
     private int totalTasks;
+    private PriorityQueue<Task> priorityQueue;
 
     /**
      * Creates a TaskList object.
      */
     public TaskList() {
         list = new ArrayList<>();
+        priorityQueue = new PriorityQueue<>();
         totalTasks = 0;
     }
 
