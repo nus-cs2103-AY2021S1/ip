@@ -55,7 +55,7 @@ public class Ui {
      * @return Returns a string message when a task is added.
      */
     public String addTask(Task task, int size, boolean shouldUndo) {
-        return format((shouldUndo ? "\nUNDO EXECUTED:\n" : "Got it.")
+        return format((shouldUndo ? "\nUNDO EXECUTED:\n" : "Got it. ")
             + "I've " + (shouldUndo ? "recovered" : "added")
             + " this task:\n" + task + "\n"
             + "Now you have " + size + " tasks in the list.");
