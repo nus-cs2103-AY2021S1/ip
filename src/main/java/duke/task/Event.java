@@ -6,6 +6,9 @@ import static duke.util.Keyword.EVENT_SYMBOL;
 
 import java.time.LocalDateTime;
 
+/**
+ * Event class which consists of a time frame. dateTime refers to the creation time of the object.
+ */
 public class Event extends Task {
 
     private final String timeFrame;
@@ -22,7 +25,8 @@ public class Event extends Task {
     }
 
     /**
-     * Initializes an {@code Event} task with all parameters.
+     * Initializes the {@code Event} task with all parameters.
+     * This is used when the Csv converter parses the task from the storage.
      *
      * @param description Description of event.
      * @param isDone Boolean status of event.
@@ -34,6 +38,11 @@ public class Event extends Task {
         this.timeFrame = timeFrame;
     }
 
+    /**
+     * Returns a {@code String} representation of this {@code Event} task.
+     *
+     * @return String representation of the Event task.
+     */
     @Override
     public String toString() {
         return EVENT_SYMBOL + super.toString() + EVENT_AT + timeFrame + CLOSE_BRACKET;

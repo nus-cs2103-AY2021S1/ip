@@ -18,7 +18,13 @@ public class EmptyTimeException extends DukeException {
         super(getEmptyTimeMessage(taskType));
     }
 
-    public static String getEmptyTimeMessage(TaskType taskType) {
-        return String.format(EMPTY_TIME_MESSAGE, taskType.toLower());
+    /**
+     * Gets the empty time message.
+     *
+     * @param taskType TaskType of task.
+     * @return String response to user.
+     */
+    private static String getEmptyTimeMessage(TaskType taskType) {
+        return String.format(EMPTY_TIME_MESSAGE, taskType.toLowerCase());
     }
 }

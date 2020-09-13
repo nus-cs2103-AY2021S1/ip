@@ -8,7 +8,12 @@ public enum TaskType {
     EVENT,
     TODO;
 
-    public String toLower() {
+    /**
+     * Obtains a lower-cased representation of the {@code TaskType}.
+     *
+     * @return TaskType in lower-cased.
+     */
+    public String toLowerCase() {
         return toString().toLowerCase();
     }
 }

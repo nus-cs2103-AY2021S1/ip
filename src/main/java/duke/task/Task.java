@@ -12,7 +12,7 @@ import java.time.format.DateTimeFormatter;
 
 /**
  * Stores all methods and properties of a Task class.
- * Variables include description, task type, time and done status.
+ * Variables include description, task type, time frame, and dateTime and done status.
  */
 public abstract class Task {
 
@@ -101,6 +101,11 @@ public abstract class Task {
         return dateTime.format(DateTimeFormatter.ofPattern(DATE_TIME_FORMAT));
     }
 
+    /**
+     * Gets the time frame of the task.
+     *
+     * @return Time frame of task.
+     */
     public String getTimeFrame() {
         return timeFrame;
     }

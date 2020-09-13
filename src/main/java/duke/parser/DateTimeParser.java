@@ -34,7 +34,7 @@ public abstract class DateTimeParser {
     }
 
     /**
-     * Checks if the input given is in a LocalDateTime format, e.g.
+     * Checks if the input given is in a LocalDateTime format, e.g. yyyy-MM-dd hh:mm.
      *
      * @param input User input.
      * @return True if input is in a LocalDateTime format, false otherwise.
@@ -69,7 +69,7 @@ public abstract class DateTimeParser {
     }
 
     /**
-     * Checks if the input given is in a LocalDate format.
+     * Checks if the input given is in a LocalDate format, e.g. yyyy-MM-dd.
      *
      * @param input User input.
      * @return True if input is in a LocalDate format, false otherwise.
@@ -84,7 +84,7 @@ public abstract class DateTimeParser {
     }
 
     /**
-     * Formats the date to a MMM d YYYY format.
+     * Formats the date to a MMM d yyyy / h.mm a format.
      *
      * @param date Input date from user.
      * @return A LocalDate object.
@@ -96,7 +96,7 @@ public abstract class DateTimeParser {
     }
 
     /**
-     * Checks if the input given is in a LocalTime format.
+     * Checks if the input given is in a LocalTime format, e.g. hh:mm.
      *
      * @param input User input.
      * @return True if input is in a LocalTime format, false otherwise.
