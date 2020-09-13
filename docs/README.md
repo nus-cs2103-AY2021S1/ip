@@ -6,8 +6,9 @@ so that you can get things done faster than your traditional task management app
 * Table of Contents
 {:toc}
 
-## Features 
+--------------------------------------------------------------------------------------------------------------------
 
+## Features 
 ### 1. Task management
 
 Execute simple task management with easy to use commands:
@@ -23,32 +24,30 @@ View all tasks with simply with `list`.
 Additionally, search for specific tasks using `search` or `find`
 
 ### 3. Natural date time support
-Use natural date language instead of spelling out the actual date & time in a recognised format.
+Use natural datetime language instead of spelling out the actual date & time.
 
-Supported natural date language:
-* Today
-* Tomorrow
-* Yesterday
-* Day of the week
+Supported Language:
 
-Supported natural time language:
-* Morning - 8am
-* Noon - 12pm
-* Evening - 7pm
-* Night - 10pm
-* Midnight - 11.59pm
+|Natural Date | Natural Time | Hybrid Date Time|
+|:---:|:---:|:---:|
+|Today | Morning (8AM) | Now|
+|Tomorrow | Noon (12PM) | Tonight<br>(Tomorrow Night)|
+|Yesterday | Evening (7PM) ||
+|Day of the week | Night (10PM) ||
+|    | Midnight (11.59PM) ||
 
-Hybrid natural language:
-* Now
-* Tonight (equivalent to tomorrow night)
+### 4. Auto save
+Task data are saved in the hard disk automatically after any command that changes the data. 
+There is no need to save manually. A green circle at the bottom right of the chat bubble 
+indicates a successful save, and a red circle indicates an unsuccessful one.
 
+--------------------------------------------------------------------------------------------------------------------
 
 ## Usage
 
+<div markdown="block" style="background: #dff4f7; border-color: #dff4f7">
 
-<div markdown="block" style="background: #17a2b8; border-color: #17a2b8">
-
-**:information_source: Notes about the command format:**<br>
+**Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `todo DESC`, `DESC` is a parameter which can be used as `todo do homework`.
@@ -64,7 +63,7 @@ Hybrid natural language:
   e.g. `[list, ls]` as the command phrase means that you can use`list` or `ls` to execute the command.
   
 </div>
-
+&nbsp;
 
 ### `help` - Viewing help
 
@@ -72,6 +71,7 @@ Shows the list of commands and use format.
 
 Format: `help`
 
+&nbsp;
 
 ### `todo` - Create a todo
 
@@ -86,6 +86,8 @@ Examples:
 * `todo eat` creates a new todo task named `eat`
 
 ![todoImage](./images/todo.png)
+
+&nbsp;
 
 
 ### `event` - Create an event
@@ -108,6 +110,7 @@ Examples:
 
 ![eventImage](./images/event.png)
 
+&nbsp;
 
 ### `deadline` - Create a deadline
 
@@ -130,6 +133,7 @@ depending on the time of creation
 
 ![deadlineImage](./images/deadline.png)
 
+&nbsp;
 
 ### `done` - Mark a task as done
 
@@ -147,6 +151,7 @@ Example:
 
 ![doneImage](./images/done.png)
 
+&nbsp;
 
 ### `[delete, del, rm]` - Delete a task
 
@@ -164,6 +169,7 @@ Examples:
 
 ![deleteImage](./images/delete.png)
 
+&nbsp;
 
 ### `[list, ls]` - List all tasks
 
@@ -171,6 +177,7 @@ Shows a list of all tasks in the address book.
 
 Format: `list`
 
+&nbsp;
 
 ### `[find, search]` - Locate tasks by description
 
@@ -191,6 +198,7 @@ Examples:
 
 ![findImage](./images/find.png)
 
+&nbsp;
 
 ### `[clear, clr]` - Clear tasks
 
@@ -204,9 +212,12 @@ Examples:
 * `clear all` clears all tasks in the list
 * `clear done` clears only the completed tasks from the list.
 
+&nbsp;
 
 ### `[bye, exit]` - Exit the program
 
 Exits the program.
 
 Format: `bye`
+
+&nbsp;
