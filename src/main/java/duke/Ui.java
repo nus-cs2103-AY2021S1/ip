@@ -28,8 +28,8 @@ class Ui {
      * @return Welcome message.
      */
     String showWelcome() {
-        String welcomeMessage = "Hello! I'm Shinomiya \u2665\n"
-                + "What can I do for you?";
+        String welcomeMessage = "Hello! I'm Piplup \uD83C\uDFB5\n"
+                + "What should we explore today?";
         return welcomeMessage;
     }
 
@@ -39,7 +39,7 @@ class Ui {
      * @return Exit message.
      */
     String showExit() {
-        String exitMessage = "Bye. Hope to see you again soon! \u2665";
+        String exitMessage = "Bye. Hope to see you again soon! \uD83D\uDC27\u2665";
         return exitMessage;
     }
 
@@ -51,9 +51,9 @@ class Ui {
      * @return Add task message.
      */
     String showAddTaskMessage(String taskString, String lenString) {
-        String addedTaskOutputMessage = "Got it. I've added this task:\n"
+        String addedTaskOutputMessage = "Got it. I've added this mission:\n"
                 + taskString + "\nNow you have " + lenString
-                + " tasks in the list.";
+                + " missions in the list.";
         return addedTaskOutputMessage;
     }
 
@@ -64,7 +64,7 @@ class Ui {
      * @return List task message.
      */
     String showListTaskMessage(ArrayList<String> taskListString) {
-        StringBuilder listTaskMessage = new StringBuilder("Here are the tasks in your list:\n");
+        StringBuilder listTaskMessage = new StringBuilder("Here are the missions in your list:\n");
         int index = 1;
         for (String taskString : taskListString) {
             listTaskMessage.append(index).append(".").append(taskString).append("\n");
@@ -80,7 +80,7 @@ class Ui {
      * @return Do task message.
      */
     String showDoTaskMessage(String taskString) {
-        String doneOutputMessage = "Nice! I've marked this task as done: \n"
+        String doneOutputMessage = "Nice! I've marked this mission as done: \n"
                 + taskString;
         return doneOutputMessage;
     }
@@ -93,9 +93,9 @@ class Ui {
      * @return Delete task message.
      */
     String showDeleteTaskMessage(String taskString, String lenString) {
-        String deletionOutputMessage = "Noted. I've removed this task:\n"
+        String deletionOutputMessage = "Noted. I've removed this mission:\n"
                 + taskString + "\nNow you have " + lenString
-                + " tasks in the list.";
+                + " missions in the list.";
         return deletionOutputMessage;
     }
 
@@ -106,7 +106,7 @@ class Ui {
      * @return Find task message.
      */
     String showFindTaskMessage(ArrayList<String> foundTaskListString) {
-        StringBuilder findTaskMessage = new StringBuilder("Here are the matching tasks in your list:\n");
+        StringBuilder findTaskMessage = new StringBuilder("Here are the matching missions in your list:\n");
         int index = 1;
         for (String taskString : foundTaskListString) {
             findTaskMessage.append(index).append(".").append(taskString).append("\n");
