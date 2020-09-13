@@ -12,7 +12,7 @@ This is what you should see when you start up Cait:
 ## Quick start
 
 1. Make sure that you have Java `11` or above installed in your computer.
-2. Download the latest `Cait.jar` from here (link).
+2. Download the latest `Cait.jar`.
 3. Copy the file to the folder you want to use as the _home folder_ for Cait.
 4. Double-click the file to start the app.
 5. Type the command in the message box and press Enter to execute it. e.g. typing `help` and pressing Enter will list out the commands you can use.
@@ -72,7 +72,7 @@ Example of usage:
 
 - `event day6 concert /at 2019-10-05`
 
-- `event dance performance /at 2020-12-29`
+- `event dance /at 2020-12-29`
 
 Expected outcome:
 
@@ -99,6 +99,24 @@ Expected outcome:
 ![Image of deadline](images/deadline.png)
 <br>
 
+### `list`
+Shows your saved tasks.
+
+## Usage
+
+### `list` - View your task list
+
+Lists out all your tasks that you have added.
+
+Example of usage: 
+
+- `list`
+
+Expected outcome:
+
+![Image of list](images/list.png)
+<br>
+
 ### `done`
 Finishes a task.
 
@@ -117,24 +135,6 @@ Example of usage:
 Expected outcome:
 
 ![Image of done](images/done.png)
-<br>
-
-### `list`
-Shows your saved tasks.
-
-## Usage
-
-### `list` - View your task list
-
-Lists out all your tasks that you have added.
-
-Example of usage: 
-
-- `list`
-
-Expected outcome:
-
-![Image of list](images/list.png)
 <br>
 
 ### `delete`
