@@ -69,36 +69,36 @@ public class Duke extends Application {
         return textToAdd;
     }
 
-    /**
-     * Iteration 2:
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
-     */
-    private void handleUserInput() {
-        String input = userInput.getText();
-        Label userText = getDialogLabel(input);
-        String output = null;
-        try {
-            output = this.parser.processInput(input);
-            Label dukeText = getDialogLabel(getResponse(output));
-            dialogContainer.getChildren().addAll(
-                    DialogBox.getUserDialog(userText, new ImageView(user)),
-                    DialogBox.getDukeDialog(dukeText, new ImageView(duke))
-            );
-            // clears input box
-            userInput.setText("");
-        } catch (DukeException e) {
-            e.printStackTrace();
-        }
-
-    }
+//    /**
+//     * Iteration 2:
+//     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+//     * the dialog container. Clears the user input after processing.
+//     */
+//    private void handleUserInput() {
+//        String input = userInput.getText();
+//        Label userText = getDialogLabel(input);
+//        String output = null;
+//        try {
+//            output = this.parser.processInput(input);
+//            Label dukeText = getDialogLabel(getResponse(output));
+//            dialogContainer.getChildren().addAll(
+//                    DialogBox.getUserDialog(userText, new ImageView(user)),
+//                    DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+//            );
+//            // clears input box
+//            userInput.setText("");
+//        } catch (DukeException e) {
+//            e.printStackTrace();
+//        }
+//
+//    }
 
     /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    private String getResponse(String input) {
-        return input;
+    protected String getResponse(String input) {
+        return this.parser.processInput(input);
     }
 
     @Override
@@ -157,14 +157,14 @@ public class Duke extends Application {
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
-        //Step 3. Add functionality to handle user input.
-        sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
-        });
-
-        userInput.setOnAction((event) -> {
-            handleUserInput();
-        });
+//        //Step 3. Add functionality to handle user input.
+//        sendButton.setOnMouseClicked((event) -> {
+//            handleUserInput();
+//        });
+//
+//        userInput.setOnAction((event) -> {
+//            handleUserInput();
+//        });
 
         //Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
