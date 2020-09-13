@@ -49,17 +49,17 @@
     -->
 
     <!-- Checks the ordering of import statements.
-    The order rule "STATIC###STANDARD_JAVA_PACKAGE###SPECIAL_IMPORTS###THIRD_PARTY_PACKAGE" consists of:
-      1. STATIC: static imports
-      2. SPECIAL_IMPORTS: defined as org imports
-      3. STANDARD_JAVA_PACKAGE: standard java/javax imports
-      4. THIRD_PARTY_PACKAGE: defined as com imports
+    The order rule "SPECIAL_IMPORTS###STANDARD_JAVA_PACKAGE###THIRD_PARTY_PACKAGE###STATIC" consists of:
+      1. SPECIAL_IMPORTS: defined as rogue.* imports
+      2. STANDARD_JAVA_PACKAGE: standard java/javax imports
+      3. THIRD_PARTY_PACKAGE: defined as com or org imports
+      4. STATIC: static imports
     -->
     <module name="CustomImportOrder">
       <property name="customImportOrderRules"
                 value="SPECIAL_IMPORTS###STANDARD_JAVA_PACKAGE###THIRD_PARTY_PACKAGE###STATIC"/>
       <property name="specialImportsRegExp" value="^rogue\."/>
-      <property name="thirdPartyPackageRegExp" value="^com\."/>
+      <property name="thirdPartyPackageRegExp" value="^(com|org)\."/>
     </module>
 
     <!-- Checks for redundant import statements.

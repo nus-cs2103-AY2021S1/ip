@@ -1,10 +1,9 @@
 package rogue.logic.parser;
 
-import org.junit.jupiter.api.Test;
-
+import rogue.logic.directives.exceptions.ExecutionException;
 import rogue.logic.parser.exceptions.IncorrectInputException;
 
-import rogue.logic.directives.exceptions.ExecutionException;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
