@@ -17,6 +17,8 @@ public class Parser {
             return new DeadlineCommand(str);
         } else if (s.equals("event")) {
             return new EventCommand(str);
+        }else if (s.equals("prioritize")) {
+            return new PrioritizeCommand(str);
         } else {
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
