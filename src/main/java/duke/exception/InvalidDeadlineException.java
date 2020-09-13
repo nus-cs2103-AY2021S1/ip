@@ -8,8 +8,8 @@ import duke.ui.Ui;
 public class InvalidDeadlineException extends DukeException {
 
     private static final String LINE_1 = "Deadline task is poorly formatted.";
-    private static final String LINE_2 = "Here is a proper format: deadline 'task name' /by 'end time'";
-    private static final String LINE_3 = "e.g. deadline Exercise /by 2020-12-01 12:00";
+    private static final String LINE_2 = "Here is a proper format: deadline 'task name' /by yyyy-mm-dd";
+    private static final String LINE_3 = "e.g. deadline Exercise /by 2020-12-01";
 
     /**
      * Initializes the InvalidDeadlineException object with the error message suggesting the proper format.

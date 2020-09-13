@@ -1,6 +1,7 @@
 package duke.parser;
 
-import duke.command.AddComplexTaskCommand;
+import duke.command.AddDeadlineCommand;
+import duke.command.AddEventCommand;
 import duke.command.AddToDoCommand;
 import duke.command.Command;
 import duke.command.ExitCommand;
@@ -46,9 +47,9 @@ public class Parser {
         case "todo":
             return new AddToDoCommand(details);
         case "deadline":
-            return new AddComplexTaskCommand(details, TaskType.DEADLINE);
+            return new AddDeadlineCommand(details);
         case "event":
-            return new AddComplexTaskCommand(details, TaskType.EVENT);
+            return new AddEventCommand(details);
         case "find":
             return new FindCommand(details);
         case "bye":
@@ -94,7 +95,7 @@ public class Parser {
     }
 
     /**
-     * Returns the unique identifier tied to the ComplexTask.
+     * Returns the unique identifier tied to this {@code Task}.
      *
      * @return String identifier of the Task.
      */
@@ -104,14 +105,14 @@ public class Parser {
     }
 
     /**
-     * Parses the description for ComplexTask.
+     * Parses the description for the given {@code Task}.
      *
-     * @param description Description of Complex task.
-     * @param taskType Task type of Complex task.
+     * @param description Description of task.
+     * @param taskType Task type of task.
      * @return String Array consisting of task details and time.
      * @throws DukeException If the format inputted is not correct.
      */
-    public static String[] parseComplexTaskDescription(String description, TaskType taskType) throws DukeException {
+    public static String[] parseTaskDescription(String description, TaskType taskType) throws DukeException {
         String[] inputArr = description.split(getIdentifier(taskType), 2);
 
         if (inputArr.length == 1) {

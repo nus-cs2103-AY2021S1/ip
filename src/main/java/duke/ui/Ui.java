@@ -114,11 +114,4 @@ public class Ui {
     public String emptyFind(String queryWord) {
         return String.format("There are no matching tasks with the keyword %s.", queryWord);
     }
-
-    /**
-     * Prints the file read error when reading from the CSV file.
-     */
-    public void fileReadingError() {
-        System.out.println("Error in reading from csv file");
-    }
 }

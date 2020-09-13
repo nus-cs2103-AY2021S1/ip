@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import duke.exception.FileUpdateFailException;
 import duke.exception.InvalidFileFormatException;
@@ -70,7 +71,7 @@ public class Storage {
             }
             return taskList;
         } catch (IOException | InvalidFileFormatException e) {
-            ui.fileReadingError();
+            System.out.println(Arrays.toString(e.getStackTrace()));
             return taskList;
         }
     }
@@ -83,7 +84,7 @@ public class Storage {
     public void update(TaskList tasks) throws FileUpdateFailException {
         try {
             FileWriter fileWriter = new FileWriter(filePath);
-            String header = "Task type  ,Description  ,Time  ,Status\n";
+            String header = "Task type,Description,Time frame (for Event),Time created or Deadline,Status\n";
             StringBuilder stringBuilder = new StringBuilder(header);
 
             for (Task task : tasks.getTasks()) {
@@ -103,7 +104,7 @@ public class Storage {
      * @return String representation of the task in .csv format.
      */
     private String convertToCsvFormat(Task task) {
-        return String.format("%s  ,%s  ,%s  ,%s\n",
-            task.getTaskName(), task.getDescription(), task.getTime(), task.getStatus());
+        return String.format("%s  ,%s  ,%s  ,%s  ,%s\n",
+            task.getTaskName(), task.getDescription(), task.getTimeFrame(), task.getTime(), task.getStatus());
     }
 }

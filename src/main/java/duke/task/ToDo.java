@@ -1,26 +1,25 @@
 package duke.task;
 
+import java.time.LocalDateTime;
+
 /**
- * ToDo task, which is one of the three Task object.
+ * ToDo task, which is one of the three Task objects.
  */
 public class ToDo extends Task {
-    /**
-     * Initializes the ToDo task with isDone boolean value.
-     *
-     * @param description Description of the task.
-     * @param isDone Boolean value to represent if task is done.
-     */
-    public ToDo(String description, boolean isDone) {
-        super(description, isDone, TaskType.TODO, "-");
-    }
+
+    private static final String TASK_SYMBOL = "[T]";
 
     /**
-     * Initializes the ToDo task with isDone boolean value.
+     * Initializes the ToDo task with the description only. boolean isDone is false by default.
      *
      * @param description Description of the task.
      */
     public ToDo(String description) {
-        super(description, false, TaskType.TODO, "-");
+        super(description, TaskType.TODO, "-", LocalDateTime.now(), false);
+    }
+
+    public ToDo(String description, boolean isDone, String timeFrame, LocalDateTime dateTime) {
+        super(description, TaskType.TODO, timeFrame, dateTime, isDone);
     }
 
     /**
@@ -30,6 +29,6 @@ public class ToDo extends Task {
      */
     @Override
     public String toString() {
-        return "[T]" + super.toString();
+        return TASK_SYMBOL + super.toString();
     }
 }

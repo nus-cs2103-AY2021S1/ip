@@ -6,7 +6,8 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
 
-import duke.command.AddComplexTaskCommand;
+import duke.command.AddDeadlineCommand;
+import duke.command.AddEventCommand;
 import duke.command.AddToDoCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
@@ -24,7 +25,7 @@ public class ParserTest {
     public void testValidInputBasic() {
         try {
             String s1 = "todo work";
-            String s2 = "deadline test /by 2pm";
+            String s2 = "deadline return book /by 2020-08-23 10:15";
             String s3 = "event test /at 2-4pm";
             String s4 = "list";
             String s5 = "done 5";
@@ -33,8 +34,8 @@ public class ParserTest {
             String s8 = "bye";
             // Tests
             assertTrue(Parser.parse(s1) instanceof AddToDoCommand);
-            assertTrue(Parser.parse(s2) instanceof AddComplexTaskCommand);
-            assertTrue(Parser.parse(s3) instanceof AddComplexTaskCommand);
+            assertTrue(Parser.parse(s2) instanceof AddDeadlineCommand);
+            assertTrue(Parser.parse(s3) instanceof AddEventCommand);
             assertTrue(Parser.parse(s4) instanceof ShowCommand);
             assertTrue(Parser.parse(s5) instanceof SimpleCommand);
             assertTrue(Parser.parse(s6) instanceof SimpleCommand);
@@ -61,8 +62,8 @@ public class ParserTest {
             String s8 = "bye 444";
             // Tests
             assertTrue(Parser.parse(s1) instanceof AddToDoCommand);
-            assertTrue(Parser.parse(s2) instanceof AddComplexTaskCommand);
-            assertTrue(Parser.parse(s3) instanceof AddComplexTaskCommand);
+            assertTrue(Parser.parse(s2) instanceof AddDeadlineCommand);
+            assertTrue(Parser.parse(s3) instanceof AddEventCommand);
             assertTrue(Parser.parse(s4) instanceof ShowCommand);
             assertTrue(Parser.parse(s5) instanceof SimpleCommand);
             assertTrue(Parser.parse(s6) instanceof SimpleCommand);

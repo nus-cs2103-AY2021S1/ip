@@ -1,14 +1,21 @@
 package duke.task;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 /**
  * Stores all methods and properties of a Task class.
  * Variables include description, task type, time and done status.
  */
 public abstract class Task {
 
+    private static final String dateTimeFormat = "MMM d yyyy / h.mm a";
+
     private final String description;
     private final TaskType taskType;
-    private final String time;
+    private final LocalDateTime dateTime;
+    private final String timeFrame;
+
     private boolean isDone;
 
     /**
@@ -17,13 +24,14 @@ public abstract class Task {
      * @param description Task details.
      * @param isDone Status of task - true if done, false otherwise.
      * @param taskType Type of Task.
-     * @param time Time of the task.
+     * @param dateTime Date and time of the task.
      */
-    protected Task(String description, boolean isDone, TaskType taskType, String time) {
+    protected Task(String description, TaskType taskType, String timeFrame, LocalDateTime dateTime, boolean isDone) {
         this.description = description;
-        this.isDone = isDone;
         this.taskType = taskType;
-        this.time = time;
+        this.dateTime = dateTime;
+        this.timeFrame = timeFrame;
+        this.isDone = isDone;
     }
 
     /**
@@ -52,24 +60,6 @@ public abstract class Task {
     }
 
     /**
-     * Retrieves the String representation of the status of Task.
-     *
-     * @return String representation of Task status.
-     */
-    public String getStatus() {
-        return isDone ? "Done" : "Not done";
-    }
-
-    /**
-     * Retrieves the Task name in capitalized form.
-     *
-     * @return Task name in CAPS.
-     */
-    public String getTaskName() {
-        return taskType.toString();
-    }
-
-    /**
      * Retrieves the Task description.
      *
      * @return Task description.
@@ -79,12 +69,34 @@ public abstract class Task {
     }
 
     /**
+     * Retrieves the name of task.
+     *
+     * @return Task name in CAPS.
+     */
+    public String getTaskName() {
+        return taskType.toString();
+    }
+
+    /**
+     * Retrieves the String representation of the status of Task.
+     *
+     * @return String representation of Task status.
+     */
+    public String getStatus() {
+        return isDone ? "Done" : "Not done";
+    }
+
+    /**
      * Retrieves the time of the Task.
      *
      * @return Time of Task.
      */
     public String getTime() {
-        return time;
+        return dateTime.format(DateTimeFormatter.ofPattern(dateTimeFormat));
+    }
+
+    public String getTimeFrame() {
+        return timeFrame;
     }
 
     /**

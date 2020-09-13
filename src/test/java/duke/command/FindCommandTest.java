@@ -3,13 +3,16 @@ package duke.command;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.time.LocalDateTime;
+
 import org.junit.jupiter.api.Test;
 
 import duke.exception.EmptyFindException;
-import duke.task.ComplexTask;
-import duke.task.TaskType;
+import duke.task.Deadline;
+import duke.task.Event;
 import duke.task.ToDo;
 import duke.tasklist.TaskList;
+
 
 public class FindCommandTest extends CommandTests {
 
@@ -21,8 +24,8 @@ public class FindCommandTest extends CommandTests {
         try {
             FindCommand fc = new FindCommand("test");
             ToDo toDo = new ToDo("te");
-            ComplexTask event = new ComplexTask("test", TaskType.EVENT, "2pm");
-            ComplexTask deadline = new ComplexTask("123test12312", TaskType.DEADLINE, "2pm");
+            Event event = new Event("test", "2pm");
+            Deadline deadline = new Deadline("123test12312", LocalDateTime.now());
             taskList.add(toDo);
             taskList.add(event);
             taskList.add(deadline);

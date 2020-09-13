@@ -88,7 +88,7 @@ public class TaskList {
      * Finds all tasks with descriptions that are matching the String input.
      *
      * @param input Input word for querying.
-     * @return new TaskList with tasks matching the input word
+     * @return New TaskList with tasks matching the input word
      */
     public TaskList matchAll(String input) {
         ArrayList<Task> newTaskList = new ArrayList<>();

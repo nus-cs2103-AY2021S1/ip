@@ -18,6 +18,7 @@ public abstract class AddCommand extends Command {
      * @param tasks Task List object.
      * @param ui User Interface object.
      * @param storage Storage object.
+     * @throws FileUpdateFailException If storage file fails to get updated.
      */
     protected String addTask(Task newTask, TaskList tasks, Ui ui, Storage storage) throws FileUpdateFailException {
         tasks.add(newTask);

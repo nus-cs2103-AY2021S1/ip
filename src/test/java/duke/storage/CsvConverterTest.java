@@ -9,7 +9,8 @@ import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.Test;
 
 import duke.exception.InvalidFileFormatException;
-import duke.task.ComplexTask;
+import duke.task.Deadline;
+import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 
@@ -33,12 +34,12 @@ public class CsvConverterTest {
             assertEquals("-", todo.getTime());
             assertFalse(todo.isDone());
             // Check event
-            assertTrue(event instanceof ComplexTask);
+            assertTrue(event instanceof Event);
             assertEquals("eat", event.getDescription());
             assertEquals("1200-1400", event.getTime());
             assertFalse(event.isDone());
             // Check deadline
-            assertTrue(deadline instanceof ComplexTask);
+            assertTrue(deadline instanceof Deadline);
             assertEquals("read", deadline.getDescription());
             assertEquals("2pm", deadline.getTime());
             assertTrue(deadline.isDone());
@@ -65,12 +66,12 @@ public class CsvConverterTest {
             assertEquals("-", todo.getTime());
             assertFalse(todo.isDone());
             // Check event
-            assertTrue(event instanceof ComplexTask);
+            assertTrue(event instanceof Event);
             assertEquals("   ", event.getDescription());
             assertEquals("1200-1400", event.getTime());
             assertFalse(event.isDone());
             // Check deadline
-            assertTrue(deadline instanceof ComplexTask);
+            assertTrue(deadline instanceof Deadline);
             assertEquals("read", deadline.getDescription());
             assertEquals("2pm", deadline.getTime());
             assertTrue(deadline.isDone());

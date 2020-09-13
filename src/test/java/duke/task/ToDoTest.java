@@ -37,9 +37,9 @@ public class ToDoTest {
      */
     @Test
     public void testConstructor() {
-        ToDo newTodo = new ToDo(description, false);
+        ToDo newTodo = new ToDo(description);
         assertFalse(newTodo.isDone());
-        newTodo = new ToDo(description, true);
+        newTodo = new ToDo(description);
         assertTrue(newTodo.isDone());
     }
 
