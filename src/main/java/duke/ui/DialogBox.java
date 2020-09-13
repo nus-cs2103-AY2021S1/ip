@@ -22,6 +22,8 @@ import javafx.scene.layout.HBox;
  * representing Duke's response have its avatar on the left instead.
  */
 public class DialogBox extends HBox {
+    // @@author Jeffry Lum-reused
+    // Reused from https://se-education.org/guides/tutorials/javaFxPart4.html with minor modifications
     @FXML
     private Label dialog;
     @FXML
@@ -70,6 +72,7 @@ public class DialogBox extends HBox {
         db.flip();
         return db;
     }
+    // @@author
 
     public static DialogBox getDukeGreeting(Image img) {
         DialogBox db = new DialogBox(Duke.GREETING, img);

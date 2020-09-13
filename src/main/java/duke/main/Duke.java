@@ -7,7 +7,8 @@ package duke.main;
  */
 public class Duke {
     public static final String GREETING = "Hello, I'm your chatbot!\n"
-            + "What can I do for you?";
+            + "What can I do for you?\n\n"
+            + "GUI elements are adapted from https://se-education.org/guides/tutorials/javaFx.html";
 
     private final Parser parser;
 

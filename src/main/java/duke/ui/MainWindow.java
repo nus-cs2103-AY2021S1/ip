@@ -13,6 +13,8 @@ import javafx.scene.layout.VBox;
  * Class representing the overall shape of the GUI.
  */
 public class MainWindow extends AnchorPane {
+    // @@author Jeffry Lum-reused
+    // Reused from https://se-education.org/guides/tutorials/javaFxPart4.html
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -24,7 +26,9 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
+    // Image taken from https://utulsa.edu/sexual-violence-prevention-education/generic-avatar/
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.jpg"));
+    // Image taken from Sodacan: https://commons.wikimedia.org/wiki/File:Imperial_Crown_(Heraldry).svg
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/duke.png"));
 
     @FXML
@@ -36,11 +40,14 @@ public class MainWindow extends AnchorPane {
         duke = d;
         greet();
     }
+    // @@author
 
     private void greet() {
         dialogContainer.getChildren().add(DialogBox.getDukeGreeting(dukeImage));
     }
 
+    // @@author Jeffry Lum-reused
+    // Reused from https://se-education.org/guides/tutorials/javaFxPart4.html with minor modification
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
@@ -51,4 +58,5 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
     }
+    // @@author
 }

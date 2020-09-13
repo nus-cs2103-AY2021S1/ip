@@ -2,6 +2,8 @@ package duke.main;
 
 import javafx.application.Application;
 
+// @@author Jeffry Lum-reused
+// Reused from https://se-education.org/guides/tutorials/javaFxPart1.html
 /**
  * Driver class to run the main method.
  */
@@ -16,3 +18,4 @@ public class Launcher {
         Application.launch(Main.class, args);
     }
 }
+// @@author

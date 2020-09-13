@@ -20,6 +20,15 @@ enum DateFormat {
         this.pattern = pattern;
     }
 
+    // Solution below adapted from https://stackoverflow.com/a/4024604
+    /**
+     * Converts a given string into a LocalDate if and only if it matches at least
+     * one of the accepted date formats.
+     *
+     * @param date String that represents a date.
+     * @return LocalDate resulting from the parsing of <code>date</code> into a DateTimeFormatter.
+     * @throws InvalidDateException If the string is not in an acceptable date format.
+     */
     public static LocalDate getLocalDate(String date) throws InvalidDateException {
         LocalDate out = null;
 

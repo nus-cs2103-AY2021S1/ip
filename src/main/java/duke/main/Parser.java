@@ -80,6 +80,7 @@ public class Parser {
         }
     }
 
+    // Solution adapted from https://stackoverflow.com/a/17008136
     /**
      * Returns the command word in the user input that is not "list" or "bye".
      * This is the first word in the input line.

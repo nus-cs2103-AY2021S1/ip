@@ -9,6 +9,8 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+// @@author Jeffry Lum-reused
+// Reused from https://se-education.org/guides/tutorials/javaFxPart4.html with minor modifications
 /**
  * Main is a class that represents an application that houses the Duke chat-bot.
  */
@@ -30,3 +32,4 @@ public class Main extends Application {
         }
     }
 }
+// @@author
