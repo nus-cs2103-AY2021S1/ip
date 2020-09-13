@@ -11,7 +11,6 @@ Add Functions
 
 **Here are the commands to add different types of tasks into your tasklist**  
 <br>
-<br>
 <details>
 <summary>Add Todo</summary>
 
@@ -56,12 +55,15 @@ Add Functions
 
 <details>
 <summary>
-Search For Word
+Search Functions
 </summary>
+<br>
 
+**Here are the commands to search for tasks via description, time or date**  
+<br>
 <details>
 <summary>
-Search Via Word
+Search Via Description
 </summary>
 
 ## `find`
