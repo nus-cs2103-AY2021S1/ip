@@ -34,9 +34,9 @@ public class Ui {
      */
     public String appendHelpMessage() {
         textOnScreen += "These r wud u tell your ol' grandma here...\nYu wan add more tasks\n"
-                + "        todo {description} #{tag} \n                /by {YYYY-MM-DD HHmm}\n"
-                + "        deadline {description} #{tag} \n                /by {YYYY-MM-DD HHmm}\n"
-                + "        event {description} #{tag} \n                /at {YYYY-MM-DD HHmm}\n"
+                + "        todo {description} #{tag} \n                /by {DDMMYY HHmm}\n"
+                + "        deadline {description} #{tag} \n                /by {DDMMYY HHmm}\n"
+                + "        event {description} #{tag} \n                /at {DDMMYY HHmm}\n"
                 + "Yu wan remove tasks coz incompetent\n        delete {task number}\n"
                 + "Yu wan mark task as completed\n        done {task number}\n"
                 + "Yu wan see ur tasks coz u forget\n        list\n"
