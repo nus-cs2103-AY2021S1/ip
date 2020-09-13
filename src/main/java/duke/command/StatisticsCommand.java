@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.Statistics;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -12,6 +13,7 @@ public class StatisticsCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        return ui.showStatistics(tasks);
+        Statistics statistics = new Statistics(tasks);
+        return ui.showStatistics(tasks, statistics);
     }
 }
