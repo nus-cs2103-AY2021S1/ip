@@ -77,9 +77,9 @@ public class Ui {
      */
     static public String printTodoTask(String taskContent, int size, int undoneCount){
         return (Ui.print("The following task has been added to your list:")+
-        Ui.print("  [T][ ] " + taskContent)+
-        Ui.print(String.format("Now you have %d tasks in your list.", size))+
-        Ui.print(String.format("There are %d tasks waiting to be done.", undoneCount)));
+                Ui.print("  [T][ ] " + taskContent)+
+                Ui.print(String.format("Now you have %d tasks in your list.", size))+
+                Ui.print(String.format("There are %d tasks waiting to be done.", undoneCount)));
     }
 
     /**
@@ -91,9 +91,9 @@ public class Ui {
      */
     static public String printDeadlineTask(String taskContent, int size, int undoneCount){
         return (Ui.print("The following task has been added to your list:")+
-        Ui.print("  [D][ ] " + taskContent)+
-        Ui.print(String.format("Now you have %d tasks in your list.", size))+
-        Ui.print(String.format("There are %d tasks waiting to be done.", undoneCount)));
+                Ui.print("  [D][ ] " + taskContent)+
+                Ui.print(String.format("Now you have %d tasks in your list.", size))+
+                Ui.print(String.format("There are %d tasks waiting to be done.", undoneCount)));
     }
 
     /**
@@ -105,9 +105,9 @@ public class Ui {
      */
     static public String printEventTask(String taskContent, int size, int undoneCount){
         return (Ui.print("The following task has been added to your list:")+
-        Ui.print("  [E][ ] " + taskContent)+
-        Ui.print(String.format("Now you have %d tasks in your list.", size))+
-        Ui.print(String.format("There are %d tasks waiting to be done.", undoneCount)));
+                Ui.print("  [E][ ] " + taskContent)+
+                Ui.print(String.format("Now you have %d tasks in your list.", size))+
+                Ui.print(String.format("There are %d tasks waiting to be done.", undoneCount)));
     }
 
     /**

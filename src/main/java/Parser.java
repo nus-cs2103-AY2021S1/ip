@@ -70,7 +70,8 @@ public class Parser {
      * @throws ParseErrorException
      * @throws WrongDescriptionException
      */
-    public Task parseDeadlineTask(String content) throws EmptyDescriptionException, ParseErrorException, WrongDescriptionException{
+    public Task parseDeadlineTask(String content) throws
+            EmptyDescriptionException, ParseErrorException, WrongDescriptionException{
         if (content.length() <= 0)
             throw new EmptyDescriptionException("DEADLINE");
         try {
@@ -93,7 +94,8 @@ public class Parser {
      * @throws ParseErrorException
      * @throws WrongDescriptionException
      */
-    public Task parseEventTask(String content) throws EmptyDescriptionException, ParseErrorException, WrongDescriptionException{
+    public Task parseEventTask(String content) throws
+            EmptyDescriptionException, ParseErrorException, WrongDescriptionException{
         if (content.length() <= 0)
             throw new EmptyDescriptionException("EVENT");
         try {
@@ -116,7 +118,8 @@ public class Parser {
      * @throws WrongDescriptionException
      * @throws EmptyDescriptionException
      */
-    public Task parseDone(String content) throws DukeException, WrongDescriptionException, EmptyDescriptionException{
+    public Task parseDone(String content) throws
+            DukeException, WrongDescriptionException, EmptyDescriptionException{
         try {
             if (content.length() < 1)
                 throw new EmptyDescriptionException("DONE");
@@ -139,7 +142,8 @@ public class Parser {
      * @throws WrongDescriptionException
      * @throws EmptyDescriptionException
      */
-    public Task parseDelete(String content) throws DukeException, WrongDescriptionException, EmptyDescriptionException{
+    public Task parseDelete(String content) throws
+            DukeException, WrongDescriptionException, EmptyDescriptionException{
         try {
             if (content.length() < 1)
                 throw new EmptyDescriptionException("DELETE");
