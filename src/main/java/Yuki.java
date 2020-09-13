@@ -127,7 +127,10 @@ public class Yuki {
 
             if (c instanceof ExitCommand) {
                 PauseTransition delay = new PauseTransition(Duration.seconds(3));
-                delay.setOnFinished(event -> Platform.exit());
+                delay.setOnFinished(event -> {
+                    Platform.exit();
+                    System.exit(0);
+                });
                 delay.play();
             }
 

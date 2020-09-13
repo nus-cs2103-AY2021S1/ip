@@ -1,5 +1,5 @@
 # User Guide
-### Yuki is a personal assistant chatbot that helps to keep track of tasks.
+### Everyone needs a friend! How about one that would help you take down all your important tasks? Yuki is a bot that would make it more exciting to track your task! To start using her, simply download the Yuki.jar file in release v0.2 and place her in your favourite folder! Hope you become close to her soon :smile:
 
 ## Features 
     - Add tasks
