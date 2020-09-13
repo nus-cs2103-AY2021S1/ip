@@ -24,6 +24,11 @@ public class Main extends Application {
                     Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
+
+            // Solution adapted from
+            // http://www.learningaboutelectronics.com/Articles/How-to-add-a-title-to-a-window-using-JavaFX.php
+            stage.setTitle("NotDuke");
+
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();

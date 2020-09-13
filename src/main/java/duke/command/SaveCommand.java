@@ -7,18 +7,18 @@ import duke.main.TaskList;
  * Abstraction for the bye command.
  * This class saves the TaskList into a file before sending a farewell message.
  */
-public class ByeCommand extends TaskListOperator {
-    private static final String BYE = "All changes saved, hope to see you again!";
+public class SaveCommand extends TaskListOperator {
+    private static final String BYE = "All changes saved!";
 
     private final Storage storage;
 
     /**
-     * Constructs a new ByeCommand object.
+     * Constructs a new SaveCommand object.
      *
      * @param storage Storage to write to a file with.
      * @param taskList TaskList to be operated on.
      */
-    public ByeCommand(Storage storage, TaskList taskList) {
+    public SaveCommand(Storage storage, TaskList taskList) {
         super(taskList);
         this.storage = storage;
     }

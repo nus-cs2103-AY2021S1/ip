@@ -7,7 +7,7 @@ package duke.command;
 public class HelpCommand implements Command {
     public static final String COMMAND_LIST = "Welcome to Duke! The full list of "
             + "commands are listed below:\n"
-            + "1. bye - Saves all changes to the task list to the hard drive.\n"
+            + "1. save - Saves all changes to the task list to the hard drive.\n"
             + "2. help - Displays all available commands.\n"
             + "3. done [task index] - Marks the task at the specified index as "
             + "complete.\n"

@@ -3,7 +3,7 @@ package duke.main;
 import duke.command.AddDeadlineCommand;
 import duke.command.AddEventCommand;
 import duke.command.AddToDoCommand;
-import duke.command.ByeCommand;
+import duke.command.SaveCommand;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.FindCommand;
@@ -41,8 +41,8 @@ public class Parser {
         switch (input) {
         case "list":
             return new ListCommand(taskList).execute();
-        case "bye":
-            return new ByeCommand(storage, taskList).execute();
+        case "save":
+            return new SaveCommand(storage, taskList).execute();
         case "help":
             return new HelpCommand().execute();
         default:
