@@ -70,7 +70,7 @@ public class UiTest {
     public void displayTasks_correctTaskList_listPrinted() {
         TaskList list = new TaskList(new ArrayList<>());
         list.add(ToDo.getToDo("Have lunch."));
-        list.add(Deadline.getDeadline("Homework", "20201111"));
+        list.add(Deadline.getDeadline("Homework", "2020 11 11"));
         list.add(Event.getEvent("Tutorial", "2020 11 11 11:22").markComplete());
         Ui.displayTasks(list);
         String expectedOutput = "------------------------------------------------------------------\n"
@@ -107,7 +107,7 @@ public class UiTest {
     private TaskList setUpTestList() {
         TaskList list = new TaskList(new ArrayList<>());
         list.add(ToDo.getToDo("Have lunch."));
-        list.add(Deadline.getDeadline("Homework", "20201111"));
+        list.add(Deadline.getDeadline("Homework", "2020 11 11"));
         list.add(Event.getEvent("Tutorial", "2020 11 11 11:22").markComplete());
         list.add(Event.getEvent("Lecture", "2020 11 12 10:45").markComplete());
         return list;

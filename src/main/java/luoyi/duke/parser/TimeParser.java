@@ -1,5 +1,6 @@
 package luoyi.duke.parser;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -7,20 +8,22 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import luoyi.duke.data.exception.DukeIllegalArgumentException;
+
 /**
  * Encapsulate custom parsing of time string to get LocalDate or LocalTime.
  */
 public class TimeParser {
     // Accept YYYYMMDD, DDMMYYYY
     private static final List<Pattern> DATE_PATTERN_LIST = new ArrayList<>(
-            List.of(Pattern.compile("(?<year>\\d{4})[\\s\\-.]?(?<month>\\d{1,2})[\\s\\-.]?(?<day>\\d{1,2})"),
-                    Pattern.compile("(?<day>\\d{1,2})[\\s\\-.]?(?<month>\\d{1,2})[\\s\\-.]?(?<year>\\d{4})")));
+            List.of(Pattern.compile("(?<year>\\d{4})[\\s\\-./](?<month>\\d{2})[\\s\\-./](?<day>\\d{2})"),
+                    Pattern.compile("(?<day>\\d{2})[\\s\\-./](?<month>\\d{2})[\\s\\-./](?<year>\\d{4})")));
     // Accept YYYY MM DD HHMM, DD MM YYYY HHMM
     private static final List<Pattern> DATETIME_PATTERN_LIST = new ArrayList<>(
-            List.of(Pattern.compile("(?<year>\\d{4})[\\s\\-.](?<month>\\d{1,2})[\\s\\-.](?<day>\\d{1,2})"
-                    + "[\\s\\-.T](?<hour>\\d{1,2})[\\s\\-.:]?(?<minute>\\d{2})"),
-                    Pattern.compile("(?<day>\\d{1,2})[\\s\\-.](?<month>\\d{1,2})[\\s\\-.](?<year>\\d{4})"
-                            + "[\\s\\-.T](?<hour>\\d{1,2})[\\s\\-.:]?(?<minute>\\d{2})")));
+            List.of(Pattern.compile("(?<year>\\d{4})[\\s\\-./](?<month>\\d{2})[\\s\\-./](?<day>\\d{2})"
+                    + "[\\sT](?<hour>\\d{2})[\\s.:]?(?<minute>\\d{2})"),
+                    Pattern.compile("(?<day>\\d{2})[\\s\\-./](?<month>\\d{2})[\\s\\-./](?<year>\\d{4})"
+                            + "[\\sT](?<hour>\\d{2})[\\s.:]?(?<minute>\\d{2})")));
 
     /**
      * Returns a parsed date.
@@ -46,9 +49,13 @@ public class TimeParser {
         if (!matcher.matches()) {
             throw new RuntimeException(string + " failed to match regex!");
         }
-        return LocalDate.of(Integer.parseInt(matcher.group("year")),
-                Integer.parseInt(matcher.group("month")),
-                Integer.parseInt(matcher.group("day")));
+        try {
+            return LocalDate.of(Integer.parseInt(matcher.group("year")),
+                    Integer.parseInt(matcher.group("month")),
+                    Integer.parseInt(matcher.group("day")));
+        } catch (DateTimeException e) {
+            throw new DukeIllegalArgumentException(e.getMessage());
+        }
     }
 
     /**
@@ -75,11 +82,15 @@ public class TimeParser {
         if (!matcher.matches()) {
             throw new RuntimeException(string + " failed to match regex!");
         }
-        return LocalDateTime.of(Integer.parseInt(matcher.group("year")),
-                Integer.parseInt(matcher.group("month")),
-                Integer.parseInt(matcher.group("day")),
-                Integer.parseInt(matcher.group("hour")),
-                Integer.parseInt(matcher.group("minute")));
+        try {
+            return LocalDateTime.of(Integer.parseInt(matcher.group("year")),
+                    Integer.parseInt(matcher.group("month")),
+                    Integer.parseInt(matcher.group("day")),
+                    Integer.parseInt(matcher.group("hour")),
+                    Integer.parseInt(matcher.group("minute")));
+        } catch (DateTimeException e) {
+            throw new DukeIllegalArgumentException(e.getMessage());
+        }
     }
 
     /**

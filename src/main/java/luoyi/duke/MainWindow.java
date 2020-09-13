@@ -32,9 +32,16 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.jpg"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/cat.gif"));
 
+    /**
+     * Initialises the main window.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+
+        // Add initial prompt
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog("Hi I'm CatBot! What"
+                + " can I do for you?", dukeImage));
     }
 
     public void setDuke(IDuke d) {
@@ -49,6 +56,8 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
+
+        // Exit program if bye is detected
         if (input.equals("bye")) {
             Timer timer = new Timer();
             timer.schedule(new TimerTask() {
@@ -59,6 +68,8 @@ public class MainWindow extends AnchorPane {
                 }
             }, 5000);
         }
+
+        // Handle inputs
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),

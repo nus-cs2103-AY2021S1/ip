@@ -7,7 +7,7 @@ import luoyi.duke.data.task.ITask;
 
 /**
  * Encodes the tasks in a Duke object to a string for storage.
- * Format is [T/D/E]|[0/1]|[description]|[time].
+ * The format is [T/D/E]|[0/1]|[description]|[time].
  */
 public class TaskEncoder {
     /**
