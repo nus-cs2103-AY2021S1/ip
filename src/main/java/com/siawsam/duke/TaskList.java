@@ -44,7 +44,7 @@ public class TaskList implements Serializable {
         return item.split(" ")[0].trim();
     }
     
-    private String getItemDescription(String item, String itemType) {
+    private String getItemDescription(String item, String itemType) throws DukeException {
         assert item.length() > 0 : "empty item literal";
         assert itemType.length() > 0 : "empty item type string";
         
@@ -54,19 +54,25 @@ public class TaskList implements Serializable {
                        .trim();
     }
     
-    private String getItemParameter(String item, String itemType) {
+    private String getItemParameter(String item, String itemType) throws DukeException {
         assert item.length() > 0 : "empty item literal";
         assert itemType.length() > 0 : "empty item type string";
         
         return splitItemLiteral(item, itemType)[1].trim();
     }
     
-    private String[] splitItemLiteral(String item, String itemType) {
+    private String[] splitItemLiteral(String item, String itemType) throws DukeException {
         assert item.length() > 0 : "empty item literal";
         assert itemType.length() > 0 : "empty item type string";
         
         String delimiter = itemType.equals("deadline") ? "/by" : "/at";
-        return item.split(delimiter);
+        String[] tokens = item.split(delimiter);
+        
+        if (tokens.length == 1) {
+            throw new DukeException("Invalid " + itemType + " command (wrong delimiter).");
+        }
+        
+        return tokens;
     }
     //--------end of item literal utilities---------//
     
@@ -96,7 +102,7 @@ public class TaskList implements Serializable {
         }
     }
     
-    private Task parseEvent(String itemLiteral) {
+    private Task parseEvent(String itemLiteral) throws DukeException {
         assert itemLiteral.length() > 0 : "empty item literal";
         
         return new Event(

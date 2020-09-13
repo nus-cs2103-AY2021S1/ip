@@ -138,10 +138,22 @@ public class Parser {
     
     private Response parseTagCommand(String literal) {
         String parameters = literal.split("tag")[1].trim();
-        int itemIndex = Integer.parseInt(parameters.split(" ")[0]);
-        String tagName = parameters.split(Integer.toString(itemIndex))[1].trim();
-        
-        return userTaskList.tagItem(itemIndex, tagName, tagList);
+        try {
+            String itemIndex = parameters.split(" ")[0];
+            boolean isTagNameAbsent = parameters.split(itemIndex).length == 0;
+    
+            if (isTagNameAbsent) {
+                throw new DukeException("No tag name specified.");
+            }
+    
+            String tagName = parameters.split(itemIndex)[1].trim();
+            return userTaskList.tagItem(Integer.parseInt(itemIndex), tagName, tagList);
+        } catch (NumberFormatException | DukeException exception) {
+            String errorMsg = Ui.showErrorMessage(new DukeException("Invalid tag command."));
+            return new Response(errorMsg);
+        } catch (IllegalArgumentException exception) {
+            return new Response(Ui.showErrorMessage(exception));
+        }
     }
     
     private Response parseUntagCommand(String literal) {
@@ -150,6 +162,8 @@ public class Parser {
                     Integer.parseInt(literal.split(" ")[1]),
                     tagList
             );
+        } catch (NumberFormatException ex) {
+            return new Response("Invalid untag command.");
         } catch (IllegalArgumentException ex) {
             return new Response(Ui.showErrorMessage(ex));
         }
