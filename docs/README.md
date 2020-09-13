@@ -8,6 +8,7 @@ Duke is a **desktop app for organising your todo tasks, deadlines and events via
 3. Copy the file to the folder you want to use as the _home folder_ for your Duke.
 4. Double-click the file to start the app.
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`list`** and pressing Enter will display your tasks. The GUI similar to the below should appear within a second.
+![GUI](https://github.com/m0nggh/ip/blob/master/docs/Ui.PNG)
 
 ## Features & Usage
 
@@ -157,15 +158,7 @@ Expected outcome:
 
 This command saves the data and exits the program.
 
-## Command Summary
-|Action|Format/Examples  |
-|--|--|
-|**list**  | `list` |
-|**done**  | `done [task number]` <br> e.g. `done 1`|
-|**todo**  | `todo [details]` <br> e.g. `todo sleep` |
-|**deadline**  | `deadline [details] /by [YYYY-MM-DD HH:MM]` <br> e.g. `deadline return book /by 2020-01-01 12:30` |
-|**event**  | `event [details] /at [YYYY-MM-DD HH:MM]` <br> e.g. `event project meeting /at 2020-01-02 14:30` |
-|**delete**  | `delete [task number]` <br> e.g. `delete 1` |
-|**find**  | `find [keyword]` <br> e.g. `find dinner` |
-|**undo**  | `undo` |
-|**bye**  | `bye` |
+
+## Acknowledgements
+GUI code was referenced from https://se-education.org/guides/tutorials/javaFx.html. <br>
+GUI image was taken from https://onlyvectorbackgrounds.com/ambient-light-background-day-blue/.
