@@ -31,23 +31,23 @@ class DateTimeProcessor {
             )
     );
 
-    private Optional<LocalDateTime> parseDateTime(String input) throws DukeException {
+    private Optional<LocalDateTime> parseDateTime(String input) {
         for (String format : possibleDateTimeFormats) {
             try {
                 return Optional.of(LocalDateTime.parse(input, DateTimeFormatter.ofPattern(format)));
             } catch (DateTimeParseException e) {
-                throw new DukeException(e.toString());
+                continue;
             }
         }
         return Optional.empty();
     }
 
-    private Optional<LocalDate> parseDate(String input) throws DukeException {
+    private Optional<LocalDate> parseDate(String input) {
         for (String format : possibleDateFormats) {
             try {
                 return Optional.of(LocalDate.parse(input, DateTimeFormatter.ofPattern(format)));
             } catch (DateTimeParseException e) {
-                throw new DukeException(e.toString());
+                continue;
             }
         }
         return Optional.empty();
@@ -61,34 +61,31 @@ class DateTimeProcessor {
      * @param input The date-time string which may not be formatted properly.
      * @return The neatly formatted date-time string.
      */
-    String getParsedDate(String input) throws DukeException {
+    String getParsedDate(String input) {
+        assert input.length() > 0 : "Input string is empty";
         Optional<LocalDateTime> possibleDateTime = parseDateTime(input);
-        try {
-            Optional<LocalDate> possibleDate = parseDate(input);
-            if (possibleDateTime.isPresent()) {
-                LocalDateTime dateTime = possibleDateTime.get();
-                Month month = dateTime.getMonth();
-                int day = dateTime.getDayOfMonth();
-                int year = dateTime.getYear();
-                int hour = dateTime.getHour();
-                int min = dateTime.getMinute();
-                String meridiem = hour > 12 ? "PM" : "AM";
-                return month.toString() + " " + day + " "
-                        + year + " " + (hour > 12 ? hour - 12 : hour)
-                        + ":" + min + " " + meridiem;
-            } else if (possibleDate.isPresent()) {
-                LocalDate dateTime = possibleDate.get();
-                Month month = dateTime.getMonth();
-                int day = dateTime.getDayOfMonth();
-                int year = dateTime.getYear();
-                return month.toString() + " " + day + " " + year;
-            } else {
-                // If no possible format can be found, just return
-                // the same string.
-                return input;
-            }
-        } catch (DukeException e) {
-            throw e;
+        Optional<LocalDate> possibleDate = parseDate(input);
+        if (possibleDateTime.isPresent()) {
+            LocalDateTime dateTime = possibleDateTime.get();
+            Month month = dateTime.getMonth();
+            int day = dateTime.getDayOfMonth();
+            int year = dateTime.getYear();
+            int hour = dateTime.getHour();
+            int min = dateTime.getMinute();
+            String meridian = hour > 12 ? "PM" : "AM";
+            return month.toString() + " " + day + " "
+                    + year + " " + (hour > 12 ? hour - 12 : hour)
+                    + ":" + min + " " + meridian;
+        } else if (possibleDate.isPresent()) {
+            LocalDate dateTime = possibleDate.get();
+            Month month = dateTime.getMonth();
+            int day = dateTime.getDayOfMonth();
+            int year = dateTime.getYear();
+            return month.toString() + " " + day + " " + year;
+        } else {
+            // If no possible format can be found, just return
+            // the same string.
+            return input;
         }
     }
 }

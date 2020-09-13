@@ -8,7 +8,8 @@ package duke;
 class Parser {
 
     enum Command {
-        BYE, LIST, DONE, DELETE, TODO, EVENT, DEADLINE, FIND, INVALID
+        BYE, LIST, DONE, DELETE, TODO, EVENT,
+        DEADLINE, FIND, HELP, INVALID
     }
 
     /**
@@ -39,6 +40,8 @@ class Parser {
             return Command.DEADLINE;
         case "find":
             return Command.FIND;
+        case "help":
+            return Command.HELP;
         default:
             return Command.INVALID;
         }
@@ -64,6 +67,7 @@ class Parser {
                     // Stop index when indicator /at or /by is found.
                 }
             }
+
             if (indexToStop == -1) {
                 throw new DukeException("Incorrect Input for timed task.");
             }
