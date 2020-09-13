@@ -22,9 +22,11 @@ Duke is a **desktop app for tracking down todos, deadlines and events for use vi
 1. Ensure you have Java `11` or above installed in your Computer.
 2. Download the latest Duke.jar from here.
 3. Copy the file to the folder you want to use as the home folder for your AddressBook.
-4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. **If not able to, you can open terminal in that directory and run: `java -jar <filename>`**
+4. Double-click the file to start the app. The GUI similar to the one below should appear in a few seconds. **If not able to, you can open terminal in that directory and run: `java -jar <filename>`**
 
-![Duke GUI](https://github.com/FH-30/ip/blob/master/docs/Ui.png)
+<div align = "center">
+  <img src="https://github.com/FH-30/ip/blob/master/docs/Ui.png"/>
+</div>
 
 5. Type the command in the command box and press Enter or click Send to execute it. e.g. typing `list` and pressing Enter or clicking Send will list all your current tasks.
 Some example commands you can try:
@@ -45,9 +47,8 @@ Adds a task to the list.
 Format: `todo TASK`
 
 Examples:
-
-	* `todo wash car`
-	* `todo clean house`
+* `todo wash car`
+* `todo clean house`
 
 #### Adding a deadline: `deadline`
 
@@ -56,9 +57,8 @@ Adds a deadline to the list.
 Format: `deadline TASK /by dd/mm/yyyy hh:mm`
 
 Examples:
-
-	* deadline return book /by 22/08/2020 18:00
-	* deadline finish project /by 25/08/2020 20:00
+* deadline return book /by 22/08/2020 18:00
+* deadline finish project /by 25/08/2020 20:00
 
 #### Adding an event: `event`
 
@@ -67,9 +67,8 @@ Adds an event to the list.
 Format: `event TASK /at dd/mm/yyyy hh:mm`
 
 Examples:
-
-	* event attend seminar /at 23/09/2020 13:00
-	* event project meeting /at 26/09/2020 20:00
+* event attend seminar /at 23/09/2020 13:00
+* event project meeting /at 26/09/2020 20:00
 
 ### Marking a task as done: `done`
 
@@ -78,9 +77,8 @@ Marks a task in the list as done.
 Format `done INDEX`
 
 Examples:
-	
-	* `done 1`
-	* `done 2`
+* `done 1`
+* `done 2`
 
 ### Listing all tasks: `list`
 
@@ -89,11 +87,11 @@ Shows a list of all Tasks in the list.
 Format: `list`
 
 Additional tags:
-	1. `-a`: Includes archived tasks
+* `-a`: Includes archived tasks
 
 Examples:
-	* `list`
-	* `list -a`
+* `list`
+* `list -a`
 
 
 ###  Locating a task by name: `find`
@@ -103,8 +101,8 @@ Finds tasks whose description contains the given keyword.
 Format: `find KEYWORD`
 
 Examples:
-	* `find project`
-	* `find wedding`
+* `find project`
+* `find wedding`
 
 ### Displaying all tasks on a specific date: `tasks on`
 
@@ -113,8 +111,8 @@ Displays all tasks that occur on the given date.
 Format: `tasks on dd/mm/yyyy`
 
 Examples:
-	* `tasks on 15/09/2020`
-	* `tasks on 27/08/2020`
+* `tasks on 15/09/2020`
+* `tasks on 27/08/2020`
 
 ### Archiving a task: `archive`
 
@@ -123,8 +121,8 @@ Archives a task in the list.
 Format: `archive INDEX`
 
 Examples:
-	* `archive 1`
-	* `archive 2`
+* `archive 1`
+* `archive 2`
 
 ### Unarchiving a task: `unarchive`
 
@@ -133,8 +131,8 @@ Unarchives a task in the archived list.
 Format: `unarchive INDEX`
 
 Examples:
-	* `unarchive 1`
-	* `unarchive 2`
+* `unarchive 1`
+* `unarchive 2`
 
 ### Deleting a task: `delete`
 
@@ -143,14 +141,15 @@ Deletes a task in the list.
 Format: `delete INDEX`
 
 Examples:
-	* `delete 1`
-	* `delete 2`
+	
+* `delete 1`
+* `delete 2`
 
 ### Exiting the program: `bye`
 
 Exits the program.
 
-Fomrat: `bye`
+Format: `bye`
 
 ### Saving the data
 
