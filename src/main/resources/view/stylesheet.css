@@ -1,3 +1,5 @@
+/** Solution below adapted from https://docs.oracle.com/javafx/2/get_started/css.htm */
+
 #dialogContainer {
     -fx-background-image: url("../images/PiplupBackground.png");
 }

@@ -18,7 +18,7 @@ class ErrorMessage {
         case FILE_NOT_FOUND:
             return "PIII!!! File cannot be found. \uD83D\uDC80";
         case WRONG_TASK_TYPE_IN_STORAGE:
-            return "PIII!!! Invalid mission type in storage file, please type D/E/T. \uD83D\uDC80";
+            return "PIII!!! Invalid task type in storage file, please type D/E/T. \uD83D\uDC80";
         case WRONG_DATE_FORMAT:
             return "PIII!!! Pass in a date in yyyy-mm-dd. \uD83D\uDC80";
         case INVALID_ORDER:

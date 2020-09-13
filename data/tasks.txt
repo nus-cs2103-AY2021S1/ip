@@ -1,2 +1,4 @@
-T | 0 | haha1
-D | 0 | hah3 | 1999-01-30
+T | 0 | Defeat Gengar
+D | 1 | Save Mudkip | 2020-09-09
+E | 0 | Attend Sobble's birthday | 2020-12-12
+D | 0 | Save Squirtle | 2021-01-01
