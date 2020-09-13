@@ -8,12 +8,22 @@ a chatbot with a fun personality can help make task management more appealing, h
 
 ## Quick Start
 1. Ensure you have Java 11 or above installed in your system. If not, you can get it [here](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html).
-2. Download the latest version of `Tebby.jar` from [here](https://github.com/sudogene/ip/releases).
+2. Download the latest version of `TebbyGUI.jar` from [here](https://github.com/sudogene/ip/releases).
 3. Move the file to a directory of your choice, note that additional folder and file will be created in that directory.
-4. Double click `Tebby.jar`. You should see a GUI with a welcome message from Tebby.
+4. Double click `TebbyGUI.jar`. You should see a GUI with a welcome message from Tebby.
 5. You can start with the `help` command to get a list of commands.
 
 ![sample image](sampleimage.PNG)
+
+Alternatively, you can start Tebby in CLI mode (for advanced users) with the following steps
+
+2. Download the latest version of `TebbyCLI.jar` from [here](https://github.com/sudogene/ip/releases).
+3. Start up your terminal.
+5. Navigate to the directory containing `TebbyCLI.jar`.
+6. Run the program using `java -jar TebbyCLI.jar`.
+7. You should see the following CLI with a welcome message from Tebby.
+
+![sample image](samplecli.PNG)
 
 ---
 
