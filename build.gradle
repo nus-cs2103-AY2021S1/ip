@@ -46,7 +46,7 @@ test {
 }
 
 application {
-    mainClassName = "Launcher"
+    mainClassName = "duke.Launcher"
 }
 
 shadowJar {
@@ -61,10 +61,8 @@ checkstyle {
 
 run{
     standardInput = System.in
-    systemProperty "file.encoding", "utf-8"
+    systemProperty "file.encoding", "UTF-8"
 }
-
-compileJava.options.encoding = 'UTF-8'
 
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'

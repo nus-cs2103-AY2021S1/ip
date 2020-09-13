@@ -51,7 +51,7 @@ class StorageTest {
         try {
             assertTrue(storage.store(sampleList));
         } catch (DukeException e) {
-            System.out.println(e);
+            System.out.println("Exception while testing if store() works: " + e.toString());
             fail();
         }
     }
