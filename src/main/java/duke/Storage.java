@@ -59,16 +59,16 @@ class Storage {
         // T | isDoneInt | description
 
         File file = new File(this.filePath);
-        ArrayList<ArrayList<String>> formattedOutput = new ArrayList<>();
+        ArrayList<ArrayList<String>> formattedOutputs = new ArrayList<>();
         try {
             Scanner s = new Scanner(file);
             while (s.hasNext()) {
                 String line = s.nextLine();
                 String[] lineParts = line.split(" \\| ");
                 ArrayList<String> linePartArray = new ArrayList<>(Arrays.asList(lineParts));
-                formattedOutput.add(linePartArray);
+                formattedOutputs.add(linePartArray);
             }
-            return formattedOutput;
+            return formattedOutputs;
         } catch (java.io.FileNotFoundException e) {
             String errorMessage = ErrorMessage.getErrorMessage(ErrorType.FILE_NOT_FOUND);
             throw new DukeException(errorMessage);

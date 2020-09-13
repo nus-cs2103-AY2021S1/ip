@@ -27,9 +27,9 @@ class Parser {
         if (partsOfCommand.length > 1) {
             assert partsOfCommand.length == 2 : "Length of parts of command should be 2";
             String secondPartOfCommand = partsOfCommand[1];
-            return new String[]{action, secondPartOfCommand};
+            return new String[] {action, secondPartOfCommand};
         } else {
-            return new String[]{action};
+            return new String[] {action};
         }
     }
 

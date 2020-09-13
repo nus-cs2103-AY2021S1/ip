@@ -5,15 +5,15 @@ import java.util.ArrayList;
 class FindCommand extends Command {
 
     /** Contains user's search string. */
-    private String search;
+    private String searchString;
 
     /**
      * Constructs find command.
      *
-     * @param search String to find.
+     * @param searchString String to find.
      */
-    FindCommand(String search) {
-        this.search = search;
+    FindCommand(String searchString) {
+        this.searchString = searchString;
     }
 
     /**
@@ -25,7 +25,7 @@ class FindCommand extends Command {
      */
     @Override
     String execute(TaskList tasks, Ui ui, Storage storage) {
-        ArrayList<String> foundTaskListString = tasks.findTasks(search);
+        ArrayList<String> foundTaskListString = tasks.findTasks(searchString);
         return ui.showFindTaskMessage(foundTaskListString);
     }
 

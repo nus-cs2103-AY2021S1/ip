@@ -54,20 +54,29 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
+        handleExit(isExit);
+        handleUserText();
+    }
+
+    @FXML
+    private void handleExit(boolean isExit) {
         // After user says "bye", and gives another input e.g. "some_text", the application will exit.
         if (isExit) {
             // get a handle to the stage
             Stage stage = (Stage) scrollPane.getScene().getWindow();
             stage.close();
         }
+    }
 
+    @FXML
+    private void handleUserText() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
         isExit = duke.isExit(input);
 
         dialogContainer.getChildren().addAll(
-            DialogBox.getUserDialog(input, userImage),
-            DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getUserDialog(input, userImage),
+                DialogBox.getDukeDialog(response, dukeImage)
         );
 
         userInput.clear();

@@ -211,7 +211,8 @@ class TaskList {
      */
     ArrayList<String> sortTasks(SortOrderOption sortOrderOptionEnum) {
         sortTasksInPlace(sortOrderOptionEnum);
-        return listTasks();
+        ArrayList<String> taskListString = listTasks();
+        return taskListString;
     }
 
     private void sortTasksInPlace(SortOrderOption sortOrderOptionEnum) {
