@@ -7,7 +7,7 @@ import static duke.util.Keyword.KEYWORD_DUPLICATE_EXCEPTION;
  */
 public class DuplicateException extends DukeException {
     /**
-     * Initializes the DuplicateException Object.
+     * Initialize the DuplicateException Object.
      */
     public DuplicateException() {
         super(KEYWORD_DUPLICATE_EXCEPTION);

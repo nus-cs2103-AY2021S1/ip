@@ -17,10 +17,13 @@ import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.textui.Ui;
 
+/**
+ * Class that simulates the help command of the user.
+ */
 public class HelpCommand extends Command {
 
     /**
-     * Creates a HelpCommand object.
+     * Initialize a HelpCommand object.
      *
      * @param inputArr Array of length 2 that contains information of the user input
      *                 At index 0, contains the type of command
@@ -40,7 +43,7 @@ public class HelpCommand extends Command {
     }
 
     /**
-     * Generates the list of commands available in Duke
+     * Generate the list of commands available in Duke
      *
      * @return A list of commands available in Duke
      */

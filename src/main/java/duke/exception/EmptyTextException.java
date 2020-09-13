@@ -7,7 +7,7 @@ import static duke.util.Keyword.KEYWORD_EMPTY_EXCEPTION;
  */
 public class EmptyTextException extends DukeException {
     /**
-     * Initializes the EmptyTextException Object.
+     * Initialize the EmptyTextException Object.
      *
      * @param text The command that is throwing the exception.
      */

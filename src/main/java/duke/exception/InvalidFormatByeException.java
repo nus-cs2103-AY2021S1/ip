@@ -7,7 +7,7 @@ import static duke.util.Keyword.KEYWORD_BYE_EXCEPTION;
  */
 public class InvalidFormatByeException extends DukeException {
     /**
-     * Initializes the InvalidFormatByeException Object.
+     * Initialize the InvalidFormatByeException Object.
      */
     public InvalidFormatByeException() {
         super(KEYWORD_BYE_EXCEPTION);

@@ -7,7 +7,7 @@ import static duke.util.Keyword.KEYWORD_DELETE_EXCEPTION;
  */
 public class InvalidFormatDeleteException extends DukeException {
     /**
-     * Initializes the InvalidFormatDeleteException Object.
+     * Initialize the InvalidFormatDeleteException Object.
      */
     public InvalidFormatDeleteException() {
         super(KEYWORD_DELETE_EXCEPTION);

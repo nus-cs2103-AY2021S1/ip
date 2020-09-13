@@ -7,7 +7,7 @@ import static duke.util.Keyword.KEYWORD_DEADLINE_EXCEPTION;
  */
 public class InvalidFormatDeadlineException extends DukeException {
     /**
-     * Initializes the InvalidFormatDeadlineException Object.
+     * Initialize the InvalidFormatDeadlineException Object.
      */
     public InvalidFormatDeadlineException() {
         super(KEYWORD_DEADLINE_EXCEPTION);

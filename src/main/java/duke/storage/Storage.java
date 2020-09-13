@@ -2,6 +2,7 @@ package duke.storage;
 
 import static duke.util.Keyword.KEYWORD_DEADLINE;
 import static duke.util.Keyword.KEYWORD_EVENT;
+import static duke.util.Keyword.KEYWORD_STRING_ZERO;
 import static duke.util.Keyword.KEYWORD_TODO;
 
 import java.io.BufferedReader;
@@ -26,27 +27,27 @@ import duke.tasklist.TaskList;
 public class Storage {
 
     /**
-     * Checking if a particular task is completed.
+     * Check if a particular task is completed.
      *
      * @param s A string encoding whether a task is completed.
      * @return Returns true if the task is completed, false otherwise.
      */
     private boolean isTaskDone(String s) {
-        return !s.equals("0");
+        return !s.equals(KEYWORD_STRING_ZERO);
     }
 
     /**
-     * Checking if a particular task has reminder on.
+     * Check if a particular task has reminder on.
      *
      * @param s A string encoding whether a task has reminder on.
      * @return Returns true if the task has reminder on, false otherwise.
      */
     private boolean isReminderOn(String s) {
-        return !s.equals("0");
+        return !s.equals(KEYWORD_STRING_ZERO);
     }
 
     /**
-     * Creates a file path.
+     * Create a file path.
      *
      * @param path The directory that to be created.
      * @throws IOException
@@ -57,7 +58,7 @@ public class Storage {
     }
 
     /**
-     * Creates a CSV file for the user.
+     * Create a CSV file for the user.
      *
      * @param file The CSV file to be created.
      * @throws IOException
@@ -68,7 +69,7 @@ public class Storage {
     }
 
     /**
-     * Recording down the list of tasks that the user have during this session.
+     * Record down the list of tasks that the user have during this session.
      *
      * @param file The CSV file to record down the information.
      * @param tasks Object contains the task list.
@@ -86,7 +87,7 @@ public class Storage {
     }
 
     /**
-     * When the user exits, records the data back into the user's file.
+     * Record the data back into the user's file when user exits the program/
      *
      * @param tasks Object contains the task list.
      */
@@ -110,7 +111,7 @@ public class Storage {
     }
 
     /**
-     * Retrieves the user's data and load into the system.
+     * Retrieve the user's data and load into the system.
      *
      * @param tasks Object contains the task list.
      */

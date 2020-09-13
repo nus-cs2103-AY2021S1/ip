@@ -15,6 +15,10 @@ public class Keyword {
     public static final String KEYWORD_EVENT_FORMAT = " /at ";
     public static final String KEYWORD_USER = "user";
     public static final String KEYWORD_DUKE = "duke";
+    public static final String KEYWORD_EMPTY_MESSAGE = "";
+    public static final String KEYWORD_YES = "y";
+    public static final String KEYWORD_NO = "n";
+    public static final String KEYWORD_STRING_ZERO = "0";
 
     // Task message
     public static final String KEYWORD_TASK_MARKED_BEFORE = "This task has already been marked!";
@@ -26,7 +30,7 @@ public class Keyword {
     public static final String KEYWORD_UI_GOODBYE_MESSAGE = "Bye ^.^, Hope to see you again soon!!!";
     public static final String KEYWORD_UI_HELLO_DUKE = "Welcome back";
 
-    // command
+    // Command
     public static final String KEYWORD_TODO = "todo";
     public static final String KEYWORD_EVENT = "event";
     public static final String KEYWORD_DEADLINE = "deadline";
@@ -41,9 +45,7 @@ public class Keyword {
     // Notification message
     public static final String KEYWORD_ADD_NOTIFICATION = "Got it. I've added this task:";
     public static final String KEYWORD_COMMAND_ERR = "Sorry something went wrong. Duke crashed X.X";
-    public static final String KEYWORD_DELETE_INVALID_INPUT = "Invalid input for delete";
     public static final String KEYWORD_DELETE_NOTIFICATION = "Noted. I've removed this task:";
-    public static final String KEYWORD_DONE_INVALID_INPUT = "Invalid input for done";
     public static final String KEYWORD_FIND_SUCCESS = "Here are the matching tasks in your list:";
     public static final String KEYWORD_HELP_DISPLAY_MESSAGE = "Here are the list of commands available:\n";
     public static final String KEYWORD_HELP_LIST = "1. list\n";

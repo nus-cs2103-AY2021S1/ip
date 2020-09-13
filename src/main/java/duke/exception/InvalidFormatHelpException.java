@@ -7,7 +7,7 @@ import static duke.util.Keyword.KEYWORD_HELP_EXCEPTION;
  */
 public class InvalidFormatHelpException extends DukeException {
     /**
-     * Initializes the InvalidFormatHelpException Object.
+     * Initialize the InvalidFormatHelpException Object.
      */
     public InvalidFormatHelpException() {
         super(KEYWORD_HELP_EXCEPTION);

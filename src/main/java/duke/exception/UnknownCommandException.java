@@ -7,7 +7,7 @@ import static duke.util.Keyword.KEYWORD_UNKNOWN_COMMAND_EXCEPTION;
  */
 public class UnknownCommandException extends DukeException {
     /**
-     * Initializes the UnknownCommandException Object.
+     * Initialize the UnknownCommandException Object.
      */
     public UnknownCommandException() {
         super(KEYWORD_UNKNOWN_COMMAND_EXCEPTION);

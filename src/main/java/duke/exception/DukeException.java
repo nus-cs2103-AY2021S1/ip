@@ -5,7 +5,7 @@ package duke.exception;
  */
 public abstract class DukeException extends Exception {
     /**
-     * Initializes the DukeException Object.
+     * Initialize the DukeException Object.
      *
      * @param message Message to be displayed to the user when an invalid input is keyed in.
      */

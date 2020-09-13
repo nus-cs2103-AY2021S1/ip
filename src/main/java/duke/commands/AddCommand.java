@@ -31,7 +31,7 @@ import duke.ui.textui.Ui;
 public class AddCommand extends Command {
 
     /**
-     * Creates an AddCommand object.
+     * Initialize an AddCommand object.
      *
      * @param inputArr Array of length 2 that contains information of the user input
      *                 At index 0, contains the type of command
@@ -52,7 +52,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Adds the given task into the task list. Expected format for the date in message is YYYY-MM-DD HHMM or
+     * Add the given task into the task list. Expected format for the date in message is YYYY-MM-DD HHMM or
      * YYYY-MM-DD HHMM. If type is of todo, date can be omitted.
      *
      * @param type Type of task that is being entered (todo, event, deadline).
@@ -90,7 +90,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Check for duplicate before adding.
+     * Check for any duplicate in the task list before adding the task into it.
      *
      * @param tasks Object contains the task list.
      * @param task The task to be added.
@@ -109,7 +109,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Checks if task list contains this exact task.
+     * Check if task list contains this exact task.
      *
      * @param taskList the list of tasks.
      * @param task the task that user is trying to add.

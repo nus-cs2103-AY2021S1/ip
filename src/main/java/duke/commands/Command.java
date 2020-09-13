@@ -15,7 +15,7 @@ public abstract class Command {
     protected String[] inputArr;
 
     /**
-     * Creates a Command object.
+     * Initialize a Command object.
      *
      * @param inputArr Array of length 2 that contains information of the user input
      *                 At index 0, contains the type of command
@@ -26,7 +26,7 @@ public abstract class Command {
     }
 
     /**
-     * Prints the error message when duke crashes.
+     * Print the error message when duke crashes.
      */
     public static void printErr() {
         System.out.println(KEYWORD_COMMAND_ERR);

@@ -57,6 +57,11 @@ public class ReminderDisplay extends VBox {
     @FXML
     private TextFlow time;
 
+    /**
+     * Open the reminder section in the GUI.
+     *
+     * @param taskDetails The list of tasks that is set on reminder.
+     */
     private ReminderDisplay(String ... taskDetails) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/ReminderDisplay.fxml"));
@@ -71,7 +76,7 @@ public class ReminderDisplay extends VBox {
     }
 
     /**
-     * Returns a display of the task that was set on reminder.
+     * Return a display of the task that was set on reminder.
      *
      * @param task Task that is set on reminder.
      * @return A display of the task that was set on reminder.
@@ -94,12 +99,13 @@ public class ReminderDisplay extends VBox {
     }
 
     /**
-     * Creates a text array that constitute the text header of a specific color and text description of a
+     * Create a text array that constitute the text header of a specific color and text description of a
      * specific color
      *
-     * @param title
-     * @param description
-     * @return
+     * @param title The type of event.
+     * @param description The description of the event.
+     * @return A text array that contains the text header of a specific color and a text description of
+     * a specific color.
      */
     private Text[] createText(String title, String description) {
         Text text1 = new Text(title);
@@ -157,7 +163,7 @@ public class ReminderDisplay extends VBox {
     }
 
     /**
-     * Creates the display for the list of tasks that is set on reminder.
+     * Create the display for the list of tasks that is set on reminder.
      *
      * @param taskDetails A list of details regarding the task.
      */
@@ -177,7 +183,7 @@ public class ReminderDisplay extends VBox {
     }
 
     /**
-     * Returns a text array that determines the date format.
+     * Return a text array that determines the date format.
      *
      * @param taskDetails A list of details regarding the task.
      * @return A text array that determines the date format.
@@ -195,7 +201,7 @@ public class ReminderDisplay extends VBox {
     }
 
     /**
-     * Returns a text array that determines the time format.
+     * Return a text array that determines the time format.
      *
      * @param taskDetails A list of details regarding the task.
      * @return Returns a text array that determines the time format.
@@ -212,7 +218,7 @@ public class ReminderDisplay extends VBox {
     }
 
     /**
-     * Returns a shorten name for the day.
+     * Return a shorten name for the day.
      *
      * @param textDate the day of the task.
      * @return A shorten common abbreviation name for the day.

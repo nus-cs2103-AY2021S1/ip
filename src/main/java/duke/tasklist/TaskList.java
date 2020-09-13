@@ -19,7 +19,7 @@ public class TaskList {
     }
 
     /**
-     * Return the number of tasks in the list
+     * Return the number of tasks in the list.
      *
      * @return Integer value of the size of the list
      */
@@ -28,35 +28,35 @@ public class TaskList {
     }
 
     /**
-     * Retrieves the task at that index 'n' of the list.
+     * Retrieve the task at that index 'index' of the list.
      *
-     * @param n Integer value.
-     * @return A task at that index 'n'.
+     * @param index Integer value.
+     * @return A task at that index 'index'.
      */
-    public Task get(int n) {
-        return listTasks.get(n);
+    public Task get(int index) {
+        return listTasks.get(index);
     }
 
     /**
-     * Adds the tasks into the list
+     * Add the tasks into the list of tasks.
      *
-     * @param t Task to be added.
+     * @param task Task to be added.
      */
-    public void add(Task t) {
-        listTasks.add(t);
+    public void add(Task task) {
+        listTasks.add(task);
     }
 
     /**
-     * Removes the task as that index 'n' of the list.
+     * Remove the task at that index 'index' of the list.
      *
-     * @param n Integer value.
+     * @param index Integer value.
      */
-    public void remove(int n) {
-        listTasks.remove(n);
+    public void remove(int index) {
+        listTasks.remove(index);
     }
 
     /**
-     * set the task at that index 'n' of the list.
+     * Set the task at that index 'n' of the list.
      *
      * @param index Integer value.
      * @param task Task to be inserted.
@@ -66,13 +66,13 @@ public class TaskList {
     }
 
     /**
-     * Compares the task priority for reminder *Todo takes the highest priority*.
+     * Compare the task priority for reminder *Todo takes the highest priority*.
      *
      * @param task1 First task
      * @param task2 Second task
-     * @return returns true if task1 is more important in terms of type and deadline than task2
+     * @return True if task1 is more important in terms of type and deadline than task2.
      */
-    public boolean compare(Task task1, Task task2) {
+    private boolean compare(Task task1, Task task2) {
         if (task1.getPriority() > task2.getPriority()) {
             // implies task1 is of todo and task2 is event/deadline
             return true;
@@ -146,10 +146,10 @@ public class TaskList {
     }
 
     /**
-     * Checks if a task already exist in the list of tasks.
+     * Check if a task already exist in the list of tasks.
      *
      * @param task The new to be added task.
-     * @return Boolean value representing whether the task exist in the lsit of tasks.
+     * @return Boolean value representing whether the task exist in the list of tasks.
      */
     public boolean checkExistBefore(Task task) {
         for (int i = 0; i < listTasks.size(); i++) {

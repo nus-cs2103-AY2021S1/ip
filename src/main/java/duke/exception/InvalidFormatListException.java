@@ -7,7 +7,7 @@ import static duke.util.Keyword.KEYWORD_LIST_EXCEPTION;
  */
 public class InvalidFormatListException extends DukeException {
     /**
-     * Initializes the InvalidFormatListException Object.
+     * Initialize the InvalidFormatListException Object.
      */
     public InvalidFormatListException() {
         super(KEYWORD_LIST_EXCEPTION);

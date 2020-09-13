@@ -8,14 +8,17 @@ import java.time.format.DateTimeFormatter;
 
 import duke.exception.InvalidFormatDateException;
 
+/**
+ * Class that helps to format the date of the user's input.
+ */
 public class DateFormatter {
 
     public static final DateTimeFormatter FORMAT_DATE_TIME = DateTimeFormatter.ofPattern("EEEE, dd MMM yyyy, h:mma");
 
     /**
-     *Formats the user's input timing into a LocalDateTime format.
+     * Format the user's input date and time into a LocalDateTime object.
      *
-     * @param dateAndTime The inputted user's timing.
+     * @param dateAndTime The user's input of date and time.
      * @return A LocalDateTime object that contains the information of the timing.
      * @throws InvalidFormatDateException If the inputted user's timing is not of the correct format:
      * YYYY-MM-DD HHMM or YYYY-MM-DD, an exception will be thrown to notify the user.
@@ -26,14 +29,12 @@ public class DateFormatter {
         String[] date = dateFormat[0].split("-");
         String time;
         if (dateFormat.length == 1) {
-            // case where he nvr input in the time
             time = "2359";
             if (date.length != 3) {
                 throw new InvalidFormatDateException();
             }
         } else {
             time = dateFormat[1];
-            // case where he inputs in the time
             if (date.length != 3 || time.length() != 4) {
                 throw new InvalidFormatDateException();
             }

@@ -37,6 +37,13 @@ public class DialogBox extends HBox {
     @FXML
     private VBox speechBubble;
 
+    /**
+     * Open the dialog box in the GUI.
+     *
+     * @param text text Text to output.
+     * @param image Image of DialogBox (either Duke or User).
+     * @param user Duke or User.
+     */
     private DialogBox(String text, Image image, String user) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -50,7 +57,7 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Flips the dialog box such that the ImageView is on the left and text on the right.
+     * Flip the dialog box such that the ImageView is on the left and text on the right.
      */
     private void flip() {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
@@ -59,10 +66,24 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Display the user's dialog.
+     *
+     * @param text Input text from user.
+     * @param image User's icon.
+     * @return Display of user dialog.
+     */
     public static DialogBox getUserDialog(String text, Image image) {
         return new DialogBox(text, image, KEYWORD_USER);
     }
 
+    /**
+     * Display Duke's response.
+     *
+     * @param text Output text from Duke.
+     * @param image Duke's image.
+     * @return Display of Duke's response.
+     */
     public static DialogBox getDukeDialog(String text, Image image) {
         var db = new DialogBox(text, image, KEYWORD_DUKE);
         db.flip();
@@ -89,7 +110,8 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Depending on the user, it will show a speech bubble orientated from the left or right.
+     * Display the speech bubble orientated to the right if the message is from the user, else display the speech
+     * bubble orientated to the left if the message is from duke.
      *
      * @param user The person speaking.
      */

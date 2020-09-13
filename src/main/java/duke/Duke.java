@@ -13,7 +13,6 @@ import javafx.application.Platform;
  * the user inputs. You can use it to record down tasks and marking the progress
  * of it.
  */
-
 public class Duke {
 
     private Storage storage;

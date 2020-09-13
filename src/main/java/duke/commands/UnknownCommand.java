@@ -8,11 +8,10 @@ import duke.ui.textui.Ui;
 /**
  * Class that simulates an unknown command.
  */
-
 public class UnknownCommand extends Command {
 
     /**
-     * Creates an UnknownCommand object.
+     * Initialize an UnknownCommand object.
      *
      * @param inputArr Array of length 2 that contains information of the user input
      *                 At index 0, contains the type of command

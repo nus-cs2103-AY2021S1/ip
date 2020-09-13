@@ -21,7 +21,7 @@ public class Task {
     protected LocalDateTime dueDate;
 
     /**
-     * Creates a task object the containing details of the task.
+     * Initialize a task object the containing details of the task.
      *
      * @param description Details of the task.
      */
@@ -32,7 +32,7 @@ public class Task {
     }
 
     /**
-     * Creates a task object the containing details of the task.
+     * Initialize a task object the containing details of the task.
      *
      * @param description Details of the task.
      * @param isDone Boolean value representing whether a task is completed.
@@ -44,7 +44,7 @@ public class Task {
     }
 
     /**
-     * Creates a task object the containing details of the task.
+     * Initialize a task object the containing details of the task.
      *
      * @param description Details of the task.
      * @param priority Integer value denoting the priority of the task.
@@ -57,7 +57,7 @@ public class Task {
     }
 
     /**
-     * Creates a task object the containing details of the task.
+     * Initialize a task object the containing details of the task.
      *
      * @param description Details of the task.
      * @param priority Integer value denoting the priority of the task.
@@ -70,7 +70,7 @@ public class Task {
     }
 
     /**
-     * Creates a task object the containing details of the task.
+     * Initialize a task object the containing details of the task.
      *
      * @param description Details of the task.
      * @param isDone Boolean value of whether a task is completed.
@@ -85,7 +85,7 @@ public class Task {
     }
 
     /**
-     * Creates a task object the containing details of the task.
+     * Initialize a task object the containing details of the task.
      *
      * @param description Details of the task.
      * @param isDone Boolean value of whether a task is completed.
@@ -102,7 +102,7 @@ public class Task {
     }
 
     /**
-     * Displays a cross if task is not done, a tick otherwise.
+     * Display a cross if task is not done, a tick otherwise.
      *
      * @return Byte encoding strings of the symbols tick or X.
      */
@@ -111,7 +111,7 @@ public class Task {
     }
 
     /**
-     * Marks the task as completed.
+     * Mark the task as completed.
      */
     public String markAsDone() {
         if (this.isDone) {
@@ -137,9 +137,9 @@ public class Task {
     }
 
     /**
-     * Returns a proper styling to be recorded into CSV.
+     * Return a proper styling to be recorded into CSV.
      *
-     * @return A format to be recorded into CSV.
+     * @return A formatted string to be recorded into CSV.
      */
     public String formatStyling() {
         return String.format(",%s,%d,%d\n", description, getTaskStatus(), getReminderStatus());
@@ -164,7 +164,7 @@ public class Task {
     }
 
     /**
-     * Retrieves the details of the task.
+     * Retrieve the details of the task.
      *
      * @return A string representing the details of the task.
      */
@@ -173,7 +173,7 @@ public class Task {
     }
 
     /**
-     * Retrieves the priority of the task.
+     * Retrieve the priority of the task.
      *
      * @return Integer representing the priority of the task.
      */
@@ -182,7 +182,7 @@ public class Task {
     }
 
     /**
-     * Retrieves the due date of the task.
+     * Retrieve the due date of the task.
      *
      * @return A LocalDateTime object representing the due date.
      */

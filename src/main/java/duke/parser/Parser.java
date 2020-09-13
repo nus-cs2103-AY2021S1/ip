@@ -30,7 +30,7 @@ import duke.commands.UnknownCommand;
 public class Parser {
 
     /**
-     * Making sense of the user's input and outputting the relevant commands to the input.
+     * Make sense of the user's input and execute the correct command based on the user's input.
      */
     public static Command parse(String message) {
         assert message != null;

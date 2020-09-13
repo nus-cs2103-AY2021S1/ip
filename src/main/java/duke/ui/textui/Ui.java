@@ -11,21 +11,21 @@ import java.util.stream.Stream;
 public class Ui {
 
     /**
-     * Greets the user.
+     * Greet the user.
      */
     public String greetings() {
         return messageFormatter(KEYWORD_UI_HELLO_DUKE);
     }
 
     /**
-     * Saying goodbye to user.
+     * Say goodbye to user.
      */
     public String goodBye() {
         return messageFormatter(KEYWORD_UI_GOODBYE_MESSAGE);
     }
 
     /**
-     * Prints the error 'message'.
+     * Print the error 'message'.
      * @param message Error message to be printed.
      */
     public String printException(String message) {

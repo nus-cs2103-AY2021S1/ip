@@ -7,7 +7,7 @@ import static duke.util.Keyword.KEYWORD_FIND_EXCEPTION;
  */
 public class InvalidFormatFindException extends DukeException {
     /**
-     * Initializes the InvalidFormatFindException Object.
+     * Initialize the InvalidFormatFindException Object.
      */
     public InvalidFormatFindException() {
         super(KEYWORD_FIND_EXCEPTION);

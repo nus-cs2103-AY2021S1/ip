@@ -7,7 +7,7 @@ import static duke.util.Keyword.KEYWORD_EVENT_EXCEPTION;
  */
 public class InvalidFormatEventException extends DukeException {
     /**
-     * Initializes the InvalidFormatEventException Object.
+     * Initialize the InvalidFormatEventException Object.
      */
     public InvalidFormatEventException() {
         super(KEYWORD_EVENT_EXCEPTION);

@@ -10,17 +10,17 @@ import java.time.LocalDateTime;
 public class Event extends Task {
 
     /**
-     * Creates a event object the containing details of the task.
+     * Initialize a event object the containing details of the task.
      *
      * @param description Details of the task.
-     * @param eventTime LocalDateTime format of the time.
+     * @param eventTime LocalDateTime format of the date and time.
      */
     public Event(String description, LocalDateTime eventTime) {
         super(description, 0, eventTime);
     }
 
     /**
-     * Creates a event object the containing details of the task.
+     * Initialize a event object the containing details of the task.
      *
      * @param description Details of the task.
      * @param eventTime String format of the time. Either YYYY-MM-DD HHMM or
@@ -33,9 +33,9 @@ public class Event extends Task {
     }
 
     /**
-     * Returns a proper styling to be recorded into CSV.
+     * Return a proper styling to be recorded into CSV.
      *
-     * @return A format to be recorded into CSV.
+     * @return A formatted string to be recorded into CSV.
      */
     public String formatStyling() {
         return String.format("event,%s%s", getDueDate(), super.formatStyling());

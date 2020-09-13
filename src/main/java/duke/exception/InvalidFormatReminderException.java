@@ -7,7 +7,7 @@ import static duke.util.Keyword.KEYWORD_REMINDER_EXCEPTION;
  */
 public class InvalidFormatReminderException extends DukeException {
     /**
-     * Initializes the InvalidFormatReminderException Object.
+     * Initialize the InvalidFormatReminderException Object.
      */
     public InvalidFormatReminderException() {
         super(KEYWORD_REMINDER_EXCEPTION);

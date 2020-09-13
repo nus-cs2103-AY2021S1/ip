@@ -10,11 +10,10 @@ import duke.ui.textui.Ui;
 /**
  * Class that simulates the bye command of the user.
  */
-
 public class ByeCommand extends Command {
 
     /**
-     * Creates an ByeCommand object.
+     * Initialize an ByeCommand object.
      *
      * @param inputArr Array of length 2 that contains information of the user input
      *                 At index 0, contains the type of command

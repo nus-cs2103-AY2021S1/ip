@@ -1,6 +1,7 @@
 package duke.commands;
 
 import static duke.util.FormatChecker.checkFindFormat;
+import static duke.util.Keyword.KEYWORD_EMPTY_MESSAGE;
 import static duke.util.Keyword.KEYWORD_FIND_SUCCESS;
 
 import duke.exception.InvalidFormatFindException;
@@ -15,7 +16,7 @@ import duke.ui.textui.Ui;
 public class FindCommand extends Command {
 
     /**
-     * Creates a FindCommand object.
+     * Initialize a FindCommand object.
      *
      * @param inputArr Array of length 2 that contains information of the user input
      *                 At index 0, contains the type of command
@@ -35,7 +36,7 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Find and displays the list of task based on the user's input.
+     * Find and display the list of task that contains the user's input.
      *
      * @param tasks Object that contains the list of tasks.
      * @param keyword The task that the user is looking for.
@@ -50,7 +51,7 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Construct the list of task based on the use's input.
+     * Construct the list of task based on the user's input.
      *
      * @param finalMessage Empty message.
      * @param tasks Object that contains the list of tasks.
@@ -69,13 +70,13 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Checks if the Stringbuilder is an empty string.
+     * Check if the Stringbuilder contains an empty string.
      *
      * @param finalMessage Stringbuilder containing the result.
      * @return True if Stringbuilder does not contain an empty string, else false.
      */
     private boolean checkEmptyMessage(StringBuilder finalMessage) {
-        return finalMessage.toString().equals("");
+        return finalMessage.toString().equals(KEYWORD_EMPTY_MESSAGE);
     }
 
     /**

@@ -39,7 +39,7 @@ public class MainWindow extends AnchorPane {
     private Image welcomeStitch = new Image(this.getClass().getResourceAsStream("/images/welcomestitch.png"));
 
     /**
-     * Binds the height of the reminder and the chat portion.
+     * Bind the height of the reminder and the chat portion.
      */
     @FXML
     public void initialize() {
@@ -47,6 +47,12 @@ public class MainWindow extends AnchorPane {
         reminderScreen.vvalueProperty().bind(reminderSection.heightProperty());
     }
 
+    /**
+     * Initialize duke.
+     *
+     * @param duke Duke application.
+     * @param stage Screen of the GUI.
+     */
     public void setDuke(Duke duke, Stage stage) {
         this.duke = duke;
         Ui ui = new Ui();
@@ -58,7 +64,7 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * Create two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     @FXML
@@ -74,7 +80,7 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Checks the list of task to see which is marked as reminders and display to the users these tasks in a sorted.
+     * Check the list of task to see which is marked as reminders and display to the users these tasks in a sorted.
      * order by time.
      *
      * @param taskList List of tasks.
