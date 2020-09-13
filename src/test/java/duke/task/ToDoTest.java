@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.time.LocalDateTime;
+
 import org.junit.jupiter.api.Test;
 
 public class ToDoTest {
@@ -21,7 +23,6 @@ public class ToDoTest {
         assertFalse(newToDo.isDone());
         assertEquals("Not done", newToDo.getStatus());
         assertEquals("TODO", newToDo.getTaskName());
-        assertEquals("-", newToDo.getTime());
         assertEquals(description, newToDo.getDescription());
         assertEquals(String.format("[T][\u2718] %s", description), newToDo.toString());
 
@@ -39,7 +40,7 @@ public class ToDoTest {
     public void testConstructor() {
         ToDo newTodo = new ToDo(description);
         assertFalse(newTodo.isDone());
-        newTodo = new ToDo(description);
+        newTodo = new ToDo(description, true, "-", LocalDateTime.now());
         assertTrue(newTodo.isDone());
     }
 

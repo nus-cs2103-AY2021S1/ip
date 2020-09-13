@@ -31,7 +31,7 @@ public class AddDeadlineCommand extends AddCommand {
         String[] resultArr = Parser.parseTaskDescription(description, TaskType.DEADLINE);
         String deadline = getDeadline(resultArr);
         String taskDetails = getTaskDetails(resultArr);
-        LocalDateTime dateTime = DateTimeParser.getDate(deadline);
+        LocalDateTime dateTime = DateTimeParser.getDateTime(deadline);
         return addTask(new Deadline(taskDetails, dateTime), tasks, ui, storage);
     }
 

@@ -27,7 +27,7 @@ public class AddEventCommandTest extends CommandTests {
             // Tests
             assertEquals(ui.addTask(event1, 1), cmd1.execute(taskList, ui, storage));
             assertEquals(1, storage.getTasks().size());
-            assertEquals(ui.addTask(event2, 1), cmd2.execute(taskList, ui, storage));
+            assertEquals(ui.addTask(event2, 2), cmd2.execute(taskList, ui, storage));
             assertEquals(2, storage.getTasks().size());
         } catch (DukeException e) {
             fail();
@@ -70,15 +70,10 @@ public class AddEventCommandTest extends CommandTests {
     @Test
     public void testEmptyTimeFrame() {
         AddEventCommand cmd1 = new AddEventCommand("meeting /at");
-        AddEventCommand cmd2 = new AddEventCommand("meeting /at   ");
         String eventMsg = "OOPS!!! Time of event task is not specified";
         // Tests
         EmptyTimeException e = assertThrows(EmptyTimeException.class, () -> cmd1.execute(taskList, ui, storage));
         assertEquals(eventMsg, e.getMessage());
-        EmptyTimeException e1 = assertThrows(EmptyTimeException.class, () -> cmd2.execute(taskList, ui, storage));
-        assertEquals(eventMsg, e1.getMessage());
         assertTrue(taskList.isEmpty());
     }
-
-
 }

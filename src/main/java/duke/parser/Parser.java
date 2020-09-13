@@ -22,12 +22,12 @@ import duke.command.AddDeadlineCommand;
 import duke.command.AddEventCommand;
 import duke.command.AddToDoCommand;
 import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.HelpCommand;
 import duke.command.ShowCommand;
-import duke.command.SimpleCommand;
-import duke.command.SimpleCommandType;
 import duke.exception.DukeException;
 import duke.exception.EmptyTaskException;
 import duke.exception.EmptyTimeException;
@@ -58,9 +58,9 @@ public class Parser {
         case KEYWORD_LIST:
             return new ShowCommand();
         case KEYWORD_DONE:
-            return new SimpleCommand(details, SimpleCommandType.DONE);
+            return new DoneCommand(details);
         case KEYWORD_DELETE:
-            return new SimpleCommand(details, SimpleCommandType.DELETE);
+            return new DeleteCommand(details);
         case KEYWORD_TODO:
             return new AddToDoCommand(details);
         case KEYWORD_DEADLINE:

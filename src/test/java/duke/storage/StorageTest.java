@@ -1,12 +1,17 @@
 package duke.storage;
 
+import static duke.util.Keyword.DATE_TIME_FORMAT;
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 
 import duke.exception.FileUpdateFailException;
 import duke.task.Task;
@@ -41,7 +46,10 @@ public class StorageTest {
             assertEquals(task3.getDescription(), tasks.get(2).getDescription());
             for (Task task : tasks) {
                 assertEquals("TODO", task.getTaskName());
-                assertEquals("-", task.getTime());
+                String taskCreationTime = task.getTime();
+                Executable exe = () -> LocalDateTime.parse(taskCreationTime,
+                    DateTimeFormatter.ofPattern(DATE_TIME_FORMAT));
+                assertAll(exe);
             }
         } catch (FileUpdateFailException e) {
             System.out.println(e.getMessage());

@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import java.util.Arrays;
+
 import org.junit.jupiter.api.Test;
 
 import duke.exception.InvalidFileFormatException;
@@ -13,6 +15,7 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
+
 
 public class CsvConverterTest {
 
@@ -22,28 +25,29 @@ public class CsvConverterTest {
     @Test
     public void testValidInputBasic() {
         try {
-            String s1 = "TODO  ,cs2103 tutorial  ,-  ,Not done";
-            String s2 = "EVENT  ,eat  ,1200-1400  ,Not done";
-            String s3 = "DEADLINE  ,read  ,2pm  ,Done";
+            String s1 = "TODO  ,cs2103 tutorial  ,-  ,Aug 23 2020 / 9.45 PM  ,Not done";
+            String s2 = "EVENT  ,eat  ,1200-1400  ,Aug 23 2020 / 9.45 PM  ,Not done";
+            String s3 = "DEADLINE  ,read  ,-  ,Aug 23 2020 / 9.45 PM  ,Done";
             Task todo = CsvConverter.parseToTask(s1);
             Task event = CsvConverter.parseToTask(s2);
             Task deadline = CsvConverter.parseToTask(s3);
             // Check ToDo
             assertTrue(todo instanceof ToDo);
             assertEquals("cs2103 tutorial", todo.getDescription());
-            assertEquals("-", todo.getTime());
+            assertEquals("Aug 23 2020 / 9.45 PM", todo.getTime());
             assertFalse(todo.isDone());
             // Check event
             assertTrue(event instanceof Event);
             assertEquals("eat", event.getDescription());
-            assertEquals("1200-1400", event.getTime());
+            assertEquals("Aug 23 2020 / 9.45 PM", event.getTime());
             assertFalse(event.isDone());
             // Check deadline
             assertTrue(deadline instanceof Deadline);
             assertEquals("read", deadline.getDescription());
-            assertEquals("2pm", deadline.getTime());
+            assertEquals("Aug 23 2020 / 9.45 PM", deadline.getTime());
             assertTrue(deadline.isDone());
         } catch (InvalidFileFormatException e) {
+            System.out.println(Arrays.toString(e.getStackTrace()));
             fail();
         }
     }
@@ -54,28 +58,29 @@ public class CsvConverterTest {
     @Test
     public void testValidInputAdvanced() {
         try {
-            String s1 = "TODO  ,cs2103 tutorial  ,-  ,Not Done";
-            String s2 = "EVENT  ,     ,1200-1400  ,NOt done";
-            String s3 = "deadLinE  ,read  ,2pm  ,done";
+            String s1 = "TODO  ,cs2103 tutorial  ,-  ,Aug 23 2020 / 9.45 PM  ,Not Done";
+            String s2 = "EVENT  ,eat  ,1200-1400  ,Aug 23 2020 / 9.45 PM  ,NOt done";
+            String s3 = "deadLinE  ,read  ,-  ,Aug 23 2020 / 9.45 PM  ,done";
             Task todo = CsvConverter.parseToTask(s1);
             Task event = CsvConverter.parseToTask(s2);
             Task deadline = CsvConverter.parseToTask(s3);
             // Check ToDo
             assertTrue(todo instanceof ToDo);
             assertEquals("cs2103 tutorial", todo.getDescription());
-            assertEquals("-", todo.getTime());
+            assertEquals("Aug 23 2020 / 9.45 PM", todo.getTime());
             assertFalse(todo.isDone());
             // Check event
             assertTrue(event instanceof Event);
-            assertEquals("   ", event.getDescription());
-            assertEquals("1200-1400", event.getTime());
+            assertEquals("eat", event.getDescription());
+            assertEquals("Aug 23 2020 / 9.45 PM", event.getTime());
             assertFalse(event.isDone());
             // Check deadline
             assertTrue(deadline instanceof Deadline);
             assertEquals("read", deadline.getDescription());
-            assertEquals("2pm", deadline.getTime());
+            assertEquals("Aug 23 2020 / 9.45 PM", deadline.getTime());
             assertTrue(deadline.isDone());
         } catch (InvalidFileFormatException e) {
+            System.out.println(Arrays.toString(e.getStackTrace()));
             fail();
         }
     }
@@ -86,11 +91,12 @@ public class CsvConverterTest {
      */
     @Test
     public void testInvalidFormat() {
-        String s1 = "TODO  ,cs2103 tutorial ,-  ,Not done";
-        String s2 = "DEADLINE  ,read  ,2pm";
-        String s3 = "EVENT  ,eat   ,Not done";
-        String s4 = "EVENT  ,eat   ,I am not done";
-        String s5 = "NOTEVENT  ,eat   ,2-4pm  ,done";
+
+        String s1 = "TODO  ,cs2103 tutorial ,-  ,Aug 23 2020 / 9.45 PM  ,Not done";
+        String s2 = "EVENT  ,eat  ,1200-1400  ,Aug 23 2020 / 9.45 PM  ,";
+        String s3 = "DEADLINE  ,read  , ,Aug 23 2020 / 9.45 PM  ,Done";
+        String s4 = "EVENT  ,eat  ,1200-1400  ,Aug 23 2020 / 9.45 PM  ,Not done!!";
+        String s5 = "NOTEVENT  ,eat   ,2-4pm  ,Aug 23 2020 / 9.45 PM  ,done";
         // Tests
         assertThrows(InvalidFileFormatException.class, () -> CsvConverter.parseToTask(s1));
         assertThrows(InvalidFileFormatException.class, () -> CsvConverter.parseToTask(s2));

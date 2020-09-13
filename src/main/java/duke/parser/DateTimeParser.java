@@ -8,15 +8,20 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 
-import duke.exception.DukeException;
 import duke.exception.InvalidDateException;
 
 /**
- * Parses the deadline of a {@code Deadline} task into a MMM d yyyy / h.mm a format.
+ * Parses the deadline of the {@code Deadline} task into a MMM d yyyy / h.mm a format.
  */
 public abstract class DateTimeParser {
 
-    public static LocalDateTime getDate(String deadline) throws DukeException {
+    /**
+     * Parses the input string into a MMM d yyyy / h.mm a format.
+     * @param deadline Deadline of task before parsing.
+     * @return A MMM d yyyy / h.mm a format of the deadline.
+     * @throws InvalidDateException If the deadline of task does not follow the proper format.
+     */
+    public static LocalDateTime getDateTime(String deadline) throws InvalidDateException {
         if (isDateTimeFormat(deadline)) {
             return formatDateTime(deadline);
         } else if (isDateFormat(deadline)) {
