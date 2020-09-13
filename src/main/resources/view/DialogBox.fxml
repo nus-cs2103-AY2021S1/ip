@@ -12,13 +12,14 @@
         <Label fx:id="dialog" text="Label" wrapText="true" minHeight="-Infinity"
                style="-fx-background-color: #fcf7de; -fx-padding: 5 10 5 10; -fx-background-radius: 15; -fx-font-family: 'Courier New'; -fx-font-weight: 600; -fx-font-size: 13px;"/>
         <StackPane>
-            <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="displayPicture" fitHeight="70.0" fitWidth="70.0" pickOnBounds="true"
+                       preserveRatio="true" />
             <padding>
                 <Insets left="12.0" right="12.0" />
             </padding>
         </StackPane>
     </children>
     <padding>
-        <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
+        <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
     </padding>
 </fx:root>

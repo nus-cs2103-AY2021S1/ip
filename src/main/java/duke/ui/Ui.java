@@ -31,7 +31,7 @@ public class Ui {
     private static final String DIVIDER =
             "------------------------------------------------------\n";
 
-    private static final String GREETING = "\nHello, I'm Star Bot! What can I do for you?\nSay \"bye\" to exit.\n";
+    private static final String GREETING = "\nHello, I'm Star Bot! What can I do for you?\n";
     private static final String GOODBYE_MESSAGE = "Goodbye, see you again soon! :)";
     private static final String EMPTY_LIST_MESSAGE = "Your list is empty! Let's add some tasks!";
 
