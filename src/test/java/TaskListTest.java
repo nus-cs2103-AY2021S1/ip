@@ -1,15 +1,18 @@
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class DukeTest {
+import duke.TaskList;
+import duke.Task;
+
+public class TaskListTest {
+
     @Test
     public void taskListTest() {
-        duke.TaskList taskList = duke.TaskList.startList();
+        TaskList taskList = TaskList.startList();
         assertEquals("Got it. I've added this task:\n" +
                         "\t[✘] eat food\n" +
                         "\tNow you have 1 tasks in the list.",
-                taskList.addToList(new duke.Task("eat food")));
+                taskList.addToList(new Task("eat food")));
         try {
             assertEquals("Noted. I've removed this task:\n" +
                             "\t[✘] eat food\n" +
@@ -19,22 +22,4 @@ public class DukeTest {
             e.printStackTrace();
         }
     }
-
-
-
-    @Test
-    public void parserTest() {
-        try {
-            String[] arr = duke.Parser.parseInput("todo eat food");
-            assertEquals("todo",
-                    arr[0]);
-            assertEquals("eat food",
-                    arr[1]);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-
-    }
-
 }
