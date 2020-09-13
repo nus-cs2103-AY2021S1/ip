@@ -2,6 +2,7 @@
 [T][✓] play
 [T][✗] cancer2
 [T][✗] cancer3
+[T][✗] play games
 
 dog ,Cost:$1000.00
 cat ,Cost:$500.00

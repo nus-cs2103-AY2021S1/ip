@@ -5,7 +5,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 
-<fx:root alignment="TOP_RIGHT" minHeight="-Infinity" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" type="javafx.scene.layout.HBox" style="-fx-padding: 20;&#10;-fx-border-style: dotted inside;&#10;-fx-border-insets: 5;&#10;-fx-border-radius: 15px;&#10;-fx-border-color: green ;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="TOP_RIGHT" minHeight="-Infinity" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" type="javafx.scene.layout.HBox" style="-fx-padding: 20;&#10;-fx-border-style: solid inside;&#10;-fx-border-insets: 5;&#10;-fx-border-radius: 15px;&#10;-fx-border-color: green;-fx-background-color: white; -fx-opacity: 0.8; -fx-text-fill: green; -fx-font-family: Courier New;   " xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <Label fx:id="dialog" text="Label" wrapText="true" />
         <ImageView fx:id="displayPicture" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" />
