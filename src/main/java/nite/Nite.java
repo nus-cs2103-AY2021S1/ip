@@ -47,8 +47,7 @@ public class Nite {
             Command command = Parser.parse(input);
             isExit = command.isExit();
             if (isExit) {
-                System.exit(0);
-                //return ui.showFarewell();
+                return ui.showFarewell();
             }
             assert !command.isExit() : "Exit command should not reach here.";
             return command.execute(tasks, ui, storage);

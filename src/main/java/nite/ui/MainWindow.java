@@ -1,5 +1,9 @@
 package nite.ui;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -75,6 +79,13 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
+        if (input.equals("bye")) {
+            new Timer().schedule(new TimerTask() {
+                public void run () {
+                    Platform.exit();
+                }
+            }, 1000);
+        }
         assert !input.isEmpty() : "Input should not be empty.";
         String response = nite.getResponse(input);
         assert !response.isEmpty() : "Response should not be empty.";
