@@ -23,6 +23,7 @@ public class DataStorage {
      * Returns file created or opened to read and save data.
      *
      * @return File created or opened.
+     * @throws IOException When file is not successfully created.
      */
     public File loadData() throws IOException {
         File f = new File("./src/data/duke.txt"); // create a File for the given file path

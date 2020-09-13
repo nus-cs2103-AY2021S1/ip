@@ -57,7 +57,8 @@ public class Duke {
      * Takes in user input, parses into a command and executes
      * the next command till an exit command is given.
      *
-     * @return reply to user based on the input.
+     * @param input User input
+     * @return Reply to user based on the input.
      */
     public String getResponse(String input) {
         String ddReply;

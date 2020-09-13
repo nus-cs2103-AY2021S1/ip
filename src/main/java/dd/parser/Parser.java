@@ -29,63 +29,39 @@ public class Parser {
     public static Command parse(String input) throws DukeException {
         Command c;
 
-        if (input.equals("bye")) {
-            // exit command
-            c = new ExitCommand("exit", "");
+        boolean isQueryInput = input.startsWith("check") || input.startsWith("find");
+        boolean isListCommand = input.equals("list") || isQueryInput;
 
-            // delay 2 seconds before closing application to display bye greeting first
-            PauseTransition delay = new PauseTransition(Duration.seconds(2));
-            delay.setOnFinished(event -> Platform.exit());
-            delay.play();
+        boolean isAddTodo = input.startsWith("todo");
+        boolean isAddDeadline = input.startsWith("deadline");
+        boolean isAddEvent = input.startsWith("event");
+        boolean isAddCommand = isAddTodo || isAddDeadline || isAddEvent;
 
+        if (isListCommand) {
+            c = parseListInput(input);
+        } else if (isAddCommand) {
+            c = parseAddInput(input);
+        } else if (input.startsWith("done")) {
+            c = parseDoneInput(input);
+        } else if (input.startsWith("delete")) {
+            c = parseDeleteInput(input);
+        } else if (input.equals("bye")) {
+            c = parseExit();
         } else if (input.equals("help")) {
-            // help command
             c = new HelpCommand("help", "");
+        } else {
+            throw new DukeException("Invalid command, I don't understand :(\n"
+                    + "Type 'help' for a list of possible commands.");
+        }
+        return c;
+    }
 
-        } else if (input.equals("list")) {
+    private static Command parseListInput(String input) throws DukeException {
+        Command c = null;
+
+        if (input.equals("list")) {
             // list command
             c = new ListCommand("list", "");
-
-        } else if (input.startsWith("todo")) {
-            // add to-do command
-            if (input.length() < 5) {
-                throw new DukeException("To-do item cannot be empty! e.g. todo borrow book");
-            } else {
-                c = new AddCommand("todo", input.substring(5));
-            }
-
-        } else if (input.startsWith("deadline")) {
-            // add deadline command
-            if (input.length() < 9) {
-                throw new DukeException("Deadline item cannot be empty!");
-            } else {
-                c = new AddCommand("deadline", input.substring(9));
-            }
-
-        } else if (input.startsWith("event")) {
-            // add event command
-            if (input.length() < 6) {
-                throw new DukeException("Event item cannot be empty!");
-            } else {
-                c = new AddCommand("event", input.substring(6));
-            }
-
-        } else if (input.startsWith("done")) {
-            // done command
-            if (input.length() < 5) {
-                throw new DukeException("Item number cannot be empty!");
-            } else {
-                c = new DoneCommand("done", input.substring(5));
-            }
-
-        } else if (input.startsWith("delete")) {
-            // delete command
-            if (input.length() < 7) {
-                throw new DukeException("Item number cannot be empty!");
-            } else {
-                c = new DeleteCommand("delete", input.substring(7));
-            }
-
         } else if (input.startsWith("check")) {
             // check list command
             if (input.length() < 6) {
@@ -93,7 +69,6 @@ public class Parser {
             } else {
                 c = new ListCommand("check", input.substring(6));
             }
-
         } else if (input.startsWith("find")) {
             // list find command
             if (input.length() < 5) {
@@ -101,14 +76,66 @@ public class Parser {
             } else {
                 c = new ListCommand("find", input.substring(5));
             }
-
-        } else {
-            // not valid task
-            throw new DukeException("Invalid command, I don't understand :(\n"
-                    + "Type 'help' for a list of possible commands.");
-
         }
-
         return c;
     }
+
+    private static Command parseAddInput(String input) throws DukeException {
+        Command c = null;
+
+        if (input.startsWith("todo")) {
+            if (input.length() < 5) {
+                throw new DukeException("To-do item cannot be empty! e.g. todo borrow book");
+            } else {
+                c = new AddCommand("todo", input.substring(5));
+            }
+        } else if (input.startsWith("deadline")) {
+            if (input.length() < 9) {
+                throw new DukeException("Deadline item cannot be empty!");
+            } else {
+                c = new AddCommand("deadline", input.substring(9));
+            }
+        } else if (input.startsWith("event")) {
+            if (input.length() < 6) {
+                throw new DukeException("Event item cannot be empty!");
+            } else {
+                c = new AddCommand("event", input.substring(6));
+            }
+        }
+        return c;
+    }
+
+    private static Command parseDoneInput(String input) throws DukeException {
+        Command c = null;
+
+        if (input.length() < 5) {
+            throw new DukeException("Item number cannot be empty!");
+        } else {
+            c = new DoneCommand("done", input.substring(5));
+        }
+        return c;
+    }
+
+    private static Command parseDeleteInput(String input) throws DukeException {
+        Command c = null;
+
+        if (input.length() < 7) {
+            throw new DukeException("Item number cannot be empty!");
+        } else {
+            c = new DeleteCommand("delete", input.substring(7));
+        }
+        return c;
+    }
+
+    private static Command parseExit() {
+        Command c = null;
+        c = new ExitCommand("exit", "");
+
+        // delay 2 seconds before closing application to display bye greeting first
+        PauseTransition delay = new PauseTransition(Duration.seconds(2));
+        delay.setOnFinished(event -> Platform.exit());
+        delay.play();
+        return c;
+    }
+
 }

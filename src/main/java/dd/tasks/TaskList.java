@@ -24,6 +24,7 @@ public class TaskList {
      * Class Constructor with specified file to fetch data from.
      *
      * @param f Specified file to fetch data from to create TaskList.
+     * @throws FileNotFoundException When file is not found.
      */
     public TaskList(File f) throws FileNotFoundException {
         Scanner s = new Scanner(f); // create a Scanner using the File as the source

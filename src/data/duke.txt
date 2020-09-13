@@ -2,5 +2,5 @@ T , 0 , borrow book
 T , 1 , tutorials
 E , 0 , class , 18 Dec 2020 03:00 PM
 E , 1 , team meeting , 18 Dec 2020 08:20 PM
-D , 0 , return book , 21 Dec 2020
+D , 1 , return book , 21 Dec 2020
 D , 0 , tutorial , 31 Dec 2020 11:59 PM

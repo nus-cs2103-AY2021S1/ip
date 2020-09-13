@@ -20,6 +20,8 @@ public class Main extends Application {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
+            /* logo image from
+            https://www.clipartkey.com/view/hhoTTh_transparent-emoji-peach-png-transparent-background-peach-emoji/ */
             stage.getIcons().add(new Image(this.getClass().getResourceAsStream("/images/appIcon.png")));
             stage.setTitle("Timmi the Task Manager");
             stage.setScene(scene);

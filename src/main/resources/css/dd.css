@@ -3,6 +3,8 @@
 }
 
 .chatbg{
+    /* image taken from
+    https://www.vectorstock.com/royalty-free-vector/seamless-pattern-with-pink-peaches-and-leaves-vector-26981347 */
     -fx-background-image: url('../images/peach.png');
     -fx-background-size: 800px 600px;
     -fx-background-position: bottom;
