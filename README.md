@@ -1,6 +1,6 @@
-# com.jacob.duke.Duke project template
+# mamba project template
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+This is a project template for a greenfield Java project. It's named after the NBA Los Angles Lakers Legend _Kobe Bryant_. Given below are instructions on how to use it.
 
 ## Setting up in Intellij
 
