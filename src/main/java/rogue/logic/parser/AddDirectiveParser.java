@@ -19,7 +19,7 @@ public class AddDirectiveParser {
     /** Option to add a date and time to a {@code Deadline}. */
     private static final String OPTION_DEADLINE_DATETIME = "/by";
 
-     /** Option to add a date and time to an {@code Event}. */
+    /** Option to add a date and time to an {@code Event}. */
     private static final String OPTION_EVENT_DATETIME = "/at";
 
     /** Message for when the description is missing. */
@@ -38,6 +38,17 @@ public class AddDirectiveParser {
     private static final String ERROR_INVALID_TASK = "sToP TrYiNg tO FoOl mE."
             + " sUcH A TaSk cAnNoT Be aDdEd.";
 
+    /**
+     * Creates an {@code AddDirective} for a {@code Task}.
+     *
+     * OPTION_DESCRIPTION: the description of a {@code Task}.
+     * OPTION_DEADLINE_DATETIME: the datetime for a {@code Deadline}.
+     * OPTION_EVENT_DATETIME: the datetime for an {@code Event}.
+     *
+     * @param args The action and options to be parsed.
+     * @return An {@code AddDirective} for the requested {@code Task}
+     * @throws IncorrectInputException if no task description or an invalid action is provided.
+     */
     public AddDirective parse(Argument args) throws IncorrectInputException {
         String description = args.getOptionValue(OPTION_DESCRIPTION);
 
@@ -68,7 +79,7 @@ public class AddDirectiveParser {
         }
 
         try {
-            LocalDate by = DateTimeUtil.convertStringToDate(dateString);
+            LocalDate by = DateTimeUtil.parseStringToDate(dateString);
 
             return new AddDirective(Action.ADD_DEADLINE, description, by);
         } catch (DateTimeParseException e) {
@@ -84,7 +95,7 @@ public class AddDirectiveParser {
         }
 
         try {
-            LocalDate at = DateTimeUtil.convertStringToDate(dateString);
+            LocalDate at = DateTimeUtil.parseStringToDate(dateString);
 
             return new AddDirective(Action.ADD_EVENT, description, at);
         } catch (DateTimeParseException e) {

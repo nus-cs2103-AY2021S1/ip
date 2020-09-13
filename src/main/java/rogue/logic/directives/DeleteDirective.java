@@ -39,7 +39,7 @@ public class DeleteDirective implements Executable {
      * @param tasks     The {@code TaskList} from which a {@code Task} is deleted.
      * @param ui        An instance of {@code Ui}.
      * @return A {@code Report} with a success message
-     * @throws ExecutionException if the index provided is invalid.
+     * @throws ExecutionException if the index does not match any {@code Task} in the {@code TaskList}.
      * @throws StorageException if data cannot be saved to file.
      */
     @Override

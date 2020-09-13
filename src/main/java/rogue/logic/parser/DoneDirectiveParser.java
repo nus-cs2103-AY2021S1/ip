@@ -15,6 +15,15 @@ public class DoneDirectiveParser {
     private static final String ERROR_INCORRECT_INDEX = "sToP TrYiNg tO FoOl mE. tHe \"done\" ComMand"
             + " mUsT Be FolLoWed bY tHe InDEx Of THe TAsK.";
 
+    /**
+     * Creates a {@code DoneDirective} for a {@code Task}.
+     *
+     * OPTION_INDEX: the index of the {@code Task} to mark as done.
+     *
+     * @param args The action and options to be parsed.
+     * @return A {@code DoneDirective} for the requested {@code Task}
+     * @throws IncorrectInputException if the provided index is not an integer.
+     */
     public DoneDirective parse(Argument args) throws IncorrectInputException {
         try {
             // The index provided by the user is off by one

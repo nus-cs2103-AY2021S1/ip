@@ -10,7 +10,7 @@ import rogue.ui.Ui;
  */
 public class ExitDirective implements Executable {
     /** Message for when {@code Rogue} is exiting. */
-    private final String MESSAGE_EXIT_SUCCESS = "hOpE To sEe yOu aGaIn. NoT.";
+    private static final String MESSAGE_EXIT_SUCCESS = "hOpE To sEe yOu aGaIn. NoT.";
 
     /**
      * Starts the exit sequence for {@code Rogue}.

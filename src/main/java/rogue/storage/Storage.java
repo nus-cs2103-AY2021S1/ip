@@ -147,11 +147,11 @@ public class Storage {
 
                 switch (args[0]) {
                 case "D":
-                    LocalDate date = DateTimeUtil.convertStringToDate(args[3]);
+                    LocalDate date = DateTimeUtil.parseStringToDate(args[3]);
                     tasks.add(new Deadline(description, isDone, date));
                     break;
                 case "E":
-                    date = DateTimeUtil.convertStringToDate(args[3]);
+                    date = DateTimeUtil.parseStringToDate(args[3]);
                     tasks.add(new Event(description, isDone, date));
                     break;
                 default:

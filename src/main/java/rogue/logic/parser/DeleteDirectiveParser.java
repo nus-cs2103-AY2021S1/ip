@@ -15,6 +15,15 @@ public class DeleteDirectiveParser {
     private static final String ERROR_INCORRECT_INDEX = "sToP TrYiNg tO FoOl mE. tHe \"delete\" ComMand"
             + " mUsT Be FolLoWed bY tHe InDEx Of THe TAsK.";
 
+    /**
+     * Creates a {@code DeleteDirective} for a {@code Task}.
+     *
+     * OPTION_INDEX: the index of the {@code Task} to delete.
+     *
+     * @param args The action and options to be parsed.
+     * @return A {@code FindDirective} to search for matching {@code Task}
+     * @throws IncorrectInputException if the provided index is not an integer.
+     */
     public DeleteDirective parse(Argument args) throws IncorrectInputException {
         try {
             // The index provided by the user is off by one

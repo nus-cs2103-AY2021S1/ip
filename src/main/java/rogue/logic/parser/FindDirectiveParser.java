@@ -15,6 +15,15 @@ public class FindDirectiveParser {
     private static final String ERROR_MISSING_SEARCH_TERM = "sToP TrYiNg tO FoOl mE. "
             + "fInD MuSt bE FoLlOwEd bY ThE SeArCh tErM.";
 
+    /**
+     * Creates a {@code FindDirective} for a {@code Task}.
+     *
+     * OPTION_SEARCH_DESCRIPTION: the search term for the description of a {@code Task}.
+     *
+     * @param args The action and options to be parsed.
+     * @return A {@code DoneDirective} for the requested {@code Task}
+     * @throws IncorrectInputException if the search term is missing.
+     */
     public FindDirective parse(Argument args) throws IncorrectInputException {
         String descriptionSearchTerm = args.getOptionValue(OPTION_SEARCH_DESCRIPTION);
 

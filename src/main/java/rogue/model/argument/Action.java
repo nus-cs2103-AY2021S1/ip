@@ -9,15 +9,15 @@ import java.util.Map;
  * to execute the corresponding actions.
  */
 public enum Action {
-    ADD_TODO        ("todo"),
-    ADD_DEADLINE    ("deadline"),
-    ADD_EVENT       ("event"),
-    LIST            ("list"),
-    FIND            ("find"),
-    DELETE          ("delete"),
-    MARK_AS_DONE    ("done"),
-    EXIT            ("bye"),
-    INVALID         ("");
+    ADD_TODO ("todo"),
+    ADD_DEADLINE ("deadline"),
+    ADD_EVENT ("event"),
+    LIST ("list"),
+    FIND ("find"),
+    DELETE ("delete"),
+    MARK_AS_DONE ("done"),
+    EXIT ("bye"),
+    INVALID ("");
 
     /** Stores keyword to action mappings. */
     private static final Map<String, Action> KEYWORD_ACTION_MAP = new HashMap<>();
