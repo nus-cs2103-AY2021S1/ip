@@ -30,7 +30,7 @@ public class UiTest {
     @Test
     public void sayBye_null_success() {
         String result = new Ui().sayBye();
-        assertEquals(" Bye. Hope to see you again soon!", result);
+        assertEquals(" Bye. Hope to see you again soon.", result);
     }
 
     @Test
