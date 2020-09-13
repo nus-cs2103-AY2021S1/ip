@@ -7,6 +7,7 @@ import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.tasks.TaskList;
 import duke.ui.UI;
+import javafx.animation.PauseTransition;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
@@ -22,6 +23,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 
 /**
@@ -251,8 +253,12 @@ public class Duke extends Application {
                 dukeDialog
         );
         userInput.clear();
+
         if (isExit) {
-            Platform.exit();
+            PauseTransition pause = new PauseTransition(Duration.seconds(1));
+            pause.setOnFinished(event -> Platform.exit());
+            pause.play();
+
         }
     }
 
