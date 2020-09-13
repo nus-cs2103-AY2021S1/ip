@@ -6,8 +6,8 @@ import java.util.ArrayList;
  * A list for Duke to store Tasks in.
  */
 public class TaskList {
-    int count;
-    ArrayList<Task> list;
+    private int count;
+    private ArrayList<Task> list;
 
     private TaskList() {
         count = 0;
@@ -31,9 +31,9 @@ public class TaskList {
         this.count = this.count + 1;
         this.list.add(t);
 
-        return "Got it. I've added this task:\n\t" +
-                t.toString() +
-                "\n\tNow you have " + count + " tasks in the list.";
+        return "Got it. I've added this task:\n\t"
+                + t.toString()
+                + "\n\tNow you have " + count + " tasks in the list.";
     }
 
     /**
@@ -42,15 +42,15 @@ public class TaskList {
      * @return A success message if successful.
      * @throws InvalidTaskNumberException If index specified is out of bounds.
      */
-    public String markAsDone(int i) throws InvalidTaskNumberException{
+    public String markAsDone(int i) throws InvalidTaskNumberException {
         Task t;
         try {
             t = this.list.get(i - 1).taskDone();
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidTaskNumberException();
         }
-        return "Nice! I've marked this task as done:\n\t" +
-                "  " + t.toString();
+        return "Nice! I've marked this task as done:\n\t"
+                + "  " + t.toString();
     }
 
     /**
@@ -59,18 +59,18 @@ public class TaskList {
      * @return A success message if successful.
      * @throws InvalidTaskNumberException If index specified is out of bounds.
      */
-    public String remove(int i) throws InvalidTaskNumberException{
+    public String remove(int i) throws InvalidTaskNumberException {
         Task t;
         try {
             t = this.list.get(i - 1);
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidTaskNumberException();
         }
-        this.list.remove(i-1);
+        this.list.remove(i - 1);
         this.count = this.count - 1;
-        return "Noted. I've removed this task:\n\t" +
-                t.toString() +
-                "\n\tNow you have " + count + " tasks in the list.";
+        return "Noted. I've removed this task:\n\t"
+                + t.toString()
+                + "\n\tNow you have " + count + " tasks in the list.";
     }
 
     /**
@@ -107,16 +107,22 @@ public class TaskList {
             boolean isDone = t.isDone();
             String desc = t.getDescription();
             String time = t.getDeadline();
-            str = str + type + "@" +
-                    (isDone ? "1" : "0") + "@" +
-                    desc +
-                    ((time == null) ? "" : "@" + time) +
-                    System.getProperty("line.separator");
+            str = str + type + "@"
+                    + (isDone ? "1" : "0") + "@"
+                    + desc
+                    + ((time == null) ? "" : "@" + time)
+                    + System.getProperty("line.separator");
         }
         return str;
     }
 
+    public int getCount() {
+        return this.count;
+    }
 
+    public ArrayList<Task> getList() {
+        return this.list;
+    }
 
     @Override
     public String toString() {

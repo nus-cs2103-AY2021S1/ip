@@ -1,7 +1,16 @@
 package duke;
 
 public class Parser {
-    public static String[] parseInput(String input) throws MissingDescriptionException, MissingDurationException, InvalidInputException{
+    /**
+     * Parses user input.
+     * @param input User input.
+     * @return The user input parsed into a String array.
+     * @throws MissingDescriptionException If the user did not specify the description.
+     * @throws MissingDurationException If the user did not specify the time.
+     * @throws InvalidInputException If the user input is invalid.
+     */
+    public static String[] parseInput(String input)
+            throws MissingDescriptionException, MissingDurationException, InvalidInputException {
         String[] arr = input.split("\\s", 2);
         String pref = arr[0];
         String rest;
@@ -14,7 +23,7 @@ public class Parser {
         } else if (arr[0].equalsIgnoreCase("done")) {
             if (arr.length == 1) {
                 throw new MissingDescriptionException("done");
-                }
+            }
         } else if (arr[0].equalsIgnoreCase("delete")) {
             if (arr.length == 1) {
                 throw new MissingDescriptionException("delete");

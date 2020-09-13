@@ -1,36 +1,59 @@
 package duke;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.BufferedReader;
 import java.io.IOException;
 
 public class Storage {
-    String filePath;
-    File f;
+    private String filePath;
+    private File file;
 
+    /**
+     * Creates a Storage object with data from save file.
+     * @param filepath File path of the save file.
+     */
     public Storage(String filepath) {
         this.filePath = filepath;
-        this.f = new File(filepath);
+        this.file = new File(filepath);
     }
 
+    /**
+     * Writes text to save file.
+     * @param textToAdd Text to write into save file.
+     * @throws IOException If there is an error accessing the file.
+     */
     public void writeToFile(String textToAdd) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         fw.write(textToAdd);
         fw.close();
     }
 
+    public String getFilePath() {
+        return this.filePath;
+    }
+
+    public File getFile() {
+        return this.file;
+    }
+
+    /**
+     * Populates a TaskList with data from a save file.
+     * @param list TaskList to be populated.
+     * @throws IOException If there is an error accessing the file.
+     * @throws IndexOutOfBoundsException If there is an error parsing the file.
+     */
     public void populateList(TaskList list) throws IOException, IndexOutOfBoundsException {
-        FileReader fr = new FileReader(f);
+        FileReader fr = new FileReader(file);
         BufferedReader br = new BufferedReader(fr);
         String line;
 
-        if (!f.exists()) {
+        if (!file.exists()) {
             Ui.displayMessage("Creating new data file: duke.txt");
-            f.getParentFile().mkdirs();
+            file.getParentFile().mkdirs();
             try {
-                f.createNewFile();
+                file.createNewFile();
             } catch (IOException e) {
                 Ui.displayMessage(e.getMessage());
             }

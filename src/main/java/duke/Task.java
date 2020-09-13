@@ -8,10 +8,10 @@ import java.time.format.DateTimeFormatter;
  * and whether it is done.
  */
 public class Task {
-    String description;
-    boolean isDone;
-    String type = "";
-    LocalDateTime deadline = null;
+    protected String type = "";
+    protected LocalDateTime deadline = null;
+    private String description;
+    private boolean isDone;
 
     /**
      * Creates a Task object with the specified Description.
@@ -23,7 +23,7 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+        return (isDone ? "D" : "X"); //return tick or X symbols
     }
 
     public String getDescription() {
@@ -44,12 +44,8 @@ public class Task {
                 : this.deadline.toString();
     }
 
-    /**
-     * @return This Task's deadline in the specified format.
-     * @param f String representation of the format.
-     */
-    public String formatDeadline(String f) {
-        return deadline.format(DateTimeFormatter.ofPattern(f));
+    public String formatDeadline(String s) {
+        return deadline.format(DateTimeFormatter.ofPattern(s));
     }
 
     /**
