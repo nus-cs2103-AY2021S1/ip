@@ -1,5 +1,5 @@
 /**
- * The program runs into a invalid Event exception
+ * The program runs into a invalid Event exception.
  */
 public class InvalidFormatException extends DukeException {
     public InvalidFormatException() {

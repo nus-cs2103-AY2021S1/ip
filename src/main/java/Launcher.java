@@ -1,5 +1,4 @@
 
-
 /**
  * A launcher class to workaround classpath issues.
  */
