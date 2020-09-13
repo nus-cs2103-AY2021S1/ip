@@ -74,7 +74,7 @@ Adds an event task to the task list with a provided DESC and DATE. The DESC **sh
 Format: event DESC /at DATE
 Example: event CS2103T Tutorial /at 2020-09-16
 
-### Find tasks with a common keyword: *find (f)*
+### Find tasks with a common keyword: find (f)
 
 Lists all tasks with the indicated KEYWORD. The KEYWORD can be longer than one word. If no tasks contain the KEYWORD, the command will return an empty list.
 
