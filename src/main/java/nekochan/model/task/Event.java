@@ -127,7 +127,7 @@ public class Event extends Task {
                 DateParser.parseStringToDateTime(content[2]),
                 DateParser.parseStringToDateTime(content[3]));
         if (content[1].equals(ENCODED_COMPLETE_FLAG)) {
-            newEvent.setCompleted();
+            newEvent = newEvent.setCompleted();
         } else if (!content[1].equals(ENCODED_INCOMPLETE_FLAG)) {
             throw new NekoStorageException(Messages.STORAGE_ERROR_CORRUPT);
         }

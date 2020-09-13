@@ -75,7 +75,7 @@ public class Deadline extends Task {
         }
         Deadline newDeadline = new Deadline(content[3], DateParser.parseStringToDateTime(content[2]));
         if (content[1].equals(ENCODED_COMPLETE_FLAG)) {
-            newDeadline.setCompleted();
+            newDeadline = newDeadline.setCompleted();
         } else if (!content[1].equals(ENCODED_INCOMPLETE_FLAG)) {
             throw new NekoStorageException(Messages.STORAGE_ERROR_CORRUPT);
         }

@@ -49,7 +49,7 @@ public class ToDo extends Task {
         }
         ToDo newToDo = new ToDo(content[2]);
         if (content[1].equals(ENCODED_COMPLETE_FLAG)) {
-            newToDo.setCompleted();
+            newToDo = newToDo.setCompleted();
         } else if (!content[1].equals(ENCODED_INCOMPLETE_FLAG)) {
             throw new NekoStorageException(Messages.STORAGE_ERROR_CORRUPT);
         }
