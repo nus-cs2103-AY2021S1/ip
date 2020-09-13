@@ -33,7 +33,7 @@ public class Duke {
      */
     public void run() {
         Scanner sc = new Scanner(System.in);
-        Ui.displayMessage("Hello! I'm duke.Duke\n\tWhat can I do for you?");
+        Ui.displayMessage("Hello! I'm Duke\n\tWhat can I do for you?");
         String input;
         String msg;
         boolean cont = true;
