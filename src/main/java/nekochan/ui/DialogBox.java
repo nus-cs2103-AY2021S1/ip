@@ -16,6 +16,8 @@ import javafx.scene.shape.Circle;
 
 public class DialogBox extends HBox {
 
+    private static final String ERROR_STYLE = "-fx-background-color: #FF9100; -fx-background-radius: 10px";
+
     @FXML
     private Label dialog;
     @FXML
@@ -50,11 +52,21 @@ public class DialogBox extends HBox {
         return new DialogBox(text, image);
     }
 
+    public static DialogBox getErrorDialog(String text, Image image) {
+        DialogBox node = new DialogBox(text, image);
+        return node.highlightError();
+    }
+
     private DialogBox flip() {
         this.setAlignment(Pos.CENTER_LEFT);
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         FXCollections.reverse(tmp);
         this.getChildren().setAll(tmp);
+        return this;
+    }
+
+    private DialogBox highlightError() {
+        dialog.setStyle(ERROR_STYLE);
         return this;
     }
 

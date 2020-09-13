@@ -80,11 +80,12 @@ public class MainWindow extends AnchorPane {
                 PauseTransition pause = new PauseTransition((Duration.seconds(2)));
                 pause.setOnFinished((event) -> {
                     Platform.exit();
+                    System.exit(0);
                 });
                 pause.play();
             }
         } catch (NekoException e) {
-            print(e.getMessage());
+            printError(e.getMessage());
         } finally {
             userInput.clear();
         }
@@ -98,6 +99,12 @@ public class MainWindow extends AnchorPane {
         assert response.length() > 0 : "response message should not be empty";
 
         dialogContainer.getChildren().add(DialogBox.getNekoDialog(response, botImage));
+    }
+
+    private void printError(String message) {
+        assert message.length() > 0 : "error message should not be empty";
+
+        dialogContainer.getChildren().add(DialogBox.getErrorDialog(message, botImage));
     }
 
     private void greet() {
