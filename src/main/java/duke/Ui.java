@@ -83,31 +83,14 @@ public class Ui {
 
     /**
      * Returns task to be deleted and displayed text when deleted.
-     * @param userInput User input.
+     * @param deletedTask Task deleted.
      * @param taskList User's tasks.
      * @return Text when a task is deleted.
-     * @throws DukeException When an invalid input is entered.
      */
-    public String displayDelete(String userInput, TaskList taskList) throws DukeException {
-        if (!userInput.substring(6).isBlank()) {
-            try {
-                String toDelete = userInput.substring(7);
-                int index = Integer.parseInt(toDelete);
-                if (index <= taskList.size() && index > 0) {
-                    String deleted = taskList.getTasks().get(index - 1).toString();
-                    taskList.getTasks().remove(index - 1);
-                    return "Noted! I've deleted this task:\n" + deleted
-                            + "\nNow you have " + taskList.size()
-                            + " tasks in the list.";
-                } else {
-                    throw new IndexOutOfBoundsException();
-                }
-            } catch (NumberFormatException | IndexOutOfBoundsException ex) {
-                throw new DukeException("The number keyed in is invalid!");
-            }
-        } else {
-            throw new DukeException("The description of a delete cannot be empty!");
-        }
+    public String displayDelete(String deletedTask, TaskList taskList) {
+        return "Noted! I've deleted this task:\n" + deletedTask
+                    + "\nNow you have " + taskList.size()
+                    + " tasks in the list.";
     }
 
     /**

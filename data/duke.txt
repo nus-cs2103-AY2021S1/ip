@@ -1,3 +1,1 @@
-ToDo | undone | do homework
-Deadline | done | submit homework | 23/04/2020 12:00 PM
-Event | undone | exam | 23/09/2020 04:00 PM
+Deadline | undone | submit homework | 23/04/2020 12:00 PM
