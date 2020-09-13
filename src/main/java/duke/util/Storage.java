@@ -6,11 +6,13 @@ import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.Todo;
 
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -19,7 +21,8 @@ import java.util.Scanner;
  */
 
 public class Storage {
-    File file = new File("data/duke.txt");
+    String pathname = "data/duke.txt";
+    File file = new File(pathname);
 
     public Storage() { }
 
@@ -41,16 +44,19 @@ public class Storage {
      */
     public void update(TaskList tasks) throws DukeException {
         try {
-            checkFileExistence(this.file);
-            FileWriter fw = new FileWriter(file.getAbsoluteFile());
-            BufferedWriter bw = new BufferedWriter(fw);
+            Path path = Paths.get(pathname);
+            Files.deleteIfExists(path);
+            File f = new File(pathname);
+            f.getParentFile().mkdirs();
+            f.createNewFile();
+            FileWriter fw = new FileWriter(pathname, true);
 
             for (int i = 1; i < tasks.getTasklist().size() + 1; i++) {
                 Task t = tasks.get(i - 1);
                 String text = t.fileFormat() + "\n";
-                bw.write(text);
+                fw.write(text);
             }
-            bw.close();
+            fw.close();
 
         } catch (IOException e) {
             throw new DukeException("Can't update file!");

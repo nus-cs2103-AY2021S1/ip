@@ -28,7 +28,7 @@ public class ExitCommand extends Command {
         ui.addSentence("byebye pingu miss u");
 
         super.execute(tasks, ui, storage);
-
+        System.exit(1);
         return ui.getResponse();
     }
 }

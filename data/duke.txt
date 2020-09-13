@@ -4,3 +4,4 @@ D , 1 , dinner , 2012-01-02
 T , 1 , book taxi , 
 D , 0 , drink bleach , 2020-09-05
 D , 0 , tutorial , 2020-09-24
+T , 0 , huhu , 
