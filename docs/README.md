@@ -25,6 +25,8 @@ Example of usage:
 Expected outcome: 
 
 An uncompleted todo task `homework`, marked with a cross, will be added to your task list. 
+<br>
+
 
 ### Adding a deadline-task: `deadline`
 Adds a deadline task to the task list.
@@ -42,6 +44,8 @@ Example of usage:
 Expected outcome: 
 
 An uncompleted deadline task `homework`, marked with a cross, with given date and time will be added to your task list. 
+<br>
+
 
 ### Adding an event-task: `event`
 Adds an event task to the task list.
@@ -59,6 +63,8 @@ Example of usage:
 Expected outcome: 
 
 An uncompleted event task `dinner`, marked with a cross, with given date and time will be added to your task list. 
+<br>
+
 
 ### Marking task as completed: `done`
 Marks a task in the task list as done.
@@ -72,6 +78,8 @@ Example of usage:
 Expected outcome: 
 
 The task with task number `1` on the task list will be marked as done with a tick. 
+<br>
+
 
 ### Deleting a task: `delete`
 Deletes a task in the task list.
@@ -85,11 +93,15 @@ Example of usage:
 Expected outcome: 
 
 The task with task number `1` on the task list will be deleted. 
+<br>
+
 
 ### Listing tasks: `list`
 Lists all the tasks in the task list.
 
 Format: `list`
+<br>
+
 
 ### Finding tasks: `find`
 Finds all the tasks containing the given keyword in the task list.
@@ -103,6 +115,8 @@ Example of usage:
 Expected outcome: 
 
 Every task in the task list containing `work` in its description will be shown.
+<br>
+
 
 ### Undoing commands: `undo`
 Reverts the state of task list to before the previous command.
@@ -110,14 +124,14 @@ Reverts the state of task list to before the previous command.
 Format: `undo`
 
 Possible commands to undo: `todo`, `deadline`, `event`, `done`, `delete` 
+<br>
 
 
 ### Exiting Bob: `exit`
 Exits the program.
 
 Format: `exit`
-
-## Usage
+<br>
 
 
 ## Command Summary
@@ -130,5 +144,5 @@ Done              | `done TASK_NUMBER` <br> e.g.: `done 1`
 Delete            | `delete TASK_NUMBER` <br> e.g.: `delete 1`
 List              | `list`
 Find              | `find KEYWORD` <br> e.g.: `find work`
-undo              | `undo`
+Undo              | `undo`
 Exit              | `exit`
