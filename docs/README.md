@@ -146,7 +146,7 @@ Here are the tasks in your list:
 7. [E][✘]  June event(At: Jun 6 2020)
 8. [E][✘]  Dec event (At: Dec 1 2020)
 ```
-</h2>6. Find tasks</h2>
+<h2>6. Find tasks</h2>
 <h5>Search for tasks that match a certain key phrase</h5>
 
 Input:
