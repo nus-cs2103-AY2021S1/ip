@@ -169,6 +169,17 @@ Delete Task
 
 ![delete](./Images/delete.png)
 </details>
+<hr>
+</details>
+
+<details>
+<summary>
+Exit Function
+</summary>
+
+## `bye`
+
+* Type in `bye` to exit program
 </details>
 
 ## Usage
