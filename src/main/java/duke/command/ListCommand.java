@@ -1,7 +1,5 @@
 package duke.command;
 
-import duke.exception.DukeException;
-
 import duke.storage.Storage;
 
 import duke.tasklist.TaskList;
@@ -17,7 +15,7 @@ public class ListCommand extends Command {
      * @param taskList
      * @param ui
      * @param storage
-     * @throws DukeException
+     * @return the Duke response to show user
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {

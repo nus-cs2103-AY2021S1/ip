@@ -9,7 +9,6 @@ import duke.exception.DukeException;
  * Deals with understanding the input from user and determining Command to execute.
  */
 public class Parser {
-    public static final String LINE = "_______________________________________\n";
 
     /**
      * Determines which Command should be called based on user input.
@@ -29,6 +28,8 @@ public class Parser {
             return new ByeCommand();
         } else if (userCommand.equals("list")) {
             return new ListCommand();
+        } else if (userCommand.equals("help")) {
+            return new HelpCommand();
         } else if (userCommand.equals("done")) {
             try {
                 return new DoneCommand(inputSplit[1]);
