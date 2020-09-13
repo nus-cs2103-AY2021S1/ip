@@ -34,16 +34,16 @@ public enum Message {
 
         static {
             usages.put("list", "List the tasks stored. Optionally, list tasks on a specific date."
-                    + "\nUsage: list [date]");
-            usages.put("done", "Mark a task as done.\nUsage: done [index]");
-            usages.put("todo", "Create a new todo task.\nUsage: todo [description]");
-            usages.put("deadline", "Create a new deadline task.\nUsage: deadline [description] /by [time]");
-            usages.put("event", "Create a new event task.\nUsage: event [description] /at [time]");
-            usages.put("delete", "Delete a task.\nUsage: delete [index]");
-            usages.put("find", "Find a task with description.\nUsage: find [description]");
-            usages.put("bye", "Quit application.\nUsage: bye");
-            usages.put("sort", "Sort tasks.\nUsage: sort [time/description]");
-            usages.put("help", "Get help. Can specify command.\nUsage: help [keyword]");
+                    + "\nUsage: list [DATE]");
+            usages.put("done", "Mark a task as done.\nUsage: done INDEX");
+            usages.put("todo", "Create a new todo task.\nUsage: todo DESCRIPTION");
+            usages.put("deadline", "Create a new deadline task.\nUsage: deadline DESCRIPTION /by TIME");
+            usages.put("event", "Create a new event task.\nUsage: event DESCRIPTION /at TIME");
+            usages.put("delete", "Delete a task.\nUsage: delete INDEX");
+            usages.put("find", "Find a task based on description.\nUsage: find DESCRIPTION");
+            usages.put("bye", "Exit program.\nUsage: bye");
+            usages.put("sort", "Sort tasks.\nUsage: sort [TIME/DESCRIPTION]");
+            usages.put("help", "Get help message. Can specify command to narrow help message.\nUsage: help [KEYWORD]");
         }
 
         private static String get(String key) {
