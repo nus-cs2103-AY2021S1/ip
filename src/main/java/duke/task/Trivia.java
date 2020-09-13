@@ -3,12 +3,12 @@ package duke.task;
 import duke.DukeException;
 
 public class Trivia extends Task {
-    private String triviaQuestion;    
+    private String triviaQuestion;
     private String triviaAnswer;
 
     /**
      * Initiate Trivia object.
-     * 
+     *
      * @param triviaQuestion trivia question.
      * @param triviaAnswer answer to the trivia question.
      */
@@ -25,7 +25,7 @@ public class Trivia extends Task {
     public String getTriviaAnswer() {
         return this.triviaAnswer;
     }
-    
+
     @Override
     public void markDone() throws DukeException {
         throw new DukeException("Cannot mark trivia as done");
@@ -35,7 +35,7 @@ public class Trivia extends Task {
     public boolean getIsDone() throws DukeException {
         throw new DukeException("Cannot mark trivia as done");
     }
-    
+
     @Override
     public String toString() {
         return String.format("[Q] %s\n    [A] %s", this.triviaQuestion, this.triviaAnswer);

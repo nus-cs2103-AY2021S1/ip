@@ -3,8 +3,22 @@ package duke;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
-import duke.command.*;
-import duke.task.*;
+import duke.command.ByeCommand;
+import duke.command.ClearCommand;
+import duke.command.Command;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.EventCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.ToDoCommand;
+import duke.command.TriviaCommand;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+import duke.task.Trivia;
 
 /**
  * Represents Parser Object which parses user reply and execute appropriate response.
@@ -124,7 +138,7 @@ public class Parser {
         Task newTrivia = new Trivia(question, answer);
         return newTrivia;
     }
-    
+
     /**
      * Parse event command arguments to create Todo object.
      *

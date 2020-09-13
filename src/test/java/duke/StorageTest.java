@@ -1,10 +1,4 @@
-import duke.Duke;
-import duke.DukeException;
-import duke.Storage;
-import duke.stubs.ToDoStub;
-import duke.task.Task;
-import org.junit.jupiter.api.Test;
-
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -13,16 +7,20 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+
+import duke.Duke;
+import duke.DukeException;
+import duke.Storage;
+import duke.stubs.ToDoStub;
+import duke.task.Task;
 
 public class StorageTest {
-
     @Test
     public void testLoadFileFromMemory_todoStub_success() throws DukeException, IOException {
         // clear file from previous session if it exists
         try {
             Files.delete(Paths.get(Duke.FILE_PATH));
-           
         } catch (NoSuchFileException exception) {
             System.out.println("File path does not originally exist");
         } finally {
@@ -40,7 +38,4 @@ public class StorageTest {
             }
         }
     }
-
-   
-
 }

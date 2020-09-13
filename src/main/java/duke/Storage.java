@@ -8,7 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import duke.task.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+import duke.task.Trivia;
 
 /**
  * Represents the Storage Object containing logic to writing and storing task list to memory.
@@ -65,8 +69,8 @@ public class Storage {
                     tasksToWriteToMemory += String.format("E,%d,%s,%s\n", task.getIsDone() ? 1 : 0,
                                                 task.getDescription(), ((Event) task).getAtWhen());
                 } else if (task instanceof Trivia) {
-                    tasksToWriteToMemory += String.format("Q,%s,%s\n",
-                            ((Trivia) task).getTriviaQuestion(), ((Trivia) task).getTriviaAnswer());
+                    tasksToWriteToMemory += String.format("Q,%s,%s\n", ((Trivia) task).getTriviaQuestion(), (
+                                                (Trivia) task).getTriviaAnswer());
                 } else {
                     throw new DukeException("Cannot save invalid task type");
                 }

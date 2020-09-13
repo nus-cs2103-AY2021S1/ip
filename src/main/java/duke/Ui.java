@@ -102,7 +102,7 @@ public class Ui {
         return String.format("Got it. I've added this trivia:\n    %s\nNow you have %d items in the list",
                 task.toString(), taskItems.getSize());
     }
- 
+
     /**
      * Shows Task deleted message.
      *

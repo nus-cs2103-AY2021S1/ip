@@ -13,7 +13,12 @@
     <module name="FileTabCharacter">
         <!-- Checks that there are no tab characters in the file. -->
     </module>
-    
+
+    <module name="NewlineAtEndOfFile">
+        <!-- Accept LF, CR or CRLF to accomodate devs who prefer different line endings -->
+        <property name="lineSeparator" value="lf_cr_crlf"/>
+    </module>
+
     <module name="RegexpSingleline">
         <!-- Checks that FIXME is not used in comments.  TODO is preferred. -->
         <property name="format" value="((//.*)|(\*.*))FIXME" />
@@ -129,11 +134,6 @@
             <!-- Validates identifiers for method parameters against the expression "^[a-z][a-zA-Z0-9]*$". -->
             <property name="severity" value="warning"/>
         </module>
-
-<!--        <module name="LocalFinalVariableName">-->
-<!--            &lt;!&ndash; Validates identifiers for local final variables against the expression "^[a-z][a-zA-Z0-9]*$". &ndash;&gt;-->
-<!--            <property name="severity" value="warning"/>-->
-<!--        </module>-->
 
         <module name="LocalVariableName">
             <!-- Validates identifiers for local variables against the expression "^[a-z][a-zA-Z0-9]*$". -->
@@ -294,6 +294,7 @@
         <module name="Regexp">
             <property name="format" value="[ \t]+$"/>
             <property name="illegalPattern" value="true"/>
+            <property name="message" value="Trailing whitespace"/>
         </module>
 
         <module name="OperatorWrap">

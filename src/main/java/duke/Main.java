@@ -12,18 +12,21 @@ import javafx.stage.Stage;
  * A GUI for Duke using FXML.
  */
 public class Main extends Application {
-
+    private static final String MAINWINDOW_FXML_PATH = "/view/MainWindow.fxml";
+    private static final String CSS_FILE_PATH = "/view/main.css";
+    private static final String BOT_NAME = "INTRUBOT";
     private Duke duke = new Duke();
 
     @Override
     public void start(Stage stage) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(MAINWINDOW_FXML_PATH));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
-            scene.getStylesheets().add("/view/main.css");
+            scene.getStylesheets().add(CSS_FILE_PATH);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
+            stage.setTitle(BOT_NAME);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

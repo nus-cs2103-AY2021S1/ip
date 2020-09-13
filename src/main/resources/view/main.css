@@ -1,3 +1,9 @@
 #dialogContainer {
-    -fx-background-color: #585858;
+    -fx-background-color: #0051BA;
+}
+#dialog {
+    -fx-background-color: #FFDA1A;
+    -fx-padding: 10px;
+    -fx-border-style: dotted;
+    -fx-border-width: 2px;
 }
