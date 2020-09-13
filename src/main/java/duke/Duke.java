@@ -3,6 +3,7 @@ package duke;
 import java.nio.file.Path;
 
 import duke.command.Command;
+import duke.command.RemindCommand;
 import duke.exception.DukeInputException;
 import duke.exception.DukeSaveDataException;
 import duke.io.InputHandler;
@@ -146,6 +147,9 @@ public class Duke {
      */
     public void initialize() {
         this.ui.displayGreet();
+
+        new RemindCommand().execute(this.ui, this.taskManager, this.saveManager);
+        this.ui.displayQueuedMessages();
     }
 
     /**
