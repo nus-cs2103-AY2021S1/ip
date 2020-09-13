@@ -1,10 +1,12 @@
 #RichBot User Guide
+
 RichBot is a desktop app for managing tasks, optimized for use via
 a Command Line Interface(CLI) while still having the benefits of
 Graphical User Interface (GUI). This app can help you to manage
 your tasks tidier and efficiently.
 
 ##Table of Content
+
 * [Features](#features)
 * [Usage](#usage)
     * [Showing help](#help---showing-list-of-commands)
