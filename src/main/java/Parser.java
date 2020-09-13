@@ -3,7 +3,7 @@
  */
 public class Parser {
     enum Command {
-        UNDO, LIST, BYE, DONE, DELETE, DEADLINE, EVENT, TODO, EMPTY_TASK_TODO, EMPTY_TASK_EVENT_DEADLINE, EMPTY_DATE, NULL, FIND;
+        UNDO, LIST, BYE, DONE, DELETE, DEADLINE, EVENT, TODO, FIND;
     }
 
 
@@ -13,7 +13,7 @@ public class Parser {
      * @param msg String message to parse and find a Command associated with message.
      * @return Command associated with the message passed in.
      */
-    public Command parse(String msg) {
+    public Command parse(String msg) throws DukeException {
         if (msg.equals("bye")) {
             return Command.BYE;
 
@@ -42,22 +42,23 @@ public class Parser {
                 return Command.TODO;
 
             } else if (msg.matches("^todo\\s*$")) {
-                return Command.EMPTY_TASK_TODO;
+//                return Command.EMPTY_TASK_TODO;
+                throw new DukeException(DukeExceptionType.EMPTY_TASK_TODO);
 
             } else if (
                     msg.matches("^event\\s/at.*$") ||
                             msg.matches("^deadline\\s/by.*$") ||
                             msg.matches("^event\\s*$") ||
                             msg.matches("^deadline\\s*$")) {
-                return Command.EMPTY_TASK_EVENT_DEADLINE;
+                throw new DukeException(DukeExceptionType.EMPTY_TASK_EVENT_DEADLINE);
 
             } else if (msg.matches("^event .* /at\\s*$") ||
                     msg.matches("^deadline .* /by\\s*") ||
                     msg.matches("^event.*") ||
                     msg.matches("^deadline.*")) {
-                return Command.EMPTY_DATE;
+                throw new DukeException(DukeExceptionType.EMPTY_DATE);
             }
-            return Command.NULL;
+            throw new DukeException(DukeExceptionType.INVALID_INPUT);
         }
     }
 }

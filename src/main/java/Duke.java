@@ -1,6 +1,5 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 import java.util.Stack;
 
 
@@ -23,16 +22,24 @@ public class Duke {
         String currentDirectory = System.getProperty("user.dir");
         this.storage = new Storage(currentDirectory + "/data/duke.txt");
 
-        if (storage.getExisted()) {
+        if (storage.hasExisting()) {
             taskList = new TaskList(storage.getTaskList());
         }
     }
 
+    /**
+     * Add current state of taskList to the stack of histories.
+     */
     public void addHistory(TaskList taskList) {
         taskListHistories.push(taskList);
     }
 
-    public boolean undoHistory() {
+    /**
+     * Undo the previous action, and returns a boolean to indicate if the undo is successful.
+     *
+     * @return Boolean to indicate if the undo is successful
+     */
+    public boolean undoHistorySucceeded() {
         if (!taskListHistories.empty()) {
             TaskList taskListHistory = taskListHistories.pop();
             storage.write(taskListHistory);
@@ -43,6 +50,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Return a String depending on the input.
+     *
+     * @param msg A String indicating the message that was passed in.
+     * @return String of message to be displayed back to the user.
+     */
     public String getResponse(String msg) {
         try {
             Parser.Command command = parser.parse(msg);
@@ -55,7 +68,7 @@ public class Duke {
                 // Exit program
                 return Ui.messagePrint("Bye. Hope to see you again soon!");
             } else if (command == Parser.Command.UNDO) {
-                if (undoHistory()) {
+                if (undoHistorySucceeded()) {
                     String listMessage = "";
                     for (int i = 0; i < taskList.size(); i++) {
                         listMessage += (i + 1) + ". " + taskList.get(i).toString() + "\n";
@@ -119,7 +132,7 @@ public class Duke {
                 return Ui.messagePrint(output);
             }
 
-            // Creating new task commands -------------------------------------
+            // Commands related with creating new tasks -------------------------------------
             else if (command == Parser.Command.DEADLINE) {
                 addHistory(taskList);
                 // Create deadline.
@@ -151,22 +164,7 @@ public class Duke {
                 // Create ToDo
                 String task = msg.substring(5); //Number 5 = starting index of todo string.
                 newTask = new ToDo(task);
-            }
-
-            // Exceptions commands ----------------------------------
-            else if (command == Parser.Command.EMPTY_TASK_TODO) {
-                // Checks for empty task in a new ToDo
-                throw new DukeException(DukeExceptionType.EMPTY_TASK_TODO);
-
-            } else if (command == Parser.Command.EMPTY_TASK_EVENT_DEADLINE) {
-                // Checks for empty task in a new deadline or event.
-                throw new DukeException(DukeExceptionType.EMPTY_TASK_EVENT_DEADLINE);
-
-            } else if (command == Parser.Command.EMPTY_DATE) {
-                // Checks for empty date in a new deadline or event.
-                throw new DukeException(DukeExceptionType.EMPTY_DATE);
             } else {
-                // Else if input is unrecognized, return null.
                 throw new DukeException(DukeExceptionType.INVALID_INPUT);
             }
 
@@ -175,7 +173,6 @@ public class Duke {
                     "Got it. I've added this task:\n" +
                             "  %s\n" +
                             "Now you have %d tasks in the list.", newTask.toString(), taskList.size());
-
             storage.write(taskList);
             return Ui.messagePrint(newTaskMsg);
         } catch (DukeException e) {

@@ -1,4 +1,9 @@
-T | 0 | buy food
+T | 0 | food
+T | 0 | food
+T | 0 | food
+T | 0 | food
+T | 0 | food
+T | 0 | food
 T | 0 | food
 T | 0 | buy food
-T | 0 | sell food
+T | 0 | h

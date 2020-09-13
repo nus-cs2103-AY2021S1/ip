@@ -40,7 +40,7 @@ public class Storage {
      *
      * @return Boolean value of if the storage txt file already exists.
      */
-    public boolean getExisted() {
+    public boolean hasExisting() {
         return this.isExisted;
     }
 
