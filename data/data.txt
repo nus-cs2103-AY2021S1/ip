@@ -1,5 +1,6 @@
 E | 1 | competition | 2020-09-23 9pm-10pm
 T | 0 | thinking out loud
 D | 0 | dranks? | 2020-09-27 9pm-2am
-E | 0 | feed Mrs Dino | 2020-09-17 6pm
-T | 0 | take a nap
+E | 0 | feed Mrs Dino | 2020-10-11 5pm
+D | 1 | finish project | 2020-09-22 6pm
+E | 0 | concert | 2020-09-23 7pm
