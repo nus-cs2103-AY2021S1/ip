@@ -7,6 +7,11 @@ public enum SimpleCommandType {
     DELETE,
     DONE;
 
+    /**
+     * Returns a string representation of the {@code SimpleCommandType}.
+     *
+     * @return String representation of the {@code SimpleCommandType}.
+     */
     @Override
     public String toString() {
         return super.toString().toLowerCase();

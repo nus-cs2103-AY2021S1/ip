@@ -1,9 +1,8 @@
 package duke.command;
 
-import duke.exception.EmptyTaskException;
+import duke.exception.EmptyToDoException;
 import duke.exception.FileUpdateFailException;
 import duke.storage.Storage;
-import duke.task.TaskType;
 import duke.task.ToDo;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
@@ -30,13 +29,13 @@ public class AddToDoCommand extends AddCommand {
      * @param tasks Task List object.
      * @param ui User Interface object.
      * @param storage Storage object.
-     * @throws EmptyTaskException If the task detail is empty.
+     * @throws EmptyToDoException If the task detail is empty.
      * @throws FileUpdateFailException If storage file fails to get updated.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws EmptyTaskException, FileUpdateFailException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws EmptyToDoException, FileUpdateFailException {
         if (taskDetails.isEmpty()) {
-            throw new EmptyTaskException(TaskType.TODO);
+            throw new EmptyToDoException();
         }
         return addTask(new ToDo(taskDetails), tasks, ui, storage);
     }

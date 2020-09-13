@@ -7,12 +7,12 @@ import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
 /**
- * Handles the addition of tasks into the Task List.
+ * Handles the addition of tasks into the Task List and updating of storage.
  */
 public abstract class AddCommand extends Command {
 
     /**
-     * Adds the new task into the Task List.
+     * Adds the new {@code Task} into the {@code TaskList} and updates the storage.
      *
      * @param newTask New task to be added.
      * @param tasks Task List object.

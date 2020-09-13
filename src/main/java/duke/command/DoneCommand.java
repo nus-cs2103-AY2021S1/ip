@@ -1,29 +1,44 @@
 package duke.command;
 
-import duke.exception.DukeException;
+import duke.exception.FileUpdateFailException;
+import duke.exception.InvalidSimpleCommandException;
+import duke.exception.InvalidTaskNumberException;
 import duke.exception.TaskAlreadyDoneException;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Abstracts the marking of task as done command.
+ */
 public class DoneCommand extends SimpleCommand {
 
     private final String input;
 
+    /**
+     * Initializes the {@code DoneCommand} object.
+     *
+     * @param input Input string from user.
+     */
     public DoneCommand(String input) {
         this.input = input;
     }
 
     /**
-     * Deletes or complete a task, depending on the task type.
+     * Executes marking of task as done command.
      *
      * @param tasks Task List object.
      * @param ui User Interface object.
      * @param storage Storage object.
-     * @throws DukeException If an error is found in the user input.
+     * @return Response message to user.
+     * @throws InvalidSimpleCommandException If Done command is invalid.
+     * @throws InvalidTaskNumberException If task number does not lie within the size of TaskList.
+     * @throws TaskAlreadyDoneException If task has already been marked done before.
+     * @throws FileUpdateFailException If file in storage fails to get updated.
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidSimpleCommandException,
+        InvalidTaskNumberException, TaskAlreadyDoneException, FileUpdateFailException {
         checkValidity(input, SimpleCommandType.DONE, tasks);
         int digit = Integer.parseInt(input);
         Task current = tasks.get(digit - 1);

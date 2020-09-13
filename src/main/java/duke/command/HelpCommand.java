@@ -4,12 +4,15 @@ import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Prints out all commands to the user.
+ */
 public class HelpCommand extends Command {
 
     private static final String HEADER = "Here are the available commands that I know:";
     private static final String[] listOfCommands = new String[]{
         "todo _ (e.g. todo 3)",
-        "deadline 'task name' /by 'end time' (e.g. deadline Exercise /by Sunday)",
+        "deadline 'task name' /by 'end time' (e.g. deadline Exercise /by 2020-08-23)",
         "event 'task name' /at 'start time - end time' (e.g. meeting /at Sunday 2pm - 4pm)",
         "list",
         "done _ (e.g. done 4)",
