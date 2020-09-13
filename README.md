@@ -57,7 +57,7 @@ Duke is a task management tool which will help the users to manage their tasks. 
      1. If there are any further prompts, accept the defaults.
    1. After the importing is complete, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()`. If the setup is correct, you should     see something like the below:
    ![Image of Ui]
-   (https://github.com/TCQian/ip/blob/master/docs/Ui.png)
+   (https://raw.githubusercontent.com/TCQian/ip/master/docs/Ui.png)
    
 ### <a id="3.2">3.2 How to use Duke?</a>
    Command | Purpose | Result
