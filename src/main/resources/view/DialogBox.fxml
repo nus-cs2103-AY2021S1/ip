@@ -5,18 +5,39 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 
-<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" style="-fx-background-color: black;" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0" xmlns:fx="http://javafx.com/fxml/1">
-  <children>
-    <Label fx:id="dialog" text="Label" textFill="#12b4ff" wrapText="true" minHeight="-Infinity">
-         <HBox.margin>
-            <Insets top="10.0" />
-         </HBox.margin></Label>
-    <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true">
-         <HBox.margin>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </HBox.margin></ImageView>
-  </children>
-  <padding>
-    <Insets bottom="20.0" left="10.0" right="10.0" top="20.0" />
-  </padding>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.effect.DropShadow?>
+<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0" xmlns:fx="http://javafx.com/fxml/1">
+
+    <!--
+    @@author nweiyue-resued
+    Reused from https://github.com/erisjacey/ip/blob/master/src/main/resources/view/DialogBox.fxml
+    with minor modifications
+    -->
+
+    <children>
+        <VBox fx:id="chatBubble" styleClass="chat-bubble" minHeight="-Infinity" alignment="TOP_RIGHT" maxHeight="-Infinity" spacing="5.0">
+            <HBox.margin>
+                <Insets top="10.0" left="10.0" right="5.0"/>
+            </HBox.margin>
+            <padding>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+            </padding>
+            <effect>
+                <DropShadow blurType="GAUSSIAN" color="#9c9a9a" height="16.23" radius="9.9625" width="25.62"/>
+            </effect>
+            <children>
+                <Label fx:id="dialog" styleClass="chat-label" lineSpacing="5.0" text="Label" wrapText="true">
+                    <font>
+                        <Font name="Lucida Console" size="12.0" />
+                    </font>
+                </Label>
+            </children>
+        </VBox>
+        <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true"/>
+    </children>
+
+    <!-- @@author -->
+
 </fx:root>
