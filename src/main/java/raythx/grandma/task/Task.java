@@ -15,7 +15,7 @@ public abstract class Task {
     public static final String DEADLINE_TAG = "D";
     public static final String EVENT_TAG = "E";
     public static final String TIME_FORMAT = "HHmm";
-    public static final String DATE_FORMAT = "DDmmyy";
+    public static final String DATE_FORMAT = "ddMMyy";
     public static final String OUTPUT_TIME_FORMAT = "h:mm a";
     public static final String OUTPUT_DATE_FORMAT = "MMM dd yyyy";
 
