@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="600.0" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="duke.MainWindow">
+    <children>
+        <TextField fx:id="userInput" layoutY="658.0" onAction="#handleUserInput" prefHeight="40.0" prefWidth="500.0">
+         <font>
+            <Font name="Gabriola" size="20.0" />
+         </font></TextField>
+        <Button fx:id="enterButton" layoutX="500.0" layoutY="660.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="35.0" prefWidth="100.0" text="Enter" textFill="WHITE">
+            <font>
+                <Font name="Gabriola" size="20.0" />
+            </font></Button>
+        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" opacity="0.9" prefHeight="660.0" prefWidth="600.0" style="-fx-background: transparent; -fx-background-image: url('images/Background.png'); -fx-background-size: 110% 100%;" vvalue="1.0">
+            <content>
+                <VBox fx:id="dialogContainer" prefWidth="588.0" />
+            </content>
+        </ScrollPane>
+    </children>
+</AnchorPane>

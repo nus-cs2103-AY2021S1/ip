@@ -1,0 +1,11 @@
+#userInput {
+    -fx-background-color: #FFFFFF;
+}
+
+#enterButton {
+    -fx-background-color: #704316;
+}
+
+#dialog {
+    -fx-background-color: rgb(255, 255, 255, 0.8);
+}
