@@ -1,7 +1,7 @@
 # User Guide
 
 ## What is Mug
-**Mug** is a Personalise Chatbox helps in **keeping track of our daily tasks**(todo tasks, task with deadline and event). Mug helps you to record your tasks via **Command Line Interface (CLI)** while having the benefits of a Graphical User Interface (GUI).
+**Mug** is a Personalise Chatbox helps in **keeping track of daily tasks**(todo tasks, task with deadline and event). Mug helps you to record your tasks via **Command Line Interface (CLI)** while having the benefits of a Graphical User Interface (GUI).
 
 ## QuickStart
 1. Ensure you have Java `11` or above installed in your Computer.
@@ -11,7 +11,7 @@
 1. Copy **mug.jar** to the folder you want to use as the home folder for your Mug.
 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds.<br>
-   ![Ui](images/Ui.png)
+   ![initialUi](images/initial.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing `list` and pressing Enter will list out all saved tasks.
 
