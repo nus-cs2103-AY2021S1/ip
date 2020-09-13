@@ -64,11 +64,11 @@ Okay. I will add this task:
 Now you have 4 tasks in the list.
 ```
 
+*** 
+
 ### `deadline <description> /at <date> <time>` - Adding deadline task
 
 Adds a deadline task with specified date and time to the list.
-
-Describe action and its outcome.
 
 Example of usage: 
 
@@ -81,6 +81,8 @@ Okay. I will add this task:
   [D][X] homework (by: Sep 13 2020 20:00)
 Now you have 5 tasks in the list.
 ```
+
+*** 
 
 ### `event <description> /at <date> <time>` - Adding event task
 
@@ -97,6 +99,8 @@ Okay. I will add this task:
   [E][X] project meeting (at: Sep 13 2020 22:00)
 Now you have 6 tasks in the list.
 ```
+
+***
 
 ### `list` - Listing all the tasks
 
@@ -118,6 +122,8 @@ Here is the tasks in your list:
 6. [E][X] project meeting (at: Sep 13 2020 22:00)
 ```
 
+***
+
 ### `done <index>` - Marking a task as done
 
 Marks the task at the specified index as done. 
@@ -136,6 +142,8 @@ Expected outcome:
 Successfully marked this task as done:
   [D][O] homework (by: Sep 13 2020 20:00)
 ```
+
+***
 
 ### `delete <index>` - Deleting a task
 
@@ -157,6 +165,8 @@ Okay. I will delete this task:
 Now you have 5 tasks in the list.
 ```
 
+***
+
 ### `find <keyword>` - Finding tasks by keyword
 
 Finds all the tasks which description contains the keyword.
@@ -172,6 +182,8 @@ Here are the matching tasks in your list:
 1. [E][X] clean room (at: Sep 13 2020 18:00)
 2. [T][X] check room
 ```
+
+***
 
 ### `reschedule <index> <date> <time>` - Changing a task's date and time
 
@@ -193,6 +205,8 @@ Successfully change this task's date:
   [E][X] laundry (at: Sep 20 2020 20:00)
 ```
 
+***
+
 ### `taskafter <date>` - Listing all the tasks after a date
 
 Shows all the task after the specified date.
@@ -207,6 +221,8 @@ Expected outcome:
 Here is the tasks after Sep 15 2020:
 1. [E][X] laundry (at: Sep 20 2020 20:00)
 ```
+
+***
 
 ### `taskbefore <date>` - Listing all the tasks before a date
 
@@ -224,6 +240,8 @@ Here is the tasks before Sep 13 2020:
 2. [D][O] homework (by: Sep 13 2020 20:00)
 3. [E][X] project meeting (at: Sep 13 2020 22:00)
 ```
+
+***
 
 ### `bye` - Exiting the app
 
