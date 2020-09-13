@@ -35,6 +35,8 @@ public class FindDirective implements Executable {
      */
     @Override
     public Report execute(Storage storage, TaskList tasks, Ui ui) {
+        assert searchTerm != null : "The search term cannot be null!";
+
         List<Task> matchingTasks = tasks.search(searchTerm);
 
         if (matchingTasks.isEmpty()) {

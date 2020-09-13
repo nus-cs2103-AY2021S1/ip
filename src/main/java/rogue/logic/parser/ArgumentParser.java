@@ -40,7 +40,10 @@ public class ArgumentParser {
         }
 
         Matcher argsMatcher = PATTERN_OPTIONS.matcher(input);
-        Action action = Action.getAction(inputMatcher.group(1).trim()); // Will not be null
+
+        assert inputMatcher.group(1) != null : "The action cannot be null!";
+
+        Action action = Action.getAction(inputMatcher.group(1).trim());
         Map<String, String> optionValueMap = new HashMap<>();
 
         // Capture all option-value pairs

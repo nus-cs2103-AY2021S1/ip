@@ -45,6 +45,8 @@ public class DoneDirective implements Executable {
         try {
             tasks.get(index).markAsDone();
 
+            assert tasks.get(index).isDone() : "The task must be marked as done!";
+
             storage.save(tasks.getTaskList());
 
             return new Report(String.format(MESSAGE_DONE_SUCCESS, tasks.get(index).toString()));

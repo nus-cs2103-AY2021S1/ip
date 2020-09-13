@@ -13,7 +13,7 @@ import java.time.format.DateTimeParseException;
  * Parses user inputs into an {@code AddDirective}.
  */
 public class AddDirectiveParser {
-    /** Option to add a description to a {@code Task}. **/
+    /** Option to add a description to a {@code Task}. */
     private static final String OPTION_DESCRIPTION = "/d";
 
     /** Option to add a date and time to a {@code Deadline}. */

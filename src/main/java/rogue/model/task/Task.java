@@ -32,6 +32,10 @@ public class Task {
         return description;
     }
 
+    public boolean isDone() {
+        return isDone;
+    }
+
     /**
      * Displays an icon based on completion status of a {@code Task}.
      *
