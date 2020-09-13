@@ -1,6 +1,5 @@
 # Mrs Dino User Guide
 ![Mrs Dino Example](./Ui.png)
-Format: ![Alt Text](url)
 
 ## Features 
 
@@ -18,5 +17,4 @@ Example of usage:
 
 Expected outcome:
 
-![Add todo example](/images/addTodo.png)
-Format: ![Alt Text](url)
+![Add todo example](./images/addTodo.png)
