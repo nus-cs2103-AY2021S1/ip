@@ -198,6 +198,7 @@ public class TaskList {
             System.out.println(response);
             return response;
         }
+        assert false;
     }
 
     /**
@@ -209,6 +210,7 @@ public class TaskList {
             int listIndexNumber = Integer.parseInt(listIndexString);
             Task task = list.get(listIndexNumber - 1);
             list.remove(listIndexNumber - 1);
+            assert !list.contains(task);
             String response = "The following task has been deleted:\n" + task;
             System.out.println(response);
             return response;
@@ -222,6 +224,7 @@ public class TaskList {
             System.out.println(response);
             return response;
         }
+        assert false;
     }
 
     /**
