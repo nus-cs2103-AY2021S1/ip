@@ -16,6 +16,9 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 public class App extends Application {
     private ScrollPane scrollPane;
     private VBox dialogContainer;
