@@ -5,6 +5,7 @@ import java.io.IOException;
 import bob.Bob;
 import bob.common.Messages;
 import bob.exceptions.BobException;
+import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -14,6 +15,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
 
 /**
@@ -84,7 +86,13 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
         if (bob.checkExited()) {
-            closeApplication();
+            PauseTransition pause = new PauseTransition(Duration.seconds(1.5f));
+            pause.setOnFinished(event -> {
+                Platform.exit();
+            });
+            userInput.setDisable(true);
+            sendButton.setDisable(true);
+            pause.play();
         }
     }
 
