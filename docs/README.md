@@ -24,8 +24,7 @@ Example of usage:
 
 Expected outcome: 
 
-An uncompleted todo task `homework`, marked with a cross, will be added to your task list. 
-<br>
+An uncompleted todo task `homework`, marked with a cross, will be added to your task list.<br><br>
 
 
 ### Adding a deadline-task: `deadline`
@@ -43,8 +42,7 @@ Example of usage:
 
 Expected outcome: 
 
-An uncompleted deadline task `homework`, marked with a cross, with given date and time will be added to your task list. 
-<br>
+An uncompleted deadline task `homework`, marked with a cross, with given date and time will be added to your task list.<br><br>
 
 
 ### Adding an event-task: `event`
@@ -62,8 +60,7 @@ Example of usage:
 
 Expected outcome: 
 
-An uncompleted event task `dinner`, marked with a cross, with given date and time will be added to your task list. 
-<br>
+An uncompleted event task `dinner`, marked with a cross, with given date and time will be added to your task list.<br><br>
 
 
 ### Marking task as completed: `done`
@@ -77,8 +74,7 @@ Example of usage:
 
 Expected outcome: 
 
-The task with task number `1` on the task list will be marked as done with a tick. 
-<br>
+The task with task number `1` on the task list will be marked as done with a tick.<br><br>
 
 
 ### Deleting a task: `delete`
@@ -92,15 +88,13 @@ Example of usage:
 
 Expected outcome: 
 
-The task with task number `1` on the task list will be deleted. 
-<br>
+The task with task number `1` on the task list will be deleted.<br><br>
 
 
 ### Listing tasks: `list`
 Lists all the tasks in the task list.
 
-Format: `list`
-<br>
+Format: `list`<br><br>
 
 
 ### Finding tasks: `find`
@@ -114,8 +108,7 @@ Example of usage:
 
 Expected outcome: 
 
-Every task in the task list containing `work` in its description will be shown.
-<br>
+Every task in the task list containing `work` in its description will be shown.<br><br>
 
 
 ### Undoing commands: `undo`
@@ -123,15 +116,13 @@ Reverts the state of task list to before the previous command.
 
 Format: `undo`
 
-Possible commands to undo: `todo`, `deadline`, `event`, `done`, `delete` 
-<br>
+Possible commands to undo: `todo`, `deadline`, `event`, `done`, `delete` <br><br>
 
 
 ### Exiting Bob: `exit`
 Exits the program.
 
-Format: `exit`
-<br>
+Format: `exit`<br><br>
 
 
 ## Command Summary
