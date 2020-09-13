@@ -51,7 +51,7 @@ public class Duke {
     /**
      * Initiates and runs the main programme.
      */
-    public void run() throws IOException {
+    public void run() {
 
         Scanner sc = new Scanner(System.in);
         String input;
