@@ -88,8 +88,7 @@ Action   | Format/Examples
 help | help
 list | list
 bye | bye
-done | done INDEX
-e.g. done 3
+done | done INDEX<br>e.g. done 3
 delete | delete INDEX<br>e.g. delete 2
 check | check DATE<br>e.g. check 2020-07-02
 todo | todo DESC<br>e.g. todo new stuff
