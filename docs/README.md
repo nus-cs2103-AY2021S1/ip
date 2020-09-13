@@ -1,5 +1,5 @@
 # User Guide
-
+![Image of Duke](https://https://github.com/gordonfgz/ip/blob/master/docs/Ui.png.png)
 ## Features 
 
 ### Feature 1: Add Tasks 
