@@ -1,32 +1,12 @@
 # User Guide
 
-## Features 
-
-### Feature 1 
-Description of feature.
-
-## Usage
-
-### `Keyword` - Describe action
-
-Describe action and its outcome.
-
-Example of usage: 
-
-`keyword (optional arguments)`
-
-Expected outcome:
-
-`outcome`
-
-
 ## What is Cait?
 
 **Cait** is a Personal Assistant Chatbot that can help you to **keep track of your tasks**, such as todos, events, and deadlines. This desktop application lets you manage your tasks via a **Command Line Interface (CLI)**, such as inserting tasks into a list, setting the tasks to done when you have completed them, and deleting the tasks when you do not need them anymore. This application is similar to a chat, where you type your commands into a message box, as if you are speaking to Cait.
 
 This is what you should see when you start up Cait:
 <br>
-![Image of start](images/onstart.png)
+![Image of start](images/onstartedit.png)
 <br>
 
 ## Quick start
