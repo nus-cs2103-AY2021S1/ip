@@ -8,7 +8,9 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.VBox;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -24,12 +26,14 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/brain.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/cutecat.jpeg"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/chubbycat.jpeg"));
 
     @FXML
     public void initialize() {
+
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        scrollPane.setBackground(Background.EMPTY);
     }
 
     public void setDuke(Duke d) {
@@ -40,7 +44,7 @@ public class MainWindow extends AnchorPane {
      * Displays the greetings to users.
      */
     public void greetUser() {
-        String introAndReminder = duke.getResponse("reminder");
+        String introAndReminder = duke.getResponse("intro");
         addToDialogContainer(
                 DialogBox.getDukeDialog(introAndReminder, dukeImage)
         );

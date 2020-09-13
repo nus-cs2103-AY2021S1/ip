@@ -17,7 +17,8 @@ public class Ui {
      * @return The introductions.
      */
     public String intro() {
-        return reply("Hello, I'm Ravenloss!!!\n");
+        return reply("^._.^  I'm Pan-Pan, I'll be your best fur-end!!! "
+                + "Type 'meow' for the list of instructions\n");
     }
 
     /**
@@ -37,9 +38,9 @@ public class Ui {
     public String list(List<Task> tasks) {
         StringBuilder buffer = new StringBuilder();
         if (tasks.size() == 0) {
-            buffer.append(reply("You have no pending tasks"));
+            buffer.append(reply("You have no pending tasks, fur real!"));
         } else {
-            buffer.append(reply("Here are the tasks in your list:")).append("\n");
+            buffer.append(reply("Are these tasks fur-miliar?")).append("\n");
             for (int i = 0; i < tasks.size(); i++) {
                 String number = (i + 1) + ".";
                 Task currentTask = tasks.get(i);
@@ -57,7 +58,7 @@ public class Ui {
     public String filteredList(List<Task> filteredTasks) {
         StringBuilder buffer = new StringBuilder();
         if (filteredTasks.size() == 0) {
-            buffer = new StringBuilder(reply("No tasks found"));
+            buffer = new StringBuilder(reply("No tasks found or maybe I fur-get"));
         } else {
             buffer.append(reply("Here are the matching tasks in your list:")).append("\n");
             for (int i = 0; i < filteredTasks.size(); i++) {
@@ -79,11 +80,11 @@ public class Ui {
      */
     public String addMessage(Task currentTask, Integer size) {
         StringBuilder buffer = new StringBuilder();
-        buffer.append(reply("Got it. I've added this duke.task:"))
+        buffer.append(reply("Paw-some! I'll try to remember!"))
                 .append("\n")
                 .append(reply(INDENTATION + currentTask.toString()))
                 .append("\n")
-                .append(reply("Now you have " + size + " tasks in the list."))
+                .append(reply("Now you have " + size + " tasks in my memoewry."))
                 .append("\n");
         return buffer.toString();
     }
@@ -96,7 +97,7 @@ public class Ui {
     public String doneMessage(Task currentTask) {
         currentTask.done();
         StringBuilder buffer = new StringBuilder();
-        buffer.append(reply("Good job! I've marked this task as done"))
+        buffer.append(reply("Good meow!!! I've marked this task as done"))
                 .append("\n")
                 .append(reply(INDENTATION + currentTask.toString()))
                 .append("\n");
@@ -108,7 +109,7 @@ public class Ui {
      * @return The farewell message.
      */
     public String farewell() {
-        return reply("Bye. Hope to see you again soon!");
+        return reply("Bye!!! Don't fur-get me!!!");
     }
 
     /**
@@ -119,11 +120,11 @@ public class Ui {
      */
     public String deleteMessage(Task currentTask, Integer sizeLeft) {
         StringBuilder buffer = new StringBuilder();
-        buffer.append(reply("Noted. I've removed this task: "))
+        buffer.append(reply("Meeeeoowww. I've eaten this task: "))
                 .append("\n")
                 .append(reply(INDENTATION + currentTask.toString()))
                 .append("\n")
-                .append(reply("Now you have " + sizeLeft + " tasks in the list."))
+                .append(reply("Now you have " + sizeLeft + " delicious tasks in the list."))
                 .append("\n");
         return buffer.toString();
     }
@@ -136,9 +137,9 @@ public class Ui {
     public String currentWeekTasks(List<Task> weeklyTasks) {
         StringBuilder buffer = new StringBuilder();
         if (weeklyTasks.size() == 0) {
-            buffer = new StringBuilder(reply("You have no pending events or deadlines this week!"));
+            buffer = new StringBuilder(reply("You are free this week! Time for a nap"));
         } else {
-            buffer.append(reply("Here are your pending events or deadlines this week!:"))
+            buffer.append(reply("Don't fur-get your event/deadlines this week!:"))
                     .append("\n");
             for (int i = 0; i < weeklyTasks.size(); i++) {
                 String number = (i + 1) + ".";
@@ -149,5 +150,39 @@ public class Ui {
             }
         }
         return buffer.toString();
+    }
+
+    /**
+     * Prints out the cat bot guide
+     * @return The cat bot guide
+     */
+    public String displayGuide() {
+        return "Try these paw-sible commands!"
+                + '\n' + '\n' + "'todo  {description}'"
+                + "\n-Adds a todo task to my memeowry"
+
+                + '\n' + '\n' + "'deadline  {description}  /by  {yyyy-MM-dd  HH:mm}'"
+                + "\n-Adds a deadline task to my memeowry"
+
+                + '\n' + '\n' + "'event  {description}  /at  {yyyy-MM-dd HH:mm}'"
+                + "\n-Adds an event task to my memeowry"
+
+                + '\n' + '\n' + "'list'"
+                + "\n-I'll try to uuuuhhh recall your tasks!"
+
+                + '\n' + '\n' + "'done  {task number}'"
+                + "\n-I'll mark your task as done!"
+
+                + '\n' + '\n' + "'delete  {task number}'"
+                + "\n-Allows me to eat your task!"
+
+                + '\n' + '\n' + "'find  {keyword}'"
+                + "\n-I'll help you find some fur-miliar tasks!"
+
+                + '\n' + '\n' + "'reminder'"
+                + "\n-Purr-haps I'll show you your tasks this week!"
+
+                + '\n' + '\n' + "'bye'"
+                + "\n-Don't even";
     }
 }

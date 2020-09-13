@@ -3,14 +3,7 @@ package duke;
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
 
-import duke.commands.AddCommand;
-import duke.commands.Command;
-import duke.commands.DeleteCommand;
-import duke.commands.DoneCommand;
-import duke.commands.ExitCommand;
-import duke.commands.FindCommand;
-import duke.commands.ListCommand;
-import duke.commands.RemindCommand;
+import duke.commands.*;
 import duke.exceptions.DukeDateTimeParseException;
 import duke.exceptions.DukeDeadlineFormatException;
 import duke.exceptions.DukeEmptyActionException;
@@ -66,8 +59,12 @@ public class Parser {
                 return parseFindCommand(commandLine);
             } else if (isReminder(commandLine)) {
                 return new RemindCommand();
+            } else if (isGuide(commandLine)) {
+                return new GuideCommand();
             } else if (isBye(commandLine)) {
                 return new ExitCommand();
+            } else if (isIntro(commandLine)) {
+                return new IntroCommand();
             } else {
                 throw new DukeInvalidTaskException();
             }
@@ -78,6 +75,24 @@ public class Parser {
         } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
             throw new DukeEmptyActionException();
         }
+    }
+
+    /**
+     * Check if the input is 'guide'.
+     * @param commandLine The user input.
+     * @return Returns a boolean
+     */
+    private static boolean isGuide(String commandLine) {
+        return commandLine.equals("meow");
+    }
+
+    /**
+     * Check if the input is 'intro'.
+     * @param commandLine The user input.
+     * @return Returns a boolean
+     */
+    private static boolean isIntro(String commandLine) {
+        return commandLine.equals("intro");
     }
 
     /**
@@ -97,8 +112,8 @@ public class Parser {
 
     /**
      * Check if the input starts with 'find'.
-     * @param commandLine
-     * @return
+     * @param commandLine The user input.
+     * @return Returns a boolean
      */
     private static boolean isFind(String commandLine) {
         return commandLine.startsWith("find");

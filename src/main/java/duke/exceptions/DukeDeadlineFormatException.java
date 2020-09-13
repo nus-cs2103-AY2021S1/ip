@@ -6,7 +6,7 @@ package duke.exceptions;
  */
 public class DukeDeadlineFormatException extends DukeException {
 
-    public static final String ERROR_DEADLINE_FORMAT = "The description of 'deadline' should be accompanied"
+    public static final String ERROR_DEADLINE_FORMAT = "The description of 'deadline' should be accompaw-nied"
             + " by '/by' followed by the date in this format: 'yyyy-MM-dd HH:mm'";
 
 

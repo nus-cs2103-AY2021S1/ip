@@ -6,7 +6,7 @@ package duke.exceptions;
  */
 public class DukeEmptyActionException extends DukeException {
 
-    public static final String ERROR_EMPTY_ACTION_TASK = "Add the appropriate number after the command 'done/delete'";
+    public static final String ERROR_EMPTY_ACTION_TASK = "Add the appaw-priate number after the command 'done/delete'";
 
 
     /**

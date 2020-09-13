@@ -20,7 +20,6 @@ public class RemindCommand implements Command {
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         TaskListFilter weekFilter = new WeekFilter();
-        String intro = ui.intro();
-        return intro + '\n' + ui.currentWeekTasks(tasks.findTasks(weekFilter));
+        return ui.currentWeekTasks(tasks.findTasks(weekFilter));
     }
 }

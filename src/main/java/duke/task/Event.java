@@ -31,7 +31,7 @@ public class Event extends Task {
                 + " "
                 + super.toString()
                 + "(at: "
-                + date.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm"))
+                + date.format(DateTimeFormatter.ofPattern("MMM d, yyyy HH:mm"))
                 + ")";
     }
 }

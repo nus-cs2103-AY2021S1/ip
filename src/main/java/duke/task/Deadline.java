@@ -29,7 +29,7 @@ public class Deadline extends Task {
                 + super.getStatusIcon()
                 + " " + super.toString()
                 + " (by: "
-                + date.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm"))
+                + date.format(DateTimeFormatter.ofPattern("MMM d, yyyy HH:mm"))
                 + ")";
     }
 }
