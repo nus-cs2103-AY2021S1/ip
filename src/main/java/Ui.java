@@ -5,7 +5,7 @@ import java.util.Scanner;
  * Represents the user interface to deal with interactions with the user.
  */
 public class Ui {
-    private final String line = "----------------------";
+    private final String line = "-----------------------------------------------";
     private final String logo = " ____        _        \n"
                                 + "|  _ \\ _   _| | _____ \n"
                                 + "| | | | | | | |/ / _ \\\n"
@@ -39,12 +39,12 @@ public class Ui {
     }
 
     /**
-     * Returns a string pattern for displaying duke exception messages.
+     * Returns a special string pattern for displaying duke exception messages.
      * @param ex DukeException.
      * @return Returns a string representation of a duke exception.
      */
     public String throwDukeException(DukeException ex) {
-        return format(ex.getMessage());
+        return line + "\n" + format(ex.getMessage()) + "\n" + line;
     }
 
     /**
