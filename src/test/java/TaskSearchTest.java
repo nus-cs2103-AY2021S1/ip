@@ -51,8 +51,8 @@ public class TaskSearchTest {
         Response searchResponse = searcher.searchAndDisplay("borrow");
         
         String expectedMessage = "Here are the matching tasks in your list:\n"
-                                         + "[T] [✘] borrow book\n"
-                                         + "[T] [✘] borrow umbrella\n";
+                                         + "[T] [\u2718] borrow book\n"
+                                         + "[T] [\u2718] borrow umbrella\n";
         assertEquals(expectedMessage, searchResponse.getMessage());
     }
 }
