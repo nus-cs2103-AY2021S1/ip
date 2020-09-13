@@ -5,7 +5,7 @@ package duke;
  */
 public class Ui {
 
-    private final String instructions = "Hello! I'm duke.Duke\n"
+    private final String instructions = "Hello! I'm Duke\n"
             + "Send me a task in one of the following formats and I'll store it for you.\n"
             + "\tTodo: \"todo <description>\"\n"
             + "\tDeadline: \"deadline <description> /by <YYYY-MM-DD>\"\n"

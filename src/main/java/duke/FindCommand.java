@@ -24,7 +24,7 @@ public class FindCommand extends Command {
         TaskList filteredTaskList = new TaskList(new ArrayList<>(tasks.toStream()
                 .filter(x -> x.description.contains(description)).collect(Collectors.toList())));
         StringBuilder output = new StringBuilder();
-        if (tasks.isEmpty()) {
+        if (filteredTaskList.isEmpty()) {
             output.append("I'm sorry, there's nothing that matches your search.");
         } else {
             IntStream.range(0, filteredTaskList.size()).forEach(i -> {
