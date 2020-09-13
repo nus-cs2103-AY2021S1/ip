@@ -16,7 +16,7 @@ This application also allows user to use Graphical User Interface (GUI).
 9. Exit the application: ```bye```
 
 ### Feature 0: Load existing tasks
-Duke application will automatically saves your tasks after each command and loads up when everytime you enter the application.
+Duke application will automatically saves your tasks after each command and loads up everytime you enter the application.
 An example would be as shown in the image below, where the user has existing tasks that is stored in the list previously.
 
 ![Feature0](https://github.com/Wincenttjoi/ip/blob/master/docs/feature0.JPG)
