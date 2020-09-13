@@ -26,8 +26,8 @@ Expected outcome:
 
 This is what you should see when you start up Cait:
 <br>
-![Image of start](https://https://github.com/caitlinjee/ip/blob/master/docs/images/onstart.png)
-
+![Image of start](images/onstart.png)
+<br>
 
 ## Quick start
 
@@ -56,7 +56,7 @@ Example of usage:
 
 Expected outcome:
 
-![Image of help](https://https://github.com/caitlinjee/ip/blob/master/docs/images/help.png)
+![Image of help](images/help.png)
 <br>
 
 ### `todo`
@@ -76,7 +76,7 @@ Example of usage:
 
 Expected outcome:
 
-![Image of todo](https://https://github.com/caitlinjee/ip/blob/master/docs/images/todo.png)
+![Image of todo](images/todo.png)
 <br>
 
 ### `event`
@@ -96,7 +96,7 @@ Example of usage:
 
 Expected outcome:
 
-![Image of event](https://https://github.com/caitlinjee/ip/blob/master/docs/images/event.png)
+![Image of event](images/event.png)
 <br>
 
 ### `deadline`
@@ -116,7 +116,7 @@ Example of usage:
 
 Expected outcome:
 
-![Image of deadline](https://https://github.com/caitlinjee/ip/blob/master/docs/images/deadline.png)
+![Image of deadline](images/deadline.png)
 <br>
 
 ### `done`
@@ -136,7 +136,7 @@ Example of usage:
 
 Expected outcome:
 
-![Image of done](https://https://github.com/caitlinjee/ip/blob/master/docs/images/done.png)
+![Image of done](images/done.png)
 <br>
 
 ### `list`
@@ -154,7 +154,7 @@ Example of usage:
 
 Expected outcome:
 
-![Image of list](https://https://github.com/caitlinjee/ip/blob/master/docs/images/list.png)
+![Image of list](images/list.png)
 <br>
 
 ### `delete`
@@ -174,7 +174,7 @@ Example of usage:
 
 Expected outcome:
 
-![Image of delete](https://https://github.com/caitlinjee/ip/blob/master/docs/images/delete.png)
+![Image of delete](images/delete.png)
 <br>
 
 ### `find`
@@ -192,7 +192,7 @@ Example of usage:
 
 Expected outcome:
 
-![Image of find](https://https://github.com/caitlinjee/ip/blob/master/docs/images/find.png)
+![Image of find](images/find.png)
 <br>
 
 ### `bye`
