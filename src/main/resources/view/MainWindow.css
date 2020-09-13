@@ -1,0 +1,18 @@
+.button {
+    -fx-background-color: #b19cd9;
+    -fx-border-radius: 50px;
+    -fx-font-family: monospace;
+    -fx-font-weight: bold;
+    -fx-font-size: 18px;
+}
+
+.textField {
+    -fx-border-color: #b19cd9;
+    -fx-font-family: monospace;
+    -fx-font-size: 15px;
+    -fx-border-width: 1px;
+}
+
+.VBox {
+   -fx-background-image: url("../images/planets.jpg")
+}

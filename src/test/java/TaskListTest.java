@@ -14,7 +14,6 @@ class TaskListTest {
     @Test
     void generateList_validFile() {
         TaskList taskList = new TaskList();
-
         try {
             taskList.generateList(testFile);
             assertEquals(2, taskList.size());

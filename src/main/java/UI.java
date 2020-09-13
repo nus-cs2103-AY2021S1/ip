@@ -33,7 +33,7 @@ public class UI {
      * Reads a starting message at the start of UI.
      */
     public String startUpMessage() {
-        return "Hi! I'm Duke" + this.readSavedTasks() + "\n" + "What can I do for you?";
+        return "Hi! I'm Duke" + "\n" + this.readSavedTasks() + "\n" + "What can I do for you?";
     }
 
     /**
@@ -48,7 +48,7 @@ public class UI {
             String tasks = "Here are your current tasks:";
 
             for (int i = 0; i < size; i++) {
-                tasks += "\n" + "  " + this.storage.getTaskFromList(i);
+                tasks += "\n" + (i + 1) + ". " + this.storage.getTaskFromList(i);
             }
             return tasks;
         }
@@ -106,7 +106,7 @@ public class UI {
                 this.updateStatus = "Not updating";
                 this.updateIndex = -1;
 
-                return "Updated " + taskToChange + "to: " + "\n" + taskChangedTo;
+                return "Updated:" + "\n" + taskToChange + "\n" + "    ↓" + "\n" + taskChangedTo;
             }
 
             int parseResult = this.parser.parse(input, this.storage.getSizeofTasks());
