@@ -21,7 +21,7 @@ import bob.storage.Storage;
  * Represents the task-managing ChatBot.
  */
 public class Bob {
-    private Storage storage;
+    private final Storage storage;
     private Tasklist tasks;
     private boolean hasExited;
 
