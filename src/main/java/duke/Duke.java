@@ -55,7 +55,11 @@ public class Duke {
             } catch (Exception e) {
                 return ("Write a number pls");
             }
-            actionPicker(userInput);
+
+            String a = actionPicker(userInput);
+            if (!a.equals("")) {
+                return a;
+            }
             // Gets the new input
             userInput = scan.nextLine();
         }
