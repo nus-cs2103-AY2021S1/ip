@@ -65,6 +65,9 @@ Double click the jar file to run
 ### `deadline`
 Deadline is a task with description, a completion status, a reminder status and a date. Note that the date format must follow either `dd/MM/yy HH:mm` or `dd/MM/yy`. By default reminder status is set to false and could only be activated/deactivated using the `remind` command.
 
+Format:
+`deadline <description> /by <date>`
+
 Example of usage: 
 
 `deadline Project Duke submission /by 2020-12-11 2312`
@@ -79,6 +82,9 @@ Now you have <Int> tasks in the list.
 ### `event`
 Event is a task with description, a completion status, a reminder status and a date. Note that the date format must follow either `dd/MM/yy HH:mm` or `dd/MM/yy`. By default reminder status is set to false and could only be activated/deactivated using the `remind` command.
 
+Format:
+`event <description> /at <date>`
+
 Example of usage: 
 
 `event Project Duke meeting /at 2020-12-11 2312`
@@ -92,6 +98,9 @@ Now you have <Int> tasks in the list.
  
 ### `todo`
 Todo is a task with a description, a completion status and a reminder status. By default reminder status is set to false and could only be activated/deactivated using the `remind` command.
+
+Format:
+`todo <description>`
 
 Example of usage: 
 
@@ -122,6 +131,9 @@ Here are the tasks in your list:
 ### `done`
 The task to be marked is indicated by the index after the `done` command, you can view the index of the task by typing `list`.
 
+Format:
+`done <Integer>`
+
 Example of usage: 
 
 `done 1`
@@ -134,6 +146,9 @@ Nice! I've marked this task as done:
 
 ### `delete`
 The task to be deleted is indicated by the index after the `done` command, you can view the index of the task by typing `list`.
+
+Format:
+`delete <Integer>`
 
 Example of usage: 
 
@@ -149,6 +164,9 @@ Now you have <Int> tasks in the list.
 ### `find`
 Find tasks thats contains the keyword, note that only 1 keyword is allowed currently.
 
+Format:
+`find <Keyword>`
+
 Example of usage: 
 
 `find duke`
@@ -162,6 +180,9 @@ Here are the matching tasks in your list:
 
 ### `remind`
 The task to be reminded is indicated by the index after the `remind` command, you can view the index of the task by typing `list`. Also, state whether to activate or deactivate the reminder using `y` for yes, `n` for no after the `remind` command.
+
+Format:
+`remind <Integer> <y/n>`
 
 Example of usage: 
 
