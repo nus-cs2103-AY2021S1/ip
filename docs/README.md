@@ -21,7 +21,6 @@ Add Functions
 * Type `todo` followed by a space and then type in the 'todo' you wish to add into your list
 <br>
 <br>
-<br>
 
 ![Todo](./Images/todo.png)
 </details>
@@ -44,10 +43,9 @@ Add Functions
 
 ## `event`
 <br>
+* Type "event" followed by description of event, then followed by "/at" followed by a space and then type in ther rest of the description
 <br>
-*Type "event" followed by description of event, then followed by "/at" followed by a space and then type in ther rest of the description
-<br>
-*Input date via 'YYYY-MM-DD' format and time in 'HH:MM' format if you wish to add date and time
+* Input date via 'YYYY-MM-DD' format and time in 'HH:MM' format if you wish to add date and time
 <br>
 <br>
 
