@@ -34,7 +34,7 @@ public class DialogBox extends HBox {
      * @param img image of user to be shown in display window
      * @param isAssistant boolean to check if is assistant or user
      */
-    private DialogBox(String text, Image img, boolean isAssistant) {
+    private DialogBox(String text, Image img, boolean isAssistant, boolean isError) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -59,8 +59,11 @@ public class DialogBox extends HBox {
 
         this.setBorder(new Border(new BorderStroke(Color.DARKBLUE,
                 BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-        if (isAssistant) {
+
+        if (isAssistant && !isError) {
             this.setBackground(new Background(new BackgroundFill(Color.LIGHTBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
+        } else if (isAssistant && isError) {
+            this.setBackground(new Background(new BackgroundFill(Color.LIGHTPINK, CornerRadii.EMPTY, Insets.EMPTY)));
         }
         int count = dialog.getText().endsWith("\n") ? 1 : 0;
         String[] stringList = dialog.getText().split("\n");
@@ -90,7 +93,7 @@ public class DialogBox extends HBox {
      * @return new instance of dialogbox
      */
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img, false);
+        return new DialogBox(text, img, false, false);
     }
 
     /**
@@ -100,7 +103,12 @@ public class DialogBox extends HBox {
      * @return new instance of dialogbox
      */
     public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img, true);
+        String prefix = text.substring(1, 6);
+        System.out.println(prefix + " " + prefix.length());
+        var db = new DialogBox(text, img, true, false);
+        if (prefix.equals("OH NO")) {
+            db = new DialogBox(text, img, true, true);
+        }
         db.flip();
         return db;
     }

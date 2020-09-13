@@ -60,7 +60,7 @@ public class TagCommand extends Command{
 
             return responseList;
         } catch (StringIndexOutOfBoundsException | ArrayIndexOutOfBoundsException a) {
-            throw new DukeException("Please enter a valid tag");
+            throw new DukeException("  Please enter a valid tag, 'tag <task number> #<tag name)'");
         } catch (NumberFormatException n) {
             throw new DukeException("Please enter a valid number task to be tagged");
         }
