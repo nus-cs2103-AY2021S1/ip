@@ -37,6 +37,7 @@ public class FindCommand extends Command {
             String[] description = task.getDescription().split("\\s");
             boolean isFound = false;
             for (String word : description) {
+                // find keyword
                 if (word.equals(keyword)) {
                     isFound = true;
                     break;
@@ -52,6 +53,7 @@ public class FindCommand extends Command {
         int i = 1;
         String output = FIND_TITLE + "\n";
         for (Task task : filteredList) {
+            // print found element
             output += i++ + "." + task + "\n";
         }
         return output;
