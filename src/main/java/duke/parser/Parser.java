@@ -82,6 +82,8 @@ public class Parser {
         } else if (this.context.getMacroList().hasMacro(commandName)) {
             Macro macro = this.context.getMacroList().getMacro(commandName);
             runCommand(commandName, macro::execute, macro.getOptions(), args);
+        } else {
+            throw DukeException.Errors.UNKNOWN_COMMAND.create();
         }
 
     }

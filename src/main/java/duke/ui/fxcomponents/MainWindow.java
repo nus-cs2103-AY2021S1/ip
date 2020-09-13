@@ -45,6 +45,10 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
+        if (input.matches("\\s*")) {
+            // ignore if user sends empty input/only whitespaces
+            return;
+        }
         this.guiHelper.setUserInput(input);
         this.userMessage(input);
         this.duke.nextIteration();
