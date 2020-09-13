@@ -86,7 +86,7 @@ public class Task {
      * @return
      */
     public String execute(TaskList taskList, Ui ui, Storage storage) {
-        return null;
+        return "Opps! It is not a valid input! :p";
     };
 
     public String getType() {

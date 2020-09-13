@@ -114,6 +114,7 @@ public class Parser {
         } catch (NoDescriptionException | NoTimeException | NoSuchOrderException
                 | NoTaskChosenException | NoThisNumOfTaskException e) {
             e.printStackTrace();
+            return new Task("Invalid", false);
         }
         return null;
     }
