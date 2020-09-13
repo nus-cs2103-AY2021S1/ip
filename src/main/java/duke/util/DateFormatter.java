@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.List;
 
 import duke.exception.DukeException;
+import duke.exception.InvalidDateException;
 
 /**
  * Contains utility methods for converting between Dates and Strings.
@@ -16,8 +17,7 @@ public class DateFormatter {
     // @@author aizatazhar-reused
     // Reused from https://stackoverflow.com/a/16990333/12003017 with minor modifications
     private static List<String> dateFormats = Arrays.asList(
-            "dd-MM-yyyy hhmm",
-            "dd-MM-yyyy"
+            "dd-MM-yyyy HHmm"
     );
 
     /**
@@ -30,6 +30,7 @@ public class DateFormatter {
     public static Date parseDate(String strDate) throws DukeException {
         for (String format: dateFormats) {
             SimpleDateFormat sdf = new SimpleDateFormat(format);
+            sdf.setLenient(false);
             try {
                 return sdf.parse(strDate);
             } catch (ParseException e) {
@@ -37,8 +38,8 @@ public class DateFormatter {
             }
         }
 
-        throw new DukeException("Invalid input for date. Given '" + strDate + "', "
-                + "expecting format dd-MM-yyyy hhmm");
+        throw new InvalidDateException("Invalid input for date. Given '" + strDate + "', "
+                + "expecting format dd-MM-yyyy HHmm");
     }
     // @@author
 
@@ -60,7 +61,7 @@ public class DateFormatter {
      * @return String representation of the date in a save-friendly format.
      */
     public static String formatSave(Date date) {
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hhmm");
+        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HHmm");
         return dateFormat.format(date);
     }
 }

@@ -2,6 +2,7 @@ package duke.ui;
 
 import duke.Duke;
 import duke.exception.DukeException;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -10,6 +11,8 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
+// @@author aizatazhar-reused
+// Reused from https://se-education.org/guides/tutorials/javaFxPart4.html with minor modifications
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -47,7 +50,7 @@ public class MainWindow extends AnchorPane {
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply
      */
     @FXML
-    private void handleUserInput() {
+     private void handleUserInput() {
         String input = userInput.getText();
         String response;
         boolean isErrorMessage;
@@ -63,6 +66,12 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage, isErrorMessage)
         );
+
+        if (response.equals("Bye. Hope to see you again soon!")) {
+            Platform.exit();
+        }
+
         userInput.clear();
     }
 }
+// @@author

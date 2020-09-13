@@ -6,7 +6,6 @@ import duke.ui.Ui;
 import duke.util.Parser;
 import duke.util.Storage;
 import duke.util.TaskList;
-import javafx.application.Platform;
 
 /**
  * Represents the main class for the Duke application.
@@ -25,7 +24,7 @@ public class Duke {
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
-            ui.showLoadingError();
+            System.out.println(e.getMessage());
             tasks = new TaskList();
         }
     }
@@ -39,16 +38,11 @@ public class Duke {
      */
     public String getResponse(String input) throws DukeException {
         String response;
-
         try {
             Command command = Parser.parse(input);
             response = command.execute(tasks, ui, storage);
         } catch (DukeException e) {
             throw e;
-        }
-
-        if (response.equals("Bye. Hope to see you again soon!")) {
-            Platform.exit();
         }
 
         return response;

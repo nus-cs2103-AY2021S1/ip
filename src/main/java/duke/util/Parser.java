@@ -17,6 +17,7 @@ import duke.command.ToDoCommand;
 import duke.exception.DukeException;
 import duke.exception.InvalidDeadlineException;
 import duke.exception.InvalidEventException;
+import duke.exception.InvalidFindException;
 import duke.exception.InvalidToDoException;
 
 /**
@@ -98,8 +99,11 @@ public class Parser {
         return new ToDoCommand(description);
     }
 
-    private static Command parseFind(String input) {
+    private static Command parseFind(String input) throws InvalidFindException {
         String[] split = input.split("find ");
+        if (split.length == 0 || split.length == 1) {
+            throw new InvalidFindException();
+        }
         String restOfInput = split[1];
         String[] keywords = restOfInput.split("\\s*~\\s*"); // splits and trims
 

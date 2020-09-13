@@ -15,6 +15,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.Circle;
 
+// @@author aizatazhar-reused
+// Reused from https://se-education.org/guides/tutorials/javaFxPart4.html with minor modifications
 /**
  * An example of a custom control using FXML.
  * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
@@ -22,12 +24,12 @@ import javafx.scene.shape.Circle;
  */
 public class DialogBox extends HBox {
     private static final String USER_BACKGROUND =
-            "-fx-background-color: rgba(114, 205, 247, 0.5); -fx-background-radius: 15;";
+            "-fx-background-color: rgba(114, 205, 247, 0.9); -fx-background-radius: 15; -fx-font-weight: bold;";
     private static final String DUKE_BACKGROUND =
-            "-fx-background-color: rgba(255, 168, 220, 0.5); -fx-background-radius: 15;";
+            "-fx-background-color: rgba(68, 242, 117, 0.9); -fx-background-radius: 15; -fx-font-weight: bold;";
     private static final String ERROR_STYLE =
-            "-fx-background-color: rgba(242, 66, 54, 0.5); -fx-background-radius: 15;"
-                    + "-fx-font-size: 16px; -fx-font-weight: bold; -fx-color: red;";
+            "-fx-background-color: rgba(243, 156, 150, 0.9); -fx-background-radius: 15;"
+                    + "-fx-font-size: 16px; -fx-font-weight: bold;";
     @FXML
     private Label dialog;
     @FXML
@@ -79,4 +81,5 @@ public class DialogBox extends HBox {
         db.flip();
         return db;
     }
+    // @@author
 }

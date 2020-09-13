@@ -31,7 +31,7 @@ public class DateFormatterTest {
             fail("Exception not thrown");
         } catch (DukeException e) {
             String expectedError = "Invalid input for date. Given '" + "2020 Oct 10 1021" + "', "
-                    + "expecting format dd-MM-yyyy hhmm";
+                    + "expecting format dd-MM-yyyy HHmm";
             assertEquals(e.getMessage(), expectedError);
         }
     }

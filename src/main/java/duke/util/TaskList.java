@@ -92,7 +92,12 @@ public class TaskList {
                 response.add(String.format("%d.%s", i + 1, tasks.get(i)));
             }
         }
-        return response.toString();
+
+        if (response.toString().equals("")) {
+            return "No matching tasks found :(";
+        } else {
+            return response.toString();
+        }
     }
 
     /**
