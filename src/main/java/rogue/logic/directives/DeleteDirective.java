@@ -48,6 +48,8 @@ public class DeleteDirective implements Executable {
         try {
             Task deletedTask = tasks.delete(index);
 
+            assert deletedTask != null : "Deleted task cannot be null!";
+
             storage.save(tasks.getTaskList());
 
             return new Report(String.format(MESSAGE_DELETE_SUCCESS, deletedTask.toString(), tasks.count()));

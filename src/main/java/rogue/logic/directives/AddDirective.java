@@ -63,6 +63,8 @@ public class AddDirective implements Executable {
     public Report execute(Storage storage, TaskList tasks, Ui ui) throws StorageException {
         Task task;
 
+        assert description != null : "The description for a task cannot be null.";
+
         switch (action) {
         case ADD_DEADLINE:
             task = new Deadline(description, date);

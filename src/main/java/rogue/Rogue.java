@@ -55,7 +55,13 @@ public class Rogue {
     public String getResponse(String input) {
         try {
             Executable e = Parser.createExe(input);
+
+            assert e != null : "A parser must create an executable!";
+
             Report r = e.execute(storage, tasks, ui);
+
+            assert r != null : "An executable must generate a report!";
+
             return r.toString();
         } catch (IncorrectInputException | ExecutionException | StorageException e) {
             return e.getMessage();

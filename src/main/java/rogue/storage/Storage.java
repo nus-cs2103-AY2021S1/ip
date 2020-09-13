@@ -21,14 +21,17 @@ import java.util.List;
  * Deals with file I/O and persisting information across multiple executions.
  */
 public class Storage {
-    /** Separator for each field in file. **/
+    /** Separator for each field in file. */
     private static final String FORMAT_TASK_FIELD_DELIMITER = "\\s\\|\\s";
 
-    /** The value corresponding to whether a task is completed. **/
+    /** The value corresponding to whether a task is completed. */
     private static final String VALUE_TASK_COMPLETE = "1";
 
+    /** Message for when the save file does not conform to the expected format. */
     private static final String ERROR_INCORRECT_FILE_FORMAT =
             "ERROR: Saved file does not have the correct format!\n";
+
+    /** Message for when an error is encountered when performing I/O operations. */
     private static final String ERROR_IO = "ERROR: Unable to %s tasks from file!";
 
     private Path filePath;
@@ -52,7 +55,7 @@ public class Storage {
         Path parentDirPath = path.getParent();
 
         try {
-            // Create parent directories if they do not exist
+            // Creates parent directories if they do not exist
             if (parentDirPath != null) {
                 Files.createDirectories(parentDirPath);
             }
@@ -64,11 +67,15 @@ public class Storage {
             e.printStackTrace();
         }
 
+        assert Files.exists(path) : "Save file must be available!";
+
         return new Storage(path);
     }
 
     /**
      * Writes the summary of each {@code Task} to the file.
+     *
+     * All prior content in the file will be replaced.
      *
      * @param tasks A list of tasks.
      * @throws StorageException if the file cannot be written to.
@@ -76,6 +83,7 @@ public class Storage {
     public void save(List<Task> tasks) throws StorageException {
         try {
             List<String> taskSummary = convertTasksToString(tasks);
+            // Overwrites content in existing file
             Files.write(filePath, taskSummary, StandardOpenOption.TRUNCATE_EXISTING);
         } catch (IOException e) {
             throw new StorageException(String.format(ERROR_IO, "save"));
@@ -108,6 +116,8 @@ public class Storage {
         List<String> taskSummary = new ArrayList<>();
 
         for (Task task : tasks) {
+            assert task != null : "A task cannot be null!";
+
             taskSummary.add(task.summarize());
         }
 
@@ -129,6 +139,8 @@ public class Storage {
         for (String summary : taskSummary) {
             try {
                 String[] args = summary.split(FORMAT_TASK_FIELD_DELIMITER);
+
+                assert args.length >= 3 : "A task has a minimum of 3 fields!";
 
                 boolean isDone = (args[1].equals(VALUE_TASK_COMPLETE)) ? true : false;
                 String description = args[2];
