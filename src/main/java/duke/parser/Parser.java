@@ -3,7 +3,7 @@ package duke.parser;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
-import java.util.function.Predicate;
+import java.util.function.BiFunction;
 
 import duke.command.ByeCommand;
 import duke.command.Command;
@@ -23,7 +23,7 @@ import duke.exception.DukeException;
  * @author Audrey Felicio Anwar
  */
 public class Parser {
-    private static final Predicate<String[]> CHECK_LENGTH = (s) -> s.length <= 1;
+    private static final BiFunction<String[], Integer, Boolean> CHECK_LENGTH = (s, i) -> s.length <= i;
     private enum Commands {
         BYE,
         LIST,
@@ -37,8 +37,13 @@ public class Parser {
     }
     private static String errorMessage = null;
 
-    private static Command handleDoneOrDelete(Commands commandType, int index) throws DukeException {
-        Command command;
+    private static Command handleDoneOrDelete(Commands commandType, String[] separatedWords) {
+        Command command = null;
+        if (CHECK_LENGTH.apply(separatedWords, 1)) {
+            errorMessage = " Task index must be specified :(";
+            return command;
+        }
+        int index = Integer.parseInt(separatedWords[1]);
         switch (commandType) {
         case DONE:
             command = new DoneCommand(index);
@@ -47,44 +52,68 @@ public class Parser {
             command = new DeleteCommand(index);
             break;
         default:
-            throw new DukeException(" Command type not found");
+            errorMessage = " Command type not found";
         }
         return command;
     }
 
-    private static Command handleAddTask(Commands commandType, String input) throws DukeException {
-        String description;
-        String[] contents;
+    private static Command handleAddTask(Commands commandType, String input, String timeIndicator) {
+        StringBuilder description = new StringBuilder();
         LocalDate time;
         Command command = null;
+        String[] separatedWords = timeIndicator.equals("") ? new String[]{input} : input.split(timeIndicator);
+        System.out.println(separatedWords[0]);
+        String[] getDescription = separatedWords[0].split(" ");
+        if (CHECK_LENGTH.apply(getDescription, 1)) {
+            errorMessage = " Task description cannot be empty :(";
+            return command;
+        }
+        if (CHECK_LENGTH.apply(separatedWords, 1) && !commandType.equals(Commands.TODO)) {
+            errorMessage = " Date cannot be empty :(";
+            return command;
+        }
+        for (int i = 1; i < getDescription.length; i++) {
+            description.append(getDescription[i]);
+        }
+        time = timeIndicator.equals("") ? null : LocalDate.parse(separatedWords[1].trim());
         switch (commandType) {
         case TODO:
-            description = input.substring(5);
-            command = new ToDoCommand(description);
+            command = new ToDoCommand(description.toString().trim());
             break;
         case DEADLINE:
-            contents = input.substring(9).split(" /by ");
-            if (CHECK_LENGTH.test(contents)) {
-                errorMessage = " Deadline date cannot be empty :(";
-                break;
-            }
-            description = contents[0];
-            time = LocalDate.parse(contents[1]);
-            command = new DeadlineCommand(description, time);
+            command = new DeadlineCommand(description.toString().trim(), time);
             break;
         case EVENT:
-            contents = input.substring(6).split(" /at ");
-            if (CHECK_LENGTH.test(contents)) {
-                errorMessage = " Event date cannot be empty :(";
-                break;
-            }
-            description = contents[0];
-            time = LocalDate.parse(contents[1]);
-            command = new EventCommand(description, time);
+            command = new EventCommand(description.toString().trim(), time);
             break;
         default:
-            throw new DukeException(" Command type not found");
+            errorMessage = " Command type not found";
         }
+        return command;
+    }
+
+    private static Command handleFind(String[] separatedWords) {
+        Command command = null;
+        if (CHECK_LENGTH.apply(separatedWords, 1)) {
+            errorMessage = " Keyword cannot be empty :(";
+            return command;
+        }
+        String keyword = separatedWords[1];
+        command = new FindCommand(keyword);
+        return command;
+    }
+
+    private static Command handleUpdate(String[] separatedWords) {
+        Command command = null;
+        if (CHECK_LENGTH.apply(separatedWords, 3)) {
+            errorMessage = " Details cannot be empty :(";
+            return command;
+        }
+        int index = Integer.parseInt(separatedWords[1]);
+        String type = separatedWords[2];
+        String newDetails = Arrays.stream(Arrays.copyOfRange(separatedWords, 3, separatedWords.length))
+                .reduce("", (accumulated, current) -> accumulated + current + " ").trim();
+        command = new UpdateCommand(index, type, newDetails);
         return command;
     }
 
@@ -97,8 +126,8 @@ public class Parser {
      */
     public static Command parse(String input) throws DukeException {
         try {
-            String[] separated = input.split("\\s+");
-            Commands commandType = Commands.valueOf(separated[0].toUpperCase());
+            String[] separatedWords = input.split("\\s+");
+            Commands commandType = Commands.valueOf(separatedWords[0].toUpperCase());
             Command command = null;
             switch (commandType) {
             case BYE:
@@ -109,48 +138,22 @@ public class Parser {
                 break;
             case DONE:
             case DELETE:
-                if (CHECK_LENGTH.test(separated)) {
-                    errorMessage = " Task index must be specified :(";
-                    break;
-                }
-                try {
-                    int index = Integer.parseInt(separated[1]);
-                    command = handleDoneOrDelete(commandType, index);
-                } catch (NumberFormatException error) {
-                    errorMessage = " Task index must be an integer :(";
-                }
+                command = handleDoneOrDelete(commandType, separatedWords);
                 break;
             case TODO:
+                command = handleAddTask(commandType, input, "");
+                break;
             case DEADLINE:
+                command = handleAddTask(commandType, input, "/by");
+                break;
             case EVENT:
-                if (CHECK_LENGTH.test(separated)) {
-                    errorMessage = " Task description cannot be empty :(";
-                    break;
-                }
-                command = handleAddTask(commandType, input);
+                command = handleAddTask(commandType, input, "/at");
                 break;
             case FIND:
-                if (CHECK_LENGTH.test(separated)) {
-                    errorMessage = " Keyword cannot be empty :(";
-                    break;
-                }
-                String keyword = input.substring(5);
-                command = new FindCommand(keyword);
+                command = handleFind(separatedWords);
                 break;
             case UPDATE:
-                if (separated.length <= 3) {
-                    errorMessage = " Details cannot be empty :(";
-                    break;
-                }
-                try {
-                    int index = Integer.parseInt(separated[1]);
-                    String type = separated[2];
-                    String newDetails = Arrays.stream(Arrays.copyOfRange(separated, 3, separated.length))
-                            .reduce("", (accumulated, current) -> accumulated + current + " ").trim();
-                    command = new UpdateCommand(index, type, newDetails);
-                } catch (NumberFormatException error) {
-                    errorMessage = " Task index must be an integer :(";
-                }
+                command = handleUpdate(separatedWords);
                 break;
             default:
                 throw new DukeException(" Command type not found");
@@ -159,6 +162,8 @@ public class Parser {
                 throw new DukeException(errorMessage);
             }
             return command;
+        } catch (NumberFormatException error) {
+            throw new DukeException(" Task index must be an integer :(");
         } catch (IllegalArgumentException error) {
             throw new DukeException(" Command not recognized :(");
         } catch (DateTimeParseException error) {
