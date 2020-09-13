@@ -192,7 +192,6 @@ help
 list
 todo <description>
 sort
-
 ```
 
 ---
@@ -219,7 +218,6 @@ Expected outcome:
 3.[D][✘] Homework (by: 14 Sep 2020 23:59)
 4.[T][✘] Buy groceries
 5.[E][✘] Birthday (at: 06 May 2020 00:00)
-
 ```
 
 ---
@@ -244,7 +242,6 @@ Expected outcome:
 I've added this task:
 [T][✘] Buy groceries
 Now you have 6 tasks in the list.
-
 ```
 
 ---
@@ -276,13 +273,11 @@ Expected outcome:
 
 Your task list has been sorted!
 
-
 1.[E][✘] Birthday (at: 06 May 2020 00:00)
 2.[D][✘] Homework (by: 14 Sep 2020 23:59)
 3.[E][✓] Math exam (at: 20 Nov 2020 19:00)
 4.[T][✘] Clean room
 5.[T][✘] Buy groceries
-
 ```
 
 ---
