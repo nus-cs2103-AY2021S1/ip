@@ -12,7 +12,7 @@ import ui.TextUi;
 public class Duke {
 
     private static final String GREETING =
-            "Hi, I'm your Professor, Martin. I keep track of\n"
+            "Hi, I'm your Professor, Elon. I keep track of\n"
                     + "your tasks and load them if you have any saved.\n";
     private static final String HELP_MESSAGE =
             "You can ask me to do these:\n"
@@ -99,7 +99,6 @@ public class Duke {
                 ? "\\..\\data\\taskList.txt"
                 : "\\data\\taskList.txt");
         Duke dukeProgram = new Duke(filePath);
-        System.out.println(Main.class.getResource("/view/MainWindow.fxml"));
         dukeProgram.runInConsole();
     }
 }

@@ -49,7 +49,7 @@ public class Parser {
         case "find":
             return new FindCommand(fullCommand, taskList);
         case "help":
-            return new HelpCommand();
+            return new HelpCommand(fullCommand);
         default:
             return new InvalidCommand();
         }

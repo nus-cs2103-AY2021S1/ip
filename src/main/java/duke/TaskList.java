@@ -133,7 +133,7 @@ public class TaskList {
      */
     public boolean markTaskDone(int taskNum) throws DukeException {
         if (taskNum <= 0 || taskNum > tasks.size()) {
-            throw new DukeException("task.Task number does not exist.");
+            throw new DukeException("Task number does not exist.");
         } else {
             Task t = tasks.get(taskNum - 1);
             t.markDone();

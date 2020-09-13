@@ -32,7 +32,12 @@ public class DeleteCommand implements Command {
         } else {
             StringJoiner responseBuilder = new StringJoiner("\n");
             String numString = fullCommand.substring(7);
-            int entryNum = Integer.parseInt(numString);
+            int entryNum;
+            try {
+                entryNum = Integer.parseInt(numString);
+            } catch (NumberFormatException e) {
+                throw new DukeException("You did not pass in a number for delete!");
+            }
             String taskToRemoveString = taskList.getTask(entryNum - 1).toString();
             if (taskList.deleteTask(entryNum)) {
                 responseBuilder.add("Noted. I have removed this task:");

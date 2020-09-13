@@ -32,7 +32,12 @@ public class DoneCommand implements Command {
             StringJoiner responseBuilder = new StringJoiner("\n");
             // For processing "done" command with the corresponding integer value.
             String numString = fullCommand.substring(5);
-            int entryNum = Integer.parseInt(numString);
+            int entryNum;
+            try {
+                entryNum = Integer.parseInt(numString);
+            } catch (NumberFormatException e) {
+                throw new DukeException("You did not pass in a number for done command.");
+            }
             if (taskList.markTaskDone(entryNum)) {
                 responseBuilder.add("Nice! I've marked this task as done:");
                 responseBuilder.add(taskList.getTask(entryNum - 1).toString());

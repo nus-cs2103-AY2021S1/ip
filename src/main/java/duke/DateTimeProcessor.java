@@ -24,10 +24,10 @@ class DateTimeProcessor {
 
     private final ArrayList<String> possibleDateTimeFormats = new ArrayList<>(
             Arrays.asList(
-                    "dd/MM/yyyy HHmm", "yyyy/MM/dd HHmm", "MM/dd/yyyy HHmm",
-                    "HHmm dd/MM/yyyy", "HHmm yyyy/MM/dd", "HHmm MM/dd/yyyy",
-                    "dd-MM-yyyy HHmm", "yyyy-MM-dd HHmm", "MM/dd/yyyy HHmm",
-                    "HHmm dd-MM-yyyy", "HHmm yyyy-MM-dd", "HHmm MM-dd-yyyy"
+                        "dd/MM/yyyy HHmm", "yyyy/MM/dd HHmm", "MM/dd/yyyy HHmm",
+                        "HHmm dd/MM/yyyy", "HHmm yyyy/MM/dd", "HHmm MM/dd/yyyy",
+                        "dd-MM-yyyy HHmm", "yyyy-MM-dd HHmm", "MM/dd/yyyy HHmm",
+                        "HHmm dd-MM-yyyy", "HHmm yyyy-MM-dd", "HHmm MM-dd-yyyy"
             )
     );
 
