@@ -23,6 +23,8 @@ public class TaskList {
      * @return updated Task
      */
     public Task updateTaskStatus(int index, boolean status) {
+        assert index > 0 : "Accessing tasklist with negative index";
+        assert index < tasks.size() : "Accessing tasklist out of bounds";
         Task taskToUpdate = tasks.get(index);
         Task updatedTask = taskToUpdate.updateStatus(true);
         tasks.set(index, updatedTask);
@@ -57,6 +59,8 @@ public class TaskList {
      * @return Task
      */
     public Task getTask(int i) {
+        assert i > 0 : "Accessing tasklist with negative index";
+        assert i < tasks.size() : "Accessing tasklist out of bounds";
         return tasks.get(i);
     }
 
