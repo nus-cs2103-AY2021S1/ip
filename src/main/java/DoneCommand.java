@@ -42,6 +42,7 @@ public class DoneCommand extends Command {
         Task markedTask = markingTask.markAsDone();
         store.set(indexOfMarkingTask, markedTask);
         storage.save(new TaskList(store));
+        
         return DONE_TITLE + "\n"
                 + markedTask;
     }
