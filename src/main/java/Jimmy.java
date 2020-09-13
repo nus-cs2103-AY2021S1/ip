@@ -84,8 +84,8 @@ public class Jimmy {
         }
         try {
             String reply = Parser.parse(taskList, input);
+            saveList();
             if (input.equals("bye")) {
-                saveList();
                 reply += "\n Click the \" X \" button to close this window.";
             }
             return reply;

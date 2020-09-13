@@ -1,5 +1,3 @@
-D-----✓-----return book-----sunday
-D-----✘-----same as above-----Aug 29 2020 Sat 2359hrs
-E-----✓-----2103 tutorial-----5pm Wednesday 26th Aug
-T-----✓-----new test-----NaN
-D-----✘-----finish assignment-----sunday morning rain is falling
+E-----✓-----tP team meeting-----zoom, Sat 9pm
+T-----✘-----2103/T Quiz ASAP-----NaN
+D-----✘-----complete iP tasks-----Sep 18 2020 2359hrs

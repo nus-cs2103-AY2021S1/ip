@@ -99,7 +99,12 @@ public class Task {
     protected static String tryFormatDateElseThrow(String timeConstraint) throws DateTimeParseException {
         String[] timeConstraintArray = timeConstraint.split(" ", 2);
         String potentiallyValidDate = timeConstraintArray[0];
-        String remainingTimeConstraint = timeConstraintArray[1];
+        String remainingTimeConstraint;
+        if (timeConstraintArray.length == 2) {
+            remainingTimeConstraint = timeConstraintArray[1];
+        } else {
+            remainingTimeConstraint = "";
+        }
         LocalDate date = LocalDate.parse(potentiallyValidDate);
         return date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " " + remainingTimeConstraint;
     }

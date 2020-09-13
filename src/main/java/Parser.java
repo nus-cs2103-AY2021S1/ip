@@ -33,7 +33,8 @@ public class Parser {
             switch (msg) {
 
             case "list":
-                reply = lst.toString();
+                reply = "Here are your pending tasks:\n\n"
+                    + lst.toString();
                 break;
 
             case "bye":
@@ -41,7 +42,7 @@ public class Parser {
                 break;
 
             case "help":
-                reply = "Here are a list of commands available:\n"
+                reply = "Here are a list of commands available:\n\n"
                     + getHelpOptions();
                 break;
 
@@ -94,9 +95,6 @@ public class Parser {
                 reply = "Here are the matching tasks in your list:\n\t" + tasks;
                 break;
 
-            case "help":
-
-
             default:
                 throw new JimmyException(ErrorMessage.UNKNOWN_FUNCTION);
             }
@@ -131,7 +129,7 @@ public class Parser {
             Task taskToBeDeleted = taskList.getTask(index);
             taskList.deleteTask(index);
             return "Noted. I've removed this task:" + "\n\t  " + taskToBeDeleted
-                + "\n\tNow you have " + taskList.getNumTasks() + " tasks in the list.";
+                + "\nNow you have " + taskList.getNumTasks() + " tasks in the list.";
         } else {
             return reply;
         }
