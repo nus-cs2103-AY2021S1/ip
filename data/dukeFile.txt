@@ -1,7 +1,2 @@
-E | true | again | 2021-11-24
-D | true | play | 1985-11-02
-T | true | eat 
-D | false | sing | 2020-04-03
-E | false | war | 2021-02-11
-T | true | sleep
-T | false | sleep
+E | false | consultation | 2020-11-13
+D | false | maths assignment | 2020-09-21
