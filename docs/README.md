@@ -1,4 +1,4 @@
-# User Guide
+
 <h1>Duke user guide</h1>
 
 <h3>UI of Duke</h3>
@@ -14,7 +14,7 @@ Features include:
 7. Exit programm
 
 ## Usage
-1. Add tasks:
+<h2>1. Add tasks:</h2>
 <h5> Add tasks like ToDo, Event and Deadline</h5>
 
 * todo Description
@@ -58,7 +58,7 @@ Adding Deadline to the list:
 You have 3 tasks in the list.
 ```
 
-2. List tasks
+<h2>2. List tasks</h2>
 <h5>List all the tasks stored in Duke</h5>
 Input:
     
@@ -76,7 +76,7 @@ Here are the tasks in your list:
 3. [D][✘] cool deadline(By: Dec 15 2020)
 ```
 
-3. Deleting tasks
+<h2>3. Deleting tasks</h2>
 <h5>Delete a task to clear space</h5>
 Input:
 
@@ -91,7 +91,7 @@ Task removed:
 You have 1 task in the list.
 ``` 
 
-4. Marking as done
+<h2>4. Marking as done</h2>
 <h5>Marks the tasks as done by changing the cross to a tick</h5>
 Input:
 
@@ -106,7 +106,7 @@ Nice! I've marked this task as done:
 [E][✓] cool event(At: Oct 9 2020)
 ```
 
-5. Sort tasks by date
+<h2>5. Sort tasks by date</h2>
 <h5>Sorts the tasks into 1) ToDo 2) Deadline 3) Event. Deadline and Events would also be sorted by date</h5>    
 Input:
 
@@ -146,7 +146,7 @@ Here are the tasks in your list:
 7. [E][✘]  June event(At: Jun 6 2020)
 8. [E][✘]  Dec event (At: Dec 1 2020)
 ```
-6. Find tasks
+</h2>6. Find tasks</h2>
 <h5>Search for tasks that match a certain key phrase</h5>
 
 Input:
@@ -161,7 +161,7 @@ Here are the items that match
 2) [E][✘]  Dec event (At: Dec 1 2020)
 ```
 
-7. Exit programm
+<h2>7. Exit programm</h2>
 <h5>Quit the programm when finish. Programm will give the closing messgae and exit automatically</h5>
 
 Input:
