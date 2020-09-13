@@ -1,5 +1,4 @@
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
@@ -18,31 +17,27 @@ public class Storage {
     public TaskList load() throws IOException {
         TaskList list = new TaskList();
         if (!file.createNewFile()) {
-            readTask(list);
+            Scanner sc = new Scanner(file);
+            while (sc.hasNextLine()) {
+                String task = sc.nextLine();
+                String description = task.substring(7);
+                // check the 5th char is tick or cross
+                boolean isDone = task.charAt(4) == '\u2713';
+                Task newTask;
+
+                // check the second character is T/D/E
+                if (task.charAt(1) == 'T') {
+                    newTask = new Todo(description, isDone);
+                } else if (task.charAt(1) == 'D') {
+                    newTask = new Deadline(description, isDone);
+                } else {
+                    newTask = new Event(description, isDone);
+                }
+                list.addTask(newTask);
+            }
+            sc.close();
         }
         return list;
-    }
-
-    public void readTask(TaskList list) throws IOException {
-        Scanner sc = new Scanner(file);
-        while (sc.hasNextLine()) {
-            String task = sc.nextLine();
-            String description = task.substring(7);
-            // check the 5th char is tick or cross
-            boolean isDone = task.charAt(4) == '\u2713';
-            Task newTask;
-
-            // check the second character is T/D/E
-            if (task.charAt(1) == 'T') {
-                newTask = new Todo(description, isDone);
-            } else if (task.charAt(1) == 'D') {
-                newTask = new Deadline(description, isDone);
-            } else {
-                newTask = new Event(description, isDone);
-            }
-            list.addTask(newTask);
-        }
-        sc.close();
     }
 
     public void writeToFile(TaskList list) throws IOException {
