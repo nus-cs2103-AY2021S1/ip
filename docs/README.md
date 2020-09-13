@@ -173,7 +173,7 @@ done 4
 < Expected outcome:
 
 ```
-Okay I've set this task's start date time:
+Okay I've marked this task as done:
   [F][✓] meditate (at: 13 Sep, 11:00 pm) (for: 30 min)
 ```
 
@@ -183,6 +183,7 @@ Okay I've set this task's start date time:
 Format: `remove <task number>`
 
 Alternative: `delete <task number>`
+
 Alternative: `remove all` to clear the task list
 
 \> Example of usage:
