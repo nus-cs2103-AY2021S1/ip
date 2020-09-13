@@ -18,31 +18,31 @@ The grandma task mananger application caters to the younger generation using cru
 
     todo {description} #{tag} /by DDMMYY HHMM
 
-    **entries are case sensitive**
+ **entries are case sensitive**
 
 ### Adding "deadline" task - adds a task with deadline into grandma.
 
     deadline {description} #{tag} /by DDMMYY HHMM
 
-    **entries are case sensitive**
+ **entries are case sensitive**
 
 ### Adding "event" task - adds an event task into grandma.
 
     event {description} #{tag} /at DDMMYY HHMM
 
-    **entries are case sensitive**
+ **entries are case sensitive**
 
 ### Delete task - delete a task from grandma.
 
     delete {task number}
 
-    *task number can be viewed using list*
+ *task number can be viewed using list*
 
 ### Complete task - mark a task as complete in grandma.
 
     done {task number}
 
-    *task number can be viewed using list*
+ *task number can be viewed using list*
 
 ### List tasks - view the list of tasks in grandma.
 
@@ -52,7 +52,7 @@ The grandma task mananger application caters to the younger generation using cru
 
     find {keyword}
 
-    *the find function is case insensitive*
+*the find function is case insensitive*
 
 ### Exit grandma - Save information and leave the application.
 
@@ -66,7 +66,7 @@ todo something #fun
 
 deadline homework #sad /by 311220 2021
 
-    Got it, here yur task bij [D] [✘] homework #sad (by: Jan 31 2020, 8:21 pm)
+    Got it, here yur task bij [D] [✘] homework #sad (by: Dec 31 2020, 8:21 pm)
 
 done 1
 
@@ -74,7 +74,7 @@ done 1
 
 delete 2
 
-    okcan deleted: [D] [✘] homework #sad (by: Jan 31 2020, 8:21 pm) Now you have 1 tasks in the list.
+    okcan deleted: [D] [✘] homework #sad (by: Dec 31 2020, 8:21 pm) Now you have 1 tasks in the list.
 
 list
 
