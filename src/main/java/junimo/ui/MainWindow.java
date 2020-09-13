@@ -32,7 +32,7 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    public void setDuke(Junimo d) {
+    public void setJunimo(Junimo d) {
         junimo = d;
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(junimo.getWelcome(), junimoImage)

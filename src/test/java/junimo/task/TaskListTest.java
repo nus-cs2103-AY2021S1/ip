@@ -1,14 +1,7 @@
 package junimo.task;
 
-import junimo.task.Deadline;
-import junimo.task.Event;
-import junimo.task.Task;
-import junimo.task.TaskList;
-import junimo.task.Todo;
 import org.junit.jupiter.api.Test;
 
-import java.io.BufferedReader;
-import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,34 +10,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class TaskListTest {
 
     public enum SampleTask {
-        DEADLINE("deadline Math Test /by 2020-08-31", true,
-                new Deadline("Math Test", "2020-08-31", true)),
-        EVENT("event Pool Party /at Matt's House", false,
-                new Event("Pool Party", "Matt's House", false)),
-        TODO("todo Write English Essay", false,
-                new Todo("Write English Essay", false));
+        DEADLINE(new Deadline("Math Test", "2020-08-31", true)),
+        EVENT(new Event("Pool Party", "Matt's House", false)),
+        TODO(new Todo("Write English Essay", false));
 
-        final String command;
         final Task task;
-        private boolean isDone;
 
-        SampleTask(String command, boolean isDone, Task task) {
-            this.command = command;
-            this.isDone = isDone;
+        SampleTask(Task task) {
             this.task = task;
         }
-
-        String getStoredString() {
-            return this.command + System.lineSeparator() + this.isDone + System.lineSeparator();
-        }
-    }
-
-    public static String getCorrectFormatSampleData() {
-        StringBuilder data = new StringBuilder();
-        for (SampleTask sample : SampleTask.values()) {
-            data.append(sample.getStoredString());
-        }
-        return data.toString();
     }
 
     public static List<Task> getCorrectFormatExpectedTaskList() {
@@ -65,30 +39,27 @@ public class TaskListTest {
     public void addCorrectFormatTest() {
         TaskList taskList = new TaskList();
         for (SampleTask sampleTask : SampleTask.values()) {
-            taskList.add(sampleTask.command, sampleTask.isDone, false);
+            taskList.add(sampleTask.task, false);
         }
         assertEquals(getCorrectFormatExpectedTaskList(), taskList.getTaskList());
     }
 
     @Test
-    public void correctFormatBufferedReaderConstuctorTest() {
-        BufferedReader br = new BufferedReader(new StringReader(getCorrectFormatSampleData()));
-        TaskList taskList = new TaskList(br);
-        assertEquals(getCorrectFormatExpectedTaskList(), taskList.getTaskList());
-    }
-
-    @Test
     public void markTaskAsDoneTest() {
-        BufferedReader br = new BufferedReader(new StringReader(getCorrectFormatSampleData()));
-        TaskList taskList = new TaskList(br);
+        TaskList taskList = new TaskList();
+        for (SampleTask sampleTask : SampleTask.values()) {
+            taskList.add(sampleTask.task, false);
+        }
         taskList.markTaskAsDone("1");
         assertEquals("[\u2713]", taskList.getTaskList().get(0).getCheckBox());
     }
 
     @Test
     public void deleteTaskTest() {
-        BufferedReader br = new BufferedReader(new StringReader(getCorrectFormatSampleData()));
-        TaskList taskList = new TaskList(br);
+        TaskList taskList = new TaskList();
+        for (SampleTask sampleTask : SampleTask.values()) {
+            taskList.add(sampleTask.task, false);
+        }
         taskList.deleteTask("2");
         List<Task> expectedTaskList = getCorrectFormatExpectedTaskList();
         expectedTaskList.remove(1);
