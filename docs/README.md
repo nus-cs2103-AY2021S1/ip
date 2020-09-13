@@ -4,7 +4,7 @@ Duke is a **desktop app for organising your todo tasks, deadlines and events via
 
 ## Quick Start
 1. Ensure you have Java 11 or above installed in your Computer.
-2. Download the latest duke.jar from [here](https://github.com/m0nggh/ip/releases/tag/v0.2).
+2. Download the latest duke.jar from [here](https://github.com/m0nggh/ip/releases/tag/v0.3).
 3. Copy the file to the folder you want to use as the _home folder_ for your Duke.
 4. Double-click the file to start the app.
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`list`** and pressing Enter will display your tasks. The GUI similar to the below should appear within a second. <br><br>
@@ -13,6 +13,10 @@ Duke is a **desktop app for organising your todo tasks, deadlines and events via
 ## Features & Usage
 
 Below are a list of features and their respective commands:
+
+### `help` - displays all available commands
+
+This command shows a list of commands available in the Duke program.
 
 ### `list` - displays all current tasks
 
@@ -161,6 +165,7 @@ This command saves the data and exits the program.
 ## Command Summary
 |Action|Format/Examples  |
 |--|--|
+|**help** | `help` |
 |**list**  | `list` |
 |**done**  | `done [task number]` <br> e.g. `done 1`|
 |**todo**  | `todo [details]` <br> e.g. `todo sleep` |
@@ -172,5 +177,6 @@ This command saves the data and exits the program.
 |**bye**  | `bye` |
 
 ## Acknowledgements
-GUI code was referenced from https://se-education.org/guides/tutorials/javaFx.html. <br>
+GUI: 
+Code was referenced from https://se-education.org/guides/tutorials/javaFx.html. <br>
 GUI image was taken from https://onlyvectorbackgrounds.com/ambient-light-background-day-blue/.
