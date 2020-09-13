@@ -3,18 +3,18 @@
 Duke Task Tracker is a **desktop application for managing your tasks, optimized for use via a Command Line Interface ** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Duke Task Tracker can get your task management done faster than traditional GUI applications. 
 
 * [Features](#features)
-  * [Viewing help : **--help**](#viewing-help--help)
-  * [Adding a basic task : **todo**](#adding-a-basic-task-todo)
-  * [Adding a task with a deadline : **deadline**](#adding-a-task-with-a-deadline-deadline)
-  * [Adding a task with a date : **event**](#adding-a-task-with-a-date-event)
-  * [Listing all tasks : **list**](#listing-all-tasks-list)
-  * [Setting a task as done  : **done**](#setting-a-task-as-done-done)
-  * [Deleting a task : **delete**](#deleting-a-task-delete)
-  * [Searching for tasks : **search**](#searching-for-tasks-search)
-  * [Adding a task to reminders : **remind**](#adding-a-task-to-reminders)
-  * [Retrieving events on a date : **getEvents**](#retrieving-events-on-a-date-getevents)
-  * [Retrieving reminders : **getReminders**](#retrieving-reminders-getreminders)
-  * [Exiting the program :  **bye**](#exiting-the-program-bye)
+  * [Viewing help : **`--help`**](#viewing-help-----help)
+  * [Adding a basic task : **`todo`**](#adding-a-basic-task--todo)
+  * [Adding a task with a deadline : **`deadline`**](#adding-a-task-with-a-deadline--deadline)
+  * [Adding a task with a date : **`event`**](#adding-a-task-with-a-date--event)
+  * [Listing all tasks : **`list`**](#listing-all-tasks--list)
+  * [Setting a task as done  : **`done`**](#setting-a-task-as-done--done)
+  * [Deleting a task : **`delete`**](#deleting-a-task--delete)
+  * [Searching for tasks : **`search`**](#searching-for-tasks--search)
+  * [Adding a task to reminders : **`remind`**](#adding-a-task-to-reminders--remind)
+  * [Retrieving events on a date : **`getEvents`**](#retrieving-events-on-a-date--getevents)
+  * [Retrieving reminders : **`getReminders`**](#retrieving-reminders--getreminders)
+  * [Exiting the program :  **`bye`**](#exiting-the-program--bye)
   * [Saving the data ](#saving-the-data)
 
 ----------------------------
@@ -23,16 +23,16 @@ Duke Task Tracker is a **desktop application for managing your tasks, optimized 
 
 ### Features
 
-- words in \<....> are the user input.
-- items that have '/' before them are keywords for that command
+- words in `<....>` are the user input.
+- items that have `/` before them are keywords for that command
 
-### Viewing help : -- help
+### Viewing help : `-- help`
 
 Shows a message explaining what commands Duke Task Tracker accepts and what the command formats are.
 
 Format : --help
 
-### Adding a basic task : todo
+### Adding a basic task : `todo`
 
 Adds a task that only has a task description to the list of tasks.
 
@@ -43,7 +43,7 @@ Examples:
 - todo A new Task 
 - todo CS2100 Tutorial 4
 
-### Adding a task with a deadline : deadline
+### Adding a task with a deadline : `deadline`
 
 Adds a task that has a deadline associated with it.
 
@@ -58,7 +58,7 @@ Notes:
 
 - \<deadline description> can either be text or a date in YYYY-MM-DD format.
 
-### Adding a task with a date : event
+### Adding a task with a date : `event`
 
 Adds a task that has an event date associated with it.
 
@@ -73,13 +73,13 @@ Notes:
 
 - \<event date description> can either be text or a date in YYYY-MM-DD format.
 
-### Listing all tasks : list
+### Listing all tasks : `list`
 
 Shows a list of all tasks currently in the task list.
 
 Format: list
 
-### Setting a task as done : done
+### Setting a task as done : `done`
 
 Edits an existing task and marks it as done.
 
@@ -94,7 +94,7 @@ Notes:
 
 - \<task number> is the number that appears on the left of a task when the list of tasks is displayed.
 
-### Deleting a task : delete
+### Deleting a task : `delete`
 
 Deletes an existing task from the task list.
 
@@ -109,7 +109,7 @@ Notes:
 
 - \<task number> is the number that appears on the left of a task when the list of tasks is displayed.
 
-### Searching for tasks : search
+### Searching for tasks : `search`
 
 Searches for tasks in the list that match the keywords.
 
@@ -124,7 +124,7 @@ Notes:
 
 - search takes in multiple keywords as arguments and tasks are matched to each keyword individually.
 
-### Adding a task to reminders : remind
+### Adding a task to reminders : `remind`
 
 Adds a task to the list of reminders
 
@@ -139,7 +139,7 @@ Notes:
 
 - \<task number> is the number that appears on the left of a task when the list of tasks is displayed.
 
-### Retrieving events on a date : getEvents
+### Retrieving events on a date : `getEvents`
 
 Retrieves all tasks that take place or have deadlines on the corresponding date.
 
@@ -154,13 +154,13 @@ Notes:
 
 - \<date> must be a valid date in YYYY-MM-DD format.
 
-### Retrieving reminders : getReminders
+### Retrieving reminders : `getReminders`
 
 Retrieves all reminders.
 
 Format: getReminders
 
-### Exiting the program : bye
+### Exiting the program : `bye`
 
 Exits the program.
 
@@ -174,33 +174,33 @@ Duke Task Tracker automatically saves data in the hard disk every time a change 
 
 ## Command Summary
 
-Action | Format
+| Action | Format |
 
------------- | -------------
+| :---: | :---: |
 
-Help | --help
+| Help | `--help` |
 
-Add Basic Task | todo \<task description>
+| Add Basic Task | `todo <task description>` |
 
-Add Task with Deadline | deadline \<task description> /by \<deadline description>
+| Add Task with Deadline | `deadline <task description> /by <deadline description>` |
 
-Add Task with Event Date | event \<task description> /at \<event date description>
+| Add Task with Event Date | `event <task description> /at <event date description>` |
 
-List | list
+| List | `list` |
 
-Done | done \<task number>
+|Done | `done <task number>` |
 
-Delete | delete \<task number>
+| Delete | `delete <task number>` |
 
-Remind | remind \<task number>
+| Remind | `remind <task number>` |
 
-Search | search \<keyword1 keyword2 etc...>
+| Search | `search <keyword1 keyword2 etc...>` |
 
-getEvents | getEvents \<date>
+| getEvents | `getEvents <date>` |
 
-getReminders | getReminders
+| getReminders | `getReminders` |
 
-Exit | bye
+| Exit | `bye` |
 
 
 
