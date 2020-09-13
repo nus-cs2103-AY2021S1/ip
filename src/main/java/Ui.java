@@ -21,7 +21,8 @@ public class Ui {
      */
     protected String hello() {
         String intro = "Hello! I'm Bob\n"
-                + "What can I do for you?\n";
+                + "What can I do for you?\n"
+                + "If you need help, please type help :)\n";
         return divider + "\n" + intro + "\n" + divider;
     }
 
