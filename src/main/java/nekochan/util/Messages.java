@@ -20,10 +20,11 @@ public class Messages {
     public static final String PARSE_COMMAND_TODO_MISSING_ARGUMENT = "I know your life is empty "
             + "but your todo can't be empty.\n";
     public static final String PARSE_COMMAND_EVENT_MISSING_ARGUMENT = "Are you going somewhere without me?\n";
-    public static final String PARSE_COMMAND_SEARCH_MISSING_ARGUMENT = "I don't have the answer to everything.\n";
+    public static final String PARSE_COMMAND_SEARCH_MISSING_ARGUMENT = "Neko-chan doesn't have the "
+            + "answer to everything.\n";
     public static final String PARSE_COMMAND_UNKNOWN = "Wakarimasen~\n";
 
-    public static final String PARSE_DATETIME_ERROR = "I can't understand what you're saying...\n";
+    public static final String PARSE_DATETIME_ERROR = "Neko-chan can't understand what you're saying...\n";
 
     public static final String PARSE_TASK_DESCRIPTION_ERROR = "That's really descriptive...\n";
     public static final String PARSE_DEADLINE_DUE_DATE_ERROR = "So you never did plan on doing it huh...\n";
@@ -31,37 +32,38 @@ public class Messages {
     public static final String PARSE_EVENT_MISSING_END_DATETIME_ERROR = "Something's missing, "
             + "oh right I lost track of time.\n";
 
-    public static final String INVALID_TASK_TYPE_ERROR = "I don't understand.\n";
+    public static final String INVALID_TASK_TYPE_ERROR = "Neko-chan doesn't understand.\n";
 
     public static final String DECODE_UNEXPECTED_TYPE_ERROR = "Something doesn't seem right...\n";
 
-    public static final String MISSING_TASK_ERROR = "I couldn't find that task. Are you trying to make 2020 worse?\n";
-    public static final String DUPLICATE_TASK_ERROR = "You already have this task!\n";
-    public static final String SIMILAR_TASK_ERROR = "However, I found something similar:\n";
+    public static final String MISSING_TASK_ERROR = "Neko-chan doesn't know that much yet.\n";
+    public static final String DUPLICATE_TASK_ERROR = "Neko-chan already know this!\n";
+    public static final String SIMILAR_TASK_ERROR = "But Neko-chan found something similar:\n";
 
-    public static final String STORAGE_ERROR_UNABLE_TO_WRITE = "I didn't have enough strength to move the bits.\n";
-    public static final String STORAGE_ERROR_FOLDER_ERROR = "I got lost somewhere in your folders.\n";
-    public static final String STORAGE_ERROR_MISSING_SAVE = "I think I lost my memory... Let me start afresh.\n";
+    public static final String STORAGE_ERROR_UNABLE_TO_WRITE = "Neko-chan doesn't know how to write.\n";
+    public static final String STORAGE_ERROR_FOLDER_ERROR = "Neko-chan got lost somewhere in your folders.\n";
+    public static final String STORAGE_ERROR_MISSING_SAVE = "Neko-chan thinks she lost her memory..."
+            + " Let me start afresh.\n";
     public static final String STORAGE_ERROR_CORRUPT = "There's something wrong with my memory...\n";
 
-    public static final String HISTORY_REDO_LIMIT_EXCEEDED = "I can't tell the future!";
-    public static final String HISTORY_UNDO_LIMIT_EXCEEDED = "I've told you all I know!";
+    public static final String HISTORY_REDO_LIMIT_EXCEEDED = "Neko-chan can't tell the future!";
+    public static final String HISTORY_UNDO_LIMIT_EXCEEDED = "Neko-chan has told you all she knows!";
 
-    public static final String MESSAGE_WELCOME = "Konnichiwa!\nWhat can I do for you?\n";
-    public static final String MESSAGE_ADD = "Got it. I've added this task:\n";
-    public static final String MESSAGE_EMPTY_LIST = "Congratulations! You don't have any tasks left to do.\n";
-    public static final String MESSAGE_LIST = "Here are the tasks in your list:\n";
+    public static final String MESSAGE_WELCOME = "Konnichinyaa!\nWhat can Neko-chan do for you?\n";
+    public static final String MESSAGE_ADD = "Hai hai~ Neko-chan has added this task:\n";
+    public static final String MESSAGE_EMPTY_LIST = "Sugoi! You don't have any tasks left to do.\n";
+    public static final String MESSAGE_LIST = "Here's everything Neko-chan knows:\n";
     public static final String MESSAGE_EXIT = "Ja ne!\n";
-    public static final String MESSAGE_DELETE = "Noted. I've removed this task:\n";
-    public static final String MESSAGE_DELETE_ALL = "I've cleared all your tasks.\nYou sure are efficient.\n";
-    public static final String MESSAGE_COMPLETE = "Nice! I've marked this task as complete:\n";
-    public static final String MESSAGE_TASK_COUNT = "Now you have %d tasks in your list.\n";
-    public static final String MESSAGE_SEARCH = "Here's everything I found:\n";
-    public static final String MESSAGE_EMPTY_SEARCH = "I couldn't find anything for you.\n";
-    public static final String MESSAGE_UNDO = "You're lucky I could reverse time.\n";
+    public static final String MESSAGE_DELETE = "Hai! Neko-chan has removed this task:\n";
+    public static final String MESSAGE_DELETE_ALL = "Neko-chan has cleared all your tasks.\nYou sure are efficient!\n";
+    public static final String MESSAGE_COMPLETE = "Yay! Neko-chan has marked this task as complete:\n";
+    public static final String MESSAGE_SEARCH = "Here's everything Neko-chan found:\n";
+    public static final String MESSAGE_EMPTY_SEARCH = "Neko-chan couldn't find anything for you.\n";
+    public static final String MESSAGE_UNDO = "You're lucky Neko-chan can reverse the time.\n";
     public static final String MESSAGE_REDO = "So this is how the future looks like.\n";
+    private static final String MESSAGE_TASK_COUNT = "Neko-chan now knows %d %s.\n";
 
     public static String getTotalTaskMessage(int count) {
-        return String.format(MESSAGE_TASK_COUNT, count);
+        return String.format(MESSAGE_TASK_COUNT, count, count > 1 ? "things" : "thing");
     }
 }

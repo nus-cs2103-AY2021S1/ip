@@ -1,57 +1,57 @@
     ________________________________________________________
-     Gomen nasai~ I think I lost my memory... Let me start afresh.
+     Gomen nasai~ Neko-chan thinks she lost her memory... Let me start afresh.
     ________________________________________________________
 
     ________________________________________________________
-     Konnichiwa!
-     What can I do for you?
+     Konnichinyaa!
+     What can Neko-chan do for you?
     ________________________________________________________
 
     ________________________________________________________
-     Got it. I've added this task:
+     Hai hai~ Neko-chan has added this task:
      [T][✘] borrow book
-     Now you have 1 tasks in your list.
+     Neko-chan now knows 1 thing.
     ________________________________________________________
 
     ________________________________________________________
-     Got it. I've added this task:
+     Hai hai~ Neko-chan has added this task:
      [T][✘] read book
-     Now you have 2 tasks in your list.
+     Neko-chan now knows 2 things.
     ________________________________________________________
 
     ________________________________________________________
-     Got it. I've added this task:
+     Hai hai~ Neko-chan has added this task:
      [D][✘] return book (by: 14 Aug 2019)
-     Now you have 3 tasks in your list.
+     Neko-chan now knows 3 things.
     ________________________________________________________
 
     ________________________________________________________
-     Here are the tasks in your list:
+     Here's everything Neko-chan knows:
      1. [T][✘] borrow book
      2. [T][✘] read book
      3. [D][✘] return book (by: 14 Aug 2019)
     ________________________________________________________
 
     ________________________________________________________
-     Got it. I've added this task:
+     Hai hai~ Neko-chan has added this task:
      [E][✘] celebrate birthday (on 22 Aug 2020 for all day)
-     Now you have 4 tasks in your list.
+     Neko-chan now knows 4 things.
     ________________________________________________________
 
     ________________________________________________________
-     Got it. I've added this task:
+     Hai hai~ Neko-chan has added this task:
      [E][✘] CS2103T lecture (from 28 Aug 2020 16:00 to 28 Aug 2020 18:00)
-     Now you have 5 tasks in your list.
+     Neko-chan now knows 5 things.
     ________________________________________________________
 
     ________________________________________________________
-     Got it. I've added this task:
+     Hai hai~ Neko-chan has added this task:
      [E][✘] weekend (from 29 Aug 2020 to 31 Aug 2020)
-     Now you have 6 tasks in your list.
+     Neko-chan now knows 6 things.
     ________________________________________________________
 
     ________________________________________________________
-     Here are the tasks in your list:
+     Here's everything Neko-chan knows:
      1. [T][✘] borrow book
      2. [T][✘] read book
      3. [D][✘] return book (by: 14 Aug 2019)
@@ -65,7 +65,7 @@
     ________________________________________________________
 
     ________________________________________________________
-     Here are the tasks in your list:
+     Here's everything Neko-chan knows:
      1. [T][✘] borrow book
      2. [T][✘] read book
      3. [D][✘] return book (by: 14 Aug 2019)
@@ -79,7 +79,7 @@
     ________________________________________________________
 
     ________________________________________________________
-     Here are the tasks in your list:
+     Here's everything Neko-chan knows:
      1. [T][✘] borrow book
      2. [T][✘] read book
      3. [D][✘] return book (by: 14 Aug 2019)
@@ -117,7 +117,7 @@
     ________________________________________________________
 
     ________________________________________________________
-     Here are the tasks in your list:
+     Here's everything Neko-chan knows:
      1. [T][✘] borrow book
      2. [T][✘] read book
      3. [D][✘] return book (by: 14 Aug 2019)
@@ -127,9 +127,9 @@
     ________________________________________________________
 
     ________________________________________________________
-     Noted. I've removed this task:
+     Hai! Neko-chan has removed this task:
      [D][✘] return book (by: 14 Aug 2019)
-     Now you have 5 tasks in your list.
+     Neko-chan now knows 5 things.
     ________________________________________________________
 
     ________________________________________________________
@@ -137,13 +137,13 @@
     ________________________________________________________
 
     ________________________________________________________
-     Noted. I've removed this task:
+     Hai! Neko-chan has removed this task:
      [E][✘] CS2103T lecture (from 28 Aug 2020 16:00 to 28 Aug 2020 18:00)
-     Now you have 4 tasks in your list.
+     Neko-chan now knows 4 things.
     ________________________________________________________
 
     ________________________________________________________
-     Here are the tasks in your list:
+     Here's everything Neko-chan knows:
      1. [T][✘] borrow book
      2. [T][✘] read book
      3. [E][✘] celebrate birthday (on 22 Aug 2020 for all day)
