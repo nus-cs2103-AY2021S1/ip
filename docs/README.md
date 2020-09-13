@@ -11,7 +11,7 @@
 1. Copy **mug.jar** to the folder you want to use as the home folder for your Mug.
 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds.<br>
-   ![initialUi](images/initial.png)
+   ![initialUi](images/initialUi.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing `list` and pressing Enter will list out all saved tasks.
 
