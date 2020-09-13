@@ -42,10 +42,23 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
-        );
+
+        if (duke.isError()) {
+            dialogContainer.getChildren().addAll(
+                    UserDialogBox.getUserDialog(input, userImage),
+                    ErrorDialogBox.getErrorDialog(response, dukeImage)
+            );
+        } else {
+            dialogContainer.getChildren().addAll(
+                    UserDialogBox.getUserDialog(input, userImage),
+                    DukeDialogBox.getDukeDialog(response, dukeImage)
+            );
+        }
+
+        if (duke.isExit()) {
+            System.exit(0);
+        }
+
         userInput.clear();
     }
 

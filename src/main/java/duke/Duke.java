@@ -11,6 +11,7 @@ import duke.exceptions.DukeException;
 public class Duke {
     private TaskManager taskManager;
     private boolean isExit;
+    private boolean isError;
 
     /**
      * Initializes the logic unit behind Duke.
@@ -33,7 +34,17 @@ public class Duke {
      */
     public String getResponse(String input) {
         Command command = Parser.parse(input);
-        return command.execute(taskManager);
+        String response = command.execute(taskManager);
+        this.isError = command.isError();
+        this.isExit = command.isExit();
+        return response;
     }
 
+    public boolean isError() {
+        return isError;
+    }
+
+    public boolean isExit() {
+        return isExit;
+    }
 }

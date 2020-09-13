@@ -42,6 +42,7 @@ public class AddTodoCommand extends Command {
             Todo todo = taskManager.addTodo(content, priority);
             return MessageManager.getAddSuccessMessage(todo, taskManager);
         } catch (DukeException | IOException exception) {
+            this.isError = true;
             return exception.getMessage();
         }
     }

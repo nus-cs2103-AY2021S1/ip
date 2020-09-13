@@ -43,6 +43,7 @@ public class AddEventCommand extends Command {
             Event event = taskManager.addEvent(content, datetime, priority);
             return MessageManager.getAddSuccessMessage(event, taskManager);
         } catch (DukeException | IOException exception) {
+            this.isError = true;
             return exception.getMessage();
         }
     }

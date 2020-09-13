@@ -41,6 +41,7 @@ public class DeleteTaskCommand extends Command {
             Task task = taskManager.deleteTask(taskNumber);
             return MessageManager.getDeleteSuccessMessage(task, taskManager);
         } catch (DukeException | IOException exception) {
+            this.isError = true;
             return exception.getMessage();
         }
     }
