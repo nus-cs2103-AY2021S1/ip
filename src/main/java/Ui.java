@@ -1,9 +1,14 @@
+import javafx.stage.Stage;
+
+import java.util.concurrent.TimeUnit;
+
 /**
  * Ui class deals with all of the interactions with the user.
  */
 public class Ui {
     protected Parser parser;
     protected String divider = "____________________________________________________________";
+    protected Stage stage;
 
     /**
      * Constructor creates an Ui object.
@@ -12,6 +17,7 @@ public class Ui {
      */
     public Ui(Parser parser) {
         this.parser = parser;
+        this.stage = null;
     }
 
     /**
@@ -45,8 +51,8 @@ public class Ui {
      * @return goodbye message
      */
     protected String goodbye() {
-        String message = divider + "\n" + "Bye. Hope to see you again soon! :)" + "\n" + divider;
-        return message;
+        this.stage.close();
+        return "bye!";
     }
 
 }

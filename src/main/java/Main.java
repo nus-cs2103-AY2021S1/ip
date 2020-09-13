@@ -24,6 +24,7 @@ public class Main extends Application {
             Image icon = new Image(this.getClass().getResourceAsStream("/images/icon.jpg"));
             stage.getIcons().add(icon);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
+            duke.getUi().stage = stage;
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
