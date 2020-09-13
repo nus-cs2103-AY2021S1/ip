@@ -8,8 +8,8 @@ public class Ui {
      * @return String to greet user.
      */
     public String greetings() {
-        String greetings = "Hello! I'm Duke\n"
-                + "What can I do for you?\n";
+        String greetings = "Ciao... *evil giggle*\nI'm your Dark Side...\n"
+                + "How may I serve you? >:)\n";
         return greetings;
     }
 

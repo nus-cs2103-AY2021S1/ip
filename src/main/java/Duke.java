@@ -63,7 +63,9 @@ public class Duke {
      * Replace this stub with your completed method.
      */
     String getResponse(String input) throws DukeException {
-        return "Your Dark Side:\n" + this.run(input);
+        return "- - - - - - - - - - - - Dark Side: - - - - - - - - - - - -\n\n"
+            + this.run(input)
+            + "\n- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n";
     }
 
     /**
