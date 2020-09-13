@@ -175,7 +175,7 @@ If you have any further questions, please contact me through the email provided 
 ### Command Summary
 Action | Format
 ------------ | -------------
-Add | 1. `todo <description>` <br> 2. `deadline <description> /by <YYYY-MM-DD>` <br> 3. `event <description /at <YYYY-MM-DD>`
+Add | 1. `todo <description>` 2. `deadline <description> /by <YYYY-MM-DD>` 3. `event <description /at <YYYY-MM-DD>`
 List | `list`
 Done | `done <index>`
 Delete | `delete <index>`
