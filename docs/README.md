@@ -23,7 +23,7 @@ Alternatively, you can start Tebby in CLI mode (for advanced users) with the fol
 6. Run the program using `java -jar TebbyCLI.jar`.
 7. You should see the following CLI with a welcome message from Tebby.
 
-![sample image](samplecli.PNG)
+![sample image](samplecli.png)
 
 ---
 
