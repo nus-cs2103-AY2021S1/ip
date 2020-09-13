@@ -1,3 +1,7 @@
 T | 0 | read book
 T | 0 | break free
 T | 0 | read book
+D | 0 | homeowkr | 1234-12-30
+D | 0 | homework | 1234-12-30
+D | 0 | homework | 2013-02-28
+D | 0 |  a      | 1234-12-30

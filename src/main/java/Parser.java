@@ -221,8 +221,8 @@ public class Parser {
     private String createAndAddDeadline(String input) throws EmptyDescriptionException, WrongFormatException {
         int stringLength = input.length();
         assert stringLength >= 1 : "Input cannot be empty";
-        if (input.length() < 9 || input.substring(8).replaceAll("\\s", "").equals("")) {
-            throw new EmptyDescriptionException("deadline");
+        if (input.length() < 9 || input.substring(8, input.indexOf("/")).replaceAll("\\s", "").equals("")) {
+            return new EmptyDescriptionException("deadline").toString();
         } else if (input.contains("/by")
                 && Character.toString(input.charAt(8)).equals(" ")
                 && Character.toString(input.charAt(input.indexOf("/") + 3)).equals(" ")
@@ -232,6 +232,7 @@ public class Parser {
             if (by.matches(".*[a-zA-Z]+.*")) {
                 return new WrongFormatException("deadline").toString();
             }
+
             LocalDate date = LocalDate.parse(by);
             Task task = new Deadline(desc, date);
             return this.addTaskToTasklist(task);
