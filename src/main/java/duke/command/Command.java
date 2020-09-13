@@ -71,6 +71,12 @@ public class Command {
             case REMOVEDUPLICATES:
                 dukeResponse = removeDuplicates(tasks);
                 break;
+            case CLEAR:
+                dukeResponse = clearTaskList(tasks);
+                break;
+            case HELP:
+                dukeResponse = printHelp();
+                break;
             default:
                 if (findMatchingTasks(tasks, taskInfo).length() <= 0) {
                     throw new DukeInvalidCommandException("Sorry Poppins but I'm not sure about this command :)");
@@ -261,6 +267,31 @@ public class Command {
         tasks.removeDuplicatesExceptFirst();
         String dukeResponse = "\tDuplicates removed. Only first copies remain.\n";
         dukeResponse += printList(tasks);
+        return dukeResponse;
+    }
+
+    private String clearTaskList(TaskList tasks) {
+        tasks.clear();
+        String dukeResponse = "\tList cleared.\n";
+        dukeResponse += printList(tasks);
+        return dukeResponse;
+    }
+
+    private String printHelp() {
+        String dukeResponse = "\tI can only understand these human commands :(\n";
+        dukeResponse += "\n\n\t'help': I will tell you the only human commands I know.";
+        dukeResponse += "\n\n\t'print': I will list you all the tasks you told me.";
+        dukeResponse += "\n\n\t'todo homework': I will add homework task to the list.";
+        dukeResponse += "\n\n\t'event Christmas /at 25-12-2020 1600': I will " +
+            "add Christmas event to the list at the specified time";
+        dukeResponse += "\n\n\t'deadline homework /by 25-12-2020 1600': I will " +
+            "add homework to the list with the specified deadline";
+        dukeResponse += "\n\n\t'delete 2': I will delete task 2 from the list.";
+        dukeResponse += "\n\n\t'done 3': I will mark task 3 in the list as complete.";
+        dukeResponse += "\n\n\t'duplicate': I will list you the duplicated task.";
+        dukeResponse += "\n\n\t'remove duplicates': I will remove all duplicate tasks except the first copy.";
+        dukeResponse += "\n\n\t'clear please' : I will clear the tasks list.";
+        dukeResponse += "\n\n\t'bye': I will go away... sadly :(";
         return dukeResponse;
     }
 }

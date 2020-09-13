@@ -30,6 +30,10 @@ public class Parser {
             return new Command(CommandType.DUPLICATE, taskInfo);
         } else if (taskInfo.startsWith("remove duplicates")) {
             return new Command(CommandType.REMOVEDUPLICATES, taskInfo);
+        } else if (taskInfo.startsWith("clear please")) {
+            return new Command(CommandType.CLEAR, taskInfo);
+        } else if (taskInfo.startsWith("help")) {
+            return new Command(CommandType.HELP, taskInfo);
         } else {
             return new Command(CommandType.FINDMATCHINGTASK, taskInfo);
         }

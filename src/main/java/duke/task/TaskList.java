@@ -183,4 +183,8 @@ public class TaskList {
         }
         taskList.removeIf(task -> task == null);
     }
+
+    public void clear() {
+        taskList.clear();
+    }
 }

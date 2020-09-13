@@ -16,6 +16,7 @@ import duke.task.Events;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.TaskType;
+import duke.task.TimedTask;
 import duke.task.ToDos;
 
 /**
@@ -162,12 +163,9 @@ public class Storage {
             String when = "";
             switch(taskType.returnTaskSymbol()) {
             case 'D' :
-                Deadlines deadline = (Deadlines) tasks.get(i);
-                when = " : " + deadline.returnTime().trim();
-                break;
             case 'E' :
-                Events event = (Events) tasks.get(i);
-                when = " : " + event.returnTime().trim();
+                TimedTask timedTask = (TimedTask) tasks.get(i);
+                when = " : " + timedTask.returnTime().trim();
                 break;
             default :
                 break;

@@ -9,7 +9,7 @@ import java.time.format.DateTimeParseException;
  *
  * @author Alvin Chee
  */
-public class Deadlines extends Task {
+public class Deadlines extends TimedTask {
     private String by;
     private LocalDateTime localDateTime;
     private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd MMM yyyy h:mm a");
@@ -27,7 +27,7 @@ public class Deadlines extends Task {
             this.localDateTime = LocalDateTime.parse(by, DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));;
         } catch (DateTimeParseException e) {
             throw new DukeDateTimeParseException("Please input the date and time in yyyy-MM-dd HHmm format"
-                    + " with the correct values\n\teg. event hackathon /by 2014-12-25 1630");
+                    + " with the correct values\n\teg. deadline hackathon /by 2014-12-25 1630");
         }
 
     }
@@ -37,6 +37,7 @@ public class Deadlines extends Task {
      *
      * @return String description of deadline.
      */
+    @Override
     public String returnTime() {
         return this.by;
     }

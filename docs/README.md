@@ -1,4 +1,7 @@
-# User Guide
+# **User Guide for Duck**
+
+## Introduction
+
 
 ## Features 
 

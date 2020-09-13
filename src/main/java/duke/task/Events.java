@@ -9,7 +9,7 @@ import java.time.format.DateTimeParseException;
  *
  * @author Alvin Chee
  */
-public class Events extends Task {
+public class Events extends TimedTask {
     private String at;
     private LocalDateTime localDateTime;
     private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd MMM yyyy h:mm a");
@@ -38,6 +38,7 @@ public class Events extends Task {
      *
      * @return String description of deadline.
      */
+    @Override
     public String returnTime() {
         return this.at;
     }
