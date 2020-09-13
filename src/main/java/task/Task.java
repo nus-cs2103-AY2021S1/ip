@@ -15,6 +15,7 @@ public abstract class Task {
      *
      * @param task
      * @param isCompleted
+     * @param priority 
      */
     public Task(String task, boolean isCompleted, int priority) {
         this.task = task;
@@ -26,12 +27,12 @@ public abstract class Task {
         return task;
     }
 
-    public boolean isCompleted() {
-        return isCompleted;
-    }
-
     public int getPriority() {
         return priority;
+    }
+
+    public boolean isCompleted() {
+        return isCompleted;
     }
 
     /**
