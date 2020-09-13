@@ -8,7 +8,7 @@ Duke is a **desktop app for organising your todo tasks, deadlines and events via
 3. Copy the file to the folder you want to use as the _home folder_ for your Duke.
 4. Double-click the file to start the app.
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`list`** and pressing Enter will display your tasks. The GUI similar to the below should appear within a second. <br><br>
-![GUI](https://github.com/m0nggh/ip/blob/master/docs/Ui.PNG)
+![GUI](https://github.com/m0nggh/ip/blob/master/docs/Ui.png)
 
 ## Features & Usage
 
