@@ -3,6 +3,24 @@
 ## Introduction
 A simple guide to get you kick started on how to easily use this CLI app to create and manage your personal TaskList
 ## Features 
+
+<details>
+<summary>
+View Function
+</summary>
+## `list`
+<br>
+**Command to view tasks**
+<br>
+
+* Type in `list`
+* List of all tasks currently contained in tasklist will be shown
+<br>
+<br>
+
+![list](./Images/list.png)
+<hr>
+</details>
 <details>
 <summary>
 Add Functions
@@ -107,7 +125,49 @@ Search Via Date
 
 ![schedule](./Images/schedule.png)
 </details>
+<hr>
 </details>
+
+<details>
+<summary>
+Update functions
+</summary>
+<br>
+
+**Commands to edit tasklist**
+<br>
+<details>
+<summary>
+Change Task Status
+</summary>
+
+## `done`
+<br>
+
+* Type in `done` followed by task number which you wish to mark as done
+* Status icon of task will be changed
+<br>
+<br>
+
+![done](./Images/done.png)
+</details>
+<details>
+<summary>
+Delete Task
+</summary>
+
+## `delete`
+<br>
+
+* Type in `delete` followed by task number of task you wish to remove from tasklist
+* Task with corresponding number entered will be removed
+<br>
+<br>
+
+![delete](./Images/delete.png)
+</details>
+</details>
+
 ## Usage
 
 ### `Keyword` - Describe action
