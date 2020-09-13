@@ -1,6 +1,5 @@
 package rogue.logic.parser;
 
-import rogue.logic.directives.exceptions.ExecutionException;
 import rogue.logic.parser.exceptions.IncorrectInputException;
 
 import org.junit.jupiter.api.Test;
@@ -10,11 +9,11 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class ParserTest {
     @Test
     public void createExe_invalidArguments_exceptionThrown() {
-        assertThrows(ExecutionException.class, () -> {
+        assertThrows(IncorrectInputException.class, () -> {
             Parser.createExe("done book");
         });
 
-        assertThrows(ExecutionException.class, () -> {
+        assertThrows(IncorrectInputException.class, () -> {
             Parser.createExe("delete note");
         });
     }
