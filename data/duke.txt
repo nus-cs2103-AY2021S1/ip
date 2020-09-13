@@ -2,6 +2,5 @@ E , 1 , read book , 2020-08-01
 E , 0 , eat book , 2015-04-12
 D , 1 , dinner , 2012-01-02
 T , 1 , book taxi , 
-D , 0 , jump off building , 2020-09-05
 D , 0 , drink bleach , 2020-09-05
-T , 0 , fh , 
+D , 0 , tutorial , 2020-09-24

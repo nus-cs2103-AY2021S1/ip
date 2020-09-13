@@ -16,7 +16,7 @@ public class FindCommand extends Command {
     static String keyword;
 
     public FindCommand(String keyword) {
-        this.keyword = keyword.trim();
+        this.keyword = keyword.trim().toLowerCase();
     }
 
     /**
@@ -32,7 +32,7 @@ public class FindCommand extends Command {
     public String execute(TaskList tasks, OutputUi ui, Storage storage) {
         ArrayList<Task> relevantTasks = new ArrayList<>();
         for (Task t : tasks.getTasklist()) {
-            if (t.getDescription().contains(keyword)) {
+            if (t.getDescription().toLowerCase().contains(keyword)) {
                 relevantTasks.add(t);
             }
         }
