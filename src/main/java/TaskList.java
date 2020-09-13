@@ -114,7 +114,7 @@ public class TaskList implements Iterable<Task> {
                                 + "  %s\nYou still have %d tasks in your list.\n", temp.toString(), item.toString(),
                         this.getListOfItems().size());
             } else {
-                return (new DukeException("Unable to detect class")).toString();
+                return (new DukeException("ToDo Task detected. Unable to reschedule")).toString();
             }
         } catch (Exception e) {
             return (new DukeException("Unable reschedule the specified Task")).toString();
