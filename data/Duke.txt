@@ -5,3 +5,5 @@
 5.[D][✗] GES project report (by: 22 Sep 2020)
 6.[E][✗] Football game (at: Sat 2pm)
 7.[T][✓] Repair car headlights
+8.[T][✗] Get a haircut
+9.[E][✗] One Direction concert  (at: Friday 6pm)
