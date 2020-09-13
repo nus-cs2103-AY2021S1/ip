@@ -28,7 +28,7 @@ Expected result:
 
 ###### Adds a todo task to the tasks list.
 
-**Usage: "todo  <task>"**
+**Usage: "todo (task)"**
 
 **_Example: "todo homework"_**
 
@@ -41,7 +41,7 @@ Expected result:
 
 ###### Adds a task with a specified deadline to the tasks list.
 
-**Usage: "deadline  <task>  by / <deadline in MM-DD-YYYY hhmm format> "**
+**Usage: "deadline (task) by / (deadline in MM-DD-YYYY hhmm format) "**
 
 **_Example: "deadline homework /by 2014-12-25 1630"_**
 
@@ -54,7 +54,7 @@ Expected result:
 
 ###### Adds a task with a specified event time to the tasks list.
 
-**Usage: "event  <task>  at / <deadline in MM-DD-YYYY hhmm format> "**
+**Usage: "event  (task)  at / (deadline in MM-DD-YYYY hhmm format) "**
 
 **_Example: "event hackathon /at 2014-12-25 1630"_**
 
@@ -81,7 +81,7 @@ Expected result:
 
 ###### Marks a task as done in the tasks list.
 
-**Usage: "done  <task number>"**
+**Usage: "done (task number)"**
 
 **_Example: "done 2"_**
 
@@ -94,7 +94,7 @@ Expected result:
 
 ###### Deletes a task from the tasks list.
 
-**Usage: "delete  <task number>"**
+**Usage: "delete (task number)"**
 
 **_Example: "delete 2"_**
 
