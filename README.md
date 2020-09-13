@@ -1,26 +1,172 @@
-# Duke project template
+# User Guide
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+Duke is a **desktop app for tracking down todos, deadlines and events for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Duke can get your tasks management done faster than traditional GUI apps.
 
-## Setting up in Intellij
+* [Quick Start](#quick-start)
+* [Features](#features)
+	* [Adding a task](#adding-a-task)
+		* [Adding a todo: `todo`](#adding-a-todo-todo)
+		* [Adding a deadline: `deadline`](#adding-a-deadline-deadline)
+		* [Adding an event: `event`](#adding-an-event-event)
+	* [Marking a task as done: `done`](#marking-a-task-as-done-done)
+	* [Listing all tasks: `list`](#listing-all-tasks-list)
+	* [Locating a task by name: `find`](#locating-a-task-by-name-find)
+	* [Displaying all tasks on a specific date: `tasks on`](#displaying-all-tasks-on-a-specific-date-tasks-on)
+	* [Archiving a task: `archive`](#archiving-a-task-archive)
+	* [Unarchiving a task: `unarchive`](#unarchiving-a-task-unarchive)
+	* [Deleting a task: `delete`](#deleting-a-task-delete)
+	* [Exiting the program: `bye`](#exiting-the-program-bye)
+* [Command Summary](#command-summary)
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+## Quick Start
+1. Ensure you have Java `11` or above installed in your Computer.
+2. Download the latest Duke.jar from [here](https://github.com/FH-30/ip/releases/tag/A-Release).
+3. Copy the file to the folder you want to use as the home folder for your AddressBook.
+4. Double-click the file to start the app. The GUI similar to the one below should appear in a few seconds. **If not able to, you can open terminal in that directory and run: `java -jar <filename>`**
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project dialog first)
-1. Set up the correct JDK version, as follows:
-   1. Click `Configure` > `Structure for New Projects` and then `Project Settings` > `Project` > `Project SDK`
-   1. If JDK 11 is listed in the drop down, select it. If it is not, click `New...` and select the directory where you installed JDK 11
-   1. Click `OK`
-1. Import the project into Intellij as follows:
-   1. Click `Open or Import`.
-   1. Select the project directory, and click `OK`
-   1. If there are any further prompts, accept the defaults.
-1. After the importing is complete, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()`. If the setup is correct, you should see something like the below:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+<div align = "center">
+  <img src="https://github.com/FH-30/ip/blob/master/docs/Ui.png"/>
+</div>
+
+5. Type the command in the command box and press Enter or click Send to execute it. e.g. typing `list` and pressing Enter or clicking Send will list all your current tasks.
+Some example commands you can try:
+	* `todo wash car` : Adds a task called wash car into your list.
+	* `done 1`: Marks the 1st task in the current list.
+	* `delete 1`: Deletes the 1st task in the current list.
+	* `bye`: Exits the app.
+6. Refer to the Features below for details of each command.
+
+## Features 
+
+### Adding a task
+
+#### Adding a todo: `todo`
+
+Adds a task to the list.
+
+Format: `todo TASK`
+
+Examples:
+* `todo wash car`
+* `todo clean house`
+
+#### Adding a deadline: `deadline`
+
+Adds a deadline to the list.
+
+Format: `deadline TASK /by dd/mm/yyyy hh:mm`
+
+Examples:
+* deadline return book /by 22/08/2020 18:00
+* deadline finish project /by 25/08/2020 20:00
+
+#### Adding an event: `event`
+
+Adds an event to the list.
+
+Format: `event TASK /at dd/mm/yyyy hh:mm`
+
+Examples:
+* event attend seminar /at 23/09/2020 13:00
+* event project meeting /at 26/09/2020 20:00
+
+### Marking a task as done: `done`
+
+Marks a task in the list as done.
+
+Format `done INDEX`
+
+Examples:
+* `done 1`
+* `done 2`
+
+### Listing all tasks: `list`
+
+Shows a list of all Tasks in the list.
+
+Format: `list`
+
+Additional tags:
+* `-a`: Includes archived tasks
+
+Examples:
+* `list`
+* `list -a`
+
+
+###  Locating a task by name: `find`
+
+Finds tasks whose description contains the given keyword.
+
+Format: `find KEYWORD`
+
+Examples:
+* `find project`
+* `find wedding`
+
+### Displaying all tasks on a specific date: `tasks on`
+
+Displays all tasks that occur on the given date.
+
+Format: `tasks on dd/mm/yyyy`
+
+Examples:
+* `tasks on 15/09/2020`
+* `tasks on 27/08/2020`
+
+### Archiving a task: `archive`
+
+Archives a task in the list.
+
+Format: `archive INDEX`
+
+Examples:
+* `archive 1`
+* `archive 2`
+
+### Unarchiving a task: `unarchive`
+
+Unarchives a task in the archived list.
+
+Format: `unarchive INDEX`
+
+Examples:
+* `unarchive 1`
+* `unarchive 2`
+
+### Deleting a task: `delete`
+
+Deletes a task in the list.
+
+Format: `delete INDEX`
+
+Examples:
+	
+* `delete 1`
+* `delete 2`
+
+### Exiting the program: `bye`
+
+Exits the program.
+
+Format: `bye`
+
+### Saving the data
+
+Duke data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+
+### Command summary
+
+Action | Format
+-------|-------
+todo | `todo TASK`
+deadline | `deadline TASK /by dd/mm/yyyy hh:mm`
+event | `event TASK /at dd/mm/yyyy hh:mm`
+done | `done INDEX`
+list | `list` or `list -a` to include archived tasks
+find | `find KEYWORD`
+tasks on | `tasks on dd/mm/yyyy`
+archive | `archive INDEX`
+unarchive | `unarchive INDEX`
+delete | `delete INDEX`
+bye | `bye`
