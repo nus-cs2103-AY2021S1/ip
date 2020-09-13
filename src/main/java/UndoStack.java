@@ -35,7 +35,7 @@ public class UndoStack {
     /**
      * Gets the previous list of tasks.
      * @return previous list of tasks.
-     * @throws UndoException
+     * @throws UndoException the exception for invalid user input.
      */
     public static TaskList getPreviousTaskList() throws UndoException {
         if (stack.size() == 0) {
