@@ -45,7 +45,7 @@ https://www.oracle.com/technetwork/java/javase/downloads/jdk11-downloads-5066655
 </a>
 
 * Mac / Linux / Windows <br/>
-    Double click the jar file to run or `java -jar Duke-0.1.3.jar` in the path where you have the jar file.
+    Double click the jar file to run or `java -jar Duke-0.1.4.jar` in the path where you have the jar file.
 
 ## Features 
 * Add different types of task _e.g._ `todo`, `deadline`, `event`
