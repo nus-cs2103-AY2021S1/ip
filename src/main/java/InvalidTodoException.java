@@ -1,5 +1,5 @@
 /**
- * The program runs into a invalid Todo input exception
+ * The program runs into a invalid Todo input exception.
  */
 public class InvalidTodoException extends DukeException {
     public InvalidTodoException() {

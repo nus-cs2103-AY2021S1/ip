@@ -1,10 +1,16 @@
 import java.util.ArrayList;
-
+/**
+ * A tasklist that handles corresponding task-related jobs.
+ */
 public class TaskList {
-
 
     private ArrayList<Task> tasks = new ArrayList<Task>();
 
+    /**
+     * Returns the task with corresponding keyword.
+     * @param keyword The keyword to find corresponding task.
+     * @return the String description with corresponding keyword.
+     */
     public String findTask(String keyword) {
         ArrayList<Task> listOfFoundItems = new ArrayList<Task>();
         String output = "";
@@ -31,12 +37,21 @@ public class TaskList {
         return output;
     }
 
-
+    /**
+     * Returns the String with added task.
+     * @param myTask The task being added.
+     * @return the String for task added.
+     */
     public String addTask(Task myTask) {
         this.tasks.add(myTask);
         return "added: " + myTask;
     }
 
+    /**
+     * Returns the String with deleted task.
+     * @param index The task index.
+     * @return the String for task deleted.
+     */
     public String deleteTask(int index) {
         assert this.tasks.size() > index;
         Task myTask = this.tasks.get(index);
@@ -44,10 +59,18 @@ public class TaskList {
         return "removed: " + myTask;
     }
 
+    /**
+     * Returns the list of tasks in TaskList.
+     * @return a list of tasks.
+     */
     public ArrayList<Task> getTasks() {
         return this.tasks;
     }
 
+    /**
+     * Returns a String showing tasks in the tasklist.
+     * @return a String description for a list of tasks.
+     */
     public String showList() {
         int iterator = 1;
         String output = "Here are the tasks in your list:\n";
@@ -58,6 +81,10 @@ public class TaskList {
         return output;
     }
 
+    /**
+     * Returns the number of task completed.
+     * @return an integer of number of task completed.
+     */
     public String numberOfTaskCompleted() {
         int number = 0;
         String output = "Number of task completed: ";

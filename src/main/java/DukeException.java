@@ -1,5 +1,5 @@
 /**
- * Give the message of what problem the program runs into.
+ * A type of Exception thrown by Duke.
  */
 public class DukeException extends Exception {
     public DukeException(String errorMessage) {

@@ -21,6 +21,7 @@ public class Main extends Application {
     public void start(Stage stage) {
         try {
             duke.storage.createDirectory("TaskList");
+            duke.storage.updateList(duke.tasks);
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);

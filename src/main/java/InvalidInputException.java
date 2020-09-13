@@ -1,5 +1,5 @@
 /**
- * The program runs into a invalid Input exception
+ * The program runs into a invalid Input exception.
  */
 public class InvalidInputException extends DukeException {
     public InvalidInputException() {
