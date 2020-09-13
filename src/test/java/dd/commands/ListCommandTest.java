@@ -20,7 +20,9 @@ public class ListCommandTest {
 
     @Test
     public void list_success() throws DukeException {
-        String res = "Here is your current list of task(s)!\n1. [T][✘] borrow book\n";
+        String res = "Here is your current list of task(s)!\n"
+                + "**************************************************\n"
+                + "1. [T][✘] borrow book\n";
 
         Todo t = new Todo("borrow book");
         ArrayList<Task> a = new ArrayList<>();
@@ -41,6 +43,7 @@ public class ListCommandTest {
     @Test
     public void checkDate_success() throws DukeException {
         String res = "Here is your list of task(s) on 31-12-2020:\n"
+                + "**************************************************\n"
                 + "1. [D][✘] return book (by: 31 Dec 2020)\n";
 
         Todo t = new Todo("borrow book");
@@ -121,6 +124,7 @@ public class ListCommandTest {
     @Test
     public void checkDesc_success() throws DukeException {
         String res = "Here is the list of task(s) related to book:\n"
+                + "**************************************************\n"
                 + "1. [T][✘] borrow book\n"
                 + "2. [D][✘] return book (by: 31 Dec 2020)\n";
 
