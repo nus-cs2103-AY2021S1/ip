@@ -44,11 +44,11 @@ test {
 }
 
 application {
-    mainClassName = "duke.duke.Launcher"
+    mainClassName = "duke.gui.Launcher"
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "gui"
     archiveClassifier = null
 }
 
@@ -64,7 +64,7 @@ run {
 jar {
     manifest {
         attributes(
-                'Main-Class': 'duke.duke.Launcher'
+                'Main-Class': 'duke.gui.Launcher'
         )
     }
 }

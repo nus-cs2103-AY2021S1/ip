@@ -1,4 +1,4 @@
-package duke.duke;
+package duke.gui;
 
 import java.io.File;
 
@@ -48,7 +48,7 @@ public class Duke extends Application {
      * to null.
      */
     public Duke() {
-        store = new Storage("./data", "duke.txt");
+        store = new Storage("./data", "gui.txt");
         this.ui = new UI();
         File loadFile = store.loadData(ui);
         if (loadFile == null) {
@@ -104,7 +104,7 @@ public class Duke extends Application {
      * @param args Command line arguments.
      */
     public static void main(String[] args) {
-        Duke duke = new Duke("./data", "duke.txt");
+        Duke duke = new Duke("./data", "gui.txt");
         duke.run();
     }
 
