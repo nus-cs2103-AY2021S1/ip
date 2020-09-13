@@ -1,4 +1,4 @@
-# mamba project template
+# MAMBA project template
 
 This is a project template for a greenfield Java project. It's named after the NBA Los Angles Lakers Legend _Kobe Bryant_. Given below are instructions on how to use it.
 
