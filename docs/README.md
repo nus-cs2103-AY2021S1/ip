@@ -126,14 +126,14 @@ Format: `exit`<br><br>
 
 
 ## Command Summary
-Action            | Format, Examples
-------------------|---------------------------------
-Add todo task     | `todo DESCRIPTION` <br> e.g.: `todo homework`
-Add deadline task | `deadline DESCRIPTION /by DATE TIME` <br> e.g.: `deadline homework /by 2020/09/15 2359`
-Add event task    | `event DESCRIPTION /at DATE TIME` <br> e.g.: `event dinner /at 2020/09/15 1900`
-Done              | `done TASK_NUMBER` <br> e.g.: `done 1`
-Delete            | `delete TASK_NUMBER` <br> e.g.: `delete 1`
-List              | `list`
-Find              | `find KEYWORD` <br> e.g.: `find work`
-Undo              | `undo`
-Exit              | `exit`
+Action  | Format, Examples
+--------|-----------------
+**Add todo task** | `todo DESCRIPTION` <br> e.g.: `todo homework`
+**Add deadline task** | `deadline DESCRIPTION /by DATE TIME` <br> e.g.: `deadline homework /by 2020/09/15 2359`
+**Add event task** | `event DESCRIPTION /at DATE TIME` <br> e.g.: `event dinner /at 2020/09/15 1900`
+**Done** | `done TASK_NUMBER` <br> e.g.: `done 1`
+**Delete** | `delete TASK_NUMBER` <br> e.g.: `delete 1`
+**List** | `list`
+**Find** | `find KEYWORD` <br> e.g.: `find work`
+**Undo** | `undo`
+**Exit** | `exit`
