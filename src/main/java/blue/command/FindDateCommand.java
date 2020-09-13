@@ -15,7 +15,7 @@ public class FindDateCommand extends FindCommand {
     /**
      * The Date.
      */
-    private final LocalDate date;
+    protected final LocalDate date;
 
     /**
      * Instantiates a new Find date command.

@@ -97,6 +97,7 @@ public class Event extends Task {
     /**
      * Returns the formatted time.
      *
+     * @param time the time.
      * @return the formatted time.
      */
     private String getFormattedTime(LocalTime time) {

@@ -11,6 +11,7 @@ import blue.command.DeleteCommand;
 import blue.command.DoneCommand;
 import blue.command.FindDateCommand;
 import blue.command.FindDescriptionCommand;
+import blue.command.FindTodayCommand;
 import blue.command.ListCommand;
 import blue.command.TaskCommand;
 import blue.exception.BlueException;
@@ -329,6 +330,6 @@ public class Parser {
      * @return the find date command.
      */
     private static FindDateCommand getTodayCommand() {
-        return new FindDateCommand(LocalDate.now());
+        return new FindTodayCommand();
     }
 }

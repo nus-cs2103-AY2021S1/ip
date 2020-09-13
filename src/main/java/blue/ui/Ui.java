@@ -93,6 +93,22 @@ public class Ui {
     }
 
     /**
+     * Returns tasks found with today's date.
+     *
+     * @param list the list.
+     * @return the found message.
+     */
+    public String getFoundMessage(ArrayList<Task> list) {
+        if (list.isEmpty()) {
+            return String.format("There are no tasks today!\n");
+        }
+
+        String intro = "Here are today's tasks:\n";
+        StringBuilder builder = new StringBuilder(intro);
+        return this.getListItems(builder, list).toString();
+    }
+
+    /**
      * Returns tasks found with the date.
      *
      * @param localDate the date.
@@ -108,9 +124,7 @@ public class Ui {
         }
 
         String intro = String.format("Here are the tasks that I've found on %s:\n", formattedDate);
-        if (localDate.compareTo(LocalDate.now()) == 0) {
-            intro = "Here are today's tasks:\n";
-        }
+
         StringBuilder builder = new StringBuilder(intro);
         return this.getListItems(builder, list).toString();
     }
