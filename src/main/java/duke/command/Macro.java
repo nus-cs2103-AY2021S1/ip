@@ -39,10 +39,16 @@ public class Macro {
         String[] inputSplitBySemicolon = declaration.split(" *; *");
         String[] macroNameAndArgs = inputSplitBySemicolon[0].split("\\s+");
         String[] commands = Arrays.copyOfRange(inputSplitBySemicolon, 1, inputSplitBySemicolon.length);
+        String macroName = macroNameAndArgs[0];
+        Options options = parseOptions(Arrays.copyOfRange(macroNameAndArgs, 1, macroNameAndArgs.length));
+        return new Macro(macroName, Arrays.asList(commands), options);
+    }
+
+    private static Options parseOptions(String[] macroArgs) throws DukeException {
         Options options = new Options();
         try {
-            for (int i = 1; i < macroNameAndArgs.length; i++) {
-                String name = macroNameAndArgs[i];
+            for (int i = 0; i < macroArgs.length; i++) {
+                String name = macroArgs[i];
                 String description = "macro argument " + name;
                 Option option = new Option(name, true, description);
                 option.setRequired(true);
@@ -51,7 +57,7 @@ public class Macro {
         } catch (IllegalArgumentException e) {
             throw DukeException.Errors.MACRO_DEFINITION_ERROR.create();
         }
-        return new Macro(macroNameAndArgs[0], Arrays.asList(commands), options);
+        return options;
     }
 
     public String getName() {
@@ -77,6 +83,8 @@ public class Macro {
                 parser.parseAndRun(commands[lastCommandIndex]);
             }
         } catch (DukeException e) {
+            /* note: not factoring out code below because its only used here and its
+               purpose/what it's doing is obvious. */
             DukeCustomException toThrow = new DukeCustomException(e.getMessage());
 
             String errorLocation = "An error occurred when executing this command:\n"
