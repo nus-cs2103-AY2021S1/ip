@@ -1,4 +1,4 @@
-# Duke User Guide [![Github](./GitHub-Mark-32px.png)](https://github.com/ZoroarkDarkrai/ip)
+# User Guide
 ## Quick start
 
 1. Ensure you have Java `11` or above installed in your Computer.
