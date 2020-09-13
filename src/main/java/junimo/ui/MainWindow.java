@@ -52,6 +52,7 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, junimoImage)
         );
         userInput.clear();
+        assert userInput == null;
     }
 
     /**
