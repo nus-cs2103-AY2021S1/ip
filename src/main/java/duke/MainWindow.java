@@ -1,5 +1,7 @@
 package duke;
 
+import java.util.concurrent.CompletableFuture;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -32,6 +34,8 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.prefWidthProperty().bind(scrollPane.widthProperty().add(-15));
+        dialogContainer.prefHeightProperty().bind(scrollPane.heightProperty());
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog("Hello! I'm Duke!\nWhat can I do?", dukeImage)
         );
@@ -58,6 +62,17 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
+        CompletableFuture.runAsync(() -> {
+            try {
+                if (input.equals("bye")) {
+                    Thread.sleep(1000);
+                    System.exit(0);
+                }
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                System.exit(1);
+            }
+        });
         userInput.clear();
     }
 }

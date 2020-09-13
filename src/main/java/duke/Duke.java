@@ -47,7 +47,8 @@ public class Duke {
      * Returns responses after parsing user commands.
      */
     public String getResponse(String input) throws DukeException {
-        return Parser.parse(input).execute(taskItems, ui, storage);
+        Command command = Parser.parse(input);
+        return command.execute(taskItems, ui, storage);
     }
 
     /** * Executes the Duke process.

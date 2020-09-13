@@ -30,6 +30,10 @@ public class TriviaCommand extends Command {
      */
     @Override
     public String execute(TaskList taskItems, Ui ui, Storage storage) throws DukeException {
+        boolean hasDuplicates = taskItems.findIfDuplicateExists(task);
+        if (hasDuplicates) {
+            throw new DukeException("Duplicate Trivia Added");
+        }
         taskItems.addTask(task);
         storage.saveTaskToMemory(taskItems.getAll());
         return ui.addTriviaReply(task, taskItems);

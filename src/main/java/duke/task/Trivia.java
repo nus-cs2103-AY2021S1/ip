@@ -13,7 +13,7 @@ public class Trivia extends Task {
      * @param triviaAnswer answer to the trivia question.
      */
     public Trivia(String triviaQuestion, String triviaAnswer) {
-        super(triviaQuestion);
+        super(triviaQuestion + triviaAnswer);
         this.triviaQuestion = triviaQuestion;
         this.triviaAnswer = triviaAnswer;
     }
@@ -34,6 +34,14 @@ public class Trivia extends Task {
     @Override
     public boolean getIsDone() throws DukeException {
         throw new DukeException("Cannot mark trivia as done");
+    }
+
+    @Override
+    public boolean checkIfDuplicate(Task otherTask) {
+        if (otherTask instanceof Trivia) {
+            return super.checkIfDuplicate(otherTask);
+        }
+        return false;
     }
 
     @Override
