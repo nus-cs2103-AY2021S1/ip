@@ -45,7 +45,7 @@ public class Parser {
                     return ui.addLines(taskList.add(Deadline.createDeadline(arr[1])));
 
                 } catch (ArrayIndexOutOfBoundsException e) {
-                    return (new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.", e))
+                    return (new DukeException("OOPS!!! The description of a deadline cannot be empty.", e))
                             .toString();
                 }
             case TODO:
@@ -55,7 +55,7 @@ public class Parser {
                     return ui.addLines(taskList.add(item));
 
                 } catch (Exception e) {
-                    return (new DukeException("☹ OOPS!!! The description of a todo cannot be empty.", e)).toString();
+                    return (new DukeException("OOPS!!! The description of a todo cannot be empty.", e)).toString();
                 }
             case EVENT:
                 try {
@@ -63,7 +63,7 @@ public class Parser {
                     return ui.addLines(taskList.add(Event.createEvent(arr[1])));
 
                 } catch (Exception e) {
-                    return (new DukeException("☹ OOPS!!! The description of a event cannot be empty.", e)).toString();
+                    return (new DukeException("OOPS!!! The description of a event cannot be empty.", e)).toString();
                 }
             case DELETE:
                 try {
@@ -72,7 +72,7 @@ public class Parser {
                     return ui.addLines(taskList.deleteTask(index2));
 
                 } catch (Exception e) {
-                    return (new DukeException("☹ OOPS!!! There is no task at that list number to delete!", e))
+                    return (new DukeException("OOPS!!! There is no task at that list number to delete!", e))
                              .toString();
                 }
             case FIND:
@@ -86,7 +86,7 @@ public class Parser {
                     String taskToChange = arr[1];
                     return ui.addLines(taskList.rescheduleTask(taskToChange));
                 } catch (Exception e) {
-                    return (new DukeException("☹ OOPS!!! The description to reschedule a task cannot be empty", e))
+                    return (new DukeException("OOPS!!! The description to reschedule a task cannot be empty", e))
                                 .toString();
                 }
             default: return "Unable to parse";

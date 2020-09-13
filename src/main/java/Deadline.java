@@ -28,7 +28,7 @@ public class Deadline extends Task {
      */
     public static Deadline createDeadline(String str) {
         if (str == null) {
-            throw new DukeException("I need something to work with.");
+            throw new DukeException("Luigi wonders why the string is null");
         }
         String[] detailsArray = str.split("/by", 2);
         try {

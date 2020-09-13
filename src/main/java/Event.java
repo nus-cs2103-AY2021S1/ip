@@ -27,7 +27,7 @@ public class Event extends Task {
      */
     public static Event createEvent(String details) {
         if (details == null) {
-            throw new DukeException("missing details");
+            throw new DukeException("luigi thinks you are missing details");
         }
         String[] detailsArray = details.split("/at", 2);
         try {

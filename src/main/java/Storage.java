@@ -8,7 +8,7 @@ import java.nio.file.Paths;
 import java.util.Scanner;
 
 /**
- * Storage class handles saving and loading of data from the hardrive
+ * Storage class handles saving and loading of data from the hard-drive
  */
 public class Storage {
 

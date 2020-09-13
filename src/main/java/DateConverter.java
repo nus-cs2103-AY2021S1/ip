@@ -16,13 +16,13 @@ public class DateConverter {
 
     private static final List<String> ACCEPTED_FORMATS_DATE_ONLY = Arrays.asList("d MMM yyyy", "d-M-yyyy", "d/M/yyyy");
     private static final int HAS_TIME_INDICATOR = 0;
-    private static final int NULL_TIME_INDICATOR = 30;
+    private static final int NO_TIME_INDICATOR = 30;
 
     /**
-     * compares accepted date formats with the string input. If it matches, it will create the Date in the fomrat
+     * compares accepted date formats with the string input. If it matches, it will create the Date in the format
      *
      * @param input String containing date
-     * @return LoacalDateTime object
+     * @return LocalDateTime object
      */
     @SuppressWarnings("checkstyle:EmptyCatchBlock")
     public static LocalDateTime parseString(String input) {
@@ -38,7 +38,7 @@ public class DateConverter {
             for (String format : ACCEPTED_FORMATS_DATE_ONLY) {
                 try {
                     return LocalDate.parse(input, DateTimeFormatter.ofPattern(format)).atStartOfDay()
-                            .withSecond(NULL_TIME_INDICATOR);
+                            .withSecond(NO_TIME_INDICATOR);
                 } catch (DateTimeParseException ignored) {
                 }
             }
@@ -55,7 +55,7 @@ public class DateConverter {
      * @return String form of dateTime
      */
     public static String parseLocalDateTime(LocalDateTime dateTime) {
-        if (dateTime.getSecond() == 30) {
+        if (dateTime.getSecond() == NO_TIME_INDICATOR) {
             return dateTime.format(DateTimeFormatter.ofPattern(ACCEPTED_FORMATS_DATE_ONLY.get(0)));
         } else {
             return dateTime.format(DateTimeFormatter.ofPattern(ACCEPTED_FORMATS_WITH_TIME.get(0)));

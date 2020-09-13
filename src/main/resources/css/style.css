@@ -11,11 +11,11 @@
     -fx-background-radius: 15;
     -fx-padding: 30px;
     -fx-border-insets: 5px;
-    -fx-background-insets: 5px;
     -fx-border-radius: 5;
+    -fx-background-insets: 5px;
     -fx-text-fill: black;
     -fx-font-weight: bold;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0.5, 0.0, 0.0);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0.1, 0.2), 10, 0.5, 0.0, 0.0);
 }
 
 
