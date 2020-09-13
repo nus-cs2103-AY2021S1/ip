@@ -1,5 +1,9 @@
 package duke;
+import duke.exception.DukeException;
+import duke.parser.Parser;
+import duke.storage.Storage;
 import duke.task.TaskList;
+import duke.ui.Ui;
 
 public class Duke {
     private static final String logo = " ____        _        \n"
@@ -9,8 +13,10 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
     private boolean isExit = false;
 
-    Duke() {
-        // initializing plus greeting
+    /**
+     * Initialize a Duke instance.
+     */
+    public Duke() {
         TaskList taskList = new TaskList();
         Storage.loadFromFile(taskList);
         Ui ui = new Ui();

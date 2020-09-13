@@ -43,11 +43,8 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         displayPicture.setImage(img);
-        Circle clip = new Circle(50, 50, 50);
-        displayPicture.setClip(clip);
-        this.setSpacing(10);
-        this.setBackground(new Background(new BackgroundFill(
-                Color.gray(0.7), new CornerRadii(10), new Insets(5, 5, 5, 5))));
+        setProfilePicture();
+        setBackground();
     }
 
     /**
@@ -68,5 +65,22 @@ public class DialogBox extends HBox {
         var db = new DialogBox(text, img);
         db.flip();
         return db;
+    }
+
+    /**
+     * Tweaks the way profile picture is shown.
+     */
+    private void setProfilePicture() {
+        Circle profileCircle = new Circle(50, 50, 50);
+        displayPicture.setClip(profileCircle);
+    }
+
+    /**
+     * Adds padding.
+     */
+    private void setBackground() {
+        Background dukeBackground = new Background(new BackgroundFill(
+                Color.gray(0.7), new CornerRadii(20), new Insets(5, 5, 5, 5)));
+        this.setBackground(dukeBackground);
     }
 }

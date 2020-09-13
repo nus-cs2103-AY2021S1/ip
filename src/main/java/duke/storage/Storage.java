@@ -1,4 +1,4 @@
-package duke;
+package duke.storage;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -125,8 +125,4 @@ public class Storage {
             e.printStackTrace();
         }
     }
-
-
-
-
 }

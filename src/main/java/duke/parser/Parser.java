@@ -1,9 +1,12 @@
-package duke;
+package duke.parser;
+import duke.exception.DukeException;
+import duke.storage.Storage;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.TaskList;
 import duke.task.TimeParser;
 import duke.task.ToDo;
+import duke.ui.Ui;
 
 public class Parser {
     private static TaskList taskList;

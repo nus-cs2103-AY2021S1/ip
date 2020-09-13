@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import duke.DukeException;
+import duke.exception.DukeException;
 
 public class TimeParser {
     /** Returns the date in format "MMM d yyyy".
