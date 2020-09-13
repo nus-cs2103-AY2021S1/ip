@@ -64,7 +64,7 @@ Format: `find KEYWORD`
 Example: 
 * `find Assignment` returns Deadline `CS2105 Assignment`, Deadline `CS2100 Assignment` and Event `Assignment Meeting`
 
-![find Example] (https://github.com/Hazel1603/ip/blob/master/docs/find.png?raw=true)
+![find Example](find.png)
 
 ### `save` - Saving current tasks
 
