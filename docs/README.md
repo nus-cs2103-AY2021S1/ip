@@ -6,18 +6,20 @@
 
 This is what you should see when you start up Cait:
 <br>
+<br>
 ![Image of start](images/onstart.png)
 <br>
 <br>
 <br>
 Here is a brief explanation of Cait's UI:
 <br>
+<br>
 ![Image of start](images/onstartedit.png)
 <br>
 ## Quick start
 
 1. Make sure that you have Java `11` or above installed in your computer.
-2. Download the latest `Cait.jar`.
+2. Download the latest `Cait.jar` [here](https://github.com/caitlinjee/ip/releases/tag/v0.2).
 3. Copy the file to the folder you want to use as the _home folder_ for Cait.
 4. Double-click the file to start the app.
 5. Type the command in the message box and press Enter to execute it. e.g. typing `help` and pressing Enter will list out the commands you can use.
@@ -33,7 +35,7 @@ Shows the commands you can use.
 
 ### `help` - Viewing help
 
-Lists out all the commands you can type
+Lists out all the commands you can type.
 
 Example of usage: 
 
@@ -91,7 +93,7 @@ Adds a deadline to your saved tasks.
 
 ### `deadline <task> /by <yyyy-mm-dd>` - Adding an deadline
 
-Adds a deadline to your list of tasks at a specified date.
+Adds a deadline to your list of tasks by a specified date.
 
 Example of usage: 
 
@@ -169,7 +171,7 @@ Finds the tasks with a keyword.
 
 ### `find <keyword>` - Finding tasks
 
-Lists out all the tasks whose description contains the keyword.
+Lists out all the tasks whose description contains the specified keyword.
 
 Example of usage: 
 
