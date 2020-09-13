@@ -34,7 +34,7 @@ public class Storage {
      */
     public static Task genTaskFromString(String string) {
         assert string.charAt(1) == 'T' || string.charAt(1) == 'D' || string.charAt(1) == 'E';
-        boolean status = (string.charAt(4) == '\u2713');
+        boolean status = (string.charAt(4) == 'O');
         char taskType = string.charAt(1);
 
         if (taskType == 'T') {

@@ -127,6 +127,7 @@ public class Parser {
         }
 
         String output = "Here are the matching tasks in your list:\n";
+        final int outputLength = output.length();
         String keyword = command.substring(5);
         for (int i = 1; i < tasks.size() + 1; i++) {
             Task currentTask = tasks.get(i - 1);
@@ -134,7 +135,7 @@ public class Parser {
                 output += i + ". " + currentTask + "\n";
             }
         }
-        return output;
+        return (output.length() == outputLength) ? "There are no matching tasks!" : output;
     }
 
     private static String executeTodo(String command) throws IOException {
