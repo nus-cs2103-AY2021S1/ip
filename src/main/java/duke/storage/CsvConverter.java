@@ -76,6 +76,13 @@ public class CsvConverter {
         return resultArr;
     }
 
+    /**
+     * Converts the string time in the .csv file to a {@code LocalDateTime} object.
+     *
+     * @param input Input string.
+     * @return LocalDateTime object.
+     * @throws InvalidFileFormatException If the input is not in format that can be converted.
+     */
     private static LocalDateTime stringToDateTime(String input) throws InvalidFileFormatException {
         try {
             return LocalDateTime.parse(input, DateTimeFormatter.ofPattern(DATE_TIME_FORMAT));

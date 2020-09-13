@@ -60,6 +60,8 @@ public class Ui {
 
     /**
      * Greets the user upon starting the program.
+     *
+     * @return Greetings message to the user.
      */
     public static String greetings() {
         return stringFormatter(WELCOME_MESSAGE_ONE, WELCOME_MESSAGE_TWO);
@@ -67,42 +69,47 @@ public class Ui {
 
     /**
      * Retrieves the goodbye message.
+     *
+     * @return Goodbye message to the user.
      */
     public String goodbye() {
         return GOODBYE_MESSAGE;
     }
 
     /**
-     * Prints task done message.
+     * Retrieves the successful task done message.
      *
      * @param current Input task.
+     * @return Successful task marked as done message.
      */
     public String markTaskAsDone(Task current) {
         return stringFormatter(TASK_MARKED_MESSAGE, FOUR_SPACES + current);
     }
 
     /**
-     * Prints the deletion success message.
+     * Retrieves the deletion success message.
      *
      * @param current Current task.
      * @param size Size of task list.
+     * @return Successful deletion of task message.
      */
     public String deleteTask(Task current, int size) {
         return stringFormatter(TASK_DELETED_MESSAGE, FOUR_SPACES + current, String.format(NUM_OF_TASKS_MESSAGE, size));
     }
 
     /**
-     * Prints the add task message.
+     * Retrieves the add task message.
      *
      * @param newTask New task added.
      * @param size Size of task list.
+     * @return Successful addition of task message.
      */
     public String addTask(Task newTask, int size) {
         return stringFormatter(TASK_ADDED_MESSAGE, FOUR_SPACES + newTask, String.format(NUM_OF_TASKS_MESSAGE, size));
     }
 
     /**
-     * Prints the empty task list message.
+     * Retrieves the empty task list message.
      */
     public String emptyTaskList() {
         return EMPTY_TASK_LIST_MESSAGE;
@@ -113,6 +120,7 @@ public class Ui {
      *
      * @param tasks Task list.
      * @param extra Extra word to add in, if any.
+     * @return Show task list message.
      */
     public String showTaskList(TaskList tasks, String extra) {
         String header = String.format(DISPLAY_TASKS_MESSAGE, extra);
@@ -120,12 +128,12 @@ public class Ui {
     }
 
     /**
-     * Prints the no matching tasks found message.printNumberedArray
+     * Prints the no matching tasks found message.
      *
      * @param queryWord Word use to query task list.
+     * @return No matching tasks found message.
      */
     public String emptyFind(String queryWord) {
         return String.format(NO_MATCHING_TASKS_MESSAGE, queryWord);
     }
-
 }

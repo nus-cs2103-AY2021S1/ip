@@ -29,7 +29,6 @@ import duke.command.FindCommand;
 import duke.command.HelpCommand;
 import duke.command.ShowCommand;
 import duke.exception.DukeException;
-import duke.exception.EmptyTaskException;
 import duke.exception.EmptyTimeException;
 import duke.exception.InvalidDeadlineException;
 import duke.exception.InvalidEventException;
@@ -37,10 +36,9 @@ import duke.exception.UnknownCommandException;
 import duke.task.TaskType;
 
 /**
- * Parses the user input and creating a command from it.
+ * Handles the parsing of user input.
  */
 public class Parser {
-
 
     /**
      * Parses the user input and returns the corresponding command.
@@ -122,16 +120,20 @@ public class Parser {
     }
 
     /**
-     * Parses the description for the given {@code Task}.
+     * Parses the description for the {@code Deadline} and {@code Event} tasks and returns an array representation
+     * of the input.
      *
      * @param description Description of task.
      * @param taskType Task type of task.
      * @return String Array consisting of task details and time.
-     * @throws DukeException If the format inputted is not correct.
+     * @throws InvalidDeadlineException If deadline is not formatted correctly.
+     * @throws InvalidEventException If Event is not formatted correctly.
+     * @throws EmptyTimeException If time of event is not specified.
      */
-    public static String[] parseTaskDescription(String description, TaskType taskType) throws DukeException {
-        String[] inputArr = description.split(getIdentifier(taskType), ARRAY_SIZE);
+    public static String[] parseTaskDescription(String description, TaskType taskType)
+        throws InvalidDeadlineException, InvalidEventException, EmptyTimeException {
 
+        String[] inputArr = description.split(getIdentifier(taskType), ARRAY_SIZE);
         if (inputArr.length < ARRAY_SIZE) {
             switch(taskType) {
             case DEADLINE:
@@ -142,13 +144,7 @@ public class Parser {
                 assert false : INVALID_TASK_TYPE;
             }
         }
-
-        String taskDetails = inputArr[0];
         String time = inputArr[1];
-
-        if (taskDetails.isEmpty()) {
-            throw new EmptyTaskException(taskType);
-        }
         if (time.isBlank()) {
             throw new EmptyTimeException(taskType);
         }

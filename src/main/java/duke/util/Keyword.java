@@ -1,5 +1,8 @@
 package duke.util;
 
+/**
+ * Contains all keywords being used in the entire app.
+ */
 public class Keyword {
 
     // Task class
