@@ -36,32 +36,40 @@ Examples include:
 
 ### Listing all Tasks `list`
 Shows a list of all task in tasklist.
+
 Format: `list`
 
 ### Adding a To Do Task `todo`
 Adds a To Do task with its description appended.
+
 Format: `todo TASK_DESCRIPTION`
 
 ### Adding a Deadline Task `deadline`
 Adds a Deadline task with its description and date time appended
+
 Format: `deadline TASK_DESCRIPTION /by DD-MM-YYYY HHHH`
 
 ### Adding an Event Task `event`
 Adds a Event task with its description and date time appended
+
 Format: `event TASK_DESCRIPTION /at DD-MM-YYYY HHHH`
 
 ### Delete a Task `delete`
 Deletes a Task depending on its position from `list`
+
 Format: `delete ITEM_INDEX`
 
 ### Finding task based on description `find`
 Finds and returns a list of task that contains description appended to find command.
+
 Format: `find TASK_DESCRIPTION`
 
 ### Marking a task as done `done`
 Marks a Task as done depending on its position from `list`
+
 Format: `done ITEM_INDEX`
 
 ### Exit and save `bye`
 Saves and exits from application
+
 Format: `bye`
