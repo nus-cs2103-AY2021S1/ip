@@ -108,7 +108,7 @@ Example of usage:
 
 Expected outcome: 
 
-Every task in the task list containing `work` in its description will be shown.<br><br>
+Every the tasks in the task list containing `work` in its description will be listed.<br><br>
 
 
 ### Undoing commands: `undo`
