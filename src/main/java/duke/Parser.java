@@ -14,6 +14,7 @@ import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.FindCommand;
+import duke.command.HelpCommand;
 import duke.command.ListCommand;
 import duke.command.ListDateCommand;
 import duke.command.UnknownCommand;
@@ -262,6 +263,8 @@ public class Parser {
             return delete(command);
         } else if (command.startsWith("find")) {
             return find(command);
+        } else if (command.startsWith("help")) {
+            return new HelpCommand();
         } else {
             try {
                 return add(command);
