@@ -5,13 +5,21 @@ Duke is a bot that helps you keep track of your tasks at hand.
 ## Features supported
 
 1) **`todo`**: Add tasks of type todo to your list.
+
 2) **`deadline`**: Add tasks of type deadline to your list.
+
 3) **`event`**: Add tasks of type event to your list.
+
 4) **`done`**: Marks a task as done.
+
 5) **`delete`**: Deletes a task.
+
 6) **`list`**: Displays a list of tasks.
+
 7) **`find`**: Look up tasks with a keyword.
+
 8) **`schedule`**: Look up tasks scheduled on a given date.
+
 9) **`bye`**: Quits the application. 
 
 
