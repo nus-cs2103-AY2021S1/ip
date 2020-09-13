@@ -77,11 +77,49 @@ public class Duke {
         }
     }
 
-//    public static void main (String[]args) throws DukeException {
-//        new Duke("listStore.ser").run();
-//    }
+    /**
+     * Parser class deals with making sense of user command.
+     */
+    public static class Parser {
+        private final String userInput;
+        private final TaskList savedTaskList;
 
+        Parser(String nextLine, TaskList inputs) {
+            this.userInput = nextLine;
+            this.savedTaskList = inputs;
+        }
 
+        /**
+         * Runs different methods on the TaskList based on user command.
+         *
+         * @throws DukeException if user command is not recognised or if methods in TaskList throw DukeException
+         */
+        String parse() throws DukeException {
+            try {
+                if (userInput.startsWith("done")) {
+                    return savedTaskList.taskDone(userInput);
+                } else if (userInput.startsWith("remove")) {
+                    return savedTaskList.removeTask(userInput);
+                } else if (userInput.startsWith("todo")) {
+                    return savedTaskList.addTodoTask(userInput);
+                } else if (userInput.startsWith("deadline")) {
+                    return savedTaskList.addDeadlineTask(userInput);
+                } else if (userInput.startsWith("event")) {
+                    return savedTaskList.addEventTask(userInput);
+                } else if (userInput.startsWith("find")) {
+                    return savedTaskList.findTask(userInput);
+                } else if (userInput.equals("list")) {
+                    return savedTaskList.printList();
+                } else {
+                    throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+                }
+            } catch (DukeException e) {
+                System.out.println(e.msg);
+                return e.msg;
+            }
+        }
+    }
+    
     /**
      * Input class represents input from the user in the form of tasks.
      */
@@ -308,11 +346,11 @@ public class Duke {
             inputs.remove(numTaskDone - 1);
             storage.writeToFile(inputs);
             if (inputType.done) {
-                return ("Noted. I've removed this task:" + "\n" + inputType.id + "[/] " + inputType.content 
-                        + inputType.printTime + "\n" + "Now you have " + inputs.size() + " tasks in the list.");
+                return "Noted. I've removed this task:" + "\n" + inputType.id + "[/] " + inputType.content 
+                        + inputType.printTime + "\n" + "Now you have " + inputs.size() + " tasks in the list.";
             } else {
-                return ("Noted. I've removed this task:" + "\n" + inputType.id + "[x] " + inputType.content
-                        + inputType.printTime + "\n" + "Now you have " + inputs.size() + " tasks in the list.");
+                return "Noted. I've removed this task:" + "\n" + inputType.id + "[x] " + inputType.content
+                        + inputType.printTime + "\n" + "Now you have " + inputs.size() + " tasks in the list.";
             }
         }
 
@@ -378,20 +416,24 @@ public class Duke {
          * @throws DukeException if user does not specify event task
          */
         String addEventTask(String nextLine) throws DukeException {
-            if (nextLine.equals("event") || nextLine.equals("event ")) {
-                throw new DukeException("OOPS!!! The description of an event cannot be empty.");
+            try { 
+                if (nextLine.equals("event") || nextLine.equals("event ")) {
+                    throw new DukeException("OOPS!!! The description of an event cannot be empty.");
+                }
+                int charLoc = nextLine.indexOf("/at");
+                Event event = new Event(nextLine.substring(6, charLoc), nextLine.substring(charLoc + 4));
+                if (taskExist(event.content, event.time)) {
+                    return "Could not add task. Task already exists!";
+                }
+                inputs.add(event);
+                int count = inputs.size();
+                storage.writeToFile(inputs);
+                assert inputs != null;
+                return ("Got it. I've added this task: \n" + "  [E][x] " + event.content
+                        + event.printTime + "\n Now you have " + count + " tasks in the list");
+            } catch (java.time.format.DateTimeParseException e) {
+                return "Please provide proper date format!";
             }
-            int charLoc = nextLine.indexOf("/at");
-            Event event = new Event(nextLine.substring(6, charLoc), nextLine.substring(charLoc + 4));
-            if (taskExist(event.content, event.time)) {
-                return "Could not add task. Task already exists!";
-            }
-            inputs.add(event);
-            int count = inputs.size();
-            storage.writeToFile(inputs);
-            assert inputs != null;
-            return ("Got it. I've added this task: \n" + "  [E][x] " + event.content
-                    + event.printTime + "\n Now you have " + count + " tasks in the list");
         }
 
         /**
@@ -467,7 +509,13 @@ public class Duke {
             }
             return false;
         }
-        
+
+        /**
+         * Checks if the date of two tasks are the same. 
+         * @param task 
+         * @param taskDate 
+         * @return true if the date of both tasks matches or the second task does not have a date 
+         */
         boolean taskDateMatch(Input task, LocalDate taskDate) {
             if (taskDate == null) {
                 return true;
@@ -487,81 +535,14 @@ public class Duke {
      * UI class deals with the User Input.
      */
     public static class UI {
-        private Scanner sc = new Scanner(System.in);
-
-        /** 
-         * UI Constructor, prints DUKE to show that the program has initialized.
-         */
-        UI() {
-            String logo = " ____        _        \n"
-                    + "|  _ \\ _   _| | _____ \n"
-                    + "| | | | | | | |/ / _ \\\n"
-                    + "| |_| | |_| |   <  __/\n"
-                    + "|____/ \\__,_|_|\\_\\___|\n";
-            System.out.println("Hello from\n" + logo);
-
-            System.out.println("Hello! I'm Duke \n"
-                    + "What can I do for you?");
-        }
-
-        /**
-         * Scans for user input.
-         */
-        String readInput() {
-            return this.sc.nextLine();
-        }
 
         /**
          * Prints 'Loading Error!' if DukeException is caught while constructing Duke Object.
          */
-         
         void showLoadingError() {
             System.out.println("Loading Error!");
         }
 
 
-    }
-
-    /**
-     * Parser class deals with making sense of user command.
-     */
-    public static class Parser {
-        private final String userInput;
-        private final TaskList savedTaskList;
-
-        Parser(String nextLine, TaskList inputs) {
-            this.userInput = nextLine;
-            this.savedTaskList = inputs;
-        }
-
-        /** 
-         * Runs different methods on the TaskList based on user command.
-         * 
-         * @throws DukeException if user command is not recognised or if methods in TaskList throw DukeException
-         */
-        String parse() throws DukeException {
-            try {
-                if (userInput.startsWith("done")) {
-                    return savedTaskList.taskDone(userInput);
-                } else if (userInput.startsWith("remove")) {
-                    return savedTaskList.removeTask(userInput);
-                } else if (userInput.startsWith("todo")) {
-                    return savedTaskList.addTodoTask(userInput);
-                } else if (userInput.startsWith("deadline")) {
-                    return savedTaskList.addDeadlineTask(userInput);
-                } else if (userInput.startsWith("event")) {
-                    return savedTaskList.addEventTask(userInput);
-                } else if (userInput.startsWith("find")) {
-                    return savedTaskList.findTask(userInput);
-                } else if (userInput.equals("list")) {
-                    return savedTaskList.printList();
-                } else {
-                    throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
-                }
-            } catch (DukeException e) {
-                System.out.println(e.msg);
-                return e.msg;
-            }
-        }
     }
 }
