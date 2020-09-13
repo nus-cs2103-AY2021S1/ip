@@ -1,5 +1,5 @@
 # User Guide
-### Everyone needs a friend! How about one that would help you take down all your important tasks? Yuki is a bot that would make it more exciting to track your task! To start using her, simply download the Yuki.jar file in release v0.2 and place her in your favourite folder! Hope you become close to her soon :smile:
+### Everyone needs a friend! How about one that would help you take down all your important tasks? Yuki is a bot that would make it more exciting to track your task! To start using her, simply download the Yuki.jar file in release v0.2 and place her in your favourite folder! Hope you become close to her soon!
 
 ## Features 
     - Add tasks

@@ -121,6 +121,22 @@ public class Deadline extends Task {
     }
 
     /**
+     * Returns a string representation of this <code>Task</code> object for saving.
+     *
+     * @return a string representation of this <code>Task</code> object for saving
+     */
+    @Override
+    public String toSaveFormat() {
+        String s = "[D]" + super.toSaveFormat() + " (FINISH by: "
+                + DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG).format(toDoBy);
+        if (time == null) {
+            return s + ")";
+        } else {
+            return s + " " + time.toString() + ")";
+        }
+    }
+
+    /**
      * Returns a string representation of this <code>Deadline</code> object.
      *
      * @return a string representation of this <code>Deadline</code> object

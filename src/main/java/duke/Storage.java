@@ -95,7 +95,7 @@ public class Storage {
                 Task t;
                 String taskType = task.substring(0, 3);
                 String status = task.substring(3, 6);
-                boolean isDone = status.equals("[" + "\u2713" + "]");
+                boolean isDone = status.equals("[T]");
 
                 if (taskType.equals("[T]")) {
                     t = new Todo(task.substring(7), isDone);
@@ -134,7 +134,7 @@ public class Storage {
 
             int taskCounter = 0;
             for (Task task : listOfTask) {
-                fileWriter.write(task.toString());
+                fileWriter.write(task.toSaveFormat());
                 fileWriter.write(System.getProperty("line.separator"));
                 taskCounter++;
             }

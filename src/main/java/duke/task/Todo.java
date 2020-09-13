@@ -43,6 +43,15 @@ public class Todo extends Task {
     }
 
     /**
+     * Returns a string representation of this <code>Task</code> object for saving.
+     *
+     * @return a string representation of this <code>Task</code> object for saving
+     */
+    public String toSaveFormat() {
+        return "[T]" + super.toSaveFormat();
+    }
+
+    /**
      * Returns a string representation of this <code>Todo</code> object.
      *
      * @return a string representation of this <code>Todo</code> object

@@ -60,6 +60,15 @@ public class Task {
     }
 
     /**
+     * Returns a string representation of this <code>Task</code> object for saving.
+     *
+     * @return a string representation of this <code>Task</code> object for saving
+     */
+    public String toSaveFormat() {
+        return this.isDone ? "[T] " + this.description : "[F] " + this.description;
+    }
+
+    /**
      * Compare the date of this <code>Task</code> with the specified date.
      *
      * @param date the specified Date

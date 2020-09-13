@@ -112,6 +112,18 @@ public class Event extends Task {
     }
 
     /**
+     * Returns a string representation of this <code>Task</code> object for saving.
+     *
+     * @return a string representation of this <code>Task</code> object for saving
+     */
+    @Override
+    public String toSaveFormat() {
+        return "[E]" + super.toSaveFormat() + " (APPEAR at: "
+                + DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG).format(schedule)
+                + " " + startTime + "-" + endTime + ")";
+    }
+
+    /**
      * Returns a string representation of this <code>Event</code> object.
      *
      * @return a string representation of this <code>Event</code> object
