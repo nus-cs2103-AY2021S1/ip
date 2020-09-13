@@ -9,6 +9,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
+import java.util.Timer;
+import java.util.TimerTask;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -42,6 +46,7 @@ public class MainWindow extends AnchorPane {
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
+     * Exits the Duke application when user inputs 'bye'.
      */
     @FXML
     private void handleUserInput() {
@@ -52,6 +57,9 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(dukeOutput, dukeImage)
         );
         userInput.clear();
+        if (input.equals("bye")) {
+            exitDuke();
+        }
     }
 
     /**
@@ -69,5 +77,14 @@ public class MainWindow extends AnchorPane {
         }
         dukeOutput = TOPLINE + response + BOTTOMMINE;
         return dukeOutput;
+    }
+
+    private void exitDuke() {
+        Timer exit = new Timer();
+        exit.schedule(new TimerTask() {
+            public void run() {
+                System.exit(0);
+            }
+        }, 500);
     }
 }

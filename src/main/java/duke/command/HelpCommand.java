@@ -17,15 +17,15 @@ public class HelpCommand extends Command {
      */
     public String execute(TaskList taskList, Ui ui, Storage storage) {
         String response = "List of commands:"
-                + "\nbye: Exit duke"
-                + "\nlist: Display list of tasks"
-                + "\ndelete <id>: Delete task"
-                + "\ndone <id>: Set task as completed"
-                + "\nfind <keyword>: Display list of tasks that include keyword"
-                + "\nfilter <date>: Display list task tasks due on date"
-                + "\ntodo <name>: Add a new task"
-                + "\ndeadline <name> /by <date> <time>: Add a new task with deadline"
-                + "\nevent <name> /at <date> <time>: Add a new event"
+                + "\nbye: Exit duke\n"
+                + "\nlist: Display list of tasks\n"
+                + "\ndelete <id>: Delete task\n"
+                + "\ndone <id>: Set task as completed\n"
+                + "\nfind <keyword>: Display list of tasks that include keyword\n"
+                + "\nfilter <date>: Display list task tasks due on date\n"
+                + "\ntodo <name>: Add a new task\n"
+                + "\ndeadline <name> /by <date> <time>: Add a new task with deadline\n"
+                + "\nevent <name> /at <date> <time>: Add a new event\n"
                 + "\nweekly <name> /every <day> <time>: Add a new weekly recurring task";
         return response;
     }
