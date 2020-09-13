@@ -10,4 +10,5 @@ delete 1
 todo join sports club
 done 4
 list
+list
 bye
