@@ -9,7 +9,16 @@ and manage your tasks easily, you will be able to increase your productivity in 
 - [Features](#features)
 - [Usage](#usage)
     - [todo](#todo-description---adding-todo-task)
-    
+    - [deadline](#deadline-description-at-date-time---adding-deadline-task)
+    - [event](#event-description-at-date-time---adding-event-task)
+    - [list](#list---listing-all-the-tasks)
+    - [done](#done-index---marking-a-task-as-done)
+    - [delete](#delete-index---deleting-a-task)
+    - [find](#find-keyword---finding-tasks-by-keyword)
+    - [reschedule](#reschedule-index-date-time---changing-a-tasks-date-and-time)
+    - [taskafter](#taskafter-date---listing-all-the-tasks-after-a-date)
+    - [taskbefore](#taskbefore-date---listing-all-the-tasks-before-a-date)
+    - [bye](#bye---exiting-the-app)
 ## Features 
 
 ### Support multiple type of tasks
@@ -148,7 +157,7 @@ Okay. I will delete this task:
 Now you have 5 tasks in the list.
 ```
 
-### `find <keyword>` - Finding tasks by description
+### `find <keyword>` - Finding tasks by keyword
 
 Finds all the tasks which description contains the keyword.
 
