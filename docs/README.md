@@ -6,7 +6,7 @@
 ## QuickStart
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest **mug.jar** from here.
+1. Download the latest **mug.jar** from [here](https://github.com/TianYong-Goh/ip/releases/tag/v0.2).
 
 1. Copy **mug.jar** to the folder you want to use as the home folder for your mug.Mug.
 
