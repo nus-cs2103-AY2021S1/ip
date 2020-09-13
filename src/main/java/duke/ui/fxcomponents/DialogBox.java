@@ -18,6 +18,8 @@ import javafx.scene.layout.HBox;
  * DialogBox to contain messages from the user and Duke.
  */
 public class DialogBox extends HBox {
+    // @@author se-edu-reused
+    // Reused with modifications from the module's tutorial.
     @FXML
     private Label dialog;
     @FXML

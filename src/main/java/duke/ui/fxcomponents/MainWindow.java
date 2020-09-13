@@ -16,6 +16,8 @@ import javafx.stage.Stage;
  * format and display messages.
  */
 public class MainWindow extends AnchorPane {
+    // @@author se-edu-reused
+    // Reused with modifications from the module's tutorial.
     @FXML
     private ScrollPane scrollArea;
     @FXML
