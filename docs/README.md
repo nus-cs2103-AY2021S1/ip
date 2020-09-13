@@ -18,15 +18,12 @@
 
 ## Features
 
-<div markdown="block" class="alert alert-info">
-
-**:information_source: Notes about the command format:**<br>
+**Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add /n NAME`, `NAME` is a parameter which can be used as `add /n John Doe`.
 * `DATE` should be in `YYYY-MM-DD` format.
 
-</div>
 
 ### Listing all tasks : `list`
 
