@@ -10,7 +10,6 @@ import java.io.IOException;
 public class FileClass {
 
     public static void createFile(String filename) {
-        assert (!filename.equals(""));
         File f = new File(filename);
         System.out.println("full path: " + f.getAbsolutePath());
         System.out.println("file exists?: " + f.exists());
@@ -18,7 +17,6 @@ public class FileClass {
     }
 
     private static void printFileHelper(String filePath) throws FileNotFoundException {
-        assert (!filePath.equals(""));
         File f = new File(filePath); // create a File for the given file path
         Scanner s = new Scanner(f); // create a Scanner using the File as the source
         while (s.hasNext()) {
@@ -27,7 +25,6 @@ public class FileClass {
     }
 
     public static void printFileContents(String filename) {
-        assert (!filename.equals(""));
         try {
             printFileHelper(filename);
         } catch (FileNotFoundException e) {
@@ -36,14 +33,12 @@ public class FileClass {
     }
 
     private static void writeToFileHelper(String filePath, String textToAdd) throws IOException {
-        assert (!filePath.equals(""));
         FileWriter fw = new FileWriter(filePath);
         fw.write(textToAdd);
         fw.close();
     }
 
     public static void writeToFile(String filename) {
-        assert (!filename.equals(""));
         try {
             writeToFileHelper(filename, "first line" + System.lineSeparator() + "second line");
         } catch (IOException e) {

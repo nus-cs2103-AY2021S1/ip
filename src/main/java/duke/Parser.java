@@ -22,7 +22,6 @@ public class Parser {
             String line = sc.nextLine();
             Scanner scan = new Scanner(line);
             String in = scan.next();
-            assert(in != null);
             if (in.equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
                 break;
