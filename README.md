@@ -170,18 +170,21 @@ Format: bye
 
 Duke Task Tracker automatically saves data in the hard disk every time a change is made. 
 
----------
+----------------------
 
+## Command Summary
 
-
-
-
-
-
-
-
-
-
-
-
-
+|          Action          |                          Format                          |
+| :----------------------: | :------------------------------------------------------: |
+|           Help           |                         `--help`                         |
+|      Add Basic Task      |                `todo <task description>`                 |
+|  Add Task with Deadline  | `deadline <task description> /by <deadline description>` |
+| Add Task with Event Date | `event <task description> /at <event date description>`  |
+|           List           |                          `list`                          |
+|           Done           |                   `done <task number>`                   |
+|          Delete          |                  `delete <task number>`                  |
+|          Remind          |                  `remind <task number>`                  |
+|          Search          |           `search <keyword1 keyword2 etc...>`            |
+|        getEvents         |                    `getEvents <date>`                    |
+|       getReminders       |                      `getReminders`                      |
+|           Exit           |                          `bye`                           |
