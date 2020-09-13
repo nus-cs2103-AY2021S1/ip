@@ -1,7 +1,5 @@
 # Intrubot User Guide
 
-![Intrubot_Screenshot](Ui.png)
-
 ## What is Intrubot
 Intrubot is a **desktop based chat application** for keeping track of your tasks.
 You can interact via a Command Line Interface view responses via a Graphical
@@ -9,7 +7,7 @@ User Interface (GUI).
 
 --------------------------------------------------------------------------------------------------------------------
 ## Table of Contents
-- [Getting Started](#)
+- [Getting Started](#getting-started)
 - [About Intrubot's Features](#Features)
     - [Add tasks](#add-tasks)
     - [List items](#list-items)
@@ -20,7 +18,6 @@ User Interface (GUI).
     - [Add Trivia](#save-trivia)
     - [Exit](#exit)
 - [Usage](#usage)
-- [CommandSummary](#)
     - [todo](#todo)
     - [deadline](#deadline)
     - [event](#event)
@@ -36,32 +33,35 @@ User Interface (GUI).
 * Ensure you have Java 11 or above installed in your Computer.
 * Download the latest `.jar` from [here](#).
 * Double-click the file to start the app. The GUI will appear in a few seconds. 
+
+![Intrubot_Screenshot](Ui.png)
+
 ## Features 
 
-### Add Tasks 
-Save 3 kinds of tasks to your task list: todo, deadline, event. 
+#### Add Tasks 
+* Save 3 kinds of tasks to your task list: todo, deadline, event. 
 
-### Add trivia
-Learnt a fun fact? Save the question and answer to Intrubot.
+#### Add trivia
+* Learnt a fun fact? Save the question and answer to Intrubot.
 
-### List Items 
-Lists all the tasks and trivia you have saved.
+#### List Items 
+* Lists all the tasks and trivia you have saved.
 
-### Find Items 
-Search for tasks and trivia in your list.
+#### Find Items 
+* Search for tasks and trivia in your list.
 
-### Mark Tasks 
-Mark tasks as done when you have completed them.
+#### Mark Tasks 
+* Mark tasks as done when you have completed them.
 
-### Clear Items
-Want to start on a fresh slate? Intrubot can clear all your items in your list.
+#### Clear Items
+* Want to start on a fresh slate? Intrubot can clear all your items in your list.
 
-### No Duplicates
-Ensure you never save redundant tasks with a friendly reminder 
+#### No Duplicates
+* Ensure you never save redundant tasks with a friendly reminder 
 when you try to add a task that already exists.
 
-### Exit
-Done using Intrubot? Simply exit! Your data will be waiting for you when you come back.
+#### Exit
+* Done using Intrubot? Simply exit! Your data will be waiting for you when you come back.
 
 ## Usage
 
