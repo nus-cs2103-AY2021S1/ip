@@ -53,7 +53,7 @@ Example of usage:
 
 Expected outcome:
 
-![Deadline](images/Deadline.png)
+![Deadline](images/deadline.png)
 
 <br/>
 
