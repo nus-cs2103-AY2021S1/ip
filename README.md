@@ -1,6 +1,6 @@
 # User Guide
 
-Duke Task Tracker is a **desktop application for managing your tasks, optimized for use via a Command Line Interface ** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Duke Task Tracker can get your task management done faster than traditional GUI applications. 
+Duke Task Tracker is a **desktop application for managing your tasks, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Duke Task Tracker can get your task management done faster than traditional GUI applications. 
 
 * [Features](#features)
   * [Viewing help : **`--help`**](#viewing-help-----help)

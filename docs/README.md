@@ -1,6 +1,6 @@
 # User Guide
 
-Duke Task Tracker is a **desktop application for managing your tasks, optimized for use via a Command Line Interface ** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Duke Task Tracker can get your task management done faster than traditional GUI applications. 
+Duke Task Tracker is a **desktop application for managing your tasks, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Duke Task Tracker can get your task management done faster than traditional GUI applications. 
 
 * [Features](#features)
   * [Viewing help : **`--help`**](#viewing-help-----help)
@@ -174,42 +174,17 @@ Duke Task Tracker automatically saves data in the hard disk every time a change 
 
 ## Command Summary
 
-| Action | Format |
-
-| :---: | :---: |
-
-| Help | `--help` |
-
-| Add Basic Task | `todo <task description>` |
-
-| Add Task with Deadline | `deadline <task description> /by <deadline description>` |
-
-| Add Task with Event Date | `event <task description> /at <event date description>` |
-
-| List | `list` |
-
-|Done | `done <task number>` |
-
-| Delete | `delete <task number>` |
-
-| Remind | `remind <task number>` |
-
-| Search | `search <keyword1 keyword2 etc...>` |
-
-| getEvents | `getEvents <date>` |
-
-| getReminders | `getReminders` |
-
-| Exit | `bye` |
-
-
-
-
-
-
-
-
-
-
-
-
+|          Action          |                          Format                          |
+| :----------------------: | :------------------------------------------------------: |
+|           Help           |                         `--help`                         |
+|      Add Basic Task      |                `todo <task description>`                 |
+|  Add Task with Deadline  | `deadline <task description> /by <deadline description>` |
+| Add Task with Event Date | `event <task description> /at <event date description>`  |
+|           List           |                          `list`                          |
+|           Done           |                   `done <task number>`                   |
+|          Delete          |                  `delete <task number>`                  |
+|          Remind          |                  `remind <task number>`                  |
+|          Search          |           `search <keyword1 keyword2 etc...>`            |
+|        getEvents         |                    `getEvents <date>`                    |
+|       getReminders       |                      `getReminders`                      |
+|           Exit           |                          `bye`                           |
