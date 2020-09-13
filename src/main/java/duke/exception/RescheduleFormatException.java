@@ -12,6 +12,6 @@ public class RescheduleFormatException extends DukeException {
      */
     public RescheduleFormatException() {
         super("Invalid argument or format! Please put it in the format of \"reschedule <task number> <date>\""
-                + "such as \"reschedule 1 2020-01-01!\"");
+                + " such as \"reschedule 1 2020-01-01!\"");
     }
 }
