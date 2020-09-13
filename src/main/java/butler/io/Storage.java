@@ -77,7 +77,7 @@ public class Storage {
                     break;
 
                 default:
-                    throw new ButlerException("Something is wrong. This place should be unreachable.");
+                    assert false : "Something is wrong. There is an unidentified task type.";
                 }
 
                 fileText += taskDetails + System.lineSeparator();
@@ -87,10 +87,10 @@ public class Storage {
             fw.close();
 
         } catch (IOException e) {
-            throw new ButlerException("There is an error with writing to the path. File is not detected.");
+            assert false : "There is an error with writing to the path. File is not detected.";
 
         } catch (ClassCastException e) {
-            throw new ButlerException("Something is wrong. ClassCastException should be unreachable.");
+            assert false : "Something is wrong. There is a ClassCastException.";
         }
     }
 
@@ -127,7 +127,7 @@ public class Storage {
                 Files.createDirectory(Paths.get("./data/"));
                 Files.createFile(Paths.get(filePath));
             } catch (IOException f) {
-                throw new ButlerException("Code should never reach here." + f.getMessage());
+                assert false : "Code should never reach here." + f.getMessage();
             }
             throw new ButlerException("There is no file to access.");
 
