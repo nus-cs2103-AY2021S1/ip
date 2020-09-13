@@ -1,2 +1,3 @@
-ToDo | undone | have dinner
-Deadline | undone | return book | 24/04/2020 12:30 PM
+ToDo | undone | do homework
+Deadline | done | submit homework | 23/04/2020 12:00 PM
+Event | undone | exam | 23/09/2020 04:00 PM
