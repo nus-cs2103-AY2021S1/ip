@@ -56,14 +56,12 @@ public class Duke extends Application {
         String filePath = "data/duke.txt";
         storage = new Storage(filePath);
         try {
+            storage.createFile();
             tasks = new TaskList(storage.load());
         } catch (FileNotFoundException e) {
             handleExceptions("FileNotFound");
-            storage.createFile();
-            tasks = new TaskList();
         } catch (DukeException e) {
             handleExceptions("DukeException");
-            tasks = new TaskList();
         }
     }
 
