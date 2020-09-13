@@ -34,6 +34,7 @@ Advanced Command used for updating a *Deadline* or *Event* with a new date and t
 - **num** can be any numeric value
 - note the white space between text 
 - note the **num** for Delete, Done and Update represents the index of that specific task in the list
+
 ### `Add` 
 Example of usage: 
 ```
@@ -75,7 +76,6 @@ Example of usage:
 ```
 list
 ```
-
 Expected outcome:
 ```
 Here are the tasks in your list:
@@ -104,6 +104,7 @@ Expected outcome:
 Undetstood! I've marked this task as done:
 [T][✓] read book
 ```
+
 ### `Find` 
 Example of usage: 
 ```
