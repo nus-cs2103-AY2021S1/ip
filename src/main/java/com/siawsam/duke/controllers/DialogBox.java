@@ -25,7 +25,7 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
     
-    private DialogBox(String text, Image img) {
+    private DialogBox(String text, Image img, String id) {
         assert text.length() > 0 : "Dialogbox cannot have empty text";
         
         try {
@@ -37,6 +37,7 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
         
+        this.setId(id);
         dialog.setText(text);
         displayPicture.setImage(img);
     }
@@ -52,11 +53,11 @@ public class DialogBox extends HBox {
     }
     
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        return new DialogBox(text, img, "userDialogBox");
     }
     
     public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+        var db = new DialogBox(text, img, "dukeDialogBox");
         db.flip();
         return db;
     }

@@ -25,6 +25,7 @@ public class Main extends Application {
         loader.setController(new LandingScene(duke, primaryStage));
         AnchorPane ap = loader.load();
         Scene scene = new Scene(ap);
+        scene.getStylesheets().add("/styles/styles.css");
         
         primaryStage.setScene(scene);
         primaryStage.show();
