@@ -28,14 +28,15 @@ public class DeleteCommand extends Command {
      * @param taskList List of tasks on which this command acts on.
      * @param ui User interface to interact with user.
      * @param storage Storage which stores given <code>taskList</code> on hard disk.
+     * @return String response of task execution.
      * @throws ButlerException if <code>taskIndex</code> is an invalid index
      *                         or an error occurs in saving the list of tasks.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws ButlerException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws ButlerException {
         taskList.deleteTask(taskIndex);
         storage.storeTaskList(taskList);
-        ui.showTaskDeleted(taskIndex);
+        return ui.showTaskDeleted(taskIndex);
     }
 
     /**

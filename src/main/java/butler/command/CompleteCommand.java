@@ -33,16 +33,19 @@ public class CompleteCommand extends Command {
      * @param taskList List of tasks on which this command acts on.
      * @param ui User interface to interact with user.
      * @param storage Storage which stores given <code>taskList</code> on hard disk.
+     * @return String response of task execution.
      * @throws ButlerException if an invalid index is given in <code>indexArray</code>
      *                         or an error occurs in saving the list of tasks.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws ButlerException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws ButlerException {
+        String output = "";
         for (int i : indexArray) {
             taskList.completeTask(i);
             storage.storeTaskList(taskList);
-            ui.showTaskCompleted(i);
+            output += ui.showTaskCompleted(i);
         }
+        return output;
     }
 
     /**

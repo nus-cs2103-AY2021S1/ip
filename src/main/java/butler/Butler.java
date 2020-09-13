@@ -11,7 +11,7 @@ import butler.task.TaskList;
  * Represents a butler that manages a list of tasks for the user.
  *
  * Butler maintains a list of tasks across different sessions.
- * Data of the list of tasks are saved in hard disk within data/tasks.txt
+ * Data of the list of tasks are saved in hard disk within <code>filePath</code>
  * relative to the program file location.
  */
 public class Butler {
@@ -20,37 +20,30 @@ public class Butler {
     private TaskList tasks;
     private Ui ui;
 
-    private Butler(String filePath) {
+    /**
+     * Constructs a butler that stores tasks in the <code>filePath</code>.
+     *
+     * @param filePath Location where tasks is stored.
+     */
+    public Butler(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
         } catch (ButlerException e) {
-            ui.showLoadingError();
             tasks = new TaskList();
         }
     }
 
-    public static void main(String[] args) {
-        new Butler("data/tasks.txt").run();
-    }
-
-    private void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (ButlerException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
+    /**
+     * Gets a response message.
+     */
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(tasks, ui, storage);
+        } catch (ButlerException e) {
+            return ui.showError(e.getMessage());
         }
     }
 }

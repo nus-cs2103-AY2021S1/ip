@@ -29,13 +29,14 @@ public class AddCommand extends Command {
      * @param taskList List of tasks in which task is to be added to.
      * @param ui User interface to interact with user.
      * @param storage Storage which stores given <code>taskList</code> on hard disk.
+     * @return String response of task execution.
      * @throws ButlerException if an error with saving the list of tasks occurs.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws ButlerException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws ButlerException {
         taskList.addTask(task);
         storage.storeTaskList(taskList);
-        ui.showTaskAdded(task);
+        return ui.showTaskAdded(task);
     }
 
     /**
