@@ -41,6 +41,7 @@ You can add tasks of 3 types: To-do, Deadline and Event.
     <br>
     <br>
     Expected outcome:
+    <br>
     ![Image of To-do Screen](images/todo.png) 
     <br>
     
@@ -49,6 +50,7 @@ You can add tasks of 3 types: To-do, Deadline and Event.
     <br>
     <br>
     Expected outcome:
+    <br>
     ![Image of Deadline Screen](images/deadline.png) 
     <br>
   
@@ -57,6 +59,7 @@ You can add tasks of 3 types: To-do, Deadline and Event.
     <br>
     <br>
     Expected outcome:
+    <br>
     ![Image of Deadline Screen](images/deadline.png) 
     <br>
     
@@ -70,6 +73,7 @@ Get list of tasks: `list`
     <br>
     <br>
     Expected outcome:
+    <br>
     ![Image of List Screen](images/list.png) 
     <br>
     
@@ -83,6 +87,7 @@ Mark task as done: `done <index>`
     <br>
     <br>
     Expected outcome:
+    <br>
     ![Image of Done Screen](images/done.png) 
     <br>
 
@@ -96,6 +101,7 @@ Delete task: `delete <index>`
     <br>
     <br>
     Expected outcome:
+    <br>
     ![Image of Delete Screen](images/delete.png) 
     <br> 
     
@@ -109,6 +115,7 @@ Find task: `find <keyword>`
     <br>
     <br>
     Expected outcome:
+    <br>
     ![Image of Find Screen](images/find.png) 
     <br> 
     
@@ -122,6 +129,7 @@ Find task: `update <index> <desc/date> <new description/YYYY-MM-DD>`
     <br>
     <br>
     Expected outcome:
+    <br>
     ![Image of Update Screen 1](images/update1.png) 
     <br> 
     
@@ -129,6 +137,7 @@ Find task: `update <index> <desc/date> <new description/YYYY-MM-DD>`
     <br>
     <br>
     Expected outcome:
+    <br>
     ![Image of Update Screen 2](images/update2.png) 
     <br> 
     
@@ -142,6 +151,7 @@ Get list of commands: `help`
     <br>
     <br>
     Expected outcome:
+    <br>
     ![Image of Help Screen](images/help.png) 
     <br> 
 
