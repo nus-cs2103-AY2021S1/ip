@@ -29,12 +29,12 @@ public class Junimo {
 
     private TaskList taskList;
     private Parser parser;
-
+    
     public Junimo(String filePath) {
         try {
             storage = new Storage(filePath);
-            taskList = new TaskList(storage.load());
-            parser = new Parser(taskList);
+            taskList = new TaskList();
+            parser = new Parser(taskList, storage.load());
         } catch (FileNotFoundException e) {
             System.out.println("Error: file not created. " + e);
         }

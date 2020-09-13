@@ -36,8 +36,10 @@ public class Storage {
             File dirFile = new File(dir);
 
             // Create file and parent directories if they do not exist yet
-            dirFile.mkdirs();
-            file.createNewFile();
+            boolean parentDirCreated = dirFile.mkdirs();
+            assert parentDirCreated;
+            boolean fileCreated = file.createNewFile();
+            assert fileCreated;
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }

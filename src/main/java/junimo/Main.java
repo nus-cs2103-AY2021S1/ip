@@ -1,4 +1,4 @@
-package junimo.ui;
+package junimo;
 
 import java.io.IOException;
 
@@ -8,7 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import junimo.Junimo;
+import junimo.ui.MainWindow;
 
 /**
  * A GUI for Duke using FXML.
@@ -29,7 +29,7 @@ public class Main extends Application {
             stage.setTitle("Junimo");
             stage.setScene(scene);
             stage.setResizable(false);
-            fxmlLoader.<MainWindow>getController().setDuke(junimo);
+            fxmlLoader.<MainWindow>getController().setJunimo(junimo);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

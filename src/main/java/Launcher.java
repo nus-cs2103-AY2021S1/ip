@@ -1,5 +1,5 @@
 import javafx.application.Application;
-import junimo.ui.Main;
+import junimo.Main;
 
 /**
  * A launcher class to workaround classpath issues.

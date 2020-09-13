@@ -8,7 +8,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import junimo.Junimo;
-import junimo.ui.DialogBox;
 
 /**
  * Controller for junimo.ui.MainWindow. Provides the layout for the other controls.
@@ -22,18 +21,18 @@ public class MainWindow extends AnchorPane {
     private TextField userInput;
     @FXML
     private Button sendButton;
-    
+
     private Junimo junimo;
-    
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Blue-Junimo.png"));
-    private Image junimoImage = new Image(this.getClass().getResourceAsStream("/images/Purple-Junimo.png"));
+
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/Blue-Junimo.png"));
+    private final Image junimoImage = new Image(this.getClass().getResourceAsStream("/images/Purple-Junimo.png"));
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    public void setDuke(Junimo d) {
+    public void setJunimo(Junimo d) {
         junimo = d;
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(junimo.getWelcome(), junimoImage)
