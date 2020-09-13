@@ -1,6 +1,7 @@
 import java.io.IOException;
 import java.util.Collections;
 
+import duke.ui.Ui;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -57,5 +58,11 @@ public class DialogBox extends HBox {
         var db = new DialogBox(text, img);
         db.flip();
         return db;
+    }
+    
+    public static DialogBox initDukeDialog(Image img) {
+        System.out.println(Ui.LOGO);
+        String welcomeMsg = "Welcome to Duke!!!";
+        return getDukeDialog(welcomeMsg, img);
     }
 }

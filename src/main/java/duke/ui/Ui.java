@@ -7,7 +7,7 @@ import java.util.Scanner;
  */
 public class Ui {
     private final String DIVIDER = "----------------------------------------------------------------------------------";
-    private final String LOGO = " ____        _        \n"
+    public static final String LOGO = " ____        _        \n"
                               + "|  _ \\ _   _| | _____ \n"
                               + "| | | | | | | |/ / _ \\\n"
                               + "| |_| | |_| |   <  __/\n"
