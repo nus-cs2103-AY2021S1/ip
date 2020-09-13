@@ -3,15 +3,18 @@ package duke;
 import duke.command.Command;
 
 /**
- * Represents a Personal Assistant Chatbot, Duke, that helps a person to keep track of various tasks.
+ * Represents a Personal Assistant Chat bot, Duke, that helps a person to keep track of various tasks.
  */
 public class Duke {
+    /** The Storage used for loading and saving tasks */
     private final Storage storage;
+    /** The Ui used for user interaction */
     private final Ui ui;
+    /** The list of tasks */
     private TaskList tasks;
 
     /**
-     * Creates a new Duke Chatbot.
+     * Creates a new Duke Chat bot.
      * If there is an existing file in the filepath, previous tasks (if any) will be loaded.
      *
      * @param filePath the filepath where tasks are loaded from and saved to.
@@ -23,26 +26,34 @@ public class Duke {
         try {
             tasks = new TaskList(storage.loadTasks());
         } catch (DukeException e) {
-            ui.generateErrorMessage(e);
-            tasks = new TaskList();
+            System.out.println(ui.generateErrorMessage(e));
         }
     }
 
     /**
-     * Runs the Duke Chatbot.
+     * Runs the Duke Chat bot.
      * If an Exit command is entered, Duke terminates.
      */
     public void run() {
-        System.out.println(ui.generateDividers(ui.generateWelcomeMessage()));
+        String welcomeMessage = ui.generateDividers(
+                ui.generateWelcomeMessage());
+        System.out.println(welcomeMessage);
         boolean isExit = false;
+
         while (!isExit) {
+            String fullCommand = ui.readCommand();
+
             try {
-                String fullCommand = ui.readCommand();
                 Command c = Parser.parse(fullCommand);
-                System.out.println(ui.generateDividers(c.executeCommand(tasks, ui, storage)));
+                String message = ui.generateDividers(
+                        c.executeCommand(tasks, ui, storage));
+                System.out.println(message);
                 isExit = c.isExit();
             } catch (DukeException e) {
-                System.out.println(ui.generateDividers(ui.generateErrorMessage(e)));
+                String errorMessage = ui.generateDividers(
+                        ui.generateErrorMessage(e));
+                System.out.println(ui.generateDividers(
+                        errorMessage));
             }
         }
     }
@@ -56,7 +67,8 @@ public class Duke {
     public Response getResponse(String input) {
         try {
             Command c = Parser.parse(input);
-            return new Response(c.executeCommand(tasks, ui, storage), c.isExit());
+            return new Response(c.executeCommand(tasks, ui, storage),
+                    c.isExit());
         } catch (DukeException e) {
             return new Response(ui.generateErrorMessage(e), false);
         }

@@ -8,8 +8,10 @@ import duke.task.Task;
  * Represents the part of Duke that deals with user interaction.
  */
 public class Ui {
+    /** A line divider */
     private static final String DIVIDER =
             "______________________________________________________________________";
+    /** The scanner used for user interaction */
     private final Scanner sc;
 
     /**
@@ -71,26 +73,29 @@ public class Ui {
     }
 
     /**
-     * Generates a message with a list of tasks from the task list that contain a common keyword.
+     * Generates a message with a list of tasks
+     * from the task list that contain a common keyword.
      *
      * @param keyword the specified keyword.
      * @param tasks the task list.
      * @return the generated message.
      */
     public String generateFindMessage(String keyword, TaskList tasks) {
-        return "Here are the matching tasks in your list:\n" + tasks.getMatchingTasks(keyword);
+        return "Here are the matching tasks in your list:\n"
+                + tasks.getMatchingTasks(keyword);
     }
 
     /**
      * Generates a message that a task has been successfully added into the task list.
-     * The new total number of tasks will be recalculated and will be included in the message.
+     * The new total number of tasks will be recalculated and included in the message.
      *
      * @param task the task that has been added into the task list.
      * @param tasks the task list.
      * @return the generated message.
      */
     public String generateAddedMessage(Task task, TaskList tasks) {
-        return "Task added successfully!\n\t" + task + generateNumOfTasksMessage(tasks);
+        return "Task added successfully!\n\t"
+                + task + generateNumOfTasksMessage(tasks);
     }
 
     /**
@@ -105,14 +110,15 @@ public class Ui {
 
     /**
      * Generates a message that a task has been successfully deleted from the task list.
-     * The new total number of tasks will be recalculated and will be included in the message.
+     * The new total number of tasks will be recalculated and included in the message.
      *
      * @param task the task that has been deleted from the task list.
      * @param tasks the task list.
      * @return the generated message.
      */
     public String generateDeletedMessage(Task task, TaskList tasks) {
-        return "Task deleted successfully!\n\t" + task + generateNumOfTasksMessage(tasks);
+        return "Task deleted successfully!\n\t"
+                + task + generateNumOfTasksMessage(tasks);
     }
 
     /**
@@ -122,7 +128,8 @@ public class Ui {
      * @return the generated message.
      */
     public String generateNumOfTasksMessage(TaskList tasks) {
-        return String.format("\nNow you have %d task(s) in the list.", tasks.getNumOfTasks());
+        return String.format("\nNow you have %d task(s) in the list.",
+                tasks.getNumOfTasks());
     }
 
     /**

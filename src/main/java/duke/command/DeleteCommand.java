@@ -10,6 +10,7 @@ import duke.task.Task;
  * Represents a command that will delete a task from the task list.
  */
 public class DeleteCommand extends Command {
+    /** The number of the task to be deleted */
     private final int taskNum;
 
     /**
@@ -32,13 +33,9 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String executeCommand(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        try {
-            Task task = tasks.deleteTask(taskNum);
-            storage.save(tasks.getTasks());
-            return ui.generateDeletedMessage(task, tasks);
-        } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Uh-oh! Looks like you have entered an invalid task number.");
-        }
+        Task task = tasks.deleteTask(taskNum);
+        storage.save(tasks.getTasks());
+        return ui.generateDeletedMessage(task, tasks);
     }
 
     /**

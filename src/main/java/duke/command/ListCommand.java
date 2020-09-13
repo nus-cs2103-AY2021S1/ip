@@ -8,7 +8,6 @@ import duke.Ui;
  * Represents a command that will display all tasks in the task list.
  */
 public class ListCommand extends Command {
-
     /**
      * Gets all the tasks in the task list.
      *

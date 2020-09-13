@@ -9,7 +9,6 @@ import duke.Ui;
  * Represents a command based on the user input.
  */
 public abstract class Command {
-
     /**
      * Executes the command with the specified task list, ui and storage.
      *

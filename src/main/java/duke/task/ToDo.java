@@ -22,12 +22,14 @@ public class ToDo extends Task {
      */
 
     public static ToDo load(String toDoDetails) {
+        // Split into type of task, status and description
         String[] splitToDoDetails = toDoDetails.split("\\|", 3);
-        for (int i = 0; i < splitToDoDetails.length; i++) {
-            splitToDoDetails[i] = splitToDoDetails[i].strip();
-        }
-        ToDo todo = new ToDo(splitToDoDetails[2].strip());
-        if (splitToDoDetails[1].equals("true")) {
+
+        String status = splitToDoDetails[1];
+        String description = splitToDoDetails[2];
+        ToDo todo = new ToDo(description);
+
+        if (status.equals("true")) {
             todo.markAsDone();
         }
         return todo;

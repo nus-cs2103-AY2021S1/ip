@@ -4,7 +4,9 @@ package duke.task;
  * Represents a task to be completed.
  */
 public class Task {
+    /** The task description */
     protected String description;
+    /** Indicates whether the task is completed or not */
     protected boolean isDone;
 
     /**

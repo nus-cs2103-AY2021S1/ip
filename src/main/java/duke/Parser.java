@@ -18,7 +18,6 @@ import duke.task.ToDo;
  * Represents the part of Duke that deals with making sense of the user command.
  */
 public class Parser {
-
     /**
      * Parses the command given by the user so that Duke can execute it.
      *
@@ -27,30 +26,46 @@ public class Parser {
      * @throws DukeException if the command given by the user is invalid.
      */
     public static Command parse(String fullCommand) throws DukeException {
+        // Replace excess whitespaces with just one
         fullCommand = fullCommand.strip().replaceAll("\\s+", " ");
-        String[] splitCommands = fullCommand.split(" ", 2);
-        splitCommands[0] = splitCommands[0].toUpperCase();
+        // Split into command and description
+        String[] splitCommand = fullCommand.split(" ", 2);
+        // Convert command to uppercase to standardize
+        String command = splitCommand[0].toUpperCase();
+
         try {
-            switch (splitCommands[0]) {
+            switch (command) {
             case "TODO":
-                ToDo todo = new ToDo(splitCommands[1]);
+                String description = splitCommand[1];
+                ToDo todo = new ToDo(description);
                 return new AddCommand(todo);
             case "DEADLINE":
-                String[] splitDeadline = splitCommands[1].split(" /by ", 2);
-                Deadline deadline = new Deadline(splitDeadline[0], LocalDate.parse(splitDeadline[1]));
+                // Split into description and due date
+                String[] splitDeadline = splitCommand[1].split(" /by ", 2);
+
+                description = splitDeadline[0];
+                LocalDate dueDate = LocalDate.parse(splitDeadline[1]);
+                Deadline deadline = new Deadline(description, dueDate);
                 return new AddCommand(deadline);
             case "EVENT":
-                String[] splitEvent = splitCommands[1].split(" /at ", 2);
-                Event event = new Event(splitEvent[0], LocalDate.parse(splitEvent[1]));
+                // Split into description and event date
+                String[] splitEvent = splitCommand[1].split(" /at ", 2);
+
+                description = splitEvent[0];
+                LocalDate eventDate = LocalDate.parse(splitEvent[1]);
+                Event event = new Event(description, eventDate);
                 return new AddCommand(event);
             case "DELETE":
-                return new DeleteCommand(Integer.parseInt(splitCommands[1]));
+                int taskNum = Integer.parseInt(splitCommand[1]);
+                return new DeleteCommand(taskNum);
             case "FIND":
-                return new FindCommand(splitCommands[1]);
+                String keyword = splitCommand[1];
+                return new FindCommand(keyword);
             case "LIST":
                 return new ListCommand();
             case "DONE":
-                return new DoneCommand(Integer.parseInt(splitCommands[1]));
+                taskNum = Integer.parseInt(splitCommand[1]);
+                return new DoneCommand(taskNum);
             case "BYE":
                 return new ExitCommand();
             default:
@@ -63,7 +78,7 @@ public class Parser {
         } catch (DateTimeParseException e) {
             throw new DukeException("Uh-oh! Looks like you have got the format for the date wrong.");
         } catch (IndexOutOfBoundsException e) {
-            switch (splitCommands[0]) {
+            switch (command) {
             case "DELETE":
                 throw new DukeException(
                         "Uh-oh! You did not enter the number of the task you wish to delete.");
@@ -71,7 +86,7 @@ public class Parser {
                 throw new DukeException(
                         "Uh-oh! You did not enter the number of the task you wish to complete.");
             default:
-                if (splitCommands.length > 1) {
+                if (splitCommand.length > 1) {
                     throw new DukeException(
                             "Uh-oh! Looks like you have got the format for the description wrong.");
                 } else {

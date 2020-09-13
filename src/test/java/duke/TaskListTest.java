@@ -14,9 +14,9 @@ import duke.task.Task;
 import duke.task.ToDo;
 
 public class TaskListTest {
-    private ToDo todo = new ToDo("homework");
-    private Deadline deadline = new Deadline("assignment", LocalDate.parse("2020-09-05"));
-    private Event event = new Event("party", LocalDate.parse("2020-09-04"));
+    private final ToDo todo = new ToDo("homework");
+    private final Deadline deadline = new Deadline("assignment", LocalDate.parse("2020-09-05"));
+    private final Event event = new Event("party", LocalDate.parse("2020-09-04"));
 
     @Test
     public void addTask_tasksAddedSuccessfully() {
@@ -31,7 +31,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void deleteTask_deleteSecondTask_taskDeletedSuccessfully() {
+    public void deleteTask_deleteSecondTask_taskDeletedSuccessfully() throws DukeException {
         TaskList tasks = new TaskList();
         tasks.addTask(todo);
         tasks.addTask(deadline);
@@ -79,7 +79,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void markAsDone_taskCompletedSuccessfully() {
+    public void markAsDone_taskCompletedSuccessfully() throws DukeException {
         TaskList tasks = new TaskList();
         tasks.addTask(todo);
         tasks.addTask(deadline);

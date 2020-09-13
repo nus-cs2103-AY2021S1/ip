@@ -10,6 +10,7 @@ import duke.task.Task;
  * Tasks can be added into, marked as done, or deleted from the list.
  */
 public class TaskList {
+    /** The list associated with this TaskList */
     private final List<Task> tasks;
 
     /**
@@ -43,38 +44,13 @@ public class TaskList {
      * @param taskNum the number of the task to be deleted.
      * @return the deleted task.
      */
-    public Task deleteTask(int taskNum) {
+    public Task deleteTask(int taskNum) throws DukeException {
         int index = taskNum - 1;
-        return tasks.remove(index);
-    }
-
-    /**
-     * Retrieves the task list.
-     *
-     * @return the list of tasks.
-     */
-    public List<Task> getTasks() {
-        return tasks;
-    }
-
-    /**
-     * Retrieves the number of tasks in the task list.
-     *
-     * @return the number of tasks in the task list.
-     */
-    public int getNumOfTasks() {
-        return tasks.size();
-    }
-
-    /**
-     * Retrieves a task from the task list.
-     *
-     * @param taskNum the number of the task to be retrieved.
-     * @return the retrieved task.
-     */
-    public Task getTask(int taskNum) {
-        int index = taskNum - 1;
-        return tasks.get(index);
+        try {
+            return tasks.remove(index);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Uh-oh! Looks like you have entered an invalid task number.");
+        }
     }
 
     /**
@@ -82,9 +58,13 @@ public class TaskList {
      *
      * @param taskNum the number of the task to be marked as done.
      */
-    public void markAsDone(int taskNum) {
+    public void markAsDone(int taskNum) throws DukeException {
         int index = taskNum - 1;
-        tasks.get(index).markAsDone();
+        try {
+            tasks.get(index).markAsDone();
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Uh-oh! Looks like you have entered an invalid task number.");
+        }
     }
 
     /**
@@ -95,12 +75,32 @@ public class TaskList {
      */
     public TaskList getMatchingTasks(String keyword) {
         TaskList matchingTasks = new TaskList();
+
         for (Task task : tasks) {
             if (task.toString().contains(keyword)) {
                 matchingTasks.addTask(task);
             }
         }
         return matchingTasks;
+    }
+
+    /**
+     * Retrieves a specific task from the task list.
+     *
+     * @param taskNum the number of the task to be retrieved.
+     * @return the retrieved task.
+     */
+    public Task getTask(int taskNum) {
+        int index = taskNum - 1;
+        return tasks.get(index);
+    }
+
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
+    public int getNumOfTasks() {
+        return tasks.size();
     }
 
     /**
@@ -111,9 +111,11 @@ public class TaskList {
     @Override
     public String toString() {
         StringBuilder allTasks = new StringBuilder();
+
         for (int i = 1; i <= tasks.size(); i++) {
             int index = i - 1;
-            allTasks.append("\n").append(i).append(".").append(tasks.get(index));
+            allTasks.append("\n").append(i).append(".")
+                    .append(tasks.get(index));
         }
         return allTasks.toString();
     }
