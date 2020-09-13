@@ -15,11 +15,11 @@ import task.Todo;
 /**
  * Handles the opening and storing of tasks from text files.
  */
-class Storage {
+public class Storage {
 
     private String filePath;
 
-    Storage(String filePath) {
+    public Storage(String filePath) {
         this.filePath = filePath;
     }
 
@@ -27,6 +27,7 @@ class Storage {
      * Parses text file from file path specified to get
      * the Task objects stored, and returns them all
      * packaged in an ArrayList.
+     *
      * @return ArrayList containing Task objects.
      * @throws DukeException Exception while loading from text file.
      */
@@ -49,13 +50,13 @@ class Storage {
                 // Note, this is assuming that format of
                 // task.Task.getDescriptionForDatabase() remains the same.
                 String[] formattedTaskString = taskFromFile.split(" - ");
-                Parser.Command taskCommand = Parser.parseCommand(formattedTaskString[0]);
+                String taskType = formattedTaskString[0];
                 boolean isTaskDone = formattedTaskString[1].equals("1");
-                switch (taskCommand) {
-                case TODO:
+                switch (taskType) {
+                case "todo":
                     outputTaskList.add(new Todo(formattedTaskString[2], isTaskDone));
                     break;
-                case EVENT:
+                case "event":
                     outputTaskList.add(
                             new Event(
                                     formattedTaskString[2],
@@ -64,7 +65,7 @@ class Storage {
                             )
                     );
                     break;
-                case DEADLINE:
+                case "deadline":
                     outputTaskList.add(
                             new Deadline(
                                     formattedTaskString[2],
@@ -86,11 +87,12 @@ class Storage {
 
     /**
      * Saves the Tasks stored in a TaskList into the file path of the Storage.
+     *
      * @param taskList TaskList object containing Task(s) to store.
      * @return true if store was successful.
      * @throws DukeException Exception while storing into file.
      */
-    boolean store(TaskList taskList) throws DukeException {
+    public boolean store(TaskList taskList) throws DukeException {
         try {
             File taskListFile = new File(filePath);
             // Clear the pre-existing file if there is one.

@@ -38,13 +38,15 @@ class ParserTest {
      */
     @Test
     void testParserInvalidCommand() {
-        assertEquals(
-                Parser.Command.INVALID,
-                Parser.parseCommand("im not sure")
-        );
-        assertEquals(
-                Parser.Command.INVALID,
-                Parser.parseCommand("even t concert /at tonight!")
-        );
+        try {
+            Parser.getCommand("im not sure", new TaskList(), new Storage("")).executeWithResponse();
+        } catch (DukeException e) {
+            assertEquals("I'm sorry, but I don't know what that means :-(", e.toString());
+        }
+        try {
+            Parser.getCommand("even t concert /at tonight!", new TaskList(), new Storage("")).executeWithResponse();
+        } catch (DukeException e) {
+            assertEquals("I'm sorry, but I don't know what that means :-(", e.toString());
+        }
     }
 }

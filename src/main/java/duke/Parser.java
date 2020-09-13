@@ -1,49 +1,57 @@
 package duke;
 
+import command.ByeCommand;
+import command.Command;
+import command.DeadlineCommand;
+import command.DeleteCommand;
+import command.DoneCommand;
+import command.EventCommand;
+import command.FindCommand;
+import command.HelpCommand;
+import command.InvalidCommand;
+import command.ListCommand;
+import command.TodoCommand;
+
+
 /**
  * Contains two parse functions, one for interpreting user input
  * to get the correct Command used, and another function to separate
  * strings with time into its description and time.
  */
-class Parser {
-
-    enum Command {
-        BYE, LIST, DONE, DELETE, TODO, EVENT,
-        DEADLINE, FIND, HELP, INVALID
-    }
+public class Parser {
 
     /**
      * Given the full input string, this method checks the first
      * few characters to see if the keyword corresponds to a specific
-     * Command.
+     * Command and returns a new command to be executed.
      *
      * @param fullCommand The entire command from the user input.
      * @return The Command corresponding to the keyword from the user.
      */
-    static Command parseCommand(String fullCommand) {
+    static Command getCommand(String fullCommand, TaskList taskList, Storage storage) {
         String[] splitWords = fullCommand.split(" ");
         String keyword = splitWords[0].toLowerCase();
         switch (keyword) {
         case "bye":
-            return Command.BYE;
+            return new ByeCommand(storage, taskList);
         case "list":
-            return Command.LIST;
+            return new ListCommand(taskList);
         case "done":
-            return Command.DONE;
+            return new DoneCommand(fullCommand, taskList);
         case "delete":
-            return Command.DELETE;
+            return new DeleteCommand(fullCommand, taskList);
         case "todo":
-            return Command.TODO;
+            return new TodoCommand(fullCommand, taskList);
         case "event":
-            return Command.EVENT;
+            return new EventCommand(fullCommand, taskList);
         case "deadline":
-            return Command.DEADLINE;
+            return new DeadlineCommand(fullCommand, taskList);
         case "find":
-            return Command.FIND;
+            return new FindCommand(fullCommand, taskList);
         case "help":
-            return Command.HELP;
+            return new HelpCommand();
         default:
-            return Command.INVALID;
+            return new InvalidCommand();
         }
     }
 
@@ -55,47 +63,43 @@ class Parser {
      * @return A String array of size 2. Index 0 contains the task's description,
      * index 1 contains the date of the task.
      */
-    static String[] parseTimedTask(String str) throws DukeException {
+    public static String[] parseTimedTask(String str) throws DukeException {
         String[] result = new String[2];
-        try {
-            // Split the string first then loop through to find the stop point at either /at or /by.
-            String[] arr = str.split(" ");
-            int indexToStop = -1;
-            for (int i = 0; i < arr.length; i++) {
-                if (arr[i].equals("/at") || arr[i].equals("/by")) {
-                    indexToStop = i;
-                    // Stop index when indicator /at or /by is found.
-                }
+        // Split the string first then loop through to find the stop point at either /at or /by.
+        String[] arr = str.split(" ");
+        int indexToStop = -1;
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i].equals("/at") || arr[i].equals("/by")) {
+                indexToStop = i;
+                // Stop index when indicator /at or /by is found.
             }
-            if (indexToStop == -1) {
-                throw new DukeException("Incorrect Input for timed task.");
-            }
-
-            // Use StringBuilder Class to recreate the description and time separately.
-            StringBuilder sb = new StringBuilder();
-            for (int j = 0; j < indexToStop; j++) {
-                sb.append(arr[j]);
-                if (j != indexToStop - 1) {
-                    sb.append(" ");
-                }
-            }
-            // task.Event / task.Deadline description has been built, pass it to result[0].
-            result[0] = sb.toString();
-
-            sb = new StringBuilder();
-            for (int k = indexToStop + 1; k < arr.length; k++) {
-                sb.append(arr[k]);
-                if (k != arr.length - 1) {
-                    sb.append(" ");
-                }
-            }
-            String date = sb.toString();
-            // Now to check if this date can be formatted nicely using duke.DateTimeProcessor class.
-            String parsedDate = new DateTimeProcessor().getParsedDate(date);
-            result[1] = parsedDate;
-        } catch (DukeException e) {
-            throw e;
         }
+        if (indexToStop == -1) {
+            throw new DukeException("Incorrect Input for timed task.");
+        }
+
+        // Use StringBuilder Class to recreate the description and time separately.
+        StringBuilder sb = new StringBuilder();
+        for (int j = 0; j < indexToStop; j++) {
+            sb.append(arr[j]);
+            if (j != indexToStop - 1) {
+                sb.append(" ");
+            }
+        }
+        // task.Event / task.Deadline description has been built, pass it to result[0].
+        result[0] = sb.toString();
+
+        sb = new StringBuilder();
+        for (int k = indexToStop + 1; k < arr.length; k++) {
+            sb.append(arr[k]);
+            if (k != arr.length - 1) {
+                sb.append(" ");
+            }
+        }
+        String date = sb.toString();
+        // Now to check if this date can be formatted nicely using duke.DateTimeProcessor class.
+        String parsedDate = new DateTimeProcessor().getParsedDate(date);
+        result[1] = parsedDate;
         return result;
     }
 }

@@ -8,7 +8,7 @@ public class DukeException extends Exception {
 
     private String errorMsg;
 
-    DukeException(String msg) {
+    public DukeException(String msg) {
         this.errorMsg = msg;
     }
 
