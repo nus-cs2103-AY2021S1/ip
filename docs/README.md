@@ -18,7 +18,7 @@ Examples include:
 
 * `todo eat`: Adds a ToDo Task called eat.
 
-* `deadline homework /by 12-09-2020 1900`: Adds a Deadline Task called homework with the date time of 12 SEP 2020, 7pm
+* `deadline homework /by 12-09-2020 1900`: Adds a Deadline Task called homework with the date time of 12 SEP 2020 7pm.
 
 * `event dance /at 12-09-2020 1900`: Adds a Event Task called dance with the date time of 12 SEP 2020 7pm.
 
