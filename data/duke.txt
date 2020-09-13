@@ -3,3 +3,4 @@ T | ✗ | watch show
 T | ✓ | eat dinner
 D | ✓ | return book | 2020-01-01T12:30
 E | ✗ | project meeting | 2020-02-02T14:30
+T | ✗ | sleep

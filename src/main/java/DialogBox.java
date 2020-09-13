@@ -7,10 +7,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Label;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 
 /**
  * An example of a custom control using FXML.
@@ -35,6 +40,24 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         displayPicture.setImage(img);
+
+        // create a circle and clip it
+        Circle circle = new Circle(50, 50, 50);
+        displayPicture.setClip(circle);
+
+        // snapshot the rounded image
+        SnapshotParameters parameters = new SnapshotParameters();
+        parameters.setFill(Color.TRANSPARENT);
+        WritableImage snappedImage = displayPicture.snapshot(parameters, null);
+
+        // remove the rounding clip to allow effect to show through
+        displayPicture.setClip(null);
+        DropShadow glow = new DropShadow();
+        glow.setColor(Color.RED);
+        glow.setWidth(15);
+        glow.setHeight(15);
+        displayPicture.setEffect(glow);
+        displayPicture.setImage(snappedImage);
     }
 
     /**

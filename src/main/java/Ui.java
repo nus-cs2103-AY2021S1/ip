@@ -35,7 +35,8 @@ public class Ui {
      * @return Returns a greeting string.
      */
     public String greet() {
-        return format("Hello! I'm Duke!\n" + "What can I do for you?");
+        return format("Hello! I'm Duke!\n" + "What can I do for you?\n"
+                + "Type 'help' if you are a new user!");
     }
 
     /**
@@ -111,6 +112,25 @@ public class Ui {
             sb.append(i + 1 + "." + tasks.get(i) + "\n");
         }
         return format(sb.toString());
+    }
+
+    /**
+     * Returns/Prints a help menu for the user.
+     * @return Returns a string message for all the commands.
+     */
+    public String displayHelpMenu() {
+        return line + "\n" + "Available Commands: " + "\n"
+                + "list: displays all current tasks" + "\n"
+                + "done [task no]: marks task as completed" + "\n"
+                + "todo [details]: adds a todo task" + "\n"
+                + "deadline [details] /by [YYYY-MM-DD HH:MM]: adds a deadline" + "\n"
+                + "event [details] /at [YYYY-MM-DD HH:MM]: adds an event" + "\n"
+                + "delete [task no]: removes task" + "\n"
+                + "find [keyword]: searches for tasks" + "\n"
+                + "undo: reverts the latest command" + "\n"
+                + "bye: exits the program" + "\n"
+                + "help: opens this help menu" + "\n"
+                + "Enjoy this program!" + "\n" + line;
     }
 
     /**
