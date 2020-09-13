@@ -16,7 +16,7 @@ public class Argument {
      * @param action
      * @param optionValueMap
      */
-    public Argument(Action action, Map optionValueMap) {
+    public Argument(Action action, Map<String, String> optionValueMap) {
         this.action = action;
         this.optionValueMap = optionValueMap;
     }
