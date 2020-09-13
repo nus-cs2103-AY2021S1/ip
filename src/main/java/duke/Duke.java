@@ -33,14 +33,10 @@ public class Duke {
      * Gets a string output from Duke based on input given in order to output message for client.
      * @param input Input that is parsed to generate a output.
      */
-    public String getResponse(String input) {
+    public String getResponse(String input) throws DukeException {
         Ui ui = new Ui();
         Storage storage = new Storage("\\save.txt");
-        try {
-            Command c = Parser.manage(input);
-            return (c.execute(ui, storage));
-        } catch (DukeException e) {
-            return (e.getMessage());
-        }
+        Command c = Parser.manage(input);
+        return (c.execute(ui, storage));
     }
 }
