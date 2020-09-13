@@ -36,6 +36,11 @@ public class Event extends Task {
     }
 
     @Override
+    public LocalDate getDate() {
+        return at;
+    }
+
+    @Override
     public String summarize() {
         return String.format("E | %s | %s", super.summarize(),
                 at.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));

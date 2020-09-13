@@ -42,7 +42,9 @@ public class AddDirectiveParser {
      * Creates an {@code AddDirective} for a {@code Task}.
      *
      * OPTION_DESCRIPTION: the description of a {@code Task}.
+     *
      * OPTION_DEADLINE_DATETIME: the datetime for a {@code Deadline}.
+     *
      * OPTION_EVENT_DATETIME: the datetime for an {@code Event}.
      *
      * @param args The action and options to be parsed.
@@ -75,7 +77,7 @@ public class AddDirectiveParser {
         String dateString = args.getOptionValue(OPTION_DEADLINE_DATETIME);
 
         if (dateString.equals("")) {
-            throw new IncorrectInputException(String.format(ERROR_MISSING_DATE, "/by"));
+            throw new IncorrectInputException(String.format(ERROR_MISSING_DATE, OPTION_DEADLINE_DATETIME));
         }
 
         try {
@@ -91,7 +93,7 @@ public class AddDirectiveParser {
         String dateString = args.getOptionValue(OPTION_EVENT_DATETIME);
 
         if (dateString.equals("")) {
-            throw new IncorrectInputException(String.format(ERROR_MISSING_DATE, "/at"));
+            throw new IncorrectInputException(String.format(ERROR_MISSING_DATE, OPTION_EVENT_DATETIME));
         }
 
         try {

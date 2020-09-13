@@ -1,9 +1,11 @@
 package rogue.model.task;
 
+import java.time.LocalDate;
+
 /**
  * Represents a task that can be tracked by Rogue.
  */
-public class Task {
+public abstract class Task {
     private String description;
     private boolean isDone;
 
@@ -34,6 +36,17 @@ public class Task {
 
     public boolean isDone() {
         return isDone;
+    }
+
+    /**
+     * Gets the date of the {@code Task}.
+     *
+     * The epoch year is returned if the {@code Task} has no associated date.
+     *
+     * @return The date of the {@code Task}
+     */
+    public LocalDate getDate() {
+        return LocalDate.EPOCH;
     }
 
     /**

@@ -1,5 +1,6 @@
 package rogue.model.task;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -65,12 +66,33 @@ public class TaskList {
      * Finds {@code Task} with descriptions containing the search term.
      *
      * @param searchTerm The search term.
-     * @return A list of tasks whose descriptions contain the search term
+     * @return A {@code TaskList} for all matching {@code Task}
      */
-    public List<Task> search(String searchTerm) {
-        return tasks.stream()
+    public TaskList searchByDescription(String searchTerm) {
+        List<Task> matchingTasks = tasks.stream()
                 .filter(task -> task.getDescription().contains(searchTerm))
                 .collect(Collectors.toList());
+
+        return new TaskList(matchingTasks);
+    }
+
+    /**
+     * Finds {@code Task} that are due to happen in the specified number of days.
+     *
+     * Overdue {@code Task} are not included in the search.
+     *
+     * @param numOfDays The number of days.
+     * @return A {@code TaskList} for all matching {@code Task}
+     */
+    public TaskList searchByDays(int numOfDays) {
+        LocalDate startDate = LocalDate.now();
+        LocalDate endDate = startDate.plusDays(numOfDays + 1); // Add 1 to include end date
+
+        List<Task> matchingTasks = tasks.stream()
+                .filter(task -> task.getDate().isAfter(startDate) && task.getDate().isBefore(endDate))
+                .collect(Collectors.toList());
+
+        return new TaskList(matchingTasks);
     }
 
     /**

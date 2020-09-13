@@ -36,6 +36,11 @@ public class Deadline extends Task {
     }
 
     @Override
+    public LocalDate getDate() {
+        return by;
+    }
+
+    @Override
     public String summarize() {
         return String.format("D | %s | %s", super.summarize(),
                 by.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
