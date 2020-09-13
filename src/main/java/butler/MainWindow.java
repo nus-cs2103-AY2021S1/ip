@@ -1,5 +1,6 @@
 package butler;
 
+import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -7,6 +8,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import javafx.util.Duration;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -53,5 +56,13 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getButlerDialog(response, butlerImage)
         );
         userInput.clear();
+
+        if (input.equals("bye")) {
+            Stage s = (Stage) userInput.getScene().getWindow();
+            PauseTransition p = new PauseTransition(Duration.seconds(2));
+            p.setOnFinished(event ->
+                    s.close());
+            p.play();
+        }
     }
 }
