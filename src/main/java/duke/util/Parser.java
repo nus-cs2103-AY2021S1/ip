@@ -80,12 +80,16 @@ public class Parser {
             return new AddCommand(command, description);
         case "done":
             try {
-                int i = Integer.parseInt(parsed[1]);
-                return new DoneCommand(i);
+                String taskSelection = parsed[1];
+                if (taskSelection.equals("all")) {
+                    return new DoneCommand();
+                }
+                int taskNumber = Integer.parseInt(taskSelection);
+                return new DoneCommand(taskNumber);
             } catch (NumberFormatException nfe) {
                 throw new DukeException("Invalid task number!");
             } catch (ArrayIndexOutOfBoundsException aioobe) {
-                return new InvalidCommand("Hm? What task number have you done?");
+                return new InvalidCommand("You can mark tasks as done!\nE.g. 'done 1' or 'done all'");
             }
         case "list":
             return new ListCommand();
@@ -101,13 +105,13 @@ public class Parser {
             } catch (NumberFormatException nfe) {
                 throw new DukeException("Invalid task number!");
             } catch (ArrayIndexOutOfBoundsException aioobe) {
-                return new InvalidCommand("Uh? What task number to remove?");
+                return new InvalidCommand("You can remove tasks from the list!\nE.g. 'remove 1' or 'remove all'");
             }
         case "find":
             try {
                 return new FindCommand(parsed[1]);
             } catch (ArrayIndexOutOfBoundsException aioobe) {
-                return new InvalidCommand("Hm? What do you want to find?");
+                return new InvalidCommand("You can filter your list using keywords!\nE.g. 'find assignment'");
             }
         case "help":
             return new HelpCommand();
@@ -115,16 +119,16 @@ public class Parser {
             try {
                 return new SortCommand(parsed[1]);
             } catch (ArrayIndexOutOfBoundsException aioobe) {
-                return new InvalidCommand("You can sort by: name, type, datetime");
+                return new InvalidCommand("You can sort by: name, type, datetime\nE.g. 'sort name'");
             }
         case "start":
             try {
                 int taskNumber = Integer.parseInt(parsed[1]);
                 return new StartTaskCommand(taskNumber, parsed[2] + " " + parsed[3]);
             } catch (ArrayIndexOutOfBoundsException aioobe) {
-                return new InvalidCommand();
+                return new InvalidCommand("You can set a fixed task's date time!\nE.g. 'start 1 today 23:00'");
             } catch (NumberFormatException nfe) {
-                throw new DukeException("Invalid task number!");
+                throw new DukeException("Invalid fixed task number!");
             }
         default:
             return new InvalidCommand();

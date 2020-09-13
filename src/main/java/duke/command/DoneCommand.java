@@ -15,8 +15,16 @@ public class DoneCommand implements Command {
 
     private final int index;
 
+    private final boolean isEntireList;
+
     public DoneCommand(int index) {
         this.index = index;
+        isEntireList = false;
+    }
+
+    public DoneCommand() {
+        this.index = -1;
+        isEntireList = true;
     }
 
     @Override
@@ -40,6 +48,17 @@ public class DoneCommand implements Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
+        if (isEntireList) {
+            for (Task task: tasks.getList()) {
+                if (!task.getDone()) {
+                    task.markAsDone();
+                }
+            }
+            storage.update(tasks.getList());
+            String msg = "Wow, you've done everything??\nNice, I've marked them all!";
+            ui.sendMessage(msg);
+            return msg;
+        }
         try {
             Task task = tasks.markDone(index);
             storage.update(tasks.getList());

@@ -27,6 +27,10 @@ public class SortCommand implements Command {
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        if (tasks.getList().isEmpty()) {
+            ui.sendMessage("I can't sort an empty list :(");
+            return "I can't sort an empty list :(";
+        }
         tasks.sort(sortBy);
         storage.update(tasks.getList());
         String successMessage = "Your list has been sorted!";

@@ -15,16 +15,16 @@ public class RemoveCommand implements Command {
 
     private final int index;
 
-    private final boolean isClear;
+    private final boolean isEntireList;
 
     public RemoveCommand(int index) {
         this.index = index;
-        isClear = false;
+        isEntireList = false;
     }
 
     public RemoveCommand() {
         index = -1;
-        isClear = true;
+        isEntireList = true;
     }
 
     @Override
@@ -53,11 +53,12 @@ public class RemoveCommand implements Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        if (isClear) {
+        if (isEntireList) {
             tasks.removeAll();
             storage.update(tasks.getList());
-            ui.sendMessage("Your list has been cleared!!");
-            return "Your list has been cleared!!";
+            String msg = "Your list has been cleared!! Yay~";
+            ui.sendMessage(msg);
+            return msg;
         }
         try {
             Task task = tasks.remove(index);

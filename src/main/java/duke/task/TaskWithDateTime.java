@@ -80,6 +80,9 @@ public abstract class TaskWithDateTime extends Task {
     }
 
     private LocalTime parseTime(String raw) {
+        if (!raw.contains("!") || !raw.contains(".")) {
+            raw += ":00";
+        }
         String timeString = String.format("%1$" + 5 + "s",
                 raw.replace(".", ":"))
                 .replace(" ", "0");

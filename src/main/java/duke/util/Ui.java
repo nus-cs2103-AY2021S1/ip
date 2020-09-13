@@ -28,7 +28,7 @@ public class Ui {
     /** The line for enclosing messages */
     private final String LINE = "    --------------------------------------------------------------";
 
-    private final String WELCOME_MESSAGE = "Hello! Tebby lives to serve :)\nType help for list of commands!";
+    private final String WELCOME_MESSAGE = "Hello! Tebby lives to serve :)\nSend 'help' for list of commands!";
 
     /**
      * Constructor for the Ui class.
@@ -66,6 +66,7 @@ public class Ui {
     }
 
     /**
+     * Prints the bot's message in a formatted way.
      * The standardized format for printing messages from the bot is:
      *
      *     --------------------------------------------------------------
@@ -163,7 +164,7 @@ public class Ui {
         for (String command: commands) {
             sb.append(" - ").append(command).append("\n");
         }
-        sb.append("<required> [optional]");
+        sb.append("\nFields: <required> [optional]");
         return sb.toString();
     }
 

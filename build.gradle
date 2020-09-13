@@ -30,12 +30,13 @@ test {
 }
 
 application {
-    mainClassName = "duke.gui.Launcher"
+    mainClassName = "duke.Launcher"
     //mainClassName = "duke.Duke"
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "TebbyGui"
+    //archiveBaseName = "TebbyCli"
     archiveClassifier = null
 }
 
