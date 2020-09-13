@@ -27,6 +27,12 @@ public class Duke {
         tasks = new TaskList(storage.load());
     }
 
+    public String intro() {
+        return "Hi Mary Poppins! My name is Duck. I am not familiar with the human language.\n"
+            + "But I would very much like to know about your adventures :(\n"
+            + "Would you type 'help' to know about all the commands that I understand? :D";
+    }
+
     /**
      * Gets the stage from Main.
      *
