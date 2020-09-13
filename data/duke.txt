@@ -1,9 +1,2 @@
-T | 0 | food
-T | 0 | food
-T | 0 | food
-T | 0 | food
-T | 0 | food
-T | 0 | food
-T | 0 | food
-T | 0 | buy food
-T | 0 | h
+E | 0 | Swimming practice | 23/9/2019
+T | 0 | Catch fishes!
