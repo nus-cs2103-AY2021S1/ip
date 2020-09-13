@@ -1,4 +1,4 @@
 D, 0, 2105 Assignment , 2020-09-18
-D, 0, CS2100 Assignment , 2020-09-12
-E, 0, CS2105 tutorial , 2020-09-08 1500
-E, 0, CS2100 Lecture , 2020-09-08 1600
+D, 1, CS2100 Assignment , 2020-09-12
+D, 0, Submit iP , 2020-09-18
+D, 0, Feedback Triangulation , 2020-09-19

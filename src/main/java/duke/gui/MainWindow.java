@@ -2,6 +2,8 @@ package duke.gui;
 
 import duke.Duke;
 import duke.Ui;
+
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -55,10 +57,8 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
 
-        if (response.equals("Bye! Please come again!")) {
-            userInput.setDisable(true);
-            sendButton.setDisable(true);
-            System.exit(0);
+        if (response.equals(Ui.byeMsg)) {
+            Platform.exit();
         }
     }
 }

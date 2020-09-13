@@ -14,7 +14,7 @@ public class Ui {
     final private String saveMsg = "Aright, I have remembered your sins :)";
     final private String retListMsg = "Here's what you have ordered...";
     final private String defaultError = DukeException.INVALID_COMMAND_EXCEPTION.toString();
-    final private String byeMsg = "Bye! Please come again!";
+    public final static String byeMsg = "Bye! Please come again!";
     final private String newLine = "\n";
 
     private Scanner s;
