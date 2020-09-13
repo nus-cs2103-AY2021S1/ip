@@ -91,6 +91,13 @@ public class TaskStorage {
         }
     }
 
+    /**
+     * Converts a string representation of boolean to a boolean.
+     * Reused from https://stackoverflow.com/a/18419766.
+     *
+     * @param isTrue String representation of boolean.
+     * @return Boolean representation of the String.
+     */
     private static boolean convertToBoolean(String isTrue) {
         boolean returnValue = false;
         if ("1".equalsIgnoreCase(isTrue) || "yes".equalsIgnoreCase(isTrue)
