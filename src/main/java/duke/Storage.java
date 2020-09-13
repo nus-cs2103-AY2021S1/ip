@@ -6,14 +6,17 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Stack;
 
 public class Storage {
     private String filepath;
     private File file;
+    private Stack<String> actions;
 
     Storage(String path) {
         this.filepath = path;
         this.file = new File(path);
+        this.actions = new Stack<>();
     }
 
     /**

@@ -1,14 +1,18 @@
 package duke;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Stack;
 
 public class Ui {
     private boolean exited = false;
     private TaskList tl;
     private Storage s;
+    private Stack<String> actions;
+
     Ui(TaskList tl, Storage s) {
         this.tl = tl;
         this.s = s;
+        this.actions = new Stack<>();
     }
 
     /**
@@ -105,6 +109,24 @@ public class Ui {
     }
 
     /**
+     * Prints out a string everytime the user indicates a task as not done
+     * @param arr arraylist of tasks
+     */
+    public static String printForUnDone(ArrayList<Task> arr, Task t) {
+        String keyword = "";
+        String toPrint = "";
+        if (t instanceof Deadline) {
+            keyword = "by";
+            toPrint = " (" + keyword + ": " + t.getTime() + ")";
+        } else if (t instanceof Event) {
+            keyword = "at";
+            toPrint = " (" + keyword + ": " + t.getTime() + ")";
+        }
+        return "Got it. Duke has marked this task as not done:" + "\n" + t.getIndicator()
+                + t.getIcon() + t.getName() + toPrint + "\n" + "Now you have " + arr.size() + " tasks in the list.";
+    }
+
+    /**
      * Prints out a string everytime the user deletes a task
      * @param arr temporary list of tasks
      * @param t the task to print out
@@ -187,8 +209,10 @@ public class Ui {
      */
     public String respondToDone(int taskNumber) throws Exception {
         ArrayList<Task> arr = tl.getArr();
-        Task t = arr.get(taskNumber - 1);
+        int position = taskNumber - 1;
+        Task t = arr.get(position);
         t.taskIsDone();
+        actions.push("done" + " " + position);
         s.listWriter(arr);
         return printForDone(arr, t);
     }
@@ -205,10 +229,13 @@ public class Ui {
      * Prints out the statement saying that todo has been added and updates the list
      */
     public String respondToTodo(String name) throws Exception {
+        ArrayList<Task> arr = tl.getArr();
         Todo t = new Todo(name);
         tl.addTask(t);
-        s.listWriter(tl.getArr());
-        return print(tl.getArr(), t);
+        int position = arr.size() - 1;
+        actions.push("todo " + position);
+        s.listWriter(arr);
+        return print(arr, t);
     }
 
     /**
@@ -229,6 +256,8 @@ public class Ui {
         ArrayList<Task> arr = tl.getArr();
         Event e = new Event(name, time);
         tl.addTask(e);
+        int position = arr.size() - 1;
+        actions.push("event" + " " + position);
         s.listWriter(arr);
         return print(arr, e);
     }
@@ -254,8 +283,16 @@ public class Ui {
      */
     public String respondToDelete(int taskNumber) throws Exception {
         ArrayList<Task> arr = tl.getArr();
-        Task t = arr.get(taskNumber - 1);
+        int position = taskNumber - 1;
+        Task t = arr.get(position);
         tl.removeTask(t);
+        if (t instanceof Todo) {
+            actions.push("T" + " " + position + " " + t.getName());
+        } else if (t instanceof Deadline) {
+            actions.push("D" + " " + position + " " + t.getName() + " " + t.getTime());
+        } else {
+            actions.push("E" + " " + position + " " + t.getName() + " " + t.getTime());
+        }
         s.listWriter(arr);
         return printForDelete(arr, t);
     }
@@ -278,6 +315,8 @@ public class Ui {
         ArrayList<Task> arr = tl.getArr();
         Deadline d = new Deadline(name, time);
         tl.addTask(d);
+        int position = arr.size() - 1;
+        actions.push("deadline" + " " + position);
         s.listWriter(arr);
         return print(arr, d);
     }
@@ -287,5 +326,53 @@ public class Ui {
      */
     public String respondToCommandDoesNotExist() {
         return "Command does not exist!" + "\n";
+    }
+
+    public String popFromStack() {
+        return actions.pop();
+    }
+
+    public String respondToUndo() throws Exception {
+        if (actions.empty()) {
+            return "Nothing to undo!";
+        }
+        ArrayList<Task> arr = tl.getArr();
+        String action = popFromStack();
+        String[] splits = action.split(" ");
+        String act = splits[0];
+        if (act.equals("todo") || act.equals("deadline") || act.equals("event")) {
+            int position = Integer.parseInt(splits[1]);
+            Task t = arr.get(position);
+            tl.removeTask(t);
+            s.listWriter(arr);
+            return printForDelete(arr, t);
+        } else if (act.equals("delete")) {
+            int position = Integer.parseInt(splits[1]);
+            String type = splits[2];
+            if (type.equals("E")) {
+                Event e = new Event(splits[3], splits[4]);
+                arr.add(position, e);
+                s.listWriter(arr);
+                return print(arr, e);
+            } else if (type.equals("D")) {
+                Deadline d = new Deadline(splits[3], splits[4]);
+                arr.add(position, d);
+                s.listWriter(arr);
+                return print(arr, d);
+            } else {
+                Todo t = new Todo(splits[3]);
+                arr.add(position, t);
+                s.listWriter(arr);
+                return print(arr, t);
+            }
+        } else if (act.equals("done")) {
+            int index = Integer.parseInt(splits[1]);
+            Task t = arr.get(index);
+            t.taskIsNotDone();
+            s.listWriter(arr);
+            return printForUnDone(arr, t);
+        } else {
+            return "Wrong command";
+        }
     }
 }

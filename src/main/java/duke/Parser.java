@@ -45,6 +45,8 @@ public class Parser {
             return doneParser(command, arr, ui);
         } else if (command.substring(0, 4).equals("todo")) {
             return todoParser(command, ui, indexOfSlash);
+        } else if (command.substring(0, 4).equals("undo")) {
+            return undoParser(command, ui);
         } else if (command.length() == 4) {
             return ui.respondToCommandDoesNotExist();
         } else if (command.substring(0, 5).equals("event")) {
@@ -127,6 +129,14 @@ public class Parser {
             return ui.respondToTodoWrongSyntax();
         } else {
             return ui.respondToTodo(command.substring(5));
+        }
+    }
+
+    private static String undoParser(String command, Ui ui) throws Exception {
+        if (command.length() > 4) {
+            return ui.respondToTodoWrongSyntax();
+        } else {
+            return ui.respondToUndo();
         }
     }
 

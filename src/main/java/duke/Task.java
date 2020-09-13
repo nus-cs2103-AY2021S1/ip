@@ -31,6 +31,13 @@ public class Task {
     }
 
     /**
+     * Updates the task as not done.
+     */
+    void taskIsNotDone() {
+        this.isDone = false;
+    }
+
+    /**
      * Returns a string of indicator.
      * @return String
      */
