@@ -1,7 +1,6 @@
 package duke;
 
 import command.Command;
-import javafx.fxml.FXMLLoader;
 import ui.TextUi;
 
 /**
