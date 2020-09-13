@@ -15,7 +15,7 @@ public abstract class Task {
      *
      * @param task
      * @param isCompleted
-     * @param priority 
+     * @param priority
      */
     public Task(String task, boolean isCompleted, int priority) {
         this.task = task;
