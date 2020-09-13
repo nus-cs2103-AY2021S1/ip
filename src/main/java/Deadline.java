@@ -53,7 +53,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Turns task object into a string to be saved in data file.
+     * Returns a string of the task object to be saved in data file.
      * @return string in the format of data in data file.
      */
     @Override
