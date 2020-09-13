@@ -126,6 +126,7 @@ Format: `exit`<br><br>
 
 
 ## Command Summary
+
 Action  | Format, Examples
 --------|-----------------
 **Add todo task** | `todo DESCRIPTION` <br> e.g.: `todo homework`
