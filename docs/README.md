@@ -6,9 +6,14 @@
 
 This is what you should see when you start up Cait:
 <br>
+![Image of start](images/onstart.png)
+<br>
+<br>
+<br>
+Here is a brief explanation of Cait's UI:
+<br>
 ![Image of start](images/onstartedit.png)
 <br>
-
 ## Quick start
 
 1. Make sure that you have Java `11` or above installed in your computer.
