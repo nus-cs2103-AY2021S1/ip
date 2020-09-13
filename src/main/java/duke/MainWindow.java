@@ -26,8 +26,8 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/cony.png"));
-    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/brown.png"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/cony_user.png"));
+    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/brown_duke.png"));
 
     /**
      * Loads the start up screen of the application
@@ -35,8 +35,8 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog("Hello, I'm Duke! How can I help you today?",
-                dukeImage));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog("Hello, I'm Bearimy! How can I help you today?"
+                , dukeImage));
         if (!Duke.getTasks().getListOfTasks().isEmpty()) {
             String savedTasks = "Welcome back! Here are the tasks in your list:\n";
             for (Task task : Duke.getTasks().getListOfTasks()) {

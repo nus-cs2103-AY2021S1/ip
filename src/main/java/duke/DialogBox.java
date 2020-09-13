@@ -63,6 +63,8 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getDialogBox(String text) {
+        var db = new DialogBox(text);
+        db.setMinSize(DialogBox.USE_PREF_SIZE, DialogBox.USE_PREF_SIZE);
         return new DialogBox(text);
     }
 

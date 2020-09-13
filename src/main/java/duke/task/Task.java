@@ -13,7 +13,7 @@ public class Task {
      * @param description name of task
      */
     public Task(String description) {
-        this.description = description;
+        this.description = description.trim();
         this.isDone = false;
     }
 
