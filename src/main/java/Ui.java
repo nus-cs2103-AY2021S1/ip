@@ -29,8 +29,10 @@ public class Ui {
                 + "\t\t 2. deadline <task> /by <YYYY-MM-DD>\n"
                 + "\t\t 3. event <task> /at <YYYY-MM-DD>\n"
                 + "\t\t 4. done <number of the task>\n"
-                + "\t\t 5. delete <number of the task>\n"
-                + "\t\t 6. list\n"
+                + "\t\t 5. prioritize <number of the task>\n"
+                + "\t\t 6. delete <number of the task>\n"
+                + "\t\t 7. list\n"
+                + "\t\t 7. bye\n"
                 + "\t" + line);
         return (str);
     }
@@ -108,5 +110,11 @@ public class Ui {
 
     public String errorWithLoading() {
         return ("☹ OOPS!!! Your file cannot be loaded :-(");
+    }
+
+    public String printPrioritizeTask(TaskList list, int num) {
+        return ("\t" + line + "\n\tNoted. I've prioritized this task:\n\t  "
+                + list.getList().get(num - 1)
+                + "\n\t" + line);
     }
 }
