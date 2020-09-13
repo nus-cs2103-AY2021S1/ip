@@ -85,7 +85,7 @@ public class Ui {
     }
 
     public String showFind() {
-        return "Hey! I have printed out the tasks that match the name:";
+        return "Hey! I have printed out the tasks that contain the name:";
     }
 
     public String showNothingFound() {

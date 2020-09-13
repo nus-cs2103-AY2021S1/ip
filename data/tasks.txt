@@ -1,2 +1,0 @@
-D | 1 | return book | 14/09/2020 1800
-E | 0 | mlbb tournament | 2/12/2019 1800
