@@ -1,8 +1,20 @@
-# User Guide 
+# User Guide To The One and Only Pepe The Frog
 
 ## Introduction
-A simple guide to get you kick started on how to easily use this CLI app to create and manage your personal TaskList
-## Features 
+A simple guide to get you started on how to easily use this CLI app to create and manage your personal TaskList
+
+![Ui](./Ui.png)
+
+## Features
+
+* Able to save personal tasklist that will not be lost even if app is closed
+* Allows you to easily add, delete and update Tasks within tasklist
+* Provides you with ability to search for tasks via different parameters
+* Helps to point you out when invalid commands are entered
+* Has a great personality
+
+
+## Usage
 
 <details>
 <summary>
