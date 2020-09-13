@@ -41,6 +41,7 @@ public class Duke extends Application {
     private UI ui;
     private Image userImage;
     private Image dukeImage;
+    private Image iconImage;
     private boolean isExit;
 
     /**
@@ -48,7 +49,7 @@ public class Duke extends Application {
      * to null.
      */
     public Duke() {
-        store = new Storage("./data", "gui.txt");
+        store = new Storage("./data", "duke.txt");
         this.ui = new UI();
         File loadFile = store.loadData(ui);
         if (loadFile == null) {
@@ -60,6 +61,8 @@ public class Duke extends Application {
                 this.getClass().getResourceAsStream("/images/DaUser.png"));
         dukeImage = new Image(
                 this.getClass().getResourceAsStream("/images/DaDuke.png"));
+        iconImage = new Image(
+                this.getClass().getResourceAsStream("/images/DaIcon.png"));
     }
 
     /**
@@ -104,7 +107,7 @@ public class Duke extends Application {
      * @param args Command line arguments.
      */
     public static void main(String[] args) {
-        Duke duke = new Duke("./data", "gui.txt");
+        Duke duke = new Duke("./data", "duke.txt");
         duke.run();
     }
 
@@ -119,7 +122,9 @@ public class Duke extends Application {
         //The container for the content of the chat to scroll.
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
+        dialogContainer.setStyle("-fx-background-image: url(\"/images/DaBackground.png\");");;
         scrollPane.setContent(dialogContainer);
+        dialogContainer.setSpacing(20);
 
         userInput = new TextField();
         sendButton = new Button("Send");
@@ -134,7 +139,8 @@ public class Duke extends Application {
 
         // more code to be added here later
         //Step 2. Formatting the window to look as expected
-        stage.setTitle("Duke");
+        stage.setTitle("Duke Task Tracker");
+        stage.getIcons().add(iconImage);
         stage.setResizable(false);
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);
@@ -152,7 +158,6 @@ public class Duke extends Application {
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
         userInput.setPrefWidth(325.0);
-
         sendButton.setPrefWidth(55.0);
 
         AnchorPane.setTopAnchor(scrollPane, 1.0);
@@ -166,8 +171,8 @@ public class Duke extends Application {
         ImageView dukePic = new ImageView(dukeImage);
         dukePic.setClip(new Circle(50, 50, 50));
 
-        DialogBox dukeGreeting = DialogBox
-                                         .getDukeDialog(new Label(ui.displayGreeting()), dukePic);
+        DialogBox dukeGreeting = DialogBox.getDukeDialog(new Label(ui.displayGreeting()), dukePic);
+        dukeGreeting.setStyle("-fx-background-radius: 20px; -fx-background-color: #35C9DD;");
 
         Insets padding = new Insets(10, 0, 10, 0);
         dukeGreeting.setPadding(padding);
@@ -208,8 +213,25 @@ public class Duke extends Application {
     }
 
     private void handleUserInput() {
+        String invalidInput = "Looks like your input was invalid! Enter --help for more information";
+        String invalidCommand = "Invalid command/format! check --help for more info";
+        String invalidDeadline = "Invalid deadline task!";
+        String invalidEvent = "Invalid event task!";
+        String invalidTodo = "Invalid todo task!";
+        String noSuchElement = "There's no such element!";
+
         Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
+
+        String response = getResponse((userInput.getText()));
+        boolean isInvalidCommandOrElement = response.equals(invalidCommand) || response.equals(noSuchElement)
+                                                    || response.equals(invalidInput);
+        boolean isInvalidTaskFormat = response.equals(invalidDeadline) || response.equals(invalidEvent)
+                                              || response.equals(invalidTodo);
+        Label dukeText = new Label(response);
+        if (isInvalidCommandOrElement || isInvalidTaskFormat) {
+            dukeText.setStyle("-fx-text-fill: rgb(100%, 0%, 0%);");
+        }
+
         ImageView dukePicture = new ImageView(dukeImage);
         ImageView userPicture = new ImageView(userImage);
         Insets padding = new Insets(10, 0, 10, 0);
@@ -235,7 +257,7 @@ public class Duke extends Application {
     }
 
     private String getResponse(String input) {
-        Command command = Parser.parse(input);
+        Command command = Parser.parse(input);;
         String response = command.execute(tasks, ui, store);
         isExit = command.isExit();
         return response;

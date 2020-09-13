@@ -116,17 +116,21 @@ public class Parser {
     //Otherwise, returns an InvalidCommand object.
     private static Command prepareDeadline(String commandBody) {
         String[] splitParts = commandBody.split((" /by "));
-        boolean insufficientArguments = splitParts.length != 2;
-        boolean argumentsEmpty = splitParts[0].strip().length() == 0 || splitParts[1].strip().length() == 0;
-        boolean isNotValid = insufficientArguments || argumentsEmpty;
-        if (isNotValid) {
+        try {
+            boolean insufficientArguments = splitParts.length != 2;
+            boolean argumentsEmpty = splitParts[0].strip().length() == 0 || splitParts[1].strip().length() == 0;
+            boolean isNotValid = insufficientArguments || argumentsEmpty;
+            if (isNotValid) {
+                return new InvalidCommand();
+            }
+            LocalDate localDate = Parser.parseDate(splitParts[1].strip());
+            if (localDate != null) {
+                return new DeadlineCommand(splitParts[0].stripLeading(), localDate);
+            } else {
+                return new DeadlineCommand(splitParts[0].stripLeading(), splitParts[1].strip());
+            }
+        } catch (IndexOutOfBoundsException e) {
             return new InvalidCommand();
-        }
-        LocalDate localDate = Parser.parseDate(splitParts[1].strip());
-        if (localDate != null) {
-            return new DeadlineCommand(splitParts[0].stripLeading(), localDate);
-        } else {
-            return new DeadlineCommand(splitParts[0].stripLeading(), splitParts[1].strip());
         }
     }
 
@@ -134,18 +138,22 @@ public class Parser {
     //Otherwise, returns an InvalidCommand object.
     private static Command prepareEvent(String commandBody) {
         String[] splitParts = commandBody.split((" /at "));
-        boolean insufficientArguments = splitParts.length != 2;
-        boolean argumentsEmpty = splitParts[0].strip().length() == 0 || splitParts[1].strip().length() == 0;
-        boolean isNotValid = insufficientArguments || argumentsEmpty;
-        if (isNotValid) {
-            return new InvalidCommand();
-        } else {
-            LocalDate localDate = Parser.parseDate(splitParts[1].strip());
-            if (localDate != null) {
-                return new EventCommand(splitParts[0].stripLeading(), localDate);
+        try {
+            boolean insufficientArguments = splitParts.length != 2;
+            boolean argumentsEmpty = splitParts[0].strip().length() == 0 || splitParts[1].strip().length() == 0;
+            boolean isNotValid = insufficientArguments || argumentsEmpty;
+            if (isNotValid) {
+                return new InvalidCommand();
             } else {
-                return new EventCommand(splitParts[0].stripLeading(), splitParts[1].strip());
+                LocalDate localDate = Parser.parseDate(splitParts[1].strip());
+                if (localDate != null) {
+                    return new EventCommand(splitParts[0].stripLeading(), localDate);
+                } else {
+                    return new EventCommand(splitParts[0].stripLeading(), splitParts[1].strip());
+                }
             }
+        } catch (IndexOutOfBoundsException e) {
+            return new InvalidCommand();
         }
     }
 
