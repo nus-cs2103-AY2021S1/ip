@@ -28,7 +28,7 @@ User Interface (GUI).
     - [find](#find)
     - [delete](#delete)
     - [bye](#bye)
---------------------------------------------------------------------------------------------------------------------
+
 ## Getting Started 
 * Ensure you have Java 11 or above installed in your Computer.
 * Download the latest `.jar` from [here](#).
