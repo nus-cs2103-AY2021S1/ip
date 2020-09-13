@@ -14,8 +14,8 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.stage.Stage?>
 
-<fx:root iconified="true" minHeight="600.0" minWidth="500.0" title="Alice" type="Stage"
-         xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
+<fx:root minHeight="600.0" minWidth="500.0" title="Alice" type="Stage" xmlns="http://javafx.com/javafx"
+         xmlns:fx="http://javafx.com/fxml">
     <scene>
         <Scene stylesheets="@../style/alice.css">
             <root>

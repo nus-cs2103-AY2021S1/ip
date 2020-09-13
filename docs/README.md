@@ -6,6 +6,10 @@ so that you can get things done faster than your traditional task management app
 * Table of Contents
 {:toc}
 
+&nbsp;
+
+&nbsp;
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features 
@@ -41,6 +45,10 @@ Task data are saved in the hard disk automatically after any command that change
 There is no need to save manually. A green circle at the bottom right of the chat bubble 
 indicates a successful save, and a red circle indicates an unsuccessful one.
 
+&nbsp;
+
+&nbsp;
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Usage
@@ -64,6 +72,9 @@ indicates a successful save, and a red circle indicates an unsuccessful one.
   
 </div>
 &nbsp;
+
+&nbsp;
+
 
 ### `help` - Viewing help
 
