@@ -1,6 +1,4 @@
-D | 1 | this work | 2020-06-05
-E | 1 | something | 2020-06-05
-T | 1 | task with keyword
-T | 0 | new otodo
-D | 0 | something | 2020-12-23
-E | 0 | a new event | "23123"
+E | 1 | 0 | 0 | 0
+T | 1 | 0 | 0
+T | 0 | 0 | 0
+D | 0 | 0 | 0 | 0

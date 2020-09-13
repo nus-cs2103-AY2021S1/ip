@@ -20,6 +20,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
@@ -212,8 +213,24 @@ public class Duke extends Application {
     }
 
     private void handleUserInput() {
+        String invalidInput = "Looks like your input was invalid! Enter --help for more information";
+        String invalidCommand = "Invalid command/format! check --help for more info";
+        String invalidDeadline = "Invalid deadline task!";
+        String invalidEvent = "Invalid event task!";
+        String invalidTodo = "Invalid todo task!";
+        String noSuchElement = "There's no such element!";
+
         Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
+
+        String response = getResponse((userInput.getText()));
+        boolean isInvalidCommandOrElement = response.equals(invalidCommand) || response.equals(noSuchElement)
+                                                    || response.equals(invalidInput);
+        boolean isInvalidTaskFormat = response.equals(invalidDeadline) || response.equals(invalidEvent)
+                                              || response.equals(invalidTodo);
+        Label dukeText = new Label(response);
+        if (isInvalidCommandOrElement || isInvalidTaskFormat) {
+            dukeText.setStyle("-fx-text-fill: rgb(100%, 0%, 0%);");
+        }
         ImageView dukePicture = new ImageView(dukeImage);
         ImageView userPicture = new ImageView(userImage);
         Insets padding = new Insets(10, 0, 10, 0);
@@ -239,7 +256,7 @@ public class Duke extends Application {
     }
 
     private String getResponse(String input) {
-        Command command = Parser.parse(input);
+        Command command = Parser.parse(input);;
         String response = command.execute(tasks, ui, store);
         isExit = command.isExit();
         return response;
