@@ -60,12 +60,12 @@ public class DialogBox extends HBox {
     }
 
     protected static DialogBox getUserDialog(String text) {
-        DialogBox db = new DialogBox(text, USER_IMAGE, Color.NAVAJOWHITE);
-        db.flip();
-        return db;
+        return new DialogBox(text, USER_IMAGE, Color.CORNFLOWERBLUE);
     }
 
     protected static DialogBox getDukeDialog(String text) {
-        return new DialogBox(text, PEANUT_IMAGE, Color.DODGERBLUE);
+        DialogBox db = new DialogBox(text, PEANUT_IMAGE, Color.LIGHTSALMON);
+        db.flip();
+        return db;
     }
 }
