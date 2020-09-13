@@ -14,6 +14,7 @@ import java.util.Scanner;
 public class UserList {
     private static File file;
     private static Path filepath;
+    private static ArrayList<User> userList;
 
     public static void initialize() {
         String dir = System.getProperty("user.dir");
@@ -57,20 +58,36 @@ public class UserList {
                 User user = new User(userInfo[0], userInfo[1], userInfo[2]);
                 users.add(user);
             }
+            userList = users;
         } catch (Exception e) {
             System.out.println("Failed to load users information.");
         }
-        return users;
+        return userList;
     }
 
     public static void addUser(User user) {
         try {
-            Scanner sc = new Scanner(file);
             FileWriter writer = new FileWriter(file);
-            writer.write(user.getUsername() + "," + user.getUserPassword() + "," + user.getNickname() + "\n");
-            writer.close();
+            userList.add(user);
+            write();
         } catch (IOException e) {
             System.out.println("Failed to add the new user.");
+        }
+    }
+
+    public static void write() {
+        try {
+            FileWriter writer = new FileWriter(file);
+            ArrayList<User> users = readUsersInfo();
+            String usersInfo = "";
+            for (User user: users) {
+                usersInfo += (user.getUsername() + "," + user.getUserPassword() + "," + user.getNickname() + "\n");
+            }
+            writer.write(usersInfo);
+            writer.close();
+
+        } catch (IOException e) {
+            System.out.println("Failed to write info int userInfo.txt");
         }
     }
 }
