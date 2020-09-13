@@ -7,6 +7,7 @@ import duke.task.ToDo;
 
 public class Parser {
     private static TaskList taskList;
+    private static boolean isExit = false;
 
     /**
      * Sets taskList for Parser.
@@ -77,6 +78,7 @@ public class Parser {
             return Ui.greet();
         case "bye":
             Storage.writeToFile(taskList);
+            isExit = true;
             return Ui.getExitMessage();
         case "list":
             return taskList.taskListToString();
@@ -201,6 +203,15 @@ public class Parser {
                 throw new DukeException("Wrong format when describing a date.");
             }
         }
+    }
+
+    /**
+     * Returns whether the program should exit.
+     *
+     * @return A boolean.
+     */
+    public static boolean isExit() {
+        return isExit;
     }
 
     /**

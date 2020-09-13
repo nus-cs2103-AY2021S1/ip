@@ -7,12 +7,14 @@ public class Duke {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
+    private boolean isExit = false;
 
     Duke() {
         // initializing plus greeting
         TaskList taskList = new TaskList();
         Storage.loadFromFile(taskList);
         Ui ui = new Ui();
+        this.isExit = false;
         Parser.setTaskList(taskList);
     }
     /**
@@ -23,28 +25,46 @@ public class Duke {
      */
     public String getResponse(String input) {
         try {
-            return Parser.parseCommand(input);
+            String response = Parser.parseCommand(input);
+            if (Parser.isExit()) {
+                this.isExit = true;
+            }
+            return response;
         } catch (DukeException e) {
             return Ui.getErrorMessage(e.getMessage());
         }
     }
 
     /**
-     * Executes the Duke program.
-     * @param args Args.
+     * Sets exit states to true.
      */
-    public static void main(String[] args) {
+    public void setExit() {
+        this.isExit = true;
+    }
+
+    /**
+     * Returns whether the program should exit.
+     *
+     * @return A boolean.
+     */
+    public boolean isExit() {
+        return this.isExit;
+    }
+
+    /**
+     * Run the duke program.
+     */
+    public void run() {
         TaskList taskList = new TaskList();
         Storage.loadFromFile(taskList);
         Ui ui = new Ui();
         System.out.print(Ui.greet());
         Parser.setTaskList(taskList);
-        boolean isClosed = false;
-        while (!isClosed) {
+        while (!this.isExit) {
             try {
                 String command = ui.readInput();
                 if (Parser.stopProgram(command)) {
-                    isClosed = true;
+                    this.isExit = true;
                     Storage.writeToFile(taskList);
                     System.out.print(ui.exit());
                 } else {
@@ -54,5 +74,13 @@ public class Duke {
                 System.out.println(Ui.getErrorMessage(e.getMessage()));
             }
         }
+    }
+
+    /**
+     * Entry point for the Duke program.
+     * @param args Args.
+     */
+    public static void main(String[] args) {
+        new Duke().run();
     }
 }
