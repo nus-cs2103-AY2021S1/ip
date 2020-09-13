@@ -32,11 +32,11 @@ Supported natural date language:
 * Day of the week
 
 Supported natural time language:
-* Morning | 8am
-* Noon | 12pm
-* Evening | 7pm
-* Night | 10pm
-* Midnight | 11.59pm
+* Morning - 8am
+* Noon - 12pm
+* Evening - 7pm
+* Night - 10pm
+* Midnight - 11.59pm
 
 Hybrid natural language:
 * Now
@@ -46,7 +46,7 @@ Hybrid natural language:
 ## Usage
 
 
-<div markdown="block" class="alert alert-info">
+<div markdown="block" style="background: #17a2b8; border-color: #17a2b8">
 
 **:information_source: Notes about the command format:**<br>
 
@@ -84,6 +84,7 @@ Format: `todo DESC`
 Examples:
 * `todo finish project` creates a new todo task named `finish project`
 * `todo eat` creates a new todo task named `eat`
+
 ![todoImage](./images/todo.png)
 
 
@@ -104,6 +105,7 @@ Examples:
 * `event lecture /at today` creates a new party event happening `Today`
 * `event lunch /at tomorrow noon` creates a new lunch event happening tomorrow at `12PM`
 * `event party /at 24-8-2020 night` creates a new party event happening on `Monday, Aug 24 2020, 10PM`
+
 ![eventImage](./images/event.png)
 
 
@@ -125,6 +127,7 @@ Examples:
 * `deadline submission /by 2200` creates a new `submission` deadline to be done by today 10PM or tomorrow 10PM 
 depending on the time of creation
 * `deadline homework /by 3/4 2pm` creates a new `homework` deadline to be done by Apr 03, 2PM of the current year
+
 ![deadlineImage](./images/deadline.png)
 
 
@@ -141,6 +144,7 @@ Format: `done TASK_NUMBER`
 
 Example:
 * `done 3` marks the 3rd task in the list as done
+
 ![doneImage](./images/done.png)
 
 
@@ -157,6 +161,7 @@ Format: `delete TASK_NUMBER`
 
 Examples:
 * `delete 4` deletes the 4th task in the list
+
 ![deleteImage](./images/delete.png)
 
 
@@ -183,6 +188,7 @@ Format: `find KEYWORD (MORE_KEYWORDS)…`
 Examples:
 * `find homework` returns `Do Homework` and `submit homework`
 * `find meeting book` returns `return book` and `project meeting`
+
 ![findImage](./images/find.png)
 
 
