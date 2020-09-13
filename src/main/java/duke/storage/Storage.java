@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import duke.Duke;
+import duke.command.FindCommand;
 import duke.exception.DukeException;
 import duke.task.Task;
 
@@ -130,12 +131,29 @@ public class Storage {
      */
 
     public static void save(String textToAdd) {
+        File file = new File(Duke.FILENAME);
+
+        File newFile = new File(System.getProperty("user.dir") + "/data/");
+        newFile.mkdir();
+        try {
+
+            // Create new file
+            // if it does not exist
+            if (file.createNewFile())
+                System.out.println("File created");
+            else
+                System.out.println("File already exists");
+        }
+        catch (Exception e) {
+            System.err.println(e);
+        }
 
         try {
             writeToFile(textToAdd);
         } catch (IOException e) {
             System.out.println("Oops, something went wrong: " + e.getMessage());
         }
+
     }
 }
 
