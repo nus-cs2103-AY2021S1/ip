@@ -173,27 +173,16 @@ the data of your previous RJ21 home folder.
 If you have any further questions, please contact me through the email provided in acknowledgements.
 
 ### Command Summary
+
 Action | Format
 ------------ | -------------
-Add | 1. `todo <description>` 2. `deadline <description> /by <YYYY-MM-DD>` 3. `event <description /at <YYYY-MM-DD>`
+Add | 1. `todo <description>` <br> 2. `deadline <description> /by <YYYY-MM-DD>` <br> 3. `event <description /at <YYYY-MM-DD>`
 List | `list`
 Done | `done <index>`
 Delete | `delete <index>`
 Find | `find <keyword>`
 Update | `update <index> <desc/date> <new description/YYYY-MM-DD>`
 Help | `help`
-Bye | `bye`
-
-Action | Format, Examples
------------- | -------------
-Help | `help`
-List | `list`
-Todo | `todo <task>` <br> eg, `todo read book`
-Event | `event <task> /at <yyyy-mm-dd>` <br> eg, `event day6 concert /at 2019-10-05`
-Deadline | `deadline <task> /by <yyyy-mm-dd>` <br> eg, `deadline eat cake /by 2020-09-04`
-Done | `done <list index(es)>` <br> eg, `done 4 5 6`
-Delete | `delete <list index(es)>` <br> eg, `delete 1`
-Find | `find <keyword>` <br> eg, `find cake`
 Bye | `bye`
 
 ### Acknowledgements
