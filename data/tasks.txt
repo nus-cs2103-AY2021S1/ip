@@ -1,4 +1,5 @@
-E | 0 | Math exam | 20-11-2020 1900
-T | 0 | Clean room
+E | 0 | Birthday | 06-05-2020 0000
 D | 0 | Homework | 14-09-2020 2359
-T | 0 | Buy groceriesbye
+E | 1 | Math exam | 20-11-2020 1900
+T | 0 | Clean room
+T | 0 | Buy groceries

@@ -31,16 +31,26 @@ public class FindCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         StringJoiner response = new StringJoiner("\n");
         StringJoiner userStrings = new StringJoiner("\n");
+
         for (String string : stringsToFind) {
             userStrings.add(String.format("\"%s\"", string));
         }
+
         response.add(String.format("Here are the tasks in your list that contain \n%s\n",
                 userStrings.toString()));
+        int numberOfTasksFound = 0;
         for (String toFind : stringsToFind) {
-            response.add(tasks.find(toFind));
+            if (!tasks.find(toFind).equals("")) {
+                response.add(tasks.find(toFind));
+                numberOfTasksFound++;
+            }
         }
 
-        return response.toString();
+        if (numberOfTasksFound == 0) {
+            return "No matching tasks found :(";
+        } else {
+            return response.toString();
+        }
     }
 
     @Override

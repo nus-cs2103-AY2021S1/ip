@@ -45,13 +45,13 @@ public class DeadlineCommand extends Command {
         storage.save(tasks);
 
         return String.format(
-                "I've added this task:\n  %s \nNow you have %s tasks in the list.",
+                "I've added this task:\n%s\nNow you have %s tasks in the list.",
                 task, tasks.size()
         );
     }
 
     @Override
     public String toString() {
-        return "deadline <task> /by <date>";
+        return "deadline <description> /by <date>";
     }
 }

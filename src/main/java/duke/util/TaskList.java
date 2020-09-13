@@ -93,11 +93,7 @@ public class TaskList {
             }
         }
 
-        if (response.toString().equals("")) {
-            return "No matching tasks found :(";
-        } else {
-            return response.toString();
-        }
+        return response.toString();
     }
 
     /**

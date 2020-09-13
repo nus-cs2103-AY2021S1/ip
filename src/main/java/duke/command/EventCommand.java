@@ -44,13 +44,13 @@ public class EventCommand extends Command {
         assert (previousTaskSize + 1 == subsequentTaskSize);
         storage.save(tasks);
         return String.format(
-                "I've added this task:\n  %s \nNow you have %s tasks in the list.",
+                "I've added this task:\n%s\nNow you have %s tasks in the list.",
                 task, tasks.size()
         );
     }
 
     @Override
     public String toString() {
-        return "event <task> /at <date>";
+        return "event <description> /at <date>";
     }
 }

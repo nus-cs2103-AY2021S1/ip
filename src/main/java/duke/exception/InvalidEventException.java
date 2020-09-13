@@ -9,6 +9,6 @@ public class InvalidEventException extends DukeException {
      */
     public InvalidEventException() {
         super("You entered the event command incorrectly :(\n"
-                + "The command format is \"event <task> /at <dd-MM-yyyy hhmm>\"");
+                + "The command format is \"event <description> /at <dd-MM-yyyy HHmm>\"");
     }
 }

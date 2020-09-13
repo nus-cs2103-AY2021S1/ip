@@ -39,13 +39,13 @@ public class ToDoCommand extends Command {
         assert (previousTaskSize + 1 == subsequentTaskSize);
         storage.save(tasks);
         return String.format(
-                "I've added this task:\n  %s \nNow you have %s tasks in the list.",
+                "I've added this task:\n%s\nNow you have %s tasks in the list.",
                 task, tasks.size()
         );
     }
 
     @Override
     public String toString() {
-        return "todo <task>";
+        return "todo <description>";
     }
 }

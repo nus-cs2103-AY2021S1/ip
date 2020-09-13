@@ -41,7 +41,7 @@ public class DoneCommand extends Command {
         Task task = tasks.get(index - 1);
         task.completeTask();
         storage.save(tasks);
-        return "Nice! I've marked this task as done:\n  " + task.toString();
+        return "Nice! I've marked this task as done:\n" + task.toString();
     }
 
     @Override
