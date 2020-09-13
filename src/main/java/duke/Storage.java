@@ -68,15 +68,14 @@ public class Storage {
             File file = new File(this.path);
             file.getParentFile().mkdirs();
             FileWriter fw;
-            if (file.exists()) {
-                fw = new FileWriter(file, false);
-            } else {
-                fw = new FileWriter(file, true);
-            }
+            fw = file.exists()
+                    ? new FileWriter(file, false)
+                    : new FileWriter(file, true);
             for (Task task : tasks) {
                 fw.write(task.writeToFile() + "\n");
             }
             fw.close();
+            System.out.println("All changes had been saved.");
         } catch (IOException e) {
             System.err.println (e);
         }

@@ -5,23 +5,20 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 
-<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="450.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="510.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <HBox fx:id="speechBubble" maxHeight="-Infinity" styleClass="speech-bubble" stylesheets="@duke.css">
+        <HBox fx:id="textBubble" maxHeight="-Infinity" styleClass="text-bubble" stylesheets="@duke.css">
             <children>
-                <Label minHeight="-Infinity" fx:id="dialog" text="Label" wrapText="true">
+                <Label fx:id="dialog" text="Label" wrapText="true" minHeight="-Infinity" >
                     <padding>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                        <Insets top="10.0" bottom="10.0" left="10.0" right="10.0" />
                     </padding>
                 </Label>
             </children>
-            <HBox.margin>
-                <Insets left="10.0" right="10.0" />
-            </HBox.margin>
         </HBox>
         <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" />
     </children>
     <padding>
-        <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
+        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
     </padding>
 </fx:root>

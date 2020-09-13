@@ -3,7 +3,10 @@
     -fx-background-size: cover;
 }
 
-.speech-bubble {
+.text-bubble {
     -fx-background-color: #F5F5F5;
     -fx-background-radius: 15px;
+    -fx-border-color: black;
+    -fx-border-width: 2 2 2 2;
+    -fx-border-radius: 15px;
 }
