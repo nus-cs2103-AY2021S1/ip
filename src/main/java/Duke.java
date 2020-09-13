@@ -17,7 +17,8 @@ public class Duke {
     private Parser parser;
     private static final String FILE_PATH = "data/Duke.txt";
 
-    public Duke() throws FileNotFoundException{
+    public Duke() throws IOException {
+        checkFilePath();
         this.storage = new Storage(FILE_PATH);
         this.taskList = new TaskList(storage);
         this.parser = new Parser(taskList);
@@ -69,7 +70,6 @@ public class Duke {
     }
 
     public static void main(String[] args) throws IOException {
-        checkFilePath();
         new Duke().run();
     }
 

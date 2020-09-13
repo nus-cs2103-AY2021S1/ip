@@ -14,12 +14,11 @@ public class Main extends Application {
 
     private Duke duke = new Duke();
 
-    public Main() throws FileNotFoundException {
+    public Main() throws IOException {
     }
 
     @Override
     public void start(Stage stage) throws IOException {
-        duke.checkFilePath();
         try {
             FXMLLoader fxmlLoader =
                     new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));

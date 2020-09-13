@@ -25,13 +25,7 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
-    private final static Image USER_IMAGE =
-            new Image(new File("src/main/resources/images/user.png").toURI().toString());
-    private final static Image PEANUT_IMAGE =
-            new Image(new File("src/main/resources/images/peanut.png").toURI().toString());
-
-
-    protected DialogBox(String text, Image img, Color backgroundColor) {
+    protected DialogBox(String text, Color backgroundColor) {
 
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -43,10 +37,19 @@ public class DialogBox extends HBox {
         }
 
         label.setText(text);
-        displayPicture.setImage(img);
         displayPicture.setClip(new Circle(50, 50, 50));
         this.setBackground(new Background(new BackgroundFill(backgroundColor,null,null)));
 
+    }
+
+    private void setUserImage() {
+        Image img = new Image(String.valueOf(DialogBox.class.getResource("/images/user.png")));
+        displayPicture.setImage(img);
+    }
+
+    private void setPeanutImage() {
+        Image img = new Image(String.valueOf(DialogBox.class.getResource("/images/peanut.png")));
+        displayPicture.setImage(img);
     }
 
     /**
@@ -60,12 +63,15 @@ public class DialogBox extends HBox {
     }
 
     protected static DialogBox getUserDialog(String text) {
-        return new DialogBox(text, USER_IMAGE, Color.CORNFLOWERBLUE);
+        DialogBox db = new DialogBox(text, Color.CORNFLOWERBLUE);
+        db.setUserImage();
+        return db;
     }
 
     protected static DialogBox getDukeDialog(String text) {
-        DialogBox db = new DialogBox(text, PEANUT_IMAGE, Color.LIGHTSALMON);
+        DialogBox db = new DialogBox(text, Color.LIGHTSALMON);
         db.flip();
+        db.setPeanutImage();
         return db;
     }
 }
