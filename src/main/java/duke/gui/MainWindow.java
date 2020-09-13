@@ -13,6 +13,9 @@ import javafx.scene.layout.VBox;
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
+    private static final String TOPLINE = "----------------- DUKE -----------------\n";
+    private static final String BOTTOMMINE = "\n------------------------------------------";
+    private static final String ERRORLINE = "----------------- ERROR ----------------\n";
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -44,6 +47,7 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
+        response = TOPLINE + response + BOTTOMMINE;
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)

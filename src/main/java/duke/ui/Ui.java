@@ -7,7 +7,7 @@ import java.util.Scanner;
  */
 @SuppressWarnings("checkstyle:Regexp")
 public class Ui {
-    public static final String LINE = "_______________________________________\n";
+    private static final String LINE = "_______________________________________\n";
     private Scanner scanner;
 
     public Ui() {
