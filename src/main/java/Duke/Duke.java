@@ -132,11 +132,10 @@ public class Duke extends Application {
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
         scene = new Scene(mainLayout);
-
         stage.setScene(scene);
         stage.show();
 
-        stage.setTitle("Duke");
+        stage.setTitle("Fantasia");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);
