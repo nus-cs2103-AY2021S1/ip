@@ -22,7 +22,7 @@
         <children>
             <Label fx:id="dialog" lineSpacing="5.0" styleClass="chat-label" text="Label" wrapText="true">
                 <font>
-                    <Font name="Comic Sans MS" size="16.0" />
+                    <Font name="Comic Sans MS" size="13.0" />
                 </font>
             </Label>
         </children>

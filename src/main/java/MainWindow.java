@@ -31,7 +31,7 @@ public class MainWindow extends AnchorPane{
     @FXML
     public void initialize() {
         String welcomeText = "Hey welcome to Zelda's bot!\nThese are the list of commands:\n" +
-                "1. list -> to show you the list of tasks\n2. sort -> sort the tasks\n" +
+                "1. list -> shows you the list of tasks\n2. sort -> sorts the tasks\n" +
                 "3. event/deadline/todo -> add a new task\n4. update -> update an existing task\n" +
                 "5. schedule -> to view all tasks for a month/date\n";
         userInput.setPromptText("Enter Commands here!");

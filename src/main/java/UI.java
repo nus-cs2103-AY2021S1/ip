@@ -17,7 +17,7 @@ public class UI {
      */
     protected String doneTask(Task task) {
         if (!task.getStatus()) {
-            String str1 = "\nNice! I have completed this task!";
+            String str1 = "\nNice! I have completed this task!\n";
             String str2 = " " + task + "\n";
             return str1 + str2;
         } else {
@@ -65,7 +65,7 @@ public class UI {
         String allTask = "";
         String str1 = "Here are the tasks in your tasklist:\n";
         for (Task task : taskList.getTaskList()) {
-            allTask += index + "." + task + "\n";
+            allTask += index + ". " + task + "\n";
             index++;
         }
         return str1 + allTask;
@@ -81,11 +81,11 @@ public class UI {
             String str1 = "\nNo matching tasks found!\n";
             return str1;
         } else {
-            String str2 = "\nHere are the tasks in your list!\n";
+            String str2 = "\nHere are the tasks in your list:\n";
             int index = 1;
             String allTask = "";
             for (Task task : foundTasks) {
-                allTask += index + "." + task + "\n";
+                allTask += index + ". " + task + "\n";
                 index++;
             }
             return str2 + allTask;
@@ -94,16 +94,16 @@ public class UI {
 
     protected String findScheduleOnDate(TaskList tasks, LocalDate date) {
         String str1 = "";
-        String str2 = "\nHere is your schedule for this day!\n";
-        int index = 1;
+        String str2 = "\nHere is your schedule for this day:\n";
+        int index = 0;
         ArrayList<Task> allTasks = tasks.getTaskList();
         for (Task task: allTasks) {
             if (task.getTaskDeadline().equals(date)) {
-                str1 += index + ". " + task + "\n";
+                str1 += index + 1 + ". " + task + "\n";
                 index++;
             }
         }
-        if (str1.compareTo("") == 1) {
+        if (index == 0) {
             return "No work for today!";
         } else {
             return str2 + str1;
@@ -112,17 +112,17 @@ public class UI {
 
     protected String findScheduleForMonth(TaskList tasks, Month month) {
         String str1 = "";
-        String str2 = "\nHere is your schedule for ths Month!\n";
-        int index = 1;
+        String str2 = "\nHere is your schedule for ths month:\n";
+        int index = 0;
         ArrayList<Task> eventAndDeadlineTasks = tasks.filterTask();
         for (Task eventOrDeadline : eventAndDeadlineTasks) {
             Month scheduleMonth = eventOrDeadline.getTaskDeadline().getMonth();
             if (scheduleMonth.equals(month)) {
-                str1 += index + "." + eventOrDeadline + "\n";
+                str1 += index + 1 + ". " + eventOrDeadline + "\n";
                 index++;
             }
         }
-        if (str1.compareTo("") == 1) {
+        if (index == 0) {
             return "No work for today!";
         } else {
             return str2 + str1;
@@ -130,7 +130,7 @@ public class UI {
     }
 
     protected String sortTasks(ArrayList<Task> sortedTasks) {
-        String str1 = "\nYour Tasks has been sorted! :)\n";
+        String str1 = "\nYour tasks has been sorted:\n";
         String str2 = "";
         int index = 1;
         for (Task task: sortedTasks) {
@@ -142,7 +142,7 @@ public class UI {
 
     protected String enterNewUpdateForTask(Task taskToBeUpdated) {
         return "\nThis is the current task:\n" + taskToBeUpdated +
-                "\nOk tell me what to update!]n";
+                "\nOk tell me what to update!\n";
     }
 
     protected String updatedTask(Task updatedTask) {

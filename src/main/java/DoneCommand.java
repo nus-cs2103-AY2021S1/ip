@@ -30,9 +30,8 @@ public class DoneCommand extends Command {
             taskIndex = Integer.parseInt(doneCommand[1]);
             if (taskIndex > 0 && taskIndex <= tasks.getTaskList().size()) {
                 Task completedTask = tasks.getTaskList().get(taskIndex-1);
-                String dukeResponse = dukeUI.doneTask(completedTask);
                 tasks.markTaskDone(completedTask);
-
+                String dukeResponse = dukeUI.doneTask(completedTask);
                 return dukeResponse;
             } else {
                 throw new InvalidTaskNumberException();
