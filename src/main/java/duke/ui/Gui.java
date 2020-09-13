@@ -22,6 +22,8 @@ public class Gui extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setup();
+            stage.setTitle("Duke");
+
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
