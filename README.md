@@ -1,6 +1,6 @@
 # Duke
 
-![Ui demo](/doc/Ui.png)
+![Ui demo](https://github.com/Lingy12/ip/blob/master/docs/Ui.png)
 
 This is the independent project for CS2103T AY20/21.
 
