@@ -44,7 +44,7 @@ test {
 }
 
 application {
-    mainClassName = "butler.Butler"
+    mainClassName = "butler.Launcher"
 }
 
 shadowJar {
