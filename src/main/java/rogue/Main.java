@@ -15,6 +15,7 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
         Rogue rogue = new Rogue(DEFAULT_SAVE_FILE_PATH);
+        stage.setTitle("Rogue"); // Sets title for the window
         Ui.init(stage, rogue);
     }
 }
