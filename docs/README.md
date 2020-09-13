@@ -146,7 +146,7 @@ Example of usage:
 `settings /name Rui`
 
 Expected outcome:  
-![Image of ToDo command](./images/settingsName.png)
+![Image of Settings command](./images/settingsName.png)
 
 ##### 2. Settings to change reminder period -`settings /days NUMBER_OF_DAYS`
 Default number of days is 7, but you can change it if you like.
@@ -195,8 +195,3 @@ Simply copy the folder into your new laptop, and run the JAR file in the same di
 retrieve all the data for you!  
 
 If you have any further questions, please do not hesitate to contact me via [Github](https://github.com/ruilingk)!
-
-## Acknowledgements
-Images used for making of Focus:  
-[Image of Pocus](https://cdn.shopify.com/s/files/1/0231/6137/2752/files/bt21-rj_ebcc3442-da05-40c0-869a-e3befcf6f48e_1600x.jpg?v=1563920540)  
-[Image of User](https://cdn.shopify.com/s/files/1/0231/6137/2752/files/bt21-koya_ab56b8c9-ca8a-40a7-a82a-689eaffa8d3d_1600x.jpg?v=1563920606)
