@@ -46,11 +46,8 @@ public class Bob {
     }
 
     private String getPathName() {
-        boolean ifPathDirIsTest = System.getProperty("user.dir").endsWith("text-ui-test");
         boolean ifPathDirIsIp = System.getProperty("user.dir").endsWith("ip");
-        return ifPathDirIsTest
-                ? "test.txt"
-                : ifPathDirIsIp
+        return ifPathDirIsIp
                 ? "data/bob.txt"
                 // Creates a save file on the user's home directory if user is not in ip directory
                 : System.getProperty("user.dir") + "/bob.txt";
