@@ -39,6 +39,20 @@ public class DialogBox extends HBox {
         displayPicture.setImage(img);
     }
 
+    private DialogBox(String text, Image img, boolean isDuke) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DukeDialogBox.fxml"));
+            fxmlLoader.setController(this);
+            fxmlLoader.setRoot(this);
+            fxmlLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        dialog.setText(text);
+        displayPicture.setImage(img);
+    }
+
     /**
      * Flips the dialog box such that the ImageView is on the left and text on the right.
      */
@@ -54,7 +68,7 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+        var db = new DialogBox(text, img, true);
         db.flip();
         return db;
     }
