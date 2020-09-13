@@ -15,11 +15,13 @@ class Ui {
     private static final String CIAO ="Spero di rivederti presto\n";
     private static final String CONVO_START = GREETING;
     private static final String END = "|end|ciao|bye|close|exit|nights|shutdown|";
+    private static final String USER_GREETINGS = "|hi|hey|wassup|";
 
     private static final Controller CONTROLLER = Controller.init();
 
     private boolean enterPasswordMode = false;
     private boolean confirmPasswordMode = false;
+    private boolean hasBeenGreeted = false;
     private String password;
 
 
@@ -62,8 +64,13 @@ class Ui {
             return "You are somebody new! Please state your user password.";
         }
         // Initiating a conversation with duke with 'hi'
-        if (s.length() == 3 && s.contains("hey")) {
+        if (!hasBeenGreeted && USER_GREETINGS.contains("|" + s + "|")) {
+            hasBeenGreeted = true;
             return CONVO_START;
+        }
+
+        if (hasBeenGreeted && USER_GREETINGS.contains("|" + s + "|")) {
+            return "Why are you greeting me again?";
         }
 
         String reply = CONTROLLER.parseAndExec(s);
