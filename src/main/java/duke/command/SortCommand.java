@@ -43,6 +43,7 @@ public class SortCommand extends Command {
         list.sortList(list.getList().stream()
                                     .sorted(comparator)
                                     .collect(Collectors.toList()));
+
         storage.generateTxt(list);
         return ui.showSort() + "\n" + new ListCommand()
                 .execute(list, ui, storage);

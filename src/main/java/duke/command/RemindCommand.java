@@ -1,16 +1,16 @@
 package duke.command;
 
-import duke.exception.DukeException;
-import duke.storage.Storage;
-import duke.task.Task;
-import duke.tasklist.TaskList;
-import duke.ui.Ui;
-
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Predicate;
+
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.task.Task;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
 
 public class RemindCommand extends Command {
 
@@ -39,7 +39,7 @@ public class RemindCommand extends Command {
                 return Optional.empty();
             }
 
-            if(x.isDone()) {
+            if (x.isDone()) {
                 return Optional.empty();
             }
 
@@ -70,7 +70,7 @@ public class RemindCommand extends Command {
             }
         }
 
-        return count != 1? out : ui.showNoRecentTask();
+        return count != 1 ? out : ui.showNoRecentTask();
     }
 
     @Override

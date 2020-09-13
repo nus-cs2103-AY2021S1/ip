@@ -40,6 +40,9 @@ public class Storage {
         String file = filePath.split("/")[1];
         String dir = System.getProperty("user.dir");
 
+
+        //Look for the folder specified in the path
+        //Create the folder and file if folder not found
         java.nio.file.Path dataFolder = java.nio.file.Paths.get(dir, folder);
         if (!java.nio.file.Files.exists(dataFolder)) {
             if (!new File(dataFolder.toString()).mkdir()) {
@@ -49,9 +52,11 @@ public class Storage {
 
         assert dataFolder != null : "Folder not found!";
 
+
+        //Look for the file specified by the path under the condition that folder has been found
+        //Create new file if file not found
         java.nio.file.Path fileLocation = java.nio.file.Paths
                 .get(dataFolder.toString(), file);
-
         if (!java.nio.file.Files.exists(fileLocation)) {
             try {
                 if (!fileLocation.toFile().createNewFile()) {
@@ -61,6 +66,7 @@ public class Storage {
                 throw new FolderErrorException();
             }
         }
+
         assert fileLocation != null : "file not found!";
         this.data = new File(fileLocation.toString());
     }

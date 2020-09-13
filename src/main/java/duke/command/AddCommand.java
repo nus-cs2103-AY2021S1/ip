@@ -49,29 +49,11 @@ public class AddCommand extends Command {
                 break;
             }
             case "deadline": {
-                int byIndex = this.description.indexOf(" /by ");
-                if (byIndex == -1) {
-                    throw new DukeException("Keyword \" /by \" not found, note the white space!");
-                }
-
-                assert byIndex > 1 : "there is no task";
-
-                String deadline = this.description.substring(byIndex + 4).trim();
-                String description = this.description.substring(0, byIndex).trim();
-                current = new Deadline(description, deadline);
+                current = generateComplexTask("by");
                 break;
             }
             case "event": {
-                int atIndex = this.description.indexOf(" /at ");
-                if (atIndex == -1) {
-                    throw new DukeException("Keyword \" /at \" not found, note the white space!");
-                }
-
-                assert atIndex > 1 : "there is no task";
-
-                String deadline = this.description.substring(atIndex + 4).trim();
-                String description = this.description.substring(0, atIndex).trim();
-                current = new Event(description, deadline);
+                current = generateComplexTask("at");
                 break;
             }
             default: {
@@ -90,7 +72,22 @@ public class AddCommand extends Command {
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("Invalid date and time format detected!");
         }
+    }
 
+    private Task generateComplexTask(String keyword) throws DukeException {
+        String processedKeyword = " /" + keyword + " ";
+        int index = this.description.indexOf(processedKeyword);
+        if (index == -1) {
+            throw new DukeException("Keyword " + processedKeyword + " not found, note the white space!");
+        }
+
+        assert index > 1 : "there is no task";
+
+        String deadline = this.description.substring(index + 4).trim();
+        String description = this.description.substring(0, index).trim();
+
+        return keyword.equals("by") ? new Deadline(description, deadline)
+                                    : new Event(description, deadline);
 
     }
 

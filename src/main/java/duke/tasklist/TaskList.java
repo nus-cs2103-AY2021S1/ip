@@ -9,6 +9,7 @@ import duke.task.Task;
  * Represents a collection of all kinds of tasks.
  */
 public class TaskList {
+
     protected List<Task> list;
 
     public TaskList() {
@@ -39,4 +40,5 @@ public class TaskList {
     public void sortList(List<Task> list) {
         this.list = list;
     }
+
 }
