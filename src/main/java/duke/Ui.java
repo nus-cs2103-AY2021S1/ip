@@ -62,7 +62,7 @@ public class Ui {
     }
 
     /**
-     * Method to print a done message for a Task.
+     * Print a done message for a Task.
      * @param t Task that is done.
      */
     public static void printDoneTask(Task t){

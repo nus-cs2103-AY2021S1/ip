@@ -38,6 +38,10 @@ public class Storage {
             Scanner fileReader = new Scanner(f);
             while(fileReader.hasNextLine()){
                 String[] command = Parser.parseCommand(fileReader.nextLine());
+                switch(command[0]){
+                    case "done":
+
+                }
                 if(command[0].contentEquals("done")){
                     int index = taskList.size() - 1;
                     taskList.get(index).setDone();
