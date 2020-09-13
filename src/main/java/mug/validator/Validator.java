@@ -7,14 +7,14 @@ import mug.command.Command;
 import mug.mugexception.MugException;
 
 /**
- * Validates or parses the user mug.command
+ * Validates or parses the user command
  */
 public class Validator {
 
     /**
      * Validates user's input.
      *
-     * @param command User mug.command.
+     * @param command User command.
      * @param splitInputLen Length of the split string.
      * @param isTime time related.
      * @throws MugException If splitNum less than 2.
@@ -24,11 +24,11 @@ public class Validator {
             boolean isDeadline = command == Command.DEADLINE;
             boolean isEvent = command == Command.EVENT;
             if ((isTime && isDeadline)) {
-                throw new MugException("HEY!!! Feed me with {/by [date]}. mug.Mug is hungry T_T");
+                throw new MugException("HEY!!! Feed me with {/by [date]}. Mug is hungry T_T");
             } else if (isTime && isEvent) {
-                throw new MugException("HEY!!! Feed me with {/at [date]}. mug.Mug is hungry T_T");
+                throw new MugException("HEY!!! Feed me with {/at [date]}. Mug is hungry T_T");
             } else {
-                throw new MugException("HEY!!! Don't be stingy give mug.Mug more information >.<");
+                throw new MugException("HEY!!! Don't be stingy give Mug more information >.<");
             }
         }
     }
@@ -36,7 +36,7 @@ public class Validator {
     /**
      * Validates the info that user's input.
      *
-     * @param command User mug.command.
+     * @param command User command.
      * @param info Task description.
      * @param isTime time related.
      * @throws MugException If info pass in is empty.
@@ -46,11 +46,11 @@ public class Validator {
         boolean isEvent = command == Command.EVENT;
         if (info.trim().equals("")) {
             if ((isTime && isDeadline)) {
-                throw new MugException("HEY!!! Feed me with {/by [date]}. mug.Mug is hungry T_T");
+                throw new MugException("HEY!!! Feed me with {/by [date]}. Mug is hungry T_T");
             } else if (isTime && isEvent) {
-                throw new MugException("HEY!!! Feed me with {/at [date]}. mug.Mug is hungry T_T");
+                throw new MugException("HEY!!! Feed me with {/at [date]}. Mug is hungry T_T");
             } else {
-                throw new MugException("HEY!!! Don't be stingy give mug.Mug more information >.<");
+                throw new MugException("HEY!!! Don't be stingy give Mug more information >.<");
             }
         }
     }
@@ -66,22 +66,22 @@ public class Validator {
         try {
             return LocalDate.parse(date.trim());
         } catch (DateTimeParseException ex) {
-            throw new MugException("mug.Mug is picky. Give him the correct date format(YYYY-MM-DD) XD");
+            throw new MugException("Mug is picky. Give him the correct date format(YYYY-MM-DD) XD");
         }
     }
 
     /**
-     * Parses and validates mug.command.
+     * Parses and validates command.
      *
-     * @param command User mug.command.
-     * @return Parse mug.command.
-     * @throws MugException If wrong mug.command give.
+     * @param command User command.
+     * @return Parse command.
+     * @throws MugException If wrong command give.
      */
     public static Command command(String command) throws MugException {
         try {
             return Command.valueOf(command.toUpperCase());
         } catch (IllegalArgumentException ex) {
-            throw new MugException("Hey!!! I'm sorry, but mug.Mug don't know what that means :3");
+            throw new MugException("Hey!!! I'm sorry, but Mug don't know what that means :3");
         }
     }
 
@@ -98,11 +98,11 @@ public class Validator {
             int index = Integer.parseInt(strIndex.trim());
 
             if (splitInputLen < 2) {
-                throw new MugException("HEY!!! Don't be stingy give mug.Mug more information >.<");
+                throw new MugException("HEY!!! Don't be stingy give Mug more information >.<");
             }
             return index;
         } catch (NumberFormatException ex) {
-            throw new MugException("Please feed mug.Mug an integer number ~_~");
+            throw new MugException("Please feed Mug an integer number ~_~");
         }
     }
 }
