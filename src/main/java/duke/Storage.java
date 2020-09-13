@@ -1,10 +1,5 @@
 package duke;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -13,6 +8,11 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 
 /**
  * Class for loading and persisting data to disk.
@@ -38,7 +38,8 @@ public class Storage {
      * Loads tasks from saveFilePath.
      * @return ArrayList of loaded tasks
      */
-    public static ArrayList<Task> load() throws InvalidSaveFileException, DateTimeParseException, FileNotFoundException {
+    public static ArrayList<Task> load() throws InvalidSaveFileException, DateTimeParseException,
+            FileNotFoundException {
         createSaveDirectoryIfNotExists();
         File file = new File(saveFilePath);
         Scanner scanner = new Scanner(file);
@@ -47,19 +48,19 @@ public class Storage {
         while (scanner.hasNext()) {
             String[] components = scanner.nextLine().split("\\|");
             switch (components[0]) {
-                case "T":
-                    tasks.add(new Todo(components[2], components[1].equals(doneString)));
-                    break;
-                case "D":
-                    tasks.add(new Deadline(components[2], components[1].equals(doneString),
-                            LocalDateTime.parse(components[3])));
-                    break;
-                case "E":
-                    tasks.add(new Event(components[2], components[1].equals(doneString),
-                            components[3]));
-                    break;
-                default:
-                    throw new InvalidSaveFileException();
+            case "T":
+                tasks.add(new Todo(components[2], components[1].equals(doneString)));
+                break;
+            case "D":
+                tasks.add(new Deadline(components[2], components[1].equals(doneString),
+                        LocalDateTime.parse(components[3])));
+                break;
+            case "E":
+                tasks.add(new Event(components[2], components[1].equals(doneString),
+                        components[3]));
+                break;
+            default:
+                throw new InvalidSaveFileException();
             }
         }
         return tasks;
@@ -67,7 +68,7 @@ public class Storage {
 
     private static void createSaveDirectoryIfNotExists() {
         File saveDirectory = new File("data");
-        if (! saveDirectory.exists()) {
+        if (!saveDirectory.exists()) {
             saveDirectory.mkdir();
         }
     }

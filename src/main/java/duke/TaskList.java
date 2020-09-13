@@ -1,13 +1,12 @@
 package duke;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
-
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.ArrayList;
 
 /**
  * TaskList for manipulating user tasks.
@@ -42,18 +41,18 @@ public class TaskList {
         String[] taskComponents = Parser.parseTask(command);
 
         switch (userCommandType) {
-            case TODO:
-                task = new Todo(taskComponents[0], false);
-                break;
-            case DEADLINE:
-                task = new Deadline(taskComponents[0], false,
-                        Parser.parseDateTime(taskComponents[1]));
-                break;
-            case EVENT:
-                task = new Event(taskComponents[0], false, taskComponents[1]);
-                break;
-            default:
-                throw new Parser.InvalidCommandException();
+        case TODO:
+            task = new Todo(taskComponents[0], false);
+            break;
+        case DEADLINE:
+            task = new Deadline(taskComponents[0], false,
+                    Parser.parseDateTime(taskComponents[1]));
+            break;
+        case EVENT:
+            task = new Event(taskComponents[0], false, taskComponents[1]);
+            break;
+        default:
+            throw new Parser.InvalidCommandException();
         }
 
         for (Task existingTask: tasks) {
@@ -164,7 +163,7 @@ public class TaskList {
      * Saves user tasks to disk.
      */
     public void saveTaskList() throws IOException {
-            Storage.save(tasks);
+        Storage.save(tasks);
     }
 
     /**

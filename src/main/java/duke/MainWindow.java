@@ -1,5 +1,7 @@
 package duke;
 
+import java.io.IOException;
+
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -7,8 +9,6 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-
-import java.io.IOException;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -25,12 +25,19 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
+    /**
+     * Initialise main windows.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         addDukeDialog(StringConstants.getGreeting());
     }
 
+    /**
+     * Set duke object to main window.
+     * @param d duke object
+     */
     public void setDuke(Duke d) {
         duke = d;
     }

@@ -1,17 +1,20 @@
 package duke;
 
-import duke.task.Task;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+
+import duke.task.Task;
 
 /**
  * Main program for Duke.
  */
 public class Duke {
-    TaskList userTaskList;
+    private final TaskList userTaskList;
 
+    /**
+     * Initialise duke and load tasks.
+     */
     public Duke() {
         ArrayList<Task> tasks;
         try {

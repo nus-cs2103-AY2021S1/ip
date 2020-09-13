@@ -70,7 +70,7 @@ public class Parser {
         } else if (taskType.equals(DEADLINE_COMMAND) || taskType.equals(EVENT_COMMAND)) {
             for (int i = 0; i < components.length - 1; i++) {
                 if (components[i].equals("/at") || components[i].equals("/by")) {
-                    String dateTimeString =  i + 2 == components.length
+                    String dateTimeString = i + 2 == components.length
                             ? components[i + 1] + " 0000"
                             : String.join(" ",
                             Arrays.copyOfRange(components, i + 1, components.length));
@@ -98,8 +98,8 @@ public class Parser {
         try {
             return LocalDateTime.parse(dateString, dateTimeFormatter);
         } catch (DateTimeParseException exception) {
-            throw new InvalidCommandException("Invalid date time format, " +
-                    "please specify your date in dd/MM/yyyy HHmm format");
+            throw new InvalidCommandException("Invalid date time format, "
+                    + "please specify your date in dd/MM/yyyy HHmm format");
         }
     }
 
