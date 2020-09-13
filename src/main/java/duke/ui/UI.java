@@ -201,7 +201,7 @@ public class UI {
                        + "\n"
                        + "list : Lists all items currently being tracked\n"
                        + "\n"
-                       + "getEvents <date> : Retrieves all tasks with the corresponding date\n"
+                       + "getEvents <date> : Retrieves all tasks with the corresponding date in YYYY-MM-DD format\n"
                        + "\n"
                        + "search <keyword1 keyword2....> : Searches for all tasks matching the keywords\n"
                        + "\n"
