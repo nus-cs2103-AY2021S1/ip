@@ -94,15 +94,15 @@ public class Storage {
         try {
             ArrayList<Task> list = new ArrayList<>();
             if (isEmptySave || savefile.length() == 0) {
-                // Checks if save file is empty, returns empty task list to start
+                // Checks if save file is empty, returns empty task list
                 System.out.println("Current save file is empty.");
                 return list;
             }
             Scanner sc = new Scanner(savefile);
             // Reads the number of tasks to be parsed then parses the tasks
             int noOfTasks = Integer.parseInt(sc.nextLine());
+            // Read all tasks from savefile
             for (int i = 0; i < noOfTasks; i++) {
-                // Read all tasks from savefile
                 String input = sc.nextLine();
                 if (input.startsWith("todo")) {
                     Task newTodo = Parser.parseNewTaskCommand(input, Task.TaskType.TODO);
@@ -117,8 +117,8 @@ public class Storage {
                     throw new DukeException("\u2639 Whoops, error parsing " + '"' + input + '"' + " in save file");
                 }
             }
+            // Marks completed tasks as done
             while (sc.hasNext()) {
-                // Marks completed tasks as done
                 int doneTaskIndex = Integer.parseInt(sc.next());
                 list.get(doneTaskIndex).markAsDone();
             }
@@ -174,7 +174,7 @@ public class Storage {
         try {
             this.writer = new FileWriter(location + FILE_NAME);
             String doneIndexes;
-            // Writes the number of tasks in list
+            // Saves the current number of tasks in task list
             writer.write(list.size() + System.lineSeparator());
             StringBuilder doneIndexesBuilder = new StringBuilder();
             for (int i = 0; i < list.size(); i++) {
@@ -182,12 +182,12 @@ public class Storage {
                 if (t.isDone()) {
                     doneIndexesBuilder.append(i).append(" ");
                 }
-                // Writes the each task to file
+                // Saves each task to file
                 writer.write(t.printSaveFormat() + System.lineSeparator());
             }
             doneIndexes = doneIndexesBuilder.toString();
             if (!doneIndexes.equals("")) {
-                // Writes the index of completed tasks
+                // Saves the index of completed tasks
                 writer.write(doneIndexes + System.lineSeparator());
             }
             writer.flush();

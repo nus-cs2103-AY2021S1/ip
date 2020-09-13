@@ -8,7 +8,7 @@ import duke.task.Task;
  */
 public class DeadlineCommand extends AddAbstractTaskCommand {
     public static final String COMMAND_WORD = "deadline";
-    public static final String COMMAND_USAGE = COMMAND_WORD + ": Adds a deadline task with time.\n\n"
+    public static final String COMMAND_USAGE = COMMAND_WORD + ": Adds a deadline task with time.\n"
         + "Fields: " + "[description]" + " /by " + "[time] \n"
         + "Example: " + COMMAND_WORD + " Programming Assignment /by 2020-10-10 1800";
 

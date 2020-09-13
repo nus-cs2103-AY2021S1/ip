@@ -23,9 +23,9 @@
          <children>
             <HBox maxWidth="1.7976931348623157E308">
                <children>
-                <TextField fx:id="userInput" maxWidth="Infinity" onAction="#handleUserInput" prefHeight="50.0" prefWidth="509.0" promptText="type help to view all commands " style="-fx-background-color: #D4F1F4; -fx-prompt-text-fill: grey; -fx-background-radius: 15;" HBox.hgrow="ALWAYS">
+                <TextField fx:id="userInput" maxWidth="Infinity" onAction="#handleUserInput" prefHeight="50.0" prefWidth="509.0" promptText="Talk to duke or type help " style="-fx-background-color: #D4F1F4; -fx-prompt-text-fill: grey; -fx-background-radius: 15;" HBox.hgrow="ALWAYS">
                      <font>
-                        <Font name="Segoe UI Italic" size="16.0" />
+                        <Font name="Segoe UI Italic" size="18.0" />
                      </font>
                      <effect>
                         <DropShadow spread="0.34" />
@@ -34,7 +34,7 @@
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </HBox.margin>
                   </TextField>
-                <Button fx:id="sendButton" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" minWidth="107.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="50.0" prefWidth="107.0" style="-fx-background-color: #75E6DA; -fx-background-radius: 15;" text="Enter" textFill="#5b5b5b" wrapText="true">
+                <Button fx:id="sendButton" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" minWidth="107.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="50.0" prefWidth="107.0" style="-fx-background-color: #a6e1ff; -fx-background-radius: 15;" text="Enter" textFill="#5b5b5b" wrapText="true">
                      <font>
                         <Font name="Segoe UI Bold" size="18.0" />
                      </font>

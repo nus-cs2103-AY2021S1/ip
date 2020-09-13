@@ -12,8 +12,6 @@ public class TaskListHandler {
     protected ArrayList<Task> tasks;
     protected Stack<ArrayList<Task>> undoTaskLists;
     protected Stack<String> inputsToUndo;
-    // protected Stack<ArrayList<Task>> redoTaskLists;
-    // protected Stack<String> inputsToRedo;
 
     /**
      * Stores tasks from save file or empty task list if save file unavailable.
@@ -24,8 +22,6 @@ public class TaskListHandler {
         this.tasks = list;
         this.inputsToUndo = new Stack<>();
         this.undoTaskLists = new Stack<>();
-        // this.inputsToRedo = new Stack<>();
-        // this.redoTaskLists = new Stack<>();
     }
 
     /**
@@ -65,7 +61,6 @@ public class TaskListHandler {
      */
     public void printList() throws DukeException {
         if (tasks.isEmpty()) {
-            // Asks user for tasks when printing empty list
             throw new DukeException("\u2639 Whoops, the list of tasks is empty, pls add tasks first!");
         }
         int listPos = 1;
@@ -121,16 +116,6 @@ public class TaskListHandler {
         System.out.println("The previous command: " + '"' + previousCommand + '"' + " has been undone!");
         ArrayList<Task> previousTaskList = undoTaskLists.pop();
         tasks = previousTaskList;
-        /* // Redo requires pushing the popped undo-list into a redo-stack
-
-        ArrayList<Task> redoTasks = new ArrayList<>();
-        for (Task t: previousTaskList) {
-            redoTasks.add(t.deepCopy());
-        }
-        redoTaskLists.push(redoTasks);
-        inputsToRedo.push(previousCommand);
-
-         */
     }
 
     /**
@@ -148,24 +133,4 @@ public class TaskListHandler {
         undoTaskLists.push(savedTaskList);
         inputsToUndo.push(command);
     }
-
-    /*
-
-    public void restoreRedoTaskList() throws DukeException {
-        if (redoTaskLists.empty()) {
-            throw new DukeException("\u2639 Whoops, there are no more commands to redo!");
-        }
-        String futureCommand = inputsToRedo.pop();
-        System.out.println("The previous command: " + '"' + futureCommand + '"' + " has been redone!");
-        ArrayList<Task> futureTaskList = redoTaskLists.pop();
-        for (Task t: futureTaskList) {
-            System.out.println(t);
-        }
-        tasks = futureTaskList;
-        // Pushing the popped undo-list into a redo-stack
-        undoTaskLists.push(futureTaskList);
-        inputsToUndo.push(futureCommand);
-    }
-
-     */
 }

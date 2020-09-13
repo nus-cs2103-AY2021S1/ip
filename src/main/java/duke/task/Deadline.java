@@ -9,6 +9,7 @@ import java.time.format.DateTimeParseException;
  * Inherits from Task.
  */
 public class Deadline extends Task {
+    public static final String SEPARATOR = "/by";
 
     /**
      * Initializes with a description and the time that deadline should be completed by.

@@ -26,12 +26,10 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
+    // user.png: Standing Man icon by Icons8 from https://icons8.com/icon/8NzonSPORfzB/man-in-a-tuxedo
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
-    // Standing Man icon by Icons8 from https://icons8.com/icon/8NzonSPORfzB/man-in-a-tuxedo
-
+    // duke.png: Man In A Tuxedo icon by Icons8 from https://icons8.com/icon/21832/standing-man
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/duke.png"));
-    // Man In A Tuxedo icon by Icons8 from https://icons8.com/icon/21832/standing-man
-
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -49,12 +47,14 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         if (input.equals("bye")) {
-            // Delay code by James_D adapted from:
-            // https://stackoverflow.com/questions/27334455/how-to-close-a-stage-after-a-certain-amount-of-time-javafx
             Stage stage = (Stage) scrollPane.getScene().getWindow();
+            // @@author James_D
+            // Reused with minor modifications from
+            // https://stackoverflow.com/questions/27334455/how-to-close-a-stage-after-a-certain-amount-of-time-javafx
             PauseTransition delay = new PauseTransition(Duration.seconds(1.5));
             delay.setOnFinished(event -> stage.close());
             delay.play();
+            // @@author
         }
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(

@@ -15,7 +15,7 @@ import duke.task.Task;
 public class DoneCommand extends AbstractModifyTaskCommand {
     public static final String COMMAND_WORD = "done";
     public static final String COMMAND_USAGE = COMMAND_WORD + ": Completes the task specified by the task number in "
-        + "the list.\n\n"
+        + "the list.\n"
         + "Fields: " + "[task number] \n"
         + "Example: " + COMMAND_WORD + " 1 ";
 

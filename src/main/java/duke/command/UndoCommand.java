@@ -10,7 +10,7 @@ import duke.TaskListHandler;
 public class UndoCommand extends Command {
     public static final String COMMAND_WORD = "undo";
     public static final String COMMAND_USAGE = COMMAND_WORD + ": Undo the previous command, "
-        + "but cannot undo an undo command.\n\n"
+        + "but cannot undo an undo command.\n"
         + "Example: " + COMMAND_WORD;
     /**
      * Reverts the previous command given by the user.

@@ -15,14 +15,6 @@ import duke.task.Todo;
 
 class ParserTest {
 
-    //    @Test
-    //    void parse() throws DukeException {
-    //        taskListHandler handler = new taskListHandler(new ArrayList<>());
-    //        Parser.parse("todo pop-quiz", handler);
-    //        TodoCommand tdcmd = new TodoCommand(new Todo("todo pop-quiz"));
-    //        assertEquals(Parser.parse("todo pop-quiz", handler), tdcmd);
-    //    }
-
     @Test
     void parseModifyTaskCommand() throws DukeException {
         TaskListHandler handler = new TaskListHandler(new ArrayList<>());
@@ -46,7 +38,7 @@ class ParserTest {
     void parseTaskWithTime() throws DukeException {
         Event newEvent = new Event("fan-signing", "2pm");
         String command = "event fan-signing /at 2pm";
-        assertEquals(Parser.parseTaskWithTimeSubroutine(command, Task.TaskType.EVENT, "/at"), newEvent);
+        assertEquals(Parser.parseTaskWithTimeSubroutine(command, Task.TaskType.EVENT), newEvent);
         System.out.println("Passed: parseTaskWithTimeTest!");
     }
 

@@ -9,7 +9,7 @@ import duke.TaskListHandler;
  */
 public class ListCommand extends Command {
     public static final String COMMAND_WORD = "list";
-    public static final String COMMAND_USAGE = COMMAND_WORD + ": Displays all tasks and their details.\n\n"
+    public static final String COMMAND_USAGE = COMMAND_WORD + ": Displays all tasks and their details.\n"
         + "Example: "
         + COMMAND_WORD;
 
@@ -22,7 +22,6 @@ public class ListCommand extends Command {
      */
     @Override
     public void execute(TaskListHandler handler, Storage storage, String input) throws DukeException {
-        // Prints the given list
         handler.printList();
     }
 }

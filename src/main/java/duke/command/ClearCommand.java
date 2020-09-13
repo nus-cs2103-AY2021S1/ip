@@ -9,7 +9,7 @@ import duke.task.Task;
 
 public class ClearCommand extends Command {
     public static final String COMMAND_WORD = "clear";
-    public static final String COMMAND_USAGE = COMMAND_WORD + ": Removes ALL tasks.\n\n"
+    public static final String COMMAND_USAGE = COMMAND_WORD + ": Removes ALL tasks.\n"
         + "Example: " + COMMAND_WORD;
 
     /**

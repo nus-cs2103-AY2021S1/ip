@@ -37,8 +37,14 @@ public class Parser {
         String firstWord = input.split(" ")[0];
         switch (firstWord) {
         case "bye":
+            if (checkInputForEmptySpace(input)) {
+                return new InvalidCommand();
+            }
             return new ByeCommand();
         case "list":
+            if (checkInputForEmptySpace(input)) {
+                return new InvalidCommand();
+            }
             return new ListCommand();
         case "done":
             Task currentTask = Parser.parseModifyTaskCommand(input, handler);
@@ -56,16 +62,32 @@ public class Parser {
             Task newEvent = Parser.parseNewTaskCommand(input, Task.TaskType.EVENT);
             return new EventCommand(newEvent);
         case "clear":
+            if (checkInputForEmptySpace(input)) {
+                return new InvalidCommand();
+            }
             return new ClearCommand();
         case "find":
             return new FindCommand();
         case "undo":
+            if (checkInputForEmptySpace(input)) {
+                return new InvalidCommand();
+            }
             return new UndoCommand();
         case "help":
             return new HelpCommand();
         default:
             return new InvalidCommand();
         }
+    }
+
+    /**
+     * Checks the given input for additional parameters given when a single word-command is given.
+     *
+     * @param input User input.
+     * @return Invalid command
+     */
+    public static boolean checkInputForEmptySpace(String input) {
+        return input.contains(" ");
     }
 
     /**
@@ -106,7 +128,7 @@ public class Parser {
     }
 
     /**
-     * Processes user input into a task to add to the task list.
+     * Processes user input into a task to be added to the task list.
      *
      * @param input User input.
      * @param tasktype Type of task to be added.
@@ -114,31 +136,27 @@ public class Parser {
      * @throws DukeException if task description is empty or invalid command format used.
      */
     public static Task parseNewTaskCommand(String input, Task.TaskType tasktype) throws DukeException {
-        // Sorts the input into a task with or without time
         try {
-            // if given empty arguments or space as task
             String dummyTask = input.split(" ")[1].trim();
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("\u2639 Whoops, the description of "
                 + tasktype.toString().toLowerCase() + " cannot be empty");
         }
-
         if (tasktype == Task.TaskType.TODO) {
-            // Without time
             String todoWithSpace = "todo ";
             String taskDesc = input.substring(todoWithSpace.length());
             return new Todo(taskDesc);
         }
         if (tasktype == Task.TaskType.DEADLINE) {
             try {
-                return parseTaskWithTimeSubroutine(input, tasktype, "/by");
+                return parseTaskWithTimeSubroutine(input, tasktype);
             } catch (IndexOutOfBoundsException e) {
                 throw new DukeException("\u2639 Whoops wrong format, use add deadline format: "
                     + "deadline [task] /by [time (can be 'YYYY-MM-DD HHMM')]");
             }
         } else if (tasktype == Task.TaskType.EVENT) {
             try {
-                return parseTaskWithTimeSubroutine(input, tasktype, "/at");
+                return parseTaskWithTimeSubroutine(input, tasktype);
             } catch (IndexOutOfBoundsException e) {
                 throw new DukeException("\u2639 Whoops wrong format, use add event format: "
                     + "event [task] /at [time]");
@@ -154,20 +172,15 @@ public class Parser {
      *
      * @param input User input.
      * @param tasktype Type of task.
-     * @param separator String separating description and time.
      * @return New Task to be added.
      * @throws DukeException if description or time is empty.
      */
     public static Task parseTaskWithTimeSubroutine(String input,
-                                                   Task.TaskType tasktype,
-                                                   String separator) throws DukeException {
-        String taskDesc = input.substring(tasktype.name().length() + 1, input.indexOf(separator) - 1);
+                                                   Task.TaskType tasktype) throws DukeException {
+        String taskDesc = parseTaskDesc(input, tasktype);
         checkIsFieldEmpty("taskDesc", taskDesc);
-        // size of /by or /at with a space
-        String atByWithSpace = "/at ";
-        int lengthOfSeparator = atByWithSpace.length();
         assert !taskDesc.isEmpty() : "Error processing the empty task description given";
-        String time = input.substring(input.indexOf(separator) + lengthOfSeparator);
+        String time = parseTime(input, tasktype);
         checkIsFieldEmpty("time", time);
         assert !time.isEmpty() : "Error processing the empty time given";
         if (tasktype == Task.TaskType.DEADLINE) {
@@ -175,8 +188,8 @@ public class Parser {
         } else if (tasktype == Task.TaskType.EVENT) {
             return new Event(taskDesc, time);
         } else {
-            assert false : "Error parsing new task with time of task type " + tasktype + " in subroutine";
-            return new Task("this task should not be created");
+            assert false : "Error in parseTaskWithTimeSubroutine: " + tasktype;
+            throw new DukeException("Error parsing new task with time of task type " + tasktype + " in subroutine");
         }
     }
 
@@ -188,9 +201,46 @@ public class Parser {
      * @throws DukeException if field is empty.
      */
     public static void checkIsFieldEmpty(String nameOfField, String field) throws DukeException {
-        // check whether the argument given is empty
         if (field.trim().isEmpty()) {
             throw new DukeException("\u2639 Whoops, " + nameOfField + " cannot be empty!");
+        }
+    }
+
+    /**
+     * Process the part of the user command before the separator into the task description for the new task.
+     *
+     * @param input User input.
+     * @param tasktype Type of task, which can be a deadline or event.
+     * @return Description of the task.
+     * @throws DukeException If invalid TaskType is given.
+     */
+    public static String parseTaskDesc(String input, Task.TaskType tasktype) throws DukeException {
+        if (tasktype == Task.TaskType.DEADLINE) {
+            return input.substring(tasktype.name().length() + 1, input.indexOf(Deadline.SEPARATOR) - 1);
+        } else if (tasktype == Task.TaskType.EVENT) {
+            return input.substring(tasktype.name().length() + 1, input.indexOf(Event.SEPARATOR) - 1);
+        } else {
+            assert false : "Error in parseTaskDesc: " + input + " " + tasktype;
+            throw new DukeException("Error in parseTaskDesc: " + input + " " + tasktype);
+        }
+    }
+
+    /**
+     * Process the part of the user command after the separator into the time for the new task.
+     *
+     * @param input User input.
+     * @param tasktype Type of task, which can be a deadline or event.
+     * @return Description of the task.
+     * @throws DukeException If invalid TaskType is given.
+     */
+    public static String parseTime(String input, Task.TaskType tasktype) throws DukeException {
+        if (tasktype == Task.TaskType.DEADLINE) {
+            return input.substring(input.indexOf(Deadline.SEPARATOR) + Deadline.SEPARATOR.length() + 1);
+        } else if (tasktype == Task.TaskType.EVENT) {
+            return input.substring(input.indexOf(Event.SEPARATOR) + Event.SEPARATOR.length() + 1);
+        } else {
+            assert false : "Error in parseTime: " + input + " " + tasktype;
+            throw new DukeException("Error in parseTime " + input + " " + tasktype);
         }
     }
 }

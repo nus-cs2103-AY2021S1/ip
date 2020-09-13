@@ -13,7 +13,7 @@ import duke.task.Task;
  */
 public class FindCommand extends Command {
     public static final String COMMAND_WORD = "find";
-    public static final String COMMAND_USAGE = COMMAND_WORD + ": Searches for tasks matching the given keyword.\n\n"
+    public static final String COMMAND_USAGE = COMMAND_WORD + ": Searches for tasks matching the given keyword.\n"
         + "Fields: " + "[description] \n"
         + "Example: " + COMMAND_WORD + " books ";
 
@@ -26,10 +26,11 @@ public class FindCommand extends Command {
      */
     @Override
     public void execute(TaskListHandler handler, Storage storage, String input) throws DukeException {
-        // Second word is the keyword to search for
+        // Second word in user input is the keyword to search for
         String keyword = input.substring(5);
         ArrayList<Task> foundTasks = handler.findTasksByKeyword(keyword);
         if (!foundTasks.isEmpty()) {
+            // Found tasks matching keyword
             Ui.printSuccess("find", foundTasks.get(0), foundTasks);
         } else {
             // Unable to find any matching task

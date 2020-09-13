@@ -13,6 +13,9 @@ public class Duke {
     private final TaskListHandler handlerVar;
     private ByteArrayOutputStream guiOutput;
 
+    /**
+     * Initializes the storage instance and handler instance for all task list operations.
+     */
     public Duke() {
         storageVar = new Storage("./data");
         handlerVar = new TaskListHandler(storageVar.getListFromFile());

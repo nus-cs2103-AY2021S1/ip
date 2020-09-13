@@ -6,6 +6,7 @@ package duke.task;
  * Inherits from Task.
  */
 public class Event extends Task {
+    public static final String SEPARATOR = "/at";
 
     /**
      * Initializes with a description and the time of event.

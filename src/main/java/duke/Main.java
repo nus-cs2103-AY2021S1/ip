@@ -27,8 +27,8 @@ public class Main extends Application {
             fxmlLoader.<MainWindow>getController().showGreeting();
             stage.show();
             stage.setTitle("Duke");
-            stage.getIcons().add(new Image(Main.class.getResourceAsStream("/images/icon.png")));
             // Shooting Stars icon by Icons8 from https://icons8.com/icon/81220/shooting-stars
+            stage.getIcons().add(new Image(Main.class.getResourceAsStream("/images/icon.png")));
         } catch (IOException e) {
             e.printStackTrace();
         }
