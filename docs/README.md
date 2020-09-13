@@ -6,12 +6,10 @@ as you ask him to.
 >**Learn more about his features below**.
 
 ## Features 
-<div markdown="block" class="alert alert-info">
-**:information_source: Note about the command format:** <br>
+###**:information_source: Note about the command format:** <br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `todo DESCRIPTION`, `DESCRIPTION` is a parameter which can be used as `add homework`.
-</div>
 
 ### Adding a todo-task: `todo`
 Adds a todo task to the task list.
