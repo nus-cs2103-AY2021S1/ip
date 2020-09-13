@@ -22,6 +22,7 @@ public class DialogBox extends HBox {
     private Text dialog;
     @FXML
     private ImageView displayPicture;
+
     // Constructor
     private DialogBox(String text, Image img) {
         try {
