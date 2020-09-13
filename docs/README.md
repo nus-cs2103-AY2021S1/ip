@@ -2,22 +2,21 @@
 
 Duke-it is a desktop application for managing tasks by typing commands, while also having a Graphical User Interface (GUI)
 
-* [Features Summary](#features-summary)
+* [Features](#features)
 * [Feature Details](#feature-details)
 * [Quick start](#quick-start)
 
-## Features Summary
-| Action      | Description, Format & Examples |
-| ----------- | ----------- |
-| Bye | Exits the application <br/> ```bye``` |
-| Deadline | Creates a new deadline task <br/> ```deadline <DESCRIPTION> /by <DATE>``` <br/> e.g. ```deadline Math homework /by 10-09-2020 2359``` |
-| Delete | Deletes a task <br/> ```delete <INDEX>``` <br/> e.g. ```delete 1``` |
-| Done | Marks a task as complete <br/> ```done <INDEX>``` <br/> e.g. ```done 1``` |
-| Event | Creates a new event task <br/> ```event <DESCRIPTION> /at <DATE>``` <br/> e.g. ```event Christmas /at 25-12-2020 0000``` |
-| Find | Finds tasks containing given keywords separated by ~ <br/> ```find <KEYWORDS>``` <br/> e.g. ```find Math ~ English ~ Science``` |
-| List | Lists all tasks <br/> ```list``` |
-| Todo | Creates a new todo task <br/> ```todo <DESCRIPTION>``` <br/> e.g. ```todo Clean room``` |
-| Sort | Sorts the task list by oldest date first <br/> ```sort``` |
+## Features
+1. **Bye** - exits the application
+1. **Deadline** - creates a new deadline task
+1. **Delete** - deletes a task
+1. **Done** - marks a task as complete
+1. **Event** - creates a new event task
+1. **Find** - finds task containing given keywords
+1. **Help** - lists all available commands
+1. **List** - lists all tasks
+1. **Todo** -- creates a new todo task
+1. **Sort** - sorts teh task list by oldest date first
 
 ## Feature Details
 
