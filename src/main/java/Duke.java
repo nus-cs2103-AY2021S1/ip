@@ -1,5 +1,4 @@
 import java.io.IOException;
-import java.util.Iterator;
 
 
 public class Duke {
@@ -7,30 +6,11 @@ public class Duke {
     private final Parser parser;
     private final Ui ui;
 
-    public Duke() throws IOException {
+    public Duke() throws IOException, ToDoException, eventException, deadlineException {
         Storage dukeStorage = Storage.initialiseStorage();
-        dukeStorage.loadFromDisk();
         this.storage = dukeStorage;
         this.parser = new Parser();
         this.ui = new Ui();
-    }
-
-    private String response(String userInput, TaskList taskList) throws DukeException, IOException {
-        if (userInput.equals("bye")) {
-            return ui.showByeMessage();
-        } else if (userInput.equals("list")) {
-            return ui.showList(returnList());
-        } else if (userInput.startsWith("todo") || userInput.startsWith("deadline") || userInput.startsWith("event")) {
-            Task thisTask = parser.processAddTaskInput(userInput);
-            taskList.addTask(thisTask);
-            storage.saveToDisk();
-            return ui.showAddTaskMessage(thisTask, taskList);
-        } else {
-            TaskList originalTaskList = TaskList.copy(taskList);
-            parser.processOtherActionInput(userInput, taskList);
-            storage.saveToDisk();
-            return ui.showOtherActionMessage(userInput, originalTaskList);
-        }
     }
 
     /**
@@ -45,7 +25,22 @@ public class Duke {
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    String getResponse(String input) throws IOException, DukeException {
-        return response(input, storage.taskList);
+    String getResponse(String userInput) throws IOException{
+        TaskList taskList = this.storage.taskList;
+        try {
+            if (userInput.equals("bye")) {
+                return ui.showByeMessage();
+            } else if (userInput.equals("list")) {
+                return ui.showList(returnList());
+            } else if (userInput.startsWith("todo") || userInput.startsWith("deadline") || userInput.startsWith("event")) {
+                return parser.processAddTaskInput(userInput, taskList, storage, ui);
+            } else {
+                TaskList originalTaskList = TaskList.copy(taskList);
+                parser.processOtherActionInput(userInput, taskList, ui, storage);
+                return ui.showOtherActionMessage(userInput, originalTaskList);
+            }
+        } catch (DukeException e) {
+            return e.toString();
+        }
     }
 }

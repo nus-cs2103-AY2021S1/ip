@@ -11,24 +11,22 @@ public class Parser {
      * @throws deadlineException
      * @throws eventException
      */
-    public Task processAddTaskInput(String userInput) throws DukeException {
+    public String processAddTaskInput(String userInput, TaskList taskList, Storage storage, Ui ui) throws DukeException, IOException {
         String taskType = userInput.split(" ")[0];
         Task thisTask = null;
         switch (taskType) {
             case "todo":
-                if (userInput.equals("todo")) throw new ToDoException();
                 thisTask = new Task(userInput.replace("todo ", ""));
-                return thisTask;
+                taskList.addTask(thisTask, storage);
+                return ui.showAddTaskMessage(thisTask, taskList);
             case "deadline":
-                if (userInput.equals("deadline")) throw new deadlineException();
-                String[] StringArr = userInput.split(" /by");
-                thisTask = new Deadline(StringArr[0].replace("deadline ", ""), StringArr[1]);
-                return thisTask;
+                thisTask = new Deadline(userInput);
+                taskList.addTask(thisTask, storage);
+                return ui.showAddTaskMessage(thisTask, taskList);
             case "event":
-                if (userInput.equals("event")) throw new eventException();
-                StringArr = userInput.split(" /at");
-                thisTask = new Event(StringArr[0].replace("event ", ""), StringArr[1]);
-                return thisTask;
+                thisTask = new Event(userInput);
+                taskList.addTask(thisTask, storage);
+                return ui.showAddTaskMessage(thisTask, taskList);
             default:
                 throw new DukeException();
         }
@@ -42,31 +40,29 @@ public class Parser {
      * @throws IOException
      * @throws DukeException
      */
-    public void processOtherActionInput(String userInput, TaskList taskList) throws IOException, DukeException {
-        String actionType = userInput.split(" ")[0];
+    public String processOtherActionInput(String userInput, TaskList taskList, Ui ui, Storage storage) throws IOException, DukeException {
+        String[] splitUserInput = userInput.split(" ");
+        String actionType = splitUserInput[0];
+        if (splitUserInput[1].equals("")) throw new DukeException("Please enter an index/duration");
         switch (actionType) {
             case "done":
-                if (userInput.equals("done")) throw new DukeException();
                 int doneIndex = Integer.parseInt(userInput.replace("done ", ""));
                 assert doneIndex >= 1 : "Index must be a positive value";
-                taskList.taskCompleted(doneIndex);
-                System.out.println("\n");
-                break;
+                taskList.taskCompleted(doneIndex, storage);
+                return ui.showOtherActionMessage(userInput, taskList);
             case "delete":
-                if (userInput.equals("delete")) throw new deleteException();
                 int indexDeleted = Integer.parseInt(userInput.replace("delete ", ""));
                 assert indexDeleted >= 1 : "Index must be a positive value";
-                taskList.deleteTask(indexDeleted);
-                break;
+                taskList.deleteTask(indexDeleted, storage);
+                return ui.showOtherActionMessage(userInput, taskList);
             case "find":
-                if (userInput.equals("find")) throw new searchException();
-                break;
-            case "duration" :
+                return ui.showOtherActionMessage(userInput, taskList);
+            case "duration":
                 if (userInput.equals("duration")) throw new DurationException();
                 int indexSettingDuration = Integer.parseInt(userInput.split(" ")[1]);
                 assert indexSettingDuration >= 1 : "Index must be a positive value";
-                taskList.setDuration(userInput);
-                break;
+                taskList.setDuration(userInput, storage);
+                return ui.showOtherActionMessage(userInput, taskList);
             default:
                 throw new DukeException();
         }

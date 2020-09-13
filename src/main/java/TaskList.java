@@ -27,7 +27,7 @@ public class TaskList {
      * @return
      * @throws IOException
      */
-    public static TaskList retrieveTaskList(Path File) throws IOException {
+    public static TaskList retrieveTaskList(Path File) throws IOException, ToDoException, eventException, deadlineException {
         TaskList returnTaskList = new TaskList();
         if (java.nio.file.Files.exists(File)) {
             Scanner scanner = new Scanner(File);
@@ -78,36 +78,40 @@ public class TaskList {
      * @throws deleteException
      * @throws IOException
      */
-    public void deleteTask(int index) throws deleteException, IOException {
+    public void deleteTask(int index, Storage storage) throws deleteException, IOException {
         if (index <= taskList.size()) {
             taskList.remove(index - 1);
+            storage.saveToDisk();
         } else {
             throw new deleteException();
         }
     }
 
-    public void setDuration(String userInput) {
+    public void setDuration(String userInput, Storage storage) throws IOException {
         String[] splitBySpaces = userInput.split(" ");
         int indexSettingDuration = Integer.parseInt(splitBySpaces[1]);
         String durationSet = splitBySpaces[2];
         Task taskSettingDurationFor = taskList.get(indexSettingDuration-1);
         taskSettingDurationFor.setDuration(durationSet);
+        storage.saveToDisk();
     }
 
     /**
      * Add Task given to the list
      * @param task
      */
-    public void addTask(Task task) {
+    public void addTask(Task task, Storage storage) throws IOException {
         taskList.add(task);
+        storage.saveToDisk();
     }
 
     /**
      * Marks task with given index as completed
      * @param index
      */
-    public void taskCompleted(int index) {
+    public void taskCompleted(int index, Storage storage) throws IOException {
         taskList.get(index - 1).isDone = true;
+        storage.saveToDisk();
     }
 
     /**

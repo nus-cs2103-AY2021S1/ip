@@ -11,9 +11,10 @@ public class Storage {
     static private final java.nio.file.Path PATH = java.nio.file.Paths.get(HOME, "IdeaProjects", "ip");
     static private final java.nio.file.Path FILE = java.nio.file.Paths.get(HOME, "IdeaProjects", "ip", "iPStorage");
 
-    public static Storage initialiseStorage() throws IOException {
+    public static Storage initialiseStorage() throws IOException, ToDoException, eventException, deadlineException {
         Storage returnStorage = new Storage();
         returnStorage.taskList = TaskList.retrieveTaskList(FILE);
+        returnStorage.loadFromDisk();
         return returnStorage;
     }
 
@@ -21,7 +22,7 @@ public class Storage {
      * Called when Duke is initialised
      * @throws IOException
      */
-    public void loadFromDisk() throws IOException {
+    public void loadFromDisk() throws IOException, ToDoException, eventException, deadlineException {
         taskList = TaskList.retrieveTaskList(FILE);
     }
 

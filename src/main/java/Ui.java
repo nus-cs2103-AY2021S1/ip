@@ -11,14 +11,6 @@ public class Ui {
         System.out.println(logo + "\nHello im Eu Zin's Duke, he spent thursday afternoon creating me cuz he forgot abt the iP");
     }
 
-//    public void showBorder() {
-//        System.out.println("\n\\   / \\   / \\   / \\   / im not very creative \\   / \\   / \\   / \\   /\n \\ /   \\ /   \\ /   \\ /      EuZin's Duke      \\ /   \\ /   \\ /   \\ /\n\n");
-//    }
-
-    public void showAddedMessage() {
-        System.out.println("ok can i've added it\n");
-    }
-
     public String showAddTaskMessage(Task thisTask, TaskList taskList) {
         return thisTask.toString() + "\n" + "Now got " + (taskList.getSize()) + " task in the list\n";
     }

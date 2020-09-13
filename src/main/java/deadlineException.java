@@ -1,6 +1,11 @@
 public class deadlineException extends DukeException {
 
+    public deadlineException(String message) {
+        super(message);
+    }
+
     public String toString() {
-        return "what deadline gimme smth to write pls";
+        if (!message.equals("")) return message;
+        else return "what deadline gimme smth to write pls";
     }
 }
