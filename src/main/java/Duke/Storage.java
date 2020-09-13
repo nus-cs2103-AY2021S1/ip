@@ -59,43 +59,24 @@ public class Storage {
      * @return the lists of task that will be given to TaskList.
      */
     public ArrayList<Task> load(Ui ui) {
-        ArrayList<Task> listOfTasks = new ArrayList<Task>();
+        ArrayList<Task> listOfTasks = new ArrayList<>();
         try {
             Scanner sc1 = new Scanner(dukeFile);
             while (sc1.hasNext()) {
                 String loadedInput = sc1.nextLine();
                 String taskType = loadedInput.substring(0, 3);
+                String description = loadedInput.substring(7);
+                boolean isComplete;
+                isComplete = loadedInput.substring(4, 7).equals("[✓]");
                 switch (taskType) {
                 case ("[T]") :
-                    Todo newTodo = new Todo(loadedInput.substring(7));
-                    if (loadedInput.substring(4, 7).equals("[✓]")) {
-                        newTodo.completeTask();
-                    }
-                    listOfTasks.add(newTodo);
+                    loadTodo(listOfTasks, description, isComplete);
                     break;
                 case("[D]") :
-                    int byPosition = loadedInput.indexOf("by:");
-                    Deadline newDeadline = new Deadline(
-                            loadedInput.substring(7, byPosition));
-                    if (loadedInput.substring(4, 7).equals("[✓]")) {
-                        newDeadline.completeTask();
-                    }
-                    LocalDateTime date = LocalDateTime.parse(loadedInput.substring(byPosition + 3),
-                            SAVE_READ_DATETIME_FORMAT);
-                    newDeadline.setTime(date);
-                    listOfTasks.add(newDeadline);
+                    loadDeadline(listOfTasks, description, isComplete);
                     break;
                 case("[E]"):
-                    int atPosition = loadedInput.indexOf("at:");
-                    Event newEvent = new Event(
-                            loadedInput.substring(7, atPosition));
-                    if (loadedInput.substring(4, 7).equals("[✓]")) {
-                        newEvent.completeTask();
-                    }
-                    date = LocalDateTime.parse(loadedInput.substring(atPosition + 3),
-                            SAVE_READ_DATETIME_FORMAT);
-                    newEvent.setTime(date);
-                    listOfTasks.add(newEvent);
+                    loadEvent(listOfTasks, description, isComplete);
                     break;
                 default:
                     assert false : taskType;
@@ -122,5 +103,59 @@ public class Storage {
         } catch (IOException e) {
             System.out.println(e.toString());
         }
+    }
+
+    private void loadTodo(ArrayList<Task> listOfTasks, String description, boolean isComplete) {
+        Todo newTodo = new Todo(description);
+        if (isComplete) {
+            newTodo.completeTask();
+        }
+        listOfTasks.add(newTodo);
+    }
+
+    private void loadDeadline(ArrayList<Task> listOfTasks, String description, boolean isComplete) {
+        boolean isRepeated = false;
+        if (!description.substring(0, 5).equals("[NRP]")) {
+            isRepeated = true;
+        } else {
+            assert description.substring(0, 5).equals("[NRP]");
+        }
+        int byPosition = description.indexOf("by:");
+        Deadline newDeadline = new Deadline(description.substring(5, byPosition));
+        if (isComplete) {
+            newDeadline.completeTask();
+        }
+        LocalDateTime date = LocalDateTime.parse(description.substring(byPosition + 3),
+                SAVE_READ_DATETIME_FORMAT);
+        newDeadline.setTime(date);
+        if (isRepeated) {
+            Repeater.setRecurrence(newDeadline, description.substring(0, 5));
+            date = Repeater.correctDate(newDeadline);
+            newDeadline.setTime(date);
+        }
+        listOfTasks.add(newDeadline);
+    }
+
+    private void loadEvent(ArrayList<Task> listOfTasks, String description, boolean isComplete) {
+        boolean isRepeated = false;
+        if (!description.substring(0, 5).equals("[NRP]")) {
+            isRepeated = true;
+        } else {
+            assert description.substring(0, 5).equals("[NRP]");
+        }
+        int atPosition = description.indexOf("at:");
+        Event newEvent = new Event(description.substring(5, atPosition));
+        if (isComplete) {
+            newEvent.completeTask();
+        }
+        LocalDateTime date = LocalDateTime.parse(description.substring(atPosition + 3),
+                SAVE_READ_DATETIME_FORMAT);
+        newEvent.setTime(date);
+        if (isRepeated) {
+            Repeater.setRecurrence(newEvent, description.substring(0, 5));
+            date = Repeater.correctDate(newEvent);
+            newEvent.setTime(date);
+        }
+        listOfTasks.add(newEvent);
     }
 }
