@@ -2,6 +2,9 @@ package duke;
 
 import duke.commands.Command;
 import duke.exceptions.DukeException;
+import duke.support.Parser;
+import duke.support.Storage;
+import duke.task.TaskList;
 import javafx.application.Platform;
 
 /**

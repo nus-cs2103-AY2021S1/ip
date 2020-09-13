@@ -1,4 +1,4 @@
-package duke;
+package duke.task;
 
 import java.util.ArrayList;
 
@@ -9,11 +9,11 @@ import java.util.ArrayList;
 public class TaskList {
     private ArrayList<Task> taskList;
 
-    TaskList(ArrayList<Task> taskList) {
+    public TaskList(ArrayList<Task> taskList) {
         this.taskList = taskList;
     }
 
-    TaskList() {
+    public TaskList() {
         this.taskList = new ArrayList<Task>();
     }
 

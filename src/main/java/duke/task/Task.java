@@ -1,4 +1,4 @@
-package duke;
+package duke.task;
 import duke.exceptions.DukeException;
 
 public class Task {

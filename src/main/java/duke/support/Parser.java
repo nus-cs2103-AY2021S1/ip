@@ -1,8 +1,9 @@
-package duke;
+package duke.support;
 
 import duke.commands.*;
 import duke.exceptions.DukeException;
 import duke.exceptions.InvalidInputException;
+import duke.support.Login;
 import duke.user.User;
 
 

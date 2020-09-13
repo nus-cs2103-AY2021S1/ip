@@ -1,4 +1,4 @@
-package duke;
+package duke.support;
 
 import duke.user.User;
 import duke.user.UserList;

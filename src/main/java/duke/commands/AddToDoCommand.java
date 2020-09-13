@@ -1,9 +1,9 @@
 package duke.commands;
 
-import duke.Storage;
-import duke.Task;
-import duke.TaskList;
-import duke.ToDo;
+import duke.support.Storage;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.ToDo;
 import duke.Ui;
 
 public class AddToDoCommand extends Command {

@@ -2,6 +2,7 @@ package duke;
 
 import java.io.IOException;
 
+import duke.ui.MainWindow;
 import duke.user.UserList;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
