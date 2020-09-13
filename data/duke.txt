@@ -1,1 +1,2 @@
-Deadline | undone | submit homework | 23/04/2020 12:00 PM
+Deadline | done | submit homework | 23/04/2020 12:00 PM
+ToDo | done | borrow book

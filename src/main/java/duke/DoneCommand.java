@@ -35,6 +35,11 @@ public class DoneCommand extends Command {
         assert ui != null : "Ui cannot be null";
         int length = userInput.length();
         int position = Integer.parseInt(userInput.substring(5, length));
+        if (position <= taskList.getTasks().size() && position > 0) {
+            taskList.getTasks().get(position - 1).markAsDone();
+        } else {
+            throw new DukeException("You have keyed in an invalid number!");
+        }
         storage.writeToFile(taskList.getTasks());
         return ui.displayDone(taskList.getTasks(), position);
     }

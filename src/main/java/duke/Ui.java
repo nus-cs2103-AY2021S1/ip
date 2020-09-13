@@ -100,14 +100,10 @@ public class Ui {
      * @throws DukeException When index < 0 or index > tasks.size().
      */
     public String displayDone(ArrayList<Task> tasks, int pos) throws DukeException {
-        if (pos <= tasks.size() && pos > 0) {
-            tasks.get(pos - 1).markAsDone(); //marking task as done
-            return "Great work! I've marked this task as done:\n"
-                    + tasks.get(pos - 1).toString()
-                    + "\nKeep the ticks going! ^_^";
-        } else {
-            throw new DukeException("You have keyed in an invalid number!");
-        }
+        String taskMarkedAsDone = tasks.get(pos - 1).toString();
+        return "Great work! I've marked this task as done:\n"
+                + taskMarkedAsDone
+                + "\nKeep the ticks going! ^_^";
     }
 
     /**
