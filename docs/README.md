@@ -47,8 +47,6 @@ indicates a successful save, and a red circle indicates an unsuccessful one.
 
 &nbsp;
 
-&nbsp;
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## Usage
