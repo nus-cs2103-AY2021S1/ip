@@ -1,0 +1,19 @@
+#dialogContainer {
+    -fx-background-image: url("../images/PiplupBackground.png");
+}
+
+.label {
+    -fx-padding: 10;
+    -fx-background-color: #CCFF99;
+}
+
+.button {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-color: rgb(90, 200, 250);
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+}
+
+.button:hover {
+    -fx-background-color: linear-gradient(#2A5058, #61a2b1);
+}
