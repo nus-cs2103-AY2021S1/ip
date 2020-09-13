@@ -1,4 +1,5 @@
 package duke.commands;
+import java.util.Arrays;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -33,12 +34,14 @@ public class FindCommand extends Command {
         assert tasklist != null : "Tasklist cannot be null.";
         assert storage != null : "Storage cannot be null.";
         assert description != null : "Description cannot be null.";
-        String response = IntStream.range(0, tasklist.getSize())
+        String response = "Tasks with description '" + this.description + "':\n";
+        int initialResponseLength = response.length();
+        response += IntStream.range(0, tasklist.getSize())
                 .filter(index -> tasklist.get(index).toString().contains(description))
-                .mapToObj(index -> String.format("%d. %s", index + 1, tasklist.get(index)))
+                .mapToObj(index -> String.format("%s %d. %s", "Task", index + 1, tasklist.get(index)))
                 .collect(Collectors.joining("\n"))
                 .trim();
-        if (response.length() == 0) {
+        if (response.length() == initialResponseLength) {
             throw new DukeException("word does not exist in TaskList!");
         }
         return response;

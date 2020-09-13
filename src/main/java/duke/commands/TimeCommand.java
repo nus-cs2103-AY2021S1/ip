@@ -37,7 +37,8 @@ public class TimeCommand extends Command {
         assert storage != null : "Storage cannot be null.";
         assert description != null : "Description cannot be null.";
         boolean timeExists = false;
-        String response = "";
+        int position = 1;
+        String response = "Tasks taking place at " + description + ":\n";;
         LocalTime timeSearched;
         try {
             timeSearched = LocalTime.parse(description);
@@ -47,13 +48,15 @@ public class TimeCommand extends Command {
         for (Task i : tasklist.getList()) {
             if (i instanceof Deadline) {
                 if (((Deadline) i).isSameTime(timeSearched)) {
-                    response += (i.toString()) + "\n";
+                    response += "Task " + position + ". " + i.toString() + "\n";
                     timeExists = true;
+                    position++;
                 }
             } else if (i instanceof Event) {
                 if (((Event) i).isSameTime(timeSearched)) {
-                    response += (i.toString()) + "\n";
+                    response += "Task " + position + ". " + i.toString() + "\n";
                     timeExists = true;
+                    position++;
                 }
             }
         }

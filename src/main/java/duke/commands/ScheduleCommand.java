@@ -38,7 +38,7 @@ public class ScheduleCommand extends Command {
         assert description != null : "Description cannot be null.";
         boolean dateExists = false;
         int position = 1;
-        String response = "Tasks on " + description + "\n";
+        String response = "Tasks on " + description + ":\n";
         LocalDate dateSearched;
         try {
             dateSearched = LocalDate.parse(description);

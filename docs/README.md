@@ -75,6 +75,7 @@ Search Via Description
 <br>
 <br> 
 
+![find](./Images/find.png)
 </details>
 <details>
 <summary>
@@ -89,7 +90,7 @@ Search Via Time
 <br>
 <br>
 
-
+![time](./Images/time.png)
 </details>
 <details>
 <summary>
@@ -104,6 +105,7 @@ Search Via Date
 <br>
 <br> 
 
+![schedule](./Images/schedule.png)
 </details>
 </details>
 ## Usage
