@@ -120,6 +120,8 @@ Exits the program.
 Format: `exit`
 
 ## Feature Summary 
+Command Types: 
+
 Command | Format/ Examples
 --------|-----------------
 todo | `todo DESCRIPTION` e.g. `todo read book`
