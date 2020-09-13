@@ -2,9 +2,9 @@ package duke.commands;
 
 import duke.exceptions.DukeException;
 import duke.storage.Storage;
+import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
-import duke.task.Task;
 
 /**
  * Encapsulates a command for Mrs Dino to add a Todo task.
@@ -32,7 +32,6 @@ public class TodoCommand extends Command {
     @Override
     public CommandResult execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         taskList.addTodo("0", todoTaskDetails);
-//        storage.writeToFile("T", "0", todoTaskDetails, "");
         storage.saveTasks(taskList);
         int size = taskList.getSize();
         Task targetTask = taskList.get(size - 1);

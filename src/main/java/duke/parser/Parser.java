@@ -12,7 +12,7 @@ public class Parser {
     /**
      * Instance of UI class that helps display messages to the user.
      */
-    Ui ui;
+    private Ui ui;
 
     /**
      * Constructs a new Parser object.
@@ -56,7 +56,7 @@ public class Parser {
                     return parseTodo(splitCommand[1]);
                 }
             } catch (DukeException error) {
-                System.out.println(error.getMessage());
+                throw new DukeException("OOPS!!! The description of a todo cannot be empty");
             }
         }
         case DELETE: {

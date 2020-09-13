@@ -19,7 +19,7 @@ public class Event extends Task {
     public Event(String isCompleted, String taskName, String at) {
         super("E", isCompleted, taskName);
         this.at = at;
-        String dateAndTime[] = at.split("\\s");
+        String[] dateAndTime = at.split("\\s");
         assert dateAndTime[0] != null;
         this.date = LocalDate.parse(dateAndTime[0]);
         if (dateAndTime.length > 1) {

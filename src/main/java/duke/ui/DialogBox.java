@@ -60,12 +60,26 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Gets dialog box to display messages by the user.
+     *
+     * @param text Message by the user.
+     * @param img Display image of the user.
+     * @return A new instance of DialogBox.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         String type = "user";
         return new DialogBox(text, img, type);
     }
 
-    public static DialogBox getDukeDialog(String text, Image img) {
+    /**
+     * Gets dialog box to display messages by the Mrs Dino.
+     *
+     * @param text Message by Mrs Dino.
+     * @param img Display image of Mrs Dino.
+     * @return A new instance of DialogBox.
+     */
+    public static DialogBox getMrsDinoDialog(String text, Image img) {
         String type = "duke";
         var db = new DialogBox(text, img, type);
         db.flip();

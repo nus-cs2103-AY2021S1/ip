@@ -2,9 +2,9 @@ package duke.commands;
 
 import duke.exceptions.DukeException;
 import duke.storage.Storage;
+import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
-import duke.task.Task;
 
 /**
  * Encapsulates a command for Mrs Dino to mark a task as done.

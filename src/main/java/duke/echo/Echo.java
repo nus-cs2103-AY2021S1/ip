@@ -16,8 +16,8 @@ public class Echo {
      */
     public static void initialise() {
         while (!Echo.terminate) {
-            Scanner sc = new Scanner(System.in);  // Create a Scanner object
-            String command = sc.nextLine();  // Read user input
+            Scanner sc = new Scanner(System.in); // Create a Scanner object
+            String command = sc.nextLine(); // Read user input
             Echo.echoMessage(command); // Output user input
         }
     }

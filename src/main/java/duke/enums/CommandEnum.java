@@ -42,7 +42,7 @@ public enum CommandEnum {
     }
 
     /**
-     * Static method that loads the HashMap with key-value pairs of all enumeration values.
+     * Loads the HashMap with key-value pairs of all enumeration values.
      */
     static {
         for (CommandEnum commandEnum : CommandEnum.values()) {

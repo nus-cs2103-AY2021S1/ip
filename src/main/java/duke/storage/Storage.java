@@ -99,14 +99,14 @@ public class Storage {
      * Retrieves data store in the storage file and loads them into the task list.
      *
      * @param taskList TaskList that we want to load the data into.
-     * @throws FileNotFoundException 
+     * @throws FileNotFoundException Exception when file is not found.
      */
     public void loadFromTextFile(TaskList taskList) throws FileNotFoundException {
         File file = new File(this.filePath); // create a File for the given file path
         Scanner s = new Scanner(file); // create a Scanner using the File as the source
         while (s.hasNext()) {
             String currentLine = s.nextLine();
-            String details[] = currentLine.split("\\|");
+            String[] details = currentLine.split("\\|");
             switch(details[0].trim()) {
             // Trims away whitespaces at the start and end of string
             case "T":
@@ -117,6 +117,7 @@ public class Storage {
                 break;
             case "E":
                 taskList.addEvent(details[1].trim(), details[2].trim(), details[3].trim());
+                break;
             default:
                 break;
             }

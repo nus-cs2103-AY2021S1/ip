@@ -27,11 +27,14 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/JohnnyBravo.jpg"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/MrsDino.jpg"));
 
+    /**
+     * Initialises the GUI.
+     */
     @FXML
     public void initialize() {
         Ui ui = new Ui();
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(ui.getWelComeMessage(), dukeImage)
+                DialogBox.getMrsDinoDialog(ui.getWelComeMessage(), dukeImage)
         );
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
@@ -50,7 +53,7 @@ public class MainWindow extends AnchorPane {
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getMrsDinoDialog(response, dukeImage)
         );
         userInput.clear();
     }

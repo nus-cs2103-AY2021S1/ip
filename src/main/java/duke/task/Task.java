@@ -32,16 +32,36 @@ public abstract class Task {
         return this.toString();
     }
 
+    /**
+     * Checks if task has been completed.
+     *
+     * @return boolean value denoting if the task has been completed.
+     */
     public boolean isCompleted() {
         return this.isCompleted;
     }
 
+    /**
+     * Getter method for type of the task.
+     *
+     * @return Type of the task.
+     */
     public String getType() {
         return this.type;
     }
 
+    /**
+     * Getter method for date and time of the task.
+     *
+     * @return Date and time of the task.
+     */
     public abstract String getDateAndTime();
 
+    /**
+     * Getter method for name of the task.
+     *
+     * @return Name of the task.
+     */
     public String getTaskName() {
         return this.taskName;
     }
