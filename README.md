@@ -61,15 +61,15 @@ Duke is a task management tool which will help the users to manage their tasks. 
    
 ### <a id="3.2">3.2 How to use Duke?</a>
    Command | Purpose | Result
-   `todo` [Description] | Add a task of todo type to the list of tasks | New task added onto the list with the tag of `[T]`.
-   `event` [Description] + "/at" + [Time (dd/ mm/ yy hhmm)] | Add a task of event type to the list of tasks | New task added onto the list with the tag of `[E]`.
-   `deadline` [Description] + "/by" + [Time (dd/ mm/ yy hhmm)] | Add a task of deadline type to the list of tasks | New task added onto the list with the tag of `[D]`.
-   `list` | List out the taks. | A list of tasks is shown.
-   `done` | Mark the task as done. | The marked task is shown on the list with the tag of `[/]` to indicate its status of completion is done.
-   `delete` | Delete the unwanted task. | A new list of tasks is shown without the deleted task.
-   `undo` | Undo the action. | The list of tasks from previous action will be shown.
-   `find` | Find the tasks that the description of the tasks contains the keyword. | Only the tasks match the requirement will be shown.
+   ----------- | ----------- | ----------- 
+   `todo` [Description]                                        | Add a task of todo type to the list of tasks                           | New task added onto the list with the tag of `[T]`.
+   `event` [Description] + "/at" + [Time (dd/ mm/ yy hhmm)]    | Add a task of event type to the list of tasks                          | New task added onto the list with the tag of `[E]`.
+   `deadline` [Description] + "/by" + [Time (dd/ mm/ yy hhmm)] | Add a task of deadline type to the list of tasks                       | New task added onto the list with the tag of `[D]`.
+   `list`                                                      | List out the taks.                                                     | A list of tasks is shown.
+   `done`                                                      | Mark the task as done.                                                 | The marked task is shown on the list with the tag of `[/]` to indicate its status of completion is done.
+   `delete`                                                    | Delete the unwanted task.                                              | A new list of tasks is shown without the deleted task.
+   `undo`                                                      | Undo the action.                                                       | The list of tasks from previous action will be shown.
+   `find`                                                      | Find the tasks that the description of the tasks contains the keyword. | Only the tasks match the requirement will be shown.
 
 ## <a id="#4">4. Contact Us</a>
- For any issues, queries or suggestion, feel free to contact the developer with the github account name : TCQian
-* [Github](https://github.com/TCQian)
+ For any issues, queries or suggestion, feel free to contact the developer with the github account name : [TCQian](https://github.com/TCQian)
