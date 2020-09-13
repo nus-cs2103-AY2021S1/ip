@@ -25,7 +25,8 @@ Expected outcome:
 **Cait** is a Personal Assistant Chatbot that can help you to **keep track of your tasks**, such as todos, events, and deadlines. This desktop application lets you manage your tasks via a **Command Line Interface (CLI)**, such as inserting tasks into a list, setting the tasks to done when you have completed them, and deleting the tasks when you do not need them anymore. This application is similar to a chat, where you type your commands into a message box, as if you are speaking to Cait.
 
 This is what you should see when you start up Cait:
-(pic)
+<br>
+![Image of start](https://https://github.com/caitlinjee/ip/blob/master/docs/images/onstart.png)
 
 
 ## Quick start
@@ -43,7 +44,7 @@ This is what you should see when you start up Cait:
 ### `help`
 Shows the commands you can use.
 
-### Usage
+## Usage
 
 ### `help` - Viewing help
 
@@ -55,31 +56,13 @@ Example of usage:
 
 Expected outcome:
 
-- `outcome` (pic)
-<br>
-
-### `list`
-Shows your saved tasks.
-
-### Usage
-
-### `list` - View your task list
-
-Lists out all your tasks that you have added.
-
-Example of usage: 
-
-- `list`
-
-Expected outcome:
-
-- `outcome` (pic)
+![Image of help](https://https://github.com/caitlinjee/ip/blob/master/docs/images/help.png)
 <br>
 
 ### `todo`
 Adds a todo to your saved tasks.
 
-### Usage
+## Usage
 
 ### `todo <task>` - Adding a todo
 
@@ -93,13 +76,13 @@ Example of usage:
 
 Expected outcome:
 
-- `outcome` (pic)
+![Image of todo](https://https://github.com/caitlinjee/ip/blob/master/docs/images/todo.png)
 <br>
 
 ### `event`
 Adds a event to your saved tasks.
 
-### Usage
+## Usage
 
 ### `event <task> /at <yyyy-mm-dd>` - Adding an event
 
@@ -113,13 +96,13 @@ Example of usage:
 
 Expected outcome:
 
-- `outcome` (pic)
+![Image of event](https://https://github.com/caitlinjee/ip/blob/master/docs/images/event.png)
 <br>
 
 ### `deadline`
 Adds a deadline to your saved tasks.
 
-### Usage
+## Usage
 
 ### `deadline <task> /by <yyyy-mm-dd>` - Adding an deadline
 
@@ -133,13 +116,13 @@ Example of usage:
 
 Expected outcome:
 
-- `outcome` (pic)
+![Image of deadline](https://https://github.com/caitlinjee/ip/blob/master/docs/images/deadline.png)
 <br>
 
 ### `done`
 Finishes a task.
 
-### Usage
+## Usage
 
 ### `done <list index(es)>` - Setting a task to done
 
@@ -153,13 +136,31 @@ Example of usage:
 
 Expected outcome:
 
-- `outcome` (pic)
+![Image of done](https://https://github.com/caitlinjee/ip/blob/master/docs/images/done.png)
+<br>
+
+### `list`
+Shows your saved tasks.
+
+## Usage
+
+### `list` - View your task list
+
+Lists out all your tasks that you have added.
+
+Example of usage: 
+
+- `list`
+
+Expected outcome:
+
+![Image of list](https://https://github.com/caitlinjee/ip/blob/master/docs/images/list.png)
 <br>
 
 ### `delete`
 Deletes a task.
 
-### Usage
+## Usage
 
 ### `delete <list index(es)>` - Deleting a task
 
@@ -169,17 +170,17 @@ Example of usage:
 
 - `delete 1`
 
-- `delete 4 5 6`
+- `delete 3 5 `
 
 Expected outcome:
 
-- `outcome` (pic)
+![Image of delete](https://https://github.com/caitlinjee/ip/blob/master/docs/images/delete.png)
 <br>
 
 ### `find`
 Finds the tasks with a keyword.
 
-### Usage
+## Usage
 
 ### `find <keyword>` - Finding tasks
 
@@ -191,13 +192,13 @@ Example of usage:
 
 Expected outcome:
 
-- `outcome` (pic)
+![Image of find](https://https://github.com/caitlinjee/ip/blob/master/docs/images/find.png)
 <br>
 
 ### `bye`
 Shuts down the application.
 
-### Usage
+## Usage
 
 ### `bye` - Saying bye
 
@@ -209,7 +210,7 @@ Example of usage:
 
 Expected outcome:
 
-- `outcome` (pic)
+- Cait will shut down
 <br>
 
 ### Command summary
