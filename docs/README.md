@@ -1,5 +1,5 @@
 # User Guide
-Mamba is a chat bot designed to use via a command line interface while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Mamba can help you create word-based flashcards faster than traditional GUI apps.
+Mamba is a chat bot designed to use via a command line interface while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Mamba can help you store and update tasks faster than traditional GUI apps.
 
 It pays tribute to the two great black men who died in 2020. Kobe Bryant and Chadwick Boseman.
 ###Quick Start
