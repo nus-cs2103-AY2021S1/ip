@@ -18,8 +18,12 @@ import javafx.scene.layout.HBox;
 
 /**
  * An example of a custom control using FXML.
- * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
- * containing text from the speaker.
+ * This control represents a dialog box consisting of an ImageView to represent the speaker's face
+ * and a label containing text from the speaker.
+ *
+ * Display pictures taken from: https://www.veryicon.com/icons/movie--tv/doraemon/
+ * Background image taken from: https://tenor.com/view/yay-hooray-party-celebrate-parties-gif-13284604
+ * Images used are of "License: Free for personal and commercial purpose".
  */
 public class DialogBox extends HBox {
     @FXML
@@ -56,13 +60,27 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Returns a user dialog.
+     * 
+     * @param text The message.
+     * @param img The image.
+     * @return User dialog.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         DialogBox db = new DialogBox(text, img);
         db.setPadding(new Insets(10, 10, 10, 10));
         return db;
     }
 
-    public static DialogBox getDukeDialog(String text, Image img) {
+    /**
+     * Returns a Doraemon dialog.
+     *
+     * @param text The message.
+     * @param img The image.
+     * @return Doraemon dialog.
+     */
+    public static DialogBox getDoraemonDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
         db.setPadding(new Insets(10, 10, 10, 10));
