@@ -13,11 +13,30 @@
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds.<br>
    ![initialUi](images/initialUi.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing `list` and pressing Enter will list out all saved tasks.
+1. Type the command in the command box and press Enter to execute it. e.g. typing `help` and pressing Enter will list out all commands can be use.
 
 1. Refer to the Features below for details of each command.
 
 ## Features 
+
+### `help`
+Shows all commands
+
+## Usage
+
+### `help` - Showing all Commands
+
+Lists out all commands
+
+Example of usage: 
+
+`help`
+
+Expected outcome:
+
+![help](images/help.png)
+
+<br/>
 
 ### `todo`
 Adds todo task to your tasks
@@ -191,6 +210,7 @@ Expected outcome:
 ## Command Summary
 Action|Format
 ------|--------------
+help| `help`
 todo| `todo {description}`
 deadline| `deadline {description} /by {YYYY-MM-DD}`
 event| `event {description} /at {YYYY-MM-DD}`
