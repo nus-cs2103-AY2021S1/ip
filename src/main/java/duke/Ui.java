@@ -101,7 +101,7 @@ public class Ui {
     public String printList(TaskList taskList) {
         String returnString = " Here are the tasks in your list: ";
         for (int i = 0; i < taskList.totalTask(); i++) {
-            returnString += "\n\t " + (i + 1) + ". " + taskList.getTask(i).toString();
+            returnString += "\n " + (i + 1) + ". " + taskList.getTask(i).toString();
         }
         return returnString;
     }
@@ -131,11 +131,11 @@ public class Ui {
      * @return String to be printed out to welcome the user.
      */
     public String showWelcome() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ \uD83D\uDD34 \uD83D\uDD34 \\\n"
-                + "| |_| | |_| |   <  \\__/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
+        String logo = "___          __        \n"
+                    + "| __\\___ __| | _____ \n"
+                    + "| | | | | | | |/ \uD83D\uDD34 \uD83D\uDD34 \\\n"
+                    + "| |_| | |_| |   <  \\__/\n"
+                    + "|____/\\__,|_|\\_\\___|\n";
 
         return "Hello! I'm\n"
                 + logo + "\nWhat can I do for you?";

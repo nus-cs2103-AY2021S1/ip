@@ -18,6 +18,7 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 
 /**
  * Custom control using FXML.
@@ -43,6 +44,8 @@ public class DialogBox extends HBox {
         this.setSpacing(10);
         dialog.setText(text);
         displayPicture.setImage(img);
+        final Circle clip = new Circle(49, 48, 48);
+        displayPicture.setClip(clip);
     }
 
     /**
