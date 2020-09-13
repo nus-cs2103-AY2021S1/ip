@@ -12,4 +12,5 @@ public class Launcher {
         Application.launch(Main.class, args);
         System.out.println("Duke processes finished.");
     }
+
 }

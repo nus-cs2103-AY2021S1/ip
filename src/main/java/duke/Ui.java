@@ -10,7 +10,9 @@ import duke.dependencies.parser.Controller;
  */
 class Ui {
 
-    private static final String GREETING = "Hello, I'm Duke\nwhat can I do for you?\n";
+    private static final String GREETING = "Hello, I'm pipboy\nWelcome " +
+            "to year 2287, you have been away for some time now "
+            + "time to get yourself oriented to this place....";
 
     private static final String CIAO ="Spero di rivederti presto\n";
     private static final String CONVO_START = GREETING;
