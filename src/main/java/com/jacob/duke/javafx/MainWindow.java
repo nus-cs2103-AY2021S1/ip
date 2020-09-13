@@ -33,14 +33,14 @@ public class MainWindow extends AnchorPane {
             + "  bye: terminates our conversation\n"
             + "\n\n Add Request:\n"
             + "  todo <task description>: adds todo\n"
-            + "  event <task description> /at <YYYY-MM-DD>: adds an event\n"
-            + "  deadline <task description> /by <YYYY-MM-DD>: adds deadline\n"
+            + "  event <task description> /at <YYYY-MM-DD 2359>: adds an event\n"
+            + "  deadline <task description> /by <YYYY-MM-DD 2359>: adds deadline\n"
             + "\n\n Additional Commands:\n"
             + "  delete <number>: deletes selected task\n"
             + "  done <number>: marks selected task done \n"
-            + "  list-due <YYYY-MM-DD HHMM>: gets list of tasks due on that date\n"
+            + "  list-due <YYYY-MM-DD 2359>: gets list of tasks due on that date\n"
             + "  find: finds any task that has a description matching the given string\n"
-            + "  note Question? Answer: Adds a note\n"
+            + "  note <question>? <answer>: Adds a flashcard type note\n"
             + "  note-list: gets list of note\n"
             + "  note-delete <index>: delete note at specified index on list\n";
     public MainWindow() { }

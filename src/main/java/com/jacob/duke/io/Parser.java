@@ -122,7 +122,7 @@ public class Parser {
         try {
             LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("yyyy-MM-dd kkmm"));
         } catch (DateTimeParseException e) {
-            throw new DukeException("This is an invalid Date time format: use YYYY-MM-DD kkmm(2400 format)");
+            throw new DukeException("This is an invalid Date time format: use YYYY-MM-DD 2359");
         }
     }
 }
