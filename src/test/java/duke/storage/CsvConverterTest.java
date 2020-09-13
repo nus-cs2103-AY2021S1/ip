@@ -16,7 +16,9 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 
-
+/**
+ * Tests the CsvConverter on various inputs.
+ */
 public class CsvConverterTest {
 
     /**
@@ -84,7 +86,6 @@ public class CsvConverterTest {
             fail();
         }
     }
-
 
     /**
      * Tests CsvConverter with invalid string formats.

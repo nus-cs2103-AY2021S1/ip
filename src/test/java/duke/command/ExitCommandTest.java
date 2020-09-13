@@ -5,7 +5,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * Tests for exit command.
+ */
 public class ExitCommandTest extends CommandTests {
+
+    /**
+     * Basic tests.
+     */
     @Test
     public void test() {
         ExitCommand cmd = new ExitCommand();

@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.Test;
 
 import duke.exception.DukeException;
-import duke.exception.EmptyTaskException;
+import duke.exception.EmptyToDoException;
 import duke.task.ToDo;
 
 public class AddToDoCommandTest extends CommandTests {
@@ -44,7 +44,7 @@ public class AddToDoCommandTest extends CommandTests {
         String expectedMessage = "OOPS!!! The description of a todo cannot be empty.";
         AddToDoCommand cmd = new AddToDoCommand(emptyTaskDetails);
         // Tests
-        EmptyTaskException e = assertThrows(EmptyTaskException.class, () -> cmd.execute(taskList, ui, storage));
+        EmptyToDoException e = assertThrows(EmptyToDoException.class, () -> cmd.execute(taskList, ui, storage));
         assertEquals(expectedMessage, e.getMessage());
         assertTrue(taskList.isEmpty());
     }

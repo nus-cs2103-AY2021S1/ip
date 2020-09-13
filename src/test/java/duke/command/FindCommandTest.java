@@ -13,7 +13,9 @@ import duke.task.Event;
 import duke.task.ToDo;
 import duke.tasklist.TaskList;
 
-
+/**
+ * Tests the find command.
+ */
 public class FindCommandTest extends CommandTests {
 
     /**

@@ -6,6 +6,9 @@ import org.junit.jupiter.api.Test;
 
 import duke.task.ToDo;
 
+/**
+ * Tests the show list command.
+ */
 public class ShowCommandTest extends CommandTests {
 
     private final ShowCommand sc = new ShowCommand();

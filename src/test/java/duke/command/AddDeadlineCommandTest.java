@@ -16,7 +16,9 @@ import duke.exception.InvalidDeadlineException;
 import duke.parser.DateTimeParser;
 import duke.task.Deadline;
 
-
+/**
+ * Tests the AddDeadlineCommand.
+ */
 public class AddDeadlineCommandTest extends CommandTests {
 
     /**
@@ -46,6 +48,10 @@ public class AddDeadlineCommandTest extends CommandTests {
             fail();
         }
     }
+
+    /**
+     * Tests for invalid deadline commands.
+     */
     @Test
     public void testInvalidDeadlineFormats() {
         AddDeadlineCommand cmd1 = new AddDeadlineCommand("read /by 2-4pm");
@@ -74,7 +80,7 @@ public class AddDeadlineCommandTest extends CommandTests {
     }
 
     /**
-     * Tests for empty time frame in description.
+     * Tests for empty time description.
      */
     @Test
     public void testEmptyTimeFrame() {

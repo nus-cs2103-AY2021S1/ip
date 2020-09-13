@@ -14,6 +14,9 @@ import org.junit.jupiter.api.Test;
 import duke.task.Task;
 import duke.task.ToDo;
 
+/**
+ * Tests the {@code TaskList} class.
+ */
 public class TaskListTest {
 
     /**

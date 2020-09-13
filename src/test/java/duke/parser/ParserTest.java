@@ -4,18 +4,24 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import java.util.Arrays;
+
 import org.junit.jupiter.api.Test;
 
 import duke.command.AddDeadlineCommand;
 import duke.command.AddEventCommand;
 import duke.command.AddToDoCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ShowCommand;
-import duke.command.SimpleCommand;
 import duke.exception.DukeException;
 import duke.exception.UnknownCommandException;
 
+/**
+ * Tests the parser with different inputs.
+ */
 public class ParserTest {
 
     /**
@@ -37,11 +43,12 @@ public class ParserTest {
             assertTrue(Parser.parse(s2) instanceof AddDeadlineCommand);
             assertTrue(Parser.parse(s3) instanceof AddEventCommand);
             assertTrue(Parser.parse(s4) instanceof ShowCommand);
-            assertTrue(Parser.parse(s5) instanceof SimpleCommand);
-            assertTrue(Parser.parse(s6) instanceof SimpleCommand);
+            assertTrue(Parser.parse(s5) instanceof DoneCommand);
+            assertTrue(Parser.parse(s6) instanceof DeleteCommand);
             assertTrue(Parser.parse(s7) instanceof FindCommand);
             assertTrue(Parser.parse(s8) instanceof ExitCommand);
         } catch (DukeException e) {
+            System.out.println(Arrays.toString(e.getStackTrace()));
             fail();
         }
     }
@@ -65,11 +72,12 @@ public class ParserTest {
             assertTrue(Parser.parse(s2) instanceof AddDeadlineCommand);
             assertTrue(Parser.parse(s3) instanceof AddEventCommand);
             assertTrue(Parser.parse(s4) instanceof ShowCommand);
-            assertTrue(Parser.parse(s5) instanceof SimpleCommand);
-            assertTrue(Parser.parse(s6) instanceof SimpleCommand);
+            assertTrue(Parser.parse(s5) instanceof DoneCommand);
+            assertTrue(Parser.parse(s6) instanceof DeleteCommand);
             assertTrue(Parser.parse(s7) instanceof FindCommand);
             assertTrue(Parser.parse(s8) instanceof ExitCommand);
         } catch (DukeException e) {
+            System.out.println(Arrays.toString(e.getStackTrace()));
             fail();
         }
     }

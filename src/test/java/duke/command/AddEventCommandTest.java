@@ -12,10 +12,13 @@ import duke.exception.EmptyTimeException;
 import duke.exception.InvalidEventException;
 import duke.task.Event;
 
+/**
+ * Tests for adding of events.
+ */
 public class AddEventCommandTest extends CommandTests {
 
     /**
-     * Tests for adding of simple tasks.
+     * Tests for adding of simple event tasks.
      */
     @Test
     public void testAddingStandard() {

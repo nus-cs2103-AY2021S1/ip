@@ -10,6 +10,9 @@ import duke.task.Task;
 import duke.task.ToDo;
 import duke.tasklist.TaskList;
 
+/**
+ * Tests the {@code Ui} class to ensure output to user matches.
+ */
 public class UiTest {
 
     private final Ui ui = new Ui();

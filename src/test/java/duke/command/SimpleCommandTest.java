@@ -8,6 +8,9 @@ import org.junit.jupiter.api.Test;
 import duke.exception.InvalidSimpleCommandException;
 import duke.exception.InvalidTaskNumberException;
 
+/**
+ * Tests for the successive word after a simple command.
+ */
 public class SimpleCommandTest extends CommandTests {
 
     /**

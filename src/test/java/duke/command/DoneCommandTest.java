@@ -11,7 +11,11 @@ import duke.exception.DukeException;
 import duke.exception.TaskAlreadyDoneException;
 import duke.task.ToDo;
 
+/**
+ * Tests for the marking of task as done command.
+ */
 public class DoneCommandTest extends CommandTests {
+
     /**
      * Tests the marking of task done command.
      */

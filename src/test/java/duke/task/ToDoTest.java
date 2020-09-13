@@ -8,6 +8,9 @@ import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * Tests the ToDo class.
+ */
 public class ToDoTest {
 
     private final String description = "workout";
