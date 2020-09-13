@@ -20,7 +20,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
@@ -123,7 +122,9 @@ public class Duke extends Application {
         //The container for the content of the chat to scroll.
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
+        dialogContainer.setStyle("-fx-background-image: url(\"/images/DaBackground.png\");");;
         scrollPane.setContent(dialogContainer);
+        dialogContainer.setSpacing(20);
 
         userInput = new TextField();
         sendButton = new Button("Send");
@@ -157,7 +158,6 @@ public class Duke extends Application {
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
         userInput.setPrefWidth(325.0);
-
         sendButton.setPrefWidth(55.0);
 
         AnchorPane.setTopAnchor(scrollPane, 1.0);
@@ -171,8 +171,8 @@ public class Duke extends Application {
         ImageView dukePic = new ImageView(dukeImage);
         dukePic.setClip(new Circle(50, 50, 50));
 
-        DialogBox dukeGreeting = DialogBox
-                                         .getDukeDialog(new Label(ui.displayGreeting()), dukePic);
+        DialogBox dukeGreeting = DialogBox.getDukeDialog(new Label(ui.displayGreeting()), dukePic);
+        dukeGreeting.setStyle("-fx-background-radius: 20px; -fx-background-color: #35C9DD;");
 
         Insets padding = new Insets(10, 0, 10, 0);
         dukeGreeting.setPadding(padding);
@@ -231,6 +231,7 @@ public class Duke extends Application {
         if (isInvalidCommandOrElement || isInvalidTaskFormat) {
             dukeText.setStyle("-fx-text-fill: rgb(100%, 0%, 0%);");
         }
+
         ImageView dukePicture = new ImageView(dukeImage);
         ImageView userPicture = new ImageView(userImage);
         Insets padding = new Insets(10, 0, 10, 0);

@@ -56,22 +56,22 @@ public class TaskList {
         LocalDate localDate;
         switch (line[0].strip()) {
         case "T":
-            newTask = new ToDo(line[2].strip());
+            newTask = new ToDo(line[3].strip());
             break;
         case "D":
-            localDate = Parser.parseDate(line[3].strip());
+            localDate = Parser.parseDate(line[4].strip());
             if (localDate != null) {
-                newTask = new Deadline(line[2].strip(), localDate);
+                newTask = new Deadline(line[3].strip(), localDate);
             } else {
-                newTask = new Deadline(line[2].strip(), line[3].strip());
+                newTask = new Deadline(line[3].strip(), line[4].strip());
             }
             break;
         case "E":
-            localDate = Parser.parseDate(line[3].strip());
+            localDate = Parser.parseDate(line[4].strip());
             if (localDate != null) {
-                newTask = new Event(line[2].strip(), localDate);
+                newTask = new Event(line[3].strip(), localDate);
             } else {
-                newTask = new Event(line[2].strip(), line[3].strip());
+                newTask = new Event(line[3].strip(), line[4].strip());
             }
             break;
         default:
