@@ -45,8 +45,9 @@ public class TaskList {
         TaskList matchedTasks = new TaskList();
         for (Task i: tasks) {
             String taskDescription = i.getDescription().toLowerCase();
+            String taskTag = i.getTaskTag().toLowerCase();
             String lowerCaseTaskDescription = keyWord.toLowerCase();
-            if (taskDescription.contains(lowerCaseTaskDescription)) {
+            if (taskDescription.contains(lowerCaseTaskDescription) || taskTag.contains(lowerCaseTaskDescription)) {
                 matchedTasks.addTask(i);
             }
         }
