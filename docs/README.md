@@ -2,14 +2,14 @@
 
 
 ## **Introduction**
-Duck is a highly-intelligent bot that would be able to help to track your day-to-day tasks and record important events in your life. While these daily tasks might sometimes seem too trivial and become a hassle to be noted down, they are usually the ones that you tend to forget. After all, you never know when these tasks could snowball into something significant. A stitch in time saves nine!
+Duck is a highly-intelligent bot that would be able to help to track your day-to-day tasks and record important events in your life. While these daily tasks might sometimes seem too trivial and become a hassle to note down, they are usually the ones that you tend to forget. After all, you never know when these tasks could snowball into something significant. A stitch in time saves nine!
 
 
 ## **Features**
 
 
 #### _Help_:
-### 1.`help`
+### 1.`Help`
 
 ###### Prints out a list of commands Duck understand.
 
@@ -24,7 +24,7 @@ Expected result:
 
 
 #### _Adding tasks_:
-### 2.`todo`
+### 2.`Todo`
 
 ###### Adds a todo task to the tasks list.
 
@@ -37,7 +37,7 @@ Expected result:
 
 
 
-### 3.`deadline`
+### 3.`Deadline`
 
 ###### Adds a task with a specified deadline to the tasks list.
 
@@ -50,7 +50,7 @@ Expected result:
 
 
 
-### 4.`event`
+### 4.`Event`
 
 ###### Adds a task with a specified event time to the tasks list.
 
@@ -64,7 +64,7 @@ Expected result:
 
 
 #### _Other task list operations_:
-### 5.`list`
+### 5.`List`
 
 ###### Prints out the list of tasks you told Duck.
 
@@ -77,7 +77,7 @@ Expected result:
 
 
 
-### 6.`done`
+### 6.`Done`
 
 ###### Marks a task as done in the tasks list.
 
@@ -90,7 +90,7 @@ Expected result:
 
 
 
-### 7.`delete`
+### 7.`Delete`
 
 ###### Deletes a task from the tasks list.
 
@@ -103,7 +103,7 @@ Expected result:
 
 
 
-### 8.`clear`
+### 8.`Clear`
 
 ###### Clears the task list.
 
@@ -120,7 +120,7 @@ Expected result:
 
 
 
-### 9.`duplicate`
+### 9.`Duplicate`
 
 ###### Fetches all duplicated tasks in the list.
 
@@ -133,7 +133,7 @@ Expected result:
 
 
 
-### 10.`remove duplicates`
+### 10.`Remove duplicates`
 
 ###### Removes all duplicated tasks except the first copy.
 
@@ -150,7 +150,7 @@ Expected result:
 
 
 
-### 11.`bye`
+### 11.`Bye`
 
 ###### Exits duck application.
 

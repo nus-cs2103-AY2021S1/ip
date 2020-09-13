@@ -270,6 +270,11 @@ public class Command {
         return dukeResponse;
     }
 
+    /**
+     * Clears the taskList.
+     * @param tasks The list of tasks to be cleared.
+     * @return String of duke response containing new empty task list.
+     */
     private String clearTaskList(TaskList tasks) {
         tasks.clear();
         String dukeResponse = "\tList cleared.\n";
@@ -277,6 +282,10 @@ public class Command {
         return dukeResponse;
     }
 
+    /**
+     * Prints the commands that duke understands.
+     * @return String of duke response containing all the commands duke knows.
+     */
     private String printHelp() {
         String dukeResponse = "\tI can only understand these human commands :(\n";
         dukeResponse += "\n\n\t'help': I will tell you the only human commands I know.";

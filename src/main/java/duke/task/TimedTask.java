@@ -1,5 +1,10 @@
 package duke.task;
 
+/**
+ * The class TimedTask denotes a timed task.
+ *
+ * @author Alvin Chee
+ */
 public abstract class TimedTask extends Task{
 
     /**
