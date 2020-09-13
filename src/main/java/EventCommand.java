@@ -23,12 +23,11 @@ public class EventCommand extends Command {
     /**
      * Executes the command.
      * @param tasks a list of tasks.
-     * @param ui ui.
      * @param storage the storage working on data file.
      * @throws EventException to show incorrect user input.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws EventException {
+    public String execute(TaskList tasks, Storage storage) throws EventException {
         UndoStack.add(tasks);
         ArrayList<Task> store = tasks.getTaskList();
         int index = getIndexOfAt();

@@ -18,12 +18,11 @@ public class UndoCommand extends Command {
     /**
      * Executes the command.
      * @param tasks list of existing tasks.
-     * @param ui Ui.
      * @param storage storage of the data.
      * @throws UndoException exception for invalid input.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws UndoException {
+    public String execute(TaskList tasks, Storage storage) throws UndoException {
         TaskList previousTaskList = UndoStack.getPreviousTaskList();
         tasks.setTaskList(previousTaskList);
         storage.save(previousTaskList);

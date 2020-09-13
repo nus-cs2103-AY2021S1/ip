@@ -4,7 +4,4 @@
  */
 public class UndoException extends DukeException {
     public UndoException() { super("There is no previous action."); }
-    public UndoException(String msg) {
-        super(msg);
-    }
 }

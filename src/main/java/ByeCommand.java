@@ -8,11 +8,10 @@ public class ByeCommand extends Command {
     /**
      * Executes the command.
      * @param tasks an object includes a list of tasks.
-     * @param ui ui.
      * @param storage the storage that working on data file.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
         return END;
     }
 

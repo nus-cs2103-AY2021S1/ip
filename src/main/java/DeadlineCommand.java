@@ -23,12 +23,11 @@ public class DeadlineCommand extends Command {
     /**
      * Executes the command.
      * @param tasks a list of tasks.
-     * @param ui ui.
      * @param storage the storage working on data file.
      * @throws DeadlineException to show incorrect user input.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DeadlineException {
+    public String execute(TaskList tasks, Storage storage) throws DeadlineException {
         UndoStack.add(tasks);
         ArrayList<Task> store = tasks.getTaskList();
         int index = getIndexOfBy();

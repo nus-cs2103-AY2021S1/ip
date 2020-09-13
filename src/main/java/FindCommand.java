@@ -20,12 +20,11 @@ public class FindCommand extends Command {
     /**
      * Executes the command.
      * @param tasks a list of tasks.
-     * @param ui ui.
      * @param storage the storage working on data file.
      * @throws FindException to show incorrect user input.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws FindException {
+    public String execute(TaskList tasks, Storage storage) throws FindException {
         ArrayList<Task> store = tasks.getTaskList();
         ArrayList<Task> filteredList = new ArrayList<>();
 

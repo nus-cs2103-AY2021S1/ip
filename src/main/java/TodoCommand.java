@@ -20,12 +20,11 @@ public class TodoCommand extends Command {
     /**
      * Executes the command.
      * @param tasks a list of tasks.
-     * @param ui ui.
      * @param storage the storage working on data file.
      * @throws TodoException to show incorrect user input.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws TodoException {
+    public String execute(TaskList tasks, Storage storage) throws TodoException {
         UndoStack.add(tasks);
         ArrayList<Task> store = tasks.getTaskList();
         if (input.length == 1) {

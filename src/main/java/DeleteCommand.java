@@ -20,12 +20,11 @@ public class DeleteCommand extends Command {
     /**
      * Execute the command.
      * @param tasks list of existing tasks.
-     * @param ui Ui.
      * @param storage storage of data.
      * @throws DeleteException exception for invalid input.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DeleteException {
+    public String execute(TaskList tasks, Storage storage) throws DeleteException {
         UndoStack.add(tasks);
         ArrayList<Task> store = tasks.getTaskList();
         if (this.input.length == 1) { //incomplete done command

@@ -8,11 +8,10 @@ public class ListCommand extends Command {
     /**
      * Executes the command.
      * @param tasks a list of tasks.
-     * @param ui ui.
      * @param storage a storage working on data file.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
         int i = 1;
         String output = LIST_TITLE + "\n";
         for (Task task : tasks.getTaskList()) {

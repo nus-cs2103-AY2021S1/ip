@@ -20,12 +20,11 @@ public class DoneCommand extends Command {
     /**
      * Executes the command.
      * @param tasks list of existing tasks.
-     * @param ui Ui.
      * @param storage storage of the data.
      * @throws DoneException exception for invalid input.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DoneException {
+    public String execute(TaskList tasks, Storage storage) throws DoneException {
         UndoStack.add(tasks);
         ArrayList<Task> store = tasks.getTaskList();
         if (input.length == 1) { //incomplete done command
@@ -42,7 +41,6 @@ public class DoneCommand extends Command {
         Task markedTask = markingTask.markAsDone();
         store.set(indexOfMarkingTask, markedTask);
         storage.save(new TaskList(store));
-        
         return DONE_TITLE + "\n"
                 + markedTask;
     }
