@@ -23,6 +23,30 @@ Ask Siri to show you all the tasks that you have - completed and uncompleted.
 Revert the changes you made and go back to the previous state by undoing your last command.
 
 ## Usage
+### `help` - Show all commands
+
+Displays all the commands that the user can give to Siri.
+
+Example of usage: 
+
+`help`
+
+Expected outcome:
+
+```
+Here are all the commands that you can give me:
+- 'list' to see all the tasks
+- 'todo <description>' to add a new todo task
+- 'event <description> /at <YYYY/MM/DD> <HH:MM>' to add a new todo task
+- 'todo <description> /by <YYYY/MM/DD> <HH:MM>' to add a new todo task
+- 'delete <taskId>' to delete the task with the given ID
+- 'done <taskId>' to mark the task with the given ID as completed
+- 'find <keyword>' to find all tasks with the descriptions matching the given keyword
+- 'undo' to undo the previous command given to Duke
+- 'help' to view this list again
+- 'bye' to exit the program
+```
+
 ### `list` - Show all tasks
 
 Display all the tasks that Siri has - both completed and uncompleted
