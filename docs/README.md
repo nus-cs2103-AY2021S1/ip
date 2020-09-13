@@ -39,7 +39,7 @@ Adds a task of type to do to the task list.
 Format: `todo DESCRIPTION`
 
 Examples:
-* `todo do laundry`*
+* `todo do laundry`
 
 ### Adding an event task: `event`
 
@@ -48,7 +48,7 @@ Adds a task of type event to the task list.
 Format: `event DESCRIPTION /at DATE`
 
 Examples:
-* `event team meeting /at 2020-05-06`*
+* `event team meeting /at 2020-05-06`
 
 ### Adding a deadline task: `deadline`
 
@@ -57,7 +57,7 @@ Adds a task of type deadline to the task list.
 Format: `deadline DESCRIPTION /by DATE`
 
 Examples:
-* `deadline art project /by 2021-03-15`*
+* `deadline art project /by 2021-03-15`
 
 
 ### Updating a task description: `update`
@@ -118,7 +118,7 @@ Examples:
 
 Exits the program.
 
-Format: `exit`
+Format: `bye`
 
 ### Saving the data
 
