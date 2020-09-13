@@ -44,10 +44,8 @@ Download and install jdk 11 from: <a href="https://www.oracle.com/technetwork/ja
 https://www.oracle.com/technetwork/java/javase/downloads/jdk11-downloads-5066655.html
 </a>
 
-* Mac / Linux <br/>
-    `java -jar Duke-0.1.3.jar`
-* Windows <br/>
-Double click the jar file to run
+* Mac / Linux / Windows <br/>
+    Double click the jar file to run or `java -jar Duke-0.1.3.jar` in the path where you have the jar file.
 
 ## Features 
 * Add different types of task _e.g._ `todo`, `deadline`, `event`
@@ -62,11 +60,16 @@ Double click the jar file to run
 
 ## Usage
 
+### Notes about the command command format:
+   * Words in `UPPER_CASE` are the parameters to be supplied by the user.
+     e.g. `todo DESCRIPTION`, `DESCRIPTION` is a parameter which can be used as `todo task1`.
+   
+   
 ### `deadline`
 Deadline is a task with description, a completion status, a reminder status and a date. Note that the date format must follow either `dd/MM/yy HH:mm` or `dd/MM/yy`. By default reminder status is set to false and could only be activated/deactivated using the `remind` command.
 
 Format:
-`deadline <description> /by <date>`
+`deadline DESCRIPTION /by DATE`
 
 Example of usage: 
 
@@ -83,7 +86,7 @@ Now you have <Int> tasks in the list.
 Event is a task with description, a completion status, a reminder status and a date. Note that the date format must follow either `dd/MM/yy HH:mm` or `dd/MM/yy`. By default reminder status is set to false and could only be activated/deactivated using the `remind` command.
 
 Format:
-`event <description> /at <date>`
+`event DESCRIPTION /at DATE`
 
 Example of usage: 
 
@@ -100,7 +103,7 @@ Now you have <Int> tasks in the list.
 Todo is a task with a description, a completion status and a reminder status. By default reminder status is set to false and could only be activated/deactivated using the `remind` command.
 
 Format:
-`todo <description>`
+`todo DESCRIPTION`
 
 Example of usage: 
 
@@ -132,7 +135,7 @@ Here are the tasks in your list:
 The task to be marked is indicated by the index after the `done` command, you can view the index of the task by typing `list`.
 
 Format:
-`done <Integer>`
+`done INTEGER`
 
 Example of usage: 
 
@@ -148,7 +151,7 @@ Nice! I've marked this task as done:
 The task to be deleted is indicated by the index after the `done` command, you can view the index of the task by typing `list`.
 
 Format:
-`delete <Integer>`
+`delete INTEGER`
 
 Example of usage: 
 
@@ -165,7 +168,7 @@ Now you have <Int> tasks in the list.
 Find tasks thats contains the keyword, note that only 1 keyword is allowed currently.
 
 Format:
-`find <Keyword>`
+`find KEYWORD`
 
 Example of usage: 
 
@@ -182,7 +185,7 @@ Here are the matching tasks in your list:
 The task to be reminded is indicated by the index after the `remind` command, you can view the index of the task by typing `list`. Also, state whether to activate or deactivate the reminder using `y` for yes, `n` for no after the `remind` command.
 
 Format:
-`remind <Integer> <y/n>`
+`remind INTEGER Y/N`
 
 Example of usage: 
 
