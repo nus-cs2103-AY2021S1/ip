@@ -21,7 +21,7 @@ public class Ui {
      * Greets the user when the program is executed.
      */
     public String greetingMessage() {
-        return ("Hello! I'm Duke. What can I do for you?");
+        return ("Hello! I'm Fandesma. What can I do for you?");
     }
 
     /**
