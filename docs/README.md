@@ -2,8 +2,26 @@
 
 ## Features 
 
-### Feature 1 
-Description of feature.
+### Add Task
+The user is able to add new tasks to the task list.
+
+Types of task to be added are
+  1. to do
+  2. deadline
+  3. event
+
+### Delete Task
+The user is able to delete no longer wanted task from the task list.
+
+### List Tasks
+The user is able to view all tasks inside the task list.
+
+### Update Task
+The user is able to modify existing tasks' details.
+Types of details available to be modified are
+1. description
+2. time
+3. completion status
 
 ## Usage
 
