@@ -280,12 +280,12 @@ public class Command {
     private String printHelp() {
         String dukeResponse = "\tI can only understand these human commands :(\n";
         dukeResponse += "\n\n\t'help': I will tell you the only human commands I know.";
-        dukeResponse += "\n\n\t'print': I will list you all the tasks you told me.";
+        dukeResponse += "\n\n\t'list': I will list you all the tasks you told me.";
         dukeResponse += "\n\n\t'todo homework': I will add homework task to the list.";
-        dukeResponse += "\n\n\t'event Christmas /at 25-12-2020 1600': I will " +
-            "add Christmas event to the list at the specified time";
-        dukeResponse += "\n\n\t'deadline homework /by 25-12-2020 1600': I will " +
+        dukeResponse += "\n\n\t'deadline homework /by 2020-12-25 1600': I will " +
             "add homework to the list with the specified deadline";
+        dukeResponse += "\n\n\t'event Christmas /at 2020-12-25 1600': I will " +
+            "add Christmas event to the list at the specified time";
         dukeResponse += "\n\n\t'delete 2': I will delete task 2 from the list.";
         dukeResponse += "\n\n\t'done 3': I will mark task 3 in the list as complete.";
         dukeResponse += "\n\n\t'duplicate': I will list you the duplicated task.";

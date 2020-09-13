@@ -1,23 +1,161 @@
 # **User Guide for Duck**
 
-## Introduction
+
+## **Introduction**
+Duck is a highly-intelligent bot that would be able to help to track your day-to-day tasks and record important events in your life. While these daily tasks might sometimes seem too trivial and become a hassle to be noted down, they are usually the ones that you tend to forget. After all, you never know when these tasks could snowball into something significant. A stitch in time saves nine!
 
 
-## Features 
+## **Features**
 
-### Feature 1 
-Description of feature.
 
-## Usage
+#### _Help_:
+### 1.`help`
 
-### `Keyword` - Describe action
+###### Prints out a list of commands Duck understand.
 
-Describe action and its outcome.
+**Usage: "help"**
 
-Example of usage: 
+**_Example: "help"_**
 
-`keyword (optional arguments)`
+Expected result: 
+!["help"](.\ss\help.png)
 
-Expected outcome:
 
-`outcome`
+
+
+#### _Adding tasks_:
+### 2.`todo`
+
+###### Adds a todo task to the tasks list.
+
+**Usage: "todo  <task>"**
+
+**_Example: "todo homework"_**
+
+Expected result: 
+!["print"](.\ss\todo.png)
+
+
+
+### 3.`deadline`
+
+###### Adds a task with a specified deadline to the tasks list.
+
+**Usage: "deadline  <task>  by / <deadline in MM-DD-YYYY hhmm format> "**
+
+**_Example: "deadline homework /by 2014-12-25 1630"_**
+
+Expected result: 
+!["print"](.\ss\deadline.png)
+
+
+
+### 4.`event`
+
+###### Adds a task with a specified event time to the tasks list.
+
+**Usage: "event  <task>  at / <deadline in MM-DD-YYYY hhmm format> "**
+
+**_Example: "event hackathon /at 2014-12-25 1630"_**
+
+Expected result: 
+!["print"](.\ss\event.png)
+
+
+
+#### _Other task list operations_:
+### 5.`list`
+
+###### Prints out the list of tasks you told Duck.
+
+**Usage: "list"**
+
+**_Example: "list"_**
+
+Expected result: 
+!["print"](.\ss\list.png)
+
+
+
+### 6.`done`
+
+###### Marks a task as done in the tasks list.
+
+**Usage: "done  <task number>"**
+
+**_Example: "done 2"_**
+
+Expected result: 
+!["print"](.\ss\done.png)
+
+
+
+### 7.`delete`
+
+###### Deletes a task from the tasks list.
+
+**Usage: "delete  <task number>"**
+
+**_Example: "delete 2"_**
+
+Expected result: 
+!["print"](.\ss\delete.png)
+
+
+
+### 8.`clear`
+
+###### Clears the task list.
+
+**Usage: "clear please"**
+
+**_Example: "clear please"_**
+
+Expected result: 
+!["print"](.\ss\clear.png)
+
+
+
+#### _Dealing with duplicates_:
+
+
+
+### 9.`duplicate`
+
+###### Fetches all duplicated tasks in the list.
+
+**Usage: "duplicate"**
+
+**_Example: "duplicate"_**
+
+Expected result: 
+!["print"](.\ss\duplicate.png)
+
+
+
+### 10.`remove duplicates`
+
+###### Removes all duplicated tasks except the first copy.
+
+**Usage: "remove duplicates"**
+
+**_Example: "remove duplicates"_**
+
+Expected result: 
+!["print"](.\ss\removeDuplicates.png)
+
+
+
+#### _Other Duck operations_:
+
+
+
+### 11.`bye`
+
+###### Exits duck application.
+
+**Usage: "bye"**
+
+**_Example: "bye"_**
+
+Expected result: Duck application closed.
