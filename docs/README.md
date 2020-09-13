@@ -1,5 +1,13 @@
 # User Guide
-### Everyone needs a friend! How about one that would help you take down all your important tasks? Yuki is a bot that would make it more exciting to track your task! To start using her, simply download the Yuki.jar file in release v0.2 and place her in your favourite folder! Hope you become close to her soon!
+### Everyone needs a friend! How about one that would help you take down all your important tasks? Yuki is a desktop app for managing tasks via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).
+
+## Quick Start
+1. Ensure you have java `11` or above installed in your computer.
+2. Download the latest `Yuki.jar` from [here](https://github.com/samlsm/ip/releases).
+3. Copy the file to the folder you want to use as the home folder for your taskManager.
+4. Double-click the file to start the app.
+5. Type commands in the command box at the bottom of the page and Enter to execute. For new users, typing `help` would give you the list of available commands.
+
 
 ## Features 
     - Add tasks
