@@ -46,12 +46,28 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
-        response = TOPLINE + response + BOTTOMMINE;
+        String dukeOutput = getDukeResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getDukeDialog(dukeOutput, dukeImage)
         );
         userInput.clear();
+    }
+
+    /**
+     * Gets the response from Duke and customise the output text based on whether a DukeException was thrown.
+     *
+     * @param input the input given by user.
+     * @return dukeOutput the output that duke will respond to the user with.
+     */
+    private String getDukeResponse(String input) {
+        String dukeOutput = "";
+        String response = duke.getResponse(input);
+        if (duke.getIsResponseDukeException()) {
+            dukeOutput = ERRORLINE + response + BOTTOMMINE;
+            return dukeOutput;
+        }
+        dukeOutput = TOPLINE + response + BOTTOMMINE;
+        return dukeOutput;
     }
 }

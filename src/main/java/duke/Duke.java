@@ -11,10 +11,11 @@ import duke.ui.Ui;
  * Main class.
  */
 public class Duke {
-    public static Storage storage;
-    public static TaskList taskList;
-    public static Ui ui;
-    public static boolean exit;
+    private static Storage storage;
+    private static TaskList taskList;
+    private static Ui ui;
+    private static boolean exit;
+    private boolean isResponseDukeException;
 
     public Duke() {
         this.ui = new Ui();
@@ -54,9 +55,15 @@ public class Duke {
     public String getResponse(String input) {
         try {
             Command command = Parser.parse(input);
+            this.isResponseDukeException = false;
             return command.execute(this.taskList, this.ui, this.storage);
         } catch (DukeException e) {
+            this.isResponseDukeException = true;
             return e.getMessage();
         }
+    }
+
+    public boolean getIsResponseDukeException() {
+        return this.isResponseDukeException;
     }
 }
