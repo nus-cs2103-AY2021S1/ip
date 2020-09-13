@@ -3,6 +3,7 @@ package duke;
 import duke.command.Command;
 import duke.command.RemindCommand;
 import duke.exception.DukeException;
+import duke.gui.DialogBox;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
@@ -72,7 +73,6 @@ public class Duke extends Application {
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
         scene = new Scene(mainLayout);
-
         stage.setScene(scene);
         stage.show();
 

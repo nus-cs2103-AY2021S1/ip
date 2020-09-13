@@ -1,8 +1,7 @@
-package duke;
+package duke.gui;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -10,7 +9,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.scene.text.Font;
 
 public class DialogBox extends HBox {
 
@@ -48,20 +46,19 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(Label l, ImageView iv) {
-
+        l.setTextFill(Color.web("#08d9d6"));
         DialogBox userDialog = new DialogBox(l, iv);
-        userDialog.setStyle("-fx-background-color: #f1f3f8;");
-        userDialog.setPadding(new Insets(15, 10, 15, 0));
+        userDialog.setId("HBoxUser");
+        userDialog.getStylesheets().add("/css/styles.css");
         return userDialog;
     }
 
     public static DialogBox getDukeDialog(Label l, ImageView iv) {
-        l.setFont(new Font("Cambria", 15));
-        l.setTextFill(Color.web("#e7305b"));
+        l.setTextFill(Color.web("#ff2e63"));
         var db = new DialogBox(l, iv);
+        db.setId("HBoxDuke");
+        db.getStylesheets().add("/css/styles.css");
         db.flip();
-        db.setStyle("-fx-background-color: #ddf3f5;");
-        db.setPadding((new Insets(15, 0, 15, 10)));
         return db;
     }
 }

@@ -1,5 +1,6 @@
-package duke;
+package duke.gui;
 
+import duke.Duke;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -48,8 +49,8 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
-                DialogBox2.getUserDialog(input, userImage),
-                DialogBox2.getDukeDialog(response, dukeImage)
+                DialogBoxFxml.getUserDialog(input, userImage),
+                DialogBoxFxml.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
     }

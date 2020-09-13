@@ -99,4 +99,8 @@ public class Ui {
     public String showRemind() {
         return "Please take a look at the tasks that will occur soon:\n";
     }
+
+    public String showNoRecentTask() {
+        return "Yay! You have no upcoming task for the next 3 days~";
+    }
 }

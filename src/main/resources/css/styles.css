@@ -1,0 +1,16 @@
+#HBoxDuke{
+    -fx-background-color: #eaeaea;
+    -fx-background-image:url("https://www.transparenttextures.com/patterns/diamond-upholstery.png");
+    -fx-font-family: Arial;
+    -fx-font-size: 16;
+    -fx-padding: 15, 0, 15, 10;
+}
+
+#HBoxUser{
+    -fx-background-color: #252a34;
+    -fx-background-image:url("https://www.transparenttextures.com/patterns/always-grey.png");
+    -fx-padding: 15, 10, 15, 0;
+    -fx-font-family: Cambria;
+    -fx-font-size: 18;
+    -fx-font-weight: 700;
+}

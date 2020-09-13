@@ -70,7 +70,7 @@ public class RemindCommand extends Command {
             }
         }
 
-        return out;
+        return count != 1? out : ui.showNoRecentTask();
     }
 
     @Override
