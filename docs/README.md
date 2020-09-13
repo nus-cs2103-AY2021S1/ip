@@ -194,16 +194,4 @@ Exit Function
 * Type in `bye` to exit program
 </details>
 
-## Usage
-
-### `Keyword` - Describe action
-
-Describe action and its outcome.
-
-Example of usage: 
-
-`keyword (optional arguments)`
-
-Expected outcome:
-
-`outcome`
+### Hope this helped!
