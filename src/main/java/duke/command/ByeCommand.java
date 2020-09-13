@@ -4,6 +4,9 @@ import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
+import javafx.animation.PauseTransition;
+import javafx.application.Platform;
+import javafx.util.Duration;
 
 /**
  * Implements bye command objects.
@@ -23,6 +26,17 @@ public class ByeCommand extends Command {
     @Override
     public String executeCommand(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         storage.saveTasks(tasks.getTasks());
+        //@@author AudreyFelicio-reused
+        //Reused from
+        //https://stackoverflow.com/questions/27334455/how-to-close-a-stage-after-a-certain-amount-of-time-javafx
+        //with modifications and extra functionality. Code is used to set timeout before exiting application.
+        PauseTransition delayExit = new PauseTransition(Duration.seconds(1));
+        delayExit.setOnFinished(event -> {
+            Platform.exit();
+            System.exit(0);
+        });
+        delayExit.play();
+        //@@author
         return ui.showGoodbyeUser();
     }
 
