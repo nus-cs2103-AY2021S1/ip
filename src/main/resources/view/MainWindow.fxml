@@ -18,7 +18,7 @@
     <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="557.0" prefWidth="400.0" vvalue="1.0">
         <VBox fx:id="dialogContainer" prefHeight="552.0" prefWidth="388.0" />
     </ScrollPane>
-   <ImageView fitHeight="557.0" fitWidth="400.0" opacity="0.4">
+   <ImageView fitHeight="557.0" fitWidth="389.0" opacity="0.3">
       <image>
          <Image url="@../../../../../Siri.jpg" />
       </image>

@@ -35,7 +35,10 @@ public class MainWindow extends AnchorPane {
 
     public void setDuke(Duke d) {
         duke = d;
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(duke.greet(), dukeImage));
+        DialogBox dukeDialog = DialogBox.getDukeDialog(duke.greet(), dukeImage);
+        VBox.setMargin(dukeDialog, new Insets(10, 5, 0, 5));
+
+        dialogContainer.getChildren().add(dukeDialog);
     }
 
     /**
@@ -50,6 +53,7 @@ public class MainWindow extends AnchorPane {
         DialogBox dukeDialog = DialogBox.getDukeDialog(response, dukeImage);
 
         VBox.setMargin(userDialog, new Insets(10, 5, 10, 5));
+        VBox.setMargin(dukeDialog, new Insets(0, 5, 0, 5));
 
         dialogContainer.getChildren().addAll(
                 userDialog,
