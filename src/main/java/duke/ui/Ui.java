@@ -1,5 +1,20 @@
 package duke.ui;
 
+import static duke.util.Keyword.DISPLAY_TASKS_MESSAGE;
+import static duke.util.Keyword.EMPTY_STRING_ERROR;
+import static duke.util.Keyword.EMPTY_TASK_LIST_MESSAGE;
+import static duke.util.Keyword.FOUR_SPACES;
+import static duke.util.Keyword.GOODBYE_MESSAGE;
+import static duke.util.Keyword.LINE_SEPARATOR;
+import static duke.util.Keyword.NO_MATCHING_TASKS_MESSAGE;
+import static duke.util.Keyword.NUM_FORMATTER;
+import static duke.util.Keyword.NUM_OF_TASKS_MESSAGE;
+import static duke.util.Keyword.TASK_ADDED_MESSAGE;
+import static duke.util.Keyword.TASK_DELETED_MESSAGE;
+import static duke.util.Keyword.TASK_MARKED_MESSAGE;
+import static duke.util.Keyword.WELCOME_MESSAGE_ONE;
+import static duke.util.Keyword.WELCOME_MESSAGE_TWO;
+
 import duke.task.Task;
 import duke.tasklist.TaskList;
 
@@ -17,10 +32,10 @@ public class Ui {
     public static String stringFormatter(String... args) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < args.length - 1; i++) {
-            sb.append(args[i]).append("\n");
+            sb.append(args[i]).append(LINE_SEPARATOR);
         }
         sb.append(args[args.length - 1]);
-        assert (sb.length() > 0) : "String builder is empty!";
+        assert (sb.length() > 0) : EMPTY_STRING_ERROR;
         return sb.toString();
     }
 
@@ -34,12 +49,12 @@ public class Ui {
     public String printNumberedArray(Object[] array, String header) {
         int numOfCommands = array.length;
         StringBuilder str1 = new StringBuilder();
-        str1.append(header).append("\n");
+        str1.append(header).append(LINE_SEPARATOR);
         for (int i = 1; i < numOfCommands; i++) {
-            String s = String.format("%d. %s\n", i, array[i - 1]);
-            str1.append(s);
+            String s = String.format(NUM_FORMATTER, i, array[i - 1]);
+            str1.append(s).append(LINE_SEPARATOR);
         }
-        str1.append(String.format("%d. %s", numOfCommands, array[numOfCommands - 1]));
+        str1.append(String.format(NUM_FORMATTER, numOfCommands, array[numOfCommands - 1]));
         return str1.toString();
     }
 
@@ -47,14 +62,14 @@ public class Ui {
      * Greets the user upon starting the program.
      */
     public static String greetings() {
-        return stringFormatter("Hello, I'm Duke!", "What can I do for you?");
+        return stringFormatter(WELCOME_MESSAGE_ONE, WELCOME_MESSAGE_TWO);
     }
 
     /**
      * Retrieves the goodbye message.
      */
     public String goodbye() {
-        return "Bye! Hope to see you again soon!";
+        return GOODBYE_MESSAGE;
     }
 
     /**
@@ -63,7 +78,7 @@ public class Ui {
      * @param current Input task.
      */
     public String markTaskAsDone(Task current) {
-        return stringFormatter("Nice! I've marked this task as done:", String.format("    %s", current));
+        return stringFormatter(TASK_MARKED_MESSAGE, FOUR_SPACES + current);
     }
 
     /**
@@ -73,8 +88,7 @@ public class Ui {
      * @param size Size of task list.
      */
     public String deleteTask(Task current, int size) {
-        return stringFormatter("Noted. I've removed this task:", String.format("    %s", current),
-            String.format("Now you have %d tasks in the list.", size));
+        return stringFormatter(TASK_DELETED_MESSAGE, FOUR_SPACES + current, String.format(NUM_OF_TASKS_MESSAGE, size));
     }
 
     /**
@@ -84,15 +98,14 @@ public class Ui {
      * @param size Size of task list.
      */
     public String addTask(Task newTask, int size) {
-        return stringFormatter("Got it. I've added this task:", String.format("    %s", newTask),
-            String.format("Now you have %d tasks in the list.", size));
+        return stringFormatter(TASK_ADDED_MESSAGE, FOUR_SPACES + newTask, String.format(NUM_OF_TASKS_MESSAGE, size));
     }
 
     /**
      * Prints the empty task list message.
      */
     public String emptyTaskList() {
-        return "You currently have no tasks in the list.";
+        return EMPTY_TASK_LIST_MESSAGE;
     }
 
     /**
@@ -102,16 +115,17 @@ public class Ui {
      * @param extra Extra word to add in, if any.
      */
     public String showTaskList(TaskList tasks, String extra) {
-        String header = String.format("Here are the %stasks in your list:", extra);
+        String header = String.format(DISPLAY_TASKS_MESSAGE, extra);
         return printNumberedArray(tasks.getTasks().toArray(), header);
     }
 
     /**
-     * Prints the no matching tasks found message.
+     * Prints the no matching tasks found message.printNumberedArray
      *
      * @param queryWord Word use to query task list.
      */
     public String emptyFind(String queryWord) {
-        return String.format("There are no matching tasks with the keyword %s.", queryWord);
+        return String.format(NO_MATCHING_TASKS_MESSAGE, queryWord);
     }
+
 }

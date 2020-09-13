@@ -1,5 +1,11 @@
 package duke.storage;
 
+import static duke.util.Keyword.CSV_SEPARATOR;
+import static duke.util.Keyword.DATE_TIME_FORMAT;
+import static duke.util.Keyword.KEYWORD_DEADLINE;
+import static duke.util.Keyword.KEYWORD_EVENT;
+import static duke.util.Keyword.KEYWORD_TODO;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -15,7 +21,8 @@ import duke.task.ToDo;
  */
 public class CsvConverter {
 
-    private static final String dateTimeFormat = "MMM d yyyy / h.mm a";
+    private static final String DONE = "done";
+    private static final String NOT_DONE = "not done";
 
     /**
      * Creates a task from the CSV format of the task.
@@ -33,11 +40,11 @@ public class CsvConverter {
         boolean isDone = stringToBoolean(resultArr[4]);
 
         switch (taskType) {
-        case "TODO":
+        case KEYWORD_TODO:
             return new ToDo(description, isDone, timeFrame, dateTime);
-        case "EVENT":
+        case KEYWORD_EVENT:
             return new Event(description, isDone, timeFrame, dateTime);
-        case "DEADLINE":
+        case KEYWORD_DEADLINE:
             return new Deadline(description, isDone, timeFrame, dateTime);
         default:
             throw new InvalidFileFormatException();
@@ -52,15 +59,16 @@ public class CsvConverter {
      * @throws InvalidFileFormatException If there are errors in the csv format.
      */
     private static String[] parseString(String input) throws InvalidFileFormatException {
-        String[] resultArr = input.split("\\s{2},", 5);
+        int expectedLength = 5;
+        String[] resultArr = input.split(CSV_SEPARATOR, expectedLength);
 
-        if (resultArr.length < 4) {
+        if (resultArr.length < expectedLength) {
             throw new InvalidFileFormatException();
         }
         resultArr[0] = resultArr[0].toUpperCase();
         resultArr[4] = resultArr[4].toLowerCase();
         String doneStatus = resultArr[4];
-        boolean validStatus = doneStatus.equals("done") || doneStatus.equals("not done");
+        boolean validStatus = doneStatus.equals(DONE) || doneStatus.equals(NOT_DONE);
 
         if (!validStatus) {
             throw new InvalidFileFormatException();
@@ -70,7 +78,7 @@ public class CsvConverter {
 
     private static LocalDateTime stringToDateTime(String input) throws InvalidFileFormatException {
         try {
-            return LocalDateTime.parse(input, DateTimeFormatter.ofPattern(dateTimeFormat));
+            return LocalDateTime.parse(input, DateTimeFormatter.ofPattern(DATE_TIME_FORMAT));
         } catch (DateTimeParseException e) {
             throw new InvalidFileFormatException();
         }
@@ -83,6 +91,6 @@ public class CsvConverter {
      * @return True if done, false if not done.
      */
     private static boolean stringToBoolean(String input) {
-        return input.equals("done");
+        return input.equals(DONE);
     }
 }

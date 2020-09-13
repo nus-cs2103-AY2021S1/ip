@@ -7,13 +7,13 @@ import duke.ui.Ui;
  */
 public class UnknownCommandException extends DukeException {
 
-    private static final String MSG_1 = "I'm sorry, but I don't know what that means.";
-    private static final String MSG_2 = "Type 'help' to display the list of commands available.";
+    private static final String LINE_1 = "I'm sorry, but I don't know what that means.";
+    private static final String LINE_2 = "Type 'help' to display the list of commands available.";
 
     /**
      * Initializes the UnknownCommandException object.
      */
     public UnknownCommandException() {
-        super(Ui.stringFormatter(MSG_1, MSG_2));
+        super(Ui.stringFormatter(LINE_1, LINE_2));
     }
 }

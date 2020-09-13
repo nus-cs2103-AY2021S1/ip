@@ -18,6 +18,5 @@ public class InvalidDateException extends DukeException {
      */
     public InvalidDateException() {
         super(Ui.stringFormatter(LINE_1, LINE_2, LINE_3, LINE_4, LINE_5));
-
     }
 }

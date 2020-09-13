@@ -1,5 +1,11 @@
 package duke.storage;
 
+import static duke.util.Keyword.BASE_DIRECTORY;
+import static duke.util.Keyword.CSV_FORMAT;
+import static duke.util.Keyword.CSV_HEADER;
+import static duke.util.Keyword.FILE_NAME;
+import static duke.util.Keyword.FOLDER_NAME;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -12,7 +18,6 @@ import duke.exception.FileUpdateFailException;
 import duke.exception.InvalidFileFormatException;
 import duke.task.Task;
 import duke.tasklist.TaskList;
-import duke.ui.Ui;
 
 /**
  * Handles the interactions with the user's CSV file.
@@ -20,17 +25,17 @@ import duke.ui.Ui;
  */
 public class Storage {
 
+
+
     private final String dataDirectory;
     private final String filePath;
-    private final Ui ui;
 
     /**
      * Initializes the storage object and create a new file.
      */
     public Storage() {
-        ui = new Ui();
-        dataDirectory = System.getProperty("user.dir") + "/data";
-        filePath = dataDirectory + "/tasklist.csv";
+        dataDirectory = System.getProperty(BASE_DIRECTORY) + FOLDER_NAME;
+        filePath = dataDirectory + FILE_NAME;
         createFile();
     }
 
@@ -84,9 +89,7 @@ public class Storage {
     public void update(TaskList tasks) throws FileUpdateFailException {
         try {
             FileWriter fileWriter = new FileWriter(filePath);
-            String header = "Task type,Description,Time frame (for Event),Time created or Deadline,Status\n";
-            StringBuilder stringBuilder = new StringBuilder(header);
-
+            StringBuilder stringBuilder = new StringBuilder(CSV_HEADER);
             for (Task task : tasks.getTasks()) {
                 stringBuilder.append(convertToCsvFormat(task));
             }
@@ -104,7 +107,7 @@ public class Storage {
      * @return String representation of the task in .csv format.
      */
     private String convertToCsvFormat(Task task) {
-        return String.format("%s  ,%s  ,%s  ,%s  ,%s\n",
+        return String.format(CSV_FORMAT,
             task.getTaskName(), task.getDescription(), task.getTimeFrame(), task.getTime(), task.getStatus());
     }
 }

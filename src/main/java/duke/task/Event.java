@@ -1,5 +1,9 @@
 package duke.task;
 
+import static duke.util.Keyword.CLOSE_BRACKET;
+import static duke.util.Keyword.EVENT_AT;
+import static duke.util.Keyword.EVENT_SYMBOL;
+
 import java.time.LocalDateTime;
 
 public class Event extends Task {
@@ -32,6 +36,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + timeFrame + ")";
+        return EVENT_SYMBOL + super.toString() + EVENT_AT + timeFrame + CLOSE_BRACKET;
     }
 }

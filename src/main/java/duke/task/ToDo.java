@@ -1,13 +1,13 @@
 package duke.task;
 
+import static duke.util.Keyword.TODO_SYMBOL;
+
 import java.time.LocalDateTime;
 
 /**
  * ToDo task, which is one of the three Task objects.
  */
 public class ToDo extends Task {
-
-    private static final String TASK_SYMBOL = "[T]";
 
     /**
      * Initializes the ToDo task with the description only. boolean isDone is false by default.
@@ -29,6 +29,6 @@ public class ToDo extends Task {
      */
     @Override
     public String toString() {
-        return TASK_SYMBOL + super.toString();
+        return TODO_SYMBOL + super.toString();
     }
 }

@@ -6,5 +6,9 @@ package duke.task;
 public enum TaskType {
     DEADLINE,
     EVENT,
-    TODO
+    TODO;
+
+    public String toLower() {
+        return toString().toLowerCase();
+    }
 }

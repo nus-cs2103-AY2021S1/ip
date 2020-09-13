@@ -1,13 +1,17 @@
 package duke.task;
 
+import static duke.util.Keyword.CLOSE_BRACKET;
+import static duke.util.Keyword.DEADLINE_BY;
+import static duke.util.Keyword.DEADLINE_SYMBOL;
+import static duke.util.Keyword.NIL;
+
 import java.time.LocalDateTime;
+
 
 public class Deadline extends Task {
 
-    private static final String DEADLINE_SYMBOL = "[D]";
-
     public Deadline(String description, LocalDateTime deadline) {
-        super(description, TaskType.DEADLINE, "-", deadline, false);
+        super(description, TaskType.DEADLINE, NIL, deadline, false);
     }
 
     public Deadline(String description, boolean isDone, String timeFrame, LocalDateTime dateTime) {
@@ -16,6 +20,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return DEADLINE_SYMBOL + super.toString() + " (by: " + getTime() + ")";
+        return DEADLINE_SYMBOL + super.toString() + DEADLINE_BY + getTime() + CLOSE_BRACKET;
     }
 }

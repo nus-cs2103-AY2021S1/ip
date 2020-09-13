@@ -5,10 +5,12 @@ package duke.exception;
  */
 public class InvalidFileFormatException extends DukeException {
 
+    private static final String INVALID_FILE_FORMAT = "CSV file is poorly formatted!";
+
     /**
      * Initializes the InvalidFileFormatException.
      */
     public InvalidFileFormatException() {
-        super("CSV file is poorly formatted!");
+        super(INVALID_FILE_FORMAT);
     }
 }

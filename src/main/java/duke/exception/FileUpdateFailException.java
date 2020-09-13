@@ -5,10 +5,12 @@ package duke.exception;
  */
 public class FileUpdateFailException extends DukeException {
 
+    private static final String FILE_UPDATE_FAIL_MESSAGE = "Error in updating .csv file in storage.";
+
     /**
      * Initializes the FileUpdateFailException.
      */
     public FileUpdateFailException() {
-        super("Failed to update tasks in csv file.");
+        super(FILE_UPDATE_FAIL_MESSAGE);
     }
 }

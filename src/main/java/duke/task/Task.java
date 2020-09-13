@@ -1,5 +1,12 @@
 package duke.task;
 
+import static duke.util.Keyword.CROSS_SYMBOL;
+import static duke.util.Keyword.DATE_TIME_FORMAT;
+import static duke.util.Keyword.DONE;
+import static duke.util.Keyword.NOT_DONE;
+import static duke.util.Keyword.SINGLE_SPACE;
+import static duke.util.Keyword.TICK_SYMBOL;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -8,8 +15,6 @@ import java.time.format.DateTimeFormatter;
  * Variables include description, task type, time and done status.
  */
 public abstract class Task {
-
-    private static final String dateTimeFormat = "MMM d yyyy / h.mm a";
 
     private final String description;
     private final TaskType taskType;
@@ -22,9 +27,10 @@ public abstract class Task {
      * Initialises the Task object.
      *
      * @param description Task details.
-     * @param isDone Status of task - true if done, false otherwise.
      * @param taskType Type of Task.
-     * @param dateTime Date and time of the task.
+     * @param timeFrame Time frame of Task (Only valid for Event).
+     * @param dateTime Date and time of the task (Deadline for Deadline objects, creation time for other tasks).
+     * @param isDone Status of task - true if done, false otherwise.
      */
     protected Task(String description, TaskType taskType, String timeFrame, LocalDateTime dateTime, boolean isDone) {
         this.description = description;
@@ -35,12 +41,12 @@ public abstract class Task {
     }
 
     /**
-     * Obtains the Done and Not done icons.
+     * Obtains the Done and Not done symbols.
      *
-     * @return String representation of icons.
+     * @return String representation of symbols.
      */
     private String getStatusIcon() {
-        return (isDone ? "[\u2713]" : "[\u2718]"); //return tick or X symbols
+        return (isDone ? TICK_SYMBOL : CROSS_SYMBOL);
     }
 
     /**
@@ -83,7 +89,7 @@ public abstract class Task {
      * @return String representation of Task status.
      */
     public String getStatus() {
-        return isDone ? "Done" : "Not done";
+        return isDone ? DONE : NOT_DONE;
     }
 
     /**
@@ -92,7 +98,7 @@ public abstract class Task {
      * @return Time of Task.
      */
     public String getTime() {
-        return dateTime.format(DateTimeFormatter.ofPattern(dateTimeFormat));
+        return dateTime.format(DateTimeFormatter.ofPattern(DATE_TIME_FORMAT));
     }
 
     public String getTimeFrame() {
@@ -116,6 +122,6 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        return getStatusIcon() + " " + description;
+        return getStatusIcon() + SINGLE_SPACE + description;
     }
 }

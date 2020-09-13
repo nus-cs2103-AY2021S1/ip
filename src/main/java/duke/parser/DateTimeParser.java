@@ -1,5 +1,8 @@
 package duke.parser;
 
+import static duke.util.Keyword.SINGLE_SPACE;
+import static duke.util.Keyword.TIME_SYMBOL;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -57,7 +60,7 @@ public abstract class DateTimeParser {
      * @return Formatted String.
      */
     private static String matchDateTimeFormat(String input) {
-        return input.replace(" ", "T");
+        return input.replace(SINGLE_SPACE, TIME_SYMBOL);
     }
 
     /**

@@ -5,10 +5,12 @@ package duke.exception;
  */
 public class EmptyFindException extends DukeException {
 
+    private static final String EMPTY_FIND_MESSAGE = "Failed to update tasks in csv file.";
+
     /**
      * Initializes the EmptyFindException.
      */
     public EmptyFindException() {
-        super("The description of a find cannot be empty!");
+        super(EMPTY_FIND_MESSAGE);
     }
 }

@@ -1,5 +1,23 @@
 package duke.parser;
 
+import static duke.util.Keyword.ARRAY_SIZE;
+import static duke.util.Keyword.DEADLINE_DELIMITER;
+import static duke.util.Keyword.EMPTY_STRING;
+import static duke.util.Keyword.EVENT_DELIMITER;
+import static duke.util.Keyword.INVALID_ARR_ERROR;
+import static duke.util.Keyword.INVALID_TASK_TYPE;
+import static duke.util.Keyword.KEYWORD_BYE;
+import static duke.util.Keyword.KEYWORD_DEADLINE;
+import static duke.util.Keyword.KEYWORD_DELETE;
+import static duke.util.Keyword.KEYWORD_DONE;
+import static duke.util.Keyword.KEYWORD_EVENT;
+import static duke.util.Keyword.KEYWORD_FIND;
+import static duke.util.Keyword.KEYWORD_HELP;
+import static duke.util.Keyword.KEYWORD_LIST;
+import static duke.util.Keyword.KEYWORD_TODO;
+import static duke.util.Keyword.MULTI_SPACE;
+import static duke.util.Keyword.SINGLE_SPACE;
+
 import duke.command.AddDeadlineCommand;
 import duke.command.AddEventCommand;
 import duke.command.AddToDoCommand;
@@ -23,7 +41,6 @@ import duke.task.TaskType;
  */
 public class Parser {
 
-    private static final String INVALID_ARR_ERROR = "Array is not empty";
 
     /**
      * Parses the user input and returns the corresponding command.
@@ -38,24 +55,24 @@ public class Parser {
         String details = getRestOfWord(inputArr);
 
         switch (keyWord) {
-        case "list":
+        case KEYWORD_LIST:
             return new ShowCommand();
-        case "done":
+        case KEYWORD_DONE:
             return new SimpleCommand(details, SimpleCommandType.DONE);
-        case "delete":
+        case KEYWORD_DELETE:
             return new SimpleCommand(details, SimpleCommandType.DELETE);
-        case "todo":
+        case KEYWORD_TODO:
             return new AddToDoCommand(details);
-        case "deadline":
+        case KEYWORD_DEADLINE:
             return new AddDeadlineCommand(details);
-        case "event":
+        case KEYWORD_EVENT:
             return new AddEventCommand(details);
-        case "find":
+        case KEYWORD_FIND:
             return new FindCommand(details);
-        case "bye":
-            return new ExitCommand();
-        case "help":
+        case KEYWORD_HELP:
             return new HelpCommand();
+        case KEYWORD_BYE:
+            return new ExitCommand();
         default:
             throw new UnknownCommandException();
         }
@@ -68,8 +85,8 @@ public class Parser {
      * @return String array of the input.
      */
     private static String[] deconstructInput(String input) {
-        String formattedString = input.trim().replaceAll("\\s{2,}", " ");
-        return formattedString.split(" ", 2);
+        String formattedString = input.trim().replaceAll(MULTI_SPACE, SINGLE_SPACE);
+        return formattedString.split(SINGLE_SPACE, ARRAY_SIZE);
     }
 
     /**
@@ -80,7 +97,7 @@ public class Parser {
      */
     private static String getKeyWord(String[] arr) {
         assert (arr.length > 0) : INVALID_ARR_ERROR;
-        return arr[0].toLowerCase();
+        return arr[0].toUpperCase();
     }
 
     /**
@@ -91,7 +108,7 @@ public class Parser {
      */
     private static String getRestOfWord(String[] arr) {
         assert (arr.length > 0) : INVALID_ARR_ERROR;
-        return arr.length == 1 ? "" : arr[1];
+        return arr.length == 1 ? EMPTY_STRING : arr[1];
     }
 
     /**
@@ -101,7 +118,7 @@ public class Parser {
      */
     private static String getIdentifier(TaskType taskType) {
         assert (taskType == TaskType.DEADLINE || taskType == TaskType.EVENT);
-        return taskType == TaskType.DEADLINE ? " /by" : " /at";
+        return taskType == TaskType.EVENT ? EVENT_DELIMITER : DEADLINE_DELIMITER;
     }
 
     /**
@@ -113,16 +130,16 @@ public class Parser {
      * @throws DukeException If the format inputted is not correct.
      */
     public static String[] parseTaskDescription(String description, TaskType taskType) throws DukeException {
-        String[] inputArr = description.split(getIdentifier(taskType), 2);
+        String[] inputArr = description.split(getIdentifier(taskType), ARRAY_SIZE);
 
-        if (inputArr.length == 1) {
+        if (inputArr.length < ARRAY_SIZE) {
             switch(taskType) {
             case DEADLINE:
                 throw new InvalidDeadlineException();
             case EVENT:
                 throw new InvalidEventException();
             default:
-                assert false : "Invalid task type!";
+                assert false : INVALID_TASK_TYPE;
             }
         }
 

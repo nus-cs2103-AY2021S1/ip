@@ -1,5 +1,7 @@
 package duke;
 
+import static duke.util.Keyword.TIMEOUT_DURATION;
+
 import duke.command.Command;
 import duke.exception.DukeException;
 import duke.parser.Parser;
@@ -34,7 +36,7 @@ public class Duke {
     private void setTimeout(Runnable runnable) {
         new Thread(() -> {
             try {
-                Thread.sleep(1000);
+                Thread.sleep(TIMEOUT_DURATION);
                 runnable.run();
             } catch (InterruptedException e) {
                 e.printStackTrace();
