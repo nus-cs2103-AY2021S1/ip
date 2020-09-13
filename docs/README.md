@@ -288,5 +288,5 @@ This is a greenfield Java project using [NUS-CS2103](https://github.com/nus-cs21
 done 1
 
 Okay I've marked this task as done:
-    [D][✓] finish README.md (by: 13 Sep)
+    [D][✓] finish README.md (by: 14 Sep)
 ```
