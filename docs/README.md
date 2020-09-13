@@ -50,7 +50,7 @@ Format: `--help`
 
 Example of usage: 
 
-`todo borrow book`
+`--help`
 
 Expected outcome:
 
