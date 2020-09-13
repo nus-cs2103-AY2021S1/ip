@@ -1,26 +1,26 @@
 # User Guide
 
-## What is mug.Mug
-**mug.Mug** is a Personalise Chatbox helps in **keeping track of daily mug.tasks**(todo mug.tasks, task with deadline and event). mug.Mug helps you to record your mug.tasks via **Command Line Interface (CLI)** while having the benefits of a Graphical User Interface (GUI).
+## What is Mug
+**Mug** is a Personalise Chatbox helps in **keeping track of daily tasks**(todo tasks, task with deadline and event). Mug helps you to record your tasks via **Command Line Interface (CLI)** while having the benefits of a Graphical User Interface (GUI).
 
 ## QuickStart
 1. Ensure you have Java `11` or above installed in your Computer.
 
 1. Download the latest **mug.jar** from [here](https://github.com/TianYong-Goh/ip/releases/tag/v0.2).
 
-1. Copy **mug.jar** to the folder you want to use as the home folder for your mug.Mug.
+1. Copy **mug.jar** to the folder you want to use as the home folder for your Mug.
 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds.<br>
    ![initialUi](images/initialUi.png)
 
-1. Type the mug.command in the mug.command box and press Enter to execute it. e.g. typing `list` and pressing Enter will list out all saved mug.tasks.
+1. Type the command in the command box and press Enter to execute it. e.g. typing `list` and pressing Enter will list out all saved tasks.
 
-1. Refer to the Features below for details of each mug.command.
+1. Refer to the Features below for details of each command.
 
 ## Features 
 
 ### `todo`
-Adds todo task to your mug.tasks
+Adds todo task to your tasks
 
 ## Usage
 
@@ -58,7 +58,7 @@ Expected outcome:
 <br/>
 
 ### `event`
-Adds event mug.tasks
+Adds event task
 
 ## Usage
 
@@ -119,9 +119,9 @@ Shows all saved taskd
 
 ## Usage
 
-### `list` - Listing all mug.tasks
+### `list` - Listing all tasks
 
-Lists out all mug.tasks in the list
+Lists out all tasks in the list
 
 Example of usage: 
 
@@ -134,13 +134,13 @@ Expected outcome:
 <br/>
 
 ### `undo`
-Undo for mug.command(**todo**, **deadline**, **event**, **delete**, **done**)
+Undo for command(**todo**, **deadline**, **event**, **delete**, **done**)
 
 ## Usage
 
 ### `undo` - Undo
 
-undo the previous mug.command
+undo the previous command
 
 Example of usage: 
 
@@ -153,13 +153,13 @@ Expected outcome:
 <br/>
 
 ### `find`
-Finds mug.tasks from the list
+Finds tasks from the list
 
 ## Usage
 
-### `find {keyword}` - Searching mug.tasks
+### `find {keyword}` - Searching tasks
 
-List out all the mug.tasks contain the keyword given.
+List out all the tasks contain the keyword given.
 
 Example of usage: 
 
@@ -176,7 +176,7 @@ Close the application
 
 ## Usage
 
-### `bye` - 
+### `bye` - Closing application
 
 Disable user input.
 

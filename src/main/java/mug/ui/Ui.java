@@ -122,12 +122,6 @@ public class Ui {
         return "** Bye. Hope to see you soon!! **";
     }
 
-    /**
-     * Undergoes action for list command.
-     *
-     * @param tasks A list of tasks to show.
-     * @return list of Tasks.
-     */
     private String listAction(TaskList tasks) {
         return tasks.readList();
     }
