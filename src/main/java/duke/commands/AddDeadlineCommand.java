@@ -6,7 +6,7 @@ import duke.task.Deadline;
 import duke.support.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.Ui;
+import duke.ui.Ui;
 
 public class AddDeadlineCommand extends Command {
     private String commandContent;

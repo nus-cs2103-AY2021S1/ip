@@ -3,7 +3,7 @@ package duke.commands;
 
 import duke.support.Storage;
 import duke.task.TaskList;
-import duke.Ui;
+import duke.ui.Ui;
 
 public class ListCommand extends Command {
     public ListCommand() {

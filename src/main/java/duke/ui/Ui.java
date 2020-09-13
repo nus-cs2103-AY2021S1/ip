@@ -1,4 +1,4 @@
-package duke;
+package duke.ui;
 
 import duke.support.Login;
 import duke.task.Task;

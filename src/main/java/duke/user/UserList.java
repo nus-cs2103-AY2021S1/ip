@@ -64,19 +64,14 @@ public class UserList {
     }
 
     public static void addUser(User user) {
-        try {
-            FileWriter writer = new FileWriter(file);
-            userList.add(user);
-            write();
-        } catch (IOException e) {
-            System.out.println("Failed to add the new user.");
-        }
+        userList.add(user);
+        write();
     }
 
     public static void write() {
         try {
             FileWriter writer = new FileWriter(file);
-            ArrayList<User> users = readUsersInfo();
+            ArrayList<User> users = userList;
             String usersInfo = "";
             for (User user: users) {
                 usersInfo += (user.getUsername() + "," + user.getUserPassword() + "," + user.getNickname() + "\n");

@@ -4,7 +4,7 @@ import duke.support.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.ToDo;
-import duke.Ui;
+import duke.ui.Ui;
 
 public class AddToDoCommand extends Command {
     private String commandContent;
