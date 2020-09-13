@@ -31,6 +31,7 @@ test {
 
 application {
     mainClassName = "duke.gui.Launcher"
+    //mainClassName = "duke.Duke"
 }
 
 shadowJar {
@@ -66,3 +67,10 @@ dependencies {
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'mac'
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'linux'
 }
+
+//compileJava.options.fork = true
+//compileJava.options.forkOptions.executable = '.gradle\\javac.exe'
+
+apply plugin: 'java'
+sourceCompatibility = 11
+targetCompatibility = 11

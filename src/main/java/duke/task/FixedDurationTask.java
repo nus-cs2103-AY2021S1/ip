@@ -21,7 +21,7 @@ public class FixedDurationTask extends Task {
     private Optional<LocalTime> startTime;
     private final Duration duration;
 
-    public FixedDurationTask(String description, String duration) {
+    public FixedDurationTask(String description, String duration) throws DukeException {
         super("F", description);
         this.duration = parseDuration(duration);
         startDate = Optional.empty();
@@ -49,21 +49,28 @@ public class FixedDurationTask extends Task {
      * @param raw the user input to be parsed.
      * @return the duration of the task.
      */
-    public Duration parseDuration(String raw) {
+    public Duration parseDuration(String raw) throws DukeException {
+        if (!raw.contains("h") && !raw.contains("m")) {
+            throw new DukeException("Invalid duration!");
+        }
         String[] temp = raw.toLowerCase().split(" ");
-        int hour;
-        int minute;
-        if (temp[0].contains("h")) {
-            hour = Integer.parseInt(temp[0].split("h")[0]);
-            if (temp.length > 1 && temp[1].contains("m")) {
-                System.out.println("Contains m");
-                minute = Integer.parseInt(temp[1].split("m")[0]);
-            } else {
-                minute = 0;
+        int hour = 0;
+        int minute = 0;
+        try {
+            for (String token : temp) {
+                if (token.endsWith("h") && hour == 0) {
+                    hour = Integer.parseInt(token.split("h")[0]);
+                } else if (token.endsWith("m") && minute == 0) {
+                    minute = Integer.parseInt(token.split("m")[0]);
+                } else if (hour != 0 && minute != 0){
+                    break;
+                }
             }
-        } else {
-            hour = 0;
-            minute = Integer.parseInt(temp[0].split("m")[0]);
+        } catch (NumberFormatException nfe) {
+            throw new DukeException("Invalid duration!");
+        }
+        if (hour < 0 || minute < 0 || (hour == 0 && minute == 0)) {
+            throw new DukeException("Invalid duration!");
         }
         return Duration.ofMinutes((long) (60 * hour) + minute);
     }
@@ -130,10 +137,10 @@ public class FixedDurationTask extends Task {
         long min = (sec % 3600) / 60;
         info += " (for: ";
         if (hr != 0) {
-            info += String.format("%d hr ", hr);
+            info += String.format("%d hr", hr);
         }
         if (min != 0) {
-            info += String.format("%d min", min);
+            info += String.format(" %d min", min);
         }
         info += ")";
         return super.toString() + info;
