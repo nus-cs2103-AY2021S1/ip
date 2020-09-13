@@ -44,7 +44,7 @@ public class Duke extends Application {
     private Scene scene;
 
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/NewDuke.png"));
 
     /**
      * Creates a Duke object which holds a file path and uses it to load
