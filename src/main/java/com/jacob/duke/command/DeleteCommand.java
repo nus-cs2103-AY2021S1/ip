@@ -30,10 +30,12 @@ public class DeleteCommand implements Command {
     @Override
     public String execute(Ui ui, DukeList dukeList, Storage storage) throws DukeException {
         List<Task> taskList = dukeList.getTaskList();
-        Task theRemovedTask = taskList.remove(Integer.parseInt(inputCommand.substring(7)) - 1);
-        if (theRemovedTask == null) {
+        int deleteIndex = Integer.parseInt(inputCommand.substring(7)) - 1;
+        if (deleteIndex == -1 || deleteIndex >= taskList.size()) {
             throw new DukeException("No such task exists. ");
         }
+
+        Task theRemovedTask = taskList.remove(deleteIndex);
         storage.removeTextFromTasks(theRemovedTask.convertToFile());
 
         return ui.showTaskDeleted(theRemovedTask.getCurrentStatus(), taskList);

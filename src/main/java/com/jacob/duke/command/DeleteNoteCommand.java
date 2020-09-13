@@ -15,10 +15,11 @@ public class DeleteNoteCommand implements Command {
     @Override
     public String execute(Ui ui, DukeList dukeList, Storage storage) throws DukeException {
         List<Note> noteList = dukeList.getNoteList();
-        Note theRemovedNote = noteList.remove(Integer.parseInt(fullCommand.substring("note-delete ".length())) - 1);
-        if (theRemovedNote == null) {
+        int deleteIndex = Integer.parseInt(fullCommand.substring("note-delete ".length())) - 1;
+        if (deleteIndex == -1 || deleteIndex >= noteList.size()) {
             throw new DukeException("No such note exists.");
         }
+        Note theRemovedNote = noteList.remove(deleteIndex);
         storage.removeTextFromNotes(theRemovedNote.convertToFileFormat());
         return ui.showNoteDeleted(theRemovedNote.getCurrentStatus(), noteList);
     }
