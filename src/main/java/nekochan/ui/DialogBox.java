@@ -45,16 +45,16 @@ public class DialogBox extends HBox {
 
 
     public static DialogBox getUserDialog(String text, Image image) {
-        return new DialogBox(text, image).flip();
+        return new DialogBox(text, image);
     }
 
     public static DialogBox getNekoDialog(String text, Image image) {
-        return new DialogBox(text, image);
+        return new DialogBox(text, image).flip();
     }
 
     public static DialogBox getErrorDialog(String text, Image image) {
         DialogBox node = new DialogBox(text, image);
-        return node.highlightError();
+        return node.flip().highlightError();
     }
 
     private DialogBox flip() {
