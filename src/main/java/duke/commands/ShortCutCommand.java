@@ -12,7 +12,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 /**
- * used to add short cuts
+ * Handles case when short is the input to add short cuts
  */
 public class ShortCutCommand extends Command {
 

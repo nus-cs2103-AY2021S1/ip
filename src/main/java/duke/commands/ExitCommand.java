@@ -6,7 +6,7 @@ import duke.helpers.TaskList;
 import duke.helpers.Ui;
 
 /**
- * handles case when exit is the keyword
+ * Handles case when exit is the keyword
  */
 public class ExitCommand extends Command {
     /**

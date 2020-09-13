@@ -14,7 +14,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Used to handle when input is deadline
+ * Handles when input is deadline
  */
 public class DeadlineCommand extends AddCommand {
     /**

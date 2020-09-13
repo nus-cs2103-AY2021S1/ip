@@ -8,7 +8,7 @@ import duke.helpers.Ui;
 import duke.tasks.ToDo;
 
 /**
- * Has the method if ToDo is keyword deadline
+ * Handles case where todo is the input
  */
 public class TodoCommand extends AddCommand {
     /**

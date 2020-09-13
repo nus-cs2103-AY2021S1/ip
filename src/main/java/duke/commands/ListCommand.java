@@ -6,7 +6,7 @@ import duke.helpers.TaskList;
 import duke.helpers.Ui;
 
 /**
- * used to handle case when list is the keyword
+ * Used to handle case when list is the keyword
  */
 public class ListCommand extends Command {
     /**
