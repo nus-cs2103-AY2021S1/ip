@@ -66,7 +66,7 @@ Now you have 1 tasks in the list
 
 ### 3. Delete
 
-Deletes a task at an index. The specified index must be be in the range of the task list size.
+Deletes a task at an index. The specified index must be in the range of the task list size.
 
 **Usage**
 
@@ -284,7 +284,7 @@ Your task list has been sorted!
 
 ## Quick Start
 1. Ensure you have [Java ```11```](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html) or above installed on your computer.
-2. Download the latest [`duke.jar`](https://github.com/aizatazhar/ip/releases/tag/v1.0).
+2. Download the latest [`duke.jar`](https://github.com/aizatazhar/ip/releases).
 3. Copy the file to the folder you wish to use as the home folder.
 4. Double-click the file to start the app
 5. Type your command into the box and press enter to execute it.
