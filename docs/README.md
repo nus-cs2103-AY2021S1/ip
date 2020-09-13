@@ -10,8 +10,6 @@ If you can type fast, Hyu's Drive-In can get your daily tasks done faster than t
 Words in `UPPER_CASE` are the parameters to be supplied by the user.
 e.g. in `todo DESCRIPTION`, `DESCRIPTION` is a parameter which can be used as `todo read book`. 
 
-
-
 ### `todo` - Adding a ToDo Item
 
 Adds a Todo Item into the list of tasks. 
@@ -64,7 +62,7 @@ Format: `find KEYWORD`
 Example: 
 * `find Assignment` returns Deadline `CS2105 Assignment`, Deadline `CS2100 Assignment` and Event `Assignment Meeting`
 
-![find Example] (/docs/find.png)
+![find Example] (https://github.com/Hazel1603/ip/blob/master/docs/find.png?raw=true)
 
 ### `save` - Saving current tasks
 
@@ -118,3 +116,17 @@ Example:
 Exits the program. 
 
 Format: `exit`
+
+## Feature Summary 
+Command | Format/ Examples
+--------|-----------------
+todo | `todo DESCRIPTION` e.g. `todo read book`
+deadline | `deadline DESCRIPTION /by DEADLINE` e.g. `deadline return book /by 2020/09/15`
+event | `event DESCRIPTION /at DATETIME` e.g. `event tP Meeting /at 2020/09/14 1400`
+list | `list`
+find | `find KEYWORD` e.g. `find Assignment`
+save | `save`
+sort | `sort /type` or `sort /date`
+done | `done INDEX`
+delete | `delete INDEX` 
+bye | `bye`
