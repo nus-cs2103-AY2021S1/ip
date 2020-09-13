@@ -27,7 +27,22 @@ public class MainWindow extends AnchorPane {
 
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/userChatBotIcon.png"));
     private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/dukeChatBotIcon.png"));
-
+    private final String startString = "Whats up young blood. Kobe here. How can I help you today?\n"
+            + "\n Basic Requests:\n"
+            + "  list: gets you list of currently stored tasks\n"
+            + "  bye: terminates our conversation\n"
+            + "\n\n Add Request:\n"
+            + "  todo <task description>: adds todo\n"
+            + "  event <task description> /at <YYYY-MM-DD>: adds an event\n"
+            + "  deadline <task description> /by <YYYY-MM-DD>: adds deadline\n"
+            + "\n\n Additional Commands:\n"
+            + "  delete <number>: deletes selected task\n"
+            + "  done <number>: marks selected task done \n"
+            + "  list-due <YYYY-MM-DD HHMM>: gets list of tasks due on that date\n"
+            + "  find: finds any task that has a description matching the given string\n"
+            + "  note Question? Answer: Adds a note\n"
+            + "  note-list: gets list of note\n"
+            + "  note-delete <index>: delete note at specified index on list\n";
     public MainWindow() { }
 
     /**
@@ -36,21 +51,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        String startUpString = "Whats up young blood. Kobe here. How can I help you today?\n"
-                + "\n\n\nBasic Commands:\n"
-                + "list: gets you list of currently stored tasks\n"
-                + "bye: terminates our conversation\n"
-                + "\n\n\nAdd Commands:\n"
-                + "todo <task description>: adds todo\n"
-                + "event <task description> /at <YYYY-MM-DD>: adds an event\n"
-                + "deadline <task description> /by <YYYY-MM-DD>: adds deadline\n"
-                + "\n\n\nAdditional Commands:\n"
-                + "delete <number>: deletes selected task\n"
-                + "done <number>: marks selected task done \n"
-                + "list-due <YYYY-MM-DD HHMM>: gets list of tasks due on that date\n"
-                + "find: finds any task that has a description matching the given string\n";
-
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(startUpString, dukeImage));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(startString, dukeImage));
     }
 
     public void setDuke(Duke d) {
