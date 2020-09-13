@@ -10,7 +10,8 @@ import javafx.application.Application;
  */
 public class Main {
     /**
-     * Main function/entrypoint. Will create a new Duke instance and begin interaction with the user immediately.
+     * Main function/entrypoint. Will create a new Duke instance and begin
+     * interaction with the user immediately.
      * Takes in one optional command line argument: --cli
      * which starts Duke in cli mode.
      *

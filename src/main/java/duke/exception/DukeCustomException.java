@@ -10,6 +10,12 @@ public class DukeCustomException extends DukeException {
     public DukeCustomException(String message) {
         super(message);
     }
+
+    /**
+     * Adds a message only if the extraMessage was not set
+     * previously.
+     * @param extraMessage message to attach.
+     */
     public void setExtraMessage(String extraMessage) {
         if (this.extraMessage == null) {
             this.extraMessage = extraMessage;

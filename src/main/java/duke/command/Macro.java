@@ -35,7 +35,7 @@ public class Macro {
      * @throws DukeException if declaration has the wrong format.
      */
     public static Macro newMacro(String declaration) throws DukeException {
-        // note: following also trims whitespace.
+        // note: following line also trims whitespace between semicolons.
         String[] inputSplitBySemicolon = declaration.split(" *; *");
         String[] macroNameAndArgs = inputSplitBySemicolon[0].split("\\s+");
         String[] commands = Arrays.copyOfRange(inputSplitBySemicolon, 1, inputSplitBySemicolon.length);
@@ -116,7 +116,7 @@ public class Macro {
     }
 
     private String substitute(CommandLine args, String line) {
-        // TODO possibly use a StringBuilder here instead.
+        // TODO possibly use a StringBuilder here instead for performance.
         for (Iterator<Option> i = args.iterator(); i.hasNext(); ) {
             Option option = i.next();
             String from = option.getOpt();
