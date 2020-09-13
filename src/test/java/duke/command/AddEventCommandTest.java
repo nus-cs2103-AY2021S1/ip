@@ -73,10 +73,10 @@ public class AddEventCommandTest extends CommandTests {
     @Test
     public void testEmptyTimeFrame() {
         AddEventCommand cmd1 = new AddEventCommand("meeting /at");
-        String eventMsg = "OOPS!!! Time of event task is not specified";
+        String eventMessage = "OOPS!!! Time of event task is not specified";
         // Tests
         EmptyTimeException e = assertThrows(EmptyTimeException.class, () -> cmd1.execute(taskList, ui, storage));
-        assertEquals(eventMsg, e.getMessage());
+        assertEquals(eventMessage, e.getMessage());
         assertTrue(taskList.isEmpty());
     }
 }

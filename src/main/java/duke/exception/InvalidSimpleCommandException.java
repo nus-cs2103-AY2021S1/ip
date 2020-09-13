@@ -25,8 +25,8 @@ public class InvalidSimpleCommandException extends DukeException {
      * @return Formatted message.
      */
     private static String getMessage(SimpleCommandType simpleCommandType) {
-        String errorMsg = String.format(LINE_1, simpleCommandType.toTitleCase());
-        String suggestionMsg = String.format(LINE_2, simpleCommandType);
-        return Ui.stringFormatter(errorMsg, suggestionMsg);
+        String errorMessage = String.format(LINE_1, simpleCommandType.toTitleCase());
+        String suggestionMessage = String.format(LINE_2, simpleCommandType);
+        return Ui.stringFormatter(errorMessage, suggestionMessage);
     }
 }
