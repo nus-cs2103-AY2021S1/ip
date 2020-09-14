@@ -36,6 +36,7 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
+        dialog.setWrapText(true);
         displayPicture.setImage(img);
         dialog.setMinHeight(Region.USE_PREF_SIZE);
     }
@@ -57,8 +58,7 @@ public class DialogBox extends HBox {
                 new CornerRadii(20),
                 new Insets(5, 5, 5, 5)
         );
-        Background background = new Background(backFill);
-        db.setBackground(background);
+        db.setBackground(new Background(backFill));
         return db;
     }
 
@@ -70,8 +70,7 @@ public class DialogBox extends HBox {
                 new CornerRadii(20),
                 new Insets(5, 5, 5, 5)
         );
-        Background background = new Background(backFill);
-        db.setBackground(background);
+        db.setBackground(new Background(backFill));
         return db;
     }
 }
