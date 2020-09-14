@@ -1,12 +1,15 @@
 package botbot;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import botbot.commands.Command;
 import botbot.commands.DeadlineCommand;
 import botbot.commands.DeleteCommand;
+import botbot.commands.EditCommand;
 import botbot.commands.EventCommand;
 import botbot.commands.FindCommand;
 import botbot.commands.InvalidCommand;
@@ -19,11 +22,14 @@ import botbot.tasks.Event;
  * Checker for the validity of user input as Botbot commands.
  */
 public class CommandValidator {
+    public static final String ERROR_MESSAGE_INVALID_TASK_ID = "invalid task number!";
     public static final String ERROR_MESSAGE_NO_SUCH_COMMAND = "sorry, I don't know what that means!";
     
     private static final String ERROR_MESSAGE_EMPTY = "%s cannot be empty!";
     private static final String ERROR_MESSAGE_EMPTY_DESCRIPTION = String.format(ERROR_MESSAGE_EMPTY,
             "the description of a task");
+    private static final String ERROR_MESSAGE_EMPTY_EDIT = String.format(ERROR_MESSAGE_EMPTY,
+            "the content to be edited");
     private static final String ERROR_MESSAGE_EMPTY_SEARCH = String.format(ERROR_MESSAGE_EMPTY,
             "the search keyword");
     private static final String ERROR_MESSAGE_EMPTY_TASK_ID = String.format(ERROR_MESSAGE_EMPTY,
@@ -32,16 +38,23 @@ public class CommandValidator {
             "deleted");
     private static final String ERROR_MESSAGE_EMPTY_TASK_ID_DONE = String.format(ERROR_MESSAGE_EMPTY_TASK_ID,
             "marked as done");
+    private static final String ERROR_MESSAGE_EMPTY_TASK_ID_EDIT = String.format(ERROR_MESSAGE_EMPTY_TASK_ID,
+            "edited");
 
-    private static final String ERROR_MESSAGE_INVALID_FORMAT = "invalid format! please follow '%s'!";
+    private static final String ERROR_MESSAGE_INVALID_FORMAT = "invalid %s format! please follow '%s'!";
+    private static final String ERROR_MESSAGE_INVALID_FORMAT_DATETIME = String.format(ERROR_MESSAGE_INVALID_FORMAT,
+            "date-time", "<D-M-YYYY HHmm> (eg. 17-3-2020 0945 or 3-4-2020 with no time specified)");
     private static final String ERROR_MESSAGE_INVALID_FORMAT_DEADLINE = String.format(ERROR_MESSAGE_INVALID_FORMAT,
-            Deadline.COMMAND_FORMAT);
+            "command", Deadline.COMMAND_FORMAT);
+    private static final String ERROR_MESSAGE_INVALID_FORMAT_EDIT = String.format(ERROR_MESSAGE_INVALID_FORMAT,
+            "command", EditCommand.COMMAND_FORMAT);
     private static final String ERROR_MESSAGE_INVALID_FORMAT_EVENT = String.format(ERROR_MESSAGE_INVALID_FORMAT,
-            Event.COMMAND_FORMAT);
-    private static final String ERROR_MESSAGE_INVALID_TASK_ID = "invalid task number!";
+            "command", Event.COMMAND_FORMAT);
 
     private static final Pattern FORMAT_ARG_ADD_DEADLINE = Pattern.compile("(?<description>.*) /by (?<by>.*)");
     private static final Pattern FORMAT_ARG_ADD_EVENT = Pattern.compile("(?<description>.*) /at (?<at>.*)");
+    private static final Pattern FORMAT_ARGS_EDIT = Pattern.compile("(?<id>\\d+)(?<description>.+?)?"
+        + "(\\h+/at\\h*(?<at>.*?))?(\\h+/by\\h*(?<by>.*))?");
 
     /**
      * Attempts to create a DeadlineCommand.
@@ -61,8 +74,13 @@ public class CommandValidator {
 
         String description = matcher.group("description").trim();
         String byStr = matcher.group("by").trim();
-        LocalDateTime by = Parser.parseDateTime(byStr);
-        return new DeadlineCommand(description, by);
+        
+        try {
+            LocalDateTime by = Parser.parseDateTime(byStr);
+            return new DeadlineCommand(description, by);
+        } catch (DateTimeParseException e) {
+            return new InvalidCommand(ERROR_MESSAGE_INVALID_FORMAT_DATETIME);
+        }
     }
 
     /**
@@ -83,8 +101,13 @@ public class CommandValidator {
 
         String description = matcher.group("description").trim();
         String atStr = matcher.group("at").trim();
-        LocalDateTime at = Parser.parseDateTime(atStr);
-        return new EventCommand(description, at);
+        
+        try {
+            LocalDateTime at = Parser.parseDateTime(atStr);
+            return new EventCommand(description, at);
+        } catch (DateTimeParseException e) {
+            return new InvalidCommand(ERROR_MESSAGE_INVALID_FORMAT_DATETIME);
+        }
     }
 
     /**
@@ -119,6 +142,44 @@ public class CommandValidator {
         }
     }
 
+    /**
+     * Attempts to create an EditCommand.
+     *
+     * @param args Arguments to edit task.
+     * @return EditCommand if arguments given are valid, InvalidCommand otherwise.
+     */
+    public static Command tryEdit(String args) {
+        if (args.isBlank()) {
+            return new InvalidCommand(ERROR_MESSAGE_EMPTY_TASK_ID_EDIT);
+        }
+        
+        Matcher matcher = FORMAT_ARGS_EDIT.matcher(args.trim());
+        if (!matcher.matches()) {
+            return new InvalidCommand(ERROR_MESSAGE_INVALID_FORMAT_EDIT);
+        }
+        String idStr = matcher.group("id").trim();
+        
+        Optional<String> description = Optional.ofNullable(matcher.group("description"))
+                .map(String::trim);
+        Optional<String> atStr = Optional.ofNullable(matcher.group("at"))
+                .map(String::trim);
+        Optional<String> byStr = Optional.ofNullable(matcher.group("by"))
+                .map(String::trim);
+
+        try {
+            int id = Parser.parseCommandId(idStr);
+            if (description.isEmpty() && atStr.isEmpty() && byStr.isEmpty()) {
+                return new InvalidCommand(ERROR_MESSAGE_EMPTY_EDIT);
+            }
+            Optional<LocalDateTime> at = atStr.map(Parser::parseDateTime);
+            Optional<LocalDateTime> by = byStr.map(Parser::parseDateTime);
+            return new EditCommand(id, description, at, by);
+        } catch (NumberFormatException e) {
+            return new InvalidCommand(ERROR_MESSAGE_INVALID_TASK_ID);
+        } catch (DateTimeParseException e) {
+            return new InvalidCommand(ERROR_MESSAGE_INVALID_FORMAT_DATETIME);
+        }
+    }
 
     /**
      * Attempts to create a FindCommand.

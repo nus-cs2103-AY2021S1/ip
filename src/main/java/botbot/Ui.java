@@ -24,6 +24,7 @@ public class Ui {
             + "%s\nyou now have %d task%s in your list\n";
     private static final String RESPONSE_DELETE = "ok! I've removed this task:\n" + INDENT
             + "%s\nyou now have %d task%s in your list\n";
+    private static final String RESPONSE_EDIT = "ok! I've edited the task to:\n" + INDENT + "%s";
     private static final String RESPONSE_ERROR = "oops! %s\n";
     private static final String RESPONSE_EXIT = "bye! see you soon!";
     private static final String RESPONSE_FIND_MATCH = "here is the match in your list:\n%s";
@@ -80,6 +81,16 @@ public class Ui {
     public String showDeleteResponse(Task task, int numOfTasks) {
         String plurality = makePlural(numOfTasks);
         return String.format(RESPONSE_DELETE, task, numOfTasks, plurality);
+    }
+
+    /**
+     * Displays the response for an EditCommand.
+     *
+     * @param task Task edited.
+     * @return Response for EditCommand.
+     */
+    public String showEditResponse(Task task) {
+        return String.format(RESPONSE_EDIT, task);
     }
 
     /**

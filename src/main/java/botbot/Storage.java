@@ -124,9 +124,9 @@ public class Storage {
                 temp.add(task.getStatus());
                 temp.add(task.getDescription());
                 if (task instanceof Deadline) {
-                    temp.add(task.getBy());
+                    temp.add(task.getBy().toString());
                 } else if (task instanceof Event) {
-                    temp.add(task.getAt());
+                    temp.add(task.getAt().toString());
                 } else {
                     assert task instanceof Todo : "Invalid task type";
                 }
