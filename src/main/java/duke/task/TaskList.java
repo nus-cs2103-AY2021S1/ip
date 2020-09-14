@@ -57,9 +57,9 @@ public class TaskList {
 
     public void set(int index, Task task) {
         assert task != null : "task cannot be null";
-        tasks.set(index, task);
         Pair<Task, Integer> infoPair = new Pair<>(tasks.get(index), index);
         prevCommands.add(new Pair<>(UPDATE_KEY, infoPair));
+        tasks.set(index, task);
     }
 
     /**
