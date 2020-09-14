@@ -16,7 +16,6 @@ Duke is a task manager with a Graphical User Interface(GUI). Given below are ins
 * Acknowledgements
 ## Quick Start
 
-P## Quick start
  1. Ensure that you have Java `11` or above installed in your computer.
  
  2. Download the latest `duke.jar` from [here](https://github.com/WM71811/ip/releases/tag/v0.3).
