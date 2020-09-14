@@ -8,7 +8,6 @@ import task.Todo;
 import taskList.TaskList;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -36,7 +35,10 @@ public class Storage {
      */
     public ArrayList<Task> load() throws DukeException {
         try {
-            Scanner sc = new Scanner(new File(filePath));
+            File file = new File(this.filePath);
+            file.getParentFile().mkdirs(); // This should create a folder for the file.
+            file.createNewFile(); // This should create a new file if file is not already exists.
+            Scanner sc = new Scanner(new File(this.filePath));
             ArrayList<Task> store = new ArrayList<>(100);
             while (sc.hasNextLine()) {
                 String[] str = sc.nextLine().split("\\|");
@@ -51,7 +53,7 @@ public class Storage {
                 }
             }
             return store;
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             throw new DukeException("File not found");
         }
     }
