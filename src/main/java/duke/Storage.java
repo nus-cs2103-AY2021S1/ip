@@ -16,10 +16,18 @@ import duke.task.Todo;
  * The Storage object deals with loading tasks from the file and saving tasks in the file.
  */
 public class Storage {
+    private final String homeDirectory;
     private final String filePath;
 
-    public Storage(String filePath) {
-        this.filePath = filePath;
+    /**
+     * Initializes the Storage object.
+     *
+     * @param homeDirectory Path to the data directory.
+     * @param fileName File name of the .txt file that stores the task data.
+     */
+    public Storage(String homeDirectory, String fileName) {
+        this.homeDirectory = homeDirectory;
+        this.filePath = homeDirectory + fileName;
     }
 
     /**
@@ -30,7 +38,6 @@ public class Storage {
      */
     public void write(TaskList tasks) throws DukeException {
         try {
-            File f = new File(filePath);
             FileWriter fw = new FileWriter(filePath);
             StringBuilder textToAdd = new StringBuilder();
             for (Task task : tasks.getTaskList()) {
@@ -46,11 +53,24 @@ public class Storage {
     /**
      * Returns ArrayList of tasks found in duke.txt file.
      *
-     * @param filePath Path of the duke.txt file.
      * @return ArrayList of tasks.
      * @throws DukeException If the duke.txt file has an unknown task type. If the file cannot be loaded.
      */
-    public ArrayList<Task> load(String filePath) throws DukeException {
+    public ArrayList<Task> load() throws DukeException {
+        File dir = new File(homeDirectory);
+        File file = new File(filePath);
+
+        if (!dir.exists()) {
+            new File(homeDirectory).mkdirs();
+        }
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                throw new DukeException("Cannot load, file not found!");
+            }
+        }
+
         try {
             ArrayList<Task> taskList = new ArrayList<>();
             File f = new File(filePath);

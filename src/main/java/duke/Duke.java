@@ -15,8 +15,8 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class Duke extends Application {
-    private static final String HOME_DIRECTORY = System.getProperty("user.dir") + "/data/";
-    private static final String FILE_NAME = "duke.txt";
+    private static final String HOME_DIRECTORY = System.getProperty("user.dir") + "/data";
+    private static final String FILE_NAME = "/duke.txt";
     private Image user = new Image(this.getClass().getResourceAsStream("/images/User.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/Duke.png"));
     private ScrollPane scrollPane;
@@ -34,11 +34,11 @@ public class Duke extends Application {
      */
     public Duke() {
         ui = new Ui();
-        storage = new Storage(HOME_DIRECTORY + FILE_NAME);
+        storage = new Storage(HOME_DIRECTORY, FILE_NAME);
         try {
-            tasks = new TaskList(storage.load(HOME_DIRECTORY + FILE_NAME));
+            tasks = new TaskList(storage.load());
         } catch (DukeException e) {
-            ui.showLoadingError();
+            ui.showError(e.getMessage());
             tasks = new TaskList();
         }
     }
