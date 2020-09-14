@@ -13,12 +13,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private final String filePath = System.getProperty("user.dir")
-            + (System.getProperty("user.dir").endsWith("text-ui-test")
-            ? "\\..\\data\\taskList.txt"
-            : "\\data\\taskList.txt");
-
-    private final Duke duke = new Duke(filePath);
+    private final Duke duke = new Duke();
 
     @Override
     public void start(Stage stage) {
