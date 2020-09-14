@@ -1,14 +1,9 @@
 package duke.gui;
 
 import java.io.IOException;
-import java.util.Collections;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -39,14 +34,14 @@ public class DialogBox extends HBox {
         displayPicture.setImage(img);
     }
 
-    /**
-     * Flips the dialog box such that the ImageView is on the left and text on the right.
-     */
-    private void flip() {
-        ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
-        Collections.reverse(tmp);
-        getChildren().setAll(tmp);
-        setAlignment(Pos.TOP_LEFT);
+    private void setResponseStyle() {
+        dialog.setStyle("-fx-label-padding: 10; -fx-background-radius: 10; -fx-background-color: #66fcf1; "
+                + "-fx-max-width: 325;");
+    }
+
+    private void setExceptionStyle() {
+        dialog.setStyle("-fx-label-padding: 10; -fx-background-radius: 10; -fx-background-color: #fc493d; "
+                + "-fx-max-width: 325;");
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
@@ -55,7 +50,15 @@ public class DialogBox extends HBox {
 
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
-        db.flip();
+        db.setResponseStyle();
+        return db;
+    }
+
+    public static DialogBox getExceptionDialog(String text, Image img) {
+        assert text.contains("Ex: ") && text.length() > 4;
+        String actualText = text.substring(text.indexOf(' ') + 1);
+        var db = new DialogBox(actualText, img);
+        db.setExceptionStyle();
         return db;
     }
 }

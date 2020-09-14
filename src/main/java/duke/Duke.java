@@ -67,7 +67,7 @@ public class Duke {
             return c.execute(this.tasks, this.ui, this.storage, this.aliasMap);
         } catch (DukeException e) {
             this.ui.printWithFormatting(e.getMessage());
-            return e.getMessage();
+            return "Ex: " + e.getMessage();
         }
     }
 

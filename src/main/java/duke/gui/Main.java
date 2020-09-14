@@ -6,6 +6,7 @@ import duke.Duke;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -15,6 +16,7 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
     private Duke duke = new Duke("data/tasks.txt");
+    private Image icon = new Image(this.getClass().getResourceAsStream("/images/icon.png"));
 
     @Override
     public void start(Stage stage) {
@@ -24,6 +26,9 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            stage.setResizable(false);
+            stage.setTitle("Opus");
+            stage.getIcons().add(icon);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             fxmlLoader.<MainWindow>getController().setStage(stage);
             stage.show();

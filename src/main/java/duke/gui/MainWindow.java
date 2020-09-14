@@ -25,8 +25,9 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/prompt.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/opus_normal.png"));
+    private Image exImage = new Image(this.getClass().getResourceAsStream("/images/opus_exception.png"));
 
     private Stage stage;
 
@@ -53,10 +54,20 @@ public class MainWindow extends AnchorPane {
         assert input != null;
         String response = duke.getResponse(input);
         assert response != null;
+
+        boolean isException = response.contains("Ex: ");
+        DialogBox db;
+        if (isException) {
+            db = DialogBox.getExceptionDialog(response, exImage);
+        } else {
+            db = DialogBox.getDukeDialog(response, dukeImage);
+        }
+
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                db
         );
+
         userInput.clear();
         if (response.contains("Bye")) {
             this.stage.close();
