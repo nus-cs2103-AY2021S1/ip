@@ -13,7 +13,7 @@ The matrix is a desktop app which allows you to keep track of tasks with a Graph
 	9. Exiting the program: `exit`
 - Quick list of command examples
 
-##QuickStart
+## QuickStart
 Please ensure that you have installed the latest version of the Jar file as well as java `11` installed to run the program.
 
 Here are some example commands you can try:
@@ -45,7 +45,7 @@ Got it. I've added this task:
 Now you have 1 tasks in the list.
  ```
  
-#### Adding a Deadline: `deadline`
+ #### Adding a Deadline: `deadline`
 
 Adds a deadline to the list of tasks.
 Format: `deadline <DESCRIPTION> /by <DD-MM-YYYY HH:MM>`
@@ -61,7 +61,7 @@ Got it. I've added this task:
 Now you have 1 tasks in the list.
  ```
  
- #### Adding an Event: `event`
+#### Adding an Event: `event`
 
 Adds an event to the list of tasks.
 Format: `event <DESCRIPTION> /at <DD-MM-YYYY HH:MM>`
@@ -77,11 +77,11 @@ Got it. I've added this task:
 Now you have 2 tasks in the list.
 ```
  
- ### Display list: `list`
- To display the list fo tasks that has already been made.
- Format: `list`
+### Display list: `list`
+To display the list fo tasks that has already been made.
+Format: `list`
  
- Example of Usage:
+Example of Usage:
  `list`
  
  Expected outcome:
@@ -94,11 +94,11 @@ Here are the tasks in your list:
  
  >:stop_sign: If the list is empty a warning message will be shown.
  
-  ### Done: `done`
- Marks the task as done 
- Format: `done <Task Number in list>`
+### Done: `done`
+Marks the task as done 
+Format: `done <Task Number in list>`
  
- Example of Usage:
+Example of Usage:
  `done 1`
  
  Example of outcome:
@@ -175,9 +175,8 @@ This will exit the program.
 
 Example of usage: 'bye'
 
-##Quicklist of commands
-`todo borrow book` `deadline return book /by 23-02-2020 00:00` `event project meeting /at 01-01-2020 12:30` `done 2` `delete 2` `list` `bye` `tag 1 lol` `findtag lol`
-` help`
+## Quicklist of commands
+`todo borrow book` `deadline return book /by 23-02-2020 00:00` `event project meeting /at 01-01-2020 12:30` `done 2` `delete 2` `list` `bye` `tag 1 lol` `findtag lol` `help`
 
 
 
