@@ -61,7 +61,7 @@ class TaskListTest {
         try {
             String actual = list.deleteTask(1);
             String expected = "Noted. I've removed this task:\n" +
-                    "[T][" + CROSS + "] test content1\n" +
+                    "    [T][" + CROSS + "] test content1\n" +
                     "Now you have 1 task in the list.\n";
             assertEquals(expected, actual);
         } catch (DukeException e) {

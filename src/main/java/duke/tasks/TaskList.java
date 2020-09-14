@@ -105,7 +105,7 @@ public class TaskList {
         }
         Task task = tasks.get(index - 1);
         String output = "Noted. I've removed this task:\n";
-        output += task + "\n";
+        output += "    " + task + "\n";
         tasks.remove(index - 1);
         assert tasks.size() < size : "Item not deleted successfully";
         size--;
