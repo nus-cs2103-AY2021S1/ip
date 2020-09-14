@@ -13,18 +13,23 @@ C-3PO can add different types of tasks to your task list, including:
 C-3PO can understand date representation of the format `YYYY-MM-DD` and 
 compare multiple dates based on this feature. For date and time which cannot
 be understood by C-3PO, a raw string is used to store the date and time.
+
 ### Mark tasks as done
 C-3PO can mark tasks as done and display the task status in a list.
+
 ### List all tasks
 C-3PO is able to list all existing tasks.
+
 ### Delete tasks
 C-3PO can delete existing tasks from the task list.
+
 ### Sort tasks by different properties
 C-3PO can sort tasks by:
 * Name: in alphabetical order, from A to Z;
 * Kind: `Deadline` comes before `Event` before `Todo`;
 * Date: later understandable dates come before earlier dates, followed by string
 dates (`Deadline` before `Event`), and finally followed by `Todo` tasks.
+
 ### Save data into local storage
 C-3PO will store the data into local storage automatically after each
 operation. Every time when C-3PO starts, it automatically reads the local
