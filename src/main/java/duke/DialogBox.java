@@ -13,6 +13,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 
 /**
  * An example of a custom control using FXML.
@@ -24,6 +25,10 @@ public class DialogBox extends HBox {
     private Text dialog;
     @FXML
     private ImageView displayPicture;
+    @FXML
+    private TextFlow textContainer;
+
+    final private String DUKE_DIALOG_CSS = "-fx-background-color: #CDEDFD; -fx-border-radius: 10; -fx-background-radius: 10; -fx-padding: 10;";
 
     private DialogBox(String text, Image img) {
         try {
@@ -41,12 +46,14 @@ public class DialogBox extends HBox {
 
     /**
      * Flips the dialog box such that the ImageView is on the left and text on the right.
+     * Also changes the colour of the dialog box.
      */
     private void flip() {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
+        textContainer.setStyle(DUKE_DIALOG_CSS);
     }
 
     /**
