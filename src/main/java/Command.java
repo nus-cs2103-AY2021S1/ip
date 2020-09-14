@@ -57,6 +57,7 @@ public class Command {
         ArrayList<String> userCommandDetails = parser.parseUserCommand(userCommand, taskList.getLength());
         String response = "";
         String userCommandType = userCommandDetails.get(0);
+        assert isValidCommand(userCommandType) : "The user command is not a valid operation.";
         if (userCommandType.equals("Show")) {
             response = taskList.showList(ui);
             storage.save(taskList.getTasks());
@@ -68,6 +69,7 @@ public class Command {
         }
         if (userCommandType.equals("Add")) {
             String taskType = userCommandDetails.get(1);
+            assert isValidTaskType(taskType) : "The task type should be a todo, deadline, or event.";
             if (taskType.equals("ToDo")) {
                 String todoDescription = userCommandDetails.get(2);
                 ToDo todo = new ToDo(todoDescription);
@@ -105,5 +107,15 @@ public class Command {
             storage.save(taskList.getTasks());
         }
         return response;
+    }
+
+    private boolean isValidCommand(String userCommandType) {
+        return userCommandType.equals("Show") || userCommandType.equals("Done")
+                || userCommandType.equals("Add") || userCommandType.equals("Find")
+                || userCommandType.equals("Delete");
+    }
+
+    private boolean isValidTaskType(String taskType) {
+        return taskType.equals("ToDo") || taskType.equals("Deadline") || taskType.equals("Event");
     }
 }
