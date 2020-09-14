@@ -38,7 +38,10 @@ public class App extends AnchorPane {
      */
     @FXML
     public void initialize() {
+        // set up ui
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+
+        // set up logic
         TaskList list = new TaskList();
         storage = new Storage(list);
         evaluator = new Evaluator(storage);

@@ -24,7 +24,10 @@ public class DialogBox extends HBox {
     @FXML
     private Label dialog;
     @FXML
+    private HBox dialogContainer;
+    @FXML
     private ImageView displayPicture;
+
 
     /**
      * Constructs a DialogBox Instance.
@@ -56,6 +59,20 @@ public class DialogBox extends HBox {
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
+
+    }
+
+    /**
+     * Sets the alignment of the Dialog container.
+     *
+     * @param isUserTurn a boolean representing if the dialog box if of the user.
+     */
+    private void setDialogContainerDirection(boolean isUserTurn) {
+        if (isUserTurn) {
+            dialogContainer.setAlignment(Pos.CENTER_RIGHT);
+        } else {
+            dialogContainer.setAlignment(Pos.CENTER_LEFT);
+        }
     }
 
     /**
@@ -66,7 +83,9 @@ public class DialogBox extends HBox {
      * @return a DialogBox instance from the user.
      */
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        DialogBox userBox = new DialogBox(text, img);
+        userBox.setDialogContainerDirection(true);
+        return userBox;
     }
 
     /**
@@ -77,8 +96,9 @@ public class DialogBox extends HBox {
      * @return a DialogBox instance from Duke.
      */
     public static DialogBox getDukeDialog(String text, Image img) {
-        DialogBox dialogBox = new DialogBox(text, img);
-        dialogBox.flip();
-        return dialogBox;
+        DialogBox dukeBox = new DialogBox(text, img);
+        dukeBox.flip();
+        dukeBox.setDialogContainerDirection(false);
+        return dukeBox;
     }
 }
