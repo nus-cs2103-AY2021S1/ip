@@ -1,7 +1,6 @@
 T | 1 | read book
-T | 0 | borrow book @eyes
-D | 0 | assignment | 10/10/1998, 1900
-D | 0 | assignment | 10/10/1998, 1200 @cs2100
-E | 0 | hehe | 01/01/1998, 1900
-E | 0 | hehe | 01/01/1998, 1900 @2040
-T | 0 | lalalland @2040
+T | 0 | return book @NationalLibrary
+D | 0 | tutorial2 | 10/10/2020, 1900
+D | 0 | tutorial3 | 11/10/2020, 2000 @CS2100
+E | 0 | graded assignment | 01/01/2021, 1200
+E | 0 | labSubmission | 12/10/2020, 2359 @CS2100

@@ -50,7 +50,7 @@ public class AddCommandTest {
         try {
             addCommand.execute(taskList, ui, storage);
         } catch (DukeException e) {
-            assertEquals("Please enter dates in this format: dd/MM/yyyy timeIn24Hr"
+            assertEquals("Please enter dates in this format: dd/MM/yyyy HHmm"
                     + "\nE.g. 01/12/2020 2359", e.getMessage());
         } catch (IOException e) {
             e.printStackTrace();
@@ -78,7 +78,7 @@ public class AddCommandTest {
         try {
             addCommand.execute(taskList, ui, storage);
         } catch (DukeException e) {
-            assertEquals("Please enter dates in this format: dd/MM/yyyy timeIn24Hr"
+            assertEquals("Please enter dates in this format: dd/MM/yyyy HHmm"
                     + "\nE.g. 01/12/2020 2359", e.getMessage());
         } catch (IOException e) {
             e.printStackTrace();

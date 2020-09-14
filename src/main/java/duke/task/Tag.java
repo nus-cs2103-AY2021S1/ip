@@ -43,7 +43,7 @@ public class Tag {
      * @return tags
      */
     public static String listTags() {
-        StringBuilder reply = new StringBuilder("Here are the tasks that matched your search:");
+        StringBuilder reply = new StringBuilder("Here are your tags:");
 
         for (int i = 0; i < tags.size(); i++) {
             String tag = tags.get(i);

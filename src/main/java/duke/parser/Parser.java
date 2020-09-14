@@ -1,5 +1,8 @@
 package duke.parser;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import duke.command.AddCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
@@ -91,6 +94,43 @@ public class Parser {
             break;
         }
         return command;
+    }
+
+    /**
+     * Parses users' input into LocalDateTime object.
+     *
+     * @param input users' input
+     * @param hasTag boolean true if input contains a tag
+     * @return LocalDateTime
+     */
+    public static LocalDateTime parseTime(String input, boolean hasTag) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy'T'HHmm");
+        LocalDateTime time;
+        if (hasTag) {
+            time = LocalDateTime.parse(input.split(" @")[0]
+                    .replace(' ', 'T'), formatter);
+
+        } else {
+            time = LocalDateTime.parse(input.replace(' ', 'T'), formatter);
+        }
+        return time;
+    }
+
+    /**
+     * Parses users' input into a Tag string.
+     *
+     * @param input users' input
+     * @return Tag string
+     * @throws DukeException if tag is empty
+     */
+    public static String parseTag(String input) throws DukeException {
+        String tag;
+        try {
+            tag = input.split(" @")[1];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("Tag cannot be empty!");
+        }
+        return tag;
     }
 }
 

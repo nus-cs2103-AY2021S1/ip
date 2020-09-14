@@ -2,11 +2,12 @@ package duke.task;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import duke.exception.DukeException;
+import duke.parser.Parser;
 import duke.storage.Storage;
+import duke.ui.Ui;
 
 /**
  * contains the task list e.g., it has operations to add/delete tasks in the list
@@ -43,8 +44,7 @@ public class TaskList {
         try {
             Task task = tasks.get(index - 1); // index - 1 to match the index in ArrayList
             task.markDone();
-            reply = "Nice! I've marked this task as done:"
-                    + "\n\t" + task;
+            reply = Ui.getDoneMessage(task);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Missing or invalid item number!");
         }
@@ -68,8 +68,7 @@ public class TaskList {
         try {
             Task task = tasks.get(index - 1); // index -1 to match the index in ArrayList
             tasks.remove(index - 1); // index - 1 to match the index in ArrayList
-            reply = "Noted. I've deleted this task:"
-                    + "\n\t" + task + printTotalNumberOfTasks();
+            reply = Ui.getDeleteMessage(task) + printTotalNumberOfTasks();
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Missing or invalid item number!");
         }
@@ -94,18 +93,20 @@ public class TaskList {
         }
         Task task;
         if (taskName.contains("@")) {
-            String [] taskTokens = taskName.split(" @");
-            task = new Todo(taskTokens[0], taskTokens[1]);
-            Tag.addTagIfNew(taskTokens[1]);
+            try {
+                String[] taskTokens = taskName.split(" @");
+                task = new Todo(taskTokens[0], taskTokens[1]);
+                Tag.addTagIfNew(taskTokens[1]);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                throw new DukeException("Tag cannot be empty!");
+            }
         } else {
             task = new Todo(taskName, "");
         }
         tasks.add(task);
         storage.appendToFile(task.toText());
 
-        return "Got it. I've added this task:"
-                + "\n\t" + task
-                + printTotalNumberOfTasks();
+        return Ui.getAddSuccessMessage(task) + printTotalNumberOfTasks();
     }
 
     /**
@@ -120,29 +121,23 @@ public class TaskList {
         if (taskName.isBlank()) {
             throw new DukeException("Description cannot be only empty spaces!");
         }
-        String[] taskArray = taskName.split(" /by ");
+        String[] taskTokens = taskName.split(" /by ");
         boolean hasTag = taskName.contains("@");
         String tag = "";
-        taskName = taskArray[0];
-        String timeBy;
+        taskName = taskTokens[0];
+        LocalDateTime timeBy;
         if (hasTag) {
-            timeBy = taskArray[1].split(" @")[0]
-                    .replace(' ', 'T');
-            tag = taskArray[1].split(" @")[1];
+            timeBy = Parser.parseTime(taskTokens[1], true);
+            tag = Parser.parseTag(taskTokens[1]);
             Tag.addTagIfNew(tag);
         } else {
-            timeBy = taskArray[1]
-                    .replace(' ', 'T');
+            timeBy = Parser.parseTime(taskTokens[1], false);
         }
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy'T'HHmm");
-        Task task;
-        task = new Deadline(taskName, LocalDateTime.parse(timeBy, formatter), tag);
+        Task task = new Deadline(taskName, timeBy, tag);
         tasks.add(task);
         storage.appendToFile(task.toText());
 
-        return "Got it. I've added this task:"
-                + "\n\t" + task
-                + printTotalNumberOfTasks();
+        return Ui.getAddSuccessMessage(task) + printTotalNumberOfTasks();
     }
 
     /**
@@ -157,31 +152,24 @@ public class TaskList {
         if (taskName.isBlank()) {
             throw new DukeException("Description cannot be only empty spaces!");
         }
-        String[] taskArray = taskName.split(" /at ");
+        String[] taskTokens = taskName.split(" /at ");
         boolean hasTag = taskName.contains("@");
-        taskName = taskArray[0];
-        String timeAt;
         String tag = "";
+        taskName = taskTokens[0];
+        LocalDateTime timeAt;
         if (hasTag) {
-            timeAt = taskArray[1].split(" @")[0]
-                    .replace(' ', 'T');
-            tag = taskArray[1].split(" @")[1];
+            timeAt = Parser.parseTime(taskTokens[1], true);
+            tag = Parser.parseTag(taskTokens[1]);
             Tag.addTagIfNew(tag);
         } else {
-            timeAt = taskArray[1]
-                    .replace(' ', 'T');
+            timeAt = Parser.parseTime(taskTokens[1], false);
         }
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy'T'HHmm");
-        Task task;
-        task = new Event(taskName, LocalDateTime.parse(timeAt, formatter), tag);
-        tasks.add(task);
-        //Ui.printAddSuccess(task);
 
-        //printTotalNumberOfTasks();
+        Task task = new Event(taskName, timeAt, tag);
+        tasks.add(task);
+
         storage.appendToFile(task.toText());
-        return "Got it. I've added this task:"
-                + "\n\t" + task
-                + printTotalNumberOfTasks();
+        return Ui.getAddSuccessMessage(task) + printTotalNumberOfTasks();
     }
 
     /**

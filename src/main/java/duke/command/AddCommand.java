@@ -53,7 +53,7 @@ public class AddCommand extends Command {
 
             }
         } catch (DateTimeException e) {
-            throw new DukeException("Please enter dates in this format: dd/MM/yyyy timeIn24Hr"
+            throw new DukeException("Please enter dates in this format: dd/MM/yyyy HHmm"
                     + "\nE.g. 01/12/2020 2359");
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("Invalid description!");
