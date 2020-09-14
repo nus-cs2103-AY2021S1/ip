@@ -1,18 +1,19 @@
 package juke;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+
 import juke.task.Deadline;
 import juke.task.Event;
 import juke.task.Task;
-
-import java.time.LocalDate;
-import java.util.ArrayList;
 
 /**
  * The TaskList class holds and manages the current list of Tasks stored
  * by the user.
  */
 public class TaskList {
-    public static ArrayList<Task> list;
+
+    private static ArrayList<Task> list;
 
     /**
      * Constructs a TaskList
@@ -21,6 +22,23 @@ public class TaskList {
      */
     public TaskList(ArrayList<Task> loadedTasks) {
         this.list = loadedTasks;
+    }
+
+    /**
+     * Returns the current total taskList size.
+     * @return Total taskList size.
+     */
+    public static int getListSize() {
+        return list.size();
+    }
+
+    /**
+     * Returns the task located at the given index of the taskList.
+     * @param index Index position of task.
+     * @return The task to be returned.
+     */
+    public static Task getTask(int index) {
+        return list.get(index);
     }
 
     /**

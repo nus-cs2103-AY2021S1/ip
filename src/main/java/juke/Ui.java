@@ -8,13 +8,13 @@ import juke.command.Command;
  */
 public class Ui {
 
+    private static final String LINE = "___________________________________________________";
+
     private Parser parser;
 
     public Ui() {
         this.parser = new Parser();
     }
-
-    private static final String LINE = "___________________________________________________";
 
     /**
      * Utilises the parser to parse user commands.

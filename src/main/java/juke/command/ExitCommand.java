@@ -1,9 +1,9 @@
 package juke.command;
 
+import java.io.IOException;
+
 import juke.Storage;
 import juke.TaskList;
-
-import java.io.IOException;
 
 /**
  * Represents the command to exit the chatbot.

@@ -1,9 +1,9 @@
 package juke.command.update;
 
+import java.time.LocalDate;
+
 import juke.Storage;
 import juke.TaskList;
-
-import java.time.LocalDate;
 
 /**
  * Represents the command to update both the task description and date.

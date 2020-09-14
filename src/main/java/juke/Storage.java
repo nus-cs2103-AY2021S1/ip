@@ -1,11 +1,5 @@
 package juke;
 
-import juke.exception.UnknownTaskException;
-import juke.task.Deadline;
-import juke.task.Event;
-import juke.task.Task;
-import juke.task.Todo;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -14,6 +8,14 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import juke.exception.UnknownTaskException;
+import juke.task.Deadline;
+import juke.task.Event;
+import juke.task.Task;
+import juke.task.Todo;
+
+
 
 /**
  * Represents a Storage class that handles all the hard-disk storage of the Tasklist.
@@ -85,8 +87,8 @@ public class Storage {
         assert Files.exists(Paths.get(root, "data", "dukeTaskList.txt")) : "File does not exist";
 
         FileWriter fw = new FileWriter(Paths.get(root, "data", "dukeTaskList.txt").toString());
-        for (int i = 0; i < TaskList.list.size(); i++) {
-            Task task = TaskList.list.get(i);
+        for (int i = 0; i < TaskList.getListSize(); i++) {
+            Task task = TaskList.getTask(i);
             String toAdd = task.taskSaver();
             fw.write(toAdd + "\n");
         }
