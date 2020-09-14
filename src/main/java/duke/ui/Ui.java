@@ -141,13 +141,13 @@ public class Ui {
     /**
      * Prints the task list to the user.
      *
-     * @param tasks Task list.
+     * @param taskList Task list.
      * @param extra Extra word to add in, if any.
      * @return Show task list message.
      */
-    public String showTaskList(TaskList tasks, String extra) {
+    public String showTaskList(TaskList taskList, String extra) {
         String header = String.format(DISPLAY_TASKS_MESSAGE, extra);
-        return printNumberedArray(tasks.getTasks().toArray(), header);
+        return printNumberedArray(taskList.getTasks().toArray(), header);
     }
 
     /**

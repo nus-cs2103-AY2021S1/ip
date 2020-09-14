@@ -12,12 +12,12 @@ public class ExitCommand extends Command {
     /**
      * Terminates the program.
      *
-     * @param tasks Task List object.
+     * @param taskList TaskList object.
      * @param ui User Interface object.
      * @param storage Storage object.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         return ui.goodbye();
     }
 

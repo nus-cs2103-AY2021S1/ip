@@ -15,19 +15,19 @@ public abstract class SimpleCommand extends Command {
      *
      * @param input Input string.
      * @param simpleCommandType Simple command type
-     * @param tasks TaskList.
+     * @param taskList TaskList.
      * @throws InvalidSimpleCommandException When the user input is not a number.
      * @throws InvalidTaskNumberException When the number is not within the size of the TaskList.
      */
-    protected void checkValidity(String input, SimpleCommandType simpleCommandType, TaskList tasks)
+    protected void checkValidity(String input, SimpleCommandType simpleCommandType, TaskList taskList)
         throws InvalidSimpleCommandException, InvalidTaskNumberException {
         if (!isNumber(input)) {
             throw new InvalidSimpleCommandException(simpleCommandType);
         }
 
         int digit = Integer.parseInt(input);
-        if (!tasks.checkIfValid(digit)) {
-            throw new InvalidTaskNumberException(tasks.size());
+        if (!taskList.checkIfValid(digit)) {
+            throw new InvalidTaskNumberException(taskList.size());
         }
     }
 

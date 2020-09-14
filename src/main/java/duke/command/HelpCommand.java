@@ -25,12 +25,12 @@ public class HelpCommand extends Command {
     /**
      * Displays the list of commands.
      *
-     * @param tasks Task List object.
+     * @param taskList TaskList object.
      * @param ui User Interface object.
      * @param storage Storage object.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         return ui.printNumberedArray(listOfCommands, HEADER);
     }
 }

@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.exception.DuplicateTaskException;
 import duke.exception.EmptyTimeException;
 import duke.exception.FileUpdateFailException;
 import duke.exception.InvalidDeadlineException;
@@ -30,20 +31,21 @@ public class AddEventCommand extends AddCommand {
     /**
      * Adds a {@code Event} task into the {@code TaskList}.
      *
-     * @param tasks Task List object.
+     * @param taskList TaskList object.
      * @param ui User Interface object.
      * @param storage Storage object.
      * @return Response message to user.
      * @throws EmptyTimeException If deadline portion of task is empty.
-     * @throws InvalidEventException If input does not follow the format of {@code Event} tasks.
+     * @throws InvalidEventException If input does not follow the format of an {@code Event} task.
      * @throws InvalidDeadlineException Not thrown here in this method.
      * @throws FileUpdateFailException If file in storage fails to get updated.
+     * @throws DuplicateTaskException If the new task to be added already exists in the current {@code TaskList}.
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws EmptyTimeException, InvalidEventException,
-        InvalidDeadlineException, FileUpdateFailException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws EmptyTimeException, InvalidEventException,
+        InvalidDeadlineException, FileUpdateFailException, DuplicateTaskException {
         String[] resultArr = TaskParser.parseTaskDescription(description, TaskType.EVENT);
         String taskDetails = resultArr[0];
         String timeFrame = resultArr[1];
-        return addTask(new Event(taskDetails, timeFrame), tasks, ui, storage);
+        return addTask(new Event(taskDetails, timeFrame), taskList, ui, storage);
     }
 }

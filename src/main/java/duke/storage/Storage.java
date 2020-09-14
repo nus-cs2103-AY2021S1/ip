@@ -91,7 +91,7 @@ public class Storage {
     /**
      * Loads the tasks from the taskList if header is not empty.
      *
-     * @param taskList Task List.
+     * @param taskList TaskList.
      * @param bufferedReader BufferedReader.
      * @throws IOException If there is an error when reading the file.
      * @throws InvalidFileFormatException File is formatted wrongly.

@@ -10,6 +10,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import duke.exception.DukeException;
+import duke.exception.DuplicateTaskException;
 import duke.exception.EmptyTimeException;
 import duke.exception.InvalidDateException;
 import duke.exception.InvalidDeadlineException;
@@ -29,20 +30,20 @@ public class AddDeadlineCommandTest extends CommandTests {
         try {
             Deadline ct1 = new Deadline("Test", DateTimeParser.getDateTime("2020-08-23"));
             Deadline ct2 = new Deadline("test2", DateTimeParser.getDateTime("2020-08-23T10:15"));
-            Deadline ct3 = new Deadline("test2", DateTimeParser.getDateTime("22:15"));
+            Deadline ct3 = new Deadline("test3", DateTimeParser.getDateTime("22:15"));
             AddDeadlineCommand cmd1 = new AddDeadlineCommand("Test /by 2020-08-23");
             AddDeadlineCommand cmd2 = new AddDeadlineCommand("test2 /by 2020-08-23 10:15");
             AddDeadlineCommand cmd3 = new AddDeadlineCommand("test2 /by 2020-08-23T10:15");
             AddDeadlineCommand cmd4 = new AddDeadlineCommand("test2 /by 2020-08-23 10:15:33");
-            AddDeadlineCommand cmd5 = new AddDeadlineCommand("test2 /by22:15");
-            // Tests
+            AddDeadlineCommand cmd5 = new AddDeadlineCommand("test3 /by22:15");
+            // DateTimeFormat
             assertEquals(ui.addTask(ct1, 1), cmd1.execute(taskList, ui, storage));
             assertEquals(1, storage.getTasks().size());
             assertEquals(ui.addTask(ct2, 2), cmd2.execute(taskList, ui, storage));
-            assertEquals(ui.addTask(ct2, 3), cmd3.execute(taskList, ui, storage));
-            assertEquals(ui.addTask(ct2, 4), cmd4.execute(taskList, ui, storage));
-            assertEquals(ui.addTask(ct3, 5), cmd5.execute(taskList, ui, storage));
-            assertEquals(5, storage.getTasks().size());
+            assertThrows(DuplicateTaskException.class, () -> cmd3.execute(taskList, ui, storage));
+            assertEquals(ui.addTask(ct2, 3), cmd4.execute(taskList, ui, storage));
+            assertEquals(ui.addTask(ct3, 4), cmd5.execute(taskList, ui, storage));
+            assertEquals(4, storage.getTasks().size());
         } catch (DukeException e) {
             System.out.println(Arrays.toString(e.getStackTrace()));
             fail();

@@ -28,7 +28,7 @@ public class DoneCommand extends SimpleCommand {
     /**
      * Executes marking of task as done command.
      *
-     * @param tasks Task List object.
+     * @param taskList TaskList object.
      * @param ui User Interface object.
      * @param storage Storage object.
      * @return Response message to user.
@@ -37,17 +37,17 @@ public class DoneCommand extends SimpleCommand {
      * @throws TaskAlreadyDoneException If task has already been marked done before.
      * @throws FileUpdateFailException If file in storage fails to get updated.
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidSimpleCommandException,
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws InvalidSimpleCommandException,
         InvalidTaskNumberException, TaskAlreadyDoneException, FileUpdateFailException {
-        checkValidity(input, SimpleCommandType.DONE, tasks);
+        checkValidity(input, SimpleCommandType.DONE, taskList);
         int digit = Integer.parseInt(input);
-        Task current = tasks.get(digit - 1);
+        Task current = taskList.get(digit - 1);
 
         if (current.isDone()) {
             throw new TaskAlreadyDoneException();
         }
         current.markAsDone();
-        storage.updateFile(tasks);
+        storage.updateFile(taskList);
         return ui.markTaskAsDone(current);
     }
 }
