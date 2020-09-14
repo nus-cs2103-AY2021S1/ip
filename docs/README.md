@@ -56,7 +56,7 @@ Example of usage:
 Expected outcome:
 
 >Yes! I have successfully added:
-<br/>[T][✘] Walk the dog
+<br/>[T][✗] Walk the dog
 
 ### 2. `deadline` - Add new deadline
 Add a new deadline task with description and time. <br/>
