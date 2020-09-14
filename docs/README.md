@@ -247,7 +247,7 @@ Now you have 6 tasks in the list.
 
 ### 10. Sort
 
-Sorts the task list by oldest date first. 
+Sorts the task list by earliest date first. 
 
 **Usage**
 
