@@ -53,7 +53,7 @@ public class Duke extends Application {
         userInput = new TextField();
         sendButton = new Button("Send");
 
-        font = new Font("Calibri", 14);
+        font = new Font("Consolas", 14);
 
         setStyle(stage);
         setActions();
@@ -75,7 +75,7 @@ public class Duke extends Application {
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);
 
-        mainLayout.setPrefSize(400.0, 600.0);
+        mainLayout.setPrefSize(500.0, 600.0);
 
         scrollPane.setPrefSize(385, 535);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
