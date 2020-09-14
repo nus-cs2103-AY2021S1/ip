@@ -95,3 +95,9 @@ Examples:
 Displays the number of tasks completed in the past 7 days.
 
 Format: `stats`
+
+### <a id="bye"></a> Exiting the program: `bye`
+
+Exits the program.
+
+Format: `bye`
