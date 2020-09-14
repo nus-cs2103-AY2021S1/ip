@@ -1,9 +1,6 @@
 package duke.storage;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -29,6 +26,16 @@ public class Storage {
     public Storage(String filePath) {
         try {
             this.filePath = filePath;
+            File directory = new File("./data");
+            if (!directory.exists()) {
+                directory.mkdirs();
+            }
+            File file = new File("./data/duke.txt");
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                System.out.println("There are some errors when retrieving data!");
+            }
             inputSource = new Scanner(new File(filePath));
         } catch (FileNotFoundException e) {
             System.out.println("File: " + filePath + " cannot be found!");
