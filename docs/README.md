@@ -2,7 +2,7 @@
 
 ## Sample App Demo
 
-![image](Ui.gif)
+![image](../other/app-preview.gif)
 
 ## Features 
 
