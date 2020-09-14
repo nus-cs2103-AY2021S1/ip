@@ -1,29 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root alignment="TOP_RIGHT" fillHeight="false" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefWidth="400.0" style="-fx-background-color: dbd0db;" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" style="-fx-background-color: cfbacf;" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label fx:id="dialog" cache="true" centerShape="false" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="99.0" text="Label" wrapText="true">
-         <font>
-            <Font name="Cambria" size="12.0" />
-         </font>
-         <HBox.margin>
-            <Insets right="5.0" />
-         </HBox.margin></Label>
-        <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" layoutX="100.0" pickOnBounds="true" preserveRatio="true">
-         <HBox.margin>
-            <Insets left="5.0" right="5.0" />
-         </HBox.margin></ImageView>
+        <Label fx:id="dialog" lineSpacing="1.0" minHeight="-Infinity" style="-fx-background-color: dbd0db; -fx-background-radius: 5; -fx-padding: 10;" text="Label" textOverrun="CLIP" wrapText="true">
+            <font>
+                <Font name="Arial" size="13.0" />
+            </font>
+            <HBox.margin>
+                <Insets left="5.0" right="5.0"/>
+            </HBox.margin>
+        </Label>
+        <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true">
+            <HBox.margin>
+                <Insets left="5.0" />
+            </HBox.margin>
+        </ImageView>
     </children>
     <padding>
         <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
     </padding>
-   <opaqueInsets>
-      <Insets bottom="5.0" top="5.0" />
-   </opaqueInsets>
 </fx:root>

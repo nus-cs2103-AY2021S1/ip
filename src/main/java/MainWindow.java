@@ -1,3 +1,4 @@
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -13,6 +14,7 @@ import javafx.scene.layout.VBox;
  */
 public class MainWindow extends AnchorPane {
 
+    private final String EXIT_STRING = "Bye bye!!! See you again next time :)";
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -40,7 +42,7 @@ public class MainWindow extends AnchorPane {
     public void setDuke(Duke d) {
         duke = d;
     }
-
+    
     /**
      * Creates two dialog boxes, one echoing user input and the other
      * containing Duke's reply and then appends them to
@@ -50,10 +52,14 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
+        boolean isEnd = response.equals(EXIT_STRING);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+        if (isEnd) {
+            Platform.exit();
+        }
     }
 }
