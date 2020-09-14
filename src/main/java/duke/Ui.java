@@ -50,16 +50,6 @@ public class Ui {
     }
 
     /**
-     * Gets and returns user inputs to be parsed.
-     *
-     * @return String to be parse
-     */
-    public String getInput() {
-        String nextLine = sc.nextLine();
-        return nextLine;
-    }
-
-    /**
      * Returns welcome message to user.
      *
      * @return Welcome message.
@@ -184,6 +174,7 @@ public class Ui {
 
     /**
      * Returns UI message after tasks are found using a keyword.
+     *
      * @param foundTasks Task list with tasks found.
      * @param keyword Keyword used to find tasks.
      * @return UI message for found tasks.

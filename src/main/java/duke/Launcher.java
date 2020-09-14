@@ -2,6 +2,8 @@ package duke;
 
 import javafx.application.Application;
 
+//@@author Jeffry Lum
+//Guides for SE Student Project: Java FX Tutorial
 /**
  * A launcher class to workaround classpath issues.
  */

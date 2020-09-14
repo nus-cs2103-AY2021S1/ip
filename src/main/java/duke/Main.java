@@ -8,6 +8,8 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+//@@author Jeffry Lum
+//Guides for SE Student Project: Java FX Tutorial
 /**
  * A GUI for Duke using FXML.
  */
@@ -28,6 +30,7 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
+            stage.setTitle("Chatty-Bot");
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

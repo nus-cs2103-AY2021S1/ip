@@ -39,7 +39,7 @@ public class Storage {
      *
      * @param currTaskList Task list of bot.
      * @return Message after loading data.
-     * @throws InvalidCommand Unable to read or create data file.
+     * @throws FileError Unable to read or create data file.
      */
     public String loadData(TaskList currTaskList) throws FileError {
         String loadingDataFileMessage = this.checkHistory();
@@ -56,7 +56,7 @@ public class Storage {
      * Creates the relevant directory and data file if user do not have them.
      *
      * @return Message indicating directory and/or datafile found (if applicable).
-     * @throws InvalidCommand Unable to create directory or data file.
+     * @throws FileError Unable to create directory or data file.
      */
     private String checkHistory() throws FileError {
         String overallHistoryMessage = "";
@@ -69,7 +69,7 @@ public class Storage {
      * Adds the new task into storage file.
      *
      * @param newTask New Task that has been added.
-     * @throws InvalidCommand Unable write to file.
+     * @throws FileError Unable write to file.
      */
     public void addTask(Task newTask) throws InvalidCommand, FileError {
         String retrieveTaskType = checkTaskType(newTask);
@@ -84,7 +84,7 @@ public class Storage {
      * @param editedTask Task to be edited.
      * @param taskIndex Index of task in the task list.
      * @param currentList Current task list used by bot.
-     * @throws InvalidCommand Unable to remove old data file.
+     * @throws FileError Unable to remove old data file.
      */
     public void editTask(Task editedTask, int taskIndex, TaskList currentList) throws FileError {
         String taskType = checkTaskType(editedTask);
@@ -97,11 +97,11 @@ public class Storage {
     /**
      * Updates the tagged task in the storage file.
      *
-     * @param editedTask
-     * @param taskIndex
-     * @param currentList
-     * @param tagWord
-     * @throws InvalidCommand tagged task error
+     * @param editedTask Task that has been tagged.
+     * @param taskIndex Index of task that has been edited in task list.
+     * @param currentList Current TaskList in use by bot.
+     * @param tagWord Tag word used for tagging.
+     * @throws FileError Unable to read or write to storage file.
      */
     public void editTaggedTask(Task editedTask, int taskIndex, TaskList currentList, String tagWord)
             throws FileError {
@@ -116,7 +116,7 @@ public class Storage {
      * Deletes task from storage file when it is removed from task list.
      *
      * @param removedTask Task to be removed.
-     * @throws InvalidCommand Unable to remove old data file.
+     * @throws FileError Unable to remove old data file.
      */
     public void deleteTask(Task removedTask) throws FileError {
         String taskType = checkTaskType(removedTask);
