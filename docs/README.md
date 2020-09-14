@@ -69,7 +69,7 @@ eg. `event task3 /by 14/9/2020`
 
 ![event](./screenshot/event.png)
 
-
+### 2. List
 #### 2a. **`list`** - List all task(s) in the task list. 
 **Example of Usage:** `list`
 
@@ -86,7 +86,7 @@ eg. `event task3 /by 14/9/2020`
 ![list_date](./screenshot/listdate.png)
 
 
-#### 3. **`done`** - Mark a task as completed.
+### 3. **`done`** - Mark a task as completed.
 **Example of Usage:** `done 1`
 
 Marks the task of *index 1* from the task list as completed. The list shows a tick instead of cross.
@@ -96,7 +96,7 @@ Marks the task of *index 1* from the task list as completed. The list shows a ti
 ![done](./screenshot/done.png)
 
 
-#### 4. **`delete`** - Removes a task from the task list.
+### 4. **`delete`** - Removes a task from the task list.
 **Example of Usage:** `delete 1`
 
 Removes the task of *index 1* from the task list.
@@ -106,7 +106,7 @@ Removes the task of *index 1* from the task list.
 ![delete](./screenshot/delete.png)
 
 
-#### 5. **`find`** - Searches for all the task(s) that contains the keyword(s).
+### 5. **`find`** - Searches for all the task(s) that contains the keyword(s).
 **Example of Usage:** `find task`
 
 Finds all the task that contains the word *task* from the task list.
@@ -116,7 +116,7 @@ Finds all the task that contains the word *task* from the task list.
 ![find](./screenshot/find.png)
 
 
-#### 6. **`help`** - Shows the list of available commands and their instructions.
+### 6. **`help`** - Shows the list of available commands and their instructions.
 **Example of Usage:** `help`
 
 **Expected outcome:**
@@ -124,7 +124,7 @@ Finds all the task that contains the word *task* from the task list.
 ![help](./screenshot/help.png)
 
 
-#### 7. **`bye`** - Use when you want to exit the application.
+### 7. **`bye`** - Use when you want to exit the application.
 **Example of Usage:** `bye`
 
 **Expected outcome:** A bye message appears and application closes after 1.5 seconds.
