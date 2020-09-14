@@ -81,45 +81,38 @@ public class TaskList {
     public Task addTodo(String name) {
         assert !name.isBlank();
         Todo todo = new Todo(name, false);
-        addTask(todo);
+        taskList.add(todo);
         return todo;
     }
 
     /**
      * Adds a deadline to the list of tasks and returns it.
      * @param name the name of the deadline task
-     * @param by the date the deadline is due
+     * @param deadlineDate the date the deadline is due
      * @return the newly added deadline
      */
-    public Task addDeadline(String name, Date by) {
+
+    public Task addDeadline(String name, Date deadlineDate) {
+
         assert !name.isBlank();
-        assert by != null;
-        Deadline deadline = new Deadline(name, false, by);
-        addTask(deadline);
+        assert deadlineDate != null;
+        Deadline deadline = new Deadline(name, false, deadlineDate);
+        taskList.add(deadline);
         return deadline;
     }
 
     /**
      * Adds an event to the list of tasks and returns it.
      * @param name the name of the event task
-     * @param at the date the event is on
+     * @param eventDate the date the event is on
      * @return the newly added event
      */
-    public Task addEvent(String name, Date at) {
+    public Task addEvent(String name, Date eventDate) {
         assert !name.isBlank();
-        assert at != null;
-        Event event = new Event(name, false, at);
-        addTask(event);
+        assert eventDate != null;
+        Event event = new Event(name, false, eventDate);
+        taskList.add(event);
         return event;
-    }
-
-    /**
-     * Adds a task to the list of tasks.
-     * @param task the task to be added
-     */
-    public void addTask(Task task) {
-        assert taskList != null;
-        taskList.add(task);
     }
 
     /**

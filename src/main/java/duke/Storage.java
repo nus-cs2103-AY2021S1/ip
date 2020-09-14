@@ -94,18 +94,13 @@ public class Storage {
     private String formatTask(Task task) {
         String name = task.getName();
         int isComplete = task.getStatus() ? 1 : 0;
-        String type;
         if (task.getType() == TaskType.DEADLINE) {
-            type = "D";
+            return String.format("%s|%d|%s|%s", "D", isComplete,
+                    name, DateFormat.formatDate(task.getDate()));
         } else if (task.getType() == TaskType.TODO) {
-            type = "T";
+            return String.format("%s|%d|%s", "T", isComplete, name);
         } else {
-            type = "E";
-        }
-        if (type.equals("T")) {
-            return String.format("%s|%d|%s", type, isComplete, name);
-        } else {
-            return String.format("%s|%d|%s|%s", type, isComplete,
+            return String.format("%s|%d|%s|%s", "E", isComplete,
                     name, DateFormat.formatDate(task.getDate()));
         }
     }
