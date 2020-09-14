@@ -25,8 +25,8 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             scene.getStylesheets().add(CSS_FILE_PATH);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.setTitle(BOT_NAME);
+            fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

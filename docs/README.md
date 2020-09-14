@@ -8,7 +8,7 @@ User Interface (GUI).
 --------------------------------------------------------------------------------------------------------------------
 ## Table of Contents
 - [Getting Started](#getting-started)
-- [About Intrubot's Features](#Features)
+- [About Intrubot's Features](#features)
     - [Add tasks](#add-tasks)
     - [List items](#list-items)
     - [Find items](#find-items)
@@ -24,8 +24,8 @@ User Interface (GUI).
     - [trivia](#trivia)
     - [list](#list)
     - [clear](#clear)
-    - [done](#done)
     - [find](#find)
+    - [done](#done)
     - [delete](#delete)
     - [bye](#bye)
 
@@ -36,7 +36,7 @@ User Interface (GUI).
 
 ![Intrubot_Screenshot](Ui.png)
 
-## Features 
+##Features 
 
 #### Add Tasks 
 * Save 3 kinds of tasks to your task list: todo, deadline, event. 
@@ -124,7 +124,7 @@ Now you have 3 tasks in the list
 Adds a trivia to the list. Trivia contains a question and an answer.
 
 Format:
-trivia <question> /ans <ans>
+`trivia <question> /ans <ans>`
 
 Example of usage: 
 
@@ -161,6 +161,24 @@ Format:
 Expected outcome:
 ```
 Task list cleared
+```
+
+### `find` 
+
+Find items in the list with matching description.
+
+Format:
+`find <String>`
+
+Example of usage: 
+
+`find to`
+
+Expected outcome:
+```
+HAI. Here are matching tasks:
+1. [E][✘] flight to korea (at: Jun 17 2020)
+2. [T][✓] go to supermarket
 ```
 
 
