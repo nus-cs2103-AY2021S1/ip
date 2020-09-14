@@ -1,11 +1,11 @@
 # Duke User Guide
 
-## Overview
+## <ins>Overview</ins>
 Duke is an interactive chat-bot that helps to organize your tasks through a to-do list.
 
 <img src="https://raw.githubusercontent.com/eugene3231/ip/master/docs/Ui.png" width="400">
 
-## Quick Start Guide
+## <ins>Quick Start Guide</ins>
 Prerequisites:
 
 * Java JDK 11
@@ -15,9 +15,9 @@ Running Duke:
   1. [Download](https://github.com/eugene3231/ip/releases) *`Duke.jar`*
   2. Run *`Duke.jar`*
   3. The GUI should appear and you can start talking to Duke!
-  
 
-## Features 
+
+## <ins>Features</ins>
 
 ### Add tasks
 * Creates a task of type listed below and add it to the task list.
@@ -44,7 +44,7 @@ Running Duke:
 * Undos the previous user command.
 
 
-## Usage
+## <ins>Usage</ins>
 
 ### 1. `todo` - Add new todo
 Add a new todo task with description. </br>
