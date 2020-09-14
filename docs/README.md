@@ -56,7 +56,7 @@ Example of usage:
 Expected outcome:
 
 > Yes! I have successfully added:
-</br> [T][✘] Walk the dog
+</br>[T][✘] Walk the dog
 
 ### 2. `deadline` - Add new deadline
 Add a new deadline task with description and time. </br>
@@ -68,7 +68,7 @@ Example of usage:
 Expected outcome:
 
 > Yes! I have successfully added:
-</br> [D][✘] Assignment (by: 10 Oct 2020, 06:00 PM)
+</br>[D][✘] Assignment (by: 10 Oct 2020, 06:00 PM)
 
 ### 3. `event` - Add new event
 Add a new event task with description and time. </br>
@@ -80,7 +80,7 @@ Example of usage:
 Expected outcome:
 
 > Yes! I have successfully added: 
-</br> [E][✘] Meeting (at: 10pm)
+</br>[E][✘] Meeting (at: 10pm)
 
 ### 4. `delete` - Delete a task
 Delete a task by specifing its number in the task list.
@@ -92,7 +92,7 @@ Example of usage:
 Expected outcome:
 
 > Alright! I've removed this task: 
-</br> [E][✔] Google Career Talk (at: U-Town)
+</br>[E][✔] Google Career Talk (at: U-Town)
 
 ### 5. `list` - List all tasks
 Display all tasks currently in the list.
@@ -104,11 +104,11 @@ Example of usage:
 Expected outcome:
 
 > Here are the tasks in your list:</br>
-</br> 1. [D][✔] Send Email (by: 13 Sept 2020, 06:00 PM)
-</br> 2. [E][✘] Software Engineering class (at: 3pm)
-</br> 3. [D][✘] Submission of Essay (by: 6pm on Thursday)
-</br> 4. [D][✘] Assignment (by: 10 Oct 2020, 06:00 PM)
-</br> </br> You have 4 task(s) in the list
+</br>1. [D][✔] Send Email (by: 13 Sept 2020, 06:00 PM)
+</br>2. [E][✘] Software Engineering class (at: 3pm)
+</br>3. [D][✘] Submission of Essay (by: 6pm on Thursday)
+</br>4. [D][✘] Assignment (by: 10 Oct 2020, 06:00 PM)
+</br></br>You have 4 task(s) in the list
 
 ### 6. `clear` - Clear all tasks
 Delete all tasks in the list.
@@ -131,7 +131,7 @@ Example of usage:
 Expected outcome:
 
 > I have found the matching tasks in your list:
-</br> [D][✘] Submission of Essay (by: 6pm on Thursday)
+</br>[D][✘] Submission of Essay (by: 6pm on Thursday)
 
 ### 8. `done` - Completes a task
 Mark a task as done by specifing its number in the task list.
@@ -143,7 +143,7 @@ Example of usage:
 Expected outcome:
 
 > Good job! You completed:
-</br> [D][✔] Assignment (by: 10 Oct 2020, 06:00 PM)
+</br>[D][✔] Assignment (by: 10 Oct 2020, 06:00 PM)
 
 ### 9. `undo` - Undo the previous command
 Example of usage: 
