@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.task.FixedDurationTaskWithDateTime;
 import duke.task.Task;
 import duke.task.FixedDurationTask;
 import duke.util.TaskList;
@@ -30,9 +31,13 @@ public class StartTaskCommand implements Command {
                 throw new DukeException("That is not a fixed duration task!");
             }
             FixedDurationTask fixedDurationTask = (FixedDurationTask) task;
-            fixedDurationTask.setStartDateTimeFromString(startAt);
+            String[] rawDesc = fixedDurationTask.getDescription().split(" / ");
+            String description = rawDesc[0];
+            int duration = Integer.parseInt(rawDesc[1]);
+            Task newTask = new FixedDurationTaskWithDateTime(description, duration, startAt);
+            tasks.getList().set(index - 1, newTask);
             storage.update(tasks.getList());
-            String msg = ui.getSuccessMessage("start", task);
+            String msg = ui.getSuccessMessage("start", newTask);
             ui.sendMessage(msg);
             return msg;
         } catch (DukeException e) {

@@ -9,6 +9,9 @@ import java.util.Comparator;
 import java.util.Optional;
 import java.util.stream.IntStream;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 /**
  * The TaskList encapsulates the list of tasks and is in charge of
  * creating tasks, adding or removing tasks from the list, marking
@@ -82,7 +85,7 @@ public class TaskList {
             try {
                 split = description.split(" /by ");
                 desc = split[0];
-                String by = split[1];
+                String by = split[split.length - 1];
                 task = new Deadline(desc, by);
             } catch (IndexOutOfBoundsException ioobe) {
                 throw new DukeException("Invalid " + type + " description!");
@@ -92,7 +95,7 @@ public class TaskList {
             try {
                 split = description.split(" /at ");
                 desc = split[0];
-                String at = split[1];
+                String at = split[split.length - 1];;
                 task = new Event(desc, at);
             } catch (IndexOutOfBoundsException ioobe) {
                 throw new DukeException("Invalid " + type + " description!");
@@ -102,7 +105,7 @@ public class TaskList {
             try {
                 split = description.split(" /for ");
                 desc = split[0];
-                String duration = split[1];
+                String duration = split[split.length - 1];
                 task = new FixedDurationTask(desc, duration);
             } catch (IndexOutOfBoundsException ioobe) {
                 throw new DukeException("Invalid " + type + " description!");
@@ -237,42 +240,15 @@ public class TaskList {
         }
     }
 
-    private void sortByName() {
+    public void sortByName() {
         list.sort(Comparator.comparing(Task::getDescription));
     }
 
-    private void sortByType() {
+    public void sortByType() {
         list.sort(Comparator.comparing(Task::getType));
     }
 
-    private void sortByDateTime() {
-        list.sort(
-                (Task t1, Task t2) -> {
-                    if (t1 instanceof TaskWithDateTime && t2 instanceof TaskWithDateTime) {
-                        TaskWithDateTime dt1 = (TaskWithDateTime) t1;
-                        TaskWithDateTime dt2 = (TaskWithDateTime) t2;
-                        if (dt1.getDate().equals(dt2.getDate())) {
-                            if (dt1.getTime().isPresent() && dt2.getTime().isPresent()) {
-                                return dt1.getTime().get().compareTo(dt2.getTime().get());
-                            } else if (dt1.getTime().isPresent()) {
-                                return -1;
-                            } else if (dt2.getTime().isPresent()){
-                                return 1;
-                            } else {
-                                return 0;
-                            }
-                        } else {
-                            return dt1.getDate().compareTo(dt2.getDate());
-                        }
-                    }
-                    if (t1 instanceof TaskWithDateTime) {
-                        return -1;
-                    } else if (t2 instanceof TaskWithDateTime) {
-                        return 1;
-                    } else {
-                        return 0;
-                    }
-                }
-        );
+    public void sortByDateTime() {
+        list.sort(new TaskDateTimeComparator());
     }
 }

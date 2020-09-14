@@ -1,10 +1,6 @@
 package duke.util;
 
-import duke.task.Task;
-import duke.task.Todo;
-import duke.task.Event;
-import duke.task.Deadline;
-import duke.task.FixedDurationTask;
+import duke.task.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -53,13 +49,11 @@ public class Storage {
 
     /**
      * Reads the txt file and creates the tasks accordingly. This allows
-     * users to retrieve their last edited task list to resume usage. Interestingly,
-     * csv files should be usable as the duke.txt replacement since the format of
-     * saving and writing are comma-separated.
+     * users to retrieve their last edited task list to resume usage.
      *
-     *     Subtype , Description , DateTime
+     *     Subtype|Description|DateTime
      *
-     * Subtypes are single letters - T/D/E
+     * Subtypes are single letters - T/D/E/F
      * Descriptions are strings
      * DateTime are raw date time strings for Deadline and Event only.
      * @return the list of tasks to be loaded into TaskList.
@@ -71,9 +65,8 @@ public class Storage {
         try {
             Scanner sc = new Scanner(file);
             while (sc.hasNext()) {
-                String[] t = sc.nextLine().split(",");
+                String[] t = sc.nextLine().split("\\|");
                 assert List.of("T", "E", "D", "F").contains(t[0]) : "Subtype should be T, E, F, or D only";
-
                 switch (t[0]) {
                 case "T":
                     list.add(new Todo(t[2], t[1].equals("1")));
@@ -85,12 +78,14 @@ public class Storage {
                     list.add(new Event(t[2], t[3], t[1].equals("1")));
                     break;
                 case "F":
-                    FixedDurationTask fdt = new FixedDurationTask(t[2], Integer.parseInt(t[3]));
+                    FixedDurationTask fdt;
+                    if (t.length > 4) {
+                        fdt = new FixedDurationTaskWithDateTime(t[2], Integer.parseInt(t[3]), t[4]);
+                    } else {
+                        fdt = new FixedDurationTask(t[2], Integer.parseInt(t[3]));
+                    }
                     if (t[1].equals("1")) {
                         fdt.markAsDone();
-                    }
-                    if (!(t[4].equals(" "))) {
-                        fdt.setStartDateTimeFromString(t[4]);
                     }
                     list.add(fdt);
                     break;
@@ -116,14 +111,14 @@ public class Storage {
             FileWriter fw = new FileWriter(file);
             for (Task t: list) {
                 StringBuilder toWrite = new StringBuilder(
-                        String.format("%s,%s", t.getType(), (t.getDone() ? "1" : "0")));
+                        String.format("%s|%s", t.getType(), (t.getDone() ? "1" : "0")));
                 String desc = t.getDescription();
                 if (List.of("D", "E", "F").contains(t.getType())) {
-                    toWrite.append(",");
+                    toWrite.append("|");
                     String[] descSplit = desc.split(" / ");
-                    toWrite.append(String.join(",", descSplit));
+                    toWrite.append(String.join("|", descSplit));
                 } else {
-                    toWrite.append(",").append(desc);
+                    toWrite.append("|").append(desc);
                 }
                 fw.write(toWrite + "\n");
             }
