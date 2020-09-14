@@ -98,7 +98,7 @@ public class Deadline extends Task {
      */
     public String generateByFormat() {
         if (byDateTime != null) {
-            return byDateTime.format(DateTimeFormatter.ofPattern("MMM dd yyyy, K:mm a"));
+            return byDateTime.format(DateTimeFormatter.ofPattern("MMM dd yyyy, h:mm a"));
         } else if (byDate != null) {
             return byDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
         } else {

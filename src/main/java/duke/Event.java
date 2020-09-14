@@ -98,7 +98,7 @@ public class Event extends Task {
      */
     public String generateAtFormat() {
         if (atDateTime != null) {
-            return atDateTime.format(DateTimeFormatter.ofPattern("MMM dd yyyy, K:mm a"));
+            return atDateTime.format(DateTimeFormatter.ofPattern("MMM dd yyyy, h:mm a"));
         } else if (atDate != null) {
             return atDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
         } else {
