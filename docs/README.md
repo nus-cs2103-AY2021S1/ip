@@ -83,7 +83,7 @@ Expected outcome:
     [E][✘] Meeting (at: 10pm)
 
 ### 4. `delete` - Delete a task
-Deletes a task by specifing its number in the task list.
+Delete a task by specifing its number in the task list.
 
 Example of usage: 
 
@@ -95,7 +95,7 @@ Expected outcome:
     [E][✔] Google Career Talk (at: U-Town)
 
 ### 5. `list` - List all tasks
-Displays all tasks currently in the list.
+Display all tasks currently in the list.
 
 Example of usage: 
 
@@ -113,7 +113,7 @@ Expected outcome:
     You have 4 task(s) in the list
 
 ### 6. `clear` - Clear all tasks
-Deletes all tasks in the list.
+Delete all tasks in the list.
 
 Example of usage: 
 
@@ -158,7 +158,7 @@ Expected outcome:
 
 ### 10. `help` - Displays help guide for commands
 Examples of usage: 
-* Displays help for all commands
+* Display help for all commands
 
   `help`
 
