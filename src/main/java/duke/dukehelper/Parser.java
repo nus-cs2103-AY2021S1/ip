@@ -53,7 +53,6 @@ public class Parser {
                                             boolean isLoaded, boolean isDone) {
         assert (content != null && !content.equals("")) : "Empty or null content";
         assert (deadline != null) : "Null deadline";
-        assert (exactTime != null && !exactTime.equals("")) : "Empty or null time";
         assert (deadlineStr != null && !deadlineStr.equals("")) : "Empty or null deadline string";
 
         Deadline deadlineTask = new Deadline(content, deadline, exactTime, deadlineStr);
@@ -78,7 +77,6 @@ public class Parser {
                                       Boolean isLoaded, Boolean isDone) {
         assert (content != null && !content.equals("")) : "Empty or null content for event";
         assert (deadline != null) : "Null deadline for event";
-        assert (exactTime != null && !exactTime.equals("")) : "Empty or null time for event";
         assert (deadlineStr != null && !deadlineStr.equals("")) : "Empty or null deadline string for event";
 
         Event eventTask = new Event(content, deadline, exactTime, deadlineStr);

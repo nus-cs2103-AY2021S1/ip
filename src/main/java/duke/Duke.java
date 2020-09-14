@@ -130,7 +130,7 @@ public class Duke {
      * @return message to user
      * @throws DukeException
      */
-    protected String tokenizeCommand(String command, boolean isLoaded) throws DukeException {
+    protected String parsedCommand(String command, boolean isLoaded) throws DukeException {
         command = command.strip();
         if (command.equals("")) return "";
         String[] tokens = command.split(" ");
@@ -155,7 +155,7 @@ public class Duke {
         } else {
             try {
                 for (String task : savedTasks) {
-                    tokenizeCommand(task, true);
+                    parsedCommand(task, true);
                 }
             } catch (DukeException e) {
                 result += Ui.printDialog(ERROR_LOAD_MSG);
@@ -183,7 +183,7 @@ public class Duke {
             return "GET_CHART";
         } else {
             try {
-                String result = tokenizeCommand(content, false);
+                String result = parsedCommand(content, false);
                 if (!result.equals("")) return Ui.printDialog(result);
             } catch (DukeException e) {
                 return Ui.printDialog(e.getMessage());
