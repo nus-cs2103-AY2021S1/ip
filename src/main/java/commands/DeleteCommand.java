@@ -7,7 +7,7 @@ import storage.Storage;
 import ui.Ui;
 
 /**
- * Deletes a specific task in the current task list of Duke.
+ * Deletes a specific task in the current task list of model.Duke.
  */
 public class DeleteCommand extends Command {
 
@@ -17,9 +17,9 @@ public class DeleteCommand extends Command {
 
     /**
      * Constructs a delete command.
-     * @param taskList of Duke.
-     * @param storage of Duke.
-     * @param ui of Duke.
+     * @param taskList of model.Duke.
+     * @param storage of model.Duke.
+     * @param ui of model.Duke.
      * @param userInput details of command.
      */
     public DeleteCommand(TaskList taskList, Storage storage, Ui ui, String userInput) {

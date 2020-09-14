@@ -17,8 +17,8 @@ public class FindDateCommand extends Command {
 
     /**
      * Constructs find date command.
-     * @param taskList of Duke.
-     * @param ui of Duke.
+     * @param taskList of model.Duke.
+     * @param ui of model.Duke.
      * @param userInput details of command.
      */
     public FindDateCommand(TaskList taskList, Ui ui, String userInput) {

@@ -9,15 +9,15 @@ import storage.Storage;
 import ui.Ui;
 
 /**
- * Adds a Deadline task into the current task list of Duke.
+ * Adds a Deadline task into the current task list of model.Duke.
  */
 public class DeadlineCommand extends CreateTaskCommand {
 
     /**
      * Constructs a deadline command.
-     * @param taskList of Duke.
-     * @param storage of Duke.
-     * @param ui of Duke.
+     * @param taskList of model.Duke.
+     * @param storage of model.Duke.
+     * @param ui of model.Duke.
      * @param userInput details of tasks.
      */
     public DeadlineCommand(TaskList taskList, Storage storage, Ui ui, String userInput) {

@@ -137,11 +137,11 @@ public class Ui {
     }
 
     public String showSorted() {
-        return "There you go, your list has been sorted alphabetically!";
+        return "Brilliant! Your list has been sorted alphabetically!";
     }
 
     public String showSortedDateTime() {
-        return "There you go, your list has been sorted by date and time!";
+        return "Stupendous! Your list has been sorted by date and time!";
     }
 
     public static String showBreakLine() {

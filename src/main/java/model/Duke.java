@@ -1,3 +1,5 @@
+package model;
+
 import java.util.ArrayList;
 
 import commands.Command;
@@ -7,9 +9,10 @@ import data.task.TaskList;
 import parser.Parser;
 import storage.Storage;
 import ui.Ui;
+
 /**
- * Entry point of the Posh Duke Chat Bot.
- * Drives the entire process of Duke from start to end.
+ * Over seeing class of the DukeBunny Chat Bot.
+ * Drives the entire process of Duke from start to end behind the GUI.
  */
 public class Duke {
     private Ui ui;
@@ -20,27 +23,31 @@ public class Duke {
     public Duke() {
     }
 
-    Duke(String file) {
+    /**
+     * Constructs a model of Duke with a specified file path.
+     * @param filePath file path.
+     */
+    public Duke(String filePath) {
         this.ui = new Ui();
         this.taskList = new TaskList(new ArrayList<>());
-        this.storage = new Storage(file);
+        this.storage = new Storage(filePath);
         this.parser = new Parser(this.taskList, this.storage, this.ui);
     }
     /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    public String getResponse(String userInput) {
+    public ResponseResult getResponse(String userInput) {
         try {
             Command userCommand = this.parser.parseCommand(userInput);
-            return userCommand.execute();
+            return new ResponseResult(false, userCommand.execute());
         } catch (DukeException e) {
-            return this.ui.showDukeError(e);
+            return new ResponseResult(true, this.ui.showDukeError(e));
         }
     }
 
     /**
-     * Initialises Duke.
+     * Initialises model.Duke.
      * @return welcome message.
      */
     public String initDuke() {

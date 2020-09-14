@@ -18,8 +18,8 @@ public class FindCommand extends Command {
 
     /**
      * Constructs a find command.
-     * @param taskList of Duke.
-     * @param ui of Duke.
+     * @param taskList of model.Duke.
+     * @param ui of model.Duke.
      * @param userInput details of command.
      */
     public FindCommand(TaskList taskList, Ui ui, String userInput) {

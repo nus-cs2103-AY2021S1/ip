@@ -3,7 +3,7 @@ package commands;
 import ui.Ui;
 
 /**
- * Exits from Duke.
+ * Exits from model.Duke.
  */
 public class ByeCommand extends Command {
 

@@ -5,7 +5,7 @@ import javafx.application.Application;
  */
 public class Launcher {
     /**
-     * Entry point for Duke.
+     * Entry point for model.Duke.
      * @param args
      */
     public static void main(String[] args) {

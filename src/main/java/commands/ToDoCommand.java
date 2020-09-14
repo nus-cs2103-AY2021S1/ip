@@ -7,15 +7,15 @@ import storage.Storage;
 import ui.Ui;
 
 /**
- * Adds a To_Do task into the current task list of Duke.
+ * Adds a To_Do task into the current task list of model.Duke.
  */
 public class ToDoCommand extends CreateTaskCommand {
 
     /**
      * Constructs a to do command.
-     * @param taskList of Duke.
-     * @param storage of Duke.
-     * @param ui of Duke.
+     * @param taskList of model.Duke.
+     * @param storage of model.Duke.
+     * @param ui of model.Duke.
      * @param userInput details of tasks.
      */
     public ToDoCommand(TaskList taskList, Storage storage, Ui ui, String userInput) {

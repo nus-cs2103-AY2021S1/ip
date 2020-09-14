@@ -3,11 +3,14 @@ import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import model.Duke;
+import ui.MainWindow;
 
 /**
- * A GUI for Duke using FXML.
+ * A GUI for model.Duke using FXML.
  */
 public class Main extends Application {
     @Override
@@ -18,6 +21,8 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            stage.setTitle("DukeBunny");
+            stage.getIcons().add(new Image("/images/DukeBunnyPxl.PNG"));
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
         } catch (IOException e) {
