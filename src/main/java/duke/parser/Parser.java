@@ -16,7 +16,7 @@ public class Parser {
     public enum Command {
         BYE("bye"), LIST("list"), DONE("done"), TODO("todo"), DEADLINE("deadline"),
               EVENT("event"), DELETE("delete"), FILTER("filter"), FIND("find");
-        public String value;
+        private String value;
         Command(String value) {
             this.value = value;
         }
