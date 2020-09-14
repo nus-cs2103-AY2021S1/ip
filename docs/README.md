@@ -5,7 +5,7 @@ while still having the benefits of a Graphical User Interface (GUI).
 
 ## Quick Start
 1. Ensure you have Java 11 or above installed in your computer.
-2. Download the latest `duke.jar` from !here[url]
+2. Download the latest `duke.jar` from [here](https://github.com/jiaqi20/ip/releases/tag/A-Jar-v0.2)
 3. Copy the file to the folder you want to use as _home folder_ for Duke
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds.
 <br>
