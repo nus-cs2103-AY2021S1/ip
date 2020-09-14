@@ -6,7 +6,7 @@ import java.util.Scanner;
  * The class that receive user's input and print corresponding responses on the screen.
  */
 public class Ui {
-    public static final String GREETING = "\tHello! I'm Duke\n" + "\tWhat can I do for you?";
+    public static final String GREETING = "\tHello! I'm Tachikoma\n" + "\tWhat can I do for you?";
     private static final String DIVIDER = "\t____________________________________________________________\n";
     private Scanner sc;
 

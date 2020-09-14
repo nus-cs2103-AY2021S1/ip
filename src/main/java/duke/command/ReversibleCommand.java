@@ -5,6 +5,9 @@ import duke.component.Storage;
 import duke.component.TaskList;
 import duke.component.Ui;
 
+/**
+ * Commands that can be "undoed"
+ */
 public interface ReversibleCommand extends Command {
     /**
      * Undoes the command.

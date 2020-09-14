@@ -47,6 +47,7 @@ public class DialogBox extends HBox {
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
+        this.setStyle("-fx-background-color: #F5DC9D;");
     }
 
     public static DialogBox getUserDialog(String text, Image img) {

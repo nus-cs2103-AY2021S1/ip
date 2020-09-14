@@ -7,6 +7,9 @@ import duke.component.Storage;
 import duke.component.TaskList;
 import duke.component.Ui;
 
+/**
+ * Command that undo previous reversible command.
+ */
 public class UndoCommand implements Command {
 
     @Override
