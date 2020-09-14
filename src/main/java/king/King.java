@@ -43,11 +43,11 @@ public class King {
      */
     public String getResponse(String input) {
         try {
-            return parser.parse(input);
+            return UI.emptyChatBox(parser.parse(input));
         } catch (KingException e) {
-            return UI.emptyChatBox(e.message);
+            return UI.errorBox(e.message);
         } catch (StorageException e) {
-            return UI.emptyChatBox(e.message);
+            return UI.errorBox(e.message);
         }
     }
 

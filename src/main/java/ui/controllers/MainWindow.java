@@ -54,9 +54,17 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = king.getResponse(input);
+        DialogBox kingDialogBox;
+        DialogBox userDialogBox;
+        if (response.contains(UI.errorBox(""))) {
+            kingDialogBox = DialogBox.getErrorDialog(response, kingImage);
+        } else {
+           kingDialogBox = DialogBox.getKingDialog(response, kingImage);
+        }
+        userDialogBox = DialogBox.getUserDialog(input, userImage);
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(UI.emptyChatBox(input), userImage),
-                DialogBox.getKingDialog(response, kingImage)
+                userDialogBox,
+                kingDialogBox
         );
         userInput.clear();
         if (response.equals(king.getResponse("bye"))) {

@@ -19,7 +19,7 @@
     -fx-padding: 10 10 10 10;
     -fx-border-color: black;
     -fx-border-width: 1;
-    -fx-background-color: #25D366;
+    -fx-background-color: #ffeebd;
     -fx-start-margin: 10;
     -fx-start-margin: 10;
 }
@@ -29,7 +29,7 @@
  }
 
 .bg-green{
-    -fx-background-color: #25D366;
+    -fx-background-color: #9aedd1;
 }
 
 .btn-submit{

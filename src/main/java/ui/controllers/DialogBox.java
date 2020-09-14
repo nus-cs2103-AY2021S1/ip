@@ -47,8 +47,15 @@ public class DialogBox extends HBox {
         return new DialogBox(text, img);
     }
 
+    public static DialogBox getErrorDialog(String text, Image img) {
+        DialogBox errorDialog = new DialogBox(text, img);
+        errorDialog.dialog.setStyle("-fx-background-color:#f786ce;");
+        return errorDialog;
+    }
+
     public static DialogBox getUserDialog(String text, Image img) {
         var db = new DialogBox(text, img);
+        db.dialog.setStyle("-fx-background-color:#d9d9d9;");
         db.flip();
         return db;
     }
