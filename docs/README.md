@@ -101,7 +101,7 @@ indicating the index of the Task that they would like to mark as important
 	2. [T][X] Read Book
 	3. [D][O] 2103T Report Submission by Sep 18 2020 23:59
 	
-	_note that the order changed in order of urgency and importance_
+	*note that the order changed in order of urgency and importance*
 
 ### Feature 6 : Find Specific Tasks by Keyword
 Users can view specific Tasks that have been added into the List. This
