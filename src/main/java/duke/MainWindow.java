@@ -1,9 +1,7 @@
 package duke;
 
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.SnapshotParameters;
-import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -26,8 +24,6 @@ public class MainWindow extends AnchorPane {
     private VBox dialogContainer;
     @FXML
     private TextField userInput;
-    @FXML
-    private Button sendButton;
 
     private Duke duke;
 
@@ -83,10 +79,6 @@ public class MainWindow extends AnchorPane {
             this.dialogContainer.getChildren().addAll(
                     new PinguDialogBox("pingu doesn't understand what that means :(", pingu));
             this.userInput.clear();
-//        } catch (DukeException e) {
-//            this.dialogContainer.getChildren().addAll(
-//                    new PinguDialogBox("pingu doesn't understand what that means :(", pingu));
-//            this.userInput.clear();
         }
 
     }
