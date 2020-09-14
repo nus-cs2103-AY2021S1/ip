@@ -1,4 +1,4 @@
-# User Guide for TheDuke
+# User Guide for Incredible Bot
 
 *Keane Chan Jun Yu | A0205678W*
 
@@ -92,7 +92,7 @@ Now you have 1 tasks in the list.
 ## Acknowledgements
 
 ### External packages Used
-- [JUnit by JUnit Team](https://github.com/junit-team/junit5/) - For testing classes and methods in TheDuke
+- [JUnit by JUnit Team](https://github.com/junit-team/junit5/) - For testing classes and methods in Incredible Bot
 - [JavaFX by OpenJDK](https://github.com/openjdk/jfx) - For creating Graphical User Interface.
 
 ### Images Used

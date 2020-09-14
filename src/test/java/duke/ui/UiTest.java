@@ -23,7 +23,7 @@ public class UiTest {
      */
     @Test
     public void testGreeting() {
-        assertEquals("Welcome to TheDuke!\nWhat can I do for you?\n", Ui.greetings());
+        assertEquals("Welcome to Incredible Bot!\nWhat can I do for you?\n", Ui.greetings());
     }
 
     /**
