@@ -27,11 +27,11 @@ public class Ui {
     }
 
     public String showDoneMessage(Task t) {
-        return "Uncle Roger mark this task done:\t" + t;
+        return "Uncle Roger mark this task done:\n\t" + t;
     }
 
     public String showDeleteMessage(TaskList tList, Task t) {
-        return "Uncle Roger remove task:\t" + t + "\nNow you have " + (tList.size()) + " task(s) in the list lah!";
+        return "Uncle Roger remove task:\n\t" + t + "\nNow you have " + (tList.size()) + " task(s) in the list lah!";
     }
 
     public String showAddTaskMessage(TaskList tList, Task t) {

@@ -61,7 +61,7 @@ public class Parser {
             if (allSplitArgs.length > 1) {
                 return new AddCommand(CommandType.EVENT, allSplitArgs[0], tagSplitArgs, parseDateAndTime(allSplitArgs[1]));
             } else {
-                throw new DukeException("you need date and time for event (hint: event something /at YYY-MM-DD)!");
+                throw new DukeException("you need date and time for event (hint: event something /at YYYY-MM-DD)!");
             }
         } else {
             throw new DukeException("Uncle Roger dunno any command like that!");

@@ -11,6 +11,6 @@ public class DukeException extends Exception {
 
     @Override
     public String toString() {
-        return "Paiseh ah, " + super.toString();
+        return "Paiseh ah, " + super.getMessage();
     }
 }
