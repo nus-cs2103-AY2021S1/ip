@@ -46,7 +46,7 @@ public class Duke {
             this.ui = ui;
             parser = new Parser(taskList, this.ui);
         } catch (StorageOperationException e) {
-            System.out.println(e.getMessage());
+            ui.outputErrorBlockToUser(e.getMessage());
             throw new RuntimeException(e);
         }
     }
@@ -67,7 +67,7 @@ public class Duke {
             try {
                 storage.saveTasks(taskList);
             } catch (StorageOperationException soe) {
-                System.out.println(soe.getMessage());
+                ui.outputErrorBlockToUser(soe.getMessage());
             }
             return true;
         }
@@ -76,7 +76,7 @@ public class Duke {
             Command command = parser.getCommandFromInput(input);
             command.execute();
         } catch (DukeException e) {
-            ui.outputBlockToUser(e.getMessage());
+            ui.outputErrorBlockToUser(e.getMessage());
         }
         return false;
     }

@@ -17,7 +17,7 @@ public class Ui {
             + "  | - |    | |    | .__/ | ' \\   / _` |  \n"
             + "  |_|_|   _|_|_   |_|__  |_||_|  \\__,_|  \n"
             + "_|\"\"\"\"\"|_|\"\"\"\"\"|_|\"\"\"\"\"|_|\"\"\"\"\"|_|\"\"\"\"\"| \n"
-            + "\"`-0-0-'\"`-0-0-'\"`-0-0-'\"`-0-0-'\"`-0-0-' ";
+            + "\"`-0-0-'\"`-0-0-'\"`-0-0-'\"`-0-0-'\"`-0-0-' \n";
     private static final String GREETING = "Hello, Alpha here... welcome to my help centre... again.\n"
             + "Would you like to explain what you want?\n";
     private static final String LINE_PREFIX = "    ";
@@ -50,7 +50,7 @@ public class Ui {
     }
 
     /**
-     * Shows a message to user with indentation and divider blocks.
+     * Shows a message to user in a text bubble.
      */
     public void outputBlockToUser(String... message) {
         //System.out.print(LINE_PREFIX + DIVIDER.replace("\n", LINE_SEPARATOR));
@@ -63,7 +63,23 @@ public class Ui {
         //System.out.print(DIVIDER.replace("\n", LINE_SEPARATOR));
     }
 
+    /**
+     * Shows an error message to the user in a text bubble.
+     * @param message
+     */
+    public void outputErrorBlockToUser(String... message) {
+        String output = "";
+        for (String m : message) {
+            output += (m.replace("\n", LINE_SEPARATOR));
+        }
+        printError(output);
+    }
+
     private void print(String input) {
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(input, dukeImage));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(input, dukeImage, false));
+    }
+
+    private void printError(String input) {
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(input, dukeImage, true));
     }
 }

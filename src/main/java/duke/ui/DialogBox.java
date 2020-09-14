@@ -9,10 +9,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 
 /**
@@ -22,7 +23,7 @@ import javafx.scene.text.TextAlignment;
  */
 public class DialogBox extends HBox {
     @FXML
-    private Label dialog;
+    private Text dialog;
     @FXML
     private ImageView displayPicture;
 
@@ -55,9 +56,14 @@ public class DialogBox extends HBox {
         return new DialogBox(text, img);
     }
 
-    public static DialogBox getDukeDialog(String text, Image img) {
+    public static DialogBox getDukeDialog(String text, Image img, boolean error) {
         var db = new DialogBox(text, img);
         db.flip();
+        db.setStyle("-fx-background-color: rgba(0,106,113,0.8);" + "-fx-border-radius: 20;"
+                + "-fx-background-radius: 20;" + "-fx-background-insets: 5;");
+        if (error) {
+            db.dialog.setFill(Color.rgb(255, 126, 103));
+        }
         return db;
     }
 }
