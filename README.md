@@ -1,13 +1,5 @@
----
-layout: page
-title: User Guide
----
-
 Duke is a **desktop app for managing tasks, optimized for use via a Command Line Interface** (CLI) while still having 
 the benefits of a Graphical User Interface (GUI).
-
-* Table of Contents
-{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -20,7 +12,7 @@ the benefits of a Graphical User Interface (GUI).
 3. Copy the file to the folder you want to use as the _home folder_.
 
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds.<br>
-   ![Ui](images/Start.png)
+   ![Ui](docs/images/Start.png)
 
 5. Type the command in the command box and press Enter / Return on your keyboard to execute it. Alternatively, you may 
 press the Enter button on the GUI. e.g. typing **`todo Defeat Gengar`** and pressing Enter will add a task 
@@ -42,14 +34,10 @@ named `Defeat Gengar` to your task list.<br>
 
 ## Features
 
-<div markdown="block" class="alert alert-info">
-
 **:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `todo NAME`, `NAME` is a parameter which can be used as `todo Defeat Gengar`.
-
-</div>
 
 ### Adding a task: `todo / event / deadline`
 
