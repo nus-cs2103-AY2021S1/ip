@@ -40,6 +40,9 @@ public class AddToListCommand extends Command {
             throw new DukeException("Please input valid date format!");
         }
         String[] inputData = inputDeadline.split(dateFormat);
+        if (inputData.length != 3 || inputData[2].length() != 9) {
+            throw new DukeException("Please input valid date format!");
+        }
         int date = Integer.parseInt(inputData[0]);
         int month = Integer.parseInt(inputData[1]);
         int year = Integer.parseInt(inputData[2].substring(0, 4));
