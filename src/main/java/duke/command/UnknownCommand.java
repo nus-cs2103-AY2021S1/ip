@@ -1,8 +1,8 @@
 package duke.command;
 
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
+import duke.backend.Storage;
+import duke.task.TaskList;
+import duke.response.Response;
 import duke.exception.DukeUnknownInputException;
 
 /**
@@ -28,7 +28,7 @@ public class UnknownCommand implements Command {
      * @return True because Duke should continue running.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Response ui, Storage storage) {
         return ui.showError(new DukeUnknownInputException());
     }
 }

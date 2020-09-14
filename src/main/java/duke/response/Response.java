@@ -1,12 +1,13 @@
-package duke;
+package duke.response;
 
+import duke.task.TaskList;
 import duke.task.Task;
 
 /**
  * User interface which deals with user interactions.
  * Also prints relevant error messages and responses.
  */
-public class Ui {
+public class Response {
     /**
      * Represents two spaces.
      */

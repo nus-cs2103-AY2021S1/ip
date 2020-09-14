@@ -1,8 +1,8 @@
 package duke.command;
 
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
+import duke.backend.Storage;
+import duke.task.TaskList;
+import duke.response.Response;
 
 /**
  * Represents a Bye message action.
@@ -28,7 +28,7 @@ public class ByeCommand implements Command {
      * @return False because Duke should stop running.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Response ui, Storage storage) {
         return ui.printBye();
     }
 }

@@ -1,7 +1,7 @@
 package duke.ui;
 
 import duke.Duke;
-import duke.Ui;
+import duke.response.Response;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -46,7 +46,7 @@ public class MainWindow extends AnchorPane {
     public void setDuke(Duke d) {
         duke = d;
         dialogContainer.getChildren().addAll(
-            DialogBox.getDoraemonDialog(Ui.intro(), dukeImage)
+            DialogBox.getDoraemonDialog(Response.intro(), dukeImage)
         );
     }
 
@@ -69,7 +69,7 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
 
-        if (response.equals(Ui.printBye())) {
+        if (response.equals(Response.printBye())) {
             Platform.runLater(() -> {
                 try {
                     //Show the bye message for 1.5seconds before exit.
