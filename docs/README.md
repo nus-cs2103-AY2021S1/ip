@@ -8,7 +8,6 @@ organize your task list much faster than GUI apps if you can type fast.
 * [Quick Start](#quick-start)
 * [Features](#features)
 
-<a id="quick-start"></a>
 ## Quick Start
 1. Check that you have installed `Java 11` or above installed in your computer.
 2. Download the latest `hotline.jar` from [here](https://github.com/AudreyFelicio/ip/releases).
@@ -29,7 +28,7 @@ Types of task that can be added are:
  
     ### `todo` - Create New To Do Task
     
-    Create a new to-do task and add to the user's task list.
+    Creates a new to-do task and add to the user's task list.
     
     Command format:
     
@@ -43,7 +42,7 @@ Types of task that can be added are:
 
     ### `deadline` - Create New Deadline Task
     
-    Create a new deadline task and add to the user's task list.
+    Creates a new deadline task and add to the user's task list.
     
     Command format:
     
@@ -57,7 +56,7 @@ Types of task that can be added are:
 
     ### `event` - Create New Event Task
     
-    Create a new event task and add to the user's task list.
+    Creates a new event task and add to the user's task list.
     
     Command format:
     
@@ -72,7 +71,7 @@ Deletes no longer wanted tasks from the task list.
 
 ### `delete` - Delete Task From List
 
-Delete a certain task from list.
+Deletes a certain task from list.
 
 Command format:
 
@@ -173,3 +172,16 @@ Command format:
 Example:
 
 `bye`
+
+## Command Summary
+Action | Format, Examples
+------ | ----------------
+Add to-do | `todo <string: description>` <br> e.g. `todo Finish CS2103T Project`
+Add deadline | `deadline <string: description> /by <string: yyyy-mm-dd>` <br> e.g. `deadline CCA Registration /by 2020-09-14`
+Add event | `event <string: description> /at <string: yyyy-mm-dd>` <br> e.g. `event Application Release /at 2020-09-18)`
+Delete | `delete <integer: task number>` <br> e.g. `delete 1`
+List | `list`
+Update | `update <integer: task number> description <string: new description>` <br> `update <integer: task number> time <string: yyyy-mm-dd>` <br> `update <integer: task number> mark <integer: 1 for done or 0 for not done>` <br> e.g. `update 2 description NUS Angklung CCA Registration`
+Find | `find <string: keyword>` <br> e.g. `find Release`
+Done | `done <integer: task number>` <br> e.g. `done 2`
+Bye | `bye`
