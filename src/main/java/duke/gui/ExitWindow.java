@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 
@@ -27,6 +28,7 @@ public class ExitWindow {
 
         Scene scene = new Scene(root);
 
+        stage.initModality(Modality.APPLICATION_MODAL);
         stage.setTitle("Exit");
         stage.setScene(scene);
 
