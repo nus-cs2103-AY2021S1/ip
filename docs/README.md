@@ -356,3 +356,18 @@ Assume that this is the 4th task in your list: `[D] [X] CS2100 assignment 1 (by:
 The task at position 4 has been updated to this:
 [D] [X] CS2100 assignment 1 (by: 30 Aug 2020)
 ```
+
+## Appendix
+
+### Parsing date
+These are the date formats supported by Duke from highest parsing priority to lowest parsing priority
+* yyyy-MM-dd
+* yyyy-M-dd
+* yyyy-M-d
+* dd-MM-yyyy
+* dd-M-yyyy
+* d-M-yyyy
+* yyyy/MM/dd
+* dd/MM/yyyy
+* dd/M/yyyy
+* d/M/yyyy
