@@ -1,4 +1,5 @@
 # User Guide
+![Duke UI](Ui.png)
 This is a user guide for the usage of Duke Application, made by 
 [Stephen Tan](https://www.linkedin.com/in/stephen-tan-hin-khai/) under 
 the module CS2103T 2020/21 Sem 1.

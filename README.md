@@ -23,8 +23,12 @@ Then, type the help command to get help on what Duke can do.
 help
 ```
 
+![Duke UI](Ui.png)
+
 ## Acknowledgements
 In this project, I acknowledge referencing [here](https://github.com/JoeyChenSmart/ip)
 for inspiration for the functional software pattern used.
+
+Use of Gradle project Wrapper.
 
 Initial Template is taken from [Prof Damith](https://github.com/damithc)
