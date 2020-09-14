@@ -25,29 +25,33 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
+    /** The Duke for the GUI */
     private Duke duke;
-    private Ui ui;
-
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    /** The image used in the GUI for the user */
+    private final Image userImage = new Image(this.getClass()
+            .getResourceAsStream("/images/DaUser.png"));
+    /** The image used in the GUI for Duke */
+    private final Image dukeImage = new Image(this.getClass()
+            .getResourceAsStream("/images/DaDuke.png"));
 
     /**
      * Initializes the MainWindow.
      */
     @FXML
     public void initialize() {
-        ui = new Ui();
+        Ui ui = new Ui();
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(ui.generateWelcomeMessage(), dukeImage));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(
+                ui.generateWelcomeMessage(), dukeImage));
     }
 
     /**
      * Sets the specified Duke to the Duke in this MainWindow.
      *
-     * @param d the specified Duke.
+     * @param duke the specified Duke.
      */
-    public void setDuke(Duke d) {
-        duke = d;
+    public void setDuke(Duke duke) {
+        this.duke = duke;
     }
 
     /**
@@ -64,8 +68,10 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response.getResponse(), dukeImage)
         );
         userInput.clear();
+
         if (response.isExit()) {
-            PauseTransition delay = new PauseTransition(Duration.seconds(1));
+            PauseTransition delay = new PauseTransition(
+                    Duration.seconds(1));
             delay.setOnFinished(event -> Platform.exit());
             delay.play();
         }

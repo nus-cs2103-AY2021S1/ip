@@ -9,6 +9,7 @@ import duke.task.Task;
  * Represents a command that will add a task into the task list.
  */
 public class AddCommand extends Command {
+    /** The task to be added */
     private final Task task;
 
     /**

@@ -8,6 +8,7 @@ import duke.Ui;
  * Represents a command that will find matching tasks in the last list based on a specified keyword.
  */
 public class FindCommand extends Command {
+    /** The keyword used to find matching tasks */
     private final String keyword;
 
     /**

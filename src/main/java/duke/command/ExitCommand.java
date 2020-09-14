@@ -8,7 +8,6 @@ import duke.Ui;
  * Represents a command that will terminate Duke.
  */
 public class ExitCommand extends Command {
-
     /**
      * Terminates Duke.
      *

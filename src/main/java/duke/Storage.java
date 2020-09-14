@@ -14,9 +14,10 @@ import duke.task.Task;
 import duke.task.ToDo;
 
 /**
- * Represents the part of Duke that deals with loading tasks from a file and saving tasks in the same file.
+ * Represents the part of Duke that deals with loading and saving tasks.
  */
 public class Storage {
+    /** The file where tasks are loaded from and saved to */
     private final File file;
 
     /**
@@ -31,7 +32,7 @@ public class Storage {
         try {
             file.createNewFile();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Uh-oh! An I/O error occurred.");
         }
     }
 
@@ -48,16 +49,7 @@ public class Storage {
 
             while (sc.hasNext()) {
                 String taskDetails = sc.nextLine();
-                Task task;
-                if (taskDetails.startsWith("T")) {
-                    task = ToDo.load(taskDetails);
-                } else if (taskDetails.startsWith("D")) {
-                    task = Deadline.load(taskDetails);
-                } else if (taskDetails.startsWith("E")) {
-                    task = Event.load(taskDetails);
-                } else {
-                    throw new IllegalArgumentException();
-                }
+                Task task = extractTask(taskDetails);
                 tasks.add(task);
             }
             return tasks;
@@ -74,12 +66,29 @@ public class Storage {
     public void save(List<Task> tasks) {
         try {
             FileWriter fw = new FileWriter("./data/tasks.txt");
+
             for (Task t : tasks) {
                 fw.write(t.saveAs() + "\n");
             }
             fw.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Uh-oh! An I/O error occurred.");
+        }
+    }
+
+    /**
+     * Extracts the specific task from the 'saved' format.
+     *
+     * @param taskDetails the task in 'saved' format.
+     * @return the extracted task.
+     */
+    public Task extractTask(String taskDetails) {
+        if (taskDetails.startsWith("T")) {
+            return ToDo.load(taskDetails);
+        } else if (taskDetails.startsWith("D")) {
+            return Deadline.load(taskDetails);
+        } else { // taskDetails starts with "E"
+            return Event.load(taskDetails);
         }
     }
 }

@@ -7,6 +7,7 @@ import java.time.format.DateTimeFormatter;
  * Represents an event to be held on a certain date.
  */
 public class Event extends Task {
+    /** The date of the event */
     protected LocalDate eventDate;
 
     /**
@@ -27,9 +28,15 @@ public class Event extends Task {
      * @return a new instance of the event.
      */
     public static Event load(String eventDetails) {
+        // Split into type of task, status, description and event date
         String[] splitEventDetails = eventDetails.split("\\|", 4);
-        Event event = new Event(splitEventDetails[2], LocalDate.parse(splitEventDetails[3]));
-        if (splitEventDetails[1].equals("true")) {
+
+        String status = splitEventDetails[1];
+        String description = splitEventDetails[2];
+        LocalDate eventDate = LocalDate.parse(splitEventDetails[3]);
+        Event event = new Event(description, eventDate);
+
+        if (status.equals("true")) {
             event.markAsDone();
         }
         return event;

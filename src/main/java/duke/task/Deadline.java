@@ -4,9 +4,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Represents a deadline to be completed before a certain date.
+ * Represents a deadline to be completed before a due date.
  */
 public class Deadline extends Task {
+    /** The date the deadline is due */
     protected LocalDate dueDate;
 
     /**
@@ -27,9 +28,15 @@ public class Deadline extends Task {
      * @return a new instance of the deadline.
      */
     public static Deadline load(String deadlineDetails) {
+        // Split into type of task, status, description and due date
         String[] splitDeadlineDetails = deadlineDetails.split(" \\| ", 4);
-        Deadline deadline = new Deadline(splitDeadlineDetails[2], LocalDate.parse(splitDeadlineDetails[3]));
-        if (splitDeadlineDetails[1].equals("true")) {
+
+        String status = splitDeadlineDetails[1];
+        String description = splitDeadlineDetails[2];
+        LocalDate dueDate = LocalDate.parse(splitDeadlineDetails[3]);
+        Deadline deadline = new Deadline(description, dueDate);
+
+        if (status.equals("true")) {
             deadline.markAsDone();
         }
         return deadline;

@@ -10,6 +10,7 @@ import duke.task.Task;
  * Tasks can be added into, marked as done, or deleted from the list.
  */
 public class TaskList {
+    /** The list associated with this TaskList */
     private final List<Task> tasks;
 
     /**
@@ -43,33 +44,52 @@ public class TaskList {
      * @param taskNum the number of the task to be deleted.
      * @return the deleted task.
      */
-    public Task deleteTask(int taskNum) {
+    public Task deleteTask(int taskNum) throws DukeException {
         assert (taskNum > 0 && taskNum <= tasks.size()) : "taskNum should be more than 0, and less than or "
                 + "equal to size of list";
         int index = taskNum - 1;
-        return tasks.remove(index);
+        try {
+            return tasks.remove(index);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Uh-oh! Looks like you have entered an invalid task number.");
+        }
     }
 
     /**
-     * Retrieves the task list.
+     * Marks a task as done.
      *
-     * @return the list of tasks.
+     * @param taskNum the number of the task to be marked as done.
      */
-    public List<Task> getTasks() {
-        return tasks;
+    public void markAsDone(int taskNum) throws DukeException {
+        assert (taskNum > 0 && taskNum <= tasks.size()) : "taskNum should be more than 0, and less than or "
+                + "equal to size of list";
+        int index = taskNum - 1;
+        try {
+            tasks.get(index).markAsDone();
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Uh-oh! Looks like you have entered an invalid task number.");
+        }
     }
 
     /**
-     * Retrieves the number of tasks in the task list.
+     * Retrieves a list of tasks in the task list which contain a specified keyword.
      *
-     * @return the number of tasks in the task list.
+     * @param keyword the keyword used to find the matching tasks.
+     * @return the list of matching tasks.
      */
-    public int getNumOfTasks() {
-        return tasks.size();
+    public TaskList getMatchingTasks(String keyword) {
+        TaskList matchingTasks = new TaskList();
+
+        for (Task task : tasks) {
+            if (task.toString().contains(keyword)) {
+                matchingTasks.addTask(task);
+            }
+        }
+        return matchingTasks;
     }
 
     /**
-     * Retrieves a task from the task list.
+     * Retrieves a specific task from the task list.
      *
      * @param taskNum the number of the task to be retrieved.
      * @return the retrieved task.
@@ -81,32 +101,12 @@ public class TaskList {
         return tasks.get(index);
     }
 
-    /**
-     * Marks a task as done.
-     *
-     * @param taskNum the number of the task to be marked as done.
-     */
-    public void markAsDone(int taskNum) {
-        assert (taskNum > 0 && taskNum <= tasks.size()) : "taskNum should be more than 0, and less than or "
-                + "equal to size of list";
-        int index = taskNum - 1;
-        tasks.get(index).markAsDone();
+    public List<Task> getTasks() {
+        return tasks;
     }
 
-    /**
-     * Retrieves a list of tasks in the task list which contain a specified keyword.
-     *
-     * @param keyword the keyword used to find the matching tasks.
-     * @return the list of matching tasks.
-     */
-    public TaskList getMatchingTasks(String keyword) {
-        TaskList matchingTasks = new TaskList();
-        for (Task task : tasks) {
-            if (task.toString().contains(keyword)) {
-                matchingTasks.addTask(task);
-            }
-        }
-        return matchingTasks;
+    public int getNumOfTasks() {
+        return tasks.size();
     }
 
     /**

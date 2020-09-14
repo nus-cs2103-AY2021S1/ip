@@ -3,12 +3,11 @@ package duke;
 import javafx.application.Application;
 
 /**
- * Launches the Duke Chatbot GUI.
+ * Launches the Duke Chat bot GUI.
  */
 public class Launcher {
-
     /**
-     * Runs the Duke Chatbot GUI.
+     * Runs the Duke Chat bot GUI.
      *
      * @param args unused.
      */
