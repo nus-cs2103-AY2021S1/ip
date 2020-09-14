@@ -155,7 +155,7 @@ Views all tasks added.
 
   `1. [E] [✓] project meeting (at: 19:00, Dec 25 2020)`
   
-  `2. [T] [✘] visit new theme park (at: 19:00, Dec 25 2020)`
+  `2. [T] [✘] visit new theme park`
   
   `3. [D] [✓] CS2030 homework (by: Dec 22 2020)`
   
