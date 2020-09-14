@@ -78,7 +78,7 @@ public class TaskList {
      */
     public String find(String keyword) {
         List<Task> filteredList = list.stream()
-                .filter(t -> t.getDetails().contains(keyword))
+                .filter(t -> t.getDetails().toLowerCase().contains(keyword.toLowerCase()))
                 .collect(Collectors.toList());
         String result = "Here are the matching tasks in your list:\n";
         result += listToString(filteredList);

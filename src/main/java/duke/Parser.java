@@ -3,6 +3,7 @@ package duke;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 import java.util.Arrays;
 import java.util.List;
 
@@ -26,7 +27,7 @@ import duke.task.ToDo;
  */
 public class Parser {
 
-    private static final List<String> DATE_FORMATS = Arrays.asList("yyyy/MM/dd HHmm", "y/M/d HHmm", "y-M-d HHmm");
+    private static final List<String> DATE_FORMATS = Arrays.asList("uuuu/MM/dd HHmm", "u/M/d HHmm", "u-M-d HHmm");
     private static final String BYE = "bye";
     private static final String LIST = "list";
     private static final String DONE = "done";
@@ -83,7 +84,9 @@ public class Parser {
     public static LocalDateTime parseDate(String dateString) {
         for (String format : DATE_FORMATS) {
             try {
-                return LocalDateTime.parse(dateString, DateTimeFormatter.ofPattern(format));
+                return LocalDateTime.parse(
+                        dateString,
+                        DateTimeFormatter.ofPattern(format).withResolverStyle(ResolverStyle.STRICT));
             } catch (DateTimeParseException e) {
                 e.getMessage();
             }
@@ -149,10 +152,17 @@ public class Parser {
             throw new DukeException("Oops! You need to include both start and end dates.");
         }
 
-        LocalDateTime startDate = parseDate(dates[0].trim());
-        LocalDateTime endDate = parseDate(dates[1].trim());
+        String startDateString = dates[0].trim();
+        LocalDateTime startDate = parseDate(startDateString);
+        String endDateString = dates[1].trim();
+        if (endDateString.length() <= 4) {
+            endDateString = startDateString.substring(0, startDateString.indexOf(' ')) + " " + endDateString;
+        }
+        LocalDateTime endDate = parseDate(endDateString);
         if (startDate == null || endDate == null) {
             throw new DukeException("Oops! Format of date and time might be wrong.");
+        } else if (startDate.compareTo(endDate) > 0) {
+            throw new DukeException("Oops! Start date must be earlier than end date");
         }
         return new Event(detail, startDate, endDate);
     }

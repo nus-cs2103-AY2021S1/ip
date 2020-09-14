@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
@@ -49,7 +50,7 @@ public class Storage {
 
         try {
             if (directoryExists) {
-                FileReader fileReader = new FileReader(String.valueOf(path));
+                FileReader fileReader = new FileReader(String.valueOf(path), StandardCharsets.UTF_8);
                 BufferedReader buffReader = new BufferedReader(fileReader);
                 readData(buffReader, list);
             } else {
