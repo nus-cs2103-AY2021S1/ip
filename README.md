@@ -1,26 +1,65 @@
-# Duke project template
+# Duke User Guide
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+Duke is a chatbot that the user can use to track their tasks, deadlines and events.
 
-## Setting up in Intellij
+## Quick start
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+1. Ensure you have Java 11 or above installed in your computer.
+2. Download the latest duke.jar from [here](https://github.com/zhaojj2209/ip/releases/tag/A-Release).
+3. Copy the file to the folder you want to use as the home folder for Duke.
+4. Double-click the file to start the app. The GUI similar to the image below should appear in a few seconds.
+5. Type the command in the command box and press Enter to execute it. e.g. typing help and pressing Enter will open the help window.
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project dialog first)
-1. Set up the correct JDK version, as follows:
-   1. Click `Configure` > `Structure for New Projects` and then `Project Settings` > `Project` > `Project SDK`
-   1. If JDK 11 is listed in the drop down, select it. If it is not, click `New...` and select the directory where you installed JDK 11
-   1. Click `OK`
-1. Import the project into Intellij as follows:
-   1. Click `Open or Import`.
-   1. Select the project directory, and click `OK`
-   1. If there are any further prompts, accept the defaults.
-1. After the importing is complete, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()`. If the setup is correct, you should see something like the below:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+   ![Duke GUI](./docs/Ui.png)
+
+## Features
+
+### Creates a new todo task - `todo`
+
+Adds a new todo task containing its description.
+
+Usage: `todo <description>`
+
+### Creates a new deadline task - `deadline`
+
+Adds a new deadline task containing its description and deadline (in `yyyy-MM-dd` format).
+
+Usage: `deadline <description> /by <deadline>`
+
+### Creates a new event task - `event`
+
+Adds a new event task containing its description and event time (in `yyyy-MM-dd` format).
+
+Usage: `event <description> /at <event time>`
+
+### Edit task - `edit`
+
+Edits the details of the task.
+
+Edit description: `edit <number of task in list> desc <description>`
+
+Edit time (for deadline/event): `edit <number of task in list> time <new date>`
+
+### Lists all tasks - `list`
+
+Lists all tasks in order of creation.
+
+Usage: `list`
+
+### Completes a task - `done`
+
+Marks a task as complete.
+
+Usage: `done <number of task in list>`
+
+### Searches for tasks - `find`
+
+Returns tasks that contain the input keyword.
+
+Usage: `find <keyword>`
+
+### Exit program - `bye`
+
+Exits the program.
+
+Usage: `bye`
