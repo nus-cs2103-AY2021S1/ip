@@ -16,7 +16,7 @@ public class Main extends Application {
 
     private static final String PATH_TO_MAIN_WINDOW = "/view/MainWindow.fxml";
     private static final String PATH_TO_MAIN_WINDOW_STYLES = "/view/MainWindow.css";
-    private static final String NAME = "Duke task manager";
+    private static final String NAME = "Incredible Bot";
 
     private final Duke duke = new Duke();
 
