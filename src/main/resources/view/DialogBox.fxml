@@ -10,35 +10,33 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0"
-         stylesheets="@mainStyle.css" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11"
-         xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" stylesheets="@mainStyle.css" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <VBox fx:id="chatBubble" alignment="TOP_RIGHT" minHeight="-Infinity" spacing="5.0" styleClass="chatBubble">
             <HBox.margin>
-                <Insets left="15.0" right="5.0"/>
+                <Insets left="15.0" right="5.0" />
             </HBox.margin>
             <padding>
-                <Insets bottom="15.0" left="15.0" right="15.0" top="15.0"/>
+                <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
             </padding>
             <effect>
-                <DropShadow blurType="GAUSSIAN" color="#9c9a9a" height="16.23" radius="9.9625" width="25.62"/>
+                <DropShadow blurType="GAUSSIAN" color="#9c9a9a" height="16.23" radius="9.9625" width="25.62" />
             </effect>
             <children>
-                <Label fx:id="dialog" lineSpacing="5.0" styleClass="chat-label" text="Label" wrapText="true">
+                <Label fx:id="dialog" lineSpacing="5.0" styleClass="chat-label" text="Label" textAlignment="JUSTIFY" wrapText="true">
                     <font>
-                        <Font size="15.0"/>
+                        <Font size="15.0" />
                     </font>
                     <textFill>
                         <LinearGradient endX="1.0" endY="1.0">
                             <stops>
-                                <Stop color="#171215"/>
-                                <Stop color="#171217" offset="1.0"/>
+                                <Stop color="#171215" />
+                                <Stop color="#171217" offset="1.0" />
                             </stops>
                         </LinearGradient>
                     </textFill>
                     <effect>
-                        <DropShadow blurType="GAUSSIAN" color="#ee0e0e" spread="0.44"/>
+                        <DropShadow blurType="GAUSSIAN" color="#ee0e0e" spread="0.44" />
                     </effect>
                 </Label>
             </children>
@@ -48,14 +46,13 @@
                           <Label fx:id="dialog" minHeight="-Infinity" prefHeight="125.0" prefWidth="291.0" text="Label" wrapText="true" />
                      </children>-->
         </VBox>
-        <ImageView fx:id="displayPicture" cache="true" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true"
-                   preserveRatio="true">
+        <ImageView fx:id="displayPicture" cache="true" fitHeight="96.0" fitWidth="101.0" pickOnBounds="true" preserveRatio="true">
             <effect>
-                <DropShadow blurType="GAUSSIAN" color="#c90c9a"/>
+                <DropShadow blurType="GAUSSIAN" color="#c70c26" height="26.69" radius="12.940000000000001" spread="0.58" width="27.07" />
             </effect>
         </ImageView>
     </children>
     <padding>
-        <Insets bottom="15.0" left="5.0" right="5.0" top="15.0"/>
+        <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
     </padding>
 </fx:root>

@@ -74,6 +74,3 @@ public class Duke extends Thread {
         new Duke().runDuke();
     }
 }
-/*  Todo: 1. sanitise user input: all lowercase..
-          2.
- */

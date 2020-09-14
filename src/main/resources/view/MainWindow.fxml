@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="600.0" styleClass="anchorPane" stylesheets="@mainStyle.css" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="duke.ui.controller.MainWindow">
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="600.0" styleClass="anchorPane" stylesheets="@mainStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="duke.ui.controller.MainWindow">
     <children>
         <AnchorPane fx:id="secondContainer" prefHeight="806.0" prefWidth="600.0" styleClass="secondContainer">
             <children>
@@ -24,12 +24,12 @@
                         </VBox>
                     </content>
                 </ScrollPane>
-                <TextField fx:id="userInput" layoutY="747.0" onAction="#handleUserInput" prefHeight="56.0" prefWidth="548.0" promptText="Command me..." styleClass="userInput" AnchorPane.bottomAnchor="3.0">
+                <TextField fx:id="userInput" layoutX="6.0" layoutY="747.0" onAction="#handleUserInput" opacity="0.82" prefHeight="56.0" prefWidth="548.0" promptText="Command me..." styleClass="userInput" AnchorPane.bottomAnchor="3.0">
                     <effect>
                         <Blend mode="RED" />
                     </effect>
                 </TextField>
-                <Button fx:id="sendButton" alignment="CENTER" layoutX="548.0" layoutY="750.0" minWidth="50.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="50.0" prefWidth="50.0" styleClass="sendButton" text="&gt;" textAlignment="CENTER">
+                <Button fx:id="sendButton" alignment="CENTER" layoutX="548.0" layoutY="750.0" minWidth="50.0" mnemonicParsing="false" onAction="#handleUserInput" opacity="0.82" prefHeight="50.0" prefWidth="50.0" styleClass="sendButton" text="&#11166;" textAlignment="CENTER">
                     <opaqueInsets>
                         <Insets />
                     </opaqueInsets>
@@ -37,7 +37,7 @@
                         <BoxBlur height="0.0" width="0.0" />
                     </effect>
                     <font>
-                        <Font size="12.0" />
+                        <Font size="8.0" />
                     </font>
                 </Button>
             </children>

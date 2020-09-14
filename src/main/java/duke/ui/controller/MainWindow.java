@@ -24,8 +24,8 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
     private Duke duke;
-    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
-    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/visualise.gif"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/marilyn3.png"));
+    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/godfather3.png"));
     /**
      * Initialize Duke by printing welcome greeting
      */
@@ -49,9 +49,8 @@ public class MainWindow extends AnchorPane {
                                              DialogBox.getDukeDialog(response, dukeImage));
         userInput.clear();
     }
-    // todo: 2) dynamic resizing of DialogBox for vertical height to display long list
     /*
     Gif cropped from: http://gifgifs.com/crop/
-    gif taken from: https://www.reddit.com/r/Cinemagraphs/comments/8ceghg/reflections/
+    gif taken from: http://christianblanchard.com/hs-cinemagraph/
      */
 }
