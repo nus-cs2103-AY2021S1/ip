@@ -1,4 +1,4 @@
-# User Guide
+# User Guide [![Status](https://travis-ci.org/BobbyZhouZijian/ip.svg?branch=master)](https://travis-ci.org/BobbyZhouZijian/ip)
 
 ## Features
 
