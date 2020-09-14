@@ -30,6 +30,16 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Sends welcome message to the client.
+     */
+    public void sendWelcomeMessage() {
+        String response = duke.getWelcome();
+        dialogContainer.getChildren().addAll(
+                DukeDialogBox.getDukeDialog(response, dukeImage)
+        );
+    }
+
     public void setDuke(Duke d) {
         duke = d;
     }
