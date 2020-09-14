@@ -1,6 +1,7 @@
 package butler.task;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 import butler.exception.ButlerException;
 
@@ -100,12 +101,9 @@ public class TaskList {
      * @return A list of tasks that contains the given <code>keyword</code>.
      */
     public TaskList findTasks(String keyword) {
-        ArrayList<Task> filteredList = new ArrayList<>();
-        for (Task t : taskList) {
-            if (t.getSummary().contains(keyword)) {
-                filteredList.add(t);
-            }
-        }
-        return new TaskList(filteredList);
+        ArrayList<Task> filteredArrayList = taskList.stream()
+                .filter(t -> t.getSummary().contains(keyword))
+                .collect(Collectors.toCollection(ArrayList::new));
+        return new TaskList(filteredArrayList);
     }
 }
