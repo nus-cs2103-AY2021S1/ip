@@ -1,5 +1,6 @@
 package botbot.commands;
 
+import botbot.CommandValidator;
 import botbot.Storage;
 import botbot.TaskList;
 import botbot.Ui;
@@ -32,10 +33,14 @@ public class MarkAsDoneCommand extends Command {
      */
     @Override
     public String execute(Storage storage, TaskList tasks, Ui ui) {
-        Task task = tasks.get(id);
-        task.markAsDone();
-        assert task.getStatus().equals(TaskStatus.DONE.getStrValue()) : "Mark task as done unsuccessful";
-        storage.save(tasks);
-        return ui.showMarkAsDoneResponse(task);
+        try {
+            Task task = tasks.get(id);
+            task.markAsDone();
+            assert task.getStatus().equals(TaskStatus.DONE.getStrValue()) : "Mark task as done unsuccessful";
+            storage.save(tasks);
+            return ui.showMarkAsDoneResponse(task);
+        } catch (IndexOutOfBoundsException e) {
+            return ui.showErrorResponse(CommandValidator.ERROR_MESSAGE_INVALID_TASK_ID);
+        }
     }
 }

@@ -1,5 +1,6 @@
 package botbot.commands;
 
+import botbot.CommandValidator;
 import botbot.Storage;
 import botbot.TaskList;
 import botbot.Ui;
@@ -31,9 +32,13 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(Storage storage, TaskList tasks, Ui ui) {
-        Task task = tasks.get(id);
-        tasks.delete(id);
-        storage.save(tasks);
-        return ui.showDeleteResponse(task, tasks.size());
+        try {
+            Task task = tasks.get(id);
+            tasks.delete(id);
+            storage.save(tasks);
+            return ui.showDeleteResponse(task, tasks.size());
+        } catch (IndexOutOfBoundsException e) {
+            return ui.showErrorResponse(CommandValidator.ERROR_MESSAGE_INVALID_TASK_ID);
+        }
     }
 }
