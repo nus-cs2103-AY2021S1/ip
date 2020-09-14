@@ -94,6 +94,12 @@ public class TaskManager {
         return res;
     }
 
+    /**
+     * Returns all the tasks in the task list that has a specified tag.
+     *
+     * @param tag The Tag to find.
+     * @return A list of tasks that have the specified tag.
+     */
     public ArrayList<Task> findTaskWithTag(Tag tag) {
         ArrayList<Task> res = new ArrayList<>();
         for (Task task : this.taskList) {

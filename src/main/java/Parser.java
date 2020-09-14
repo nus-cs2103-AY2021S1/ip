@@ -7,6 +7,14 @@ import java.time.format.DateTimeParseException;
  */
 
 public class Parser {
+
+    /**
+     * Creates different commands from user inputs.
+     *
+     * @param userInput String representing user input.
+     * @return A Command that contains information on how to execute the command.
+     * @throws DukeException thrown when there is any exception during the parsing process.
+     */
     public static Command parse(String userInput) throws DukeException {
         int i = userInput.trim().indexOf(' ');
         String command = userInput;
@@ -129,7 +137,7 @@ public class Parser {
         }
     }
 
-    public static TagList parseTag(String detail) {
+    private static TagList parseTag(String detail) {
         int i = detail.trim().indexOf("#");
         String tagList = detail.substring(i).trim();
         String spaceRemovedString = tagList.replace(" ", "");
@@ -145,7 +153,7 @@ public class Parser {
         return res;
     }
 
-    public static Tag parseTagToFind(String tag) {
+    private static Tag parseTagToFind(String tag) {
         return new Tag(tag);
     }
 }

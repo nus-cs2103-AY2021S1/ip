@@ -80,7 +80,7 @@ public class TaskSaveAndLoadManager {
                 TagList tagList = loadTagList(string);
                 return new DeadlineTask(taskDescription, isDone, dt, tagList);
             } else {
-                return new DeadlineTask(taskDescription, isDone, dt,null);
+                return new DeadlineTask(taskDescription, isDone, dt, null);
             }
         } else if (taskType.equals("event")) {
             DateAndTime dt = new DateAndTime(LocalDate.parse(splitDataString[3]),
@@ -89,7 +89,7 @@ public class TaskSaveAndLoadManager {
                 TagList tagList = loadTagList(string);
                 return new DeadlineTask(taskDescription, isDone, dt, tagList);
             } else {
-                return new DeadlineTask(taskDescription, isDone, dt,null);
+                return new DeadlineTask(taskDescription, isDone, dt, null);
             }
         } else {
             return null;

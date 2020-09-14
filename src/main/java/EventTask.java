@@ -5,6 +5,14 @@
 public class EventTask extends Task {
     private DateAndTime eventTime;
 
+    /**
+     * Creates an EventTask object with name, status, time, and tag.
+     *
+     * @param taskName A String representing task name.
+     * @param isDone A boolean representing task status.
+     * @param eventTime A DateAndTime event representing event time.
+     * @param tagList A TagList to manage tags.
+     */
     public EventTask(String taskName, boolean isDone, DateAndTime eventTime, TagList tagList) {
         super(taskName, isDone, tagList);
         this.eventTime = eventTime;

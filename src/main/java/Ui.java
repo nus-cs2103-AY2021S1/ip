@@ -1,11 +1,11 @@
+import java.util.ArrayList;
+
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 
-import java.util.ArrayList;
-
 public class Ui {
-    private static final String GREETING = "Ah another dude trying to be productive. " +
-                                            "Sure. What do you want, sweetie? Type help to view all commands. \n";
+    private static final String GREETING = "Ah another dude trying to be productive. "
+                                            + "Sure. What do you want, sweetie? Type help to view all commands. \n";
     private static final String BYE = "That's all? Sure. See you again (hopefully LOL).";
     private static final String LIST_REPLY = "Checking the whole list doesn't make you finish anything faster... \n";
     private static final String FIND_REPLY = "Found 'em. But at what cost... \n";
@@ -16,7 +16,7 @@ public class Ui {
     private static final String ADD_REPLY_TOP = "Wow, another task. Added. You sure you can finish them all? \n";
     private static final String ADD_REPLY_BOT = "Now you have a grand total of %d tasks";
     private static final String DONE_REPLY = "Wah finally. Wondering how long more I need to wait... \n";
-    private static final String HELP_REPLY =  "\u0AE6 todo [description] - add a todo task \n"
+    private static final String HELP_REPLY = "\u0AE6 todo [description] - add a todo task \n"
                                             + "\u0AE6 deadline [description] /by [YYYY-MM-DD] - add a deadline task \n"
                                             + "\u0AE6 event [description] /at [YYYY-MM-DD HH:mm] - add an event task \n"
                                             + "\u0AE6 list - view all current tasks \n"

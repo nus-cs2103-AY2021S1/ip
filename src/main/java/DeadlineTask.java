@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 /**
  * <p>The DeadlineTask class defines the behavior of deadline task that has a
  * specific date to be done by for the task.</p>

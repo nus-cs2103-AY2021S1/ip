@@ -1,9 +1,9 @@
-import javafx.scene.layout.VBox;
-
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class Duke  {
+import javafx.scene.layout.VBox;
+
+public class Duke {
     private Ui ui;
     private TaskSaveAndLoadManager taskSaveAndLoadManager = new TaskSaveAndLoadManager();
     private TaskManager taskManager;

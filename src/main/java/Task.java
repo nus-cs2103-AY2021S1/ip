@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 /**
  * <p>The Task class defines the behaviour of a task.</p>
  */
