@@ -88,12 +88,28 @@ Examples:
  - `x 3`
 
 ### 2.8 Add a new macro
-*Warning: this is an advanced feature!*
+**Warning: this is an advanced feature!**
+
 Adds a macro to run several commands in succession.
 
 NOTE: allows you to use one of the arguments as a command, allowing
 you to build higher order commands but also potentially infinite loops.
-*USE WITH CAUTION*.
+
+**USE WITH CAUTION**.
+
+#### How it works
+
+Macros accept *arguments* that can be substituted as variables into a series
+of commands defined by a user.
+
+Arguments are strings with associated option names added after the macro
+name.
+Arguments with no associated option name are called *Unnamed arguments*.
+
+E.g. in the macro `sample abc -t test -v test2`, the macro's name is
+ `sample`. `test` and `test2` are
+arguments associated to the options `t` and `v` respectively, and
+`abc` is an unnamed argument.
 
 Arguments to the macro can be substituted in the commands using the syntax:
 `\ARGUMENT_NAME`.
@@ -103,13 +119,15 @@ Unnamed arguments can be substituted using the syntax: `\$`
 Format: `macro MACRO_NAME ARGUMENT_1 ARGUMENT_2 ... ; 
 COMMAND_NAME_1 ARGUMENTS_TO_COMMAND \REUSED_ARGUMENT; COMMAND_NAME_2...`
 
-Examples:
 #### Example 1
 `macro spEvent -at ; event special \$ -at \at`
  
  Example usage of this macro: `spEvent test -at 2020-09-13`
  
  The following command will be executed by the macro: `event special test -at 2020-09-13`
+ 
+ i.e. in `event special \$ -at \at`, `\$` and `\at` will be substituted with
+  `test` and `2020-09-13` respectively.
 
 #### Example 2
 `macro doubleTodo ; todo \$ ; todo second \$`
