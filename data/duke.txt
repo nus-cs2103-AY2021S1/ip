@@ -1,5 +1,6 @@
 T , 1 , read book 
-D , 1 , return book , 2020-09-12
 E , 0 , book fair , 2020-10-19
 D , 0 , drawing , 2020-09-10
-T , 0 , read book 
+T , 0 , play piano 
+D , 1 , homework , 2020-10-12
+E , 0 , birthday party , 2020-12-20

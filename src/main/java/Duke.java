@@ -74,15 +74,13 @@ public class Duke {
 
     /**
      * Sets duplicate task.
-     *
      */
     public void setDuplicateTask(Task task) {
         this.duplicateTask = task;
     }
 
     /**
-     * Deletes duplicate task.
-     *
+     * Resets duplicate task to null.
      */
     public void resetDuplicateTask() {
         this.duplicateTask = null;

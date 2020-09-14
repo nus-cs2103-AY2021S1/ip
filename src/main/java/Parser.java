@@ -158,7 +158,7 @@ public class Parser {
                     isAt = true;
                     description = description.substring(0, description.length() - 1);
                 }
-                if (isAt) {
+                if (!isAt) {
                     description += command[i] + " ";
                 } else {
                     if (i == command.length - 2) {
@@ -180,7 +180,13 @@ public class Parser {
         }
         return "";
     }
-    
+
+    /**
+     * Checks duplicates.
+     *
+     * @param str String format of task added by user.
+     * @param taskList List of tasks.        
+     */
     public boolean detectDuplicates(String str, TaskList taskList) {
         for (int i = 0; i < taskList.getSize(); i++) {
             boolean isDuplicate = str.equals(taskList.getTask(i).toString());

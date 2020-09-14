@@ -7,8 +7,6 @@ public class Launcher {
      * @param args Command line arguments.
      */
     public static void main(String[] args) {
-
         Application.launch(Main.class, args);
-        //new Duke(PATH).run();
     }
 }
