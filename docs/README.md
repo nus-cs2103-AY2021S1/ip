@@ -19,7 +19,7 @@ optimized for use via a Command Line Interface (CLI).
 home folder for your Duke.
 4. Double-click the file to start the app. The GUI similar to 
 the below should appear in a few seconds. 
-![Image of enter page](/docs/UiImage/EnterPage.png)
+[![Enter page]](https://github.com/YangYue128-helen/ip/blob/master/docs/UiImage/EnterPage.png)
 
 ### Features 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.  
