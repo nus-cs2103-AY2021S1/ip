@@ -8,7 +8,7 @@ DukeBunny offers several useful features with a touch of posh attitude to it.
 3. Copy the downloaded jar file to the folder you want to use as the home folder for your DukeBunny.
 4. Double-click the file to start the app. The GUI below should appear in a few seconds.\
 ![DukeBunnyWelcomeSS](/docs/DukeBunnyWelcomeSS.png)
-5. Enter commands in the command box and press Enter to execute it. (Please refer to command list)
+5. Enter command in the command box and press Enter to execute it. (Please refer to command list)
 
 ## Features
 Words in `UPPER_CASE` are the parameters that are supplied by the user.\
@@ -22,7 +22,7 @@ Example:
 `todo Buy bread`
 
 Expected outcome:
-```javascript
+```
 No worries, the following task has been added to your list:
  -------------------------------------------------------------
 [T][✘] Buy bread
@@ -39,7 +39,7 @@ Example:
 `deadline Physics Project /by 2020-12-04 1800`
 
 Expected outcome:
-```javascript
+```
 No worries, the following task has been added to your list:
 -------------------------------------------------------------
 [D][✘] Physics Project (by: 4 December 2020 06:00 PM)
@@ -57,7 +57,7 @@ Example:
 `event Family Christmas party /at 2020-12-25 1800-2300`
 
 Expected outcome:
-```javascript
+```
 No worries, the following task has been added to your list:
 -------------------------------------------------------------
 [E][✘] Familiy Christmas party (at: 25 December 2020 06:00 PM to 11:00 PM)
@@ -70,7 +70,7 @@ Views all tasks that are in the task list.
 Format: `list`
 
 Example:
-```javascript
+```
 todo Buy bread
 deadline Physics Project /by 2020-12-04 1800
 event Family Christmas party /at 2020-12-25 1800-2300
@@ -78,7 +78,7 @@ list
 ```
 
 Expected outcome:
-```javascript
+```
 Here are the tasks in your list:
 -------------------------------------------------------------
 1.[T][✘] Buy bread
@@ -92,13 +92,13 @@ in the task list displayed when `list` is called.
 Format: `done INDEX`
 
 Example:
-```javascript
+```
 list
 done 1
 ```
 
 Expected outcome:
-```javascript
+```
 Here are the tasks in your list:
 -------------------------------------------------------------
 1.[T][✘] Buy bread
@@ -107,7 +107,7 @@ Here are the tasks in your list:
 ```
 
 When `delete 1` is entered.
-```javascript
+```
 Splendid! I've marked the following task as done:
 -------------------------------------------------------------
   [✓] Buy bread
@@ -119,7 +119,7 @@ in the task list displayed when `list` is entered.
 Format: `delete INDEX`
 
 Example:
-```javascript
+```
 list
 delete 1
 ```
@@ -127,7 +127,7 @@ delete 1
 Expected outcome:
 
 When `list` is entered.
-```javascript
+```
 Here are the tasks in your list:
 -------------------------------------------------------------
 1.[T][✓] Buy bread
@@ -136,7 +136,7 @@ Here are the tasks in your list:
 ```
 
 When `delete 1` is entered.
-```javascript
+```
 No worries, the following task has been deleted from your list:
 -------------------------------------------------------------
   [✓] Buy bread
@@ -152,7 +152,7 @@ Example:
 `find project`
 
 Expected outcome:
-```javascript
+```
 Splendid! Here are the tasks in your list that matches 'project':
 -------------------------------------------------------------
 1.[D][✘] Physics Project (by: 4 December 2020 06:00 PM)
@@ -166,7 +166,7 @@ Example:
 `finddt 2020-12-25`
 
 Expected outcome:
-```javascript
+```
 Splendid! Here are the tasks in your list that matches '2020-12-25':
 -------------------------------------------------------------
 1.[E][✘] Family Christmas party (at: 25 December 2020 06:00 PM to 11:00 PM)
