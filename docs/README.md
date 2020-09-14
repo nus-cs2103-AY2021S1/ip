@@ -1,5 +1,9 @@
 # User Guide
 
+## Sample App Demo
+
+![image](Ui.gif)
+
 ## Features 
 
 ### Todo Feature
