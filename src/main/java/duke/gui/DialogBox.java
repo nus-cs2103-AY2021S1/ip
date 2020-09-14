@@ -4,12 +4,22 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -23,7 +33,7 @@ public class DialogBox extends HBox {
     @FXML
     private Label dialog;
     @FXML
-    private ImageView displayPicture;
+    private Circle displayPicture;
 
     /**
      * Creates a dialog box with a text and an image.
@@ -42,7 +52,7 @@ public class DialogBox extends HBox {
         }
 
         this.dialog.setText(text);
-        this.displayPicture.setImage(img);
+        this.displayPicture.setFill(new ImagePattern(img));
     }
 
     /**
@@ -53,7 +63,13 @@ public class DialogBox extends HBox {
      * @return Dialog box with the user's image and text.
      */
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        DialogBox db = new DialogBox(text, img);
+        BackgroundFill backgroundFill = new BackgroundFill(
+                Color.LIGHTGRAY,
+                new CornerRadii(5),
+                Insets.EMPTY);
+        db.dialog.setBackground(new Background(backgroundFill));
+        return db;
     }
 
     /**
@@ -64,9 +80,37 @@ public class DialogBox extends HBox {
      * @return Dialog box with Duke's image and text.
      */
     public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+        DialogBox db = new DialogBox(text, img);
         db.flip();
+        boolean isError = db.isErrorMessage(text);
+        if (isError) {
+            db.dialog.setTextFill(Color.RED);
+            BorderStroke borderStroke = new BorderStroke(
+                    Color.RED,
+                    BorderStrokeStyle.SOLID,
+                    new CornerRadii(5),
+                    BorderWidths.DEFAULT);
+            db.dialog.setBorder(new Border(borderStroke));
+        } else {
+            BackgroundFill backgroundFill = new BackgroundFill(
+                    Color.LIGHTGREEN,
+                    new CornerRadii(5),
+                    Insets.EMPTY);
+            db.dialog.setBackground(new Background(backgroundFill));
+        }
         return db;
+    }
+
+    /**
+     * Checks if the response is an error message.
+     *
+     * @param response String describing the response.
+     * @return If the response is an error message.
+     */
+    private boolean isErrorMessage(String response) {
+        String[] splitResponse = response.split(" ", 2);
+        String firstWord = splitResponse[0];
+        return firstWord.contains("ERROR:");
     }
 
     /**

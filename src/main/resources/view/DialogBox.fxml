@@ -2,14 +2,21 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
-<fx:root xmlns:fx="http://javafx.com/fxml/1" alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308"
-         maxWidth="1.7976931348623157E308"
-         prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/8.0.171">
+<?import javafx.scene.shape.Circle?>
+<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0"
+         type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label fx:id="dialog" text="Label" wrapText="true"/>
-        <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true"/>
+        <Label fx:id="dialog" text="Label" textOverrun="CLIP" wrapText="true">
+            <HBox.margin>
+                <Insets left="8.0" right="8.0"/>
+            </HBox.margin>
+            <padding>
+                <Insets bottom="4.0" left="8.0" right="8.0" top="4.0"/>
+            </padding>
+        </Label>
+        <Circle fx:id="displayPicture" fill="WHITE" radius="45.0" stroke="WHITE" strokeLineCap="ROUND"
+                strokeType="OUTSIDE" strokeWidth="0.0"/>
     </children>
     <padding>
         <Insets bottom="15.0" left="5.0" right="5.0" top="15.0"/>
