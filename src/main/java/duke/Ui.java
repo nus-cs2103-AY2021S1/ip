@@ -5,7 +5,6 @@ import java.util.List;
 import duke.task.Task;
 
 
-
 /**
  * Deals with interactions with the user.
  */
@@ -14,15 +13,17 @@ public class Ui {
 
     /**
      * Displays the introductions.
+     *
      * @return The introductions.
      */
     public String intro() {
-        return reply("^._.^  I'm Pan-Pan, I'll be your best fur-end!!! "
-                + "Type 'meow' for the list of instructions\n");
+        return reply("^._.^  I'm Chubbs, I'll be your best fur-end!!! "
+                + "Type 'meow' for the list of instructions" + '\n');
     }
 
     /**
      * Displays the message with the indentation.
+     *
      * @param string String to be displayed.
      * @return The message with proper indentation.
      */
@@ -32,6 +33,7 @@ public class Ui {
 
     /**
      * Displays the list of tasks
+     *
      * @param tasks The list of tasks.
      * @return The list of tasks in proper format.
      */
@@ -52,6 +54,7 @@ public class Ui {
 
     /**
      * Display the filtered list with the proper response message to the user.
+     *
      * @param filteredTasks The filtered tasks.
      * @return The list of filtered tasks.
      */
@@ -74,8 +77,9 @@ public class Ui {
 
     /**
      * Displays the message when a task is added to the list.
+     *
      * @param currentTask The task to be added.
-     * @param size The size of the list.
+     * @param size        The size of the list.
      * @return The message when a task is added.
      */
     public String addMessage(Task currentTask, Integer size) {
@@ -91,6 +95,7 @@ public class Ui {
 
     /**
      * Displays the message when a task is marked as done.
+     *
      * @param currentTask The tasks that was marked as done.
      * @return The message when a task is marked as done.
      */
@@ -106,6 +111,7 @@ public class Ui {
 
     /**
      * Displays the farewell message
+     *
      * @return The farewell message.
      */
     public String farewell() {
@@ -114,8 +120,9 @@ public class Ui {
 
     /**
      * Displays the message after deleting a task.
+     *
      * @param currentTask The task deleted.
-     * @param sizeLeft The size of the list after deleting the task.
+     * @param sizeLeft    The size of the list after deleting the task.
      * @return The delete message.
      */
     public String deleteMessage(Task currentTask, Integer sizeLeft) {
@@ -131,6 +138,7 @@ public class Ui {
 
     /**
      * Displays the current deadlines/events this week.
+     *
      * @param weeklyTasks The deadlines/events this week.
      * @return The string version of the deadlines/events this week in proper format.
      */
@@ -154,6 +162,7 @@ public class Ui {
 
     /**
      * Prints out the cat bot guide
+     *
      * @return The cat bot guide
      */
     public String displayGuide() {

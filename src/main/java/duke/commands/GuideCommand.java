@@ -12,8 +12,9 @@ public class GuideCommand implements Command {
 
     /**
      * Displays the chatbot guide.
-     * @param tasks TaskList.
-     * @param ui Ui.
+     *
+     * @param tasks   TaskList.
+     * @param ui      Ui.
      * @param storage Storage.
      * @return The reminder message by the Ui.
      */

@@ -11,14 +11,16 @@ public class Deadline extends Task {
 
     /**
      * Deadline constructor.
+     *
      * @param description Details of the task.
-     * @param isDone Progress of the task.
-     * @param date Date of the deadline.
+     * @param isDone      Progress of the task.
+     * @param date        Date of the deadline.
      */
     public Deadline(String description, boolean isDone, LocalDateTime date) {
         super(description, isDone);
         this.date = date;
     }
+
     public LocalDateTime getDate() {
         return this.date;
     }

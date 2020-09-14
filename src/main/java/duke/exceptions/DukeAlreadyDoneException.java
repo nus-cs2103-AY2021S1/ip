@@ -8,7 +8,6 @@ public class DukeAlreadyDoneException extends DukeException {
 
     public static final String ERROR_ALREADY_DONE = "This task is already done!";
 
-
     /**
      * DukeAlreadyDoneException constructor.
      */

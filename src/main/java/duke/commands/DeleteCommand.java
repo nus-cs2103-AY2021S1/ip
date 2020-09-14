@@ -15,6 +15,7 @@ public class DeleteCommand implements Command {
 
     /**
      * DeleteCommand constructor.
+     *
      * @param index The index of the task in the array to be deleted.
      */
     public DeleteCommand(Integer index) {
@@ -24,14 +25,16 @@ public class DeleteCommand implements Command {
     /**
      * Executes the deletion of task and sends the appropriate response to the user and
      * also stores the changes to the storage.
-     * @param tasks TaskList.
-     * @param ui Ui.
+     *
+     * @param tasks   TaskList.
+     * @param ui      Ui.
      * @param storage Storage.
      * @return The delete message by the Ui.
      * @throws DukeException Exceptions when executing the different methods of TaskList,
-     * Ui and Storage.
+     *                       Ui and Storage.
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage)
+            throws DukeException {
         if (index >= tasks.getSize() || index < 0) {
             throw new DukeInvalidIndexException();
         }

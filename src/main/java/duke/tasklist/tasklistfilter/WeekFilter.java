@@ -17,7 +17,7 @@ public class WeekFilter implements TaskListFilter {
     private LocalDateTime endOfWeek;
 
     /**
-     * WeekFilter Constructor. The contsructor finds the week of the year and the
+     * WeekFilter Constructor. The constructor finds the week of the year and the
      * current year.
      */
     public WeekFilter() {
@@ -29,6 +29,7 @@ public class WeekFilter implements TaskListFilter {
 
     /**
      * Check if the event or deadline occur this week.
+     *
      * @param task The given task.
      * @return Boolean if the task is occurs this week.
      */
@@ -44,7 +45,7 @@ public class WeekFilter implements TaskListFilter {
         } else {
             taskDate = ((Event) task).getDate();
         }
-
+        // Takes note of the day, month and the year of the task
         int dayOfTask = taskDate.getDayOfMonth();
         int monthOfTask = taskDate.getMonthValue() - 1;
         int yearOfTask = taskDate.getYear();

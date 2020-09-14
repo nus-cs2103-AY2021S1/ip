@@ -29,9 +29,11 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/cutecat.jpeg"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/chubbycat.jpeg"));
 
+    /**
+     * Initialize the MainWindow.
+     */
     @FXML
     public void initialize() {
-
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         scrollPane.setBackground(Background.EMPTY);
     }
@@ -50,14 +52,19 @@ public class MainWindow extends AnchorPane {
         );
     }
 
+    /**
+     * Adds the DialogBoxes to the container.
+     *
+     * @param nodes The Dialog Boxes.
+     */
     @SafeVarargs
     private void addToDialogContainer(Node... nodes) {
         dialogContainer.getChildren().addAll(nodes);
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Creates two dialog boxes, one echoing user input and the other containing bot's reply and then appends them to
+     * the dialog container. Clears the user input after processing. Exits when the input is 'bye'.
      */
     @FXML
     private void handleUserInput() {

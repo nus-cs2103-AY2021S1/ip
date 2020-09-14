@@ -13,8 +13,9 @@ public class RemindCommand implements Command {
 
     /**
      * Displays deadlines/events that occur this week.
-     * @param tasks TaskList.
-     * @param ui Ui.
+     *
+     * @param tasks   TaskList.
+     * @param ui      Ui.
      * @param storage Storage.
      * @return The reminder message by the Ui.
      */

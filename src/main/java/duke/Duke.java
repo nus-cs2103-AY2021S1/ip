@@ -50,6 +50,7 @@ public class Duke {
 
     /**
      * Returns the appropriate response from the chat bot.
+     *
      * @param input The user input.
      * @return The appropriate response message.
      */

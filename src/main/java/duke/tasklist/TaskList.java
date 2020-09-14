@@ -15,6 +15,7 @@ public class TaskList {
 
     /**
      * TaskList constructor.
+     *
      * @param planner The list of tasks.
      */
     public TaskList(List<Task> planner) {
@@ -23,6 +24,7 @@ public class TaskList {
 
     /**
      * Adds a task into the planner.
+     *
      * @param task Task object.
      */
     public void addToPlanner(Task task) {
@@ -31,6 +33,7 @@ public class TaskList {
 
     /**
      * Gives the number of tasks in the planner.
+     *
      * @return The number of tasks.
      */
     public Integer getSize() {
@@ -39,6 +42,7 @@ public class TaskList {
 
     /**
      * Gives the list of tasks.
+     *
      * @return The list of tasks.
      */
     public List<Task> getPlanner() {
@@ -47,6 +51,7 @@ public class TaskList {
 
     /**
      * Marks the task as done.
+     *
      * @param index The index of the task in the list of tasks.
      * @return The task that is marked as done.
      */
@@ -57,6 +62,7 @@ public class TaskList {
 
     /**
      * Deletes the task.
+     *
      * @param index The index of the task in the list of tasks.
      * @return The task deleted.
      */
@@ -66,6 +72,7 @@ public class TaskList {
 
     /**
      * Gives the task.
+     *
      * @param index The index of the specified task.
      * @return The task inquired.
      */
@@ -75,6 +82,7 @@ public class TaskList {
 
     /**
      * Filters the list of tasks with the keyword.
+     *
      * @param listFilter The filter for the tasklist.
      * @return A filtered list of tasks.
      */
@@ -96,15 +104,14 @@ public class TaskList {
         });
         return filteredTasks;
 
-        */
-
         // Stream Version
-        //        return tasks.stream()
-        //                .filter(task -> task.getDescription().contains(keyword))
-        //                .collect(Collectors.toList());
         return tasks.stream()
-        .filter(task -> listFilter.filter(task))
-        .collect(Collectors.toList());
+            .filter(task -> task.getDescription().contains(keyword))
+            .collect(Collectors.toList());
+        */
+        return tasks.stream()
+                .filter(task -> listFilter.filter(task))
+                .collect(Collectors.toList());
 
     }
 }

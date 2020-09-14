@@ -7,7 +7,7 @@ package duke.exceptions;
 public class DukeInvalidTaskException extends DukeException {
 
     public static final String ERROR_INVALID_TASK = "Paw-don me, "
-            + "I feline sad that I cannot understand you ^._.^";
+            + "I cannot understand you ^._.^";
 
 
     /**

@@ -16,6 +16,7 @@ public class DoneCommand implements Command {
 
     /**
      * DoneCommand constructor.
+     *
      * @param index The index of the task in the array to be marked as done.
      */
     public DoneCommand(Integer index) {
@@ -25,20 +26,22 @@ public class DoneCommand implements Command {
     /**
      * Executes the marking of task as done and sends the appropriate response to the user.
      * It also stores the changes to the storage.
-     * @param tasks TaskList.
-     * @param ui Ui.
+     *
+     * @param tasks   TaskList.
+     * @param ui      Ui.
      * @param storage Storage.
      * @return The done message by the Ui.
      * @throws DukeException Exceptions when executing the different methods of TaskList,
-     * Ui and Storage. Also accounts for index errors.
+     *                       Ui and Storage. Also accounts for index errors.
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage)
+            throws DukeException {
         if (index >= tasks.getSize() || index < 0) {
             throw new DukeInvalidIndexException();
         }
         Task currentTask = tasks.getTask(index);
 
-        if (currentTask.getIsDone()) {
+        if (currentTask.isDone()) {
             throw new DukeAlreadyDoneException();
         }
         tasks.markAsDone(index);

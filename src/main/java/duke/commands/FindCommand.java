@@ -14,6 +14,7 @@ public class FindCommand implements Command {
 
     /**
      * FindCommand constructor.
+     *
      * @param keyword The keyword to filter the list of tasks.
      */
     public FindCommand(String keyword) {
@@ -22,8 +23,9 @@ public class FindCommand implements Command {
 
     /**
      * Displays the filtered list of tasks with the keyword.
-     * @param tasks TaskList.
-     * @param ui Ui.
+     *
+     * @param tasks   TaskList.
+     * @param ui      Ui.
      * @param storage Storage.
      * @return The find message by the Ui.
      */
