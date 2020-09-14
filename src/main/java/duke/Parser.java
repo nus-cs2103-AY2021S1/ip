@@ -61,6 +61,14 @@ public class Parser {
         }
     }
 
+    private static String[] getSplitDescription(String[] commandArr, String splitBy, String message) throws MissingInformationException {
+        String[] descriptionArr = commandArr[1].split(splitBy, 2);
+        if (descriptionArr.length < 2 || descriptionArr[1].isBlank()) {
+            throw new MissingInformationException(message);
+        }
+        return descriptionArr;
+    }
+
     private static Command parseDelete(String[] commandArr) throws MissingInformationException {
         int index = getIndex(commandArr);
         return new DeleteCommand(index);
@@ -90,11 +98,7 @@ public class Parser {
 
     private static Command parseDeadline(String[] commandArr) throws MissingInformationException, DateException {
         checkDescription(commandArr, "The description of a deadline cannot be empty.");
-
-        String[] descriptionArr = commandArr[1].split(" /by ", 2);
-        if (descriptionArr.length < 2 || descriptionArr[1].isBlank()) {
-            throw new MissingInformationException("Deadline is missing a date.");
-        }
+        String[] descriptionArr = getSplitDescription(commandArr, " /by ", "Deadline is missing a date.");
         Date date = DateFormat.parseDate(descriptionArr[1]);
         return new AddCommand(TaskType.DEADLINE, descriptionArr[0], date);
 
@@ -102,11 +106,7 @@ public class Parser {
 
     private static Command parseEvent(String[] commandArr) throws MissingInformationException, DateException {
         checkDescription(commandArr, "The description of an event cannot be empty.");
-
-        String[] descriptionArr = commandArr[1].split(" /at ", 2);
-        if (descriptionArr.length < 2 || descriptionArr[1].isBlank()) {
-            throw new MissingInformationException("Event is missing a date.");
-        }
+        String[] descriptionArr = getSplitDescription(commandArr, " /at ", "Event is missing a date.");
         Date date = DateFormat.parseDate(descriptionArr[1]);
         return new AddCommand(TaskType.EVENT, descriptionArr[0], date);
 

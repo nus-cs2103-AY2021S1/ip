@@ -76,40 +76,32 @@ public class TaskList {
      */
     public Task addTodo(String name) {
         Todo todo = new Todo(name, false);
-        addTask(todo);
+        taskList.add(todo);
         return todo;
     }
 
     /**
      * Adds a deadline to the list of tasks and returns it.
      * @param name the name of the deadline task
-     * @param by the date the deadline is due
+     * @param deadlineDate the date the deadline is due
      * @return the newly added deadline
      */
-    public Task addDeadline(String name, Date by) {
-        Deadline deadline = new Deadline(name, false, by);
-        addTask(deadline);
+    public Task addDeadline(String name, Date deadlineDate) {
+        Deadline deadline = new Deadline(name, false, deadlineDate);
+        taskList.add(deadline);
         return deadline;
     }
 
     /**
      * Adds an event to the list of tasks and returns it.
      * @param name the name of the event task
-     * @param at the date the event is on
+     * @param eventDate the date the event is on
      * @return the newly added event
      */
-    public Task addEvent(String name, Date at) {
-        Event event = new Event(name, false, at);
-        addTask(event);
+    public Task addEvent(String name, Date eventDate) {
+        Event event = new Event(name, false, eventDate);
+        taskList.add(event);
         return event;
-    }
-
-    /**
-     * Adds a task to the list of tasks.
-     * @param task the task to be added
-     */
-    public void addTask(Task task) {
-        taskList.add(task);
     }
 
     /**

@@ -1,5 +1,6 @@
 package duke.gui;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -8,6 +9,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 import duke.Duke;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 /**
@@ -48,6 +52,24 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+        if (input.equals("bye")) {
+            handleExit();
+        }
+    }
+
+    /**
+     * Closes the GUI when user decides to exit.
+     */
+    private void handleExit() {
+        TimerTask timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                Platform.exit();
+                System.exit(0);
+            }
+        };
+
+        new Timer().schedule(timerTask, 1000);
     }
 }
 
