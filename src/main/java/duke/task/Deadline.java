@@ -37,7 +37,7 @@ public class Deadline extends Task {
             }
             date = LocalDate.parse(dateTimeSplit[0], dateParser);
         } catch (DateTimeParseException e) {
-            throw new DukeException("Yo! DateTime format is wrong. <dd/MM/yy [HH:MM]>");
+            throw new DukeException("Yo! DateTime format is wrong. <dd/MM/yy [HH:mm]>");
         }
     }
 
