@@ -31,6 +31,9 @@ public class DataSaver implements PopUpBox {
         Button saveAndQuit = new Button("Save and quit");
         Button notSaveAndQuit = new Button("Do not save and quit");
         Button cancel = new Button("Cancel");
+        saveAndQuit.defaultButtonProperty().bind(saveAndQuit.focusedProperty());
+        notSaveAndQuit.defaultButtonProperty().bind(notSaveAndQuit.focusedProperty());
+        cancel.defaultButtonProperty().bind(cancel.focusedProperty());
 
         Label saveDataMessage = new Label();
         saveAndQuit.setOnAction(e -> {

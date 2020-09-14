@@ -24,6 +24,7 @@ public class Messenger {
      * Error handling messages.
       */
     public static final char FROWN = '\u2639';
+    public static final String EMPTY_TEXT_FILLER = "What did you just say?";
     public static final String INDEX_FORMAT_ERROR = FROWN + " OOPS!!! Seems you have provided an invalid index :-(";
     public static final String COMMAND_UNRECOGNIZABLE_ERROR = FROWN + " OOPS!!! I'm sorry, "
             + "but I don't know what that means :-(";

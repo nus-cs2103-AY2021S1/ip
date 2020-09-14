@@ -3,6 +3,7 @@ package duke.controller;
 import java.io.IOException;
 import java.util.Collections;
 
+import duke.ui.Messenger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -96,6 +97,9 @@ public class DialogBox extends HBox {
      * @return a DialogBox instance from Duke.
      */
     public static DialogBox getDukeDialog(String text, Image img) {
+        if (text.length() == 0) {
+            text = Messenger.EMPTY_TEXT_FILLER;
+        }
         DialogBox dukeBox = new DialogBox(text, img);
         dukeBox.flip();
         dukeBox.setDialogContainerDirection(false);

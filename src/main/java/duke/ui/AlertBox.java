@@ -30,6 +30,7 @@ public class AlertBox implements PopUpBox {
         alertContent.setText(message);
         Button closeButton = new Button("Close");
         closeButton.setOnAction(e -> window.close());
+        closeButton.setDefaultButton(true);
 
         VBox layout = new VBox(20);
         layout.getChildren().addAll(alertContent, closeButton);
