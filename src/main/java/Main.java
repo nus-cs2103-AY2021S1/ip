@@ -21,6 +21,7 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
+            stage.setTitle("C-3PO");
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

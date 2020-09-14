@@ -67,7 +67,7 @@ public class ChatBot {
     }
 
     public String getWelcomeMsg() {
-        return welcomeMsg + "\nHello there! What can I do for you?";
+        return welcomeMsg + "\n\nHello! I am C-3PO, human cyborg relations. What can I do for you?";
     }
 
     public String getResponse(String input) {
