@@ -82,7 +82,7 @@ public class MainWindow extends AnchorPane {
         if (input.equals("bye")) {
             new Timer().schedule(new TimerTask() {
                 public void run () {
-                    Platform.exit();
+                    System.exit(0);
                 }
             }, 1000);
         }
