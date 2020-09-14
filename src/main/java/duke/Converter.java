@@ -30,7 +30,7 @@ public class Converter {
      * @param s input string
      * @return a formatted string
      */
-    static String by(String s) {
+    public static String by(String s) {
         String first = s.split("/by ")[0];
         String second = s.split("/by ")[1];
         LocalDate date = LocalDate.parse(second);

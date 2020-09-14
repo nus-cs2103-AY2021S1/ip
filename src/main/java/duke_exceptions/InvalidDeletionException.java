@@ -5,7 +5,7 @@ package duke_exceptions;
  * </code> object is used when attempted deletion index is invalid
  */
 public class InvalidDeletionException extends Exception {
-    InvalidDeletionException() {}
+    public InvalidDeletionException() {}
     @Override
     public String toString() {
         return "OOPS!!! Deletion index is invalid.";

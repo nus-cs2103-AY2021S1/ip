@@ -6,7 +6,7 @@ package duke_exceptions;
  * information
  */
 public class FindEmptyBodyException extends EmptyBodyException {
-    FindEmptyBodyException() {}
+    public FindEmptyBodyException() {}
     @Override
     public String toString() {
         return "OOPS!!! Empty find is invalid.";

@@ -6,7 +6,7 @@ package duke_exceptions;
  * information
  */
 public class TodoEmptyBodyException extends EmptyBodyException {
-    TodoEmptyBodyException() {}
+    public TodoEmptyBodyException() {}
     @Override
     public String toString() {
         return "OOPS!!! The description of a todo cannot be empty.";

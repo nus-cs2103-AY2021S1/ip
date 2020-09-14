@@ -5,7 +5,7 @@ package duke_exceptions;
  * Exception</code> object is used when invalid task type is detected
  */
 public class IllegalTaskTypeException extends Exception {
-    IllegalTaskTypeException() {}
+    public IllegalTaskTypeException() {}
     @Override
     public String toString() {
         return "OOPS!!! Cannot detect task type";

@@ -5,7 +5,7 @@ package duke;
  * a simple task without any constraints on dates
  */
 public class Todo extends Task {
-    Todo(String message) {
+    public Todo(String message) {
         super(message);
     }
 

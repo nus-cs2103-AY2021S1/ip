@@ -1,5 +1,3 @@
-<<<<<<< HEAD:src/main/java/Parser.java
-=======
 package duke;
 
 import java.util.ArrayList;
@@ -7,13 +5,12 @@ import java.util.List;
 import duke_exceptions.*;
 
 
->>>>>>> master:src/main/java/duke/Parser.java
 public class Parser {
     // constant SPACE and LINE for format purposes
-    public static String SPACE = "     ";
-    public static String INDENT = "      ";
-    public static String MORE_INDENT = "        ";
-    public static String LINE = "_____________________________________________\n";
+    private static String SPACE = "     ";
+    private static String INDENT = "      ";
+    private static String MORE_INDENT = "        ";
+    private static String LINE = "_____________________________________________\n";
 
     /**
      * Returns formatted string, adding SPACE and LINE
@@ -258,7 +255,7 @@ public class Parser {
      * @param taskType task type, T or D or E
      * @return a response string for a new task command
      */
-    public String handleAdd(TaskList lst, String command, TaskType taskType) {
+    private String handleAdd(TaskList lst, String command, TaskType taskType) {
         String description;
         try {
             description = command.split(" ", 2)[EXTRA];
