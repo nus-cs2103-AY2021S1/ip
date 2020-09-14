@@ -54,43 +54,33 @@ public class StorageManager {
         // generate data file
         try {
             dataFile.createNewFile();
+            Scanner fileScanner = new Scanner(dataFile);
+            while (fileScanner.hasNextLine()) {
+                // regenerate the DukeTasks
+                String savedTask = fileScanner.nextLine();
+                String[] taskData = savedTask.split("\\|");
+                DukeTask task;
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern(
+                        CommonString.DUKE_DATETIME_FORMAT.toString());
+                switch (taskData[0]) {
+                case "T":
+                    task = new TodoTask(taskData[2]);
+                    break;
+                case "E":
+                    task = new EventTask(taskData[2], LocalDateTime.parse(taskData[3], formatter));
+                    break;
+                default: // "D"
+                    task = new DeadlineTask(taskData[2], LocalDateTime.parse(taskData[3], formatter));
+
+                }
+                if (taskData[1].equals("1")) {
+                    task.markAsDone();
+                }
+                dataList.add(task);
+            }
         } catch (IOException e) {
             throw new DukeFileNotFoundException("Problem with creating data file\n" + e.getMessage());
         }
-
-        // read from data file
-        if (dataFile.exists()) {
-            try {
-                Scanner fileScanner = new Scanner(dataFile);
-
-                while (fileScanner.hasNextLine()) {
-                    // regenerate the DukeTasks
-                    String savedTask = fileScanner.nextLine();
-                    String[] taskData = savedTask.split("\\|");
-                    DukeTask task;
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern(
-                            CommonString.DUKE_DATETIME_FORMAT.toString());
-                    switch (taskData[0]) {
-                    case "T":
-                        task = new TodoTask(taskData[2]);
-                        break;
-                    case "E":
-                        task = new EventTask(taskData[2], LocalDateTime.parse(taskData[3], formatter));
-                        break;
-                    default: // "D"
-                        task = new DeadlineTask(taskData[2], LocalDateTime.parse(taskData[3], formatter));
-
-                    }
-                    if (taskData[1].equals("1")) {
-                        task.markAsDone();
-                    }
-                    dataList.add(task);
-                }
-            } catch (FileNotFoundException e) {
-                throw new DukeFileNotFoundException(e.getMessage());
-            }
-        }
-
         return dataList;
     }
 
@@ -105,11 +95,7 @@ public class StorageManager {
      */
     public void saveData(ArrayList<DukeTask> dataList) throws DukeIoException {
         assert dataList != null : "saveDate input dataList cannot be null";
-        StringBuilder dataString = new StringBuilder();
-        dataList.forEach(task ->
-                dataString.append(generateAdditionString(task)).append(System.lineSeparator()));
-        String output = dataString.toString();
-
+        String output = generateDataString(dataList);
         try {
             FileWriter writer = new FileWriter(filePath);
             writer.write(output);
@@ -117,6 +103,18 @@ public class StorageManager {
         } catch (IOException e) {
             throw new DukeIoException(e.getMessage());
         }
+    }
+
+    /**
+     * Generates the String representing all data in the datafile
+     * @param dataList List containing all DukeTask
+     * @return String denoting output
+     */
+    private String generateDataString(ArrayList<DukeTask> dataList) {
+        StringBuilder dataString = new StringBuilder();
+        dataList.forEach(task ->
+                dataString.append(generateAdditionString(task)).append(System.lineSeparator()));
+        return dataString.toString();
     }
 
     /**

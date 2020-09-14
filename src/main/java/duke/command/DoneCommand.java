@@ -46,15 +46,15 @@ public class DoneCommand extends Command {
         assert taskList != null : "DoneCommand must have a taskList";
         if (index < 0 || index >= taskList.getSize()) {
             throw new InvalidTaskIndexException();
-        } else if (taskList.getTaskList().get(index).getDoneStatus()) {
+        }
+        if (taskList.getTaskList().get(index).getDoneStatus()) {
             throw new TaskDoneException();
+        }
+        taskList.markDone(index);
+        if (isGuiTask) {
+            response = uiManager.getTaskMarkAsDone(taskList.getTaskList().get(index), taskList.getSize());
         } else {
-            taskList.markDone(index);
-            if (isGuiTask) {
-                response = uiManager.getMarkAsDone(taskList.getTaskList().get(index), taskList.getSize());
-            } else {
-                uiManager.printMarkAsDone(taskList.getTaskList().get(index), taskList.getSize());
-            }
+            uiManager.printTaskMarkAsDone(taskList.getTaskList().get(index), taskList.getSize());
         }
     }
 }

@@ -42,32 +42,51 @@ public class FindCommand extends Command {
                         StorageManager storageManager, boolean isGuiTask) {
         assert uiManager != null : "FindCommand must have a uiManager";
         assert taskList != null : "FindCommand must have a taskList";
+        ArrayList<DukeTask> filteredList = searchTaskList(taskList);
+        if (filteredList.size() == 0) { // The TaskList does not contain anything with keyword
+            if (isGuiTask) {
+                response = uiManager.getKeywordCannotBeFound(keyword);
+            } else {
+                uiManager.printKeywordCannotBeFound(keyword);
+            }
+        } else {
+            if (isGuiTask) {
+                response = buildResponseString(filteredList, uiManager);
+            } else {
+                uiManager.printKeywordFoundResult(keyword, filteredList.size() > 1);
+                IntStream.range(0, filteredList.size())
+                        .forEach(i -> uiManager.printNumberedTask(filteredList.get(i), i));
+            }
+        }
+    }
+
+    /**
+     * Returns a list of DukeTasks containing the keyword
+     * @param taskList TaskList of DukeTasks to be searched
+     * @return ArrayList of DukeTasks that contain the keyword
+     */
+    private ArrayList<DukeTask> searchTaskList(TaskList taskList) {
         ArrayList<DukeTask> filteredList = new ArrayList<>();
         taskList.getTaskList().forEach(task -> {
             if (task.getDescription().toLowerCase().contains(keyword.toLowerCase())) {
                 filteredList.add(task);
             }
         });
+        return filteredList;
+    }
 
-        if (filteredList.size() == 0) {
-            if (isGuiTask) {
-                response = uiManager.getFindCannotBeFound(keyword);
-            } else {
-                uiManager.printFindCannotBeFound(keyword);
-            }
-        } else {
-            if (isGuiTask) {
-                StringBuilder output = new StringBuilder(
-                        uiManager.getFindFilteredList(keyword, filteredList.size() > 1) + "\n");
-                IntStream.range(0, filteredList.size())
-                        .forEach(i -> output.append(uiManager.getNumberedTask(filteredList.get(i), i)).append("\n"));
-                response = output.toString();
-            } else {
-                uiManager.printFindFilteredList(keyword, filteredList.size() > 1);
-                IntStream.range(0, filteredList.size())
-                        .forEach(i -> uiManager.printNumberedTask(filteredList.get(i), i));
-            }
-        }
+    /**
+     * Returns a String denoting output of the Command response
+     * @param tasks ArrayList of the DukeTasks
+     * @param uiManager UIManager in charge of returning Strings related to the response
+     * @return String of the response
+     */
+    private String buildResponseString(ArrayList<DukeTask> tasks, CommandInteractionUi uiManager) {
+        StringBuilder output = new StringBuilder(
+                uiManager.getKeywordFoundResult(keyword, tasks.size() > 1) + "\n");
+        IntStream.range(0, tasks.size())
+                .forEach(i -> output.append(uiManager.getNumberedTask(tasks.get(i), i)).append("\n"));
+        return output.toString();
     }
 }
 

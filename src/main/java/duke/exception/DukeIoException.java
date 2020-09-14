@@ -11,6 +11,6 @@ public class DukeIoException extends DukeException {
 
     @Override
     public String guiString() {
-        return "Ngghhh...DukeTama didn't teach me to read/write from files...Please call him to ask why...";
+        return "Ngghhh...DukeTama methods to read/write from files is a lil wrong...Please call him to ask why...";
     }
 }

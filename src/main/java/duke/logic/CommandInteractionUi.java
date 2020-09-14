@@ -29,23 +29,23 @@ public interface CommandInteractionUi {
     String getNumberedTask(DukeTask task, int num);
 
     // DONE COMMAND
-    void printMarkAsDone(DukeTask task, int size);
+    void printTaskMarkAsDone(DukeTask task, int size);
 
-    String getMarkAsDone(DukeTask task, int size);
+    String getTaskMarkAsDone(DukeTask task, int size);
 
     // FIND COMMAND
-    void printFindCannotBeFound(String keyword);
+    void printKeywordCannotBeFound(String keyword);
 
-    String getFindCannotBeFound(String keyword);
+    String getKeywordCannotBeFound(String keyword);
 
-    void printFindFilteredList(String keyword, boolean isPlural);
+    void printKeywordFoundResult(String keyword, boolean isPlural);
 
-    String getFindFilteredList(String keyword, boolean isPlural);
+    String getKeywordFoundResult(String keyword, boolean isPlural);
 
     // SORT COMMAND
-    void printSortList(String tag, boolean isPlural);
+    void printSortListResult(String tag, boolean isPlural);
 
-    String getSortList(String tag, boolean isPlural);
+    String getSortListResult(String tag, boolean isPlural);
 
     // GENERAL
     void printTaskStatus(int size);

@@ -153,10 +153,10 @@ public class UiManager implements UserInteractionUi, CommandInteractionUi {
      * Prints when users invoke <code>DoneCommand</code>.
      * Method implemented from CommandInteractionUi interface.
      */
-    public void printMarkAsDone(DukeTask task, int size) {
+    public void printTaskMarkAsDone(DukeTask task, int size) {
         assert task != null : "printMarkAsDone dukeTask cannot be null";
 
-        System.out.println(getMarkAsDone(task, size));
+        System.out.println(getTaskMarkAsDone(task, size));
     }
 
     /**
@@ -167,7 +167,7 @@ public class UiManager implements UserInteractionUi, CommandInteractionUi {
      * @param size Number of tasks in list
      * @return String
      */
-    public String getMarkAsDone(DukeTask task, int size) {
+    public String getTaskMarkAsDone(DukeTask task, int size) {
         assert task != null : "getMarkAsDone dukeTask cannot be null";
 
         return "Oh...you're done? I'll mark it down for you...\n\n"
@@ -179,10 +179,10 @@ public class UiManager implements UserInteractionUi, CommandInteractionUi {
      * Prints when FindCommand does not find Task.
      * Method implemented from CommandInteractionUi interface.
      */
-    public void printFindCannotBeFound(String keyword) {
+    public void printKeywordCannotBeFound(String keyword) {
         assert keyword != null : "printFindCannotBeFound keyword cannot be null";
 
-        System.out.println(getFindCannotBeFound(keyword));
+        System.out.println(getKeywordCannotBeFound(keyword));
     }
 
     /**
@@ -192,7 +192,7 @@ public class UiManager implements UserInteractionUi, CommandInteractionUi {
      * @param keyword String containing keyword
      * @return String
      */
-    public String getFindCannotBeFound(String keyword) {
+    public String getKeywordCannotBeFound(String keyword) {
         assert keyword != null : "getFindCannotBeFound keyword cannot be null";
 
         return "...ngghh...I don't know any..." + "\"" + keyword + "\"...zzz...";
@@ -202,10 +202,10 @@ public class UiManager implements UserInteractionUi, CommandInteractionUi {
      * Prints Tasks found by FindCommand
      * Method implemented from CommandInteractionUi interface.
      */
-    public void printFindFilteredList(String keyword, boolean isPlural) {
+    public void printKeywordFoundResult(String keyword, boolean isPlural) {
         assert keyword != null : "printFindFilteredList keyword cannot be null";
 
-        System.out.println(getFindFilteredList(keyword, isPlural));
+        System.out.println(getKeywordFoundResult(keyword, isPlural));
     }
 
     /**
@@ -215,7 +215,7 @@ public class UiManager implements UserInteractionUi, CommandInteractionUi {
      * @param keyword String containing keyword
      * @return String
      */
-    public String getFindFilteredList(String keyword, boolean isPlural) {
+    public String getKeywordFoundResult(String keyword, boolean isPlural) {
         assert keyword != null : "getFindFilteredList keyword cannot be null";
 
         return "...*yawns*...I found " + (isPlural ? "some tasks" : "a task")
@@ -226,10 +226,10 @@ public class UiManager implements UserInteractionUi, CommandInteractionUi {
      * Prints Tasks sorted by SortCommand.
      * Method implemented from CommandInteractionUi interface.
      */
-    public void printSortList(String tag, boolean isPlural) {
+    public void printSortListResult(String tag, boolean isPlural) {
         assert tag != null : "printSortList tag cannot be null";
 
-        System.out.println(getSortList(tag, isPlural));
+        System.out.println(getSortListResult(tag, isPlural));
     }
 
     /**
@@ -239,7 +239,7 @@ public class UiManager implements UserInteractionUi, CommandInteractionUi {
      * @param tag String containing type of Tasks sorted.
      * @return String
      */
-    public String getSortList(String tag, boolean isPlural) {
+    public String getSortListResult(String tag, boolean isPlural) {
         assert tag != null : "getSortList tag cannot be null";
 
         return "...*yawns*...I sorted " + (isPlural ? "some tasks" : "a task")

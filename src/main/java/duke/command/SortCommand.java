@@ -37,25 +37,12 @@ public class SortCommand extends Command {
         verifyTag(tag);
         taskList.sortTaskList();
 
-        ArrayList<DukeTask> filteredList = new ArrayList<>();
-        taskList.getTaskList().forEach(task -> {
-            if (tag.equals("all")) {
-                filteredList.add(task);
-            } else if (tag.equals("deadline") && task instanceof DeadlineTask) {
-                filteredList.add(task);
-            } else if (tag.equals("event") && task instanceof EventTask) {
-                filteredList.add(task);
-            }
-        });
+        ArrayList<DukeTask> filteredList = filterTaskList(taskList);
 
         if (isGuiTask) {
-            StringBuilder output = new StringBuilder(
-                    uiManager.getSortList(tag, filteredList.size() > 1) + "\n");
-            IntStream.range(0, filteredList.size())
-                    .forEach(i -> output.append(uiManager.getNumberedTask(filteredList.get(i), i)).append("\n"));
-            response = output.toString();
+            response = buildResponseString(filteredList, uiManager);
         } else {
-            uiManager.printSortList(tag, filteredList.size() > 1);
+            uiManager.printSortListResult(tag, filteredList.size() > 1);
             IntStream.range(0, filteredList.size())
                     .forEach(i -> uiManager.printNumberedTask(filteredList.get(i), i));
         }
@@ -79,5 +66,38 @@ public class SortCommand extends Command {
         default:
             throw new InvalidInstructionFormatException();
         }
+    }
+
+    /**
+     * Returns an ArrayList of the Tasks equivalent to tag.
+     * @param taskList containing DukeTasks
+     * @return ArrayList of filtered DukeTasks
+     */
+    private ArrayList<DukeTask> filterTaskList(TaskList taskList) {
+        ArrayList<DukeTask> filteredList = new ArrayList<>();
+        taskList.getTaskList().forEach(task -> {
+            if (tag.equals("all")) {
+                filteredList.add(task);
+            } else if (tag.equals("deadline") && task instanceof DeadlineTask) {
+                filteredList.add(task);
+            } else if (tag.equals("event") && task instanceof EventTask) {
+                filteredList.add(task);
+            }
+        });
+        return filteredList;
+    }
+
+    /**
+     * Returns a String denoting output of the Command response
+     * @param filteredList TaskList of the filtered DukeTasks
+     * @param uiManager UIManager in charge of returning Strings related to the response
+     * @return String of the response
+     */
+    private String buildResponseString(ArrayList<DukeTask> filteredList, CommandInteractionUi uiManager) {
+        StringBuilder output = new StringBuilder(
+                uiManager.getSortListResult(tag, filteredList.size() > 1) + "\n");
+        IntStream.range(0, filteredList.size())
+                .forEach(i -> output.append(uiManager.getNumberedTask(filteredList.get(i), i)).append("\n"));
+        return output.toString();
     }
 }

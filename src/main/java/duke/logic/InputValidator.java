@@ -36,10 +36,10 @@ public class InputValidator {
     public static boolean validateSizeTwo(String[] instructionArray)
             throws InvalidInstructionLengthException {
         assert instructionArray != null : "validateSizeTwo array cannot be null";
-        if (instructionArray.length == 2) {
-            return true;
+        if (instructionArray.length != 2) {
+            throw new InvalidInstructionLengthException();
         } // if len != 2 or the input is not an integer
-        throw new InvalidInstructionLengthException();
+        return true;
     }
 
     /**
@@ -53,13 +53,13 @@ public class InputValidator {
     public static boolean validateSizeTwoAndInt(String[] instructionArray)
             throws InvalidInstructionLengthException, InvalidInstructionFormatException {
         assert instructionArray != null : "validateSizeTwoAndInt array cannot be null";
-        if (instructionArray.length == 2) {
-            if (isNumeric(instructionArray[1])) {
-                return true;
-            }
+        if (instructionArray.length != 2) {
+            throw new InvalidInstructionLengthException();
+        }
+        if (!isNumeric(instructionArray[1])) {
             throw new InvalidInstructionFormatException();
         }
-        throw new InvalidInstructionLengthException();
+        return true;
     }
 
 

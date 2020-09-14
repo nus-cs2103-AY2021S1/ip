@@ -45,13 +45,12 @@ public class DeleteCommand extends Command {
         assert taskList != null : "DeleteCommand must have a taskList";
         if (index < 0 || index >= taskList.getSize()) {
             throw new InvalidTaskIndexException();
+        }
+        DukeTask task = taskList.deleteFromList(index);
+        if (isGuiTask) {
+            this.response = uiManager.getDeleteTask(task, taskList.getSize());
         } else {
-            DukeTask task = taskList.deleteFromList(index);
-            if (isGuiTask) {
-                this.response = uiManager.getDeleteTask(task, taskList.getSize());
-            } else {
-                uiManager.printDeleteTask(task, taskList.getSize());
-            }
+            uiManager.printDeleteTask(task, taskList.getSize());
         }
     }
 }

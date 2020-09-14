@@ -37,17 +37,27 @@ public class ListCommand extends Command {
         assert uiManager != null : "ListCommand must have a uiManager";
         assert taskList != null : "ListCommand must have a taskList";
         if (isGuiTask) {
-            StringBuilder output = new StringBuilder();
-            IntStream.range(0, taskList.getSize())
-                    .forEach(i -> {
-                        output.append(uiManager.getNumberedTask(taskList.getTaskList().get(i), i)).append("\n");
-                    });
-            output.append("\n").append(uiManager.getTaskStatus(taskList.getSize()));
-            response = output.toString();
+            response = buildResponseString(taskList, uiManager);
         } else {
             IntStream.range(0, taskList.getSize())
                     .forEach(i -> uiManager.printNumberedTask(taskList.getTaskList().get(i), i));
             uiManager.printTaskStatus(taskList.getSize());
         }
+    }
+
+    /**
+     * Returns a String denoting output of the Command response
+     * @param taskList TaskList of the DukeTasks
+     * @param uiManager UIManager in charge of returning Strings related to the response
+     * @return String of the response
+     */
+    private String buildResponseString(TaskList taskList, CommandInteractionUi uiManager) {
+        StringBuilder output = new StringBuilder();
+        IntStream.range(0, taskList.getSize())
+                .forEach(i -> {
+                    output.append(uiManager.getNumberedTask(taskList.getTaskList().get(i), i)).append("\n");
+                });
+        output.append("\n").append(uiManager.getTaskStatus(taskList.getSize()));
+        return output.toString();
     }
 }
