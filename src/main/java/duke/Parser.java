@@ -82,17 +82,20 @@ public class Parser {
     private static Command parseGet(String[] commandArr) throws MissingInformationException, DateException {
         checkDescription(commandArr, "Date is missing!");
         Date date = DateFormat.parseDate(commandArr[1]);
+        assert date != null;
         return new GetCommand(date);
 
     }
 
     private static Command parseFind(String[] commandArr) throws MissingInformationException {
         checkDescription(commandArr, "Key word is missing!");
+        assert !commandArr[1].isBlank();
         return new FindCommand(commandArr[1]);
     }
 
     private static Command parseTodo(String[] commandArr) throws MissingInformationException {
         checkDescription(commandArr, "The description of a todo cannot be empty.");
+        assert !commandArr[1].isBlank();
         return new AddCommand(TaskType.TODO, commandArr[1]);
     }
 
@@ -100,6 +103,8 @@ public class Parser {
         checkDescription(commandArr, "The description of a deadline cannot be empty.");
         String[] descriptionArr = getSplitDescription(commandArr, " /by ", "Deadline is missing a date.");
         Date date = DateFormat.parseDate(descriptionArr[1]);
+        assert !descriptionArr[0].isBlank();
+        assert date != null;
         return new AddCommand(TaskType.DEADLINE, descriptionArr[0], date);
 
     }
@@ -108,6 +113,8 @@ public class Parser {
         checkDescription(commandArr, "The description of an event cannot be empty.");
         String[] descriptionArr = getSplitDescription(commandArr, " /at ", "Event is missing a date.");
         Date date = DateFormat.parseDate(descriptionArr[1]);
+        assert !descriptionArr[0].isBlank();
+        assert date != null;
         return new AddCommand(TaskType.EVENT, descriptionArr[0], date);
 
     }

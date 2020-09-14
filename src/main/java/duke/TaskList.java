@@ -39,6 +39,7 @@ public class TaskList {
      * @return the current list of tasks
      */
     public List<Task> getTasks() {
+        assert taskList != null;
         return taskList;
     }
 
@@ -47,6 +48,7 @@ public class TaskList {
      * @return the number of tasks
      */
     public int getCount() {
+        assert taskList != null;
         return taskList.size();
     }
 
@@ -56,6 +58,7 @@ public class TaskList {
      * @return the completed task
      */
     public Task completeTask(int index) {
+        assert taskList != null;
         taskList.get(index - 1).markAsDone();
         return taskList.get(index - 1);
     }
@@ -66,6 +69,7 @@ public class TaskList {
      * @return the deleted task
      */
     public Task deleteTask(int index) {
+        assert taskList != null;
         return taskList.remove(index - 1);
     }
 
@@ -75,6 +79,7 @@ public class TaskList {
      * @return the newly added todo
      */
     public Task addTodo(String name) {
+        assert !name.isBlank();
         Todo todo = new Todo(name, false);
         taskList.add(todo);
         return todo;
@@ -86,7 +91,11 @@ public class TaskList {
      * @param deadlineDate the date the deadline is due
      * @return the newly added deadline
      */
+
     public Task addDeadline(String name, Date deadlineDate) {
+
+        assert !name.isBlank();
+        assert deadlineDate != null;
         Deadline deadline = new Deadline(name, false, deadlineDate);
         taskList.add(deadline);
         return deadline;
@@ -99,6 +108,8 @@ public class TaskList {
      * @return the newly added event
      */
     public Task addEvent(String name, Date eventDate) {
+        assert !name.isBlank();
+        assert eventDate != null;
         Event event = new Event(name, false, eventDate);
         taskList.add(event);
         return event;
@@ -110,6 +121,8 @@ public class TaskList {
      * @return the list of tasks that are due or on that date
      */
     public List<Task> getTasksWithDate(Date date) {
+        assert taskList != null;
+        assert date != null;
         List<Task> result = new ArrayList<>();
         for (Task task : taskList) {
             if (task.getType() != TaskType.TODO && task.getDate().equals(date)) {
@@ -125,6 +138,8 @@ public class TaskList {
      * @return the list of tasks with the specific keyword or keywords
      */
     public List<Task> getTasksWithWord(String keyword) {
+        assert taskList != null;
+        assert ! keyword.isBlank();
         List<Task> result = new ArrayList<>();
         for (Task task : taskList) {
             if (task.getName().contains(keyword)) {
