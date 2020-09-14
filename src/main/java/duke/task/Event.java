@@ -36,7 +36,9 @@ public class Event extends Task {
             if (optStart.isPresent() && optEnd.isPresent()) {
                 startTime = optStart.get();
                 endTime = optEnd.get();
-                isInDateFormat = true;
+                if (endTime.compareTo(startTime) >= 0) { // if end happens after start
+                    isInDateFormat = true;
+                }
             }
         }
     }
