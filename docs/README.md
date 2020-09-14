@@ -49,7 +49,7 @@ Got it. I've added the task:
 Now you have 2 tasks in the list.
 
 Got it. I've added the task:
-[D][✗] Return book (by: DECEMBER 12 2020)
+[D][✗] Return book (by: DECEMBER 31 2020)
 Now you have 3 tasks in the list.
 ```
 
@@ -66,7 +66,7 @@ Expected outcome:
 ```
 1. [T][✗] Learn Java 
 2. [E][✗] Group meeting (at: Monday) 
-3. [D][✗] Return book (by: DECEMBER 12 2020)
+3. [D][✗] Return book (by: DECEMBER 31 2020)
 ```
 
 ### `done` - mark a task as done
@@ -96,7 +96,7 @@ Expected outcome:
 
 ```
 Noted! I've removed this task:
-[D][✗] Return book (by: DECEMBER 12 2020)
+[D][✗] Return book (by: DECEMBER 31 2020)
 Now you have 2 tasks in the list.
 ```
 
