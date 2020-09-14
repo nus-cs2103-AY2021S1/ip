@@ -3,18 +3,144 @@
 ## Features 
 
 ### Feature 1 
-Description of feature.
+To-do list
 
 ## Usage
 
-### `Keyword` - Describe action
+### `Add task` 
 
-Describe action and its outcome.
+Use the keyword **_todo_** followed by task description.
 
 Example of usage: 
 
-`keyword (optional arguments)`
+_todo feed dog_
 
 Expected outcome:
 
-`outcome`
+_Added to list : [LOW] feed dog_
+
+_You have a total of 1 tasks_
+
+### `Show tasks` 
+
+Type in the keyword **_list_** as input
+
+Example of usage: 
+
+_list_
+
+Expected outcome:
+
+Check out your missions!
+_1.  [T] [LOW] feed doge [?]_
+
+_You have a total of 1 tasks_
+
+### `Remove` 
+
+Use the keyword **_remove_** followed by task serial number as
+shown by the **_list_** command
+
+Example of usage: 
+
+_remove 1_
+
+Expected outcome:
+
+_Task successfully removed!_
+
+_-> [LOW] feed doge_
+
+_You have a total of 0 tasks_
+
+### `Remove` 
+
+Use the keyword **_remove_** followed by task serial number as
+shown by the **_list_** command
+
+Example of usage: 
+
+_remove 1_
+
+Expected outcome:
+
+_Task successfully removed!_
+
+_-> [LOW] feed doge_
+
+_You have a total of 0 tasks_
+
+### `Mark as done` 
+
+Use the keyword **_check_** followed by task serial number as
+shown by the **_list_** command
+
+Example of usage: 
+
+_check 1_
+
+Expected outcome:
+
+_Such wow! I have completed the following task!_
+
+_[LOW] feed dog [?]_
+
+_You have a total of 1 tasks_
+
+### `Add events` 
+
+Use the keyword **_event_** followed by event description.
+A date must be specified after the description with the
+following format : **_event_** _description_ **_/on_** _YYYY-MM-DD_
+
+Example of usage: 
+
+_event east coast plan /on 2020-09-02_
+
+Expected outcome:
+
+_Added to list : [LOW] east coast plan on WEDNESDAY 2 SEPTEMBER 2020_
+
+### `Add deadline` 
+
+Use the keyword **_deadline_** followed by event description.
+A date must be specified after the description with the
+following format : **_deadline_** _description_ **_/by_** _YYYY-MM-DD_
+
+Example of usage: 
+
+_dead west coast plan /by 2020-10-02_
+
+Expected outcome:
+
+_Added to list : [LOW] west coast plan by FRIDAY 2 OCTOBER 2020_
+
+### `Find task` 
+
+Use the keyword **_find_** followed by search keyword.
+Multiple keywords can be used by adding a _comma_ after the previous keyword.
+
+Example of usage: 
+
+_find dog,east_
+
+Expected outcome:
+
+_Doge found the following tasks you asked for!_
+
+ _1.  [T] [LOW] feed doge [?]_
+ 
+ _2.  [E] [LOW] east coast plan on WEDNESDAY 2 SEPTEMBER 2020 [?]_
+
+### `Set priority` 
+
+Use the keyword **_-PL_** followed by a number from _**1**_ to _**3**_ to indicate 
+priority level of the task, with _**1**_ being the lowest priority and _**3**_ being the highest priority.
+Otherwise, the default priority level is _low._
+Example of usage: 
+
+_todo feed doge -PL3_
+
+Expected outcome:
+
+_Added to list : [HIGH] feed doge_ 
