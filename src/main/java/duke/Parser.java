@@ -12,7 +12,7 @@ import exception.DukeException;
 /**
  * A Parser object deals with making sense of user command.
  *
- * @author amelia
+ * @author ameliatjy
  * @version 2.0
  * @since 2020-09-01
  */

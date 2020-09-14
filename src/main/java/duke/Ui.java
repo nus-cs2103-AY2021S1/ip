@@ -7,7 +7,7 @@ import task.Task;
 /**
  * A Ui object deals with interactions with the user.
  *
- * @author amelia
+ * @author ameliatjy
  * @version 2.0
  * @since 2020-09-01
  */

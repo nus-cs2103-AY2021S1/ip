@@ -25,7 +25,7 @@ import task.Todo;
 /**
  * A TaskStorage object deals with loading tasks from the file and saving tasks in the file.
  *
- * @author amelia
+ * @author ameliatjy
  * @version 1.0
  * @since 2020-09-08
  */

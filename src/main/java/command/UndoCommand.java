@@ -13,7 +13,7 @@ import task.Task;
 /**
  * An UndoCommand object undo the previous user action.
  *
- * @author amelia
+ * @author ameliatjy
  * @version 1.0
  * @since 2020-09-08
  */

@@ -11,7 +11,7 @@ import task.Task;
 /**
  * A FindCommand object searches for tasks within the list based on keyword.
  *
- * @author amelia
+ * @author ameliatjy
  * @version 1.0
  * @since 2020-09-01
  */

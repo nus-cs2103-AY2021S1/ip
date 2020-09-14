@@ -15,7 +15,7 @@ import task.Todo;
 /**
  * An AddToListCommand object adds a task to the existing list.
  *
- * @author amelia
+ * @author ameliatjy
  * @version 1.0
  * @since 2020-09-01
  */

@@ -4,9 +4,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Represents a task.Deadline by its taskName, deadline and whether or not it has been completed.
+ * Represents a Deadline by its taskName, deadline and whether or not it has been completed.
  *
- * @author amelia
+ * @author ameliatjy
  * @version 1.0
  * @since 2020-08-26
  */

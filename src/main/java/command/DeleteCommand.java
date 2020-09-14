@@ -9,7 +9,7 @@ import task.Task;
 /**
  * A DeleteCommand object deletes a task from the existing list.
  *
- * @author amelia
+ * @author ameliatjy
  * @version 1.0
  * @since 2020-09-01
  */

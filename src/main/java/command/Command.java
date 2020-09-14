@@ -11,7 +11,7 @@ import storage.CommandStorage;
 /**
  * Abstract Command class to handle users' command.
  *
- * @author amelia
+ * @author ameliatjy
  * @version 1.0
  * @since 2020-09-01
  */

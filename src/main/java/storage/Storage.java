@@ -3,7 +3,7 @@ package storage;
 /**
  * A Storage object deals with loading data from a file and saving data to the same file.
  *
- * @author amelia
+ * @author ameliatjy
  * @version 2.0
  * @since 2020-09-08
  */

@@ -8,7 +8,7 @@ import storage.CommandStorage;
 /**
  * A ListCommand object lists all tasks in the list.
  *
- * @author amelia
+ * @author ameliatjy
  * @version 1.0
  * @since 2020-09-01
  */

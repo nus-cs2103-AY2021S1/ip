@@ -7,7 +7,7 @@ import task.Task;
 /**
  * A TaskList object stores tasks input by the user in a list.
  *
- * @author amelia
+ * @author ameliatjy
  * @version 1.0
  * @since 2020-08-26
  */

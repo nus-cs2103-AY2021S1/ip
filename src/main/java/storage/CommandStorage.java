@@ -13,7 +13,7 @@ import task.Task;
 /**
  * A CommandStorage object deals with loading past user commands from a file and saving new ones to the same file.
  *
- * @author amelia
+ * @author ameliatjy
  * @version 1.0
  * @since 2020-09-08
  */

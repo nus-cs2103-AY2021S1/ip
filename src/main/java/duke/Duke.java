@@ -12,7 +12,7 @@ import storage.TaskStorage;
 /**
  * A Duke object represents the chat bot which responds to users' inputs.
  *
- * @author amelia
+ * @author ameliatjy
  * @version 2.0
  * @since 2020-09-01
  */

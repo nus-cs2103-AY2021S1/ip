@@ -9,7 +9,7 @@ import task.Task;
 /**
  * A DoneCommand object marks a task in the existing list as done.
  *
- * @author amelia
+ * @author ameliatjy
  * @version 1.0
  * @since 2020-09-01
  */

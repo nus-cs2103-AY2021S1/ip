@@ -3,7 +3,7 @@ package task;
 /**
  * Represents a Todo object by its taskName and whether or not it has been completed.
  *
- * @author amelia
+ * @author ameliatjy
  * @version 1.0
  * @since 2020-08-26
  */

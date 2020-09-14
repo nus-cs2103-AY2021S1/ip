@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * Represents an task.Event by its taskName, date of event and whether or not it has been completed.
  *
- * @author amelia
+ * @author ameliatjy
  * @version 1.0
  * @since 2020-08-26
  */
