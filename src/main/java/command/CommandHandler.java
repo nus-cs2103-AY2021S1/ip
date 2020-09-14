@@ -136,7 +136,7 @@ public class CommandHandler implements Consumer<String>, Function<String, String
     private static String listTasks() {
         return TaskList.size() == 0
                 ? "No tasks added."
-                : TaskList.stream()
+                : "Tasks:\n" + TaskList.stream()
                     .map(new Function<Task, String>() {
                         private int id = 1;
                         public String apply(Task t) {

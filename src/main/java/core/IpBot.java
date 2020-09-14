@@ -18,6 +18,7 @@ public class IpBot extends Application {
         URL url = IpBot.class.getResource("/view/MainWindow.fxml");
         BorderPane root = FXMLLoader.load(url);
 
+        primaryStage.setTitle("iPbot");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }

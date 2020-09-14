@@ -1,14 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.MainWindow">
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Button?>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.MainWindow">
    <bottom>
-      <TextField fx:id="input" promptText="Enter Command..." BorderPane.alignment="CENTER" onKeyPressed="#handleUserInput" />
+      <TextField fx:id="input" promptText="Enter Command..."  onKeyPressed="#handleUserInput" />
    </bottom>
    <center>
-      <TextArea fx:id="output" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" wrapText="true"/>
+      <ListView fx:id="output" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER"/>
    </center>
+   <left>
+      <VBox>
+         <padding>
+           <Insets top="20" right="10" bottom="20" left="10" />
+         </padding>
+         <Label fx:id="help" prefHeight="600.0" prefWidth="200.0" wrapText="true"/>
+      </VBox>
+   </left>
+   <right>
+      <VBox>
+         <padding>
+           <Insets top="20" right="10" bottom="20" left="10" />
+         </padding>
+         <Label fx:id="taskList" prefHeight="600.0" prefWidth="200.0" wrapText="true"/>
+      </VBox>
+   </right>
 </BorderPane>
