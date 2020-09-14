@@ -7,7 +7,6 @@ import duke.component.CliUi;
 import duke.component.FxmlUi;
 import duke.component.Parser;
 import duke.component.Storage;
-import duke.component.StorageStub;
 import duke.component.TaskList;
 import duke.component.Ui;
 
@@ -31,14 +30,7 @@ public class Duke {
         } else {
             ui = new FxmlUi();
         }
-        Storage storage = new StorageStub();
-        try {
-            storage = new ActualStorage(filePath);
-        } catch (Exception e) {
-            assert false : "No resource tasks file.";
-            ui.output(e.getMessage());
-        }
-        this.storage = storage;
+        storage = new ActualStorage(filePath);
         list = storage.getList();
     }
 

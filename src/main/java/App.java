@@ -16,9 +16,6 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
 public class App extends Application {
     private ScrollPane scrollPane;
     private VBox dialogContainer;
@@ -27,7 +24,7 @@ public class App extends Application {
     private Scene scene;
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
-    private Duke runningDuke = new Duke("src/main/resources/tasks.txt", false);
+    private Duke runningDuke = new Duke(this.getClass().getResource("tasks.txt").getPath(), false);
 
     @Override
     public void start(Stage stage) {
@@ -44,8 +41,6 @@ public class App extends Application {
         });
 
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
-
-        runningDuke = new Duke(this.getClass().getResource("/tasks.txt").getPath(), false);
     }
 
     private void formatWindow(Stage stage, AnchorPane mainLayout) {

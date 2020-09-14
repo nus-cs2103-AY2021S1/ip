@@ -20,34 +20,54 @@ public class ActualStorage implements Storage {
     public static final char DEADLINE_INDICATOR = 'D';
     public static final char EVENT_INDICATOR = 'E';
     public static final String INPUT_FILE_FORMAT_ERROR = "Input file format error!";
-    private final String filePath;
+    private File file;
     private final TaskList list;
 
     /**
      * Creates a Storage object, and initializes the list of tasks with data in the file.
      * @param filePath the file path holding the targeted data
-     * @throws FileNotFoundException if the file is not in the given file path
-     * @throws InvalidCommandException should never been thrown if the input file is well-written
      */
-    public ActualStorage(String filePath) throws FileNotFoundException, InvalidCommandException {
-        this.filePath = filePath;
+    public ActualStorage(String filePath) {
         list = new TaskList();
-        File file = new File(filePath);
-        readFile(file);
+        file = new File(filePath);
+        try {
+            file.createNewFile();
+        } catch (Exception e) {
+            createFile();
+        }
+        try {
+            readFile(file);
+        } catch (Exception e) {
+            assert false : INPUT_FILE_FORMAT_ERROR;
+        }
     }
 
-    private void readFile(File file) throws FileNotFoundException, InvalidCommandException {
+    private void createFile () {
+        new File("data").mkdir();
+        try {
+            file = new File("data/tasks.txt");
+            file.createNewFile();
+        } catch (Exception e) {
+            assert false : "Creation unsuccessful!.";
+        }
+    }
+
+    private void readFile(File file) throws FileNotFoundException {
         Scanner sc = new Scanner(file);
         while (sc.hasNext()) {
             readNextTask(sc);
         }
     }
 
-    private void readNextTask(Scanner sc) throws InvalidCommandException {
+    private void readNextTask(Scanner sc) {
         String[] taskInfo = sc.nextLine().split(Storage.splitter);
         String taskType = taskInfo[0];
-        Task toAdd = getTask(taskType, taskInfo);
-        list.add(toAdd);
+        try {
+            Task toAdd = getTask(taskType, taskInfo);
+            list.add(toAdd);
+        } catch (Exception e) {
+            assert false : INPUT_FILE_FORMAT_ERROR;
+        }
     }
 
     private Task getTask(String taskType, String[] taskInfo) throws InvalidCommandException {
@@ -64,7 +84,6 @@ public class ActualStorage implements Storage {
                 toAdd = new ToDo("error");
             }
         }
-        System.out.println(toAdd);
         return toAdd;
     }
 
@@ -80,31 +99,6 @@ public class ActualStorage implements Storage {
         return taskType.charAt(0) == TODO_INDICATOR;
     }
 
-    private String getDescription(Scanner sc) {
-        String description = sc.nextLine();
-        int i = getFirstNonSpaceLocation(description);
-        return description.substring(i);
-    }
-
-    private int getFirstNonSpaceLocation(String description) {
-        int i = 0;
-        while (description.charAt(i) == Parser.SPACE_CHAR) {
-            i++;
-        }
-        return i;
-    }
-
-    private int getDoneMarker(Scanner sc) {
-        sc.next();
-        int done = sc.nextInt();
-        sc.next();
-        return done;
-    }
-
-    private String getTaskType(Scanner sc) {
-        return sc.next();
-    }
-
     @Override
     public TaskList getList() {
         return list;
@@ -113,7 +107,7 @@ public class ActualStorage implements Storage {
     @Override
     public void addToList(Task task) throws InvalidCommandException {
         try {
-            FileWriter fw = new FileWriter(filePath, true);
+            FileWriter fw = new FileWriter(file, true);
             fw.write(task.outputToFile());
             fw.close();
         } catch (IOException e) {
@@ -124,12 +118,11 @@ public class ActualStorage implements Storage {
     @Override
     public void reWrite(TaskList list) throws InvalidCommandException {
         try {
-            FileWriter fw = new FileWriter(filePath);
+            FileWriter fw = new FileWriter(file);
             for (Task task : list) {
                 fw.write(task.outputToFile());
             }
             fw.close();
-            System.out.println(fw);
         } catch (IOException e) {
             throw new InvalidCommandException(e.getMessage());
         }
