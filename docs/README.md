@@ -28,9 +28,9 @@ Example of usage:
 
 Expected outcome:
 
-`Duke: Here are the tasks in your list:`
-`1.[T][?] eat dinner`
-`2.[T][?] watch show`
+`Duke: Here are the tasks in your list:` <br>
+`1.[T][✗] eat dinner` <br>
+`2.[T][✓] watch show` <br>
 
 ### `done` - marks task as completed
 
@@ -46,8 +46,8 @@ Example of usage:
 
 Expected outcome:
 
-`Duke: Nice! I've marked this task as done:`
-`[T][?] eat dinner`
+`Duke: Nice! I've marked this task as done:` <br>
+`[T][✓] eat dinner` <br>
 
 ### `todo` - adds a todo task
 
@@ -63,9 +63,9 @@ Example of usage:
 
 Expected outcome:
 
-`Duke: Got it. I've added this task:`
-`[T][?] sleep`
-`Now you have 3 tasks in the list.`
+`Duke: Got it. I've added this task:` <br>
+`[T][✗] sleep` <br>
+`Now you have 3 tasks in the list.` <br>
 
 ### `deadline` - adds a deadline
 
@@ -81,9 +81,9 @@ Example of usage:
 
 Expected outcome:
 
-`Duke: Got it. I've added this task:`
-`[D][?] return book (by: Jan 1 2020 12:30)`
-`Now you have 3 tasks in the list.`
+`Duke: Got it. I've added this task:` <br>
+`[D][✗] return book (by: Jan 1 2020 12:30)` <br>
+`Now you have 3 tasks in the list.` <br>
 
 ### `event` - adds an event
 
@@ -99,9 +99,9 @@ Example of usage:
 
 Expected outcome:
 
-`Duke: Got it. I've added this task:`
-`[E][?] project meeting (at: Jan 2 2020 14:30)`
-`Now you have 3 tasks in the list.`
+`Duke: Got it. I've added this task:` <br>
+`[E][✗] project meeting (at: Jan 2 2020 14:30)` <br>
+`Now you have 3 tasks in the list.` <br>
 
 ### `delete` - removes task
 
@@ -117,9 +117,9 @@ Example of usage:
 
 Expected outcome:
 
-`Duke: Noted. I've removed this task:`
-`[T][?] eat dinner`
-`Now you have 2 tasks in the list.`
+`Duke: Noted. I've removed this task:` <br>
+`[T][✓] eat dinner` <br>
+`Now you have 2 tasks in the list.` <br>
 
 ### `find` - searches for tasks
 
@@ -135,8 +135,8 @@ Example of usage:
 
 Expected outcome:
 
-`Duke: Here are the matching tasks in your list:`
-`1.[T][?] eat dinner`
+`Duke: Here are the matching tasks in your list:` <br>
+`1.[T][✓] eat dinner` <br>
 
 ### `undo` - reverts the latest command
 
@@ -152,18 +152,18 @@ Example of usage:
 
 Expected outcome:
 
-`Duke:`
-`UNDO EXECUTED:`
-`I've recovered this task:`
-`[T][?] eat dinner`
-`Now you have 2 tasks in the list.`
+`Duke:` <br>
+`UNDO EXECUTED:` <br>
+`I've recovered this task:` <br>
+`[T][✓] eat dinner` <br>
+`Now you have 2 tasks in the list.` <br>
 
 ### `bye` - exits the program
 
 This command saves the data and exits the program.
 
 ## Command Summary
-|Action|Format/Examples  |
+|Action|Format/Examples|
 |--|--|
 |**help** | `help` |
 |**list**  | `list` |
@@ -177,6 +177,5 @@ This command saves the data and exits the program.
 |**bye**  | `bye` |
 
 ## Acknowledgements
-GUI: 
-Code was referenced from https://se-education.org/guides/tutorials/javaFx.html. <br>
+GUI code was referenced from https://se-education.org/guides/tutorials/javaFx.html. <br>
 GUI image was taken from https://onlyvectorbackgrounds.com/ambient-light-background-day-blue/.
