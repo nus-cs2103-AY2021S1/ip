@@ -25,7 +25,8 @@ public class CommandList implements Command {
         } else {
             message += "Here are the tasks in your list:\n";
             for (int i = 1; i <= list.size(); i++) {
-                message += i + "." + list.get(i - 1) + "\n";
+                message += i + "." + list.get(i - 1);
+                if (i != list.size()) message += "\n";
             }
         }
     }
