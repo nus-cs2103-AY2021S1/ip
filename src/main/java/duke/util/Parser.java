@@ -62,21 +62,12 @@ public class Parser {
                 int deleteIdx = Integer.parseInt(trimmedInput.split(" ")[1]) - 1;
                 return new DeleteCommand(deleteIdx);
             case TODO:
-                checkTaskFormat(type.toString().toLowerCase(), trimmedInput);
-                assert !trimmedInput.contains("/");
-                int startOfDescription = trimmedInput.indexOf(' ') + 1;
-                String description = trimmedInput.substring(startOfDescription);
-                return new AddCommand(description);
+                return getAddCommand(trimmedInput, type);
             case DEADLINE:
             case EVENT:
                 return getAddTimedCommand(trimmedInput, type.toString().toLowerCase());
             case ALIAS:
-                checkAliasFormat(trimmedInput);
-                String mapping = trimmedInput.substring(trimmedInput.indexOf(' '));
-                String alias = mapping.split("=")[0].trim();
-                String typeAsString = mapping.split("=")[1].trim();
-                CommandType commandToMap = CommandType.valueOf(typeAsString.toUpperCase());
-                return new AliasCommand(alias, commandToMap);
+                return getAliasCommand(trimmedInput);
             default:
                 throw new DukeException("Oh dear! I'm sorry, but I don't know what that means :(");
             }
@@ -87,6 +78,21 @@ public class Parser {
         } catch (IllegalArgumentException ex) {
             throw new DukeException("Oh dear! I'm sorry, but I don't know what that means :(");
         }
+    }
+
+    /**
+     * Returns a timed command.
+     *
+     * @param input user input.
+     * @param command type of command.
+     * @throws DukeException if there are any formatting issues.
+     */
+    private static AddCommand getAddCommand(String input, CommandType command) throws DukeException {
+        checkTaskFormat(command.toString().toLowerCase(), input);
+        assert !input.contains("/");
+        int startOfDescription = input.indexOf(' ') + 1;
+        String description = input.substring(startOfDescription);
+        return new AddCommand(description);
     }
 
     /**
@@ -126,6 +132,24 @@ public class Parser {
             LocalDate date = LocalDate.parse(meta, dateFormat);
             return new TimedAddCommand(command, description, date);
         }
+    }
+
+    /**
+     * Returns a timed command.
+     *
+     * @param input user input.
+     * @throws DukeException if there are any formatting issues.
+     */
+    private static AliasCommand getAliasCommand(String input) throws DukeException {
+
+        checkAliasFormat(input);
+
+        String mapping = input.substring(input.indexOf(' '));
+        String alias = mapping.split("=")[0].trim();
+        String typeAsString = mapping.split("=")[1].trim();
+        CommandType commandToMap = CommandType.valueOf(typeAsString.toUpperCase());
+
+        return new AliasCommand(alias, commandToMap);
     }
 
     /**
