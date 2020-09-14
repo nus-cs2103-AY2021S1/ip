@@ -21,16 +21,23 @@ public class Ui {
 
     /**
      * Displays Duke's introduction message.
+     *
+     * @return Introduction to be displayed if GUI is used.
      */
-    public void displayIntroduction() {
+    public String displayIntroduction() {
         String divider = "____________________________________________________________\n";
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n\n";
-        String welcome = "Hello! I'm Duke.\n";
-        System.out.println(divider + logo + welcome + divider);
+        String welcome = "Hello! I'm Duke.\n" + "How can I help you?\n";
+        if (hasGui) {
+            return welcome;
+        } else {
+            System.out.println(divider + logo + welcome + divider);
+            return "";
+        }
     }
 
     /**

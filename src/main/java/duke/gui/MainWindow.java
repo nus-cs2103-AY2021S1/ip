@@ -1,5 +1,6 @@
 package duke.gui;
 
+import duke.Ui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -16,6 +17,8 @@ public class MainWindow extends AnchorPane {
     /** GUI for Duke. */
     private Main dukeGui;
 
+    private boolean isFirstLaunch = true;
+
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -28,9 +31,20 @@ public class MainWindow extends AnchorPane {
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    /**
+     * Initializes the main window.
+     * Displays the introduction message if this is the first launch.
+     */
     @FXML
     public void initialize() {
         this.scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+
+        if (isFirstLaunch) {
+            isFirstLaunch = false;
+            this.dialogContainer
+                    .getChildren()
+                    .add(DialogBox.getDukeDialog(new Ui(true).displayIntroduction(), this.dukeImage));
+        }
     }
 
     /**
