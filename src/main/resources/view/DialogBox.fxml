@@ -7,40 +7,25 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<fx:root alignment="TOP_RIGHT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefWidth="400.0" style="-fx-background-color: wheat; -fx-border-image-width: 20; -fx-border-style: segments(10, 15, 15, 15)  line-cap round; -fx-border-color: black;" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="TOP_RIGHT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-      <HBox maxHeight="-Infinity" style="-fx-background-color: green;">
+      <HBox maxHeight="-Infinity" spacing="1.0" style="-fx-background-color: #c9b70c;">
          <children>
               <Label fx:id="dialog" alignment="CENTER" contentDisplay="CENTER" minHeight="-Infinity" text="Label" textFill="#b43636" textOverrun="CLIP" wrapText="true">
                <font>
-                  <Font name="Cambria" size="14.0" />
+                  <Font name="Cambria" size="14.0"  />
                </font>
             </Label>
          </children>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
       </HBox>
       <StackPane>
          <children>
               <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </StackPane>
-      <HBox layoutX="272.0" layoutY="26.0" maxHeight="-Infinity" style="-fx-background-color: green;">
-         <children>
-            <Label fx:id="dialog1" alignment="CENTER" contentDisplay="CENTER" minHeight="-Infinity" text="Label" textFill="#b43636" textOverrun="CLIP" wrapText="true">
-               <font>
-                  <Font name="Cambria" size="14.0" />
-               </font>
-            </Label>
-         </children>
-      </HBox>
-      <HBox layoutX="371.0" layoutY="26.0" maxHeight="-Infinity" style="-fx-background-color: green;">
-         <children>
-            <Label fx:id="dialog11" alignment="CENTER" contentDisplay="CENTER" minHeight="-Infinity" text="Label" textFill="#b43636" textOverrun="CLIP" wrapText="true">
-               <font>
-                  <Font name="Cambria" size="14.0" />
-               </font>
-            </Label>
-         </children>
-      </HBox>
     </children>
     <padding>
         <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
