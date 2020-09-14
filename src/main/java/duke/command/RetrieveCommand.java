@@ -9,9 +9,8 @@ import java.util.stream.Collectors;
 
 import duke.exception.InvalidTaskDateException;
 import duke.storage.Storage;
-import duke.task.Deadline;
-import duke.task.Event;
 import duke.task.Task;
+import duke.task.TimedTask;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
@@ -48,7 +47,7 @@ public class RetrieveCommand extends Command {
 
             List<Task> retrievedList = tasks.getList()
                     .stream()
-                    .filter(task -> checkIfSameDate(task))
+                    .filter(this::checkIfSameDate)
                     .collect(Collectors.toList());
 
             TaskList retrievedTasks = new TaskList(new ArrayList<>(retrievedList));
@@ -62,17 +61,9 @@ public class RetrieveCommand extends Command {
     }
 
     private boolean checkIfSameDate(Task t) {
-        if (t instanceof Deadline) {
-            Deadline d = (Deadline) t;
-            if (d.getDateTime().toLocalDate().isEqual(date)) {
-                return true;
-            }
-        }
-        if (t instanceof Event) {
-            Event e = (Event) t;
-            if (e.getDateTime().toLocalDate().isEqual(date)) {
-                return true;
-            }
+        if (t instanceof TimedTask) {
+            TimedTask tt = (TimedTask) t;
+            return tt.getDate().isEqual(date);
         }
         return false;
     }

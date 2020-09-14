@@ -1,49 +1,34 @@
 package duke.task;
 
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Represents a Task that needs to be done by a certain date and time. A
- * <code>Deadline</code> object is represented as a Task with a LocalDateTime value.
+ * Represents a TimedTask that needs to be done by a certain date and time. A
+ * <code>Deadline</code> object is represented as a Task with a LocalDateTime.
  */
-public class Deadline extends Task {
-
-    /** Indicates when the Deadline needs to be completed by */
-    private LocalDateTime by;
+public class Deadline extends TimedTask {
 
     /**
-     * Constructs a <code>Deadline</code> object with a description and a LocalDateTime value.
+     * Constructs a <code>Deadline</code> object with a description and a LocalDateTime.
      * This Deadline is marked as undone.
      *
      * @param description Describes what to do.
      * @param by String representation of date and time.
      */
     public Deadline(String description, String by) {
-        super(description);
-        this.by = LocalDateTime.parse(by, DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+        super(description, by);
     }
 
     /**
      * Constructs a <code>Deadline</code> object with a description,
-     * a boolean to indicate if the Deadline is done and a LocalDateTime value.
+     * a boolean to indicate if the Deadline is done and a LocalDateTime.
      *
      * @param description Describes what to do.
      * @param isDone Indicates if the Deadline is done.
      * @param by String representation of date and time.
      */
     public Deadline(String description, boolean isDone, String by) {
-        super(description, isDone);
-        this.by = LocalDateTime.parse(by, DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
-    }
-
-    /**
-     * Returns the LocalDateTime in which the Deadline has to completed by.
-     *
-     * @return A LocalDateTime object.
-     */
-    public LocalDateTime getDateTime() {
-        return by;
+        super(description, isDone, by);
     }
 
     /**
@@ -54,7 +39,7 @@ public class Deadline extends Task {
     @Override
     public String toFileString() {
         return "D | " + super.toFileString() + " | "
-                + by.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+                + dateTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
     }
 
     /**
@@ -65,6 +50,6 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: "
-                + by.format(DateTimeFormatter.ofPattern("dd MMMM yyyy, hh:mm a")) + ")";
+                + dateTime.format(DateTimeFormatter.ofPattern("dd MMMM yyyy, hh:mm a")) + ")";
     }
 }
