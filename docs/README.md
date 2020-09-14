@@ -55,7 +55,7 @@ Example of usage:
 
 Expected outcome:
 
-> Yes! I have successfully added:
+>Yes! I have successfully added:
 </br>[T][✘] Walk the dog
 
 ### 2. `deadline` - Add new deadline
@@ -67,8 +67,8 @@ Example of usage:
 
 Expected outcome:
 
-> Yes! I have successfully added:
-</br>[D][✘] Assignment (by: 10 Oct 2020, 06:00 PM)
+>Yes! I have successfully added:
+</br>[D][✗] Assignment (by: 10 Oct 2020, 06:00 PM)
 
 ### 3. `event` - Add new event
 Add a new event task with description and time. </br>
@@ -79,8 +79,8 @@ Example of usage:
 
 Expected outcome:
 
-> Yes! I have successfully added: 
-</br>[E][✘] Meeting (at: 10pm)
+>Yes! I have successfully added: 
+</br>[E][✗] Meeting (at: 10pm)
 
 ### 4. `delete` - Delete a task
 Delete a task by specifing its number in the task list.
@@ -92,7 +92,7 @@ Example of usage:
 Expected outcome:
 
 >Alright! I've removed this task: 
-</br>[E][✔] Google Career Talk (at: U-Town)
+</br>[E][✓] Google Career Talk (at: U-Town)
 
 ### 5. `list` - List all tasks
 Display all tasks currently in the list.
