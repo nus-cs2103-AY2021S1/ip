@@ -1,9 +1,5 @@
 # User Guide
 
-## Sample App Demo
-
-![image](../other/app-preview.gif)
-
 ## Features 
 
 ### Todo Feature
