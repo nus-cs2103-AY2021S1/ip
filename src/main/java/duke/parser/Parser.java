@@ -1,5 +1,9 @@
 package duke.parser;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import duke.command.AddCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
@@ -22,6 +26,7 @@ import duke.task.Todo;
  * Represents a Parser class and consists of methods related to parsing user commands.
  */
 public class Parser {
+    private static final String TIME_FORMAT = "yyyy-MM-dd";
 
     /**
      * Returns a command object by parsing the user command.
@@ -174,6 +179,20 @@ public class Parser {
             }
             String taskName = body.split(" /by ")[0];
             String time = body.split(" /by ")[1];
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(TIME_FORMAT);
+            try {
+                LocalDate localDate = LocalDate.parse(time, formatter);
+                String parsedTime = localDate.format(formatter);
+                if (!parsedTime.equals(time)) {
+                    throw new InvalidDeadlineException("Sorry, I cannot process the command"
+                            + " since the time due of the deadline task is not in the correct form! "
+                            + "Please input the time in the form of yyyy-MM-dd.");
+                }
+            } catch (DateTimeParseException e) {
+                return new ErrorCommand("Sorry, I cannot process the command"
+                        + " since the time due of the deadline task is not in the correct form! "
+                        + "Please input the time in the form of yyyy-MM-dd.");
+            }
             Task newTask = new Deadline(taskName, time);
             return new AddCommand(newTask);
         } catch (InvalidInputException e) {
@@ -203,6 +222,20 @@ public class Parser {
             }
             String taskName = body.split(" /at ")[0];
             String time = body.split(" /at ")[1];
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(TIME_FORMAT);
+            try {
+                LocalDate localDate = LocalDate.parse(time, formatter);
+                String parsedTime = localDate.format(formatter);
+                if (!parsedTime.equals(time)) {
+                    throw new InvalidEventException("Sorry, I cannot process the command"
+                            + " since the time of the event task is not in the correct form! "
+                            + "Please input the time in the form of yyyy-MM-dd.");
+                }
+            } catch (DateTimeParseException e) {
+                return new ErrorCommand("Sorry, I cannot process the command"
+                        + " since the time of the event task is not in the correct form! "
+                        + "Please input the time in the form of yyyy-MM-dd.");
+            }
             Task newTask = new Event(taskName, time);
             return new AddCommand(newTask);
         } catch (InvalidInputException e) {
