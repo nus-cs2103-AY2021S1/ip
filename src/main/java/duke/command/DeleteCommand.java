@@ -40,10 +40,10 @@ public class DeleteCommand extends Command {
             String error = "Invalid Task! The task ID you provided is not valid.";
             throw new InvalidTaskException(error);
         }
-        Task toRemove = tasks.getTask(this.taskID - 1);
+        Task deletedTask = tasks.getTask(this.taskID - 1);
         tasks.removeTask(this.taskID - 1);
         storage.saveToFile(tasks);
-        return ui.showDeletedTask(toRemove, tasks.getListSize());
+        return ui.showDeletedTask(deletedTask, tasks.getListSize());
     }
 
     /**

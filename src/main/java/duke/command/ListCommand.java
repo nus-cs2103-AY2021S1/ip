@@ -2,7 +2,10 @@ package duke.command;
 
 import duke.Storage;
 import duke.Ui;
+import duke.task.Task;
 import duke.task.TaskList;
+
+import java.util.List;
 
 /**
  * Represents a command to display all the tasks in the user's list of tasks.
@@ -19,7 +22,8 @@ public class ListCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        return ui.showTaskList(tasks.getTaskList());
+        List<Task> listOfTasks = tasks.getTaskList();
+        return ui.showTaskList(listOfTasks);
     }
 
     /**

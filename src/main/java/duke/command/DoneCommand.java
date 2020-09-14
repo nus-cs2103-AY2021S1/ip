@@ -4,6 +4,7 @@ import duke.Storage;
 import duke.Ui;
 import duke.exception.DukeException;
 import duke.exception.InvalidTaskException;
+import duke.task.Task;
 import duke.task.TaskList;
 
 /**
@@ -41,7 +42,8 @@ public class DoneCommand extends Command {
         }
         tasks.completeTask(this.taskID - 1);
         storage.saveToFile(tasks);
-        return ui.showCompletedTask(tasks.getTask(this.taskID - 1));
+        Task completedTask = tasks.getTask(this.taskID - 1);
+        return ui.showCompletedTask(completedTask);
     }
 
     /**

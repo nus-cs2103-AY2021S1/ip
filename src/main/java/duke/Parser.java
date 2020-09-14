@@ -183,7 +183,8 @@ public class Parser {
         String[] parsedInput = userInput.split(" ", 2);
         String command = parsedInput[0];
         try {
-            int taskID = Integer.parseInt(parsedInput[1]);
+            String taskIdAsString = parsedInput[1].trim();
+            int taskID = Integer.parseInt(taskIdAsString);
             return taskID;
         } catch (ArrayIndexOutOfBoundsException | NumberFormatException ex) {
             String error = "No Task ID provided! Please input the ID of the task you wish to "
