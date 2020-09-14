@@ -21,15 +21,20 @@ import java.util.stream.Stream;
  */
 public class Executor {
 
+    private static final String ERROR_INDICATOR = "ERROR";
+
     // Error messages
     private static final String ERR_INDEX_OUT_OF_BOUND = "The task's number is not within the range of the list.\n";
     private static final String ERR_DELETE_MISSING_TASK_NUM = "Which task's number do you want to delete?\n";
     private static final String ERR_DONE_MISSING_TASK_NUM = "Which task's number do you want to mark as done?\n";
     private static final String ERR_TASK_MISSING_PRIORITY = "Indicate the priority of the task after \"/p\".\n";
     private static final String ERR_TASK_INVALID_PRIORITY = "The priority of a task can only be low, medium or high.\n";
-    private static final String ERR_EVENT_MISSING_DATETIME = "Include the date and time of the event after \"/at\".\n";
-    private static final String ERR_DEADLINE_MISSING_DATETIME =
-            "Include the date and time of the deadline after \"/by\".\n";
+    private static final String ERR_TODO_WRONG_FORMAT =
+            "Use the format \"todo <description> /p <priority>\".\n";
+    private static final String ERR_EVENT_WRONG_FORMAT =
+            "Use the format \"event <description> /p <priority> /at <DD-MM-YYYY HHMM>\".\n";
+    private static final String ERR_DEADLINE_WRONG_FORMAT =
+            "Use the format \"deadline <description> /p <priority> /by <DD-MM-YYYY HHMM>\".\n";
 
     /** Storage for executor to write data to. */
     private final Storage storage;
@@ -288,16 +293,27 @@ public class Executor {
      * @return Description of the task without the priority label.
      */
     private String removePriorityLabel(Priority priority, String description) {
+        String actualDescription;
         switch (priority) {
         case LOW:
-            return description.replace(" /p low", "");
+            actualDescription = description.replace(" /p low", "");
+            break;
         case MEDIUM:
-            return description.replace(" /p medium", "");
+            actualDescription = description.replace(" /p medium", "");
+            break;
         case HIGH:
-            return description.replace(" /p high", "");
+            actualDescription = description.replace(" /p high", "");
+            break;
         default:
-            return "";
+            actualDescription = Executor.ERROR_INDICATOR;
+            break;
         }
+
+        if (actualDescription.contains("/p")) {
+            actualDescription = Executor.ERROR_INDICATOR;
+        }
+
+        return actualDescription;
     }
 
     /**
@@ -305,11 +321,14 @@ public class Executor {
      *
      * @param description Description of the todo.
      * @return String describing the result of creating a todo.
-     * @throws DukeInputException If the priority is missing or invalid.
+     * @throws DukeInputException If the priority is missing or invalid or the description is wrongly formatted.
      */
     private String createTodo(String description) throws DukeInputException {
         Priority priority = this.extractPriority(description);
         String actualDescription = this.removePriorityLabel(priority, description);
+        if (actualDescription.equals(Executor.ERROR_INDICATOR)) {
+            throw new DukeInputException(Executor.ERR_TODO_WRONG_FORMAT);
+        }
         Task task = new Todo(priority, actualDescription);
         return this.addTask(task);
     }
@@ -325,8 +344,8 @@ public class Executor {
         Priority priority = this.extractPriority(description);
         String actualDescription = this.removePriorityLabel(priority, description);
         String[] arr = actualDescription.split(" /at ", 2);
-        if (arr.length < 2 || arr[1].equals("")) {
-            throw new DukeInputException(Executor.ERR_EVENT_MISSING_DATETIME);
+        if (actualDescription.equals(Executor.ERROR_INDICATOR) || arr.length < 2 || arr[1].equals("")) {
+            throw new DukeInputException(Executor.ERR_EVENT_WRONG_FORMAT);
         }
         Task task = new Event(priority, arr[0], arr[1]);
         return this.addTask(task);
@@ -343,8 +362,8 @@ public class Executor {
         Priority priority = this.extractPriority(description);
         String actualDescription = this.removePriorityLabel(priority, description);
         String[] arr = actualDescription.split(" /by ", 2);
-        if (arr.length < 2 || arr[1].equals("")) {
-            throw new DukeInputException(Executor.ERR_DEADLINE_MISSING_DATETIME);
+        if (actualDescription.equals(Executor.ERROR_INDICATOR) || arr.length < 2 || arr[1].equals("")) {
+            throw new DukeInputException(Executor.ERR_DEADLINE_WRONG_FORMAT);
         }
         Task task = new Deadline(priority, arr[0], arr[1]);
         return this.addTask(task);

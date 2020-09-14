@@ -35,9 +35,9 @@ Nice! I've marked this as done:
 
 ERROR: The description of a deadline cannot be empty.
 
-ERROR: Include the date and time of the deadline after "/by".
+ERROR: Use the format "deadline <description> /p <priority> /by <DD-MM-YYYY HHMM>".
 
-ERROR: Include the date and time of the deadline after "/by".
+ERROR: Use the format "deadline <description> /p <priority> /by <DD-MM-YYYY HHMM>".
 
 ERROR: Enter the date and time as "dd-MM-yyyy HHmm".
 
@@ -51,9 +51,9 @@ Now you have 3 tasks in the list.
 
 ERROR: The description of an event cannot be empty.
 
-ERROR: Include the date and time of the event after "/at".
+ERROR: Use the format "event <description> /p <priority> /at <DD-MM-YYYY HHMM>".
 
-ERROR: Include the date and time of the event after "/at".
+ERROR: Use the format "event <description> /p <priority> /at <DD-MM-YYYY HHMM>".
 
 Got it. I've added this task:
 [E][H][✘] project meeting (at: 01 Sep 2020, 08:00 AM)
