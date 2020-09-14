@@ -17,7 +17,7 @@ public class EventC extends Command {
     }
 
     @Override
-    public String execute(Ui ui, TaskList todoList, Storage store) throws IOException {
+    public String execute(Ui ui, TaskList todoList, Storage store) throws IOException, DukeException {
         assert input.length() > 5 : "no date entered";
 
         String result = "";
@@ -30,8 +30,8 @@ public class EventC extends Command {
             result += "Aight new task for you: \n" + e.toString();
             result += "\nNow you got " + todoList.size() + " task(s) waiting man";
             store.write(e);
-        } catch (ArrayIndexOutOfBoundsException | IOException e) {
-            System.out.println("You either didn't enter a date or a task");
+        } catch (StringIndexOutOfBoundsException | IOException e) {
+            throw new DukeException("You didn't enter a date!");
         }
         return result;
     }

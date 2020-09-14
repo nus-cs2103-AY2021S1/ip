@@ -1,6 +1,7 @@
 package duke.Command;
 
 import duke.Command.Command;
+import duke.DukeException;
 import duke.Storage;
 import duke.task.Task;
 import duke.TaskList;
@@ -19,15 +20,20 @@ public class DoneC extends Command {
     }
 
     @Override
-    public String execute(Ui ui, TaskList todoList, Storage store) throws IOException {
-        assert input.length() > 4 : "no date entered";
+    public String execute(Ui ui, TaskList todoList, Storage store) throws IOException, DukeException {
+        assert input.length() > 4 : "no id entered";
 
         String result = "";
-        int taskID = Integer.parseInt( input.substring(5)) - 1;
-        Task task = todoList.get(taskID);
-        task.markAsDone();
-        result += "Gratz, you finished this dawg :\n";
-        result += task.toString();
+        try {
+            int taskID = Integer.parseInt( input.substring(5)) - 1;
+            Task task = todoList.get(taskID);
+            task.markAsDone();
+            result += "Gratz, you finished this dawg :\n";
+            result += task.toString();
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new DukeException("You didn't enter a task you want to mark as done!");
+        }
+
         return result;
     }
 }

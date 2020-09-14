@@ -18,24 +18,28 @@ public class OnC extends Command {
     }
 
     @Override
-    public String execute(Ui ui, TaskList todoList, Storage store) throws IOException {
+    public String execute(Ui ui, TaskList todoList, Storage store) throws IOException, DukeException {
         assert input.length() > 2 : "no date entered";
-
         String result = "";
-        LocalDate checkOn = LocalDate.parse(input.substring(3).trim());
-        result += "On this day, you have: \n";
-        int eventCount = 0;
-        for (Task checkEvent : todoList.getTodoList()) {
-            if (checkEvent instanceof Event && ((Event) checkEvent).at.equals(checkOn)) {
-                result += checkEvent.toString() + "\n";
-                eventCount++;
+        try {
+            LocalDate checkOn = LocalDate.parse(input.substring(3).trim());
+            result += "On this day, you have: \n";
+            int eventCount = 0;
+            for (Task checkEvent : todoList.getTodoList()) {
+                if (checkEvent instanceof Event && ((Event) checkEvent).at.equals(checkOn)) {
+                    result += checkEvent.toString() + "\n";
+                    eventCount++;
+                }
             }
+            if (eventCount > 0) {
+                result += "   [ A total of " + eventCount + " event(s)]";
+            } else {
+                result += "   [ You have no events on this day ]";
+            }
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new DukeException("You didn't enter a date!");
         }
-        if (eventCount > 0) {
-            result += "   [ A total of " + eventCount + " event(s)]";
-        } else {
-            result += "   [ You have no events on this day ]";
-        }
+
         return result;
     }
 }

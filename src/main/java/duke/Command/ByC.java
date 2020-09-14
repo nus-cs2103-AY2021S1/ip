@@ -22,23 +22,28 @@ public class ByC extends Command {
     }
 
     @Override
-    public String execute(Ui ui, TaskList todoList, Storage store) throws IOException {
+    public String execute(Ui ui, TaskList todoList, Storage store) throws IOException, DukeException {
         assert input.length() > 2 : "no date entered";
-        LocalDate checkBy = LocalDate.parse(input.substring(3));
         String result = "";
-        result += "By this day, you have: \n" ;
-        int deadCount = 0;
-        for (Task checkDead : todoList.todoList) {
-            if (checkDead instanceof Deadline && isBy((Deadline)checkDead, checkBy)) {
-                result += checkDead.toString();
-                deadCount++;
+        try {
+            LocalDate checkBy = LocalDate.parse(input.substring(3));
+            result += "By this day, you have: \n" ;
+            int deadCount = 0;
+            for (Task checkDead : todoList.todoList) {
+                if (checkDead instanceof Deadline && isBy((Deadline)checkDead, checkBy)) {
+                    result += checkDead.toString();
+                    deadCount++;
+                }
             }
+            if (deadCount > 0) {
+                result += "   [ A total of " + deadCount + " deadline(s)]";
+            } else {
+                result += "      [ You have no deadlines by this day ]";
+            }
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new DukeException("You didn't enter date!");
         }
-        if (deadCount > 0) {
-            result += "   [ A total of " + deadCount + " deadline(s)]";
-        } else {
-            result += "      [ You have no deadlines by this day ]";
-        }
+
         return result;
     }
 }

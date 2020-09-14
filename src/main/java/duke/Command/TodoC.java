@@ -17,13 +17,13 @@ public class TodoC extends Command {
     }
 
     @Override
-    public String execute(Ui ui, TaskList todoList, Storage store){
+    public String execute(Ui ui, TaskList todoList, Storage store) throws DukeException {
 
         assert input.length() > 4 : "no date entered";
 
         String result = "";
-        String name = input.substring(5);
         try {
+            String name = input.substring(5);
             if (name.isEmpty()) {
                 throw new DukeException("no task indicated");
             } else {
@@ -35,8 +35,8 @@ public class TodoC extends Command {
                 store.write(td);
 
             }
-        } catch (DukeException | IOException e) {
-            result += "Enter a task after schedule!";
+        } catch (StringIndexOutOfBoundsException | IOException e) {
+            throw new DukeException("You didn't enter a task");
         }
         return result;
     }

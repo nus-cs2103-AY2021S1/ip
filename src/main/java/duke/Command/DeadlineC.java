@@ -19,9 +19,9 @@ public class DeadlineC extends Command {
     @Override
     public String execute(Ui ui, TaskList todoList, Storage store) throws DukeException {
         assert input.length() > 7 : "no date entered";
-        String fullDL = input.substring(9);
         String result = "";
         try {
+            String fullDL = input.substring(9);
             String dlName = fullDL.split("/by")[0];
             LocalDate dlTime = LocalDate.parse(fullDL.split("/by ")[1]);
             Deadline dl = new Deadline(dlName, dlTime);
@@ -29,7 +29,7 @@ public class DeadlineC extends Command {
             result += "Aight new task for you: \n" + dl.toString() +"\n";
             result += "Now you got " + todoList.size() + " task(s) waiting man";
             store.write(dl);
-        } catch (ArrayIndexOutOfBoundsException | IOException e) {
+        } catch (StringIndexOutOfBoundsException | IOException e) {
             throw new DukeException("You either didn't enter a date or a task");
         }
         return result;
