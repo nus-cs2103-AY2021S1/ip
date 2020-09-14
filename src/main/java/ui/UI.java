@@ -28,15 +28,16 @@ public class UI {
      * @return String welcome message.
      */
     public static String welcome() {
-        String logo =
-                " ____  __.__\n"
-                        + "|    |/ _|__| ____    ____\n"
-                        + "|      < |  |/    \\  / ___\\\n"
-                        + "|    |  \\|  |   |  \\/ /_/  >\n"
-                        + "|____|__ \\__|___|  /\\___  /\n"
-                        + "        \\/       \\//_____/\n";
+        String logo = " ___  __.__\n"
+                + "|    |/ _|__|  __       ___\n"
+                + "|      < |  |/ _  \\   /  __ \\\n"
+                + "|    |   \\|  | |   \\ \\/  /_/   \\\n"
+                + "|___|___\\__|   |  /\\__  /  /\n"
+                + "                   \\//_____/";
 
-        return logo + "\n" + "Hello! I'm King!\nWhat can I do for you?";
+        String message = "Hello! I'm King!\nWhat can I do for you?";
+        return wrapBorderAroundText("#", "", "#", "    ", 20, logo, true)
+                + "\n" + message;
     }
 
     /**
@@ -49,9 +50,9 @@ public class UI {
      */
     @Deprecated
     public static String kingChatBox(String chatContent) {
-        return "\t" + printKingBorder("King says", 5, '-') + "\n\t"
-                + formatStringIfLong(chatContent) + "\n"
-                + "\t" + printKingBorder("", CHAT_WIDTH, '-') + "\n";
+        return "\t" + printLine("King says", 5, "-", CHAT_WIDTH) + "\n\t"
+                + formatStringIfLong(chatContent, "\n") + "\n"
+                + "\t" + printLine("", null, "-", CHAT_WIDTH) + "\n";
     }
 
     /**
@@ -70,9 +71,8 @@ public class UI {
      * @return String error box around error message.
      */
     public static String errorBox(String error) {
-        return printKingBorder("Error Encountered", 4, '=') + "\n\t"
-                + formatStringIfLong(error) + "\n"
-                + printKingBorder("", CHAT_WIDTH, '=') + "\n";
+        return printLine(" Error Encountered ", 4, "-", CHAT_WIDTH) + "\n"
+                + formatStringIfLong(error, "\n");
     }
 
     /**
@@ -92,8 +92,8 @@ public class UI {
     /**
      * Returns a chat box wrap around a message when the user successfully deletes tasks.
      *
-     * @param itemsDeletedList    taskList of the items deleted.
-     * @param numOfItemsLeft number of items left in the new TaskList.
+     * @param itemsDeletedList taskList of the items deleted.
+     * @param numOfItemsLeft   number of items left in the new TaskList.
      * @return String chat box around text.
      * @see TaskList
      */
@@ -160,7 +160,7 @@ public class UI {
     }
 
     // folds a string if it is too long to fit into the chat box
-    private static String formatStringIfLong(String unformattedString) {
+    private static String formatStringIfLong(String unformattedString, String delimiter) {
         int len = unformattedString.length();
         if (len > CHAT_WIDTH) {
             StringBuilder longString = new StringBuilder(unformattedString);
@@ -174,7 +174,7 @@ public class UI {
                 } else if (c == '\t') {
                     pos++;
                 } else if ((processedLength >= BUFFER && c == ' ') || processedLength == CHAT_WIDTH) {
-                    longString.insert(pos, "\n\t");
+                    longString.insert(pos, delimiter);
                     pos += 4;
                     processedLength = 1;
                 } else if (processedLength == 0 && c == ' ') {
@@ -190,15 +190,77 @@ public class UI {
         }
     }
 
-    private static String printKingBorder(String text, int posOfText, char symbol) {
+    /**
+     * Prints a line with the option to include a text in the middle
+     * of the line.
+     * @param text
+     * @param posOfText
+     * @param symbol
+     * @param length
+     * @return
+     */
+    private static String printLine(String text, Integer posOfText, String symbol, Integer length) {
         StringBuilder result = new StringBuilder();
-        for (int i = 0; i < posOfText; i++) {
-            result.append(symbol);
-        }
-        result.append(text);
-        for (int i = result.length(); i < CHAT_WIDTH; i++) {
-            result.append(symbol);
+        if (text == "") {
+            for (int i = 0; i < length; i++) {
+                result.append(symbol);
+            }
+        } else {
+            for (int i = 0; i < posOfText; i++) {
+                result.append(symbol);
+            }
+            result.append(text);
+            while (result.length() < length) {
+                result.append(symbol);
+            }
         }
         return result.toString();
+    }
+
+    /**
+     * wrap border around text
+     *
+     * @param top
+     * @param right
+     * @param bot
+     * @param left
+     * @param size
+     * @param text
+     * @param gotSideBorder
+     * @return
+     */
+    private static String wrapBorderAroundText(String top, String right, String bot, String left,
+                                               int size, String text, boolean gotSideBorder) {
+        String topBorder = printLine("", null, top, size);
+        String botBorder = printLine("", null, bot, size);
+        StringBuilder input = new StringBuilder(text);
+        StringBuilder output = new StringBuilder();
+        output.append(topBorder);
+        output.append("\n");
+        if (gotSideBorder) {
+            int processedLength = 0;
+            int linePos = 0;
+            while (processedLength < input.length()) {
+                if (input.charAt(processedLength) == '\n') {
+                    while (linePos < size - 1) {
+                        output.append(" ");
+                        linePos++;
+                    }
+                    output.append(right + "\n");
+                    linePos = 0;
+                } else {
+                    if (linePos == 0) {
+                        output.append(left);
+                    }
+                    output.append(input.charAt(processedLength));
+                    linePos++;
+                }
+                processedLength++;
+            }
+        } else {
+            output.append(text);
+        }
+        output.append("\n" + botBorder);
+        return output.toString();
     }
 }
