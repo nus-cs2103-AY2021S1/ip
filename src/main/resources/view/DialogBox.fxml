@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root fx:id="hBox" alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="380.0" opacity="0.95" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root fx:id="hBox" alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="380.0" opacity="0.95" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
     <children>
       <HBox fx:id="dialogContainer" alignment="CENTER_LEFT" prefHeight="95.0" prefWidth="273.0">
          <children>
