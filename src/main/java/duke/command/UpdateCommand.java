@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-/** This class represents a user command to udpate a task. */
+/** This class represents a user command to update a task. */
 public class UpdateCommand extends Command {
     private int taskIndex;
     private String description;

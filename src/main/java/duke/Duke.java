@@ -17,10 +17,7 @@ public class Duke {
 
     private static final String PATH = "./data/duke.txt";
 
-    /**
-     * Constructs a Duke object associated with a file path.
-     * @param path The location of the storage file.
-     */
+    /** Constructs a Duke object associated with a file path. */
     public Duke() {
         try {
             this.ui = new Ui();
@@ -52,5 +49,11 @@ public class Duke {
 
     public String getResponse() {
         return ui.getMessage();
+    }
+
+    public boolean isError() {
+        boolean isError = ui.getIsError();
+        ui.resetIsError();
+        return isError;
     }
 }

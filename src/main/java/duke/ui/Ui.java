@@ -12,6 +12,7 @@ public class Ui {
     
     /** The message to be sent to the user through the GUI. */
     private String message;
+    private boolean isError;
 
     public String getMessage() {
         return this.message;
@@ -109,5 +110,14 @@ public class Ui {
      */
     public void saveErrorMessage(String error) {
         this.message = error;
+        this.isError = true;
+    }
+
+    public boolean getIsError() {
+        return this.isError;
+    }
+
+    public void resetIsError() {
+        this.isError = false;
     }
 }
