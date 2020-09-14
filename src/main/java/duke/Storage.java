@@ -116,7 +116,8 @@ public class Storage {
             if (!isReadableFilePath(newFilePath)) {
                 throw FILE_NOT_FOUND;
             }
-            return loadFile(new File(newFilePath));
+            ArrayList<Task> result = loadFile(new File(newFilePath));
+            return result;
         } catch (FileNotFoundException err) {
             throw FILE_NOT_FOUND;
         }
@@ -132,9 +133,9 @@ public class Storage {
         f.mkdirs();
     }
 
-    private ArrayList<Task> loadFile(File file) throws FileNotFoundException, DukeException {
+    private ArrayList<Task> loadFile(File currentFile) throws FileNotFoundException, DukeException {
         ArrayList<Task> loadedTask = new ArrayList<>();
-        Scanner scanner = new Scanner(file);
+        Scanner scanner = new Scanner(currentFile);
         String[] dataRead;
         while (scanner.hasNext()) {
             dataRead = readSavedData(scanner.nextLine());
