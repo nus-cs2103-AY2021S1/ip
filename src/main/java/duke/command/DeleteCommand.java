@@ -37,7 +37,7 @@ public class DeleteCommand extends Command {
         Task deletedTask = tasks.getTask(taskNumber);
         tasks.removeTask(taskNumber);
         String responseMessage = "Noted. I've removed this task:\n\t   "
-                + deletedTask + "\n\t "
+                + deletedTask + "\n "
                 + "Now you have "
                 + tasks.getNumberOfTaskDescription()
                 + " in the list.";

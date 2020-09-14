@@ -36,13 +36,13 @@ public class SortCommandTest {
         Storage storage = new Storage();
         SortCommand sortCommand = new SortCommand();
         CommandResponse actual = sortCommand.execute(tasks, ui, storage);
-        String expectedMessage = "Got it! I've sorted your tasks:\n"
-                + "\t 1.[T][✘] eat\n"
-                + "\t 2.[T][✘] dance\n"
-                + "\t 3.[D][✘] sleep (by: 12 February 2012, 12:12 PM)\n"
-                + "\t 4.[D][✘] sing (by: 12 December 2012, 12:12 PM)\n"
-                + "\t 5.[E][✘] play (at: 12 April 2014, 12:14 PM)\n"
-                + "\t 6.[E][✘] drink (at: 12 December 2020, 12:14 PM) ";
+        String expectedMessage = "Got it! I've sorted your tasks:\n\t "
+                + "1.[T][✘] eat\n\t "
+                + "2.[T][✘] dance\n\t "
+                + "3.[D][✘] sleep (by: 12 February 2012, 12:12 PM)\n\t "
+                + "4.[D][✘] sing (by: 12 December 2012, 12:12 PM)\n\t "
+                + "5.[E][✘] play (at: 12 April 2014, 12:14 PM)\n\t "
+                + "6.[E][✘] drink (at: 12 December 2020, 12:14 PM) ";
         CommandResponse expected = new CommandResponse(expectedMessage, false);
         assertEquals(expected.getResponseMessage(), actual.getResponseMessage());
     }

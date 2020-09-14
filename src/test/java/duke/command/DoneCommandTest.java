@@ -21,8 +21,8 @@ public class DoneCommandTest {
         Storage storage = new Storage();
         DoneCommand doneCommand = new DoneCommand(0);
         CommandResponse actual = doneCommand.execute(tasks, ui, storage);
-        String expectedMessage = "Nice! I've marked this task as done:\n"
-                + "\t   [T][✓] eat";
+        String expectedMessage = "Nice! I've marked this task as done:\n\t   "
+                + "[T][✓] eat";
         assertEquals(1, tasks.getNumberOfTask());
         CommandResponse expected = new CommandResponse(expectedMessage, false);
         assertEquals(expected, actual);

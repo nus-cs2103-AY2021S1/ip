@@ -21,9 +21,9 @@ public class DeleteCommandTest {
         Storage storage = new Storage();
         DeleteCommand deleteCommand = new DeleteCommand(0);
         CommandResponse actual = deleteCommand.execute(tasks, ui, storage);
-        String expectedMessage = "Noted. I've removed this task:\n"
-                + "\t   [T][✘] eat\n"
-                + "\t Now you have 0 task in the list.";
+        String expectedMessage = "Noted. I've removed this task:\n\t   "
+                + "[T][✘] eat\n "
+                + "Now you have 0 task in the list.";
         assertEquals(0, tasks.getNumberOfTask());
         CommandResponse expected = new CommandResponse(expectedMessage, false);
         assertEquals(expected, actual);

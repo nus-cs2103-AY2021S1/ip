@@ -32,8 +32,8 @@ public class RetrieveCommandTest {
         RetrieveCommand retrieveCommand = new RetrieveCommand(LocalDate.parse("12/02/2012",
                 DateTimeFormatter.ofPattern("dd/MM/yyyy")));
         CommandResponse actual = retrieveCommand.execute(tasks, ui, storage);
-        String expectedMessage = "Here are the deadlines and events happening on 12 February 2012:\n"
-                + "\t 1.[D][✘] sleep (by: 12 February 2012, 12:12 PM) ";
+        String expectedMessage = "Here are the deadlines and events happening on 12 February 2012:\n\t "
+                + "1.[D][✘] sleep (by: 12 February 2012, 12:12 PM) ";
         CommandResponse expected = new CommandResponse(expectedMessage, false);
         assertEquals(expected, actual);
     }

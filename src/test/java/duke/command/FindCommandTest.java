@@ -31,10 +31,10 @@ public class FindCommandTest {
         Storage storage = new Storage();
         FindCommand findCommand = new FindCommand("book");
         CommandResponse actual = findCommand.execute(tasks, ui, storage);
-        String expectedMessage = "Here are the matching tasks in your list:\n"
-                + "\t 1.[T][✘] borrow book\n"
-                + "\t 2.[D][✘] readbook (by: 12 February 2012, 12:12 PM)\n"
-                + "\t 3.[E][✘] return book (at: 12 April 2014, 12:14 PM) ";
+        String expectedMessage = "Here are the matching tasks in your list:\n\t "
+                + "1.[T][✘] borrow book\n\t "
+                + "2.[D][✘] readbook (by: 12 February 2012, 12:12 PM)\n\t "
+                + "3.[E][✘] return book (at: 12 April 2014, 12:14 PM) ";
         CommandResponse expected = new CommandResponse(expectedMessage, false);
         assertEquals(expected, actual);
     }
