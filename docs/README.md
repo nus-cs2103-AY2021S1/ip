@@ -8,10 +8,10 @@ DukeBunny offers several useful features with a touch of posh attitude to it.
 3. Copy the downloaded jar file to the folder you want to use as the home folder for your DukeBunny.
 4. Double-click the file to start the app. The GUI below should appear in a few seconds.\
 
-![DukeBunnyWelcomeSS](/docs/DukeBunnyWelcomeSS.PNG)
+![DukeBunnyWelcomeSS](/docs/DukeBunnyWelcomeSS.png)
 5. Enter commands in the command box and press Enter to execute it. (Please refer to command list)\
 
-![DukeBunnyCommandSS](/docs/DukeBunnyCommandSS.PNG)
+![DukeBunnyCommandSS](/docs/DukeBunnyCommandSS.png)
 
 ## Features
 Words in `UPPER_CASE` are the parameters that are supplied by the user.\
