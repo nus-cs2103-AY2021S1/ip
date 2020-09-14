@@ -1,3 +1,5 @@
+package duke;
+
 import duke.ChatBot;
 
 public class Duke {
