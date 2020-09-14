@@ -1,4 +1,4 @@
-# User Guide
+# Duke User Guide
 
 ## Overview
 Duke is an interactive chat-bot that helps to organize your tasks through a to-do list.
@@ -47,7 +47,7 @@ Starting Duke:
 ## Usage
 
 ### 1. `todo` - Add new todo
-Add a new todo task with its given description. </br>
+Add a new todo task with description. </br>
 
 Example of usage: 
 
@@ -59,26 +59,27 @@ Expected outcome:
     [T][✘] Walk the dog
 
 ### 2. `deadline` - Add new deadline
-
+Add a new deadline task with description and time. </br>
 Example of usage: 
 
-`deadline [description] /by [time]`
+`deadline Assignment /by 2020-10-10 1800`
 
 Expected outcome:
 
-`outcome`
+> Yes! I have successfully added: </br>
+    [D][✘] Assignment (by: 10 Oct 2020, 06:00 PM)
 
 ### 3. `event` - Add new event
-
-Describe action and its outcome.
+Add a new event task with description and time. </br>
 
 Example of usage: 
 
-`event [description] /at [time]`
+`event Meeting /at 10pm`
 
 Expected outcome:
 
-`outcome`
+> Yes! I have successfully added: </br>
+    [E][✘] Meeting (at: 10pm)
 
 ### 4. `delete` - Delete a task
 
@@ -90,7 +91,8 @@ Example of usage:
 
 Expected outcome:
 
-`outcome`
+> Alright! I've removed this task: </br>
+    [E][✔] Google Career Talk (at: U-Town)
 
 ### 5. `list` - List all tasks
 
@@ -98,11 +100,18 @@ Displays all tasks currently in the list.
 
 Example of usage: 
 
-`list
+`list`
 
 Expected outcome:
 
-`outcome`
+> Here are the tasks in your list:</br>
+    </br>
+    1. [D][✔] Send Email (by: 13 Sept 2020, 06:00 PM)</br>
+    2. [E][✘] Software Engineering class (at: 3pm)</br>
+    3. [D][✘] Submission of Essay (by: 6pm on Thursday)</br>
+    4. [D][✘] Assignment (by: 10 Oct 2020, 06:00 PM)</br>
+    </br>
+    You have 4 task(s) in the list
 
 ### 6. `clear` - Clear all tasks
 
@@ -114,7 +123,7 @@ Example of usage:
 
 Expected outcome:
 
-`outcome`
+> The list of tasks has successfully been cleared.
 
 ### 7. `find` - Find a task by keyword
 
@@ -122,11 +131,12 @@ Find all tasks matching the keyword either fully or partially.
 
 Example of usage: 
 
-`find assignment`
+`find Essay`
 
 Expected outcome:
 
-`outcome`
+> I have found the matching tasks in your list: </br>
+    [D][✘] Submission of Essay (by: 6pm on Thursday)
 
 ### 8. `done` - Completes a task
 
@@ -134,11 +144,12 @@ Mark a task as done by specifing its number in the task list.
 
 Example of usage: 
 
-`done 1`
+`done 4`
 
 Expected outcome:
 
-`outcome`
+> Good job! You completed: </br>
+    [D][✔] Assignment (by: 10 Oct 2020, 06:00 PM)
 
 ### 9. `undo` - Undo the previous command
 
@@ -148,7 +159,7 @@ Example of usage:
 
 Expected outcome:
 
-`outcome`
+> The previous command: "done 3" has been undone!
 
 ### 10. `help` - Displays help guide for commands
 
@@ -161,8 +172,8 @@ Example of usage:
 
   `help deadline`
 
-`keyword (optional arguments)`
-
 Expected outcome:
 
-`outcome`
+> deadline: Adds a deadline task with time. </br>
+  Fields: [description] /by [time] 
+  Example: deadline Assignment /by 2020-10-10 1800
