@@ -10,16 +10,16 @@
 
 
 ## Features 
-   * [Adding a task](#feature-1)
-   * [Deleting a task](#feature-2)
-   * [Listing all tasks](#feature-3)
-   * [Mark a task as completed](#feature-4)
-   * [Search for task(s) using keywords](#feature-5)
-   * [Search for task(s) on particular day](#feature-6)
-   * [Undo a command](#feature-7)
-   * [Help](#feature-8)
+   * [Adding a task](#adding-a-task)
+   * [Deleting a task](#deleting-a-task)
+   * [Listing all tasks](#listing-all-task)
+   * [Mark a task as completed](#mark-a-task-as-completed)
+   * [Search for task(s) using specified keywords](#search-for-tasks-using-specified-keywords)
+   * [Search for task(s) on specified date](#search-for-tasks-on-specified-date)
+   * [Undo a command](#undo-a-command)
+   * [Help](#help)
 
-### Feature 1
+### Adding a task
 #### Yuki accepts mainly 3 types of task, including `todo`, `deadline`, `event`.
 
 1. Add a `todo` task:
@@ -44,7 +44,7 @@
 
     Expected outcome: `[E][✘] CS2103T Finals (APPEAR at: 01 December 2020 12:00-14:00)`
 
-### Feature 2
+### Deleting a task
 To delete a task permanently from storage, make use of command `delete {taskNumber}`. The taskNumber of a specific task can be found using the `list` command, press `Enter` to execute.
 
 Example of usage: `delete 5`
@@ -54,7 +54,7 @@ Expected outcome:<br />
 `[T][✘] pay mobile bill`<br />
 `Now you have 4 tasks in the list. Keep going!!`
 
-### Feature 3
+### Listing all task
 To display all tasks in storage, make use of command  `list`, press `Enter` to execute.
 
 Example of usuage:
@@ -65,7 +65,7 @@ Expected outcome:<br />
 `1. [D][✓] CS2103T IP Submission (FINISH by: 18 September 2020 12:00)`<br />
 `2. ... `
 
-### Feature 4 
+### Mark a task as completed 
 To mark a specific task as completed, make use of command `done {taskNumber}`. The taskNumber of a specific task can be found using the `list` command, press `Enter` to execute.
 
 Example of usage:
@@ -75,7 +75,7 @@ Expected outcome: <br />
 `Good Job!!! You cleared this task:`<br />
 `[D][✓] CS2103T IP Submission (FINISH by: 18 September 2020 12:00)`
 
-### Feature 5
+### Search for task(s) using specified keywords
 To search for task(s) containing specific keyword(s), make use of the command `find {keyword1} ... {keywordN}`, press `Enter` to execute.
 
 Example of usage:
@@ -86,7 +86,7 @@ Expected outcome: <br />
 `1. [D][✓] CS2103T IP Submission (FINISH by: 18 September 2020 12:00)`<br />
 `2. [E][✘] CS2103T Finals (APPEAR at: 01 December 2020 12:00-14:00)`.
 
-### Feature 6
+### Search for task(s) on specified date
 To check for task(s) occuring on a particular day, make use of the command `check YYYY:MM:DD`, press `Enter` to execute.
 
 Example of usage:
@@ -97,8 +97,8 @@ Expected outcome: <br />
 `1. [D][✓] CS2103T IP Submission (FINISH by: 18 September 2020 12:00)`<br />
 ...
 
-### Feature 7
+### Undo a command
 To undo any of the commands that can be undone (eg. add, delete, done), make use of the command `undo`, press `enter` to execute.
 
-### Feature 8
+### Help
 At any point in time you require assistance in using the bot, make use of the command `help` to access the list of commands available and its format. 
