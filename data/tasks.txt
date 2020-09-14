@@ -3,3 +3,4 @@ todo|✓|write homework
 deadline|✓|project|Oct 11 2020
 event|✘|meeting2|2020-11-10
 deadline|✘|essay|Nov 12 2020
+deadline|✘|   1        |Nov 11 2020

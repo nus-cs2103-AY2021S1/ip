@@ -70,6 +70,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses a user command that starts with "done."
+     *
+     * @param wordArray The word Array of user command.
+     * @return The command object that Duke will execute.
+     */
     public static Command parseDone(String[] wordArray) {
         int noOfWords = wordArray.length;
         try {
@@ -89,7 +95,7 @@ public class Parser {
     }
 
     /**
-     * Parses a user command that starts with "done."
+     * Parses a user command that starts with "delete."
      *
      * @param wordArray The word Array of user command.
      * @return The command object that Duke will execute.
@@ -172,13 +178,13 @@ public class Parser {
                         + "cannot add it into the list.");
             }
             String body = userCommand.split(" ", 2)[1];
-            if (body.split(" /by").length < 2) {
+            if (body.split("/by ").length < 2) {
                 throw new InvalidDeadlineException("Please tell me both the name and"
                         + " the time due of the deadline task in the correct form! "
                         + "Don't forget to include the time by using /by.");
             }
-            String taskName = body.split(" /by ")[0];
-            String time = body.split(" /by ")[1];
+            String taskName = body.split("/by ")[0];
+            String time = body.split("/by ")[1];
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern(TIME_FORMAT);
             try {
                 LocalDate localDate = LocalDate.parse(time, formatter);
@@ -215,13 +221,13 @@ public class Parser {
                         + " of the event task! Or else I cannot add it into the list.");
             }
             String body = userCommand.split(" ", 2)[1];
-            if (body.split(" /at").length < 2) {
+            if (body.split("/at ").length < 2) {
                 throw new InvalidEventException("Please tell me both the name and "
                         + "the time period of the event task in the correct form! "
                         + "Don't forget to include the time by using /at.");
             }
-            String taskName = body.split(" /at ")[0];
-            String time = body.split(" /at ")[1];
+            String taskName = body.split("/at ")[0];
+            String time = body.split("/at ")[1];
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern(TIME_FORMAT);
             try {
                 LocalDate localDate = LocalDate.parse(time, formatter);
