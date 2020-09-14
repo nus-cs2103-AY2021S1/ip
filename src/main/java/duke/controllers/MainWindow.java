@@ -1,4 +1,8 @@
 package duke.controllers;
+import java.awt.Desktop;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 import duke.Duke;
 import duke.Parser;
@@ -13,6 +17,8 @@ import javafx.scene.layout.VBox;
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
+    private static final String UG_WEBSITE = "https://mgiang2015.github.io/ip/";
+
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -21,6 +27,9 @@ public class MainWindow extends AnchorPane {
     private TextField userInput;
     @FXML
     private Button sendButton;
+
+    @FXML
+    private Button helpButton;
 
     private Duke duke;
 
@@ -66,5 +75,18 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialogBox(dukeLogo, dukeImage),
                 DialogBox.getDukeDialogBox(dukeWelcome, dukeImage)
         );
+    }
+
+    /**
+     * Brings User to User Guide website
+     */
+    @FXML
+    public void goToUserGuide() {
+        try {
+            URI uri= new URI(UG_WEBSITE);
+            java.awt.Desktop.getDesktop().browse(uri);
+        } catch (IOException | URISyntaxException e) {
+            e.printStackTrace();
+        }
     }
 }
