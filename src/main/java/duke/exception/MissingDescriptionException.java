@@ -1,4 +1,6 @@
-package duke;
+package duke.exception;
+
+import duke.task.TaskType;
 
 public class MissingDescriptionException extends MissingElementException {
     public MissingDescriptionException(TaskType type) {

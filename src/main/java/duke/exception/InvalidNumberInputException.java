@@ -1,7 +1,7 @@
-package duke;
+package duke.exception;
 
-public class InvalidNumberInput extends DukeException {
-    public InvalidNumberInput() {
+public class InvalidNumberInputException extends DukeException {
+    public InvalidNumberInputException() {
         super("Sorry this is not a number.");
     }
 }

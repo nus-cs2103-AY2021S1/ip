@@ -1,9 +1,10 @@
-package duke;
+package duke.command;
 
-import duke.command.Command;
+import duke.task.TaskManager;
+import duke.ui.Ui;
 
 /**
- * <p>duke.FindCommand class defines the behaviour of a command to find an item in the task list.</p>
+ * <p>duke.command.FindCommand class defines the behaviour of a command to find an item in the task list.</p>
  */
 public class FindCommand extends Command {
     private final String keyword;

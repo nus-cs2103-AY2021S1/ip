@@ -1,4 +1,4 @@
-package duke;
+package duke.exception;
 
 public class MissingTaskIndexException extends DukeException {
     public MissingTaskIndexException() {

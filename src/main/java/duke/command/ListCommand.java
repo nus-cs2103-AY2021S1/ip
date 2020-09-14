@@ -1,7 +1,10 @@
-package duke;
+package duke.command;
+
+import duke.task.TaskManager;
+import duke.ui.Ui;
 
 /**
- * <p>duke.ListCommand class defines the behaviour of a command to see all tasks in the list.</p>
+ * <p>duke.command.ListCommand class defines the behaviour of a command to see all tasks in the list.</p>
  */
 public class ListCommand extends Command {
     @Override

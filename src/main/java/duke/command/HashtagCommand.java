@@ -1,4 +1,8 @@
-package duke;
+package duke.command;
+
+import duke.tag.Tag;
+import duke.task.TaskManager;
+import duke.ui.Ui;
 
 public class HashtagCommand extends Command {
     private final Tag tag;

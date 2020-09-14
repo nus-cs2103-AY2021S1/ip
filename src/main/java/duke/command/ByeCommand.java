@@ -1,7 +1,10 @@
-package duke;
+package duke.command;
+
+import duke.task.TaskManager;
+import duke.ui.Ui;
 
 /**
- * <p>duke.ByeCommand class defines the behaviour of a command to end the chat.</p>
+ * <p>duke.command.ByeCommand class defines the behaviour of a command to end the chat.</p>
  */
 public class ByeCommand extends Command {
     @Override

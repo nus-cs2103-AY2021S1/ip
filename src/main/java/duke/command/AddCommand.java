@@ -1,7 +1,11 @@
-package duke;
+package duke.command;
+
+import duke.task.Task;
+import duke.task.TaskManager;
+import duke.ui.Ui;
 
 /**
- * <p>duke.AddCommand class defines the behaviour of a command to add a task.</p>
+ * <p>duke.command.AddCommand class defines the behaviour of a command to add a task.</p>
  */
 public class AddCommand extends Command {
     private final Task task;
