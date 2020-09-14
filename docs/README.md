@@ -8,8 +8,7 @@ DukeBunny offers several useful features with a touch of posh attitude to it.
 3. Copy the downloaded jar file to the folder you want to use as the home folder for your DukeBunny.
 4. Double-click the file to start the app. The GUI below should appear in a few seconds.\
 ![DukeBunnyWelcomeSS](/docs/DukeBunnyWelcomeSS.png)
-5. Enter commands in the command box and press Enter to execute it. (Please refer to command list)\
-![DukeBunnyCommandSS](/docs/DukeBunnyCommandSS.png)
+5. Enter commands in the command box and press Enter to execute it. (Please refer to command list)
 
 ## Features
 Words in `UPPER_CASE` are the parameters that are supplied by the user.\
@@ -192,7 +191,7 @@ DukeBunny will always draw the data of the task list from the TaskList.txt file.
 
 ## Command Summary
 Action | Format/Examples
------------- | -------------
+------------ | ------------
 Add Todo | `todo DESCRIPTION` <br> e.g. `todo Buy bread`
 Add deadline | `deadline DESCRIPTION /by DATE TIME` <br> e.g. `deadline Physics Project /by 2020-12-04 1800` 
 Add event | `event DESCRIPTION /AT DATE START_TIME-END_TIME` <br> e.g. `event Family Christmas party /at 2020-12-25 1800-2300`
