@@ -115,11 +115,12 @@ Example:
 * `find Assignment` followed by `delete 1` deletes the first item in the overall list, but not the first 
     item in the list returned by the `find` command. 
  
- ### `clear` - Clears all saved data
+### `clear` - Clears all saved data
  
- Clears all saved data.  
+Clears all saved data.  
  
- Format: `clear`
+Format: `clear`
+
  
 ### `bye` - Exiting the Program
 
