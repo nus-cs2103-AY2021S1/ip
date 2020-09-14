@@ -69,7 +69,7 @@ public class Parser {
             "Latter date is before former date for happen between.";
     public static final String UNRECOGNIZED_HAPPEN_COMMAND_EXCEPTION = "Invalid happen command input.";
     public static final String INVALID_DATE_FORMAT_EXCEPTION = "Invalid date format. Please use yyyy-MM-dd.";
-    public static final String INVALID_DATE_TIME_FORMAT_EXCEPTION = "Invalid input datetime, please input as"
+    public static final String INVALID_DATE_TIME_FORMAT_EXCEPTION = "Invalid input datetime, please input as "
             + "yyyy-MM-dd HH:mm.";
     public static final String INVALID_TASK_TYPE_INDEX_EXCEPTION = "The index of task is not of the desired task type.";
     public static final String FIX_COMMAND_FORMAT_EXCEPTION = "The format for fix command should be "

@@ -17,7 +17,7 @@ public class DeadlineTest {
             Deadline d = new Deadline("Assignment 1", "2020/09/01");
             fail();
         } catch (Exception e) {
-            assertEquals("\u2639 OOPS!!! Invalid input date, please input as yyyy-mm-dd.", e.getMessage());
+            assertEquals("\u2639 OOPS!!! Invalid date format. Please use yyyy-MM-dd.", e.getMessage());
         }
     }
 
@@ -141,10 +141,10 @@ public class DeadlineTest {
     public void output_toWriteStorage() {
         try {
             Deadline d = new Deadline("Assignment 1", "2020-08-02");
-            assertEquals("D | 0 | Assignment 1 | By: 2020-08-02\n", d.outputToFile());
+            assertEquals("D &&& 0 &&& Assignment 1 &&& 2020-08-02 &&& 0\n", d.outputToFile());
 
             d.markAsDone();
-            assertEquals("D | 1 | Assignment 1 | By: 2020-08-02\n", d.outputToFile());
+            assertEquals("D &&& 1 &&& Assignment 1 &&& 2020-08-02 &&& 0 &&& 2020-09-14\n", d.outputToFile());
         } catch (Exception e) {
             fail();
         }
@@ -154,8 +154,7 @@ public class DeadlineTest {
     public void toString_systemOutput() {
         try {
             Deadline d = new Deadline("Assignment 1", "2020-08-02");
-            assertEquals("[D][\u2718] Assignment 1 (by: Aug 2 2020) This is overdue! "
-                    + "The deadline has passed!!!", d.toString());
+            assertEquals("[D][\u2718] Assignment 1 (by: Aug 2 2020)", d.toString());
 
             d.markAsDone();
             assertEquals("[D][\u2713] Assignment 1 (by: Aug 2 2020)", d.toString());

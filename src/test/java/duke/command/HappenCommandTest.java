@@ -78,14 +78,14 @@ public class HappenCommandTest {
             new HappenCommand("happen in 0 days").execute(ui, list, storage);
             fail();
         } catch (Exception e) {
-            assertEquals("\u2639 OOPS!!! Please input a positive integer for happen in command.", e.getMessage());
+            assertEquals("\u2639 OOPS!!! Number of days should be a positive integer.", e.getMessage());
         }
 
         try {
             new HappenCommand("happen in -3 days").execute(ui, list, storage);
             fail();
         } catch (Exception e) {
-            assertEquals("\u2639 OOPS!!! Please input a positive integer for happen in command.", e.getMessage());
+            assertEquals("\u2639 OOPS!!! Number of days should be a positive integer.", e.getMessage());
         }
     }
 

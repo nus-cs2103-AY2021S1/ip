@@ -266,7 +266,7 @@ public class ParserTest {
             Parser.parseAddTask("deadline assignment /by 2020/08/31");
             fail();
         } catch (Exception e) {
-            assertEquals("\u2639 OOPS!!! Invalid input date, please input as yyyy-mm-dd.", e.getMessage());
+            assertEquals("\u2639 OOPS!!! Invalid date format. Please use yyyy-MM-dd.", e.getMessage());
         }
 
         try {

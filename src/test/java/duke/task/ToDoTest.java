@@ -23,10 +23,10 @@ public class ToDoTest {
     public void output_toWriteStorage() {
         try {
             ToDo t = new ToDo("return books");
-            assertEquals("T | 0 | return books\n", t.outputToFile());
+            assertEquals("T &&& 0 &&& return books\n", t.outputToFile());
 
             t.markAsDone();
-            assertEquals("T | 1 | return books\n", t.outputToFile());
+            assertEquals("T &&& 1 &&& return books\n", t.outputToFile());
         } catch (Exception e) {
             fail();
         }
