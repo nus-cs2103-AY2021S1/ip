@@ -21,9 +21,16 @@ public class Ui {
      * Shows the greeting message.
      */
     public String showGreeting() {
-        String message = "Eh what's up\n"
-                + "What do you want?";
-        return wrapMessageInBorders(message);
+        String message = "Are ya winning, son?\n\n"
+                + "Here are the following commands you can use:\n"
+                + "todo {name of task}  -  Adds a new todo task\n"
+                + "deadline {name of task} /by {YYYY-MM-DD}  -  Adds a new deadline\n"
+                + "event {name of task} /at {YYYY-MM-DD}  -  Adds a new event\n"
+                + "done {task index}  -  Marks the task with stated index as done\n"
+                + "delete {task index}  -  Deletes the task with stated index\n"
+                + "list  -  Shows the list of tasks\n"
+                + "statistics  -  Shows some statistics regarding the tasks\n";
+        return cleanMessage(message);
     }
 
     /**
@@ -31,14 +38,14 @@ public class Ui {
      */
     public String showGoodbye() {
         String message = "Alright I'll see you around!\n";
-        return wrapMessageInBorders(message);
+        return cleanMessage(message);
     }
 
     /**
      * Shows the loading file error.
      */
     public String showLoadingError() {
-        return (wrapMessageInBorders("Error loading file!"));
+        return (cleanMessage("Error loading file!"));
     }
 
     /**
@@ -55,7 +62,7 @@ public class Ui {
                     + task
                     + "\n";
         }
-        return wrapMessageInBorders(message);
+        return cleanMessage(message);
     }
 
     /**
@@ -76,7 +83,7 @@ public class Ui {
                 + "\n"
                 + "In total, you have completed " + statistics.getNumOfDoneTasks()
                 + " out of " + tasks.getSize() + " tasks. (" + statistics.getPercentageOfDoneTasks() + "%)\n";
-        return wrapMessageInBorders(message);
+        return cleanMessage(message);
     }
 
     /**
@@ -92,7 +99,7 @@ public class Ui {
                 + "Now you have "
                 + tasks.getSize()
                 + " tasks in the list.";
-        return wrapMessageInBorders(message);
+        return cleanMessage(message);
     }
 
     /**
@@ -108,7 +115,7 @@ public class Ui {
                 + "Now you have "
                 + tasks.getSize()
                 + " tasks in the list.";
-        return wrapMessageInBorders(message);
+        return cleanMessage(message);
     }
 
     /**
@@ -119,7 +126,7 @@ public class Ui {
     public String showDoneTask(Task task) {
         String message = "Nice! I've marked this task as done:\n"
                 + task;
-        return wrapMessageInBorders(message);
+        return cleanMessage(message);
     }
 
     /**
@@ -136,7 +143,7 @@ public class Ui {
                     + task
                     + "\n";
         }
-        return wrapMessageInBorders(message);
+        return cleanMessage(message);
     }
 
     /**
@@ -145,7 +152,7 @@ public class Ui {
      * @param message The error message to be shown.
      */
     public String showError(String message) {
-        return wrapMessageInBorders(message);
+        return cleanMessage(message);
     }
 
     /**
@@ -154,17 +161,12 @@ public class Ui {
      * @param message The message to be wrapped.
      * @return The wrapped message.
      */
-    public String wrapMessageInBorders(String message) {
+    public String cleanMessage(String message) {
         if (message.endsWith("\n")) {
             // If the message ends with a newline, remove the newline
             message = message.substring(0, message.length() - 1);
         }
 
-        String line = "____________________________________________________________\n";
-        return line
-                + message
-                + "\n"
-                + line
-                + "\n";
+        return message;
     }
 }
