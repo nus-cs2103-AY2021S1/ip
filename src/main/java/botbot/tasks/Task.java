@@ -1,11 +1,16 @@
 package botbot.tasks;
 
+import java.time.LocalDateTime;
+import java.util.Optional;
+
 /**
  * Represents a task with a description and completion status.
  */
 public abstract class Task {
-    protected final char type;
-    protected final String description;
+    private final char type;
+    private String description;
+    private Optional<LocalDateTime> at;
+    private Optional<LocalDateTime> by;
     private TaskStatus status;
 
     /**
@@ -17,6 +22,25 @@ public abstract class Task {
     public Task(char type, String description) {
         this.type = type;
         this.description = description;
+        this.at = Optional.empty();
+        this.by = Optional.empty();
+        status = TaskStatus.NOT_DONE;
+    }
+
+    /**
+     * Creates a task.
+     *
+     * @param type Type of task.
+     * @param description Description of task
+     * @param at Time of task.
+     * @param by Deadline of task.
+     */
+    public Task(char type, String description, LocalDateTime at, LocalDateTime by) {
+        this.type = type;
+        this.description = description;
+        this.at = Optional.ofNullable(at);
+        this.by = Optional.ofNullable(by);
+        assert this.at.isPresent() ^ this.by.isPresent() : "'at' and 'by' are both present or both absent";
         status = TaskStatus.NOT_DONE;
     }
 
@@ -30,6 +54,26 @@ public abstract class Task {
     public Task(char type, String description, TaskStatus status) {
         this.type = type;
         this.description = description;
+        this.at = Optional.empty();
+        this.by = Optional.empty();
+        this.status = status;
+    }
+
+     /**
+     * Creates a task.
+     *
+     * @param type Type of task.
+     * @param description Description of task.
+     * @param at Time of task.
+     * @param by Deadline of task.
+     * @param status Completion status of task.
+     */
+    public Task(char type, String description, LocalDateTime at, LocalDateTime by, TaskStatus status) {
+        this.type = type;
+        this.description = description;
+        this.at = Optional.ofNullable(at);
+        this.by = Optional.ofNullable(by);
+        assert this.at.isPresent() ^ this.by.isPresent() : "'at' and 'by' are both present or both absent";
         this.status = status;
     }
 
@@ -84,12 +128,30 @@ public abstract class Task {
      *
      * @return Time of task.
      */
-    public abstract String getAt();
+    public LocalDateTime getAt() {
+        return at.orElse(null);
+    }
 
     /**
      * Returns the deadline of the task.
      *
      * @return Deadline of task.
      */
-    public abstract String getBy();
+    public LocalDateTime getBy() {
+        return by.orElse(null);
+    }
+    
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setAt(LocalDateTime at) {
+        assert at != null;
+        this.at = Optional.ofNullable(at);
+    }
+
+    public void setBy(LocalDateTime by) {
+        assert by != null;
+        this.by = Optional.ofNullable(by);
+    }
 }

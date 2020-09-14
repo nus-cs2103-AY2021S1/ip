@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 import botbot.commands.Command;
 import botbot.commands.DeadlineCommand;
 import botbot.commands.DeleteCommand;
+import botbot.commands.EditCommand;
 import botbot.commands.EventCommand;
 import botbot.commands.ExitCommand;
 import botbot.commands.FindCommand;
@@ -46,6 +47,9 @@ public class Parser {
 
         case DeleteCommand.COMMAND_KEYWORD:
             return CommandValidator.tryDelete(args);
+            
+        case EditCommand.COMMAND_KEYWORD:
+            return CommandValidator.tryEdit(args);
 
         case EventCommand.COMMAND_KEYWORD:
             return CommandValidator.tryAddEvent(args);
@@ -75,8 +79,9 @@ public class Parser {
      *
      * @param args Input to be parsed.
      * @return Task ID parsed from input.
+     * @throws NumberFormatException If input does not contain a parsable integer.
      */
-    static int parseCommandId(String args) {
+    static int parseCommandId(String args) throws NumberFormatException {
         assert !args.isBlank() : "Args provided is blank";
         return Integer.parseInt(args) - 1;
     }

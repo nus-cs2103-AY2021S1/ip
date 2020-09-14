@@ -25,26 +25,6 @@ public class Todo extends Task {
         super(TYPE_CODE, description, status);
     }
 
-    /**
-     * Returns the time of the to-do.
-     *
-     * @return Null.
-     */
-    @Override
-    public String getAt() {
-        return null;
-    }
-
-    /**
-     * Returns the deadline of the to-do.
-     *
-     * @return Null.
-     */
-    @Override
-    public String getBy() {
-        return null;
-    }
-
     @Override
     public String toString() {
         return String.format("[%c] [%s] %s", getType(), getStatusIcon(), getDescription());

@@ -11,7 +11,6 @@ public class Deadline extends Task {
     public static final char TYPE_CODE = 'D';
     public static final String COMMAND_FORMAT = "deadline <description> /by <D-M-YYYY HHmm> (eg. 17-3-2020 0945 "
             + "or 3-4-2020 with no time specified)";
-    private LocalDateTime by;
 
     /**
      * Creates a deadline.
@@ -20,8 +19,7 @@ public class Deadline extends Task {
      * @param by Deadline of task.
      */
     public Deadline(String description, LocalDateTime by) {
-        super(TYPE_CODE, description);
-        this.by = by;
+        super(TYPE_CODE, description, null, by);
     }
 
     /**
@@ -32,33 +30,12 @@ public class Deadline extends Task {
      * @param by Deadline of task.
      */
     public Deadline(String description, TaskStatus status, String by) {
-        super(TYPE_CODE, description, status);
-        this.by = LocalDateTime.parse(by);
-    }
-    
-    /**
-     * Returns the time of the deadline.
-     *
-     * @return Null.
-     */
-    @Override
-    public String getAt() {
-        return null;
-    }
-
-    /**
-     * Returns the deadline of the deadline.
-     *
-     * @return Deadline of task.
-     */
-    @Override
-    public String getBy() {
-        return by.toString();
+        super(TYPE_CODE, description, null, LocalDateTime.parse(by), status);
     }
 
     @Override
     public String toString() {
         return String.format("[%c] [%s] %s (by: %s)", getType(), getStatusIcon(), getDescription(),
-                BotbotDateTimeFormatter.convertDateTimeToStr(by));
+                BotbotDateTimeFormatter.convertDateTimeToStr(getBy()));
     }
 }
