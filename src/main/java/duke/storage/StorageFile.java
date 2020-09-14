@@ -11,6 +11,7 @@ import java.util.List;
 import src.main.java.duke.data.Duke;
 import src.main.java.duke.data.exception.IllegalValueException;
 
+//Solution below adapted from https://github.com/se-edu/addressbook-level2
 
 /**
  * Represents a storage that manages the storage of the Best2103Bot.
