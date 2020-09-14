@@ -5,9 +5,12 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.shape.Box?>
 <fx:root alignment="TOP_RIGHT" minHeight="-Infinity" maxWidth="1.7976931348623157E308" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label fx:id="dialog" textFill="#44ff00" style="-fx-padding: 0 20 0 20" text="Label" wrapText="true" minHeight="100"/>
+        <Label fx:id="dialog" textFill="#44ff00" style="-fx-padding: 0 20 0 20; -fx-border-color: #44ff00; -fx-border-radius: 20" text="Label" wrapText="true" minHeight="80"/>
+        <Separator minWidth="10" style="-fx-opacity: 0"/>
         <ImageView fx:id="displayPicture" style="-fx-padding: 0 10 0 10" fitHeight="150.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" />
     </children>
     <padding>
