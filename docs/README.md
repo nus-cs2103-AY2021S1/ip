@@ -38,6 +38,7 @@ Example of usage:
   * `todo` return book
   * `todo` read book
   
+  
 ### Adding a Deadline task: `deadline`  
 
 Adds a task with a dealine to the list of the tasks.
@@ -50,6 +51,7 @@ Example of usage:
   * `deadline` return book /by 4-6-2020 1800
   * `deadline` read book /by 2020-6-4 1800
   
+  
 ### Adding a Event task: `event`  
 
 Adds a event task to the list of the tasks.
@@ -58,6 +60,7 @@ Format: `event [TASK] /at [TIME]`
 Example of usage: 
   * `event` return book /by sunday
   * `event` read book /by wednesday
+
 
 ### Adding a Recurring task: `recurring`  
 
@@ -71,6 +74,7 @@ Example of usage:
   * `recurring` weekly return book 1600 
   * `recurring` monthly return book 1600 
   
+  
 ### Listing all tasks: `list`
 
 Shows a list of all the tasks.
@@ -79,6 +83,7 @@ Format: `list`
   
 Example of usage: 
   * `list`
+  
   
 ### Marking task as done: `done`
 
@@ -90,6 +95,7 @@ Format: `done [TASK NUMBER]`
 Example of usage: 
   * `done` 1 
   
+  
 ### Marking task as not done: `undo`
 
 Marks the task as not done.
@@ -100,6 +106,7 @@ Format: `undo [TASK NUMBER]`
 Example of usage: 
   * `undo` 1 
 
+
 ### Finding a task: `find`
 
 Finds a task in the tasklist.
@@ -108,6 +115,7 @@ Format: `find [TASK NAME]`
   
 Example of usage: 
   * `find` book 
+  
   
 ### Deleting a task: `delete`
 
@@ -119,6 +127,7 @@ Format: `delete [TASK NUMBER]`
 Example of usage: 
   * `delete` 1 
   
+  
 ### Exiting the program: `bye`
 
 Exits the program
@@ -128,9 +137,11 @@ Format: `bye`
 Example of usage: 
   * `bye`
   
+  
 ### Saving the data
 
 Task data are saved in the hard disk automatically when the command `bye` is inputted.
+
 
 ## Command summary
 
