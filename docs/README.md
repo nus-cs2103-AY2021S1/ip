@@ -19,6 +19,8 @@ Sparrow is a **desktop app for managing tasks and vocabulary, optimized for use 
   * [Saving the data](#saving-the-data)
 - [Command summary](#command-summary)
 
+--------------------
+
 <a name="quick-start"></a>
 ## Quick start
 
@@ -27,7 +29,8 @@ Sparrow is a **desktop app for managing tasks and vocabulary, optimized for use 
 3. Copy the file to the folder you want to use as the _home folder_ for Sparrow.
 4. Double-click the file to start the app. The GUI similar to the one shown below should appear in a few seconds.
 ![Ui](images/Ui.png)
----
+
+--------------------
 
 <a name="features"></a>
 ## Features
@@ -141,10 +144,11 @@ Format: `bye`
 ### Saving the data
 Sparrow data will be saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
----
+--------------------
 
 <a name="command-summary"></a>
 ## Command summary
+
 Action           | Format, Examples
 ---------------- | ----------------------------------------------------------------------------------------------
 Add todo         | `todo <DESCRIPTION>` <br> e.g., `todo buy ship`
