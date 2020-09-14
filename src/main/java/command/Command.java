@@ -5,7 +5,8 @@ import duke.ui.Ui;
 import duke.storage.Storage;
 
 /**
- * Interface which would be implemented in Parser class when specific commands are called.
+ * Interface for Commands
+ * Implementation have to overwrite execute and isExit methods.
  */
 
 public interface Command {
