@@ -1,6 +1,7 @@
 import javafx.application.Application;
 
 /**
+ * Adapted from https://se-education.org/guides/tutorials/javaFxPart1.html
  * A launcher class to workaround classpath issues.
  */
 public class Launcher {

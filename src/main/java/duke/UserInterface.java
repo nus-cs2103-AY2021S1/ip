@@ -4,39 +4,35 @@ import java.util.List;
 
 public class UserInterface {
     private static final String INDENT = "    ";
+    private static final String SPACE = " ";
     private static final String UPPER_LINE = INDENT + "___________________________________________________" + "\n";
     private static final String LOWER_LINE = INDENT + "___________________________________________________" + "\n";
 
     private static final String DONE_TASK_MARKED_MESSAGE = "    Nice! I've marked this task as done:";
     private static final String DELETE_TASK_MARKED_MESSAGE = "    Noted. I've removed this task:";
 
-    private static final String NO_TASK_MESSAGE = "    Sorry the task does not exists";
     private static final String ADDED_TASK_MESSAGE = "    Got it. I've added this task:";
 
     private static final String INVALID_COMMAND_MESSAGE = "    Sorry couldn't recognise command";
-    private static final String INVALID_DONE_MESSAGE = "    Sorry done cannot be empty ";
+    private static final String INVALID_DONE_MESSAGE = "    Sorry done command is incomplete";
     private static final String INVALID_TODO_MESSAGE = "    Sorry todo cannot be empty ";
-    private static final String INVALID_DELETE_MESSAGE = "    Sorry delete cannot be empty ";
+    private static final String INVALID_DELETE_MESSAGE = "    Sorry delete command is incomplete ";
     private static final String INVALID_SEARCH_MESSAGE = "    Sorry please enter your keyword correctly";
 
     private static final String NO_SEARCH_RESULT_MESSAGE = "    No match for keyword searched";
     private static final String MATCH_SEARCH_RESULT_MESSAGE = "    Here are the matching tasks in your list:";
 
-    private static final String GREET_USER_LINE_1 = "Hello! I'm duke.Duke";
-    private static final String GREET_USER_LINE_2 = "What can I do for you?";
+    private static final String GREET_USER_LINE_1 = INDENT + "Hello! I'm duke.Duke";
+    private static final String GREET_USER_LINE_2 = INDENT + "What can I do for you?";
 
     private static final String BYE_MESSAGE = "Bye. Hope to see you again soon!";
 
-    private static final String TASK_LEFT_MESSAGE_PART_1 = "Now you have ";
-    private static final String TASK_LEFT_MESSAGE_PART_2 = " tasks in the list.";
+    private static final String TASK_LEFT_MESSAGE_PART_1 = INDENT + "Now you have ";
+    private static final String TASK_LEFT_MESSAGE_PART_2 = SPACE + "tasks in the list.";
 
-    private static final String INVALID_DATE_FORMAT = "Please give a valid date";
-
-
-    private static final String SPACE = " ";
+    private static final String INVALID_DATE_FORMAT = INDENT + "Please give a valid date";
 
     public UserInterface() {
-
     }
 
     /**
@@ -47,7 +43,7 @@ public class UserInterface {
     public String outputUi(String... contents) {
         StringBuilder result = new StringBuilder(UPPER_LINE);
         for (String s : contents) {
-            result.append(INDENT).append(s).append("\n");
+            result.append(s).append("\n");
         }
         result.append(LOWER_LINE);
         return result.toString();
@@ -71,10 +67,6 @@ public class UserInterface {
 
     public String showInvalidDeleteCommand() {
         return outputUi(INVALID_DELETE_MESSAGE);
-    }
-
-    public String showInvalidTaskNumber() {
-        return outputUi(NO_TASK_MESSAGE);
     }
 
     public String showMarkedTaskDoneMessage(Task task) {
@@ -110,50 +102,27 @@ public class UserInterface {
     }
 
     public String showSearchResults(List<Task> lstOfTask) {
-        return outputUi(MATCH_SEARCH_RESULT_MESSAGE, listTaskOnly(lstOfTask));
-    }
-
-    /**
-     * This method list the tasks currently in the taskList when the user
-     * runs the list task command.
-     * @param lstOfTask the task lists consisting the tasks
-     * @return String that is formatted to output to user
-     */
-    public String listTaskOnly(List<Task> lstOfTask) {
-        String outputIndent = "    ";
-        StringBuilder concat = new StringBuilder();
-        for (int i = 0; i < lstOfTask.size(); i++) {
-            Task task = lstOfTask.get(i);
-            int taskNumber = i + 1;
-            String s = "";
-            if (i == lstOfTask.size() - 1) {
-                s = outputIndent + taskNumber + "." + task.toString();
-            } else {
-                s = outputIndent + taskNumber + "." + task.toString() + "\n";
-            }
-            concat.append(s);
-        }
-        return concat.toString();
+        return outputUi(MATCH_SEARCH_RESULT_MESSAGE, listTask(lstOfTask));
     }
 
     /**
      * This method list the tasks currently in the taskList when the user
      *  runs the list task command. (I dont think we need this method its a repeat)
-     * @param lstOfTask
-     * @return
+     * @param lstOfTask the task lists consisting the tasks
+     * @return String that is formatted to output to user
      */
     public String listTask(List<Task> lstOfTask) {
-        String outputIndent = "    ";
         StringBuilder concat = new StringBuilder();
         for (int i = 0; i < lstOfTask.size(); i++) {
             Task task = lstOfTask.get(i);
             int taskNumber = i + 1;
             String s = "";
             if (i == lstOfTask.size() - 1) {
-                s = outputIndent + taskNumber + "." + task.toString();
+                s = INDENT + taskNumber + "." + task.toString();
             } else {
-                s = outputIndent + taskNumber + "." + task.toString() + "\n";
+                s = INDENT + taskNumber + "." + task.toString() + "\n";
             }
+
             concat.append(s);
         }
         return outputUi(concat.toString());

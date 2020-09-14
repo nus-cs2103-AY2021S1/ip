@@ -2,7 +2,6 @@ package duke;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +15,8 @@ public class Duke {
     private TaskList tasksList;
     private Scheduler scheduler;
 
-    public Duke() {} // empty constructor needed for javaFX
+    // empty constructor needed for javaFX
+    public Duke() {}
 
     /**
      * Constructor for a duke object
@@ -35,10 +35,13 @@ public class Duke {
     private void startup() {
         try {
             storage.populateToLstOfTask(tasksList.getLstOfTask());
-            ui.greetUser();
         } catch (IOException e) {
             System.out.println(e.toString() + " Error trying to load tasks");
         }
+    }
+
+    public String greetDukeUser() {
+        return ui.greetUser();
     }
 
     private String processCommand(String[] parsedUserInput) {
@@ -147,23 +150,27 @@ public class Duke {
     }
 
     private String addEvent(String[] parsedUserInput) {
-        String taskDescription = "";
-        for (int i = 1; i < parsedUserInput.length; i++) {
-            if (i == parsedUserInput.length - 1) {
-                taskDescription += parsedUserInput[i];
-            } else {
-                taskDescription += parsedUserInput[i] + " ";
+        try {
+            String taskDescription = "";
+            for (int i = 1; i < parsedUserInput.length; i++) {
+                if (i == parsedUserInput.length - 1) {
+                    taskDescription += parsedUserInput[i];
+                } else {
+                    taskDescription += parsedUserInput[i] + " ";
+                }
             }
+
+            String[] eventArray = taskDescription.split(" /at ");
+            String description = eventArray[0];
+            String date = eventArray[1];
+
+            LocalDateTime localDateTime = parser.parseDateAndTime(date);
+            Event event = new Event(description, localDateTime);
+            tasksList.add(event);
+            return ui.showAddedTaskMessage(event, tasksList.getNumOfTask());
+        } catch (DateTimeParseException e) {
+            return ui.showInvalidDateFormatGiven();
         }
-
-        String[] eventArray = taskDescription.split(" /at ");
-        String description = eventArray[0];
-        String date = eventArray[1];
-
-        LocalDateTime localDateTime = parser.parseDateAndTime(date);
-        Event event = new Event(description, localDateTime);
-        tasksList.add(event);
-        return ui.showAddedTaskMessage(event, tasksList.getNumOfTask());
     }
 
     private String addDeadline(String[] parsedUserInput) {
@@ -226,7 +233,8 @@ public class Duke {
         try {
             scheduler.instantiateTasksList(this.tasksList);
 
-            String typeOfSchedule = parsedUserInput[1]; // can add other types of scheduling
+            // can add other types of scheduling
+            String typeOfSchedule = parsedUserInput[1];
             String dateString = parsedUserInput[2];
             String timeString = parsedUserInput[3];
             LocalDateTime date = parser.parseDateAndTime(dateString + " " + timeString);
@@ -249,23 +257,22 @@ public class Duke {
     public static void main(String[] args) {
         Duke duke = new Duke("Tasks.txt");
         Scanner sc = new Scanner(System.in);
+        System.out.println(duke.greetDukeUser());
 
         while (sc.hasNext()) {
             String input = sc.nextLine();
             String[] parsedString = duke.parser.parseString(input);
-            duke.processCommand(parsedString);
+            System.out.println(duke.processCommand(parsedString));
             if (input.equals("bye")) {
                 break;
             }
         }
-
-
     }
 
-
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * This method returns a response to user input
+     * @param input String input by user
+     * @return the String output by duke
      */
     public String getResponse(String input) {
         String[] parsedString = this.parser.parseString(input);

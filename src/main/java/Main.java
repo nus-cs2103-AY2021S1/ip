@@ -8,6 +8,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
+ * Adapted from https://se-education.org/guides/tutorials/javaFxPart4.html
  * A GUI for Duke using FXML.
  */
 public class Main extends Application {
@@ -22,6 +23,7 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
+            fxmlLoader.<MainWindow>getController().greetUser();
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
