@@ -12,7 +12,7 @@ View your schedule, check what is due by a certain date, what is happening on a 
 Define a custom range of dates and view all events/deadlines within that range
 
 ## Usage
-##*Adding tasks*
+## *Adding tasks*
 ### `deadline` - Create a new deadline task
 
 
@@ -60,7 +60,7 @@ Expected outcome:
  
  
 
-##*Manage your tasks*
+## *Manage your tasks*
 
 
 ### `delete` - Delete a task
@@ -92,7 +92,7 @@ Expected outcome:
 `Gratz, you finished this dawg:
 [T][✓] sleep`
 
-##*View your tasks*
+## *View your tasks*
 
 ### `by` - Check what deadlines you have *by* a certain date
 
@@ -159,7 +159,7 @@ Expected outcome:
 
 `In 100 days, you have: 1.[E][X] sleep (at: Dec 9 2020) [A total of 1 reminder(s)]`
 
-##*Other user commands*
+## *Other user commands*
 
 ### `bye` - Exits the program
 
