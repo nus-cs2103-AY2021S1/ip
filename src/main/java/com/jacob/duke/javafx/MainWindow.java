@@ -1,4 +1,5 @@
 package main.java.com.jacob.duke.javafx;
+import java.util.concurrent.CompletableFuture;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -64,13 +65,25 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
-        String input = userInput.getText();
+        String input = userInput.getText().trim();
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+
+        CompletableFuture.runAsync(() -> {
+            try {
+                if (input.equals("bye")) {
+                    Thread.sleep(1000);
+                    System.exit(0);
+                }
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                System.exit(1);
+            }
+        });
 
         assert (userInput.getText().equals(""));
     }

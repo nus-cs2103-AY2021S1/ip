@@ -9,8 +9,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import java.nio.file.Files;
+import java.text.NumberFormat;
 import java.util.List;
 
+import main.java.com.jacob.duke.DukeException;
 import main.java.com.jacob.duke.DukeList;
 import main.java.com.jacob.duke.note.Note;
 import main.java.com.jacob.duke.task.Deadline;
@@ -60,10 +62,15 @@ public class Storage {
     }
 
     //handleTaskCommandsFromFile
-    private void convertFileToTask(String[] inputs, DukeList dukeList) {
+    private void convertFileToTask(String[] inputs, DukeList dukeList) throws DukeException {
         List<Task> taskList = dukeList.getTaskList();
         String type = inputs[0];
-        int isDone = Integer.parseInt(inputs[1]);
+        int isDone;
+        try {
+            isDone = Integer.parseInt(inputs[1]);
+        } catch (NumberFormatException e) {
+            throw new DukeException(e.getMessage());
+        }
         String description = inputs[2];
         int count = dukeList.getTaskList().size();
 
@@ -106,7 +113,7 @@ public class Storage {
     }
 
     //handle the file lines at initialization
-    private void handleFileCommands(String fileLine, DukeList dukeList) {
+    private void handleFileCommands(String fileLine, DukeList dukeList) throws DukeException {
         String[] inputs = fileLine.split("~");
         String type = inputs[0];
 
@@ -134,7 +141,7 @@ public class Storage {
                     new DataInputStream(new FileInputStream(this.filename))));
             String line = reader.readLine();
             while (line != null) {
-                //parse the line here and add to dukelist
+                //parse the line here and add to duke list
                 this.handleFileCommands(line, dukeList);
                 line = reader.readLine();
             }
@@ -142,6 +149,10 @@ public class Storage {
             reader.close();
         } catch (IOException e) {
             System.out.println("The file " + filename + " could not be found or opened! " + e.getMessage());
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println(e.getMessage());
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
         }
         return dukeList;
     }

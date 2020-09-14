@@ -1,5 +1,4 @@
 package main.java.com.jacob.duke.javafx;
-
 import java.io.IOException;
 
 import javafx.application.Application;
