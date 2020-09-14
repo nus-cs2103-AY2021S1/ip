@@ -9,6 +9,7 @@ public class Duke {
 
     private Storage storage;
     private TaskList tasks;
+    private Task duplicateTask;
     private Ui ui;
     private Parser parser;
     
@@ -62,6 +63,31 @@ public class Duke {
         return this.tasks;
     }
 
+    /**
+     * Gets duplicate task.
+     *
+     * @return Duplicate task.
+     */
+    public Task getDuplicateTask() {
+        return this.duplicateTask;
+    }
+
+    /**
+     * Sets duplicate task.
+     *
+     */
+    public void setDuplicateTask(Task task) {
+        this.duplicateTask = task;
+    }
+
+    /**
+     * Deletes duplicate task.
+     *
+     */
+    public void resetDuplicateTask() {
+        this.duplicateTask = null;
+    }
+    
     /**
      * Gets storage.
      * 

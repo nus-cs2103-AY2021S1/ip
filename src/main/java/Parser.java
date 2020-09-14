@@ -18,30 +18,18 @@ public class Parser {
         assert strArr.length > 0 : "User input is not processed";
         try {
             check(strArr);
-            if (userInput.equals("bye")) {
+            if (userInput.equals("help")) {
+                return duke.getUi().printHelp();
+            } else if (userInput.equals("bye")) {
                 return duke.getUi().printBye();
-                //System.exit(0);
             } else if (userInput.equals("list")) {
                 return duke.getUi().printTaskList(duke.getTasks());
             } else if (strArr[0].equals("done")) {
-                duke.getTasks().getTask(Integer.parseInt(strArr[1]) - 1).markAsDone();
-                duke.getStorage().writeFile(duke.getTasks().getTaskList());
-                return duke.getUi().printDoneTask(duke.getTasks().getTask(Integer.parseInt(strArr[1]) - 1));
+                return handleDone(strArr, duke);
             } else if (strArr[0].equals("delete")) {
-                int integer = Integer.parseInt(strArr[1]) - 1;
-                Task task = duke.getTasks().getTask(Integer.parseInt(strArr[1]) - 1);
-                duke.getTasks().deleteTask(integer);
-                duke.getStorage().writeFile(duke.getTasks().getTaskList());
-                return duke.getUi().printDeleteTask(task, duke.getTasks());
+                return handleDelete(strArr, duke);
             } else if (strArr[0].equals("find")) {
-                String keyword = strArr[1];
-                TaskList taskLst = new TaskList();
-                for (int i = 0; i < duke.getTasks().getSize(); i++) {
-                    if (duke.getTasks().getTask(i).getDescription().contains(keyword)) {
-                        taskLst.addTask(duke.getTasks().getTask(i));
-                    }
-                }
-                    return duke.getUi().printMatchingTasks(taskLst);
+                return handleFind(strArr, duke);
             } else {
                 return handleAddTask(strArr, duke);
             }
@@ -51,21 +39,83 @@ public class Parser {
     }
 
     /**
+     * Handles response message on find command.
+     *
+     * @param command User input.
+     * @param duke Duke object.
+     * @return Duke response message.
+     */
+    public String handleFind(String[] command, Duke duke) throws IOException {
+        String keyword = command[1];
+        TaskList taskLst = new TaskList();
+        for (int i = 0; i < duke.getTasks().getSize(); i++) {
+            if (duke.getTasks().getTask(i).getDescription().contains(keyword)) {
+                taskLst.addTask(duke.getTasks().getTask(i));
+            }
+        }
+        return duke.getUi().printMatchingTasks(taskLst);
+    }
+    
+    /**
+     * Handles response message on done command.
+     *
+     * @param command User input.
+     * @param duke Duke object.
+     * @return Duke response message.
+     */
+    public String handleDone(String[] command, Duke duke) throws IOException {
+        duke.getTasks().getTask(Integer.parseInt(command[1]) - 1).markAsDone();
+        duke.getStorage().writeFile(duke.getTasks().getTaskList());
+        return duke.getUi().printDoneTask(duke.getTasks().getTask(Integer.parseInt(command[1]) - 1));
+    }
+
+    /**
+     * Handles response message on delete command.
+     *
+     * @param command User input.
+     * @param duke Duke object.
+     * @return Duke response message.
+     */
+    public String handleDelete(String[] command, Duke duke) throws IOException {
+        int integer = Integer.parseInt(command[1]) - 1;
+        Task task = duke.getTasks().getTask(Integer.parseInt(command[1]) - 1);
+        duke.getTasks().deleteTask(integer);
+        duke.getStorage().writeFile(duke.getTasks().getTaskList());
+        return duke.getUi().printDeleteTask(task, duke.getTasks());
+    }
+    
+    /**
      * Handles response message on task adding commands.
      * 
      * @param command User input.
      * @param duke Duke object.
      * @return Duke response message.
      */
-    public String handleAddTask(String[] command, Duke duke) throws IOException {
-        if (command[0].equals("todo")) {
+    public String handleAddTask(String[] command, Duke duke) throws IOException, DukeException {
+        if (command[0].equals("yes")) {
+            if (duke.getDuplicateTask() == null) {
+                throw new DukeException("duplicate");
+            }
+            Task task = duke.getDuplicateTask();
+            duke.getTasks().addTask(task);
+            duke.getStorage().writeFile(duke.getTasks().getTaskList());
+            duke.resetDuplicateTask();
+            return duke.getUi().printAddTask(task, duke.getTasks());
+        } else if (command[0].equals("no")) {
+            if (duke.getDuplicateTask() == null) { 
+                throw new DukeException("duplicate");
+            }
+            duke.resetDuplicateTask();
+            return duke.getUi().printHandleDuplicate();
+        } else if (command[0].equals("todo")) {
             String description = "";
             for (int i = 1; i < command.length; i++) {
                 description += command[i] + " ";
             }
             Task task = new Todo(description);
             if (detectDuplicates(task.toString(), duke.getTasks())) {
-                return "Duke has detected duplicates ._.";
+                duke.setDuplicateTask(task);
+                return duke.getUi().detectDuplicatesError();
             } else {
                 duke.getTasks().addTask(task);
                 duke.getStorage().writeFile(duke.getTasks().getTaskList());
@@ -92,7 +142,8 @@ public class Parser {
             }
             Task task = new Deadline(description, LocalDate.parse(date));
             if (detectDuplicates(task.toString(), duke.getTasks())) {
-                return "Duke has detected duplicates ._.";
+                duke.setDuplicateTask(task);
+                return duke.getUi().detectDuplicatesError();
             } else {
                 duke.getTasks().addTask(task);
                 duke.getStorage().writeFile(duke.getTasks().getTaskList());
@@ -119,7 +170,8 @@ public class Parser {
             }
             Task task = new Event(description, LocalDate.parse(date));
             if (detectDuplicates(task.toString(), duke.getTasks())) {
-                return "Duke has detected duplicates ._.";
+                duke.setDuplicateTask(task);
+                return duke.getUi().detectDuplicatesError();
             } else {
                 duke.getTasks().addTask(task);
                 duke.getStorage().writeFile(duke.getTasks().getTaskList());
@@ -151,7 +203,8 @@ public class Parser {
             throw new DukeException(arr[0]);
         } else if (!arr[0].equals("todo") && !arr[0].equals("deadline") && !arr[0].equals("event") &&
                 !arr[0].equals("list") && !arr[0].equals("bye") && !arr[0].equals("done") 
-                && !arr[0].equals("delete") && !arr[0].equals("find")) {
+                && !arr[0].equals("delete") && !arr[0].equals("find") && !arr[0].equals("help") 
+                && !arr[0].equals("yes") && !arr[0].equals("no")) {
             throw new DukeException("other");
         }
     }

@@ -112,4 +112,38 @@ public class Ui {
         return drawBorder("Here are the matching tasks in your list:\n" + lst.toString());
 
     }
+
+    /**
+     * Prints response message of duplicate error detected.
+     *
+     * @return Duke response message of duplicate errors.
+     */
+    public String detectDuplicatesError() {
+        return drawBorder("Duke has detected duplicates ._.\n" 
+                + "If you still want to add the task, please enter 'yes'!\n" 
+                + "If not, please type 'no'");
+    }
+
+    /**
+     * Prints all the commands.
+     *
+     * @return Duke response message of all commands available.
+     */
+    public String printHelp() {
+        return drawBorder("Here are some example commands you can try:\n" 
+                + "1. list\n" + "2. todo <task>\n" + "3. deadline <task> /by <yyyy-mm-dd>\n" 
+                + "4. event <task> /at <yyyy-mm-dd>\n" + "5. done <index>\n"
+                + "6. delete <index>\n" + "7. done <index>\n" + "8. find <index>\n" + "8. bye\n");
+
+    }
+
+    /**
+     * Prints response to not adding duplicate.
+     *
+     * @return Duke response message of not adding duplicate task.
+     */
+    public String printHandleDuplicate() {
+        return drawBorder("Ok, noted! Task is not added to the list");
+    }
+    
 }

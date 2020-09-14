@@ -6,6 +6,14 @@ public class Task {
     protected boolean isDone;
 
     /**
+     * Creates empty task.
+     *
+     */
+    public Task() {
+        
+    }
+    
+    /**
      * Creates task.
      * 
      * @param description Task description.
