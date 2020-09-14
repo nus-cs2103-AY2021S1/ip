@@ -1,9 +1,0 @@
-T ; 1 ; read book
-D ; 0 ; return book /by 2020-01-01
-E ; 0 ; project meeting /at 2020-02-02
-T ; 1 ; join sports club
-T ; 0 ; watch concert
-D ; 1 ; do laundry /by 2020-09-27
-T ; 1 ; some things
-D ; 0 ; CS2103 /by 2020-08-27
-E ; 0 ; concert /at 2021-05-01

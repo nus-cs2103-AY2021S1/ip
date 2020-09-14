@@ -1,15 +1,16 @@
 package duke;
 
 /**
- * Represents a deadline inherited from task. A <code>Deadline</code> object corresponds to
+ * Represents a deadline inherited from task.
+ * A <code>Deadline</code> object corresponds to
  * a task associated a date as deadline
  */
 public class Deadline extends Task {
-    Deadline(String message) {
+    Deadline(final String message) {
         super(message);
     }
 
-    Deadline(String message, boolean isDone) {
+    Deadline(final String message, final boolean isDone) {
         super(message, isDone);
     }
 

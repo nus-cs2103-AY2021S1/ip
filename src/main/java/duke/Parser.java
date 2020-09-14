@@ -22,9 +22,6 @@ public class Parser {
         return SPACE + LINE + INDENT + input + "\n" + SPACE + LINE;
     }
 
-    // a message to be printed when invoking a toodoo, event, or deadline
-    private final String messageAdded = "Got it. I've added this task:\n";
-
     // command split indicators
     private final int PRIOR = 0;
     private final int EXTRA = 1;
@@ -264,6 +261,8 @@ public class Parser {
         }
 
         lst.addOfType(description, taskType);
+        // a message to be printed when invoking a toodoo, event, or deadline
+        String messageAdded = "Got it. I've added this task:\n";
         return format(messageAdded + MORE_INDENT + getMostRecentTask(lst).print() + getListCountMessage(lst));
     }
 
