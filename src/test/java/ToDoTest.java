@@ -7,7 +7,7 @@ import duke.ToDo;
 public class ToDoTest {
     @Test
     public void testGetStatusIcon() {
-        assertEquals("\u2718", new ToDo("sleep").getStatusIcon());
+        assertEquals("X", new ToDo("sleep").getStatusIcon());
     }
 
     @Test
