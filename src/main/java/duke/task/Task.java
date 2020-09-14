@@ -1,14 +1,13 @@
 package duke.task;
 
 import static duke.util.Keyword.CROSS_SYMBOL;
-import static duke.util.Keyword.DATE_TIME_FORMAT;
+import static duke.util.Keyword.DATE_TIME_OUTPUT_FORMAT;
 import static duke.util.Keyword.DONE;
 import static duke.util.Keyword.NOT_DONE;
 import static duke.util.Keyword.SINGLE_SPACE;
 import static duke.util.Keyword.TICK_SYMBOL;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 /**
  * Stores all methods and properties of a Task class.
@@ -98,7 +97,7 @@ public abstract class Task implements Comparable<Task> {
      * @return Time of Task.
      */
     public String getTime() {
-        return dateTime.format(DateTimeFormatter.ofPattern(DATE_TIME_FORMAT));
+        return dateTime.format(DATE_TIME_OUTPUT_FORMAT);
     }
 
     /**
