@@ -1,15 +1,6 @@
-E  | 0 | asdfa asdfasd | 2019-02-12 18:00
-E  | 0 | asdfasdf asdfadsf | 2019-02-12 18:00
-T  | 0 | asdfasdf
-T  | 0 | asdfadf
-T  | 0 | aldskfmaklsdf
-T  | 0 | alkdsfmaskldf
-T  | 0 | alksdmfkalsdfmklads
-T  | 0 | alsdkfmalksdmf
-T  | 0 | as
-T  | 0 | asdfa
-T  | 0 | a
-T  | 0 | asd
-T  | 0 | asdfasdf asdfasdf
-T  | 0 | asd
-T  | 0 | adsasdf
+T  | 0 | exercise
+D  | 0 | workout | 2019-02-12 18:00
+T  | 0 | complete work
+T  | 0 | homework
+E  | 0 | mark homework | 2019-02-18 18:00
+D  | 0 | do homework | 2019-02-18 18:00

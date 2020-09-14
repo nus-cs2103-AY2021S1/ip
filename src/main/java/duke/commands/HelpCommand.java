@@ -13,7 +13,8 @@ public class HelpCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        String[] stringArray = {src.main.java.duke.commands.AddTodoCommand.MESSAGE_USAGE,
+        String[] stringArray = {ListCommand.MESSAGE_USAGE,
+            AddTodoCommand.MESSAGE_USAGE,
             AddEventCommand.MESSAGE_USAGE,
             AddDeadlineCommand.MESSAGE_USAGE,
             DeleteCommand.MESSAGE_USAGE,
