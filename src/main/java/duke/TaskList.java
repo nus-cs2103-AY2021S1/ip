@@ -45,6 +45,8 @@ public class TaskList {
      * @return the deleted task.
      */
     public Task deleteTask(int taskNum) throws DukeException {
+        assert (taskNum > 0 && taskNum <= tasks.size()) : "taskNum should be more than 0, and less than or "
+                + "equal to size of list";
         int index = taskNum - 1;
         try {
             return tasks.remove(index);
@@ -59,6 +61,8 @@ public class TaskList {
      * @param taskNum the number of the task to be marked as done.
      */
     public void markAsDone(int taskNum) throws DukeException {
+        assert (taskNum > 0 && taskNum <= tasks.size()) : "taskNum should be more than 0, and less than or "
+                + "equal to size of list";
         int index = taskNum - 1;
         try {
             tasks.get(index).markAsDone();
@@ -91,6 +95,8 @@ public class TaskList {
      * @return the retrieved task.
      */
     public Task getTask(int taskNum) {
+        assert (taskNum > 0 && taskNum <= tasks.size()) : "taskNum should be more than 0, and less than or "
+                + "equal to size of list";
         int index = taskNum - 1;
         return tasks.get(index);
     }
@@ -111,11 +117,9 @@ public class TaskList {
     @Override
     public String toString() {
         StringBuilder allTasks = new StringBuilder();
-
         for (int i = 1; i <= tasks.size(); i++) {
             int index = i - 1;
-            allTasks.append("\n").append(i).append(".")
-                    .append(tasks.get(index));
+            allTasks.append("\n").append(i).append(".").append(tasks.get(index));
         }
         return allTasks.toString();
     }
