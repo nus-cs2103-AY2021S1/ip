@@ -13,7 +13,9 @@ public class Duke {
         LIST,
         FIND,
         ERROR,
-        SORT,
+        SORTDATE,
+        SORTTYPE,
+        CLEAR,
         BYE
     }
 
@@ -74,14 +76,19 @@ public class Duke {
                 } catch (DukeException ex1) {
                     return ui.showError(ex1.toString());
                 }
-            case SORT:
+            case SORTDATE:
+                return ui.returnList(tasks.sortByDate());
+            case SORTTYPE:
+                return ui.returnList(tasks.sortByType());
+            case CLEAR:
                 try {
-                    return ui.returnList(tasks.sort(input));
-                } catch (DukeException ex1){
-                    return ui.showError(ex1.toString());
+                    storage.overwriteData(tasks.clear());
+                    return ui.save();
+                } catch (IOException ex1) {
+                    return ui.showError(ex1.getLocalizedMessage());
                 }
             case ERROR:
-                return ui.defaultError();
+                return ui.DEFAULTERROR();
             case BYE:
                 return ui.bye();
         }

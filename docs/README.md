@@ -95,8 +95,9 @@ Format: `done INDEX`
 Example:
 
 * `list` followed by `done 1` marks the first task item in the list as Done. 
-* `find House` or `sort /type` followed by `done 1` does not mark the first item in the result of the `find` command 
- but first item in the the overall list as done. 
+* `sort /type` followed by `done 1` marks the first item in the result of the `sort` command as done. 
+* `find Assignment` followed by `done 1` marks the first item in the overall list as done, but not the first 
+    item in the list returned by the `find` command. 
 
 ### `delete` - Deleting a task
 
@@ -110,8 +111,15 @@ Format: `delete INDEX`
 Example:
 
 * `list` followed by `delete 1` deletes the first task item in the list. 
-* `find House` or `sort /type` followed by `delete 1` does not delete the first item in the result of the `find` command 
- but first item in the the overall list.  
+* `sort /type` followed by `delete 1` deletes the first item in the result of the `find` command. 
+* `find Assignment` followed by `delete 1` deletes the first item in the overall list, but not the first 
+    item in the list returned by the `find` command. 
+ 
+ ### `clear` - Clears all saved data
+ 
+ Clears all saved data.  
+ 
+ Format: `clear`
  
 ### `bye` - Exiting the Program
 
@@ -120,7 +128,7 @@ Exits the program.
 Format: `exit`
 
 ## Feature Summary 
-Command Types: 
+
 
 Command | Format/ Examples
 --------|-----------------
@@ -133,4 +141,5 @@ save | `save`
 sort | `sort /type` or `sort /date`
 done | `done INDEX`
 delete | `delete INDEX` 
+clear | `clear`
 bye | `bye`

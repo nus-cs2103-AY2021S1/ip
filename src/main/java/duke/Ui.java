@@ -6,16 +6,16 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
-    final private String line = "-------------------------------------";
-    final private String loadFailMsg = "Sorry, I forgot you existed!";
-    final private String addedMsg = "Alright, I've added a new order: ";
-    final private String doneMsg = "Great choice! I have taken your order: ";
-    final private String deleteMsg = "Too bad. I'll remove the following order: ";
-    final private String saveMsg = "Aright, I have remembered your sins :)";
-    final private String retListMsg = "Here's what you have ordered...";
-    final private String defaultError = DukeException.INVALID_COMMAND_EXCEPTION.toString();
-    public final static String byeMsg = "Bye! Please come again!";
-    final private String newLine = "\n";
+    final private String LINE = "-------------------------------------";
+    final private String LOADFAILMSG = "Sorry, I forgot you existed!";
+    final private String ADDEDMSG = "Alright, I've added a new order: ";
+    final private String DONEMSG = "Great choice! I have taken your order: ";
+    final private String DELETEMSG = "Too bad. I'll remove the following order: ";
+    final private String SAVEMSG = "Aright, I have remembered your sins :)";
+    final private String RETLISTMSG = "Here's what you have ordered...";
+    final private String DEFAULTERROR = DukeException.INVALID_COMMAND_EXCEPTION.toString();
+    public final static String BYEMSG = "Bye! Please come again!";
+    final private String NEWLINE = "\n";
 
     private Scanner s;
 
@@ -37,46 +37,46 @@ public class Ui {
     }
 
     public void showLine() {
-        System.out.println(line);
+        System.out.println(LINE);
     }
 
     public String addedItem(Task curr, int size) {
-         return addedMsg + newLine + curr + newLine + "You have ordered " + size + " items." + newLine;
+         return ADDEDMSG + NEWLINE + curr + NEWLINE + "You have ordered " + size + " items." + NEWLINE;
     }
 
     public String showError(String ex) {
-        return ex + newLine;
+        return ex + NEWLINE;
     }
 
     public String doneItem(Task curr) {
-        return doneMsg + newLine + curr;
+        return DONEMSG + NEWLINE + curr;
     }
 
     public String deleteItem(Task curr) {
-        return deleteMsg + newLine + curr;
+        return DELETEMSG + NEWLINE + curr;
     }
 
     public String returnList(ArrayList<Task> curr) {
         String temp = "";
         for (int k = 0; k < curr.size(); k++) {
-            temp += ((k + 1) + ": " + curr.get(k)) + newLine;
+            temp += ((k + 1) + ": " + curr.get(k)) + NEWLINE;
         }
-        return retListMsg + newLine + temp;
+        return RETLISTMSG + NEWLINE + temp;
     }
 
     public String save() {
-        return saveMsg + newLine;
+        return SAVEMSG + NEWLINE;
     }
 
-    public String defaultError() {
-        return defaultError + newLine;
+    public String DEFAULTERROR() {
+        return DEFAULTERROR + NEWLINE;
     }
 
     public String bye() {
-        return byeMsg + newLine;
+        return BYEMSG + NEWLINE;
     }
 
     public String showLoadingError() {
-        return loadFailMsg + newLine;
+        return LOADFAILMSG + NEWLINE;
     }
 }

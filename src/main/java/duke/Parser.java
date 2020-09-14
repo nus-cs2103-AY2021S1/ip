@@ -1,7 +1,10 @@
 package duke;
 
+import duke.task.Task;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 
 public class Parser {
 
@@ -58,6 +61,18 @@ public class Parser {
         }
     }
 
+    public static Duke.Command determineSortType(String input) {
+        String[] filter = input.split("/", 2);
+        Duke.Command ret = Duke.Command.ERROR;
+        if (filter[1].equals("type")) {
+            ret = Duke.Command.SORTTYPE;
+        }
+        if (filter[1].equals("date")) {
+            ret = Duke.Command.SORTDATE;
+        }
+        return ret;
+    }
+
     /**
      * Returns a enum class item stored in duke.Duke based on the first word of the input.
      * @param input Command from user
@@ -79,7 +94,9 @@ public class Parser {
         } else if (getFirstWord(input).equals("find")) {
             return Duke.Command.FIND;
         } else if (getFirstWord(input).equals("sort")) {
-            return Duke.Command.SORT;
+            return determineSortType(input);
+        } else if (input.equals("clear")) {
+            return Duke.Command.CLEAR;
         } else if (input.equals("bye")) {
             return Duke.Command.BYE;
         } else {

@@ -34,12 +34,12 @@ public class TaskList {
     /**
      * Adds a new subclass of duke.task.Task based on a String input.
      * @param input Command from user
-     * @return a duke.task.Task that is either a duke.task.ToDo, a duke.task.Deadline or an duke.task.Event.
+     * @return a duke.task.Task that is either a duke.task.To-Do, a duke.task.Deadline or an duke.task.Event.
      * @throws DukeException Throws exception if command is invalid due to missing information.
      */
     public Task addItem(String input) throws DukeException {
         assert input.length() >= 4;
-        String arr[] = input.split(" ", 2);
+        String[] arr = input.split(" ", 2);
         Task curr = new Task("");
         if (arr.length == 1) {
             throw DukeException.INVALID_TASK_EXCEPTION;
@@ -47,7 +47,7 @@ public class TaskList {
             curr = new ToDo(arr[1]);
             list.add(curr);
         } else if (arr[0].equals("deadline")) {
-            String info[] = arr[1].split("/by ", 2);
+            String[] info = arr[1].split("/by ", 2);
             if (info.length == 1) {
                 throw DukeException.INVALID_DEADLINE_EXCEPTION;
             } else {
@@ -55,7 +55,7 @@ public class TaskList {
                 list.add(curr);
             }
         } else if (arr[0].equals("event")) {
-            String info[] = arr[1].split("/at ", 2);
+            String[] info = arr[1].split("/at ", 2);
             if (info.length == 1) {
                 throw DukeException.INVALID_TIME_EXCEPTION;
             } else {
@@ -65,9 +65,7 @@ public class TaskList {
 //                    String time = Parser.timeParser(t[1]);
                     curr = new Event(info[0], date, t[1]);
                     list.add(curr);
-                } catch (DukeException ex1) {
-                    throw DukeException.INVALID_TIME_EXCEPTION;
-                } catch (NumberFormatException ex1) {
+                } catch (DukeException | NumberFormatException ex1) {
                     throw DukeException.INVALID_TIME_EXCEPTION;
                 }
             }
@@ -83,7 +81,7 @@ public class TaskList {
      */
     public Task deleteItem(String input) throws DukeException{
         assert input.length() >= 6;
-        String info[] = input.split(" ", 2);
+        String[] info = input.split(" ", 2);
         Task toBeDeleted = new Task("");
         if (info.length == 1) {
             throw DukeException.INVALID_INDEX_EXCEPTION;
@@ -111,7 +109,7 @@ public class TaskList {
      */
     public Task doneItem(String input) throws DukeException {
         assert input.length() >= 4;
-        String info[] = input.split(" ", 2);
+        String[] info = input.split(" ", 2);
         Task toBeRet = new Task("");
         if (info.length == 1) {
             throw DukeException.INVALID_INDEX_EXCEPTION;
@@ -149,40 +147,43 @@ public class TaskList {
         }
     }
 
-    public ArrayList<Task> sort(String input) throws DukeException {
-        String[] filter = input.split("/", 2);
-        if (filter[1].equals("type")) {
-            return sortByType();
-        } else if (filter[1].equals("date")){
-            return sortByDate();
-        } else {
-            throw DukeException.INVALID_SORT_EXCEPTION;
-        }
-    }
-
+    /**
+     * Sorts the current list by type of tasks, with To-do items listed first, followed by Deadlines then Events.
+     * @return ArrayList of Tasks.
+     */
     public ArrayList<Task> sortByType() {
         ArrayList<Task> todos = new ArrayList<>();
         ArrayList<Task> deadlines = new ArrayList<>();
         ArrayList<Task> events = new ArrayList<>();
 
         for (Task k: list) {
-            if (k.getType().equals("Todo")) {
-                todos.add(k);
-            } else if (k.getType().equals("Event")) {
-                events.add(k);
-            } else if (k.getType().equals("Deadline")) {
-                deadlines.add(k);
+            switch (k.getType()) {
+                case "Todo":
+                    todos.add(k);
+                    break;
+                case "Event":
+                    events.add(k);
+                    break;
+                case "Deadline":
+                    deadlines.add(k);
+                    break;
             }
         }
         todos.addAll(deadlines);
         todos.addAll(events);
-        return todos;
+        list = todos;
+        return getList();
     }
 
+    /**
+     * Sorts the current list by date due, with undated To-do items listed first.
+     * @return ArrayList of Tasks.
+     */
     public ArrayList<Task> sortByDate() {
         ArrayList<Task> ret = new ArrayList<>(list);
         Collections.sort(ret);
-        return ret;
+        list = ret;
+        return getList();
     }
 
     /**
@@ -193,6 +194,10 @@ public class TaskList {
         return this.list.size();
     }
 
+    public ArrayList<Task> clear() {
+        list = new ArrayList<>();
+        return getList();
+    }
     /**
      * Returns the current list of Tasks.
      * @return an ArrayList of Tasks
