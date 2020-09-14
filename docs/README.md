@@ -14,26 +14,26 @@ a small software incrementally, while applying as many Java and SE techniques as
 1. Ensure you have Java 11 or above installed in your Computer.
 1. Download the latest ip.jar from [here](https://github.com/Nahoyhp/ip).
 1. Copy the file to the folder you want to use as the home folder.
-   1. Make sure you have the priviledge to create a new directory and edit files within the directory.
+   [] Make sure you have the priviledge to create a new directory and edit files within the directory.
 1. Double-click the file to start the app. The GUI should appear in a few seconds.
 1. Type the command in the command box and press Enter to execute it. 
 For the details of each command, refer to the [Features](##features) below.
 
 
 ## Summary of Command  
-Action | Format & Example  
------------------------|-----------------------  
-Add a ToDo task | `todo EVENT_TITLE ` <br/> <br/> e.g: `todo Assigment 1`  
-Add a Deadline task | `deadline EVENT_TITLE /by DATE TIME` <br/> <br/> e.g: `deadline Assignment 1 /by 2020-09-14 18:00`  
-Add an Event task | `event EVENT_TITLE /at DATE TIME - TIME` <br/> <br/> e.g: `event Birthday Party /at 2020-09-14 18:00 20:00`  
-List | `list`  
-Mark a Task as Done | `done INDEX` <br/> <br/> e.g: `done 2`  
-Delete a Task | `delete INDEX` <br/> <br/> e.g: `delete 2`  
-Find tasks with keyword | `find KEYWORD` <br/> <br/> e.g: `find homework`  
-Archive data into a separate file | `archive LOCATION_TO_SAVE` <br/> <br/> e.g: `archive data\dukeII.txt`  
-Load Data | `load FILE_LOCATION` <br/> <br/> e.g: `load data\dukeII.txt`  
-Save | `save`  
-End the session | `bye`  
+| Action | Format & Example |  
+|-----------------------|-----------------------|
+|Add a ToDo task | `todo EVENT_TITLE ` <br/> <br/> e.g: `todo Assigment 1`|  
+|Add a Deadline task | `deadline EVENT_TITLE /by DATE TIME` <br/> <br/> e.g: `deadline Assignment 1 /by 2020-09-14 18:00`|  
+|Add an Event task | `event EVENT_TITLE /at DATE TIME - TIME` <br/> <br/> e.g: `event Birthday Party /at 2020-09-14 18:00 20:00`|  
+|List | `list` |
+|Mark a Task as Done | `done INDEX` <br/> <br/> e.g: `done 2`|  
+|Delete a Task | `delete INDEX` <br/> <br/> e.g: `delete 2`  |
+|Find tasks with keyword | `find KEYWORD` <br/> <br/> e.g: `find homework`|  
+|Archive data into a separate file | `archive LOCATION_TO_SAVE` <br/> <br/> e.g: `archive data\dukeII.txt`|  
+|Load Data | `load FILE_LOCATION` <br/> <br/> e.g: `load data\dukeII.txt`  |
+|Save | `save`  |
+|End the session | `bye`|  
 
 ## Features
 <blockquote>
