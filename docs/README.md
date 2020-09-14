@@ -29,6 +29,7 @@ dates (`Deadline` before `Event`), and finally followed by `Todo` tasks.
 C-3PO will store the data into local storage automatically after each
 operation. Every time when C-3PO starts, it automatically reads the local
 storage and loads previous data from it.
+
 ## Usage
 
 ### `list` - list all tasks
