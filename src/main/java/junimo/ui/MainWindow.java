@@ -40,7 +40,7 @@ public class MainWindow extends AnchorPane {
     public void setJunimo(Junimo d) {
         junimo = d;
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(junimo.getWelcome(), junimoImage)
+                DialogBox.getJunimoDialog(junimo.getWelcome(), junimoImage)
         );
     }
 
@@ -56,7 +56,7 @@ public class MainWindow extends AnchorPane {
         boolean isErrorMessage = response.getIsErrorMessage();
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(
+                DialogBox.getJunimoDialog(
                         responseMesssage,
                         isErrorMessage ? redJunimoImage : junimoImage
                 )

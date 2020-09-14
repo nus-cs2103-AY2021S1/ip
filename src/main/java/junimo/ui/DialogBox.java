@@ -68,7 +68,7 @@ public class DialogBox extends HBox {
      * @param img Junimo's display image.
      * @return Dialog Box containing messages or responses from Junimo and Junimo's image.
      */
-    public static DialogBox getDukeDialog(String text, Image img) {
+    public static DialogBox getJunimoDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
         return db;
