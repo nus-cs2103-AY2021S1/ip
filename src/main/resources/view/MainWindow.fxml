@@ -14,12 +14,13 @@
                    AnchorPane.bottomAnchor="1.0"/>
         <Button fx:id="sendButton" layoutX="324.0" layoutY="558.0" mnemonicParsing="false" onAction="#handleUserInput"
                 prefHeight="41.0" prefWidth="76.0" text="Send"/>
-        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="557.0" prefWidth="400.0"
+        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="567.0" prefWidth="400.0"
                     vvalue="1.0" >
             <content>
                 <VBox fx:id="dialogContainer" prefHeight="552.0" prefWidth="388.0"
-                      style="-fx-background-size: 400 550; -fx-background-repeat: space;
-                       -fx-background-image: url('https://kpopping.com/uploads/documents/56/2/Dh09oUTUEAE8HTc.jpeg')"/>
+                      style="-fx-background-size: 300 650; -fx-background-repeat: inherit;
+                       -fx-background-image: url(https://png.pngtree.com/thumb_back/fh260/background/20191024/pngtree-colorful-stroke-memphis-pattern-background-in-pastel-image_320554.jpg)   " />
+
             </content>
         </ScrollPane>
     </children>

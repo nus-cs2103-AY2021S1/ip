@@ -30,8 +30,8 @@ public class DeleteCommand extends Command {
         } catch (DukeException e) {
             return e.getMessage();
         }
-        return "Noted. I've removed this duke.task:\n " + selectedTask
-                + "\nNow you have " + tasks.size() + " in the list.";
+        return "Noted. I've removed this task:\n " + selectedTask
+                + "\nYou now have " + tasks.size() + " task(s) in the list.";
     }
 
 }

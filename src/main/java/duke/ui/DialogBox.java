@@ -16,6 +16,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.Circle;
 
+//@@author RuiFengg-reused
+//Reused from https://se-education.org/guides/tutorials/javaFxPart4.html with minor modifications
+
 /**
  * An example of a custom control using FXML.
  * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
@@ -26,7 +29,7 @@ public class DialogBox extends HBox {
     private Label dialog;
     @FXML
     private ImageView displayPicture;
-
+    //Solution below adapted from @@author AdithyaNarayan
     private DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -43,7 +46,7 @@ public class DialogBox extends HBox {
 
         displayPicture.setClip(circle);
 
-        dialog.setStyle("-fx-background-color: darkcyan;"
+        dialog.setStyle("-fx-background-color: mediumpurple;"
                + " -fx-background-radius: 20; -fx-min-width: 250; -fx-end-margin: 20");
         dialog.setPadding(new Insets(12));
 
@@ -68,7 +71,7 @@ public class DialogBox extends HBox {
         circle.setRadius(40);
         displayPicture.setClip(circle);
 
-        dialog.setStyle("-fx-background-color: white; -fx-min-width: 250; -fx-background-radius: 20;");
+        dialog.setStyle("-fx-background-color: deeppink; -fx-min-width: 250; -fx-background-radius: 20;");
         dialog.setPadding(new Insets(12));
     }
 

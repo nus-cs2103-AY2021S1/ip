@@ -114,7 +114,7 @@ public class AddCommand extends Command {
 
     private String formatMessage(Task task) {
         return String.format("Got it I've added this task:\n%s"
-                        + "\nNow you have %s tasks in the list.\n",
+                        + "\nYou now have %s task(s) in the list.\n",
                 task.toString(), tasks.size());
     }
 }
