@@ -1,104 +1,107 @@
 package duke.parser;
 
 import java.time.LocalDate;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-import duke.data.exception.DeadlineMissingDateException;
-import duke.data.exception.EventMissingDateException;
-import duke.data.exception.InvalidInputException;
-import duke.data.exception.ToDoMissingDescriptionException;
-import duke.data.task.Deadline;
-import duke.data.task.Event;
-import duke.data.task.Task;
-import duke.data.task.TaskList;
-import duke.data.task.ToDo;
-import duke.storage.Storage;
-import duke.ui.Ui;
+import commands.*;
 
 /**
  * Parses user input.
  */
 public class Parser {
 
+    public static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
+    public static final String EVENT_DELIMITER = "/at";
+    public static final String DEADLINE_DELIMITER = "/by";
+
     /**
      * Parses user input and performs corresponding actions
      * through ui, taskList and storage.
      * @param userInput The line of text keyed in by the user.
-     * @param ui User interface displayed by the application.
-     * @param taskList Collection of the list of tasks.
-     * @param storage Storage to save and load files.
      */
-    public static void parseUserInput(String userInput, Ui ui, TaskList taskList, Storage storage) {
-        if (userInput.startsWith("bye")) {
-            ui.printMessage("Bye! See you next time :)");
-            System.exit(0);
-        } else if (userInput.startsWith("list")) {
-            String message = "";
-            for (int i = 0; i < taskList.getTaskList().size(); i++) {
-                message += (i + 1) + ": " + taskList.getTask(i) + "\n";
-            }
-            ui.printMessage(message);
-        } else if (userInput.matches("done ([0-9]+)")) {
-            int number = Integer.parseInt(userInput.split(" ")[1]);
-            if (number > taskList.getTaskList().size()) {
-                ui.printMessage("duke.data.task.Task not found please choose another number!");
-            } else if (number < 100 && number > 0) {
-                taskList.getTask(number - 1).markAsDone();
-                ui.printMessage("This task is done, great job!\n" + taskList.getTask(number - 1));
-            }
-        } else if (userInput.startsWith("todo")) {
-            String description = userInput.replace("todo", "").trim();
-            if (description.length() == 0) {
-                System.out.println(new ToDoMissingDescriptionException());
-            } else {
-                Task task = new ToDo(description);
-                taskList.addTask(task);
-                storage.save(task);
-                ui.printMessage("Added: " + task
-                        + String.format("\nNow you have %d tasks in the list", taskList.getTaskList().size()));
-            }
-        } else if (userInput.startsWith("deadline")) {
-            if (userInput.contains("/by")) {
-                String description = userInput.replace("deadline ", "").split("/by")[0].trim();
-                String dueDate = userInput.replace("deadline", "").split("/by")[1].trim();
-
-                Task task = new Deadline(description, LocalDate.parse(dueDate));
-                taskList.addTask(task);
-                storage.save(task);
-                ui.printMessage("Added " + task
-                        + String.format("\nNow you have %d tasks in the list", taskList.getTaskList().size()));
-            } else {
-                System.out.println(new DeadlineMissingDateException());
-            }
-        } else if (userInput.startsWith("event")) {
-            if (userInput.contains("/at")) {
-                String description = userInput.replace("event ", "").split("/at")[0].trim();
-                String time = userInput.replace("event ", "").split("/at")[1].trim();
-                System.out.println(time);
-                Task task = new Event(description, LocalDate.parse(time));
-                taskList.addTask(task);
-                storage.save(task);
-                ui.printMessage("Added " + task
-                        + String.format("\nNow you have %d tasks in the list", taskList.getTaskList().size()));
-            } else {
-                System.out.println(new EventMissingDateException());
-            }
-        } else if (userInput.startsWith("delete")) {
-            int taskToDelete = Integer.parseInt(userInput.replace("delete ", "")) - 1;
-
-            ui.printMessage("I have removed this task:\n" + taskList.getTask(taskToDelete)
-                    + String.format("\nNow you have %d tasks in the list", taskList.getTaskList().size() - 1));
-            taskList.deleteTask(taskToDelete);
-        } else if (userInput.startsWith("find")) {
-            String keyword = userInput.replace("find ", "");
-            String message = "Here are the matching tasks in your list\n";
-            for (Task task : taskList.getTaskList()) {
-                if (task.getDescription().contains(keyword)) {
-                    message += task.toString() + "\n";
-                }
-            }
-            ui.printMessage(message);
-        } else {
-            System.out.println(new InvalidInputException());
+    public Command parseUserInput(String userInput) {
+        final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
+        if (!matcher.matches()) {
+            // return incorrect command
         }
+
+        final String commandWord = matcher.group("commandWord");
+        final String arguments = matcher.group("arguments");
+
+        switch (commandWord) {
+        case ListCommand.COMMAND_WORD:
+            return new ListCommand();
+        case ToDoCommand.COMMAND_WORD:
+            return prepareToDo(arguments);
+        case EventCommand.COMMAND_WORD:
+            return prepareEvent(arguments);
+        case DeadlineCommand.COMMAND_WORD:
+            return prepareDeadline(arguments);
+        case FindCommand.COMMAND_WORD:
+            return prepareFind(arguments);
+        case DoneCommand.COMMAND_WORD:
+            return prepareDone(arguments);
+        case ExitCommand.COMMAND_WORD:
+            return new ExitCommand();
+        case HelpCommand.COMMAND_WORD: // Fallthrough
+        default:
+            return new HelpCommand();
+        }
+    }
+
+    private Command prepareFind(String arguments) {
+        try {
+            return new FindCommand(arguments.trim());
+        } catch (IllegalArgumentException exception) {
+            return new IncorrectCommand(exception.getMessage());
+        }
+    }
+
+    private Command prepareDone(String arguments) {
+        try {
+            String index = arguments.trim();
+            return new DoneCommand(Integer.parseInt(index));
+        } catch (IllegalArgumentException exception) {
+            return new IncorrectCommand(exception.getMessage());
+        }
+    }
+
+    private Command prepareDeadline(String arguments) {
+        try {
+            String description = splitDescription(arguments);
+            LocalDate date = parseTime(arguments, DEADLINE_DELIMITER);
+            return new DeadlineCommand(description, date);
+        } catch (IllegalArgumentException exception) {
+            return new IncorrectCommand(exception.getMessage());
+        }
+    }
+
+    private Command prepareEvent(String arguments) {
+        try {
+            String description = splitDescription(arguments);
+            LocalDate date = parseTime(arguments, EVENT_DELIMITER);
+            return new EventCommand(description, date);
+        } catch (IllegalArgumentException exception) {
+            return new IncorrectCommand(exception.getMessage());
+        }
+    }
+
+    private Command prepareToDo(String arguments) {
+        try {
+            return new ToDoCommand(arguments.trim());
+        } catch (IllegalArgumentException exception) {
+            return new IncorrectCommand(exception.getMessage());
+        }
+    }
+
+    private String splitDescription(String arguments) {
+        String description = arguments.split("/")[0].trim();
+        return description;
+    }
+
+    private LocalDate parseTime(String arguments, String delimiter) { // throws a wrong dateformatexception
+        String time = arguments.split(delimiter)[1].trim();
+        return LocalDate.parse(time);
     }
 }

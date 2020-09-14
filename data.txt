@@ -1,0 +1,19 @@
+[T] | 0 |  hello
+[T] | 0 |  hello
+[T] | 0 |  how are you
+[T] | 0 |  hello
+[E] | 0 |  hello (at: 10 Oct 2010)
+[D] | 0 |  do work (by: 11 Oct 2010)
+[T] | 0 |  hello
+[T] | 0 |  yelp
+[T] | 0 |  hello
+[T] | 0 |  yelo
+[E] | 0 |  you then (at: 10 Nov 2010)
+[T] | 0 |  hello
+[T] | 0 |  wha
+[T] | 0 |  hello
+[T] | 0 |  yo
+[T] | 0 |  task
+[E] | 0 |  askldfja (at: 10 Nov 2010)
+[T] | 0 |  hello
+[E] | 0 |  yo (at: 10 Nov 2020)

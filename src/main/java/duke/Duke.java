@@ -2,6 +2,9 @@ package duke;
 
 import java.util.Scanner;
 
+import commands.Command;
+import commands.CommandResult;
+import commands.ExitCommand;
 import duke.data.exception.DukeException;
 import duke.data.task.TaskList;
 import duke.parser.Parser;
@@ -16,6 +19,7 @@ public class Duke {
 
     private Storage storage;
     private TaskList tasks;
+    private Parser parser;
     private Ui ui;
     private String filePath = "data/tasks.txt";
 
@@ -26,6 +30,7 @@ public class Duke {
     public Duke() {
         ui = new Ui();
         storage = new Storage(filePath);
+        parser = new Parser();
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
@@ -44,11 +49,14 @@ public class Duke {
     public void run() {
         ui.greeting();
         Scanner scanner = new Scanner(System.in);
+        Command command;
 
-        while (true) {
+        do {
             String input = scanner.nextLine();
-            Parser.parseUserInput(input, ui, tasks, storage);
-        }
+            command = parser.parseUserInput(input);
+            CommandResult commandResult = command.execute(tasks, storage);
+            ui.printMessage(commandResult.getMessageToUser().split("\n"));
+        } while (!(command instanceof ExitCommand));
     }
 
     /**
@@ -56,7 +64,9 @@ public class Duke {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        Command command = parser.parseUserInput(input);
+        CommandResult commandResult = command.execute(tasks, storage);
+        return "Duke heard: \n" + commandResult.getMessageToUser();
     }
 
 }
