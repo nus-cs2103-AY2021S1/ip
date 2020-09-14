@@ -138,19 +138,6 @@ public class DeadlineTest {
     }
 
     @Test
-    public void isOverdue_isOverdue() {
-        try {
-            Deadline d = new Deadline("Assignment 1", "2020-08-02");
-            assertTrue(d.isOverdue());
-
-            d.markAsDone();
-            assertFalse(d.isOverdue());
-        } catch (Exception e) {
-            fail();
-        }
-    }
-
-    @Test
     public void output_toWriteStorage() {
         try {
             Deadline d = new Deadline("Assignment 1", "2020-08-02");
