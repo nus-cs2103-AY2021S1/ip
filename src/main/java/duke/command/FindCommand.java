@@ -1,8 +1,8 @@
 package duke.command;
 
 import duke.backend.Storage;
-import duke.task.TaskList;
 import duke.response.Response;
+import duke.task.TaskList;
 
 /**
  * Represents the command to Tasks that contains the keyword.

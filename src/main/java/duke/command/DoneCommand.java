@@ -3,9 +3,9 @@ package duke.command;
 import java.io.IOException;
 
 import duke.backend.Storage;
-import duke.task.TaskList;
-import duke.response.Response;
 import duke.exception.DukeInvalidIndexException;
+import duke.response.Response;
+import duke.task.TaskList;
 
 /**
  * Represents a marking a task as done action.

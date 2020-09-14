@@ -1,7 +1,7 @@
 package duke.response;
 
-import duke.task.TaskList;
 import duke.task.Task;
+import duke.task.TaskList;
 
 /**
  * User interface which deals with user interactions.

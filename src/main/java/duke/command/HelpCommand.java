@@ -1,8 +1,8 @@
 package duke.command;
 
 import duke.backend.Storage;
-import duke.task.TaskList;
 import duke.response.Response;
+import duke.task.TaskList;
 
 /**
  * Represents a list of available instructions.

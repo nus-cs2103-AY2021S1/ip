@@ -1,5 +1,14 @@
 package duke;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.jupiter.api.Test;
+
 import duke.exception.DukeInvalidIndexException;
 import duke.response.Response;
 import duke.task.Deadline;
@@ -7,21 +16,13 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.Todo;
-import org.junit.jupiter.api.Test;
-
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TaskListTest {
-    TaskList taskList = new TaskList();
+    private TaskList taskList = new TaskList();
 
-    Task todo = new Todo("task 1");
-    Task deadline = new Deadline("task 2", LocalDate.of(2020, 8, 24), LocalTime.of(8,24));
-    Task event = new Event("task 3", LocalDate.of(2020, 9, 9), LocalTime.of(9, 9));
+    private Task todo = new Todo("task 1");
+    private Task deadline = new Deadline("task 2", LocalDate.of(2020, 8, 24), LocalTime.of(8, 24));
+    private Task event = new Event("task 3", LocalDate.of(2020, 9, 9), LocalTime.of(9, 9));
 
     @Test
     public void addTodo_validTodo_success() {
@@ -96,7 +97,7 @@ public class TaskListTest {
 
     @Test
     public void getListAsStringFromList_validLongerList_success() {
-        List<Task> list = new ArrayList();
+        List<Task> list = new ArrayList<>();
         list.add(todo);
         list.add(deadline);
         String expectedResult = Response.TWO_INDENT + "1." + todo.toString() + "\n"
@@ -174,5 +175,14 @@ public class TaskListTest {
         TaskList tl = new TaskList();
         assertEquals("There are no tasks on this date!",
                 tl.getTasksOnDate(LocalDate.of(2020, 1, 1)));
+    }
+
+    @Test
+    public void getTaskWithKeyword_validKeyword_success() {
+        TaskList tl = new TaskList();
+        tl.addTask(deadline);
+        String expectedResult = Response.TWO_INDENT + "1." + deadline.toString();
+        assertEquals(expectedResult,
+                tl.getTaskWithKeyword("task"));
     }
 }
