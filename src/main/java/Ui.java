@@ -21,6 +21,7 @@ public class Ui {
                                             + "\u0AE6 event [description] /at [YYYY-MM-DD HH:mm] - add an event task \n"
                                             + "\u0AE6 list - view all current tasks \n"
                                             + "\u0AE6 find [keyword] - find all tasks with specified keyword \n"
+                                            + "\u0AE6 #[task number] - find all tasks with specified tag \n"
                                             + "\u0AE6 done [task number] - mark chosen task as done \n"
                                             + "\u0AE6 delete [task number] - delete chosen task \n";
 

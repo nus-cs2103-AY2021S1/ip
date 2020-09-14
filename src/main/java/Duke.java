@@ -10,6 +10,7 @@ public class Duke  {
 
     /**
      * Creates a Duke object and initialises a Task Manager.
+     *
      * @throws IOException when input or output operation fails.
      */
     public Duke() throws IOException {
@@ -22,6 +23,7 @@ public class Duke  {
 
     /**
      * Initialises the UI.
+     *
      * @param dialogContainer The vertical layout to contain dialogues.
      */
     public void setUi(VBox dialogContainer) {
@@ -36,6 +38,7 @@ public class Duke  {
 
     /**
      * Returns whether the input command is bye.
+     *
      * @param input String to represent user input.
      * @return a boolean indicating if the user input is a ByeCommand.
      * @throws IOException when input or output operation fails.
