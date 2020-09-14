@@ -4,7 +4,7 @@ import data.task.TaskList;
 import ui.Ui;
 
 /**
- * Prints the task list currently stored in Duke.
+ * Prints the task list currently stored in model.Duke.
  */
 public class ListCommand extends Command {
 
@@ -12,8 +12,8 @@ public class ListCommand extends Command {
 
     /**
      * Constructs a list command.
-     * @param ui of Duke.
-     * @param taskList of Duke.
+     * @param ui of model.Duke.
+     * @param taskList of model.Duke.
      */
     public ListCommand(Ui ui, TaskList taskList) {
         super(ui);

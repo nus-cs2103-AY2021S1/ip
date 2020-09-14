@@ -12,9 +12,9 @@ public class SortCommand extends Command {
 
     /**
      * Constructs a sort command.
-     * @param ui of Duke.
-     * @param taskList of Duke.
-     * @param storage of Duke.
+     * @param ui of model.Duke.
+     * @param taskList of model.Duke.
+     * @param storage of model.Duke.
      */
     public SortCommand(Ui ui, TaskList taskList, Storage storage) {
         super(ui);

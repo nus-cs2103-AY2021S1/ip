@@ -1,6 +1,17 @@
 package parser;
 
-import commands.*;
+import commands.ByeCommand;
+import commands.Command;
+import commands.DeadlineCommand;
+import commands.DeleteCommand;
+import commands.DoneCommand;
+import commands.EventCommand;
+import commands.FindCommand;
+import commands.FindDateCommand;
+import commands.ListCommand;
+import commands.SortCommand;
+import commands.SortDateTimeCommand;
+import commands.ToDoCommand;
 import data.exception.DukeIllegalCommandException;
 import data.task.TaskList;
 import storage.Storage;
@@ -17,9 +28,9 @@ public class Parser {
 
     /**
      * Constructs a parser to parse user input commands.
-     * @param taskList of Duke.
-     * @param storage of Duke.
-     * @param ui of Duke.
+     * @param taskList of model.Duke.
+     * @param storage of model.Duke.
+     * @param ui of model.Duke.
      */
     public Parser(TaskList taskList, Storage storage, Ui ui) {
         this.taskList = taskList;

@@ -11,7 +11,7 @@ import data.task.Task;
 import data.task.TaskList;
 import ui.Ui;
 /**
- * Represents the storage of where Duke is loading information from and saving information to.
+ * Represents the storage of where model.Duke is loading information from and saving information to.
  */
 public class Storage {
 

@@ -11,9 +11,9 @@ public class SortDateTimeCommand extends Command {
 
     /**
      * Constructs a sortdatetime command.
-     * @param ui of Duke.
-     * @param taskList of Duke.
-     * @param storage of Duke.
+     * @param ui of model.Duke.
+     * @param taskList of model.Duke.
+     * @param storage of model.Duke.
      */
     public SortDateTimeCommand(Ui ui, TaskList taskList, Storage storage) {
         super(ui);

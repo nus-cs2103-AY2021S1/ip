@@ -17,7 +17,7 @@ public class StorageTest {
 
     @Test
     public void constructor_nullFilePath_exceptionThrown() {
-        assertThrows(NullPointerException.class, () -> new Storage(null));
+        assertThrows(AssertionError.class, () -> new Storage(null));
     }
 
     @Test

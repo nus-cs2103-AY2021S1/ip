@@ -7,7 +7,7 @@ import storage.Storage;
 import ui.Ui;
 
 /**
- * Marks a specific task in the current task list of Duke as done.
+ * Marks a specific task in the current task list of model.Duke as done.
  */
 public class DoneCommand extends Command {
 
@@ -17,9 +17,9 @@ public class DoneCommand extends Command {
 
     /**
      * Constructs a done command.
-     * @param taskList of Duke.
-     * @param storage of Duke.
-     * @param ui of Duke.
+     * @param taskList of model.Duke.
+     * @param storage of model.Duke.
+     * @param ui of model.Duke.
      * @param userInput details of command.
      */
     public DoneCommand(TaskList taskList, Storage storage, String userInput, Ui ui) {

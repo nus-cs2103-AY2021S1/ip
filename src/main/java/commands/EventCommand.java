@@ -9,15 +9,15 @@ import storage.Storage;
 import ui.Ui;
 
 /**
- * Adds an Event task into the current task list of Duke.
+ * Adds an Event task into the current task list of model.Duke.
  */
 public class EventCommand extends CreateTaskCommand {
 
     /**
      * Constructs a event command.
-     * @param taskList of Duke.
-     * @param storage of Duke.
-     * @param ui of Duke.
+     * @param taskList of model.Duke.
+     * @param storage of model.Duke.
+     * @param ui of model.Duke.
      * @param userInput details of tasks.
      */
     public EventCommand(TaskList taskList, Storage storage, Ui ui, String userInput) {

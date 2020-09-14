@@ -4,7 +4,7 @@ import data.exception.DukeException;
 import ui.Ui;
 
 /**
- * Base class of a Command in Duke.
+ * Base class of a Command in model.Duke.
  */
 
 public abstract class Command {
