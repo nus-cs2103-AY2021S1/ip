@@ -29,12 +29,13 @@ public class Ui {
      * @return String menu
      */
     public String getMenu() {
-        return "1. list\n" + "2. done {item number}\n" + "3. todo {description}\n"
-                + "4. deadline {description} /by {dd/mm/yyyy} {hhmm}\n"
+        return "1. list\n " + "2. done...{item number}\n" + "3. todo...{description}\n"
+                + "4. deadline...{description}.../by...{dd/mm/yyyy}...{hhmm}\n"
                 + "\t e.g. deadline return book /by 1/12/2020 1800\n"
-                + "5. event {description} /at {dd/mm/yyyy} {hhmm}-{hhmm}\n"
-                + "\t e.g. event meeting /at 1/12/2020 1800-1900\n" + "7. delete {item number}\n"
-                + "8. find {item to find}\n" + "9. update {item number} /{desc OR date} {value}\n" + "10. bye";
+                + "5. event...{description}.../at...{dd/mm/yyyy}...{hhmm}-{hhmm}\n"
+                + "\t e.g. event meeting /at 1/12/2020 1800-1900\n" + "6. delete...{item number}\n"
+                + "7. find...{item to find}\n" + "8. update...{item number}.../{desc OR date}...{value}\n"
+                + "\t e.g. update 1 /desc new value OR update 1 /date 1/12/2020 1800\n" + "9. bye";
     }
 
     /**
