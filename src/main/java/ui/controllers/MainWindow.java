@@ -59,7 +59,7 @@ public class MainWindow extends AnchorPane {
         if (response.contains(UI.errorBox(""))) {
             kingDialogBox = DialogBox.getErrorDialog(response, kingImage);
         } else {
-           kingDialogBox = DialogBox.getKingDialog(response, kingImage);
+            kingDialogBox = DialogBox.getKingDialog(response, kingImage);
         }
         userDialogBox = DialogBox.getUserDialog(input, userImage);
         dialogContainer.getChildren().addAll(

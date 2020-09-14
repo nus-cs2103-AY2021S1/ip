@@ -1,3 +1,2 @@
-E@1@meeting@2pm
-D@0@CS2103 iP@2020-05-04T14:00
-E@1@Running@2pm
+T@0@sing
+E@0@marathon@2pm
