@@ -14,7 +14,7 @@ import java.time.format.DateTimeFormatter;
  * Stores all methods and properties of a Task class.
  * Variables include description, task type, time frame, and dateTime and done status.
  */
-public abstract class Task {
+public abstract class Task implements Comparable<Task> {
 
     private final String description;
     private final TaskType taskType;
@@ -128,5 +128,16 @@ public abstract class Task {
     @Override
     public String toString() {
         return getStatusIcon() + SINGLE_SPACE + description;
+    }
+
+    /**
+     * Compares each task according to their {@code LocalDateTime} dateTime.
+     *
+     * @param otherTask Other task to compare to.
+     * @return The comparator value, negative if less, positive if greater.
+     */
+    @Override
+    public int compareTo(Task otherTask) {
+        return this.dateTime.compareTo(otherTask.dateTime);
     }
 }

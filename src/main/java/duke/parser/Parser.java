@@ -11,6 +11,7 @@ import static duke.util.Keyword.KEYWORD_EVENT;
 import static duke.util.Keyword.KEYWORD_FIND;
 import static duke.util.Keyword.KEYWORD_HELP;
 import static duke.util.Keyword.KEYWORD_LIST;
+import static duke.util.Keyword.KEYWORD_SORT;
 import static duke.util.Keyword.KEYWORD_TODO;
 import static duke.util.Keyword.MULTI_SPACE;
 import static duke.util.Keyword.SINGLE_SPACE;
@@ -25,6 +26,7 @@ import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.HelpCommand;
 import duke.command.ShowCommand;
+import duke.command.SortCommand;
 import duke.exception.DukeException;
 import duke.exception.UnknownCommandException;
 
@@ -64,6 +66,8 @@ public class Parser {
             return new HelpCommand();
         case KEYWORD_BYE:
             return new ExitCommand();
+        case KEYWORD_SORT:
+            return new SortCommand();
         default:
             throw new UnknownCommandException();
         }

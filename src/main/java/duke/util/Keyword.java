@@ -47,6 +47,7 @@ public class Keyword {
     public static final String KEYWORD_FIND = "FIND";
     public static final String KEYWORD_BYE = "BYE";
     public static final String KEYWORD_HELP = "HELP";
+    public static final String KEYWORD_SORT = "SORT";
     public static final String EVENT_DELIMITER = " /at";
     public static final String DEADLINE_DELIMITER = " /by";
     public static final String INVALID_TASK_TYPE = "Invalid task type!";
@@ -69,6 +70,8 @@ public class Keyword {
     public static final String NO_MATCHING_TASKS_MESSAGE = "There are no matching tasks with the keyword %s.";
     public static final String NUM_FORMATTER = "%d. %s";
     public static final String FILE_CREATION_ERR = "Error in creating file!";
+    public static final String SORT_SUCCESS_MESSAGE = "Your list has been sorted!";
+    public static final String SORT_PROMPT_MESSAGE = "Type in 'list' to see the sorted list.";
 
     // DateTimeParser
     public static final String DATE_TIME_FORMAT = "MMM d yyyy / h.mm a";

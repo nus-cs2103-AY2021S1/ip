@@ -10,6 +10,8 @@ import static duke.util.Keyword.LINE_SEPARATOR;
 import static duke.util.Keyword.NO_MATCHING_TASKS_MESSAGE;
 import static duke.util.Keyword.NUM_FORMATTER;
 import static duke.util.Keyword.NUM_OF_TASKS_MESSAGE;
+import static duke.util.Keyword.SORT_PROMPT_MESSAGE;
+import static duke.util.Keyword.SORT_SUCCESS_MESSAGE;
 import static duke.util.Keyword.TASK_ADDED_MESSAGE;
 import static duke.util.Keyword.TASK_DELETED_MESSAGE;
 import static duke.util.Keyword.TASK_MARKED_MESSAGE;
@@ -157,6 +159,10 @@ public class Ui {
     public String emptyFind(String queryWord) {
         String message = String.format(NO_MATCHING_TASKS_MESSAGE, queryWord);
         return stringFormatter(message);
+    }
+
+    public String sortMessage() {
+        return stringFormatter(SORT_SUCCESS_MESSAGE, SORT_PROMPT_MESSAGE);
     }
 
     public void fileCreationError() {
