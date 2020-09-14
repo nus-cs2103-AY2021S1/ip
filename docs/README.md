@@ -4,7 +4,7 @@
 The matrix is a desktop app which allows you to keep track of tasks with a Graphical User Interface(GUI). The app has a chat interface which make the monitoring of tasks more human like. 
 - Quick start
 - Features
-	1. Add tasks: `todo` `event` `deadline` 
+	1. [Add tasks](#addtask): `todo` `event` `deadline` 
 	2. Display list: `list`
 	3. Marking task as done: `done`
 	4. Deleting tasks: `delete`
@@ -29,7 +29,7 @@ Here are some example commands you can try:
 ## Features 
 
 
-### Add tasks 
+### Add tasks <div id ="addtask"></div>
 There are three types of tasks that could be added into the list: ToDo, Event and Deadline. The various formats have various types of inputs and outputs as shown below:
 
 #### Adding a ToDo: `todo`
@@ -51,7 +51,7 @@ Now you have 1 tasks in the list.
 
 Adds a deadline to the list of tasks.
 Format: `deadline <DESCRIPTION> /by <DD-MM-YYYY HH:MM>`
->:stop_sign: The date that has been input has to be strictly of the following format: `DD-MM-YYYY HH:MM'
+> :stop_sign: The date that has been input has to be strictly of the following format: `DD-MM-YYYY HH:MM'
 
 Example of usage: 
 `deadline return book /by 23-02-2020 00:00`
@@ -67,7 +67,7 @@ Now you have 1 tasks in the list.
 
 Adds an event to the list of tasks.
 Format: `event <DESCRIPTION> /at <DD-MM-YYYY HH:MM>`
->:stop_sign: The date that has been input has to be strictly of the following format: `DD-MM-YYYY HH:MM'
+> :stop_sign: The date that has been input has to be strictly of the following format: `DD-MM-YYYY HH:MM'
 
 Example of usage: 
 `event project meeting /at 01-01-2020 12:30`
@@ -94,7 +94,7 @@ Here are the tasks in your list:
 3. [D][✘] return book (by: 23 Feb 2020, 12:00 AM)
  ```
  
- >:stop_sign: If the list is empty a warning message will be shown.
+ > :stop_sign: If the list is empty a warning message will be shown.
  
 ### Done: `done`
 Marks the task as done 
@@ -138,7 +138,7 @@ Here are the matching tasks in your list:
 2. [E][✘] book discussion (by: 1 Jan 2020, 12:30 PM)
 3. [D][✘] return book (by: 23 Feb 2020, 12:00 AM)
 ```
- >:stop_sign: You could enter partial words and it still works. For example, instead of `book` you could type `bo` and it would generate search results based on that.
+ > :stop_sign: You could enter partial words and it still works. For example, instead of `book` you could type `bo` and it would generate search results based on that.
  
 ### Tag: 'tag'
 You can tag tasks with a certain tag to make it easier to group certain tasks together.
@@ -154,7 +154,7 @@ Got it. I've tagged this task with: #today
 [E][✘] project meeting (by: 1 Jan 2020, 12:30 PM)
 Now you have 2 tasks in the list.
 ```
- >:stop_sign: Use tags to group multiple tasks together for easier search.
+ > :stop_sign: Use tags to group multiple tasks together for easier search.
  
 ### FIndTag: `findtag'
 This will help you search for tags with a certain tag name.
