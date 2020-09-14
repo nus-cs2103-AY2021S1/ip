@@ -5,37 +5,19 @@
 <?import javafx.scene.effect.Blend?>
 <?import javafx.scene.effect.Glow?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.shape.Line?>
 
 <fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-      <BorderPane prefHeight="73.0" prefWidth="170.0">
-         <center>
-              <Label fx:id="dialog" contentDisplay="CENTER" prefHeight="73.0" prefWidth="186.0" text="Label" wrapText="true" BorderPane.alignment="CENTER">
-               <effect>
-                  <Blend>
-                     <topInput>
-                        <Glow />
-                     </topInput>
-                  </Blend>
-               </effect>
-            </Label>
-         </center>
-         <top>
-            <Line endX="127.29289245605469" endY="-10.399493217468262" startX="-88.76103210449219" startY="-8.277681350708008" BorderPane.alignment="CENTER" />
-         </top>
-         <bottom>
-            <Line endX="117.29289245605469" endY="0.4644663333892822" startX="-102.5908203125" startY="0.4644663333892822" strokeLineCap="BUTT" BorderPane.alignment="CENTER" />
-         </bottom>
-         <right>
-            <Line endX="-95.12132263183594" endY="96.95472717285156" startX="-95.65672302246094" startY="186.24761962890625" BorderPane.alignment="CENTER" />
-         </right>
-         <left>
-            <Line endX="-99.34925842285156" endY="-237.97669982910156" startX="-98.69851684570312" startY="-148.68380737304688" BorderPane.alignment="CENTER" />
-         </left>
-      </BorderPane>
+        <Label fx:id="dialog" alignment="CENTER" contentDisplay="CENTER" prefHeight="73.0" prefWidth="186.0" styleClass="textbg" stylesheets="@../images/style.css" text="Label" wrapText="true">
+         <effect>
+            <Blend>
+               <topInput>
+                  <Glow />
+               </topInput>
+            </Blend>
+         </effect>
+      </Label>
         <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" />
     </children>
     <padding>

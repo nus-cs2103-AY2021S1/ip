@@ -1,0 +1,23 @@
+.bodybg{
+	-fx-background-image: url("/images/pineapple.jpg");
+	
+	
+}
+
+.textbg{
+	-fx-background-color: teal;
+	-fx-background-radius: 30;
+	-fx-border-radius: 30;
+	-fx-border-width:5;
+	
+}
+
+.textboxbg{
+	-fx-background-color: cyan;
+	-fx-background-radius: 30;
+	
+}
+
+.buttonbg {
+	-fx-background-image: url("/images/send.png");
+}
