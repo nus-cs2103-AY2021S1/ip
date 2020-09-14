@@ -87,4 +87,14 @@ public class Storage {
         }
 
     }
+
+    /**
+     * Deletes the save file for duke tasks.
+     */
+    public void deleteStorage(){
+        File file = new File(this.path + this.filename);
+        if (file.exists()) {
+            file.delete();
+        }
+    }
 }

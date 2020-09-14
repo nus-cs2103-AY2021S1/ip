@@ -25,14 +25,20 @@ public class FindCommand extends Command {
             if (list.getList().size() == 0) {
                 ui.printMessage("There is nothing in match!");
             } else {
-                ui.printMessage("Here are the matching tasks in your list:");
-
                 int taskIndexCounter = 1;
+                StringBuilder stringBuilder = new StringBuilder();
                 for (Task task: list.getList()) {
                     if (task.getDescription().contains(matchingString)) {
-                        ui.printMessage("" + taskIndexCounter + "." + task);
+                        stringBuilder.append(taskIndexCounter).append(".").append(task).append("\n");
                         taskIndexCounter++;
                     }
+                }
+
+                if (stringBuilder.length() > 0) {
+                    ui.printMessage("Here are the matching tasks in your list:");
+                    ui.printMessage(stringBuilder.toString());
+                } else {
+                    ui.printMessage("No matching task found!");
                 }
             }
         }

@@ -1,6 +1,5 @@
 package duke.command;
 
-import java.lang.reflect.InvocationTargetException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -28,17 +27,25 @@ public class EventCommand extends Command {
             throw new DukeCommandException("\u2639 OOPS!!! Wrong 'event' command format!");
         } else {
             String[] parseArray = getInputCommand().substring(6).split(" /at ");
+            String[] dateSegments = parseArray[1].split("/");
+            for (int i = 0; i < 2; i++) {
+                if (dateSegments[i].length() == 1) {
+                    dateSegments[i] = "0" + dateSegments[i];
+                }
+            }
+            parseArray[1] = dateSegments[0] + "/" + dateSegments[1] + "/" + dateSegments[2];
 
             Event event;
             try {
-                assert(LocalDateTime.parse(parseArray[1], DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"))
-                       .isAfter(LocalDateTime.now()));
+                if (LocalDateTime.parse(parseArray[1], DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"))
+                        .isBefore(LocalDateTime.now())) {
+                    throw new DukeCommandException("That date has already passed!");
+                }
+
                 event = new Event(parseArray[0], LocalDateTime.parse(
                   parseArray[1], DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm")));
             } catch (DateTimeParseException e) {
                 throw new DukeCommandException("Invalid date!");
-            } catch (AssertionError e) {
-                throw new DukeCommandException("Assertion error");
             }
             list.getList().add(event);
 

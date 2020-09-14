@@ -26,17 +26,25 @@ public class DateCommand extends Command {
         if (!pattern.matcher(getInputCommand()).matches()) {
             throw new DukeCommandException("\u2639 OOPS!!! Wrong 'date' command format!");
         } else {
-            String dateString = getInputCommand().split(" ")[1];
+            String[] parseArray = getInputCommand().split(" ");
+            String[] dateSegments = parseArray[1].split("/");
+            for (int i = 0; i < 2; i++) {
+                if (dateSegments[i].length() == 1) {
+                    dateSegments[i] = "0" + dateSegments[i];
+                }
+            }
+            parseArray[1] = dateSegments[0] + "/" + dateSegments[1] + "/" + dateSegments[2];
+            String dateString = parseArray[1];
             LocalDate date = LocalDate.parse(dateString, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-            ui.printMessage("Here are the tasks of date " + date + ":");
 
             int taskIndexCounter = 1;
+            StringBuilder stringBuilder = new StringBuilder();
             for (Task task: list.getList()) {
                 if (task instanceof Deadline) {
                     Deadline deadline = (Deadline) task;
                     LocalDateTime deadlineTime = deadline.getBy();
                     if (date.getYear() == deadlineTime.getYear() && date.getDayOfYear() == deadlineTime.getDayOfYear()) {
-                        ui.printMessage("" + taskIndexCounter + "." + task);
+                        stringBuilder.append(taskIndexCounter).append(".").append(task).append("\n");
                         taskIndexCounter++;
                     }
                 }
@@ -44,10 +52,17 @@ public class DateCommand extends Command {
                     Event event = (Event) task;
                     LocalDateTime eventTime = event.getAt();
                     if (date.getYear() == eventTime.getYear() && date.getDayOfYear() == eventTime.getDayOfYear()) {
-                        ui.printMessage("" + taskIndexCounter + "." + task);
+                        stringBuilder.append(taskIndexCounter).append(".").append(task).append("\n");
                         taskIndexCounter++;
                     }
                 }
+            }
+
+            if (stringBuilder.length() > 0) {
+                ui.printMessage("Here are the tasks of date " + date + ":");
+                ui.printMessage(stringBuilder.toString());
+            } else {
+                ui.printMessage("No matching task found!");
             }
         }
     }

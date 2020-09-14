@@ -5,7 +5,7 @@ package duke;
  * for duke.
  */
 public enum DukeCommand {
-    LIST("list", 100), DATE("date", 101), FIND("find", 102),
+    LIST("list", 100), DATE("date", 101), FIND("find", 102), CLEARALL("clearall", 102),
 
     TODO("todo", 200), DEADLINE("deadline", 201), EVENT("event", 201),
 
