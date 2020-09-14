@@ -108,7 +108,7 @@ Expected outcome:
 </br> 2. [E][✘] Software Engineering class (at: 3pm)
 </br> 3. [D][✘] Submission of Essay (by: 6pm on Thursday)
 </br> 4. [D][✘] Assignment (by: 10 Oct 2020, 06:00 PM)
-</br> You have 4 task(s) in the list
+</br> </br> You have 4 task(s) in the list
 
 ### 6. `clear` - Clear all tasks
 Delete all tasks in the list.
