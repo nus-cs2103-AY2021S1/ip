@@ -59,28 +59,84 @@ storage and loads previous data from it.
 
 ### `list` - list all tasks
 
-Describe action and its outcome.
+`list` command can list all the added tasks stored in the local database.
 
-Example of usage: 
-
-`keyword (optional arguments)`
-
-Expected outcome:
-
-`outcome`
+```
+list
+```
 
 ### `todo` - add a todo task
 
+`todo` command can add a new todo task to the task list.
+
+```
+todo DESCRIPTION
+```
+
 ### `deadline` - add a deadline task
+
+`deadline` command add a new deadline task to the task list.
+
+```
+deadline DESCRIPTION /by DATE
+```
+
+`DATE` can be a string or in the format of `YYYY-MM-DD`. For the latter format, C-3PO will be able to understand the due date, while for the former format, C-3PO will directly save the date as a raw string.
 
 ### `event` - add an event task
 
+`event` command add a new deadline task to the task list.
+
+```
+event DESCRIPTION /at DATE
+```
+
+`DATE` can be a string or in the format of `YYYY-MM-DD`. For the latter format, C-3PO will be able to understand the date, while for the former format, C-3PO will directly save the date as a raw string.
+
 ### `done` - mark a task as done
+
+`done` command marks a task as done.
+
+```
+done INDEX
+```
+
+For a non-empty task list with `n` tasks, ` INDEX` must be in the range of 1 to `n` (inclusive).
 
 ### `delete` - delete a task
 
+`delete` command deletes a task from the list.
+
+```
+delete INDEX
+```
+
+For a non-empty task list with `n` tasks, ` INDEX` must be in the range of 1 to `n` (inclusive).
+
 ### `find` - find tasks by keywords
+
+`find` command searches for tasks with a specified keyword and prints a list of all searched tasks.
+
+```
+find KEYWORDS
+```
 
 ### `sort` - sort tasks by kind, name or date
 
+`sort` command sorts the task list by their kinds, names or dates.
+
+```
+sort /by COMPARATOR
+```
+
+`COMPARATOR` can only be `date`, `name` or `kind`.
+
 ### `bye` - save and exit
+
+`bye` command shuts down the chat bot and exits in two seconds.
+
+```
+bye
+```
+
+
