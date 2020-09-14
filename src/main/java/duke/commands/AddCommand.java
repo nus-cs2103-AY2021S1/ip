@@ -14,6 +14,7 @@ public class AddCommand implements Command {
 
     /**
      * AddCommand constructor.
+     *
      * @param task The task to be added.
      */
     public AddCommand(Task task) {
@@ -23,14 +24,16 @@ public class AddCommand implements Command {
     /**
      * Executes the addition of task and sends the appropriate response to the user and
      * stores the changes to the storage.
-     * @param tasks The TaskList.
-     * @param ui The Ui.
+     *
+     * @param tasks   The TaskList.
+     * @param ui      The Ui.
      * @param storage The Storage.
      * @return The add message by the Ui.
      * @throws DukeException Exceptions when executing the different methods of TaskList,
-     * Ui and Storage.
+     *                       Ui and Storage.
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage)
+            throws DukeException {
         tasks.addToPlanner(task);
         String response = ui.addMessage(task, tasks.getSize());
         storage.save(tasks.getPlanner());

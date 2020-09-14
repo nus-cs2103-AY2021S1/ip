@@ -6,7 +6,7 @@ package duke.exceptions;
  */
 public class DukeInvalidIndexException extends DukeException {
 
-    public static final String ERROR_INVALID_INDEX = "There appears to be a problem with your task number.";
+    public static final String ERROR_INVALID_INDEX = "There appears to be a paw-blem with your task number.";
 
 
     /**

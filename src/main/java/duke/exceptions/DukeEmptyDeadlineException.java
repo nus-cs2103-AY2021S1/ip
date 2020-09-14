@@ -6,7 +6,7 @@ package duke.exceptions;
  */
 public class DukeEmptyDeadlineException extends DukeException {
 
-    public static final String ERROR_EMPTY_DEADLINE_TASK = "The description of a 'deadline' cannot be empty.";
+    public static final String ERROR_EMPTY_DEADLINE_TASK = "You fur-get some deadline details.";
 
 
     /**

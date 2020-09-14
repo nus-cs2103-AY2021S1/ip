@@ -11,9 +11,10 @@ public class Event extends Task {
 
     /**
      * Event constructor.
+     *
      * @param description Details of the task.
-     * @param isDone Progress of the task.
-     * @param date Date of the event.
+     * @param isDone      Progress of the task.
+     * @param date        Date of the event.
      */
     public Event(String description, boolean isDone, LocalDateTime date) {
         super(description, isDone);
@@ -31,7 +32,7 @@ public class Event extends Task {
                 + " "
                 + super.toString()
                 + "(at: "
-                + date.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm"))
+                + date.format(DateTimeFormatter.ofPattern("MMM d, yyyy HH:mm"))
                 + ")";
     }
 }

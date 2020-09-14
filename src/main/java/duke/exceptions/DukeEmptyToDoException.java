@@ -6,7 +6,7 @@ package duke.exceptions;
  */
 public class DukeEmptyToDoException extends DukeException {
 
-    public static final String ERROR_EMPTY_TODO_TASK = "The description of a 'todo' cannot be empty.";
+    public static final String ERROR_EMPTY_TODO_TASK = "You fur-get some todo details.";
 
 
     /**

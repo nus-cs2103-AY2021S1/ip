@@ -6,10 +6,8 @@ package duke.exceptions;
  */
 public class DukeDateTimeParseException extends DukeException {
 
-    public static final String ERROR_INVALID_DATE = "Please input the proper date in this "
+    public static final String ERROR_INVALID_DATE = "Please input the paw-per date in this "
             + "format: 'yyyy-MM-dd HH:mm'";
-
-
     /**
      * DukeDateTimeParseException constructor.
      */

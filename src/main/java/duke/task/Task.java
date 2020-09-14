@@ -9,8 +9,9 @@ public abstract class Task {
 
     /**
      * Task constructor.
+     *
      * @param description Details of the task.
-     * @param isDone Progress of the task.
+     * @param isDone      Progress of the task.
      */
     public Task(String description, boolean isDone) {
         this.description = description;
@@ -19,6 +20,7 @@ public abstract class Task {
 
     /**
      * Display the progress of the task.
+     *
      * @return A boolean to check the task's progress.
      */
     public String getStatusIcon() {
@@ -31,10 +33,12 @@ public abstract class Task {
     public void done() {
         this.isDone = true;
     }
+
     public String getDescription() {
         return this.description;
     }
-    public boolean getIsDone() {
+
+    public boolean isDone() {
         return this.isDone;
     }
 

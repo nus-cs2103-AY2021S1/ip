@@ -6,7 +6,7 @@ package duke.exceptions;
  */
 public class DukeEmptyFindException extends DukeException {
 
-    public static final String ERROR_ALREADY_DONE = "Missing keyword to find!";
+    public static final String ERROR_ALREADY_DONE = "Mhiss-ing keyword to find!";
 
 
     /**

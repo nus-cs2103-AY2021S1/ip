@@ -17,7 +17,6 @@ import duke.task.Task;
 import duke.task.Todo;
 
 
-
 /**
  * Storage deals with loading tasks from the file and saving tasks in the file.
  */
@@ -36,6 +35,7 @@ public class Storage {
     /**
      * Loads the saved tasks. On the case that the file is not found,
      * this will create a directory and a text file.
+     *
      * @return An ArrayList of tasks.
      * @throws DukeFileNotFoundException Checks if the file is deleted or corrupted halfway.
      */
@@ -86,6 +86,7 @@ public class Storage {
 
     /**
      * Creates the text file.
+     *
      * @param path The path where the duke text file will be created.
      * @throws DukeFileNotFoundException Checks if there is any error after saving.
      */
@@ -105,6 +106,7 @@ public class Storage {
 
     /**
      * Saves the tasks into the text file into a proper format.
+     *
      * @param tasks List of tasks.
      * @throws DukeException Checks if the file is deleted or corrupted halfway.
      */
@@ -112,19 +114,19 @@ public class Storage {
         DateTimeFormatter style = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         try {
             FileWriter myWriter = new FileWriter(fileName);
-            for (Task task: tasks) {
+            for (Task task : tasks) {
                 if (task instanceof Todo) {
                     myWriter.write("T | "
-                            + (task.getIsDone() ? "1 | " : "0 | ")
+                            + (task.isDone() ? "1 | " : "0 | ")
                             + task.getDescription());
                 } else if (task instanceof Deadline) {
                     myWriter.write("D | "
-                            + (task.getIsDone() ? "1 | " : "0 | ")
+                            + (task.isDone() ? "1 | " : "0 | ")
                             + task.getDescription() + " | "
                             + ((Deadline) task).getDate().format(style));
                 } else {
                     myWriter.write("E | "
-                            + (task.getIsDone() ? "1 | " : "0 | ")
+                            + (task.isDone() ? "1 | " : "0 | ")
                             + task.getDescription() + " | "
                             + ((Event) task).getDate().format(style));
                 }

@@ -7,8 +7,9 @@ public class Todo extends Task {
 
     /**
      * Todo constructor.
+     *
      * @param description Details of the task.
-     * @param isDone Progress of the task.
+     * @param isDone      Progress of the task.
      */
     public Todo(String description, boolean isDone) {
         super(description, isDone);

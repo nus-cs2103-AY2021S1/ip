@@ -13,14 +13,14 @@ public class RemindCommand implements Command {
 
     /**
      * Displays deadlines/events that occur this week.
-     * @param tasks TaskList.
-     * @param ui Ui.
+     *
+     * @param tasks   TaskList.
+     * @param ui      Ui.
      * @param storage Storage.
      * @return The reminder message by the Ui.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         TaskListFilter weekFilter = new WeekFilter();
-        String intro = ui.intro();
-        return intro + '\n' + ui.currentWeekTasks(tasks.findTasks(weekFilter));
+        return ui.currentWeekTasks(tasks.findTasks(weekFilter));
     }
 }
