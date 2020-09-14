@@ -69,7 +69,7 @@ public class MainWindow extends AnchorPane {
         if (Parser.checkBye(input)) {
             Node source = userInput.getParent();
             Stage stage = (Stage) source.getScene().getWindow();
-            PauseTransition delay = new PauseTransition(Duration.seconds(2));
+            PauseTransition delay = new PauseTransition(Duration.seconds(0));
             delay.setOnFinished(event -> stage.close());
             delay.play();
         }
