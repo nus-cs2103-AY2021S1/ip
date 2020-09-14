@@ -1,6 +1,7 @@
 import Task.Task;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Stores tasks and supports various operations on them.
@@ -43,15 +44,19 @@ public class TaskList implements java.io.Serializable {
      * Prints the list of tasks through the UI class
      */
     public void print_tasks() {
+        UI.print(this.toString());
+    }
+
+    @Override
+    public String toString(){
         if(tasks.size() == 0){
-            UI.print("There are no tasks!\n");
-            return;
+            return "There are no tasks!\n";
         }
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {
-            sb.append((i + 1) + "." + tasks.get(i).toString());
+            sb.append(i + 1).append(".").append(tasks.get(i).toString());
         }
-        UI.print(sb.toString());
+        return sb.toString();
     }
 
     /**
@@ -110,5 +115,13 @@ public class TaskList implements java.io.Serializable {
         } else {
             UI.print("No match found!\n");
         }
+    }
+
+    /**
+     * Sorts tasks by date then prints the new list.
+     */
+    public void sort(){
+        Collections.sort(tasks);
+        UI.print("Tasks sorted by date.\n" + this.toString());
     }
 }

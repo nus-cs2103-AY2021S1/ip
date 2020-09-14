@@ -94,6 +94,9 @@ public class Parser {
             }
             tasks.find(input.substring(5));
             break;
+        case "sort":
+            tasks.sort();
+            break;
         default:
             throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
