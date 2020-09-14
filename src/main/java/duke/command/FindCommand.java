@@ -16,6 +16,9 @@ import duke.ui.Ui;
 public class FindCommand extends Command {
     public static final String COMMAND = "find";
 
+    private static final String DONE_KEYWORD = "done";
+    private static final String NOT_DONE_KEYWORD = "not_done";
+
     private String[] keywords;
 
     /**
@@ -45,9 +48,15 @@ public class FindCommand extends Command {
                 filteredTasks = tasks.filter((task) -> {
                     boolean isDeadlineAndDueOnDate = task instanceof Deadline && ((Deadline) task).isDueOn(date);
                     boolean isEventAndOccurOnDate = task instanceof Event && ((Event) task).isOccurringOn(date);
-                    return isDeadlineAndDueOnDate || isEventAndOccurOnDate;
+                    boolean containKeyword = task.toString().toLowerCase().contains(keyword.toLowerCase());
+                    return isDeadlineAndDueOnDate || isEventAndOccurOnDate || containKeyword;
                 });
-
+            } else if (keyword.equals(DONE_KEYWORD) || keyword.equals(NOT_DONE_KEYWORD)) {
+                filteredTasks = tasks.filter(task -> {
+                    boolean isDone = task.isDone();
+                    boolean containKeyword = task.toString().toLowerCase().contains(keyword.toLowerCase());
+                    return (keyword.equals(DONE_KEYWORD) ? isDone : !isDone) || containKeyword;
+                });
             } else {
                 filteredTasks = tasks.filter((task) ->
                         task.toString().toLowerCase().contains(keyword.toLowerCase()));

@@ -40,10 +40,7 @@ public class TaskList {
      * @param task The task to be added
      */
     public void add(Task task) {
-        assert task != null : "task cannot be null";
-        Pair<Task, Integer> infoPair = new Pair<>(null, tasks.size());
-        prevCommands.add(new Pair<>(ADD_KEY, infoPair));
-        tasks.add(task);
+        this.add(tasks.size(), task);
     }
 
     /**
@@ -53,16 +50,16 @@ public class TaskList {
      */
     public void add(int index, Task task) {
         assert task != null : "task cannot be null";
+        tasks.add(index, task);
         Pair<Task, Integer> infoPair = new Pair<>(null, index);
         prevCommands.add(new Pair<>(ADD_KEY, infoPair));
-        tasks.add(index, task);
     }
 
     public void set(int index, Task task) {
         assert task != null : "task cannot be null";
+        tasks.set(index, task);
         Pair<Task, Integer> infoPair = new Pair<>(tasks.get(index), index);
         prevCommands.add(new Pair<>(UPDATE_KEY, infoPair));
-        tasks.set(index, task);
     }
 
     /**
@@ -93,9 +90,9 @@ public class TaskList {
      */
     public void markAsDone(int index) {
         assert index >= 0 && index < tasks.size() : "index out of bound";
+        tasks.set(index, tasks.get(index).markAsDone());
         Pair<Task, Integer> infoPair = new Pair<>(null, index);
         prevCommands.add(new Pair<>(DONE_KEY, infoPair));
-        tasks.set(index, tasks.get(index).markAsDone());
     }
 
     /**
