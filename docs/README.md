@@ -6,17 +6,18 @@
 HAL9000 categorizes tasks into 3 types:
 1. **To do**: General task.
 
-    
-
 1. **Deadline**: Task with a specific deadline.
-
-    
     
 1. **Event**: Task with a time or place.
+    
+### Other features
+1. **list**: view all your tasks.
 
-    
-    
-### Mark done, delete and find your task
+1. **done**: mark a task as done.
+
+1. **delete**: delete a task from your list permanently.
+
+1. **find**: find a task with a keyword.
 
 ## Usage
 ### `todo` - Save your task as a To Do task.
@@ -50,7 +51,7 @@ Expected outcome:
        [D][✗] collect moon rock samples (by: 2020-09-21 17:00)
      Now you have 3 tasks in the list.
 
-### `Event` - Save your task as an Event task
+### `event` - Save your task as an Event task
 
 To save task as a Deadline task, specify task name followed by \
 details about the event, like time or location. 
