@@ -1,6 +1,6 @@
 # Hisoka User Guide
 
-![GitHub Logo](Ui.png =500x500)
+![GitHub Logo](Ui.png)
 
 ## Features
 
