@@ -1,17 +1,24 @@
 import java.util.ArrayList;
 
 /**
- * Represents the task list of the Duke application. The task list is
- * responsible for storing and modifying the current tasks.
+ * Represents the task list of the Duke application. The task list is responsible
+ * for storing and modifying tasks.
  */
 public class TaskList {
 
     private ArrayList<Task> tasks;
 
+    /**
+     * Constructs an empty TaskList.
+     */
     public TaskList() {
         this.tasks = new ArrayList<>();
     }
 
+    /**
+     * Constructs a TaskList containing the tasks saved in the hard disk.
+     * @param savedTasks List of tasks saved in the hard disk.
+     */
     public TaskList(ArrayList<String> savedTasks) {
         ArrayList<Task> tasks = new ArrayList<>();
         for (String savedTask : savedTasks) {
@@ -58,26 +65,26 @@ public class TaskList {
     }
 
     /**
-     * Returns the current size of the task list.
-     * @return Current size of the task list.
+     * Returns the current size of the TaskList.
+     * @return Current size of the TaskList.
      */
     public int getLength() {
         return tasks.size();
     }
 
     /**
-     * Returns the task list.
-     * @return Task list.
+     * Returns the TaskList.
+     * @return TaskList.
      */
     public ArrayList<Task> getTasks() {
         return tasks;
     }
 
     /**
-     * Creates and sends a list of String objects representing the
-     * tasks in the task list to the user interface of the Duke
-     * application for display.
+     * Creates and sends a list of String objects representing the tasks in the TaskList
+     * to the user interface of the Duke application to retrieve the corresponding response.
      * @param ui User interface of the Duke application.
+     * @return Response of the user interface.
      */
     public String showList(Ui ui) {
         ArrayList<Task> displayedTasks = new ArrayList<>();
@@ -88,10 +95,11 @@ public class TaskList {
     }
 
     /**
-     * Marks a specified task as done and alerts the user interface
-     * of the Duke application to display the corresponding message.
+     * Marks a specified task in the TaskList as done and retrieves the corresponding
+     * response from the user interface of the Duke application.
      * @param taskPosition Position of the task to be marked as done in the task list.
      * @param ui User interface of the Duke application.
+     * @return Response of the user interface.
      */
     public String markDone(int taskPosition, Ui ui) {
         Task doneTask = tasks.get(taskPosition);
@@ -99,6 +107,14 @@ public class TaskList {
         return ui.showDone(doneTask);
     }
 
+    /**
+     * Deletes specified tasks in the TaskList and retrieves the corresponding response
+     * from the user interface of the Duke application.
+     * @param deletedTaskPositions ArrayList containing the positions of the tasks to be
+     *                             deleted in the task list.
+     * @param ui User interface of the Duke application.
+     * @return Response of the user interface.
+     */
     public String deleteTasks(ArrayList<String> deletedTaskPositions, Ui ui) {
         ArrayList<Task> removedTasks = new ArrayList<>();
         ArrayList<Task> remainingTasks = new ArrayList<>();
@@ -117,6 +133,12 @@ public class TaskList {
         return ui.showDelete(removedTasks, tasks.size());
     }
 
+    /**
+     * Deletes all the tasks in the TaskList and retrieves the corresponding
+     * response from the user interface of the Duke application.
+     * @param ui User interface of the Duke application.
+     * @return Response of the user interface.
+     */
     public String deleteAll(Ui ui) {
         ArrayList<Task> removedTasks = new ArrayList<>();
         for (Task task : tasks) {
@@ -127,10 +149,11 @@ public class TaskList {
     }
 
     /**
-     * Adds a new task to the task list and alerts the user interface
-     * of the Duke application to display the corresponding message.
-     * @param task New task to be added to the task list.
+     * Adds a new task to the TaskList and retrieves the corresponding response
+     * from the user interface of the Duke application.
+     * @param task Task to be added to the TaskList.
      * @param ui User interface of the Duke application.
+     * @return Response of the user interface.
      */
     public String addTask(Task task, Ui ui) {
         tasks.add(task);
@@ -138,9 +161,11 @@ public class TaskList {
     }
 
     /**
-     * Finds the tasks in the task list that match the given keyword.
-     * @param keyword Keyword given by the user.
+     * Finds the tasks in the TaskList that match
+     * Finds all the tasks in the TaskList that match the specified keyword.
+     * @param keyword Keyword specified by the user.
      * @param ui User interface of the Duke application.
+     * @return Response of the user interface.
      */
     public String findTask(String keyword, Ui ui) {
         ArrayList<String> matchingTasks = new ArrayList<>();

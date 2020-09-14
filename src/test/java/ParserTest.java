@@ -1,8 +1,10 @@
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import java.util.ArrayList;
+
+import org.junit.jupiter.api.Test;
 
 public class ParserTest {
 
@@ -13,7 +15,7 @@ public class ParserTest {
             expectedList.add("Find");
             expectedList.add("book");
             Parser parser = new Parser();
-            assertEquals(expectedList, parser.processString("find book", 10));
+            assertEquals(expectedList, parser.parseUserCommand("find book", 10));
         } catch (Exception e) {
             fail();
         }
@@ -23,7 +25,7 @@ public class ParserTest {
     public void testDate() {
         try {
             Parser parser = new Parser();
-            assertEquals("Oct 15 2020 6.30pm", parser.processDate("2020-10-15 1830"));
+            assertEquals("Oct 15 2020 06:30 PM", parser.parseDateTime("2020-10-15 1830"));
         } catch (DateException e) {
             fail();
         }
@@ -31,7 +33,7 @@ public class ParserTest {
 
     @Test
     public void testInvalidCommand() {
-        assertThrows(InvalidTaskArgumentException.class,
-                () -> new Parser().processString("event project meeting", 10));
+        assertThrows(InvalidTaskArgumentException.class, () -> new Parser()
+                .parseUserCommand("event project meeting", 10));
     }
 }

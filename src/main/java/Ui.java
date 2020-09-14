@@ -2,18 +2,24 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * Represents the user interface of the Duke application. The
- * user interface is responsible for receiving commands from and
- * displaying messages to the user.
+ * Represents the user interface of the Duke application. The user interface is
+ * responsible for constructing responses to user commands.
  */
 public class Ui {
 
     private Scanner scanner;
 
+    /**
+     * Constructs a Ui object.
+     */
     public Ui() {
         this.scanner = new Scanner(System.in);
     }
 
+    /**
+     * Returns a line display.
+     * @return Line display.
+     */
     public String showLine() {
         return "----------------------------------------------------------" + System.lineSeparator();
     }
@@ -44,9 +50,10 @@ public class Ui {
     }
 
     /**
-     * Displays an error message to the user when the Duke application encounters
-     * an error.
-     * @param message Error message.
+     * Returns a response specifying an error that has occurred during the execution
+     * of a user command.
+     * @param errorMessage Message specifying the error encountered.
+     * @return Response of the user interface.
      */
     public String showError(String errorMessage) {
         String response = "";
@@ -57,8 +64,10 @@ public class Ui {
     }
 
     /**
-     * Displays a message indicating that a particular task has been marked as done.
-     * @param task Task that has been marked as done.
+     * Returns a response indicating that a specified task in the task list of the Duke application
+     * has been marked as done.
+     * @param task Task in the task list that has been marked as done.
+     * @return Response of the user interface.
      */
     public String showDone(Task task) {
         String response = "";
@@ -70,10 +79,11 @@ public class Ui {
     }
 
     /**
-     * Displays a message indicating that a new task has been added to the task list.
-     * The total number of tasks in the task list after addition is also displayed.
+     * Returns a response indicating that a specified task has been added to the task list
+     * of the Duke application. The response also indicates the updated size of the task list.
      * @param task Task that has been added to the task list.
-     * @param size Total number of tasks in the task list after addition.
+     * @param taskListSize Updated size of the task list.
+     * @return Response of the user interface.
      */
     public String showAdd(Task task, int taskListSize) {
         String response = "";
@@ -86,10 +96,11 @@ public class Ui {
     }
 
     /**
-     * Displays a message indicating that a task has been deleted from the task list.
-     * The total number of tasks in the task list after deletion is also displayed.
-     * @param task Task that has been deleted from the task list.
-     * @param size Total number of tasks in the task list after deletion.
+     * Returns a response indicating that specified tasks have been deleted from the task list
+     * of the Duke application. The response also indicates the updated size of the task list.
+     * @param tasks ArrayList of tasks that have been deleted from the task list.
+     * @param taskListSize Updated size of the task list.
+     * @return Response of the user interface.
      */
     public String showDelete(ArrayList<Task> tasks, int taskListSize) {
         String response = "";
@@ -103,6 +114,11 @@ public class Ui {
         return response;
     }
 
+    /**
+     * Returns a response that displays the tasks in the task list of the Duke application.
+     * @param tasks ArrayList of tasks in the task list.
+     * @return Response of the user interface.
+     */
     public String showList(ArrayList<Task> tasks) {
         String response = "";
         response += showLine();
@@ -115,9 +131,10 @@ public class Ui {
     }
 
     /**
-     * Displays tasks in the task list that match a keyword given by the user.
-     * @param lst List of String objects representing the tasks in the task list
-     *            that match the given keyword.
+     * Returns a response indicating the tasks in the task list of the Duke application
+     * that match a given keyword.
+     * @param tasks ArrayList of tasks in the task list that match a given keyword.
+     * @return Response of the user interface.
      */
     public String showFind(ArrayList<String> tasks) {
         String response = "";

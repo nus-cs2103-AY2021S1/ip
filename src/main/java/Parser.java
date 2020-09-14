@@ -6,10 +6,16 @@ import java.util.Date;
 
 /**
  * Represents the parser of the Duke application. The parser is responsible for
- * analysing the user command so that it can be understood by the application.
+ * processing the user command so that it can be executed by the application.
  */
 public class Parser {
 
+    /**
+     * Parses the date or time of a deadline or event.
+     * @param dateTime the date or time of a deadline or event
+     * @return String representation of the date or time.
+     * @throws DateException If an error occurs while parsing the date or time.
+     */
     public static String parseDateTime(String dateTime) throws DateException {
         try {
             return processDateTime(dateTime);
@@ -40,6 +46,21 @@ public class Parser {
         return dateFormat.format(date);
     }
 
+    /**
+     * Parses the user command into a format that can be understood by the command
+     * component of the Duke application.
+     * @param userCommand User command received by the Parser.
+     * @param taskListSize Current size of the task list.
+     * @return List of user command details.
+     * @throws InvalidDoneException If an error occurs while parsing a command to mark
+     * tasks as done.
+     * @throws InvalidTaskArgumentException If an error occurs while parsing a command
+     * to add tasks.
+     * @throws InvalidDeleteException If an error occurs while parsing a command to
+     * delete tasks.
+     * @throws InvalidCommandException If the user command type is invalid.
+     * @throws DateException If an error occurs while parsing the dates of events or deadlines.
+     */
     public ArrayList<String> parseUserCommand(String userCommand, int taskListSize)
             throws InvalidDoneException, InvalidTaskArgumentException, InvalidDeleteException,
             InvalidCommandException, DateException {

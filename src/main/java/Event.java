@@ -1,15 +1,15 @@
 /**
- * Represents an event. An event has both a description of the activity,
- * and a date/time indicating when it occurs.
+ * Represents an event. An event is a task that has a description of the activity,
+ * and a date or time indicating when it occurs.
  */
 public class Event extends Task {
 
     private String at;
 
     /**
-     * Returns an Event.
+     * Constructs an Event with the specified description and date.
      * @param description Description of the Event.
-     * @param at Date/time at which the Event occurs.
+     * @param at Date at which the Event occurs.
      */
     public Event(String description, String at) {
         super(description);
@@ -22,8 +22,7 @@ public class Event extends Task {
     }
 
     /**
-     * Returns a String representation of the Event that will be saved
-     * in the hard disk.
+     * Returns a representation of the Event that will be saved in the hard disk.
      * @return String representation of the Event.
      */
     public String getFormattedString() {

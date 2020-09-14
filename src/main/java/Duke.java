@@ -1,5 +1,10 @@
 import java.io.IOException;
 
+/**
+ * Represents the backend of the Duke application. The backend consists of the
+ * storage, task list, parser, and user interface components which are coordinated
+ * by the command.
+ */
 public class Duke {
 
     private Storage storage;
@@ -9,10 +14,11 @@ public class Duke {
     private Ui ui;
 
     /**
-     * Returns a Duke application.
-     * @param filePath Path of file that contains tasks.
-     * @throws IOException If an error occurs while accessing/creating the
-     * directory/file containing the tasks.
+     * Constructs a Duke application with the specified location for
+     * containing tasks.
+     * @param filePath Path of the file that contains the tasks.
+     * @throws IOException If an error occurs while accessing or creating the
+     * directory or file containing the tasks.
      */
     public Duke(String filePath) throws IOException {
         storage = new Storage(filePath);
@@ -26,14 +32,20 @@ public class Duke {
         }
     }
 
+    /**
+     * Constructs a Duke application with the default location for
+     * containing tasks.
+     * @throws IOException If an error occurs while accessing or creating the
+     * directory or file containing the tasks.
+     */
     public Duke() throws IOException {
         this("data/tasks.txt");
     }
 
     /**
      * Runs the Duke application.
-     * @throws IOException If an error occurs while accessing/creating the
-     * directory/file containing the tasks.
+     * @throws IOException If an error occurs while accessing or creating the
+     * directory or file containing the tasks.
      */
     public void run() throws IOException {
         ui.showWelcome();
@@ -63,6 +75,13 @@ public class Duke {
         }
     }
 
+    /**
+     * Returns a response to the main window based on the user command received.
+     * @param userCommand User command received by the Duke application.
+     * @return Response to the main window.
+     * @throws IOException If an error occurs while accessing or creating the
+     * directory or file containing the tasks.
+     */
     public String getResponse(String userCommand) throws IOException {
         try {
             command.receiveUserCommand(userCommand);

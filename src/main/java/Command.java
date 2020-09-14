@@ -2,21 +2,24 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * Represents the central component of the Duke application. This
- * component coordinates the roles of other components (i.e. the
- * storage, parser, user interface, task list) in executing a user
- * command.
+ * Represents the central backend component of the Duke application. This
+ * component coordinates the roles of other components (i.e. storage, parser,
+ * user interface, task list) in executing a user command.
  */
 public class Command {
 
     private String userCommand;
 
+    /**
+     * Constructs a Command object that has not received
+     * any user command yet.
+     */
     public Command() {
         this.userCommand = "";
     }
 
     /**
-     * Receives a user command from the user interface.
+     * Receives a user command from the main window.
      * @param userCommand User command.
      */
     public void receiveUserCommand(String userCommand) {
@@ -24,7 +27,7 @@ public class Command {
     }
 
     /**
-     * Returns Boolean value indicating whether the Duke application should exit.
+     * Indicates whether the Duke application should exit.
      * @return Boolean value indicating whether the Duke application should exit.
      */
     public boolean exit() {
@@ -32,24 +35,21 @@ public class Command {
     }
 
     /**
-     * Executes a user command. The Command object directs the user command to the
-     * parser for parsing. It then proceeds to alert the task list, storage, and user
-     * interface to perform the appropriate actions.
+     * Executes a user command. The Command object directs the user command to the parser
+     * for parsing. It then proceeds to alert the task list, storage, and user interface to
+     * perform the appropriate actions based on the user command.
      * @param parser Parser of the Duke application.
-     * @param taskList Task list of the Duke application.
+     * @param taskList Task list of the Duke application
      * @param storage Storage system of the Duke application.
      * @param ui User interface of the Duke application.
-     * @throws IOException If an error occurs while accessing/creating the directory/file
+     * @return Response of the Command object to the main window.
+     * @throws IOException If an error occurs while accessing or creating the directory or file
      * containing the tasks.
-     * @throws InvalidTaskArgumentException If an error occurs while parsing
-     * a command to add tasks.
-     * @throws InvalidDoneException If an errors occurs while parsing
-     * a command to mark tasks as done.
-     * @throws InvalidCommandException If the user command cannot be understood.
-     * @throws InvalidDeleteException If an error occurs while parsing
-     * a command to delete tasks.
-     * @throws DateException If an error occurs while parsing the dates/times
-     * of event/deadlines.
+     * @throws InvalidTaskArgumentException If an error occurs while parsing a command to add tasks.
+     * @throws InvalidDoneException If an error occurs while parsing a command to mark tasks as done.
+     * @throws InvalidCommandException If the user command type is invalid.
+     * @throws InvalidDeleteException If an error occurs while parsing a command to delete tasks.
+     * @throws DateException If an error occurs while parsing the dates of events or deadlines.
      */
     public String executeUserCommand(Parser parser, TaskList taskList, Storage storage, Ui ui)
             throws IOException, InvalidTaskArgumentException, InvalidDoneException, InvalidCommandException,

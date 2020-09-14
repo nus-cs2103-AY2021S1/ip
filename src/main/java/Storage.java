@@ -5,25 +5,29 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * Represents the storage system of the Duke application. The storage system is
- * responsible for loading tasks from the hard disk whenever the Duke application
- * starts up, and for saving tasks in the hard disk whenever the task list changes.
+ * Represents the storage system of the Duke application. The storage system is responsible
+ * for loading tasks from the hard disk whenever the Duke application starts up, and for
+ * saving tasks in the hard disk whenever the task list changes.
  */
 public class Storage {
 
     private String filepath;
 
+    /**
+     * Constructs a Storage object with the specified location for containing the tasks.
+     * @param filepath Path of file containing the tasks.
+     */
     public Storage(String filepath) {
         this.filepath = filepath;
     }
 
     /**
-     * Loads tasks from the hard disk when the Duke application starts up.
+     * Loads tasks from the hard disk whenever the Duke application starts up.
      * @return List of String objects representing the tasks in the hard disk.
-     * @throws IOException If an error occurs while accessing/creating the
-     * directory/file containing the tasks
-     * @throws DukeException If the directory/file containing the tasks
-     * did not exist initially.
+     * @throws IOException If an error occurs while accessing or creating the directory
+     * or file containing the tasks.
+     * @throws DukeException If the directory or file containing the tasks does not
+     * exist yet.
      */
     public ArrayList<String> load() throws IOException, DukeException {
         boolean isDirectoryAndFileFound = createFile();
@@ -41,9 +45,10 @@ public class Storage {
     }
 
     /**
-     * Creates the directory/file containing the tasks, if they did not exist initially.
-     * @return Boolean value indicating whether the directory/file existed initially.
-     * @throws IOException If an error occurs while accessing/creating the directory/file.
+     * Creates the directory or file containing the tasks, if it does not exist yet.
+     * @return Boolean value indicating whether the directory or file already exists.
+     * @throws IOException If an error occurs while accessing or creating the directory or
+     * file containing the tasks.
      */
     public boolean createFile() throws IOException {
         boolean isDirectoryAndFileFound = true;
@@ -60,9 +65,10 @@ public class Storage {
     }
 
     /**
-     * Saves the tasks in the task list to the hard disk.
-     * @param lst Task list.
-     * @throws IOException If an error occurs while accessing/creating the directory/file.
+     * Saves the tasks in the specified task list to the hard disk.
+     * @param tasks Task list.
+     * @throws IOException If an error occurs while accessing the directory or file containing
+     * the tasks.
      */
     public void save(ArrayList<Task> tasks) throws IOException {
         File file = new File(filepath);

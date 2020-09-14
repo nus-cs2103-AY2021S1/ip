@@ -1,13 +1,18 @@
 /**
- * Represents a task. The Task class is an abstract class because in the
- * context of the Duke application, it is necessary for the user to specify
- * a task as being a todo, deadline, or event.
+ * Represents a task. A task has a description of the activity, and an indicator
+ * of whether the activity has been completed. A task must be a todo, deadline,
+ * or event.
  */
 public abstract class Task {
 
     protected String description;
     protected boolean isDone;
 
+    /**
+     * Constructs a Task with the specified description. The Task is marked
+     * as not done by default.
+     * @param description Description of the activity associated with the Task.
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
@@ -21,8 +26,7 @@ public abstract class Task {
     }
 
     /**
-     * Returns a String object indicating whether the Task
-     * is done.
+     * Indicates whether the Task is done.
      * @return String object indicating whether the Task is done.
      */
     public String getStatusIcon() {
@@ -35,7 +39,8 @@ public abstract class Task {
     }
 
     /**
-     * Returns an alternative String representation of the Task
+     * Returns an alternate representation of the Task that will be saved in
+     * the hard disk.
      * @return String object representing the Task.
      */
     public abstract String getFormattedString();
