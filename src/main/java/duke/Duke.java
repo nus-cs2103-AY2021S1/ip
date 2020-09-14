@@ -32,12 +32,10 @@ public class Duke {
 
     /**
      * Initialise Duke with filePath of the saved list of tasks.
-     * @param filePath The path to the text file which stores the
-     *                 user's tasks.
      */
-    public Duke(String filePath) {
+    public Duke() {
         this.textUi = new TextUi();
-        this.storage = new Storage(filePath);
+        this.storage = new Storage();
         this.isRunning = true;
         try {
             taskList = new TaskList(storage.load());
@@ -94,11 +92,7 @@ public class Duke {
      * @param args String array passed into main.
      */
     public static void main(String[] args) {
-        String filePath = System.getProperty("user.dir")
-                + (System.getProperty("user.dir").endsWith("text-ui-test")
-                ? "\\..\\data\\taskList.txt"
-                : "\\data\\taskList.txt");
-        Duke dukeProgram = new Duke(filePath);
+        Duke dukeProgram = new Duke();
         dukeProgram.runInConsole();
     }
 }

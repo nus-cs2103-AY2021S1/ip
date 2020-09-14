@@ -2,4 +2,3 @@ todo - 1 - make coffee
 event - 1 - go for tutorial - Thursday 2pm
 todo - 1 - eat dinner
 event - 0 - presentation - 20th Sept 2pm
-deadline - 0 - 2103T iP - SEPTEMBER 18 2020 11:59 PM
