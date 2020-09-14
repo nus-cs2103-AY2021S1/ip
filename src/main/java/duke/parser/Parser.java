@@ -43,26 +43,23 @@ public class Parser {
             if (userCommand.equals("list")) {
                 return new ListCommand();
             }
-            if (wordArray[0].equals("done")) {
+            switch (wordArray[0]) {
+            case "done":
                 return parseDone(wordArray);
-            }
-            if (wordArray[0].equals("delete")) {
+            case "delete":
                 return parseDeletion(wordArray);
-            }
-            if (wordArray[0].equals("find")) {
+            case "find":
                 return parseFind(wordArray);
-            }
-            if (wordArray[0].equals("todo")) {
+            case "todo":
                 return parseTodo(userCommand);
-            }
-            if (wordArray[0].equals("deadline")) {
+            case "deadline":
                 return parseDeadline(userCommand);
-            }
-            if (wordArray[0].equals("event")) {
+            case "event":
                 return parseEvent(userCommand);
+            default:
+                throw new InvalidInputException("I cannot understand your command! "
+                        + "Please ensure your command follows the rules.");
             }
-            throw new InvalidInputException("I cannot understand your command! "
-                    + "Please ensure your command follows the rules.");
         } catch (InvalidInputException e) {
             return new ErrorCommand(e.getMessage());
         }
@@ -86,6 +83,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses a user command that starts with "done."
+     *
+     * @param wordArray The word Array of user command.
+     * @return The command object that Duke will execute.
+     */
     public static Command parseDeletion(String[] wordArray) {
         int noOfWords = wordArray.length;
         try {
@@ -104,6 +107,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses a user command that starts with "find."
+     *
+     * @param wordArray The word Array of user command.
+     * @return The command object that Duke will execute.
+     */
     public static Command parseFind(String[] wordArray) {
         int noOfWords = wordArray.length;
         try {
@@ -120,6 +129,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses a user command that starts with "todo."
+     *
+     * @param userCommand The string of user command.
+     * @return The command object that Duke will execute.
+     */
     public static Command parseTodo(String userCommand) {
         String[] wordArray = userCommand.split(" ");
         int noOfWords = wordArray.length;
@@ -136,6 +151,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses a user command that starts with "deadline."
+     *
+     * @param userCommand The string of user command.
+     * @return The command object that Duke will execute.
+     */
     public static Command parseDeadline(String userCommand) {
         String[] wordArray = userCommand.split(" ");
         int noOfWords = wordArray.length;
@@ -160,6 +181,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses a user command that starts with "event."
+     *
+     * @param userCommand The string of user command.
+     * @return The command object that Duke will execute.
+     */
     public static Command parseEvent(String userCommand) {
         String[] wordArray = userCommand.split(" ");
         int noOfWords = wordArray.length;

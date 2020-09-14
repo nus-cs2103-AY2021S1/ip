@@ -53,6 +53,7 @@ public class MainWindow extends AnchorPane {
     public void setDuke(Duke duke) {
         this.duke = duke;
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(duke.getUi().displayGreeting(), dukeImage));
+
     }
 
     /**
@@ -73,7 +74,7 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
         if (duke.canCloseWindow()) {
             PauseTransition delay = new PauseTransition((Duration.seconds(TIME_DELAY)));
-            delay.setOnFinished(event -> Platform.exit());
+            delay.setOnFinished(event -> System.exit(0));
             delay.play();
         }
 

@@ -41,8 +41,6 @@ public class Storage {
             } else {
                 if (!directory.exists()) {
                     directory.mkdir();
-                    throw new InvalidFilePathException("The directory does not exist at the start."
-                            + " a directory to store the data would be created.");
                 }
                 this.filePath = filePath;
                 this.directoryPath = directoryPath;

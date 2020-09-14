@@ -22,17 +22,32 @@ public class TaskList {
     }
 
     /**
-     * Adds a task to the list of tasks.
+     * Adds a task to the list of tasks. Detect duplicates when duplicate tasks
+     * are added.
      *
      * @param newTask The task to be added.
      */
     public void addTask(Task newTask) throws InvalidRequestException {
         int numberOfTasks = listOfTasks.size();
         boolean isDuplicate = false;
+        String newTaskString = newTask.writeToFile();
+        String[] newWordsParsed = newTaskString.split("\\|");
         for (int i = 0; i < numberOfTasks; i++) {
-            if (newTask.writeToFile().equals(listOfTasks.get(i).writeToFile())) {
+            String taskString = listOfTasks.get(i).writeToFile();
+            String[] wordsParsed = taskString.split("\\|");
+            boolean isSameType = wordsParsed[0].equals(newWordsParsed[0]);
+            boolean hasSameName = (wordsParsed[2].trim()).equals(newWordsParsed[2].trim());
+            boolean isTodo = newWordsParsed[0].equals("todo");
+            if (isSameType && hasSameName && isTodo) {
                 isDuplicate = true;
                 break;
+            }
+            if (isSameType && hasSameName && !isTodo) {
+                boolean isSameTime = (wordsParsed[3].trim()).equals(newWordsParsed[3].trim());
+                if (isSameTime) {
+                    isDuplicate = true;
+                    break;
+                }
             }
         }
         if (!isDuplicate) {
@@ -40,7 +55,7 @@ public class TaskList {
             assert listOfTasks.size() > numberOfTasks : "Addition failed";
         } else {
             throw new InvalidRequestException("Replicates detected."
-                    + " This task has already been marked as done!");
+                    + " This task has already been placed inside the list!");
         }
     }
 

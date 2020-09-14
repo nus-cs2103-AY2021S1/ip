@@ -15,7 +15,7 @@ public class Launcher {
         try {
             Application.launch(Main.class, args);
         } catch (Exception e) {
-            e.getMessage();
+            e.printStackTrace();
         }
     }
 }

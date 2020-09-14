@@ -5,12 +5,7 @@ event|✘|meeting|2pm
 event|✘|meeting2|2020-11-10
 deadline|✘|prepare presentation|Sep 10 2020
 todo|✓|complete assignment
-todo|✓|12
 todo|✓|9
-todo|✘|10
 deadline|✓|11|Nov 11 2020
-event|✓|12|2020-12-12
 todo|✘|13
-event|✓|14|2020-12-10
 todo|✘|15
-deadline|✘|16|Oct 12 2020
