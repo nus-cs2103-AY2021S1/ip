@@ -4,4 +4,298 @@ Hello from
 | | | | | | | |/ / _ \
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
+--------------------------------------------------
+Hello! I'm Duke
+What can I do for you?
+--------------------------------------------------
+
+Type an action (list, todo, deadline, event, done, delete, bye)
+	todo [description],
+	deadline [description] /by [DD/MM/YYYY hhmm],
+	event [description] /at [DD/MM/YYYY hhmm],
+	done [duke.data.task number], delete [duke.data.task number]
+--------------------------------------------------
+--------------------------------------------------
+There is nothing in the list!!
+--------------------------------------------------
+
+Type an action (list, todo, deadline, event, done, delete, bye)
+	todo [description],
+	deadline [description] /by [DD/MM/YYYY hhmm],
+	event [description] /at [DD/MM/YYYY hhmm],
+	done [duke.data.task number], delete [duke.data.task number]
+--------------------------------------------------
+--------------------------------------------------
+Got it. I've added this duke.data.task:
+	[T][X] read book
+Now you have 1 duke.data.task in the list.
+--------------------------------------------------
+
+Type an action (list, todo, deadline, event, done, delete, bye)
+	todo [description],
+	deadline [description] /by [DD/MM/YYYY hhmm],
+	event [description] /at [DD/MM/YYYY hhmm],
+	done [duke.data.task number], delete [duke.data.task number]
+--------------------------------------------------
+--------------------------------------------------
+Got it. I've added this duke.data.task:
+	[D][X] return book (by: Sat, 12 Sep 2020 10:00 PM)
+Now you have 2 duke.data.task in the list.
+--------------------------------------------------
+
+Type an action (list, todo, deadline, event, done, delete, bye)
+	todo [description],
+	deadline [description] /by [DD/MM/YYYY hhmm],
+	event [description] /at [DD/MM/YYYY hhmm],
+	done [duke.data.task number], delete [duke.data.task number]
+--------------------------------------------------
+--------------------------------------------------
+Got it. I've added this duke.data.task:
+	[E][X] project meeting (at: Sat, 22 Aug 2020 01:00 PM)
+Now you have 3 duke.data.task in the list.
+--------------------------------------------------
+
+Type an action (list, todo, deadline, event, done, delete, bye)
+	todo [description],
+	deadline [description] /by [DD/MM/YYYY hhmm],
+	event [description] /at [DD/MM/YYYY hhmm],
+	done [duke.data.task number], delete [duke.data.task number]
+--------------------------------------------------
+--------------------------------------------------
+1. [T][X] read book
+2. [D][X] return book (by: Sat, 12 Sep 2020 10:00 PM)
+3. [E][X] project meeting (at: Sat, 22 Aug 2020 01:00 PM)
+--------------------------------------------------
+
+Type an action (list, todo, deadline, event, done, delete, bye)
+	todo [description],
+	deadline [description] /by [DD/MM/YYYY hhmm],
+	event [description] /at [DD/MM/YYYY hhmm],
+	done [duke.data.task number], delete [duke.data.task number]
+--------------------------------------------------
+--------------------------------------------------
+Nice! I've marked this duke.data.task as done:
+	[T][O] read book
+--------------------------------------------------
+
+Type an action (list, todo, deadline, event, done, delete, bye)
+	todo [description],
+	deadline [description] /by [DD/MM/YYYY hhmm],
+	event [description] /at [DD/MM/YYYY hhmm],
+	done [duke.data.task number], delete [duke.data.task number]
+--------------------------------------------------
+--------------------------------------------------
+1. [T][O] read book
+2. [D][X] return book (by: Sat, 12 Sep 2020 10:00 PM)
+3. [E][X] project meeting (at: Sat, 22 Aug 2020 01:00 PM)
+--------------------------------------------------
+
+Type an action (list, todo, deadline, event, done, delete, bye)
+	todo [description],
+	deadline [description] /by [DD/MM/YYYY hhmm],
+	event [description] /at [DD/MM/YYYY hhmm],
+	done [duke.data.task number], delete [duke.data.task number]
+--------------------------------------------------
+--------------------------------------------------
+Got it. I've added this duke.data.task:
+	[T][X] read book
+Now you have 4 duke.data.task in the list.
+--------------------------------------------------
+
+Type an action (list, todo, deadline, event, done, delete, bye)
+	todo [description],
+	deadline [description] /by [DD/MM/YYYY hhmm],
+	event [description] /at [DD/MM/YYYY hhmm],
+	done [duke.data.task number], delete [duke.data.task number]
+--------------------------------------------------
+--------------------------------------------------
+1. [T][O] read book
+2. [D][X] return book (by: Sat, 12 Sep 2020 10:00 PM)
+3. [E][X] project meeting (at: Sat, 22 Aug 2020 01:00 PM)
+4. [T][X] read book
+--------------------------------------------------
+
+Type an action (list, todo, deadline, event, done, delete, bye)
+	todo [description],
+	deadline [description] /by [DD/MM/YYYY hhmm],
+	event [description] /at [DD/MM/YYYY hhmm],
+	done [duke.data.task number], delete [duke.data.task number]
+--------------------------------------------------
+--------------------------------------------------
+Got it. I've deleted this duke.data.task:
+	[T][X] read book
+Now you have 3 duke.data.task in the list.
+--------------------------------------------------
+
+Type an action (list, todo, deadline, event, done, delete, bye)
+	todo [description],
+	deadline [description] /by [DD/MM/YYYY hhmm],
+	event [description] /at [DD/MM/YYYY hhmm],
+	done [duke.data.task number], delete [duke.data.task number]
+--------------------------------------------------
+--------------------------------------------------
+1. [T][O] read book
+2. [D][X] return book (by: Sat, 12 Sep 2020 10:00 PM)
+3. [E][X] project meeting (at: Sat, 22 Aug 2020 01:00 PM)
+--------------------------------------------------
+
+Type an action (list, todo, deadline, event, done, delete, bye)
+	todo [description],
+	deadline [description] /by [DD/MM/YYYY hhmm],
+	event [description] /at [DD/MM/YYYY hhmm],
+	done [duke.data.task number], delete [duke.data.task number]
+--------------------------------------------------
+--------------------------------------------------
+OOPS!!! I'm sorry, but I don't know what that means :-(
+--------------------------------------------------
+
+Type an action (list, todo, deadline, event, done, delete, bye)
+	todo [description],
+	deadline [description] /by [DD/MM/YYYY hhmm],
+	event [description] /at [DD/MM/YYYY hhmm],
+	done [duke.data.task number], delete [duke.data.task number]
+--------------------------------------------------
+--------------------------------------------------
+OOPS!!! Please enter a duke.data.task number after 'done'.
+--------------------------------------------------
+
+Type an action (list, todo, deadline, event, done, delete, bye)
+	todo [description],
+	deadline [description] /by [DD/MM/YYYY hhmm],
+	event [description] /at [DD/MM/YYYY hhmm],
+	done [duke.data.task number], delete [duke.data.task number]
+--------------------------------------------------
+--------------------------------------------------
+OOPS!!! The duke.data.task number is not valid.
+--------------------------------------------------
+
+Type an action (list, todo, deadline, event, done, delete, bye)
+	todo [description],
+	deadline [description] /by [DD/MM/YYYY hhmm],
+	event [description] /at [DD/MM/YYYY hhmm],
+	done [duke.data.task number], delete [duke.data.task number]
+--------------------------------------------------
+--------------------------------------------------
+OOPS!!! Please enter a duke.data.task number after 'delete'.
+--------------------------------------------------
+
+Type an action (list, todo, deadline, event, done, delete, bye)
+	todo [description],
+	deadline [description] /by [DD/MM/YYYY hhmm],
+	event [description] /at [DD/MM/YYYY hhmm],
+	done [duke.data.task number], delete [duke.data.task number]
+--------------------------------------------------
+--------------------------------------------------
+OOPS!!! The duke.data.task number is not valid.
+--------------------------------------------------
+
+Type an action (list, todo, deadline, event, done, delete, bye)
+	todo [description],
+	deadline [description] /by [DD/MM/YYYY hhmm],
+	event [description] /at [DD/MM/YYYY hhmm],
+	done [duke.data.task number], delete [duke.data.task number]
+--------------------------------------------------
+--------------------------------------------------
+OOPS!!! The description of a todo cannot be empty.
+--------------------------------------------------
+
+Type an action (list, todo, deadline, event, done, delete, bye)
+	todo [description],
+	deadline [description] /by [DD/MM/YYYY hhmm],
+	event [description] /at [DD/MM/YYYY hhmm],
+	done [duke.data.task number], delete [duke.data.task number]
+--------------------------------------------------
+--------------------------------------------------
+OOPS!!! The description of a deadline cannot be empty.
+--------------------------------------------------
+
+Type an action (list, todo, deadline, event, done, delete, bye)
+	todo [description],
+	deadline [description] /by [DD/MM/YYYY hhmm],
+	event [description] /at [DD/MM/YYYY hhmm],
+	done [duke.data.task number], delete [duke.data.task number]
+--------------------------------------------------
+--------------------------------------------------
+Invalid format, missing '/by' key or deadline!!
+--------------------------------------------------
+
+Type an action (list, todo, deadline, event, done, delete, bye)
+	todo [description],
+	deadline [description] /by [DD/MM/YYYY hhmm],
+	event [description] /at [DD/MM/YYYY hhmm],
+	done [duke.data.task number], delete [duke.data.task number]
+--------------------------------------------------
+--------------------------------------------------
+OOPS!!! The description of a deadline cannot be empty.
+--------------------------------------------------
+
+Type an action (list, todo, deadline, event, done, delete, bye)
+	todo [description],
+	deadline [description] /by [DD/MM/YYYY hhmm],
+	event [description] /at [DD/MM/YYYY hhmm],
+	done [duke.data.task number], delete [duke.data.task number]
+--------------------------------------------------
+--------------------------------------------------
+Invalid value for DayOfMonth (valid values 1 - 28/31): 53
+--------------------------------------------------
+
+Type an action (list, todo, deadline, event, done, delete, bye)
+	todo [description],
+	deadline [description] /by [DD/MM/YYYY hhmm],
+	event [description] /at [DD/MM/YYYY hhmm],
+	done [duke.data.task number], delete [duke.data.task number]
+--------------------------------------------------
+--------------------------------------------------
+Invalid value for MonthOfYear (valid values 1 - 12): 90
+--------------------------------------------------
+
+Type an action (list, todo, deadline, event, done, delete, bye)
+	todo [description],
+	deadline [description] /by [DD/MM/YYYY hhmm],
+	event [description] /at [DD/MM/YYYY hhmm],
+	done [duke.data.task number], delete [duke.data.task number]
+--------------------------------------------------
+--------------------------------------------------
+OOPS!!! The description of an event cannot be empty.
+--------------------------------------------------
+
+Type an action (list, todo, deadline, event, done, delete, bye)
+	todo [description],
+	deadline [description] /by [DD/MM/YYYY hhmm],
+	event [description] /at [DD/MM/YYYY hhmm],
+	done [duke.data.task number], delete [duke.data.task number]
+--------------------------------------------------
+--------------------------------------------------
+Invalid format, missing '/at' key or event date!!
+--------------------------------------------------
+
+Type an action (list, todo, deadline, event, done, delete, bye)
+	todo [description],
+	deadline [description] /by [DD/MM/YYYY hhmm],
+	event [description] /at [DD/MM/YYYY hhmm],
+	done [duke.data.task number], delete [duke.data.task number]
+--------------------------------------------------
+--------------------------------------------------
+OOPS!!! The description of an event cannot be empty.
+--------------------------------------------------
+
+Type an action (list, todo, deadline, event, done, delete, bye)
+	todo [description],
+	deadline [description] /by [DD/MM/YYYY hhmm],
+	event [description] /at [DD/MM/YYYY hhmm],
+	done [duke.data.task number], delete [duke.data.task number]
+--------------------------------------------------
+--------------------------------------------------
+Invalid value for HourOfDay (valid values 0 - 23): 98
+--------------------------------------------------
+
+Type an action (list, todo, deadline, event, done, delete, bye)
+	todo [description],
+	deadline [description] /by [DD/MM/YYYY hhmm],
+	event [description] /at [DD/MM/YYYY hhmm],
+	done [duke.data.task number], delete [duke.data.task number]
+--------------------------------------------------
+--------------------------------------------------
+Bye. Hope to see you again soon!
+--------------------------------------------------
 
