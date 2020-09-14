@@ -10,15 +10,16 @@
 
 
 ## Features 
-    - Add tasks
-    - Delete tasks
-    - List all tasks
-    - Mark task as completed
-    - Search for task(s) using keywords
-    - Search for task(s) on particular day
-    - Undo a command
-    
-### Feature 1 
+   * [Adding a task](#feature-1)
+   * [Deleting a task](#feature-2)
+   * [Listing all tasks](#feature-3)
+   * [Mark a task as completed](#feature-4)
+   * [Search for task(s) using keywords](#feature-5)
+   * [Search for task(s) on particular day](#feature-6)
+   * [Undo a command](#feature-7)
+   * [Help](#feature-8)
+
+### Feature 1
 #### Yuki accepts mainly 3 types of task, including `todo`, `deadline`, `event`.
 
 1. Add a `todo` task:
