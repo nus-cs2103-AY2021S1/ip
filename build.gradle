@@ -49,8 +49,7 @@ application {
 }
 
 shadowJar {
-    archiveBaseName = "pingu"
-
+    archiveBaseName = "pingu helpbot"
     archiveClassifier = null
 }
 
