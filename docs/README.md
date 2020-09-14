@@ -37,6 +37,7 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
    8. update...{item number}.../{desc OR date}...{value}
    9. bye
    ```
+ 
 ## Features
 In order for easy of use, the menu displayed to users was design to be **simple**.  
 > Notes to reading menu: 
