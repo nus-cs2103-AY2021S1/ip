@@ -1,4 +1,6 @@
 # TheMatrix User Guide
+![alt text](matrix.png)
+
 The matrix is a desktop app which allows you to keep track of tasks with a Graphical User Interface(GUI). The app has a chat interface which make the monitoring of tasks more human like. 
 - Quick start
 - Features
@@ -45,7 +47,7 @@ Got it. I've added this task:
 Now you have 1 tasks in the list.
  ```
  
- #### Adding a Deadline: `deadline`
+#### Adding a Deadline: `deadline`
 
 Adds a deadline to the list of tasks.
 Format: `deadline <DESCRIPTION> /by <DD-MM-YYYY HH:MM>`
