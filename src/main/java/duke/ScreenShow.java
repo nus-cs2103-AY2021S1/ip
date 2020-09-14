@@ -1,7 +1,6 @@
 package duke;
 
 import javafx.application.Application;
-
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -23,7 +22,6 @@ public class ScreenShow extends Application {
 
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
-    
     @Override
     public void start(Stage stage) {
         //Step 1. Setting up required components
@@ -58,8 +56,7 @@ public class ScreenShow extends Application {
 
         scrollPane.setVvalue(1.0);
         scrollPane.setFitToWidth(true);
-
-        // You will need to import `javafx.scene.layout.Region` for this. 
+        // You will need to import `javafx.scene.layout.Region` for this.
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
         userInput.setPrefWidth(325.0);

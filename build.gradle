@@ -63,4 +63,3 @@ checkstyle {
 run{
     standardInput = System.in
 }
-//apply plugin: "com.github.johnrengelman.shadow"

@@ -5,19 +5,16 @@ package duke;
  */
 public class Ui {
     /**
-     * Shows welcome message.
+     * Returns Duke welcoming message.
+     *
+     * @return String welcoming greeting.
      */
-    public void showWelcome() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("    ______________________________________");
-        System.out.println("        Hello! I'm Duke");
-        System.out.println("        What can I do for you?");
-        System.out.println("    ______________________________________");
+    public String showWelcome() {
+        String greeting = "    ______________________________________\n";
+        greeting += "        Hello! I'm Duke\n";
+        greeting += "        What can I do for you?\n";
+        greeting += "    ______________________________________\n";
+        return greeting;
     }
 
     /**
