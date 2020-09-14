@@ -21,6 +21,7 @@ import javafx.scene.paint.Color;
  * @since v0.2
  */
 public class DialogBox extends HBox {
+    private static final Insets DIALOG_BOX_PADDING = new Insets(10, 0, 10, 0);
     private static final Color DIALOG_COLOR = Color.rgb(255, 255, 255);
     private static final Insets DIALOG_PADDING = new Insets(5);
     private static final Background TEXT_BOX = new Background(
@@ -40,6 +41,7 @@ public class DialogBox extends HBox {
         displayPicture.setFitHeight(100.0);
 
         this.setAlignment(Pos.TOP_RIGHT);
+        this.setPadding(DIALOG_BOX_PADDING);
         this.getChildren().addAll(text, displayPicture);
     }
 

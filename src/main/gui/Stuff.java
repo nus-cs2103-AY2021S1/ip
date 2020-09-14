@@ -6,7 +6,6 @@ import java.util.concurrent.TimeUnit;
 
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -111,8 +110,6 @@ public class Stuff extends Application {
         DialogBox stuffGreeting = DialogBox
                 .getStuffDialog(new Label(ui.printGreetingMessage()), stuffImageView);
 
-        stuffGreeting.setSpacing(10);
-
         dialogContainer.getChildren().addAll(stuffGreeting);
 
         try {
@@ -125,8 +122,6 @@ public class Stuff extends Application {
             DialogBox stuffDialog = DialogBox
                     .getStuffDialog(new Label(ui.printErrorMessage()), stuffImageView);
 
-            stuffDialog.setSpacing(10);
-
             dialogContainer.getChildren().addAll(stuffDialog);
         } catch (InvalidOptionException e) {
             stuffImageView = new ImageView(stuffImage);
@@ -135,8 +130,6 @@ public class Stuff extends Application {
 
             DialogBox stuffDialog = DialogBox
                     .getStuffDialog(new Label(e.getMessage()), stuffImageView);
-
-            stuffDialog.setSpacing(10);
 
             dialogContainer.getChildren().addAll(stuffDialog);
         }
@@ -158,8 +151,6 @@ public class Stuff extends Application {
         if (isEmptyInput) {
             return;
         }
-
-        Insets padding = new Insets(10, 0, 10, 0);
 
         ImageView userImageView = new ImageView(userImage);
         ImageView stuffLoadingImageView = new ImageView(stuffImage);
@@ -188,14 +179,6 @@ public class Stuff extends Application {
                 loadingText, stuffLoadingImageView);
         DialogBox stuffDialog = DialogBox.getStuffDialog(stuffText, stuffImageView);
 
-        userDialog.setPadding(padding);
-        stuffLoadingDialog.setPadding(padding);
-        stuffDialog.setPadding(padding);
-
-        userDialog.setSpacing(10);
-        stuffLoadingDialog.setSpacing(10);
-        stuffDialog.setSpacing(10);
-
         dialogContainer.getChildren().addAll(userDialog, stuffLoadingDialog);
         userInput.clear();
 
@@ -211,6 +194,7 @@ public class Stuff extends Application {
             } catch (IOException e) {
                 DialogBox stuffError = DialogBox
                         .getStuffDialog(new Label(ui.printErrorMessage()), stuffImageView);
+
                 dialogContainer.getChildren().addAll(stuffError);
             }
 
