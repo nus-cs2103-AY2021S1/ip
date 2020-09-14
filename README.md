@@ -1,6 +1,20 @@
-# Duke project template
+# Pikachu Task Manager ChatBot
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+This is a project for a greenfield Java project, adapted from CS2103 Duke, named after the Java mascot _Duke_. Given below are instructions on how to use it. 
+
+## Chatbot Commands:
+
+- find [keyword]
+- date [task date]
+- todo [new todo list]
+- event [new event] \at [DD-MM-YYYY HH:MM]
+- deadline [new event] \by [DD-MM-YYYY HH:MM]
+- tag [task number] [new tag]
+- findtag [tag]
+- untag [task number] [tag]
+- untag [tag]
+- delete [task number]
+
 
 ## Setting up in Intellij
 
