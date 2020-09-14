@@ -90,7 +90,7 @@ public class Ui {
     }
 
     public String showError(String message) {
-        return INDENT + message + "\n" + showDivider();
+        return INDENT + showDivider() + message + "\n" + showDivider();
     }
 
     public String showInvalidCommandMessage() {

@@ -40,7 +40,7 @@ public class Task {
     }
 
     public String toString() {
-        return "[" + getStatusIcon() + "] " + " {" + priority.name() + "} " + description;
+        return "[" + getStatusIcon() + "]" + " {" + priority.name() + "} " + description;
     }
 
     /**
