@@ -7,6 +7,14 @@ import java.util.HashMap;
  */
 public class ShortCuts {
     private static HashMap<String, String> shortCuts = new HashMap<>();
+    //Contains the shortcuts, where the Key is the short form and the value is the original value
+
+    /**
+     * Constructor to insert shortCuts into shortCuts hashMap
+     *
+     * @param shortCut is the key for the hashMap
+     * @param originalForm is the value for the hashMap
+     */
     private ShortCuts(String shortCut, String originalForm) {
         shortCuts.put(shortCut, originalForm);
     }

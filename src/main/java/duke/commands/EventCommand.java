@@ -31,7 +31,7 @@ public class EventCommand extends AddCommand {
      * Adds Event task or handle exceptions
      *
      * @param tasks to change the taskList if necessary when no error
-     * @param ui
+     * @param ui to store the DukeException that may be thrown if there is an error in user input
      * @param storage to change the file in the if necessary when no error
      * @return String returns the string of the output that informs the action has been complete.
      * @throws DukeException if there no description after Event no time or time is wrong format

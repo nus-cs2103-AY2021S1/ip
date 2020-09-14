@@ -10,9 +10,9 @@ public class DeadlineException extends DukeException {
      * descriptionPresent tests shows whether the description is present in the input of the user or not.
      * If description is not present it is true, else it is false
      */
-    private boolean isDescriptionAbsent;
-    private boolean isDateTimeFormatWrong;
-    private boolean isDateTimeAbsent;
+    private boolean isDescriptionAbsent; //true if description for deadline keyword is not given, false otherwise
+    private boolean isDateTimeFormatWrong; //true if date and/ or time is given in wrong format by user, false otherwise
+    private boolean isDateTimeAbsent; //true if date is not given by user, false otherwise
 
     /**
      * constructor for deadline exception that assigns description and format values

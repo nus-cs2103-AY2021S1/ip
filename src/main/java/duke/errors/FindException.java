@@ -4,9 +4,9 @@ package duke.errors;
  * The class FindException deals with what happens when an error occurs for task with find keyword
  */
 public class FindException extends DukeException {
-    private boolean noMatches;
-    private boolean isDescriptionAbsent;
-    private String description;
+    private boolean noMatches; //true if there are no matches from user input to the Task names
+    private boolean isDescriptionAbsent; //true if description is not given by input, false otherwise
+    private String description; //the description given by user(words to search for in tasks)
 
     /**
      * constructor assigns values of description and string

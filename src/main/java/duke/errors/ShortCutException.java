@@ -6,10 +6,10 @@ import duke.helpers.ShortCuts;
  * used when there is an error in user input while adding short cut
  */
 public class ShortCutException extends DukeException {
-    private boolean isDescriptionAbsent;
-    private boolean isShortCutAbsent;
-    private boolean isShortCutAlreadyPresent;
-    private boolean isUselessShortCut;
+    private boolean isDescriptionAbsent; //true if the description is absent in user input, false otherwise
+    private boolean isShortCutAbsent; //true if short cut is not provided
+    private boolean isShortCutAlreadyPresent; //true if short cut is already defined, false otherwise
+    private boolean isUselessShortCut; //if short cut is defined for a command not read by Duke
     private String shortCut;
 
     /**

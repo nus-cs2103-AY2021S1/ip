@@ -24,7 +24,7 @@ public class TodoCommand extends AddCommand {
      * Adds deadline into a task list in TaskList.
      *
      * @param tasks to change the taskList if necessary
-     * @param ui
+     * @param ui to store the DukeException that may be thrown if there is an error in user input
      * @param storage to change the file in the if necessary
      * @return String returns the string of the output that informs the action has been complete.
      * @throws DukeException whenever there is an error, no

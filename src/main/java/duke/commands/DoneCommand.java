@@ -27,7 +27,7 @@ public class DoneCommand extends Command {
      * Completes done task and handle error
      *
      * @param tasks to change the taskList as a task is completed
-     * @param ui
+     * @param ui to store the DukeException that may be thrown if there is an error in user input
      * @param storage to change the file as task is completed
      * @return String returns the string of the output that informs the done action has been complete.
      * @throws DukeException thrown if the ID is more than number of ID is absent

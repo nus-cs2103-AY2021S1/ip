@@ -30,7 +30,7 @@ public class DeadlineCommand extends AddCommand {
      * to add deadline into a task list in TaskList
      *
      * @param tasks to change the taskList if necessary
-     * @param ui
+     * @param ui to store the DukeException that may be thrown if there is an error in user input
      * @param storage to change the file in the if necessary
      * @return String returns the string of the output that informs the action is successful
      * @throws DukeException whenever there is an error, where the time adn or date is absent or in wrong format, no

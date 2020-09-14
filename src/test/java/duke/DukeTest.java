@@ -11,7 +11,15 @@ import java.util.Scanner;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class DukeTest {
-    public static boolean equal(String s1, String s2) throws FileNotFoundException {
+    /**
+     * Tests whether the 2 files at the filePaths given contain same content
+     *
+     * @param s1 filePath of expected result
+     * @param s2 filePath of the actual result
+     * @return true if both files contain the same values and false otherwise
+     * @throws FileNotFoundException if file is not present in either scenario
+     */
+    private static boolean equal(String s1, String s2) throws FileNotFoundException {
         File exp = new File(s1);
         File act = new File(s2);
         Scanner e = new Scanner(exp);

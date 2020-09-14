@@ -11,10 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * used to handle case where find is keyword
+ * Handles case where find is keyword
  */
 public class FindCommand extends Command {
     private List<Task> tasks = new ArrayList<>();
+    //contains list of Task objects whose name contains words after the find keyword
 
     /**
      * Assigns string to a value of string
@@ -29,7 +30,7 @@ public class FindCommand extends Command {
      * Finds the tasks which contains keyword in string
      *
      * @param tasks to look for the task's string value
-     * @param ui
+     * @param ui to store the DukeException that may be thrown if there is an error in user input
      * @param storage no need
      * @return String returns the string of the output that informs the find action is successful.
      * @throws DukeException used to throw error when no words mentioned after find or the keyword is not present in
@@ -68,7 +69,7 @@ public class FindCommand extends Command {
         }
     }
     /**
-     * sets the Tasks list here with Tasks containing key words.
+     * sets the Tasks list here with Tasks containing words given by user.
      *
      * @param strings contains String of key words
      * @param tasks contains all the current tasks
@@ -77,24 +78,48 @@ public class FindCommand extends Command {
         List<Task> allTasks = tasks.getAllTasks();
         for (int i = 0; i < tasks.getAllTasks().size(); i++) {
             Task task = allTasks.get(i);
-            String string = task.getName();
-            String[] comp = string.split(" ", -2);
-            boolean contains = false;
-            for (int j = 0; j < strings.length; j++) {
-                String s = strings[j];
-                for (int k = 0; k < comp.length; k++) {
-                    if (comp[k].equals(s)) { //checks whether Task name/description contains keywords given by user
-                        contains = true; //then assigns contains true if that is the case
-                        break;
-                    }
-                }
-            }
+            String string = task.getName(); //gives name of Task object
+            String[] comp = string.split(" ", -2); //split object into separate words
+            boolean contains = taskContainsUserWords(strings, comp); //
             if (contains) {
                 this.tasks.add(task); //if contains is true, Task is added to ArrayList of tasks.
             }
         }
     }
 
+    /**
+     * Checks whether the Task contains the words given by user
+     *
+     * @param strings array of Task name split into different words
+     * @param comp array of user words split into different words
+     * @return true is task contains words given by user and false otherwise
+     */
+    private boolean taskContainsUserWords(String[] strings, String[] comp) {
+        boolean contains = false;
+        for (int j = 0; j < strings.length; j++) {
+            String word = strings[j];
+            contains = wordPresentInUserWords(word, comp);
+        }
+        return contains;
+    }
+
+    /**
+     * Checks whether a word is the same as the array of words(String) given by user
+     *
+     * @param word a word from from Task name
+     * @param comp array of words given by user
+     * @return true if word is contained in comp and false otherwise
+     */
+    private boolean wordPresentInUserWords(String word, String[] comp) {
+        boolean contains = false;
+        for (int k = 0; k < comp.length; k++) {
+            if (comp[k].equals(word)) { //checks whether Task name/description contains keywords given by user
+                contains = true; //then assigns contains true if that is the case
+                break;
+            }
+        }
+        return contains;
+    }
     /**
      * Prints out the find message
      *

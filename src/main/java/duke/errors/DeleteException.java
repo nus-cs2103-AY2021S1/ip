@@ -11,8 +11,8 @@ public class DeleteException extends DukeException {
      * If ID is not present it is true, else it is false
      * deleted checks whether the task was previously deleted, if deleted it is true else false.
      */
-    private boolean isiDAbsent;
-    private boolean isNotiDDefined;
+    private boolean isiDAbsent; //true if iD is not given by user, false otherwise
+    private boolean isNotiDDefined; // true if iD is not defined yet, false otherwise
 
     /**
      * constructor that assigns tne 2 variables its respective values

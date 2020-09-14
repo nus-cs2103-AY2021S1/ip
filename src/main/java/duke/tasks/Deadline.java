@@ -4,7 +4,7 @@ package duke.tasks;
  * The deadline is a subclass of Task and it is used to describe tasks that has to be completed by a specific day.
  */
 public class Deadline extends Task {
-    private String day = null;
+    private String dayAndOrTime; //the day and or time that Task deadline had to be completed by
     /**
      * Assigns the name and day values, initializes Deadline task
      *
@@ -13,7 +13,7 @@ public class Deadline extends Task {
      */
     public Deadline(String name, String day) {
         super(name);
-        this.day = day;
+        this.dayAndOrTime = day;
     }
 
     /**
@@ -21,11 +21,11 @@ public class Deadline extends Task {
      *
      * @param name argument in super class constructor
      * @param done argument in super class constructor
-     * @param day assigns to this.day
+     * @param dayAndOrTime assigns to this.day
      */
-    public Deadline(String name, boolean done, String day) {
+    public Deadline(String name, boolean done, String dayAndOrTime) {
         super(name, done);
-        this.day = day;
+        this.dayAndOrTime = dayAndOrTime;
     }
 
     /**
@@ -36,7 +36,7 @@ public class Deadline extends Task {
      * and also mentions the deadline.
      */
     public String toString() {
-        return "[D]" + super.toString() + "(by: " + this.day + ")";
+        return "[D]" + super.toString() + "(by: " + this.dayAndOrTime + ")";
     }
 
     /**
@@ -46,7 +46,7 @@ public class Deadline extends Task {
      * @return the string representation
      */
     public String inputListFormat() {
-        return "D" + super.inputListFormat() + " | " + this.day; //format of Tasks to appear in file in Storage
+        return "D" + super.inputListFormat() + " | " + this.dayAndOrTime; //format of Tasks to appear in file in Storage
     }
 
 }

@@ -9,11 +9,11 @@ public class EventException extends DukeException {
      * description tests shows whether the description is present in the input of the user or not.
      * If description is not present it is true, else it is false
      */
-    private boolean isDescriptionAbsent;
-    private boolean isEndTimeAbsent;
-    private boolean isStartAfterEnd;
-    private boolean isDateTimeWrongFormat;
-    private boolean isStartDateTimeEmpty;
+    private boolean isDescriptionAbsent; //true if the user input does not have description, else false
+    private boolean isEndTimeAbsent; //true if end time is not given by user, false otherwise
+    private boolean isStartAfterEnd; //true if start>end, false otherwise
+    private boolean isDateTimeWrongFormat; //true if date and/ or time is in wrong format, false otherwise
+    private boolean isStartDateTimeEmpty; //true if start date and/ or time is not given by user, false otherwise
 
     /**
      *

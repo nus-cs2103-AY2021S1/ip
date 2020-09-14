@@ -13,8 +13,8 @@ public abstract class Command {
      * commandName which contains information on task and details to perform task
      * isExit is used to tell whether program terminates, where id true, it terminates
      */
-    protected String commandDescription;
-    protected int lengthOfKeyword;
+    protected String commandDescription; //the String input given by user
+    protected int lengthOfKeyword; //length of keyword eg for find is 4
     private boolean isExit = false;
 
     /**

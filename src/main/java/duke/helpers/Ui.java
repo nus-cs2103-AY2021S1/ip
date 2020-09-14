@@ -11,8 +11,12 @@ import java.util.Scanner;
  * deals with interactions with the user
  */
 public class Ui {
-    private DukeException dukeException;
-    private Scanner sc;
+    private DukeException dukeException; //Contains the DukeException if it is thrown
+    private Scanner sc; //Used to scan the user input
+
+    /**
+     * Constructor that assigns Scanner sc to Scanner object, to scan values given by user
+     */
     public Ui() {
         sc = new Scanner(System.in);
     }

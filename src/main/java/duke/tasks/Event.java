@@ -4,19 +4,19 @@ package duke.tasks;
  * The Event is a subclass of Task and it is used to describe tasks that has to be completed by a specific day and time
  */
 public class Event extends Task {
-    private String dateTime;
-    private String end;
+    private String startDateAndOrTime; //the start date and/or time of the event
+    private String endDateAndOrTime; //the end date and/or time of the event
 
     /**
      * Assigns the name, done and day variables with values and used to initialize Event task
      *
      * @param name super(name) so that it does whatever is mentioned in the parent class
-     * @param dateTime assigns this.dayTime to dayTime value
+     * @param start assigns this.dayTime to dayTime value
      */
-    public Event(String name, String dateTime, String end) {
+    public Event(String name, String start, String end) {
         super(name);
-        this.dateTime = dateTime;
-        this.end = end;
+        this.startDateAndOrTime = start;
+        this.endDateAndOrTime = end;
     }
 
     /**
@@ -24,11 +24,13 @@ public class Event extends Task {
      *
      * @param name argument in super class constructor
      * @param done argument in super class constructor
+     * @param startDateAndOrTime argument used to assign this.startDateAndOrTime with value
+     * @param endDateAndOrTime  argument assigns this.endDateAndOrTime with value
      */
-    public Event(String name, boolean done, String dateTime, String end) {
+    public Event(String name, boolean done, String startDateAndOrTime, String endDateAndOrTime) {
         super(name, done);
-        this.dateTime = dateTime;
-        this.end = end;
+        this.startDateAndOrTime = startDateAndOrTime;
+        this.endDateAndOrTime = endDateAndOrTime;
     }
 
     /**
@@ -38,7 +40,7 @@ public class Event extends Task {
      *      * and also mentions the Event.
      */
     public String toString() {
-        return "[E]" + super.toString() + "(at: " + this.dateTime + "-" + this.end + ")";
+        return "[E]" + super.toString() + "(at: " + this.startDateAndOrTime + "-" + this.endDateAndOrTime + ")";
     }
 
     /**
@@ -48,7 +50,7 @@ public class Event extends Task {
      * @return the string representation
      */
     public String inputListFormat() {
-        return "E" + super.inputListFormat() + " | " + this.dateTime + "-" + this.end;
+        return "E" + super.inputListFormat() + " | " + this.startDateAndOrTime + "-" + this.endDateAndOrTime;
         //format of Tasks to appear in file in Storage
     }
 }

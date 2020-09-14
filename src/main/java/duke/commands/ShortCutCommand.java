@@ -31,7 +31,7 @@ public class ShortCutCommand extends Command {
      * Duke gives String depending on input, in this case that short cut has been added
      *
      * @param tasks used to access tasks in its list and change if necessary
-     * @param ui
+     * @param ui to store the DukeException that may be thrown if there is an error in user input
      * @param storage to change the input there if necessary
      * @return String that short cut is added
      * @throws DukeException when the user input is wrong such as

@@ -4,7 +4,7 @@ package duke.errors;
  * This exception is thrown whenever there is a file absent at a specific path mentioned in the filePath
  */
 public class FileAbsentException extends DukeException {
-    private String isFilePathAbsent;
+    private String isFilePathAbsent; //the String of the filePath where file is not present
 
     /**
      * This assigns filePath variable to a value

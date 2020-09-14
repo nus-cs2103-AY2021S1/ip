@@ -10,7 +10,7 @@ import java.util.List;
  * contains the task list e.g., it has operations to add/delete tasks in the list
  */
 public class TaskList {
-    private List<Task> allTasks;
+    private List<Task> allTasks; //Contains all the current tasks
     /**
      * Assigns allTasks a value
      *

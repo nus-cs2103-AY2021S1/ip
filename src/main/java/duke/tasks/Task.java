@@ -10,8 +10,8 @@ public abstract class Task {
      * Tasks is made static because it contains the different tasks that are added, and therefore it is not limited to
      * a single instance of Task
      */
-    private boolean done;
-    private String name;
+    private boolean done; //true if Task is completed, false otherwise
+    private String name; //gives name of the Task
 
     /**
      * constructor assigns name variable a value

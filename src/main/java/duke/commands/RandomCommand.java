@@ -22,7 +22,7 @@ public class RandomCommand extends Command {
      * Gives wrong input exception
      *
      * @param tasks
-     * @param ui
+     * @param ui to store the DukeException that is thrown since there is an error in user input
      * @param storage
      * @return String returns the string of the output that informs the action has been complete.
      * @throws WrongInputException is thrown
