@@ -66,7 +66,7 @@ public class Parser {
      * checks whether list is said by user
      *
      * @param input String by user
-     * @return boolean whether list is said, true if bye is said and false otherwise
+     * @return boolean whether list is said, true if list is said and false otherwise
      */
     private static boolean isList(String input) {
         return input.length() >= 4 && input.equals("list");
@@ -76,7 +76,7 @@ public class Parser {
      * checks whether delete is said by user
      *
      * @param input String by user
-     * @return boolean whether delete is said, true if bye is said and false otherwise
+     * @return boolean whether delete is said, true if delete is said and false otherwise
      */
     private static boolean isDelete(String input) {
         return input.length() >= 6 && input.substring(0, 6).equals("delete");
@@ -86,7 +86,7 @@ public class Parser {
      * checks whether done is said by user
      *
      * @param input String by user
-     * @return boolean whether done is said, true if bye is said and false otherwise
+     * @return boolean whether done is said, true done is said and false otherwise
      */
     private static boolean isDone(String input) {
         return input.length() >= 4 && input.substring(0, 4).equals("done");
@@ -106,7 +106,7 @@ public class Parser {
      * checks whether event is said by user
      *
      * @param input String by user
-     * @return boolean whether event is said, true if bye is said and false otherwise
+     * @return boolean whether event is said, true if event is said and false otherwise
      */
     private static boolean isEvent(String input) {
         return input.length() >= 5 && input.substring(0, 5).equals("event");
@@ -116,7 +116,7 @@ public class Parser {
      * checks whether deadline is said by user
      *
      * @param input String by user
-     * @return boolean whether deadline is said, true if bye is said and false otherwise
+     * @return boolean whether deadline is said, true if deadline is said and false otherwise
      */
     private static boolean isDeadline(String input) {
         return input.length() >= 8 && input.substring(0, 8).equals("deadline");
@@ -126,7 +126,7 @@ public class Parser {
      *checks whether find is said by user
      *
      * @param input String by user
-     * @return boolean whether find is said, true if bye is said and false otherwise
+     * @return boolean whether find is said, true if find is said and false otherwise
      */
     private static boolean isFind(String input) {
         return input.length() >= 4 && input.substring(0, 4).equals("find");

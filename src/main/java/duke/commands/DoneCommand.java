@@ -99,7 +99,7 @@ public class DoneCommand extends Command {
         String s = "";
         for (int i = 0; i < tasks.getAllTasks().size(); i++) {
             s = s + tasks.getAllTasks().get(i).inputListFormat() + "\n";
-            //new taskList String since done is being set for task with ID mentioned by user
+            //new taskList String since done is being set for task with iD mentioned by user
         }
         return s;
     }

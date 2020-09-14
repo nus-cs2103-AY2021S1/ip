@@ -18,6 +18,10 @@ public class Duke {
     private Storage storage; //deals with loading tasks from the file, saving tasks and shortcuts in the file
     private TaskList tasks; //contains the task list e.g., it has operations to add/delete tasks in the list
     private Ui ui = new Ui(); //deals with interactions with the user
+
+    /**
+     * A constructor used to initialise Duke.
+     */
     public Duke(){}
 
     /**

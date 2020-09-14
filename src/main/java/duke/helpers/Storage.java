@@ -156,7 +156,7 @@ public class Storage {
     /**
      * This splits the short form into the original form and short form
      *
-     * @param shortFormString is the String input tby user
+     * @param shortFormString is the String input by user
      * @return String array containing the original and the short form of keywords
      */
     public String[] shortFormDictionary(String shortFormString) {

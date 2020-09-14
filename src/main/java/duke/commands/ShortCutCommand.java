@@ -147,6 +147,6 @@ public class ShortCutCommand extends Command {
      */
     private boolean containsUselessShortCut(String originalForm) {
         return !ShortCuts.getShortCuts().containsValue(originalForm);
-        //since the short cut in ShorCut contains value of all tasks recognised by user
+        //since the short cut in ShortCut contains value of all tasks recognised by user
     }
 }
