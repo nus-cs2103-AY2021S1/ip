@@ -37,7 +37,7 @@ public class MainWindow extends AnchorPane {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";*/
-        String text = this.topLine + "Hello! I'm Duke.\nWhat can I do for you?" + this.bottomLine;
+        String text = this.topLine + "Pika Pika Pikachu!\nWhat can I do for you?" + this.bottomLine;
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(text, dukeImage)
         );
