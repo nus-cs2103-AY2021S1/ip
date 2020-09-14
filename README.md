@@ -1,7 +1,7 @@
 # Duke Chat Bot User Guide
 
 ## User Interface
-![UI](Ui.png)
+![UI](docs/Ui.png)
 
 ## Features 
 
