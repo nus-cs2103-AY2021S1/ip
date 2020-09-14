@@ -50,7 +50,9 @@ public class Event extends Task {
         } catch (DateTimeParseException e) {
             try {
                 this.atDate = LocalDate.parse(this.at);
-            } catch (DateTimeParseException ignored) { }
+            } catch (DateTimeParseException ignored) {
+                // at is not in format of localDate or localDateTime.
+            }
         }
     }
 

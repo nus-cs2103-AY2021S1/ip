@@ -52,7 +52,7 @@ public class Deadline extends Task {
             try {
                 this.byDate = LocalDate.parse(this.by);
             } catch (DateTimeParseException ignored) {
-                this.byDate = null;
+                // by is not in the format of localDate or localDateTime
             }
         }
     }

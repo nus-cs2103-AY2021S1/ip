@@ -31,4 +31,4 @@ jobs:
           java-package: jdk+fx
 
       - name: Build and test with Gradle
-        run: ./gradlew test
+        run: ./gradlew check

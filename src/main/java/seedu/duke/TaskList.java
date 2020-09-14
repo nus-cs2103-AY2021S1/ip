@@ -52,9 +52,9 @@ public class TaskList {
      */
     public List<Task> getListOfTasksWithKeyword(String keyword) {
         return this.listOfTasks.stream().filter(
-                task -> keyword.charAt(0) == '#'
-                        ? task.getTag().equals(keyword.substring(1))
-                        : task.getDescription().contains(keyword)
+            task -> keyword.charAt(0) == '#'
+                    ? task.getTag().equals(keyword.substring(1))
+                    : task.getDescription().contains(keyword)
         ).collect(Collectors.toList());
     }
 
