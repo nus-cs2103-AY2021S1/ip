@@ -48,7 +48,7 @@ public class AddCommand implements ReversibleCommand {
         taskList.add(newTask);
         storage.saveList(taskList);
         reversibleCommands.add(this);
-        return ui.giveResponse("\tGot it. I've added this task:\n\t\t"
+        return ui.giveResponse("    Got it. I've added this task:\n        "
             + newTask
             + taskList.sizeDescription());
     }
@@ -57,7 +57,7 @@ public class AddCommand implements ReversibleCommand {
     public String undo(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         Task removed = taskList.removeLast();
         storage.saveList(taskList);
-        return ui.giveResponse("\tOK! I've removed the task you just added now:\n\t\t"
+        return ui.giveResponse("    OK! I've removed the task you just added now:\n        "
             + removed
             + taskList.sizeDescription());
     }

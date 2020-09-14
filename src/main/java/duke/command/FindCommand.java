@@ -48,7 +48,7 @@ public class FindCommand implements Command {
             }
         }
         if (results.size() == 0) {
-            return ui.giveResponse("\tI cannot find any task containing " + keyword + " !");
+            return ui.giveResponse("    I cannot find any task containing " + keyword + " !");
         } else {
             return ui.displayList(results, "Here are the matching tasks in your list:");
         }

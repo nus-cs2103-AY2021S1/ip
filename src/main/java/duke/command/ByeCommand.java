@@ -27,6 +27,6 @@ public class ByeCommand implements Command {
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage,
                           LinkedList<ReversibleCommand> reversibleCommands) throws DukeException {
-        return ui.giveResponse("\tBye. Hope to see you again soon!");
+        return ui.giveResponse("    Bye. Hope to see you again soon!");
     }
 }

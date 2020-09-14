@@ -56,7 +56,7 @@ public class DeleteCommand implements ReversibleCommand {
         storage.saveList(taskList);
         this.deletedTask = Optional.of(task);
         reversibleCommands.add(this);
-        return ui.giveResponse("\tNoted. I've removed this task:\n\t\t"
+        return ui.giveResponse("    Noted. I've removed this task:\n        "
             + task
             + taskList.sizeDescription());
     }
@@ -66,7 +66,7 @@ public class DeleteCommand implements ReversibleCommand {
         Task taskToReAdd = deletedTask.orElseThrow(() -> new DukeException("I cannot restore the deleted task."));
         taskList.add(index, taskToReAdd);
         storage.saveList(taskList);
-        return ui.giveResponse("\tOK! I've re-added the task you just deleted:\n\t\t"
+        return ui.giveResponse("    OK! I've re-added the task you just deleted:\n        "
             + taskToReAdd
             + taskList.sizeDescription());
     }

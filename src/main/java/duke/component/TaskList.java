@@ -141,7 +141,7 @@ public class TaskList {
      * @return  a description of the size of the task list.
      */
     public String sizeDescription() {
-        return "\n\tNow you have " + list.size()
+        return "\n    Now you have " + list.size()
             + " task" + (list.size() > 1 ? "s" : "") + " in the list.";
     }
 

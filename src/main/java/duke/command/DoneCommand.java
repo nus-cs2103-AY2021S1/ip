@@ -54,13 +54,13 @@ public class DoneCommand implements ReversibleCommand {
         taskList.markAsDone(index);
         storage.saveList(taskList);
         reversibleCommands.add(this);
-        return ui.giveResponse("\tNice! I've marked this task as done:\n\t\t" + task);
+        return ui.giveResponse("    Nice! I've marked this task as done:\n        " + task);
     }
     @Override
     public String undo(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         taskList.markAsUndone(index);
         Task task = taskList.get(index);
         storage.saveList(taskList);
-        return ui.giveResponse("\tOK! I've unchecked the task:\n\t\t" + task);
+        return ui.giveResponse("    OK! I've unchecked the task:\n        " + task);
     }
 }

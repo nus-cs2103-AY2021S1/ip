@@ -6,8 +6,8 @@ import java.util.Scanner;
  * The class that receive user's input and print corresponding responses on the screen.
  */
 public class Ui {
-    public static final String GREETING = "\tHello! I'm Tachikoma\n" + "\tWhat can I do for you?";
-    private static final String DIVIDER = "\t____________________________________________________________\n";
+    public static final String GREETING = "    Hello! I'm Tachikoma\n" + "    What can I do for you?";
+    private static final String DIVIDER = "    ____________________________________________________________\n";
     private Scanner sc;
 
     /**
@@ -42,9 +42,9 @@ public class Ui {
      */
     public String displayList(TaskList taskList, String description) {
 
-        String list = "\t" + description + "\n";
+        String list = "    " + description + "\n";
         for (int i = 1; i <= taskList.size(); i++) {
-            list += "\t " + i + ". " + taskList.get(i - 1) + "\n";
+            list += "     " + i + ". " + taskList.get(i - 1) + "\n";
         }
 
         //remove the extra "\n"
