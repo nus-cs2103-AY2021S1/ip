@@ -1,9 +1,8 @@
-E | 1 | project meeting | 01-01-2020 12:30 | bru
+E | 1 | project meeting | 01-01-2020 12:30 | done
 D | 0 | return book | 23-02-2020 00:00 | bro
 T | 0 | sing song | sis
 T | 1 | run | bro
 T | 0 | swim | deeddd
 T | 1 | eat | 
-T | 1 | swim | 
 D | 0 | return book | 23-02-2020 00:00 | 
 E | 0 | project meeting | 01-01-2020 12:30 | 
