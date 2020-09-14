@@ -1,7 +1,8 @@
-package duke;
+package duke.ui;
 
 import java.io.IOException;
 
+import duke.Duke;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -15,7 +16,7 @@ public class Main extends Application {
 
     private static final String PATH_TO_MAIN_WINDOW = "/view/MainWindow.fxml";
     private static final String PATH_TO_MAIN_WINDOW_STYLES = "/view/MainWindow.css";
-    private static final String NAME = "TheDuke";
+    private static final String NAME = "Duke task manager";
 
     private final Duke duke = new Duke();
 

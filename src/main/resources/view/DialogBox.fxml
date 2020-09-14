@@ -7,24 +7,28 @@
 
 <?import javafx.scene.layout.VBox?>
 <fx:root alignment="TOP_RIGHT"
-         maxHeight="620.0"
+         fillHeight="false"
+         minHeight="-Infinity"
+         maxHeight="Infinity"
+         spacing="5.0"
          type="javafx.scene.layout.HBox"
          xmlns="http://javafx.com/javafx/11"
          xmlns:fx="http://javafx.com/fxml/1">
-    <VBox style="-fx-background-color: whitesmoke;
-    -fx-border-width: 0.5;
-    -fx-border-color: transparent;
-    -fx-border-radius: 30;
-    -fx-padding: 20">
+    <VBox
+          styleClass="speechBubble"
+          fx:id="container"
+          alignment="TOP_RIGHT"
+          maxHeight="-Infinity"
+    >
         <Label
+                styleClass="textStyle"
                 fx:id="dialog"
-                text="Label"
-                textFill="#2c2929"
+                minWidth="20"
+                maxWidth="400"
+                maxHeight="Infinity"
+                textFill="#333333"
+                lineSpacing="2"
                 wrapText="true">
-            <HBox.margin>
-                <Insets left="8.0"
-                        right="8.0"/>
-            </HBox.margin>
         </Label>
     </VBox>
     <ImageView fx:id="displayPicture"
@@ -32,14 +36,8 @@
                fitWidth="200.0"
                pickOnBounds="true"
                preserveRatio="true">
-        <HBox.margin>
-            <Insets left="5.0"/>
-        </HBox.margin>
     </ImageView>
     <padding>
-        <Insets bottom="15.0"
-                left="1.0"
-                right="3.0"
-                top="15.0"/>
+        <Insets top="7.5" bottom="7.5"/>
     </padding>
 </fx:root>

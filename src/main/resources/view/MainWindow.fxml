@@ -8,13 +8,15 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
-<AnchorPane maxHeight="Infinity"
-            maxWidth="Infinity"
-            minHeight="680.0"
-            minWidth="700.0"
-            xmlns="http://javafx.com/javafx/11"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="duke.MainWindow">
+
+<AnchorPane
+        maxHeight="Infinity"
+        maxWidth="Infinity"
+        minHeight="650.0"
+        minWidth="800.0"
+        xmlns="http://javafx.com/javafx/11"
+        xmlns:fx="http://javafx.com/fxml/1"
+        fx:controller="duke.ui.MainWindow">
     <GridPane AnchorPane.bottomAnchor="0"
               AnchorPane.leftAnchor="0"
               AnchorPane.rightAnchor="0"
@@ -27,9 +29,9 @@
         </rowConstraints>
         <TextField styleClass="textFieldStyle"
                    fx:id="userInput"
-                   minHeight="50.0"
-                   minWidth="620.0"
-                   promptText="Enter a command"
+                   minHeight="45.0"
+                   minWidth="680.0"
+                   promptText="Enter a command..."
                    onAction="#handleUserInput"
                    AnchorPane.bottomAnchor="1.0"
                    GridPane.columnIndex="0"
@@ -38,7 +40,7 @@
                 fx:id="sendButton"
                 mnemonicParsing="false"
                 onAction="#handleUserInput"
-                prefHeight="50.0"
+                prefHeight="45.0"
                 prefWidth="80.0"
                 text=">"
                 textAlignment="CENTER"
@@ -48,6 +50,7 @@
         </Button>
         <ScrollPane fx:id="scrollPane"
                     fitToWidth="true"
+                    fitToHeight="true"
                     hbarPolicy="NEVER"
                     hvalue="1.0"
                     maxHeight="Infinity"
@@ -58,7 +61,6 @@
                     GridPane.rowIndex="0">
             <VBox   styleClass="screenStyle"
                     fx:id="dialogContainer"
-                    minHeight="578"
                     maxHeight="Infinity"
             />
         </ScrollPane>

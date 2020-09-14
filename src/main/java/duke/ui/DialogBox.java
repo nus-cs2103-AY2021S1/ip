@@ -1,4 +1,4 @@
-package duke;
+package duke.ui;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 /**
  * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
@@ -20,28 +21,45 @@ import javafx.scene.layout.HBox;
  */
 public class DialogBox extends HBox {
 
+    private static final String PATH_TO_FXML = "/view/DialogBox.fxml";
+    private static final String PATH_TO_CSS = "/view/DialogBox.css";
+
     @FXML
     private Label dialog;
     @FXML
     private ImageView displayPicture;
+    @FXML
+    private VBox container;
 
     /**
      * Opens the dialog box in the GUI.
      *
      * @param text Text to output.
-     * @param img Image of DialogBox (either Duke or User).
+     * @param image Image of DialogBox (either Duke or User).
      */
-    private DialogBox(String text, Image img) {
+    private DialogBox(String text, Image image) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource(PATH_TO_FXML));
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        createDialogBox(text, image);
+    }
+
+    /**
+     * Creates the dialog box.
+     *
+     * @param text Text to display.
+     * @param image Image to display.
+     */
+    private void createDialogBox(String text, Image image) {
+        container.getStylesheets().add(PATH_TO_CSS);
+        dialog.getStylesheets().add(PATH_TO_CSS);
         dialog.setText(text);
-        displayPicture.setImage(img);
+        displayPicture.setImage(image);
     }
 
     /**

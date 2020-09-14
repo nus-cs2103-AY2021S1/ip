@@ -1,5 +1,11 @@
 .speechBubble {
-    -fx-background-color: white;
-    -fx-border-width: 0;
-    -fx-padding: 20
+    -fx-background-color: #F6F6F6;
+    -fx-background-radius: 15;
+    -fx-effect: dropshadow(gaussian, #00000029, 1, 0.5, 1, 2);
+    -fx-padding: 15;
+}
+
+.textStyle {
+    -fx-font-family: "Lucida Fax Regular";
+    -fx-font-size: 15;
 }

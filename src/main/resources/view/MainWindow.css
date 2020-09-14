@@ -1,15 +1,18 @@
 .screenStyle {
-    -fx-border-color: transparent;
+    -fx-background-color: linear-gradient(to bottom, #E9B934, #F5945C);
+    -fx-background-size: 100%;
+    -fx-background-position: center;
+    -fx-background: transparent;
 }
 
 .buttonStyle {
     -fx-font-family: "Segoe UI Emoji";
     -fx-background-color: white;
-    -fx-font-size: 20;
-    -fx-border-color: "#DFD6D6";
+    -fx-font-size: 28;
 }
 
 .textFieldStyle {
     -fx-background-color: white;
-    -fx-border-color: white;
+    -fx-font-family: "Lucida Fax Regular";
+    -fx-font-size: 13;
 }

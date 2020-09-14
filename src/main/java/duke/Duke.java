@@ -29,6 +29,22 @@ public class Duke {
     }
 
     /**
+     * Obtains input from user and outputs accordingly.
+     *
+     * @param input User input.
+     * @return Duke response message.
+     */
+    public String getResponse(String input) {
+        try {
+            Command command = Parser.parse(input);
+            checkForExit(command);
+            return command.execute(taskList, ui, storage);
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
+    }
+
+    /**
      * Method to run a method after a 1 second delay.
      *
      * @param runnable Method to run.
@@ -60,22 +76,6 @@ public class Duke {
     private void checkForExit(Command command) {
         if (command.isExit()) {
             setTimeout(Platform::exit);
-        }
-    }
-
-    /**
-     * Obtains input from user and outputs accordingly.
-     *
-     * @param input User input.
-     * @return Duke response message.
-     */
-    protected String getResponse(String input) {
-        try {
-            Command command = Parser.parse(input);
-            checkForExit(command);
-            return command.execute(taskList, ui, storage);
-        } catch (DukeException e) {
-            return e.getMessage();
         }
     }
 }
