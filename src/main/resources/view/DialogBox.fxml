@@ -6,15 +6,18 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root alignment="TOP_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="129.0" minWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="BOTTOM_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label fx:id="userText" alignment="TOP_RIGHT" text="Label" wrapText="true">
+        <Label fx:id="userText" alignment="TOP_RIGHT" text="Label" textFill="WHITE" wrapText="true">
          <font>
-            <Font name="Courier" size="14.0" />
+            <Font name="Courier" size="12.0" />
          </font>
-         <opaqueInsets>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </opaqueInsets></Label>
+         <HBox.margin>
+            <Insets />
+         </HBox.margin>
+         <padding>
+            <Insets right="5.0" />
+         </padding></Label>
         <ImageView fx:id="profilePic" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true">
          <HBox.margin>
             <Insets />

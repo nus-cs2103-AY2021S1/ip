@@ -1,4 +1,3 @@
-F~todo say hello
-T~deadline helloWorld /by 2020-09-08 19:00
-F~event meeting /at 10:30pm
-F~todo different from sample
+F~todo go to Mars
+F~deadline collect moon rock samples /by 2020-09-09 17:00
+F~event NASA blast off /at Earth 10:00

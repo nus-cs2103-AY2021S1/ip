@@ -33,8 +33,8 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser2.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke2.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Dave.jpg"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Hal9000.jpg"));
 
     @FXML
     public void initialize() {
@@ -69,8 +69,10 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     public void welcomeUser() {
+        String dukeLogo = duke.getLogo();
         String dukeWelcome = duke.getWelcomeMessage();
         dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialogBox(dukeLogo, dukeImage),
                 DialogBox.getDukeDialogBox(dukeWelcome, dukeImage)
         );
     }

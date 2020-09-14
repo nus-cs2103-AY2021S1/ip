@@ -44,13 +44,22 @@ public class Duke {
         return outputMsg;
     }
 
-    public String getWelcomeMessage() {
+    public String getLogo() {
         String logo =
+                               "   __ _____   __  ___  ___  ___  ___\n"
+                             + "  / // / _ | / / / _ \\/ _ \\/ _ \\/ _ \\\n"
+                             + " / _  / __ |/ /__\\_, / // / // / // /\n"
+                             + "/_//_/_/ |_/____/___/\\___/\\___/\\___/\n";
+        return logo;
+    }
+
+    public String getWelcomeMessage() {
+        String message =
                 "Hello! I'm Hal9000\nWhat can I do for you?\n"
                 + "Enter \"help\" for instructions\n"
                 + "enter \"list\" to see sample data / your existing tasks";
         // Intro message
-        return logo;
+        return message;
     }
 
     /**

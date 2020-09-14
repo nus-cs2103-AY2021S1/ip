@@ -1,12 +1,4 @@
-HELP BOOKLET
-1. Commands we have:
+Visit https://mgiang2015.github.io/ip/ for more details.
+Quick Help:
+    todo [task name], deadline [task name] /by [YYYY-MM-DD] [HH:MM], event [task name] /at [details]
     list, done [task number], delete [task number], help
-2. Kinds of tasks and syntax
-    Todo: General task.
-        todo [task name]. Example: todo wash dishes
-    Event: Task with specific deadline
-        event [task name] /at [additional information].
-        Example: event meeting /at 5pm on Zoom
-    Deadline: Task with specific end date.
-        deadline [task name] /by [YYYY.MM.DD] [HH:MM].
-        Example: deadline CS2103T /by 2020.10.13 23:59
