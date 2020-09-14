@@ -20,6 +20,9 @@ public class EventCommand extends Command {
     
     private static DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
+    private final int INPUT_INDEX = 6;
+    private final int EVENT_INDEX = 3;
+
     public EventCommand(String input) {
         super(input);
     }
@@ -37,13 +40,8 @@ public class EventCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidDateTimeFormatException,
             InvalidInputException, InvalidSaveFileException {
 
-        final int INPUT_INDEX = 6;
-        final int EVENT_INDEX = 3;
-
-        //Check if event is specified
-        if (super.input.length() <= INPUT_INDEX) {
-            throw new InvalidInputException("☹ OOPS!!! The description of an event cannot be empty.");
-        }
+        //Check input validity by running a series of tests
+        checkValidity();
 
         String[] splitWord = super.input.split("/");
         String desc = splitWord[0].substring(INPUT_INDEX, splitWord[0].length() - 1);
@@ -62,5 +60,24 @@ public class EventCommand extends Command {
         storage.saveFile(tasks.getTasks());
         return ui.printOutput("Got it. I've added this task:\n" + task.toString()
                 + "\nNow you have " + tasks.getTasks().size() + " tasks in the list.");
+    }
+
+    private void checkValidity() throws InvalidInputException {
+
+        String[] splitWord = super.input.split("/");
+        String description = splitWord[0].substring(INPUT_INDEX);
+
+        if (super.input.length() <= INPUT_INDEX) {
+            throw new InvalidInputException("The description of an event cannot be empty.");
+        } else if (splitWord.length != 2) {
+            throw new InvalidInputException("Please use /at to indicate event time,"
+                    + " and only 1 forward slash throughout");
+        } else if (description.charAt(description.length() - 1) != ' ') {
+            throw new InvalidInputException("The formatting of your entry is wrong. Be sure to leave"
+                    + " a space between the description and event timing");
+        } else if (!splitWord[1].substring(0, EVENT_INDEX).equals("at ")) {
+            System.out.println(splitWord[1].substring(0, EVENT_INDEX));
+            throw new InvalidInputException("Please indicate the start of the event by using /at exclusively.");
+        }
     }
 }

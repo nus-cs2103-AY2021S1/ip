@@ -16,6 +16,7 @@ public class Duke {
     private Ui ui;
     private Storage storage;
     private TaskList taskList;
+    private String saveFileErrorMsg = "";
 
     /**
      * Constructor to create a Duke object.
@@ -28,7 +29,7 @@ public class Duke {
         try {
             this.taskList = new TaskList(this.storage.readFile());
         } catch (InvalidSaveFileException e) {
-            ui.showError(e.getMessage());
+            saveFileErrorMsg = e.getMessage();
             taskList = new TaskList();
         }
         this.taskList.createDuplicateChecker();
@@ -49,6 +50,11 @@ public class Duke {
     }
 
     protected String showGreeting() {
-        return ui.showGreeting();
+        String result = "";
+        if (!saveFileErrorMsg.isBlank()) {
+            result += saveFileErrorMsg;
+            result += "\n";
+        }
+        return result += ui.showGreeting();
     }
 }

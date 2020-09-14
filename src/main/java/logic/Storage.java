@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -58,6 +59,9 @@ public class Storage {
         } catch (IOException e) {
             throw new InvalidSaveFileException("Hmmmm....there is something wrong with the previous save file! We "
                     + "will have to write a new one!");
+        } catch (DateTimeParseException err) {
+            throw new InvalidSaveFileException("Hmmmm.....seems like an entry was saved wrongly!"
+                    + " Lets write a new save!");
         }
         return toDoList;
     }
