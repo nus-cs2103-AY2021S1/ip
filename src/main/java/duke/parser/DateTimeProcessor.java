@@ -1,4 +1,4 @@
-package duke;
+package duke.parser;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -13,7 +13,7 @@ import java.util.Optional;
  * This processor parses strings and returns a neatly
  * formatted Date-Time String.
  */
-class DateTimeProcessor {
+public class DateTimeProcessor {
 
     private final ArrayList<String> possibleDateFormats = new ArrayList<>(
             Arrays.asList(
@@ -61,7 +61,7 @@ class DateTimeProcessor {
      * @param input The date-time string which may not be formatted properly.
      * @return The neatly formatted date-time string.
      */
-    String getParsedDate(String input) {
+    public String getParsedDate(String input) {
         assert input.length() > 0 : "Input string is empty";
         Optional<LocalDateTime> possibleDateTime = parseDateTime(input);
         Optional<LocalDate> possibleDate = parseDate(input);

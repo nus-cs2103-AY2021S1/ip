@@ -1,7 +1,8 @@
 package duke;
 
-import command.Command;
-import ui.TextUi;
+import duke.command.Command;
+import duke.parser.Parser;
+import duke.ui.TextUi;
 
 /**
  * Duke is the main program where most of the logic is
@@ -87,7 +88,7 @@ public class Duke {
     }
 
     /**
-     * Initialise program with a new instance of duke.Duke.
+     * Initialise program with a new instance of Duke.
      *
      * @param args String array passed into main.
      */

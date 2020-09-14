@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
 
+import duke.parser.Parser;
+
 /**
  * JUnit test class to test methods in Parser.
  */

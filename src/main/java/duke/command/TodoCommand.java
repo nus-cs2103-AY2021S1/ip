@@ -1,10 +1,10 @@
-package command;
+package duke.command;
 
 import java.util.StringJoiner;
 
 import duke.DukeException;
 import duke.TaskList;
-import task.Todo;
+import duke.task.Todo;
 
 /**
  * Command to create a To-do Task.

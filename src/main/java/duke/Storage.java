@@ -9,10 +9,10 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import task.Deadline;
-import task.Event;
-import task.Task;
-import task.Todo;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 
 /**
  * Handles the opening and storing of tasks from text files.
@@ -27,6 +27,24 @@ public class Storage {
      */
     public Storage() {
         String filePath = "./data/taskList.txt";
+        path = Paths.get(filePath);
+        File taskListfile = new File(filePath);
+        if (Files.notExists(this.path)) {
+            try {
+                taskListfile.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * Constructor for the Storage object to track locally saved tasks.
+     * The storage object checks for any pre-existing files and
+     * if it is not available, the storage object will create a file.
+     * @param filePath path where the saved task list is stored.
+     */
+    public Storage(String filePath) {
         path = Paths.get(filePath);
         File taskListfile = new File(filePath);
         if (Files.notExists(this.path)) {

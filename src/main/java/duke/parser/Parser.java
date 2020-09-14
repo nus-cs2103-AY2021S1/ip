@@ -1,17 +1,19 @@
-package duke;
+package duke.parser;
 
-import command.ByeCommand;
-import command.Command;
-import command.DeadlineCommand;
-import command.DeleteCommand;
-import command.DoneCommand;
-import command.EventCommand;
-import command.FindCommand;
-import command.HelpCommand;
-import command.InvalidCommand;
-import command.ListCommand;
-import command.TodoCommand;
-
+import duke.DukeException;
+import duke.Storage;
+import duke.TaskList;
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.EventCommand;
+import duke.command.FindCommand;
+import duke.command.HelpCommand;
+import duke.command.InvalidCommand;
+import duke.command.ListCommand;
+import duke.command.TodoCommand;
 
 /**
  * Contains two parse functions, one for interpreting user input
@@ -28,7 +30,7 @@ public class Parser {
      * @param fullCommand The entire command from the user input.
      * @return The Command corresponding to the keyword from the user.
      */
-    static Command getCommand(String fullCommand, TaskList taskList, Storage storage) {
+    public static Command getCommand(String fullCommand, TaskList taskList, Storage storage) {
         String[] splitWords = fullCommand.split(" ");
         String keyword = splitWords[0].toLowerCase();
         switch (keyword) {
@@ -97,7 +99,7 @@ public class Parser {
             }
         }
         String date = sb.toString();
-        // Now to check if this date can be formatted nicely using duke.DateTimeProcessor class.
+        // Now to check if this date can be formatted nicely using DateTimeProcessor class.
         String parsedDate = new DateTimeProcessor().getParsedDate(date);
         result[1] = parsedDate;
         return result;

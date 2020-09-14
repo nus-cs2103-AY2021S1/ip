@@ -6,9 +6,9 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
 
-import task.Deadline;
-import task.Event;
-import task.Todo;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Todo;
 
 /**
  * JUnit test class to test the Storage class.
@@ -53,20 +53,6 @@ class StorageTest {
         } catch (DukeException e) {
             System.out.println("Exception while testing if store() works: " + e.toString());
             fail();
-        }
-    }
-
-    /**
-     * Tests if a invalid file path will trigger an exception.
-     */
-    @Test
-    void testStorage_fakeFilePath_willThrowExceptionOnStore() {
-        Storage storage = new Storage("fakeFilePath!");
-        try {
-            storage.store(new TaskList());
-            fail(); // Should not reach here.
-        } catch (DukeException e) {
-            assertTrue(e.toString().contains("Exception occurred while storing into file: "));
         }
     }
 

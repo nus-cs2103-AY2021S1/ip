@@ -1,4 +1,4 @@
-package task;
+package duke.task;
 
 /**
  * A Task. Contains a description, and a boolean to

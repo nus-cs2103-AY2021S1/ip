@@ -1,4 +1,4 @@
-package task;
+package duke.task;
 
 /**
  * An event is a task which occurs at a particular date and time.

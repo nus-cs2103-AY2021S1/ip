@@ -2,7 +2,7 @@ package duke;
 
 import java.util.ArrayList;
 
-import task.Task;
+import duke.task.Task;
 
 /**
  * Contains Tasks stored in an ArrayList. Includes other

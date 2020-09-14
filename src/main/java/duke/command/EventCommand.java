@@ -1,11 +1,11 @@
-package command;
+package duke.command;
 
 import java.util.StringJoiner;
 
 import duke.DukeException;
-import duke.Parser;
+import duke.parser.Parser;
 import duke.TaskList;
-import task.Event;
+import duke.task.Event;
 
 /**
  * Command to create an event task.

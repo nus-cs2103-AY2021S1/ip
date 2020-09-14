@@ -1,11 +1,11 @@
-package command;
+package duke.command;
 
 import java.util.StringJoiner;
 
 import duke.DukeException;
-import duke.Parser;
 import duke.TaskList;
-import task.Deadline;
+import duke.parser.Parser;
+import duke.task.Deadline;
 
 /**
  * Command to create a Deadline task.

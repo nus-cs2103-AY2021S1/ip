@@ -1,4 +1,4 @@
-package task;
+package duke.task;
 
 /**
  * A To-do is a Task to be done some time in the future.
