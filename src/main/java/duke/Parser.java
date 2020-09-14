@@ -81,7 +81,7 @@ public class Parser {
      * @param dateString Date provided by user in the form of string.
      * @return Date in LocalDateTime.
      */
-    public static LocalDateTime parseDate(String dateString) {
+    public static LocalDateTime parseDate(String dateString) throws DukeException{
         for (String format : DATE_FORMATS) {
             try {
                 return LocalDateTime.parse(
@@ -91,7 +91,7 @@ public class Parser {
                 e.getMessage();
             }
         }
-        return null;
+        throw new DukeException("Oops! Format of date and time might be wrong.");
     }
 
     /**
@@ -123,9 +123,6 @@ public class Parser {
             throw new DukeException("Oops! You need to include both detail and time.");
         }
         LocalDateTime date = parseDate(arr[1].trim());
-        if (date == null) {
-            throw new DukeException("Oops! Format of date and time might be wrong.");
-        }
         return new Deadline(detail, date);
     }
 
@@ -159,11 +156,10 @@ public class Parser {
             endDateString = startDateString.substring(0, startDateString.indexOf(' ')) + " " + endDateString;
         }
         LocalDateTime endDate = parseDate(endDateString);
-        if (startDate == null || endDate == null) {
-            throw new DukeException("Oops! Format of date and time might be wrong.");
-        } else if (startDate.compareTo(endDate) > 0) {
+        if (startDate.compareTo(endDate) > 0) {
             throw new DukeException("Oops! Start date must be earlier than end date");
         }
+
         return new Event(detail, startDate, endDate);
     }
 
