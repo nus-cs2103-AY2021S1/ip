@@ -58,22 +58,25 @@ public class Storage {
      */
     Task stringToTask(String str) throws InvalidTypeException, InvalidDataException {
         String[] info = str.split("\\|");
-        if (info.length < 4) {
+        int infoLength = info.length;
+        if (infoLength < 3) {
             throw new InvalidDataException();
         }
         boolean isComplete = info[1].equals("1");
-        String[] tags;
+        boolean hasTags;
+        String[] tags = new String[]{};
         switch (info[0]) {
-        case "T":
-            tags = retrieveTags(info[3]);
+        case Todo.SYMBOL:
+            hasTags = infoLength == 4;
+            tags = hasTags ? retrieveTags(info[3]) : tags;
             return new Todo(info[2], isComplete, tags);
-        case "D":
-            assert info.length >= 4;
-            tags = retrieveTags(info[4]);
+        case Deadline.SYMBOL:
+            hasTags = infoLength == 5;
+            tags = hasTags ? retrieveTags(info[4]) : tags;
             return new Deadline(info[2], isComplete, info[3], tags);
-        case "E":
-            assert info.length >= 4;
-            tags = retrieveTags(info[4]);
+        case Event.SYMBOL:
+            hasTags = infoLength == 5;
+            tags = hasTags ? retrieveTags(info[4]) : tags;
             return new Event(info[2], isComplete, info[3], tags);
         default:
             throw new InvalidTypeException();

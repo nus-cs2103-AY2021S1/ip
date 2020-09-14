@@ -4,8 +4,8 @@ package duke.task;
  * Deadline class for tasks that have a set deadline.
  */
 public class Deadline extends Task {
-    public static final String FORMAT = "deadline [^ ]+.+[^ ]+ /by [^ ]+.+";
-    static final String SYMBOL = "D";
+    public static final String FORMAT = "deadline [^ ]+.* /by [^ ]+.*";
+    public static final String SYMBOL = "D";
     private DateTime deadline;
 
     /**

@@ -1,0 +1,16 @@
+.dialogBox {
+    -fx-border-width: 5.0;
+    -fx-background-color: #ECE3F0;
+    -fx-padding: 10px;
+    -fx-border-insets: 5px;
+    -fx-background-insets: 5px;
+    -fx-border-radius: 5;
+    -fx-text-fill: black;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0.5, 0.0, 0.0);
+}
+
+.sendButton {
+    -fx-background-color: #022D36;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
