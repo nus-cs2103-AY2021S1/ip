@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 public class Storage { //deals with loading task and saving task in file
 
-    private String filePath; //some
+    private String filePath; //check
     private File file;
 
     /**
