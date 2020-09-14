@@ -1,7 +1,7 @@
 #dialogContainer {
     -fx-background-color: #427aa1;
-    -fx-background-radius: 10;
-    -fx-border-radius: 10;
+    /*-fx-background-radius: 10;
+    -fx-border-radius: 10;*/
     /*-fx-background-image: url('/images/skyBackground2.jpg');
     -fx-background-position: center;*/
 }
@@ -49,7 +49,7 @@
 }
 /* @@author */
 
-#scrollPane {
+/*#scrollPane {
     -fx-background-radius: 10;
     -fx-border-radius: 10;
     -fx-fit-to-height: true;
@@ -58,4 +58,4 @@
     -fx-border-color: black;
     -fx-background-insets: 11;
     -fx-border-insets: 10;
-}
+}*/
