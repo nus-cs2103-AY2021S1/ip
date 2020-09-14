@@ -14,7 +14,11 @@ This is a project for a greenfield Java project, adapted from CS2103 Duke, named
 - untag [task number] [tag]
 - untag [tag]
 - delete [task number]
+- done [task number]
 
+## Sample App Preview
+
+![image](other/app preview.gif)
 
 ## Setting up in Intellij
 
