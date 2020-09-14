@@ -1,4 +1,4 @@
-package duke;
+package duke.exception;
 
 /**
  * Exception class that gets thrown by supporting classes' methods.

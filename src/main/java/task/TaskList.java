@@ -1,6 +1,4 @@
-package duke;
-
-import duke.Task;
+package duke.task;
 
 import java.util.ArrayList;
 
@@ -27,7 +25,7 @@ public class TaskList {
 		return tasks.get(i);
 	}
 
-	public boolean add(Task task){
+	public boolean add(Task task) {
 		tasks.add(task);
 		return true;
 	}

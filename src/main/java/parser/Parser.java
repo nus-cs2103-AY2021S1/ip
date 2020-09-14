@@ -1,11 +1,12 @@
-package duke;
+package duke.parser;
 
-import duke.DukeException;
-import duke.Command;
-import duke.TaskList;
-import duke.Ui;
-import duke.Storage;
-import duke.Task;
+import duke.exception.DukeException;
+import duke.command.Command;
+import duke.task.TaskList;
+import duke.ui.Ui;
+import duke.storage.Storage;
+import duke.task.Task;
+import duke.task.TaskType;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -115,7 +116,7 @@ public class Parser {
 					return outputStringBuilder.toString();
 				}
 
-				duke.Task task = new duke.Task(duke.TaskType.TODO, false, input);
+				Task task = new Task(TaskType.TODO, false, input);
 				taskList.add(task);
 
 				temp = "Got it. I've added this task:";
@@ -188,7 +189,7 @@ public class Parser {
 							.append(localDateTime.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.SHORT)))
 							.append(")");
 					input = taskStringBuilder.toString();
-					duke.Task task = new duke.Task(duke.TaskType.DEADLINE, false, input, Optional.of(localDateTime));
+					Task task = new Task(TaskType.DEADLINE, false, input, Optional.of(localDateTime));
 					taskList.add(task);
 
 					temp = "Got it. I've added this task:";
@@ -238,7 +239,7 @@ public class Parser {
 				StringBuilder taskStringBuilder = new StringBuilder();
 				taskStringBuilder.append(input.substring(0, index)).append("(at:").append(input.substring(index + 3)).append(")");
 				input = taskStringBuilder.toString();
-				duke.Task task = new duke.Task(duke.TaskType.DEADLINE, false, input);
+				Task task = new Task(TaskType.DEADLINE, false, input);
 				taskList.add(task);
 
 				temp = "Got it. I've added this task:";
@@ -294,7 +295,7 @@ public class Parser {
 					return outputStringBuilder.toString();
 				}
 
-				duke.Task task = taskList.remove(tasknumber - 1);
+				Task task = taskList.remove(tasknumber - 1);
 				Task newTask = task.done();
 				taskList.add(tasknumber - 1, newTask);
 
@@ -350,7 +351,7 @@ public class Parser {
 					return outputStringBuilder.toString();
 				}
 
-				duke.Task task = taskList.remove(tasknumber - 1);
+				Task task = taskList.remove(tasknumber - 1);
 
 				temp = "Noted. I've removed this task:";
 				outputStringBuilder.append(temp).append("\n");
