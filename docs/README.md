@@ -20,21 +20,20 @@ a small software incrementally, while applying as many Java and SE techniques as
 For the details of each command, refer to the [Features](##features) below.
 
 
-## Summary of Command
-Action | Format & Example
------------------------|-----------------------
-Add a ToDo task | `todo EVENT_TITLE ` <br/> <br/> e.g: `todo Assigment 1`
-Add a Deadline task | `deadline EVENT_TITLE /by DATE TIME` <br/> <br/> e.g: `deadline Assignment 1 /by 2020-09-14 18:00`
-Add an Event task | `event EVENT_TITLE /at DATE TIME - TIME` <br/> <br/> e.g: `event Birthday Party /at 2020-09-14 18:00 20:00`
-List | `list`
-Mark a Task as Done | `done INDEX` <br/> <br/> e.g: `done 2`
-Delete a Task | `delete INDEX` <br/> <br/> e.g: `delete 2`
-Find tasks with keyword | `find KEYWORD` <br/> <br/> e.g: `find homework`
-Archive data into a separate file | `archive LOCATION_TO_SAVE` <br/> <br/> e.g: `archive data\dukeII.txt`
-Load Data | `load FILE_LOCATION` <br/> <br/> e.g: `load data\dukeII.txt`
-Save | `save`
-End the session | `bye`
-
+## Summary of Command  
+Action | Format & Example  
+-----------------------|-----------------------  
+Add a ToDo task | `todo EVENT_TITLE ` <br/> <br/> e.g: `todo Assigment 1`  
+Add a Deadline task | `deadline EVENT_TITLE /by DATE TIME` <br/> <br/> e.g: `deadline Assignment 1 /by 2020-09-14 18:00`  
+Add an Event task | `event EVENT_TITLE /at DATE TIME - TIME` <br/> <br/> e.g: `event Birthday Party /at 2020-09-14 18:00 20:00`  
+List | `list`  
+Mark a Task as Done | `done INDEX` <br/> <br/> e.g: `done 2`  
+Delete a Task | `delete INDEX` <br/> <br/> e.g: `delete 2`  
+Find tasks with keyword | `find KEYWORD` <br/> <br/> e.g: `find homework`  
+Archive data into a separate file | `archive LOCATION_TO_SAVE` <br/> <br/> e.g: `archive data\dukeII.txt`  
+Load Data | `load FILE_LOCATION` <br/> <br/> e.g: `load data\dukeII.txt`  
+Save | `save`  
+End the session | `bye`  
 
 ## Features
 <blockquote>
