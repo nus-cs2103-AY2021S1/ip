@@ -7,7 +7,7 @@
 
 5. Type a command in the text box to execute it. For example, typing `help` and pressing `Send` will
 provide useful information to navigate the app and use it optimally.
-6. Refer to the [Features section]{#features) below for details of each command.
+6. Refer to the Features section below for details of each command.
 
 ## Features 
 
