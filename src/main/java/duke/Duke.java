@@ -71,7 +71,7 @@ public class Duke extends Application{
         }catch (IOException | IllegalArgumentException e) {
             System.out.println(e);
         }
-        return "Somethign went wrong!";
+        return "Something went wrong!";
     }
     
     public Duke() {
@@ -161,11 +161,9 @@ public class Duke extends Application{
         } else {
             throw new IllegalUserInputException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
-
-        if (task != null) {
-            taskList.addTask(task);
-            return userInterface.taskAddedMessage(task);
-        }
-        return "Something went wrong!";
+        
+        assert task!=null : "Task should not be null";
+        taskList.addTask(task);
+        return userInterface.taskAddedMessage(task);
     }
 }
