@@ -30,7 +30,11 @@ public class Junimo {
 
     private TaskList taskList;
     private Parser parser;
-    
+
+    /**
+     * Constructs the Junimo object that handles the logic of the program.
+     * @param filePath File path to store and retrieve saved tasks.
+     */
     public Junimo(String filePath) {
         try {
             storage = new Storage(filePath);
@@ -41,14 +45,26 @@ public class Junimo {
         }
     }
 
+    /**
+     * Returns the welcome greeting.
+     * @return The welcome greeting.
+     */
     public String getWelcome() {
         return Greeting.welcome();
     }
 
+    /**
+     * Parses the input command.
+     * @param inputCommand input command to be parsed.
+     * @return The response to the input command.
+     */
     public Response parseInputCommand(String inputCommand) {
         return parser.parseInputCommand(inputCommand);
     }
 
+    /**
+     * Saves tasks in task list and archives to a text file.
+     */
     public void save() {
         storage.save(taskList);
     }

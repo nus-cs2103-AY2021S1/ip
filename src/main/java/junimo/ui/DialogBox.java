@@ -1,6 +1,5 @@
 package junimo.ui;
 
-import java.awt.*;
 import java.io.IOException;
 import java.util.Collections;
 
@@ -14,12 +13,8 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
 
 /**
- * An example of a custom control using FXML.
  * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
  * containing text from the speaker.
  */
