@@ -88,7 +88,7 @@ public class TaskList {
     public ArrayList<Task> find(String toFind) {
         ArrayList<Task> searchResults = new ArrayList<>();
         for (Task task : taskArrayList) {
-            if (task.getDescription().contains(toFind)) {
+            if (task.getDescription().toLowerCase().contains(toFind.toLowerCase())) {
                 searchResults.add(task);
             }
         }

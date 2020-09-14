@@ -48,6 +48,7 @@ public class UpdateCommand extends Command {
         Task toUpdate = taskList.retrieveTask(Integer.parseInt(index) - 1);
         if (updateType.equals("desc")) {
             toUpdate.setDescription(updateValue);
+            storage.write(taskList);
         } else {
             String[] inputDateTime = updateValue.split(" ");
             String[] date = inputDateTime[0].split("[/\\\\]|-");
