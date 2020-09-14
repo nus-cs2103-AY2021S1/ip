@@ -19,7 +19,14 @@
          </font></Button>
         <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="557.0" prefWidth="400.0" vvalue="1.0">
             <content>
-                <VBox fx:id="dialogContainer" prefHeight="552.0" prefWidth="388.0" />
+                <VBox fx:id="dialogContainer" prefHeight="552.0" prefWidth="388.0">
+               <children>
+                  <Button fx:id="helpButton" alignment="TOP_RIGHT" mnemonicParsing="false" onAction="#goToUserGuide" text="Help">
+                     <font>
+                        <Font name="Courier Bold" size="13.0" />
+                     </font>
+                  </Button>
+               </children></VBox>
             </content>
         </ScrollPane>
     </children>
