@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 import duke.backend.Storage;
 import duke.task.TaskList;
-import duke.response.Ui;
+import duke.response.Response;
 
 public class ListDateCommand implements Command {
     private final LocalDate date;
@@ -37,7 +37,7 @@ public class ListDateCommand implements Command {
      * @return True because Duke should continue running.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Response ui, Storage storage) {
         return (tasks.getTasksOnDate(date));
     }
 }

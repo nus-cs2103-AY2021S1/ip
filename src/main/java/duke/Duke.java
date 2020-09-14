@@ -12,7 +12,7 @@ import duke.exception.DukeEmptyKeywordException;
 import duke.exception.DukeInvalidDataException;
 import duke.exception.DukeInvalidDateTimeInputException;
 import duke.response.Parser;
-import duke.response.Ui;
+import duke.response.Response;
 import duke.task.TaskList;
 
 /**
@@ -22,13 +22,13 @@ import duke.task.TaskList;
 public class Duke {
     private TaskList list;
     private final Storage storage;
-    private final Ui ui;
+    private final Response ui;
 
     /**
      * Class constructor.
      */
     public Duke() {
-        ui = new Ui();
+        ui = new Response();
         String filePath = System.getProperty("user.home") + "/data";
         checkAndMakeDir(filePath);
         filePath += "/duke.txt";

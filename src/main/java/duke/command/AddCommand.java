@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import duke.backend.Storage;
 import duke.task.TaskList;
-import duke.response.Ui;
+import duke.response.Response;
 import duke.exception.DukeInvalidIndexException;
 import duke.task.Task;
 
@@ -43,7 +43,7 @@ public class AddCommand implements Command {
      * @return True because Duke should continue running.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Response ui, Storage storage) {
         try {
             tasks.addTask(this.task);
             storage.save(tasks);

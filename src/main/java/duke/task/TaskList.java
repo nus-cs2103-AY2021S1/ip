@@ -6,10 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import duke.exception.DukeInvalidIndexException;
-import duke.response.Ui;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
+import duke.response.Response;
 
 /**
  * Contains the list of tasks.
@@ -90,7 +87,7 @@ public class TaskList {
     public static String getListAsStringFromList(List<Task> list, String alternative) {
         String s = "";
         for (int i = 0; i < list.size(); i++) {
-            s += Ui.TWO_INDENT + (i + 1) + "." + list.get(i);
+            s += Response.TWO_INDENT + (i + 1) + "." + list.get(i);
             if (i != list.size() - 1) {
                 s += '\n';
             }

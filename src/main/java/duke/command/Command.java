@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.backend.Storage;
 import duke.task.TaskList;
-import duke.response.Ui;
+import duke.response.Response;
 
 /**
  * Represents an action corresponding to a user input.
@@ -23,5 +23,5 @@ public interface Command {
      * @param storage The Storage to save the TaskList.
      * @return True if Duke should continue running.
      */
-    String execute(TaskList tasks, Ui ui, Storage storage);
+    String execute(TaskList tasks, Response ui, Storage storage);
 }

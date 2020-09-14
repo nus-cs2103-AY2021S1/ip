@@ -1,7 +1,7 @@
 package duke;
 
 import duke.exception.DukeInvalidIndexException;
-import duke.response.Ui;
+import duke.response.Response;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -89,7 +89,7 @@ public class TaskListTest {
     public void getListAsStringFromList_validList_success() {
         List<Task> list = new ArrayList<>();
         list.add(todo);
-        String expectedResult = Ui.TWO_INDENT + "1." + todo.toString();
+        String expectedResult = Response.TWO_INDENT + "1." + todo.toString();
         assertEquals(expectedResult,
                 TaskList.getListAsStringFromList(list, "Alternative String"));
     }
@@ -99,8 +99,8 @@ public class TaskListTest {
         List<Task> list = new ArrayList();
         list.add(todo);
         list.add(deadline);
-        String expectedResult = Ui.TWO_INDENT + "1." + todo.toString() + "\n"
-                + Ui.TWO_INDENT + "2." + deadline.toString();
+        String expectedResult = Response.TWO_INDENT + "1." + todo.toString() + "\n"
+                + Response.TWO_INDENT + "2." + deadline.toString();
         assertEquals(expectedResult, TaskList.getListAsStringFromList(list, "Alternative"));
     }
 
@@ -114,7 +114,7 @@ public class TaskListTest {
     public void getListAsString_validTaskList_success() {
         TaskList tl = new TaskList();
         tl.addTask(todo);
-        String expectedResult = Ui.TWO_INDENT + "1." + todo.toString();
+        String expectedResult = Response.TWO_INDENT + "1." + todo.toString();
         assertEquals(expectedResult, tl.getListAsString());
     }
 
@@ -123,8 +123,8 @@ public class TaskListTest {
         TaskList tl = new TaskList();
         tl.addTask(todo);
         tl.addTask(deadline);
-        assertEquals(Ui.TWO_INDENT + "1." + todo.toString()
-                + "\n" + Ui.TWO_INDENT
+        assertEquals(Response.TWO_INDENT + "1." + todo.toString()
+                + "\n" + Response.TWO_INDENT
                 + "2." + deadline.toString(), tl.getListAsString());
     }
 
@@ -164,7 +164,7 @@ public class TaskListTest {
     public void getTaskOnDate_validDate_success() {
         TaskList tl = new TaskList();
         tl.addTask(deadline);
-        String expectedResult = Ui.TWO_INDENT + "1." + deadline.toString();
+        String expectedResult = Response.TWO_INDENT + "1." + deadline.toString();
         assertEquals(expectedResult,
                 tl.getTasksOnDate(LocalDate.of(2020, 8, 24)));
     }

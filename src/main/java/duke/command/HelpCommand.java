@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.backend.Storage;
 import duke.task.TaskList;
-import duke.response.Ui;
+import duke.response.Response;
 
 /**
  * Represents a list of available instructions.
@@ -28,7 +28,7 @@ public class HelpCommand implements Command {
      * @return True if Duke should continue running.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Response ui, Storage storage) {
         String result = "--------Instructions-------- \n";
         for (CommandType type: CommandType.values()) {
             result += type.toString();
