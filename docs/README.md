@@ -24,13 +24,13 @@ and events.
 
 ### Features
 1. [Add tasks](#feature-1-add-tasks)
-2. [List all tasks](#feature-2-list-tasks)
-3. [Mark tasks as done](#feature-3-mark-tasks)
+2. [List all tasks](#feature-2-list-all-tasks)
+3. [Mark tasks as done](#feature-3-mark-tasks-as-done)
 4. [Delete tasks](#feature-4-delete-tasks)
-5. [Find tasks using keyword](#feature-5-find-tasks)
+5. [Find tasks using keyword](#feature-5-find-tasks-using-keyword)
 6. [Update current tasks](#feature-6-update-tasks)
-7. [Get list of commands](#feature-7-get-commands)
-8. [Exit RJ21](#feature-8-exit)
+7. [Get list of commands](#feature-7-get-list-of-commands)
+8. [Exit RJ21](#feature-8-quit-rj21)
 
 #### Feature 1: Add tasks
 You can add tasks of 3 types: To-do, Deadline and Event.
