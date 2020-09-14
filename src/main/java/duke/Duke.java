@@ -3,6 +3,7 @@ package duke;
 import java.io.IOException;
 
 import duke.commands.Command;
+import duke.commands.StartCommand;
 import duke.exceptions.DukeException;
 
 /**
@@ -46,5 +47,14 @@ public class Duke {
 
     public boolean isExit() {
         return isExit;
+    }
+
+    /**
+     * Returns the message for when Duke welcomes the user.
+     * @return Welcome message in String.
+     */
+    public String getWelcome() {
+        Command command = new StartCommand("");
+        return command.execute(taskManager);
     }
 }
