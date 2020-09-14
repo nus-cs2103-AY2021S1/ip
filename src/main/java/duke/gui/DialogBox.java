@@ -6,12 +6,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 public class DialogBox extends HBox {
     @FXML
@@ -25,6 +27,7 @@ public class DialogBox extends HBox {
             loader.setController(this);
             loader.setRoot(this);
             loader.load();
+            VBox.setMargin(this, new Insets(10));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -48,6 +51,7 @@ public class DialogBox extends HBox {
         FXCollections.reverse(children);
         getChildren().setAll(children);
         setAlignment(Pos.TOP_LEFT);
+        setStyle("-fx-background-color: #344955;");
     }
 
 }

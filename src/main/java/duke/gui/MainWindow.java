@@ -52,9 +52,10 @@ public class MainWindow {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        DialogBox mUser = DialogBox.getUserDialog(userText, userImage);
+        DialogBox mDuke = DialogBox.getDukeDialog(dukeText, dukeImage);
         dialogContainer.getChildren()
-                .addAll(DialogBox.getUserDialog(userText, userImage),
-                        DialogBox.getDukeDialog(dukeText, dukeImage));
+                .addAll(mUser, mDuke);
         checkIfExit(fullCommand);
         userInput.clear();
     }
