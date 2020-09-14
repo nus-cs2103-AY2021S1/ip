@@ -55,8 +55,8 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[" + TaskType.DEADLINE.getInitial() + "]" +
-                super.toString() +
-                " (by: " + DateTimeHandler.generateDateTimeFormat(by, byDate, byDateTime) + ")";
+        return "[" + TaskType.DEADLINE.getInitial() + "]"
+                + super.toString()
+                + " (by: " + DateTimeHandler.generateDateTimeFormat(by, byDate, byDateTime) + ")";
     }
 }

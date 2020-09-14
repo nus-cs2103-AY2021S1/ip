@@ -56,8 +56,8 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[" + TaskType.EVENT.getInitial() + "]" +
-                super.toString() +
-                " (at: " + DateTimeHandler.generateDateTimeFormat(at, atDate, atDateTime) + ")";
+        return "[" + TaskType.EVENT.getInitial() + "]"
+                + super.toString()
+                + " (at: " + DateTimeHandler.generateDateTimeFormat(at, atDate, atDateTime) + ")";
     }
 }
