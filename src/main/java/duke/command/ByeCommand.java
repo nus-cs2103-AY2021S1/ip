@@ -10,6 +10,6 @@ public class ByeCommand extends Command {
     /** Exits the program. */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
-        System.exit(0);
+        ui.saveByeMessage();
     }
 }
