@@ -55,15 +55,14 @@ public class TaskList {
     public Task markTaskAsDone(int taskNumber) throws DukeException {
         if (taskNumber <= 0 || taskNumber > storedTasks.size()) {
             throw new DukeException("Wrong task number!");
-        } else {
-            Task task = storedTasks.get(taskNumber - 1);
-            if (task.isDone()) {
-                throw new DukeException("This task is already done: " + task.getDescription());
-            }
-            task.markAsDone();
-            assert task.isDone;
-            return task;
         }
+        Task task = storedTasks.get(taskNumber - 1);
+        if (task.isDone()) {
+            throw new DukeException("This task is already done: " + task.getDescription());
+        }
+        task.markAsDone();
+        assert task.isDone;
+        return task;
     }
 
     /**
@@ -75,12 +74,11 @@ public class TaskList {
     public Task deleteTask(int taskNumber) throws DukeException {
         if (taskNumber <= 0 || taskNumber > storedTasks.size()) {
             throw new DukeException("Wrong task number!");
-        } else {
-            Task taskToDelete = storedTasks.get(taskNumber - 1);
-            storedTasks.remove(taskToDelete);
-            assert !storedTasks.contains(taskToDelete);
-            return taskToDelete;
         }
+        Task taskToDelete = storedTasks.get(taskNumber - 1);
+        storedTasks.remove(taskToDelete);
+        assert !storedTasks.contains(taskToDelete);
+        return taskToDelete;
     }
 
     /**

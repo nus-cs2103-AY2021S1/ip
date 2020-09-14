@@ -44,24 +44,19 @@ public class AddCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        Task newTask = null;
         if (commandType == CommandType.TODO) {
-            ToDo newTask = new ToDo(description);
-            taskList.addTask(newTask);
-            ui.processAddMessage(newTask, taskList.getCount());
-            storage.updateTasks(taskList);
+            newTask = new ToDo(description);
         } else if (commandType == CommandType.DEADLINE) {
-            Deadline newTask = new Deadline(description, dateTime);
-            taskList.addTask(newTask);
-            ui.processAddMessage(newTask, taskList.getCount());
-            storage.updateTasks(taskList);
+            newTask = new Deadline(description, dateTime);
         } else if (commandType == CommandType.EVENT) {
-            Event newTask = new Event(description, dateTime);
-            taskList.addTask(newTask);
-            ui.processAddMessage(newTask, taskList.getCount());
-            storage.updateTasks(taskList);
+            newTask = new Event(description, dateTime);
         } else {
             assert false;
         }
+        taskList.addTask(newTask);
+        ui.processAddMessage(newTask, taskList.getCount());
+        storage.updateTasks(taskList);
     }
 
     /**
