@@ -117,15 +117,15 @@ Exits the program.
 Format: `bye`
 
 ## Command summary
- Action | Format, examples
- ------------ | -------------
-Add a Todo task | `todo TASK_NAME`, e.g.,`todo do readings`
-Add a Deadline task | `deadline TASK_NAME /by YYYY-MM-DD`, e.g.,  `deadline finish report /by 2020-09-21`
-Add an Event task | `event TASK_NAME /at YYYY-MM-DD`, e.g., `event workshop /at 2020-09-23`                 
-List all tasks | `list`
-Mark a task as done | `done INDEX`, e.g., `done 3`
-Delete a task | `delete INDEX`, e.g., `delete 6`
-Find tasks matching the keyword | `find KEYWORD`, e.g., `find project`
+ Action | Format, examples |
+ ------------ | ------------- |
+Add a Todo task | `todo TASK_NAME`, e.g.,`todo do readings` |
+Add a Deadline task | `deadline TASK_NAME /by YYYY-MM-DD`, e.g.,  `deadline finish report /by 2020-09-21` |
+Add an Event task | `event TASK_NAME /at YYYY-MM-DD`, e.g., `event workshop /at 2020-09-23` |                 
+List all tasks | `list` |
+Mark a task as done | `done INDEX`, e.g., `done 3` |
+Delete a task | `delete INDEX`, e.g., `delete 6` |
+Find tasks matching the keyword | `find KEYWORD`, e.g., `find project` |
 Exit | `bye`
 
 ## Acknowledgements
