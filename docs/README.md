@@ -12,8 +12,8 @@ Prerequisites:
 * Ensure that your `JAVA_HOME` is set to the correct JDK 11 location
 
 Starting Duke:
-  1. [Download](https://github.com/eugene3231/ip/releases) *Duke.jar* and *runduke.bat*
-  2. Start *runduke.bat* file with Duke.jar in the same directory
+  1. [Download](https://github.com/eugene3231/ip/releases) *`Duke.jar`* and *`runduke.bat`*
+  2. Run *`runduke.bat`* with *`Duke.jar`* in the **same directory**
   3. The GUI should appear and you can start talking to Duke!
   
 
