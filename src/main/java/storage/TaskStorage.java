@@ -119,7 +119,10 @@ public class TaskStorage extends Storage {
         assert time != null : "Time cannot be null";
         assert period != null : "Time period cannot be null";
         int hour = Integer.parseInt(time.split(":")[0]);
-        if (period.equals("PM")) {
+        if (hour == 12 && period.equals("AM")) {
+            hour = 0;
+        }
+        if (period.equals("PM") && hour != 12) {
             hour += 12;
         }
         return hour;
