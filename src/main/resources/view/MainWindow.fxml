@@ -12,7 +12,7 @@
       <TextField fx:id="userInput" layoutX="-1.0" layoutY="756.0" onAction="#handleUserInput" prefHeight="45.0" prefWidth="529.0" />
       <ScrollPane fx:id="scrollArea" prefHeight="757.0" prefWidth="594.0">
          <content>
-            <VBox fx:id="outputContainer" prefWidth="597.0" />
+            <VBox fx:id="outputContainer" prefWidth="560.0" />
          </content>
       </ScrollPane>
    </children>
