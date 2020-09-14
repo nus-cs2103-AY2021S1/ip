@@ -112,11 +112,11 @@ public class Parser {
         String commandName = parts[0].trim();
         boolean isSingleArgCommand = singleArgCommands.contains(commandName);
 
-        if (parts.length < 2 && !isSingleArgCommand) {
-            throw new WrongSyntaxException();
-        }
         if (!commands.contains(commandName)) {
             throw new UnknownCommandException(commandName);
+        }
+        if (parts.length < 2 && !isSingleArgCommand) {
+            throw new WrongSyntaxException();
         }
         if (isSingleArgCommand) {
             return new String[]{ commandName, "" };
