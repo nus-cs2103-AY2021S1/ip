@@ -84,7 +84,10 @@ public class Event extends Task {
                     String[] times = splitEventTime[1].trim().split("-");
                     LocalTime startTime = LocalTime.parse(times[0]);
                     LocalTime endTime = LocalTime.parse(times[1]);
+                    checkTime(startTime, endTime);
                     return new Event(description, date, startTime, endTime);
+                } catch (DukeException e) {
+                    throw e;
                 } catch (Exception e) {
                     String errMessage = " Please input event time in the following format:\n "
                             + "   YYYY/MM/DD HH:MM-HH:MM!\n" + " *Woof woof*\n";
@@ -96,6 +99,21 @@ public class Event extends Task {
             throw e;
         } catch (Exception e) {
             throw new DukeException(errMessage1);
+        }
+    }
+
+    /**
+     * Compare the start time of an event with the end time.
+     *
+     * @param startTime start time of the event
+     * @param endTime end time of the event
+     * @throws DukeException if start time is before or same as end time.
+     */
+    public static void checkTime(LocalTime startTime, LocalTime endTime) throws DukeException {
+        if (startTime.compareTo(endTime) > 0) {
+            throw new DukeException(" You can't end the event before the start time! Woof!\n");
+        } else if (startTime.compareTo(endTime) == 0) {
+            throw new DukeException(" Start time cannot be the same as end time! Woof!\n");
         }
     }
 
@@ -120,7 +138,7 @@ public class Event extends Task {
     public String toSaveFormat() {
         return "[E]" + super.toSaveFormat() + " (APPEAR at: "
                 + DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG).format(schedule)
-                + " " + startTime + "-" + endTime + ")";
+                + " " + startTime.toString() + "-" + endTime.toString() + ")";
     }
 
     /**
@@ -130,8 +148,9 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("h:mma");
         return "[E]" + super.toString() + " (APPEAR at: "
                 + DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG).format(schedule)
-                + " " + startTime + "-" + endTime + ")";
+                + " " + startTime.format(dateTimeFormatter) + " - " + endTime.format(dateTimeFormatter) + ")";
     }
 }

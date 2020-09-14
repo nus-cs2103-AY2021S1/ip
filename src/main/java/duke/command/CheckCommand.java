@@ -66,7 +66,7 @@ public class CheckCommand implements Command {
      * @return a string representation informing users how to execute this command
      */
     public static String commandToExecute() {
-        return " check <keyword1> {...} : checks for tasks\n";
+        return " check <YYYY/MM/DD> : tasks on this day\n";
     }
 
     /**

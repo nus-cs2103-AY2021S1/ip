@@ -16,7 +16,7 @@ public class EventTest {
     @Test
     public void createTask_success() throws DukeException {
         Event e = Event.createTask("EVENT meeting /at      2019/02/20 16:00-18:00");
-        assertEquals("[E][✘] meeting (APPEAR at: 20 February 2019 16:00-18:00)", e.toString());
+        assertEquals("[E][✘] meeting (APPEAR at: 20 February 2019 4:00pm - 6:00pm)", e.toString());
     }
 
     @Test
@@ -77,13 +77,13 @@ public class EventTest {
     @Test
     public void task_checkFormatPrint() throws DukeException {
         Event e = Event.createTask("EVENT       meeting /at 2019/02/20    16:00-18:00 ");
-        assertEquals("[E][✘] meeting (APPEAR at: 20 February 2019 16:00-18:00)", e.toString());
+        assertEquals("[E][✘] meeting (APPEAR at: 20 February 2019 4:00pm - 6:00pm)", e.toString());
     }
 
     @Test
     public void createTaskWithDoneTest() {
         Event e = new Event("meeting", "20 February 2019 16:00-18:00", true);
-        assertEquals("[E][✓] meeting (APPEAR at: 20 February 2019 16:00-18:00)", e.toString());
+        assertEquals("[E][✓] meeting (APPEAR at: 20 February 2019 4:00pm - 6:00pm)", e.toString());
     }
 
     @Test

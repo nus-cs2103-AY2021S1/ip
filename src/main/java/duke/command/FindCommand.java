@@ -60,7 +60,7 @@ public class FindCommand implements Command {
      * @return a string representation informing users how to execute this command
      */
     public static String commandToExecute() {
-        return " find <YYYY:MM:DD> : tasks on this day\n";
+        return " find <keyword1> {...} : search for tasks\n";
     }
 
     /**

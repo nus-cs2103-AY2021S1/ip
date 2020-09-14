@@ -22,7 +22,7 @@ public class DeadlineTest {
     @Test
     public void createTask_withTime_success() throws DukeException {
         Deadline d = Deadline.createTask("DeAdLine tutorial /by 2019/02/20 12:00");
-        assertEquals("[D][✘] tutorial (FINISH by: 20 February 2019 12:00)", d.toString());
+        assertEquals("[D][✘] tutorial (FINISH by: 20 February 2019 12:00pm)", d.toString());
     }
 
     @Test

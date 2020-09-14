@@ -143,12 +143,13 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("h:mma");
         String s = "[D]" + super.toString() + " (FINISH by: "
                 + DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG).format(toDoBy);
         if (time == null) {
             return s + ")";
         } else {
-            return s + " " + time.toString() + ")";
+            return s + " " + time.format(dateTimeFormatter) + ")";
         }
     }
 }
