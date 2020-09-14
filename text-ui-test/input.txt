@@ -1,0 +1,15 @@
+deadline wakeup /by 730am
+todo finish cs2103 ip
+event lunch /at 12pm-1pm
+list
+done 1
+done 3
+list
+done 2
+event todo
+todo event
+todo
+event
+deadline
+hey alexa play despacito
+bye
