@@ -35,7 +35,7 @@ Expected outcome:
     [T][not done] grocery run
     You have 1 tasks in the list.
     
-### `event` - Adds an Event
+#### `event` - Adds an Event
 
 Adds an Event with details on its date to the list of tasks.
 
@@ -53,7 +53,7 @@ Expected outcome:
     [E][not done] NUS Open House (at: 12 March 2020 12:00 PM)
     You have 2 tasks in the list.
 
-### `deadline` - Adds a Deadline
+#### `deadline` - Adds a Deadline
 
 Adds a task with details on its deadline to the list of tasks.
 
@@ -70,7 +70,9 @@ Expected outcome:
     Got it. I've added this task:
     [D][not done] open book assignment (by: 15 September 2020 11:59 PM)
     You have 3 tasks in the list.
+
 ___
+
 ### Feature 2: Deletion of tasks
 #### `delete` - Deletes a task
 
@@ -89,7 +91,9 @@ Expected outcome:
     Noted. I've removed this task:
     [T][not done] grocery run
     You have 2 tasks in the list.
+
 ___
+
 ### Feature 3: View list of all tasks
 #### `list` - Lists out all tasks
 
@@ -103,7 +107,9 @@ Expected outcome:
 
     1. [E][not done] NUS Open House (at: 12 March 2020 12:00 PM)
     2. [D][not done] open book assignment (by: 15 September 2020 11:59 PM)
+
 ___
+
 ### Feature 4: Mark completion of tasks
 #### `done` - Marks a task as completed
 
@@ -121,7 +127,9 @@ Expected outcome:
 
     Nice! I've marked this task as done:
     [E][done] NUS Open House (at: 12 March 2020 12:00 PM)
+
 ___
+
 ### Feature 5: Undo last action
 #### `undo` - Undo last action
 
@@ -137,7 +145,9 @@ Expected outcome:
     Here is your updated list of tasks.
     1. [E][not done] NUS Open House (at: 12 March 2020 12:00 PM)
     2. [D][not done] open book assignment (by: 15 September 2020 11:59 PM)
+
 ___
+
 ### Feature 6: Search for tasks
 #### `find` - Search for tasks with keyword
 
@@ -155,7 +165,9 @@ Expected outcome:
 
     1. [E][not done] NUS Open House (at: 12 March 2020 12:00 PM)
     2. [D][not done] open book assignment (by: 15 September 2020 11:59 PM)
+
 ___
+
 ### Feature 7: Storage and retrieval of tasks from local drive
 The Duke chat bot is capable of retrieving the list of tasks from past sessions. The user is able to make modifications
 to the list in the active session which would be reflected in the storage on the local drive.
