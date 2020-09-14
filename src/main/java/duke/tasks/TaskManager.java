@@ -32,12 +32,12 @@ public class TaskManager {
      * @param isNew Boolean to indicate that the TaskManager is first initialised.
      */
     public TaskManager(String path, boolean isNew) {
-        assert isNew == true : "isNew is to allow for polymorphism for the case where taskmanager is new";
+        assert isNew : "isNew is to allow for polymorphism for the case where taskmanager is new";
         this.ioParser = new TaskIoParser(path);
         this.taskList = ioParser.loadNewTaskList();
     }
     /**
-     * Indicate that a task is done
+     * Indicates that a task is done
      * @param index index of the list as displayed from the application
      * @return String representation of indicating the task is done.
      * @throws DukeCommandException if a illegal index is given

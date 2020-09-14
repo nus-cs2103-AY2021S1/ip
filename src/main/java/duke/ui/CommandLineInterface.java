@@ -24,8 +24,8 @@ public class CommandLineInterface implements UserInterface {
      * Constructs the CommandLineInterface UI for use without a GUI
      */
     public CommandLineInterface() {
-        this.scanner = new Scanner(System.in);
-        this.isChatbotRunning = false;
+        scanner = new Scanner(System.in);
+        isChatbotRunning = false;
     }
     @Override
     public boolean isRunning() {
@@ -38,8 +38,8 @@ public class CommandLineInterface implements UserInterface {
     @Override
     public void start(String userName) {
         assert !isChatbotRunning : "CommandLineInterface should only start once";
-        this.isChatbotRunning = true;
-        this.userName = userName;
+        isChatbotRunning = true;
+        userName = userName;
         systemMessage(String.format(logo, userName));
     }
 

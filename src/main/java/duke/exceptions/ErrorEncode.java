@@ -1,5 +1,7 @@
 package duke.exceptions;
-
+/**
+ * Enum to encapsulate all generic messages for specific error types
+ */
 public enum ErrorEncode {
     FileRead(0, "A I/O and Filereading Error has occured."),
     BadCommandGiven(1, "I cannot understand what that command means."),
