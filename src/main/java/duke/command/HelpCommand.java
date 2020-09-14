@@ -18,7 +18,8 @@ public class HelpCommand extends Command {
         "done _ (e.g. done 4)",
         "delete _ (e.g. delete 4)",
         "find '   ' (e.g. find book)",
-        "bye",
+        "sort",
+        "bye"
     };
 
     /**

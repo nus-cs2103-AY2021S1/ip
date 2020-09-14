@@ -1,6 +1,7 @@
 package duke.tasklist;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import duke.task.Task;
 
@@ -103,5 +104,12 @@ public class TaskList {
             .filter(task -> task.match(input))
             .forEach(taskList::add);
         return taskList;
+    }
+
+    /**
+     * Sorts the tasks in the list.
+     */
+    public void sort() {
+        Collections.sort(tasks);
     }
 }
