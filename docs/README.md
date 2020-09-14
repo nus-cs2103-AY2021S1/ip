@@ -24,7 +24,7 @@ Add an event to your list.
 
 ## Usage
 
-### `todo <event name> /at <DD-MM-YYYY>`
+### `event <event name> /at <DD-MM-YYYY>`
 
 Adds the event to your list of tasks
 
