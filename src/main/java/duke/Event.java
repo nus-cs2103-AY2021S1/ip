@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * Represents an event inherited from task. A <code>Event</code> object corresponds to
  * a task associated a date as event date

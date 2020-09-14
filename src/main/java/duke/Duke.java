@@ -1,3 +1,5 @@
+package duke;
+
 import java.nio.file.Path;
 import java.util.List;
 import java.util.ArrayList;

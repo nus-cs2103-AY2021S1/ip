@@ -1,5 +1,9 @@
+package duke;
+
 import java.util.ArrayList;
 import java.util.List;
+import duke_exceptions.*;
+
 
 public class Parser {
     // constant SPACE and LINE for format purposes

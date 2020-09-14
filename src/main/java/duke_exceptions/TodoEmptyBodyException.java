@@ -1,3 +1,5 @@
+package duke_exceptions;
+
 /**
  * Represents a Toodo Empty Body Exception. A <code>Todoo EmptyBody
  * Exception</code> object is used when "todoo" is called without further

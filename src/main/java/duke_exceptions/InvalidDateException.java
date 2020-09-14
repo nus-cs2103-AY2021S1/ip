@@ -1,3 +1,5 @@
+package duke_exceptions;
+
 /**
  * Represents an Invalid Date Exception . An <code>Invalid Date Exception
  * </code> object is used when date is invalid

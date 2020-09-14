@@ -1,6 +1,7 @@
+package duke;
+
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
-import java.util.List;
 
 /**
  * Represents a user interface and deals with interactions
