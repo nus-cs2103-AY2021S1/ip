@@ -21,7 +21,7 @@ public class Ui {
 
     public static String showWelcome() {
         return "Hello! I'm Duke\n" + "What can I do for you?\n"
-                + "to know more about Duke, type in 'help'";
+                + "To know more about Duke, type in 'help'";
     }
 
     public static String showEnd() {
@@ -80,16 +80,16 @@ public class Ui {
     }
 
     public static String printHelpInformation() {
-        return  "Instructions in Duke:\n"
-                + "  1. list -- display all the added tasks\n"
-                + "  2. todo DESCRIPTION -- add a simple task\n"
+        return  "Instructions in Duke:\n\n"
+                + "  1. list -- display all the added tasks\n\n"
+                + "  2. todo DESCRIPTION -- add a simple task\n\n"
                 + "  3. deadline DESCRIPTION /by DATE(format: mm-dd-yyyy)\n"
-                + "     -- add a task that needs to be done by a date\n"
+                + "     -- add a task that needs to be done by a date\n\n"
                 + "  4. event DESCRIPTION /at DATE(format: mm-dd-yyyy)\n"
-                + "     -- add a task that needs to be done at a date\n"
-                + "  5. done INDEX -- mark the task at INDEX as done\n"
-                + "  6. delete INDEX -- delete the task at INDEX\n"
-                + "  7. find KEYWORD -- display all the tasks that contains the keyword\n"
+                + "     -- add a task that needs to be done at a date\n\n"
+                + "  5. done INDEX -- mark the task at INDEX as done\n\n"
+                + "  6. delete INDEX -- delete the task at INDEX\n\n"
+                + "  7. find KEYWORD -- display all the tasks that contains the keyword\n\n"
                 + "  8. bye -- say bye to Duke and end the app";
     }
 }
