@@ -1,8 +1,8 @@
 package duke.command;
 
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
+import duke.backend.Storage;
+import duke.task.TaskList;
+import duke.response.Ui;
 
 /**
  * Represents a Bye message action.

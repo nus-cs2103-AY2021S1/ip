@@ -2,9 +2,9 @@ package duke.command;
 
 import java.io.IOException;
 
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
+import duke.backend.Storage;
+import duke.task.TaskList;
+import duke.response.Ui;
 import duke.exception.DukeInvalidIndexException;
 import duke.task.Task;
 

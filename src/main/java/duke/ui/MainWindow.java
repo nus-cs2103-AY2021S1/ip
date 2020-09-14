@@ -1,7 +1,7 @@
 package duke.ui;
 
 import duke.Duke;
-import duke.Ui;
+import duke.response.Ui;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Node;

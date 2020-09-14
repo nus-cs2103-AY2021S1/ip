@@ -2,6 +2,7 @@ package duke;
 
 import java.io.File;
 
+import duke.backend.Storage;
 import duke.command.Command;
 import duke.exception.DukeEmptyAtException;
 import duke.exception.DukeEmptyByException;
@@ -10,6 +11,9 @@ import duke.exception.DukeEmptyIndexException;
 import duke.exception.DukeEmptyKeywordException;
 import duke.exception.DukeInvalidDataException;
 import duke.exception.DukeInvalidDateTimeInputException;
+import duke.response.Parser;
+import duke.response.Ui;
+import duke.task.TaskList;
 
 /**
  * Represents the chat bot.
