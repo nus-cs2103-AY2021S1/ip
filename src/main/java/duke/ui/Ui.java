@@ -112,6 +112,9 @@ public class Ui {
      * @return The message  results
      */
     public String showFindResult(TaskList tasks) {
+        if (tasks.size() == 0) {
+            return "Sorry, I cannot find anything from your list that matches your keyword(s)";
+        }
         return "Here are the matching task(s) in your list: \n" + tasks.toString();
     }
 
