@@ -29,9 +29,12 @@ User can view all possible commands.
 #### `todo` - add a todo task to the list
 Todos: tasks without any date/time attached to it e.g., visit new theme park 
 
-Example of usage: 
+Example of usage:
+
 `todo visit new theme park`
+
 Expected outcome:
+
 `Wow, another task. Added. You sure you can finish them all? 
   [T] [✘] borrow book
   Now you have a grand total of 1 tasks!`
