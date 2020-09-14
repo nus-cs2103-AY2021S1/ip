@@ -13,7 +13,9 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private static final String PATH_TO_MAINWINDOW = "/view/MainWindow.fxml";
+    private static final String PATH_TO_MAIN_WINDOW = "/view/MainWindow.fxml";
+    private static final String PATH_TO_MAIN_WINDOW_STYLES = "/view/MainWindow.css";
+    private static final String NAME = "TheDuke";
 
     private final Duke duke = new Duke();
 
@@ -25,9 +27,11 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(PATH_TO_MAINWINDOW));
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(PATH_TO_MAIN_WINDOW));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
+            scene.getStylesheets().add(PATH_TO_MAIN_WINDOW_STYLES);
+            stage.setTitle(NAME);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();

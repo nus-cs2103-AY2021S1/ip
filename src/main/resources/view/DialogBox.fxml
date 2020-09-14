@@ -4,28 +4,32 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.text.Font?>
+
+<?import javafx.scene.layout.VBox?>
 <fx:root alignment="TOP_RIGHT"
          maxHeight="620.0"
          type="javafx.scene.layout.HBox"
          xmlns="http://javafx.com/javafx/11"
          xmlns:fx="http://javafx.com/fxml/1">
-    <Label fx:id="dialog"
-           text="Label"
-           textFill="#2c2929"
-           wrapText="true">
-        <HBox.margin>
-            <Insets left="8.0"
-                    right="8.0"/>
-        </HBox.margin>
-        <font>
-            <Font name="Segoe UI"
-                  size="13.0"/>
-        </font>
-    </Label>
+    <VBox style="-fx-background-color: whitesmoke;
+    -fx-border-width: 0.5;
+    -fx-border-color: transparent;
+    -fx-border-radius: 30;
+    -fx-padding: 20">
+        <Label
+                fx:id="dialog"
+                text="Label"
+                textFill="#2c2929"
+                wrapText="true">
+            <HBox.margin>
+                <Insets left="8.0"
+                        right="8.0"/>
+            </HBox.margin>
+        </Label>
+    </VBox>
     <ImageView fx:id="displayPicture"
-               fitHeight="80.0"
-               fitWidth="80.0"
+               fitHeight="200.0"
+               fitWidth="200.0"
                pickOnBounds="true"
                preserveRatio="true">
         <HBox.margin>

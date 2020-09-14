@@ -1,0 +1,15 @@
+.screenStyle {
+    -fx-border-color: transparent;
+}
+
+.buttonStyle {
+    -fx-font-family: "Segoe UI Emoji";
+    -fx-background-color: white;
+    -fx-font-size: 20;
+    -fx-border-color: "#DFD6D6";
+}
+
+.textFieldStyle {
+    -fx-background-color: white;
+    -fx-border-color: white;
+}
