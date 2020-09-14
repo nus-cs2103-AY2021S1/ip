@@ -57,7 +57,7 @@ public class Event extends Task {
         String separator = "~";
         String timeInterval = timeStart.format(super.inputDateTimePattern) + " to "
                 + timeEnd.format(super.inputDateTimePattern);
-        return String.format("D%s%s%s%s%s%s%n", separator, isDone, separator,
+        return String.format("E%s%s%s%s%s%s%n", separator, isDone, separator,
                 super.description, separator, timeInterval);
     }
 
