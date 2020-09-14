@@ -37,13 +37,19 @@ public class TaskList {
     }
 
     /**
-     * Gets the task at the specified <code>index</code>.
+     * Gets the task at the specified <code>taskIndex</code>.
+     * Valid indexes range from 0 to less than the size of this list of tasks.
      *
      * @param taskIndex Index of the task.
-     * @return Task at the specified <code>index</code>.
+     * @return Task at the specified <code>taskIndex</code>.
      */
-    public Task getTask(int taskIndex) {
-        return taskList.get(taskIndex);
+    public Task getTask(int taskIndex) throws ButlerException {
+        try {
+            return taskList.get(taskIndex);
+        } catch (IndexOutOfBoundsException e) {
+            throw new ButlerException("Please give a valid index. \""
+                    + taskIndex + "\" is not a valid index.");
+        }
     }
 
     /**
@@ -56,10 +62,10 @@ public class TaskList {
     }
 
     /**
-     * Marks the task at the specified <code>index</code> as complete.
-     * Valid indexes range from 1 to the size of this list of tasks.
+     * Marks the task at the specified <code>taskIndex</code> as complete.
+     * Valid indexes range from 0 to less than the size of this list of tasks.
      *
-     * @param taskIndex Index of the task to mark as completed.
+     * @param taskIndex Index of the task to mark as complete.
      * @throws ButlerException if the index is out of range.
      */
     public void completeTask(int taskIndex) throws ButlerException {
@@ -72,7 +78,8 @@ public class TaskList {
     }
 
     /**
-     * Removes the task at the specified <code>index</code> from this list.
+     * Removes the task at the specified <code>taskIndex</code> from this list.
+     * Valid indexes range from 0 to less than the size of this list of tasks.
      *
      * @param taskIndex Index of the task to be removed.
      * @throws ButlerException if the index is out of range.

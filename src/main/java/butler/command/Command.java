@@ -21,7 +21,7 @@ public abstract class Command {
     public abstract String execute(TaskList taskList, Ui ui, Storage storage) throws ButlerException;
 
     /**
-     * Returns a boolean whether this command is an <code>ExitCommand</code>.
+     * Returns true if this command is an <code>ExitCommand</code>.
      *
      * @return <code>true</code> if this is an <code>ExitCommand</code>
      *         else <code>false</code>.

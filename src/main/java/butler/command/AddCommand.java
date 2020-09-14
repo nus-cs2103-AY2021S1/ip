@@ -10,7 +10,7 @@ import butler.task.TaskList;
  * Represents a command to add a <code>Task</code> to a <code>TaskList</code>.
  */
 public class AddCommand extends Command {
-    private Task task;
+    private final Task task;
 
     /**
      * Constructs a command to add the given <code>task</code>.
@@ -36,13 +36,13 @@ public class AddCommand extends Command {
     public String execute(TaskList taskList, Ui ui, Storage storage) throws ButlerException {
         taskList.addTask(task);
         storage.storeTaskList(taskList);
-        return ui.showTaskAdded(task);
+        return ui.showTaskIsAdded(task);
     }
 
     /**
-     * Returns a boolean whether this command is an <code>ExitCommand</code>.
+     * Returns true if this command is an <code>ExitCommand</code>.
      *
-     * @return <code>false</code>
+     * @return <code>false</code>.
      */
     @Override
     public Boolean isExit() {
@@ -50,7 +50,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Returns the task this command is adding.
+     * Returns the task to be added.
      *
      * @return Task to be added by this command.
      */

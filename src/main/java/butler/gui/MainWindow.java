@@ -1,5 +1,6 @@
-package butler;
+package butler.gui;
 
+import butler.Butler;
 import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -26,9 +27,12 @@ public class MainWindow extends AnchorPane {
 
     private Butler butler;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image butlerImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private final Image butlerImage = new Image(this.getClass().getResourceAsStream("/images/DaButler.png"));
 
+    /**
+     * Initialises the scroll pane of the application.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -57,11 +61,11 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
 
+        // Closes the application upon an exit command
         if (input.equals("bye")) {
             Stage s = (Stage) userInput.getScene().getWindow();
             PauseTransition p = new PauseTransition(Duration.seconds(2));
-            p.setOnFinished(event ->
-                    s.close());
+            p.setOnFinished(event -> s.close());
             p.play();
         }
     }

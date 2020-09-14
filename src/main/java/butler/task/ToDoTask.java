@@ -25,4 +25,13 @@ public class ToDoTask extends Task {
     public String toString() {
         return "[T]" + super.toString();
     }
+
+    /**
+     * Returns a string representation of this task for storage in hard disk.
+     *
+     * @return String representation of this task for storage in hard disk.
+     */
+    public String toStorageString() {
+        return super.toStorageString();
+    }
 }

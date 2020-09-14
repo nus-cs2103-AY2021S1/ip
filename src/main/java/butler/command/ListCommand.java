@@ -6,38 +6,39 @@ import butler.io.Ui;
 import butler.task.TaskList;
 
 /**
- * Represents a command to exit Butler.
+ * Represents a command to list all tasks in a task list.
  */
-public class ExitCommand extends Command {
+public class ListCommand extends Command {
 
     /**
-     * Constructs a command to exit Butler.
+     * Constructs a command to list all tasks in a task list.
      */
-    public ExitCommand() {
+    public ListCommand() {
     }
 
     /**
-     * Alerts the user that Butler will be closed and updates the task list saved in the hard disk.
+     * Lists out the tasks in <code>taskList</code> using <code>ui</code> and
+     * updates the list of tasks saved in the hard disk.
      *
      * @param taskList List of tasks on which this command acts on.
      * @param ui User interface to interact with user.
      * @param storage Storage which stores given <code>taskList</code> on hard disk.
      * @return String response of task execution.
-     * @throws ButlerException if an error occurs while saving the task list.
+     * @throws ButlerException if an error with saving the list of tasks occurs.
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws ButlerException {
         storage.storeTaskList(taskList);
-        return ui.showFarewellMessage();
+        return ui.showTaskList(taskList);
     }
 
     /**
      * Returns true if this command is an <code>ExitCommand</code>.
      *
-     * @return <code>true</code>.
+     * @return <code>false</code>.
      */
     @Override
     public Boolean isExit() {
-        return true;
+        return false;
     }
 }

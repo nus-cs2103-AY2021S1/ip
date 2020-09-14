@@ -11,11 +11,8 @@ import java.util.Scanner;
 
 import butler.command.AddCommand;
 import butler.exception.ButlerException;
-import butler.task.DeadlineTask;
-import butler.task.EventTask;
 import butler.task.Task;
 import butler.task.TaskList;
-import butler.task.TaskType;
 
 /**
  * Represents a storage responsible for reading and writing into the hard disk.
@@ -23,7 +20,7 @@ import butler.task.TaskType;
  * stores the list of tasks into the same location within the hard disk.
  */
 public class Storage {
-    private String filePath;
+    private final String filePath;
 
     /**
      * Constructs a new storage with the given <code>filePath</code>.
@@ -36,7 +33,7 @@ public class Storage {
     }
 
     /**
-     * Stores the given <code>taskList</code> within the <code>filePath</code>.
+     * Stores the given <code>taskList</code> into the <code>filePath</code>.
      *
      * @param taskList List of tasks to be written into the hard disk.
      * @throws ButlerException if file is not detected.
@@ -46,51 +43,18 @@ public class Storage {
             FileWriter fw = new FileWriter(filePath);
             String fileText = "";
 
-            int size = taskList.getSize();
-            for (int i = 0; i < size; i++) {
+            // Content of text to be written into file
+            int listSize = taskList.getSize();
+            for (int i = 0; i < listSize; i++) {
                 Task task = taskList.getTask(i);
-                String taskDetails;
-                TaskType taskType = task.getTaskType();
-
-                if (task.isComplete()) {
-                    taskDetails = "complete";
-                } else {
-                    taskDetails = "incomplete";
-                }
-
-                switch (taskType) {
-                case TODO:
-                    taskDetails += " todo " + task.getSummary();
-                    break;
-
-                case DEADLINE:
-                    DeadlineTask deadlineTask = (DeadlineTask) task;
-                    taskDetails += " deadline " + deadlineTask.getSummary()
-                            + " /by " + deadlineTask.getDeadline();
-                    break;
-
-                case EVENT:
-                    EventTask eventTask = (EventTask) task;
-                    taskDetails += " event " + eventTask.getSummary()
-                            + " /at " + eventTask.getStartDate() + " "
-                            + eventTask.getEndDate();
-                    break;
-
-                default:
-                    throw new ButlerException("Something is wrong. This place should be unreachable.");
-                }
-
+                String taskDetails = task.toStorageString();
                 fileText += taskDetails + System.lineSeparator();
             }
 
             fw.write(fileText);
             fw.close();
-
         } catch (IOException e) {
             throw new ButlerException("There is an error with writing to the path. File is not detected.");
-
-        } catch (ClassCastException e) {
-            throw new ButlerException("Something is wrong. ClassCastException should be unreachable.");
         }
     }
 
@@ -98,7 +62,8 @@ public class Storage {
      * Loads the list of tasks from the <code>filePath</code>.
      *
      * @return A list of tasks read from the <code>filePath</code>.
-     * @throws ButlerException if there is an error within the content of the file.
+     * @throws ButlerException if there is an error within the content of the file
+     *                         or the file is not detected.
      */
     public ArrayList<Task> load() throws ButlerException {
         try {
@@ -106,39 +71,56 @@ public class Storage {
             Scanner s = new Scanner(f);
             ArrayList<Task> taskList = new ArrayList<>();
 
+            //Inputs each task line by line
             while (s.hasNext()) {
                 String input = s.nextLine();
-
-                String completionStatus = input.split(" ", 2)[0];
-                String details = input.split(" ", 2)[1];
-
-                AddCommand c = (AddCommand) Parser.parse(details);
-                Task task = c.getTask();
-
-                if (completionStatus.equals("complete")) {
-                    task.markComplete();
-                }
+                Task task = loadTaskFromLine(input);
                 taskList.add(task);
             }
             return taskList;
 
         } catch (FileNotFoundException e) {
-            try {
-                Files.createDirectory(Paths.get("./data/"));
-                Files.createFile(Paths.get(filePath));
-            } catch (IOException f) {
-                throw new ButlerException("Code should never reach here." + f.getMessage());
-            }
+            createFilePath();
             throw new ButlerException("There is no file to access.");
-
-        } catch (IndexOutOfBoundsException e) {
-            throw new ButlerException("There is an error inside the file. The task has incomplete details.");
-
         } catch (ClassCastException e) {
             throw new ButlerException("Instead of tasks, a command was written into the file.");
+        }
+    }
 
-        } catch (ButlerException e) {
-            throw new ButlerException("There is an error within the task in the file.");
+    /**
+     * Loads a task from a line of input.
+     *
+     * @param input String representation of a task.
+     * @return A task represented by <code>input</code>.
+     * @throws ButlerException if there is an error within the input.
+     */
+    private Task loadTaskFromLine(String input) throws ButlerException {
+        try {
+            String taskDetails = input.split(" ", 2)[1];
+            AddCommand c = (AddCommand) Parser.parse(taskDetails);
+            Task task = c.getTask();
+
+            String completionStatus = input.split(" ", 2)[0];
+            if (completionStatus.equals("complete")) {
+                task.markComplete();
+            }
+            return task;
+        } catch (IndexOutOfBoundsException e) {
+            throw new ButlerException("There is an error inside the file. The task has incomplete details.");
+        }
+    }
+
+    /**
+     * Creates a filePath.
+     *
+     * @throws ButlerException if the file path already exists.
+     */
+    private void createFilePath() throws ButlerException {
+        try {
+            Files.createDirectory(Paths.get("./data/"));
+            Files.createFile(Paths.get(filePath));
+        } catch (IOException e) {
+            throw new ButlerException("Code should never reach here." + e.getMessage());
         }
     }
 }

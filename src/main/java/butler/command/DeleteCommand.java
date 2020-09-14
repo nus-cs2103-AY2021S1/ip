@@ -9,7 +9,7 @@ import butler.task.TaskList;
  * Represents a command to delete a <code>Task</code> from a list of tasks.
  */
 public class DeleteCommand extends Command {
-    private int taskIndex;
+    private final int taskIndex;
 
     /**
      * Constructs a command to delete a task with specified <code>taskIndex</code>.
@@ -23,7 +23,7 @@ public class DeleteCommand extends Command {
     /**
      * Deletes the task specified by <code>taskIndex</code> from <code>taskList</code>.
      * Updates the list of tasks saved in the hard disk and
-     * alerts the user that the task has been successfully added.
+     * alerts the user that the task has been successfully deleted.
      *
      * @param taskList List of tasks on which this command acts on.
      * @param ui User interface to interact with user.
@@ -36,13 +36,13 @@ public class DeleteCommand extends Command {
     public String execute(TaskList taskList, Ui ui, Storage storage) throws ButlerException {
         taskList.deleteTask(taskIndex);
         storage.storeTaskList(taskList);
-        return ui.showTaskDeleted(taskIndex);
+        return ui.showTaskIsDeleted(taskIndex);
     }
 
     /**
-     * Returns a boolean whether this command is an <code>ExitCommand</code>.
+     * Returns true if this command is an <code>ExitCommand</code>.
      *
-     * @return <code>false</code>
+     * @return <code>false</code>.
      */
     @Override
     public Boolean isExit() {
