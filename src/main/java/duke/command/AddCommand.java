@@ -12,7 +12,7 @@ import duke.task.TaskList;
 import java.util.Arrays;
 
 /**
- * A command dealing with adding a task to a task-list.
+ * A command dealing with adding an entry to a Duke-list.
  */
 public class AddCommand extends Command {
     private CommandType commandType;
@@ -30,31 +30,34 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(Ui ui, Storage storage) throws DukeException {
         switch (commandType) {
         case TODO:
             assert details.length == 1;
+            TaskList tasks = storage.getTasks();
             ToDo toDo = new ToDo(details[0]);
-            tasks.addTask(toDo);
+            tasks.addEntry(toDo);
             storage.addLine(toDo.toFileString());
-            ui.showAddedTask(toDo.toString(), tasks.getNumTasks());
+            ui.showAddedTask(toDo.toString(), tasks.getNumEntries());
             break;
         case DEADLINE:
             assert details.length == 2;
+            tasks = storage.getTasks();
             Deadline deadline = new Deadline(details[0], details[1]);
-            tasks.addTask(deadline);
+            tasks.addEntry(deadline);
             storage.addLine(deadline.toFileString());
-            ui.showAddedTask(deadline.toString(), tasks.getNumTasks());
+            ui.showAddedTask(deadline.toString(), tasks.getNumEntries());
             break;
         case EVENT:
             assert details.length == 2;
+            tasks = storage.getTasks();
             Event event = new Event(details[0], details[1]);
-            tasks.addTask(event);
+            tasks.addEntry(event);
             storage.addLine(event.toFileString());
-            ui.showAddedTask(event.toString(), tasks.getNumTasks());
+            ui.showAddedTask(event.toString(), tasks.getNumEntries());
             break;
         default:
-            throw DukeException.INVALID_COMMAND_EXCEPTION;
+            throw UserInputException.INVALID_COMMAND;
         };
     }
 

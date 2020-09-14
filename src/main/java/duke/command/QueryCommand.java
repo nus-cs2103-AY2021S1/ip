@@ -11,7 +11,9 @@ import java.util.ArrayList;
  * A command dealing with search queries on the tasks in the task-list.
  */
 public class QueryCommand extends Command {
+    /** The type of the QueryCommand. */
     private CommandType commandType;
+    /** The keyword to be used for searching. */
     private String searchQuery;
 
     /**
@@ -26,8 +28,9 @@ public class QueryCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        String[] lines = tasks.getTasks();
+    public void execute(Ui ui, Storage storage) throws FileException {
+        TaskList tasks = storage.getTasks();
+        String[] lines = tasks.getEntries();
         ArrayList<String> finds = new ArrayList<>();
         for (String line : lines) {
             if (line.toLowerCase().contains(searchQuery)) {
@@ -35,7 +38,7 @@ public class QueryCommand extends Command {
             }
         }
 
-        if (finds.size() > 0) {
+        if (!finds.isEmpty()) {
             ui.listNumberedFoundTasks(finds.toArray(new String[1]));
         } else {
             ui.setNoFoundTasksMessage(searchQuery);

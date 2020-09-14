@@ -1,60 +1,18 @@
 package duke.task;
 
 import duke.DukeException;
-
-import java.util.ArrayList;
+import duke.DukeList;
+import duke.command.UserInputException;
 
 /**
  * A task-list maintaining the state of the tasks.
  */
-public class TaskList {
-    private final ArrayList<Task> tasks;
+public class TaskList extends DukeList<Task> {
 
     /**
      * Constructs a new TaskList object with an empty task-list.
      */
-    public TaskList() {
-        tasks = new ArrayList<>();
-    }
-
-    /**
-     * Gets the number of tasks in the task-list.
-     *
-     * @return The number of tasks currently in the task-list.
-     */
-    public int getNumTasks() {
-        return tasks.size();
-    }
-
-    /** Returns the tasks in the task-list as an array of string objects. */
-    public String[] getTasks() {
-        int numTasks = tasks.size();
-        String[] taskStrings = new String[numTasks];
-        for (int i = 0; i < numTasks; i++) {
-            taskStrings[i] = tasks.get(i).toString();
-        }
-        return taskStrings;
-    }
-
-    /**
-     * Adds a task to the current task-list.
-     *
-     * @param task The task to be added to the task-list.
-     */
-    public void addTask(Task task) {
-        tasks.add(task);
-    }
-
-    /**
-     * Adds tasks from the given list to the current task-list.
-     *
-     * @param tasks The list of tasks to be added to the task-list.
-     */
-    public void loadTasks(ArrayList<Task> tasks) {
-        for (Task t : tasks) {
-            this.tasks.add(t);
-        }
-    }
+    public TaskList() {}
 
     /**
      * Marks the task at the specified index of the task-list as done.
@@ -66,27 +24,28 @@ public class TaskList {
      */
     public Task markTaskAsDone(int index) throws DukeException {
         try {
-            Task task = tasks.get(index - 1);
+            Task task = entries.get(index - 1);
             task.markAsDone();
             return task;
         } catch (IndexOutOfBoundsException e) {
-            throw DukeException.INVALID_TASK_INDEX_EXCEPTION;
+            throw UserInputException.INVALID_TASK_INDEX;
         }
     }
 
     /**
-     * Deletes the task at the specified index of the task-list.
+     * Deletes the entry at the specified index of the task-list.
      *
-     * @param index The index specifying the position in the task-list to delete the task (starts at 1).
-     * @return The deleted task.
-     * @throws DukeException If the index is out of bounds, either less than 1 or bigger than the size of
+     * @param index The index specifying the position in the task-list to delete the entry (starts at 1).
+     * @return The deleted entry.
+     * @throws DukeException If the index is out of bounds (either less than 1 or bigger than the size of
      * the task-list.
      */
     public Task deleteTask(int index) throws DukeException {
         try {
-            return tasks.remove(index - 1);
+            return entries.remove(index - 1);
         } catch (IndexOutOfBoundsException e) {
-            throw DukeException.INVALID_TASK_INDEX_EXCEPTION;
+            throw UserInputException.INVALID_TASK_INDEX;
         }
     }
+
 }

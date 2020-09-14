@@ -8,17 +8,19 @@ import duke.task.Task;
 import duke.task.TaskList;
 
 /**
- * A command dealing with editing or deleting a task from a task-list.
+ * A command dealing with editing or deleting an entry from a Duke-list.
  */
 public class EditCommand extends Command {
+    /** The Type of the EditCommand. */
     private CommandType commandType;
+    /** The index associated with the command. */
     private int index;
 
     /**
      * Constructs a new EditCommand object of the specified CommandType with the index where the command is executed.
      *
-     * @param commandType
-     * @param index
+     * @param commandType The type of the EditCommand.
+     * @param index The index associated with the command.
      */
     public EditCommand(CommandType commandType, int index) {
         this.commandType = commandType;
@@ -26,7 +28,8 @@ public class EditCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(Ui ui, Storage storage) throws DukeException {
+        TaskList tasks = storage.getTasks();
         switch (this.commandType) {
         case DONE:
             Task doneTask = tasks.markTaskAsDone(index);
@@ -35,11 +38,11 @@ public class EditCommand extends Command {
             break;
         case DELETE:
             Task deletedTask = tasks.deleteTask(index);
-            ui.showDeletedTask(deletedTask.toString(), tasks.getNumTasks());
+            ui.showDeletedTask(deletedTask.toString(), tasks.getNumEntries());
             storage.deleteLine(index);
             break;
         default:
-            throw DukeException.INVALID_COMMAND_EXCEPTION;
+            throw UserInputException.INVALID_COMMAND;
         }
     }
 

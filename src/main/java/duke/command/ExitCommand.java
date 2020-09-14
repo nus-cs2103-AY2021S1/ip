@@ -3,8 +3,6 @@ package duke.command;
 import duke.Ui;
 import duke.Storage;
 
-import duke.task.TaskList;
-
 /**
  * A command that signals the application to close.
  */
@@ -21,7 +19,7 @@ public class ExitCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(Ui ui, Storage storage) {
         ui.goodbye();
     }
 
