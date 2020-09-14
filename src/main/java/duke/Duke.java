@@ -36,6 +36,7 @@ public class Duke extends Application {
 
     private Image user = new Image(this.getClass().getResourceAsStream("/images/User.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/Duke.jpg"));
+    private Image icon = new Image(this.getClass().getResourceAsStream("/images/send.png"));
 
     /**
      * Represents a Duke object that servers as a tracking bot
@@ -67,8 +68,19 @@ public class Duke extends Application {
         scrollPane.setContent(dialogContainer);
 
         userInput = new TextField();
-        sendButton = new Button("Send");
+        userInput.setId("UserInput");
+        userInput.getStylesheets().add("/css/styles.css");
+        userInput.setPromptText("Enter your command here");
 
+
+        sendButton = new Button();
+        ImageView icon = new ImageView(this.icon);
+        icon.setFitHeight(24);
+        icon.setFitWidth(30);
+        sendButton.setGraphic(icon);
+        sendButton.setId("Button");
+        sendButton.getStylesheets().add("/css/styles.css");
+        
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
@@ -77,13 +89,14 @@ public class Duke extends Application {
         stage.show();
 
         stage.setTitle("Duke");
+        stage.getIcons().add(this.duke);
         stage.setResizable(false);
-        stage.setMinHeight(600.0);
+        stage.setMinHeight(700.0);
         stage.setMinWidth(700.0);
 
-        mainLayout.setPrefSize(800.0, 600.0);
+        mainLayout.setPrefSize(800.0, 700.0);
 
-        scrollPane.setPrefSize(685, 535);
+        scrollPane.setPrefSize(685, 620);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
@@ -93,9 +106,10 @@ public class Duke extends Application {
         // You will need to import `javafx.scene.layout.Region` for this.
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
-        userInput.setPrefWidth(625.0);
-
-        sendButton.setPrefWidth(55.0);
+        userInput.setPrefWidth(600.0);
+        userInput.setPrefHeight(37);
+        sendButton.setPrefWidth(82.0);
+        sendButton.setPrefHeight(36);
 
         AnchorPane.setTopAnchor(scrollPane, 1.0);
 

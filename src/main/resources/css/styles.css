@@ -13,3 +13,36 @@
     -fx-font-family: Arial;
     -fx-font-size: 16;
 }
+
+#UserInput{
+   -fx-font-family: "Quicksand";
+   -fx-font-size: 18;
+   -fx-padding: 1,1,1,1;
+   -fx-border-color: grey;
+   -fx-border-width: 2;
+   -fx-border-radius: 1;
+   -fx-border: gone;
+   -fx-background-color: transparent;
+   -fx-text-fill: grey;
+}
+
+#Button{
+	-fx-box-shadow: 0px 0px 0px 2px;
+	-fx-box-shadow-color: #9fb4f2;
+    -fx-background:linear-gradient(to bottom, #7892c2 5%, #476e9e 100%);
+    -fx-background-color: #eaeaea;
+	-fx-border-radius:11px;
+	-fx-border:1px;
+	-fx-border-style: solid;
+	-fx-border-color: #4e6096;
+	-fx-display:inline-block;
+	-fx-cursor:pointer;
+	-fx-font-color:#ffffff;
+	-fx-font-family:Arial;
+    -fx-font-size:17px;
+	-fx-font-weight:bold;
+	-fx-text-decoration: none;
+	-fx-text-shadow:0px 1px 0px;
+	-fx-text-shadow-color: #283966;
+}
+
