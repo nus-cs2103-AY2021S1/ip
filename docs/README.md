@@ -1,5 +1,5 @@
 # User Guide
-
+Duke is a chatbot that manages your tasks. You can use Duke to organize tasks that you need to do, deadlines and events .
 ## Features 
 
 ### Feature 1 
@@ -7,14 +7,13 @@ Description of feature.
 
 ## Usage
 
-### `Keyword` - Describe action
+### `todo` - Adding a todo
 
-Describe action and its outcome.
+Adds a task that you need to do in your to do list in Duke.
 
-Example of usage: 
+Format: `todo DESCRIPTION [#TAG]`
 
-`keyword (optional arguments)`
+Examples of usage: 
 
-Expected outcome:
-
-`outcome`
+* `todo do homework`
+* `todo do homework #school`
