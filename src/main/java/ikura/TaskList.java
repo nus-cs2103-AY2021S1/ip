@@ -167,7 +167,11 @@ public class TaskList extends Observable<TaskList> /* CRTP KEKW */ {
 
         return StreamUtils.indexed(this.tasks.stream())
             .filter(x -> {
-                var words = Arrays.stream(x.snd().getTitle().split(" "));
+                var words = Stream.concat(
+                    Arrays.stream(x.snd().getTitle().split(" ")),
+                    Arrays.stream(x.snd().getDescription().split(" "))
+                ).map(t -> t.toLowerCase());
+
                 return words.anyMatch(w -> keywords.contains(w));
             })
             .collect(Collectors.toList());
