@@ -1,5 +1,6 @@
 package duke.helpers;
 
+import duke.errors.DeadlineException;
 import duke.errors.DukeException;
 import duke.errors.FIleEmptyException;
 import duke.errors.FileAbsentException;
@@ -104,7 +105,7 @@ public class Storage {
      * @param isDone boolean of whether task is completed or not. True if completed and false otherwise.
      * @return Event task
      */
-    private Event eventPresent(String input, boolean isDone) {
+    private Event eventPresent(String input, boolean isDone) throws DukeException {
         String string = "";
         int index = -1;
         for (int i = 8; i < input.length(); i++) {
@@ -122,7 +123,7 @@ public class Storage {
             }
             another = another + input.charAt(i); // character "-" separates the start and end time.
         }
-        return new Event(string, isDone, another, input.substring(index + 1));
+        return Event.eventTask(string, another, input.substring(index + 1), isDone);
     }
     /**
      * Returns Deadline task for that present in list in storage
@@ -131,7 +132,7 @@ public class Storage {
      * @param isDone boolean of whether task is completed or not. True if completed and false otherwise.
      * @return Deadline task
      */
-    private Deadline deadlinePresent(String input, boolean isDone) {
+    private Deadline deadlinePresent(String input, boolean isDone) throws DeadlineException {
         String string = "";
         int index = -1;
         for (int i = 8; i < input.length(); i++) {
@@ -141,8 +142,7 @@ public class Storage {
             }
             string = string + input.charAt(i); //line '|' splits the description of deadline and time.
         }
-        return new Deadline(string, isDone, input.substring(index + 2));
-
+        return Deadline.deadlineTask(string, input.substring(index + 2), isDone);
     }
     /**
      * gives the filePath

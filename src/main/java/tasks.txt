@@ -1,2 +1,4 @@
 T | 1 | buy book
 D | 0 | submission | 14 Nov 2020
+E | 0 | concert | 12:00-14:00
+E | 0 | competition | 12:00-14:00

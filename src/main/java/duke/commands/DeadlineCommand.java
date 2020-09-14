@@ -41,11 +41,8 @@ public class DeadlineCommand extends AddCommand {
             ui.setDukeException(new DeadlineException(true, false, false));
             throw new DeadlineException(true, false, false); //Since description is absent
         }
-
         try {
-            String[] dataSplit = splitData(); //Split into description name and time and/or date
-            Deadline d = deadlineTask(dataSplit[0], dataSplit[1]); //gives the Deadline
-            return updateTaskList(storage, d, tasks); //updates the tasks and file in storage
+            return Deadline.addDeadlineTask(tasks, ui, storage, commandDescription);
         } catch (DukeException dukeException) {
             ui.setDukeException(dukeException);
             throw dukeException;
