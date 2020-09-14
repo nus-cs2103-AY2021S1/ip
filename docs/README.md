@@ -190,6 +190,7 @@ DukeBunny data is automatically saved into the TaskList.txt file after any comma
 DukeBunny will always draw the data of the task list from the TaskList.txt file.
 
 ## Command Summary
+
 | Action | Format/Examples |
 | ------------- | ------------- |
 | Add Todo | `todo DESCRIPTION` <br> e.g. `todo Buy bread` |
