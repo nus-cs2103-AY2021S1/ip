@@ -16,7 +16,7 @@ public class AddToListCommandTest {
     }
 
     @Test
-    public void processDate_taskDateWithoutTime_exceptionThrown() throws DukeException {
+    public void processDate_taskDateWithoutTime_exceptionThrown() {
         try {
             AddToListCommand command = new AddToListCommand();
             LocalDateTime test = command.processDate("5/2/2020");
@@ -26,7 +26,7 @@ public class AddToListCommandTest {
     }
 
     @Test
-    public void processDate_invalidDate_exceptionThrown() throws DukeException {
+    public void processDate_invalidDate_exceptionThrown() {
         try {
             AddToListCommand command = new AddToListCommand();
             LocalDateTime test = command.processDate("5/13/2020 1900");
