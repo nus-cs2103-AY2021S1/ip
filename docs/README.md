@@ -35,9 +35,11 @@ Example of usage:
 
 Expected outcome:
 
-<p> `Wow, another task. Added. You sure you can finish them all? 
+`Wow, another task. Added. You sure you can finish them all? 
+  
   [T] [✘] borrow book
-  Now you have a grand total of 1 tasks!` </p>
+  
+  Now you have a grand total of 1 tasks!`
 
 Deadlines: tasks that need to be done before a specific date e.g., submit CS2030 homework by 22/12/2020
 
