@@ -16,7 +16,7 @@ Nite is a task tracking cat-bot, dark as the night, and convenient to use.
 
 ## Quick Start
 1. Ensure you have `Java 11` or above installed in your Computer.
-2. Download the latest nite.jar from [here](https://github.com/cwenling/ip/releases).
+2. Download the latest nite.jar from [here](https://github.com/cwenling/ip/releases/tag/A-Release).
 3. Copy the file to the folder you want to use as the home folder for Nite.
 4. Double-click the file, and Nite will wake up. Your chat with Nite will appear:
 ![Welcome Screen](./ui/welcome.png)
