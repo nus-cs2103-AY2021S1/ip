@@ -126,10 +126,11 @@ public class DeleteCommand extends Command {
      */
     private String rewrite(Storage storage, TaskList tasks, int iD) throws DukeException {
         try {
+            String message = deleteTaskString(tasks, iD);
             deleteTaskInTaskList(tasks, iD); //deleted the task with ID in TaskList
             String newTaskList = newInputInStorageFIle(tasks); //gives new file input and deletes
             updateTaskInStorage(newTaskList, storage); //replaces old list in storage file with this
-            return deleteTaskString(tasks, iD);
+            return message;
         } catch (DukeException dukeException) {
             throw new FileAbsentException(storage.getFilePath());
         }

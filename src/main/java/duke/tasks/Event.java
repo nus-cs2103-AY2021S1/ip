@@ -67,7 +67,7 @@ public class Event extends Task {
      * @return the string representation
      */
     public String inputListFormat() {
-        return "E" + super.inputListFormat() + " | " + this.startDateAndOrTime + "-" + this.endDateAndOrTime;
+        return "E" + super.inputListFormat() + "| " + this.startDateAndOrTime + "-" + this.endDateAndOrTime;
         //format of Tasks to appear in file in Storage
     }
     public static String addEventTask(TaskList tasks, Ui ui, Storage storage, String commandDescription) throws DukeException {

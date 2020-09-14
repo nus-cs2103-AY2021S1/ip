@@ -76,7 +76,8 @@ public class Deadline extends Task {
      * @return the string representation
      */
     public String inputListFormat() {
-        return "D" + super.inputListFormat() + " | " + this.dayAndOrTime; //format of Tasks to appear in file in Storage
+        String s = super.inputListFormat();
+        return "D" + super.inputListFormat() + "| " + this.dayAndOrTime; //format of Tasks to appear in file in Storage
     }
 
     public static String addDeadlineTask(TaskList tasks, Ui ui, Storage storage, String commandDescription)
