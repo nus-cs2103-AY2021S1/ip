@@ -25,7 +25,13 @@ public class Duke {
     public Duke(boolean hasGui) {
         TaskList taskList = new TaskList();
         this.ui = new Ui(hasGui);
-        Storage storage = new Storage("../data", "../data/duke.txt", this.ui, taskList);
+        Storage storage;
+        if (hasGui) {
+            String currDir = System.getProperty("user.dir");
+            storage = new Storage(currDir + "/data", currDir + "/data/duke.txt", this.ui, taskList);
+        } else {
+            storage = new Storage("../data", "../data/duke.txt", this.ui, taskList);
+        }
         storage.checkSavedFile();
         this.parser = new Parser(storage);
     }
