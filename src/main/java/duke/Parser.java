@@ -47,7 +47,7 @@ public class Parser {
         } else if (actionType.equals("todo") || actionType.equals("deadline") || actionType.equals("event")) {
             return new AddToListCommand();
         } else {
-            throw new DukeException("Specified action is not recognised!");
+            throw new DukeException("Specified action is not recognised.");
         }
     }
 }
