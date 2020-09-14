@@ -2,7 +2,7 @@
 DukeBunny is a **desktop application for managing tasks, optimized for use via a Command Line Interface (CLI)** while still 
 having the visual benefits of a Graphical User Interface (GUI). If you need help in **keeping track of things to do**, 
 DukeBunny offers several useful features with a touch of posh attitude to it.  
-##Getting Started
+## Getting Started
 1. Ensure you have Java `11` or above installed in your Computer.
 2. Download the latest `DukeBunny.jar` from here.
 3. Copy the downloaded jar file to the folder you want to use as the home folder for your DukeBunny.
@@ -190,7 +190,7 @@ Format: `bye`
 DukeBunny data is automatically saved into the TaskList.txt file after any command that changes the data is executed.
 DukeBunny will always draw the data of the task list from the TaskList.txt file.
 
-##Command Summary
+## Command Summary
 Action | Format/Examples
 ------------ | -------------
 Add Todo | `todo DESCRIPTION` <br> e.g. `todo Buy bread`
