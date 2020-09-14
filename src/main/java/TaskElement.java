@@ -1,3 +1,6 @@
+/**
+ * Class that stores the differnt types of command constants.
+ */
 public enum TaskElement {
     BYE("bye"),
     LIST("list"),
@@ -13,6 +16,11 @@ public enum TaskElement {
 
     public final String label;
 
+    /**
+     * Returns the labels of the different constants.
+     *
+     * @param input The input that has been input by the user.
+     */
     private TaskElement(String label) {
         this.label = label;
     }

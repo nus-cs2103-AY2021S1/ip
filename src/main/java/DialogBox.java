@@ -9,25 +9,27 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 
 /**
- * An example of a custom control using FXML.
- * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
+ * This control represents a dialog box consisting of a Circle to represent the speaker's face and a label
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
     @FXML
     private Label dialog;
-    //@FXML
-    //private ImageView displayPicture;
 
     @FXML
     private Circle displayPicture;
 
+    /**
+     * Generates the Dialog box object for the GUI.
+     *
+     * @param text The text generated for teh reminder.
+     * @param img  The image of the different parties talking in the GUI
+     */
     private DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -53,10 +55,22 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Generates the Dialog box object for the user.
+     *
+     * @param text The text generated for the reminder.
+     * @param img  The image of the different parties talking in the GUI
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Generates the Dialog box object for the responder.
+     *
+     * @param text The text generated for the reminder.
+     * @param img  The image of the different parties talking in the GUI
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

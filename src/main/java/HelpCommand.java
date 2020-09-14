@@ -1,10 +1,26 @@
+/**
+ * Class that makes a helpCommand which genereates the help message.
+ */
 public class HelpCommand extends Command {
-    private String command;
+    private String input;
 
-    HelpCommand(String command) {
-        this.command = command;
+    /**
+     * Constructs a helpCommand object with a provided input.
+     *
+     * @param input The input that has been input by the user.
+     */
+    HelpCommand(String input) {
+        this.input = input;
     }
 
+    /**
+     * Generates the help message.
+     *
+     * @param tasklist The list of tasks.
+     * @param ui       The ui object that helps generate the different messgaes for display.
+     * @return String The message that is to be output on the GUI.
+     * @throws DukeException If there are wrong eneteries.
+     */
     @Override
     public String execute(TaskList tasklist, UI ui) throws DukeException {
         String message = "Welcome to the help list!!! Below are the list of commands that you can enter: \n";

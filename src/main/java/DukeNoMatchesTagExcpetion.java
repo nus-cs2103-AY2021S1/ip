@@ -1,3 +1,6 @@
+/**
+ * Thrown to indicate that there is no matches with Tags the user has keyed in.
+ */
 public class DukeNoMatchesTagExcpetion extends DukeException {
 
     /**

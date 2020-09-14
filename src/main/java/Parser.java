@@ -155,14 +155,32 @@ public class Parser {
         return input.split(" ")[0].equals(TaskElement.FIND.label);
     }
 
+    /**
+     * Parses the input to check for "tag".
+     *
+     * @param input Input of the user.
+     * @return True if there is "tag".
+     */
     public static boolean isTag(String input) {
         return input.split(" ")[0].equals(TaskElement.TAG.label);
     }
 
+    /**
+     * Parses the input to check for "findtag".
+     *
+     * @param input Input of the user.
+     * @return True if there is "findtag".
+     */
     public static boolean isFindTag(String input) {
         return input.split(" ")[0].equals(TaskElement.FINDTAG.label);
     }
 
+    /**
+     * Parses the input to check for "help".
+     *
+     * @param input Input of the user.
+     * @return True if there is "help".
+     */
     public static boolean isHelp(String input) {
         return input.split(" ")[0].equals(TaskElement.HELP.label);
     }

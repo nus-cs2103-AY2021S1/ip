@@ -1,5 +1,5 @@
 /**
- * Thrown to indicate that the user has put in an empty deadline Time
+ * Thrown to indicate that the user has put in an empty deadline Time.
  */
 public class DukeEmptyDeadlineTimeException extends DukeException {
 

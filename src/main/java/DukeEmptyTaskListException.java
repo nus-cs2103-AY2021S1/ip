@@ -1,3 +1,6 @@
+/**
+ * Thrown to indicate that the user has requested to display the list when there is no tasks.
+ */
 public class DukeEmptyTaskListException extends DukeException {
 
     /**

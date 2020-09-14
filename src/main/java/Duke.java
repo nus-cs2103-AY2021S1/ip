@@ -1,5 +1,4 @@
 import java.io.IOException;
-import java.time.format.DateTimeParseException;
 
 /**
  * Main class where Duke program is run.
@@ -24,17 +23,10 @@ public class Duke {
     }
 
     /**
-     * Runs the duke program and will terminate upon input "bye"
+     * Runs the duke program and will terminate upon input "bye".
      *
-     * @throws DukeUnknownInputException      If users inputs invalid input.
-     * @throws DukeEmptyToDoException         If todo is empty.
-     * @throws DukeEmptyEventException        If event is empty.
-     * @throws DukeEmptyDeadlineException     If deadline is empty.
-     * @throws DukeInvalidDoneNumException    If done number entered is invalid.
-     * @throws DukeEmptyDeadlineTimeException If the deadline time is empty.
-     * @throws DukeEmptyEventTimeException    If the event time is empty.
-     * @throws DukeDeleteException            If there are any other exceptions.
-     * @throws DateTimeParseException         If there is time passed in the wrong format.
+     * @param input input of the user.
+     * @throws DukeException If the user keys in wromg inputs and returns various messages.
      */
     public String run(String input) {
         String message = "";

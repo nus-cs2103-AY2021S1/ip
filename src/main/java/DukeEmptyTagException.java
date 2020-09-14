@@ -1,4 +1,8 @@
+/**
+ * Thrown to indicate that the user has put in an empty Tag message.
+ */
 public class DukeEmptyTagException extends DukeException {
+
     /**
      * Constructs a DukeEmptyTagException with a relevant detail message.
      *

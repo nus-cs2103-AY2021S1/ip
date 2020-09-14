@@ -1,17 +1,34 @@
+/**
+ * Class that makes a Findcommand which helps find the different tasks.
+ */
 public class FindCommand extends Command {
-    private String command;
+    private String input;
 
-    FindCommand(String command) {
-        this.command = command;
+    /**
+     * Constructs a FindCommand object with a provided input.
+     *
+     * @param input The input that has been input by the user.
+     */
+    FindCommand(String input) {
+        this.input = input;
     }
 
+    /**
+     * Finds the task with the input provided.
+     *
+     * @param tasklist The list of tasks.
+     * @param ui       The ui object that helps generate the different messgaes for display.
+     * @return String The message that is to be output on the GUI.
+     * @throws DukeEmptyFindException If there is empty message.
+     * @throws DukeNoMatchesExcpetion If there are no matches to the input.
+     */
     @Override
     public String execute(TaskList tasklist, UI ui) throws DukeEmptyFindException, DukeNoMatchesExcpetion {
         String message = "";
         try {
-            String[] findParts = command.split(" ");
+            String[] findParts = input.split(" ");
             if (findParts.length == 1) {
-                throw new DukeEmptyFindException(command);
+                throw new DukeEmptyFindException(input);
             } else {
                 message = ui.printKeywordTasks(findParts[1], tasklist.getTasks());
             }

@@ -1,7 +1,6 @@
-T | 0 | read book | dd
 E | 1 | project meeting | 01-01-2020 12:30 | bru
 D | 0 | return book | 23-02-2020 00:00 | bro
 T | 0 | sing song | sis
-T | 1 | run | lol
+T | 1 | run | bro
 T | 0 | swim | deeddd
-T | 0 | eat | 
+T | 1 | eat | 

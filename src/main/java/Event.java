@@ -18,8 +18,8 @@ public class Event extends Task {
     /**
      * Constructs an Event object with the specified description and date and/or time.
      *
-     * @param description The description of this event.
-     * @param descriptionAfterAt          The date/time of this event.
+     * @param description        The description of this event.
+     * @param descriptionAfterAt The date/time of this event.
      * @throws DateTimeParseException Throws if there is a wrong format of date/time passed.
      */
     public Event(String description, String descriptionAfterAt) throws DateTimeParseException {
@@ -35,7 +35,8 @@ public class Event extends Task {
      */
     @Override
     public String writeSaveFormat() {
-        return String.format("E | %d | %s | %s | %s", isDone ? 1 : 0, description, descriptionAfterAt, hasTag ? tagName: "");
+        return String.format("E | %d | %s | %s | %s", isDone
+                ? 1 : 0, description, descriptionAfterAt, hasTag ? tagName : "");
     }
 
     /**

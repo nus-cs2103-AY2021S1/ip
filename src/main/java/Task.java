@@ -2,17 +2,9 @@
  * Represents an Task reminder.
  */
 public class Task {
-    /**
-     * The description of the task.
-     */
     protected String description;
-    /**
-     * If teh task is done.
-     */
     protected boolean isDone;
-
     protected String tagName;
-
     protected boolean hasTag;
 
     /**
@@ -53,26 +45,53 @@ public class Task {
         return store;
     }
 
+    /**
+     * Generates the tick and cross symbol.
+     *
+     * @return String returns the string version of a tick and cross.
+     */
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
+    /**
+     * Generates the tag message.
+     *
+     * @return String returns the tage message with the # infront.
+     */
     public String getTagDisplay() {
         String message = "";
         if (hasTag) {
-            message += " #" +  this.tagName;
+            message += " #" + this.tagName;
         }
         return message;
     }
+
+    /**
+     * Generates the message of this task.
+     *
+     * @return String returns the message form of this task.
+     */
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "]" + " " + description + getTagDisplay();
     }
 
+    /**
+     * Checks wether the keyword is in the descrition.
+     *
+     * @param substring the string to be found.
+     * @return boolean if the keyword exists.
+     */
     public boolean containsKeyword(String substring) {
         return this.description.contains(substring);
     }
 
+    /**
+     * Makes the tag with the current tag name.
+     *
+     * @param tagName Name of the tag.
+     */
     public void makeTag(String tagName) {
         this.tagName = tagName;
         this.hasTag = true;

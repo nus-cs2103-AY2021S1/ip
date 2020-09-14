@@ -1,5 +1,5 @@
 /**
- * Thrown to indicate that the user has put in an empty deadline
+ * Thrown to indicate that the user has put in an empty deadline.
  */
 public class DukeEmptyDeadlineException extends DukeException {
 

@@ -12,8 +12,8 @@ public class Deadline extends Task {
     /**
      * Constructs a Deadline with a description and a due date.
      *
-     * @param description The description of this deadline.
-     * @param descriptionAfterBy          The due date of this deadline.
+     * @param description        The description of this deadline.
+     * @param descriptionAfterBy The due date of this deadline.
      * @throws DateTimeParseException If date is not in the right format.
      */
     public Deadline(String description, String descriptionAfterBy) throws DateTimeParseException {
@@ -29,7 +29,8 @@ public class Deadline extends Task {
      */
     @Override
     public String writeSaveFormat() {
-        return String.format("D | %d | %s | %s | %s", isDone ? 1 : 0, description, descriptionAfterBy, hasTag ? tagName: "");
+        return String.format("D | %d | %s | %s | %s",
+                isDone ? 1 : 0, description, descriptionAfterBy, hasTag ? tagName : "");
     }
 
     /**

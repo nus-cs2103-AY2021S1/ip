@@ -1,3 +1,6 @@
+/**
+ * Thrown to indicate that the user has put in an empty FindTag message.
+ */
 public class DukeEmptyFindTagException extends DukeException {
 
     /**
