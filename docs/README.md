@@ -206,6 +206,8 @@ Expected outcome:
 
                 `bye` - to exit the program
  ```
+ ## Exiting the program
+
  ### `bye` - Exits the program
  
  Format: `bye`
@@ -215,7 +217,7 @@ Expected outcome:
  `bye`
  
  Expected outcome:
- ```Terminates the program```
+ Terminates the program
  
 
 
