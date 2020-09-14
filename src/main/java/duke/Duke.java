@@ -87,7 +87,8 @@ public class Duke extends Application {
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
-        dialogContainer.getChildren().add(getDialogLabel(ui.showGreeting()));
+        Label greetingText = new Label(ui.showGreeting());
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(greetingText, new ImageView(duke)));
 
         // Stage 3
         sendButton.setOnMouseClicked((event) -> {
@@ -103,20 +104,6 @@ public class Duke extends Application {
     }
 
     /**
-     * Iteration 1:
-     * Creates a label with the specified text and adds it to the dialog container.
-     * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
-     */
-    private Label getDialogLabel(String text) {
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
-    }
-
-    /**
-     * Iteration 2:
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
@@ -131,8 +118,7 @@ public class Duke extends Application {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Gets the Duke response to the user input.
      */
     private String getResponse(String input) {
         String response;

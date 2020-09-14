@@ -22,15 +22,15 @@ public class Ui {
      */
     public String showGreeting() {
         String message = "Are ya winning, son?\n\n"
-                + "Here are the following commands you can use:\n"
-                + "todo {name of task}  -  Adds a new todo task\n"
-                + "deadline {name of task} /by {YYYY-MM-DD}  -  Adds a new deadline\n"
-                + "event {name of task} /at {YYYY-MM-DD}  -  Adds a new event\n"
-                + "done {task index}  -  Marks the task with stated index as done\n"
-                + "delete {task index}  -  Deletes the task with stated index\n"
-                + "find {keyword}  -  Get the list of tasks with stated keyword(s)\n"
-                + "list  -  Shows the list of tasks\n"
-                + "statistics  -  Shows some statistics regarding the tasks\n";
+                + "Here are the following commands you can use:\n\n"
+                + "todo {name of task}\n"
+                + "deadline {name of task} /by {YYYY-MM-DD}\n"
+                + "event {name of task} /at {YYYY-MM-DD}\n"
+                + "done {task index}\n"
+                + "delete {task index}\n"
+                + "find {keyword}\n"
+                + "list\n"
+                + "statistics\n";
         return cleanMessage(message);
     }
 
