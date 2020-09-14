@@ -14,6 +14,7 @@ Duke is a task manager with a Graphical User Interface(GUI). Given below are ins
     * Exiting the program `bye`
 * Command summary
 * Acknowledgements
+
 ## Quick Start
 
  1. Ensure that you have Java `11` or above installed in your computer.
@@ -117,16 +118,16 @@ Exits the program.
 Format: `bye`
 
 ## Command summary
- Action | Format, examples |
- ------------ | ------------- |
-Add a Todo task | `todo TASK_NAME`, e.g.,`todo do readings` |
-Add a Deadline task | `deadline TASK_NAME /by YYYY-MM-DD`, e.g.,  `deadline finish report /by 2020-09-21` |
-Add an Event task | `event TASK_NAME /at YYYY-MM-DD`, e.g., `event workshop /at 2020-09-23` |                 
-List all tasks | `list` |
-Mark a task as done | `done INDEX`, e.g., `done 3` |
-Delete a task | `delete INDEX`, e.g., `delete 6` |
-Find tasks matching the keyword | `find KEYWORD`, e.g., `find project` |
-Exit | `bye`
+Index | Action | Format, examples |
+| ------------ | ------------ | ------------- |
+1 | Add a Todo task | `todo TASK_NAME`, e.g.,`todo do readings` |
+2 | Add a Deadline task | `deadline TASK_NAME /by YYYY-MM-DD`, e.g.,  `deadline finish report /by 2020-09-21` |
+3 | Add an Event task | `event TASK_NAME /at YYYY-MM-DD`, e.g., `event workshop /at 2020-09-23` |                 
+4 | List all tasks | `list` |
+5 | Mark a task as done | `done INDEX`, e.g., `done 3` |
+6 | Delete a task | `delete INDEX`, e.g., `delete 6` |
+7 | Find tasks matching the keyword | `find KEYWORD`, e.g., `find project` |
+8 | Exit | `bye`
 
 ## Acknowledgements
 1. [Gradle Tutorial](https://se-education.org/guides/tutorials/gradle.html)
