@@ -1,7 +1,7 @@
 package duke.exception;
 
 /**
- * Represents an exception when user tried to list tasks when there are no tasks.
+ * Represents an exception when user tried to list Task when there are no Task in the list.
  */
 public class NoTaskException extends DukeException {
 

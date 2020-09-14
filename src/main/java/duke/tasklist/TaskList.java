@@ -5,13 +5,13 @@ import java.util.ArrayList;
 import duke.task.Task;
 
 /**
- * Represents a list to store and manipulate tasks.
+ * Represents a list to store and manipulate Task.
  * A <code>TaskList</code> object is represented by an ArrayList.
  */
 public class TaskList {
 
-    /** ArrayList of tasks */
-    private final ArrayList<Task> tasks;
+    /** ArrayList of Task */
+    private ArrayList<Task> tasks;
 
     /**
      * Constructs a <code>TaskList</code> object.
@@ -21,7 +21,7 @@ public class TaskList {
     }
 
     /**
-     * Constructs a <code>TaskList</code> object filled with tasks
+     * Constructs a <code>TaskList</code> object filled with Task
      * contained in an ArrayList.
      *
      * @param tasks ArrayList of tasks
@@ -40,9 +40,9 @@ public class TaskList {
     }
 
     /**
-     * Marks task as complete based on its index in the list.
+     * Marks Task as complete based on its index in the list.
      *
-     * @param index Index of task to be mark as complete.
+     * @param index Index of Task to be mark as complete.
      */
     public void doTask(int index) {
         assert index >= 0 : "Task index should not be less than 0";
@@ -50,9 +50,9 @@ public class TaskList {
     }
 
     /**
-     * Removes <code>Task</code> from the list based on in its index in the list.
+     * Removes Task from the list based on in its index in the list.
      *
-     * @param index Index of task to be removed.
+     * @param index Index of Task to be removed.
      */
     public void removeTask(int index) {
         assert index >= 0 : "Task index should not be less than 0";
@@ -60,10 +60,10 @@ public class TaskList {
     }
 
     /**
-     * Returns a task based on in its index in the list.
+     * Returns a Task based on in its index in the list.
      *
-     * @param index Index of task.
-     * @return Task
+     * @param index Index of Task to be retrieved.
+     * @return Task to be retrieved.
      */
     public Task getTask(int index) {
         assert index >= 0 : "Task index should not be less than 0";
@@ -71,16 +71,16 @@ public class TaskList {
     }
 
     /**
-     * Returns the list of tasks.
+     * Returns the list of Task.
      *
-     * @return A list of tasks.
+     * @return A list of Task.
      */
     public ArrayList<Task> getList() {
         return tasks;
     }
 
     /**
-     * Returns the number of tasks in the list.
+     * Returns the number of Task in the list.
      *
      * @return The size of the list.
      */
@@ -90,11 +90,15 @@ public class TaskList {
 
     /**
      * Returns a String description of the number of Task.
+     * If there is more than 1 Task it will return "[number of Task] tasks".
+     * If there is 0 or 1 Task it will return "[number of Task] task".
      *
      * @return String description of the number of Task.
      */
     public String getNumberOfTaskDescription() {
         int noOfTask = getNumberOfTask();
+        assert noOfTask >= 0 : "Number of Task in TaskList cannot be negative";
+
         String taskDescription = "";
         if (noOfTask > 1) {
             taskDescription = noOfTask + " tasks";
@@ -113,6 +117,7 @@ public class TaskList {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Here are the tasks in your list:\n\t ");
+
         int index = 1;
         for (Task task : tasks) {
             sb.append(index).append(".").append(task.toString()).append("\n\t ");

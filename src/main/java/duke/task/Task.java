@@ -1,13 +1,13 @@
 package duke.task;
 
 /**
- * Represents a task that needs to be done. A
- * <code>Task</code> object is represented by a String description
+ * Represents a Task that needs to be done. A
+ * <code>Task</code> object is represented by a Task description
  * and a boolean indicating if the Task is done.
  */
 public class Task {
 
-    /** String to describe the task */
+    /** String to describe the Task */
     protected final String description;
 
     /** Boolean to indicate if the Task is done */
@@ -17,7 +17,7 @@ public class Task {
      * Constructs a <code>Task</code> object with a description.
      * This Task is marked as undone.
      *
-     * @param description Describes what to do.
+     * @param description Describes what needs to be done.
      */
     public Task(String description) {
         this.description = description;
@@ -49,7 +49,7 @@ public class Task {
      *
      * @return An icon representing the completion status of the Task.
      */
-    public String getStatusIcon() {
+    private String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 

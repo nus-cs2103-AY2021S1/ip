@@ -21,7 +21,7 @@ import duke.ui.Ui;
  */
 public class RetrieveCommand extends Command {
     /** Date of Deadline and Event to be retrieved */
-    private final LocalDate date;
+    private LocalDate date;
 
     /**
      * Constructs a <code>RetrieveCommand</code> object.
@@ -39,6 +39,7 @@ public class RetrieveCommand extends Command {
      * @param tasks TaskList to store Task.
      * @param ui Ui to interact with users.
      * @param storage Storage use by Duke to save and load files.
+     * @return CommandResponse A response to the user.
      * @throws InvalidTaskDateException If date and time format is invalid.
      */
     @Override

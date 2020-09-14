@@ -17,10 +17,10 @@ import duke.ui.Ui;
 public class AddDeadlineCommand extends Command {
 
     /** Description of Deadline to be added */
-    private final String description;
+    private String description;
 
     /** String representation of date and time of Deadline to be added */
-    private final String by;
+    private String by;
 
     /**
      * Constructs a <code>AddDeadlineCommand</code> object.
@@ -40,6 +40,7 @@ public class AddDeadlineCommand extends Command {
      * @param tasks TaskList to store Task.
      * @param ui Ui to interact with users.
      * @param storage Storage use by Duke to save and load files.
+     * @return CommandResponse A response to the user.
      * @throws InvalidTaskDateTimeException If date and time format is invalid.
      */
     @Override
@@ -49,7 +50,7 @@ public class AddDeadlineCommand extends Command {
             tasks.addTask(task);
             storage.save(tasks);
             String responseMessage = "Got it. I've added this deadline: \n\t   "
-                    + task + "\n\t "
+                    + task + "\n "
                     + "Now you have "
                     + tasks.getNumberOfTaskDescription()
                     + " in the list.";

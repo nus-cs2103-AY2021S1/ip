@@ -12,7 +12,7 @@ import duke.ui.Ui;
 public class AddTodoCommand extends Command {
 
     /** Description of Todo to be added */
-    private final String description;
+    private String description;
 
     /**
      * Constructs a <code>AddTodoCommand</code> object.
@@ -30,6 +30,7 @@ public class AddTodoCommand extends Command {
      * @param tasks TaskList to store Task.
      * @param ui Ui to interact with users.
      * @param storage Storage use by Duke to save and load files.
+     * @return CommandResponse A response to the user.
      */
     @Override
     public CommandResponse execute(TaskList tasks, Ui ui, Storage storage) {
@@ -37,7 +38,7 @@ public class AddTodoCommand extends Command {
         tasks.addTask(task);
         storage.save(tasks);
         String responseMessage = "Got it. I've added this todo: \n\t   "
-                + task + "\n\t "
+                + task + "\n "
                 + "Now you have "
                 + tasks.getNumberOfTaskDescription()
                 + " in the list.";

@@ -18,22 +18,17 @@ import duke.tasklist.TaskList;
 
 /**
  * Represents a <code>Storage</code> class that saves and loads
- * tasks.
+ * Task. A Task is represented here as a String containing the type
+ * of Task, the description, whether it is done and the date
+ * and time if applicable.
  */
 public class Storage {
 
-    /** Path to text file which contains the stored tasks */
+    /** Path to text file which contains the stored Task */
     private static final String FILE_PATH = "./data/tasks.txt";
 
     /**
-     * Constructs a <code>Storage</code> object with a dedicated
-     * file path.
-     */
-    public Storage() {
-    }
-
-    /**
-     * Saves the tasks into a text file.
+     * Saves the Task into a text file.
      *
      * @param tasks A list of Task.
      */
@@ -57,7 +52,7 @@ public class Storage {
     }
 
     /**
-     * Loads the tasks from a text file.
+     * Loads the Task from a text file.
      *
      * @return A list of Task.
      */
@@ -86,8 +81,11 @@ public class Storage {
      *
      * @param taskDetails String containing a Task details.
      * @return A Task.
+     * @throws InvalidDoneIndicatorException  If isDoneString is not "0" or "1".
+     * @throws InvalidTaskTypeException  If type is not 'T', 'D' or 'E'.
      */
-    public Task createTaskFromFile(String taskDetails) throws DukeException {
+    private Task createTaskFromFile(String taskDetails) throws InvalidDoneIndicatorException,
+            InvalidTaskTypeException {
         String[] taskStringSplit = taskDetails.split(" \\| ", 3);
         String type = taskStringSplit[0];
         String isDoneString = taskStringSplit[1];
@@ -113,8 +111,9 @@ public class Storage {
     /**
      * Return false if String is "0" and true if "1".
      *
-     * @param doneIndicator String of "0" or "1"
+     * @param doneIndicator String of "0" or "1".
      * @return boolean value to indicate if a Task is done.
+     * @throws InvalidDoneIndicatorException  If doneIndicator is not "0" or "1".
      */
     private boolean checkIfDone(String doneIndicator) throws InvalidDoneIndicatorException {
         if (doneIndicator.equals("1")) {
@@ -125,5 +124,4 @@ public class Storage {
             throw new InvalidDoneIndicatorException();
         }
     }
-
 }

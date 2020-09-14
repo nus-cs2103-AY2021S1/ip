@@ -9,23 +9,17 @@ import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
 /**
- * The Duke programme implements an application that allow users
- * to track 3 different types of tasks, namely Todo, Deadline
- * and Event to a list.
- *
- * @author Ngoh Wei Yue
- * @version 0.1
- * @since 14-08-2020
+ * The Duke class is the main class where the chat bot runs.
  */
 public class Duke {
 
-    /** Storage to store existing tasks in hard disk */
-    private final Storage storage;
+    /** Storage to store existing Task in hard disk */
+    private Storage storage;
 
-    /** TaskList to store tasks in a data structure */
-    private final TaskList tasks;
+    /** TaskList to store Task in a data structure */
+    private TaskList tasks;
 
-    /** Ui to interact with the users */
+    /** Ui to interact with the user */
     private Ui ui;
     /**
      * Constructs a <code>Duke</code> object.
@@ -40,7 +34,7 @@ public class Duke {
      * Get response from Duke.
      *
      * @param input Input from user.
-     * @return Response base on the Command executed.
+     * @return Response based on the Command executed.
      */
     public CommandResponse getResponse(String input) {
         try {
@@ -53,8 +47,7 @@ public class Duke {
 
     /**
      * Runs and terminates the application when user calls for it.
-     *
-     * @return Nothing.
+     * Only use for testing.
      */
     private void run() {
         ui.sendGreeting();
@@ -79,8 +72,8 @@ public class Duke {
     }
 
     /**
-     * Runs the application. This is the main method which
-     * serves as the entry point of the Duke application.
+     * Runs the application. This is the main method for
+     * testing purposes.
      *
      * @param args Unused.
      */

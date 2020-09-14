@@ -15,7 +15,7 @@ import duke.ui.Ui;
  */
 public class SortCommand extends Command {
 
-    /** Custom Comparator which sorts the Tasks base on their types and then by their Date and Time */
+    /** Custom Comparator which sorts the Tasks base on their types and then by their LocalDateTime if any */
     private static final Comparator<Task> TASK_COMPARATOR = new Comparator<Task>() {
         @Override
         public int compare(Task o1, Task o2) {
@@ -68,6 +68,7 @@ public class SortCommand extends Command {
      * @param tasks TaskList to store Task.
      * @param ui Ui to interact with users.
      * @param storage Storage use by Duke to save and load files.
+     * @return CommandResponse A response to the user.
      */
     @Override
     public CommandResponse execute(TaskList tasks, Ui ui, Storage storage) {

@@ -1,7 +1,7 @@
 package duke.exception;
 
 /**
- * Represents an exception when user does not provide any keyword/keyphrase.
+ * Represents an exception when the String is not '0' or '1' and thus cannot be convert to a boolean value.
  */
 public class InvalidDoneIndicatorException extends DukeException {
 

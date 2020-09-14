@@ -19,7 +19,7 @@ public class AddTodoCommandTest {
         AddTodoCommand addTodoCommand = new AddTodoCommand("eat");
         CommandResponse actual = addTodoCommand.execute(tasks, ui, storage);
         String expectedMessage = "Got it. I've added this todo: \n\t   "
-                + "[T][✘] eat\n\t "
+                + "[T][✘] eat\n "
                 + "Now you have 1 task in the list.";
         assertEquals("[T][✘] eat", tasks.getTask(0).toString());
         CommandResponse expected = new CommandResponse(expectedMessage, false);

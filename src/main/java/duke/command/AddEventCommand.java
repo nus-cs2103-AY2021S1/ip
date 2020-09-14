@@ -2,7 +2,6 @@ package duke.command;
 
 import java.time.format.DateTimeParseException;
 
-import duke.exception.DukeException;
 import duke.exception.InvalidTaskDateTimeException;
 import duke.storage.Storage;
 import duke.task.Event;
@@ -16,7 +15,7 @@ import duke.ui.Ui;
 public class AddEventCommand extends Command {
 
     /** Description of Event to be added */
-    private final String description;
+    private String description;
 
     /** String representation of date and time of Event to be added */
     private final String at;
@@ -39,16 +38,17 @@ public class AddEventCommand extends Command {
      * @param tasks TaskList to store Task.
      * @param ui Ui to interact with users.
      * @param storage Storage use by Duke to save and load files.
+     * @return CommandResponse A response to the user.
      * @throws InvalidTaskDateTimeException If date and time format is invalid.
      */
     @Override
-    public CommandResponse execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public CommandResponse execute(TaskList tasks, Ui ui, Storage storage) throws InvalidTaskDateTimeException {
         try {
             Task task = new Event(description, at);
             tasks.addTask(task);
             storage.save(tasks);
             String responseMessage = "Got it. I've added this event: \n\t   "
-                    + task + "\n\t "
+                    + task + "\n "
                     + "Now you have "
                     + tasks.getNumberOfTaskDescription()
                     + " in the list.";

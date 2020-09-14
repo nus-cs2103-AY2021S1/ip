@@ -35,8 +35,15 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        sendGuiGreeting();
+    }
 
-        String greeting = "Hello! I'm Duke\nWhat can I do for you?";
+    /**
+     * Sends a greeting to user when the user runs the application.
+     */
+    private void sendGuiGreeting() {
+        String greeting = "Hello! I'm Duke!\n"
+                + "What can I do for you?";
         dialogContainer.getChildren().add(
                 DialogBox.getDukeDialog(greeting, dukeImage)
         );
@@ -44,6 +51,8 @@ public class MainWindow extends AnchorPane {
 
     /**
      * Set Duke object to run the application.
+     *
+     * @param d Duke object to be set.
      */
     public void setDuke(Duke d) {
         duke = d;

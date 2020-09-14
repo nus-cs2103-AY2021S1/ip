@@ -4,12 +4,13 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Represents a task that needs to be done at a certain date and time. An
+ * Represents a Task that needs to be done at a certain date and time. An
  * <code>Event</code> object is represented as a Task with a LocalDateTime value.
  */
 public class Event extends Task {
+
     /** Indicates when the Event is held at */
-    protected LocalDateTime at;
+    private LocalDateTime at;
 
     /**
      * Constructs an <code>Event</code> object with a description and a LocalDateTime value.

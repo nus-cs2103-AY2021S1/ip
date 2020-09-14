@@ -11,7 +11,7 @@ import duke.ui.Ui;
 public class FindCommand extends Command {
 
     /** Keywords to search for */
-    private final String content;
+    private String content;
 
     /**
      * Constructs a <code>FindCommand</code> object.
@@ -30,6 +30,7 @@ public class FindCommand extends Command {
      * @param tasks TaskList to store Task.
      * @param ui Ui to interact with users.
      * @param storage Storage use by Duke to save and load files.
+     * @return CommandResponse A response to the user.
      */
     @Override
     public CommandResponse execute(TaskList tasks, Ui ui, Storage storage) {

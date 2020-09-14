@@ -1,7 +1,7 @@
 package duke.exception;
 
 /**
- * Represents an exception when user does not input any LocalDateTime when adding events.
+ * Represents an exception when user does not input any LocalDateTime when adding Event.
  */
 public class NoTaskDurationException extends DukeException {
 

@@ -1,7 +1,7 @@
 package duke.exception;
 
 /**
- * Represents an exception when user keys in invalid commands
+ * Represents an exception when user keys in unknown commands
  */
 public class InvalidCommandException extends DukeException {
 

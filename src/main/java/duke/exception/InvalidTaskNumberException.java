@@ -1,7 +1,7 @@
 package duke.exception;
 
 /**
- * Represents an exception when user input an invalid task number.
+ * Represents an exception when user input an invalid Task number.
  */
 public class InvalidTaskNumberException extends DukeException {
 

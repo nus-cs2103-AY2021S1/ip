@@ -28,6 +28,7 @@ public abstract class Command {
      * @param tasks TaskList to store Task.
      * @param ui Ui to interact with users.
      * @param storage Storage use by Duke to save and load files.
+     * @return CommandResponse A response to the user.
      * @throws DukeException If error specific to Duke occurs.
      */
     public abstract CommandResponse execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;

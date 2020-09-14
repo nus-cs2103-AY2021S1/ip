@@ -33,7 +33,7 @@ public class UiTest {
                 + "| |_| | |_| |   <  __/\n\t "
                 + "|____/ \\__,_|_|\\_\\___|\n\t ";
         String expected = LINE + "\n\t " + logo
-                + "\n\t Hello! I'm Duke\n\t What can I do for you?\n" + LINE + "\n";
+                + "\n\t Hello! I'm Duke!\n\t What can I do for you?\n" + LINE + "\n";
         Ui ui = new Ui();
         ui.sendGreeting();
         assertEquals(expected, outContent.toString());

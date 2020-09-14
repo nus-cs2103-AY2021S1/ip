@@ -3,14 +3,14 @@ package duke.command;
 /**
  * Represents a response from the application after executing a Command.
  */
-@SuppressWarnings("checkstyle:Regexp")
+
 public class CommandResponse {
 
     /** Message to be shown to user */
-    private final String responseMessage;
+    private String responseMessage;
 
     /** Indicates if the program should exit */
-    private final boolean shouldExit;
+    private boolean shouldExit;
 
     /**
      * Constructs a <code>CommandResponse</code> object.

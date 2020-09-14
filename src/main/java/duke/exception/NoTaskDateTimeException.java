@@ -1,7 +1,7 @@
 package duke.exception;
 
 /**
- * Represents an exception when user does not input any LocalDateTime when adding deadlines.
+ * Represents an exception when user does not input any LocalDateTime when adding Deadline.
  */
 public class NoTaskDateTimeException extends DukeException {
 

@@ -1,7 +1,7 @@
 package duke.exception;
 
 /**
- * Represents an exception when user does not input any content when adding tasks.
+ * Represents an exception when user does not input any content when adding Task.
  */
 public class NoTaskContentException extends DukeException {
 

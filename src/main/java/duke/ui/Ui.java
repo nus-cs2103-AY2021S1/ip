@@ -3,20 +3,13 @@ package duke.ui;
 import java.util.Scanner;
 
 /**
- * Represents an interface to interact with the users. A <code>Ui</code>
- * object is responsible for getting inputs from the users and displaying
- * outputs.
+ * Represents an interface to interact with the user at the command line.
+ * A <code>Ui</code> object is responsible for taking in user's inputs and displaying outputs.
  */
 public class Ui {
 
     /** String to separate different outputs from Duke */
     private static final String LINE = "\t____________________________________________________________";
-
-    /**
-     * Constructs an <code>Ui</code> object.
-     */
-    public Ui() {
-    }
 
     /**
      * Sends a greeting to users.
@@ -30,7 +23,7 @@ public class Ui {
         System.out.println(LINE
                 + "\n\t "
                 + logo
-                + "\n\t Hello! I'm Duke\n\t What can I do for you?\n"
+                + "\n\t Hello! I'm Duke!\n\t What can I do for you?\n"
                 + LINE);
     }
 

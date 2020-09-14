@@ -1,7 +1,7 @@
 package duke.exception;
 
 /**
- * Represents an exception when user does not input a task number to mark as done.
+ * Represents an exception when user does not input a Task number to mark as done.
  */
 public class InvalidDoneException extends DukeException {
 
