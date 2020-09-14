@@ -15,22 +15,22 @@ I've decided to customize it with the theme of one of my favourite shows: South 
 
 ## Features (types of commands currently supported)
 
-1. **`help`**: provides a list of possible commands
-1. **`list`**: shows the list of tasks
-1. **`done`**: marks a task as complete
-1. **`delete`**: deletes a task from the list
-1. **`clear`**: deletes *all* tasks from the list
+1. [**`help`**](#help): provides a list of possible commands
+1. [**`list`**](#list): shows the list of tasks
+1. [**`done`**](#done): marks a task as complete
+1. [**`delete`**](#delete): deletes a task from the list
+1. [**`clear`**](#clear): deletes *all* tasks from the list
 1. **Task adding**:
-   1. **`todo`**: creates a todo task with specific description
-   1. **`event`**: creates an event task with specific description and date/time
-   1. **`deadline`**: creates a deadline task with specific description and date/time
-1. **`find`**: searches for task(s) which match the given keyword(s)
-1. **`schedule`**: shows the tasks due/at at a specific a date
-1. **`bye`**: ends the conversation with Awesome-O
+   1. [**`todo`**](#todo): creates a todo task with specific description
+   1. [**`event`**](#event): creates an event task with specific description and date/time
+   1. [**`deadline`**](#deadline): creates a deadline task with specific description and date/time
+1. [**`find`**](#find): searches for task(s) which match the given keyword(s)
+1. [**`schedule`**](#schedule): shows the tasks due/at at a specific a date
+1. [**`bye`**](#bye): ends the conversation with Awesome-O
 
 ## Feature Details
 
-### 1. `help`
+### <a name="help"></a>1. `help`
 
 This command shows a list of all possible commands Awesome-O can recognize.
 
@@ -76,7 +76,7 @@ Expected outcome:
     "bye"
 ```
 
-### 2. `list`
+### <a name="list"></a>2.`list`
 
 This command shows the current list of tasks that has been saved.
 
@@ -99,7 +99,7 @@ Awesome-O now shows you your tasks:
 3. [D][✘] submit this project (by: 18 Sep 2020, 11:59 PM)
 ```
 
-### 3. `done`
+### <a name="done"></a>3. `done`
 
 This command marks a single task as having been completed.
 
@@ -121,7 +121,7 @@ Awesome-O marked this task as done:
    [E][✓] play warcraft (at: 18 Sep 2020, 11:00 PM)
 ```
 
-### 4. `delete`
+### <a name="delete"></a>4. `delete`
 
 This command deletes a *single* task from the list.
 
@@ -143,7 +143,7 @@ Awesome-O removed this task:
 Now you have 2 tasks in the list.
 ```
 
-### 5. `clear`
+### <a name="clear"></a>5. `clear`
 
 This command deletes *all* tasks from the list, leaving an empty list thereafter.
 
@@ -163,7 +163,7 @@ Expected outcome:
 Awesome-O has cleared all tasks.
 ```
 
-### 6.i. `todo`
+### <a name="todo"></a>6.i. `todo`
 
 This command adds a *todo* task to the list.
 
@@ -187,7 +187,7 @@ Awesome-O added this task:
 Now you have 1 tasks in the list.
 ```
 
-### 6.ii `event`
+### <a name="event"></a>6.ii `event`
 
 This command adds an *event* task to the list.
 
@@ -214,7 +214,7 @@ Now you have 2 tasks in the list.
 
 ```
 
-### 6.iii `deadline`
+### <a name="deadline"></a>6.iii `deadline`
 
 This command adds a *deadline* task to the list.
 
@@ -241,7 +241,7 @@ Now you have 3 tasks in the list.
 ```
 
 
-### 7. `find`
+### <a name="find"></a>7. `find`
 
 This command checks against the tasks that match the given keyword(s), and shows them, if any.
 
@@ -262,7 +262,7 @@ Awesome-O shows you the tasks that match the keyword:
 1. [E][✘] play warcraft (at: 18 Sep 2020, 11:00 PM)
 ```
 
-### 8. `schedule`
+### <a name="schedule"></a>8. `schedule`
 
 This command checks against the tasks whose specified date matches the given date, and shows them, if any.
 
@@ -286,7 +286,7 @@ Awesome-O shows you the tasks scheduled on this day:
 2. [D][✘] submit this project (by: 18 Sep 2020, 11:59 PM)
 ```
 
-### 9. `bye`
+### <a name="bye"></a>9. `bye`
 
 This command simply ends the conversation with Awesome-O and the application thereafter.
 
