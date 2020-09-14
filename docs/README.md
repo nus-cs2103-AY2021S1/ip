@@ -66,7 +66,7 @@ Example of usage:
 
 Expected outcome:
 
-`[E][✘] work hard (at: 12月 12 2020 12 : 21)`
+`[E][✘] work hard (at: 12 12 2020 12 : 21)`
 
 ### `deadline` - Add deadline tasks
 
@@ -78,7 +78,7 @@ Example of usage:
 
 Expected outcome:
 
-`[D][✘] work hard (by: 12月 12 2020 12 : 21)`
+`[D][✘] work hard (by: 12 12 2020 12 : 21)`
 
 ### `done` - Mark tasks as done
 
@@ -107,7 +107,7 @@ Expected outcome:
          [T][✓] read books
   Now you have 2 tasks in the list.`
   
- ### `check` - find tasks that match the date and time
+### `check` - find tasks that match the date and time
  
 Find the tasks that matches the date and time.
  
@@ -117,9 +117,9 @@ Find the tasks that matches the date and time.
  
  Expected outcome:
  
-`[E][✘] work hard (at: 12月 12 2020 12 : 21)`
+`[E][✘] work hard (at: 12 12 2020 12 : 21)`
 
- ### `find` - find tasks that match the keyword
+### `find` - find tasks that match the keyword
  
 Find the tasks that matches the keyword.
  
@@ -129,9 +129,9 @@ Find the tasks that matches the keyword.
  
  Expected outcome:
  
-`[E][✘] work hard (at: 12月 12 2020 12 : 21)`
+`[E][✘] work hard (at: 12 12 2020 12 : 21)`
 
- ### `update` - find tasks that match the keyword
+### `update` - find tasks that match the keyword
  
 Find the tasks that matches the keyword.
  
@@ -145,7 +145,7 @@ Find the tasks that matches the keyword.
 
    
 
- ### `bye` - find tasks that match the keyword
+### `bye` - find tasks that match the keyword
  
 Exit the application and save the changes into the task list.
  
