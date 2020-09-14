@@ -25,7 +25,7 @@ Kirbybot is a bot that helps to manage tasks. You can add, edit and delete tasks
 
 ## Installation
 
-Download the java application under release [v2.0](hhttps://github.com/Jillzyt/ip/releases/tag/v0.2) to start your journey on task
+Download the java application under release [v0.2](https://github.com/Jillzyt/ip/releases/tag/v0.2) to start your journey on task
  management.
 
 ## Usage via java
@@ -75,7 +75,7 @@ Example: update 2 do homework
 <img src="/docs/images/update.png" height="300" width="500">
 
 ### 6. Storage feature
-The file of your tasks will be saved in the directory ./data/duke.txt.
+The summary of your task list will be saved in the directory ./data/duke.txt.
 
 ## Pull request
 ### To run the application
