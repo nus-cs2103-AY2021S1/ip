@@ -87,6 +87,7 @@ public class Event extends Task {
     public String toString() {
         String formattedStartDateTime = startDateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm"));
         String formattedEndDateTime = endDateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm"));
+
         return "[E]" + super.toString()
                 + String.format(" (at: %s to %s)", formattedStartDateTime, formattedEndDateTime);
     }
