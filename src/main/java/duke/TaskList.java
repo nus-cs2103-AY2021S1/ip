@@ -77,7 +77,7 @@ public class TaskList {
         String output = "";
         ArrayList<Task> filteredTaskList = new ArrayList<>();
         tasks.forEach(task -> {
-            if (task.getDescription().contains(keywords)) {
+            if (task.getDescription().toLowerCase().contains(keywords.toLowerCase())) {
                 filteredTaskList.add(task);
             }
         });
