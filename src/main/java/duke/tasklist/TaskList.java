@@ -34,6 +34,10 @@ public class TaskList {
         return this.list;
     }
 
+    public boolean isEmpty() {
+        return this.list.isEmpty();
+    }
+
     /**
      * Marks the i-th task (index i - 1) as done.
      *

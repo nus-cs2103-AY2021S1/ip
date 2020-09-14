@@ -5,6 +5,7 @@ import duke.tasks.Task;
 
 import java.time.LocalDate;
 
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 /** This class deals with messages sent to the user. */
@@ -18,6 +19,10 @@ public class Ui {
         return this.message;
     }
 
+    public void saveByeMessage() {
+        this.message = "Goodbye! Hope to see you again soon :-)";
+    }
+
     /**
      * Saves all tasks on the specified date to the message.
      * If no date is specified, saves all tasks to the message.
@@ -26,21 +31,33 @@ public class Ui {
      * @param date The date used to filter tasks.
      */
     public void saveListMessage(TaskList taskList, LocalDate date) {
+        if (taskList.isEmpty()) {
+            this.message = "You have no tasks in the list!";
+            return;
+        }
         int i = 1;
         StringBuilder sb = new StringBuilder();
-
         if (date == null) {
+            sb.append("Here are the tasks in your list:\n");
             for (Task t : taskList.getList()) {
-                sb.append(i + "." + t + "\n");
+                sb.append("\t" + i + "." + t + "\n");
                 i++;
             }
         } else {
+            String dateString = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+
             for (Task t : taskList.getList()) {
                 if (t.getDate() != null && t.getDate().equals(date)) {
-                    sb.append(i + "." + t + "\n");
+                    sb.append("\t" + i + "." + t + "\n");
                     i++;
                 }
             }
+
+            if (sb.length() == 0) {
+                this.message = "You have no tasks on " + dateString;
+                return;
+            }
+            sb.insert(0, "Here are your tasks on " + dateString + ":\n");
         }
 
         this.message = sb.toString();
@@ -48,22 +65,29 @@ public class Ui {
 
     /**
      * Saves all tasks containing the keyword to the message.
+     * Keyword matching is not case sensitive.
      *
      * @param taskList The TaskList containing all tasks.
      * @param keyword The keyword filter.
      */
     public void saveFindMessage(TaskList taskList, String keyword) {
+        String lowerCaseKeyword = keyword.toLowerCase();
         int i = 1;
-        assert i >= 0 : "index of taskList must be greater or equal to zero";
-        assert i < taskList.size() : "index of taskList must be less than size of taskList";
         StringBuilder sb = new StringBuilder();
 
         for (Task t : taskList.getList()) {
-            if (t.getDescription().indexOf(keyword) != -1) {
-                sb.append(i++ + "." + t + "\n");
+            if (t.getDescription().toLowerCase().indexOf(lowerCaseKeyword) != -1) {
+                sb.append("\t" + i + "." + t + "\n");
+                i++;
             }
         }
 
+        if (sb.length() == 0) {
+            this.message = "You have no tasks containing " + keyword;
+            return;
+        }
+
+        sb.insert(0, "Here are your tasks containing " + keyword + "\n");
         this.message = sb.toString();
     }
 
