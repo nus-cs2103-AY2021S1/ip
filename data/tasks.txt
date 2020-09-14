@@ -1,11 +1,4 @@
 todo|✓|read book
 todo|✓|write homework
 deadline|✘|project|Oct 11 2020
-event|✘|meeting|2pm
 event|✘|meeting2|2020-11-10
-deadline|✘|prepare presentation|Sep 10 2020
-todo|✓|complete assignment
-todo|✓|9
-deadline|✓|11|Nov 11 2020
-todo|✘|13
-todo|✘|15
