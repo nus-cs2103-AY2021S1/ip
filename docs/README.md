@@ -247,7 +247,7 @@ Now you have 6 tasks in the list.
 
 ### 10. Sort
 
-Sorts the task list by earliest date first. 
+Sorts the task list by earliest date first. If the task has no date (todo tasks), they are placed at the end.
 
 **Usage**
 
