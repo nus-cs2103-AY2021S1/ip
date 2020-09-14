@@ -99,8 +99,8 @@ public class Parser {
             }
         } else if (inputInformation[0].equals(CommandType.FIND.getInput())) {
             if (inputInformation.length > 1) {
-                String searchDescription = getStringFromArray(inputInformation, 1, inputInformation.length);
-                return new FindCommand(searchDescription);
+                String[] searchKeywords = Arrays.copyOfRange(inputInformation, 1, inputInformation.length);
+                return new FindCommand(searchKeywords);
             } else {
                 throw new DukeException("You need to include your keyword...");
             }

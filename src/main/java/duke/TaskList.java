@@ -84,16 +84,16 @@ public class TaskList {
     }
 
     /**
-     * Generates result task list of tasks where search description matches the task description.
-     * This includes tasks with descriptions matching the search description only partially.
+     * Generates result task list of tasks where the task description matches any of the search keywords.
+     * This includes tasks with descriptions matching the search keywords only partially.
      *
-     * @param searchDescription String to be searched.
-     * @return Result task list of tasks where search description matches the task description.
+     * @param searchKeywords Variable number of search keywords.
+     * @return Result task list of tasks where the task description matches any of the search keywords.
      */
-    public List<Task> generateResultTaskList(String searchDescription) {
+    public List<Task> generateResultTaskList(String... searchKeywords) {
         List<Task> resultTaskList = storedTasks
                 .stream()
-                .filter(task -> task.getDescription().contains(searchDescription))
+                .filter(task -> task.matchesKeywords(searchKeywords))
                 .collect(Collectors.toList());
         return resultTaskList;
     }

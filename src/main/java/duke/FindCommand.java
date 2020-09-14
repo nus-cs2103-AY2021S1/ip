@@ -5,15 +5,15 @@ package duke;
  */
 public class FindCommand extends Command {
 
-    private String description;
+    private String[] searchKeywords;
 
     /**
      * Initializes a find command.
      *
-     * @param description The search description to find the command.
+     * @param searchKeywords The search keywords stored as a String array.
      */
-    public FindCommand(String description) {
-        this.description = description;
+    public FindCommand(String[] searchKeywords) {
+        this.searchKeywords = searchKeywords;
     }
 
     /**
@@ -26,7 +26,7 @@ public class FindCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.processResultTaskList(taskList.generateResultTaskList(description));
+        ui.processResultTaskList(taskList.generateResultTaskList(searchKeywords));
     }
 
     /**

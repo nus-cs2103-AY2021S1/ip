@@ -1,5 +1,7 @@
 package duke;
 
+import java.util.Arrays;
+
 /**
  * Represents a task with a description and if task is done.
  */
@@ -60,6 +62,19 @@ public class Task {
      */
     protected boolean isDone() {
         return isDone;
+    }
+
+    /**
+     * Checks if task description matches any of the search keywords.
+     * This check is case insensitive.
+     *
+     * @param searchKeywords Variable number of search keywords.
+     * @return If task description matches any of the search keywords.
+     */
+    public boolean matchesKeywords(String... searchKeywords) {
+        return Arrays
+                .stream(searchKeywords)
+                .anyMatch(keyword -> description.toLowerCase().contains(keyword.toLowerCase()));
     }
 
     public String toString() {
