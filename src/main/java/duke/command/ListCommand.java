@@ -1,14 +1,14 @@
 package duke.command;
 
+import duke.DukeList;
 import duke.Ui;
 import duke.Storage;
 
-import duke.task.TaskList;
-
 /**
- * A command dealing with listing tasks from the task-list.
+ * A command dealing with listing entries from the Duke-list.
  */
 public class ListCommand extends Command {
+    /** The type of the ListCommand. */
     private CommandType commandType;
 
     /**
@@ -22,12 +22,18 @@ public class ListCommand extends Command {
 
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        String[] lines = tasks.getTasks();
-        if (lines.length > 0) {
-            ui.listNumberedTasks(lines);
+    public void execute(Ui ui, Storage storage) throws FileException {
+        DukeList<?> entries;
+        if (commandType.equals(CommandType.LIST)) {
+            entries = storage.getTasks();
         } else {
-            ui.setNoTasksMessage();
+            entries = storage.getFinances();
+        }
+        String[] lines = entries.getEntries();
+        if (lines.length > 0) {
+            ui.listNumberedEntries(lines);
+        } else {
+            ui.setNoEntriesMessage();
         }
     }
 

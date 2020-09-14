@@ -6,23 +6,29 @@ package duke;
 public class Ui {
 
     /** Standard messages as part of the UI's design. */
-    private static final String MESSAGE_WELCOME = "Hello! I'm Duke, your task-list manager!\n"
+    private static final String MESSAGE_WELCOME = "Hello! I'm Duke, your list manager!\n"
             + "Before we get started, let me know if you would like to:\n"
-            + "    i)  LOAD   <filepath> : fetch a task-list you have made before, or\n"
-            + "   ii)  CREATE <filepath> : create a new task-list from scratch.";
+            + "    i)  LOAD   <filetype> <filepath> : fetch a list you have made before, or\n"
+            + "   ii)  CREATE <filetype> <filepath> : create a new list from scratch.";
     private static final String MESSAGE_GOODBYE = "Bye. Hope to see you again soon!";
-    private static final String MESSAGE_ADD_TASK = "Got it. I've added this task:";
-    private static final String MESSAGE_DELETED_TASK = "Noted. I've removed this task:";
-    private static final String MESSAGE_CURRENT_TASKS = "Now you have %d task(s) in the list.";
-    private static final String MESSAGE_DONE_TASK = "Nice! I've marked this as done:";
-    private static final String MESSAGE_LIST_TASKS = "Here are the tasks in your list:";
-    private static final String MESSAGE_NO_TASKS = "There are no tasks in your list.";
-    private static final String MESSAGE_FOUND_TASKS = "Here are the matching tasks in your list:";
-    private static final String MESSAGE_NO_FOUND_TASKS = "Hmm...I did not manage to find any tasks containing ";
-    private static final String MESSAGE_FILE_LOADED = "Got it. I have successfully loaded your task-list from ";
-    private static final String MESSAGE_FILE_CREATED = "Congratulations! You now have a new task-list at ";
+    private static final String MESSAGE_TASK_ADDED = "Got it. I've added this task:";
+    private static final String MESSAGE_TASK_DELETED = "Noted. I've removed this task:";
+    private static final String MESSAGE_TASKS_CURRENT = "Now you have %d task(s) in the list.";
+    private static final String MESSAGE_TASK_DONE = "Nice! I've marked this as done:";
+    private static final String MESSAGE_LIST = "Here are the entries in your list:";
+    private static final String MESSAGE_NO_ENTRIES = "There are no entries in your list.";
+    private static final String MESSAGE_TASKS_FOUND = "Here are the matching tasks in your list:";
+    private static final String MESSAGE_TASKS_NOT_FOUND = "Hmm...I did not manage to find any tasks containing ";
+    private static final String MESSAGE_FILE_LOADED = "Got it. I have successfully loaded your list from ";
+    private static final String MESSAGE_FILE_CREATED = "Congratulations! You now have a new list at ";
+    private static final String MESSAGE_CATEGORY_ADDED = "Got it. I've added this category:";
+    private static final String MESSAGE_CATEGORY_DELETED = "Noted. I've removed this category:";
+    private static final String MESSAGE_AMOUNT_CHANGED = "Got it. I've updated your finance record:";
+    private static final String MESSAGE_CATEGORY_RENAMED = "Done. I've renamed this category:";
+    private static final String MESSAGE_FILE_UNLOADED = "Okay! I've unloaded the current file.";
     private static final String MESSAGE_TAG = "What can I do for you next?";
     private static final String ERROR_PREFIX = "\u2639 OOPS!!! ";
+    private static final String CHANGE_FORMAT = "%-15s:    %.02f -> %.02f";
 
     /** The message to be passed to the user. */
     private String outputMessage;
@@ -123,23 +129,23 @@ public class Ui {
     }
 
     /**
-     * Concatenates the tasks as a numbered list starting from 1, and sets it as the output message.
+     * Concatenates the entries as a numbered list starting from 1, and sets it as the output message.
      *
-     * @param tasks The tasks to be numbered and listed.
+     * @param entries The entries to be numbered and listed.
      */
-    public void listNumberedTasks(String... tasks) {
-        assert tasks.length > 0;
-        String[] lines = new String[tasks.length + 1];
-        lines[0] = MESSAGE_LIST_TASKS;
-        System.arraycopy(tasks, 0, lines, 1, tasks.length);
+    public void listNumberedEntries(String... entries) {
+        assert entries.length > 0;
+        String[] lines = new String[entries.length + 1];
+        lines[0] = MESSAGE_LIST;
+        System.arraycopy(entries, 0, lines, 1, entries.length);
         outputMessage = numberAndConcatenateLines(true, false, lines);
     }
 
     /**
      * Sets the output message to be the standard message for when the task-list is empty.
      */
-    public void setNoTasksMessage() {
-        outputMessage = MESSAGE_NO_TASKS;
+    public void setNoEntriesMessage() {
+        outputMessage = MESSAGE_NO_ENTRIES;
     }
 
     /**
@@ -151,7 +157,7 @@ public class Ui {
     public void listNumberedFoundTasks(String... finds) {
         assert finds.length > 0;
         String[] lines = new String[finds.length + 1];
-        lines[0] = MESSAGE_FOUND_TASKS;
+        lines[0] = MESSAGE_TASKS_FOUND;
         System.arraycopy(finds, 0, lines, 1, finds.length);
         outputMessage = numberAndConcatenateLines(true, false, lines);
     }
@@ -162,7 +168,7 @@ public class Ui {
      * @param searchQuery The keyword used for searching the tasks.
      */
     public void setNoFoundTasksMessage(String searchQuery) {
-        outputMessage = MESSAGE_NO_FOUND_TASKS + searchQuery;
+        outputMessage = MESSAGE_TASKS_NOT_FOUND + searchQuery;
     }
 
     /**
@@ -190,7 +196,10 @@ public class Ui {
      * @param numTasks The current number of tasks in the task-list.
      */
     public void showAddedTask(String task, int numTasks) {
-        outputMessage = concatenateLines(MESSAGE_ADD_TASK, " " + task, String.format(MESSAGE_CURRENT_TASKS, numTasks));
+        outputMessage = concatenateLines(
+                MESSAGE_TASK_ADDED,
+                " " + task,
+                String.format(MESSAGE_TASKS_CURRENT, numTasks));
     }
 
     /**
@@ -199,7 +208,7 @@ public class Ui {
      * @param task The task that was marked as done.
      */
     public void showDoneTask(String task) {
-        outputMessage = concatenateLines(MESSAGE_DONE_TASK, "  " + task);
+        outputMessage = concatenateLines(MESSAGE_TASK_DONE, "  " + task);
     }
 
     /**
@@ -209,10 +218,56 @@ public class Ui {
      * @param numTasks The current number of tasks in the task-list.
      */
     public void showDeletedTask(String task, int numTasks) {
-        outputMessage = concatenateLines(MESSAGE_DELETED_TASK,
+        outputMessage = concatenateLines(MESSAGE_TASK_DELETED,
                 "  " + task,
-                String.format(MESSAGE_CURRENT_TASKS, numTasks));
+                String.format(MESSAGE_TASKS_CURRENT, numTasks));
 
     }
 
+    /**
+     * Sets the output message to show that the specified category has been added.
+     *
+     * @param name The name of the added category.
+     */
+    public void showAddedCategory(String name) {
+        outputMessage = concatenateLines(MESSAGE_CATEGORY_ADDED, name);
+    }
+
+    /**
+     * Sets the output message to show that the specified category has been removed.
+     *
+     * @param name The name of the removed category.
+     */
+    public void showRemovedCategory(String name) {
+        outputMessage = concatenateLines(MESSAGE_CATEGORY_DELETED, name);
+    }
+
+    /**
+     * Sets the output message to show the change in amount within the category.
+     *
+     * @param name The name of the category.
+     * @param previousAmount The previous amount within the category.
+     * @param newAmount The new amount within the category.
+     */
+    public void showChangedAmount(String name, double previousAmount, double newAmount) {
+        outputMessage = concatenateLines(MESSAGE_AMOUNT_CHANGED,
+                String.format(CHANGE_FORMAT, name, previousAmount, newAmount));
+    }
+
+    /**
+     * Sets the output message to show the change in name of the category.
+     *
+     * @param oldName The previous name of the category.
+     * @param newName The new name of the category.
+     */
+    public void showRenamedCategory(String oldName, String newName) {
+        outputMessage = concatenateLines(MESSAGE_CATEGORY_RENAMED, String.format("%s -> %s", oldName, newName));
+    }
+
+    /**
+     * Sets the output message to show that the current file has been unloaded.
+     */
+    public void showUnloaded() {
+        outputMessage = concatenateLines(MESSAGE_FILE_UNLOADED, MESSAGE_TAG);
+    }
 }

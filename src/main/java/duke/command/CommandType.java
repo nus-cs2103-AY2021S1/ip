@@ -13,7 +13,14 @@ public enum CommandType {
     EVENT("event"),
     FIND("find"),
     LOAD("load"),
-    CREATE("create");
+    CREATE("create"),
+    UNLOAD("unload"),
+    NEW("new"),
+    REMOVE("remove"),
+    ADD("add"),
+    REDUCE("reduce"),
+    RENAME("rename"),
+    DISPLAY("display");
 
     private final String label;
 
