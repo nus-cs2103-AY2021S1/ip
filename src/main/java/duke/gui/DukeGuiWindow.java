@@ -81,6 +81,9 @@ public class DukeGuiWindow extends BorderPane {
         stage.close();
     }
 
+    /**
+     * Shows all available commands to the user.
+     */
     @FXML
     public void showAllCommands() {
         String response = duke.getResponse(CommandFormat.HELP_CMD_FORMAT);
