@@ -1,17 +1,19 @@
 package duke;
 
+import javafx.animation.PauseTransition;
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.util.ArrayList;
 
@@ -179,6 +181,9 @@ public class Mocha extends Application {
             } else if (commandNumber == 6) {
                 responseReturn = ui.sayGoodbye();
                 storage.writeToFile(tasks.getTaskList());
+                PauseTransition delay = new PauseTransition(Duration.millis(1000));
+                delay.setOnFinished(event-> Platform.exit());
+                delay.play();
                 
             } else if (commandNumber == 7) {
                 int taskNumber = parser.getDeleteTaskNumber();
