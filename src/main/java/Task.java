@@ -3,7 +3,7 @@
  * context of the Duke application, it is necessary for the user to specify
  * a task as being a todo, deadline, or event.
  */
-abstract class Task {
+public abstract class Task {
 
     protected String description;
     protected boolean isDone;

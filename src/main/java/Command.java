@@ -9,18 +9,18 @@ import java.util.ArrayList;
  */
 public class Command {
 
-    private String currentInput;
+    private String userCommand;
 
     public Command() {
-        this.currentInput = "";
+        this.userCommand = "";
     }
 
     /**
      * Receives a user command from the user interface.
-     * @param s User command.
+     * @param userCommand User command.
      */
-    public void receive(String s) {
-        this.currentInput = s;
+    public void receiveUserCommand(String userCommand) {
+        this.userCommand = userCommand;
     }
 
     /**
@@ -28,7 +28,7 @@ public class Command {
      * @return Boolean value indicating whether the Duke application should exit.
      */
     public boolean exit() {
-        return this.currentInput.equals("bye");
+        return userCommand.equals("bye");
     }
 
     /**
@@ -51,34 +51,56 @@ public class Command {
      * @throws DateException If an error occurs while parsing the dates/times
      * of event/deadlines.
      */
-    public String executeTask(Parser parser, TaskList taskList, Storage storage, Ui ui)
+    public String executeUserCommand(Parser parser, TaskList taskList, Storage storage, Ui ui)
             throws IOException, InvalidTaskArgumentException, InvalidDoneException, InvalidCommandException,
             InvalidDeleteException, DateException {
-        ArrayList<String> lst = parser.parseString(currentInput, taskList.getLength());
+        ArrayList<String> userCommandDetails = parser.parseUserCommand(userCommand, taskList.getLength());
         String response = "";
-        if (lst.get(0).equals("Show")) {
+        String userCommandType = userCommandDetails.get(0);
+        if (userCommandType.equals("Show")) {
             response = taskList.showList(ui);
             storage.save(taskList.getTasks());
-        } else if (lst.get(0).equals("Done")) {
-            response = taskList.markDone(Integer.parseInt(lst.get(1)), ui);
+        }
+        if (userCommandType.equals("Done")) {
+            int taskPosition = Integer.parseInt(userCommandDetails.get(1));
+            response = taskList.markDone(taskPosition, ui);
             storage.save(taskList.getTasks());
-        } else if (lst.get(0).equals("Add")) {
-            if (lst.get(1).equals("ToDo")) {
-                response = taskList.addTask(new ToDo(lst.get(2)), ui);
-            } else if (lst.get(1).equals("Deadline")) {
-                response = taskList.addTask(new Deadline(lst.get(2), lst.get(3)), ui);
-            } else {
-                response = taskList.addTask(new Event(lst.get(2), lst.get(3)), ui);
+        }
+        if (userCommandType.equals("Add")) {
+            String taskType = userCommandDetails.get(1);
+            if (taskType.equals("ToDo")) {
+                String todoDescription = userCommandDetails.get(2);
+                ToDo todo = new ToDo(todoDescription);
+                response = taskList.addTask(todo, ui);
+            }
+            if (taskType.equals("Deadline")) {
+                String deadlineDescription = userCommandDetails.get(2);
+                String deadlineDate = userCommandDetails.get(3);
+                Deadline deadline = new Deadline(deadlineDescription, deadlineDate);
+                response = taskList.addTask(deadline, ui);
+            }
+            if (taskType.equals("Event")) {
+                String eventDescription = userCommandDetails.get(2);
+                String eventDate = userCommandDetails.get(3);
+                Event event = new Event(eventDescription, eventDate);
+                response = taskList.addTask(event, ui);
             }
             storage.save(taskList.getTasks());
-        } else if (lst.get(0).equals("Find")) {
-            response = taskList.findTask(lst.get(1), ui);
-        } else {
-            if (lst.get(1).equals("All")) {
+        }
+        if (userCommandType.equals("Find")) {
+            String keyword = userCommandDetails.get(1);
+            response = taskList.findTask(keyword, ui);
+        }
+        if (userCommandType.equals("Delete")) {
+            boolean isDeleteAll = userCommandDetails.get(1).equals("All");
+            if (isDeleteAll) {
                 response = taskList.deleteAll(ui);
             } else {
-                lst.remove(0);
-                response = taskList.deleteTasks(lst, ui);
+                ArrayList<String> deletedTasks = new ArrayList<>();
+                for (int i = 1; i < userCommandDetails.size(); i++) {
+                    deletedTasks.add(userCommandDetails.get(i));
+                }
+                response = taskList.deleteTasks(deletedTasks, ui);
             }
             storage.save(taskList.getTasks());
         }

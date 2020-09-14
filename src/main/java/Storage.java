@@ -26,18 +26,18 @@ public class Storage {
      * did not exist initially.
      */
     public ArrayList<String> load() throws IOException, DukeException {
-        boolean isFound = createFile();
-        if (!isFound) {
+        boolean isDirectoryAndFileFound = createFile();
+        if (!isDirectoryAndFileFound) {
             throw new DukeException();
         }
         File file = new File(filepath);
         Scanner scanner = new Scanner(file);
-        ArrayList<String> lst = new ArrayList<>();
+        ArrayList<String> tasks = new ArrayList<>();
         while (scanner.hasNext()) {
-            lst.add(scanner.nextLine());
+            tasks.add(scanner.nextLine());
         }
         scanner.close();
-        return lst;
+        return tasks;
     }
 
     /**
@@ -46,18 +46,17 @@ public class Storage {
      * @throws IOException If an error occurs while accessing/creating the directory/file.
      */
     public boolean createFile() throws IOException {
-        boolean isFound = true;
-        File file;
-        file = new File(filepath.substring(0, filepath.lastIndexOf("/")));
+        boolean isDirectoryAndFileFound = true;
+        File file = new File(filepath.substring(0, filepath.lastIndexOf("/")));
         if (!file.isDirectory()) {
-            isFound = false;
+            isDirectoryAndFileFound = false;
             file.mkdirs();
         }
         file = new File(filepath);
         if (file.createNewFile()) {
-            isFound = false;
+            isDirectoryAndFileFound = false;
         }
-        return isFound;
+        return isDirectoryAndFileFound;
     }
 
     /**
@@ -65,11 +64,11 @@ public class Storage {
      * @param lst Task list.
      * @throws IOException If an error occurs while accessing/creating the directory/file.
      */
-    public void save(ArrayList<Task> lst) throws IOException {
+    public void save(ArrayList<Task> tasks) throws IOException {
         File file = new File(filepath);
         new FileWriter(file, false).close();
         FileWriter filewriter = new FileWriter(file, true);
-        for (Task task : lst) {
+        for (Task task : tasks) {
             filewriter.write(task.getFormattedString() + System.lineSeparator());
         }
         filewriter.close();
