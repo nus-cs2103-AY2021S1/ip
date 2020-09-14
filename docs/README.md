@@ -4,6 +4,8 @@
 
 Fantasia is a task and expense management application which the user can use to set reminders and deadlines for upcoming events and also track their own expenses. It uses a CLI to process instructions from the user, which can provide a faster and more efficient experience than a usual to-do list application.
 
+![Fantasia](Ui.png)
+
 ### Create Task
 There are 3 different categories of tasks which can be created in Fantasia- `todo`,`deadline` and `event`. `todo` contains a description of the task while `deadline` and `event` contains a description of the task as well as its time(in YYYY-MM-DD format).
 
