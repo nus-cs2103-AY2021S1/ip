@@ -60,32 +60,32 @@ public class Statistics {
         percentageOfDoneTasks = (int) (numOfDoneTasks / tasks.getSize() * 100);
     }
 
-    public double getNumOfTodos() {
-        return numOfTodos;
+    public int getNumOfTodos() {
+        return (int) numOfTodos;
     }
 
-    public double getNumOfDoneTodos() {
-        return numOfDoneTodos;
+    public int getNumOfDoneTodos() {
+        return (int) numOfDoneTodos;
     }
 
-    public double getNumOfDeadlines() {
-        return numOfDeadlines;
+    public int getNumOfDeadlines() {
+        return (int) numOfDeadlines;
     }
 
-    public double getNumOfDoneDeadlines() {
-        return numOfDoneDeadlines;
+    public int getNumOfDoneDeadlines() {
+        return (int) numOfDoneDeadlines;
     }
 
-    public double getNumOfEvents() {
-        return numOfEvents;
+    public int getNumOfEvents() {
+        return (int) numOfEvents;
     }
 
-    public double getNumOfDoneEvents() {
-        return numOfDoneEvents;
+    public int getNumOfDoneEvents() {
+        return (int) numOfDoneEvents;
     }
 
-    public double getNumOfDoneTasks() {
-        return numOfDoneTasks;
+    public int getNumOfDoneTasks() {
+        return (int) numOfDoneTasks;
     }
 
     public int getPercentageOfDoneTodos() {
