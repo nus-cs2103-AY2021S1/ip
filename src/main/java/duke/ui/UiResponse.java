@@ -140,7 +140,7 @@ public class UiResponse {
     public void reportException(DukeException exception) {
         UiPrint.drawLine(UiPrint.STAR, 50);
 
-        System.out.println(exception.getMessage());
+        System.out.println("\n" + exception.getMessage());
 
         UiPrint.drawLine(UiPrint.STAR, 50);
     }
