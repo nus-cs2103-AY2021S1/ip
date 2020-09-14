@@ -1,3 +1,2 @@
 D | 0 | ip  | Sep 07 2020 23:00
-E | 0 | concert  | Sep 08 2020 03:00
-T | 1 | sleep
+D | 1 | assignment  | Sep 14 2020 23:59
