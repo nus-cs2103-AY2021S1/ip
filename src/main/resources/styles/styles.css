@@ -1,0 +1,21 @@
+.root {
+    -fx-font-size: 14pt;
+    -fx-font-family: "sans-sarif";
+    -fx-background: "#212227";
+    -fx-border-radius: 5px;
+}
+
+.chat-box {
+    -fx-background-color: "#637074";
+    -fx-padding: 5px;
+}
+
+.chat-box-user {
+    -fx-background-color: "#8693AB";
+    -fx-padding: 5px;
+}
+
+.chat-box-error {
+    -fx-background-color: "#f5426c";
+    -fx-padding: 5px;
+}
