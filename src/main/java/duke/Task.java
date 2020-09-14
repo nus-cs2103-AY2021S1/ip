@@ -31,12 +31,12 @@ public class Task {
     }
 
     /**
-     * Retrieves completion status of task.
+     * Retrieves completion status icon of task.
      *
-     * @return Status of task.
+     * @return Status icon of task.
      */
-    public String getStatus() {
-        return (isDone ? "done" : "not done");
+    public String getStatusIcon() {
+        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
     /**
@@ -78,6 +78,6 @@ public class Task {
     }
 
     public String toString() {
-        return "[" + getStatus() + "] " + description;
+        return "[" + getStatusIcon() + "] " + description;
     }
 }
