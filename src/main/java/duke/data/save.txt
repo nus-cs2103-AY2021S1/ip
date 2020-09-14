@@ -1,9 +1,7 @@
-7
+5
 todo Resume
 deadline Send Email /by 13 Sept 2020, 06:00 PM
 event Google Career Talk /at U-Town
 event Software Engineering class /at 3pm
 deadline Submission of Essay /by 6pm on Thursday
-todo asdasdasd
-todo asdasdasd
 1 2 
