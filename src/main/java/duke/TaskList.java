@@ -44,6 +44,8 @@ public class TaskList {
      * @return the deleted task.
      */
     public Task deleteTask(int taskNum) {
+        assert (taskNum > 0 && taskNum <= tasks.size()) : "taskNum should be more than 0, and less than or "
+                + "equal to size of list";
         int index = taskNum - 1;
         return tasks.remove(index);
     }
@@ -73,6 +75,8 @@ public class TaskList {
      * @return the retrieved task.
      */
     public Task getTask(int taskNum) {
+        assert (taskNum > 0 && taskNum <= tasks.size()) : "taskNum should be more than 0, and less than or "
+                + "equal to size of list";
         int index = taskNum - 1;
         return tasks.get(index);
     }
@@ -83,6 +87,8 @@ public class TaskList {
      * @param taskNum the number of the task to be marked as done.
      */
     public void markAsDone(int taskNum) {
+        assert (taskNum > 0 && taskNum <= tasks.size()) : "taskNum should be more than 0, and less than or "
+                + "equal to size of list";
         int index = taskNum - 1;
         tasks.get(index).markAsDone();
     }
