@@ -2,3 +2,4 @@
 dog ,Cost:$1000.00
 cat ,Cost:$500.00
 rabbit ,Cost:$200.00
+Duke ,Cost:$60.00

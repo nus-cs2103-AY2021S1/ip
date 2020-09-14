@@ -4,10 +4,7 @@ package duke;
 import main.java.Duke.Commands.Command;
 import main.java.Duke.Duke;
 import main.java.Duke.Parser;
-import main.java.Duke.Task.Deadline;
-import main.java.Duke.Task.Event;
-import main.java.Duke.Task.Task;
-import main.java.Duke.Task.TaskList;
+import main.java.Duke.Task.*;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
@@ -18,10 +15,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class DukeTest {
     @Test
     public void toDoTest() {
-        Duke duke = new Duke("duke.txt");
+        Duke duke = new Duke();
         Parser parser = new Parser(duke);
         ArrayList<Task> arr = new ArrayList<>();
-        TaskList taskList = new TaskList(arr);
+        ArrayList<Expense> expenses = new ArrayList<>();
+        TaskList taskList = new TaskList(arr,expenses);
         Command cmd = parser.parse("todo Tutorial 1", taskList);
         cmd.execute();
 
@@ -31,10 +29,11 @@ public class DukeTest {
 
     @Test
     public void deadlineTest() {
-        Duke duke = new Duke("duke.txt");
+        Duke duke = new Duke();
         Parser parser = new Parser(duke);
         ArrayList<Task> arr = new ArrayList<>();
-        TaskList taskList = new TaskList(arr);
+        ArrayList<Expense> expenses = new ArrayList<>();
+        TaskList taskList = new TaskList(arr,expenses);
         Command cmd = parser.parse("deadline Tutorial 1 /by 2020-02-01", taskList);
         cmd.execute();
 
@@ -43,10 +42,11 @@ public class DukeTest {
     }
     @Test
     public void eventTest() {
-        Duke duke = new Duke("duke.txt");
+        Duke duke = new Duke();
         Parser parser = new Parser(duke);
         ArrayList<Task> arr = new ArrayList<>();
-        TaskList taskList = new TaskList(arr);
+        ArrayList<Expense> expenses = new ArrayList<>();
+        TaskList taskList = new TaskList(arr,expenses);
         Command cmd = parser.parse("event Tutorial 1 /at 2020-02-01", taskList);
         cmd.execute();
 
