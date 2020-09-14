@@ -23,7 +23,7 @@ Duke is a **desktop app for managing your tasks, optimized for use via a Command
   1. Copy the file to the folder you want to use as the *home folder* for your Duke app.
   1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.
   
-     ![Duke](/docs/Ui.png)
+     ![Duke](/docs/ui.png)
   1. Type the command in the command box and press Enter to execute it.
   1. Refer to the [Features](#features) below for details for each command.
   
