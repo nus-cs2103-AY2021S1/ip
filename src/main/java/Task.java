@@ -36,6 +36,13 @@ public class Task {
     }
 
     /**
+     * Mark a task as not done.
+     */
+    public void markNotDone() {
+        this.isDone = false;
+    }
+
+    /**
      * Get the status of a task.
      * @return boolean
      */

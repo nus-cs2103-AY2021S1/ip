@@ -16,13 +16,14 @@ public class UI {
      * @return String response for this command.
      */
     protected String doneTask(Task task) {
-        if (!task.getStatus()) {
-            String str1 = "\nNice! I have completed this task!\n";
-            String str2 = " " + task + "\n";
-            return str1 + str2;
-        } else {
+        if (task.getStatus()) {
             String str1 = "\nThis task has already been completed!\n";
             return str1;
+        } else {
+            task.markNotDone();
+            String str2 = "\nNice! I have completed this task!\n";
+            String str3 = " " + task + "\n";
+            return str2 + str3;
         }
     }
 
@@ -92,6 +93,12 @@ public class UI {
         }
     }
 
+    /**
+     * Find all events and deadlines due on a particular date.
+     * @param tasks list of tasks in the task list.
+     * @param date date which the tasks are due.
+     * @return String response by the bot.
+     */
     protected String findScheduleOnDate(TaskList tasks, LocalDate date) {
         String str1 = "";
         String str2 = "\nHere is your schedule for this day:\n";
@@ -110,6 +117,12 @@ public class UI {
         }
     }
 
+    /**
+     * Find all events and deadline due on a particular month.
+     * @param tasks list of tasks in the task list.
+     * @param month month which the tasks are due.
+     * @return String response by the bot.
+     */
     protected String findScheduleForMonth(TaskList tasks, Month month) {
         String str1 = "";
         String str2 = "\nHere is your schedule for ths month:\n";
@@ -129,6 +142,11 @@ public class UI {
         }
     }
 
+    /**
+     * Prints the chronologically sorted list of tasks.
+     * @param sortedTasks list of all tasks in an arraylist.
+     * @return String response by the bot.
+     */
     protected String sortTasks(ArrayList<Task> sortedTasks) {
         String str1 = "\nYour tasks has been sorted:\n";
         String str2 = "";
@@ -140,11 +158,21 @@ public class UI {
         return str1 + str2;
     }
 
+    /**
+     * Prints the task that is to be updated by the user.
+     * @param taskToBeUpdated the task to be updated.
+     * @return String response by the bot.
+     */
     protected String enterNewUpdateForTask(Task taskToBeUpdated) {
         return "\nThis is the current task:\n" + taskToBeUpdated +
                 "\nOk tell me what to update!\n";
     }
 
+    /**
+     * Prints the updated task.
+     * @param updatedTask the updated task.
+     * @return String response by the bot.
+     */
     protected String updatedTask(Task updatedTask) {
         String str1 = "\nThis task has been updated!\n";
         return str1 + updatedTask;
