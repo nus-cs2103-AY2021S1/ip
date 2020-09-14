@@ -1,6 +1,7 @@
 package main.gui;
 
 import java.io.IOException;
+import java.util.Random;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 
@@ -34,6 +35,7 @@ import main.ui.Ui;
  * @since v0.2
  */
 public class Stuff extends Application {
+    private static final Random DELAY_GENERATOR = new Random();
     private final Image userImage;
     private final Image stuffImage;
     private final Image icon;
@@ -171,21 +173,22 @@ public class Stuff extends Application {
         }
 
         Label userText = new Label(input);
-        Label loadingText = new Label("...");
-        Label stuffText = new Label(output);
+        Label stuffText = new Label("...");
 
         DialogBox userDialog = DialogBox.getUserDialog(userText, userImageView);
-        DialogBox stuffLoadingDialog = DialogBox.getStuffDialog(
-                loadingText, stuffLoadingImageView);
         DialogBox stuffDialog = DialogBox.getStuffDialog(stuffText, stuffImageView);
 
-        dialogContainer.getChildren().addAll(userDialog, stuffLoadingDialog);
+        dialogContainer.getChildren().addAll(userDialog, stuffDialog);
         userInput.clear();
 
-        CompletableFuture.delayedExecutor(750, TimeUnit.MILLISECONDS)
+        String finalOutput = output;
+        CompletableFuture
+                .delayedExecutor(
+                        DELAY_GENERATOR.nextInt(500) + 250,
+                        TimeUnit.MILLISECONDS
+                )
                 .execute(() -> Platform.runLater(() -> {
-                    int size = dialogContainer.getChildren().size();
-                    dialogContainer.getChildren().set(size - 1, stuffDialog);
+                    stuffText.setText(finalOutput);
                 }));
 
         if (!hasCommandAfter) {
