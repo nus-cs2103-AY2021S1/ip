@@ -50,6 +50,9 @@ public class UpdateCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException, IOException {
+        if (taskIndex > taskList.size()) {
+            throw new DukeException("You only have " + taskList.size() + " tasks!");
+        }
         Task taskToUpdate = taskList.get(this.taskIndex - 1);
         if (this.date == null && this.startTime == null && this.description != null) {
             taskToUpdate.updateDescription(this.description);

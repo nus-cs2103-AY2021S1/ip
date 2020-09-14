@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
@@ -29,8 +30,10 @@ public class DeleteCommand extends Command {
      * @param storage The Storage to delete the task from.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
-        assert i < taskList.size() : "index should be less than taskList length";
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException, DukeException {
+        if (i > taskList.size()) {
+            throw new DukeException("You only have " + taskList.size() + " tasks!");
+        }
         ui.saveDeleteMessage(taskList.delete(i));
         storage.refresh(taskList);
     }
