@@ -8,7 +8,6 @@ import java.util.ArrayList;
  * Parser deals with making sense of the user command
  */
 public class Parser {
-    private static final String HORIZONTAL_LINE = "______________________________________________________";
     private String command;
     private String[] commandParts;
 
@@ -75,11 +74,9 @@ public class Parser {
             return newToDoTask;
 
         } catch (Exception e) {
-            throw new MissingTaskDescriptionException(HORIZONTAL_LINE
-                    + "\r\n"
-                    + "Oops! The description cannot be empty :("
-                    + "\r\n"
-                    + HORIZONTAL_LINE);
+            throw new MissingTaskDescriptionException(
+                    "Oops! The description cannot be empty :("
+            );
         }
     }
 
@@ -94,17 +91,13 @@ public class Parser {
 
             String[] deadlineParts = commandParts[1].split("/by");
             LocalDate deadline = LocalDate.parse(deadlineParts[1].trim());
-            String afterDateTimeFormat = deadline.format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
+            String deadlinePattern = "dd MMM yyyy";
+            String afterDateTimeFormat = deadline.format(DateTimeFormatter.ofPattern(deadlinePattern));
             Task newDeadlineTask = new Deadline(deadlineParts[0].trim(), afterDateTimeFormat);
             return newDeadlineTask;
 
         } catch (Exception e) {
-
-            throw new MissingTaskDescriptionException(HORIZONTAL_LINE
-                    + "\r\n"
-                    + "Oops! The description cannot be empty :("
-                    + "\r\n"
-                    + HORIZONTAL_LINE);
+            throw new MissingTaskDescriptionException("Oops! The description cannot be empty :(");
         }
     }
 
@@ -119,17 +112,13 @@ public class Parser {
 
             String[] eventParts = commandParts[1].split("/at");
             LocalDate event = LocalDate.parse(eventParts[1].trim());
-            String afterDateTimeFormat = event.format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
+            String eventPattern = "dd MMM yyyy";
+            String afterDateTimeFormat = event.format(DateTimeFormatter.ofPattern(eventPattern));
             Task newEventTask = new Event(eventParts[0].trim(), afterDateTimeFormat);
             return newEventTask;
 
         } catch (Exception e) {
-
-            throw new MissingTaskDescriptionException(HORIZONTAL_LINE
-                    + "\r\n"
-                    + "Oops! The description cannot be empty :("
-                    + "\r\n"
-                    + HORIZONTAL_LINE);
+            throw new MissingTaskDescriptionException("Oops! The description cannot be empty :(");
         }
     }
 
@@ -159,12 +148,7 @@ public class Parser {
             return taskNumber;
 
         } catch (Exception e) {
-
-            throw new MissingTaskNumberException(HORIZONTAL_LINE
-                    + "\r\n"
-                    + "Oops! The task number cannot be missing :("
-                    + "\r\n"
-                    + HORIZONTAL_LINE);
+            throw new MissingTaskNumberException("Oops! The task number cannot be missing :(");
         }
     }
 
@@ -196,12 +180,7 @@ public class Parser {
             return taskNumber;
 
         } catch (Exception e) {
-
-            throw new MissingTaskNumberException(HORIZONTAL_LINE
-                    + "\r\n"
-                    + "Oops! The task number cannot be missing :("
-                    + "\r\n"
-                    + HORIZONTAL_LINE);
+            throw new MissingTaskNumberException("Oops! The task number cannot be missing :(");
         }
     }
 
@@ -236,12 +215,7 @@ public class Parser {
             return matchingTasks;
 
         } catch (Exception e) {
-
-            throw new MissingTaskDescriptionException(HORIZONTAL_LINE
-                    + "\r\n"
-                    + "Oops! The description cannot be empty :("
-                    + "\r\n"
-                    + HORIZONTAL_LINE);
+            throw new MissingTaskDescriptionException("Oops! The description cannot be empty :(");
         }
     }
 }

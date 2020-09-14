@@ -1,18 +1,16 @@
 package duke;
 
 /**
- * Event is a subclass of Task.
+ * Event is a subclass of Task that start at a specific time and ends at a specific time.
  */
 public class Event extends Task {
-    // Events: Tasks that start at a specific time and ends at a specific time
-    // Example: Team project meeting on 2/10/2019 2-4pm
     private String at;
 
     /**
      * Constructor of Event object.
      *
      * @param description Takes in the description of the Event object.
-     * @param at Takes in the date in which the task is on in YYYYY-MM-DD format.
+     * @param at Takes in the date in which the task is on in YYYY-MM-DD format.
      */
     public Event(String description, String at) {
         super(description);

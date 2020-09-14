@@ -1,18 +1,16 @@
 package duke;
 
 /**
- * Deadline is a subclass of Task.
+ * Deadline is a subclass of Task that need to be done before a specific date or time.
  */
 public class Deadline extends Task {
-    // Deadlines: Tasks that need to be done before a specific time date/time
-    // Example: Submit report by 11/10/2019 5pm
     protected String by;
 
     /**
      * Constructor of Deadline object.
      *
      * @param description Takes in the description of the deadline task.
-     * @param by Takes in the date in which the task needs to be completed by in YYYYY-MM-DD format..
+     * @param by Takes in the date in which the task needs to be completed by in YYYY-MM-DD format.
      */
     public Deadline(String description, String by) {
         super(description);

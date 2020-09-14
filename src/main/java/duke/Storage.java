@@ -14,7 +14,8 @@ public class Storage {
 
     /**
      * Constructor of Storage object
-     * @param filePath
+     *
+     * @param filePath Takes in the path of the file that stores the data.
      */
     public Storage(String filePath) {
         this.path = filePath;

@@ -24,8 +24,6 @@ public class MainWindow extends AnchorPane {
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.png"));
     private Image mochaImage = new Image(this.getClass().getResourceAsStream("/images/Mocha.png"));
-    
-    Ui ui = new Ui();
 
     @FXML
     public void initialize() {
@@ -33,6 +31,7 @@ public class MainWindow extends AnchorPane {
     }
 
     public void setMocha(Mocha m) {
+        Ui ui = new Ui();
         mocha = m;
         dialogContainer.getChildren().add(
                 DialogBox.getMochaDialog(ui.sayIntroduction(), mochaImage));
