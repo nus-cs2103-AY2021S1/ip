@@ -2,7 +2,9 @@ package duke.Gui;
 
 import java.io.IOException;
 import java.util.Collections;
+import java.util.concurrent.TimeUnit;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -104,7 +106,6 @@ public class DialogBox extends HBox {
      */
     public static DialogBox getDukeDialog(String text, Image img) {
         String prefix = text.substring(1, 6);
-        System.out.println(prefix + " " + prefix.length());
         var db = new DialogBox(text, img, true, false);
         if (prefix.equals("OH NO")) {
             db = new DialogBox(text, img, true, true);

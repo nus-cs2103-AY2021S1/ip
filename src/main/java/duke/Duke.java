@@ -7,10 +7,13 @@ import duke.component.Parser;
 import duke.component.Storage;
 import duke.task.TaskList;
 import javafx.application.Application;
+import javafx.application.Platform;
 
+import javax.swing.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 public class Duke {
     private static final Path filepath = Paths.get(".", "data", "duke.txt");
@@ -65,6 +68,11 @@ public class Duke {
         String response = "";
         try {
             Command c = Parser.parse(input);
+            // exit when bye command issue
+            if (c.isExit()) {
+                JOptionPane.showMessageDialog(null, "Goodbye, hope to see you again!");
+                Platform.exit();
+            }
             responseList = c.execute(taskList, gui, storage, responseList);
         } catch (DukeException e) {
             responseList.add(e.getMessage());
