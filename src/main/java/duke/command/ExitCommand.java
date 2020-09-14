@@ -4,6 +4,9 @@ import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import javafx.animation.PauseTransition;
+import javafx.application.Platform;
+import javafx.util.Duration;
 
 /**
  * Command that exits the Duke program.
@@ -33,6 +36,9 @@ public class ExitCommand extends Command {
     @Override
     public String getExecuteString(TaskList tasks, TaskList archives,
                                    Ui ui, Storage storage) throws DukeException {
+        PauseTransition delay = new PauseTransition(Duration.seconds(0.5));
+        delay.setOnFinished(event -> Platform.exit());
+        delay.play();
         return ui.getGoodbyeString();
     }
 

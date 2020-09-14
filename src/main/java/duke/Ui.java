@@ -26,19 +26,21 @@ public class Ui {
     /**
      * Prints greeting message.
      */
-    public void printGreeting() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-
+    public String getGreeting() {
         String intro1 = "Hello! I'm Duke \n";
         String intro2 = "What can I do for you? \n";
+        String info = "Here's a list of commands to help you get started: \n"
+                + "1. todo DESCRIPTION \n2. deadline DESCRIPTION /by DATE [TIME] \n"
+                + "3. event DESCRIPTION /at DATE [TIME] \n4. delete INDEX \n"
+                + "5. done INDEX \n6. list \n7. archive INDEX \n8. find KEYWORD \n"
+                + "9. bye \nFor more info, visit the user guide at: https://pengxiangg.github.io/ip/ \n ";
 
-        String greeting = formatString(intro1 + intro2);
-        System.out.println(greeting);
+        String greeting = intro1 + intro2 + info;
+        return greeting;
+    }
+
+    public void printGreeting() {
+        System.out.println(formatString(getGreeting()));
     }
 
     /**

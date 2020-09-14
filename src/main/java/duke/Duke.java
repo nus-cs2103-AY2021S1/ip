@@ -65,4 +65,8 @@ public class Duke {
     public TaskList getTaskList() {
         return taskList;
     }
+
+    public String getGreeting() {
+        return ui.getGreeting();
+    }
 }

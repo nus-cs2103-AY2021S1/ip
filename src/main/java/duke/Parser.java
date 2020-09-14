@@ -82,8 +82,8 @@ public class Parser {
             }
         } catch (ParseException e) {
             throw new DukeException("Please enter a date and time in the format of \n"
-                    + "dd/MM/2020 HHmm (e.g. 02/12/2020 1530) "
-                    + "or dd/MM/2020 (e.g. 15/02/2020)\n");
+                    + "dd/MM/yyyy HHmm (e.g. 02/12/2020 1530) "
+                    + "or dd/MM/yyyy (e.g. 15/02/2020)\n");
         } catch (NumberFormatException e) {
             throw new DukeException("Please enter a task number in numeric format\n");
         }

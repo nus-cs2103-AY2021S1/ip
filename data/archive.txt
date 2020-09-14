@@ -1,2 +1,4 @@
 T | 1 | eat dinner
 T | 0 | eat lunch
+D | 0 | bathe | Sep 21 2019 01:00am | 1
+E | 1 | dinner with friends | Sep 15 2020 06:00pm | 1
