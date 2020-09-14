@@ -25,15 +25,30 @@ User can view all possible commands.
 
 ## Usage
 
-### `todo`/`deadline`/`event` - add a todo/deadline/event task
+### `todo`/`deadline`/`event` - add task
+#### `todo` - add a todo task to the list
+Todos: tasks without any date/time attached to it e.g., visit new theme park 
 
-Describe action and its outcome.
+Example of usage: 
+`todo visit new theme park`
+Expected outcome:
+`Wow, another task. Added. You sure you can finish them all? 
+  [T] [✘] borrow book
+  Now you have a grand total of 1 tasks!`
+
+Deadlines: tasks that need to be done before a specific date e.g., submit CS2030 homework by 22/12/2020
+
+Events: tasks that start at a specific time and ends at a specific time e.g., team project meeting on 25/12/2020 7pm
 
 Example of usage: 
 
-`keyword (optional arguments)`
+`todo visit new theme park`
+
+`deadline CS2030 homework /by 2020-12-22`
+
+`event project meeting /at 19:00 2020-12-25`
 
 Expected outcome:
 
-`outcome`
+
 
