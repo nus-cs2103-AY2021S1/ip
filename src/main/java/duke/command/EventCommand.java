@@ -2,6 +2,7 @@ package duke.command;
 
 import java.time.LocalDate;
 
+import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.Event;
 import duke.task.Task;
@@ -37,9 +38,10 @@ public class EventCommand extends Command {
      * @return Responses to be passed to user.
      */
     @Override
-    public String executeCommand(TaskList tasks, Ui ui, Storage storage) {
+    public String executeCommand(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task newTask = new Event(description, false, time);
         tasks.addTask(newTask, ui);
+        storage.saveTasks(tasks.getTasks());
         return ui.getResponses();
     }
 }

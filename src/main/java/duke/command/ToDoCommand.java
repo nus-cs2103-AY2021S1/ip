@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
@@ -27,9 +28,10 @@ public class ToDoCommand extends Command {
      * @return Responses to be passed to user.
      */
     @Override
-    public String executeCommand(TaskList tasks, Ui ui, Storage storage) {
+    public String executeCommand(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task newTask = new ToDo(description, false);
         tasks.addTask(newTask, ui);
+        storage.saveTasks(tasks.getTasks());
         return ui.getResponses();
     }
 }

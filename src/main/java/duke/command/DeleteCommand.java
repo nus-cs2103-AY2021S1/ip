@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
@@ -25,8 +26,9 @@ public class DeleteCommand extends Command {
      * @return Responses to be passed to user.
      */
     @Override
-    public String executeCommand(TaskList tasks, Ui ui, Storage storage) {
+    public String executeCommand(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         tasks.deleteTask(index, ui);
+        storage.saveTasks(tasks.getTasks());
         return ui.getResponses();
     }
 }

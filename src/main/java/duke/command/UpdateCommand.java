@@ -40,6 +40,7 @@ public class UpdateCommand extends Command {
     @Override
     public String executeCommand(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         tasks.updateTask(index, type, newDetails, ui);
+        storage.saveTasks(tasks.getTasks());
         return ui.getResponses();
     }
 }
