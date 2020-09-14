@@ -22,7 +22,7 @@ jar {
     }
     mainClassName = 'duke.Launcher'
     archiveBaseName = 'Duke'
-    archiveVersion = '0.1'
+    archiveVersion = '0.2'
 }
 
 repositories {
