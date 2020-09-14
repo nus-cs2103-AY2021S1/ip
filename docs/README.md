@@ -1,6 +1,19 @@
 # User Guide
 Duke is a desktop app for managing tasks, optimized for use via a Command Line Interface (CLI).
 
+##### Tables of Contents
+[Features](#features)
+* [Adding a task](#add)
+* [Listing all tasks](#list)
+* [Locating task by description](#find)
+* [Finishing a task](#done)
+* [Deleting a task](#delete)
+* [Archiving a task](#archive)
+
+[FAQ](#faq) <br>
+[Command Summary](#command_summary)
+
+<a name="features"/>
 ## Features 
 Note:
 
@@ -9,6 +22,7 @@ Note:
 * Items in square brackets are optional. e.g. `deadline TASK /by DATE [TIME]` can be used as `deadline watch lecture /by 14/09/2020` or as `deadline watch lecture /by 14/09/2020 1600`
 
 <br>
+<a name="add"/>
 ### Adding a task: `todo`, `deadline`, `event` 
 Adds a task into the list
 
@@ -28,12 +42,14 @@ Examples:
 * `event watch lecture /at 16/09/2020 1600`
 
 <br>
+<a name="list"/>
 ### Listing all tasks: `list`
 Shows a list of all tasks.
 
 Format: `list`
 
 <br>
+<a name="find"/>
 ### Locating task by description: `find`
 Finds tasks whose description contain the given keyword
 
@@ -50,6 +66,7 @@ Examples:
 
 
 <br>
+<a name="done"/>
 ### Finishing a task: `done`
 Marks the specified task as completed.
 
@@ -65,6 +82,7 @@ Examples:
 
 
 <br>
+<a name="delete"/>
 ### Deleting a task: `delete`
 Deletes the specified task from the list.
 
@@ -80,6 +98,7 @@ Examples:
 
 
 <br>
+<a name="archive"/>
 ### Archiving a task: `archive`
 Archives the specified task in the list.
 
@@ -92,13 +111,15 @@ Comments:
 * The task is deleted from the main list and added into a text file containing the archived tasks.
 * The archive text file can be found under `/data/archive.txt`
 
+<a name="faq"/>
 ## FAQ
 **Q**: Do I need to save the data?  <br>
 **A**: No, the tasks are saved automatically every time the list changes.
 
+<a name="command_summary"/>
 ## Command Summary
 | Action | Format, Examples |
-| ------ | ---------------- |
+| --- | --- |
 | Todo | `todo DESCRIPTION` <br> e.g. `todo read book`|
 | Deadline | `deadline DESCRIPTION /by DATE [TIME]`<br> e.g. `deadline return book /by 24/08/2020`|
 | Event | `event DESCRIPTION /at DATE [TIME]` |
