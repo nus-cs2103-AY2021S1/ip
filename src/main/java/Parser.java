@@ -1,6 +1,8 @@
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Represents the parser of the Duke application. The parser is responsible for
@@ -8,174 +10,207 @@ import java.util.ArrayList;
  */
 public class Parser {
 
-    /**
-     * Parses the dates/times of deadlines and events.
-     * @param date String that represents either a date in YYYY-MM-DD
-     *             format, or a timestamp in YYYY-MM-DD HHMM format.
-     * @return String that represents an alternative format of the date/time.
-     * @throws DateException If the given date/time is not in a format
-     * appropriate for parsing.
-     */
-    public static String parseDate(String date) throws DateException {
+    public static String parseDateTime(String dateTime) throws DateException {
         try {
-            String[] dates = date.split(" ");
-            String processedDate = "";
-            String processedTime = "";
-            if (dates.length == 1) {
-                LocalDate localDate = LocalDate.parse(dates[0]);
-                processedDate = localDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-                return processedDate;
-            } else {
-                LocalDate localDate = LocalDate.parse(dates[0]);
-                processedDate = localDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-
-                double time = Double.parseDouble(dates[1]);
-                if (time >= 1300) {
-                    time -= 1200;
-                }
-                int hour = (int) (time / 100);
-                if (hour == 24 || hour == 0) {
-                    processedTime += "12.";
-                } else {
-                    processedTime += hour + ".";
-                }
-                int minute = (int) (time % 100);
-                if (minute < 10) {
-                    processedTime += "0" + minute;
-                } else {
-                    processedTime += minute;
-                }
-                if ((Double.parseDouble(dates[1]) >= 1200)
-                        && (Double.parseDouble(dates[1]) < 2400)) {
-                    processedTime += "pm";
-                } else {
-                    processedTime += "am";
-                }
-                return processedDate + " " + processedTime;
-            }
-        } catch (java.time.format.DateTimeParseException e) {
+            return processDateTime(dateTime);
+        } catch (java.time.format.DateTimeParseException | java.text.ParseException e) {
             throw new DateException("Sorry! I don't understand the date/time. Please specify the date/time "
                     + "in YYYY-MM-DD or YYYY-MM-DD HHMM format.");
         }
     }
 
-    /**
-     * Parses the user command.
-     * @param s User command.
-     * @param size Current size of the task list.
-     * @return List of String objects that represent the parsed user command.
-     * @throws InvalidDoneException If for a done command, either no task is
-     * specified or the argument provided does not represent a valid task.
-     * @throws InvalidTaskArgumentException If the command to add tasks is not
-     * correctly or completely specified.
-     * @throws InvalidDeleteException If for a delete command, either no task is
-     * specified or the argument provided does not represent a valid task.
-     * @throws InvalidCommandException If the user command cannot be understood.
-     * @throws DateException If the given date/time for an event/deadline is not
-     * in a format appropriate for parsing.
-     */
-    public ArrayList<String> parseString(String s, int size)
-            throws InvalidDoneException, InvalidTaskArgumentException,
-            InvalidDeleteException, InvalidCommandException, DateException {
-        ArrayList<String> lst = new ArrayList<>();
-        if (s.equals("list")) {
-            lst.add("Show");
-            return lst;
-        } else if ((s.length() >= 4) && (s.substring(0, 4).equals("done"))) {
-            if (s.length() <= 5) {
-                throw new InvalidDoneException("\u2639" + " OOPS!!! The task to be marked as done is not "
-                        + "specified.");
-            } else {
-                try {
-                    int i = Integer.parseInt(s.substring(5)) - 1;
-                    if ((i < 0) || (i >= size)) {
-                        throw new InvalidDoneException("\u2639" + " OOPS!!! The number specified does not represent "
-                                + "a valid task.");
-                    }
-                    lst.add("Done");
-                    lst.add(Integer.toString(i));
-                    return lst;
-                } catch (NumberFormatException e) {
-                    throw new InvalidDoneException("\u2639" + " OOPS!!! The task to be marked as done is not "
-                            + "specified by a valid number.");
-                }
-            }
-        } else if ((s.length() >= 4) && (s.substring(0, 4).equals("todo"))) {
-            if (s.length() <= 5) {
-                throw new InvalidTaskArgumentException("\u2639" + " OOPS!!! The description of a todo cannot "
-                        + "be empty.");
-            } else {
-                lst.add("Add");
-                lst.add("ToDo");
-                lst.add(s.substring(5));
-                return lst;
-            }
-        } else if ((s.length() >= 8) && (s.substring(0, 8).equals("deadline"))) {
-            if (s.length() <= 9) {
-                throw new InvalidTaskArgumentException("\u2639" + " OOPS!!! The deadline is lacking a "
-                        + "description/date.");
-            } else {
-                String[] arr = s.substring(9).split(" /by ");
-                if (arr.length < 2) {
-                    throw new InvalidTaskArgumentException("\u2639" + " OOPS!!! The deadline is lacking a "
-                            + "description/date.");
-                } else {
-                    lst.add("Add");
-                    lst.add("Deadline");
-                    lst.add(arr[0]);
-                    lst.add(parseDate(arr[1]));
-                    return lst;
-                }
-            }
-        } else if ((s.length() >= 5) && (s.substring(0, 5).equals("event"))) {
-            if (s.length() <= 6) {
-                throw new InvalidTaskArgumentException("\u2639" + " OOPS!!! The event is lacking a "
-                        + "description/date.");
-            } else {
-                String[] arr = s.substring(6).split(" /at ");
-                if (arr.length < 2) {
-                    throw new InvalidTaskArgumentException("\u2639" + " OOPS!!! The event is lacking a "
-                            + "description/date.");
-                } else {
-                    lst.add("Add");
-                    lst.add("Event");
-                    lst.add(arr[0]);
-                    lst.add(parseDate(arr[1]));
-                    return lst;
-                }
-            }
-        } else if ((s.length() >= 6) && (s.substring(0, 6).equals("delete"))) {
-            if (s.length() <= 7) {
-                throw new InvalidDeleteException("\u2639" + "OOPS!!! The tasks to be deleted are not "
-                        + "specified.");
-            } else if (s.substring(7).equals("all")) {
-                lst.add("Delete");
-                lst.add("All");
-                return lst;
-            } else {
-                try {
-                    lst.add("Delete");
-                    String[] numbers = s.substring(7).split(" ");
-                    for (int i = 0; i < numbers.length; i++) {
-                        int num = Integer.parseInt(numbers[i]) - 1;
-                        if ((num < 0) || (num >= size)) {
-                            throw new InvalidDeleteException("\u2639" + " OOPS!!! There is a number specified "
-                                    + "that does not represent a valid task.");
-                        }
-                        lst.add(Integer.toString(num));
-                    }
-                    return lst;
-                } catch (NumberFormatException e) {
-                    throw new InvalidDeleteException("\u2639" + " OOPS!!! There is a task to be deleted "
-                            + " that is not specified by a valid number.");
-                }
-            }
-        } else if ((s.length() >= 4) && (s.substring(0, 4).equals("find"))) {
-            lst.add("Find");
-            lst.add(s.split(" ")[1]);
-            return lst;
+    private static String processDateTime(String dateTime) throws
+            java.time.format.DateTimeParseException, java.text.ParseException {
+        String[] dateTimes = dateTime.split(" ");
+        boolean hasOnlyDate = dateTimes.length == 1;
+        LocalDate localDate = LocalDate.parse(dateTimes[0]);
+        String processedDate = localDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        if (hasOnlyDate) {
+            return processedDate;
+        }
+        int time = Integer.parseInt(dateTimes[1]);
+        String processedTime = processTime(time);
+        return processedDate + " " + processedTime;
+    }
+
+    private static String processTime(int time) throws java.text.ParseException {
+        int militaryTime = time;
+        Date date = new SimpleDateFormat("hhmm").parse(String.format("%04d", militaryTime));
+        SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm a");
+        return dateFormat.format(date);
+    }
+
+    public ArrayList<String> parseUserCommand(String userCommand, int taskListSize)
+            throws InvalidDoneException, InvalidTaskArgumentException, InvalidDeleteException,
+            InvalidCommandException, DateException {
+        ArrayList<String> userCommandDetails = new ArrayList<>();
+        if (isListCommand(userCommand)) {
+            return addListCommand(userCommandDetails);
+        } else if (isDoneCommand(userCommand)) {
+            return addDoneCommand(userCommandDetails, userCommand, taskListSize);
+        } else if (isTodoCommand(userCommand)) {
+            return addTodoCommand(userCommandDetails, userCommand);
+        } else if (isDeadlineCommand(userCommand)) {
+            return addDeadlineCommand(userCommandDetails, userCommand);
+        } else if (isEventCommand(userCommand)) {
+            return addEventCommand(userCommandDetails, userCommand);
+        } else if (isDeleteCommand(userCommand)) {
+            return addDeleteCommand(userCommandDetails, userCommand, taskListSize);
+        } else if (isFindCommand(userCommand)) {
+            return addFindCommand(userCommandDetails, userCommand);
         } else {
             throw new InvalidCommandException("\u2639" + " OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
+    }
+
+    private boolean isNumeric(String taskNumber) {
+        try {
+            Integer.parseInt(taskNumber);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    private boolean isListCommand(String userCommand) {
+        return userCommand.equals("list");
+    }
+
+    private ArrayList<String> addListCommand(ArrayList<String> userCommandDetails) {
+        userCommandDetails.add("Show");
+        return userCommandDetails;
+    }
+
+    private boolean isDoneCommand(String userCommand) {
+        return (userCommand.length() >= 4) && (userCommand.substring(0, 4).equals("done"));
+    }
+
+    private ArrayList<String> addDoneCommand(ArrayList<String> userCommandDetails,
+           String userCommand, int taskListSize) throws InvalidDoneException {
+        boolean isTaskNumberNotSpecified = userCommand.length() <= 5;
+        if (isTaskNumberNotSpecified) {
+            throw new InvalidDoneException("\u2639" + " OOPS!!! The task to be marked as done is not "
+                    + "specified.");
+        }
+        boolean isTaskNumberInvalidInt = !isNumeric(userCommand.substring(5));
+        if (isTaskNumberInvalidInt) {
+            throw new InvalidDoneException("\u2639" + " OOPS!!! The task to be marked as done is not "
+                    + "specified by a valid number.");
+        }
+        int taskNumber = Integer.parseInt(userCommand.substring(5)) - 1;
+        boolean isTaskNumberOutOfBounds = (taskNumber < 0) || (taskNumber >= taskListSize);
+        if (isTaskNumberOutOfBounds) {
+            throw new InvalidDoneException("\u2639" + " OOPS!!! The number specified does not represent "
+                    + "a valid task.");
+        }
+        userCommandDetails.add("Done");
+        userCommandDetails.add(Integer.toString(taskNumber));
+        return userCommandDetails;
+    }
+
+    private boolean isTodoCommand(String userCommand) {
+        return (userCommand.length() >= 4) && (userCommand.substring(0, 4).equals("todo"));
+    }
+
+    private ArrayList<String> addTodoCommand(ArrayList<String> userCommandDetails,
+           String userCommand) throws InvalidTaskArgumentException {
+        boolean isTodoDescriptionMissing = userCommand.length() <= 5;
+        if (isTodoDescriptionMissing) {
+            throw new InvalidTaskArgumentException("\u2639" + " OOPS!!! The description of a todo cannot "
+                    + "be empty.");
+        }
+        userCommandDetails.add("Add");
+        userCommandDetails.add("ToDo");
+        userCommandDetails.add(userCommand.substring(5));
+        return userCommandDetails;
+    }
+
+    private boolean isDeadlineCommand(String userCommand) {
+        return (userCommand.length() >= 8) && (userCommand.substring(0, 8).equals("deadline"));
+    }
+
+    private ArrayList<String> addDeadlineCommand(ArrayList<String> userCommandDetails,
+           String userCommand) throws InvalidTaskArgumentException, DateException {
+        boolean isDeadlineDescriptionDateMissing = (userCommand.length() <= 9)
+                || (userCommand.substring(9).split(" /by ").length < 2);
+        if (isDeadlineDescriptionDateMissing) {
+            throw new InvalidTaskArgumentException("\u2639" + " OOPS!!! The deadline is lacking a "
+                    + "description/date.");
+        }
+        userCommandDetails.add("Add");
+        userCommandDetails.add("Deadline");
+        String[] deadlineDetails = userCommand.substring(9).split(" /by ");
+        String deadlineDescription = deadlineDetails[0];
+        String deadlineDate = parseDateTime(deadlineDetails[1]);
+        userCommandDetails.add(deadlineDescription);
+        userCommandDetails.add(deadlineDate);
+        return userCommandDetails;
+    }
+
+    private boolean isEventCommand(String userCommand) {
+        return (userCommand.length() >= 5) && (userCommand.substring(0, 5).equals("event"));
+    }
+
+    private ArrayList<String> addEventCommand(ArrayList<String> userCommandDetails,
+           String userCommand) throws InvalidTaskArgumentException, DateException {
+        boolean isEventDescriptionDateMissing = (userCommand.length() <= 6)
+                || (userCommand.substring(6).split(" /at ").length < 2);
+        if (isEventDescriptionDateMissing) {
+            throw new InvalidTaskArgumentException("\u2639" + " OOPS!!! The event is lacking a "
+                    + "description/date.");
+        }
+        userCommandDetails.add("Add");
+        userCommandDetails.add("Event");
+        String[] eventDetails = userCommand.substring(6).split(" /at ");
+        String eventDescription = eventDetails[0];
+        String eventDate = parseDateTime(eventDetails[1]);
+        userCommandDetails.add(eventDescription);
+        userCommandDetails.add(eventDate);
+        return userCommandDetails;
+    }
+
+    private boolean isDeleteCommand(String userCommand) {
+        return (userCommand.length() >= 6) && (userCommand.substring(0, 6).equals("delete"));
+    }
+
+    private ArrayList<String> addDeleteCommand(ArrayList<String> userCommandDetails,
+           String userCommand, int taskListSize) throws InvalidDeleteException {
+        boolean isTaskNumberNotSpecified = userCommand.length() <= 7;
+        if (isTaskNumberNotSpecified) {
+            throw new InvalidDeleteException("\u2639" + "OOPS!!! The tasks to be deleted are not "
+                    + "specified.");
+        }
+        userCommandDetails.add("Delete");
+        boolean isDeleteAll = userCommand.substring(7).equals("all");
+        if (isDeleteAll) {
+            userCommandDetails.add("All");
+        } else {
+            String[] deletedTaskPositions = userCommand.substring(7).split(" ");
+            for (int i = 0; i < deletedTaskPositions.length; i++) {
+                if (!isNumeric(deletedTaskPositions[i])) {
+                    throw new InvalidDeleteException("\u2639" + " OOPS!!! There is a task to be deleted "
+                            + " that is not specified by a valid number.");
+                }
+                int deletedTaskNumber = Integer.parseInt(deletedTaskPositions[i]) - 1;
+                boolean isTaskNumberOutOfBounds = (deletedTaskNumber < 0) || (deletedTaskNumber >= taskListSize);
+                if (isTaskNumberOutOfBounds) {
+                    throw new InvalidDeleteException("\u2639" + " OOPS!!! There is a number specified "
+                            + "that does not represent a valid task.");
+                }
+                userCommandDetails.add(Integer.toString(deletedTaskNumber));
+            }
+        }
+        return userCommandDetails;
+    }
+
+    private boolean isFindCommand(String userCommand) {
+        return (userCommand.length() >= 4) && (userCommand.substring(0, 4).equals("find"));
+    }
+
+    private ArrayList<String> addFindCommand(ArrayList<String> userCommandDetails, String userCommand) {
+        userCommandDetails.add("Find");
+        String keyword = userCommand.split(" ")[1];
+        userCommandDetails.add(keyword);
+        return userCommandDetails;
     }
 }

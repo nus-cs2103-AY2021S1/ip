@@ -37,15 +37,15 @@ public class Duke {
      */
     public void run() throws IOException {
         ui.showWelcome();
-        command.receive(ui.readCommand());
+        command.receiveUserCommand(ui.readCommand());
         while (!command.exit()) {
             try {
-                command.executeTask(parser, tasks, storage, ui);
+                command.executeUserCommand(parser, tasks, storage, ui);
             } catch (InvalidTaskArgumentException | InvalidDoneException | InvalidCommandException
                     | InvalidDeleteException | DateException e) {
                 ui.showError(e.getMessage());
             } finally {
-                command.receive(ui.readCommand());
+                command.receiveUserCommand(ui.readCommand());
             }
         }
         ui.showFarewell();
@@ -63,12 +63,12 @@ public class Duke {
         }
     }
 
-    public String getResponse(String input) throws IOException {
+    public String getResponse(String userCommand) throws IOException {
         try {
-            command.receive(input);
-            return command.executeTask(parser, tasks, storage, ui);
-        } catch (InvalidTaskArgumentException | InvalidDoneException | InvalidCommandException |
-                InvalidDeleteException | DateException e) {
+            command.receiveUserCommand(userCommand);
+            return command.executeUserCommand(parser, tasks, storage, ui);
+        } catch (InvalidTaskArgumentException | InvalidDoneException | InvalidCommandException
+                | InvalidDeleteException | DateException e) {
             return ui.showError(e.getMessage());
         }
     }
