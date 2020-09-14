@@ -8,6 +8,7 @@ C-3PO can add different types of tasks to your task list, including:
 * `Todo` tasks that have a description for the task;
 * `Event` tasks that have a description, and a date when the events happen.
 * `Deadline` tasks that have a description and a due date.
+
 ### Date processing
 C-3PO can understand date representation of the format `YYYY-MM-DD` and 
 compare multiple dates based on this feature. For date and time which cannot
