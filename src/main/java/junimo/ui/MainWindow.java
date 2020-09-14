@@ -8,7 +8,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 import junimo.Junimo;
 
 import java.util.Timer;
@@ -31,6 +30,7 @@ public class MainWindow extends AnchorPane {
 
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/Blue-Junimo.png"));
     private final Image junimoImage = new Image(this.getClass().getResourceAsStream("/images/Purple-Junimo.png"));
+    private final Image redJunimoImage = new Image(this.getClass().getResourceAsStream("/images/Red-Junimo.png"));
 
     @FXML
     public void initialize() {
@@ -51,10 +51,15 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = getResponse(userInput.getText());
+        Response response = getResponse(userInput.getText());
+        String responseMesssage = response.getMesssage();
+        boolean isErrorMessage = response.getIsErrorMessage();
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, junimoImage)
+                DialogBox.getDukeDialog(
+                        responseMesssage,
+                        isErrorMessage ? redJunimoImage : junimoImage
+                )
         );
         userInput.clear();
         assert userInput == null;
@@ -77,7 +82,7 @@ public class MainWindow extends AnchorPane {
      * Generates a response to user input.
      */
     @FXML
-    private String getResponse(String input) {
+    private Response getResponse(String input) {
         return junimo.parseInputCommand(input);
     }
 }

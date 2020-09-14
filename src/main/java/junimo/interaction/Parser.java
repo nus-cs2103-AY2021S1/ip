@@ -5,6 +5,7 @@ import junimo.task.Event;
 import junimo.task.Task;
 import junimo.task.TaskList;
 import junimo.task.Todo;
+import junimo.ui.Response;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -77,7 +78,7 @@ public class Parser {
      *
      * Handles the following command types: bye, done, delete, todo, deadline and event.
      */
-    public String parseInputCommand(String inputCommand) {
+    public Response parseInputCommand(String inputCommand) {
         String[] splitCommand = inputCommand.split(" ", 2);
         assert splitCommand.length > 0 : "inputCommand should not be empty.";
 
@@ -86,80 +87,81 @@ public class Parser {
         switch (command) {
         case "bye":
             if (splitCommand.length == 1) {
-                return Greeting.exit();
+                return new Response(Greeting.exit(), false);
             }
             // Fallthrough if length of splitCommand > 1
 
         case "list":
             if (splitCommand.length == 1) {
-                return taskList.list();
+                return new Response(taskList.list(), false);
             }
             // Fallthrough if length of splitCommand > 1
 
         case "archives":
             if (splitCommand.length == 1) {
-                return taskList.showArchives();
+                return new Response(taskList.showArchives(), false);
             }
             // Fallthrough if length of splitCommand > 1
 
         case "done":
             try {
-                return taskList.markTaskAsDone(splitCommand[1]);
+                return new Response(taskList.markTaskAsDone(splitCommand[1]), false);
             } catch (IndexOutOfBoundsException ex) {
                 String errMessage = "Please indicate which task you'd like to check off!";
                 System.out.println(errMessage);
-                return errMessage;
+                return new Response(errMessage, true);
             }
 
         case "archive":
             try {
-                return taskList.archive(splitCommand[1]);
+                return new Response(taskList.archive(splitCommand[1]), false);
             } catch (IndexOutOfBoundsException ex) {
                 String errMessage = "Please indicate which task you'd like to archive!";
                 System.out.println(errMessage);
-                return errMessage;
+                return new Response(errMessage, true);
             }
 
         case "unarchive":
             try {
-                return taskList.unarchive(splitCommand[1]);
+                return new Response(taskList.unarchive(splitCommand[1]), false);
             } catch (IndexOutOfBoundsException ex) {
                 String errMessage = "Please indicate which task you'd like to unarchive!";
                 System.out.println(errMessage);
-                return errMessage;
+                return new Response(errMessage, true);
             }
 
         case "delete":
             try {
-                return taskList.deleteTask(splitCommand[1]);
+                return new Response(taskList.deleteTask(splitCommand[1]), false);
             } catch (IndexOutOfBoundsException ex) {
                 String errMessage = "Please indicate which task you'd like to delete!";
                 System.out.println(errMessage);
-                return errMessage;
+                return new Response(errMessage, true);
             }
 
         case "find":
             if (splitCommand.length == 1) {
-                return taskList.find("");
+                return new Response(taskList.find(""), false);
             } else {
-                return taskList.find(splitCommand[1]);
+                return new Response(taskList.find(splitCommand[1]), false);
             }
 
         case "todo":
         case "deadline":
         case "event":
             try {
-                return parseAddTaskCommand(inputCommand, false, true, false);
+                return new Response(parseAddTaskCommand(inputCommand, false, true, false),
+                        false);
             } catch (IllegalArgumentException ex) {
                 String errMessage = ex.getMessage();
                 System.out.println(errMessage);
-                return errMessage;
+                return new Response(errMessage, true);
             }
 
         default:
             String errMessage = "Sorry I don't know what that means!\n";
             System.out.println(errMessage);
-            return errMessage;
+            return new Response(errMessage, true);
         }
     }
 

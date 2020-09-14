@@ -6,6 +6,8 @@ deadline write book /by 2020-12-12
 true
 todo read book
 false
+todo hug me
+true
 archives
 todo archive this
 false

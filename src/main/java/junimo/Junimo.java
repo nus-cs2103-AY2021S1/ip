@@ -4,6 +4,7 @@ import junimo.backend.Storage;
 import junimo.interaction.Parser;
 import junimo.interaction.Greeting;
 import junimo.task.TaskList;
+import junimo.ui.Response;
 
 import java.io.FileNotFoundException;
 
@@ -44,11 +45,7 @@ public class Junimo {
         return Greeting.welcome();
     }
 
-    public String getBye() {
-        return Greeting.exit();
-    }
-
-    public String parseInputCommand(String inputCommand) {
+    public Response parseInputCommand(String inputCommand) {
         return parser.parseInputCommand(inputCommand);
     }
 
