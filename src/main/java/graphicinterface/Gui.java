@@ -1,5 +1,5 @@
-package graphicinterface;
 
+package graphicinterface;
 
 import java.io.IOException;
 
@@ -11,12 +11,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-
 import javafx.util.Duration;
+
 /**
  * A GUI for duke.Duke using FXML.
- * Credit for line 32-34 go to James_D answer in
- * https://stackoverflow.com/questions/27334455/how-to-close-a-stage-after-a-certain-amount-of-time-javafx.
  */
 public class Gui extends Application {
     @Override
@@ -29,8 +27,11 @@ public class Gui extends Application {
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             fxmlLoader.<MainWindow>getController().setTerminateFunction(() -> {
+                //@@author John_D
+                //Slight Modification from his solution on
+                //https://stackoverflow.com/questions/27334455/how-to-close-a-stage-after-a-certain-amount-of-time-javafx.
                 PauseTransition delay = new PauseTransition(Duration.seconds(2));
-                delay.setOnFinished( event -> stage.close() );
+                delay.setOnFinished(event -> stage.close());
                 delay.play();
             });
             fxmlLoader.<MainWindow>getController().welcomeMessage();
