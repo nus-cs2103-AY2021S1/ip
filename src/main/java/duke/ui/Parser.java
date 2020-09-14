@@ -123,7 +123,7 @@ public class Parser {
         Pattern integerPattern = Pattern.compile("(?<integer>\\d+)\\s?");
         Matcher matcher = integerPattern.matcher(arguments);
         if (matcher.matches()) {
-            int index = Integer.parseInt(matcher.group("integer"));
+            int index = Integer.parseInt(matcher.group("integer")) - 1;
             if (index < 0 || index > taskList.getSize() - 1) {
                 throw new DukeException(String.format("☹ BLEHHHHHH. Task no. %d does not exist. "
                         + "Please try again.", (index + 1)));

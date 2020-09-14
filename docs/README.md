@@ -26,7 +26,7 @@ Adds a deadline to the task list.
 
 Format: `deadline <Description> /by <Time>`
 
-_Note: Time format =_ `Date Time` = `YYYY-MM-dd hhmm`
+_Note: Time format =_ `Date Time` = `YYYY-MM-dd HHmm`
 
 Examples: 
 * `deadline Philosophy essay /by 2020-09-18 2359`
@@ -37,7 +37,7 @@ Adds an event to the task list.
 
 Format: `event <Description> /at <Time>`
 
-_Note: Time format =_ `Date startTime-endTime` = `YYYY-MM-dd hhmm-hhmm`
+_Note: Time format =_ `Date startTime-endTime` = `YYYY-MM-dd HHmm-HHmm`
 
 Examples: 
 * `event Art Exhibition Opening /at 2020-09-20 1800-2200`
@@ -49,14 +49,8 @@ Lists out all tasks in the task list.
 Example of usage: `list`
 
 Expected outcome: 
-```
-Here are the tasks in your list:
-    1. [T][✓] read book
-    2. [D][✘] return book (by: June 6 2020)
-    3. [E][✘] project meeting (at: Aug 6 2020, 1400hrs-1600hrs)
-    4. [T][✓] join sports club
-    5. [T][✘] borrow book
-```
+
+![list command](./images/list.png)
 
 ### Removing a task: `delete`
 **Removes** a task from the task list.
@@ -90,19 +84,17 @@ Format: `find <Search Term>`
 * search term is case-insensitive
 
 Example of usage: 
-`find ultra`
+* `find ultra`
+* `find book`
 
 Expected outcome: 
-```
-Here are the matching tasks in your list:
-    1. [E][X] Ultra hackathon (at: Oct 14 2020, 0800hrs - 2300hrs)
-    2. [T][/] ultra difficult essay 
-```
+
+![find command](./images/find.png)
 
 ### Postpone a deadline/event: `postpone`
 Postpone a deadline or event.
 
-Format: `postpone <index> <amount> <time unit>`
+Format: `postpone <index> /by <amount> <time unit>`
 
 Supported time units: 
 * `year(s)`
@@ -111,26 +103,16 @@ Supported time units:
 * `hour(s)`
 * `minute(s)`
 
-Example of usage: 
-```
->> list
-Here are the tasks in your list:
-    1. [T][✓] read book
-    2. [D][✘] return book (by: June 6 2020)
-    3. [E][✘] project meeting (at: Aug 6 2020, 1400hrs-1600hrs)
-    4. [T][✓] join sports club
-    5. [T][✘] borrow book
+Example of usage: `postpone 3 /by 2 hours`
 
->> postpone 3 2 hours 
-Pushing it back by 2 hours.
-Okay, I've postponed it. Updated as follows:
-    [E][✘] project meeting (at: Aug 6 2020, 1600hrs-1800hrs)
-```
+Example of outcome:
+
+![list command](./images/postpone.png) 
 
 ### Advance a deadline/event: `postpone`
 Advance (brings forward) a deadline or event.
 
-Format: `advance <index> <amount> <time unit>`
+Format: `advance <index> /by <amount> <time unit>`
 
 Supported time units: 
 * `year(s)`
@@ -139,33 +121,27 @@ Supported time units:
 * `hour(s)`
 * `minute(s)`
 
-Example of usage: 
-```
->> list
-Here are the tasks in your list:
-    1. [T][✓] read book
-    2. [D][✘] return book (by: June 6 2020)
-    3. [E][✘] project meeting (at: Aug 6 2020, 1400hrs-1600hrs)
-    4. [T][✓] join sports club
-    5. [T][✘] borrow book
+Example of usage: `advance 3 /by 2 hours`
 
->> advance 3 2 hours 
-Bringing it forward by 2 hours.
-Okay, I've postponed it. Updated as follows:
-    [E][✘] project meeting (at: Aug 6 2020, 1200hrs-1400hrs)
-```
+Example of outcome:
+
+![list command](./images/advance.png) 
 
 
 ## Command Summary
 
 Action | Format, Examples
-_________|_________
+___|___
 Add To-do |  `todo <Description>`<br/>E.g.: `todo finish Sci-Fi readings for class` 
-Add Deadline | asd
-Add Event |  asd
-List | asd
-Delete | asd
-Done | asd
-Find |  ads
-Postpone | ads
-Advance | ads
+Add Deadline | `deadline <Description> /by <Time>`<br/>
+E.g.: `deadline Philosophy essay /by 2020-09-18 2359`
+Add Event |  `event <Description> /at <Time>`<br/>
+E.g.: `event Art Exhibition Opening /at 2020-09-20 1800-2200`
+List | `list`
+Delete | `delete <index>`
+Done | `done <index>`
+Find |  `find <search term>`
+Postpone | `postpone <index> <amount> <time unit>`<br/>
+E.g.: `postpone 3 /by 2 hours` 
+Advance | `advance <index> <amount> <time unit>`<br/>
+E.g.: `advance 3 /by 2 hours` 
