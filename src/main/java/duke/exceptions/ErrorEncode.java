@@ -9,7 +9,8 @@ public enum ErrorEncode {
     BadDateGiven(3, "You did not give a valid date!"),
     BlankCommand(4, "No input command was given"),
     IndexError(5, "The index of the task is out of bounds"),
-    UnknownError(99, "Something Exceptionally unexpected has happened! We will shut the application down");
+    UnknownError(99, "Something Exceptionally unexpected has happened!"
+            + " We will shut the application down");
 
     private final int code;
     private final String description;

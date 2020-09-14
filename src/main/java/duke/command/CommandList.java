@@ -11,6 +11,7 @@ import duke.tasks.ToDo;
 /**
  * CommandList to store commands supported by duke
  * Software pattern referenced from https://github.com/JoeyChenSmart/ip
+ * Implementation is done by myself with reference to this example
  */
 class CommandList {
     private static final String ALLHELP = "\t Need some help huh?\n"
@@ -32,7 +33,7 @@ class CommandList {
         }
         assert arguments.length == 2 : "The length of the argument should always only be 2"
                 + " because of -by seperator";
-        ui.systemMessage(taskManager.add(new Deadline(arguments[0] , arguments[1])));
+        ui.systemMessage(taskManager.add(Deadline.createNewDeadline(arguments[0] , arguments[1])));
     };
     static final CommandExecuter TODO = (taskManager, ui, arguments) -> {
         if (arguments[0].isEmpty()) {
@@ -47,7 +48,7 @@ class CommandList {
         }
         assert arguments.length == 2 : "The length of the argument should always only be 2"
                 + " because of -at seperator";
-        ui.systemMessage(taskManager.add(new Event(arguments[0], arguments[1])));
+        ui.systemMessage(taskManager.add(Event.createNewEvent(arguments[0], arguments[1])));
     };
     static final CommandExecuter FIND = (taskManager, ui, arguments) -> {
         ui.systemMessage(taskManager.findTasks(arguments[0]));

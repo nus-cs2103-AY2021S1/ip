@@ -83,7 +83,7 @@ public class TaskIoParser {
     public void writeTask(List<Task> taskList) throws DukeIoException {
         if (!saveFile.exists()) {
             try {
-                Files.createDirectory(Path.of(saveFile.getPath()));
+                Files.createDirectories(Path.of(saveFile.getPath()));
                 Files.createFile(Path.of(saveFile.getPath()).resolve(SAVEFILE));
             } catch (IOException e) {
                 throw new DukeIoException("Could not save the file due to directory not created");

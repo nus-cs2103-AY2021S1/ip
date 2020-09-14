@@ -13,9 +13,9 @@ public enum CommandHelp {
     DELETE("delete", "delete a task via index: delete 1 to delete first task"),
     TODO("todo", "schedule a untimed task"),
     DEADLINE("deadline", "schedule a timed deadline task, please structure with "
-            + "[deadline <task name> /by dd-MM-YYYY]"),
+            + "[deadline <task name> -by dd-MM-YYYY]"),
     EVENT("event", "schedule a timed event task, please structure with "
-            + "[event <task name> /at dd-MM-YYYY]"),
+            + "[event <task name> -at dd-MM-YYYY]"),
     SEARCH("find", "find <regex expression> on description only"),
     BLANK("", "This is a invalid command");
     private final String commandEncoding;

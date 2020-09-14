@@ -15,14 +15,14 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class DeadlineTest {
     @Test
     public void testDeadlineClassConstructor_invalidString_throwsDukeDateTimeException() {
-        assertThrows(DukeDateTimeException.class, () -> new Deadline("description", "fail"));
+        assertThrows(DukeDateTimeException.class, () -> Deadline.createNewDeadline("description", "fail"));
     }
 
 
     @Test
     public void testDeadlineConstructor_autoCorrectsBlankDateField_CorrectstoCurrentDate() {
         try {
-            Deadline deadline = new Deadline("random_desc", "");
+            Deadline deadline = Deadline.createNewDeadline("random_desc", "");
             assertEquals(LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-YYYY")),deadline.getDateby());
         } catch (Exception e) {
             e.printStackTrace();
@@ -31,7 +31,7 @@ public class DeadlineTest {
 
     @Test
     public void testTimeLeftArithmetric_noInput_zeroReturned() throws Exception {
-        Deadline deadline = new Deadline("random_desc", "");
+        Deadline deadline = Deadline.createNewDeadline("random_desc", "");
         assertEquals(deadline.timeLeft(), 0);
     }
 }
