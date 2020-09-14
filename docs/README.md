@@ -13,9 +13,9 @@ User Interface (GUI).
     - [List items](#list-items)
     - [Find items](#find-items)
     - [Mark tasks](#mark-tasks)
-    - [Clear tasks](#clear-tasks)
+    - [Clear items](#clear-items)
     - [No Duplicates](#no-duplicates)
-    - [Add Trivia](#save-trivia)
+    - [Add Trivia](#add-trivia)
     - [Exit](#exit)
 - [Usage](#usage)
     - [todo](#todo)
@@ -31,12 +31,13 @@ User Interface (GUI).
 
 ## Getting Started 
 * Ensure you have Java 11 or above installed in your Computer.
-* Download the latest `.jar` from [here](#).
-* Double-click the file to start the app. The GUI will appear in a few seconds. 
+* Download the latest `.jar` from [here](https://github.com/orzymandias/ip/releases/tag/A-Release).
+* Windows OS:Double-click the file to start the app.
+* MacOS/*nix: Navigate to directory containing jar file and run `java -jar duke.jar`
 
 ![Intrubot_Screenshot](Ui.png)
 
-##Features 
+## Features 
 
 #### Add Tasks 
 * Save 3 kinds of tasks to your task list: todo, deadline, event. 
