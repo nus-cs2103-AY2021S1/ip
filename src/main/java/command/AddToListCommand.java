@@ -1,5 +1,6 @@
 package command;
 
+import java.time.DateTimeException;
 import java.time.LocalDateTime;
 
 import duke.TaskList;
@@ -48,7 +49,11 @@ public class AddToListCommand extends Command {
         int year = Integer.parseInt(inputData[2].substring(0, 4));
         int hour = Integer.parseInt(inputData[2].substring(5, 7));
         int min = Integer.parseInt(inputData[2].substring(7));
-        return LocalDateTime.of(year, month, date, hour, min);
+        try {
+            return LocalDateTime.of(year, month, date, hour, min);
+        } catch (DateTimeException e) {
+            throw new DukeException("Invalid date or time inputs!");
+        }
     }
 
     /**
