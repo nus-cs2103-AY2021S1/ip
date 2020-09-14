@@ -58,6 +58,8 @@ public class Parser {
             return findHandler(input, splitInput, list);
         } else if (splitInput[0].equals("archive")) {
             return archiveHandler(splitInput, list, archives);
+        } else if (splitInput[0].equals("bye")) {
+            return byeHandler();
         } else {
             try {
                 return commandTask(input,list);
@@ -83,6 +85,9 @@ public class Parser {
         }
     }
 
+    public static String byeHandler() {
+        return "Bye. Hope to see you again soon!";
+    }
 
     public static String doneHandler(String[] splitInput, TaskList list) throws DukeException {
         if (splitInput.length == 1) {
@@ -102,7 +107,6 @@ public class Parser {
                 }
             } catch (NumberFormatException e) {
                 throw new DukeException("☹ OOPS!!! Invalid task number.");
-
             }
         }
     }

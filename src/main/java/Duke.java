@@ -1,4 +1,5 @@
 import exception.DukeException;
+import javafx.application.Platform;
 import parser.Parser;
 import tasklist.TaskList;
 import storage.Storage;
@@ -6,6 +7,8 @@ import ui.Ui;
 import java.io.IOException;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Duke {
     private final static String FILE_PATH = System.getProperty("user.dir") + "/data/duke.txt";
@@ -54,29 +57,29 @@ public class Duke {
      */
     public void run(String command) {
         input = command;
-        String[] splitInput = input.split(" ");
         try {
-            if (splitInput[0].equals("bye")) {
-                output = "Bye. Hope to see you again soon!";
-            } else {
-                output = Parser.commandParser(input, tasks, archivedTasks);
-            }
+            output = Parser.commandParser(input, tasks, archivedTasks);
         } catch (DukeException e) {
             output = e.getMessage();
         }
-
     }
-
 
     /**
      * Gets the response for the input command
      * @param input The input command
      * @return a String with the response
      */
-     String getResponse(String input) throws DukeException {
+     String getResponse(String input) {
+         if(input.equals("bye")) {
+             new Timer().schedule(new TimerTask() {
+                 public void run() {
+                     Platform.exit();
+                     System.exit(0);
+                 }
+             } , 2000);
+         }
          run(input);
          return this.output;
     }
-
 }
 
