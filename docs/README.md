@@ -12,8 +12,8 @@ Prerequisites:
 * Ensure that your `JAVA_HOME` is set to the correct JDK 11 location
 
 Starting Duke:
-  1. [Download](https://github.com/eugene3231/ip/releases) Duke.jar and runduke.bat.
-  2. Start the .bat file with Duke.jar in the same directory.
+  1. [Download](https://github.com/eugene3231/ip/releases) *Duke.jar* and *runduke.bat*
+  2. Start *runduke.bat* file with Duke.jar in the same directory
   3. The GUI should appear and you can start talking to Duke!
   
 
@@ -26,19 +26,19 @@ Starting Duke:
   - Todo
 
 ### Delete tasks
-* Removes a task from the task list.
+* Removes a task.
 
 ### Show all tasks
-* Displays all tasks in the task list.
+* Displays all tasks.
 
 ### Clear all tasks
-* Removes all tasks in the task list.
+* Removes all tasks.
 
 ### Find a task
 * Finds a task based on a given keyword.
 
 ### Mark task as completed
-* Completes a task in the task list.
+* Completes a task.
 
 ### Undo 
 * Undos the previous user command.
@@ -60,6 +60,7 @@ Expected outcome:
 
 ### 2. `deadline` - Add new deadline
 Add a new deadline task with description and time. </br>
+
 Example of usage: 
 
 `deadline Assignment /by 2020-10-10 1800`
@@ -82,7 +83,6 @@ Expected outcome:
     [E][✘] Meeting (at: 10pm)
 
 ### 4. `delete` - Delete a task
-
 Deletes a task by specifing its number in the task list.
 
 Example of usage: 
@@ -95,7 +95,6 @@ Expected outcome:
     [E][✔] Google Career Talk (at: U-Town)
 
 ### 5. `list` - List all tasks
-
 Displays all tasks currently in the list.
 
 Example of usage: 
@@ -114,7 +113,6 @@ Expected outcome:
     You have 4 task(s) in the list
 
 ### 6. `clear` - Clear all tasks
-
 Deletes all tasks in the list.
 
 Example of usage: 
@@ -126,7 +124,6 @@ Expected outcome:
 > The list of tasks has successfully been cleared.
 
 ### 7. `find` - Find a task by keyword
-
 Find all tasks matching the keyword either fully or partially.
 
 Example of usage: 
@@ -139,7 +136,6 @@ Expected outcome:
     [D][✘] Submission of Essay (by: 6pm on Thursday)
 
 ### 8. `done` - Completes a task
-
 Mark a task as done by specifing its number in the task list.
 
 Example of usage: 
@@ -152,7 +148,6 @@ Expected outcome:
     [D][✔] Assignment (by: 10 Oct 2020, 06:00 PM)
 
 ### 9. `undo` - Undo the previous command
-
 Example of usage: 
 
 `undo`
@@ -162,8 +157,7 @@ Expected outcome:
 > The previous command: "done 3" has been undone!
 
 ### 10. `help` - Displays help guide for commands
-
-Example of usage: 
+Examples of usage: 
 * Displays help for all commands
 
   `help`
