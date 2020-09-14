@@ -25,8 +25,11 @@ public class Event extends TimedTask {
     @Override
     protected String getTxtFormat() {
         String[] splitTag = super.getTxtFormat().split("#", 2);
-        return "event, " + splitTag[0] + "/at" + this.dateTime.format(Deadline.INPUT_FORMAT)
-                + " #" + splitTag[1];
+        if (splitTag.length > 1) {
+            return "event, " + splitTag[0] + "/at" + this.dateTime.format(Deadline.INPUT_FORMAT)
+                    + " #" + splitTag[1];
+        }
+        return "event, " + splitTag[0] + "/at" + this.dateTime.format(Deadline.INPUT_FORMAT);
     }
 
     /**
@@ -37,7 +40,10 @@ public class Event extends TimedTask {
     @Override
     public String toString() {
         String[] splitTag = super.toString().split("#", 2);
-        return "[E]" + splitTag[0] + " (at: " + super.getDateTimeString() + ")"
-                + " #" + splitTag[1];
+        if (splitTag.length > 1) {
+            return "[E]" + splitTag[0] + " (at: " + super.getDateTimeString() + ")"
+                    + " #" + splitTag[1];
+        }
+        return "[E]" + splitTag[0] + " (at: " + super.getDateTimeString() + ")";
     }
 }

@@ -25,8 +25,11 @@ public class Deadline extends TimedTask {
     @Override
     protected String getTxtFormat() {
         String[] splitTag = super.getTxtFormat().split("#", 2);
-        return "deadline, " + splitTag[0] + "/by" + this.dateTime.format(Deadline.INPUT_FORMAT)
-                + " #" + splitTag[1];
+        if (splitTag.length > 1) {
+            return "deadline, " + splitTag[0] + "/by" + this.dateTime.format(Deadline.INPUT_FORMAT)
+                    + " #" + splitTag[1];
+        }
+        return "deadline, " + splitTag[0] + "/by" + this.dateTime.format(Deadline.INPUT_FORMAT);
     }
 
     /**
@@ -37,7 +40,10 @@ public class Deadline extends TimedTask {
     @Override
     public String toString() {
         String[] splitTag = super.toString().split("#", 2);
-        return "[D]" + splitTag[0] + " (by: " + super.getDateTimeString() + ")"
-                + " #" + splitTag[1];
+        if (splitTag.length > 1) {
+            return "[D]" + splitTag[0] + " (by: " + super.getDateTimeString() + ")"
+                    + " #" + splitTag[1];
+        }
+        return "[D]" + splitTag[0] + " (by: " + super.getDateTimeString() + ")";
     }
 }
