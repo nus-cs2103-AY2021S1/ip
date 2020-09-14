@@ -18,6 +18,7 @@ The letter inside the brackets next to each command name is the shortcut for tha
 ### Show instruction list: help (h)
 
 Shows a message in the app with the list of available commands for you to use.
+
 Format: help
 
 ### Show all current tasks: list (l)
@@ -37,6 +38,7 @@ Format: bye
 Marks a task with the indicated INDEX as complete. The INDEX **must be a positive number** and corresponds to the index number shown in the displayed task list. Command will fail if INDEX exceeds the number of tasks in the list.
 
 Format: done INDEX
+
 Example: done 3
 
 ### Delete a task: delete (x)
@@ -44,6 +46,7 @@ Example: done 3
 Deletes a task with the indicated INDEX. The INDEX **must be a positive number** and corresponds to the index number shown in the displayed task list. Command will fail if INDEX exceeds the number of tasks in the list.
 
 Format: delete INDEX
+
 Example: delete 5
 
 ### Check for tasks on a specific date: check (c)
@@ -51,6 +54,7 @@ Example: delete 5
 Lists all tasks with the indicated DATE. The DATE **must be in YYYY-MM-DD format**. If no tasks occur on the DATE, the command will return an empty list.
 
 Format: check DATE
+
 Example: check 2020-09-01
 
 ### Add a todo task: todo (t)
@@ -58,6 +62,7 @@ Example: check 2020-09-01
 Adds a todo task to the task list with a provided DESC. The DESC **should not be empty**, otherwise the command will fail. DESC can contain more than one word.
 
 Format: todo DESC
+
 Example: todo finish this user guide
 
 ### Add a deadline task: deadline (d)
@@ -65,6 +70,7 @@ Example: todo finish this user guide
 Adds a deadline task to the task list with a provided DESC and DATE. The DESC **should not be empty** and the DATE **must be in YYYY-MM-DD format**, otherwise the command will fail. DESC can contain more than one word.
 
 Format: deadline DESC /by DATE
+
 Example: deadline update iP increments /by 2020-09-16
 
 ### Add an event task: event (e)
@@ -72,6 +78,7 @@ Example: deadline update iP increments /by 2020-09-16
 Adds an event task to the task list with a provided DESC and DATE. The DESC **should not be empty** and the DATE **must be in YYYY-MM-DD format**, otherwise the command will fail. DESC can contain more than one word.
 
 Format: event DESC /at DATE
+
 Example: event CS2103T Tutorial /at 2020-09-16
 
 ### Find tasks with a common keyword: find (f)
@@ -79,6 +86,7 @@ Example: event CS2103T Tutorial /at 2020-09-16
 Lists all tasks with the indicated KEYWORD. The KEYWORD can be longer than one word. If no tasks contain the KEYWORD, the command will return an empty list.
 
 Format: find KEYWORD
+
 Example: find Tutorial
 
 ## Command Summary
