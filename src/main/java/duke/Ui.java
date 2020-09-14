@@ -28,6 +28,7 @@ public class Ui {
                 + "event {name of task} /at {YYYY-MM-DD}  -  Adds a new event\n"
                 + "done {task index}  -  Marks the task with stated index as done\n"
                 + "delete {task index}  -  Deletes the task with stated index\n"
+                + "find {keyword}  -  Get the list of tasks with stated keyword(s)\n"
                 + "list  -  Shows the list of tasks\n"
                 + "statistics  -  Shows some statistics regarding the tasks\n";
         return cleanMessage(message);
@@ -75,14 +76,18 @@ public class Ui {
     public String showStatistics(TaskList tasks, Statistics statistics) {
         String message = "Here are some statistics about your tasks:\n\n"
                 + "You have completed " + statistics.getNumOfDoneTodos()
-                + " out of " + statistics.getNumOfTodos() + " Todos. (" + statistics.getPercentageOfDoneTodos() + "%)\n"
+                + " out of " + statistics.getNumOfTodos()
+                + " Todos. (" + statistics.getPercentageOfDoneTodos() + "%)\n"
                 + "You have completed " + statistics.getNumOfDoneDeadlines()
-                + " out of " + statistics.getNumOfDeadlines() + " Deadlines. (" + statistics.getPercentageOfDoneDeadlines() + "%)\n"
+                + " out of " + statistics.getNumOfDeadlines()
+                + " Deadlines. (" + statistics.getPercentageOfDoneDeadlines() + "%)\n"
                 + "You have completed " + statistics.getNumOfDoneEvents()
-                + " out of " + statistics.getNumOfEvents() + " Events. (" + statistics.getPercentageOfDoneEvents() + "%)\n"
+                + " out of " + statistics.getNumOfEvents()
+                + " Events. (" + statistics.getPercentageOfDoneEvents() + "%)\n"
                 + "\n"
                 + "In total, you have completed " + statistics.getNumOfDoneTasks()
-                + " out of " + tasks.getSize() + " tasks. (" + statistics.getPercentageOfDoneTasks() + "%)\n";
+                + " out of " + tasks.getSize()
+                + " tasks. (" + statistics.getPercentageOfDoneTasks() + "%)\n";
         return cleanMessage(message);
     }
 

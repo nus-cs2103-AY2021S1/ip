@@ -1,5 +1,10 @@
 package duke;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.Arrays;
+
 import duke.command.AddCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
@@ -12,11 +17,6 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.Arrays;
 
 /**
  * The Parser object deals with loading tasks from the file and saving tasks in the file.
@@ -39,12 +39,20 @@ public class Parser {
         case "list":
             return new ListCommand();
         case "done": {
-            String lastChar = inputArr[inputArr.length - 1];
-            return new DoneCommand(Integer.parseInt(lastChar) - 1);
+            try {
+                String lastChar = inputArr[inputArr.length - 1];
+                return new DoneCommand(Integer.parseInt(lastChar) - 1);
+            } catch (Exception e) {
+                throw new DukeException("Please add the index of the task!!");
+            }
         }
         case "delete": {
-            String lastChar = inputArr[inputArr.length - 1];
-            return new DeleteCommand(Integer.parseInt(lastChar) - 1);
+            try {
+                String lastChar = inputArr[inputArr.length - 1];
+                return new DeleteCommand(Integer.parseInt(lastChar) - 1);
+            } catch (Exception e) {
+                throw new DukeException("Please add the index of the task!!");
+            }
         }
         case "bye":
             return new ExitCommand();
@@ -100,7 +108,6 @@ public class Parser {
     }
 
     private static String getTaskDescription() {
-        assert inputArr.length > 1 : "inputArr length should be more than 1";
         StringBuilder desc = new StringBuilder();
         int i = 1;
         while ((i < inputArr.length) && (!inputArr[i].contains("/by")) && (!inputArr[i].contains("/at"))) {
@@ -112,7 +119,6 @@ public class Parser {
     }
 
     private static String getTaskTimeDate() {
-        assert inputArr.length > 2 : "inputArr length should be more than 1";
         String dateTime = "";
         int i = 0;
         while (!inputArr[i].contains("/by") && (!inputArr[i].contains("/at"))) {

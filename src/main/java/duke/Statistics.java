@@ -1,8 +1,8 @@
 package duke;
 
-import duke.task.Task;
-
 import java.util.ArrayList;
+
+import duke.task.Task;
 
 /**
  * The Statistics object contains a range of statistics regarding the tasks in the list.
@@ -51,6 +51,8 @@ public class Statistics {
                     numOfDoneEvents++;
                 }
                 break;
+            default:
+                assert false;
             }
         }
 

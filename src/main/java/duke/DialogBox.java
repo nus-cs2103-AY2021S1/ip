@@ -19,6 +19,13 @@ public class DialogBox extends HBox {
     private Label text;
     private ImageView displayPicture;
 
+    /**
+     * Initializes DialogBox object.
+     *
+     * @param l Label used to make DialogBox.
+     * @param iv ImageView used to make DialogBox.
+     * @param type User type.
+     */
     public DialogBox(Label l, ImageView iv, String type) {
         text = l;
         displayPicture = iv;
@@ -50,10 +57,24 @@ public class DialogBox extends HBox {
         this.getChildren().setAll(tmp);
     }
 
+    /**
+     * Gets the dialog box of the user.
+     *
+     * @param l User Label.
+     * @param iv User Imageview.
+     * @return User DialogBox.
+     */
     public static DialogBox getUserDialog(Label l, ImageView iv) {
         return new DialogBox(l, iv, "user");
     }
 
+    /**
+     * Gets the dialog box of Duke.
+     *
+     * @param l Duke Label.
+     * @param iv Duke Imageview.
+     * @return Duke DialogBox.
+     */
     public static DialogBox getDukeDialog(Label l, ImageView iv) {
         var db = new DialogBox(l, iv, "duke");
         db.flip();
