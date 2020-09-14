@@ -28,7 +28,6 @@ public class TaskList {
             lst.add(new Event(message));
             break;
         }
-
     }
 
     public int size() {

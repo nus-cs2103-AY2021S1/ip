@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
 public class Converter {
     /**
      * Returns a formatted string transforming from "/at" to ":(at)"
-     * The input string must contain "/at"
+     * Assume the input string must contain "/at"
      *
      * @param s input string
      * @return a formatted string
@@ -22,7 +22,7 @@ public class Converter {
 
     /**
      * Returns a formatted string transforming from "/by" to ":(by)"
-     * The input string must contain "/by"
+     * Assume the input string must contain "/by"
      *
      * @param s input string
      * @return a formatted string
@@ -46,13 +46,14 @@ public class Converter {
         String isDone = s.split(" ; ")[1];
         String message = s.split(" ; ")[2];
 
-        if (taskType.equals("T")) {
+        switch (taskType) {
+        case "T":
             return new Todo(message, getStatus(Integer.parseInt(isDone)));
-        } else if (taskType.equals("E")) {
+        case "E":
             return new Event(message, getStatus(Integer.parseInt(isDone)));
-        } else if (taskType.equals("D")) {
+        case "D":
             return new Deadline(message, getStatus(Integer.parseInt(isDone)));
-        } else {
+        default:
             throw new IllegalTaskTypeException();
         }
     }

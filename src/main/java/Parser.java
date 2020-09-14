@@ -103,13 +103,13 @@ public class Parser {
             response = handleFind(lst, command);
             break;
         case "todo":
-            response = handleTodo(lst, command);
+            response = handleAdd(lst, command, TaskType.T);
             break;
         case "deadline":
-            response = handleDeadline(lst, command);
+            response = handleAdd(lst, command, TaskType.D);
             break;
         case "event":
-            response = handleEvent(lst, command);
+            response = handleAdd(lst, command, TaskType.E);
             break;
         default:
             return format(new UnknownCommandException().toString());
@@ -149,9 +149,11 @@ public class Parser {
             return format(new DoneEmptyBodyException().toString());
         }
 
-        int index;
+        int index = Integer.parseInt(extraCommand) - 1;
+        Task task;
+
         try {
-            index = Integer.parseInt(extraCommand) - 1;
+            task = lst.get(index);
         } catch (IndexOutOfBoundsException ex) {
             return format(new InvalidDoneException().toString());
         }
@@ -159,7 +161,6 @@ public class Parser {
         assert index > 0;
         assert index < lst.size();
 
-        Task task = lst.get(index);
         task.setDone();
         TaskList.numberOfDoneTasks++;
         String messageMarked = "Nice! I've marked this task as done:\n";
@@ -181,9 +182,11 @@ public class Parser {
             return format(new DeleteEmptyBodyException().toString());
         }
 
-        int index;
+        int index = Integer.parseInt(extraCommand) - 1;
+        Task task;
+
         try {
-            index = Integer.parseInt(extraCommand) - 1;
+            task = lst.get(index);
         } catch (IndexOutOfBoundsException ex) {
             return format(new InvalidDeletionException().toString());
         }
@@ -191,7 +194,6 @@ public class Parser {
         assert index > 0;
         assert index < lst.size();
 
-        Task task = lst.get(index);
         lst.delete(index);
         TaskList.numberOfDoneTasks++;
 
@@ -207,7 +209,7 @@ public class Parser {
      * @return a string listing all tasks in lst
      */
     private String getListCountMessage(TaskList lst) {
-        return "\n" + INDENT + "Now you have " + lst.size() + " task(s) in the list.\n";
+        return "\n" + INDENT + "Now you have " + lst.size() + " task(s) in the list.";
     }
 
     /**
@@ -234,18 +236,19 @@ public class Parser {
             }
         }
 
-        String messageMatching = "Here are the matching tasks in your list:\n";
+        String messageMatching = "Here are the matching tasks in your list:";
         return formatList(taskPrint(subList), messageMatching);
     }
 
     /**
-     * Returns a response string for "toodoo" command
+     * Returns a response string for a new task command
      *
      * @param lst the task list
      * @param command the command to be processed
-     * @return a response string for "toodoo" command
+     * @param taskType task type, T or D or E
+     * @return a response string for a new task command
      */
-    public String handleTodo(TaskList lst, String command) {
+    public String handleAdd(TaskList lst, String command, TaskType taskType) {
         String description;
         try {
             description = command.split(" ", 2)[EXTRA];
@@ -253,52 +256,18 @@ public class Parser {
             return format(new TodoEmptyBodyException().toString());
         }
 
-        Task task = new Todo(description);
-        lst.add(task);
-
-        return format(messageAdded + task.print() + getListCountMessage(lst));
+        lst.addOfType(description, taskType);
+        return format(messageAdded + MORE_INDENT + getMostRecentTask(lst).print() + getListCountMessage(lst));
     }
 
     /**
-     * Returns a response string for "event" command
+     * Returns the most recent task in the task list
      *
      * @param lst the task list
-     * @param command the command to be processed
-     * @return a response string for "event" command
+     * @return rthe most recent task
      */
-    public String handleEvent(TaskList lst, String command) {
-        String description;
-        try {
-            description = command.split(" ", 2)[EXTRA];
-        } catch (IndexOutOfBoundsException ex) {
-            return format(new TodoEmptyBodyException().toString());
-        }
-
-        Task task = new Event(description);
-        lst.add(task);
-
-        return format(messageAdded + task.print() + getListCountMessage(lst));
-    }
-
-    /**
-     * Returns a response string for "deadline" command
-     *
-     * @param lst the task list
-     * @param command the command to be processed
-     * @return a response string for "deadline" command
-     */
-    public String handleDeadline(TaskList lst, String command) {
-        String description;
-        try {
-            description = command.split(" ", 2)[EXTRA];
-        } catch (IndexOutOfBoundsException ex) {
-            return format(new TodoEmptyBodyException().toString());
-        }
-
-        Task task = new Deadline(description);
-        lst.add(task);
-
-        return format(messageAdded + task.print() + getListCountMessage(lst));
+    private Task getMostRecentTask(TaskList lst) {
+        return lst.get(lst.size() - 1);
     }
 
     /**

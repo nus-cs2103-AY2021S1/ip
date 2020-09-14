@@ -1,6 +1,5 @@
 import java.nio.file.Path;
-import java.util.List;
-import java.util.ArrayList;
+
 /**
  * Represents an interactive bot to handle tasks
  */
