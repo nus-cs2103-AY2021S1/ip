@@ -27,7 +27,7 @@ public class HelpCommand implements Command {
         } else if (splitInput.length == 1) {
             return HELP_MESSAGE;
         } else {
-            switch (splitInput[1]) {
+            switch (splitInput[1].toLowerCase()) {
             case "list":
                 return "list: Lists the current tasks in your list.\n"
                         + "Tasks are ordered based on the time\n"
