@@ -91,7 +91,7 @@ Example of usage:
 
 Expected outcome:
 
-> Alright! I've removed this task: 
+>Alright! I've removed this task: 
 </br>[E][✔] Google Career Talk (at: U-Town)
 
 ### 5. `list` - List all tasks
@@ -103,11 +103,11 @@ Example of usage:
 
 Expected outcome:
 
-> Here are the tasks in your list:</br>
-</br>1. [D][✔] Send Email (by: 13 Sept 2020, 06:00 PM)
-</br>2. [E][✘] Software Engineering class (at: 3pm)
-</br>3. [D][✘] Submission of Essay (by: 6pm on Thursday)
-</br>4. [D][✘] Assignment (by: 10 Oct 2020, 06:00 PM)
+>Here are the tasks in your list:
+</br></br>1. [D][✓] Send Email (by: 13 Sept 2020, 06:00 PM)
+</br>2. [E][✗] Software Engineering class (at: 3pm)
+</br>3. [D][✗] Submission of Essay (by: 6pm on Thursday)
+</br>4. [D][✗] Assignment (by: 10 Oct 2020, 06:00 PM)
 </br></br>You have 4 task(s) in the list
 
 ### 6. `clear` - Clear all tasks
@@ -119,7 +119,7 @@ Example of usage:
 
 Expected outcome:
 
-> The list of tasks has successfully been cleared.
+>The list of tasks has successfully been cleared.
 
 ### 7. `find` - Find a task by keyword
 Find all tasks matching the keyword either fully or partially.
@@ -130,8 +130,8 @@ Example of usage:
 
 Expected outcome:
 
-> I have found the matching tasks in your list:
-</br>[D][✘] Submission of Essay (by: 6pm on Thursday)
+>I have found the matching tasks in your list:
+</br>[D][✗] Submission of Essay (by: 6pm on Thursday)
 
 ### 8. `done` - Completes a task
 Mark a task as done by specifing its number in the task list.
@@ -142,8 +142,8 @@ Example of usage:
 
 Expected outcome:
 
-> Good job! You completed:
-</br>[D][✔] Assignment (by: 10 Oct 2020, 06:00 PM)
+>Good job! You completed:
+</br>[D][✓] Assignment (by: 10 Oct 2020, 06:00 PM)
 
 ### 9. `undo` - Undo the previous command
 Example of usage: 
@@ -166,6 +166,6 @@ Examples of usage:
 
 Expected outcome:
 
-> deadline: Adds a deadline task with time.
+>deadline: Adds a deadline task with time.
 </br> Fields: [description] /by [time] 
 </br> Example: deadline Assignment /by 2020-10-10 1800
