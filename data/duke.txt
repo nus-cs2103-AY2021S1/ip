@@ -1,8 +1,11 @@
-[T][?] abcde  @  Sep 08 1999
-[D][X] dshaodhuas  @  Sep 09 1999
-[T][?] 123
-[T][X] 1234
-[T][?] 12345
-[T][X] 1234
-[D][X] abcde  @  Sep 08 1999
-[T][X] 987
+[T][X] never  @  Sep 17 1999
+[D][X] gonna  @  Sep 18 1999
+[T][?] give  @  Sep 19 1999
+[T][?] you  @  Sep 07 1999
+[T][?] up  @  Sep 20 1999
+[E][X] never  @  Sep 01 1999
+[D][X] gonna  @  Sep 02 1999
+[T][?] let  @  Sep 03 1999
+[E][?] you  @  Sep 09 1999
+[D][?] down  @  Sep 13 1999
+[E][X] never gonna run around and desert you  @  Sep 09 1999
