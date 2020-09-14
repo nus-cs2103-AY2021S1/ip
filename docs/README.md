@@ -118,6 +118,7 @@ Comments:
 
 <a name="command_summary"/>
 ## Command Summary
+
 | Action | Format, Examples |
 | --- | --- |
 | Todo | `todo DESCRIPTION` <br> e.g. `todo read book`|
