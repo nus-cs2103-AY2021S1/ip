@@ -9,7 +9,8 @@
     shown below should appear in a few seconds. The example below contains
     some sample data.
     
-    [image]
+    ![Image of Ui]
+    (https://github.com/seantaysl/ip/blob/master/docs/Ui.png)
 5. Type the command in the command box and press Enter to execute it.
 <br/> Some example commands are listed below:
 
