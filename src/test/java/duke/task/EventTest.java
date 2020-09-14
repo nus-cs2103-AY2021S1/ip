@@ -14,7 +14,7 @@ public class EventTest {
             Event e = new Event("project meeting",
                     new SimpleDateFormat("dd/MM/yyyy HHmm")
                             .parse("05/12/2020 1600"), true, false);
-            assertEquals("[E][✘] project meeting (at: Dec 05 2020 04:00pm)", e.toString());
+            assertEquals("[E][✘] project meeting (at: Dec 05 2020 04:00PM)", e.toString());
         } catch (Exception e) {
             //Do nothing
         }
