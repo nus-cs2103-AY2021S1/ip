@@ -1,8 +1,11 @@
 event book event /at library
 false
-todo read book
-true
 deadline write book /by 2020-12-12
 false
 todo eat ice cream
+true
+todo read book
+true
+archives
+todo eat dinner
 false

@@ -21,7 +21,10 @@ public class Greeting {
                 + "\n       'event <event description> /at <event location>'."
                 + "\n* To view your tasks, say: 'list'."
                 + "\n* To check off a task, say: 'done <task number>'."
-                + "\n* To find tasks, say: 'find <word>'.\n"
+                + "\n* To find tasks, say: 'find <word>'."
+                + "\n* To archive tasks, say: 'archive <task number>'."
+                + "\n* To unarchive tasks, say: 'unarchive <task number>'."
+                + "\n* To view your archived tasks, say: 'archives'.\n"
                 + STAR_LINE;
         System.out.println(welcomeMessage);
         return welcomeMessage;
