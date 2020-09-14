@@ -2,6 +2,7 @@ package emily.app;
 
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -38,6 +39,7 @@ public class UI extends Application {
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
 
+
         userInput = new TextField();
         Button sendButton = new Button("Send");
 
@@ -56,7 +58,7 @@ public class UI extends Application {
 
         mainLayout.setPrefSize(400.0, 600.0);
 
-        scrollPane.setPrefSize(385, 535);
+        scrollPane.setPrefSize(385, 525);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
@@ -66,7 +68,9 @@ public class UI extends Application {
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
         userInput.setPrefWidth(325.0);
+        userInput.setPrefHeight(35);
         sendButton.setPrefWidth(55.0);
+        sendButton.setPrefHeight(35.0);
 
         AnchorPane.setTopAnchor(scrollPane, 1.0);
 
@@ -78,7 +82,7 @@ public class UI extends Application {
 
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
         dialogContainer.getChildren().addAll(
-                new emily.app.DialogBox(getDialogLabel(intro), new ImageView())
+                new emily.app.DialogBox(getDialogLabel(intro), new ImageView(), true)
         );
 
         //Part 3. Add functionality to handle user input.

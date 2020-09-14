@@ -43,7 +43,7 @@ test {
 }
 
 application {
-    mainClassName = "main.java.emily.app.Launcher"
+    mainClassName = "emily.app.Launcher"
 }
 
 shadowJar {

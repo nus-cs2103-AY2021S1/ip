@@ -130,7 +130,7 @@ public class Logic {
             if (shortened.equals("view")){
                 throw new DukeException("Missing date");
             }
-            c = Command.View;
+            c = Command.VIEW;
         } else if (input.contains("delete")) {
             if (shortened.equals("delete")) {
                 throw new DukeException("Empty Index");
@@ -161,7 +161,7 @@ public class Logic {
             }
             c = Command.FIND;
         } else { //Unrecognised command given by the user
-            throw new DukeException("Invalid input");
+            throw new DukeException("I do not understand the command x.x");
         }
         return c;
     }
