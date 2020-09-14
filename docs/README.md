@@ -1,6 +1,26 @@
 # User Guide of C-3PO
 C-3PO is a droid for human cyborg relations.
 
+- [User Guide of C-3PO](#user-guide-of-c-3po)
+  * [Features](#features)
+    + [Add tasks - todo, events and deadlines](#add-tasks---todo--events-and-deadlines)
+    + [Date processing](#date-processing)
+    + [Mark tasks as done](#mark-tasks-as-done)
+    + [List all tasks](#list-all-tasks)
+    + [Delete tasks](#delete-tasks)
+    + [Sort tasks by different properties](#sort-tasks-by-different-properties)
+    + [Save data into local storage](#save-data-into-local-storage)
+  * [Usage](#usage)
+    + [`list` - list all tasks](#-list----list-all-tasks)
+    + [`todo` - add a todo task](#-todo----add-a-todo-task)
+    + [`deadline` - add a deadline task](#-deadline----add-a-deadline-task)
+    + [`event` - add an event task](#-event----add-an-event-task)
+    + [`done` - mark a task as done](#-done----mark-a-task-as-done)
+    + [`delete` - delete a task](#-delete----delete-a-task)
+    + [`find` - find tasks by keywords](#-find----find-tasks-by-keywords)
+    + [`sort` - sort tasks by kind, name or date](#-sort----sort-tasks-by-kind--name-or-date)
+    + [`bye` - save and exit](#-bye----save-and-exit)
+
 ## Features 
 
 ### Add tasks - todo, events and deadlines
