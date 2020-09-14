@@ -54,7 +54,7 @@ public class Storage {
             fw.write(fileText);
             fw.close();
         } catch (IOException e) {
-            throw new ButlerException("There is an error with writing to the path. File is not detected.");
+            assert false : "There is an error with writing to the path. File is not detected.";
         }
     }
 
@@ -120,7 +120,7 @@ public class Storage {
             Files.createDirectory(Paths.get("./data/"));
             Files.createFile(Paths.get(filePath));
         } catch (IOException e) {
-            throw new ButlerException("Code should never reach here." + e.getMessage());
+            assert false : "Code should never reach here." + e.getMessage();
         }
     }
 }
