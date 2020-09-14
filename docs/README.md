@@ -115,7 +115,6 @@ Eg: done 5
 
 
 
-
 ##### Delete the task : delete
 
 This feature allows users to delete certain tasks.
@@ -128,6 +127,15 @@ Format: delete [task index]
 we first use list to find the index of the task. For example, in this case, the index 
 for the ip task is taken as 5.
 Eg: delete 5
+
+##### Find a certain task: find
+
+This feature allows users to find a certain task from the list and look at the detail.
+
+Example, i want to find when is my ip due.
+
+Format find [taskName]
+eg: find ip
 
 #####  Ending a session : bye
 
