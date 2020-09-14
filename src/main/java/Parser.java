@@ -8,7 +8,6 @@ public class Parser {
     protected String description;
     protected String date;
     protected LocalDate time;
-    protected String type;
     protected TaskList tasks;
     protected Ui ui;
     protected boolean isFinished;
@@ -23,6 +22,12 @@ public class Parser {
         isFinished = false;
     }
 
+    /**
+     * Makes sense of the user input.
+     * @param input the user command
+     * @return Duke's response to the user command
+     * @throws DukeException exceptions when processing the command.
+     */
     public String parse(String input) throws DukeException {
         if(input.equals("list")) {
             return ui.list();
@@ -30,7 +35,7 @@ public class Parser {
             isFinished = true;
             return Ui.showEnd();
         } else if (input.equals("help")) {
-            return ui.printHelpInformation();
+            return Ui.printHelpInformation();
         } else if(input.equals("todo") || input.equals("deadline") || input.equals("event")) {
             throw new DukeException("OOPS!!! The description cannot be empty.");
 
@@ -44,27 +49,13 @@ public class Parser {
             return handleAddCommand("event ", input);
 
         } else if(input.startsWith("done ")) {
-
-            description = input.substring(5);
-            int selected = Integer.parseInt(description);
-            tasks.get(selected - 1).markAsDone();
-            return "Nice! I've marked this task as done:\n" + "  "
-                    + tasks.get(selected - 1).toString();
+            return handleDoneCommand(input);
 
         } else if(input.startsWith("delete ")) {
-
-            description = input.substring(7);
-            int selected = Integer.parseInt(description);
-            Task task = tasks.get(selected - 1);
-            tasks.deleteTask(selected - 1);
-            return "Noted. I've removed this task:\n"
-                    + "  " + task.toString()
-                    + "\nNow you have " + (tasks.count()) + " tasks in the list.";
+            return handleDeleteCommand(input);
 
         } else if(input.startsWith("find ")) {
-            description = input.substring(5);
-            TaskList matchingTasks = tasks.findTasks(description);
-            return ui.find(matchingTasks);
+            return handleFindCommand(input);
 
         } else {
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -93,6 +84,30 @@ public class Parser {
         return "Got it. I've added this task:\n"
                 + "  " + tasks.get(tasks.count() - 1).toString()
                 + "\nNow you have " + (tasks.count()) + " tasks in the list.";
+    }
+
+    private String handleDoneCommand(String input) {
+        description = input.substring(5);
+        int selected = Integer.parseInt(description);
+        tasks.get(selected - 1).markAsDone();
+        return "Nice! I've marked this task as done:\n" + "  "
+                + tasks.get(selected - 1).toString();
+    }
+
+    private  String handleDeleteCommand(String input) {
+        description = input.substring(7);
+        int selected = Integer.parseInt(description);
+        Task task = tasks.get(selected - 1);
+        tasks.deleteTask(selected - 1);
+        return "Noted. I've removed this task:\n"
+                + "  " + task.toString()
+                + "\nNow you have " + (tasks.count()) + " tasks in the list.";
+    }
+
+    private String handleFindCommand(String input) {
+        description = input.substring(5);
+        TaskList matchingTasks = tasks.findTasks(description);
+        return ui.find(matchingTasks);
     }
 
     public boolean isFinished() {
