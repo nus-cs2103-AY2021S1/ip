@@ -10,7 +10,6 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.HBox;
 
 public class DialogBox extends HBox {
@@ -34,6 +33,17 @@ public class DialogBox extends HBox {
         displayPicture.setImage(image);
     }
 
+    // Static Factory Methods
+    public static DialogBox getUserDialog(String text, Image img) {
+        return new DialogBox(text, img);
+    }
+
+    public static DialogBox getDukeDialog(String text, Image img) {
+        var db = new DialogBox(text, img);
+        db.flip();
+        return db;
+    }
+
     /**
      * Flips the dialog box such that the ImageView is on the left and text on the right.
      */
@@ -43,15 +53,5 @@ public class DialogBox extends HBox {
         getChildren().setAll(tmp);
         setAlignment(Pos.CENTER_LEFT);
         dialog.setAlignment(Pos.CENTER_LEFT);
-    }
-
-    public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
-    }
-
-    public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
-        db.flip();
-        return db;
     }
 }
