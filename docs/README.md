@@ -1,7 +1,7 @@
 # DoLah User Guide [![Status](https://travis-ci.org/BobbyZhouZijian/ip.svg?branch=master)](https://travis-ci.org/BobbyZhouZijian/ip)
 
 <p align="center">
-    <img src="./Ui.png" alt="App Image" width="400" height="700">
+    <img src="./Ui.png" alt="App Image" width="400" height="600">
 </p>
 
 ## Features
