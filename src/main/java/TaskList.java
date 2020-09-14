@@ -48,7 +48,9 @@ public class TaskList {
     }
 
     public void update(int index, Task updated) {
+        boolean isDone = this.list.get(index).isDone;
         this.list.remove(index);
+        updated.isDone = isDone;
         this.list.add(updated);
     }
 

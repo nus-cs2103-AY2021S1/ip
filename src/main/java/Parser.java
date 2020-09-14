@@ -313,7 +313,7 @@ public class Parser {
         assert numTask > -1 : "completeDelete function was passed with negative numTask value";
         String[] words = str.split("\\s+");
         int len = words.length;
-        if (len > 2) {
+        if (len > 1) {
             String num = words[1];
             boolean result = num.matches(".*\\d.*");
             if (result) {
