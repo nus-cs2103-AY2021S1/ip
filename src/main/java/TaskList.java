@@ -132,14 +132,18 @@ public class TaskList {
     
 
     public String printTaskList() {
-        String returnString = "";
-        int counter = 0;
-        Iterator<Task> taskIterator = this.taskList.iterator();
-        while (taskIterator.hasNext()) {
-            Task thisTask = taskIterator.next();
-            returnString += "\n" + (counter + 1) + ". " + thisTask.toString();
-            counter++;
+        if (this.taskList.size() == 0) {
+            return "You currently have nothing on your list";
+        } else {
+            String returnString = "Here's what you have on your list";
+            int counter = 0;
+            Iterator<Task> taskIterator = this.taskList.iterator();
+            while (taskIterator.hasNext()) {
+                Task thisTask = taskIterator.next();
+                returnString += "\n" + (counter + 1) + ". " + thisTask.toString();
+                counter++;
+            }
+            return returnString;
         }
-        return returnString;
     }
 }

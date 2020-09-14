@@ -21,7 +21,7 @@ public class Event extends Task{
         if (userInput.equals("event")) throw properFormatAdvisoryException;
         String[] StringArr = userInput.split(" /at");
         if (StringArr.length != 2) throw properFormatAdvisoryException;
-        StringArr[0] = StringArr[0].replace("event", "");
+        StringArr[0] = StringArr[0].replace("event ", "");
         return StringArr;
     }
 

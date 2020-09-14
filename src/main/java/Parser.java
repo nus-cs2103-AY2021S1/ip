@@ -52,9 +52,10 @@ public class Parser {
                 return ui.showOtherActionMessage(userInput, taskList);
             case "delete":
                 int indexDeleted = Integer.parseInt(userInput.replace("delete ", ""));
+                TaskList duplicatedTaskList = TaskList.copy(taskList);
                 assert indexDeleted >= 1 : "Index must be a positive value";
                 taskList.deleteTask(indexDeleted, storage);
-                return ui.showOtherActionMessage(userInput, taskList);
+                return ui.showOtherActionMessage(userInput, duplicatedTaskList);
             case "find":
                 return ui.showOtherActionMessage(userInput, taskList);
             case "duration":

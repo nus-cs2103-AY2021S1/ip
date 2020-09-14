@@ -1,18 +1,18 @@
 import java.util.ArrayList;
 
 public class Ui {
+    private static final String LOGO = " ____        _        \n"
+            + "|  _ \\ _   _| | _____ \n"
+            + "| | | | | | | |/ / _ \\\n"
+            + "| |_| | |_| |   <  __/\n"
+            + "|____/ \\__,_|_|\\_\\___|\n";
 
     public void showWelcomeMessage() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println(logo + "\nHello im Eu Zin's Duke, he spent thursday afternoon creating me cuz he forgot abt the iP");
+        System.out.println(LOGO + "\nHello im Eu Zin's Duke, he spent thursday afternoon creating me cuz he forgot abt the iP");
     }
 
     public String showAddTaskMessage(Task thisTask, TaskList taskList) {
-        return thisTask.toString() + "\n" + "Now got " + (taskList.getSize()) + " task in the list\n";
+        return "I've added\n" + thisTask.toString() + " | to your list. \nNow got " + (taskList.getSize()) + " task in the list\n";
     }
 
     public String showOtherActionMessage(String userInput, TaskList taskList) throws DukeException {
@@ -48,10 +48,8 @@ public class Ui {
         return "Bye. Hope to see you again soon!";
     }
 
-    public String showList(String returnList) {
-        String returnString = "faster do don't netflix already";
-        returnString += returnList;
-        return returnString + "\n";
+    public String showList(TaskList taskList) {
+        return taskList.printTaskList();
     }
 
 }
