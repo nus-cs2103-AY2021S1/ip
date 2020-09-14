@@ -13,6 +13,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 
 public class DialogBox extends HBox {
     @FXML
@@ -33,9 +34,9 @@ public class DialogBox extends HBox {
         dialog.setText(text);
         dialog.setStyle("-fx-border-radius: 10 10 0 10;"
                 + "-fx-background-radius: 10 10 0 10;"
-                + "-fx-background-color: lightblue;"
+                + "-fx-background-color: tomato;"
                 + "-fx-padding:  5");
-        dialog.setFont(Font.font("Courier New"));
+        dialog.setFont(Font.font("Courier New", FontWeight.BOLD, 12));
         displayPicture.setFill(new ImagePattern(img));
     }
 
@@ -48,7 +49,7 @@ public class DialogBox extends HBox {
         getChildren().setAll(tmp);
         getChildren().get(1).setStyle("-fx-border-radius: 10 10 10 0;"
                 + "-fx-background-radius: 10 10 10 0;"
-                + "-fx-background-color: lightblue;"
+                + "-fx-background-color: tomato;"
                 + "-fx-padding:  5");
         setAlignment(Pos.TOP_LEFT);
     }
