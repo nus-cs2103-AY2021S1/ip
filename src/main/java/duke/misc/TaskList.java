@@ -87,6 +87,9 @@ public class TaskList {
         for (int i = 0; i < this.items.size(); i++) {
             res += String.format("    %d.%s\n", i + 1, this.items.get(i));
         }
+        if (items.size() == 0) {
+            res += "    None";
+        }
         return res;
     }
 
@@ -100,6 +103,9 @@ public class TaskList {
         String res = "Here are your tasks:\n";
         for (int i = 0; i < arrayList.size(); i++) {
             res += String.format("    %d.%s\n", i + 1, arrayList.get(i));
+        }
+        if (arrayList.size() == 0) {
+            res += "    None";
         }
         return res;
     }
