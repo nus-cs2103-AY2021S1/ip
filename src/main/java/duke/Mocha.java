@@ -160,6 +160,7 @@ public class Mocha extends Application {
         
         try {
             int commandNumber = parser.parseCommand(input);
+            assert commandNumber == -1 || commandNumber > 1 && commandNumber <= 8;
 
             if (commandNumber >= 1 && commandNumber <= 3) {
                 Task newTask = parser.createTask(commandNumber);
