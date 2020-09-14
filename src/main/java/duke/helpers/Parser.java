@@ -1,6 +1,17 @@
 package duke.helpers;
 
-import duke.commands.*;
+
+import duke.commands.Command;
+import duke.commands.DeadlineCommand;
+import duke.commands.DeleteCommand;
+import duke.commands.DoneCommand;
+import duke.commands.EventCommand;
+import duke.commands.ExitCommand;
+import duke.commands.FindCommand;
+import duke.commands.ListCommand;
+import duke.commands.RandomCommand;
+import duke.commands.ShortCutCommand;
+import duke.commands.TodoCommand;
 
 /**
  * This is a Parser class that determines which command operation to choose, which in turn determines

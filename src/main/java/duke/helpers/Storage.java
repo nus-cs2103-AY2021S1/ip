@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-
 /**
  * Deals with loading tasks from the file and saving tasks in the file and stores shortcuts
  */

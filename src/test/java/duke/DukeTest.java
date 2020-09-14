@@ -10,6 +10,7 @@ import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+
 public class DukeTest {
     /**
      * Tests whether the 2 files at the filePaths given contain same content
