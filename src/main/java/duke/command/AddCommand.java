@@ -22,7 +22,7 @@ public abstract class AddCommand extends Command {
      */
     protected String addTask(Task newTask, TaskList tasks, Ui ui, Storage storage) throws FileUpdateFailException {
         tasks.add(newTask);
-        storage.update(tasks);
+        storage.updateFile(tasks);
         return ui.addTask(newTask, tasks.size());
     }
 }

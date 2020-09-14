@@ -3,6 +3,7 @@ package duke.ui;
 import static duke.util.Keyword.DISPLAY_TASKS_MESSAGE;
 import static duke.util.Keyword.EMPTY_STRING_ERROR;
 import static duke.util.Keyword.EMPTY_TASK_LIST_MESSAGE;
+import static duke.util.Keyword.FILE_CREATION_ERR;
 import static duke.util.Keyword.FOUR_SPACES;
 import static duke.util.Keyword.GOODBYE_MESSAGE;
 import static duke.util.Keyword.LINE_SEPARATOR;
@@ -14,6 +15,8 @@ import static duke.util.Keyword.TASK_DELETED_MESSAGE;
 import static duke.util.Keyword.TASK_MARKED_MESSAGE;
 import static duke.util.Keyword.WELCOME_MESSAGE_ONE;
 import static duke.util.Keyword.WELCOME_MESSAGE_TWO;
+
+import java.util.stream.IntStream;
 
 import duke.task.Task;
 import duke.tasklist.TaskList;
@@ -30,13 +33,12 @@ public class Ui {
      * @return Concatenated strings.
      */
     public static String stringFormatter(String... args) {
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < args.length - 1; i++) {
-            sb.append(args[i]).append(LINE_SEPARATOR);
-        }
-        sb.append(args[args.length - 1]);
-        assert (sb.length() > 0) : EMPTY_STRING_ERROR;
-        return sb.toString();
+        StringBuilder stringBuilder = new StringBuilder();
+        int numOfStrings = args.length;
+        IntStream.range(0, numOfStrings)
+            .forEach(i -> appendWithNewLine(stringBuilder, args[i]));
+        assert (stringBuilder.length() > 0) : EMPTY_STRING_ERROR;
+        return stringBuilder.toString();
     }
 
     /**
@@ -44,18 +46,37 @@ public class Ui {
      *
      * @param array Input array.
      * @param header Header title.
-     * @return Numbered list of commands.
+     * @return Numbered list of objects.
      */
     public String printNumberedArray(Object[] array, String header) {
         int numOfCommands = array.length;
-        StringBuilder str1 = new StringBuilder();
-        str1.append(header).append(LINE_SEPARATOR);
-        for (int i = 1; i < numOfCommands; i++) {
-            String s = String.format(NUM_FORMATTER, i, array[i - 1]);
-            str1.append(s).append(LINE_SEPARATOR);
-        }
-        str1.append(String.format(NUM_FORMATTER, numOfCommands, array[numOfCommands - 1]));
-        return str1.toString();
+        assert numOfCommands > 0;
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(header).append(LINE_SEPARATOR);
+        IntStream.range(0, numOfCommands)
+            .forEach(i -> appendWithNewLine(stringBuilder, labelString(array[i], i)));
+        return stringBuilder.toString();
+    }
+
+    /**
+     * Labels the string with the corresponding index.
+     *
+     * @param string Input string.
+     * @param i Index of item.
+     * @return Labelled string.
+     */
+    private String labelString(Object string, int i) {
+        return String.format(NUM_FORMATTER, i + 1, string);
+    }
+
+    /**
+     * Appends the string to the {@code StringBuilder} along with a line separator.
+     *
+     * @param stringBuilder StringBuilder to store strings.
+     * @param string Input string.
+     */
+    private static void appendWithNewLine(StringBuilder stringBuilder, String string) {
+        stringBuilder.append(string).append(LINE_SEPARATOR);
     }
 
     /**
@@ -73,7 +94,7 @@ public class Ui {
      * @return Goodbye message to the user.
      */
     public String goodbye() {
-        return GOODBYE_MESSAGE;
+        return stringFormatter(GOODBYE_MESSAGE);
     }
 
     /**
@@ -112,7 +133,7 @@ public class Ui {
      * Retrieves the empty task list message.
      */
     public String emptyTaskList() {
-        return EMPTY_TASK_LIST_MESSAGE;
+        return stringFormatter(EMPTY_TASK_LIST_MESSAGE);
     }
 
     /**
@@ -134,6 +155,11 @@ public class Ui {
      * @return No matching tasks found message.
      */
     public String emptyFind(String queryWord) {
-        return String.format(NO_MATCHING_TASKS_MESSAGE, queryWord);
+        String message = String.format(NO_MATCHING_TASKS_MESSAGE, queryWord);
+        return stringFormatter(message);
+    }
+
+    public void fileCreationError() {
+        System.out.println(FILE_CREATION_ERR);
     }
 }

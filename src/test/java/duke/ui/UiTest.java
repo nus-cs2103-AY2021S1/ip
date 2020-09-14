@@ -23,7 +23,7 @@ public class UiTest {
      */
     @Test
     public void testGreeting() {
-        assertEquals("Welcome to TheDuke!\nWhat can I do for you?", Ui.greetings());
+        assertEquals("Welcome to TheDuke!\nWhat can I do for you?\n", Ui.greetings());
     }
 
     /**
@@ -31,7 +31,7 @@ public class UiTest {
      */
     @Test
     public void testGoodbye() {
-        assertEquals("Bye! Hope to see you again soon!", ui.goodbye());
+        assertEquals("Bye! Hope to see you again soon!\n", ui.goodbye());
     }
 
     /**
@@ -40,7 +40,7 @@ public class UiTest {
     @Test
     public void testMarkTaskAsDone() {
         toDo.markAsDone();
-        assertEquals("Nice! I've marked this task as done:\n    [T][\u2713] test", ui.markTaskAsDone(toDo));
+        assertEquals("Nice! I've marked this task as done:\n    [T][\u2713] test\n", ui.markTaskAsDone(toDo));
     }
 
     /**
@@ -49,7 +49,7 @@ public class UiTest {
     @Test
     public void testDeleteTask() {
         assertEquals("Noted. I've removed this task:\n    [T][\u2718] test\n"
-            + "Now you have 5 tasks in the list.", ui.deleteTask(toDo, 5));
+            + "Now you have 5 tasks in the list.\n", ui.deleteTask(toDo, 5));
     }
 
     /**
@@ -58,7 +58,7 @@ public class UiTest {
     @Test
     public void testAddTask() {
         assertEquals("Got it. I've added this task:\n    [T][\u2718] test\n"
-            + "Now you have 4 tasks in the list.", ui.addTask(toDo, 4));
+            + "Now you have 4 tasks in the list.\n", ui.addTask(toDo, 4));
     }
 
     /**
@@ -66,7 +66,7 @@ public class UiTest {
      */
     @Test
     public void testEmptyTaskList() {
-        assertEquals("You currently have no tasks in the list.", ui.emptyTaskList());
+        assertEquals("You currently have no tasks in the list.\n", ui.emptyTaskList());
     }
 
     /**
@@ -86,13 +86,13 @@ public class UiTest {
         String expectedString = "Here are the matching tasks in your list:\n"
             + "1. [T][\u2718] todo1\n"
             + "2. [T][\u2718] todo2\n"
-            + "3. [T][\u2718] todo3";
+            + "3. [T][\u2718] todo3\n";
         assertEquals(expectedString, ui.showTaskList(taskList, "matching "));
         // Test 2
         expectedString = "Here are the tasks in your list:\n"
             + "1. [T][\u2718] todo1\n"
             + "2. [T][\u2718] todo2\n"
-            + "3. [T][\u2718] todo3";
+            + "3. [T][\u2718] todo3\n";
         assertEquals(expectedString, ui.showTaskList(taskList, ""));
     }
 
@@ -101,7 +101,7 @@ public class UiTest {
      */
     @Test
     public void testEmptyFind() {
-        assertEquals("There are no matching tasks with the keyword size.", ui.emptyFind("size"));
-        assertEquals("There are no matching tasks with the keyword .", ui.emptyFind(""));
+        assertEquals("There are no matching tasks with the keyword size.\n", ui.emptyFind("size"));
+        assertEquals("There are no matching tasks with the keyword .\n", ui.emptyFind(""));
     }
 }

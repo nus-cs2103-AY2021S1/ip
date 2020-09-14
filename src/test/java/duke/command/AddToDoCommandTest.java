@@ -41,7 +41,7 @@ public class AddToDoCommandTest extends CommandTests {
     @Test
     public void testEmptyTaskDetails() {
         String emptyTaskDetails = "";
-        String expectedMessage = "OOPS!!! The description of a todo cannot be empty.";
+        String expectedMessage = "OOPS!!! The description of a todo cannot be empty.\n";
         AddToDoCommand cmd = new AddToDoCommand(emptyTaskDetails);
         // Tests
         EmptyToDoException e = assertThrows(EmptyToDoException.class, () -> cmd.execute(taskList, ui, storage));

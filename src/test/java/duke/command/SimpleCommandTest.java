@@ -31,7 +31,7 @@ public class SimpleCommandTest extends CommandTests {
     @Test
     public void testInvalidTaskNumber() {
         String expectedMessage = String.format("OOPS!!! Task number does not exist in the list.\n"
-            + "Your current list only has %d tasks!", 0);
+            + "Your current list only has %d tasks!\n", 0);
         SimpleCommand sc1 = new DoneCommand("5");
         SimpleCommand sc2 = new DeleteCommand("-2");
         // Tests

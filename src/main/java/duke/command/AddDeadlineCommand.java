@@ -8,7 +8,7 @@ import duke.exception.InvalidDateException;
 import duke.exception.InvalidDeadlineException;
 import duke.exception.InvalidEventException;
 import duke.parser.DateTimeParser;
-import duke.parser.Parser;
+import duke.parser.TaskParser;
 import duke.storage.Storage;
 import duke.task.Deadline;
 import duke.task.TaskType;
@@ -47,7 +47,7 @@ public class AddDeadlineCommand extends AddCommand {
     public String execute(TaskList tasks, Ui ui, Storage storage) throws EmptyTimeException, InvalidEventException,
         InvalidDeadlineException, InvalidDateException, FileUpdateFailException {
 
-        String[] parsedArr = Parser.parseTaskDescription(description, TaskType.DEADLINE);
+        String[] parsedArr = TaskParser.parseTaskDescription(description, TaskType.DEADLINE);
         String deadline = getDeadline(parsedArr);
         String taskDetails = getTaskDetails(parsedArr);
         LocalDateTime dateTime = DateTimeParser.getDateTime(deadline);

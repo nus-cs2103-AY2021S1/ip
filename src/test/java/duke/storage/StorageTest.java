@@ -16,6 +16,9 @@ import duke.task.Task;
 import duke.task.ToDo;
 import duke.tasklist.TaskList;
 
+/**
+ * Tests interaction with user storage.
+ */
 public class StorageTest {
 
     private final Storage storage = new Storage();
@@ -34,7 +37,7 @@ public class StorageTest {
             taskList.add(task2);
             taskList.add(task3);
             // Update
-            storage.update(taskList);
+            storage.updateFile(taskList);
             // After updating
             ArrayList<Task> tasks = storage.getTasks();
             // Tests
@@ -60,7 +63,7 @@ public class StorageTest {
     public void testEmptyTasks() {
         TaskList emptyTaskList = new TaskList(new ArrayList<>());
         try {
-            storage.update(emptyTaskList);
+            storage.updateFile(emptyTaskList);
             ArrayList<Task> emptyTasks = storage.getTasks();
             assertTrue(emptyTasks.isEmpty());
         } catch (FileUpdateFailException e) {

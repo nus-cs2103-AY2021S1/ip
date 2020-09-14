@@ -34,14 +34,33 @@ public class Duke {
      * @param runnable Method to run.
      */
     private void setTimeout(Runnable runnable) {
-        new Thread(() -> {
-            try {
-                Thread.sleep(TIMEOUT_DURATION);
-                runnable.run();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }).start();
+        Runnable program = () -> runAfterDelay(runnable);
+        new Thread(program).start();
+    }
+
+    /**
+     * Runs the {@code Runnable} object after a delay of 600ms.
+     *
+     * @param runnable Method to run.
+     */
+    private void runAfterDelay(Runnable runnable) {
+        try {
+            Thread.sleep(TIMEOUT_DURATION);
+            runnable.run();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Checks if the command is an {@code ExitCommand}, quitting the program if so.
+     *
+     * @param command Input Command from user.
+     */
+    private void checkForExit(Command command) {
+        if (command.isExit()) {
+            setTimeout(Platform::exit);
+        }
     }
 
     /**
@@ -53,9 +72,7 @@ public class Duke {
     protected String getResponse(String input) {
         try {
             Command command = Parser.parse(input);
-            if (command.isExit()) {
-                setTimeout(() -> Platform.exit());
-            }
+            checkForExit(command);
             return command.execute(tasks, ui, storage);
         } catch (DukeException e) {
             return e.getMessage();

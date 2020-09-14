@@ -11,12 +11,19 @@ public class TaskList {
     private final ArrayList<Task> tasks;
 
     /**
-     * Initializes the task list.
+     * Initializes the task list with an {@code ArrayList} of tasks.
      *
      * @param tasks List of tasks.
      */
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
+    }
+
+    /**
+     * Initializes the task list with an empty {@code ArrayList}.
+     */
+    public TaskList() {
+        tasks = new ArrayList<>();
     }
 
     /**
@@ -91,12 +98,10 @@ public class TaskList {
      * @return New TaskList with tasks matching the input word
      */
     public TaskList matchAll(String input) {
-        ArrayList<Task> newTaskList = new ArrayList<>();
-        for (Task task : tasks) {
-            if (task.match(input)) {
-                newTaskList.add(task);
-            }
-        }
-        return new TaskList(newTaskList);
+        TaskList taskList = new TaskList();
+        tasks.stream()
+            .filter(task -> task.match(input))
+            .forEach(taskList::add);
+        return taskList;
     }
 }

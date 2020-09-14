@@ -41,7 +41,7 @@ public class DeleteCommand extends SimpleCommand {
         int digit = Integer.parseInt(input);
         Task current = tasks.get(digit - 1);
         tasks.delete(digit - 1);
-        storage.update(tasks);
+        storage.updateFile(tasks);
         return ui.deleteTask(current, tasks.size());
     }
 }

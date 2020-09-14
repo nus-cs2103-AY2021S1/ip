@@ -1,5 +1,7 @@
 package duke.exception;
 
+import duke.ui.Ui;
+
 /**
  * Thrown when the task is already done.
  */
@@ -11,6 +13,6 @@ public class TaskAlreadyDoneException extends DukeException {
      * Initializes the TaskAlreadyDoneException object.
      */
     public TaskAlreadyDoneException() {
-        super(TASK_ALREADY_DONE_MESSAGE);
+        super(Ui.stringFormatter(TASK_ALREADY_DONE_MESSAGE));
     }
 }

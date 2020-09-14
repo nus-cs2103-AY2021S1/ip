@@ -1,5 +1,7 @@
 package duke.exception;
 
+import duke.ui.Ui;
+
 /**
  * Thrown when the file format of the CSV is not properly formatted.
  */
@@ -11,6 +13,6 @@ public class InvalidFileFormatException extends DukeException {
      * Initializes the InvalidFileFormatException.
      */
     public InvalidFileFormatException() {
-        super(INVALID_FILE_FORMAT);
+        super(Ui.stringFormatter(INVALID_FILE_FORMAT));
     }
 }

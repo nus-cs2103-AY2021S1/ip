@@ -38,7 +38,7 @@ public class Keyword {
     public static final String SINGLE_SPACE = " ";
     public static final String LINE_SEPARATOR = "\n";
     public static final String EMPTY_STRING = "";
-    public static final int TIMEOUT_DURATION = 1000;
+    public static final int TIMEOUT_DURATION = 600;
 
     // Parser
     public static final String KEYWORD_LIST = "LIST";
@@ -68,6 +68,7 @@ public class Keyword {
     public static final String DISPLAY_TASKS_MESSAGE = "Here are the %stasks in your list:";
     public static final String NO_MATCHING_TASKS_MESSAGE = "There are no matching tasks with the keyword %s.";
     public static final String NUM_FORMATTER = "%d. %s";
+    public static final String FILE_CREATION_ERR = "Error in creating file!";
 
     // DateTimeParser
     public static final String DATE_TIME_FORMAT = "MMM d yyyy / h.mm a";

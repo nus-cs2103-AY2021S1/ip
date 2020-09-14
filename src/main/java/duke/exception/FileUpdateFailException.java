@@ -1,5 +1,7 @@
 package duke.exception;
 
+import duke.ui.Ui;
+
 /**
  * Thrown when the csv file fails to update properly.
  */
@@ -11,6 +13,6 @@ public class FileUpdateFailException extends DukeException {
      * Initializes the FileUpdateFailException.
      */
     public FileUpdateFailException() {
-        super(FILE_UPDATE_FAIL_MESSAGE);
+        super(Ui.stringFormatter(FILE_UPDATE_FAIL_MESSAGE));
     }
 }

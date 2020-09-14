@@ -47,7 +47,7 @@ public class DoneCommand extends SimpleCommand {
             throw new TaskAlreadyDoneException();
         }
         current.markAsDone();
-        storage.update(tasks);
+        storage.updateFile(tasks);
         return ui.markTaskAsDone(current);
     }
 }

@@ -4,7 +4,7 @@ import duke.exception.EmptyTimeException;
 import duke.exception.FileUpdateFailException;
 import duke.exception.InvalidDeadlineException;
 import duke.exception.InvalidEventException;
-import duke.parser.Parser;
+import duke.parser.TaskParser;
 import duke.storage.Storage;
 import duke.task.Event;
 import duke.task.TaskType;
@@ -41,7 +41,7 @@ public class AddEventCommand extends AddCommand {
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws EmptyTimeException, InvalidEventException,
         InvalidDeadlineException, FileUpdateFailException {
-        String[] resultArr = Parser.parseTaskDescription(description, TaskType.EVENT);
+        String[] resultArr = TaskParser.parseTaskDescription(description, TaskType.EVENT);
         String taskDetails = resultArr[0];
         String timeFrame = resultArr[1];
         return addTask(new Event(taskDetails, timeFrame), tasks, ui, storage);

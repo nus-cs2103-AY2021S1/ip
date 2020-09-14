@@ -85,7 +85,7 @@ public class AddDeadlineCommandTest extends CommandTests {
     @Test
     public void testEmptyTimeFrame() {
         AddDeadlineCommand cmd1 = new AddDeadlineCommand("meeting /by");
-        String deadlineMessage = "OOPS!!! Time of deadline task is not specified";
+        String deadlineMessage = "OOPS!!! Time of deadline task is not specified!\n";
         // Tests
         EmptyTimeException e = assertThrows(EmptyTimeException.class, () -> cmd1.execute(taskList, ui, storage));
         assertEquals(deadlineMessage, e.getMessage());
