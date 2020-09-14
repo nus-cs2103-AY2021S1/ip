@@ -12,6 +12,8 @@ public class ChatBot {
     private final Ui ui;
     private final Parser parser;
     private TaskList tasks;
+    private String welcomeMsg;
+    private boolean isExit;
 
     /**
      * Constructor of the chat bot.
@@ -23,15 +25,23 @@ public class ChatBot {
     public ChatBot() {
         ui = new Ui();
         ui.showLoading();
+        isExit = false;
+        welcomeMsg = "Data loading...\n";
         parser = new Parser();
         try {
             tasks = new TaskList(Storage.readList());
             ui.showLoaded(tasks.size());
+            welcomeMsg += "Previous data found!\nNow you have "
+                    + tasks.size() + " task in the list!";
         } catch (NoDataFileException e) {
             tasks = new TaskList();
             ui.showLoadedNew();
+            welcomeMsg += "Did not find any previous stored data and "
+                    + "new data file created!\nWelcome!";
         } catch (IOException e) {
             ui.showLoadingError();
+            welcomeMsg += "Oops! Cannot access your data file and no" +
+                    "\nnew data file has been created!";
         }
     }
 
@@ -56,14 +66,23 @@ public class ChatBot {
         }
     }
 
+    public String getWelcomeMsg() {
+        return welcomeMsg + "\nHello there! What can I do for you?";
+    }
+
     public String getResponse(String input) {
         try {
             Command cmd = parser.parse(input);
+            if (cmd.isExit()) isExit = true;
             cmd.execute(tasks, ui);
             Storage.save(tasks.getList());
             return cmd.getMessage();
         } catch (Exception e) {
             return e.getMessage();
         }
+    }
+
+    public boolean isExit() {
+        return isExit;
     }
 }

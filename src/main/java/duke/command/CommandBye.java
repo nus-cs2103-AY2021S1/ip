@@ -25,6 +25,6 @@ public class CommandBye implements Command {
     }
 
     public String getMessage() {
-        return "Bye. Hope to see you again soon!";
+        return "Bye. Hope to see you again soon!\nExiting in 2 seconds...";
     }
 }
