@@ -11,6 +11,9 @@ import javafx.stage.Stage;
 
 /**
  * A GUI for Botbot using FXML.
+ *
+ * @author wakululuu-reused.
+ * Reused from https://se-education.org/guides/tutorials/javaFxPart4.html with minor modifications.
  */
 public class Main extends Application {
     private final Botbot botbot = new Botbot("data/botbot.txt");
