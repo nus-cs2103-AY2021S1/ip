@@ -47,6 +47,8 @@ public class Mario {
             return Ui.MESSAGE_WRONG_FORMAT;
         } catch (IndexOutOfBoundsException e) {
             return Ui.MESSAGE_TASK_ID_MISSING;
+        } catch (NumberFormatException e){
+            return Ui.MESSAGE_NOT_A_NUMBER;
         }
 
         String response;

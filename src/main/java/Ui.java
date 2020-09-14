@@ -3,6 +3,7 @@ import java.util.ArrayList;
 public class Ui {
 
     // Messages used in the package classes
+    static final String MESSAGE_NOT_A_NUMBER = "The index has to be a number of course!";
     static final String MESSAGE_INVALID_ID =
             "That task wasn't even on the list! You can save the princess if you're that free...";
     static final String MESSAGE_TASK_ID_MISSING = "You didn't give me the task number to work with...";

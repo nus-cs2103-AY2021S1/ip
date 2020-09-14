@@ -43,7 +43,7 @@ public class Parser {
      */
     public Command parse(String input)
             throws MissingDelimiterException, MissingDateTimeException, InvalidCommandException,
-            DateTimeParseException, IndexOutOfBoundsException, AliasNotAllowedException {
+            DateTimeParseException, IndexOutOfBoundsException, AliasNotAllowedException,NumberFormatException {
         String[] commandElements = input.trim().split(" ");
 
         // replaces custom mapping with default commands
