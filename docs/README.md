@@ -109,16 +109,17 @@ Format: `no`
 ![Image of no](images/no.png)
 
 ### Command summary
-| Action | Format, Examples |
-| ------------ | ------------- |
-| Help | `help` |
-| List | `list` |
-| Todo | `todo TASK` <br> e.g., `todo play piano` |
-| Deadline | `deadline TASK /by YYYY-MM-DD` <br> e.g., `deadline homework /by 2020-10-12` |
-| Event | `event TASK /at YYYY-MM-DD` <br> e.g., `event birthday party /at 2020-12-20` |
-| Delete | `delete LIST_INDEX` <br> e.g., `delete 2` |
-| Done | `done LIST_INDEX` <br> e.g., `done 5` |
-| Find | `find KEYWORD` <br> eg, `find book` |
-| Bye | `bye` |
-| Yes | `yes` |
-| No | `no` |
+
+Action | Format, Examples
+------------ | ------------
+Help | `help`
+List | `list`
+Todo | `todo TASK` <br> e.g., `todo play piano`
+Deadline | `deadline TASK /by YYYY-MM-DD` <br> e.g., `deadline homework /by 2020-10-12`
+Event | `event TASK /at YYYY-MM-DD` <br> e.g., `event birthday party /at 2020-12-20`
+Delete | `delete LIST_INDEX` <br> e.g., `delete 2`
+Done | `done LISt_INDEX` <br> e.g., `done 5`
+Find | `find KEYWORD` <br> e.g., `find book`
+Bye | `bye`
+Yes | `yes`
+No | `no`
