@@ -99,12 +99,15 @@ E.g.
 ####Archiving data : `load`
 Load the archived file at the DESTINATION.
 DESTINATION should point to a `.txt` file and takes relative position from the folder that contains the application .jar.
-It will not override the current data until `save` or `bye` command is keyed in.
+It will not override the current data until `save` or `bye` command is entered.  
 Format: `archive DESTINATION`
 E.g.
 * `archive data\dukeII.txt`
 
 ####Ending a session : `bye`
+Close the application window after 2 seconds.  
+The application will automatically save the file to the default file path.  
+Format: `bye`
 
 ##Credit
 Credit goes to
