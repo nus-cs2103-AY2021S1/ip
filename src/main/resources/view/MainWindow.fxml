@@ -29,7 +29,7 @@
                         <Blend mode="RED" />
                     </effect>
                 </TextField>
-                <Button fx:id="sendButton" alignment="CENTER" layoutX="548.0" layoutY="750.0" minWidth="50.0" mnemonicParsing="false" onAction="#handleUserInput" opacity="0.82" prefHeight="50.0" prefWidth="50.0" styleClass="sendButton" text="&#11166;" textAlignment="CENTER">
+                <Button fx:id="sendButton" alignment="CENTER" layoutX="548.0" layoutY="750.0" minWidth="50.0" mnemonicParsing="false" onAction="#handleUserInput" opacity="0.82" prefHeight="50.0" prefWidth="50.0" styleClass="sendButton" text="⮞" textAlignment="CENTER">
                     <opaqueInsets>
                         <Insets />
                     </opaqueInsets>

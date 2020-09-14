@@ -22,7 +22,7 @@ public class ParserTest {
     @Test
     public void exceptionHandling_insufficientTodoDescription_dukeExceptionReturned() {
         String input = "todo";
-        String expectedMsg = "invalid todo command: do what?";
+        String expectedMsg = Message.ERROR_TODO_DESC.getMsg();
         Parser p = new Parser();
         DukeException de = assertThrows(DukeException.class, () -> {
             p.parseCommand(input);
