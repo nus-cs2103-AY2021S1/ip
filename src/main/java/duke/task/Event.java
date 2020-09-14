@@ -4,8 +4,8 @@ package duke.task;
  * Event class for tasks that have a set timing.
  */
 public class Event extends Task {
-    public static final String FORMAT = "event [^ ]+.+[^ ]+ /at [^ ]+.+";
-    static final String SYMBOL = "E";
+    public static final String FORMAT = "event [^ ]+.* /at [^ ]+.*";
+    public static final String SYMBOL = "E";
     private DateTime time;
 
     /**

@@ -4,7 +4,7 @@ package duke.task;
  * Task class to represent a task to be manipulated by Duke.
  */
 public class Task {
-    static final String SYMBOL = "T";
+    public static final String SYMBOL = "T";
     protected String title;
     protected boolean isComplete;
     protected String[] tags;

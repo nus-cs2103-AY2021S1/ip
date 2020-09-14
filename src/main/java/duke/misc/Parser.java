@@ -1,5 +1,15 @@
 package duke.misc;
 
+import static duke.misc.Constants.BYE;
+import static duke.misc.Constants.LIST;
+import static duke.misc.Constants.FIND;
+import static duke.misc.Constants.DONE;
+import static duke.misc.Constants.DELETE;
+import static duke.misc.Constants.TODO;
+import static duke.misc.Constants.DEADLINE;
+import static duke.misc.Constants.EVENT;
+import static duke.misc.Constants.HELP;
+
 import java.io.IOException;
 import java.util.Arrays;
 
@@ -29,18 +39,18 @@ public class Parser {
         String cleanInput = removeHashTags(input);
         String type = cleanInput.split("\\s+")[0];
         switch (type) {
-        case "todo":
+        case TODO:
             if (!cleanInput.matches(Todo.FORMAT)) {
                 throw new InvalidDescriptionException();
             }
             return new Todo(cleanInput.substring(5), tags);
-        case "deadline":
+        case DEADLINE:
             if (!cleanInput.matches(Deadline.FORMAT)) {
                 throw new InvalidDescriptionException();
             }
             String[] dl = cleanInput.split(" /by ");
             return new Deadline(dl[0].substring(9), dl[1], tags);
-        case "event":
+        case EVENT:
             if (!cleanInput.matches(Event.FORMAT)) {
                 throw new InvalidDescriptionException();
             }
@@ -71,29 +81,31 @@ public class Parser {
         int idx;
 
         switch (arr[0]) {
-        case "bye":
+        case BYE:
             try {
                 tl.saveData();
                 return Ui.GOODBYE;
             } catch (IOException e) {
                 return e.toString();
             }
-        case "list":
+        case LIST:
             return tl.display();
-        case "find":
+        case HELP:
+            return Ui.HELP_MESSAGE;
+        case FIND:
             try {
                 return tl.find(input);
             } catch (InvalidDescriptionException e) {
                 return e.toString();
             }
-        case "done":
+        case DONE:
             idx = Integer.parseInt(arr[1]) - 1;
             try {
                 return tl.completeTask(idx);
             } catch (InvalidIndexException e) {
                 return e.toString();
             }
-        case "delete":
+        case DELETE:
             idx = Integer.parseInt(arr[1]) - 1;
             try {
                 return tl.deleteTask(idx);
