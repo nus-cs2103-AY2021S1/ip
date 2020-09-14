@@ -1,4 +1,4 @@
-package duke;
+package duke.task;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -9,18 +9,18 @@ import java.util.Optional;
  */
 
 public class Task {
-	duke.TaskType taskType;
+	TaskType taskType;
 	boolean isDone;
 	String string;
 	Optional<LocalDateTime> dateTime;
 
-	public Task(duke.TaskType taskType, boolean isDone, String string) {
+	public Task(TaskType taskType, boolean isDone, String string) {
 		this.taskType = taskType;
 		this.isDone = isDone;
 		this.string = string;
 		this.dateTime = Optional.empty();
 	}
-	public Task(duke.TaskType taskType, boolean isDone, String string, Optional<LocalDateTime> dateTime) {
+	public Task(TaskType taskType, boolean isDone, String string, Optional<LocalDateTime> dateTime) {
 		this.taskType = taskType;
 		this.isDone = isDone;
 		this.string = string;
@@ -30,22 +30,24 @@ public class Task {
 	public String getString() {
 		return string;
 	}
+
 	public String getDoneString() {
 		String string;
-		return (isDone ?"[\u2713]" : "[\u2718]" ); //tick and cross
+		return (isDone) ? "[\u2713]" : "[\u2717]"; // ✓ or ✗
 	}
 
-	public duke.Task done() {
-		return new duke.Task(taskType, true, string);
+	public Task done() {
+		return new Task(taskType, true, string);
 	}
 
 	public String getTypeString() {
 		String string;
 		assert taskType != null : "taskType has not been instantiated.";
-		if(taskType.equals(duke.TaskType.TODO)){
+
+		if(taskType.equals(TaskType.TODO)) {
 			string = "[T]";
 		}
-		else if(taskType.equals(duke.TaskType.DEADLINE)){
+		else if(taskType.equals(TaskType.DEADLINE)) {
 			string = "[D]";
 		}
 		else{

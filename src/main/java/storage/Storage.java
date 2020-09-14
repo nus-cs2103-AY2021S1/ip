@@ -1,4 +1,9 @@
-package duke;
+package duke.storage;
+
+import duke.task.Task;
+import duke.exception.DukeException;
+import duke.task.TaskList;
+import duke.task.TaskType;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -29,26 +34,37 @@ public class Storage {
 		try {
 			Scanner sc = new Scanner(file);
 			String task, taskString;
-			duke.TaskType taskType;
+			TaskType taskType;
 			boolean isDone;
 			LocalDateTime dateTime;
 			while (sc.hasNext()) {
 				task = sc.nextLine();
-				if(task.charAt(1) == 'T') {
-					taskType = duke.TaskType.TODO;
-				} else if(task.charAt(1) == 'D') {
-					taskType = duke.TaskType.DEADLINE;
-				} else {
-					taskType = duke.TaskType.EVENT;
+				switch (task.charAt((1))) {
+					case 'T' :
+						taskType = TaskType.TODO;
+						break;
+					case 'D' :
+						taskType = TaskType.DEADLINE;
+						break;
+					case 'E' :
+						taskType = TaskType.EVENT;
+						break;
+					default :
+						throw new DukeException("Oh no! TaskType in file is wrong. File is corrupted!");
+				}
+				switch (task.charAt((4))) {
+					case '\u2713' :
+						isDone = true;
+						break;
+					case '\u2718' :
+						isDone = false;
+						break;
+					default :
+						throw new DukeException("Oh no! isDone in file is wrong. File is corrupted!");
 				}
 
-				if (task.charAt(4) == '\u2713') { //✓
-					isDone = true;
-				} else {
-					isDone = false;
-				}
 				taskString = task.substring(6);
-				if (taskType == duke.TaskType.DEADLINE) {
+				if (taskType == TaskType.DEADLINE) {
 					int index = task.indexOf("(by:");
 					dateTime = LocalDateTime.parse(task.substring(index + 4, task.length()-1), DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.SHORT));
 					list.add(new Task(taskType, isDone, taskString, Optional.of(dateTime)));
