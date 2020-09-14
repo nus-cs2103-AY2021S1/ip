@@ -47,7 +47,9 @@ public class DoneCommand implements ReversibleCommand {
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage,
                           LinkedList<ReversibleCommand> reversibleCommands) throws DukeException {
-
+        if (index < 0 || index >= taskList.size()) {
+            throw new DukeException("The task index should be an index on the list!");
+        }
         Task task = taskList.get(index);
         taskList.markAsDone(index);
         storage.saveList(taskList);
