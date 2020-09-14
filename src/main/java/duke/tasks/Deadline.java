@@ -1,10 +1,17 @@
 package duke.tasks;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+
 /**
  * The deadline is a subclass of Task and it is used to describe tasks that has to be completed by a specific day.
  */
 public class Deadline extends Task {
     private String dayAndOrTime; //the day and or time that Task deadline had to be completed by
+    private LocalDate deadlineInDate;
+    private LocalDateTime deadlineInDateAndTime;
+    private LocalTime deadlineInTime;
     /**
      * Assigns the name and day values, initializes Deadline task
      *
@@ -16,18 +23,32 @@ public class Deadline extends Task {
         this.dayAndOrTime = day;
     }
 
-    /**
+    /*
      * Assigns the name, done and day values, initializes Deadline task
      *
      * @param name argument in super class constructor
      * @param done argument in super class constructor
      * @param dayAndOrTime assigns to this.day
-     */
+
     public Deadline(String name, boolean done, String dayAndOrTime) {
         super(name, done);
         this.dayAndOrTime = dayAndOrTime;
+    }*/
+    public Deadline(String name, String dayAndOrTime, LocalDate deadlineInDate) {
+        super(name);
+        this.dayAndOrTime = dayAndOrTime;
+        this.deadlineInDate = deadlineInDate;
     }
-
+    public Deadline(String name, String dayAndOrTime, LocalDateTime deadlineInDateAndTime) {
+        super(name);
+        this.dayAndOrTime = dayAndOrTime;
+        this.deadlineInDateAndTime = deadlineInDateAndTime;
+    }
+    public Deadline(String name, String dayAndOrTime, LocalTime deadlineInTime) {
+        super(name);
+        this.dayAndOrTime = dayAndOrTime;
+        this.deadlineInTime = deadlineInTime;
+    }
     /**
      * Takes no arguments and overrides the toString method
      *
