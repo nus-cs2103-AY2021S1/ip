@@ -47,6 +47,7 @@ public class CommandHandler implements Consumer<String>, Function<String, String
             switch (cmd) {
             case EXIT_CMD:
                 output = "Goodbye!";
+                System.exit(0);
                 break;
             case LIST_CMD:
                 output = listTasks();
