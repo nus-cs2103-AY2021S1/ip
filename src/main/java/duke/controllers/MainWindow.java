@@ -1,5 +1,4 @@
 package duke.controllers;
-import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -83,7 +82,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void goToUserGuide() {
         try {
-            URI uri= new URI(UG_WEBSITE);
+            URI uri = new URI(UG_WEBSITE);
             java.awt.Desktop.getDesktop().browse(uri);
         } catch (IOException | URISyntaxException e) {
             e.printStackTrace();
