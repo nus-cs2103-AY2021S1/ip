@@ -7,13 +7,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.scene.shape.Circle;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 
 /**
  * Controller for the dialog box.
@@ -23,8 +24,6 @@ public class DialogBox extends HBox {
     private Label dialog;
     @FXML
     private ImageView displayPicture;
-
-    private Circle clip = new Circle(40, 40, 40);
 
     private DialogBox(String text, Image img) {
         try {
@@ -38,7 +37,7 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         displayPicture.setImage(img);
-        displayPicture.setClip(clip);
+        dialog.setMinHeight(Region.USE_PREF_SIZE);
     }
 
     /**
@@ -52,12 +51,27 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        var db = new DialogBox(text, img);
+        BackgroundFill backFill = new BackgroundFill(
+                Color.web("#99EDCC"),
+                new CornerRadii(20),
+                new Insets(5, 5, 5, 5)
+        );
+        Background background = new Background(backFill);
+        db.setBackground(background);
+        return db;
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
+        BackgroundFill backFill = new BackgroundFill(
+                Color.web("FFF8F0"),
+                new CornerRadii(20),
+                new Insets(5, 5, 5, 5)
+        );
+        Background background = new Background(backFill);
+        db.setBackground(background);
         return db;
     }
 }
