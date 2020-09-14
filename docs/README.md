@@ -9,7 +9,7 @@ CatBot is a chat bot that can help you to organise your tasks and schedule.
 ## Quick Start
 
 1. Ensure that you have Java `11` or above installed.
-2. Download the latest `catbot.jar` from here.
+2. Download the latest `catbot.jar` from [here](https://github.com/luo-git/ip/releases).
 3. Copy the file to the folder you want to use as the home folder for your AddressBook.
 4. Start the jar file from a terminal using `java -jar catbot.jar`. The GUI should appear in a few seconds.
 5. Type in a command in the command box to execute it. Type `help` to see all the commands available.
@@ -28,9 +28,9 @@ CatBot is a chat bot that can help you to organise your tasks and schedule.
 > Time representation:
 > Format of time can be `DD MM YYYY [HH MM]` or `YYYY MM DD [HH MM]` or a string. 
 > Date segment is `DD MM YY` and time segment is `HH MM`.
-> Delimiter between date can be `.`, ` `, `-` or `/`.
-> Delimiter between time can be `.`, ` ` or `:`.
-> Delimiter between date and time can be ` ` or `T`.
+> Delimiter between date can be `.`, `space`, `-` or `/`.
+> Delimiter between time can be `.`, `space` or `:`.
+> Delimiter between date and time can be `space` or `T`.
 
 ### Add Todo Task: `todo`
 Create a new todo task.
