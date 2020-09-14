@@ -76,8 +76,13 @@ public class Storage {
 
             // Write tasks to new file overwriting the old file
             FileWriter fw = new FileWriter(file);
-            List<Task> tl = taskList.getTaskList();
-            for (Task t : tl) {
+            List<Task> list = taskList.getTaskList();
+            List<Task> archives = taskList.getArchives();
+            for (Task t : list) {
+                fw.write(t.getParsedTask());
+            }
+            fw.write("archives\n");
+            for (Task t : archives) {
                 fw.write(t.getParsedTask());
             }
             fw.close();

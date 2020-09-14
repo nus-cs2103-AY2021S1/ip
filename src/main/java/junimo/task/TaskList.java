@@ -8,12 +8,14 @@ import java.util.List;
  */
 public class TaskList {
     private final List<Task> list;
+    private final List<Task> archives;
 
     /**
      * Constructs an instance of TaskList with an empty task list.
      */
     public TaskList() {
         list = new ArrayList<>();
+        archives = new ArrayList<>();
     }
 
     /**
@@ -22,6 +24,14 @@ public class TaskList {
      */
     public List<Task> getTaskList() {
         return list;
+    }
+
+    /**
+     * Returns the archives list containing the user's archived task.
+     * @return List containing the user's archived Task.
+     */
+    public List<Task> getArchives() {
+        return archives;
     }
 
     /**
@@ -51,6 +61,13 @@ public class TaskList {
     }
 
     /**
+     * Prints a list of the user's archived tasks.
+     */
+    public String showArchives() {
+        return printList(archives, "archived tasks");
+    }
+    
+    /**
      * Prints the task added and number of tasks in the list.
      * @param task The task added.
      */
@@ -66,13 +83,18 @@ public class TaskList {
      * @param task Task to add to task list.
      * @param shouldEcho Whether or not to echo the task added.
      */
-    public String add(Task task, boolean shouldEcho) {
+    public String addTask(Task task, boolean shouldEcho) {
         list.add(task);
         if (shouldEcho) {
             return echo(task.toString());
         } else {
             return null;
         }
+    }
+    
+    public String addArchivedTask(Task task) {
+        archives.add(task);
+        return null;
     }
 
     /**
@@ -99,7 +121,6 @@ public class TaskList {
             System.out.println(response);
             return response;
         }
-        assert false;
     }
 
     /**
@@ -127,7 +148,6 @@ public class TaskList {
             System.out.println(response);
             return response;
         }
-        assert false;
     }
 
     /**
@@ -143,5 +163,48 @@ public class TaskList {
             }
         }
         return printList(matchingTasks, "matching tasks");
+    }
+
+    public String archive(String listIndexString) {
+        try {
+            int listIndexNumber = Integer.parseInt(listIndexString);
+            Task task = list.get(listIndexNumber - 1);
+            list.remove(listIndexNumber - 1);
+            archives.add(task);
+            String response = "The following task has been archived:\n" + task;
+            System.out.println(response);
+            return response;
+        } catch (IndexOutOfBoundsException ex) {
+            String response = "OOPS! This task index does not exist! Type 'list' to check out your tasks.";
+            System.out.println(response);
+            return response;
+        } catch (NumberFormatException ex) { // if list index string is not an integer
+            String response = "OOPS! The keyword 'archive' is used to archive tasks as follows:"
+                    + "   archive <task index>";
+            System.out.println(response);
+            return response;
+        }
+    }
+    
+    public String unarchive(String listIndexString) {
+        try {
+            int listIndexNumber = Integer.parseInt(listIndexString);
+            Task task = archives.get(listIndexNumber - 1);
+            archives.remove(listIndexNumber - 1);
+            list.add(task);
+            String response = "The following task has been unarchived:\n" + task;
+            System.out.println(response);
+            return response;
+        } catch (IndexOutOfBoundsException ex) {
+            String response = "OOPS! This archived task index does not exist! Type 'archives' to check out your "
+                    + "archived tasks.";
+            System.out.println(response);
+            return response;
+        } catch (NumberFormatException ex) { // if list index string is not an integer
+            String response = "OOPS! The keyword 'unarchive' is used to unarchive tasks as follows:"
+                    + "   unarchive <task index>";
+            System.out.println(response);
+            return response;
+        }
     }
 }
