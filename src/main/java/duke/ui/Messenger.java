@@ -7,11 +7,11 @@ public class Messenger {
     /**
      * Project logo.
      */
-    public static final String LOGO = " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
+    public static final String LOGO = " ____   ___      _            __        _\n"
+                                    + "|  _   \\/ _     \\ | |         /    \\     | |____\n"
+                                    + "| | |  | | |  | | |        /   _  \\    |  ___  |\n"
+                                    + "| |_| | |_|  | | |___ /  /__\\ \\   | |   | |\n"
+                                    + "|____/\\____/ |_____|_/    \\__\\ |_|  |_|\n";
 
     /**
      * Messages for loading and saving files.

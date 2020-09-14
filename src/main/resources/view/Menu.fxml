@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="duke.controller.Menu">
-   <VBox fx:id="dukeLogo" layoutX="174.0" layoutY="36.0" prefHeight="200.0" prefWidth="253.0" />
-   <Button fx:id="startButton" layoutX="207.0" layoutY="273.0" mnemonicParsing="false" onAction="#switchToMain" prefHeight="27.0" prefWidth="186.0" text="Start Duke" textFill="#611717" textOverrun="CENTER_ELLIPSIS" />
+   <VBox fx:id="dukeLogo" alignment="CENTER" layoutX="17.0" layoutY="11.0" prefHeight="273.0" prefWidth="569.0">
+      <children>
+         <Label fx:id="logoName" alignment="CENTER" contentDisplay="CENTER" text="Label" textFill="#68656f">
+            <font>
+               <Font name="Trebuchet MS" size="24.0" />
+            </font>
+         </Label>
+      </children></VBox>
+   <Button fx:id="startButton" layoutX="207.0" layoutY="297.0" mnemonicParsing="false" onAction="#switchToMain" prefHeight="27.0" prefWidth="186.0" text="Start Duke" textFill="#611717" textOverrun="CENTER_ELLIPSIS" />
 </AnchorPane>
