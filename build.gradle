@@ -2,7 +2,13 @@ plugins {
     id 'java'
     id 'application'
     id 'checkstyle'
-    id 'com.github.johnrengelman.shadow' version '6.0.0'
+    id 'com.github.johnrengelman.shadow' version '5.1.0'
+}
+
+compileJava.options.encoding = 'UTF-8'
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
 }
 
 repositories {
@@ -10,9 +16,6 @@ repositories {
 }
 
 dependencies {
-    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.5.0'
-    testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.5.0'
-
     String javaFxVersion = '11'
 
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'win'
@@ -27,6 +30,8 @@ dependencies {
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'win'
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'mac'
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'linux'
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.5.0'
+    testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.5.0'
 }
 
 test {
@@ -41,8 +46,6 @@ test {
         showStackTraces true
         showStandardStreams = false
     }
-
-    systemProperty "file.encoding", "utf-8"
 }
 
 application {
@@ -50,20 +53,16 @@ application {
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "elon"
     archiveClassifier = null
-
 }
 
 checkstyle {
-    toolVersion = '8.36'
+    toolVersion = '8.32'
 }
 
-run{
+run {
     standardInput = System.in
-    systemProperty "file.encoding", "UTF-8"
-}
-
-tasks.withType(JavaCompile) {
-    options.encoding = 'UTF-8'
+    enableAssertions = true
+    systemProperty "file.encoding", "utf-8"
 }
