@@ -5,6 +5,7 @@ package ikura.gui.components;
 
 import ikura.gui.GuiFrontend;
 
+import javafx.scene.text.Font;
 import javafx.scene.layout.HBox;
 import javafx.scene.input.KeyCode;
 import javafx.scene.control.Button;
@@ -30,8 +31,10 @@ public class CommandInputView extends HBox {
         this.frontend = frontend;
         this.field = new TextField();
         this.field.setPromptText("enter command here");
+        this.field.setFont(Font.font(14));
 
         var enterButton = new Button("send");
+        enterButton.setFont(Font.font(14));
 
         enterButton.setOnAction(event -> {
             this.runCommand();

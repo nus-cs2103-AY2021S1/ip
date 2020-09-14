@@ -9,7 +9,6 @@ import java.util.Optional;
 import java.util.ArrayList;
 import java.util.stream.Stream;
 import java.util.stream.Collectors;
-import java.util.function.Consumer;
 
 import ikura.task.Task;
 import ikura.util.Pair;
@@ -22,12 +21,11 @@ import ikura.util.InvalidDatabaseException;
 /**
  * A class encapsulating the list of tasks.
  */
-public class TaskList implements Observable<TaskList> /* CRTP KEKW */ {
+public class TaskList extends Observable<TaskList> /* CRTP KEKW */ {
 
     //* this can't be final, because the compiler is dumb
     private List<Task> tasks;
     private final Database db;
-    private final List<Consumer<TaskList>> observers = new ArrayList<>();
 
     /**
      * Constructs a TaskList, loading the tasks from disk from the given Database.
@@ -173,22 +171,5 @@ public class TaskList implements Observable<TaskList> /* CRTP KEKW */ {
                 return words.anyMatch(w -> keywords.contains(w));
             })
             .collect(Collectors.toList());
-    }
-
-    /**
-     * Add an observer that is called whenever the task list, or any of the tasks contained within,
-     * get updated.
-     *
-     * @param observer the observer to register
-     */
-    @Override
-    public void addObserver(Consumer<TaskList> observer) {
-        this.observers.add(observer);
-    }
-
-    private void updateObservers() {
-        for (var observer : this.observers) {
-            observer.accept(this);
-        }
     }
 }

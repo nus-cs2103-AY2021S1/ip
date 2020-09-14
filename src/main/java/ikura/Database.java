@@ -4,6 +4,7 @@
 package ikura;
 
 import java.util.List;
+import java.util.Arrays;
 import java.util.Optional;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -43,6 +44,54 @@ public class Database {
     public Database(String path) {
         this.databasePath = path;
     }
+
+
+    /**
+     * Split the input by the delimiter '|', accounting for
+     * escaped | in the actual input.
+     *
+     * @param input the input line. this should contain at most 2 pipes.
+     * @return the list of components: first one can be discarded, second one is the title, third one
+     *         is the description (if it exists -- empty otherwise);
+     */
+    public static String[] splitTitleAndDescription(String input) {
+
+        // the input is something like this. so we can just make a an array of 3.
+        // <type, doneness and date> | <title> | [description]
+
+        var currentPart = 0;
+        var ret = new StringBuilder[3];
+        for (var i = 0; i < 3; i++) {
+            ret[i] = new StringBuilder();
+        }
+
+        char prev = 0;
+        for (int i = 0; i < input.length(); i++) {
+
+            char ch = input.charAt(i);
+
+            if (ch == '\\') {
+                if (i + 1 < input.length() && input.charAt(i + 1) == '|') {
+                    // append the pipe, then skip the next char (the pipe)
+                    ret[currentPart].append("|");
+                    i += 1;
+                } else {
+                    ret[currentPart].append("\\");
+                }
+            } else if (ch == '|') {
+                currentPart++;
+            } else {
+                ret[currentPart].append(input.charAt(i));
+            }
+        }
+
+        return Arrays.stream(ret)
+            .map(x -> x.toString())
+            .collect(Collectors.toList())
+            .toArray(new String[0]);
+    }
+
+
 
     /**
      * Load the list of tasks from the database.
@@ -140,24 +189,23 @@ public class Database {
                         return Either.left(String.format("invalid doneness '%c' (expected either '0' or '1')", asdf));
                     }
 
+                    var bits = splitTitleAndDescription(line);
+
                     // TODO: clean up this code
                     Task task = null;
                     if (type == 'T') {
 
-                        var bits  = line.split("\\|");
                         var title = bits[1];
-                        var desc  = (bits.length > 2 ? bits[2] : "");
+                        var desc  = bits[2];
 
                         task = new Todo(title, desc);
 
                     } else if (type == 'D' || type == 'E') {
 
                         try {
-                            var date = TaskParser.parseDate(line.substring(2, line.indexOf('|')));
-
-                            var bits  = line.split("\\|");
+                            var date = TaskParser.parseDate(bits[0].substring(2));
                             var title = bits[1];
-                            var desc  = (bits.length > 2 ? bits[2] : "");
+                            var desc  = bits[2];
 
                             if (type == 'D') {
                                 task = new Deadline(title, desc, date);
@@ -219,12 +267,19 @@ public class Database {
                 Stream.of(String.format("%d", DATABASE_VERSION)),
                 list.stream()
                     .map(task -> {
+
+                        var title = task.getTitle();
+                        var desc  = task.getDescription();
+
+                        // escape any pipes in the content
+                        title = title.replace("|", "\\|");
+                        desc  = desc.replace("|", "\\|");
+
                         if (task instanceof Todo) {
 
                             return String.format("%c%c|%s|%s", 'T',
                                 task.isDone() ? '1' : '0',
-                                task.getTitle(),
-                                task.getDescription());
+                                title, desc);
 
                         } else if (task instanceof Event) {
 
@@ -232,8 +287,7 @@ public class Database {
                             return String.format("%c%c%s|%s|%s", 'E',
                                 task.isDone() ? '1' : '0',
                                 event.getDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")),
-                                task.getTitle(),
-                                task.getDescription());
+                                title, desc);
 
                         } else if (task instanceof Deadline) {
 
@@ -241,8 +295,7 @@ public class Database {
                             return String.format("%c%c%s|%s|%s", 'D',
                                 task.isDone() ? '1' : '0',
                                 deadline.getDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")),
-                                task.getTitle(),
-                                task.getDescription());
+                                title, desc);
                         } else {
                             // asdf?!
                             return "";

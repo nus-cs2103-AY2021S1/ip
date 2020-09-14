@@ -60,5 +60,8 @@ public class GuiFrontend extends Frontend {
 
     @Override
     public void endLog() {
+
+        // make some spacing, since the user input is not echoed
+        this.outputLog.add("");
     }
 }

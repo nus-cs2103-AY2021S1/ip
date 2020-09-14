@@ -3,23 +3,18 @@
 
 package ikura.task;
 
-import java.util.List;
-import java.util.ArrayList;
-import java.util.function.Consumer;
-
 import ikura.util.Observable;
 
 /**
  * An abstract class representing a Task. It contains a description (name) and records its current state
  * (done or not done).
  */
-public abstract class Task implements Observable<Task> {
+public abstract class Task extends Observable<Task> {
 
     private String title;
     private String description;
 
     private boolean done;
-    private final List<Consumer<Task>> observers = new ArrayList<>();
 
     /**
      * Constructs a new Task with the given description. It is set to uncompleted by default.
@@ -101,6 +96,17 @@ public abstract class Task implements Observable<Task> {
     }
 
     /**
+     * Mark the task as not completed. This should only be called on tasks that are already
+     * completed.
+     */
+    public void markAsNotDone() {
+        assert this.done;
+        this.done = false;
+
+        this.updateObservers();
+    }
+
+    /**
      * Check if the task has an associated date.
      *
      * @return true if the task has a date, false otherwise.
@@ -110,16 +116,5 @@ public abstract class Task implements Observable<Task> {
     @Override
     public String toString() {
         return String.format("[%s] %s", this.done ? "\u2713" : "\u2718", this.title);
-    }
-
-    @Override
-    public void addObserver(Consumer<Task> observer) {
-        this.observers.add(observer);
-    }
-
-    private void updateObservers() {
-        for (var observer : this.observers) {
-            observer.accept(this);
-        }
     }
 }

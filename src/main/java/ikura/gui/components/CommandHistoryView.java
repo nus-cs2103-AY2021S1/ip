@@ -5,8 +5,10 @@ package ikura.gui.components;
 
 import ikura.gui.GuiFrontend;
 
+import javafx.scene.text.Font;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.Priority;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.collections.ObservableList;
 
@@ -27,6 +29,23 @@ public class CommandHistoryView extends VBox {
 
         var list = new ListView<String>(this.history);
         list.setFocusTraversable(false);
+
+        // imagine needing to write 14 lines of code just so you can change the
+        // font of the things inside the listview.
+        list.setCellFactory(cell -> {
+            return new ListCell<String>() {
+                @Override protected void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+
+                    if (item != null && !empty) {
+                        this.setText(item);
+                        this.setFont(Font.font(14));
+                    } else {
+                        this.setText(null);
+                    }
+                }
+            };
+        });
 
         VBox.setVgrow(list, Priority.ALWAYS);
 
