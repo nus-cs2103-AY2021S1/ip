@@ -33,6 +33,15 @@ public class DukeGuiWindow extends BorderPane {
         this.duke = duke;
         this.stage = stage;
 
+        stage.setOnCloseRequest(event -> {
+            event.consume();
+            try {
+                exit();
+            } catch (IOException exception) {
+                exception.printStackTrace();
+            }
+        });
+
         duke.getGuiResponse().greet();
         dukeMessage.setText(duke.getGuiResponse().getResponse());
     }
@@ -71,14 +80,15 @@ public class DukeGuiWindow extends BorderPane {
      */
     @FXML
     public void exit() throws IOException {
-        ExitWindow exitWindow = new ExitWindow();
-        boolean saveTasks = exitWindow.display();
+        boolean saveTasks = ExitWindow.display();
 
         if (saveTasks) {
             saveTasks();
         }
 
-        stage.close();
+        if (ExitWindow.isStillExit()) {
+            stage.close();
+        }
     }
 
     /**

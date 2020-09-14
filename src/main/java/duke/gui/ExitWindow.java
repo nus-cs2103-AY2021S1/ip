@@ -14,7 +14,9 @@ import javafx.stage.Stage;
 public class ExitWindow {
 
     private static boolean answer;
+    private static boolean stillExit;
     private static Stage stage = new Stage();
+    private static boolean isLoaded = false;
 
     /**
      * Displays an ExitWindow asking if the user want to save current tasks.
@@ -22,6 +24,16 @@ public class ExitWindow {
      * @throws IOException
      */
     public static boolean display() throws IOException {
+        if (!isLoaded) {
+            loadLayout();
+        }
+
+        stage.showAndWait();
+
+        return answer;
+    }
+
+    private static void loadLayout() throws IOException {
         FXMLLoader fxmlLoader =
                 new FXMLLoader(Main.class.getResource("/view/ExitWindow.fxml"));
         Parent root = fxmlLoader.load();
@@ -32,9 +44,19 @@ public class ExitWindow {
         stage.setTitle("Exit");
         stage.setScene(scene);
 
-        stage.showAndWait();
+        stage.setOnCloseRequest(event -> {
+            stillExit = false;
+        });
 
-        return answer;
+        isLoaded = true;
+    }
+
+    /**
+     * Gets if the user still want to exit the program.
+     * @return
+     */
+    public static boolean isStillExit() {
+        return stillExit;
     }
 
     /**
@@ -44,6 +66,7 @@ public class ExitWindow {
     public void yesButtonClicked() {
         stage.close();
         answer = true;
+        stillExit = true;
     }
 
     /**
@@ -53,5 +76,6 @@ public class ExitWindow {
     public void noButtonClicked() {
         stage.close();
         answer = false;
+        stillExit = true;
     }
 }
