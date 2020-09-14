@@ -52,9 +52,12 @@ public class MainWindow extends AnchorPane {
         );
         if (response.equals(ExitCommand.MESSAGE_EXIT)) {
             Stage stage = (Stage) sendButton.getScene().getWindow();
+            //@@author jonfoocy-reused
+            //Reused from https://stackoverflow.com/a/27334614/ with minor modifications
             PauseTransition delay = new PauseTransition(Duration.seconds(1));
             delay.setOnFinished((event) -> stage.close());
             delay.play();
+            //@@author
         }
         userInput.clear();
     }

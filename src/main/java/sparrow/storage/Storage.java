@@ -45,9 +45,12 @@ public class Storage {
         }
     }
 
+    //@@author jonfoocy-reused
+    //Reused from https://github.com/se-edu/addressbook-level2
     private boolean isValidPath(Path filePath) {
         return filePath.toString().endsWith(".txt");
     }
+    //@@author
 
     /**
      * Returns list of tasks loaded from hard disk.

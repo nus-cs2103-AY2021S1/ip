@@ -57,6 +57,9 @@ public class Parser {
      */
     public Command parseCommand(String userInput) {
         assert !userInput.isBlank() : "No input entered"; // do I need this assertion?
+        //@@author jonfoocy-reused
+        //Reused from https://github.com/se-edu/addressbook-level2 with modifications,
+        //including idea of preparing Commands.
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
             // doesn't seem to enter this block
@@ -105,6 +108,7 @@ public class Parser {
             //todo
             return new HelpCommand();
         }
+        //@@author
     }
 
     private Command prepareAddTodo(String args) {
