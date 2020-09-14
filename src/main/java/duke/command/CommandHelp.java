@@ -27,8 +27,8 @@ public enum CommandHelp {
      * @param help Help message to display
      */
     CommandHelp(String code, String help) {
-        this.commandEncoding = code;
-        this.helpMsg = help;
+        commandEncoding = code;
+        helpMsg = help;
     }
     /**
      * Getter for command that is encoded in a Command
@@ -47,6 +47,6 @@ public enum CommandHelp {
      * @return boolean indicating that the command is the same.
      */
     public boolean equals(CommandHelp other) {
-        return other.getCode().equals(this.getCode());
+        return other.getCode().equals(getCode());
     }
 }

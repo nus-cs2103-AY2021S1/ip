@@ -46,8 +46,8 @@ public class CommandLineInterface implements UserInterface {
     @Override
     public void close() {
         assert isChatbotRunning : "CommandLineInterface should only end once";
-        this.scanner.close();
-        this.isChatbotRunning = false;
+        scanner.close();
+        isChatbotRunning = false;
         systemMessage(String.format(goodbye, userName));
     }
 

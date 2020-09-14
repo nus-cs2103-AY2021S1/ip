@@ -22,8 +22,8 @@ public class TaskManager {
      * @throws DukeIoException If no loaded save is read
      */
     public TaskManager(String path) throws DukeIoException {
-        this.ioParser = new TaskIoParser(path);
-        this.taskList = ioParser.loadTaskList();
+        ioParser = new TaskIoParser(path);
+        taskList = ioParser.loadTaskList();
     }
 
     /**
@@ -33,8 +33,8 @@ public class TaskManager {
      */
     public TaskManager(String path, boolean isNew) {
         assert isNew : "isNew is to allow for polymorphism for the case where taskmanager is new";
-        this.ioParser = new TaskIoParser(path);
-        this.taskList = ioParser.loadNewTaskList();
+        ioParser = new TaskIoParser(path);
+        taskList = ioParser.loadNewTaskList();
     }
     /**
      * Indicates that a task is done
@@ -47,8 +47,8 @@ public class TaskManager {
         try {
             int i = Integer.parseInt(index) - 1;
             //0 indexing
-            this.getTask(i).doTask();
-            return "\tNice! I've marked this task as done: \n\t" + this.getTask(i) + "\n";
+            getTask(i).doTask();
+            return "\tNice! I've marked this task as done: \n\t" + getTask(i) + "\n";
         } catch (IllegalArgumentException e) {
             throw new DukeCommandException(index);
         } catch (IndexOutOfBoundsException e) {
@@ -68,12 +68,12 @@ public class TaskManager {
         try {
             int i = Integer.parseInt(index) - 1;
             //0 indexing
-            Task t = this.getTask(i);
-            this.taskList.remove(i);
+            Task t = getTask(i);
+            taskList.remove(i);
             return new StringBuilder().append("\tNoted! I've removed this task from your list: \n\t")
                     .append(t)
                     .append("\n\tNow you have ")
-                    .append(this.taskList.size())
+                    .append(taskList.size())
                     .append("tasks in the list.\n").toString();
         } catch (IllegalArgumentException e) {
             throw new DukeCommandException(index);
@@ -89,7 +89,7 @@ public class TaskManager {
      * @return Task the task at that index
      */
     private Task getTask(int index) {
-        return this.taskList.get(index);
+        return taskList.get(index);
     }
 
     /**
@@ -98,8 +98,8 @@ public class TaskManager {
      * @return String to be wrapped and printed
      */
     public String add(Task t) {
-        this.taskList.add(t);
-        return this.echo(t);
+        taskList.add(t);
+        return echo(t);
     }
 
     /**
@@ -111,7 +111,7 @@ public class TaskManager {
     private String echo(Task task) {
         return new StringBuilder().append("\tGot it. I've added this task:\n\t  ")
                 .append(task).append("\n\tNow you have ")
-                .append(this.taskList.size())
+                .append(taskList.size())
                 .append(" tasks in the list.\n")
                 .toString();
     }
@@ -137,7 +137,7 @@ public class TaskManager {
      */
     public String findTasks(String pattern) {
         StringBuilder sb = new StringBuilder("");
-        if (this.taskList.size() > 0) {
+        if (taskList.size() > 0) {
             Pattern stringPattern = Pattern.compile(pattern);
             AtomicInteger index = new AtomicInteger();
             sb.append(taskList.stream()

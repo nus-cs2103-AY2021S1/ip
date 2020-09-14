@@ -34,9 +34,9 @@ public class Duke {
         } catch (DukeIoException e) {
             list1 = new TaskManager(System.getProperty("user.dir"), true);
         }
-        this.taskManager = list1;
+        taskManager = list1;
         this.ui = ui;
-        ui.start("Friend");
+        this.ui.start("Friend");
     }
     private void parseRun(String input) throws DukeException {
         for (CommandEnums cmd : CommandEnums.values()) {
@@ -53,7 +53,7 @@ public class Duke {
             for (int i = 1; i <= count; i++) {
                 arguments[i - 1] = match.group(i);
             }
-            cmd.execute(this.taskManager, this.ui, arguments);
+            cmd.execute(taskManager, ui, arguments);
             return;
         }
         throw new DukeCommandException(input);
@@ -66,7 +66,7 @@ public class Duke {
     public void nextIteration() {
         String input = textParser.cleanInput(ui.nextLine());
         try {
-            this.parseRun(input);
+            parseRun(input);
         } catch (DukeException e) {
             ui.systemMessage(e.toString());
         }

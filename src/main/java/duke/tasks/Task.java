@@ -17,7 +17,7 @@ abstract class Task {
      */
     protected Task(String description, boolean done) {
         this.description = description;
-        this.isDoneTask = done;
+        isDoneTask = done;
     }
 
     /**
@@ -25,14 +25,14 @@ abstract class Task {
      * @return Boolean representing whether the task is done
      */
     public boolean done() {
-        return this.isDoneTask;
+        return isDoneTask;
     }
 
     /**
      * Mark a generic Task object as done
      */
     public void doTask() {
-        this.isDoneTask = true;
+        isDoneTask = true;
     }
 
     /**
@@ -40,7 +40,7 @@ abstract class Task {
      * @return description of task
      */
     public String getDescription() {
-        return this.description;
+        return description;
     }
 
     /**
@@ -48,12 +48,12 @@ abstract class Task {
       * @return either done or not done
      */
     public String statusIcon() {
-        return this.isDoneTask ? "[\u2713] " : "[\u2718] ";
+        return isDoneTask ? "[\u2713] " : "[\u2718] ";
     }
 
     @Override
     public String toString() {
-        return this.statusIcon() + this.getDescription();
+        return statusIcon() + getDescription();
     }
 
     /**
@@ -61,6 +61,6 @@ abstract class Task {
      * @return a encoded string version of task for writing to text file.
      */
     public String saveTask() {
-        return this.isDoneTask + SEPERATOR + description;
+        return isDoneTask + SEPERATOR + description;
     }
 }

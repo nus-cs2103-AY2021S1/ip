@@ -17,14 +17,14 @@ public class GuiHelper implements UserInterface {
      * Constructs helper class for GUI Interfacing
      */
     public GuiHelper() {
-        this.commandOutput = new ArrayList<>();
+        commandOutput = new ArrayList<>();
     }
 
     @Override
     public void start(String userName) {
-        assert !this.isChatbotRunning : "GuiHelper should start only once";
-        this.isChatbotRunning = true;
-        this.userName = userName;
+        assert !isChatbotRunning : "GuiHelper should start only once";
+        isChatbotRunning = true;
+        userName = userName;
     }
     @Override
     public boolean isRunning() {
@@ -33,20 +33,20 @@ public class GuiHelper implements UserInterface {
 
     @Override
     public void close() {
-        assert this.isChatbotRunning : "GuiHelper should only close once";
-        this.isChatbotRunning = false;
-        this.commandOutput.add("Goodbye " + userName + " my friend!");
+        assert isChatbotRunning : "GuiHelper should only close once";
+        isChatbotRunning = false;
+        commandOutput.add("Goodbye " + userName + " my friend!");
     }
 
     @Override
     public String nextLine() {
-        return this.userInput;
+        return userInput;
     }
 
     @Override
     public void systemMessage(String message) {
-        this.isNotConsumed = true;
-        this.commandOutput.add(message);
+        isNotConsumed = true;
+        commandOutput.add(message);
     }
 
     /**
@@ -58,10 +58,10 @@ public class GuiHelper implements UserInterface {
      * @return Output from Duke Command if it is first invocation, else optional.empty.
      */
     public Optional<List<String >> consumeCommandOutput() {
-        if (this.isNotConsumed) {
-            List<String> result = this.commandOutput;
-            this.isNotConsumed = false;
-            this.commandOutput = new ArrayList<>();
+        if (isNotConsumed) {
+            List<String> result = commandOutput;
+            isNotConsumed = false;
+            commandOutput = new ArrayList<>();
             return Optional.of(result);
         } else {
             return Optional.empty();
@@ -73,7 +73,7 @@ public class GuiHelper implements UserInterface {
      * @param input userInput
      */
     public void setUserInput(String input) {
-        this.userInput = input;
+        userInput = input;
     }
 
     public String toString() {

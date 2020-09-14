@@ -24,16 +24,16 @@ public class MainWindow extends AnchorPane {
     private GuiHelper guiHelper;
     private Duke duke;
 
-    private final Image userImg = new Image(this.getClass().getResourceAsStream("/images/caocao.gif"));
-    private final Image dukeImg = new Image(this.getClass().getResourceAsStream("/images/trump.gif"));
+    private final Image userImg = new Image(getClass().getResourceAsStream("/images/caocao.gif"));
+    private final Image dukeImg = new Image(getClass().getResourceAsStream("/images/trump.gif"));
 
     /**
      * Substitute constructor for GUI
      */
     public void setup() {
-        this.guiHelper = new GuiHelper();
-        this.duke = new Duke(guiHelper);
-        this.greeting();
+        guiHelper = new GuiHelper();
+        duke = new Duke(guiHelper);
+        greeting();
     }
 
     /**
@@ -50,13 +50,13 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        this.guiHelper.setUserInput(input);
-        this.userMessage(input);
-        this.duke.nextIteration();
-        if (!this.guiHelper.isRunning()) {
-            this.closeWindow();
+        guiHelper.setUserInput(input);
+        userMessage(input);
+        duke.nextIteration();
+        if (!guiHelper.isRunning()) {
+            closeWindow();
         }
-        this.guiHelper.consumeCommandOutput().ifPresent((message) -> {
+        guiHelper.consumeCommandOutput().ifPresent((message) -> {
             message.forEach(this::dukeMessage);
         });
         userInput.clear();
@@ -64,7 +64,7 @@ public class MainWindow extends AnchorPane {
 
     private void greeting() {
         final String welcomeMessage = "Hello Friend! I'm Duke, how may I help you!";
-        this.dukeMessage(welcomeMessage);
+        dukeMessage(welcomeMessage);
     }
 
     private void closeWindow() {

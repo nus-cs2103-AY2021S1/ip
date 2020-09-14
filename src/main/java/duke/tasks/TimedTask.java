@@ -43,7 +43,7 @@ abstract class TimedTask extends Task {
             if (NOW.format(FMAT).length() > date.length()) {
                 date = date + NOW.format(FMAT).substring(date.length());
             }
-            this.dateby = LocalDateTime.parse(date, FMAT);
+            dateby = LocalDateTime.parse(date, FMAT);
         } catch (DateTimeParseException e) {
             throw new DukeDateTimeException("The String you entered does not meet the "
                     + "required format of 'yyyy-MM-dd' ");

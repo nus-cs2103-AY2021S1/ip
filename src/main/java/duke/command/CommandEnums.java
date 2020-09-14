@@ -31,7 +31,7 @@ public enum CommandEnums {
      */
     CommandEnums(CommandExecuter executer, String formatString, String name) {
         this.executer = executer;
-        this.format = Pattern.compile(formatString);
+        format = Pattern.compile(formatString);
         this.name = name;
     }
 
@@ -43,10 +43,10 @@ public enum CommandEnums {
      * @return Optional regex Match if exists, else empty
      */
     public Optional<Matcher> matcher(String rawInput) {
-        if (!rawInput.startsWith(this.name)) {
+        if (!rawInput.startsWith(name)) {
             return Optional.empty();
         }
-        Matcher matcher = this.format.matcher(rawInput.substring(this.name.length()).trim());
+        Matcher matcher = format.matcher(rawInput.substring(name.length()).trim());
         return Optional.of(matcher);
     }
 
@@ -58,7 +58,7 @@ public enum CommandEnums {
      * @throws DukeException an Exception in the internal commandlist
      */
     public void execute(TaskManager taskManager, UserInterface ui, String[] args) throws DukeException {
-        this.executer.run(taskManager, ui , args);
+        executer.run(taskManager, ui , args);
     }
 
     /**
