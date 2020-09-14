@@ -37,7 +37,7 @@ public class DeleteCommand extends Command {
             int indexNumber = Integer.parseInt(intSubstring);
             Task deletedTask = this.taskList.delete(indexNumber);
             this.storage.saveTaskList(this.taskList); //Overwrites current data.txt file
-            return this.ui.showDelete(deletedTask) + "\n"
+            return this.ui.showDelete(deletedTask)
                     + this.ui.showTotalTasks(this.taskList.getTotalTask());
         } catch (NumberFormatException ex) {
             throw new DukeInvalidUserInputException("My sincere apologies, but please enter a valid number.");

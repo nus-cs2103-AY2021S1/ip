@@ -2,9 +2,12 @@ package data.task;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+
+import data.exception.DukeInvalidUserInputException;
 
 /**
  * Represents an array list of tasks.
@@ -91,24 +94,29 @@ public class TaskList {
      * @param date to find.
      * @return an array list of tasks that contain the date.
      */
-    public ArrayList<Task> findTasksDate(String date) {
+    public ArrayList<Task> findTasksDate(String date) throws DukeInvalidUserInputException {
         ArrayList<Task> result = new ArrayList<>();
-        LocalDate inputDate = LocalDate.parse(date);
-        assert inputDate != null; //To ensure inputDate has been correctly parsed.
-        for (Task task : this.taskList) {
-            if (task instanceof Deadline) {
-                Deadline deadline = (Deadline) task;
-                if (deadline.getDate().equals(inputDate)) {
-                    result.add(task);
-                }
-            } else if (task instanceof Event) {
-                Event event = (Event) task;
-                if (event.getDate().equals(inputDate)) {
-                    result.add(task);
+        try {
+            LocalDate inputDate = LocalDate.parse(date);
+            assert inputDate != null; //To ensure inputDate has been correctly parsed.
+            for (Task task : this.taskList) {
+                if (task instanceof Deadline) {
+                    Deadline deadline = (Deadline) task;
+                    if (deadline.getDate().equals(inputDate)) {
+                        result.add(task);
+                    }
+                } else if (task instanceof Event) {
+                    Event event = (Event) task;
+                    if (event.getDate().equals(inputDate)) {
+                        result.add(task);
+                    }
                 }
             }
+            return result;
+        } catch (DateTimeParseException e) {
+            throw new DukeInvalidUserInputException("It seems you have entered an invalid date and time. "
+                    + "The format should be as follows YYYY-MM-DD hhmm.");
         }
-        return result;
     }
 
     /**

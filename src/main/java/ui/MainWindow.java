@@ -22,8 +22,6 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    //private Image userImage = null;
-    //private Image dukeImage = null;
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DukeUserPxl.PNG"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DukeBunnyPxl.PNG"));
     private Image dukeImageError = new Image(this.getClass().getResourceAsStream("/images/DukeBunnyErrorPxl.PNG"));
@@ -35,6 +33,8 @@ public class MainWindow extends AnchorPane {
 
     public void setDuke(Duke d) {
         duke = d;
+        userInput.setPromptText("Enter command here");
+        userInput.getParent().requestFocus();
         //Welcome Message
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(duke.initDuke(), dukeImage)

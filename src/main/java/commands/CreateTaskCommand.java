@@ -65,7 +65,7 @@ public abstract class CreateTaskCommand extends Command {
     protected String addTask(Task newTask) {
         this.taskList.add(newTask);
         this.storage.saveTask(newTask);
-        return this.ui.showAddedToList(newTask) + "\n"
+        return this.ui.showAddedToList(newTask) + Ui.showBreakLine()
                 + this.ui.showTotalTasks(this.taskList.getTotalTask());
     }
 }

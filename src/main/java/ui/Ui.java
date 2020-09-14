@@ -76,7 +76,7 @@ public class Ui {
      */
     public String showAddedToList(Task task) {
         String addToListMsg = "No worries, the following task has been added to your list:";
-        return addToListMsg + "\t" + task;
+        return addToListMsg + showBreakLine() + task;
     }
 
     /**
@@ -133,7 +133,7 @@ public class Ui {
     public String showDelete(Task task) {
         String deleteMsg = "No worries, the following task has been deleted from your list:";
         String taskDetails = "  [" + task.getStatusIcon() + "] " + task.getDescription();
-        return deleteMsg + showBreakLine() + taskDetails;
+        return deleteMsg + showBreakLine() + taskDetails + showBreakLine();
     }
 
     public String showSorted() {
