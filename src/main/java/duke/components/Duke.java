@@ -2,6 +2,7 @@ package duke.components;
 
 import duke.GUI.DialogBox;
 import duke.exceptions.DukeException;
+import duke.tasks.Task;
 import javafx.application.Application;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -254,6 +255,10 @@ public class Duke extends Application {
                             parser.getDoneTaskNum()
                     )
             );
+
+            taskStore.overwriteWith(tasks.getMyList(),"duke.txt");
+            reminderStore.overwriteWith(tasks.getReminderList(),"reminders.txt");
+
         } else if (parser.isFind) {
 
             output = ui.returnFindTask(tasks.findTasks(parser.getFindTask()));
@@ -265,9 +270,15 @@ public class Duke extends Application {
                     tasks.getMyList()
             );
 
+            taskStore.overwriteWith(tasks.getMyList(),"duke.txt");
+            reminderStore.overwriteWith(tasks.getReminderList(),"reminders.txt");
+
         } else if (parser.isDelete) {
 
             output = ui.returnDeleteTask(tasks.deleteTask(parser.getDeleteTaskNum()), tasks.getMyList());
+
+            taskStore.overwriteWith(tasks.getMyList(),"duke.txt");
+            reminderStore.overwriteWith(tasks.getReminderList(),"reminders.txt");
 
         } else if (parser.isBye) {
 
@@ -275,7 +286,17 @@ public class Duke extends Application {
 
         } else if (parser.isReminder) {
 
-            output = ui.returnAddReminder(tasks.addReminder(parser.getRemindTaskNum()),tasks.getReminderList());
+            Task task;
+            task = tasks.addReminder(parser.getRemindTaskNum());
+            if(task == null){
+                output = ui.returnDuplicateReminder();
+            }else {
+                output = ui.returnAddReminder(task, tasks.getReminderList());
+
+                taskStore.overwriteWith(tasks.getMyList(),"duke.txt");
+                reminderStore.overwriteWith(tasks.getReminderList(),"reminders.txt");
+
+            }
 
         } else if (parser.isReminderList) {
 
@@ -289,8 +310,6 @@ public class Duke extends Application {
             output = "error";
         }
 
-        taskStore.overwriteWith(tasks.getMyList(),"duke.txt");
-        reminderStore.overwriteWith(tasks.getReminderList(),"reminders.txt");
         return output;
 
     }

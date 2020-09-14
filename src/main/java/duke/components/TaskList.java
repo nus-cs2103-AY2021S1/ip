@@ -47,6 +47,13 @@ public class TaskList {
 
         Task currentTask = myList.get(taskNum);
         currentTask.finishTask();
+        for(int i = 0; i < reminderList.size(); i++){
+            Task checkTask = reminderList.get(i);
+            if(checkTask.getDescription().equals(currentTask.getDescription())){
+                reminderList.remove(checkTask);
+            }
+        }
+
         return currentTask;
 
     }
@@ -106,6 +113,13 @@ public class TaskList {
     public Task deleteTask(int taskNum) {
         Task currentTask = myList.get(taskNum);
         myList.remove(taskNum);
+        for(int i = 0; i < reminderList.size(); i++){
+            Task checkTask = reminderList.get(i);
+            if(checkTask.getDescription().equals(currentTask.getDescription())){
+                reminderList.remove(checkTask);
+            }
+        }
+
         return currentTask;
     }
     public ArrayList<Task> findTasks(String keyword){
@@ -120,6 +134,14 @@ public class TaskList {
     }
     public Task addReminder(int taskNum){
         Task currentTask = myList.get(taskNum);
+
+        for(int i = 0; i < reminderList.size(); i++){
+            Task checkTask = reminderList.get(i);
+            if(checkTask.getDescription().equals(currentTask.getDescription())){
+                reminderList.remove(currentTask);
+                currentTask = null;
+            }
+        }
         reminderList.add(currentTask);
         return currentTask;
     }

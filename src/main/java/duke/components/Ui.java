@@ -197,6 +197,12 @@ public class Ui {
         String REMINDER_TEXT = "Your reminders: \n";
         return REMINDER_TEXT+returnTaskList(reminderList);
     }
+    public String returnDuplicateReminder(){
+
+        return "_______________________________\n" +
+                "This task is already in the reminder list!\n"+
+                "_______________________________";
+    }
 
 
 }
