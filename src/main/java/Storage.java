@@ -1,84 +1,119 @@
-import java.util.Scanner;
-import java.util.ArrayList;
-import java.io.IOException;
-import java.time.LocalDate;
+import java.io.*;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
+/**
+ * A Storage class that handles reading and writing files.
+ */
 public class Storage {
-    String filePath;
-    public Storage(String filePath){
-        this.filePath = filePath;
+
+    /**
+     * Create a directory for file storage.
+     * @param dirName the directory name.
+     * throw exception if directory exists.
+     */
+    public void createDirectory(String dirName) {
+        File file = new File(dirName);
+
+        if (!file.exists()) {
+            try {
+                file.mkdir();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
-     public ArrayList<Task> load() throws DukeException, IOException{
-         Scanner sc = new Scanner(System.in);
-         System.out.println("Hello! I'm Duke\n"+"What can I do for you?");
-         ArrayList<Task> listOfItems = DataManager.loadTaskFromFile();
-         String echo= sc.nextLine();
-         while(!echo.equals("bye")) {
-             try {
-                 String[] tempArray = echo.split(" ");
-                 if (echo.equals("list")) {
-                     int iterator = 1;
-                     System.out.println("Here are the tasks in your list:");
-                     for (Task s : listOfItems) {
-                         System.out.println(iterator + "." + s.toString());
-                         iterator++;
-                     }
-                 }
 
-                 else if (tempArray[0].equals("done")) {
-                     int index = Integer.parseInt(tempArray[1]) - 1;
-                     listOfItems.get(index).markDone();
-                     System.out.println("Nice! I've marked this task as done: \n" + listOfItems.get(index).toString());
-                 } else if(tempArray[0].equals("delete")) {
-                     int index = Integer.parseInt(tempArray[1]) - 1;
-                     Task tobeRemove = listOfItems.get(index);
-                     listOfItems.remove(index);
-                     System.out.println("Noted. I've removed this task: \n" + tobeRemove.toString() + "\nNow you have " + listOfItems.size() + " tasks in the list");
-                 }
-                 else {
-                     if (tempArray[0].equals("todo")) {
-                         if(tempArray.length == 1) {
-                             throw new InvalidTodoException();
-                         }
-                         Todo newTodo = new Todo(echo.substring(5), false);
-                         listOfItems.add(newTodo);
-                         System.out.println("Got it. I've added this task:\n" + newTodo.toString() +
-                                 "\nNow you have " + listOfItems.size() + " tasks in total");
+    /**
+     * Update the directory for file storage.
+     * @param tasks the list of task pending to be updated into directory.
+     * throw IOException if directory has be deleted.
+     */
+    public void updateDirectory(TaskList tasks) {
 
-                     }
-                     else if (tempArray[0].equals("deadline")) {
-                         if(tempArray.length == 1) {
-                             throw new InvalidDeadlineException();
-                         }
-                         String[] tempString = echo.substring(9).split(" /by");
-                         Deadline newDeadline = new Deadline(tempString[0], false, LocalDate.parse(tempString[1]));
-                         listOfItems.add(newDeadline);
-                         System.out.println("Got it. I've added this task:\n" + newDeadline.toString()
-                                 + "\nNow you have " + listOfItems.size() + " tasks in total");
+        File fileDir = new File("TaskList");
+        File[] fileList = fileDir.listFiles();
+        for (File f : fileList) {
+            if (f.toString().startsWith("TaskList/Task")) {
+                Path path = FileSystems.getDefault().getPath(f.toString());
+                try {
+                    Files.delete(path);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
 
-                     }
-                     else if (tempArray[0].equals("event")) {
-                         if(tempArray.length == 1) {
-                             throw new InvalidEventException();
-                         }
-                         String[] tempString = echo.substring(7).split(" /at");
-                         Event newEvent = new Event(tempString[0], false,  LocalDate.parse(tempString[1]));
-                         listOfItems.add(newEvent);
-                         System.out.println("Got it. I've added this task:\n" + newEvent.toString()
-                                 + "\nNow you have " + listOfItems.size() + " tasks in total");
-                     }
-                     else {
-                         throw new InvalidInputException();
-                     }
+        for (int i = 0; i < tasks.getTasks().size(); i++) {
+            writeToFile(tasks.getTasks().get(i), i);
+        }
+    }
 
-                 }
-             } catch (DukeException e) {
-                 System.out.println(e.getMessage());
-             }
-             echo = sc.nextLine();
-         }
-         DataManager.writeToFile(listOfItems);
-         System.out.println("Bye. Hope to see you again soon!");
-         return listOfItems;
-     }
+    /**
+     * Create a new file.
+     * @param fileName the file name.
+     * throw IOException if file name exists.
+     */
+    public void createFile(String fileName) {
+
+        File file = new File(fileName);
+
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * Write to a file.
+     * @param task the task pending to be writen.
+     * @param index the index of the file.
+     */
+    public void writeToFile(Task task, int index) {
+        createFile("TaskList/Task" + index + ".txt");
+        try {
+            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("TaskList/Task" + index + ".txt"));
+            out.writeObject(task);
+        } catch (IOException e) {
+            System.out.println("Writing to File");
+        }
+    }
+
+    /**
+     * Read from a file.
+     * @param fileDir the file directory.
+     * return the task extracted from the file.
+     * throw IOException if no such file exist.
+     */
+    public Task readFromFile(String fileDir) {
+        Task task = null;
+        try {
+            ObjectInputStream in = new ObjectInputStream(new FileInputStream(fileDir));
+            task = (Task) in.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return task;
+
+    }
+
+    /**
+     * Update the task list from files.
+     * @param tasks Task list.
+     */
+    public void updateList(TaskList tasks) {
+        File fileDir = new File("TaskList");
+        File[] fileList = fileDir.listFiles();
+        for (File f : fileList) {
+            if (f.toString().startsWith("TaskList/Task")) {
+                tasks.getTasks().add(readFromFile(f.toString()));
+            }
+        }
+    }
 }
+
+
