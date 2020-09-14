@@ -12,6 +12,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.paint.Color;
 
 /**
  * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
@@ -23,7 +24,7 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
-    private DialogBox(String text, Image img) {
+    private DialogBox(String text, Image img, boolean isErrorMessage) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -36,6 +37,12 @@ public class DialogBox extends HBox {
         dialog.setText(text);
         displayPicture.setImage(img);
         dialog.setMinHeight(Region.USE_PREF_SIZE);
+        if (isErrorMessage) {
+            dialog.setTextFill(Color.web("#ff3333"));
+            dialog.setUnderline(true);
+        } else {
+            dialog.setTextFill(Color.web("#0076a3"));
+        }
     }
 
     /**
@@ -49,11 +56,11 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        return new DialogBox(text, img, false);
     }
 
-    public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+    public static DialogBox getDukeDialog(String text, Image img, boolean isErrorMessage) {
+        var db = new DialogBox(text, img, isErrorMessage);
         db.flip();
         return db;
     }

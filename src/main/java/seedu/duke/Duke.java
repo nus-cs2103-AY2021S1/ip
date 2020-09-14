@@ -9,6 +9,7 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
     private boolean exitProgram;
+    private boolean hasError;
 
     /**
      * Initializes Duke with the file path of the data file to be used for storage
@@ -41,6 +42,7 @@ public class Duke {
     public String getResponse(String input) {
         assert !this.exitProgram;
         ui.clearOutputMessage();
+        this.hasError = false;
         assert ui.getOutputMessage().length() == 0;
         try {
             Command command = Parser.parse(input);
@@ -48,6 +50,7 @@ public class Duke {
             this.exitProgram = command.isExit();
         } catch (DukeException err) {
             ui.showError(err.getMessage());
+            this.hasError = true;
         }
         assert ui.getOutputMessage().length() > 0;
         return ui.getOutputMessage();
@@ -55,5 +58,9 @@ public class Duke {
 
     public boolean getExitProgram() {
         return this.exitProgram;
+    }
+
+    public boolean hasError() {
+        return this.hasError;
     }
 }
