@@ -160,5 +160,5 @@ ___
 The Duke chat bot is capable of retrieving the list of tasks from past sessions. The user is able to make modifications
 to the list in the active session which would be reflected in the storage on the local drive.
 
-##Thank you for reading this user guide!
+## Thank you for reading this user guide!
 If you have any queries, please do not hesitate to contact me via GitHub @ameliatjy!
