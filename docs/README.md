@@ -129,8 +129,8 @@ You can modify `duke.txt` to add, delete or mark `todo` `event` `deadline` tasks
     * D - `deadline`
     * E - `event`
 * Task Status:
-    * 0 - `&#x2718` - Task not done.
-    * 1 - `&#x2713` - Task done.
+    * 0 - Task not done.
+    * 1 - Task done.
 * Date:
     * `dd/MM/yy`
 * Time:
