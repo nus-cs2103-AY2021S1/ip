@@ -35,6 +35,8 @@ public class MainWindow extends AnchorPane {
         mocha = m;
         dialogContainer.getChildren().add(
                 DialogBox.getMochaDialog(ui.sayIntroduction(), mochaImage));
+        dialogContainer.getChildren().add(
+                DialogBox.getMochaDialog(ui.help(), mochaImage));
     }
 
     /**
