@@ -12,6 +12,7 @@ public class AddCommand extends Command {
     protected Task task;
 
     public AddCommand(Task task) {
+        super();
         this.task = task;
     }
 

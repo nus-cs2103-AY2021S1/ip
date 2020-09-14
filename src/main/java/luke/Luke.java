@@ -1,16 +1,7 @@
 package luke;
 
-import java.io.*;
-import java.time.LocalDate;
-import java.util.Scanner;
-import java.util.regex.Pattern;
-
 import luke.commands.Command;
-import luke.exception.*;
-import luke.task.Deadline;
-import luke.task.Event;
-import luke.task.Task;
-import luke.task.Todo;
+import luke.exception.LukeException;
 
 public class Luke {
 
@@ -18,6 +9,9 @@ public class Luke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Creates a Luke object with the given filepath.
+     */
     public Luke(String filePath) {
         this.storage = new Storage(filePath);
         try {

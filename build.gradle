@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'application'
     id 'com.github.johnrengelman.shadow' version '5.1.0'
+    id 'checkstyle'
 }
 
 repositories {
@@ -49,6 +50,10 @@ application {
 shadowJar {
     archiveBaseName = "luke"
     archiveClassifier = null
+}
+
+checkstyle {
+    toolVersion = '8.29'
 }
 
 run{

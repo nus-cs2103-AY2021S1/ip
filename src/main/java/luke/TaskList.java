@@ -1,9 +1,12 @@
 package luke;
 
-import luke.task.Task;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import luke.exception.LukeEmptyCommandException;
+import luke.exception.LukeException;
+import luke.exception.LukeNoResultException;
+import luke.task.Task;
 
 public class TaskList {
     protected List<Task> tasks;
@@ -43,6 +46,12 @@ public class TaskList {
         return this.tasks.size();
     }
 
+    /**
+     * Removes the task with the specified index
+     * within the current list of tasks.
+     *
+     * @param taskNumber the index of the task to be deleted
+     */
     public Task deleteTask(int taskNumber) {
         int idx = taskNumber - 1;
         Task deletedTask = this.tasks.get(idx);
@@ -50,6 +59,12 @@ public class TaskList {
         return deletedTask;
     }
 
+    /**
+     * Marks the task with the specified index as done
+     * within the current list of tasks.
+     *
+     * @param taskNumber the index of the task to be deleted
+     */
     public Task doTask(int taskNumber) {
         int idx = taskNumber - 1;
         Task doneTask = this.tasks.get(idx);
@@ -57,7 +72,13 @@ public class TaskList {
         return doneTask;
     }
 
-    public void findTask(String input) {
+    /**
+     * Finds the task containing the given keyword
+     * within the current list of tasks.
+     *
+     * @param input the given keyword used to find a task
+     */
+    public List<Task> findTask(String input) throws LukeNoResultException {
         ArrayList<Task> result = new ArrayList<>();
         for (int i = 0; i < this.tasks.size(); i++) {
             Task current = this.tasks.get(i);
@@ -65,16 +86,10 @@ public class TaskList {
                 result.add(current);
             }
         }
-        if (result.size() < 1) {
-            //return error message
-        } else {
-            String todoSummary = "Here are the tasks in your list.";
-            for (int i = 0; i < result.size(); i++) {
-                Task current = result.get(i);
-                todoSummary += String.format("%d.%s\n", i + 1, current);
-            }
-            System.out.printf(todoSummary);
+        if (result.size() <= 0) {
+            throw new LukeNoResultException(input);
         }
+        return result;
     }
 
 }

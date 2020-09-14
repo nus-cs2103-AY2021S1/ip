@@ -1,15 +1,15 @@
 package luke;
 
-import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import luke.exception.LukeDataLoadingException;
 import luke.exception.LukeException;
 import luke.task.Task;
 
@@ -18,6 +18,11 @@ public class Storage {
     private final String dataFile;
     private final String dataFileDir;
 
+    /**
+     * Creates a Storage object to manage data file from hard disk.
+     *
+     * @param filePath path of the data file that contains the current list of tasks
+     */
     public Storage (String filePath) {
         this.dataFolderDir = filePath.concat("/data/");
         this.dataFile = "tasks.txt";
@@ -75,14 +80,13 @@ public class Storage {
         List<Task> tasks = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(this.dataFileDir))) {
             String readLine = null;
-            while((readLine = br.readLine()) != null){
+            while ((readLine = br.readLine()) != null) {
                 Task parsedTask = Parser.parseTask(readLine);
                 tasks.add(parsedTask);
             }
         } catch (FileNotFoundException e) {
             throw new LukeException(e.getMessage());
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             throw new LukeException(e.getMessage());
         }
         return tasks;

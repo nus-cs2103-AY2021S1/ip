@@ -12,6 +12,7 @@ public class DoneCommand extends Command {
     protected int taskNumber;
 
     public DoneCommand(int taskNumber) {
+        super();
         this.taskNumber = taskNumber;
     }
 

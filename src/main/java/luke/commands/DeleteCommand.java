@@ -12,6 +12,7 @@ public class DeleteCommand extends Command {
     protected int taskNumber;
 
     public DeleteCommand(int taskNumber) {
+        super();
         this.taskNumber = taskNumber;
     }
 

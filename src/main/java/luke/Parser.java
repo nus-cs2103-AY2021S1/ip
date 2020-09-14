@@ -1,5 +1,8 @@
 package luke;
 
+import java.time.DateTimeException;
+import java.time.LocalDateTime;
+
 import luke.commands.*;
 import luke.exception.*;
 import luke.task.Deadline;
@@ -7,13 +10,17 @@ import luke.task.Event;
 import luke.task.Task;
 import luke.task.Todo;
 
-import java.time.DateTimeException;
-import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.List;
 
 public class Parser {
 
+    /**
+     * Parses a line that contains information about a task
+     * to generate the corresponding task.
+     *
+     * @param taskStr the line that contains information about a task
+     * @return the corresponding task
+     * @throws LukeException if insufficient details are given for a task
+     */
     public static Task parseTask(String taskStr) throws LukeException {
         assert taskStr != "" : "Task should not be empty.";
         String[] taskDetails = taskStr.split("\\|");
@@ -31,6 +38,14 @@ public class Parser {
         return parsedTask;
     }
 
+    /**
+     * Parses user input that contains information about a command
+     * to generate the corresponding command.
+     *
+     * @param input the input from the user
+     * @return the corresponding command
+     * @throws LukeException if command is given in incorrect format
+     */
     public static Command parseCommand(String input) throws LukeException {
         assert input != "" : "User input should not be empty.";
         String[] commandSplit = input.trim().split(" ", 2);
@@ -49,6 +64,8 @@ public class Parser {
                 return parseDeleteCommand(commandSplit);
             case "done":
                 return parseDoneCommand(commandSplit);
+            case "find":
+                return parseFindCommand(commandSplit);
             case "bye":
                 return new ExitCommand();
             default:
@@ -101,6 +118,14 @@ public class Parser {
     private static Command parseDoneCommand(String[] commandSplit) throws LukeEmptyCommandException {
         try {
             return new DeleteCommand(Integer.parseInt(commandSplit[1]));
+        } catch (IndexOutOfBoundsException e) {
+            throw new LukeEmptyCommandException(commandSplit[0]);
+        }
+    }
+
+    private static Command parseFindCommand(String[] commandSplit) throws LukeEmptyCommandException {
+        try {
+            return new FindCommand(commandSplit[1]);
         } catch (IndexOutOfBoundsException e) {
             throw new LukeEmptyCommandException(commandSplit[0]);
         }
