@@ -3,11 +3,13 @@ import java.util.Scanner;
 public class Ui {
 
     private static final String horizontal_line = "------------------------------------------";
-    private static final String logo = " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
+    private static final String logo = "        \n"
+
+            + "____       _      _        _ \n"
+            + "| __ )    (_)    | |      | | \n"
+            + "|  _ \\      | |    | |      | | \n"
+            + "| |_) |    | |    | |      | |  \n"
+            + "|____/   |_|   |｜  ｜| \n";
 
     private Scanner scanner;
     public Ui() {
@@ -29,7 +31,6 @@ public class Ui {
     public void printHorizontalLine() {
         System.out.println(horizontal_line);
     }
-    
     public String printLine() {
         return horizontal_line;
     }
@@ -39,7 +40,6 @@ public class Ui {
      * Prints the welcome message
      */
     public static String welcome_message() {
-        
         String message = "Hello from Bill \n" + logo + "\n";
         message = message + horizontal_line + "\n ";
         message = message + "Hello! I'm Bill \n" + "What Can I do for you? \n";
@@ -49,7 +49,6 @@ public class Ui {
         System.out.println("Hello! I'm Bill ");
         System.out.println("What Can I do for you? ");
         System.out.println(horizontal_line);
-        
         return message;
     }
 
@@ -60,10 +59,7 @@ public class Ui {
         System.out.println(horizontal_line);
         System.out.println("Bye. Hope to see you again soon!");
         System.out.println(horizontal_line);
-        
-        
     }
-    
     public static String exitMessage() {
         return horizontal_line + "\n" + "Bye. Hope to see you again soon! \n" + horizontal_line + "\n";
     }

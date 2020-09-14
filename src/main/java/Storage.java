@@ -1,15 +1,12 @@
 import java.io.File;
-import java.io.IOException;
-import java.io.FileWriter;
 import java.io.FileNotFoundException;
-import java.util.List;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Storage {
     private static String filePath;
     private static File file;
-
-
     Storage (String filePath) throws IOException {
         File file = new File(filePath);
         if (file.exists()) {
@@ -49,13 +46,12 @@ public class Storage {
 
     /**
      * Stores the updated Lists that contain the tasks to bill.txt.
-     * @param list_of_Content TaskList that manages tasks.
+     * @param listOfContent TaskList that manages tasks.
      */
-    public static void write(TaskList list_of_Content) {
+    public static void write(TaskList listOfContent) {
         try {
             FileWriter fileWriter = new FileWriter(filePath, true);
-            for (Task task : list_of_Content.getTheList()) {
-//                fileWriter.write(task.fileFormat() + "\n");
+            for (Task task : listOfContent.getTheList()) {
                 fileWriter.write(task.timeConverted() + "\n");
             }
             fileWriter.close();
@@ -64,5 +60,4 @@ public class Storage {
             e.printStackTrace();
         }
     }
-    
 }

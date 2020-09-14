@@ -5,11 +5,11 @@ public class Deadline extends Task {
 
     /**
      * Contructs an event object.
-     * @param new_task Name of event.
+     * @param newTask Name of event.
      * @param deadline Time at which event happens.
      */
-    public Deadline(String new_task, String deadline) {
-        super(new_task);
+    public Deadline(String newTask, String deadline) {
+        super(newTask);
         this.deadline = deadline;
     }
 
@@ -24,15 +24,12 @@ public class Deadline extends Task {
      * Return the converted time form of the task.
      */
     public String timeConverted() {
-        timeParser inputTime = new timeParser(deadline);
+        TimeParser inputTime = new TimeParser(deadline);
         String outputTime = inputTime.timeConverter();
         return "D" + " | " + super.fileFormat() + " | " + outputTime;
 
     }
-    
     @Override
     public String toString() {
-        
-        return "[D]" +  super.toString() + " (by: " + deadline + ")";
-    }
+        return "[D]" + super.toString() + " (by: " + deadline + ")"; }
 }

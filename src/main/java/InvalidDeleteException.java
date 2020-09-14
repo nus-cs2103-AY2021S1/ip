@@ -1,5 +1,4 @@
-public class InvalidDeleteException extends InvalidException{
-
+public class InvalidDeleteException extends InvalidException {
     /**
      * Returns a InvalidDeleteException.
      * @param message Message.

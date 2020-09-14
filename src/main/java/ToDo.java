@@ -2,10 +2,10 @@ public class ToDo extends Task {
 
     /**
      * Constructor for a todo object.
-     * @param new_task Name of todo object.
+     * @param newTask Name of todo object.
      */
-    public ToDo(String new_task) {
-        super(new_task);
+    public ToDo(String newTask) {
+        super(newTask);
     }
 
 
@@ -25,7 +25,6 @@ public class ToDo extends Task {
     }
     @Override
     public String toString() {
-        return "[T]" +  super.toString() ;
-    }
+        return "[T]" + super.toString(); }
 }
 

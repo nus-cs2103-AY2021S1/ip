@@ -1,3 +1,4 @@
+
 import java.io.IOException;
 
 import javafx.application.Application;
@@ -15,7 +16,6 @@ public class Main extends Application {
 
     public Main() throws IOException {
     }
- 
     @Override
     public void start(Stage stage) {
         try {

@@ -1,9 +1,8 @@
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class timeParser {
+public class TimeParser {
 
     private String inputTime;
 
@@ -11,7 +10,7 @@ public class timeParser {
      * Contructor for a time parser object.
      * @param inputTime input time from the user.
      */
-    public timeParser(String inputTime) {
+    public TimeParser(String inputTime) {
         this.inputTime = inputTime;
     }
 

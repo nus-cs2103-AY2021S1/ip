@@ -1,14 +1,14 @@
 public class Task {
-    protected String new_task;
+    protected String newTask;
     protected boolean isDone;
-    protected String time;
+
 
     /**
      * Constructs a task object.
-     * @param new_task Name of task.
+     * @param newTask Name of task.
      */
-    public Task(String new_task) {
-        this.new_task = new_task;
+    public Task(String newTask) {
+        this.newTask = newTask;
         this.isDone = false;
     }
 
@@ -27,14 +27,14 @@ public class Task {
      * Return the file format form for the task.
      */
     public String fileFormat() {
-        return this.getStatusIcon() + " | " + new_task;
+        return this.getStatusIcon() + " | " + newTask;
     }
 
     /**
      * Return the converted time form of the task.
      */
     public String timeConverted() {
-        return this.getStatusIcon() + " | " + new_task;
+        return this.getStatusIcon() + " | " + newTask;
 
     }
 
@@ -42,14 +42,10 @@ public class Task {
      * To check whether the task contain the keyword searched by the user
      */
     public boolean containKeyWord(String keyword) {
-        return new_task.contains(keyword);
+        return newTask.contains(keyword);
     }
-    
-    
     @Override
     public String toString() {
-        return  "[" + this.getStatusIcon() + "] " + new_task;
+        return String.format("[%s] %s", this.getStatusIcon(), newTask);
     }
-
-    
 }

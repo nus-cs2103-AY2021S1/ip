@@ -1,4 +1,4 @@
-public class InvalidDoneException extends InvalidException{
+public class InvalidDoneException extends InvalidException {
 
     /**
      * Returns a InvalidDoneException.

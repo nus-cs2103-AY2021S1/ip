@@ -4,11 +4,11 @@ public class Event extends Task {
 
     /**
      * Contructor for an event object.
-     * @param new_task Name of event.
+     * @param newTask Name of event.
      * @param duration Time at which event happens.
      */
-    public Event(String new_task, String duration) {
-        super(new_task);
+    public Event(String newTask, String duration) {
+        super(newTask);
         this.duration = duration;
     }
 
@@ -23,15 +23,14 @@ public class Event extends Task {
      * Return the converted time form of the task.
      */
     public String timeConverted() {
-        timeParser inputTime = new timeParser(duration);
+        TimeParser inputTime = new TimeParser(duration);
         String outputTime = inputTime.timeConverter();
         return "E" + " | " + super.fileFormat() + " | " + outputTime;
-        
     }
 
     @Override
     public String toString() {
-        return "[E]" +  super.toString() + " (at: " + duration + ")";
+        return "[E]" + super.toString() + " (at: " + duration + ")";
     }
 }
 

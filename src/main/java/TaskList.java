@@ -1,10 +1,8 @@
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 public class TaskList {
-    
     private List<Task> listOfContents;
-
     /**
      * Constructor for TaskList object.
      */
@@ -20,7 +18,7 @@ public class TaskList {
         int totalTasks = listOfContents.size();
         boolean containDuplicate = false;
         for (int i = 0; i < totalTasks; i = i + 1) {
-            if (task.new_task.equals(listOfContents.get(i).new_task)) {
+            if (task.newTask.equals(listOfContents.get(i).newTask)) {
                 containDuplicate = true;
                 break;
             }
@@ -31,7 +29,11 @@ public class TaskList {
             throw new InvalidException("detect duplicates, the tasks is already in the list");
         }
     }
-    
+
+    /**
+     * return the string form of the task added.
+     * @param task Task to be added.
+     */
     public String addStringTask (Task task) {
         String message = "Got it. I've added this task: \n";
         message = message + task.timeConverted() + "\n";
@@ -54,29 +56,21 @@ public class TaskList {
      * Prints the whole taskList.
      */
     public String showAllContent() {
-            int no_of_tasks = listOfContents.size();
-
-            Ui ui = new Ui();
-//            System.out.println("Here are the tasks in your list: ");
-            String allTasks = "Here are the tasks in your list: \n";
-            allTasks = allTasks + ui.printLine() + "\n";
-//            ui.printHorizontalLine();
-            if (no_of_tasks == 0) {
-                
-                String noTasks = "There is no tasks in the list, please add some tasks first \n";
-                allTasks =  allTasks + noTasks;
-//                System.out.println("There is no tasks in the list, please add some tasks first ");
-            } else {
-                for (int i = 0; i < listOfContents.size(); i = i + 1) {
-                    String counter = Integer.toString(i + 1) + ". ";
-                    String oneTask = counter + listOfContents.get(i).timeConverted();
-                    allTasks = allTasks + oneTask + "\n";
-                   // System.out.println(counter + list_of_Contents.get(i).timeConverted());
-                }
+        int noOfTasks = listOfContents.size();
+        Ui ui = new Ui();
+        String allTasks = "Here are the tasks in your list: \n";
+        allTasks = allTasks + ui.printLine() + "\n";
+        if (noOfTasks == 0) {
+            String noTasks = "There is no tasks in the list, please add some tasks first \n";
+            allTasks += noTasks;
+        } else {
+            for (int i = 0; i < listOfContents.size(); i = i + 1) {
+                String counter = i + 1 + ". ";
+                String oneTask = counter + listOfContents.get(i).timeConverted();
+                allTasks = allTasks + oneTask + "\n";
             }
-        //            ui.printHorizontalLine(); 
-            return allTasks;
-
+        }
+        return allTasks;
     }
 
     /**
@@ -113,7 +107,6 @@ public class TaskList {
 
         assert listOfContents.size() < n : "The number you choose is more than the total number of tasks it contains";
         String reply = "Noted. I've removed this task: \n";
-//        System.out.println("Noted. I've removed this task:");
         Task task = listOfContents.get(n);
         System.out.println(task.toString());
         reply = reply + task.toString();
@@ -122,7 +115,6 @@ public class TaskList {
         int currentSize = listOfContents.size();
         reply = reply + "\n" + "Now you have " + currentSize + " tasks in the list. \n";
         return reply;
-       
     }
 
     /**
@@ -131,16 +123,13 @@ public class TaskList {
     public String findKeyword(String keyword) {
 
         Ui ui = new Ui();
-        int no_of_tasks = listOfContents.size();
+        int noOfTasks = listOfContents.size();
         int counter = 1;
         String tasks = "Here are the possible matches: \n" + ui.printLine() + "\n";
-//        ui.printHorizontalLine();
-        if (no_of_tasks == 0) {
+        if (noOfTasks == 0) {
 
             String noTasks = "There is no tasks in the list, please add some tasks first \n";
             tasks = tasks + noTasks;
-//            System.out.println("There is no tasks in the list ");
-            
         } else {
             boolean isTaskFound = false;
             for (int i = 0; i < listOfContents.size(); i = i + 1) {
@@ -148,16 +137,13 @@ public class TaskList {
                     isTaskFound = true;
                     String oneTask = counter + ". " + listOfContents.get(i).timeConverted();
                     tasks = tasks + oneTask + "\n";
-//                    System.out.println(counter + list_of_Contents.get(i).timeConverted());
                     counter = counter + 1;
                 }
             }
-            
             if (!isTaskFound) {
                 tasks = tasks + "Sorry, we cannot find a tasks that match the keyword in the list :( \n";
             }
         }
-//        ui.printHorizontalLine();
         tasks = tasks + ui.printLine();
         return tasks;
     }
