@@ -1,4 +1,7 @@
 import Task.Task;
+import Task.Todo;
+import Task.Deadline;
+import Task.Event;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -93,7 +96,6 @@ public class Parser {
             break;
         default:
             throw new DukeException("I'm sorry, but I don't know what that means :-(");
-            break;
         }
     }
 }
