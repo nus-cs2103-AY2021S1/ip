@@ -16,8 +16,6 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-
 
 public class DialogBox extends HBox {
 
@@ -57,17 +55,11 @@ public class DialogBox extends HBox {
 
     public static DialogBox getUserDialog(String text, Image img) {
         DialogBox db = new DialogBox(text, img);
-        // following lines for future padding purposes!
-        // db.setPadding(new Insets(15, 12, 15, 12));
-        //db.setSpacing(10);
         return db;
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
         DialogBox db = new DialogBox(text, img);
-        // following lines for future padding purposes!
-        //db.setPadding(new Insets(15, 12, 100, 12));
-        //db.setSpacing(10);
         db.flip();
         return db;
     }
