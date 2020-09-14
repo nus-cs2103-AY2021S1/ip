@@ -1,5 +1,6 @@
 # DoLah User Guide [![Status](https://travis-ci.org/BobbyZhouZijian/ip.svg?branch=master)](https://travis-ci.org/BobbyZhouZijian/ip)
 
+![App Image](./docs/Ui.png)
 ## Features
 
 DoLah is a task managing application that helps you too keep track of what you list of tasks.
