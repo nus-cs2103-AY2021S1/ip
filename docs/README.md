@@ -4,7 +4,7 @@ having the visual benefits of a Graphical User Interface (GUI). If you need help
 DukeBunny offers several useful features with a touch of posh attitude to it.  
 ## Getting Started
 1. Ensure you have Java `11` or above installed in your Computer.
-2. Download the latest `DukeBunny.jar` from here.
+2. Download the latest `DukeBunny.jar` from https://github.com/hogantan/ip/releases/tag/v3.
 3. Copy the downloaded jar file to the folder you want to use as the home folder for your DukeBunny.
 4. Double-click the file to start the app. The GUI below should appear in a few seconds.\
 ![DukeBunnyWelcomeSS](/docs/DukeBunnyWelcomeSS.png)
