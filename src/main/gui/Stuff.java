@@ -37,6 +37,7 @@ import main.ui.Ui;
 public class Stuff extends Application {
     private final Image userImage;
     private final Image stuffImage;
+    private final Image icon;
     private final Ui ui;
     private final TaskList tasks;
     private ScrollPane scrollPane;
@@ -53,6 +54,8 @@ public class Stuff extends Application {
                 this.getClass().getResourceAsStream("/images/Peter.jpg"));
         stuffImage = new Image(
                 this.getClass().getResourceAsStream("/images/Stuff.jpg"));
+        icon = new Image(
+                this.getClass().getResourceAsStream("/images/StuffIcon.jpg"));
     }
 
     @Override
@@ -69,6 +72,7 @@ public class Stuff extends Application {
 
         Scene scene = new Scene(mainLayout);
 
+        stage.getIcons().add(icon);
         stage.setScene(scene);
         stage.show();
 
