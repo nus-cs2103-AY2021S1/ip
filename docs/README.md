@@ -1,140 +1,110 @@
 # User Guide
 
+Hotline is a **desktop app for managing personal task list
+and it is optimized for use via a Command Line Interface** (CLI) 
+while still having a Graphical User Interface (GUI). Hotline can
+organize your task list much faster than GUI apps if you can type fast.
+
+* [Quick Start](#quick-start)
+* [Features](#features)
+
+<a id="quick-start"></a>
+## Quick Start
+1. Check that you have installed `Java 11` or above installed in your computer.
+2. Download the latest `hotline.jar` from [here](https://github.com/AudreyFelicio/ip/releases).
+3. Copy the jar file to the folder you want to use as the root folder of your task management app.
+4. Double-click the jar file to start the app. A GUI similar to below will appear in a few seconds.
+5. Type the command in text box on the bottom of the GUI and press Enter or click on Send button
+to execute the command.
+6. Refer to the Features below for the full details of the commands.
+
 ## Features 
 
 ### Add Task
-The user is able to add new tasks to the task list.
+Adds new tasks to the task list.
 
-Types of task to be added are
-  1. to do
-  2. deadline
-  3. event
+Types of task that can be added are:
+
+1. to-do
+ 
+    ### `todo` - Create New To Do Task
+    
+    Create a new to-do task and add to the user's task list.
+    
+    Command format:
+    
+    `todo <string: description>`
+    
+    Example:
+    
+    `todo Finish CS2103T Project`
+
+2. deadline
+
+    ### `deadline` - Create New Deadline Task
+    
+    Create a new deadline task and add to the user's task list.
+    
+    Command format:
+    
+    `deadline <string: description> /by <string: yyyy-mm-dd>`
+    
+    Example:
+    
+    `deadline CCA Registration /by 2020-09-14`
+
+3. event
+
+    ### `event` - Create New Event Task
+    
+    Create a new event task and add to the user's task list.
+    
+    Command format:
+    
+    `event <string: description> /at <string: yyyy-mm-dd>`
+    
+    Example:
+    
+    `event Application Release /at 2020-09-18)`
 
 ### Delete Task
-The user is able to delete no longer wanted task from the task list.
+Deletes no longer wanted tasks from the task list.
+
+### `delete` - Delete Task From List
+
+Delete a certain task from list.
+
+Command format:
+
+`delete <integer: task number>`
+
+Example:
+
+`delete 1`
 
 ### List Tasks
-The user is able to view all tasks inside the task list.
-
-### Update Task
-The user is able to modify existing tasks' details.
-Types of details available to be modified are
-1. description
-2. time
-3. completion status
-
-## Usage
-
-### `todo` - Create New To Do Task
-
-Create a new to do task and add to the user's task list.
-
-Command format:
-
-`todo <string: description>`
-
-Example of usage:
-
-`todo Finish CS2103T Project`
-
-Expected outcome:
-
-```
-<<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>>
-  Your task has been recorded.
-    [T][✘] Finish CS2103T Project
-  You have 1 tasks currently.
-<<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>>
-```
-
-### `deadline` - Create New Deadline Task
-
-Create a new deadline task and add to the user's task list.
-
-Command format:
-
-`deadline <string: description> /by <string: yyyy-mm-dd>`
-
-Example of usage:
-
-`deadline CCA Registration /by 2020-09-14`
-
-Expected outcome:
-
-```
-<<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>>
-  Your task has been recorded.
-    [D][✘] CCA Registration (by: Sep 14 2020)
-  You have 2 tasks currently.
-<<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>>
-```
-
-### `event` - Create New Event Task
-
-Create a new event task and add to the user's task list.
-
-Command format:
-
-`event <string: description> /at <string: yyyy-mm-dd>`
-
-Example of usage:
-
-`event Application Release /at 2020-09-18)`
-
-Expected outcome:
-
-```
-<<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>>
-  Your task has been recorded.
-    [E][✘] Application Release (at: Sep 18 2020)
-  You have 2 tasks currently.
-<<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>>
-```
+Lists all tasks inside the task list.
 
 ### `list`  - List All Tasks
 
-List all the to dos, deadlines, and events that the user have.
+List all the to-dos, deadlines, and events that the user have.
 
 Command format:
 
 `list`
 
-Example of usage: 
+Example: 
 
 `list`
 
-Expected outcome:
 
-```
-<<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>>
-  Let me list out all your tasks...
-  1. [T][✓] Finish CS2103T Project
-  2. [D][✘] CCA Registration (by: Sep 14 2020)
-  3. [E][✘] Application Release (at: Sep 18 2020)
-<<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>>
-```
+### Update Task
+Updates existing tasks' details.
 
-### `done` - Mark Task As Completed
-
-Mark a to do, deadline, or event as completed.
-
-Command format:
-
-`done <integer: task number>`
-
-Example of usage:
-
-`done 2`
-
-Expected outcome:
-
-```
-<<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>>
-  Congratulations for finishing this task!
-  Let me mark this as done for you.
-    [D][✓] CCA Registration (by: Sep 14 2020)
-<<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>>
-```
+Types of details that can modified are:
+1. description
+2. time
+3. completion status
 
 ### `update` - Change Task Details
 
@@ -148,18 +118,12 @@ Command format:
 
 `update <integer: task number> mark <integer: 1 for done or 0 for not done>`
 
-Example of usage:
+Example:
 
 `update 2 description NUS Angklung CCA Registration`
 
-Expected outcome:
-
-```
-<<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>>
-  Your task has been updated
-    [D][✓] NUS Angklung CCA Registration (by: Sep 14 2020)
-<<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>>
-```
+### Find Tasks
+Finds tasks that contain a specific keyword.
 
 ### `find` - Find Task From List
 
@@ -169,40 +133,34 @@ Command format:
 
 `find <string: keyword>`
 
-Example of usage:
+Example:
 
 `find Release`
 
-Expected outcome:
+### Save Tasks
+Saves the task list to the hard disk.
 
-```
-<<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>>
-  Let me list out the matching tasks for you...
-  1. [E][✘] Application Release (at: Sep 18 2020)
-<<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>>
-```
+The data is saved on `[root_directory]/tasks.txt`
 
-### `delete` - Delete Task From List
+The task list is automatically saved every time the user add, update, or delete a task.
 
-Delete a certain task from list.
+### Do Task
+Does task and mark as completed.
+
+### `done` - Mark Task As Completed
+
+Mark a to-do, deadline, or event as completed.
 
 Command format:
 
-`delete <integer: task number>`
+`done <integer: task number>`
 
-Example of usage:
+Example:
 
-`delete 1`
+`done 2`
 
-Expected outcome:
-
-```
-<<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>>
-  Okay, I will remove this task for you
-    [T][✓] Finish CS2103T Project
-  You have 2 tasks currently.
-<<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>>
-```
+### Exiting The Program
+Exits the application.
 
 ### `bye` - Exit Application
 
@@ -212,47 +170,6 @@ Command format:
 
 `bye`
 
-Example of usage:
+Example:
 
 `bye`
-
-Expected outcome:
-
-```
-<<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>>
-██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████
-██                  ████      ████████  ██████████████████      ████    ██  ▒▒██████████  ████████  ████████        ░░██    ██████████
-██                  ████      ████████    ████████  ██████      ██      ██    ████████    ░░████▒▒    ████            ██      ▓▓      
-██                  ████      ██████      ████████    ▒▒██      ██              ██████      ████                              ██      
-████      ████      ████      ██████        ██████              ██            ████████                        ████            ██      
-████      ████      ▒▒        ████          ▒▒████              ██          ████████████            ██      ██████            ██      
-████      ████                ████    ░░      ████              ██        ████████████████          ██      ██████            ██      
-████      ████                ██                ██              ██          ██████████████        ████      ████▒▒            ██      
-████      ████      ████    ██░░                ▒▒      ██      ██            ▓▓██████████        ████                ██              
-████      ████      ████    ██        ████              ████░░  ██            ████████████        ████▒▒              ██              
-████      ████      ████    ██▒▒      ████    ████      ██████████      ██    ████████████        ██████░░          ██████          ██
-████████████████████████████████████████████████████████████████████████████████████████████████████████████    ████████████    ██████
-██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████
-████████████████████████████████████████████████████████████████      ████████████████████████████████████████████████████████████████
-████████████████████████████████████████████████████████████            ██████████████████████████████████████████████████████████████
-████████████████████████████████████████████████████████████      ██    ██████████████████████████████████████████████████████████████
-████████████████████████████████████████████████████████████            ██████████████████████████████████████████████████████████████
-████████████████████████████████████████████████████████████▓▓        ██  ████████████████████████████████████████████████████████████
-██████████████████████████████████████████████████████████                  ██████████████████████████████████████████████████████████
-██████████████████████████████████████████████████████████      ██          ██████████████████████████████████████████████████████████
-██████████████████████████████████████████████████████████                  ██████████████████████████████████████████████████████████
-██████████████████████████████████████████████████████████▒▒              ████████████████████████████████████████████████████████████
-██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████
-██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████
-██████████████████        ████████████      ██████████      ██████▒▒        ██████▒▒        ██████  ██████░░████████████▒▒  ██████████
-██████████████              ░░████            ████            ██              ██              ██    ██████    ░░            ██████████
-████████████░░              ████                                                                      ██                    ██████████
-████████████      ░░████░░████        ████            ████            ██░░            ██    ▒▒██              ██      ████████████████
-██████████      ████                ██████          ██████            ████                  ░░████          ▒▒██          ████████████
-██████████      ████                ██████          ██████            ████                      ████        ████          ████████████
-██████████      ██████              ████            ████              ██      ██      ████      ████      ██████            ██████████
-██████████░░                ▒▒                ██              ██              ██                ████      ██████            ██████████
-████████████                ████            ████            ░░██            ████              ██████      ██████            ██████████
-██████████████            ████████          ██████          ████          ██████            ████████      ██████            ██████████
-<<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>>
-```
