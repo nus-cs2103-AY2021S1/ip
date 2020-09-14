@@ -21,11 +21,10 @@ public class Main extends Application {
         try {
             duke.onStart(true);
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/DukeGui.fxml"));
-            BorderPane ap = fxmlLoader.load();
-            Scene scene = new Scene(ap);
+            BorderPane bp = fxmlLoader.load();
+            Scene scene = new Scene(bp);
             stage.setScene(scene);
             fxmlLoader.<DukeGuiWindow>getController().setUp(duke, stage);
-            fxmlLoader.<DukeGuiWindow>getController().onStart();
             stage.setTitle("Duke");
             stage.show();
         } catch (IOException e) {

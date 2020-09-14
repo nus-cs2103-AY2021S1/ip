@@ -12,6 +12,8 @@ import duke.ui.UiPrint;
 
 public class GuiResponse {
 
+    public static final String TASK_SAVED = "Tasks saved successfully...";
+
     private Duke duke;
     private StringBuilder response;
 

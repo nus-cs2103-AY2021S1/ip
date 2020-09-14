@@ -17,19 +17,21 @@ public class DukeGuiWindow extends BorderPane {
     private Label dukeMessage;
     @FXML
     private Label userMessage;
+    @FXML
+    private Label messageLabel;
 
     private Duke duke;
     private Stage stage;
 
+    /**
+     * Sets up things on the start.
+     * @param duke
+     * @param stage
+     */
     public void setUp(Duke duke, Stage stage) {
         this.duke = duke;
         this.stage = stage;
-    }
 
-    /**
-     * Sets up things on start.
-     */
-    public void onStart() {
         duke.getGuiResponse().greet();
         dukeMessage.setText(duke.getGuiResponse().getResponse());
     }
@@ -38,6 +40,7 @@ public class DukeGuiWindow extends BorderPane {
      * Handles the user input.
      * @throws IOException
      */
+    @FXML
     public void handleUserInput() throws IOException {
         String input = userInput.getText();
         userMessage.setText(input);
@@ -50,5 +53,29 @@ public class DukeGuiWindow extends BorderPane {
             duke.onExit();
             stage.close();
         }
+    }
+
+    /**
+     * Saves all current tasks.
+     * @throws IOException
+     */
+    @FXML
+    public void saveTasks() throws IOException {
+        duke.getStorage().saveCurrentTasks();
+        messageLabel.setText(GuiResponse.TASK_SAVED);
+    }
+
+    /**
+     * Asks the user if he or she wants to save current tasks, then exit the program.
+     */
+    public void exit() throws IOException {
+        ExitWindow exitWindow = new ExitWindow();
+        boolean saveTasks = exitWindow.display();
+
+        if (saveTasks) {
+            saveTasks();
+        }
+
+        stage.close();
     }
 }
