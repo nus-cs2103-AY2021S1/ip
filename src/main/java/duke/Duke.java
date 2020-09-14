@@ -1,6 +1,6 @@
 package duke;
-import java.util.Arrays;
 
+import java.util.Arrays;
 import duke.task.Task;
 /**
  * Responsible for interpreting the input and interacting with the User.
@@ -56,7 +56,7 @@ public class Duke {
         return ui.showTaskAdded(addedDeadline.toString(), tasks.getTotalTask());
     }
 
-    private String createTodo(String[] commandParts) throws DukeException {
+    private String createTodo(String[] commandParts) {
         if (commandParts.length != 2) {
             String errorMessage = "Error: Please key in as: \n "
                     + "event [title]";
@@ -112,6 +112,7 @@ public class Duke {
                     response = ui.showTasks(tasks.toString());
                 }
                 break;
+            //Dealing with memory
             case "archive":
                 String[] filePaths = Arrays.copyOfRange(inputComponents, 1, inputComponents.length);
                 this.storage.saveToFile(tasks.toSaveFormat(), filePaths);
@@ -124,6 +125,10 @@ public class Duke {
                 }
                 this.loadFile(inputComponents[1]);
                 response = ui.show("Successful");
+                break;
+            case "save":
+                storage.saveToFile(tasks.toSaveFormat());
+                response = ui.show("Current Progress is saved. You can proceed with next command as per normal");
                 break;
 
             //3 different types of task
