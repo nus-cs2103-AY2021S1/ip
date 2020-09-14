@@ -3,7 +3,6 @@ package duke.main;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -15,15 +14,16 @@ import duke.task.TaskList;
 import duke.task.ToDo;
 
 /**
- * Saves the tasks in the hard disk automatically whenever the task list changes and
- * loads the data from the hard disk when Duke starts up.
+ * Saves the tasks in the hard disk automatically whenever the task list
+ * changes and loads the data from the hard disk when Duke starts up.
  */
 public class Storage {
     private static final String FOLDER_PATH = "data/";
     private final String storagePath;
 
     /**
-     * Creates a Storage object.
+     * Initializes a Storage object.
+     *
      * @param fileName Name of the saved file.
      */
     public Storage(String fileName) {
@@ -32,6 +32,7 @@ public class Storage {
 
     /**
      * Writes text to the saved file.
+     *
      * @param textToAdd Text to be added into the file.
      */
     private void writeToFile(String textToAdd) {
@@ -45,7 +46,8 @@ public class Storage {
     }
 
     /**
-     * Writes the entire task list to the saved file.
+     * Writes the content of the task list to the saved file.
+     *
      * @param taskList The task list such that its details are copied in the saved file.
      */
     public void writeTasks(TaskList taskList) {
@@ -60,6 +62,7 @@ public class Storage {
 
     /**
      * Reads the file and forms a list of individual string representations of tasks in the file.
+     *
      * @return A list of string representation of tasks in the saved file.
      * @throws IOException when the directory to the saved file is not found.
      */
@@ -84,6 +87,7 @@ public class Storage {
 
     /**
      * Converts the string representation of task in the saved file to a task object.
+     *
      * @param savedTask String representation of task in the saved file.
      * @return The corresponding task.
      * @throws IOException when the folder or the saved file cannot be found.
@@ -111,6 +115,7 @@ public class Storage {
 
     /**
      * Reads from the saved file and creates the task list.
+     *
      * @return Task list that contains all the tasks in the saved file.
      * @throws IOException when the directory to the saved file is not found.
      */

@@ -1,13 +1,13 @@
 package duke.main;
 
 import duke.exception.DukeException;
-
 import duke.exception.InvalidCommandException;
+
 import duke.task.DeadLine;
 import duke.task.Event;
 import duke.task.Task;
-import duke.task.ToDo;
 import duke.task.TaskList;
+import duke.task.ToDo;
 
 /**
  * Handles the logic flow of Duke.
@@ -16,7 +16,8 @@ public class Processor {
 
     /**
      * Handles the case when user input bye command.
-     * @param ui The UI that handles interaction between program and user.
+     *
+     * @param ui The UI that handles interaction between Duke and user.
      */
     public static void handleByeCommand(StringBuilder response, Ui ui) {
         String goodbyeMessage = ui.getGoodByeMessage();
@@ -26,9 +27,10 @@ public class Processor {
 
     /**
      * Handles the case when user input list command.
-     * @param response The program's response to user's input.
-     * @param ui The UI that handles interaction between program and user.
-     * @param tasks User's task list.
+     *
+     * @param response Duke's response to user's input.
+     * @param ui       The UI that handles interaction between Duke and user.
+     * @param tasks    User's task list.
      */
     public static void handleListCommand(StringBuilder response, Ui ui, TaskList tasks) {
         String headerMessage = "Here are the tasks in your list:\n";
@@ -38,10 +40,11 @@ public class Processor {
 
     /**
      * Handles the case when user input done command.
+     *
      * @param userInput The user's input.
-     * @param response The program's response to user's input.
-     * @param ui The UI that handles interaction between program and user.
-     * @param tasks User's task list.
+     * @param response  Duke's response to user's input.
+     * @param ui        The UI that handles interaction between Duke and user.
+     * @param tasks     User's task list.
      * @throws DukeException when the index is invalid.
      */
     public static void handleDoneCommand(
@@ -56,10 +59,11 @@ public class Processor {
 
     /**
      * Handles the case when user input delete command.
+     *
      * @param userInput The user's input.
-     * @param response The program's response to user's input.
-     * @param ui The UI that handles interaction between program and user.
-     * @param tasks User's task list.
+     * @param response  Duke's response to user's input.
+     * @param ui        The UI that handles interaction between Duke and user.
+     * @param tasks     User's task list.
      * @throws DukeException when the index is invalid.
      */
     public static void handleDeleteCommand(
@@ -74,10 +78,11 @@ public class Processor {
 
     /**
      * Handles the case when user input todo command.
+     *
      * @param userInput The user's input.
-     * @param response The program's response to user's input.
-     * @param ui The UI that handles interaction between program and user.
-     * @param tasks User's task list.
+     * @param response  Duke's response to user's input.
+     * @param ui        The UI that handles interaction between Duke and user.
+     * @param tasks     User's task list.
      * @throws DukeException can be thrown when task description is empty.
      */
     public static void handleTodoCommand(
@@ -101,10 +106,11 @@ public class Processor {
 
     /**
      * Handles the case when user input deadline command.
+     *
      * @param userInput The user's input.
-     * @param response The program's response to user's input.
-     * @param ui The UI that handles interaction between program and user.
-     * @param tasks User's task list.
+     * @param response  Duke's response to user's input.
+     * @param ui        The UI that handles interaction between Duke and user.
+     * @param tasks     User's task list.
      * @throws DukeException can be thrown when the task description or the time is empty, or
      *                       date format is incorrect.
      */
@@ -134,10 +140,11 @@ public class Processor {
 
     /**
      * Handles the case when user input event command.
+     *
      * @param userInput The user's input.
-     * @param response The program's response to user's input.
-     * @param ui The UI that handles interaction between program and user.
-     * @param tasks User's task list.
+     * @param response  Duke's response to user's input.
+     * @param ui        The UI that handles interaction between Duke and user.
+     * @param tasks     User's task list.
      * @throws DukeException can be thrown when the task description or the time is empty, or
      *                       date format is incorrect.
      */
@@ -166,11 +173,12 @@ public class Processor {
     }
 
     /**
-     * Handles the case when user input find command
+     * Handles the case when user input find command.
+     *
      * @param userInput The user's input.
-     * @param response The program's response to user's input.
-     * @param ui The UI that handles interaction between program and user.
-     * @param tasks User's task list.
+     * @param response  Duke's response to user's input.
+     * @param ui        The UI that handles interaction between Duke and user.
+     * @param tasks     User's task list.
      * @throws DukeException can be thrown when the task description or the time is empty, or
      *                       date format is incorrect.
      */
@@ -182,6 +190,15 @@ public class Processor {
         response.append(message);
     }
 
+    /**
+     * Handles the case when user input sort command
+     *
+     * @param userInput Input from the user.
+     * @param response  Duke's response to user's input.
+     * @param ui        The UI that handles interaction between Duke and user.
+     * @param tasks     User's task list.
+     * @throws InvalidCommandException When the command given is invalid.
+     */
     public static void handleSortCommand(
             String userInput, StringBuilder response, Ui ui, TaskList tasks) throws InvalidCommandException {
         if (Parser.isSortedByPriority(userInput)) {
@@ -196,11 +213,21 @@ public class Processor {
             response.append(message);
         }
     }
+
+    private static boolean isValidCommand(String command) throws InvalidCommandException {
+        if (Keyword.isValid(command)) {
+            return true;
+        } else {
+            throw new InvalidCommandException();
+        }
+    }
+
     /**
      * Processes the run of the program.
-     * @param tasks The user's task list.
+     *
+     * @param tasks   The user's task list.
      * @param storage The storage storing the user's saved task list.
-     * @param ui UI that handles interaction with user.
+     * @param ui      UI that handles interaction with user.
      * @throws DukeException Exception can be thrown due to multiple reasons, such as
      *                       invalid command, empty task description, empty date or
      *                       wrong date format.
@@ -210,6 +237,7 @@ public class Processor {
             String userInput = Parser.readNextLine();
             String command = Parser.getCommand(userInput);
             StringBuilder response = new StringBuilder();
+            isValidCommand(command);
             if (command.equals("bye")) {
                 handleByeCommand(response, ui);
                 break;

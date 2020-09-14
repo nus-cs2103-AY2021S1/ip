@@ -7,7 +7,7 @@ import java.util.List;
  * Represents the task list contains the user's tasks.
  */
 public class TaskList {
-    List<Task> taskList;
+    private List<Task> taskList;
 
     public TaskList() {
         this.taskList = new ArrayList<>();
@@ -18,7 +18,8 @@ public class TaskList {
     }
 
     /**
-     * Adds a task to the list.
+     * Adds a task to the task list.
+     *
      * @param task The task to be added.
      */
     public void addTask(Task task) {
@@ -27,6 +28,7 @@ public class TaskList {
 
     /**
      * Gets a task corresponding to its index in the list.
+     *
      * @param index The index of the task in the list.
      * @return The corresponding task.
      */
@@ -36,6 +38,7 @@ public class TaskList {
 
     /**
      * Gets the number of tasks in the list.
+     *
      * @return The number of tasks in the user's task list.
      */
     public int getSize() {
@@ -44,6 +47,7 @@ public class TaskList {
 
     /**
      * Gets the task list.
+     *
      * @return The user's task list.
      */
     public List<Task> getTaskList() {
@@ -52,6 +56,7 @@ public class TaskList {
 
     /**
      * Forms a new task list object containing all the tasks with the given keyword.
+     *
      * @param keyword The keyword from the user's input.
      * @return A new task list object with all the tasks contaning that keyword.
      */
@@ -67,6 +72,7 @@ public class TaskList {
 
     /**
      * Removes a task from the task list.
+     *
      * @param index Index of the task to be deleted.
      */
     public void deleteTask(int index) {
@@ -75,8 +81,9 @@ public class TaskList {
     }
 
     /**
-     * Sorts the task list alphabetically.
-     * @return a task list that is sorted based on the alphabetical order of the tasks.
+     * Get the task list that is sorted alphabetically.
+     *
+     * @return The task list that is sorted based on the alphabetical order of the tasks.
      */
     public TaskList sortDescription() {
         List<Task> sortedList = new ArrayList<>(this.taskList);
@@ -84,6 +91,11 @@ public class TaskList {
         return new TaskList(sortedList);
     }
 
+    /**
+     * Get the task list that is sorted based on the priority level.
+     *
+     * @return The task list that is sorted based on the priority level of the tasks.
+     */
     public TaskList sortPriority() {
         List<Task> sortedList = new ArrayList<>(this.taskList);
         sortedList.sort((task1, task2) ->

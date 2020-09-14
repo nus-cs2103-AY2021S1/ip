@@ -1,7 +1,6 @@
 package duke.main;
 
 import duke.exception.DukeException;
-
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -29,7 +28,7 @@ public class Ui {
     }
 
     /**
-     * Prints farewell to the users when they stop using Duke.
+     * Gets farewell message to the users when they exits Duke program.
      */
     public String getGoodByeMessage() {
         return "Bye Master. Hope to see you again soon!";
@@ -37,6 +36,7 @@ public class Ui {
 
     /**
      * Adds indentation to the message.
+     *
      * @param message The message to be indented.
      * @return The indented message.
      */
@@ -46,6 +46,7 @@ public class Ui {
 
     /**
      * Adds line break to the end of the message.
+     *
      * @param message The message string to be added a line break.
      * @return The message with a line break at the end of the string.
      */
@@ -55,6 +56,7 @@ public class Ui {
 
     /**
      * Builds a complete message from multiple small messages.
+     *
      * @param strings String array contains all the small messages.
      * @return The final complete message.
      */
@@ -69,6 +71,7 @@ public class Ui {
 
     /**
      * Returns the response to users when they mark a task as done.
+     *
      * @param task The task that is marked as done.
      * @return The message notifying user that the task is marked as done.
      */
@@ -81,9 +84,10 @@ public class Ui {
 
     /**
      * Returns the response to users when they modify the task list.
+     *
      * @param message Message to be included.
-     * @param task The task that is being added/deleted from the task list.
-     * @param tasks The task list of the user.
+     * @param task    The task that is being added/deleted from the task list.
+     * @param tasks   The task list of the user.
      * @return The message notifying the user of the current task list.
      */
     private String taskListModify(String message, Task task, TaskList tasks) {
@@ -98,7 +102,8 @@ public class Ui {
 
     /**
      * Returns the messages to the user when they add a task to the task list.
-     * @param task The task to be added.
+     *
+     * @param task  The task to be added.
      * @param tasks The user's task list.
      * @return The message notifying the user that the task is successfully added
      *         to the task list.
@@ -109,7 +114,8 @@ public class Ui {
 
     /**
      * Returns the messages to the user when they delete a task from the task list.
-     * @param task The task to be deleted.
+     *
+     * @param task  The task to be deleted.
      * @param tasks The user's task list.
      * @return The message notifying the user that a task is successfully deleted
      *         from the task list.
@@ -120,6 +126,7 @@ public class Ui {
 
     /**
      * Returns the message which is the task list containing all the tasks having a certain keyword.
+     *
      * @param tasks Task list that contains all the tasks having a certain keyword.
      * @return The message notifying the user of the tasks that contain the particular keyword.
      */
@@ -137,6 +144,7 @@ public class Ui {
 
     /**
      * Returns the message containing the full task list to the user.
+     *
      * @param tasks The user's task list.
      * @return The message notifying user of the current task list.
      */
@@ -154,6 +162,7 @@ public class Ui {
 
     /**
      * Prints out error to the user when an error is met.
+     *
      * @param error The error to be printed.
      */
     public void printError(DukeException error) {

@@ -19,6 +19,7 @@ public class Parser {
 
     /**
      * Reads next line of input from the user.
+     *
      * @return The next line that user inputs.
      */
     public static String readNextLine() {
@@ -27,6 +28,7 @@ public class Parser {
 
     /**
      * Checks whether there is still input coming in.
+     *
      * @return True if there is still next line and false otherwise.
      */
     public static boolean hasNextLine() {
@@ -35,6 +37,7 @@ public class Parser {
 
     /**
      * Returns the command keyword in the user input.
+     *
      * @param userInput The string represents user's input.
      * @return The keyword command.
      */
@@ -45,9 +48,10 @@ public class Parser {
 
     /**
      * Returns the arguments of the user's input.
+     *
      * @param userInput The string represents the user's input.
-     * @return The arguments.
-     * @throws EmptyTaskException
+     * @return The arguments followed the command keyword.
+     * @throws EmptyTaskException when there is no task followed the command.
      */
     public static String getArgs(String userInput) throws EmptyTaskException {
         String[] components = userInput.split(" ", 2);
@@ -60,6 +64,7 @@ public class Parser {
 
     /**
      * Gets the task index for done and delete command.
+     *
      * @param userInput The string represents the user's input.
      * @return The task index.
      * @throws InvalidIndexException
@@ -75,6 +80,7 @@ public class Parser {
 
     /**
      * Returns the task's description from the user input.
+     *
      * @param userInput The string represents the user's input.
      * @return The task's description.
      * @throws EmptyTaskException
@@ -90,6 +96,7 @@ public class Parser {
 
     /**
      * Returns the date and/or time for deadline and event tasks.
+     *
      * @param userInput The string represents user's input.
      * @param keyword Keyword to distinguish deadline and event tasks.
      * @return The date and/or time for the task.
@@ -107,10 +114,11 @@ public class Parser {
     }
 
     /**
-     * Checks whether the given date in the correct format of YYYY-MM-DD HH:mm (time is optional)
+     * Checks whether the given date in the correct format of YYYY-MM-DD HH:mm (time is optional).
+     *
      * @param time The input date time.
      * @return True if the input date time is of correct format.
-     * @throws InvalidDateFormatException
+     * @throws InvalidDateFormatException when the date keyed in is in a wrong format.
      */
     public static boolean isValidDate(String time) throws InvalidDateFormatException {
         String[] times = time.split("-");
@@ -122,6 +130,7 @@ public class Parser {
 
     /**
      * Checks whether the user's input, other than containing date, contains time or not.
+     *
      * @param time The input date time.
      * @return True if there is time included, false otherwise.
      */
@@ -130,6 +139,12 @@ public class Parser {
         return components.length == 2;
     }
 
+    /**
+     * Checks whether user input priority to the task.
+     *
+     * @param userInput The input from the user.
+     * @return True if user indicates the priority of the task, false otherwise.
+     */
     public static boolean hasPriority(String userInput) {
         String[] components = userInput.split("/priority ");
         return components.length > 1;
@@ -139,6 +154,13 @@ public class Parser {
         return priority.equals("high") || priority.equals("medium") || priority.equals("low");
     }
 
+    /**
+     * Returns the string priority of the task.
+     *
+     * @param userInput The input from the user.
+     * @return The string representation of priority level.
+     * @throws InvalidPriorityException When the input priority is not either high, medium or low.
+     */
     public static String getPriority(String userInput) throws InvalidPriorityException {
         String[] components = userInput.split("/priority ");
         String priority = components[1];
@@ -149,6 +171,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Checks whether the user wants to sort the task list based on the priority of the task.
+     *
+     * @param userInput The input from the user.
+     * @return True if user wants to sort based on priority, false otherwise.
+     * @throws InvalidCommandException When the command is invalid.
+     */
     public static boolean isSortedByPriority(String userInput) throws InvalidCommandException {
         String[] components = userInput.split(" ", 2);
         if (components.length == 1) {

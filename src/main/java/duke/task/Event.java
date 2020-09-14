@@ -4,10 +4,22 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents an event task.
+ */
 public class Event extends Task {
     private LocalDate eventTime;
     private LocalDateTime time;
 
+    /**
+     * Initializes an event task.
+     *
+     * @param description Description of the task.
+     * @param time        Date/Time that the event takes place.
+     * @param hasTime     Whether there is a specified time for the event.
+     * @param isDone      Whether the event is done or not.
+     * @param priority    Priority level of the event.
+     */
     public Event(
             String description, String time, boolean hasTime, boolean isDone, String priority) {
         super(description, isDone, priority);
@@ -19,6 +31,11 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Gets the string representation of the event task to be stored in the data file.
+     *
+     * @return String representation of the event task in the data file.
+     */
     @Override
     public String getStorageString() {
         return "E | " + this.getStatusIcon() + " | " + this.description
