@@ -151,8 +151,30 @@ public abstract class Task implements Comparable<Task> {
     public boolean equals(Object object) {
         assert object instanceof Task;
         Task otherTask = (Task) object;
-        boolean hasSameDescription = this.description.equals(otherTask.description);
-        boolean hasSameTime = this.dateTime.isEqual(otherTask.dateTime);
+        boolean hasSameDescription = sameDescription(otherTask.description);
+        boolean hasSameTime = sameTime(otherTask.dateTime);
         return hasSameDescription && hasSameTime;
+    }
+
+    /**
+     * Checks if the two dateTime of the other task is the same as this task.
+     *
+     * @param otherDateTime DateTime of the other task.
+     * @return True if the other task has the same DateTime.
+     */
+    private boolean sameTime(LocalDateTime otherDateTime) {
+        boolean sameYear = dateTime.getYear() == otherDateTime.getYear();
+        boolean sameDayOfYear = dateTime.getDayOfYear() == otherDateTime.getDayOfYear();
+        return sameYear && sameDayOfYear;
+    }
+
+    /**
+     * Checks if the description of the other task is the same as this task.
+     *
+     * @param otherDescription The other task's description.
+     * @return True if the other task has the same description.
+     */
+    private boolean sameDescription(String otherDescription) {
+        return description.equals(otherDescription);
     }
 }

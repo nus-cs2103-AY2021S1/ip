@@ -34,16 +34,16 @@ public class AddDeadlineCommandTest extends CommandTests {
             AddDeadlineCommand cmd1 = new AddDeadlineCommand("Test /by 2020-08-23");
             AddDeadlineCommand cmd2 = new AddDeadlineCommand("test2 /by 2020-08-23 10:15");
             AddDeadlineCommand cmd3 = new AddDeadlineCommand("test2 /by 2020-08-23T10:15");
-            AddDeadlineCommand cmd4 = new AddDeadlineCommand("test2 /by 2020-08-23 10:15:33");
+            AddDeadlineCommand cmd4 = new AddDeadlineCommand("test2 /by 2020-08-23 23:15");
             AddDeadlineCommand cmd5 = new AddDeadlineCommand("test3 /by22:15");
             // DateTimeFormat
             assertEquals(ui.addTask(ct1, 1), cmd1.execute(taskList, ui, storage));
             assertEquals(1, storage.getTasks().size());
             assertEquals(ui.addTask(ct2, 2), cmd2.execute(taskList, ui, storage));
             assertThrows(DuplicateTaskException.class, () -> cmd3.execute(taskList, ui, storage));
-            assertEquals(ui.addTask(ct2, 3), cmd4.execute(taskList, ui, storage));
-            assertEquals(ui.addTask(ct3, 4), cmd5.execute(taskList, ui, storage));
-            assertEquals(4, storage.getTasks().size());
+            assertThrows(DuplicateTaskException.class, () -> cmd4.execute(taskList, ui, storage));
+            assertEquals(ui.addTask(ct3, 3), cmd5.execute(taskList, ui, storage));
+            assertEquals(3, storage.getTasks().size());
         } catch (DukeException e) {
             System.out.println(Arrays.toString(e.getStackTrace()));
             fail();

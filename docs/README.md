@@ -1,4 +1,6 @@
-# User Guide
+# User Guide for TheDuke
+
+*Keane Chan Jun Yu | A0205678W*
 
 ## Features 
 
@@ -7,7 +9,11 @@ Description of feature.
 
 ## Usage
 
-### `Keyword` - Describe action
+### `todo` - adds a todo
+
+A todo task will be added to your list of tasks.
+
+Example of usage:
 
 Describe action and its outcome.
 

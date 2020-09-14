@@ -10,7 +10,7 @@
          fillHeight="false"
          minHeight="-Infinity"
          maxHeight="Infinity"
-         spacing="5.0"
+         spacing="8.0"
          type="javafx.scene.layout.HBox"
          xmlns="http://javafx.com/javafx/11"
          xmlns:fx="http://javafx.com/fxml/1">
@@ -38,6 +38,6 @@
                preserveRatio="true">
     </ImageView>
     <padding>
-        <Insets top="7.5" bottom="7.5"/>
+        <Insets top="7.5" bottom="7.5" left="10.0" right="10.0"/>
     </padding>
 </fx:root>
