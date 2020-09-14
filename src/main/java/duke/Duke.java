@@ -1,5 +1,7 @@
 package duke;
 
+import duke.lists.TaskList;
+
 /**
  * Duke chat bot 
  */

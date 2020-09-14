@@ -1,4 +1,4 @@
-package duke;
+package duke.lists;
 
 import duke.commands.Command;
 import duke.exceptions.DukeInvalidUndoException;

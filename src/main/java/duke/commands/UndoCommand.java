@@ -1,10 +1,10 @@
 package duke.commands;
 
-import duke.DeletedTaskList;
-import duke.CommandList;
+import duke.lists.DeletedTaskList;
+import duke.lists.CommandList;
 import duke.Ui;
 import duke.Storage;
-import duke.TaskList;
+import duke.lists.TaskList;
 
 import duke.exceptions.DukeInvalidUndoException;
 import duke.tasks.Task;
