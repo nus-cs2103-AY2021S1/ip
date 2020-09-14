@@ -9,9 +9,9 @@ import java.util.Scanner;
  * initially and creating it if it is not found. It also manages the saving and loading of duke.txt.
  */
 
-public class Storage { //deals with loading task and saving task in file.
+public class Storage { //deals with loading task and saving task in file
 
-    private String filePath; //check //test//test
+    private String filePath; 
     private File file;
 
     /**
