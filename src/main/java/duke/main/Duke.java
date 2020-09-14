@@ -2,9 +2,9 @@ package duke.main;
 
 import java.io.IOException;
 
+import duke.exception.DukeException;
 import duke.exception.InvalidCommandException;
 import duke.task.TaskList;
-import duke.exception.DukeException;
 
 
 /**
