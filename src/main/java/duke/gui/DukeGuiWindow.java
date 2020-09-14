@@ -1,5 +1,7 @@
 package duke.gui;
 
+import java.io.IOException;
+
 import duke.Duke;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -7,12 +9,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-
 public class DukeGuiWindow extends BorderPane {
 
     @FXML
-    public TextField userInput;
+    private TextField userInput;
     @FXML
     private Label dukeMessage;
     @FXML
