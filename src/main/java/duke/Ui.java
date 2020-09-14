@@ -7,23 +7,20 @@ import java.util.Scanner;
  * Ui deals with interactions with users.
  */
 public class Ui {
-    private static final String HORIZONTAL_LINE = "______________________________________________________";
+    private final String spacing = "\r\n";
 
     /**
-    * Introduction of Mocha.
-     * @return
+     * Introduction of Mocha.
+     *
+     * @return Mocha's Introduction in String format.
      */
     public String sayIntroduction() {
 
         String nameIntro = "Hello, I'm Mocha!";
         String greeting = "What's up today!";
-        String mochaIntro = (HORIZONTAL_LINE
-                + "\r\n"
-                + nameIntro
-                + "\r\n"
-                + greeting
-                + "\r\n"
-                + HORIZONTAL_LINE);
+        String mochaIntro = (nameIntro
+                + spacing
+                + greeting);
         return mochaIntro;
     }
 
@@ -53,44 +50,40 @@ public class Ui {
      */
     public String addTask(Task task, int sizeOfTasks) {
         String newTask = "";
-        
+        String totalNumberOfTasksString = "Total number of tasks in list: ";
+
         if (task.getTaskType() == "ToDo") {
 
-            newTask = (HORIZONTAL_LINE
-                    + "\r\n"
-                    + "One new ToDo Task added: "
-                    + "\r\n"
+            String toDoHeader = "One new ToDo Task added: ";
+
+            newTask = (toDoHeader
+                    + spacing
                     + task.toString()
-                    + "\r\n"
-                    + "Total number of tasks in list: "
-                    + sizeOfTasks
-                    + "\r\n"
-                    + HORIZONTAL_LINE);
+                    + spacing
+                    + totalNumberOfTasksString
+                    + sizeOfTasks);
 
         } else if (task.getTaskType() == "Deadline") {
 
-            newTask = (HORIZONTAL_LINE
-                    + "\r\n"
-                    + "One new Deadline added: "
-                    + "\r\n"
+            String deadlineHeader = "One new Deadline Task added: ";
+
+            newTask = (deadlineHeader
+                    + spacing
                     + task.toString()
-                    + "\r\n"
-                    + "Total number of tasks in list: "
-                    + sizeOfTasks
-                    + "\r\n"
-                    + HORIZONTAL_LINE);
+                    + spacing
+                    + totalNumberOfTasksString
+                    + sizeOfTasks);
 
         } else if (task.getTaskType() == "Event") {
-            newTask = (HORIZONTAL_LINE
-                    + "\r\n"
-                    + "One new Deadline Task added: "
-                    + "\r\n"
+
+            String eventHeader = "One new Event Task added: ";
+
+            newTask = (eventHeader
+                    + spacing
                     + task.toString()
-                    + "\r\n"
-                    + "Total number of tasks in list: "
-                    + sizeOfTasks
-                    + "\r\n"
-                    + HORIZONTAL_LINE);
+                    + spacing
+                    + totalNumberOfTasksString
+                    + sizeOfTasks);
         }
         return newTask;
     }
@@ -102,12 +95,11 @@ public class Ui {
      */
     public String markTaskDone(Task task) {
         String newTaskDone = "";
-        newTaskDone = (HORIZONTAL_LINE
-                + "\r\n"
-                + "Nice! One thing done: \r\n"
-                + task.toString()
-                + "\r\n"
-                + HORIZONTAL_LINE);
+        String taskDoneHeader = "Nice! One thing done:";
+
+        newTaskDone = (taskDoneHeader
+                + spacing
+                + task.toString());
         return newTaskDone;
     }
 
@@ -121,26 +113,27 @@ public class Ui {
         String allTasks = "";
         String dividerEnd = "";
         String listAllTasks = "";
-        
-        dividerStart = (HORIZONTAL_LINE
-                + "\r\n"
-                + "Here are all of your tasks:"
-                + "\r\n");
+
+        String listAllTasksHeader = "Here are all of your tasks:";
+        dividerStart = (listAllTasksHeader
+                + spacing);
 
         for (int i = 0; i < tasks.getSize(); i++) {
             String taskToString = "";
-            taskToString = ((i + 1) + "." + tasks.getTask(i).toString() +"\n");
+            taskToString = ((i + 1) + "." + tasks.getTask(i).toString() + "\n");
             allTasks += taskToString;
         }
 
-        dividerEnd += ("\r\n"
+        dividerEnd += (spacing
                 + "You have a total of "
                 + tasks.getSize()
-                + " tasks."
-                + "\r\n"
-                + HORIZONTAL_LINE);
-        
-        listAllTasks = dividerStart + allTasks + dividerEnd;
+                + " tasks.");
+
+        if (tasks.getSize() == 0) {
+            listAllTasks = dividerEnd;
+        } else {
+            listAllTasks = dividerStart + allTasks + dividerEnd;
+        }
         return listAllTasks;
     }
 
@@ -148,34 +141,28 @@ public class Ui {
      * Mocha's salutations.
      */
     public String sayGoodbye() {
-        String mochaGoodbye = "";
-       mochaGoodbye = (HORIZONTAL_LINE
-                + "\r\n"
-                + "Bye! See ya soon!"
-                + "\r\n"
-                + HORIZONTAL_LINE);
+        String mochaGoodbye = "Bye! See ya soon!";
         return mochaGoodbye;
     }
 
     /**
      * Displays the message when a task is deleted.
-     * 
+     *
      * @param task Takes in a task object.
      * @param sizeOfTasks Takes in the size of the list of tasks.
-     * @return
+     * @return the message for a deleted task in String format.
      */
     public String deleteTask(Task task, int sizeOfTasks) {
         String deleteTask = "";
-        deleteTask = (HORIZONTAL_LINE
-                + "\r\n"
-                + "Noted. Removing the following task:"
-                + "\r\n"
+        String deleteTaskHeader = "Noted. Removing the following task:";
+        String deleteTaskFooter = "Total number of tasks left in the list: ";
+
+        deleteTask = (deleteTaskHeader
+                + spacing
                 + task.toString()
-                + "\r\n"
-                + "Total number of tasks left in the list: "
-                + sizeOfTasks
-                + "\r\n"
-                + HORIZONTAL_LINE);
+                + spacing
+                + deleteTaskFooter
+                + sizeOfTasks);
         return deleteTask;
     }
 
@@ -187,25 +174,21 @@ public class Ui {
     public String findTask(ArrayList<Task> matchingTasks) {
         String dividerStart = "";
         String relevantTasks = "";
-        String dividerEnd = "";
         String findTask = "";
 
-        dividerStart = (HORIZONTAL_LINE
-                + "\r\n"
-                + "Here are the matching tasks in your list:"
-                + "\r\n");
+        String findTaskHeader = "Here are the matching tasks in your list:";
+        dividerStart = (findTaskHeader + spacing);
 
         for (int i = 0; i < matchingTasks.size(); i++) {
             String matchingTask = "";
-            matchingTask = ((i + 1) 
+            matchingTask = ((i + 1)
                     + "."
                     + matchingTasks.get(i).toString()
-                    + "\n");
+                    + spacing);
             relevantTasks += matchingTask;
         }
-        
-        dividerEnd = HORIZONTAL_LINE;
-        findTask = dividerStart + relevantTasks + dividerEnd;
+
+        findTask = dividerStart + relevantTasks;
         return findTask;
     }
 }

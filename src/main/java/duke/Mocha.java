@@ -1,5 +1,7 @@
 package duke;
 
+import java.util.ArrayList;
+
 import javafx.animation.PauseTransition;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -15,11 +17,10 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-import java.util.ArrayList;
-
-
+/**
+ * Mocha contains of the logic of the application.
+ */
 public class Mocha extends Application {
-
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
@@ -34,17 +35,20 @@ public class Mocha extends Application {
     private Storage storage;
     private TaskList tasks;
 
-    public static void main(String[] args) {
-        // ... 
-    }
-
+    /**
+     * Constructor of Mocha object.
+     */
     public Mocha() {
         ui = new Ui();
         parser = ui.createParser();
         storage = new Storage("data/tasks.txt");
-        tasks = new TaskList(storage.loadData());        
+        tasks = new TaskList(storage.loadData());
     }
-    
+
+    public static void main(String[] args) {
+        //..
+    }
+
     @Override
     public void start(Stage stage) {
         //Step 1. Setting up required components
@@ -80,7 +84,6 @@ public class Mocha extends Application {
         scrollPane.setVvalue(1.0);
         scrollPane.setFitToWidth(true);
 
-        // You will need to import `javafx.scene.layout.Region` for this. 
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
         userInput.setPrefWidth(325.0);
@@ -118,14 +121,11 @@ public class Mocha extends Application {
             handleUserInput();
         });
 
-//        Label mochaIntroduction = new Label(ui.sayIntroduction());
         dialogContainer.getChildren().add(
                 DialogBox.getMochaDialog(ui.sayIntroduction(), mocha));
-        
     }
 
     /**
-     * Iteration 1:
      * Creates a label with the specified text and adds it to the dialog container.
      *
      * @param text String containing text to add
@@ -139,7 +139,6 @@ public class Mocha extends Application {
     }
 
     /**
-     * Iteration 2:
      * Creates two dialog boxes, one echoing user input and the other containing Mocha's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
@@ -154,12 +153,14 @@ public class Mocha extends Application {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Generates the response of Mocha according to the input of the user.
+     *
+     * @param input Takes in the input of the user.
+     * @return the response of Mocha.
      */
     String getResponse(String input) {
-        String responseReturn = ""; 
-        
+        String responseReturn = "";
+
         try {
             int commandNumber = parser.parseCommand(input);
             assert commandNumber == -1 || commandNumber > 1 && commandNumber <= 8;
@@ -168,43 +169,38 @@ public class Mocha extends Application {
                 Task newTask = parser.createTask(commandNumber);
                 tasks.addTask(newTask);
                 responseReturn = ui.addTask(newTask, tasks.getSize());
-                
+
             } else if (commandNumber == 4) {
                 int taskNumber = parser.getDoneTaskNumber();
                 Task doneTask = tasks.getTask(taskNumber);
                 doneTask.markAsDone();
                 responseReturn = ui.markTaskDone(doneTask);
-                
+
             } else if (commandNumber == 5) {
                 responseReturn = ui.listAllTasks(tasks);
-                
+
             } else if (commandNumber == 6) {
                 responseReturn = ui.sayGoodbye();
                 storage.writeToFile(tasks.getTaskList());
+
                 PauseTransition delay = new PauseTransition(Duration.millis(1000));
                 delay.setOnFinished(event-> Platform.exit());
                 delay.play();
-                
+ 
             } else if (commandNumber == 7) {
                 int taskNumber = parser.getDeleteTaskNumber();
                 Task deleteTask = tasks.getTask(taskNumber);
                 tasks.deleteTask(taskNumber);
                 responseReturn = ui.deleteTask(deleteTask, tasks.getSize());
-                
+
             } else if (commandNumber == 8) {
                 ArrayList<Task> matchingTasks = parser.getMatchingTasks(tasks);
                 responseReturn = ui.findTask(matchingTasks);
 
             } else {
-                final String horizontalLine = "_____________________________________________________";
-
-                throw new CommandNotRecognizedException(horizontalLine
-                        + "\r\n"
-                        + "Oops! I couldn't understand what you mean :("
-                        + "\r\n"
-                        + horizontalLine);
+                throw new CommandNotRecognizedException("Oops! I couldn't understand what you mean :(");
             }
-            
+
         } catch (MissingTaskDescriptionException e) {
             responseReturn = e.getMessage();
         } catch (MissingTaskNumberException e) {

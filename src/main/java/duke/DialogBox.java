@@ -15,9 +15,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
 /**
- * An example of a custom control using FXML.
- * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
- * containing text from the speaker.
+ * Dialog box consists of an ImageView to represent the speaker's face and a label containing text from the speaker.
  */
 public class DialogBox extends HBox {
     @FXML
@@ -25,6 +23,11 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
+    /**
+     * Constructor of DialogBox object.
+     * @param text Takes in the text of the DialogBox object.
+     * @param img Takes in the image of the DialogBox object.
+     */
     private DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -49,10 +52,26 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Returns a DialogBox of the user.
+     * The ImageView appears on the right side.
+     *
+     * @param text Prints the text inputted.
+     * @param img Displays the ImageView.
+     * @return a new DialogBox with text inputted and ImageView passed into the argument.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Returns a DialogBox of Mocha.
+     * The ImageView appears on the left side.
+     *
+     * @param text Prints the text inputted.
+     * @param img Displays the ImageView.
+     * @return a new DialogBox with text inputted and ImageView passed into the argument.
+     */
     public static DialogBox getMochaDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
