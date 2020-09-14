@@ -7,7 +7,7 @@ import duke.task.TaskList;
  * Interacts with the user.
  */
 public class Ui {
-    private static String horizontalLine = "________________________________________";
+    private static String horizontalLine = "_______________________________________";
 
     /**
      * Prints the welcome message

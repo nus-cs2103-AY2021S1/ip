@@ -35,6 +35,6 @@ public class Command {
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         assert ui != null : "ui object cannot be null";
-        return ui.showUnrecognizedCommandMessage();
+        throw new DukeException(ui.showUnrecognizedCommandMessage());
     }
 }

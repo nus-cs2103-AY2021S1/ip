@@ -6,6 +6,7 @@ import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
+import javafx.util.Pair;
 
 /**
  * Main class, responsible for running the program.
@@ -15,6 +16,14 @@ public class Duke {
     private Ui ui;
     private TaskList tasks;
     private boolean isRunning;
+
+    /**
+     * The type of the response message
+     */
+    public enum ResponseType {
+        MESSAGE,
+        ERROR
+    }
 
     /**
      * Creates a <code>Duke</code> object.
@@ -37,7 +46,7 @@ public class Duke {
      * @param fullCommand The input command of the user
      * @return A response of the program
      */
-    public String getResponse(String fullCommand) {
+    public Pair<String, ResponseType> getResponse(String fullCommand) {
         String response;
         try {
             Command command = Parser.parse(fullCommand);
@@ -45,16 +54,17 @@ public class Duke {
                 isRunning = true;
             }
             if (!isRunning) {
-                return "I'm sleeping...zzz";
+                return new Pair<>("I'm sleeping...zzz", ResponseType.MESSAGE);
             }
             if (command.isExit()) {
                 isRunning = false;
             }
             response = command.execute(tasks, ui, storage);
+            return new Pair<>(response, ResponseType.MESSAGE);
         } catch (DukeException e) {
             response = ui.showError(e.getMessage());
+            return new Pair<>(response, ResponseType.ERROR);
         }
-        return response;
     }
 
     /**

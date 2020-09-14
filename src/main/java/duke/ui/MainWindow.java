@@ -9,6 +9,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.util.Pair;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -44,7 +46,7 @@ public class MainWindow extends AnchorPane {
         sendImage.setImage(sendIcon);
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(new Ui().showWelcome(), dukeImage)
+                DialogBox.getDukeDialog(new Ui().showWelcome(), dukeImage, false)
         );
     }
 
@@ -59,10 +61,12 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
+        Pair<String, Duke.ResponseType> responsePair = duke.getResponse(input);
+        String response = responsePair.getKey();
+        Duke.ResponseType type = responsePair.getValue();
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getDukeDialog(response, dukeImage, type == Duke.ResponseType.ERROR)
         );
         userInput.clear();
     }
