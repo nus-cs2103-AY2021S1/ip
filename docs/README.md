@@ -7,7 +7,6 @@ DukeBunny offers several useful features with a touch of posh attitude to it.
 2. Download the latest `DukeBunny.jar` from https://github.com/hogantan/ip/releases/tag/v3.
 3. Copy the downloaded jar file to the folder you want to use as the home folder for your DukeBunny.
 4. Double-click the file to start the app. The GUI below should appear in a few seconds.
-
 ![DukeBunnyWelcomeSS](/docs/DukeBunnyWelcomeSS.png)
 5. Enter command in the command box and press Enter to execute it. (Please refer to command list)
 
