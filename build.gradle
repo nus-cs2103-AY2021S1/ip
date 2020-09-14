@@ -48,7 +48,7 @@ application {
 }
 
 shadowJar {
-    archiveBaseName = "soccat duke"
+    archiveBaseName = "doraemon_taskList"
     archiveClassifier = null
 }
 
