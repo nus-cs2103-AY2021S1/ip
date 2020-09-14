@@ -35,12 +35,16 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
-        dialog.setMinSize(250, Label.USE_PREF_SIZE);
         displayPicture.setImage(img);
 
+        //@@author marcus2k-reused
+        //Adapted from zhangj1an's Duke GUI
+        //GUI settings copied with minor modification on dialog box min width.
+        dialog.setMinSize(250, Label.USE_PREF_SIZE);
         this.setBackground(new Background(new BackgroundFill(
                 Color.gray(0.865), new CornerRadii(10), new Insets(5, 5, 5, 5))));
         this.setSpacing(10);
+        //@@author
     }
 
     /**
