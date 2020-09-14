@@ -9,7 +9,7 @@ import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
 /**
- * Abstracts the execution of the deletion of tasks command.
+ * Abstracts the execution of the deletion of task command.
  */
 public class DeleteCommand extends SimpleCommand {
 
@@ -27,7 +27,7 @@ public class DeleteCommand extends SimpleCommand {
     /**
      * Executes the deletion of task command.
      *
-     * @param tasks Task List object.
+     * @param taskList TaskList object.
      * @param ui User Interface object.
      * @param storage Storage object.
      * @return Response message to user.
@@ -35,13 +35,13 @@ public class DeleteCommand extends SimpleCommand {
      * @throws InvalidTaskNumberException If task number does not lie within the size of TaskList.
      * @throws FileUpdateFailException If file in storage fails to get updated.
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidSimpleCommandException,
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws InvalidSimpleCommandException,
         InvalidTaskNumberException, FileUpdateFailException {
-        checkValidity(input, SimpleCommandType.DELETE, tasks);
+        checkValidity(input, SimpleCommandType.DELETE, taskList);
         int digit = Integer.parseInt(input);
-        Task current = tasks.get(digit - 1);
-        tasks.delete(digit - 1);
-        storage.updateFile(tasks);
-        return ui.deleteTask(current, tasks.size());
+        Task current = taskList.get(digit - 1);
+        taskList.delete(digit - 1);
+        storage.updateFile(taskList);
+        return ui.deleteTask(current, taskList.size());
     }
 }

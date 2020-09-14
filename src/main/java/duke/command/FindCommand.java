@@ -24,20 +24,20 @@ public class FindCommand extends Command {
     /**
      * Finds all matching tasks based on the given user input.
      *
-     * @param tasks Task List object.
+     * @param taskList TaskList object.
      * @param ui User Interface object.
      * @param storage Storage object.
      * @throws EmptyFindException If no task matches the user input.
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws EmptyFindException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws EmptyFindException {
         if (input.isEmpty()) {
             throw new EmptyFindException();
         }
-        TaskList taskList = tasks.matchAll(input);
-        if (taskList.isEmpty()) {
+        TaskList outPutList = taskList.matchAll(input);
+        if (outPutList.isEmpty()) {
             return ui.emptyFind(input);
         } else {
-            return ui.showTaskList(taskList, "matching ");
+            return ui.showTaskList(outPutList, "matching ");
         }
     }
 }

@@ -59,7 +59,7 @@ public abstract class Task implements Comparable<Task> {
     /**
      * Retrieves the status of the Task.
      *
-     * @return True iff task is done, false otherwise.
+     * @return True if and only if task is done, false otherwise.
      */
     public boolean isDone() {
         return isDone;
@@ -111,10 +111,10 @@ public abstract class Task implements Comparable<Task> {
     }
 
     /**
-     * Returns true iff the task description contains the query word, false otherwise.
+     * Returns true if and only if the task description contains the query word, false otherwise.
      *
      * @param query Query word.
-     * @return true iff task description contains the query.
+     * @return True if and only if task description contains the query.
      */
     public boolean match(String query) {
         return description.contains(query);
@@ -139,5 +139,20 @@ public abstract class Task implements Comparable<Task> {
     @Override
     public int compareTo(Task otherTask) {
         return this.dateTime.compareTo(otherTask.dateTime);
+    }
+
+    /**
+     * Checks if this task has the same description and time as the other task.
+     *
+     * @param object Other task to check.
+     * @return True if this task is equal to the other task.
+     */
+    @Override
+    public boolean equals(Object object) {
+        assert object instanceof Task;
+        Task otherTask = (Task) object;
+        boolean hasSameDescription = this.description.equals(otherTask.description);
+        boolean hasSameTime = this.dateTime.isEqual(otherTask.dateTime);
+        return hasSameDescription && hasSameTime;
     }
 }

@@ -12,14 +12,14 @@ public class SortCommand extends Command {
     /**
      * Executes the sorting of tasks in the {@code TaskList}.
      *
-     * @param tasks Task List object.
+     * @param taskList TaskList object.
      * @param ui User Interface object.
      * @param storage Storage object.
      * @return Message to notify that the list has been sorted.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
-        tasks.sort();
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        taskList.sort();
         return ui.sortMessage();
     }
 }

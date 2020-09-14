@@ -17,7 +17,7 @@ public class Duke {
 
     private final Ui ui;
     private final Storage storage;
-    private final TaskList tasks;
+    private final TaskList taskList;
 
     /**
      * Initializes the duke backend.
@@ -25,7 +25,7 @@ public class Duke {
     public Duke() {
         this.ui = new Ui();
         this.storage = new Storage();
-        this.tasks = new TaskList(storage.getTasks());
+        this.taskList = new TaskList(storage.getTasks());
     }
 
     /**
@@ -73,7 +73,7 @@ public class Duke {
         try {
             Command command = Parser.parse(input);
             checkForExit(command);
-            return command.execute(tasks, ui, storage);
+            return command.execute(taskList, ui, storage);
         } catch (DukeException e) {
             return e.getMessage();
         }

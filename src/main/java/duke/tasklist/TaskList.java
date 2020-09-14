@@ -86,10 +86,20 @@ public class TaskList {
     /**
      * Checks if the task list is empty.
      *
-     * @return True iff task list is empty, false otherwise.
+     * @return True if and only if task list is empty, false otherwise.
      */
     public boolean isEmpty() {
         return tasks.isEmpty();
+    }
+
+    /**
+     * Returns true if this task list contains the specified task.
+     *
+     * @param task Task whose presence in this list is to be tested.
+     * @return {@code True} if this list contains the specified task.
+     */
+    public boolean contains(Task task) {
+        return tasks.contains(task);
     }
 
     /**
