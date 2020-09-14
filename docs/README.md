@@ -13,7 +13,7 @@ Roger is a **desktop app for managing tasks, optimised for use via a Command Lin
     1. Deadline: `deadline`
     1. Event: `event`
 1. Mark tasks as done: `done`
-1. Delete tasks: `delete` 
+1. Delete tasks: `delete`
 1. List tasks: `list`
 
 ## Usage
@@ -53,15 +53,15 @@ event meet auntie hersha /at 2020-10-20
 Expected outcome:
 ```
 Uncle Roger add task:
-[T][✘] make fried rice
+    [T][✘] make fried rice
 Now you have 1 task(s) in the list lah!
 
 Uncle Roger add task:
-[D][✘] upload youtube video (by: Sep 29, 2020)
+    [D][✘] upload youtube video (by: Sep 29, 2020)
 Now you have 2 task(s) in the list lah!
 
 Uncle Roger add task:
-[E][✘] meet auntie hersha (at: Oct 20 2020)
+    [E][✘] meet auntie hersha (at: Oct 20 2020)
 Now you have 3 task(s) in the list lah!
 ```
 
@@ -82,9 +82,9 @@ list
 Expected outcome:
 ```
 Here the list lah:
-1.[T][✘] make fried rice
-2.[D][✘] upload youtube video (by: Sep 29, 2020)
-3.[E][✘] meet auntie hersha (at: Oct 20 2020)
+    1.[T][✘] make fried rice
+    2.[D][✘] upload youtube video (by: Sep 29, 2020)
+    3.[E][✘] meet auntie hersha (at: Oct 20 2020)
 ```
 
 ### `done` - Marking a task as done
@@ -104,7 +104,7 @@ done 1
 Expected outcome:
 ```
 Uncle Roger mark this task done:
-[T][O] make fried rice
+    [T][O] make fried rice
 ```
 
 ### `delete` - Deleting a task
@@ -112,8 +112,8 @@ Deletes a task.
 
 Format:
 ```
-// delete the task with INDEX
-delete INDEX
+// delete the task index I
+delete I
 ```
 
 Example usage:
