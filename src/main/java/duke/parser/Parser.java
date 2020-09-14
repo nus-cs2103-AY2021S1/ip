@@ -17,7 +17,7 @@ import src.main.java.duke.commands.HelpCommand;
 import src.main.java.duke.commands.IncorrectCommand;
 import src.main.java.duke.commands.ListCommand;
 import src.main.java.duke.commands.MarkDoneCommand;
-import src.main.java.duke.commands.UpdatedescriptionCommand;
+import src.main.java.duke.commands.UpdateCommand;
 
 /**
  * Represents a parser that parses user input.
@@ -79,10 +79,13 @@ public class Parser {
             return prepareMarkDone(arguments);
         case FindCommand.COMMAND_WORD:
             return prepareFind(arguments);
-        case UpdatedescriptionCommand.COMMAND_WORD:
+        case UpdateCommand.COMMAND_WORD:
             return prepareUpdateDescription(arguments);
-        default:
+        case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+        default:
+            return new IncorrectCommand("☹ OOPS!!! Incorrect command!!! "
+                   + "Type 'help' to find out more");
         }
     }
 
@@ -134,10 +137,10 @@ public class Parser {
         // Validate arg string format
         if (!matcher.matches()) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    UpdatedescriptionCommand.MESSAGE_USAGE));
+                    UpdateCommand.MESSAGE_USAGE));
         }
 
-        return new UpdatedescriptionCommand(matcher.group("description"), Integer.valueOf(matcher.group("index")));
+        return new UpdateCommand(matcher.group("description"), Integer.valueOf(matcher.group("index")));
     }
 
     /**

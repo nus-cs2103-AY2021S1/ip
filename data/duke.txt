@@ -1,6 +1,6 @@
 E  | 0 | asdfa asdfasd | 2019-02-12 18:00
-E  | 0 | asdfasd fadsfads | 2019-02-12 18:00
-T  | 0 | help
+E  | 0 | asdfasdf asdfadsf | 2019-02-12 18:00
+T  | 0 | asdfasdf
 T  | 0 | asdfadf
 T  | 0 | aldskfmaklsdf
 T  | 0 | alkdsfmaskldf
@@ -12,3 +12,4 @@ T  | 0 | a
 T  | 0 | asd
 T  | 0 | asdfasdf asdfasdf
 T  | 0 | asd
+T  | 0 | adsasdf

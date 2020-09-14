@@ -22,7 +22,7 @@ public class Main extends Application {
         ap.showWelcomeMessage();
         Scene scene = new Scene(ap);
         stage.setScene(scene);
-        stage.setTitle("Best 2103/2103T bot");
+        stage.setTitle("KirbyBot");
         try {
             StorageFile storage = new StorageFile();
             ap.setDuke(storage.load().setStorageFile(storage));

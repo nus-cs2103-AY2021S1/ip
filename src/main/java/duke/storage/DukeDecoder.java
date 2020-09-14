@@ -55,7 +55,6 @@ public class DukeDecoder {
         String[] inputList = input.split("\\|");
         if (!(Pattern.matches(TODO_REGEX, input.trim()) | Pattern
                 .matches(DEADLINE_REGEX, input.trim()))) {
-            System.out.println("I'm sorry, but I don't know what that means :-(");
         }
 
         String letterCommand = inputList[0].trim();
@@ -73,7 +72,7 @@ public class DukeDecoder {
             newTask.markAsDoneWithoutPrint();
             break;
         default:
-            System.out.println("I'm sorry, but I don't know what that means :-(");
+            System.out.println("There's something wrong with decoding the file");
         }
         return newTask;
     }
