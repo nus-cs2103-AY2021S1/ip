@@ -5,6 +5,7 @@ import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -24,6 +25,7 @@ public class Main extends Application {
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.setTitle("C-3PO");
+            stage.getIcons().add(new Image(Main.class.getResourceAsStream( "/images/icon.png" )));
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
