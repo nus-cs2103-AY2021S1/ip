@@ -7,8 +7,8 @@ import java.time.LocalDate;
  * This task has a starting date and ending date.
  */
 public class EventTask extends Task {
-    private LocalDate startDate;
-    private LocalDate endDate;
+    private final LocalDate startDate;
+    private final LocalDate endDate;
 
     /**
      * Constructs an event task with the given <code>summary</code>,
@@ -40,24 +40,6 @@ public class EventTask extends Task {
     }
 
     /**
-     * Gets the starting date of this event task.
-     *
-     * @return Starting date of this event task.
-     */
-    public LocalDate getStartDate() {
-        return startDate;
-    }
-
-    /**
-     * Gets the ending date of this event task.
-     *
-     * @return Ending date of this event task.
-     */
-    public LocalDate getEndDate() {
-        return endDate;
-    }
-
-    /**
      * Returns a string representation of this event task.
      *
      * @return String representation of this event task.
@@ -65,5 +47,15 @@ public class EventTask extends Task {
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (from: " + getEventDuration() + ")";
+    }
+
+    /**
+     * Returns a string representation of this task for storage in hard disk.
+     *
+     * @return String representation of this task for storage in hard disk.
+     */
+    public String toStorageString() {
+        return super.toStorageString()
+                + " /at " + startDate + " " + endDate;
     }
 }

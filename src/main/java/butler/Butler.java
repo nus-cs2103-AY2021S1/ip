@@ -8,7 +8,7 @@ import butler.io.Ui;
 import butler.task.TaskList;
 
 /**
- * Represents a butler that manages a list of tasks for the user.
+ * Represents the main logic of a butler that manages a list of tasks for the user.
  *
  * Butler maintains a list of tasks across different sessions.
  * Data of the list of tasks are saved in hard disk within <code>filePath</code>
@@ -16,9 +16,9 @@ import butler.task.TaskList;
  */
 public class Butler {
 
-    private Storage storage;
+    private final Storage storage;
     private TaskList tasks;
-    private Ui ui;
+    private final Ui ui;
 
     /**
      * Constructs a butler that stores tasks in the <code>filePath</code>.
@@ -36,14 +36,17 @@ public class Butler {
     }
 
     /**
-     * Gets a response message.
+     * Gets a response message to the <code>input</code>.
+     *
+     * @param input User input.
+     * @return Response message to user input.
      */
     public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
             return c.execute(tasks, ui, storage);
         } catch (ButlerException e) {
-            return ui.showError(e.getMessage());
+            return ui.showErrorMessage(e.getMessage());
         }
     }
 }

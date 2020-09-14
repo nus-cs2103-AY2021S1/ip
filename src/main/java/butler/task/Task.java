@@ -8,11 +8,11 @@ package butler.task;
 public abstract class Task {
 
     protected TaskType taskType;
-    private String summary;
+    private final String summary;
     private boolean isComplete;
 
     /**
-     * Constructs an incomplete task with the given <code>summmary</code>.
+     * Constructs an incomplete task with the given <code>summary</code>.
      *
      * @param summary Summary of this task.
      */
@@ -32,24 +32,6 @@ public abstract class Task {
     }
 
     /**
-     * Gets the boolean completion status of this task.
-     *
-     * @return <code>true</code> if this task is complete else <code>false</code>
-     */
-    public boolean isComplete() {
-        return isComplete;
-    }
-
-    /**
-     * Gets the task type of this task.
-     *
-     * @return Task type.
-     */
-    public TaskType getTaskType() {
-        return taskType;
-    }
-
-    /**
      * Marks this task as complete.
      */
     public void markComplete() {
@@ -63,6 +45,16 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        return (isComplete ? "[Y]" : "[N]") + " " + getSummary();
+        return (isComplete ? "[Y]" : "[N]") + " " + summary;
+    }
+
+    /**
+     * Returns a string representation of this task for storage in hard disk.
+     *
+     * @return String representation of this task for storage in hard disk.
+     */
+    public String toStorageString() {
+        return (isComplete ? "complete" : "incomplete") + " "
+                + taskType.toString() + " " + summary;
     }
 }

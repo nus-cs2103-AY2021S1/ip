@@ -6,7 +6,7 @@ import java.time.LocalDate;
  * Represents a task with a deadline.
  */
 public class DeadlineTask extends Task {
-    private LocalDate deadline;
+    private final LocalDate deadline;
 
     /**
      * Constructs a deadline task with the given <code>summary</code>
@@ -28,15 +28,6 @@ public class DeadlineTask extends Task {
     }
 
     /**
-     * Gets the deadline of this deadline task.
-     *
-     * @return Deadline of this deadline task.
-     */
-    public LocalDate getDeadline() {
-        return deadline;
-    }
-
-    /**
      * Returns a string representation of this deadline task.
      *
      * @return String representation of this deadline task.
@@ -44,5 +35,15 @@ public class DeadlineTask extends Task {
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + getDeadlineString() + ")";
+    }
+
+    /**
+     * Returns a string representation of this task for storage in hard disk.
+     *
+     * @return String representation of this task for storage in hard disk.
+     */
+    public String toStorageString() {
+        return super.toStorageString()
+                + " /by " + deadline;
     }
 }
