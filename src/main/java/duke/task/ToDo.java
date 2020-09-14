@@ -3,8 +3,6 @@ package duke.task;
 import duke.command.InvalidCommandException;
 import duke.component.Parser;
 
-import java.time.LocalDate;
-
 /**
  * Represents a todo task that contains a description.
  */

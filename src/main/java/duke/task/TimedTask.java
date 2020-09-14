@@ -1,14 +1,18 @@
 package duke.task;
 
+import java.time.LocalDate;
+
 import duke.command.InvalidCommandException;
 import duke.component.Storage;
-
-import java.time.LocalDate;
 
 public abstract class TimedTask extends Task {
     protected int repeat;
     protected LocalDate lastDone;
 
+    /**
+     * Creates a TimedTask with the given description and initialize the repeat period to be 0 days, i.e. not repeat.
+     * @param description
+     */
     public TimedTask(String description) {
         super(description);
         repeat = 0;
@@ -21,7 +25,7 @@ public abstract class TimedTask extends Task {
      * @return the output notice string of the snooze command
      * @throws InvalidCommandException if the input format, or the task index and the time is invalid
      */
-    abstract public String snoozeTo(String[] input) throws InvalidCommandException;
+    public abstract String snoozeTo(String[] input) throws InvalidCommandException;
 
     /**
      * Sets the task to repeat regularly.
@@ -29,7 +33,7 @@ public abstract class TimedTask extends Task {
      * @return the output notice string of the repeat command
      * @throws InvalidCommandException if the task does not have a fixed time yet
      */
-    abstract public String repeat(int n) throws InvalidCommandException;
+    public abstract String repeat(int n) throws InvalidCommandException;
 
     protected String repeatMessage() {
         if (repeat == 0) {
@@ -41,7 +45,7 @@ public abstract class TimedTask extends Task {
 
     protected String lastDoneMessage() {
         if (isDone) {
-            return Storage.splitter + lastDone;
+            return Storage.SPLITTER + lastDone;
         } else {
             return "";
         }

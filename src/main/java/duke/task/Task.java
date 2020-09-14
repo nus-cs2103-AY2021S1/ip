@@ -46,7 +46,7 @@ public abstract class Task {
      */
     public String outputToFile() {
         int done = isDone ? 1 : 0;
-        return Storage.splitter + done + Storage.splitter + description;
+        return Storage.SPLITTER + done + Storage.SPLITTER + description;
     }
 
     /**

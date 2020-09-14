@@ -60,7 +60,7 @@ public class ActualStorage implements Storage {
     }
 
     private void readNextTask(Scanner sc) {
-        String[] taskInfo = sc.nextLine().split(Storage.splitter);
+        String[] taskInfo = sc.nextLine().split(Storage.SPLITTER);
         String taskType = taskInfo[0];
         try {
             Task toAdd = getTask(taskType, taskInfo);
