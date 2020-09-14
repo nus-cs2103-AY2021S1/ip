@@ -18,3 +18,5 @@ text-ui-test/EXPECTED-UNIX.TXT
 
 gradle/
 gradlew*
+
+tasks.ser
