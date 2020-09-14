@@ -1,7 +1,7 @@
 /** Solution below adapted from https://docs.oracle.com/javafx/2/get_started/css.htm */
 
 #dialogContainer {
-    -fx-background-image: url("../images/PiplupBackground3.png");
+    -fx-background-image: url("../images/PiplupBackground.png");
 }
 
 .label {
