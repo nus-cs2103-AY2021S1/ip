@@ -60,8 +60,8 @@ public class Ui {
                 + "todo [taskname]\n"
                 + "deadline [taskname] /by [yyyy-MM-dd HHmm]\n"
                 + "event [taskname] /at [yyy-MM-dd HHmm]\n"
-                + "delete [index or all]\n"
-                + "update [index] [name or time] [input]\n"
+                + "delete [index or 'all']\n"
+                + "update [index] ['name' or 'time'] [input]\n"
                 + "bye\n";
     }
 
