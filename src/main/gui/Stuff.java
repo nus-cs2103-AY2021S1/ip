@@ -155,11 +155,9 @@ public class Stuff extends Application {
         }
 
         ImageView userImageView = new ImageView(userImage);
-        ImageView stuffLoadingImageView = new ImageView(stuffImage);
         ImageView stuffImageView = new ImageView(stuffImage);
 
         userImageView.setClip(new Circle(50, 50, 50));
-        stuffLoadingImageView.setClip(new Circle(50, 50, 50));
         stuffImageView.setClip(new Circle(50, 50, 50));
 
         String[] splitInput = input.trim().split(" ");
