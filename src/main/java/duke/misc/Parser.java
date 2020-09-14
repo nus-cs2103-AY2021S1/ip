@@ -1,14 +1,14 @@
 package duke.misc;
 
 import static duke.misc.Constants.BYE;
-import static duke.misc.Constants.LIST;
-import static duke.misc.Constants.FIND;
-import static duke.misc.Constants.DONE;
-import static duke.misc.Constants.DELETE;
-import static duke.misc.Constants.TODO;
 import static duke.misc.Constants.DEADLINE;
+import static duke.misc.Constants.DELETE;
+import static duke.misc.Constants.DONE;
 import static duke.misc.Constants.EVENT;
+import static duke.misc.Constants.FIND;
 import static duke.misc.Constants.HELP;
+import static duke.misc.Constants.LIST;
+import static duke.misc.Constants.TODO;
 
 import java.io.IOException;
 import java.util.Arrays;
