@@ -27,7 +27,7 @@ public class Ui {
      * Prints greeting message.
      */
     public String getGreeting() {
-        String intro1 = "Hello! I'm Duke \n";
+        String intro1 = "Hello! I'm Duke, your tasks manager.\n";
         String intro2 = "What can I do for you? \n";
         String info = "Here's a list of commands to help you get started: \n"
                 + "1. todo DESCRIPTION \n2. deadline DESCRIPTION /by DATE [TIME] \n"
