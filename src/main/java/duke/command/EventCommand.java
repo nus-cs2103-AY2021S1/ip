@@ -76,7 +76,7 @@ public class EventCommand extends Command {
 
         String resultSb = String.format("%s\n %s\n", ui.showLine(), "Got it. I've added this task:") + "\t"
                 + taskList.retrieveTask(taskList.sizeOfList() - 1) + String.format(
-                "Now you have %o tasks in list.\n", taskList.sizeOfList()) + ui.showLine();
+                "\nNow you have %o tasks in list.\n", taskList.sizeOfList()) + ui.showLine();
         Ui.printString(resultSb);
 
         storage.write(taskList);
