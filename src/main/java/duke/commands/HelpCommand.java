@@ -19,8 +19,8 @@ public class HelpCommand extends Command {
             DeleteCommand.MESSAGE_USAGE,
             MarkDoneCommand.MESSAGE_USAGE,
             HelpCommand.MESSAGE_USAGE,
-            ExitCommand.MESSAGE_USAGE,
-            UpdatedescriptionCommand.MESSAGE_USAGE};
+            UpdatedescriptionCommand.MESSAGE_USAGE,
+            ExitCommand.MESSAGE_USAGE};
 
         String resultString = "";
 

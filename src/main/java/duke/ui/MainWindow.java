@@ -55,12 +55,21 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
+     * Shows error message to the user
+     */
+    public void showErrorMessage(String errorMessage) {
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(errorMessage, dukeImage)
+        );
+    }
+
+    /**
      * Shows welcome message to the user
      */
     public void showWelcomeMessage() {
         dialogContainer.getChildren().addAll(
-                src.main.java.duke.ui.DialogBox.getUserDialog("Hello! I'm Best2103/TBot \n"
-                        + "What can I do for you?", dukeImage)
+                src.main.java.duke.ui.DialogBox.getUserDialog("Hello! I'm KirbyBot! \n"
+                        + "Type 'help' to start owo.", dukeImage)
         );
     }
 

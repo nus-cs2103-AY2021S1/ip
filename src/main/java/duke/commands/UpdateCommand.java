@@ -1,19 +1,20 @@
 package src.main.java.duke.commands;
 
+import src.main.java.duke.commons.Messages;
 import src.main.java.duke.data.task.Task;
 
 /**
  * Represents a command that updates the description of the task.
  */
-public class UpdatedescriptionCommand extends Command {
+public class UpdateCommand extends Command {
 
-    public static final String COMMAND_WORD = "updatedescription";
+    public static final String COMMAND_WORD = "update";
 
     // Message to add
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Update task description in tasklist. "
-            + "\nParameters: update index description \n"
-            + "Example: " + COMMAND_WORD
-            + " updatedescription 1 read my homework";
+            + "\nParameters: index description \n"
+            + "Example: \n"
+            + " update 1 read my homework";
 
     public static final String MESSAGE_SUCCESS = "Task updated: %1$s";
 
@@ -24,7 +25,7 @@ public class UpdatedescriptionCommand extends Command {
      * @param newDescription new description to be updated.
      * @param index index of the task to be updated.
      */
-    public UpdatedescriptionCommand(String newDescription, int index) {
+    public UpdateCommand(String newDescription, int index) {
         super(index);
         this.newDescription = newDescription;
     }
@@ -35,9 +36,9 @@ public class UpdatedescriptionCommand extends Command {
             Task updatedTask = duke.updateDescription(newDescription, getTargetIndex());
             return new CommandResult(String.format(MESSAGE_SUCCESS, updatedTask));
         } catch (IndexOutOfBoundsException ie) {
-            return new CommandResult(src.main.java.duke.commons.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+            return new CommandResult(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         } catch (Exception e) {
-            return new CommandResult(src.main.java.duke.commons.Messages.MESSAGE_TASK_NOT_IN_TASKLIST);
+            return new CommandResult(Messages.MESSAGE_TASK_NOT_IN_TASKLIST);
         }
     }
 }

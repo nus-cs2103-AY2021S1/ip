@@ -17,8 +17,8 @@ import src.main.java.duke.data.exception.IllegalValueException;
  */
 public class StorageFile {
 
-    private static String STORAGE_DIRECTORY = System.getProperty("user.dir") + "/data";
-    private static String TEXT_FILE_NAME = "/duke.txt";
+    private static final String STORAGE_DIRECTORY = System.getProperty("user.dir") + "/data";
+    private static final String TEXT_FILE_NAME = "/duke.txt";
 
     /** Default file path used if the user doesn't provide the file name. */
     public static final String DEFAULT_STORAGE_FILEPATH = STORAGE_DIRECTORY + TEXT_FILE_NAME;
