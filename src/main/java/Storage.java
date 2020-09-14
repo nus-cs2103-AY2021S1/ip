@@ -10,7 +10,7 @@ import java.util.stream.Stream;
  */
 public class Storage {
 
-    private Path path;
+    private final Path path;
 
     public Storage(Path path) {
         this.path = path;
@@ -34,22 +34,22 @@ public class Storage {
             Stream<Task> taskStream = Files.lines(path).map(item -> {
 
                 String[] dataArray = item.split("\\|");
-                String type = dataArray[0].trim();
+                String taskType = dataArray[0].trim();
                 boolean isDone = dataArray[1].trim().equals("1");
-                String description = dataArray[2].trim();
+                String taskDescription = dataArray[2].trim();
                 String time = dataArray[3].trim();
 
                 Task task = null;
 
-                switch (type) {
+                switch (taskType) {
                 case "T":
-                    task = new Todo(description, isDone);
+                    task = new Todo(taskDescription, isDone);
                     break;
                 case "D":
-                    task = new Deadline(description, isDone, LocalDate.parse(time));
+                    task = new Deadline(taskDescription, isDone, LocalDate.parse(time));
                     break;
                 case "E":
-                    task = new Event(description, isDone, LocalDate.parse(time));
+                    task = new Event(taskDescription, isDone, LocalDate.parse(time));
                     break;
                 default:
                     break;
@@ -58,10 +58,10 @@ public class Storage {
 
             });
 
-            ArrayList<Task> taskList = new ArrayList<>();
-            taskStream.forEach(taskList::add);
+            ArrayList<Task> tasks = new ArrayList<>();
+            taskStream.forEach(tasks::add); // add tasks from the hard disk to the arrayList
 
-            return taskList;
+            return tasks;
 
 
         } catch (IOException e) {
@@ -80,11 +80,8 @@ public class Storage {
 
         for (Task tsk : taskList) {
             String time = tsk.getTime() == null ? "-" : tsk.getTime().toString();
-            String entry = tsk.getType() + " | " +
-                    tsk.getStatus() + " | " +
-                    tsk.getDescription() + " | " +
-                    time  +
-                    System.lineSeparator();
+            String entry = tsk.getType() + " | " + tsk.getStatus() + " | " +
+                    tsk.getDescription() + " | " + time  + System.lineSeparator();
             message = message.concat(entry);
         }
 

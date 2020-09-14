@@ -5,7 +5,7 @@ import java.time.LocalDate;
  */
 public class Deadline extends Task {
 
-    private String type;
+    private final String type;
 
     /**
      * Constructor.

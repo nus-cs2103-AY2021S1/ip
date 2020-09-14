@@ -1,11 +1,11 @@
 import java.util.ArrayList;
 
 /**
- * A class representing the tasks in a list.
+ * A class representing the current tasks in a list.
  */
 public class TaskList {
 
-    private ArrayList<Task> tasks;
+    private final ArrayList<Task> tasks;
 
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;

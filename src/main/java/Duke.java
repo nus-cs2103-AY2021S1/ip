@@ -1,17 +1,15 @@
 import java.nio.file.Path;
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 /**
- * The main class with the chat bot dealing with the user's inputs.
+ * The class with the chat bot dealing with the user's inputs.
  */
 public class Duke {
 
-    private Storage storage;
+    private final Storage storage;
     private TaskList taskList;
-    private Ui ui;
+    private final Ui ui;
     private static final String BYE = "bye";
 
     public Duke(String filePath) {
@@ -45,44 +43,23 @@ public class Duke {
 
         switch (first) {
         case "done":
-            int id = Integer.parseInt(last) - 1;
-            String changed = taskList.getTask(id).getDescription();
-            String type = taskList.getTask(id).getType();
-            taskList.getTask(id).markAsDone();
-            storage.saveTasks(taskList.getTasks());
-            return ui.doneTask() + "[" + type + "][" + "\u2713" + "]" + changed + "\n";
+
+            return Parser.parseDone(last, taskList, storage, ui);
 
         case "todo":
-            try {
-                Todo todo = Todo.makeToDo(last, false);
-                taskList.addTask(todo);
-                storage.saveTasks(taskList.getTasks());
-                return ui.addTask() + todo.toString() + "\n" + ui.showNumberOfTasks(taskList.getTasks());
-            } catch (DukeException e) {
-                return "Todo cannot be empty";
-            }
 
-        case "deadline": {
-            String job = last.split("/by")[0].trim();
-            String time = last.split("/by")[1].trim();
-            LocalDate date = LocalDate.parse(time);
-            Deadline work = new Deadline(job + " (by: " + formatter.format(date) + ")", false, date);
-            taskList.addTask(work);
-            storage.saveTasks(taskList.getTasks());
-            return ui.addTask() + work.toString() + "\n" + ui.showNumberOfTasks(taskList.getTasks());
-        }
+            return Parser.parseToDo(last, taskList, storage, ui);
 
-        case "event": {
-            String job = last.split("/at")[0].trim();
-            String time = last.split("/at")[1].trim();
-            LocalDate date = LocalDate.parse(time);
-            Event work = new Event(job + " (at: " + formatter.format(date) + ")", false, date);
-            taskList.addTask(work);
-            storage.saveTasks(taskList.getTasks());
-            return ui.addTask() + work.toString() + "\n" + ui.showNumberOfTasks(taskList.getTasks());
-        }
+        case "deadline":
 
-        case "find": {  // finds the task even if the keyword matches the task partially
+            return Parser.parseDeadline(last, taskList, storage, ui, formatter);
+
+        case "event":
+
+            return Parser.parseEvent(last, taskList, storage, ui, formatter);
+
+        case "find":   // finds the task even if the keyword matches the task partially
+
             ArrayList<Task> findTasks = new ArrayList<>();
             for (Task task : taskList.getTasks()) {
                 if (task.getDescription().contains(last)) {
@@ -90,29 +67,22 @@ public class Duke {
                 }
             }
             return ui.printMatchingTasks(findTasks);
-        }
 
-        case "delete": {
-            int index = Integer.parseInt(last) - 1;
-            String deleted = taskList.getTask(index).getDescription();
-            String deletedType = taskList.getTask(index).getType();
-            String status = taskList.getTask(index).getStatusIcon();
-            Task removedTask = taskList.removeTask(index);
-            storage.saveTasks(taskList.getTasks());
 
-            return ui.removeTask() + "[" + deletedType + "][" + status + "] "
-                    + deleted + "\n" + ui.showNumberOfTasks(taskList.getTasks());
+        case "delete":
 
-        }
+            return Parser.parseDelete(last, taskList, storage, ui);
 
-        case "list": {
+        case "list":
+
             return ui.showList(taskList.getTasks());
-        }
 
         case BYE:
+
             return ui.exit();
 
         default:
+
             return ui.invalidInput();
         }
     }

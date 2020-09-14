@@ -26,10 +26,6 @@ public class Task {
         this.isDone = true;
     }
 
-    public void addTask(String task) {
-        System.out.println("added : " + task);
-    }
-
     /**
      * Gets the task description.
      * @return the description of the task.
