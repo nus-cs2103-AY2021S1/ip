@@ -92,6 +92,13 @@ public class Parser {
         if (input.split("/by").length < 2) {
             throw new InvalidDeadlineException("OOPS!!! please provide me with the"
                     + " duration of the task to be completed");
+        } else {
+            int timeLength = isDone[isDone.length - 1].length();
+            int dateLength = isDone[isDone.length - 2].length();
+            if (timeLength < 4 || dateLength < 10) {
+                throw new InvalidDeadlineException("Fail to add task :( . "
+                        + "Please check the time and date format again");
+            }
         }
         int index = input.indexOf("/by");
         String task = input.substring(firstChar.length() + 1, index);
@@ -113,6 +120,13 @@ public class Parser {
         if (input.split("/at").length < 2) {
             throw new InvalidDeadlineException("OOPS!!! please provide me with the"
                     + " time of the task to be completed");
+        } else {
+            int timeLength = isDone[isDone.length - 1].length();
+            int dateLength = isDone[isDone.length - 2].length();
+            if (timeLength < 4 || dateLength < 10) {
+                throw new InvalidDeadlineException("Fail to add task :( . "
+                        + "Please check the time and date format again");
+            }
         }
         int index = input.indexOf("/at");
         String task = input.substring(firstChar.length() + 1, index);
