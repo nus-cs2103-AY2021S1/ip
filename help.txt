@@ -1,4 +1,4 @@
-Visit https://github.com/mgiang2015/ip/blob/master/docs/README.md for more details.
+Visit https://mgiang2015.github.io/ip/ for more details.
 Quick Help:
     todo [task name], deadline [task name] /by [YYYY-MM-DD] [HH:MM], event [task name] /at [details]
     list, done [task number], delete [task number], help
