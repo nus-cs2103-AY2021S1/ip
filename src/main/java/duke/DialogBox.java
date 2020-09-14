@@ -50,11 +50,11 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox("You: " + text, img);
+        return new DialogBox("You:\n" + text, img);
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox("Bob say word: " + text, img);
+        var db = new DialogBox("Bob say word:\n\n" + text, img);
         db.flip();
         return db;
     }
