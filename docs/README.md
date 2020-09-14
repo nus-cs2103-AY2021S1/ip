@@ -1,6 +1,5 @@
 # User Guide
 Duke is a chatbot that manages your tasks. You can use Duke to organize tasks that you need to do, deadlines and events .
-## Features 
 
 ### Quickstart
 1. Make sure you have Java 11 or above installed in your computer
