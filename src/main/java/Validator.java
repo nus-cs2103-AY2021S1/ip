@@ -7,8 +7,6 @@ import java.util.Objects;
  */
 public class Validator {
 
-    // todo: fix ambiguous method call for requireNonNull(null) <- not sure which method to call
-
     public static void requireNonNull(Object object) {
         Objects.requireNonNull(object);
     }

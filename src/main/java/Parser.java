@@ -2,7 +2,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.MissingFormatArgumentException;
 
 /**
  * Class to handle parsing of input into commands.
@@ -16,8 +15,10 @@ public class Parser {
      * @return Command after being parsed.
      * @throws EmptyBodyException    If command in string form is empty.
      * @throws UnknownInputException If command in string form is not a recognised command.
+     * @throws  MissingInputException If required parameters are not supplied.
      */
-    public static Command parse(String textCommand) throws EmptyBodyException, UnknownInputException {
+    public static Command parse(String textCommand) throws EmptyBodyException,
+            UnknownInputException, MissingInputException {
         String[] words = textCommand.split(" ", 2);
         String firstWord = words[0];
         String remaining = words.length > 1 ? words[1] : "";
@@ -68,8 +69,10 @@ public class Parser {
      * @return Command after being parsed.
      * @throws EmptyBodyException    If command in string form is empty.
      * @throws UnknownInputException If command in string form is not a recognised command.
+     * @throws MissingInputException If a parameter is missing.
      */
-    public static Command parseNotesCommand(String command) throws UnknownInputException, EmptyBodyException {
+    public static Command parseNotesCommand(String command)
+            throws UnknownInputException, EmptyBodyException, MissingInputException {
         Validator.requireNonNull(command);
 
         String[] words = command.split(" ", 2);
@@ -116,7 +119,7 @@ public class Parser {
                     break;
                 }
                 default: {
-                    throw new UnknownInputException("Unknown parameter name " + entry.getKey());
+                    throw new UnknownInputException(entry.getKey(), "a parameter name");
                 }
                 }
             }
@@ -129,7 +132,7 @@ public class Parser {
                 return new AddNoteCommand(title, description, priority);
             } catch (NullPointerException e) {
                 e.printStackTrace();
-                throw new MissingFormatArgumentException("");
+                throw new MissingInputException("a parameter", "title, descripton and priority");
             }
         }
         case "list": {
@@ -143,7 +146,7 @@ public class Parser {
             return new DeleteNoteCommand(taskNumber);
         }
         default: {
-            throw new UnknownInputException("Unknown notes command: " + firstWord);
+            throw new UnknownInputException(firstWord, "a notes command");
         }
         }
 
@@ -173,7 +176,7 @@ public class Parser {
             return Priority.LOW;
         }
         default:
-            throw new UnknownInputException("Unknown priority: " + priority); // todo: change exception name
+            throw new UnknownInputException(priority, "a priority");
         }
     }
 }
