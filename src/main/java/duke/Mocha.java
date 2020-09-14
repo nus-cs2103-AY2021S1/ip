@@ -196,7 +196,10 @@ public class Mocha extends Application {
             } else if (commandNumber == 8) {
                 ArrayList<Task> matchingTasks = parser.getMatchingTasks(tasks);
                 responseReturn = ui.findTask(matchingTasks);
-
+                
+            } else if (commandNumber == 9) {
+                responseReturn = ui.help();
+                
             } else {
                 throw new CommandNotRecognizedException("Oops! I couldn't understand what you mean :(");
             }
