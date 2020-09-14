@@ -16,7 +16,7 @@ public class UiTest {
         System.setOut(new PrintStream(outContent));
 
         String expectedOutput = "Task 1 has been deleted." + System.lineSeparator();
-        ui.showTaskDeleted(1);
+        ui.showTaskIsDeleted(1);
         assertEquals(expectedOutput, outContent.toString());
     }
 }

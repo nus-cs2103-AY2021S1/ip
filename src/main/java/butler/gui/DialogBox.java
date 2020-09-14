@@ -1,4 +1,4 @@
-package butler;
+package butler.gui;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -15,8 +15,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
 /**
- * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
- * containing text from the speaker.
+ * This control represents a dialog box consisting of an ImageView to represent the speaker's face
+ * and a label containing text from the speaker.
  */
 public class DialogBox extends HBox {
     @FXML
@@ -54,10 +54,24 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Creates a dialogue box for the user.
+     * Dialogue box contains text and a profile image.
+     *
+     * @param text Text message.
+     * @param img Profile image.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Creates a dialogue box for butler.
+     * Dialogue box contains text and a profile image.
+     *
+     * @param text Text message.
+     * @param img Profile image.
+     */
     public static DialogBox getButlerDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

@@ -8,25 +8,23 @@ import butler.io.Ui;
 import butler.task.TaskList;
 
 /**
- * Represents a command to mark some tasks as completed.
- * Able to mark multiple tasks as complete.
+ * Represents a command to mark multiple tasks as completed.
  */
 public class CompleteCommand extends Command {
-    private ArrayList<Integer> indexArray;
+    private final ArrayList<Integer> taskIndexList;
 
     /**
-     * Constructs a command to mark some tasks as completed.
-     * Tasks to be marked as completed are specified by <code>indexArray</code>.
-     * <code>indexArray</code> is a list of task indexes.
+     * Constructs a command to mark multiple tasks as completed.
+     * Task indexes are specified by <code>taskIndexList</code>.
      *
-     * @param indexArray List of task indexes to be marked as completed.
+     * @param taskIndexList List of task indexes to be marked as completed.
      */
-    public CompleteCommand(ArrayList<Integer> indexArray) {
-        this.indexArray = indexArray;
+    public CompleteCommand(ArrayList<Integer> taskIndexList) {
+        this.taskIndexList = taskIndexList;
     }
 
     /**
-     * Marks some tasks within the specified <code>taskList</code> as completed.
+     * Marks multiple tasks within the specified <code>taskList</code> as completed.
      * Updates the list of tasks saved in the hard disk and
      * alerts the user that the tasks have been marked as completed.
      *
@@ -34,24 +32,24 @@ public class CompleteCommand extends Command {
      * @param ui User interface to interact with user.
      * @param storage Storage which stores given <code>taskList</code> on hard disk.
      * @return String response of task execution.
-     * @throws ButlerException if an invalid index is given in <code>indexArray</code>
+     * @throws ButlerException if an invalid index is given in <code>taskIndexList</code>
      *                         or an error occurs in saving the list of tasks.
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws ButlerException {
-        String output = "";
-        for (int i : indexArray) {
-            taskList.completeTask(i);
+        StringBuilder output = new StringBuilder();
+        for (int index : taskIndexList) {
+            taskList.completeTask(index);
             storage.storeTaskList(taskList);
-            output += ui.showTaskCompleted(i);
+            output.append(ui.showTaskIsCompleted(index));
         }
-        return output;
+        return output.toString();
     }
 
     /**
-     * Returns a boolean whether this command is an <code>ExitCommand</code>.
+     * Returns true if this command is an <code>ExitCommand</code>.
      *
-     * @return <code>false</code>
+     * @return <code>false</code>.
      */
     @Override
     public Boolean isExit() {
