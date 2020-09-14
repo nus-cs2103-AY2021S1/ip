@@ -1,3 +1,13 @@
+<<<<<<< HEAD:src/main/java/Parser.java
+=======
+package duke;
+
+import java.util.ArrayList;
+import java.util.List;
+import duke_exceptions.*;
+
+
+>>>>>>> master:src/main/java/duke/Parser.java
 public class Parser {
     // constant SPACE and LINE for format purposes
     public static String SPACE = "     ";

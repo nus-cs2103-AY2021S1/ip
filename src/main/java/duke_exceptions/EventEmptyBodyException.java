@@ -1,3 +1,5 @@
+package duke_exceptions;
+
 /**
  * Represents an Event Empty Body Exception. An <code>Event Empty Body
  * Exception</code> object is used when "event" is called without further

@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * Represents a task. A <code>Task</code> object corresponds to
  * a message and a status (whether it is done)

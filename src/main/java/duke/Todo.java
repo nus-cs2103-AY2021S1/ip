@@ -1,29 +1,31 @@
+package duke;
+
 /**
- * Represents a deadline inherited from task. A <code>Deadline</code> object corresponds to
- * a task associated a date as deadline
+ * Represents a toodo inherited from task. A <code>Deadline</code> object corresponds to
+ * a simple task without any constraints on dates
  */
-public class Deadline extends Task {
-    Deadline(String message) {
+public class Todo extends Task {
+    Todo(String message) {
         super(message);
     }
 
-    Deadline(String message, boolean isDone) {
+    Todo(String message, boolean isDone) {
         super(message, isDone);
     }
 
     @Override
     public String getPureTypeLetter() {
-        return "D";
+        return "T";
     }
 
     @Override
     public String getTypeLetter() {
-        return "[D]";
+        return "[T]";
     }
 
     @Override
     public String getPrintMessage() {
-        return Converter.by(getMessage());
+        return getMessage();
     }
 
     @Override
