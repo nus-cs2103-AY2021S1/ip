@@ -190,16 +190,16 @@ DukeBunny data is automatically saved into the TaskList.txt file after any comma
 DukeBunny will always draw the data of the task list from the TaskList.txt file.
 
 ## Command Summary
-Action | Format/Examples
------------- | ------------
-Add Todo | `todo DESCRIPTION` <br> e.g. `todo Buy bread`
-Add deadline | `deadline DESCRIPTION /by DATE TIME` <br> e.g. `deadline Physics Project /by 2020-12-04 1800` 
-Add event | `event DESCRIPTION /AT DATE START_TIME-END_TIME` <br> e.g. `event Family Christmas party /at 2020-12-25 1800-2300`
-View list | `list`
-Mark done | `done INDEX` <br> e.g. `done 1`
-Delete | `delete INDEX` <br> e.g. `delete 1`
-Find tasks (keyword)  | `find KEYWORD` <br> e.g. `find project`
-Find tasks (date) | `finddt DATE` <br> e.g. `finddt 2020-12-25`
-Sort alphabetically | `sort`
-Sort based on date and time | `sortdt`
-Exit | `bye`
+| Action | Format/Examples |
+| ------------- | ------------- |
+| Add Todo | `todo DESCRIPTION` <br> e.g. `todo Buy bread` |
+| Add deadline | `deadline DESCRIPTION /by DATE TIME` <br> e.g. `deadline Physics Project /by 2020-12-04 1800` |
+| Add event | `event DESCRIPTION /AT DATE START_TIME-END_TIME` <br> e.g. `event Family Christmas party /at 2020-12-25 1800-2300` |
+| View list | `list` |
+| Mark done | `done INDEX` <br> e.g. `done 1` |
+| Delete | `delete INDEX` <br> e.g. `delete 1` |
+| Find tasks (keyword)  | `find KEYWORD` <br> e.g. `find project` |
+| Find tasks (date) | `finddt DATE` <br> e.g. `finddt 2020-12-25` |
+| Sort alphabetically | `sort` |
+| Sort based on date and time | `sortdt` |
+| Exit | `bye` |
