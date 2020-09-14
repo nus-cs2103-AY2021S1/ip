@@ -70,3 +70,7 @@ run {
 checkstyle {
     toolVersion = '8.29'
 }
+
+shadowJar {
+    archiveFileName = "Junimo.jar"
+}

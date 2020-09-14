@@ -4,10 +4,14 @@ event book event /at library
 false
 deadline write book /by 2020-12-12
 true
-todo read book
-false
 todo hug me
 true
+todo read book
+true
+event party /at the beach
+false
+deadline do project /by 2020-09-26
+false
 archives
 todo archive this
 false
