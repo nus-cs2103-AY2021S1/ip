@@ -11,10 +11,9 @@ import java.util.Scanner;
 import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
-import duke.task.Tag;
+import duke.task.TagList;
 import duke.task.Task;
 import duke.task.Todo;
-
 
 /**
  * Deals with loading tasks from the file and saving tasks in the file
@@ -79,7 +78,7 @@ public class Storage {
                     if (hasTag) {
                         String [] taskTokens = taskName.split(" @");
                         task = new Todo(taskTokens[0], taskTokens[1]);
-                        Tag.addTagIfNew(taskTokens[1]);
+                        TagList.addTagIfNew(taskTokens[1]);
                     } else {
                         task = new Todo(taskName, "");
                     }
@@ -91,7 +90,7 @@ public class Storage {
                     if (hasTag) {
                         String tag = taskArray[3].split(" @")[1];
                         task = new Deadline(taskName, timeBy, tag);
-                        Tag.addTagIfNew(tag);
+                        TagList.addTagIfNew(tag);
                     } else {
                         task = new Deadline(taskName, timeBy, "");
                     }
@@ -103,7 +102,7 @@ public class Storage {
                     if (hasTag) {
                         String tag = taskArray[3].split(" @")[1];
                         task = new Event(taskName, timeAt, tag);
-                        Tag.addTagIfNew(tag);
+                        TagList.addTagIfNew(tag);
                     } else {
                         task = new Event(taskName, timeAt, "");
                     }

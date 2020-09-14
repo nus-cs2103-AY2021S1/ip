@@ -68,6 +68,12 @@ public class TaskList {
         try {
             Task task = tasks.get(index - 1); // index -1 to match the index in ArrayList
             tasks.remove(index - 1); // index - 1 to match the index in ArrayList
+            if (task.hasTag) {
+                task.tag.decreaseCount();
+                if (task.tag.getCount() < 1) {
+                    TagList.deleteTag(task.tag.getTagName());
+                }
+            }
             reply = Ui.getDeleteMessage(task) + printTotalNumberOfTasks();
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Missing or invalid item number!");
@@ -96,7 +102,7 @@ public class TaskList {
             try {
                 String[] taskTokens = taskName.split(" @");
                 task = new Todo(taskTokens[0], taskTokens[1]);
-                Tag.addTagIfNew(taskTokens[1]);
+                TagList.addTagIfNew(taskTokens[1]);
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new DukeException("Tag cannot be empty!");
             }
@@ -129,7 +135,7 @@ public class TaskList {
         if (hasTag) {
             timeBy = Parser.parseTime(taskTokens[1], true);
             tag = Parser.parseTag(taskTokens[1]);
-            Tag.addTagIfNew(tag);
+            TagList.addTagIfNew(tag);
         } else {
             timeBy = Parser.parseTime(taskTokens[1], false);
         }
@@ -160,7 +166,7 @@ public class TaskList {
         if (hasTag) {
             timeAt = Parser.parseTime(taskTokens[1], true);
             tag = Parser.parseTag(taskTokens[1]);
-            Tag.addTagIfNew(tag);
+            TagList.addTagIfNew(tag);
         } else {
             timeAt = Parser.parseTime(taskTokens[1], false);
         }
@@ -201,7 +207,7 @@ public class TaskList {
      * @throws DukeException DukeException
      */
     public String findTasksWithTag(String queryTag) throws DukeException {
-        if (!Tag.containsTag(queryTag)) {
+        if (TagList.containsTag(queryTag) == -1) {
             throw new DukeException("Tag does not exist!");
         }
         ArrayList<String> matchedTasks = new ArrayList<>();
