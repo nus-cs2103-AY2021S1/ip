@@ -1,65 +1,140 @@
-# Duke project template
+# User Guide of C-3PO
+C-3PO is a droid for human cyborg relations.
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+- [User Guide of C-3PO](#user-guide-of-c-3po)
+  * [Features](#features)
+    + [Add tasks - todo, events and deadlines](#add-tasks---todo--events-and-deadlines)
+    + [Date processing](#date-processing)
+    + [Mark tasks as done](#mark-tasks-as-done)
+    + [List all tasks](#list-all-tasks)
+    + [Delete tasks](#delete-tasks)
+    + [Sort tasks by different properties](#sort-tasks-by-different-properties)
+    + [Save data into local storage](#save-data-into-local-storage)
+  * [Usage](#usage)
+    + [`list` - list all tasks](#-list----list-all-tasks)
+    + [`todo` - add a todo task](#-todo----add-a-todo-task)
+    + [`deadline` - add a deadline task](#-deadline----add-a-deadline-task)
+    + [`event` - add an event task](#-event----add-an-event-task)
+    + [`done` - mark a task as done](#-done----mark-a-task-as-done)
+    + [`delete` - delete a task](#-delete----delete-a-task)
+    + [`find` - find tasks by keywords](#-find----find-tasks-by-keywords)
+    + [`sort` - sort tasks by kind, name or date](#-sort----sort-tasks-by-kind--name-or-date)
+    + [`bye` - save and exit](#-bye----save-and-exit)
 
-## Setting up in Intellij
+## Features 
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+### Add tasks - todo, events and deadlines
+C-3PO can add different types of tasks to your task list, including:
+* `Todo` tasks that have a description for the task;
+* `Event` tasks that have a description, and a date when the events happen.
+* `Deadline` tasks that have a description and a due date.
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project dialog first)
-1. Set up the correct JDK version, as follows:
-   1. Click `Configure` > `Structure for New Projects` and then `Project Settings` > `Project` > `Project SDK`
-   1. If JDK 11 is listed in the drop down, select it. If it is not, click `New...` and select the directory where you installed JDK 11
-   1. Click `OK`
-1. Import the project into Intellij as follows:
-   1. Click `Open or Import`.
-   1. Select the project directory, and click `OK`
-   1. If there are any further prompts, accept the defaults.
-1. After the importing is complete, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()`. If the setup is correct, you should see something like the below:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+### Date processing
+C-3PO can understand date representation of the format `YYYY-MM-DD` and 
+compare multiple dates based on this feature. For date and time which cannot
+be understood by C-3PO, a raw string is used to store the date and time.
 
-## Features implemented
+### Mark tasks as done
+C-3PO can mark tasks as done and display the task status in a list.
 
-1. Add a task from user input to a list of tasks. Example:
-    
-2. Mark a task in the list as done.
+### List all tasks
+C-3PO is able to list all existing tasks.
 
-3. Add support for tracking three types of tasks:
+### Delete tasks
+C-3PO can delete existing tasks from the task list.
 
-    * **ToDos**: tasks without any date/time attached to it e.g., visit new theme park
-    * **Deadlines**: tasks that need to be done before a specific date/time e.g., submit report by 11/10/2019 5pm
-    * **Events**: tasks that start at a specific time and ends at a specific time e.g., team project meeting on 2/10/2019 2-4pm
+### Sort tasks by different properties
+C-3PO can sort tasks by:
+* Name: in alphabetical order, from A to Z;
+* Kind: `Deadline` comes before `Event` before `Todo`;
+* Date: later understandable dates come before earlier dates, followed by string
+dates (`Deadline` before `Event`), and finally followed by `Todo` tasks.
 
-4. Add error handling features:
+### Save data into local storage
+C-3PO will store the data into local storage automatically after each
+operation. Every time when C-3PO starts, it automatically reads the local
+storage and loads previous data from it.
 
-    * Command that is not `todo`, `deadline`, `event`, `list`, `done` or `bye` cannot be recognised.
-    * For commands that require a description, such as `todo`, `deadline`, `event`, if the response does not include a description, Duke will not accept.
-    * For command `done` that takes an argument of particular format (i.e. integer), Duke will not receive illegal arguments.
-    * For commands that takes in a time after some trigger words, such as `deadline` and `event`, Duke will not accept responses without a time.
-    
-5. Add delete feature:
-    1. Duke will recognise command `delete` followed by an applicable integer to delete the corresponding task.
-    2. For those `delete` commands that Duke does not accept, error handling is also implemented for this.
-6. Save to disk: Duke will keep a copy of the task list in a local file and retrive it every time Duke starts.
-7. Time format support for `deadline` and `event`, if a date input is of the pattern `yyyy-mm-dd`, Duke will understand this
-and print the format as `MMM dd yyyy`, otherwise, Duke will treat this as a string.
+## Usage
 
-## Automated UI Testing
-1. Assume you are running a *nix operating system, e.g. macOS.
-1. Make sure you have `dos2unix` installed.
-1. Direct to directory `text-ui-text`.
-1. Run `chmod +x runtest.sh` to make the `.sh` file executable.
-1. Run command
-    ```
-    ./runtest.sh
-   ```
-1. If the actual output matches the `EXPECTED.TXT`, the test passes.
+### `list` - list all tasks
 
-   If the actual output differs from the `EXPECTED.TXT`, the script will report a failure.
+`list` command can list all the added tasks stored in the local database.
+
+```
+list
+```
+
+### `todo` - add a todo task
+
+`todo` command can add a new todo task to the task list.
+
+```
+todo DESCRIPTION
+```
+
+### `deadline` - add a deadline task
+
+`deadline` command add a new deadline task to the task list.
+
+```
+deadline DESCRIPTION /by DATE
+```
+
+`DATE` can be a string or in the format of `YYYY-MM-DD`. For the latter format, C-3PO will be able to understand the due date, while for the former format, C-3PO will directly save the date as a raw string.
+
+### `event` - add an event task
+
+`event` command add a new deadline task to the task list.
+
+```
+event DESCRIPTION /at DATE
+```
+
+`DATE` can be a string or in the format of `YYYY-MM-DD`. For the latter format, C-3PO will be able to understand the date, while for the former format, C-3PO will directly save the date as a raw string.
+
+### `done` - mark a task as done
+
+`done` command marks a task as done.
+
+```
+done INDEX
+```
+
+For a non-empty task list with `n` tasks, ` INDEX` must be in the range of 1 to `n` (inclusive).
+
+### `delete` - delete a task
+
+`delete` command deletes a task from the list.
+
+```
+delete INDEX
+```
+
+For a non-empty task list with `n` tasks, ` INDEX` must be in the range of 1 to `n` (inclusive).
+
+### `find` - find tasks by keywords
+
+`find` command searches for tasks with a specified keyword and prints a list of all searched tasks.
+
+```
+find KEYWORDS
+```
+
+### `sort` - sort tasks by kind, name or date
+
+`sort` command sorts the task list by their kinds, names or dates.
+
+```
+sort /by COMPARATOR
+```
+
+`COMPARATOR` can only be `date`, `name` or `kind`.
+
+### `bye` - save and exit
+
+`bye` command shuts down the chat bot and exits in two seconds.
+
+```
+bye
+```
