@@ -45,29 +45,29 @@ e.g. in todo TITLE, TITLE is a parameter which can be used as todo homework.
 </font>
 </blockquote>
 
-####Adding a ToDo : `todo`
+###Add a ToDo : `todo` 
 Add a todo list.
 Format: `todo EVENT_TITLE`  
 E.g:
 * `todo homework`
 
-####Add a Deadline : `deadline`
+###Add a Deadline : `deadline`
 Add a deadline list. The DATE should be in YYYY-MM-DD format and TIME should be HH:MM format.  
 Format: `deadline EVENT_TITLE /at DATE TIME - TIME`  
 E.g:
 * `deadline Assignment 1 /by 2020-09-14 18:00`
 
-####Adding an Event : `event`
+###Adding an Event : `event`
 Add a deadline list. The DATE should be in YYYY-MM-DD format and TIME should be HH:MM format.  
 Format: `event EVENT_TITLE /at DATE TIME - TIME`  
 E.g:
 * `event Birthday Party /at 2020-09-14 18:00 20:00`
 
-####Listing out all Tasks : `list`
+###Listing out all Tasks : `list`
 List out all the tasks added to the application in order of the entry.   
 Format: `list`
 
-####Marking a Task as done : `done`
+###Marking a Task as done : `done`
 Mark the task at INDEX as done.  
 INDEX should be a positive integer, e.g. 1, 2, 3, 4... and the order is in entry order.  
 If you are not sure about the order, check with `list` command.
@@ -75,7 +75,7 @@ Format: `done INDEX`
 E.g.
 * 'done 5'
 
-####Loading archived data : `delete`
+###Loading archived data : `delete`
 Delete the task at INDEX as done.  
 INDEX should be a positive integer, e.g. 1, 2, 3, 4... and the order is in entry order.  
 If you are not sure about the order, check with `list` command.
@@ -84,19 +84,19 @@ Format: `delete INDEX`
 E.g.
 * 'delete 5'  
 
-####Saving progress : `save`
+###Saving progress : `save`
 Save all the file into the default folder.
 The default folder is `data\duke.txt` which will be located in the same folder as the application `.jar` file.
 Format: `save`
 
-####Archiving data : `archive`
+###Archiving data : `archive`
 Saves all the data of the current progress into the DESTINATION.
 DESTINATION should point to a `.txt` file and takes relative position from the folder that contains the application .jar.
 Format: `archive DESTINATION`
 E.g.
 * `archive data\dukeII.txt`  
 
-####Archiving data : `load`
+###Archiving data : `load`
 Load the archived file at the DESTINATION.
 DESTINATION should point to a `.txt` file and takes relative position from the folder that contains the application .jar.
 It will not override the current data until `save` or `bye` command is entered.  
@@ -104,7 +104,7 @@ Format: `archive DESTINATION`
 E.g.
 * `archive data\dukeII.txt`
 
-####Ending a session : `bye`
+###Ending a session : `bye`
 Close the application window after 2 seconds.  
 The application will automatically save the file to the default file path.  
 Format: `bye`
