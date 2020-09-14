@@ -1,3 +1,7 @@
 E-----✓-----tP team meeting-----zoom, Sat 9pm
 T-----✘-----2103/T Quiz ASAP-----NaN
 D-----✘-----complete iP tasks-----Sep 18 2020 2359hrs
+T-----✓-----borrow a book-----NaN
+D-----✘-----return that one book-----Jan 10 2020 Sunday
+D-----✘-----return that one book-----Sep 20 2020 Sunday
+E-----✘-----team meeting-----the library, Sunday

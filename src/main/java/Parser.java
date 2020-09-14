@@ -92,7 +92,7 @@ public class Parser {
             case "find":
                 String desc = msg.split("find ")[1];
                 String tasks = lst.findTasksWith(desc);
-                reply = "Here are the matching tasks in your list:\n\t" + tasks;
+                reply = "Here are the matching tasks in your list:\n" + tasks;
                 break;
 
             default:
