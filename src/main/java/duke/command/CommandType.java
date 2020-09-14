@@ -13,7 +13,7 @@ public enum CommandType {
         @Override
         public String toString() {
             return "deadline: adds a task with deadline.\n"
-                    + "    eg. deadline <taskName> /by <dd/MM/yyyy> <HHmm>\n";
+                    + "    eg. deadline <description> /by <dd/MM/yyyy> <HHmm>\n";
         }
     },
 
@@ -26,7 +26,7 @@ public enum CommandType {
         @Override
         public String toString() {
             return "event: adds a task with a scheduled time. \n"
-                    + "    eg. event <taskName> /at <dd/MM/yyyy> <HHmm>\n";
+                    + "    eg. event <description> /at <dd/MM/yyyy> <HHmm>\n";
         }
     },
 
@@ -39,7 +39,7 @@ public enum CommandType {
         @Override
         public String toString() {
             return "todo: adds a todo task to the list.\n"
-                    + "    eg. todo <taskName>'\n";
+                    + "    eg. todo <description>'\n";
         }
     },
 
