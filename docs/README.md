@@ -16,7 +16,7 @@ Duke-it is a desktop application for managing tasks by typing commands, while al
 1. **Help** - lists all available commands
 1. **List** - lists all tasks
 1. **Todo** -- creates a new todo task
-1. **Sort** - sorts teh task list by oldest date first
+1. **Sort** - sorts the task list by oldest date first
 
 ## Feature Details
 
