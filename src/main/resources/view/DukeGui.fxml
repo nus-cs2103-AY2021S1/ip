@@ -24,6 +24,9 @@
                <children>
                   <Label text="Version:" />
                   <Label text="2.0" />
+                  <Region prefHeight="17.0" prefWidth="117.0" />
+                  <Label text="Message:" />
+                  <Label fx:id="messageLabel" text="None" />
                </children>
                <VBox.margin>
                   <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
@@ -79,8 +82,8 @@
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
-              <MenuItem mnemonicParsing="false" text="Save" />
-                  <MenuItem mnemonicParsing="false" text="Exit" />
+              <MenuItem mnemonicParsing="false" onAction="#saveTasks" text="Save" />
+                  <MenuItem mnemonicParsing="false" onAction="#exit" text="Exit" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
