@@ -21,8 +21,9 @@ For the details of each command, refer to the [Features](##features) below.
 
 
 ## Summary of Command  
+
 | Action | Format & Example |  
-|-----------------------|-----------------------|
+|---|---|
 |Add a ToDo task | `todo EVENT_TITLE ` <br/> <br/> e.g: `todo Assigment 1`|  
 |Add a Deadline task | `deadline EVENT_TITLE /by DATE TIME` <br/> <br/> e.g: `deadline Assignment 1 /by 2020-09-14 18:00`|  
 |Add an Event task | `event EVENT_TITLE /at DATE TIME - TIME` <br/> <br/> e.g: `event Birthday Party /at 2020-09-14 18:00 20:00`|  
