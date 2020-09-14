@@ -7,6 +7,7 @@ import command.DoneCommand;
 import command.FindCommand;
 import command.ListCommand;
 import command.UndoCommand;
+import exception.DukeException;
 
 /**
  * A Parser object deals with making sense of user command.
@@ -27,8 +28,9 @@ public class Parser {
      *
      * @param inputMsg User's input message to the chat bot.
      * @return Command to be executed.
+     * @throws DukeException If command type is invalid.
      */
-    public Command processMsg(String inputMsg) {
+    public Command processMsg(String inputMsg) throws DukeException {
         // user specified action, to identify type of action
         String actionType = inputMsg.split(" ")[0];
 
@@ -42,8 +44,10 @@ public class Parser {
             return new FindCommand();
         } else if (actionType.equals("undo")) {
             return new UndoCommand();
-        } else {
+        } else if (actionType.equals("todo") || actionType.equals("deadline") || actionType.equals("event")) {
             return new AddToListCommand();
+        } else {
+            throw new DukeException("Specified action is not recognised!");
         }
     }
 }

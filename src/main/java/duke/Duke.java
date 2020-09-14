@@ -56,8 +56,8 @@ public class Duke {
             return ui.endDuke();
         }
         commandStorage.writeToFile(input);
-        Command command = parser.processMsg(input);
         try {
+            Command command = parser.processMsg(input);
             return command.execute(input, tasks, ui, commandStorage);
         } catch (DukeException | ParseException e) {
             return e.getMessage();
