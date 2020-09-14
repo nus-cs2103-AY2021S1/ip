@@ -1,3 +1,2 @@
-T | 1 | Buy groceries
-E | 0 | Class gathering | 12 December 2020 06:00 PM to 11:00 PM
-D | 0 | Math homework | 24 September 2020 11:59 PM
+D | 0 | Physics Project | 4 December 2020 06:00 PM
+E | 1 | Family Christmas party | 25 December 2020 06:00 PM to 11:00 PM
