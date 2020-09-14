@@ -3,17 +3,17 @@ A simple personal tasks manager created as part of NUS CS2103T Individual Projec
 
 This application follows the theme of winter, with the usage of some images that I had personally taken when in Japan.
 
-![Duke](https://imgur.com/a/EwNX4AA)
+![Duke](./Ui.png)
 
 ## Features 
 The Duke chat bot is equipped with the following features.
-1. **Addition** of tasks.
-2. **Deletion** of tasks.
-3. **View list** of all tasks.
-4. **Mark completion** of tasks.
-5. **Undo** last action.
-6. **Search** for tasks.
-7. **Storage and retrieval** of tasks from local drive.
+1. [Addition of tasks](#feature-1-addition-of-tasks)
+2. [Deletion of tasks](#feature-2-deletion-of-tasks)
+3. [View list of all tasks](#feature-3-view-list-of-all-tasks)
+4. [Mark completion of tasks](#feature-4-mark-completion-of-tasks)
+5. [Undo last action](#feature-5-undo-last-action)
+6. [Search for tasks](#feature-6-search-for-tasks)
+7. [Storage and retrieval of tasks from local drive](#feature-7-storage-and-retrieval-of-tasks-from-local-drive)
 
 ## Usage
 ### Feature 1: Addition of tasks
