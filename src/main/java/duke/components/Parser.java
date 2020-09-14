@@ -71,40 +71,40 @@ public class Parser {
 
             isDone = true;
             doneTaskNum = Character.getNumericValue(input.charAt(5))-1;
-        }else if(input.startsWith("find")){
+        }else if(input.startsWith("find ")){
 
             isFind = true;
             findTask = input.substring(5);
 
-        } else if (input.startsWith("todo")) {
+        } else if (input.startsWith("todo ")) {
 
             isTask = true;
             description = input;
 
         } else {
-            if (input.startsWith("deadline")) {
+            if (input.startsWith("deadline ")) {
 
                 isTask = true;
                 description = input.substring(0, input.indexOf('/') - 1);
                 date = LocalDate.parse(input.substring(input.indexOf('/') + 4));
 
-            } else if (input.startsWith("event")) {
+            } else if (input.startsWith("event ")) {
 
                 isTask = true;
                 description = input.substring(0, input.indexOf('/') - 1);
                 date = LocalDate.parse(input.substring(input.indexOf('/') + 4, input.indexOf('/') + 14));
                 time = input.substring(input.indexOf('/') + 15);
 
-            } else if (input.startsWith("delete")) {
+            } else if (input.startsWith("delete ")) {
 
                 isDelete = true;
                 deleteTaskNum = Character.getNumericValue(input.charAt(7)) - 1;
 
-            } else if (input.startsWith("bye")) {
+            } else if (input.equalsIgnoreCase("bye")) {
 
                 isBye = true;
 
-            } else if (input.startsWith("remind")) {
+            } else if (input.startsWith("remind ")) {
 
                 isReminder = true;
                 remindTaskNum = Character.getNumericValue(input.charAt(7)) - 1;
