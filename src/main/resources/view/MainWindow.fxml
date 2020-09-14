@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="duke.controllers.MainWindow">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="duke.controllers.MainWindow">
     <children>
         <TextField fx:id="userInput" layoutY="558.0" onAction="#handleUserInput" prefHeight="41.0" prefWidth="324.0" promptText="Tell HAL9000 something!" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="76.0" AnchorPane.topAnchor="558.0">
          <font>
@@ -19,15 +22,24 @@
          </font></Button>
         <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="557.0" prefWidth="400.0" vvalue="1.0">
             <content>
-                <VBox fx:id="dialogContainer" prefHeight="552.0" prefWidth="388.0">
-               <children>
-                  <Button fx:id="helpButton" alignment="TOP_RIGHT" mnemonicParsing="false" onAction="#goToUserGuide" text="Help">
-                     <font>
-                        <Font name="Courier Bold" size="13.0" />
-                     </font>
-                  </Button>
-               </children></VBox>
+                <VBox fx:id="dialogContainer" prefHeight="552.0" prefWidth="388.0" style="-fx-background-image: url(/images/Space.jpg);" />
             </content>
         </ScrollPane>
+      <Button fx:id="helpButton" alignment="BASELINE_LEFT" layoutX="4.0" layoutY="4.0" mnemonicParsing="false" onAction="#goToUserGuide" style="-fx-background-color: BLACK;" text="Help">
+         <font>
+            <Font name="Courier Bold" size="13.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="RED" />
+                  <Stop color="#29ff00" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </Button>
     </children>
 </AnchorPane>
