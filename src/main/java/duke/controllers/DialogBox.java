@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Rectangle;
 
 /**
  * Controller for DialogBox. This control represents a dialog box consisting of an ImageView to represent the speaker's
@@ -44,6 +45,23 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         displayPicture.setImage(image);
+        displayPicture.setClip(generateClip(displayPicture, 50));
+    }
+
+    /**
+     * Generates a clip for the {@code ImageView} with the specified corner radius.
+     *
+     * @param imageView the {@code ImageView} to inherit the width and height from.
+     * @param cornerRadius the corner radius value.
+     * @return a clip for the {@code ImageView}.
+     */
+    private static Rectangle generateClip(ImageView imageView, int cornerRadius) {
+        Rectangle clip = new Rectangle();
+        clip.setWidth(imageView.getFitWidth());
+        clip.setHeight(imageView.getFitHeight());
+        clip.setArcWidth(cornerRadius);
+        clip.setArcHeight(cornerRadius);
+        return clip;
     }
 
     /**
