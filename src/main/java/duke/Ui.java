@@ -299,7 +299,7 @@ public class Ui {
                 + "\n>> Shows your current todo list"
                 + "\nType: 'todo <task name>'"
                 + "\n>> Add <task name> as a todo task into the list"
-                + "\n>>eg: todo learn cooking"
+                + "\n>> eg: todo learn cooking"
                 + "\nType: 'deadline <task name> /by <date> <time>"
                 + "\n>> Add <task name> that is due by <date> at <time> as a deadline task into the list"
                 + "\n>> eg: deadline CS2103T project /by 2020-08-26 23:59"
