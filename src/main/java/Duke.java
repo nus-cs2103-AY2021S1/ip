@@ -78,7 +78,7 @@ public class Duke {
             output += "\nNow you have " + taskList.size() + " tasks in the list.";
         } else if (commandType == Command.EXIT) {
             storage.save(taskList);
-            print = false;
+            System.exit(0);
         } else if (commandType == Command.INVALID) {
             output = "Sorry, I don't understand that command..";
         } else if (commandType == Command.FIND) {
@@ -115,12 +115,7 @@ public class Duke {
     String getResponse(String input) {
         Command command;
         command = Parser.parse(input);
-        if (command.getCommandType() == Command.EXIT) {
-            System.exit(0);
-        } else {
-            return this.execute(command);
-        }
-        return "";
+        return this.execute(command);
     }
 
 //    private void run() {
