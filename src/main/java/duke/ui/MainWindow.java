@@ -26,8 +26,12 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/spiderman.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/matrix.png"));
 
+    /**
+     * Initializes main window.
+     */
     @FXML
     public void initialize() {
+        dialogContainer.setStyle("-fx-background-color: #436060");
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
