@@ -8,6 +8,11 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.VBox;
 
 import parserstorageui.Parser;
@@ -29,9 +34,14 @@ public class MainWindow extends AnchorPane {
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/mrbean.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/troll.png"));
+    private Image bground = new Image(this.getClass().getResourceAsStream("/images/bg.jpg"));
 
-    @FXML
+
     public void initialize() {
+        BackgroundSize size = new BackgroundSize(100, 100, true, true, true, false);
+        BackgroundImage bg = new BackgroundImage(bground, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.REPEAT,
+            BackgroundPosition.DEFAULT, size);
+        dialogContainer.setBackground(new Background(bg));
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().add(DialogBox.getDukeDialog("Hello I'm Verzachtend \n"
             + "What can I do for you?\n"

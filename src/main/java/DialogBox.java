@@ -48,12 +48,15 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        DialogBox user = new DialogBox(text, img);
+        user.setAlignment(Pos.CENTER_RIGHT);
+        return user ;
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
+        db.setAlignment(Pos.CENTER_LEFT);
         return db;
     }
 }
