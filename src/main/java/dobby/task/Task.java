@@ -22,9 +22,9 @@ public class Task {
     public String getDescription() {
         String checkbox = "[";
 
-        if (this.isDone()) { // tick or cross
+        if (this.isDone()) { // tick
             checkbox = checkbox + "\u2713] ";
-        } else {
+        } else { // or cross
             checkbox = checkbox + "\u2718] ";
         }
 
