@@ -22,6 +22,12 @@ public class Ui {
         System.out.println("What can i do for you?");
     }
 
+    public static String intro(boolean isChat) {
+        String str1 = "Hello from\n";
+        String str2 = "Hi! I'm duke.Duke your friendly neighbourhood chat bot\n";
+        String str3 = "What can i do for you?";
+        return  str1 + str2 + str3;
+    }
     /**
      * Displays an indicator that the list is about to be shown
      */
