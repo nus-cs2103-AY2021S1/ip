@@ -57,7 +57,7 @@ public class TaskParser {
         } catch (DateTimeParseException exception) {
             throw new IndexOutOfBoundsException(
                     "\u2639 OOPS!!! Both date and time (24 hour format) must be "
-                            + "in the form \"DD/MM/YYYY HH:MM\"");
+                            + "in the form \"DD/MM/YYYY HH:MM\".");
         }
     }
 
@@ -70,7 +70,9 @@ public class TaskParser {
                     dateAndTime[0].trim(), times[0].trim(), times[1].trim());
         } catch (IndexOutOfBoundsException exception) {
             throw new IndexOutOfBoundsException(
-                    "\u2639 OOPS!!! The start and end time of an event cannot be empty.");
+                    "\u2639 OOPS!!! The date, start and end time of an event cannot be empty.\n"
+                            + DukeConstants.INDENT 
+                            + "They must be in the form \"DD/MM/YYYY HH:MM-HH:MM\".");
         }
     }
     
