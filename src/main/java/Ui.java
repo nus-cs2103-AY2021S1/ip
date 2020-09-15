@@ -102,4 +102,27 @@ public class Ui {
     public String errorWithLoading() {
         return ("☹ OOPS!!! Your file cannot be loaded :-(");
     }
+
+    public String printFindTask(TaskList task) {
+        String str;
+        if (task.getList().size() > 0) {
+            str = ("\t" + line + "\n\tHere are the matching task(s) in your list:\n");
+            int index = 1;
+            List<Task> ls = task.getList();
+            for (Task t : ls) {
+                str += ("\t" + index + ". " + t + "\n");
+                index++;
+            }
+            str += ("\t" + line + "\n");
+        } else {
+            str = ("\t" + line + "\n");
+            str += ("\tThere is no matching task in the list.\n");
+            str += ("\t" + line);
+        }
+        return str;
+    }
+
+    public String printInvalidKeyword() {
+        return ("☹ OOPS!!! Please tell me a keyword!");
+    }
 }

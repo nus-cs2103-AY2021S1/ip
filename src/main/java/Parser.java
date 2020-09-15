@@ -16,6 +16,8 @@ public class Parser {
             return new DeadlineCommand(str);
         } else if (s.equals("event")) {
             return new EventCommand(str);
+        } else if (s.equals("find")) {
+            return new FindKeywordCommand(str);
         } else {
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
