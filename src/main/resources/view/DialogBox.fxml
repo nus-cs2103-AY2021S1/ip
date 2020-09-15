@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <fx:root maxHeight="Infinity" prefWidth="400.0" fillHeight="false"
-         type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+         type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.0" xmlns:fx="http://javafx.com/fxml/1">
     <StackPane fx:id="displayPictureWrapper" alignment="TOP_LEFT">
         <HBox.margin>
             <Insets left="4.0" top="8.0" right="4.0" bottom="8.0"/>
