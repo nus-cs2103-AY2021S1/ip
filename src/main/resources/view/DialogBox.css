@@ -1,0 +1,12 @@
+#textContainer {
+    -fx-background-radius: 10;
+    -fx-padding: 10 10 10 10;
+    -fx-background-color: #2b5278;
+    -fx-text-fill: #dce4e7;
+}
+
+#displayPicture {
+    -fx-border-width: 2;
+    -fx-border-radius: 50%;
+    -fx-padding: 10 10 10 10;
+}

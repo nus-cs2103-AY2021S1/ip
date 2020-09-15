@@ -1,0 +1,15 @@
+#root, #dialogContainer, #sendButton, #scrollPane {
+    -fx-background-color: #0e1621;
+}
+
+#sendButton, #userInput {
+    -fx-background-color: #17212b;
+}
+
+#sendButton {
+    -fx-text-fill: #5288c1;
+}
+
+#userInput {
+    -fx-text-fill: #e8ded4;
+}
