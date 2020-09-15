@@ -1,9 +1,24 @@
 # User Guide
+https://bchenghi.github.io/ip/
+
+## About
+```
+ ____        _        
+|  _ \ _   _| | _____ 
+| | | | | | | |/ / _ \
+| |_| | |_| |   <  __/
+|____/ \__,_|_|\_\___|
+Hello! I'm Duke, your friendly task manager.
+How can I help you today?
+```
 
 ## Features 
 
 ### Stores your tasks 
-Duke allows you to store tasks ad search for them in the future
+Duke allows you to store tasks and search for them in the future.
+
+### Multiple task types
+Choose from Todo, Deadline and Event task types.
 
 ### Undo and Redo
 Duke has undo and redo features to correct mistakes easily.
