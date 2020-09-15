@@ -35,7 +35,7 @@ public class Ui {
     public String buildTaskList(ArrayList<Task> taskList) {
         String s = "";
         for (int i = 0; i < taskList.size(); i++) {
-            s = s = s + (i + 1) + ". " + taskList.get(i) + "\n";
+            s = s + (i + 1) + ". " + taskList.get(i) + "\n";
         }
         return s;
     }
@@ -52,6 +52,6 @@ public class Ui {
      * Prints error message from failing to load save file.
      */
     public void showLoadingError() {
-        System.out.println("Failed to load from file. Initiating new instace.");
+        System.out.println("Failed to load from file. Initiating new instance.");
     }
 }

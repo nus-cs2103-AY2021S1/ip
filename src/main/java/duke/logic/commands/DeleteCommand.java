@@ -31,14 +31,17 @@ public class DeleteCommand extends Command {
     @Override
     public String execute(TaskManager tm, Ui ui, Storage storage) throws DukeException {
         String[] commandDetails = command.split(" ", 2);
+        // Handles empty delete command
         if (commandDetails.length == 1) {
             throw new DukeException("Delete Index not provided!");
         }
+
         assert commandDetails.length == 2;
         try {
             int delIndex = Integer.parseInt(commandDetails[1]) - 1;
             Task delTask = tm.getTask(delIndex);
             tm.deleteTask(delIndex);
+            postCommandSave(tm, storage);
             return ("Task deleted: " + delTask);
         } catch (NumberFormatException e) {
             throw new DukeException("Index is not a number!");
