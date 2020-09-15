@@ -1,14 +1,14 @@
 # User Guide
 
 ## Features 
-* Add a task to do: todo
-* Add a task with a deadline: deadline
-* Add an event: event
-* Remove a task: remove
-* Mark task as done: done
-* Find task by keyword: find
-* List tasks: list
-* Exit the program: bye
+* Add a task to do: `todo`
+* Add a task with a deadline: `deadline`
+* Add an event: `event`
+* Remove a task: `remove`
+* Mark task as done: `done`
+* Find task by keyword: `find`
+* List tasks: `list`
+* Exit the program: `bye`
 
 
 ### Add a task to do: todo
@@ -22,7 +22,7 @@ Expected Outcome:
 ``` 
 Got it. I've added this task:
      [T][x] walk the dog
- Now you have 3 tasks in the list
+Now you have 3 tasks in the list
 ```
 
 ### Add a task with a deadline: deadline
