@@ -142,7 +142,7 @@ public class Parser {
             throw new DukeException(incorrectTaskDescriptionMessage);
         }
 
-        String[] splitInput = taskDetails.split(" ");
+        String[] splitInput = taskDetails.split(" ", 2);
         Priority priority = Priority.valueOf(splitInput[0]);
         String taskDescription = splitInput[1];
 

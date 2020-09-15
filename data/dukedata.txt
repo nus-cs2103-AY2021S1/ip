@@ -1,7 +1,4 @@
-T | 1 | HIGH | read book
-D | 1 | LOW | return book | June 6th
-E | 0 | MEDIUM | project meeting | Aug 6th 2-4pm
-T | 0 | HIGH | read book
-T | 0 | HIGH | yolo
-T | 0 | HIGH | hello
-E | 0 | MEDIUM | test  | 2019-10-15 08:00
+T | 1 | LOW | Buy bread
+D | 0 | HIGH | Submit report | null
+D | 0 | LOW | Complete essay | Tomorrow
+E | 0 | LOW | Take out the trash | Tonight 10pm
