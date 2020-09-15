@@ -17,6 +17,7 @@
     <Label
             fx:id="dialog"
             text="Label"
+            textFill="WHITE"
             wrapText="true"
             style=" -fx-border-color: #3D8DF3;
                     -fx-border-width: 1;
