@@ -4,8 +4,8 @@
 Duke is a Chat-like task manager.
 
 ## QuickStart
-1. Ensure that [Java 11](!https://www.oracle.com/java/technologies/javase-jdk11-downloads.html) or above is installed.
-2. Download the [`Duke.jar`](!https://github.com/Nauw1010/ip/releases)
+1. Ensure that [Java 11](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html) or above is installed.
+2. Download the [`Duke.jar`]()
 3. Double-clicked the jar file.
 4. Start chatting with Duke!
 
