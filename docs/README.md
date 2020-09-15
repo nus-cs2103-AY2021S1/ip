@@ -7,10 +7,14 @@ DukePenguin is a desktop app for managing tasks with the help of Graphical User 
 1. [Usage](#Usage)
 
 ##Quick Start
-1. Download [DukePenguin v0.1](https://github.com/Jaylenlee/ip/releases/tag/A-Jar)
+1. Ensure you have Java Version 11 or above on your computer. Click [here](https://www.oracle.com/java/technologies/javase/jdk11-archive-downloads.html) to download if not.
+1. Download [DukePenguin_v0.2](https://github.com/Jaylenlee/ip/releases/tag/v0.2)
+1. Open the DukePenguin_v0.2 to start using :)
+
+Alternatively you can also open it with terminal:
 1. Open up any terminal. For example, search "Command Prompt" on Windows search.
-1. Change directory to where the DukePenguin Jar file is located. Example: cd downloads/DukePenguin
-1. Type java -jar DukePenguin.jar and enter.
+1. Change directory to where the DukePenguin_v0.2 Jar file is located. Example: cd Downloads
+1. Type java -jar DukePenguin_v0.2.jar and enter.
 1. You can now use DukePenguin.
 
 ## Features 
