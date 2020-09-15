@@ -13,8 +13,8 @@ public class Ui {
     /**
      * Greets the user with a message when they start the application.
      */
-    public void greetUser() {
-        System.out.println("Hello! I am Duke\n" + "What can I do for you?");
+    public static String greetUser() {
+        return "Hello! I am Duke\n" + "What can I do for you?";
     }
 
     /**
