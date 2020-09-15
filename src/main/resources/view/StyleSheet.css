@@ -1,0 +1,28 @@
+.root{
+    -fx-font-size: 10pt;
+    -fx-font-family: "Courier New";
+}
+
+#dialogContainer {
+    -fx-background-image: url("/images/GUI_BG.jpg");
+    -fx-background-size: cover;
+}
+
+#dialog{
+    -fx-background-color: #dbb357;
+    -fx-text-fill: white;
+    -fx-padding: 10pt;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-border-color: white;
+    -fx-border-width: 2 2 2 2;
+}
+
+#welcomeText{
+    -fx-background-color: rgba(238, 232, 223, 1);
+    -fx-padding: 10pt;
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+    -fx-border-color: white;
+    -fx-border-width: 2 2 2 2;
+}
