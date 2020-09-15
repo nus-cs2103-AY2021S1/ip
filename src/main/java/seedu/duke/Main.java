@@ -30,6 +30,7 @@ public class Main extends Application {
             fxmlLoader.<Gui>getController().setDuke(duke);
             fxmlLoader.<Gui>getController().setWelcomeWords();
             stage.setTitle("Duke");
+            stage.setResizable(false);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
