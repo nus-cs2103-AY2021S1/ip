@@ -70,6 +70,10 @@ public class DialogBox extends HBox {
         text.setStyle("-fx-background-color: white; -fx-background-radius: 32;");
         text.setPadding(new Insets(12));
         text.setMinHeight(Double.NEGATIVE_INFINITY);
+
+        if (text.getText().startsWith("you n00b!")) {
+            text.setStyle("-fx-background-color: red; -fx-background-radius: 32;");
+        }
         return this;
     }
 
