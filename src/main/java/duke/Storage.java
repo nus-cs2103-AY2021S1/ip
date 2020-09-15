@@ -261,6 +261,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Resets the storage so that it is ready to work with a new file.
+     *
+     * <p>After resetting, no other commands from the user will work until they create
+     * or load another file.</p>
+     */
     public void reset() {
         this.filepath = null;
         this.parentFilepath = null;
