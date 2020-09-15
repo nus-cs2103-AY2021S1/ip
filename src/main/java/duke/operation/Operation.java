@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 public enum Operation {
+    HELP("help", "h"),
     BYE("bye", "seeya"),
     FIND("find", "f"),
     LIST("list", "ls"),

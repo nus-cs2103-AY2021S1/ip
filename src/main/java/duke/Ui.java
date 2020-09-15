@@ -32,11 +32,11 @@ public class Ui {
      * Prints welcome.
      */
     public void showWelcome() {
-        System.out.println(line
-                + logo
-                + "\n Hello, I'm Duke \n What can I do for you?\n"
-                + line);
-        showingString = " Hello, I'm Duke \n What can I do for you?\n";
+        String finalString = " Hi, I am Duke\n"
+                + " Nice to see you. What can I do for you?\n"
+                + " If you are first time here, type \"help\" or \"h\" for help.\n";
+        System.out.println(line + finalString + line);
+        showingString = finalString;
     }
 
     /**
@@ -167,6 +167,22 @@ public class Ui {
      */
     public void bye() {
         String finalString = " Bye. Hope to see you again soon!\n";
+        System.out.println(line + finalString + line);
+        showingString = finalString;
+    }
+
+    /**
+     * Give user help.
+     */
+    public void help() {
+        String finalString = " Greeting. Here are some command you can use to chat with me:\n"
+                + "  1. todo (your task description)\n"
+                + "  (to add a todo task)\n"
+                + "  2. list\n"
+                + "  (list all the tasks)\n"
+                + "  3. done (index)\n"
+                + "  (mark done a certain task)\n"
+                + " For more help. Please refer to the product website.\n";
         System.out.println(line + finalString + line);
         showingString = finalString;
     }

@@ -26,6 +26,7 @@ public class Parser {
         String key;
         commands = Arrays.copyOf(commands, 3);
         switch (Operation.toOperation(commands[0])) {
+        case HELP:
         case BYE:
         case FIND:
         case LIST: {

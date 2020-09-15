@@ -70,6 +70,9 @@ public class Duke {
                 isExit = true;
                 ui.bye();
                 return getUiShowingString(ui);
+            } else if (Operation.toOperation(commands[0]) == Operation.HELP) {
+                ui.help();
+                return getUiShowingString(ui);
             }
             tasks.runCommand(commands, ui, storage);
             return getUiShowingString(ui);
