@@ -62,11 +62,14 @@ public class Parser {
         case "hello":
             return new GreetingCommand();
         case "bye":
+        case "exit":
             return new ExitCommand();
         case "list":
             return new ListCommand();
         case "stats":
             return new StatsCommand();
+        case "help":
+            return new HelpCommand();
         case "done":
         case "delete":
             throw FeiException.operationException();
