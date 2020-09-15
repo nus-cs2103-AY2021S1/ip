@@ -14,6 +14,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
     private static final String RESOURCE_PATH = "/view/MainWindow.fxml";
+    private static final String STYLESHEETS_PATH = "/styles/stylesheets.css";
 
     private Duke duke = new Duke();
 
@@ -28,6 +29,7 @@ public class Main extends Application {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(RESOURCE_PATH));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
+            scene.getStylesheets().add("styles/stylesheets.css");
             stage.setScene(scene);
             stage.setResizable(false);
             fxmlLoader.<MainWindow>getController().setDuke(duke);

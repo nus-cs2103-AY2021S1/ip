@@ -34,17 +34,17 @@ public class Duke {
      * Generates the Duke's response to the given input.
      *
      * @param input The input by the user.
-     * @return The response given by Duke.
+     * @return The {@link Response} given by Duke.
      */
-    public String getResponse(String input) {
+    public Response getResponse(String input) {
         try {
             Command c = Parser.parse(input);
             if (c.isExit()) {
                 Platform.exit();
             }
-            return c.execute(tasks, storage);
+            return new Response(c.execute(tasks, storage), false);
         } catch (DukeException e) {
-            return (e.getMessage());
+            return new Response(e.getMessage(), true);
         }
     }
 
