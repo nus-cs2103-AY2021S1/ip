@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
@@ -80,7 +81,7 @@ public class TaskList {
      */
     protected ArrayList<Task> findTask(String keyWord) {
         ArrayList<Task> foundTasks = new ArrayList<>();
-        foundTasks = this.taskList.stream().filter(task -> task.description.equals(keyWord))
+        foundTasks = this.taskList.stream().filter(task -> task.getDescription().equals(keyWord))
                 .collect(Collectors.toCollection(ArrayList::new));
         return foundTasks;
     }
@@ -116,63 +117,34 @@ public class TaskList {
     }
 
     /**
-     * Retrieves task to be updated.
-     *
-     * @param taskNumber index of the updating tasks.
-     * @return the task to be updated.
-     */
-    protected Task getTaskToUpdate(int taskNumber) {
-        assert (taskNumber >= 1) : "invalid task number";
-        return this.taskList.get(taskNumber - 1);
-    }
-
-    /**
-     * Returns the updated version of a task.
-     *
-     * @param detailToUpdate string containing what to update.
+     * Updates existing task with new task.
+     * @param updatingTask task to be updated.
+     * @param updateDetails new details to update the task with.
+     * @param taskIndex index of task in the task list.
      * @return new updated task.
      * @throws DukeException
      */
-    protected Task getUpdatedTask(String detailToUpdate) throws DukeException {
+    protected Task updateTask(Task updatingTask, String updateDetails, int taskIndex) throws DukeException {
         try {
-            Task updatingTask = this.taskList.stream()
-                    .filter(task -> task.isBeingUpdated)
-                    .findFirst()
-                    .get();
-            String[] updateDetails = detailToUpdate.split(" ", 2);
-            if (updateDetails[0].equals("date")) {
-                LocalDate newDate = LocalDate.parse(updateDetails[1]);
-                if (updatingTask instanceof Deadline) {
-                    return new Deadline(updatingTask.description, newDate);
+            String[] updatingDetails = updateDetails.split(" ", 2);
+            String updateType = updatingDetails[0];
+            Task updatedTask;
+            if (updateType.equals("desc")) {
+                updatedTask = updatingTask.updateTaskDescription(updatingDetails[1]);
+            } else if (updateType.equals("date")) {
+                if (updatingTask instanceof TimedTask) {
+                    LocalDate newDueDate = LocalDate.parse(updatingDetails[1]);
+                    updatedTask = updatingTask.updateTimedTaskDeadline(newDueDate);
                 } else {
-                    return new Event(updatingTask.description, newDate);
-                }
-            } else if (updateDetails[0].equals("desc")) {
-                String newDescription = updateDetails[1];
-                if (updatingTask instanceof Deadline) {
-                    return new Deadline(newDescription, ((Deadline) updatingTask).getTaskDeadline());
-                } else if (updatingTask instanceof Event) {
-                    return new Event(newDescription, ((Event) updatingTask).getTaskDeadline());
-                } else {
-                    return new Todo(newDescription);
+                    throw new InvalidCommandException();
                 }
             } else {
                 throw new InvalidCommandException();
             }
-
-        } catch (IndexOutOfBoundsException e) {
+            taskList.set(taskIndex - 1, updatedTask);
+            return updatedTask;
+        } catch (IndexOutOfBoundsException | DateTimeParseException e) {
             throw new InvalidCommandException();
         }
-    }
-
-    /**
-     * Updates the tasklist with the updated task.
-     *
-     * @param updatedTask the new updated task.
-     */
-    protected void updateTask(Task updatedTask) {
-        this.taskList = this.taskList.stream()
-                .map(task -> task.isBeingUpdated ? updatedTask : task)
-                .collect(Collectors.toCollection(ArrayList::new));
     }
 }

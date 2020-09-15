@@ -23,22 +23,21 @@ public class UpdateCommand extends Command {
      */
     @Override
     String execute(TaskList tasks, UI ui) throws DukeException {
+        int taskIndex;
+        String dukeResponse = "";
         try {
-            String[] parsedCommand = userCommand.split(" ", 2);
-            String dukeResponse = "";
-            if (parsedCommand[1].matches("\\d+")) {
-                int taskNumber = Integer.parseInt(parsedCommand[1]);
-                Task updatingTask = tasks.getTaskToUpdate(taskNumber);
-                updatingTask.toBeUpdated();
-                dukeResponse = ui.enterNewUpdateForTask(updatingTask);
+            String[] updateCommand = userCommand.split(" ", 3);
+            taskIndex = Integer.parseInt(updateCommand[1]);
+            if (taskIndex > 0 && taskIndex <= tasks.getTaskList().size()) {
+                Task updatingTask = tasks.getTaskList().get(taskIndex - 1);
+                String detailsToUpdate = updateCommand[2];
+                Task updatedTask = tasks.updateTask(updatingTask, detailsToUpdate, taskIndex);
+                dukeResponse = ui.updateTask(updatingTask, updatedTask);
             } else {
-                String detailToChange = parsedCommand[1];
-                Task updatedTask = tasks.getUpdatedTask(detailToChange);
-                tasks.updateTask(updatedTask);
-                dukeResponse = ui.updatedTask(updatedTask);
+                throw new InvalidTaskNumberException();
             }
             return dukeResponse;
-        } catch (IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException | NumberFormatException e) {
             throw new InvalidTaskNumberException();
         }
     }

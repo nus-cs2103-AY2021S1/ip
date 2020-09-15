@@ -1,7 +1,7 @@
 
 .scroll-bar {
     -fx-background-image: url("/images/pixelDreams.jpg");
-    -fx-background-size: 150% 150%
+    -fx-background-size: 150% 150%;
     -fx-background-position: bottom center;
     -fx-background: transparent;
 }
@@ -12,7 +12,6 @@
     -fx-font-size: 13;
     -fx-font-family: "Comic Sans MS", cursive, sans-serif;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0.5, 0.0, 0.0);
-    -fx-size
 }
 
 .chat-bubble {

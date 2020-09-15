@@ -20,8 +20,8 @@ public class UI {
             String str1 = "\nThis task has already been completed!\n";
             return str1;
         } else {
-            task.markNotDone();
-            String str2 = "\nNice! I have completed this task!\n";
+            task.markAsDone();
+            String str2 = "\nNice! I have completed this taskkk!\n";
             String str3 = " " + task + "\n";
             return str2 + str3;
         }
@@ -159,22 +159,14 @@ public class UI {
     }
 
     /**
-     * Prints the task that is to be updated by the user.
-     * @param taskToBeUpdated the task to be updated.
+     * Prints the old task and the new updated task.
+     * @param oldTask old task before update.
+     * @param updatedTask new task after update.
      * @return String response by the bot.
      */
-    protected String enterNewUpdateForTask(Task taskToBeUpdated) {
-        return "\nThis is the current task:\n" + taskToBeUpdated +
-                "\nOk tell me what to update!\n";
-    }
-
-    /**
-     * Prints the updated task.
-     * @param updatedTask the updated task.
-     * @return String response by the bot.
-     */
-    protected String updatedTask(Task updatedTask) {
-        String str1 = "\nThis task has been updated!\n";
-        return str1 + updatedTask;
+    protected String updateTask(Task oldTask, Task updatedTask) {
+        String str1 = "\nThis task:\n";
+        String str2 = "\nhas been updated to this task:\n";
+        return str1 + oldTask + "\n" + str2 + updatedTask + "\n";
     }
 }
