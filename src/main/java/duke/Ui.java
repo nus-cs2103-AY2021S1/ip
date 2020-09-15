@@ -27,13 +27,8 @@ public class Ui {
      *
      * @return Returns "Bye" if the user inputs the bye command.
      */
-    public String goodbye(boolean isRunningOnGui) {
-        if (isRunningOnGui) {
-            return "Bye! Hope to see you again soon!";
-        } else {
-            System.out.println("Bye! Hope to see you again soon!");
-            return "Bye";
-        }
+    public String goodbye() {
+        return "Bye! Hope to see you again soon!";
     }
 
     /**
@@ -41,53 +36,29 @@ public class Ui {
      *
      * @param tasks The current TaskList of the User.
      */
-    public String list(TaskList tasks, boolean isRunningOnGui) {
-        if (isRunningOnGui) {
-            if (tasks.size() == 0) {
-                return "There are no tasks in your list yet.";
-            } else {
-                String response = "Here are the tasks in your list:";
-                for (int i = 0; i < tasks.getTasks().size(); i++) {
-                    String taskString = "\n" + (i + 1) + ". " + tasks.getTasks().get(i).recordString();
-                    response += taskString;
-                }
-                return response;
-            }
+    public String list(TaskList tasks) {
+        if (tasks.size() == 0) {
+            return "There are no tasks in your list yet.";
         } else {
-            if (tasks.size() == 0) {
-                System.out.println("There are no tasks in your list yet.");
-            } else {
-                System.out.println("Here are the tasks in your list:");
-                for (int i = 0; i < tasks.getTasks().size(); i++) {
-                    System.out.println((i + 1) + ". " + tasks.getTasks().get(i).recordString());
-                }
+            String response = "Here are the tasks in your list:";
+            for (int i = 0; i < tasks.getTasks().size(); i++) {
+                String taskString = "\n" + (i + 1) + ". " + tasks.getTasks().get(i).recordString();
+                response += taskString;
             }
-            return "";
+            return response;
         }
     }
 
-    public String showTags(TaskList tasks, boolean isRunningOnGui) {
-        if (isRunningOnGui) {
-            if (tasks.size() == 0) {
-                return "There are no tasks in your list yet.";
-            } else {
-                String response = "Here are the tasks in your list:";
-                for (int i = 0; i < tasks.getTasks().size(); i++) {
-                    String taskString = "\n" + (i + 1) + ". " + tasks.getTasks().get(i).recordStringWithTags();
-                    response += taskString;
-                }
-                return response;
-            }
+    public String showTags(TaskList tasks) {
+        if (tasks.size() == 0) {
+            return "There are no tasks in your list yet.";
         } else {
-            if (tasks.size() == 0) {
-                System.out.println("There are no tasks in your list yet.");
-            } else {
-                System.out.println("Here are the tasks in your list:");
-                for (int i = 0; i < tasks.getTasks().size(); i++) {
-                    System.out.println((i + 1) + ". " + tasks.getTasks().get(i).recordStringWithTags());
-                }
+            String response = "Here are the tasks in your list:";
+            for (int i = 0; i < tasks.getTasks().size(); i++) {
+                String taskString = "\n" + (i + 1) + ". " + tasks.getTasks().get(i).recordStringWithTags();
+                response += taskString + "\n";
             }
-            return "";
+            return response;
         }
     }
 
@@ -96,16 +67,10 @@ public class Ui {
      *
      * @param t The specified task that was marked done.
      */
-    public String done(Task t, boolean isRunningOnGui) {
-        if (isRunningOnGui) {
-            String response = "Nice! I've marked this task as done:";
-            response += "\n" + t.recordString();
-            return response;
-        } else {
-            System.out.println("Nice! I've marked this task as done:");
-            System.out.println(t.recordString());
-            return "";
-        }
+    public String done(Task t) {
+        String response = "Nice! I've marked this task as done:";
+        response += "\n" + t.recordString();
+        return response;
     }
 
     /**
@@ -113,16 +78,10 @@ public class Ui {
      *
      * @param t The specified task that was marked done.
      */
-    public String tag(Task t, Tag tag, boolean isRunningOnGui) {
-        if (isRunningOnGui) {
-            String response = "Nice! I've tagged this task with " + tag + ":";
-            response += "\n" + t.recordString();
-            return response;
-        } else {
-            System.out.println("Nice! I've tagged this task with " + tag + ":");
-            System.out.println(t.recordString());
-            return "";
-        }
+    public String tag(Task t, Tag tag) {
+        String response = "Nice! I've tagged this task with " + tag + ":";
+        response += "\n" + t.recordString();
+        return response;
     }
 
     /**
@@ -132,18 +91,11 @@ public class Ui {
      * @param t The specified task that was deleted.
      * @param size The number of tasks in the TaskList.
      */
-    public String delete(Task t, int size, boolean isRunningOnGui) {
-        if (isRunningOnGui) {
-            String response = "Noted. I've removed this task:";
-            response += "\n" + t.recordString();
-            response += "\n" + "Now, you have " + size + " tasks in the list";
-            return response;
-        } else {
-            System.out.println("Noted. I've removed this task:");
-            System.out.println(t.recordString());
-            System.out.println("Now, you have " + size + " tasks in the list");
-            return "";
-        }
+    public String delete(Task t, int size) {
+        String response = "Noted. I've removed this task:";
+        response += "\n" + t.recordString();
+        response += "\n" + "Now, you have " + size + " tasks in the list";
+        return response;
     }
 
     /**
@@ -153,17 +105,28 @@ public class Ui {
      * @param t The specified task that was added.
      * @param size The number of tasks in the TaskList.
      */
-    public String add(Task t, int size, boolean isRunningOnGui) {
-        if (isRunningOnGui) {
-            String response = "Got it. I've added this task:";
-            response += "\n" + t.recordString();
-            response += "\n" + "Now, you have " + size + " tasks in the list";
+    public String add(Task t, int size) {
+        String response = "Got it. I've added this task:";
+        response += "\n" + t.recordString();
+        response += "\n" + "Now, you have " + size + " tasks in the list";
+        return response;
+    }
+
+    /**
+     * Displays the tasks in the user's TaskList that match the input string.
+     *
+     * @param tasks The list of Tasks that contains the input string.
+     */
+    public String find(ArrayList<Task> tasks) {
+        if (tasks.size() == 0) {
+            return "Could not find any tasks.";
+        } else {
+            String response = "Here are the matching tasks in your list:";
+            for (int i = 0; i < tasks.size(); i++) {
+                String matchingTask = "\n" + (i + 1) + ". " + tasks.get(i).recordString();
+                response += matchingTask;
+            }
             return response;
-        } else {
-            System.out.println("Got it. I've added this task:");
-            System.out.println(t.recordString());
-            System.out.println("Now, you have " + size + " tasks in the list");
-            return "";
         }
     }
 
@@ -172,58 +135,16 @@ public class Ui {
      *
      * @param tasks The list of Tasks that contains the input string.
      */
-    public String find(ArrayList<Task> tasks, boolean isRunningOnGui) {
-        if (isRunningOnGui) {
-            if (tasks.size() == 0) {
-                return "Could not find any tasks.";
-            } else {
-                String response = "Here are the matching tasks in your list:";
-                for (int i = 0; i < tasks.size(); i++) {
-                    String matchingTask = "\n" + (i + 1) + ". " + tasks.get(i).recordString();
-                    response += matchingTask;
-                }
-                return response;
-            }
+    public String findTag(ArrayList<Task> tasks) {
+        if (tasks.size() == 0) {
+            return "Could not find any tasks.";
         } else {
-            if (tasks.size() == 0) {
-                System.out.println("Could not find any tasks.");
-            } else {
-                System.out.println("Here are the matching tasks in your list:");
-                for (int i = 0; i < tasks.size(); i++) {
-                    System.out.println((i + 1) + ". " + tasks.get(i).recordString());
-                }
+            String response = "Here are the matching tasks in your list:";
+            for (int i = 0; i < tasks.size(); i++) {
+                String matchingTask = "\n" + (i + 1) + ". " + tasks.get(i).recordStringWithTags();
+                response += matchingTask;
             }
-            return "";
-        }
-    }
-
-    /**
-     * Displays the tasks in the user's TaskList that match the input string.
-     *
-     * @param tasks The list of Tasks that contains the input string.
-     */
-    public String findTag(ArrayList<Task> tasks, boolean isRunningOnGui) {
-        if (isRunningOnGui) {
-            if (tasks.size() == 0) {
-                return "Could not find any tasks.";
-            } else {
-                String response = "Here are the matching tasks in your list:";
-                for (int i = 0; i < tasks.size(); i++) {
-                    String matchingTask = "\n" + (i + 1) + ". " + tasks.get(i).recordStringWithTags();
-                    response += matchingTask;
-                }
-                return response;
-            }
-        } else {
-            if (tasks.size() == 0) {
-                System.out.println("Could not find any tasks.");
-            } else {
-                System.out.println("Here are the matching tasks in your list:");
-                for (int i = 0; i < tasks.size(); i++) {
-                    System.out.println((i + 1) + ". " + tasks.get(i).recordStringWithTags());
-                }
-            }
-            return "";
+            return response;
         }
     }
 
@@ -238,7 +159,7 @@ public class Ui {
             Scanner userInput = new Scanner(System.in);
             while (userInput.hasNext()) {
                 String input = userInput.nextLine();
-                String s = Parser.parse(input, tasks, false);
+                String s = Parser.parse(input, tasks);
                 if (s.equals("Bye")) {
                     break;
                 }
@@ -248,7 +169,7 @@ public class Ui {
         }
     }
 
-    public String removeTag(Task t, boolean isRunningOnGui, boolean isTagRemoved, String tagRemoved) {
+    public String removeTag(Task t, boolean isTagRemoved, String tagRemoved) {
         if (!isTagRemoved) {
             return "The specified task does not have the specified tag: " + tagRemoved;
         } else {

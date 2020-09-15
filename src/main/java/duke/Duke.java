@@ -46,8 +46,8 @@ public class Duke {
                     ui.showLoadingError(e);
                 }
             }
-            String response = Parser.parse(input, tasks, true);
-            if (response.equals(ui.goodbye(true))) {
+            String response = Parser.parse(input, tasks);
+            if (response.equals(ui.goodbye())) {
                 exit();
             }
             return response;

@@ -31,13 +31,12 @@ public class Parser {
      *
      * @param userInputWords Array of words from user input.
      * @param tasks The user's current task list.
-     * @param isRunningOnGui A boolean that returns true if the application is running on GUI.
      * @return Returns a response to the user.
      * @throws DukeException  If user input is incorrect.
      */
     public static String executeDoneCommand(
-            String[] userInputWords, TaskList tasks, boolean isRunningOnGui) throws DukeException {
-        Integer index;
+            String[] userInputWords, TaskList tasks) throws DukeException {
+        int index;
         try {
             index = Integer.parseInt(userInputWords[1]);
         } catch (Exception e) {
@@ -47,7 +46,7 @@ public class Parser {
         Task t = tasks.get(index - 1);
         ArrayList<Task> tasksCopy = tasks.clone();
         Storage.store(tasksCopy);
-        return ui.done(t, isRunningOnGui);
+        return ui.done(t);
     }
 
     /**
@@ -55,13 +54,12 @@ public class Parser {
      *
      * @param userInputWords Array of words from user input.
      * @param tasks The user's current task list.
-     * @param isRunningOnGui A boolean that returns true if the application is running on GUI.
      * @return Returns a response to the user.
      * @throws DukeException  If user input is incorrect.
      */
     public static String executeDeleteCommand(
-            String[] userInputWords, TaskList tasks, boolean isRunningOnGui) throws DukeException {
-        Integer index;
+            String[] userInputWords, TaskList tasks) throws DukeException {
+        int index;
         try {
             index = Integer.parseInt(userInputWords[1]);
         } catch (Exception e) {
@@ -73,7 +71,7 @@ public class Parser {
         Task deletedTask = tasks.remove(index - 1);
         ArrayList<Task> tasksCopy = tasks.clone();
         Storage.store(tasksCopy);
-        return ui.delete(deletedTask, tasks.size(), isRunningOnGui);
+        return ui.delete(deletedTask, tasks.size());
     }
 
     /**
@@ -81,13 +79,12 @@ public class Parser {
      *
      * @param userInputWords Array of words from user input.
      * @param tasks The user's current task list.
-     * @param isRunningOnGui A boolean that returns true if the application is running on GUI.
      * @return Returns a response to the user.
      * @throws DukeException  If user input is incorrect. tag 1 HAPPY
      */
     public static String executeTagCommand(
-            String[] userInputWords, TaskList tasks, boolean isRunningOnGui) throws DukeException {
-        Integer index;
+            String[] userInputWords, TaskList tasks) throws DukeException {
+        int index;
         try {
             index = Integer.parseInt(userInputWords[1]);
         } catch (Exception e) {
@@ -101,7 +98,7 @@ public class Parser {
         Task t = tasks.get(index - 1);
         ArrayList<Task> tasksCopy = tasks.clone();
         Storage.store(tasksCopy);
-        return ui.tag(t, tag, isRunningOnGui);
+        return ui.tag(t, tag);
     }
 
     /**
@@ -109,12 +106,11 @@ public class Parser {
      *
      * @param userInputWords Array of words from user input.
      * @param tasks The user's current task list.
-     * @param isRunningOnGui A boolean that returns true if the application is running on GUI.
      * @return Returns a response to the user.
      * @throws DukeException  If user input is incorrect. tag 1 HAPPY
      */
     public static String executeRemoveTagCommand(
-            String[] userInputWords, TaskList tasks, boolean isRunningOnGui) throws DukeException {
+            String[] userInputWords, TaskList tasks) throws DukeException {
         int index = Integer.parseInt(userInputWords[1]);
         String tagToRemove = userInputWords[2];
         if (index > tasks.size() || index < 0) {
@@ -124,7 +120,7 @@ public class Parser {
         boolean isTagRemoved = t.removeTag(tagToRemove) == 1;
         ArrayList<Task> tasksCopy = tasks.clone();
         Storage.store(tasksCopy);
-        return ui.removeTag(t, isRunningOnGui, isTagRemoved, tagToRemove);
+        return ui.removeTag(t, isTagRemoved, tagToRemove);
     }
 
     /**
@@ -132,14 +128,13 @@ public class Parser {
      *
      * @param userInputWords Array of words from user input.
      * @param tasks The user's current task list.
-     * @param isRunningOnGui A boolean that returns true if the application is running on GUI.
      * @return Returns a response to the user.
      */
     public static String executeFindCommand(
-            String[] userInputWords, TaskList tasks, boolean isRunningOnGui) {
+            String[] userInputWords, TaskList tasks) {
         String keyWord = userInputWords[1];
         ArrayList<Task> foundTasks = tasks.find(keyWord);
-        return ui.find(foundTasks, isRunningOnGui);
+        return ui.find(foundTasks);
     }
 
     /**
@@ -147,14 +142,13 @@ public class Parser {
      *
      * @param userInputWords Array of words from user input.
      * @param tasks The user's current task list.
-     * @param isRunningOnGui A boolean that returns true if the application is running on GUI.
      * @return Returns a response to the user.
      */
     public static String executeFindTagCommand(
-            String[] userInputWords, TaskList tasks, boolean isRunningOnGui) {
+            String[] userInputWords, TaskList tasks) {
         String keyTag = userInputWords[1];
         ArrayList<Task> foundTasks = tasks.findTag(keyTag);
-        return ui.findTag(foundTasks, isRunningOnGui);
+        return ui.findTag(foundTasks);
     }
 
     /**
@@ -163,12 +157,11 @@ public class Parser {
      * @param input Line of user input.
      * @param userInputWords Array of words from user input.
      * @param tasks The user's current task list.
-     * @param isRunningOnGui A boolean that returns true if the application is running on GUI.
      * @return Returns a response to the user.
      * @throws DukeException  If user input is incorrect.
      */
     public static String createToDoCommand(
-            String input, String[] userInputWords, TaskList tasks, boolean isRunningOnGui) throws DukeException {
+            String input, String[] userInputWords, TaskList tasks) throws DukeException {
         if (userInputWords.length <= 1) {
             throw new DukeException("The description of a todo cannot be empty.");
         }
@@ -176,7 +169,7 @@ public class Parser {
         tasks.add(newToDo);
         ArrayList<Task> tasksCopy = tasks.clone();
         Storage.store(tasksCopy);
-        return ui.add(newToDo, tasks.size(), isRunningOnGui);
+        return ui.add(newToDo, tasks.size());
     }
 
     /**
@@ -185,12 +178,11 @@ public class Parser {
      * @param input Line of user input.
      * @param userInputWords Array of words from user input.
      * @param tasks The user's current task list.
-     * @param isRunningOnGui A boolean that returns true if the application is running on GUI.
      * @return Returns a response to the user.
      * @throws DukeException  If user input is incorrect.
      */
     public static String createDeadlineCommand(
-            String input, String[] userInputWords, TaskList tasks, boolean isRunningOnGui) throws DukeException {
+            String input, String[] userInputWords, TaskList tasks) throws DukeException {
         if (userInputWords.length <= 1) {
             throw new DukeException("The description of a deadline cannot be empty.");
         }
@@ -205,7 +197,7 @@ public class Parser {
             tasks.add(newDeadline);
             ArrayList<Task> tasksCopy = tasks.clone();
             Storage.store(tasksCopy);
-            return ui.add(newDeadline, tasks.size(), isRunningOnGui);
+            return ui.add(newDeadline, tasks.size());
         } catch (Exception e) {
             throw new DukeException("Please enter a valid YYYY-MM-DD date format!");
         }
@@ -217,12 +209,11 @@ public class Parser {
      * @param input Line of user input.
      * @param userInputWords Array of words from user input.
      * @param tasks The user's current task list.
-     * @param isRunningOnGui A boolean that returns true if the application is running on GUI.
      * @return Returns a response to the user.
      * @throws DukeException  If user input is incorrect.
      */
     public static String createEventCommand(
-            String input, String[] userInputWords, TaskList tasks, boolean isRunningOnGui) throws DukeException {
+            String input, String[] userInputWords, TaskList tasks) throws DukeException {
         if (userInputWords.length <= 1) {
             throw new DukeException("The description of an event cannot be empty.");
         }
@@ -237,7 +228,7 @@ public class Parser {
             tasks.add(newEvent);
             ArrayList<Task> tasksCopy = tasks.clone();
             Storage.store(tasksCopy);
-            return ui.add(newEvent, tasks.size(), isRunningOnGui);
+            return ui.add(newEvent, tasks.size());
         } catch (Exception e) {
             throw new DukeException("Please enter a valid YYYY-MM-DD date format!");
         }
@@ -249,42 +240,42 @@ public class Parser {
      *
      * @param inputted Line of user input.
      * @param tasks The user's current task list.
-     * @param isRunningOnGui A boolean that returns true if the application is running on GUI.
      * @return Returns a response to the user.
      * @throws DukeException  If user input is incorrect.
      */
-    public static String parse(String inputted, TaskList tasks, boolean isRunningOnGui) throws DukeException {
+    public static String parse(String inputted, TaskList tasks) throws DukeException {
         String input = inputted.trim();
         if (input.equals(EMPTY_COMMAND)) {
             throw new DukeException("Please input a proper command!");
         }
+        //userInputWords length reflects the number of words in the input command.
         String[] userInputWords = input.split(" ");
         if (input.equals(BYE_COMMAND)) {
-            return ui.goodbye(isRunningOnGui);
+            return ui.goodbye();
         } else if (input.equals(LIST_COMMAND)) {
-            return ui.list(tasks, isRunningOnGui);
+            return ui.list(tasks);
         } else if (userInputWords.length == 2 && userInputWords[0].equals(DONE_COMMAND)) {
-            return executeDoneCommand(userInputWords, tasks, isRunningOnGui);
+            return executeDoneCommand(userInputWords, tasks);
         } else if (userInputWords.length == 2 && userInputWords[0].equals(DELETE_COMMAND)) {
-            return executeDeleteCommand(userInputWords, tasks, isRunningOnGui);
+            return executeDeleteCommand(userInputWords, tasks);
         } else if (userInputWords.length == 2 && userInputWords[0].equals(FIND_COMMAND)) {
-            return executeFindCommand(userInputWords, tasks, isRunningOnGui);
+            return executeFindCommand(userInputWords, tasks);
         }  else if (userInputWords.length == 2 && userInputWords[0].equals(FIND_TAG_COMMAND)) {
-            return executeFindTagCommand(userInputWords, tasks, isRunningOnGui);
+            return executeFindTagCommand(userInputWords, tasks);
         } else if (userInputWords.length == 3 && userInputWords[0].equals(TAG_COMMAND)) {
-            return executeTagCommand(userInputWords, tasks, isRunningOnGui);
+            return executeTagCommand(userInputWords, tasks);
         } else if (userInputWords.length == 3 && userInputWords[0].equals(REMOVE_TAG_COMMAND)) {
-            return executeRemoveTagCommand(userInputWords, tasks, isRunningOnGui);
+            return executeRemoveTagCommand(userInputWords, tasks);
         } else if (userInputWords.length == 2 && input.equals(SHOW_TAGS_COMMAND)) {
-            return ui.showTags(tasks, isRunningOnGui);
+            return ui.showTags(tasks);
         } else {
             switch (userInputWords[0]) {
             case NEW_TODO_COMMAND:
-                return createToDoCommand(input, userInputWords, tasks, isRunningOnGui);
+                return createToDoCommand(input, userInputWords, tasks);
             case NEW_DEADLINE_COMMAND:
-                return createDeadlineCommand(input, userInputWords, tasks, isRunningOnGui);
+                return createDeadlineCommand(input, userInputWords, tasks);
             case NEW_EVENT_COMMAND:
-                return createEventCommand(input, userInputWords, tasks, isRunningOnGui);
+                return createEventCommand(input, userInputWords, tasks);
             default:
                 throw new DukeException("I'm sorry, but I don't know what that means :-(");
             }

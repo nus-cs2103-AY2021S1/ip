@@ -1,20 +1,26 @@
 package duke;
 
 public enum Tag {
-    HAPPY, ANGRY, SAD, CONFUSED, EXCITED, DOGTAG;
+    FUN, BORING, EXCITING, URGENT, CHILL, SIAN, LAZE, DUMMY;
 
     public static Tag StringToTag(String input) throws DukeException {
         switch (input) {
-            case "happy":
-                return HAPPY;
-            case "angry":
-                return ANGRY;
-            case "sad":
-                return SAD;
-            case "confused":
-                return CONFUSED;
-            case "excited":
-                return EXCITED;
+            case "fun":
+                return FUN;
+            case "boring":
+                return BORING;
+            case "exciting":
+                return EXCITING;
+            case "urgent":
+                return URGENT;
+            case "chill":
+                return CHILL;
+            case "sian":
+                return SIAN;
+            case "laze":
+                return LAZE;
+            case "dummy":
+                return DUMMY;
             default:
                 throw new DukeException("Sorry, Duke does not recognise that tag name :(");
         }
@@ -22,18 +28,22 @@ public enum Tag {
 
     public static String TagToString(Tag tag) {
         switch (tag) {
-            case HAPPY:
-                return "happy";
-            case ANGRY:
-                return "angry";
-            case SAD:
-                return "sad";
-            case CONFUSED:
-                return "confused";
-            case EXCITED:
-                return "excited";
+            case FUN:
+                return "fun";
+            case BORING:
+                return "boring";
+            case EXCITING:
+                return "exciting";
+            case URGENT:
+                return "urgent";
+            case CHILL:
+                return "chill";
+            case SIAN:
+                return "sian";
+            case LAZE:
+                return "laze";
             default:
-                return "dogtag";
+                return "dummy";
         }
     }
 }
