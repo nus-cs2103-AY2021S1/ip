@@ -1,5 +1,5 @@
 E/0/Computing Day /2020-09-02
 T/1/Write Book
 D/1/CS2103T homework /2000-02-19
-D/1/get some wins /1999-09-01
 E/0/eat snacks /2020-12-10
+T/0/Play CoD
