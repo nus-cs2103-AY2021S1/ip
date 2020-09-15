@@ -3,8 +3,8 @@ package duke.command;
 import java.util.StringJoiner;
 
 import duke.DukeException;
-import duke.parser.Parser;
 import duke.TaskList;
+import duke.parser.Parser;
 import duke.task.Event;
 
 /**
