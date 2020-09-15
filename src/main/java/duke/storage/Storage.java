@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -24,8 +26,29 @@ import duke.tasklist.TaskList;
  */
 public class Storage {
 
-    /** Path to text file which contains the stored Task */
+    /** String path to text file which contains the stored Task */
     private static final String FILE_PATH = "./data/tasks.txt";
+
+    /** Path to text file which contains the stored Task */
+    private Path path;
+
+    /**
+     * Constructs a <code>Storage</code> object with a default file path.
+     */
+    public Storage() {
+        this(FILE_PATH);
+    }
+
+    /**
+     * Constructs a <code>Storage</code> object with a specified file path.
+     *
+     * @param filePath The String path to text file which stores Task.
+     */
+    private Storage(String filePath) {
+        path = Paths.get(filePath);
+        File file = new File(filePath);
+        file.getParentFile().mkdirs();
+    }
 
     /**
      * Saves the Task into a text file.
