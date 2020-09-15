@@ -12,12 +12,32 @@ import java.util.List;
 public class Ui {
 
     /**
-     * JavafxUi constructor
+     * Ui constructor
      */
     Ui() {
 
     }
 
+    /**
+     * addTask method which returns the task information
+     */
+    public String helpString() {
+        String help = "Welcome to duke!\n" +
+                "These are the list of commands and [ ] indicates user input while { } indicates variables\n" +
+                "- [todo {name}] to add a new todo\n" +
+                "- [deadline {name} /by {dd/mm/yyyy HHmm}] to add a new deadline\n" +
+                "- [event {name} /at {dd/mm/yyy HHmm-HHmm}] to add a new event\n" +
+                "- [delete {index}] to delete a task at the index specified\n" +
+                "- [delete all] to delete all tasks\n" +
+                "- [done {index}] to mark a task as done\n" +
+                "- [list] to view all tasks in the list\n" +
+                "- [find {word}] to find task that contains a certain work\n" +
+                "- [snooze {index}] to push back a deadline or event by an hour\n" +
+                "- [reschedule {index} {hours}] to push back a deadline or event by a number of hours\n" +
+                "- [help] to print list of commands\n" +
+                "- [bye] to exit the application";
+        return help;
+    }
 
     /**
      * addTask method which returns the task information
@@ -89,7 +109,7 @@ public class Ui {
      */
     public String foundWord(List<Task> tasks) {
         return "Here are the matching tasks in your list:\n"
-                + printList(tasks);
+            + printList(tasks);
     }
 
     public String rescheduledTask(Task task) {

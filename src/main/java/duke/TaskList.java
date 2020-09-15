@@ -135,21 +135,28 @@ public class TaskList {
      * @param word word user wants to find
      * @return returns a new list of tasks that contain specifed word
      */
-    public List<Task> findWord(String word) {
+    public List<Task> findWord(String word) throws DukeException {
         assert !word.isBlank();
         List<Task> findArray = new ArrayList<>();
+        int count = 0;
+        outer:
         for (Task x: tasks) {
             String[] nameArray = x.getName().split(" ");
             inner:
             for (String y: nameArray) {
                 if (word.equals(y)) {
                     findArray.add(x);
-                    break inner;
+                    count += 1;
+                    continue outer;
                 }
             }
             findArray.add(null);
         }
-        return findArray;
+        if (count == 0) {
+            throw new DukeException("Sorry I can't find any tasks containing that word!");
+        } else {
+            return findArray;
+        }
     }
 
     public Task rescheduleTask(String num, String hours) {

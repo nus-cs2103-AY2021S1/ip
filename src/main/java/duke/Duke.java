@@ -95,9 +95,12 @@ public class Duke {
             output += ui.rescheduledTask(taskList.rescheduleTask(inputArray[1],"1"));
             storage.saveFile(taskList.getTasks());
             return output;
+        case "help":
+            output += ui.helpString();
+            return output;
         default:
             throw new DukeException("Sorry I don't know what you mean. \n" +
-                    "Type /help to see the list of commands available!");
+                    "Type help to see the list of commands available!");
         }
     }
 }

@@ -87,41 +87,36 @@ public class Storage {
             throw new DukeException("File cannot be located or opened");
         }
         List<Task> tasks = new ArrayList<>();
-            while (sc.hasNextLine()) {
-                String type = sc.nextLine();
-                String done = sc.nextLine();
-                String name = sc.nextLine();
-                if (type.equals("ToDo")) {
-                    Task temp = new ToDo(name);
-                    if (done.equals("true")) {
-                        temp.completeTask();
-                    }
-                    tasks.add(temp);
-                    sc.nextLine();
-                } else if (type.equals("Deadlines")) {
-                    String startDateTime = sc.nextLine();
-                    Task temp = new Deadlines(name, startDateTime);
-                    if (done.equals("true")) {
-                        temp.completeTask();
-                    }
-                    tasks.add(temp);
-                    sc.nextLine();
-                } else {
-                    String startDateTime = sc.nextLine();
-                    String endDateTime = sc.nextLine();
-                    Task temp = new Events(name, startDateTime, endDateTime);
-                    if (done.equals("true")) {
-                        temp.completeTask();
-                    }
-                    tasks.add(temp);
-                    sc.nextLine();
+        while (sc.hasNextLine()) {
+            String type = sc.nextLine();
+            String done = sc.nextLine();
+            String name = sc.nextLine();
+            if (type.equals("ToDo")) {
+                Task temp = new ToDo(name);
+                if (done.equals("true")) {
+                    temp.completeTask();
                 }
+                tasks.add(temp);
+                sc.nextLine();
+            } else if (type.equals("Deadlines")) {
+                String startDateTime = sc.nextLine();
+                Task temp = new Deadlines(name, startDateTime);
+                if (done.equals("true")) {
+                    temp.completeTask();
+                }
+                tasks.add(temp);
+                sc.nextLine();
+            } else {
+                String startDateTime = sc.nextLine();
+                String endDateTime = sc.nextLine();
+                Task temp = new Events(name, startDateTime, endDateTime);
+                if (done.equals("true")) {
+                    temp.completeTask();
+                }
+                tasks.add(temp);
+                sc.nextLine();
             }
-            return tasks;
-
+        }
+        return tasks;
     }
-
 }
-
-
-
