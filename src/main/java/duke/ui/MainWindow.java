@@ -33,6 +33,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+
         String helloMessage = UI.getHelloMessage() + "\n\nI've saved these so far:\n"
                 + duke.getResponse("list");
         dialogContainer.getChildren().addAll(
