@@ -106,7 +106,7 @@ Example: `delete 1`
 
 Sample Usage:
 
-![Deleting a task](readme-img/delete.png)
+![Deleting a task](docs/readme-img/delete.png)
 
 ## Filtering Tasks
 
