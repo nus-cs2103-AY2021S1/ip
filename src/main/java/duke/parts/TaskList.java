@@ -53,7 +53,7 @@ public class TaskList {
         }
 
         if (index >= tasks.size()) {
-            throw new DeleteOutOfBounds(index + 1);
+            throw new DeleteOutOfBounds(tasks.size());
         }
         assert index < tasks.size() && index >= 0;
         Task removed = tasks.remove(index);
@@ -100,7 +100,7 @@ public class TaskList {
         }
 
         if (index >= tasks.size()) {
-            throw new DeleteOutOfBounds(index + 1);
+            throw new DeleteOutOfBounds(tasks.size());
         }
         tasks.get(index).setDone();
         this.updateList(storage);
