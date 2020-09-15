@@ -7,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Circle;
 
 public class DialogBox extends HBox {
 
@@ -24,6 +25,7 @@ public class DialogBox extends HBox {
     public DialogBox(Label label, ImageView imageview) {
         text = label;
         displayPicture = imageview;
+        imageview.setClip(new Circle(50, 50, 50));
 
         text.setWrapText(true);
         displayPicture.setFitWidth(100.0);
@@ -45,7 +47,7 @@ public class DialogBox extends HBox {
         return new DialogBox(l, iv);
     }
 
-    public static DialogBox getDukeDialog(Label l, ImageView iv) {
+    public static DialogBox getOliviaDialog(Label l, ImageView iv) {
         return new DialogBox(l, iv).flip();
     }
 
