@@ -76,7 +76,7 @@ public class Ui {
      * @return the message indicated the task has been marked as completed
      */
     public String taskCompleted(Task task) {
-        return "Nice, I've marked this task as done!" + task.toString();
+        return "Nice, I've marked this task as done!\n" + task.toString();
     }
 
     /**
