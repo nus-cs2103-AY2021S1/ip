@@ -2,24 +2,19 @@
 
 ## Features 
 
-CLEAR,
+## General
 
-LIST,
-DONE,
-DELETE,
-ADD,
-FIND,
+### `clear` - clear all data
 
-NOTES,
-NEW,
-WRITE,
-VIEW,
-COMPLETE,
+Example of usage: 
 
+`clear`
 
-### Task List 
+Example outcome:
 
-## Usage
+nothing
+
+## Task List
 
 ### `tasks` - View list of all tasks
 
@@ -85,10 +80,8 @@ Expected outcome:
 
 `✰ 1. [T] [✓] read the bible ✰`
 
-### Notes
-Description of feature.
 
-## Usage
+## Notes
 
 ### `notes` - View list of all notes
 
