@@ -137,7 +137,7 @@ public class TaskList {
 
     @Override
     public String toString() {
-        StringBuilder res = new StringBuilder("Here are the tasks in your list:\n");
+        StringBuilder res = new StringBuilder("o(=*T*=)m\nHere are the tasks in your list:\n");
         for (int i = 0; i < list.size(); i++) {
             res.append((i + 1)).append(" ").append(list.get(i).toString()).append("\n");
         }

@@ -4,16 +4,16 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 
@@ -37,9 +37,11 @@ public class Duke extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
+    private HBox space1;
+    private HBox space2;
 
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/img1.jpg"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/img2.jpg"));
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/img1.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/img2.png"));
 
     /**
      * Constructs a Duke object
@@ -83,6 +85,7 @@ public class Duke extends Application {
      */
     @Override
     public void start(Stage stage){
+        System.out.println(javafx.scene.text.Font.getFamilies());
         //Step 1. Setting up required components
 
         //The container for the content of the chat to scroll.
@@ -97,6 +100,7 @@ public class Duke extends Application {
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
         scene = new Scene(mainLayout);
+        scene.getStylesheets().add("/style/style.css");
 
         //Step 2. Formatting the window to look as expected
         stage.setTitle("Duke");
@@ -106,7 +110,7 @@ public class Duke extends Application {
 
         mainLayout.setPrefSize(400.0, 600.0);
 
-        scrollPane.setPrefSize(385, 535);
+        scrollPane.setPrefSize(400, 560 );
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
@@ -116,9 +120,11 @@ public class Duke extends Application {
         // You will need to import `javafx.scene.layout.Region` for this.
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
-        userInput.setPrefWidth(325.0);
+        userInput.setPrefWidth(320.0);
+        userInput.setPrefHeight(10);
 
-        sendButton.setPrefWidth(55.0);
+        sendButton.setPrefWidth(80.0);
+        sendButton.setPrefHeight(40);
 
         AnchorPane.setTopAnchor(scrollPane, 1.0);
 
@@ -131,7 +137,9 @@ public class Duke extends Application {
         //Step 3. Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
             try {
-                handleUserInput();
+                if (handleUserInput()) {
+                    stage.close();
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -139,7 +147,9 @@ public class Duke extends Application {
 
         userInput.setOnAction((event) -> {
             try {
-                handleUserInput();
+                if (handleUserInput()) {
+                    stage.close();
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -155,6 +165,14 @@ public class Duke extends Application {
 
         stage.setScene(scene);
         stage.show();
+
+        stage.setOnCloseRequest(e -> {
+            try {
+                storage.writeFile(tasks);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        });
     }
 
     /**
@@ -175,16 +193,28 @@ public class Duke extends Application {
      * Iteration 2:
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
-     * @throws IOException for handling file
+     * @return whether to terminate the app
+     * @throws IOException for handling files
      */
-    private void handleUserInput() throws IOException {
-        Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
+    private boolean handleUserInput() throws IOException {
+        String input = userInput.getText();
+        Label userText = new Label(input);
+        Label dukeText = new Label(getResponse(input));
+
+        space1 = new HBox();
+        space2 = new HBox();
+        space1.setPrefHeight(30);
+        space2.setPrefHeight(30);
+
         dialogContainer.getChildren().addAll(
+                space1,
                 DialogBox.getUserDialog(userText, new ImageView(user)),
+                space2,
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke))
         );
         userInput.clear();
+
+        return input.equals("bye");
     }
 
     /**

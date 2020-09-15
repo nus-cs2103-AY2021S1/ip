@@ -211,8 +211,8 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + "\n     (by: "
+        return "[D]" + super.toString() + "\n   (by: "
                 + (date == null ? by : (date.toString() + " (" + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")"))
-                + (time != null ? " " + time.toString() : "") + ")\n";
+                + (time != null ? " " + time.toString() : "") + ")";
     }
 }

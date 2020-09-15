@@ -73,7 +73,7 @@ public class Task {
         if (end >= len) {
             end = len - 1;
         }
-        if (start + 4 < end - 1) {
+        if (start + 4 < end - 1 || start > end) {
             return "";
         }
         return input.substring(start + 4, (input.charAt(end) != '#' ? end + 1 : end - 1));
@@ -170,7 +170,7 @@ public class Task {
      */
     @Override
     public String toString() {
-        return "[" + getStatusIcon() + "] " + description + (tagList == null ? "" : "\n" + tagList.toString());
+        return "[" + getStatusIcon() + "] " + description + (tagList == null || tagList.getSize() == 0 ? "" : "\n" + tagList.toString());
     }
 
 }

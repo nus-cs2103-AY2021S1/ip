@@ -58,6 +58,14 @@ public class TagList {
         return tags.get(index - 1);
     }
 
+    /**
+     * Returns the size of the tag list
+     * @return the size of the tag list
+     */
+    public int getSize() {
+        return tags.size();
+    }
+
     public String fileToString() {
         StringBuilder res = new StringBuilder();
         for (Tag tag : tags) {
@@ -71,7 +79,7 @@ public class TagList {
         if (tags.size() <= 0) {
             return "";
         }
-        StringBuilder res = new StringBuilder("     Tags: ");
+        StringBuilder res = new StringBuilder("   Tags: ");
         for (Tag tag : tags) {
             res.append(tag.toString()).append(" ");
         }

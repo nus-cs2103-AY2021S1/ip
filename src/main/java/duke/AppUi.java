@@ -9,21 +9,21 @@ public class AppUi extends Ui {
 
     public AppUi(){}
 
-    Supplier<String> byeMessage = () -> "Bye. Hope to see you again soon!";
-    Supplier<String> inputEmptyErrorMsg = () -> "\uD83D\uDE43 OOPS!!! input cannot be empty.";
-    Supplier<String> wrongFormatAfterDoneMsg = () -> "\uD83D\uDE43 wrong input after the word \"done\"";
-    Supplier<String> wrongFormatAfterDeleteMsg = () -> "\uD83D\uDE43 wrong input after the word \"delete\"";
-    Supplier<String> descriptionEmptyMsg = () -> "\uD83D\uDE43 OOPS!!! The description of a todo cannot be empty.";
+    Supplier<String> byeMessage = () -> "Bye. Hope to see you again soon! o(=*T*=)m";
+    Supplier<String> inputEmptyErrorMsg = () -> "\uD83D\uDE43 OOPS!!! input cannot be empty. o(=*T*=)m";
+    Supplier<String> wrongFormatAfterDoneMsg = () -> "\uD83D\uDE43 wrong input after the word \"done\" o(=*T*=)m";
+    Supplier<String> wrongFormatAfterDeleteMsg = () -> "\uD83D\uDE43 wrong input after the word \"delete\" o(=*T*=)m";
+    Supplier<String> descriptionEmptyMsg = () -> "\uD83D\uDE43 OOPS!!! The description of a todo cannot be empty. o(=*T*=)m";
     Supplier<String> wrongDeadlineFormatMsg = () -> "\uD83D\uDE43 OOPS!!! The description and time of a deadline cannot be empty."
-            + " Or maybe you used \"at\" instead of \"by\"?";
+            + " Or maybe you used \"at\" instead of \"by\"? o(=*T*=)m";
     Supplier<String> wrongEventFormatMsg = () -> "\uD83D\uDE43 OOPS!!! The description and time of a event cannot be empty."
-            + " Or maybe you used \"by\" instead of \"at\"?";
+            + " Or maybe you used \"by\" instead of \"at\"? o(=*T*=)m";
     Supplier<String> wrongDateFormatMsg = () -> "Wrong date input format. Correct format should be \"YYYY-MM-DD\"\n";
     Supplier<String> wrongTimeFormatMsg = () -> "Wrong time format. Correct format should be \"HH:MM\"\n";
     Supplier<String> noSuchCommandMsg = () -> "\uD83D\uDE43 Sorry~ please specify whether this is a todo or a deadline or a event\n"
-            + "put the word \"todo\" or \"deadline\" or \"event\" in front of your description";
+            + "put the word \"todo\" or \"deadline\" or \"event\" in front of your description o(=*T*=)m";
     Supplier<String> wrongFindFormatMsg = () -> "Wrong \"find\" command format.\nCorrect is \"find {keyword}\" "
-            + "where {keyword} is the keyword you want to search";
+            + "where {keyword} is the keyword you want to search o(=*T*=)m";
 
     /**
      * Returns the input empty error message
@@ -57,7 +57,7 @@ public class AppUi extends Ui {
      * @return message when task number exceed TaskList size
      */
     public String getTaskNumberExceedMsg(int taskNumber, int listSize) {
-        return "no such task: task " + taskNumber + " as you only have " + listSize + " in total";
+        return "no such task: task " + taskNumber + " as you only have " + listSize + " in total o(=*T*=)m";
     }
 
     /**
@@ -84,7 +84,7 @@ public class AppUi extends Ui {
      */
     public String getDeleteMessage(Task task, TaskList list) {
         return "Noted. I've removed this task:\n" + task.toString()
-                + String.format("\nNow you have %d tasks in the list.", list.getSize());
+                + String.format("\nNow you have %d tasks in the list. o(=*T*=)m", list.getSize());
     }
 
     /**
@@ -107,17 +107,17 @@ public class AppUi extends Ui {
             Todo newTodo = (Todo) task;
             return "Got it. I've added this task:\n"
                     + newTodo.toString() + "\n"
-                    + String.format("Now you have %d tasks in the list.", listSize);
+                    + String.format("Now you have %d tasks in the list. o(=*T*=)m", listSize);
         } else if (type == DEADLINE) {
             Deadline ddl = (Deadline) task;
             return "Got it. I've added this task:\n"
                     + ddl.toString() + "\n"
-                    + String.format("Now you have %d tasks in the list.", listSize);
+                    + String.format("Now you have %d tasks in the list. o(=*T*=)m", listSize);
         } else {
             Event event = (Event) task;
             return "Got it. I've added this task:\n"
                     + event.toString() + "\n"
-                    + String.format("Now you have %d tasks in the list.", listSize);
+                    + String.format("Now you have %d tasks in the list. o(=*T*=)m", listSize);
         }
     }
 
@@ -142,7 +142,7 @@ public class AppUi extends Ui {
                 res += (event.toString() + "\n");
             }
         }
-        return res + String.format("Now you have %d tasks in the list.", overallListSize);
+        return res + String.format("Now you have %d tasks in the list. o(=*T*=)m", overallListSize);
     }
 
     /**
@@ -212,10 +212,11 @@ public class AppUi extends Ui {
      */
     public static String getLogo(){
         return "Hello from\n"
-                + " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
+                + " ___            _        \n"
+                + "|  _  \\  _   _  | |  _    ___ \n"
+                + "| | |  |  | | | |   | |/ /      / _ \\\n"
+                + "| |_|  |  | |_| |   |  <     |  __/\n"
+                + "|___/  \\__,_|_ |  |\\_ \\ ___|\n"
+                + "o(=*T*=)m\n";
     }
 }
