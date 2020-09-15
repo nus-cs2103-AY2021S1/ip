@@ -4,10 +4,7 @@
 
 ### Feature 1 - Add Task
 Add a task.  
-The task can be:
-1. todo
-2. event
-3. deadline
+The task can be: todo, event, deadline
 ### Feature 2 - Mark Task as Done
 ### Feature 3 - Delete Task
 ### Feature 4 - Find task 
