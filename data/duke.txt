@@ -1,6 +1,2 @@
-E | 0 | CK birthday | 2020-09-13 | 12:00
-T | 0 | get groceries
-T | 0 | watch lecture 5 CS2100
-D | 0 | assignment 1 CS2100 | 2020-09-18 | 23:59
 T | 0 | description
-D | 0 | description | 2020-12-22 | 16:00
+D | 0 | description | 2012-02-12 | 16:00
