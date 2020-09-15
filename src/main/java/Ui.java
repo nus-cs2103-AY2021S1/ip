@@ -5,7 +5,7 @@ import java.io.IOException;
  */
 public class Ui {
 
-    public final static String HORIZONTAL_LINE = "________________________________" + "\n";
+    public final static String HORIZONTAL_LINE = "________________________________________________________" + "\n";
 
     /**
      * Constructor that creates a Ui object, with a Scanner that reads user input.
@@ -16,7 +16,7 @@ public class Ui {
      * Prints to user a welcome message when the program is run.
      */
     public static String printWelcome() {
-        String hello = "Hello! I'm Chris" + "\n" + "What can I do for you?" + "\n";
+        String hello = "hey it's Cardi B!" + "\n" + "what do you need" + "\n";
         return HORIZONTAL_LINE + "\n" + hello + HORIZONTAL_LINE;
     }
 
@@ -24,7 +24,7 @@ public class Ui {
      * Prints to user if the user has entered the terminate command.
      */
     public static String printBye() {
-        String bye = "Bye. Hope to see you again soon!" + "\n";
+        String bye = "Okrrr bye!" + "\n";
         return HORIZONTAL_LINE + "\n" + bye + HORIZONTAL_LINE;
     }
 
@@ -34,7 +34,7 @@ public class Ui {
      * @return completed message String
      */
     public String printDone(Task task) {
-        return HORIZONTAL_LINE + "Nice! I've marked this task as done:" + "\n"
+        return HORIZONTAL_LINE + "Proud of you sister! I've marked this task as done:" + "\n"
                 + task.toString() + "\n" + HORIZONTAL_LINE;
     }
 
@@ -46,7 +46,7 @@ public class Ui {
      * @return delete message String
      */
     public String printDelete(TaskList taskList, Task task) {
-        return HORIZONTAL_LINE + "Noted. I've removed this task:" + "\n"
+        return HORIZONTAL_LINE + "Okrr sister. I've removed this task:" + "\n"
                 + task.toString() + "\n" + "Now you have " + taskList.getSize() + " tasks in the list."
                 + "\n" + HORIZONTAL_LINE;
     }
@@ -59,13 +59,13 @@ public class Ui {
     public String printList(TaskList taskList) {
         StringBuilder tasks = new StringBuilder();
         if (taskList.getSize() > 0) {
-            tasks.append(HORIZONTAL_LINE + "Here are the tasks in your list:" + "\n");
+            tasks.append(HORIZONTAL_LINE + "Here are the tasks in your list sister:" + "\n");
             for (int i = 1; i <= taskList.getSize(); i++) {
                 Task task = taskList.getTask(i);
                 tasks.append(i + "." + task.toString()).append("\n");
             }
         } else {
-            tasks.append("You have no tasks mate!");
+            tasks.append("You have no tasks sister!");
         }
         tasks.append(HORIZONTAL_LINE);
         return tasks.toString();
@@ -78,7 +78,7 @@ public class Ui {
      * @return Add message String
      */
     public String printAdd(TaskList taskList, Task task) {
-        return HORIZONTAL_LINE + "Got it. I've added this task:" + "\n" + task.toString() + "\n"
+        return HORIZONTAL_LINE + "Got it sister! I've added this task:" + "\n" + task.toString() + "\n"
                 + "Now you have " + taskList.getSize() + " tasks in the list."
                 + "\n" + HORIZONTAL_LINE;
     }
@@ -121,7 +121,7 @@ public class Ui {
      * @return String of error message
      */
     public String printError(String message) {
-        return "Oh no there seems to be an error" + message;
+        return "Oh dear! There seems to be an error" + "\n" + message;
     }
 
     /**
@@ -148,7 +148,7 @@ public class Ui {
                         .append("\n");
             }
         } else {
-            tasks.append("There are no matching tasks.");
+            tasks.append("Oops! There are no matching tasks.");
         }
         return tasks.toString();
     }

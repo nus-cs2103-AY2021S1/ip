@@ -1,4 +1,4 @@
 D | 0 | return book | 06-06-2020 0900
-E | 0 | project meeting | 06-08-2020 1400
 T | 1 | join sports club
-T | 0 | borrow book
+D | 1 | return book | 07-06-2020 0900
+E | 0 | birthday party | 12-12-2020 1200

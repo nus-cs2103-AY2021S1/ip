@@ -86,7 +86,6 @@ public class Storage {
      */
     public Task loadTasks(String line) {
         String[] tasks = line.split(" \\| ");
-        System.out.println("print: " + Arrays.toString(tasks));
         String task = tasks[0];
         Boolean isDone = tasks[1].equals("1");
         String desc = tasks[2];
