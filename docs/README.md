@@ -12,7 +12,7 @@ Created by: Sruthi
 3. Execute the command `java -jar duke.java` in your terminal
 
 ## User Interface
-![UI](UI.png)
+![UI](Ui.png)
 
 ## Features 
 
