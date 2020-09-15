@@ -67,7 +67,15 @@ public class Parser {
                         throw new DukeException();
                     } else {
                         int index = userInput.indexOf("/by");
+                        if(userInput.substring(9,index).length() == 0){
+                            throw new DukeException();
+                        }
+
+                        if(userInput.substring((index + 4)).length() == 0){
+                            throw new DukeException();
+                        }
                         String deadlineDateString = userInput.substring(index + 4);
+
                         LocalDate deadlineDate = LocalDate.parse(deadlineDateString);
                         Deadline deadline = new Deadline(userInput.substring(9, index), false, deadlineDate);
                         return new addCommand(tasklist, deadline);
@@ -75,7 +83,7 @@ public class Parser {
                 } catch (DateTimeParseException e) {
                     return new exceptionCommand(tasklist, duke.ui.showException("Please input date in the format: YYYY-MM-DD"));
                 } catch (DukeException e) {
-                    return new exceptionCommand(tasklist, duke.ui.showException("deadline must include '/by'"));
+                    return new exceptionCommand(tasklist, duke.ui.showException("deadline must include '<description> /by <date>'"));
                 }
 
 
@@ -88,6 +96,9 @@ public class Parser {
                         throw new DukeException();
                     } else {
                         int index = userInput.indexOf("/at");
+                        if (userInput.substring(6,index).length()==0) {
+                            throw new DukeException();
+                        }
                         if (userInput.substring(index + 3).length() < 1) {
                             throw new DukeArrayException();
                         }
@@ -102,7 +113,7 @@ public class Parser {
                 } catch (DateTimeParseException e) {
                 return new exceptionCommand(tasklist,duke.ui.showException("Please input date in the format: YYYY-MM-DD"));
                 } catch (DukeException e) {
-                return new exceptionCommand(tasklist,duke.ui.showException("event must include '/at'"));
+                return new exceptionCommand(tasklist,duke.ui.showException("event must include '<description> /at <date>'"));
                 }
 
 
