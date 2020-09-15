@@ -133,6 +133,7 @@ public class Parser {
                 int taskPosition = Integer.parseInt(userInput.substring(5));
                 String response = tasks.setDoneAsString(taskPosition);
                 assert response.length() > 0 : "Response should not be empty";
+                storage.saveTasks(tasks.getTasksList());
                 return response;
 
             } catch (StringIndexOutOfBoundsException e) {
