@@ -38,7 +38,7 @@ Command: `delete {INDEX}`
 
 Example: `delete 4`
 
-<img src="/docs/example4.png" height="300" width="500">
+<img src="/docs/example4.png" height="500" width="500">
 
 ### 3. List all Tasks
 List all the tasks in Duke's task list.  
