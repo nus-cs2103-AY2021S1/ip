@@ -9,7 +9,6 @@ import java.util.concurrent.TimeUnit;
 import duke.Duke;
 import duke.commands.Command;
 import duke.commands.ExceptionCommand;
-
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.ScrollPane;
@@ -33,8 +32,8 @@ public class MainWindow extends AnchorPane {
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Mocha.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Milk.png"));
-    private Image dukeImageException = new Image(this.getClass().getResourceAsStream("/images/Milk Confused.png"));
-    private Image dukeImageBye = new Image(this.getClass().getResourceAsStream("/images/Milk Crying.png"));
+    private Image dukeImageException = new Image(this.getClass().getResourceAsStream("/images/Milk Harh.png"));
+    private Image dukeImageBye = new Image(this.getClass().getResourceAsStream("/images/Milk Bye.png"));
 
     /** Initializes Main Window with a welcome message. */
     @FXML
@@ -53,9 +52,8 @@ public class MainWindow extends AnchorPane {
         duke = d;
     }
 
-    /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+    /** Creates two dialog boxes, one echoing user input and the other containing Duke's reply,
+     * and then appends them to the dialog container. Clears the user input after processing.
      */
     @FXML
     private void handleUserInput() {
