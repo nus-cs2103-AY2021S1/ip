@@ -19,9 +19,10 @@ public class ListCommand extends Command {
     public String execute(TaskList taskList, Ui ui, Storage storage) {
         String listItems = "";
         for (int i = 1; i <= taskList.size(); i++) {
-            listItems = listItems + i + ". " + taskList.get(i - 1) + "\n";
+            listItems = listItems + "\n";
+            listItems = listItems + i + ". " + taskList.get(i - 1);
         }
-        String repsonse = "Here are the tasks in your list: \n" + listItems;
+        String repsonse = "Here are the tasks in your list:" + listItems;
         return repsonse;
     }
 

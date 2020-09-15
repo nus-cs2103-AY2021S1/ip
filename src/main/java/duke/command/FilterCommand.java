@@ -38,11 +38,12 @@ public class FilterCommand extends Command {
             LocalDate filterDate = LocalDate.parse(reformatedDate);
             for (int i = 1; i <= taskList.size(); i++) {
                 if (taskList.get(i - 1).isDate(filterDate)) {
-                    listItems = listItems + i + ". " + taskList.get(i - 1) + "\n";
+                    listItems = listItems + "\n";
+                    listItems = listItems + i + ". " + taskList.get(i - 1);
                 }
             }
             String response = "Here are your tasks due on " + filterDate.format(DateTimeFormatter.ofPattern("MMM d yyy"))
-                    + ": \n" + listItems;
+                    + ":" + listItems;
             return response;
         } catch (DateTimeParseException e) {
             throw new DukeException("Please enter a valid date!");

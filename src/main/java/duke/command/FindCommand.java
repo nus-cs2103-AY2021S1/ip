@@ -24,10 +24,11 @@ public class FindCommand extends Command {
         String listItems = "";
         for (int i = 1; i <= taskList.size(); i++) {
             if (taskList.get(i - 1).toString().contains(keyword)) {
-                listItems = listItems + i + ". " + taskList.get(i - 1) + "\n";
+                listItems = listItems + "\n";
+                listItems = listItems + i + ". " + taskList.get(i - 1);
             }
         }
-        String response = "Here are your tasks that matches your search: \n" + listItems;
+        String response = "Here are your tasks that matches your search:" + listItems;
         return response;
     }
 
