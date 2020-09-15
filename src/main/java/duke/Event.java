@@ -5,6 +5,7 @@ package duke;
  */
 public class Event extends Task{
     private String duration;
+    private static final String EVENT_SYMBOL = "[E]";
 
     /**
      * Constructor for Event class.
@@ -26,7 +27,7 @@ public class Event extends Task{
      * @return the symbol of the Event class as a String
      */
     public String getTaskSymbol() {
-        return "[E]";
+        return EVENT_SYMBOL;
     }
 
     /**

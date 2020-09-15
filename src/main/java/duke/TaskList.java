@@ -49,7 +49,7 @@ public class TaskList {
     public TaskList search (String keyWord) {
         TaskList taskList = new TaskList(new ArrayList<Task>());
         for (Task task:this.taskList) {
-            if (task.toString().contains(keyWord)) {
+            if (task.contains(keyWord)) {
                 taskList.addTask(task);
             }
         }
