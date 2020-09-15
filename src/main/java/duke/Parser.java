@@ -10,10 +10,12 @@ import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.GetCommand;
 import duke.command.ListCommand;
+import duke.command.SortCommand;
 import duke.exception.DateException;
 import duke.exception.DukeException;
 import duke.exception.MissingInformationException;
 import duke.format.DateFormat;
+import duke.sort.SortBy;
 import duke.task.TaskType;
 
 /**
@@ -47,6 +49,8 @@ public class Parser {
             return parseGet(commandArr);
         } else if (commandArr[0].equals("find")) {
             return parseFind(commandArr);
+        } else if (commandArr[0].equals("sort")) {
+            return parseSort(commandArr);
         } else if (commandArr[0].equals("bye")) {
             return new ExitCommand();
         } else {
@@ -117,6 +121,20 @@ public class Parser {
         assert date != null;
         return new AddCommand(TaskType.EVENT, descriptionArr[0], date);
 
+    }
+
+    private static Command parseSort(String[] commandArr) throws MissingInformationException {
+        checkDescription(commandArr, "Sorting criteria cannot be empty. You can sort by name or date.");
+        SortBy criteria;
+        if (commandArr[1].equals("name")) {
+            criteria = SortBy.NAME;
+        } else if (commandArr[1].equals("date")) {
+            criteria = SortBy.DATE;
+        } else {
+            throw new MissingInformationException("Invalid sorting criteria. You can only sort by name or date.");
+        }
+
+        return new SortCommand(criteria);
     }
 
     /**
