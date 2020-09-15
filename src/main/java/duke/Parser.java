@@ -9,6 +9,7 @@ import duke.command.DoneCommand;
 import duke.command.EventCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
+import duke.command.HelpCommand;
 import duke.command.ListCommand;
 import duke.command.TodoCommand;
 import duke.command.UpdateCommand;
@@ -30,6 +31,7 @@ public class Parser {
     public static Command parse(String input) throws DukeException {
         boolean isExitCommand = input.equals("bye");
         boolean isListCommand = input.equals("list");
+        boolean isHelpCommand = input.equals("help");
         boolean isDoneCommand = input.length() >= 4 && input.startsWith("done");
         boolean isDeleteCommand = input.length() >= 6 && input.startsWith("delete");
         boolean isTodoCommand = input.length() >= 4 && input.startsWith("todo");
@@ -38,13 +40,15 @@ public class Parser {
         boolean isFindCommand = input.length() >= 4 && input.startsWith("find");
         boolean isUpdateCommand = input.length() >= 6 && input.startsWith("update");
 
-        boolean isInvalidCommand = !(isExitCommand || isListCommand || isDoneCommand || isDeleteCommand
+        boolean isInvalidCommand = !(isExitCommand || isListCommand || isHelpCommand || isDoneCommand || isDeleteCommand
                 || isTodoCommand || isEventCommand || isDeadlineCommand || isFindCommand || isUpdateCommand);
 
         if (isExitCommand) {
             return new ExitCommand();
         } else if (isListCommand) {
             return new ListCommand();
+        } else if (isHelpCommand) {
+            return new HelpCommand();
         } else if (isDoneCommand) {
             return new DoneCommand(input.substring(4));
         } else if (isDeleteCommand) {

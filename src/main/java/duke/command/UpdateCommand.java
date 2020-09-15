@@ -10,6 +10,9 @@ import duke.exception.InvalidUpdateInputException;
 
 import java.io.IOException;
 
+/**
+ * UpdateCommand deals with update input.
+ */
 public class UpdateCommand extends Command {
     String input;
 

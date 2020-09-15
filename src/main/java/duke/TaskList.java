@@ -59,12 +59,27 @@ public class TaskList {
         return task;
     }
 
+    /**
+     * Edits description of a Task from list.
+     * @param num          Int Task number to be deleted
+     * @param description  New description
+     * @return Updated task
+     */
     public Task editTaskDescription(int num, String description) {
         int index = num -1;
         this.list.get(index).setDescription(description);
         return this.list.get(index);
     }
 
+    /**
+     * Edits date and time of a Task from list.
+     * @param num   Int Task number to be deleted
+     * @param date  String date
+     * @param time  String time
+     * @return Updated task
+     * @throws InvalidDateTimeException
+     * @throws InvalidUpdateInputException
+     */
     public Task editTaskDatetime(int num, String date, String time) throws InvalidDateTimeException, InvalidUpdateInputException {
         int index = num -1;
         this.list.get(index).setDateTime(date, time);
