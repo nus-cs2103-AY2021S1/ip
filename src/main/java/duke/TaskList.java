@@ -51,7 +51,6 @@ public class TaskList {
         String newDesc = desc.substring(0, desc.indexOf('/') - 1);
         String time = desc.substring(desc.indexOf('/') + 4);
         tasks.add(new Deadline(newDesc, time));
-
     }
 
     private void addEvent(String event) {
@@ -88,6 +87,7 @@ public class TaskList {
             addEvent(command.substring(5));
         }
         Ui.addTask(tasks);
+        saveToDisk();
     }
 
     /**
@@ -99,6 +99,7 @@ public class TaskList {
         int num = Integer.parseInt(command) - 1;
         tasks.get(num).setDone();
         Ui.markDone(tasks.get(num));
+        saveToDisk();
     }
 
     /**
@@ -110,6 +111,7 @@ public class TaskList {
         int num = Integer.parseInt(command) - 1;
         Task cur = tasks.remove(num);
         Ui.delete(cur, tasks);
+        saveToDisk();
     }
 
     /**

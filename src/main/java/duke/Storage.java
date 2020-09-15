@@ -11,7 +11,7 @@ import java.util.*;
  * handle loading files and saving program's data to disk
  */
 public class Storage {
-    private final Queue<String> inputData;
+    private final List<String> inputData;
     private File file;
 
     /**
@@ -34,8 +34,54 @@ public class Storage {
         inputData = readFileToLines();
     }
 
-    private Queue<String> readFileToLines() {
-        Queue<String> dataToReturn = new LinkedList<>();
+    /**
+     * load the saved list of tasks
+     *
+     * @return the data of the file provided in the constructor
+     */
+    public static List<Task> parseFromString(List<String> extData) throws IllegalStateException {
+        List<Task> tasks = new ArrayList<>();
+        Queue<String> data = new LinkedList<>(extData);
+        while (!data.isEmpty()) {
+            String type = data.poll();
+            String desc = data.poll();
+            int status = Integer.parseInt(data.poll());
+            switch (type) {
+            case "todo":
+                tasks.add(new Todo(desc));
+                break;
+            case "deadline":
+                String by = data.poll();
+                tasks.add(new Deadline(desc, by));
+                break;
+            case "event":
+                String at = data.poll();
+                if (!data.isEmpty()) {
+                    Event event = null;
+                    try {
+                        event = new Event(desc, at, data.peek());
+                    } catch (DateTimeParseException e) {
+                    }
+                    if (event != null) {
+                        data.poll();
+                        tasks.add(event);
+                        break;
+                    }
+                }
+                tasks.add(new Event(desc, at));
+                break;
+            default:
+                throw new IllegalStateException("The data file is corrupted");
+            }
+            if (status == 1) {
+                tasks.get(tasks.size() - 1).setDone();
+            }
+        }
+        return tasks;
+    }
+
+    private List<String> readFileToLines() {
+        List<String> dataToReturn = new ArrayList<>();
         try {
             Scanner sc = new Scanner(file);
             while (sc.hasNext()) {
@@ -47,44 +93,8 @@ public class Storage {
         return dataToReturn;
     }
 
-    /**
-     * load the saved list of tasks
-     *
-     * @return the data of the file provided in the constructor
-     */
-    public List<Task> load() throws IllegalStateException {
-        List<Task> lst = new ArrayList<>();
-        while (!inputData.isEmpty()) {
-            String type = inputData.poll();
-            String desc = inputData.poll();
-            int status = Integer.parseInt(inputData.poll());
-            switch (type) {
-            case "todo":
-                lst.add(new Todo(desc));
-                break;
-            case "deadline":
-                String by = inputData.poll();
-                lst.add(new Deadline(desc, by));
-                break;
-            case "event":
-                String at = inputData.poll();
-                if (!inputData.isEmpty()) {
-                    try {
-                        lst.add(new Event(desc, at, inputData.peek()));
-                    } catch (DateTimeParseException e) {
-                        break;
-                    }
-                }
-                lst.add(new Event(desc, at));
-                break;
-            default:
-                throw new IllegalStateException("The data file is corrupted");
-            }
-            if (status == 1) {
-                lst.get(lst.size() - 1).setDone();
-            }
-        }
-        return lst;
+    public List<Task> load() {
+        return parseFromString(inputData);
     }
 
     /**
