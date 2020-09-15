@@ -1,9 +1,9 @@
 package duke.commands;
 
 import duke.DukeException;
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
+import duke.util.Storage;
+import duke.util.TaskList;
+import duke.util.Ui;
 
 /**
  * Abstract class to define a general command processing class.
@@ -21,5 +21,5 @@ public abstract class Command {
      * @throws DukeException Duke-related exception due to processing
      */
     public abstract boolean run(TaskList taskList, Storage storage, Ui ui) throws DukeException;
-    public abstract String runNew(TaskList taskList, Storage storage, Ui ui) throws DukeException;
+    public abstract String runGUI(TaskList taskList, Storage storage, Ui ui) throws DukeException;
 }

@@ -1,6 +1,10 @@
 package duke;
 
 import duke.commands.Command;
+import duke.util.Parser;
+import duke.util.Storage;
+import duke.util.TaskList;
+import duke.util.Ui;
 
 /**
  * Main class to initialise and run the chatbot.
@@ -32,7 +36,7 @@ public class Duke {
     }
 
     /**
-     * Main running loop
+     * Main running loop (non-GUI)
      */
     public void run() {
         boolean keepGoing = true;
@@ -54,7 +58,7 @@ public class Duke {
             Command command = parser.processInput(input);
             assert command != null : "Parser returned null";
 
-            return command.runNew(taskList, storage, ui);
+            return command.runGUI(taskList, storage, ui);
         } catch (DukeException ex) {
             return ex.getMessage();
         }

@@ -1,5 +1,6 @@
-package duke;
+package duke.util;
 
+import duke.DukeException;
 import duke.commands.*;
 import duke.tasks.TaskType;
 

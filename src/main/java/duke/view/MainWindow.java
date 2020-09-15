@@ -1,5 +1,6 @@
-package duke;
+package duke.view;
 
+import duke.Duke;
 import javafx.fxml.FXML;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -38,13 +39,24 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         assert input != null : "Input text from GUI is null";
 
+        displayUser(input);
+        userInput.clear();
+
         String response = duke.getResponse(input);
         assert response != null : "No response from Duke to GUI";
 
+        displayDuke(response);
+    }
+
+    private void displayUser(String msg) {
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getUserDialog(msg, userImage)
         );
-        userInput.clear();
+    }
+
+    private void displayDuke(String msg) {
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(msg, dukeImage)
+        );
     }
 }
