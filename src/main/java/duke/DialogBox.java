@@ -33,8 +33,6 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
-        // todo set font in fxml instead
-        dialog.setStyle("-fx-font-family: monospace");
         displayPicture.setImage(img);
     }
 
