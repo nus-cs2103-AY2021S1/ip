@@ -3,6 +3,8 @@ package duke.command;
 import duke.exception.DukeException;
 import duke.exception.InvalidCommandException;
 import duke.exception.InvalidTaskException;
+import duke.response.NormalResponse;
+import duke.response.Response;
 import duke.task.Task;
 import duke.task.TaskFactory;
 import duke.task.TaskList;
@@ -18,16 +20,17 @@ public class TaskCommand {
      *
      * @param in String "task" command issued by user.
      * @param taskList TaskList list that contains tasks added by the user.
-     * @return String response message to user.
+     * @return Response response message to user.
      * @throws DukeException If the task command provided does not fit the specified format.
      */
-    public static String execute(String in, TaskList taskList) throws DukeException {
+    public static Response execute(String in, TaskList taskList) throws DukeException {
         TaskType taskType = CommandParser.parseTaskType(in);
         String taskDetails = in.replaceFirst(taskType.toString().toLowerCase(), "").trim();
         if (taskType == TaskType.Invalid) {
             throw new InvalidCommandException(INVALID_COMMAND_MSG);
         }
-        return createTask(taskType, taskDetails, taskList, false, true);
+        String response = createTask(taskType, taskDetails, taskList, false, true);
+        return new NormalResponse(response);
     }
 
     /**

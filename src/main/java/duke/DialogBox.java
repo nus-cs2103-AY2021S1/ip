@@ -3,6 +3,7 @@ package duke;
 import java.io.IOException;
 import java.util.Collections;
 
+import duke.response.Response;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -16,6 +17,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.shape.Circle;
 
 public class DialogBox extends HBox {
+    private static final String ERROR_HEX_COLOR = "#ff0000";
+    private static final String CLASS_BG_COLOR = "-fx-background-color: ";
     private static final String FXML_PATH = "/view/DialogBox.fxml";
     @FXML
     private Label dialog;
@@ -69,13 +72,22 @@ public class DialogBox extends HBox {
 
     /**
      * Creates a dialog box to display duke's response.
+     * Changes dialog to red for an error response.
      *
-     * @param text String text response from Duke.
+     * @param resp Response text response from Duke.
      * @param img Image image of Duke.
      * @return DialogBox a dialog box of the Duke's response.
      */
-    public static DialogBox getDukeDialog(String text, Image img) {
-        DialogBox db = new DialogBox(text, img);
+    public static DialogBox getDukeDialog(Response resp, Image img) {
+        DialogBox db = new DialogBox(resp.getMessage(), img);
+        if (resp.isError()) {
+            String dialogStyle = db.dialog.getStyle();
+            int startIndex = dialogStyle.indexOf(CLASS_BG_COLOR);
+            int endIndex = dialogStyle.substring(startIndex).indexOf(";");
+            String updatedStyle = dialogStyle.substring(0, startIndex + CLASS_BG_COLOR.length())
+                    + ERROR_HEX_COLOR + dialogStyle.substring(endIndex);
+            db.dialog.setStyle(updatedStyle);
+        }
         db.flip();
         return db;
     }

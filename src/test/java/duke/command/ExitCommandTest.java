@@ -4,11 +4,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
+import duke.response.Response;
+
 public class ExitCommandTest {
     @Test
     public void execute() {
-        String actual = ExitCommand.execute();
+        Response response = ExitCommand.execute();
         String expected = "Bye. Hope to see you again soon!";
-        assertEquals(expected, actual);
+        assertEquals(expected, response.getMessage());
     }
 }

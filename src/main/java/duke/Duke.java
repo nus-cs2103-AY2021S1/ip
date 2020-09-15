@@ -10,6 +10,8 @@ import duke.command.CommandExecutor;
 import duke.command.DukeCommandExecutor;
 import duke.exception.DukeException;
 import duke.exception.InvalidSaveFileException;
+import duke.response.NormalResponse;
+import duke.response.Response;
 import duke.storage.DukeStorage;
 import duke.storage.Storage;
 import duke.task.TaskArrayList;
@@ -60,30 +62,19 @@ public class Duke {
             throw new InvalidSaveFileException(ERROR_LOAD_SAVE);
         }
 
-        ui.print(START_MSG);
+        ui.print(new NormalResponse(START_MSG));
         while (true) {
             String input = sc.nextLine().trim();
-            try {
-                String msgBody = exe.execute(input, taskList);
-                ui.print(msgBody);
-                if (exe.shouldExit()) {
-                    break;
-                }
-            } catch (DukeException e) {
-                ui.printErr(e.getMessage());
+            Response msgBody = exe.execute(input, taskList);
+            ui.print(msgBody);
+            if (exe.shouldExit()) {
+                break;
             }
         }
     }
 
-    protected String getResponse(String input) {
-        String response;
-        try {
-            response = exe.execute(input, taskList);
-        } catch (DukeException e) {
-            response = e.getMessage();
-        }
-
-        return response;
+    protected Response getResponse(String input) {
+        return exe.execute(input, taskList);
     }
 
     protected void loadSave() throws DukeException {

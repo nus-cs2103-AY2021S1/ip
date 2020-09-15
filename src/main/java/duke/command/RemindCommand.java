@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.stream.Stream;
 
 import duke.exception.InvalidCommandException;
+import duke.response.NormalResponse;
+import duke.response.Response;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -17,10 +19,10 @@ public class RemindCommand {
      *
      * @param in String "remind" command issued by user.
      * @param taskList TaskList list that contains tasks added by the user.
-     * @return String response message to user including tasks that are due within the specified time period.
+     * @return Response response message to user including tasks that are due within the specified time period.
      * @throws InvalidCommandException If an invalid number of days is provided.
      */
-    public static String execute(String in, TaskList taskList) throws InvalidCommandException {
+    public static Response execute(String in, TaskList taskList) throws InvalidCommandException {
         try {
             int numberDays = Integer.parseInt(in.replaceFirst("remind ", ""));
             if (numberDays < 0) {
@@ -44,7 +46,7 @@ public class RemindCommand {
                     : "There are no tasks that are due within " + numberDays + " days!";
 
             String response = firstLine + String.join("\n", filteredTasks);
-            return response;
+            return new NormalResponse(response);
         } catch (NumberFormatException e) {
             throw new InvalidCommandException(ERROR_INVALID_FORMAT);
         }

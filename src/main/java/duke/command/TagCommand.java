@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import duke.exception.InvalidCommandException;
+import duke.response.NormalResponse;
+import duke.response.Response;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -24,10 +26,10 @@ public class TagCommand extends Command {
      *
      * @param in String "tag" command issued by user.
      * @param taskList TaskList list that contains tasks added by the user.
-     * @return String response message to user.
+     * @return Response response message to user.
      * @throws InvalidCommandException If an invalid index is provided.
      */
-    public static String execute(String in, TaskList taskList) throws InvalidCommandException {
+    public static Response execute(String in, TaskList taskList) throws InvalidCommandException {
         String[] details = in.replaceFirst("tag ", "").split(" ");
         String[] tags = Arrays.copyOfRange(details, 1, details.length);
         for (String tag : tags) {
@@ -38,11 +40,13 @@ public class TagCommand extends Command {
 
         try {
             int index = Integer.parseInt(details[0]);
+            String response;
             if (index < 0) {
-                return removeTagsFromTask(Math.abs(index) - 1, taskList, tags);
+                response = removeTagsFromTask(Math.abs(index) - 1, taskList, tags);
             } else {
-                return addTagsToTask(index - 1, taskList, tags);
+                response = addTagsToTask(index - 1, taskList, tags);
             }
+            return new NormalResponse(response);
         } catch (NumberFormatException e) {
             throw new InvalidCommandException(ERROR_INVALID_INDEX);
         }

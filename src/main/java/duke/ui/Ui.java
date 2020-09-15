@@ -1,5 +1,7 @@
 package duke.ui;
 
+import duke.response.Response;
+
 // Class that handle the printing and formatting of the program's response message.
 public class Ui {
     private static final String DIVIDER = "____________________________________________________________";
@@ -8,18 +10,14 @@ public class Ui {
     /**
      * Prints a formatted response message to the user.
      *
-     * @param msg String message to show the user.
+     * @param resp Response response message to show the user.
      */
-    public void print(String msg) {
-        System.out.print(DIVIDER + "\n" + msg + "\n" + DIVIDER + "\n");
-    }
-
-    /**
-     * Prints a formatted error message to the user.
-     *
-     * @param msg String error message to show the user.
-     */
-    public void printErr(String msg) {
-        System.out.print(ERROR_HEADER + "\n" + msg + "\n" + DIVIDER + "\n");
+    public void print(Response resp) {
+        String message = resp.getMessage();
+        if (resp.isError()) {
+            System.out.print(ERROR_HEADER + "\n" + message + "\n" + DIVIDER + "\n");
+        } else {
+            System.out.print(DIVIDER + "\n" + message + "\n" + DIVIDER + "\n");
+        }
     }
 }

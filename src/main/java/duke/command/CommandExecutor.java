@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.exception.DukeException;
+import duke.response.Response;
 import duke.task.TaskList;
 
 /**
@@ -8,7 +9,7 @@ import duke.task.TaskList;
  * Contains a shouldExit method which only returns true if the "bye" command was issued by the user.
  */
 public interface CommandExecutor {
-    public String execute(String in, TaskList taskList) throws DukeException;
+    public Response execute(String in, TaskList taskList);
 
     public void loadSaveString(String in, TaskList taskList) throws DukeException;
 
