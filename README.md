@@ -23,7 +23,7 @@ Then, type the help command to get help on what Duke can do.
 help
 ```
 
-![Duke UI](Ui.png)
+![Duke UI](docs/Ui.png)
 
 ## Acknowledgements
 In this project, I acknowledge referencing [here](https://github.com/JoeyChenSmart/ip)
