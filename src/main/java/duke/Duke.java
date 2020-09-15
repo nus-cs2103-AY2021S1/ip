@@ -1,5 +1,7 @@
 package duke;
 
+import javax.swing.text.TableView;
+
 public class Duke {
 
     private Storage storage;
@@ -48,6 +50,10 @@ public class Duke {
         try {
             Command command = Parser.parse(input);
             output = command.execute(ui, tasks, storage);
+
+            if (command.isExit()) {
+                System.exit(0);
+            }
         } catch (DukeException e) {
             output = ui.printError(e.getMessage());
         }
