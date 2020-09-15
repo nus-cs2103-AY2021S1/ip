@@ -1,11 +1,11 @@
 package duke;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import duke.command.Command;
 import duke.task.TaskList;
 import javafx.application.Platform;
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * Main class to run Duke program.
@@ -37,7 +37,7 @@ public class Duke {
         while (!isExit) {
             String fullCommand = ui.readCommand();
             try {
-                assert fullCommand.length() == 0: "Not valid command";
+                assert fullCommand.length() == 0 : "Not valid command";
                 Command c = Parser.parse(fullCommand);
                 c.execute(list, ui, saveData);
                 isExit = c.isExit();

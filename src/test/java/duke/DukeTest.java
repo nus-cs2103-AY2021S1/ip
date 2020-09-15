@@ -1,14 +1,9 @@
 package duke;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
 
-import duke.command.Command;
-import duke.command.ExitCommand;
-import duke.command.ShowListCommand;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.TaskList;
@@ -58,32 +53,5 @@ public class DukeTest {
     public void eventTest1() {
         Event event = new Event("party", "2020-12-12");
         assertEquals("[E][✘] party (at: 2020-12-12)", event.toString());
-    }
-
-    @Test
-    public void checkListCommandTest1() throws DukeException {
-        try {
-            Command c = Parser.parse("list");
-            assertTrue(c instanceof ShowListCommand);
-        } catch (DukeException e) {
-            System.out.println(e);
-            fail();
-        }
-    }
-
-    @Test
-    public void checkInvalidCommandTest1() throws DukeException {
-        try {
-            Command c = Parser.parse("bananananannaa");
-
-        } catch (DukeException e) {
-            assertEquals("☹ OOPS!!! wait..... I don't understand your order my sir.", e.getMessage());
-        }
-    }
-
-    @Test
-    public void checkExitCommandTest1() throws DukeException {
-        Command c = Parser.parse("bye");
-        assertTrue(c instanceof ExitCommand);
     }
 }

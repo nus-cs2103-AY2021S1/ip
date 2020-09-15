@@ -30,10 +30,16 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * set Duke to the main Duke
+     */
     public void setDuke(Duke d) {
         duke = d;
     }
 
+    /**
+     * Duke to print hi message
+     */
     public void sayHi() {
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog("Hello from Mr Duke\n" + "What can I do for you mate?", dukeImage)

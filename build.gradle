@@ -2,7 +2,7 @@ plugins {
     id 'java'
     id 'application'
     id 'checkstyle'
-    id 'com.github.johnrengelman.shadow' version '5.1.0'
+    id "com.github.johnrengelman.shadow" version "6.0.0"
 }
 
 repositories {
@@ -12,7 +12,15 @@ repositories {
 dependencies {
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.5.0'
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.5.0'
+    compile 'org.apache.commons:commons-lang3:3.9'
 }
+
+jar {
+    manifest {
+        attributes"Main-Class": "$mainClassName"
+    }
+}
+mainClassName = "Main"
 
 test {
     useJUnitPlatform()
@@ -47,7 +55,7 @@ dependencies {
 }
 
 application {
-    mainClassName = "seedu.duke.Duke"
+    mainClassName = "duke.Launcher"
 }
 
 shadowJar {
