@@ -45,3 +45,5 @@ T | 1 | live life
 T | 1 | enjoy life
 T | 0 | live life
 T | 0 | live life
+T | 1 | Get abs
+D | 0 | CS2103 homework Aug 8 2020E | 0 | Concert Aug 10 2020
