@@ -87,7 +87,7 @@ public class Storage {
     public void updateData(String data, int taskNumber) {
         assert taskNumber > 0;
         try {
-            BufferedReader br = new BufferedReader(new FileReader(String.valueOf(path)));
+            BufferedReader br = new BufferedReader(new FileReader(String.valueOf(path), StandardCharsets.UTF_8));
             String newData = "";
             String oldData;
             int lineNumber = 1;
@@ -100,7 +100,7 @@ public class Storage {
                 }
                 lineNumber++;
             }
-            BufferedWriter bw = new BufferedWriter(new FileWriter(String.valueOf(path)));
+            BufferedWriter bw = new BufferedWriter(new FileWriter(String.valueOf(path), StandardCharsets.UTF_8));
             bw.write(newData);
             bw.close();
         } catch (IOException e) {
