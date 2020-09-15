@@ -6,7 +6,7 @@ import duke.exception.DukeException;
 import duke.storage.Storage;
 
 /**
- * Class the holds the tasks provided by the user.
+ * Class that holds the tasks provided by the user.
  */
 public class TaskList {
 

@@ -9,6 +9,7 @@ import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.InvalidCommand;
 import duke.command.ListCommand;
+import duke.command.RemoveTagCommand;
 import duke.command.TagCommand;
 import duke.exception.DukeException;
 
@@ -39,9 +40,9 @@ public class Parser {
 
         switch (op) {
         case BYE:
-            return new ExitCommand();
+            return parseExitCommand();
         case LIST:
-            return new ListCommand();
+            return parseListCommand();
         case TODO:
         case DEADLINE:
         case EVENT:
@@ -54,10 +55,20 @@ public class Parser {
             return parseFindCommand(commandArg);
         case TAG:
             return parseTagCommand(commandArg);
+        case RMTAG:
+            return parseRemoveTagCommand(commandArg);
         case INVALID:
         default:
-            return new InvalidCommand();
+            return parseInvalidCommand();
         }
+    }
+
+    private static ExitCommand parseExitCommand() {
+        return new ExitCommand();
+    }
+
+    private static ListCommand parseListCommand() {
+        return new ListCommand();
     }
 
     private static AddCommand parseAddCommand(CommandType taskType, String taskDetail) throws DukeException {
@@ -129,5 +140,27 @@ public class Parser {
 
         String[] tags = commandArgArr[1].split(" ");
         return new TagCommand(taskIdx, tags);
+    }
+
+    private static RemoveTagCommand parseRemoveTagCommand(String commandArg) throws DukeException {
+        String[] commandArgArr = commandArg.split(" ", 2);
+        int taskIdx;
+
+        try {
+            taskIdx = Integer.parseInt(commandArgArr[0]);
+        } catch (NumberFormatException e) {
+            throw new DukeException("Sorry I'm not sure what task you are asking for!");
+        }
+
+        if (commandArgArr.length < 2) {
+            throw new DukeException("You have to tell me what to tag(s) to delete!");
+        }
+
+        String[] tagsToRemove = commandArgArr[1].split(" ", 2);
+        return new RemoveTagCommand(taskIdx, tagsToRemove);
+    }
+
+    private static InvalidCommand parseInvalidCommand() {
+        return new InvalidCommand();
     }
 }

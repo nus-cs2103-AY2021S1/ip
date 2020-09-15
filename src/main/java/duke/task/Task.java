@@ -68,7 +68,7 @@ public abstract class Task {
     }
 
     public boolean hasTags() {
-        return tags != null && tags.size() != 0;
+        return tags.size() != 0;
     }
 
     public List<String> getTags() {
@@ -86,6 +86,16 @@ public abstract class Task {
     public void addTags(List<String> newTags) {
         assert newTags != null : "Tags cannot be null.";
         tags.addAll(newTags);
+    }
+
+    /**
+     * Remove a tag, if it exists.
+     * @param tagToRemove Tag to be removed.
+     * @return Whether the provided tag is removed from the list.
+     */
+    public boolean removeTag(String tagToRemove) {
+        assert tagToRemove != null : "Tag to remove cannot be null.";
+        return tags.remove(tagToRemove);
     }
 
     /**

@@ -7,17 +7,12 @@ import duke.exception.DukeException;
  */
 public class Ui {
     private String nextMessage;
-  
+
     /**
      * Show a greeting message to the user.
      */
     public static String getGreetingMessage() {
-        String logo = ",--.                           ,--. \n"
-                + "|  |-.  ,---. ,--.--. ,---.  ,-|  | \n"
-                + "| .-. '| .-. ||  .--'| .-. :' .-. | \n"
-                + "| `-' |' '-' '|  |   \\   --.\\ `-' | \n"
-                + " `---'  `---' `--'    `----' `---'  \n\n";
-        return "Hi I'm\n" + logo + "Please give me something to do.";
+        return "Hi I'm\n" + "ｂｏｒｅｄ\n" + "Please give me something to do.";
     }
 
     /**
