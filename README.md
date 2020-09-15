@@ -37,6 +37,8 @@ This program when run (running Duke.main()), will display a window that represen
 
 ### Commands and instructions
 
+Note: < INFO > denotes information to be filled in by the user
+
 #### View all the commands
 
 * _**Format**_ | `!commands`
