@@ -1,20 +1,160 @@
 # User Guide
+DukePenguin is a desktop app for managing tasks with the help of Graphical User Interface (GUI). It has fun and simple UI interaction during execution which makes it more user friendly than other similar GUI apps
+
+# Table of contents
+1. [Quick Start](#Quick Start)
+1. [Features](#Features)
+1. [Usage](#Usage)
+
+##Quick Start
+1. Download [DukePenguin v0.1](https://github.com/Jaylenlee/ip/releases/tag/A-Jar)
+1. Open up any terminal. For example, search "Command Prompt" on Windows search.
+1. Change directory to where the DukePenguin Jar file is located. Example: cd downloads/DukePenguin
+1. Type java -jar DukePenguin.jar and enter.
+1. You can now use DukePenguin.
 
 ## Features 
 
-### Feature 1 
-Description of feature.
+### Adding tasks:
+#### Todo tasks: `todo`
+ Adds a task to be done in the future without any time restriction.
+ [API](#todo) 
 
+ 
+ #### Deadline tasks: `deadline`
+ Adds a task to be done in the future before a specific deadline.
+ [API](#deadline) 
+ 
+ #### Event tasks: `event`
+ Adds a task to be done in the future within a specific time range.
+ [API](#event) 
+ 
+### Displaying tasks:
+#### List tasks: `list`
+ Displays a indexed list of available tasks.
+ [API](#list) 
+ 
+#### Find tasks: `find`
+ Finds a indexed list of available tasks with the given keyword.
+ [API](#find) 
+ 
+#### Sort tasks: `sort`
+Sorts a indexed list of available tasks by their type and then description.
+ [API](#sort) 
+ 
+ ### Deleting tasks:
+ #### Delete tasks: `delete`
+ Deletes a task at a particular index of the list.
+ [API](#delete) 
+  
+ ### Marking tasks:
+ #### Done tasks: `Done`
+ Marks a task at a particular index of the list to be done. 
+ [API](#done) 
+  
+ ### Terminating program:
+ #### Exit: `bye`
+Terminates and exits the program. 
+[API](#bye) 
+   
 ## Usage
+### `todo` <a name="todo"></a>
+ - adds a task without time restriction to list 
 
-### `Keyword` - Describe action
+Format of command: `todo <description>`
 
-Describe action and its outcome.
-
-Example of usage: 
-
-`keyword (optional arguments)`
+Example of usage: `todo borrow book`
 
 Expected outcome:
 
-`outcome`
+![todo](./expectedOutcome/todo.jpg)
+
+
+### `deadline` <a name="deadline"></a>
+- adds a task that needed to be done before a certain deadline
+
+Format of command: `deadline <description> /by <YYYY-MM-DD> <HHmm>`
+
+Example of usage: `deadline return book /by 2020-12-31 1200`
+
+Expected outcome:
+
+![todo](./expectedOutcome/deadline.jpg)
+
+
+### `event` <a name="event"></a>
+- adds a task that needed to be done within a certain time period
+
+Format of command: `event <description> /at <YYYY-MM-DD> <HHmm>-<HHmm>`
+
+Example of usage: `event read book /at 2020-12-25 1200-1400`
+
+Expected outcome:
+
+![todo](./expectedOutcome/event.jpg)
+
+### `list` <a name="list"></a>
+- displays all tasks available
+
+Format of command: `list`
+
+Example of usage: `list`
+
+Expected outcome:
+
+![todo](./expectedOutcome/list.jpg)
+
+### `find`  <a name="find"></a>
+- displays all tasks available with the given keyword
+
+Format of command: `find <keyword>`
+
+Example of usage: `find Dec`
+
+Expected outcome:
+
+![todo](./expectedOutcome/find.jpg)
+
+### `sort` <a name="sort"></a>
+- sorts all tasks available by their task's type and then description alphabetically
+
+Format of command: `sort`
+
+Example of usage: `sort`
+
+Expected outcome:
+
+![todo](./expectedOutcome/sort.jpg)
+
+### `delete` <a name="delete"></a>
+- deletes a task at a particular index
+
+Format of command: `delete <index>`
+
+Example of usage: `delete 1`
+
+Expected outcome:
+
+![todo](./expectedOutcome/delete.jpg)
+
+### `done` <a name="done"></a>
+- marks a task at a particular index done
+
+Format of command: `done <index>`
+
+Example of usage: `done 1`
+
+Expected outcome:
+
+![todo](./expectedOutcome/done.jpg)
+
+### `bye` <a name="bye"></a>
+- terminates DukePenguin
+
+Format of command: `bye`
+
+Example of usage: `bye`
+
+Expected outcome:
+
+![todo](./expectedOutcome/bye.jpg)
