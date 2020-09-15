@@ -1,14 +1,26 @@
 package duke.task;
 
+/**
+ * A class to represent a general task that is created by the user
+ *
+ * @author Roger Lim
+ */
 public class Task {
     protected String description;
     protected boolean isDone;
 
+    /**
+     * Creates a task with the description and isDone at false.
+     * @param description
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
-
+    /**
+     * Creates a task with the description and isDone specified.
+     * @param description
+     */
     public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;

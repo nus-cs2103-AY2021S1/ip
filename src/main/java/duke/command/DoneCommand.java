@@ -1,20 +1,23 @@
 package duke.command;
 
-import java.io.IOException;
-
-import duke.error.*;
 import duke.parts.Storage;
 import duke.parts.TaskList;
 import duke.parts.Ui;
 import duke.task.Task;
 
+/**
+ * Represents a command which is used to set a task as done in the list
+ * It is execute when the execute method is called
+ *
+ * @author Roger Lim
+ */
 public class DoneCommand extends Command {
-    int index;
+    private int index;
     public DoneCommand(String index) {
         this.index = Integer.parseInt(index);
     }
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws IncorrectFormat, IOException, EventDateParseException, DeadlineDateParseException, DeleteListEmptyException, DeleteOutOfBounds, DeleteNegativeIndex {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         Task done = tasks.markDone(index, storage);
         return ui.printDone(done);
     }

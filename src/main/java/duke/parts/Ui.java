@@ -8,6 +8,8 @@ import duke.task.Task;
 
 /**
  * A class to handle the response and output that is being shown to the user.
+ *
+ * @author Roger Lim
  */
 public class Ui {
     static final String LINE = "    ____________________________________________________________";
@@ -32,7 +34,7 @@ public class Ui {
     }
 
     private String printNumTask(int numTask) {
-        if(numTask == 1) {
+        if (numTask == 1) {
             return String.format("%sYou have %d task in the list.", INDENT, numTask);
         }
         return String.format("%sYou have %d tasks in the list.", INDENT, numTask);
@@ -118,14 +120,24 @@ public class Ui {
     }
 
     /**
-     * Prints the message when task is marked as done
+     * Prints the message when task is marked as done.
      * @param task
-     * @return Message for the user
+     * @return Message for the user.
      */
     public String printDone(Task task) {
         String output = INDENT + "Nice! I've marked this task as done: \n";
         output += INDENT;
         output += task.getOutput();
+        System.out.println(output);
+        return output;
+    }
+
+    /**
+     * Prints the message when tasks are sorted.
+     * @return Message for the user.
+     */
+    public String printSorted() {
+        String output = INDENT + "Tasks sorted";
         System.out.println(output);
         return output;
     }

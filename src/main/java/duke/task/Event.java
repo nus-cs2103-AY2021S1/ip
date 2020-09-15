@@ -8,10 +8,19 @@ import duke.error.EventDateParseException;
 
 /**
  * Class that represents an event item in the taskList.
+ *
+ * @author Roger Lim
  */
 public class Event extends Task {
     private LocalDate time;
 
+    /**
+     * Create an instance of Event with description and time specified.
+     * Done is marks as false.
+     * @param description The description for the event.
+     * @param time The time of the deadline.
+     * @throws EventDateParseException
+     */
     public Event(String description, String time) throws EventDateParseException {
         super(description);
         try {
@@ -21,6 +30,12 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Create an instance of Event with description, time and isDone specified.
+     * @param description The description for the deadline.
+     * @param isDone Boolean value representing if the event task is done.
+     * @param time The time of the event.
+     */
     public Event(String description, boolean isDone, String time) {
         super(description, isDone);
         this.time = LocalDate.parse(time);

@@ -31,6 +31,9 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/spongebob.jpg"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/squidward.jpeg"));
 
+    /**
+     * Initialised the main window of the gui.
+     */
     @FXML
     public void initialize() {
         String welcomeMessage = "How may I take your order";

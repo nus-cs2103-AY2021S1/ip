@@ -19,6 +19,8 @@ import duke.task.ToDo;
 /**
  * Used to help store, save and load user data.
  * This allows data to be preserved when the system is turned off.
+ *
+ * @author Roger Lim
  */
 public class Storage {
     private String filePath;

@@ -11,6 +11,8 @@ import duke.task.Task;
 /**
  * Represents a command which is used to delete a task from the list of tasks.
  * It is executed when the execute method is called.
+ *
+ * @author Roger Lim
  */
 public class DeleteCommand extends Command {
     private int index;

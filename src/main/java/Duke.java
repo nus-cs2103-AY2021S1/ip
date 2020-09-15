@@ -8,6 +8,11 @@ import duke.parts.Storage;
 import duke.parts.TaskList;
 import duke.parts.Ui;
 
+/**
+ * Represents Duke object which handles the terminal non gui duke bot.
+ *
+ * @author Roger Lim
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;

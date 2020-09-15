@@ -9,6 +9,8 @@ import duke.parts.Ui;
 /**
  * Represents a command which is used to print the list of tasks.
  * It is executed when the execute method is called.
+ *
+ * @author Roger Lim
  */
 public class PrintCommand extends Command {
 

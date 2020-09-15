@@ -1,6 +1,13 @@
 package duke.parts;
 
-import duke.command.*;
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.PrintCommand;
+import duke.command.SortCommand;
 import duke.error.UnknownAction;
 
 
@@ -11,9 +18,11 @@ public class Parser {
 
     /**
      * Process the input and return a command which represents the input.
+     * @author Roger Lim
      * @param input The input string got from the user.
      * @return A command that can be executed.
      * @throws UnknownAction
+     *
      */
 
     public static Command parse(String input) throws UnknownAction {
@@ -23,10 +32,10 @@ public class Parser {
             return new PrintCommand();
         } else if (input.equals("bye")) {
             return new ExitCommand();
-        } else if (input.equals("sort")){
+        } else if (input.equals("sort")) {
             return new SortCommand();
         } else if (input.indexOf("delete") == 0) {
-            String index = input.replaceAll("\\D","");
+            String index = input.replaceAll("\\D", "");
             assert Integer.parseInt(index) > 0;
             return new DeleteCommand(Integer.parseInt(index));
         } else if (input.indexOf("find") == 0) {

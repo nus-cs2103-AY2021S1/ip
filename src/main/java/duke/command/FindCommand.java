@@ -9,6 +9,12 @@ import duke.parts.TaskList;
 import duke.parts.Ui;
 import duke.task.Task;
 
+/**
+ * Represents a command which is used to search for tasks.
+ * It is executed when the execute method is called.
+ *
+ * @author Roger Lim
+ */
 public class FindCommand extends Command {
 
     private String input;

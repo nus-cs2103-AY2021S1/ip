@@ -12,11 +12,17 @@ import duke.parts.Storage;
 import duke.parts.TaskList;
 import duke.parts.Ui;
 
-
+/**
+ * A general abstract class to represent a command that is issued by the user.
+ *
+ * @author Roger Lim
+ */
 public abstract class Command {
 
     public abstract String execute(TaskList tasks, Ui ui, Storage storage)
-            throws IncorrectFormat, IOException, EventDateParseException, DeadlineDateParseException, DeleteListEmptyException, DeleteOutOfBounds, DeleteNegativeIndex;
+            throws IncorrectFormat, IOException,
+                           EventDateParseException, DeadlineDateParseException,
+                           DeleteListEmptyException, DeleteOutOfBounds, DeleteNegativeIndex;
 
     public abstract boolean isExit();
 }

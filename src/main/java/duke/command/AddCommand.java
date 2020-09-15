@@ -15,6 +15,8 @@ import duke.task.ToDo;
 /**
  * Represents a command which is used to add a task to the list.
  * It is executed when the execute method is called.
+ *
+ * @author Roger Lim
  */
 public class AddCommand extends Command {
     private String input;

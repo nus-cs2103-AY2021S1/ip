@@ -2,6 +2,7 @@ package duke.task;
 
 /**
  * Class that represents a to do item in the taskList.
+ * @author Roger Lim
  */
 public class ToDo extends Task {
     public ToDo(String description) {

@@ -8,11 +8,21 @@ import duke.error.DeadlineDateParseException;
 
 /**
  * Class that represents a deadline item in the taskList.
+ *
+ * @author Roger Lim
  */
 
 public class Deadline extends Task {
     private LocalDate time;
 
+
+    /**
+     * Create an instance of Deadline with description and time specified.
+     * Done is marks as false.
+     * @param description The description for the deadline.
+     * @param time The time of the deadline.
+     * @throws DeadlineDateParseException
+     */
     public Deadline(String description, String time) throws DeadlineDateParseException {
         super(description);
         try {
@@ -22,6 +32,12 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Create an instance of Deadline with description, time and isDone specified.
+     * @param description The description for the deadline.
+     * @param isDone Boolean value representing if the deadline task is done.
+     * @param time The time of the deadline.
+     */
     public Deadline(String description, boolean isDone, String time) {
         super(description, isDone);
         this.time = LocalDate.parse(time);

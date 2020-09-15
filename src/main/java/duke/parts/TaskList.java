@@ -10,6 +10,8 @@ import duke.task.Task;
 
 /**
  * A class to store and handle the tasks input by the user
+ *
+ * @author Roger Lim
  */
 public class TaskList {
 
@@ -30,7 +32,7 @@ public class TaskList {
     /**
      * Add a task and update the storage of the system.
      * @param task Tasks to be added
-     * @param storage Storage of the system
+     * @param storage The storage of the system
      */
     public void addTask(Task task, Storage storage) {
         tasks.add(task);
@@ -39,20 +41,21 @@ public class TaskList {
     /**
      * Deletes a task and update the storage of the system.
      * @param index Index of task to be deleted
-     * @param storage Storage of the system
+     * @param storage The storage of the system
      */
-    public Task deleteTask(int index, Storage storage) throws DeleteNegativeIndex, DeleteOutOfBounds, DeleteListEmptyException {
-        if(tasks.size() == 0) {
+    public Task deleteTask(int index, Storage storage)
+            throws DeleteNegativeIndex, DeleteOutOfBounds, DeleteListEmptyException {
+        if (tasks.size() == 0) {
             throw new DeleteListEmptyException();
         }
         if (index < 0) {
             throw new DeleteNegativeIndex();
         }
 
-        if (index >= tasks.size() ) {
+        if (index >= tasks.size()) {
             throw new DeleteOutOfBounds(index + 1);
         }
-        assert index < tasks.size() && index >= 0 ;
+        assert index < tasks.size() && index >= 0;
         Task removed = tasks.remove(index);
         updateList(storage);
         return removed;
@@ -82,12 +85,22 @@ public class TaskList {
         return temp;
     }
 
+    /**
+     * Marks the tasks at this index as done.
+     * @param index The index of the tasks to be marked as done.
+     * @param storage The storage of the system.
+     * @return The tasks after it has been updated.
+     */
     public Task markDone(int index, Storage storage) {
         tasks.get(index).setDone();
         this.updateList(storage);
         return tasks.get(index);
     }
 
+    /**
+     * Sorts the list of tasks and updates the storage.
+     * @param storage The storage of the system.
+     */
     public void sort(Storage storage) {
         Collections.sort(tasks, new TaskComparator());
         this.updateList(storage);
