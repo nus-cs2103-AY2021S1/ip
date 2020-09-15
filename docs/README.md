@@ -2,6 +2,8 @@
 
 YURINA CHAN is a todo App that helps you to manage your daily tasks better.
 
+![Image of YURINA CHAN](https://github.com/SherryWu178/ip/blob/master/docs/Ui.png)
+
 ## Features 
 
 ### Add Tasks 
