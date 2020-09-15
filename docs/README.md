@@ -2,6 +2,8 @@
 *Ekud* is a task management application to keep track of your todos, deadlines and events. 
 The task list is stored permanently in the hard disk and can be retrieved later.
 
+![Image of Yaktocat](Ui.png)
+
 ## Index
 * this unordered seed list will be replaced by toc as unordered list
 {:toc}
@@ -72,14 +74,14 @@ Marks a given task as done.
 
 Usage: `done <task_index>`
 
-**Note:** `task_index` must be valid. Valid indices are within the range of the tasklist. You can view the tasklist by using [list](https://adithyanarayan.github.io/ip/#list).
+**Note:** `task_index` must be valid. Valid indices are within the range of the tasklist. You can view the tasklist by using [list](https://adithyanarayan.github.io/ip/#list---lists-all-tasks).
 Example: `done 2`
 
 ### `delete` - Deletes a tasklist
 Deletes a task in the tasklist *forever*.
 Usage: `delete <task_index>`
 
-**Note:** `task_index` must be valid. Valid indices are within the range of the tasklist. You can view the tasklist by using [list](https://adithyanarayan.github.io/ip/#list). Note that once a task is deleted, the only way to bring it back is by using the [undo](https://adithyanarayan.github.io/ip/#undo) command. If a task is deleted and the application is closed, there is no way to recover the deleted task.
+**Note:** `task_index` must be valid. Valid indices are within the range of the tasklist. You can view the tasklist by using [list](https://adithyanarayan.github.io/ip/#list---lists-all-taskst). Note that once a task is deleted, the only way to bring it back is by using the [undo](https://adithyanarayan.github.io/ip/#undo---undo-previous-commands) command. If a task is deleted and the application is closed, there is no way to recover the deleted task.
 
 Example: `delete 2`
 
