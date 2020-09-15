@@ -36,6 +36,7 @@ public class FindCommand extends Command {
         if (commandDetails.length == 1) {
             throw new DukeException("Search term not provided!");
         }
+        assert commandDetails.length == 2;
         String searchTerm = commandDetails[1];
         ArrayList<Task> mathingTasks = tm.findTasks(searchTerm);
         if (mathingTasks.isEmpty()) {
