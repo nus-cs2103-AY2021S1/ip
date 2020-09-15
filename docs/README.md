@@ -5,11 +5,23 @@ and it is optimized for use via a Command Line Interface** (CLI)
 while still having a Graphical User Interface (GUI). Hotline can
 organize your task list much faster than GUI apps if you can type fast.
 
-* [Quick Start](#quick-start)
-* [Features](#features)
+* [Quick Start](#quick-start)  
+* [Features](#features)  
+    * [Add Task](#add-task)
+	    * [todo](#todo---create-new-to-do-task)
+	    * [deadline](#deadline---create-new-deadline-task)
+	    * [event](#event---create-new-event-task)
+    * [Delete Task](#delete-task)
+    * [List Tasks](#list-tasks)
+    * [Update Task](#update-task)
+    * [Find Tasks](#find-tasks)
+    * [Save Tasks](#save-tasks)
+    * [Do Task](#do-task)
+    * [Exiting The Program](#exiting-the-program)
+* [Command Summary](#command-summary)
 
 ## Quick Start
-1. Check that you have installed `Java 11` or above installed in your computer.
+1. Check that you have installed `Java 11` or above in your computer.
 2. Download the latest `hotline.jar` from [here](https://github.com/AudreyFelicio/ip/releases).
 3. Copy the jar file to the folder you want to use as the root folder of your task management app.
 4. Double-click the jar file to start the app. A GUI similar to below will appear in a few seconds.
@@ -24,11 +36,7 @@ Adds new tasks to the task list.
 
 Types of task that can be added are:
 
-1. to-do
- 
-    ### `todo` - Create New To Do Task
-    
-    Creates a new to-do task and add to the user's task list.
+1. ### `todo` - Create New To-Do Task
     
     Command format:
     
@@ -38,11 +46,7 @@ Types of task that can be added are:
     
     `todo Finish CS2103T Project`
 
-2. deadline
-
-    ### `deadline` - Create New Deadline Task
-    
-    Creates a new deadline task and add to the user's task list.
+2. ### `deadline` - Create New Deadline Task
     
     Command format:
     
@@ -52,11 +56,7 @@ Types of task that can be added are:
     
     `deadline CCA Registration /by 2020-09-14`
 
-3. event
-
-    ### `event` - Create New Event Task
-    
-    Creates a new event task and add to the user's task list.
+3. ### `event` - Create New Event Task
     
     Command format:
     
@@ -71,8 +71,6 @@ Deletes no longer wanted tasks from the task list.
 
 ### `delete` - Delete Task From List
 
-Deletes a certain task from list.
-
 Command format:
 
 `delete <integer: task number>`
@@ -85,8 +83,6 @@ Example:
 Lists all tasks inside the task list.
 
 ### `list`  - List All Tasks
-
-List all the to-dos, deadlines, and events that the user have.
 
 Command format:
 
@@ -107,8 +103,6 @@ Types of details that can modified are:
 
 ### `update` - Change Task Details
 
-Change task description, time, and completion status.
-
 Command format:
 
 `update <integer: task number> description <string: new description>`
@@ -124,9 +118,7 @@ Example:
 ### Find Tasks
 Finds tasks that contain a specific keyword.
 
-### `find` - Find Task From List
-
-Find all tasks with description that matches the keyword.
+### `find` - Find Tasks From List
 
 Command format:
 
@@ -148,8 +140,6 @@ Does task and mark as completed.
 
 ### `done` - Mark Task As Completed
 
-Mark a to-do, deadline, or event as completed.
-
 Command format:
 
 `done <integer: task number>`
@@ -162,8 +152,6 @@ Example:
 Exits the application.
 
 ### `bye` - Exit Application
-
-Prints out a goodbye message and exits the application after 1 second.
 
 Command format:
 
