@@ -45,7 +45,8 @@ public class SortCommand implements Executable {
                 Event tempTwo = (Event) t2;
                 return temp.getDate().compareTo(tempTwo.getDate());
             }
-            return -1;
+            assert false : "Object not of type Task has entered"; // should not reach here
+            return -1; // should not reach here
         }
     };
 
@@ -64,7 +65,8 @@ public class SortCommand implements Executable {
             tasks.sort(comparator);
         }
         List<String> enumeration = tasks.enumerate();
-        enumeration.add(0, SORTED_MESSAGE + LIST_MESSAGE_FRONT + tasks.size() + LIST_MESSAGE_END);
+        enumeration.add(0, SORTED_MESSAGE + "\n"
+                + LIST_MESSAGE_FRONT + tasks.size() + LIST_MESSAGE_END);
         return ui.outputString(enumeration);
     }
 }
