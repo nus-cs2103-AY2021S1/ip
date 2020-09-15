@@ -24,20 +24,23 @@ public class DoneCommand implements Command {
         try {
             Helper.validateTaskNumber(taskNumber, list);
         } catch (InvalidTaskNumberException e) {
-            ui.say(e.getMessage());
+            ui.say(e.getMessage(), true);
             return;
         }
 
         StringBuilder sb = new StringBuilder();
         Task t = list.get(taskNumber - 1);
+        boolean isError;
         if (t.isDone()) {
             sb.append("You've already completed this task:\n");
+            isError = true;
         } else {
             t.markAsDone();
             sb.append("Nice! I've marked this task as done:\n");
+            isError = false;
         }
         sb.append("  " + t.displayString());
         assert !sb.toString().isBlank();
-        ui.say(sb.toString());
+        ui.say(sb.toString(), isError);
     }
 }

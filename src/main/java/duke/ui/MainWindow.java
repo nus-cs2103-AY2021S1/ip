@@ -75,7 +75,7 @@ public class MainWindow extends AnchorPane implements Ui {
     }
 
     @Override
-    public void say(String string) {
-        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(string, dukeImage));
+    public void say(String string, boolean isError) {
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(string, dukeImage, isError));
     }
 }

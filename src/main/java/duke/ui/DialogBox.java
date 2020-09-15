@@ -11,7 +11,10 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 
 /**
  * A custom JavaFX component for displaying Duke's or the user's message together with a display picture.
@@ -48,6 +51,19 @@ public class DialogBox extends HBox {
         this.getChildren().setAll(tmp);
     }
 
+    private void formatAsDukeError() {
+        dialog.setBackground(new Background(new BackgroundFill(Color.ORANGE, null, null)));
+        dialog.setTextFill(Color.WHITE);
+    }
+
+    private void formatAsDuke() {
+        dialog.setBackground(new Background(new BackgroundFill(Color.gray(0.9), null, null)));
+    }
+
+    private void formatAsUser() {
+        dialog.setBackground(new Background(new BackgroundFill(Color.LIGHTBLUE, null, null)));
+    }
+
     /**
      * Creates a DialogBox to display the user's inputs, with the display picture on the right and right-aligned text.
      *
@@ -56,7 +72,9 @@ public class DialogBox extends HBox {
      * @return A DialogBox to display the user's input.
      */
     public static DialogBox getUserDialog(String text, Image image) {
-        return new DialogBox(text, image);
+        DialogBox db = new DialogBox(text, image);
+        db.formatAsUser();
+        return db;
     }
 
     /**
@@ -66,9 +84,14 @@ public class DialogBox extends HBox {
      * @param image Duke's display picture.
      * @return A DialogBox to display Duke's responses.
      */
-    public static DialogBox getDukeDialog(String text, Image image) {
+    public static DialogBox getDukeDialog(String text, Image image, boolean isError) {
         var db = new DialogBox(text, image);
         db.flip();
+        if (isError) {
+            db.formatAsDukeError();
+        } else {
+            db.formatAsDuke();
+        }
         return db;
     }
 }

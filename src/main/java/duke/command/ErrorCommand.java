@@ -20,6 +20,6 @@ public class ErrorCommand implements Command {
 
     @Override
     public void execute(Ui ui, TaskList list) {
-        ui.say(message);
+        ui.say(message, true);
     }
 }

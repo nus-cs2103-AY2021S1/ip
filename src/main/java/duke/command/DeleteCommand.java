@@ -24,7 +24,7 @@ public class DeleteCommand implements Command {
         try {
             Helper.validateTaskNumber(taskNumber, list);
         } catch (InvalidTaskNumberException e) {
-            ui.say(e.getMessage());
+            ui.say(e.getMessage(), true);
             return;
         }
         Task t = list.delete(taskNumber - 1);

@@ -35,11 +35,6 @@ public class EditCommand<T extends Task> implements Command {
     public void execute(Ui ui, TaskList list) {
         try {
             Helper.validateTaskNumber(taskNumber, list);
-        } catch (InvalidTaskNumberException e) {
-            ui.say(e.getMessage());
-        }
-
-        try {
             // ClassCastException is expected if user tries to edit the wrong type of task, eg. edit date of a Task.
             // It is necessary to rely on the exception since instanceof is not allowed for generics.
             @SuppressWarnings("unchecked")
@@ -48,10 +43,10 @@ public class EditCommand<T extends Task> implements Command {
                 edit.apply(task);
             }
             ui.say("Okay, edited this:\n  " + task.displayString());
+        } catch (InvalidTaskNumberException | EditingException e) {
+            ui.say(e.getMessage(), true);
         } catch (ClassCastException classCastException) {
-            ui.say("Wrong type of task!"); // TODO: better error message
-        } catch (EditingException editingException) {
-            ui.say(editingException.getMessage());
+            ui.say("Wrong type of task!", true); // TODO: better error message
         }
     }
 }
