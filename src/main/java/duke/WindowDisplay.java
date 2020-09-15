@@ -35,12 +35,11 @@ public class WindowDisplay extends Application {
 
     private Stage stagePointer;
 
+    //@@author Jeffry Lum-reused
+    //Reused from sub pages under https://se-education.org/guides/tutorials/javaFx.html with minor modifications
     @Override
     public void start(Stage stage) {
         //Step 1. Setting up required components
-
-        //Setting up pointer
-        stagePointer = stage;
 
         //The container for the content of the chat to scroll.
         scrollPane = new ScrollPane();
@@ -86,12 +85,12 @@ public class WindowDisplay extends Application {
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
 
-        AnchorPane.setLeftAnchor(userInput , 1.0);
+        AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
         // My setup for this to work
 
-        this.mySetup();
+        this.mySetup(stage);
 
         // my stuff ends
 
@@ -104,10 +103,12 @@ public class WindowDisplay extends Application {
             handleUserInput();
         });
     }
+    //@@author Jeffry Lum
 
     // below are private methods only used in this class
 
-    private void mySetup() {
+    private void mySetup(Stage stage) {
+        stagePointer = stage;
         TextCacher.cacheStartMessage();
         flushTextCache();
 
@@ -147,6 +148,7 @@ public class WindowDisplay extends Application {
 
     /**
      * Sends input into the parsing and command logic
+     *
      * @return The text cached in the TextCacher cached by the logic
      */
     private String getResponse(String input) {
@@ -155,16 +157,12 @@ public class WindowDisplay extends Application {
     }
 
     private void endLogic() {
-        try {
-            TextCacher.cacheEndMessage();
-            flushTextCache();
+        TextCacher.cacheEndMessage();
+        flushTextCache();
 
-            PauseTransition delay = new PauseTransition(Duration.seconds(5));
-            delay.setOnFinished( event -> stagePointer.close() );
-            delay.play();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        PauseTransition delay = new PauseTransition(Duration.seconds(5));
+        delay.setOnFinished(event -> stagePointer.close());
+        delay.play();
     }
 
     private void flushTextCache() {

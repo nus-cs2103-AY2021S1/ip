@@ -24,3 +24,20 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
    | |_| | |_| |   <  __/
    |____/ \__,_|_|\_\___|
    ```
+User Guide:
+
+This program when run (running Duke.main()), will display a window that represents a chat window with a bot.
+
+Start by typing anything in the text box at the bottom of the window and instructions/errors will guide you along.
+
+Following are the commands and how to use them.
+
+1) !commands | returns a list of text commands
+2) list | lists out all the current tasks
+3) bye | saves the current tasks into a file and exits program\n" +
+4) done | format: \"done <task number>\", marks a task in the list as done\n" +
+5) todo | format: \"todo <description>\", creates a todo task\n" +
+6) deadline | format: \"deadline <description> /by <dd/MM/yyyy HHmm>\", creates a deadline task\n" +
+7) event | format: "event <description> /at <dd/MM/yyyy HHmm>", creates a event task
+8) delete | format: "delete <task number>", deletes a task in the list
+9) find | format: "find <string>", finds tasks with matching string
