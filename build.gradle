@@ -47,8 +47,9 @@ application {
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "Moco"
     archiveClassifier = null
+    archiveVersion = "2.0"
 }
 
 checkstyle {

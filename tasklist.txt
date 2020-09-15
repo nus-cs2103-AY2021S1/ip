@@ -1,0 +1,2 @@
+D | ✘ | deadlineTask  | 2020-12-12
+E | ✘ | eventTask  | 2020-10-10
