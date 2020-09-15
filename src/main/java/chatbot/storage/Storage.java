@@ -114,6 +114,7 @@ public class Storage {
 
         try {
             Files.write(location, dataStr.getBytes());
+            System.out.print("Wrote to file...");
         } catch (IOException e) {
             throw new ChatbotException(Message.MESSAGE_FAIL_SAVE);
         }

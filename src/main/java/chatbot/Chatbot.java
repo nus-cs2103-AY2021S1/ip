@@ -63,7 +63,7 @@ public class Chatbot {
     }
 
     private void initialiseDataPath() {
-        String path = "./data/chatbot.txt";
+        String path = "chatbot.txt";
         this.filePath = Path.of(path);
     }
 

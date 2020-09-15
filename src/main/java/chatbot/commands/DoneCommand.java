@@ -27,7 +27,8 @@ public class DoneCommand extends Command {
     public String execute(TaskList taskList, Ui ui, Storage storage) throws ChatbotException {
         Task taskDone = taskList.markAsDone(index);
 
-        assert storage.saveTasks(taskList.getTasks()) : "Save tasks supposed to return true.";
+        boolean isSaveSuccess = storage.saveTasks(taskList.getTasks());
+        assert isSaveSuccess : "Save tasks supposed to return true.";
 
         return ui.markDoneSuccess(taskDone);
     }

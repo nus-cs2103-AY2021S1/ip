@@ -32,7 +32,8 @@ public class DeleteCommand extends Command {
 
         Task deletedTask = taskList.removeTask(index);
 
-        assert storage.saveTasks(taskList.getTasks()) : "Save tasks supposed to return true.";
+        boolean isSaveSuccess = storage.saveTasks(taskList.getTasks());
+        assert isSaveSuccess : "Save tasks supposed to return true.";
 
         return ui.deleteSuccess(deletedTask, taskList.count());
     }
