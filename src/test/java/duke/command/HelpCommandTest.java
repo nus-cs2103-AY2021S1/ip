@@ -25,7 +25,7 @@ public class HelpCommandTest {
                 + "* delete <task number>: delete the task from your list\n\t "
                 + "* done <task number>: mark the task as complete\n\t "
                 + "* retrieve <dd/MM/yyyy>: retrieves the tasks due on or happening on this date\n\t "
-                + "* find <keyword(s)>: retrieves the tasks that contain the keyword(s)\n\t "
+                + "* find <keyword>: retrieves the tasks that contain the keyword\n\t "
                 + "* sort: sorts your list by their task type and then by their dates and time if any\n\t "
                 + "* bye: exit the application";
         CommandResponse expected = new CommandResponse(expectedMessage, false);
