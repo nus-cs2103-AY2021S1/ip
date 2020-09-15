@@ -11,7 +11,7 @@ public class CliLauncher {
     /**
      * File name of the file where the current task list is saved (under ./data/ directory)
      */
-    private static final String fileString = "duke.txt";
+    private static final String FILE_STRING = "duke.txt";
 
     /**
      * Runs Duke's cli based program. Saves output in the file specified in the fileString
@@ -23,18 +23,20 @@ public class CliLauncher {
         Ui.showGreetings();
 
         try {
-            Storage storage = Storage.create(CliLauncher.fileString);
+            Storage storage = Storage.create(CliLauncher.FILE_STRING);
 
             while (true) {
                 String cmdString = cmdScanner.nextCommand();
                 Response response = duke.runCommand(cmdString);
-                storage.write(duke.getTaskList());
                 System.out.println(response.getText());
 
                 if (response.getExit()) {
                     break;
                 }
             }
+
+            storage.write(duke.getTaskList());
+            storage.close();
         } catch (DukeException e) {
             Ui.showError(e.getMessage());
         } catch (Exception e) {
