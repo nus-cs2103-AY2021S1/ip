@@ -1,7 +1,7 @@
 # Viscount
 ![](https://i.imgur.com/dt9NWoj.png)
 
-Viscount is a **desktop app for managing tasks, optimised for use via a Command Line Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). If you are someone who can type fast, Viscount can help you track your tasks faster than traditional GUI apps.
+Viscount is a **desktop app for managing tasks, optimised for use via a Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). If you are someone who can type fast, Viscount can help you track your tasks faster than traditional GUI apps.
 
 ## Quick Start for Users
 1. Ensure you have Java 11 or later installed.
