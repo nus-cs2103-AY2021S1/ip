@@ -1,4 +1,2 @@
 T | 0 | read book | -
-T | 0 | buy bread | -
 D | 0 | essay submission (by: 15 Oct 2020) | 2020-10-15
-E | 0 | project meeting (at: 21 Nov 2020) | 2020-11-21

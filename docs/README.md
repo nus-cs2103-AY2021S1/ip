@@ -3,25 +3,25 @@
 ## Features 
 
 ### Add Todo Task 
-Adds a new todo task with the specified description to the user’s list.
+Adds a new todo task with the specified description to the list.
 
 ### Add Deadline Task
-Adds a deadline task with the specified description and due date to the user’s list.
+Adds a deadline task with the specified description and due date to the list.
 
 ### Add Event Task
-Adds an event task with the specified description and event date to the user’s list.
+Adds an event task with the specified description and event date to the list.
 
 ### Finish Task
-Marks the task at the specified index in the user’s list as done.
+Marks the task at the specified index in the list as done.
 
 ### Delete Task
-Deletes the task at the specified index in the user’s list.
+Deletes the task at the specified index in the list.
 
 ### List Task
-Lists out all the tasks in the user’s list in the same order as they were entered. 
+Lists out all the tasks in the list in the same order as they were entered. 
 
 ### Find Task
-Lists out all the tasks that match user’s keyword even if the keyword is incomplete.
+Lists out all the tasks that match the keyword even if the keyword is incomplete.
 
 ### Exit Program
 Exits the program.
@@ -35,7 +35,7 @@ Format: `todo <description>`
 
 Example of usage: 
 
-* `todo read book` adds the todo task with description `read book` to   the user’s list.
+* `todo read book` adds the todo task with description `read book` to the list.
 
 ### Add Deadline Task: `deadline`
 Adds a new deadline task.
@@ -44,7 +44,7 @@ Format: `deadline <description> /by <YYYY-MM-DD>`
 
 Example of usage:
 
-* `deadline history essay /by 2020-10-12` adds the deadline task with description `history essay` and due date `2020-10-12` to the user’s list.
+* `deadline history essay /by 2020-10-12` adds the deadline task with description `history essay` and due date `2020-10-12` to the list.
 
 ### Add Event Task: `event`
 Adds a new event task.
@@ -53,7 +53,7 @@ Format: `event <description> /at <YYYY-MM-DD>`
 
 Example of usage:
 
-* `event project meeting /at 2020-11-15` adds the event task with description `project meeting` and event date `2020-11-15` to the user’s list.
+* `event project meeting /at 2020-11-15` adds the event task with description `project meeting` and event date `2020-11-15` to the list.
 
 ### Finish Task: `done`
 Marks the task as done.
@@ -62,19 +62,19 @@ Format: `done <index>`
 
 Example of usage:
 
-* `done 2` marks the second task in the user’s list as done.
+* `done 2` marks the second task in the list as done.
 
 ### Delete Task: `delete`
-Deletes the task from the user’s list.
+Deletes the task from the list.
 
 Format: `delete <index>`
 
 Example of usage:
 
-* `delete 2` deletes the second task in the user’s list.
+* `delete 2` deletes the second task in the list.
 
 ### List Task: `list`
-Lists out all the tasks in the user’s list.
+Lists out all the tasks in the list.
 
 Format: `list`
 
@@ -83,7 +83,7 @@ Example of usage:
 * `list` shows all the tasks in the list.
 
 ### Find Task: `find`
-Lists out all the tasks that match user’s keyword.
+Lists out all the tasks that match the keyword.
 
 Format: `find <description>`
 

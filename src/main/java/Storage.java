@@ -35,7 +35,8 @@ public class Storage {
 
                 String[] dataArray = item.split("\\|");
                 String taskType = dataArray[0].trim();
-                boolean isDone = dataArray[1].trim().equals("1");
+                String statusIcon = dataArray[1].trim();
+                boolean isDone = statusIcon.equals("1");
                 String taskDescription = dataArray[2].trim();
                 String time = dataArray[3].trim();
 
@@ -55,14 +56,11 @@ public class Storage {
                     break;
                 }
                 return task;
-
             });
 
             ArrayList<Task> tasks = new ArrayList<>();
             taskStream.forEach(tasks::add); // add tasks from the hard disk to the arrayList
-
             return tasks;
-
 
         } catch (IOException e) {
             throw new DukeException("Unable to load tasks");
@@ -71,17 +69,17 @@ public class Storage {
 
     /**
      * Saves the tasks to the hard disk.
-     * @param taskList arrayList containing the tasks.
+     * @param tasks arrayList containing the tasks.
      * @throws DukeException an exception with the "failure to save" message
      */
-    public void saveTasks(ArrayList<Task> taskList) throws DukeException {
+    public void saveTasks(ArrayList<Task> tasks) throws DukeException {
 
         String message = "";
 
-        for (Task tsk : taskList) {
-            String time = tsk.getTime() == null ? "-" : tsk.getTime().toString();
-            String entry = tsk.getType() + " | " + tsk.getStatus() + " | " +
-                    tsk.getDescription() + " | " + time  + System.lineSeparator();
+        for (Task task : tasks) {
+            String time = task.getTime() == null ? "-" : task.getTime().toString();
+            String entry = task.getType() + " | " + task.getStatus() + " | " +
+                    task.getDescription() + " | " + time  + System.lineSeparator();
             message = message.concat(entry);
         }
 
