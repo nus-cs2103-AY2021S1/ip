@@ -1,3 +1,2 @@
-T | 0 | readbook
-T | 1 | meeting
-D | 1 | return book | 2020-08-26
+T | 1 | read book
+D | 0 | return book | 2020-10-10
