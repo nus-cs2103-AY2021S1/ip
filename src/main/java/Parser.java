@@ -1,3 +1,5 @@
+import java.io.FileNotFoundException;
+
 /**
  * Represents a parser that deals with making sense of the user command.
  */
@@ -24,7 +26,18 @@ public class Parser {
             if (taskList.list.isEmpty()) {
                 return ui.emptyList();
             } else {
-                return ui.returnAllTasks(taskList);
+                //return ui.returnAllTasks(taskList);
+                Storage storage = new Storage(filePath);
+                TaskList tasks;
+                String s = "";
+                try {
+                    tasks = new TaskList(storage.load());
+                    s = ui.returnAllTasks(tasks);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+                return s;
+
             }
         } else if (pieces[0].equals("find")) { // listing command
             if (taskList.list.isEmpty()) {
@@ -36,16 +49,21 @@ public class Parser {
             if (pieces.length == 1) { // task number is missing
                 return ui.markDoneFailure();
             } else {
-                int task = Integer.parseInt(pieces[1]); // get the task number
-                if (task > taskList.noOfTasks) {
-                    return ui.uncreatedTask(); // task has not been created
-                } else {
-                    assert (taskList.list.get(task - 1) != null) : "Incorrect index.";
-                    Task cur = taskList.list.get(task - 1);
-                    cur.markAsDone();
-                    Storage.updateTasks(taskList.getNoOfTasks(), taskList.list, filePath);
-                    return ui.markDoneSuccessful(cur);
+                try {
+                    int task = Integer.parseInt(pieces[1]); // get the task number
+                    if (task > taskList.noOfTasks) {
+                        return ui.uncreatedTask(); // task has not been created
+                    } else {
+                        assert (taskList.list.get(task - 1) != null) : "Incorrect index.";
+                        Task cur = taskList.list.get(task - 1);
+                        cur.markAsDone();
+                        Storage.updateTasks(taskList.getNoOfTasks(), taskList.list, filePath);
+                        return ui.markDoneSuccessful(cur);
+                    }
+                } catch (NumberFormatException e) {
+                    return ui.incorrectDoneFormat();
                 }
+
             }
         } else if (pieces[0].equals("delete")) { // delete command
             if (pieces.length == 1) {

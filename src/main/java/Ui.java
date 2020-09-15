@@ -200,4 +200,11 @@ public class Ui {
         String stringToReturn = LINE + ex.getMessage() + "\n" + LINE;
         return stringToReturn;
     }
+
+    public String incorrectDoneFormat() {
+        Exception ex = new InvalidInputException("Your input format for 'done' command is wrong!" +
+                                                 " It should be 'done TASK_NUMBER.");
+        String stringToReturn = LINE + ex.getMessage() + "\n" + LINE;
+        return stringToReturn;
+    }
 }

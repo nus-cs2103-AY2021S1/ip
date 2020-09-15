@@ -16,7 +16,6 @@ public class TaskList {
 
     /**
      * Default constructor for a task list without any task.
-     * @param args unused
      */
     public TaskList() {
         this.list = new ArrayList<>();
@@ -43,7 +42,7 @@ public class TaskList {
                 String[] pieces = command.split("]", 3);
                 String type = pieces[0];
                 String icon = pieces[1].substring(pieces[1].length() - 1); // status icon
-                boolean isDone = (icon == "\u2713") ? true : false;
+                boolean isDone = (icon.equals("\u2713")); // \u2713 is the icon for ✓
                 String description = pieces[2].substring(1, pieces[2].length());
 
                 Task t = new Task("");
