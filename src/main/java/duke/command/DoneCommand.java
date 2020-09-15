@@ -40,11 +40,4 @@ public class DoneCommand extends Command {
         return ui.printReply(String.format(MESSAGE_SUCCESS, completedTask));
     }
 
-    /**
-     * Indicates whether Duke chatbot is still running.
-     * @return false.
-     */
-    public boolean isExit() {
-        return false;
-    }
 }

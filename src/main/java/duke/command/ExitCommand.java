@@ -5,7 +5,9 @@ import duke.TaskList;
 import duke.Ui;
 
 public class ExitCommand extends Command {
-
+    public ExitCommand() {
+        isExit = true;
+    }
     /**
      * Executes the exit command.
      * @param taskList TaskList associated with command.
@@ -14,14 +16,5 @@ public class ExitCommand extends Command {
      */
     public String execute(TaskList taskList, Ui ui, Storage storage) {
         return ui.exit();
-    }
-
-    /**
-     * Indicates whether Duke chatbot is still running.
-     * @return true.
-     */
-    public boolean isExit() {
-
-        return true;
     }
 }

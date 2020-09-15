@@ -34,7 +34,4 @@ public class FindCommand extends Command {
         return ui.printSearchResults(searchResults);
     }
 
-    public boolean isExit() {
-        return false;
-    }
 }

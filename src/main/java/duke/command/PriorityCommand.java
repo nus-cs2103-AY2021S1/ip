@@ -74,11 +74,4 @@ public class PriorityCommand extends Command {
         return ui.printReply(String.format(MESSAGE_SUCCESS, action.toString().toLowerCase(), task));
     }
 
-    /**
-     * Indicates whether Duke chatbot is still running.
-     * @return false.
-     */
-    public boolean isExit() {
-        return false;
-    }
 }

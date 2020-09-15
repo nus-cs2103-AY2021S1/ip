@@ -21,11 +21,4 @@ public class ListCommand extends Command {
         return ui.listTasks(taskList);
     }
 
-    /**
-     * Indicates whether Duke chatbot is still running.
-     * @return false.
-     */
-    public boolean isExit() {
-        return false;
-    }
 }

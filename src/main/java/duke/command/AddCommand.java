@@ -45,12 +45,4 @@ public class AddCommand extends Command {
         return ui.printReply(String.format(MESSAGE_SUCCESS, taskList.get(taskList.size() - 1), taskList));
     }
 
-    /**
-     * Indicates whether Duke chatbot is still running.
-     * @return false.
-     */
-    public boolean isExit() {
-        return false;
-    }
-
 }

@@ -9,7 +9,10 @@ import duke.exception.DukeException;
  * Represents an executable command.
  */
 public abstract class Command {
-
+    /**
+     * Status of chatbot.
+     */
+    protected boolean isExit = false;
     /**
      * Executes the command.
      * @param taskList TaskList associated with command.
@@ -23,6 +26,8 @@ public abstract class Command {
      * Indicates whether Duke chatbot is still running.
      * @return Boolean to determine state of Duke.
      */
-    public abstract boolean isExit();
+    public boolean isExit() {
+        return isExit;
+    };
 
 }
