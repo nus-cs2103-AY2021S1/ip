@@ -1,3 +1,2 @@
-T | true | love fei
-D | false | finish es2600 reflection | Sep 5 2020
-E | false | es2660 meeting | 15:00
+T | false | finish ip
+D | false | tp | Sep 20 2020

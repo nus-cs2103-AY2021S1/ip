@@ -12,6 +12,7 @@ public class Fei {
     private TaskList tasks;
     private final Storage storage;
     private final Ui ui;
+    private boolean isExit;
 
     /**
      * Create a Fei's chatterbox with a file path you want to store all your data in.
@@ -22,6 +23,7 @@ public class Fei {
         ui = new Ui();
         storage = new Storage(filePath);
         tasks = new TaskList();
+        isExit = false;
         try {
             tasks = storage.load();
         } catch (FeiException e) {
@@ -34,10 +36,15 @@ public class Fei {
         try {
             String fullCommand = input;
             Command c = Parser.parse(fullCommand);
+            this.isExit = c.isExit();
             return c.execute(tasks, ui, storage);
         } catch (FeiException e) {
             return e.getMessage();
         }
+    }
+
+    public boolean isExit() {
+        return this.isExit;
     }
 
 }
