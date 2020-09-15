@@ -16,7 +16,7 @@ public class Parser {
         assert toPrint != null : "Input cannot be empty";
 
         if (toPrint.startsWith("list")) {
-            return new ListCommand(toPrint);
+            return new ListCommand();
         } else if (toPrint.startsWith("done")) {
             return new DoneCommand(toPrint);
         } else if (toPrint.startsWith("delete")) {
@@ -31,6 +31,8 @@ public class Parser {
             return new ByeCommand();
         } else if (toPrint.startsWith("find")) {
             return new FindCommand(toPrint);
+        } else if (toPrint.startsWith("help")) {
+            return new HelpCommand();
         } else {
             return new ErrorCommand();
         }

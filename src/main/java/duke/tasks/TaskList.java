@@ -42,7 +42,8 @@ public class TaskList {
     }
 
     /**
-     * Lists all the task from the list of tasks.
+     * List all the tasks in the task list.
+     * @return output for the console.
      */
     public String list() {
         String printGui = "";
@@ -55,10 +56,6 @@ public class TaskList {
             i++;
         }
         return printGui;
-
-//        String finalPrintGui = printGui;
-//        this.taskLs.forEach(n -> finalPrintGui.concat((this.taskLs.indexOf(n) + 1 + ". " + n + "\n")));
-//        return finalPrintGui;
     }
 
     /**
@@ -76,6 +73,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Creates a String for a done input to print out on the console.
+     * @param toPrint user input.
+     * @return output for the console.
+     */
     public String doneString(String toPrint) {
         String command = toPrint.replaceAll("[^\\d.]", "");
         int indexCommand = Integer.parseInt(command.trim());
@@ -105,6 +107,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Creates a string for a todo input to print out on the console
+     * @param toPrint user input
+     * @return output for the console
+     */
     public String todoString(String toPrint) {
         toPrint = toPrint.substring(4);
         Todo taskTodo = new Todo(toPrint);
@@ -131,6 +138,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Creates a string for a event input to print out on the console
+     * @param toPrint user input
+     * @return output for the console
+     */
     public String eventString(String toPrint) {
         toPrint = toPrint.substring(5);
         String[] arrtoPrint = toPrint.split("/at ");
@@ -162,6 +174,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Creates a string for a deadline input to print out on the console
+     * @param toPrint user input
+     * @return output for the console
+     */
     public String deadlineString(String toPrint) {
         toPrint = toPrint.substring(8);
         String[] arrtoPrint = toPrint.split("/by ");
@@ -176,7 +193,8 @@ public class TaskList {
 
     /**
      * Finds the tasks in the list of tasks matching the keyword.
-     * @param toPrint Keyword entered by user.
+     * @param toPrint keyword entered by the user
+     * @return String of tasks to be printed on the console
      */
     public String find(String toPrint) {
         try {
@@ -197,7 +215,9 @@ public class TaskList {
     }
 
     /**
-     * Lists the task from the list of tasks.
+     * Lists the task from the task list.
+     * @param printGui Intro before listing the matching tasks.
+     * @return String of tasks in the task list.
      */
     public String findList(String printGui) {
         int size = this.taskLs.size();
@@ -206,6 +226,20 @@ public class TaskList {
             printGui = printGui + i + ". " + this.taskLs.get(i - 1) + "\n";
             i++;
         }
+        return printGui;
+    }
+
+    public String help() {
+        String printGui = "";
+        printGui += "Here are the available commands: " + "\n";
+        printGui += "todo <instructions> e.g todo read book" + "\n";
+        printGui += "deadline <instructions> e.g deadline fly /by 2018-03-03" + "\n";
+        printGui += "event <instructions> e.g event jog /at 2017-04-02" + "\n";
+        printGui += "done <integer> e.g done 2 to mark the second task as done" + "\n";
+        printGui += "find <keyword> e.g find book to find all tasks matching the keyword" + "\n";
+        printGui += "type list to see your current task list" +"\n";
+        printGui += "type bye to terminate Duke";
+
         return printGui;
     }
 
