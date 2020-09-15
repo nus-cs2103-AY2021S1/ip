@@ -42,6 +42,7 @@ public class DialogBox extends HBox {
         dialog.setPadding(new Insets(10));
         dialog.setText(text);
         displayPicture.setImage(img);
+        displayPicture.setFitHeight(75);
         setBackground(new Background(new BackgroundFill(isUserDialog ? Color.LIGHTBLUE : Color.LIGHTGREY,
                 new CornerRadii(5), new Insets(5))));
     }

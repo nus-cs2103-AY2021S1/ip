@@ -31,6 +31,7 @@ public class MainWindow extends AnchorPane {
     private Duke duke;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Mocha.png"));
+    private Image userImageBye = new Image(this.getClass().getResourceAsStream("/images/Mocha Bye.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Milk.png"));
     private Image dukeImageException = new Image(this.getClass().getResourceAsStream("/images/Milk Harh.png"));
     private Image dukeImageBye = new Image(this.getClass().getResourceAsStream("/images/Milk Bye.png"));
@@ -61,7 +62,7 @@ public class MainWindow extends AnchorPane {
         Command response = duke.getResponse(input);
         if (response.isExit()) {
             dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
+                DialogBox.getUserDialog(input, userImageBye),
                 DialogBox.getDukeDialog(response.getDialog(), dukeImageBye)
             );
             ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
