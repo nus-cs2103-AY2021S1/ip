@@ -35,7 +35,7 @@ public class Ui {
         message = e.getMessage();
     }
     public void setMessagePrintHelp() {
-        message = "Welcome to Duke! Here is a list of commands you can use: \n"
+        message = "Welcome to Duke! Here is a list of commands you can use: \n\n"
                 + "todo <name> - adds a Todo task to your list\n"
                 + "deadline <name> /by <time> - adds a Deadline task to your list\n"
                 + "event <name> /at <time> - adds an Event task to your list\n"
@@ -46,7 +46,8 @@ public class Ui {
                 + "find <keyword> - displays all tasks containing the exact keyword\n"
                 + "upcoming <number> - displays all tasks occurring within the given number of days\n"
                 + "help - displays this helpful message\n"
-                + "exit - shuts down the bot\n";
+                + "exit - shuts down the bot\n"
+                + LINE;
     }
     public void setMessagePrintList(TaskList tasks) {
         message = "Here are your tasks:\n"

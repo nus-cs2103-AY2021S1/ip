@@ -1,5 +1,25 @@
 # User Guide
-Duke is a chat bot that helps you keep track of tasks, including deadlines and events!
+Welcome to Duke! Duke is a chat bot that helps you keep track of tasks, including deadlines and events!
+
+## Quick Start
+To get started, download the duke.jar file to your computer and place it in a folder of your choosing. To launch Duke, 
+run the .jar file, and the Duke window should open shortly.
+
+As a first command, create a new example ToDo task by typing in "todo play around with Duke" 
+without the quotation marks. This will create the task "play around with Duke" and place it in your task list. To check
+that it has been added correctly, type in the "list" command to display the task list.
+
+Next, try using the "done 1" and "undone 1" commands to mark the task done and not done respectively. Like before, you 
+can verify that the commands worked by using "list" to view the task list. The number you enter represents the number 
+of the task, so if you want to mark the third task in the list as done, use type in "done 3" instead of 1.
+
+Finally, to close off this brief tutorial, use the command "delete 1" to delete the example task from your list. You can 
+"list" once again to display your task list, which by now should be empty.
+
+If you ever forget which command to use, you can type "help" to view the entire list of commands that you can use in
+interacting with Duke, including the more advanced "find" and "upcoming" commands!
+
+Have fun using Duke!
 
 ## Features 
 1. Add a new task to your list
@@ -30,7 +50,22 @@ Shows you all your deadlines and events which are occurring in the next X days.
 
 ### Storing your list of tasks in the hard disk
 Duke will auto-save your list of tasks, so you can see the same list the next time you launch Duke. 
-To close Duke without saving, close the window without using the "exit" keyword.
+To close Duke without saving, close the window without using the "exit" keyword, such as by using the shortcut Alt-F4 or
+using End Task in Windows Task Manager.
+
+
+If you wish to transfer your data to another computer, follow these simple steps:
+
+1. Go to the folder where your duke.jar file is
+1. Locate the text file named "data"
+1. Create a new folder and copy the duke.jar and data.txt files inside
+1. Transfer this folder to your new computer
+1. Ensure that the folder on the new computer still contains both the duke.jar and data.txt files
+1. You're done!
+
+Ensure that your data.txt and duke.jar are in the **same folder**. If Duke cannot find the data.txt file in the folder,
+it will simply create a fresh data file from scratch. Additionally, make sure to not lose your original data.txt, or 
+your task list data will be **lost**!
 
 ## Usage
 
@@ -46,6 +81,7 @@ Expected outcome:
 
 `Added new task: Buy new clothes
 You now have 1 task in your list.`
+
 The ToDo task will be added to your task list.
 
 ### `deadline <task description> /by <date of task in DD/MM/YYYY format> <time of task in hh:mm format>` - Add a new Deadline
@@ -60,6 +96,7 @@ Expected outcome:
 
 `Added new task: Math Assignment
 You now have 2 tasks in your list.`
+
 The deadline "Math Assignment" will be added to your task list.
 
 _NOTE: it is important that you follow the given format exactly. Duke will prompt you if you use an incorrect format._
@@ -76,11 +113,13 @@ Expected outcome:
 
 `Added new task: Mom's birthday 
 You now have 3 tasks in your list.`
+
 The event "Mom's birthday" will be added to your task list.
 
 ### `delete <number of the task you want to delete>` - Deletes a task
 
-Deletes a task from your task list. Be careful, this action is permanent!
+Deletes a task from your task list. The number you enter refers to the number of the task in the list. 
+Be careful, this action is permanent!
 
 Example of usage:
 
@@ -89,11 +128,13 @@ Example of usage:
 Expected outcome:
 
 `The task [D][X] Math Assignment (by Oct 20 2020 23:59) has been deleted from your list.`
+
 The second task in your list (Math Assignment) will be deleted from your list.
 
 ### `done <number of task you want to mark as done>` - Marks a task as done
 
-Marks a task in your list as done. The opposite of this action is the "undone" command.
+Marks a task in your list as done. The number you enter refers to the number of the task in the list. 
+The opposite of this action is the "undone" command.
 
 Example of usage:
 
@@ -102,11 +143,13 @@ Example of usage:
 Expected outcome:
 
 `Congrats, I've marked this task as done!`
+
 The second task in your list (now Mom's Birthday) will be marked as done.
 
 ### `undone <number of task you want to mark as done>` - Marks a task as not done
 
-Marks a task in your list as not done. The opposite of this action is the "done" command.
+Marks a task in your list as not done. The number you enter refers to the number of the task in the list. 
+The opposite of this action is the "done" command.
 
 Example of usage:
 
@@ -115,17 +158,20 @@ Example of usage:
 Expected outcome:
 
 `I've marked that task as unfinished.`
+
 The second task in your list (Mom's Birthday) will be marked as not done.
 
-### `search <keywords>` - Searches your tasks containing the keywords
+### `find <keywords>` - Searches your tasks containing the keywords
 
 Searches your task list for all tasks containing the exact keywords. It works similar to Ctrl-F on your browser or text editors.
 
 Example usage:
 
-`todo Buy new chair
+```
+todo Buy new chair
 todo Buy new table
-search Buy new`
+find Buy new
+```
 
 Expected outcome:
 
@@ -158,7 +204,8 @@ Here are your tasks:
 
 ### `upcoming <X number of days>` - Shows you all upcoming tasks
 
-Duke will display all upcoming deadlines or events occurring within the number of days you enter. Since ToDos have no date or time associated with them, they will not be displayed.
+Duke will display all upcoming deadlines or events occurring within the number of days you enter. 
+Since ToDos have no date or time associated with them, they will not be displayed.
 
 Example usage:
 
@@ -167,12 +214,15 @@ upcoming 7`
 
 Expected outcome:
 
-`I found 1 task occurring in the next 7 days:
-1.[D][X] Math Assignment (by: Sep 19 2020 23:59)`
+```
+I found 1 task occurring in the next 7 days:
+
+1.[D][X] Math Assignment (by: Sep 19 2020 23:59)
+```
 
 ### `exit` - Quits and saves
-
-Shuts down Duke after auto-saving your task list. If you shut down Duke without using this keyword, Duke will not save your task list.
+Shuts down Duke after auto-saving your task list. If you shut down Duke without using this keyword, such as
+by using Alt-F4 or Windows Task Manager, Duke will not save your task list.
 
 Example usage:
 
@@ -181,6 +231,7 @@ Example usage:
 Expected outcome:
 
 `Goodbye!`
+
 Duke will then exit and the window will close.
 
 ### `help` - Help message
@@ -195,6 +246,7 @@ Expected outcome:
 
 ```
 Welcome to Duke! Here is a list of commands you can use:
+
 todo <name> - adds a Todo task to your list
 deadline <name> /by <time> - adds a Deadline task to your list
 event <name> /at <time> - adds an Event task to your list
