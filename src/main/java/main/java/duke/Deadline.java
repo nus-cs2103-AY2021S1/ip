@@ -5,6 +5,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
+
     String taskType = "D";
     LocalDate localDate;
     LocalTime localTime;
@@ -30,7 +31,8 @@ public class Deadline extends Task {
         // index 2 contains time
         // String.split is called with limit 4 to make the time string free of whitespace before and after.
         String[] descSplitBySpace = byDateTime.split(" ", 4);
-        assert descSplitBySpace.length == 3 : "deadline is not in the format /by 2011-11-29 1830";
+        assert descSplitBySpace.length == 4 || descSplitBySpace.length == 3 : "deadline is not in the format /by " +
+                "2011-11-29 1830";
         localDate = LocalDate.parse(descSplitBySpace[1]);
         String timeString = descSplitBySpace[2];
         localTime = stringToLocalTime(timeString.substring(0, timeString.length() - 2),

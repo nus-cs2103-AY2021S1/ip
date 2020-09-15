@@ -46,7 +46,7 @@ public class Ui {
         taskList.addTask(toAdd);
         return "  Got it. I've added this task:\n"
                 + "    " + toAdd.toString() + "\n"
-                + "  Now you have " + (taskList.size()+1) + " tasks in the list.";
+                + "  Now you have " + (taskList.size()) + " tasks in the list.";
     }
 
     /**
@@ -98,7 +98,7 @@ public class Ui {
         } else if (priority.equals("high")) {
             toMark.setPriority(Priority.HIGH);
         } else {
-            return " Sorry, we the priority has to be either low, medium or high";
+            return " OOPS!!! Sorry, we the priority has to be either low, medium or high";
         }
         result = "  Nice! the priority for this task has been set to " + priority + ":\n"
                 + "    " + toMark.toString();
@@ -129,7 +129,7 @@ public class Ui {
             DeadlineFormatException dFormatException = new DeadlineFormatException();
             toReturn = dFormatException.getMessage();
         } catch (DateTimeParseException dtpe) {
-            DeadlineFormatException dFormatException = new DeadlineFormatException("Sorry, please key in a " +
+            DeadlineFormatException dFormatException = new DeadlineFormatException("  OOPS!!! Sorry, please key in a " +
                     "valid date and time " +
                     "format");
             toReturn = dFormatException.getMessage();
@@ -144,7 +144,8 @@ public class Ui {
      * @return the string to be displayed as the response on CLI or GUI
      */
     public String getDukeResponse(String nextInput) {
-        // nextInput can include the priority of the task by ending the command with /priority low or medium or high.
+        // nextInput can include the priority of the task by
+        // ending the command with /priority low or medium or high.
         String[] commandComponents = nextInput.split(" ", 4);
         String header = commandComponents[0];
         String toReturn;
@@ -159,11 +160,11 @@ public class Ui {
                 int taskIndex = Integer.parseInt(commandComponents[1]) - 1;
                 toReturn = markTaskDone(taskIndex);
             } catch (IndexOutOfBoundsException e) {
-                DoneException doneException = new DoneException("The task number does not exist!");
+                DoneException doneException = new DoneException("  OOPS!!! The task number does not exist");
                 toReturn = doneException.getMessage();
             } catch (NumberFormatException nfe) {
                 DoneException doneException =
-                        new DoneException("Please provide a task number to mark as done!");
+                        new DoneException("  OOPS!!! Please provide a task number to mark as done");
                 toReturn = doneException.getMessage();
             }
         } else if (header.equals("delete")) {
@@ -171,17 +172,19 @@ public class Ui {
                 int taskIndex = Integer.parseInt(commandComponents[1]) - 1;
                 toReturn = deleteTask(taskIndex);
             } catch (IndexOutOfBoundsException e) {
-                DeleteTaskException deleteException = new DeleteTaskException("The task number does not exist!");
+                DeleteTaskException deleteException = new DeleteTaskException("  OOPS!!! The task number does not " +
+                        "exist");
                 toReturn = deleteException.getMessage();
             } catch (NumberFormatException nfe) {
                 DeleteTaskException deleteException =
-                        new DeleteTaskException("Please provide a task number to delete!");
+                        new DeleteTaskException("  OOPS!!! Please provide a task number to delete");
                 toReturn = deleteException.getMessage();
             }
         } else if (header.equals("find")) {
             String keyword = commandComponents[1];
             toReturn = taskList.searchWithKeyword(keyword);
         } else if (header.equals("set")) {
+            // can be scaled to support other types of set commands
             // set 2 priority low or medium or high
             int taskIndex = Integer.parseInt(commandComponents[1]) - 1;
             String fieldToSet = commandComponents[2];
@@ -189,7 +192,7 @@ public class Ui {
             if (fieldToSet.equals("priority")) {
                 toReturn = markTaskPriority(priority, taskIndex);
             } else {
-                toReturn = "  Sorry setting of this type of label is supported";
+                toReturn = "  OOPS!!! Sorry setting of this type of label is supported";
             }
         } else {
             toReturn = getResultFromParser(nextInput);
@@ -205,7 +208,7 @@ public class Ui {
     public void handleUserInput() {
         Scanner sc = new Scanner(System.in);
         horiLine(60);
-        System.out.println("  Hello! I'm IntelliGent!\n  What can I do for you?");
+        System.out.println("  Hello, Welcome to Duke, your personal assistant!");
         horiLine(60);
         while (sc.hasNextLine()) {
             String nextInput = sc.nextLine();

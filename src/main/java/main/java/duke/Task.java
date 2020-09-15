@@ -71,7 +71,7 @@ public class Task {
 
     /**
      * Sets the priority of this Task
-     * @param priority the value of the enum Priority
+     * @param p the value of the enum Priority
      */
     public void setPriority(Priority p) {
         this.priority = p;

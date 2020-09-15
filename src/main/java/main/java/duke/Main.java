@@ -19,6 +19,8 @@ public class Main extends Application {
     private Duke duke = new Duke(workingDir + File.separator
             + "tasklist.txt");
 
+    //@@author ngzhenteng-reused
+    //Reused from https://se-education.org/guides/tutorials/javaFxPart4.html
     /**
      * The main entry point for all JavaFX applications.
      * The start method is called after the init method has returned,
@@ -47,4 +49,5 @@ public class Main extends Application {
             e.printStackTrace();
         }
     }
+    //@@author
 }

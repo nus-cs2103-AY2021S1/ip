@@ -48,7 +48,7 @@ public class Duke {
      * @return duke's response to be displayed in GUI.
      */
     protected String getResponse(String input) {
-        return "Duke responds:\n" + ui.getDukeResponse(input);
+        return "  Duke responds:\n" + ui.getDukeResponse(input);
     }
 
     public static void main(String[] args) {

@@ -29,8 +29,10 @@ public class Event extends Task{
         // an array where index 0 contains "by"
         // index 1 contains date
         // index 2 contains time
-        String[] descSplitBySpace = byDateTime.split(" ", 3);
-        assert descSplitBySpace.length == 3 : "deadline is not in the format /by 2011-11-29 1830";
+        // String.split is called with limit 4 to make the time string free of whitespace before and after.
+        String[] descSplitBySpace = byDateTime.split(" ", 4);
+        assert descSplitBySpace.length == 4 || descSplitBySpace.length == 3 : "deadline is not in the format /by " +
+                "2011-11-29 1830";
         localDate = LocalDate.parse(descSplitBySpace[1]);
         String timeString = descSplitBySpace[2];
         localTime = stringToLocalTime(timeString.substring(0, timeString.length() - 2),
