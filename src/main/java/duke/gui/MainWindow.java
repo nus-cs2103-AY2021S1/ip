@@ -18,7 +18,7 @@ import java.util.TimerTask;
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
-    private static final String TOPLINE = "~~~~~~~~~~~~~~~~~~~~~~~~\n";
+    private static final String TOPLINE = "~~~~~~~~~~ DUKE ~~~~~~~~~~\n";
     private static final String BOTTOMMINE = "\n~~~~~~~~~~~~~~~~~~~~~~~~";
     private static final String ERRORLINE = "~~~~~~~~~~ ERROR ~~~~~~~~~\n";
     @FXML
