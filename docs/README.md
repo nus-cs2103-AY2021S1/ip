@@ -3,6 +3,13 @@ Duke is a PC chatbot application designed to manage user's tasks.
 
 It can be accessed via a Command Line Interface (CLI) or a Graphical User Interface (GUI)
 
+## Getting started
+1. Ensure that your PC has Java 11 installed. 
+2. Double click to open the duke.jar file to start using in GUI
+3. Alternatively, you can also run the duke.ar file in a CLI
+4. Tasks added or deleted will be store in a tasks.txt file in the same directory as the duke.jar
+5. Ensure that the command bye is executed before exiting the application. (Reason: this saves changes of the tasks to the .txt file)
+
 ## Features 
 Items in curly braces are compulsory field to be given by the user (e.g. `{KEYWORD}`)
 
