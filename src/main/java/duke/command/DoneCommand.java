@@ -52,7 +52,6 @@ public class DoneCommand extends Command {
         try {
             if (num <= list.size()) {
                 Task current = list.get(num - 1);
-                current.markAsDone();
                 storage.editFile(num - 1);
                 return ui.doneMessage(current.getDone(), current.getDescription(), true);
             } else {

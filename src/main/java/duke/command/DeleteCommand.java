@@ -15,7 +15,7 @@ import duke.task.TaskList;
 
 public class DeleteCommand extends Command {
     private final int num;
-
+    private String deletedMessage = "";
     /**
      * The constructor for the Delete Command.
      * @param command the specific command instructions
@@ -39,6 +39,7 @@ public class DeleteCommand extends Command {
                 throw new DukeException("☹ OOPS!!! there is no such task");
             } else {
                 Task deleted = list.delete(num - 1);
+                deletedMessage = deleted.toString();
                 ui.deleteMessage(deleted.toString(), list.size());
                 storage.deleteTask(num);
             }
@@ -49,15 +50,10 @@ public class DeleteCommand extends Command {
 
     @Override
     public String executeChat(TaskList list, Ui ui, Storage storage) {
-        try {
-            if (num < 0 || num > list.size()) {
-                return "☹ OOPS!!! there is no such task";
-            } else {
-            Task deleted = list.delete(num - 1);
-            storage.deleteTask(num);
-            return ui.deleteMessage(deleted.toString(), list.size(), true);
-        } }catch (IOException e) {
-            return e.getMessage();
+        if (num < 0 || num > list.size() + 1) {
+            return "☹ OOPS!!! there is no such task";
+        } else {
+        return ui.deleteMessage(deletedMessage, list.size(), true);
         }
     }
 }

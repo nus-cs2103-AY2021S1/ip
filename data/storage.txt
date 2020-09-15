@@ -1,6 +1,2 @@
-D | 0 | go play | 2020-09-09
-D | 0 | go play | 2020-09-09
-T | 0 | go die
-T | 0 | go die
-T | 0 | go run
-T | 0 | go run
+E | 0 | go run | stadium
+T | 0 | jump

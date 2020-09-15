@@ -23,10 +23,11 @@ public class Ui {
     }
 
     public static String intro(boolean isChat) {
-        String str1 = "Hello from\n";
-        String str2 = "Hi! I'm duke.Duke your friendly neighbourhood chat bot\n";
-        String str3 = "What can i do for you?";
-        return  str1 + str2 + str3;
+        String str1 = "Hi! I'm Colt!\n";
+        String str2 = "I am your personal assistant cowboy here to keep track of tasks\n";
+        String str3 = "What can i do for you?\n";
+        String str4 = "The 3 main features you can keep track of are todo, deadline, task";
+        return  str1 + str2 + str3 + str4;
     }
     /**
      * Displays an indicator that the list is about to be shown

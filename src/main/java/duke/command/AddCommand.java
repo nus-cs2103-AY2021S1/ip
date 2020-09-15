@@ -77,7 +77,7 @@ public class AddCommand extends Command {
                     throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
                 }
                 task = new Todo(type[1]);
-                storage.addToFile("T | 0 | " + task.getDescription());
+
             } else if (type[0].equals("deadline")) {
                 if (type.length == 1) {
                     throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
@@ -85,7 +85,6 @@ public class AddCommand extends Command {
                 String second = type[1];
                 String[] secondSplit = second.split(" /by ", 2);
                 task = new Deadline(secondSplit[0], secondSplit[1]);
-                storage.addToFile("D | 0 | " + task.getDescription() + " | " + secondSplit[1]);
             } else if (type[0].equals("event")) {
                 if (type.length == 1) {
                     throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
@@ -93,15 +92,11 @@ public class AddCommand extends Command {
                 String second = type[1];
                 String[] secondSplit = second.split(" /at ", 2);
                 task = new Event(secondSplit[0], secondSplit[1]);
-                storage.addToFile("E | 0 | " + task.getDescription() + " | " + secondSplit[1]);
             } else {
                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
-            list.add(task);
             return ui.addedTaskMessage(task, list.size(), true);
         } catch (DukeException e) {
-            return e.getMessage();
-        } catch (IOException e) {
             return e.getMessage();
         }
     }

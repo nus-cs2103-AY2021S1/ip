@@ -43,11 +43,11 @@ public class DialogBox extends HBox {
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
         dialog.setStyle("-fx-background-color: rgb(200, 230, 242); " +
-                "-fx-background-radius: 15;" +
-                "-fx-padding: 7.5;" +
+                "-fx-background-radius: 20;" +
+                "-fx-padding: 10;" +
                 "-fx-text-fill: rgb(153, 20, 51);" +
                 "-fx-border-color: rgb(153, 20, 51);" +
-                "-fx-border-radius: 15;");
+                "-fx-border-radius: 20;");
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
