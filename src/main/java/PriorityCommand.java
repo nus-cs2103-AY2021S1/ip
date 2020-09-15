@@ -13,6 +13,16 @@ public class PriorityCommand extends Command {
         this.priority = Integer.parseInt(splitInput[2]);
     }
 
+    public String getPriority(int priority) {
+        if (this.priority == 1) {
+            return "HIGH";
+        } else if (this.priority == 2) {
+            return "MEDIUM";
+        } else {
+            return "LOW";
+        }
+    }
+
     public String handle(String input, TaskManager taskManager, Storage fileHandler) throws IOException {
         if (input.equals("priority")) {
             return "Priority levels:\n HIGH - 1\n MEDIUM - 2\n LOW - 3";
@@ -24,7 +34,7 @@ public class PriorityCommand extends Command {
             taskManager.setTaskPriority(taskNum, priority);
             fileHandler.writeToFile(taskManager);
 
-            return "Noted. I've changed the priority of this task to: " + this.priority + "\n"
+            return "Noted. I've changed the priority of this task to: " + this.getPriority(this.priority) + "\n"
                     + taskManager.getTask(taskNum - 1);
         }
     }

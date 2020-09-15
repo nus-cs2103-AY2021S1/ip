@@ -1,2 +1,2 @@
-E ## 0 ## 3 ## concert  ## 2020-10-11 19:00
-T ## 0 ## 3 ## zoom workout
+T ## 0 ## 2 ## zoom workout
+D ## 1 ## 1 ## cs assignment  ## 2020-08-12
