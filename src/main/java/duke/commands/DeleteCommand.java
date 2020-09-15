@@ -16,7 +16,9 @@ import duke.helpers.Ui;
 public class DeleteCommand extends Command {
     /**
      * assigns string to a value of string
+     *
      * @param input assigns string to this this.string
+     * @param lengthOfKeyword assigns this to this.lengthOfKeyword
      */
     public DeleteCommand(String input, int lengthOfKeyword) {
         super(input, lengthOfKeyword);

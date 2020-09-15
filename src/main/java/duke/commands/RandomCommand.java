@@ -13,6 +13,7 @@ public class RandomCommand extends Command {
      * Assigns string to a value of string
      *
      * @param input assigns string to this this.string
+     * @param lengthOfKeyword assigns this to this.lengthOfKeyword
      */
     public RandomCommand(String input, int lengthOfKeyword) {
         super(input, lengthOfKeyword);

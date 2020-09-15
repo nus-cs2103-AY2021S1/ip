@@ -2,11 +2,6 @@ package duke.commands;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.DateTimeException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 
 import duke.errors.DukeException;
 import duke.errors.FileAbsentException;
@@ -60,50 +55,4 @@ public abstract class AddCommand extends Command {
         return stringToUpdateTaskList(task, taskList);
     }
 
-    /**
-     * converts string to date
-     *
-     * @param string string to convert to date
-     * @return local date which is converted from string, if cannot then DateTimeException thrown
-     */
-    protected static LocalDate stringToLocalDate(String string) {
-        try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy MM dd");
-            LocalDate parsedDate = LocalDate.parse(string, formatter); //converts string to date
-            return parsedDate;
-        } catch (DateTimeException d) {
-            throw d;
-        }
-    }
-    /**
-     * converts string to dateTime
-     *
-     * @param string string to convert to dateTime
-     * @return local dateTime which is converted from string, if cannot then DateTimeException thrown
-     */
-    protected static LocalDateTime stringToLocalDateTime(String string) {
-        try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy MM dd, HH:mm");
-            LocalDateTime parsedDate = LocalDateTime.parse(string, formatter); //converts string to date and time
-            return parsedDate;
-        } catch (DateTimeException g) {
-            throw g;
-        }
-    }
-
-    /**
-     * converts string to time
-     *
-     * @param string string to convert to time
-     * @return local time which is converted from string, if cannot then DateTimeException thrown
-     */
-    protected static LocalTime stringToLocalTime(String string) {
-        try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-            LocalTime parsedDate = LocalTime.parse(string, formatter); //converts string to time
-            return parsedDate;
-        } catch (DateTimeException f) {
-            throw f;
-        }
-    }
 }

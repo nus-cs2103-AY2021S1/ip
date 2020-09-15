@@ -12,6 +12,7 @@ public class ExitCommand extends Command {
     /**
      * assigns string to a value of string
      * @param input assigns string to this this.string
+     * @param lengthOfKeyword assigns this to this.lengthOfKeyword
      */
     public ExitCommand(String input, int lengthOfKeyword) {
         super(input, lengthOfKeyword);

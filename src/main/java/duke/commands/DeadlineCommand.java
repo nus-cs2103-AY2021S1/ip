@@ -15,6 +15,7 @@ public class DeadlineCommand extends AddCommand {
      * assigns string to a value of string and initialize Deadline Command
      *
      * @param input assigns string to this this.string
+     * @param lengthOfKeyword assigns this to this.lengthOfKeyword
      */
     public DeadlineCommand(String input, int lengthOfKeyword) {
         super(input, lengthOfKeyword);

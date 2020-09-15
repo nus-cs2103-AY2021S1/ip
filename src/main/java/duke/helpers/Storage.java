@@ -59,25 +59,10 @@ public class Storage {
         try {
             List<Task> tasks = new ArrayList<>();
             Scanner sc = new Scanner(f);
-            if (sc.hasNext()) {
-                do {
-                    String input = sc.nextLine();
-                    char bool = input.charAt(4); //gives the char of 1 or 0 as it is always present at index 4
-                    boolean isDone = (bool == '1'); //since 1 indicates done
-                    if (input.charAt(0) == 'T') {
-                        ToDo todoPresent = todoPresent(input, isDone);
-                        tasks.add(todoPresent);
-                    } else if (input.charAt(0) == 'E') {
-                        Event eventPresent = eventPresent(input, isDone);
-                        tasks.add(eventPresent);
-                    } else if (input.charAt(0) == 'D') {
-                        Deadline deadlinePresent = deadlinePresent(input, isDone);
-                        tasks.add(deadlinePresent);
-                    } else {
-
-                    }
-                } while (sc.hasNextLine());
+            while (sc.hasNext()) {
+                    addTasks(tasks, sc);
             }
+            addTasks(tasks, sc);
             if (tasks.size() == 0) {
                 throw new FIleEmptyException();
             } else {
@@ -88,6 +73,30 @@ public class Storage {
         }
     }
 
+    /**
+     * Adds all the current tasks to the TaskList tasks
+     *
+     * @param tasks where task being scanned are inserted into TaskList tasks
+     * @param sc Scanner used to scan user input
+     * @throws DukeException
+     */
+    private void addTasks(List<Task> tasks, Scanner sc) throws DukeException {
+        String input = sc.nextLine();
+        char bool = input.charAt(4); //gives the char of 1 or 0 as it is always present at index 4
+        boolean isDone = (bool == '1'); //since 1 indicates done
+        if (input.charAt(0) == 'T') {
+            ToDo todoPresent = todoPresent(input, isDone);
+            tasks.add(todoPresent);
+        } else if (input.charAt(0) == 'E') {
+            Event eventPresent = eventPresent(input, isDone);
+            tasks.add(eventPresent);
+        } else if (input.charAt(0) == 'D') {
+            Deadline deadlinePresent = deadlinePresent(input, isDone);
+            tasks.add(deadlinePresent);
+        } else {
+
+        }
+    }
     /**
      * Returns ToDo task for that present in the list in storage
      *
@@ -171,6 +180,12 @@ public class Storage {
         }
         return new String[]{shortForm, shortFormString.substring(index + 1)};
     }
+
+    /**
+     * Gets the shortFormsFilePath
+     *
+     * @return value of shortFormsFilePath
+     */
     public String getShortFormsFilePath() {
         return shortFormsFilePath;
     }

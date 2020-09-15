@@ -15,6 +15,7 @@ public class TodoCommand extends AddCommand {
      * Assigns string to a value of string
      *
      * @param input assigns string to this this.string
+     * @param lengthOfKeyword assigns this to this.lengthOfKeyword
      */
     public TodoCommand(String input, int lengthOfKeyword) {
         super(input, lengthOfKeyword);

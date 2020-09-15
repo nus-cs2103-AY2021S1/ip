@@ -21,6 +21,7 @@ public abstract class Command {
      * Assigns string to a value
      *
      * @param userInput assigns this.string to string
+     * @param lengthOfKeyword assigns this to this.lengthOfKeyword
      */
     public Command(String userInput, int lengthOfKeyword) {
         this.userInput = userInput;
@@ -39,7 +40,7 @@ public abstract class Command {
      * Executes the necessary task
      *
      * @param tasks used to access tasks in its list and change if necessary
-     * @param ui
+     * @param ui used to assign ui's dukeException if there is an error in user input
      * @param storage to change the input there if necessary
      * @throws DukeException if there are exceptions present
      */
