@@ -3,16 +3,19 @@
 ## Introduction
 Duke (a.k.a JonasBot) is a personalised chat bot that functions as a task manager, allowing
 users to perform a variety of task related functions.
-Duke maintains some features of a Graphical User Interface (GUI) but is ideal for users
-who prefer a Command Line Interface (CLI).
+Duke is optimized for use via a **Command Line Interface** (CLI) 
+while still having the benefits of a Graphical User Interface (GUI).
 
 ## Getting Started
-1. Ensure that you have Java `11` or above installed on your device.
+1. Ensure that you have Java `11` or above installed in your computer.
 2. You can find the latest version of Duke [here](https://github.com/jonasngs/ip/releases/tag/v0.2).
-3. Download the `duke.jar` file and open the jar file to start the application.
-4. You should be able to see the following application:
-![DukeStart Image](/DukeStart.png)
-5. Enter commands into the textbox located at the bottom of the application and click `Send`.
+3. Download the `Duke.jar` file and copy the jar file to the folder you want to use as the home folder for Duke.
+4. Double click the file to start the application.
+4. You should be able to see the following application in a few seconds:
+![DukeStart Image](./DukeStart.png)
+
+5. Enter commands into the command box located at the bottom of the application and click `Send` to execute it.
+6. Refer to the functions below for details of each command.
 
 ## Duke Functions and Commands
 
@@ -77,7 +80,7 @@ Nice! I've marked this task as done:
 
 ### 5. `Delete` a task
 **Command**: `delete <task ID>` <br/>
-**Function**: Deletes a task. <br/>
+**Function**: Deletes a task from the user's list of tasks. <br/>
 **Example of usage**: 
 ```
 delete 1 
@@ -147,7 +150,7 @@ Here are the tasks that I have found:
 
 ### 10. Seek `help` for functions and commands 
 **Command**: `help` <br/>
-**Function**: List out all of Duke's functions and commands. <br/>
+**Function**: List out all of Duke's functions and their respective commands. <br/>
 **Example of usage**: 
 ```
 help
@@ -179,7 +182,7 @@ Below is a list of all the commands for my functions:
 8. To end this chat: 'bye'.
 ```
 
-### 11. `End` the session with Duke 
+### 11. `Exit` the session with Duke 
 **Command**: `bye` <br/>
 **Function**: Terminates the session with Duke. <br/>
 **Example of usage**: 
