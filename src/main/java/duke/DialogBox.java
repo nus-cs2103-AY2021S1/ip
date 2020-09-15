@@ -14,8 +14,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
 public class DialogBox extends HBox {
-    private static final Image userImage = new Image("/images/user.png");
-    private static final Image botImage = new Image("/images/bot.png");
+    private static final Image userImage = new Image("/images/user.PNG");
+    private static final Image botImage = new Image("/images/bot.PNG");
 
     @FXML
     private Label label;

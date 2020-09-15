@@ -7,7 +7,7 @@ import javafx.application.Application;
  */
 public class Launcher {
     public static void main(String[] args) {
-        runCli(args);
+        runGui(args);
     }
 
     public static void runCli(String[] args) {

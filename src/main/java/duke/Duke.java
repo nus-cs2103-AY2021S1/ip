@@ -2,9 +2,9 @@ package duke;
 
 import java.io.IOException;
 
-import javafx.application.Platform;
 import duke.command.Command;
 import duke.exception.DukeException;
+import javafx.application.Platform;
 
 /**
  * Represents a chatbot that takes in and executes commands from the user.

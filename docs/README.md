@@ -6,7 +6,9 @@ Add, delete, show, and mark your tasks as done.
 
 ## Usage
 
-Note: Examples below are assumed to be executed in order.
+Note: 
+Examples below are assumed to be executed in order.
+Items in [] are optional.
 
 ### `todo` - Add a new task
 
