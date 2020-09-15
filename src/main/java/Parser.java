@@ -66,6 +66,16 @@ public class Parser {
             } else {
                 return "    description cannot be empty~";
             }
+        } else if (order.length() >= 6 && order.substring(0, 6).equals("delete")) {
+            if (order.length() > 6) {
+                int toBeDeleted = Integer.parseInt(order.substring(7)) - 1;
+                Task temp = TaskList.list.get(toBeDeleted);
+                TaskList.list.remove(toBeDeleted);
+                Storage.writeData(TaskList.list);
+                return "    I have removed this task: " + "\n" + temp;
+            } else {
+                return "    Sorry, you have not specified which task to be deleted.";
+            }
         } else if (order.length() >= 1 && order.charAt(0) == 't') {
             if (order.length() > 1) {
                 String content = order.substring(2);
@@ -100,16 +110,6 @@ public class Parser {
                 return "    added:" + content + "\n" + "    Now you have " + TaskList.list.size() + " task(s) in the list";
             } else {
                 return "    description cannot be empty~";
-            }
-        } else if (order.length() >= 6 && order.substring(0, 6).equals("delete")) {
-            if (order.length() > 6) {
-                Integer toBeDeleted = Integer.valueOf(order.substring(7));
-                Task temp = TaskList.list.get(toBeDeleted - 1);
-                TaskList.list.remove(toBeDeleted - 1);
-                Storage.writeData(TaskList.list);
-                return "    I have removed this task: " + "\n" + temp;
-            } else {
-                return "    Sorry, you have not specified which task to be deleted.";
             }
         } else if (order.length() >= 5 && order.substring(0, 4).equals("find")) {
             if (order.length() > 5) {
