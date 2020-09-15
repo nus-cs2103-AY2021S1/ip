@@ -5,3 +5,24 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+Hello, I'm Duke, your personal assistant. 
+ What can I do for you?
+
+added:book hotel
+    Now you have 1 task(s) in the list
+
+added:book hotel 
+    Now you have 2 task(s) in the list
+
+added:book hotel 
+    Now you have 3 task(s) in the list
+
+1. [T][✘] book hotel
+2. [E][✘] book hotel (tomorrow)
+3. [D][✘] book hotel (by tomorrow)
+
+    Sorry, I don't understand.
+
+    description cannot be empty~
+
+    Bye-bye, see you next time!
