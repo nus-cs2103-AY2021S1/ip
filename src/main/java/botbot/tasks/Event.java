@@ -2,7 +2,7 @@ package botbot.tasks;
 
 import java.time.LocalDateTime;
 
-import botbot.BotbotDateTimeFormatter;
+import botbot.utils.BotbotDateTimeFormatter;
 
 /**
  * Represents an event with a description, time and completion status.

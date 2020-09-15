@@ -2,7 +2,7 @@ package botbot.tasks;
 
 import java.time.LocalDateTime;
 
-import botbot.BotbotDateTimeFormatter;
+import botbot.utils.BotbotDateTimeFormatter;
 
 /**
  * Represents a deadline with a description, deadline and completion status.

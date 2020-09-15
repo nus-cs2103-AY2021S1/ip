@@ -1,9 +1,9 @@
 package botbot.commands;
 
-import botbot.CommandValidator;
-import botbot.Storage;
-import botbot.TaskList;
-import botbot.Ui;
+import botbot.utils.CommandValidator;
+import botbot.utils.Storage;
+import botbot.utils.TaskList;
+import botbot.ui.Ui;
 import botbot.tasks.Task;
 
 /**

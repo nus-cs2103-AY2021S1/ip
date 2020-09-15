@@ -1,8 +1,8 @@
 package botbot.commands;
 
-import botbot.Storage;
-import botbot.TaskList;
-import botbot.Ui;
+import botbot.utils.Storage;
+import botbot.utils.TaskList;
+import botbot.ui.Ui;
 
 /**
  * Represents a command with the ability to be executed.

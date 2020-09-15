@@ -1,4 +1,4 @@
-package botbot;
+package botbot.utils;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -26,7 +26,7 @@ public class Storage {
      *
      * @param filePath Filepath where data will be located.
      */
-    Storage(String filePath) {
+    public Storage(String filePath) {
         this.filePath = filePath;
     }
 
@@ -36,7 +36,7 @@ public class Storage {
      *
      * @return List of existing tasks.
      */
-    List<Task> load() {
+    public List<Task> load() {
         File file = new File(filePath);
         file.getParentFile().mkdirs();
         assert file.getParentFile().isDirectory() : "Parent directory for data file not created";

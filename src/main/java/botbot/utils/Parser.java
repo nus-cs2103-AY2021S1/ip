@@ -1,4 +1,4 @@
-package botbot;
+package botbot.utils;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -32,7 +32,7 @@ public class Parser {
      * @param input Input to be parsed.
      * @return Command parsed from input.
      */
-    static Command parseCommand(String input) {
+    public static Command parseCommand(String input) {
         Matcher matcher = FORMAT_COMMAND.matcher(input.trim());
         if (!matcher.matches()) {
             return new InvalidCommand(CommandValidator.ERROR_MESSAGE_NO_SUCH_COMMAND);
@@ -81,7 +81,7 @@ public class Parser {
      * @return Task ID parsed from input.
      * @throws NumberFormatException If input does not contain a parsable integer.
      */
-    static int parseCommandId(String args) throws NumberFormatException {
+    public static int parseCommandId(String args) throws NumberFormatException {
         assert !args.isBlank() : "Args provided is blank";
         return Integer.parseInt(args) - 1;
     }
@@ -93,7 +93,7 @@ public class Parser {
      * @return Date (and time) parsed from input.
      * @throws DateTimeParseException If input does not follow expected datetime format.
      */
-    static LocalDateTime parseDateTime(String input) throws DateTimeParseException {
+    public static LocalDateTime parseDateTime(String input) throws DateTimeParseException {
         if (input.length() < DATE_TIME_LENGTH) {
             input += BotbotDateTimeFormatter.NO_TIME_FLAG_STR;
         }

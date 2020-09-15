@@ -1,5 +1,6 @@
-package botbot;
+package botbot.ui;
 
+import botbot.utils.TaskList;
 import botbot.tasks.Task;
 
 /**

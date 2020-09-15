@@ -1,4 +1,4 @@
-package botbot;
+package botbot.utils;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

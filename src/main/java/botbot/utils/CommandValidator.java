@@ -1,4 +1,4 @@
-package botbot;
+package botbot.utils;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
@@ -17,6 +17,7 @@ import botbot.commands.MarkAsDoneCommand;
 import botbot.commands.TodoCommand;
 import botbot.tasks.Deadline;
 import botbot.tasks.Event;
+import botbot.utils.Parser;
 
 /**
  * Checker for the validity of user input as Botbot commands.

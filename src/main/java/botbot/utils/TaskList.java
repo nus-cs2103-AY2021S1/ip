@@ -1,6 +1,6 @@
-package botbot;
+package botbot.utils;
 
-import static botbot.Ui.INDENT;
+import static botbot.ui.Ui.INDENT;
 
 import java.time.LocalDateTime;
 import java.util.Collection;

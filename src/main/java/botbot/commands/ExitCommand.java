@@ -1,9 +1,9 @@
 package botbot.commands;
 
 import botbot.Main;
-import botbot.Storage;
-import botbot.TaskList;
-import botbot.Ui;
+import botbot.utils.Storage;
+import botbot.utils.TaskList;
+import botbot.ui.Ui;
 
 /**
  * Terminates the bot.
