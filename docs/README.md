@@ -36,26 +36,35 @@ The simplest task in the whole app! Simply input a description and this task wil
 
 ### 2. Event
 
-Events are used for scheduling purposes, allowing you to tag a specific time frame to attend to a task. 
+Events are used for scheduling purposes, allowing you to tag a specific time frame to a task. 
 Time frames used can be flexible as you want it too! e.g. event eat /at Tampines
 
 ### 3. Deadline
 
-Last but not least, we have deadlines, tasks with fixed due dates. Deadlines can be used to mark tasks with
-fixed deadlines.
+Last but not least, we have deadlines, tasks with fixed due dates. Use it to track your all your assignment and
+work deadlines!
  
 ### To assist you with managing your tasks are:
- - `list` - Display the list of tasks
+
+#### Other Commands
+ - `list` - Displays the list of tasks
  - `sort` - Sorts the tasks according to completion status and type
- - `done` - Complete a task
- - `delete` - Delete a task
+ - `done` - Completes a task
+ - `delete` - Deletes a task
  - `find` - Finds all tasks which matches the query word
+
+#### Side features
+ - Fully responsive UI which supports full-screen usage
+ - Prompts displayed whenever you input a wrong command
+ - Prevents addition of duplicate tasks - Duplicate tasks are tasks created on the same day with the same description
+ - Accepts case-insensitive commands *e.g.* DeadLine
+ - Compatible with Windows, MacOS and Linux
 
 ## Usage
 
 ### Notes about the format of commands:
 - Words in `lower_case` are fixed inputs.
-- Words in `UPPER_CASE` are input supplied by the user. e.g. `todo DESCRIPTION`, DESCRIPTION is refers to the input
+- Words in `UPPER_CASE` are input supplied by the user. e.g. `todo DESCRIPTION`, DESCRIPTION refers to the input
 supplied by the user.
 
 
@@ -262,7 +271,6 @@ Expected outcome:
 ```
 Bye! Hope to see you again soon! 
 ```
-
 
 ## Acknowledgements
 
