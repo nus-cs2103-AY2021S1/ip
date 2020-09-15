@@ -1,7 +1,6 @@
 package task;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -99,7 +98,7 @@ public class TaskList {
      * @return size of list.
      */
     public int size() {
-        int size  = this.taskList.size();
+        int size = this.taskList.size();
         return size;
     }
 

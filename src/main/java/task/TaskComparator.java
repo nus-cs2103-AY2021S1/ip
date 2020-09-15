@@ -33,7 +33,7 @@ public class TaskComparator implements Comparator<Task> {
             int lowestIndex = Math.min(sizeA, sizeB);
 
             for (int i = 0; i < lowestIndex; i++) {
-                if(descriptionA.charAt(i) != descriptionB.charAt(i)) {
+                if (descriptionA.charAt(i) != descriptionB.charAt(i)) {
                     return descriptionA.charAt(i) - descriptionB.charAt(i);
                 }
             }
