@@ -1,4 +1,5 @@
 # User Guide
+Duke can help you manage and save your tasks!
 
 ## Types of Tasks
 1. Todo: Tasks that do not have date/time associated with it.
