@@ -32,7 +32,7 @@ public class Ui {
      * Prints welcome.
      */
     public void showWelcome() {
-        String finalString = " Hi, I am Duke\n"
+        String finalString = " Hi, I am Duke!\n"
                 + " Nice to see you. What can I do for you?\n"
                 + " If you are first time here, type \"help\" or \"h\" for help.\n";
         System.out.println(line + finalString + line);
