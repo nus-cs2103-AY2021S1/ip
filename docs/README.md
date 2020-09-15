@@ -2,7 +2,7 @@
 
 *Keane Chan Jun Yu | A0205678W*
 
-<img src="Ui.png" width="100%"/>
+<img src="Ui.png" width="75%"/>
 
 Welcome to Incredible Bot, a task manager app which manages your todos, events and deadlines!
 
@@ -11,7 +11,7 @@ Welcome to Incredible Bot, a task manager app which manages your todos, events a
     - [Todo](#1.-Todo)
     - [Event](#2.-Event)
     - [Deadline](#3.-Deadline)
-    - [Additional Features](#To-assist-you-with-managing-your-tasks-are:)
+    - [Additional Features](#to-assist-you-with-managing-your-tasks-are)
 - [Usage](#Usage)
     - [Todo](#todo---adds-a-todo)
     - [Event](#event---adds-an-event)
