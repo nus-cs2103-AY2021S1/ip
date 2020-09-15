@@ -1,6 +1,9 @@
-# Duke project template
+# Duke
+![Duke](/docs/Ui.png) <br>
+Duke is a desktop task-management application with a graphical user interface that uses a command-line input to simulate conversing with a chat bot. It is made with a project template provided by CS2103/T AY2021S1.
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+## User Guide
+The user guide can be found [here](https://jflim98.github.io/ip/).
 
 ## Setting up in Intellij
 
