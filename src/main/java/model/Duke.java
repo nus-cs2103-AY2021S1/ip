@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import commands.Command;
 import data.exception.DukeException;
@@ -57,5 +58,23 @@ public class Duke {
             return this.ui.showDukeError(e);
         }
         return Ui.showGreeting();
+    }
+
+    private void run() {
+        System.out.println(initDuke());
+        Scanner sc = new Scanner(System.in);
+        while (true) {
+            String userInput = sc.nextLine();
+            System.out.println(getResponse(userInput).getMsg());
+        }
+    }
+
+    /**
+     * Used for running duke in a terminal.
+     * @param args
+     */
+    public static void main(String[] args) {
+        Duke duke = new Duke("data/TaskList.txt");
+        duke.run();
     }
 }
