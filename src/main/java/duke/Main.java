@@ -27,6 +27,7 @@ public class Main extends Application {
             stage.close();
         }
         try {
+            stage.setTitle("Duke");
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             MainWindow ap = fxmlLoader.load();
             ap.setBackground(new Background(new BackgroundFill(Color.BLACK, null, null)));
