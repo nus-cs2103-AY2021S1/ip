@@ -43,7 +43,8 @@ public class MainWindow extends AnchorPane {
      */
     private void sendGuiGreeting() {
         String greeting = "Hello! I'm Duke!\n"
-                + "What can I do for you?";
+                + "What can I do for you?\n"
+                + "Enter \"help\" to find out what I can do!";
         dialogContainer.getChildren().add(
                 DialogBox.getDukeDialog(greeting, dukeImage)
         );

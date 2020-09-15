@@ -10,6 +10,7 @@ import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.FindCommand;
+import duke.command.HelpCommand;
 import duke.command.ListCommand;
 import duke.command.RetrieveCommand;
 import duke.command.SortCommand;
@@ -72,6 +73,8 @@ public class Parser {
             return parseFind(input);
         } else if (input.equals("sort")) {
             return parseSort(input, tasks);
+        } else if (input.equals("help")) {
+            return new HelpCommand();
         } else {
             throw new InvalidCommandException();
         }
