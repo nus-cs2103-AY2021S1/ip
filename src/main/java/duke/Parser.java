@@ -33,7 +33,7 @@ public class Parser {
         }
         case DONE: {
             if (!isNumeric(commands[1])) {
-                throw new DukeException(" ☹ OOPS!!! The argument of done command is not a number.");
+                throw new DukeException(" OOPS!!! The argument of done command is not a number.");
             }
             return commands;
         }
@@ -45,16 +45,16 @@ public class Parser {
         }
         case TODO:
             if (commands[1] == null || commands[1].isBlank()) {
-                throw new DukeException(" ☹ OOPS!!! The description of a todo cannot be empty.");
+                throw new DukeException(" OOPS!!! The description of a todo cannot be empty.");
             }
             return commands;
         case DEADLINE:
             key = " /by ";
             if (commands[1].isBlank()) {
-                throw new DukeException(" ☹ OOPS!!! The description of a deadline cannot be empty.");
+                throw new DukeException(" OOPS!!! The description of a deadline cannot be empty.");
             }
             if (!commands[1].contains(key)) {
-                throw new DukeException(" ☹ OOPS!!! The description of a deadline must contain /by keywords");
+                throw new DukeException(" OOPS!!! The description of a deadline must contain /by keywords");
             }
             temp = commands[1].split(key);
             commands[1] = temp[0];
@@ -63,17 +63,17 @@ public class Parser {
         case EVENT:
             key = " /at ";
             if (commands[1].isBlank()) {
-                throw new DukeException(" ☹ OOPS!!! The description of a event cannot be empty.");
+                throw new DukeException(" OOPS!!! The description of a event cannot be empty.");
             }
             if (!commands[1].contains(key)) {
-                throw new DukeException(" ☹ OOPS!!! The description of a event must contain /at keywords");
+                throw new DukeException(" OOPS!!! The description of a event must contain /at keywords");
             }
             temp = commands[1].split(key);
             commands[1] = temp[0];
             commands[2] = temp[1];
             return commands;
         default:
-            throw new DukeException(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new DukeException(" OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 
