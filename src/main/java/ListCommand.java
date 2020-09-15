@@ -21,7 +21,7 @@ public class ListCommand extends Command {
         if (tasks.getSize() == 0) {
             throw new DukeException("There are currently no tasks in the list.");
         }
-        
+
         System.out.println("Here are the tasks in your list:");
 
         for (int i = 0; i < tasks.getSize(); i++) {

@@ -41,6 +41,9 @@ public class Duke {
 
     /**
      * Gets a reply from Duke chatbot program.
+     *
+     * @param input User's input into program
+     * @return Response from Duke.
      */
     public String getResponse(String input) {
         ByteArrayOutputStream formattedOutput = new ByteArrayOutputStream();
@@ -58,6 +61,15 @@ public class Duke {
         reply = reply.trim();
         System.setOut(System.out);
         return reply;
+    }
+
+    /**
+     * Gets Duke's Welcome Message.
+     *
+     * @return Duke's Welcome Message.
+     */
+    public String getWelcomeMessage() {
+        return "Hello! I'm Duke! How can I help you?";
     }
 
     /**

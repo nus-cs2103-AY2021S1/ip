@@ -5,12 +5,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Circle;
+import javafx.scene.text.Font;
 
 /**
  * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
@@ -34,6 +37,14 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         displayPicture.setImage(img);
+
+        dialog.setFont(Font.font("Arial", 12.0));
+        dialog.setAlignment(Pos.CENTER);
+
+        this.setMargin(dialog, new Insets(0, 10, 0, 10));
+
+        Circle clip = new Circle(50, 50, 50);
+        displayPicture.setClip(clip);
     }
 
     /**
