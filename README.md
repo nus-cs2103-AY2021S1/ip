@@ -173,7 +173,7 @@ tags: #CHILL
 ### 12. `removetag TASKID TAGNAME`
 Sample input:
 ```
-removetag 2 CHILL
+removetag 2 chill
 ```
 
 Expected output:
