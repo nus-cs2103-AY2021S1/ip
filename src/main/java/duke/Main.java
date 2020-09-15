@@ -26,6 +26,7 @@ public class Main extends Application {
             stage.setScene(scene);
             //Returns the controller (MainWindow) associated with the root object (AnchorPane obj).
             fxmlLoader.<MainWindow>getController().setDuke(duke);
+            stage.setTitle("Managing Time!");
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
