@@ -1,7 +1,5 @@
 package duke.commands;
 
-import static duke.tasklist.TaskList.incrementNumCompletedTasks;
-
 import duke.exceptions.InvalidTaskIndexException;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;

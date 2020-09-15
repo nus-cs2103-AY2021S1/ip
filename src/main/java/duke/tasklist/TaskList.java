@@ -21,18 +21,21 @@ public class TaskList {
         this.tasks = tasks;
     }
 
-    /**
+    /** Gets the number of tasks completed in the session.
+     *
      * @return The number of tasks completed in the session.
      */
     public static int getNumCompletedTasks() {
         return numCompletedTasks;
     }
 
-    public static void incrementNumCompletedTasks() {
+    /** Increments the number of completed tasks. */
+    private static void incrementNumCompletedTasks() {
         TaskList.numCompletedTasks++;
     }
 
-    /**
+    /** Gets the list of tasks.
+     *
       * @return The list of tasks.
      */
     public ArrayList<Task> getTasks() {

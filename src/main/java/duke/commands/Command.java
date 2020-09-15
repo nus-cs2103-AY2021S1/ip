@@ -25,6 +25,10 @@ public abstract class Command {
         return dialog;
     }
 
+    /** Sets Duke's reply to the user input to the given string.
+     *
+     * @param dialog The string to update Duke's reply with.
+     */
     public void setDialog(String dialog) {
         this.dialog = dialog;
     }

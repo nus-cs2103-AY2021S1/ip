@@ -135,9 +135,10 @@ public class Ui {
      * @return The statistics of the taskList in Duke format.
      */
     public String formatStats(ArrayList<Task> tasks) {
+        // Gets the number of tasks completed in this session.
         String s = String.format("You have completed %d %s in this session.", getNumCompletedTasks(),
             getNumCompletedTasks() == 1 ? "task" : "tasks");
-
+        // Gets the number of tasks uncompleted in the current list.
         int numUncompletedTasks = 0;
         for (Task task : tasks) {
             if (!task.isDone()) {
@@ -148,7 +149,6 @@ public class Ui {
             s += String.format("\nYou have %d uncompleted %s in your current list.", numUncompletedTasks,
                 numUncompletedTasks == 1 ? "task" : "tasks");
         }
-
         return s;
     }
 }

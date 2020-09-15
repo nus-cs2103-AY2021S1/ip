@@ -15,7 +15,7 @@ public class ByeCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
-        setDialog(ui.DIALOG_BYE);
+        setDialog(Ui.DIALOG_BYE);
     }
 
     /** Indicates that the program is terminating. */
