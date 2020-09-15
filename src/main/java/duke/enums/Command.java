@@ -272,7 +272,7 @@ public enum Command {
     },
 
     /**
-     * Searches for {@code Task}s in the {@code TaskManager} which match the keyword.
+     * Searches for {@code Task}s in the {@code TaskManager} which match the provided keywords.
      */
     FIND {
         /**
@@ -303,6 +303,40 @@ public enum Command {
         public DukeResponse execute(String inputArgs) {
             String[] searchKeywords = inputArgs.trim().split("\\s+");
             String response = Store.getTaskManager().getMatchingTasks(searchKeywords);
+            return new DukeResponse(response);
+        }
+    },
+
+    /**
+     * Displays a list of all commands along with a brief description.
+     */
+    HELP {
+        /**
+         * Validates whether the user input is of the correct format for the 'help' command.
+         *
+         * @param alias the name used in invoking the command; can be either the command name or an alias.
+         * @param inputArgs the user inputted arguments.
+         * @throws DukeException if the user input is invalid.
+         */
+        @Override
+        public void validate(String alias, String inputArgs) throws DukeException {
+            String regex = "^\\s*$";
+            if (!Pattern.matches(regex, inputArgs)) {
+                String template = ResourceHandler.getString("exception.noArgs");
+                String message = MessageFormat.format(template, alias);
+                throw new DukeException(message);
+            }
+        }
+
+        /**
+         * Executes the 'help' command.
+         *
+         * @param inputArgs the user inputted arguments.
+         * @return the output of running the 'help' command.
+         */
+        @Override
+        public DukeResponse execute(String inputArgs) {
+            String response = ResourceHandler.getString("command.help");
             return new DukeResponse(response);
         }
     },
