@@ -29,6 +29,10 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/userIcon.jpg"));
     private Image lukeImage = new Image(this.getClass().getResourceAsStream("/images/lukeIcon.jpg"));
 
+    /**
+     * Initializes initial settings for MainWindow.
+     *
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -41,6 +45,11 @@ public class MainWindow extends AnchorPane {
         });
     }
 
+    /**
+     * Greets the user with a welcome message.
+     *
+     * @param luke Luke object
+     */
     public void greet(Luke luke) {
         setLuke(luke);
         dialogContainer.getChildren().add(DialogBox.getLukeDialog(this.luke.getUi().showWelcome(), lukeImage));

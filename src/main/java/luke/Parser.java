@@ -3,16 +3,26 @@ package luke;
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
 
-import luke.commands.*;
-import luke.exception.*;
+import luke.commands.AddCommand;
+import luke.commands.Command;
+import luke.commands.DeleteCommand;
+import luke.commands.DoneCommand;
+import luke.commands.ExitCommand;
+import luke.commands.FindCommand;
+import luke.commands.ListCommand;
+import luke.exception.LukeDateTimeException;
+import luke.exception.LukeEmptyCommandException;
+import luke.exception.LukeException;
+import luke.exception.LukeUnknownCommandException;
 import luke.task.Deadline;
 import luke.task.Event;
 import luke.task.Task;
 import luke.task.Todo;
 
-
+/**
+ * Represents a Parser to interpret task and command.
+ */
 public class Parser {
-
     /**
      * Parses a line that contains information about a task
      * to generate the corresponding task.

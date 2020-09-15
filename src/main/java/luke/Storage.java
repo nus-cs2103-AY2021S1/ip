@@ -13,6 +13,9 @@ import java.util.List;
 import luke.exception.LukeException;
 import luke.task.Task;
 
+/**
+ * Represents a Storage to manage data file.
+ */
 public class Storage {
     private final String dataFolderDir;
     private final String dataFile;

@@ -1,37 +1,37 @@
-luke.Luke:
-	Hey there! I'm luke.Luke.
+luke.luke:
+	Hey there! I'm luke.luke.
 	Please tell me what to add to your to-do list.
 You:
-	luke.Luke:
+	luke.luke:
 	The following task has been successfully added.
 	[T][✘] go grocery shopping
 	Now you have 1 task in your to-do list.
 You:
-	luke.Luke:
+	luke.luke:
 	The following task has been successfully added.
 	[D][✘] finish individual project (by: tonight)
 	Now you have 2 tasks in your to-do list.
 You:
-	luke.Luke:
+	luke.luke:
 	The following task has been successfully added.
 	[E][✘] participate in zoom meeting (at: sun 10-11am)
 	Now you have 3 tasks in your to-do list.
 You:
-	luke.Luke:
+	luke.luke:
 	Here are the tasks in your to-do list.
 	1.[T][✘] go grocery shopping
 	2.[D][✘] finish individual project (by: tonight)
 	3.[E][✘] participate in zoom meeting (at: sun 10-11am)
 You:
-	luke.Luke:
+	luke.luke:
 	The following task has successfully been marked as done!
 	[D][✓] finish individual project (by: tonight)
 You:
-	luke.Luke:
+	luke.luke:
 	Here are the tasks in your to-do list.
 	1.[T][✘] go grocery shopping
 	2.[D][✓] finish individual project (by: tonight)
 	3.[E][✘] participate in zoom meeting (at: sun 10-11am)
 You:
-	luke.Luke:
+	luke.luke:
 	Oh, are you leaving? Hope to see you soon!

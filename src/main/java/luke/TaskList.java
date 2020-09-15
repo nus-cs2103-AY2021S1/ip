@@ -3,11 +3,12 @@ package luke;
 import java.util.ArrayList;
 import java.util.List;
 
-import luke.exception.LukeEmptyCommandException;
-import luke.exception.LukeException;
 import luke.exception.LukeNoResultException;
 import luke.task.Task;
 
+/**
+ * Represents a Tasklist that contains the current tasks.
+ */
 public class TaskList {
     protected List<Task> tasks;
 

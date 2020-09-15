@@ -3,6 +3,9 @@ package luke;
 import luke.commands.Command;
 import luke.exception.LukeException;
 
+/**
+ * Represents Luke object that executes commands from the user.
+ */
 public class Luke {
 
     private Storage storage;
@@ -22,6 +25,12 @@ public class Luke {
         this.ui = new Ui();
     }
 
+    /**
+     * Executes user input and returns a response.
+     *
+     * @param input user input
+     * @return appropriate response to user input
+     */
     public String getResponse(String input) {
         try {
             Command command = Parser.parseCommand(input);

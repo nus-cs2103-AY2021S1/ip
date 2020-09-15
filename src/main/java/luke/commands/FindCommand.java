@@ -9,15 +9,18 @@ import luke.exception.LukeException;
 import luke.exception.LukeNoResultException;
 import luke.task.Task;
 
+/**
+ * Represents a command to find matching tasks.
+ */
 public class FindCommand extends Command {
 
     protected String keyword;
 
     /**
      * Creates a FindCommand object to find tasks
-     * that matches the given keyword.
+     * that match the given keyword.
      *
-     * @param keyword the keyword used to find related tasks
+     * @param keyword the keyword used to find matching tasks
      */
     public FindCommand(String keyword) {
         super();
