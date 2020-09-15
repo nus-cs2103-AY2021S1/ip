@@ -2,7 +2,7 @@
 
 *Keane Chan Jun Yu | A0205678W*
 
-<img src="Ui.png" width="75%"/>
+<p align="center"><img src="Ui.png" width="75%"/></p>
 
 Welcome to Incredible Bot, a task manager app which manages your todos, events and deadlines!
 
