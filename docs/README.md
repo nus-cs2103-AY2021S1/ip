@@ -180,14 +180,15 @@ Example:
 ![Bye](./Bye.png)
 
 ## Command Summary
+
 Action | Format, Examples
------- | ----------------
-Add to-do | `todo <string: description>` <br> e.g. `todo Finish CS2103T Project`
-Add deadline | `deadline <string: description> /by <string: yyyy-mm-dd>` <br> e.g. `deadline CCA Registration /by 2020-09-14`
-Add event | `event <string: description> /at <string: yyyy-mm-dd>` <br> e.g. `event Application Release /at 2020-09-18`
-Delete | `delete <integer: task number>` <br> e.g. `delete 1`
-List | `list`
-Update | `update <integer: task number> description <string: new description>` <br> `update <integer: task number> time <string: yyyy-mm-dd>` <br> `update <integer: task number> mark <integer: 1 for done or 0 for not done>` <br> e.g. `update 1 description NUS Angklung CCA Registration`
-Find | `find <string: keyword>` <br> e.g. `find Release`
-Done | `done <integer: task number>` <br> e.g. `done 2`
-Bye | `bye`
+-------|-----------------
+**Add to-do** | `todo <string: description>` <br> e.g. `todo Finish CS2103T Project`
+**Add deadline** | `deadline <string: description> /by <string: yyyy-mm-dd>` <br> e.g. `deadline CCA Registration /by 2020-09-14`
+**Add event** | `event <string: description> /at <string: yyyy-mm-dd>` <br> e.g. `event Application Release /at 2020-09-18`
+**Delete** | `delete <integer: task number>` <br> e.g. `delete 1`
+**List** | `list`
+**Update** | `update <integer: task number> description <string: new description>` <br> `update <integer: task number> time <string: yyyy-mm-dd>` <br> `update <integer: task number> mark <integer: 1 for done or 0 for not done>` <br> e.g. `update 1 description NUS Angklung CCA Registration`
+**Find** | `find <string: keyword>` <br> e.g. `find Release`
+**Done** | `done <integer: task number>` <br> e.g. `done 2`
+**Bye** | `bye`
