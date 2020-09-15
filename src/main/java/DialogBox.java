@@ -70,7 +70,7 @@ public class DialogBox extends HBox {
 
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
-        if (text.substring(0, 6).equals("Error:")) {
+        if (text.length() >= 6 && text.substring(0, 6).equals("Error:")) {
             db.dialog.setTextFill(Color.YELLOW);
         }
         db.flip();
