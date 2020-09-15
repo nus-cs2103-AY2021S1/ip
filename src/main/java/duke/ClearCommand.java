@@ -5,7 +5,8 @@ package duke;
  */
 public class ClearCommand extends Command {
     /**
-     * Instantiates a Clear Command
+     * Instantiates a Clear Command.
+     *
      * @param parsedCommand the parsed command
      */
     public ClearCommand(String[] parsedCommand) {
@@ -14,6 +15,7 @@ public class ClearCommand extends Command {
 
     /**
      * Executes command and write to storage.
+     *
      * @param tasks the tasklist containing tasks so far
      * @param ui ui to interact with user
      * @param storage storage to read and write to storage file

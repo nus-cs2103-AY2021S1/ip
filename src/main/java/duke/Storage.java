@@ -23,6 +23,7 @@ public class Storage {
 
     /**
      * Runs upon program start-up to load data onto program.
+     *
      * @return An arrayList of existing tasks
      * @throws DukeException if file is not found
      */
@@ -37,6 +38,7 @@ public class Storage {
     }
 
     /**
+     * Loads the tasks to the program.
      *
      * @param file path pointing to data storage file
      * @return An arrayList of existing tasks
@@ -68,7 +70,8 @@ public class Storage {
     }
 
     /**
-     * Iterates through taskList and writes tasks to file storage
+     * Iterates through taskList and writes tasks to file storage.
+     *
      * @param tasks the taskList containing the tasks
      */
     void writeToFile(TaskList<Task> tasks) throws DukeException {

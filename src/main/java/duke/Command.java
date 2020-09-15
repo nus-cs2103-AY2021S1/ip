@@ -8,6 +8,7 @@ public abstract class Command {
 
     /**
      * Instantiates a Command.
+     *
      * @param parsedCommand
      */
     public Command(String[] parsedCommand) {
@@ -20,6 +21,7 @@ public abstract class Command {
 
     /**
      * Abstract method that executes a command.
+     *
      * @param tasks tasklist containing tasks
      * @param ui to interact with user
      * @param storage to read and write date to file
@@ -29,6 +31,7 @@ public abstract class Command {
 
     /**
      * Determines if it is the end of a program.
+     *
      * @return boolean to indicate if end of program
      */
     boolean isExitProgram() {

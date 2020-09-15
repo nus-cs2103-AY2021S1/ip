@@ -8,6 +8,7 @@ public class Event extends Task {
 
     /**
      * Instantiates an event with a description of it.
+     *
      * @param description description of the event
      * @param timing the timing of the event
      */
@@ -18,6 +19,7 @@ public class Event extends Task {
 
     /**
      * Overloaded constructor to instantiate a event with customised status.
+     *
      * @param description description of the event
      * @param done status of the event
      * @param timing the end date of the event
@@ -29,6 +31,7 @@ public class Event extends Task {
 
     /**
      * Marks a event as 'done'.
+     *
      * @return a event that is done
      */
     @Override
@@ -38,6 +41,7 @@ public class Event extends Task {
 
     /**
      * Overridden toString() method.
+     *
      * @return custom String
      */
     @Override

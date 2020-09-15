@@ -9,6 +9,7 @@ public class Task {
 
     /**
      * Instantiates a task with a description of it.
+     *
      * @param description an explanation of what the task is about
      */
     Task(String description) {
@@ -18,6 +19,7 @@ public class Task {
 
     /**
      * Overloaded constructor to instantiate a task with customised status.
+     *
      * @param description description of the task
      * @param done status of the task
      */
@@ -28,6 +30,7 @@ public class Task {
 
     /**
      * Visualises the status of a task.
+     *
      * @return whether or not a task is done
      */
     String getStatusIcon() {

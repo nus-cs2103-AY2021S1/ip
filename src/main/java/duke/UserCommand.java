@@ -1,7 +1,7 @@
 package duke;
 
 /**
- * Encapsulates all the commands recognised by chatBot
+ * Encapsulates all the commands recognised by chatBot.
  */
 public enum UserCommand {
     BYE("bye"),
@@ -18,6 +18,7 @@ public enum UserCommand {
 
     /**
      * Constructor for instantiating a user command.
+     *
      * @param command command that the user types in
      */
     UserCommand(String command) {
@@ -25,7 +26,8 @@ public enum UserCommand {
     }
 
     /**
-     * Get method for user command
+     * Get method for user command.
+     *
      * @return the user command
      */
     String getCommand() {

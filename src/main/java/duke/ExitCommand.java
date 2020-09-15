@@ -10,6 +10,7 @@ public class ExitCommand extends Command {
 
     /**
      * Executes command and write to storage.
+     *
      * @param tasks the tasklist containing tasks so far
      * @param ui ui to interact with user
      * @param storage storage to read and write to storage file
@@ -22,6 +23,7 @@ public class ExitCommand extends Command {
 
     /**
      * Determines if it is the end of a program.
+     *
      * @return false to indicate end of program
      */
     @Override

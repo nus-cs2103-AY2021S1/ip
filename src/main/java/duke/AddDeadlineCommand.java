@@ -12,6 +12,7 @@ import java.time.format.FormatStyle;
 public class AddDeadlineCommand extends Command {
     /**
      * Instantiates a AddDeadlineCommand.
+     *
      * @param parsedCommand the parsed command
      */
     public AddDeadlineCommand(String[] parsedCommand) {
@@ -20,6 +21,7 @@ public class AddDeadlineCommand extends Command {
 
     /**
      * Executes command and write to storage.
+     *
      * @param tasks the tasklist containing tasks so far
      * @param ui ui to interact with user
      * @param storage storage to read and write to storage file
@@ -75,6 +77,7 @@ public class AddDeadlineCommand extends Command {
 
     /**
      * Adds a task to the tasklist.
+     *
      * @param tasks the tasklist containing tasks so far
      * @param taskToAdd the task to add to tasklist
      */
@@ -87,6 +90,7 @@ public class AddDeadlineCommand extends Command {
 
     /**
      * Prints list size.
+     *
      * @param tasks the tasklists
      */
     void printToDoListSize(TaskList<Task> tasks, Ui ui) {

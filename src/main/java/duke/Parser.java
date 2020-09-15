@@ -6,6 +6,7 @@ package duke;
 public class Parser {
     /**
      * Splits user input into command and description to facilitate processing.
+     *
      * @param fullCommand full user input
      * @return the appropriate Command
      * @throws DukeException if user input is invalid
@@ -17,7 +18,8 @@ public class Parser {
     }
 
     /**
-     * Invokes the correct Command object based on the user's command
+     * Invokes the correct Command object based on the user's command.
+     *
      * @param command user's command input
      * @param parsedCommand user's parsed input
      * @return the appropriate duke.Command

@@ -8,6 +8,7 @@ public class Deadline extends Task {
 
     /**
      * Instantiates a duke.Deadline with a description of it.
+     *
      * @param description the description of the deadline
      * @param endDate the end date of the deadline
      */
@@ -18,6 +19,7 @@ public class Deadline extends Task {
 
     /**
      * Overloaded constructor to instantiate a deadline with customised status.
+     *
      * @param description description of the deadline
      * @param done status of the deadline
      * @param endDate the end date of the deadline
@@ -29,6 +31,7 @@ public class Deadline extends Task {
 
     /**
      * Marks a deadline as 'done'.
+     *
      * @return a deadline that is done
      */
     @Override
@@ -37,7 +40,8 @@ public class Deadline extends Task {
     }
 
     /**
-     * Overriden toString() method
+     * Overriden toString() method.
+     *
      * @return custom String
      */
     @Override

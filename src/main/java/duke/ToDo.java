@@ -16,6 +16,7 @@ public class ToDo extends Task {
 
     /**
      * Overloaded constructor to instantiate a todo with customised status.
+     *
      * @param description description of the todo
      * @param done status of the todo
      */
@@ -25,6 +26,7 @@ public class ToDo extends Task {
 
     /**
      * Marks a todo as 'done'.
+     *
      * @return a todo that is done
      */
     @Override
@@ -33,7 +35,8 @@ public class ToDo extends Task {
     }
 
     /**
-     * Overriden toString() method
+     * Overriden toString() method.
+     *
      * @return custom String
      */
     @Override

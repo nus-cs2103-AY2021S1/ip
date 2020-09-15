@@ -6,6 +6,7 @@ package duke;
 public class DeleteCommand extends Command {
     /**
      * Instantiates a delete command.
+     *
      * @param parsedCommand command that has been parsed
      */
     public DeleteCommand(String[] parsedCommand) {
@@ -14,6 +15,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Executes command and write to storage.
+     *
      * @param tasks the tasklist containing tasks so far
      * @param ui ui to interact with user
      * @param storage storage to read and write to storage file
@@ -46,6 +48,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Adds a task to the tasklist.
+     *
      * @param tasks the tasklist containing tasks so far
      * @param taskToAdd the task to add to tasklist
      */
@@ -58,6 +61,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Prints list size.
+     *
      * @param tasks the tasklists
      */
     void printToDoListSize(TaskList<Task> tasks, Ui ui) {
