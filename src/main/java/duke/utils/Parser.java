@@ -1,5 +1,6 @@
 package duke.utils;
 
+import duke.Duke;
 import duke.command.ClearCommand;
 import duke.command.Command;
 import duke.command.CommandType;
@@ -65,16 +66,20 @@ public class Parser {
                 throw new DukeException("Event format isn't correct");
             }
         case TODO:
-            int indexOfTodoTasks = input.indexOf(" ");
-            String descriptionOfTodo = input.substring(indexOfTodoTasks).trim();
-            if (descriptionOfTodo.equals("")) {
-                throw new DukeException("Todo what? ");
-            }
-            return new TodoCommand(descriptionOfTodo.trim());
-        case FIND:
-            int indexOfCharsToFind = input.indexOf(" ");
-            String descriptionToFind = input.substring(indexOfCharsToFind).trim();
             try {
+                int indexOfTodoTasks = input.indexOf(" ");
+                String descriptionOfTodo = input.substring(indexOfTodoTasks).trim();
+                if (descriptionOfTodo.equals("")) {
+                    throw new DukeException("Todo what? ");
+                }
+                return new TodoCommand(descriptionOfTodo.trim());
+            } catch (Exception e) {
+                throw new DukeException("Todo format isn't correct");
+            }
+        case FIND:
+            try {
+                int indexOfCharsToFind = input.indexOf(" ");
+                String descriptionToFind = input.substring(indexOfCharsToFind).trim();
                 return new FindCommand(descriptionToFind);
             } catch (Exception e) {
                 throw new DukeException("Find format isn't correct");
