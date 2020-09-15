@@ -16,8 +16,6 @@ public class AddCommand implements Command {
         this.task = task;
     }
 
-    public AddCommand() { }
-
     /**
      * Adds a task to the given list.
      *

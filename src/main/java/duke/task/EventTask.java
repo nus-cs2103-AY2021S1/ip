@@ -40,6 +40,6 @@ public class EventTask extends Task {
      * Converts task to string representation in database- task type, 1 for done/0 for not done, and description
      */
     public String toDBString() {
-        return TASK_TYPE + "~" + super.toDBString() + "~" + at.format(DateTimeFormatter.ofPattern("yyyy-mm-dd"));
+        return TASK_TYPE + "~" + super.toDBString() + "~" + at.toString();
     }
 }

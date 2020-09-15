@@ -1,16 +1,16 @@
 package duke.storage;
 
+import duke.task.*;
+
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.io.IOException;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
-
-import duke.task.*;
 
 public class Storage {
     String dataDirectory;
@@ -73,7 +73,6 @@ public class Storage {
         }
     }
 
-
     /**
      * Stores data to file (rewritten after each function call)
      */
@@ -86,7 +85,7 @@ public class Storage {
                 writer.write(task.toDBString() + System.lineSeparator());
             }
             writer.close();
-        } catch(Exception e) {
+        } catch(IOException e) {
             e.printStackTrace();
         }
     }

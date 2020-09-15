@@ -2,6 +2,7 @@ package duke.ui;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -14,7 +15,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 
 public class DialogBox extends HBox {
+    @FXML
     private Label text;
+    @FXML
     private ImageView displayPicture;
 
 

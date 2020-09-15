@@ -1,14 +1,15 @@
 package duke.parser;
 
-import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
-
 import duke.DukeException;
 import duke.ExceptionTypeEnum;
 import duke.command.*;
 import duke.task.*;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 
 public class Parser {
     static Map<String, String> commandMap = new HashMap<>();
@@ -32,90 +33,34 @@ public class Parser {
 
         switch (Parser.getMappedCommand(command)) {
         case "list":
-            if (remainingText != null) {
-                throw new DukeException(ExceptionTypeEnum.INCORRECT_LIST);
-            }
-            return new ListCommand();
+            return parseListCommand(remainingText);
 
         case "find":
-            if (remainingText == null) {
-                throw new DukeException(ExceptionTypeEnum.MISSING_FIND_KEYWORD);
-            }
-            return new FindCommand(remainingText);
+            return parseFindCommand(remainingText);
 
         case "view":
-            if (remainingText == null) {
-                throw new DukeException(ExceptionTypeEnum.MISSING_SCHEDULE_DATE);
-            }
-            LocalDate date = LocalDate.parse(remainingText);
-            return new ScheduleCommand(date);
+            return parseScheduleCommand(remainingText);
 
         case "todo":
-            if (remainingText == null) {
-                throw new DukeException(ExceptionTypeEnum.MISSING_TODO_DESCRIPTION);
-            }
-            task = new TodoTask(remainingText);
-            return new AddCommand(task);
-
+            return parseTodo(remainingText);
 
         case "deadline":
-            if (remainingText == null) {
-                throw new DukeException(ExceptionTypeEnum.MISSING_DEADLINE_DESCRIPTION);
-            }
-            taskItems = remainingText.split(" /by ");
-            description = taskItems[0].trim();
-            if (taskItems.length == 1) {
-                throw new DukeException(ExceptionTypeEnum.MISSING_DEADLINE_DATE);
-            }
-            LocalDate by = LocalDate.parse(taskItems[1].trim());
-            task = new DeadlineTask(description, by);
-            return new AddCommand(task);
+            return parseDeadline(remainingText);
 
         case "event":
-            if (remainingText == null) {
-                throw new DukeException(ExceptionTypeEnum.MISSING_EVENT_DESCRIPTION);
-            }
-            taskItems = remainingText.split(" /at ");
-            description = taskItems[0].trim();
-            if (taskItems.length == 1) {
-                throw new DukeException(ExceptionTypeEnum.MISSING_EVENT_DATE);
-            }
-            LocalDate at = LocalDate.parse(taskItems[1].trim());
-            task = new EventTask(description, at);
-            return new AddCommand(task);
+            return parseEvent(remainingText);
 
         case "note":
-            if (remainingText == null) {
-                throw new DukeException(ExceptionTypeEnum.MISSING_NOTE_NAME);
-            }
-            taskItems = remainingText.split(" /desc ");
-            String name = taskItems[0].trim();
-            if (taskItems.length == 1) {
-                throw new DukeException(ExceptionTypeEnum.MISSING_NOTE_DESCRIPTION);
-            }
-            description = taskItems[1].trim();
-            task = new Note(description, name);
-            return new AddCommand(task);
+            return parseNote(remainingText);
 
         case "done":
-            if (remainingText == null) {
-                throw new DukeException(ExceptionTypeEnum.MISSING_DONE_ITEM);
-            }
-            index = Integer.parseInt(remainingText) - 1;
-            return new DoneCommand(index);
+            return parseDoneCommand(remainingText);
 
         case "delete":
-            if (remainingText == null) {
-                throw new DukeException(ExceptionTypeEnum.MISSING_DELETE_ITEM);
-            }
-            index = Integer.parseInt(remainingText) - 1;
-            return new DeleteCommand(index);
+            return parseDeleteCommand(remainingText);
 
         case "bye":
-            if (remainingText != null) {
-                throw new DukeException(ExceptionTypeEnum.INCORRECT_BYE);
-            }
-            return new ByeCommand();
+            return parseByeCommand(remainingText);
 
         case "unknown":
         default:
@@ -123,6 +68,117 @@ public class Parser {
         }
     }
 
+    private static ListCommand parseListCommand(String remainingText) throws DukeException {
+        if (remainingText != null) {
+            throw new DukeException(ExceptionTypeEnum.INCORRECT_LIST);
+        }
+        return new ListCommand();
+    }
+
+    private static FindCommand parseFindCommand(String remainingText) throws DukeException {
+        if (remainingText == null) {
+            throw new DukeException(ExceptionTypeEnum.MISSING_FIND_KEYWORD);
+        }
+        return new FindCommand(remainingText);
+    }
+
+    private static ScheduleCommand parseScheduleCommand(String remainingText) throws DukeException {
+        if (remainingText == null) {
+            throw new DukeException(ExceptionTypeEnum.MISSING_SCHEDULE_DATE);
+        }
+        LocalDate date;
+        try {
+            date = LocalDate.parse(remainingText);
+        } catch (DateTimeParseException e) {
+            throw new DukeException(ExceptionTypeEnum.INCORRECT_SCHEDULE_DATE);
+        }
+        return new ScheduleCommand(date);
+    }
+
+    private static AddCommand parseTodo(String remainingText) throws DukeException {
+        if (remainingText == null) {
+            throw new DukeException(ExceptionTypeEnum.MISSING_TODO_DESCRIPTION);
+        }
+        Task task = new TodoTask(remainingText);
+        return new AddCommand(task);
+    }
+
+    private static AddCommand parseEvent(String remainingText) throws DukeException {
+        if (remainingText == null) {
+            throw new DukeException(ExceptionTypeEnum.MISSING_EVENT_DESCRIPTION);
+        }
+        String[] taskItems = remainingText.split(" /at ");
+        String description = taskItems[0].trim();
+        if (taskItems.length == 1) {
+            throw new DukeException(ExceptionTypeEnum.MISSING_EVENT_DATE);
+        }
+        LocalDate at;
+
+        try {
+            at = LocalDate.parse(taskItems[1].trim());
+        } catch (DateTimeParseException e) {
+            throw new DukeException(ExceptionTypeEnum.INCORRECT_EVENT_DATE);
+        }
+        Task task = new EventTask(description, at);
+        return new AddCommand(task);
+    }
+
+    private static AddCommand parseDeadline(String remainingText) throws DukeException {
+        if (remainingText == null) {
+            throw new DukeException(ExceptionTypeEnum.MISSING_DEADLINE_DESCRIPTION);
+        }
+        String[] taskItems = remainingText.split(" /by ");
+        String description = taskItems[0].trim();
+        if (taskItems.length == 1) {
+            throw new DukeException(ExceptionTypeEnum.MISSING_DEADLINE_DATE);
+        }
+
+        LocalDate by;
+        try {
+            by = LocalDate.parse(taskItems[1].trim());
+        } catch (DateTimeParseException e) {
+            throw new DukeException(ExceptionTypeEnum.INCORRECT_DEADLINE_DATE);
+        }
+        Task task = new DeadlineTask(description, by);
+        return new AddCommand(task);
+    }
+
+    private static AddCommand parseNote(String remainingText) throws DukeException {
+        if (remainingText == null) {
+            throw new DukeException(ExceptionTypeEnum.MISSING_NOTE_NAME);
+        }
+        String[] taskItems = remainingText.split(" /desc ");
+        String name = taskItems[0].trim();
+        if (taskItems.length == 1) {
+            throw new DukeException(ExceptionTypeEnum.MISSING_NOTE_DESCRIPTION);
+        }
+        String description = taskItems[1].trim();
+        Task task = new Note(description, name);
+        return new AddCommand(task);
+    }
+
+    private static DoneCommand parseDoneCommand(String remainingText) throws DukeException {
+        if (remainingText == null) {
+            throw new DukeException(ExceptionTypeEnum.MISSING_DONE_ITEM);
+        }
+        int index = Integer.parseInt(remainingText) - 1;
+        return new DoneCommand(index);
+    }
+
+    private static DeleteCommand parseDeleteCommand(String remainingText) throws DukeException {
+        if (remainingText == null) {
+            throw new DukeException(ExceptionTypeEnum.MISSING_DELETE_ITEM);
+        }
+        int index = Integer.parseInt(remainingText) - 1;
+        return new DeleteCommand(index);
+    }
+
+    private static ByeCommand parseByeCommand(String remainingText) throws DukeException {
+        if (remainingText != null) {
+            throw new DukeException(ExceptionTypeEnum.INCORRECT_BYE);
+        }
+        return new ByeCommand();
+    }
 
     private static String getMappedCommand(String command) {
         commandMap.put("list", "list");
