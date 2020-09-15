@@ -2,7 +2,7 @@
 
 Duke- the all-in-one friendly task manager :bowtie:
 
-## Main Features
+## Main Features <a id="features"></a>
 ### [Add todo task: ](#add-todo) `todo`
 ### [Add deadline task: ](#add-deadline) `deadline`
 ### [Add event task: ](#add-event) `event`
@@ -24,7 +24,7 @@ Got it. I've added this task: <br />
 [T][✘] assignment 7 <br />
 Now you have 1 task in the list.
 
-### Add deadline task: `deadline` <a id="add-deadlne"></a>
+### Add deadline task: `deadline` <a id="add-deadline"></a>
 Add a todo task based on user input as the task description. Requires deadline after /by preferably in
 the proper format: 
 - yyyy/mm/dd or yyyy-mm-dd 
@@ -125,4 +125,5 @@ Example of usage: <br />
 Expected outcome: <br />
 Bye. Hope to see you again soon!
 
+<br />
 Back to [Main Features](#features)
