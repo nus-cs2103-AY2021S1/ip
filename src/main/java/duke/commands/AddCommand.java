@@ -34,7 +34,7 @@ public class AddCommand extends Command {
      * @throws IOException If file don't exist.
      * @throws DukeException If input is not recognised.
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException, DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws IOException, DukeException {
 
         String taskType = parsedStrings[0];
         String description = parsedStrings[1];
@@ -58,7 +58,8 @@ public class AddCommand extends Command {
                 throw new DukeException("I don't know what type of task this is :(");
         }
         taskList.add(newTask);
-        ui.printAddMessage(newTask, taskList);
-        super.execute(taskList, ui, storage);
+        String outputString = ui.printAddMessage(newTask, taskList);
+        outputString += super.execute(taskList, ui, storage);
+        return outputString;
     }
 }

@@ -15,7 +15,7 @@ public class ListCommand extends Command {
      * @param ui Ui that handles system output.
      * @param storage Storage that handles file saving.
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        taskList.print();
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        return taskList.print();
     }
 }

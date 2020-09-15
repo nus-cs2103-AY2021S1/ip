@@ -30,10 +30,11 @@ public class DoneCommand extends Command {
      * @throws IOException If file don't exist.
      * @throws DukeException If input is not recognised.
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException, DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws IOException, DukeException {
         Task doneTask = taskList.setDoneTask(index);
-        ui.printDoneMessage(doneTask);
-        super.execute(taskList, ui, storage);
+        String outputString = ui.printDoneMessage(doneTask);
+        outputString += super.execute(taskList, ui, storage);
+        return outputString;
     }
 
 }

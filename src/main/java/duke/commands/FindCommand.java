@@ -33,7 +33,7 @@ public class FindCommand extends Command {
      * @throws IOException If file don't exist.
      * @throws DukeException If input is not recognised.
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException, DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws IOException, DukeException {
 
         ArrayList<Task> taskArray = new ArrayList<>();
         for (int index = 0; index < taskList.size(); index++) {
@@ -45,7 +45,8 @@ public class FindCommand extends Command {
         }
 
         TaskList matchedTaskList = new TaskList(taskArray);
-        ui.printFindMessage(matchedTaskList);
-        super.execute(taskList, ui, storage);
+        String outputString = ui.printFindMessage(matchedTaskList);
+        outputString += super.execute(taskList, ui, storage);
+        return outputString;
     }
 }
