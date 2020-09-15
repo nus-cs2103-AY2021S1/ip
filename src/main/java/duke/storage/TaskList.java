@@ -73,18 +73,6 @@ public class TaskList {
     }
 
     /**
-     * Retrieves the index of the task in the task list if the task is found in the task list. Returns -1 if the task
-     * is not found in the task list.
-     *
-     * @param task Task to be determined if it is in the task list.
-     * @return Index of the task in the task list if the task is found in the task list. Otherwise, returns -1.
-     */
-    public int getTaskListIndex(Task task) {
-        int index = this.listOfTasks.indexOf(task) + OFFSET_LIST_INDEX;
-        return index;
-    }
-
-    /**
      * Returns the an ordered list of tasks stored in the task list.
      *
      * @return An ordered list of tasks.

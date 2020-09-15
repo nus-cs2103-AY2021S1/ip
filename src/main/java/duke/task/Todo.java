@@ -10,7 +10,7 @@ public class Todo extends Task {
      * @param description Description of what to do.
      */
     public Todo(String description) {
-        super(description);
+        super(description, "[T]");
     }
 
     /**
@@ -20,6 +20,6 @@ public class Todo extends Task {
      */
     @Override
     public String toString() {
-        return "[T]" + super.toString();
+        return super.toString();
     }
 }

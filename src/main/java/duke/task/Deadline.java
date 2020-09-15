@@ -11,7 +11,7 @@ public class Deadline extends Task {
      * @param deadlineDate Deadline of task.
      */
     public Deadline(String description, String deadlineDate) {
-        super(description, deadlineDate);
+        super(description, "[D]", deadlineDate);
     }
 
     /**
@@ -21,6 +21,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.getTime() + ")";
+        return super.toString() + " (by: " + this.getTime() + ")";
     }
 }

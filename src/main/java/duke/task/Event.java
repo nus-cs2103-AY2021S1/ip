@@ -8,11 +8,11 @@ public class Event extends Task {
     /**
      * Constructs a task with the specified description and date of event.
      *
-     * @param description Decription of event.
+     * @param description Description of event.
      * @param eventTime Date of event.
      */
     public Event(String description, String eventTime) {
-        super(description, eventTime);
+        super(description, "[E]", eventTime);
     }
 
     /**
@@ -22,6 +22,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.getTime() + ")";
+        return super.toString() + " (at: " + this.getTime() + ")";
     }
 }

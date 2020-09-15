@@ -9,6 +9,7 @@ public class Task {
     public static final String STATUS_CROSS = "[" + "\u2718" + "]";
 
     private String description;
+    private String typeOfTask;
     private String time;
     private boolean isDone;
 
@@ -16,9 +17,12 @@ public class Task {
      * Constructs a new task with the specified description.
      *
      * @param description Description of task.
+     * @param typeOfTask Indicates the type of task (todo, deadline or event).
+     * @param time Time of task if applicable.
      */
-    public Task(String description, String... time) {
+    public Task(String description, String typeOfTask, String... time) {
         this.description = description;
+        this.typeOfTask = typeOfTask;
 
         if (time.length > 0) {
             this.time = time[0];
@@ -69,8 +73,8 @@ public class Task {
      * @return True is the tasks are duplicates. Otherwise, returns false.
      */
     public boolean equals(Task task) {
-        boolean isEquals = this.description.equals(task.description) && task.time.equals(task.getTime());
-        return isEquals;
+        return this.description.equals(task.description) && task.time.equals(task.getTime())
+                && this.typeOfTask.equals(task.typeOfTask);
     }
 
     /**
@@ -80,6 +84,6 @@ public class Task {
      */
     @Override
     public String toString() {
-        return this.getStatusIcon() + " " + this.description;
+        return this.typeOfTask + this.getStatusIcon() + " " + this.description;
     }
 }
