@@ -24,7 +24,7 @@ public class TaskList {
                     task.toString() + "\n" +
                     "Now you have " + size() + " tasks in the list.");
         } else {
-            return ("Task already exists\n" +
+            return ("Task already exists:\n" +
                     taskList.get(duplicateTaskNum).toString() + "\n" +
                     "No new task is added");
         }

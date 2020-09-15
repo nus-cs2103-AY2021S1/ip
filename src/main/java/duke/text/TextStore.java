@@ -2,6 +2,8 @@ package duke.text;
 
 public class TextStore {
 
+    // Maybe consider changing this class into a text file of sorts and be loaded at the start as an experiment
+    // Public messages means that they are referenced outside to craft messages with other strings (ie strings from task)
 
     // Bling msgs
     protected final static String top = "--------------Bot made by Hendey Fan--------------";
@@ -19,7 +21,7 @@ public class TextStore {
     protected final static String taskNumNotSpecified = "Error: task number not specified";
     protected final static String timeNotFound = "Error: time not specified";
     protected final static String dateTimeFormatError = "Error: date time in an incorrect format\n" +
-            "Please follow this format: dd/MM/yyyy HHmm";
+            "Please follow this format: <dd/MM/yyyy HHmm>";
     protected final static String noSearchTermError = "Error: search term not defined";
 
     // Status msgs
@@ -29,6 +31,8 @@ public class TextStore {
     public final static String tasksSavedToTextFile = "Status: tasks saved to text file successfully";
 
     // static info/display strings
+    public final static String doneText    = "[Complete] ";
+    public final static String notDoneText = "[ToBeDone] ";
     protected final static String commandList =
             "1) !commands | returns a list of text commands\n" +
                     "2) list | lists out all the current tasks\n" +
@@ -39,8 +43,5 @@ public class TextStore {
                     "7) event | format: \"event <description> /at <dd/MM/yyyy HHmm>\", creates an event task\n" +
                     "8) delete | format: \"delete <task number>\", deletes a task in the list\n" +
                     "9) find | format: \"find <string>\", finds tasks with matching string";
-
-    public final static String doneText    = "[Complete] ";
-    public final static String notDoneText = "[ToBeDone] ";
     protected final static String promptMsg = "Type \"!commands\" for a list of commands and formats :)";
 }

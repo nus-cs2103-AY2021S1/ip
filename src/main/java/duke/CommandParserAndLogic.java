@@ -110,9 +110,9 @@ public class CommandParserAndLogic {
                 TextCacher.cacheTimeNotFoundError();
             } else {
                 try {
-                    TextCacher.cacheTextStandard(taskList.addTask(new DeadLineTask(details[0], MyDateTime.parse(details[1]))));
+                    String processInfo = taskList.addTask(new DeadLineTask(details[0], MyDateTime.parse(details[1])));
+                    TextCacher.cacheTextStandard(processInfo);
                 } catch (DateTimeParseException e) {
-//                    System.out.println(e.getMessage());
                     TextCacher.cacheDateTimeFormatError();
                 }
             }
@@ -128,7 +128,8 @@ public class CommandParserAndLogic {
                 TextCacher.cacheTimeNotFoundError();
             } else {
                 try {
-                    TextCacher.cacheTextStandard(taskList.addTask(new EventTask(details[0], MyDateTime.parse(details[1]))));
+                    String processInfo = taskList.addTask(new EventTask(details[0], MyDateTime.parse(details[1])));
+                    TextCacher.cacheTextStandard(processInfo);
                 } catch (DateTimeParseException e) {
                     TextCacher.cacheDateTimeFormatError();
                 }
