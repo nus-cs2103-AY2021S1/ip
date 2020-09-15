@@ -3,6 +3,8 @@ Duke is a desktop app for managing tasks, optimized for use via a Command Line I
 benefits of a Graphical User Interface (GUI). If you can type fast, Duke can get your tasks management done faster than 
 traditional GUI apps.
 
+![Duke](Ui.png)
+
 ## Features 
 
 Usage | Format, Examples
