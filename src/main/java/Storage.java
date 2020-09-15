@@ -37,13 +37,28 @@ public class Storage {
      * @throws FileNotFoundException when file is not found from the
      * given file path.
      */
-    public static void loadFileContent() throws FileNotFoundException {
-        File f = new File(filePath); // create a File for the given file path
-        Scanner s = new Scanner(f); // create a Scanner using the File as the source
+    public static void loadFileContent() {
+        File storedFile = new File(filePath); // create a File for the given file path;
 
-        while (s.hasNext()) {
-            String taskSummary = s.nextLine();
-            Storage.lineReader(taskSummary);
+        try {
+            Scanner scanner = new Scanner(storedFile); // create a Scanner using the File as the source
+
+            while (scanner.hasNext()) {
+                String taskSummary = scanner.nextLine();
+                Storage.lineReader(taskSummary);
+            }
+
+        } catch (FileNotFoundException e) {
+            File directory = storedFile.getParentFile();
+
+            try {
+                if (!directory.exists() || !directory.isDirectory()) {
+                    directory.mkdirs();
+                }
+                storedFile.createNewFile();
+            } catch (IOException ex) {
+                System.out.println("Unable to open/create file: " + ex.toString());
+            }
         }
     }
 

@@ -3,6 +3,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Represents a Parser object.
@@ -136,7 +137,16 @@ public class Parser {
         assert trimmedStr.length() > 2 : "user input should not be empty/just white spaces";
 
         if (str.equals("bye")) {
-            MainWindow.closeWindow();
+            Thread t1 = new Thread(() -> {
+                try {
+                    TimeUnit.SECONDS.sleep(2);
+                    MainWindow.closeWindow();
+                } catch (InterruptedException ie) {
+                    System.out.println("Unable to sleep");
+                }
+            });
+
+            t1.start();
             return "See you again!";
 
         } else if (str.equals("list")) {
@@ -365,7 +375,8 @@ public class Parser {
                     + "You can take a break! :)";
 
         } else {
-            String output = "Here are your tasks to be completed within 3 days:\n";
+            String output = "***Reminder:\n"
+                    + "Here are your tasks to be completed within 3 days:\n";
             int partialSize = filteredTasks.size();
             int index = 1;
             for (int i = 0; i < partialSize; i++) {

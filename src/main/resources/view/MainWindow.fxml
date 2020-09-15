@@ -3,6 +3,8 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.TextFlow?>
@@ -21,8 +23,14 @@
         </ScrollPane>
       <TextFlow prefHeight="28.0" prefWidth="400.0" AnchorPane.bottomAnchor="572.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Button fx:id="loadFileButton" mnemonicParsing="false" onAction="#checkFileLoaded" prefHeight="20.0" prefWidth="75.0" text="File Status" textFill="#4254e3" />
-            <Button fx:id="reminderButton" mnemonicParsing="false" onAction="#handleReminderAction" prefHeight="20.0" prefWidth="75.0" text="Reminder" textFill="#2d6dbf" />
+            <Button fx:id="reminderButton" mnemonicParsing="false" onAction="#handleReminderAction" prefHeight="25.0" prefWidth="400.0" text="My Reminder" textFill="#2d6dbf">
+               <graphic>
+                  <ImageView fitHeight="21.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/Bell.PNG" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
          </children>
       </TextFlow>
     </children>

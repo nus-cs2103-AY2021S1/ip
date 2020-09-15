@@ -1,4 +1,3 @@
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -36,16 +35,11 @@ public class Duke {
         storage = new Storage(filepath);
         isFileLoaded = false;
 
-        try {
-            storage.loadFileContent();
+        storage.loadFileContent();
 
-            List<Task> fileTasks = storage.getSavedTasks();
-            tasks = new TaskList(fileTasks);
-            isFileLoaded = true;
-
-        } catch (FileNotFoundException e) {
-            System.out.println(e);
-        }
+        List<Task> fileTasks = storage.getSavedTasks();
+        tasks = new TaskList(fileTasks);
+        isFileLoaded = true;
 
         parser = new Parser(tasks);
     }

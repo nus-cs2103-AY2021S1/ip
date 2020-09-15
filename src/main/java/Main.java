@@ -22,6 +22,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            stage.setTitle("DUKE_ip_v2.0");
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
             String reminders = duke.getReminder();
