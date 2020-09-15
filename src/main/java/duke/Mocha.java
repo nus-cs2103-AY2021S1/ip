@@ -173,6 +173,7 @@ public class Mocha extends Application {
 
             } else if (commandNumber == 4) {
                 int taskNumber = parser.getDoneTaskNumber();
+                parser.biggerThanSizeOfTasks(taskNumber, tasks.getSize());
                 Task doneTask = tasks.getTask(taskNumber);
                 doneTask.markAsDone();
                 responseReturn = ui.markTaskDone(doneTask);
@@ -187,9 +188,10 @@ public class Mocha extends Application {
                 PauseTransition delay = new PauseTransition(Duration.millis(1000));
                 delay.setOnFinished(event-> Platform.exit());
                 delay.play();
- 
+
             } else if (commandNumber == 7) {
                 int taskNumber = parser.getDeleteTaskNumber();
+                parser.biggerThanSizeOfTasks(taskNumber, tasks.getSize());
                 Task deleteTask = tasks.getTask(taskNumber);
                 tasks.deleteTask(taskNumber);
                 responseReturn = ui.deleteTask(deleteTask, tasks.getSize());
@@ -197,10 +199,10 @@ public class Mocha extends Application {
             } else if (commandNumber == 8) {
                 ArrayList<Task> matchingTasks = parser.getMatchingTasks(tasks);
                 responseReturn = ui.findTask(matchingTasks);
-                
+
             } else if (commandNumber == 9) {
                 responseReturn = ui.help();
-                
+
             } else {
                 throw new CommandNotRecognizedException("Oops! I couldn't understand what you mean :(");
             }
@@ -211,8 +213,10 @@ public class Mocha extends Application {
             responseReturn = e.getMessage();
         } catch (CommandNotRecognizedException e) {
             responseReturn = e.getMessage();
+        } catch (TaskNotFoundException e) {
+            responseReturn = e.getMessage();
+        } finally {
+            return responseReturn;
         }
-        return responseReturn;
     }
 }
-    

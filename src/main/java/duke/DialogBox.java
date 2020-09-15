@@ -41,7 +41,7 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        
+
         Color col = Color.rgb(240, 228, 228);
         CornerRadii corn = new CornerRadii(10);
         dialog.setBackground(new Background(new BackgroundFill(col, corn, null)));

@@ -190,14 +190,21 @@ public class Ui {
         findTask = dividerStart + relevantTasks;
         return findTask;
     }
-    
+
+    /**
+     * Lists all commands of the task manager.
+     *
+     * @return help list.
+     */
     public String help() {
         String helpHeader = "Here are all the commands: ";
         String toDoHelp = "todo {description} : Creates a new ToDo Task";
-        String eventHelp = "event {description} /at dd/MM/yyyy HH:mm-HH:mm (24 hour clock)" +
-                " : Creates a new Event Task for dd MMM yyyy";
-        String deadlineHelp = "deadline {description} /by dd/MM/yyyy HH:mm (24 hour clock) " +
-                ": Creates a new Deadline Task for dd MMM yyyy";
+        String eventHelp = ("event {description} "
+                + "/at dd/MM/yyyy HH:mm-HH:mm (24 hour clock)"
+                + " : Creates a new Event Task for dd MMM yyyy");
+        String deadlineHelp = "deadline {description} "
+                + "/by dd/MM/yyyy HH:mm (24 hour clock) "
+                + ": Creates a new Deadline Task for dd MMM yyyy";
         String listHelp = "list : Lists all tasks";
         String doneHelp = "done {taskNumber} : Marks a task as done";
         String deleteHelp = "delete {taskNumber} : Deletes a task";

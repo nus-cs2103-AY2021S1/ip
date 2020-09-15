@@ -23,7 +23,7 @@ public class Parser {
         this.commandParts = command.split("\\s", 2);
         String commandKeyword = commandParts[0];
         int commandNumber = -1;
-        
+
         if (commandKeyword.contains("todo")) {
             commandNumber = 1;
         } else if (commandKeyword.contains("deadline")) {
@@ -42,7 +42,7 @@ public class Parser {
             commandNumber = 8;
         } else if (commandKeyword.contains("help")) {
             commandNumber = 9;
-        } 
+        }
         return commandNumber;
     }
 
@@ -121,11 +121,11 @@ public class Parser {
      */
     public Task createNewEvent() throws MissingTaskDescriptionException {
         try {
-            
+
             String[] eventParts = commandParts[1].split("/at");
             String[] dateAndTime = eventParts[1].trim().split("\\s");
             String[] timeParts = dateAndTime[1].split("-");
-            
+
             DateFormat eventDateInputFormat = new SimpleDateFormat("dd/MM/yyyy");
             DateFormat eventTimeInputFormat = new SimpleDateFormat("HH:mm");
             DateFormat eventDateOutputFormat = new SimpleDateFormat("dd MMM yyyy");
@@ -136,7 +136,7 @@ public class Parser {
             String eventDateFormatted = eventDateOutputFormat.format(eventDate);
             String eventStartTimeFormatted = eventTimeOutputFormat.format(eventStartTime);
             String eventEndTimeFormatted = eventTimeOutputFormat.format(eventEndTime);
-            String dateAndTimeFormatted = (eventDateFormatted 
+            String dateAndTimeFormatted = (eventDateFormatted
                     + " " + eventStartTimeFormatted + " - " + eventEndTimeFormatted);
             Task newEventTask = new Deadline(eventParts[0].trim(), dateAndTimeFormatted);
             return newEventTask;
@@ -145,11 +145,38 @@ public class Parser {
             String emptyDescription = "Oops! The description cannot be empty :(";
             String eventKeyword = "Did you remember to put /at ?";
             String eventFormat = "The format should be dd/MM/yy HH:mm-HH:mm (24 hour clock)";
-            throw new MissingTaskDescriptionException(emptyDescription 
-                    + "\r\n" 
+            throw new MissingTaskDescriptionException(emptyDescription
+                    + "\r\n"
                     + eventKeyword
                     + "\r\n"
                     + eventFormat);
+        }
+    }
+
+    /**
+     * Throws TaskNotFoundException if task number user inputs is bigger than size of TaskList.
+     *
+     * @param taskNumber Task number user inputs.
+     * @param sizeOfTasks Size of existing Task.
+     * @throws TaskNotFoundException thrown when task number is bigger than size of TaskList.
+     */
+    public void biggerThanSizeOfTasks(int taskNumber, int sizeOfTasks) throws TaskNotFoundException {
+        biggerThanSizeOfTasksHelper(taskNumber + 1, sizeOfTasks);
+    }
+
+    /**
+     *Helper class for biggerThanSizeOfTasks.
+     *
+     * @param sizeOfTasks Size of existing Task.
+     * @throws TaskNotFoundException thrown when task number is bigger than size of TaskList.
+     */
+    public void biggerThanSizeOfTasksHelper(int taskNumber, int sizeOfTasks) throws TaskNotFoundException {
+        try {
+            if (taskNumber > sizeOfTasks || taskNumber == 0) {
+                throw new TaskNotFoundException("Task not found :(");
+            }
+        } catch (Exception e) {
+            throw new TaskNotFoundException("Task not found :(");
         }
     }
 
@@ -167,7 +194,7 @@ public class Parser {
     }
 
     /**
-     * Helper class for doneTask().
+     * Helper class for getDoneTaskNumber().
      *
      * @return the task number of the task for status to be updated.
      * @throws MissingTaskNumberException Exception is thrown when task number is missing.
@@ -188,19 +215,14 @@ public class Parser {
      *
      * @return the task number of the task.
      */
-    public int getDeleteTaskNumber() {
+    public int getDeleteTaskNumber() throws MissingTaskNumberException {
         int taskNumber = -1;
-
-        try {
-            taskNumber = deleteTaskFromList();
-        } catch (MissingTaskNumberException e) {
-            System.out.println(e.getMessage());
-        }
+        taskNumber = deleteTaskFromList();
         return taskNumber;
     }
 
     /**
-     * Helper class for deleteTask().
+     * Helper class for getDeleteTaskNumber().
      *
      * @return the task number of the task that is to be deleted.
      * @throws MissingTaskNumberException Exception is thrown when task number is missing.
