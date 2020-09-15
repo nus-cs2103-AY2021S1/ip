@@ -2,7 +2,7 @@
 Duke is a personal task manager that helps to add, store, delete, find and sort tasks for you. :smile:
 
 ## Duke GUI
-![Duke GUI](/docs/Ui.PNG)
+![Duke GUI](/docs/Ui.png)
 
 ## Setting Up
 Download the latest relase of Duke.jar to start using Duke.
@@ -45,13 +45,13 @@ Bye! Hope to see you again soon.
 ### 3. `deadline NAMEOFDEADLINE /YYYY-MM-DD`
 Sample input:
 ```
-deadline ip6 /2020-09-12
+deadline homework /2020-09-12
 ```
 
 Expected output:
 ```
 Got it. I have added this tasks:
-[D][X] ip6 (by: Sep 12 2020)
+[D][X] homework (by: Sep 12 2020)
 Now you have 1 task in the list
 ```
 
@@ -64,7 +64,7 @@ delete 1
 Expected output:
 ```
 Noted. I have removed this task:
-[D][X] ip6 (by: Sep 12 2020)
+[D][X] homework (by: Sep 12 2020)
 Now you have 0 tasks in the list
 ```
 
@@ -77,32 +77,32 @@ done 1
 Expected output:
 ```
 Nice! I have marked this task as done:
-[D][O] ip6 (by: Sep 12 2020)
+[D][O] homework (by: Sep 12 2020)
 ```
 
 ### 6. `event NAMEOFEVENT /YYYY-MM-DD`
 Sample input:
 ```
-event anniversary /2020-10-08
+event birthday /2020-10-08
 ```
 
 Expected output:
 ```
 Got it. I have added this task:
-[E][X] anniversary (at: Oct 8 2020)
+[E][X] birthday (at: Oct 8 2020)
 Now you have 2 tasks in the list
 ```
 
 ### 7. `find KEYWORD`
 Sample input:
 ```
-find ip6
+find birthday
 ```
 
 Expected output:
 ```
 Here are the matching tasks in your list:
-[D][O]ip6 (by: Sep 12 2020)
+[D][O] birthday (by: Sep 12 2020)
 ```
 
 ### 8. `list`
@@ -114,9 +114,9 @@ list
 Expected output:
 ```
 Here are the tasks in your list:
-1. [T][O] drink water
-2. [D][O]ip6 (by: Sep 12 2020)
-3. [E][X] anniversary (at: Oct 8 2020)
+1. [T][O] run
+2. [D][O] homework (by: Sep 12 2020)
+3. [E][X] birthday (at: Oct 8 2020)
 ```
 
 ### 9. `sort`
@@ -128,9 +128,9 @@ sort
 Expected output:
 ```
 SORTED BY TASK TYPE
-1. [D][O]ip6 (by: Sep 12 2020)
-2. [E][X] anniversary (at: Oct 8 2020)
-3. [T][O] drink water
+1. [D][O] homework (by: Sep 12 2020)
+2. [E][X] birthday (at: Oct 8 2020)
+3. [T][O] run
 ```
 
 ### 10. `todo NAMEOFTODO`
@@ -142,7 +142,7 @@ todo drink water
 Expected output:
 ```
 Got it. I have added this task:
-[T][X] drink water
+[T][X] run
 Now you have 3 tasks in the list
 ```
 
