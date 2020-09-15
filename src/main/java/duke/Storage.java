@@ -63,6 +63,13 @@ public class Storage {
         ArrayList<Task> tasksArray = taskList.getAllTasks();
         String fileOutput = "";
 
+        try {
+            new File(filepath).getParentFile().mkdirs();
+        } catch (Exception e) {
+            // e.printStackTrace();
+            return false;
+        }
+
         for (Task task: tasksArray) {
             for (String string: task.serialize()) {
                 fileOutput = fileOutput + string + " | ";
@@ -76,6 +83,7 @@ public class Storage {
             writer.close();
 
         } catch (IOException e) {
+            // System.out.println(e.getMessage());
             return false;
         }
 

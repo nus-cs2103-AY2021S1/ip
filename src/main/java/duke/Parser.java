@@ -50,8 +50,12 @@ public class Parser {
     }
 
     private String processBye() {
-        Storage.saveTasksTo("data/duke.txt", taskList);
-        return ui.showGoodbyeScreen();
+        if (Storage.saveTasksTo("data/duke.txt", taskList)) {
+            System.exit(0);
+            return " ";
+        } else {
+            return "Error: Unable to save file";
+        }
     }
 
     private String processDone(String input) throws DukeException {

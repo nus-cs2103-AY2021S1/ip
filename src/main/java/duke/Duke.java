@@ -31,7 +31,6 @@ public class Duke {
      */
     public String parseInput(String input) {
         String output = parser.parse(input);
-        // System.out.println(output);
         return output;
     }
 }
