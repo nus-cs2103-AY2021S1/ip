@@ -22,7 +22,7 @@
 
 ## C. Usage
 
-#### 1. Greet Duke
+### 1. Greet Duke
 
 Say Hi to Duke!
 
@@ -31,7 +31,7 @@ Example of usage: <br/>
  - `yo` 
  - `hello`
 
-#### 2. Add a task
+### 2. Add a task
 
 A task can either be a todo, deadline or event. <br/>
 A todo needs the description of the task. <br/>
@@ -53,14 +53,14 @@ Example of usage: <br/>
 
 Ensure your date is keyed in `ddmmyyyy` format. 
 
-#### 3. Lists all tasks
+### 3. Lists all tasks
 
 This lists all the tasks currently stored. 
 
 Example of usage: <br/>
 - `list`
 
-#### 4. Marks a specific task done
+### 4. Marks a specific task done
 
 This marks the specified task done, regardless of which type of task it is (i.e. works for todo, deadline, event).
 You need to know the number of the task you wish to mark done, which can be found by the list command. 
@@ -76,7 +76,7 @@ Example of usage: <br/>
 - `done 13` <br/>
    This marks the 13th task done.
 
-#### 5. Deletes a specific task
+### 5. Deletes a specific task
 
 This deletes the specified task, regardless of which type of task it is (i.e. works for todo, deadline, event).
 You need to know the number of the task you wish to delete, which can be found by the list command. 
@@ -92,7 +92,7 @@ Example of usage: <br/>
 - `delete 13` <br/>
    This deletes the 13th task.
 
-#### 6. Finds a task
+### 6. Finds a task
 
 This helps you search for a task that matches your input.
 
@@ -105,7 +105,7 @@ Example of usage: <br/>
 - `find cs2103t` 
    This finds all tasks that includes cs2103t.
 
-#### 7. Leave the conversation
+### 7. Leave the conversation
 
 Say bye to duke.
 
