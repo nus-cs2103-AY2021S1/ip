@@ -50,7 +50,11 @@ public class Parser {
                 throw new DukeException("You can't do something not in the list?");
             }
         case DELETE:
-            return new DeleteCommand(Integer.parseInt(keywords[1].trim()) - 1);
+            try {
+                return new DeleteCommand(Integer.parseInt(keywords[1].trim()) - 1);
+            } catch (Exception e) {
+                throw new DukeException("Delete what? ");
+            }
         case DEADLINE:
             try {
                 int by = input.indexOf(" /by");
