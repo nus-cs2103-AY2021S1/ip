@@ -1,6 +1,8 @@
+10
+2020-08-11
 T ; 1 ; read book
 D ; 0 ; return book /by 2020-01-01
-E ; 0 ; project meeting /at 2020-02-02
+E ; 1 ; project meeting /at 2020-02-02
 T ; 1 ; join sports club
 T ; 0 ; watch concert
 D ; 1 ; do laundry /by 2020-09-27
