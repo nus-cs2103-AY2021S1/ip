@@ -1,6 +1,6 @@
 package commands;
 
-import data.exception.DukeIllegalCommandException;
+import data.exception.DukeIllegalFollowUpCommandException;
 import data.exception.DukeInvalidUserInputException;
 import data.task.Event;
 import data.task.TaskList;
@@ -25,7 +25,7 @@ public class EventCommand extends CreateTaskCommand {
     }
 
     @Override
-    public String execute() throws DukeInvalidUserInputException, DukeIllegalCommandException {
+    public String execute() throws DukeInvalidUserInputException, DukeIllegalFollowUpCommandException {
         try {
             String userInputWithoutCommand = this.userInput.substring(this.userInput.indexOf(' '));
             String[] userInputWithoutCommandArr = userInputWithoutCommand.split("/");
@@ -40,7 +40,7 @@ public class EventCommand extends CreateTaskCommand {
                 Event newTask = new Event(description, dateTime);
                 return addTask(newTask);
             } else {
-                throw new DukeIllegalCommandException(followUpCommand);
+                throw new DukeIllegalFollowUpCommandException("event", followUpCommand);
             }
         } catch (IndexOutOfBoundsException e) {
             throw new DukeInvalidUserInputException("I'm sorry to inform you that the "
