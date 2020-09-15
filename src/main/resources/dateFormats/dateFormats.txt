@@ -1,2 +1,4 @@
 ^\d{12}$ | yyyyMMddHHmm
 ^\d{4}-\d{2}-\d{2} \d{2}:\d{2}$ | yyyy-MM-dd HH:mm
+^\d{8} \d{4}$ | yyyyMMdd HHmm
+^\d{2}:\d{2} \d{6}$ | HH:mm ddMMyy
