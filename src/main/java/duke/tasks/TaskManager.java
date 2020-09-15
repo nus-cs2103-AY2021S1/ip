@@ -159,7 +159,7 @@ public class TaskManager {
 
     private void checkValidIndex(int taskNum) throws DukeException {
         int totalNumber = getTotalNumberOfItems();
-        if (taskNum < 0 || taskNum >= totalNumber) {
+        if (taskNum < 0 || taskNum > totalNumber) {
             String errorResponse = String.format("You gave an invalid task number. Give a number from 0 to %d.", totalNumber);
             throw new DukeException(errorResponse);
         }
