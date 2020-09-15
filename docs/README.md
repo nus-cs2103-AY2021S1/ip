@@ -6,12 +6,25 @@
 
 Welcome to Incredible Bot, a task manager app which manages your todos, events and deadlines!
 
-## Content Page
-- [Features](## Features)
-    - [Todo](### 1. Todo)
-    - [Event](### 2. Event)
-    - [Deadline] (### 3. Deadline)
-    - [Additional Features] (### To assist you with managing your tasks are:)
+## Table of Contents
+- [Features](#Features)
+    - [Todo](#1.-Todo)
+    - [Event](#2.-Event)
+    - [Deadline](#3.-Deadline)
+    - [Additional Features](#To-assist-you-with-managing-your-tasks-are:)
+- [Usage](#Usage)
+    - [Todo](#todo---adds-a-todo)
+    - [Event](#event---adds-an-event)
+    - [Deadline](#deadline---adds-a-deadline)
+    - [List](#list---shows-all-tasks)
+    - [Sort](#sort---sorts-the-list-of-tasks)
+    - [Done](#done---marks-a-task-as-done)
+    - [Delete](#delete---deletes-a-task)
+    - [Find](#find---finds-matching-tasks-in-the-list)
+    - [Help](#help---displays-the-list-of-commands-available)
+    - [Bye](#bye---quits-the-program)
+- [Acknowledgements](#acknowledgements)
+    
 
 ## Features
 
@@ -195,7 +208,7 @@ Noted. I've removed this task:
 Now you have 2 tasks in the list.
 ```
 
-### `find` - finds the matching tasks in the list
+### `find` - finds matching tasks in the list
 
 Finds the list of matching tasks to the query word after find.
 
