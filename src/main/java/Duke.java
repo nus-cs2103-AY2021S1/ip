@@ -54,9 +54,14 @@ public class Duke {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) throws IOException {
-        Command command = Parser.parseInput(input);
-
-        assert command != null;
-        return command.handle(input, taskManager, fileHandler);
+        String trimmedInput = input.trim();
+        String e = DukeExceptionHandler.handleException(trimmedInput);
+        if (e != null) {
+            return e;
+        } else {
+            Command command = Parser.parseInput(trimmedInput);
+            assert command != null;
+            return command.handle(trimmedInput, taskManager, fileHandler);
+        }
     }
 }

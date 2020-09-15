@@ -11,8 +11,8 @@ public class AddCommand extends Command {
         assert input != null;
 
         String[] splitInput = input.split(" ", 2);
-        this.taskType = splitInput[0]; //
-        this.taskDescription = splitInput[1];
+        this.taskType = splitInput[0];
+        this.taskDescription = splitInput[1].trim();
     }
 
     public String handle(String input, TaskManager taskManager, Storage fileHandler) throws IOException {

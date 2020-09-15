@@ -1,4 +1,10 @@
-package PACKAGE_NAME;
+public class IncorrectInputNumberException extends DukeException {
+    public IncorrectInputNumberException(String message) {
+        super(message);
+    }
 
-public class IncorrectInputNumberException {
+    @Override
+    public String toString() {
+        return "OOPS!!! You have keyed in the wrong number of inputs :(";
+    }
 }

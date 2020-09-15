@@ -1,7 +1,7 @@
 public class Parser {
 
     public static Command parseInput(String input) {
-        
+
         if (input.equals("list")) {
             return new ListCommand();
         } else if (input.contains("done")) {
