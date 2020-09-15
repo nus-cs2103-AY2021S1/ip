@@ -56,12 +56,23 @@ public class Ui {
     }
 
     /**
+     * Prints a message for task that just had its priority marked.
+     * @param taskToMark Task that has priority marked.
+     */
+    public String printPriorityMessage(Task taskToMark) {
+        String string;
+        string = "Nice! I've marked this task priority as such:\n";
+        string += "\t" + taskToMark;
+        return string;
+    }
+
+    /**
      * Prints a done message for the given Task.
      * @param doneTask Task that is marked as completed.
      */
     public String printDoneMessage(Task doneTask) {
         String string;
-        string = "Nice! I've marked this task as done:";
+        string = "Nice! I've marked this task as done:\n";
         string += "\t" + doneTask;
         return string;
     }

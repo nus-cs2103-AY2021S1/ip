@@ -7,6 +7,7 @@ package duke.tasks;
 public class Task {
     protected boolean isCompleted;
     protected String description;
+    protected String priorityLevel;
 
     /**
      * Constructor.
@@ -15,6 +16,7 @@ public class Task {
     public Task(String description) {
         this.isCompleted = false;
         this.description = description;
+        this.priorityLevel = "nil";
     }
 
     /**
@@ -22,6 +24,14 @@ public class Task {
      */
     public void markDone() {
         this.isCompleted = true;
+    }
+
+    /**
+     * Sets the priority level of the task.
+     * @param priorityLevel of the task.
+     */
+    public void setPriorityLevel(String priorityLevel) {
+        this.priorityLevel = priorityLevel;
     }
 
     /**
@@ -58,6 +68,7 @@ public class Task {
      */
     @Override
     public String toString() {
-        return "[" + getStatusIcon() + "] " + description;
+        return "[" + getStatusIcon() + "] " +
+                "(P: " + priorityLevel + ") " + description;
     }
 }

@@ -32,8 +32,15 @@ public class Parser {
             case "deadline":
             case "event":
                 remainingString = scanner.nextLine();
-                parsedStrings = parseRemainingString(action, remainingString);
+                parsedStrings = parseAddCommandString(action, remainingString);
                 return new AddCommand(parsedStrings);
+            case "priority":
+                remainingString = scanner.nextLine();
+                Object[] parsedObjects = parsePriorityCommandString(remainingString);
+                int taskIndex = (int) parsedObjects[0];
+                String priorityLevel = (String) parsedObjects[1];
+                return new PriorityCommand(taskIndex, priorityLevel);
+
             case "find":
                 remainingString = scanner.nextLine();
                 return new FindCommand(remainingString);
@@ -54,7 +61,7 @@ public class Parser {
      * @param remainingString String that contains the description (and due).
      * @throws DukeException
      */
-    public static String[] parseRemainingString(String taskType, String remainingString) throws DukeException {
+    public static String[] parseAddCommandString(String taskType, String remainingString) throws DukeException {
         if (remainingString.length() == 0) {
             throw new DukeException("The description can't be empty.");
         }
@@ -86,6 +93,19 @@ public class Parser {
             default:
                 throw new DukeException("I don't know what type of task this is :(");
 
+        }
+    }
+
+
+    public static Object[] parsePriorityCommandString(String remainingString) throws DukeException {
+        String[] splitStrings = remainingString.trim().split(" ");
+
+        try {
+            int taskIndex = Integer.valueOf(splitStrings[0]) - 1;
+            String priorityString = splitStrings[1];
+            return new Object[] {taskIndex, priorityString};
+        } catch (NumberFormatException e) {
+            throw new DukeException("I don't know which task index are you referring to :(");
         }
     }
 
