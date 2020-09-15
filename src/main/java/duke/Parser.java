@@ -115,7 +115,12 @@ public class Parser {
      */
     public static String executeRemoveTagCommand(
             String[] userInputWords, TaskList tasks) throws DukeException {
-        int index = Integer.parseInt(userInputWords[1]);
+        int index;
+        try {
+            index = Integer.parseInt(userInputWords[1]);
+        } catch (Exception e) {
+            throw new DukeException("Please input a valid task number.");
+        }
         String tagToRemove = userInputWords[2];
         if (index > tasks.size() || index <= 0) {
             throw new DukeException("That task number does not exist.");
@@ -194,6 +199,9 @@ public class Parser {
         if (index == INVALID_INDEX) {
             throw new DukeException("Please include the date of the deadline!");
         }
+        if (index == DEADLINE_DESCRIPTION_START_INDEX) {
+            throw new DukeException("The description of a deadline cannot be empty.");
+        }
         String deadlineDescription = input.substring(DEADLINE_DESCRIPTION_START_INDEX, index - 1);
         String deadlineDate = input.substring(index + DATE_START_INDEX);
         try {
@@ -224,6 +232,9 @@ public class Parser {
         int index = input.indexOf("/");
         if (index == INVALID_INDEX) {
             throw new DukeException("Please include the date of the event!");
+        }
+        if (index == EVENT_DESCRIPTION_START_INDEX) {
+            throw new DukeException("The description of an event cannot be empty.");
         }
         String eventDescription = input.substring(EVENT_DESCRIPTION_START_INDEX, index - 1);
         String eventDate = input.substring(index + DATE_START_INDEX);
