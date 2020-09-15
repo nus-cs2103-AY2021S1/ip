@@ -34,6 +34,9 @@ Delete a specific task number.
 ### Done Feature
 Marks a task as done.
 
+### Bye Feature
+Close the app.
+
 ## Usage
 
 ### `todo <task name>`
@@ -191,3 +194,7 @@ Example of usage:
 Expected outcome:
 
 `1. [T][✔] Group Project Task (at: 14 Sep 2020 7.00am) #abc #urgent`
+
+### `bye`
+
+Closes the app.
