@@ -1,6 +1,10 @@
 package duke.exceptions;
 
-// Exception for incomplete/ inappropriate command given
+/**
+ * Represents the exception from an incomplete function
+ * when the function receives an inappropriate command or
+ * when the command is incomplete
+ */
 public class IncompleteCommandException extends DukeException{
 
     public IncompleteCommandException(){

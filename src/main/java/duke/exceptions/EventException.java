@@ -1,6 +1,9 @@
 package duke.exceptions;
 
-// Exception for wrong event command format
+/**
+ * Represents the exception from the event function
+ * when the function receives a command in the wrong format.
+ */
 public class EventException extends DukeException{
     public EventException(){
         super("Please key in the event in the following format:\n" +

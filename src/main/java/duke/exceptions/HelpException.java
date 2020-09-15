@@ -1,6 +1,9 @@
 package duke.exceptions;
 
-// Exception for wrong help command format
+/**
+ * Represents the exception from the help function
+ * when the function receives an inappropriate command
+ */
 public class HelpException extends DukeException{
     public HelpException(){
         super("Please key in an appropriate command after the \"help\"\n" +

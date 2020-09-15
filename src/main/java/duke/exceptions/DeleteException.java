@@ -1,6 +1,9 @@
 package duke.exceptions;
 
-// Exception for wrong delete command format
+/**
+ * Represents the exception from the delete function
+ * when the function receives a command in the wrong format.
+ */
 public class DeleteException extends DukeException{
     public DeleteException(int currentTask, int totalTask){
 

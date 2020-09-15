@@ -4,11 +4,11 @@ import duke.tasks.Task;
 
 public class Ui {
     private final static String LONG_LINE = "________________________________________________________________________________";
-    private final static String LOGO = "___          _\n"
-            + "|  _ \\ _   _| | ___\n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| | <  __/\n"
-            + "|___/ \\_,_|_|\\_\\_|\n";
+    private final static String LOGO = " __         _\n"
+            + "| _ \\ _   _| | ___\n"
+            + "|| | | | | | |/ / _\\\n"
+            + "||_| | |_| |  <  __/\n"
+            + "|___/ \\_,_ |_|\\_\\_|\n";
 
 
 

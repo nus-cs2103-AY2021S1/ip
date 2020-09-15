@@ -1,6 +1,9 @@
 package duke.exceptions;
 
-// Exception for wrong done command format
+/**
+ * Represents the exception from the help function
+ * when the function receives an inappropriate command
+ */
 public class DoneException extends DukeException{
     public DoneException(int currentTask, int totalTask){
 

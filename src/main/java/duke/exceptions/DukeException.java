@@ -1,7 +1,7 @@
 package duke.exceptions;
 
 /**
- * duke.Main exception class in the Duke application, that allows
+ * Represents the exception class in the Duke application, that allows
  * the other exceptions to extend from.
  */
 public class DukeException extends Exception{

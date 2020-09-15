@@ -40,7 +40,6 @@ public class StartingBox extends HBox {
         }
 
         welcomeText.setText(text);
-//        startingPicture.setImage(img);
         leftPicture.setImage(img);
         rightPicture.setImage(img);
     }

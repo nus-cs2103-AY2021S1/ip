@@ -1,6 +1,9 @@
 package duke.exceptions;
 
-// Exception for wrong deadline format
+/**
+ * Represents the exception from the deadline function
+ * when the function receives a command in the wrong format.
+ */
 public class DeadlineException extends DukeException{
 
     public DeadlineException (){
