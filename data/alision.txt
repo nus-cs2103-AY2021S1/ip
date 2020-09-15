@@ -1,5 +1,0 @@
-T | true | finish ip
-D | false | finish ip | tonight
-D | false | return book | June 6th
-D | false | finish ip | Aug 28 2020
-E | true | es2600 presentation | Aug 27th 4-6pm

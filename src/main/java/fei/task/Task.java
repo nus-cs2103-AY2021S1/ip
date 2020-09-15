@@ -1,6 +1,9 @@
 package fei.task;
 
 public class Task {
+    private static String TICK = "\u2713";
+    private static String CROSS = "\u2718";
+
     protected String description;
     protected boolean isDone;
 
@@ -19,7 +22,7 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718");
+        return (isDone ? TICK : CROSS);
     }
 
     public void markAsDone() {
@@ -38,6 +41,10 @@ public class Task {
     @Override
     public String toString() {
         return String.format("[%s] %s", this.getStatusIcon(), this.description);
+    }
+
+    public boolean isDone() {
+        return this.isDone;
     }
 
 }
