@@ -29,7 +29,7 @@ public class OliviaGui extends Application {
     private void displayIntro() {
         Label introText = new Label(olivia.welcome());
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(introText, new ImageView(oliviaImage)));
+                DialogBox.getOliviaDialog(introText, new ImageView(oliviaImage)));
     }
 
     private void handleUserInput() {
@@ -38,7 +38,7 @@ public class OliviaGui extends Application {
         Label dukeText = new Label(parser.parse(userInput.getText()));
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(userImage)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(oliviaImage))
+                DialogBox.getOliviaDialog(dukeText, new ImageView(oliviaImage))
         );
         if (olivia.shouldExit()) {
             Platform.exit();
@@ -48,6 +48,7 @@ public class OliviaGui extends Application {
 
     @Override
     public void start(Stage stage) {
+
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
@@ -70,7 +71,7 @@ public class OliviaGui extends Application {
 
         mainLayout.setPrefSize(400.0, 600.0);
 
-        scrollPane.setPrefSize(385, 535);
+        scrollPane.setPrefSize(400, 535);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
@@ -79,7 +80,7 @@ public class OliviaGui extends Application {
 
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
-        userInput.setPrefWidth(325.0);
+        userInput.setPrefWidth(345.0);
 
         sendButton.setPrefWidth(55.0);
 
