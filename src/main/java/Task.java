@@ -30,6 +30,11 @@ public abstract class Task {
         return "[" + (isDone ? "\u2713" : "\u2718") + "]"; //return tick or X symbols
     }
 
+    /**
+     * Marks a task as done if it is not done yet.
+     *
+     * @throws TaskException
+     */
     public void markAsDone() throws TaskException {
         if (isDone) {
             throw new TaskException(taskType, "done status", TaskExceptionType.DONE);
@@ -43,7 +48,8 @@ public abstract class Task {
      * @return String that contains the details of a Task and is saved in a specified file.
      */
     public String getSavedString() {
-        return taskType.getSymbol() + " | " + (isDone ? "1" : "0") + " | " + description + " | " + (priority == null ? "": priority.toString());
+        return taskType.getSymbol() + " | " + (isDone ? "1" : "0") + " | " + description + " | "
+                + (priority == null ? "" : priority.toString());
     }
 
     public boolean isOccuringOn(Date date) {

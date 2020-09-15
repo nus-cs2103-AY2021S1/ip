@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Date;
 
 /**
  * ListCommand is a request to display all current tasks.

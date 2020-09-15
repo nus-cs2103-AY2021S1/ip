@@ -31,7 +31,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return super.toString() + " (by: " + Ui.formatDate(by) + ")" + (priority == null ? "" :
-                " (priority: " + priority.toString() + ")");
+        return super.toString() + " (by: " + Ui.formatDate(by) + ")" + (priority == null ? ""
+                : " (priority: " + priority.toString() + ")");
     }
 }

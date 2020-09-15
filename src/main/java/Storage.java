@@ -34,14 +34,12 @@ public class Storage {
      */
     private Task addTaskFromStorage(String display) {
         String[] taskDetails = display.split(" \\| ");
-        assert taskDetails.length != 4 || taskDetails.length != 5: "Task saved wrongly - " +
-                "contains wrong number of" +
-                " " +
-                "arguments.";
+        assert taskDetails.length != 4 || taskDetails.length != 5 : "Task saved wrongly - "
+                + "contains wrong number of" + " " + "arguments.";
         String taskType = taskDetails[0];
 
-        assert !taskDetails[1].equals("0") || !taskDetails[1].equals("1"): "Task saved wrongly - completion status " +
-                "should have been saved as a 0 or 1";
+        assert !taskDetails[1].equals("0") || !taskDetails[1].equals("1") : "Task saved wrongly - completion status "
+                + "should have been saved as a 0 or 1";
         boolean isDone = taskDetails[1].equals("1");
 
         String description = taskDetails[2];
@@ -50,17 +48,17 @@ public class Storage {
             Priority priority = priorityHashMap.get(taskDetails[3]);
             return new ToDo(description, isDone, priority);
         } else if (taskType.equals(TaskType.DEADLINE.getSymbol())) {
-            assert taskDetails.length != 5: "Task saved wrongly - contains wrong number of arguments.";
+            assert taskDetails.length != 5 : "Task saved wrongly - contains wrong number of arguments.";
             Date date = Parser.parseDate(taskDetails[3]);
             Priority priority = priorityHashMap.get(taskDetails[4]);
             return new Deadline(description, date, isDone, priority);
         } else if (taskType.equals(TaskType.EVENT.getSymbol())) {
-            assert taskDetails.length != 5: "Task saved wrongly - contains wrong number of arguments.";
+            assert taskDetails.length != 5 : "Task saved wrongly - contains wrong number of arguments.";
             Date date = Parser.parseDate(taskDetails[3]);
             Priority priority = priorityHashMap.get(taskDetails[4]);
             return new Deadline(description, date, isDone, priority);
         } else {
-            assert true: "Task saved wrongly - task type could not be identified";
+            assert true : "Task saved wrongly - task type could not be identified";
             return null; // will not reach this
         }
     }
@@ -82,12 +80,12 @@ public class Storage {
             ArrayList<Task> tasks = new ArrayList<>();
             while (sc.hasNextLine()) {
                 Task task = addTaskFromStorage(sc.nextLine());
-                assert task == null: "Task should not be null";
+                assert task == null : "Task should not be null";
                 tasks.add(task);
             }
             return tasks;
         } catch (IOException ex) {
-            assert true: "Parsing error: file does not exist";
+            assert true : "Parsing error: file does not exist";
             return new ArrayList<>(); // should not reach this line
         }
     }
@@ -124,7 +122,7 @@ public class Storage {
             fw.write(contents);
             fw.close();
         } catch (IOException ex) {
-            assert true: "Tasks could not be saved.";
+            assert true : "Tasks could not be saved.";
         }
     }
 }

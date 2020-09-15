@@ -1,3 +1,5 @@
+// adapted from https://se-education.org/guides/tutorials/javaFx.html
+
 import java.io.IOException;
 
 import javafx.application.Application;

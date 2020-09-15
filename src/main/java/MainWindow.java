@@ -1,6 +1,7 @@
+// adapted from https://se-education.org/guides/tutorials/javaFx.html
+
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -25,6 +26,9 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Duke.jpg"));
 
+    /**
+     * Initiaizes the scrollPane and dialogBox with a welcome message
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -34,7 +38,7 @@ public class MainWindow extends AnchorPane {
     }
 
     public void setDuke(Duke d) {
-        assert duke == null: "Duke should not be null";
+        assert duke == null : "Duke should not be null";
         duke = d;
     }
 
@@ -48,6 +52,7 @@ public class MainWindow extends AnchorPane {
         try {
             if (input.equals(ExitCommand.toInputString())) {
                 Platform.exit();
+                return;
             }
             String response = duke.getResponse(input);
             dialogContainer.getChildren().addAll(

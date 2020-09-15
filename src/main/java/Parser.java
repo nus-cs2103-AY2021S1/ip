@@ -14,6 +14,8 @@ public class Parser {
      * @param str String to parse.
      * @return Date if successfully parsed, null if wrong date format.
      */
+    // adapted from https://stackoverflow.com/questions/4024544/
+    // how-to-parse-dates-in-multiple-formats-using-simpledateformat
     public static Date parseDate(String str) {
         List<String> formatStrings = Arrays.asList("yyyy-M-dd", "dd/M/yyyy HHmm", "dd/M/yyyy", "MMM d yyyy");
 
@@ -80,8 +82,8 @@ public class Parser {
             throw new TaskException(taskType, "time", TaskExceptionType.EMPTY);
         }
         int startIdxofDate = startIdxofDateIndicator + dateIndicator.length();
-        int endIdxofDate = userInput.substring(startIdxofDate).indexOf(" /") == -1 ?
-                userInput.length() : startIdxofDate + userInput.substring(startIdxofDate).indexOf(" /");
+        int endIdxofDate = userInput.substring(startIdxofDate).indexOf(" /") == -1
+                ? userInput.length() : startIdxofDate + userInput.substring(startIdxofDate).indexOf(" /");
         if (endIdxofDate <= startIdxofDate || userInput.substring(startIdxofDate, endIdxofDate).isBlank()) {
             throw new TaskException(taskType, "time", TaskExceptionType.EMPTY);
         }
@@ -122,7 +124,7 @@ public class Parser {
             Priority priority = parseTaskPriority(userInput, TaskType.EVENT);
             return new AddCommand(TaskType.EVENT, description, date, priority);
         } else {
-            assert true: "Task type could not be identified.";
+            assert true : "Task type could not be identified.";
             return null; // won't hit
         }
 
@@ -160,10 +162,10 @@ public class Parser {
             }
             String keyWord = userInput.substring(ListKeywordCommand.toInputString().length());
             return new ListKeywordCommand(keyWord);
-            // TODO list priority command
         } else if (userInput.equals(ExitCommand.toInputString())) {
             return new ExitCommand();
-        } else if (userInput.startsWith(TaskType.TODO.toString()) || userInput.startsWith(TaskType.DEADLINE.toString()) || userInput.startsWith(TaskType.EVENT.toString())){
+        } else if (userInput.startsWith(TaskType.TODO.toString()) || userInput.startsWith(TaskType.DEADLINE.toString())
+                || userInput.startsWith(TaskType.EVENT.toString())) {
             return parseAddTask(userInput);
         } else {
             throw new DukeException("I don't know what that means");

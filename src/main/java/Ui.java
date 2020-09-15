@@ -11,8 +11,8 @@ public class Ui {
     private static final String LINE = "____________________________________________________________";
     private static final ArrayList<String> WELCOME_MSG = new ArrayList<>(Arrays.asList("Hello! I'm Duke", "What can I"
             + " do for you?"));
-    private static final ArrayList<String> GOODBYE_MSG = new ArrayList<>(Arrays.asList("Bye. Hope to see you again " +
-            "soon!"));
+    private static final ArrayList<String> GOODBYE_MSG = new ArrayList<>(Arrays.asList(
+            "Bye. Hope to see you again soon!"));
     private static final String DONE_MSG = "Nice! I've marked this task as done:";
     private static final String DELETED_MSG = "Noted. I've removed this task:";
     private static final String ADD_MSG = "Got it. I've added this task:";
@@ -86,7 +86,7 @@ public class Ui {
      * @return String with count of tasks.
      */
     public static String getListCount(TaskList tasks) {
-        assert tasks == null: "TaskList should not be null";
+        assert tasks == null : "TaskList should not be null";
         return "Now you have " + tasks.getCount() + " task" + (tasks.getCount() == 1 ? "" : "s") + " in the list.";
     }
 
@@ -99,7 +99,7 @@ public class Ui {
      * @return ArrayList containing details of tasks that fulfil the criteria.
      */
     public static ArrayList<String> getTaskList(TaskList tasks, Date date, String keyWord) {
-        assert tasks == null: "TaskList should not be null";
+        assert tasks == null : "TaskList should not be null";
         ArrayList<String> lst = new ArrayList<>();
         int idx = 1;
         for (Task task : tasks.getTasks()) {
@@ -119,7 +119,7 @@ public class Ui {
      * @return ArrayList feedback message that task is marked as done.
      */
     public static ArrayList<String> getDoneTask(Task task) {
-        assert task == null: "Task should not be null";
+        assert task == null : "Task should not be null";
         ArrayList<String> lst = new ArrayList<>();
         lst.add(DONE_MSG);
         lst.add(INDENT + task.toString());
@@ -134,8 +134,8 @@ public class Ui {
      * @return ArrayList
      */
     public static ArrayList<String> getDeletedTask(Task task, TaskList taskList) {
-        assert task == null: "Task should not be null";
-        assert taskList == null: "TaskList should not be null";
+        assert task == null : "Task should not be null";
+        assert taskList == null : "TaskList should not be null";
         ArrayList<String> lst = new ArrayList<>();
         lst.add(DELETED_MSG);
         lst.add(INDENT + task.toString());
@@ -151,8 +151,8 @@ public class Ui {
      * @return ArrayList feedback message that task is added to taskList.
      */
     public static ArrayList<String> getAddTask(Task task, TaskList taskList) {
-        assert task == null: "Task should not be null";
-        assert taskList == null: "TaskList should not be null";
+        assert task == null : "Task should not be null";
+        assert taskList == null : "TaskList should not be null";
         ArrayList<String> lst = new ArrayList<>();
         lst.add(ADD_MSG);
         lst.add(INDENT + task.toString());

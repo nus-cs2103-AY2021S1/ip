@@ -31,8 +31,8 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return super.toString() + " (at: " + Ui.formatDate(at) + ")" + (priority == null ? "" :
-                " (priority: " + priority.toString() + ")");
+        return super.toString() + " (at: " + Ui.formatDate(at) + ")" + (priority == null ? ""
+                : " (priority: " + priority.toString() + ")");
     }
 
 }

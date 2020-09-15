@@ -48,7 +48,7 @@ public class AddCommand extends Command {
     @Override
     public ArrayList<String> execute(TaskList tasks, Storage storage) {
         Task task = createNewTask();
-        assert task == null: "Task should not be null";
+        assert task == null : "Task should not be null";
         tasks.addTask(task);
         storage.saveList(tasks);
         return Ui.getAddTask(task, tasks);
