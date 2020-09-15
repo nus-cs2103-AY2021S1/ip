@@ -55,7 +55,7 @@ public class Task {
     public String toString() {
         assert taskName != null;
 
-        String mark = isDone ? "✓" : "✗";
+        String mark = isDone ? "\u2713" : "\u2717"; // u2713: unicode for tick, u2717: unicode for cross
         return "[" + mark + "] " + taskName;
     }
 }
