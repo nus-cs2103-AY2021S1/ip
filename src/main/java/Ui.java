@@ -29,9 +29,11 @@ public class Ui {
                 + "\t\t 2. deadline <task> /by <YYYY-MM-DD>\n"
                 + "\t\t 3. event <task> /at <YYYY-MM-DD>\n"
                 + "\t\t 4. done <number of the task>\n"
-                + "\t\t 5. delete <number of the task>\n"
-                + "\t\t 6. find <keyword>\n"
-                + "\t\t 7. list\n"
+                + "\t\t 5. prioritize <number of the task>\n"
+                + "\t\t 6. delete <number of the task>\n"
+                + "\t\t 7. find <keyword>\n"
+                + "\t\t 8. list\n"
+                + "\t\t 9. bye\n"
                 + "\t" + line);
         return (str);
     }
@@ -110,6 +112,7 @@ public class Ui {
     public String errorWithLoading() {
         return ("☹ OOPS!!! Your file cannot be loaded :-(");
     }
+<<<<<<< HEAD
 
     public String printFindTask(TaskList task) {
         String str;
@@ -133,4 +136,13 @@ public class Ui {
     public String printInvalidKeyword() {
         return ("☹ OOPS!!! Please tell me a keyword!");
     }
+||||||| 1cb78ba
+=======
+
+    public String printPrioritizeTask(TaskList list, int num) {
+        return ("\t" + line + "\n\tNoted. I've prioritized this task:\n\t  "
+                + list.getList().get(num - 1)
+                + "\n\t" + line);
+    }
+>>>>>>> 9add1ed834983e187ad56fdfc20287695369ee95
 }

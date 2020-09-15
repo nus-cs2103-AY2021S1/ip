@@ -19,6 +19,8 @@ public class Parser {
             return new EventCommand(str);
         } else if (s.equals("find")) {
             return new FindKeywordCommand(str);
+        }else if (s.equals("prioritize")) {
+            return new PrioritizeCommand(str);
         } else {
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
