@@ -1,5 +1,4 @@
 T | 0 | deadline
-T | 0 | dinner
-T | 1 | lunch
+T | 1 | dinner
 E | 0 | something | 05-08-2020 12:00PM
 E | 0 | another thing | 06-08-2020 6:00PM
