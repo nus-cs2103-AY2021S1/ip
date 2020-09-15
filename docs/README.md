@@ -118,6 +118,7 @@ Exits the program.
 Format: `bye`
 
 ## Command summary
+
 Index | Action | Format, examples |
 | ------------ | ------------ | ------------- |
 1 | Add a Todo task | `todo TASK_NAME`, e.g.,`todo do readings` |
