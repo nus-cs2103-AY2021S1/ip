@@ -1,5 +1,7 @@
 import processor.UI;
 
+//@@author Jaylenlee-reused-->
+//Solution below adapted from https://se-education.org/guides/tutorials/javaFxPart4.html
 public class Duke {
 
     private boolean isWorking;
@@ -37,3 +39,4 @@ public class Duke {
         return reply;
     }
 }
+//@@author

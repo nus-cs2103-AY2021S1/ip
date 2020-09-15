@@ -7,6 +7,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import processor.UI;
 
+//@@author Jaylenlee-reused-->
+//Solution below adapted from https://se-education.org/guides/tutorials/javaFxPart4.html
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -71,3 +73,4 @@ public class MainWindow extends AnchorPane {
         );
     }
 }
+//@@author

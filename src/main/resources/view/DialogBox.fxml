@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
+<?import javafx.scene.control.Label?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.ImageView?>
+<!--@@author Jaylenlee-reused-->
+<!--Solution below adapted from https://se-education.org/guides/tutorials/javaFxPart4.html-->
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
@@ -17,3 +21,4 @@
         <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
     </padding>
 </fx:root>
+        <!--@@author-->
