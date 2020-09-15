@@ -2,10 +2,12 @@
  * Represents a parser that deals with making sense of the user command.
  */
 public class Parser {
+
     /**
      * How the parser will respond to users' command.
-     * @param command Full command by the user.
-     * @param ui Ui used in responding.
+     *
+     * @param command  Full command by the user.
+     * @param ui       Ui used in responding.
      * @param taskList Task list referred to in the interaction.
      * @param filePath The relative path to assigned file for reading
      *                 and writing of data.
@@ -13,7 +15,7 @@ public class Parser {
      */
     public static String respond(String command, Ui ui, TaskList taskList, String filePath) {
         String[] pieces = command.split(" ", 3);
-        assert(pieces[0] != null) : "Incorrect splitting.";
+        assert (pieces[0] != null) : "Incorrect splitting.";
         if (command.equals("bye")) { // terminating command
             return ui.bye();
         } else if (command.equals("Hi")) {
@@ -71,44 +73,19 @@ public class Parser {
                 cur.setTag(tag);
                 Storage.updateTasks(taskList.getNoOfTasks(), taskList.list, filePath);
                 return ui.setTagSuccessful(cur);
-
-
-
+            }
         } else {
-            if (pieces.length == 1) {
-                String s = Parser.incompleteCommand(ui, pieces[0]);
-                return s;
-            } else {
-                return successfulCommand(ui, taskList, pieces[0], pieces[1], filePath);
+                if (pieces.length == 1) {
+                    String s = Parser.incompleteCommand(ui, pieces[0]);
+                    return s;
+                } else {
+                    return successfulCommand(ui, taskList, pieces[0], pieces[1], filePath);
+                }
             }
         }
-    }
 
-    public static String incompleteCommand(Ui ui, String comma nd){
-        String stringToReturn = "";
-        switch (command) {
-            case "todo":
-                stringToReturn = ui.missingDescription("todo");
-                break;
-
-            case "deadline":
-                stringToReturn = ui.missingDescription("deadline");
-                break;
-
-            case "event":
-                stringToReturn = ui.missingDescription("event");
-                break;
-
-            default:
-                stringToReturn = ui.unknownCommand();
-                break;
-        }
-        assert (stringToReturn != "") : "Switch statement error.";
-        return stringToReturn;
-    }
-
-    public static String successfulCommand(Ui ui, TaskList taskList,String firstCommandWord,
-                                           String secondCommandWord,String filePath) {
+    private static String successfulCommand (Ui ui, TaskList taskList, String firstCommandWord,
+                                            String secondCommandWord, String filePath){
         Task t = new Task("");
         String[] array;
         switch (firstCommandWord) {
@@ -144,6 +121,29 @@ public class Parser {
         } else {
             return "";
         }
+    }
+
+    private static String incompleteCommand(Ui ui, String command) {
+        String stringToReturn;
+        switch (command) {
+            case "todo":
+                stringToReturn = ui.missingDescription("todo");
+                break;
+
+            case "deadline":
+                stringToReturn = ui.missingDescription("deadline");
+                break;
+
+            case "event":
+                stringToReturn = ui.missingDescription("event");
+                break;
+
+            default:
+                stringToReturn = ui.unknownCommand();
+                break;
+        }
+        assert (stringToReturn != "") : "Switch statement error.";
+        return stringToReturn;
     }
 }
 
