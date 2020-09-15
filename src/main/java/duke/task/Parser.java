@@ -37,6 +37,10 @@ public class Parser {
             return result;
         }
 
+        if (command.equals("help")) {
+            return ui.showHelp();
+        }
+
         try {
             //string array cmd contains keyword command in [0] and rest of the information in [1]
             String[] cmd = command.split(" ", 2);
