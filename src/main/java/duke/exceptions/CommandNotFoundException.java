@@ -2,6 +2,9 @@ package duke.exceptions;
 
 public class CommandNotFoundException extends DukeException {
 
+    /**
+     * Creates a CommandNotFoundException exception with te default error message.
+     */
     public CommandNotFoundException() {
         this("OOPS!!! I'm sorry, but I don't know what that means... (´∀`)\n"
                 + "So far I support the following tasks, eg: \n\n"

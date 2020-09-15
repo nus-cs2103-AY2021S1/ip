@@ -13,10 +13,10 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
@@ -27,13 +27,14 @@ import javafx.scene.text.Font;
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
+    private static final Color DUKE_COLOR = Color.web("rgb(174, 198, 207)");
+    private static final Color LABEL_COLOR = Color.web("rgb(245, 245, 245)");
+    private static final Color USER_COLOR = Color.web("rgb(239, 232, 214)");
+
     @FXML
     private Label dialog;
     @FXML
     private ImageView displayPicture;
-    private final static Color LABEL_COLOR = Color.web("rgb(245, 245, 245)");
-    private final static Color USER_COLOR = Color.web("rgb(239, 232, 214)");
-    private final static Color DUKE_COLOR = Color.web("rgb(174, 198, 207)");;
 
 
     private DialogBox(String text, Image img) {

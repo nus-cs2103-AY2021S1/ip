@@ -12,6 +12,11 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Initialises Duke.
+     *
+     * @param filePath the filepath of data.txt.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);

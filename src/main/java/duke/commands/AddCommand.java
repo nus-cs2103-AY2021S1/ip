@@ -1,24 +1,27 @@
 package duke.commands;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 
-import duke.exceptions.EmptyTaskException;
-import duke.exceptions.EmptyTimeException;
-import duke.exceptions.WrongDateFormatException;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
-import duke.tasks.Todo;
 import duke.tasks.PeriodTask;
+import duke.tasks.Todo;
 import duke.ui.Ui;
 
 public class AddCommand extends Command {
     protected String type;
     protected String description;
-    protected LocalDate date[];
+    protected LocalDate[] date;
 
+    /**
+     * Constructs an AddCommand object.
+     *
+     * @param type The type of the task: todo, deadline, event, period-task.
+     * @param description Title of the task.
+     * @param date An LocalDate array contains related dates.
+     */
     public AddCommand(String type, String description, LocalDate[] date) {
         this.type = type;
         this.description = description;
@@ -58,9 +61,29 @@ public class AddCommand extends Command {
             output = ui.displayAddTaskMessage(periodTask);
             break;
         default:
-        throw new AssertionError(type);
+            throw new AssertionError(type);
         }
         return output;
+    }
+
+    private boolean areTwoLocalDateArrayEqual(LocalDate[] arr1, Object obj) {
+        if (!(obj instanceof LocalDate[])) {
+            return false;
+        }
+
+        LocalDate[] arr2 = (LocalDate[]) obj;
+
+        if (arr1.length != arr2.length) {
+            return false;
+        }
+
+        for (int i = 0; i < arr1.length; i++) {
+            if (!arr1[i].isEqual(arr2[i])) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     @Override
@@ -68,7 +91,7 @@ public class AddCommand extends Command {
         if (obj instanceof AddCommand) {
             AddCommand command = (AddCommand) obj;
             return (type.equals(command.type)) && (description.equals(command.description))
-                    && (date == date || date.equals(command.date));
+                    && (areTwoLocalDateArrayEqual(date, command.date));
         } else {
             return false;
         }

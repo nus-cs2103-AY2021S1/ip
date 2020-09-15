@@ -1,11 +1,14 @@
 package duke.parser;
 
-import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
-import duke.commands.*;
-import duke.exceptions.*;
-import duke.tasks.Todo;
+import duke.commands.Command;
+import duke.commands.ExitCommand;
+import duke.exceptions.CommandNotFoundException;
+import duke.exceptions.EmptyTaskException;
+import duke.exceptions.EmptyTimeException;
+import duke.exceptions.IncompleteMessageException;
+import duke.exceptions.WrongDateFormatException;
 
 public class Parser {
     public Parser() {
@@ -17,7 +20,7 @@ public class Parser {
     }
 
     protected static int getArrayIndex(String[] parseArray) throws EmptyTaskException {
-        try{
+        try {
             String index = parseArray[1];
             return Integer.parseInt(index) - 1;
         } catch (DateTimeParseException ex) {
@@ -49,7 +52,7 @@ public class Parser {
         case "done":
             return new DoneParser().parseDoneCommand(parseArray);
         case "find":
-            return new FineParser().parseFindCommand(parseArray);
+            return new FindParser().parseFindCommand(parseArray);
         case "delete":
             return new DeleteParser().parseDeleteCommand(parseArray);
         case "todo":

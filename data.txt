@@ -1,5 +1,4 @@
 T | 1 | watch Inception
 D | 1 | finish hw | 2020-08-27
 D | 1 | test | 2020-09-11
-D | 0 | rrr | 2020-09-02
-D | 0 | ttt | 2020-09-09 | 2020-09-19
+T | 0 | movie with JH | 2020-09-23
