@@ -1,0 +1,6 @@
+T | 1 | eat | 2020-09-14
+T | 0 | sleep
+T | 1 | repeat | 2020-09-14
+T | 0 | eat
+T | 0 | sleep
+T | 0 | repeat
