@@ -20,10 +20,11 @@ public class ExitCommand extends Command {
      * @throws IOException If file don't exist.
      * @throws DukeException If input is not recognised.
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException, DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws IOException, DukeException {
         isExit = true;
-        ui.printExitMessage();
-        super.execute(taskList, ui, storage);
+        String outputString = ui.printExitMessage();
+        outputString += super.execute(taskList, ui, storage);
+        return outputString;
     }
 
     @Override

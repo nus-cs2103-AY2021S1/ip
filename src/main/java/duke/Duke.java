@@ -1,25 +1,28 @@
 package duke;
 
 import duke.commands.Command;
-import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.util.DukeException;
 import duke.util.Parser;
 import duke.util.Storage;
 import duke.util.Ui;
 
-import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
+
+import javafx.application.Application;
+import javafx.scene.Scene;
+
+import javafx.stage.Stage;
+import javafx.scene.control.Label;
 
 /**
  * Duke program is a Task Management App. It takes in user command for task manipulations
  * and shows a list of Tasks that is ongoing.
  */
-public class Duke {
+public class Duke extends Application {
     private String filePath;
     private Storage storage;
-    private Ui ui;
+    public Ui ui;
     private TaskList taskList;
 
     /**
@@ -36,6 +39,15 @@ public class Duke {
             ui.showLoadingError();
             taskList = new TaskList();
         }
+    }
+
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
     }
 
     /**
@@ -59,19 +71,24 @@ public class Duke {
         }
     }
 
-    /** Initialise empty duke.txt if not found, else initialise the taskList based on existing duke.txt **/
-    public static void initFile(String filePath) throws IOException {
-        FileWriter fileWriter = new FileWriter(filePath);
+    /**
+     * Returns a response to the user's input.
+     *
+     * @param input User input.
+     * @return String response from program.
+     */
+    public String getResponse(String input) {
 
-    }
-    /** Updates the file in hard disk based on the new taskList. **/
-    public static void updateFile(String filePath, ArrayList<Task> taskList) throws IOException {
-        FileWriter fileWriter = new FileWriter(filePath);
-        for (int index = 0; index < taskList.size(); index++) {
-            Task task = taskList.get(index);
-            fileWriter.write(task.fileString() + "\n");
+        String output = "";
+
+        try {
+            Command c = Parser.parse(input);
+            output += c.execute(taskList, ui, storage);
+        } catch (DukeException | IOException e) {
+            output += ui.showError(e.getMessage());
         }
-        fileWriter.close();
+
+        return output;
     }
 
     /**

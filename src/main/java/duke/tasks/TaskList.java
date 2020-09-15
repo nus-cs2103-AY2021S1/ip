@@ -70,12 +70,14 @@ public class TaskList {
     /**
      * Print the outputs of the Tasks in the TaskList.
      */
-    public void print() {
-        System.out.println("Here are the tasks in your list:");
+    public String print() {
+        String string;
+        string = "Here are the tasks in your list:\n";
         for (int i = 0; i < taskList.size(); i++) {
             String stringCount = String.valueOf(i + 1);
-            System.out.println(stringCount + ". " + taskList.get(i));
+            string += stringCount + ". " + taskList.get(i) + "\n";
         }
+        return string;
     }
 
     /**

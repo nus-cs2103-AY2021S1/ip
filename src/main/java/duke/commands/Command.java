@@ -25,8 +25,9 @@ public abstract class Command {
      * @throws IOException If file don't exist.
      * @throws DukeException If input is not recognised.
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException, DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws IOException, DukeException {
         storage.updateFile(taskList);
+        return "";
     }
 
     /**

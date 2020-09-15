@@ -30,9 +30,10 @@ public class DeleteCommand extends Command {
      * @throws IOException If file don't exist.
      * @throws DukeException If input is not recognised.
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException, DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws IOException, DukeException {
         Task deletedTask = taskList.remove(index);
-        ui.printDeleteMessage(deletedTask, taskList);
-        super.execute(taskList, ui, storage);
+        String outputString = ui.printDeleteMessage(deletedTask, taskList);
+        outputString += super.execute(taskList, ui, storage);
+        return outputString;
     }
 }
