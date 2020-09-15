@@ -26,6 +26,7 @@
     
 4. **Command Summary**
 
+----------------------------------------------------
     
 ### 1. Introduction
  
@@ -39,7 +40,8 @@ Graphical User Interface (GUI)
 3. Double click the file to start the app.
 4. Type the command in the input box and press Enter to execute it
 
-### 3. Features 
+### 3. Features
+ 
 #### Adding a todo: `todo`
 Adds a todo to the task list
 
@@ -49,6 +51,9 @@ Examples:
 * `todo buy bread`
 * `todo eat`
 
+
+
+
 #### Adding a deadline: `deadline`
 Adds a deadline to the task list
 
@@ -57,6 +62,9 @@ Format: `deadline DESCRIPTION /by YYYY-MM-DD`
 Examples:
 * `deadline do tutorial /by 2020-09-15`
 * `deadline watch lecture /by 2020-09-18`
+
+
+
 
 #### Adding an event: `event`
 Adds an event to the task list
@@ -68,10 +76,14 @@ Examples
 * `event watch movie /at 2020-09-22`
 
 
+
+
 #### Listing all tasks: `list`
 Displays all tasks in the list
 
 Format: `list`
+
+
 
 
 #### Marking a task as done: `done`
@@ -87,6 +99,8 @@ Examples:
 * `done 13`
 
 
+
+
 #### Deleting a task: `delete`
 Deletes a task from the list
 
@@ -98,6 +112,8 @@ Format `delete INDEX`
 Examples:
 * `delete 4`
 * `delete 10`
+
+
 
 
 #### Finding a task: `find`
@@ -112,6 +128,8 @@ Examples:
 * `find ea`
 
 
+
+
 #### Undo a command: `undo`
 Reverses the latest command that changes the task list
 
@@ -123,6 +141,8 @@ Format `undo`
     3. `event`
     4. `done`
     5. `delete`
+
+
 
 #### Exiting the program: `bye`
 Exits the program
