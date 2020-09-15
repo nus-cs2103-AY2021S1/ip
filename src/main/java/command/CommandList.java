@@ -15,12 +15,11 @@ public class CommandList implements Command{
 	@Override
 	public String execute(TaskList taskList, Ui ui, Storage storage) {
 		Task task;
-		String string = "Here are the tasks in your list:";
-		StringBuilder stringBuilder = new StringBuilder().append(string).append("\n");
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append("Here are the tasks in your list:").append("\n");
 		for (int i = 1; i <= taskList.size(); i++) {
 			task = taskList.get(i - 1);
-			string = i + "." + task.getTypeString() + task.getDoneString() + task.getString();
-			stringBuilder.append(string).append("\n");
+			stringBuilder.append(i).append(". ").append(task.toFullOutputString()).append("\n");
 		}
 		stringBuilder.deleteCharAt(stringBuilder.length()-1);
 		return stringBuilder.toString();

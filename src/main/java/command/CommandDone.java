@@ -60,8 +60,7 @@ public class CommandDone implements Command {
 		temp = "Nice! I've marked this task as done:";
 		outputStringBuilder.append(temp).append("\n");
 
-		temp = " " + newTask.getTypeString() + newTask.getDoneString() + newTask.toString();
-		outputStringBuilder.append(temp);
+		outputStringBuilder.append(" ").append(newTask.toFullOutputString());
 
 
 		return outputStringBuilder.toString();

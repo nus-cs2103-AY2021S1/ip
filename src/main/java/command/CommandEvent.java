@@ -25,35 +25,39 @@ public class CommandEvent implements Command {
 		String input = fullCommand.substring(5);
 		StringBuilder outputStringBuilder = new StringBuilder();
 		String temp;
-		if(input.isEmpty()){
-			temp = "☹ OOPS!!! The description of a event cannot be empty.";
-			outputStringBuilder.append(temp);
+		try {
+			String[] inputAndTag = Task.getTagFromString(input);
+			input = inputAndTag[0];
+			String tag = inputAndTag[1];
+
+			if (input.isEmpty()) {
+				outputStringBuilder.append("☹ OOPS!!! The description of a event cannot be empty.");
+				return outputStringBuilder.toString();
+			}
+
+			int index = input.indexOf("/at ");
+			if (index == -1) {
+				outputStringBuilder.append("☹ OOPS!!! The description of an event must have a indicated deadline.");
+				return outputStringBuilder.toString();
+			}
+
+			StringBuilder taskStringBuilder = new StringBuilder();
+			taskStringBuilder.append(input.substring(0, index)).append("(at:").append(input.substring(index + 3)).append(") ");
+			input = taskStringBuilder.toString();
+			Task task = new Task(TaskType.EVENT, false, input, tag);
+			taskList.add(task);
+
+			outputStringBuilder.append("Got it. I've added this task:").append("\n");
+
+			outputStringBuilder.append(" ").append(task.toFullOutputString()).append("\n");
+
+			temp = "Now you have " + taskList.size() + " tasks in the list.";
+			outputStringBuilder.append("Now you have ").append(taskList.size()).append(" tasks in the list.");
+
 			return outputStringBuilder.toString();
+		} catch (duke.exception.DukeException e) {
+			return outputStringBuilder.append(e.getMessage()).toString();
 		}
-
-		int index = input.indexOf("/at");
-		if (index == -1) {
-			temp ="☹ OOPS!!! The description of an event must have a indicated deadline.";
-			outputStringBuilder.append(temp);
-			return outputStringBuilder.toString();
-		}
-
-		StringBuilder taskStringBuilder = new StringBuilder();
-		taskStringBuilder.append(input.substring(0, index)).append("(at:").append(input.substring(index + 3)).append(")");
-		input = taskStringBuilder.toString();
-		Task task = new Task(TaskType.DEADLINE, false, input);
-		taskList.add(task);
-
-		temp = "Got it. I've added this task:";
-		outputStringBuilder.append(temp).append("\n");
-
-		temp = " " + task.getTypeString() + task.getDoneString() + input;
-		outputStringBuilder.append(temp).append("\n");
-
-		temp = "Now you have " + taskList.size() + " tasks in the list.";
-		outputStringBuilder.append(temp);
-
-		return outputStringBuilder.toString();
 	}
 
 	@Override

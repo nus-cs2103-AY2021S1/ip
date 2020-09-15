@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.task.TaskList;
+import duke.task.Task;
 import duke.ui.Ui;
 import duke.storage.Storage;
 
@@ -25,9 +26,9 @@ public class CommandFind implements Command {
 		String temp = "Here are the matching tasks in your list:";
 		outputStringBuilder.append(temp).append("\n");
 		for (int taskListIndex = 1; taskListIndex <= taskList.size(); taskListIndex++) {
-			duke.task.Task task = taskList.get(taskListIndex -1);
-			if (task.getFullString().contains(phrase)) {
-				temp = taskListIndex + "." + task.getFullString();
+			Task task = taskList.get(taskListIndex -1);
+			if (task.toFullOutputString().contains(phrase)) {
+				temp = taskListIndex + "." + task.toFullOutputString();
 				outputStringBuilder.append(temp).append("\n");
 			}
 		}

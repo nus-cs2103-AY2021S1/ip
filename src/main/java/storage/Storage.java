@@ -1,7 +1,7 @@
 package duke.storage;
 
-import duke.task.Task;
 import duke.exception.DukeException;
+import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.TaskType;
 
@@ -11,6 +11,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.time.format.FormatStyle;
 import java.util.ArrayList;
 import java.util.Optional;
@@ -32,8 +33,8 @@ public class Storage {
 		assert file.exists() : "File does not exist.";
 		ArrayList<Task> list = new ArrayList<>();
 		try {
-			Scanner sc = new Scanner(file);
-			String task, taskString;
+			Scanner sc = new Scanner(file); //causing exception
+			String task, taskString, tag;
 			TaskType taskType;
 			boolean isDone;
 			LocalDateTime dateTime;
@@ -56,20 +57,31 @@ public class Storage {
 					case '\u2713' :
 						isDone = true;
 						break;
-					case '\u2718' :
+					case '\u2717' :
 						isDone = false;
 						break;
 					default :
 						throw new DukeException("Oh no! isDone in file is wrong. File is corrupted!");
 				}
+				String[] stringAndTag = getTag(task);
+				taskString = stringAndTag[0];
+				tag = stringAndTag[1];
+				int hashIndex = task.lastIndexOf("#");
+				taskString = task.substring(6,hashIndex);
 
-				taskString = task.substring(6);
 				if (taskType == TaskType.DEADLINE) {
-					int index = task.indexOf("(by:");
-					dateTime = LocalDateTime.parse(task.substring(index + 4, task.length()-1), DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.SHORT));
-					list.add(new Task(taskType, isDone, taskString, Optional.of(dateTime)));
+					int index = task.indexOf("(by: ");
+					if (index == -1) {
+						throw new DukeException("Oh no! Deadline task does not have a deadline. File is corrupted!");
+					}
+					try {
+						dateTime = LocalDateTime.parse(task.substring(index + 5, hashIndex - 2), DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.SHORT));
+					} catch (DateTimeParseException e ) {
+						throw new DukeException("Oh no! File contains incorrect date format. File is corrupted!");
+					}
+					list.add(new Task(taskType, isDone, taskString, Optional.of(dateTime), tag));
 				} else {
-					list.add(new Task(taskType, isDone, taskString));
+					list.add(new Task(taskType, isDone, taskString, tag));
 				}
 			}
 
@@ -92,13 +104,35 @@ public class Storage {
 
 			for (int listIndex = 0; listIndex < taskList.size(); listIndex++) {
 				task = taskList.get(listIndex);
-				fileWriter.write(task.getTypeString() + task.getDoneString() + task.getString() + System.lineSeparator());
+				fileWriter.write(task.toFullFileString() + System.lineSeparator());
 			}
 			fileWriter.close();
 
-			return "Tasks have been saved! ";
+			return "Tasks have been saved!";
 		} catch (IOException e) {
 			return e.getMessage();
 		}
+	}
+
+	public String clear() {
+		save(new TaskList());
+		return "Task file has been cleared!";
+	}
+
+	public String[] getTag(String task) throws DukeException {
+		int hashIndex = task.lastIndexOf("#");
+		if(hashIndex == -1) {
+			throw new DukeException("No # found. File is corrupted.");
+		}
+		if (hashIndex == task.length()) {
+			throw new DukeException("No description for tag found. File is corrupted.");
+		}
+		String[] output = new String[2];
+		output[0] = task.substring(0,hashIndex);
+		output[1] = task.substring(hashIndex + 1);
+		if (Task.isEmptyTag(output[1])) {
+			output[1] = "";
+		}
+		return output;
 	}
 }

@@ -5,6 +5,7 @@ import duke.task.Task;
 import duke.ui.Ui;
 import duke.storage.Storage;
 import duke.task.TaskType;
+import duke.exception.DukeException;
 
 /**
  * Todo Command
@@ -24,26 +25,32 @@ public class CommandTodo implements Command{
 		StringBuilder outputStringBuilder = new StringBuilder();
 		assert fullCommand.length() <= 5 : "todo: string is too short.";
 		String input = fullCommand.substring(4);
-		String temp;
-		if (input.isEmpty()) {
-			temp = "\uD83D\uDE00 OOPS!!! The description of a todo cannot be empty.";
-			outputStringBuilder.append(temp);
+
+		try {
+			String[] inputAndTag = Task.getTagFromString(input);
+			input = inputAndTag[0];
+			String tag = inputAndTag[1];
+
+			if (input.isEmpty()) {
+				outputStringBuilder.append("\uD83D\uDE00 OOPS!!! The description of a todo cannot be empty.");
+				return outputStringBuilder.toString();
+			}
+
+			Task task = new Task(TaskType.TODO, false, input, tag);
+			taskList.add(task);
+
+
+			outputStringBuilder.append("Got it. I've added this task:").append("\n");
+
+			outputStringBuilder.append(" ").append(task.toFullOutputString()).append("\n");
+
+			outputStringBuilder.append("Now you have ").append(taskList.size()).append(" tasks in the list.");
+
 			return outputStringBuilder.toString();
+		} catch (DukeException e) {
+			return outputStringBuilder.append(e.getMessage()).toString();
 		}
 
-		Task task = new Task(TaskType.TODO, false, input);
-		taskList.add(task);
-
-		temp = "Got it. I've added this task:";
-		outputStringBuilder.append(temp).append("\n");
-
-		temp = " " + task.getTypeString() + task.getDoneString() + input;
-		outputStringBuilder.append(temp).append("\n");
-
-		temp ="Now you have " + taskList.size() + " tasks in the list.";
-		outputStringBuilder.append(temp);
-
-		return outputStringBuilder.toString();
 	}
 
 	@Override
