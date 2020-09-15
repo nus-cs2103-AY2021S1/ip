@@ -5,7 +5,7 @@ package emily.task;
  * Contains a string of description detail.
  */
 public class Task {
-    protected final String description;
+    protected String description;
     protected char type;
     protected boolean hasFinished;
 
@@ -24,6 +24,10 @@ public class Task {
 
     public String getDescription() {
         return this.description;
+    }
+
+    public void modifyDescription(String d){
+        this.description = d;
     }
 
     //return a String of a tick or cross indicating completion of task

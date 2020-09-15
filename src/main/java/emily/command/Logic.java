@@ -25,7 +25,7 @@ public class Logic {
      * Valid commands
      */
     enum Command {
-        LIST, DELETE, TASK, DONE, FIND, VIEW
+        LIST, DELETE, TASK, DONE, FIND, VIEW, EDIT
     }
 
     /**
@@ -65,7 +65,7 @@ public class Logic {
             break;
         case VIEW: //find all task with given date in format yyyy-mm-dd
             String date = input.substring(5);
-            ArrayList<Task> lsSameDate  = ls.findSameDate(date);
+            ArrayList<Task> lsSameDate = ls.findSameDate(date);
 
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
             String formattedDate = LocalDate.parse(date).format(formatter);
@@ -102,6 +102,15 @@ public class Logic {
             outputLines.add("I have deleted this task for you: " + current);
             outputLines.add("You have " + ls.getTaskArrayList().size() + " tasks in your list now");
             break;
+        case EDIT:
+            index = Character.getNumericValue(input.charAt(5)) - 1;
+            current = ls.getTaskArrayList().get(index);
+            String newDescription = input.substring(7);
+            current.modifyDescription(newDescription);
+
+            outputLines.add("I have edited the description for you: " + current);
+
+            break;
         default: //failure of the checkValidInput to check commands
             assert false : "checksValidInput has failed";
             throw new DukeException("Command is not recognised");
@@ -127,7 +136,7 @@ public class Logic {
         } else if (input.equals("list")) {
             c = Command.LIST;
         } else if (input.contains("view")) { //users will key in specific date
-            if (shortened.equals("view")){
+            if (shortened.equals("view")) {
                 throw new DukeException("Missing date");
             }
             c = Command.VIEW;
@@ -160,6 +169,13 @@ public class Logic {
                 throw new DukeException("Missing keyword");
             }
             c = Command.FIND;
+        } else if (input.contains("edit")) {
+            if (shortened.equals("edit")) {
+                throw new DukeException("Index cannot be found");
+            } else if (shortened.length()<7) {
+                throw new DukeException("Please add description");
+            }
+            c = Command.EDIT;
         } else { //Unrecognised command given by the user
             throw new DukeException("I do not understand the command x.x");
         }
