@@ -85,30 +85,27 @@ public class Parser {
         if (argument.isEmpty()) {
             throw new MissingTaskDescriptionException();
         }
-        switch (command) {
-            case "todo":
-                return new AddCommand(new ToDo(argument));
-            case "deadline": {
-                if (!argument.contains(" /by ")) {
-                    throw new MissingDateTimeException();
-                }
-                String[] argumentDescriptionAndDate = argument.split(" /by ");
-                String description = argumentDescriptionAndDate[0];
-                String date = argumentDescriptionAndDate[1];
-                return new AddCommand(new Deadline(description, LocalDate.parse(date, FORMATTER_INPUT)));
+        if (command.equals("todo")) {
+            return new AddCommand(new ToDo(argument));
+        } else if (command.equals("deadline")) {
+            if (!argument.contains(" /by ")) {
+                throw new MissingDateTimeException();
             }
-            case "event": {
-                if (!argument.contains(" /at ")) {
-                    throw new MissingDateTimeException();
-                }
-                String[] argumentDescriptionAndDate = argument.split(" /at ");
-                String description = argumentDescriptionAndDate[0];
-                String date = argumentDescriptionAndDate[1];
-                return new AddCommand(new Event(description, LocalDate.parse(date, FORMATTER_INPUT)));
+            String[] argumentDescriptionAndDate = argument.split(" /by ");
+            String description = argumentDescriptionAndDate[0];
+            String date = argumentDescriptionAndDate[1];
+            return new AddCommand(new Deadline(description, LocalDate.parse(date, FORMATTER_INPUT)));
+        } else if (command.equals("event")) {
+            if (!argument.contains(" /at ")) {
+                throw new MissingDateTimeException();
             }
-            default:
-                assert false : "Oh no! This invalid Duke Command scenario should be handled earlier.";
-                throw new InvalidDukeCommandException();
+            String[] argumentDescriptionAndDate = argument.split(" /at ");
+            String description = argumentDescriptionAndDate[0];
+            String date = argumentDescriptionAndDate[1];
+            return new AddCommand(new Event(description, LocalDate.parse(date, FORMATTER_INPUT)));
+        } else {
+            assert false : "Oh no! This invalid Duke Command scenario should be handled earlier.";
+            throw new InvalidDukeCommandException();
         }
     }
 
@@ -124,26 +121,20 @@ public class Parser {
             String type = "" + taskParts[0].charAt(1);
             String status = "" + taskParts[0].charAt(4);
             String argument = taskParts[1];
-            switch (type) {
-                case "T":
-                    tasks.add(new ToDo(isDone(status), argument));
-                    break;
-                case "D": {
-                    String[] argumentDescriptionAndDate = argument.split(" \\(by: ");
-                    String description = argumentDescriptionAndDate[0];
-                    String date = argumentDescriptionAndDate[1];
-                    tasks.add(new Deadline(isDone(status), description, LocalDate.parse(date, FORMATTER_DISPLAY)));
-                    break;
-                }
-                case "E": {
-                    String[] argumentDescriptionAndDate = argument.split(" \\(at: ");
-                    String description = argumentDescriptionAndDate[0];
-                    String date = argumentDescriptionAndDate[1];
-                    tasks.add(new Event(isDone(status), description, LocalDate.parse(date, FORMATTER_DISPLAY)));
-                    break;
-                }
-                default:
-                    assert false : "Oh no! An invalid task type has been passed.";
+            if (type.equals("T")) {
+                tasks.add(new ToDo(isDone(status), argument));
+            } else if (type.equals("D")) {
+                String[] argumentDescriptionAndDate = argument.split(" \\(by: ");
+                String description = argumentDescriptionAndDate[0];
+                String date = argumentDescriptionAndDate[1];
+                tasks.add(new Deadline(isDone(status), description, LocalDate.parse(date, FORMATTER_DISPLAY)));
+            } else if (type.equals("E")) {
+                String[] argumentDescriptionAndDate = argument.split(" \\(at: ");
+                String description = argumentDescriptionAndDate[0];
+                String date = argumentDescriptionAndDate[1];
+                tasks.add(new Event(isDone(status), description, LocalDate.parse(date, FORMATTER_DISPLAY)));
+            } else {
+                assert false : "Oh no! An invalid task type has been passed.";
             }
         }
         return tasks;
