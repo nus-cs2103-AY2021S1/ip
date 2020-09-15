@@ -1,6 +1,7 @@
 public class Task {
     protected String newTask;
     protected boolean isDone;
+    protected boolean isImported;
 
 
     /**
@@ -10,6 +11,12 @@ public class Task {
     public Task(String newTask) {
         this.newTask = newTask;
         this.isDone = false;
+        this.isImported = false;
+    }
+    protected Task(String newTask, boolean isDone) {
+        this.newTask = newTask;
+        this.isDone = isDone;
+        this.isImported = true;
     }
 
     public String getStatusIcon() {
@@ -20,7 +27,11 @@ public class Task {
      * Marks the task as done or completed.
      */
     public void setTaskAsDone() {
-        this.isDone = true;
+        if (isImported) {
+            this.newTask = this.newTask.replace("\u2718", "\u2713");
+        } else {
+            this.isDone = true;
+        }
     }
 
     /**
@@ -34,7 +45,11 @@ public class Task {
      * Return the converted time form of the task.
      */
     public String timeConverted() {
-        return this.getStatusIcon() + " | " + newTask;
+        if (isImported) {
+            return newTask;
+        } else {
+            return this.getStatusIcon() + " | " + newTask;
+        }
 
     }
 
@@ -46,6 +61,7 @@ public class Task {
     }
     @Override
     public String toString() {
-        return String.format("[%s] %s", this.getStatusIcon(), newTask);
+        String a = String.format("[%s] %s", this.getStatusIcon(), newTask);
+        return this.newTask;
     }
 }

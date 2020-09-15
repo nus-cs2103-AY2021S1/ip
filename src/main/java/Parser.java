@@ -11,6 +11,9 @@ public class Parser {
         return input.equals("bye");
     }
 
+    public TaskList getListOfContent() {
+        return listOfContent;
+    }
     /**
      * initiate taskList for Parser.
      * @param list TaskList that manages tasks.
@@ -155,7 +158,6 @@ public class Parser {
     public static String processInput(String input) throws InvalidException {
         String[] isDone = input.split(" ");
         String firstChar = isDone[0];
-
         if (input.equals("bye")) {
             Storage.write(listOfContent);
             return Ui.exitMessage();

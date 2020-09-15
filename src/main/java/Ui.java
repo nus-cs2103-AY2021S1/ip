@@ -1,3 +1,4 @@
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Ui {
@@ -10,12 +11,15 @@ public class Ui {
             + "|  _ \\      | |    | |      | | \n"
             + "| |_) |    | |    | |      | |  \n"
             + "|____/   |_|   |｜  ｜| \n";
-
+    private static String filepath;
     private Scanner scanner;
     public Ui() {
         scanner = new Scanner(System.in);
     }
-
+    protected Ui(String filePath) {
+        scanner = new Scanner(System.in);
+        this.filepath = filePath;
+    }
 
     /**
      * Returns the user input.
@@ -45,7 +49,16 @@ public class Ui {
         message = message + "Hello! I'm Bill \n" + "What Can I do for you? \n";
         message = message + "\n ( You can find a list of command by typing \"help \" comand \n eg: help ) \n";
         message = message + horizontal_line + "\n ";
+        Storage storage = new Storage(filepath);
+        try {
+            return message + storage.checkFile(filepath);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         return message;
+    }
+    public static String tr() {
+        return "hello";
     }
 
     /**

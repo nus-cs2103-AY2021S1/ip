@@ -1,13 +1,5 @@
-D | ✘ | return book  | Dec 15 2019 09:00 AM
-D | ✘ | return book  | Dec 12 2019 05:00 PM
-E | ✘ | return book  | Dec 12 2019 06:00 PM
-T | ✓ | borrow book
-T | ✘ | borrow book
-T | ✘ | return book
-T | ✘ | hey
-T | ✘ | yes
-T | ✘ | no
-T | ✘ | llll
-T | ✘ | 2
-T | ✘ | hey
-T | ✘ | lah
+T | ✘ | hy
+T | ✘ | hy
+T | ✓ | hy
+T | ✓ | hy
+D | ✘ | ip  | Aug 02 2019 08:00 AM

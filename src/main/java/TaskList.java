@@ -9,6 +9,9 @@ public class TaskList {
     TaskList() {
         listOfContents = new ArrayList<>();
     }
+    TaskList(List<Task> listOfContents) {
+        this.listOfContents = listOfContents;
+    }
 
     /**
      * Adds a task to taskList.
