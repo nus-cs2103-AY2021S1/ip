@@ -22,18 +22,19 @@ public class Storage {
         this.txtData = new ArrayList<>();
     }
 
-    public ArrayList<Task> load() throws DukeException {
+    public ArrayList<Task> loadData() throws DukeException {
         try {
             File dir = new File(filePath);
-            if (dir.exists()) {
-                Scanner data = new Scanner(dir);
+            if (!dir.exists()) {
+                dir.mkdir();
+            }
+            Scanner data = new Scanner(dir);
 
-                while (data.hasNextLine()) {
-                    String curr = data.nextLine();
-                    String[] info = curr.split(", ", 4);
-                    Task newTask = generateNewTask(info);
-                    txtData.add(newTask);
-                }
+            while (data.hasNextLine()) {
+                String curr = data.nextLine();
+                String[] info = curr.split(", ", 4);
+                Task newTask = generateNewTask(info);
+                txtData.add(newTask);
             }
             return txtData;
         } catch (FileNotFoundException ex1) {

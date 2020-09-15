@@ -47,7 +47,7 @@ public class Parser {
      * @param text any String
      * @return the first word in the string.
      */
-    private static String getFirstWord(String text) {
+    public static String getFirstWord(String text) {
 
         int index = text.indexOf(' ');
 

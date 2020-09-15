@@ -10,7 +10,6 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.junit.jupiter:junit-jupiter:5.4.2'
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.5.0'
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.5.0'
 
@@ -45,7 +44,7 @@ test {
 }
 
 application {
-    mainClassName = "duke.Duke"
+    mainClassName = "duke.gui.Launcher"
 }
 
 shadowJar {
@@ -58,5 +57,6 @@ checkstyle {
 }
 
 run{
+    enableAssertions = true
     standardInput = System.in
 }
