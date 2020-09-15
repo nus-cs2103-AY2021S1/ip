@@ -28,6 +28,11 @@ public class NoteList {
         //initialize  list of tasks
         noteList = new ArrayList<>();
 
+        //nothing to load from storage
+        if (load.equals("")) {
+            return;
+        }
+
         try {
             //loop through load to form task list
             String[] notes = load.split("\\|");
