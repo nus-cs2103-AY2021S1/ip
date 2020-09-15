@@ -115,10 +115,11 @@ public class TaskList {
         List<Task> filteredTasks = tasks.stream()
                 .filter(task -> task.getDate() != null && task.getDate().equals(date)).collect(Collectors.toList());
         if (filteredTasks.size() == 0) {
-            return "There are no tasks happening on: " + date.format(DateTimeFormatter.ofPattern("MMMM d yyyy"));
+            return "There are no tasks/deadlines happening on: "
+                    + date.format(DateTimeFormatter.ofPattern("MMMM d yyyy"));
         }
         StringBuilder output = new StringBuilder();
-        output.append("Here are the tasks happening on: ").append(date).append("\n");
+        output.append("Here are the tasks/deadlines happening on: ").append(date).append("\n");
 
         for (int i = 0; i < filteredTasks.size(); i++) {
             output.append(String.format("%d. %s" + (i == filteredTasks.size() - 1 ? "" : "\n"),

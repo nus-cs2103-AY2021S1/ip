@@ -24,6 +24,7 @@ import javafx.scene.shape.Circle;
 public class DialogBox extends HBox {
     private static final String DUKE_DIALOG_COLOUR = "#D9D9D9";
     private static final String USER_DIALOG_COLOUR = "#95EC69";
+    private static final String DUKE_EXCEPTION_DIALOG_COLOUR = "#FFA199";
 
     @FXML
     private Label dialog;
@@ -41,6 +42,7 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
+        dialog.setWrapText(true);
         displayPicture.setImage(img);
         Circle circle = new Circle(40);
         circle.setStroke(Color.WHITE);
@@ -56,7 +58,7 @@ public class DialogBox extends HBox {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
-        setAlignment(Pos.TOP_LEFT);
+        setAlignment(Pos.CENTER_LEFT);
     }
 
     private void setDialogColour(String colour) {
@@ -66,14 +68,19 @@ public class DialogBox extends HBox {
 
     public static DialogBox getUserDialog(String text, Image img) {
         var db = new DialogBox(text, img);
+        db.setAlignment(Pos.CENTER_RIGHT);
         db.setDialogColour(USER_DIALOG_COLOUR);
         return db;
     }
 
-    public static DialogBox getDukeDialog(String text, Image img) {
+    public static DialogBox getDukeDialog(String text, Image img, boolean isError) {
         var db = new DialogBox(text, img);
         db.flip();
-        db.setDialogColour(DUKE_DIALOG_COLOUR);
+        if (isError) {
+            db.setDialogColour(DUKE_EXCEPTION_DIALOG_COLOUR);
+        } else {
+            db.setDialogColour(DUKE_DIALOG_COLOUR);
+        }
         db.setFillHeight(true);
         return db;
     }
