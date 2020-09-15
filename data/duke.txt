@@ -1,6 +1,2 @@
 T | 0 | description
 D | 0 | description | 2012-02-12 | 16:00
-T | 0 | description 1
-T | 0 | descriptio 2
-D | 0 | description | 2019-02-12 | 21:00
-D | 0 | description | 2010-12-22 | 17:00
