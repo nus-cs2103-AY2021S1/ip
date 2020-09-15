@@ -76,7 +76,7 @@ public class FindCommand extends Command {
     private String keyWordString() {
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < keyWords.length - 1; i++) {
-            stringBuilder.append(keyWords[i] + ", ");
+            stringBuilder.append(keyWords[i] + "\", \"");
         }
         stringBuilder.append(keyWords[keyWords.length - 1]);
         return stringBuilder.toString();
