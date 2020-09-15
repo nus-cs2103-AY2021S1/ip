@@ -42,6 +42,9 @@ public class Duke extends Application {
     private Image user = new Image(this.getClass().getResourceAsStream("/images/user.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/duke.png"));
 
+    private static final String LINE_TOP =    "╭⋟──────────❀• *₊。❀°。─╮\n";
+    private static final String LINE_BOTTOM = "╰─────────────────────⋞╯\n";
+
     public Duke() {
     }
 
@@ -114,11 +117,11 @@ public class Duke extends Application {
         stage.setTitle("Duke - Chat Bot");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
-        stage.setMinWidth(400.0);
+        stage.setMinWidth(500.0);
 
-        mainLayout.setPrefSize(400.0, 600.0);
+        mainLayout.setPrefSize(500.0, 600.0);
 
-        scrollPane.setPrefSize(385, 535);
+        scrollPane.setPrefSize(485, 535);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
@@ -128,7 +131,7 @@ public class Duke extends Application {
         // You will need to import `javafx.scene.layout.Region` for this.
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
-        userInput.setPrefWidth(325.0);
+        userInput.setPrefWidth(425.0);
 
         sendButton.setPrefWidth(55.0);
 
@@ -144,12 +147,17 @@ public class Duke extends Application {
 
         //Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+
+        //Display welcome messages when the user opens the chat bot.
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(new Label(new Ui().greet()), new ImageView(duke)));
+
+        //Handle user input sent by clicking.
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput();
         });
 
+        //Handle user input sent by return on keyboard.
         userInput.setOnAction((event) -> {
             handleUserInput();
         });
@@ -161,9 +169,12 @@ public class Duke extends Application {
      * the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() {
-        Label userText = new Label(userInput.getText());
+
 
         Duke testBot = new Duke("data/tasks.txt");
+        String formattedInput = LINE_TOP + "                     "
+                              + userInput.getText() + '\n' + LINE_BOTTOM;
+        Label userText = new Label(formattedInput);
         Label dukeText = new Label(getResponse(userInput.getText(),testBot));
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(user)),

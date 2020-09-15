@@ -90,7 +90,7 @@ public class Parser {
                 String tag = pieces[2];
                 cur.setTag(tag);
                 Storage.updateTasks(taskList.getNoOfTasks(), taskList.list, filePath);
-                return ui.setTagSuccessful(cur);
+                return ui.setTagSuccessful(tag,cur);
             }
         } else {
                 if (pieces.length == 1) {

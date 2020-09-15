@@ -38,12 +38,20 @@ public class TaskList {
                 if (command.length() < 3) {
                     break;
                 }
-                command = command.substring(3, command.length());
+                command = command.substring(3);
                 String[] pieces = command.split("]", 3);
                 String type = pieces[0];
                 String icon = pieces[1].substring(pieces[1].length() - 1); // status icon
                 boolean isDone = (icon.equals("\u2713")); // \u2713 is the icon for ✓
-                String description = pieces[2].substring(1, pieces[2].length());
+                String description = "";
+                String tag = null;
+                if (pieces[2].contains("<")) {
+                    String[] smallerPieces = pieces[2].split("<", 2);
+                    description = (smallerPieces[0]).substring(1);
+                    tag = smallerPieces[1].substring(0, smallerPieces[1].length() - 1);
+                } else {
+                    description = pieces[2].substring(1);
+                }
 
                 Task t = new Task("");
                 String[] array;
@@ -93,6 +101,9 @@ public class TaskList {
 
                     default:
                         break;
+                }
+                if (tag != null) {
+                    t.setTag(tag);
                 }
                 list.add(t);
                 noOfTasks++;
