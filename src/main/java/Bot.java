@@ -74,10 +74,10 @@ public class Bot {
                     return output;
                 case ("delete"):
                     Integer deleteNumber = Integer.valueOf(parsedInfo[1]) - 1;
-                    if (deleteNumber <= 0) {
+                    if (deleteNumber < 0) {
                         throw new invalidDeleteNumberException();
                     }
-                    assert deleteNumber >= 1 : "Invalid Number";
+                    //assert deleteNumber >= 1 : "Invalid Number";
                     output = taskList.deleteListing(deleteNumber, printer, storage);
                     return output;
                 case ("find"):
