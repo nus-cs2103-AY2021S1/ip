@@ -1,5 +1,6 @@
 package duke;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -54,7 +55,8 @@ public class MainWindow extends AnchorPane {
         Label userText = new Label(userInput.getText());
         ResultInfo resultInfo = duke.getResponse(userInput.getText());
         if (resultInfo.isExit()) {
-            Main.getStage().close();
+            Platform.exit();
+            //Main.getStage().close();
         } else {
             ImageView img = new ImageView(resultInfo.isSuccess() ? dukeNotes : dukeSadge);
             Label dukeText = new Label(resultInfo.getResponse());

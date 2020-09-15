@@ -44,5 +44,7 @@ public class Notification {
             trayIcon.displayMessage("Duke tasks incoming", "Incoming tasks: \n" + stringBuilder.toString(),
                     TrayIcon.MessageType.INFO);
         }
+
+        tray.remove(trayIcon);
     }
 }

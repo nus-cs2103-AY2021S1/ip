@@ -130,7 +130,7 @@ Command | Format
 `date` | `date DATE`
 `delete` | `delete TASKINDEX`
 `clearall` | `clearall`
-
+`bye` | `bye`
 
 
 
