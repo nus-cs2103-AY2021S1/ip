@@ -154,6 +154,7 @@ public class TaskList {
 
     /**
      * Completes the task at the position in the list which the user specifies.
+     * May also complete all tasks of a type or containing a keyword.
      *
      * @param str User input
      * @return A string indicating completion of the task.
@@ -209,12 +210,13 @@ public class TaskList {
 
     /**
      * Deletes the task at the position in the list which the user specifies.
+     * May also delete all tasks of a type or containing a keyword.
      *
      * @param str User input
      * @return A string indicating deletion of the task.
      * @throws TaskDeletionException If the number is out of range of the list.
      */
-    public String deleteTask(String str) throws TaskDeletionException, InvalidCommandException {
+    public String deleteTask(String str) throws TaskDeletionException {
         if (!str.startsWith("delete ")) {
             throw new TaskDeletionException(tasks.size());
         }
@@ -237,7 +239,7 @@ public class TaskList {
         }
     }
 
-    private String deleteMultiple(String type) throws InvalidCommandException {
+    private String deleteMultiple(String type) {
         switch (type) {
         case "deadline":
             tasks.removeIf(task -> task instanceof Deadline);
@@ -255,7 +257,7 @@ public class TaskList {
             tasks.removeIf(task -> !task.isDone());
             break;
         default:
-            throw new InvalidCommandException();
+            tasks.removeIf(task -> task.getDescription().contains(type));
         }
         return "All " + type + " tasks have been removed.\nYou now have " + tasks.size() + " tasks in the list";
     }

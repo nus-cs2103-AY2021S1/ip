@@ -96,7 +96,7 @@ Example usage:
 
 `delete 1`
 
-Sample outcome:
+Expected outcome:
 
 ```
 >> Task has been removed.
@@ -108,7 +108,7 @@ Sample outcome:
 
 Displays all tasks, along with their type, date and completion status.
 
-Sample outcome:
+Expected outcome:
 
 ```
 >> Here are the tasks in your list:
@@ -124,7 +124,7 @@ Example usage:
 
 `find project`
 
-Sample outcome:
+Expected outcome:
 
 ```
 >> Here are the matching tasks in your list:
@@ -136,11 +136,7 @@ Sample outcome:
 
 Remove all tasks from your current task list.
 
-Example usage:
-
-`clear`
-
-Sample outcome:
+Expected outcome:
 
 ```
 >> Task List has been cleared.

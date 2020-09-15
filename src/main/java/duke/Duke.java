@@ -56,6 +56,11 @@ public class Duke {
         new Duke().run();
     }
 
+    /**
+     * Returns Duke's response to display in the GUI.
+     * @param input user input in the dialog box.
+     * @return Duke's reply to the user input
+     */
     public String getResponse(String input) {
         if (input.equals("bye")) {
             storage.save(tasks);
