@@ -37,6 +37,9 @@ public class AddCommandParser implements Parser {
         case EVENT:
             try {
                 String description = args.split("/at")[0].trim();
+                if (description.length() == 0) {
+                    throw new NoArgumentException(Message.MESSAGE_EMPTY_TASK);
+                }
                 String dateString = args.split("/at")[1].trim();
                 LocalDate date = LocalDate.parse(dateString);
 
@@ -52,6 +55,9 @@ public class AddCommandParser implements Parser {
         case DEADLINE:
             try {
                 String description = args.split("/by")[0].trim();
+                if (description.length() == 0) {
+                    throw new NoArgumentException(Message.MESSAGE_EMPTY_TASK);
+                }
                 String dateString = args.split("/by")[1].trim();
                 LocalDate date = LocalDate.parse(dateString);
 

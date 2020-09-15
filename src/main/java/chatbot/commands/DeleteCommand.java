@@ -18,6 +18,10 @@ public class DeleteCommand extends Command {
         this.index = index;
     }
 
+    public int getIndex() {
+        return index + 1;
+    }
+
     @Override
     public boolean isExit() {
         return false;

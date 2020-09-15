@@ -8,7 +8,8 @@ import org.junit.jupiter.api.Test;
 
 public class DeadlineTest {
 
-    private final Deadline dl = Deadline.newDeadline("return book", LocalDate.parse("2020-08-25"));
+    private final Deadline dl = Deadline.newDeadline(
+            "return book", LocalDate.parse("2020-08-25"));
 
     @Test
     public void factoryMethod_validArguments_correctAttributes() {

@@ -20,6 +20,10 @@ public class SortCommand extends Command {
         this.comparator = comp;
     }
 
+    public Comparator<Task> getComparator() {
+        return comparator;
+    }
+
     @Override
     public boolean isExit() {
         return false;

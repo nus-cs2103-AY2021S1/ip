@@ -14,6 +14,10 @@ public class AddCommand extends Command {
         this.toAdd = task;
     }
 
+    public Task getToAdd() {
+        return this.toAdd;
+    }
+
     @Override
     public boolean isExit() {
         return false;

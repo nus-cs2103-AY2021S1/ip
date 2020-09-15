@@ -16,6 +16,10 @@ public class FindCommand extends Command {
         this.pred = pred;
     }
 
+    public Predicate<Task> getPred() {
+        return pred;
+    }
+
     @Override
     public boolean isExit() {
         return false;
