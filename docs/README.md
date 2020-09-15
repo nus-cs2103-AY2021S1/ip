@@ -27,10 +27,9 @@
 Say Hi to Duke!
 
 Example of usage: <br/>
-`hi` , `yo` , `hello`
-
-Expected outcome: <br/>
-`outcome`
+ - `hi` 
+ - `yo` 
+ - `hello`
 
 #### 2. Add a task
 
@@ -45,27 +44,21 @@ Format <br/>
 3. To add an event : `event (description)  / (date)`
 
 Example of usage: <br/>
-`todo finish cs2103t tasks` <br/> 
-Adds a todo with the description "finish cs2103 tasks" <br/>
-`deadline finish cs2103t tasks / 18092020` <br/> 
-Adds a deadline with the description "finish cs2103 tasks" by the deadline 18-09-2020<br/>
-`event cs2103t team meeting / 20092020` <br/> 
-Adds a event with the description "cs2103t team meeting" on the date 18-09-2020<br/>
+- `todo finish cs2103t tasks` <br/> 
+   Adds a todo with the description "finish cs2103 tasks" <br/>
+- `deadline finish cs2103t tasks / 18092020` <br/> 
+   Adds a deadline with the description "finish cs2103 tasks" by the deadline 18-09-2020<br/>
+- `event cs2103t team meeting / 20092020` <br/> 
+   Adds a event with the description "cs2103t team meeting" on the date 18-09-2020<br/>
 
 Ensure your date is keyed in `ddmmyyyy` format. 
-
-Expected outcome:<br/>
-`outcome`
 
 #### 3. Lists all tasks
 
 This lists all the tasks currently stored. 
 
 Example of usage: <br/>
-`list`
-
-Expected outcome:<br/>
-`outcome`
+- `list`
 
 #### 4. Marks a specific task done
 
@@ -78,13 +71,10 @@ Format:  <br/>
  This marks the task done at the specified index.
  
 Example of usage: <br/>
-`done 1`  <br/>
-This marks the first task done.<br/>
-`done 13` <br/>
-This marks the 13th task done.
-
-Expected outcome:<br/>
-`outcome`
+- `done 1`  <br/>
+   This marks the first task done.<br/>
+- `done 13` <br/>
+   This marks the 13th task done.
 
 #### 5. Deletes a specific task
 
@@ -97,13 +87,10 @@ Format:  <br/>
 This deletes the task at the specified index
  
 Example of usage: <br/>
-`delete 1`  <br/>
-This deletes the first task.<br/>
-`delete 13` <br/>
-This deletes the 13th task.
- 
-Expected outcome:<br/>
-`outcome`
+- `delete 1`  <br/>
+   This deletes the first task.<br/>
+- `delete 13` <br/>
+   This deletes the 13th task.
 
 #### 6. Finds a task
 
@@ -115,18 +102,13 @@ Format: <br/>
 This helps you search for a task that matches the input given.
 
 Example of usage: <br/>
-`find cs2103t` 
-This finds all tasks that includes cs2103t.
-
-Expected outcome:<br/>
-`outcome`
+- `find cs2103t` 
+   This finds all tasks that includes cs2103t.
 
 #### 7. Leave the conversation
 
 Say bye to duke.
 
 Example of usage: <br/>
-`bye` , `cya`
-
-Expected outcome:<br/>
-`outcome`
+- `bye`
+- `cya`
