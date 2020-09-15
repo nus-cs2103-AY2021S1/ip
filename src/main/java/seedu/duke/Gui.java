@@ -9,6 +9,10 @@ import javafx.scene.layout.VBox;
 
 /**
  * Hold the GUI interaction with user.
+ * Code Reuse Credit:
+ *  * Some parts of the structure of the code of the class is from CS2103 JavaFX tutorial page.
+ *  *  Website of the page:
+ *  *  https://se-education.org/guides/tutorials/javaFx.html
  */
 public class Gui extends AnchorPane {
 
