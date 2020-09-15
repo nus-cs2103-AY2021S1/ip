@@ -129,6 +129,7 @@ every command that changes the data. There is no need to save manually.
 
 <br /><br>
 ## Command Summary
+
 Action | Format
 ------ | ------
 Add | `deadline DESCRIPTION /by DATE [TIME]`<br /><br>`event DESCRIPTION /at DATE [TIME]`<br /><br>`todo DESCRIPTION`
@@ -142,4 +143,4 @@ View | `list`
 <br /><br>
 ## Acknowledgements
 - Libraries used: [JavaFX](https://openjfx.io/), [JUnit5](https://github.com/junit-team/junit5)
-- User guide adapted from https://se-education.org/addressbook-level3/UserGuide.html
+- User guide adapted from [https://se-education.org/addressbook-level3/UserGuide.html](https://se-education.org/addressbook-level3/UserGuide.html)
