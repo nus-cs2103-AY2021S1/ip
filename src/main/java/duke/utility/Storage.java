@@ -37,7 +37,6 @@ public class Storage {
     private void getPath(String fileName){
         Path path = Paths.get(".", "data", fileName);
         try {
-            // Create directory if needed
             Path parentPath = path.getParent();
             Files.createDirectories(parentPath);
 

@@ -1,6 +1,3 @@
-T | 1 | read book                 
-T | 1 | eat book               
-E | 1 | attend book fest | 2019-08-19 
-T | 1 | burn book          
-T | 1 | buy book     
-T | 1 | eat lunch 
+T | 0 | eat book  
+E | 0 | drink book | 2020-09-18 
+D | 0 | sell book | 2019-10-29 

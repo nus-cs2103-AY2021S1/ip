@@ -53,6 +53,7 @@ public class TaskList {
         for (int i = 0; i < taskList.size(); i++) {
             outputString.append(String.format("%d. %s\n", i + 1, taskList.get(i).toString()));
         }
+        System.out.println(outputString);
         return outputString.toString();
     }
 
@@ -119,15 +120,6 @@ public class TaskList {
      */
     public Task getTask(int index) {
         return taskList.get(index);
-    }
-
-    /**
-     * get the boolean value of whether the duke.task is being updated
-     *
-     * @return the boolean isUpdating
-     */
-    public boolean isUpdating() {
-        return isUpdating;
     }
 
     /**

@@ -7,11 +7,18 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Label;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 
 /**
  * An example of a custom control using FXML.
@@ -24,7 +31,7 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
-    private final double LENGTH = 100.0;
+    private final double LENGTH = 50.0;
 
     private DialogBox(String text, Image img) {
         try {
@@ -37,6 +44,8 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
+        dialog.setFont(Font.font("Arial", FontWeight.BOLD, 8));
+        dialog.setTextFill(Paint.valueOf("orange"));
         displayPicture.setImage(img);
         displayPicture.setFitWidth(LENGTH);
         displayPicture.setFitHeight(LENGTH);
@@ -58,6 +67,12 @@ public class DialogBox extends HBox {
         circle.setCenterY(imageView.getY() + LENGTH/2);
         circle.setCenterX(imageView.getX() + LENGTH/2);
         imageView.setClip(circle);
+        SnapshotParameters parameters = new SnapshotParameters();
+        parameters.setFill(Color.TRANSPARENT);
+        WritableImage image = imageView.snapshot(parameters, null);
+        imageView.setClip(null);
+        imageView.setEffect(new DropShadow(20, Color.HOTPINK));
+        imageView.setImage(image);
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
