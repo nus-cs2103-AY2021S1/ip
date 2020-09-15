@@ -32,8 +32,7 @@ public class Ui {
      */
     public String formatPrint(String str) {
         String divider = "----------------------------\n";
-        String newStr = ("   " + divider + str + "\n" + divider).replaceAll("(\r\n|\n)", "\r\n   ");
-        return newStr;
+        return (divider + str + "\n" + divider);
     }
 
     /**
@@ -43,8 +42,7 @@ public class Ui {
      */
     public String printError(String str) {
         String divider = "############################\n";
-        String newStr = ("   " + divider + str + "\n" + divider).replaceAll("(\r\n|\n)", "\r\n   ");
-        return newStr;
+        return (divider + str + "\n" + divider);
     }
 
     /**
