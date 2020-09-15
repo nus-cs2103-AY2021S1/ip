@@ -30,7 +30,7 @@ public class Storage {
     private FileOutputStream fileOut;
     private ObjectOutputStream objOut;
 
-    private Storage() {
+    protected Storage() {
 
     }
 

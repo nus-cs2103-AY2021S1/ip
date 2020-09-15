@@ -7,9 +7,10 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import ekud.exceptions.DukeIoException;
 import ekud.tasks.Task;
 import ekud.tasks.TaskList;
-
+import ekud.utils.Storage;
 
 public class OriginatorTest {
     @Test
@@ -17,7 +18,14 @@ public class OriginatorTest {
         List<Originator.Memento> savedStates = new ArrayList<>();
         TaskList t = new TaskList(new ArrayList<>());
 
-        t.setObserver(null);
+        Storage storageMock = new Storage() {
+            @Override
+            public void save(ArrayList<Task> tasks) throws DukeIoException {
+
+            }
+        };
+
+        t.setObserver(storageMock);
 
 
         Originator originator = new Originator();
@@ -36,6 +44,6 @@ public class OriginatorTest {
 
         originator.restoreFromMemento(savedStates.get(1));
 
-        assertEquals(originator.getState().get(2).getDescription(), "state 3");
+        assertEquals(originator.getState().get(2).getDescription(), "state3");
     }
 }
