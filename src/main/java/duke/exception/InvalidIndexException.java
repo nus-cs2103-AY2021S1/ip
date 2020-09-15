@@ -1,8 +1,8 @@
 package duke.exception;
 
 public class InvalidIndexException extends DukeException {
-    public InvalidIndexException(String message) {
-        super(message);
+    public InvalidIndexException() {
+        super("☹ OOPS!!! There is no such task.");
     }
 
 }

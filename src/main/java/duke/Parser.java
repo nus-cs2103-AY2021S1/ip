@@ -9,6 +9,7 @@ import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.PriorityCommand;
 import duke.exception.InvalidCommandException;
+import duke.exception.InvalidIndexException;
 import duke.exception.InvalidInputException;
 import duke.exception.InvalidTaskTypeException;
 
@@ -22,10 +23,11 @@ public class Parser {
      * @return The command to be executed based on user input.
      * @throws InvalidInputException If description is empty for adding new tasks.
      * @throws InvalidCommandException If command is not defined.
-     * @throws InvalidTaskTypeException if task is invalid.
+     * @throws InvalidTaskTypeException If task is invalid.
+     * @throws InvalidIndexException If index of task is invalid.
      */
     static Command parse (String fullCommand)
-        throws InvalidInputException, InvalidCommandException, InvalidTaskTypeException {
+            throws InvalidInputException, InvalidCommandException, InvalidTaskTypeException {
         String[] commands = fullCommand.trim().split(" ", 2);
         assert !fullCommand.isEmpty() : "Command cannot be empty";
         switch(commands[0]) {
@@ -126,19 +128,29 @@ public class Parser {
      * Parses argument in the context of deleting a new task.
      * @param index Index of task to be deleted.
      * @return Returns a prepared command to delete specified task.
+     * @throws InvalidInputException If index is not a number.
      */
-    static Command prepareDelete(String index) {
-        int taskIndex = Integer.valueOf(index);
-        return new DeleteCommand(taskIndex);
+    static Command prepareDelete(String index) throws InvalidInputException {
+        try {
+            int taskIndex = Integer.valueOf(index);
+            return new DeleteCommand(taskIndex);
+        } catch (NumberFormatException exception) {
+            throw new InvalidInputException("Input is not a number");
+        }
     }
 
     /**
      * Parses argument in the context of marking a task as completed.
      * @param index Index of task to be mark as done.
      * @return Returns a prepared command to mark task as completed.
+     * @throws InvalidInputException If index is not a number.
      */
-    static Command prepareDone(String index) {
-        int taskIndex = Integer.valueOf(index);
-        return new DoneCommand(taskIndex);
+    static Command prepareDone(String index) throws InvalidInputException {
+        try {
+            int taskIndex = Integer.valueOf(index);
+            return new DoneCommand(taskIndex);
+        } catch (NumberFormatException exception) {
+            throw new InvalidInputException("Input is not a number");
+        }
     }
 }

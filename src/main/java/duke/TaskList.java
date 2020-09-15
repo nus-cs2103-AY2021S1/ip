@@ -91,7 +91,7 @@ public class TaskList {
      */
     public void deleteTask(int index) throws InvalidIndexException {
         if (index > tasks.size() || index < 1) {
-            throw new InvalidIndexException("☹ OOPS!!! There is no such task.");
+            throw new InvalidIndexException();
         }
         tasks.remove(index - 1);
     }
@@ -103,7 +103,7 @@ public class TaskList {
      */
     public void completeTask(int index) throws InvalidIndexException {
         if (index > tasks.size() || index < 1) {
-            throw new InvalidIndexException("☹ OOPS!!! There is no such task.");
+            throw new InvalidIndexException();
         }
         Task completedTask = tasks.get(index - 1);
         completedTask.markAsDone();
@@ -124,7 +124,7 @@ public class TaskList {
      */
     public Task get(int index) throws InvalidIndexException {
         if (index >= tasks.size() || index < 0) {
-            throw new InvalidIndexException("☹ OOPS!!! There is no such task.");
+            throw new InvalidIndexException();
         }
         return tasks.get(index);
     }
