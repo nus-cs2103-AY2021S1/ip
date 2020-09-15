@@ -43,13 +43,13 @@ public class TaskListStorage {
             list = StorageHelper.open(this::deserializeTaskList, filepath);
             ui.say(String.format("Loaded tasks from %s.", filepath));
         } catch (FileMissingException e) {
-            ui.say(String.format("Couldn't find the file %s. %s", filepath, createNewListMessage));
+            ui.say(String.format("Couldn't find the file %s. %s", filepath, createNewListMessage), true);
             list = new TaskList();
         } catch (FileReadingException e) {
-            ui.say(String.format("Couldn't read the file %s. %s", filepath, createNewListMessage));
+            ui.say(String.format("Couldn't read the file %s. %s", filepath, createNewListMessage), true);
             list = new TaskList();
         } catch (DeserializingException e) {
-            ui.say(String.format("I don't understand the data in %s. %s", filepath, createNewListMessage));
+            ui.say(String.format("I don't understand the data in %s. %s", filepath, createNewListMessage), true);
             list = new TaskList();
         }
         list.connectStorage((taskList) -> {
