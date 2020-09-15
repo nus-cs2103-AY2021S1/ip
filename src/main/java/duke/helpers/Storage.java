@@ -60,7 +60,7 @@ public class Storage {
             List<Task> tasks = new ArrayList<>();
             Scanner sc = new Scanner(f);
             while (sc.hasNext()) {
-                    addTasks(tasks, sc);
+                addTasks(tasks, sc);
             }
             addTasks(tasks, sc);
             if (tasks.size() == 0) {
