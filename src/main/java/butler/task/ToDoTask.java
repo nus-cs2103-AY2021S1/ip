@@ -31,7 +31,20 @@ public class ToDoTask extends Task {
      *
      * @return String representation of this task for storage in hard disk.
      */
+    @Override
     public String toStorageString() {
         return super.toStorageString();
+    }
+
+    /**
+     * Returns a deep copy of this task.
+     *
+     * @return A deep copy of this task.
+     */
+    @Override
+    public Task copy() {
+        ToDoTask task = new ToDoTask(summary);
+        task.isComplete = this.isComplete;
+        return task;
     }
 }

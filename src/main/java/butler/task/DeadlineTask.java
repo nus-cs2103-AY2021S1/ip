@@ -34,7 +34,8 @@ public class DeadlineTask extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + getDeadlineString() + ")";
+        return "[D]" + super.toString()
+                + " (by: " + getDeadlineString() + ")";
     }
 
     /**
@@ -42,8 +43,21 @@ public class DeadlineTask extends Task {
      *
      * @return String representation of this task for storage in hard disk.
      */
+    @Override
     public String toStorageString() {
         return super.toStorageString()
                 + " /by " + deadline;
+    }
+
+    /**
+     * Returns a deep copy of this task.
+     *
+     * @return A deep copy of this task.
+     */
+    @Override
+    public Task copy() {
+        DeadlineTask task = new DeadlineTask(summary, deadline);
+        task.isComplete = this.isComplete;
+        return task;
     }
 }

@@ -60,6 +60,7 @@ public class DialogBox extends HBox {
      *
      * @param text Text message.
      * @param img Profile image.
+     * @return A dialogue box for the user.
      */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
@@ -71,6 +72,7 @@ public class DialogBox extends HBox {
      *
      * @param text Text message.
      * @param img Profile image.
+     * @return A dialogue box for the butler.
      */
     public static DialogBox getButlerDialog(String text, Image img) {
         var db = new DialogBox(text, img);

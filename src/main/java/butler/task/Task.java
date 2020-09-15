@@ -8,8 +8,8 @@ package butler.task;
 public abstract class Task {
 
     protected TaskType taskType;
-    private final String summary;
-    private boolean isComplete;
+    protected final String summary;
+    protected boolean isComplete;
 
     /**
      * Constructs an incomplete task with the given <code>summary</code>.
@@ -57,4 +57,11 @@ public abstract class Task {
         return (isComplete ? "complete" : "incomplete") + " "
                 + taskType.toString() + " " + summary;
     }
+
+    /**
+     * Returns a deep copy of this task.
+     *
+     * @return A deep copy of this task.
+     */
+    public abstract Task copy();
 }

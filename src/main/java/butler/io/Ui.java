@@ -1,6 +1,5 @@
 package butler.io;
 
-import butler.exception.ButlerException;
 import butler.task.Task;
 import butler.task.TaskList;
 
@@ -21,7 +20,7 @@ public class Ui {
      * @param taskList List of tasks to be listed out.
      * @return A string of the list of tasks.
      */
-    public String showTaskList(TaskList taskList) throws ButlerException {
+    public String showTaskList(TaskList taskList) {
         // Message header
         String message = "Here are your list of tasks.\n"
                 + "You have " + taskList.getSize()
@@ -36,7 +35,7 @@ public class Ui {
      * Task that was added is specified by <code>task</code>.
      *
      * @param task Task that was added.
-     * @return Response message that a task is added.
+     * @return Response message that a task was added.
      */
     public String showTaskIsAdded(Task task) {
         String message;
@@ -45,11 +44,11 @@ public class Ui {
     }
 
     /**
-     * Returns a response message that a task is marked as completed.
+     * Returns a response message that a task was marked as completed.
      * The task is specified by the <code>taskIndex</code> given.
      *
      * @param taskIndex Index of task marked as completed.
-     * @return Response message that a task is marked as completed.
+     * @return Response message that a task was marked as completed.
      */
     public String showTaskIsCompleted(int taskIndex) {
         String message;
@@ -76,12 +75,12 @@ public class Ui {
      * @param taskList List of tasks to be listed out.
      * @return A string of the list of filtered tasks.
      */
-    public String showFilteredTaskList(TaskList taskList) throws ButlerException {
+    public String showFilteredTaskList(TaskList taskList) {
         // Message header
         String message = "Here are the matching tasks in your list.\n"
                 + "You have " + taskList.getSize()
                 + (taskList.getSize() > 1 ? " tasks" : " task")
-                + " in total.\n";
+                + " that match.\n";
         message += showTaskListBodyMessage(taskList);
         return message;
     }
@@ -109,12 +108,28 @@ public class Ui {
     }
 
     /**
+     * Returns a string of the given old list of tasks.
+     *
+     * @param taskList Old list of tasks.
+     * @return String of old list of tasks.
+     */
+    public String showOldTaskList(TaskList taskList) {
+        // Message header
+        String message = "Here are the current tasks after undoing the previous commands.\n"
+                + "You have " + taskList.getSize()
+                + (taskList.getSize() > 1 ? " tasks" : " task")
+                + " in total.\n";
+        message += showTaskListBodyMessage(taskList);
+        return message;
+    }
+
+    /**
      * Returns the message body for the list of tasks.
      *
      * @param taskList List of tasks to be listed out.
      * @return Message body for the list of tasks.
      */
-    private String showTaskListBodyMessage(TaskList taskList) throws ButlerException {
+    private String showTaskListBodyMessage(TaskList taskList) {
         String taskListBodyMessage = "";
         for (int i = 0; i < taskList.getSize(); i++) {
             taskListBodyMessage += "\n" + (i + 1) + ": " + taskList.getTask(i);

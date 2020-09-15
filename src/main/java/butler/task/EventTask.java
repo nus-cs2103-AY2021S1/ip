@@ -30,7 +30,7 @@ public class EventTask extends Task {
      *
      * @return Time period of this event task.
      */
-    public String getEventDuration() {
+    public String getEventPeriod() {
         return startDate.getDayOfMonth() + " "
                 + startDate.getMonth().toString() + " "
                 + startDate.getYear() + " to "
@@ -46,7 +46,8 @@ public class EventTask extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + getEventDuration() + ")";
+        return "[E]" + super.toString()
+                + " (from: " + getEventPeriod() + ")";
     }
 
     /**
@@ -54,8 +55,21 @@ public class EventTask extends Task {
      *
      * @return String representation of this task for storage in hard disk.
      */
+    @Override
     public String toStorageString() {
         return super.toStorageString()
                 + " /at " + startDate + " " + endDate;
+    }
+
+    /**
+     * Returns a deep copy of this task.
+     *
+     * @return A deep copy of this task.
+     */
+    @Override
+    public Task copy() {
+        EventTask task = new EventTask(summary, startDate, endDate);
+        task.isComplete = this.isComplete;
+        return task;
     }
 }

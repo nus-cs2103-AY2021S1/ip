@@ -1,9 +1,8 @@
 package butler.command;
 
-import butler.exception.ButlerException;
 import butler.io.Storage;
 import butler.io.Ui;
-import butler.task.TaskList;
+import butler.task.TaskListManager;
 
 /**
  * Represents a command to list all tasks in a task list.
@@ -17,19 +16,18 @@ public class ListCommand extends Command {
     }
 
     /**
-     * Lists out the tasks in <code>taskList</code> using <code>ui</code> and
+     * Lists out the tasks in the current list of tasks using <code>ui</code> and
      * updates the list of tasks saved in the hard disk.
      *
-     * @param taskList List of tasks on which this command acts on.
+     * @param taskListManager Manager of the list of tasks on which this command acts on.
      * @param ui User interface to interact with user.
-     * @param storage Storage which stores given <code>taskList</code> on hard disk.
+     * @param storage Storage which stores current list of tasks on hard disk.
      * @return String response of task execution.
-     * @throws ButlerException if an error with saving the list of tasks occurs.
      */
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) throws ButlerException {
-        storage.storeTaskList(taskList);
-        return ui.showTaskList(taskList);
+    public String execute(TaskListManager taskListManager, Ui ui, Storage storage) {
+        storage.storeTaskList(taskListManager.getCurrentTaskList());
+        return ui.showTaskList(taskListManager.getCurrentTaskList());
     }
 
     /**

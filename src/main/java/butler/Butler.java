@@ -6,6 +6,7 @@ import butler.io.Parser;
 import butler.io.Storage;
 import butler.io.Ui;
 import butler.task.TaskList;
+import butler.task.TaskListManager;
 
 /**
  * Represents the main logic of a butler that manages a list of tasks for the user.
@@ -17,8 +18,8 @@ import butler.task.TaskList;
 public class Butler {
 
     private final Storage storage;
-    private TaskList tasks;
     private final Ui ui;
+    private TaskListManager taskListManager;
 
     /**
      * Constructs a butler that stores tasks in the <code>filePath</code>.
@@ -29,9 +30,9 @@ public class Butler {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
-            tasks = new TaskList(storage.load());
+            taskListManager = new TaskListManager(new TaskList(storage.load()));
         } catch (ButlerException e) {
-            tasks = new TaskList();
+            taskListManager = new TaskListManager(new TaskList());
         }
     }
 
@@ -44,7 +45,7 @@ public class Butler {
     public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
-            return c.execute(tasks, ui, storage);
+            return c.execute(taskListManager, ui, storage);
         } catch (ButlerException e) {
             return ui.showErrorMessage(e.getMessage());
         }

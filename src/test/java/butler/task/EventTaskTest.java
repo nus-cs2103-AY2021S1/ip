@@ -11,6 +11,6 @@ public class EventTaskTest {
     @Test
     public void getTimeTest() {
         EventTask eventTask = new EventTask("summary", LocalDate.parse("2020-02-12"), LocalDate.parse("2021-12-12"));
-        assertEquals("12 FEBRUARY 2020 to 12 DECEMBER 2021", eventTask.getEventDuration());
+        assertEquals("12 FEBRUARY 2020 to 12 DECEMBER 2021", eventTask.getEventPeriod());
     }
 }

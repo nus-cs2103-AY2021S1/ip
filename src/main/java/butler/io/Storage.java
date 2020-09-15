@@ -36,9 +36,8 @@ public class Storage {
      * Stores the given <code>taskList</code> into the <code>filePath</code>.
      *
      * @param taskList List of tasks to be written into the hard disk.
-     * @throws ButlerException if file is not detected.
      */
-    public void storeTaskList(TaskList taskList) throws ButlerException {
+    public void storeTaskList(TaskList taskList) {
         try {
             FileWriter fw = new FileWriter(filePath);
             String fileText = "";
@@ -82,8 +81,6 @@ public class Storage {
         } catch (FileNotFoundException e) {
             createFilePath();
             throw new ButlerException("There is no file to access.");
-        } catch (ClassCastException e) {
-            throw new ButlerException("Instead of tasks, a command was written into the file.");
         }
     }
 
@@ -107,20 +104,21 @@ public class Storage {
             return task;
         } catch (IndexOutOfBoundsException e) {
             throw new ButlerException("There is an error inside the file. The task has incomplete details.");
+        } catch (ClassCastException e) {
+            throw new ButlerException("Instead of tasks, a command was written into the file.");
         }
     }
 
     /**
-     * Creates a filePath.
-     *
-     * @throws ButlerException if the file path already exists.
+     * Creates a filePath. Called only when filePath does not exist.
      */
-    private void createFilePath() throws ButlerException {
+    private void createFilePath() {
         try {
             Files.createDirectory(Paths.get("./data/"));
             Files.createFile(Paths.get(filePath));
         } catch (IOException e) {
-            assert false : "Code should never reach here." + e.getMessage();
+            assert false : "FilePath was already created when calling this method."
+                    + e.getMessage();
         }
     }
 }

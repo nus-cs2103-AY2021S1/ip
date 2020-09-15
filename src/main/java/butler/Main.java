@@ -28,9 +28,9 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setButler(butler);
-            stage.setTitle("Butler");
+            stage.setTitle("Butler - Your Personal Task Manager");
             stage.setResizable(false);
+            fxmlLoader.<MainWindow>getController().setButler(butler);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
