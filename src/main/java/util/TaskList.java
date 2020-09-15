@@ -174,7 +174,7 @@ public class TaskList {
 
         //Check if list is empty
         if (findings.isEmpty()) {
-            throw new DukeException("Sorry I find can't any tasks related to " + keyword + ".");
+            throw new DukeException("Sorry I find can't any tasks related to '" + keyword + "'.");
         } else {
             String m = "Here are the relevant tasks!\n";
             // Prints all tasks in findings
