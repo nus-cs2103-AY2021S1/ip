@@ -18,5 +18,6 @@ public enum CommandType {
         DUPLICATE,
         REMOVEDUPLICATES,
         CLEAR,
-        HELP;
+        HELP,
+        ERROR;
 }

@@ -61,6 +61,9 @@ public class Command {
             case HANDLEVENT:
                 dukeResponse =  handleEvent(tasks, taskInfo);
                 break;
+            case FINDMATCHINGTASK:
+                dukeResponse = findMatchingTasks(tasks, taskInfo);
+                break;
             case DELETETASK:
                 dukeResponse =  tasks.deleteTask(taskInfo);
                 break;
@@ -78,11 +81,7 @@ public class Command {
                 dukeResponse = printHelp();
                 break;
             default:
-                if (findMatchingTasks(tasks, taskInfo).length() <= 0) {
-                    throw new DukeInvalidCommandException("Sorry Poppins but I'm not sure about this command :)");
-                } else {
-                    dukeResponse = findMatchingTasks(tasks, taskInfo);
-                }
+                throw new DukeInvalidCommandException("Sorry Poppins but I'm not sure about this command :)");
             }
             storage.saveTaskList(tasks);
         } catch (DukeInvalidCommandException err) {
@@ -230,11 +229,14 @@ public class Command {
      * @return List of matching tasks if any.
      */
     private String findMatchingTasks(TaskList tasks, String taskInfo) {
-        String[] taskInfos = taskInfo.trim().split(" ");
+        String taskInfoFind = taskInfo.replace("find", "");
+        String[] taskInfos = taskInfoFind.trim().split(" ");
         assert taskInfos.length > 0 : "taskInfos length should be >= 1";
         List<Task> matchList = tasks.returnMatchingTasks(taskInfos);
         assert matchList != null : "matchList should not be null";
-        String dukeResponse = matchList.size() == 0 ? "" : "\tHere are the matching tasks in your list:";
+        String dukeResponse = matchList.size() == 0
+            ? "Sorry Poppins I am unable to find any matches."
+            : "\tHere are the matching tasks in your list:";
         String matches = IntStream
             .range(0, matchList.size())
             .mapToObj(i -> String.format("\n\t\t%d. %s", i + 1, matchList.get(i)))
@@ -295,6 +297,7 @@ public class Command {
             "add (homework) to the list with the (specified deadline)";
         dukeResponse += "\n\n\t'event (Christmas) /at (2020-12-25 1600)' : I will " +
             "add (Christmas) event to the list at the (specified time)";
+        dukeResponse += "\n\n\t'find book' : I will find any task that matches book.";
         dukeResponse += "\n\n\t'delete 2' : I will delete task 2 from the list.";
         dukeResponse += "\n\n\t'done 3' : I will mark task 3 in the list as complete.";
         dukeResponse += "\n\n\t'duplicate' : I will list you all the duplicate tasks.";

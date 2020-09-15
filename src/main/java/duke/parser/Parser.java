@@ -11,10 +11,10 @@ public class Parser {
      * @Return Command based on task information.
      */
     public static Command parse(String taskInfo) {
-        String cmd = taskInfo.trim();
-        if (cmd.equalsIgnoreCase("bye")) {
+        String cmd = taskInfo.trim().toLowerCase();
+        if (cmd.equals("bye")) {
             return new Command(CommandType.BYE, taskInfo);
-        } else if (cmd.equalsIgnoreCase("list")) {
+        } else if (cmd.equals("list")) {
             return new Command(CommandType.PRINT, taskInfo);
         } else if (taskInfo.startsWith("done")) {
             return new Command(CommandType.MARKTASKDONE, taskInfo);
@@ -26,6 +26,8 @@ public class Parser {
             return new Command(CommandType.HANDLEVENT, taskInfo);
         } else if (taskInfo.startsWith("delete")) {
             return new Command(CommandType.DELETETASK, taskInfo);
+        } else if (taskInfo.startsWith("find")) {
+            return new Command(CommandType.FINDMATCHINGTASK, taskInfo);
         } else if (taskInfo.startsWith("duplicate")) {
             return new Command(CommandType.DUPLICATE, taskInfo);
         } else if (taskInfo.startsWith("remove duplicates")) {
@@ -33,9 +35,9 @@ public class Parser {
         } else if (taskInfo.startsWith("clear please")) {
             return new Command(CommandType.CLEAR, taskInfo);
         } else if (taskInfo.startsWith("help")) {
-            return new Command(CommandType.HELP, taskInfo);
+            return new Command(CommandType.HELP , taskInfo);
         } else {
-            return new Command(CommandType.FINDMATCHINGTASK, taskInfo);
+            return new Command(CommandType.ERROR , taskInfo);
         }
     }
 }
