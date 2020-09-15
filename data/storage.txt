@@ -1,2 +1,4 @@
 E | 0 | go run | stadium
 T | 0 | jump
+T | 0 | go swim
+T | 0 | go run
