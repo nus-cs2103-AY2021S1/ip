@@ -43,6 +43,9 @@ public class Parser {
         } catch (Exception e) {
             throw new DukeException("Please input a valid task number.");
         }
+        if (index > tasks.size() || index <= 0) {
+            throw new DukeException("That task number does not exist.");
+        }
         tasks.get(index - 1).setDone();
         Task t = tasks.get(index - 1);
         ArrayList<Task> tasksCopy = tasks.clone();
@@ -66,7 +69,7 @@ public class Parser {
         } catch (Exception e) {
             throw new DukeException("Please input a valid task number.");
         }
-        if (index > tasks.size() || index < 0) {
+        if (index > tasks.size() || index <= 0) {
             throw new DukeException("That task number does not exist.");
         }
         Task deletedTask = tasks.remove(index - 1);
@@ -91,7 +94,7 @@ public class Parser {
         } catch (Exception e) {
             throw new DukeException("Please input a valid task number.");
         }
-        if (index > tasks.size() || index < 0) {
+        if (index > tasks.size() || index <= 0) {
             throw new DukeException("That task number does not exist.");
         }
         Tag tag = Tag.stringToTag(userInputWords[2]);
@@ -114,7 +117,7 @@ public class Parser {
             String[] userInputWords, TaskList tasks) throws DukeException {
         int index = Integer.parseInt(userInputWords[1]);
         String tagToRemove = userInputWords[2];
-        if (index > tasks.size() || index < 0) {
+        if (index > tasks.size() || index <= 0) {
             throw new DukeException("That task number does not exist.");
         }
         Task t = tasks.get(index - 1);
