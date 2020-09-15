@@ -1,8 +1,17 @@
-# Duke project template
+# Viscount
+![](https://i.imgur.com/dt9NWoj.png)
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+Viscount is a **desktop app for managing tasks, optimised for use via a Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). If you are someone who can type fast, Viscount can help you track your tasks faster than traditional GUI apps.
 
-## Setting up in Intellij
+## Quick Start for Users
+1. Ensure you have Java 11 or later installed.
+1. Download the jar file from the project website.
+1. Copy the file to the folder you want to use as the home folder for the application.
+1. Double-click the file to start the app. A GUI should appear, with the field bar to input commands.
+
+Check out the [user guide](https://sc-arecrow.github.io/viscount/) to get started!
+
+## Setting up in Intellij for Developers
 
 Prerequisites: JDK 11, update Intellij to the most recent version.
 
@@ -15,12 +24,4 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
    1. Click `Open or Import`.
    1. Select the project directory, and click `OK`
    1. If there are any further prompts, accept the defaults.
-1. After the importing is complete, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()`. If the setup is correct, you should see something like the below:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+1. After the importing is complete, locate the `src/main/java/viscount.Launcher.java` file, right-click it, and choose `Run Launcher.main()`. If the setup is correct, the Viscount application should open.
