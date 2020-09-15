@@ -17,14 +17,14 @@ import duke.task.TaskType;
  * Encapsulates the parsing of user inputs.
  */
 public class Parser {
-    private static final Set<String> COMMAND_EXIT = new HashSet<>(Arrays.asList("bye", "exit", "q"));
-    private static final Set<String> COMMAND_LIST = new HashSet<>(Arrays.asList("list", "ls", "l"));
-    private static final Set<String> COMMAND_FIND = new HashSet<>(Arrays.asList("find", "f"));
-    private static final Set<String> COMMAND_COMPLETE = new HashSet<>(Arrays.asList("check", "ck"));
     private static final Set<String> COMMAND_ADD_TODO = new HashSet<>(Arrays.asList("todo", "t"));
     private static final Set<String> COMMAND_ADD_EVENT = new HashSet<>(Arrays.asList("event", "e"));
     private static final Set<String> COMMAND_ADD_DEADLINE = new HashSet<>(Arrays.asList("deadline", "d"));
+    private static final Set<String> COMMAND_LIST = new HashSet<>(Arrays.asList("list", "ls", "l"));
+    private static final Set<String> COMMAND_COMPLETE = new HashSet<>(Arrays.asList("check", "ck"));
     private static final Set<String> COMMAND_DELETE = new HashSet<>(Arrays.asList("remove", "rm"));
+    private static final Set<String> COMMAND_FIND = new HashSet<>(Arrays.asList("find", "f"));
+    private static final Set<String> COMMAND_EXIT = new HashSet<>(Arrays.asList("bye", "exit", "q"));
 
     /**
      * Processes the full user input.
