@@ -16,9 +16,9 @@ public class Parser {
         assert userInput != null;
         String[] inputArr = userInput.split(" ");
         String cmd = inputArr[0];
-        boolean isAddCmd = cmd.equals(Instruction.TODO.getInstruction()) ||
-                cmd.equals(Instruction.DEADLINE.getInstruction()) ||
-                cmd.equals(Instruction.EVENT.getInstruction());
+        boolean isAddCmd = cmd.equals(Instruction.TODO.getInstruction())
+                || cmd.equals(Instruction.DEADLINE.getInstruction())
+                || cmd.equals(Instruction.EVENT.getInstruction());
         if (cmd.equals(Instruction.BYE.getInstruction())) {
             return new ExitCommand();
         } else if (cmd.equals(Instruction.LIST.getInstruction())) {
