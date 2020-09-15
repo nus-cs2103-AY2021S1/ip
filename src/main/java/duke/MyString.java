@@ -1,10 +1,10 @@
 package duke;
 
-public class Reply {
+public class MyString {
 
     private String res;
 
-    public Reply() {
+    public MyString() {
         res = "";
     }
 

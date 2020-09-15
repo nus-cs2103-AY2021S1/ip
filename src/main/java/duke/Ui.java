@@ -27,7 +27,11 @@ public class Ui {
     /**
      * bye user
      */
-    public String sayBye() {
-        return ("Bye. Hope to see you again soon!");
+    public void sayBye(MyString response) {
+        response.addNewLines("Bye. Hope to see you again soon!");
+    }
+
+    public void invalidCommand(MyString response) {
+        response.addNewLines("Invalid command");
     }
 }

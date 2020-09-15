@@ -4,8 +4,25 @@ package duke;
  */
 public class Parser {
 
+    public enum CommandType {
+        LIST,
+        DONE,
+        TODO,
+        DEADLINE,
+        BYE,
+        EVENT,
+        DELETE,
+        DOWITHIN,
+        FIND,
+        INVALID
+    }
+
     public Parser() {
 
+    }
+
+    public CommandType getType(String cmd) {
+        return CommandType.LIST;
     }
 
     /**

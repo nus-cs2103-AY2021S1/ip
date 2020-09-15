@@ -1,15 +1,10 @@
 package duke;
 
-import java.io.IOException;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.FileNotFoundException;
+import java.util.Scanner;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.stream.Collectors;
 
 import javafx.application.Application;
-import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
@@ -19,30 +14,24 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.Region;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import java.util.Scanner;
-import java.util.List;
 
 /**
  * Duke the best chatbot hehe
  */
 public class Duke extends Application {
 
-    private Storage storage;
-    private TaskList tasks;
-    private Ui ui;
-    private Parser parser;
+    private final Storage storage;
+    private final TaskList tasks;
+    private final Ui ui;
+    private final Parser parser;
 
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
 
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private final Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private final Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     public void start(Stage stage) {
         scrollPane = new ScrollPane();
@@ -50,12 +39,12 @@ public class Duke extends Application {
         scrollPane.setContent(dialogContainer);
 
         userInput = new TextField();
-        sendButton = new Button("Send");
+        Button sendButton = new Button("Send");
 
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
-        scene = new Scene(mainLayout);
+        Scene scene = new Scene(mainLayout);
 
         stage.setScene(scene);
         stage.show();
@@ -123,11 +112,11 @@ public class Duke extends Application {
     }
 
     public String getResponse(String input) {
-        return "cak heard: " + input;
+        return "Duke heard: " + input;
     }
 
     public String getReply(String input) {
-        return solveInput(input);
+        return handleCommand(input);
     }
 
     private Label getDialogLabel(String text) {
@@ -165,127 +154,51 @@ public class Duke extends Application {
         return cur;
     }
 
-    public String solveInput(String cmd) {
-        Reply res = new Reply();
-        if(cmd.equals("bye")) {
-            res.addNewLines(ui.sayBye());
+    public String handleCommand(String cmd) {
+        MyString respond = new MyString();
+
+        Parser.CommandType commandType = parser.getType(cmd);
+
+        switch (commandType) {
+            // commands handled by TaskList
+            case LIST:
+                tasks.handleList(respond);
+                break;
+            case DELETE:
+                tasks.handleDelete(cmd, respond);
+                break;
+            case FIND:
+                tasks.handleFind(cmd, respond);
+                break;
+            case DONE:
+                tasks.handleDone(cmd, respond);
+                break;
+            case TODO:
+                tasks.handleToDo(cmd, respond);
+                break;
+            case EVENT:
+                tasks.handleEvent(cmd, respond);
+                break;
+            case DEADLINE:
+                tasks.handleDeadline(cmd, respond);
+                break;
+            case DOWITHIN:
+                tasks.handleDoWithin(cmd, respond);
+                break;
+            // commands handled by UI only
+            case BYE:
+                ui.sayBye(respond);
+                break;
+            case INVALID:
+                ui.invalidCommand(respond);
+                break;
+            default:
+                break;
         }
-        else if(cmd.equals("list")) {
-            res.addNewLines("Here are the tasks in your list:");
-            // list with index
-            for(int i = 1; i <= tasks.getSize(); ++i) {
-                res.addNewLines(i + "." + tasks.get(i - 1).getStatus());
-            }
-            // list without index
-            // tasks.getArrayList().forEach((n) -> System.out.println(n.getStatus()));
-        }
-        else if(cmd.length() >= 4 && cmd.substring(0, 4).equals("done")) {
-            int c = 0;
-            for(int i = 5; i < cmd.length(); ++i) {
-                c = c * 10 + cmd.charAt(i) - '0';
-            }
-            res.addNewLines("Nice! I've marked this task as done:");
-            tasks.get(c - 1).done();
-            res.addNewLines(tasks.get(c - 1).getStatus());
-        }
-        else if(cmd.length() >= 4 && cmd.substring(0, 4).equals("todo")) {
-            try {
-                checkCmd(cmd, 4, "OOPS!!! The description of a todo cannot be empty.");
-                String getName = cmd.substring(5);
-                assert(!getName.equals(""));
-                Todo tmp = new Todo(getName);
-                res.addNewLines("Got it. I've added this task: ");
-                res.addNewLines("  " + tmp.getStatus());
-                tasks.add(tmp);
-                res.addNewLines("Now you have " + tasks.getSize() + " tasks in the list.");
-            }
-            catch (DukeException ex) {
-                res.addNewLines(ex.getMessage());
-            }
-        }
-        else if(cmd.length() >= 8 &&cmd.substring(0, 8).equals("deadline")) {
-            try {
-                checkCmd(cmd, 8, "☹ OOPS!!! The description of a deadline cannot be empty.");
-                String getName = parser.getNameBy(cmd);
-                assert(!getName.equals(""));
-                String getDeadline = parser.getDeadlineBy(cmd);
-                getDeadline = formatDate(getDeadline);
-                Deadline tmp = new Deadline(getName, getDeadline);
-                res.addNewLines("Got it. I've added this task: ");
-                res.addNewLines("  " + tmp.getStatus());
-                tasks.add(tmp);
-                res.addNewLines("Now you have " + tasks.getSize() + " tasks in the list.");
-            }
-            catch (DukeException ex) {
-                res.addNewLines(ex.getMessage());
-            }
-        }
-        else if(cmd.length() >= 5 &&cmd.substring(0, 5).equals("event")) {
-            try {
-                checkCmd(cmd, 5, "☹ OOPS!!! The description of a event cannot be empty.");
-                String getName = parser.getNameAt(cmd);
-                assert(!getName.equals(""));
-                String getTime = parser.getDeadlineAt(cmd);
-                getTime = formatDate(getTime);
-                Event tmp = new Event(getName, getTime);
-                res.addNewLines("Got it. I've added this task: ");
-                res.addNewLines("  " + tmp.getStatus());
-                tasks.add(tmp);
-                res.addNewLines("Now you have " + tasks.getSize() + " tasks in the list.");
-                //
-            }
-            catch (DukeException ex) {
-                res.addNewLines(ex.getMessage());
-            }
-        }
-        else if(cmd.length() >= 6 && cmd.substring(0, 6).equals("delete")){
-            int c = 0;
-            for(int i = 7; i < cmd.length(); ++i) {
-                c = c * 10 + cmd.charAt(i) - '0';
-            }
-            res.addNewLines("Noted. I've removed this task: ");
-            res.addNewLines(tasks.get(c - 1).getStatus());
-            tasks.remove(c - 1);
-            res.addNewLines("Now you have " + tasks.getSize() + " tasks in the list.");
-        }
-        else if(cmd.length() >= 4 && cmd.substring(0, 4).equals("find")) {
-            String tmp = cmd.substring(5);
-            res.addNewLines("Here are the matching tasks in your list:");
-            for(int i = 1; i <= tasks.getSize(); ++i) if(tasks.get(i - 1).description.contains(tmp)){
-                res.addNewLines(i + "." + tasks.get(i - 1).getStatus());
-            }
-            // find without index
-            List<Task> containsList = tasks.getArrayList().stream().filter(n -> n.description.contains(tmp))
-                    .collect(Collectors.toList());
-        }
-        else if(cmd.length() >= 8 && cmd.substring(0, 8).equals("dowithin")) {
-            //void parse(String cmd) {
-            String getName = "";
-            String from = "";
-            String to = "";
-            for(int i = 9; i < cmd.length(); ++i) {
-                if(cmd.substring(i, i + 10).equals(" /between ")) {
-                    getName = cmd.substring(9, i);
-                    for(int j = i + 10; j < cmd.length(); ++j) {
-                        if(cmd.substring(j, j + 6).equals(" /and ")) {
-                            from = cmd.substring(i + 10, j);
-                            to = cmd.substring(j + 6);
-                            break;
-                        }
-                    }
-                    break;
-                }
-            }
-            DoWithinPeriodTasks tmp = new DoWithinPeriodTasks(getName, from, to);
-            res.addNewLines("Got it. I've added this task: ");
-            res.addNewLines("  " + tmp.getStatus());
-            tasks.add(tmp);
-            res.addNewLines("Now you have " + tasks.getSize() + " tasks in the list.");
-            //}
-        }
-        else res.addNewLines("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+
         storage.updateDataFile(tasks.getArrayList());
-        return res.toString();
+
+        return respond.toString();
     }
 
     public void run() {
@@ -293,28 +206,11 @@ public class Duke extends Application {
         Scanner myScanner = new Scanner(System.in);
         while(true) {
             String cmd = myScanner.nextLine();
-            solveInput(cmd);
+            handleCommand(cmd);
         }
     }
 
     /**
      * check if date is yyyy-mm-dd, then format to MMM d yyyy
      */
-    public static String formatDate(String str) {
-        LocalDate d;
-        try {
-            d = LocalDate.parse(str);
-        } catch (Exception e) {
-            return str;
-        }
-        return d.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-    }
-
-    /**
-     * check if the command is valid
-     */
-    public static void checkCmd(String cmd, int len, String Ex) throws DukeException {
-        if(cmd.length() == len) throw new DukeException(Ex);
-    }
-
 }
