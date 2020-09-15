@@ -1,6 +1,7 @@
 package luke;
 
 import java.time.DateTimeException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import luke.commands.AddCommand;
@@ -38,7 +39,7 @@ public class Parser {
         if (taskDetails[0].equals("T")) {
             parsedTask = new Todo(taskDetails[2]);
         } else if (taskDetails[0].equals("D")) {
-            parsedTask = new Deadline(taskDetails[2], LocalDateTime.parse(taskDetails[3]));
+            parsedTask = new Deadline(taskDetails[2], LocalDate.parse(taskDetails[3]));
         } else if (taskDetails[0].equals("E")) {
             parsedTask = new Event(taskDetails[2], taskDetails[3]);
         }
@@ -99,7 +100,7 @@ public class Parser {
         try {
             String[] deadlineDetails = commandSplit[1].trim().split("/by");
             String deadlineDescription = deadlineDetails[0].trim();
-            LocalDateTime by = LocalDateTime.parse(deadlineDetails[1].trim());
+            LocalDate by = LocalDate.parse(deadlineDetails[1].trim());
             return new AddCommand(new Deadline(deadlineDescription, by));
         } catch (IndexOutOfBoundsException e) {
             throw new LukeEmptyCommandException(commandSplit[0]);
@@ -119,7 +120,7 @@ public class Parser {
 
     private static Command parseDeleteCommand(String[] commandSplit) throws LukeEmptyCommandException {
         try {
-            return new DoneCommand(Integer.parseInt(commandSplit[1]));
+            return new DeleteCommand(Integer.parseInt(commandSplit[1]));
         } catch (IndexOutOfBoundsException e) {
             throw new LukeEmptyCommandException(commandSplit[0]);
         }
@@ -127,7 +128,7 @@ public class Parser {
 
     private static Command parseDoneCommand(String[] commandSplit) throws LukeEmptyCommandException {
         try {
-            return new DeleteCommand(Integer.parseInt(commandSplit[1]));
+            return new DoneCommand(Integer.parseInt(commandSplit[1]));
         } catch (IndexOutOfBoundsException e) {
             throw new LukeEmptyCommandException(commandSplit[0]);
         }

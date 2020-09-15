@@ -23,6 +23,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            stage.setTitle("Luke the Skytalker");
             fxmlLoader.<MainWindow>getController().greet(luke);
             stage.show();
         } catch (IOException e) {

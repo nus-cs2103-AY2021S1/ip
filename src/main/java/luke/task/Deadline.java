@@ -1,5 +1,6 @@
 package luke.task;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
@@ -8,7 +9,7 @@ import java.time.format.FormatStyle;
  * Represents a task and its deadline for the user.
  */
 public class Deadline extends Task {
-    protected LocalDateTime by;
+    protected LocalDate by;
 
     /**
      * Creates a Deadline object that indicates the task and its deadline.
@@ -16,7 +17,7 @@ public class Deadline extends Task {
      * @param description details about the task
      * @param by deadline tha the task should be finished by
      */
-    public Deadline(String description, LocalDateTime by) {
+    public Deadline(String description, LocalDate by) {
         super(TaskType.DEADLINE, description);
         this.by = by;
     }
@@ -26,7 +27,7 @@ public class Deadline extends Task {
     }
 
     public String stringifyBy() {
-        return by.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG));
+        return by.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
     @Override

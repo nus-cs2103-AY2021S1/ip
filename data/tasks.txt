@@ -1,3 +1,2 @@
-T|1|eat breakfast|
-E|0|dance|9pm
-T|0|what to do|
+E|0|team meeting|5pm
+T|0|eat fried chicken|

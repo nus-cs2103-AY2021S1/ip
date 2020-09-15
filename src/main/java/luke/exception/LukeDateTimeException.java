@@ -10,6 +10,6 @@ public class LukeDateTimeException extends LukeException {
      * @param string the DateTime format given by the user
      */
     public LukeDateTimeException(String string) {
-        super("Unable to read date and time. Please enter the date and time in the format 'DD-MM-YYYY HHMM'");
+        super("Unable to read date and time. Please enter the date and time in the format 'YYYY-MM-DD'");
     }
 }
