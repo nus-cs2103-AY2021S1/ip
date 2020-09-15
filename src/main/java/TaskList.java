@@ -119,8 +119,8 @@ public class TaskList {
 
   /** Prints out the TaskList */
   public String list() {
-    StringBuilder out = new StringBuilder("Task list\n");
-    System.out.println("Task list");
+    StringBuilder out = new StringBuilder("Meow list\n");
+    System.out.println("Meow list");
     int i = 0;
     for (Task task : tasks) {
       System.out.println(++i+ ". " + task);

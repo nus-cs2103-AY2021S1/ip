@@ -28,8 +28,8 @@ public class Duke extends Application {
   private Button sendButton;
   private Scene scene;
 
-  private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-  private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+  private Image user = new Image(this.getClass().getResourceAsStream("/images/memewomen.jpg"));
+  private Image duke = new Image(this.getClass().getResourceAsStream("/images/memecat.jpg"));
 
   public Duke() {
     tasks = new TaskList(Storage.load());
@@ -63,7 +63,7 @@ public class Duke extends Application {
     stage.show();
 
     // Step 2. Formatting the window to look as expected
-    stage.setTitle("Duke");
+    stage.setTitle("Meow the meme lord");
     stage.setResizable(false);
     stage.setMinHeight(600.0);
     stage.setMinWidth(400.0);

@@ -92,7 +92,7 @@ public class Parser {
         return "Bye. Hope to see you again soon!";
       default:
         try {
-          throw new DukeException("I'm sorry, but I don't know what that means :-(");
+          throw new DukeException("Meow Meow does not understand");
         } catch (DukeException e) {
           System.out.println(e);
           return e.getMessage();
