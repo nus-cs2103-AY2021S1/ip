@@ -160,7 +160,7 @@ This feature allows users to find a certain task from the list and look at the d
 
 *Usage*: i want to find when is my ip due.
 
-*Format*: dfind [taskName]
+*Format*: find [taskName]
 
 *E.g*: find ip
 
