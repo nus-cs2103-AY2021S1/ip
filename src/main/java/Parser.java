@@ -34,10 +34,11 @@ public class Parser {
             throw new InvalidException("There are only " + noOfTasks
                     + " tasks in the list; Please restate the task to be mark as done");
         }
+        if (index <= 0) {
+            throw new InvalidException("Please choose a task to mark as done, the index start from 1");
+        }
         Task current = listOfContent.getTheList().get(index - 1);
         current.setTaskAsDone();
-        System.out.println("Nice! I've marked this task as done: ");
-        System.out.println(current.timeConverted());
         return current.timeConverted();
     }
     protected static String processDeleteCommand(String input) throws InvalidException {
@@ -63,9 +64,6 @@ public class Parser {
         }
         Task toBeRemove = listOfContent.getTheList().get(index - 1);
         int noOfTasksLeft = listOfContent.getSizeOfList();
-        System.out.println(" Noted. I've removed this task:  ");
-        System.out.println(toBeRemove);
-        System.out.println(" Now you have " + noOfTasksLeft + " tasks in the list. ");
         return listOfContent.removeTask(index - 1);
     }
     protected static String processTodoCommand(String input) throws InvalidException {
@@ -77,9 +75,6 @@ public class Parser {
         }
         ToDo newTask = new ToDo(input.substring(firstChar.length() + 1));
         listOfContent.addTask(newTask);
-        System.out.println("Got it. I've added this task: ");
-        System.out.println(newTask.timeConverted());
-        System.out.println("Now you have " + listOfContent.getSizeOfList() + " tasks in the list.");
         return listOfContent.addStringTask(newTask);
     }
     protected static String processDeadlineCommand(String input) throws InvalidException {
@@ -97,7 +92,8 @@ public class Parser {
             int dateLength = isDone[isDone.length - 2].length();
             if (timeLength < 4 || dateLength < 10) {
                 throw new InvalidDeadlineException("Fail to add task :( . "
-                        + "Please check the time and date format again");
+                        + "Please check the time and date format again. "
+                        + "The correct format should be dd/mm/yyyy tttt. Eg: 02/08/2019 1800");
             }
         }
         int index = input.indexOf("/by");
@@ -105,9 +101,6 @@ public class Parser {
         String time = input.substring(index + 4);
         Deadline deadline = new Deadline(task, time);
         listOfContent.addTask(deadline);
-        System.out.println("Got it. I've added this task: ");
-        System.out.println(deadline.timeConverted());
-        System.out.println("Now you have " + listOfContent.getSizeOfList() + " tasks in the list.");
         return listOfContent.addStringTask(deadline);
     }
     protected static String processEventCommand(String input) throws InvalidException {
@@ -125,7 +118,8 @@ public class Parser {
             int dateLength = isDone[isDone.length - 2].length();
             if (timeLength < 4 || dateLength < 10) {
                 throw new InvalidDeadlineException("Fail to add task :( . "
-                        + "Please check the time and date format again");
+                        + "Please check the time and date format again. "
+                        + "The correct format should be dd/mm/yyyy tttt. Eg: 02/08/2019 1800");
             }
         }
         int index = input.indexOf("/at");
@@ -133,10 +127,23 @@ public class Parser {
         String duration = input.substring(index + 4);
         Task event = new Event(task, duration);
         listOfContent.addTask(event);
-        System.out.println("Got it. I've added this task: ");
-        System.out.println(event.timeConverted());
-        System.out.println("Now you have " + listOfContent.getSizeOfList() + " tasks in the list.");
         return listOfContent.addStringTask(event);
+    }
+    protected static String processHelpCommand() {
+        String toDoCommand = "Use TODO to add a new task. Format todo [taskName], Eg: todo ip \n";
+        String deleteCommand = "\n Use DELETE a new task. Format delete [taskIndex], Eg: delete 5 \n";
+        String findCommand = "\n Use FIND to find a new task. Format find [taskName], Eg: find ip \n";
+        String eventCommand = "\n Use EVENT to add a new task with date and time. "
+                + " Format event [taskName] /at dd/mm/yyyy tttt , Eg: event ip /at 02/08/2019 0800 \n";
+        String deadlineCommand = "\n Use DEADLINE to add a new task with date and time. "
+                + " Format deadline [taskName] /by dd/mm/yyyy tttt , Eg: deadline ip /at 02/08/2019 0800 \n";
+        String listCommand = "\n use LIST to find the lists of task. Format: list. Eg: list \n";
+        String doneCommand = "\n Use DONE to mark a task as done. Format: done [taskIndex], Eg: done 5 \n";
+        String byeCommand = "\n Use BYE to exit from the application. Format: bye. Eg: bye \n";
+        String ending = "\n Please use the above mentioned command, other command are not supported :( ";
+        return toDoCommand + deleteCommand
+                + findCommand
+                + eventCommand + deadlineCommand + listCommand + doneCommand + byeCommand + ending;
     }
 
     /**
@@ -153,8 +160,10 @@ public class Parser {
             Storage.write(listOfContent);
             return Ui.exitMessage();
         }
+        if (input.equals("help")) {
+            return processHelpCommand();
+        }
         if (input.equals("list")) {
-            System.out.println("Here are the tasks in your list: ");
             return listOfContent.showAllContent();
         } else if (firstChar.equals("find")) {
             String keyword = isDone[isDone.length - 1];
@@ -171,7 +180,8 @@ public class Parser {
             } else if (firstChar.equals("event")) {
                 return processEventCommand(input);
             } else {
-                throw new InvalidException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+                throw new InvalidException("OOPS!!! I'm sorry, but I don't know what that means :-( "
+                       + "You can you \"help\" command to find the list of command to use");
             }
         }
     }

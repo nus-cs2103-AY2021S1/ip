@@ -1,13 +1,12 @@
-import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Test;
 
 public class TaskListTest {
     @Test
-    void getSizeOfList_Ui_Test() {
+    void getSizeOfListUiTest() {
         TaskList taskList = new TaskList();
-
-        assertEquals(taskList.getSizeOfList(),0 );
+        assertEquals(taskList.getSizeOfList(), 0);
     }
 }

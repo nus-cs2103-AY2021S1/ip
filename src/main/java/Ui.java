@@ -43,12 +43,8 @@ public class Ui {
         String message = "Hello from Bill \n" + logo + "\n";
         message = message + horizontal_line + "\n ";
         message = message + "Hello! I'm Bill \n" + "What Can I do for you? \n";
+        message = message + "\n ( You can find a list of command by typing \"help \" comand \n eg: help ) \n";
         message = message + horizontal_line + "\n ";
-        System.out.println("Hello from Bill \n" + logo);
-        System.out.println(horizontal_line);
-        System.out.println("Hello! I'm Bill ");
-        System.out.println("What Can I do for you? ");
-        System.out.println(horizontal_line);
         return message;
     }
 
