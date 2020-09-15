@@ -18,6 +18,7 @@ public class Storage {
             put(Priority.HIGH.toString(), Priority.HIGH);
             put(Priority.MEDIUM.toString(), Priority.MEDIUM);
             put(Priority.LOW.toString(), Priority.LOW);
+            put("-", null);
         }
     };
 
@@ -34,7 +35,7 @@ public class Storage {
      */
     private Task addTaskFromStorage(String display) {
         String[] taskDetails = display.split(" \\| ");
-        assert taskDetails.length != 4 || taskDetails.length != 5 : "Task saved wrongly - "
+        assert taskDetails.length != 3 || taskDetails.length != 4 || taskDetails.length != 5 : "Task saved wrongly - "
                 + "contains wrong number of" + " " + "arguments.";
         String taskType = taskDetails[0];
 
@@ -56,7 +57,7 @@ public class Storage {
             assert taskDetails.length != 5 : "Task saved wrongly - contains wrong number of arguments.";
             Date date = Parser.parseDate(taskDetails[3]);
             Priority priority = priorityHashMap.get(taskDetails[4]);
-            return new Deadline(description, date, isDone, priority);
+            return new Event(description, date, isDone, priority);
         } else {
             assert true : "Task saved wrongly - task type could not be identified";
             return null; // will not reach this
@@ -99,18 +100,9 @@ public class Storage {
      */
     public void saveList(TaskList taskList) {
         ArrayList<Task> tasks = taskList.getTasks();
-        String[] directories = filePath.split("/");
-        String currFilePath = directories[0];
-        String[] directoriesToCreate = Arrays.copyOfRange(directories, 1, directories.length - 1);
-        for (String folder : directoriesToCreate) {
-            File dir = new File(currFilePath);
-            if (!dir.exists()) {
-                dir.mkdir();
-            }
-            currFilePath += "/" + folder;
-        }
         try {
             File file = new File(filePath);
+            file.getParentFile().mkdirs();
             if (!file.exists()) {
                 file.createNewFile();
             }

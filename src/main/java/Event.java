@@ -21,7 +21,8 @@ public class Event extends Task {
 
     @Override
     public String getSavedString() {
-        return super.getSavedString() + " | " + Ui.formatDate(at);
+        return super.getSavedString() + " | " + Ui.formatDate(at) + " | " + (priority == null ? "-" :
+                priority.toString());
     }
 
     @Override

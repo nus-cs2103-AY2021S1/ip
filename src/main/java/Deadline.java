@@ -21,7 +21,7 @@ public class Deadline extends Task {
 
     @Override
     public String getSavedString() {
-        return super.getSavedString() + " | " + Ui.formatDate(by);
+        return super.getSavedString() + " | " + Ui.formatDate(by) + " | " + (priority == null ? "-" : priority.toString());
     }
 
     @Override

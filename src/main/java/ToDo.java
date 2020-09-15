@@ -8,6 +8,11 @@ public class ToDo extends Task {
     }
 
     @Override
+    public String getSavedString() {
+        return super.getSavedString() + " | " + (priority == null ? "-" : priority.toString());
+    }
+
+    @Override
     public String toString() {
         return super.toString() + (priority == null ? "" : " (priority: " + priority.toString() + ")");
     }

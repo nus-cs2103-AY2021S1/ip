@@ -48,8 +48,7 @@ public abstract class Task {
      * @return String that contains the details of a Task and is saved in a specified file.
      */
     public String getSavedString() {
-        return taskType.getSymbol() + " | " + (isDone ? "1" : "0") + " | " + description + " | "
-                + (priority == null ? "" : priority.toString());
+        return taskType.getSymbol() + " | " + (isDone ? "1" : "0") + " | " + description;
     }
 
     public boolean isOccuringOn(Date date) {
