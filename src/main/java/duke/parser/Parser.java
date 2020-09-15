@@ -100,14 +100,22 @@ public class Parser {
             if (remaining == null) {
                 throw DukeException.invalidNumber();
             }
-            index = Integer.parseInt(remaining) - 1;
-            return new DoneCommand(index);
+            try {
+                index = Integer.parseInt(remaining) - 1;
+                return new DoneCommand(index);
+            } catch (NumberFormatException numExcept) {
+                throw DukeException.invalidInput();
+            }
         case DELETE_COMMAND:
             if (remaining == null) {
                 throw DukeException.invalidNumber();
             }
-            index = Integer.parseInt(remaining) - 1;
-            return new DeleteCommand(index);
+            try {
+                index = Integer.parseInt(remaining) - 1;
+                return new DeleteCommand(index);
+            } catch (NumberFormatException numExcept) {
+                throw DukeException.invalidInput();
+            }
         case FIND_COMMAND:
             if (remaining == null) {
                 throw DukeException.missingParameters();

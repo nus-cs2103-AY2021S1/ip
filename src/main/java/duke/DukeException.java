@@ -15,9 +15,10 @@ public class DukeException extends Exception {
             + "a task with attached time cannot be empty";
 
     private static final String ALREADY_DONE_FRONT = "The task \'";
-    private static final String ALREADY_DONE_END = "\' has already been marked as done.";
+    private static final String ALREADY_DONE_END = "\' is already marked as done.";
 
     private static final String INVALID_NUMBER = "Please specify a valid item number";
+    private static final String INVALID_INPUT = "Please input a number for this command";
 
     private static final String UNSPECIFIC_COMMAND = "This is a single word command. Please try again";
     private static final String MISSING_PARAMETERS = "This command requires more parameters. Please try again";
@@ -85,6 +86,17 @@ public class DukeException extends Exception {
      */
     public static DukeException invalidNumber() {
         return new DukeException(INVALID_NUMBER);
+    }
+
+    /**
+     * creates an exception stating that the string passed
+     * as a parameter to commands requiring number inputs (e.g. done and delete)
+     * cannot be parsed as an integer
+     *
+     * @return exception indicating the input that cannot be parsed
+     */
+    public static DukeException invalidInput() {
+        return new DukeException(INVALID_INPUT);
     }
 
     /**

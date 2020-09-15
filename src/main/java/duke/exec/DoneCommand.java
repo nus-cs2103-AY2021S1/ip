@@ -30,6 +30,9 @@ public class DoneCommand implements Executable {
      */
     @Override
     public String run(TaskList tasks, Ui ui, Storage store) throws DukeException {
+        if (tasks.size() <= index || index < 0) {
+            throw DukeException.invalidNumber(); // keep happy path prominent
+        }
         Task toToggle = tasks.get(index);
 
         // if it is done, there is no need to set as done

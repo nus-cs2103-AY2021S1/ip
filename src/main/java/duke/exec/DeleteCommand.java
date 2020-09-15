@@ -32,7 +32,7 @@ public class DeleteCommand implements Executable {
      */
     @Override
     public String run(TaskList tasks, Ui ui, Storage store) throws DukeException {
-        if (tasks.size() < index || index <= 0) {
+        if (tasks.size() <= index || index < 0) {
             throw DukeException.invalidNumber(); // keep happy path prominent
         }
         Task toDelete = tasks.get(index);
