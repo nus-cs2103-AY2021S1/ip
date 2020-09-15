@@ -35,13 +35,13 @@ public class NekoHistory {
 
     private void saveState(TaskList nextState) {
         if (version != histories.size() - 1) {
-            revertState();
+            clearFutureStates();
         }
         histories.add(nextState);
         version++;
     }
 
-    private void revertState() {
+    private void clearFutureStates() {
         histories.subList(version + 1, histories.size()).clear();
     }
 
@@ -73,8 +73,8 @@ public class NekoHistory {
             TaskList nextState = getCurrent().addTask(task);
             saveState(nextState);
             return task;
-        } catch (NekoDuplicateTaskException e) {
-            revertState();
+        } catch (NekoSimilarTaskException e) {
+            saveState(e.getNextState());
             throw e;
         }
     }
@@ -88,14 +88,9 @@ public class NekoHistory {
      * @throws NekoTaskNotFoundException if the specified {@code index} is out of range.
      */
     public Task markAsComplete(int index) throws NekoTaskNotFoundException {
-        try {
-            TaskList nextState = getCurrent().markAsComplete(index);
-            saveState(nextState);
-            return nextState.getTask(index);
-        } catch (NekoTaskNotFoundException e) {
-            revertState();
-            throw e;
-        }
+        TaskList nextState = getCurrent().markAsComplete(index);
+        saveState(nextState);
+        return nextState.getTask(index);
     }
 
     /**
@@ -107,16 +102,11 @@ public class NekoHistory {
      * @throws NekoTaskNotFoundException if the specified {@code index} is out of range.
      */
     public Task deleteTask(int index) throws NekoTaskNotFoundException {
-        try {
-            // Retrieve the task before it is deleted for command response.
-            Task deletedTask = getCurrent().getTask(index);
-            TaskList nextState = getCurrent().deleteTask(index);
-            saveState(nextState);
-            return deletedTask;
-        } catch (NekoTaskNotFoundException e) {
-            revertState();
-            throw e;
-        }
+        // Retrieve the task before it is deleted for command response.
+        Task deletedTask = getCurrent().getTask(index);
+        TaskList nextState = getCurrent().deleteTask(index);
+        saveState(nextState);
+        return deletedTask;
     }
 
     /**

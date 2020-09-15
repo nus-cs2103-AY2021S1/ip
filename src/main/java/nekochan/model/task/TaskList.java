@@ -70,7 +70,7 @@ public class TaskList {
         nextState.tasks.add(task);
 
         if (hasSimilars) {
-            throw new NekoSimilarTaskException(Messages.SIMILAR_TASK_ERROR, similars);
+            throw new NekoSimilarTaskException(Messages.SIMILAR_TASK_ERROR, similars, nextState);
         }
         return nextState;
     }
