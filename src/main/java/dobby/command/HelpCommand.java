@@ -5,28 +5,10 @@ import dobby.TaskList;
 
 public class HelpCommand implements Command {
 
-    protected static final String USAGE = "help";
-    protected static final String ALL_COMMANDS = "You can use the following commands in this chat bot:"
-            + "\n  " + TodoCommand.USAGE
-            + "\n  " + DeadlineCommand.USAGE
-            + "\n  " + EventCommand.USAGE
-            + "\n  " + ListCommand.USAGE
-            + "\n  " + DoneCommand.USAGE
-            + "\n  " + DeleteCommand.USAGE
-            + "\n  " + ScheduledCommand.USAGE
-            + "\n  " + FindCommand.USAGE
-            + "\n  " + FindtypeCommand.USAGE
-            + "\n  " + UpdateCommand.USAGE
-            + "\n  " + HelpCommand.USAGE
-            + "\n  " + ByeCommand.USAGE;
-
     @Override
     public String parseInput(TaskList tasks, String text) throws DobbyException {
         assert text.equals("help") : "Help command must be help";
-        return ALL_COMMANDS;
-    }
-
-    public String getAllCommands() {
-        return ALL_COMMANDS;
+        String userGuide = "https://sagarsureka.github.io/ip/";
+        return "Please look at the user guide at: " + userGuide;
     }
 }

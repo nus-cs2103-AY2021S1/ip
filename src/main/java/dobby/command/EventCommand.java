@@ -8,8 +8,6 @@ import dobby.task.Event;
 
 public class EventCommand implements Command {
 
-    protected static final String USAGE = "event _description_ /at dd/mm/yyyy hhhh(optional)";
-
     @Override
     public String parseInput(TaskList tasks, String text) throws DobbyException {
         String message;
@@ -20,10 +18,10 @@ public class EventCommand implements Command {
 
             if (text.indexOf("/at") < 0 && text.length() >= 1) { // non-empty description and /by missing
                 throw new DobbyException("Incorrect usage of command.\nSchedule details cannot be empty. "
-                        + "Please try again.\n  " + USAGE);
+                        + "Please try again.");
             } else if (text.indexOf("/at") == 0) { // no description, by given
                 throw new DobbyException("Incorrect usage of command.\nDescription cannot be empty. "
-                        + "Please try again.\n  " + USAGE);
+                        + "Please try again.");
             }
 
             String at = text.substring(text.indexOf("/at") + 4).trim();
@@ -35,8 +33,8 @@ public class EventCommand implements Command {
                 boolean isCorrectFormat = at.substring(1 + at.lastIndexOf(' ')).length() > 4;
                 if (isCorrectFormat) {
                     throw new DobbyException("Incorrect usage of command.\n"
-                            + "Details of time should be in 24hr format with only 4 digits. Please try again.\n  "
-                            + USAGE);
+                            + "Details of time should be in 24hr format with only 4 digits. "
+                            + "Please try again.");
                 }
             }
 
@@ -47,14 +45,14 @@ public class EventCommand implements Command {
         } catch (StringIndexOutOfBoundsException e) {
             if (text.startsWith("event") || text == null) { // description empty
                 throw new DobbyException("Incorrect usage of command.\nDescription cannot be empty. "
-                        + "Please try again.\n  " + USAGE);
+                        + "Please try again.");
             } else { // no schedule details specified
                 throw new DobbyException("Incorrect usage of command.\nSchedule details cannot be empty. "
-                        + "Please try again.\n  " + USAGE);
+                        + "Please try again.");
             }
         } catch (DateTimeParseException e) {
             throw new DobbyException("Incorrect usage of command.\nThe format of the date in incorrect. "
-                    + "Please try again.\n  " + USAGE);
+                    + "Please try again.");
         } catch (DobbyException e) { // empty description or /at missing
             return e.getMessage();
         }

@@ -2,8 +2,6 @@ package dobby;
 
 import java.util.Scanner;
 
-import dobby.command.HelpCommand;
-
 /**
  * Interacts with the user
  */
@@ -14,7 +12,7 @@ public class Ui {
      * Calls reply function with greeting string
      */
     public static String greet() {
-        String message = "Hello! I'm Dobby.\n" + (new HelpCommand()).getAllCommands();
+        String message = "Hello! I'm Dobby. \nHow can I help you!";
         return message;
     }
 

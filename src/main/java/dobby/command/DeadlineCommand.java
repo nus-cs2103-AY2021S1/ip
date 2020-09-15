@@ -7,7 +7,6 @@ import dobby.TaskList;
 import dobby.task.Deadline;
 
 public class DeadlineCommand implements Command {
-    protected static final String USAGE = "deadline _description_ /by dd/mm/yyyy hhhh(optional)";
 
     @Override
     public String parseInput(TaskList tasks, String text) throws DobbyException {
@@ -19,10 +18,10 @@ public class DeadlineCommand implements Command {
 
             if (text.indexOf("/by") < 0 && text.length() >= 1) { // non-empty description and /by missing
                 throw new DobbyException("Incorrect usage of command.\nDeadline details cannot be empty. "
-                        + "Please try again.\n  " + USAGE);
+                        + "Please try again.");
             } else if (text.indexOf("/by") == 0) { // no description, by given
                 throw new DobbyException("Incorrect usage of command.\nDescription cannot be empty. "
-                        + "Please try again.\n  " + USAGE);
+                        + "Please try again.");
             }
 
             String by = text.substring(text.indexOf("/by") + 4).trim();
@@ -35,7 +34,7 @@ public class DeadlineCommand implements Command {
                 if (isCorrectFormat) {
                     throw new DobbyException("Incorrect usage of command.\n"
                             + "Details of time should be in 24hr format with only 4 digits. "
-                            + "Please try again.\n  " + USAGE);
+                            + "Please try again.");
                 }
             }
 
@@ -46,17 +45,14 @@ public class DeadlineCommand implements Command {
         } catch (StringIndexOutOfBoundsException e) {
             if (text.startsWith("deadline") || text == null) { // description empty
                 throw new DobbyException("Incorrect usage of command.\nDescription cannot be empty. "
-                        + "Please try again.\n  "
-                        + USAGE);
+                        + "Please try again.");
             } else { // no deadline details specified
                 throw new DobbyException("Incorrect usage of command.\nDeadline details cannot be empty. "
-                        + "Please try again.\n  "
-                        + USAGE);
+                        + "Please try again.");
             }
         } catch (DateTimeParseException e) {
             throw new DobbyException("Incorrect usage of command.\nThe format of the date in incorrect. "
-                    + "Please try again.\n  "
-                    + USAGE);
+                    + "Please try again.");
         } catch (DobbyException e) { // empty description or /by missing
             return e.getMessage();
         }

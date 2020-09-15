@@ -24,8 +24,7 @@ public class UpdateCommand implements Command {
             System.out.println("Task index: " + taskIndex);
             if (taskIndex > tasks.getSize()) {
                 throw new DobbyException("Incorrect usage of command.\n"
-                        + "Task number must be within the correct range. Please try again.\n  "
-                        + USAGE);
+                        + "Task number must be within the correct range. Please try again.");
             }
             Task task = tasks.getTask(taskIndex - 1);
             text = text.substring(2).trim();
@@ -38,7 +37,7 @@ public class UpdateCommand implements Command {
             }
 
         } catch (StringIndexOutOfBoundsException e) {
-            throw new DobbyException("Incorrect usage of command.\n  " + USAGE);
+            throw new DobbyException("Incorrect usage of command.");
         } catch (DobbyException e) {
             return e.getMessage();
         }
@@ -57,15 +56,14 @@ public class UpdateCommand implements Command {
      */
     private String updateTodo(TaskList tasks, String text, Todo task, int index) throws DobbyException {
         if (!text.startsWith("desc:")) {
-            throw new DobbyException("Incorrect usage of command.\n  " + USAGE);
+            throw new DobbyException("Incorrect usage of command.");
         }
         assert text.startsWith("desc:") : "Ensure correct usage of command";
 
         String description = text.substring("desc:".length()).trim();
         if (description.length() == 0) {
             throw new DobbyException("Incorrect usage of command.\n  "
-                    + "Description cannot be empty.\n  "
-                    + USAGE);
+                    + "Description cannot be empty.");
         }
         assert description.length() > 0 : "Description cannot be empty";
         task.setDescription(description);
@@ -109,7 +107,7 @@ public class UpdateCommand implements Command {
             }
 
             if (!(isUpdatingDate || isUpdatingDescription || isUpdatingTime)) {
-                throw new DobbyException("Incorrect usage of command.\n  " + USAGE);
+                throw new DobbyException("Incorrect usage of command.");
             }
             return String.format("Updated task number %d:\n  %s", index, task.getDescription());
         } catch (DobbyException e) {
@@ -142,8 +140,7 @@ public class UpdateCommand implements Command {
         }
         if (description.length() == 0) {
             throw new DobbyException("Incorrect usage of command.\n  "
-                    + "Description cannot be empty.\n  "
-                    + USAGE);
+                    + "Description cannot be empty.");
         }
         assert description.length() > 0 : "Description cannot be empty";
         task.setDescription(description);
@@ -169,8 +166,7 @@ public class UpdateCommand implements Command {
         }
         if (date.length() == 0) {
             throw new DobbyException("Incorrect usage of command.\n  "
-                    + "Date cannot be empty.\n  "
-                    + USAGE);
+                    + "Date cannot be empty.");
         }
         assert date.length() > 0 : "Date cannot be empty";
         task.setDate(date);
@@ -189,8 +185,7 @@ public class UpdateCommand implements Command {
         time = text;
         if (time.length() == 0) {
             throw new DobbyException("Incorrect usage of command.\n  "
-                    + "Time cannot be empty.\n  "
-                    + USAGE);
+                    + "Time cannot be empty.");
         }
         assert time.length() > 0 : "Time cannot be empty";
         task.setTime(time);

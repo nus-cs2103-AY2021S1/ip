@@ -5,7 +5,6 @@ import dobby.TaskList;
 import dobby.task.Todo;
 
 public class TodoCommand implements Command {
-    protected static final String USAGE = "todo _description_";
 
     @Override
     public String parseInput(TaskList tasks, String text) throws DobbyException {
@@ -22,7 +21,7 @@ public class TodoCommand implements Command {
                     tasks.getSize() > 1 ? "s" : "");
         } catch (StringIndexOutOfBoundsException e) {
             throw new DobbyException("Incorrect usage of command.\nDescription cannot be empty. "
-                    + "Please try again.\n  " + USAGE);
+                    + "Please try again.");
         }
         assert message != null : "Return message to user cannot be empty";
         return message;

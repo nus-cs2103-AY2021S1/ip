@@ -6,8 +6,6 @@ import dobby.task.Task;
 
 public class DeleteCommand implements Command {
 
-    protected static final String USAGE = "delete _task_number_";
-
     @Override
     public String parseInput(TaskList tasks, String text) throws DobbyException {
         String message = "";
@@ -19,8 +17,7 @@ public class DeleteCommand implements Command {
             int index = Integer.parseInt(text);
             if (tasks.getSize() < index) { // if index is out of range throw exception
                 throw new DobbyException("Incorrect usage of command.\n"
-                        + "Task number must be within the correct range.\n  "
-                        + USAGE);
+                        + "Task number must be within the correct range.");
             }
 
             assert index <= tasks.getSize() : "Task to delete must be in correct range";
@@ -32,8 +29,7 @@ public class DeleteCommand implements Command {
             return e.getMessage();
         } catch (Exception e) { // missing number after done
             throw new DobbyException("Incorrect usage of command.\n"
-                    + "Please enter a task number after delete.\n  "
-                    + USAGE);
+                    + "Please enter a task number after delete.");
         }
         assert message != null : "Return message to user cannot be empty";
         return message;

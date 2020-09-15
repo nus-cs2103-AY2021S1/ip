@@ -34,8 +34,7 @@ public class ParserTest {
             todoNoDescription = e.getMessage();
         }
         assertEquals("Incorrect usage of command.\n"
-                + "Description cannot be empty. Please try again.\n  "
-                + "todo _description_", todoNoDescription);
+                + "Description cannot be empty. Please try again.", todoNoDescription);
 
         // for valid todo command
         String todoTask;
@@ -61,8 +60,7 @@ public class ParserTest {
             deadlineNoDescription = e.getMessage();
         }
         assertEquals("Incorrect usage of command.\n"
-                + "Description cannot be empty. Please try again.\n  "
-                + "deadline _description_ /by dd/mm/yyyy hhhh(optional)", deadlineNoDescription);
+                + "Description cannot be empty. Please try again.", deadlineNoDescription);
 
         // for deadline command with no deadline details
         String emptyDeadlineDetails;
@@ -72,8 +70,7 @@ public class ParserTest {
             emptyDeadlineDetails = e.getMessage();
         }
         assertEquals("Incorrect usage of command.\n"
-                + "Deadline details cannot be empty. Please try again.\n  "
-                + "deadline _description_ /by dd/mm/yyyy hhhh(optional)", emptyDeadlineDetails);
+                + "Deadline details cannot be empty. Please try again.", emptyDeadlineDetails);
 
         // for valid deadline command
         String deadlineTask;
@@ -101,8 +98,7 @@ public class ParserTest {
             eventNoDescription = e.getMessage();
         }
         assertEquals("Incorrect usage of command."
-                + "\nDescription cannot be empty. Please try again.\n  "
-                + "event _description_ /at dd/mm/yyyy hhhh(optional)", eventNoDescription);
+                + "\nDescription cannot be empty. Please try again.", eventNoDescription);
 
         // for event command with no schedule details
         String emptyEventDetails;
@@ -112,8 +108,7 @@ public class ParserTest {
             emptyEventDetails = e.getMessage();
         }
         assertEquals("Incorrect usage of command."
-                + "\nSchedule details cannot be empty. Please try again.\n  "
-                + "event _description_ /at dd/mm/yyyy hhhh(optional)", emptyEventDetails);
+                + "\nSchedule details cannot be empty. Please try again.", emptyEventDetails);
 
         // for valid event command
         String eventTask;
@@ -214,8 +209,7 @@ public class ParserTest {
         }
 
         assertEquals("1. [T][\u2718] test findtype command\n", message);
-        assertEquals("Incorrect usage of command. Please try again."
-                + "\n  findtype _T/D/E_", noType);
+        assertEquals("Incorrect usage of command. Please try again.", noType);
     }
 
     @Test
@@ -243,7 +237,7 @@ public class ParserTest {
         assertEquals("1. [T][\u2718] test findtype command\n", message);
         assertEquals("Incorrect usage of command."
                 + "\nKeyword required cannot be empty. "
-                + "Please try again.\n  find _keyword_", noKeyword);
+                + "Please try again.", noKeyword);
         assertEquals("There are no tasks of containing the word - none",
                 noTaskContainingKeyword);
     }

@@ -8,8 +8,6 @@ import dobby.TaskList;
 
 public class ScheduledCommand implements Command {
 
-    protected static final String USAGE = "scheduled dd/mm/yyyy";
-
     @Override
     public String parseInput(TaskList tasks, String text) throws DobbyException {
         String message;
@@ -24,8 +22,7 @@ public class ScheduledCommand implements Command {
             message = tasks.getScheduledTasks(parsedDate);
         } catch (DateTimeParseException | StringIndexOutOfBoundsException e) {
             throw new DobbyException("Incorrect usage of command.\n"
-                    + "The format of the date in incorrect. Please try again.\n  "
-                    + USAGE);
+                    + "The format of the date in incorrect. Please try again.");
         }
         assert message != null : "Return message to user cannot be empty";
         return message;
