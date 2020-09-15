@@ -27,7 +27,8 @@ Format: `event TASK /at DATE TIME`
 Examples: `event Meeting /at 2020-09-09 1400hrs` Adds a task called 'Meeting at 9 Sep 2020 1400hrs' to your task list.
 
 ### Listing all tasks `list`
-Shows a list of all tasks in the task list.
+Shows a list of all tasks in the task list.source
+
 
 Format: `list`
 
