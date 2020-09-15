@@ -1,6 +1,7 @@
 T | 1 | study quiz
-D | 0 | quiz| Thu, Sep 24 2020
+D | 1 | quiz| Thu, Sep 24 2020
 E | 0 | homecoming| Sun, Sep 20 2020 07:30 PM
 T | 0 | portfolio making
-D | 0 | project work| Sat, Sep 19 2020
-E | 0 | Concert | Fri, Nov 20 2020 07:30 PM
+D | 1 | project work| Sat, Sep 19 2020
+E | 0 | Concert| Fri, Nov 20 2020 07:30 PM
+T | 0 | borrow books

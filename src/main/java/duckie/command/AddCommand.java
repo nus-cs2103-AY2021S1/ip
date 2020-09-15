@@ -40,6 +40,7 @@ public class AddCommand extends Command {
             throw e;
         }
         String output = "Quack! Added: \n";
+        output += task + "\n";
         output += "Now you have " + tasks.getTaskList().size() + " task(s) in the list.";
         return output;
     }
