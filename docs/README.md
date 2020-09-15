@@ -18,17 +18,17 @@ Duke supports the creation of three different types of tasks: [`todo`](#todo---a
 Duke is able to [`list`](#list---listing-all-tasks) the tasks the user has added. Duke displays the type of the task, description of the task and status of the task.
 
 ### Mark task as done
-Duke allows the user to mark a task as [`done`](done---marking-a-task-as-done) once the user has completed the task.
+Duke allows the user to mark a task as [`done`](#done---marking-a-task-as-done) once the user has completed the task.
 
 ### Delete tasks
-Duke is able to [`delete`](delete---deleting-a-task) tasks that has already been added.
+Duke is able to [`delete`](#delete---deleting-a-task) tasks that has already been added.
 
 
 ### Find tasks
-Duke can [`find`](find---finding-a-task) tasks that include a certain string in its description and list them for easy access.
+Duke can [`find`](#find---finding-a-task) tasks that include a certain string in its description and list them for easy access.
 
 ### Undo last command
-Duke can [`undo`](undo---undoing-previous-command) the last command that made a change to the task list.
+Duke can [`undo`](#undo---undoing-previous-command) the last command that made a change to the task list.
 
 
 ## Usage
