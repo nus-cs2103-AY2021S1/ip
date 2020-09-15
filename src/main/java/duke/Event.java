@@ -1,16 +1,16 @@
 package duke;
 
 /**
- * Represents an event inherited from task. A <code>Event</code> object corresponds to
- * a task associated a date as event date
+ * Represents an event inherited from task. A <code>Event</code> object
+ * corresponds to a task associated a date as event date
  */
 
 public class Event extends Task {
-    Event(String message) {
+    Event(final String message) {
         super(message);
     }
 
-    Event(String message, boolean isDone) {
+    Event(final String message, final boolean isDone) {
         super(message, isDone);
     }
     @Override

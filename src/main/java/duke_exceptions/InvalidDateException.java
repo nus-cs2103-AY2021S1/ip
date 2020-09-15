@@ -5,7 +5,14 @@ package duke_exceptions;
  * </code> object is used when date is invalid
  */
 public class InvalidDateException extends Exception {
-    InvalidDateException() {}
+    /** Empty constructor as only toString method is repetitively used.
+     *
+     */
+    InvalidDateException() { }
+
+    /** Returns a string message for invalid date body exception.
+     *
+     */
     @Override
     public String toString() {
         return "OOPS!!! Date is invalid.";

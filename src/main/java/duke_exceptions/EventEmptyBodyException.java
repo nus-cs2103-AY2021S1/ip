@@ -6,7 +6,14 @@ package duke_exceptions;
  * information
  */
 public class EventEmptyBodyException extends EmptyBodyException {
-    EventEmptyBodyException() {}
+    /** Empty constructor as only toString method is repetitively used.
+     *
+     */
+    public EventEmptyBodyException() { }
+
+    /** Returns a string message for event empty body exception.
+     *
+     */
     @Override
     public String toString() {
         return "OOPS!!! The description of an event cannot be empty.";

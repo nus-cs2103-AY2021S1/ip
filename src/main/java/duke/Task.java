@@ -6,7 +6,7 @@ package duke;
  */
 
 public class Task {
-    private String message;
+    private final String message;
     private boolean isDone;
 
     Task(String message) {

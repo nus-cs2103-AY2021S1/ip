@@ -6,7 +6,14 @@ package duke_exceptions;
  * information
  */
 public class FindEmptyBodyException extends EmptyBodyException {
-    public FindEmptyBodyException() {}
+    /** Empty constructor as only toString method is repetitively used.
+     *
+     */
+    public FindEmptyBodyException() { }
+
+    /** Returns a string message for find empty body exception.
+     *
+     */
     @Override
     public String toString() {
         return "OOPS!!! Empty find is invalid.";

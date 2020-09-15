@@ -6,7 +6,14 @@ package duke_exceptions;
  * information
  */
 public class DoneEmptyBodyException extends EmptyBodyException {
-    public DoneEmptyBodyException() {}
+    /** Empty constructor as only toString method is repetitively used.
+     *
+     */
+    public DoneEmptyBodyException() { }
+
+    /** Returns a string message for done empty body exception.
+     *
+     */
     @Override
     public String toString() {
         return "OOPS!!! Empty done is invalid.";

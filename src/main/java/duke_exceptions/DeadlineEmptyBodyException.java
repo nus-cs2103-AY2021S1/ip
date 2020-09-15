@@ -7,7 +7,14 @@ package duke_exceptions;
  */
 
 public class DeadlineEmptyBodyException extends EmptyBodyException {
-    DeadlineEmptyBodyException() { }
+    /** Empty constructor as only toString method is repetitively used.
+     *
+     */
+    public DeadlineEmptyBodyException() { }
+
+    /** Returns a string message for deadline empty body exception.
+     *
+     */
     @Override
     public String toString() {
         return "OOPS!!! The description of a deadline cannot be empty.";

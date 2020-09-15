@@ -21,10 +21,10 @@ public class MainWithUi extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
-    private Image userPic = new Image(this.getClass().getResourceAsStream("/images/DaUser.jpg"));
-    private Image dukePic = new Image(this.getClass().getResourceAsStream("/images/DaDuke.jpg"));
-    private java.nio.file.Path path = java.nio.file.Paths.get(System.getProperty("user.home"), "ip","start.txt");
-    private Duke dukeBot = new Duke(path);
+    private final Image userPic = new Image(this.getClass().getResourceAsStream("/images/DaUser.jpg"));
+    private final Image dukePic = new Image(this.getClass().getResourceAsStream("/images/DaDuke.jpg"));
+    private final java.nio.file.Path path = java.nio.file.Paths.get(System.getProperty("user.home"), "ip","start.txt");
+    private final Duke dukeBot = new Duke(path);
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -99,18 +99,6 @@ public class MainWithUi extends Application {
         });
 
         // more code to be added here later
-    }
-
-    /**
-     * Iteration 1:
-     * Creates a label with the specified text and adds it to the dialog container.
-     * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
-     */
-    private Label getDialogLabel(String text) {
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-        return textToAdd;
     }
 
     /**

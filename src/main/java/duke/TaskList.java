@@ -9,7 +9,7 @@ import java.util.List;
  * it has operations to add/delete tasks in the list
  */
 public class TaskList {
-    private List<Task> lst = new ArrayList<>();
+    private final List<Task> lst = new ArrayList<>();
     public static int numberOfDoneTasks;
     public static LocalDate lastLoginDate;
 

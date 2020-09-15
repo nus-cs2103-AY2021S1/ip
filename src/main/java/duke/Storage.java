@@ -14,7 +14,7 @@ import duke_exceptions.*;
  * the file and saving tasks in the file
  */
 public class Storage {
-    private File file;
+    private final File file;
     Storage(Path path) {
         this.file = new File(path.toString());
     }

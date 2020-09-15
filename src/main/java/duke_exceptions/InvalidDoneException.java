@@ -5,7 +5,15 @@ package duke_exceptions;
  * </code> object is used when attempted done index is invalid
  */
 public class InvalidDoneException extends Exception {
-    public InvalidDoneException() {}
+    /** Empty constructor as only toString method is repetitively used.
+     *
+     */
+    public InvalidDoneException() { }
+
+    /** Returns a string message for invalid done exception.
+     *  (Index out of bounds)
+     *
+     */
     @Override
     public String toString() {
         return "OOPS!!! Done index is invalid.";

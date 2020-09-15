@@ -12,8 +12,8 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
     // changed duke initialisation
-    java.nio.file.Path path = java.nio.file.Paths.get(System.getProperty("user.home"), "ip","start.txt");
-    private Duke duke = new Duke(path);
+    final java.nio.file.Path path = java.nio.file.Paths.get(System.getProperty("user.home"), "ip","start.txt");
+    private final Duke duke = new Duke(path);
 
     @Override
     public void start(Stage stage) {

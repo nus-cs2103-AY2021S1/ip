@@ -6,7 +6,14 @@ package duke_exceptions;
  * information
  */
 public class DeleteEmptyBodyException extends EmptyBodyException {
+    /** Empty constructor as only toString method is repetitively used.
+     *
+     */
     public DeleteEmptyBodyException() { }
+
+    /** Returns a string message for delete empty body exception.
+     *
+     */
     @Override
     public String toString() {
         return "OOPS!!! Empty deletion is invalid.";

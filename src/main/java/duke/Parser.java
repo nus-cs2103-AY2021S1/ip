@@ -1,16 +1,13 @@
 package duke;
 
-import java.util.ArrayList;
-import java.util.List;
 import duke_exceptions.*;
-
 
 public class Parser {
     // constant SPACE and LINE for format purposes
-    private static String SPACE = "     ";
-    private static String INDENT = "      ";
-    private static String MORE_INDENT = "        ";
-    private static String LINE = "_____________________________________________\n";
+    private static final String SPACE = "     ";
+    private static final String INDENT = "      ";
+    private static final String MORE_INDENT = "        ";
+    private static final String LINE = "_____________________________________________\n";
 
     /**
      * Returns formatted string, adding SPACE and LINE
@@ -27,7 +24,7 @@ public class Parser {
     private final int EXTRA = 1;
 
     // current command: the whole line
-    private String command;
+    private final String command;
 
     /**
      * Constructor of Parser
@@ -131,6 +128,7 @@ public class Parser {
      */
     private boolean isValid(String command) {
         try {
+            //noinspection unused
             String type = command.split(" ")[PRIOR];
         } catch (IndexOutOfBoundsException ex) {
             return false;
@@ -257,11 +255,19 @@ public class Parser {
         try {
             description = command.split(" ", 2)[EXTRA];
         } catch (IndexOutOfBoundsException ex) {
-            return format(new TodoEmptyBodyException().toString());
+            switch (taskType) {
+            case T:
+                return format(new TodoEmptyBodyException().toString());
+            case D:
+                return format(new DeadlineEmptyBodyException().toString());
+            case E:
+                return format(new EventEmptyBodyException().toString());
+            }
+            return format(new UnknownCommandException().toString());
         }
 
         lst.addOfType(description, taskType);
-        // a message to be printed when invoking a toodoo, event, or deadline
+        // a message to be printed when invoking a todo, event, or deadline
         String messageAdded = "Got it. I've added this task:\n";
         return format(messageAdded + MORE_INDENT + getMostRecentTask(lst).print() + getListCountMessage(lst));
     }
@@ -270,7 +276,7 @@ public class Parser {
      * Returns the most recent task in the task list
      *
      * @param lst the task list
-     * @return rthe most recent task
+     * @return the most recent task
      */
     private Task getMostRecentTask(TaskList lst) {
         return lst.get(lst.size() - 1);

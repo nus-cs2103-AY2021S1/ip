@@ -1,8 +1,9 @@
 package duke;
 
+import duke_exceptions.IllegalTaskTypeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import duke_exceptions.*;
+
 
 /**
  * Represents methods to manipulate with formats, e.g. dates
@@ -72,6 +73,6 @@ public final class Converter {
      * @return boolean status
      */
     static boolean getStatus(final int i) {
-        return i == 0 ? false : true;
+        return i != 0;
     }
 }
