@@ -109,7 +109,7 @@ public class WindowDisplay extends Application {
 
         Path pathToSave = Paths.get(System.getProperty("user.home"), "ipSave.txt");
         TaskList taskList = FileManager.readFromSave(pathToSave);
-        
+
         flushTextCache();
 
         commandParserAndLogic = new CommandParserAndLogic(taskList, pathToSave);
