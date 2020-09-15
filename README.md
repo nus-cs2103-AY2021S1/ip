@@ -1,26 +1,46 @@
-# Duke project template
+# User Guide
+- Table of Contents
+    - [Description](#description)
+    - [Setting up](#setting-uo)
+    - [Features](#features)
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+## Description
+This is a chat bot named after the Java mascot _Duke_. _Duke_ can help you to manage your tasks.
+![Ui](./Ui.png)
 
-## Setting up in Intellij
+## Setting up 
+1. Download the jar file from the releases. 
+2. Put the file in its own folder.
+3. Double click on it to run.
+4. Have fun :) 
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+## Features
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project dialog first)
-1. Set up the correct JDK version, as follows:
-   1. Click `Configure` > `Structure for New Projects` and then `Project Settings` > `Project` > `Project SDK`
-   1. If JDK 11 is listed in the drop down, select it. If it is not, click `New...` and select the directory where you installed JDK 11
-   1. Click `OK`
-1. Import the project into Intellij as follows:
-   1. Click `Open or Import`.
-   1. Select the project directory, and click `OK`
-   1. If there are any further prompts, accept the defaults.
-1. After the importing is complete, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()`. If the setup is correct, you should see something like the below:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+- #### Greet the chat bot
+ `hello`
+ 
+ - #### Add a task with description 
+    - Todo: 
+        `todo {description} [/every {interval}]`
+        - e.g. `todo read a book /every week`
+    - Event:
+        `event {description} /at yyyy-MM-dd [HHmm] [/every {interval}]`
+        - e.g. `event dinner party /at 2020-09-16 1730`
+    - Deadline:
+        `deadline {description} /by yyyy-MM-dd [HHmm] [/every {interval}]`
+        - e.g. `deadline homework /by 2020-09-18 2359`
+        
+ - #### Complete a task
+ `done {task number}`
+        
+ - #### Delete a task
+ `delete {task number}`
+ 
+ - #### List all your tasks
+ `list`
+ 
+ - #### Find tasks that contain a keyword
+ `find {keyword}`
+ 
+ - #### Save and exit the application
+ `bye`

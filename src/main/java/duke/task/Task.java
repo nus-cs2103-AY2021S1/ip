@@ -41,7 +41,7 @@ public abstract class Task {
     }
 
     protected String formatDateTime(String str) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
         LocalDateTime ldt = LocalDateTime.parse(str, formatter);
         return ldt.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm"));
     }
