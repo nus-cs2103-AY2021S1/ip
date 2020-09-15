@@ -31,7 +31,7 @@ public class Ui {
      * @return String Welcome message.
      */
     public static String outputWelcome() {
-        return "Hello! I'm Dude\n" + "What can I do for you today?";
+        return "Hi Mocha! I'm Milk!\n" + "What's up!";
     }
 
     /**
@@ -39,7 +39,7 @@ public class Ui {
      * @return String Invalid input message.
      */
     public String outputInvalidInput() {
-        return "Sorry! But I don't know what that means!";
+        return "Sorry Mocha >< Bb don't understand what you mean T.T";
     }
 
     /**
@@ -47,7 +47,7 @@ public class Ui {
      * @return String Exit message.
      */
     public String outputBye() {
-        return "Bye! Hope to see you again soon!";
+        return "Bye! See you soon!";
     }
 
     /**
@@ -55,7 +55,7 @@ public class Ui {
      * @return String Done error message.
      */
     public String outputDoneError() {
-        return "Sorry! The number does not exist in the list!";
+        return "Oh no! The number does not exist in the list!";
     }
 
     /**
@@ -72,7 +72,7 @@ public class Ui {
      * @return String No task message.
      */
     public String outputListNoTask() {
-        return "Congratulations! You have currently no task.";
+        return "Congratulations Mocha!! You have currently no task.";
     }
 
     /**
@@ -81,7 +81,7 @@ public class Ui {
      * @return String All the current task.
      */
     public String outputListTask(TaskList ls) {
-        StringBuilder str = new StringBuilder("Here are the tasks in your list:\n");
+        StringBuilder str = new StringBuilder("Looks like Mocha will be busy ><\nJiayous for the following tasks:\n");
         for (int i = 0; i < ls.size(); i++) {
             Task task = ls.get(i);
             int num = i + 1;
@@ -111,7 +111,7 @@ public class Ui {
      * @return String To-do error message.
      */
     public String outputTodoError() {
-        return "Sorry! The description of todo cannot be empty!!\n"
+        return "Mocha! The description of todo cannot be empty!!\n"
                 + "Here's an example: todo Homework";
     }
 
@@ -136,7 +136,7 @@ public class Ui {
      * @return String Error message of deadline.
      */
     public String outputDeadlineFormatError() {
-        return "Sorry! Please enter a date for the deadline using the command '/by'!\n"
+        return "Mocha! You need to enter a date for the deadline using the command '/by'!\n"
                 + "Here's an example: deadline CS2103T project /by 2020-08-26 23:59";
     }
 
@@ -145,7 +145,7 @@ public class Ui {
      * @return String An error message for deadline with an example.
      */
     public String outputDeadlineError() {
-        return "Sorry! The description of deadline cannot be empty!\n"
+        return "Mocha! The description of deadline cannot be empty!\n"
                 + "Here's an example: deadline CS2103T project /by 2020-08-26 23:59";
     }
 
@@ -154,7 +154,7 @@ public class Ui {
      * @return String An error message for event task with an example of input.
      */
     public String outputEventFormatError() {
-        return "Sorry! Please enter a duration for the event using the command '/at'!\n"
+        return "Mocha! You need to enter a duration for the event using the command '/at'!\n"
                 + "Here's an example: event welcome tea /at 2020-08-29";
     }
 
@@ -163,7 +163,7 @@ public class Ui {
      * @return String Error message for event task.
      */
     public String outputEventError() {
-        return "Sorry! The description of event cannot be empty!\n"
+        return "Mocha! The description of event cannot be empty!\n"
                 + "Here's an example: event welcome tea /at 2020-08-29";
     }
 
@@ -174,7 +174,7 @@ public class Ui {
      * @return String Confirmation message.
      */
     public String outputDeleteMsg(TaskList ls, Task tsk) {
-        String str = "Successfully deleted this task:\n" + tsk.toString() + "\n";
+        String str = "Sure! I've deleted this task:\n" + tsk.toString() + "\n";
         if (ls.size() > 1) {
             str += "Now you have " + ls.size() + " tasks in the list.";
         } else {
@@ -188,7 +188,7 @@ public class Ui {
      * @return String An error message.
      */
     public String outputDeleteError() {
-        return "Sorry! The number to be deleted does not exist in the list!";
+        return "Mocha! The number to be deleted does not exist in the list!";
     }
 
     /**
@@ -196,7 +196,7 @@ public class Ui {
      * @return String Message of no task.
      */
     public String outputCheckNoTask() {
-        return "You have currently no task on all days!";
+        return "Yay Mocha! You have currently no task on all days! Let's go out!";
     }
 
     /**
@@ -243,7 +243,7 @@ public class Ui {
      * @return String Error Message.
      */
     public String outputCheckError() {
-        return "Sorry! Seems like the format of your input is wrong :o\n"
+        return "Mocha! Seems like the format of your input is wrong :o\n"
                 + "Here's an example: check 2020-08-08";
     }
 
@@ -275,7 +275,7 @@ public class Ui {
 
     private void getFindSummary(String keyword, StringBuilder str, int counter) {
         if (counter == 0) {
-            str.append("Looks like there is no task matching that keyword: ").append(keyword);
+            str.append("Hmm, Mocha, looks like there is no task matching that keyword: ").append(keyword);
         } else if (counter == 1) {
             str.append("^ Only the above task matched the keyword: '").append(keyword)
                     .append("' from your list.");
@@ -290,7 +290,7 @@ public class Ui {
      * @return String Error message.
      */
     public String outputFindError() {
-        return "Key in something for me to find!";
+        return "Say something for me to find!";
     }
 
     public String outputHelp() {
