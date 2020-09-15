@@ -62,15 +62,27 @@ public class TaskList {
         this.storageObserver = storage;
     }
 
+    /**
+     * Notifies observer of change in state of task list. In this
+     * particular case, it notifies the storage to save the current
+     * state of the task list.
+     *
+     * @throws DukeIoException the duke io exception thrown when unable to save
+     */
     public void notifyObserver() throws DukeIoException {
-         assert storageObserver != null : "No Observers";
-         storageObserver.save(tasks);
+        assert storageObserver != null : "No Observers";
+        storageObserver.save(tasks);
     }
 
     public int size() {
         return tasks.size();
     }
 
+    /**
+     * Copies current task list in a deep manner to create new objects.
+     *
+     * @return the deep copy of the current task list
+     */
     public TaskList copy() {
         ArrayList<Task> newTasks = tasks
                 .stream()

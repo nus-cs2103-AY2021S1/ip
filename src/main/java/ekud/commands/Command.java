@@ -2,7 +2,11 @@ package ekud.commands;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -126,7 +130,8 @@ public enum Command {
             }
             try {
                 int toDelete = Integer.parseInt(parameters.get("argument")) - 1;
-                String ret = String.format(strings.getString("output.delete"), tasks.remove(toDelete), tasks.size()).strip();
+                String ret = String.format(strings.getString("output.delete"), tasks.remove(toDelete), tasks.size())
+                        .strip();
                 afterExecute(DELETE);
                 return ret;
             } catch (NumberFormatException e) {
@@ -245,6 +250,12 @@ public enum Command {
         return ret;
     }
 
+    /**
+     * Cleans up command after execution. Common code relating to
+     * saving current state after command has executed.
+     *
+     * @param command the command which was executed
+     */
     public static void afterExecute(Command command) {
         originator.set(tasks, strings.getString("command." + command.name().toLowerCase()));
         savedStates.add(originator.saveToMemento());

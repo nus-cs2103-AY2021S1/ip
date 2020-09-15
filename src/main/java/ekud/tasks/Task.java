@@ -28,6 +28,11 @@ public class Task implements Serializable {
         return description;
     }
 
+    /**
+     * Copy the current task in a deep manner.
+     *
+     * @return the copy of the task
+     */
     public Task copy() {
         Task ret = new Task(description);
         ret.isDone = isDone;

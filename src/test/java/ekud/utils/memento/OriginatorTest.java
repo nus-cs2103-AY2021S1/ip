@@ -1,11 +1,15 @@
 package ekud.utils.memento;
 
-import org.junit.jupiter.api.Test;
-import ekud.tasks.Task;
-import ekud.tasks.TaskList;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import org.junit.jupiter.api.Test;
+
+import ekud.tasks.Task;
+import ekud.tasks.TaskList;
+
 
 public class OriginatorTest {
     @Test
@@ -14,6 +18,7 @@ public class OriginatorTest {
         TaskList t = new TaskList(new ArrayList<>());
 
         t.setObserver(null);
+
 
         Originator originator = new Originator();
         t.add(new Task("state1"));
@@ -24,12 +29,13 @@ public class OriginatorTest {
 
         t.add(new Task("state3"));
         originator.set(t, "command3");
-        // We can request multiple mementos, and choose which one to roll back to.
         savedStates.add(originator.saveToMemento());
 
         t.add(new Task("state4"));
         originator.set(t, "command4");
 
         originator.restoreFromMemento(savedStates.get(1));
+
+        assertEquals(originator.getState().get(2).getDescription(), "state 3");
     }
 }
