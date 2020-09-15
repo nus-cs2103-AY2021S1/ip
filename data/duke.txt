@@ -1,3 +1,3 @@
 T | ✓ | play dote | low
-D | ✘ | CS2100 assignment  | 2020-09-20 | high
-T | ✘ | eat  | medium
+T | ✘ | plan for date  | high
+D | ✘ | CS2100 assignment  | 2020-09-20 | low

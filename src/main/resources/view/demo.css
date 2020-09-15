@@ -1,0 +1,11 @@
+#dialog {
+    -fx-font-size: 14px;
+    -fx-font: Roboto;
+    -fx-padding: 10 10 10 10;
+    -fx-font-weight: 700;
+    -fx-min-height: 10px;
+}
+
+#displayPicture {
+    -fx-padding: 2 2 2 2;
+}

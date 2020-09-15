@@ -27,8 +27,8 @@ public class MainWindow extends AnchorPane {
     private Duke duke;
     private Stage stage;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/cat.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/ducky.png"));
 
     /**
      * Initializes the main window and prints out greeting message.
@@ -58,6 +58,7 @@ public class MainWindow extends AnchorPane {
         delay.setOnFinished(event -> this.stage.hide());
         delay.play();
     }
+
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
@@ -72,7 +73,8 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
         if (input.equals("bye")) {
-            this.exit(2);
+            int secondToClose = 2;
+            this.exit(secondToClose);
         }
     }
 }

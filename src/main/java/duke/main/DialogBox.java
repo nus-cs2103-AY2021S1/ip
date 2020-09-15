@@ -14,6 +14,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 
@@ -27,8 +28,8 @@ public class DialogBox extends HBox {
     /**
      * Initializes a DialogBox object.
      *
-     * @param text Text to be inserted in the dialog box.
-     * @param displayPicture Image to be inserted in the dialog box.
+     * @param text Text to be inserted in the label.
+     * @param displayPicture Image to be inserted in the image view.
      */
     public DialogBox(String text, Image displayPicture) {
         try {
@@ -44,8 +45,8 @@ public class DialogBox extends HBox {
         this.displayPicture.setImage(displayPicture);
     }
 
-    private void setBackgroundColor(Color color) {
-        this.setBackground(new Background(new BackgroundFill(color, null, null)));
+    private Background setBackground(Color color, CornerRadii radius) {
+        return new Background(new BackgroundFill(color, radius, null));
     }
 
     private String getText() {
@@ -63,7 +64,10 @@ public class DialogBox extends HBox {
 
     public static DialogBox getUserDialog(String text, Image image) {
         DialogBox db = new DialogBox(text, image);
-        db.setBackgroundColor(Color.GREEN);
+        CornerRadii corn = new CornerRadii(10);
+        Color backgroundColor = Color.rgb(69, 238, 82);
+        Background background = db.setBackground(backgroundColor, corn);
+        db.dialog.setBackground(background);
         assert !db.getText().equals("") : "User input cannot be empty";
         return db;
     }
@@ -71,7 +75,10 @@ public class DialogBox extends HBox {
     public static DialogBox getDukeDialog(String text, Image image) {
         DialogBox dukeBox = new DialogBox(text, image);
         dukeBox.flip();
-        dukeBox.setBackgroundColor(Color.YELLOW);
+        CornerRadii corn = new CornerRadii(10);
+        Color backgroundColor = Color.rgb(53, 179, 255);
+        Background background = dukeBox.setBackground(backgroundColor, corn);
+        dukeBox.dialog.setBackground(background);
         assert !dukeBox.getText().equals("") : "Duke's response cannot be empty";
         return dukeBox;
     }
