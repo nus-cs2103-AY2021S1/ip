@@ -3,16 +3,15 @@
 Duke- the all-in-one friendly task manager :bowtie:
 
 ## Main Features
-- #####[Add todo task: ](#add-todo) `todo`
-- #####[Add deadline task: ](#add-deadline) `deadline`
-- #####[Add event task: ](#add-event) `event`
-- #####[List all tasks: ](#list) `list`
-- #####[Mark task as done: ](#done) `done`
-- #####[Delete task: ](#delete) `delete`
-- #####[Find task: ](#find) `find`
-- #####[Help for all commands: ](#help) `help`
-- #####[Bye to exit: ](#bye) `bye`
-
+### [Add todo task: ](#add-todo) `todo`
+### [Add deadline task: ](#add-deadline) `deadline`
+### [Add event task: ](#add-event) `event`
+### [List all tasks: ](#list) `list`
+### [Mark task as done: ](#done) `done`
+### [Delete task: ](#delete) `delete`
+### [Find task: ](#find) `find`
+### [Help for all commands: ](#help) `help`
+### [Bye to exit: ](#bye) `bye`
 
 ### Add todo task: `todo` <a href="add-todo"></a>
 Add a todo task with user input as the task description. 
