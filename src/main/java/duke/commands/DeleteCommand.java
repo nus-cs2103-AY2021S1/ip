@@ -27,6 +27,7 @@ public class DeleteCommand extends Command {
      * @param taskList TaskList containing Tasks.
      * @param ui Ui that handles system output.
      * @param storage Storage that handles file saving.
+     * @return outputString Command output.
      * @throws IOException If file don't exist.
      * @throws DukeException If input is not recognised.
      */
