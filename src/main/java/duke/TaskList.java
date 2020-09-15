@@ -89,6 +89,22 @@ public class TaskList {
     }
 
     /**
+     * Compares the specified task to the tasks in the list
+     * and check for duplicates.
+     *
+     * @param task the specified task to compare with.
+     * @return true if a duplicate exists in the list or false otherwise.
+     */
+    public boolean hasDuplicate(Task task) {
+        for (Task t : tasks) {
+            if (t.equals(task)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Retrieves a specific task from the task list.
      *
      * @param taskNum the number of the task to be retrieved.

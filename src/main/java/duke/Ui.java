@@ -141,4 +141,16 @@ public class Ui {
     public String generateErrorMessage(Exception e) {
         return e.getMessage();
     }
+
+    /**
+     * Generates a message that a task was not added into the list
+     * because a duplicate was detected.
+     *
+     * @param task the task that was not successfully added
+     * @return the generated message
+     */
+    public String generateDuplicateMessage(Task task) {
+        return "The following task was not added as a duplicate was detected:\n"
+                + task;
+    }
 }

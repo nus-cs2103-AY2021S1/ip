@@ -47,6 +47,25 @@ public class ToDo extends Task {
     }
 
     /**
+     * Checks if this ToDo is equal to the specified object.
+     *
+     * @param obj the object to check.
+     * @return true if this is equal to the specified object or false otherwise.
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        } else if (obj instanceof ToDo) {
+            ToDo toDo = (ToDo) obj;
+
+            return this.description.equals(toDo.description);
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * Returns a string representation of the to-do.
      *
      * @return a string representation of the to-do.

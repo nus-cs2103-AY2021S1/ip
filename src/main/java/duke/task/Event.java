@@ -54,6 +54,26 @@ public class Event extends Task {
     }
 
     /**
+     * Checks if this Event is equal to the specified object.
+     *
+     * @param obj the object to check.
+     * @return true if this is equal to the specified object or false otherwise.
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        } else if (obj instanceof Event) {
+            Event event = (Event) obj;
+
+            return this.description.equals(event.description)
+                    && this.eventDate.equals(event.eventDate);
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * Returns a string representation of the event.
      *
      * @return a string representation of the event.
