@@ -22,8 +22,9 @@ public class DoneCommand extends Command {
         }
         List<String> listOfTask= new ArrayList<>();
         for (int index = 1; index < input.size(); index++) {
-            taskList.finishTask(index);
-            listOfTask.add(taskList.getTask(index).toString());
+            int taskIndex = Integer.parseInt(input.get(index));
+            taskList.finishTask(taskIndex);
+            listOfTask.add(taskList.getTask(taskIndex).toString());
         }
 
         return Ui.answerDone(listOfTask);
