@@ -38,6 +38,9 @@ public class MainWindow extends AnchorPane {
         sparrow = s;
     }
 
+    /**
+     * Sends welcome message to user in Gui window.
+     */
     public void welcome() {
         String welcomeText = "Welcome to Sparrow!\n What can I do for ye?";
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(welcomeText, sparrowImage));
