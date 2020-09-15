@@ -38,12 +38,16 @@ public class TaskList {
      * Returns taskList in string.
      */
     public String taskListToString() {
-        String message = "Here are the tasks in your list:\n";
-        for (int i = 0; i < taskList.size(); i++) {
-            String s = INDENTATION + (i + 1) + ". " + taskList.get(i).toString();
-            message += s + "\n";
+        if (taskList.size() == 0) {
+            return "You haven't added any tasks to your list:)\n";
+        } else {
+            String message = "Here are the tasks in your list:\n";
+            for (int i = 0; i < taskList.size(); i++) {
+                String s = INDENTATION + (i + 1) + ". " + taskList.get(i).toString();
+                message += s + "\n";
+            }
+            return message;
         }
-        return message;
     }
 
     /**

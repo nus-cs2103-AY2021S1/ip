@@ -13,7 +13,7 @@ public class Duke {
      */
     public Duke() {
         TaskList taskList = new TaskList();
-        Storage.loadFromFile(taskList);
+        loadFile(taskList);
         Ui ui = new Ui();
         this.isExit = false;
         Parser.setTaskList(taskList);
@@ -46,11 +46,24 @@ public class Duke {
     }
 
     /**
+     * Loads the saved tasks.
+     *
+     * @param taskList Task list.
+     */
+    public void loadFile(TaskList taskList) {
+        try {
+            Storage.loadFromFile(taskList);
+        } catch (DukeException e) {
+            System.out.println(Ui.getErrorMessage(e.getMessage()));
+        }
+    }
+
+    /**
      * Run the duke program.
      */
     public void run() {
         TaskList taskList = new TaskList();
-        Storage.loadFromFile(taskList);
+        loadFile(taskList);
         Ui ui = new Ui();
         System.out.print(Ui.greet());
         Parser.setTaskList(taskList);

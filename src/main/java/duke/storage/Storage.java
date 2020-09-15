@@ -8,6 +8,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
+import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -23,37 +24,41 @@ public class Storage {
      *
      * @param taskList TaskList that manages tasks.
      */
-    public static void loadFromFile(TaskList taskList) {
+    public static void loadFromFile(TaskList taskList) throws DukeException {
         try {
-            Path currentRelativePath = Paths.get("");
-            String s = currentRelativePath.toAbsolutePath().toString();
-
-            java.nio.file.Path path = java.nio.file.Paths.get(s, "src", "data");
-            boolean directoryExists = java.nio.file.Files.exists(path);
-
-            if (!directoryExists) {
-                // System.out.println("data folder does not exist. Let's create one.");
-                File dir = new File(String.valueOf(path));
-                dir.mkdir();
+            File file = setupStorage();
+            Scanner sc = new Scanner(file);
+            while (sc.hasNextLine()) {
+                String row = sc.nextLine();
+                String[] data = row.split(" {2}");
+                memoryProcessor(data, taskList);
             }
-            Path filePath = Paths.get(s, "src", "data", "duke.txt");
-            dukeFilePath = String.valueOf(filePath);
-            File f = new File(String.valueOf(filePath));
-            if (!f.createNewFile()) {
-                Scanner sc = new Scanner(f);
-                while (sc.hasNextLine()) {
-                    String row = sc.nextLine();
-                    String[] data = row.split(" {2}");
-                    memoryProcessor(data, taskList);
-                }
-                sc.close();
-            }
+            sc.close();
         } catch (FileNotFoundException e) {
-            System.out.println("Create new file please");
-        } catch (IOException e) {
-            e.printStackTrace();
+            throw new DukeException("Error loading file from storage.");
         }
     }
+
+    public static File setupStorage() throws DukeException {
+        Path currentRelativePath = Paths.get("");
+        String s = currentRelativePath.toAbsolutePath().toString();
+
+        Path path = Paths.get(s, "data", "duke.txt");
+        File file = new File(String.valueOf(path));
+        try {
+            if (!file.exists()) {
+                File directory = new File(file.getParent());
+                if (!directory.exists()) {
+                    directory.mkdirs();
+                }
+                file.createNewFile();
+            }
+        } catch (IOException e) {
+            throw new DukeException("Error loading from storage");
+        }
+        return file;
+    }
+
 
     /**
      * Adds the tasks from data to taskList.
@@ -106,9 +111,10 @@ public class Storage {
      *
      * @param taskList TaskList that manages tasks.
      */
-    public static void writeToFile(TaskList taskList) {
+    public static void writeToFile(TaskList taskList) throws DukeException {
         try {
-            FileWriter writer = new FileWriter(dukeFilePath);
+            File file = setupStorage();
+            FileWriter writer = new FileWriter(file);
             for (Task task : taskList.getTaskList()) {
                 String[] data = task.taskToArray();
                 if (data.length == 3) {
@@ -122,7 +128,9 @@ public class Storage {
             }
             writer.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new DukeException("Error loading from storage");
+        } catch (DukeException e) {
+            throw e;
         }
     }
 }
