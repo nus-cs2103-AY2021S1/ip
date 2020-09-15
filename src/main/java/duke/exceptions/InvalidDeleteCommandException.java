@@ -1,5 +1,8 @@
 package duke.exceptions;
 
+/**
+ * Thrown when the user inputs an invalid index to be marked for deletion.
+ */
 public class InvalidDeleteCommandException extends DukeException {
 
     public InvalidDeleteCommandException() {

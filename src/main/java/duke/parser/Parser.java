@@ -17,11 +17,11 @@ import duke.command.UserCommand;
 public class Parser {
 
     /**
-     * @param userInput user's input
-     * @return command
+     * @param userInput User's input.
+     * @return command Corresponding Command based on user's input.
      */
     public static UserCommand parse(String userInput) {
-        String firstArg = userInput.split(" ")[0];
+        String firstArg = userInput.trim().split(" ")[0];
         switch (userInput) {
         case "bye":
             return new ByeCommand(userInput);

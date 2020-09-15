@@ -50,8 +50,8 @@ public class DoneCommand extends UserCommand {
             throw new InvalidDoneCommandException();
         } else {
             int itemToBeMarkedAsDone = Integer.parseInt(doneCommandArray[1]);
-            taskList.getTask(itemToBeMarkedAsDone - 1).markAsDone();
-            return ui.printResponse(DEFAULT_MESSAGE + taskList.getTask(itemToBeMarkedAsDone - 1)
+            taskList.getTaskAtIndex(itemToBeMarkedAsDone - 1).markAsDone();
+            return ui.printResponse(DEFAULT_MESSAGE + taskList.getTaskAtIndex(itemToBeMarkedAsDone - 1)
                     .getDescription());
         }
     }

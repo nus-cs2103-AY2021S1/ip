@@ -33,10 +33,7 @@ public abstract class UserCommand {
      */
     public abstract String execute(TaskList taskList, Ui ui) throws DukeException;
 
-    /**
-     * @return isExit boolean
-     */
-    public boolean isExit() {
-        return isExit();
+    public Boolean getExit() {
+        return isExit;
     }
 }

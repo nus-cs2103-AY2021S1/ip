@@ -1,9 +1,9 @@
 package duke;
 
-import duke.command.ByeCommand;
 import duke.command.UserCommand;
 import duke.exceptions.DukeException;
 import duke.parser.Parser;
+import duke.response.Response;
 import duke.storage.Storage;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
@@ -28,7 +28,7 @@ public class Duke {
     private Scene scene;
 
     /**
-     * @param filePath file path of the file to be loaded.
+     * @param filePath Filepath to be loaded.
      */
     public Duke(String filePath) {
         ui = new Ui();
@@ -36,12 +36,16 @@ public class Duke {
         tasks = storage.load();
     }
 
+    /**
+     * @param userInput User's input.
+     * @return Response that allows Gui to display text dynamically.
+     */
     public Response getResponse(String userInput) {
         try {
             UserCommand command = Parser.parse(userInput);
             String response = command.execute(tasks, ui);
             storage.save(tasks);
-            if (command instanceof ByeCommand) {
+            if (command.getExit()) {
                 return new Response(response, false, true);
             }
             return new Response(response, false, false);

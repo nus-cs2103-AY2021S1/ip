@@ -1,5 +1,7 @@
-package duke;
+package duke.gui;
 
+import duke.Duke;
+import duke.response.Response;
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -58,7 +60,6 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         Response response = duke.getResponse(input);
-
         DialogBox dukeDialog;
         if (response.isErrorMessage()) {
             dukeDialog = DialogBox.getDukeDialog(response.getResponseMessage(), dukeImage, true);

@@ -1,4 +1,4 @@
-package duke;
+package duke.response;
 
 public class Response {
     private boolean isErrorMessage;

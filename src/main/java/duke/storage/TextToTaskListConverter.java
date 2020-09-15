@@ -8,13 +8,13 @@ import java.io.ObjectInputStream;
 import duke.tasks.TaskList;
 
 /**
- * Converts txt file to an arraylist.
+ * Loads the saved TaskList.
  */
 public class TextToTaskListConverter {
 
     /**
-     * @param filePath location of the file.
-     * @return list containing the previously saved tasks.
+     * @param filePath Filepath where the file is stored.
+     * @return TaskList that has been saved previously.
      */
     public static TaskList readFile(String filePath) {
         try {

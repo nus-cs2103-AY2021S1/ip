@@ -5,17 +5,16 @@ import java.util.Scanner;
 import duke.tasks.TaskList;
 
 /**
- * Deals with interactions with the user.
+ * Deals with handling interactions with the user.
  */
 public class Ui {
 
-    /**
-     * Scanner to take in user's input.
-     */
-    private Scanner in;
 
+    /**
+     * Constructor for Ui.
+     */
     public Ui() {
-        this.in = new Scanner(System.in);
+
     }
 
     /**
@@ -26,22 +25,22 @@ public class Ui {
     }
 
     /**
-     * Prints all the items within the list.
+     * Prints out all the Task within the TaskList.
      *
-     * @param taskList list containing all the tasks.
+     * @param taskList TaskList that contains the Tasks.
      */
     public String printList(TaskList taskList) {
         String s = "\n";
         for (int x = 0; x < taskList.listSize(); x++) {
-            s = s + (int) (x + 1) + ":" + taskList.getTask(x).toString() + "\n";
+            s = s + (int) (x + 1) + ":" + taskList.getTaskAtIndex(x).toString() + "\n";
         }
         return s;
     }
 
     /**
-     * Prints the size of the list.
+     * Prints the size of the TaskList.
      *
-     * @param taskList list containing all the tasks.
+     * @param taskList TaskList that contains the Tasks.
      */
     public String printListCount(TaskList taskList) {
         return "Now you have " + taskList.listSize() + " tasks in the list";
@@ -50,7 +49,7 @@ public class Ui {
     /**
      * Prints the response to user's command.
      *
-     * @param response string to be output.
+     * @param response String to be printed to the user.
      */
     public String printResponse(String response) {
         return response;

@@ -2,10 +2,11 @@ package duke.command;
 
 import java.time.LocalDate;
 
-import duke.duplicatechecker.DuplicateDetector;
+import duke.duplicatechecker.DuplicateChecker;
 import duke.exceptions.DukeException;
 import duke.exceptions.DuplicateException;
 import duke.tasks.Deadline;
+import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.timeformatter.TimeFormatter;
 import duke.ui.Ui;
@@ -38,9 +39,9 @@ public class DeadlineCommand extends UserCommand {
         String by = deadlineArr[1].substring(deadlineArr[1].indexOf("by") + 3);
         String deadlineString = deadlineArr[0].substring(9);
         LocalDate localDeadlineDate = TimeFormatter.localDate(by);
-        DuplicateDetector duplicateDetector = new DuplicateDetector(deadlineString, localDeadlineDate, taskList,
-                eventType);
-        if (duplicateDetector.checkForDuplicates()) {
+        DuplicateChecker duplicateChecker = new DuplicateChecker(deadlineString, localDeadlineDate, taskList,
+                Task.TaskType.Deadline);
+        if (duplicateChecker.checkForDuplicates()) {
             throw new DuplicateException();
         } else {
             Deadline deadline = new Deadline(deadlineString, localDeadlineDate);

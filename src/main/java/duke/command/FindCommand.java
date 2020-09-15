@@ -35,7 +35,7 @@ public class FindCommand extends UserCommand {
             String search = userInput.substring(5);
             List<Task> searchList = new ArrayList<>();
             for (int i = 0; i < taskList.listSize(); i++) {
-                Task task = taskList.getTask(i);
+                Task task = taskList.getTaskAtIndex(i);
                 if (task.getDescription().contains(search)) {
                     searchList.add(task);
                 }
@@ -44,7 +44,7 @@ public class FindCommand extends UserCommand {
                 return ui.printResponse("No results found.");
             } else {
                 TaskList tempList = new TaskList(searchList);
-                return ui.printList(tempList);
+                return ui.printResponse("Here are the search results\n") + ui.printList(tempList);
             }
         }
     }

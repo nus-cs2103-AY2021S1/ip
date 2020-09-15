@@ -2,10 +2,11 @@ package duke.command;
 
 import java.time.LocalDate;
 
-import duke.duplicatechecker.DuplicateDetector;
+import duke.duplicatechecker.DuplicateChecker;
 import duke.exceptions.DukeException;
 import duke.exceptions.DuplicateException;
 import duke.tasks.Event;
+import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.timeformatter.TimeFormatter;
 import duke.ui.Ui;
@@ -38,8 +39,9 @@ public class EventCommand extends UserCommand {
         String at = eventArr[1].substring(eventArr[1].indexOf("at") + 3);
         String eventString = eventArr[0].substring(6);
         LocalDate localEventDate = TimeFormatter.localDate(at);
-        DuplicateDetector duplicateDetector = new DuplicateDetector(eventString, localEventDate, taskList, eventType);
-        if (duplicateDetector.checkForDuplicates()) {
+        DuplicateChecker duplicateChecker = new DuplicateChecker(eventString, localEventDate, taskList
+                , Task.TaskType.Event);
+        if (duplicateChecker.checkForDuplicates()) {
             throw new DuplicateException();
         } else {
             Event event = new Event(eventString, localEventDate);
