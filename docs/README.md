@@ -2,7 +2,7 @@
 Duke is task manager that helps you organise your to dos, deadline, and events all in one place. 
 
 ## Duke GUI
-![Duke GUI](duke.PNG)
+![Duke GUI](Ui.png)
 
 ## Setting Up 
 Download the latest release of Duke.jar to start using Duke.
