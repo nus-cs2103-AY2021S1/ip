@@ -5,16 +5,16 @@ traditional GUI apps.
 
 ## Features 
 Usage | Format, Examples
-------- | ---------
-todo | `todo [description]`<br/>e.g. `todo todo 1`
-deadline | `deadline [description] /by [yyyy-MM-dd]`<br/>e.g. `deadline deadline 1 /by 2020-09-15`
-event | `event [description] /at [yyyy-MM-dd h:mm a]`<br/>e.g. `event event 1 /at 2020-09-15 10:51 am`
-done | `done [index]`<br/>e.g. `done 3`
-find | `find [keywords]`<br/>e.g. `find eve`
-delete | `delete [index]`<br/>e.g. `delete 4`
-list | `list`
-schedule | `schedule [yyyy-MM-dd]`<br/>e.g. `schedule 2020-09-15`
-bye | `bye`
+------- | ---------------
+**todo** | `todo [description]`<br/>e.g. `todo todo 1`
+**deadline** | `deadline [description] /by [yyyy-MM-dd]`<br/>e.g. `deadline deadline 1 /by 2020-09-15`
+**event** | `event [description] /at [yyyy-MM-dd h:mm a]`<br/>e.g. `event event 1 /at 2020-09-15 10:51 am`
+**done** | `done [index]`<br/>e.g. `done 3`
+**find** | `find [keywords]`<br/>e.g. `find eve`
+**delete** | `delete [index]`<br/>e.g. `delete 4`
+**list** | `list`
+**schedule** | `schedule [yyyy-MM-dd]`<br/>e.g. `schedule 2020-09-15`
+**bye** | `bye`
 
 ## Usage
 
@@ -31,11 +31,11 @@ Input:
 `todo todo 1`
 
 Expected outcome:
-
-`Got it. I've added this task: `<br/>
-`[T][✘] todo 1`<br/>
-`Now you have 9 tasks in the list.`
-
+```
+Got it. I've added this task: 
+    [T][✘] todo 1
+Now you have 9 tasks in the list.
+```
 ### `deadline` - Adding deadline task
 
 Adds a deadline task with a Date to the list.
@@ -49,10 +49,11 @@ Input:
 `deadline deadline 1 /by 2020-09-15`
 
 Expected outcome:
-
-`Got it. I've added this task: `<br/>
-`[D][✘] deadline 1 (by: Sep 15 2020)`<br/>
-`Now you have 8 tasks in the list.`
+```
+Got it. I've added this task: 
+    [D][✘] deadline 1 (by: Sep 15 2020)
+Now you have 8 tasks in the list.
+```
 
 ### `event` - Adding event task
 
@@ -68,9 +69,12 @@ Input:
 
 Expected outcome:
 
-`Got it. I've added this task: `<br/>
-`[E][✘] event 1 (at: Sep 15 2020 10:32 am)`<br/>
-`Now you have 7 tasks in the list.`
+```
+Got it. I've added this task: 
+    [E][✘] event 1 (at: Sep 15 2020 10:32 am)
+Now you have 7 tasks in the list.
+```
+
 
 ### `done` - Marking a task as done
 
@@ -86,8 +90,11 @@ Input:
 
 Expected outcome:
 
-`Nice! I've marked this task as done: `<br/>
-`[T][✓] todo 1`
+```
+Nice! I've marked this task as done: 
+    [T][✓] todo 1
+```
+
 
 ### `find` - Finding tasks
 
@@ -103,9 +110,12 @@ Input:
 
 Expected outcome:
 
-`Here are the matching tasks in your list: `<br/>
-`1. [T][✘] todo 1`<br/>
-`2. [T][✘] todo 2`
+```
+Here are the matching tasks in your list: 
+    1. [T][✘] todo 1
+    2. [T][✘] todo 2
+```
+
 
 ### `delete` - Deleting a task
 
@@ -121,9 +131,12 @@ Input:
 
 Expected outcome:
 
-`Noted. I've removed this task: `<br/>
-`[T][✘] todo 1`<br/>
-`Now you have 4 tasks in the list.`
+```
+Noted. I've removed this task: 
+    [T][✘] todo 1
+Now you have 4 tasks in the list.
+```
+
 
 ### `list` - Listing all tasks
 
@@ -139,11 +152,14 @@ Input:
 
 Expected outcome:
 
-`Here are the tasks in your list: `<br/>
-`1. [T][✘] todo 1`<br/>
-`2. [D][✘] deadline 1 (by: Sep 20 2020)`<br/>
-`3. [E][✘] event 1 (at: Sep 21 2020 7:00 pm)`<br/>
-`4. [T][✓] todo done`
+```
+Here are the tasks in your list: 
+    1. [T][✘] todo 1
+    2. [D][✘] deadline 1 (by: Sep 20 2020)
+    3. [E][✘] event 1 (at: Sep 21 2020 7:00 pm)
+    4. [T][✓] todo done
+```
+
 
 
 
@@ -161,8 +177,11 @@ Input:
 
 Expected outcome:
 
-`Here are the schedule on Sep 20 2020: `<br/>
-`1. [D][✘] exam (by: Sep 20 2020)`
+```
+Here are the schedule on Sep 20 2020: 
+  1. [D][✘] exam (by: Sep 20 2020)
+```
+
 
 ### `bye` - Exiting the program
 
