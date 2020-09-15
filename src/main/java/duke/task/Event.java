@@ -1,4 +1,6 @@
 package duke.task;
+import duke.exception.DukeException;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -9,14 +11,14 @@ public class Event extends Task {
     protected String at;
     protected LocalDateTime atDateTime;
 
-    public Event(String description, String at, boolean isDone) {
+    public Event(String description, String at, boolean isDone) throws DukeException {
         super(description, isDone);
         this.at = at;
         try {
             String reformatedDateTime = reformateDateTime();
             this.atDateTime = LocalDateTime.parse(reformatedDateTime);
         } catch (DateTimeParseException e) {
-            System.out.println("Invalid input! Enter appropriate date and time format");
+            throw new DukeException("Invalid input! Enter appropriate date and time format");
         }
     }
 

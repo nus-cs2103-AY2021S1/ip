@@ -1,9 +1,7 @@
 package duke.command;
 
 import duke.storage.Storage;
-
 import duke.tasklist.TaskList;
-
 import duke.ui.Ui;
 
 public class FindCommand extends Command {
@@ -29,7 +27,7 @@ public class FindCommand extends Command {
                 listItems = listItems + i + ". " + taskList.get(i - 1) + "\n";
             }
         }
-        String response = "Here are your task that matches your search: \n" + listItems;
+        String response = "Here are your tasks that matches your search: \n" + listItems;
         return response;
     }
 

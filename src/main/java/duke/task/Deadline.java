@@ -1,22 +1,23 @@
 package duke.task;
+import duke.exception.DukeException;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.LocalDate;
-import java.util.Date;
 
 public class Deadline extends Task {
     protected String by;
     protected LocalDateTime byDateTime;
 
-    public Deadline(String description, String by, boolean isDone) {
+    public Deadline(String description, String by, boolean isDone) throws DukeException {
         super(description, isDone);
         this.by = by;
         try {
             String reformatedDateTime = reformateDateTime();
             this.byDateTime = LocalDateTime.parse(reformatedDateTime);
         } catch (DateTimeParseException e) {
-            System.out.println("Invalid input! Enter appropriate date and time format");
+            throw new DukeException("Invalid input! Enter appropriate date and time format");
         }
     }
 
