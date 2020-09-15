@@ -2,7 +2,6 @@
 
 _**botbot**_ :robot: is a desktop app for managing tasks.
 
-<br /><br>
 - [Quick Start](#quick-start)
 - [Features](#features)
   - [Add a deadline: `deadline`](#add-a-deadline-deadline)
@@ -19,7 +18,6 @@ _**botbot**_ :robot: is a desktop app for managing tasks.
 - [Acknowledgements](#acknowledgements)
 
 <br /><br>
-<br /><br>
 ## Quick Start
 1. Ensure you have Java 11 or above installed.
 1. Download the latest release of `botbot.jar`.
@@ -28,7 +26,6 @@ _**botbot**_ :robot: is a desktop app for managing tasks.
 1. Refer to the [Command Summary](#command-summary) for the list of commands available.
 1. Type a command in the chat box and press *Enter* to execute.
 
-<br /><br>
 <br /><br>
 ## Features 
 
@@ -52,7 +49,6 @@ Examples:
 - `deadline call service centre /by 20-9-2020 1800`
 - `deadline buy gifts /by 1-12-2020`
 
-<br /><br>
 #### Add a to-do: `todo`
 Adds a to-do to the task list.
 
@@ -60,7 +56,6 @@ Format: `todo DESCRIPTION`
 
 Example: `todo send mail`
 
-<br /><br>
 #### Add an event: `event`
 Adds an event to the task list.
 
@@ -72,7 +67,6 @@ Examples:
 - `event brunch /at 1-10-2020 1100`
 - `event tammy's party /at 16-9-2020`
 
-<br /><br>
 #### Delete a task: `delete`
 Deletes a task from the task list.
 
@@ -81,7 +75,6 @@ Format: `delete INDEX`
 
 Example: `delete 3`
 
-<br /><br>
 #### Edit a task: `edit`
 Edits a task on the task list.
 
@@ -100,7 +93,6 @@ Examples:
 list to `call tammy` and `16-9-2020 0000` respectively.
 - `edit 5 /by 31-12-2020` edits the deadline of the 5th task on the task list to `31-12-2020`.
 
-<br /><br>
 #### Mark a task as done: `done`
 Marks a task on the task list as done.
 
@@ -109,7 +101,6 @@ Format: `done INDEX`
 
 Example: `done 1`
 
-<br /><br>
 #### Search for a keyphrase: `find`
 Searches for the specified keyphrase in the task list.
 
@@ -122,24 +113,20 @@ Format: `find KEYPHRASE`
 
 Example: `find Buy coffee` returns `buy Coffee` and `Buy coffee and tea`.
 
-<br /><br>
 #### View the task list: `list`
 Displays the task list.
 
 Format: `list`
 
-<br /><br>
 #### Exit the program: `bye`
 Exits *botbot*.
 
 Format: `bye`
 
-<br /><br>
 #### Save the task list
 *botbot* automatically saves your data in `/data/botbot.txt` in the home folder for *botbot* after 
 every command that changes the data. There is no need to save manually.
 
-<br /><br>
 <br /><br>
 ## Command Summary
 Action | Format
@@ -152,8 +139,6 @@ Mark as done | `done INDEX`
 Search | `find KEYPHRASE`
 View | `list`
 
-
-<br /><br>
 <br /><br>
 ## Acknowledgements
 - Libraries used: [JavaFX](https://openjfx.io/), [JUnit5](https://github.com/junit-team/junit5)
