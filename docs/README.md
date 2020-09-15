@@ -15,7 +15,7 @@ Duke is a Personal Assistant Chatbot that helps a user keep track of his tasks.
 * Saves the data automatically
 
 ## Usage
-### `todo` - Adds a Todo task
+### Add a Todo task - `todo`
 
 Adds a Todo task to the task list.
 
@@ -34,7 +34,7 @@ Now you have 1 task(s) in the list.
 ```
 <br />
 
-### `deadline` - Adds a Deadline task
+### Add a Deadline task - `deadline`
 
 Adds a Deadline task with date and time to the task list.
 
@@ -53,7 +53,7 @@ Now you have 2 task(s) in the list.
 ```
 <br />
 
-### `event` - Adds an Event task
+### Add an Event task - `event`
 
 Adds an Event task with date and time to the task list.
 
@@ -72,7 +72,7 @@ Now you have 3 task(s) in the list.
 ```
 <br />
 
-### `list` - Lists all the tasks
+### List all the tasks - `list`
 
 Lists all the tasks in the task list.
 
@@ -88,7 +88,7 @@ Here are the task(s) in your list:
 ```
 <br />
 
-### `done` - Marks a task as done
+### Mark a task as done - `done`
 
 Marks a specified task in the task list as done.
 
@@ -109,7 +109,7 @@ Nice! I've marked this task as done:
 ```
 <br />
 
-### `delete` - Deletes a task
+### Delete a task - `delete`
 
 Deletes a specified task in the task list.
 
@@ -132,7 +132,7 @@ Now you have 2 task(s) in the list.
 
 <br />
 
-### `find` - Finds all the tasks with the keyword
+### Find all the tasks with the keyword - `find`
 
 Finds all the tasks with the given keyword.
 
@@ -151,7 +151,7 @@ Here are the matching task(s) in your list:
 
 <br />
 
-### `exit`
+### Exit the programe - `exit`
 
 Exits the program.
 
