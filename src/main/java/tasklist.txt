@@ -1,17 +1,2 @@
-T | 0 | eat dinner
-D | 0 | hw | Dec 12 2021 12:34
-E | 0 | sa | idk when
-T | 0 | eat lunch
-T | 0 | testing
-T | 0 | testing
-D | 0 | trying test 1 | Dec 12 2020 19:00
-D | 0 | trying test 1 | Dec 12 2020 19:12
-T | 0 | testing
-T | 0 | testing
-E | 0 | hello | 3pm
-D | 0 | for screenshot | Dec 12 2020 19:12
-T | 0 | hi
-T | 0 | what is happening
-T | 0 | 1
-T | 0 | 2
-T | 0 | 3
+D | 0 | try again | Dec 12 2020 19:12
+E | 0 | test e | 3pm Monday

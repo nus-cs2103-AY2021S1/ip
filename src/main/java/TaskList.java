@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TaskList {
-    public List<Task> list;
+    private List<Task> list;
 
     /**
      * Constructor for TaskList.
@@ -37,5 +37,23 @@ public class TaskList {
      */
     public void delete(int i) {
         list.remove(i - 1);
+    }
+
+    /**
+     * Update the status of the task at a particular position.
+     * @param i
+     * @param newTask
+     */
+    public void setTask(int i, Task newTask) {
+        this.list.set(i - 1, newTask);
+    }
+
+    /**
+     * Generate a string with the task size.
+     * @return a String indicating the task size.
+     */
+    public String printTaskSize() {
+        return ("Now you have " + this.list.size() +
+                (this.list.size() > 1 ? " tasks" : " task") + " on the list");
     }
 }

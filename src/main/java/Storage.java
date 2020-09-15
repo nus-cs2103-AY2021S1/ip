@@ -1,4 +1,7 @@
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -6,24 +9,19 @@ import java.util.Scanner;
 
 public class Storage {
 
-    File file;
-    String filepath;
+    private File file;
+    private Path filepath;
 
     /**
      * Constructor for Storage.
      * @param filepath
      */
     public Storage(String filepath) {
-        this.filepath = filepath;
-        try {
-            this.file = new File(filepath);
-            this.file.getParentFile().mkdirs();
+        this.filepath = Paths.get(filepath);
+        this.file = this.filepath.toAbsolutePath().toFile();
 
-            if (!file.exists()) {
-                file.createNewFile();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (!file.exists()) {
+            file.mkdirs();
         }
     }
 
@@ -32,41 +30,44 @@ public class Storage {
      * @return an arraylist of all the tasks
      * @throws FileNotFoundException
      */
-    public ArrayList<Task> loadData() throws FileNotFoundException {
-        Scanner reader = new Scanner(file);
-        ArrayList<Task> list = new ArrayList<>();
-        while (reader.hasNextLine()) {
-            String data = reader.nextLine();
-            boolean isDone = data.contains("| 1 |") ? true : false;
-            String description = data.split(" | ")[1];
-            if (data.startsWith("T")) {
-                ToDo toDo = new ToDo(description);
-                if (isDone) {
-                    toDo.markAsDone();
+    public ArrayList<Task> loadData() throws FileNotFoundException, IncorrectInputException {
+        try (BufferedReader reader = Files.newBufferedReader(this.filepath)) {
+            ArrayList<Task> list = new ArrayList<>();
+            String data;
+            reader.readLine();
+            while ((data = reader.readLine()) != null) {
+//                String data = reader.nextLine();
+                boolean isDone = data.contains("| 1 |") ? true : false;
+                String[] arr = data.split(" \\| ", 4);
+                String description = arr[2];
+                if (data.startsWith("T")) {
+                    ToDo toDo = new ToDo(description);
+                    if (isDone) {
+                        toDo.markAsDone();
+                    }
+                    list.add(toDo);
+                } else if (data.startsWith("D")) {
+                    DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm");
+                    DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
+                    LocalDateTime dateTime = LocalDateTime.parse(arr[3], outputFormat);
+                    dateTime.format(inputFormat);
+                    Deadline deadline = new Deadline(description, dateTime);
+                    if (isDone) {
+                        deadline.markAsDone();
+                    }
+                    list.add(deadline);
+                } else if (data.startsWith("E")) {
+                    Event event = new Event(description, arr[3]);
+                    if (isDone) {
+                        event.markAsDone();
+                    }
+                    list.add(event);
                 }
-                list.add(toDo);
-            } else if (data.startsWith("D")) {
-                String[] arr = description.split(" | ");
-                DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
-                DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm");
-                LocalDateTime dateTime = LocalDateTime.parse(arr[1], inputFormat);
-                dateTime.format(outputFormat);
-                Deadline deadline = new Deadline(arr[0], dateTime);
-                if (isDone) {
-                    deadline.markAsDone();
-                }
-                list.add(deadline);
-            } else if (data.startsWith("E")) {
-                String[] arr = description.split(" | ");
-                Event event = new Event(arr[0], arr[1]);
-                if (isDone) {
-                    event.markAsDone();
-                }
-                list.add(event);
             }
+            return list;
+        } catch (IOException e) {
+            throw new IncorrectInputException("erm temp to change later");
         }
-        reader.close();
-        return list;
     }
 
     /**
@@ -76,7 +77,7 @@ public class Storage {
      */
     public void saveTask(Task task) throws IOException {
         BufferedWriter file = new BufferedWriter(new FileWriter(
-                filepath, true));
+                String.valueOf(filepath), true));
         file.newLine();
         file.write(task.toSave());
         file.close();
