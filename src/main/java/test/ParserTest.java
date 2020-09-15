@@ -8,7 +8,7 @@ class ParserTest {
 
     @org.junit.jupiter.api.Test
     void getTaskDescription() {
-        assertEquals("2 3 4", Parser.getTaskDescription(
+        assertEquals("2 3 4", Parser.getTextAfterCommand(
                 new String[] {"1", "2", "3", "4"}));
     }
 

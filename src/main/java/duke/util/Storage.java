@@ -1,6 +1,11 @@
 package duke.util;
 
-import duke.task.*;
+import duke.task.Task;
+import duke.task.Todo;
+import duke.task.Event;
+import duke.task.Deadline;
+import duke.task.FixedDurationTask;
+import duke.task.FixedDurationTaskWithDateTime;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -12,25 +17,17 @@ import java.util.List;
 import java.util.ArrayList;
 
 /**
- * The Storage class handles all the reading and writing between
- * the program and the txt file which stores all the tasks in a
- * comma-separated value (csv) format. Each time the task list in
- * the program is being updated, the Storage object will rewrite
- * the txt file.
- *
- * This class enables the saving and loading feature of the task list, which
- * makes the program more usable as users do not have to rewrite all their
- * tasks whenever the program restarts.
+ * The storage handles all the reading and writing between
+ * the program and the txt file which stores all the tasks.
+ * This enables the saving and loading feature of the application.
  */
 public class Storage {
 
     private final File file;
 
     /**
-     * Initialises with the File object using the txt file path.
-     * If the path does not exist due to missing directories,
-     * this constructor will attempt to create the necessary
-     * directories.
+     * Constructs the storage with a given file path. If the path
+     * does not exist, the directories and file will be created.
      * @param filePath the path of the txt file.
      */
     public Storage(String filePath) {
@@ -48,16 +45,11 @@ public class Storage {
     }
 
     /**
-     * Reads the txt file and creates the tasks accordingly. This allows
-     * users to retrieve their last edited task list to resume usage.
-     *
-     *     Subtype|Description|DateTime
-     *
-     * Subtypes are single letters - T/D/E/F
-     * Descriptions are strings
-     * DateTime are raw date time strings for Deadline and Event only.
-     * @return the list of tasks to be loaded into TaskList.
-     * @throws DukeException when task creation fails.
+     * Loads the task list from the txt file. A new task list
+     * is created and populated with the corresponding tasks as
+     * parsed in the txt file.
+     * @return the list of tasks.
+     * @throws DukeException when task creation fails or txt file can't be read.
      */
     public List<Task> load() throws DukeException {
         List<Task> list = new ArrayList<>();
@@ -102,9 +94,11 @@ public class Storage {
     }
 
     /**
-     * Updates the task list txt file by rewriting the file using the input task list.
-     * This allows users to save their progress while using the task list.
-     * @param list the list of task to be read and written into txt file.
+     * Updates the task list txt file using the given task list.
+     * Tasks are generally written to the txt file in the following format:
+     *     type|isDone|description|others
+     * where 'others' is only relevant to certain types of tasks.
+     * @param list the list of task to be written into txt file.
      */
     public void update(List<Task> list) {
         try {

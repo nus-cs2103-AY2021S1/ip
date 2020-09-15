@@ -13,6 +13,10 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
+    /**
+     * Starts the application after setting up the stage.
+     * @param stage the stage to be displayed.
+     */
     @Override
     public void start(Stage stage) {
         try {

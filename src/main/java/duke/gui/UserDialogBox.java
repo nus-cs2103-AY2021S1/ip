@@ -18,6 +18,11 @@ public class UserDialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
+    /**
+     * Constructs the user dialog box which will contain the user's message and image.
+     * @param text the user's message.
+     * @param img the user's image.
+     */
     public UserDialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));

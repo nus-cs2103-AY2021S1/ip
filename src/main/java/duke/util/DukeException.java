@@ -1,17 +1,14 @@
 package duke.util;
 
 /**
- * Since Duke has specific keywords or command formats required from
- * the user input to function as intended, and user inputs can deviate
- * from expected formats due to an array of errors i.e. number format error,
- * wrong command error, non-existing command error, command format error,
- * the DukeException helps to standardize all Duke related errors.
+ * Duke exception encompasses all the possible native exceptions generated
+ * in the program by wrapping them under the context of the chat bot application.
+ * Personality of the bot can be easily portrayed in the standardized prefix of the
+ * error messages.
  */
 public class DukeException extends Exception {
-
     /**
-     * Constructor which prepends a Duke error signature
-     * to the given message for standardization.
+     * Constructs the duke exception.
      * @param message the error message.
      */
     public DukeException(String message) {

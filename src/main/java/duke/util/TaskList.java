@@ -1,6 +1,10 @@
 package duke.util;
 
-import duke.task.*;
+import duke.task.Task;
+import duke.task.Todo;
+import duke.task.Event;
+import duke.task.Deadline;
+import duke.task.FixedDurationTask;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -9,22 +13,17 @@ import java.util.Comparator;
 import java.util.Optional;
 import java.util.stream.IntStream;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-
 /**
- * The TaskList encapsulates the list of tasks and is in charge of
- * creating tasks, adding or removing tasks from the list, marking
- * tasks as completed, and generating a print message of the list.
+ * The task list keeps track of all the tasks and has additional
+ * functionalities including adding, removing, modifying tasks,
+ * filtering, and formatting of the list for printing.
  */
 public class TaskList {
 
-    /** The list containing Tasks objects. */
     private final List<Task> list;
 
     /**
-     * Constructor for TaskList. This constructor is usually
-     * used when loading a list of tasks from the txt file.
+     * Constructs the task list with a given list.
      * @param list the list of tasks.
      */
     public TaskList(List<Task> list) {
@@ -32,7 +31,7 @@ public class TaskList {
     }
 
     /**
-     * Constructor for TaskList to create an empty list.
+     * Constructs an empty task list.
      */
     public TaskList() {
         this.list = new ArrayList<>();
@@ -55,19 +54,11 @@ public class TaskList {
     }
 
     /**
-     * The static factory method to create the subtypes of Tasks:
-     *
-     *     - Todo: A simple task with a description only
-     *     - Event: A task requiring attendance at a date and time
-     *     - Deadline: A task requiring completion by a date and time
-     *
-     * Creation of these tasks are based on the type input. After which,
-     * the description of the task will be parsed and handled individually
-     * by the appropriate subclasses.
-     * @param type the subtype of the Task to be created.
+     * The static factory method to create the subtypes of tasks.
+     * @param type the subtype of the task to be created.
      * @param description the raw description of the task.
-     * @return the created Task object.
-     * @throws DukeException when creation fails usually due to improper format description.
+     * @return the created task object.
+     * @throws DukeException when task creation fails.
      */
     public static Task createTask(String type, String description) throws DukeException {
         Task task = new Todo("");
@@ -114,19 +105,25 @@ public class TaskList {
         return task;
     }
 
+    /**
+     * Adds a task to the task list.
+     * @param task the task to be added.
+     */
     public void add(Task task) {
         list.add(task);
     }
 
+    /**
+     * Gets the task from the task list using a task number.
+     * @param i the index of the task.
+     * @return the task.
+     */
     public Task get(int i) {
         return list.get(i);
     }
 
     /**
-     * Removes the task of the given task number. The removed task
-     * is then returned for the application to print or handle if required.
-     * Important to note that task numbers are based on their indices in the list,
-     * and tasks after a deleted task will have their indices shifted down by one value.
+     * Removes and returns the task of the given task number.
      * @param i the index of the task to be removed.
      * @return the removed task.
      * @throws DukeException when the index does not contain a task.
@@ -140,14 +137,24 @@ public class TaskList {
         }
     }
 
+    /**
+     * Removes all tasks from the task list.
+     */
     public void removeAll() {
         list.clear();
     }
 
     /**
-     * Marks a task as completed and returns the same task for the application
-     * to print of handle if required. Indices are based on the objects' indices
-     * in the list.
+     * Replaces a task at the given index.
+     * @param i the index.
+     * @param task the new task.
+     */
+    public void replace(int i, Task task) {
+        list.set(i, task);
+    }
+
+    /**
+     * Marks a task as done and returns the task.
      * @param i the index of the task.
      * @return the task.
      * @throws DukeException when the index does not contain a task.
@@ -168,17 +175,7 @@ public class TaskList {
     }
 
     /**
-     * Generates a print message containing the list of tasks. The message
-     * will go through Ui formatting and be printed out. Example:
-     *
-     * >> list
-     *     --------------------------------------------------------
-     *     Here are the tasks in your list:
-     *     1. [T][✘] Mop the floor
-     *     2. [D][✘] assignment (by: Aug 26 2020, 11:59 pm)
-     *     3. [E][✘] future date (at: Feb 14 2021, 07:00 pm)
-     *     --------------------------------------------------------
-     *
+     * Gets the formatted message of the task list for printing.
      * @return the formatted print message of the list.
      */
     public String getPrintMessage() {
@@ -198,10 +195,7 @@ public class TaskList {
     }
 
     /**
-     * Generates a print message containing the list of tasks that the user
-     * is interested in seeing based on the input query keyword. Keywords are
-     * matched as whole words instead of substrings.
-     * The search result may be empty.
+     * Gets the formatted message of the filtered task list for printing.
      * @param query the keyword to filter tasks.
      * @return the formatted print message of the filtered list.
      */
@@ -218,10 +212,7 @@ public class TaskList {
     }
 
     /**
-     * Sorts the task list based on the input parameter. Users can sort by
-     * either task names lexicographically, subtypes, or date time if applicable.
-     * In the case of date time sorting, tasks without date time will be sorted
-     * last.
+     * Sorts the task list based on the input parameter.
      * @param sortBy the parameter of sorting the list.
      */
     public void sort(String sortBy) throws DukeException {
@@ -240,14 +231,23 @@ public class TaskList {
         }
     }
 
+    /**
+     * Sorts the task list by the task description.
+     */
     public void sortByName() {
         list.sort(Comparator.comparing(Task::getDescription));
     }
 
+    /**
+     * Sorts the task list by the task type.
+     */
     public void sortByType() {
         list.sort(Comparator.comparing(Task::getType));
     }
 
+    /**
+     * Sorts the task list by task's the date time.
+     */
     public void sortByDateTime() {
         list.sort(new TaskDateTimeComparator());
     }

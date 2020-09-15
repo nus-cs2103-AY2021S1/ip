@@ -1,12 +1,32 @@
 package duke.util;
 
-import duke.task.*;
+import duke.task.Task;
+import duke.task.TaskWithDateTime;
+import duke.task.FixedDurationTaskWithDateTime;
+import duke.task.Todo;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Comparator;
 
+/**
+ * Comparator for comparing tasks using the date time fields.
+ */
 public class TaskDateTimeComparator implements Comparator<Task> {
+
+    /**
+     * Compares two tasks. The comparison follows the rules:
+     *     - Task without date time will be last
+     *     - Two tasks with dates will be compared
+     *         - Task with earlier date will be first
+     *         - If same date, time will be compared
+     *             - Task without time will be last
+     *             - Task with earlier time will be first
+     *
+     * @param t1 the first task.
+     * @param t2 the second task.
+     * @return the compare value.
+     */
     @Override
     public int compare(Task t1, Task t2) {
         if (hasNoDateTime(t1)) {

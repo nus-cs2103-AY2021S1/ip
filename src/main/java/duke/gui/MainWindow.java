@@ -37,6 +37,9 @@ public class MainWindow extends AnchorPane {
     private final Image dukeHuhImage = new Image(this.getClass().getResourceAsStream("/images/tebbyHuh.png"));
     private final Image dukeErrorImage = new Image(this.getClass().getResourceAsStream("/images/tebbyError.png"));
 
+    /**
+     * Initializes the main window of the GUI with a welcome message from the bot.
+     */
     @FXML
     public void initialize() {
         System.out.println("=================== [ Tebby started in GUI mode ] ===================");
@@ -49,11 +52,20 @@ public class MainWindow extends AnchorPane {
         );
     }
 
+    /**
+     * Sets the bot's logic with the given bot.
+     * @param d the bot.
+     */
     public void setDuke(Duke d) {
         duke = d;
     }
 
-    public void getDateText(ActionEvent event) {
+    /**
+     * Upon selection of a date using the DatePicker in the GUI, this
+     * method appends the selected date's text to the user input text field.
+     * @param event the event of DatePicker selecting a date.
+     */
+    public void appendDateTextToUserInput(ActionEvent event) {
         try {
             LocalDate date = datePicker.getValue();
             String currentText = userInput.getText();
@@ -62,7 +74,7 @@ public class MainWindow extends AnchorPane {
             datePicker.getEditor().clear();
             datePicker.setValue(null);
         } catch (NullPointerException e) {
-            System.out.println("DatePicker has been reset.");
+            System.out.println("User has selected a date from DatePicker.");
         }
     }
 

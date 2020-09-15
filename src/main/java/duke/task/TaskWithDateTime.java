@@ -8,13 +8,9 @@ import java.time.format.DateTimeParseException;
 import java.util.Optional;
 
 /**
- * Some tasks have more information such as the date and time of their
- * occurrence or a particular deadline in which the task has to be attended to or
- * completed by.
- *
- * This subtype uses the java.time package for its date and time.
- * the time is optional, as depicted by the use of Optional class, as some
- * tasks do not have exact stipulated time.
+ * Task with date time encapsulates tasks that contain date time information.
+ * Date is compulsory while time is optional. The reasoning is that some tasks
+ * can take arbitrary time range or the entire day, hence having the date suffices.
  */
 public abstract class TaskWithDateTime extends Task {
 
@@ -22,11 +18,10 @@ public abstract class TaskWithDateTime extends Task {
     protected Optional<LocalTime> time;
 
     /**
-     * Constructor for tasks with date time. The date time is a raw string which will
-     * be parsed into LocalDate and LocalTime objects if successful.
+     * Constructs the task with date time.
      * @param description the description of the task.
      * @param dateTime the raw date time string of the task.
-     * @throws DukeException when the date time format is incorrect.
+     * @throws DukeException when task creation fails.
      */
     public TaskWithDateTime(String type, String description, String dateTime) throws DukeException {
         super(type, description);
@@ -46,12 +41,11 @@ public abstract class TaskWithDateTime extends Task {
     }
 
     /**
-     * Overloaded constructor for Event.
-     * This constructor is usually used when loading tasks from the txt file.
+     * Constructs the task with date time with completion status.
      * @param description the description of the task.
      * @param dateTime the raw date time string of the task.
-     * @param isDone the completion flag of the task.
-     * @throws DukeException when the date time format is incorrect.
+     * @param isDone the completion status of the task.
+     * @throws DukeException when task creation fails.
      */
     public TaskWithDateTime(String type, String description, String dateTime, boolean isDone) throws DukeException {
         super(type, description, isDone);
@@ -89,14 +83,26 @@ public abstract class TaskWithDateTime extends Task {
         return LocalTime.parse(timeString);
     }
 
+    /**
+     * Gets the date of the task.
+     * @return the date of the task.
+     */
     public LocalDate getDate() {
         return date;
     }
 
+    /**
+     * Gets the optional time of the task.
+     * @return the optional time of the task.
+     */
     public Optional<LocalTime> getTime() {
         return time;
     }
 
+    /**
+     * Formats the string representation of the task and returns it.
+     * @return the formatted string representation of the task.
+     */
     @Override
     public String getDescription() {
         return String.format("%s / %s%s", description, date,

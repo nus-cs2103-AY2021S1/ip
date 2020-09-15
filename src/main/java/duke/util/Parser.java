@@ -16,56 +16,44 @@ import java.util.Arrays;
 
 /**
  * The Parser is in charge of parsing raw strings of user inputs
- * and generating the appropriate response to the inputs. For example,
- * when the user sends "exit", the parser will return an ExitCommand
- * to be executed by the program.
- *
- * All methods of this class are static as this class is meant to be used functionally.
+ * and generating the appropriate response to the inputs.
  */
 public class Parser {
 
-    /**
-     * Splits the raw string using single spaces as delimiters to generate
-     * tokenized strings. This is required for the program to parse commands.
-     * Example:
-     *
-     * "a user input" -> ["a", "user", "input"]
-     *
-     * @param raw the raw string input.
-     * @return the split string.
-     */
     private static String[] format(String raw) {
         return raw.split(" ");
     }
 
     /**
-     * This method is used when the user's command involves
-     * task creation. The parser extracts the description of the task.
-     *
-     * "todo sleep for 20 hrs"          -> "sleep for 20 hrs"
-     * "event lecture /at today 10:00"  -> "lecture /at today 10:00"
-     *
-     * The output string will be passed onto the respective task constructors.
+     * Gets the command in lower case.
      * @param raw the raw string input.
-     * @return the task description.
+     * @return the command in lower case.
      */
-    public static String getTaskDescription(String[] raw) {
+    public static String getCommand(String[] raw) {
+        return raw[0].toLowerCase();
+    }
+
+    /**
+     * Gets the text after the command which is typically the first token
+     * of the raw string.
+     * @param raw the raw string input.
+     * @return the text after the command.
+     */
+    public static String getTextAfterCommand(String[] raw) {
         String[] temp = Arrays.copyOfRange(raw, 1, raw.length);
         return String.join(" ", temp);
     }
 
     /**
-     * Generates the appropriate command object based on the user input.
-     * This requires a series of string analysis such as checking of the
-     * command denoted as the first word of the user's message, and further
-     * parsing of the rest of the message accordingly.
+     * Parses the raw string input and generates the appropriate
+     * command as a response to the input.
      * @param input the raw string input.
      * @return the appropriate Command object in response to the user input.
-     * @throws DukeException when task creation fails or task indices are incorrect.
+     * @throws DukeException when parsing of the input fails.
      */
     public static Command parse(String input) throws DukeException {
         String[] parsed = Parser.format(input);
-        String command = parsed[0].toLowerCase();
+        String command = Parser.getCommand(parsed);
 
         switch (command) {
         case "bye":
@@ -76,7 +64,7 @@ public class Parser {
         case "event":
         case "deadline":
         case "fixed":
-            String description = Parser.getTaskDescription(parsed);
+            String description = Parser.getTextAfterCommand(parsed);
             return new AddCommand(command, description);
         case "done":
             try {
@@ -89,7 +77,7 @@ public class Parser {
             } catch (NumberFormatException nfe) {
                 throw new DukeException("Invalid task number!");
             } catch (ArrayIndexOutOfBoundsException aioobe) {
-                return new InvalidCommand("You can mark tasks as done!\nE.g. 'done 1' or 'done all'");
+                return new InvalidCommand("Uh oh! Here's how it works:\nE.g. 'done 1' or 'done all'");
             }
         case "list":
             return new ListCommand();
@@ -105,13 +93,13 @@ public class Parser {
             } catch (NumberFormatException nfe) {
                 throw new DukeException("Invalid task number!");
             } catch (ArrayIndexOutOfBoundsException aioobe) {
-                return new InvalidCommand("You can remove tasks from the list!\nE.g. 'remove 1' or 'remove all'");
+                return new InvalidCommand("Uh oh! Here's how it works:\nE.g. 'remove 1' or 'remove all'");
             }
         case "find":
             try {
                 return new FindCommand(parsed[1]);
             } catch (ArrayIndexOutOfBoundsException aioobe) {
-                return new InvalidCommand("You can filter your list using keywords!\nE.g. 'find assignment'");
+                return new InvalidCommand("Uh oh! Here's how it works:\nE.g. 'find assignment'");
             }
         case "help":
             return new HelpCommand();
@@ -119,14 +107,15 @@ public class Parser {
             try {
                 return new SortCommand(parsed[1]);
             } catch (ArrayIndexOutOfBoundsException aioobe) {
-                return new InvalidCommand("You can sort by: name, type, datetime\nE.g. 'sort name'");
+                return new InvalidCommand(
+                        "Uh oh! Here's how it works:\nE.g. 'sort name'\nYou can sort by name, datetime, type");
             }
         case "start":
             try {
                 int taskNumber = Integer.parseInt(parsed[1]);
                 return new StartTaskCommand(taskNumber, parsed[2] + " " + parsed[3]);
             } catch (ArrayIndexOutOfBoundsException aioobe) {
-                return new InvalidCommand("You can set a fixed task's date time!\nE.g. 'start 1 today 23:00'");
+                return new InvalidCommand("Uh oh! Here's how it works:\nE.g. 'start 1 today 23:00'");
             } catch (NumberFormatException nfe) {
                 throw new DukeException("Invalid fixed task number!");
             }

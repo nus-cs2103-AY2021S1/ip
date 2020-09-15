@@ -5,20 +5,30 @@ import duke.util.DukeException;
 import java.time.Duration;
 
 /**
- * The fixed duration task has two main states; task with duration without a
- * specified start date time, and task with duration and specified start date time.
- * This allows users to create a task without a decided start date time and they
- * are free to provide the start date time in the future.
+ * The fixed duration task is a subtype of a task which has no set date time
+ * but has a known duration. Example:
+ *     [F][✘] meditate (for: 2 hr)
  */
 public class FixedDurationTask extends Task {
 
     protected final Duration duration;
 
+    /**
+     * Constructs the fixed duration task.
+     * @param description the description of the task.
+     * @param duration the raw string of the duration.
+     * @throws DukeException when task creation fails.
+     */
     public FixedDurationTask(String description, String duration) throws DukeException {
         super("F", description);
         this.duration = parseDuration(duration);
     }
 
+    /**
+     * Constructs the fixed duration task.
+     * @param description the description of the task.
+     * @param durationSeconds the duration in seconds.
+     */
     public FixedDurationTask(String description, long durationSeconds) {
         super("F", description);
         this.duration = Duration.ofSeconds(durationSeconds);
@@ -64,11 +74,19 @@ public class FixedDurationTask extends Task {
         return Duration.ofMinutes((long) (60 * hour) + minute);
     }
 
+    /**
+     * Gets the description of the task.
+     * @return description of the task.
+     */
     @Override
     public String getDescription() {
         return String.format("%s / %s", description, duration.getSeconds());
     }
 
+    /**
+     * Formats the string representation of the task and returns it.
+     * @return the formatted string representation of the task.
+     */
     @Override
     public String toString() {
         long sec = duration.getSeconds();
