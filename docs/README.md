@@ -10,8 +10,10 @@ Created by: Sruthi
 1. Ensure you have Java 11 or above installed in your machine.
 2. Go to the directory containing the jar file you have just downloaded
 3. Execute the command `java -jar duke.java` in your terminal
+
 ## User Interface
 ![UI](UI.png)
+
 ## Features 
 
 ### Add Tasks
