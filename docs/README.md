@@ -1,30 +1,30 @@
 # User Guide
 
 Duke is a task manager with a Graphical User Interface(GUI). Given below are instructions on how to use it.
-* 1. Quick Start
-* 2. Features
-    * 2.1 Adding a ToDo task `todo`
-    * 2.2 Adding a Deadline task `deadline`
-    * 2.3 Adding an Event task `event`
-    * 2.4 Listing all tasks `list`
-    * 2.5 Marking a task as done `done`
-    * 2.6 Deleting a task `delete`
-    * 2.7 Finding tasks that match a keyword `find`
-    * 2.8 Saving the data
-    * 2.9 Exiting the program `bye`
-    * 2.10 Displaying the help message `help`
-* 3. Usage
-    * 3.1 `todo` - Add a ToDo task
-    * 3.2 `deadline` - Add a Deadline task
-    * 3.3 `event` - Add an Event task
-    * 3.4 `list` - List all tasks
-    * 3.5 `done` - Mark a task as done
-    * 3.6 `delete` - Delete a task
-    * 3.7 `find` - Find tasks matching a keyword
-    * 3.8 `bye` - Exit the program
-    * 3.9 `help` - Display the help message
-* 4. Command summary
-* 5. Acknowledgements
+* [1. Quick Start](#1-quick-start)
+* [2. Features](#2-features)
+    * [2.1 Adding a ToDo task `todo`](#21-adding-a-todo-task-todo)
+    * [2.2 Adding a Deadline task `deadline`](#22-adding-a-deadline-task-deadline)
+    * [2.3 Adding an Event task `event`](#23-adding-an-event-task-event)
+    * [2.4 Listing all tasks `list`](#24-listing-all-tasks-list)
+    * [2.5 Marking a task as done `done`](#25-marking-a-task-as-done-done)
+    * [2.6 Deleting a task `delete`](#26-deleting-a-task-delete)
+    * [2.7 Finding tasks that match a keyword `find`](#27-finding-tasks-that-match-a-keyword-find)
+    * [2.8 Saving the data](#28-saving-the-data)
+    * [2.9 Exiting the program `bye`](#29-exit-the-program-bye)
+    * [2.10 Displaying the help message `help`](#210-displaying-the-help-message-help)
+* [3. Usage](#3-usage)
+    * [3.1 `todo` - Add a ToDo task](#31-todo---add-a-todo-task)
+    * [3.2 `deadline` - Add a Deadline task](#32-deadline---add-a-deadline-task)
+    * [3.3 `event` - Add an Event task](#33-event---add-an-event-task)
+    * [3.4 `list` - List all tasks](#34-list---list-all-tasks)
+    * [3.5 `done` - Mark a task as done](#35-done---mark-a-task-as-done)
+    * [3.6 `delete` - Delete a task](#36-delete---delete-a-task)
+    * [3.7 `find` - Find tasks matching a keyword](#37-find---find-tasks-matching-a-keyword)
+    * [3.8 `bye` - Exit the program](#38-bye---exit-the-program)
+    * [3.9 `help` - Display the help message](#39-help---display-the-help-message)
+* [4. Command summary](#4-command-summary)
+* [5. Acknowledgements](#5-acknowledgements)
 
 ## 1. Quick Start
 
