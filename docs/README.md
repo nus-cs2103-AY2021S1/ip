@@ -86,6 +86,10 @@ Example of usage:
 
 `check 1 2`
 
+Expected outcome:
+
+![Check outcome](images/check-outcome.JPG)
+
 ### `remove [index] [index]` - Delete one or more tasks
 
 Delete one or more tasks.
@@ -97,6 +101,10 @@ Aliases: `rm`
 Example of usage:
 
 `remove 1 2`
+
+Expected outcome:
+
+![Remove outcome](images/remove-outcome.JPG)
 
 ### `find [search-term]` - Look for tasks with matching descriptions
 

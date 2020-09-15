@@ -21,7 +21,7 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
 
 If the setup is correct, you should see something like the below:
 
-![Startup image](./docs/Startup.PNG)
+![Startup image](docs/images/Startup.PNG)
 
 ## Using the Application
 
