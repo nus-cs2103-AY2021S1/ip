@@ -1,7 +1,6 @@
 package olivia.ui;
 
 import java.util.List;
-import java.util.Scanner;
 
 import olivia.resource.TaskList;
 import olivia.task.Task;
@@ -12,16 +11,6 @@ import olivia.util.OliviaException;
  */
 
 public class Ui {
-
-    private final Scanner sc;
-
-    /**
-     * Constructor that creates a Ui object, with a Scanner that reads user input.
-     */
-
-    public Ui() {
-        sc = new Scanner(System.in);
-    }
 
     /**
      * Prints to user if the given save file has loaded successfully and the tasks found
