@@ -90,11 +90,17 @@ public class Printer {
      * @return all available commands
      */
     public static String printListCommands() {
-        String commandList = "help\n" + "done <task number> \n" + "todo <task content> \n"
-                + "deadline <task content> /<" + Constants.DF_LOCAL_TIME + ">\n"
-                + "event <task content> /<" + Constants.DF_LOCAL_TIME + ">\n"
-                + "find <query key>\n" + "delete <task number>\n"
-                + "l[i]s[t]\n" + "bye\n";
+        String commandList = "help: list out all the available commands\n"
+                + "done <task number>: Mark the task as done. \n"
+                + "todo <task content>: Create a todo task. A todo has no deadline.\n"
+                + "deadline <task content> /<" + Constants.DF_LOCAL_TIME
+                + ">: Create a deadline task. Remember to input your date of deadline.\n"
+                + "event <task content> /<" + Constants.DF_LOCAL_TIME
+                + ">: Create an event task. An event has a duration.\n"
+                + "find <query key>: find the task by your query key.\n"
+                + "delete <task number>: delete your task.\n"
+                + "li?st?: list out all the tasks that you have.\n"
+                + "bye: turn off the Duke.\n";
         System.out.println(commandList);
         return commandList;
     }

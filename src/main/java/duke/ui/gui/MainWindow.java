@@ -6,6 +6,8 @@ import duke.DukeCommandMatcher;
 import duke.storage.Storage;
 import duke.ui.Printer;
 import duke.utils.Constants;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
@@ -35,6 +37,8 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DonaldTrump.jpg"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Duke.png"));
 
+    private final ChangeListener<Boolean> inputFocusListener = this::handleFocusedInputField;
+
     /**
      * Initializer for main window.
      */
@@ -42,20 +46,22 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(Constants.GREETING, dukeImage));
+        userInput.focusedProperty().addListener(this.inputFocusListener);
+    }
 
-        userInput.focusedProperty().addListener((event, oldVal, newVal) -> {
-            if (newVal) {
-                userInput.setStyle("-fx-background-radius: 10");
-                userPanel.setPadding(new Insets(3, 5, 3, 5));
-                userPanel.setSpacing(10.0);
-                userInput.setPrefWidth(325);
-            } else {
-                userInput.setStyle("-fx-background-radius: 30");
-                userPanel.setPadding(new Insets(3, 5, 3, 25));
-                userInput.setPrefWidth(275);
-                userPanel.setSpacing(25.0);
-            }
-        });
+    private void handleFocusedInputField(ObservableValue<? extends Boolean> observableValue,
+                                         Boolean oldVal, Boolean newVal) {
+        if (newVal) {
+            userInput.setStyle("-fx-background-radius: 10");
+            userPanel.setPadding(new Insets(3, 5, 3, 5));
+            userPanel.setSpacing(10.0);
+            userInput.setPrefWidth(325);
+        } else {
+            userInput.setStyle("-fx-background-radius: 30");
+            userPanel.setPadding(new Insets(3, 5, 3, 25));
+            userInput.setPrefWidth(275);
+            userPanel.setSpacing(25.0);
+        }
     }
 
 
@@ -83,7 +89,8 @@ public class MainWindow extends AnchorPane {
             if (Objects.equals(response, Constants.EXITRESPONSE)) {
                 db = DialogBox.getDukeDialog(Printer.printBye(), dukeImage);
                 userInput.setEditable(false);
-                userInput.setStyle("-fx-background-color: grey;");;
+                userInput.setStyle("-fx-background-color: grey;");
+                userInput.focusedProperty().removeListener(this.inputFocusListener);
             } else {
                 assert response != Constants.EXITRESPONSE : response;
                 db = DialogBox.getDukeDialog(response, dukeImage);
@@ -93,4 +100,5 @@ public class MainWindow extends AnchorPane {
             dialogContainer.getChildren().add(DialogBox.getDukeDialog(e.getMessage(), dukeImage));
         }
     }
+
 }
