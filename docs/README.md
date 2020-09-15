@@ -1,9 +1,38 @@
 # User Guide
 
+![image](../other/app-preview.gif)
+
 ## Features 
 
 ### Todo Feature
 Add a todo task to your list.
+
+### Event Feature
+Add an event to your list.
+
+### Deadline Feature
+Add a deadline to your list.
+
+### Find Feature
+Display tasks with a specific keyword within your list.
+
+### Date Feature
+Find tasks with a specific date within your list.
+
+### Tag Feature
+Tags your task with a specific tag.
+
+### Find Tag Feature
+Display a list of tasks with the specified tag.
+
+### Untag Feature
+Untags all tasks (or a specified index of task) by removing the specified tag.
+
+### Delete Feature
+Delete a specific task number.
+
+### Done Feature
+Marks a task as done.
 
 ## Usage
 
@@ -19,9 +48,6 @@ Expected outcome:
 
 `[T][x] <task name>`
 
-### Event Feature
-Add an event to your list.
-
 ## Usage
 
 ### `event <event name> /at <DD-MM-YYYY>`
@@ -36,9 +62,6 @@ Expected outcome:
 
 `[E][x] <event name> (at: 09 Sep 2020 11.59pm)`
 
-### Deadline Feature
-Add a deadline to your list.
-
 ## Usage
 
 ### `deadline <deadline name> /by <DD-MM-YYYY>` 
@@ -52,9 +75,6 @@ Example of usage:
 Expected outcome:
 
 `[D][x] <event name> (by: 09 Sep 2020 11.59pm)`
-
-### Find Feature
-Finds tasks with a specific keyword within your list.
 
 ## Usage
 
@@ -71,9 +91,6 @@ Expected outcome:
 `1. [E][x] meeting for CS2103 (at: 14 Sep 2020 10.00pm)`
 `2. [E][x] CCAmeeting (at: 20 Sep 2020 7.00am)`
 
-### Date Feature
-Finds tasks with a specific date within your list.
-
 ## Usage
 
 ### `date <DD-MM-YYYY>` - 
@@ -88,9 +105,6 @@ Expected outcome:
 
 `1. [E][x] meeting for CS2103 (at: 14 Sep 2020 10.00pm)`
 `2. [T][x] Group Project Task (at: 14 Sep 2020 7.00am)`
-
-### Tag Feature
-Tags your task with a specific tag.
 
 ## Usage
 
@@ -107,9 +121,6 @@ Expected outcome:
 `1. [E][x] meeting for CS2103 (at: 14 Sep 2020 10.00pm)`
 `2. [T][x] Group Project Task (at: 14 Sep 2020 7.00am) #urgent`
 
-### Find Tag Feature
-Display a list of tasks with the specified tag.
-
 ## Usage
 
 ### `findtag <tag>` - 
@@ -124,9 +135,6 @@ Expected outcome:
 
 `1. [E][x] meeting for CS2103 (at: 14 Sep 2020 10.00pm) #urgent #important`
 `2. [T][x] Group Project Task (at: 14 Sep 2020 7.00am) #abc #urgent`
-
-### Untag Feature
-Untags all tasks (or a specified index of task) by removing the specified tag.
 
 ## Usage
 
@@ -156,9 +164,6 @@ Expected outcome:
 `1. [E][x] meeting for CS2103 (at: 14 Sep 2020 10.00pm) #urgent #important`
 `2. [T][x] Group Project Task (at: 14 Sep 2020 7.00am) #abc`
 
-### Delete Feature
-Delete a specific task number.
-
 ## Usage
 
 ### `delete <index>` - 
@@ -172,9 +177,6 @@ Example of usage:
 Expected outcome:
 
 `1. [T][x] Group Project Task (at: 14 Sep 2020 7.00am) #abc #urgent`
-
-### Done Feature
-Marks a task as done.
 
 ## Usage
 
