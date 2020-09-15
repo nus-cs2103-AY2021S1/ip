@@ -94,7 +94,7 @@ public class Parser {
         if (index > tasks.size() || index < 0) {
             throw new DukeException("That task number does not exist.");
         }
-        Tag tag = Tag.StringToTag(userInputWords[2]);
+        Tag tag = Tag.stringToTag(userInputWords[2]);
         tasks.get(index - 1).addTag(tag);
         Task t = tasks.get(index - 1);
         ArrayList<Task> tasksCopy = tasks.clone();
@@ -262,7 +262,7 @@ public class Parser {
             return executeDeleteCommand(userInputWords, tasks);
         } else if (userInputWords.length == 2 && userInputWords[0].equals(FIND_COMMAND)) {
             return executeFindCommand(userInputWords, tasks);
-        }  else if (userInputWords.length == 2 && userInputWords[0].equals(FIND_TAG_COMMAND)) {
+        } else if (userInputWords.length == 2 && userInputWords[0].equals(FIND_TAG_COMMAND)) {
             return executeFindTagCommand(userInputWords, tasks);
         } else if (userInputWords.length == 3 && userInputWords[0].equals(TAG_COMMAND)) {
             return executeTagCommand(userInputWords, tasks);

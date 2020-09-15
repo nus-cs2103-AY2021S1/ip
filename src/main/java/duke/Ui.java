@@ -25,7 +25,7 @@ public class Ui {
     /**
      * Simulates an exit event when the user inputs the bye command.
      *
-     * @return Returns "Bye" if the user inputs the bye command.
+     * @return Returns a response to the user.
      */
     public String goodbye() {
         return "Bye! Hope to see you again soon!";
@@ -35,6 +35,7 @@ public class Ui {
      * Displays the user's current task list.
      *
      * @param tasks The current TaskList of the User.
+     * @return Returns the user's current task list.
      */
     public String list(TaskList tasks) {
         if (tasks.size() == 0) {
@@ -49,6 +50,12 @@ public class Ui {
         }
     }
 
+    /**
+     * Displays the user's current task list and their respective tags.
+     *
+     * @param tasks The current TaskList of the User.
+     * @return Returns the user's current task list and their respective tags..
+     */
     public String showTags(TaskList tasks) {
         if (tasks.size() == 0) {
             return "There are no tasks in your list yet.";
@@ -66,6 +73,7 @@ public class Ui {
      * Notifies the user that the specified task has been marked done.
      *
      * @param t The specified task that was marked done.
+     * @return Returns a response to the user that the specified task has been marked done.
      */
     public String done(Task t) {
         String response = "Nice! I've marked this task as done:";
@@ -77,6 +85,7 @@ public class Ui {
      * Notifies the user that the specified task has been tagged.
      *
      * @param t The specified task that was marked done.
+     * @return Returns a response to the user that the specified task has been tagged.
      */
     public String tag(Task t, Tag tag) {
         String response = "Nice! I've tagged this task with " + tag + ":";
@@ -90,6 +99,7 @@ public class Ui {
      *
      * @param t The specified task that was deleted.
      * @param size The number of tasks in the TaskList.
+     * @return Returns a response to the user.
      */
     public String delete(Task t, int size) {
         String response = "Noted. I've removed this task:";
@@ -104,6 +114,7 @@ public class Ui {
      *
      * @param t The specified task that was added.
      * @param size The number of tasks in the TaskList.
+     * @return Returns a response to the user.
      */
     public String add(Task t, int size) {
         String response = "Got it. I've added this task:";
@@ -116,6 +127,7 @@ public class Ui {
      * Displays the tasks in the user's TaskList that match the input string.
      *
      * @param tasks The list of Tasks that contains the input string.
+     * @return Returns the tasks in the user's TaskList that match the input string.
      */
     public String find(ArrayList<Task> tasks) {
         if (tasks.size() == 0) {
@@ -131,9 +143,10 @@ public class Ui {
     }
 
     /**
-     * Displays the tasks in the user's TaskList that match the input string.
+     * Displays the tasks in the user's TaskList that match the input tag.
      *
-     * @param tasks The list of Tasks that contains the input string.
+     * @param tasks The list of Tasks that contains the input tag.
+     * @return Returns the tasks in the user's TaskList that match the input tag.
      */
     public String findTag(ArrayList<Task> tasks) {
         if (tasks.size() == 0) {
@@ -169,6 +182,14 @@ public class Ui {
         }
     }
 
+    /**
+     * Notifies the user if the specified tag of the specified task was removed.
+     *
+     * @param t The specified task.
+     * @param isTagRemoved If the tag is removed or not
+     * @param tagRemoved The tag that was removed (if any)
+     * @return Returns a response to the user.
+     */
     public String removeTag(Task t, boolean isTagRemoved, String tagRemoved) {
         if (!isTagRemoved) {
             return "The specified task does not have the specified tag: " + tagRemoved;

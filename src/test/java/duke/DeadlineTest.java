@@ -11,8 +11,8 @@ class DeadlineTest {
         Deadline readBook = new Deadline("read book", "2020-01-01");
         Deadline notReadBook = new Deadline("not read book", "2020-01-01");
         readBook.setDone();
-        assertEquals("[D][✓] read book (by: Jan 01 2020)", readBook.recordString());
-        assertEquals("[D][✘] not read book (by: Jan 01 2020)", notReadBook.recordString());
+        assertEquals("[D][✓] read book (by: Jan 01 2020)", readBook.formattedDateString());
+        assertEquals("[D][✘] not read book (by: Jan 01 2020)", notReadBook.formattedDateString());
     }
 
     @Test

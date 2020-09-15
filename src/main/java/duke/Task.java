@@ -19,9 +19,9 @@ public class Task {
     }
 
     /**
-     * Returns a tick if task is completed, a cross if otherwise.
+     * Returns an "O" if task is completed, an "X" if otherwise.
      *
-     * @return Tick if completed, cross if not.
+     * @return "O" if completed, "X" if not.
      */
     public String getStatusIcon() {
         return (isDone ? "O" : "X");
@@ -31,6 +31,11 @@ public class Task {
         return this.description;
     }
 
+    /**
+     * Returns all the tags tagged to the task.
+     *
+     * @return The tasks tagged to the task.
+     */
     public String getTags() {
         String response = "";
         for (Tag tag : tags) {
@@ -39,19 +44,29 @@ public class Task {
         return response;
     }
 
+    /**
+     * Adds a tag to the task.
+     */
     public void addTag(Tag tag) {
         this.tags.add(tag);
     }
 
+    /**
+     * Removes the specified tag from the task if it exists.
+     *
+     * @param tagString The specified tag.
+     * @return Returns 1 if tag was found and removed, 0 if tag was not found.
+     */
     public int removeTag(String tagString) {
         for (int i = 0; i < this.tags.size(); i++) {
-            if (Tag.TagToString(this.tags.get(i)).equals(tagString)) {
+            if (Tag.tagToString(this.tags.get(i)).equals(tagString)) {
                 this.tags.remove(i);
                 return 1;
             }
         }
         return 0;
     }
+
     /**
      * Sets the task to be completed.
      */

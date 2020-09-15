@@ -29,14 +29,19 @@ public class Deadline extends Task {
         return "[D]" + super.toString() + " (by: " + formattedDate + ")";
     }
 
+    /**
+     * Returns the Deadline description, formatted date, and tags to the user.
+     *
+     * @return Deadline description, date and tags.
+     */
     public String formattedDateStringWithTags() {
-        return "[D]" + super.toString() + " (at: " + formattedDate + ")" +
-                (this.tags.size() == 0 ? "" :"\ntags: " + super.getTags());
+        return "[D]" + super.toString() + " (at: " + formattedDate + ")"
+                + (this.tags.size() == 0 ? "" : "\ntags: " + super.getTags());
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")" +
-                (this.tags.size() == 0 ? "" :"\ntags: " + super.getTags());
+        return "[D]" + super.toString() + " (by: " + by + ")"
+                + (this.tags.size() == 0 ? "" : "\ntags: " + super.getTags());
     }
 }

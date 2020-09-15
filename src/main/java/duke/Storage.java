@@ -143,7 +143,7 @@ public class Storage {
                 break;
             case (TAG):
                 String[] tags = task.split(" ");
-                TAG_COMMAND(loadedTasks, tags);
+                tagCommand(loadedTasks, tags);
                 break;
             default:
                 throw new DukeException("I'm sorry, something went wrong!");
@@ -152,10 +152,17 @@ public class Storage {
         return new TaskList(loadedTasks);
     }
 
-    public void TAG_COMMAND(ArrayList<Task> tasks, String[] tags) throws DukeException {
+    /**
+     * Adds the tags to the rightmost task.
+     *
+     * @param tasks Loaded tasks from tasks.txt
+     * @param tags Array of tags.
+     * @throws DukeException  If one of the tags in the file do not exist.
+     */
+    public void tagCommand(ArrayList<Task> tasks, String[] tags) throws DukeException {
         for (int i = 1; i < tags.length; i++) {
             String tag = tags[i].substring(1).toLowerCase();
-            Tag tagToBeAdded = Tag.StringToTag(tag);
+            Tag tagToBeAdded = Tag.stringToTag(tag);
             int indexToAddTags = tasks.size() - 1;
             tasks.get(indexToAddTags).addTag(tagToBeAdded);
         }

@@ -11,8 +11,8 @@ class EventTest {
         Event readBook = new Event("read book", "2020-01-01");
         Event notReadBook = new Event("not read book", "2020-01-01");
         readBook.setDone();
-        assertEquals("[E][✓] read book (at: Jan 01 2020)", readBook.recordString());
-        assertEquals("[E][✘] not read book (at: Jan 01 2020)", notReadBook.recordString());
+        assertEquals("[E][✓] read book (at: Jan 01 2020)", readBook.formattedDateString());
+        assertEquals("[E][✘] not read book (at: Jan 01 2020)", notReadBook.formattedDateString());
     }
 
     @Test

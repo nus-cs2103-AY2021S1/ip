@@ -29,14 +29,19 @@ public class Event extends Task {
         return "[E]" + super.toString() + " (at: " + formattedDate + ")";
     }
 
+    /**
+     * Returns the Event description, formatted date and tags to the user.
+     *
+     * @return Event description, data and tags
+     */
     public String formattedDateStringWithTags() {
-        return "[E]" + super.toString() + " (at: " + formattedDate + ")" +
-                (this.tags.size() == 0 ? "" :"\ntags: " + super.getTags());
+        return "[E]" + super.toString() + " (at: " + formattedDate + ")"
+                + (this.tags.size() == 0 ? "" : "\ntags: " + super.getTags());
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + start + ")" +
-                (this.tags.size() == 0 ? "" :"\ntags: " + super.getTags());
+        return "[E]" + super.toString() + " (at: " + start + ")"
+                + (this.tags.size() == 0 ? "" : "\ntags: " + super.getTags());
     }
 }
