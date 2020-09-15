@@ -40,7 +40,7 @@ public class Storage {
      */
     public ArrayList<Task> loadFile() throws FileNotFoundException, DukeException {
         if (!file.exists()) {
-            throw new DukeException("No file found");
+            throw new FileNotFoundException("No file found");
         }
         Scanner scanner = new Scanner(file);
         ArrayList<Task> tasks = new ArrayList<>();
