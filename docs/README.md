@@ -1,20 +1,61 @@
 # User Guide
+Duke is a simple task manager that can help you keep track of your todos,
+deadlines and events.
 
 ## Features 
+1. [Add a todo](#Add-a-todo)
+2. [Add a deadline](#Add-a-deadline)
+3. [Add an event](#Add-an-event)
+4. [List all tasks](#List-all-tasks)
+5. [Delete a task](#Delete-a-task)
+6. [Mark a task as complete](#Mark-task-complete)
 
-### Feature 1 
-Description of feature.
+### Add a todo
+Adds a todo
 
-## Usage
+Format: `todo`, `[todo name]`
 
-### `Keyword` - Describe action
+![todo](Todo.png)
 
-Describe action and its outcome.
+### Add a deadline
+Adds a deadline.
 
-Example of usage: 
+Format: `deadline`, `[deadline name]`, `[deadline due date]`
 
-`keyword (optional arguments)`
+Deadline due date should be given in this format: `dd mm yyyy`
 
-Expected outcome:
+![deadline](Deadline.png)
 
-`outcome`
+### Add an event
+Adds an event
+
+Format: `event`, `[event name]`, `[event start time]`, `[event end time]`
+
+Event timings should be given in this format: `dd mm yyyy HH:mm`
+
+![event 1](Event1.png) ![event 2](Event2.png)
+
+### List all tasks
+Lists all tasks
+
+Format: `list`
+
+![list](List.png)
+
+### Delete a task
+Deletes a task. Task is indicated by its number in the list.
+
+The number can be checked with the command `list`.
+
+Format: `delete`, `[task number]`
+
+![delete 1](Delete1.png) ![delete 2](Delete2.png)
+
+### Mark task complete
+Marks a task as completed. Task is indicated by its number in the list.
+
+The number can be checked with the command `list`.
+
+![mark 1](Mark1.png) ![mark2](Mark2.png)
+
+Format: `complete`, `[task number]`
