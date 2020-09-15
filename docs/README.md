@@ -27,103 +27,103 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
 
 Duke supports the following operations:
 
-   #### Saying hello!
-   You can say hello to Duke by typing the following command:
-   ```
-   hello
-   ```
-   
-   #### Adding tasks
-   
-   Duke supports the adding of 3 task types and the ability to specify its priority(optional).
-   1. todo
-   1. deadline
-   1. event
-   
-   To add a task, enter a command in the following format:
-   "{task type} {task description} /priority {low/medium/high}"
-   Priority is optional.
-   
-   Adding a todo task
+#### Saying hello!
+You can say hello to Duke by typing the following command:
+```
+hello
+```
 
-   Kindly note that the command is case sensitive.
-   Example command: 
-   ```
-   todo CS2103T IP increments
-   todo CS2103T IP increments /priority high
-   ```
+#### Adding tasks
 
-   Adding a deadline task
+Duke supports the adding of 3 task types and the ability to specify its priority(optional).
+1. todo
+1. deadline
+1. event
 
-   Kindly note that the command is case sensitive.
-   Date and Time deadlines can be specified in the task description using the /by flag. Date and Time has to be in the format "yyyy-mm-dd HHMM".
-   Example command: 
-   ```
-   deadline CS2103T IP increments /by 2020-10-19 1900
-   deadline CS2103T IP increments /by 2020-10-19 1900 /priority medium
-   ```
+To add a task, enter a command in the following format:
+"{task type} {task description} /priority {low/medium/high}"
+Priority is optional.
 
-   Adding an event task
+Adding a todo task
 
-   Kindly note that the command is case sensitive.
-   Date and Time deadlines can be specified in the task description using the /by flag. Date and Time has to be in the format "yyyy-mm-dd HHMM".
-   Example command: 
-   ```
-   event family gathering /by 2020-10-12 1800
-   event family gathering /by 2020-10-12 1800 /priority low
-   ```
-   
-   #### Listing all tasks
-   
-   To list all tasks, enter the following command
-   ```
-   list
-   ```
+Kindly note that the command is case sensitive.
+Example command: 
+```
+todo CS2103T IP increments
+todo CS2103T IP increments /priority high
+```
 
-   #### Deleting tasks
-  
-   To delete a task, enter a command in the following format:
-   "delete {task number}"
-   The task number is the number indicated on the left of the task in the list of tasks.
+Adding a deadline task
 
-   Example:
-   ```
-   delete 2
-   ```
-   
-   #### Marking tasks as done
+Kindly note that the command is case sensitive.
+Date and Time deadlines can be specified in the task description using the /by flag. Date and Time has to be in the format "yyyy-mm-dd HHMM".
+Example command: 
+```
+deadline CS2103T IP increments /by 2020-10-19 1900
+deadline CS2103T IP increments /by 2020-10-19 1900 /priority medium
+```
 
-   To mark a task as done, enter a command in the following format:
-   "done {task number}"
-   The task should appear with a tick as opposed to a cross.
-   
-   Example:
-   ```
-   done 2
-   ```
-   #### Setting priority of tasks
+Adding an event task
 
-   To set the priority of a task, enter a command in the following format:
-   "set priority {task number} {low/medium/high}"
-   
-   Example:
-   ```
-   done 2
-   ```
-   #### Exiting from the Application
+Kindly note that the command is case sensitive.
+Date and Time deadlines can be specified in the task description using the /by flag. Date and Time has to be in the format "yyyy-mm-dd HHMM".
+Example command: 
+```
+event family gathering /by 2020-10-12 1800
+event family gathering /by 2020-10-12 1800 /priority low
+```
 
-   To exit from the Command Line Interface type the following command:
- 
-   ```
-   bye
-   ```
+#### Listing all tasks
 
-   To exit from the Graphic User Interface, simply click the cross at the top right of the pop up window.
+To list all tasks, enter the following command
+```
+list
+```
 
-   #### Error messages
+#### Deleting tasks
 
-   Duke will notify you of an invalid command/input, this can be recognised by the red background in the GUI and the presence of the keyword "OOPS!!!" for the CLI.
+To delete a task, enter a command in the following format:
+"delete {task number}"
+The task number is the number indicated on the left of the task in the list of tasks.
 
-   ```
-   OOPS!!! Sorry setting of this type of label is supported.
-   ```
+Example:
+```
+delete 2
+```
+
+#### Marking tasks as done
+
+To mark a task as done, enter a command in the following format:
+"done {task number}"
+The task should appear with a tick as opposed to a cross.
+
+Example:
+```
+done 2
+```
+#### Setting priority of tasks
+
+To set the priority of a task, enter a command in the following format:
+"set priority {task number} {low/medium/high}"
+
+Example:
+```
+done 2
+```
+#### Exiting from the Application
+
+To exit from the Command Line Interface type the following command:
+
+```
+bye
+```
+
+To exit from the Graphic User Interface, simply click the cross at the top right of the pop up window.
+
+#### Error messages
+
+Duke will notify you of an invalid command/input, this can be recognised by the red background in the GUI and the presence of the keyword "OOPS!!!" for the CLI.
+
+```
+OOPS!!! Sorry setting of this type of label is supported.
+```
