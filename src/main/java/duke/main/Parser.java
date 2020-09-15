@@ -1,5 +1,9 @@
 package duke.main;
 
+import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 import duke.exception.EmptyDateException;
@@ -121,12 +125,19 @@ public class Parser {
      * @return True if the input date time is of correct format.
      * @throws InvalidDateFormatException when the date keyed in is in a wrong format.
      */
-    public static boolean isValidDate(String time) throws InvalidDateFormatException {
-        String[] times = time.split("-");
-        if (times.length != 3) {
+    public static boolean isValidDate(String time, boolean hasTime) throws InvalidDateFormatException {
+        String correctFormatNoDate = "yyyy-MM-dd";
+        String correctFormatWithDate = "yyyy-MM-dd HH:mm";
+        try {
+            if (hasTime) {
+                LocalDateTime.parse(time, DateTimeFormatter.ofPattern(correctFormatWithDate));
+            } else {
+                LocalDate.parse(time, DateTimeFormatter.ofPattern(correctFormatNoDate));
+            }
+            return true;
+        } catch (DateTimeException err) {
             throw new InvalidDateFormatException(false);
         }
-        return true;
     }
 
     /**

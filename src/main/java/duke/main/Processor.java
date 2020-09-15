@@ -127,10 +127,10 @@ public class Processor {
         String argument = Parser.getArgs(userInput);
         String taskDescription = Parser.findDescription(argument);
         String deadLineTime = Parser.findTime(argument, "by");
-        // check whether the date time format is correct
-        Parser.isValidDate(deadLineTime);
         // check whether time is included
         boolean hasTime = Parser.hasTime(deadLineTime);
+        // check whether the date time format is correct
+        Parser.isValidDate(deadLineTime, hasTime);
         boolean hasPriority = Parser.hasPriority(userInput);
 
         Task deadLine;
@@ -161,10 +161,10 @@ public class Processor {
         String argument = Parser.getArgs(userInput);
         String taskDescription = Parser.findDescription(argument);
         String eventTime = Parser.findTime(argument, "at");
-        // check whether the date time format is correct
-        Parser.isValidDate(eventTime);
         // check whether time is included
         boolean hasTime = Parser.hasTime(eventTime);
+        // check whether the date time format is correct
+        Parser.isValidDate(eventTime, hasTime);
         boolean hasPriority = Parser.hasPriority(userInput);
 
         Task event;
