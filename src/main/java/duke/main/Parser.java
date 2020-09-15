@@ -3,6 +3,7 @@ package duke.main;
 import java.util.Scanner;
 
 import duke.exception.EmptyDateException;
+import duke.exception.EmptyIndexException;
 import duke.exception.EmptyTaskException;
 import duke.exception.InvalidCommandException;
 import duke.exception.InvalidDateFormatException;
@@ -69,10 +70,10 @@ public class Parser {
      * @return The task index.
      * @throws InvalidIndexException
      */
-    public static int getIndexTask(String userInput) throws InvalidIndexException {
+    public static int getIndexTask(String userInput) throws EmptyIndexException {
         String[] components = userInput.split(" ", 2);
         if (components.length < 2) {
-            throw new InvalidIndexException();
+            throw new EmptyIndexException();
         } else {
             return Integer.parseInt(components[1]);
         }
