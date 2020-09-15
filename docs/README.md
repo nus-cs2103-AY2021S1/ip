@@ -25,6 +25,7 @@ organize your task list much faster than GUI apps if you can type fast.
 2. Download the latest `hotline.jar` from [here](https://github.com/AudreyFelicio/ip/releases).
 3. Copy the jar file to the folder you want to use as the root folder of your task management app.
 4. Double-click the jar file to start the app. A GUI similar to below will appear in a few seconds.
+![Welcome Image](./Welcome.png)
 5. Type the command in text box on the bottom of the GUI and press Enter or click on Send button
 to execute the command.
 6. Refer to the Features below for the full details of the commands.
@@ -45,6 +46,8 @@ Types of task that can be added are:
     Example:
     
     `todo Finish CS2103T Project`
+    
+    ![Todo](./Todo.png)
 
 2. ### `deadline` - Create New Deadline Task
     
@@ -55,6 +58,8 @@ Types of task that can be added are:
     Example:
     
     `deadline CCA Registration /by 2020-09-14`
+    
+    ![Deadline](./Deadline.png)
 
 3. ### `event` - Create New Event Task
     
@@ -64,7 +69,9 @@ Types of task that can be added are:
     
     Example:
     
-    `event Application Release /at 2020-09-18)`
+    `event Application Release /at 2020-09-18`
+    
+    ![Event](./Event.png)
 
 ### Delete Task
 Deletes no longer wanted tasks from the task list.
@@ -79,6 +86,8 @@ Example:
 
 `delete 1`
 
+![Delete](./Delete.png)
+
 ### List Tasks
 Lists all tasks inside the task list.
 
@@ -92,6 +101,7 @@ Example:
 
 `list`
 
+![List](./List.png)
 
 ### Update Task
 Updates existing tasks' details.
@@ -113,7 +123,9 @@ Command format:
 
 Example:
 
-`update 2 description NUS Angklung CCA Registration`
+`update 1 description NUS Angklung CCA Registration`
+
+![Update](./Update.png)
 
 ### Find Tasks
 Finds tasks that contain a specific keyword.
@@ -127,6 +139,8 @@ Command format:
 Example:
 
 `find Release`
+
+![Find](./Find.png)
 
 ### Save Tasks
 Saves the task list to the hard disk.
@@ -148,6 +162,8 @@ Example:
 
 `done 2`
 
+![Done](./Done.png)
+
 ### Exiting The Program
 Exits the application.
 
@@ -161,15 +177,17 @@ Example:
 
 `bye`
 
+![Bye](./Bye.png)
+
 ## Command Summary
 Action | Format, Examples
 ------ | ----------------
 Add to-do | `todo <string: description>` <br> e.g. `todo Finish CS2103T Project`
 Add deadline | `deadline <string: description> /by <string: yyyy-mm-dd>` <br> e.g. `deadline CCA Registration /by 2020-09-14`
-Add event | `event <string: description> /at <string: yyyy-mm-dd>` <br> e.g. `event Application Release /at 2020-09-18)`
+Add event | `event <string: description> /at <string: yyyy-mm-dd>` <br> e.g. `event Application Release /at 2020-09-18`
 Delete | `delete <integer: task number>` <br> e.g. `delete 1`
 List | `list`
-Update | `update <integer: task number> description <string: new description>` <br> `update <integer: task number> time <string: yyyy-mm-dd>` <br> `update <integer: task number> mark <integer: 1 for done or 0 for not done>` <br> e.g. `update 2 description NUS Angklung CCA Registration`
+Update | `update <integer: task number> description <string: new description>` <br> `update <integer: task number> time <string: yyyy-mm-dd>` <br> `update <integer: task number> mark <integer: 1 for done or 0 for not done>` <br> e.g. `update 1 description NUS Angklung CCA Registration`
 Find | `find <string: keyword>` <br> e.g. `find Release`
 Done | `done <integer: task number>` <br> e.g. `done 2`
 Bye | `bye`

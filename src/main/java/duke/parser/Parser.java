@@ -23,6 +23,7 @@ import duke.exception.DukeException;
  * @author Audrey Felicio Anwar
  */
 public class Parser {
+    private static final String SEPARATOR = System.getProperty("line.separator");
     private static final BiFunction<String[], Integer, Boolean> CHECK_LENGTH = (s, i) -> s.length <= i;
     private enum Commands {
         BYE,
@@ -73,7 +74,7 @@ public class Parser {
             return command;
         }
         for (int i = 1; i < getDescription.length; i++) {
-            description.append(getDescription[i]);
+            description.append(getDescription[i]).append(" ");
         }
         time = timeIndicator.equals("") ? null : LocalDate.parse(separatedWords[1].trim());
         switch (commandType) {
