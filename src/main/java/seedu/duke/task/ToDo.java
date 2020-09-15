@@ -5,7 +5,7 @@ import seedu.duke.task.Task;
 import java.time.LocalDateTime;
 
 /**
- * Class that represents
+ * Class that represents a todo task.
  */
 public class ToDo extends Task {
 
@@ -25,6 +25,11 @@ public class ToDo extends Task {
 
     @Override
     public LocalDateTime getTime(){
+        return null;
+    }
+
+    @Override
+    public LocalDateTime getEndTime() {
         return null;
     }
 

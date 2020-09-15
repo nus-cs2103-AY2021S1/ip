@@ -18,18 +18,18 @@ public class DoneCommand extends Command {
      * Marks the given task as done.
      * @param ls The current list of tasks.
      * @param ui The ui that takes of printing output.
-     * @throws DukeException If the given number does not correspond to a task in the list.
+     * @throws DukeNotSureException If the given number does not correspond to a task in the list.
      */
     @Override
-    public void execute(TaskList ls, Ui ui) throws DukeException {
-        int number = Integer.parseInt(words[1]);
-        if (number > ls.size() || number < 0) {
-            throw new DukeNotSureException("This task doesn't seem to exist? Pick a proper task, good god.");
-        } else {
+    public void execute(TaskList ls, Ui ui) throws DukeNotSureException {
+        try {
+            int number = Integer.parseInt(words[1]);
             Task oldTask = ls.get(number - 1);
             oldTask.checkTask();
             ui.printResult(("Did you really finish it? Eh, good for you I guess. Marked:" + "\n"
                     + oldTask.getStatus()));
+        } catch(IndexOutOfBoundsException e) {
+            throw new DukeNotSureException("This task doesn't seem to exist? Pick a proper task, good god.");
         }
     }
 }

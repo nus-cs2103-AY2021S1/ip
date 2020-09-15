@@ -9,6 +9,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import seedu.duke.Duke;
 
+//@@author Jeffry Lum
+//Reused from https://se-education.org/guides/tutorials/javaFxPart4.html with minor modifications
 /**
  * A GUI for Duke using FXML.
  */
@@ -32,3 +34,4 @@ public class Main extends Application {
         }
     }
 }
+//@@author

@@ -40,7 +40,6 @@ public class Ui {
     public void bye() {
         String byeText = "Running away huh??";
         printResult(byeText);
-        System.exit(0);
     }
 
     /**

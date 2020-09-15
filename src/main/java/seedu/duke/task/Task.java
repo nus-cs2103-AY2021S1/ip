@@ -47,9 +47,15 @@ public abstract class Task {
 
     /**
      * Returns the deadline of the task, if any.
-     * @return DateTime object that is the deadline of the task, if any.
+     * @return LocalDateTime object that is the deadline of the task, if any.
      */
     public abstract LocalDateTime getTime();
+
+    /**
+     * Returns the ending time of the task, if any.
+     * @return LocalDateTime object that is the ending time of the task, if any.
+     */
+    public abstract LocalDateTime getEndTime();
 
     /**
      * Returns the state of the current task.

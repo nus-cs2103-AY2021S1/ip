@@ -15,6 +15,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 
+//@@author Jeffry Lum
+//Reused from https://se-education.org/guides/tutorials/javaFxPart4.html with minor modifications
 public class DialogBox extends HBox {
     @FXML
     private Label dialog;
@@ -59,3 +61,4 @@ public class DialogBox extends HBox {
         return db;
     }
 }
+//@@author

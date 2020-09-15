@@ -12,7 +12,7 @@ public class ParserTest {
             assertEquals(0, new Parser().parse("delete"));
             fail(); // the test should not reach this line
         } catch (Exception e) {
-            assertEquals("ERROR!! Huh?? What are you trying to do??", e.getMessage());
+            assertEquals("I need a number, not whatever you wrote. :s", e.getMessage());
         }
     }
 }

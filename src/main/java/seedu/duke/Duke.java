@@ -53,8 +53,6 @@ public class Duke {
                 this.ui.showError(e.getMessage());
             } catch (DateTimeException e) {
                 this.ui.showError("Can't read your date man. Put it like this ok? --> 25 Mar 2020 1930");
-            } finally {
-                this.ui.bye();
             }
         }
         this.storage.save(this.tasklist, this.ui);
@@ -65,6 +63,8 @@ public class Duke {
     }
 
     public String getResponse(String input) {
+        //@@author Ernest Friedman-Hill
+        //Reused from https://stackoverflow.com/questions/8708342/redirect-console-output-to-string-in-java with minor modifications
         ByteArrayOutputStream str = new ByteArrayOutputStream();
         PrintStream printStr = new PrintStream(str);
         PrintStream oldOut = System.out;
@@ -78,17 +78,17 @@ public class Duke {
             isExit = c.isExit();
         } catch (DukeException e) {
             this.ui.showError(e.getMessage());
-        } catch (DateTimeException e) {
-            this.ui.showError("Can't read your date man. Put it like this ok? --> 25 Mar 2020 1930");
         }
 
         if (isExit) {
             this.storage.save(this.tasklist, this.ui);
-            this.ui.bye();
+            System.exit(0);
         }
 
         System.out.flush();
         System.setOut(oldOut);
+        //@@author
+
         return str.toString();
     }
 

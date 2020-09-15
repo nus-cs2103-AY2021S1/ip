@@ -33,14 +33,12 @@ public class Storage {
         this.path = DEFAULT_STORAGE_FILEPATH;
     }
 
-    public Storage(String filepath) {
-        this.path = filepath;
-    }
 
     /**
      * Loads the tasks from the textfile so that Duke can access the tasks
      * @return List containing the tasks
      * @throws IOException When the path is incorrect
+     * @throws DukeException When the text file contains lines that are not supposed to be there.
      */
     public ArrayList<Task> load() throws IOException, DukeException {
         File f = new File(this.path);
@@ -61,8 +59,10 @@ public class Storage {
                 case "E": { // case where the task is an event
                     boolean status = arr[1].equals(TICK);
                     String todo = arr[2];
-                    LocalDateTime deadline = LocalDateTime.parse(arr[3], FORMATTER);
-                    ls.add(new Event(todo, deadline, status));
+                    String[] times = arr[3].split(" to ");
+                    LocalDateTime startTime = LocalDateTime.parse(times[0], FORMATTER);
+                    LocalDateTime endTime = LocalDateTime.parse(times[1], FORMATTER);
+                    ls.add(new Event(todo, startTime, endTime, status));
                     break;
                 }
                 case "T": {
@@ -83,7 +83,6 @@ public class Storage {
                 }
             }
         }
-        assert ls.size() >= 0 : "Should have added the tasks or an empty list.";
         return ls;
     }
 
@@ -107,8 +106,11 @@ public class Storage {
                 String addition = "";
                 if (t.getTime() == null) {
                     addition = "\n";
-                } else {
+                } else if (t.getType().equals("D")) {
                     addition = "*" + t.getTime().format(FORMATTER) + "\n";
+                } else {
+                    addition = "*" + t.getTime().format(FORMATTER) + " to "
+                            + t.getEndTime().format(FORMATTER) + "\n";
                 }
                 tasks = tasks + toAdd + addition;
             }

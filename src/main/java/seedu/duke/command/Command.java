@@ -7,7 +7,7 @@ import seedu.duke.ui.Ui;
 /**
  * Class that represents user commands.
  */
-public class Command {
+public abstract class Command {
     protected String[] words;
 
     public Command() {}
@@ -24,5 +24,5 @@ public class Command {
         return false;
     }
 
-    public void execute(TaskList ls, Ui ui) throws DukeException {}
+    public abstract void execute(TaskList ls, Ui ui) throws DukeException;
 }

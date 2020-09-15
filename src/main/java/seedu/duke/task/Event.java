@@ -7,11 +7,13 @@ import java.time.format.DateTimeFormatter;
  * Class that represents an event task.
  */
 public class Event extends Task {
-    protected LocalDateTime time;
+    private LocalDateTime startTime;
+    private LocalDateTime endTime;
 
-    public Event(String name, LocalDateTime time, boolean status) {
+    public Event(String name, LocalDateTime startTime, LocalDateTime endTime, boolean status) {
         super(name, status);
-        this.time = time;
+        this.startTime = startTime;
+        this.endTime = endTime;
     }
 
     /**
@@ -21,15 +23,26 @@ public class Event extends Task {
     @Override
     public String getStatus() {
         return "[E]" + super.getStatus() + " (at: "
-                + this.time.format(DateTimeFormatter.ofPattern("d MMM yyyy kkmm")) + ")";
+                + this.startTime.format(DateTimeFormatter.ofPattern("d MMM yyyy kkmm")) + " to "
+                + this.endTime.format(DateTimeFormatter.ofPattern("d MMM yyyy kkmm")) + ")";
     }
 
     /**
-     * Gets the deadline of the task.
-     * @return DateTime object that represents the deadline.
+     * Gets the starting time of the task.
+     * @return DateTime object that represents the start time.
      */
+    @Override
     public LocalDateTime getTime() {
-        return this.time;
+        return this.startTime;
+    }
+
+    /**
+     * Returns the ending time of the task, if any.
+     * @return LocalDateTime object that is the ending time of the task, if any.
+     */
+    @Override
+    public LocalDateTime getEndTime() {
+        return this.endTime;
     }
 
     /**

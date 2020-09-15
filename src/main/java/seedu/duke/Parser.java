@@ -25,16 +25,17 @@ public class Parser {
         String eventCommand = "event";
         String findCommand = "find";
         String sortCommand = "sort";
+        String helpCommand = "help";
 
         if (input.equals(listCommand)) {
             return new ListCommand();
         } else if (input.equals(endCommand)) {
             return new ByeCommand();
+        } else if(input.equals(helpCommand)) {
+            return new HelpCommand();
         } else {
             String[] words = input.split(" ", 2);
-            if (words.length > 2) { // nothing was written after the command
-                throw new DukeNotSureException("Huh?? What are you trying to do?? Write what you have to do!");
-            } else if (words[0].equals(doneCommand)) {
+            if (words[0].equals(doneCommand)) {
                 return new DoneCommand(words);
             } else if (words[0].equals(deleteCommand)) {
                 return new DeleteCommand(words);
