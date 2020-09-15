@@ -2,6 +2,7 @@ package dobby.gui;
 
 import dobby.Dobby;
 import dobby.Ui;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
@@ -41,7 +42,7 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(Ui.greet(), dobbyImage)
         );
-        BackgroundFill backgroundFill = new BackgroundFill(Color.LEMONCHIFFON, CornerRadii.EMPTY, Insets.EMPTY);
+        BackgroundFill backgroundFill = new BackgroundFill(Color.LIGHTCYAN, CornerRadii.EMPTY, Insets.EMPTY);
         dialogContainer.setBackground(new Background(backgroundFill));
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
@@ -62,6 +63,11 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dobbyImage)
         );
+        if (input.equalsIgnoreCase("bye")) {
+            Platform.exit();
+            System.exit(0);
+        }
         userInput.clear();
     }
+
 }

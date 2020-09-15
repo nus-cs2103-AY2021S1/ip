@@ -61,7 +61,7 @@ public class DialogBox extends HBox {
         var db = new DialogBox(text, img);
         db.setBackground(
                 new Background(
-                        new BackgroundFill(Color.LIGHTBLUE, CornerRadii.EMPTY, Insets.EMPTY)
+                        new BackgroundFill(Color.LIGHTSKYBLUE, CornerRadii.EMPTY, Insets.EMPTY)
                 )
         );
         return db;
@@ -70,11 +70,13 @@ public class DialogBox extends HBox {
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
-        db.setBackground(
-                new Background(
-                        new BackgroundFill(Color.LEMONCHIFFON, CornerRadii.EMPTY, Insets.EMPTY)
-                )
-        );
+        BackgroundFill bFill;
+        if (text.startsWith("Incorrect") || text.startsWith("Sorry")) {
+            bFill = new BackgroundFill(Color.ORANGERED, CornerRadii.EMPTY, Insets.EMPTY);
+        } else {
+            bFill = new BackgroundFill(Color.LIGHTCYAN, CornerRadii.EMPTY, Insets.EMPTY);
+        }
+        db.setBackground(new Background(bFill));
         return db;
     }
 }
