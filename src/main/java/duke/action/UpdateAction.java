@@ -1,11 +1,12 @@
 package duke.action;
 
+import java.util.Optional;
+
 import duke.exception.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
-import java.util.Optional;
 
 /**
  * This represents and Action to be carried out that

@@ -1,22 +1,20 @@
 package duke.command;
 
+import java.util.Queue;
+
 import duke.action.Action;
 import duke.storage.Storage;
-
 import duke.task.TaskList;
-
 import duke.ui.Ui;
-
-import java.util.Queue;
 
 /**
  * Represents a call to find Tasks that contain the keyword.
  */
 public class FindCommand extends Command {
 
-    private final String keyWords;
-
     public static final String COMMAND_WORD = "find";
+
+    private final String keyWords;
 
     /**
      * Constructor for FindCommand.
@@ -32,7 +30,8 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(Ui ui, Storage storage, TaskList tasks, Queue<Action> commandQueue) {
+    public void execute(Ui ui, Storage storage, TaskList tasks,
+                        Queue<Action> commandQueue) {
         ui.findTasksMessage(tasks, keyWords);
     }
 }

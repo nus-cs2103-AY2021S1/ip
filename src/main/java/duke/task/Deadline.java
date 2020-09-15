@@ -1,10 +1,10 @@
 package duke.task;
 
-import duke.exception.DukeException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
+
+import duke.exception.DukeException;
 
 /**
  * This is a Deadline Task.
@@ -16,16 +16,21 @@ public class Deadline extends Task {
     private LocalDate byLocalDate;
 
     /**
-     * Constructs a new Deadline Task.
+     * Constructor
      * @param description Description of Task.
      * @param by Date due for the Deadline.
      */
-    public Deadline(String description, String by, LocalDate byLocalDate) {
+    private Deadline(String description, String by, LocalDate byLocalDate) {
         super(description);
         this.by = by;
         this.byLocalDate = byLocalDate;
     }
 
+    /**
+     * Invoked to create a new Deadline Task.
+     * @param description Description of Task.
+     * @param by Date due for the Deadline.
+     */
     public static Deadline createDeadline(String description, String by) throws DukeException {
         try {
             LocalDate byLocalDate = LocalDate.parse(by);
@@ -78,7 +83,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[" + Task.DEADLINE_SAVE_SYMBOL + "]" + super.toString() + " (by: " +
-                byLocalDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
+        return "[" + Task.DEADLINE_SAVE_SYMBOL + "]" + super.toString() + " (by: "
+                + byLocalDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
     }
 }

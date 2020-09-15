@@ -1,9 +1,8 @@
 package duke.task;
 
-import duke.Duke;
-
 import java.util.ArrayList;
-import java.util.List;
+
+import duke.Duke;
 
 /**
  * The TaskList object keeps a List of Tasks for Duke.
@@ -17,7 +16,7 @@ public class TaskList {
      * TaskList constructor called when first running Duke.
      */
     public TaskList() {
-         tasks = new ArrayList<>(Duke.MAX_NUM_OF_TASKS);
+        tasks = new ArrayList<>(Duke.MAX_NUM_OF_TASKS);
     }
 
     /**
@@ -63,6 +62,11 @@ public class TaskList {
         tasks.remove(i - 1);
     }
 
+    /**
+     * Removes and replaces a Task in the TaskList with an updated Task.
+     * @param i Task number provided.
+     * @param updatedTask Task with updated details.
+     */
     public void replace(int i, Task updatedTask) {
         assert i > 0 && i <= tasks.size();
 

@@ -1,23 +1,23 @@
 package duke.task;
 
-import duke.exception.DukeException;
-
 import java.util.Optional;
+
+import duke.exception.DukeException;
 
 /**
  * This class is a representation of a Task object.
  */
 public abstract class Task {
 
-    protected String description;
-    protected boolean isDone;
-
     public static final String TODO_SAVE_SYMBOL = "T";
     public static final String DEADLINE_SAVE_SYMBOL = "D";
     public static final String EVENT_SAVE_SYMBOL = "E";
-
     public static final String DEADLINE_FIELD_IDENTIFIER = "/by";
     public static final String EVENT_FIELD_IDENTIFIER = "/at";
+
+    protected String description;
+    protected boolean isDone;
+
     /**
      * Constructs a Task object.
      * @param description Description of the given Task.

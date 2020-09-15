@@ -1,9 +1,9 @@
 package duke.action;
 
+import java.util.Optional;
+
 import duke.exception.DukeException;
 import duke.ui.Ui;
-
-import java.util.Optional;
 
 /**
  * Represents a follow up action that is required proceeding a Command.
@@ -20,7 +20,8 @@ public abstract class Action {
      * @param input User provided input.
      * @return      Optional containing a following Action if any, empty Optional if not.
      */
-    public abstract Optional<Action> receiveInputAndGetNextAction(String input) throws DukeException;
+    public abstract Optional<Action> receiveInputAndGetNextAction(
+            String input) throws DukeException;
 
     /**
      * Carries out the process specific to each action.

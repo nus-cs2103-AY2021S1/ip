@@ -1,8 +1,10 @@
 package duke.ui;
 
 import java.util.Scanner;
+
 import duke.exception.DukeException;
-import duke.task.*;
+import duke.task.Task;
+import duke.task.TaskList;
 
 /**
  * The Ui class handles interaction with the user, and is responsible for
@@ -12,7 +14,7 @@ public class Ui {
     private Scanner sc;
 
     public Ui() {
-      this.sc = new Scanner(System.in);
+        this.sc = new Scanner(System.in);
     }
 
     /**
@@ -55,11 +57,11 @@ public class Ui {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo +
-        "____________________________________________________________\n" +
-        " Hello! I'm Duke\n" +
-        " What can I do for you?\n" +
-                "____________________________________________________________");
+        System.out.println("Hello from\n" + logo
+                + "____________________________________________________________\n"
+                + " Hello! I'm Duke\n"
+                + " What can I do for you?\n"
+                + "____________________________________________________________");
     }
 
     /**
@@ -81,7 +83,7 @@ public class Ui {
      */
     public void doneTaskMessage(Task t) {
         String message =
-        "Nice! I've marked this task as done:\n"
+                "Nice! I've marked this task as done:\n"
                 + "  " + t.toString();
         System.out.println(message);
     }
@@ -94,8 +96,8 @@ public class Ui {
     public void deleteTaskMessage(Task t, TaskList tasks) {
         String message =
                 "Noted. I've removed this task:\n"
-                        + "  " + t.toString() + "\n" +
-                        "Now you have " + tasks.getNumOfTasks() + " tasks in the list.";
+                        + "  " + t.toString() + "\n"
+                        + "Now you have " + tasks.getNumOfTasks() + " tasks in the list.";
         System.out.println(message);
     }
 

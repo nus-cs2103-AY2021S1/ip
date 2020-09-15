@@ -1,10 +1,10 @@
 package duke.task;
 
-import duke.exception.DukeException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
+
+import duke.exception.DukeException;
 
 /**
  * This is an Event Task.
@@ -15,7 +15,7 @@ public class Event extends Task {
     protected LocalDate atLocalDate;
 
     /**
-     * Constructs a new Event Task.
+     * Constructor.
      * @param description Description of Task
      * @param at Time at which the Event occurs.
      */
@@ -25,6 +25,11 @@ public class Event extends Task {
         this.atLocalDate = atLocalDate;
     }
 
+    /**
+     * Invoked to create a new Event Task.
+     * @param description Description of Task.
+     * @param at Date due for the Event.
+     */
     public static Event createEvent(String description, String at) throws DukeException {
         try {
             LocalDate atLocalDate = LocalDate.parse(at);

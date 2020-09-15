@@ -1,26 +1,24 @@
 package duke.command;
 
+import java.util.Queue;
+
 import duke.action.Action;
 import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.task.Event;
-
 import duke.ui.Ui;
-
-import duke.storage.Storage;
-
-import java.util.Queue;
 
 /**
  * Represents a call to create a new Event Task.
  */
 public class EventCommand extends Command {
 
+    public static final String COMMAND_WORD = "event";
+
     private final String description;
     private final String eventDate;
-
-    public static final String COMMAND_WORD = "event";
 
     /**
      * Constructor for EventCommand.
@@ -38,7 +36,8 @@ public class EventCommand extends Command {
     }
 
     @Override
-    public void execute(Ui ui, Storage storage, TaskList tasks, Queue<Action> commandQueue) throws DukeException {
+    public void execute(Ui ui, Storage storage, TaskList tasks,
+                        Queue<Action> commandQueue) throws DukeException {
         Task t = Event.createEvent(description, eventDate);
         tasks.add(t);
         ui.addTaskMessage(t, tasks);

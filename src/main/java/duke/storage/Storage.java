@@ -1,16 +1,18 @@
 package duke.storage;
 
-import duke.Duke;
-import duke.task.*;
-
-import duke.exception.DukeException;
-import java.io.IOException;
-
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
-import java.util.ArrayList;
+import duke.Duke;
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
 
 /**
  * The Storage class handles the reading and writing of data from the hard disk.
@@ -112,11 +114,14 @@ public class Storage {
                 } else {
                     // Unknown Task type.
                     throw new DukeException("Check duke.txt storage file integrity: \n"
-                    + "Line No: "+ lineNumber + "\n"
+                    + "Line No: " + lineNumber + "\n"
                     + "Content: " + nextEntryLine);
                 }
 
-                if (isDone) { t.markAsDone(); }
+                if (isDone) {
+                    t.markAsDone();
+                }
+
                 // Finally, add task if no exception thrown.
                 tasks.add(t);
             }

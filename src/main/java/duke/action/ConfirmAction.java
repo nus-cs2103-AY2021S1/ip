@@ -1,14 +1,19 @@
 package duke.action;
 
-import duke.ui.Ui;
-
 import java.util.Optional;
 
+import duke.ui.Ui;
+
 /**
- * Represents a pending Action that is waiting to
- * be authorized by the User.
+ * Represents a pending Action that is waiting to be authorized by the User.
  */
 public class ConfirmAction extends Action {
+
+    /**
+     * Expected User inputs.
+     */
+    private static final String YES = "y";
+    private static final String NO = "n";
 
     /**
      * Pending Action to be executed.
@@ -26,13 +31,7 @@ public class ConfirmAction extends Action {
     private final Ui ui;
 
     /**
-     * Expected User inputs.
-     */
-    private static final String YES = "y";
-    private static final String NO = "n";
-
-    /**
-     * Constructs a new ConfirmAction
+     * Constructs a new ConfirmAction.
      * @param actionToBeExecuted Action that is prepared
      *                           but not yet executed
      */

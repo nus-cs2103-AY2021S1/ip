@@ -1,5 +1,7 @@
 package duke.command;
 
+import java.util.Queue;
+
 import duke.action.Action;
 import duke.action.UpdateAction;
 import duke.exception.DukeException;
@@ -7,16 +9,13 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
-import java.util.Queue;
-
 /**
  * Represents a call to update a Task.
  */
 public class UpdateCommand extends Command {
 
-    private final int taskNumber;
-
     public static final String COMMAND_WORD = "update";
+    private final int taskNumber;
 
     /**
      * Constructor for DoneCommand.

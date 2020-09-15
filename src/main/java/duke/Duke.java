@@ -1,20 +1,18 @@
 package duke;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import java.util.LinkedList;
+import java.util.Optional;
+import java.util.Queue;
+
+import duke.action.Action;
 import duke.command.Command;
 import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
-import duke.action.*;
-
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-
-import java.util.LinkedList;
-import java.util.Optional;
-import java.util.Queue;
-
 
 /**
  * Duke is a text-based bot that tracks different types of tasks.
@@ -22,13 +20,14 @@ import java.util.Queue;
  * as well as other commands such as search, marking as done etc.
  */
 public class Duke {
+
+    public static final String DEFAULT_SAVE_FILE = ".\\data\\duke.txt";
+    public static final int MAX_NUM_OF_TASKS = 100;
+
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
     private Queue<Action> actionQueue;
-
-    public static final String DEFAULT_SAVE_FILE = ".\\data\\duke.txt";
-    public static final int MAX_NUM_OF_TASKS = 100;
 
     /**
      * Constructs a Duke object and initialises Ui, Storage & TaskList classes.

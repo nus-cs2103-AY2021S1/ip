@@ -1,8 +1,8 @@
 package duke.task;
 
-import duke.exception.DukeException;
-
 import java.util.Optional;
+
+import duke.exception.DukeException;
 
 /**
  * This is a Todo Task
