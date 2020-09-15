@@ -12,6 +12,6 @@ public class Todo extends Task {
 
     @Override
     public String toString() {
-        return "[T] " + getStatusIcon() + " " + this.getPriority() + " " + this.description;
+        return "[T]" + "[" + getStatusIcon() + "]" + "[" + this.getPriority() + "]" + " " + this.description;
     }
 }

@@ -8,7 +8,7 @@ public class FindCommand extends Command {
         assert input != null;
 
         String[] splitInput = input.split(" ");
-        this.searchWord = splitInput[1];
+        this.searchWord = splitInput[1].trim();
     }
 
     public String handle(String input, TaskManager taskManager, Storage fileHandler) {

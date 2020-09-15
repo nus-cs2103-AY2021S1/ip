@@ -17,7 +17,7 @@ public class DukeExceptionHandler {
 
         } else if (!text.contains("todo") && !text.contains("deadline") && !text.contains("event")
                 && !text.contains("done") && !text.contains("delete") && !text.contains("find")
-                && !text.equals("list")) {
+                && !text.equals("list") && !text.equals("bye") && !text.equals("priority")) {
             InvalidInputException error = new InvalidInputException(text);
             return error.toString();
         }
