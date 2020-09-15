@@ -130,18 +130,15 @@ Example of outcome:
 
 ## Command Summary
 
+
 Action | Format, Examples
-___|___
+--------|------------------
 Add To-do |  `todo <Description>`<br/>E.g.: `todo finish Sci-Fi readings for class` 
-Add Deadline | `deadline <Description> /by <Time>`<br/>
-E.g.: `deadline Philosophy essay /by 2020-09-18 2359`
-Add Event |  `event <Description> /at <Time>`<br/>
-E.g.: `event Art Exhibition Opening /at 2020-09-20 1800-2200`
+Add Deadline | `deadline <Description> /by <Time>`<br/>E.g.: `deadline Philosophy essay /by 2020-09-18 2359`
+Add Event |  `event <Description> /at <Time>`<br/>E.g.: `event Art Exhibition Opening /at 2020-09-20 1800-2200`
 List | `list`
 Delete | `delete <index>`
 Done | `done <index>`
 Find |  `find <search term>`
-Postpone | `postpone <index> <amount> <time unit>`<br/>
-E.g.: `postpone 3 /by 2 hours` 
-Advance | `advance <index> <amount> <time unit>`<br/>
-E.g.: `advance 3 /by 2 hours` 
+Postpone | `postpone <index> <amount> <time unit>`<br/>E.g.: `postpone 3 /by 2 hours` 
+Advance | `advance <index> <amount> <time unit>`<br/>E.g.: `advance 3 /by 2 hours` 
