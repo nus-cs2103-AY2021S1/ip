@@ -28,7 +28,7 @@ public class Greet {
         } else if (originalGreeting.equals("bye")) {
             greeting = EXIT_GREETING;
         }
-        String response = STYLE + greeting + "\n" + STYLE;
+        String response = STYLE + greeting + STYLE;
         return response;
     }
 }

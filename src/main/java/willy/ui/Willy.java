@@ -1,15 +1,20 @@
 package willy.ui;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -70,7 +75,7 @@ public class Willy extends Application {
     }
 
     @Override
-    public void start(Stage stage) {
+    public void start(Stage stage) throws FileNotFoundException {
 
         // normal code to start Willy
         new Willy(true);
@@ -81,10 +86,23 @@ public class Willy extends Application {
         // JavaFX code
         stage.setTitle("Willy"); // Stage Name
 
+        // Responsible for Willy image (NOT FUNCTIONING)
+        // Solution below adapted from https://www.tutorialspoint.com/javafx/javafx_images.htm
+        FileInputStream inputstream = new FileInputStream("asset/Willy.jpg");
+        Image image = new Image(inputstream);
+        ImageView imageView = new ImageView(image);
+        imageView.setX(50);
+        imageView.setY(25);
+        imageView.setFitHeight(100);
+        imageView.setFitWidth(50);
+        imageView.setPreserveRatio(true);
+        imageView.setCache(true);
+        Group willyImage = new Group(imageView);
+
         // Responsible for Willy Greetings & Input Section
         Label willy = new Label(introGUI);
         Greet startDuke = new Greet();
-        Label changingCommand = new Label(startDuke.toString());
+        Label botCommand = new Label(startDuke.toString());
         willy.setAlignment(Pos.CENTER);
         TextField inputField = new TextField();
         inputField.setPromptText("State tasks to track");
@@ -95,25 +113,28 @@ public class Willy extends Application {
         enterButton.setOnAction(action -> {
                 String message = inputField.getText();
                 inputField.clear();
-                changingCommand.setText(parser.parse(message, true)); // Returns Response
+                botCommand.setText(parser.parse(message, true)); // Returns Response
         });
         clearButton.setOnAction(action -> {
             inputField.clear();
         });
 
         // Putting together Layout Components
+        HBox willyIntro = new HBox();
+        willyIntro.setSpacing(10);
+        willyIntro.getChildren().addAll(willyImage, willy);
         HBox hbox = new HBox(); // Positions components in a horizontal row
         hbox.setSpacing(10);
         hbox.setPadding(new Insets(10, 20, 5, 30));
         hbox.getChildren().addAll(inputField, enterButton, clearButton);
         VBox vbox = new VBox(); // Positions components in a vertical column
-        vbox.getChildren().addAll(willy, hbox, changingCommand);
+        vbox.getChildren().addAll(willyIntro, botCommand, hbox);
 
         StackPane layout = new StackPane();
         layout.getChildren().addAll(vbox);
 
         // Build & Show Scene
-        Scene scene = new Scene(layout, 500, 450, Color.BLACK);
+        Scene scene = new Scene(layout, 380, 480, Color.BLACK);
         stage.setScene(scene);
         stage.show(); // To display stage to users
     }
