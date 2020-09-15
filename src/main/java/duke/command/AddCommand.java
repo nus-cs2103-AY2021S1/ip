@@ -63,7 +63,7 @@ public class AddCommand extends Command {
             tasks.addTask(newTask, storage);
             return output;
         } catch (IndexOutOfBoundsException e) {
-            return "    Please give a description for your task";
+            throw new IncorrectFormat();
         }
     }
 

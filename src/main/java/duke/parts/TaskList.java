@@ -62,7 +62,6 @@ public class TaskList {
     }
 
     /**
-     *
      * @return Number of tasks stored in the list.
      */
     public int numTask() {
@@ -91,7 +90,18 @@ public class TaskList {
      * @param storage The storage of the system.
      * @return The tasks after it has been updated.
      */
-    public Task markDone(int index, Storage storage) {
+    public Task markDone(int index, Storage storage)
+            throws DeleteListEmptyException, DeleteNegativeIndex, DeleteOutOfBounds {
+        if (tasks.size() == 0) {
+            throw new DeleteListEmptyException();
+        }
+        if (index < 0) {
+            throw new DeleteNegativeIndex();
+        }
+
+        if (index >= tasks.size()) {
+            throw new DeleteOutOfBounds(index + 1);
+        }
         tasks.get(index).setDone();
         this.updateList(storage);
         return tasks.get(index);

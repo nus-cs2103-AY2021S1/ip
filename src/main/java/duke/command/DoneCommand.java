@@ -1,5 +1,8 @@
 package duke.command;
 
+import duke.error.DeleteListEmptyException;
+import duke.error.DeleteNegativeIndex;
+import duke.error.DeleteOutOfBounds;
 import duke.parts.Storage;
 import duke.parts.TaskList;
 import duke.parts.Ui;
@@ -17,8 +20,9 @@ public class DoneCommand extends Command {
         this.index = Integer.parseInt(index);
     }
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
-        Task done = tasks.markDone(index, storage);
+    public String execute(TaskList tasks, Ui ui, Storage storage)
+            throws DeleteListEmptyException, DeleteOutOfBounds, DeleteNegativeIndex {
+        Task done = tasks.markDone(index - 1, storage);
         return ui.printDone(done);
     }
 

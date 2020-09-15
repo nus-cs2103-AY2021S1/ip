@@ -35,9 +35,9 @@ public class Ui {
 
     private String printNumTask(int numTask) {
         if (numTask == 1) {
-            return String.format("%sYou have %d task in the list.", INDENT, numTask);
+            return String.format("You have %d task in the list.", numTask);
         }
-        return String.format("%sYou have %d tasks in the list.", INDENT, numTask);
+        return String.format("You have %d tasks in the list.", numTask);
     }
 
     /**
@@ -48,7 +48,7 @@ public class Ui {
      */
     public String showDelete(Task removed, int numLeft) {
         String taskLeft = printNumTask(numLeft);
-        String output = INDENT + "Task removed: " + "\n"
+        String output = "Task removed: " + "\n"
                                 + INDENT + removed.getOutput() + "\n"
                                 + taskLeft;
         System.out.println(output);
@@ -64,7 +64,7 @@ public class Ui {
     public String printList(Storage storage) throws IOException {
         ArrayList<Task> arrTask = storage.load();
         String output = printNumTask(arrTask.size()) + "\n";
-        output += INDENT + "Here are the tasks in your list:\n";
+        output += "Here are the tasks in your list:\n";
         for (int i = 0; i < arrTask.size(); i++) {
             output += String.format("%s%d. %s", INDENT, i + 1, arrTask.get(i).getOutput());
             if (i < arrTask.size() - 1) {
@@ -83,8 +83,8 @@ public class Ui {
      * @return The message for the user
      */
     public String printNew(Task task, String type, int numTask) {
-        String output = String.format("%sAdding %s to the list:\n", INDENT, type)
-                        + String.format("%s%s\n", INDENT, task.getOutput())
+        String output = String.format("Adding %s to the list:\n", type)
+                        + INDENT + String.format("%s\n", task.getOutput())
                                 + printNumTask(numTask);
         System.out.println(output);
         return output;
@@ -97,10 +97,10 @@ public class Ui {
      */
     public String printFind(ArrayList<Task> arr) {
         if (arr.isEmpty()) {
-            System.out.println(INDENT + "There are no items");
-            return INDENT + "There are no items";
+            System.out.println("There are no items");
+            return "There are no items";
         } else {
-            String output = INDENT + "Here are the items that match\n";
+            String output = "Here are the items that match\n";
             for (int i = 0; i < arr.size(); i++) {
                 output += String.format("%s%d) %s", INDENT, i + 1,
                         arr.get(i).getOutput()) + "\n";
@@ -115,8 +115,8 @@ public class Ui {
      * @return The closing message.
      */
     public String bye() {
-        System.out.println(INDENT + "Bye. Hope to see you again soon");
-        return INDENT + "Bye. Hope to see you again soon";
+        System.out.println("Bye. Hope to see you again soon");
+        return "Bye. Hope to see you again soon";
     }
 
     /**
@@ -125,8 +125,7 @@ public class Ui {
      * @return Message for the user.
      */
     public String printDone(Task task) {
-        String output = INDENT + "Nice! I've marked this task as done: \n";
-        output += INDENT;
+        String output = "Nice! I've marked this task as done: \n" + INDENT;
         output += task.getOutput();
         System.out.println(output);
         return output;
@@ -137,7 +136,7 @@ public class Ui {
      * @return Message for the user.
      */
     public String printSorted() {
-        String output = INDENT + "Tasks sorted";
+        String output = "Tasks sorted";
         System.out.println(output);
         return output;
     }
