@@ -39,8 +39,14 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
+        dialog.setStyle(
+                " -fx-background-color: rgba(220,168,255,0.76); " +
+                " -fx-text-fill: #fafff3; " +
+                " -fx-background-radius: 10px; " +
+                " -fx-padding: 10px;"
+        );
         displayPicture.setImage(img);
-        displayPicture.setClip(new Circle(50, 50, 50));
+        displayPicture.setClip(new Circle(25, 25, 25));
     }
 
     /**
@@ -54,7 +60,9 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        var db = new DialogBox(text, img);
+        db.dialog.setStyle(db.dialog.getStyle() + " -fx-background-color: rgba(255,213,14,0.75); ");
+        return db;
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {

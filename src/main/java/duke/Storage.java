@@ -45,9 +45,9 @@ public class Storage {
         try {
             outFile = new File(filePath);
             if (!outFile.getParentFile().exists()) {
-                throw new DukeException(" ☹ OOPS!!! The folder does not exist.");
+                throw new DukeException(" OOPS!!! The folder does not exist.");
             } else if (!outFile.exists()) {
-                throw new DukeException(" ☹ OOPS!!! The file does not exist.");
+                throw new DukeException(" OOPS!!! The file does not exist.");
             }
             out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outFile), "utf-8"), 10240);
 
@@ -61,7 +61,7 @@ public class Storage {
             out.flush();
             out.close();
         } catch (IOException e) {
-            throw new DukeException(" ☹ OOPS!!! There is an IOException: " + e.getMessage());
+            throw new DukeException(" OOPS!!! There is an IOException: " + e.getMessage());
         }
     }
 
@@ -81,11 +81,11 @@ public class Storage {
             File fileParent = file.getParentFile();
             if (!fileParent.exists()) {
                 boolean isSuccess = fileParent.mkdirs();
-                if(!isSuccess) throw new DukeException("Oops! Fail to create the storage dictionary.");
+                if(!isSuccess) throw new DukeException(" Oops! Fail to create the storage dictionary.");
             }
             if (!file.exists()) {
                 boolean isSuccess = file.createNewFile();
-                if(!isSuccess) throw new DukeException("Oops! Fail to create the storage file.");
+                if(!isSuccess) throw new DukeException(" Oops! Fail to create the storage file.");
             }
             fileReader = new FileReader(filePath);
             bufferedReader = new BufferedReader(fileReader);
@@ -98,7 +98,7 @@ public class Storage {
             }
             return taskList;
         } catch (IOException e) {
-            throw new DukeException(" ☹ OOPS!!! There is an IOException: " + e.getMessage());
+            throw new DukeException(" OOPS!!! There is an IOException: " + e.getMessage());
         }
     }
 
@@ -119,7 +119,7 @@ public class Storage {
             return new Event(isDone, commands[2], commands[3]);
         }
         default: {
-            throw new DukeException("Ops, the storage format goes wrong somewhere.");
+            throw new DukeException(" Ops, the storage format goes wrong somewhere.");
         }
         }
     }
