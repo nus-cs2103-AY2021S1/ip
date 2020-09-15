@@ -25,6 +25,7 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             scene.getStylesheets().add("view/MainWindow.css");
             scene.getStylesheets().add("view/DialogBox.css");
+            stage.setTitle("Duke");
             stage.setScene(scene);
             UserList.initialize();
 
