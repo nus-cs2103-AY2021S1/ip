@@ -27,16 +27,7 @@ public class AddCommand extends Command {
 
     @Override
     public boolean run(TaskList taskList, Storage storage, Ui ui) throws DukeException {
-        Task newTask;
-        if (taskType == TaskType.TODO) {
-            newTask = taskList.addTodo(attributes);
-        } else if (taskType == TaskType.DEADLINE) {
-            newTask = taskList.addDDLTask(attributes, false);
-        } else {
-            newTask = taskList.addDDLTask(attributes, true);
-        }
-        ui.writeAdd(newTask, taskList.getSize());
-        storage.storeList(taskList.getList());
+        runGUI(taskList, storage, ui);
         return true;
     }
 

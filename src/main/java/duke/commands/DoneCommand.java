@@ -22,9 +22,7 @@ public class DoneCommand extends Command {
 
     @Override
     public boolean run(TaskList taskList, Storage storage, Ui ui) throws DukeException {
-        Task markedTask = taskList.markDone(Integer.parseInt(attributes));
-        ui.writeDone(markedTask);
-        storage.storeList(taskList.getList());
+        runGUI(taskList, storage, ui);;
         return true;
     }
 

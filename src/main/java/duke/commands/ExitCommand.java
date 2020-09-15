@@ -22,7 +22,7 @@ public class ExitCommand extends Command {
     }
 
     @Override
-    public String runGUI(TaskList taskList, Storage storage, Ui ui) throws DukeException {
+    public String runGUI(TaskList taskList, Storage storage, Ui ui) {
         System.exit(0);
         return ui.exit();
     }

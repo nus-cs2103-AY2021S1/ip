@@ -23,13 +23,12 @@ public class FindCommand extends Command {
 
     @Override
     public boolean run(TaskList taskList, Storage storage, Ui ui) {
-        List<String> foundTasks = taskList.findTasks(attributes);
-        ui.writeSearch(foundTasks);
+        runGUI(taskList, storage, ui);
         return true;
     }
 
     @Override
-    public String runGUI(TaskList taskList, Storage storage, Ui ui) throws DukeException {
+    public String runGUI(TaskList taskList, Storage storage, Ui ui) {
         List<String> foundTasks = taskList.findTasks(attributes);
         return ui.writeSearch(foundTasks);
     }

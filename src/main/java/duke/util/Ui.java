@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * Class to handle the interface with the user.
+ * Class to handle the interface with the user. Supports both GUI and CLI.
  */
 public class Ui {
 
