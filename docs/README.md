@@ -198,6 +198,7 @@ There is no need to save manually.
 ___
 
 ## Command summary
+
 Action | Format | Examples
 ------ | ------ | --------
 `todo` | `todo DESCRIPTION` | `todo read book`
