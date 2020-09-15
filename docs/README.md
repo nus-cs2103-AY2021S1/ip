@@ -95,6 +95,18 @@ Sample Usage:
 
 ![Showing all tasks](readme-img/done.png)
 
+## Deleting A Task
+
+Delete an unwanted task that was added previously.
+
+Syntax: `delete <index of task>`
+
+Example: `delete 1`
+
+Sample Usage:
+
+![Showing all tasks](readme-img/done.png)
+
 ## Filtering Tasks
 
 The app provides several methods to filter the tasks.
