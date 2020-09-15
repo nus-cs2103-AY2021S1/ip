@@ -3,12 +3,12 @@
 Welcome to the Duke created by Xia Liyi to help you mange your tasks.
 
 ## Content
-* [Introduction](#Introduction)
-* [About](#About)
-* [Getting Started](#Getting Started)
-* [Features List](#Features List)
-* [Usage](#Usage)
-* [Credits](#Credits)
+* [Introduction](#introduction)
+* [About](#about)
+* [Getting Started](#getting-started)
+* [Features List](#features-list)
+* [Usage](#usage)
+* [Credits](#credits)
 
 ## Introduction
 This is mainly a task management application supported by JavaFX. It is an individual project in CS2103/T. It is also the gift I prepare for the girl I love.
