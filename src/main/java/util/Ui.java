@@ -6,8 +6,8 @@ package util;
 public class Ui {
     /** Constants **/
     private final String outputSymbol = ">>> ";
-    private final String lineBreak = "--.--.--.--.--.--.--.--.--.--.--." +
-            "--.--.--.--.--.--.--.--.--.--.--";
+    private final String lineBreak = "--.--.--.--.--.--.--.--.--.--.--."
+            + "--.--.--.--.--.--.--.--.--.--.--";
     // Text Images
     private final String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
@@ -37,10 +37,10 @@ public class Ui {
      * @return Duke's greetings as a String
      */
     public String getGreetings() {
-        return greetings +
-                "\nHello, I'm Duke! " +
-                "What can I help you with today?" +
-                "\n" + lineBreak + "\n";
+        return greetings
+                + "\nHello, I'm Duke! "
+                + "What can I help you with today?"
+                + "\n" + lineBreak + "\n";
     }
 
     /**
@@ -49,9 +49,9 @@ public class Ui {
      * @return Duke's farewell as a String
      */
     public String getFarewells() {
-        return outputSymbol +
-                "Bye! Hoped I helped!" +
-                "\n" + lineBreak;
+        return outputSymbol
+                + "Bye! Hoped I helped!"
+                + "\n" + lineBreak;
     }
 
     /**

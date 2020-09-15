@@ -1,7 +1,5 @@
 package util;
 
-import util.task.*;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -11,11 +9,16 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import util.task.Deadline;
+import util.task.Event;
+import util.task.Task;
+import util.task.Todo;
+
 /**
  * Deals with loading tasks from the file and saving tasks in the file
  * */
 public class Storage {
-    private String filePath;
+    private final String filePath;
 
     /**
      * Constructor for Storage class.
@@ -63,7 +66,7 @@ public class Storage {
                         t.setStatus(true);
                     }
                     tasks.add(t);
-                } catch(Exception e) {
+                } catch (Exception e) {
                     // Print out error message
                     System.out.println("Er, I found an error in the storage data.");
                     System.out.println("This line will be excluded from my task list:\n"

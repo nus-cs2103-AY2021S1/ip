@@ -1,9 +1,13 @@
 package util;
 
-import util.task.*;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
+
+import util.task.Deadline;
+import util.task.Event;
+import util.task.Task;
+import util.task.Todo;
+
 
 /**
  * Contains the task list.
@@ -109,7 +113,7 @@ public class TaskList {
         try {
             Task t = tasks.get(index);
             String m = String.format("Noted!\nI've helped you remove the following task:\n ->%s\n",
-            t.toString());
+                    t.toString());
             tasks.remove(index);
             return m + String.format("Now, there is %d tasks in the list!\n", tasks.size());
         } catch (IndexOutOfBoundsException e) {
@@ -139,7 +143,7 @@ public class TaskList {
         String output = "";
         // Turn all tasks in Duke's list into a long String
         for (int i = 0; i < tasks.size(); i++) {
-            output = output + String.format("%d. %s\n", i+1, tasks.get(i));
+            output = output + String.format("%d. %s\n", (i + 1), tasks.get(i));
         }
         return output;
     }

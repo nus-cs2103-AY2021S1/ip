@@ -10,6 +10,9 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
     protected LocalDate dueDate;
 
+    /**
+     * Constructor.
+     */
     public Deadline(String name, LocalDate date) {
         super(name);
         this.dueDate = date;

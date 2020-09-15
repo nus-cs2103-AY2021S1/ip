@@ -34,8 +34,7 @@ public class Parser {
                 return Command.TODO;
             } else {
                 // Something wrong with command, throw exception
-                throw new DukeException("Whoops! Something went wrong and I can't process your "
-                        + instructions[0] + " command. Sorry! D:");
+                throw new DukeException(wrongCmdMsg(instructions[0]));
             }
         } else if (instructions[0].equals("deadline")) {
             // Command: "deadline <taskName> /by <deadline>"
@@ -49,13 +48,11 @@ public class Parser {
                     return Command.DEADLINE;
                 } else {
                     // Something wrong with command, throw exception
-                    throw new DukeException("Whoops! Something went wrong and I can't process your "
-                            + instructions[0] + " command. Sorry! D:");
+                    throw new DukeException(wrongCmdMsg(instructions[0]));
                 }
             } else {
                 // Something wrong with command, throw exception
-                throw new DukeException("Whoops! Something went wrong and I can't process your "
-                        + instructions[0] + " command. Sorry! D:");
+                throw new DukeException(wrongCmdMsg(instructions[0]));
             }
 
         } else if (instructions[0].equals("event")) {
@@ -69,13 +66,11 @@ public class Parser {
                     return Command.EVENT;
                 } else {
                     // Something wrong with command, throw exception
-                    throw new DukeException("Whoops! Something went wrong and I can't process your "
-                            + instructions[0] + " command. Sorry! D:");
+                    throw new DukeException(wrongCmdMsg(instructions[0]));
                 }
             } else {
                 // Something wrong with command, throw exception
-                throw new DukeException("Whoops! Something went wrong and I can't process your "
-                        + instructions[0] + " command. Sorry! D:");
+                throw new DukeException(wrongCmdMsg(instructions[0]));
             }
         } else if (instructions[0].equals("done")) {
             // Command: "done <task>"
@@ -90,8 +85,7 @@ public class Parser {
                 }
             } else {
                 // Something wrong with command, throw exception
-                throw new DukeException("Whoops! Something went wrong and I can't process your "
-                        + instructions[0] + " command. Sorry! D:");
+                throw new DukeException(wrongCmdMsg(instructions[0]));
             }
         } else if (instructions[0].equals("delete")) {
             // Command: "delete <taskNumber>"
@@ -107,8 +101,7 @@ public class Parser {
                 }
             } else {
                 // Something wrong with command, throw exception
-                throw new DukeException("Whoops! Something went wrong and I can't process your "
-                        + instructions[0] + " command. Sorry! D:");
+                throw new DukeException(wrongCmdMsg(instructions[0]));
             }
         } else if (instructions[0].equals("find")) {
             // Command: "find <keyword>"
@@ -116,8 +109,7 @@ public class Parser {
                 return Command.FIND;
             } else {
                 // Something wrong with command, throw exception
-                throw new DukeException("Whoops! Something went wrong and I can't process your "
-                        + instructions[0] + " command. Sorry! D:");
+                throw new DukeException(wrongCmdMsg(instructions[0]));
             }
         } else if (instructions[0].equals("update")) {
             // Command: "done <task>"
@@ -132,8 +124,7 @@ public class Parser {
                 }
             } else {
                 // Something wrong with command, throw exception
-                throw new DukeException("Whoops! Something went wrong and I can't process your "
-                        + instructions[0] + " command. Sorry! D:");
+                throw new DukeException(wrongCmdMsg(instructions[0]));
             }
         }
         return Command.INVALID;
@@ -160,14 +151,13 @@ public class Parser {
             // Check if there is even anything after command
             // Exception thrown if userInput.split() fails
             // Command has no details, throw exception
-            throw new DukeException("Whoops! I think you forgot to finish your "
-                    + "command. Sorry but I need it. D:");
+            throw new DukeException("Whoops! I think you forgot to finish your command. "
+                    + "Sorry but I need it. D:");
         }
     }
 
     /**
-     * Returns lateral location of the specified position.
-     * If the position is unset, NaN is returned.
+     * Checks that the String is in the right date format.
      *
      * @param dateString String that may be a LocalDate.
      * @throws DukeException  If dateString is not a LocalDate.
@@ -178,8 +168,18 @@ public class Parser {
         } catch (Exception e) {
             // Check if string can be recognized as a valid LocalDate
             // If can't, print out error message
-            throw new DukeException("Whoops! I think there is an error in your date." +
-                    "\nPlease Try Again!");
+            throw new DukeException("Whoops! I think there is an error in your date."
+                    + "\nPlease Try Again!");
         }
+    }
+
+    /**
+     * Generates and returns wrong command exception message.
+     *
+     * @param command Command string that went wrong.
+     */
+    private static String wrongCmdMsg(String command) {
+        return "Whoops! Something went wrong and I can't process your "
+                + command + " command. Sorry! D:";
     }
 }

@@ -66,7 +66,7 @@ public class Task {
      * @return String in proper format for Duke's save file.
      */
     public String toSaveData() {
-        if(isDone) {
+        if (isDone) {
             return "1 - " + this.name;
         } else {
             return "0 - " + this.name;
@@ -76,7 +76,7 @@ public class Task {
     @Override
     public String toString() {
         // By default print task name and status
-        if(isDone) {
+        if (isDone) {
             return "[Done] " + this.name;
         } else {
             return "[X] " + this.name;

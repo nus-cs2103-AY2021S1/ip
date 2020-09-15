@@ -1,6 +1,11 @@
 import java.io.FileNotFoundException;
 
-import util.*;
+import util.Command;
+import util.DukeException;
+import util.Parser;
+import util.Storage;
+import util.TaskList;
+import util.Ui;
 
 /**
  * Duke's main class.
@@ -8,7 +13,7 @@ import util.*;
  * Consists of a Storage, TaskList and Ui.
  * Contains the program loop in run() method.
  */
-public class Duke{
+public class Duke {
     // Duke's program variables
     private Storage storage;
     private TaskList tasks;
@@ -72,7 +77,7 @@ public class Duke{
                     output = ui.getError(e);
                 } finally {
                     // Return farewells
-                   return ui.getFarewells() + output;
+                    return ui.getFarewells() + output;
                 }
             case LIST:
                 output = ui.getLineBreak() + ui.getList(tasks);

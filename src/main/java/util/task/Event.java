@@ -1,7 +1,5 @@
 package util.task;
 
-import java.time.format.DateTimeFormatter;
-
 /**
  * Event inherits from Task.
  * Event is a Task that has an added characteristic of a duration.
@@ -9,6 +7,9 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
     protected String duration;
 
+    /**
+     * Constructor.
+     */
     public Event(String name, String details) {
         super(name);
         this.duration = details;
@@ -20,7 +21,6 @@ public class Event extends Task {
      * @return Duration of the Event.
      */
     public String getEventDetails() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
         //return this.duration.format(formatter);
         return this.duration;
     }
