@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 public class TodoTest {
 
-    Todo todo = Todo.newTodo("Read book");
+    private final Todo todo = Todo.newTodo("Read book");
 
     @Test
     public void factoryMethod_validArguments_correctAttributes() {

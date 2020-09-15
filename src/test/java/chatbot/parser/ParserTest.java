@@ -1,22 +1,28 @@
 package chatbot.parser;
 
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import chatbot.commands.*;
-import chatbot.data.Deadline;
-import chatbot.data.Task;
-import chatbot.data.Todo;
-import chatbot.exception.ParseException;
-import org.junit.jupiter.api.Test;
-
-import chatbot.common.Message;
-import chatbot.exception.ChatbotException;
-
 import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.function.Predicate;
+
+import org.junit.jupiter.api.Test;
+
+import chatbot.commands.AddCommand;
+import chatbot.commands.Command;
+import chatbot.commands.DeleteCommand;
+import chatbot.commands.DoneCommand;
+import chatbot.commands.FindCommand;
+import chatbot.commands.SortCommand;
+import chatbot.common.Message;
+import chatbot.data.Deadline;
+import chatbot.data.Task;
+import chatbot.data.Todo;
+import chatbot.exception.ChatbotException;
+import chatbot.exception.ParseException;
 
 public class ParserTest {
 
@@ -104,7 +110,7 @@ public class ParserTest {
             assertEquals(ex.getMessage(), Message.MESSAGE_ITEM_DO_NOT_EXIST);
         }
     }
-    
+
     @Test
     public void parseDoneCommand_validCommand_success() throws ChatbotException {
         Command doneCmd1 = ChatbotParser.parseCommand("done 1");
