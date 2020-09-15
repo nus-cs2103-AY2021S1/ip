@@ -64,6 +64,10 @@ checkstyle {
     toolVersion = '8.29'
 }
 
+runShadow {
+    systemProperty "file.encoding", "utf-8"
+}
+
 run{
     systemProperty "file.encoding", "utf-8"
 
