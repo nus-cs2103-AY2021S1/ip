@@ -45,14 +45,22 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
-        );
-        userInput.clear();
-        if (response.equals(Ui.formatMultiLine(Ui.getGoodbye()))) {
-            Platform.exit();
+        try {
+            if (input.equals(ExitCommand.toInputString())) {
+                Platform.exit();
+            }
+            String response = duke.getResponse(input);
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input, userImage),
+                    DialogBox.getDukeDialog(response, dukeImage, false)
+            );
+        } catch (DukeException | TaskException ex) {
+            String response = ex.getMessage();
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input, userImage),
+                    DialogBox.getDukeDialog(response, dukeImage, true)
+            );
         }
+        userInput.clear();
     }
 }

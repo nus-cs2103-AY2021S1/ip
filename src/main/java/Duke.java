@@ -27,13 +27,9 @@ public class Duke {
         tasks = new TaskList(storage.initializeTasks());
     }
 
-    public String getResponse(String text) {
-        try {
-            Command c = Parser.parse(text);
-            return Ui.formatMultiLine(c.execute(tasks, storage));
-        } catch (DukeException | TaskException e) {
-            return e.getMessage();
-        }
+    public String getResponse(String text) throws DukeException, TaskException {
+        Command c = Parser.parse(text);
+        return Ui.formatMultiLine(c.execute(tasks, storage));
     }
 
     /**

@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 
 /**
  * An example of a custom control using FXML.
@@ -47,12 +48,19 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    public void setError() {
+        dialog.setTextFill(Color.web("#ff0000", 0.8));
+    }
+
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
-    public static DialogBox getDukeDialog(String text, Image img) {
+    public static DialogBox getDukeDialog(String text, Image img, boolean isError) {
         var db = new DialogBox(text, img);
+        if (isError) {
+            db.setError();
+        }
         db.flip();
         return db;
     }
