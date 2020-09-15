@@ -102,6 +102,8 @@ public class Command implements Executable {
         return new Command(CommandType.AUTHCHECK, null);
     }
 
+    /* -------------------------------------------- DEPRECATED ------------------------------------------------------ */
+
 //    public static Command createEventCommand(Task task) {
 //        return new Command(CommandType.EVENT, task);
 //    }

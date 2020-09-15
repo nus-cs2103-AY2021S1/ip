@@ -6,7 +6,13 @@ import duke.dependencies.executable.Executable;
 import duke.dependencies.storage.TaskList;
 import duke.dependencies.task.Task;
 
-import static duke.dependencies.executable.CommandType.*;
+import static duke.dependencies.executable.CommandType.ADD;
+import static duke.dependencies.executable.CommandType.CLEAR;
+import static duke.dependencies.executable.CommandType.DELETE;
+import static duke.dependencies.executable.CommandType.DONE;
+import static duke.dependencies.executable.CommandType.FIND;
+import static duke.dependencies.executable.CommandType.INVALID;
+import static duke.dependencies.executable.CommandType.LIST;
 
 /**
  * Class that enables the logical manipulation of given Executable. Interprets the type of Command and

@@ -1,5 +1,7 @@
 package duke;
 
+import duke.dependencies.longtext.HelpText;
+import duke.dependencies.longtext.StoryText;
 import duke.dependencies.parser.Controller;
 
 
@@ -12,7 +14,7 @@ class Ui {
 
     private static final String GREETING = "Hello, I'm pipboy\nWelcome " +
             "to year 2287, you have been away for some time now "
-            + "time to get yourself oriented to this place....";
+            + "time to get yourself oriented to this place....\n";
 
     private static final String CIAO ="Spero di rivederti presto\n";
     private static final String CONVO_START = GREETING;
@@ -68,7 +70,11 @@ class Ui {
         // Initiating a conversation with duke with 'hi'
         if (!hasBeenGreeted && USER_GREETINGS.contains("|" + s + "|")) {
             hasBeenGreeted = true;
-            return CONVO_START;
+            return CONVO_START + "\n" + StoryText.STORY_OF_FALLOUT;
+        }
+
+        if (s.equals("help")) {
+            return HelpText.HELP_TEXT;
         }
 
         if (hasBeenGreeted && USER_GREETINGS.contains("|" + s + "|")) {
