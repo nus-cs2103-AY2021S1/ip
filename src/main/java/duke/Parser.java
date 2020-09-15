@@ -12,10 +12,13 @@ public class Parser {
      * @param userInput Input from user.
      * @return Returns appropriate Command.
      */
-    static Command readUserInput(String userInput) {
+    static Command readUserInput(String userInput) throws DukeException {
         assert userInput != null;
         String[] inputArr = userInput.split(" ");
         String cmd = inputArr[0];
+        boolean isAddCmd = cmd.equals(Instruction.TODO.getInstruction()) ||
+                cmd.equals(Instruction.DEADLINE.getInstruction()) ||
+                cmd.equals(Instruction.EVENT.getInstruction());
         if (cmd.equals(Instruction.BYE.getInstruction())) {
             return new ExitCommand();
         } else if (cmd.equals(Instruction.LIST.getInstruction())) {
@@ -31,8 +34,10 @@ public class Parser {
         } else if (cmd.equals(Instruction.FIND.getInstruction())) {
             String keyword = inputArr[1];
             return new FindCommand(keyword);
-        } else {
+        } else if (isAddCmd) {
             return new AddCommand(userInput);
+        } else {
+            throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
     }
 }
