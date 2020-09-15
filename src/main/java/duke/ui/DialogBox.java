@@ -11,12 +11,13 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 
 /**
  * Represents the dialog box that is shown to the user which contains the dialog and display picture.
@@ -33,7 +34,7 @@ public class DialogBox extends HBox {
      * The image view of the display picture.
      */
     @FXML
-    private ImageView displayPicture;
+    private Circle displayPicture;
 
     /**
      * Constructs a dialog box that stores the text and display picture.
@@ -61,7 +62,7 @@ public class DialogBox extends HBox {
         // Add background color to text box for user
         setBackgroundColor(Color.PINK);
 
-        displayPicture.setImage(image);
+        displayPicture.setFill(new ImagePattern(image));
     }
 
     private void setBackgroundColor(Color color) {
