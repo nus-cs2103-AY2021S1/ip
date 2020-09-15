@@ -186,19 +186,3 @@ Tasks are sorted automatically after any command that changes the task list.
 ### Saving the data
 Task list data are saved in the hard disk automatically after any command that changes the data. 
 There is no need to save manually.
-
-
-
-## Usage
-
-### `Keyword` - Describe action
-
-Describe action and its outcome.
-
-Example of usage: 
-
-`keyword (optional arguments)`
-
-Expected outcome:
-
-`outcome`
