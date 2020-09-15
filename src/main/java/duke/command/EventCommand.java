@@ -14,6 +14,10 @@ import duke.ui.Ui;
  * Represents a command that creates an event task.
  */
 public class EventCommand extends UserCommand {
+
+    private static String eventType = "Event";
+    private static final String DEFAULT_MESSAGE = "Got it. I've added this task:";
+
     /**
      * @param userInput user's input.
      */
@@ -32,12 +36,13 @@ public class EventCommand extends UserCommand {
         String at = eventArr[1].substring(eventArr[1].indexOf("at") + 3);
         String eventString = eventArr[0].substring(6);
         LocalDate localEventDate = TimeFormatter.localDate(at);
-        if (new DuplicateDetector(eventString, localEventDate, taskList, "Event").checkForDuplicates()) {
+        DuplicateDetector duplicateDetector = new DuplicateDetector(eventString, localEventDate, taskList, eventType);
+        if (duplicateDetector.checkForDuplicates()) {
             throw new DuplicateException();
         } else {
             Event event = new Event(eventString, localEventDate);
             taskList.addTask(event);
-            return ui.printResponse("Got it. I've added this task:") + "\n"
+            return ui.printResponse(DEFAULT_MESSAGE) + "\n"
                     + ui.printResponse(event.toString()) + "\n"
                     + ui.printListCount(taskList);
         }

@@ -9,6 +9,10 @@ import duke.tasks.ToDo;
 import duke.ui.Ui;
 
 public class ToDoCommand extends UserCommand {
+
+    private static String eventType = "ToDo";
+    private static final String DEFAULT_MESSAGE = "Got it. I've added this task:";
+
     public ToDoCommand(String userInput) {
         super(userInput);
     }
@@ -24,12 +28,13 @@ public class ToDoCommand extends UserCommand {
             throw new EmptyToDoException();
         } else {
             String todoString = userInput.substring(5);
-            if (new DuplicateDetector(todoString, taskList, "ToDo").checkForDuplicates()) {
+            DuplicateDetector duplicateDetector = new DuplicateDetector(todoString, taskList, eventType);
+            if (duplicateDetector.checkForDuplicates()) {
                 throw new DuplicateException();
             } else {
                 ToDo todo = new ToDo(todoString);
                 taskList.addTask(todo);
-                return ui.printResponse("Got it. I've added this task:") + "\n"
+                return ui.printResponse(DEFAULT_MESSAGE) + "\n"
                         + ui.printResponse(todo.toString()) + "\n"
                         + ui.printListCount(taskList);
             }

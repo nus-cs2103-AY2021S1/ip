@@ -31,17 +31,17 @@ public class FindCommand extends UserCommand {
             throw new EmptyFindException();
         } else {
             String search = userInput.substring(5);
-            List<Task> temp = new ArrayList<>();
+            List<Task> searchList = new ArrayList<>();
             for (int i = 0; i < taskList.listSize(); i++) {
                 Task task = taskList.getTask(i);
                 if (task.getDescription().contains(search)) {
-                    temp.add(task);
+                    searchList.add(task);
                 }
             }
-            if (temp.isEmpty()) {
+            if (searchList.isEmpty()) {
                 return ui.printResponse("No results found.");
             } else {
-                TaskList tempList = new TaskList(temp);
+                TaskList tempList = new TaskList(searchList);
                 return ui.printList(tempList);
             }
         }

@@ -13,14 +13,14 @@ public class DuplicateDetector {
     private String taskType;
 
     public DuplicateDetector(String description, LocalDate date, TaskList taskList, String taskType) {
-        this.description = description;
+        this.description = description.toLowerCase();
         this.date = date;
         this.taskList = taskList;
         this.taskType = taskType;
     }
 
     public DuplicateDetector(String description, TaskList taskList, String taskType) {
-        this.description = description;
+        this.description = description.toLowerCase();
         this.taskList = taskList;
         this.date = null;
         this.taskType = taskType;
@@ -33,13 +33,21 @@ public class DuplicateDetector {
             if (taskType.equals(task.getTaskType())) {
                 String taskDescription = task.getDescription().toLowerCase();
                 LocalDate localDate = task.getLocalDate();
-                if (taskDescription.equals(description.toLowerCase()) && (localDate == null
-                        || localDate.equals(date))) {
+                if (checkForDuplicateDescription(taskDescription) && checkForDuplicateDate(localDate)) {
                     hasDuplicate = true;
                 }
             }
         }
         return hasDuplicate;
     }
+
+    public boolean checkForDuplicateDate(LocalDate localDate) {
+        return localDate == null || localDate.equals(date);
+    }
+
+    public boolean checkForDuplicateDescription(String taskDescription) {
+        return taskDescription.equals(description);
+    }
+
 
 }

@@ -10,11 +10,18 @@ import duke.ui.Ui;
  */
 public class DoneCommand extends UserCommand {
 
+    private static final String DEFAULT_MESSAGE = "Nice! I've marked this task as done: " + "\n" + "[\u2713]";
+
     /**
      * @param userInput user's input.
      */
     public DoneCommand(String userInput) {
         super(userInput);
+    }
+
+    public boolean checkInputRange(String[] doneCommandArray, int taskSize) {
+        int itemToBeMarkedAsDone = Integer.parseInt(doneCommandArray[1]);
+        return itemToBeMarkedAsDone > taskSize || itemToBeMarkedAsDone <= 0;
     }
 
     /**
@@ -27,15 +34,14 @@ public class DoneCommand extends UserCommand {
         String[] doneCommandArray = userInput.split(" ");
         if (doneCommandArray.length < 2) {
             throw new InvalidDoneCommandException();
+        }
+        if (checkInputRange(doneCommandArray, taskList.listSize())) {
+            throw new InvalidDoneCommandException();
         } else {
             int itemToBeMarkedAsDone = Integer.parseInt(doneCommandArray[1]);
-            if (itemToBeMarkedAsDone > taskList.listSize() || itemToBeMarkedAsDone <= 0) {
-                throw new InvalidDoneCommandException();
-            } else {
-                taskList.getTask(itemToBeMarkedAsDone - 1).markAsDone();
-                return ui.printResponse("Nice! I've marked this task as done: " + "\n" + "[\u2713]"
-                        + taskList.getTask(itemToBeMarkedAsDone - 1).getDescription());
-            }
+            taskList.getTask(itemToBeMarkedAsDone - 1).markAsDone();
+            return ui.printResponse(DEFAULT_MESSAGE + taskList.getTask(itemToBeMarkedAsDone - 1)
+                    .getDescription());
         }
     }
 }

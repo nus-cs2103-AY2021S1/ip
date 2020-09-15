@@ -19,7 +19,7 @@ public class Ui {
     }
 
     /**
-     * Goodbye message to the user.
+     * Prints goodbye message to the user.
      */
     public String sayGoodBye() {
         return "Bye. Hope to see you again soon!";

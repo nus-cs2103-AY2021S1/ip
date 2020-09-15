@@ -15,6 +15,9 @@ import duke.ui.Ui;
  */
 public class DeadlineCommand extends UserCommand {
 
+    private static String eventType = "Deadline";
+    private static final String DEFAULT_MESSAGE = "Got it. I've added this task:";
+
     /**
      * @param userInput user's input.
      */
@@ -33,13 +36,14 @@ public class DeadlineCommand extends UserCommand {
         String by = deadlineArr[1].substring(deadlineArr[1].indexOf("by") + 3);
         String deadlineString = deadlineArr[0].substring(9);
         LocalDate localDeadlineDate = TimeFormatter.localDate(by);
-        if (new DuplicateDetector(deadlineString, localDeadlineDate, taskList, "Deadline")
-                .checkForDuplicates()) {
+        DuplicateDetector duplicateDetector = new DuplicateDetector(deadlineString, localDeadlineDate, taskList,
+                eventType);
+        if (duplicateDetector.checkForDuplicates()) {
             throw new DuplicateException();
         } else {
             Deadline deadline = new Deadline(deadlineString, localDeadlineDate);
             taskList.addTask(deadline);
-            return ui.printResponse("Got it. I've added this task:") + "\n"
+            return ui.printResponse(DEFAULT_MESSAGE) + "\n"
                     + ui.printResponse(deadline.toString()) + "\n"
                     + ui.printListCount(taskList);
         }
