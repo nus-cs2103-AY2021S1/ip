@@ -1,6 +1,6 @@
-T | 0 | go climb
-T | 1 | go wrestle
-E | 0 | go swim | pool
-E | 0 | go swim | pool
 D | 0 | go play | 2020-09-09
 D | 0 | go play | 2020-09-09
+T | 0 | go die
+T | 0 | go die
+T | 0 | go run
+T | 0 | go run
