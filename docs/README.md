@@ -28,7 +28,7 @@ Sparrow is a **desktop app for managing tasks and vocabulary, optimized for use 
 2. Download the latest `Sparrow.jar` from [here](https://github.com/jonfoocy/ip/releases).
 3. Copy the file to the folder you want to use as the _home folder_ for Sparrow.
 4. Double-click the file to start the app. The GUI similar to the one shown below should appear in a few seconds.
-![Ui](images/Ui.png)
+![Ui](images/SparrowStartScreen.png)
 
 --------------------
 
