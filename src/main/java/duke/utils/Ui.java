@@ -67,7 +67,7 @@ public class Ui {
                 + "\n- deadline (de) <task> /by <yyyy-mm-dd>"
                 + "\n- event (e) <task> /at <yyyy-mm-dd>"
                 + "\n- find (f) <keyword>"
-                + "\n bye (b)"
+                + "\n- bye (b)"
                 + "\n- clear (c)\n");
 
 
