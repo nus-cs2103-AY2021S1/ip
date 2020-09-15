@@ -1,8 +1,6 @@
 package duke;
 
 import java.util.Scanner;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
