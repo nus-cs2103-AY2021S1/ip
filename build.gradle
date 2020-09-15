@@ -60,3 +60,9 @@ run{
     enableAssertions = true
     standardInput = System.in
 }
+
+gradle.projectsEvaluated {
+    tasks.withType(JavaCompile) {
+        options.compilerArgs << "-Xlint:unchecked"
+    }
+}
