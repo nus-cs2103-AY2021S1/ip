@@ -2,7 +2,6 @@ package duke.gui;
 
 import java.io.IOException;
 
-import duke.Duke;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -15,7 +14,6 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke("data/tasks.txt");
     private Image icon = new Image(this.getClass().getResourceAsStream("/images/icon.png"));
 
     @Override
@@ -29,7 +27,6 @@ public class Main extends Application {
             stage.setResizable(false);
             stage.setTitle("Opus");
             stage.getIcons().add(icon);
-            fxmlLoader.<MainWindow>getController().setDuke(duke);
             fxmlLoader.<MainWindow>getController().setStage(stage);
             stage.show();
         } catch (IOException e) {

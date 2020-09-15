@@ -63,7 +63,7 @@ public class Storage {
                 loadFromFile(tasks);
             }
         } catch (IOException ex) {
-            throw new DukeException("Oh dear! " + ex.getMessage());
+            throw new DukeException("FATAL: " + ex.getMessage());
         }
         return tasks;
     }
@@ -111,7 +111,7 @@ public class Storage {
                 }
             }
         } catch (DateTimeParseException ex) {
-            throw new DukeException("Oh dear! Bad date and time format.");
+            throw new DukeException("INVALID DATE/TIME FORMAT DETECTED");
         } catch (FileNotFoundException ex) {
             throw new DukeException(ex.getMessage());
         }
@@ -176,7 +176,7 @@ public class Storage {
         boolean isInvalid = hasInvalidType || isIncomplete;
 
         if (isInvalid) {
-            throw new DukeException("Oh dear! Invalid task in line " + lineCounter + ".");
+            throw new DukeException("INVALID TASK DETECTED: LINE " + lineCounter);
         }
     }
 
@@ -197,7 +197,7 @@ public class Storage {
         try {
             writeToFile(taskData.toString());
         } catch (IOException ex) {
-            throw new DukeException("Oh dear! " + ex.getMessage());
+            throw new DukeException("FATAL: " + ex.getMessage());
         }
     }
 

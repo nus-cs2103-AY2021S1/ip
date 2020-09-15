@@ -31,13 +31,16 @@ public class MainWindow extends AnchorPane {
 
     private Stage stage;
 
+    /**
+     * Initializes the MainWindow
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-    }
-
-    public void setDuke(Duke d) {
-        duke = d;
+        this.duke = new Duke("data/tasks.txt");
+        String response = this.duke.getGreeting();
+        DialogBox db = DialogBox.getDukeDialog(response, dukeImage);
+        dialogContainer.getChildren().addAll(db);
     }
 
     public void setStage(Stage s) {
@@ -69,7 +72,7 @@ public class MainWindow extends AnchorPane {
         );
 
         userInput.clear();
-        if (response.contains("Bye")) {
+        if (response.contains("Terminating")) {
             this.stage.close();
         }
     }

@@ -34,8 +34,8 @@ public class Ui {
      * @return the printed message.
      */
     public String greet() {
-        String textToPrint = "Hello! I'm Duke\n"
-                + "What can I do for you?";
+        String textToPrint = "Opus is online.\n"
+                + "Enter a prompt.";
         printWithFormatting(textToPrint);
         return textToPrint;
     }
@@ -46,7 +46,7 @@ public class Ui {
      * @return the printed message.
      */
     public String sayBye() {
-        String textToPrint = "Bye. Hope to see you again soon!";
+        String textToPrint = "Terminating connection.";
         printWithFormatting(textToPrint);
         return textToPrint;
     }
@@ -60,7 +60,7 @@ public class Ui {
     public String printList(List<Task> tasks) {
         assert tasks != null;
         int id = 1;
-        StringBuilder output = new StringBuilder("Here are the tasks in your list:");
+        StringBuilder output = new StringBuilder("Your tasks are as follows:");
         for (Task task : tasks) {
             output.append("\n").append(id).append(". ").append(task);
             id++;
@@ -79,7 +79,7 @@ public class Ui {
     public String printFoundTasks(List<Task> tasks) {
         assert tasks != null;
         int id = 1;
-        StringBuilder output = new StringBuilder("Here are the matching tasks in your list:");
+        StringBuilder output = new StringBuilder("Matching tasks are as follows:");
         for (Task task : tasks) {
             output.append("\n").append(id).append(". ").append(task);
             id++;
@@ -97,7 +97,7 @@ public class Ui {
      */
     public String printDoneMessage(Task task) {
         assert task != null;
-        String textToPrint = "Nice! I've marked this task as done:\n"
+        String textToPrint = "Affirmative. Task set as done:\n"
                 + "   " + task;
         printWithFormatting(textToPrint);
         return textToPrint;
@@ -112,9 +112,9 @@ public class Ui {
      */
     public String printDeleteMessage(Task task, int size) {
         assert task != null && size >= 0;
-        String textToPrint = "Noted. I've removed this task:\n"
+        String textToPrint = "Affirmative. Task eliminated:\n"
                 + "   " + task + "\n"
-                + "Now you have " + size + " tasks in the list.";
+                + "You have " + size + " tasks left.";
         printWithFormatting(textToPrint);
         return textToPrint;
     }
@@ -128,7 +128,7 @@ public class Ui {
      */
     public String printAddMessage(Task task, int size) {
         assert task != null && size >= 0;
-        String textToPrint = "Got it. I've added this task:\n"
+        String textToPrint = "Affirmative. Task added:\n"
                 + "   " + task + "\n"
                 + "Now you have " + size + " tasks in the list.";
         printWithFormatting(textToPrint);
@@ -144,7 +144,7 @@ public class Ui {
      */
     public String printAliasMessage(String alias, String type) {
         assert alias != null && type != null;
-        String textToPrint = "Got it. I've added this mapping:\n"
+        String textToPrint = "Affirmative. Mapping added:\n"
                 + "   " + alias + " -> " + type;
         printWithFormatting(textToPrint);
         return textToPrint;

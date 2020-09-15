@@ -69,14 +69,14 @@ public class Parser {
             case ALIAS:
                 return getAliasCommand(trimmedInput);
             default:
-                throw new DukeException("Oh dear! I'm sorry, but I don't know what that means :(");
+                throw new DukeException("UNKNOWN COMMAND DETECTED");
             }
         } catch (DateTimeParseException ex) {
-            throw new DukeException("Oh dear! Please format the date and time as yyyy/MM/dd HHmm!");
+            throw new DukeException("INVALID DATE/TIME FORMAT DETECTED - USE 'yyyy/MM/dd HHmm'");
         } catch (NumberFormatException | ArrayIndexOutOfBoundsException ex) {
-            throw new DukeException("Oh dear! Please give me a number!");
+            throw new DukeException("NO NUMBER DETECTED");
         } catch (IllegalArgumentException ex) {
-            throw new DukeException("Oh dear! I'm sorry, but I don't know what that means :(");
+            throw new DukeException("UNKNOWN COMMAND DETECTED");
         }
     }
 
@@ -173,29 +173,29 @@ public class Parser {
         boolean hasNoDescription = hasNoSpace || hasTimestampOnly;
 
         if (hasNoDescription) {
-            throw new DukeException("Oh dear! A task description cannot be empty!");
+            throw new DukeException("NO TASK DESCRIPTION DETECTED");
         }
 
         String info = input.substring(input.indexOf(' ') + 1);
 
         if (type.equals("todo") && info.contains("/")) {
-            throw new DukeException("Oh dear! A todo shouldn't contain a timestamp!");
+            throw new DukeException("TIMESTAMP DETECTED IN TODO");
         }
         if (type.equals("deadline") && !info.contains("/by")) {
-            throw new DukeException("Oh dear! A deadline must contain '/by'!");
+            throw new DukeException("NO '/by' DETECTED IN DEADLINE");
         }
         if (type.equals("event") && !info.contains("/at")) {
-            throw new DukeException("Oh dear! An event must contain '/at'!");
+            throw new DukeException("NO '/at' DETECTED IN EVENT");
         }
 
         boolean isTimedTask = type.equals("deadline") || type.equals("event");
         boolean hasNoTimestamp = isTimedTask && input.substring(idxOfMeta).length() < 5;
 
         if (type.equals("deadline") && hasNoTimestamp) {
-            throw new DukeException("Oh dear! A deadline must contain a timestamp!");
+            throw new DukeException("NO TIMESTAMP DETECTED IN DEADLINE");
         }
         if (type.equals("event") && hasNoTimestamp) {
-            throw new DukeException("Oh dear! An event must contain a timestamp!");
+            throw new DukeException("NO TIMESTAMP DETECTED IN EVENT");
         }
     }
 
@@ -211,9 +211,9 @@ public class Parser {
         boolean hasNoEquals = !input.contains("=");
 
         if (hasNoSpace) {
-            throw new DukeException("Oh dear! An alias command must have a mapping!");
+            throw new DukeException("NO MAPPING DETECTED");
         } else if (hasNoEquals) {
-            throw new DukeException("Oh dear! An alias command must contain '='!");
+            throw new DukeException("NO '=' DETECTED IN ALIAS");
         }
 
         String mapping = input.substring(input.indexOf(' '));
@@ -232,30 +232,30 @@ public class Parser {
         }
 
         if (moreThanOneWord) {
-            throw new DukeException("Oh dear! An alias can only consist of one word!");
+            throw new DukeException("MORE THAN ONE WORD DETECTED IN ALIAS");
         } else if (hasNoAlias) {
-            throw new DukeException("Oh dear! An alias command needs an alias to map!");
+            throw new DukeException("NO ALIAS DETECTED");
         } else if (isACommandType) {
-            throw new DukeException("Oh dear! An alias cannot be a command type!");
+            throw new DukeException("COMMAND AS ALIAS DETECTED");
         }
 
         boolean endsWithEquals = idxOfEquals + 1 >= mapping.length();
 
         if (endsWithEquals) {
-            throw new DukeException("Oh dear! An alias command needs a command type to map to!");
+            throw new DukeException("NO COMMAND TYPE DETECTED");
         }
 
         String type = mapping.substring(idxOfEquals + 1).trim();
         boolean hasNoType = type.length() == 0;
 
         if (hasNoType) {
-            throw new DukeException("Oh dear! An alias command needs a command type to map to!");
+            throw new DukeException("NO COMMAND TYPE DETECTED");
         }
 
         try {
             CommandType.valueOf(type.toUpperCase());
         } catch (IllegalArgumentException ex) {
-            throw new DukeException("Oh dear! " + type + " is not a valid command type!");
+            throw new DukeException("INVALID COMMAND TYPE: " + type);
         }
     }
 }

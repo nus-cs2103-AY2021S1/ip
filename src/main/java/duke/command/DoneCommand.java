@@ -41,7 +41,7 @@ public class DoneCommand extends Command {
         boolean isOutOfBounds = this.idx >= tasks.getSize() || this.idx < 0;
 
         if (isOutOfBounds) {
-            throw new DukeException("Oh dear! That task doesn't exist!");
+            throw new DukeException("NO SUCH TASK DETECTED");
         }
 
         Task doneTask = tasks.setAsDone(this.idx);

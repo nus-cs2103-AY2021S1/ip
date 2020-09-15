@@ -41,7 +41,7 @@ public class DeleteCommand extends Command {
         boolean isOutOfBounds = this.idx >= tasks.getSize() || this.idx < 0;
 
         if (isOutOfBounds) {
-            throw new DukeException("Oh dear! That task doesn't exist!");
+            throw new DukeException("NO SUCH TASK DETECTED");
         }
 
         Task rmTask = tasks.remove(this.idx);
