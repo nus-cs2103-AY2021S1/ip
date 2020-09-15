@@ -24,9 +24,10 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            stage.setTitle("                                     Sparkles");
 
             String welcomeMsg = "*Hello, I am Sparkles*\n\n     How can I help you?";
-            Image sparklesImage = new Image(this.getClass().getResourceAsStream("/images/Sparkles.png"));
+            Image sparklesImage = new Image(this.getClass().getResourceAsStream("/images/Sparkles-transparent.png"));
             DialogBox welcome = DialogBox.getSparklesDialog(welcomeMsg, sparklesImage);
 
             fxmlLoader.<MainWindow>getController().setDialogContainer(welcome);

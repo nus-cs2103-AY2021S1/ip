@@ -25,7 +25,7 @@ public class MainWindow extends AnchorPane {
     private Sparkles sparkles;
 
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
-    private final Image sparklesImage = new Image(this.getClass().getResourceAsStream("/images/Sparkles.png"));
+    private final Image sparklesImage = new Image(this.getClass().getResourceAsStream("/images/Sparkles-transparent.png"));
 
     /**
      * Initialise dialogContainer in ScrollPane.
