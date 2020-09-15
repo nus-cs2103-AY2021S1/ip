@@ -6,13 +6,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="duke.duke.MainWindow">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="672.0" prefWidth="496.0" style="-fx-background-color: #bbb;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="duke.duke.MainWindow">
     <children>
-        <TextField fx:id="userInput" layoutX="6.0" layoutY="558.0" onAction="#handleUserInput" prefHeight="41.0" prefWidth="313.0" AnchorPane.bottomAnchor="1.0" />
-        <Button fx:id="sendButton" layoutX="324.0" layoutY="558.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="41.0" prefWidth="76.0" text="Send" />
-        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="557.0" prefWidth="400.0" vvalue="1.0">
+        <TextField fx:id="userInput" layoutX="14.0" layoutY="610.0" onAction="#handleUserInput" prefHeight="41.0" prefWidth="387.0"
+                   style="-fx-text-fill: #bbb; -fx-background-color: #2e2e2e;" AnchorPane.bottomAnchor="21.0" />
+        <Button fx:id="sendButton" layoutX="407.0" layoutY="610.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="41.0" prefWidth="76.0" text="Send" />
+        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" layoutX="14.0" layoutY="14.0" prefHeight="576.0" prefWidth="469.0" vvalue="1.0">
             <content>
-                <VBox fx:id="dialogContainer" alignment="CENTER" prefHeight="553.0" prefWidth="396.0" />
+                <VBox fx:id="dialogContainer" alignment="CENTER" prefHeight="578.0" prefWidth="474.0" style="-fx-background-color: #2e2e2e;" />
             </content>
         </ScrollPane>
     </children>
