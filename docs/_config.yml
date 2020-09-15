@@ -1,1 +1,2 @@
-include: [README.md, index.md]
+include: README.md
+theme: jekyll-theme-minimal
