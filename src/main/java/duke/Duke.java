@@ -18,7 +18,7 @@ public class Duke {
      * Initializes Duke containing the storage, terminal ui and task list. For Duke running with Terminal UI.
      *
      * @param filePath Filepath of where storage files are stored.
-     * @param ui Terminal User Interface in Duke.
+     * @param ui       Terminal User Interface in Duke.
      */
     public Duke(String filePath, TerminalUi ui) {
         this.storage = new Storage(filePath);
@@ -35,7 +35,7 @@ public class Duke {
      * Initializes Duke containing the storage, graphical ui and task list. For Duke running with GUI.
      *
      * @param filePath Filepath of where storage files are stored.
-     * @param ui Graphical User Interface in Duke.
+     * @param ui       Graphical User Interface in Duke.
      */
     public Duke(String filePath, GraphicalUi ui) {
         this.storage = new Storage(filePath);
@@ -79,7 +79,7 @@ public class Duke {
      */
     public String getResponse(String input) {
         try {
-            assert isInProgram;
+            assert (isInProgram) : "Duke should still be running.";
             Command command = Parser.parse(input);
             command.execute(taskList, ui, storage);
             isInProgram = command.isInProgram();

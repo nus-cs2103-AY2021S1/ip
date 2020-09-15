@@ -81,7 +81,7 @@ public class Storage {
                     fileWriter.write(String.join(SPLITTER, TaskType.EVENT.getInitial(), getDoneString(task),
                             task.getDescription(), ((Event) task).getAt()));
                 } else {
-                    assert false;
+                    assert (false) : "Tasks in taskList should have been in the correct format!";
                 }
                 fileWriter.write(System.lineSeparator());
             }

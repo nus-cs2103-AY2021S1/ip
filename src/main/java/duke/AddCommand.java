@@ -52,7 +52,7 @@ public class AddCommand extends Command {
         } else if (commandType == CommandType.EVENT) {
             newTask = new Event(description, dateTime);
         } else {
-            assert false;
+            assert (false) : "Add commands should have been parsed correctly.";
         }
         taskList.addTask(newTask);
         ui.processAddMessage(newTask, taskList.getCount());
