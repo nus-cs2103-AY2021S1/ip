@@ -1,0 +1,15 @@
+.scroll-view {
+    -fx-background-image: url("/images/cat_background.jpg");
+    -fx-background-size: 100% 100%;
+    -fx-background-position: bottom center;
+    -fx-background: transparent;
+}
+
+.chat-bubble {
+    -fx-spacing: 5.0;
+    -fx-border-width: 5.0;
+    -fx-border-radius: 5.0;
+    -fx-background-color:#f3dde2;
+    -fx-background-radius: 50px;
+    -fx-font-size:12;
+}
