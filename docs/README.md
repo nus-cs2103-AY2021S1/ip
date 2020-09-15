@@ -19,10 +19,11 @@ Format: `todo TASK`
 Example: `todo walk the dog`
 
 Expected Outcome:
-```Got it. I've added this task:
+``` 
+Got it. I've added this task:
      [T][x] walk the dog
  Now you have 3 tasks in the list
- ```
+```
 
 ### Add a task with a deadline: deadline
 Adds a `deadline` with the specified description to the task list.
@@ -33,7 +34,8 @@ Format: `deadline TASK /by DATE`
 Example: deadline complete individual project /by 2020-09-18`
 
 Expected Outcome:
-```Got it. I've added this task:
+``` 
+Got it. I've added this task:
     [D][x] complete individual project (Sep 18 2020)
  Now you have 4 tasks in the list
 ```
@@ -47,7 +49,8 @@ Format: `event TASK /at DATE`
 Example: `event music festival /at 2020-09-20`
 
 Expected Outcome:
-```Got it. I've added this task:
+``` 
+Got it. I've added this task:
         [E][x] music festival (Sep 20 2020)
     Now you have 5 tasks in the list
 ```
@@ -62,9 +65,10 @@ Format: `remove INDEX`
 Example: `remove 2`
 
 Expected Outcome:
-```Noted. I've removed this task:
+``` 
+Noted. I've removed this task:
        [T][x] read book
-    Now you have 4 tasks in the list.
+    Now you have 4 tasks in the list. 
 ```
 
 ### Mark task as done: done
@@ -78,7 +82,8 @@ Format: `done INDEX`
 Example: `done 2`
 
 Expected Outcome:
-``` Nice! I've marked this task as done:
+``` 
+Nice! I've marked this task as done:
         [/] walk the dog
 ```
 
@@ -90,7 +95,8 @@ Format: `find KEYWORD`
 Example: `find music`
 
 Expected Outcome:
-``` Tasks Found:
+``` 
+Tasks Found:
     5. [E][x] music festival (Sep 20 2020)
 ```
 
@@ -100,8 +106,9 @@ Lists the current task list.
 Format: `list`
 
 Expected Outcome:
-```   Here are the tasks in your list:
-        1. [T][x] complete project 
+```  
+Here are the tasks in your list:
+    1. [T][x] complete project 
 ```
 
 ### Exit the program: bye
