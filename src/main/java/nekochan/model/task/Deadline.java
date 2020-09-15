@@ -147,7 +147,8 @@ public class Deadline extends Task {
             LocalDate searchDate = DateParser.parseStringToDateTime(searchParameter).toLocalDate();
             return searchDate.isEqual(due.toLocalDate());
         } catch (NekoException e) {
-            return searchParameter.contains(description) || description.contains(searchParameter);
+            return searchParameter.toLowerCase().contains(description.toLowerCase())
+                    || description.toLowerCase().contains(searchParameter.toLowerCase());
         }
     }
 

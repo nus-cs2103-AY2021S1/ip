@@ -117,7 +117,8 @@ public class ToDo extends Task {
      */
     @Override
     public boolean match(String searchParameter) {
-        return description.contains(searchParameter) || searchParameter.contains(description);
+        return description.toLowerCase().contains(searchParameter.toLowerCase())
+                || searchParameter.toLowerCase().contains(description.toLowerCase());
     }
 
     /**

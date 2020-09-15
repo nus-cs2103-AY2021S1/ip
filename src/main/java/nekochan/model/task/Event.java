@@ -217,7 +217,8 @@ public class Event extends Task {
                     && searchDate.isAfter(startDateTime.toLocalDate());
             return isEqualStart || isEqualEnd || isBetween;
         } catch (NekoException e) {
-            return searchParameter.contains(description) || description.contains(searchParameter);
+            return searchParameter.toLowerCase().contains(description.toLowerCase())
+                    || description.toLowerCase().contains(searchParameter.toLowerCase());
         }
     }
 
