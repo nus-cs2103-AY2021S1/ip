@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.Region?>
+
+
+<fx:root minHeight="-Infinity" prefHeight="25.0" prefWidth="400.0" style="-fx-background-color: #566573;" type="javafx.scene.layout.Region" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" />

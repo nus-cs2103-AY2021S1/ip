@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="718.0" prefWidth="450.0" style="-fx-background-color: #283747;" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bob.ui.MainWindow">
+    <children>
+        <TextField fx:id="userInput" alignment="TOP_LEFT" layoutY="654.0" onAction="#handleUserInput" prefHeight="80.0" prefWidth="367.0" style="-fx-text-fill: white; -fx-background-color: #2E4053;" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="83.0" AnchorPane.topAnchor="654.0" />
+        <Button fx:id="sendButton" layoutX="367.0" layoutY="654.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="52.0" prefWidth="83.0" style="-fx-background-color: #283747;" text="Send" textFill="#eeeaea" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="367.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="654.0" />
+        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" layoutY="83.0" prefHeight="571.0" prefWidth="450.0" vvalue="1.0">
+         <content>
+                <VBox fx:id="dialogContainer" prefHeight="576.0" prefWidth="436.0" style="-fx-background-color: #566573;" />
+         </content>
+        </ScrollPane>
+      <ImageView fx:id="imageView" fitHeight="61.0" fitWidth="163.0" layoutX="154.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+    </children>
+</AnchorPane>
