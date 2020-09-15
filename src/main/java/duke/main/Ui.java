@@ -131,15 +131,17 @@ public class Ui {
      * @return The message notifying the user of the tasks that contain the particular keyword.
      */
     public String getMatchingList(TaskList tasks) {
-        String message = "Quack Quack! Here are the matching tasks in your list:\n";
+        String messageWhenMatch = "Quack Quack! Here are the matching tasks in your list:\n";
+        String messageNoMatch = "Quack :'( There's no matching task in the list:\n";
         int numOfTasks = tasks.getSize();
+        boolean hasMatch = numOfTasks != 0;
         for (int i = 0; i < numOfTasks; i++) {
             int taskNumber = i + 1;
             String taskDetail = tasks.getTask(i).toString();
             String taskDetailWithLineBreak = addLineBreak(taskDetail);
-            message = message + indentMessage(taskNumber + "." + taskDetailWithLineBreak);
+            messageWhenMatch = messageWhenMatch + indentMessage(taskNumber + "." + taskDetailWithLineBreak);
         }
-        return message;
+        return hasMatch ? messageWhenMatch : messageNoMatch;
     }
 
     /**
