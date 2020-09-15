@@ -31,7 +31,6 @@ public class Duke {
         storage = new Storage(filePath);
         try {
             results = new TaskList();
-            results = new TaskList();
             List<Task> taskList = storage.readFromFile();
             taskList.stream().forEach(task -> results.add(task));
         } catch (DukeException e) {

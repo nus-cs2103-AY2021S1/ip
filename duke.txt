@@ -1,6 +1,2 @@
-T | 1 | read books
-D | 0 | review for exam | 2020-12-09T11:59
-E | 0 | exam | 2020-02-10T15:00
-T | 0 | cycling
-T | 0 | return books
 T | 0 | read books
+D | 0 | test | 2020-12-12T12:12

@@ -77,7 +77,11 @@ public class Ui {
      * @return a string representing a list of tasks.
      */
     public String showList(TaskList result) {
-        return printList(":) Here are all the tasks in your list:", result, "");
+        if (result.getSize() == 0) {
+            return "Hi, sorry that the list is empty : )";
+        } else {
+            return printList(":) Here are all the tasks in your list:", result, "");
+        }
     }
 
     /**
@@ -96,7 +100,11 @@ public class Ui {
      * @return a string representing a list of tasks when finding by keywords.
      */
     public String findTaskAlert(TaskList result) {
-        return printList(findTaskFrontAlert, result, "");
+        if (result.getSize() == 0) {
+            return "Hi, sorry that the list is empty : )";
+        } else {
+            return printList(findTaskFrontAlert, result, "");
+        }
     }
 
     /**
