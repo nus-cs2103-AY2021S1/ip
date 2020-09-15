@@ -1,7 +1,5 @@
 # Eu Zin's Duke User Guide
 
-[![N|Solid](https://cldup.com/dTxpPi9lDf.thumb.png)](https://nodesource.com/products/nsolid)
-
 Eu Zin's Duke is a simple no frills(because Eu Zin is not great at jxml yet) to-do list that can help you keep track of your bust day! 
 
 ## Contents:
