@@ -120,7 +120,7 @@ public class Parser {
     public static Task parseDeadline(String input) throws DuckieException {
         String[] splitted = input.split("/");
         if (isAWord(splitted[1]) || input.split(" ")[1].equals("/")) {
-            throw new DuckieException("Please state a date in the format 'DD MMM YYYY' after '/by'.\n"
+            throw new DuckieException("Please state a date in the format 'd MMM YYYY' after '/by'.\n"
                     + "\t" + "For example, 'deadline Quiz /by 21 Aug 2000'.");
         }
         String time = splitted[1].split(" ", 2)[1];
@@ -134,7 +134,7 @@ public class Parser {
     public static Task parseEvent(String input) throws DuckieException {
         String[] splitted = input.split("/");
         if (isAWord(splitted[1])) {
-            throw new DuckieException("Please state a date in the format 'DD MMM YYYY HH:MM a' after '/at'.\n"
+            throw new DuckieException("Please state a date in the format 'd MMM YYYY HH:MM a' after '/at'.\n"
                     + "\t" + "For example, 'event Party /at 21 Aug 2000 07:20 PM'.");
         }
         String time = splitted[1].split(" ", 2)[1];

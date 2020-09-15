@@ -4,4 +4,4 @@ E | 0 | homecoming| Sun, Sep 20 2020 07:30 PM
 T | 0 | portfolio making
 D | 1 | project work| Sat, Sep 19 2020
 E | 0 | Concert| Fri, Nov 20 2020 07:30 PM
-T | 0 | borrow books
+D | 0 | assignment | Mon, Aug 24 2020

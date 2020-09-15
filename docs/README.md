@@ -34,12 +34,60 @@ Input bye command and exit the platform to say goodbye to Duckie.
 
 Format: `todo DESCRIPTION`
 
-Example of usage: '
+Example of usage: `todo borrow books`
 
-`todo borrow books`
+Expected outcome: 
+```
+"Quack! Added: 
+[T][✘] borrow books
+Now you have 1 task(s) in the list.
+```
 
-Expected outcome:
+### `deadline` - A task containing a deadline
 
-`"Quack! Added: `
-`[T][✘] borrow books`
-`Now you have " + tasks.getTaskList().size() + " task(s) in the list.`
+Format: `deadline DESCRIPTION /by d MMM YYYY`
+
+Example of usage: `deadline Quiz /by 21 Aug 2020`
+
+Expected outcome: 
+```
+"Quack! Added: 
+[D][✘] Quiz (by: Fri, 21 Aug 2020)
+Now you have 1 task(s) in the list.
+```
+
+### `event` - A task containing a date of event
+
+Format: `event DESCRIPTION /at d MMM YYYY HH:MM a`
+
+Example of usage: `event Dance Night /at 21 Aug 2020 07:30 PM`
+
+Expected outcome: 
+```
+"Quack! Added: 
+[E][✘] Dance Night (at: Fri, 21 Aug 2020 07:30 PM)
+Now you have 1 task(s) in the list.
+```
+
+### `list` - List all the tasks in the task list
+
+Example of usage: `list`
+
+Expected outcome: 
+```
+"Quack! You have these in your list currently:
+1. [T][✘] borrow books
+2. [D][✘] Quiz (by: Fri, 21 Aug 2020)
+3. [E][✘] Dance Night (at: Fri, 21 Aug 2020 07:30 PM)
+```
+
+### 'delete' - Delete a particular task in the list
+Format: `delete INDEX`
+
+Example of usage: `delete 2`
+
+Expected outcome: 
+```
+"Quack! I've removed this task: 
+[D][✘] Quiz (by: Fri, 21 Aug 2020)
+```
