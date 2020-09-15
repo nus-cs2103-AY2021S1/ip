@@ -30,6 +30,11 @@ public class AddCommand extends Command {
     @Override
     public void execute(TaskList tasks, Storage storage, Ui ui) throws DukeException {
         String[] inputArr = input.split(" ", 2);
+
+        if (inputArr.length == 1) {
+            throw new DukeException("Please key in a valid description");
+        }
+
         String taskType = inputArr[0];
         String taskDescription = inputArr[1];
 
