@@ -1,4 +1,4 @@
-# User Guide
+# Duke: User Guide
 ## Quick Start
 1. Download  and execute `jar` file from release. GUI should appear in a few seconds.
 2. Type in commands and press `enter` on the keyboard or click the "Send" button to execute commands.
@@ -18,7 +18,7 @@ You may also remove them from your list via the `delete` command.
 ### Feature 3 - Intuitive Command Line Interface
 Duke allows you to record your tasks with simple command line commands.
 
-## Guide to use Duke Application
+## Feature Details
 
 ### `todo` - Adds a todo task to your task list
 
@@ -111,7 +111,6 @@ Expected outcome:
 The following task has been successfully removed:
 	[T][x] description of todo
 You have at total of 2 tasks in the list.
-______________________________
 ```
 
 ### `done` - Marks a task as done
@@ -130,7 +129,7 @@ Great job! The following task has been marked as done:
 
 input `sort` followed by `description` or `type`
 
-Example usage:
+Example usage 1:
 `sort description`
 
 Expected outcome:
@@ -142,7 +141,7 @@ These are the tasks in your list:
 2. [E][x] my event (at: 19th of September 2019, 11:49pm)
 ```
 
-Example usage:
+Example usage 2:
 `sort type`
 
 Expected outcome:
