@@ -6,7 +6,7 @@ import java.time.format.DateTimeParseException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class MyDateTimeTest {
+public class DukeTest {
     @Test
     public void MyDateTimeWrongValue(){
         try {

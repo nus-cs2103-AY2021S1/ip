@@ -23,5 +23,5 @@ public class EventTask extends Task {
     }
 
     @Override
-    public String saveString() {return "E/break/" + this.done + "/break/" + name + "/break/" + date;}
+    public String saveString() {return "E/break/" + this.done + "/break/" + description + "/break/" + date;}
 }

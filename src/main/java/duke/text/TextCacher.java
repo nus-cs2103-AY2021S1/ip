@@ -4,24 +4,24 @@ import java.nio.file.Path;
 
 public class TextCacher {
 
-    private static String store = "";
+    private static StringBuilder store = new StringBuilder();
 
     /**
      * Returns the cached string in the class object and clears the cache
      * @return String that was cached
      */
     public static String getStore() {
-        String temp = store;
-        store = "";
+        String temp = store.toString();
+        store = new StringBuilder();
         return temp;
     }
 
     public static void cacheTextStandard(String middle) {
-        store += TextStore.top + "\n" + middle + "\n" + TextStore.bottom + "\n";
+        store.append(TextStore.top).append("\n").append(middle).append("\n").append(TextStore.bottom).append("\n");
     }
 
     public static void cacheErrorMsg(String details) {
-        store += TextStore.errorBling + "\n" + details + "\n" + TextStore.errorBling + "\n";
+        store.append(TextStore.errorBling).append("\n").append(details).append("\n").append(TextStore.errorBling).append("\n");
     }
 
     // Bling msgs

@@ -18,5 +18,5 @@ public class TodoTask extends Task {
     }
 
     @Override
-    public String saveString() { return "T/break/" + this.done + "/break/" + name; }
+    public String saveString() { return "T/break/" + this.done + "/break/" + description; }
 }

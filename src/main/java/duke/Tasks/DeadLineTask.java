@@ -22,5 +22,5 @@ public class DeadLineTask extends Task {
     }
 
     @Override
-    public String saveString() {return "D/break/" + this.done + "/break/" + name + "/break/" + date;}
+    public String saveString() {return "D/break/" + this.done + "/break/" + description + "/break/" + date;}
 }
