@@ -11,20 +11,18 @@ import java.util.Collections;
 public class TaskList {
     private static final String INVALID_RANGE = "Index out of range! Try again.\n";
     private static final String COMPLETED_TASK = "This task has already been completed!";
-    private static final String MARK_DONE_TASK = "    Nice! I have marked this task as done:\n";
-    private static final String MISSING_INDEX = "No index found! Try again.\n";
+    private static final String MARK_DONE_TASK = "Nice! I have marked this task as done:\n";
     private static final String DELETE_TASK = "Noted. I have removed this task:\n";
     private static final String ADD_TASK = "Got it. I have added this task:\n";
     private static final String NOT_FOUND = "There are no tasks related to this keyword!\n";
     private static final String FOUND_KEYWORD = "Here are the matching tasks in your list: \n";
-    private static final String DESCRIPTION = "    Here are the tasks in your list:\n";
+    private static final String DESCRIPTION = "Here are the tasks in your list:\n";
     private static final String MUST_BE_NUMBER = "Index must be a number!\n";
-
-    private static final String TODO = "todo";
-    private static final String EVENT = "event";
-    private static final String DEADLINE = "deadline";
-    private static final String FIND = "find";
-    private static final String SORT_TASK_NAME = "SORTED BY TASK NAME\n";
+    private static final String INVALID_DATE = "Invalid Date format!\n";
+    private static final String MISSING_DIVIDER = "Missing Divider!\n";
+    private static final String LINE_BREAK = "\n";
+    private static final String SORT_TASK_TYPE = "SORTED BY TASK TYPE\n";
+    private static final String MISSING_INFO = "Missing Information!\n";
 
     private static final String TODO_SYMBOL = "T";
     private static final String EVENT_SYMBOL = "E";
@@ -42,6 +40,16 @@ public class TaskList {
     }
 
     /**
+     * Outputs the size of tasklist.
+     *
+     * @return String describing size of tasklist.
+     */
+
+    private String sizeOfTaskList() {
+        return "Now you have " + taskLists.size() + " tasks in the list" + "\n";
+    }
+
+    /**
      * Checks if a input for a new task is valid.
      *
      * @param input Name of the task.
@@ -50,8 +58,51 @@ public class TaskList {
      */
     public void checkForItem(String input, String task) throws DukeException {
         if (input.isBlank()) {
-            throw new DukeException("The description of a " + task + " cannot be empty!");
+            throw new DukeException("The field after " + task + " cannot be empty!");
         }
+    }
+
+    /**
+     * Prints out list of Tasks on CLI.
+     */
+    public void showTaskListForCli() {
+        Ui.printForCli(toString());
+    }
+
+    /**
+     * Returns list of Tasks on GUI.
+     *
+     * @return String of Tasklist.
+     */
+    public String showTaskListForGui() {
+        return toString();
+    }
+
+    /**
+     * Checks if given index of the task is in valid position.
+     *
+     * @param index Index of the task.
+     * @param size Size of Tasklist.
+     * @return boolean True if valid index, else false.
+     */
+    private boolean checkValidIndex(int index, int size) {
+        if (index < 1 || index > size) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Checks if given Deadline or Event task has a divider "/".
+     *
+     * @param input String of user input.
+     * @return boolean True if valid index, else false.
+     */
+    private boolean checkForDivider(String input) {
+        if (!input.contains("/")) {
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -61,28 +112,26 @@ public class TaskList {
      */
     public void completeTaskForCli(String userInput) {
         try {
+            checkForItem(userInput.substring(4), Keyword.DONE.label); //Length of "done"
             String[] splitUserInput = userInput.split(" ");
             int index = Integer.parseInt(splitUserInput[1]);
-            assert index > 0 && index <= taskLists.size(); //Must be within range
-            if (index < 1 || index > taskLists.size()) {
-                Ui.print(INVALID_RANGE);
-            } else {
-                if (taskLists.get(index - 1).getIsDone()) {
-                    Ui.print(COMPLETED_TASK);
-                } else {
-                    taskLists.get(index - 1).markAsDone();
-                    Storage.completeTaskOnFile(index - 1, taskLists.size());
-                    String info = MARK_DONE_TASK;
-                    info += taskLists.get(index - 1).toString() + "\n";
-                    Ui.print(info);
-                }
+            int size = taskLists.size();
+            boolean isValidIndex = checkValidIndex(index, size);
+            if (!isValidIndex) {
+                Ui.printForCli(INVALID_RANGE);
             }
-        } catch (StringIndexOutOfBoundsException e) {
-            Ui.print(INVALID_RANGE);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            Ui.print(MISSING_INDEX);
-        } catch (NumberFormatException e) {
-            Ui.print(MUST_BE_NUMBER);
+            if (taskLists.get(index - 1).getIsDone()) {
+                Ui.printForCli(COMPLETED_TASK);
+            }
+            taskLists.get(index - 1).markAsDone();
+            Storage.completeTaskOnFile(index - 1, taskLists.size());
+            String info = MARK_DONE_TASK;
+            info += taskLists.get(index - 1).toString();
+            Ui.printForCli(info);
+        } catch (NumberFormatException err) {
+            Ui.printForCli(MUST_BE_NUMBER);
+        } catch (DukeException err) {
+            Ui.printForCli(err.getMessage());
         }
     }
 
@@ -94,43 +143,29 @@ public class TaskList {
      */
     public String completeTaskForGui(String userInput) {
         try {
-            if (userInput.length() < 5) {
-                return (MISSING_INDEX);
-            }
+            checkForItem(userInput.substring(4), Keyword.DONE.label); //Length of "done"
             String[] splitUserInput = userInput.split(" ");
             int index = Integer.parseInt(splitUserInput[1]);
-            assert index > 0 && index <= taskLists.size(); //Must be within range
-            if (index < 1 || index > taskLists.size()) {
-                return (INVALID_RANGE);
-            } else {
-                if (taskLists.get(index - 1).getIsDone()) {
-                    return (COMPLETED_TASK);
-                } else {
-                    taskLists.get(index - 1).markAsDone();
-                    Storage.completeTaskOnFile(index - 1, taskLists.size());
-                    String info = MARK_DONE_TASK;
-                    info += taskLists.get(index - 1).toString() + "\n";
-                    return info;
-                }
+            int size = taskLists.size();
+            boolean isValidIndex = checkValidIndex(index, size);
+            if (!isValidIndex) {
+                return INVALID_RANGE;
             }
-        } catch (StringIndexOutOfBoundsException e) {
-            return INVALID_RANGE;
-        } catch (ArrayIndexOutOfBoundsException e) {
-            return MISSING_INDEX;
-        } catch (NumberFormatException e) {
+            if (taskLists.get(index - 1).getIsDone()) {
+                return COMPLETED_TASK;
+            }
+            taskLists.get(index - 1).markAsDone();
+            Storage.completeTaskOnFile(index - 1, taskLists.size());
+            String info = MARK_DONE_TASK;
+            info += taskLists.get(index - 1).toString();
+            return info;
+        } catch (NumberFormatException err) {
             return MUST_BE_NUMBER;
+        } catch (DukeException err) {
+            return err.getMessage();
         }
     }
 
-    /**
-     * Outputs the size of tasklist.
-     *
-     * @return String describing size of tasklist.
-     */
-
-    private String sizeOfTaskList() {
-        return "Now you have " + taskLists.size() + " tasks in the list" + "\n";
-    }
     /**
      * Task to be deleted from tasklist.
      *
@@ -138,23 +173,28 @@ public class TaskList {
      */
     public void deleteTaskForCli(String userInput) {
         try {
+            checkForItem(userInput.substring(6), Keyword.DELETE.label); //Length of "done"
             String[] splitUserInput = userInput.split(" ");
             int index = Integer.parseInt(splitUserInput[1]);
-            assert index > 0 && index <= taskLists.size(); //Must be within range
-            if (index < 1 || index > taskLists.size()) {
-                Ui.print(INVALID_RANGE);
-            } else {
-                String info = DELETE_TASK;
-                info += "  " + taskLists.get(index - 1).toString() + "\n";
-                taskLists.remove(index - 1);
-                Storage.deleteTaskOnFile(index - 1, taskLists.size());
-                info += sizeOfTaskList();
-                Ui.print(info);
+            int size = taskLists.size();
+            boolean isValidIndex = checkValidIndex(index, size);
+            if (!isValidIndex) {
+                Ui.printForCli(INVALID_RANGE);
             }
-        } catch (NumberFormatException e) {
-            Ui.print(MUST_BE_NUMBER);
+            String info = DELETE_TASK;
+            info += taskLists.get(index - 1).toString();
+            info += LINE_BREAK;
+            taskLists.remove(index - 1);
+            Storage.deleteTaskOnFile(index - 1, size);
+            info += sizeOfTaskList();
+            Ui.printForCli(info);
+        } catch (NumberFormatException err) {
+            Ui.printForCli(MUST_BE_NUMBER);
+        } catch (DukeException err) {
+            Ui.printForCli(err.getMessage());
         }
     }
+
     /**
      * Task to be deleted from tasklist.
      *
@@ -163,21 +203,25 @@ public class TaskList {
      */
     public String deleteTaskForGui(String userInput) {
         try {
+            checkForItem(userInput.substring(6), Keyword.DELETE.label); //Length of "done"
             String[] splitUserInput = userInput.split(" ");
             int index = Integer.parseInt(splitUserInput[1]);
-            assert index > 0 && index <= taskLists.size(); //Must be within range
-            if (index < 1 || index > taskLists.size()) {
-                return (INVALID_RANGE);
-            } else {
-                String info = DELETE_TASK;
-                info += "  " + taskLists.get(index - 1).toString() + "\n";
-                taskLists.remove(index - 1);
-                Storage.deleteTaskOnFile(index - 1, taskLists.size());
-                info += sizeOfTaskList();
-                return info;
+            int size = taskLists.size();
+            boolean isValidIndex = checkValidIndex(index, size);
+            if (!isValidIndex) {
+                return INVALID_RANGE;
             }
-        } catch (NumberFormatException e) {
+            String info = DELETE_TASK;
+            info += taskLists.get(index - 1).toString();
+            info += LINE_BREAK;
+            taskLists.remove(index - 1);
+            Storage.deleteTaskOnFile(index - 1, size);
+            info += sizeOfTaskList();
+            return info;
+        } catch (NumberFormatException err) {
             return MUST_BE_NUMBER;
+        } catch (DukeException err) {
+            return err.getMessage();
         }
     }
 
@@ -188,16 +232,16 @@ public class TaskList {
      */
     public void addToDoForCli(String userInput) {
         try {
-            checkForItem(userInput.substring(4), TODO);
-            assert userInput.length() > 5; //Need to have input
+            checkForItem(userInput.substring(4), Keyword.TODO.label.strip()); //Length of "todo"
             String task = userInput.substring(5);
             String info = ADD_TASK;
-            Todo tempTodo = new Todo(task);
-            Storage.addTask(tempTodo.getStorageString(TODO_SYMBOL));
-            info += "  " + tempTodo.toString() + "\n";
-            taskLists.add(tempTodo);
+            Todo newToDo = new Todo(task);
+            Storage.addTask(newToDo.getStorageString(TODO_SYMBOL));
+            info += newToDo.toString();
+            info += LINE_BREAK;
+            taskLists.add(newToDo);
             info += sizeOfTaskList();
-            Ui.print(info);
+            Ui.printForCli(info);
         } catch (DukeException | IOException err) {
             System.out.println(err.getMessage());
         }
@@ -211,14 +255,14 @@ public class TaskList {
      */
     public String addToDoForGui(String userInput) {
         try {
-            checkForItem(userInput.substring(4), TODO);
-            assert userInput.length() > 5; //Need to have input
+            checkForItem(userInput.substring(4), Keyword.TODO.label.strip()); //Length of "todo"
             String task = userInput.substring(5);
             String info = ADD_TASK;
-            Todo tempTodo = new Todo(task);
-            Storage.addTask(tempTodo.getStorageString(TODO_SYMBOL));
-            info += "  " + tempTodo.toString() + "\n";
-            taskLists.add(tempTodo);
+            Todo newToDo = new Todo(task);
+            Storage.addTask(newToDo.getStorageString(TODO_SYMBOL));
+            info += newToDo.toString();
+            info += LINE_BREAK;
+            taskLists.add(newToDo);
             info += sizeOfTaskList();
             return info;
         } catch (DukeException | IOException err) {
@@ -233,24 +277,30 @@ public class TaskList {
      */
     public void addDeadlineForCli(String userInput) {
         try {
-            checkForItem(userInput.substring(8), DEADLINE);
-            assert userInput.length() > 8; //Need to have input
-            assert userInput.contains("/"); //Must have date;
+            checkForItem(userInput.substring(8), Keyword.DEADLINE.label.strip()); //Length of "Deadline
+            boolean isDividerFound = checkForDivider(userInput.substring(8));
+            if (!isDividerFound) {
+                Ui.printForCli(MISSING_DIVIDER);
+            }
             int dateIndex = userInput.indexOf("/");
             String task = userInput.substring(9, dateIndex);
+            if (task.strip().equals("")) {
+                Ui.printForCli(MISSING_INFO);
+            }
             String time = userInput.substring(dateIndex + 1);
             String info = ADD_TASK;
-            Deadline tempDeadline = new Deadline(task, time);
-            String formatDate = tempDeadline.getFormattedDate();
-            info += "  " + tempDeadline.toString() + "\n";
-            taskLists.add(tempDeadline);
-            Storage.addTask(tempDeadline.getStorageString(DEADLINE_SYMBOL, formatDate));
+            Deadline newDeadline = new Deadline(task, time);
+            String formatDate = newDeadline.getFormattedDate();
+            info += newDeadline.toString();
+            info += LINE_BREAK;
+            taskLists.add(newDeadline);
+            Storage.addTask(newDeadline.getStorageString(DEADLINE_SYMBOL, formatDate));
             info += sizeOfTaskList();
-            Ui.print(info);
+            Ui.printForCli(info);
         } catch (DukeException | IOException err) {
             System.out.println(err.getMessage());
-        } catch (DateTimeParseException e) {
-            System.out.println(e.getMessage());
+        } catch (DateTimeParseException err) {
+            System.out.println(INVALID_DATE);
         }
     }
 
@@ -262,24 +312,30 @@ public class TaskList {
      */
     public String addDeadlineForGui(String userInput) {
         try {
-            checkForItem(userInput.substring(8), DEADLINE);
-            assert userInput.length() > 8; //Need to have input
-            assert userInput.contains("/"); //Must have date;
+            checkForItem(userInput.substring(8), Keyword.DEADLINE.label.strip()); //Length of Event
+            boolean isDividerFound = checkForDivider(userInput.substring(8));
+            if (!isDividerFound) {
+                return MISSING_DIVIDER;
+            }
             int dateIndex = userInput.indexOf("/");
             String task = userInput.substring(9, dateIndex);
+            if (task.strip().equals("")) {
+                return MISSING_INFO;
+            }
             String time = userInput.substring(dateIndex + 1);
             String info = ADD_TASK;
-            Deadline tempDeadline = new Deadline(task, time);
-            String formatDate = tempDeadline.getFormattedDate();
-            info += "  " + tempDeadline.toString() + "\n";
-            taskLists.add(tempDeadline);
-            Storage.addTask(tempDeadline.getStorageString(DEADLINE_SYMBOL, formatDate));
+            Deadline newDeadline = new Deadline(task, time);
+            String formatDate = newDeadline.getFormattedDate();
+            info += newDeadline.toString();
+            info += LINE_BREAK;
+            taskLists.add(newDeadline);
+            Storage.addTask(newDeadline.getStorageString(DEADLINE_SYMBOL, formatDate));
             info += sizeOfTaskList();
             return info;
         } catch (DukeException | IOException err) {
             return err.getMessage();
-        } catch (DateTimeParseException e) {
-            return e.getMessage();
+        } catch (DateTimeParseException err) {
+            return INVALID_DATE;
         }
     }
 
@@ -290,24 +346,30 @@ public class TaskList {
      */
     public void addEventForCli(String userInput) {
         try {
-            checkForItem(userInput.substring(5), EVENT);
-            assert userInput.length() > 5; //Need to have input
-            assert userInput.contains("/"); //Must have date;
+            checkForItem(userInput.substring(5), Keyword.EVENT.label.strip()); //Length of Event
+            boolean isDividerFound = checkForDivider(userInput.substring(5));
+            if (!isDividerFound) {
+                Ui.printForCli(MISSING_DIVIDER);
+            }
             int dateIndex = userInput.indexOf("/");
             String task = userInput.substring(6, dateIndex);
+            if (task.strip().equals("")) {
+                Ui.printForCli(MISSING_INFO);
+            }
             String time = userInput.substring(dateIndex + 1);
             String info = ADD_TASK;
-            Event tempEvent = new Event(task, time);
-            String formatDate = tempEvent.getFormattedDate();
-            info += "  " + tempEvent.toString() + "\n";
-            Storage.addTask(tempEvent.getStorageString(EVENT_SYMBOL, formatDate));
-            taskLists.add(tempEvent);
+            Event newEvent = new Event(task, time);
+            String formatDate = newEvent.getFormattedDate();
+            info += newEvent.toString();
+            info += LINE_BREAK;
+            Storage.addTask(newEvent.getStorageString(EVENT_SYMBOL, formatDate));
+            taskLists.add(newEvent);
             info += sizeOfTaskList();
-            Ui.print(info);
+            Ui.printForCli(info);
         } catch (DukeException | IOException err) {
             System.out.println(err.getMessage());
-        } catch (DateTimeParseException e) {
-            System.out.println(e.getMessage());
+        } catch (DateTimeParseException err) {
+            System.out.println(INVALID_DATE);
         }
     }
 
@@ -319,24 +381,30 @@ public class TaskList {
      */
     public String addEventForGui(String userInput) {
         try {
-            checkForItem(userInput.substring(5), EVENT);
-            assert userInput.length() > 5; //Need to have input
-            assert userInput.contains("/"); //Must have date;
+            checkForItem(userInput.substring(5), Keyword.EVENT.label.strip()); //Length of Event
+            boolean isDividerFound = checkForDivider(userInput.substring(5));
+            if (!isDividerFound) {
+                return MISSING_DIVIDER;
+            }
             int dateIndex = userInput.indexOf("/");
             String task = userInput.substring(6, dateIndex);
+            if (task.strip().equals("")) {
+                return MISSING_INFO;
+            }
             String time = userInput.substring(dateIndex + 1);
             String info = ADD_TASK;
-            Event tempEvent = new Event(task, time);
-            String formatDate = tempEvent.getFormattedDate();
-            info += "  " + tempEvent.toString() + "\n";
-            Storage.addTask(tempEvent.getStorageString(EVENT_SYMBOL, formatDate));
-            taskLists.add(tempEvent);
+            Event newEvent = new Event(task, time);
+            String formatDate = newEvent.getFormattedDate();
+            info += newEvent.toString();
+            info += LINE_BREAK;
+            Storage.addTask(newEvent.getStorageString(EVENT_SYMBOL, formatDate));
+            taskLists.add(newEvent);
             info += sizeOfTaskList();
             return info;
         } catch (DukeException | IOException err) {
             return err.getMessage();
-        } catch (DateTimeParseException e) {
-            return e.getMessage();
+        } catch (DateTimeParseException err) {
+            return INVALID_DATE;
         }
     }
 
@@ -347,7 +415,7 @@ public class TaskList {
      */
     public void findForCli(String input) {
         try {
-            checkForItem(input.substring(5), FIND);
+            checkForItem(input.substring(4), Keyword.FIND.label.strip()); //Length of "find"
             String keyword = input.substring(5);
             ArrayList<Task> keywordInTasks = new ArrayList<>();
             for (int i = 0; i < taskLists.size(); i++) {
@@ -357,16 +425,20 @@ public class TaskList {
                 }
             }
             if (keywordInTasks.size() == 0) {
-                Ui.print(NOT_FOUND);
-            } else {
-                String info = FOUND_KEYWORD;
-                for (int i = 0; i < keywordInTasks.size(); i++) {
-                    info += keywordInTasks.get(i).toString() + "\n";
-                }
-                Ui.print(info);
+                Ui.printForCli(NOT_FOUND);
+            }
+
+            String info = FOUND_KEYWORD;
+            for (int i = 0; i < keywordInTasks.size(); i++) {
+                info += keywordInTasks.get(i).toString();
+                info += LINE_BREAK;
+            }
+
+            if (keywordInTasks.size() != 0) {
+                Ui.printForCli(info);
             }
         } catch (DukeException err) {
-            System.out.println(err.getMessage());
+            Ui.printForCli(err.getMessage());
         }
     }
 
@@ -378,7 +450,7 @@ public class TaskList {
      */
     public String findForGui(String input) {
         try {
-            checkForItem(input.substring(5), FIND);
+            checkForItem(input.substring(4), Keyword.FIND.label); //Length for "find"
             String keyword = input.substring(5);
             ArrayList<Task> keywordInTasks = new ArrayList<>();
             for (int i = 0; i < taskLists.size(); i++) {
@@ -389,20 +461,20 @@ public class TaskList {
             }
             if (keywordInTasks.size() == 0) {
                 return NOT_FOUND;
-            } else {
-                String info = FOUND_KEYWORD;
-                for (int i = 0; i < keywordInTasks.size(); i++) {
-                    info += keywordInTasks.get(i).toString() + "\n";
-                }
-                return info;
             }
+            String info = FOUND_KEYWORD;
+            for (int i = 0; i < keywordInTasks.size(); i++) {
+                info += keywordInTasks.get(i).toString();
+                info += LINE_BREAK;
+            }
+            return info;
         } catch (DukeException err) {
             return err.getMessage();
         }
     }
 
     /**
-     * Prints a sorted list of tasks by chronological order. Todo tasks will be placed first.
+     * Prints a sorted list of tasks by alphabetical order.
      */
     public void sortByTasksForCli() {
         ArrayList<String> taskListInString = new ArrayList<>();
@@ -410,14 +482,14 @@ public class TaskList {
             taskListInString.add(task.toString());
         }
         Collections.sort(taskListInString);
-        System.out.println(SORT_TASK_NAME);
+        System.out.println(SORT_TASK_TYPE);
         for (String sortedTask : taskListInString) {
             System.out.println(sortedTask + "\n");
         }
     }
 
     /**
-     * Returns a string of sorted list of tasks by chronological order. Todo tasks will be placed first.
+     * Returns a string of sorted list of tasks by alphabetical order.
      *
      * @return string of tasks in chronological order.
      */
@@ -428,12 +500,14 @@ public class TaskList {
         }
         Collections.sort(taskListInString);
         String toPrint = "";
-        toPrint += SORT_TASK_NAME;
+        toPrint += SORT_TASK_TYPE;
         for (String sortedTask : taskListInString) {
-            toPrint += sortedTask + "\n";
+            toPrint += sortedTask;
+            toPrint += LINE_BREAK;
         }
         return toPrint;
     }
+
     /**
      * Iterates through the arraylist of tasks and print it out.
      *
@@ -448,6 +522,4 @@ public class TaskList {
         }
         return toPrint;
     }
-
-
 }

@@ -1,8 +1,3 @@
-T ~ 1 ~ drink water
-E ~ 1 ~ ip4  ~ Sep 1 2020
-E ~ 1 ~ cox  ~ Aug 30 2020
-D ~ 0 ~ iP5  ~ Sep 5 2020
-T ~ 1 ~ asd
-T ~ 0 ~ eat
-D ~ 1 ~ ip6  ~ Sep 12 2020
-E ~ 0 ~ anniversary  ~ Oct 8 2020
+T ~ 0 ~ run
+E ~ 0 ~ birthday  ~ Oct 8 2020
+D ~ 1 ~ homework  ~ Sep 12 2020

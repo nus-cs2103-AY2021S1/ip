@@ -1,13 +1,13 @@
 package seedu.duke;
 
 public enum Keyword {
-    TODO("todo"),
-    EVENT("event"),
-    DEADLINE("deadline"),
-    DONE("done"),
+    TODO("todo "),
+    EVENT("event "),
+    DEADLINE("deadline "),
+    DONE("done "),
     LIST("list"),
-    DELETE("delete"),
-    FIND("find"),
+    DELETE("delete "),
+    FIND("find "),
     BYE("bye"),
     SORT("sort");
 

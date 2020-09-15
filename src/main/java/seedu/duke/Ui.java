@@ -1,6 +1,10 @@
 package seedu.duke;
 
 import java.util.Scanner;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import javafx.application.Platform;
 
 /**
  * Main class that interacts with user inputs.
@@ -55,11 +59,10 @@ public class Ui {
      * @return String output by DUI on GUI.
      */
     public String getUserInput(String input) {
-        if (input.equals(Keyword.BYE.label)) {
-            return Ui.endDuke();
-        } else {
-            return parse.readGuiInput(input);
+        if (input.strip().equals(Keyword.BYE.label)) {
+            return Ui.endDukeGui();
         }
+        return parse.readGuiInput(input);
     }
 
     /**
@@ -83,16 +86,16 @@ public class Ui {
      *
      * @param input String that is processed by Parser.
      */
-    public static void print(String input) {
+    public static void printForCli(String input) {
         Ui.printLines();
         System.out.println(input);
         Ui.printLines();
     }
 
     /**
-     * Method to end Duke Program when user input "Bye".
+     * Method to end Duke CLI Program when user input "Bye".
      */
-    public static void bye() {
+    public static void endDukeCli() {
         Ui.printLines();
         System.out.println(BYE);
         Ui.printLines();
@@ -101,7 +104,13 @@ public class Ui {
     /**
      * Static method to end Duke GUI when user input "Bye".
      */
-    public static String endDuke() {
+    public static String endDukeGui() {
+        new Timer().schedule(new TimerTask() {
+            public void run () {
+                Platform.exit();
+                System.exit(0);
+            }
+        }, 3000);
         return BYE;
     }
 }

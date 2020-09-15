@@ -79,29 +79,26 @@ public class Storage {
         File data = new File(STORAGE_PATH);
         FileReader fr = new FileReader(data);
         BufferedReader br = new BufferedReader(fr);
-        String tasks = "";
+        String task = "";
         while (true) {
-            tasks = br.readLine();
-            if (tasks == null) {
+            task = br.readLine();
+            if (task == null) {
                 break;
             }
-            String[] arrTasks = tasks.split(" ~ ");
-            assert arrTasks.length >= 3; //Must be a valid Task string
-            String typeOfTask = arrTasks[0];
-            assert typeOfTask.equals(TODO_SYMBOL) || typeOfTask.equals(DEADLINE_SYMBOL)
-                    || typeOfTask.equals(EVENT_SYMBOL); //Valid Symbol
-            String isDone = arrTasks[1];
-            String nameOfTask = arrTasks[2];
+            String[] arrOfTasks = splitString(task);
+            String typeOfTask = arrOfTasks[0];
+            String isDone = arrOfTasks[1];
+            String nameOfTask = arrOfTasks[2];
             switch (typeOfTask) {
             case TODO_SYMBOL:
                 loadToDo(nameOfTask, isDone, listOfTasks);
                 break;
             case DEADLINE_SYMBOL:
-                String date = arrTasks[3];
+                String date = arrOfTasks[3];
                 loadDeadline(nameOfTask, isDone, date, listOfTasks);
                 break;
             case EVENT_SYMBOL:
-                date = arrTasks[3];
+                date = arrOfTasks[3];
                 loadEvent(nameOfTask, isDone, date, listOfTasks);
                 break;
             default:
@@ -110,6 +107,21 @@ public class Storage {
             }
         }
         return listOfTasks;
+    }
+
+    /**
+     * Splits the string of task from storage to an array.
+     *
+     * @param taskFromStorage String of task from storage.
+     * @return Array of strings resulted from taskFromStorage being partitioned.
+     */
+    private static String[] splitString(String taskFromStorage) {
+        String[] arrOfTasks = taskFromStorage.split(" ~ ");
+        String typeOfTask = arrOfTasks[0];
+        assert arrOfTasks.length >= 3; //Must be a valid Task string
+        assert typeOfTask.equals(TODO_SYMBOL) || typeOfTask.equals(DEADLINE_SYMBOL)
+                || typeOfTask.equals(EVENT_SYMBOL); //Valid Symbol
+        return arrOfTasks;
     }
 
     /**
@@ -166,58 +178,83 @@ public class Storage {
 
 
     /**
-     * Makes task as complete in a local txt file.
+     * Helper method to mark task as complete in a local text file.
      *
-     * @param taskNo Index of the task.
+     * @param index Index of the task.
      * @param size Size of tasklist.
      */
-    public static void completeTaskOnFile(int taskNo, int size) {
+    public static void completeTaskOnFile(int index, int size) {
         try {
             File data = new File(STORAGE_PATH);
             FileReader fr = new FileReader(data);
             BufferedReader br = new BufferedReader(fr);
-            ArrayList<String> tempArr = new ArrayList<>();
-            for (int i = 0; i < size; i++) {
-                String task = br.readLine();
-                if (i == taskNo) {
-                    assert task.contains(NOT_DONE); //Must contain an uncompleted task
-                    task = task.replaceFirst(NOT_DONE, DONE);
-                }
-                tempArr.add(task);
-            }
-            Storage.clearTasks();
-            for (int i = 0; i < size; i++) {
-                Storage.addTask(tempArr.get(i));
-            }
+            ArrayList<String> tasks = new ArrayList<>();
+            completeTask(br, tasks, index, size);
         } catch (IOException ee) {
             System.out.println(ee.getMessage());
         }
     }
 
     /**
-     * Deletes a task locally from the txt file.
+     * Marks task as complete in a local text file.
+     *
+     * @param br BufferedReader to read lines from text file.
+     * @param tasks Arraylist of tasks to track.
+     * @param index Index of the task to be mark as completed.
+     * @param size Size of the TaskList.
+     */
+    private static void completeTask(BufferedReader br, ArrayList<String> tasks, int index, int size)
+            throws IOException {
+        for (int i = 0; i < size; i++) {
+            String task = br.readLine();
+            if (i == index) {
+                assert task.contains(NOT_DONE); //Must contain an uncompleted task
+                task = task.replaceFirst(NOT_DONE, DONE);
+            }
+            tasks.add(task);
+        }
+        Storage.clearTasks();
+        for (int i = 0; i < size; i++) {
+            Storage.addTask(tasks.get(i));
+        }
+    }
+
+    /**
+     * Helper method to delete a task locally from the txt file.
      *
      * @param index Index of the task.
-     * @param size Size of the tasklist.
+     * @param size Size of the TaskList.
      */
     public static void deleteTaskOnFile(int index, int size) {
         try {
             File data = new File(STORAGE_PATH);
             FileReader fr = new FileReader(data);
             BufferedReader br = new BufferedReader(fr);
-            ArrayList<String> tempArr = new ArrayList<>();
-            for (int i = 0; i <= size; i++) {
-                String task = br.readLine();
-                if (i != index) {
-                    tempArr.add(task);
-                }
-            }
-            Storage.clearTasks();
-            for (int i = 0; i < tempArr.size(); i++) {
-                Storage.addTask(tempArr.get(i));
-            }
+            ArrayList<String> tasks = new ArrayList<>();
+            deleteTask(br, tasks, index, size);
         } catch (IOException ee) {
             System.out.println(ee.getMessage());
+        }
+    }
+
+    /**
+     * Deletes task in a local text file.
+     *
+     * @param br BufferedReader to read lines from text file.
+     * @param tasks Arraylist of tasks to track.
+     * @param index Index of the task to be deleted.
+     * @param size Size of the TaskList.
+     */
+    private static void deleteTask(BufferedReader br, ArrayList<String> tasks, int index, int size) throws IOException {
+        for (int i = 0; i < size; i++) {
+            String task = br.readLine();
+            if (i != index) {
+                tasks.add(task);
+            }
+        }
+        Storage.clearTasks();
+        for (int i = 0; i < size - 1; i++) {
+            Storage.addTask(tasks.get(i));
         }
     }
 

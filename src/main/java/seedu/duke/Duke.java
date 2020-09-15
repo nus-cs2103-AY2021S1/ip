@@ -2,10 +2,6 @@ package seedu.duke;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
-
-import javafx.application.Platform;
 
 /**
  * Main class to run Duke program. Creates and stores tasks such as todo, event and deadline.
@@ -23,16 +19,15 @@ public class Duke {
     public Duke() {
         try {
             storage = new Storage();
+            ArrayList<Task> emptyList = new ArrayList<>();
+            ArrayList<Task> listFromStorage = storage.loadFromStorage(emptyList);
+            taskLists = new TaskList(listFromStorage);
+            parser = new Parser(taskLists);
+            ui = new Ui(parser);
         } catch (IOException e) {
+            parser = new Parser(taskLists);
+            ui = new Ui(parser);
             System.out.println(e.getMessage());
-        }
-        try {
-            taskLists = new TaskList(storage.loadFromStorage(new ArrayList<>()));
-            parser = new Parser(taskLists);
-            ui = new Ui(parser);
-        } catch (IOException e) {
-            parser = new Parser(taskLists);
-            ui = new Ui(parser);
         }
     }
 
@@ -43,14 +38,6 @@ public class Duke {
      * @return String output for GUI.
      */
     public String getResponse(String input) {
-        if (input.equals("bye")) {
-            new Timer().schedule(new TimerTask() {
-                public void run () {
-                    Platform.exit();
-                    System.exit(0);
-                }
-            }, 3000);
-        }
         return ui.getUserInput(input);
     }
 
@@ -62,7 +49,7 @@ public class Duke {
         while (ui.checkDukeStatus()) {
             ui.getNewInput();
         }
-        ui.bye();
+        ui.endDukeCli();
     }
 
     /**
