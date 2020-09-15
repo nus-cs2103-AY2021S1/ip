@@ -31,7 +31,7 @@ Duke is a **desktop application optimized for use via a Command Line Interface**
 1. Copy the file to the folder you want to use as the _home folder_ for your Duke.
 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. <br>
-   ![Ui](/Ui.png)
+   <img src="/docs/StartPage.png" alt="StartPage"/>
 
 1. Type the command in the command box and press ENTER/click on the `Send` button to execute it. e.g., typing **`help`** and pressing ENTER will send a response message from Duke.<br>\
    Some example commands you can try:
