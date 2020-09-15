@@ -75,6 +75,7 @@ Marks a given task as done.
 Usage: `done <task_index>`
 
 **Note:** `task_index` must be valid. Valid indices are within the range of the tasklist. You can view the tasklist by using [list](https://adithyanarayan.github.io/ip/#list---lists-all-tasks).
+
 Example: `done 2`
 
 ### `delete` - Deletes a tasklist
@@ -92,6 +93,7 @@ Undoes a given number of previous commands.
 Usage: `undo <no_of_commands>`
 
 **Note:** `no_of_commands` must be valid. Valid numbers are within the number of commands sent within the current window. Note that undo commands are not undoable.
+
 Example: `undo 2`
 
 ### `bye` - Undo previous commands
