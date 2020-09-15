@@ -90,10 +90,11 @@ public class TaskList {
      * @throws InvalidIndexException If index < 1 or index >= tasks.size().
      */
     public void deleteTask(int index) throws InvalidIndexException {
-        if (index > tasks.size() || index < 1) {
+        try {
+            tasks.remove(index - 1);
+        } catch (IndexOutOfBoundsException exception) {
             throw new InvalidIndexException();
         }
-        tasks.remove(index - 1);
     }
 
     /**
@@ -102,11 +103,12 @@ public class TaskList {
      * @throws InvalidIndexException If index < 1 or index >= tasks.size().
      */
     public void completeTask(int index) throws InvalidIndexException {
-        if (index > tasks.size() || index < 1) {
+        try {
+            Task completedTask = tasks.get(index - 1);
+            completedTask.markAsDone();
+        } catch (IndexOutOfBoundsException exception) {
             throw new InvalidIndexException();
         }
-        Task completedTask = tasks.get(index - 1);
-        completedTask.markAsDone();
     }
 
     /**
@@ -123,10 +125,11 @@ public class TaskList {
      * @return Task
      */
     public Task get(int index) throws InvalidIndexException {
-        if (index >= tasks.size() || index < 0) {
+        try {
+            return tasks.get(index);
+        } catch (IndexOutOfBoundsException exception) {
             throw new InvalidIndexException();
         }
-        return tasks.get(index);
     }
 
     @Override

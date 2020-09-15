@@ -1,4 +1,4 @@
 T | 1 | borrow book | 
 T | 1 | return book | 
 T | 1 | watch a movie | 
-T | 0 | Clean Code | 
+T | 1 | Clean Code | 
