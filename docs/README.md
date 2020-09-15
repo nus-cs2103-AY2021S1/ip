@@ -42,14 +42,10 @@ named `Defeat Gengar` to your task list.<br>
 
 ## Features
 
-<div markdown="block" class="alert alert-info">
-
 **:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `todo NAME`, `NAME` is a parameter which can be used as `todo Defeat Gengar`.
-
-</div>
 
 ### Adding a task: `todo / event / deadline`
 
