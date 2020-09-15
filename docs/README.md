@@ -3,14 +3,14 @@ Duke Task Scheduler is an app that beats your arse to do your stuff. Try it out,
 
 1. [Features](#features)
 2. [Usage](#usage)
-    * [`list`](#list)
-    * [`sort`](#sort)
-    * [`done`](#done)
-    * [`todo`](#todo)
-    * [`deadline`](#deadline)
-    * [`event`](#event)
-    * [`find`](#find)
-    * [`bye`](#bye)
+    * [`list`](#list---listing-tasks)
+    * [`sort`](#sort---sorting-list)
+    * [`done`](#done---marking-tasks-as-done)
+    * [`todo`](#todo---adding-a-todo-to-the-list)
+    * [`deadline`](#deadline---adding-a-deadline-to-the-list)
+    * [`event`](#event---adding-an-event-to-the-list)
+    * [`find`](#find---finding-tasks-that-contain-the-given-word)
+    * [`bye`](#bye---say-goodbye-to-the-bot)
 
 ## Features 
 
