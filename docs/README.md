@@ -75,7 +75,7 @@ Expected outcome:
 Finds a task.
 
 Format: `find KEYWORD`
-* All tasks that contain KEYWORDS will be displayed.
+* All tasks that contain KEYWORD will be displayed.
 
 Example of usage:
 * `find book`
