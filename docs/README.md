@@ -13,9 +13,10 @@
 
 ## Quick Start
 1. Ensure you have Java 11 or above installed in your Computer.
-2. Download the latest Duke.jar from here.
+2. Download the latest Duke.jar.
 3. Copy the file to the folder you want to use as the home folder for Duke.
 4. Double-click the file, and Duke will run. 
+
 ## Features 
 
 ### Add a task with a tag
