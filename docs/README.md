@@ -151,11 +151,11 @@ Here are the matching task(s) in your list:
 
 <br />
 
-### Exit the programe - `exit`
+### Exit the programe - `bye`
 
 Exits the program.
 
-Format: `exit`
+Format: `bye`
 
 <br />
 
