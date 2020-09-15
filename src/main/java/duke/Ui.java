@@ -91,7 +91,7 @@ public class Ui {
     }
 
     /**
-     * Read the input entered by user.
+     * Reads the input entered by user.
      * @return Returns user's input as String value.
      */
     String readCommand() {

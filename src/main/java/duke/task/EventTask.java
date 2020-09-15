@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import duke.exception.DukeException;
+import duke.exception.InvalidDateException;
 
 /**
  * Represents an event task.
@@ -20,15 +20,15 @@ public class EventTask extends Task {
      * Constructs a new instance of an EventTask.
      * @param description Description of event task.
      * @param timing Timing of event task.
-     * @throws DukeException If timing is not in the form of "dd-MM-yyyy HH:mm".
+     * @throws InvalidDateException If timing is not in the form of "dd-MM-yyyy HH:mm".
      */
-    public EventTask(String description, String timing) throws DukeException {
+    public EventTask(String description, String timing) throws InvalidDateException {
         super(description);
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
             this.timing = LocalDateTime.parse(timing, formatter);
         } catch (DateTimeParseException exception) {
-            throw new DukeException("Error! Invalid date format, Please enter the date in the format dd-MM-yyyy HH:mm");
+            throw new InvalidDateException();
         }
     }
 
