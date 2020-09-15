@@ -1,10 +1,11 @@
 package seedu.duke;
 
+import javafx.application.Application;
+
 /**
  * Main part of logic of Duke.
  */
 public class Duke {
-
     /**
      * Holds execution of orders.
      */
@@ -36,5 +37,9 @@ public class Duke {
      */
     public String run(String userInput) {
         return this.executor.execute(userInput);
+    }
+
+    public static void main(String[] args) {
+        Application.launch(Main.class, args);
     }
 }

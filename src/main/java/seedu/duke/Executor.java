@@ -46,6 +46,7 @@ public class Executor {
         String result;
         if (userInput.equals("bye")) {
             result = ui.goodBye();
+            System.exit(0);
         } else if (userInput.equals("list")) {
             result = ui.listTask(taskList);
         } else if (userInput.startsWith("done")) {
