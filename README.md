@@ -24,20 +24,76 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
    | |_| | |_| |   <  __/
    |____/ \__,_|_|\_\___|
    ```
-User Guide:
+# User Guide:
 
+### Setting up and Running the program
 This program when run (running Duke.main()), will display a window that represents a chat window with a bot.
 
-Start by typing anything in the text box at the bottom of the window and instructions/errors will guide you along.
+### How to start
+1. Start by typing anything in the text box at the bottom of the window.
+1. Instruction/error messages will guide you along.
+1. The following are the commands and how to use them.
+1. Formats have to be followed strictly.
 
-Following are the commands and how to use them.
+### Commands and instructions
 
-1) !commands | returns a list of text commands
-2) list | lists out all the current tasks
-3) bye | saves the current tasks into a file and exits program
-4) done | format: "done <task number>", marks a task in the list as done
-5) todo | format: "todo <description>", creates a todo task
-6) deadline | format: "deadline <description> /by <dd/MM/yyyy HHmm>", creates a deadline task
-7) event | format: "event <description> /at <dd/MM/yyyy HHmm>", creates an event task
-8) delete | format: "delete <task number>", deletes a task in the list
-9) find | format: "find <string>", finds tasks with matching string
+#### View all the commands
+
+* _**Format**_ | `!commands`
+
+* Displays a list of text commands in the window. 
+* A shorter version of the following below.
+    
+#### View all the tasks in the list
+
+* _**Format**_ | `list`
+
+* Displays the list of tasks currently in the task list.
+
+#### Quit the program
+
+* _**Format**_ | `bye`
+
+* Saves the current tasks into a file and exits program.
+* File saved is a .txt file.
+* File location will be displayed in the window as well.
+* After which programs closes in 5 seconds.
+
+
+#### Mark a task as done
+
+* _**Format:**_ `done <interger task number>`
+
+* Marks a designated task in the task list as done
+
+#### Add a todo task
+ 
+* _**Format:**_ `todo <description>`
+
+* Adds a todo task to the task list.
+* Populates the description of the task.
+
+#### Add a deadline task
+
+* _**Format:**_ `deadline <description> /by <dd/MM/yyyy HHmm>`
+ 
+* Adds a deadline task to the task list.
+* Populates the description and date time of the task.
+
+#### Add an event task
+
+* _**Format:**_ `event <description> /at <dd/MM/yyyy HHmm>`
+
+* Adds an event task to the task list.
+* Populates the description and date time of the task.
+
+#### Delete a task 
+
+* _**Format**_ | `delete <task number>`
+
+* Deletes a designated task from the task list.
+#### Find a task
+
+* _**Format**_ | `find <string>`
+
+* Display tasks with matching string.
