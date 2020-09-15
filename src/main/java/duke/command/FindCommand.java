@@ -6,17 +6,17 @@ import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
 /**
- * Represents an action to search for Task that contains keywords input by user.
+ * Represents an action to search for Task that contains keyword input by user.
  */
 public class FindCommand extends Command {
 
-    /** Keywords to search for */
+    /** Keyword to search for */
     private String content;
 
     /**
      * Constructs a <code>FindCommand</code> object.
      *
-     * @param content Keywords to search for.
+     * @param content Keyword to search for.
      */
     public FindCommand(String content) {
         super(false);
@@ -25,7 +25,7 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Search for Task in TaskList containing keywords input by user and list them out.
+     * Search for Task in TaskList containing keyword input by user and list them out.
      *
      * @param tasks TaskList to store Task.
      * @param ui Ui to interact with users.
