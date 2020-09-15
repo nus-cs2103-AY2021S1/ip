@@ -26,9 +26,6 @@ public class Main extends Application {
             stage.setTitle("Duke");
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
-            // initializing plus greeting
-
-
         } catch (IOException e) {
             e.printStackTrace();
         }

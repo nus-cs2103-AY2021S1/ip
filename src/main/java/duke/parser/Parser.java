@@ -96,9 +96,13 @@ public class Parser {
      * @param input Details of done command.
      * @return The response string.
      */
-    public static String parseDoneCommand(String input) {
-        int taskNumber = Integer.parseInt(input);
-        return taskList.markTaskAsDone(taskNumber);
+    public static String parseDoneCommand(String input) throws DukeException {
+        if (input.equals("")) {
+            throw new DukeException("You forgot to tell me which task to mark as done.");
+        } else {
+            int taskNumber = Integer.parseInt(input);
+            return taskList.markTaskAsDone(taskNumber);
+        }
     }
 
     /**
@@ -107,11 +111,15 @@ public class Parser {
      * @param userInput Details of tag command.
      * @return The response string.
      */
-    public static String parseTagCommand(String userInput) {
+    public static String parseTagCommand(String userInput) throws DukeException {
         String[] data = userInput.split(" ", 2);
-        int taskNumber = Integer.parseInt(data[0]);
-        String tagName = data[1];
-        return taskList.tagTaskInList(taskNumber, tagName);
+        if (data.length < 2) {
+            throw new DukeException("Tag command in wrong format.");
+        } else {
+            int taskNumber = Integer.parseInt(data[0]);
+            String tagName = data[1];
+            return taskList.tagTaskInList(taskNumber, tagName);
+        }
 
     }
 
@@ -122,11 +130,15 @@ public class Parser {
      * @return The response string.
      */
     public static String parseDeleteCommand(String userInput) throws DukeException {
-        int taskNumber = Integer.parseInt(userInput);
-        if (taskNumber <= taskList.getNumOfTask()) {
-            return taskList.deleteTask(taskNumber);
+        if (userInput.equals("")) {
+            throw new DukeException("You forgot to tell me which task to delete.");
         } else {
-            throw new DukeException("You only have " + taskList.getNumOfTask() + " tasks in your task list.");
+            int taskNumber = Integer.parseInt(userInput);
+            if (taskNumber <= taskList.getNumOfTask()) {
+                return taskList.deleteTask(taskNumber);
+            } else {
+                throw new DukeException("You only have " + taskList.getNumOfTask() + " tasks in your task list.");
+            }
         }
     }
 
@@ -215,14 +227,5 @@ public class Parser {
      */
     public static boolean isExit() {
         return isExit;
-    }
-
-    /**
-     * Returns the taskList.
-     *
-     * @return TaskList.
-     */
-    public static TaskList getTaskList() {
-        return taskList;
     }
 }

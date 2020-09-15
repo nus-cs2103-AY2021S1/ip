@@ -6,11 +6,6 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 
 public class Duke {
-    private static final String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
     private boolean isExit = false;
 
     /**
@@ -39,13 +34,6 @@ public class Duke {
         } catch (DukeException e) {
             return Ui.getErrorMessage(e.getMessage());
         }
-    }
-
-    /**
-     * Sets exit states to true.
-     */
-    public void setExit() {
-        this.isExit = true;
     }
 
     /**

@@ -80,7 +80,7 @@ public class DialogBox extends HBox {
      */
     private void setBackground() {
         Background dukeBackground = new Background(new BackgroundFill(
-                Color.gray(0.7), new CornerRadii(20), new Insets(5, 5, 5, 5)));
+                Color.CORNFLOWERBLUE, new CornerRadii(20), new Insets(5, 5, 5, 5)));
         this.setBackground(dukeBackground);
     }
 }

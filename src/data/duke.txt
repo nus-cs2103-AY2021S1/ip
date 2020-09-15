@@ -1,4 +1,6 @@
-T  0  return book
-D  0  return book  Nov 10 2019
-T  1  say hi  #hi
-T  1  say bye  #bye
+D  1  return book  Sep 22 2020
+T  0  write userguide
+E  1  team meeting  Sep 15 2020
+T  1  shopping  #clothes
+T  0  write email  #to Alice
+E  1  art exhibition  Sep 22 2020

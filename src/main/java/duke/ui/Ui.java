@@ -3,7 +3,6 @@ package duke.ui;
 import java.util.Scanner;
 
 public class Ui {
-    private static final String INDENTATION = "     ";
     private Scanner scanner;
 
     public Ui() {
