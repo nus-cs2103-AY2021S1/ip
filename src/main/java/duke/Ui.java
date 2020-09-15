@@ -124,8 +124,7 @@ public class Ui {
             allTasks += taskToString;
         }
 
-        dividerEnd += (spacing
-                + "You have a total of "
+        dividerEnd += ("You have a total of "
                 + tasks.getSize()
                 + " tasks.");
 
@@ -195,8 +194,10 @@ public class Ui {
     public String help() {
         String helpHeader = "Here are all the commands: ";
         String toDoHelp = "todo {description} : Creates a new ToDo Task";
-        String eventHelp = "event {description} /at {YYYY-MM-DD} : Creates a new Event Task for dd MMM yyyy";
-        String deadlineHelp = "deadline {description} /by {YYYY-MM-DD} : Creates a new Deadline Task for dd MMM yyyy";
+        String eventHelp = "event {description} /at dd/MM/yyyy HH:mm-HH:mm (24 hour clock)" +
+                " : Creates a new Event Task for dd MMM yyyy";
+        String deadlineHelp = "deadline {description} /by dd/MM/yyyy HH:mm (24 hour clock) " +
+                ": Creates a new Deadline Task for dd MMM yyyy";
         String listHelp = "list : Lists all tasks";
         String doneHelp = "done {taskNumber} : Marks a task as done";
         String deleteHelp = "delete {taskNumber} : Deletes a task";
@@ -220,6 +221,7 @@ public class Ui {
                 + findHelp
                 + spacing
                 + byeHelp
+                + spacing
                 + helpHelp);
         return commandsHelp;
     }
