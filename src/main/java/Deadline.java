@@ -28,7 +28,7 @@ public class Deadline extends Task {
    */
   public String getTime() {
     try {
-      Date d1 = new SimpleDateFormat("dd/mm/yyyy HHmm").parse(deadline);
+      Date d1 = new SimpleDateFormat("dd/MM/yyyy HHmm").parse(deadline);
       return new SimpleDateFormat("HH:mm, dd MMM yyyy").format(d1);
     } catch (ParseException e) {
       System.out.println("Invalid format");
