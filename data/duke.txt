@@ -1,0 +1,5 @@
+D / 0 / return book / Sep 23 2020, 10:00 am
+E / 1 / project meeting / Sep 15 2020, 02:30 pm
+T / 1 / buy groceries 
+D / 0 / midterm assignment / Sep 29 2020, 11:59 pm
+T / 0 / borrow book
