@@ -18,7 +18,7 @@ Duke supports the creation of three different types of tasks: [`todo`](#todo---a
 Duke is able to [`list`](#list---listing-all-tasks) the tasks the user has added. Duke displays the type of the task, description of the task and status of the task.
 
 ### Mark task as done
-Duke allows the user to mark a task as [`done`](done-marking-a-task-as-done) once the user has completed the task.
+Duke allows the user to mark a task as [`done`](done---marking-a-task-as-done) once the user has completed the task.
 
 ### Delete tasks
 Duke is able to [`delete`](delete---deleting-a-task) tasks that has already been added.
@@ -40,12 +40,12 @@ Words in `UPPER_CASE` are parameters that should be provided by the user. All pa
 
 Adds a ToDo task to the task list.
 
-Format:
+Format:<br>
 `todo DESCRIPTION`
 
 Example of usage: 
 
-* Command:
+* Command:<br>
 `todo tutorial`
 
 Expected outcome:
@@ -58,12 +58,12 @@ Got it. I've added this task:
 
 Adds a Deadline task to the task list.
 
-Format:
+Format:<br>
 `deadline DESCRIPTION /by YYYY-MM-DD`
 
 Example of usage: 
 
-* Command:
+* Command:<br>
 `deadline submit assignment /by 2020-09-16`
 
 Expected outcome:
@@ -76,12 +76,12 @@ Got it. I've added this task:
 
 Adds a Event task to the task list.
 
-Format:
+Format:<br>
 `event DESCRIPTION /at YYYY-MM-DD`
 
 Example of usage: 
 
-* Command:
+* Command:<br>
 `event finals /at 2020-12-02`
 
 Expected outcome:
@@ -94,16 +94,16 @@ Got it. I've added this task:
 
 Lists all tasks with their respective indexes currently in the task list.
 
-Format:
+Format:<br>
 `list`
 
 Example of usage: 
 
-* Commands used previously:
-`todo tutorial`
-`deadline submit assignment /by 2020-09-16`
-`event finals /at 2020-12-02`
-* Command:
+* Commands used previously:<br>
+`todo tutorial`<br>
+`deadline submit assignment /by 2020-09-16`<br>
+`event finals /at 2020-12-02`<br>
+* Command:<br>
 `list`
 
 Expected outcome:
@@ -117,16 +117,16 @@ Expected outcome:
 
 Marks a task as done. Best used after `list` to get the indexes of tasks.
 
-Format:
+Format:<br>
 `done INDEX`
 
 Example of usage: 
 
-* Commands used previously:
-`todo tutorial`
-`deadline submit assignment /by 2020-09-16`
-`event finals /at 2020-12-02`
-* Command:
+* Commands used previously:<br>
+`todo tutorial`<br>
+`deadline submit assignment /by 2020-09-16`<br>
+`event finals /at 2020-12-02`<br>
+* Command:<br>
 `done 1`
 
 Expected outcome:
@@ -139,17 +139,17 @@ Nice! I've marked this task as done:
 
 Deletes a task from the task list. The rest of the tasks after the deleted tasks will have their indexes shifted up by one. Best used after `list` to get the indexes of tasks.
 
-Format:
+Format:<br>
 `delete INDEX`
 
 Example of usage: 
 
-* Commands used previously:
-`todo tutorial`
-`deadline submit assignment /by 2020-09-16`
-`event finals /at 2020-12-02`
-`done 1`
-* Command:
+* Commands used previously:<br>
+`todo tutorial`<br>
+`deadline submit assignment /by 2020-09-16`<br>
+`event finals /at 2020-12-02`<br>
+`done 1`<br>
+* Command:<br>
 `delete 1`
 
 Expected outcome:
@@ -162,18 +162,18 @@ Noted. I've removed this task:
 
 Finds tasks whose description contain the keyword provided. The indexes of the tasks found correspond to their actual index i.e. the indexes provided in `list`.
 
-Format:
+Format:<br>
 `find KEYWORD`
 
 Example of usage: 
 
-* Commands used previously:
-`todo tutorial`
-`deadline submit assignment /by 2020-09-16`
-`event finals /at 2020-12-02`
-`done 1`
-`delete 1`
-* Command:
+* Commands used previously:<br>
+`todo tutorial`<br>
+`deadline submit assignment /by 2020-09-16`<br>
+`event finals /at 2020-12-02`<br>
+`done 1`<br>
+`delete 1`<br>
+* Command:<br>
 `find finals`
 
 Expected outcome:
@@ -186,19 +186,19 @@ Here are the matching tasks in your list:
 
 Reverts the task list to the last state that made changes to the task list i.e. `todo` `deadline` `event` `done` `delete`.  All subsequent `undo` commands continues to revert the state up to a maximum of four times. The first change made to the task list after running the application for the first time cannot be undone.
 
-Format:
+Format:<br>
 `undo`
 
 Example of usage:
 
-* Commands used previously:
-`todo tutorial`
-`deadline submit assignment /by 2020-09-16`
-`event finals /at 2020-12-02`
-`done 1`
-`delete 1`
-`undo`
-* Command:
+* Commands used previously:<br>
+`todo tutorial`<br>
+`deadline submit assignment /by 2020-09-16`<br>
+`event finals /at 2020-12-02`<br>
+`done 1`<br>
+`delete 1`<br>
+`undo`<br>
+* Command:<br>
 `list`
 
 Expected outcome:
@@ -213,11 +213,11 @@ Expected outcome:
 **A**: Copy the folder `duke.jar` is in to the other computer. Alternatively, just copying `duke.jar` and the folder `data` is enough.
 
 ## Command Summary
-`todo DESCRIPTION`
-`deadline DESCRIPTION /by YYYY-MM-DD`
-`event DESCRIPTION /at YYYY-MM-DD`
-`list`
-`done INDEX`
-`delete INDEX`
-`find KEYWORD`
+`todo DESCRIPTION`<br>
+`deadline DESCRIPTION /by YYYY-MM-DD`<br>
+`event DESCRIPTION /at YYYY-MM-DD`<br>
+`list`<br>
+`done INDEX`<br>
+`delete INDEX`<br>
+`find KEYWORD`<br>
 `undo`
