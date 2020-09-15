@@ -38,10 +38,24 @@ public class DialogBox extends HBox {
         }
         dialog.setText(text);
         if (type == DUKE) {
-            dialog.setStyle("-fx-text-fill: blue;");
+            dialog.setStyle("-fx-border-color: #ffffed ;\n"
+                    + "-fx-border-width: 1;\n"
+                    + "-fx-border-style: solid;\n"
+                    + "-fx-padding: 10 10 10 10;\n"
+                    + "-fx-background-color: #ffffed ;\n"
+                    + "-fx-background-radius: 5;\n"
+                    + "-fx-border-radius: 5;\n"
+                    + "-fx-text-fill: black");
         }
         if (text.contains("OOPS")) {
-            dialog.setStyle("-fx-text-fill: red;");
+            dialog.setStyle("-fx-border-color: #ffffed ;\n"
+                    + "-fx-border-width: 1;\n"
+                    + "-fx-border-style: solid;\n"
+                    + "-fx-padding: 10 10 10 10;\n"
+                    + "-fx-background-color: #ffffed ;\n"
+                    + "-fx-background-radius: 5;\n"
+                    + "-fx-border-radius: 5;\n"
+                    + "-fx-text-fill: red");
         }
         displayPicture.setImage(img);
     }
