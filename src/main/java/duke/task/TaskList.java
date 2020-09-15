@@ -22,7 +22,7 @@ public class TaskList {
     }
 
     /**
-     * Set the save function for this list. The save function will be run whenver the list changes.
+     * Set the save function for this list. The save function will be run whenever the list changes.
      *
      * @param function the save function.
      */

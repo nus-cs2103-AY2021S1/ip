@@ -1,8 +1,5 @@
 package duke.parser;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import duke.command.AddCommand;
@@ -23,7 +20,7 @@ import duke.task.Event;
 import duke.task.Task;
 
 /**
- * This class contains a function to parse user input.
+ * A class containing a single public function to parse user input.
  */
 public class Parser {
 
@@ -42,27 +39,21 @@ public class Parser {
 
         try {
             if (command.equals("bye")) {
-                ensureNoArgs(args, command);
-                return new ByeCommand();
+                return parseByeCommand(command, args);
             } else if (command.equals("list")) {
-                ensureNoArgs(args, command);
-                return new ListCommand();
+                return parseListCommand(command, args);
             } else if (command.equals("done")) {
-                int taskNumber = parseTaskNumber(args, "you have completed", "done 1");
-                return new DoneCommand(taskNumber);
+                return parseDoneCommand(args);
             } else if (command.equals("delete")) {
-                int taskNumber = parseTaskNumber(args, "you want to remove", "delete 1");
-                return new DeleteCommand(taskNumber);
+                return parseDeleteCommand(args);
             } else if (command.equals("todo")) {
-                ensureArgsPresent(args, "Couldn't add todo! The description of a todo cannot be empty.");
-                return new AddCommand(new Task(args));
+                return parseAddCommand(args);
             } else if (command.equals("deadline")) {
                 return new AddCommand(parseDeadline(args));
             } else if (command.equals("event")) {
                 return new AddCommand(parseEvent(args));
             } else if (command.equals("find")) {
-                ensureArgsPresent(args, "I need to know what phrase you would like to search for!");
-                return new FindCommand(args);
+                return parseFindCommand(args);
             } else if (command.equals("edit")) {
                 return parseEditCommand(args);
             } else if (input.isBlank()) {
@@ -75,44 +66,54 @@ public class Parser {
         }
     }
 
-    // helpers for parse function
+    // parse functions for individual commands
 
-    private static void ensureNoArgs(String args, String commandName) throws DukeParsingException {
-        if (!args.isEmpty()) {
-            throw new DukeParsingException(String.format("I don't understand that. Did you mean %s?", commandName));
-        }
+    static ByeCommand parseByeCommand(String command, String args) throws DukeParsingException {
+        ParsingHelper.ensureNoArgs(args, command);
+        return new ByeCommand();
     }
 
-    private static void ensureArgsPresent(String args, String errorString) throws DukeParsingException {
-        if (args.isBlank()) {
-            throw new DukeParsingException(errorString);
-        }
+    static ListCommand parseListCommand(String command, String args) throws DukeParsingException {
+        ParsingHelper.ensureNoArgs(args, command);
+        return new ListCommand();
     }
 
-    private static int parseTaskNumber(String args, String taskDescription, String example)
-            throws DukeParsingException {
-        try {
-            return Integer.parseInt(args);
-        } catch (NumberFormatException e) {
-            throw new DukeParsingException(
-                    String.format("You need to tell me the number of the task %s. Eg. %s", taskDescription, example));
-        }
+    static AddCommand parseAddCommand(String args) throws DukeParsingException {
+        ParsingHelper.ensureArgsPresent(args, "Couldn't add todo! The description of a todo cannot be empty.");
+        return new AddCommand(new Task(args));
     }
 
-    private static EditCommand parseEditCommand(String args) throws DukeParsingException {
+    static DoneCommand parseDoneCommand(String args) throws DukeParsingException {
+        int taskNumber = ParsingHelper.parseTaskNumber(args, "you have completed", "done 1");
+        return new DoneCommand(taskNumber);
+    }
+
+    static DeleteCommand parseDeleteCommand(String args) throws DukeParsingException {
+        int taskNumber = ParsingHelper.parseTaskNumber(args, "you want to remove", "delete 1");
+        return new DeleteCommand(taskNumber);
+    }
+
+    static FindCommand parseFindCommand(String args) throws DukeParsingException {
+        ParsingHelper.ensureArgsPresent(args, "I need to know what phrase you would like to search for!");
+        return new FindCommand(args);
+    }
+
+    static EditCommand parseEditCommand(String args) throws DukeParsingException {
         // TODO: implement multiple edits at once eg. edit 1 /start <start> /end <end>
-        String[] argsSplit;
-        try {
-            argsSplit = splitAround(args, "\\s+/((start)|(end)|(date)|(description))\\s+"); // /start, /end or /date
-        } catch (DukeParsingException e) {
-            throw new DukeParsingException("Couldn't edit item. To edit an item, talk to me using the format:\n"
-                    + "edit <task number> <what to edit> <edited content>");
-        }
-        int taskNumber = parseTaskNumber(argsSplit[0], "you want to edit", "edit 1 /description <new description>");
+
+        String missingArgsMessage = "Couldn't edit item. To edit an item, talk to me using the format:\n"
+                + "edit <task number> <what to edit> <edited content>";
+
+        // split around /start, /end or /date
+        String[] argsSplit = ParsingHelper.splitAround(args, "\\s+/((start)|(end)|(date)|(description))\\s+",
+                missingArgsMessage);
+        int taskNumber = ParsingHelper
+                .parseTaskNumber(argsSplit[0], "you want to edit", "edit 1 /description <new description>");
         String content = argsSplit[1];
+
         if (args.contains("/start") || args.contains("/end") || args.contains("/date")) {
-            ensureArgsPresent(content, "I need to know the new date!");
-            Date newDate = parseDate(content);
+            ParsingHelper.ensureArgsPresent(content, "I need to know the new date!");
+            Date newDate = ParsingHelper.parseDate(content);
             if (args.contains("/start")) {
                 return new EditCommand<>(taskNumber, new EventDateEdit(newDate, EventDateType.START));
             } else if (args.contains("/end")) {
@@ -121,92 +122,35 @@ public class Parser {
                 return new EditCommand<>(taskNumber, new DeadlineDateEdit(newDate));
             }
         } else if (args.contains("/description")) {
-            ensureArgsPresent(content, "I need to know the new task description!");
+            ParsingHelper.ensureArgsPresent(content, "I need to know the new task description!");
             return new EditCommand<>(taskNumber, new DescriptionEdit(content));
         }
 
         throw new DukeParsingException("You need to tell me what you want to edit!"); // TODO better help message
     }
 
-    private static Event parseEvent(String args) throws DukeParsingException {
-        String[] argsSplit;
-        String description;
-        String[] dateStrings;
+    static Event parseEvent(String args) throws DukeParsingException {
+        String missingArgsMessage = "Couldn't add event! To add an event, talk to me using the format "
+                + "event <description> /at <start>-<end>!";
 
-        try {
-            argsSplit = splitAround(args, "\\s+/at\\s+");
-            description = argsSplit[0];
-            dateStrings = splitAround(argsSplit[1], "\\s*-\\s*");
-        } catch (DukeParsingException e) {
-            throw new DukeParsingException("Couldn't add event! To add an event, talk to me using "
-                    + "the format event <description> /at <start>-<end>!");
-        }
-
-        Date start = parseDate(dateStrings[0]);
-        Date end = parseDate(dateStrings[1]);
+        String[] argsSplit = ParsingHelper.splitAround(args, "\\s+/at\\s+", missingArgsMessage);
+        String description = argsSplit[0];
+        String[] dateStrings = ParsingHelper.splitAround(argsSplit[1], "\\s*-\\s*", missingArgsMessage);
+        Date start = ParsingHelper.parseDate(dateStrings[0]);
+        Date end = ParsingHelper.parseDate(dateStrings[1]);
         if (start.after(end)) {
             throw new DukeParsingException("Start date is after end date!");
         }
         return new Event(description, start, end);
     }
 
-    private static Deadline parseDeadline(String args) throws DukeParsingException {
-        String[] argsSplit;
-        String description;
-        try {
-            argsSplit = splitAround(args, "\\s+/by\\s+");
-            description = argsSplit[0];
-        } catch (DukeParsingException e) {
-            throw new DukeParsingException("Couldn't add deadline! To add a deadline, talk to me using "
-                    + "the format deadline <description> /by <date>!");
-        }
-
-        // allow DukeParsingException thrown here to be propagated, since it contains a useful error message
-        // for the user
-        Date date = parseDate(argsSplit[1]);
-
+    static Deadline parseDeadline(String args) throws DukeParsingException {
+        String[] argsSplit = ParsingHelper.splitAround(args, "\\s+/by\\s+", "Couldn't add deadline! "
+                + "To add a deadline, talk to me using the format deadline <description> /by <date>!");
+        String description = argsSplit[0];
+        Date date = ParsingHelper.parseDate(argsSplit[1]);
         return new Deadline(description, date);
     }
 
-    /**
-     * Splits a string into 2 around the first occurrence of a regex pattern. An exception is thrown if the pattern does
-     * not exist, or if either of the tokens are blank.
-     */
-    private static String[] splitAround(String string, String pattern) throws DukeParsingException {
-        int splitSize = 2;
-        String[] argSplit = string.split(pattern, splitSize);
 
-        if (argSplit.length != splitSize) {
-            throw new DukeParsingException(""); // TODO: write displayable error message, else throw another error type
-        }
-
-        for (String s : argSplit) {
-            if (s.isBlank()) {
-                throw new DukeParsingException("");
-            }
-        }
-        return argSplit;
-    }
-
-    private static Date parseDate(String dateString) throws DukeParsingException {
-        final DateFormat dateOnly = new SimpleDateFormat("d/M/y");
-        // TODO: improve time parsing - this accepts nonsense time formats eg. 27:00. Hm also does not work for some
-        // reason.
-        final DateFormat withTime = new SimpleDateFormat("d/M/y H:m");
-
-        try {
-            return withTime.parse(dateString);
-        } catch (ParseException e) {
-            // ignore, because we want to try parsing with date only after this
-        }
-
-        try {
-            return dateOnly.parse(dateString);
-        } catch (ParseException e) {
-            throw new DukeParsingException(
-                    "Invalid date format! I only understand dates in the format day/month/year time "
-                            + "or day/month/year. Eg. 15/01/2020 17:00 for 15th January 5pm");
-        }
-
-    }
 }
