@@ -1,2 +1,6 @@
-D | 0 | assignment | 20/9/2020 2359
+D | 0 | project | 01/01/2020 1300
+E | 0 | meeting | 21/9/2020 1400-1500
+D | 0 | assignment 3 | 21/10/2020 2359
+T | 0 | workout
 D | 1 | return book | 6/6/2020 1800
+E | 1 | training | 23/9/2020 1500-1700
