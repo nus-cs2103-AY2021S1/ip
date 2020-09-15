@@ -2,7 +2,7 @@
 
 *Keane Chan Jun Yu | A0205678W*
 
-<p align="center"><img src="Ui.png" width="75%"/></p>
+<p align="center"><img src="Ui.png" width="100%"/></p>
 
 Welcome to IncrediBot, a task manager app which manages your todos, events and deadlines!
 
