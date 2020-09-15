@@ -86,7 +86,7 @@ Duke will shut down and save all the data.
 |Adding a todo task|`add todo <description>`|
 |Adding a deadline|`add deadline <description> /by <deadline>`|
 |Adding an event|`add event <description> /at <date/place>`|
-|Listing tasks|`list`|
+|Listing tasks|`list`| 
 |Deleting a task|`delete <task index>`|
 |Marking a task as done|`done <task index>`|
 |Finding tasks with keywords|`find <querystring>`|
