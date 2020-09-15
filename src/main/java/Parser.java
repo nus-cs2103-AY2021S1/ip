@@ -1,6 +1,7 @@
 public class Parser {
 
     private static TaskList listOfContent;
+    private static boolean isEnded = false;
 
     /**
      * Returns a boolean to indicate whether program should exit.
@@ -9,6 +10,9 @@ public class Parser {
      */
     public static boolean exit(String input) {
         return input.equals("bye");
+    }
+    public static boolean isEnded() {
+        return isEnded;
     }
 
     public TaskList getListOfContent() {
@@ -160,6 +164,7 @@ public class Parser {
         String firstChar = isDone[0];
         if (input.equals("bye")) {
             Storage.write(listOfContent);
+            isEnded = true;
             return Ui.exitMessage();
         }
         if (input.equals("help")) {

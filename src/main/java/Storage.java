@@ -103,7 +103,7 @@ public class Storage {
         Path getFilePath = Paths.get(s, "data", "bill.txt");
         filePath = String.valueOf(getFilePath);
         try {
-            FileWriter fileWriter = new FileWriter(filePath, true);
+            FileWriter fileWriter = new FileWriter(filePath, false);
             for (Task task : listOfContent.getTheList()) {
                 fileWriter.write(task.timeConverted() + "\n");
             }

@@ -8,6 +8,7 @@ public class Bill {
     private static final String filePath = "./data/bill.txt";
     private static List<Task> listOfContents;
     private static Parser parse;
+    private static boolean isEnded = false;
 
     Bill() throws IOException {
         Ui ui = new Ui(filePath);
@@ -21,10 +22,16 @@ public class Bill {
 
     public String getResponse(String input) {
         try {
+            if (Parser.isEnded()) {
+                this.isEnded = true;
+            }
             return parse.processInput(input);
         } catch (InvalidException e) {
             return Ui.getErrorMessage(e.getMessage());
         }
+    }
+    public static boolean isEnded() {
+        return isEnded;
     }
 }
 
