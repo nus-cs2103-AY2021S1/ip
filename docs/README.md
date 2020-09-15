@@ -87,8 +87,8 @@ Duke will shut down and save all the data.
 |Adding a deadline|`add deadline <description> /by <deadline>`|
 |Adding an event|`add event <description> /at <date/place>`|
 |Listing tasks|`list`| 
-|Deleting a task|`delete <task index>`|
-|Marking a task as done|`done <task index>`|
-|Finding tasks with keywords|`find <querystring>`|
+|Deleting a task|`delete <index>`|
+|Marking a task as done|`done <index>`|
+|Finding tasks with keywords|`find <keyword>`|
 |Quitting Duke|`bye`|
 
