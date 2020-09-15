@@ -1,3 +1,7 @@
+package duke.component;
+
+import duke.task.Task;
+
 import java.util.ArrayList;
 
 /**
@@ -28,8 +32,11 @@ public class Ui {
      * @return String of lists of tasks in ArrayList
      */
     public static String printList(ArrayList<Task> TaskList) {
+
         String output = "";
-        assert !TaskList.isEmpty() : "Task list is empty!";
+        if (TaskList.isEmpty()) {
+            return "You have no tasks!";
+        }
 
         for (Task task : TaskList) {
             output += (TaskList.indexOf(task) + 1) + "." + task + "\n";

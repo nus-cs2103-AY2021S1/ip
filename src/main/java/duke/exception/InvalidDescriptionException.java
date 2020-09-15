@@ -1,3 +1,5 @@
+package duke.exception;
+
 public class InvalidDescriptionException extends DukeException {
     /**
      * Exception class that handles the case where no description is provided to the task

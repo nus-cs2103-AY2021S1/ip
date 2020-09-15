@@ -1,3 +1,5 @@
+package duke.exception;
+
 /**
  * handles the case where task type/command is invalid
  *

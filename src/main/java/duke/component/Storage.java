@@ -1,3 +1,9 @@
+package duke.component;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.BufferedReader;
@@ -9,7 +15,7 @@ import java.io.FileOutputStream;
  */
 public class Storage {
 
-    private String filePath;
+    String filePath;
 
     public Storage(String filePath) {
         this.filePath = filePath;

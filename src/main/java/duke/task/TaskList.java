@@ -1,3 +1,9 @@
+package duke.task;
+
+import duke.component.Storage;
+import duke.component.Ui;
+import duke.exception.DukeException;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -67,7 +73,8 @@ public class TaskList {
             return "There are no tasks!\n";
         }
 
-        return Ui.printList(this.taskArrayList);
+        String s = Ui.printList(this.taskArrayList);
+        return s;
     }
 
     /**

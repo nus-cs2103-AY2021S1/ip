@@ -1,3 +1,10 @@
+package duke;
+
+import duke.component.Parser;
+import duke.component.Storage;
+import duke.component.Ui;
+import duke.task.TaskList;
+
 import java.util.Scanner;
 
 /**

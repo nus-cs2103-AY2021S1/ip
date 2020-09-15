@@ -1,3 +1,5 @@
+package duke.exception;
+
 /**
  * Throwable exception to be caught in other classes and methods
  */

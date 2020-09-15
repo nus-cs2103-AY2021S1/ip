@@ -1,3 +1,5 @@
+package duke.task;
+
 /**
  * Handles instances of todos, a subclass of Task with no date but only description
  *

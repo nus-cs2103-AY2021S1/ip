@@ -12,15 +12,36 @@ T | 1 | enjoy life
 T | 1 | live life
 T | 1 | enjoy life
 D | 0 | homework | Sep 2 2020
-T | 0 | live life
-T | 0 | live life
+T | 1 | live life
+T | 1 | live life
 T | 1 | enjoy life
 T | 1 | read a book
 T | 0 | borrow book
 T | 1 | enjoy life
-T | 0 | enjoy life
-T | 0 | enjoy life
-T | 0 | live life
+T | 1 | enjoy life
+T | 1 | enjoy life
+T | 1 | live life
 D | 0 | homework Aug 8 2020E | 1 | concert Aug 8 2019
+T | 1 | live life
+D | 0 | homework Aug 8 2020E | 0 | concert Jul 7 2020T | 1 | enjoy life
+T | 1 | live life
+T | 1 | live life
+T | 1 | live life
+T | 1 | live life
+T | 1 | live life
+T | 1 | live life
+T | 1 | live life
+T | 1 | live life
+T | 1 | enjoy life
+T | 1 | enjoy life
+T | 1 | live life
+T | 1 | live life
+T | 1 | live life
+T | 1 | enjoy life
+D | 0 | homework Aug 8 2020T | 1 | enjoy life
+T | 0 | Austin 3:16 says I just whooped your ass
+T | 1 | live life
+T | 1 | live life
+T | 1 | enjoy life
 T | 0 | live life
-D | 0 | homework Aug 8 2020E | 0 | concert Jul 7 2020
+T | 0 | live life
