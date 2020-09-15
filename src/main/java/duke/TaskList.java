@@ -1,7 +1,6 @@
 package duke;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import duke.task.Task;
 import duke.ui.Ui;
@@ -12,6 +11,7 @@ import duke.ui.Ui;
 public class TaskList {
     private Storage savedStorage;
     private List<Task> allTasks;
+    private static HashMap<Integer, Task> matchingTasks;
 
     /**
      * Creates an empty TaskList.
@@ -19,6 +19,10 @@ public class TaskList {
     public TaskList() {
         this.savedStorage = new Storage();
         this.allTasks = this.savedStorage.getSavedTasks();
+    }
+
+    public int getNumberOfTasks() {
+        return this.allTasks.size();
     }
 
     /**
@@ -103,26 +107,46 @@ public class TaskList {
      * @return response to User.
      */
     public String matchTasks(String toMatch) {
-        List<Task> matchingTasks = new ArrayList<>();
-        for (Task task : this.allTasks) {
+        TaskList.matchingTasks = new HashMap<>();
+        checkAllTasksForMatch(toMatch);
+        return matchTasksWithOffset(toMatch, 1);
+    }
+
+    private void checkAllTasksForMatch(String toMatch) {
+        for (int i = 0; i < this.allTasks.size(); i++) {
+            Task task = this.allTasks.get(i);
             if (task.canMatch(toMatch)) {
-                matchingTasks.add(task);
+                TaskList.matchingTasks.put(i , task);
             }
         }
+    }
 
+    private String printMatchingTasks( String toMatch) {
         String printMatchingTasks;
-        if (matchingTasks.size() == 0) {
+        if (TaskList.matchingTasks.size() == 0) {
             printMatchingTasks = "There are no tasks that match " + toMatch + "\n";
         } else {
             printMatchingTasks = "Matching tasks: \n";
-            for (Task task : matchingTasks) {
+            for (Task task : TaskList.matchingTasks.values()) {
                 printMatchingTasks = printMatchingTasks.concat(task + "\n");
             }
         }
         return Ui.printMessage(printMatchingTasks);
     }
 
-    public int getNumberOfTasks() {
-        return this.allTasks.size();
+    private String matchTasksWithOffset( String toMatch, int offset) {
+       try {
+           int offsetLimit = 5;
+           int substringEndIndex = toMatch.length() - offset;
+           String toMatchOffset = toMatch.substring(0, substringEndIndex);
+           if (offset == offsetLimit) {
+               return this.printMatchingTasks( toMatch);
+           } else {
+               checkAllTasksForMatch(toMatchOffset);
+               return matchTasksWithOffset( toMatch, offset+1);
+           }
+       } catch (StringIndexOutOfBoundsException e) {
+           return this.printMatchingTasks(toMatch);
+       }
     }
 }
