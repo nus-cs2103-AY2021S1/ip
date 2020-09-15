@@ -34,7 +34,7 @@ public class WindowDisplay extends Application {
     private Stage stagePointer;
 
     //@@author Jeffry Lum-reused
-    //Reused from sub pages under https://se-education.org/guides/tutorials/javaFx.html with minor modifications
+    //Code below reused from sub pages under https://se-education.org/guides/tutorials/javaFx.html with minor modifications
     @Override
     public void start(Stage stage) {
         //Step 1. Setting up required components
@@ -102,13 +102,16 @@ public class WindowDisplay extends Application {
     // below are private methods only used in this class
 
     private void mySetup(Stage stage) {
-        stagePointer = stage;
         TextCacher.cacheStartMessage();
         flushTextCache();
 
-        Path pathToSave = Paths.get(System.getProperty("user.home"), "ipSave.txt");
+        stagePointer = stage;
 
+        Path pathToSave = Paths.get(System.getProperty("user.home"), "ipSave.txt");
         TaskList taskList = FileManager.readFromSave(pathToSave);
+        
+        flushTextCache();
+
         commandParserAndLogic = new CommandParserAndLogic(taskList, pathToSave);
         // set up done
         TextCacher.cachePromptMsg();
