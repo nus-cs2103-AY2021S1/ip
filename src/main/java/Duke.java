@@ -1,5 +1,3 @@
-//package duke;
-
 import java.io.IOException;
 import java.util.*;
 import java.io.File;
@@ -41,9 +39,6 @@ public class Duke {
     }
 
     public static void main(String[] args) throws DukeException, IOException {
-        //File file = new File("duke/out/todo.txt");
-        //file.isDirectory();
-
         new Duke("out/todo.txt").run();
 
     }

@@ -1,0 +1,3 @@
+[T] [✓] sleep
+[D] [✓] shower  by: 11
+[D] [✓] proj  by: tmr
