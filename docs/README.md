@@ -2,11 +2,16 @@
 DukePenguin is a desktop app for managing tasks with the help of Graphical User Interface (GUI). It has fun and simple UI interaction during execution which makes it more user friendly than other similar GUI apps
 
 # Table of contents
-1. [Quick Start](#Quick Start)
+1. [Quick Start](#QuickStart)
 1. [Features](#Features)
+    1. [Adding Tasks](#Add)
+    1. [Displaying Tasks](#Display)
+    1. [Deleting Tasks](#Delete)
+    1. [Marking Tasks](#Mark)
+    1. [Terminating Program ](#Terminate)
 1. [Usage](#Usage)
 
-## Quick Start
+## Quick Start <a name="QuickStart"></a>
 1. Ensure you have Java Version 11 or above on your computer. Click [here](https://www.oracle.com/java/technologies/javase/jdk11-archive-downloads.html) to download if not.
 1. Download [DukePenguin_v0.2](https://github.com/Jaylenlee/ip/releases/tag/v0.2)
 1. Open the DukePenguin_v0.2 to start using :)
@@ -17,9 +22,9 @@ Alternatively you can also open it with terminal:
 1. Type java -jar DukePenguin_v0.2.jar and enter.
 1. You can now use DukePenguin.
 
-## Features 
+## Features <a name="Features"></a>
 
-### Adding tasks:
+### Adding tasks: <a name="Add"></a>
 #### Todo tasks: `todo`
  - Adds a task to be done in the future without any time restriction.
  [API](#todo) 
@@ -32,7 +37,7 @@ Alternatively you can also open it with terminal:
  - Adds a task to be done in the future within a specific time range.
  [API](#event) 
  
-### Displaying tasks:
+### Displaying tasks: <a name="Display"></a>
 #### List tasks: `list`
  - Displays a indexed list of available tasks.
  [API](#list) 
@@ -45,22 +50,22 @@ Alternatively you can also open it with terminal:
 - Sorts a indexed list of available tasks by their type and then description.
  [API](#sort) 
  
-### Deleting tasks:
+### Deleting tasks: <a name="Delete"></a>
 #### Delete tasks: `delete`
 - Deletes a task at a particular index of the list.
  [API](#delete) 
   
-### Marking tasks:
+### Marking tasks: <a name="Mark"></a>
 #### Done tasks: `Done`
  - Marks a task at a particular index of the list to be done. 
  [API](#done) 
   
-### Terminating program:
+### Terminating program: <a name="Terminate"></a>
 #### Exit: `bye`
 - Terminates and exits the program. 
 [API](#bye) 
    
-## Usage
+## Usage <a name="Usage"></a>
 ### `todo` <a name="todo"></a>
  - adds a task without time restriction to list 
 
