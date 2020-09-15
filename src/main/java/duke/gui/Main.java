@@ -14,7 +14,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke("data/duke.Duke.txt");
+    private Duke duke = new Duke("data/data");
 //    private Duke duke = new Duke("");
 //    private Duke duke = new Duke("data/Duke.txt");
 

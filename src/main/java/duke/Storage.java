@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -24,14 +25,15 @@ public class Storage {
 
     public ArrayList<Task> loadData() throws DukeException {
         try {
-            File dir = new File(filePath);
+            File dir = new File("data");
             if (!dir.exists()) {
-                dir.mkdir();
+                dir.mkdirs();
+                FileWriter fw = new FileWriter("data");
+                fw.close();
             }
-            Scanner data = new Scanner(dir);
-
-            while (data.hasNextLine()) {
-                String curr = data.nextLine();
+            Scanner f = new Scanner(new File(this.filePath));
+            while (f.hasNext()) {
+                String curr = f.nextLine();
                 String[] info = curr.split(", ", 4);
                 Task newTask = generateNewTask(info);
                 txtData.add(newTask);
@@ -41,6 +43,8 @@ public class Storage {
             throw new DukeException("Saved Data not found");
         } catch (DateTimeParseException ex2) {
             throw new DukeException("Date/Time incorrect format");
+        } catch (IOException ex3) {
+            throw new DukeException("Something went wrong...");
         }
     }
 
@@ -68,7 +72,7 @@ public class Storage {
 
     public void overwriteData(ArrayList<Task> data) throws IOException {
         try {
-            FileWriter fw = new FileWriter(this.filePath);
+            FileWriter fw = new FileWriter("data/data");
             String newData = "";
             for (Task k : data) {
                 String textToAdd = k.storageForm();
@@ -81,4 +85,5 @@ public class Storage {
         }
     }
 }
+
 
