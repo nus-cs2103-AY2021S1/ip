@@ -50,37 +50,24 @@ public class Storage {
             Scanner scanner = new Scanner(storageFile);
             while (scanner.hasNextLine()) {
                 String currentLine = scanner.nextLine();
-                String[] wordsParsed = currentLine.split(" | ");
-//                for(int i=0;i<wordsParsed.length;i++){
-//                    System.out.println(i+": "+wordsParsed[i]);
-//                }
+                String[] wordsParsed = currentLine.split(" \\| ");
+
                 String isTaskDone = wordsParsed[2].equals("1")
                         ? "true"
                         : "false";
-//                System.out.println(wordsParsed[4]);
                 switch (wordsParsed[0]) {
                     case "T":
-                        Task todo = new Todo(wordsParsed[4]);
+                        Task todo = new Todo(wordsParsed[2]);
                         todo.setStatus(isTaskDone);
                         listOfTasks.add(todo);
                         break;
                     case "D":
-                        String deadlineDate = "";
-                        for (int i = 6; i < wordsParsed.length; i++) {
-                            deadlineDate = deadlineDate + wordsParsed[i] + " ";
-                        }
-//                        deadlineDate = deadlineDate.substring(5);
-                        Task deadline = new Deadline(wordsParsed[4], deadlineDate);
+                        Task deadline = new Deadline(wordsParsed[2], wordsParsed[3]);
                         deadline.setStatus(isTaskDone);
                         listOfTasks.add(deadline);
                         break;
                     case "E":
-                        String eventDate = "";
-                        for (int i = 6; i < wordsParsed.length; i++) {
-                            eventDate = eventDate + wordsParsed[i] + " ";
-                        }
-//                        eventDate = eventDate.substring(3);
-                        Task event = new Event(wordsParsed[4], eventDate);
+                        Task event = new Event(wordsParsed[4], wordsParsed[3]);
                         event.setStatus(isTaskDone);
                         listOfTasks.add(event);
                         break;

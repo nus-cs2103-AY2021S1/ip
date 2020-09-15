@@ -40,7 +40,7 @@ public class Parser {
      */
     public static String processCommand(String command) throws Exception {
 
-        if (command.equals("list")) {
+        if (command.contains("list")) {
 
             return taskList.printTaskList();
 
