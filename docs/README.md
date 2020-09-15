@@ -57,6 +57,8 @@ Adds a To-Do task to the task list with the specified task name.
 
 ![todo image](images/todo.png)
 
+### **Usage**
+
 ### `deadline TASKNAME /by YYYY-MM-DD` - Adds a Deadline task to the task list
 
 Adds a Deadline task to the task list with the specified task name and date to be completed by.
@@ -68,6 +70,8 @@ Adds a Deadline task to the task list with the specified task name and date to b
 **Expected outcome:**
 
 ![deadline image](images/deadline.png)
+
+### **Usage**
 
 ### `event TASKNAME /by YYYY-MM-DD` - Adds a Event task to the task list
 
