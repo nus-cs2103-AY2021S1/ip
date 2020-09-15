@@ -53,11 +53,11 @@ public class Duke {
         } else if (cmd == Command.NOTES) {
             result = Ui.print(notes.toString());
         } else if (cmd == Command.NEW) {
-            isWriting = true;
-            String noteName = in.substring(Parser.NEW_LENGTH);
-            if (noteName.length() == 0) {
+            if (in.length() <= Parser.NEW_LENGTH) {
                 result = Ui.errorMsg("enter a note name! e.g. note mynote");
             } else {
+                isWriting = true;
+                String noteName = in.substring(Parser.NEW_LENGTH);
                 result = Ui.print("new note added! now type in the content of your note.");
                 tempNote = new Note(noteName);
                 notes.add(tempNote);
@@ -69,68 +69,76 @@ public class Duke {
             result = Ui.print("your note has been saved!");
         } else if (cmd == Command.VIEW) {
             int current;
-            try {
-                assert in.length() >= Parser.VIEW_LENGTH : "input is too short";
-                current = Integer.parseInt(in.substring(Parser.VIEW_LENGTH));
-                current--;
-                Note note;
-                if (current < 0 || current >= notes.size()) {
-                    result = Ui.errorMsg("that is not the number of a note in the list!");
-                } else {
-                    note = notes.get(current);
-                    result = Ui.print(note.getContent());
-                }
-            } catch (Exception e){
+            if (in.length() <= Parser.VIEW_LENGTH) {
                 result = Ui.errorMsg("you haven't entered a note number to view!");
+            } else {
+                try {
+                    current = Integer.parseInt(in.substring(Parser.VIEW_LENGTH));
+                    current--;
+                    Note note;
+                    if (current < 0 || current >= notes.size()) {
+                        result = Ui.errorMsg("that is not the number of a note in the list!");
+                    } else {
+                        note = notes.get(current);
+                        result = Ui.print(note.getContent());
+                    }
+                } catch (Exception e) {
+                    result = Ui.errorMsg("you haven't entered a note number to view!");
+                }
             }
         } else if (cmd == Command.FIND) {
-            assert in.length() >= Parser.FIND_LENGTH : "input is too short";
-            String keyword = in.substring(Parser.FIND_LENGTH);
-            if (keyword.length() == 0) {
+            if (in.length() <= Parser.FIND_LENGTH) {
                 result = Ui.errorMsg("you haven't entered a search keyword!");
             } else {
+                String keyword = in.substring(Parser.FIND_LENGTH);
+                assert keyword.length() > 0 : "keyword does not exist";
                 result = Ui.print("here's the list of tasks that contain the keyword!") + Ui.print(tasks.findTasks(keyword).toString());
             }
         } else if (cmd == Command.DONE) {
-            int current;
-            try {
-                assert in.length() >= Parser.DONE_LENGTH : "input is too short";
-                current = Integer.parseInt(in.substring(Parser.DONE_LENGTH));
-                current--;
-                Task task;
-                if (current < 0 || current >= tasks.size()) {
-                    result = Ui.errorMsg("that is not the number of a task in the list!");
-                } else {
-                    task = tasks.get(current);
-                    assert task != null : "task is null";
-                    if (task.isDone) {
-                        result = Ui.errorMsg("you have already completed " + task.task + "!");
-                    } else {
-                        task.complete();
-                        result = Ui.print("congrats on finishing your task :) it's marked as done:\n\t" + task);
-                    }
-
-                }
-            } catch (Exception e){
+            if (in.length() <= Parser.DONE_LENGTH) {
                 result = Ui.errorMsg("you haven't entered a task number to complete!");
+            } else {
+                int current;
+                try {
+                    current = Integer.parseInt(in.substring(Parser.DONE_LENGTH));
+                    current--;
+                    Task task;
+                    if (current < 0 || current >= tasks.size()) {
+                        result = Ui.errorMsg("that is not the number of a task in the list!");
+                    } else {
+                        task = tasks.get(current);
+                        assert task != null : "task is null";
+                        if (task.isDone) {
+                            result = Ui.errorMsg("you have already completed " + task.task + "!");
+                        } else {
+                            task.complete();
+                            result = Ui.print("congrats on finishing your task :) it's marked as done:\n\t" + task);
+                        }
+                    }
+                } catch (Exception e){
+                    result = Ui.errorMsg("you haven't entered a task number to complete!");
+                }
             }
         } else if (cmd == Command.DELETE){
-            int current;
-            try {
-                assert in.length() >= Parser.DELETE_LENGTH : "input is too short";
-                current = Integer.parseInt(in.substring(Parser.DELETE_LENGTH));
-                current--;
-                Task task;
-                if (current < 0 || current >= tasks.size()) {
-                    result = Ui.errorMsg("that is not the number of a task in the list!");
-                } else {
-                    task = tasks.get(current);
-                    assert task != null : "task is null";
-                    tasks.delete(current);
-                    result = Ui.print("i've removed the following task from the list:\n\t" + task + "\nnow you have " + tasks.size() + " items in your tasklist.");
-                }
-            } catch (Exception e){
+            if (in.length() <= Parser.DELETE_LENGTH) {
                 result = Ui.errorMsg("you haven't entered a task number to delete!");
+            } else {
+                int current;
+                try {
+                    current = Integer.parseInt(in.substring(Parser.DELETE_LENGTH));
+                    current--;
+                    Task task;
+                    if (current < 0 || current >= tasks.size()) {
+                        result = Ui.errorMsg("that is not the number of a task in the list!");
+                    } else {
+                        task = tasks.get(current);
+                        assert task != null : "task is null";
+                        tasks.delete(current);
+                        result = Ui.print("i've removed the following task from the list:\n\t" + task + "\nnow you have " + tasks.size() + " items in your tasklist.");
+                    }
+                } catch (Exception e){
+                    result = Ui.errorMsg("you haven't entered a task number to delete!");
+                }
             }
         } else if (cmd == Command.ADD){
             Task temp = Parser.getTask(in);

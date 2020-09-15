@@ -73,7 +73,9 @@ public class Parser {
     public static Task getTask(String in) {
         String taskName;
         Task temp = null;
-        if (in.startsWith("todo ")){
+        if (in.equals(TODO) | in.equals(EVENT) | in.equals(DEADLINE)) {
+            msg = Ui.errorMsg("the task description cannot be nothing D:");
+        } else if (in.startsWith("todo ")){
             taskName = in.substring(TODO_LENGTH);
             if (taskName.length() == 0) {
                 msg = Ui.errorMsg("the task description cannot be nothing D:");
@@ -104,10 +106,10 @@ public class Parser {
             } else if (ind - 1 <= EVENT_LENGTH) {
                 msg = Ui.errorMsg("the task description cannot be nothing D:");
             } else {
-                taskName = in.substring(EVENT_LENGTH,ind - 1);
+                taskName = in.substring(EVENT_LENGTH, ind - 1);
                 LocalDateTime time = LocalDateTime.parse(in.substring(ind + AT_LENGTH),
                         dateFormat);
-                temp = new Event(taskName,time);
+                temp = new Event(taskName, time);
             }
         }
         return temp;
