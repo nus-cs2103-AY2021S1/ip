@@ -7,7 +7,7 @@ _Ikurabowl_ is a **desktop app for tasks and todos, optimised for use via a Comm
 
 ## Quick start
 
-1. Ensure you have Java `11` or above installed in your Computer.
+1. Ensure you have Java *11* or above installed in your Computer.
 
 1. Download the latest `ikurabowl.jar` from [here](https://github.com/zhiayang/ip/releases) and save it to the folder you want to use as the _home folder_ for _ikurabowl_.
 
@@ -20,9 +20,7 @@ _Ikurabowl_ is a **desktop app for tasks and todos, optimised for use via a Comm
 
 ## Features
 
-<div markdown="block" class="alert alert-info">
-
-**:information_source: Notes about the command format:**<br>
+**Notes about the command format:**<br>
 
 * Items in angled brackets (eg: `<description>`) are the inputs from the user.
 * Items in square brackets (eg: `[date]`) are optional inputs from the user.
@@ -30,7 +28,7 @@ _Ikurabowl_ is a **desktop app for tasks and todos, optimised for use via a Comm
 * All arguments can contain whitespace; the argument for that parameter ends either at the end of the input, or when the next parameter delimiter (ie. `/foo`) is encountered.
 * The date format is `YYYY-MM-DD` in all instances.
 
-</div>
+<hr />
 
 ## Types of Tasks
 
@@ -59,7 +57,8 @@ An Event is functionally the same as a Deadline, in that it also has a date comp
 
 
 
-
+<hr />
+<br />
 
 
 ## Commands
@@ -70,14 +69,13 @@ Creates a new Todo task.
 
 Format: `todo <title> [/desc <description>]​`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-If the description is not specified, then it is empty.
-</div>
+**Tip:** if the description is not specified, then it is empty.
 
 Examples:
 * `todo Buy 700 eggs /desc required to bake a huge cake.`
 * `todo Buy 30 cartons of milk`
 
+<br />
 
 ### Adding an Event: `event`
 
@@ -85,15 +83,14 @@ Creates a new Event; note that the date is mandatory.
 
 Format: `event <title> /at <date> [/desc <description>​]`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-The date and description can come in any order, as long as the date is present.
-</div>
+**Tip:** the date and description can come in any order, as long as the date is present.
 
 Examples:
 * `event Massive birthday party /at 2020-12-31`
 * `event Clean up the mess /desc I'm sure there will be a lot /at 2021-01-01`
 
 
+<br />
 
 ### Adding an Deadline: `deadline`
 
@@ -106,12 +103,18 @@ Examples:
 * `deadline Invite people /desc I'm sure there will be a lot /by 2020-11-18`
 
 
+
+<br />
+
 ### Listing all tasks : `list`
 
 Shows a list of all the tasks that are tracked.
 
 Format: `list`
 
+
+
+<br />
 
 ### Deleting all tasks : `reset`
 
@@ -120,6 +123,8 @@ Deletes all tasks from the list. Note that this is irreversible!
 Format: `reset`
 
 
+
+<br />
 
 ### Completing a task : `done`
 
@@ -131,6 +136,9 @@ Example:
 * `done 3`
 
 
+
+<br />
+
 ### Deleting a task : `delete`
 
 Delete a task. This takes the task number, similar to `done`.
@@ -141,6 +149,8 @@ Example:
 * `delete 3`
 
 
+
+<br />
 
 ### Editing a task : `edit`
 
@@ -158,6 +168,8 @@ Examples:
 
 
 
+<br />
+
 ### Searching for a task: `find`
 
 Finds persons whose names contain *any* of the given keywords.
@@ -174,11 +186,19 @@ Format: `find <keyword> [<keyword>]...`
 Examples:
 * `find eggs` returns `Buy eggs` and `Dispose of Eggs`
 
+
+
+<br />
+
 ### Exiting the program : `quit`
 
 Exits the program.
 
 Format: `quit`
+
+
+
+<br />
 
 ### Saving the data
 
