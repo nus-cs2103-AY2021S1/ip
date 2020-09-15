@@ -71,7 +71,7 @@ public class Ui {
             stringBuilder.append("Here are the tasks in the list:\n");
             for (int i = 0; i < noOfTasks; i++) {
                 Task task = listOfTasks.get(i);
-                stringBuilder.append((i + 1) + "." + task + "\n");
+                stringBuilder.append((i + 1) + ". " + task + "\n");
             }
         }
         return stringBuilder.toString();
@@ -161,12 +161,32 @@ public class Ui {
             stringBuilder.append("Here are the task or tasks that match with this keyword:\n");
             for (int i = 0; i < noOfTasks; i++) {
                 Task task = matchingTasks.get(i);
-                stringBuilder.append((i + 1) + "." + task + "\n");
+                stringBuilder.append((i + 1) + ". " + task + "\n");
             }
         }
         return stringBuilder.toString();
     }
 
+    /**
+     * Displays the help message.
+     *
+     * @return The help message.
+     */
+    public String displayHelp() {
+        String helpMessage = "Hi, here is a list of commands that I can recognize: \n"
+                + "1. 'todo TASK_NAME': this adds a ToDo task.\n"
+                + "2. 'deadline TASK_NAME /by YYYY-MM-DD': this adds a Deadline task.\n"
+                + "3. 'event TASK_NAME /at YYYY-MM-DD': this adds an Event task.\n"
+                + "4. 'list': this lists all the tasks you have now.\n"
+                + "5. 'done INDEX': this marks the task at the specified index as done. The index refers to "
+                + "the index number on the list.\n"
+                + "6. 'delete INDEX': this deletes the task at the specified index. The index refers to the index "
+                + "number on the list.\n"
+                + "7. 'find KEYWORD': this finds the tasks in the list that matches the keyword.\n"
+                + "8. 'bye': exits the program.\n"
+                + "9. 'help': this shows you the help message that lists the valid formats of the commands.\n";
+        return helpMessage;
+    }
 
 
 }
