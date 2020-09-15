@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -82,7 +84,7 @@ public class Parser {
             }
             Storage.todoToFile(newItem);
             System.out.println("new task added: " + newItem.toString());
-            System.out.println("You now have " + itemList.size() + " tasks in your list!");
+            System.out.println("You now have " + (itemList.size() + 1) + " tasks in your list!");
         }
 
         //list down the contents in the list
@@ -91,7 +93,7 @@ public class Parser {
             System.out.println("Here is your list: ");
             for (int i = 0; i < itemList.size(); i++) {
                 Task task = itemList.get(i);
-                System.out.println((i+1) + ". "+ task.toString());
+                System.out.println((i+1) + " " + task.toString());
             }
         }
 

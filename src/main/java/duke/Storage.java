@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -24,7 +26,7 @@ public class Storage {
     public Storage (String path) throws IOException {
         this.path = path;
         file = new File(path);
-        if (! file.isFile()) {
+        if (! file.exists()) {
             file.createNewFile();
         }
     }

@@ -1,3 +1,5 @@
+package duke;
+
 public class TODO extends Task {
 
     public TODO(String name, Status status) {

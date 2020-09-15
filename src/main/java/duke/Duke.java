@@ -1,10 +1,6 @@
-import java.io.IOException;
-import java.util.*;
-import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.io.FileWriter;
+package duke;
 
+import java.io.IOException;
 
 
 public class Duke {
@@ -39,7 +35,7 @@ public class Duke {
     }
 
     public static void main(String[] args) throws DukeException, IOException {
-        new Duke("out/todo.txt").run();
+        new Duke("src/main/java/duke/todo.txt").run();
 
     }
 }
