@@ -185,7 +185,7 @@ The tasks that have been added will be saved in a .txt file. It can be found in 
 
 A `0` or `1` is prepended to the command to signify if the tasks is incomplete/complete respectively.
 
-If the task has tags, ` //tags <tag1> <tag2>` will be appened to the command.
+If the task has tags, ` //tags <tag1> <tag2> ...` will be appened to the command.
 
 Examples: 
 ```
