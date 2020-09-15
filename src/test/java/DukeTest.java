@@ -27,30 +27,26 @@ public class DukeTest {
     }
 
     @Test
-    public void ParserDeadlineTest() {
+    public void ParserDeadlineTest() throws DukeException {
         assertEquals(Parser.Command.DEADLINE, parser.parse("deadline eat food /by tomorrow"));
     }
 
     @Test
-    public void ParserEventTest() {
+    public void ParserEventTest() throws DukeException {
         assertEquals(Parser.Command.EVENT, parser.parse("event eat food /at tomorrow night"));
     }
 
     @Test
-    public void ParserTodoTest() {
+    public void ParserTodoTest() throws DukeException {
         assertEquals(Parser.Command.TODO, parser.parse("todo eat food"));
     }
 
     @Test
     public void ParserEmptyTaskTest() {
-        assertEquals(Parser.Command.EMPTY_TASK_EVENT_DEADLINE, parser.parse("event /at tomorrow"));
-        assertEquals(Parser.Command.EMPTY_TASK_EVENT_DEADLINE, parser.parse("event /at "));
     }
 
     @Test
     public void ParserEmptyDateTest() {
-        assertEquals(Parser.Command.EMPTY_DATE, parser.parse("event eat food"));
-        assertEquals(Parser.Command.EMPTY_DATE, parser.parse("event eat food /at"));
     }
 
     @Test

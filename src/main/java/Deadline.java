@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
  * A deadline has a attribute "dueDateAsString" or "dueDateAsDate", which is the time the deadline is due.
  * The attribute dueDate can be represented by a String, or a date object.
  */
-public class Deadline extends Task{
+public class Deadline extends Task {
     protected String dueDateAsString;
     protected LocalDate dueDateAsDate;
 
@@ -55,9 +55,11 @@ public class Deadline extends Task{
     @Override
     public String toString() {
         if (dueDateAsDate != null) {
-            return "[D]" + super.toString() + " (by: " + dueDateAsDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+            return "[D]" + super.toString() + " (by: "
+                    + dueDateAsDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
         } else {
-            return "[D]" + super.toString() + " (by: " + dueDateAsString + ")";
+            return "[D]" + super.toString() + " (by: "
+                    + dueDateAsString + ")";
         }
     }
 }
