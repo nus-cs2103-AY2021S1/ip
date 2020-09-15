@@ -6,7 +6,7 @@ DukePenguin is a desktop app for managing tasks with the help of Graphical User 
 1. [Features](#Features)
 1. [Usage](#Usage)
 
-##Quick Start
+## Quick Start
 1. Ensure you have Java Version 11 or above on your computer. Click [here](https://www.oracle.com/java/technologies/javase/jdk11-archive-downloads.html) to download if not.
 1. Download [DukePenguin_v0.2](https://github.com/Jaylenlee/ip/releases/tag/v0.2)
 1. Open the DukePenguin_v0.2 to start using :)
@@ -24,12 +24,11 @@ Alternatively you can also open it with terminal:
  Adds a task to be done in the future without any time restriction.
  [API](#todo) 
 
- 
  #### Deadline tasks: `deadline`
  Adds a task to be done in the future before a specific deadline.
  [API](#deadline) 
  
- #### Event tasks: `event`
+#### Event tasks: `event`
  Adds a task to be done in the future within a specific time range.
  [API](#event) 
  
@@ -46,18 +45,18 @@ Alternatively you can also open it with terminal:
 Sorts a indexed list of available tasks by their type and then description.
  [API](#sort) 
  
- ### Deleting tasks:
- #### Delete tasks: `delete`
- Deletes a task at a particular index of the list.
+### Deleting tasks:
+#### Delete tasks: `delete`
+Deletes a task at a particular index of the list.
  [API](#delete) 
   
- ### Marking tasks:
- #### Done tasks: `Done`
+### Marking tasks:
+#### Done tasks: `Done`
  Marks a task at a particular index of the list to be done. 
  [API](#done) 
   
- ### Terminating program:
- #### Exit: `bye`
+### Terminating program:
+#### Exit: `bye`
 Terminates and exits the program. 
 [API](#bye) 
    
@@ -83,7 +82,7 @@ Example of usage: `deadline return book /by 2020-12-31 1200`
 
 Expected outcome:
 
-![todo](./expectedOutcome/deadline.jpg)
+![deadline](./expectedOutcome/deadline.jpg)
 
 
 ### `event` <a name="event"></a>
@@ -95,7 +94,7 @@ Example of usage: `event read book /at 2020-12-25 1200-1400`
 
 Expected outcome:
 
-![todo](./expectedOutcome/event.jpg)
+![event](./expectedOutcome/event.jpg)
 
 ### `list` <a name="list"></a>
 - displays all tasks available
@@ -106,7 +105,7 @@ Example of usage: `list`
 
 Expected outcome:
 
-![todo](./expectedOutcome/list.jpg)
+![list](./expectedOutcome/list.jpg)
 
 ### `find`  <a name="find"></a>
 - displays all tasks available with the given keyword
@@ -117,7 +116,7 @@ Example of usage: `find Dec`
 
 Expected outcome:
 
-![todo](./expectedOutcome/find.jpg)
+![find](./expectedOutcome/find.jpg)
 
 ### `sort` <a name="sort"></a>
 - sorts all tasks available by their task's type and then description alphabetically
@@ -128,7 +127,7 @@ Example of usage: `sort`
 
 Expected outcome:
 
-![todo](./expectedOutcome/sort.jpg)
+![sort](./expectedOutcome/sort.jpg)
 
 ### `delete` <a name="delete"></a>
 - deletes a task at a particular index
@@ -139,7 +138,7 @@ Example of usage: `delete 1`
 
 Expected outcome:
 
-![todo](./expectedOutcome/delete.jpg)
+![delete](./expectedOutcome/delete.jpg)
 
 ### `done` <a name="done"></a>
 - marks a task at a particular index done
@@ -150,7 +149,7 @@ Example of usage: `done 1`
 
 Expected outcome:
 
-![todo](./expectedOutcome/done.jpg)
+![done](./expectedOutcome/done.jpg)
 
 ### `bye` <a name="bye"></a>
 - terminates DukePenguin
@@ -161,4 +160,4 @@ Example of usage: `bye`
 
 Expected outcome:
 
-![todo](./expectedOutcome/bye.jpg)
+![bye](./expectedOutcome/bye.jpg)
