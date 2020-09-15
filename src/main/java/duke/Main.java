@@ -14,7 +14,7 @@ import javafx.stage.Stage;
  * A GUI for Duke.
  */
 public class Main extends Application {
-    private Duke duke = new Duke("src/main/java/tasks.txt", "src/main/java/shortCuts.txt");
+    private Duke duke = new Duke("tasks.txt", "shortCuts.txt");
 
     /**
      * Implements the abstract start method in Application class

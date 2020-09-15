@@ -82,8 +82,8 @@ public class DeleteCommand extends Command {
      * @return String informing that the task is deleted.
      */
     private String deleteTaskString(TaskList tasks, int iD) {
-        return "   Noted. I've removed this task:\n" + // gives delete message
-                "   " + tasks.getAllTasks().get(iD - 1).toString() + "\n"
+        return "  Noted. I've removed this task:\n" + // gives delete message
+                "  " + tasks.getAllTasks().get(iD - 1).toString() + "\n"
                 + "  Now you have " + (tasks.getAllTasks().size() - 1) + " tasks in the list.";
     }
 

@@ -41,7 +41,7 @@ public class ListCommand extends Command {
     private String listMessage(TaskList tasks) {
         String s = "";
         for (int i = 0; i < tasks.getAllTasks().size(); i++) {
-            s = s + "\n" + "  " + tasks.getAllTasks().get(i);
+            s = s + "\n" + (i + 1) + ".  " + tasks.getAllTasks().get(i);
             // concatenates all the string representation of Tasks TaskList
         }
         return s.substring(1);
