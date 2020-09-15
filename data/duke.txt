@@ -2,3 +2,5 @@ T | 0 | cs2103T tutorial |
 D | 1 | cs2103T ip | important | 2020-09-18 12:00
 E | 0 | rest |  | 2020-02-01 22:00
 E | 0 | eat | fun | 2020-09-15 15:00
+T | 0 | eat | 
+T | 0 | eat | 
