@@ -10,8 +10,8 @@ import java.util.Optional;
  */
 public class DateTime {
 
-    private LocalDate date;
-    private Optional<LocalTime> optionalTime;
+    private final LocalDate date;
+    private final Optional<LocalTime> optionalTime;
 
     /**
      * Initialises with the date and any optional time parameter.
@@ -28,7 +28,7 @@ public class DateTime {
      * Returns if supplied date is the same day as the date stored.
      *
      * @param date Date to be checked for equality.
-     * @return True if both dates are refering to the same day.
+     * @return True if both dates are referring to the same day.
      */
     public boolean checkDateEqual(LocalDate date) {
         return date.equals(this.date);

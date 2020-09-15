@@ -12,7 +12,7 @@ import duke.task.TaskList;
 public abstract class Command {
 
     /** String array storing the user input. */
-    private String[] userString;
+    private final String[] userString;
 
     /**
      * Creates a new Command and initialises its string array.
@@ -42,7 +42,7 @@ public abstract class Command {
      */
     public boolean isExit() {
         return false;
-    };
+    }
 
     /**
      * Returns the string array.

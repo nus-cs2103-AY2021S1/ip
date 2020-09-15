@@ -17,7 +17,7 @@ public class TaskNameStringChecker extends StringChecker {
 
     private void checkTaskNamePresent(String delimiter) throws DukeException {
         if (super.checkEmptyString(getStringArray(), 2) || extractTaskName(delimiter).trim().equals("")) {
-            throw new DukeException("Uhoh! Please enter a valid description/name for your task!");
+            throw new DukeException("Uh-oh! Please enter a valid description/name for your task!");
         }
     }
 
@@ -31,7 +31,7 @@ public class TaskNameStringChecker extends StringChecker {
      */
     public String checkTaskString(TaskType taskType) throws DukeException {
         checkTaskNamePresent(taskType.getDelimiter());
-        super.checkNoIllegalCharacters(extractTaskName(taskType.getDelimiter()), "|");
+        super.checkNoIllegalCharacters(extractTaskName(taskType.getDelimiter()));
         return extractTaskName(taskType.getDelimiter());
     }
 

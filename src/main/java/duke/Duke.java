@@ -13,7 +13,7 @@ public class Duke {
     protected Ui ui;
 
     /** Handles any read/write requests. */
-    private Storage storage;
+    private final Storage storage;
 
     /** Container for the storage of tasks. */
     private TaskList tasks;

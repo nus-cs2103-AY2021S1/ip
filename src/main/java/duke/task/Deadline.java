@@ -25,7 +25,7 @@ public class Deadline extends Task {
      * @return String representation of a Deadline task with description, done status, date and/or time.
      */
     public String appendFile() {
-        String doneString = (isDone() == true ? "1" : "0");
+        String doneString = (isDone() ? "1" : "0");
         return "deadline" + " | " + doneString + " | " + getName() + " | " + getDateTime().getFileFormattedDateTime();
     }
 
@@ -37,7 +37,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        String doneString = (isDone() == true ? "✓" : "✗");
+        String doneString = (isDone() ? "✓" : "✗");
         return "[D]" + "[" + doneString + "] " + getName() + " (by: " + getDateTime().getPrintFormattedDate()
                 + " " + getDateTime().getPrintFormattedTime() + ")";
     }

@@ -8,7 +8,7 @@ import duke.DukeException;
 public abstract class StringChecker {
 
     /** Input string array from the user. */
-    private String[] inputStringArray;
+    private final String[] inputStringArray;
 
     StringChecker(String[] userInput) {
         inputStringArray = userInput;
@@ -19,10 +19,10 @@ public abstract class StringChecker {
         return (stringArray.length < length || stringArray[length - 1].trim().equals(""));
     }
 
-    protected void checkNoIllegalCharacters(String string, String delimiter) throws DukeException {
+    protected void checkNoIllegalCharacters(String string) throws DukeException {
         //Makes sure string does not contain the illegal delimiter specified
-        if (string.contains(delimiter)) {
-            throw new DukeException("Sorry, task descriptions cannot contain '" + delimiter + " '");
+        if (string.contains("|")) {
+            throw new DukeException("Sorry, task descriptions cannot contain '" + "|" + " '");
         }
     }
 

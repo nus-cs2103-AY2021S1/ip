@@ -20,7 +20,7 @@ public class Todo extends Task {
      * @return String representation of a Todo task with the description and done status.
      */
     public String appendFile() {
-        String doneString = (isDone() == true ? "1" : "0");
+        String doneString = (isDone() ? "1" : "0");
         return "todo" + " | " + doneString + " | " + getName();
     }
 
@@ -31,7 +31,7 @@ public class Todo extends Task {
      */
     @Override
     public String toString() {
-        String doneString = (isDone() == true ? "✓" : "✗");
+        String doneString = (isDone() ? "✓" : "✗");
         return "[T]" + "[" + doneString + "] " + getName();
     }
 }

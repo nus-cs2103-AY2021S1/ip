@@ -12,7 +12,7 @@ import duke.task.TaskList;
 public class Ui {
 
     /** Scanner to handle user input. */
-    private Scanner sc;
+    private final Scanner sc;
 
     /**
      * Initialises the scanner the take in user input.
@@ -27,8 +27,7 @@ public class Ui {
      * @return String that is read from user input.
      */
     public String readCommand() {
-        String userInput = sc.nextLine();
-        return userInput;
+        return sc.nextLine();
     }
 
 

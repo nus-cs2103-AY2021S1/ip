@@ -24,7 +24,7 @@ public class Event extends Task {
      * @return String representation of an Event task with description, done status, date and/or time.
      */
     public String appendFile() {
-        String doneString = (isDone() == true ? "1" : "0");
+        String doneString = (isDone() ? "1" : "0");
         return "event" + " | " + doneString + " | " + getName() + " | " + getDateTime().getFileFormattedDateTime();
     }
 
@@ -36,7 +36,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        String doneString = (isDone() == true ? "✓" : "✗");
+        String doneString = (isDone() ? "✓" : "✗");
         return "[E]" + "[" + doneString + "] " + getName() + " (at: " + getDateTime().getPrintFormattedDate()
                 + " " + getDateTime().getPrintFormattedTime() + ")";
     }

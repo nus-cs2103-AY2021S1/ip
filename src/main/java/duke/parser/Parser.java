@@ -51,7 +51,7 @@ public class Parser {
      */
     public Command parse() throws DukeException {
         List<String> addCommands = Arrays.stream(TaskType.values()).map(x -> x.name().toLowerCase())
-                .collect(Collectors.toList());;
+                .collect(Collectors.toList());
         String[] splitInput = getString().trim().split("\\s+");
         String commandType = splitInput[0];
         if (commandType.equals("")) {

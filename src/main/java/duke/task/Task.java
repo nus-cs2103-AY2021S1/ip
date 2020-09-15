@@ -8,7 +8,7 @@ import duke.DateTime;
 public abstract class Task {
 
     /** Stores the description of the Task. */
-    private String name;
+    private final String name;
 
     /** Stores the done status of the Task. */
     private boolean done;
@@ -88,7 +88,7 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        String doneString = (done == true ? "✓" : "✗");
+        String doneString = (done ? "✓" : "✗");
         return "[" + doneString + "] " + name;
     }
 }

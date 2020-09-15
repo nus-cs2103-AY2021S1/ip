@@ -18,7 +18,7 @@ import duke.task.TaskList;
 public class Storage {
 
     /** Filepath to access the local file to read/write from/to. */
-    private String filePath;
+    private final String filePath;
 
     /**
      * Initialises the storage object with the local filepath.
@@ -47,7 +47,7 @@ public class Storage {
             while (line != null) {
                 String[] splitLine = line.split("\\s*\\|\\s*");
                 String checkedFileInput = new FileStringChecker(splitLine).checkFile();
-                boolean isDone = splitLine[1].equals("1") ? true : false;
+                boolean isDone = splitLine[1].equals("1");
 
                 AddCommand c = new Parser(checkedFileInput).parseFromFile(isDone);
                 c.executeFromFile(newTaskList);

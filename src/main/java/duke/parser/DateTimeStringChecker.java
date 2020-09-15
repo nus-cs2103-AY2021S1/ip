@@ -58,12 +58,12 @@ public class DateTimeStringChecker extends StringChecker {
      * @throws DukeException If date does not exist, or its formatting is incorrect.
      */
     public LocalDate checkDate(String[] dateTime) throws DukeException {
-        checkDateExists(1, dateTime);
+        checkDateExists(dateTime);
         return checkDateFormat(dateTime);
     }
 
-    private void checkDateExists(int length, String[] dateTime) throws DukeException {
-        if (super.checkEmptyString(dateTime, length)) {
+    private void checkDateExists(String[] dateTime) throws DukeException {
+        if (super.checkEmptyString(dateTime, 1)) {
             throw new DukeException("The task must come with a date in yyyy-mm-dd format!");
         }
     }
