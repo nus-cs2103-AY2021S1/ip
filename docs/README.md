@@ -4,9 +4,17 @@ benefits of a Graphical User Interface (GUI). If you can type fast, Duke can get
 traditional GUI apps.
 
 ## Features 
-
-### Feature 1 
-Description of feature.
+Usage | Format, Examples
+------- | ---------
+todo | `todo [description]`<br/>e.g. `todo todo 1`
+deadline | `deadline [description] /by [yyyy-MM-dd]`<br/>e.g. `deadline deadline 1 /by 2020-09-15`
+event | `event [description] /at [yyyy-MM-dd h:mm a]`<br/>e.g. `event event 1 /at 2020-09-15 10:51 am`
+done | `done [index]`<br/>e.g. `done 3`
+find | `find [keywords]`<br/>e.g. `find eve`
+delete | `delete [index]`<br/>e.g. `delete 4`
+list | `list`
+schedule | `schedule [yyyy-MM-dd]`<br/>e.g. `schedule 2020-09-15`
+bye | `bye`
 
 ## Usage
 
@@ -17,6 +25,10 @@ Adds a todo task to the list.
 Example of usage: 
 
 `todo [description]`
+
+Input:
+
+`todo todo 1`
 
 Expected outcome:
 
@@ -32,6 +44,10 @@ Example of usage:
 
 `deadline [description] /by [yyyy-MM-dd]`
 
+Input:
+
+`deadline deadline 1 /by 2020-09-15`
+
 Expected outcome:
 
 `Got it. I've added this task: `<br/>
@@ -45,6 +61,10 @@ Adds an event task with a DateTime to the list.
 Example of usage: 
 
 `event [description] /at [yyyy-MM-dd h:mm a]`
+
+Input:
+
+`event event 1 /at 2020-09-15 10:32 am`
 
 Expected outcome:
 
@@ -60,6 +80,10 @@ Example of usage:
 
 `done [index]`
 
+Input:
+
+`done 5`
+
 Expected outcome:
 
 `Nice! I've marked this task as done: `<br/>
@@ -72,6 +96,10 @@ Finds tasks that contain any of the given keywords.
 Example of usage: 
 
 `find [keyword]`
+
+Input:
+
+`find todo`
 
 Expected outcome:
 
@@ -87,6 +115,10 @@ Example of usage:
 
 `delete [index]`
 
+Input:
+
+`delete 4`
+
 Expected outcome:
 
 `Noted. I've removed this task: `<br/>
@@ -98,6 +130,10 @@ Expected outcome:
 Shows a list of all tasks in Duke.
 
 Example of usage: 
+
+`list`
+
+Input:
 
 `list`
 
@@ -118,6 +154,10 @@ Shows a list of all tasks that has the specific date in Duke.
 Example of usage: 
 
 `schedule [yyyy-MM-dd]`
+
+Input:
+
+`schedule 2020-09-20`
 
 Expected outcome:
 
