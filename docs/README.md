@@ -2,10 +2,10 @@
 *Ekud* is a task management application to keep track of your todos, deadlines and events. 
 The task list is stored permanently in the hard disk and can be retrieved later.
 
-![Image of Yaktocat](Ui.png)
+![Image of Ekud](Ui.png)
 
 ## Index
-* this unordered seed list will be replaced by toc as unordered list
+* table of contents
 {:toc}
 ## Features 
 
