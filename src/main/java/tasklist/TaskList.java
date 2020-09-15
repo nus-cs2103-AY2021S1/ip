@@ -289,7 +289,7 @@ public class TaskList {
         for (Task task : todoList) {
             if (task.getTask().contains(query)) {
                 count += 1;
-                result += "\n    " + count + "." + task.getItem();
+                result += "\n    " + count + ". " + task.getItem();
             }
         }
         return result;
