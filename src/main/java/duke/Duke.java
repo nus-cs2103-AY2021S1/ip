@@ -56,13 +56,4 @@ public class Duke {
         greetings += ui.showGreetings();
         return greetings;
     }
-
-    /**
-     * Determines whether the user has entered the exit command to close the program.
-     *
-     * @return True if user has entered the exit command, otherwise returns false.
-     */
-    public boolean canExitProgram() {
-        return ui.hasExited();
-    }
 }

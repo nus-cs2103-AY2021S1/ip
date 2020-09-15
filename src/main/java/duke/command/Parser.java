@@ -63,7 +63,7 @@ public class Parser {
      * @return "Bob's" response to multi-word user commands.
      * @throws InvalidUserCommandException If a user command is not recognized by the program.
      */
-    public static String parseMultiWordUserCommands(String userCommand, Ui ui, Storage storage)
+    private static String parseMultiWordUserCommands(String userCommand, Ui ui, Storage storage)
             throws InvalidUserCommandException {
         // Extract the first word of the user command to obtain the type of user command
         String[] commandDetails = userCommand.split(" ", 2);
