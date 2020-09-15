@@ -1,6 +1,8 @@
 # User Guide to the Red Prince
 Ever wanted a red lizard, fallen from grace, to keep track of your todo items for you? Now you can!
 
+
+![Screenshot of the Red Prince](Ui.png)
 ## Features 
 
 ### Add Todos, Events, and Deadlines!
