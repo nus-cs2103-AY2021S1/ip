@@ -20,7 +20,7 @@ public class CliLauncher {
         Duke duke = new Duke();
         CommandScanner cmdScanner = new CommandScanner();
 
-        Ui.showGreet();
+        Ui.showGreetings();
 
         try {
             Storage storage = Storage.create(CliLauncher.fileString);
