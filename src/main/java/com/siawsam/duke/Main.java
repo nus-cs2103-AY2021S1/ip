@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 public class Main extends Application {
     private static final String STAGE_TITLE = "Duke Chat Bot";
     private static final String DEFAULT_SCENE = "/view/LandingScene.fxml";
+    private static final String STYLESHEET = "/styles/styles.css";
     private final Duke duke = new Duke();
     
     @Override
@@ -25,7 +26,7 @@ public class Main extends Application {
         loader.setController(new LandingScene(duke, primaryStage));
         AnchorPane ap = loader.load();
         Scene scene = new Scene(ap);
-        scene.getStylesheets().add("/styles/styles.css");
+        scene.getStylesheets().add(STYLESHEET);
         
         primaryStage.setScene(scene);
         primaryStage.show();

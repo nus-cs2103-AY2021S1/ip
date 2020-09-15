@@ -5,6 +5,9 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents a list of tasks and all operations related to modifying it.
+ */
 public class TaskList implements Serializable {
     private final List<Task> itemList = new ArrayList<>();
     
@@ -150,7 +153,7 @@ public class TaskList implements Serializable {
     }
     
     /**
-     * Tags an item.
+     * Tags an item in the tasklist.
      *
      * @param itemIndex The index of the item in the tasklist to tag.
      * @param tagName The name of the tag.

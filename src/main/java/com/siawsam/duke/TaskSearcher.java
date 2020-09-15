@@ -2,6 +2,9 @@ package com.siawsam.duke;
 
 import java.util.List;
 
+/**
+ * Represents a class to handle search operations within a tasklist.
+ */
 public class TaskSearcher {
     private final TaskList taskList;
     

@@ -10,6 +10,7 @@ import java.io.ObjectOutputStream;
 public class Writer {
     /**
      * Serializes and writes a {@link TagList tag list}  and {@link TaskList task list} to disk.
+     *
      * @param taskList The task list to save.
      * @param tagList The tag list to save.
      * @param taskListPath The write path for the task list.

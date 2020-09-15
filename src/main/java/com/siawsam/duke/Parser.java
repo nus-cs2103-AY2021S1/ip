@@ -22,7 +22,7 @@ public class Parser {
     private final Storage storage;
     
     /**
-     * Constructs a Parser when no saved task list exists.
+     * Constructs a Parser when no saved data exists.
      *
      * @param storage A Storage instance to use when the parser needs to save to disk.
      */
@@ -33,10 +33,11 @@ public class Parser {
     }
     
     /**
-     * Constructs a Parser when a saved task list exists.
+     * Constructs a Parser when saved data exists.
      *
      * @param storage      A Storage instance to use when the parser needs to save to disk.
      * @param userTaskList A TaskList instance that represents the existing save.
+     * @param tagList      A TagList instance that represents an existing save.
      */
     Parser(Storage storage, TaskList userTaskList, TagList tagList) {
         this.userTaskList = userTaskList;

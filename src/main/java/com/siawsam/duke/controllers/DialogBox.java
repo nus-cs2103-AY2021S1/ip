@@ -52,10 +52,24 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
     
+    /**
+     * Creates a new DialogBox representing user input.
+     *
+     * @param text The text content of the DialogBox.
+     * @param img The image to display as the avatar in the DialogBox.
+     * @return A DialogBox with the given text content and avatar image.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img, "userDialogBox");
     }
     
+    /**
+     * Creates a new DialogBox representing a duke reply.
+     *
+     * @param text The text content of the DialogBox.
+     * @param img The image to display as the avatar in the DialogBox.
+     * @return A DialogBox with the given text content and avatar image.
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img, "dukeDialogBox");
         db.flip();
