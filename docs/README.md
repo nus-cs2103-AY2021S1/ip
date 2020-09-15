@@ -1,5 +1,5 @@
 # Duke User Guide
-Duke is task manager that helps you organise your to dos, deadline, and events all in one place. 
+Duke is task manager that helps you organise your tasks all in one place. 
 
 ## Duke GUI
 ![Duke GUI](Ui.png)
@@ -173,7 +173,7 @@ tags: #CHILL
 ### 12. `removetag TASKID TAGNAME`
 Sample input:
 ```
-removetag 2 CHILL
+removetag 2 chill
 ```
 
 Expected output:
