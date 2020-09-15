@@ -12,12 +12,14 @@ import java.util.stream.Collectors;
  * It supports the basic operations of manipulating tasks and answering queries.
  */
 public class TaskList {
-    private static final String COMPLETED_TASKS_MESSAGE = "Here are the tasks that have been completed: \n";
+    private static final String COMPLETED_TASKS_MESSAGE = "Here are the task(s) that have been completed: \n";
     private static final String ALL_TASKS_COMPLETED_MESSAGE = "Congratulations! You have completed all your tasks!";
-    private static final String MATCHING_TASKS_MESSAGE = "Here are the tasks containing keyword: ";
+    private static final String MATCHING_TASKS_MESSAGE = "Here are the task(s) containing keyword(s): ";
     private static final String NO_TASKS_COMPLETED_MESSAGE = "☹ OOPS!!! You have not completed any task yet.";
     private static final String NO_MATCHING_TASKS_MESSAGE = "There are no tasks containing keyword: ";
-    private static final String PENDING_TASKS_MESSAGE = "Here are the tasks that are pending: \n";
+    private static final String PENDING_TASKS_MESSAGE = "Here are the task(s) that are pending: \n";
+    private static final String SHOW_TASKS_MESSAGE = "Here are the task(s)/deadline(s) happening on: ";
+    private static final String NO_TASKS_ON_DATE_MESSAGE = "There are no task/deadline happening on: ";
     private List<Task> tasks;
 
     /**
@@ -115,11 +117,11 @@ public class TaskList {
         List<Task> filteredTasks = tasks.stream()
                 .filter(task -> task.getDate() != null && task.getDate().equals(date)).collect(Collectors.toList());
         if (filteredTasks.size() == 0) {
-            return "There are no tasks/deadlines happening on: "
+            return NO_TASKS_ON_DATE_MESSAGE
                     + date.format(DateTimeFormatter.ofPattern("MMMM d yyyy"));
         }
         StringBuilder output = new StringBuilder();
-        output.append("Here are the tasks/deadlines happening on: ").append(date).append("\n");
+        output.append(SHOW_TASKS_MESSAGE).append(date).append("\n");
 
         for (int i = 0; i < filteredTasks.size(); i++) {
             output.append(String.format("%d. %s" + (i == filteredTasks.size() - 1 ? "" : "\n"),
