@@ -22,7 +22,7 @@ public class TagCommand extends Command {
     }
 
     /**
-     * Add a tag to the task specified in the tasklist
+     * Adds a tag to the task specified in the tasklist
      *
      * @param tasks a list of tasks
      */
