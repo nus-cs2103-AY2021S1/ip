@@ -1,5 +1,5 @@
 # User Guide
-![Duke](Ui.png)
+![Duke](Ui.png) <br>
 Duke is a task-management application with a graphical user interface that uses a command-line input to simulate conversing with a chat bot. It is made with a project template provided by CS2103/T AY2021S1.
 
 ## Quick Start
