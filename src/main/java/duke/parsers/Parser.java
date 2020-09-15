@@ -11,6 +11,7 @@ import duke.commands.ConfirmCommand;
 import duke.commands.DeleteCommand;
 import duke.commands.DoneCommand;
 import duke.commands.FindCommand;
+import duke.commands.HelpCommand;
 import duke.commands.ListCommand;
 import duke.commands.TodayCommand;
 import duke.exceptions.DukeDateTimeParseException;
@@ -86,9 +87,15 @@ public class Parser {
                 throw new InvalidCommandFormatException();
             }
             return parseConfirm(splitByCommand[1].strip());
+        case "help":
+            return parseHelp();
         default:
             throw new InvalidCommandException();
         }
+    }
+
+    private static Command parseHelp() {
+        return new HelpCommand();
     }
 
     private static Command parseToday() {

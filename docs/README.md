@@ -26,7 +26,8 @@ chat interface also gives users a more personal feeling.
 1. Ensure that you have Java `11` or above installed on your computer.
 2. Download the latest Duke Jar from [here](https://github.com/dianneloh9/ip/releases/tag/A-Release).
 3. Copy the file to the folder you want to use as the *home folder* for your Duke program.
-4. Double click the file to start the app. You should see the below GUI after a few seconds:
+4. Double click the file to start the app for Windows, or run `java -jar duke.jar` for Mac.
+You should see the below GUI after a few seconds:
 ![landing page](/docs/landing.png)
 5. Type the command in the command box and press Enter to execute it.
 
@@ -173,7 +174,7 @@ Format: `find KEYWORD...`
 - The order of the keywords does not matter, that is, `read book` or 
 `book read` will show the same result.
 - Only the task description is searched.
-- Only full words will be matched (eg `boo` will not match `book`);
+- Partial words can be matched (eg `boo` will match `book`);
 - Only tasks matching all keywords will be returned.
 
 Examples:  

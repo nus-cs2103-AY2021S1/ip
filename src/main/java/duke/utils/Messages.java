@@ -8,7 +8,8 @@ public class Messages {
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
-    public static final String MESSAGE_GREETING = "\t Hello! I'm Duke\n\t Here are the available commands:\n"
+    public static final String MESSAGE_BYE = "\t Bye. Hope to see you again soon!";
+    public static final String MESSAGE_HELP = "\t Here are the available commands:\n"
             + "\t \u2022 Create a todo (eg todo <task>)\n"
             + "\t \u2022 Create an event (eg event <eventName> /at <date/time(s)>)\n"
             + "\t \u2022 Create a deadline (eg deadline <deadlineName> /by <date/time>\n"
@@ -19,8 +20,7 @@ public class Messages {
             + "\t \u2022 List today's task (eg today)\n"
             + "\t \u2022 Confirm a date/time (eg confirm <task index> <date/time index>\n"
             + "\t \u2022 Exit the program (eg bye)\n";
-    public static final String MESSAGE_BYE = "\t Bye. Hope to see you again soon!";
-
+    public static final String MESSAGE_GREETING = "\t Hello! I'm Duke\n" + MESSAGE_HELP;
     public static final String MESSAGE_ADD_TASK = "\t Got it. I've added this task:\n";
     public static final String MESSAGE_DELETE_TASK = "\t Noted. I've removed this task:\n";
     public static final String MESSAGE_DONE_TASK = "\t Nice! I've marked this task as done:\n";
