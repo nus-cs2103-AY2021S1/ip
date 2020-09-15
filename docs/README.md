@@ -192,22 +192,20 @@ Update the description or duedate of an existing task in your list of task.
 
 **Command:**
 
-- update '<index of task you want to update>'
-- update desc/date '<new task description/new task date>'
+- update '<index of task you want to update>' '<date or desc>' '<new duedate or new description>'
 
 **Usage:**
-
-    update 2
-    update desc do pullups
+        
+        update 2 desc go on a date
     
 **Expected outcome:**
 
-        This is the current task:
+        This task:
         [D][✓] bench 2 plates (by: 12 Dec 2020)
-        Ok tell me what to update!
+       
         
-        This task has been updated!
-        [D][✓] do pullups (by: 12 Dec 2020)
+        has been updated to this task:
+        [D][✓] go on a date (by: 12 Dec 2020)
         
 ---
     
