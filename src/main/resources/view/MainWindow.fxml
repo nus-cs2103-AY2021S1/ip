@@ -11,14 +11,14 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="651.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="duke.MainWindow">
     <children>
-        <TextField fx:id="userInput" layoutY="558.0" onAction="#handleUserInput" prefHeight="41.0" prefWidth="324.0" AnchorPane.bottomAnchor="1.0" />
-        <Button fx:id="sendButton" layoutX="324.0" layoutY="609.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="41.0" prefWidth="76.0" text="Send" />
-        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" layoutY="61.0" prefHeight="546.0" prefWidth="400.0" vvalue="1.0">
+        <TextField fx:id="userInput" layoutY="607.0" onAction="#handleUserInput" prefHeight="41.0" prefWidth="324.0" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="76.0" />
+        <Button fx:id="sendButton" layoutX="324.0" layoutY="607.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="41.0" prefWidth="76.0" text="Send" AnchorPane.bottomAnchor="3.0" AnchorPane.rightAnchor="0.0" />
+        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" layoutY="61.0" prefHeight="546.0" prefWidth="400.0" vvalue="1.0" AnchorPane.bottomAnchor="44.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="61.0">
          <content>
                 <VBox fx:id="dialogContainer" prefHeight="544.0" prefWidth="388.0" />
          </content>
         </ScrollPane>
-      <TextFlow prefHeight="41.0" prefWidth="400.0" style="-fx-padding: 20; -fx-background-color: #e4e0dc#e4e0dc #e4e0dc#e4e0dc;" textAlignment="CENTER">
+      <TextFlow prefHeight="41.0" prefWidth="400.0" style="-fx-padding: 20; -fx-background-color: #e4e0dc#e4e0dc #e4e0dc#e4e0dc;" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Text fill="#4dc0f5" strokeType="OUTSIDE" strokeWidth="0.0" text="Duke Task Manager">
                <font>
