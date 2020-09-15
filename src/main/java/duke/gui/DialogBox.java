@@ -38,7 +38,7 @@ public class DialogBox extends HBox {
         }
         dialog.setText(text);
         if (type == DUKE) {
-            dialog.setStyle("-fx-text-fill: blue;-fx-background-color: azure;");
+            dialog.setStyle("-fx-text-fill: blue;");
         }
         if (text.contains("OOPS")) {
             dialog.setStyle("-fx-text-fill: red;");
