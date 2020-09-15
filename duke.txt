@@ -2,3 +2,4 @@
 [E][✘] meeting (at: 2020-10-10 1400)
 [D][✘] homework (by: 2020-10-10)
 [T][✓] run
+[D][✘] project (by: 2020-09-10)
