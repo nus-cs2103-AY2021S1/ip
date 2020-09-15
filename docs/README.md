@@ -109,7 +109,7 @@ Tags the task at specified INDEX with the specified TAGWORD. A UI message will b
 
 #### **Example of usage:**
 
-`tag 2 #fun` - Tags second task on the task list as a fun task.
+`tag 2 fun` - Tags second task on the task list as a fun task.
 
 **Expected outcome:**
 
