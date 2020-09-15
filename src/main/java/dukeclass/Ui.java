@@ -12,10 +12,9 @@ public class Ui {
      * @return welcome message of String type.
      */
     public static String welcomeMessage() {
-        return "____________________________________________________________\n"
-                + "     Hello! I'm Duke\n"
-                + "     What can I do for you?\n"
-                + "____________________________________________________________\n";
+        return "I'm Duke\n"
+                + "Why did you disturb my sleep?";
+
     }
 
     /**
@@ -24,9 +23,7 @@ public class Ui {
      * @return ending message of String type.
      */
     public static String endMessage() {
-        return "____________________________________________________________\n"
-                + "     Bye. Hope to see you again soon!\n"
-                + "____________________________________________________________\n";
+        return "Bye. Hope to not see you again soon!\n";
     }
 
     /**
@@ -37,19 +34,28 @@ public class Ui {
     public static String helpMessage() {
         return "Full list of commands:\n"
                 + "type \"bye\" to save your current list\n"
+                + "\n"
                 + "type \"list\" to view your current list\n"
+                + "\n"
                 + "type \"done <number>\" to mark the specific task as done\n"
+                + "\n"
                 + "type \"delete <number>\" to delete the specific task\n"
+                + "\n"
                 + "type \"find <keyword>\" to find a task with the specific keyword\n"
-                + "type \"snooze <number> <days>\" to snooze a task by a certain number of days."
-                        +" By default snooze one day.\n"
+                + "\n"
+                + "type \"snooze <number> <number of days(optional)>\" to snooze a task by a certain number of days."
+                        +" By default snooze by one day.\n"
+                + "\n"
                 + "\n"
                 + "To add new tasks:"
-                + "type \"todo <task>\" to add a to do\n"
-                + "type \"event <task> /<preposition> <yyyy-MM-dd HH:mm>\""
-                        + "to add an event e.g event do chores /by 2020-08-08 12:00\n"
-                + "type \"deadline <task> /<preposition> <yyyy-MM-dd HH:mm>\""
-                        + "to add a deadline e.g deadline do chores /by 2020-08-08 12:00\n"
+                + "\n"
+                + "type \"todo <task message>\" to add a to do\n"
+                + "\n"
+                + "type \"event <task message> /<preposition> <yyyy-MM-dd HH:mm>\""
+                        + " to add an event e.g event do chores /by 2020-08-08 12:00\n"
+                + "\n"
+                + "type \"deadline <task message> /<preposition> <yyyy-MM-dd HH:mm>\""
+                        + " to add a deadline e.g deadline do chores /by 2020-08-08 12:00\n"
                 + "\n";
     }
 
@@ -61,9 +67,7 @@ public class Ui {
      * @return list of String type.
      */
     public static String printTaskList(TaskList list) {
-        return "____________________________________________________________\n"
-                + list.toString() + "\n"
-                + "____________________________________________________________\n";
+        return list.toString() + "\n";
     }
 
     /**
@@ -73,9 +77,7 @@ public class Ui {
      * @return task of String type.
      */
     public static String printTask(Task task) {
-        return "____________________________________________________________\n"
-                + task.toString() + "\n"
-                + "____________________________________________________________\n";
+        return task.toString() + "\n";
     }
 
     /**
@@ -85,7 +87,7 @@ public class Ui {
      * @return Exception message
      */
     public static String unknownInputErrorMessage(Exception e) {
-        return "DUKE DOES NOT UNDERSTAND YOU!!!@#%#$%^!@^%\n"
+        return "DUKE DOES NOT UNDERSTAND YOU!!! @#%#$%^!@^%\n"
                 + e
                 + "\nTRY AGAIN!!!";
     }

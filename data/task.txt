@@ -1,5 +1,7 @@
 todo//hello//true
 todo//hello//false
-todo//hello//false
 todo//test 1//false
 todo//test 2//false
+todo//test 1//false
+todo//test 2//false
+event//do chores//by//2020-08-08 12:00//true

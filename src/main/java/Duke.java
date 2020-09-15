@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 import dukeclass.Parser;
 import dukeclass.Storage;
@@ -27,30 +28,20 @@ public class Duke {
 
     }
 
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     *
-     * change access modifier to private after packaging it
-     */
     public String getResponse(String input) {
-        if (input.equals("bye")) {
-            this.endDuke();
-            Platform.exit();
-            return Ui.endMessage();
-        } else{
-            try {
-                return Parser.parseCommands(taskList, input);
+        try {
+            return Parser.parseCommands(this.taskList, input);
 
-            } catch (Exception e) {
-                return Ui.unknownInputErrorMessage(e);
-            }
+        } catch (Exception e) {
+            return Ui.unknownInputErrorMessage(e);
         }
+
     }
 
     public void endDuke() {
         try {
             Storage.writeToFile(f, taskList);
+            System.out.print("write success");
         } catch (IOException e) {
             System.out.println("Something went wrong: " + e.getMessage());
         }

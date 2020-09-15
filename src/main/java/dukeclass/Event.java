@@ -89,13 +89,13 @@ public class Event extends Task {
         String statusIcon = (status) ? "\u2714" : "\u2716";
         return "[" + ICON + "]" + "[" + statusIcon + "] "
                 + this.taskString + " (" + this.preposition + ": "
-                + dateTime.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + ")";
+                + dateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) + ")";
     }
 
     @Override
     public String toDataString() {
         return "event//" + taskString + "//" + preposition + "//"
-                + dateTime.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + "//" + status;
+                + dateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) + "//" + status;
     }
 
 }

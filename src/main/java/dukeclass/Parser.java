@@ -8,7 +8,6 @@ import java.util.Scanner;
 public class Parser {
 
 
-
     /**
      * Parse the input String by the user and returns a task.
      *
