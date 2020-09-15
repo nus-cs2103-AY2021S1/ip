@@ -1,18 +1,11 @@
 package duke.commands;
 
-import duke.errors.DeadlineException;
 import duke.errors.DukeException;
 import duke.errors.EventException;
 import duke.helpers.Storage;
 import duke.helpers.TaskList;
 import duke.helpers.Ui;
 import duke.tasks.Event;
-
-import java.time.DateTimeException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 
 /**
  * Handles cases when Event is keyword
@@ -38,9 +31,7 @@ public class EventCommand extends AddCommand {
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
-            if (isNumberOrDescriptionAbsent()) {
-                throw new EventException(true, false, false, false, false);
-            }
+            exceptionThrownIfNumberOrDescriptionAbsent();
             return Event.addEventTask(tasks, ui, storage, userInput);
             //Returns string if correct input and updates tasks and file in storage if correct input by user, else
             // throws exception
@@ -50,5 +41,15 @@ public class EventCommand extends AddCommand {
         }
     }
 
+    /**
+     * Test whether description is absent and exception is thrown if absent
+     *
+     * @throws DukeException thrown if description for event is absent
+     */
+    protected void exceptionThrownIfNumberOrDescriptionAbsent() throws DukeException {
+       if(isNumberOrDescriptionAbsent()) { //tests whether the description is absent
+           throw new EventException(true, false, false, false, false);
+       }
+    }
 }
 

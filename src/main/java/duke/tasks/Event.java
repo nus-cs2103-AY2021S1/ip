@@ -1,16 +1,18 @@
 package duke.tasks;
 
+import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
 import duke.errors.DeadlineException;
 import duke.errors.DukeException;
 import duke.errors.EventException;
 import duke.helpers.Storage;
 import duke.helpers.TaskList;
 import duke.helpers.Ui;
-import java.time.DateTimeException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
+
 
 /**
  * The Event is a subclass of Task and it is used to describe tasks that has to be completed by a specific day and time
@@ -37,19 +39,59 @@ public class Event extends Task {
     }
 
     /**
-     * Assigns the name, done and day variables with values and used to initialize Event task
+     * Assigns the name, starDateAndOrTime, endDateAndOrTime, startDate, endDate with values and initializes Event task
      *
-     * @param name argument in super class constructor
-     * @param done argument in super class constructor
-     * @param startDateAndOrTime argument used to assign this.startDateAndOrTime with value
-     * @param endDateAndOrTime  argument assigns this.endDateAndOrTime with value
+     * @param name assigned to super.name(name of deadline)
+     * @param startDateAndOrTime assigned to this.startDateAndOrTime
+     * @param endDateAndOrTime assigned to this.endDateAndOrTime
+     * @param startDate assigned to this.startDate
+     * @param endDate assigned to this.endDate
      */
-    public Event(String name, boolean done, String startDateAndOrTime, String endDateAndOrTime) {
-        super(name, done);
+    public Event(String name, String startDateAndOrTime, String endDateAndOrTime, LocalDate startDate,
+                 LocalDate endDate) {
+        super(name);
         this.startDateAndOrTime = startDateAndOrTime;
         this.endDateAndOrTime = endDateAndOrTime;
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
 
+    /**
+     * Assigns the name, starDateAndOrTime, endDateAndOrTime, startDateTime,
+     * endDateTime with values and initializes Event task
+     *
+     * @param name assigned to super.name(name of deadline)
+     * @param startDateAndOrTime assigned to this.startDateAndOrTime
+     * @param endDateAndOrTime assigned to this.endDateAndOrTime
+     * @param startDateTime assigned to this.startDateTime
+     * @param endDateTime assigned to this.endDateTime
+     */
+    public Event(String name, String startDateAndOrTime, String endDateAndOrTime, LocalDateTime startDateTime,
+                 LocalDateTime endDateTime) {
+        super(name);
+        this.startDateAndOrTime = startDateAndOrTime;
+        this.endDateAndOrTime = endDateAndOrTime;
+        this.startDateTime = startDateTime;
+        this.endDateTime = endDateTime;
+    }
+
+    /**
+     * Assigns the name, starDateAndOrTime, endDateAndOrTime, startTime, endTime with values and initializes Event task
+     *
+     * @param name assigned to super.name(name of deadline)
+     * @param startDateAndOrTime assigned to this.startDateAndOrTime
+     * @param endDateAndOrTime assigned to this.endDateAndOrTime
+     * @param startTime assigned to this.startTime
+     * @param endTime assigned to this.endTime
+     */
+    public Event(String name, String startDateAndOrTime, String endDateAndOrTime, LocalTime startTime,
+                 LocalTime endTime) {
+        super(name);
+        this.startDateAndOrTime = startDateAndOrTime;
+        this.endDateAndOrTime = endDateAndOrTime;
+        this.startTime = startTime;
+        this.endTime = endTime;
+    }
     /**
      * Overrides the toString methods
      *
@@ -70,7 +112,8 @@ public class Event extends Task {
         return "E" + super.inputListFormat() + "| " + this.startDateAndOrTime + "-" + this.endDateAndOrTime;
         //format of Tasks to appear in file in Storage
     }
-    public static String addEventTask(TaskList tasks, Ui ui, Storage storage, String commandDescription) throws DukeException {
+    public static String addEventTask(TaskList tasks, Ui ui, Storage storage, String commandDescription)
+            throws DukeException {
         return process(tasks, storage, commandDescription);
     }
     /**
@@ -152,36 +195,37 @@ public class Event extends Task {
     private static Event eventTask(String name, String start, String end) throws DukeException {
         Event e;
         try {
-            LocalDate startDate = stringToLocalDate(start); //converts start to date
-            LocalDate endDate = stringToLocalDate(end); //converts end to date
+            LocalDate startDate = stringToLocalDateExistingTask(start); //converts start to date
+            LocalDate endDate = stringToLocalDateExistingTask(end); //converts end to date
 
             if (startDate.isAfter(endDate)) {
                 throw new EventException(false, false, true, false, false); //if start > end then it throws this error.
             }
             e = new Event(name, startDate.format(DateTimeFormatter.ofPattern("dd LLL yyyy")),
-                    endDate.format(DateTimeFormatter.ofPattern("dd LLL yyyy")));
+                    endDate.format(DateTimeFormatter.ofPattern("dd LLL yyyy")), startDate, endDate);
         } catch (EventException event) {
             throw new EventException(false, false, true, false, false);
         } catch (DateTimeException d) {
             try {
-                LocalDateTime startDateTime = stringToLocalDateTime(start); //converts start to dateTime
-                LocalDateTime endDateTime = stringToLocalDateTime(end); //converts end to dateTime
+                LocalDateTime startDateTime = stringToLocalDateTimeExistingTask(start); //converts start to dateTime
+                LocalDateTime endDateTime = stringToLocalDateTimeExistingTask(end); //converts end to dateTime
                 if (startDateTime.isAfter(endDateTime)) {
                     throw new EventException(false, false, true, false, false); //if start > end it throws this error
                 }
                 e = new Event(name, startDateTime.format(DateTimeFormatter.ofPattern("dd LLL yyyy, HH:mm")),
-                        endDateTime.format(DateTimeFormatter.ofPattern("dd LLL yyyy, HH:mm")));
+                        endDateTime.format(DateTimeFormatter.ofPattern("dd LLL yyyy, HH:mm")),
+                        startDateTime, endDateTime);
             } catch (EventException event) {
                 throw new EventException(false, false, true, false, false);
             } catch (DateTimeException g) {
                 try {
-                    LocalTime parsedDate = stringToLocalTime(start); //converts start to time
-                    LocalTime endDate = stringToLocalTime(end); //converts end to time
-                    if (parsedDate.isAfter(endDate)) {
+                    LocalTime startTime = stringToLocalTimeExistingTask(start); //converts start to time
+                    LocalTime endTime = stringToLocalTimeExistingTask(end); //converts end to time
+                    if (startTime.isAfter(endTime)) {
                         throw new EventException(false, false, true, false, false); //if start > end it throws error
                     }
-                    e = new Event(name, parsedDate.format(DateTimeFormatter.ofPattern("HH:mm")),
-                            endDate.format(DateTimeFormatter.ofPattern("HH:mm")));
+                    e = new Event(name, startTime.format(DateTimeFormatter.ofPattern("HH:mm")),
+                            endTime.format(DateTimeFormatter.ofPattern("HH:mm")), startTime, endTime);
                 } catch (EventException y) {
                     throw new EventException(false, false, true, false, false);
                 } catch (DateTimeException z) {
@@ -213,7 +257,7 @@ public class Event extends Task {
                 throw new EventException(false, false, true, false, false); //if start > end then it throws this error.
             }
             e = new Event(name, startDate.format(DateTimeFormatter.ofPattern("dd LLL yyyy")),
-                    endDate.format(DateTimeFormatter.ofPattern("dd LLL yyyy")));
+                    endDate.format(DateTimeFormatter.ofPattern("dd LLL yyyy")), startDate, endDate);
         } catch (EventException event) {
             throw new EventException(false, false, true, false, false);
         } catch (DateTimeException d) {
@@ -224,18 +268,19 @@ public class Event extends Task {
                     throw new EventException(false, false, true, false, false); //if start > end it throws this error
                 }
                 e = new Event(name, startDateTime.format(DateTimeFormatter.ofPattern("dd LLL yyyy, HH:mm")),
-                        endDateTime.format(DateTimeFormatter.ofPattern("dd LLL yyyy, HH:mm")));
+                        endDateTime.format(DateTimeFormatter.ofPattern("dd LLL yyyy, HH:mm")),
+                        startDateTime, endDateTime);
             } catch (EventException event) {
                 throw new EventException(false, false, true, false, false);
             } catch (DateTimeException g) {
                 try {
-                    LocalTime parsedDate = stringToLocalTimeExistingTask(start); //converts start to time
-                    LocalTime endDate = stringToLocalTimeExistingTask(end); //converts end to time
-                    if (parsedDate.isAfter(endDate)) {
+                    LocalTime startTime = stringToLocalTimeExistingTask(start); //converts start to time
+                    LocalTime endTime = stringToLocalTimeExistingTask(end); //converts end to time
+                    if (startTime.isAfter(endTime)) {
                         throw new EventException(false, false, true, false, false); //if start > end it throws error
                     }
-                    e = new Event(name, parsedDate.format(DateTimeFormatter.ofPattern("HH:mm")),
-                            endDate.format(DateTimeFormatter.ofPattern("HH:mm")));
+                    e = new Event(name, startTime.format(DateTimeFormatter.ofPattern("HH:mm")),
+                            endTime.format(DateTimeFormatter.ofPattern("HH:mm")), startTime, endTime);
                 } catch (EventException y) {
                     throw new EventException(false, false, true, false, false);
                 } catch (DateTimeException z) {

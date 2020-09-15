@@ -2,16 +2,11 @@ package duke.commands;
 
 import duke.errors.DeadlineException;
 import duke.errors.DukeException;
+import duke.errors.EventException;
 import duke.helpers.Storage;
 import duke.helpers.TaskList;
 import duke.helpers.Ui;
 import duke.tasks.Deadline;
-
-import java.time.DateTimeException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 
 /**
  * Handles when input is deadline
@@ -37,11 +32,8 @@ public class DeadlineCommand extends AddCommand {
      * description
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        if (isNumberOrDescriptionAbsent()) {
-            ui.setDukeException(new DeadlineException(true, false, false));
-            throw new DeadlineException(true, false, false); //Since description is absent
-        }
         try {
+            exceptionThrownIfNumberOrDescriptionAbsent();
             return Deadline.addDeadlineTask(tasks, ui, storage, userInput);
         } catch (DukeException dukeException) {
             ui.setDukeException(dukeException);
@@ -49,5 +41,15 @@ public class DeadlineCommand extends AddCommand {
         }
     }
 
+    /**
+     * Test whether description is absent and exception is thrown if absent
+     *
+     * @throws DukeException thrown if description for event is absent
+     */
+    protected void exceptionThrownIfNumberOrDescriptionAbsent() throws DukeException {
+        if(isNumberOrDescriptionAbsent()) {
+            throw new DeadlineException(true, false, false); //Since description is absent
+        }
+    }
 
 }

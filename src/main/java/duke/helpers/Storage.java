@@ -1,5 +1,11 @@
 package duke.helpers;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
 import duke.errors.DeadlineException;
 import duke.errors.DukeException;
 import duke.errors.FIleEmptyException;
@@ -9,11 +15,6 @@ import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.ToDo;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
 
 /**
  * Deals with loading tasks from the file and saving tasks in the file and stores shortcuts

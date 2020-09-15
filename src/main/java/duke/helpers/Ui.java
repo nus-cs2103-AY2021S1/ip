@@ -1,11 +1,11 @@
 package duke.helpers;
 
-import duke.errors.DukeException;
-import duke.errors.FileAbsentException;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+
+import duke.errors.DukeException;
+import duke.errors.FileAbsentException;
 
 /**
  * deals with interactions with the user

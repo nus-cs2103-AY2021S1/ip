@@ -1,14 +1,14 @@
 package duke.commands;
 
+import java.io.FileWriter;
+import java.io.IOException;
+
 import duke.errors.DoneException;
 import duke.errors.DukeException;
 import duke.errors.FileAbsentException;
 import duke.helpers.Storage;
 import duke.helpers.TaskList;
 import duke.helpers.Ui;
-
-import java.io.FileWriter;
-import java.io.IOException;
 
 /**
  * Handles case when done is keyword
@@ -44,8 +44,8 @@ public class DoneCommand extends Command {
     /**
      * Returns a String if the input is given in the correct order, else Exception is thrown
      *
-     * @param tasks is used to check whether the tasks to be found is present in TaskList
-     * @param storage is used to update the file in storage that contains current tasks
+     * @param tasks is used to check whether the tasks to be found is present in TaskList, to mark as done
+     * @param storage is used to update the file in storage that contains current tasks, to mark that task as done
      * @return String if the user input is correct
      * @throws DukeException if the user input is wrong
      */

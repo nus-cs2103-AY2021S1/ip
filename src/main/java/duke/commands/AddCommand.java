@@ -1,11 +1,5 @@
 package duke.commands;
 
-import duke.errors.DukeException;
-import duke.errors.FileAbsentException;
-import duke.helpers.Storage;
-import duke.helpers.TaskList;
-import duke.tasks.Task;
-
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.DateTimeException;
@@ -13,6 +7,12 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+
+import duke.errors.DukeException;
+import duke.errors.FileAbsentException;
+import duke.helpers.Storage;
+import duke.helpers.TaskList;
+import duke.tasks.Task;
 
 /**
  * This class handles the case of adding different tasks which are ToDo, deadline and Event

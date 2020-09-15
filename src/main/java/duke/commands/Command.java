@@ -54,4 +54,5 @@ public abstract class Command {
         return userInput.length() == lengthOfKeyword || userInput.length() == lengthOfKeyword + 1;
         //since the delete number appears after length of keyword/+1
     }
+
 }

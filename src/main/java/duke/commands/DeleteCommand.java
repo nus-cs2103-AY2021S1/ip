@@ -1,14 +1,15 @@
 package duke.commands;
 
+import duke.errors.DoneException;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import duke.errors.DeleteException;
 import duke.errors.DukeException;
 import duke.errors.FileAbsentException;
 import duke.helpers.Storage;
 import duke.helpers.TaskList;
 import duke.helpers.Ui;
-
-import java.io.FileWriter;
-import java.io.IOException;
 
 /**
  * Handles the case when the keyword is delete
@@ -34,22 +35,33 @@ public class DeleteCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
-            if (isNumberOrDescriptionAbsent()) {
-                throw new DeleteException(true, false); //when number is absent
-            } else {
-                int id = Integer.parseInt(userInput.substring(lengthOfKeyword + 1));
-                if (isNumberNotInList(id, tasks)) {
-                    throw new DeleteException(false, true); //when ID is more than number of tasks in list
-                } else {
-                    return rewrite(storage, tasks, id); //to update TaskList and file in Storage
-                }
-            }
+            return process(tasks, storage);
         } catch (DukeException dukeException) {
             ui.setDukeException(dukeException);
             throw dukeException;
         }
     }
 
+    /**
+     * Returns a String if the input is given in the correct order, else Exception is thrown
+     *
+     * @param tasks is used to check whether the tasks to be found is present in TaskList, to delete the task
+     * @param storage is used to update the file in storage that contains current tasks, to remove it from the file
+     * @return String if the user input is correct
+     * @throws DukeException if the user input is wrong
+     */
+    private String process(TaskList tasks, Storage storage) throws DukeException {
+        if (isNumberOrDescriptionAbsent()) {
+            throw new DeleteException(true, false); //when number is absent
+        } else {
+            int id = Integer.parseInt(userInput.substring(lengthOfKeyword + 1));
+            if (isNumberNotInList(id, tasks)) {
+                throw new DeleteException(false, true); //when ID is more than number of tasks in list
+            } else {
+                return rewrite(storage, tasks, id); //to update TaskList and file in Storage
+            }
+        }
+    }
     /**
      * Returns whether the task is present in the list.
      *

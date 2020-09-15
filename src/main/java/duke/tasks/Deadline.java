@@ -1,16 +1,16 @@
 package duke.tasks;
 
-import duke.errors.DeadlineException;
-import duke.errors.DukeException;
-import duke.errors.FileAbsentException;
-import duke.helpers.Storage;
-import duke.helpers.TaskList;
-import duke.helpers.Ui;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+
+import duke.errors.DeadlineException;
+import duke.errors.DukeException;
+import duke.helpers.Storage;
+import duke.helpers.TaskList;
+import duke.helpers.Ui;
 
 /**
  * The deadline is a subclass of Task and it is used to describe tasks that has to be completed by a specific day.
@@ -20,39 +20,40 @@ public class Deadline extends Task {
     private LocalDate deadlineInDate;
     private LocalDateTime deadlineInDateAndTime;
     private LocalTime deadlineInTime;
-    /**
-     * Assigns the name and day values, initializes Deadline task
-     *
-     * @param name super(name) so that it does whatever is mentioned in the parent class
-     * @param day assigns this.day to day value
-     */
-    public Deadline(String name, String day) {
-        super(name);
-        this.dayAndOrTime = day;
-    }
 
     /**
-     * Assigns the name, done and day values, initializes Deadline task
+     * Assigns the name, dayAndOrTime, deadlineInDate with values initializes Deadline task
      *
-     * @param name argument in super class constructor
-     * @param done argument in super class constructor
-     * @param dayAndOrTime assigns to this.day
+     * @param name assigns this.name with value
+     * @param dayAndOrTime assigns this.dayAndOrTime with value(String format of deadlineInDate)
+     * @param deadlineInDate assigns this.deadlineInDate with value
      */
-    public Deadline(String name, boolean done, String dayAndOrTime) {
-        super(name, done);
-        this.dayAndOrTime = dayAndOrTime;
-    }
-
-    public Deadline(String name, String dayAndOrTime, LocalDate deadlineInDate) {
+    private Deadline(String name, String dayAndOrTime, LocalDate deadlineInDate) {
         super(name);
         this.dayAndOrTime = dayAndOrTime;
         this.deadlineInDate = deadlineInDate;
     }
+
+    /**
+     * Assigns the name, dayAndOrTime, deadlineInDateAndTime with values initializes Deadline task
+     *
+     * @param name assigns this.name with value
+     * @param dayAndOrTime assigns this.dayAndOrTime with value(String format of deadlineInDateAndTime)
+     * @param deadlineInDateAndTime assigns this.deadlineInDate with value
+     */
     public Deadline(String name, String dayAndOrTime, LocalDateTime deadlineInDateAndTime) {
         super(name);
         this.dayAndOrTime = dayAndOrTime;
         this.deadlineInDateAndTime = deadlineInDateAndTime;
     }
+
+    /**
+     * Assigns the name, dayAndOrTime, deadlineInDate with values initializes Deadline task
+     *
+     * @param name assigns this.name with value
+     * @param dayAndOrTime assigns this.dayAndOrTime with value(String format of deadlineInTime)
+     * @param deadlineInTime assigns this.deadlineInDate with value
+     */
     public Deadline(String name, String dayAndOrTime, LocalTime deadlineInTime) {
         super(name);
         this.dayAndOrTime = dayAndOrTime;
@@ -148,7 +149,8 @@ public class Deadline extends Task {
         } catch (DateTimeException d) {
             try {
                 LocalDateTime parsedDate = stringToLocalDateTime(dateTime); //converts string to date and time
-                e = new Deadline(name, parsedDate.format(DateTimeFormatter.ofPattern("dd LLL yyyy, HH:mm")), parsedDate);
+                e = new Deadline(name, parsedDate.format(DateTimeFormatter.ofPattern("dd LLL yyyy, HH:mm")),
+                        parsedDate);
             } catch (DateTimeException g) {
                 try {
                     LocalTime parsedDate = stringToLocalTime(dateTime); //converts string to date
@@ -177,8 +179,10 @@ public class Deadline extends Task {
             e = new Deadline(name, parsedDate.format(DateTimeFormatter.ofPattern("dd LLL yyyy")), parsedDate);
         } catch (DateTimeException d) {
             try {
-                LocalDateTime parsedDate = stringToLocalDateTimeExistingTask(dateTime); //converts string to date and time
-                e = new Deadline(name, parsedDate.format(DateTimeFormatter.ofPattern("dd LLL yyyy, HH:mm")), parsedDate);
+                LocalDateTime parsedDate = stringToLocalDateTimeExistingTask(dateTime);
+                //converts string to date and time
+                e = new Deadline(name, parsedDate.format(DateTimeFormatter.ofPattern("dd LLL yyyy, HH:mm")),
+                        parsedDate);
             } catch (DateTimeException g) {
                 try {
                     LocalTime parsedDate = stringToLocalTimeExistingTask(dateTime); //converts string to date

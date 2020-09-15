@@ -1,5 +1,8 @@
 package duke.commands;
 
+import java.io.FileWriter;
+import java.io.IOException;
+
 import duke.errors.DukeException;
 import duke.errors.FileAbsentException;
 import duke.errors.ShortCutException;
@@ -8,8 +11,6 @@ import duke.helpers.Storage;
 import duke.helpers.TaskList;
 import duke.helpers.Ui;
 
-import java.io.FileWriter;
-import java.io.IOException;
 
 /**
  * Handles case when short is the input to add short cuts
