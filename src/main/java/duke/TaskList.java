@@ -109,6 +109,10 @@ public class TaskList {
         completedTask.markAsDone();
     }
 
+    /**
+     * Retrieves the number of tasks in the task list.
+     * @return Returns the number of tasks in the task list.
+     */
     public int size() {
         return tasks.size();
     }
