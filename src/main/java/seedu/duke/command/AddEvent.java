@@ -3,8 +3,8 @@ package seedu.duke.command;
 import seedu.duke.TaskList;
 import seedu.duke.exception.DukeCommandException;
 import seedu.duke.exception.DukeDateTimeException;
-import seedu.duke.ui.Ui;
 import seedu.duke.task.Event;
+import seedu.duke.ui.Ui;
 
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
@@ -15,7 +15,7 @@ import java.util.Locale;
  * Class that represents adding an event task.
  */
 public class AddEvent extends Command {
-    public static DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("d MMM yyyy kkmm", Locale.ENGLISH);
+    private static DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("d MMM yyyy kkmm", Locale.ENGLISH);
 
     public AddEvent(String[] words) {
         super(words);

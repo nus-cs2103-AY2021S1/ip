@@ -2,8 +2,8 @@ package seedu.duke.command;
 
 import seedu.duke.TaskList;
 import seedu.duke.exception.DukeCommandException;
-import seedu.duke.ui.Ui;
 import seedu.duke.task.ToDo;
+import seedu.duke.ui.Ui;
 
 /**
  * Class that represents adding a todo task.
@@ -24,9 +24,9 @@ public class AddTodo extends Command {
         try {
             ToDo newTD = new ToDo(words[1], false);
             ls.add(newTD);
-            String thing = "Alright then, add more things to your ever-growing list of tasks:\n" +
-                    newTD.getStatus().replaceAll("(?m)^", "\t") +
-                    "\nNow you have " + ls.size() + " tasks in the list.";
+            String thing = "Alright then, add more things to your ever-growing list of tasks:\n"
+                    + newTD.getStatus().replaceAll("(?m)^", "\t")
+                    + "\nNow you have " + ls.size() + " tasks in the list.";
             ui.printResult(thing);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeCommandException("Write something after the command, gee.");

@@ -22,9 +22,9 @@ public class Ui {
      * Prints the starting introduction of Duke.
      */
     public void start() {
-        printResult("Hey I'm Duke...\n" +
-                "What do you wanna do?\n" +
-                "I ain't got all day.");
+        printResult("Hey I'm Duke...\n"
+                + "What do you wanna do?\n"
+                + "I ain't got all day.");
     }
 
     /**

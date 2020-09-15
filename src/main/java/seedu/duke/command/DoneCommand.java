@@ -1,7 +1,6 @@
 package seedu.duke.command;
 
-import seedu.duke.*;
-import seedu.duke.exception.DukeException;
+import seedu.duke.TaskList;
 import seedu.duke.exception.DukeNotSureException;
 import seedu.duke.task.Task;
 import seedu.duke.ui.Ui;
@@ -28,7 +27,7 @@ public class DoneCommand extends Command {
             oldTask.checkTask();
             ui.printResult(("Did you really finish it? Eh, good for you I guess. Marked:" + "\n"
                     + oldTask.getStatus()));
-        } catch(IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             throw new DukeNotSureException("This task doesn't seem to exist? Pick a proper task, good god.");
         }
     }

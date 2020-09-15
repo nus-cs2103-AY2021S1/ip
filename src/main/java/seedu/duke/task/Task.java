@@ -1,7 +1,6 @@
 package seedu.duke.task;
 
 import java.time.LocalDateTime;
-import java.util.Comparator;
 
 /**
  * Class that represents the tasks the user can add to their list.
@@ -20,7 +19,7 @@ public abstract class Task {
      * @return String representing the task.
      */
     public String getStatus() {
-        return this.isDone? ("[\u2713] " + toString()) : ("[\u2718] " + toString());
+        return this.isDone ? ("[\u2713] " + toString()) : ("[\u2718] " + toString());
     }
 
     /**

@@ -3,8 +3,9 @@ package seedu.duke.command;
 import seedu.duke.TaskList;
 import seedu.duke.exception.DukeCommandException;
 import seedu.duke.exception.DukeDateTimeException;
-import seedu.duke.ui.Ui;
 import seedu.duke.task.Deadline;
+import seedu.duke.ui.Ui;
+
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

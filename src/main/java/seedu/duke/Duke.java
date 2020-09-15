@@ -6,6 +6,7 @@ import java.io.PrintStream;
 import java.time.DateTimeException;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
+
 import seedu.duke.command.Command;
 import seedu.duke.exception.DukeException;
 import seedu.duke.ui.Ui;
@@ -16,11 +17,13 @@ import seedu.duke.ui.Ui;
 
 public class Duke {
 
-    private static DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("d MMM yyyy kkmm", Locale.ENGLISH);
     private Ui ui;
     private Storage storage;
     private TaskList tasklist;
 
+    /**
+     * Duke constructor that sets up the required classes.
+     */
     public Duke() {
         this.ui = new Ui();
         this.storage =  new Storage();
@@ -43,7 +46,7 @@ public class Duke {
 
         boolean isExit = false;
 
-        while(!isExit) {
+        while (!isExit) {
             try {
                 String line = this.ui.getUserCommand();
                 Command c = new Parser().parse(line);
@@ -64,7 +67,8 @@ public class Duke {
 
     public String getResponse(String input) {
         //@@author Ernest Friedman-Hill
-        //Reused from https://stackoverflow.com/questions/8708342/redirect-console-output-to-string-in-java with minor modifications
+        //Reused from https://stackoverflow.com/questions/8708342/redirect-console-output-to-string-in-java
+        //with minor modifications
         ByteArrayOutputStream str = new ByteArrayOutputStream();
         PrintStream printStr = new PrintStream(str);
         PrintStream oldOut = System.out;

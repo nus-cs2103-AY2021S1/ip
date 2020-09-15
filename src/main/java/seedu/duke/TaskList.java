@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * Class that represents the list of tasks.
  */
 public class TaskList {
-    ArrayList<Task> ls;
+    private ArrayList<Task> ls;
 
     public TaskList() {
         this.ls = new ArrayList<Task>();

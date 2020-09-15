@@ -2,9 +2,9 @@ package seedu.duke.command;
 
 import seedu.duke.TaskList;
 import seedu.duke.comparator.TaskCompareDate;
+import seedu.duke.comparator.TaskCompareDone;
 import seedu.duke.exception.DukeCommandException;
 import seedu.duke.exception.DukeNotSureException;
-import seedu.duke.comparator.TaskCompareDone;
 import seedu.duke.ui.Ui;
 import java.util.Collections;
 

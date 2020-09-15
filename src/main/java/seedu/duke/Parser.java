@@ -31,7 +31,7 @@ public class Parser {
             return new ListCommand();
         } else if (input.equals(endCommand)) {
             return new ByeCommand();
-        } else if(input.equals(helpCommand)) {
+        } else if (input.equals(helpCommand)) {
             return new HelpCommand();
         } else {
             String[] words = input.split(" ", 2);

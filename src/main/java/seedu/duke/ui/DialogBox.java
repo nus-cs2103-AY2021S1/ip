@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Collections;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
@@ -37,7 +38,7 @@ public class DialogBox extends HBox {
         this.dialog.setText(text);
         this.displayPicture.setImage(img);
 
-        Circle cir2 = new Circle(250,250,120);
+        Circle cir2 = new Circle(250, 250, 120);
         cir2.setFill(new ImagePattern(img));
     }
 

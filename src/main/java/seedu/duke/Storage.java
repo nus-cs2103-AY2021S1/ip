@@ -7,6 +7,7 @@ import seedu.duke.task.Event;
 import seedu.duke.task.Task;
 import seedu.duke.task.ToDo;
 import seedu.duke.ui.Ui;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -19,13 +20,12 @@ import java.util.Scanner;
 /**
  * Represents a storage space for the program output.
  */
-
 public class Storage {
 
-    public static final String DEFAULT_STORAGE_FILEPATH = "duke.txt";
-    public static DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("d MMM yyyy kkmm", Locale.ENGLISH);
-    public static String TICK = "\u2713";
-    public static String CROSS = "\u2718";
+    private static final String DEFAULT_STORAGE_FILEPATH = "duke.txt";
+    private static DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("d MMM yyyy kkmm", Locale.ENGLISH);
+    private static String TICK = "\u2713";
+    private static String CROSS = "\u2718";
 
     public final String path;
 
@@ -47,14 +47,14 @@ public class Storage {
 
         Scanner s = new Scanner(f); // create a Scanner using the File as the source
         ArrayList<Task> ls = new ArrayList<>();
-        assert ls.size() == 0: "Should be a new list of tasks.";
+        assert ls.size() == 0 : "Should be a new list of tasks.";
 
         while (s.hasNext()) {
             String line = s.nextLine();
             String[] arr = line.split("\\*");
             String task = arr[0];
-            assert task.equals("E") || task.equals("T") || task.equals("D") :
-                    "Should have a prefix before each task in the text file.";
+            assert task.equals("E") || task.equals("T") || task.equals("D")
+                    : "Should have a prefix before each task in the text file.";
             switch (task) {
                 case "E": { // case where the task is an event
                     boolean status = arr[1].equals(TICK);

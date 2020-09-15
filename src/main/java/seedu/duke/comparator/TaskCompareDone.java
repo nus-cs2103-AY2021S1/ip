@@ -12,7 +12,8 @@ public class TaskCompareDone implements Comparator<Task> {
      * Compares two tasks according to the type of task they are, and their completion status.
      * @param t1 The first task to be compared.
      * @param t2 The second task to be compared.
-     * @return A negative integer, zero, or a positive integer as the first argument is less than, equal to, or greater than the second.
+     * @return A negative integer, zero, or a positive integer as the first argument is less than, equal to,
+     * or greater than the second.
      */
     @Override
     public int compare(Task t1, Task t2) {

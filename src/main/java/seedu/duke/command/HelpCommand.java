@@ -26,8 +26,7 @@ public class HelpCommand extends Command {
                         + "to add an event that happens at a certain time."
                         + "eg. event read book /at 25 Mar 2020 1200 to 25 Mar 2020 1400 \n"
                 + "7. find [keyword]: finds a certain word in your task list. eg. find book \n"
-                + "8. bye: you're finally done and want to bid farewell to me, thank goodness."
-                ;
+                + "8. bye: you're finally done and want to bid farewell to me, thank goodness.";
         ui.printResult(str);
     }
 }
