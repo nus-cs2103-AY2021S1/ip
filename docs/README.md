@@ -95,7 +95,7 @@ Expected outcome:
 
 ### `delete` - Delete tasks from the list
 
-Mark tasks as done.
+Delete a certain task from the list.
 
 Example of usage: 
 
@@ -131,9 +131,9 @@ Find the tasks that matches the keyword.
  
 `[E][✘] work hard (at: 12 12 2020 12 : 21)`
 
-### `update` - find tasks that match the keyword
+### `update` - Update the details of a task
  
-Find the tasks that matches the keyword.
+Update the details of a specific task according to index.
  
  Example of usage: 
  
@@ -145,7 +145,7 @@ Find the tasks that matches the keyword.
 
    
 
-### `bye` - find tasks that match the keyword
+### `bye` - Exit the application
  
 Exit the application and save the changes into the task list.
  
