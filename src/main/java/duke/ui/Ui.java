@@ -45,7 +45,7 @@ public class Ui {
 
     //method to mark tasks as deleted
     public static String taskDeleted(Task task) {
-        String statement = "The following duke.Tasks.Task is removed from the duke.TaskList.duke.TaskList!!\n" + "[" + task.getStatusIcon() + "] "
+        String statement = "The following Task is removed from the TaskList!!\n" + "[" + task.getStatusIcon() + "] "
                 + task.getTask() + "\n";
         lineFormatter(statement);
         return statement;

@@ -26,13 +26,14 @@ public class FindCommand extends Command{
      */
     public String execute(TaskList taskList, Ui ui, Storage storage){
         String[] inputList = description.trim().split(" ", 2);
+        String toFind = inputList[1].trim().toLowerCase();
         temporaryList = new TaskList();
 
         //asserts the command to have the proper format
         assert(inputList.length == 2);
         for (int i = 0; i < taskList.getSize(); i++) {
             Task toAdd = taskList.getTask(i);
-            if (toAdd.getTask().contains(inputList[1].trim())) {
+            if (toAdd.getTask().contains(toFind)) {
                 temporaryList.addTask(toAdd);
             }
         }
