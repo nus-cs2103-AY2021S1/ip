@@ -5,6 +5,7 @@ import java.time.format.DateTimeParseException;
 import duke.commands.Command;
 import duke.commands.ExitCommand;
 import duke.exceptions.CommandNotFoundException;
+import duke.exceptions.DateSequenceException;
 import duke.exceptions.EmptyTaskException;
 import duke.exceptions.EmptyTimeException;
 import duke.exceptions.IncompleteMessageException;
@@ -39,7 +40,7 @@ public class Parser {
      * @throws WrongDateFormatException If the date cannot be parsed.
      */
     public static Command parse(String fullCommand) throws EmptyTaskException, EmptyTimeException,
-            CommandNotFoundException, WrongDateFormatException, IncompleteMessageException {
+            CommandNotFoundException, DateSequenceException, WrongDateFormatException, IncompleteMessageException {
 
         String[] parseArray = fullCommand.trim().split(" ", 2);
         String type = parseArray[0];

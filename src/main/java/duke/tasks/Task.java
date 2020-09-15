@@ -63,6 +63,9 @@ public class Task {
         return description;
     }
 
+    public Boolean matchTime(LocalDate date) {
+        return null;
+    }
     /**
      * Marks a task as finished.
      *

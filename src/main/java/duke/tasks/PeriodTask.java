@@ -39,6 +39,10 @@ public class PeriodTask extends Task {
         return hasTime;
     }
 
+    public Boolean matchTime(LocalDate date) {
+        return start.isEqual(date) || end.isEqual(date);
+    }
+
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");

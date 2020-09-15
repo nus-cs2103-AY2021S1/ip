@@ -71,7 +71,8 @@ public class Ui {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
         String dateString = date.format(formatter);
         ArrayList<Task> tasks = taskList.getTasks();
-        ArrayList<Task> filtered = tasks.stream().filter(Task::getHasTime).filter(task -> task.getTime().equals(date))
+        ArrayList<Task> filtered = tasks.stream().filter(Task::getHasTime)
+                .filter(task -> task.matchTime(date))
                 .collect(Collectors.toCollection(ArrayList::new));
         if (filtered.size() == 0) {
             return "No tasks on this day! Chill Chill~ ٩(˘◡˘)۶";

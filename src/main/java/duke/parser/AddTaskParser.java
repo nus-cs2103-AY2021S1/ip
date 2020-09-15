@@ -5,6 +5,7 @@ import java.time.format.DateTimeParseException;
 
 import duke.commands.AddCommand;
 import duke.commands.Command;
+import duke.exceptions.DateSequenceException;
 import duke.exceptions.EmptyTaskException;
 import duke.exceptions.EmptyTimeException;
 import duke.exceptions.WrongDateFormatException;
@@ -107,7 +108,7 @@ public class AddTaskParser extends Parser {
      * @throws EmptyTaskException If the the task description is empty.
      */
     public static Command parsePeriodTaskCommand(String[] parseArray) throws EmptyTimeException,
-            WrongDateFormatException, EmptyTaskException {
+            WrongDateFormatException, EmptyTaskException, DateSequenceException {
         if (isOneWordCommand(parseArray)) {
             throw new EmptyTaskException("Please don't leave the description blank~ (´∀`)");
         }
@@ -126,6 +127,9 @@ public class AddTaskParser extends Parser {
             LocalDate start = LocalDate.parse(startString);
             String endString = taskDescription.split(" /from | /to ")[2];
             LocalDate end = LocalDate.parse(endString);
+            if (start.isAfter(end)) {
+                throw new DateSequenceException();
+            }
             LocalDate[] dataArr = {start, end};
             return new AddCommand(type, name, dataArr);
         } catch (DateTimeParseException ex) {

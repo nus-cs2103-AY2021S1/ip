@@ -34,6 +34,10 @@ public class Deadline extends Task {
         return time;
     }
 
+    public Boolean matchTime(LocalDate date) {
+        return getTime().isEqual(date);
+    }
+
     public boolean getHasTime() {
         return hasTime;
     }
