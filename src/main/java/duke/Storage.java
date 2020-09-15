@@ -97,35 +97,44 @@ public class Storage {
             Scanner sc = new Scanner(localTasks);
             while (sc.hasNext()) {
                 String[] details = sc.nextLine().split(" \\| ");
-
-                switch (details[0]) {
+                String taskType = details[0];
+                String completionStatus = details[1];
+                String taskDetails = details[2];
+                String date;
+                String priority;
+                switch (taskType) {
                 case "T":
-                    TodoTask todoTask = new TodoTask(details[2]);
-                    if (details[1].equals("1")) {
+                    TodoTask todoTask = new TodoTask(taskDetails);
+                    if (completionStatus.equals("1")) {
                         todoTask.markAsDone();
                     }
                     if (details.length == 4) {
-                        todoTask.addPriority(Priority.valueOf(details[3]));
+                        priority = details[3];
+                        todoTask.addPriority(Priority.valueOf(priority));
                     }
                     tasks.add(todoTask);
                     break;
                 case "D":
-                    DeadlineTask deadlineTask = new DeadlineTask(details[2], details[3]);
-                    if (details[1].equals("1")) {
+                    date = details[3];
+                    DeadlineTask deadlineTask = new DeadlineTask(taskDetails, date);
+                    if (completionStatus.equals("1")) {
                         deadlineTask.markAsDone();
                     }
                     if (details.length == 5) {
-                        deadlineTask.addPriority(Priority.valueOf(details[4]));
+                        priority = details[4];
+                        deadlineTask.addPriority(Priority.valueOf(priority));
                     }
                     tasks.add(deadlineTask);
                     break;
                 case "E":
-                    EventTask eventTask = new EventTask(details[2], details[3]);
-                    if (details[1].equals("1")) {
+                    date = details[3];
+                    EventTask eventTask = new EventTask(taskDetails, date);
+                    if (completionStatus.equals("1")) {
                         eventTask.markAsDone();
                     }
                     if (details.length == 5) {
-                        eventTask.addPriority(Priority.valueOf(details[4]));
+                        priority = details[4];
+                        eventTask.addPriority(Priority.valueOf(priority));
                     }
                     tasks.add(eventTask);
                     break;
