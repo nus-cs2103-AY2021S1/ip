@@ -27,7 +27,6 @@ public class Fei {
         try {
             tasks = storage.load();
         } catch (FeiException e) {
-            ui.showLoadingError();
             tasks = new TaskList();
         }
     }

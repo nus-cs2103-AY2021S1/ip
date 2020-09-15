@@ -39,7 +39,7 @@ public class FeiException extends Exception {
     }
 
     public static FeiException deadlineParseException() {
-        return new FeiException("Sorry, I can't parse the time format you just inputted. \n"
+        return new FeiException("Sorry, I can't parse the time format of your input. \n"
                 + "Try it in this format: yyyy-mm-dd (e.g. 2020-01-01).");
     }
 

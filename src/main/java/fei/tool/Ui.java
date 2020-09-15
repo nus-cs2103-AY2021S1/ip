@@ -1,12 +1,8 @@
 package fei.tool;
 
-import fei.exception.FeiException;
 import fei.task.Task;
 
 public class Ui {
-    public String showLoadingError() {
-        return FeiException.loadingException().getMessage();
-    }
 
     public static String greeting() {
         return "Hello! It's me!\n"
@@ -72,6 +68,19 @@ public class Ui {
         }
         return String.format("You now have %d out of %d tasks marked as done.\n"
                 + "There are still %d task(s) left.\n", done, total, total - done);
+    }
+
+    public String HelpMessage() {
+        return "The following commands are supported:\n"
+                + "1. todo [task description]\n"
+                + "2. deadline [task description] /by [time]\n"
+                + "3. event [task description] /by [time]\n"
+                + "4. list\n"
+                + "5. delete [index]\n"
+                + "6. done [index]\n"
+                + "7. find [keywords]\n"
+                + "8. exit\n"
+                + "You can replace '[xxx]' with your on input.\n";
     }
 
 }
