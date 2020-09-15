@@ -11,18 +11,17 @@ graphics are inspired by my all time favorite game:
 # Thunderbolt Features 
 
 For the PikaDuke Bot, I have implemented the following features:
-1. **Adding** of tasks to the bot.
-2. **Storage & Retrieval** of tasks in local drive.
-3. **Listing** of all existing tasks.
-4. **Marking completion** for tasks desired to be marked as completed.
-5. **Deletion** of tasks no longer desired to be in the list.
-6. **Searching** for key taskings.
-7. **Sorting of tasks** according to their input schedule (if available).
-8. **Help** display in the event user encounters error.
 
+1. [**Adding**](#addition-of-tasks) of tasks to the bot.   
+2. [**Storage & Retrieval**](#storage-and-retrieval-of-tasks) of tasks in local drive.  
+3. [**Listing**](#listing) of all existing tasks.  
+4. [**Marking completion**](#marking-completion) for tasks desired to be marked as completed.  
+5. [**Deletion**](#deletion-of-tasks) of tasks no longer desired to be in the list.  
+6. [**Searching**](#searching) for key taskings.  
+7. [**Sorting of tasks**](#sorting-of-tasks) according to their input schedule (if available).  
+8. [**Help**](#help-command) display in the event user encounters error.  
 
 ## Feature Details
-___
 ### 1. Addition Of Tasks
 
 The user will be able to add tasks into PikaDuke. There are 3 types of tasking of which the user can
@@ -48,8 +47,6 @@ Simply adds a tasking with the 'task details' into PikaDuke.
         ADDED: [T][X] eat genki sushi
     Now you got 1 tasks
    
-![image](add-todo.png) 
-
 - **Event** - `event <task details> /at <Date & Time>`
 
 Adds an event tasking with the 'task details' as well as Date and Time into PikaDuke. 
@@ -66,8 +63,6 @@ Adds an event tasking with the 'task details' as well as Date and Time into Pika
         ADDED: [E][X] eat shabusai (at: 14 Nov 2020, 12:00PM)
     Now you got 2 tasks
    
-![image](add-event.png) 
-
 - **Deadline** - `deadline <task details> /by <Date & Time>`
 
 Adds an deadline tasking with the 'task details' as well as Date and Time into PikaDuke. 
@@ -84,11 +79,9 @@ Adds an deadline tasking with the 'task details' as well as Date and Time into P
         ADDED: [D][X] eat steak (by: 14 Nov 2020, 11:00AM)
     Now you got 3 tasks
    
-![image](add-deadline.png) 
-
 ---
 
-### 2. Storage & Retrieval of Tasks
+### 2. Storage and Retrieval of Tasks
 PikaDuke will smartly retrieve an existing set of task if there is an existing 
 file in your local computer. Upon launching of PikaDuke, it will parse through the 
 text file and create the task list to be loaded into PikaDuke.
@@ -122,8 +115,6 @@ Displays all the existing task list in PikaDuke.
         2. [E][X] eat shabusai (at: 14 Nov 2020, 12:00PM)
         3. [D][X] eat steak (by: 14 Nov 2020, 11:00AM)
     
-![image](list.png) 
-
 ---
 ### 4. Marking Completion
 - **Marking** - `done <index of task>`
@@ -176,8 +167,6 @@ Note that this will not delete the tasks not relevant with the search word.
     Retrieving your list, patient ah!
     1. [E][X] eat shabusai (at: 14 Nov 2020, 12:00PM)
  
-![image](find.png) 
-
 ---
 
 ### 7. Sorting of Tasks
