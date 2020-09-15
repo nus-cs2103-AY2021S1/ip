@@ -84,7 +84,6 @@ public class TaskList<Task> {
 
     /**
      * Exports the duke.TaskList as an arrayList for easier processing.
-     * 
      * @return the arrayList containing the Tasks
      */
     ArrayList<Task> exportList() {

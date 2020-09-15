@@ -1,0 +1,5 @@
+Deadline|0|mortgage payment |12 December 2020 12:00 pm
+Event|0|NOC talk | NUS hanger 3pm
+Todo|1|eat with chloe
+Event|0|CS2100 consultation | COM1 3pm
+Deadline|0|find a girlfriend |31 December 2099 11:59 pm
