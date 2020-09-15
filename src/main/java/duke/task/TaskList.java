@@ -67,7 +67,7 @@ public class TaskList {
      */
     public void deleteTask(int index) throws InvalidRequestException {
         int numberOfTasks = listOfTasks.size();
-        if (listOfTasks.size() < index || index < 0) {
+        if (listOfTasks.size() < index || index < 0 || index == 0) {
             throw new InvalidRequestException("You have entered an invalid duke.task "
                     + "number! Please try again.");
         }
@@ -82,7 +82,7 @@ public class TaskList {
      * @throws InvalidRequestException If the command is invalid.
      */
     public void setAsDone(int index) throws InvalidRequestException {
-        if (listOfTasks.size() < index || index < 0) {
+        if (listOfTasks.size() < index || index < 0 || index == 0) {
             throw new InvalidRequestException("You have entered an invalid task "
                     + "number! Please try again.");
         }
@@ -99,7 +99,7 @@ public class TaskList {
      * @throws InvalidRequestException If the command is invalid.
      */
     public Task getTask(int index) throws InvalidRequestException {
-        if (listOfTasks.size() < index || index < 0) {
+        if (listOfTasks.size() < index || index < 0 || index == 0) {
             throw new InvalidRequestException("You have entered an invalid task "
                     + "number! Please try again.");
         }

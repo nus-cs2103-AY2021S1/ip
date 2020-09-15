@@ -87,8 +87,14 @@ public class Parser {
                 throw new InvalidRequestException("I can only handle one request to "
                         + "mark a task as DONE once! Please check your command.");
             }
-            Integer index = Integer.parseInt(wordArray[1]);
-            return new DoneCommand(index);
+            try {
+                Integer index = Integer.parseInt(wordArray[1]);
+                return new DoneCommand(index);
+            } catch (NumberFormatException e) {
+                return new ErrorCommand("You should enter a valid index "
+                        + "after the first word 'done'! The correct form is 'done INDEX'."
+                        + "Please try again.");
+            }
         } catch (InvalidInputException e) {
             return new ErrorCommand(e.getMessage());
         }
@@ -111,8 +117,14 @@ public class Parser {
                 throw new InvalidRequestException("I can only handle one request to "
                         + "delete a task at once! Please check your command.");
             }
-            Integer index = Integer.parseInt(wordArray[1]);
-            return new DeleteCommand(index);
+            try {
+                Integer index = Integer.parseInt(wordArray[1]);
+                return new DeleteCommand(index);
+            } catch (NumberFormatException e) {
+                return new ErrorCommand("You should enter a valid index "
+                        + "after the first word 'delete'! The correct form is 'delete INDEX'."
+                        + "Please try again.");
+            }
         } catch (InvalidInputException e) {
             return new ErrorCommand(e.getMessage());
         }
@@ -178,13 +190,13 @@ public class Parser {
                         + "cannot add it into the list.");
             }
             String body = userCommand.split(" ", 2)[1];
-            if (body.split("/by ").length < 2) {
+            if (body.split(" /by ").length < 2) {
                 throw new InvalidDeadlineException("Please tell me both the name and"
                         + " the time due of the deadline task in the correct form! "
                         + "Don't forget to include the time by using /by.");
             }
-            String taskName = body.split("/by ")[0];
-            String time = body.split("/by ")[1];
+            String taskName = body.split(" /by ")[0];
+            String time = body.split(" /by ")[1];
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern(TIME_FORMAT);
             try {
                 LocalDate localDate = LocalDate.parse(time, formatter);
@@ -192,12 +204,12 @@ public class Parser {
                 if (!parsedTime.equals(time)) {
                     throw new InvalidDeadlineException("Sorry, I cannot process the command"
                             + " since the time due of the deadline task is not in the correct form! "
-                            + "Please input the time in the form of yyyy-MM-dd.");
+                            + "Please input the time in the form of yyyy-mm-dd.");
                 }
             } catch (DateTimeParseException e) {
                 return new ErrorCommand("Sorry, I cannot process the command"
                         + " since the time due of the deadline task is not in the correct form! "
-                        + "Please input the time in the form of yyyy-MM-dd.");
+                        + "Please input the time in the form of yyyy-mm-dd.");
             }
             Task newTask = new Deadline(taskName, time);
             return new AddCommand(newTask);
@@ -221,13 +233,13 @@ public class Parser {
                         + " of the event task! Or else I cannot add it into the list.");
             }
             String body = userCommand.split(" ", 2)[1];
-            if (body.split("/at ").length < 2) {
+            if (body.split(" /at ").length < 2) {
                 throw new InvalidEventException("Please tell me both the name and "
                         + "the time period of the event task in the correct form! "
                         + "Don't forget to include the time by using /at.");
             }
-            String taskName = body.split("/at ")[0];
-            String time = body.split("/at ")[1];
+            String taskName = body.split(" /at ")[0];
+            String time = body.split(" /at ")[1];
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern(TIME_FORMAT);
             try {
                 LocalDate localDate = LocalDate.parse(time, formatter);
@@ -235,12 +247,12 @@ public class Parser {
                 if (!parsedTime.equals(time)) {
                     throw new InvalidEventException("Sorry, I cannot process the command"
                             + " since the time of the event task is not in the correct form! "
-                            + "Please input the time in the form of yyyy-MM-dd.");
+                            + "Please input the time in the form of yyyy-mm-dd.");
                 }
             } catch (DateTimeParseException e) {
                 return new ErrorCommand("Sorry, I cannot process the command"
                         + " since the time of the event task is not in the correct form! "
-                        + "Please input the time in the form of yyyy-MM-dd.");
+                        + "Please input the time in the form of yyyy-mm-dd.");
             }
             Task newTask = new Event(taskName, time);
             return new AddCommand(newTask);
