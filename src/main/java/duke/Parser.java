@@ -220,8 +220,8 @@ public class Parser {
             return delete(input);
         } else if (input.startsWith("due in")) {
             return handleDueIn(input);
-        } else if (input.equals("bye")) {
-            return new ByeCommand();
+        } else if (input.equals("save")) {
+            return new SaveCommand();
         } else if (input.startsWith("find")) {
             return handleFind(input);
         } else if (input.startsWith("repeat")) {

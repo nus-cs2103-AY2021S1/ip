@@ -5,7 +5,7 @@ import duke.TaskList;
 import duke.Ui;
 import duke.exception.DukeException;
 
-public class ByeCommand extends Command {
+public class SaveCommand extends Command {
 
     /**
      * Saves the TaskList into a save file and ends the Ui.
@@ -19,7 +19,7 @@ public class ByeCommand extends Command {
         try {
             storage.save(tasks);
             ui.end();
-            return "Goodbye!";
+            return "Your list has been saved!";
         } catch (DukeException e) {
             return e.getMessage();
         }
@@ -32,6 +32,6 @@ public class ByeCommand extends Command {
 
     @Override
     public boolean equals(Object obj) {
-        return obj instanceof ByeCommand;
+        return obj instanceof SaveCommand;
     }
 }

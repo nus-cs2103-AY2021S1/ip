@@ -17,7 +17,6 @@ public class HelpCommand extends Command {
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String help = "These are the available commands:\n"
-                + "bye - exits the program\n\n"
                 + "deadline <description> /by <due date and time in YYYY-MM-DD HH:MM format> - "
                 + "adds a deadline with the given description and due date to the task list\n\n"
                 + "delete <task number> - deletes the task corresponding to the number from the task list\n\n"
@@ -32,6 +31,7 @@ public class HelpCommand extends Command {
                 + "repeat <task number> <number> <'day'/'week'/'month'/'year'> until "
                 + "<date and time in YYYY-MM-DD HH:MM format> - sets the given task to "
                 + "repeat with the given recurrence until the provided end date\n\n"
+                + "save - saves the task list\n\n"
                 + "sort - sorts the task list according to time\n\n"
                 + "todo <description> - adds a todo task with the given description to the task list";
         return (help);
