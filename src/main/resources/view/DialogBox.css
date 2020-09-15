@@ -1,0 +1,12 @@
+.anchor {
+    -fx-background-size: cover;
+}
+
+.chat-bubble {
+    -fx-background-radius: 9px;
+    -fx-border-color: cyan;
+    -fx-border-width: 1 1 1 1;
+    -fx-border-radius: 9px;
+    -fx-background-insets: 0,1;
+    -fx-padding: 5;
+}

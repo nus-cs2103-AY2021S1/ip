@@ -6,14 +6,18 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label fx:id="dialog" minHeight="-Infinity" text="Label" textFill="#00fff2" wrapText="true"
-               HBox.hgrow="ALWAYS">
-         <font>
-            <Font name="Comic Sans MS" size="12.0" />
-         </font>
-      </Label>
+      <HBox alignment="CENTER" style="-fx-background-color: #583560;" styleClass="chat-bubble"
+            stylesheets="@DialogBox.css">
+         <children>
+              <Label fx:id="dialog" minHeight="-Infinity" text="Label" textFill="#00fff2" wrapText="true">
+               <font>
+                  <Font name="Comic Sans MS" size="12.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
         <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" />
     </children>
     <padding>
