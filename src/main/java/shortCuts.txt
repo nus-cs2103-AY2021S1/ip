@@ -4,3 +4,4 @@ to todo
 dead deadline
 fi find
 tod todo
+x bye
