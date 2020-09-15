@@ -1,5 +1,4 @@
 import java.io.FileNotFoundException;
-import java.io.IOException;
 
 import duke.DukeException;
 import duke.Parser;
@@ -39,7 +38,7 @@ public class Duke {
             String userInput = ui.receiveUserInput();
             try {
                 Parser.parseInput(userInput, ui, tasks, storage);
-            } catch (DukeException | IOException e) {
+            } catch (DukeException e) {
                 ui.sayErrorMessage(e);
             } finally {
                 isBye = Parser.isBye(userInput);
@@ -58,7 +57,7 @@ public class Duke {
         }
         try {
             return Parser.parseInput(input, ui, tasks, storage);
-        } catch (DukeException | IOException e) {
+        } catch (DukeException e) {
             return ui.sayErrorMessage(e);
         }
     }

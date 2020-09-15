@@ -57,11 +57,15 @@ public class TaskList {
      * @return A String containing all the tasks (updated) in the task list.
      * @throws IOException When no storage is found.
      */
-    public String markTaskDone(Ui ui, int taskNumber, Storage storage) throws IOException {
+    public String markTaskDone(Ui ui, int taskNumber, Storage storage) {
         assert taskNumber > 0 : "Number should be greater than 0";
         Task task = tasks.get(taskNumber - 1);
         task.markDone();
-        storage.writeFile(this);
+        try {
+            storage.writeFile(this);
+        } catch (IOException e) {
+            return ui.sayErrorMessage(e);
+        }
         return ui.sayMarkedAsDone(task);
     }
 
@@ -73,11 +77,15 @@ public class TaskList {
      * @return A String containing all the tasks (updated) in the task list.
      * @throws IOException When no storage is found.
      */
-    public String deleteTask(Ui ui, int taskNumber, Storage storage) throws IOException {
+    public String deleteTask(Ui ui, int taskNumber, Storage storage) {
         assert taskNumber > 0 : "Number should be greater than 0";
         Task task = tasks.get(taskNumber - 1);
         tasks.remove(taskNumber - 1);
-        storage.writeFile(this);
+        try {
+            storage.writeFile(this);
+        } catch (IOException e) {
+            return ui.sayErrorMessage(e);
+        }
         return ui.sayDeletedTask(task, getListSize());
     }
 
@@ -90,7 +98,7 @@ public class TaskList {
      * @throws DukeException Wrong task type is selected.
      * @throws IOException When no storage is found.
      */
-    public String snoozeTask(Ui ui, int taskNumber, Storage storage) throws DukeException, IOException {
+    public String snoozeTask(Ui ui, int taskNumber, Storage storage) throws DukeException {
         assert taskNumber > 0 : "Number should be greater than 0";
         Task task = tasks.get(taskNumber - 1);
         if (task.type == Task.Type.TODO) {
@@ -99,7 +107,11 @@ public class TaskList {
         TimedTask newTask = (TimedTask) task;
         newTask.snooze();
         tasks.set(taskNumber - 1, newTask);
-        storage.writeFile(this);
+        try {
+            storage.writeFile(this);
+        } catch (IOException e) {
+            return ui.sayErrorMessage(e);
+        }
         return ui.sayTaskSnoozed(newTask);
     }
 
@@ -111,9 +123,13 @@ public class TaskList {
      * @return A string of the newly added task.
      * @throws IOException When no storage is found.
      */
-    public String addTask(Task task, Ui ui, Storage storage) throws IOException {
+    public String addTask(Task task, Ui ui, Storage storage) {
         tasks.add(task);
-        storage.writeFile(this);
+        try {
+            storage.writeFile(this);
+        } catch (IOException e) {
+            return ui.sayErrorMessage(e);
+        }
         return ui.sayAddedTask(task, getListSize());
     }
 

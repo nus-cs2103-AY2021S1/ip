@@ -25,6 +25,12 @@ public abstract class TimedTask extends Task {
                 + date;
     }
 
+    @Override
+    public String toFile() {
+        return this.getTypeIcon() + this.getDoneStatus() + " " + description + " - "
+                + date;
+    }
+
     /**
      * Snooze this task. Currently postpones the task by one day.
      */

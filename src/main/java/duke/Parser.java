@@ -40,16 +40,17 @@ public class Parser {
 
     /**
      * Parses the user input and process the user's command.
-     * @param input User input.
-     * @param ui User interface.
-     * @param tasks TaskList.
+     *
+     * @param input   User input.
+     * @param ui      User interface.
+     * @param tasks   TaskList.
      * @param storage Storage.
      * @return A String describing the outcome after processing the user's command.
      * @throws DukeException Any error regarding Duke.
-     * @throws IOException When storage faces any error.
+     * @throws IOException   When storage faces any error.
      */
     public static String parseInput(String input, Ui ui, TaskList tasks, Storage storage)
-            throws DukeException, IOException {
+            throws DukeException {
         String[] parsedInput = input.split(SPACE, 2);
         String commandKeyword = parsedInput[0].toLowerCase();
         if (commandKeyword.equals(BYE)) {
@@ -88,6 +89,7 @@ public class Parser {
 
     /**
      * Checks if user input is bye.
+     *
      * @param input User input.
      * @return A boolean stating if command is bye.
      */
@@ -111,7 +113,7 @@ public class Parser {
     }
 
     private static String handleDoneCommand(Ui ui, TaskList tasks, Storage storage, String[] parsedInput)
-            throws DukeException, IOException {
+            throws DukeException {
         if (isValidSize(tasks, parsedInput)) {
             int taskNumber = getNumber(parsedInput);
             assert taskNumber > 0 : "Number should be greater than 0";
@@ -122,7 +124,7 @@ public class Parser {
     }
 
     private static String handleDeleteCommand(Ui ui, TaskList tasks, Storage storage, String[] parsedInput)
-            throws DukeException, IOException {
+            throws DukeException {
         if (isValidSize(tasks, parsedInput)) {
             int taskNumber = getNumber(parsedInput);
             assert taskNumber > 0 : "Number should be greater than 0";
@@ -152,7 +154,7 @@ public class Parser {
     }
 
     private static String handleTodoCommand(Ui ui, TaskList tasks, Storage storage, String[] parsedInput)
-            throws DukeException, IOException {
+            throws DukeException {
         if (isValidFormat(parsedInput, Task.Type.TODO)) {
             Todo newTodo = getTodo(parsedInput);
             return tasks.addTask(newTodo, ui, storage);
@@ -162,7 +164,7 @@ public class Parser {
     }
 
     private static String handleDeadlineCommand(Ui ui, TaskList tasks, Storage storage, String[] parsedInput)
-            throws DukeException, IOException {
+            throws DukeException {
         if (isValidFormat(parsedInput, Task.Type.DEADLINE)) {
             Deadline newDeadline = getDeadline(parsedInput);
             return tasks.addTask(newDeadline, ui, storage);
@@ -172,7 +174,7 @@ public class Parser {
     }
 
     private static String handleEventCommand(Ui ui, TaskList tasks, Storage storage, String[] parsedInput)
-            throws DukeException, IOException {
+            throws DukeException {
         if (isValidFormat(parsedInput, Task.Type.EVENT)) {
             Event newEvent = getEvent(parsedInput);
             return tasks.addTask(newEvent, ui, storage);
@@ -269,7 +271,7 @@ public class Parser {
     }
 
     private static String handleSnoozeCommand(Ui ui, TaskList tasks, Storage storage, String[] parsedInput)
-            throws DukeException, IOException {
+            throws DukeException {
         if (isValidSize(tasks, parsedInput)) {
             int taskNumber = getNumber(parsedInput);
             assert taskNumber > 0 : "Number should be greater than 0";
