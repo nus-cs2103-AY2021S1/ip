@@ -18,7 +18,6 @@ _**botbot**_ :robot: is a desktop app for managing tasks.
 - [Acknowledgements](#acknowledgements)
 
 <br /><br>
------
 ## Quick Start
 1. Ensure you have Java 11 or above installed.
 1. [Download](https://github.com/wakululuu/ip/releases) the latest release of `botbot.jar`.
@@ -28,7 +27,6 @@ _**botbot**_ :robot: is a desktop app for managing tasks.
 1. Type a command in the chat box and press *Enter* to execute.
 
 <br /><br>
------
 ## Features 
 
 ###### Notes on reading the command format:
@@ -91,8 +89,8 @@ Format: `edit INDEX [DESCRIPTION] [/at AT_DATE [AT_TIME]] [/by BY_DATE [BY_TIME]
 - For a to-do, only the `DESCRIPTION` can be edited.
 - For a deadline, only the `DESCRIPTION`, `BY_DATE` and `BY_TIME` can be edited.
 - For an event, only the `DESCRIPTION`, `AT_DATE` and `AT_TIME` can be edited.
-- `DATE` must follow the `D-M-YYYY` format.
-- `TIME` must follow the `HHMM` format.
+- `AT_DATE` and `AT_DATE` must follow the `D-M-YYYY` format.
+- `AT_TIME` and `BY_TIME` must follow the `HHMM` format.
 
 Examples:
 - `edit 2 call tammy /at 16-9-2020 0000` edits the description and time of the 2nd task on the task 
@@ -139,7 +137,6 @@ Format: `bye`
 every command that changes the data. There is no need to save manually.
 
 <br /><br>
------
 ## Command Summary
 
 Action | Format
@@ -153,7 +150,6 @@ Search | `find KEYPHRASE`
 View | `list`
 
 <br /><br>
------
 ## Acknowledgements
 - Libraries used: [JavaFX](https://openjfx.io/), [JUnit5](https://github.com/junit-team/junit5)
 - User guide adapted from [https://se-education.org/addressbook-level3/UserGuide.html](https://se-education.org/addressbook-level3/UserGuide.html)
