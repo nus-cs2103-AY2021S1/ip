@@ -41,7 +41,7 @@ public class OliviaGui extends Application {
                 DialogBox.getDukeDialog(dukeText, new ImageView(oliviaImage))
         );
         if (olivia.shouldExit()) {
-            Platform.exit();
+            ((Stage) userInput.getScene().getWindow()).close();
         }
         userInput.clear();
     }
