@@ -1,0 +1,11 @@
+#anchor {
+    -fx-background-image: url('/images/bg.jpeg');
+}
+
+.scroll-pane{
+   -fx-background-color:transparent;
+}
+
+.scroll-pane .viewport {
+       -fx-background-color: transparent;
+}
