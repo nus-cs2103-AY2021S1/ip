@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.5.0](https://github.com/therizhao/ip/compare/v0.4.0...v0.5.0) (2020-09-15)
+
+
+### Features
+
+* **A-UserGuide:** Add user guide to ui and docs ([a42b08c](https://github.com/therizhao/ip/commit/a42b08ca16576e194e5d805acee03392a62ee9be))
+
+
+### Bug Fixes
+
+* Fix Gui to be able to write tasklist into file ([219c2e6](https://github.com/therizhao/ip/commit/219c2e6b6935ab1c2ecf32302d615037b9e84d20))
+
 ## [0.4.0](https://github.com/therizhao/ip/compare/v0.3.0...v0.4.0) (2020-09-08)
 
 
