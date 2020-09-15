@@ -38,6 +38,7 @@ public class DoneCommand extends Command {
             int doneIndex = Integer.parseInt(commandDetails[1]) - 1;
             Task doneTask = tm.getTask(doneIndex);
             tm.markTaskDone(doneIndex);
+            postCommandSave(tm, storage);
             return ("Task marked as done: " + doneTask);
         } catch (NumberFormatException e) {
             throw new DukeException("Index is not a number!");

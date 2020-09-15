@@ -1,7 +1,11 @@
 package duke.logic.commands;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
 import duke.exceptions.DukeException;
 import duke.model.TaskManager;
+import duke.model.task.Task;
 import duke.storage.Storage;
 import duke.ui.Ui;
 
@@ -37,5 +41,20 @@ public abstract class Command {
      */
     public boolean isExit() {
         return false;
+    }
+
+    /**
+     * Updates the DB at the end of command execution.
+     *
+     * @param tm TaskManager used to manage tasks.
+     * @param storage Storage class that handles saving to disk.
+     */
+    public void postCommandSave(TaskManager tm, Storage storage) {
+        ArrayList<Task> taskList = tm.getTaskList();
+        try {
+            storage.save(taskList);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

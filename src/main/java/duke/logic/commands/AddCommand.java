@@ -47,6 +47,7 @@ public class AddCommand extends Command {
                 LocalDate dlDate = LocalDate.parse(commandDetails[1]);
                 Deadline deadline = new Deadline(commandDetails[0], dlDate);
                 tm.addTask(deadline);
+                postCommandSave(tm, storage);
                 return ("Task added: " + deadline);
             } catch (DateTimeParseException e) {
                 throw new DukeException("Invalid DateTime format. Please use YYYY-MM-DD.");
@@ -63,6 +64,7 @@ public class AddCommand extends Command {
                 LocalDate eventDate = LocalDate.parse(commandDetails[1]);
                 Event event = new Event(commandDetails[0], eventDate);
                 tm.addTask(event);
+                postCommandSave(tm, storage);
                 return ("Task added: " + event);
             } catch (DateTimeParseException e) {
                 throw new DukeException("Invalid DateTime format. Please use YYYY-MM-DD.");
@@ -74,6 +76,7 @@ public class AddCommand extends Command {
             String commandDetails = command.substring(5);
             ToDo todo = new ToDo(commandDetails);
             tm.addTask(todo);
+            postCommandSave(tm, storage);
             return ("Task added: " + todo);
         } else {
             throw new DukeException("Command not recognised!");

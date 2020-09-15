@@ -38,6 +38,7 @@ public class DeleteCommand extends Command {
             int delIndex = Integer.parseInt(commandDetails[1]) - 1;
             Task delTask = tm.getTask(delIndex);
             tm.deleteTask(delIndex);
+            postCommandSave(tm, storage);
             return ("Task deleted: " + delTask);
         } catch (NumberFormatException e) {
             throw new DukeException("Index is not a number!");
