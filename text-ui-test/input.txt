@@ -1,0 +1,10 @@
+todo borrow books
+deadline return books /by Sunday
+event project meeting /at Mon 2-4pm
+todo read books
+todo join sports club
+list
+done 1
+done 4
+list
+bye
