@@ -1,10 +1,18 @@
-# Duke: User Guide
-## Quick Start
+# Duke User Guide
+Duke is a chat-bot application that helps you to manage your daily tasks through command line interface.
+
+* [Quick Start](#quick-start)
+* [Features](#features)
+* [Feature Details](#features)
+
+<img src="https://raw.githubusercontent.com/afroneth/ip/master/docs/Ui.png" width="400">
+
+## <ins>Quick Start</ins>
 1. Download  and execute `jar` file from release. GUI should appear in a few seconds.
 2. Type in commands and press `enter` on the keyboard or click the "Send" button to execute commands.
 3. Type `help` command to list commands available.
 
-## Features 
+## <ins>Features</ins>
 
 ### Feature 1 - Task Management
 Duke helps you to manage important tasks that you need to complete in your daily life. 
@@ -18,7 +26,7 @@ You may also remove them from your list via the `delete` command.
 ### Feature 3 - Intuitive Command Line Interface
 Duke allows you to record your tasks with simple command line commands.
 
-## Feature Details
+## <ins>Feature Details</ins>
 
 ### `todo` - Adds a todo task to your task list
 
