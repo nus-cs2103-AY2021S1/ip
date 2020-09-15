@@ -4,6 +4,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
@@ -23,6 +24,25 @@ public class Parser {
     }
 
     /**
+     * Prints the output after store keyword is found.
+     * @param store
+     */
+    public void parseList(ArrayList<Task> store) {
+        //Counter to keep track of the index of the Tasks.
+        int counter = 1;
+        System.out.println("-------------------------");
+        for (Task task : store) {
+            if (task.getDescription() != null) {
+                System.out.println(counter + ". [" + task.getType()
+                        + "][" + task.getStatusIcon() + "] " + task.getDescription()
+                        + task.recurringPrinter());
+                counter++;
+            }
+        }
+        System.out.println("-------------------------");
+    }
+
+    /**
      * Parses the specified String as required.
      * @param str the String to be parsed.
      * @throws DukeException
@@ -39,19 +59,7 @@ public class Parser {
 
         while (str != null) {
             if (str.equals("list")) {
-
-                //Counter to keep track of the index of the Tasks.
-                int counter = 1;
-                System.out.println("-------------------------");
-                for (Task task : store) {
-                    if (task.getDescription() != null) {
-                        System.out.println(counter + ". [" + task.getType()
-                                + "][" + task.getStatusIcon() + "] " + task.getDescription()
-                                + task.recurringPrinter());
-                        counter++;
-                    }
-                }
-                System.out.println("-------------------------");
+                this.parseList(store);
                 break;
             } else if (str.contains("done")) {
                 if (str.length() == 4) {
@@ -290,15 +298,10 @@ public class Parser {
      * @throws IOException
      * @throws ClassNotFoundException
      */
-    @SuppressWarnings("checkstyle:SeparatorWrap")
     public String parseStr(String str) throws DukeException, IOException {
 
         ArrayList<Task> store = this.tasks.getList();
         String result = "";
-
-        if (str.equals("blah")) {
-            throw new DukeException("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
-        }
 
         while (str != null) {
             if (str.equals("list")) {
@@ -326,23 +329,19 @@ public class Parser {
                     LocalDate newDate = date.plusWeeks(1);
                     String formattedDate = newDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
                     ((Deadlines) curr).setDeadline(formattedDate);
-                    return "-------------------------\n"
-                        + "Nice! I've marked this task as done: \n"
+                    return "Nice! I've marked this task as done: \n"
                         + "The same task has to be completed next week! \n"
                         + "I have added the same task to the list for next week"
-                        + "  [" + curr.getStatusIcon() + "] " + curr.getDescription() + "\n"
-                        + "-------------------------\n";
+                        + "  [" + curr.getStatusIcon() + "] " + curr.getDescription() + "\n";
                 } else if (curr.recurring && curr instanceof Events) {
                     LocalDate date = ((Events) curr).getDate();
                     LocalDate newDate = date.plusWeeks(1);
                     String formattedDate = newDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
                     ((Events) curr).setStart(formattedDate);
-                    return "-------------------------\n"
-                            + "Nice! I've marked this task as done: \n"
+                    return "Nice! I've marked this task as done: \n"
                             + "The same task has to be completed next week! \n"
                             + "I have added the same task to the list for next week"
-                            + "  [" + curr.getStatusIcon() + "] " + curr.getDescription() + "\n"
-                            + "-------------------------\n";
+                            + "  [" + curr.getStatusIcon() + "] " + curr.getDescription() + "\n";
                 }
 
                 curr.markAsDone();
@@ -394,7 +393,15 @@ public class Parser {
                     Deadlines curr = new Deadlines(str.substring(9));
                     String description = curr.getDescription();
                     int index = description.indexOf("/") + 4;
-                    curr.setDeadline(description.substring(index));
+
+                    String deadline = description.substring(index);
+
+                    if (deadline.length() < 15) {
+                        return "You are missing the date or the time, or the format is incorrect!\n"
+                                + "Do refer to the instructions provided for the formatting supported\n";
+                    }
+
+                    curr.setDeadline(deadline);
                     curr.setDateTime();
 
                     if (str.contains("recurring")) {
@@ -441,7 +448,12 @@ public class Parser {
                     String description = curr.getDescription();
                     int index = description.indexOf("/") + 4;
 
-                    curr.setStart(description.substring(index));
+                    String startTime = description.substring(index);
+                    if (startTime.length() < 15) {
+                        return "You are missing the date or the time, or the format is incorrect!\n"
+                                + "Do refer to the instructions provided for the formatting supported";
+                    }
+                    curr.setStart(startTime);
                     curr.setDateTime();
 
                     if (str.contains("recurring")) {
@@ -487,6 +499,9 @@ public class Parser {
                     throw new DukeException("\u2639 OOPS!!! Please specify what task to delete.");
                 }
                 int num = Integer.parseInt(str.substring(7)) - 1;
+                if (num >= store.size()) {
+                    return "The number provided is greater than the number of tasks!";
+                }
                 Task curr = store.get(num);
                 store.remove(curr);
 
@@ -498,17 +513,20 @@ public class Parser {
                 TaskList tasks = new TaskList(store);
                 int index = str.indexOf(" ") + 1;
                 String query = str.substring(index);
-                result = tasks.finder(query);
+                result = "Here's what I found:\n"
+                        + tasks.finder(query);
+                if (result.equals("")) {
+                    return "There is no such task in the task list!";
+                }
                 return result;
-            } else if (!str.equals("bye")) {
-                result = result + "added: " + str + "\n";
-                store.add(new Task(str));
+            } else if (str.equals("bye")) {
+                result = "Alright then cya again soon";
                 return result;
             } else {
-                result = "error";
+                result = "What did you just say to me?? Please follow the instructions given at the start";
                 return result;
             }
         }
-        return "error found";
+        return "I am unsure what command that is";
     }
 }

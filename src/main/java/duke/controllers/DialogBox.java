@@ -58,4 +58,19 @@ public class DialogBox extends HBox {
         db.flip();
         return db;
     }
+
+    public static DialogBox getIntro(Image img) {
+        String intro = "Hello! I'm Duke\n"
+                + "What can I do for you?\n"
+                + "Here are some of the commands i take:\n"
+                + "- list\n"
+                + "- todo <task> - to add a todo\n"
+                + "- deadline <task> /by YYYY-MM-DD TTTT>\n"
+                + "- event <task> /by <YYYY-MM-DD TTTT>\n"
+                + "- done <index of task to be deleted>\n"
+                + "- delete <index of task to be deleted>\n"
+                + "- bye\n"
+                + "Also, to make a task recurring, simply add \"recurring\" after todo/deadline/event\n";
+        return new DialogBox(intro, img);
+    }
 }

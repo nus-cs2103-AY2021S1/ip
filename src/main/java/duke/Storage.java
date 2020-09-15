@@ -47,9 +47,10 @@ public class Storage {
         } catch (EOFException e) {
             System.out.println(e);
         } catch (IOException e) {
+
+            // Create the store.ser file if it does not exist.
             File yourFile = new File("store.ser");
             yourFile.createNewFile();
-            FileOutputStream oFile = new FileOutputStream(yourFile, false);
         }
 
         return store;

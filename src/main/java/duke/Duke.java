@@ -130,8 +130,6 @@ public class Duke extends Application {
         });
 
         //Scroll down to the end every time dialogContainer's height changes.
-        Label dukeIntro = new Label(ui.introMessage());
-        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(dukeIntro, new ImageView(duke)));
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
     }
 
@@ -176,6 +174,10 @@ public class Duke extends Application {
         String result = parse.parseStr(input);
         Storage.store(tasks.getList());
         return result;
+    }
+
+    public String getIntro() {
+        return ui.introMessage();
     }
 
     /**

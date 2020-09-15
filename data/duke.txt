@@ -1,2 +1,6 @@
 
-[E][✘] |party /at 2020-10-21 2000
+[T][✘] |Cook breakfast
+[D][✘] |Drink milk /by 2020-09-21 1500
+[E][✘] |Birthday Part /at 2020-09-20 2000
+[T][✘] |Weekly Tutorials 
+[E][✘] |Guitar repair /at 2020-09-22 1700
