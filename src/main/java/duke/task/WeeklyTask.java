@@ -70,19 +70,19 @@ public class WeeklyTask extends Task {
     }
 
     private LocalDate getNextDate(String day, LocalDate now) throws DukeException {
-        if (day.equals("monday")) {
+        if (day.equals("mon")) {
             return now.with(TemporalAdjusters.next(DayOfWeek.MONDAY));
-        } else if (day.equals("tuesday")) {
+        } else if (day.equals("tue")) {
             return now.with(TemporalAdjusters.next(DayOfWeek.TUESDAY));
-        } else if (day.equals("wednesday")) {
+        } else if (day.equals("wed")) {
             return now.with(TemporalAdjusters.next(DayOfWeek.WEDNESDAY));
-        } else if (day.equals("thursday")) {
+        } else if (day.equals("thu")) {
             return now.with(TemporalAdjusters.next(DayOfWeek.THURSDAY));
-        } else if (day.equals("friday")) {
+        } else if (day.equals("fri")) {
             return now.with(TemporalAdjusters.next(DayOfWeek.FRIDAY));
-        } else if (day.equals("saturday")) {
+        } else if (day.equals("sat")) {
             return now.with(TemporalAdjusters.next(DayOfWeek.SATURDAY));
-        } else if (day.equals("sunday")) {
+        } else if (day.equals("sun")) {
             return now.with(TemporalAdjusters.next(DayOfWeek.SUNDAY));
         } else {
             throw new DukeException("Please enter a valid day!");
