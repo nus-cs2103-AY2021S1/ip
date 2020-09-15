@@ -20,8 +20,13 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            stage.setTitle("Duke: An AI In-Progress");
+            stage.setTitle("Duke: The Butler AI in Training");
             fxmlLoader.<MainWindow>getController().setDuke(duke);
+            // When user close application,
+            stage.setOnCloseRequest(e -> {
+                // Save Duke's data
+                duke.saveAtExit();
+            });
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

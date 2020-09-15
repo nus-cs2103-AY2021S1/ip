@@ -69,16 +69,7 @@ public class Duke {
             // Use switch to process the commands
             switch (cmd) {
             case EXIT:
-                // Try to Save the data
-                try {
-                    boolean saveSuccess = storage.saveToFile(tasks.getTasks());
-                    assert saveSuccess; // Save should be successful
-                } catch (DukeException e) {
-                    output = ui.getError(e);
-                } finally {
-                    // Return farewells
-                    return ui.getFarewells() + output;
-                }
+                return saveAtExit();
             case LIST:
                 output = ui.getLineBreak() + ui.getList(tasks);
                 break;
@@ -125,5 +116,23 @@ public class Duke {
      */
     public String getGreetings() {
         return ui.getGreetings();
+    }
+
+    /**
+     * Save's Duke's current data.
+     * @throws DukeException when data fails to save.
+     */
+    public String saveAtExit() {
+        String output = "";
+        // Try to Save the data
+        try {
+            boolean saveSuccess = storage.saveToFile(tasks.getTasks());
+            assert saveSuccess; // Save should be successful
+        } catch (DukeException e) {
+            output = ui.getError(e);
+        } finally {
+            // Return farewells
+            return ui.getFarewells() + output;
+        }
     }
 }
