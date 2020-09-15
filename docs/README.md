@@ -1,16 +1,16 @@
 # User Guide
 Duke Task Scheduler is an app that beats your arse to do your stuff. Try it out, won't you?
 
-1. [Features](#Features)
-2. [Usage](#Usage)
-    * [`list`](#`list`)
-    * [`sort`](#`sort`)
-    * [`done`](#`done`)
-    * [`todo`](#`todo`)
-    * [`deadline`](#`deadline`)
-    * [`event`](#`event`)
-    * [`find`](#`find`)
-    * [`bye`](#`bye`)
+1. [Features](#features)
+2. [Usage](#usage)
+    * [`list`](#list)
+    * [`sort`](#sort)
+    * [`done`](#done)
+    * [`todo`](#todo)
+    * [`deadline`](#deadline)
+    * [`event`](#event)
+    * [`find`](#find)
+    * [`bye`](#bye)
 
 ## Features 
 
