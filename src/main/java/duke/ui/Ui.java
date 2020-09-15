@@ -11,32 +11,8 @@ import duke.model.task.Task;
 public class Ui {
     static final String WELCOME = "Hello. I am Claude! What may I do for you today?";
     static final String GOODBYE = "Goodbye! Hope to see you again soon!";
-    static final String LINE = "______________________________";
-    private Scanner sc;
 
-    public Ui() {
-        this.sc = new Scanner(System.in);
-    }
-
-    /**
-     * Reads command input by user.
-     *
-     * @return String to be processed by parser.
-     */
-    public String readCommand() {
-        if (sc.hasNext()) {
-            return sc.nextLine();
-        } else {
-            return "";
-        }
-    }
-
-    /**
-     * Prints a line that serves as a divider.
-     */
-    public void showLine() {
-        System.out.println(LINE);
-    }
+    public Ui() {}
 
     /**
      * Prints welcome message.
@@ -50,14 +26,6 @@ public class Ui {
      */
     public String showGoodbye() {
         return (GOODBYE);
-    }
-
-    /**
-     * Prints output from a Command.
-     * @param s String to be printed.
-     */
-    public void showDetails(String s) {
-        System.out.println(s);
     }
 
     /**
