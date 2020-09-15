@@ -127,6 +127,11 @@ Example of outcome:
 
 ![list command](./images/advance.png) 
 
+### Help: `help`
+Shows the list of all available commands.
+
+Example: `help`
+
 
 ## Command Summary
 
@@ -141,4 +146,5 @@ Delete | `delete <index>`
 Done | `done <index>`
 Find |  `find <search term>`
 Postpone | `postpone <index> <amount> <time unit>`<br/>E.g.: `postpone 3 /by 2 hours` 
-Advance | `advance <index> <amount> <time unit>`<br/>E.g.: `advance 3 /by 2 hours` 
+Advance | `advance <index> <amount> <time unit>`<br/>E.g.: `advance 3 /by 2 hours`
+help | `help` 

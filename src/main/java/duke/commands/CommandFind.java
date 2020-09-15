@@ -2,7 +2,6 @@ package duke.commands;
 
 import duke.tasks.Task;
 import duke.tasks.TaskList;
-import duke.ui.Ui;
 
 public class CommandFind extends Command {
 
@@ -16,13 +15,13 @@ public class CommandFind extends Command {
      * @param ui Ui object
      * @param searchTerm String term to search for
      */
-    public CommandFind(TaskList taskList, Ui ui, String searchTerm) {
-        super(taskList, ui);
+    public CommandFind(TaskList taskList, String searchTerm) {
+        super(taskList);
         this.searchTerm = searchTerm.toLowerCase();
     }
 
     @Override
-    public void execute() {
+    public String execute() {
         String output = "";
         output += "Here are the matching tasks in your list:\n";
         int counter = 1;
@@ -33,6 +32,6 @@ public class CommandFind extends Command {
                 counter++;
             }
         }
-        ui.outputBlockToUser(output);
+        return output;
     }
 }

@@ -1,7 +1,6 @@
 package duke.commands;
 
 import duke.tasks.TaskList;
-import duke.ui.Ui;
 
 /**
  * Represents a command to be executed by Duke.
@@ -9,21 +8,19 @@ import duke.ui.Ui;
 public abstract class Command {
 
     protected TaskList taskList;
-    protected Ui ui;
 
     /**
      * Constructor for {@code Command}.
      * @param taskList
-     * @param ui
      */
-    public Command(TaskList taskList, Ui ui) {
+    public Command(TaskList taskList) {
         this.taskList = taskList;
-        this.ui = ui;
     }
 
     /**
-     * Executes the command.
+     * Executes the command and gets the response.
+     * @return response in String format.
      */
-    public abstract void execute();
+    public abstract String execute();
 
 }

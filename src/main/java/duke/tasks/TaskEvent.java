@@ -41,7 +41,7 @@ public class TaskEvent extends Task {
                 String.format(
                         eventDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
                         + ", " + startTime.format(DateTimeFormatter.ofPattern("Hmm'hrs'"))
-                        + "-" + endTime.format(DateTimeFormatter.ofPattern("Hmm'hrs'"))
+                        + " - " + endTime.format(DateTimeFormatter.ofPattern("Hmm'hrs'"))
                         ));
     }
 

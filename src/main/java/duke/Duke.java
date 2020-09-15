@@ -44,7 +44,7 @@ public class Duke {
             storage = new Storage(filePath);
             taskList = storage.loadTasks();
             this.ui = ui;
-            parser = new Parser(taskList, this.ui);
+            parser = new Parser(taskList);
         } catch (StorageOperationException e) {
             ui.outputErrorBlockToUser(e.getMessage());
             throw new RuntimeException(e);
@@ -74,7 +74,8 @@ public class Duke {
 
         try {
             Command command = parser.getCommandFromInput(input);
-            command.execute();
+            String response = command.execute();
+            ui.outputBlockToUser(response);
         } catch (DukeException e) {
             ui.outputErrorBlockToUser(e.getMessage());
         }

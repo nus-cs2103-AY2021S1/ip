@@ -17,6 +17,7 @@ import duke.commands.CommandAddToDo;
 import duke.commands.CommandDelete;
 import duke.commands.CommandDone;
 import duke.commands.CommandFind;
+import duke.commands.CommandHelp;
 import duke.commands.CommandList;
 import duke.commands.CommandRescheduleAdvance;
 import duke.commands.CommandReschedulePostpone;
@@ -34,20 +35,17 @@ import duke.tasks.TaskToDo;
  */
 public class Parser {
 
-    private static final Pattern COMMAND_INPUT_FORMAT = Pattern.compile("(?<command>^[ltdefpa]\\w+)" + "\\s?"
+    private static final Pattern COMMAND_INPUT_FORMAT = Pattern.compile("(?<command>^[ltdefpah]\\w+)" + "\\s?"
             + "(?<arguments>.*)");
 
     private TaskList taskList;
-    private Ui ui;
 
     /**
      * Constructor for Parser.
      * @param taskList task list.
-     * @param ui ui.
      */
-    public Parser(TaskList taskList, Ui ui) {
+    public Parser(TaskList taskList) {
         this.taskList = taskList;
-        this.ui = ui;
     }
 
     /**
@@ -73,23 +71,25 @@ public class Parser {
         String arguments = matcher.group("arguments");
         switch (command) {
         case CommandList.COMMAND_STRING:
-            return new CommandList(taskList, ui);
+            return new CommandList(taskList);
+        case CommandHelp.COMMAND_STRING:
+            return new CommandHelp(taskList);
         case CommandDone.COMMAND_STRING:
-            return new CommandDone(taskList, ui, parseDoneOrDelete(arguments));
+            return new CommandDone(taskList, parseDoneOrDelete(arguments));
         case CommandDelete.COMMAND_STRING:
-            return new CommandDelete(taskList, ui, parseDoneOrDelete(arguments));
+            return new CommandDelete(taskList, parseDoneOrDelete(arguments));
         case CommandFind.COMMAND_STRING:
-            return new CommandFind(taskList, ui, arguments);
+            return new CommandFind(taskList, arguments);
         case CommandAddToDo.COMMAND_STRING:
-            return new CommandAddToDo(taskList, ui, new TaskToDo(arguments));
+            return new CommandAddToDo(taskList, new TaskToDo(arguments));
         case CommandAddEvent.COMMAND_STRING:
-            return new CommandAddEvent(taskList, ui, parseEvent(arguments));
+            return new CommandAddEvent(taskList, parseEvent(arguments));
         case CommandAddDeadline.COMMAND_STRING:
-            return new CommandAddDeadline(taskList, ui, parseDeadline(arguments));
+            return new CommandAddDeadline(taskList, parseDeadline(arguments));
         case CommandReschedulePostpone.COMMAND_STRING:
-            return new CommandReschedulePostpone(taskList, ui, parseReschedule(arguments));
+            return new CommandReschedulePostpone(taskList, parseReschedule(arguments));
         case CommandRescheduleAdvance.COMMAND_STRING:
-            return new CommandRescheduleAdvance(taskList, ui, parseReschedule(arguments));
+            return new CommandRescheduleAdvance(taskList, parseReschedule(arguments));
         default:
             throw new DukeException("☹ BLEHHHHHH!!! I'm (not) sorry, but I don't know what that means :/");
         }

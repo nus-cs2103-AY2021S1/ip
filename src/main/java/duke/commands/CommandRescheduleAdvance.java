@@ -7,7 +7,6 @@ import duke.tasks.Task;
 import duke.tasks.TaskDeadline;
 import duke.tasks.TaskEvent;
 import duke.tasks.TaskList;
-import duke.ui.Ui;
 
 public class CommandRescheduleAdvance extends CommandReschedule {
 
@@ -20,26 +19,27 @@ public class CommandRescheduleAdvance extends CommandReschedule {
      * Constructor for {@code CommandRescheduleAdvance}.
      *
      * @param taskList
-     * @param ui
      * @param timeModification
      */
-    public CommandRescheduleAdvance(TaskList taskList, Ui ui, TimeModification timeModification) {
-        super(taskList, ui, timeModification.getTaskIndex());
+    public CommandRescheduleAdvance(TaskList taskList, TimeModification timeModification) {
+        super(taskList, timeModification.getTaskIndex());
         this.amount = timeModification.getAmount();
         this.timeUnit = timeModification.getTimeUnit();
     }
 
     @Override
-    public void execute() {
+    public String execute() {
         Task task = taskList.get(taskIndex);
         if (task instanceof TaskDeadline) {
-            ((TaskDeadline) task).advance(amount, timeUnit);
+            TaskDeadline newTask = (TaskDeadline) task;
+            newTask.advance(amount, timeUnit);
         } else if (task instanceof TaskEvent) {
-            ((TaskEvent) task).advance(amount, timeUnit);
+            TaskEvent newTask = (TaskEvent) task;
+            newTask.advance(amount, timeUnit);
         }
         String output = String.format("Advancing by %d %s\n", amount, timeUnit)
                 + "Okay, I've brought it forward. Updated as follows: \n"
                 + taskList.get(taskIndex);
-        ui.outputBlockToUser(output);
+        return output;
     }
 }

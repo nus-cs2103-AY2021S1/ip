@@ -18,8 +18,8 @@ public class Ui {
             + "  |_|_|   _|_|_   |_|__  |_||_|  \\__,_|  \n"
             + "_|\"\"\"\"\"|_|\"\"\"\"\"|_|\"\"\"\"\"|_|\"\"\"\"\"|_|\"\"\"\"\"| \n"
             + "\"`-0-0-'\"`-0-0-'\"`-0-0-'\"`-0-0-'\"`-0-0-' \n";
-    private static final String GREETING = "Hello, Alpha here... welcome to my help centre... again.\n"
-            + "Would you like to explain what you want?\n";
+    private static final String GREETING = "Hello, Alpha here... I see you've come to 'organise your life'... again.\n"
+            + "What do you want?\n" + "Hint: type 'help' if you don't know what to do.";
     private static final String LINE_PREFIX = "    ";
     private static final String LINE_SEPARATOR = System.lineSeparator();
     private static final String DIVIDER = "____________________________________________________________\n";

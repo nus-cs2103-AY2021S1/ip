@@ -1,5 +1,6 @@
 package duke.storage;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -15,7 +16,8 @@ import duke.tasks.TaskList;
 public class Storage {
 
     /** Default file path used if user does not provide one */
-    public static final String DEFAULT_STORAGE_FILEPATH = "data/save.txt";
+    public static final String DEFAULT_STORAGE_FILEPATH = "/data/save.txt";
+    public static final String DEFAULT_STORAGE_DIRECTORY = System.getProperty("user.home");
 
     public static final String SEPARATOR = ",";
 
@@ -37,7 +39,7 @@ public class Storage {
     public final Path path;
 
     public Storage() throws InvalidStorageFilePathException {
-        this(DEFAULT_STORAGE_FILEPATH);
+        this(DEFAULT_STORAGE_DIRECTORY + DEFAULT_STORAGE_FILEPATH);
     }
 
     /**
@@ -87,6 +89,8 @@ public class Storage {
      */
     public TaskList loadTasks() throws StorageOperationException {
         if (!Files.exists(path) || !Files.isRegularFile(path)) {
+            File file = new File(DEFAULT_STORAGE_FILEPATH);
+            file.getParentFile().mkdirs();
             return new TaskList();
         }
         assert Files.exists(path) && Files.isRegularFile(path) : "A non-existent file scenario"

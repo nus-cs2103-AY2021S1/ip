@@ -2,7 +2,6 @@ package duke.commands;
 
 import duke.tasks.Task;
 import duke.tasks.TaskList;
-import duke.ui.Ui;
 
 public class CommandAdd extends Command {
 
@@ -16,19 +15,18 @@ public class CommandAdd extends Command {
     /**
      * Constructor for CommandAdd
      * @param taskList task list.
-     * @param ui ui.
      * @param task task to be added.
      */
-    public CommandAdd(TaskList taskList, Ui ui, Task task) {
-        super(taskList, ui);
+    public CommandAdd(TaskList taskList, Task task) {
+        super(taskList);
         this.task = task;
     }
 
     @Override
-    public void execute() {
+    public String execute() {
         taskList.add(task);
         int size = taskList.getSize();
-        ui.outputBlockToUser(String.format(ADD_TASK_CONFIRMATION, task, size, (size == 1 ? "task" : "tasks")));
+        return String.format(ADD_TASK_CONFIRMATION, task, size, (size == 1 ? "task" : "tasks"));
     }
 
     public Task getTask() {
