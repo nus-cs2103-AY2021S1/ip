@@ -32,6 +32,9 @@ public class AddCommand extends Command {
      */
     @Override
     public CommandResponse execute(TaskList tasks, Storage storage) throws DukeException {
+        if (tasks.isDuplicate(task)) {
+            return new CommandResponse(Ui.printDuplicateTask(), this.isExit());
+        }
         tasks.addTask(task);
         storage.save(tasks.getTasks());
         return new CommandResponse(Ui.printAddTask(task, tasks), this.isExit());

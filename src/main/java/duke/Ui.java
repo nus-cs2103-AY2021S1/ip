@@ -82,6 +82,15 @@ public class Ui {
     }
 
     /**
+     * Prints a message noting that a duplicate task is detected.
+     *
+     * @return the duplicate message.
+     */
+    public static String printDuplicateTask() {
+        return printWithDivider("Sorry!!! Duplicate detected.");
+    }
+
+    /**
      * Gets the number of tasks in the task list.
      *
      * @param taskList is the list to get the number of tasks from.
