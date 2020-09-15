@@ -4,6 +4,7 @@ benefits of a Graphical User Interface (GUI). If you can type fast, Duke can get
 traditional GUI apps.
 
 ## Features 
+
 Usage | Format, Examples
 ------- | ---------------
 **todo** | `todo [description]`<br/>e.g. `todo todo 1`
