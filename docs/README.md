@@ -112,7 +112,7 @@ Expected outcome:
 
 ```
 Got it. I've added this task:
-	[D][✘] CS3230 Assignment (by: Sep 19 2020)
+    [D][✘] CS3230 Assignment (by: Sep 19 2020)
 Now you have 4 tasks in the list.
 ```
 
@@ -132,7 +132,7 @@ Expected outcome:
 
 ```
 Got it. I've added this task:
-	[E][✘] tP meeting (at: Sep 18 2020)
+    [E][✘] tP meeting (at: Sep 18 2020)
 Now you have 4 tasks in the list.
 ```
 
@@ -152,7 +152,7 @@ Expected outcome:
 
 ```
 Nice! I've marked this task as done:
-	[T][✓] wash clothes
+    [T][✓] wash clothes
 ```
 
 ### `delete` - Delete a task
@@ -171,7 +171,7 @@ Expected outcome:
 
 ```
 Noted. I've removed this task:
-	[T][✓] wash clothes
+    [T][✓] wash clothes
 Now you have 2 tasks in the list.
 ```
 
@@ -211,7 +211,7 @@ Expected outcome 1:
 
 ```
 OK! I've re-added the task you just deleted:
-	[T][✓] create zoom link for tP meeting
+    [T][✓] create zoom link for tP meeting
 Now you have 3 tasks in the list.
 ```
 
@@ -219,14 +219,14 @@ Expected outcome 2:
 
 ```
 OK! I've unchecked the task:
-	[T][✘] create zoom link for tP meeting
+    [T][✘] create zoom link for tP meeting
 ```
 
 Expected outcome 3:
 
 ```
 OK! I've removed the task you just added now:
-	[T][✘] create zoom link for tP meeting
+    [T][✘] create zoom link for tP meeting
 Now you have 2 tasks in the list.
 ```
 
