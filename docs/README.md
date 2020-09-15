@@ -1,6 +1,23 @@
 # Duckie User Guide
 Duckie is your task manager to manage all your tasks. 
 
+## Table of contents
+* [Features](#features)
+    * [Add new tasks](#add-new-tasks)
+    * [List all the tasks](#list-all-the-tasks)
+    * [Delete tasks](#delete-tasks)
+    * [Find tasks](#find-tasks)
+    * [Mark tasks as done](#mark-tasks-as-done)
+    * [Sort events or deadline](#sort-events-or-deadline-based-on-their-dates)
+    * [Exit the platform](#exit-the-platform)
+ * [Usage](#usage)
+    * [todo](#todo---a-simple-task-with-only-a-description)
+    * [deadline](#deadline---a-task-containing-a-deadline)
+    * [event](#event---a-task-containing-a-date-of-event)
+    * [list](#list---list-all-the-tasks-in-the-task-list)
+    * [delete](#delete---delete-a-particular-task-in-the-list)
+    
+
 ## Features 
 
 ### Add new tasks
@@ -23,7 +40,7 @@ Search for tasks based on keyword you have input.
 Each task has its own status and can be marked done when required.
 
 ### Sort events or deadline based on their dates
-Sort the event tasks, or the deadline tasks based on their dates in ascending order.
+Sort the event tasks, or the deadline tasks based on their dates in chronological order.
 
 ### Exit the platform
 Input bye command and exit the platform to say goodbye to Duckie.
@@ -81,7 +98,8 @@ Expected outcome:
 3. [E][✘] Dance Night (at: Fri, 21 Aug 2020 07:30 PM)
 ```
 
-### 'delete' - Delete a particular task in the list
+### `delete` - Delete a particular task based on the index in the list
+
 Format: `delete INDEX`
 
 Example of usage: `delete 2`
@@ -91,3 +109,62 @@ Expected outcome:
 "Quack! I've removed this task: 
 [D][✘] Quiz (by: Fri, 21 Aug 2020)
 ```
+
+### `delete all` - Clear all the tasks in the list
+
+Format: `delete all`
+
+Expected outcome:
+```
+Quack! All tasks are cleared in the list!
+```
+
+### `find` - Search for tasks based on a keyword you have input
+
+Format: `find KEYWORD`
+
+Example of usage: `find quiz`
+
+Expected outcome:
+```
+Quack! Duckie found these matching tasks:
+1. [D][✘] Quiz (by: Fri, 21 Aug 2020)
+```
+
+### `done` - Mark task based on the index in the list to be done
+
+Format: `done INDEX`
+
+Example of usage: `done 2`
+
+Expected outcome:
+```
+Quack! I've marked this task as done:
+[E][✓] Dance Night (at: Fri, 21 Aug 2020 07:30 PM)
+```
+
+### `sort deadline` - Sort tasks based on the deadline in chronological order
+
+Format: `sort deadline`
+
+Expected outcome:
+```
+Quack! The following are your Deadline tasks from the earliest to the latest.
+1. [D][✘] Quiz (by: Fri, 21 Aug 2020)
+2. [D][✘] CS2101 Reflection (by: Sun, 23 Aug 2020)
+```
+
+### `sort event` - Sort tasks based on the event date in chronological order
+
+Format: `sort event`
+
+Expected outcome:
+```
+Quack! The following are your Event tasks from the earliest to the latest.
+1. [E][✘] Homecoming (at: Wed, 19 Aug 2020 12:30 PM)
+2. [E][✘] Birthday Party (at: Sun, 23 Aug 2020 4:30 PM)
+```
+
+### `bye` - Exit the platform
+
+Format: `bye`
