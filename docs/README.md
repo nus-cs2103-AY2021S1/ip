@@ -71,10 +71,10 @@ Creates a new event task with the event date.
 
 #### Usage
 
-#### `event <description> /on yyyy-mm-dd`
+#### `event <description> /at yyyy-mm-dd`
 Example of usage: 
 
-`event CS2103T tutorial /on 2020-09-17`
+`event CS2103T tutorial /at 2020-09-17`
 
 Shortcut: `e`
 
@@ -94,9 +94,6 @@ Example of usage:
 
 Shortcut: `b`
 
-Expected outcome:
-
-![bye example](./images/bye.png)]
 
 ### Find Command 
 Find the task specified by the keyword.
