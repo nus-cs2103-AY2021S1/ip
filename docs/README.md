@@ -16,6 +16,13 @@ Duckie is your task manager to manage all your tasks.
     * [event](#event---a-task-containing-a-date-of-event)
     * [list](#list---list-all-the-tasks-in-the-task-list)
     * [delete](#delete---delete-a-particular-task-in-the-list)
+    * [delete all](#delete-all---clear-all-the-tasks-in-the-list)
+    * [find](#find---search-for-tasks-based-on-a-keyword-you-have-input)
+    * [done](#done---mark-task-based-on-the-index-in-the-list-to-be-done)
+    * [sort deadline](#sort-deadline---sort-tasks-based-on-the-deadline-in-chronological-order)
+    * [sort event](#sort-event---sort-tasks-based-on-the-event-date-in-chronological-order)
+    * [bye](#bye---exit-the-platform)
+ * [List of Commands](#list-of-commands)
     
 
 ## Features 
@@ -168,3 +175,19 @@ Quack! The following are your Event tasks from the earliest to the latest.
 ### `bye` - Exit the platform
 
 Format: `bye`
+
+## List of Commands
+
+Feature | Command Inputs
+------------ | -------------
+todo | `todo DESCRIPTION`
+deadline | `deadline DESCRIPTION /by d MMM YYYY`
+event | `event DESCRIPTION /at d MMM YYYY HH:MM a`
+list | `list`
+delete | `delete INDEX`
+delete all | `delete all`
+find | `find INDEX`
+done | `done INDEX`
+sort deadline | `sort deadline`
+sort event | `sort event`
+bye | `bye`
