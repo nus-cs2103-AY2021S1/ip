@@ -20,7 +20,7 @@ Welcome to the repo for my Duke chatbot. The User Guide will guide you through o
    + [Tags](#tags)
       + [Adding Tags To Tasks](#adding-tags-to-tasks)
       + [Removing Tags From Tasks](#removing-tags-from-tasks)
-   + [Exiting The App]
+   + [Exiting The App](#exiting-the-app)
 + [Data Storage](#data-storage)
       
    
@@ -46,6 +46,7 @@ Syntax: `todo <description>`
 Example: `todo Add a todo task`
 
 Sample Usage:
+
 ![Adding a todo task](readme-img/todo.png)
 
 ### Deadline
@@ -57,6 +58,7 @@ Syntax: `deadline <description> /by <YYYY-MM-DD> <HH:mm>`
 Example: `deadline Add a deadline task /by 2020-09-17 23:59`
 
 Sample Usage:
+
 ![Adding a deadline task](readme-img/deadline.png)
 
 ### Event
@@ -68,6 +70,7 @@ Syntax: `event <description> /at <YYYY-MM-DD> <HH:mm>`
 Example: `event Add an event task /at 2020-09-17 23:59`
 
 Sample Usage:
+
 ![Adding an event task](readme-img/event.png)
 
 ## Showing All Tasks
@@ -77,6 +80,7 @@ Displays all the tasks that have previously been added.
 Syntax: `list`
 
 Sample Usage:
+
 ![Showing all tasks](readme-img/list.png)
 
 ## Completing A Task
@@ -88,6 +92,7 @@ Syntax: `done <index of task>`
 Example: `done 2`
 
 Sample Usage:
+
 ![Showing all tasks](readme-img/done.png)
 
 ## Filtering Tasks
@@ -103,6 +108,7 @@ Syntax: `find <keyword>`
 Example `find CS2103T`
 
 Sample Usage:
+
 ![Filtering tasks by keyword](readme-img/find.png)
 
 ### By Due Date
@@ -114,6 +120,7 @@ Syntax: `due <YYYY-MM-DD>`
 Example `due 2020-09-16`
 
 Sample Usage:
+
 ![Filtering tasks by due date](readme-img/due.png)
 
 ### Within A Timeframe
@@ -125,6 +132,7 @@ Syntax: `remind <number of days>`
 Example `remind 5`
 
 Sample Usage:
+
 ![Filtering tasks by timeframe](readme-img/remind.png)
 
 ## Tags
@@ -138,6 +146,7 @@ Synxtax: `tag <index of task> <tag1> <tag2> ....`
 Example: `tag 1 important exams`
 
 Sample Usage:
+
 ![Adding a tag](readme-img/addtag.png)
 
 ### Removing Tags From Tasks
@@ -149,6 +158,7 @@ Example: `tag -1 SU igiveup`
 Note: If the task does not contain the tag to be deleted, the command would just ignore that specific tag.
 
 Sample Usage:
+
 ![Removing a tag](readme-img/removetag.png)
 
 ## Exiting The App
