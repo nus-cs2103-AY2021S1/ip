@@ -9,8 +9,7 @@ import java.util.List;
 import duke.exception.DukeException;
 
 /**
- * This class is to write the information
- * into the file provided in the Directory class.
+ * Writes the information into the file provided in the Directory class.
  */
 public class DukeFileWriter extends DukeFile {
     private boolean appendToFile;

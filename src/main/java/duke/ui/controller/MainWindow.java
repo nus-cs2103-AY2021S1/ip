@@ -2,6 +2,7 @@ package duke.ui.controller;
 
 import duke.main.Duke;
 import duke.tools.Format;
+import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -9,6 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -25,8 +27,11 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
+    //Image is taken from https://wiki.openjdk.java.net/display/duke/Gallery.
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Duke.png"));
+
+    //Image is taken from https://wiki.openjdk.java.net/display/duke/Gallery.
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DukeMask.png"));
 
     @FXML
     public void initialize() {
@@ -72,5 +77,8 @@ public class MainWindow extends AnchorPane {
     private void closeWindow() {
         userInput.setOnAction(null);
         sendButton.setOnAction(null);
+        PauseTransition delay = new PauseTransition(Duration.seconds(1));
+        delay.setOnFinished(event -> System.exit(0));
+        delay.play();
     }
 }

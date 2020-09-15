@@ -7,16 +7,17 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 /**
- * An example of a custom control using FXML.
- * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
+ * Represents a dialog box consisting of an ImageView to represent the speaker's face and a label
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
@@ -25,7 +26,7 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
     @FXML
-    private HBox chatBubble;
+    private VBox chatBox;
     @FXML
     private HBox chatRow;
 
@@ -50,6 +51,7 @@ public class DialogBox extends HBox {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
+        chatBox.setAlignment(Pos.CENTER);
         setAlignment(Pos.CENTER_LEFT);
     }
 
@@ -60,6 +62,8 @@ public class DialogBox extends HBox {
     public static DialogBox getDukeDialog(String text, Image img) {
         var dialogBox = new DialogBox(text, img);
         dialogBox.flip();
+        dialogBox.chatBox.setStyle("-fx-background-color: lightblue; -fx-background-radius: 13");
+        HBox.setMargin(dialogBox.chatBox, new Insets(0, 15, 0, 5));
         return dialogBox;
     }
 }

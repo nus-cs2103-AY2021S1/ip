@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
- * This class is to test the Format class.
+ * Tests the Format class.
  * Mainly 2 methods are tested: shorten() and stringToTask().
  */
 public class FormatTest {
@@ -22,10 +22,7 @@ public class FormatTest {
      */
     @Test
     public void formatShortenTest1() {
-        String test =
-                new Format<>("   hahaha  ")
-                        .shorten()
-                        .getContent();
+        String test = Format.shorten("   hahaha  ");
 
         String expected = "hahaha";
         assertEquals(test, expected);
@@ -39,9 +36,7 @@ public class FormatTest {
     @Test
     public void formatShortenTest2() {
         String test =
-                new Format<>("       ")
-                        .shorten()
-                        .getContent();
+                Format.shorten("       ");
 
         String expected = "";
         assertEquals(test, expected);
@@ -55,7 +50,7 @@ public class FormatTest {
     public void formatStringToTaskTest1() {
         String string = "[T][✘] reading";
         Task expected = new Todo("reading");
-        Task todo = new Format<>(string).stringToTask();
+        Task todo = Format.decodeTask(string);
         assertEquals(todo.toString(), expected.toString());
     }
 
@@ -67,8 +62,8 @@ public class FormatTest {
     public void formatStringToTaskTest2() {
         String string = "[D][✘] eating (by: Aug_30_2020)";
         Task expected = new Deadline("eating", new Time("2020-08-30").toString());
-        Task todo = new Format<>(string).stringToTask();
-        assertEquals(todo.toString(), expected.toString());
+        Task deadline = Format.decodeTask(string);
+        assertEquals(deadline.toString(), expected.toString());
     }
 
     /**
@@ -79,8 +74,8 @@ public class FormatTest {
     public void formatStringToTaskTest3() {
         String string = "[E][✘] eating (at: Aug_30_2020)";
         Task expected = new Event("eating", new Time("2020-08-30").toString());
-        Task todo = new Format<>(string).stringToTask();
-        assertEquals(todo.toString(), expected.toString());
+        Task event = Format.decodeTask(string);
+        assertEquals(event.toString(), expected.toString());
     }
 
 }

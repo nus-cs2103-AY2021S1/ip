@@ -3,8 +3,7 @@ package duke.exception;
 import duke.tools.FormatString;
 
 /**
- * This is an enum class that contains
- * all String for the exception error message.
+ * Contains all String for the exception error message.
  */
 public enum Exceptions {
     NUMBEREXCESSEXCEPTION {
@@ -12,13 +11,6 @@ public enum Exceptions {
         public String toString() {
             return "OOPS!!! It seems like you don't have this option\n"
                     + "Enter list to see options";
-        }
-    },
-
-    CLASSCASTEXCEPTION {
-        @Override
-        public String toString() {
-            return "The content is not of data type of String";
         }
     },
 

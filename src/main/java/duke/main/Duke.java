@@ -3,7 +3,7 @@ package duke.main;
 import duke.ui.Ui;
 
 /**
- * This is the main class that is directly called by the users.
+ * Represents the main control class to run Duke.
  */
 public class Duke {
     private Ui ui;

@@ -1,8 +1,7 @@
 package duke.tools;
 
 /**
- * This class is to make response
- * to the user's input.
+ * Make response to the user's input.
  */
 public class Response {
     protected String response;

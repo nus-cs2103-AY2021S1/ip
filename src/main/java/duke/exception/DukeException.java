@@ -3,20 +3,9 @@ package duke.exception;
 import duke.tools.Format;
 
 /**
- * This class consists all exceptions related to Duke input.
+ * Consists all exceptions related to Duke input.
  */
 public class DukeException {
-
-
-    /**
-     * Returns an error message when ClassCastException occurs.
-     *
-     * @return An error message.
-     */
-    public static String classCastException() {
-        return new Format<>(Exceptions.CLASSCASTEXCEPTION.toString()).toString();
-    }
-
     /**
      * Returns an error message when NumberFormatException occurs.
      *

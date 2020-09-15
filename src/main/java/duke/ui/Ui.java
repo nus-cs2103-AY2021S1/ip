@@ -6,7 +6,7 @@ import duke.tools.Parser;
 import duke.tools.Response;
 
 /**
- * This class is to interact with the user.
+ * Interacts with the user.
  */
 public class Ui {
     private Parser parser;
@@ -47,7 +47,7 @@ public class Ui {
      * @return A string with spaces around it.
      */
     public String conciseInput(String input) {
-        return new Format<>(input).shorten().getContent();
+        return Format.shorten(input);
     }
 
     /**

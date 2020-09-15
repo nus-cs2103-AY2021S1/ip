@@ -9,8 +9,7 @@ import duke.tools.Format;
 
 
 /**
- * This class extends the DukeFile class
- * and is to read the file in the path directory.
+ * Reads the file in the path directory.
  */
 public class DukeFileReader extends DukeFile {
 
@@ -38,8 +37,7 @@ public class DukeFileReader extends DukeFile {
         List<String> taskStrings = readFile();
 
         for (String taskString : taskStrings) {
-            Format<String> stringFormat = new Format<>(taskString);
-            taskList.addMemory(stringFormat.stringToTask());
+            taskList.addMemory(Format.decodeTask(taskString));
         }
 
         return taskList;
@@ -58,8 +56,7 @@ public class DukeFileReader extends DukeFile {
             List<String> taskStrings = readFile();
             for (String taskString : taskStrings) {
                 if (taskString.contains(content)) {
-                    Format<String> stringFormat = new Format<>(taskString);
-                    taskList.addMemory(stringFormat.stringToTask());
+                    taskList.addMemory(Format.decodeTask(taskString));
                 }
             }
         }

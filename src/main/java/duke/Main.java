@@ -4,14 +4,12 @@ import java.io.IOException;
 
 import duke.main.Duke;
 import duke.ui.controller.MainWindow;
-import javafx.animation.PauseTransition;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 /**
  * A GUI for Duke using FXML.
@@ -28,6 +26,8 @@ public class Main extends Application {
             Scene scene = new Scene(anchorPane);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
+
+            //Image is taken from https://wiki.openjdk.java.net/display/duke/Gallery.
             stage.getIcons().add(new Image(this.getClass().getResourceAsStream("/images/Duke.png")));
             stage.show();
         } catch (IOException exception) {
@@ -35,14 +35,4 @@ public class Main extends Application {
         }
     }
 
-    /**
-     * Closes the MainWindow through main.
-     *
-     * @param stage Stage object.
-     */
-    public void close(Stage stage) {
-        PauseTransition delay = new PauseTransition(Duration.millis(800));
-        delay.setOnFinished(event -> stage.close());
-        delay.play();
-    }
 }

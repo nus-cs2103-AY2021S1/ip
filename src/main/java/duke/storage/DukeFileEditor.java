@@ -3,7 +3,7 @@ package duke.storage;
 import java.util.ArrayList;
 import java.util.List;
 
-import duke.main.Command;
+import duke.command.CommandString;
 import duke.main.Statement;
 import duke.task.Task;
 import duke.tools.Format;
@@ -12,7 +12,7 @@ import duke.tools.Response;
 import duke.tools.Time;
 
 /**
- * This class is to edit the file with a provided path.
+ * Edits the file with a provided path.
  */
 public class DukeFileEditor extends DukeFile {
 
@@ -86,9 +86,9 @@ public class DukeFileEditor extends DukeFile {
         int len = requiredTask.length;
         String editedTask = requiredTask[0] + " ";
 
-        if (command.equals(Command.UPDATEDETAIL.toString())) {
+        if (command.equals(CommandString.UPDATEDETAIL)) {
             editedTask += input + " " + requiredTask[len - 2] + requiredTask[len - 1];
-        } else if (command.equals(Command.UPDATETIME.toString())) {
+        } else if (command.equals(CommandString.UPDATETIME)) {
             for (int i = 1; i < len - 1; i++) {
                 editedTask += requiredTask[i] + " ";
             }
@@ -102,7 +102,7 @@ public class DukeFileEditor extends DukeFile {
 
         taskStrings.add(lineNum - 1, editedTask);
         write(taskStrings);
-        Task task = new Format<>(editedTask).stringToTask();
+        Task task = Format.decodeTask(editedTask);
         Response response = new Response(
                 Statement.UPDATE.toString() + task
         );

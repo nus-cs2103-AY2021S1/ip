@@ -1,6 +1,5 @@
 package duke.tools;
 
-import duke.exception.DukeException;
 import duke.main.Statement;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -8,8 +7,7 @@ import duke.task.Task;
 import duke.task.Todo;
 
 /**
- * This class handles the final Format object
- * that is printed out by Duke.
+ * Handles the format of strings that is to be printed out by Duke.
  *
  * @param <T> The data type of the object in the Format.
  * */
@@ -44,31 +42,24 @@ public class Format<T> {
      *
      * @return The above described Format object.
      */
-    public Format<String> shorten() {
-        assert content instanceof String;
-        try {
-            String input = (String) content;
-            int length = input.length();
-            int frontPos = 0;
-            int backPos = length - 1;
+    public static String shorten(String input) {
+        int length = input.length();
+        int frontPos = 0;
+        int backPos = length - 1;
 
-            while (frontPos < length && input.charAt(frontPos) == ' ') {
-                frontPos++;
-            }
-
-            while (backPos >= 0 && input.charAt(backPos) == ' ') {
-                backPos--;
-            }
-
-            if (frontPos > backPos) {
-                return new Format<>(FormatString.EMPTY.toString());
-            }
-
-            return new Format<>(input.substring(frontPos, backPos + 1));
-        } catch (ClassCastException e) {
-            System.out.println(DukeException.classCastException());
-            return null;
+        while (frontPos < length && input.charAt(frontPos) == ' ') {
+            frontPos++;
         }
+
+        while (backPos >= 0 && input.charAt(backPos) == ' ') {
+            backPos--;
+        }
+
+        if (frontPos > backPos) {
+            return FormatString.EMPTY.toString();
+        }
+
+        return input.substring(frontPos, backPos + 1);
     }
 
     /**
@@ -81,44 +72,37 @@ public class Format<T> {
      * @return Task whose output of toString method
      *         is equal to the content.
      */
-    public Task stringToTask() {
-        assert content instanceof String;
-        try {
-            String input = (String) content;
-            String[] inputArray = input.split(FormatString.SPACE.toString());
-            char typeOfTask = inputArray[0].charAt(1);
-            boolean isDone = false;
+    public static Task decodeTask(String input) {
+        String[] inputArray = input.split(FormatString.SPACE.toString());
+        char typeOfTask = inputArray[0].charAt(1);
+        boolean isDone = false;
 
-            if (inputArray[0].substring(4, 5).equals(FormatString.TICK.toString())) {
-                isDone = true;
-            }
-
-            Task task;
-
-            if (typeOfTask == 'T') {
-                task = new Todo(inputArray[1]);
-            } else {
-                int lenOfArray = inputArray.length;
-                int lenOfLastInArray = inputArray[lenOfArray - 1].length();
-                String time = inputArray[lenOfArray - 1]
-                        .substring(0, lenOfLastInArray - 1)
-                        .substring(0, lenOfLastInArray - 1);
-                if (typeOfTask == 'D') {
-                    task = new Deadline(inputArray[1], time);
-                } else {
-                    task = new Event(inputArray[1], time);
-                }
-            }
-
-            if (isDone) {
-                task.setDone();
-            }
-
-            return task;
-        } catch (ClassCastException e) {
-            System.out.println(DukeException.classCastException());
-            return null;
+        if (inputArray[0].substring(4, 5).equals(FormatString.TICK.toString())) {
+            isDone = true;
         }
+
+        Task task;
+
+        if (typeOfTask == 'T') {
+            task = new Todo(inputArray[1]);
+        } else {
+            int lenOfArray = inputArray.length;
+            int lenOfLastInArray = inputArray[lenOfArray - 1].length();
+            String time = inputArray[lenOfArray - 1]
+                    .substring(0, lenOfLastInArray - 1)
+                    .substring(0, lenOfLastInArray - 1);
+            if (typeOfTask == 'D') {
+                task = new Deadline(inputArray[1], time);
+            } else {
+                task = new Event(inputArray[1], time);
+            }
+        }
+
+        if (isDone) {
+            task.setDone();
+        }
+
+        return task;
     }
 
     @Override

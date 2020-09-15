@@ -10,8 +10,7 @@ import java.util.List;
 import duke.exception.DukeException;
 
 /**
- * This class makes general approaches to access a file
- * given a directory.
+ * Makes general approaches to access a file given a directory.
  */
 public class DukeFile {
     protected Path path;

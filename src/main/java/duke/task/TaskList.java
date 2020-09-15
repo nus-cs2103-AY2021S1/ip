@@ -3,7 +3,7 @@ package duke.task;
 import java.util.ArrayList;
 
 /**
- * This class is to contain tasks.
+ * Represents a list that contains different tasks.
  *
  * @param <T> The data type of the object in the task list.
  */

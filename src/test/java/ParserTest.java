@@ -1,4 +1,4 @@
-import duke.main.Command;
+import duke.command.CommandString;
 import duke.tools.Parser;
 import duke.tools.Time;
 import duke.task.Deadline;
@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
- * This class is to test the Parser class.
+ * Tests the Parser class.
  * Mainly the commands of the Parser and
  * other related methods are tested.
  */
@@ -34,7 +34,7 @@ public class ParserTest {
             }
         }
 
-        Parser.run(Command.CLEAR.toString());
+        Parser.run(CommandString.CLEAR);
         assertTrue(isExist);
     }
 
@@ -55,7 +55,7 @@ public class ParserTest {
             }
         }
 
-        Parser.run(Command.CLEAR.toString());
+        Parser.run(CommandString.CLEAR);
         assertTrue(isExist);
     }
 
@@ -76,7 +76,7 @@ public class ParserTest {
             }
         }
 
-        Parser.run(Command.CLEAR.toString());
+        Parser.run(CommandString.CLEAR);
         assertTrue(isExist);
     }
 
@@ -85,7 +85,7 @@ public class ParserTest {
      */
     @Test
     public void runDeleteTest() {
-        Parser.run(Command.CLEAR.toString());
+        Parser.run(CommandString.CLEAR);
         Parser.run("event working /by 2020-08-30");
         Parser.run("delete 1");
         Task expected = new Event("working", new Time("2020-08-30").toString());
@@ -107,7 +107,7 @@ public class ParserTest {
      */
     @Test
     public void runDoneTest() {
-        Parser.run(Command.CLEAR.toString());
+        Parser.run(CommandString.CLEAR);
         Parser.run("event working /by 2020-08-30");
         Parser.run("done 1");
         Task expected = new Event("working", new Time("2020-08-30").toString());
@@ -122,7 +122,7 @@ public class ParserTest {
             }
         }
 
-        Parser.run(Command.CLEAR.toString());
+        Parser.run(CommandString.CLEAR);
         assertTrue(isDone);
     }
 

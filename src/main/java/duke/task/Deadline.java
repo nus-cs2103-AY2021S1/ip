@@ -1,7 +1,7 @@
 package duke.task;
 
 /**
- * This is a subclass of Task.
+ * Represents a Deadline task.
  */
 public class Deadline extends Task {
     protected String time;

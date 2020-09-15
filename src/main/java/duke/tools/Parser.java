@@ -1,7 +1,7 @@
 package duke.tools;
 
+import duke.command.CommandString;
 import duke.exception.DukeException;
-import duke.main.Command;
 import duke.main.Directory;
 import duke.main.Statement;
 import duke.storage.DukeFileEditor;
@@ -14,7 +14,7 @@ import duke.task.TaskList;
 import duke.task.Todo;
 
 /**
- * This class deals with the strings from the client
+ * Deals with the strings from the client
  * and enable the string to make sense to Duke.
  */
 public class Parser {
@@ -45,7 +45,7 @@ public class Parser {
      */
     public static void reloadTaskList() {
         taskList = new TaskList<>();
-        taskList = new DukeFileReader(Directory.FILEDIRECTORY.toString()).loadFile();
+        taskList = new DukeFileReader(Directory.FILEDIRECTORY).loadFile();
     }
 
     /**
@@ -57,7 +57,7 @@ public class Parser {
      * @return Returns true if input is "bye".
      */
     public boolean isEnd(String inputFromClient) {
-        return inputFromClient.equals(Command.BYE.toString());
+        return inputFromClient.equals(CommandString.BYE);
     }
 
     /**
@@ -75,22 +75,23 @@ public class Parser {
 
         reloadTaskList();
 
-        if (order.equals(Command.LIST.toString())) {
+        if (order.equals(CommandString.LIST)) {
             return new Format<>(Statement.LIST.toString() + taskList).toString();
         } else {
 
             if (order.length() > 0) {
-                if (extract[command].equals(Command.DONE.toString())) {
+                switch (extract[command]) {
+                case CommandString.DONE:
                     return done();
-                } else if (extract[command].equals(Command.DELETE.toString())) {
+                case CommandString.DELETE:
                     return delete();
-                } else if (extract[command].equals((Command.FIND.toString()))) {
+                case CommandString.FIND:
                     return find(extract[taskDetail]);
-                } else if (extract[command].equals((Command.CLEAR.toString()))) {
+                case CommandString.CLEAR:
                     return clear();
-                } else if (extract[command].equals((Command.UPDATE.toString()))) {
+                case CommandString.UPDATE:
                     return update();
-                } else {
+                default:
                     return identifier();
                 }
             } else {
@@ -112,7 +113,7 @@ public class Parser {
             } else {
                 Task task = taskList.getTaskList().get(num - 1);
                 task.setDone();
-                DukeFileEditor dukeFileEditor = new DukeFileEditor(Directory.FILEDIRECTORY.toString());
+                DukeFileEditor dukeFileEditor = new DukeFileEditor(Directory.FILEDIRECTORY);
                 dukeFileEditor.setTaskDone(num);
                 return new Format<>(new Response(Statement.DONE.toString() + task)).toString();
             }
@@ -134,7 +135,7 @@ public class Parser {
             } else {
                 Task task = taskList.getTaskList().get(num - 1);
                 taskList.getTaskList().remove(num - 1);
-                DukeFileEditor dukeFileEditor = new DukeFileEditor(Directory.FILEDIRECTORY.toString());
+                DukeFileEditor dukeFileEditor = new DukeFileEditor(Directory.FILEDIRECTORY);
                 dukeFileEditor.deleteLine(num);
 
                 String response =
@@ -159,7 +160,7 @@ public class Parser {
     public static String find(String content) {
         try {
             taskList = new TaskList<>();
-            DukeFileReader dukeFileReader = new DukeFileReader(Directory.FILEDIRECTORY.toString());
+            DukeFileReader dukeFileReader = new DukeFileReader(Directory.FILEDIRECTORY);
             taskList = dukeFileReader.matchContent(content);
 
             Response response = new Response(
@@ -179,7 +180,7 @@ public class Parser {
      * directory in Directory class.
      */
     public static String clear() {
-        DukeFileEditor deleteAll = new DukeFileEditor(Directory.FILEDIRECTORY.toString());
+        DukeFileEditor deleteAll = new DukeFileEditor(Directory.FILEDIRECTORY);
         deleteAll.clearFile();
         taskList = new TaskList<>();
 
@@ -212,10 +213,10 @@ public class Parser {
         }
 
         //Extract the index.
-        String indexInString = new Format<>(indexAndTypeOfUpdate[0]).shorten().getContent();
+        String indexInString = Format.shorten(indexAndTypeOfUpdate[0]);
 
         //Extract the command.
-        String command = new Format<>(indexAndTypeOfUpdate[1]).shorten().getContent();
+        String command = Format.shorten(indexAndTypeOfUpdate[1]);
 
         try {
             int index = Integer.parseInt(indexInString);
@@ -224,7 +225,7 @@ public class Parser {
                 return DukeException.numberExcessException();
             }
 
-            return new DukeFileEditor(Directory.FILEDIRECTORY.toString())
+            return new DukeFileEditor(Directory.FILEDIRECTORY)
                     .update(index, command, taskToUpdate);
         } catch (NumberFormatException e) {
             return DukeException.numberFormatException();
@@ -269,12 +270,7 @@ public class Parser {
         assert pointer != separator : "pointer or separator calculation is wrong";
 
         //details of the description is found
-        extract[taskDetail] = new Format<>(
-                description
-                        .substring(pointer + 1, separator)
-        )
-                .shorten()
-                .getContent();
+        extract[taskDetail] = Format.shorten(description.substring(pointer + 1, separator));
 
         while (separator < len && description.charAt(separator) != ' ') {
             separator++;
@@ -282,12 +278,7 @@ public class Parser {
 
         //time of the description is found
         if (separator < len - 1) {
-            extract[taskTime] = new Format<>(
-                    description
-                            .substring(separator + 1)
-            )
-                    .shorten()
-                    .getContent();
+            extract[taskTime] = Format.shorten(description.substring(separator + 1));
         }
 
         assert (separator < len - 1 && extract[taskTime] != null)
@@ -309,15 +300,15 @@ public class Parser {
         String time = extract[taskTime];
 
         //to check if the input is not a todo or event or deadline
-        if (!identity.equals(Command.TODO.toString())
-                & !identity.equals(Command.EVENT.toString())
-                & !identity.equals(Command.DEADLINE.toString())) {
+        if (!identity.equals(CommandString.TODO)
+                & !identity.equals(CommandString.EVENT)
+                & !identity.equals(CommandString.DEADLINE)) {
             return DukeException.inputFormatException();
         }
 
-        assert identity.equals(Command.TODO.toString())
-                || identity.equals(Command.EVENT.toString())
-                || identity.equals(Command.DEADLINE.toString())
+        assert identity.equals(CommandString.TODO)
+                || identity.equals(CommandString.EVENT)
+                || identity.equals(CommandString.DEADLINE)
                 : "commands other todo or event or deadline passed filter";
 
         //situation that there is no detail of the task, throw error
@@ -326,7 +317,7 @@ public class Parser {
         }
 
         Task task;
-        if (identity.equals(Command.TODO.toString())) {
+        if (identity.equals(CommandString.TODO)) {
 
             task = new Todo(detail);
 
@@ -334,7 +325,7 @@ public class Parser {
             try {
                 Time date = new Time(time);
 
-                if (identity.equals(Command.DEADLINE.toString())) {
+                if (identity.equals(CommandString.DEADLINE)) {
                     task = new Deadline(detail, date.toString());
                 } else {
                     task = new Event(detail, date.toString());
@@ -347,7 +338,7 @@ public class Parser {
         assert task != null : "condition set above appears incorrect logic";
 
         taskList.addMemory(task);
-        DukeFileWriter data = new DukeFileWriter(Directory.FILEDIRECTORY.toString(), true);
+        DukeFileWriter data = new DukeFileWriter(Directory.FILEDIRECTORY, true);
         data.writeToFile(task.toString());
         Format<Task> responseWithFormat =
                 new Format<>(task);

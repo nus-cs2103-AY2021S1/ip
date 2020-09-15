@@ -1,8 +1,7 @@
 package duke.tools;
 
 /**
- * This is an enum class which
- * contains all the format related strings.
+ * Contains all the format related strings.
  */
 public enum FormatString {
     UNDERSCORE {

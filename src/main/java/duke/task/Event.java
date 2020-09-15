@@ -1,7 +1,7 @@
 package duke.task;
 
 /**
- * This is a subclass of Task.
+ * Represents a Event task.
  */
 public class Event extends Task {
     private String time;

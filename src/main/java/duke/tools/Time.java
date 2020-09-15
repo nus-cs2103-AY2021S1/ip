@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * This class is to convert the time string
+ * Converts the time string
  * of format "yyyy-mm-dd" into "MMM_d_yyyy".
  */
 public class Time {

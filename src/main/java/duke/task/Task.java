@@ -3,8 +3,7 @@ package duke.task;
 import duke.tools.FormatString;
 
 /**
- * This class simulates the tasks
- * that the users give to Duke.
+ * Simulates the tasks that the users give to Duke.
  */
 public class Task {
     protected final String description;

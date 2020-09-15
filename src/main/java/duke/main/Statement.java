@@ -1,9 +1,7 @@
 package duke.main;
 
 /**
- * This enum class consists of
- * all pattern strings printed out
- * by Duke except the exceptions.
+ * Consists of all pattern strings printed out by Duke.
  */
 public enum Statement {
     GREET {
@@ -18,8 +16,7 @@ public enum Statement {
         @Override
         public String toString() {
             return "It is nice to talk to you.\n"
-                    + "Hope to see you again!\n"
-                    + "To restart, relaunch Duke";
+                    + "Hope to see you again!";
         }
     },
 
