@@ -1,5 +1,4 @@
 package duke.command;
-
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
@@ -16,17 +15,17 @@ public class HelpCommand extends Command {
      * @return the Duke response to show user
      */
     public String execute(TaskList taskList, Ui ui, Storage storage) {
-        String response = "List of commands:"
-                + "\nbye: Exit duke\n"
-                + "\nlist: Display list of tasks\n"
-                + "\ndelete <id>: Delete task\n"
-                + "\ndone <id>: Set task as completed\n"
-                + "\nfind <keyword>: Display list of tasks that include keyword\n"
-                + "\nfilter <date>: Display list task tasks due on date\n"
-                + "\ntodo <name>: Add a new task\n"
-                + "\ndeadline <name> /by <date> <time>: Add a new task with deadline\n"
-                + "\nevent <name> /at <date> <time>: Add a new event\n"
-                + "\nweekly <name> /every <day> <time>: Add a new weekly recurring task";
+        String response = "Here is the list of commands:"
+                + "\nExit duke:\n - bye"
+                + "\nDisplay list of tasks:\n - list"
+                + "\nDelete task:\n - delete <task id>"
+                + "\nSet task as completed:\n - done <task id>"
+                + "\nFilter tasks by keyword keyword:\n - find <keyword>"
+                + "\nFilter tasks by due date:\n - filter <dd/mm/yyyy>"
+                + "\nAdd a new task:\n - todo <task>"
+                + "\nAdd a new deadline:\n - deadline <task> /by <dd/mm/yyyy> <hhmm>"
+                + "\nAdd a new event:\n - event <name> /at <dd/mm/yyyy> <hhmm>"
+                + "\nAdd a new weekly recurring task:\n - weekly <name> /every <day> <hhmm>";
         return response;
     }
 
