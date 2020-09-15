@@ -21,19 +21,19 @@ Dillinger is a cloud-enabled, mobile-ready, offline-storage, AngularJS powered H
 Format: `list`
 
 ### todo - Adds a todo task to the task list
-Format: `todo {description} #{tag}`
+Format: `todo {description} #{tag}`</br>
 *#{tag} is an optional input*
 
 ### deadline - Adds a deadline task to the task list
-Format: `deadline {description} /by YYYY-MM-DD #{tag}`
+Format: `deadline {description} /by YYYY-MM-DD #{tag}`</br>
 *#{tag} is an optional input*
 
 ### event - Adds a event task to the task list
-Format: `event {description} /at YYYY-MM-DD #{tag}`
+Format: `event {description} /at YYYY-MM-DD #{tag}`</br>
 *#{tag} is an optional input*
 
 ### delete - Delete a task stored in task list
-Format: `delete {task number}`
+Format: `delete {task number}`</br>
 *Ensure that task number is within range*
 
 ### list - Reveals all tasks stored in task list
@@ -50,31 +50,38 @@ Format:`bye`
 
 ## Examples
 
-Input: `list`
-Example output: 
+Input: `list`</br>
+Example output:</br>
+```
     ____________________________________
     Here are the things you need to do lor: 
     1. [E][✗] Exam (at: 23 Jun 2020)
     2. [D][✗] Individual Project (by: 17 Sep 2020) [#CS2103T]
     ____________________________________
+```
     
-Input: `todo Math Homework #school`
-Example output:
+Input: `todo Math Homework #school`</br>
+Example output:</br>
+```
     ____________________________________
     Okok. I add for you: 
     [T][✗] Math Homework [#school]
     You got 3 tasks in the list.
     ____________________________________
+```
     
-Input: `deadline Project Work /by 2020-10-10 #school`
-Example output:
+Input: `deadline Project Work /by 2020-10-10 #school`</br>
+Example output:</br>
+```
     ____________________________________
     Okok. I help you add this task: 
     [D][✗] Project Work (by: 10 Oct 2020) [#school]
     You got 5 tasks in the list.
     ____________________________________
+```
 
-Input: `findtag #school`
+Input: `findtag #school`</br>
+```
 Example output:
     ____________________________________
     Here are the things you want lor: 
@@ -82,24 +89,29 @@ Example output:
     2. [D][✗] Project Work (by: 10 Oct 2020) [#school]
     3. [D][✗] Project Work (by: 10 Oct 2020) [#school]
     ____________________________________
+```
     
-Input: `done 3`
+Input: `done 3`</br>
+```
 Example output:
     ____________________________________
     Swee! Now I will mark this as done: 
     [T][✓] Math Homework [#school]
     ____________________________________
+```
     
-Input: `delete 4`
+Input: `delete 4`</br>
+```
 Example output:
     ____________________________________
     Task deleted liao: 
     [D][✗] Project Work (by: 10 Oct 2020) [#school]
     You got 4 tasks left. 
     ____________________________________
+```
 
 ## Product Snapshot
-![Duke the Singlish Dude](https://imgur.com/Nu649gT)
+![Duke the Singlish Dude](https://i.imgur.com/C7dLXhQ.png)
 
 ## Contact
 ***For any enquiries feel free to contact me at e0406711@u.nus.edu***
