@@ -1,11 +1,11 @@
 # User Guide
 
 # Features 
-## Ability to add and delete tasks
-## Ability to update added tasks
-## Ability to list all tasks, or view the ones you want
-## Ability to load a list of tasks from a local save file
-## Dark UI so you don't get blinded :)
+- Ability to add and delete tasks
+- Ability to update added tasks
+- Ability to list all tasks, or view the ones you want
+- Ability to load a list of tasks from a local save file
+- Dark UI so you don't get blinded :)
 
 ## Add tasks
 Add 3 types of tasks, To Do, Event, and Deadline, with date (optional).
