@@ -178,7 +178,7 @@ Format: `bye`
 
 ## List of Commands
 
-Feature | Command Inputs
+Features | Command Inputs
 ------------ | -------------
 todo | `todo DESCRIPTION`
 deadline | `deadline DESCRIPTION /by d MMM YYYY`
