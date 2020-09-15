@@ -58,7 +58,7 @@ public class Ui {
 
 
         displayString(logo
-                + "\n\nHello! I'm duke.Duke, your Windows duke.task.Task Manager"
+                + "\n\nHello! I'm Duke, your Windows Task Manager"
                 + "\nValid command:"
                 + "\n- list (l)"
                 + "\n- done (do) <num>"
