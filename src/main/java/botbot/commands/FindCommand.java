@@ -10,15 +10,15 @@ import botbot.tasks.Task;
  */
 public class FindCommand extends Command {
     public static final String COMMAND_KEYWORD = "find";
-    private final String keyword;
+    private final String keyphrase;
     
     /**
-     * Creates a find command to search for the specified keyword in the task list.
+     * Creates a find command to search for the specified keyphrase in the task list.
      *
-     * @param keyword Keyword to search.
+     * @param keyphrase Keyphrase to search.
      */
-    public FindCommand(String keyword) {
-        this.keyword = keyword;
+    public FindCommand(String keyphrase) {
+        this.keyphrase = keyphrase;
     }
 
     /**
@@ -33,7 +33,8 @@ public class FindCommand extends Command {
     public String execute(Storage storage, TaskList tasks, Ui ui) {
         TaskList matches = new TaskList();
         for (Task task : tasks) {
-            if (task.getDescription().contains(keyword)) {
+            String lowerCaseTaskDesc = task.getDescription().toLowerCase();
+            if (lowerCaseTaskDesc.contains(keyphrase)) {
                 matches.add(task);
             }
         }
