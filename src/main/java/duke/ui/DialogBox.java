@@ -17,6 +17,9 @@ public class DialogBox extends HBox {
     private Label text;
     private ImageView displayPicture;
 
+    //Solution below is adapted from https://se-education.org/guides/tutorials/javaFx.html
+    //Minor modifications were made
+
     /**
      * Creates a box that holds text as well as the user's profile image.
      * @param l The label.
