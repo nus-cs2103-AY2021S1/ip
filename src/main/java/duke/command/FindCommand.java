@@ -7,10 +7,17 @@ import duke.TaskList;
 import duke.Ui;
 import duke.task.Task;
 
+/**
+ * Finds the tasks in TaskList matching keyword.
+ */
 public class FindCommand extends Command {
 
     protected String keyword;
 
+    /**
+     * Constructs a new instance of a FindCommand
+     * @param keyword Keyword of task.
+     */
     public FindCommand(String keyword) {
         this.keyword = keyword;
     }

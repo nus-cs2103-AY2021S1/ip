@@ -8,6 +8,9 @@ import duke.Ui;
 import duke.exception.DukeException;
 import duke.task.Task;
 
+/**
+ * Updates priority for Task.
+ */
 public class PriorityCommand extends Command {
     /**
      * Message to be printed when AddPriorityCommand is executed successfully.
