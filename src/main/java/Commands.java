@@ -32,6 +32,6 @@ public enum Commands {
                 return c;
             }
         }
-        throw new DukeException("DukeException: OOPS!!! I'm sorry, but Luigi is Italian and doesn't understand");
+        throw new DukeException("OOPS!!! I'm sorry, but Luigi is Italian and doesn't understand");
     }
 }

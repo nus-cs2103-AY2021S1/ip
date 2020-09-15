@@ -45,7 +45,7 @@ public class Parser {
                     return ui.addLines(taskList.add(Deadline.createDeadline(arr[1])));
 
                 } catch (ArrayIndexOutOfBoundsException e) {
-                    return (new DukeException("OOPS!!! The description of a deadline cannot be empty.", e))
+                    return (new DukeException("OOPS!!! The description of a deadline is emptye.", e))
                             .toString();
                 }
             case TODO:
@@ -62,8 +62,9 @@ public class Parser {
                     Storage.save(taskList, Storage.FILE_PATH);
                     return ui.addLines(taskList.add(Event.createEvent(arr[1])));
 
-                } catch (Exception e) {
-                    return (new DukeException("OOPS!!! The description of a event cannot be empty.", e)).toString();
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    return (new DukeException("OOPS!!! The description of an event is empty.", e))
+                            .toString();
                 }
             case DELETE:
                 try {
@@ -76,10 +77,15 @@ public class Parser {
                              .toString();
                 }
             case FIND:
-                Storage.save(taskList, Storage.FILE_PATH);
-                String findWord = arr[1];
-                taskList.findTask(findWord);
-                return ui.addLines(taskList.printOutKeyWordList());
+                try {
+                    Storage.save(taskList, Storage.FILE_PATH);
+                    String findWord = arr[1];
+                    taskList.findTask(findWord);
+                    return ui.addLines(taskList.printOutKeyWordList());
+                } catch (Exception e) {
+                    return (new DukeException("OOPS!!! Please specify a keyword to search for!", e))
+                            .toString();
+                }
             case RESCHEDULE:
                 try {
                     Storage.save(taskList, Storage.FILE_PATH);

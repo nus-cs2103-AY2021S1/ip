@@ -29,6 +29,8 @@ dependencies {
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'linux'
 }
 
+
+
 test {
     useJUnitPlatform()
 
@@ -44,11 +46,11 @@ test {
 }
 
 application {
-    mainClassName = "seedu.duke.Duke"
+    mainClassName = "Launcher"
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "LuigiTaskManager"
     archiveClassifier = null
 }
 

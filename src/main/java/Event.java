@@ -35,8 +35,8 @@ public class Event extends Task {
             String dateTimeString = detailsArray[1].trim();
             LocalDateTime dateTime = DateConverter.parseString(dateTimeString);
             return new Event(description, dateTime);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("Out of Bounds Exceptions");
+        } catch (Exception e) {
+            throw new DukeException("No valid date found");
         }
     }
 

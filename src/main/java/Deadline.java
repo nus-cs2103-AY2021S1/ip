@@ -36,8 +36,8 @@ public class Deadline extends Task {
             String dateTimeString = detailsArray[1].trim();
             LocalDateTime dateTime = DateConverter.parseString(dateTimeString);
             return new Deadline(description, dateTime);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("No date found");
+        } catch (Exception e) {
+            throw new DukeException("No valid date found");
         }
     }
 
