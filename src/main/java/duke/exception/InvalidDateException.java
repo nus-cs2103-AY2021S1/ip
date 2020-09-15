@@ -2,6 +2,8 @@ package duke.exception;
 
 import static duke.util.Keyword.DATE_INPUT_FORMAT;
 import static duke.util.Keyword.DATE_TIME_INPUT_FORMAT;
+import static duke.util.Keyword.INVALID_DATE_ERR_ONE;
+import static duke.util.Keyword.INVALID_DATE_ERR_TWO;
 import static duke.util.Keyword.TIME_INPUT_FORMAT;
 
 import duke.ui.Ui;
@@ -11,13 +13,11 @@ import duke.ui.Ui;
  */
 public class InvalidDateException extends DukeException {
 
-    private static final String LINE_1 = "Date is poorly formatted!";
-    private static final String LINE_2 = "Time should be in either of these 3 formats:";
-
     /**
      * Initializes the {@code InvalidTimeException} object.
      */
     public InvalidDateException() {
-        super(Ui.stringFormatter(LINE_1, LINE_2, DATE_TIME_INPUT_FORMAT, DATE_INPUT_FORMAT, TIME_INPUT_FORMAT));
+        super(Ui.stringFormatter(INVALID_DATE_ERR_ONE, INVALID_DATE_ERR_TWO, DATE_TIME_INPUT_FORMAT,
+            DATE_INPUT_FORMAT, TIME_INPUT_FORMAT));
     }
 }

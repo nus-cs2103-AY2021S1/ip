@@ -72,6 +72,23 @@ public class Keyword {
     public static final String SORT_SUCCESS_MESSAGE = "Your list has been sorted!";
     public static final String SORT_PROMPT_MESSAGE = "Type in 'list' to see the new ordering.";
 
+    // Commands
+    public static final String KEYWORD_MATCHING = "matching ";
+
+    // Help command
+    public static final String HEADER = "Here are the available commands that I know:";
+    public static final String[] COMMAND_LIST = new String[]{
+        "todo _ (e.g. todo 3)",
+        "deadline 'task name' /by 'end time' (e.g. deadline Exercise /by 23-8-20)",
+        "event 'task name' /at 'start time - end time' (e.g. meeting /at Sunday 2pm - 4pm)",
+        "list",
+        "done _ (e.g. done 4)",
+        "delete _ (e.g. delete 4)",
+        "find '   ' (e.g. find book)",
+        "sort",
+        "bye"
+    };
+
     // DateTimeParser
     public static final String DATE_TIME_OUTPUT_FORMAT = "d MMM yyyy @ h.mm a";
     public static final String DATE_TIME_INPUT_FORMAT = "d-M-yy HHmm";
@@ -81,4 +98,31 @@ public class Keyword {
     // CsvConverter
     public static final String CSV_SEPARATOR = "  ,";
     public static final String CSV_FORMAT = "%s  ,%s  ,%s  ,%s  ,%s\n";
+    public static final String KEYWORD_NOT_DONE = "NOT DONE";
+
+    // Exception
+    public static final String INVALID_DATE_ERR_ONE = "Date is poorly formatted!";
+    public static final String INVALID_DATE_ERR_TWO = "Time should be in either of these 3 formats:";
+    public static final String OOPS_MESSAGE = "OOPS!!! %s";
+    public static final String DUPLICATE_TASK_MESSAGE = "This task already exists in the list!";
+    public static final String EMPTY_FIND_MESSAGE = "The query word cannot be empty!";
+    public static final String EMPTY_TIME_MESSAGE = "Time of %s task is not specified!";
+    public static final String EMPTY_TASK_DESCRIPTION_MESSAGE = "The description of a todo cannot be empty.";
+    public static final String FILE_UPDATE_FAIL_MESSAGE = "Error in updating .csv file in storage.";
+    public static final String INVALID_DEADLINE_ERR_ONE = "Deadline task is poorly formatted.";
+    public static final String INVALID_DEADLINE_ERR_TWO = "Here is a proper format: deadline 'task name' /by d-M-yy";
+    public static final String INVALID_DEADLINE_ERR_THREE = "e.g. deadline Exercise /by 23-8-20";
+    public static final String INVALID_EVENT_ERR_ONE = "Event task is poorly formatted.";
+    public static final String INVALID_EVENT_ERR_TWO = "Here is a proper format: event 'event name'"
+        + " /at 'start time to end time'";
+    public static final String INVALID_EVENT_ERR_THREE = "e.g. meeting /at Sunday 2 - 4pm";
+    public static final String FILE_FORMAT_ERR = "CSV file is poorly formatted!";
+    public static final String INVALID_TASK_NUM_ONE = "Task number does not exist in the list.";
+    public static final String INVALID_TASK_NUM_TWO = "Your current list only has %d tasks!";
+    public static final String INVALID_SIMPLE_COMMAND_ONE = "%s format is invalid.";
+    public static final String INVALID_SIMPLE_COMMAND_TWO = "Please try again with a proper format like '%s 3'";
+    public static final String TASK_ALREADY_DONE_MESSAGE = "Task has already been mark as done!";
+    public static final String UNKNOWN_COMMAND_ONE = "I'm sorry, but I don't know what that means.";
+    public static final String UNKNOWN_COMMAND_TWO = "Type 'help' to display the list of commands available.";
+
 }

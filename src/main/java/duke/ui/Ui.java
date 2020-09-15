@@ -42,7 +42,7 @@ public class Ui {
     }
 
     /**
-     * Prints out the list of commands.
+     * Displays the list of commands.
      *
      * @param array Input array.
      * @param header Header title.
@@ -128,7 +128,7 @@ public class Ui {
     }
 
     /**
-     * Prints the task list to the user.
+     * Displays the task list to the user.
      *
      * @param taskList Task list.
      * @param extra Extra word to add in, if any.
@@ -140,7 +140,7 @@ public class Ui {
     }
 
     /**
-     * Prints the no matching tasks found message.
+     * Displays the no matching tasks found message.
      *
      * @param queryWord Word use to query task list.
      * @return No matching tasks found message.
@@ -150,10 +150,18 @@ public class Ui {
         return stringFormatter(message);
     }
 
+    /**
+     * Displays the sort success message to the user.
+     *
+     * @return Sort success message.
+     */
     public String sortMessage() {
         return stringFormatter(SORT_SUCCESS_MESSAGE, SORT_PROMPT_MESSAGE);
     }
 
+    /**
+     * Displays the file creation error to the user.
+     */
     public void fileCreationError() {
         System.out.println(FILE_CREATION_ERR);
     }

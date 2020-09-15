@@ -18,6 +18,14 @@ import javafx.scene.layout.VBox;
  */
 public class MainWindow extends AnchorPane {
 
+    private static final String PATH_USER_IMG = "/images/user.png";
+    private static final String PATH_USER_DUKE = "/images/duke.png";
+    private static final String PATH_USER_JACK = "/images/jack.png";
+
+    private final Image userImage = new Image(this.getClass().getResourceAsStream(PATH_USER_IMG));
+    private final Image dukeImage = new Image(this.getClass().getResourceAsStream(PATH_USER_DUKE));
+    private final Image centreImage = new Image(this.getClass().getResourceAsStream(PATH_USER_JACK));
+
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -33,10 +41,6 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
-    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/duke.png"));
-    private final Image centreImage = new Image(this.getClass().getResourceAsStream("/images/jack.png"));
-
     /**
      * Initializes the main GUI screen.
      */
@@ -50,7 +54,7 @@ public class MainWindow extends AnchorPane {
      *
      * @param duke Duke application.
      */
-    public void setDuke(Duke duke) {
+    protected void setDuke(Duke duke) {
         this.duke = duke;
         greetUser();
     }

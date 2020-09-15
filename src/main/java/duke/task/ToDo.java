@@ -1,5 +1,6 @@
 package duke.task;
 
+import static duke.util.Keyword.NIL;
 import static duke.util.Keyword.TODO_SYMBOL;
 
 import java.time.LocalDateTime;
@@ -16,7 +17,7 @@ public class ToDo extends Task {
      * @param description Description of the task.
      */
     public ToDo(String description) {
-        super(description, TaskType.TODO, "-", LocalDateTime.now(), false);
+        super(description, TaskType.TODO, NIL, LocalDateTime.now(), false);
     }
 
     /**

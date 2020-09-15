@@ -1,13 +1,13 @@
 package duke.exception;
 
+import static duke.util.Keyword.EMPTY_FIND_MESSAGE;
+
 import duke.ui.Ui;
 
 /**
  * Thrown when there is not succeeding word after find.
  */
 public class EmptyFindException extends DukeException {
-
-    private static final String EMPTY_FIND_MESSAGE = "The query word cannot be empty!";
 
     /**
      * Initializes the EmptyFindException.

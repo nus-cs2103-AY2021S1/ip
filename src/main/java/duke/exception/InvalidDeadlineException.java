@@ -1,5 +1,9 @@
 package duke.exception;
 
+import static duke.util.Keyword.INVALID_DEADLINE_ERR_ONE;
+import static duke.util.Keyword.INVALID_DEADLINE_ERR_THREE;
+import static duke.util.Keyword.INVALID_DEADLINE_ERR_TWO;
+
 import duke.ui.Ui;
 
 /**
@@ -7,14 +11,10 @@ import duke.ui.Ui;
  */
 public class InvalidDeadlineException extends DukeException {
 
-    private static final String LINE_1 = "Deadline task is poorly formatted.";
-    private static final String LINE_2 = "Here is a proper format: deadline 'task name' /by d-M-yy";
-    private static final String LINE_3 = "e.g. deadline Exercise /by 23-8-20";
-
     /**
      * Initializes the InvalidDeadlineException object with the error message suggesting the proper format.
      */
     public InvalidDeadlineException() {
-        super(Ui.stringFormatter(LINE_1, LINE_2, LINE_3));
+        super(Ui.stringFormatter(INVALID_DEADLINE_ERR_ONE, INVALID_DEADLINE_ERR_TWO, INVALID_DEADLINE_ERR_THREE));
     }
 }

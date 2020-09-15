@@ -70,7 +70,7 @@ public class AddDeadlineCommand extends AddCommand {
      * Retrieves the deadline of this {@code Deadline} task.
      *
      * @param arr Parsed array.
-     * @return Deadline of Deadline task.
+     * @return Due date of Deadline task.
      */
     private String getDeadline(String[] arr) {
         return arr[1];

@@ -1,5 +1,8 @@
 package duke.exception;
 
+import static duke.util.Keyword.INVALID_TASK_NUM_ONE;
+import static duke.util.Keyword.INVALID_TASK_NUM_TWO;
+
 import duke.ui.Ui;
 
 /**
@@ -7,15 +10,12 @@ import duke.ui.Ui;
  */
 public class InvalidTaskNumberException extends DukeException {
 
-    private static final String LINE_1 = "Task number does not exist in the list.";
-    private static final String LINE_2 = "Your current list only has %d tasks!";
-
     /**
      * Initializes the InvalidTaskNumberException object with the error message suggesting the proper format.
      *
      * @param size Size provided by the user.
      */
     public InvalidTaskNumberException(int size) {
-        super(Ui.stringFormatter(LINE_1, String.format(LINE_2, size)));
+        super(Ui.stringFormatter(INVALID_TASK_NUM_ONE, String.format(INVALID_TASK_NUM_TWO, size)));
     }
 }

@@ -3,7 +3,9 @@ package duke.storage;
 import static duke.util.Keyword.CSV_SEPARATOR;
 import static duke.util.Keyword.DATE_TIME_OUTPUT_FORMAT;
 import static duke.util.Keyword.KEYWORD_DEADLINE;
+import static duke.util.Keyword.KEYWORD_DONE;
 import static duke.util.Keyword.KEYWORD_EVENT;
+import static duke.util.Keyword.KEYWORD_NOT_DONE;
 import static duke.util.Keyword.KEYWORD_TODO;
 
 import java.time.LocalDateTime;
@@ -21,9 +23,6 @@ import duke.task.ToDo;
  */
 public class CsvConverter {
 
-    private static final String DONE = "done";
-    private static final String NOT_DONE = "not done";
-
     /**
      * Creates a task from the CSV format of the task.
      *
@@ -32,7 +31,6 @@ public class CsvConverter {
      */
     protected static Task parseToTask(String input) throws InvalidFileFormatException {
         String[] resultArr = parseString(input);
-
         String taskType = resultArr[0];
         String description = resultArr[1];
         String timeFrame = resultArr[2];
@@ -55,7 +53,7 @@ public class CsvConverter {
      * Parses the input csv string to an array.
      *
      * @param input Input string.
-     * @return Array format of task.
+     * @return String array format of task.
      * @throws InvalidFileFormatException If there are errors in the csv format.
      */
     private static String[] parseString(String input) throws InvalidFileFormatException {
@@ -66,9 +64,9 @@ public class CsvConverter {
             throw new InvalidFileFormatException();
         }
         resultArr[0] = resultArr[0].toUpperCase();
-        resultArr[4] = resultArr[4].toLowerCase();
+        resultArr[4] = resultArr[4].toUpperCase();
         String doneStatus = resultArr[4];
-        boolean validStatus = doneStatus.equals(DONE) || doneStatus.equals(NOT_DONE);
+        boolean validStatus = doneStatus.equals(KEYWORD_DONE) || doneStatus.equals(KEYWORD_NOT_DONE);
 
         if (!validStatus) {
             throw new InvalidFileFormatException();
@@ -98,6 +96,6 @@ public class CsvConverter {
      * @return True if done, false if not done.
      */
     private static boolean stringToBoolean(String input) {
-        return input.equals(DONE);
+        return input.equals(KEYWORD_DONE);
     }
 }

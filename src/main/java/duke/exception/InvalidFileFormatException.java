@@ -1,5 +1,7 @@
 package duke.exception;
 
+import static duke.util.Keyword.FILE_FORMAT_ERR;
+
 import duke.ui.Ui;
 
 /**
@@ -7,12 +9,10 @@ import duke.ui.Ui;
  */
 public class InvalidFileFormatException extends DukeException {
 
-    private static final String INVALID_FILE_FORMAT = "CSV file is poorly formatted!";
-
     /**
      * Initializes the InvalidFileFormatException.
      */
     public InvalidFileFormatException() {
-        super(Ui.stringFormatter(INVALID_FILE_FORMAT));
+        super(Ui.stringFormatter(FILE_FORMAT_ERR));
     }
 }

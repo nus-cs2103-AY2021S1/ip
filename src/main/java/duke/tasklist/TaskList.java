@@ -9,6 +9,7 @@ import duke.task.Task;
  * Keeps and handles all operations regarding the user tasks.
  */
 public class TaskList {
+
     private final ArrayList<Task> tasks;
 
     /**

@@ -19,6 +19,7 @@ public abstract class AddCommand extends Command {
      * @param taskList TaskList object.
      * @param ui User Interface object.
      * @param storage Storage object.
+     * @return Response message to user.
      * @throws DuplicateTaskException If the new task to be added already exists in the current {@code TaskList}.
      * @throws FileUpdateFailException If storage file fails to get updated.
      */

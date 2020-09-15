@@ -79,7 +79,7 @@ public class DialogBox extends HBox {
      * @param img User's icon.
      * @return Display of user dialog.
      */
-    public static DialogBox getUserDialog(String text, Image img) {
+    protected static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
@@ -90,7 +90,7 @@ public class DialogBox extends HBox {
      * @param img Duke image.
      * @return Display of Duke's response.
      */
-    public static DialogBox getDukeDialog(String text, Image img) {
+    protected static DialogBox getDukeDialog(String text, Image img) {
         var dialogBox = new DialogBox(text, img);
         dialogBox.flip();
         return dialogBox;

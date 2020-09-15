@@ -1,5 +1,7 @@
 package duke.command;
 
+import static duke.util.Keyword.EMPTY_STRING;
+
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
@@ -15,13 +17,14 @@ public class ShowCommand extends Command {
      * @param taskList TaskList object.
      * @param ui User Interface object.
      * @param storage Storage object.
+     * @return Response message to user.
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
         if (taskList.isEmpty()) {
             return ui.emptyTaskList();
         } else {
-            return ui.showTaskList(taskList, "");
+            return ui.showTaskList(taskList, EMPTY_STRING);
         }
     }
 }

@@ -30,6 +30,7 @@ public class AddToDoCommand extends AddCommand {
      * @param taskList TaskList object.
      * @param ui User Interface object.
      * @param storage Storage object.
+     * @return Response message to user.
      * @throws EmptyToDoException If the task detail is empty.
      * @throws FileUpdateFailException If storage file fails to get updated.
      * @throws DuplicateTaskException If the new task to be added already exists in the current {@code TaskList}.

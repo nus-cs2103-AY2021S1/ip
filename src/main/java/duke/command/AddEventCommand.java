@@ -44,8 +44,28 @@ public class AddEventCommand extends AddCommand {
     public String execute(TaskList taskList, Ui ui, Storage storage) throws EmptyTimeException, InvalidEventException,
         InvalidDeadlineException, FileUpdateFailException, DuplicateTaskException {
         String[] resultArr = TaskParser.parseTaskDescription(description, TaskType.EVENT);
-        String taskDetails = resultArr[0];
-        String timeFrame = resultArr[1];
+        String taskDetails = getTaskDetails(resultArr);
+        String timeFrame = getTimeFrame(resultArr);
         return addTask(new Event(taskDetails, timeFrame), taskList, ui, storage);
+    }
+
+    /**
+     * Retrieves the task details from the parsed input.
+     *
+     * @param arr Parsed array.
+     * @return Details of Event task.
+     */
+    private String getTaskDetails(String[] arr) {
+        return arr[0];
+    }
+
+    /**
+     * Retrieves the deadline of this {@code Event} task.
+     *
+     * @param arr Parsed array.
+     * @return Timeframe of Event task.
+     */
+    private String getTimeFrame(String[] arr) {
+        return arr[1];
     }
 }

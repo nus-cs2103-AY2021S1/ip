@@ -1,5 +1,9 @@
 package duke.exception;
 
+import static duke.util.Keyword.INVALID_EVENT_ERR_ONE;
+import static duke.util.Keyword.INVALID_EVENT_ERR_THREE;
+import static duke.util.Keyword.INVALID_EVENT_ERR_TWO;
+
 import duke.ui.Ui;
 
 /**
@@ -7,14 +11,10 @@ import duke.ui.Ui;
  */
 public class InvalidEventException extends DukeException {
 
-    private static final String LINE_1 = "Event task is poorly formatted.";
-    private static final String LINE_2 = "Here is a proper format: event 'event name' /at 'start time to end time'";
-    private static final String LINE_3 = "e.g. meeting /at Sunday 2 - 4pm";
-
     /**
      * Initializes the InvalidEventException object with the error message suggesting the proper format.
      */
     public InvalidEventException() {
-        super(Ui.stringFormatter(LINE_1, LINE_2, LINE_3));
+        super(Ui.stringFormatter(INVALID_EVENT_ERR_ONE, INVALID_EVENT_ERR_TWO, INVALID_EVENT_ERR_THREE));
     }
 }

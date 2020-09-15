@@ -1,5 +1,7 @@
 package duke.exception;
 
+import static duke.util.Keyword.EMPTY_TIME_MESSAGE;
+
 import duke.task.TaskType;
 import duke.ui.Ui;
 
@@ -7,8 +9,6 @@ import duke.ui.Ui;
  * Thrown when either a {@code Deadline} or {@code Event} Task does not have its time specified.
  */
 public class EmptyTimeException extends DukeException {
-
-    private static final String EMPTY_TIME_MESSAGE = "Time of %s task is not specified!";
 
     /**
      * Initializes the {@code EmptyTimeException} object.

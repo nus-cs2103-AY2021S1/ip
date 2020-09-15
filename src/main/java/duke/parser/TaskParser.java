@@ -18,6 +18,7 @@ public class TaskParser {
     /**
      * Returns the unique identifier tied to this {@code Task}.
      *
+     * @param taskType Task type of task.
      * @return String identifier of the Task.
      */
     private static String getIdentifier(TaskType taskType) {
@@ -31,7 +32,7 @@ public class TaskParser {
      *
      * @param description Description of task.
      * @param taskType Task type of task.
-     * @return String Array consisting of task details and time.
+     * @return String array consisting of task details and time.
      * @throws InvalidDeadlineException If deadline is not formatted correctly.
      * @throws InvalidEventException If Event is not formatted correctly.
      * @throws EmptyTimeException If time of event is not specified.
