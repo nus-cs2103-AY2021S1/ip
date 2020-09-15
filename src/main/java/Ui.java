@@ -30,7 +30,8 @@ public class Ui {
                 + "\t\t 3. event <task> /at <YYYY-MM-DD>\n"
                 + "\t\t 4. done <number of the task>\n"
                 + "\t\t 5. delete <number of the task>\n"
-                + "\t\t 6. list\n"
+                + "\t\t 6. find <keyword>\n"
+                + "\t\t 7. list\n"
                 + "\t" + line);
         return (str);
     }
