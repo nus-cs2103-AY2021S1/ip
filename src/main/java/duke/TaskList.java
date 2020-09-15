@@ -54,7 +54,7 @@ public class TaskList {
         ArrayList<Task> matchingTask = new ArrayList<>();
 
         for (Task task: taskList) {
-            if (task.getDescription().contains(keyword)) {
+            if (task.getDescription().toLowerCase().contains(keyword.toLowerCase())) {
                 matchingTask.add(task);
             }
         }

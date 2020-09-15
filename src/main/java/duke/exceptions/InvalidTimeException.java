@@ -6,7 +6,7 @@ package duke.exceptions;
  */
 public class InvalidTimeException extends DukeException {
     /**
-     * Constructor for InvalidTimeException.
+     * Initializes InvalidTimeException.
      */
     public InvalidTimeException() {
         super("☹ OOPS!!! The format of your input time seems to be wrong.\n"

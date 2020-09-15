@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafxstyle.MainWindow;
 
 /**
  * A GUI for Duke using FXML.
@@ -18,7 +19,7 @@ public class Main extends Application {
     private Duke duke = new Duke();
 
     /**
-     * Function to start the application.
+     * Starts the application.
      *
      * @param stage Stage object.
      */

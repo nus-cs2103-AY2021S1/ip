@@ -11,7 +11,7 @@ public class Event extends Task {
     private final LocalDateTime activityTime;
 
     /**
-     * Constructor for Event.
+     * Initializes Event.
      */
     public Event(String description, LocalDateTime activityTime) {
         super(description);
@@ -19,7 +19,7 @@ public class Event extends Task {
     }
 
     /**
-     * Constructor for Event with additional argument.
+     * Initializes Event with additional argument compared to the first constructor.
      */
     public Event(String description, boolean isDone, LocalDateTime activityTime) {
         super(description, isDone);

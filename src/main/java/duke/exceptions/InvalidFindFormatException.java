@@ -6,7 +6,7 @@ package duke.exceptions;
  */
 public class InvalidFindFormatException extends DukeException {
     /**
-     * Constructor for InvalidFindFormatException.
+     * Initializes InvalidFindFormatException.
      */
     public InvalidFindFormatException() {
         super("☹ OOPS!!! The format of find command seems to be wrong.\n"

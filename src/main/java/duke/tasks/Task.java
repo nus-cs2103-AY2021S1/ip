@@ -14,7 +14,7 @@ public class Task {
     protected boolean isDone;
 
     /**
-     * Constructor for Task.
+     * Initializes  Task.
      */
     public Task(String description) {
         this.description = description;
@@ -22,7 +22,7 @@ public class Task {
     }
 
     /**
-     * Constructor for Task with additional parameter.
+     * Initializes Task with additional parameter compared to the first constructor.
      */
     public Task(String description, boolean isDone) {
         this.description = description;
@@ -34,7 +34,7 @@ public class Task {
     }
 
     /**
-     * Marking the current task as done.
+     * Marks the current task as done.
      */
     public void markAsDone() throws TaskCompletedException {
         if (isDone) {

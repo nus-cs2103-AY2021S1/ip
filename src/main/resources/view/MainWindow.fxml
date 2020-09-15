@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="Infinity" maxWidth="Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="duke.MainWindow">
+<AnchorPane maxHeight="Infinity" maxWidth="Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxstyle.MainWindow">
     <children>
         <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <columnConstraints>
@@ -25,7 +25,7 @@
             <children>
                 <TextField fx:id="userInput" minHeight="41.0" minWidth="324.0" onAction="#handleUserInput" AnchorPane.bottomAnchor="1.0" GridPane.columnIndex="0" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
                 <Button fx:id="sendButton" minHeight="41.0" minWidth="76.0" mnemonicParsing="false" onAction="#handleUserInput" text="Send" GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-                <ScrollPane fx:id="scrollPane" fitToWidth="true" hbarPolicy="NEVER" hvalue="1.0" maxHeight="Infinity" vvalue="1.0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0">
+                <ScrollPane fx:id="scrollPane" style="-fx-background: #fff2e5;-fx-border-color: #fff2e5" fitToWidth="true" hbarPolicy="NEVER" hvalue="1.0" maxHeight="Infinity" vvalue="1.0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0">
                     <content>
                         <VBox fx:id="dialogContainer" maxHeight="Infinity" />
                     </content>

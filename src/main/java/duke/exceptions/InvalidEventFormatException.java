@@ -6,7 +6,7 @@ package duke.exceptions;
  */
 public class InvalidEventFormatException extends DukeException {
     /**
-     * Constructor for InvalidEventFormatException.
+     * Initializes InvalidEventFormatException.
      */
     public InvalidEventFormatException() {
         super("☹ OOPS!!! The format of event command seems to be wrong.\n"

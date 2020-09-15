@@ -14,7 +14,7 @@ public class Deadline extends Task {
     private final LocalDateTime activityTime;
 
     /**
-     * Constructor for Deadline.
+     * Initializes Deadline.
      */
     public Deadline(String description, LocalDateTime activityTime) {
         super(description);
@@ -22,7 +22,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Another Constructor for deadline with another parameter.
+     * Initializes deadline with an additional parameter compared to the first constructor.
      */
     public Deadline(String description, boolean isDone, LocalDateTime activityTime) {
         super(description, isDone);

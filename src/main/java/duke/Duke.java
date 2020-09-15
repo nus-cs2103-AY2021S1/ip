@@ -22,7 +22,7 @@ public class Duke {
 
 
     /**
-     * Constructor for Duke object.
+     * Initializes Duke object.
      */
     public Duke() {
         this.ui = new Ui();
