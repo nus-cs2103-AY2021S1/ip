@@ -34,10 +34,10 @@ Following are the commands and how to use them.
 
 1) !commands | returns a list of text commands
 2) list | lists out all the current tasks
-3) bye | saves the current tasks into a file and exits program\n" +
-4) done | format: \"done <task number>\", marks a task in the list as done\n" +
-5) todo | format: \"todo <description>\", creates a todo task\n" +
-6) deadline | format: \"deadline <description> /by <dd/MM/yyyy HHmm>\", creates a deadline task\n" +
-7) event | format: "event <description> /at <dd/MM/yyyy HHmm>", creates a event task
+3) bye | saves the current tasks into a file and exits program
+4) done | format: "done <task number>", marks a task in the list as done
+5) todo | format: "todo <description>", creates a todo task
+6) deadline | format: "deadline <description> /by <dd/MM/yyyy HHmm>", creates a deadline task
+7) event | format: "event <description> /at <dd/MM/yyyy HHmm>", creates an event task
 8) delete | format: "delete <task number>", deletes a task in the list
 9) find | format: "find <string>", finds tasks with matching string

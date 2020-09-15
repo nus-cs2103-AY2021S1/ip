@@ -113,7 +113,7 @@ public class WindowDisplay extends Application {
         flushTextCache();
 
         String home = System.getProperty("user.home");
-        pathToSave = Paths.get(home, "Documents", "ipSave.txt");
+        pathToSave = Paths.get(home, "ipSave.txt");
 
         taskList = FileManager.readFromSave(pathToSave);
         commandParserAndLogic = new CommandParserAndLogic(taskList, pathToSave);
