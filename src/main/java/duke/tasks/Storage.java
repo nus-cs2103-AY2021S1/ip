@@ -42,23 +42,53 @@ public class Storage {
      * @throws FileNotFoundException file may not be found in the path.
      */
     public static void readFromFile(String filePath, TaskList taskLs) throws FileNotFoundException {
-        File f = new File(filePath);
+        checkDirectory(new File("data"));
+        File f = new File(rtfPath);
+        try {
+            f.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         Scanner s = new Scanner(f);
         while (s.hasNextLine()) {
             String eachTask = s.nextLine();
             if (eachTask.startsWith("[T]")) {
                 String[] description = eachTask.split("%");
                 Todo todoTask = new Todo(description[2]);
+                markTaskDone(todoTask, description[1]);
                 taskLs.add(todoTask);
             } else if (eachTask.startsWith("[D]")) {
                 String[] description = eachTask.split("%");
                 Deadline deadlineTask = new Deadline(description[2], description[3]);
+                markTaskDone(deadlineTask, description[1]);
                 taskLs.add(deadlineTask);
             } else if (eachTask.startsWith("[E]")) {
                 String[] description = eachTask.split("%");
                 Event eventTask = new Event(description[2], description[3]);
+                markTaskDone(eventTask, description[1]);
                 taskLs.add(eventTask);
             } else { }
+        }
+    }
+
+    /**
+     * Checks if task is done and marks it complete.
+     * @param addToList task to be added to task list.
+     * @param done string containing true or false.
+     */
+    public static void markTaskDone(Task addToList, String done) {
+        if (done.equalsIgnoreCase("true")) {
+            addToList.markAsDone();
+        }
+    }
+
+    /**
+     * Checks if the file exists else create the data file.
+     * @param directory location of file.
+     */
+    private static void checkDirectory(File directory) {
+        if (!directory.exists()) {
+            directory.mkdir();
         }
     }
 
