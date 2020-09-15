@@ -3,32 +3,43 @@
 1. **Introduction**
 
 2. **Quick Start**
+
 3. **Features**
+
     1. Adding a todo: `todo`
     
     2. Adding a deadline: `deadline`
+    
     3. Adding an event: `event`
+    
     4. Listing all tasks: `list`
+    
     5. Marking a task as done: `done`
+    
     6. Deleting a task: `delete`
+    
     7. Finding a task: `find`
+    
     8. Undo a command: `undo`
+    
     9. Exiting the program: `bye`
+    
 4. **Command Summary**
 
     
-###1. Introduction    
+### 1. Introduction
+ 
 Duke is a chatbot for managing tasks, optimized for use with a 
 Graphical User Interface (GUI)
 
-###2. Quick Start
+### 2. Quick Start
 1. Ensure you have Java 11 or above installed in your computer
 
-2. Download the latest duke.jar from here
+2. Download the latest duke.jar from 
 3. Double click the file to start the app.
 4. Type the command in the input box and press Enter to execute it
 
-###3. Features 
+### 3. Features 
 #### Adding a todo: `todo`
 Adds a todo to the task list
 
@@ -119,7 +130,7 @@ Exits the program
 Format: `bye`
 
 
-###4. Command Summary 
+### 4. Command Summary 
 
 Action | Format
 -------| ------------------
