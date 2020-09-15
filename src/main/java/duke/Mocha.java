@@ -160,6 +160,7 @@ public class Mocha extends Application {
      */
     String getResponse(String input) {
         String responseReturn = "";
+        input = input.trim();
 
         try {
             int commandNumber = parser.parseCommand(input);
@@ -214,3 +215,4 @@ public class Mocha extends Application {
         return responseReturn;
     }
 }
+    
