@@ -1,12 +1,17 @@
 package duke.parts;
 
-import java.io.*;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+
+import org.junit.jupiter.api.Test;
+
 import duke.error.EventDateParseException;
 import duke.task.Event;
 import duke.task.ToDo;
-import org.junit.jupiter.api.Test;
 
 public class StorageTest {
     @Test
