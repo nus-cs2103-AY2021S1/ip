@@ -1,0 +1,25 @@
+.mainBackground{
+     -fx-background-color: black;
+}
+
+.messageWindow {
+    -fx-border-width: 5.0;
+    -fx-border-color: chartreuse;
+    -fx-background-color: grey;
+    -fx-background-radius: 15;
+    -fx-padding: 20px;
+    -fx-border-insets: 5px;
+    -fx-background-insets: 5px;
+    -fx-border-radius: 15;
+    -fx-text-fill: chartreuse;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0.5, 0.0, 0.0);
+}
+
+.sendButton {
+    -fx-border-color: chartreuse;
+    -fx-border-width: 5.0;
+    -fx-background-color: grey;
+    -fx-text-fill: chartreuse;
+    -fx-font-weight: bold;
+}
