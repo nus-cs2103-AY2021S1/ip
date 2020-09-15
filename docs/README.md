@@ -2,7 +2,7 @@
 
 ## Introduction
 Chubbs is a friendly neighborhood feline application that helps you with your task management needs! 
-Chubbs also helps you to keep track of your tasks and stores them in your computer.
+Chubbs also stores them in your computer.
 ## Types of Tasks
  1. *Todo*: Task that does not require a date/time.
  2. *Deadline*: Task that needs to be completed at a date/time.
@@ -81,5 +81,6 @@ Command: | `meow`
 ### 10. Custom replies
 ![reminder](https://github.com/jimvae/ip/blob/branch-A-UserGuide/src/main/resources/images/screenshots/custom_replies.png?raw=true)
 
-
+##Acknowledgments:
+Background photo taken by Buenosia Carol from Pexels and is extracted from https://www.pexels.com/photo/white-and-gray-cat-in-brown-woven-basket-1543793/
 
