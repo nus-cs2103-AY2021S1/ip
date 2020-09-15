@@ -1,5 +1,7 @@
 # User Guide
 
+![Image of chatbot](https://github.com/kimberlyohq/ip/blob/master/docs/Ui.png)
+
 ## Features 
 
 ### Feature 1 - Adding a task
