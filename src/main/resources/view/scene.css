@@ -1,3 +1,4 @@
+/*Solution below adapted from: https://stackoverflow.com/questions/49159286/make-a-dark-mode-with-javafx*/
 #dialogContainer{
     -fx-background-color: #373e43;;
 }
