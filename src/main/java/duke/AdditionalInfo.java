@@ -16,6 +16,7 @@ public class AdditionalInfo {
     }
 
     public AdditionalInfo(int taskIndex) {
+        assert taskIndex >= 0 : "Index of task cannot be smaller than 0";
         this.taskIndex = taskIndex;
     }
 
