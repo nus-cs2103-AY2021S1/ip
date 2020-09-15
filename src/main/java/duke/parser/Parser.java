@@ -78,6 +78,8 @@ public class Parser {
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new DukeException("Please specify your weekly task details!");
             }
+        } else if (userCommand.equals("greet")) {
+            return new GreetCommand();
         } else {
             return new InvalidCommand();
         }

@@ -45,6 +45,16 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
+     * Display greeting message to user when Duke is started.
+     */
+    public void greetUser() {
+        String greeting = duke.getResponse("greet");
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(greeting, dukeImage)
+        );
+    }
+
+    /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      * Exits the Duke application when user inputs 'bye'.
