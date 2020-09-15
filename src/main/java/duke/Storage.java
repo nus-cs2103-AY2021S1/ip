@@ -71,7 +71,7 @@ public class Storage {
                 FileWriter fw = new FileWriter(this.file);
                 fw.write("");
                 for (String s: data) {
-                    fw.append(s);
+                    fw.append(s + "\n");
                 }
                 fw.close();
                 return;
@@ -83,7 +83,7 @@ public class Storage {
                     FileWriter fw = new FileWriter(currentFile);
                     fw.write("");
                     for (String s: data) {
-                        fw.append(s);
+                        fw.append(s + "\n");
                     }
                     fw.close();
                 }
@@ -138,7 +138,7 @@ public class Storage {
         Scanner scanner = new Scanner(currentFile);
         String[] dataRead;
         while (scanner.hasNext()) {
-            dataRead = readSavedData(scanner.nextLine());
+            dataRead = readSavedLine(scanner.nextLine());
             Task newTask = loadSavedTask(dataRead);
             loadedTask.add(newTask);
         }
@@ -151,7 +151,7 @@ public class Storage {
      * @param inputLine A line from save file to be interpreted.
      * @return A String array with 2 or 3 parts.
      */
-    private String[] readSavedData(String inputLine) {
+    private String[] readSavedLine(String inputLine) {
         String[] parts = inputLine.split(" \\| ");
         ArrayList<String> result = new ArrayList<>();
         for (String part : parts) {
