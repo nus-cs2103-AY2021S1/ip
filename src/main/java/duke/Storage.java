@@ -80,9 +80,13 @@ public class Storage {
      * @throws DukeException when it is unable to load file from file path
      */
     public List<Task> loadFile() throws DukeException {
+        Scanner sc = null;
         try {
-            Scanner sc = new Scanner(path);
-            List<Task> tasks = new ArrayList<>();
+            sc = new Scanner(path);
+        } catch (IOException e) {
+            throw new DukeException("File cannot be located or opened");
+        }
+        List<Task> tasks = new ArrayList<>();
             while (sc.hasNextLine()) {
                 String type = sc.nextLine();
                 String done = sc.nextLine();
@@ -115,9 +119,6 @@ public class Storage {
             }
             return tasks;
 
-        } catch (IOException e) {
-            throw new DukeException("Unable to find load file");
-        }
     }
 
 }

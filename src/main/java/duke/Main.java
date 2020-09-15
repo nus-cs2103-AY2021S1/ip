@@ -1,5 +1,14 @@
 package duke;
 
+import java.io.IOException;
+
+import javafx.scene.image.Image;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+
 /**
  * The main class to bypass JavaFX runtime components are missing error
  *
@@ -7,9 +16,21 @@ package duke;
  * @version 0.1
  * @since   8/9/2020
  */
-public class Main {
+public class Main extends Application {
+    private Image icon = new Image(this.getClass().getResourceAsStream("/images/icon.png"));
 
-    public static void main(String[] args) throws DukeException {
-        Duke.main(args);
+    public void start(Stage stage) {
+        try {
+            Duke duke = new Duke();
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
+            AnchorPane ap = fxmlLoader.load();
+            Scene scene = new Scene(ap);
+            stage.setScene(scene);
+            fxmlLoader.<MainWindow>getController().setDuke(duke);
+            stage.getIcons().add(icon);
+            stage.show();
+        } catch (IOException | DukeException e) {
+            e.printStackTrace();
+        }
     }
 }

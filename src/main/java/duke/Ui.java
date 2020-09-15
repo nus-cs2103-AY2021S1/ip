@@ -10,7 +10,6 @@ import java.util.List;
  * @since   27/8/2020
  */
 public class Ui {
-    final String outputLine = "--------------------------";
 
     /**
      * JavafxUi constructor
@@ -19,13 +18,6 @@ public class Ui {
 
     }
 
-
-    /**
-     * drawLine method which returns a line
-     */
-    public String drawLine() {
-        return outputLine;
-    }
 
     /**
      * addTask method which returns the task information
@@ -57,16 +49,14 @@ public class Ui {
      * listCount method which returns the number of tasks
      */
     public String listCount(int count) {
-        return "Now you have " + count + " tasks in the list. \n"
-               + drawLine();
+        return "Now you have " + count + " tasks in the list. \n";
     }
 
     /**
      * bye method which returns a message when the user exits
      */
     public String bye() {
-        return "Bye. Hope to see you again soon! \n"
-                + drawLine();
+        return "Bye. Hope to see you again soon! \n";
     }
 
     /**
@@ -90,7 +80,6 @@ public class Ui {
             index += 1;
 
         }
-        output += drawLine();
         return output;
     }
 
