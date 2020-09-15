@@ -1,15 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="663.0" style="-fx-background-color: #35FF40;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="duke.MainWindow">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="654.0" prefWidth="672.0" style="-fx-background-color: #35FF40;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="duke.MainWindow">
     <children>
-        <TextField fx:id="userInput" layoutX="2.0" layoutY="558.0" onAction="#handleUserInput" prefHeight="41.0" prefWidth="582.0" style="-fx-background-color: #150000; -fx-border-color: #35FF40;" AnchorPane.bottomAnchor="1.0" />
-        <Button fx:id="sendButton" layoutX="585.0" layoutY="558.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="41.0" prefWidth="76.0" style="-fx-background-color: #150000; -fx-border-color: #35FF40;" text="Send" textFill="#35ff40" />
-        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="557.0" prefWidth="663.0" style="-fx-background-color: #35FF40; -fx-border-color: #35FF40;" vvalue="1.0">
+        <TextField fx:id="userInput" layoutX="3.0" layoutY="558.0" onAction="#handleUserInput" prefHeight="41.0" prefWidth="589.0" style="-fx-background-color: #150000; -fx-border-color: #35FF40; -fx-background-image: url('file:src/main/resources/images/m2.png');" AnchorPane.bottomAnchor="2.0">
+         <effect>
+            <ColorAdjust brightness="-0.25" />
+         </effect></TextField>
+        <Button fx:id="sendButton" layoutX="594.0" layoutY="611.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="41.0" prefWidth="75.0" style="-fx-background-color: #150000; -fx-border-color: #35FF40; -fx-background-image: url('file:src/main/resources/images/m2.png');" text="Send">
+         <effect>
+            <ColorAdjust brightness="-0.25" />
+         </effect>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.4941176474094391" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.3019607961177826" green="0.16078431904315948" blue="1.0" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
+         <font>
+            <Font name="Consolas Bold" size="15.0" />
+         </font></Button>
+        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="611.0" prefWidth="672.0" style="-fx-background-color: #35FF40; -fx-border-color: #35FF40;" vvalue="1.0">
             <content>
-                <VBox fx:id="dialogContainer" blendMode="SRC_ATOP" prefHeight="553.0" prefWidth="659.0" style="-fx-background-color: #150000; -fx-border-color: #35FF40; -fx-background-image: url('file:src/main/resources/images/maple5.png');" />
+                <VBox fx:id="dialogContainer" blendMode="SRC_ATOP" prefHeight="607.0" prefWidth="668.0" style="-fx-background-color: #150000; -fx-border-color: #35FF40; -fx-background-image: url('file:src/main/resources/images/m1.png');" />
             </content>
         </ScrollPane>
     </children>

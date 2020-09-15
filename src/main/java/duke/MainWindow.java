@@ -45,7 +45,7 @@ public class MainWindow extends AnchorPane {
                 "█░░╚╩╝╚╝╚╝╚╝╚╝╩─╩╚╝░░█\uD83C\uDF3C\n" +
                 "█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█\uD83C\uDF3C";
 
-        String welcome = logo + "\nHello! I'm Duke\nWhat can I do for you?";
+        String welcome = logo + "\nHello! I'm Mushy \uD83C\uDF1F\nWhat can I do for you?";
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(welcome, dukeImage));
     }
 

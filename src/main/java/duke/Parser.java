@@ -120,7 +120,7 @@ public class Parser {
     }
 
     private static String executeByeCommand() {
-        return ("Bye. Hope to see you again soon!");
+        return ("Bye. Hope to see you again soon! \uD83D\uDE0A");
     }
 
     private static String executeListCommand() {
@@ -187,18 +187,18 @@ public class Parser {
                 + "─────────┼──────────────────────────┼───────────────────────────────────────────\n"
                 + "bye      │ exits the program        │ bye\n"
                 + "list     │ list all current tasks   │ list\n"
-                + "done     │ marks a task done        │ done {task number}\n"
-                + "delete   │ deletes a task           │ delete {task number}\n"
-                + "find     │ finds all matching tasks │ find {text to match}\n"
+                + "done     │ marks a task done        │ done [task number]\n"
+                + "delete   │ deletes a task           │ delete [task number]\n"
+                + "find     │ finds all matching tasks │ find [text to match]\n"
                 + "help     │ displays help menu       │ help\n"
-                + "todo     │ adds a todo task         │ todo {task name}\n"
-                + "deadline │ adds a deadline task     │ deadline {task name} /by {dd/MM/yyyy HHmm}\n"
-                + "event    │ adds an event task       │ event {task name} /at {duration}";
+                + "todo     │ adds a todo task         │ todo [task name]\n"
+                + "deadline │ adds a deadline task     │ deadline [task name] /by [dd/MM/yyyy HHmm]\n"
+                + "event    │ adds an event task       │ event [task name] /at [duration]";
         return output;
     }
 
     private static String executeEmptyDescriptionCommand(String identifier) {
-        return ("☹ OOPS!!! The description of a " + identifier + " cannot be empty.");
+        return ("⚠ OOPS!!! The description of a " + identifier + " cannot be empty.");
     }
 
     private static String executeTodoCommand(String input) throws IOException {
@@ -266,7 +266,7 @@ public class Parser {
     }
 
     private static String executeWrongInputCommand() {
-        String output = ("☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n");
+        String output = ("⚠ OOPS!!! I'm sorry, but I don't know what that means \uD83D\uDE41\n");
         output += ("Type \"help\" for a list of commands");
         return output;
     }

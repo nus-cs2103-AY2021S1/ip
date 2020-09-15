@@ -20,7 +20,7 @@ public class Ui {
      */
     public void greet() {
         printBorder();
-        System.out.println(INDENTATION + "Hello! I'm Duke\n    What can I do for you?");
+        System.out.println(INDENTATION + "Hello! I'm Mushy\n    What can I do for you?");
         printBorder();
     }
 
@@ -105,13 +105,13 @@ public class Ui {
                 + "─────────┼──────────────────────────┼───────────────────────────────────────────\n"
                 + "bye      │ exits the program        │ bye\n"
                 + "list     │ list all current tasks   │ list\n"
-                + "done     │ marks a task done        │ done {task number}\n"
-                + "delete   │ deletes a task           │ delete {task number}\n"
-                + "find     │ finds all matching tasks │ find {text to match}\n"
+                + "done     │ marks a task done        │ done [task number]\n"
+                + "delete   │ deletes a task           │ delete [task number]\n"
+                + "find     │ finds all matching tasks │ find [text to match]\n"
                 + "help     │ displays help menu       │ help\n"
-                + "todo     │ adds a todo task         │ todo {task name}\n"
-                + "deadline │ adds a deadline task     │ deadline {task name} /by {dd/MM/yyyy HHmm}\n"
-                + "event    │ adds an event task       │ event {task name} /at {duration}";
+                + "todo     │ adds a todo task         │ todo [task name]\n"
+                + "deadline │ adds a deadline task     │ deadline [task name] /by [dd/MM/yyyy HHmm]\n"
+                + "event    │ adds an event task       │ event [task name] /at [duration]";
         System.out.println(output);
     }
 }
