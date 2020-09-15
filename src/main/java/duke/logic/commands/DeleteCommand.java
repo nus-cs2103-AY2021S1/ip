@@ -34,6 +34,7 @@ public class DeleteCommand extends Command {
         if (commandDetails.length == 1) {
             throw new DukeException("Delete Index not provided!");
         }
+        assert commandDetails.length == 2;
         try {
             int delIndex = Integer.parseInt(commandDetails[1]) - 1;
             Task delTask = tm.getTask(delIndex);

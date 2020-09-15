@@ -48,6 +48,7 @@ public class TaskManager {
         try {
             Task completedTask = taskList.get(index);
             completedTask.markAsDone();
+            assert completedTask.isDone();
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Invalid index!");
         }
@@ -63,6 +64,7 @@ public class TaskManager {
         try {
             Task toDeleteTask = taskList.get(index);
             taskList.remove(toDeleteTask);
+            assert (taskList.contains(toDeleteTask) == false);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Invalid index!");
         }
