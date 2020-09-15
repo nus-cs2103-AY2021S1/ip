@@ -28,16 +28,31 @@ public class Event extends Task {
         this.eventTime = eventTime;
     }
 
+    /**
+     * Returns whether the task has a date time field.
+     *
+     * @return True as events have a date time field.
+     */
     @Override
     public boolean hasDateTime() {
         return true;
     }
 
+    /**
+     * Gets the event time of the event.
+     *
+     * @return Event time of the event.
+     */
     @Override
     public LocalDateTime getDateTime() {
         return eventTime;
     }
 
+    /**
+     * Sets the event time of the event.
+     *
+     * @param newDateTime New event time of the event.
+     */
     @Override
     public void setDateTime(LocalDateTime newDateTime) {
         this.eventTime = newDateTime;
@@ -54,12 +69,23 @@ public class Event extends Task {
                 eventTime.format(Parser.TASK_DATA_DATE_TIME_FORMATTER));
     }
 
+    /**
+     * Gives a displayable string representation of the task.
+     *
+     * @return Displayable string representation of the task.
+     */
     @Override
     public String toString() {
         return String.format(Event.STRING_FORMAT, getStatusIcon(), description,
                 eventTime.format(Parser.OUTPUT_DATE_TIME_FORMATTER));
     }
 
+    /**
+     * Compares this task with another object for equality.
+     *
+     * @param o Object compared.
+     * @return True if this task is equal to the object, and false otherwise.
+     */
     @Override
     public boolean equals(Object o) {
         if (o == this) {

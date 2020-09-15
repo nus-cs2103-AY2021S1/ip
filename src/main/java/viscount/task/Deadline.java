@@ -28,16 +28,31 @@ public class Deadline extends Task {
         this.dueDate = dueDate;
     }
 
+    /**
+     * Returns whether the task has a date time field.
+     *
+     * @return True as deadlines have a date time field.
+     */
     @Override
     public boolean hasDateTime() {
         return true;
     }
 
+    /**
+     * Gets the due date of the deadline.
+     *
+     * @return Due date of the deadline.
+     */
     @Override
     public LocalDateTime getDateTime() {
         return dueDate;
     }
 
+    /**
+     * Sets the due date of the dateline.
+     *
+     * @param newDateTime New due date of the deadline.
+     */
     @Override
     public void setDateTime(LocalDateTime newDateTime) {
         this.dueDate = newDateTime;
@@ -54,12 +69,23 @@ public class Deadline extends Task {
                 dueDate.format(Parser.TASK_DATA_DATE_TIME_FORMATTER));
     }
 
+    /**
+     * Gives a displayable string representation of the task.
+     *
+     * @return Displayable string representation of the task.
+     */
     @Override
     public String toString() {
         return String.format(Deadline.STRING_FORMAT, getStatusIcon(), description,
                 dueDate.format(Parser.OUTPUT_DATE_TIME_FORMATTER));
     }
 
+    /**
+     * Compares this task with another object for equality.
+     *
+     * @param o Object compared.
+     * @return True if this task is equal to the object, and false otherwise.
+     */
     @Override
     public boolean equals(Object o) {
         if (o == this) {

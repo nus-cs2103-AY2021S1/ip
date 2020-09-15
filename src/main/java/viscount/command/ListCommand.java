@@ -100,6 +100,12 @@ public class ListCommand extends Command {
         }
     }
 
+    /**
+     * Compares this command with another object for equality.
+     *
+     * @param o Object compared.
+     * @return True if this command is equal to the object, and false otherwise.
+     */
     @Override
     public boolean equals(Object o) {
         if (o == this) {

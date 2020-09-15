@@ -13,6 +13,9 @@ import viscount.task.TaskType;
  */
 public class Ui {
 
+    /**
+     * Instantiates a new Ui object.
+     */
     public Ui() {
 
     }
@@ -99,12 +102,24 @@ public class Ui {
                 convertTaskListToString(tasks));
     }
 
+    /**
+     * Gets the edit description response.
+     *
+     * @param task Task edited.
+     * @return The appropriate edit description response.
+     */
     public String getEditDescriptionResponse(Task task) {
         return String.format("Very well. I've edited the description of this %s:\n%s",
                 task.getTaskType().name().toLowerCase(),
                 task.toString());
     }
 
+    /**
+     * Gets the edit date time response.
+     *
+     * @param task Task edited.
+     * @return The appropriate edit date time response.
+     */
     public String getEditDateTimeResponse(Task task) {
         String dateTimeDescription = task.getTaskType().equals(TaskType.DEADLINE)
                 ? "due date"

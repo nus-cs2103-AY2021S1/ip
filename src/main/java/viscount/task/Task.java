@@ -39,27 +39,77 @@ public abstract class Task {
         //return tick or X symbols
     }
 
+    /**
+     * Gets the type of the task.
+     *
+     * @return Type of the task.
+     */
     public TaskType getTaskType() {
         return taskType;
     }
+
+    /**
+     * Gets the description of the task.
+     *
+     * @return Description of the task.
+     */
     public String getDescription() {
         return description;
     }
+
+    /**
+     * Gets a boolean representing whether the task is done.
+     * @return True if the task is marked as done, and false otherwise.
+     */
     public boolean getIsDone() {
         return isDone;
     }
 
+    /**
+     * Sets whether the task is done.
+     *
+     * @param isDone New state of whether the task is marked as done.
+     */
     public void setDone(boolean isDone) {
         this.isDone = isDone;
     }
 
+    /**
+     * Sets the description of the task.
+     *
+     * @param newDescription New description of task.
+     */
     public void setDescription(String newDescription) {
         this.description = newDescription;
     }
 
+    /**
+     * Sets the date time field of the task.
+     *
+     * @param newDateTime New date time of the task.
+     * @throws UnsupportedOperationException If method is called on tasks with no date time field.
+     */
     public abstract void setDateTime(LocalDateTime newDateTime) throws UnsupportedOperationException;
 
+    /**
+     * Returns whether the task has a date time field.
+     *
+     * @return True if the task has a date time field, and false otherwise.
+     */
     public abstract boolean hasDateTime();
-    public abstract LocalDateTime getDateTime();
+
+    /**
+     * Gets the date time of the task.
+     *
+     * @return Date time of time task.
+     * @throws UnsupportedOperationException If method is called on tasks with no date time field.
+     */
+    public abstract LocalDateTime getDateTime() throws UnsupportedOperationException;
+
+    /**
+     * Gives a task data representation of the task in String format.
+     *
+     * @return Task data representation of the task.
+     */
     public abstract String toTaskData();
 }
