@@ -3,12 +3,15 @@ package duke;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 /**
  * This class is the main entry point into the Duke application.
@@ -24,7 +27,10 @@ public class Main extends Application {
     private Button sendButton;
     private Scene scene;
 
-    private Duke duke = new Duke();
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/LukeDaKing.jpg"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/LukeDaDuke.jpg"));
+
+    //private Duke duke = new Duke();
 
     /**
      * Starts the GUI of Duke chatbot.
@@ -86,5 +92,49 @@ public class Main extends Application {
 
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
+
+        sendButton.setOnMouseClicked((event) -> {
+            handleUserInput();
+        });
+
+        userInput.setOnAction((event) -> {
+            handleUserInput();
+        });
+
+        //Scroll down to the end every time dialogContainer's height changes.
+        dialogContainer.heightProperty()
+                .addListener((observable) -> scrollPane.setVvalue(1.0));
+    }
+
+    /**
+     * Iteration 1:
+     * Creates a label with the specified text and adds it to the dialog container.
+     * @param text String containing text to add
+     * @return a label with the specified text that has word wrap enabled.
+     */
+    private Label getDialogLabel(String text) {
+        // You will need to import `javafx.scene.control.Label`.
+        Label textToAdd = new Label(text);
+        textToAdd.setWrapText(true);
+
+        return textToAdd;
+    }
+
+    private void handleUserInput() {
+        Label userText = new Label(userInput.getText());
+        Label dukeText = new Label(getResponse(userInput.getText()));
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(userText, new ImageView(user)),
+                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+        );
+        userInput.clear();
+    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    private String getResponse(String input) {
+        return "Your grandmother heard: " + input;
     }
 }
