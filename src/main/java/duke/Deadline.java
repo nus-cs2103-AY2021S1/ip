@@ -1,15 +1,17 @@
 package duke;
 
 /**
- * Deadline <- Task
+ * A task that need to be done by a certain deadline.
+ * Command syntax: deadline + description + /by + time
+ * Example:        deadline CS2103T IP /by every Thursday
  */
 public class Deadline extends Task {
-    String description;
-    String deadline;
-    boolean isDone;
+    private final String deadline;
 
     /**
-     * Init Deadline
+     * Constructor.
+     * @param description The description of the task.
+     * @param deadline The time of deadline of the task.
      */
     public Deadline(String description, String deadline) {
         super(description);
@@ -17,26 +19,31 @@ public class Deadline extends Task {
     }
 
     /**
-     * Status in format [D][x] return book (by: 6 June)
+     * Constructor with the addition of isDone.
+     * @param isDone Check if the task is done.
+     */
+    public Deadline(String description, boolean isDone, String deadline) {
+        super(description, isDone);
+        this.deadline = deadline;
+    }
+
+    /**
+     * Represent the task in an audience-friendly form.
+     * Format:  [D][isDone] + description + (by: deadline)
+     * Example: [D][x] CS2103T IP (by: every Thursday)
      */
     @Override
     public String getStatus() {
-        return "[D]" + super.getStatus() + " (by: " + deadline + ")";
+        return "[D]" + getIcon() + " " + getDescription()  + " (by: " + deadline + ")";
     }
 
     /**
-     * type of Task -> D for deadline
+     * Represent the task in a suitable form to store data.
+     * Format:  D|description|isDone|deadline
+     * Example: D|CS2103T IP|false|every Thursday
      */
     @Override
-    public String getType() {
-        return "D";
-    }
-
-    /**
-     * description to write to data file
-     */
-    @Override
-    public String getDescription() {
-        return super.getDescription() + "|" + this.deadline;
+    public String getDataFormat() {
+        return "D" + "|" + getDescription() + "|" + getIsDone() + "|" + deadline;
     }
 }

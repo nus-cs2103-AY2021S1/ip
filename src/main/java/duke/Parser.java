@@ -1,6 +1,7 @@
 package duke;
+
 /**
- * translate command -> name and time
+ * Parse command into specific command type for handling.
  */
 public class Parser {
 
@@ -12,7 +13,7 @@ public class Parser {
         BYE,
         EVENT,
         DELETE,
-        DOWITHIN,
+        DO_WITHIN,
         FIND,
         INVALID
     }
@@ -21,59 +22,31 @@ public class Parser {
 
     }
 
-    public CommandType getType(String cmd) {
-        return CommandType.LIST;
-    }
-
     /**
-     * get name
-     * by command
+     * Parse user's commands to CommandType that other method can understand.
+     * @param cmd User's command.
+     * @return Command type.
      */
-    public String getNameBy(String cmd) {
-        for (int i = 0; i < cmd.length(); ++i) {
-            if (cmd.charAt(i) == '/' && cmd.charAt(i + 1) == 'b' && cmd.charAt(i + 2) == 'y') {
-                return cmd.substring(9, i - 1);
-            }
+    public static CommandType getType(String cmd) {
+        if (cmd.equals(CommandTag.LIST)) {
+            return CommandType.LIST;
+        } else if (cmd.equals(CommandTag.BYE)) {
+            return CommandType.BYE;
+        } else if (cmd.startsWith(CommandTag.DONE + " ")) {
+            return CommandType.DONE;
+        } else if (cmd.startsWith(CommandTag.TODO + " ")) {
+            return CommandType.TODO;
+        } else if (cmd.startsWith(CommandTag.DEADLINE + " ")) {
+            return CommandType.DEADLINE;
+        } else if (cmd.startsWith(CommandTag.EVENT + " ")) {
+            return CommandType.EVENT;
+        } else if (cmd.startsWith(CommandTag.DELETE + " ")) {
+            return CommandType.DELETE;
+        } else if (cmd.startsWith(CommandTag.FIND + " ")) {
+            return CommandType.FIND;
+        } else if (cmd.startsWith(CommandTag.DO_WITHIN + " ")) {
+            return CommandType.DO_WITHIN;
         }
-        return "";
-    }
-
-    /**
-     * get deadline
-     * by command
-     */
-    public String getDeadlineBy(String cmd) {
-        for (int i = 0; i < cmd.length(); ++i) {
-            if (cmd.charAt(i) == '/' && cmd.charAt(i + 1) == 'b' && cmd.charAt(i + 2) == 'y') {
-                return cmd.substring(i + 4);
-            }
-        }
-        return "";
-    }
-
-    /**
-     * getname
-     * at command
-     */
-    public String getNameAt(String cmd) {
-        for (int i = 0; i < cmd.length(); ++i) {
-            if (cmd.charAt(i) == '/' && cmd.charAt(i + 1) == 'a' && cmd.charAt(i + 2) == 't') {
-                return cmd.substring(6, i - 1);
-            }
-        }
-        return "";
-    }
-
-    /**
-     * get time
-     * at command
-     */
-    public String getDeadlineAt(String cmd) {
-        for (int i = 0; i < cmd.length(); ++i) {
-            if (cmd.charAt(i) == '/' && cmd.charAt(i + 1) == 'a' && cmd.charAt(i + 2) == 't') {
-                return cmd.substring(i + 4);
-            }
-        }
-        return "";
+        return CommandType.INVALID;
     }
 }

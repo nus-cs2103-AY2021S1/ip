@@ -1,3 +1,5 @@
-2
-W|study with Daryl|6 June|9 June|false
-T|study |false
+4
+W|study with Daryl|false|false|false
+T|study |true
+D|study cs2103t|false|false
+T|play lol|false
