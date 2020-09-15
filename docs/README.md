@@ -41,7 +41,7 @@ Duke Chatbot is a **desktop app for managing task schedules, optimised for use v
         
     -   **`bye`**  : Exits the app.
         
-6.  Refer to the  [Features](https://se-education.org/addressbook-level3/UserGuide.html#features)  below for details of each command.
+6.  Refer to the  [Features](https://yejiadong.github.io/ip/#features)  below for details of each command.
 
 
 ## Features
