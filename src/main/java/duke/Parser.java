@@ -1,8 +1,9 @@
 package duke;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Parser deals with making sense of the user command
@@ -20,28 +21,29 @@ public class Parser {
     public int parseCommand(String command) {
         this.command = command;
         this.commandParts = command.split("\\s", 2);
-
-        if (commandParts[0].contains("todo")) {
-            return 1;
-        } else if (commandParts[0].contains("deadline")) {
-            return 2;
-        } else if (commandParts[0].contains("event")) {
-            return 3;
-        } else if (commandParts[0].contains("done")) {
-            return 4;
-        } else if (commandParts[0].contains("list")) {
-            return 5;
-        } else if (commandParts[0].contains("bye")) {
-            return 6;
-        } else if (commandParts[0].contains("delete")) {
-            return 7;
-        } else if (commandParts[0].contains("find")) {
-            return 8;
-        } else if (commandParts[0].contains("help")) {
-            return 9;
-        } else {
-            return -1;
-        }
+        String commandKeyword = commandParts[0];
+        int commandNumber = -1;
+        
+        if (commandKeyword.contains("todo")) {
+            commandNumber = 1;
+        } else if (commandKeyword.contains("deadline")) {
+            commandNumber = 2;
+        } else if (commandKeyword.contains("event")) {
+            commandNumber = 3;
+        } else if (commandKeyword.contains("done")) {
+            commandNumber = 4;
+        } else if (commandKeyword.contains("list")) {
+            commandNumber = 5;
+        } else if (commandKeyword.contains("bye")) {
+            commandNumber = 6;
+        } else if (commandKeyword.contains("delete")) {
+            commandNumber = 7;
+        } else if (commandKeyword.contains("find")) {
+            commandNumber = 8;
+        } else if (commandKeyword.contains("help")) {
+            commandNumber = 9;
+        } 
+        return commandNumber;
     }
 
     /**
@@ -92,14 +94,22 @@ public class Parser {
         try {
 
             String[] deadlineParts = commandParts[1].split("/by");
-            LocalDate deadline = LocalDate.parse(deadlineParts[1].trim());
-            String deadlinePattern = "dd MMM yyyy";
-            String afterDateTimeFormat = deadline.format(DateTimeFormatter.ofPattern(deadlinePattern));
+            DateFormat deadlineInputFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+            DateFormat deadlineOutputFormat = new SimpleDateFormat("dd MMM yyyy hh:mm aa");
+            Date deadline = deadlineInputFormat.parse(deadlineParts[1].trim());
+            String afterDateTimeFormat = deadlineOutputFormat.format(deadline);
             Task newDeadlineTask = new Deadline(deadlineParts[0].trim(), afterDateTimeFormat);
             return newDeadlineTask;
 
         } catch (Exception e) {
-            throw new MissingTaskDescriptionException("Oops! The description cannot be empty :(");
+            String emptyDescription = "Oops! The description cannot be empty :(";
+            String deadlineKeyword = "Did you remember to put /by ?";
+            String deadlineFormat = "The format should be dd/MM/yyyy HH:mm (24 hour clock)";
+            throw new MissingTaskDescriptionException(emptyDescription
+                    + "\r\n"
+                    + deadlineKeyword
+                    + "\r\n"
+                    + deadlineFormat);
         }
     }
 
@@ -111,16 +121,35 @@ public class Parser {
      */
     public Task createNewEvent() throws MissingTaskDescriptionException {
         try {
-
+            
             String[] eventParts = commandParts[1].split("/at");
-            LocalDate event = LocalDate.parse(eventParts[1].trim());
-            String eventPattern = "dd MMM yyyy";
-            String afterDateTimeFormat = event.format(DateTimeFormatter.ofPattern(eventPattern));
-            Task newEventTask = new Event(eventParts[0].trim(), afterDateTimeFormat);
+            String[] dateAndTime = eventParts[1].trim().split("\\s");
+            String[] timeParts = dateAndTime[1].split("-");
+            
+            DateFormat eventDateInputFormat = new SimpleDateFormat("dd/MM/yyyy");
+            DateFormat eventTimeInputFormat = new SimpleDateFormat("HH:mm");
+            DateFormat eventDateOutputFormat = new SimpleDateFormat("dd MMM yyyy");
+            DateFormat eventTimeOutputFormat = new SimpleDateFormat("hh:mm aa");
+            Date eventDate = eventDateInputFormat.parse(dateAndTime[0]);
+            Date eventStartTime = eventTimeInputFormat.parse(timeParts[0]);
+            Date eventEndTime = eventTimeInputFormat.parse(timeParts[1]);
+            String eventDateFormatted = eventDateOutputFormat.format(eventDate);
+            String eventStartTimeFormatted = eventTimeOutputFormat.format(eventStartTime);
+            String eventEndTimeFormatted = eventTimeOutputFormat.format(eventEndTime);
+            String dateAndTimeFormatted = (eventDateFormatted 
+                    + " " + eventStartTimeFormatted + " - " + eventEndTimeFormatted);
+            Task newEventTask = new Deadline(eventParts[0].trim(), dateAndTimeFormatted);
             return newEventTask;
 
         } catch (Exception e) {
-            throw new MissingTaskDescriptionException("Oops! The description cannot be empty :(");
+            String emptyDescription = "Oops! The description cannot be empty :(";
+            String eventKeyword = "Did you remember to put /at ?";
+            String eventFormat = "The format should be dd/MM/yy HH:mm-HH:mm (24 hour clock)";
+            throw new MissingTaskDescriptionException(emptyDescription 
+                    + "\r\n" 
+                    + eventKeyword
+                    + "\r\n"
+                    + eventFormat);
         }
     }
 
