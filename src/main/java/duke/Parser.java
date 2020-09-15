@@ -19,6 +19,7 @@ class Parser {
         try {
             if (command.equals("bye")) {
                 Ui.exit();
+                System.exit(0);
             } else if (command.equals("list")) {
                 taskList.list();
             } else if (command.startsWith("done")) {
