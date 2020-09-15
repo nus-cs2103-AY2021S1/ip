@@ -58,12 +58,15 @@ public class DialogBox extends HBox {
         // Add padding to text
         dialog.setPadding(new Insets(8));
 
-        // Add background color to text box
-        Color color = Color.PINK;
-        CornerRadii radii = new CornerRadii(10);
-        dialog.setBackground(new Background(new BackgroundFill(color, radii, Insets.EMPTY)));
+        // Add background color to text box for user
+        setBackgroundColor(Color.PINK);
 
         displayPicture.setImage(image);
+    }
+
+    private void setBackgroundColor(Color color) {
+        CornerRadii radii = new CornerRadii(10);
+        dialog.setBackground(new Background(new BackgroundFill(color, radii, Insets.EMPTY)));
     }
 
     /**
@@ -97,6 +100,7 @@ public class DialogBox extends HBox {
     public static DialogBox getDukeDialog(String response, Image image) {
         var db = new DialogBox(response, image);
         db.flip();
+        db.setBackgroundColor(Color.LIGHTBLUE);
         return db;
     }
 }
