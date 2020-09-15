@@ -119,3 +119,11 @@ Duke supports the following operations:
    ```
 
    To exit from the Graphic User Interface, simply click the cross at the top right of the pop up window.
+
+   ####Error messages
+
+   Duke will notify you of an invalid command/input, this can be recognised by the red background in the GUI and the presence of the keyword "OOPS!!!" for the CLI.
+
+   ```
+   OOPS!!! Sorry setting of this type of label is supported.
+   ```
