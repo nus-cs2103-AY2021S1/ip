@@ -12,6 +12,6 @@ public class FindTaskByKeywordCommand extends Command {
     public Result execute(TaskList taskList, Storage storage) {
         String listOfTasks = taskList.getTaskWithKeyword(parameters[0]);
         String message = "Master here are the tasks with keyword " + parameters[0].strip() + " :\n" + listOfTasks;
-        return new Result(message, EXECUTED_SUCCESSFULLY);
+        return new Result(message, executedSuccessfully);
     }
 }

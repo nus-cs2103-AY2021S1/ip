@@ -4,15 +4,19 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Scanner;
 
-import command.*;
-import task.Deadline;
-import task.Event;
-import task.Task;
-import task.Todo;
+import command.ByeCommand;
+import command.Command;
+import command.CreateDeadLineTaskCommand;
+import command.CreateEventTaskCommand;
+import command.CreateTodoTaskCommand;
+import command.DelTaskCommand;
+import command.FindTaskByDateCommand;
+import command.FindTaskByKeywordCommand;
+import command.GetTaskListCommand;
+import command.MarkTaskDoneCommand;
 
 /**
  * The Parser class to handle the parsing of user inputs to the appropriate commands.
@@ -22,6 +26,11 @@ import task.Todo;
 public class Parser {
     private HashMap<String, String> aliasToCommandMap;
 
+    /**
+     * Constructor for parser with custom alias as commands
+     * @param aliases the file containing the alias to command mapping
+     * @throws IOException
+     */
     public Parser(File aliases) throws IOException {
         this.aliasToCommandMap = new HashMap<>();
         FileReader fr = new FileReader(aliases); //reads the file
@@ -43,7 +52,7 @@ public class Parser {
 
     private String getCommandFrom(String alias) {
         String command = aliasToCommandMap.get(alias);
-        return command == null ? alias : command ;
+        return command == null ? alias : command;
     }
 
     public HashMap<String, String> getAliasToCommandMap() {
@@ -60,9 +69,9 @@ public class Parser {
     public Command parse(String input) throws IllegalArgumentException {
         assert input.length() > 0 : "no input given";
         Scanner sc = new Scanner(input);
-        String alias = sc.next().toLowerCase();
-        String parameters = input.replace(alias,"");
-        switch (this.getCommandFrom(alias)) {
+        String alias = sc.next();
+        String parameters = input.replace(alias, "");
+        switch (this.getCommandFrom(alias.toLowerCase())) {
         case "list":
             return new GetTaskListCommand();
         case "date":

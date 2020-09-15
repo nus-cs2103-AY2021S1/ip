@@ -48,8 +48,11 @@ public class Duke {
         this.ui.printGreeting();
     }
 
+    /**
+     * Greets user
+     * @return the greeting message
+     */
     public String greet() {
-
         return this.ui.printGreeting();
     }
 

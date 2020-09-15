@@ -19,7 +19,7 @@ public class duketest {
     @Test
     public void testIncompleteCommands1(){
         Duke testDuke = new Duke();
-        String userInput = "Todo";
+        String userInput = "todo";
         assertFalse(testDuke.run(userInput).isSuccessful());
     }
 
@@ -33,7 +33,7 @@ public class duketest {
     @Test
     public void testIncompleteCommands3(){
         Duke testDuke = new Duke();
-        String userInput = "Done";
+        String userInput = "done";
         assertFalse(testDuke.run(userInput).isSuccessful());
     }
 

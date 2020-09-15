@@ -1,1 +1,8 @@
-b\|byet\|todod\|deadlinee\|eventf\|findmd\|donedel\|deletel\|list
+b|bye
+t|todo
+d|deadline
+e|event
+f|find
+md|done
+del|delete
+l|list

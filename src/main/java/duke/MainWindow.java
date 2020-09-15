@@ -32,7 +32,7 @@ public class MainWindow extends AnchorPane {
 
     public void setDuke(Duke d) {
         duke = d;
-        dialogContainer.getChildren().addAll( DialogBox.getDukeDialog(duke.greet(), dukeImage));
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(duke.greet(), dukeImage));
     }
 
     @FXML
@@ -63,10 +63,6 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
-//        if (input.strip() == "bye") {
-//            Stage stage = (Stage)
-//        }
         userInput.clear();
     }
-    ;
 }

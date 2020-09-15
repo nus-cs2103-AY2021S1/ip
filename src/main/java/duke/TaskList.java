@@ -9,8 +9,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-import com.sun.jdi.LocalVariable;
-
 import task.Deadline;
 import task.Event;
 import task.Task;
@@ -56,7 +54,7 @@ public class TaskList {
         fr.close();
     }
 
-    private boolean descriptionIsPresent(String ...parameters){
+    private boolean descriptionIsPresent(String ...parameters) {
         return parameters.length > 0 && !parameters[0].isBlank();
     }
 
@@ -72,9 +70,9 @@ public class TaskList {
      */
     public Task addTodoTask(String ...parameters) throws DukeExceptions.IncompleteCommandException {
         if (descriptionIsPresent(parameters)) {
-            //assert parameters.length == 1 : "insufficient amount of parameters";
-            String TaskDescription = parameters[0];
-            Task newTask = new Todo(TaskDescription);
+            //assert parameters.length > 0 && !parameters[0].isBlank(): "insufficient amount of parameters";
+            String taskDescription = parameters[0];
+            Task newTask = new Todo(taskDescription);
             this.taskList.add(newTask);
             return newTask;
         } else {
@@ -96,8 +94,8 @@ public class TaskList {
         } else {
             //assert parameters.length == 2 : "insufficient amount of parameters";
             String eventDescription = parameters[0].strip();
-            LocalDateTime EventDate = LocalDateTime.parse(parameters[1].strip(), formatter);
-            Task newTask = new Event(eventDescription, EventDate);
+            LocalDateTime eventDate = LocalDateTime.parse(parameters[1].strip(), formatter);
+            Task newTask = new Event(eventDescription, eventDate);
             this.taskList.add(newTask);
             return newTask;
         }
@@ -116,8 +114,8 @@ public class TaskList {
         } else {
             //assert parameters.length == 2 : "insufficient amount of parameters";
             String eventDescription = parameters[0].strip();
-            LocalDateTime EventDate = LocalDateTime.parse(parameters[1].strip(), formatter);
-            Task newTask = new Deadline(eventDescription, EventDate);
+            LocalDateTime eventDate = LocalDateTime.parse(parameters[1].strip(), formatter);
+            Task newTask = new Deadline(eventDescription, eventDate);
             this.taskList.add(newTask);
             return newTask;
         }
@@ -182,6 +180,12 @@ public class TaskList {
         return true;
     }
 
+    /**
+     * Mark task at the index of the tasklist as done
+     *
+     * @param index
+     * @return Returns the task that was marked as completed
+     */
     public Task completeTask(int index) {
         this.getTask(index).markDone();
         return this.getTask(index);

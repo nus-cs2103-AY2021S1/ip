@@ -61,7 +61,7 @@ public class DukeExceptions {
      * error message for when the user fails to input additional parameters for the command
      */
     public static String printIncompleteCommandError() {
-        return "Master there is no description entered !\n" ;
+        return "Master there is no description entered !\n";
     }
 
     /**
