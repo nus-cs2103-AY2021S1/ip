@@ -10,7 +10,6 @@ public class IncorrectCommand extends Command {
         this.messageToUser = messageToUser;
     }
 
-
     @Override
     public CommandResult execute(TaskList tasks, Storage storage) {
         return new CommandResult(messageToUser);

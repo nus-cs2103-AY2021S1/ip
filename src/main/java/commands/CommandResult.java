@@ -14,6 +14,7 @@ public class CommandResult {
     }
 
     public String getMessageToUser() {
+        assert !messageToUser.trim().equals("");
         return messageToUser;
     }
 

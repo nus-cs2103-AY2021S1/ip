@@ -11,6 +11,7 @@ public class FindCommand extends Command {
             + "Example: " + COMMAND_WORD + " CS";
     private String searchPhrase;
     public FindCommand(String searchPhrase) {
+        assert !searchPhrase.trim().equals("");
         this.searchPhrase = searchPhrase;
     }
     @Override
