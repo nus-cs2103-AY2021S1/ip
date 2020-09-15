@@ -12,7 +12,7 @@ _**botbot**_ :robot: is a desktop app for managing tasks.
   - [Mark a task as done: `done`](#mark-a-task-as-done-done)
   - [Search for a keyphrase: `find`](#search-for-a-keyphrase-find)
   - [View the task list: `list`](#view-the-task-list-list)
-  - [Exit the program: `bye`](#exit-the-program-bye)
+  - [Close *botbot*: `bye`](#close-botbot-bye)
   - [Save the task list](#save-the-task-list)
 - [Command Summary](#command-summary)
 - [Acknowledgements](#acknowledgements)
@@ -126,8 +126,8 @@ Displays the task list.
 Format: `list`
 
 <br /><br>
-### Exit the program: `bye`
-Exits *botbot*.
+### Close *botbot*: `bye`
+Closes *botbot*.
 
 Format: `bye`
 
