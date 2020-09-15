@@ -1,12 +1,5 @@
 # Duke the Singlish Dude
 
-
-Dillinger is a cloud-enabled, mobile-ready, offline-storage, AngularJS powered HTML5 Markdown editor.
-
-  - Type some Markdown on the left
-  - See HTML in the right
-  - Magic
-
 ## Features
 
   - Task manager
@@ -21,19 +14,19 @@ Dillinger is a cloud-enabled, mobile-ready, offline-storage, AngularJS powered H
 Format: `list`
 
 ### todo - Adds a todo task to the task list
-Format: `todo {description} #{tag}`</br>
+Format: `todo {description} #{tag}`  
 *#{tag} is an optional input*
 
 ### deadline - Adds a deadline task to the task list
-Format: `deadline {description} /by YYYY-MM-DD #{tag}`</br>
+Format: `deadline {description} /by YYYY-MM-DD #{tag}`  
 *#{tag} is an optional input*
 
 ### event - Adds a event task to the task list
-Format: `event {description} /at YYYY-MM-DD #{tag}`</br>
+Format: `event {description} /at YYYY-MM-DD #{tag}`  
 *#{tag} is an optional input*
 
 ### delete - Delete a task stored in task list
-Format: `delete {task number}`</br>
+Format: `delete {task number}`  
 *Ensure that task number is within range*
 
 ### list - Reveals all tasks stored in task list
@@ -50,8 +43,8 @@ Format:`bye`
 
 ## Examples
 
-Input: `list`</br>
-Example output:</br>
+Input: `list`  
+Example output:  
 ```
     ____________________________________
     Here are the things you need to do lor: 
@@ -60,8 +53,8 @@ Example output:</br>
     ____________________________________
 ```
     
-Input: `todo Math Homework #school`</br>
-Example output:</br>
+Input: `todo Math Homework #school`  
+Example output:  
 ```
     ____________________________________
     Okok. I add for you: 
@@ -70,8 +63,8 @@ Example output:</br>
     ____________________________________
 ```
     
-Input: `deadline Project Work /by 2020-10-10 #school`</br>
-Example output:</br>
+Input: `deadline Project Work /by 2020-10-10 #school`  
+Example output:  
 ```
     ____________________________________
     Okok. I help you add this task: 
@@ -80,9 +73,9 @@ Example output:</br>
     ____________________________________
 ```
 
-Input: `findtag #school`</br>
+Input: `findtag #school`  
+Example output:  
 ```
-Example output:
     ____________________________________
     Here are the things you want lor: 
     1. [T][✗] Math Homework [#school]
@@ -91,18 +84,18 @@ Example output:
     ____________________________________
 ```
     
-Input: `done 3`</br>
+Input: `done 3`  
+Example output:  
 ```
-Example output:
     ____________________________________
     Swee! Now I will mark this as done: 
     [T][✓] Math Homework [#school]
     ____________________________________
 ```
     
-Input: `delete 4`</br>
+Input: `delete 4`  
+Example output:  
 ```
-Example output:
     ____________________________________
     Task deleted liao: 
     [D][✗] Project Work (by: 10 Oct 2020) [#school]
