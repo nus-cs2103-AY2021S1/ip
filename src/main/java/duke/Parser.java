@@ -37,7 +37,7 @@ public class Parser {
             return 7;
         } else if (commandParts[0].contains("find")) {
             return 8;
-        } else if (commandParts[0].contains("find")) {
+        } else if (commandParts[0].contains("help")) {
             return 9;
         } else {
             return -1;
