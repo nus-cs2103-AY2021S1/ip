@@ -293,6 +293,10 @@ public class Ui {
         return "Say something for me to find!";
     }
 
+    /**
+     * Returns a list of command a user can use for the application.
+     * @return String Help list.
+     */
     public String outputHelp() {
         return "Here's how I can help:"
                 + "\nType: 'list'"

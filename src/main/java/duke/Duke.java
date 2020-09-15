@@ -105,7 +105,7 @@ public class Duke {
     }
 
     private String cmdBye() throws IOException {
-        assert(isFileInStorage()): "File should exist.";
+        assert(isFileInStorage()) : "File should exist.";
         // rewrite the file to update latest changes
         Storage.saveFile(getStorageFile(), ls);
         return ui.outputBye();
