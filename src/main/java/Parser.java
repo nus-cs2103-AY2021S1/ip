@@ -180,7 +180,7 @@ public class Parser {
             } else if (firstChar.equals("event")) {
                 return processEventCommand(input);
             } else {
-                throw new InvalidException("OOPS!!! I'm sorry, but I don't know what that means :-( "
+                throw new InvalidException("OOPS!!! I'm sorry, but I don't know what that means :-( \n"
                        + "You can you \"help\" command to find the list of command to use");
             }
         }

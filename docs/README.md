@@ -52,29 +52,35 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
 
 This feature allows users to find the list of command to use
 
-Example, i want to add a task but i forgot how to use that, you can use help to help you
+*Usage*: i want to add a task but i forgot how to use that, you can use help to help you
 
-Format help
-eg: help
+*Format*: help
+
+*E.g*: help
+
+
 
 ### **Add a general ToDo task : todo**
 
 This feature allows users to add a ToDo task to our current list
 
-Example: we want to add an ip ToDo task into our list
-Format: todo [newTask]
-E.g: todo ip
+*Usage*: we want to add an ip ToDo task into our list
+
+*Format*: todo [newTask]
+
+*E.g*: todo ip
 
 
 ### **Add a Deadline task : deadline**
 
 This feature allows users to add a task with deadline to our current list
 
-Example: we want to add an ip task to our list and there is a deadline 
+*Usage*: we want to add an ip task to our list and there is a deadline 
 for this task,eg: due on 2020 August 2, 7pm
 
-Format: deadline [newTask] /by [date] [time]
-Eg: deadline ip /by 02/08/2020 1900
+*Format*: deadline [newTask] /by [date] [time]
+
+*E.g*: deadline ip /by 02/08/2020 1900
 
 **Note:**
 1. the date must be dd/mm/yyyy
@@ -87,11 +93,12 @@ two digit, for example, 2 must be written as 02 instead of just 2.
 
 This feature allows users to add an event to our current list.
 
-Example: we want to add an event to our list and there is a specific time for it.
-eg: it happens on 2020 August 2, 7pm
+*Usage*: we want to add an event to our list and there is a specific time for it.
+For example, it happens on 2020 August 2, 7pm
 
-Format: event [newTask] /at [date] [time]
-Eg: event ip /at 02/08/2020 1900
+*Format*: event [newTask] /at [date] [time]
+
+*E.g*: event ip /at 02/08/2020 1900
 
 **Note:**
 1. the date must be dd/mm/yyyy
@@ -105,22 +112,28 @@ two digits, for example, 2 must be written as 02 instead of just 2.
 
 This feature allows users to list out all the tasks added to the list in the order of the entry.
 
-Example: we want to check all the tasks that we have added
-Format: list
-eg: list
+*Usage*: we want to check all the tasks that we have added
+
+*Format*: list
+
+*E.g*: list
+
+
 
 ### **Marking a Task as done : done**
 
 This feature allows users to mark certain tasks they have done.
 
-Example: i have previously add an ip task to the list and i have done it. Now, i want
+*Usage*: i have previously add an ip task to the list and i have done it. Now, i want
 to make the task as done.
 
 
-Format: done [task index]
+*Format*: done [task index]
+
 we first use list to find the index of the task. For example, in this case, the index 
 for the ip task is taken as 5.
-Eg: done 5
+
+*E.g*: done 5
 
 
 
@@ -128,29 +141,38 @@ Eg: done 5
 
 This feature allows users to delete certain tasks.
 
-Example: i have previously add an ip task to the list. Now, i want
+*Usage*: i have previously add an ip task to the list. Now, i want
 to delete the task.
 
 
-Format: delete [task index]
+*Format*: delete [task index]
+
 we first use list to find the index of the task. For example, in this case, the index 
 for the ip task is taken as 5.
-Eg: delete 5
+
+*E.g*: delete 5
+
+
 
 ### **Find a certain task: find**
 
 This feature allows users to find a certain task from the list and look at the detail.
 
-Example, i want to find when is my ip due.
+*Usage*: i want to find when is my ip due.
 
-Format find [taskName]
-eg: find ip
+*Format*: dfind [taskName]
+
+*E.g*: find ip
+
+
 
 ###  **Ending a session : bye**
 
 This feature allows users to quit the application after they have done what they want
 
-Example: i have done adding my task and now i want to quit the application.
-Format: bye
-eg: bye
+*Usage*: i have done adding my task and now i want to quit the application.
+
+*Format*: bye
+
+*E.g*: bye
  

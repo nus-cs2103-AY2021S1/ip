@@ -12,7 +12,7 @@ public class ParserTest {
         try {
             Parser.processInput("hey");
         } catch (InvalidException e) {
-            assertEquals("OOPS!!! I'm sorry, but I don't know what that means :-( "
+            assertEquals("OOPS!!! I'm sorry, but I don't know what that means :-( \n"
                     + "You can you \"help\" command to find the list of command to use", e.getMessage());
         }
     }
