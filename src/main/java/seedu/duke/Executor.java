@@ -24,6 +24,7 @@ public class Executor {
 
     /**
      * Initializes the executor and sets default parameters.
+     *
      * @param parser Assigned parser of Duke.
      * @param ui Assigned ui object of Duke.
      * @param taskList Assigned task list of Duke.
@@ -36,6 +37,8 @@ public class Executor {
 
     /**
      * Holds the main structure of execution.
+     * This method will first tell what order user tapped in and decided how to execute them.
+     *
      * @param userInput User input represent the order.
      * @return A string represent the execution result.
      */
@@ -93,6 +96,7 @@ public class Executor {
 
     /**
      * Gives the task list.
+     *
      * @return Current task list.
      */
     public TaskList getTaskList() {
