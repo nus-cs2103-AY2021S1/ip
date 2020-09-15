@@ -40,10 +40,11 @@ public class Duke {
                 this.taskList = new TaskList();
             }
         } catch (FileNotFoundException e) {
-            ui.printException(e);
+//            MainWindow.printException(e);
+            // TODO: Show exception
             System.exit(1);
         } catch (IOException e) {
-            ui.printException(e);
+//            MainWindow.printException(e);
             System.exit(1);
         }
     }
