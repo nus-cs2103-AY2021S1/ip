@@ -105,6 +105,21 @@ public class TaskList {
     }
 
     /**
+     * Checks for any duplicates when adding task to task list.
+     *
+     * @param task is the task to check duplicates for in the task list.
+     * @return true if duplicate is detected in task list and false otherwise.
+     */
+    public boolean isDuplicate(Task task) {
+        for (Task t : tasks) {
+            if (t.equals(task)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Creates a string representation of the task list.
      *
      * @return a string representation of the task list.
