@@ -41,15 +41,15 @@ public class Ui {
     /**
      * Prints welcome message.
      */
-    public void showWelcome() {
-        System.out.println(WELCOME);
+    public String showWelcome() {
+        return WELCOME;
     }
 
     /**
      * Prints goodbye message.
      */
-    public void showGoodbye() {
-        System.out.println(GOODBYE);
+    public String showGoodbye() {
+        return (GOODBYE);
     }
 
     /**
@@ -64,12 +64,12 @@ public class Ui {
      * Prints a given ArrayList of Tasks.
      * @param taskList ArrayList of Tasks to be printed.
      */
-    public void showTaskList(ArrayList<Task> taskList) {
+    public String buildTaskList(ArrayList<Task> taskList) {
         String s = "";
         for (int i = 0; i < taskList.size(); i++) {
             s = s = s + (i + 1) + ". " + taskList.get(i) + "\n";
         }
-        showDetails(s);
+        return s;
     }
 
     /**

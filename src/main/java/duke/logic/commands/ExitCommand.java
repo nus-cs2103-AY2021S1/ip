@@ -32,7 +32,7 @@ public class ExitCommand extends Command {
      * @throws DukeException If command is not properly formatted.
      */
     @Override
-    public void execute(TaskManager tm, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskManager tm, Ui ui, Storage storage) throws DukeException {
         String[] commandDetails = command.split(" ", 2);
         if (commandDetails.length != 1) {
             throw new DukeException("Exit command should not include extra parameters!");
@@ -43,7 +43,7 @@ public class ExitCommand extends Command {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        ui.showGoodbye();
+        return ui.showGoodbye();
     }
 
     /**

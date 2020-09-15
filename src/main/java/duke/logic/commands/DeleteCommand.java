@@ -29,7 +29,7 @@ public class DeleteCommand extends Command {
      * @throws DukeException If command is not properly formatted.
      */
     @Override
-    public void execute(TaskManager tm, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskManager tm, Ui ui, Storage storage) throws DukeException {
         String[] commandDetails = command.split(" ", 2);
         if (commandDetails.length == 1) {
             throw new DukeException("Delete Index not provided!");
@@ -38,7 +38,7 @@ public class DeleteCommand extends Command {
             int delIndex = Integer.parseInt(commandDetails[1]) - 1;
             Task delTask = tm.getTask(delIndex);
             tm.deleteTask(delIndex);
-            ui.showDetails("Task deleted: " + delTask);
+            return ("Task deleted: " + delTask);
         } catch (NumberFormatException e) {
             throw new DukeException("Index is not a number!");
         }

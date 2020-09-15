@@ -28,7 +28,7 @@ public abstract class Command {
      * @param storage Storage class that handles saving and loading from file.
      * @throws DukeException If command is not properly formatted.
      */
-    public abstract void execute(TaskManager tm, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskManager tm, Ui ui, Storage storage) throws DukeException;
 
     /**
      * Returns the exit signal for Duke to terminate.
