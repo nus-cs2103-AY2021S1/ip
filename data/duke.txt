@@ -1,2 +1,5 @@
-T | 0 | eat
-T | 0 | read book
+T | 1 | math assignment
+T | 0 | buy pencil
+D | 0 | return book | 2020-09-25T23:59
+E | 0 | project meeting | 2020-09-18T13:00
+E | 0 | birthday party | 2020-09-20T16:00
