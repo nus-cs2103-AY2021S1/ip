@@ -4,7 +4,7 @@ Duke is a task-management application with a graphical user interface that uses 
 
 ## Quick Start
 1. Ensure that you have Java `11` or above installed on your computer.
-2. Download the latest `Duke.jar` [here]({repoURL}/releases).
+2. Download the latest `Duke.jar` [here](https://github.com/jflim98/ip/releases).
 3. Copy `Duke.jar` to the folder you want to use as the home folder for Duke.
 4. Double-click `Duke.jar` to launch Duke.
 5. A list of commands can be found [here](#command-summary). A more comprehensive usage guide can be found [here](#usage).
