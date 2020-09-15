@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
-    private static String filePath;
+    public static String filePath;
 
     /**
      * Storage constructor
@@ -39,7 +39,7 @@ public class Storage {
      * read list of tasks from a file
      * @return a list of tasks that has been read form the file
      */
-    static ArrayList<Task> readFile(){
+    static ArrayList<Task> readFile(String filePath){
         ArrayList<Task> tasks = new ArrayList<>();
         try{
             Scanner fileReader = new Scanner(new File(filePath));

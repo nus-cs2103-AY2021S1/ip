@@ -18,7 +18,7 @@ public class AddCommand extends Command{
      * @param inputTasks the list of tasks used
      * @param storage the storage used
      */
-    public void execute(TaskList inputTasks, Storage storage){
+    public void execute(TaskList inputTasks, Storage storage) throws DukeException {
         inputTasks.addTask(this.task);
         storage.writeToFile(inputTasks);
     }

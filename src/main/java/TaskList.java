@@ -1,7 +1,3 @@
-/**
- * list of tasks recorded from commands
- */
-
 import java.util.ArrayList;
 public class TaskList {
     public ArrayList<Task> tasks;
@@ -57,8 +53,8 @@ public class TaskList {
     public void showTaskList(){
         System.out.println("Here are the tasks in your list:" + "\n");
         for (int i = 0; i < getSize(); i++) {
-            Integer listNum = i + 1;
-            System.out.println(listNum.toString() + "." + tasks.get(i).toString());
+            int listNum = i + 1;
+            System.out.println(listNum + "." + tasks.get(i).toString());
         }
     }
 
@@ -80,8 +76,8 @@ public class TaskList {
 
         System.out.println("Here are the matching tasks in your list:\n");
         for(int i = 0; i < keyTasks.size(); i++){
-            Integer listNum = i + 1;
-            System.out.println(listNum.toString() + "." + keyTasks.get(i).toString());
+            int listNum = i + 1;
+            System.out.println(listNum + "." + keyTasks.get(i).toString());
         }
     }
 }

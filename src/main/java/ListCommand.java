@@ -7,8 +7,8 @@ public class ListCommand extends Command{
      * @param inputTasks the list of tasks used
      * @param storage the storage used
      */
-    public void execute(TaskList inputTasks, Storage storage){
+    public void execute(TaskList inputTasks, Storage storage) throws DukeException {
         inputTasks.showTaskList();
-        storage.writeToFile(inputTasks);
+        Storage.writeToFile(inputTasks);
     }
 }

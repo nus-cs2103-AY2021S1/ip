@@ -2,8 +2,8 @@
  * A general task to be added
  */
 public class Task {
-    protected String description;
-    protected boolean isDone;
+    public String description;
+    public boolean isDone;
 
     /**
      * Task constructor
