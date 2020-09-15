@@ -32,6 +32,8 @@ public class Ui {
             result += "\n-> Saved List:\n"
                     + taskList.toString()
                     + "\n";
+        } else {
+            result = "No Task in your list now.";
         }
         return result;
     }
@@ -242,6 +244,11 @@ public class Ui {
         return result;
     }
 
+    /**
+     * Give the representation of current under usage task list.
+     *
+     * @return A string representing current task list.
+     */
     public String showCurrentList() {
         String result = "You are using this list:\n";
         Storage storage = new Storage();
