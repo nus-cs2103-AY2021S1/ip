@@ -65,13 +65,17 @@ public class Parser {
                 throw new DukeException("Event format isn't correct");
             }
         case TODO:
-            if (input.substring(5).trim().equals("")) {
+            int indexOfTodoTasks = input.indexOf(" ");
+            String descriptionOfTodo = input.substring(indexOfTodoTasks).trim();
+            if (descriptionOfTodo.equals("")) {
                 throw new DukeException("Todo what? ");
             }
-            return new TodoCommand(input.substring(5).trim());
+            return new TodoCommand(descriptionOfTodo.trim());
         case FIND:
+            int indexOfCharsToFind = input.indexOf(" ");
+            String descriptionToFind = input.substring(indexOfCharsToFind).trim();
             try {
-                return new FindCommand(input.substring(5));
+                return new FindCommand(descriptionToFind);
             } catch (Exception e) {
                 throw new DukeException("Find format isn't correct");
             }
