@@ -1,4 +1,4 @@
-package task;
+package duke.task;
 
 import duke.DukeException;
 
@@ -10,9 +10,9 @@ import java.time.format.DateTimeParseException;
 
 public class Deadline extends Task {
 
-    /** Date of the task **/
+    /** Date of the duke.task **/
     protected LocalDate byDate;
-    /** Time of the task **/
+    /** Time of the duke.task **/
     protected LocalTime byTime;
 
     private Deadline(String taskName, String taskDateTime) throws DukeException {
@@ -22,11 +22,11 @@ public class Deadline extends Task {
     }
 
     /**
-     * Creates task.Deadline task
+     * Creates duke.task.Deadline duke.task
      *
-     * @param taskDescription description of the task
-     * @return task.Deadline task
-     * @throws DukeException if the format of the task description is wrong
+     * @param taskDescription description of the duke.task
+     * @return duke.task.Deadline duke.task
+     * @throws DukeException if the format of the duke.task description is wrong
      */
     public static Deadline create(String taskDescription) throws DukeException {
         if (!taskDescription.contains("/by")) {
@@ -47,7 +47,7 @@ public class Deadline extends Task {
      * Stores them into the LocalDate and LocalTime variable
      *
      * @param taskDateTime the string representation of the time and date
-     * @throws DukeException if the format of the task date/time is wrong
+     * @throws DukeException if the format of the duke.task date/time is wrong
      */
     private void parseTime(String taskDateTime) throws DukeException {
         String[] dateTime = taskDateTime.replace("/", "-").split(" ", 2);
@@ -65,26 +65,26 @@ public class Deadline extends Task {
         }
     }
     /**
-     *  * return the summarised form of the task
+     *  * return the summarised form of the duke.task
      *
-     * @return String format of the summarised details of the task
+     * @return String format of the summarised details of the duke.task
      */
     @Override
     public String toString() {
         String symbol = isDone ? "\u2713" : "\u2718";
         if (byTime != null) {
-            return String.format("[%s][%s] %s (by: %s %s)", tag, symbol, taskName,
+            return String.format("[%s][%s] %s (by: %s %s)\n", tag, symbol, taskName,
                     byDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")), byTime.toString());
         } else {
-            return String.format("[%s][%s] %s (by: %s)", tag, symbol, taskName,
+            return String.format("[%s][%s] %s (by: %s)\n", tag, symbol, taskName,
                     byDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
         }
     }
 
     /**
-     * return the summarised form of the task in the format to be saved
+     * return the summarised form of the duke.task in the format to be saved
      *
-     * @return String format of the summarised details of the task to be saved
+     * @return String format of the summarised details of the duke.task to be saved
      */
     @Override
     public String safeFileFormat() {

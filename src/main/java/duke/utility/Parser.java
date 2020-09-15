@@ -1,12 +1,12 @@
-package utility;
+package duke.utility;
 
-import command.*;
+import duke.command.*;
 import duke.DukeException;
-import task.*;
+import duke.task.*;
 
 public class Parser {
 
-    /** task.TaskList class that stores and deals with the tasks **/
+    /** duke.task.TaskList class that stores and deals with the tasks **/
     private TaskList taskList;
 
     /**
@@ -20,7 +20,7 @@ public class Parser {
     /**
      * Parse the inputs and carry out the respective commands
      *
-     * @param inputs the array of command and taskDescription obtain from user
+     * @param inputs the array of duke.command and taskDescription obtain from user
      */
     public String parseCommand(String[] inputs) {
 
@@ -31,6 +31,9 @@ public class Parser {
             String taskDescription = getTaskDescription(inputs,command);
 
             switch (command) {
+            case STATISTIC: {
+                return new IStatistic(taskList, taskDescription).execute();
+            }
             case DONE: {
                 return new Done(taskList, taskDescription).execute();
             }
@@ -66,9 +69,9 @@ public class Parser {
 
 
     /**
-     * convert string command into enum Command
+     * convert string duke.command into enum Command
      *
-     * @param commandInput command from the user
+     * @param commandInput duke.command from the user
      */
     public Commands getCommand(String commandInput) {
 

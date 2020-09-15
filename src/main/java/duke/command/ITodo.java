@@ -1,9 +1,9 @@
-package command;
+package duke.command;
 
 import duke.DukeException;
-import task.Task;
-import task.TaskList;
-import task.Todo;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
 
 public class ITodo extends Instruction{
 
@@ -12,7 +12,7 @@ public class ITodo extends Instruction{
     }
 
     @Override
-    public String execute() throws DukeException {
+    public String execute() {
         Task newTask = new Todo(taskDescription);
         return taskList.addTask(newTask, true);
     }

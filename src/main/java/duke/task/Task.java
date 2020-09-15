@@ -1,12 +1,12 @@
-package task;
+package duke.task;
 
 public abstract class Task {
 
-    /** Alphabet tag for the respective task **/
+    /** Alphabet tag for the respective duke.task **/
     protected String tag;
-    /** Boolean variable to check if the task is completed **/
+    /** Boolean variable to check if the duke.task is completed **/
     protected boolean isDone = false;
-    /** Name of the task **/
+    /** Name of the duke.task **/
     protected String taskName;
 
     /**
@@ -18,41 +18,45 @@ public abstract class Task {
     }
 
     /**
-     * Mark the task as completed
+     * Mark the duke.task as completed
      *
      */
     public void complete() {
         this.isDone = true;
     }
 
+    public String getTaskName(){
+        return taskName;
+    }
+
     /**
-     * Prints add task message for the current task
+     * Prints add duke.task message for the current duke.task
      *
      */
     public String printAddTask() {
-        return String.format("Got it. I've added this task:\n  %s", this.toString());
+        return String.format("Got it. I've added this duke:\n  %s", this.toString());
     }
 
     /**
-     * Prints delete task message for the current task
+     * Prints delete duke.task message for the current duke.task
      *
      */
     public String printDeleteTask() {
-        return String.format("Noted. I've removed this task:\n %s", this.toString());
+        return String.format("Noted. I've removed this duke:\n %s", this.toString());
     }
 
 
     /**
-     * get the string format of the stored task in the hard drive
+     * get the string format of the stored duke.task in the hard drive
      *
-     * @return String of the stored task
+     * @return String of the stored duke.task
      */
     public String safeFileFormat() {
         return "";
     }
 
     /**
-     * Check if input description is the same as task description
+     * Check if input description is the same as duke.task description
      *
      * @return Boolean on whether the description matches
      */

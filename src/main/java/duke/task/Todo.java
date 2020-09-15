@@ -1,4 +1,4 @@
-package task;
+package duke.task;
 
 public class Todo extends Task {
 
@@ -13,7 +13,7 @@ public class Todo extends Task {
     @Override
     public String toString() {
         String symbol = isDone ? "\u2713" : "\u2718";
-        return String.format("[%s][%s] %s", tag, symbol, taskName);
+        return String.format("[%s][%s] %s\n", tag, symbol, taskName);
     }
 
     @Override

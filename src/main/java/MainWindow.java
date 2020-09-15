@@ -4,8 +4,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -34,15 +36,23 @@ public class MainWindow extends AnchorPane {
     }
 
     @FXML
-    /**
-     * Creates two dialog boxes, one echoing user input and the other containing duke.Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
-     */
     private void handleUserInput() {
+        DialogBox userDialog = DialogBox.getUserDialog(userInput.getText(), userImage);
+        userDialog.setBorder(new Border(new BorderStroke(Color.ORANGERED,
+                                                         BorderStrokeStyle.SOLID,
+                                                         new CornerRadii(20.0),
+                                                         BorderWidths.DEFAULT)));
+        DialogBox dukeDialog = DialogBox.getDukeDialog(duke.getResponse(userInput.getText()), dukeImage);
+        dukeDialog.setBorder(new Border(new BorderStroke(Color.ALICEBLUE,
+                                                         BorderStrokeStyle.SOLID,
+                                                         new CornerRadii(20.0),
+                                                         BorderWidths.DEFAULT)));
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userInput.getText(), userImage),
-                DialogBox.getDukeDialog(duke.getResponse(userInput.getText()), dukeImage)
+                userDialog,
+                dukeDialog
         );
+
+
         userInput.clear();
     }
 }

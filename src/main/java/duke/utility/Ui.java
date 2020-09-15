@@ -1,4 +1,4 @@
-package utility;
+package duke.utility;
 
 import java.util.Scanner;
 
@@ -65,9 +65,9 @@ public class Ui {
 
     /**
      * Reads the in all the inputs
-     * Splits the inputs into command, task description and if there is Time/Date for the task
+     * Splits the inputs into duke.command, duke.task description and if there is Time/Date for the duke.task
      *
-     * @return An array of strings containing the command, task description and if there is Time/Date for the task
+     * @return An array of strings containing the duke.command, duke.task description and if there is Time/Date for the duke.task
      */
 
     public String[] readCommand() {

@@ -1,24 +1,21 @@
-package utility;
+package duke.utility;
 
 import duke.DukeException;
-import task.*;
+import duke.task.*;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class Storage {
 
-    /** task.TaskList class that stores and deals with the tasks **/
+    /** duke.task.TaskList class that stores and deals with the tasks **/
     private TaskList taskList;
-    /** utility.Parser class that parse and deal with the commands given **/
-    private Parser parser;
+    private Statistic statistic;
     /** Path to where the file is stored **/
-    private Path storageFilePath;
+    private Path storageTaskPath;
+    private Path storageStatisticPath;
 
     /**
      *Class constructor
@@ -26,22 +23,30 @@ public class Storage {
      * @throws DukeException If the file is unable to be opened
      */
 
-    public Storage(TaskList taskList) throws DukeException {
+    public Storage(TaskList taskList, Statistic statistic) throws DukeException {
         this.taskList = taskList;
-        storageFilePath = Paths.get(".", "data", "test.txt");
+        this.statistic = statistic;
+        storageTaskPath = Paths.get(".", "data", "test.txt");
+        storageStatisticPath = Paths.get(".","data","statistic.txt");
+        getPath("test.txt");
+        getPath("statistic.txt");
+        loadTaskFile();
+        loadStatisticFile();
+    }
+
+    private void getPath(String fileName){
+        Path path = Paths.get(".", "data", fileName);
         try {
-            // Create directory if needed
-            Path parentPath = storageFilePath.getParent();
+            Path parentPath = path.getParent();
             Files.createDirectories(parentPath);
 
-            if (!Files.exists(storageFilePath)) {
-                Files.createFile(storageFilePath);
+            if (!Files.exists(path)) {
+                Files.createFile(path);
             }
 
         } catch (IOException e) {
             System.out.println("unable to read file " + e.getMessage());
         }
-        loadFile();
     }
 
     /**
@@ -50,9 +55,9 @@ public class Storage {
      *
      * @throws DukeException If the file is unable to be opened
      */
-    public void loadFile() throws DukeException {
+    private void loadTaskFile() throws DukeException {
         try {
-            BufferedReader bf = new BufferedReader(new FileReader(storageFilePath.toString()));
+            BufferedReader bf = new BufferedReader(new FileReader(storageTaskPath.toString()));
             String task = bf.readLine();
             String[] inputs;
             while (task != null) {
@@ -65,20 +70,18 @@ public class Storage {
                         newTask = new Todo(inputs[2]);
                         break;
                     }
-
                     case "D": {
                         newTask = Deadline.create(inputs[2], inputs[3]);
                         break;
                     }
-
                     case "E": {
                         newTask = Event.create(inputs[2], inputs[3]);
                         break;
                     }
-
                     default: {
                         throw new DukeException("smlj??????");
                     }
+
                     }
 
                     if (inputs[1].equals("1")) {
@@ -97,21 +100,48 @@ public class Storage {
 
     }
 
+    private void loadStatisticFile() throws DukeException {
+
+        try {
+            BufferedReader bf = new BufferedReader(new FileReader(storageStatisticPath.toString()));
+            String task = bf.readLine();
+            String[] inputs;
+            int weekNum = -1;
+            while (task != null) {
+                inputs = task.split("#D#", 2);
+                if (inputs.length == 2) {
+                    weekNum = Integer.parseInt(inputs[1]);
+                } else {
+                    statistic.addPastTask(inputs[0], weekNum);
+                }
+                task = bf.readLine();
+            }
+        } catch(IOException e){
+            throw new DukeException("unable to open file");
+        }
+    }
+
+
     /**
      * Write the stored tasks in taskList into a file stored in the hard drive
      *
      * @throws DukeException If the tasks are unable to be saved into the file
      */
-    public void saveFile() throws DukeException {
+    public void saveTaskFile() throws DukeException {
         try {
-            FileWriter fw = new FileWriter(storageFilePath.toString());
+            FileWriter fwTask = new FileWriter(storageTaskPath.toString());
             for (int i = 0; i < taskList.getTaskListSize(); i++) {
-                fw.write(taskList.getTask(i).safeFileFormat());
+                fwTask.write(taskList.getTask(i).safeFileFormat());
             }
-            fw.close();
+            fwTask.close();
+            FileWriter fwStatistic = new FileWriter(storageStatisticPath.toString());
+            fwStatistic.write(statistic.safeFileFormat());
+            fwStatistic.close();
         } catch (IOException e) {
             throw new DukeException("unable to save file");
         }
     }
+
+
 
 }

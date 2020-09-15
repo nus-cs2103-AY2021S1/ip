@@ -1,7 +1,7 @@
-package command;
+package duke.command;
 
 import duke.DukeException;
-import task.TaskList;
+import duke.task.TaskList;
 
 public abstract class Instruction{
 

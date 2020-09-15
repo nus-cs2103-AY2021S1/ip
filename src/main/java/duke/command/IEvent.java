@@ -1,9 +1,9 @@
-package command;
+package duke.command;
 
 import duke.DukeException;
-import task.Event;
-import task.Task;
-import task.TaskList;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
 
 public class IEvent extends Instruction{
 

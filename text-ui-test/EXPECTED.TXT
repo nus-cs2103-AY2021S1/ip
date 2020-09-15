@@ -9,7 +9,7 @@ What do you want?
 ____________________________
 ____________________________
 
-Got it. I've added this task:
+Got it. I've added this duke.task:
   [T][✘] read book
 Now you have 1 tasks in the list.
 ____________________________
@@ -19,7 +19,7 @@ The description of todo cannot be empty
 ____________________________
 ____________________________
 
-Got it. I've added this task:
+Got it. I've added this duke.task:
   [D][✘] cook book (by:  Sunday)
 Now you have 2 tasks in the list.
 ____________________________
@@ -33,7 +33,7 @@ The description of deadline cannot be empty
 ____________________________
 ____________________________
 
-Got it. I've added this task:
+Got it. I've added this duke.task:
   [E][✘] cook book (at:  Monday)
 Now you have 3 tasks in the list.
 ____________________________
@@ -53,28 +53,28 @@ ____________________________
 ____________________________
 ____________________________
 
-please give a correct task index
+please give a correct duke.task index
 ____________________________
 ____________________________
 
-please give a correct task index
+please give a correct duke.task index
 ____________________________
 ____________________________
 
-Nice! I've marked this task as done:
+Nice! I've marked this duke.task as done:
   [D][✓] cook book (by:  Sunday)
 ____________________________
 ____________________________
 
-please give a correct task index
+please give a correct duke.task index
 ____________________________
 ____________________________
 
-please give a correct task index
+please give a correct duke.task index
 ____________________________
 ____________________________
 
-Noted. I've removed this task:
+Noted. I've removed this duke.task:
  [D][✓] cook book (by:  Sunday)
 Now you have 2 tasks in the list.
 ____________________________

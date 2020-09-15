@@ -1,31 +1,34 @@
 package duke;
 
-import task.TaskList;
-import utility.Parser;
-import utility.Storage;
-import utility.Ui;
+import duke.task.TaskList;
+import duke.utility.Parser;
+import duke.utility.Statistic;
+import duke.utility.Storage;
+import duke.utility.Ui;
 
 public class Duke {
 
-    /** task.TaskList class that stores and deals with the tasks **/
+    /** duke.task.TaskList class that stores and deals with the tasks **/
     private TaskList taskList;
-    /** utility.Parser class that parse and deal with the commands given **/
+    /** duke.utility.Parser class that parse and deal with the commands given **/
     private Parser parser;
-    /** utility.Storage class that handles loads and saves the task from/to hard drive **/
+    /** duke.utility.Storage class that handles loads and saves the duke.task from/to hard drive **/
     private Storage storage;
     /** UI class that is responsible for the interaction with the user **/
     private Ui ui;
+    private Statistic statistic;
 
     /**
      *Class constructor
      */
     public Duke() {
-        taskList = new TaskList();
+        statistic = new Statistic();
+        taskList = new TaskList(statistic);
         parser = new Parser(taskList);
         ui = new Ui();
 
         try {
-            storage = new Storage(taskList);
+            storage = new Storage(taskList, statistic);
         } catch (DukeException e) {
             ui.showLoadingError();
         }
@@ -37,7 +40,7 @@ public class Duke {
      */
     public void stop() {
         try {
-            storage.saveFile();
+            storage.saveTaskFile();
         } catch (DukeException e) {
             ui.showSavingError();
         }

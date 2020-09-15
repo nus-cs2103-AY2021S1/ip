@@ -1,6 +1,7 @@
-package task;
+package duke.task;
 
 import duke.DukeException;
+import duke.utility.Statistic;
 
 import java.util.ArrayList;
 
@@ -10,38 +11,41 @@ public class TaskList {
     private ArrayList<Task> taskList;
     /** boolean value to check if there is any more updates to the tasks by the user **/
     private boolean isUpdating = true;
+    private Statistic statistic;
 
     /**
      *Class constructor
      */
-    public TaskList() {
+    public TaskList(Statistic statistic) {
         this.taskList = new ArrayList<>();
+        this.statistic = statistic;
     }
 
     /**
-     * Set the indexed task as completed.
+     * Set the indexed duke.task as completed.
      *
-     * @param index index The index of the task in the taskList;
+     * @param index index The index of the duke.task in the taskList;
      * @throws DukeException  If the index is not within the range of tasks.
      */
 
     public String doneTask(int index) throws DukeException {
         if (index < 0 || index > taskList.size() - 1) {
-            throw new DukeException("please give a correct task index");
+            throw new DukeException("please give a correct duke.task index");
         }
 
         Task doneTask = taskList.get(index);
         if(doneTask.isDone){
-            throw new DukeException("This task has already been completed idiot");
+            throw new DukeException("This duke.task has already been completed idiot");
         }
         doneTask.complete();
-        String output = "Nice! I've marked this task as done:\n";
+        statistic.addCompletedTask(doneTask);
+        String output = "Nice! I've marked this duke.task as done:\n";
         output += String.format("  %s\n", doneTask.toString());
         return output;
     }
 
     /**
-     * List and prints all the task in taskList
+     * List and prints all the duke.task in taskList
      *
      */
     public String listTask() {
@@ -49,14 +53,15 @@ public class TaskList {
         for (int i = 0; i < taskList.size(); i++) {
             outputString.append(String.format("%d. %s\n", i + 1, taskList.get(i).toString()));
         }
+        System.out.println(outputString);
         return outputString.toString();
     }
 
     /**
-     * Add task into the taskList
+     * Add duke.task into the taskList
      *
-     * @param newTask The task to be added into taskList
-     * @param print If true, prints out the details of the task being added into the list
+     * @param newTask The duke.task to be added into taskList
+     * @param print If true, prints out the details of the duke.task being added into the list
      */
     public String addTask(Task newTask, Boolean print) {
         taskList.add(newTask);
@@ -70,9 +75,9 @@ public class TaskList {
     }
 
     /**
-     * Find and print out task that matches to the description
+     * Find and print out duke.task that matches to the description
      *
-     * @param description of the task
+     * @param description of the duke.task
      */
     public String findTask(String description) {
         ArrayList<Task> taskMatchingDescription = new ArrayList<>();
@@ -108,41 +113,48 @@ public class TaskList {
     }
 
     /**
-     * get the corresponding task from taskList
+     * get the corresponding duke.task from taskList
      *
-     * @param index The index of the task in the taskList
-     * @return The task with the corresponding index from the taskList
+     * @param index The index of the duke.task in the taskList
+     * @return The duke.task with the corresponding index from the taskList
      */
     public Task getTask(int index) {
         return taskList.get(index);
     }
 
     /**
-     * get the boolean value of whether the task is being updated
+     * delete the duke.task with the corresponding index in taskList
      *
-     * @return the boolean isUpdating
-     */
-    public boolean isUpdating() {
-        return isUpdating;
-    }
-
-    /**
-     * delete the task with the corresponding index in taskList
-     *
-     * @param index The index of the task in the taskList
+     * @param index The index of the duke.task in the taskList
      * @throws DukeException  If the index is not within the range of tasks.
      */
 
     public String deleteTask(int index) throws DukeException {
         String outputString = "";
-        if (index < 0 || index > taskList.size() - 1) {
+        System.out.println(index);
+        if (index < -2 || index > taskList.size() - 1) {
             throw new DukeException("please give a correct task index");
         }
 
-        outputString += taskList.get(index).printDeleteTask() + "\n";
-        taskList.remove(index);
-        outputString += printNumberOfTask(taskList.size());
-        return outputString;
+        if( index == -2){
+            removeAll();
+            return "removed all content bitch";
+        }else {
+            outputString += taskList.get(index).printDeleteTask() + "\n";
+            taskList.remove(index);
+            outputString += printNumberOfTask(taskList.size());
+            return outputString;
+        }
+    }
+
+    public String getStatistic(){
+        return statistic.getStatisticSummary();
+    }
+
+    public void removeAll(){
+        while(!taskList.isEmpty()){
+            taskList.remove(0);
+        }
     }
 
     /**

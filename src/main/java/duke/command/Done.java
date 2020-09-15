@@ -1,7 +1,7 @@
-package command;
+package duke.command;
 
 import duke.DukeException;
-import task.TaskList;
+import duke.task.TaskList;
 
 public class Done extends Instruction {
 
@@ -13,7 +13,6 @@ public class Done extends Instruction {
     @Override
     public String execute() throws DukeException {
         int index = Integer.parseInt(taskDescription) - 1;
-        String output = taskList.doneTask(index);
-        return output;
+        return taskList.doneTask(index);
     }
 }
