@@ -45,6 +45,6 @@ public class DateCommand extends Command {
                 }
             }
         }
-        dialog = ui.formatShowTasksOnDate(tasksOnDate, queryDate);
+        setDialog(ui.formatShowTasksOnDate(tasksOnDate, queryDate));
     }
 }

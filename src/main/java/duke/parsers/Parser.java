@@ -2,6 +2,7 @@ package duke.parsers;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 import duke.commands.AddCommand;
@@ -14,8 +15,8 @@ import duke.commands.FindCommand;
 import duke.commands.ListCommand;
 import duke.commands.StatsCommand;
 import duke.exceptions.DukeException;
+import duke.exceptions.InvalidDateTimeException;
 import duke.exceptions.InvalidDukeCommandException;
-import duke.exceptions.InvalidTaskIndexException;
 import duke.exceptions.MissingDateTimeException;
 import duke.exceptions.MissingTaskDescriptionException;
 import duke.exceptions.MissingTaskIndexException;
@@ -36,21 +37,27 @@ public class Parser {
     /** Parses the user inputs into a suitable format for Duke to process.
      *
      * @param userInput The user input fed into Duke.
-     * @param tasks The list that stores tasks.
      * @return An appropriate command to be executed.
      * @throws DukeException If the userInput is invalid or missing.
      */
-    public Command parse(String userInput, ArrayList<Task> tasks) throws DukeException {
+    public Command parse(String userInput) throws DukeException {
         String[] inputCommandAndArgument = userInput.split(" ", 2);
         String command = inputCommandAndArgument[0];
         String argument = inputCommandAndArgument.length == 2 ? inputCommandAndArgument[1] : "";
+
         if (userInput.equals("bye")) {
             return parseBye();
         } else if (userInput.equals("list")) {
             return parseList();
         } else if (command.equals("done") || command.equals("delete")) {
-            return parseDoneDelete(command, argument, tasks.size());
+            if (argument.isEmpty()) {
+                throw new MissingTaskIndexException();
+            }
+            return parseDoneDelete(command, Integer.parseInt(argument));
         } else if (command.equals("todo") || command.equals("deadline") || command.equals("event")) {
+            if (argument.isEmpty()) {
+                throw new MissingTaskDescriptionException();
+            }
             return parseAdd(command, argument);
         } else if (command.equals("date")) {
             return parseDate(argument);
@@ -71,14 +78,7 @@ public class Parser {
         return new ListCommand();
     }
 
-    private Command parseDoneDelete(String command, String argument, int size) {
-        if (argument.isEmpty()) {
-            throw new MissingTaskIndexException();
-        }
-        int index = Integer.parseInt(argument);
-        if (index <= 0 || index > size) {
-            throw new InvalidTaskIndexException();
-        }
+    private Command parseDoneDelete(String command, int index) {
         if (command.equals("done")) {
             return new DoneCommand(index - 1);
         } else if (command.equals("delete")) {
@@ -90,35 +90,38 @@ public class Parser {
     }
 
     private Command parseAdd(String command, String argument) {
-        if (argument.isEmpty()) {
-            throw new MissingTaskDescriptionException();
-        }
-        if (command.equals("todo")) {
-            return new AddCommand(new ToDo(argument));
-        } else if (command.equals("deadline")) {
-            if (!argument.contains(" /by ")) {
-                throw new MissingDateTimeException();
+        try {
+            if (command.equals("todo")) {
+                return new AddCommand(new ToDo(argument));
+            } else if (command.equals("deadline")) {
+                if (!argument.contains(" /by ")) {
+                    throw new MissingDateTimeException();
+                }
+                String[] descriptionAndDate = argument.split(" /by ");
+                return new AddCommand(new Deadline(descriptionAndDate[0],
+                        LocalDate.parse(descriptionAndDate[1], FORMATTER_INPUT)));
+            } else if (command.equals("event")) {
+                if (!argument.contains(" /at ")) {
+                    throw new MissingDateTimeException();
+                }
+                String[] descriptionAndDate = argument.split(" /at ");
+                return new AddCommand(new Event(descriptionAndDate[0],
+                        LocalDate.parse(descriptionAndDate[1], FORMATTER_INPUT)));
+            } else {
+                assert false : "Oh no! This invalid Duke Command scenario should be handled earlier.";
+                throw new InvalidDukeCommandException();
             }
-            String[] argumentDescriptionAndDate = argument.split(" /by ");
-            String description = argumentDescriptionAndDate[0];
-            String date = argumentDescriptionAndDate[1];
-            return new AddCommand(new Deadline(description, LocalDate.parse(date, FORMATTER_INPUT)));
-        } else if (command.equals("event")) {
-            if (!argument.contains(" /at ")) {
-                throw new MissingDateTimeException();
-            }
-            String[] argumentDescriptionAndDate = argument.split(" /at ");
-            String description = argumentDescriptionAndDate[0];
-            String date = argumentDescriptionAndDate[1];
-            return new AddCommand(new Event(description, LocalDate.parse(date, FORMATTER_INPUT)));
-        } else {
-            assert false : "Oh no! This invalid Duke Command scenario should be handled earlier.";
-            throw new InvalidDukeCommandException();
+        } catch (DateTimeParseException e) {
+            throw new InvalidDateTimeException();
         }
     }
 
     private Command parseDate(String queryDate) {
-        return new DateCommand(LocalDate.parse(queryDate, FORMATTER_INPUT));
+        try {
+            return new DateCommand(LocalDate.parse(queryDate, FORMATTER_INPUT));
+        } catch (DateTimeParseException e) {
+            throw new InvalidDateTimeException();
+        }
     }
 
     private Command parseFind(String keyword) {
@@ -141,23 +144,28 @@ public class Parser {
             String type = "" + taskParts[0].charAt(1);
             String status = "" + taskParts[0].charAt(4);
             String argument = taskParts[1];
+
             if (type.equals("T")) {
                 tasks.add(new ToDo(isDone(status), argument));
             } else if (type.equals("D")) {
-                String[] argumentDescriptionAndDate = argument.split(" \\(by: ");
-                String description = argumentDescriptionAndDate[0];
-                String date = argumentDescriptionAndDate[1];
-                tasks.add(new Deadline(isDone(status), description, LocalDate.parse(date, FORMATTER_DISPLAY)));
+                String[] descriptionAndDate = splitArgument(argument, " \\(by: ");
+                tasks.add(new Deadline(isDone(status), descriptionAndDate[0],
+                        LocalDate.parse(descriptionAndDate[1], FORMATTER_DISPLAY)));
             } else if (type.equals("E")) {
-                String[] argumentDescriptionAndDate = argument.split(" \\(at: ");
-                String description = argumentDescriptionAndDate[0];
-                String date = argumentDescriptionAndDate[1];
-                tasks.add(new Event(isDone(status), description, LocalDate.parse(date, FORMATTER_DISPLAY)));
+                String[] descriptionAndDate = splitArgument(argument, " \\(at: ");
+                tasks.add(new Event(isDone(status), descriptionAndDate[0],
+                        LocalDate.parse(descriptionAndDate[1], FORMATTER_DISPLAY)));
             } else {
                 assert false : "Oh no! An invalid task type has been passed.";
             }
         }
         return tasks;
+    }
+
+    private String[] splitArgument(String argument, String regex) {
+        String[] descriptionAndDate = argument.split(regex);
+        descriptionAndDate[1] = descriptionAndDate[1].replace(")", "");
+        return descriptionAndDate;
     }
 
     private boolean isDone(String symbol) {

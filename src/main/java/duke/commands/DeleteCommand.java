@@ -1,5 +1,6 @@
 package duke.commands;
 
+import duke.exceptions.InvalidTaskIndexException;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
@@ -28,8 +29,12 @@ public class DeleteCommand extends Command {
      */
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         assert index > taskList.getTasks().size() : "Oh no! There is an error with the DeleteCommand numbering logic.";
-        dialog = ui.formatDeleteTask(taskList.getTasks(), index);
-        taskList.deleteTask(index);
-        storage.saveTaskList(taskList.getTasks());
+        try {
+            setDialog(ui.formatDeleteTask(taskList.getTasks(), index));
+            taskList.deleteTask(index);
+            storage.saveTaskList(taskList.getTasks());;
+        } catch (IndexOutOfBoundsException e) {
+            throw new InvalidTaskIndexException();
+        }
     }
 }

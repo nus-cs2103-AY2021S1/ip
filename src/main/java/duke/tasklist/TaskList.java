@@ -44,7 +44,10 @@ public class TaskList {
      * @param index The index of the task to be marked as done.
      */
     public void markTaskAsDone(int index) {
-        tasks.get(index).markAsDone();
+        if (!tasks.get(index).isDone()) {
+            tasks.get(index).markAsDone();
+            incrementNumCompletedTasks();
+        }
     }
 
     /** Adds a task into the list.

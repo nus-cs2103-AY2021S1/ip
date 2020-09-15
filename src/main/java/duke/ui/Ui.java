@@ -4,7 +4,6 @@ import static duke.tasklist.TaskList.getNumCompletedTasks;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -127,11 +126,7 @@ public class Ui {
      * @return The error message in Duke format.
      */
     public String showError(Exception e) {
-        if (e instanceof DateTimeParseException) {
-            return "Harh? The format of the date given is invalid.";
-        } else {
-            return e.getMessage();
-        }
+        return e.getMessage();
     }
 
     /** Gives the statistics of the taskList in Duke format.

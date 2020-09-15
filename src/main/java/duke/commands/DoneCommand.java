@@ -2,6 +2,7 @@ package duke.commands;
 
 import static duke.tasklist.TaskList.incrementNumCompletedTasks;
 
+import duke.exceptions.InvalidTaskIndexException;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
@@ -31,11 +32,12 @@ public class DoneCommand extends Command {
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         assert index > taskList.getTasks().size() : "Oh no! There is an error with the DoneCommand numbering logic.";
-        if (!taskList.getTasks().get(index).isDone()) {
+        try {
             taskList.markTaskAsDone(index);
-            incrementNumCompletedTasks();
+            setDialog(ui.formatMarkAsDone(taskList.getTasks(), index));
+            storage.saveTaskList(taskList.getTasks());
+        } catch (IndexOutOfBoundsException e) {
+            throw new InvalidTaskIndexException();
         }
-        dialog = ui.formatMarkAsDone(taskList.getTasks(), index);
-        storage.saveTaskList(taskList.getTasks());
     }
 }

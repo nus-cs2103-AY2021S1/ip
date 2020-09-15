@@ -25,6 +25,10 @@ public abstract class Command {
         return dialog;
     }
 
+    public void setDialog(String dialog) {
+        this.dialog = dialog;
+    }
+
     /** Indicates whether the program is terminating. */
     public boolean isExit() {
         return false;

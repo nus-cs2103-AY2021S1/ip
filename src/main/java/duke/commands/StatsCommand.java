@@ -15,6 +15,6 @@ public class StatsCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
-        dialog = ui.formatStats(taskList.getTasks());
+        setDialog(ui.formatStats(taskList.getTasks()));
     }
 }

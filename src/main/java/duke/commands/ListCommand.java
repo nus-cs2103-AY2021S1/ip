@@ -15,6 +15,6 @@ public class ListCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
-        dialog = ui.formatLst(taskList.getTasks());
+        setDialog(ui.formatLst(taskList.getTasks()));
     }
 }

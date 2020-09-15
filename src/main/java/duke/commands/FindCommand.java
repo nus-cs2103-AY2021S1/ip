@@ -35,6 +35,6 @@ public class FindCommand extends Command {
                 matchingTasks.add(task);
             }
         }
-        dialog = ui.formatFindTasks(matchingTasks);
+        setDialog(ui.formatFindTasks(matchingTasks));
     }
 }
