@@ -23,7 +23,6 @@ public class Ui {
      */
     String showWelcome() {
         String welcomeMessage = "Hello! I'm Duke\nWhat can I do for you?";
-        System.out.println(welcomeMessage);
         return welcomeMessage;
     }
 
@@ -32,7 +31,6 @@ public class Ui {
      */
     public String exit() {
         String exitMessage = "Bye. Hope to see you again soon!";
-        System.out.println(exitMessage);
         return exitMessage;
     }
 
@@ -43,7 +41,6 @@ public class Ui {
     public String listTasks(TaskList tasks) {
         if (tasks.size() <= 0) {
             String message = "Sorry, your task list is empty.";
-            System.out.println(message);
             return message;
         }
         String message = "Here are the tasks in your list:\n";
@@ -56,7 +53,6 @@ public class Ui {
             }
             message += task + "\n";
         }
-        System.out.println(message);
         return message;
     }
 
@@ -67,7 +63,6 @@ public class Ui {
     public String printSearchResults(List<Task> tasks) {
         if (tasks.size() <= 0) {
             String message = "Sorry, there are no matching tasks with that keyword";
-            System.out.println(message);
             return message;
         } else {
             String result = "Here are the matching tasks in your list:\n";
@@ -75,8 +70,6 @@ public class Ui {
                 String task = i + ". " + tasks.get(i - 1);
                 result += task + "\n";
             }
-
-            System.out.println(result);
             return result;
         }
     }
@@ -86,7 +79,6 @@ public class Ui {
      * @param message Message to be print.
      */
     public String printReply(String message) {
-        System.out.println(message);
         return message;
     }
 
@@ -98,12 +90,12 @@ public class Ui {
         return scanner.nextLine();
     };
 
-    public void showError(String errorMessage) {
-        System.out.println(errorMessage);
+    public String showError(String errorMessage) {
+        return errorMessage;
     }
 
-    public void showLoadingError() {
-        System.out.println("Error loading data");
+    public String showLoadingError() {
+        return "Error loading data";
     }
 
 }

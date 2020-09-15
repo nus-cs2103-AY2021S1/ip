@@ -13,6 +13,7 @@ import java.util.Scanner;
 
 import duke.exception.DukeException;
 import duke.exception.DukeStorageException;
+import duke.exception.InvalidTaskTypeException;
 import duke.task.DeadlineTask;
 import duke.task.EventTask;
 import duke.task.Task;
@@ -123,7 +124,7 @@ public class Storage {
                     tasks.add(eventTask);
                     break;
                 default:
-                    throw new DukeException("Invalid Task Type");
+                    throw new InvalidTaskTypeException();
                 }
             }
             sc.close();
