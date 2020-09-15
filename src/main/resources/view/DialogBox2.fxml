@@ -14,32 +14,21 @@
 
 <fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-      <StackPane maxHeight="1.7976931348623157E308" maxWidth="400.0">
-         <children>
-              <Label fx:id="dialog" alignment="CENTER" contentDisplay="CENTER" ellipsisString="" graphicTextGap="0.0" lineSpacing="0.1" opacity="0.8" style="-fx-background-color: #33adff; -fx-background-radius: 10;" text="Label" textFill="WHITE">
-               <padding>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </padding>
-               <font>
-                  <Font name="Consolas" size="12.0" />
-               </font>
-            </Label>
-         </children>
-      </StackPane>
       <StackPane>
          <children>
             <Rectangle arcHeight="20.0" arcWidth="20.0" height="110.0" stroke="TRANSPARENT" strokeType="INSIDE" width="110.0">
+               <effect>
+                  <Shadow color="#ffb31a" />
+               </effect>
                <fill>
                   <RadialGradient centerX="0.5" centerY="0.5" radius="0.6976744186046512">
                      <stops>
-                        <Stop color="#4f4f5900" />
-                        <Stop color="AQUA" offset="1.0" />
+                        <Stop color="#ff6a0000" />
+                        <Stop color="#ffc51cbf" offset="0.3557293518189358" />
+                        <Stop color="#ffb31a" offset="1.0" />
                      </stops>
                   </RadialGradient>
                </fill>
-                <effect>
-                    <Shadow color="AQUA" />
-                </effect>
             </Rectangle>
               <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true">
                <viewport>
@@ -50,6 +39,18 @@
          <HBox.margin>
             <Insets left="10.0" right="10.0" />
          </HBox.margin>
+      </StackPane>
+      <StackPane maxHeight="1.7976931348623157E308" maxWidth="400.0">
+         <children>
+              <Label fx:id="dialog" alignment="CENTER" contentDisplay="CENTER" ellipsisString="" graphicTextGap="0.0" lineSpacing="0.1" opacity="0.8" style="-fx-background-color: #ff8800; -fx-background-radius: 10;" text="Label">
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+               <font>
+                  <Font name="Consolas" size="12.0" />
+               </font>
+            </Label>
+         </children>
       </StackPane>
     </children>
     <padding>

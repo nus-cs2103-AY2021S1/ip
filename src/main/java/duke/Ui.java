@@ -8,8 +8,10 @@ public class Ui {
     /** Standard messages as part of the UI's design. */
     private static final String MESSAGE_WELCOME = "Hello! I'm Duke, your list manager!\n"
             + "Before we get started, let me know if you would like to:\n"
-            + "    i)  LOAD   <filetype> <filepath> : fetch a list you have made before, or\n"
-            + "   ii)  CREATE <filetype> <filepath> : create a new list from scratch.";
+            + "    i)  LOAD   <filetype> <filepath> : fetch a list you\n"
+            + "        have made before, or\n"
+            + "   ii)  CREATE <filetype> <filepath> : create a new list\n"
+            + "        from scratch.";
     private static final String MESSAGE_GOODBYE = "Bye. Hope to see you again soon!";
     private static final String MESSAGE_TASK_ADDED = "Got it. I've added this task:";
     private static final String MESSAGE_TASK_DELETED = "Noted. I've removed this task:";
@@ -177,7 +179,7 @@ public class Ui {
      * @param filepath The specified filepath where the file was loaded from.
      */
     public void showLoadingSuccess(String filepath) {
-        outputMessage = concatenateLines(MESSAGE_FILE_LOADED + filepath, MESSAGE_TAG);
+        outputMessage = concatenateLines(MESSAGE_FILE_LOADED, filepath, MESSAGE_TAG);
     }
 
     /**
@@ -186,7 +188,7 @@ public class Ui {
      * @param filepath The specified filepath where the file was created.
      */
     public void showMakeFileSuccess(String filepath) {
-        outputMessage = concatenateLines(MESSAGE_FILE_CREATED + filepath, MESSAGE_TAG);
+        outputMessage = concatenateLines(MESSAGE_FILE_CREATED, filepath, MESSAGE_TAG);
     }
 
     /**

@@ -17,7 +17,7 @@ public class FileException extends DukeException {
      */
     public static final FileException FILE_NOT_FOUND = new FileException(
             "Sorry, the file does not seem to exist.\n"
-                    + "Try: CREATE <filepath>.");
+                    + "Try: CREATE [TASK/FINANCE] [filepath].");
 
     /**
      * An exception thrown when there is an existing file in the filepath where the new file is to be created.
@@ -38,7 +38,7 @@ public class FileException extends DukeException {
      */
     public static final FileException INVALID_FILE_SPECIFICATION = new FileException(
             "Sorry, please follow this format to specify the file and its type:\n"
-                    + "\t[CREATE/LOAD] [TASK/FINANCE] [filepath]");
+                    + "    [CREATE/LOAD] [TASK/FINANCE] [filepath]");
 
     /**
      * An exception thrown when the user tries to load/create another file when there is already a file
@@ -46,7 +46,7 @@ public class FileException extends DukeException {
      */
     public static final FileException FILE_ALREADY_LOADED = new FileException(
             "There is currently a file that is already loaded.\n"
-                    + " If you would like to load/create a new file,\n"
+                    + "If you would like to load/create a new file, "
                     + "please UNLOAD the current file first.");
 
     /**
