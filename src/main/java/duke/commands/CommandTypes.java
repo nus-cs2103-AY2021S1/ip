@@ -1,10 +1,10 @@
 package duke.commands;
 
+import java.util.regex.Pattern;
+
 import duke.exceptions.DukeException;
 
 import duke.utils.Messages;
-
-import java.util.regex.Pattern;
 
 /**
  * Command types that the user can use.

@@ -1,12 +1,12 @@
 package duke.commands;
 
-import duke.task.Task;
-import duke.task.TaskManager;
-import duke.utils.Messages;
-
 import java.time.LocalDate;
 
 import java.util.List;
+
+import duke.task.Task;
+import duke.task.TaskManager;
+import duke.utils.Messages;
 
 /**
  * Represents the command that will list out all of the {@code Task} which has the date matching the date when the

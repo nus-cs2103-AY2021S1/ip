@@ -1,12 +1,12 @@
 package duke.commands;
 
+import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
+
 import duke.task.Task;
 import duke.task.TaskManager;
 
 import duke.utils.Messages;
-
-import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Represents the user command which will list out all the tasks which are uncompleted.

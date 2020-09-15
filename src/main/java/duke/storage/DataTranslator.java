@@ -1,5 +1,8 @@
 package duke.storage;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import duke.exceptions.DukeException;
 
 import duke.parser.DateTimeParser;
@@ -12,9 +15,6 @@ import duke.task.TaskManager;
 import duke.task.Todo;
 
 import duke.utils.Ui;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Represents a translator which will encode the tasks in {@link TaskManager} object into the valid format to write

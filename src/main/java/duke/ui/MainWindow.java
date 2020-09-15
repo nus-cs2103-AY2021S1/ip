@@ -4,8 +4,6 @@ import duke.Duke;
 
 import duke.commands.CommandOutput;
 
-import duke.parser.CommandLineInterfaceParser;
-
 import duke.utils.Messages;
 import javafx.application.Platform;
 import javafx.beans.binding.BooleanBinding;
@@ -28,11 +26,13 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private Duke duke;
-    private static final CommandLineInterfaceParser parser = new CommandLineInterfaceParser();
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    /**
+     * Initialises the main window of the application with its appropriate properties.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());

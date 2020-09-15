@@ -30,6 +30,13 @@ import duke.utils.Messages;
 
 public class CommandLineInterfaceParser {
 
+    /**
+     * Parses the user input and returns the respective {@code Command} object.
+     *
+     * @param userInput the input the user keys into the command line interface.
+     * @return the {@code Command} object which represents the user input.
+     * @throws DukeException If the user incorrectly inputs a wrong command or a command with incorrect format.
+     */
     public static Command parse(String userInput) throws DukeException {
         try {
             String[] words = userInput.toLowerCase().split(" ");

@@ -1,12 +1,12 @@
 package duke.commands;
 
+import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
+
 import duke.task.Task;
 import duke.task.TaskManager;
 
 import duke.utils.Messages;
-
-import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Represents the user command that will list out all of the user's completed tasks.

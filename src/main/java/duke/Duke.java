@@ -1,5 +1,7 @@
 package duke;
 
+import java.util.Scanner;
+
 import duke.commands.Command;
 import duke.commands.CommandOutput;
 
@@ -15,13 +17,19 @@ import duke.task.TaskManager;
 
 import duke.utils.Ui;
 
-import java.util.Scanner;
-
+/**
+ * It is the main class that runs the entire command line interface application.
+ */
 public class Duke {
     private Ui ui;
     private Storage storage;
     private TaskManager taskManager;
 
+    /**
+     * Creates a new {@code Duke} object which contains the {@code TaskManager} object to handle the actions
+     * with regards to the {@code Task} objects, the {@code Storage} object to store the relevant task information to
+     * ensure the information persists and {@code Ui} object to format the output.
+     */
     public Duke() {
         this.ui = new Ui();
         try {
@@ -34,6 +42,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the program until the user inputs a command to terminate the program.
+     */
     public void run() {
         Scanner scanner = new Scanner(System.in);
         boolean isExit = false;

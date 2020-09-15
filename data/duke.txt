@@ -1,3 +1,4 @@
-T | 1 | fun | read book
-D | 0 |  | return book | 11 Sep 2020 9:00 PM
-E | 1 | cs2101 | project meeting | 04 Sep 2020 7:00 AM
+T | 1 |  | read book
+D | 0 |  | return book | 15 Sep 2020 11:00 AM
+E | 0 |  | project meeting | 15 Sep 2020 10:00 PM
+D | 0 |  | maths assignment | 09 Sep 2020 11:59 PM
