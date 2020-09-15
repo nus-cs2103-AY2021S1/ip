@@ -7,11 +7,14 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * This class provides an interface for keeping and retrieving the tasks on hard disk memory
  */
 public class Storage {
+    private static Logger logger = Logger.getLogger("Storage");
 
     private String filepath;
     private Parser parser;
@@ -30,11 +33,12 @@ public class Storage {
 
     private void createNewTextFileCalledTask() {
         file = new File(filepath);
+        logger.setLevel(Level.WARNING);
         try {
             if (file.createNewFile()) {
-                System.out.print("File created");
+                logger.log(Level.INFO,"Tasks file created");
             } else {
-                System.out.println("File exist");
+                logger.log(Level.INFO,"Tasks file exist");
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -51,7 +55,6 @@ public class Storage {
             FileWriter fw = new FileWriter("Tasks.txt");
 
             createNewTextFileCalledTask();
-
 
             for (Task t : lstOfTask) {
                 String taskString = t.toString();

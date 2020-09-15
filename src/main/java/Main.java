@@ -4,6 +4,7 @@ import duke.Duke;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -22,11 +23,21 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            setTitle(stage);
+            setTitleIcon(stage);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             fxmlLoader.<MainWindow>getController().greetUser();
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void setTitle(Stage stage) {
+        stage.setTitle("Duke");
+    }
+
+    private void setTitleIcon(Stage stage) {
+        stage.getIcons().add(new Image("/images/Duke.png"));
     }
 }

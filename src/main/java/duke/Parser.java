@@ -42,9 +42,9 @@ public class Parser {
             if (type.equals("T")) {
                 task = new ToDo(description);
             } else if (type.equals("E")) {
-                task = new Event(description, parseDateTimeFromTxt(date));
+                task = new Event(description, parseDateTimeFromTxtFile(date));
             } else if (type.equals("D")) {
-                task = new Deadline(description, parseDateTimeFromTxt(date));
+                task = new Deadline(description, parseDateTimeFromTxtFile(date));
             } else {
                 throw new NullPointerException("Task file corrupted");
             }
@@ -80,12 +80,17 @@ public class Parser {
      * information stored for easy retrieval later on
      */
     LocalDateTime parseDateAndTime(String dateTime) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
         LocalDateTime d1 = LocalDateTime.parse(dateTime, formatter);
         return d1;
     }
 
-    LocalDateTime parseDateTimeFromTxt(String dateTime) {
+    /**
+     * This method parse text in String to LocalDateTime
+     * @param dateTime String representation of date and time
+     * @return LocalDateTime
+     */
+    LocalDateTime parseDateTimeFromTxtFile(String dateTime) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy h:mm a");
         return LocalDateTime.parse(dateTime,formatter);
     }

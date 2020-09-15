@@ -22,10 +22,11 @@ public class UserInterface {
     private static final String NO_SEARCH_RESULT_MESSAGE = "    No match for keyword searched";
     private static final String MATCH_SEARCH_RESULT_MESSAGE = "    Here are the matching tasks in your list:";
 
-    private static final String GREET_USER_LINE_1 = INDENT + "Hello! I'm duke.Duke";
+    private static final String GREET_USER_LINE_1 = INDENT + "Hello! I'm Duke";
     private static final String GREET_USER_LINE_2 = INDENT + "What can I do for you?";
 
-    private static final String BYE_MESSAGE = "Bye. Hope to see you again soon!";
+    private static final String BYE_MESSAGE_LINE_1 = INDENT + "Bye. I have saved the tasks.";
+    private static final String BYE_MESSAGE_LINE_2 = INDENT + "Hope to see you again soon!";
 
     private static final String TASK_LEFT_MESSAGE_PART_1 = INDENT + "Now you have ";
     private static final String TASK_LEFT_MESSAGE_PART_2 = SPACE + "tasks in the list.";
@@ -94,7 +95,7 @@ public class UserInterface {
     }
 
     public String showExitMessage() {
-        return outputUi(BYE_MESSAGE);
+        return outputUi(BYE_MESSAGE_LINE_1,BYE_MESSAGE_LINE_2);
     }
 
     public String showInvalidDateFormatGiven() {
@@ -102,16 +103,15 @@ public class UserInterface {
     }
 
     public String showSearchResults(List<Task> lstOfTask) {
-        return outputUi(MATCH_SEARCH_RESULT_MESSAGE, listTask(lstOfTask));
+        return outputUi(MATCH_SEARCH_RESULT_MESSAGE, getListOfTasks(lstOfTask));
     }
 
     /**
-     * This method list the tasks currently in the taskList when the user
-     *  runs the list task command. (I dont think we need this method its a repeat)
+     * This method gets the list of tasks currently in the taskList
      * @param lstOfTask the task lists consisting the tasks
      * @return String that is formatted to output to user
      */
-    public String listTask(List<Task> lstOfTask) {
+    public String getListOfTasks(List<Task> lstOfTask) {
         StringBuilder concat = new StringBuilder();
         for (int i = 0; i < lstOfTask.size(); i++) {
             Task task = lstOfTask.get(i);
@@ -125,7 +125,16 @@ public class UserInterface {
 
             concat.append(s);
         }
-        return outputUi(concat.toString());
+        return concat.toString();
+    }
+
+    /**
+     * This method list the tasks in the lstOfTask
+     * @param lstOfTask the task to be listed
+     * @return numbered tasks
+     */
+    public String listAllTasks(List<Task> lstOfTask) {
+        return outputUi(getListOfTasks(lstOfTask));
     }
 
     public String showInvalidSearchCommand() {

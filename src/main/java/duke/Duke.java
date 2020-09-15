@@ -54,11 +54,12 @@ public class Duke {
             } else {
                 switch (checkedCommand) {
                 case LIST:
-                    result = ui.listTask(tasksList.getLstOfTask());
+                    result = ui.listAllTasks(tasksList.getLstOfTask());
                     break;
                 case BYE:
                     exit();
                     result = ui.showExitMessage();
+                    System.exit(0);
                     break;
                 case DONE:
                     result = done(parsedUserInput);
@@ -241,7 +242,7 @@ public class Duke {
 
             List<Task> tasksBeforeDate = scheduler.getTaskByDate(date);
 
-            return ui.listTask(tasksBeforeDate);
+            return ui.listAllTasks(tasksBeforeDate);
 
         } catch (NullPointerException | DateTimeParseException e2) {
             return ui.showInvalidDateFormatGiven();
