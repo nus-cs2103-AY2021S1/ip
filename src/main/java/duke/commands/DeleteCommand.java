@@ -1,6 +1,5 @@
 package duke.commands;
 
-import duke.errors.DoneException;
 import java.io.FileWriter;
 import java.io.IOException;
 

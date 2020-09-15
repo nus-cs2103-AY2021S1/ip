@@ -47,9 +47,9 @@ public class EventCommand extends AddCommand {
      * @throws DukeException thrown if description for event is absent
      */
     protected void exceptionThrownIfNumberOrDescriptionAbsent() throws DukeException {
-       if(isNumberOrDescriptionAbsent()) { //tests whether the description is absent
-           throw new EventException(true, false, false, false, false);
-       }
+        if (isNumberOrDescriptionAbsent()) { //tests whether the description is absent
+            throw new EventException(true, false, false, false, false);
+        }
     }
 }
 

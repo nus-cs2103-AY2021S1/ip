@@ -2,7 +2,6 @@ package duke.commands;
 
 import duke.errors.DeadlineException;
 import duke.errors.DukeException;
-import duke.errors.EventException;
 import duke.helpers.Storage;
 import duke.helpers.TaskList;
 import duke.helpers.Ui;
@@ -47,7 +46,7 @@ public class DeadlineCommand extends AddCommand {
      * @throws DukeException thrown if description for event is absent
      */
     protected void exceptionThrownIfNumberOrDescriptionAbsent() throws DukeException {
-        if(isNumberOrDescriptionAbsent()) {
+        if (isNumberOrDescriptionAbsent()) {
             throw new DeadlineException(true, false, false); //Since description is absent
         }
     }
