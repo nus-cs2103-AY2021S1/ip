@@ -1,12 +1,12 @@
 # User Guide
 - Table of Contents
     - [Description](#description)
-    - [Setting up](#setting-uo)
+    - [Setting up](#setting-up)
     - [Features](#features)
 
 ## Description
 This is a chat bot named after the Java mascot _Duke_. _Duke_ can help you to manage your tasks.
-![Ui](./Ui.png)
+![Ui](./docs/Ui.png)
 
 ## Setting up 
 1. Download the jar file from the releases. 
