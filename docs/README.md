@@ -94,4 +94,8 @@ Base code from
 Reference snippets of code from 
 - https://github.com/se-edu/addressbook-level2
 
+Images:
+https://t.me/addstickers/Kanna_hibiki
+https://t.me/addstickers/PinkPotato
+
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
