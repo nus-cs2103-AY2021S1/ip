@@ -59,11 +59,11 @@ public class Task {
         this.isDone = true;
     }
 
-    public String recordString() {
+    public String formattedDateString() {
         return "";
     }
 
-    public String recordStringWithTags() {
+    public String formattedDateStringWithTags() {
         return "";
     }
 

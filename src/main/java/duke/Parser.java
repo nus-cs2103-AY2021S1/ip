@@ -25,6 +25,7 @@ public class Parser {
     private static final int DEADLINE_DESCRIPTION_START_INDEX = 9;
     private static final int EVENT_DESCRIPTION_START_INDEX = 6;
     private static final int DATE_START_INDEX = 4;
+    private static final int INVALID_INDEX = -1;
 
     /**
      * Executes a done command.
@@ -187,7 +188,7 @@ public class Parser {
             throw new DukeException("The description of a deadline cannot be empty.");
         }
         int index = input.indexOf("/");
-        if (index == -1) {
+        if (index == INVALID_INDEX) {
             throw new DukeException("Please include the date of the deadline!");
         }
         String deadlineDescription = input.substring(DEADLINE_DESCRIPTION_START_INDEX, index - 1);
@@ -217,12 +218,12 @@ public class Parser {
         if (userInputWords.length <= 1) {
             throw new DukeException("The description of an event cannot be empty.");
         }
-        int ind = input.indexOf("/");
-        if (ind == -1) {
+        int index = input.indexOf("/");
+        if (index == INVALID_INDEX) {
             throw new DukeException("Please include the date of the event!");
         }
-        String eventDescription = input.substring(EVENT_DESCRIPTION_START_INDEX, ind - 1);
-        String eventDate = input.substring(ind + DATE_START_INDEX);
+        String eventDescription = input.substring(EVENT_DESCRIPTION_START_INDEX, index - 1);
+        String eventDate = input.substring(index + DATE_START_INDEX);
         try {
             Event newEvent = new Event(eventDescription, eventDate);
             tasks.add(newEvent);
@@ -245,6 +246,7 @@ public class Parser {
      */
     public static String parse(String inputted, TaskList tasks) throws DukeException {
         String input = inputted.trim();
+        assert input != null;
         if (input.equals(EMPTY_COMMAND)) {
             throw new DukeException("Please input a proper command!");
         }

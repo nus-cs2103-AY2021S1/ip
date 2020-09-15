@@ -8,11 +8,11 @@ public class ToDo extends Task {
         super(description);
     }
 
-    public String recordString() {
+    public String formattedDateString() {
         return "[T]" + super.toString();
     }
 
-    public String recordStringWithTags() {
+    public String formattedDateStringWithTags() {
         return toString();
     }
 

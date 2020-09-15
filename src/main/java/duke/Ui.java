@@ -42,7 +42,7 @@ public class Ui {
         } else {
             String response = "Here are the tasks in your list:";
             for (int i = 0; i < tasks.getTasks().size(); i++) {
-                String taskString = "\n" + (i + 1) + ". " + tasks.getTasks().get(i).recordString();
+                String taskString = "\n" + (i + 1) + ". " + tasks.getTasks().get(i).formattedDateString();
                 response += taskString;
             }
             return response;
@@ -55,7 +55,7 @@ public class Ui {
         } else {
             String response = "Here are the tasks in your list:";
             for (int i = 0; i < tasks.getTasks().size(); i++) {
-                String taskString = "\n" + (i + 1) + ". " + tasks.getTasks().get(i).recordStringWithTags();
+                String taskString = "\n" + (i + 1) + ". " + tasks.getTasks().get(i).formattedDateStringWithTags();
                 response += taskString + "\n";
             }
             return response;
@@ -69,7 +69,7 @@ public class Ui {
      */
     public String done(Task t) {
         String response = "Nice! I've marked this task as done:";
-        response += "\n" + t.recordString();
+        response += "\n" + t.formattedDateString();
         return response;
     }
 
@@ -80,7 +80,7 @@ public class Ui {
      */
     public String tag(Task t, Tag tag) {
         String response = "Nice! I've tagged this task with " + tag + ":";
-        response += "\n" + t.recordString();
+        response += "\n" + t.formattedDateString();
         return response;
     }
 
@@ -93,7 +93,7 @@ public class Ui {
      */
     public String delete(Task t, int size) {
         String response = "Noted. I've removed this task:";
-        response += "\n" + t.recordString();
+        response += "\n" + t.formattedDateString();
         response += "\n" + "Now, you have " + size + " tasks in the list";
         return response;
     }
@@ -107,7 +107,7 @@ public class Ui {
      */
     public String add(Task t, int size) {
         String response = "Got it. I've added this task:";
-        response += "\n" + t.recordString();
+        response += "\n" + t.formattedDateString();
         response += "\n" + "Now, you have " + size + " tasks in the list";
         return response;
     }
@@ -123,7 +123,7 @@ public class Ui {
         } else {
             String response = "Here are the matching tasks in your list:";
             for (int i = 0; i < tasks.size(); i++) {
-                String matchingTask = "\n" + (i + 1) + ". " + tasks.get(i).recordString();
+                String matchingTask = "\n" + (i + 1) + ". " + tasks.get(i).formattedDateString();
                 response += matchingTask;
             }
             return response;
@@ -141,7 +141,7 @@ public class Ui {
         } else {
             String response = "Here are the matching tasks in your list:";
             for (int i = 0; i < tasks.size(); i++) {
-                String matchingTask = "\n" + (i + 1) + ". " + tasks.get(i).recordStringWithTags();
+                String matchingTask = "\n" + (i + 1) + ". " + tasks.get(i).formattedDateStringWithTags();
                 response += matchingTask;
             }
             return response;
@@ -174,7 +174,7 @@ public class Ui {
             return "The specified task does not have the specified tag: " + tagRemoved;
         } else {
             String response = "Nice! I've removed the tag: " + tagRemoved;
-            response += "\nfrom " + t.recordString();
+            response += "\nfrom " + t.formattedDateString();
             return response;
         }
     }

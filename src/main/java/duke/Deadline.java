@@ -25,11 +25,11 @@ public class Deadline extends Task {
      *
      * @return Deadline description and date.
      */
-    public String recordString() {
+    public String formattedDateString() {
         return "[D]" + super.toString() + " (by: " + formattedDate + ")";
     }
 
-    public String recordStringWithTags() {
+    public String formattedDateStringWithTags() {
         return "[D]" + super.toString() + " (at: " + formattedDate + ")" +
                 (this.tags.size() == 0 ? "" :"\ntags: " + super.getTags());
     }

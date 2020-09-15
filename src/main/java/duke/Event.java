@@ -25,11 +25,11 @@ public class Event extends Task {
      *
      * @return Event description and date.
      */
-    public String recordString() {
+    public String formattedDateString() {
         return "[E]" + super.toString() + " (at: " + formattedDate + ")";
     }
 
-    public String recordStringWithTags() {
+    public String formattedDateStringWithTags() {
         return "[E]" + super.toString() + " (at: " + formattedDate + ")" +
                 (this.tags.size() == 0 ? "" :"\ntags: " + super.getTags());
     }
