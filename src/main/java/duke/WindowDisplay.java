@@ -26,11 +26,9 @@ public class WindowDisplay extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private final Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private final Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
-    private TaskList taskList;
-    private Path pathToSave;
     private CommandParserAndLogic commandParserAndLogic;
 
     private Stage stagePointer;
@@ -95,13 +93,9 @@ public class WindowDisplay extends Application {
         // my stuff ends
 
         // Add functionality to handle user input.
-        sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
-        });
+        sendButton.setOnMouseClicked((event) -> handleUserInput());
 
-        userInput.setOnAction((event) -> {
-            handleUserInput();
-        });
+        userInput.setOnAction((event) -> handleUserInput());
     }
     //@@author Jeffry Lum
 
@@ -112,10 +106,9 @@ public class WindowDisplay extends Application {
         TextCacher.cacheStartMessage();
         flushTextCache();
 
-        String home = System.getProperty("user.home");
-        pathToSave = Paths.get(home, "ipSave.txt");
+        Path pathToSave = Paths.get(System.getProperty("user.home"), "ipSave.txt");
 
-        taskList = FileManager.readFromSave(pathToSave);
+        TaskList taskList = FileManager.readFromSave(pathToSave);
         commandParserAndLogic = new CommandParserAndLogic(taskList, pathToSave);
         // set up done
         TextCacher.cachePromptMsg();

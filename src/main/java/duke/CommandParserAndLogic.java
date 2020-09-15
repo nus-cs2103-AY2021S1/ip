@@ -35,40 +35,38 @@ public class CommandParserAndLogic {
      * Follows up by calling the relevant logic
      *
      * @param string input
-     * @return true if it is an know command, else false
      */
-    private boolean commandCheck(String string) {
+    private void commandCheck(String string) {
         switch (string) {
             case "!commands":
                 TextCacher.cacheCommands();
-                return true;
+                return;
             case "bye":
                 byeLogic();
-                return true;
+                return;
             case "list":
                 listLogic();
-                return true;
+                return;
             case "done":
                 doneLogic();
-                return true;
+                return;
             case "delete":
                 deleteLogic();
-                return true;
+                return;
             case "todo":
                 toDoLogic();
-                return true;
+                return;
             case "deadline":
                 deadLineLogic();
-                return true;
+                return;
             case "event":
                 eventLogic();
-                return true;
+                return;
             case "find" :
                 findLogic();
-                return true;
+                return;
             default:
                 TextCacher.cacheCommandNotFoundError();
-                return false;
         }
     }
 

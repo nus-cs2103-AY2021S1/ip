@@ -13,7 +13,7 @@ public class TaskList {
      * Returns a string saying the task has been added and how many there are total
      * Or alternatively task is not added because it has a duplicate
      *
-     * @param task
+     * @param task task to be added to list
      * @return information string
      */
     public String addTask(Task task) {
@@ -34,7 +34,7 @@ public class TaskList {
      * Adds an task object to this TaskList object
      * Used for loading from save file
      *
-     * @param task
+     * @param task task to be loaded to list
      */
     public void loadInTask(Task task) {
         taskList.add(task);
@@ -63,7 +63,7 @@ public class TaskList {
     /**
      * Finds and returns all tasks with descriptions that contains the string provided
      *
-     * @param string
+     * @param string search term
      * @return A header followed by a list of matching tasks
      */
     public String search(String string) {
@@ -105,18 +105,12 @@ public class TaskList {
      * @throws IndexOutOfBoundsException indicating position out of bounds of list
      */
     public String markDone(int position) throws IndexOutOfBoundsException {
-        try {
-
-            if (taskList.get(position - 1).markDone()) {
-                return ("beri gude, finish that thing liao\n  " +
-                        taskList.get(position - 1).toString());
-            } else {
-                return ("Task alr finish liao\n  " +
-                        taskList.get(position - 1).toString());
-            }
-
-        } catch (IndexOutOfBoundsException e) {
-            throw e;
+        if (taskList.get(position - 1).markDone()) {
+            return ("beri gude, finish that thing liao\n  " +
+                    taskList.get(position - 1).toString());
+        } else {
+            return ("Task alr finish liao\n  " +
+                    taskList.get(position - 1).toString());
         }
     }
 
@@ -128,17 +122,12 @@ public class TaskList {
      * @throws IndexOutOfBoundsException indicating position out of bounds of list
      */
     public String deleteTask(int position) throws IndexOutOfBoundsException {
-        try {
+        Task task = taskList.get(position - 1);
+        taskList.remove(position - 1);
+        return ("Noted. I've removed this task:\n  " +
+                task.toString() + "\n" +
+                "Now you have " + size() + " tasks in the list.");
 
-            Task task = taskList.get(position - 1);
-            taskList.remove(position - 1);
-            return ("Noted. I've removed this task:\n  " +
-                    task.toString() + "\n" +
-                    "Now you have " + size() + " tasks in the list.");
-
-        } catch (IndexOutOfBoundsException e) {
-            throw e;
-        }
     }
 
     // below are private methods
