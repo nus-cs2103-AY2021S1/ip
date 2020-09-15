@@ -42,6 +42,20 @@ test {
     }
 }
 
+sourceSets {
+    main {
+        java {
+            srcDirs = ["src/main"]
+        }
+    }
+
+    test {
+        java {
+            srcDirs = ["src/test"]
+        }
+    }
+}
+
 application {
     mainClassName = "Launcher"
 }
