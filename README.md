@@ -14,7 +14,7 @@ Created by: Sruthi
 3. Execute the command `java -jar duke.java` in your terminal
 
 ## User Interface
-![UI](Ui.png)
+![UI](docs/Ui.png)
 
 ## Features 
 
