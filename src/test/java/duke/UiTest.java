@@ -12,7 +12,9 @@ import org.junit.jupiter.api.Test;
 
 import duke.ui.Ui;
 
-
+/**
+ * Implements testing for UI.
+ */
 public class UiTest {
     private static final String SEPARATOR = System.getProperty("line.separator");
     private static final String LOGO = " _   _       _   _ _            \n"
@@ -196,10 +198,13 @@ public class UiTest {
             + "          ██████            ████"
             + "████      ██████            ████"
             + "██████";
-    private final OutputStream out = new ByteArrayOutputStream();
-    private final PrintStream originalOut = System.out;
-    private final InputStream originalIn = System.in;
+    private OutputStream out = new ByteArrayOutputStream();
+    private PrintStream originalOut = System.out;
+    private InputStream originalIn = System.in;
 
+    /**
+     * Tests greeting message.
+     */
     @Test
     public void testGreetUser() {
         PrintStream ps = new PrintStream(out);
@@ -211,6 +216,9 @@ public class UiTest {
         System.setOut(originalOut);
     }
 
+    /**
+     * Tests showing divider.
+     */
     @Test
     public void testShowLine() {
         PrintStream ps = new PrintStream(out);
@@ -221,6 +229,9 @@ public class UiTest {
         System.setOut(originalOut);
     }
 
+    /**
+     * Tests goodbye message.
+     */
     @Test
     public void testGoodbyeUser() {
         PrintStream ps = new PrintStream(out);
@@ -231,6 +242,9 @@ public class UiTest {
         System.setOut(originalOut);
     }
 
+    /**
+     * Tests loading error.
+     */
     @Test
     public void testShowLoadingError() {
         PrintStream ps = new PrintStream(out);
@@ -242,6 +256,9 @@ public class UiTest {
         System.setOut(originalOut);
     }
 
+    /**
+     * Tests printing message.
+     */
     @Test
     public void testPrintMessage() {
         PrintStream ps = new PrintStream(out);
@@ -253,6 +270,9 @@ public class UiTest {
         System.setOut(originalOut);
     }
 
+    /**
+     * Tests reading input from user.
+     */
     @Test
     public void testReadInput() {
         String input = "This is a test input";
@@ -261,5 +281,19 @@ public class UiTest {
         Ui ui = new Ui();
         assertEquals(input, ui.readInput());
         System.setIn(originalIn);
+    }
+
+    /**
+     * Tests getting accumulated responses.
+     */
+    @Test
+    public void testGetResponses() {
+        PrintStream ps = new PrintStream(out);
+        System.setOut(ps);
+        Ui ui = new Ui();
+        ui.accumulateResponses("response 1", "response 2", "response 3");
+        assertEquals("response 1" + SEPARATOR + "response 2" + SEPARATOR
+                + "response 3", ui.getResponses());
+        System.setOut(originalOut);
     }
 }
