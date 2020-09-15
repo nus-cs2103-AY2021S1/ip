@@ -8,8 +8,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
             style="-fx-background-color: #002B3F;" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.171"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="duke.MainWindow">
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="duke.MainWindow">
     <children>
         <TextField fx:id="userInput" layoutY="558.0" onAction="#handleUserInput" prefHeight="41.0" prefWidth="424.0"
                    style="-fx-background-color: #586EA5; -fx-text-fill: #002B3F;" AnchorPane.bottomAnchor="1.0"/>

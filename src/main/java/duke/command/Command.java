@@ -47,7 +47,6 @@ public abstract class Command {
         } else if (contains(TodoCommand.aliases, commandKeyword)) {
             return CommandType.TODO;
         } else {
-            Main.getWindow().showsToDialog("The keyword got is: " + commandKeyword);
             return CommandType.UNKNOWN;
         }
 
