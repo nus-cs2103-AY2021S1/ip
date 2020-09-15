@@ -6,12 +6,15 @@ public class Duke {
 
     public static String HORIZONTAL_LINE =
             "_________________________________________________________________________________________";
-    public static ArrayList<Task> LIST = new ArrayList<>();
     public static String[] COMMANDS = {"todo", "deadline", "event", "list", "done", "bye", "delete"};
+    public static ArrayList<Task> LIST = new ArrayList<>();
+    public static SaveDataManager SDM = new SaveDataManager();
 
     public static void main(String[] args) {
+        Duke.LIST = SDM.loadData();
         startUpMessage();
         programLoop();
+        SDM.saveData(Duke.LIST);
     }
 
     // Prints start up message upon running
@@ -40,6 +43,15 @@ public class Duke {
                 // exit program if user inputs "bye"
                 System.out.println("Bye. Hope to see you again soon!");
                 break;
+            } else if (command[0].toLowerCase().equals("clear")) {
+                // clears task list
+                Duke.LIST.clear();
+                if (promptConfirm(sc)) {
+                    System.out.println("Task list cleared!");
+                } else {
+                    continue;
+                }
+
             } else if (command[0].toLowerCase().equals(Duke.COMMANDS[3])) {
                 // prints all elements of LIST if not empty
                 if (Duke.LIST.size() == 0) {
@@ -160,7 +172,7 @@ public class Duke {
                 if (str.toLowerCase().equals(Duke.COMMANDS[0])) {
                     continue;
                 } else {
-                    sb.append(str + " ");
+                    sb.append(str);
                 }
             } // end for loop
             task = new ToDo(sb.toString());
@@ -218,5 +230,13 @@ public class Duke {
         for (int i = 0; i < Duke.LIST.size(); i++) {
             System.out.println(i + 1 + ". " + Duke.LIST.get(i).printTask());
         }
+    }
+
+    public static boolean promptConfirm(Scanner sc) {
+        System.out.println("Are you sure? (Y/N)");
+        System.out.println(Duke.HORIZONTAL_LINE);
+        String input = sc.nextLine();
+        System.out.println(Duke.HORIZONTAL_LINE);
+        return input.toLowerCase().equals("y") ? true : false;
     }
 }
