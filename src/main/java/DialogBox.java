@@ -37,7 +37,6 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
-        dialog.getStyleClass().add("chat-bubble");
         displayPicture.setFill(new ImagePattern(img));
     }
 
