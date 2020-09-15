@@ -45,22 +45,30 @@ public class Parser {
         String command = inputCommandAndArgument[0];
         String argument = inputCommandAndArgument.length == 2 ? inputCommandAndArgument[1] : "";
         if (userInput.equals("bye")) {
-            return new ByeCommand();
+            return parseBye();
         } else if (userInput.equals("list")) {
-            return new ListCommand();
+            return parseList();
         } else if (command.equals("done") || command.equals("delete")) {
             return parseDoneDelete(command, argument, tasks.size());
         } else if (command.equals("todo") || command.equals("deadline") || command.equals("event")) {
             return parseAdd(command, argument);
         } else if (command.equals("date")) {
-            return new DateCommand(LocalDate.parse(argument, FORMATTER_INPUT));
+            return parseDate(argument);
         } else if (command.equals("find")) {
-            return new FindCommand(argument);
+            return parseFind(argument);
         } else if (command.equals("stats")) {
-            return new StatsCommand();
+            return parseStats();
         } else {
             throw new InvalidDukeCommandException();
         }
+    }
+
+    private Command parseBye() {
+        return new ByeCommand();
+    }
+
+    private Command parseList() {
+        return new ListCommand();
     }
 
     private Command parseDoneDelete(String command, String argument, int size) {
@@ -107,6 +115,18 @@ public class Parser {
             assert false : "Oh no! This invalid Duke Command scenario should be handled earlier.";
             throw new InvalidDukeCommandException();
         }
+    }
+
+    private Command parseDate(String queryDate) {
+        return new DateCommand(LocalDate.parse(queryDate, FORMATTER_INPUT));
+    }
+
+    private Command parseFind(String keyword) {
+        return new FindCommand(keyword);
+    }
+
+    private Command parseStats() {
+        return new StatsCommand();
     }
 
     /** Parses the user inputs in the list saved in the hard disk into a suitable format for Duke to process.
