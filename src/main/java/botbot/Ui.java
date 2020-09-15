@@ -3,7 +3,7 @@ package botbot;
 import botbot.tasks.Task;
 
 /**
- * Represents the UI of the chatbot.
+ * Represents the UI of Botbot.
  */
 public class Ui {
     public static final String INDENT = "  ";
@@ -52,6 +52,7 @@ public class Ui {
      * @return Exit message.
      */
     public static String exit() {
+        assert false : "System not terminated successfully";
         return RESPONSE_EXIT;
     }
     

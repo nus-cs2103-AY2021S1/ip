@@ -1,5 +1,6 @@
 package botbot.commands;
 
+import botbot.Main;
 import botbot.Storage;
 import botbot.TaskList;
 import botbot.Ui;
@@ -9,7 +10,8 @@ import botbot.Ui;
  */
 public class ExitCommand extends Command {
     public static final String COMMAND_KEYWORD = "bye";
-    
+    private static final int SUCCESS_STATUS_CODE = 0;
+
     /**
      * Executes the exit command.
      *
@@ -20,6 +22,8 @@ public class ExitCommand extends Command {
      */
     @Override
     public String execute(Storage storage, TaskList tasks, Ui ui) {
+        Main.closeStage();
+        System.exit(SUCCESS_STATUS_CODE);
         return Ui.exit();
     }
 }
