@@ -27,16 +27,12 @@ public class MainWindow extends AnchorPane {
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
     private final String topLine = "-----------------------------------------\n";
     private final String bottomLine = "\n-----------------------------------------";
-            //+ "-------------------";;
 
+    /** Initializes the MainWindow.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        /*String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";*/
         String text = this.topLine + "Pika Pika Pikachu!\nWhat can I do for you?" + this.bottomLine;
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(text, dukeImage)

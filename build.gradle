@@ -44,7 +44,7 @@ test {
 }
 
 application {
-    mainClassName = "Launcher"
+    mainClassName = "duke.Launcher"
     //mainClassName = "seedu.duke.Duke"
 }
 

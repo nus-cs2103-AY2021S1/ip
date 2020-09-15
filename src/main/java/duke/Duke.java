@@ -45,6 +45,9 @@ public class Duke extends Application {
         this.ui = new Ui();
     }
 
+    /** Initializes new Duke instance with default file storage ./data/duke.txt.
+     *
+     */
     public Duke() {
         TaskList taskList;
         this.storage = new Storage("./data/duke.txt");
@@ -195,7 +198,7 @@ public class Duke extends Application {
         String response;
         try {
             Command c = Parser.parse(input);
-            assert c != null: "No command available";
+            assert c != null : "No command available";
             response = c.execute(this.taskList, this.ui, this.storage);
         } catch (DukeException e) {
             response = ui.getError(e);

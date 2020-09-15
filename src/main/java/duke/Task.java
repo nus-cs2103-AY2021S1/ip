@@ -66,6 +66,12 @@ public abstract class Task {
         return this.tagSet.contains(tag);
     }
 
+    /** Adds a tag to the task
+     *
+     * @param tag to be added
+     * @return Task
+     * @throws DukeException
+     */
     public Task addTag(String tag) throws DukeException {
         if (this.tagSet.contains(tag)) {
             throw new DukeException("Tag already exist for task " + this.toString());
@@ -74,6 +80,12 @@ public abstract class Task {
         return this;
     }
 
+    /** Removes a tag from the task
+     *
+     * @param tag to be removed
+     * @return Task
+     * @throws DukeException
+     */
     public Task untag(String tag) {
         this.tagSet.remove(tag);
         return this;

@@ -2,8 +2,8 @@ package duke;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.Arrays;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 
 /**
@@ -131,7 +131,7 @@ public class TaskList implements Iterable<Task> {
             timedTasks.removeIf(i -> !(i instanceof TimedTask));
             Task[] timedTasksArr = timedTasks.toArray(new Task[0]);
             for (Task i : timedTasksArr) {
-                assert i instanceof TimedTask: "Non-timed tasks found.";
+                assert i instanceof TimedTask : "Non-timed tasks found.";
                 if (!((TimedTask) i).getDate().equals(date)) {
                     timedTasks.remove(i);
                 }
@@ -241,14 +241,31 @@ public class TaskList implements Iterable<Task> {
         return new TaskList(taggedTasks);
     }
 
+    /**
+     * Removes a specific tag from a specific task.
+     * @param tag tag of tasks we want to retrieve
+     * @param i index of task to be untagged
+     * @return task that was untagged
+     * @throws DukeException if no such task
+     */
     public Task untagTask(int i, String tag) throws DukeException {
         try {
-            return this.list.get(i).untag(tag);
+            if (this.list.get(i).hasTag(tag)) {
+                return this.list.get(i).untag(tag);
+            } else {
+                throw new DukeException("No such tag for the task");
+            }
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("OOPS!!! I'm sorry, the task number is out of range :<");
         }
     }
 
+    /**
+     * Removes a specific tag from all task.
+     * @param tag tag of tasks we want to retrieve
+     * @return list of tasks containing tag
+     * @throws DukeException if no such task
+     */
     public TaskList untagAllTasks(String tag) throws DukeException {
         ArrayList<Task> taggedTasks = new ArrayList<>(this.list);
         taggedTasks.removeIf(i -> !i.hasTag(tag));
