@@ -92,7 +92,7 @@ Expected outcome:
 
 ```
 Got it. I've added this task:
-	[T][✘] wash clothes
+    [T][✘] wash clothes
 Now you have 4 tasks in the list.
 ```
 
