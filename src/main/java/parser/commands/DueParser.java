@@ -23,8 +23,12 @@ public class DueParser {
             LocalDate dueDate = LocalDate.parse(input.nextLine().trim());
             DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("MMM dd yyyy");
             StringBuilder response = new StringBuilder("These tasks are due: \n");
-            for (Task task: tl.getDateStorage().get(dueDate.format(dateFormat))) {
-                response.append(task).append("\n");
+            if (tl.getDateStorage().get(dueDate.format(dateFormat)) != null) {
+                for (Task task: tl.getDateStorage().get(dueDate.format(dateFormat))) {
+                    response.append(task).append("\n");
+                }
+            } else {
+                return "No tasks are due.\n";
             }
             return response.toString();
         } catch (Exception e) {

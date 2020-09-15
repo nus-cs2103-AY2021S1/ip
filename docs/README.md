@@ -22,13 +22,13 @@ Usage:
 
 Example:
 
-`todo homework 2020-09-09`
+`todo homework 2020-09-08`
 
 Expected outcome:
 
 `Task added:`
 
-`[T][X] Homework @ Sep 09 2020`
+`[T][X] Homework @ Sep 08 2020`
 
 `You now have 1 task(s)."`
 
