@@ -37,6 +37,7 @@ Displays help message with sample command input for each command.
 `help`
 
 **Expected outcome:**
+
 ![help image](images/help.png)
 
 ## Adding tasks
@@ -53,6 +54,7 @@ Adds a To-Do task to the task list with the specified task name.
 `todo read` - Adds a read To-Do task to the task list.
 
 **Expected outcome:**
+
 ![todo image](images/todo.png)
 
 ### `deadline TASKNAME /by YYYY-MM-DD` - Adds a Deadline task to the task list
@@ -76,6 +78,7 @@ Adds a Event task to the task list with the specified task name and date the tas
 `event coding workshop /at 2020-12-20` - Adds a coding workshop event task to the task list, with event date on 20th December 2020.
 
 **Expected outcome:**
+
 ![event image](images/event.png)
 
 ## Mark a task as done
@@ -92,6 +95,7 @@ Marks task in task list with specified index as done. A UI message will be displ
 `done 2` - Marks task with index 2 on the task list as done.
 
 **Expected outcome:**
+
 ![done image](images/done.png)
 
 ## Tag a task with a keyword
@@ -108,6 +112,7 @@ Tags the task at specified INDEX with the specified TAGWORD. A UI message will b
 `tag 2 #fun` - Tags second task on the task list as a fun task.
 
 **Expected outcome:**
+
 ![tag image](images/tag.png)
 
 ## Find a task with a keyword
@@ -124,6 +129,7 @@ Finds the task with the specified TAGWORD. A UI message will be displayed by the
 `find workshop` - Find tasks on the task list containing the word 'workshop'.
 
 **Expected outcome:**
+
 ![find image](images/find.png)
 
 ## Delete a task on the task list
@@ -140,6 +146,7 @@ Deletes the task at the specified index in the task list. A UI message will be d
 `delete 3` - Deletes task numbered as number 3 on the task list.
 
 **Expected outcome:**
+
 ![delete image](images/delete.png)
 
 ## List tasks on task list
@@ -156,6 +163,7 @@ List all the tasks in the task list. A UI message containing all the tasks will 
 `list` - List all the tasks in the task list.
 
 **Expected outcome:**
+
 ![list image](images/list.png)
 
 ## Close the bot
