@@ -15,7 +15,7 @@ Feature | Description
 todo NAMEOFTODO | Creates a todo and adds it to the list of tasks
 deadline NAMEOFDEADLINE /by YYYY-MM-DD | Creates a deadline and adds it to the list of tasks
 event NAMEOFEVENT /at YYYY-MM-DD | Creates an event and adds it to the list of tasks 
-list | Shows the user's current list of tasks 
+list | Shows the current list of tasks 
 done TASKID | Marks the specified task as done 
 delete TASKID | Deletes the specified task 
 find KEYWORD | Searches for tasks that contain the specified keyword
