@@ -1,3 +1,4 @@
 T ## 0 ## 2 ## zoom workout
 D ## 1 ## 1 ## cs assignment  ## 2020-08-12
 T ## 0 ## 3 ## eat food
+E ## 0 ## 3 ## iem meeting  ## 2020-09-15 22:30
