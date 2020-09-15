@@ -1,26 +1,126 @@
-# Duke project template
+# User Guide - Duke
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+## Features 
 
-## Setting up in Intellij
+### Add 
+Add a new task (of type todo/event/deadline) to the task list.
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+### List
+View the whole task list.
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project dialog first)
-1. Set up the correct JDK version, as follows:
-   1. Click `Configure` > `Structure for New Projects` and then `Project Settings` > `Project` > `Project SDK`
-   1. If JDK 11 is listed in the drop down, select it. If it is not, click `New...` and select the directory where you installed JDK 11
-   1. Click `OK`
-1. Import the project into Intellij as follows:
-   1. Click `Open or Import`.
-   1. Select the project directory, and click `OK`
-   1. If there are any further prompts, accept the defaults.
-1. After the importing is complete, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()`. If the setup is correct, you should see something like the below:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+### Set as done
+Set a task in the list as done by list index.
+
+### Delete
+Delete a task in the list by list index.
+
+### Find
+Find tasks with a exact keyword.
+
+### Save
+Save the task list and load with saved data when reopening.
+
+## Usage
+
+#### `todo` - add a todo task
+Example of usage: 
+
+`todo homework`
+
+
+
+Expected outcome:
+
+      _____________________________________________
+       Got it. I've added this task:
+         [T][✘] homework
+       Now you have 1 task(s) in the list.
+      _____________________________________________
+
+#### `event /at yyyy-mm-dd` - add an event task
+Example of usage: 
+
+`event concert /at 2020-05-01`
+
+Expected outcome:
+
+     _____________________________________________
+      Got it. I've added this task:
+        [E][✘] concert (at: May 1 2020)
+      Now you have 2 task(s) in the list.
+     _____________________________________________
+     
+#### `deadline /by yyyy-mm-dd` - add a deadline task
+Example of usage: 
+
+`deadline assignmet /by 2020-09-23`
+
+Expected outcome:
+
+     _____________________________________________
+      Got it. I've added this task:
+        [D][✘] assignmet (by: Sep 23 2020)
+      Now you have 3 task(s) in the list.
+     _____________________________________________
+     
+#### `list` - list out the task list
+Example of usage: 
+
+`list`
+
+Expected outcome:
+
+     _____________________________________________
+      Here are the task(s) in your list:
+      1.[T][✘] homework
+      2.[E][✘] concert (at: May 1 2020)
+      3.[D][✘] assignmet (by: Sep 23 2020)
+     _____________________________________________      
+
+#### `done` - set a task as done
+Example of usage: 
+
+`done 1`
+
+Expected outcome:
+
+     _____________________________________________
+      Nice! I've marked this task as done:
+        [T][✓] homework
+     _____________________________________________
+     
+#### `delete` - delete a task in the list
+Example of usage: 
+
+`delete 1`
+
+Expected outcome:
+
+    _____________________________________________
+      Noted. I've removed this task:
+        [T][✓] homework
+      Now you have 2 task(s) in the list.
+    _____________________________________________
+    
+#### `find` - find task by an exact keyword
+Example of usage: 
+
+`find concert`
+
+Expected outcome:
+
+     _____________________________________________
+     Here are the matching task(s) in your list:
+      1.[E][✘] concert (at: May 1 2020)
+     _____________________________________________
+    
+#### `bye` - finish duke and save the task list
+Example of usage: 
+
+`bye`
+
+Expected outcome:
+
+     _____________________________________________
+      Bye. Hope to see you again soon!
+     _____________________________________________    
