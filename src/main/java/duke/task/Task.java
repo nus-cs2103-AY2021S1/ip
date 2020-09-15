@@ -9,11 +9,15 @@ import duke.exception.DukeException;
  */
 public abstract class Task {
 
+    public static final String CROSS_SYMBOL = "x";
+    public static final String EMPTY_SYMBOL = " ";
     public static final String TODO_SAVE_SYMBOL = "T";
     public static final String DEADLINE_SAVE_SYMBOL = "D";
     public static final String EVENT_SAVE_SYMBOL = "E";
     public static final String DEADLINE_FIELD_IDENTIFIER = "/by";
     public static final String EVENT_FIELD_IDENTIFIER = "/at";
+    public static final String IS_DONE = "1";
+    public static final String NOT_DONE = "0";
 
     protected String description;
     protected boolean isDone;
@@ -29,10 +33,10 @@ public abstract class Task {
 
     /**
      * Retrieves the status of a Task: done or not done.
-     * Returns a symbol: a tick for a completed Task, cross for an incomplete Task.
+     * Returns a symbol: a 'x' for a completed Task, blank space for an incomplete Task.
      */
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+        return (isDone ? CROSS_SYMBOL : EMPTY_SYMBOL); // tick: "\u2713" & cross: "\u2718" not used by windows
     }
 
     /**
@@ -60,7 +64,7 @@ public abstract class Task {
      * Returns 1 if Task isDone, 0 otherwise.
      */
     public String isDoneToString() {
-        return isDone ? "1" : "0";
+        return isDone ? IS_DONE : NOT_DONE;
     }
 
     /**
