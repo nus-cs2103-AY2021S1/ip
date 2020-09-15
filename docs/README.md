@@ -3,6 +3,7 @@
 The task list is stored permanently in the hard disk and can be retrieved later.
 
 ## Index
+* this unordered seed list will be replaced by toc as unordered list
 {:toc}
 ## Features 
 
