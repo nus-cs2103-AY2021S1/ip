@@ -180,7 +180,8 @@ public class TaskList {
                 Arrays.stream(keywords)
                         .filter((keyword) -> keyword.equals(finalQuery))
                         .forEach((keyword) -> {
-                            queriedTasks.add(new Todo(description, queriedTasks.size() + 1, task.hasDone()));
+                            queriedTasks.add(new Todo(description, queriedTasks.size() + 1,
+                                    task.hasDone(), task.getTag()));
                         });
                 break;
             case EVENT:
@@ -210,8 +211,8 @@ public class TaskList {
      */
     private Task insertTasks(int len, Task task, String description) throws DukeInvalidTimeException {
         return task.getType() == TaskType.DEADLINE
-                ? new Deadline(description, len, task.hasDone())
-                : new Event(description, len, task.hasDone());
+                ? new Deadline(description, len, task.hasDone(), task.getTag())
+                : new Event(description, len, task.hasDone(), task.getTag());
     }
 
     /**
