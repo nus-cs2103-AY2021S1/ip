@@ -48,7 +48,7 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
 
 ## Features and how to use them
 
-#### **Find the list of command: help**
+### **Find the list of command: help**
 
 This feature allows users to find the list of command to use
 
@@ -57,7 +57,7 @@ Example, i want to add a task but i forgot how to use that, you can use help to 
 Format help
 eg: help
 
-#### **Add a general ToDo task : todo**
+### **Add a general ToDo task : todo**
 
 This feature allows users to add a ToDo task to our current list
 
@@ -66,7 +66,7 @@ Format: todo [newTask]
 E.g: todo ip
 
 
-#### **Add a Deadline task : deadline**
+### **Add a Deadline task : deadline**
 
 This feature allows users to add a task with deadline to our current list
 
@@ -83,7 +83,7 @@ two digit, for example, 2 must be written as 02 instead of just 2.
 3. the time must be 4 digit, for example, 8:12am must be written as 0812 instead of 812
 
 
-#### **Adding an Event : event**
+### **Adding an Event : event**
 
 This feature allows users to add an event to our current list.
 
@@ -101,7 +101,7 @@ two digits, for example, 2 must be written as 02 instead of just 2.
 
 
 
-#### **Listing out all Tasks : list**
+### **Listing out all Tasks : list**
 
 This feature allows users to list out all the tasks added to the list in the order of the entry.
 
@@ -109,7 +109,7 @@ Example: we want to check all the tasks that we have added
 Format: list
 eg: list
 
-#### **Marking a Task as done : done**
+### **Marking a Task as done : done**
 
 This feature allows users to mark certain tasks they have done.
 
@@ -124,7 +124,7 @@ Eg: done 5
 
 
 
-#### **Delete the task : delete**
+### **Delete the task : delete**
 
 This feature allows users to delete certain tasks.
 
@@ -137,7 +137,7 @@ we first use list to find the index of the task. For example, in this case, the 
 for the ip task is taken as 5.
 Eg: delete 5
 
-#### **Find a certain task: find**
+### **Find a certain task: find**
 
 This feature allows users to find a certain task from the list and look at the detail.
 
@@ -146,7 +146,7 @@ Example, i want to find when is my ip due.
 Format find [taskName]
 eg: find ip
 
-####  **Ending a session : bye**
+###  **Ending a session : bye**
 
 This feature allows users to quit the application after they have done what they want
 
