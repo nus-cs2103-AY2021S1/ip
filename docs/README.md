@@ -13,7 +13,7 @@ Duke- the all-in-one friendly task manager :bowtie:
 ### [Help for all commands: ](#help) `help`
 ### [Bye to exit: ](#bye) `bye`
 
-### Add todo task: `todo` <a href="add-todo"></a>
+### Add todo task: `todo` <a id="add-todo"></a>
 Add a todo task with user input as the task description. 
 
 Example of usage: <br/>
@@ -24,7 +24,7 @@ Got it. I've added this task: <br />
 [T][✘] assignment 7 <br />
 Now you have 1 task in the list.
 
-### Add deadline task: `deadline` <a href="add-deadlne"></a>
+### Add deadline task: `deadline` <a id="add-deadlne"></a>
 Add a todo task based on user input as the task description. Requires deadline after /by preferably in
 the proper format: 
 - yyyy/mm/dd or yyyy-mm-dd 
@@ -39,7 +39,7 @@ Got it. I've added this task: <br />
 [D][✘] buy maple syrup (by: 15/9/2020 tonight at 1900) (Tue, Sep 15 2020 7.00pm) <br />
 Now you have 2 tasks in the list.
 
-### Add event task: `event` <a href="add-event"></a>
+### Add event task: `event` <a id="add-event"></a>
 Add a todo task based on user input as the task description. Requires event time after /at preferably in
 the proper format: 
 - yyyy/mm/dd or yyyy-mm-dd 
@@ -54,7 +54,7 @@ Got it. I've added this task: <br />
 [E][✘] wedding (at: 23/9/2020 Fullerton at 8pm) (Wed, Sep 23 2020 8.00pm) <br />
 Now you have 3 tasks in the list.
 
-### List all tasks: `list` <a href="list"></a>
+### List all tasks: `list` <a id="list"></a>
 Display all tasks and their done status.
 
 Example of usage: <br />
@@ -66,7 +66,7 @@ Here are the tasks in your list: <br />
 2.[D][✘] buy maple syrup (by: 15/9/2020 tonight at 1900) (Tue, Sep 15 2020 7.00pm) <br />
 3.[E][✘] wedding (at: 23/9/2020 Fullerton at 8pm) (Wed, Sep 23 2020 8.00pm) 
 
-### Mark task as done: `done` <a href="done"></a>
+### Mark task as done: `done` <a id="done"></a>
 Mark the task specified by the input task number as done. 
 
 Example of usage: <br />
@@ -76,7 +76,7 @@ Expected outcone: <br />
 Nice! I've marked this task as done: <br />
 [T][✓] assignment 7 <br />
 
-### Delete task: `delete` <a href="delete"></a>
+### Delete task: `delete` <a id="delete"></a>
 Delete the task specified by the input task number.
 
 Example of usage: <br />
@@ -87,7 +87,7 @@ Noted, I've removed this task: <br />
 [T][✓] assignment 7 <br />
 Now you have 2 tasks in the list.
 
-### Find task: `find` <a href="find"></a>
+### Find task: `find` <a id="find"></a>
 Find a task that fully and partially matches the input word.
 
 Example of usage: <br />
@@ -97,7 +97,7 @@ Expected outcome: <br />
 Here are the matching tasks in your list: <br />
 1.[E][✘] wedding (at: 23/9/2020 Fullerton at 8pm) (Wed, Sep 23 2020 8.00pm) 
 
-### Help for all commands: `help` <a href="help"></a>
+### Help for all commands: `help` <a id="help"></a>
 Display all valid commands.
 
 Example of usage: <br />
@@ -116,7 +116,7 @@ done <task number> - marks task as done, <br />
 find <one filter word> - finds task with specified word, <br />
 bye - goodbye! <br />
 
-### Bye to exit: `bye` <a href="bye"></a>
+### Bye to exit: `bye` <a id="bye"></a>
 Exit Duke.
 
 Example of usage: <br />
