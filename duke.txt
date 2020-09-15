@@ -1,0 +1,5 @@
+
+[T][✘] Cook breakfast
+[D][✘] Drink milk /by 2020-09-21 1500
+[D][✘] Watch webcasts /by 2020-09-20 1900  [Recurring Weekly]
+[D][✘] watch webcast  /by 2020-09-20 1900   [Recurring Weekly]
