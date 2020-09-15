@@ -1,7 +1,8 @@
 package duke.command;
 
 import duke.exception.DukeException;
-import duke.exception.InvalidCommandException;
+import duke.response.ErrorResponse;
+import duke.response.Response;
 import duke.task.TaskList;
 
 public class DukeCommandExecutor implements CommandExecutor {
@@ -15,36 +16,39 @@ public class DukeCommandExecutor implements CommandExecutor {
      *
      * @param in String command issued by user.
      * @param taskList TaskList list that contains tasks added by the user.
-     * @return String response message to user.
-     * @throws DukeException If the command is not formatted properly.
+     * @return Response response message to user.
      */
-    public String execute(String in, TaskList taskList) throws DukeException {
+    public Response execute(String in, TaskList taskList) {
         assert !hasExited : "Program has already exited";
 
-        CommandType cmdType = CommandParser.parseCmdWord(in);
-        switch (cmdType) {
-        case Delete:
-            return DeleteCommand.execute(in, taskList);
-        case Done:
-            return DoneCommand.execute(in, taskList);
-        case Due:
-            return DueCommand.execute(in, taskList);
-        case Exit:
-            hasExited = true;
-            return ExitCommand.execute();
-        case Find:
-            return FindCommand.execute(in, taskList);
-        case List:
-            return ListCommand.execute(taskList);
-        case Remind:
-            return RemindCommand.execute(in, taskList);
-        case Tag:
-            return TagCommand.execute(in, taskList);
-        case Task:
-            return TaskCommand.execute(in, taskList);
-        default:
-            assert cmdType.equals(CommandType.Invalid) : "CommandType should be Invalid";
-            throw new InvalidCommandException(ERROR_INVALID_COMMAND);
+        try {
+            CommandType cmdType = CommandParser.parseCmdWord(in);
+            switch (cmdType) {
+            case Delete:
+                return DeleteCommand.execute(in, taskList);
+            case Done:
+                return DoneCommand.execute(in, taskList);
+            case Due:
+                return DueCommand.execute(in, taskList);
+            case Exit:
+                hasExited = true;
+                return ExitCommand.execute();
+            case Find:
+                return FindCommand.execute(in, taskList);
+            case List:
+                return ListCommand.execute(taskList);
+            case Remind:
+                return RemindCommand.execute(in, taskList);
+            case Tag:
+                return TagCommand.execute(in, taskList);
+            case Task:
+                return TaskCommand.execute(in, taskList);
+            default:
+                assert cmdType.equals(CommandType.Invalid) : "CommandType should be Invalid";
+                return new ErrorResponse(ERROR_INVALID_COMMAND);
+            }
+        } catch (DukeException e) {
+            return new ErrorResponse(e.getMessage());
         }
     }
 

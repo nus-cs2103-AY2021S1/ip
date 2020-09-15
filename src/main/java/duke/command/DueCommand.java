@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.stream.Stream;
 
 import duke.exception.InvalidCommandException;
+import duke.response.NormalResponse;
+import duke.response.Response;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.util.DukeDateTime;
@@ -20,10 +22,10 @@ public class DueCommand extends Command {
      *
      * @param in String "due" command issued by user.
      * @param taskList TaskList list that contains tasks added by the user.
-     * @return String response message to user including tasks due on the specified date.
+     * @return Response response message to user including tasks due on the specified date.
      * @throws InvalidCommandException If an invalid date format is provided.
      */
-    public static String execute(String in, TaskList taskList) throws InvalidCommandException {
+    public static Response execute(String in, TaskList taskList) throws InvalidCommandException {
         String dateStr = in.replaceFirst("due ", "");
         try {
             LocalDate date = DukeDateTime.parseDate(dateStr);
@@ -47,7 +49,7 @@ public class DueCommand extends Command {
                     : "There are no tasks due on " + formattedDate + "!";
 
             String response = firstLine + String.join("\n", filteredTasks);
-            return response;
+            return new NormalResponse(response);
         } catch (DateTimeParseException | NumberFormatException e) {
             throw new InvalidCommandException(ERROR_INVALID_FORMAT);
         }

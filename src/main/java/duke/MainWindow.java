@@ -1,5 +1,7 @@
 package duke;
 
+import duke.response.NormalResponse;
+import duke.response.Response;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -45,7 +47,7 @@ public class MainWindow extends AnchorPane {
     }
 
     private void generateStartMsg() {
-        addDukeResponse(DialogBox.getDukeDialog(START_MSG, dukeImage));
+        addDukeResponse(DialogBox.getDukeDialog(new NormalResponse(START_MSG), dukeImage));
     }
 
     public void setDuke(Duke d) {
@@ -63,7 +65,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     protected void handleUserInput() {
         String input = userInput.getText().trim();
-        String response = duke.getResponse(input);
+        Response response = duke.getResponse(input);
 
         if (input.equals("")) {
             return;

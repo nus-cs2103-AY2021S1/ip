@@ -9,6 +9,9 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import duke.response.ErrorResponse;
+import duke.response.NormalResponse;
+
 public class UiTest {
     private static final String DIVIDER = "____________________________________________________________";
     private static final String ERROR_HEADER = "___________________________ERROR!___________________________";
@@ -28,19 +31,14 @@ public class UiTest {
     @Test
     public void print() {
         String msgBody = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
-        new Ui().print(msgBody);
-        assertEquals(
-            DIVIDER + "\n" + msgBody + "\n" + DIVIDER + "\n",
-            outContent.toString()
-        );
-    }
+        new Ui().print(new NormalResponse(msgBody));
 
-    @Test
-    public void printErr() {
-        String msgBody = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
-        new Ui().printErr(msgBody);
+
+        String errorMsgBody = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
+        new Ui().print(new ErrorResponse(errorMsgBody));
         assertEquals(
-                ERROR_HEADER + "\n" + msgBody + "\n" + DIVIDER + "\n",
+                DIVIDER + "\n" + msgBody + "\n" + DIVIDER + "\n"
+                        + ERROR_HEADER + "\n" + msgBody + "\n" + DIVIDER + "\n",
                 outContent.toString()
         );
     }

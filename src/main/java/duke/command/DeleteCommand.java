@@ -1,6 +1,8 @@
 package duke.command;
 
 import duke.exception.InvalidCommandException;
+import duke.response.NormalResponse;
+import duke.response.Response;
 import duke.task.Task;
 import duke.task.TaskList;
 // Handles all the logic behind any "delete" command from the user
@@ -11,10 +13,10 @@ public class DeleteCommand extends Command {
      *
      * @param in String "delete" command issued by user.
      * @param taskList TaskList list that contains tasks added by the user.
-     * @return String response message to user.
+     * @return Response response message to user.
      * @throws InvalidCommandException If an invalid index is provided.
      */
-    public static String execute(String in, TaskList taskList) throws InvalidCommandException {
+    public static Response execute(String in, TaskList taskList) throws InvalidCommandException {
         try {
             int index = Integer.parseInt(in.replaceFirst("delete", "").trim());
             Task task = taskList.remove(index - 1);
@@ -23,7 +25,7 @@ public class DeleteCommand extends Command {
             String response = "Noted. I've removed this task:\n"
                     + "  " + task.toString() + "\n"
                     + "Now you have " + len + " task" + (len == 1 ? "" : "s") + " in the list.";
-            return response;
+            return new NormalResponse(response);
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
             throw new InvalidCommandException("Please input a valid index.");
         }

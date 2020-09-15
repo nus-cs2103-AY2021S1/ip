@@ -3,6 +3,8 @@ package duke.command;
 import java.util.ArrayList;
 import java.util.stream.Stream;
 
+import duke.response.NormalResponse;
+import duke.response.Response;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -17,9 +19,9 @@ public class FindCommand extends Command {
      *
      * @param in String "due" command issued by user.
      * @param taskList TaskList list that contains tasks added by the user.
-     * @return String response message to user including tasks containing the keyword.
+     * @return Response response message to user including tasks containing the keyword.
      */
-    public static String execute(String in, TaskList taskList) {
+    public static Response execute(String in, TaskList taskList) {
         String keyword = in.replaceFirst("find ", "").trim();
 
         ArrayList<String> msg = new ArrayList<>();
@@ -41,6 +43,6 @@ public class FindCommand extends Command {
                 : RESPONSE_NO_MATCHES;
 
         String response = firstLine + String.join("\n", msg);
-        return response;
+        return new NormalResponse(response);
     }
 }

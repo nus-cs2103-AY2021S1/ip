@@ -3,6 +3,8 @@ package duke.command;
 import java.util.ArrayList;
 import java.util.stream.Stream;
 
+import duke.response.NormalResponse;
+import duke.response.Response;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -16,9 +18,9 @@ public class ListCommand extends Command {
      * Iterates the taskList and returns the information of all the tasks in the list.
      *
      * @param taskList TaskList list that contains tasks added by the user/
-     * @return String information of all the tasks in taskList/
+     * @return Response information of all the tasks in taskList/
      */
-    public static String execute(TaskList taskList) {
+    public static Response execute(TaskList taskList) {
         int len = taskList.size();
         ArrayList<String> msgBody = new ArrayList<>();
         boolean isEmpty = len == 0;
@@ -32,6 +34,7 @@ public class ListCommand extends Command {
                     msgBody.add(line);
                 });
 
-        return String.join("\n", msgBody);
+        String response = String.join("\n", msgBody);
+        return new NormalResponse(response);
     }
 }
