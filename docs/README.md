@@ -120,9 +120,9 @@ Expected outcome:
 ### Find tasks with a tag
 Find the tasks which tags match the given tag.
 
-`tag TAG` - Find the tasks in the task list that match the tag
+`tag TAG_NAME` - Find the tasks in the task list that match the tag
 
-Example of usage: `tags CS2030`
+Example of usage: `tag CS2030`
 
 Expected outcome:   
 `Here are the tasks that matched your search:`    
