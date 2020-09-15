@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
@@ -23,8 +24,11 @@
                             </effect>
                         </VBox>
                     </content>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
                 </ScrollPane>
-                <TextField fx:id="userInput" layoutX="6.0" layoutY="747.0" onAction="#handleUserInput" opacity="0.82" prefHeight="56.0" prefWidth="548.0" promptText="Command me..." styleClass="userInput" AnchorPane.bottomAnchor="3.0">
+                <TextField fx:id="userInput" layoutX="6.0" layoutY="747.0" onAction="#handleUserInput" opacity="0.82" prefHeight="56.0" prefWidth="548.0" promptText="I'm listening..." styleClass="userInput" AnchorPane.bottomAnchor="3.0">
                     <effect>
                         <Blend mode="RED" />
                     </effect>

@@ -19,7 +19,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load(); // AnchorPane is a node within the fxml file, so loads that node
             Scene scene = new Scene(ap); // place the nod onto the scene
             scene.getStylesheets().add("/view/mainStyle.css"); // one stylesheet to rule them all
-            stage.getIcons().add(new Image("/images/DaDuke.png"));
+            stage.getIcons().add(new Image("/images/marilyn3.png"));
             stage.setTitle("Duke: get a hold of yourself");
             stage.setResizable(false);
             stage.setScene(scene); // set the scene on the stage
