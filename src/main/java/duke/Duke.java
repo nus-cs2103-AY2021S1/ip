@@ -22,7 +22,7 @@ public class Duke {
      * and gets the task list from the storage.
      *
      */
-    private Duke(String filepath) {
+    public Duke(String filepath) {
         taskList = new TaskList();
         storage = new Storage(filepath, taskList);
         parser = new Parser(taskList, storage);
@@ -32,10 +32,6 @@ public class Duke {
         } catch (DukeException e) {
             ui.showLoadingError();
         }
-    }
-
-    public Duke() {
-        this("src/data/duke.txt");
     }
 
     /**

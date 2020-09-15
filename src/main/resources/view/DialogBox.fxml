@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.layout.HBox?>
 
 <fx:root alignment="TOP_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefWidth="500.0" style="-fx-max-height: &quot;Infinity&quot;;" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
@@ -16,12 +17,16 @@
             </HBox.margin>
         </Label>
         <ImageView fx:id="displayPicture" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
-            <HBox.margin>
-                <Insets right="5.0" />
-            </HBox.margin></ImageView>
+<!--            <HBox.margin>-->
+<!--                <Insets right="5.0" />-->
+<!--            </HBox.margin>-->
+            <clip>
+                <Circle centerX="60.0" centerY="60.0" radius="60.0" />
+            </clip>
+        </ImageView>
     </children>
     <padding>
-        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+        <Insets bottom="15.0" left="5.0" right="5.0" top="5.0" />
     </padding>
     <opaqueInsets>
         <Insets />

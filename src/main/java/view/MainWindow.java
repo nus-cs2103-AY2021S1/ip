@@ -50,6 +50,8 @@ public class MainWindow extends AnchorPane {
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
+     * When user types "bye", it disables the input and submit button and waits a second
+     * for duke to print the goodbye statement before exiting.
      */
     @FXML
     private void handleUserInput() {
@@ -60,5 +62,20 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+
+        if (input.equals("bye")) {
+            new Thread(() -> {
+                try {
+                    userInput.setEditable(false);
+                    sendButton.setDisable(true);
+                    Thread.sleep(1000);
+                    System.exit(0);
+                } catch (InterruptedException e) {
+                    dialogContainer.getChildren().add(
+                            DialogBox.getDukeDialog("Lan Zhan is leaving!", dukeImage)
+                    );
+                }
+            }).start();
+        }
     }
 }

@@ -6,6 +6,7 @@ import tasklist.TaskList;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -14,7 +15,7 @@ import java.util.Scanner;
  * @author (Sruthi)
  */
 public class Storage {
-    private final String filePath;
+    private final File file;
     private final String outputFormat = "  %s\n";
     private final TaskList taskList;
 
@@ -26,26 +27,39 @@ public class Storage {
      * @param taskList list of tasks
      */
     public Storage(String filePath, TaskList taskList) {
-        this.filePath = filePath;
+        this.file = new File(filePath);
         this.taskList = taskList;
     }
 
+    private void createFile() throws DukeException {
+        try {
+            if (!file.exists()) {
+                File directory = new File(file.getParent());
+                if (!directory.exists()) {
+                    directory.mkdirs();
+                }
+            }
+            file.createNewFile();
+        } catch (IOException e) {
+            throw new DukeException("Oops, an error occurred while creating the file >.<");
+        }
+    }
+
     /**
-     * It gets the task list from the file and throws a DukeException if no file is found
-     * in the filePath given.
+     * It gets the task list from the file
      *
      * @throws DukeException
      */
     public void getTodoList() throws DukeException {
         try {
-            File f = new File(filePath);
-            Scanner s = new Scanner(f);
+            createFile();
+            Scanner s = new Scanner(file);
             while (s.hasNext()) {
                 String task = s.nextLine();
                 formatStringToTask(task);
             }
         } catch (FileNotFoundException e) {
-            throw new DukeException("File not found");
+            throw new DukeException("Oops, file not found >.<");
         }
     }
 
@@ -93,7 +107,7 @@ public class Storage {
      */
     public void overwriteTodoList() {
         try {
-            FileWriter fw = new FileWriter(filePath);
+            FileWriter fw = new FileWriter(file);
             fw.write(taskList.formatTodoListToString());
             fw.close();
         } catch (Exception e) {
