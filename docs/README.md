@@ -9,7 +9,7 @@
 
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds.
 
-(insert image)
+![Screenshot of Duke](https://github.com/Nikhilalalalala/ip/tree/master/docs/Screenshot.JPG)
 
 ## B. Features 
 - Add a task that can either be a todo, deadline, or event.

@@ -26,5 +26,5 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
    ```
 
 In the creation of this individual project, some code has been adapted from 
-[this website] (https://se-education.org/guides/tutorials/javaFx.html)
- to make the graphical user interface
+[this website](https://se-education.org/guides/tutorials/javaFx.html)
+ to make the graphical user interface.
