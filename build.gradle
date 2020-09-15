@@ -9,7 +9,6 @@ repositories {
     mavenCentral()
 }
 
-<<<<<<< HEAD
 
 dependencies {
     implementation 'junit:junit:4.12'
@@ -31,11 +30,6 @@ dependencies {
 
 run {
     enableAssertions = true
-=======
-dependencies {
-    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.5.0'
-    testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.5.0'
->>>>>>> branch-Level-8
 }
 
 test {
@@ -53,19 +47,11 @@ test {
 }
 
 application {
-<<<<<<< HEAD
     mainClassName = "Launcher"
 }
 
 shadowJar {
     archiveBaseName = "Launcher"
-=======
-    mainClassName = "seedu.duke.Duke"
-}
-
-shadowJar {
-    archiveBaseName = "duke"
->>>>>>> branch-Level-8
     archiveClassifier = null
 }
 
