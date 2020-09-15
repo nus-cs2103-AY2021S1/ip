@@ -1,4 +1,2 @@
-T | 1 |  | read book
-D | 0 |  | return book | 15 Sep 2020 11:00 AM
-E | 0 |  | project meeting | 15 Sep 2020 10:00 PM
 D | 0 |  | maths assignment | 09 Sep 2020 11:59 PM
+T | 0 |  | run 5KM
