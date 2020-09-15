@@ -31,6 +31,8 @@ chat interface also gives users a more personal feeling.
 2. Download the latest Duke Jar from here.
 3. Copy the file to the folder you want to use as the *home folder* for your Duke program.
 4. Double click the file to start the app for Windows, or run `java -jar duke.jar` for Mac.
+You should be seeing the below GUI after a few seconds:
+![welcome page](/docs/WelcomePage.png)
 5. Type the command in the command box and press Enter to execute it.
 
 Some example commands you can try:
