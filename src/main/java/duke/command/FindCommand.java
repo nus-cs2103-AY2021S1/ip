@@ -10,19 +10,21 @@ import duke.tasks.TaskList;
 import duke.ui.Ui;
 
 /**
- * Represent a command that search for tasks based on user's input.
+ * Represents a command that searches for tasks based on user's input.
  */
 public class FindCommand extends UserCommand {
     /**
-     * @param userInput user's input.
+     * @param userInput User's search input.
      */
     public FindCommand(String userInput) {
         super(userInput);
     }
 
     /**
-     * @param taskList task list containing all the tasks.
-     * @param ui       ui that prints output.
+     * Searchs for tasks within the TaskList.
+     *
+     * @param taskList TaskList that contains all the existing tasks.
+     * @param ui Ui that helps to print output.
      * @throws DukeException
      */
     @Override

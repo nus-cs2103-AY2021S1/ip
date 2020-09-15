@@ -36,6 +36,21 @@ public class DialogBox extends HBox {
         }
         dialog.setText(text);
         displayPicture.setImage(img);
+        dialog.setStyle("-fx-text-fill: blue; -fx-font-family:Courier New;");
+    }
+
+    private DialogBox(String text, Image img, boolean hasError) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
+            fxmlLoader.setController(this);
+            fxmlLoader.setRoot(this);
+            fxmlLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        dialog.setText(text);
+        displayPicture.setImage(img);
+        dialog.setStyle("-fx-text-fill: red; -fx-font-family:Courier New;");
     }
 
     /**
@@ -54,6 +69,12 @@ public class DialogBox extends HBox {
 
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
+        db.flip();
+        return db;
+    }
+
+    public static DialogBox getDukeDialog(String text, Image img, boolean hasError) {
+        var db = new DialogBox(text, img, hasError);
         db.flip();
         return db;
     }

@@ -6,27 +6,38 @@ import duke.tasks.TaskList;
 import duke.ui.Ui;
 
 /**
- * Represents a command that mark a task as done.
+ * Represents a command that marks a Task as done.
  */
 public class DoneCommand extends UserCommand {
 
     private static final String DEFAULT_MESSAGE = "Nice! I've marked this task as done: " + "\n" + "[\u2713]";
 
     /**
-     * @param userInput user's input.
+     * @param userInput User's input.
      */
     public DoneCommand(String userInput) {
         super(userInput);
     }
 
-    public boolean checkInputRange(String[] doneCommandArray, int taskSize) {
-        int itemToBeMarkedAsDone = Integer.parseInt(doneCommandArray[1]);
-        return itemToBeMarkedAsDone > taskSize || itemToBeMarkedAsDone <= 0;
+
+    /**
+     * @param index String representation of the index of the Task to be marked as done.
+     * @param taskSize Size of the TaskList.
+     * @return
+     * @throws InvalidDoneCommandException
+     */
+    public boolean checkInputRange(String index, int taskSize) throws InvalidDoneCommandException {
+        try {
+            int itemToBeMarkedAsDone = Integer.parseInt(index);
+            return itemToBeMarkedAsDone > taskSize || itemToBeMarkedAsDone <= 0;
+        } catch (NumberFormatException ex) {
+            throw new InvalidDoneCommandException();
+        }
     }
 
     /**
-     * @param taskList task list containing all the tasks.
-     * @param ui       ui that prints output.
+     * @param taskList TaskList that contains all the existing tasks.
+     * @param ui Ui that helps to print output.
      * @throws DukeException
      */
     @Override
@@ -35,7 +46,7 @@ public class DoneCommand extends UserCommand {
         if (doneCommandArray.length < 2) {
             throw new InvalidDoneCommandException();
         }
-        if (checkInputRange(doneCommandArray, taskList.listSize())) {
+        if (checkInputRange(doneCommandArray[1], taskList.listSize())) {
             throw new InvalidDoneCommandException();
         } else {
             int itemToBeMarkedAsDone = Integer.parseInt(doneCommandArray[1]);

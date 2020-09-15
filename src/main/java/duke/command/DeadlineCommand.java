@@ -19,15 +19,17 @@ public class DeadlineCommand extends UserCommand {
     private static final String DEFAULT_MESSAGE = "Got it. I've added this task:";
 
     /**
-     * @param userInput user's input.
+     * @param userInput User's input.
      */
     public DeadlineCommand(String userInput) {
         super(userInput);
     }
 
     /**
-     * @param taskList task list containing all the tasks.
-     * @param ui       ui that prints output.
+     * Adds an Deadline task while checking for duplicates in TaskList.
+     *
+     * @param taskList TaskList that contains all the existing tasks.
+     * @param ui Ui that helps to print output.
      * @throws DukeException
      */
     @Override

@@ -1,5 +1,6 @@
 package duke;
 
+import duke.command.ByeCommand;
 import duke.command.UserCommand;
 import duke.exceptions.DukeException;
 import duke.parser.Parser;
@@ -35,14 +36,17 @@ public class Duke {
         tasks = storage.load();
     }
 
-    public String getResponse(String userInput) {
+    public Response getResponse(String userInput) {
         try {
             UserCommand command = Parser.parse(userInput);
-            String s = command.execute(tasks, ui);
+            String response = command.execute(tasks, ui);
             storage.save(tasks);
-            return s;
+            if (command instanceof ByeCommand) {
+                return new Response(response, false, true);
+            }
+            return new Response(response, false, false);
         } catch (DukeException exception) {
-            return exception.getMessage();
+            return new Response(exception.getMessage(), true, false);
         }
     }
 

@@ -13,13 +13,18 @@ public class ToDoCommand extends UserCommand {
     private static String eventType = "ToDo";
     private static final String DEFAULT_MESSAGE = "Got it. I've added this task:";
 
+    /**
+     * @param userInput User's input.
+     */
     public ToDoCommand(String userInput) {
         super(userInput);
     }
 
     /**
-     * @param taskList task list containing all the tasks.
-     * @param ui       ui that prints output.
+     * Adds an ToDo task while checking for duplicates in TaskList.
+     *
+     * @param taskList TaskList that contains all the existing tasks.
+     * @param ui Ui that helps to print output.
      * @throws DukeException
      */
     @Override

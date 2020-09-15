@@ -10,25 +10,25 @@ import duke.ui.Ui;
 public abstract class UserCommand {
 
     /**
-     * user's input.
+     * User's input.
      */
     protected String userInput;
 
     /**
-     * boolean to check if user wishes to exit the program
+     * Boolean to check if user wishes to exit the program
      */
     protected Boolean isExit = false;
 
     /**
-     * @param userInput user's input.
+     * @param userInput User's input.
      */
     public UserCommand(String userInput) {
         this.userInput = userInput;
     }
 
     /**
-     * @param taskList task list containing all the tasks.
-     * @param ui       ui that prints output.
+     * @param taskList TaskList that contains all the existing tasks.
+     * @param ui Ui that helps to print output.
      * @throws DukeException
      */
     public abstract String execute(TaskList taskList, Ui ui) throws DukeException;

@@ -4,12 +4,12 @@ import duke.tasks.TaskList;
 import duke.ui.Ui;
 
 /**
- * Represents a command that ends the program.
+ * Represents the command that ends the program.
  */
 public class ByeCommand extends UserCommand {
 
     /**
-     * @param userInput user's input.
+     * @param userInput User's input.
      */
     public ByeCommand(String userInput) {
         super(userInput);
@@ -17,8 +17,8 @@ public class ByeCommand extends UserCommand {
     }
 
     /**
-     * @param taskList task list containing all the tasks.
-     * @param ui       ui that prints output.
+     * @param taskList TaskList containing all the tasks.
+     * @param ui Ui that helps to print output.
      */
     @Override
     public String execute(TaskList taskList, Ui ui) {

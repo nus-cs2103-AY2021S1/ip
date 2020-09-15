@@ -12,15 +12,17 @@ import duke.ui.Ui;
 public class DeleteCommand extends UserCommand {
 
     /**
-     * @param userInput user's input.
+     * @param userInput User's input.
      */
     public DeleteCommand(String userInput) {
         super(userInput);
     }
 
     /**
-     * @param taskList task list containing all the tasks.
-     * @param ui       ui that prints output.
+     * Deletes a Task from the TaskList.
+     *
+     * @param taskList TaskList that contains all the existing tasks.
+     * @param ui Ui that helps to print output.
      * @throws DukeException
      */
     @Override

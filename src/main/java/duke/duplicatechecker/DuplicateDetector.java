@@ -5,6 +5,9 @@ import java.time.LocalDate;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 
+/**
+ * Checks for duplicate task within the existing tasklist.
+ */
 public class DuplicateDetector {
 
     private String description;
@@ -12,6 +15,12 @@ public class DuplicateDetector {
     private TaskList taskList;
     private String taskType;
 
+    /**
+     * @param description task description.
+     * @param date        date of the task.
+     * @param taskList    existing tasklist.
+     * @param taskType    type of task.
+     */
     public DuplicateDetector(String description, LocalDate date, TaskList taskList, String taskType) {
         this.description = description.toLowerCase();
         this.date = date;
@@ -19,6 +28,11 @@ public class DuplicateDetector {
         this.taskType = taskType;
     }
 
+    /**
+     * @param description task description.
+     * @param taskList    existing tasklist.
+     * @param taskType    type of task.
+     */
     public DuplicateDetector(String description, TaskList taskList, String taskType) {
         this.description = description.toLowerCase();
         this.taskList = taskList;
@@ -26,6 +40,9 @@ public class DuplicateDetector {
         this.taskType = taskType;
     }
 
+    /**
+     * @return boolean.
+     */
     public boolean checkForDuplicates() {
         boolean hasDuplicate = false;
         for (int i = 0; i < taskList.listSize(); i++) {
@@ -41,10 +58,18 @@ public class DuplicateDetector {
         return hasDuplicate;
     }
 
+    /**
+     * @param localDate date of the task.
+     * @return boolean.
+     */
     public boolean checkForDuplicateDate(LocalDate localDate) {
         return localDate == null || localDate.equals(date);
     }
 
+    /**
+     * @param taskDescription task's description
+     * @return boolean.
+     */
     public boolean checkForDuplicateDescription(String taskDescription) {
         return taskDescription.equals(description);
     }

@@ -11,7 +11,7 @@ import duke.timeformatter.TimeFormatter;
 import duke.ui.Ui;
 
 /**
- * Represents a command that creates an event task.
+ * Represents a command that creates an Event task.
  */
 public class EventCommand extends UserCommand {
 
@@ -19,15 +19,17 @@ public class EventCommand extends UserCommand {
     private static final String DEFAULT_MESSAGE = "Got it. I've added this task:";
 
     /**
-     * @param userInput user's input.
+     * @param userInput User's input.
      */
     public EventCommand(String userInput) {
         super(userInput);
     }
 
     /**
-     * @param taskList task list containing all the tasks.
-     * @param ui       ui that prints output.
+     * Adds an Event task while checking for duplicates in TaskList.
+     *
+     * @param taskList TaskList that contains all the existing tasks.
+     * @param ui Ui that helps to print output.
      * @throws DukeException
      */
     @Override

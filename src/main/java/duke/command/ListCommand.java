@@ -1,28 +1,26 @@
 package duke.command;
 
-import duke.exceptions.DukeException;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
 
 /**
- * Represents a command that shows the task in the task list.
+ * Represents a command that displays all the Tasks in the TaskList.
  */
 public class ListCommand extends UserCommand {
 
     /**
-     * @param userInput user's input.
+     * @param userInput User's input.
      */
     public ListCommand(String userInput) {
         super(userInput);
     }
 
     /**
-     * @param taskList task list containing all the tasks.
-     * @param ui       ui that prints output.
-     * @throws DukeException
+     * @param taskList TaskList that contains all the existing tasks.
+     * @param ui Ui that helps to print output.
      */
     @Override
-    public String execute(TaskList taskList, Ui ui) throws DukeException {
+    public String execute(TaskList taskList, Ui ui) {
         return ui.printList(taskList);
     }
 }

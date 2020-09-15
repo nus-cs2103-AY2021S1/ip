@@ -8,12 +8,19 @@ public class Task implements Serializable {
     protected boolean isDone;
     protected LocalDate localDate;
 
+    /**
+     * @param description task's description.
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
         this.localDate = null;
     }
 
+    /**
+     * @param description task's description.
+     * @param localDate   date associated with the task.
+     */
     public Task(String description, LocalDate localDate) {
         this.description = description;
         this.isDone = false;

@@ -6,20 +6,20 @@ import duke.tasks.TaskList;
 import duke.ui.Ui;
 
 /**
- * Represents a command that is an invalid command
+ * Represents a command that is invalid.
  */
 public class InvalidCommand extends UserCommand {
 
     /**
-     * @param userInput user's input.
+     * @param userInput User's input.
      */
     public InvalidCommand(String userInput) {
         super(userInput);
     }
 
     /**
-     * @param taskList task list containing all the tasks.
-     * @param ui       ui that prints output.
+     * @param taskList TaskList that contains all the existing tasks.
+     * @param ui Ui that helps to print output.
      * @throws DukeException
      */
     @Override

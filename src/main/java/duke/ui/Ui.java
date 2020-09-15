@@ -48,14 +48,6 @@ public class Ui {
     }
 
     /**
-     * @return string containing the user's input.
-     */
-    public String readCommand() {
-        return in.nextLine();
-    }
-
-
-    /**
      * Prints the response to user's command.
      *
      * @param response string to be output.

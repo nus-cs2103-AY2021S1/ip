@@ -28,6 +28,9 @@ public class TaskList implements Serializable {
         this.tasks.add(task);
     }
 
+    /**
+     * @param index item index in the tasks' list.
+     */
     public void deleteTask(int index) {
         assert (index >= 0 && index < this.listSize());
         this.tasks.remove(index);
