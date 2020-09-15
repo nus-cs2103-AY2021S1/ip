@@ -25,17 +25,16 @@
 
 Adds a new todo task to current list of tasks.
 
-Format: 'todo <task>'
+Format: `todo <task>`
 
 Example of usage: `todo task one`
 
 Expected outcome:
-
-'''
+```
 Got it. I've added this task:
 [T][x]task one
 Now you have 1 tasks in your list.
-'''
+```
 
 
 ### `deadline` - Add a deadline task
