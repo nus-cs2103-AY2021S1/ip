@@ -5,6 +5,8 @@ import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
+
+
 public class DoneCommand extends Command {
     private String taskIdString;
 
@@ -34,6 +36,8 @@ public class DoneCommand extends Command {
                 return response;
             }
         } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("Please specify which task you have completed!");
+        } catch (NumberFormatException e) {
             throw new DukeException("Please specify which task you have completed!");
         }
     }

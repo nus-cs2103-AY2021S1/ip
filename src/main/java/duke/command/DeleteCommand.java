@@ -1,11 +1,8 @@
 package duke.command;
 
 import duke.exception.DukeException;
-
 import duke.storage.Storage;
-
 import duke.tasklist.TaskList;
-
 import duke.ui.Ui;
 
 public class DeleteCommand extends Command {
@@ -40,6 +37,8 @@ public class DeleteCommand extends Command {
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("Please specify which duke.task you want to delete!");
+        } catch (NumberFormatException e) {
+            throw new DukeException("Please specify which task you have completed!");
         }
     }
 
