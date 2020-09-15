@@ -34,7 +34,7 @@ Describe action and its outcome.
 
    ![](https://i.imgur.com/rxwISVd.png)
    
-- `Type 'exit' in DukeQ`
+- `Type 'bye' in DukeQ`
    `Outcome`: GUI exits
    
 - `Type 'list' in DukeQ`
