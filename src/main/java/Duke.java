@@ -17,14 +17,10 @@ public class Duke {
     private TaskList tasks;
     private Storage storage;
 
-    public static void main(String[] args) {
-        new Duke().run();
-    }
-
     public Duke() {
         this.ui = new Ui();
-        this.storage = new Storage(FILEPATH);
         try {
+            this.storage = new Storage(FILEPATH);
             this.tasks = new TaskList(storage.loadFile());
         } catch (FileNotFoundException | DukeException e) {
             ui.sayErrorMessage(e);
@@ -46,6 +42,10 @@ public class Duke {
                 isBye = Parser.isBye(userInput);
             }
         }
+    }
+
+    public static void main(String[] args) {
+        new Duke().run();
     }
 
     // For implementation of JavaFX.

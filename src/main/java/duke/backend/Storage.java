@@ -9,6 +9,8 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import java.nio.file.Path;
+
 import java.time.LocalDate;
 
 import java.util.ArrayList;
@@ -26,10 +28,20 @@ public class Storage {
     private static final String DEADLINE_ICON = "D";
     private static final String EVENT_ICON = "E";
 
-    private File file;
+    private Path path;
 
-    public Storage(String filepath) {
-        file = new File(filepath);
+    public Storage(String filePath) throws DukeException {
+        String dir = System.getProperty("user.dir");
+        path = Path.of(dir, filePath);
+        File file = new File(String.valueOf(path));
+        if (!file.exists()) {
+            file.getParentFile().mkdirs();
+        }
+        try {
+            file.createNewFile();
+        } catch (IOException e) {
+            throw new DukeException("Could not create tasks.txt");
+        }
     }
 
     /**
@@ -39,6 +51,7 @@ public class Storage {
      * @throws DukeException When no file is found.
      */
     public ArrayList<Task> loadFile() throws FileNotFoundException, DukeException {
+        File file = path.toFile();
         if (!file.exists()) {
             throw new FileNotFoundException("No file found");
         }
@@ -56,7 +69,7 @@ public class Storage {
      * @throws IOException When no file is found.
      */
     public void writeFile(TaskList tasks) throws IOException {
-        FileWriter writer = new FileWriter(file);
+        FileWriter writer = new FileWriter(path.toString());
         writer.write(tasks.toString());
         writer.close();
     }

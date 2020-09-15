@@ -31,7 +31,6 @@ dependencies {
 
 test {
     useJUnitPlatform()
-    systemProperty "file.encoding", "utf-8"
 
     testLogging {
         events "passed", "skipped", "failed"
@@ -45,18 +44,19 @@ test {
 }
 
 application {
-    mainClassName = "Duke"
+    mainClassName = "Launcher"
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "launcher"
     archiveClassifier = null
 }
 
 checkstyle {
-    toolVersion = '8.23'
+    toolVersion = '8.35'
 }
 
 run{
     standardInput = System.in
+    enableAssertions = true
 }
