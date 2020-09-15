@@ -5,8 +5,8 @@ import duke.util.TaskList;
 import duke.util.Ui;
 
 public class HelpCommand extends Command {
-    private String command;
     private static final String ALL = "all";
+    private String command;
 
     public HelpCommand(String command) {
         this.command = command.toLowerCase();

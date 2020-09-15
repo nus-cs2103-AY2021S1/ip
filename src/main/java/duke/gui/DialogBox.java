@@ -20,12 +20,14 @@ import javafx.scene.layout.HBox;
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
+    private static final String DUKE = "duke";
+    private static final String HUMAN = "human";
     @FXML
     private Label dialog;
     @FXML
     private ImageView displayPicture;
 
-    private DialogBox(String text, Image img) {
+    private DialogBox(String text, Image img, String type) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -34,10 +36,16 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         dialog.setText(text);
+        if (type == DUKE) {
+            dialog.setStyle("-fx-text-fill: blue;-fx-font-family: Consolas;");
+        }
+        if (text.contains("OOPS")) {
+            dialog.setStyle("-fx-text-fill: red;");
+        }
         displayPicture.setImage(img);
     }
+
 
     /**
      * Flips the dialog box such that the ImageView is on the left and text on the right.
@@ -50,11 +58,11 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        return new DialogBox(text, img, HUMAN);
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+        var db = new DialogBox(text, img, DUKE);
         db.flip();
         return db;
     }
