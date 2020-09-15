@@ -12,7 +12,7 @@ public class Duke {
     public TaskList tasks;
     public Ui ui;
 
-    public Duke(String filePath) {
+    public Duke(String filePath) throws IOException {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
@@ -47,8 +47,7 @@ public class Duke {
      * @throws IOException
      */
     public static void main(String[] args) throws IOException {
-        String home = System.getProperty("user.home");
-        boolean fileExists = new java.io.File(home + "/iP/File.txt").exists();
-        new Duke(home + "//iP//File.txt").run();
+        boolean fileExists = new java.io.File("File.txt").exists();
+        new Duke("File.txt").run();
     }
 }

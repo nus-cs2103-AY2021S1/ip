@@ -13,9 +13,10 @@ import java.util.Scanner;
 public class Storage {
     public static String filePath;
     public static File f;
-    public Storage(String filePath) {
+    public Storage(String filePath) throws IOException {
         this.filePath = filePath;
         this.f = new File(filePath);
+        this.f.createNewFile();
     }
 
     /**
@@ -107,10 +108,10 @@ public class Storage {
      * @throws IOException
      */
     public static void writeData(List<Task> list) throws IOException {
-        f.deleteOnExit(); // delete the old file
-        File file = new File(filePath);
-        file.createNewFile();
-        FileWriter fw = new FileWriter(file);
+        //f.deleteOnExit(); // delete the old file
+        //File file = new File(filePath);
+        //file.createNewFile();
+        FileWriter fw = new FileWriter(filePath);
         for (Task task: list) {
             String temp = Parser.unparse(task); // convert Task into String
             fw.write(temp + System.lineSeparator());

@@ -15,7 +15,7 @@ public class Parser {
     public static String process(String order) throws IOException {
         assert order.length() > 0 : "command length should be more at least 1 character";
         if (order.equals("bye")) {
-            Storage.writeData(TaskList.list); //write data into the new file before exiting
+            //Storage.writeData(TaskList.list); //write data into the new file before exiting
             return "    Bye-bye, see you next time!";
         } else if (order.equals("list")) {
             if (TaskList.list.size() == 0) {

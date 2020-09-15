@@ -56,7 +56,7 @@ public class MainWindow extends AnchorPane {
 
         if (input.equals("bye")) {
             userInput.setDisable(true);
-            PauseTransition pausetransition = new PauseTransition(Duration.seconds(0.0));
+            PauseTransition pausetransition = new PauseTransition(Duration.seconds(1));
             pausetransition.setOnFinished(event -> Platform.exit());
             pausetransition.play();
         }

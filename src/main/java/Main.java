@@ -10,9 +10,10 @@ import javafx.stage.Stage;
  * A GUI for Duke using FXML.
  */
 public class Main extends Application {
-    String home = System.getProperty("user.home");
+    private Duke duke = new Duke("File.txt");
 
-    private Duke duke = new Duke(home + "//iP//File.txt");
+    public Main() throws IOException {
+    }
 
     @Override
     public void start(Stage stage) {
