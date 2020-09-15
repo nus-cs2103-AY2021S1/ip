@@ -1,6 +1,7 @@
 package duke;
 
 import java.io.FileNotFoundException;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -80,6 +81,7 @@ public class GuiParser {
                     throw new DukeEmptyDescriptionException(EVENT);
                 default:
                     throw new DukeUnknownCommandException();
+
             }
         }
 
@@ -199,20 +201,30 @@ public class GuiParser {
      * @param list List of tasks.
      * @param storage Storage object.
      * @throws FileNotFoundException
+     * @throws DukeInvalidDateException
+     * @throws DukeInvalidArgumentException
      */
     private String dealWithDeadlineGui(String input, int indexOfSpace, TaskList taskList, ArrayList<Task> list, Storage storage)
-            throws FileNotFoundException {
+            throws FileNotFoundException, DukeInvalidDateException, DukeInvalidArgumentException {
         assert indexOfSpace > -1 : "Index of space should not be negative";
 
         int index = input.indexOf("/");
+        if (index < 0 || index + 4 > input.length()) {
+            throw new DukeInvalidArgumentException(DEADLINE);
+        }
         String deadlineName = input.substring(indexOfSpace + 1, index);
         String deadlineTime = input.substring(index + 4);
-        Deadline newDeadline = new Deadline(deadlineName, deadlineTime);
-        taskList.add(newDeadline);
-        storage.update(list);
-        String str = "Got it. I've added this task:" + "\n" + newDeadline.toString() + "\n" + "Now you have " +
-                list.size() + " task in the list.";
-        return str;
+        try {
+            Deadline newDeadline = new Deadline(deadlineName, deadlineTime);
+            taskList.add(newDeadline);
+            storage.update(list);
+            String str = "Got it. I've added this task:" + "\n" + newDeadline.toString() + "\n" + "Now you have " +
+                    list.size() + " task in the list.";
+            return str;
+        } catch (DateTimeParseException e) {
+            throw new DukeInvalidDateException(DEADLINE);
+        }
+
     }
 
     /**
@@ -223,20 +235,29 @@ public class GuiParser {
      * @param list List of tasks.
      * @param storage Storage object.
      * @throws FileNotFoundException
+     * @throws DukeInvalidDateException
+     * @throws DukeInvalidArgumentException
      */
     private String dealWithEventGui(String input, int indexOfSpace, TaskList taskList, ArrayList<Task> list, Storage storage)
-            throws FileNotFoundException {
+            throws FileNotFoundException, DukeInvalidDateException, DukeInvalidArgumentException {
         assert indexOfSpace > -1 : "Index of space should not be negative";
 
         int index = input.indexOf("/");
+        if (index < 0 || index + 4 > input.length()) {
+            throw new DukeInvalidArgumentException(EVENT);
+        }
         String eventName = input.substring(indexOfSpace + 1, index);
         String eventTime = input.substring(index + 4);
-        Event newEvent = new Event(eventName, eventTime);
-        taskList.add(newEvent);
-        storage.update(list);
-        String str = "Got it. I've added this task:" + "\n" + newEvent.toString() + "\n" + "Now you have " +
-                list.size() + " task in the list.";
-        return str;
+        try {
+            Event newEvent = new Event(eventName, eventTime);
+            taskList.add(newEvent);
+            storage.update(list);
+            String str = "Got it. I've added this task:" + "\n" + newEvent.toString() + "\n" + "Now you have " +
+                    list.size() + " task in the list.";
+            return str;
+        } catch (DateTimeParseException e) {
+            throw new DukeInvalidDateException(EVENT);
+        }
     }
 
     /**

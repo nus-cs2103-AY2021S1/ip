@@ -5,7 +5,7 @@ package duke;
  */
 public class Todo extends Task {
 
-    private final String ICON = "[D]";
+    private final String ICON = "[T]";
 
     /**
      * Class constructor.
