@@ -23,7 +23,7 @@ Lists out all the tasks in the user’s list in the same order as they were entere
 ### Find Task
 Lists out all the tasks that match user’s keyword even if the keyword is incomplete.
 
-## Exit Program
+### Exit Program
 Exits the program.
  
 ## Usage
