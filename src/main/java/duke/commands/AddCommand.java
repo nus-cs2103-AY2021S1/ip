@@ -31,6 +31,7 @@ public class AddCommand extends Command {
      * @param taskList TaskList containing Tasks.
      * @param ui Ui that handles system output.
      * @param storage Storage that handles file saving.
+     * @return outputString Command output.
      * @throws IOException If file don't exist.
      * @throws DukeException If input is not recognised.
      */
@@ -46,8 +47,6 @@ public class AddCommand extends Command {
                 break;
             case "deadline":
                 due = parsedStrings[2];
-//                System.out.println(description);
-//                System.out.println(due);
                 newTask = new DeadlineTask(description, due);
                 break;
             case "event":

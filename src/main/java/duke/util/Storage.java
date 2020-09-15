@@ -37,7 +37,7 @@ public class Storage {
     public Task generateTaskFromFileString(String fileString) throws DukeException {
         String[] strings = fileString.split("[|]");
         String type = strings[0].trim();
-        boolean isCompleted = (strings[1].trim().equals("1")) ? true : false;
+        boolean isCompleted = strings[1].trim().equals("1");
         String desc = strings[2].trim();
         switch (type) {
             case "T":
