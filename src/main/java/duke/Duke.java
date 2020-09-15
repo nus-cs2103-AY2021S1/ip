@@ -15,7 +15,11 @@ public class Duke {
     private final Parser parser;
 
     public Duke(String filename) {
-        taskList = new TaskList(filename);
+        if (filename.isEmpty()) {
+            taskList = new TaskList();
+        } else {
+            taskList = new TaskList(filename);
+        }
         Ui.init();
         Ui.greet();
         parser = new Parser(taskList);
