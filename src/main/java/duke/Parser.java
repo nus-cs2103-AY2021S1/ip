@@ -1,8 +1,18 @@
 package duke;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.Scanner;
 
 import command.*;
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.Todo;
 
 /**
  * The Parser class to handle the parsing of user inputs to the appropriate commands.
@@ -10,6 +20,35 @@ import command.*;
  * @author  Ryan Lim
  */
 public class Parser {
+    private HashMap<String, String> aliasToCommandMap;
+
+    public Parser(File aliases) throws IOException {
+        this.aliasToCommandMap = new HashMap<>();
+        FileReader fr = new FileReader(aliases); //reads the file
+        BufferedReader br = new BufferedReader(fr); //creates a buffering character input stream
+        String line = br.readLine();
+        while (line != null) {
+            String[] aliasAndCommand = line.split("\\|");
+            String alias = aliasAndCommand[0];
+            String command = aliasAndCommand[1];
+            line = br.readLine();
+            aliasToCommandMap.put(alias, command);
+        }
+        fr.close();
+    }
+
+    public Parser() {
+        this.aliasToCommandMap = new HashMap<>();
+    }
+
+    private String getCommandFrom(String alias) {
+        String command = aliasToCommandMap.get(alias);
+        return command == null ? alias : command ;
+    }
+
+    public HashMap<String, String> getAliasToCommandMap() {
+        return this.aliasToCommandMap;
+    }
 
     /**
      *  returns the command (and its parameters) based on the user input that has been parsed
@@ -21,9 +60,9 @@ public class Parser {
     public Command parse(String input) throws IllegalArgumentException {
         assert input.length() > 0 : "no input given";
         Scanner sc = new Scanner(input);
-        String command = sc.next().toLowerCase();
-        String parameters = input.replace(command,"");
-        switch (command) {
+        String alias = sc.next().toLowerCase();
+        String parameters = input.replace(alias,"");
+        switch (this.getCommandFrom(alias)) {
         case "list":
             return new GetTaskListCommand();
         case "date":

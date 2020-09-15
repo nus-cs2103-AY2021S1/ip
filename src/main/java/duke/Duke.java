@@ -23,21 +23,28 @@ public class Duke {
     /** Parser which handles user input */
     private final Parser parser;
     /** Storage which manages the saving of tasks from the session into the hard disk  */
-    private final Storage storage;
+    private final Storage taskStorage;
+    private final Storage aliasStorage;
 
     /**
      * initialises Duke bot
      */
     public Duke() {
+        Parser parser;
+        TaskList taskList;
         this.ui = new Ui();
-        this.parser = new Parser();
-        this.storage = new Storage("./data/data.txt");
+        this.taskStorage = new Storage("./data/data.txt");
+        this.aliasStorage = new Storage("./data/alias.txt");
         try {
-            this.taskList = new TaskList(storage.load());
+            parser = new Parser(this.aliasStorage.load());
+            taskList = new TaskList(this.taskStorage.load());
         } catch (IOException e) {
             this.ui.printLoadingError();
-            this.taskList = new TaskList();
+            parser = new Parser();
+            taskList = new TaskList();
         }
+        this.parser = parser;
+        this.taskList = taskList;
         this.ui.printGreeting();
     }
 
@@ -60,7 +67,8 @@ public class Duke {
      */
     private void updateFile() {
         try {
-            this.storage.save(this.taskList);
+            this.taskStorage.save(this.taskList);
+            this.aliasStorage.save(this.parser.getAliasToCommandMap());
         } catch (IOException e) {
             this.ui.printErrorInSaving();
         }
@@ -71,14 +79,14 @@ public class Duke {
      *
      * @param userInput commands and parameters that the user inputs through the user interface
      */
-    public String run(String userInput) {
+    public Result run(String userInput) {
         Command command = this.parser.parse(userInput);
         if (command.getClass() == ByeCommand.class) {
             this.updateFile();
             this.isRunning = false;
         }
-        Result result = command.execute(this.taskList, this.storage);
-        return result.toString();
+        Result result = command.execute(this.taskList, this.taskStorage);
+        return result;
     }
 
     /**

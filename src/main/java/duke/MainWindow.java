@@ -55,7 +55,7 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         String response;
         try {
-            response = duke.run(input);
+            response = duke.run(input).toString();
         } catch (IllegalArgumentException e) {
             response = duke.returnUnrecognizableCommandError();
         }
