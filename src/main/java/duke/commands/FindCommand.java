@@ -59,7 +59,7 @@ public class FindCommand extends Command {
         if (isNumberOrDescriptionAbsent()) {
             throw new FindException(false, true, "");
         }
-        String find = commandDescription.substring(5);
+        String find = userInput.substring(5);
         String[] strings = find.split(" ", -2); // keywords split into different Strings
         setTasks(strings, tasks);
         if (this.tasks.size() == 0) {

@@ -191,6 +191,18 @@ public class Event extends Task {
         }
         return e;
     }
+
+    /**
+     * This method creates a deadline task by checking whether the date and/or time given is in the correct
+     * format. If it is then Deadline task is returned else, DeadlineException is returned.
+     *
+     * @param name description of Deadline task
+     * @param start gives the dateTime of the start to check whether they are in the correct format
+     * @param end gives the dateTime of the end to check whether they are in the correct format
+     * @param isDone true if task is done and false if not done and is assigned to isDone variable
+     * @return deadline if the dateTime is in the correct format
+     * @throws DeadlineException if the dateTime is in the incorrect format
+     */
     public static Event eventTask(String name, String start, String end, boolean isDone) throws DukeException {
         Event e;
         try {

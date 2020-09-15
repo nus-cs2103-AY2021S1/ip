@@ -61,7 +61,7 @@ public class TodoCommand extends AddCommand {
      * @return name of task
      */
     private String todoDescription() {
-        return commandDescription.substring(lengthOfKeyword + 1);
+        return userInput.substring(lengthOfKeyword + 1);
     }
 
 }

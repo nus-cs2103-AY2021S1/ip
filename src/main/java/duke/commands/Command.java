@@ -13,17 +13,17 @@ public abstract class Command {
      * commandName which contains information on task and details to perform task
      * isExit is used to tell whether program terminates, where id true, it terminates
      */
-    protected String commandDescription; //the String input given by user
+    protected String userInput; //the String input given by user
     protected int lengthOfKeyword; //length of keyword eg for find is 4
     private boolean isExit = false;
 
     /**
      * Assigns string to a value
      *
-     * @param commandDescription assigns this.string to string
+     * @param userInput assigns this.string to string
      */
-    public Command(String commandDescription, int lengthOfKeyword) {
-        this.commandDescription = commandDescription;
+    public Command(String userInput, int lengthOfKeyword) {
+        this.userInput = userInput;
         this.lengthOfKeyword = lengthOfKeyword;
     }
 
@@ -51,7 +51,7 @@ public abstract class Command {
      * @return true is the number/description is absent and false if number is present.
      */
     protected boolean isNumberOrDescriptionAbsent() {
-        return commandDescription.length() == lengthOfKeyword || commandDescription.length() == lengthOfKeyword + 1;
+        return userInput.length() == lengthOfKeyword || userInput.length() == lengthOfKeyword + 1;
         //since the delete number appears after length of keyword/+1
     }
 }

@@ -37,7 +37,7 @@ public class DeleteCommand extends Command {
             if (isNumberOrDescriptionAbsent()) {
                 throw new DeleteException(true, false); //when number is absent
             } else {
-                int id = Integer.parseInt(commandDescription.substring(lengthOfKeyword + 1));
+                int id = Integer.parseInt(userInput.substring(lengthOfKeyword + 1));
                 if (isNumberNotInList(id, tasks)) {
                     throw new DeleteException(false, true); //when ID is more than number of tasks in list
                 } else {

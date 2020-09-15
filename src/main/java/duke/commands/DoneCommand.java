@@ -53,7 +53,7 @@ public class DoneCommand extends Command {
         if (isNumberOrDescriptionAbsent()) {
             throw new DoneException(true, false); //when number is absent
         } else {
-            int iD = Integer.parseInt(commandDescription.substring(lengthOfKeyword + 1));
+            int iD = Integer.parseInt(userInput.substring(lengthOfKeyword + 1));
             if (isNumberNotInList(iD, tasks)) {
                 throw new DoneException(false, true); //when number is not in list
             } else {

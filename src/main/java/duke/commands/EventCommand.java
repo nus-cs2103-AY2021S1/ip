@@ -41,7 +41,7 @@ public class EventCommand extends AddCommand {
             if (isNumberOrDescriptionAbsent()) {
                 throw new EventException(true, false, false, false, false);
             }
-            return Event.addEventTask(tasks, ui, storage, commandDescription);
+            return Event.addEventTask(tasks, ui, storage, userInput);
             //Returns string if correct input and updates tasks and file in storage if correct input by user, else
             // throws exception
         } catch (DukeException dukeException) {

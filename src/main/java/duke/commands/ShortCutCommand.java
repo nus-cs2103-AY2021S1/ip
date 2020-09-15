@@ -57,7 +57,7 @@ public class ShortCutCommand extends Command {
         if (isNumberOrDescriptionAbsent()) {
             throw new ShortCutException(true, false, false, false, ""); //if description is absent
         }
-        String[] splitData = splitDescription(commandDescription);
+        String[] splitData = splitDescription(userInput);
         if (shortCutPresent(splitData[1])) {
             throw new ShortCutException(false, false, true, false, splitData[1]);
             //if short cut is already present
@@ -92,10 +92,10 @@ public class ShortCutCommand extends Command {
             }
             originalKeyWord = originalKeyWord + input.charAt(i);
         }
-        if (!originalOfShortFormPresent || commandDescription.substring(index + 1).length() == 0) {
+        if (!originalOfShortFormPresent || userInput.substring(index + 1).length() == 0) {
             throw new ShortCutException(false, true, false, false, ""); //happens when there is nothing after keyword
         }
-        String[] splitData = new String[]{originalKeyWord, commandDescription.substring(index + 1)};
+        String[] splitData = new String[]{originalKeyWord, userInput.substring(index + 1)};
         return splitData;
     }
 
