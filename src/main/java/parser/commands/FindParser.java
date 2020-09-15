@@ -29,7 +29,7 @@ public class FindParser {
                 throw Ui.DukeException.empty("find");
             }
         } catch (Ui.DukeException e) {
-            return e.getMessage();
+            return "Error: " + e.getMessage();
         }
     }
 }

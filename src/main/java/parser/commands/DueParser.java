@@ -5,7 +5,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 import data.task.Task;
-import storage.Storage;
 import tasklist.TaskList;
 
 
@@ -30,7 +29,7 @@ public class DueParser {
             return response.toString();
         } catch (Exception e) {
             // time can't be parsed
-            return e.getMessage();
+            return "Error: " + e.getMessage();
         }
     }
 }

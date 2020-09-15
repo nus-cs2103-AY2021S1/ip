@@ -198,7 +198,7 @@ public class TaskList {
      * @return String stating task deleted
      */
     public String getDeleteString(int taskNumber) {
-        StringBuilder response = new StringBuilder("Deleted task:");
+        StringBuilder response = new StringBuilder("Deleted task:\n");
         Task currentTask = storage.get(taskNumber);
         response.append(currentTask).append("\n");
         storage.remove(taskNumber);
@@ -208,7 +208,7 @@ public class TaskList {
 
 
     public String getUpdateString(int taskNumber, String changeField, String changeTo) {
-        StringBuilder response = new StringBuilder("Updated task:");
+        StringBuilder response = new StringBuilder("Updated task:\n");
         Task currentTask = storage.get(taskNumber);
         switch (changeField) {
         case "name":

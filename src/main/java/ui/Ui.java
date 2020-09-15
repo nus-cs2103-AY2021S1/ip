@@ -104,7 +104,7 @@ public class Ui {
      * @return String of list of tasks
      */
     public static String getListOutString(ArrayList<Task> storage) {
-        StringBuilder response = new StringBuilder("Here's your tasks \n");
+        StringBuilder response = new StringBuilder("Here's your tasks:\n");
         for (int i = 0; i < storage.size(); i++) {
             // list starts from 1
             Task currentTask = storage.get(i);
@@ -140,7 +140,7 @@ public class Ui {
      * @return list of filtered tasks
      */
     public static String getFilterListString(String words, ArrayList<Task> storage) {
-        StringBuilder response = new StringBuilder("Here's your matching tasks \n");
+        StringBuilder response = new StringBuilder("Here's your matching tasks:\n");
         for (int i = 0; i < storage.size(); i++) {
             // list starts from 1
             Task currentTask = storage.get(i);
