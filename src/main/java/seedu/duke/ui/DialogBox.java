@@ -37,9 +37,14 @@ public class DialogBox extends HBox {
 
         this.dialog.setText(text);
         this.displayPicture.setImage(img);
+    }
 
-        Circle cir2 = new Circle(250, 250, 120);
-        cir2.setFill(new ImagePattern(img));
+    /**
+     * Changes the background color of the dialogue box.
+     * @param box DialogBox to be changed.
+     */
+    private static void styleBox(DialogBox box) {
+        box.dialog.setStyle("-fx-background-color: #f2dfeb;");
     }
 
     /**
@@ -58,6 +63,7 @@ public class DialogBox extends HBox {
 
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
+        styleBox(db);
         db.flip();
         return db;
     }
