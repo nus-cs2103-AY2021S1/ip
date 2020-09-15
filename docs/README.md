@@ -3,7 +3,7 @@ Duke is a chat-bot application that helps you to manage your daily tasks through
 
 * [Quick Start](#quick-start)
 * [Features](#features)
-* [Feature Details](#features)
+* [Feature Details](#feature-details)
 
 <img src="https://raw.githubusercontent.com/afroneth/ip/master/docs/Ui.png" width="400">
 

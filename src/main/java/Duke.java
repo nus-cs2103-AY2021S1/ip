@@ -1,3 +1,5 @@
+import java.io.File;
+
 /**
  * Main driver class for Duke.
  */
@@ -22,6 +24,8 @@ public class Duke {
     public Duke() {
         this.ui = new Ui();
         this.storage = new Storage("data/duke.txt");
+        File file = new File("data");
+        file.mkdir();
         try {
             this.arrayOfTasks = new TaskList(storage.load());
         } catch (DukeException error) {
