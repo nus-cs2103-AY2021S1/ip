@@ -1,12 +1,12 @@
 package duke.command;
 
+import java.util.List;
+
 import duke.utils.DukeException;
 import duke.utils.DukeFileHandler;
 import duke.utils.TaskList;
 import duke.utils.Ui;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class ListCommand extends Command {
     protected static List<String> aliases;

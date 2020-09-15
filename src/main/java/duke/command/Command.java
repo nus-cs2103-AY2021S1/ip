@@ -82,11 +82,11 @@ public abstract class Command {
         DoneCommand.aliases.add("done");
 
         EventCommand.aliases = new ArrayList<>();
-        EventCommand.aliases.add("ev");
+        EventCommand.aliases.add("e");
         EventCommand.aliases.add("event");
 
         ExitCommand.aliases = new ArrayList<>();
-        ExitCommand.aliases.add("ex");
+        ExitCommand.aliases.add("b");
         ExitCommand.aliases.add("bye");
 
         FindCommand.aliases = new ArrayList<>();

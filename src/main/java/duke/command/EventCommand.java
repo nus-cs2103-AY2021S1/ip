@@ -1,19 +1,19 @@
 package duke.command;
 
+import java.util.List;
+
 import duke.task.Event;
 import duke.utils.DukeException;
 import duke.utils.DukeFileHandler;
 import duke.utils.TaskList;
 import duke.utils.Ui;
 
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class EventCommand extends Command {
+    protected static List<String> aliases;
     private final String description;
     private final String at;
-    protected static List<String> aliases;
 
 
     public EventCommand(String description, String at) {

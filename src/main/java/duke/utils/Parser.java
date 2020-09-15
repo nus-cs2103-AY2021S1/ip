@@ -1,6 +1,5 @@
 package duke.utils;
 
-import duke.Duke;
 import duke.command.ClearCommand;
 import duke.command.Command;
 import duke.command.CommandType;

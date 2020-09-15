@@ -1,6 +1,5 @@
 package duke.utils;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -100,19 +99,8 @@ public class TaskList {
      *
      * @param keyword string the user wants to find.
      * @return List of tasks with the keyword.
-     * @throws DukeException when the string does not contain the keyword.
      */
-    public List<Task> tasksContainingKeywords(String keyword) throws DukeException {
-        List<Task> containsKeywords = new ArrayList<>();
-        for (Task task : list) {
-            if (task.getDescription().contains(keyword)) {
-                containsKeywords.add(task);
-            }
-
-        }
-
+    public List<Task> tasksContainingKeywords(String keyword) {
         return list.stream().filter(x -> x.getDescription().contains(keyword)).collect(Collectors.toList());
-
-//        return containsKeywords;
     }
 }

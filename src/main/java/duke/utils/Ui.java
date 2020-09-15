@@ -60,13 +60,15 @@ public class Ui {
         displayString(logo
                 + "\n\nHello! I'm duke.Duke, your Windows duke.task.Task Manager"
                 + "\nValid command:"
-                + "\n- list"
-                + "\n- done <num>"
-                + "\n- todo <task>"
-                + "\n- delete <num>"
-                + "\n- deadline <task> /by <yyyy-mm-dd>"
-                + "\n- event <task> /at <yyyy-mm-dd>"
-                + "\n- find <keyword>\n");
+                + "\n- list (l)"
+                + "\n- done (do) <num>"
+                + "\n- todo (t) <task>"
+                + "\n- delete (d) <num>"
+                + "\n- deadline (de) <task> /by <yyyy-mm-dd>"
+                + "\n- event (e) <task> /at <yyyy-mm-dd>"
+                + "\n- find (f) <keyword>"
+                + "\n bye (b)"
+                + "\n- clear (c)\n");
 
 
     }
