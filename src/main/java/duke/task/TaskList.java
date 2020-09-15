@@ -85,7 +85,6 @@ public class TaskList {
         assert n <= taskList.size();
         String message = "Noted. I've removed this task:\n";
         Task task = taskList.get(n - 1);
-        System.out.println(INDENTATION + "  " + task.toString());
         taskList.remove(n - 1);
         message += INDENTATION + task.toString() + "\n";
         message += "Now you have " + taskList.size() + " tasks in the list.\n";
