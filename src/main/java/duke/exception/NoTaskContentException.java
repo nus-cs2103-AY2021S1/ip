@@ -7,10 +7,8 @@ public class NoTaskContentException extends DukeException {
 
     /**
      * Constructs a NoTaskContentException.
-     *
-     * @param errorMessage Error Message to show.
      */
-    public NoTaskContentException(String errorMessage) {
-        super(errorMessage);
+    public NoTaskContentException() {
+        super("OOPS!!! The content of a task cannot be empty.");
     }
 }

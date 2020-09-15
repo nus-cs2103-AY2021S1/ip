@@ -2,30 +2,29 @@ package duke.command;
 
 import duke.storage.Storage;
 import duke.task.Task;
-import duke.task.Todo;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
 /**
- * Represents an action to add new Todo.
+ * Represents an action to add new Task.
  */
-public class AddTodoCommand extends Command {
+public class AddTaskCommand extends Command {
 
-    /** Description of Todo to be added */
-    private String description;
+    /** The Task to be added. */
+    private Task task;
 
     /**
-     * Constructs a <code>AddTodoCommand</code> object.
+     * Constructs a <code>AddTaskCommand</code> object.
      *
-     * @param description Description of Todo to be added.
+     * @param task Task to be added.
      */
-    public AddTodoCommand(String description) {
+    public AddTaskCommand(Task task) {
         super(false);
-        this.description = description;
+        this.task = task;
     }
 
     /**
-     * Adds a Todo to the TaskList and notify the user if successful.
+     * Adds a Task to the TaskList and notify the user if successful.
      *
      * @param tasks TaskList to store Task.
      * @param ui Ui to interact with users.
@@ -34,10 +33,9 @@ public class AddTodoCommand extends Command {
      */
     @Override
     public CommandResponse execute(TaskList tasks, Ui ui, Storage storage) {
-        Task task = new Todo(description);
         tasks.addTask(task);
         storage.save(tasks);
-        String responseMessage = "Got it. I've added this todo: \n\t   "
+        String responseMessage = "Got it. I've added this task: \n\t   "
                 + task + "\n "
                 + "Now you have "
                 + tasks.getNumberOfTaskDescription()
@@ -51,11 +49,12 @@ public class AddTodoCommand extends Command {
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
-        } else if (obj instanceof AddTodoCommand) {
-            AddTodoCommand c = (AddTodoCommand) obj;
-            return c.description.equals(this.description) && c.getIsExit() == this.getIsExit();
+        } else if (obj instanceof AddTaskCommand) {
+            AddTaskCommand c = (AddTaskCommand) obj;
+            return c.task.equals(task) && c.getIsExit() == this.getIsExit();
         } else {
             return false;
         }
     }
 }
+
