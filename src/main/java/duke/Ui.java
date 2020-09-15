@@ -6,13 +6,13 @@ package duke;
 public class Ui {
 
     /** Standard messages as part of the UI's design. */
+    static final String MESSAGE_GOODBYE = "Bye. Hope to see you again soon!";
     private static final String MESSAGE_WELCOME = "Hello! I'm Duke, your list manager!\n"
             + "Before we get started, let me know if you would like to:\n"
             + "    i)  LOAD   <filetype> <filepath> : fetch a list you\n"
             + "        have made before, or\n"
             + "   ii)  CREATE <filetype> <filepath> : create a new list\n"
             + "        from scratch.";
-    private static final String MESSAGE_GOODBYE = "Bye. Hope to see you again soon!";
     private static final String MESSAGE_TASK_ADDED = "Got it. I've added this task:";
     private static final String MESSAGE_TASK_DELETED = "Noted. I've removed this task:";
     private static final String MESSAGE_TASKS_CURRENT = "Now you have %d task(s) in the list.";
