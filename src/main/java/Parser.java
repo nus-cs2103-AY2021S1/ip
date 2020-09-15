@@ -12,7 +12,7 @@ public class Parser {
      */
     public static Command parseCommand(String userInput)
             throws DukeException {
-        String[] input = userInput.trim().toLowerCase().split(" ", 2);
+        String[] input = userInput.trim().split(" ", 2);
         String commandWord = input[0];
         String arguments = "";
 
