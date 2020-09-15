@@ -11,65 +11,33 @@ import duke.model.task.Task;
 public class Ui {
     static final String WELCOME = "Hello. I am Claude! What may I do for you today?";
     static final String GOODBYE = "Goodbye! Hope to see you again soon!";
-    static final String LINE = "______________________________";
-    private Scanner sc;
 
-    public Ui() {
-        this.sc = new Scanner(System.in);
-    }
-
-    /**
-     * Reads command input by user.
-     *
-     * @return String to be processed by parser.
-     */
-    public String readCommand() {
-        if (sc.hasNext()) {
-            return sc.nextLine();
-        } else {
-            return "";
-        }
-    }
-
-    /**
-     * Prints a line that serves as a divider.
-     */
-    public void showLine() {
-        System.out.println(LINE);
-    }
+    public Ui() {}
 
     /**
      * Prints welcome message.
      */
-    public void showWelcome() {
-        System.out.println(WELCOME);
+    public String showWelcome() {
+        return WELCOME;
     }
 
     /**
      * Prints goodbye message.
      */
-    public void showGoodbye() {
-        System.out.println(GOODBYE);
-    }
-
-    /**
-     * Prints output from a Command.
-     * @param s String to be printed.
-     */
-    public void showDetails(String s) {
-        System.out.println(s);
+    public String showGoodbye() {
+        return (GOODBYE);
     }
 
     /**
      * Prints a given ArrayList of Tasks.
      * @param taskList ArrayList of Tasks to be printed.
      */
-    public void showTaskList(ArrayList<Task> taskList) {
+    public String buildTaskList(ArrayList<Task> taskList) {
         String s = "";
         for (int i = 0; i < taskList.size(); i++) {
             s = s = s + (i + 1) + ". " + taskList.get(i) + "\n";
         }
-        showDetails(s);
+        return s;
     }
 
     /**

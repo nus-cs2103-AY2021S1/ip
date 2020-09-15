@@ -29,7 +29,7 @@ public class DoneCommand extends Command {
      * @throws DukeException If command is not properly formatted.
      */
     @Override
-    public void execute(TaskManager tm, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskManager tm, Ui ui, Storage storage) throws DukeException {
         String[] commandDetails = command.split(" ", 2);
         if (commandDetails.length == 1) {
             throw new DukeException("Done Index not provided!");
@@ -38,7 +38,7 @@ public class DoneCommand extends Command {
             int doneIndex = Integer.parseInt(commandDetails[1]) - 1;
             Task doneTask = tm.getTask(doneIndex);
             tm.markTaskDone(doneIndex);
-            ui.showDetails("Task marked as done: " + doneTask);
+            return ("Task marked as done: " + doneTask);
         } catch (NumberFormatException e) {
             throw new DukeException("Index is not a number!");
         }

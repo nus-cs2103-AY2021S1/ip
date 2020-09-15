@@ -34,7 +34,7 @@ public class AddCommand extends Command {
      * @throws DukeException If command is not properly formatted.
      */
     @Override
-    public void execute(TaskManager tm, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskManager tm, Ui ui, Storage storage) throws DukeException {
         if (command.startsWith("deadline")) {
             if (command.length() <= 9) {
                 throw new DukeException("Description of a deadline cannot be empty!");
@@ -47,7 +47,7 @@ public class AddCommand extends Command {
                 LocalDate dlDate = LocalDate.parse(commandDetails[1]);
                 Deadline deadline = new Deadline(commandDetails[0], dlDate);
                 tm.addTask(deadline);
-                ui.showDetails("Task added: " + deadline);
+                return ("Task added: " + deadline);
             } catch (DateTimeParseException e) {
                 throw new DukeException("Invalid DateTime format. Please use YYYY-MM-DD.");
             }
@@ -63,7 +63,7 @@ public class AddCommand extends Command {
                 LocalDate eventDate = LocalDate.parse(commandDetails[1]);
                 Event event = new Event(commandDetails[0], eventDate);
                 tm.addTask(event);
-                ui.showDetails("Task added: " + event);
+                return ("Task added: " + event);
             } catch (DateTimeParseException e) {
                 throw new DukeException("Invalid DateTime format. Please use YYYY-MM-DD.");
             }
@@ -74,7 +74,7 @@ public class AddCommand extends Command {
             String commandDetails = command.substring(5);
             ToDo todo = new ToDo(commandDetails);
             tm.addTask(todo);
-            ui.showDetails("Task added: " + todo);
+            return ("Task added: " + todo);
         } else {
             throw new DukeException("Command not recognised!");
         }

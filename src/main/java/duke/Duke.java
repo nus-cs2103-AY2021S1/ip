@@ -1,7 +1,5 @@
 package duke;
 
-import java.io.IOException;
-
 import duke.exceptions.DukeException;
 import duke.logic.CommandParser;
 import duke.logic.commands.Command;
@@ -37,33 +35,17 @@ public class Duke {
     }
 
     /**
-     * This is the method that processes user input and looks out for the exit signal.
-     */
-    public void run() {
-        ui.showWelcome();;
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine();
-                Command c = CommandParser.parse(fullCommand);
-                c.execute(tm, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e);
-            } finally {
-                ui.showLine();
-            }
-        }
-    }
-
-    /**
-     * This is the main method that runs Duke.
+     * Generates response to command input.
      *
-     * @param args Unused.
-     * @throws IOException On input error.
+     * @param input String input by user.
+     * @return Response after command is executed.
      */
-    public static void main(String[] args) throws IOException {
-        new Duke().run();
+    public String getResponse(String input) {
+        try {
+            Command c = CommandParser.parse(input);
+            return c.execute(tm, ui, storage);
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
     }
 }

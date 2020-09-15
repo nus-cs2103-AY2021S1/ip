@@ -31,7 +31,7 @@ public class ListCommand extends Command {
      * @throws DukeException If command is not properly formatted.
      */
     @Override
-    public void execute(TaskManager tm, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskManager tm, Ui ui, Storage storage) throws DukeException {
         String[] commandDetails = command.split(" ", 2);
         if (commandDetails.length != 1) {
             throw new DukeException("List command should not include extra parameters!");
@@ -39,9 +39,9 @@ public class ListCommand extends Command {
         ArrayList<Task> taskList = tm.getTaskList();
         if (taskList.isEmpty()) {
             String s = "List is empty!";
-            ui.showDetails(s);
+            return s;
         } else {
-            ui.showTaskList(taskList);
+            return ui.buildTaskList(taskList);
         }
     }
 }
