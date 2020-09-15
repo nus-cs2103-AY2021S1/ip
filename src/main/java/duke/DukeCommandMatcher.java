@@ -7,6 +7,7 @@ import java.util.Objects;
 
 import duke.exceptions.CommandNotFoundException;
 import duke.exceptions.DateFormatException;
+import duke.exceptions.DurationFormatException;
 import duke.exceptions.LackOfTimeException;
 import duke.exceptions.NullCommandContentException;
 import duke.exceptions.NullCommandException;
@@ -53,7 +54,7 @@ public class DukeCommandMatcher {
      */
     public String handleCommand(String command) throws CommandNotFoundException, NullCommandException,
             LackOfTimeException, NullCommandContentException, TaskOutOfBoundException, TaskNotSpecifyException,
-            DateFormatException {
+            DateFormatException, DurationFormatException {
         if (Objects.equals(command, "")) {
             throw new NullCommandException(command);
         }
@@ -136,7 +137,7 @@ public class DukeCommandMatcher {
         }
 
         try {
-            String standardDate = UtilFunction.formatDateToStandard(splitDeadline[1]);
+            String standardDate = UtilFunction.formatDateTimeToStandard(splitDeadline[1]);
             deadline = new Deadline(splitDeadline[0], standardDate);
         } catch (IndexOutOfBoundsException e) {
             throw new LackOfTimeException("The time cannot be empty", "Duke.Deadline");
@@ -145,7 +146,7 @@ public class DukeCommandMatcher {
     }
 
     private String handleEvent(String[] eventStr) throws NullCommandContentException, LackOfTimeException,
-            DateFormatException {
+            DateFormatException, DurationFormatException {
         Event event;
         String[] splitEventStr;
         try {
@@ -158,7 +159,7 @@ public class DukeCommandMatcher {
             throw new NullCommandContentException("Description cannot be null", "Event");
         }
         try {
-            String standardDate = UtilFunction.formatDateToStandard(splitEventStr[1]);
+            String standardDate = UtilFunction.formatDurationToStandard(splitEventStr[1]);
             event = new Event(splitEventStr[0], standardDate);
         } catch (IndexOutOfBoundsException e) {
             throw new LackOfTimeException("The time cannot be empty", "Event");

@@ -2,6 +2,8 @@ package duke.dateformats;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.temporal.TemporalAdjusters;
 import java.util.Arrays;
 import java.util.List;
@@ -21,10 +23,11 @@ public class DayOnlyFormat implements DateFormat {
      * @param date input date string
      * @return
      */
-    public LocalDate mapToLocalDate(String date) {
+    public LocalDateTime mapToLocalDateTime(String date) {
         try {
             return days.stream().filter(day -> date.toUpperCase().matches(day)).map(day ->
-                            LocalDate.now().with(TemporalAdjusters.next(DayOfWeek.of(days.indexOf(day) + 1)))
+                            LocalDateTime.of(LocalDate.now(), LocalTime.of(0, 0))
+                                    .with(TemporalAdjusters.next(DayOfWeek.of(days.indexOf(day) + 1)))
             ).collect(Collectors.toList()).get(0);
         } catch (IndexOutOfBoundsException e) {
             assert false : "should only be called after checked";

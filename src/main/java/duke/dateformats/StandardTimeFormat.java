@@ -1,27 +1,22 @@
 package duke.dateformats;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
-import java.time.temporal.ChronoField;
 
 import duke.exceptions.DateFormatException;
 
-
-public class StandardDateFormat implements DateFormat {
+public class StandardTimeFormat implements DateFormat {
     //Solution below adapted from https://stackoverflow.com/questions/40175196
     private static final DateTimeFormatter INPUTDATEFORMATTER =
             new DateTimeFormatterBuilder().appendPattern("yyyy-MM-dd")
-            .optionalStart().appendPattern(" HH:mm")
-            .optionalEnd().parseDefaulting(ChronoField.HOUR_OF_DAY, 0)
-            .parseDefaulting(ChronoField.MINUTE_OF_DAY, 0).toFormatter();
-
+                    .optionalStart().appendPattern(" HH:mm")
+                    .toFormatter();
     @Override
     public boolean check(String date) {
         try {
-            LocalDate ldt = LocalDate.parse(date);
+            LocalDateTime ldt = LocalDateTime.parse(date, INPUTDATEFORMATTER);
             return true;
         } catch (DateTimeParseException e) {
             return false;
@@ -36,6 +31,5 @@ public class StandardDateFormat implements DateFormat {
         } catch (DateTimeParseException e) {
             throw new DateFormatException("Date format is not valid.");
         }
-
     }
 }

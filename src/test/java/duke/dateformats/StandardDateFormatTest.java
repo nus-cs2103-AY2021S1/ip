@@ -1,9 +1,11 @@
 package duke.dateformats;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import duke.exceptions.DateFormatException;
 
 
 public class StandardDateFormatTest {
@@ -18,9 +20,10 @@ public class StandardDateFormatTest {
         Assertions.assertEquals(false, sdf.check("Mon"));
     }
     @Test
-    public void mapToLocalDateTest_correctFormat() {
+    public void mapToLocalDateTest_correctFormat() throws DateFormatException {
         StandardDateFormat sdf = new StandardDateFormat();
-        Assertions.assertEquals(LocalDate.of(2020, 9, 25), sdf.mapToLocalDate("2020-09-25"));
+        Assertions.assertEquals(LocalDateTime.of(2020, 9, 25, 0, 0),
+                sdf.mapToLocalDateTime("2020-09-25"));
     }
 
 }

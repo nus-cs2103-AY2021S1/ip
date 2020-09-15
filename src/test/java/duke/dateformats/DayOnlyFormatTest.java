@@ -2,6 +2,8 @@ package duke.dateformats;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.temporal.TemporalAdjusters;
 
 import org.junit.jupiter.api.Assertions;
@@ -20,10 +22,12 @@ public class DayOnlyFormatTest {
         DayOnlyFormat format = new DayOnlyFormat();
         Assertions.assertEquals(false, format.check("2020-09-25"));
     }
+
     @Test
     public void mapToLocalDateTest_validFormat() {
         DayOnlyFormat format = new DayOnlyFormat();
-        Assertions.assertEquals(LocalDate.now().with(TemporalAdjusters.next(DayOfWeek.WEDNESDAY)),
-                format.mapToLocalDate("Wed"));
+        Assertions.assertEquals(LocalDateTime.of(LocalDate.now(), LocalTime.of(0, 0))
+                        .with(TemporalAdjusters.next(DayOfWeek.WEDNESDAY)),
+                format.mapToLocalDateTime("Wed"));
     }
 }

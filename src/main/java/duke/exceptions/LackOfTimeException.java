@@ -15,6 +15,7 @@ public class LackOfTimeException extends Exception {
 
     @Override
     public String getMessage() {
-        return "⚠️OOPS!!! The time/date of " + this.typeOfCommand + " cannot be empty";
+        return "⚠️OOPS!!! The time/date of " + this.typeOfCommand + " cannot be empty\n"
+                + "please put the time/date after \"/\"";
     }
 }

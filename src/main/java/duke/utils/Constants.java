@@ -6,6 +6,7 @@ import java.util.List;
 import duke.dateformats.DateFormat;
 import duke.dateformats.DayOnlyFormat;
 import duke.dateformats.StandardDateFormat;
+import duke.dateformats.StandardTimeFormat;
 import duke.storage.Storage;
 
 
@@ -59,7 +60,7 @@ public class Constants {
     /**
      * Standard date format.
      */
-    public static final String DF_LOCAL_TIME = "yyyy-mm-dd";
+    public static final String DF_LOCAL_TIME = "yyyy-mm-dd (hh:mm)?";
 
     public static final String FINDPATTERN = ("^(f|F)(i|I)(n|N)(d|D)$");
 
@@ -74,7 +75,9 @@ public class Constants {
 
     public static final Storage DEFAULTSTORAGE = new Storage("data/tasksTable.csv");
 
-    public static final List<DateFormat> DATE_FORMAT_LIST =
-            Arrays.asList(new DayOnlyFormat(), new StandardDateFormat());
+    public static final List<DateFormat> DATE_TIME_FORMAT_LIST =
+            Arrays.asList(new DayOnlyFormat(), new StandardDateFormat(), new StandardTimeFormat());
+
+    public static final String PERIODERROR = "perioderror";
 
 }
