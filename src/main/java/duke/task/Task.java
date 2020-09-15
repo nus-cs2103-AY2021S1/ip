@@ -14,15 +14,19 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+        return (this.isDone ? "\u2713" : "\u2718"); //return tick or cross symbols
     }
 
-    protected void markAsDone() {
+    public Boolean getIsDone() {
+        return this.isDone;
+    }
+
+    public void markAsDone() {
         this.isDone = true;
     }
 
     @Override
     public String toString() {
-        return description;
+        return "[" + getStatusIcon() + "]" + this.description;
     }
 }

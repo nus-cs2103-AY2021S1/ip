@@ -1,5 +1,5 @@
 todo borrow book
-deadline return book /by Sunday
+deadline return book /by 2019/12/12 1800
 list
 done 2
 list

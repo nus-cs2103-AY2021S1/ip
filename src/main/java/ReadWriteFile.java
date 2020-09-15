@@ -5,12 +5,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class ReadWriteFile {
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
 
-    public static void readTaskList(ArrayList<Task> taskList) throws DukeException {
+public class ReadWriteFile {
+    public static ArrayList<Task> readTaskList() throws DukeException {
         java.nio.file.Path path = java.nio.file.Paths.get("data").resolve("duke.txt");
         boolean dirExists = java.nio.file.Files.exists(path);
-
+        ArrayList<Task> taskList = new ArrayList<>();
         if (dirExists) {
             try {
                 File inFile = new File(path.toString());
@@ -18,31 +22,32 @@ public class ReadWriteFile {
                 Task t;
 
                 while (sc.hasNext()) {
-                    String[] task = sc.nextLine().split("\\|");
-                    switch (task[0].trim()) {
-                        case "T":
-                            t = new ToDo(task[2].trim());
-                            break;
-                        case "D":
-                            String[] dDescription = task[2].split(" /by ");
-                            t = new Deadline(dDescription[0].trim(), dDescription[1].trim());
-                            break;
-                        case "E":
-                            String[] eDescription = task[2].split(" /at ");
-                            t = new Event(eDescription[0].trim(), eDescription[1].trim());
-                            break;
-                        default:
-                            throw new DukeException("☹ Sorry, I don't recognise that command from the text file!");
+                    String[] taskInputs = sc.nextLine().split("\\|");
+                    switch (taskInputs[0].trim()) {
+                    case "T":
+                        t = new ToDo(taskInputs[2].trim());
+                        break;
+                    case "D":
+                        t = new Deadline(taskInputs[2].trim(), taskInputs[3].trim());
+                        break;
+                    case "E":
+                        t = new Event(taskInputs[2].trim(), taskInputs[3].trim());
+                        break;
+                    default:
+                        throw new DukeException("☹ Sorry, I don't recognise that command from the text file!");
                     }
-                    if (task[1].equals("1")) {
+                    if (taskInputs[1].trim().equals("1")) {
                         t.markAsDone();
                     }
                     taskList.add(t);
                 }
             } catch (FileNotFoundException e) {
                 File infile = new File(path.toString());
+                return taskList;
             }
+            return taskList;
         }
+        return null;
     }
 
     public static void writeToFile(ArrayList<Task> taskList) {
@@ -52,15 +57,13 @@ public class ReadWriteFile {
             FileWriter fw = new FileWriter(path.toString());
             for (Task task : taskList) {
                 if (task instanceof ToDo) {
-                    String taskDetails = String.format("T | %d | %s", task.isDone ? 1 : 0, task.toString());
+                    String taskDetails = ((ToDo) task).saveToDo();
                     content.append(taskDetails).append("\n");
                 } else if (task instanceof Deadline) {
-                    String taskDetails = String.format("D | %d | %s",
-                            task.isDone ? 1 : 0, task.toString());
+                    String taskDetails = ((Deadline) task).saveDeadline();
                     content.append(taskDetails).append("\n");
-                } else {
-                    String taskDetails = String.format("E | %d | %s",
-                            task.isDone ? 1 : 0, task.toString());
+                } else if (task instanceof Event){
+                    String taskDetails = ((Event) task).saveEvent();
                     content.append(taskDetails).append("\n");
                 }
             }
