@@ -96,7 +96,6 @@ public class Parser {
                     // Only delete if task number is a valid number
                     return Command.DELETE;
                 } catch (NumberFormatException e) {
-                    //System.out.println("Caught nfe");
                     throw new DukeException("Sorry, I don't think that's a valid number...");
                 }
             } else {
@@ -169,6 +168,7 @@ public class Parser {
             // Check if string can be recognized as a valid LocalDate
             // If can't, print out error message
             throw new DukeException("Whoops! I think there is an error in your date."
+                    + "\nThe format is 'YYYY-MM-DD'."
                     + "\nPlease Try Again!");
         }
     }
