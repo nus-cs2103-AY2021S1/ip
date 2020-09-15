@@ -12,7 +12,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke();
+    private Duke duke;
 
     /**
      * Starts Duke GUI.
@@ -21,6 +21,8 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
         try {
+            duke = new Duke();
+            assert (duke != null);
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
