@@ -70,7 +70,7 @@ class Task {
 
     @Override
     public String toString() {
-        return "[" + (isDone ? "✓" : "✗") + "] " + name;
+        return "[" + (isDone ? "Y" : "N") + "] " + name;
     }
 
     public boolean contains(String keyword) {
