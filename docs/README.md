@@ -1,15 +1,15 @@
 # User Guide
 
 ## Features 
-
-### Feature 1 
-Description of feature.
+Duke the Singlish Dude is a unique todo chat bot with a Singlish accent. He aids the user in adding various tasks such as todos, deadlines and events. Tasks can also be tagged for filtering.
 
 ## Usage
 
-### `Keyword` - Describe action
+### list - Lists all the tasks in Duke the Singlish Dude
 
-Describe action and its outcome.
+    list
+
+    
 
 Example of usage: 
 
