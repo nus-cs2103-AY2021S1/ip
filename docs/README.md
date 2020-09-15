@@ -2,9 +2,9 @@
 
 ## Quick Start
 1. Ensure that you have Java `11` or above installed on your computer.
-2. Download the latest `Duke.jar` [here](https://github.com/jflim98/ip/releases).
-3. Copy `Duke.jar` to the folder you want to use as the home folder for Duke.
-4. Double-click `Duke.jar` to launch Duke.
+2. Download the latest `duke.jar` [here](https://github.com/jflim98/ip/releases).
+3. Copy `duke.jar` to the folder you want to use as the home folder for Duke.
+4. Double-click `duke.jar` to launch Duke.
 5. A list of commands can be found [here](#command-summary). A more comprehensive usage guide can be found [here](#usage).
 
 ## Features 
