@@ -80,10 +80,10 @@ public class Event extends Task {
     public String toString() {
         String symbol = isDone ? "\u2713" : "\u2718";
         if (atTime != null) {
-            return String.format("[%s][%s] %s (at: %s %s)", tag, symbol, taskName,
+            return String.format("[%s][%s] %s (at: %s %s)\n", tag, symbol, taskName,
             atDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")), atTime.toString());
         } else {
-            return String.format("[%s][%s] %s (at: %s)", tag, symbol, taskName,
+            return String.format("[%s][%s] %s (at: %s)\n", tag, symbol, taskName,
                     atDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
         }
     }

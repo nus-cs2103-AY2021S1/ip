@@ -41,7 +41,6 @@ public class TaskList {
         statistic.addCompletedTask(doneTask);
         String output = "Nice! I've marked this duke.task as done:\n";
         output += String.format("  %s\n", doneTask.toString());
-        statistic.addCompletedTask(doneTask);
         return output;
     }
 

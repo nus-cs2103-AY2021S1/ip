@@ -1,4 +1,6 @@
-T | 1 | readbook   
-T | 1 | buybook   
-T | 1 | burn book 3  
-T | 1 | burn book 
+T | 1 | read book                 
+T | 1 | eat book               
+E | 1 | attend book fest | 2019-08-19 
+T | 1 | burn book          
+T | 1 | buy book     
+T | 1 | eat lunch 

@@ -34,7 +34,7 @@ public abstract class Task {
      *
      */
     public String printAddTask() {
-        return String.format("Got it. I've added this duke.task:\n  %s", this.toString());
+        return String.format("Got it. I've added this duke:\n  %s", this.toString());
     }
 
     /**
@@ -42,7 +42,7 @@ public abstract class Task {
      *
      */
     public String printDeleteTask() {
-        return String.format("Noted. I've removed this duke.task:\n %s", this.toString());
+        return String.format("Noted. I've removed this duke:\n %s", this.toString());
     }
 
 

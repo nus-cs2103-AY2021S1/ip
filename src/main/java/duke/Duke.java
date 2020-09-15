@@ -28,7 +28,7 @@ public class Duke {
         ui = new Ui();
 
         try {
-            storage = new Storage(taskList);
+            storage = new Storage(taskList, statistic);
         } catch (DukeException e) {
             ui.showLoadingError();
         }
@@ -40,7 +40,7 @@ public class Duke {
      */
     public void stop() {
         try {
-            storage.saveFile();
+            storage.saveTaskFile();
         } catch (DukeException e) {
             ui.showSavingError();
         }

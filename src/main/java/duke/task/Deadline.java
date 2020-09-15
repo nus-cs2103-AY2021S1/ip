@@ -73,10 +73,10 @@ public class Deadline extends Task {
     public String toString() {
         String symbol = isDone ? "\u2713" : "\u2718";
         if (byTime != null) {
-            return String.format("[%s][%s] %s (by: %s %s)", tag, symbol, taskName,
+            return String.format("[%s][%s] %s (by: %s %s)\n", tag, symbol, taskName,
                     byDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")), byTime.toString());
         } else {
-            return String.format("[%s][%s] %s (by: %s)", tag, symbol, taskName,
+            return String.format("[%s][%s] %s (by: %s)\n", tag, symbol, taskName,
                     byDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
         }
     }
