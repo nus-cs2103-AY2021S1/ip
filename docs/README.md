@@ -158,7 +158,9 @@ Exits the program.
 Format: `bye`
 
 Expected output:
-`Bye. Hope to see you again soon!`
+```
+Bye. Hope to see you again soon!
+```
 
 <br />
 
