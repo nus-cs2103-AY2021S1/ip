@@ -6,15 +6,6 @@ import java.util.Arrays;
  * Parses user input as commands.
  */
 public class Parser {
-    /**
-     * Checks if string contains only numbers.
-     *
-     * @param input Input string to check.
-     * @return If string contains only numbers.
-     */
-    public static boolean isNumber(String input) {
-        return input.matches("[0-9]+");
-    }
 
     /**
      * Gets appended strings from string array.
@@ -24,13 +15,19 @@ public class Parser {
      * @param indexFrom Index of array to start appending.
      * @param indexTo   Index of array to end appending.
      * @return Appended string.
+     * @throws IndexOutOfBoundsException When command input is wrongly formatted.
      */
-    public static String generateStringFromArray(String[] inputArr, int indexFrom, int indexTo) {
-        String output = "";
-        for (int i = indexFrom; i < indexTo; i++) {
-            output += inputArr[i] + " ";
+    public static String generateStringFromArray(String[] inputArr, int indexFrom, int indexTo)
+            throws IndexOutOfBoundsException {
+        try {
+            String output = "";
+            for (int i = indexFrom; i < indexTo; i++) {
+                output += inputArr[i] + " ";
+            }
+            return output.substring(0, output.length() - 1);
+        } catch (IndexOutOfBoundsException e) {
+            throw e;
         }
-        return output.substring(0, output.length() - 1);
     }
 
     /**
@@ -71,10 +68,10 @@ public class Parser {
      * @throws DukeException When command input is wrongly formatted.
      */
     public static DoneCommand generateDoneCommand(String[] inputInformation) throws DukeException {
-        if (inputInformation.length > 1 && isNumber(inputInformation[1])) {
+        try {
             int taskNumber = Integer.parseInt(inputInformation[1]);
             return new DoneCommand(taskNumber);
-        } else {
+        } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
             throw new DukeException("You need to include your task number to mark done...");
         }
     }
@@ -87,10 +84,10 @@ public class Parser {
      * @throws DukeException When command input is wrongly formatted.
      */
     public static DeleteCommand generateDeleteCommand(String[] inputInformation) throws DukeException {
-        if (inputInformation.length > 1 && isNumber(inputInformation[1])) {
+        try {
             int taskNumber = Integer.parseInt(inputInformation[1]);
             return new DeleteCommand(taskNumber);
-        } else {
+        } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
             throw new DukeException("You need to include your task number to delete...");
         }
     }
@@ -103,10 +100,10 @@ public class Parser {
      * @throws DukeException When command input is wrongly formatted.
      */
     public static AddCommand generateToDoCommand(String[] inputInformation) throws DukeException {
-        if (inputInformation.length > 1) {
+        try {
             String description = generateStringFromArray(inputInformation, 1, inputInformation.length);
             return new AddCommand(CommandType.TODO, description);
-        } else {
+        } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Your todo description can't be empty...");
         }
     }
@@ -119,7 +116,7 @@ public class Parser {
      * @throws DukeException When command input is wrongly formatted.
      */
     public static AddCommand generateDeadlineCommand(String[] inputInformation) throws DukeException {
-        if (inputInformation.length > 3) {
+        try {
             int indexOfBy = Arrays.asList(inputInformation).indexOf("/by");
             if (indexOfBy == -1) {
                 throw new DukeException("Did you include /by?");
@@ -130,7 +127,7 @@ public class Parser {
                 String by = generateStringFromArray(inputInformation, indexOfBy + 1, inputInformation.length);
                 return new AddCommand(CommandType.DEADLINE, description, by);
             }
-        } else {
+        } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Your deadline description or deadline can't be empty...");
         }
     }
@@ -143,7 +140,7 @@ public class Parser {
      * @throws DukeException When command input is wrongly formatted.
      */
     public static AddCommand generateEventCommand(String[] inputInformation) throws DukeException {
-        if (inputInformation.length > 3) {
+        try {
             int indexOfAt = Arrays.asList(inputInformation).indexOf("/at");
             if (indexOfAt == -1) {
                 throw new DukeException("Did you include /at?");
@@ -154,7 +151,7 @@ public class Parser {
                 String at = generateStringFromArray(inputInformation, indexOfAt + 1, inputInformation.length);
                 return new AddCommand(CommandType.EVENT, description, at);
             }
-        } else {
+        } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Your event description or event period can't be empty...");
         }
     }
@@ -167,10 +164,10 @@ public class Parser {
      * @throws DukeException When command input is wrongly formatted.
      */
     public static FindCommand generateFindCommand(String[] inputInformation) throws DukeException {
-        if (inputInformation.length > 1) {
+        try {
             String[] searchKeywords = Arrays.copyOfRange(inputInformation, 1, inputInformation.length);
             return new FindCommand(searchKeywords);
-        } else {
+        } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("You need to include your keyword...");
         }
     }
