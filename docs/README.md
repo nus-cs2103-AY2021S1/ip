@@ -1,22 +1,51 @@
 # User Guide
 
-## Features 
+## What is Duke?
 
-### Feature 1
+Duke is an imperfect task manager. It's not the most elegant nor the most efficient, but it gets the job done, sometimes.
+
+## How to use?
+
+Duke understands the list of commands below. Duke doesn't understand anything else (Yes, it's not very smart).
+
+### Commands
+
+`list` - List all tasks
+
+`date <date>` - List all tasks on a date
+
+ `todo <task_name>` - Adds a todo task
+ `event `
  
-Description of feature.
+ `deadline <task_name> /by <date>` - Add a deadline task to be completed by `<date>`
+ 
+`event <task_name> /at <date>` - Add an event task that is scheduled for `<date>`
 
-## Usage
+`done <task_index>` - Marks the task at the task index as done
 
-### `Keyword` - Describe action
+`delete <task_index>` - Deletes the task at the task index 
 
-Describe action and its outcome.
+`find <keywords>` - Finds all the tasks in the task list that has the keywords 
 
-Example of usage: 
+`tag <task_index> <tag_name>` - Adds a tag to the task specified
 
-`keyword (optional arguments)`
+`bye` - Shuts down the program
 
-Expected outcome:
+#### How to input the variables?
 
-`outcome`
-`
+`<date>`
+- Input `date` with this format: `yyyy-mm-dd`
+- Make sure date is within valid range
+
+`<task_index>`
+- Run `list` command
+- The number associated with the target task is the `task_index`
+
+`<keywords>`
+- Input a string (can have spaces in between)
+
+`<task_name>`
+- Input a string (can have spaces in between)
+
+`<tag_name>`
+- Input a string (can have spaces in between)

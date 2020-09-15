@@ -46,6 +46,33 @@ public class Ui {
         return output.toString();
     }
 
+    public static String getGreetings() {
+        return
+            "Hi here are the list of commands I understand."
+                + "\n"
+                + "`list` - List all tasks\n"
+                + "\n"
+                + "`date <date>` - List all tasks on a date\n"
+                + "\n"
+                + " `todo <task_name>` - Adds a todo task\n"
+                + " `event `\n"
+                + " \n"
+                + " `deadline <task_name> /by <date>` - Add a deadline task to be completed by `<date>`\n"
+                + " \n"
+                + "`event <task_name> /at <date>` - Add an event task that is scheduled for `<date>`\n"
+                + "\n"
+                + "`done <task_index>` - Marks the task at the task index as done\n"
+                + "\n"
+                + "`delete <task_index>` - Deletes the task at the task index \n"
+                + "\n"
+                + "`find <keywords>` - Finds all the tasks in the task list that has the keywords \n"
+                + "\n"
+                + "`tag <task_index> <tag_name>` - Adds a tag to the task specified\n"
+                + "\n"
+                + "`bye` - Shuts down the program\n"
+                + "\n";
+    }
+
     public static void showList(TaskList tasks) {
         System.out.print(Ui.getListString(tasks));
     }
@@ -54,8 +81,8 @@ public class Ui {
         System.out.println(Ui.getListDate(tasks, date));
     }
 
-    public static void showGreet() {
-        System.out.println("Hello! I'm Duke\nWhat can I do for you?");
+    public static void showGreetings() {
+        System.out.println(Ui.getGreetings());
     }
 
     public static void showBye() {
