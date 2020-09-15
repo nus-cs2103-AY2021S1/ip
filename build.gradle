@@ -24,7 +24,7 @@ test {
     useJUnitPlatform()
 }
 
-// Output to build/libs/shadow.jar
+// Output to build/libs/iP.jar
 shadowJar {
     mainClassName = 'Launcher'
     baseName = 'iP'

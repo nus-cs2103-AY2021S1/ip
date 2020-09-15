@@ -13,6 +13,6 @@ public class UiTest {
     @Test
     public void exceptionTest() {
         assertEquals(Ui.DukeException.invalid("dshuadhoas").getMessage(),
-                new Ui.DukeException("Sorry, 'dshuadhoas' is not a recognised order.").getMessage());
+                new Ui.DukeException("Error: Sorry, 'dshuadhoas' is not a recognised order.").getMessage());
     }
 }
