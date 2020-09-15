@@ -1,2 +1,4 @@
-0 | todo | MeetChau
-0 | todo | Submit Cs2103
+1 | todo | MeetChau
+1 | todo | Submit Cs2103
+1 | deadline | Tuan /by 2020-12-10
+0 | event | IOI /at NUS
