@@ -4,6 +4,8 @@ Duke is a PC chatbot application designed to manage user's tasks.
 It can be accessed via a Command Line Interface (CLI) or a Graphical User Interface (GUI)
 
 ## Features 
+Items in curly braces are compulsory field to be given by the user (e.g. `{KEYWORD}`)
+
 Table of commands
 
 |No. | Command | Description |
@@ -25,7 +27,7 @@ Task number can be seen from the output.
 
 #### Usage
 
-### `list` - list all tasks
+### `list`
 
 List all tasks in tasks list with numbering.
 
@@ -45,7 +47,7 @@ This command allows users to find task from the task list.
 
 #### Usage
 
-### `find {keyword}` - find all task that contains keyword
+### `find {keyword}`
 
 Search for the tasks in the tasks list using the keyword provided.
 
@@ -68,7 +70,7 @@ The todo task has only description.
 
 #### Usage
 
-### `todo {todo_description}` - adds a todo task
+### `todo {todo_description}`
 
 Adds a todo task to the task list with the description provided.
 
@@ -92,7 +94,7 @@ The event task has a description and a date and time.
 
 #### Usage
 
-### `event {event_description} /at {dd/MM/yyyy HHmm}` - adds a event task
+### `event {event_description} /at {dd/MM/yyyy HHmm}`
 
 Adds a event task to the task list with the description and date time provided.
 
@@ -118,7 +120,7 @@ The deadline task has a description and a date and time.
 
 #### Usage
 
-### `event {event_description} /by {dd/MM/yyyy HHmm}` - adds a deadline task
+### `event {event_description} /by {dd/MM/yyyy HHmm}` 
 
 Adds a deadline task to the task list with the description and date time provided.
 
@@ -142,7 +144,7 @@ This command marks a task as done (✓) based on the numbering in the list.
 
 #### Usage
 
-### `done {Task_Number}` - mark task done
+### `done {Task_Number}` 
 
 Mark a task with the corresponding task number done.
 
@@ -168,7 +170,7 @@ This command deletes a task based on the numbering in the list.
 
 #### Usage
 
-### `delete {Task_Number}` - delete task
+### `delete {Task_Number}` 
 
 Delete a task with the corresponding task number done.
 
@@ -193,7 +195,7 @@ This command gives the schedule based on tasks in task list.
 
 #### Usage
 
-### `schedule before {dd/MM/yyyy HHmm}` - schedule task
+### `schedule before {dd/MM/yyyy HHmm}` 
 
 Finds tasks with date time and outputs tasks that are before the 
 given date time.
