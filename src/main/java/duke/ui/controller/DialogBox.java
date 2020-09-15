@@ -17,6 +17,7 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
@@ -44,6 +45,8 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
+        dialog.setMinHeight(Region.USE_PREF_SIZE);
+        dialog.setMinWidth(Region.USE_PREF_SIZE);
         displayPicture.setImage(img);
     }
 

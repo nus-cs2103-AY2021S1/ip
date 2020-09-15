@@ -75,7 +75,7 @@ public class MainWindow extends AnchorPane {
 
         // close window upon input "bye"
 
-        //@@ author Lysire-reused
+        //@@author Lysire-reused
         // Reused from https://github.com/jiayushe/duke/blob/master/src/main/java/duke/MainWindow.java
         if (input.equals(EXIT)) {
             new Thread(() -> {
