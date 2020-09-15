@@ -51,8 +51,8 @@ public class Storage {
                 String[] lineData = line.split("\\|");
 
                 // trim and extract data
-                String type = lineData[0].trim();
                 boolean isDone = lineData[1].trim().equals("1");
+                String type = lineData[0].trim();
                 String description = lineData[2].trim();
                 String timestamp = lineData[3].trim();
 

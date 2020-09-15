@@ -1,7 +1,7 @@
 package chatbot.parser;
 
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -141,7 +141,7 @@ public class ParserTest {
         assertTrue(findCmd instanceof FindCommand);
         Predicate<Task> findByKeyWordPred = ((FindCommand) findCmd).getPred();
         assertTrue(findByKeyWordPred.test(task1));
-        assertTrue(!findByKeyWordPred.test(task2));
+        assertFalse(findByKeyWordPred.test(task2));
     }
 
     @Test
@@ -154,7 +154,7 @@ public class ParserTest {
         assertTrue(findCmd instanceof FindCommand);
         Predicate<Task> findByDatePred = ((FindCommand) findCmd).getPred();
         assertTrue(findByDatePred.test(dl1));
-        assertTrue(!findByDatePred.test(dl2));
+        assertFalse(findByDatePred.test(dl2));
     }
 
     @Test
