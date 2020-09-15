@@ -21,54 +21,54 @@ Alternatively you can also open it with terminal:
 
 ### Adding tasks:
 #### Todo tasks: `todo`
- Adds a task to be done in the future without any time restriction.
+ - Adds a task to be done in the future without any time restriction.
  [API](#todo) 
 
- #### Deadline tasks: `deadline`
- Adds a task to be done in the future before a specific deadline.
+#### Deadline tasks: `deadline`
+ - Adds a task to be done in the future before a specific deadline.
  [API](#deadline) 
  
 #### Event tasks: `event`
- Adds a task to be done in the future within a specific time range.
+ - Adds a task to be done in the future within a specific time range.
  [API](#event) 
  
 ### Displaying tasks:
 #### List tasks: `list`
- Displays a indexed list of available tasks.
+ - Displays a indexed list of available tasks.
  [API](#list) 
  
 #### Find tasks: `find`
- Finds a indexed list of available tasks with the given keyword.
+ - Finds a indexed list of available tasks with the given keyword.
  [API](#find) 
  
 #### Sort tasks: `sort`
-Sorts a indexed list of available tasks by their type and then description.
+- Sorts a indexed list of available tasks by their type and then description.
  [API](#sort) 
  
 ### Deleting tasks:
 #### Delete tasks: `delete`
-Deletes a task at a particular index of the list.
+- Deletes a task at a particular index of the list.
  [API](#delete) 
   
 ### Marking tasks:
 #### Done tasks: `Done`
- Marks a task at a particular index of the list to be done. 
+ - Marks a task at a particular index of the list to be done. 
  [API](#done) 
   
 ### Terminating program:
 #### Exit: `bye`
-Terminates and exits the program. 
+- Terminates and exits the program. 
 [API](#bye) 
    
 ## Usage
 ### `todo` <a name="todo"></a>
  - adds a task without time restriction to list 
 
-Format of command: `todo <description>`
+- Format of command: `todo <description>`
 
-Example of usage: `todo borrow book`
+- Example of usage: `todo borrow book`
 
-Expected outcome:
+- Expected outcome:
 
 ![todo](./expectedOutcome/todo.jpg)
 
@@ -76,11 +76,11 @@ Expected outcome:
 ### `deadline` <a name="deadline"></a>
 - adds a task that needed to be done before a certain deadline
 
-Format of command: `deadline <description> /by <YYYY-MM-DD> <HHmm>`
+- Format of command: `deadline <description> /by <YYYY-MM-DD> <HHmm>`
 
-Example of usage: `deadline return book /by 2020-12-31 1200`
+- Example of usage: `deadline return book /by 2020-12-31 1200`
 
-Expected outcome:
+- Expected outcome:
 
 ![deadline](./expectedOutcome/deadline.jpg)
 
@@ -88,76 +88,76 @@ Expected outcome:
 ### `event` <a name="event"></a>
 - adds a task that needed to be done within a certain time period
 
-Format of command: `event <description> /at <YYYY-MM-DD> <HHmm>-<HHmm>`
+- Format of command: `event <description> /at <YYYY-MM-DD> <HHmm>-<HHmm>`
 
-Example of usage: `event read book /at 2020-12-25 1200-1400`
+- Example of usage: `event read book /at 2020-12-25 1200-1400`
 
-Expected outcome:
+- Expected outcome:
 
 ![event](./expectedOutcome/event.jpg)
 
 ### `list` <a name="list"></a>
 - displays all tasks available
 
-Format of command: `list`
+- Format of command: `list`
 
-Example of usage: `list`
+- Example of usage: `list`
 
-Expected outcome:
+- Expected outcome:
 
 ![list](./expectedOutcome/list.jpg)
 
 ### `find`  <a name="find"></a>
 - displays all tasks available with the given keyword
 
-Format of command: `find <keyword>`
+- Format of command: `find <keyword>`
 
-Example of usage: `find Dec`
+- Example of usage: `find Dec`
 
-Expected outcome:
+- Expected outcome:
 
 ![find](./expectedOutcome/find.jpg)
 
 ### `sort` <a name="sort"></a>
 - sorts all tasks available by their task's type and then description alphabetically
 
-Format of command: `sort`
+- Format of command: `sort`
 
-Example of usage: `sort`
+- Example of usage: `sort`
 
-Expected outcome:
+- Expected outcome:
 
 ![sort](./expectedOutcome/sort.jpg)
 
 ### `delete` <a name="delete"></a>
 - deletes a task at a particular index
 
-Format of command: `delete <index>`
+- Format of command: `delete <index>`
 
-Example of usage: `delete 1`
+- Example of usage: `delete 1`
 
-Expected outcome:
+- Expected outcome:
 
 ![delete](./expectedOutcome/delete.jpg)
 
 ### `done` <a name="done"></a>
 - marks a task at a particular index done
 
-Format of command: `done <index>`
+- Format of command: `done <index>`
 
-Example of usage: `done 1`
+- Example of usage: `done 1`
 
-Expected outcome:
+- Expected outcome:
 
 ![done](./expectedOutcome/done.jpg)
 
 ### `bye` <a name="bye"></a>
 - terminates DukePenguin
 
-Format of command: `bye`
+- Format of command: `bye`
 
-Example of usage: `bye`
+- Example of usage: `bye`
 
-Expected outcome:
+- Expected outcome:
 
 ![bye](./expectedOutcome/bye.jpg)
