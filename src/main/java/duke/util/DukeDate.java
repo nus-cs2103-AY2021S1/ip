@@ -14,7 +14,10 @@ public class DukeDate {
     public DukeDate(String datetimeString) throws DukeException {
         String[] datetimeArray = datetimeString.split(" ");
         try {
-            this.localDate = LocalDate.parse(datetimeArray[0].trim());
+            String dateString = datetimeArray[0].trim();
+            assert dateString.length() == 10;
+
+            this.localDate = LocalDate.parse(dateString);
         } catch (DateTimeParseException e) {
             throw new DukeException("I can't really understand the due dates.");
         }

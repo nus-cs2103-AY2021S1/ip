@@ -35,7 +35,7 @@ public class AddCommand extends Command {
      * @throws DukeException If input is not recognised.
      */
     public String execute(TaskList taskList, Ui ui, Storage storage) throws IOException, DukeException {
-
+        assert parsedStrings.length == 3;
         String taskType = parsedStrings[0];
         String description = parsedStrings[1];
         String due;
