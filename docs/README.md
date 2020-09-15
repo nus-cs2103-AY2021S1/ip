@@ -1,4 +1,5 @@
 # User Guide for Duke
+![](Ui.png) | ![](Help.png)
 
 ## Features 
  - Saving passwords
