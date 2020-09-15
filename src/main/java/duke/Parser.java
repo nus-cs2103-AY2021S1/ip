@@ -33,13 +33,13 @@ public class Parser {
         }
         case DONE: {
             if (!isNumeric(commands[1])) {
-                throw new DukeException(" OOPS!!! The argument of done command is not a number.");
+                throw new DukeException(" Oops. The argument of done command is not a number.");
             }
             return commands;
         }
         case DELETE: {
             if (!isNumeric(commands[1])) {
-                throw new DukeException(" ☹ OOPS!!! The argument of delete command is not a number.");
+                throw new DukeException(" Oops. The argument of delete command is not a number.");
             }
             return commands;
         }
