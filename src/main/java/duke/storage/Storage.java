@@ -31,40 +31,71 @@ public class Storage {
     public List<Task> load() {
         List<Task> tasks = new ArrayList<>();
         File dataFile = new File(filePath);
-        if (dataFile.exists()) {
-            try {
-                Scanner scanner = new Scanner(dataFile);
-                while (scanner.hasNextLine()) {
-                    String taskEntry = scanner.nextLine();
-                    String[] taskInformation = taskEntry.split("\\|");
-                    if (taskEntry.startsWith("[T]")) {
-                        String description = taskEntry.split("\\|")[1];
-                        Task task = new ToDo(description);
-                        if (taskInformation[0].contains("1")) {
-                            task.markAsDone();
-                        }
-                        tasks.add(task);
-                    } else if (taskEntry.startsWith("[D]")) {
-                        String description = taskEntry.split("\\|")[1];
-                        Task task = new Deadline(description, LocalDate.parse(taskEntry.split("\\|")[2]));
-                        if (taskInformation[0].contains("1")) {
-                            task.markAsDone();
-                        }
-                    } else if (taskEntry.startsWith("[E]")) {
-                        String description = taskEntry.split("\\|")[1];
-                        Task task = new Event(description, LocalDate.parse(taskEntry.split("\\|")[2]));
-                        if (taskInformation[0].contains("1")) {
-                            task.markAsDone();
-                        }
-                    }
-
+        if (!dataFile.exists()) {
+            return tasks;
+        }
+        try {
+            Scanner scanner = new Scanner(dataFile);
+            while (scanner.hasNextLine()) {
+                String taskEntry = scanner.nextLine();
+                String[] taskInformation = taskEntry.split("\\|");
+                if (taskEntry.startsWith("[T]")) {
+                    loadToDo(tasks, taskInformation);
+                } else if (taskEntry.startsWith("[D]")) {
+                    loadDeadline(tasks, taskInformation);
+                } else if (taskEntry.startsWith("[E]")) {
+                    loadEvent(tasks, taskInformation);
                 }
-            } catch (IOException ioException) {
-                System.out.println("An error has occurred");
-                ioException.printStackTrace();
             }
+        } catch (IOException ioException) {
+            System.out.println("An error has occurred");
         }
         return tasks;
+    }
+
+    /**
+     * Parses text data into an Event and adds the event into the task list.
+     * @param tasks Task list.
+     * @param taskInfo String array split by delimiter "|".
+     *                 The elements are in the order: task identifier, description, date.
+     */
+    private void loadEvent(List<Task> tasks, String[] taskInfo) {
+        String description = taskInfo[1];
+        Task task = new Event(description, LocalDate.parse(taskInfo[2]));
+        if (taskInfo[0].contains("1")) {
+            task.markAsDone();
+        }
+        tasks.add(task);
+    }
+
+    /**
+     * Parses text data into a Deadline and adds the Deadline into the task list.
+     * @param tasks Task list.
+     * @param taskInfo String array split by delimiter "|".
+     *                 The elements are in the order: task identifier, description, date.
+     */
+    private void loadDeadline(List<Task> tasks, String[] taskInfo) {
+        String description = taskInfo[1];
+        Task task = new Deadline(description, LocalDate.parse(taskInfo[2]));
+        if (taskInfo[0].contains("1")) {
+            task.markAsDone();
+        }
+        tasks.add(task);
+    }
+
+    /**
+     * Parses text data into a To Do and adds it into the task list.
+     * @param tasks Task list.
+     * @param taskInfo String array split by delimiter "|".
+     *                 The elements are in the order: task identifier, description.
+     */
+    private void loadToDo(List<Task> tasks, String[] taskInfo) {
+        String description = taskInfo[1];
+        Task task = new ToDo(description);
+        if (taskInfo[0].contains("1")) {
+            task.markAsDone();
+        }
+        tasks.add(task);
     }
 
     /**
@@ -73,7 +104,7 @@ public class Storage {
      */
     public void save(Task task) {
         try {
-            FileWriter fileWriter = new FileWriter("data.txt", true);
+            FileWriter fileWriter = new FileWriter(filePath, true);
             String[] strings = task.toString().split("\\|");
             String isDone = task.getIsDone() ? "1" : "0";
             String description = strings[2];

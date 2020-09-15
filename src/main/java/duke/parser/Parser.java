@@ -4,16 +4,25 @@ import java.time.LocalDate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import commands.*;
+import commands.Command;
+import commands.DeadlineCommand;
+import commands.DoneCommand;
+import commands.EventCommand;
+import commands.ExitCommand;
+import commands.FindCommand;
+import commands.HelpCommand;
+import commands.IncorrectCommand;
+import commands.ListCommand;
+import commands.ToDoCommand;
 
 /**
  * Parses user input.
  */
 public class Parser {
 
-    public static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
-    public static final String EVENT_DELIMITER = "/at";
-    public static final String DEADLINE_DELIMITER = "/by";
+    private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
+    private static final String EVENT_DELIMITER = "/at";
+    private static final String DEADLINE_DELIMITER = "/by";
 
     /**
      * Parses user input and performs corresponding actions
@@ -50,6 +59,11 @@ public class Parser {
         }
     }
 
+    /**
+     * Processes the arguments for the FindCommand.
+     * @param arguments Search terms for the find function.
+     * @return A FindCommand or an IncorrectCommand when the argument is invalid.
+     */
     private Command prepareFind(String arguments) {
         try {
             return new FindCommand(arguments.trim());
@@ -58,7 +72,12 @@ public class Parser {
         }
     }
 
-    private Command prepareDone(String arguments) {
+    /**
+     * Processes the arguments for the DoneCommand.
+     * @param arguments A number indicating which task should be marked as done.
+     * @return A DoneCommand or an IncorrectCommand when the argument is invalid.
+     */
+    private Command prepareDone(String arguments) { // check for number
         try {
             String index = arguments.trim();
             return new DoneCommand(Integer.parseInt(index));
@@ -67,6 +86,11 @@ public class Parser {
         }
     }
 
+    /**
+     * Processes the arguments for the DeadlineCommand.
+     * @param arguments Arguments for Deadline.
+     * @return A DeadlineCommand or an IncorrectCommand when the argument is invalid.
+     */
     private Command prepareDeadline(String arguments) {
         try {
             String description = splitDescription(arguments);
@@ -77,6 +101,11 @@ public class Parser {
         }
     }
 
+    /**
+     * Processes the arguments for the EventCommand.
+     * @param arguments Arguments for Event.
+     * @return An EventCommand or an IncorrectCommand when the argument is invalid.
+     */
     private Command prepareEvent(String arguments) {
         try {
             String description = splitDescription(arguments);
@@ -87,6 +116,11 @@ public class Parser {
         }
     }
 
+    /**
+     * Processes the arguments for the ToDoCommand.
+     * @param arguments Arguments for ToDo.
+     * @return A ToDoCommand or an IncorrectCommand when the argument is invalid.
+     */
     private Command prepareToDo(String arguments) {
         try {
             return new ToDoCommand(arguments.trim());
@@ -95,11 +129,21 @@ public class Parser {
         }
     }
 
+    /**
+     * Splits the argument to retrieve the description.
+     * @param arguments User input containing only the arguments of the command.
+     * @return Description.
+     */
     private String splitDescription(String arguments) {
-        String description = arguments.split("/")[0].trim();
-        return description;
+        return arguments.split("/")[0].trim();
     }
 
+    /**
+     * Splits the argument based on the delimiter to retrieve the LocalDate.
+     * @param arguments User input containing only the arguments of the command.
+     * @param delimiter Delimiter for event or deadline. Either "/at" or "/by".
+     * @return LocalDate.
+     */
     private LocalDate parseTime(String arguments, String delimiter) { // throws a wrong dateformatexception
         String time = arguments.split(delimiter)[1].trim();
         return LocalDate.parse(time);
