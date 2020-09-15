@@ -28,7 +28,7 @@ Welcome to IncrediBot, a task manager app which manages your todos, events and d
 
 ## Features
 
-In IncrediBot, there types of tasks can be created:
+In IncrediBot, three kinds of tasks can be created:
 
 ### 1. Todo
 
