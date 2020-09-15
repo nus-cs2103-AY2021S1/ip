@@ -1,26 +1,105 @@
-# duke.Duke project template
+# Duke the Singlish Dude
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
 
-## Setting up in Intellij
+Dillinger is a cloud-enabled, mobile-ready, offline-storage, AngularJS powered HTML5 Markdown editor.
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+  - Type some Markdown on the left
+  - See HTML in the right
+  - Magic
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project dialog first)
-1. Set up the correct JDK version, as follows:
-   1. Click `Configure` > `Structure for New Projects` and then `Project Settings` > `Project` > `Project SDK`
-   1. If JDK 11 is listed in the drop down, select it. If it is not, click `New...` and select the directory where you installed JDK 11
-   1. Click `OK`
-1. Import the project into Intellij as follows:
-   1. Click `Open or Import`.
-   1. Select the project directory, and click `OK`
-   1. If there are any further prompts, accept the defaults.
-1. After the importing is complete, locate the `src/main/java/duke.Duke.java` file, right-click it, and choose `Run duke.Duke.main()`. If the setup is correct, you should see something like the below:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+## Features
+
+  - Task manager
+  - Add and delete tasks
+  - Filter through tasks by description
+  - Filter through tasks by tagging
+  - Comes with an additional Singlish accent!
+
+## Usage
+
+### list - Lists all the tasks in Duke the Singlish Dude
+Format: `list`
+
+### todo - Adds a todo task to the task list
+Format: `todo {description} #{tag}`
+*#{tag} is an optional input*
+
+### deadline - Adds a deadline task to the task list
+Format: `deadline {description} /by YYYY-MM-DD #{tag}`
+*#{tag} is an optional input*
+
+### event - Adds a event task to the task list
+Format: `event {description} /at YYYY-MM-DD #{tag}`
+*#{tag} is an optional input*
+
+### delete - Delete a task stored in task list
+Format: `delete {task number}`
+*Ensure that task number is within range*
+
+### list - Reveals all tasks stored in task list
+Format: `list`
+
+### find - Filters the task list by keyword (if any)
+Format: `find {keyword}`
+
+### findtag - Filters the task list by tag provided (if any)
+Format: `findtag #{tag}`
+
+### bye - Ends the session
+Format:`bye`
+
+## Examples
+
+Input: `list`
+Example output: 
+    ____________________________________
+    Here are the things you need to do lor: 
+    1. [E][✗] Exam (at: 23 Jun 2020)
+    2. [D][✗] Individual Project (by: 17 Sep 2020) [#CS2103T]
+    ____________________________________
+    
+Input: `todo Math Homework #school`
+Example output:
+    ____________________________________
+    Okok. I add for you: 
+    [T][✗] Math Homework [#school]
+    You got 3 tasks in the list.
+    ____________________________________
+    
+Input: `deadline Project Work /by 2020-10-10 #school`
+Example output:
+    ____________________________________
+    Okok. I help you add this task: 
+    [D][✗] Project Work (by: 10 Oct 2020) [#school]
+    You got 5 tasks in the list.
+    ____________________________________
+
+Input: `findtag #school`
+Example output:
+    ____________________________________
+    Here are the things you want lor: 
+    1. [T][✗] Math Homework [#school]
+    2. [D][✗] Project Work (by: 10 Oct 2020) [#school]
+    3. [D][✗] Project Work (by: 10 Oct 2020) [#school]
+    ____________________________________
+    
+Input: `done 3`
+Example output:
+    ____________________________________
+    Swee! Now I will mark this as done: 
+    [T][✓] Math Homework [#school]
+    ____________________________________
+    
+Input: `delete 4`
+Example output:
+    ____________________________________
+    Task deleted liao: 
+    [D][✗] Project Work (by: 10 Oct 2020) [#school]
+    You got 4 tasks left. 
+    ____________________________________
+
+## Product Snapshot
+![Duke the Singlish Dude](https://imgur.com/Nu649gT)
+
+## Contact
+***For any enquiries feel free to contact me at e0406711@u.nus.edu***
