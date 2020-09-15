@@ -37,6 +37,6 @@ public class DeleteCommand extends Command {
         storage.deleteCurrentDataInFile(taskIndex + 1, tasks.getSize());
 
         System.out.println("Noted. I've removed this task:\n" + task + "\nNow you have "
-                + tasks.getSize() + " tasks in the list.");
+                + tasks.getSize() + " task(s) in the list.");
     }
 }

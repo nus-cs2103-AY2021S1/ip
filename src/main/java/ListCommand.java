@@ -22,7 +22,7 @@ public class ListCommand extends Command {
             throw new DukeException("There are currently no tasks in the list.");
         }
 
-        System.out.println("Here are the tasks in your list:");
+        System.out.println("Here are the task(s) in your list:");
 
         for (int i = 0; i < tasks.getSize(); i++) {
             Task task = tasks.getTask(i);

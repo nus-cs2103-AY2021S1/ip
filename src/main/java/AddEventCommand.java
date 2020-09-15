@@ -37,6 +37,6 @@ public class AddEventCommand extends Command {
         storage.updateFile(tasks);
 
         System.out.println("Got it. I've added this task:\n" + event + "\nNow you have "
-                + tasks.getSize() + " tasks in the list.");
+                + tasks.getSize() + " task(s) in the list.");
     }
 }

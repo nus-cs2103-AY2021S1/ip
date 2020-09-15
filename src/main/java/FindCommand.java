@@ -38,7 +38,7 @@ public class FindCommand extends Command {
             throw new DukeException("No tasks with the word found.");
         }
 
-        System.out.println("Here are the matching tasks in your list:");
+        System.out.println("Here are the matching task(s) in your list:");
         for (int i = 0; i < tasksWithWord.size(); i++) {
             Task task = tasksWithWord.get(i);
             System.out.println((i + 1) + "." + task);
