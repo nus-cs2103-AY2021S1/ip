@@ -1,2 +1,2 @@
-theme: minima
+theme: minimal
 include: [README.md, index.md]
