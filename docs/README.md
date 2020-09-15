@@ -23,17 +23,17 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
 
 1. Alternatively, you may access the GUI by double clicking on the duke.jar file found as a release in this repo.
 
-##Using Duke
+## Using Duke
 
 Duke supports the following operations:
 
-   ####Saying hello!
+   #### Saying hello!
    You can say hello to Duke by typing the following command:
    ```
    hello
    ```
    
-   ####Adding tasks
+   #### Adding tasks
    
    Duke supports the adding of 3 task types and the ability to specify its priority(optional).
    1. todo
@@ -73,14 +73,14 @@ Duke supports the following operations:
    event family gathering /by 2020-10-12 1800 /priority low
    ```
    
-   ####Listing all tasks
+   #### Listing all tasks
    
    To list all tasks, enter the following command
    ```
    list
    ```
 
-   ####Deleting tasks
+   #### Deleting tasks
   
    To delete a task, enter a command in the following format:
    "delete {task number}"
@@ -91,7 +91,7 @@ Duke supports the following operations:
    delete 2
    ```
    
-   ####Marking tasks as done
+   #### Marking tasks as done
 
    To mark a task as done, enter a command in the following format:
    "done {task number}"
@@ -101,7 +101,7 @@ Duke supports the following operations:
    ```
    done 2
    ```
-   ####Setting priority of tasks
+   #### Setting priority of tasks
 
    To set the priority of a task, enter a command in the following format:
    "set priority {task number} {low/medium/high}"
@@ -110,7 +110,7 @@ Duke supports the following operations:
    ```
    done 2
    ```
-   ####Exiting from the Application
+   #### Exiting from the Application
 
    To exit from the Command Line Interface type the following command:
  
@@ -120,7 +120,7 @@ Duke supports the following operations:
 
    To exit from the Graphic User Interface, simply click the cross at the top right of the pop up window.
 
-   ####Error messages
+   #### Error messages
 
    Duke will notify you of an invalid command/input, this can be recognised by the red background in the GUI and the presence of the keyword "OOPS!!!" for the CLI.
 
