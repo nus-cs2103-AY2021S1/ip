@@ -26,7 +26,7 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
-    private DialogBox(String text, Image img) {
+    private DialogBox(String text, Image img, boolean isErrorResponse) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -37,6 +37,9 @@ public class DialogBox extends HBox {
         }
         dialog.setMinHeight(Region.USE_PREF_SIZE);
         dialog.setText(text);
+        if (isErrorResponse) {
+            dialog.setStyle("-fx-background-color: lightgoldenrodyellow");
+        }
         displayPicture.setImage(img);
     }
 
@@ -51,11 +54,11 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        return new DialogBox(text, img, false);
     }
 
-    public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+    public static DialogBox getDukeDialog(String text, Image img, boolean isErrorResponse) {
+        var db = new DialogBox(text, img, isErrorResponse);
         db.flip();
         return db;
     }

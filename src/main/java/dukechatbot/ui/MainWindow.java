@@ -1,5 +1,6 @@
 package dukechatbot.ui;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 import dukechatbot.duke.Duke;
@@ -31,7 +32,7 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         String initMessage = Duke.getGreetingMessage();
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(initMessage, dukeImage));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(initMessage, dukeImage, false));
         assert(dialogContainer.getChildren().size() == 1);
     }
 
@@ -48,10 +49,19 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
+        boolean isErrorResponse = false;
+        if (this.isErrorResponse(response)) {
+            isErrorResponse = true;
+        }
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getDukeDialog(response, dukeImage, isErrorResponse)
         );
         userInput.clear();
+    }
+    
+    private boolean isErrorResponse(String response) {
+        String[] components = response.split("\\r?\\n");
+        return components[1].split("\\s+")[1].equals("\u2639");
     }
 }
