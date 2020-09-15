@@ -1,14 +1,11 @@
 package duke.task;
 
-import duke.DukeException;
-
-import duke.backend.Storage;
-
-import duke.ui.Ui;
-
 import java.io.IOException;
-
 import java.util.ArrayList;
+
+import duke.DukeException;
+import duke.backend.Storage;
+import duke.ui.Ui;
 
 /**
  * Responsible for storing a list of Tasks and interaction with the Tasks.
@@ -29,7 +26,7 @@ public class TaskList {
     public String toString() {
         String listString = "";
         for (Task task : tasks) {
-            listString += task + "\n";
+            listString += task.toFile() + "\n";
         }
         return listString;
     }

@@ -8,11 +8,17 @@ import java.time.LocalDate;
  */
 public class Event extends TimedTask {
 
+    /**
+     * Constructor for Event.
+     */
     public Event(String description, LocalDate eventTime) {
         super(description, eventTime);
         super.type = Task.Type.EVENT;
     }
 
+    /**
+     * Constructor for Event with additional isDone parameter.
+     */
     public Event(String description, LocalDate eventTime, boolean isDone) {
         super(description, eventTime);
         super.type = Task.Type.EVENT;

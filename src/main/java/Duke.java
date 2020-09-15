@@ -1,11 +1,11 @@
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import duke.DukeException;
 import duke.Parser;
 import duke.backend.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
-
-import java.io.FileNotFoundException;
-import java.io.IOException;
 
 /**
  * The main Duke class.
@@ -17,6 +17,9 @@ public class Duke {
     private TaskList tasks;
     private Storage storage;
 
+    /**
+     * Initialises tasks and storage of Duke.
+     */
     public Duke() {
         this.ui = new Ui();
         try {

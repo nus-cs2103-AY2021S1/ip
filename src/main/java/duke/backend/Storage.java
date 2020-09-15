@@ -1,20 +1,20 @@
 package duke.backend;
 
-import duke.DukeException;
-
-import duke.task.*;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import java.nio.file.Path;
-
 import java.time.LocalDate;
-
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
 
 /**
  * Responsible for storing the file. A <code>Storage</code> object contains a <code>File</code>
@@ -30,6 +30,9 @@ public class Storage {
 
     private Path path;
 
+    /**
+     * Constructs Storage.
+     */
     public Storage(String filePath) throws DukeException {
         String dir = System.getProperty("user.dir");
         path = Path.of(dir, filePath);
@@ -78,7 +81,7 @@ public class Storage {
         String[] parsed = line.split(RIGHT_ICON_BRACKET, 3);
         String type = parsed[0].substring(1);
         String status = parsed[1].substring(1);
-        boolean isDone = (status.equals("\u2713")); // \u2713 is tick, \u2718 is cross.
+        boolean isDone = (status.equals("1"));
         String body = parsed[2].substring(1);
         if (type.equals(TODO_ICON)) {
             return new Todo(body, isDone);

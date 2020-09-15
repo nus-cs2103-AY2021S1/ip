@@ -1,8 +1,8 @@
 package duke.ui;
 
-import duke.task.Task;
-
 import java.util.Scanner;
+
+import duke.task.Task;
 
 /**
  * Keeps track of user input. A <code>Ui</code> object contains a <code>Scanner</code> object.
@@ -44,15 +44,15 @@ public class Ui {
      * Gives the user the list of available commands.
      */
     public String giveHelp() {
-        String message = "Commands available:\n" +
-                "todo <description> - add a todo eg. \"todo CS2103T quiz\".\n" +
-                "deadline <description> - add a deadline eg. \"deadline CS2101 OP1 slides /by tomorrow\".\n" +
-                "event <description> - add an event eg. \"event Duke's birthday party /at 2021-8-10\".\n" +
-                "done <n> - mark task number 'n' as done eg. \"done 1\".\n" +
-                "delete <n> - delete task with task number 'n' eg. \"delete 2\".\n" +
-                "find - find tasks with matching descriptions eg. \"find CS2101\".\n" +
-                "list - to list out current tasks, if any.\n" +
-                "bye - to exit Duke.";
+        String message = "Commands available:\n"
+                + "todo <description> - add a todo eg. \"todo CS2103T quiz\".\n"
+                + "deadline <description> - add a deadline eg. \"deadline CS2101 OP1 slides /by tomorrow\".\n"
+                + "event <description> - add an event eg. \"event Duke's birthday party /at 2021-8-10\".\n"
+                + "done <n> - mark task number 'n' as done eg. \"done 1\".\n"
+                + "delete <n> - delete task with task number 'n' eg. \"delete 2\".\n"
+                + "find - find tasks with matching descriptions eg. \"find CS2101\".\n"
+                + "list - to list out current tasks, if any.\n"
+                + "bye - to exit Duke.";
         return message;
     }
 

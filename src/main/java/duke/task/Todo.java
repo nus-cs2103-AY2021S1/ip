@@ -6,11 +6,17 @@ package duke.task;
  */
 public class Todo extends Task {
 
+    /**
+     * Constructor for Todo.
+     */
     public Todo(String description) {
         super(description);
         super.type = Task.Type.TODO;
     }
 
+    /**
+     * Constructor for Todo with additional isDone parameter.
+     */
     public Todo(String description, boolean isDone) {
         super(description);
         super.isDone = isDone;

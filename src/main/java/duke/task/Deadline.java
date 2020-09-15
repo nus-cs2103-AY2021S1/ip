@@ -8,11 +8,17 @@ import java.time.LocalDate;
  */
 public class Deadline extends TimedTask {
 
+    /**
+     * Constructor for Deadline.
+     */
     public Deadline(String description, LocalDate deadline) {
         super(description, deadline);
         super.type = Task.Type.DEADLINE;
     }
 
+    /**
+     * Constructor for Deadline with additional isDone parameter.
+     */
     public Deadline(String description, LocalDate deadline, boolean isDone) {
         super(description, deadline);
         super.type = Task.Type.DEADLINE;

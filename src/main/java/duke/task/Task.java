@@ -26,6 +26,15 @@ public abstract class Task {
         return this.getTypeIcon() + this.getStatusIcon() + " " + description;
     }
 
+    public String toFile() {
+        return this.getTypeIcon() + this.getDoneStatus() + " " + description;
+    }
+
+    protected String getDoneStatus() {
+        String status = (isDone ? "1" : "0");
+        return "[" + status + "]";
+    }
+
     protected String getStatusIcon() {
         String icon = (isDone ? "\u2713" : "\u2718"); // 2713 tick, 2718 cross
         return "[" + icon + "]";

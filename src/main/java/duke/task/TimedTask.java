@@ -11,6 +11,9 @@ public abstract class TimedTask extends Task {
 
     protected LocalDate date;
 
+    /**
+     * Constructor for TimedTask.
+     */
     public TimedTask(String description, LocalDate when) {
         super(description);
         this.date = when;
@@ -18,8 +21,8 @@ public abstract class TimedTask extends Task {
 
     @Override
     public String toString() {
-        return this.getTypeIcon() + this.getStatusIcon() + " " + description + " - " +
-                date;
+        return this.getTypeIcon() + this.getStatusIcon() + " " + description + " - "
+                + date;
     }
 
     /**
