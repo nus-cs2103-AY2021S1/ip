@@ -48,7 +48,7 @@ public class Duke {
             assert tasks != null : "Tasks is null";
             result = Ui.print(tasks.toString());
         } else if (cmd == Command.WRITE) {
-            tempWriting.append(in);
+            tempWriting.append(in).append("\n");
             result = Ui.print("add another line or type 'complete' to save your note");
         } else if (cmd == Command.NOTES) {
             result = Ui.print(notes.toString());
@@ -65,6 +65,7 @@ public class Duke {
         } else if (cmd == Command.COMPLETE) {
             isWriting = false;
             tempNote.updateContent(tempWriting.toString());
+            tempWriting = new StringBuilder();
             result = Ui.print("your note has been saved!");
         } else if (cmd == Command.VIEW) {
             int current;

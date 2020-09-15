@@ -1,4 +1,5 @@
-T | false | newtodo
+T | true | newtodo
 E | false | hey | 04 Feb 2010 1900
 T | false | hi
 T | false | dfkjgdfg
+T | false | hehee
