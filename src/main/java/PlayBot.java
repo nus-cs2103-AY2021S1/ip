@@ -2,8 +2,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PlayBot {
-    public String player;  //keep track of the player
-    public List<GameRecord> gameLog;    //record the result of every round of game
+    public String player; // keep track of the player
+    public List<GameRecord> gameLog; // record the result of every round of game
     public PlayBot() {
         gameLog = new ArrayList<>();
     }

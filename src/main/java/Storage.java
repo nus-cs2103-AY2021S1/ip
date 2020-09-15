@@ -62,9 +62,9 @@ public class Storage {
         }
         int indexOfComma = data.indexOf(',');
         description = data.substring(2, indexOfComma);
-        due = data.substring(indexOfComma+1);
+        due = data.substring(indexOfComma + 1);
         LocalDate ddl = LocalDate.parse(due);
-        return new Deadline(done,description, ddl);
+        return new Deadline(done, description, ddl);
     }
 
     private static Task parseEvent(String data) {
@@ -80,7 +80,7 @@ public class Storage {
         }
         int indexOfComma = data.indexOf(',');
         description = data.substring(2, indexOfComma);
-        due = data.substring(indexOfComma+1);
+        due = data.substring(indexOfComma + 1);
         LocalDate ddl = LocalDate.parse(due);
         return new Event(done, description, ddl);
     }
@@ -107,12 +107,12 @@ public class Storage {
      * @throws IOException
      */
     public static void writeData(List<Task> list) throws IOException {
-        f.deleteOnExit();//delete the old file
+        f.deleteOnExit(); // delete the old file
         File file = new File(filePath);
         file.createNewFile();
         FileWriter fw = new FileWriter(file);
         for (Task task: list) {
-            String temp = Parser.unparse(task);//convert Task into String
+            String temp = Parser.unparse(task); // convert Task into String
             fw.write(temp + System.lineSeparator());
         }
         fw.close();
