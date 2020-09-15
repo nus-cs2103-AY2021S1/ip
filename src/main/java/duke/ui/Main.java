@@ -6,6 +6,7 @@ import duke.Duke;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -16,7 +17,8 @@ public class Main extends Application {
 
     private static final String PATH_TO_MAIN_WINDOW = "/view/MainWindow.fxml";
     private static final String PATH_TO_MAIN_WINDOW_STYLES = "/view/MainWindow.css";
-    private static final String NAME = "Incredible Bot";
+    private static final String PATH_TO_IMG = "/images/dash.png";
+    private static final String NAME = "IncrediBot";
 
     private final Duke duke = new Duke();
 
@@ -33,6 +35,7 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             scene.getStylesheets().add(PATH_TO_MAIN_WINDOW_STYLES);
             stage.setTitle(NAME);
+            stage.getIcons().add(new Image(Main.class.getResourceAsStream(PATH_TO_IMG)));
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();

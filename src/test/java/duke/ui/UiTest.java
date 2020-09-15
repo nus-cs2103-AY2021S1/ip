@@ -19,14 +19,6 @@ public class UiTest {
     private final ToDo toDo = new ToDo("test");
 
     /**
-     * Tests greetings method.
-     */
-    @Test
-    public void testGreeting() {
-        assertEquals("Welcome to Incredible Bot!\nWhat can I do for you?\n", Ui.greetings());
-    }
-
-    /**
      * Tests goodbye method.
      */
     @Test

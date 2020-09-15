@@ -57,8 +57,7 @@ public class Keyword {
 
     // Ui
     public static final String EMPTY_STRING_ERROR = "String builder is empty!";
-    public static final String WELCOME_MESSAGE_ONE = "Welcome to Incredible Bot!";
-    public static final String WELCOME_MESSAGE_TWO = "What can I do for you?";
+    public static final String WELCOME_MESSAGE = "Welcome back";
     public static final String GOODBYE_MESSAGE = "Bye! Hope to see you again soon!";
     public static final String TASK_MARKED_MESSAGE = "Nice! I've marked this task as done:";
     public static final String TASK_DELETED_MESSAGE = "Noted. I've removed this task:";

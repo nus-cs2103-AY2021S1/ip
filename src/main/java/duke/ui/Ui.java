@@ -15,8 +15,6 @@ import static duke.util.Keyword.SORT_SUCCESS_MESSAGE;
 import static duke.util.Keyword.TASK_ADDED_MESSAGE;
 import static duke.util.Keyword.TASK_DELETED_MESSAGE;
 import static duke.util.Keyword.TASK_MARKED_MESSAGE;
-import static duke.util.Keyword.WELCOME_MESSAGE_ONE;
-import static duke.util.Keyword.WELCOME_MESSAGE_TWO;
 
 import java.util.stream.IntStream;
 
@@ -79,15 +77,6 @@ public class Ui {
      */
     private static void appendWithNewLine(StringBuilder stringBuilder, String string) {
         stringBuilder.append(string).append(LINE_SEPARATOR);
-    }
-
-    /**
-     * Greets the user upon starting the program.
-     *
-     * @return Greetings message to the user.
-     */
-    public static String greetings() {
-        return stringFormatter(WELCOME_MESSAGE_ONE, WELCOME_MESSAGE_TWO);
     }
 
     /**

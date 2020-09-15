@@ -1,10 +1,10 @@
-# User Guide for Incredible Bot
+# User Guide for IncrediBot
 
 *Keane Chan Jun Yu | A0205678W*
 
 <p align="center"><img src="Ui.png" width="75%"/></p>
 
-Welcome to Incredible Bot, a task manager app which manages your todos, events and deadlines!
+Welcome to IncrediBot, a task manager app which manages your todos, events and deadlines!
 
 ## Table of Contents
 - [Features](#Features)
@@ -28,7 +28,7 @@ Welcome to Incredible Bot, a task manager app which manages your todos, events a
 
 ## Features
 
-In the Incredible Bot, there types of tasks can be created:
+In the IncrediBot, there types of tasks can be created:
 
 ### 1. Todo
 
@@ -228,7 +228,7 @@ Now you have 2 tasks in the list.
 
 ### `help` - Displays the list of commands available
 
-Incredible Bot will display the list of commands that he knows.
+IncrediBot will display the list of commands that he knows.
 
 Example of usage:
 
@@ -267,9 +267,11 @@ Bye! Hope to see you again soon!
 ## Acknowledgements
 
 ### External packages Used
-- [JUnit by JUnit Team](https://github.com/junit-team/junit5/) - For testing classes and methods in Incredible Bot
+- [JUnit by JUnit Team](https://github.com/junit-team/junit5/) - For testing classes and methods in IncrediBot
 - [JavaFX by OpenJDK](https://github.com/openjdk/jfx) - For creating Graphical User Interface.
 
 ### Images Used
 - [User image](https://www.pngitem.com/middle/hbxJbTo_the-incredibles-2-mrs-incredible-png-by-metropolis/)
-- [Duke image](https://www.pngitem.com/middle/xwTbRJ_incredibles-2-mr-incredible-png-clipart-png-download/)
+- [Incredibot image](https://www.pngitem.com/middle/xwTbRJ_incredibles-2-mr-incredible-png-clipart-png-download/)
+- [Greeting image](https://www.pngitem.com/middle/hJJboRT_jackjack-incredibles-freetoedit-jack-jack-parr-the-incredibles/)
+- [App icon](https://www.pngitem.com/middle/xwThJR_elastigirl-calls-danger-incredibles-incredibles-dash-hd-png/)
