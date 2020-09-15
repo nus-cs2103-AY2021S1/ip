@@ -12,7 +12,11 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 
 /**
  * Dialog box consists of an ImageView to represent the speaker's face and a label containing text from the speaker.
@@ -37,7 +41,10 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        
+        Color col = Color.rgb(240, 228, 228);
+        CornerRadii corn = new CornerRadii(10);
+        dialog.setBackground(new Background(new BackgroundFill(col, corn, null)));
         dialog.setText(text);
         displayPicture.setImage(img);
     }
