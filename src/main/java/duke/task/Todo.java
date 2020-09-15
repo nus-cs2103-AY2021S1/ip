@@ -45,6 +45,10 @@ public class Todo extends Task {
 
     @Override
     public String toString() {
-        return TODO_ICON + super.toString() + stringifyTags();
+        String tags = stringifyTags();
+        String displayTags = tags.equals("")
+                ? ""
+                : " Tags: " + tags;
+        return TODO_ICON + super.toString() + displayTags;
     }
 }

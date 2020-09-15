@@ -22,7 +22,7 @@ public class TodoTest {
         Todo todo = Todo.createTodo(description);
         todo.addTags(new String[]{"todo1", "todo2", "todo3"});
         String saveString = todo.toSaveString();
-        String expected = "0todo " + description + " " + Task.TAGS_DELIMITER + " #todo1 #todo2 #todo3";
+        String expected = "0todo " + description + " " + Task.TAGS_DELIMITER + "#todo1 #todo2 #todo3";
         assertEquals(expected, saveString);
     }
 

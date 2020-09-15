@@ -103,7 +103,7 @@ Now you have 8 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 I have added the tags to the following task:
-  [D][X] apply for internship (by: Dec 4 2020 11:59 PM) #lazy #freeload #SU
+  [D][X] apply for internship (by: Dec 4 2020 11:59 PM) Tags: #lazy #freeload #SU
 ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
@@ -114,13 +114,13 @@ Here are the tasks in your list:
 5.[E][X] go for a run (at: Aug 25 2020 08:00 PM)
 6.[E][X] end of semester (at: Dec 6 2020 08:00 PM)
 7.[T][X] eat lunch
-8.[D][X] apply for internship (by: Dec 4 2020 11:59 PM) #lazy #freeload #SU
+8.[D][X] apply for internship (by: Dec 4 2020 11:59 PM) Tags: #lazy #freeload #SU
 ____________________________________________________________
 ____________________________________________________________
 These are the tags that were removed:
 freeload
 These are the remaining tags for the specified task:
-  [D][X] apply for internship (by: Dec 4 2020 11:59 PM) #lazy #SU
+  [D][X] apply for internship (by: Dec 4 2020 11:59 PM) Tags: #lazy #SU
 ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
@@ -131,7 +131,7 @@ Here are the tasks in your list:
 5.[E][X] go for a run (at: Aug 25 2020 08:00 PM)
 6.[E][X] end of semester (at: Dec 6 2020 08:00 PM)
 7.[T][X] eat lunch
-8.[D][X] apply for internship (by: Dec 4 2020 11:59 PM) #lazy #SU
+8.[D][X] apply for internship (by: Dec 4 2020 11:59 PM) Tags: #lazy #SU
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task: 
@@ -143,7 +143,7 @@ These are the tasks that are due within 150 days:
 4.[T][X] take a nap
 6.[E][X] end of semester (at: Dec 6 2020 08:00 PM)
 7.[T][X] eat lunch
-8.[D][X] apply for internship (by: Dec 4 2020 11:59 PM) #lazy #SU
+8.[D][X] apply for internship (by: Dec 4 2020 11:59 PM) Tags: #lazy #SU
 ____________________________________________________________
 ___________________________ERROR!___________________________
 Please input a valid number
@@ -160,7 +160,7 @@ Here are the tasks in your list:
 5.[E][X] go for a run (at: Aug 25 2020 08:00 PM)
 6.[E][X] end of semester (at: Dec 6 2020 08:00 PM)
 7.[T][X] eat lunch
-8.[D][X] apply for internship (by: Dec 4 2020 11:59 PM) #lazy #SU
+8.[D][X] apply for internship (by: Dec 4 2020 11:59 PM) Tags: #lazy #SU
 9.[E][X] project meeting (at: Aug 30 2020 08:00 PM)
 ____________________________________________________________
 ____________________________________________________________
@@ -194,7 +194,7 @@ Here are the tasks in your list:
 4.[E][X] go for a run (at: Aug 25 2020 08:00 PM)
 5.[E][X] end of semester (at: Dec 6 2020 08:00 PM)
 6.[T][X] eat lunch
-7.[D][X] apply for internship (by: Dec 4 2020 11:59 PM) #lazy #SU
+7.[D][X] apply for internship (by: Dec 4 2020 11:59 PM) Tags: #lazy #SU
 8.[E][X] project meeting (at: Aug 30 2020 08:00 PM)
 ____________________________________________________________
 ____________________________________________________________

@@ -71,6 +71,10 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         String formattedDate = DukeDateTime.localDateToFormattedString(date);
-        return DEADLINE_SYMBOL + super.toString() + "(by: " + formattedDate + " " + time12h + ")" + stringifyTags();
+        String tags = stringifyTags();
+        String displayTags = tags.equals("")
+                ? ""
+                : " Tags: " + tags;
+        return DEADLINE_SYMBOL + super.toString() + "(by: " + formattedDate + " " + time12h + ")" + displayTags;
     }
 }

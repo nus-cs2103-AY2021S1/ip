@@ -3,18 +3,17 @@ package duke.task;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 // Parent class for all types of tasks that can be created by the user.
 public abstract class Task {
-    public static final String TAGS_DELIMITER = "\\\\tags";
+    public static final String TAGS_DELIMITER = "//tags ";
     private static final String SYMBOL_DONE = "O";
     private static final String SYMBOL_NOT_DONE = "X";
 
     protected String description;
     protected boolean isDone = false;
-    protected ArrayList<String> tags = new ArrayList<>(Collections.singletonList(""));
+    protected ArrayList<String> tags = new ArrayList<>();
 
     public Task(String description) {
         this.description = description;
@@ -70,10 +69,13 @@ public abstract class Task {
     }
 
     protected String stringifyTags() {
-        return String.join(" #", tags);
+        return String.join(" ", tags.stream().map(tag -> "#" + tag).toArray(String[]::new));
     }
 
     protected String getTagsSaveString() {
+        if (tags.isEmpty()) {
+            return "";
+        }
         return TAGS_DELIMITER + stringifyTags();
     }
 

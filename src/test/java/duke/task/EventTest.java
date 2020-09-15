@@ -22,7 +22,7 @@ public class EventTest {
         Event event = Event.createEvent(description);
         event.addTags(new String[]{"event1", "event2", "event3"});
         String saveString = event.toSaveString();
-        String expected = "0event " + description + " " + Task.TAGS_DELIMITER + " #event1 #event2 #event3";
+        String expected = "0event " + description + " " + Task.TAGS_DELIMITER + "#event1 #event2 #event3";
         assertEquals(expected, saveString);
     }
 
