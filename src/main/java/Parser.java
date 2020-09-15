@@ -130,8 +130,8 @@ public class Parser {
 
         if (trimmedStr.length() < 3) {
             throw new DukeException("*Invalid command.*"
-                    + "\n  Duke Commands: bye, list, find, done, delete, todo, "
-                    + "\n                 event, deadline");
+                    + "\n  Duke Commands: bye, list, find, done, delete,"
+                    + "\n                               todo, event, deadline");
         }
 
         assert trimmedStr.length() > 2 : "user input should not be empty/just white spaces";
@@ -164,8 +164,8 @@ public class Parser {
 
         } else if (commandSpace <= 0) {
             throw new DukeException("*Invalid command.*"
-                    + "\n  Duke Commands: bye, list, find, done, delete, todo, "
-                    + "\n                 event, deadline");
+                    + "\n  Duke Commands: bye, list, find, done, delete,"
+                    + "\n                               todo, event, deadline");
         }
 
         assert commandSpace > 0 : "There should be a spacing after command call from this point onwards";
@@ -231,8 +231,8 @@ public class Parser {
 
         } else if (commandSpace <= 4) {
             throw new DukeException("*Invalid command.*"
-                    + "\n  Duke Commands: bye, list, find, done, delete, todo, "
-                    + "\n                 event, deadline");
+                    + "\n  Duke Commands: bye, list, find, done, delete,"
+                    + "\n                               todo, event, deadline");
         }
 
         assert str.length() > 4 : "The length of command with a space character should be > 4";
@@ -265,8 +265,8 @@ public class Parser {
 
         } else if (commandSpace <= 5) {
             throw new DukeException("*Invalid command.*"
-                    + "\n  Duke Commands: bye, list, find, done, delete, todo, "
-                    + "\n                 event, deadline");
+                    + "\n  Duke Commands: bye, list, find, done, delete,"
+                    + "\n                               todo, event, deadline");
         }
 
         assert str.length() > 5 : "The length of command with a space character should be > 5";
@@ -289,8 +289,8 @@ public class Parser {
 
         } else if (commandSpace <= 6) {
             throw new DukeException("*Invalid command.*"
-                    + "\n  Duke Commands: bye, list, find, done, delete, todo, "
-                    + "\n                 event, deadline");
+                    + "\n  Duke Commands: bye, list, find, done, delete,"
+                    + "\n                               todo, event, deadline");
         }
 
         assert str.length() > 6 : "The length of command with a space character should be > 6";
@@ -323,8 +323,8 @@ public class Parser {
 
         } else {
             throw new DukeException("*Invalid command.*"
-                    + "\n  Duke Commands: bye, list, find, done, delete, todo, "
-                    + "\n                 event, deadline");
+                    + "\n  Duke Commands: bye, list, find, done, delete,"
+                    + "\n                               todo, event, deadline");
         }
     }
 
