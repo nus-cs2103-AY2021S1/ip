@@ -1,9 +1,4 @@
-import duke.Command;
-import duke.DukeException;
-import duke.Parser;
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
+package duke;
 
 import javafx.application.Application;
 import javafx.scene.Scene;

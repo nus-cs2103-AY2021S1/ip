@@ -1,4 +1,4 @@
-import duke.DukeException;
+package duke;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
