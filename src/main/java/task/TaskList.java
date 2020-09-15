@@ -46,15 +46,13 @@ public class TaskList {
      */
     public String addToTaskList(Task task) {
         this.taskList.add(task);
-        return "    ____________________________________________________\n"
-                + "     Got it. I've added this task:\n"
+        return "     Got it. I've added this task:\n"
                 + "     "
                 + task
                 + "\n"
                 + "     Now you have "
                 + size()
-                + " task(s) in the list.\n"
-                + "    ____________________________________________________\n";
+                + " task(s) in the list.\n";
     }
 
     /**
@@ -69,15 +67,13 @@ public class TaskList {
 
         Task task = getTask(index);
         this.taskList.remove(index);
-        return "    ____________________________________________________\n"
-                + "     Noted. I've removed this task:\n"
+        return "     Noted. I've removed this task:\n"
                 + "     "
                 + task
                 + "\n"
                 + "     Now you have "
                 + size()
-                + " task(s) in the list.\n"
-                + "    ____________________________________________________\n";
+                + " task(s) in the list.\n";
     }
 
     /**
@@ -109,7 +105,6 @@ public class TaskList {
      */
     public String showList() {
         StringBuilder listDisplay = new StringBuilder();
-        listDisplay.append("    ____________________________________________________\n");
         listDisplay.append("     Here are the tasks in your list:\n");
         for (int i = 1; i <= this.taskList.size(); i++) {
             listDisplay.append("     ");
@@ -118,7 +113,6 @@ public class TaskList {
             listDisplay.append(this.taskList.get(i - 1));
             listDisplay.append("\n");
         }
-        listDisplay.append("    ____________________________________________________\n");
 
         return listDisplay.toString();
     }

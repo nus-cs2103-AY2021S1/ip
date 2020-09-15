@@ -16,14 +16,10 @@ import task.TaskList;
  * <p> (i) interacting with user </p>
  */
 public class UI {
-    private static final String GREETING = "    ____________________________________________________\n"
-            + "     Hello! I'm Duke\n"
-            + "     What can I do for you?\n"
-            + "    ____________________________________________________\n";
+    private static final String GREETING = "     Hello! I'm Duke\n"
+            + "     What can I do for you?\n";
 
-    private static final String ENDWORDS = "    ____________________________________________________\n"
-            + "     Bye. Hope to see you again soon!\n"
-            + "    ____________________________________________________\n";
+    private static final String ENDWORDS = "     Bye. Hope to see you again soon!\n";
 
     private CommandProcessor commandProcessor;
     private Path filePath;

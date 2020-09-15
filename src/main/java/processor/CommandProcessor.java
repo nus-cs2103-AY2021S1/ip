@@ -82,12 +82,10 @@ public class CommandProcessor {
                         throw new InvalidActionException(); // "done 0"
                     }
                     this.taskList.getTask(index - 1).markAsDone();
-                    return "    ____________________________________________________\n"
-                            + "     Nice! I've marked this task as done:\n"
+                    return "     Nice! I've marked this task as done:\n"
                             + "     "
                             + this.taskList.getTask(index - 1)
-                            + "\n"
-                            + "    ____________________________________________________\n";
+                            + "\n";
                 } catch (NumberFormatException e) {
                     throw new InvalidActionException(); // "done 1A" etc
                 }
