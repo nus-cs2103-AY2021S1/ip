@@ -7,38 +7,36 @@ import butler.task.TaskList;
 import butler.task.TaskListManager;
 
 /**
- * Represents a command to delete a <code>Task</code> from the current list of tasks.
+ * Represents a command to undo a number of changes to the task list.
  */
-public class DeleteCommand extends Command {
-    private final int taskIndex;
+public class UndoCommand extends Command {
+    private final int undoCount;
 
     /**
-     * Constructs a command to delete a task with specified <code>taskIndex</code>.
+     * Constructs a command to undo some commands.
      *
-     * @param taskIndex Index of task to be deleted.
+     * @param undoCount Number of commands to undo.
      */
-    public DeleteCommand(int taskIndex) {
-        this.taskIndex = taskIndex;
+    public UndoCommand(int undoCount) {
+        this.undoCount = undoCount;
     }
 
     /**
-     * Deletes the task specified by <code>taskIndex</code> from the current list of tasks.
+     * Undo a given number of commands.
      * Updates the list of tasks saved in the hard disk and
-     * alerts the user that the task has been successfully deleted.
+     * alerts the user that changes have been undone.
      *
      * @param taskListManager Manager of the list of tasks on which this command acts on.
      * @param ui User interface to interact with user.
      * @param storage Storage which stores current list of tasks on hard disk.
      * @return String response of task execution.
-     * @throws ButlerException if <code>taskIndex</code> is an invalid index.
+     * @throws ButlerException if <code>undoCount</code> is an invalid number.
      */
     @Override
     public String execute(TaskListManager taskListManager, Ui ui, Storage storage) throws ButlerException {
-        TaskList newTaskList = taskListManager.getCurrentTaskList().copy();
-        newTaskList.deleteTask(taskIndex);
-        taskListManager.addLatestTaskList(newTaskList);
-        storage.storeTaskList(newTaskList);
-        return ui.showTaskIsDeleted(taskIndex);
+        TaskList taskList = taskListManager.getPastTaskList(undoCount);
+        storage.storeTaskList(taskList);
+        return ui.showOldTaskList(taskList);
     }
 
     /**

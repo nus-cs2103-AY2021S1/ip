@@ -44,13 +44,8 @@ public class TaskList {
      * @param taskIndex Index of the task.
      * @return Task at the specified <code>taskIndex</code>.
      */
-    public Task getTask(int taskIndex) throws ButlerException {
-        try {
-            return taskList.get(taskIndex);
-        } catch (IndexOutOfBoundsException e) {
-            throw new ButlerException("Please give a valid index. \""
-                    + taskIndex + "\" is not a valid index.");
-        }
+    public Task getTask(int taskIndex) {
+        return taskList.get(taskIndex);
     }
 
     /**
@@ -64,7 +59,7 @@ public class TaskList {
 
     /**
      * Marks the task at the specified <code>taskIndex</code> as complete.
-     * Valid indexes range from 0 to less than the size of this list of tasks.
+     * Valid indexes range from 1 to the size of this list of tasks.
      *
      * @param taskIndex Index of the task to mark as complete.
      * @throws ButlerException if the index is out of range.
@@ -80,7 +75,7 @@ public class TaskList {
 
     /**
      * Removes the task at the specified <code>taskIndex</code> from this list.
-     * Valid indexes range from 0 to less than the size of this list of tasks.
+     * Valid indexes range from 1 to the size of this list of tasks.
      *
      * @param taskIndex Index of the task to be removed.
      * @throws ButlerException if the index is out of range.
@@ -105,5 +100,16 @@ public class TaskList {
                 .filter(t -> t.getSummary().contains(keyword))
                 .collect(Collectors.toCollection(ArrayList::new));
         return new TaskList(filteredArrayList);
+    }
+
+    /**
+     * Returns a deep copy of this task list.
+     *
+     * @return Deep copy of this task list.
+     */
+    public TaskList copy() {
+        ArrayList<Task> taskListCopy = new ArrayList<>();
+        taskList.forEach(t -> taskListCopy.add(t.copy()));
+        return new TaskList(taskListCopy);
     }
 }

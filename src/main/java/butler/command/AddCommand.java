@@ -1,13 +1,13 @@
 package butler.command;
 
-import butler.exception.ButlerException;
 import butler.io.Storage;
 import butler.io.Ui;
 import butler.task.Task;
 import butler.task.TaskList;
+import butler.task.TaskListManager;
 
 /**
- * Represents a command to add a <code>Task</code> to a <code>TaskList</code>.
+ * Represents a command to add a <code>Task</code> to the current list of tasks.
  */
 public class AddCommand extends Command {
     private final Task task;
@@ -22,20 +22,21 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Adds the task to the specified <code>taskList</code>.
+     * Adds the task to the current list of tasks.
      * Updates the list of tasks saved in the hard disk and
      * alerts the user that the task has been successfully added.
      *
-     * @param taskList List of tasks in which task is to be added to.
+     * @param taskListManager Manager of the list of tasks in which task is to be added to.
      * @param ui User interface to interact with user.
-     * @param storage Storage which stores given <code>taskList</code> on hard disk.
+     * @param storage Storage which stores current list of tasks on hard disk.
      * @return String response of task execution.
-     * @throws ButlerException if an error with saving the list of tasks occurs.
      */
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) throws ButlerException {
-        taskList.addTask(task);
-        storage.storeTaskList(taskList);
+    public String execute(TaskListManager taskListManager, Ui ui, Storage storage) {
+        TaskList newTaskList = taskListManager.getCurrentTaskList().copy();
+        newTaskList.addTask(task);
+        taskListManager.addLatestTaskList(newTaskList);
+        storage.storeTaskList(newTaskList);
         return ui.showTaskIsAdded(task);
     }
 

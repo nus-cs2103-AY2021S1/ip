@@ -1,9 +1,9 @@
 package butler.command;
 
-import butler.exception.ButlerException;
 import butler.io.Storage;
 import butler.io.Ui;
 import butler.task.TaskList;
+import butler.task.TaskListManager;
 
 /**
  * Represents a command to find tasks with specific words.
@@ -12,8 +12,7 @@ public class FindCommand extends Command {
     private final String keyword;
 
     /**
-     * Constructs a command to find tasks with the given <code>keyword</code> and
-     * updates the list of tasks saved in the hard disk.
+     * Constructs a command to find tasks with the given <code>keyword</code>.
      *
      * @param keyword Search keyword.
      */
@@ -22,19 +21,19 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Finds tasks within the given <code>taskList</code> that have the <code>keyword</code>.
-     * Alerts users via <code>ui</code> about the tasks that have been found.
+     * Finds tasks within the current list of tasks that have the <code>keyword</code>.
+     * Alerts the user about the tasks that have been found
+     * and updates the task list saved in the hard disk.
      *
-     * @param taskList List of tasks on which this command acts on.
+     * @param taskListManager Manager of the list of tasks on which this command acts on.
      * @param ui User interface to interact with user.
-     * @param storage Storage which stores given <code>taskList</code> on hard disk.
+     * @param storage Storage which stores current list of tasks on hard disk.
      * @return String response of task execution.
-     * @throws ButlerException if an error with saving the list of tasks occurs.
      */
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) throws ButlerException {
-        TaskList filteredTasks = taskList.findTasks(keyword);
-        storage.storeTaskList(taskList);
+    public String execute(TaskListManager taskListManager, Ui ui, Storage storage) {
+        TaskList filteredTasks = taskListManager.getCurrentTaskList().findTasks(keyword);
+        storage.storeTaskList(taskListManager.getCurrentTaskList());
         return ui.showFilteredTaskList(filteredTasks);
     }
 
