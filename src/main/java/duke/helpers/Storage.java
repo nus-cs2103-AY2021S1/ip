@@ -62,7 +62,7 @@ public class Storage {
             while (sc.hasNext()) {
                 addTasks(tasks, sc);
             }
-            addTasks(tasks, sc);
+            //addTasks(tasks, sc);
             if (tasks.size() == 0) {
                 throw new FIleEmptyException();
             } else {

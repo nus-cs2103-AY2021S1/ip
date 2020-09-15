@@ -99,7 +99,6 @@ public class DoneCommand extends Command {
     private String newInputInStorageFIle(TaskList tasks) {
         String s = "";
         for (int i = 0; i < tasks.getAllTasks().size(); i++) {
-            System.out.println(tasks.getAllTasks().get(i).getName() + "|");
             s = s + tasks.getAllTasks().get(i).inputListFormat() + "\n";
             //new taskList String since done is being set for task with iD mentioned by user
         }
