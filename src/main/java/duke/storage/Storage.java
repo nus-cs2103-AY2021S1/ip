@@ -1,20 +1,20 @@
 package duke.storage;
 
-import duke.exception.DukeException;
-import duke.task.TaskList;
-import duke.ui.Ui;
-
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import duke.exception.DukeException;
+import duke.task.TaskList;
+import duke.ui.Ui;
+
 /**
- * Storage class that writes the tasks to a file specified in src/data directory
+ * Storage class that writes the tasks to a file specified in data directory
  */
 public class Storage {
-    public static final Path dataDir = Paths.get(System.getProperty("user.dir"), "data");
+    public static final Path DATA_DIR = Paths.get(System.getProperty("user.dir"), "data");
     private final BufferedWriter writer;
 
     private Storage(BufferedWriter writer) {
@@ -30,10 +30,10 @@ public class Storage {
      */
     public static Storage create(String fileName) throws DukeException {
         try {
-            if (!Files.exists(Storage.dataDir)) {
-                Files.createDirectory(Storage.dataDir);
+            if (!Files.exists(Storage.DATA_DIR)) {
+                Files.createDirectory(Storage.DATA_DIR);
             }
-            Path filePath = Paths.get(Storage.dataDir.toString(), fileName);
+            Path filePath = Paths.get(Storage.DATA_DIR.toString(), fileName);
             BufferedWriter writer = Files.newBufferedWriter(filePath);
             return new Storage(writer);
         } catch (IOException e) {
