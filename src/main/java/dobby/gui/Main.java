@@ -23,6 +23,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            stage.setTitle("DOBBY- Task Manager");
             fxmlLoader.<MainWindow>getController().setDuke(dobby);
             stage.show();
         } catch (IOException e) {
