@@ -68,6 +68,9 @@ public class TaskListStorage {
     }
 
     private TaskList deserializeTaskList(String string) throws DeserializingException {
+        if (string.isBlank()) {
+            return new TaskList();
+        }
         String[] taskStrings = string.split("\n");
         TaskList tasklist = new TaskList();
         for (String taskString : taskStrings) {
