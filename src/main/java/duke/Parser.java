@@ -81,7 +81,7 @@ public class Parser {
      * @param dateString Date provided by user in the form of string.
      * @return Date in LocalDateTime.
      */
-    public static LocalDateTime parseDate(String dateString) throws DukeException{
+    public static LocalDateTime parseDate(String dateString) throws DukeException {
         for (String format : DATE_FORMATS) {
             try {
                 return LocalDateTime.parse(
