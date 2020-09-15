@@ -35,7 +35,7 @@ public class Task {
         this.priority = priority;
     }
 
-    public boolean getIsDone() {
+    public boolean getCompletionStatus() {
         return this.isDone;
     }
 
