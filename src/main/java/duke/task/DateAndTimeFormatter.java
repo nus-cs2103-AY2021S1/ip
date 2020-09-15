@@ -6,6 +6,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+/**
+ * Format date and time.
+ */
 public class DateAndTimeFormatter {
     ArrayList<Object> dateAndTime;
     

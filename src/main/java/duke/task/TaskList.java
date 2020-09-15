@@ -8,11 +8,9 @@ import duke.command.FindTaskByDate;
 import duke.command.Help;
 import duke.command.ManageTask;
 import duke.command.ShowTasks;
-import duke.io.Layout;
 import duke.io.Storage;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * Represents a current task list manager.

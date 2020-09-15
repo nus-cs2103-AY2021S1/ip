@@ -3,7 +3,6 @@ package duke.task;
 import duke.io.Parser;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 /**
  * Represents a specific task with event details.

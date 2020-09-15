@@ -1,7 +1,8 @@
 package duke;
 
 import java.util.ArrayList;
-
+import java.util.Timer;
+import java.util.TimerTask;
 import duke.command.Command;
 import duke.task.TaskList;
 import duke.task.DukeException;
@@ -33,6 +34,22 @@ public class Duke {
         return ui.greet();
     }
 
+    /**
+     * Delay the exit of duke for user to see the Duke's response for 2 seconds
+     */
+    //Solution below adapted from https://stackoverflow.com/questions/15747277/how-to-make-java-program-exit-after-a-couple-of-seconds
+    public void delayExit() {
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+
+            @Override
+            public void run() {
+                System.exit(0);
+            }
+        }, 2000);
+    }
+    
+    
     public Duke() {
         String filePath = "data/duke.txt";
         storage = new Storage(filePath);

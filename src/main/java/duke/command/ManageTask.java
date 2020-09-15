@@ -6,6 +6,9 @@ import duke.task.Task;
 
 import java.util.ArrayList;
 
+/**
+ * Represent a task manager. Can mark a task as done and delete a task.
+ */
 public class ManageTask extends Command {
     private Action type; 
     private String inputIndex;

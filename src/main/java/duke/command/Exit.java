@@ -1,12 +1,14 @@
 package duke.command;
 
 import duke.io.Layout;
-import duke.io.Parser;
 import duke.io.Storage;
 import duke.task.Task;
 
 import java.util.ArrayList;
 
+/**
+ * Represents exit command.
+ */
 public class Exit extends Command {
     
     Storage storage;

@@ -1,8 +1,5 @@
 package duke.task;
 
-import duke.io.Parser;
-
-import java.util.ArrayList;
 import java.util.Arrays;
 
 /**

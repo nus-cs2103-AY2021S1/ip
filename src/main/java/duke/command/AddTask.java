@@ -10,6 +10,9 @@ import duke.task.Todo;
 
 import java.util.ArrayList;
 
+/**
+ * Represents add task command.
+ */
 public class AddTask extends Command {
 
     Type type;

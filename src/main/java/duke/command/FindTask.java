@@ -7,6 +7,9 @@ import duke.task.Task;
 
 import java.util.ArrayList;
 
+/**
+ * Represent find task by task description command.
+ */
 public class FindTask extends Command {
     
     String [] input;

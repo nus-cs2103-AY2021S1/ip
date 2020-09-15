@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class Help extends Command {
 
     /**
-     * Return all valid commands that Duke can execute.
+     * Represent help command and return all valid commands.
      */
     @Override
     public String execute(ArrayList<Task> tasks, Layout layout) {

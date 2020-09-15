@@ -6,6 +6,9 @@ import duke.task.Task;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+/**
+ * Represents a class to format user input.
+ */
 public class Parser {
 
     /**
@@ -143,11 +146,18 @@ public class Parser {
         if (len == 4 && tryStringToInteger(str) != null) {
             int time = tryStringToInteger(str);
             String period = "am";
-            if (time >= 1200) {
+            if (time > 2359 || tryStringToInteger(str.substring(2)) > 59 ) {
+                //Case: 2400 || 1360
+                return null;
+            } 
+            else if (time >= 1200) {
                 period = "pm";
                 formattedTime += (time - 1200);
+            } else if (str.substring(0, 2).equals("00")) {
+                //Case: 0012
+                formattedTime += "12" + str.substring(2);
             } else {
-                formattedTime += time;
+                    formattedTime += time;
             }
             formattedTime = formattedTime + period;
             return formattedTime;
@@ -202,8 +212,10 @@ public class Parser {
             }
         } else {
             if (splitArr[1].length() == 3) {
+                //Case: 8.2pm
                 return splitArr[0] + "." + splitArr[1].substring(0, 1) + "0" + splitArr[1].substring(1,3);
             } else {
+                //Case: 8.20pm
                 return t;
             }
         }

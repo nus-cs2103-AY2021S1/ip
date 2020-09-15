@@ -7,6 +7,9 @@ import duke.task.Task;
 
 import java.util.ArrayList;
 
+/**
+ * Represent find task by date command.
+ */
 public class FindTaskByDate extends Command {
     String [] input;
     public FindTaskByDate(String [] input) {
