@@ -1,7 +1,7 @@
 # Zelda Bot User Guide
 This is simple chat bot application I created for my CS2103 Project. The aesthetics of the bot is inspired by my favourite childhood game: Legend of Zelda.
 
-![image] (https://zelda.gamepedia.com/File:CoH_Link_Sprite.gif)
+![image](https://zelda.gamepedia.com/File:CoH_Link_Sprite.gif)
 
 
 # **Zelda Features**
@@ -212,5 +212,5 @@ Update the description or duedate of an existing task in your list of task.
 ---
     
 # Thanks for reading this user guide!
-![image] (https://zelda.gamepedia.com/File:CoH_Link_Artwork.png)
+![image](https://zelda.gamepedia.com/File:CoH_Link_Artwork.png)
     
