@@ -1,9 +1,11 @@
 T | 1 |  Refill tea | 
-E | 0 |  Zoom Call  | 7pm | CS2103
+E | 0 |  Zoom Call  | 7pm | 
 D | 0 |  Assignment 2 | 2020-09-16 | Urgent
 T | 0 |  Pick Up Mum and Dad | 
-E | 0 |  Dinner  | 9pm | 
-E | 0 |  Dental appointment  | 16 Sep 6pm | 
+E | 0 | Dinner  | 9pm | 
+E | 0 | Dental appointment  | 16 Sep 6pm | 
 T | 0 |  Get New Haircut | 
 T | 0 |  Finish Notes | 
-E | 0 | Pick Friend Up  | 2pm | 
+E | 0 | die  | 2 | 
+E | 0 | die  | 3 | happy, die
+E | 0 | die  | 5 | 
