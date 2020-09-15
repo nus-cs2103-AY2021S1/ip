@@ -6,16 +6,13 @@ import java.util.ArrayList;
  * Prints the relevant messages.
  */
 public class Ui {
-    private static final String DIVIDER = "--------------------------------------------------------";
-    private static final String DIVIDER_HELP = "********************************************";
-
     /**
      * Prints and returns logo "Welcome" greeting.
      *
      * @return System reply message.
      */
     public static String getLogoMsg() {
-        String logo = "\n\n\n|^_^|┛\nWELCOME to DukeBT!\n";
+        String logo = "|^_^|┛\nWELCOME to DukeBT!";
         System.out.println(logo);
         return logo;
     }
@@ -26,11 +23,9 @@ public class Ui {
      * @return System reply message.
      */
     public static String getGreetingMsg() {
-        String greetingMsg = DIVIDER
-                + "\n Hello! I'm DukeBT."
+        String greetingMsg = " Hello! I'm DukeBT."
                 + "\n What can I do for you?"
-                + "\n\n **Type 'help' to see what I can do. |^_^|"
-                + "\n" + DIVIDER + "\n";
+                + "\n\n **Type 'help' to see what I can do. |^_^|";
         System.out.println(greetingMsg);
         return greetingMsg;
     }
@@ -41,8 +36,7 @@ public class Ui {
      * @return System reply message.
      */
     public static String getHelpMsg() {
-        String commandList = DIVIDER_HELP
-                + " ┗( ⊙.⊙ )┛ "
+        String commandList = " ┗( ⊙.⊙ )┛ "
                 + "\n These are all the commands you may use:"
                 + "\n     1.list -- show all tasks"
                 + "\n     2.todo <task name> -- add a task"
@@ -55,8 +49,7 @@ public class Ui {
                 + "\n     9.archive all -- archive all tasks"
                 + "\n     10.list archive -- show all archived tasks"
                 + "\n     11.help -- show all commands"
-                + "\n     12.bye -- exit the chatbot"
-                + "\n" + DIVIDER_HELP + "\n";
+                + "\n     12.bye -- exit the chatbot";
         System.out.println(commandList);
         return commandList;
     }
@@ -67,12 +60,10 @@ public class Ui {
      * @return System reply message.
      */
     public static String getByeMsg() {
-        String byeMsg = DIVIDER
-                + "\n |^_^|┛"
+        String byeMsg = " |^_^|┛"
                 + "\n Bye. Hope to see you again soon!"
                 + "\n Your task list has been saved."
-                + "\n It will be automatically reloaded when you come back!"
-                + "\n" + DIVIDER + "\n";
+                + "\n It will be automatically reloaded when you come back!";
         System.out.println(byeMsg);
         return byeMsg;
     }
@@ -85,12 +76,10 @@ public class Ui {
      * @return System reply message.
      */
     public static String getAddingDeadlineTaskMsg(ArrayList<Task> tasks) {
-        String outputMsg = DIVIDER
-                + "\n (^.^)"
+        String outputMsg = " (^.^)"
                 + "\n Got it. I've added this Deadline task:"
                 + "\n     " + tasks.size() + "." + tasks.get(tasks.size() - 1)
-                + "\n Now you have " + tasks.size() + " tasks in the list."
-                + "\n" + DIVIDER + "\n";
+                + "\n Now you have " + tasks.size() + " tasks in the list.";
         System.out.println(outputMsg);
         return outputMsg;
     }
@@ -103,12 +92,10 @@ public class Ui {
      * @return System reply message.
      */
     public static String getAddingEventTaskMsg(ArrayList<Task> tasks) {
-        String outputMsg = DIVIDER
-                + "\n (^.^)"
+        String outputMsg = " (^.^)"
                 + "\n Got it. I've added this Event task:"
                 + "\n     " + tasks.size() + "." + tasks.get(tasks.size() - 1)
-                + "\n Now you have " + tasks.size() + " tasks in the list."
-                + "\n" + DIVIDER + "\n";
+                + "\n Now you have " + tasks.size() + " tasks in the list.";
         System.out.println(outputMsg);
         return outputMsg;
     }
@@ -121,12 +108,10 @@ public class Ui {
      * @return System reply message.
      */
     public static String getAddingTodoTaskMsg(ArrayList<Task> tasks) {
-        String outputMsg = DIVIDER
-                + "\n (^.^)"
+        String outputMsg = " (^.^)"
                 + "\n Got it. I've added this ToDo task:"
                 + "\n     " + tasks.size() + "." + tasks.get(tasks.size() - 1)
-                + "\n Now you have " + tasks.size() + " tasks in the list."
-                + "\n" + DIVIDER + "\n";
+                + "\n Now you have " + tasks.size() + " tasks in the list.";
         System.out.println(outputMsg);
         return outputMsg;
     }
@@ -140,12 +125,10 @@ public class Ui {
      * @return System reply message.
      */
     public static String getDoneTaskMsg(int index, ArrayList<Task> tasks) {
-        String outputMsg = DIVIDER
-                + "\n (ﾉﾟ0ﾟ)ﾉ~"
+        String outputMsg = " (ﾉﾟ0ﾟ)ﾉ~"
                 + "\n Congratulations from DukeBT! You have done 1 task!"
                 + "\n The task below has been marked as done:"
-                + "\n      Task #" + index + ". " + tasks.get(index - 1)
-                + "\n" + DIVIDER + "\n";
+                + "\n      Task #" + index + ". " + tasks.get(index - 1);
         System.out.println(outputMsg);
         return outputMsg;
     }
@@ -160,12 +143,10 @@ public class Ui {
      * @return System reply message.
      */
     public static String getDeleteTaskMsg(int index, Task taskToDelete, TaskList tasks) {
-        String outputMsg = DIVIDER
-                + "\n (ಠ‿↼)"
+        String outputMsg = " (ಠ‿↼)"
                 + "\n Noted. This task has been removed from your task list:"
                 + "\n      Task #" + index + ". " + taskToDelete
-                + "\n Now you have " + tasks.getTaskListSize() + " tasks in the list."
-                + "\n" + DIVIDER + "\n";
+                + "\n Now you have " + tasks.getTaskListSize() + " tasks in the list.";
         System.out.println(outputMsg);
         return outputMsg;
     }
@@ -179,16 +160,13 @@ public class Ui {
     public static String getAllTasksMsg(ArrayList<Task> tasks) {
         String outputMsg = "";
         if (tasks.isEmpty()) {
-            outputMsg = DIVIDER
-                    + "\n (⊙ ‿ ⊙)"
-                    + "\n Task list is empty, please try to add some tasks first."
-                    + "\n" + DIVIDER + "\n";
+            outputMsg = " (⊙ ‿ ⊙)"
+                    + "\n Task list is empty, please try to add some tasks first.";
             System.out.println(outputMsg);
             return outputMsg;
         }
 
-        outputMsg = DIVIDER
-                + "\n (⊙ ‿ ⊙)"
+        outputMsg = " (⊙ ‿ ⊙)"
                 + "\n You have " + tasks.size() + " tasks in total."
                 + "\n Here they are:";
         return getAllTasks(tasks, outputMsg);
@@ -203,16 +181,14 @@ public class Ui {
     public static String getAllArchivedTasksMsg(ArchivedTaskList archivedTasks) {
         String outputMsg = "";
         if (archivedTasks.getArchivedTaskList().isEmpty()) {
-            outputMsg = DIVIDER
-                    + "\n (⊙ ‿ ⊙)"
+            outputMsg = " (⊙ ‿ ⊙)"
                     + "\n Archived task list is empty, there's no archived task yet."
-                    + "\n" + DIVIDER + "\n";
+                    + "\n";
             System.out.println(outputMsg);
             return outputMsg;
         }
 
-        outputMsg = DIVIDER
-                + "\n (⊙ ‿ ⊙)"
+        outputMsg = " (⊙ ‿ ⊙)"
                 + "\n You have " + archivedTasks.getArchivedTaskList().size()
                 + " archived tasks in total."
                 + "\n Here they are:";
@@ -228,12 +204,10 @@ public class Ui {
      * @return System reply message.
      */
     public static String getAddingArchiveTaskMsg(Task taskToArchive, ArchivedTaskList archivedTasks) {
-        String outputMsg = DIVIDER
-                + "\n (ಠ‿↼)"
+        String outputMsg = " (ಠ‿↼)"
                 + "\n Noted. This task has been archived from your task list:"
                 + "\n      Task " + taskToArchive
-                + "\n Now you have " + archivedTasks.getTaskListSize() + " tasks in the archived task list."
-                + "\n" + DIVIDER + "\n";
+                + "\n Now you have " + archivedTasks.getTaskListSize() + " tasks in the archived task list.";
         System.out.println(outputMsg);
         return outputMsg;
     }
@@ -245,11 +219,9 @@ public class Ui {
      * @return System reply message.
      */
     public static String getArchiveAllTaskMsg(ArchivedTaskList archivedTasks) {
-        String outputMsg = DIVIDER
-                + "\n (ಠ‿↼)"
+        String outputMsg = " (ಠ‿↼)"
                 + "\n Noted. All tasks have been archived."
-                + "\n Now you have " + archivedTasks.getTaskListSize() + " tasks in the archived task list."
-                + "\n" + DIVIDER + "\n";
+                + "\n Now you have " + archivedTasks.getTaskListSize() + " tasks in the archived task list.";
         System.out.println(outputMsg);
         return outputMsg;
     }
@@ -264,16 +236,13 @@ public class Ui {
     public static String getMatchingTasksMsg(String keyword, ArrayList<Task> matchedTasks) {
         String outputMsg = "";
         if (matchedTasks.isEmpty()) {
-            outputMsg = DIVIDER
-                    + "\n (⊙ ‿ ⊙)"
-                    + "\n There is no matching task with the keyword - '" + keyword + "'."
-                    + "\n" + DIVIDER + "\n";
+            outputMsg = " (⊙ ‿ ⊙)"
+                    + "\n There is no matching task with the keyword - '" + keyword + "'.";
             System.out.println(outputMsg);
             return outputMsg;
         }
 
-        outputMsg = DIVIDER
-                + "\n (⊙ ‿ ⊙)"
+        outputMsg = " (⊙ ‿ ⊙)"
                 + "\n You have " + matchedTasks.size() + " tasks matched with keyword - '"
                 + keyword + "'."
                 + "\n Here they are:";
@@ -284,7 +253,6 @@ public class Ui {
         for (int i = 0; i < taskList.size(); i++) {
             outputMsg += "\n      " + (i + 1) + ". " + taskList.get(i);
         }
-        outputMsg += "\n" + DIVIDER + "\n";
 
         System.out.println(outputMsg);
         return outputMsg;

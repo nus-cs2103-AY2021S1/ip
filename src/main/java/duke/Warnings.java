@@ -6,8 +6,6 @@ import java.io.IOException;
  * Display different kinds of warning messages when error occurs.
  */
 public class Warnings extends Ui {
-    private static final String DIVIDER_WARNING = "###########################";
-
     /**
      * Display warning message when invalid done task index is given.
      *
@@ -16,13 +14,11 @@ public class Warnings extends Ui {
      */
     public static String getInvalidDoneTaskIndexMsg(int tasksSize) {
         assert tasksSize >= 0 : "Task size should not be less than 0.";
-        String warningMsg = DIVIDER_WARNING
-                + "\n [• ▂ •]What? "
+        String warningMsg = " [• ▂ •]What? "
                 + "\n I couldn't find this task, please re-enter a valid task index!"
                 + "\n And make sure you follow this format - 'done <Task_Index>'."
                 + "\n You have " + tasksSize + " tasks in total."
-                + "\n **Type 'help' to see what I can do. |^_^|"
-                + "\n" + DIVIDER_WARNING + "\n";
+                + "\n **Type 'help' to see what I can do. |^_^|";
         System.out.println(warningMsg);
         return warningMsg;
     }
@@ -33,12 +29,10 @@ public class Warnings extends Ui {
      * @return System warning message.
      */
     public static String getInvalidToDoMsg() {
-        String warningMsg = DIVIDER_WARNING
-                + "\n [• ▂ •]What? "
+        String warningMsg = " [• ▂ •]What? "
                 + "\n OOPS!!! The description of a todo cannot be empty."
                 + "\n And make sure you follow this format - 'todo <task name>'."
-                + "\n **Type 'help' to see what I can do. |^_^|"
-                + "\n" + DIVIDER_WARNING + "\n";
+                + "\n **Type 'help' to see what I can do. |^_^|";
         System.out.println(warningMsg);
         return warningMsg;
     }
@@ -49,12 +43,10 @@ public class Warnings extends Ui {
      * @return System warning message.
      */
     public static String getInvalidDeadlineMsg() {
-        String warningMsg = DIVIDER_WARNING
-                + "\n [• ▂ •]What? "
+        String warningMsg = " [• ▂ •]What? "
                 + "\n OOPS!!! The description or/and deadline of a deadline task cannot be empty."
                 + "\n And make sure you follow this format - 'deadline <task name> /by <task deadline>'."
-                + "\n **Type 'help' to see what I can do. |^_^|"
-                + "\n" + DIVIDER_WARNING + "\n";
+                + "\n **Type 'help' to see what I can do. |^_^|";
         System.out.println(warningMsg);
         return warningMsg;
     }
@@ -65,12 +57,10 @@ public class Warnings extends Ui {
      * @return System warning message.
      */
     public static String getInvalidEventMsg() {
-        String warningMsg = DIVIDER_WARNING
-                + "\n [• ▂ •]What? "
+        String warningMsg = " [• ▂ •]What? "
                 + "\n OOPS!!! The description or/and event timing of a event task cannot be empty."
                 + "\n And make sure you follow this format - 'event <event name> /at <event timing>'."
-                + "\n **Type 'help' to see what I can do. |^_^|"
-                + "\n" + DIVIDER_WARNING + "\n";
+                + "\n **Type 'help' to see what I can do. |^_^|";
         System.out.println(warningMsg);
         return warningMsg;
     }
@@ -81,11 +71,9 @@ public class Warnings extends Ui {
      * @return System warning message.
      */
     public static String getInvalidInputMsg() {
-        String warningMsg = DIVIDER_WARNING
-                + "\n [• ▂ •]What? "
+        String warningMsg = " [• ▂ •]What? "
                 + "\n OOPS!!! I'm sorry, but I don't know what that means."
-                + "\n **Type 'help' to see what I can do. |^_^|"
-                + "\n" + DIVIDER_WARNING + "\n";
+                + "\n **Type 'help' to see what I can do. |^_^|";
         System.out.println(warningMsg);
         return warningMsg;
     }
@@ -98,13 +86,11 @@ public class Warnings extends Ui {
      */
     public static String getInvalidDeleteMsg(int tasksSize) {
         assert tasksSize >= 0 : "Task size should not be less than 0.";
-        String warningMsg = DIVIDER_WARNING
-                + "\n [• ▂ •]What? "
+        String warningMsg = " [• ▂ •]What? "
                 + "\n I couldn't find this task, please re-enter a valid task index!"
                 + "\n And make sure you follow this format - 'delete <Task_Index>'."
                 + "\n You have " + tasksSize + " tasks in total."
-                + "\n **Type 'help' to see what I can do. |^_^|"
-                + "\n" + DIVIDER_WARNING + "\n";
+                + "\n **Type 'help' to see what I can do. |^_^|";
         System.out.println(warningMsg);
         return warningMsg;
     }
@@ -116,15 +102,12 @@ public class Warnings extends Ui {
      * @return System warning message.
      */
     public static String getInvalidFileInputMsg(IOException e) {
-        String warningMsg1 = DIVIDER_WARNING
-                + "\n [• ▂ •]What? "
+        String warningMsg1 = " [• ▂ •]What? "
                 + "\n Invalid data inside data/taskList.txt file..."
                 + "\n Details:";
         System.out.println(warningMsg1);
         System.err.println(e);
-        String warningMsg2 = "\n" + DIVIDER_WARNING + "\n";
-        System.out.println(warningMsg2);
-        String warningMsg = warningMsg1 + "\n" + e + warningMsg2;
+        String warningMsg = warningMsg1 + "\n" + e;
         return warningMsg;
     }
 
@@ -135,16 +118,13 @@ public class Warnings extends Ui {
      * @return System warning message.
      */
     public static String getInvalidFileOutputMsg(IOException e) {
-        String warningMsg1 = DIVIDER_WARNING
-                + "\n [• ▂ •]What? "
+        String warningMsg1 = " [• ▂ •]What? "
                 + "\n Errors occurred when try to write data into data/taskList.txt file..."
                 + "\n Details:";
         System.out.println(warningMsg1);
         System.err.println(e);
-        String warningMsg2 = "\n" + DIVIDER_WARNING + "\n";
-        System.out.println(warningMsg2);
 
-        String warningMsg = warningMsg1 + "\n" + e + warningMsg2;
+        String warningMsg = warningMsg1 + "\n" + e;
         return warningMsg;
     }
 
@@ -155,13 +135,11 @@ public class Warnings extends Ui {
      * @return System warning message.
      */
     public static String getInvalidArchiveMsg(int tasksSize) {
-        String warningMsg = DIVIDER_WARNING
-                + "\n [• ▂ •]What? "
+        String warningMsg = " [• ▂ •]What? "
                 + "\n I couldn't archive this task, please re-enter a valid task index!"
                 + "\n And make sure you follow this format - 'archive <Task_Index>'."
                 + "\n You have " + tasksSize + " tasks in total."
-                + "\n **Type 'help' to see what I can do. |^_^|"
-                + "\n" + DIVIDER_WARNING + "\n";
+                + "\n **Type 'help' to see what I can do. |^_^|";
         System.out.println(warningMsg);
         return warningMsg;
     }
@@ -172,11 +150,9 @@ public class Warnings extends Ui {
      * @return System warning message.
      */
     public static String getInvalidFindMsg() {
-        String warningMsg = DIVIDER_WARNING
-                + "\n [• ▂ •]What? "
+        String warningMsg = " [• ▂ •]What? "
                 + "\n Please make sure you follow this format - 'find <Keyword>'."
-                + "\n **Type 'help' to see what I can do. |^_^|"
-                + "\n" + DIVIDER_WARNING + "\n";
+                + "\n **Type 'help' to see what I can do. |^_^|";
         System.out.println(warningMsg);
         return warningMsg;
     }
