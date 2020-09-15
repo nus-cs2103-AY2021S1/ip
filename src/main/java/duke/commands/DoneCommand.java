@@ -9,6 +9,7 @@ import duke.errors.FileAbsentException;
 import duke.helpers.Storage;
 import duke.helpers.TaskList;
 import duke.helpers.Ui;
+import duke.tasks.Task;
 
 /**
  * Handles case when done is keyword
@@ -52,11 +53,13 @@ public class DoneCommand extends Command {
      */
     private String process(TaskList tasks, Storage storage) throws DukeException {
         if (isNumberOrDescriptionAbsent()) {
-            throw new DoneException(true, false); //when number is absent
+            throw new DoneException(true, false, false); //when number is absent
         } else {
             int iD = Integer.parseInt(userInput.substring(lengthOfKeyword + 1));
             if (isNumberNotInList(iD, tasks)) {
-                throw new DoneException(false, true); //when number is not in list
+                throw new DoneException(false, true, false); //when number is not in list
+            } else if (isDone(iD, tasks)) {
+                throw new DoneException(false, false, true);
             } else {
                 return rewrite(storage, tasks, iD); //where the file in Storage is updated and TaskList is updated
             }
@@ -73,6 +76,17 @@ public class DoneCommand extends Command {
         return iD > tasks.getAllTasks().size(); //since ID cannot be more that number of tasks present
     }
 
+    /**
+     * Gives whether the task at a particular input has been completed
+     *
+     * @param iD of the task that user wants to mark as complete
+     * @param tasks where you want
+     * @return true if task is completed and false otherwise
+     */
+    private boolean isDone(int iD, TaskList tasks) {
+        Task task = tasks.getAllTasks().get(iD - 1);
+        return task.getIsDone();
+    }
     /**
      * updates the the file in storage after task is marked as done.
      *

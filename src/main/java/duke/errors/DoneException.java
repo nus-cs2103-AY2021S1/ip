@@ -11,6 +11,7 @@ public class DoneException extends DukeException {
      */
     private boolean isiDAbsent; //true if iD is not given by user, false otherwise
     private boolean isNotiDDefined; //true if iD is not defined yet, false otherwise
+    private boolean isDone; //true if task is already completed, false otherwise
 
     /**
      * constructor that assigns tne 2 variables its respective values
@@ -18,9 +19,10 @@ public class DoneException extends DukeException {
      * If present it is false else it is true.
      * @param isNOtiDDefined input, true if ID > number of tasks present, false otherwise.
      */
-    public DoneException(boolean isiDabsent, boolean isNOtiDDefined) {
+    public DoneException(boolean isiDabsent, boolean isNOtiDDefined, boolean isDone) {
         this.isiDAbsent = isiDabsent;
         this.isNotiDDefined = isNOtiDDefined;
+        this.isDone = isDone;
     }
 
     /**
@@ -37,6 +39,8 @@ public class DoneException extends DukeException {
             return iDAbsent(); //when ID is absent
         } else if (isNotiDDefined) {
             return iDNotDefined(); //when ID is not defined
+        } else if (isDone) {
+            return isDone();
         } else {
             return "default";
         }
@@ -58,5 +62,9 @@ public class DoneException extends DukeException {
      */
     private String iDNotDefined() {
         return "  '\u2639' OOPS!!! The ID is not yet defined.";
+    }
+
+    private String isDone() {
+        return "You have already completed this task";
     }
 }

@@ -23,7 +23,7 @@ public abstract class Task {
      * Tasks is made static because it contains the different tasks that are added, and therefore it is not limited to
      * a single instance of Task
      */
-    private boolean done; //true if Task is completed, false otherwise
+    private boolean isDone; //true if Task is completed, false otherwise
     private String name; //gives name of the Task
     /**
      * constructor assigns name variable a value
@@ -31,7 +31,7 @@ public abstract class Task {
      * @param name this assigns the name of the Task to the name being given in the constructor
      */
     Task(String name) {
-        this.done = false;
+        this.isDone = false;
         this.name = name;
     }
 
@@ -39,10 +39,10 @@ public abstract class Task {
      * constructor assigns name and done a value.
      *
      * @param name assigns name to this.name
-     * @param done assigns name to this.done
+     * @param isDone assigns name to this.done
      */
-    Task(String name, boolean done) {
-        this.done = done;
+    Task(String name, boolean isDone) {
+        this.isDone = isDone;
         this.name = name;
     }
     /**
@@ -55,12 +55,20 @@ public abstract class Task {
     }
 
     /**
+     * Returns value isDone of a task
+     *
+     * @return true if task is done, false otherwise
+     */
+    public boolean getIsDone() {
+        return isDone;
+    }
+    /**
      * setter that sets Done to the done value stated
      *
      * @param done value given to set it to done var
      */
     public void setDone(boolean done) {
-        this.done = done;
+        this.isDone = done;
     }
 
     /**
@@ -69,9 +77,9 @@ public abstract class Task {
      * @return String which contains info on task name as well as whether it is completed(tick sign) or not(cross sign).
      */
     public String toString() {
-        if (this.done) {
+        if (this.isDone) {
             return "[" + "\u2713" + "] " + this.name; //\u2713 is a tick, denoting done
-        } else if (!this.done) {
+        } else if (!this.isDone) {
             return "[" + "\u2717" + "] " + this.name; //\u2717 is a cross, deonoting not done
         } else {
             return "default";
@@ -84,9 +92,9 @@ public abstract class Task {
      * @return the string representation
      */
     public String inputListFormat() { //format of Tasks to appear in file in Storage
-        if (this.done) {
+        if (this.isDone) {
             return " | 1 | " + this.name; //1 denotes done
-        } else if (!this.done) {
+        } else if (!this.isDone) {
             return " | 0 | " + this.name; //0 denotes not done
         } else {
             return "default";
