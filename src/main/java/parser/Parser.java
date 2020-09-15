@@ -30,6 +30,115 @@ public class Parser {
     }
 
     /**
+     * Checks for the validity of date time input.
+     *
+     * @param dateString The date in string.
+     * @return True if the date input is valid.
+     * @throws DateTimeException
+     */
+
+    private boolean isValidDate(String dateString) throws DateTimeException {
+        String[] dateArray = dateString.split("-");
+        // Checks if the date and time are in the correct format.
+        if (dateArray.length != 3
+            || dateArray[0].length() != 4 && dateArray[1].length() != 2 && dateArray[2].length() != 2) {
+            throw new DateTimeException();
+        }
+
+        return true;
+
+    }
+
+    /**
+     * Checks for validity of input given.
+     *
+     * @param fullInput user's full input
+     * @return true if the input is valid.
+     * @throws DukeException
+     */
+    private boolean isValidInput(String fullInput) throws DukeException {
+        if (fullInput.equals("event") || fullInput.equals("deadline") || fullInput.equals("todo")
+            || fullInput.equals("done") || fullInput.equals("find") || fullInput.equals("snooze")) {
+
+            throw new DescriptionException(fullInput);
+
+        } else if (fullInput.startsWith("snooze ")) {
+
+            String[] commands = fullInput.split(" ");
+            String dateString = commands[2];
+
+            isValidDate(dateString);
+            return true;
+
+        } else if (fullInput.startsWith("find ")) {
+            if (fullInput.length() <= 5) {
+                throw new DescriptionException("find");
+            }
+            return true;
+        } else if (fullInput.startsWith("todo ")) {
+            if (fullInput.length() <= 5) {
+                throw new DescriptionException("todo");
+            }
+            return true;
+        } else if (fullInput.startsWith("deadline ")) {
+
+            if (fullInput.length() <= 9) {
+                throw new DescriptionException("deadline");
+            }
+
+            String descriptionDate = fullInput.substring(9);
+            if (!descriptionDate.contains(" /by ")) {
+                throw new TrackingException("deadline");
+            }
+
+            String[] temp = descriptionDate.split(" /by ");
+            String description = temp[0];
+            String deadlineString = temp[1];
+
+            //Checks for validity of the processed input.
+            if (description.length() == 0) {
+                throw new DescriptionException("deadline");
+            }
+            if (deadlineString.length() == 0) {
+                throw new TrackingException("deadline");
+            }
+
+            isValidDate(deadlineString);
+            return true;
+
+        } else if (fullInput.startsWith("event ")) {
+            if (fullInput.length() <= 6) {
+                throw new DescriptionException("event");
+            }
+            String descriptionDate = fullInput.substring(6);
+            if (!fullInput.contains(" /at ")) {
+                throw new TrackingException("event");
+            }
+
+            String[] temp = descriptionDate.split(" /at ");
+            String description = temp[0];
+            String atString = temp[1];
+
+            //Checks for validity of processed input.
+            if (description.length() == 0) {
+                throw new DescriptionException("event");
+            }
+            if (atString.length() == 0) {
+                throw new TrackingException("event");
+            }
+
+            isValidDate(atString);
+            return true;
+
+        } else if (fullInput.equals("list") || fullInput.startsWith("delete ") || fullInput.startsWith("done ")) {
+            return true;
+
+        } else {
+            throw new CommandException(fullInput);
+        }
+    }
+
+    /**
      * Parses the input, and makes necessary changes to tasks and storage.
      *
      * @param fullInput Command from the user.
@@ -38,13 +147,20 @@ public class Parser {
     public String parse(String fullInput) {
         assert fullInput.length() > 0;
         String result = "";
+
         try {
+            if (isValidInput(fullInput)) {
 
-            if (fullInput.equals("event") || fullInput.equals("deadline") || fullInput.equals("todo")
-                || fullInput.equals("done") || fullInput.equals("find")) {
+            }
+        } catch (DukeException e) {
+            result = e.toString();
+        }
 
-                throw new DescriptionException(fullInput);
-            } else if (fullInput.equals("list")) {
+
+        try {
+            isValidInput(fullInput);
+
+            if (fullInput.equals("list")) {
                 //Lists the tasks in the task list.
                 result = tasks.list();
             } else if (fullInput.startsWith("delete ")) {
@@ -57,16 +173,10 @@ public class Parser {
                 result = tasks.doTask(num);
             } else if (fullInput.startsWith("snooze ")) {
                 //Snoozes a task, and postpone the task to a later date.
-                String commands[] = fullInput.split(" ");
-                int taskNum = Integer.parseInt(commands[1]) - 1 ;
+                String[] commands = fullInput.split(" ");
+                int taskNum = Integer.parseInt(commands[1]) - 1;
                 String dateString = commands[2];
                 String[] dateArray = dateString.split("-");
-                // Checks if the date and time are in the correct format.
-                if (dateArray.length != 3
-                    || dateArray[0].length() != 4 && dateArray[1].length() != 2 && dateArray[2].length() != 2) {
-                    throw new DateTimeException();
-                }
-
                 result = tasks.snoozeTask(taskNum, LocalDate.of(Integer.parseInt(dateArray[0]),
                     Integer.parseInt(dateArray[1]), Integer.parseInt(dateArray[2])));
 
@@ -78,15 +188,10 @@ public class Parser {
                     + "____________________________________________________________\n";
 
             } else if (fullInput.startsWith("find ")) {
-                if (fullInput.length() <= 5) {
-                    throw new DescriptionException("find");
-                }
+
                 result = tasks.find(fullInput.substring(5));
 
             } else if (fullInput.startsWith("todo ")) {
-                if (fullInput.length() <= 5) {
-                    throw new DescriptionException("todo");
-                }
 
                 String description = fullInput.substring(5);
                 Task newTask = new ToDo(description);
@@ -95,35 +200,13 @@ public class Parser {
 
             } else if (fullInput.startsWith("deadline ")) {
 
-                //Checks for validity of input
-                if (fullInput.length() <= 9) {
-                    throw new DescriptionException("deadline");
-                }
-
                 String descriptionDate = fullInput.substring(9);
-                if (!descriptionDate.contains(" /by ")) {
-                    throw new TrackingException("deadline");
-                }
 
                 //Processes the input
                 String[] temp = descriptionDate.split(" /by ");
                 String description = temp[0];
                 String deadlineString = temp[1];
-
-                //Checks for validity of the processed input.
-                if (description.length() == 0) {
-                    throw new DescriptionException("deadline");
-                }
-                if (deadlineString.length() == 0) {
-                    throw new TrackingException("deadline");
-                }
                 String[] dateTime = deadlineString.split("-");
-                // Checks if the date and time are in the correct format.
-                if (dateTime.length != 3
-                    || dateTime[0].length() != 4 && dateTime[1].length() != 2 && dateTime[2].length() != 2) {
-                    throw new DateTimeException();
-                }
-
                 LocalDate by = LocalDate.of(Integer.parseInt(dateTime[0]), Integer.parseInt(dateTime[1]),
                     Integer.parseInt(dateTime[2]));
                 Task task = new Deadline(description, by);
@@ -132,34 +215,14 @@ public class Parser {
                 result = tasks.add(task);
 
             } else if (fullInput.startsWith("event ")) {
-                //Check for validity of input.
-                if (fullInput.length() <= 6) {
-                    throw new DescriptionException("event");
-                }
+
                 String descriptionDate = fullInput.substring(6);
-                if (!fullInput.contains(" /at ")) {
-                    throw new TrackingException("event");
-                }
+
                 //Processes the input
                 String[] temp = descriptionDate.split(" /at ");
                 String description = temp[0];
                 String atString = temp[1];
-
-                //Checks for validity of processed input.
-                if (description.length() == 0) {
-                    throw new DescriptionException("event");
-                }
-                if (atString.length() == 0) {
-                    throw new TrackingException("event");
-                }
-
                 String[] dateTime = atString.split("-");
-
-                // Check if the date and time are in the correct format.
-                if (dateTime.length != 3
-                    || dateTime[0].length() != 4 && dateTime[1].length() != 2 && dateTime[2].length() != 2) {
-                    throw new DateTimeException();
-                }
                 LocalDate at = LocalDate.of(Integer.parseInt(dateTime[0]), Integer.parseInt(dateTime[1]),
                     Integer.parseInt(dateTime[2]));
                 Task task = new Events(description, at);

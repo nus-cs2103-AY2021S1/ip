@@ -6,10 +6,11 @@
 <?import javafx.scene.effect.Glow?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
 
-<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
     <children>
-        <Label fx:id="dialog" alignment="CENTER" contentDisplay="CENTER" prefHeight="73.0" prefWidth="186.0" styleClass="textbg" stylesheets="@../images/style.css" text="Label" wrapText="true">
+        <Label fx:id="dialog" alignment="CENTER" contentDisplay="CENTER" minHeight="73.0" minWidth="186.0" styleClass="textbg" stylesheets="@../images/style.css" text="Label" textAlignment="JUSTIFY">
          <effect>
             <Blend>
                <topInput>
@@ -17,6 +18,9 @@
                </topInput>
             </Blend>
          </effect>
+         <font>
+            <Font name="Comic Sans MS Bold" size="12.0" />
+         </font>
       </Label>
         <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" />
     </children>

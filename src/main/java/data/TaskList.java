@@ -120,6 +120,14 @@ public class TaskList {
         return result;
     }
 
+    /**
+     * Snoozes the task and change the date of the task.
+     *
+     * @param taskNum The task to change
+     * @param date Date to change the task to
+     * @return String of the new task after it has been modified.
+     */
+
     public String snoozeTask(int taskNum, LocalDate date) {
 
         Task task = tasks.get(taskNum);
