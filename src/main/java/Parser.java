@@ -63,7 +63,7 @@ public class Parser {
      */
     public ArrayList<String> parseUserCommand(String userCommand, int taskListSize)
             throws InvalidDoneException, InvalidTaskArgumentException, InvalidDeleteException,
-            InvalidCommandException, DateException {
+            InvalidCommandException, InvalidFindException, DateException {
         ArrayList<String> userCommandDetails = new ArrayList<>();
         if (isListCommand(userCommand)) {
             return addListCommand(userCommandDetails);
@@ -228,8 +228,12 @@ public class Parser {
         return (userCommand.length() >= 4) && (userCommand.substring(0, 4).equals("find"));
     }
 
-    private ArrayList<String> addFindCommand(ArrayList<String> userCommandDetails, String userCommand) {
+    private ArrayList<String> addFindCommand(ArrayList<String> userCommandDetails, String userCommand)
+            throws InvalidFindException {
         userCommandDetails.add("Find");
+        if (userCommand.split(" ").length < 2) {
+            throw new InvalidFindException("\u2639" + " OOPS!!! There are no keywords specified.");
+        }
         String keyword = userCommand.split(" ")[1];
         userCommandDetails.add(keyword);
         return userCommandDetails;

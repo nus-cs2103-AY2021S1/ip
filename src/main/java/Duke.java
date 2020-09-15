@@ -54,7 +54,7 @@ public class Duke {
             try {
                 command.executeUserCommand(parser, tasks, storage, ui);
             } catch (InvalidTaskArgumentException | InvalidDoneException | InvalidCommandException
-                    | InvalidDeleteException | DateException e) {
+                    | InvalidDeleteException | InvalidFindException | DateException e) {
                 ui.showError(e.getMessage());
             } finally {
                 command.receiveUserCommand(ui.readCommand());
@@ -87,7 +87,7 @@ public class Duke {
             command.receiveUserCommand(userCommand);
             return command.executeUserCommand(parser, tasks, storage, ui);
         } catch (InvalidTaskArgumentException | InvalidDoneException | InvalidCommandException
-                | InvalidDeleteException | DateException e) {
+                | InvalidDeleteException | InvalidFindException | DateException e) {
             return ui.showError(e.getMessage());
         }
     }

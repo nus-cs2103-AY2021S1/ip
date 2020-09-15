@@ -53,7 +53,7 @@ public class Command {
      */
     public String executeUserCommand(Parser parser, TaskList taskList, Storage storage, Ui ui)
             throws IOException, InvalidTaskArgumentException, InvalidDoneException, InvalidCommandException,
-            InvalidDeleteException, DateException {
+            InvalidDeleteException, InvalidFindException, DateException {
         ArrayList<String> userCommandDetails = parser.parseUserCommand(userCommand, taskList.getLength());
         String response = "";
         String userCommandType = userCommandDetails.get(0);
