@@ -35,7 +35,11 @@ public class TaskList {
         this.tasks = new ArrayList<>();
     }
 
-    List<Task> getTasks() {
+    /**
+     * Retrieves the tasks in TaskList.
+     * @return Returns a list of all tasks.
+     */
+    public List<Task> getTasks() {
         return this.tasks;
     }
 

@@ -8,8 +8,8 @@ import duke.Duke;
 
 public class DukeTest {
     @Test
-    public void initialiseDuke() {
+    public void initializeDuke() {
         Duke duke = new Duke();
-        assertEquals("Initialised", "Initialised");
+        assertEquals("Initialized", "Initialized");
     }
 }
