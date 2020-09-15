@@ -112,7 +112,8 @@ public class DukeTest {
                 + "|___/ \\__,_|_|\\_\\___|| |  | |______|______|\\___||_|\\__\\ \n"
                 + "\n"
                 + "Hello! Dukenizer is back!\n"
-                + "What can I do for you\n", duke.getGreeting());
+                + "What can I do for you?\n\n"
+                + "Type 'help' for more info!", duke.getGreeting());
     }
 
 }

@@ -47,7 +47,8 @@ public class DeleteCommand extends Command {
             boolean isAboveZero = (Integer.parseInt(this.markItem) < 1);
             boolean isBelowListSize = (Integer.parseInt(this.markItem) > tasks.getSize());
             if (isAboveZero || isBelowListSize) {
-                throw new DukeException("Please enter a valid item number from the list!");
+                throw new DukeException("Please enter a valid item number from the list! Type 'list' to check"
+                        + " your task list.");
             }
         } catch (NumberFormatException e) { //second argument wrong format
             throw new DukeException("Please only input 'delete <item number>' with no other inputs!");

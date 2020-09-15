@@ -29,7 +29,8 @@ public class RemoveNoteCommand extends Command {
             boolean isAboveZero = (Integer.parseInt(this.markNote) < 1);
             boolean isBelowListSize = (Integer.parseInt(this.markNote) > notes.getSize());
             if (isAboveZero || isBelowListSize) {
-                throw new DukeException("Please enter a valid item number from the note list!");
+                throw new DukeException("Please enter a valid item number from the note list! Type 'notes' to "
+                        + "see your note list.");
             }
         } catch (NumberFormatException e) { //second argument wrong format
             throw new DukeException("Please only input 'RemoveNote <item number>' with no other inputs!");

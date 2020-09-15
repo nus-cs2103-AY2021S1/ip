@@ -7,6 +7,7 @@ import duke.command.DoneCommand;
 import duke.command.EventCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
+import duke.command.HelpCommand;
 import duke.command.ListCommand;
 import duke.command.NoteCommand;
 import duke.command.NotesCommand;
@@ -22,11 +23,11 @@ public class Parser {
     private static final String EXCEPTION_LIST_EXTRA_INPUTS =
             "Extra inputs detected! Please only input 'list'.";
     private static final String EXCEPTION_EMPTY_TODO =
-            "☹ OOPS!!! The description of a todo cannot be empty.";
+            "OOPS!!! The description of a todo cannot be empty.";
     private static final String EXCEPTION_EMPTY_DEADLINE =
-            "☹ OOPS!!! The description of a deadline cannot be empty.";
+            "OOPS!!! The description of a deadline cannot be empty.";
     private static final String EXCEPTION_EMPTY_EVENT =
-            "☹ OOPS!!! The description of a event cannot be empty.";
+            "OOPS!!! The description of a event cannot be empty.";
     private static final String EXCEPTION_NO_ITEM_NUMBER =
             "Please specify item number!";
     private static final String EXCEPTION_NO_SEARCH_TERM =
@@ -38,13 +39,15 @@ public class Parser {
             "Please input in the following format "
             + "'event <description> /at <yyyy-MM-dd HH:mm>' with a valid date & time";
     private static final String EXCEPTION_INVALID_FORMAT =
-            "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+            "OOPS!!! I'm sorry, but I don't know what that means :-(";
     private static final String EXCEPTION_EMPTY_NOTE =
-            "☹ OOPS!!! The description of a note cannot be empty.";
+            "OOPS!!! The description of a note cannot be empty.";
     private static final String EXCEPTION_NOTES_EXTRA_INPUTS =
             "Extra inputs detected! Please only input 'notes' to see your notes!";
     private static final String EXCEPTION_EMPTY_REMOVE =
-            "☹ OOPS!!! The please enter a note number to remove.";
+            "OOPS!!! The please enter a note number to remove.";
+    private static final String EXCEPTION_HELP_EXTRA_INPUTS =
+            "Extra inputs detected! Please only input 'help'.";
 
     /**
      * Takes in a line of user input as a String and returns a relevant Command. Otherwise,
@@ -146,6 +149,11 @@ public class Parser {
                 throw new DukeException(EXCEPTION_EMPTY_REMOVE);
             }
             return new RemoveNoteCommand(instruction[1]);
+        } else if (instruction[0].equals("help")) {
+            if (instruction.length != 1) {
+                throw new DukeException(EXCEPTION_HELP_EXTRA_INPUTS);
+            }
+            return new HelpCommand();
         } else {
             throw new DukeException(EXCEPTION_INVALID_FORMAT);
         }

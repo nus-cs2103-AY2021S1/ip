@@ -47,7 +47,8 @@ public class Ui {
                         + "|___/ \\__,_|_|\\_\\___|| |  | |______|______|\\___||_|\\__\\ \n";
 
         String s = "Hello from\n" + logo + "\n"
-                + "Hello! Dukenizer is back!\nWhat can I do for you\n";
+                + "Hello! Dukenizer is back!\nWhat can I do for you?\n\n"
+                + "Type 'help' for more info!";
 
         return s;
 
@@ -183,6 +184,30 @@ public class Ui {
         if (notes.getSize() == 0) {
             s = "There are no notes found! Type 'note <description>' to save a note!";
         }
+        return s;
+    }
+
+    /**
+     * Returns a help messsage for the list of commands.
+     *
+     * @return String representation of help message.
+     */
+    public String printHelp() {
+        String s = "List of commands:\n"
+                + "1) list\n-Lists the items in your task list.\n\n"
+                + "2) todo <description>\n-Adds a To-Do task with the description to your task list.\n\n"
+                + "3) deadline <description> /by <yyyy-MM-dd HH:mm>\n-Adds a task with a description "
+                + "and a deadline to your task list. E.g. deadline sample task 1 /by 2020-09-12 23:22\n\n"
+                + "4) event <description> /at <yyyy-MM-dd HH:mm>\n-Adds a task with a description "
+                + "at a specified time to your task list. E.g. event sample task 2 /by 2020-09-12 11:22\n\n"
+                + "5) done <item number>\n-Marks the task at item number index in your task list as \"done\"\n\n"
+                + "6) delete <item number>\n-Deletes the task at item number index in your task list\n\n"
+                + "7) find <description>\n-Finds all tasks in your task list with the description search term\n\n"
+                + "8) note <description>\n-Adds a note with the description in Dukenizer. E.g. note i am 1.8m\n\n"
+                + "9) notes\n-Lists all your notes in Dukenizer.\n\n"
+                + "10) RemoveNote <note index>\n-Removes a note at the specified index in your note list\n\n";
+
+
         return s;
     }
 }
