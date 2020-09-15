@@ -3,12 +3,12 @@ Duke is a simple task manager that can help you keep track of your todos,
 deadlines and events.
 
 ## Features 
-1. [Add a todo](#Add-a-todo)
-2. [Add a deadline](#Add-a-deadline)
-3. [Add an event](#Add-an-event)
-4. [List all tasks](#List-all-tasks)
-5. [Delete a task](#Delete-a-task)
-6. [Mark a task as complete](#Mark-task-complete)
+1. [Add a todo](#add-a-todo)
+2. [Add a deadline](#add-a-deadline)
+3. [Add an event](#add-an-event)
+4. [List all tasks](#list-all-tasks)
+5. [Delete a task](#delete-a-task)
+6. [Mark a task as complete](#mark-task-complete)
 
 ### Add a todo
 Adds a todo
@@ -59,3 +59,5 @@ The number can be checked with the command `list`.
 ![mark 1](Mark1.png) ![mark2](Mark2.png)
 
 Format: `complete`, `[task number]`
+
+## Cucumber
