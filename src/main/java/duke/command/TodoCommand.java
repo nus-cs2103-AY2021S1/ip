@@ -23,15 +23,19 @@ public class TodoCommand extends Command {
     public String execute(String command, TaskList list, Storage storage) {
         try {
             String horizontalLine = "____________________________________\n";
-            String[] commandArr = command.split("\\s+");
-            String instructions = commandArr[1];
+            String shortCommand = command.substring(5);
+            String[] commandArr = shortCommand.split("#");
+            String instructions;
+            if (commandArr[0].endsWith(" ")) {
+                int endIndex = commandArr[0].length() - 1;
+                instructions = commandArr[0].substring(0, endIndex);
+            } else {
+                instructions = commandArr[0];
+            }
             int counter = list.getList().size();
             Todo todo;
-            if (commandArr.length == 3) {
-                String tag = commandArr[2];
-                if (!tag.startsWith("#")) {
-                    return Warnings.invalidTagWarning();
-                }
+            if (commandArr.length == 2) {
+                String tag = "#" + commandArr[1];
                 todo = new Todo(false, counter + 1, instructions, tag);
             } else {
                 todo = new Todo(false, counter + 1, instructions);

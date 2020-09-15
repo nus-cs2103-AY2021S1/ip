@@ -20,15 +20,18 @@ public class FindTagCommand extends Command {
      */
     @Override
     public String execute(String command, TaskList list, Storage storage) {
-        String horizontalLine = "____________________________________\n";
-        String targetTag = command.substring(8);
-        String message;
-        if (!targetTag.startsWith("#")) {
-            return Warnings.invalidTagWarning();
-        } else {
+        try {
+            String horizontalLine = "____________________________________\n";
+            String targetTag = command.substring(8);
+            String message;
+            if (!targetTag.startsWith("#")) {
+                return Warnings.invalidTagWarning();
+            }
             message = list.filterTag(targetTag);
+            return horizontalLine + "Here are the things you want lor: \n"
+                    + message + horizontalLine;
+        } catch (Exception ex) {
+            return Warnings.invalidFindTagWarning();
         }
-        return horizontalLine + "Here are the things you want lor: \n"
-                + message + horizontalLine;
     }
 }

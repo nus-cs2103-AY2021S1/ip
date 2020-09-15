@@ -23,18 +23,25 @@ public class EventCommand extends Command {
     public String execute(String command, TaskList list, Storage storage) {
         try {
             String horizontalLine = "____________________________________\n";
-            String[] commandArr = command.split("\\s+");
-            String instructions = commandArr[1];
-            String date = commandArr[3];
+            String shortenedCommand = command.substring(6);
+            String[] commandArr = shortenedCommand.split(" /at ");
+            String instructions = commandArr[0];
+            String remainingCommand = commandArr[1];
             Event event;
             int counter = list.getList().size();
-            if (commandArr.length == 5) {
-                String tag = commandArr[4];
-                if (!tag.startsWith("#")) {
-                    return Warnings.invalidTagWarning();
+            String date;
+            if (remainingCommand.contains("#")) {
+                String[] remainingCommandArr = remainingCommand.split("#");
+                if (remainingCommandArr[0].endsWith(" ")) {
+                    int endIndex = remainingCommandArr[0].length() - 1;
+                    date = remainingCommandArr[0].substring(0, endIndex);
+                } else {
+                    date = remainingCommandArr[0];
                 }
+                String tag = "#" + remainingCommandArr[1];
                 event = new Event(false, counter + 1, instructions, date, tag);
             } else {
+                date = remainingCommand;
                 event = new Event(false, counter + 1, instructions, date);
             }
             list.addTask(counter, event);
