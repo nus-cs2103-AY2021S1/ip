@@ -31,7 +31,7 @@ public class ManageTask extends Command {
     public String execute(ArrayList<Task> tasks, Layout layout) {
         try {
             int index = Integer.parseInt(inputIndex);
-            assert index > 1;
+            assert index >= 1;
             Task task = tasks.get(index - 1);
             switch (type) {
             case DONE:
