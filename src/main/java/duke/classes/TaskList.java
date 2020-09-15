@@ -133,7 +133,7 @@ public class TaskList {
      */
 
     public Task markDone(String command) {
-        int taskNo = Character.getNumericValue(command.charAt(5)) - 1;
+        int taskNo = Integer.parseInt(command.substring(5)) - 1;
         Task task = todoList.get(taskNo);
         task.setDone(true);
         return task;
@@ -148,7 +148,8 @@ public class TaskList {
      */
 
     public Task delete(String command) {
-        int taskNo = Character.getNumericValue(command.charAt(7)) - 1;
+        int taskNo = Integer.parseInt(command.substring(7)) - 1;
+        System.out.println(taskNo);
         Task task = todoList.remove(taskNo);
         todoList.forEach((item) -> {
             if (item.getIndex() > taskNo) {
