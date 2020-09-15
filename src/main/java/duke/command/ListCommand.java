@@ -1,11 +1,11 @@
 package duke.command;
 
+import java.util.List;
+
 import duke.Storage;
 import duke.Ui;
 import duke.task.Task;
 import duke.task.TaskList;
-
-import java.util.List;
 
 /**
  * Represents a command to display all the tasks in the user's list of tasks.
