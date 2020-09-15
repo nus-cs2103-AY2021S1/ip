@@ -37,6 +37,13 @@ public class DeadlineTask extends Task {
     }
 
     @Override
+    public String parseTaskToText() {
+        return "D" + " | " + (getCompletionStatus() ? "1" : "0") + " | " + getDescription()
+                + " | " + deadline.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"))
+                + " | " + getPriority();
+    }
+
+    @Override
     public String toString() {
         return getPriority().isEmpty()
             ? "[D][" + getStatusIcon() + "] " + description + " (by: "
@@ -45,5 +52,4 @@ public class DeadlineTask extends Task {
                 + deadline.format(DateTimeFormatter.ofPattern("d MMM yyyy, hh:mm a")) + ")"
                 + " Priority: " + getPriority();
     }
-
 }

@@ -37,6 +37,13 @@ public class EventTask extends Task {
     }
 
     @Override
+    public String parseTaskToText() {
+        return "D" + " | " + (getCompletionStatus() ? "1" : "0") + " | " + getDescription()
+                + " | " + timing.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"))
+                + " | " + getPriority();
+    }
+
+    @Override
     public String toString() {
         return getPriority().isEmpty()
             ? "[E][" + getStatusIcon() + "] " + description + " (by: "

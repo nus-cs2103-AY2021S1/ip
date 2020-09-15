@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -49,21 +48,6 @@ public class Storage {
         }
     }
 
-    String convertTaskToText (Task task) {
-        if (task instanceof TodoTask) {
-            return "T" + " | " + (task.getCompletionStatus() ? "1" : "0") + " | " + task.getDescription()
-                   + " | " + task.getPriority();
-        } else if (task instanceof DeadlineTask) {
-            return "D" + " | " + (task.getCompletionStatus() ? "1" : "0") + " | " + task.getDescription() + " | "
-                    + ((DeadlineTask) task).getDeadline().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"))
-                    + " | " + task.getPriority();
-        } else {
-            return "E" + " | " + (task.getCompletionStatus() ? "1" : "0") + " | " + task.getDescription() + " | "
-                    + ((EventTask) task).getTiming().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"))
-                    + " | " + task.getPriority();
-        }
-    }
-
     /**
      * Saves the tasks data to storage file.
      * @param tasks List of tasks to be saved.
@@ -75,7 +59,7 @@ public class Storage {
             fw = new FileWriter(filePath);
             List<String> fileContent = new ArrayList<>();
             for (Task task : tasks.getTasks()) {
-                fileContent.add(convertTaskToText(task));
+                fileContent.add(task.parseTaskToText());
             }
             Files.write(Paths.get(filePath), fileContent);
             fw.close();

@@ -2,3 +2,5 @@ T | 1 | borrow book |
 T | 1 | return book | 
 T | 1 | watch a movie | 
 T | 1 | Clean Code | 
+T | 0 | testing | 
+D | 0 | testing | 15-08-2020 12:00 | 

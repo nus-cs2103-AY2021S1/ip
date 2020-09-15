@@ -74,6 +74,15 @@ public class Task {
         this.isDone = true;
     }
 
+    /**
+     * Converts task to a text format to be stored in data.
+     * @return Returns a formatted task string.
+     */
+    public String parseTaskToText() {
+        return "T" + " | " + (getCompletionStatus() ? "1" : "0") + " | " + getDescription()
+                + " | " + getPriority();
+    }
+
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;
