@@ -1,5 +1,8 @@
 package main.java.duke;
 
+/**
+ * Todo class that encapsulates tasks to be done. This is a child class of Task.
+ */
 public class Todo extends Task{
 
     String taskType = "T";

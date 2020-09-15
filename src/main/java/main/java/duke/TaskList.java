@@ -2,6 +2,9 @@ package main.java.duke;
 
 import java.util.ArrayList;
 
+/**
+ * An encapsulation of a list of tasks, enabling operations on the task list.
+ */
 public class TaskList {
 
     private ArrayList<Task> taskList = new ArrayList<>();

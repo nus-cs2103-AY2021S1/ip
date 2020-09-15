@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Deadline class that encapsulates tasks that are deadlines. This is a child class of Task.
+ */
 public class Deadline extends Task {
 
     String taskType = "D";

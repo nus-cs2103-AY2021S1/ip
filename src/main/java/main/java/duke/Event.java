@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Event class that encapsulates tasks that are events. This is a child class of Task.
+ */
 public class Event extends Task{
 
     String taskType = "E";

@@ -1,5 +1,8 @@
 package main.java.duke;
 
+/**
+ * An exception that is thrown when the description for a task is invalid.
+ */
 public class EmptyDescriptionException extends DukeException {
 
     /**

@@ -1,5 +1,8 @@
 package main.java.duke;
 
+/**
+ * An exception that is thrown when the deadline specified in a task object is of the wrong format.
+ */
 public class DeadlineFormatException extends DukeException {
 
     /**

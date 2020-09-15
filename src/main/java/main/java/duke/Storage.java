@@ -5,6 +5,10 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * A class that encapsulates all the the reading and writing of files to the system. The user task list is written as
+ * a text file to the local device.
+ */
 public class Storage {
 
     private File file;

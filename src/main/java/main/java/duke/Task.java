@@ -1,5 +1,8 @@
 package main.java.duke;
 
+/**
+ * Encapsulates the details of a task.
+ */
 public class Task {
 
     protected String description;

@@ -54,6 +54,7 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
         dialog.setText(text);
+        dialog.setWrapText(true);
         displayPicture.setImage(img);
         displayPicture.setClip(ivCrop);
 
