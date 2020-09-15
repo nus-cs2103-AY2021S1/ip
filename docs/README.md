@@ -2,7 +2,7 @@
 
 Duke- the all-in-one friendly task manager :bowtie:
 
-## Main Features <a id="features"></a>
+## Main Features <a id="Main-Features"></a>
 ### [Add todo task: ](#add-todo) `todo`
 ### [Add deadline task: ](#add-deadline) `deadline`
 ### [Add event task: ](#add-event) `event`
@@ -126,4 +126,5 @@ Expected outcome: <br />
 Bye. Hope to see you again soon!
 
 <br />
-Back to [Main Features](#features)
+
+Back to [Main Features](#Main-Features)
