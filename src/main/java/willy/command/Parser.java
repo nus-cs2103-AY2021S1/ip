@@ -6,7 +6,9 @@ import willy.task.TaskSymbol;
 import willy.task.TodoTask;
 import willy.task.EventTask;
 import willy.task.DeadlineTask;
+import willy.ui.Format;
 import willy.ui.Greet;
+import willy.ui.Response;
 import willy.ui.Willy;
 
 /**
@@ -14,16 +16,6 @@ import willy.ui.Willy;
  */
 public class Parser {
     private TaskList list;
-    private final String MISSING_INFO_MESSAGE = "Hmmm are you missing description/deadline of the task? \n\tCheck and" +
-            " try again?";
-    private final String TODO_FORMAT = "\nFormat: todo [task] \n\te.g. 'todo do Homework'";
-    private final String DEADLINE_FORMAT = "\nFormat: deadline [task] /by <date> <time> \n\te.g. 'deadline project /by " +
-            "20/20/2020 18:00'";
-    private final String EVENT_FORMAT = "\nFormat: event [task] /at <date> <time> \n\te.g. 'event project meeting /at " +
-            "20/20/2020 18:00'";
-    private final String NO_TASK_MESSAGE = "Please add in a task!";
-    private final String NO_SENSE_MESSAGE = "Hmmm sorry I'm not sure what you are saying, try something else?:(";
-    private final String EDIT_FORMAT = "\nFormat: edit [task number] > [task details] \n\te.g. 'edit 1 > todo sleep ";
 
     public Parser(TaskList list) {
         this.list = list;
@@ -42,7 +34,7 @@ public class Parser {
                 TodoTask newTask = new TodoTask(activity, TaskSymbol.TODO);
                 response = list.addToList(newTask);
             } catch (Exception e) {
-                WillyException error = new WillyException(NO_TASK_MESSAGE + TODO_FORMAT);
+                WillyException error = new WillyException(Response.NO_TASK.toString() + Format.TODO);
                 response = error.toString();
             }
         }
@@ -57,7 +49,7 @@ public class Parser {
                 response = list.addToList(newTask);
 
             } catch (Exception e) {
-                WillyException error = new WillyException(MISSING_INFO_MESSAGE + DEADLINE_FORMAT);
+                WillyException error = new WillyException(Response.NO_TASK.toString() + Format.DEADLINE);
                 response = error.toString();
             }
         }
@@ -71,7 +63,7 @@ public class Parser {
                 EventTask newTask = new EventTask(duration, activity, TaskSymbol.EVENT);
                 response = list.addToList(newTask);
             } catch (Exception e) {
-                WillyException error = new WillyException(MISSING_INFO_MESSAGE + EVENT_FORMAT);
+                WillyException error = new WillyException(Response.INCOMPLETE_INFO.toString() + Format.EVENT);
                 response = error.toString();
             }
 
@@ -92,7 +84,7 @@ public class Parser {
                 TodoTask newTask = new TodoTask(activity, TaskSymbol.TODO);
                 response = list.updateTask(taskNum, newTask);
             } catch (Exception e) {
-                WillyException error = new WillyException(NO_TASK_MESSAGE + TODO_FORMAT);
+                WillyException error = new WillyException(Response.NO_TASK.toString() + Format.TODO);
                 response = error.toString();
             }
         }
@@ -107,7 +99,7 @@ public class Parser {
                 response = list.updateTask(taskNum, newTask);
 
             } catch (Exception e) {
-                WillyException error = new WillyException(MISSING_INFO_MESSAGE + DEADLINE_FORMAT);
+                WillyException error = new WillyException(Response.INCOMPLETE_INFO.toString() + Format.DEADLINE);
                 response = error.toString();
             }
         }
@@ -121,7 +113,7 @@ public class Parser {
                 EventTask newTask = new EventTask(duration, activity, TaskSymbol.EVENT);
                 response = list.updateTask(taskNum, newTask);
             } catch (Exception e) {
-                WillyException error = new WillyException(MISSING_INFO_MESSAGE + EVENT_FORMAT);
+                WillyException error = new WillyException(Response.INCOMPLETE_INFO.toString() + Format.EVENT);
                 response = error.toString();
             }
 
@@ -179,12 +171,12 @@ public class Parser {
                 String taskMessage = message.substring(separatorIndex + 2);
                 response = taskEditor(taskNum, taskMessage);
             } catch(Exception e) {
-                WillyException error = new WillyException(EDIT_FORMAT);
+                WillyException error = new WillyException(Format.EDIT.toString());
                 response = error.toString();
             }
 
         } else {
-            WillyException error = new WillyException(NO_SENSE_MESSAGE);
+            WillyException error = new WillyException(Response.NO_SENSE.toString());
             response = error.toString();
         }
 

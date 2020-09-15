@@ -2,6 +2,7 @@ package willy.task;
 
 import willy.exceptions.WillyException;
 import willy.store.TaskStore;
+import willy.ui.Response;
 import willy.ui.Willy;
 
 import java.util.ArrayList;
@@ -15,15 +16,6 @@ public class TaskList {
     private ArrayList<Task> listOfTasks;
     private ArrayList<Task> keyList;
     private TaskStore storage;
-    private final String NON_EXISTENT_TASK_MESSAGE = "Task does not exist, please check the list again or add the task first ~";
-    private final String TASK_DONE_MESSAGE = "Niceee I've marked this task as done!";
-    private final String NO_MATCHING_TASK_MESSAGE = "There are no matching tasks found in the list. Try something else?";
-    private final String MATCHING_TASK_MESSAGE = "Here are the matching tasks in your list:";
-    private final String ADD_TASK_RESPONSE = "Ay here is the task you just added:\n";
-    private final String REMOVE_TASK_RESPONSE = "Okai here is the task you just deleted:\n";
-    private final String EMPTY_LIST_RESPONSE = "\tThere is no task in your list:>\n";
-    private final String NON_EMPTY_LIST_RESPONSE = "\tHere are the tasks in your list to jolt ur memory:>\n";
-    private final String UPDATE_TASK_RESPONSE = "Okay, Here's the task you just updated:\n";
 
     public TaskList(ArrayList<Task> listOfTasks, TaskStore storage) {
         this.listOfTasks = listOfTasks;
@@ -47,7 +39,7 @@ public class TaskList {
         listOfTasks.add(task);
         storage.updateStorage(listOfTasks);
         String willyResponse = Willy.response(
-                ADD_TASK_RESPONSE
+                Response.ADD_TASK
                 + "\t  " + task + "\n"
                 + "\tNow you have " + listOfTasks.size()
                 + " task(s), please don't forget!");
@@ -68,7 +60,7 @@ public class TaskList {
             listOfTasks.remove(i);
             storage.updateStorage(listOfTasks);
             String willyResponse = Willy.response(
-                    REMOVE_TASK_RESPONSE
+                    Response.REMOVE_TASK
                     + "\t  " + task + "\n"
                     + "\tNow you have " + listOfTasks.size()
                     + " task(s) left ~");
@@ -76,7 +68,7 @@ public class TaskList {
             return willyResponse;
 
         } catch (Exception e) {
-            WillyException error = new WillyException(NON_EXISTENT_TASK_MESSAGE);
+            WillyException error = new WillyException(Response.NO_TASK.toString());
             return error.toString();
         }
     }
@@ -88,7 +80,7 @@ public class TaskList {
             listOfTasks.set(i, editedTask);
             storage.updateStorage(listOfTasks);
             String willyResponse = Willy.response(
-                    UPDATE_TASK_RESPONSE
+                    Response.UPDATE_TASK
                     + "\t  " + editedTask + "\n"
                     + "\tNow you have " + listOfTasks.size()
                     + " task(s), please don't forget!");
@@ -96,7 +88,7 @@ public class TaskList {
             return willyResponse;
 
         } catch (Exception e){
-            WillyException error = new WillyException(NON_EXISTENT_TASK_MESSAGE);
+            WillyException error = new WillyException(Response.NO_TASK.toString());
             return error.toString();
         }
     }
@@ -109,9 +101,9 @@ public class TaskList {
     public String readList() {
         String list = Willy.getStyle();
         if (listOfTasks.size() == 0) {
-            list += EMPTY_LIST_RESPONSE;
+            list += Response.EMPTY_LIST;
         } else {
-            list += NON_EMPTY_LIST_RESPONSE;
+            list += Response.NON_EMPTY_LIST;
 
             for (int i = 0; i < listOfTasks.size(); i++) {
                 Task task = listOfTasks.get(i);
@@ -135,12 +127,12 @@ public class TaskList {
             Task task = listOfTasks.get(i);
             task.setTaskDone(true);
             storage.updateStorage(listOfTasks);
-            String willyResponse = Willy.response(TASK_DONE_MESSAGE + "\n\t   " + task);
+            String willyResponse = Willy.response(Response.DONE_TASK + "\n\t   " + task);
 
             return willyResponse;
 
         } catch (Exception e) {
-            WillyException error = new WillyException(NON_EXISTENT_TASK_MESSAGE);
+            WillyException error = new WillyException(Response.NO_TASK.toString());
             return error.toString();
         }
     }
@@ -162,11 +154,11 @@ public class TaskList {
 
         String filteredList = Willy.getStyle() + "\n";
         if (keyList.size() == 0) {
-            filteredList = filteredList + "\t" + NO_MATCHING_TASK_MESSAGE + "\n";
+            filteredList = filteredList + "\t" + Response.NON_MATCHING_TASK + "\n";
         } else {
             for (int i = 0; i < keyList.size(); i++) {
                 Task task = keyList.get(i);
-                filteredList = filteredList + "\t" + MATCHING_TASK_MESSAGE + "\n"
+                filteredList = filteredList + "\t" + Response.MATCHING_TASK + "\n"
                         + "\t  " + (i + 1) + "." + task + "\n";
             }
         }
