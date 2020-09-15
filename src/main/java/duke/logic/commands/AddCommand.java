@@ -36,13 +36,17 @@ public class AddCommand extends Command {
     @Override
     public String execute(TaskManager tm, Ui ui, Storage storage) throws DukeException {
         if (command.startsWith("deadline")) {
+            // Handles empty deadline command
             if (command.length() <= 9) {
                 throw new DukeException("Description of a deadline cannot be empty!");
             }
             String[] commandDetails = command.substring(9).split(" /by ", 2);
+
+            // Handles improperly formatted deadline command
             if (commandDetails.length != 2) {
                 throw new DukeException("Deadline not properly formatted!");
             }
+
             try {
                 LocalDate dlDate = LocalDate.parse(commandDetails[1]);
                 Deadline deadline = new Deadline(commandDetails[0], dlDate);
@@ -52,14 +56,19 @@ public class AddCommand extends Command {
             } catch (DateTimeParseException e) {
                 throw new DukeException("Invalid DateTime format. Please use YYYY-MM-DD.");
             }
+
         } else if (command.startsWith("event")) {
+            // Handles empty event command
             if (command.length() <= 6) {
                 throw new DukeException("Description of a deadline cannot be empty!");
             }
             String[] commandDetails = command.substring(6).split(" /at ", 2);
+
+            // Handles improperly formatted event command
             if (commandDetails.length != 2) {
                 throw new DukeException("Event not properly formatted!");
             }
+
             try {
                 LocalDate eventDate = LocalDate.parse(commandDetails[1]);
                 Event event = new Event(commandDetails[0], eventDate);
@@ -69,7 +78,9 @@ public class AddCommand extends Command {
             } catch (DateTimeParseException e) {
                 throw new DukeException("Invalid DateTime format. Please use YYYY-MM-DD.");
             }
+
         } else if (command.startsWith("todo")) {
+            // Handles empty todo command
             if (command.length() <= 5) {
                 throw new DukeException("Description of a deadline cannot be empty!");
             }
@@ -78,6 +89,7 @@ public class AddCommand extends Command {
             tm.addTask(todo);
             postCommandSave(tm, storage);
             return ("Task added: " + todo);
+
         } else {
             throw new DukeException("Command not recognised!");
         }

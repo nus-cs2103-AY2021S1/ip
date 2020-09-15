@@ -33,9 +33,12 @@ public class FindCommand extends Command {
     @Override
     public String execute(TaskManager tm, Ui ui, Storage storage) throws DukeException {
         String[] commandDetails = command.split(" ", 2);
+
+        // Handles empty find command
         if (commandDetails.length == 1) {
             throw new DukeException("Search term not provided!");
         }
+
         String searchTerm = commandDetails[1];
         ArrayList<Task> mathingTasks = tm.findTasks(searchTerm);
         if (mathingTasks.isEmpty()) {

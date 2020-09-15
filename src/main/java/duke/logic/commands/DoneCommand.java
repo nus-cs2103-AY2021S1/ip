@@ -31,9 +31,11 @@ public class DoneCommand extends Command {
     @Override
     public String execute(TaskManager tm, Ui ui, Storage storage) throws DukeException {
         String[] commandDetails = command.split(" ", 2);
+        // Handles empty done command
         if (commandDetails.length == 1) {
             throw new DukeException("Done Index not provided!");
         }
+
         try {
             int doneIndex = Integer.parseInt(commandDetails[1]) - 1;
             Task doneTask = tm.getTask(doneIndex);

@@ -34,15 +34,14 @@ public class ExitCommand extends Command {
     @Override
     public String execute(TaskManager tm, Ui ui, Storage storage) throws DukeException {
         String[] commandDetails = command.split(" ", 2);
+
+        // Handles exit command with extra parameters
         if (commandDetails.length != 1) {
             throw new DukeException("Exit command should not include extra parameters!");
         }
-        ArrayList<Task> taskList = tm.getTaskList();
-        try {
-            storage.save(taskList);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
+        // Save current tasks to disk before exiting
+        postCommandSave(tm, storage);
         return ui.showGoodbye();
     }
 
