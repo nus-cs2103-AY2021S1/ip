@@ -1,7 +1,6 @@
 import java.io.IOException;
 
 import duke.Duke;
-import duke.DukeException;
 import duke.GraphicalUi;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -23,13 +22,9 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            try {
-                duke = new Duke("data/duke.txt", new GraphicalUi());
-                fxmlLoader.<MainWindow>getController().setDuke(duke);
-                fxmlLoader.<MainWindow>getController().greet();
-            } catch (DukeException e) {
-                fxmlLoader.<MainWindow>getController().showLoadError(e.getMessage());
-            }
+            duke = new Duke("data/duke.txt", new GraphicalUi());
+            fxmlLoader.<MainWindow>getController().setDuke(duke);
+            fxmlLoader.<MainWindow>getController().greet();
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

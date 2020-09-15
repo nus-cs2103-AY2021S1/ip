@@ -20,7 +20,7 @@ public class Storage {
      * Loads task information stored in the file.
      *
      * @return List of tasks after loading.
-     * @throws DukeException When there is an input or output error.
+     * @throws DukeException When file formatting is wrong.
      */
     public List<Task> load() throws DukeException {
         List<Task> taskList = new ArrayList<>();
@@ -30,7 +30,7 @@ public class Storage {
                 while (sc.hasNextLine()) {
                     String[] taskInformation = sc.nextLine().split("\\" + SPLITTER);
                     if (taskInformation[0].equals(TaskType.TODO.getInitial())) {
-                        assert taskInformation.length == 3;
+                        assert taskInformation.length == 3; //change to erORORRO
                         taskList.add(new ToDo(taskInformation[2], isDone(taskInformation[1])));
                     } else if (taskInformation[0].equals(TaskType.DEADLINE.getInitial())) {
                         assert taskInformation.length == 4;
@@ -47,10 +47,10 @@ public class Storage {
                 file.getParentFile().mkdirs();
                 file.createNewFile();
             }
-            return taskList;
         } catch (IOException e) {
-            throw new DukeException("I can't seem to load the file...");
+            e.printStackTrace();
         }
+        return taskList;
     }
 
     public String getDoneString(Task task) {

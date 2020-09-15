@@ -3,23 +3,38 @@ package duke;
 import java.util.List;
 
 public class GraphicalUi extends Ui {
+    private static String greetingMessage = GREETING_MESSAGE;
     private String responseMessage;
+    private boolean hasErrorMessage;
 
+    /**
+     * Initializes a Graphical Ui for Duke.
+     */
     public GraphicalUi() {
         this.responseMessage = "";
+        hasErrorMessage = false;
     }
 
     public String getGreetingMessage() {
-        return GREETING_MESSAGE;
+        return LINE + greetingMessage + LINE;
+    }
+
+    public void setErrorGreeting(String errorMessage) {
+        greetingMessage += "\n Note that a new file was loaded due to this error: " + errorMessage + "\n";
     }
 
     @Override
     public void processError(String errorMessage) {
         responseMessage = errorMessage + "\n";
+        hasErrorMessage = true;
     }
 
     public String getResponseMessage() {
         return responseMessage;
+    }
+
+    public boolean hasErrorMessage() {
+        return hasErrorMessage;
     }
 
     /**
@@ -38,19 +53,22 @@ public class GraphicalUi extends Ui {
     @Override
     public void processAddMessage(Task task, int count) {
         responseMessage = "Quack! I have added: " + task + "\n";
-        ;
         displayTaskCount(count);
+        hasErrorMessage = false;
     }
 
     @Override
     public void processDeleteMessage(Task taskToDelete, int count) {
         responseMessage = "Quack! I have deleted this task: \n" + taskToDelete + "\n";
         displayTaskCount(count);
+        hasErrorMessage = false;
+
     }
 
     @Override
     public void processDoneMessage(Task task) {
         responseMessage = "Quack! I have marked this task as done: \n" + task + "\n";
+        hasErrorMessage = false;
     }
 
     @Override
@@ -69,6 +87,7 @@ public class GraphicalUi extends Ui {
                 count++;
             }
         }
+        hasErrorMessage = false;
     }
 
     @Override
@@ -83,5 +102,6 @@ public class GraphicalUi extends Ui {
                 count++;
             }
         }
+        hasErrorMessage = false;
     }
 }

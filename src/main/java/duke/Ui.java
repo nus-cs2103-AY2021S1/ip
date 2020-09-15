@@ -3,12 +3,10 @@ package duke;
 import java.util.List;
 
 public abstract class Ui {
-    protected static final String LINE = "____________________________________________________";
-    protected static final String GREETING_MESSAGE = LINE
-            + "\n Quack! I am Duck"
-            + "\n How can I help you today?\n" + LINE;
-    protected static final String EXIT_MESSAGE = LINE
-            + "\n Waddling off now. See you soon! \n" + LINE;
+    protected static final String LINE = "_________________________________________________";
+    protected static final String GREETING_MESSAGE = "\n Quack! I am Duck"
+            + "\n How can I help you today?\n";
+    protected static final String EXIT_MESSAGE = "\n Waddling off now. See you soon! \n";
 
     public abstract void processError(String errorMessage);
 

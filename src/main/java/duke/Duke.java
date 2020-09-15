@@ -1,5 +1,7 @@
 package duke;
 
+import java.util.ArrayList;
+
 /**
  * Duke, more commonly known as Duck, is a Personal Assistant Chat Bot that
  * helps a person to keep track of various tasks.
@@ -16,8 +18,9 @@ public class Duke {
      * Initializes Duke containing the storage, terminal ui and task list. For Duke running with Terminal UI.
      *
      * @param filePath Filepath of where storage files are stored.
+     * @param ui Terminal User Interface in Duke.
      */
-    public Duke(String filePath, Ui ui) {
+    public Duke(String filePath, TerminalUi ui) {
         this.storage = new Storage(filePath);
         this.ui = ui;
         this.isInProgram = true;
@@ -32,16 +35,17 @@ public class Duke {
      * Initializes Duke containing the storage, graphical ui and task list. For Duke running with GUI.
      *
      * @param filePath Filepath of where storage files are stored.
-     * @throws DukeException When a duke exception is caught, it is thrown to Main class for processing.
+     * @param ui Graphical User Interface in Duke.
      */
-    public Duke(String filePath, GraphicalUi ui) throws DukeException {
+    public Duke(String filePath, GraphicalUi ui) {
         this.storage = new Storage(filePath);
         this.ui = ui;
         this.isInProgram = true;
         try {
             this.taskList = new TaskList(storage.load());
         } catch (DukeException e) {
-            throw new DukeException(e.getMessage());
+            this.taskList = new TaskList(new ArrayList<>());
+            ui.setErrorGreeting(e.getMessage());
         }
     }
 
@@ -83,6 +87,15 @@ public class Duke {
             ui.processError(e.getMessage());
         }
         return ((GraphicalUi) ui).getResponseMessage();
+    }
+
+    /**
+     * Checks if GUI currently contains an error message.
+     *
+     * @return If GUI currently contains an error message.
+     */
+    public boolean hasErrorInGui() {
+        return ((GraphicalUi) ui).hasErrorMessage();
     }
 
     public boolean isInProgram() {

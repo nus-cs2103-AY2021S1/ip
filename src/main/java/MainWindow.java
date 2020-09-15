@@ -7,6 +7,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -23,7 +24,8 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/clown.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
+    private Image dukeErrorImage = new Image(this.getClass().getResourceAsStream("/images/duckError.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/duck.png"));
 
     @FXML
@@ -43,9 +45,15 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
+        DialogBox dukeDialog;
+        if (duke.hasErrorInGui()) {
+            dukeDialog = DialogBox.getDukeDialog(response, dukeErrorImage, Color.RED);
+        } else {
+            dukeDialog = DialogBox.getDukeDialog(response, dukeImage, Color.BLACK);
+        }
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getUserDialog(input, userImage, Color.BLACK),
+                dukeDialog
         );
         userInput.clear();
         if (!duke.isInProgram()) {
@@ -59,16 +67,6 @@ public class MainWindow extends AnchorPane {
      */
     public void greet() {
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(((GraphicalUi) duke.getUi()).getGreetingMessage(),
-                dukeImage));
-    }
-
-    /**
-     * Creates a dialog box which contains the error message and user image, then appends it to
-     * the dialog container.
-     *
-     * @param errorMessage Error message.
-     */
-    public void showLoadError(String errorMessage) {
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(errorMessage, userImage));
+                dukeImage, Color.BLACK));
     }
 }

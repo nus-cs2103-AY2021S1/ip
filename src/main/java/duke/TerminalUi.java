@@ -11,7 +11,7 @@ public class TerminalUi extends Ui {
     }
 
     public void greet() {
-        System.out.println(GREETING_MESSAGE);
+        printFormattedMessage(GREETING_MESSAGE);
     }
 
     public String getNextInput() {
@@ -33,7 +33,7 @@ public class TerminalUi extends Ui {
 
     @Override
     public void processClose() {
-        System.out.println(EXIT_MESSAGE);
+        printFormattedMessage(EXIT_MESSAGE);
         sc.close();
     }
 
