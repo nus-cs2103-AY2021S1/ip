@@ -8,8 +8,8 @@ import duke.task.Task;
  * user commands.
  */
 public class Ui {
-    private static final String CHATBOT = "Bob: ";
     private static final String SKIPLINE = "\n";
+    private static final String EMPTY_RESPONSE = "";
     private boolean hasExit;
 
     /**
@@ -39,15 +39,6 @@ public class Ui {
     }
 
     /**
-     * Indicates "Bob" is responding.
-     *
-     * @return "Bob: " to indicate "Bob" is responding.
-     */
-    private String showResponseIndicator() {
-        return CHATBOT + SKIPLINE;
-    }
-
-    /**
      * Displays to the user that their task list is currently empty.
      *
      * @return Message to notify users that their task list is empty.
@@ -66,7 +57,7 @@ public class Ui {
      * @return Task list saved in local storage.
      */
     private String generateTaskList(TaskList tasks, String message) {
-        String tasklist = "";
+        String tasklist = EMPTY_RESPONSE;
 
         // If list is empty
         if (tasks.getTotalNumberOfTasks() == 0) {
@@ -88,12 +79,10 @@ public class Ui {
      * @return Task list saved in the local storage.
      */
     public String showTaskList(TaskList tasks) {
-        String output = showResponseIndicator();
-
         String chatbotResponse = "Your current task list is as follows:" + SKIPLINE;
-        output += generateTaskList(tasks, chatbotResponse);
+        String output = generateTaskList(tasks, chatbotResponse);
 
-        assert !output.equals(CHATBOT + SKIPLINE);
+        assert !output.equals(EMPTY_RESPONSE);
         return output;
     }
 
@@ -105,12 +94,10 @@ public class Ui {
      * @return Task list containing tasks that match the keyword.
      */
     public String showFilteredByKeywordTaskList(TaskList tasks, String keyword) {
-        String output = showResponseIndicator();
-
         String chatbotResponse = "Here are the tasks that matched with '" + keyword + "':" + SKIPLINE;
-        output += generateTaskList(tasks, chatbotResponse);
+        String output = generateTaskList(tasks, chatbotResponse);
 
-        assert !output.equals(CHATBOT + SKIPLINE);
+        assert !output.equals(EMPTY_RESPONSE);
         return output;
     }
 
@@ -121,12 +108,10 @@ public class Ui {
      * @return Task list saved in the local storage when the program starts up.
      */
     public String loadTaskList(TaskList tasks) {
-        String output = showResponseIndicator();
-
         String chatbotResponse = "Here is your current task list:" + SKIPLINE;
-        output += generateTaskList(tasks, chatbotResponse);
+        String output = generateTaskList(tasks, chatbotResponse);
 
-        assert !output.equals(CHATBOT + SKIPLINE + "Here is your current task list:");
+        assert !output.equals("Here is your current task list:");
         return output;
     }
 
@@ -192,8 +177,7 @@ public class Ui {
      * @return Message informing user that a new task has been successfully added to the task list.
      */
     public String showAddedNewTaskMessage(Task newTask, TaskList tasks) {
-        String output = showResponseIndicator();
-        output += getUpdatedTaskListMessage(tasks, newTask, "added");
+        String output = getUpdatedTaskListMessage(tasks, newTask, "added");
         return output;
     }
 
@@ -206,9 +190,7 @@ public class Ui {
      * @return Message informing that user that the indicated task has been successfully deleted from the task list.
      */
     public String showDeleteTaskMessage(Task deletedTask, TaskList tasks) {
-        String output = showResponseIndicator();
-        output += getUpdatedTaskListMessage(tasks, deletedTask, "deleted");
-
+        String output = getUpdatedTaskListMessage(tasks, deletedTask, "deleted");
         return output;
     }
 
@@ -219,10 +201,7 @@ public class Ui {
      * @return Message informing user that the indicated task has been successfully marked as done.
      */
     public String showMarkDoneMessage(Task doneTask) {
-        String output = showResponseIndicator();
-
-        // Bob's response
-        output += "Good job completing this task! I've marked this task as done:" + SKIPLINE;
+        String output = "Good job completing this task! I've marked this task as done:" + SKIPLINE;
         output += doneTask.toString() + SKIPLINE;
         output += "Keep up the good work :)";
         return output;
@@ -235,10 +214,7 @@ public class Ui {
      * @return Message informing user that the indicated task is already marked as done.
      */
     public String showAlreadyMarkDoneMessage(Task doneTask) {
-        String output = showResponseIndicator();
-
-        // Bob's response
-        output += "OOPS. It seems like this task has already been completed:" + SKIPLINE;
+        String output = "OOPS. It seems like this task has already been completed:" + SKIPLINE;
         output += doneTask.toString() + SKIPLINE;
         return output;
     }
@@ -250,10 +226,7 @@ public class Ui {
      * @return Message informing user that indicated task already exists in the task list.
      */
     public String showTaskIsAlreadyInTaskListMessage(Task duplicateTask) {
-        String output = showResponseIndicator();
-
-        // Bob's response
-        output += "OOPS. It seems like this task already exists:" + SKIPLINE;
+        String output = "OOPS. It seems like this task already exists:" + SKIPLINE;
         output += duplicateTask.toString() + SKIPLINE;
         return output;
     }
@@ -265,8 +238,7 @@ public class Ui {
      * @param e Exception caught.
      */
     public String showErrorMessage(Exception e) {
-        String output = showResponseIndicator();
-        output += e.getLocalizedMessage();
+        String output = e.getLocalizedMessage();
         return output;
     }
 
@@ -277,5 +249,15 @@ public class Ui {
      */
     public boolean hasExited() {
         return this.hasExit;
+    }
+
+    /**
+     * 
+     *
+     * @return
+     */
+    public String showAlreadyExitedMessage() {
+        return "Why are you still here? You have already said bye to me....." + SKIPLINE
+                + "If you want to continue to talk please close and reopen me :D";
     }
 }

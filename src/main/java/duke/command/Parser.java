@@ -31,9 +31,13 @@ public class Parser {
      * @param ui User interface which handles the printing the appropriate output.
      * @param storage Local storage which handles the loading and saving of task lists.
      * @return "Bob's" response to user commands
-     * @throws InvalidUserCommandException If a user command is not recognized by the program.
      */
-    public static String parseCommands(String userCommand, Ui ui, Storage storage) throws InvalidUserCommandException {
+    public static String parseCommands(String userCommand, Ui ui, Storage storage) {
+        // If you continue to input commands after saying "bye"
+        if (ui.hasExited()) {
+            return ui.showAlreadyExitedMessage();
+        }
+
         // For single-word user commands
         if (UserCommands.EXIT.getCommandWord().equals(userCommand)) {
             return ui.showGoodbyeMessage();
@@ -47,6 +51,20 @@ public class Parser {
             }
         }
 
+        return parseMultiWordUserCommands(userCommand, ui, storage);
+    }
+
+    /**
+     * Processes multi-word user commands.
+     *
+     * @param userCommand User input command.
+     * @param ui User interface which handles the printing the appropriate output.
+     * @param storage Local storage which handles the loading and saving of task lists.
+     * @return "Bob's" response to multi-word user commands.
+     * @throws InvalidUserCommandException If a user command is not recognized by the program.
+     */
+    public static String parseMultiWordUserCommands(String userCommand, Ui ui, Storage storage)
+            throws InvalidUserCommandException {
         // Extract the first word of the user command to obtain the type of user command
         String[] commandDetails = userCommand.split(" ", 2);
 
@@ -69,7 +87,7 @@ public class Parser {
                 // User commands is not recognized by the system
                 throw new InvalidUserCommandException(ui.showInvalidUserCommand(userCommand));
             }
-        // If user input only consists of the type of command but no other details
+            // If user input only consists of the type of command but no other details
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new InvalidUserCommandException(ui.showInvalidUserCommand(userCommand));
         }

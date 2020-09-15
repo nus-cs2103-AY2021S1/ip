@@ -20,6 +20,11 @@ import javafx.scene.layout.HBox;
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
+    private static final String DIALOG_BOX_STYLE = "-fx-border-color: black; -fx-border-radius: 10px;"
+            + "-fx-background-radius: 10px; -fx-min-height: 30px; -fx-padding: 5px; -fx-font-weight: bold; ";
+    private static final String USER_DIALOG_COLOR = "-fx-background-color: blanchedalmond";
+    private static final String DUKE_DIALOG_COLOR = "-fx-background-color: lightpink";
+
     @FXML
     private Label dialog;
     @FXML
@@ -55,13 +60,20 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    private static String setDialogColor(String dialogColor) {
+        return DIALOG_BOX_STYLE + dialogColor;
+    }
+
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        var db = new DialogBox(text, img);
+        db.dialog.setStyle(setDialogColor(USER_DIALOG_COLOR));
+        return db;
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
+        db.dialog.setStyle(setDialogColor(DUKE_DIALOG_COLOR));
         return db;
     }
 }
