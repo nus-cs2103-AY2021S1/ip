@@ -22,7 +22,7 @@ public class Parser {
     private static final String FIND_SYNTAX_ERROR_MESSAGE = "Error! Note the syntax: find [keyword]";
     private static final String DONE_SYNTAX_ERROR_MESSAGE = "Error! Note the syntax: done [task number]";
     private static final String TODO_SYNTAX_ERROR_MESSAGE = "Error! Note the syntax: todo [description]";
-    private static final String DEADLINE_SYNTAX_ERROR_MESSAGE = "Error! Note the syntax:"
+    private static final String DEADLINE_SYNTAX_ERROR_MESSAGE = "Error! Note the syntax: "
                                                                 + "deadline [description] /by [date]";
     private static final String EVENT_SYNTAX_ERROR_MESSAGE = "Error! Note the syntax: event [description] /at [date]";
     private static final String DELETE_SYNTAX_ERROR_MESSAGE = "Error! Note the syntax: delete [task number]";
