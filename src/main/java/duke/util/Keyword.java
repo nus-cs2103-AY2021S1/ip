@@ -1,7 +1,5 @@
 package duke.util;
 
-import java.time.format.DateTimeFormatter;
-
 /**
  * Contains all keywords being used in the entire app.
  */
@@ -73,13 +71,13 @@ public class Keyword {
     public static final String NUM_FORMATTER = "%d. %s";
     public static final String FILE_CREATION_ERR = "Error in creating file!";
     public static final String SORT_SUCCESS_MESSAGE = "Your list has been sorted!";
-    public static final String SORT_PROMPT_MESSAGE = "Type in 'list' to see the sorted list.";
+    public static final String SORT_PROMPT_MESSAGE = "Type in 'list' to see the new ordering.";
 
     // DateTimeParser
-    public static final DateTimeFormatter DATE_TIME_OUTPUT_FORMAT = DateTimeFormatter.ofPattern("d MMM yyyy @ h.mm a");
-    public static final DateTimeFormatter DATE_TIME_INPUT_FORMAT = DateTimeFormatter.ofPattern("d-M-yy HHmm");
-    public static final DateTimeFormatter DATE_INPUT_FORMAT = DateTimeFormatter.ofPattern("d-M-yy");
-    public static final DateTimeFormatter TIME_FORMAT = DateTimeFormatter.ofPattern("HHmm");
+    public static final String DATE_TIME_OUTPUT_FORMAT = "d MMM yyyy @ h.mm a";
+    public static final String DATE_TIME_INPUT_FORMAT = "d-M-yy HHmm";
+    public static final String DATE_INPUT_FORMAT = "d-M-yy";
+    public static final String TIME_INPUT_FORMAT = "HHmm";
 
     // CsvConverter
     public static final String CSV_SEPARATOR = "  ,";

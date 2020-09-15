@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
@@ -47,7 +48,7 @@ public class StorageTest {
             for (Task task : tasks) {
                 assertEquals("TODO", task.getTaskName());
                 String taskCreationTime = task.getTime();
-                LocalDateTime.parse(taskCreationTime, DATE_TIME_OUTPUT_FORMAT);
+                LocalDateTime.parse(taskCreationTime, DateTimeFormatter.ofPattern(DATE_TIME_OUTPUT_FORMAT));
             }
         } catch (FileUpdateFailException e) {
             System.out.println(e.getMessage());

@@ -7,6 +7,7 @@ import static duke.util.Keyword.KEYWORD_EVENT;
 import static duke.util.Keyword.KEYWORD_TODO;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 import duke.exception.InvalidFileFormatException;
@@ -84,7 +85,7 @@ public class CsvConverter {
      */
     private static LocalDateTime stringToDateTime(String input) throws InvalidFileFormatException {
         try {
-            return LocalDateTime.parse(input, DATE_TIME_OUTPUT_FORMAT);
+            return LocalDateTime.parse(input, DateTimeFormatter.ofPattern(DATE_TIME_OUTPUT_FORMAT));
         } catch (DateTimeParseException e) {
             throw new InvalidFileFormatException();
         }

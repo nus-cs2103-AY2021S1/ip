@@ -2,11 +2,12 @@ package duke.parser;
 
 import static duke.util.Keyword.DATE_INPUT_FORMAT;
 import static duke.util.Keyword.DATE_TIME_INPUT_FORMAT;
-import static duke.util.Keyword.TIME_FORMAT;
+import static duke.util.Keyword.TIME_INPUT_FORMAT;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 import duke.exception.InvalidDateException;
@@ -43,7 +44,7 @@ public abstract class DateTimeParser {
      */
     private static boolean isDateTimeFormat(String input) {
         try {
-            LocalDateTime.parse(input, DATE_TIME_INPUT_FORMAT);
+            LocalDateTime.parse(input, formatterDateTime(DATE_TIME_INPUT_FORMAT));
             return true;
         } catch (DateTimeParseException e) {
             return false;
@@ -57,7 +58,7 @@ public abstract class DateTimeParser {
      * @return Formatted date and time.
      */
     private static LocalDateTime formatDateTime(String dateAndTime) {
-        return LocalDateTime.parse(dateAndTime, DATE_TIME_INPUT_FORMAT);
+        return LocalDateTime.parse(dateAndTime, formatterDateTime(DATE_TIME_INPUT_FORMAT));
     }
 
     /**
@@ -68,7 +69,7 @@ public abstract class DateTimeParser {
      */
     private static boolean isDateFormat(String input) {
         try {
-            LocalDate.parse(input, DATE_INPUT_FORMAT);
+            LocalDate.parse(input, formatterDateTime(DATE_INPUT_FORMAT));
             return true;
         } catch (DateTimeParseException e) {
             return false;
@@ -82,7 +83,7 @@ public abstract class DateTimeParser {
      * @return A LocalDate object.
      */
     private static LocalDateTime formatDate(String date) {
-        LocalDate localDate = LocalDate.parse(date, DATE_INPUT_FORMAT);
+        LocalDate localDate = LocalDate.parse(date, formatterDateTime(DATE_INPUT_FORMAT));
         LocalTime currentTime = LocalTime.now();
         return LocalDateTime.of(localDate, currentTime);
     }
@@ -95,7 +96,7 @@ public abstract class DateTimeParser {
      */
     private static boolean isTimeFormat(String input) {
         try {
-            LocalTime.parse(input, TIME_FORMAT);
+            LocalTime.parse(input, formatterDateTime(TIME_INPUT_FORMAT));
             return true;
         } catch (DateTimeParseException e) {
             return false;
@@ -109,8 +110,18 @@ public abstract class DateTimeParser {
      * @return LocalDateTime consisting of today's date input time.
      */
     private static LocalDateTime formatTime(String time) {
-        LocalTime localTime = LocalTime.parse(time, TIME_FORMAT);
+        LocalTime localTime = LocalTime.parse(time, formatterDateTime(TIME_INPUT_FORMAT));
         LocalDate currentDate = LocalDate.now();
         return LocalDateTime.of(currentDate, localTime);
+    }
+
+    /**
+     * Creates a DateTimeFormatter using the input pattern.
+     *
+     * @param pattern String pattern.
+     * @return The DateTimeFormatter based the pattern.
+     */
+    private static DateTimeFormatter formatterDateTime(String pattern) {
+        return DateTimeFormatter.ofPattern(pattern);
     }
 }

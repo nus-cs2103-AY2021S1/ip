@@ -8,6 +8,7 @@ import static duke.util.Keyword.SINGLE_SPACE;
 import static duke.util.Keyword.TICK_SYMBOL;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Stores all methods and properties of a Task class.
@@ -97,7 +98,7 @@ public abstract class Task implements Comparable<Task> {
      * @return Time of Task.
      */
     public String getTime() {
-        return dateTime.format(DATE_TIME_OUTPUT_FORMAT);
+        return dateTime.format(DateTimeFormatter.ofPattern(DATE_TIME_OUTPUT_FORMAT));
     }
 
     /**
@@ -130,14 +131,28 @@ public abstract class Task implements Comparable<Task> {
     }
 
     /**
-     * Compares each task according to their {@code LocalDateTime} dateTime.
+     * Compares each task according to the sorting standard.
+     * Incomplete tasks have the higher priority.
+     * Priority in increasing order: Deadline, Event, Todo.
+     * Tasks created earlier / have earlier deadline have higher priority.
      *
      * @param otherTask Other task to compare to.
      * @return The comparator value, negative if less, positive if greater.
      */
     @Override
     public int compareTo(Task otherTask) {
-        return this.dateTime.compareTo(otherTask.dateTime);
+        // Incomplete tasks have higher priority.
+        if (isDone && !otherTask.isDone) {
+            return 1;
+        } else if (!isDone && otherTask.isDone) {
+            return -1;
+        }
+        // Proceeds to compare tasks by task type, then time.
+        if (taskType == otherTask.taskType) {
+            return dateTime.compareTo(otherTask.dateTime);
+        } else {
+            return taskType.compareTo(otherTask.taskType);
+        }
     }
 
     /**
