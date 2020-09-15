@@ -1,8 +1,6 @@
 package duke;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 import duke.task.Deadline;
 import duke.task.Event;
@@ -50,6 +48,14 @@ public class TaskList {
     public int getCount() {
         assert taskList != null;
         return taskList.size();
+    }
+
+    /**
+     * Sort the task list based on the given comparator.
+     * @param comparator specifies how the tasks should be sorted
+     */
+    public void sort(Comparator<Task> comparator) {
+        taskList.sort(comparator);
     }
 
     /**
