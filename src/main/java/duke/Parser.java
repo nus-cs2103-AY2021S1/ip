@@ -100,7 +100,6 @@ public class Parser {
         return new FindCommand(input.substring(5));
 
     }
-
     /**
      * Parse a dateTime string of format : yyyy-mm-dd HHmm
      * and returns with format : yyyy-mm-ddTHH:mm

@@ -20,10 +20,12 @@ import duke.task.*;
 public class Storage {
     private static File memoryFile;
     private Path path;
+    private String directory;
 
 
-    public Storage(String filePath) {
-        path = Paths.get(filePath);
+    public Storage(String directory) {
+        this.directory = directory;
+        path = Paths.get(directory + "/data.txt");
     }
 
     private List<Task> parseData(File f) throws FileNotFoundException {
@@ -123,7 +125,13 @@ public class Storage {
             System.out.println(Ui.INDENT + "Load Successful!");
         } else {
             System.out.println(Ui.INDENT + "No Memory Found.");
+            File directory = new File(this.directory);
+            if (!directory.exists()) {
+                directory.mkdirs();
+            }
+
             try {
+
                 FileWriter fw = new FileWriter(path.toString());
                 System.out.println(Ui.INDENT + "Creating new memory file..");
                 fw.write("");

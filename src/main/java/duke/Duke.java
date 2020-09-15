@@ -18,9 +18,9 @@ public class Duke {
      *
      * @param filePath  File path of memory file.
      */
-    public Duke(String filePath) {
+    public Duke() {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage("./data");
         tasks = new TaskList(storage);
     }
 
