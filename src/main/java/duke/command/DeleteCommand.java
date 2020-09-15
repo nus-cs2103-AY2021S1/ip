@@ -14,7 +14,7 @@ public class DeleteCommand extends Command {
     /**
      * Message to be printed when DeleteCommand is executed successfully.
      */
-    public static final String MESSAGE_SUCCESS = "Noted. I've removed this task:\n%s";
+    protected static final String MESSAGE_SUCCESS = "Noted. I've removed this task:\n%s";
 
     protected int index;
 

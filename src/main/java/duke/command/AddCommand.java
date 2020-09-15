@@ -14,7 +14,7 @@ public class AddCommand extends Command {
     /**
      * Message to be printed when AddCommand is executed successfully.
      */
-    public static final String MESSAGE_SUCCESS = "Got it. I've added this task:\n%s\n%s";
+    protected static final String MESSAGE_SUCCESS = "Got it. I've added this task:\n%s\n%s";
 
     protected String description;
     protected String date;

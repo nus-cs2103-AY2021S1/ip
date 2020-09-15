@@ -14,7 +14,7 @@ public class DoneCommand extends Command {
     /**
      * Message to be printed when DoneCommand is executed successfully.
      */
-    public static final String MESSAGE_SUCCESS = "Nice! I've marked this task as done:\n%s";
+    protected static final String MESSAGE_SUCCESS = "Nice! I've marked this task as done:\n%s";
 
     protected int index;
 

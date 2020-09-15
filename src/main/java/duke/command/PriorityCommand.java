@@ -12,7 +12,7 @@ public class PriorityCommand extends Command {
     /**
      * Message to be printed when AddPriorityCommand is executed successfully.
      */
-    public static final String MESSAGE_SUCCESS = "Noted. I've %s priority to this task:\n%s";
+    protected static final String MESSAGE_SUCCESS = "Noted. I've %s priority to this task:\n%s";
 
     protected int index;
 
