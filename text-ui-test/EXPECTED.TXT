@@ -1,7 +1,50 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+Hi I'm Duke, your personal task-tracker bot!
+You can add todos, deadlines, or events to my list.
+You don't have an existing saved task list.
+added: [T] [✘] borrow book
+added: [D] [✘] return book (by: Tue 25 Aug 2020)
+Invalid date entered
+added: [E] [✘] meet friend (at: wed 2pm)
+1. [T] [✘] borrow book
+2. [D] [✘] return book (by: Tue 25 Aug 2020)
+3. [E] [✘] meet friend (at: wed 2pm)
+Here are the matching tasks in your list:
+[T] [✘] borrow book
+[D] [✘] return book (by: Tue 25 Aug 2020)
+added: [T] [✘] borrow umbrella
+Here are the matching tasks in your list:
+[T] [✘] borrow book
+[T] [✘] borrow umbrella
+There are no matching tasks in your list.
+I've marked this task as done:
+[T] [✓] borrow book
+1. [T] [✓] borrow book
+2. [D] [✘] return book (by: Tue 25 Aug 2020)
+3. [E] [✘] meet friend (at: wed 2pm)
+4. [T] [✘] borrow umbrella
+I've marked this task as done:
+[D] [✓] return book (by: Tue 25 Aug 2020)
+1. [T] [✓] borrow book
+2. [D] [✓] return book (by: Tue 25 Aug 2020)
+3. [E] [✘] meet friend (at: wed 2pm)
+4. [T] [✘] borrow umbrella
+I've marked this task as done:
+[E] [✓] meet friend (at: wed 2pm)
+1. [T] [✓] borrow book
+2. [D] [✓] return book (by: Tue 25 Aug 2020)
+3. [E] [✓] meet friend (at: wed 2pm)
+4. [T] [✘] borrow umbrella
+This task has been removed: [T] [✓] borrow book
+1. [D] [✓] return book (by: Tue 25 Aug 2020)
+2. [E] [✓] meet friend (at: wed 2pm)
+3. [T] [✘] borrow umbrella
+This task has been removed: [D] [✓] return book (by: Tue 25 Aug 2020)
+1. [E] [✓] meet friend (at: wed 2pm)
+2. [T] [✘] borrow umbrella
+Item #3 does not exist and cannot be removed.
+1. [E] [✓] meet friend (at: wed 2pm)
+2. [T] [✘] borrow umbrella
+Unrecognized task/command.
+Todos must have non-empty descriptions!
+Item #5 does not exist and cannot be marked as done.
+Bye. Hope to see you again

@@ -1,0 +1,86 @@
+@font-face {
+    src: url("Roboto-Light.ttf");
+}
+
+@font-face {
+    src: url("Roboto-Medium.ttf");
+}
+
+.root {
+    -fx-font-size: 15;
+    -fx-font-family: "Roboto Light";
+    -fx-background-color: "#FAF6F6";
+}
+
+#landingSceneContainer {
+    -fx-background-color: "#F2E5D7";
+}
+
+#sendButton {
+    -fx-font-family: "Roboto Medium";
+    -fx-font-size: 13;
+    -fx-background-color: "#DDF2FC";
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;
+    -fx-border-width: 2px;
+    -fx-border-color: "#AEE0F8";
+}
+
+#sendButton:hover {
+    -fx-background-color: "#AEE0F8";
+}
+
+#userInput {
+    -fx-background-color: "#FAF6F6";
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;
+    -fx-border-color: "#D7E4F2";
+    -fx-border-width: 2px;
+}
+
+#dialogContainer {
+    -fx-background-color: "#FAF6F6";
+    -fx-padding: 10;
+    -fx-spacing: 12;
+}
+
+.dialogBox {
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;
+}
+
+#dialog {
+    -fx-padding: 5px;
+}
+
+#userDialogBox {
+    -fx-background-color: "#DDFCF7";
+}
+
+#dukeDialogBox {
+    -fx-background-color: "#DDE3FC";
+}
+
+
+.scroll-bar:horizontal, .scroll-bar:vertical{
+    -fx-background-color:transparent;
+    -fx-pref-width: 12;
+}
+
+.increment-button, .decrement-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.scroll-bar:horizontal .track,
+.scroll-bar:vertical .track{
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-background-radius: 0em;
+}
+
+.scroll-bar:horizontal .thumb,
+.scroll-bar:vertical .thumb {
+    -fx-background-color: "#AEE0F8";
+    -fx-background-radius: 5em;
+}

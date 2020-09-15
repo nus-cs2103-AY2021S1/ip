@@ -15,12 +15,16 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
    1. Click `Open or Import`.
    1. Select the project directory, and click `OK`
    1. If there are any further prompts, accept the defaults.
-1. After the importing is complete, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()`. If the setup is correct, you should see something like the below:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+1. After the importing is complete, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke
+.main()`. If the setup is correct, you should see the GUI.
+   
+   ## Acknowledgements
+   1. User icon: released under Creative Commons license by William Joseph -
+    https://thenounproject.com/term/user/28345/ 
+    2. Duke image icon: released under Creative Commons license by Somewan, SG - 
+    https://thenounproject.com/term/caring-ai-bot/1812219/
+    3. Roboto fonts: released under Apache License, Version 2.0 by Christian Robertson -
+    https://fonts.google.com/specimen/Roboto
+    
+   
+   
