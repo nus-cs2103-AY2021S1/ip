@@ -1,10 +1,10 @@
 package duke.exception;
 
 public class InvalidCommandException extends DukeException {
-    private static String message = "OOPS!!! I'm sorry, but I don't know what that means :-(";
+    private static final String MESSAGE = "QUACK!!! I'm sorry master, but I don't know what that means :'(";
 
     @Override
     public String toString() {
-        return message;
+        return MESSAGE;
     }
 }

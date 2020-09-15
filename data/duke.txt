@@ -1,3 +1,4 @@
 T | ✓ | play dote | low
 T | ✘ | plan for date  | high
 D | ✘ | CS2100 assignment  | 2020-09-20 | low
+T | ✘ | laundry | low

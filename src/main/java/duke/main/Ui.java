@@ -23,7 +23,7 @@ public class Ui {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        String message = "Hola! Duke reporting for duty\nWhat can I do for you sir?";
+        String message = "Quackkk! Duke reporting for duty\nWhat can I do for you master?";
         return logo + message;
     }
 
@@ -31,7 +31,7 @@ public class Ui {
      * Gets farewell message to the users when they exits Duke program.
      */
     public String getGoodByeMessage() {
-        return "Bye Master. Hope to see you again soon!";
+        return "Bye Master. Hope to see you again soon! QUACK QUACK!!!";
     }
 
     /**
@@ -76,7 +76,7 @@ public class Ui {
      * @return The message notifying user that the task is marked as done.
      */
     public String getMarkTaskAsDoneMessage(Task task) {
-        String result = "Nice! I've marked this task as done:\n";
+        String result = "QUACKK! I've marked this task as done:\n";
         result += indentMessage(task.toString());
         result = addLineBreak(result);
         return result;
@@ -93,7 +93,7 @@ public class Ui {
     private String taskListModify(String message, Task task, TaskList tasks) {
         assert task != null : "task does not exist";
         assert tasks != null : "task list does not exist";
-        String newTaskListLength = "Now you have " + tasks.getSize() + " items in the list";
+        String newTaskListLength = "Master, you now have " + tasks.getSize() + " items in the list! Quack! Quack!";
         String taskDescription = indentMessage(task.toString());
         String[] strings = {message, taskDescription, newTaskListLength};
         String finalMessage = buildMessage(strings);
@@ -109,7 +109,7 @@ public class Ui {
      *         to the task list.
      */
     public String getAddTaskMessage(Task task, TaskList tasks) {
-        return taskListModify("Got it. I've added this task: ", task, tasks);
+        return taskListModify("Quack Quack Quack. I've added this task: ", task, tasks);
     }
 
     /**
@@ -121,7 +121,7 @@ public class Ui {
      *         from the task list.
      */
     public String getDeleteTaskMessage(Task task, TaskList tasks) {
-        return taskListModify("Noted. I've removed this task: ", task, tasks);
+        return taskListModify("Quackkk. I've removed this task for you: ", task, tasks);
     }
 
     /**
@@ -131,7 +131,7 @@ public class Ui {
      * @return The message notifying the user of the tasks that contain the particular keyword.
      */
     public String getMatchingList(TaskList tasks) {
-        String message = "Here are the matching tasks in your list:\n";
+        String message = "Quack Quack! Here are the matching tasks in your list:\n";
         int numOfTasks = tasks.getSize();
         for (int i = 0; i < numOfTasks; i++) {
             int taskNumber = i + 1;

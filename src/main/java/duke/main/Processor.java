@@ -2,6 +2,7 @@ package duke.main;
 
 import duke.exception.DukeException;
 import duke.exception.InvalidCommandException;
+import duke.exception.InvalidIndexException;
 import duke.task.DeadLine;
 import duke.task.Event;
 import duke.task.Task;
@@ -32,9 +33,15 @@ public class Processor {
      * @param tasks    User's task list.
      */
     public static void handleListCommand(StringBuilder response, Ui ui, TaskList tasks) {
-        String headerMessage = "Here are the tasks in your list:\n";
+        String headerMessage = "Quack! Your list is here:\n";
         String taskListInString = ui.getFullList(headerMessage, tasks);
         response.append(taskListInString);
+    }
+
+    private static void checkIsValidIndex(int index, TaskList tasks) throws InvalidIndexException {
+        if (index < 0 || index >= tasks.getSize()) {
+            throw new InvalidIndexException();
+        }
     }
 
     /**
@@ -50,6 +57,7 @@ public class Processor {
             String userInput, StringBuilder response, Ui ui, TaskList tasks) throws DukeException {
         int taskNumber = Parser.getIndexTask(userInput);
         int taskIndex = taskNumber - 1;
+        checkIsValidIndex(taskIndex, tasks);
         Task task = tasks.getTask(taskIndex);
         task.markAsDone();
         String message = ui.getMarkTaskAsDoneMessage(task);
@@ -69,6 +77,7 @@ public class Processor {
             String userInput, StringBuilder response, Ui ui, TaskList tasks) throws DukeException {
         int taskNumber = Parser.getIndexTask(userInput);
         int taskIndex = taskNumber - 1;
+        checkIsValidIndex(taskIndex, tasks);
         Task deletedTask = tasks.getTask(taskIndex);
         tasks.deleteTask(taskIndex);
         String message = ui.getDeleteTaskMessage(deletedTask, tasks);
@@ -202,12 +211,12 @@ public class Processor {
             String userInput, StringBuilder response, Ui ui, TaskList tasks) throws InvalidCommandException {
         if (Parser.isSortedByPriority(userInput)) {
             TaskList sortedList = tasks.sortPriority();
-            String headerMessage = "Here is your task list sorted based on priority:\n";
+            String headerMessage = "Quack! Here is your task list sorted based on priority:\n";
             String message = ui.getFullList(headerMessage, sortedList);
             response.append(message);
         } else {
             TaskList sortedList = tasks.sortDescription();
-            String headerMessage = "Here is your task list sorted alphabetically:\n";
+            String headerMessage = "Quack! Here is your task list sorted alphabetically:\n";
             String message = ui.getFullList(headerMessage, sortedList);
             response.append(message);
         }

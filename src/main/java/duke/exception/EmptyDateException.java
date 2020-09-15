@@ -1,10 +1,10 @@
 package duke.exception;
 
 public class EmptyDateException extends DukeException {
-    private static String message = "OOPS!!! Please specify the date";
+    private static final String MESSAGE = "QUACK!!! Please specify the date";
 
     @Override
     public String toString() {
-        return message;
+        return MESSAGE;
     }
 }

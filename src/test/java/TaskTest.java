@@ -1,9 +1,9 @@
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
 import duke.task.Task;
 import duke.task.ToDo;
 
-import static org.junit.Assert.assertEquals;
+import org.junit.Test;
 
 public class TaskTest {
     @Test

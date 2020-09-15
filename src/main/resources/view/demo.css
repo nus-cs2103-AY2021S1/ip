@@ -1,6 +1,5 @@
 #dialog {
     -fx-font-size: 14px;
-    -fx-font: Roboto;
     -fx-padding: 10 10 10 10;
     -fx-font-weight: 700;
     -fx-min-height: 10px;
@@ -8,4 +7,14 @@
 
 #displayPicture {
     -fx-padding: 2 2 2 2;
+}
+
+#userInput {
+    -fx-padding: 5 5 5 5;
+    -fx-background-color: #45EEDA;
+    -fx-border-radius: 30;
+}
+
+#sendButton {
+    -fx-background-color: #EE4561;
 }

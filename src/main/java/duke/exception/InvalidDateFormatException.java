@@ -1,9 +1,9 @@
 package duke.exception;
 
 public class InvalidDateFormatException extends DukeException {
-    private static String messageNoTime = "Entered date is in the wrong format. Please "
+    private static final String MESSAGE_NO_TIME = "QUACK QUACK!! Entered date is in the wrong format. Please "
             + "specify in this format YYYY-MM-DD";
-    private static String messageWithTime = "Entered date is in the wrong format. Please "
+    private static final String MESSAGE_WITH_TIME = "QUACK QUACK!! Entered date is in the wrong format. Please "
             + "specify in this format YYYY-MM-DD HH:MM";
     private boolean hasTime;
 
@@ -13,6 +13,6 @@ public class InvalidDateFormatException extends DukeException {
 
     @Override
     public String toString() {
-        return !hasTime ? messageNoTime : messageWithTime;
+        return !hasTime ? MESSAGE_NO_TIME : MESSAGE_WITH_TIME;
     }
 }

@@ -1,10 +1,10 @@
 package duke.exception;
 
 public class InvalidIndexException extends DukeException {
-    private static String message = "OOPS!!! The task index is empty :'(";
+    private static final String MESSAGE = "QUACK!!! The task index is invalid :'(";
 
     @Override
     public String toString() {
-        return message;
+        return MESSAGE;
     }
 }
