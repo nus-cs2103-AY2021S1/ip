@@ -66,7 +66,9 @@ public class Duke {
             return ui.showSaveError();
         }
     }
-
+    public String greet() {
+        return ui.greet();
+    }
     /**
      * Runs the chat bot by accepting user inputs and handling it through
      * other classes like TaskList and Ui.

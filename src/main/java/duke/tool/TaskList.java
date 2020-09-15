@@ -119,6 +119,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Find all possible tasks whose description matches the given keyword.
+     *
+     * @param keyword A string to be checked against the tasks' description.
+     * @return
+     */
     public String findTasks(String keyword) {
         List<Task> matchingTasks = new ArrayList<>();
         for (Task task: tasks) {

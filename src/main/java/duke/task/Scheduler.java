@@ -18,6 +18,11 @@ public class Scheduler {
         return dateToPass.equals(dateCreated) || dateToPass.isAfter(dateCreated);
     }
 
+    /**
+     * Schedules a task if it's past the date to be repeated.
+     *
+     * @param task The task to be repeated.
+     */
     public static void scheduleTask(Task task) {
         if (hasRepeated(task.getDateRepeated(), task.getRecurrence())) {
             task.repeatTask();

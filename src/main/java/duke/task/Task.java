@@ -23,6 +23,12 @@ public abstract class Task {
         this.recurrence = "";
     }
 
+    /**
+     * Checks if the string contains time that has the same format as hhmm."
+     *
+     * @param str The string that may contain time.
+     * @return True if the string contains time, else false.
+     */
     public boolean containsTime(String str) {
         Pattern p = Pattern.compile(".* ([01]?[0-9]|2[0-3])[0-5][0-9]");
         Matcher m = p.matcher(str);
@@ -40,11 +46,17 @@ public abstract class Task {
         return ldt.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm"));
     }
 
+    /**
+     * Updates the dateRepeated.
+     */
     public void repeatTask() {
         isDone = false;
         dateRepeated = LocalDate.now();
     }
-    
+
+    /**
+     * Marks the task as complete.
+     */
     public void completeTask() {
         isDone = true;
     }
@@ -60,23 +72,50 @@ public abstract class Task {
      */
     abstract public String formatTaskForFile();
 
+    /**
+     * Gets the recurrence interval of the task.
+     *
+     * @return The recurrence interval.
+     */
     public String getRecurrence() {
         return recurrence;
     }
 
+    /**
+     * Gets the date last repeated for the task.
+     *
+     * @return The date last repeated.
+     */
     public LocalDate getDateRepeated() {
         return dateRepeated;
     }
 
+    /**
+     * Adds the task's recurrence interval and date repeated.
+     *
+     * @param recurrence The recurrence interval to be added to the task.
+     * @param dateRepeated The date repeated to be added to the task.
+     */
     public void addRecurrence(String recurrence, LocalDate dateRepeated) {
         this.recurrence = recurrence;
         this.dateRepeated = dateRepeated;
     }
 
+    /**
+     * Checks if the task is recurring.
+     *
+     * @return True if the task is recurring, else false.
+     */
     public boolean isRecurring() {
         return recurrence != "";
     }
 
+    /**
+     * Checks if the task's description matches the string.
+     *
+     * @param keyword The string that may match the task's description.
+     * @return True if the task's description matches the string, else false.
+     */
     public boolean match(String keyword) {
         return description.contains(keyword);
     }

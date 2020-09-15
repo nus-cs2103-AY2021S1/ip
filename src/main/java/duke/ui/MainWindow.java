@@ -36,6 +36,15 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
+     * Creates a dialog box to greet the user.
+     */
+    @FXML
+    public void greet() {
+        String greeting = duke.greet();
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(greeting, dukeImage));
+    }
+
+    /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
