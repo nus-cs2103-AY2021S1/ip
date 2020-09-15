@@ -2,7 +2,12 @@ package duke.command;
 
 import java.io.IOException;
 
-import duke.error.*;
+import duke.error.DeadlineDateParseException;
+import duke.error.DeleteListEmptyException;
+import duke.error.DeleteNegativeIndex;
+import duke.error.DeleteOutOfBounds;
+import duke.error.EventDateParseException;
+import duke.error.IncorrectFormat;
 import duke.parts.Storage;
 import duke.parts.TaskList;
 import duke.parts.Ui;
