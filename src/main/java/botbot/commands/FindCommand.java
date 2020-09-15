@@ -6,7 +6,7 @@ import botbot.Ui;
 import botbot.tasks.Task;
 
 /**
- * Searches for tasks that match the specified keyword.
+ * Searches for tasks that match the specified keyphrase.
  */
 public class FindCommand extends Command {
     public static final String COMMAND_KEYWORD = "find";
@@ -18,7 +18,7 @@ public class FindCommand extends Command {
      * @param keyphrase Keyphrase to search.
      */
     public FindCommand(String keyphrase) {
-        this.keyphrase = keyphrase;
+        this.keyphrase = keyphrase.toLowerCase();
     }
 
     /**
