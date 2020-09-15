@@ -38,7 +38,7 @@ public class Duke {
             return command.execute(this.tasks, this.storage);
         } catch (DukeException e) {
             System.err.println(e);
-            return new CommandResult(e.toString());
+            return new CommandResult(e.getMessage());
         }
     }
 }
