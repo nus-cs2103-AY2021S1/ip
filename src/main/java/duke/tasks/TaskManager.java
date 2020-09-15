@@ -9,7 +9,7 @@ import com.google.gson.reflect.TypeToken;
 import com.google.gson.typeadapters.RuntimeTypeAdapterFactory;
 
 import duke.utils.PersistentList;
-import duke.utils.ResourceHandler;
+import duke.utils.Store;
 
 /**
  * Manages {@code Task} objects.
@@ -35,8 +35,8 @@ public class TaskManager {
     public String addTask(Task task) {
         tasks.add(task);
         String taskCountKey = "taskManager.taskCount." + (tasks.size() == 1 ? "singular" : "plural");
-        String template = String.format("%s\n%s", ResourceHandler.getString("taskManager.addTask"),
-                ResourceHandler.getString(taskCountKey));
+        String template = String.format("%s\n%s", Store.getResourceHandler().getString("taskManager.addTask"),
+                Store.getResourceHandler().getString(taskCountKey));
         return MessageFormat.format(template, task, tasks.size());
     }
 
@@ -49,8 +49,8 @@ public class TaskManager {
     public String removeTask(int listIndex) {
         Task removedTask = tasks.remove(listIndex);
         String taskCountKey = "taskManager.taskCount." + (tasks.size() == 1 ? "singular" : "plural");
-        String template = String.format("%s\n%s", ResourceHandler.getString("taskManager.removeTask"),
-                ResourceHandler.getString(taskCountKey));
+        String template = String.format("%s\n%s", Store.getResourceHandler().getString("taskManager.removeTask"),
+                Store.getResourceHandler().getString(taskCountKey));
         return MessageFormat.format(template, removedTask, tasks.size());
     }
 
@@ -63,7 +63,8 @@ public class TaskManager {
     public String markAsDone(int listIndex) {
         Task updatedTask = tasks.get(listIndex).markAsDone();
         tasks.set(listIndex, updatedTask);
-        return String.format("%s\n  %s", ResourceHandler.getString("taskManager.markTaskDone"), updatedTask);
+        return String.format("%s\n  %s",
+                Store.getResourceHandler().getString("taskManager.markTaskDone"), updatedTask);
     }
 
     /**
@@ -76,7 +77,7 @@ public class TaskManager {
                 .filter(task -> !((Schedulable) task).hasDateTimeElapsed()).filter(task -> !task.isDone())
                 .sorted().collect(Collectors.toList());
         StringBuilder formattedList =
-                new StringBuilder(ResourceHandler.getString("taskManager.upcomingTasksPrefix") + "\n");
+                new StringBuilder(Store.getResourceHandler().getString("taskManager.upcomingTasksPrefix") + "\n");
         IntStream.range(0, sortedUpcomingTasks.size())
                 .mapToObj(i -> String.format("%d. %s\n", i + 1, sortedUpcomingTasks.get(i)))
                 .forEach(formattedList::append);
@@ -93,7 +94,7 @@ public class TaskManager {
                 .filter(task -> ((Schedulable) task).hasDateTimeElapsed()).filter(task -> !task.isDone())
                 .sorted().collect(Collectors.toList());
         StringBuilder formattedList =
-                new StringBuilder(ResourceHandler.getString("taskManager.overdueTasksPrefix") + "\n");
+                new StringBuilder(Store.getResourceHandler().getString("taskManager.overdueTasksPrefix") + "\n");
         IntStream.range(0, sortedOverdueTasks.size())
                 .mapToObj(i -> String.format("%d. %s\n", i + 1, sortedOverdueTasks.get(i)))
                 .forEach(formattedList::append);
@@ -110,7 +111,7 @@ public class TaskManager {
         List<Task> matchingTasks = tasks.stream().filter(task -> task.matchesKeywords(keywords))
                 .collect(Collectors.toList());
         StringBuilder formattedList =
-                new StringBuilder(ResourceHandler.getString("taskManager.matchingTasksPrefix") + "\n");
+                new StringBuilder(Store.getResourceHandler().getString("taskManager.matchingTasksPrefix") + "\n");
         IntStream.range(0, matchingTasks.size())
                 .mapToObj(i -> String.format("%d. %s\n", i + 1, matchingTasks.get(i)))
                 .forEach(formattedList::append);
@@ -125,7 +126,7 @@ public class TaskManager {
     @Override
     public String toString() {
         StringBuilder formattedList =
-                new StringBuilder(ResourceHandler.getString("taskManager.listTasksPrefix") + "\n");
+                new StringBuilder(Store.getResourceHandler().getString("taskManager.listTasksPrefix") + "\n");
         IntStream.range(0, tasks.size())
                 .mapToObj(i -> String.format("%d. %s\n", i + 1, tasks.get(i)))
                 .forEach(formattedList::append);

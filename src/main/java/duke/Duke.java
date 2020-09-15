@@ -5,8 +5,9 @@ import java.io.FileOutputStream;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 import java.text.MessageFormat;
+import java.util.Locale;
 
-import duke.utils.ResourceHandler;
+import duke.utils.Store;
 import javafx.application.Application;
 
 /**
@@ -19,11 +20,18 @@ public class Duke {
      * @param args the command line parameters
      */
     public static void main(String[] args) {
+        // Set the locale on startup.
+        String language = Store.getConfigManager().getProperty("language");
+        String country = Store.getConfigManager().getProperty("country");
+        Locale locale = new Locale(language, country);
+        Store.getResourceHandler().setLocale(locale);
+
+        // Parse command line parameters
         if (args.length > 0) {
             switch (args[0].toLowerCase()) {
             case "-h":
             case "--help":
-                System.out.println(ResourceHandler.getString("duke.help"));
+                System.out.println(Store.getResourceHandler().getString("duke.help"));
                 break;
             case "-c":
             case "--console":
@@ -34,7 +42,8 @@ public class Duke {
                 launchGui();
                 break;
             default:
-                System.out.println(MessageFormat.format(ResourceHandler.getString("duke.invalidCommand"), args[0]));
+                System.out.println(MessageFormat.format(
+                        Store.getResourceHandler().getString("duke.invalidCommand"), args[0]));
             }
         } else {
             launchGui();

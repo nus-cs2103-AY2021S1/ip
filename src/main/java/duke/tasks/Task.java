@@ -3,7 +3,7 @@ package duke.tasks;
 import java.text.MessageFormat;
 import java.util.Arrays;
 
-import duke.utils.ResourceHandler;
+import duke.utils.Store;
 
 /**
  * Represents a task within <i>Duke</i>.
@@ -68,6 +68,6 @@ public abstract class Task {
     @Override
     public String toString() {
         String key = isDone ? "task.toString.done" : "task.toString.notDone";
-        return MessageFormat.format(ResourceHandler.getString(key), name);
+        return MessageFormat.format(Store.getResourceHandler().getString(key), name);
     }
 }

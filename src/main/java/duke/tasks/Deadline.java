@@ -4,7 +4,7 @@ import java.text.MessageFormat;
 import java.time.LocalDateTime;
 
 import duke.utils.DateTimeStringFormatter;
-import duke.utils.ResourceHandler;
+import duke.utils.Store;
 
 /**
  * A specialised {@code Task} that needs to be done before a specific date/time.
@@ -73,8 +73,8 @@ public class Deadline extends Task implements Schedulable {
      */
     @Override
     public String toString() {
-        return MessageFormat.format(ResourceHandler.getString("deadline.toString"), super.toString(),
-                DateTimeStringFormatter.formatDateTime(dueDate));
+        return MessageFormat.format(Store.getResourceHandler().getString("deadline.toString"),
+                super.toString(), DateTimeStringFormatter.formatDateTime(dueDate));
     }
 
     /**

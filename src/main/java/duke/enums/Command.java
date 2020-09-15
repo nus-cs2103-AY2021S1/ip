@@ -2,6 +2,7 @@ package duke.enums;
 
 import java.text.MessageFormat;
 import java.time.LocalDateTime;
+import java.util.Locale;
 import java.util.regex.Pattern;
 
 import duke.exceptions.DukeException;
@@ -10,7 +11,6 @@ import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.ToDo;
 import duke.utils.DateTimeParser;
-import duke.utils.ResourceHandler;
 import duke.utils.Store;
 
 /**
@@ -32,8 +32,9 @@ public enum Command {
         public void validate(String alias, String inputArgs) throws DukeException {
             String regex = "^\\s*\\S+\\s+\\S+\\s*$|^\\s*-l\\s*$|^\\s*-rm\\s+\\S+\\s*$";
             if (!Pattern.matches(regex, inputArgs)) {
-                String template = String.format("%s\n%s", ResourceHandler.getString("exception.invalidArgs"),
-                        ResourceHandler.getString("command.aliasFormat"));
+                String template = String.format("%s\n%s",
+                        Store.getResourceHandler().getString("exception.invalidArgs"),
+                        Store.getResourceHandler().getString("command.aliasFormat"));
                 String message = MessageFormat.format(template, alias);
                 throw new DukeException(message);
             }
@@ -83,7 +84,7 @@ public enum Command {
         public void validate(String alias, String inputArgs) throws DukeException {
             String regex = "^\\s*$";
             if (!Pattern.matches(regex, inputArgs)) {
-                String template = ResourceHandler.getString("exception.noArgs");
+                String template = Store.getResourceHandler().getString("exception.noArgs");
                 String message = MessageFormat.format(template, alias);
                 throw new DukeException(message);
             }
@@ -97,7 +98,7 @@ public enum Command {
          */
         @Override
         public DukeResponse execute(String inputArgs) {
-            String response = ResourceHandler.getString("repl.farewell");
+            String response = Store.getResourceHandler().getString("repl.farewell");
             // Return a `DukeResponse` with the exit flag enabled.
             return new DukeResponse(response, true);
         }
@@ -118,8 +119,9 @@ public enum Command {
         public void validate(String alias, String inputArgs) throws DukeException {
             String regex = "^\\s*.*\\S+.*\\s+/by\\s+.*\\S+.*\\s*$";
             if (!Pattern.matches(regex, inputArgs)) {
-                String template = String.format("%s\n%s", ResourceHandler.getString("exception.invalidArgs"),
-                        ResourceHandler.getString("command.deadlineFormat"));
+                String template = String.format("%s\n%s",
+                        Store.getResourceHandler().getString("exception.invalidArgs"),
+                        Store.getResourceHandler().getString("command.deadlineFormat"));
                 String message = MessageFormat.format(template, alias);
                 throw new DukeException(message);
             }
@@ -158,8 +160,9 @@ public enum Command {
         public void validate(String alias, String inputArgs) throws DukeException {
             String regex = "^\\s*\\d+\\s*$";
             if (!Pattern.matches(regex, inputArgs)) {
-                String template = String.format("%s\n%s", ResourceHandler.getString("exception.invalidArgs"),
-                        ResourceHandler.getString("command.deleteFormat"));
+                String template = String.format("%s\n%s",
+                        Store.getResourceHandler().getString("exception.invalidArgs"),
+                        Store.getResourceHandler().getString("command.deleteFormat"));
                 String message = MessageFormat.format(template, alias);
                 throw new DukeException(message);
             }
@@ -180,7 +183,7 @@ public enum Command {
             try {
                 response = Store.getTaskManager().removeTask(listIndex);
             } catch (IndexOutOfBoundsException e) {
-                response = ResourceHandler.getString("repl.invalidTaskIndex");
+                response = Store.getResourceHandler().getString("repl.invalidTaskIndex");
             }
             assert response != null;
             return new DukeResponse(response);
@@ -202,8 +205,9 @@ public enum Command {
         public void validate(String alias, String inputArgs) throws DukeException {
             String regex = "^\\s*\\d+\\s*$";
             if (!Pattern.matches(regex, inputArgs)) {
-                String template = String.format("%s\n%s", ResourceHandler.getString("exception.invalidArgs"),
-                        ResourceHandler.getString("command.doneFormat"));
+                String template = String.format("%s\n%s",
+                        Store.getResourceHandler().getString("exception.invalidArgs"),
+                        Store.getResourceHandler().getString("command.doneFormat"));
                 String message = MessageFormat.format(template, alias);
                 throw new DukeException(message);
             }
@@ -224,7 +228,7 @@ public enum Command {
             try {
                 response = Store.getTaskManager().markAsDone(listIndex);
             } catch (IndexOutOfBoundsException e) {
-                response = ResourceHandler.getString("repl.invalidTaskIndex");
+                response = Store.getResourceHandler().getString("repl.invalidTaskIndex");
             }
             assert response != null;
             return new DukeResponse(response);
@@ -246,8 +250,9 @@ public enum Command {
         public void validate(String alias, String inputArgs) throws DukeException {
             String regex = "^\\s*.*\\S+.*\\s+/at\\s+.*\\S+.*\\s*$";
             if (!Pattern.matches(regex, inputArgs)) {
-                String template = String.format("%s\n%s", ResourceHandler.getString("exception.invalidArgs"),
-                        ResourceHandler.getString("command.eventFormat"));
+                String template = String.format("%s\n%s",
+                        Store.getResourceHandler().getString("exception.invalidArgs"),
+                        Store.getResourceHandler().getString("command.eventFormat"));
                 String message = MessageFormat.format(template, alias);
                 throw new DukeException(message);
             }
@@ -286,8 +291,9 @@ public enum Command {
         public void validate(String alias, String inputArgs) throws DukeException {
             String regex = "^\\s*.*\\S+.*\\s*$";
             if (!Pattern.matches(regex, inputArgs)) {
-                String template = String.format("%s\n%s", ResourceHandler.getString("exception.invalidArgs"),
-                        ResourceHandler.getString("command.findFormat"));
+                String template = String.format("%s\n%s",
+                        Store.getResourceHandler().getString("exception.invalidArgs"),
+                        Store.getResourceHandler().getString("command.findFormat"));
                 String message = MessageFormat.format(template, alias);
                 throw new DukeException(message);
             }
@@ -322,7 +328,7 @@ public enum Command {
         public void validate(String alias, String inputArgs) throws DukeException {
             String regex = "^\\s*$";
             if (!Pattern.matches(regex, inputArgs)) {
-                String template = ResourceHandler.getString("exception.noArgs");
+                String template = Store.getResourceHandler().getString("exception.noArgs");
                 String message = MessageFormat.format(template, alias);
                 throw new DukeException(message);
             }
@@ -336,7 +342,56 @@ public enum Command {
          */
         @Override
         public DukeResponse execute(String inputArgs) {
-            String response = ResourceHandler.getString("command.help");
+            String response = Store.getResourceHandler().getString("command.help");
+            return new DukeResponse(response);
+        }
+    },
+
+    /**
+     * Sets the language of <i>Duke</i>.
+     */
+    LANGUAGE {
+        /**
+         * Validates whether the user input is of the correct format for the 'language' command.
+         *
+         * @param alias the name used in invoking the command; can be either the command name or an alias.
+         * @param inputArgs the user inputted arguments.
+         * @throws DukeException if the user input is invalid.
+         */
+        @Override
+        public void validate(String alias, String inputArgs) throws DukeException {
+            String regex = "^\\s*(?i)(english|chinese|en|zh)\\s*$";
+            if (!Pattern.matches(regex, inputArgs)) {
+                String template = String.format("%s\n%s",
+                        Store.getResourceHandler().getString("exception.invalidArgs"),
+                        Store.getResourceHandler().getString("command.languageFormat"));
+                String message = MessageFormat.format(template, alias);
+                throw new DukeException(message);
+            }
+        }
+
+        /**
+         * Executes the 'language' command.
+         *
+         * @param inputArgs the user inputted arguments.
+         * @return the output of running the 'language' command.
+         */
+        @Override
+        public DukeResponse execute(String inputArgs) {
+            String language = inputArgs.trim().toLowerCase();
+            switch (language) {
+            case "english":
+            case "en":
+                Store.getResourceHandler().setLocale(new Locale("en", "SG"));
+                break;
+            case "chinese":
+            case "zh":
+                Store.getResourceHandler().setLocale(new Locale("zh", "SG"));
+                break;
+            default:
+                assert false;
+            }
+            String response = Store.getResourceHandler().getString("command.switchLanguage");
             return new DukeResponse(response);
         }
     },
@@ -356,7 +411,7 @@ public enum Command {
         public void validate(String alias, String inputArgs) throws DukeException {
             String regex = "^\\s*$";
             if (!Pattern.matches(regex, inputArgs)) {
-                String template = ResourceHandler.getString("exception.noArgs");
+                String template = Store.getResourceHandler().getString("exception.noArgs");
                 String message = MessageFormat.format(template, alias);
                 throw new DukeException(message);
             }
@@ -390,7 +445,7 @@ public enum Command {
         public void validate(String alias, String inputArgs) throws DukeException {
             String regex = "^\\s*$";
             if (!Pattern.matches(regex, inputArgs)) {
-                String template = ResourceHandler.getString("exception.noArgs");
+                String template = Store.getResourceHandler().getString("exception.noArgs");
                 String message = MessageFormat.format(template, alias);
                 throw new DukeException(message);
             }
@@ -424,8 +479,9 @@ public enum Command {
         public void validate(String alias, String inputArgs) throws DukeException {
             String regex = "^\\s*.*\\S+.*\\s*$";
             if (!Pattern.matches(regex, inputArgs)) {
-                String template = String.format("%s\n%s", ResourceHandler.getString("exception.invalidArgs"),
-                        ResourceHandler.getString("command.toDoFormat"));
+                String template = String.format("%s\n%s",
+                        Store.getResourceHandler().getString("exception.invalidArgs"),
+                        Store.getResourceHandler().getString("command.toDoFormat"));
                 String message = MessageFormat.format(template, alias);
                 throw new DukeException(message);
             }
@@ -460,7 +516,7 @@ public enum Command {
         public void validate(String alias, String inputArgs) throws DukeException {
             String regex = "^\\s*$";
             if (!Pattern.matches(regex, inputArgs)) {
-                String template = ResourceHandler.getString("exception.noArgs");
+                String template = Store.getResourceHandler().getString("exception.noArgs");
                 String message = MessageFormat.format(template, alias);
                 throw new DukeException(message);
             }

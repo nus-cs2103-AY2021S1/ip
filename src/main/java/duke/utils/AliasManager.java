@@ -35,7 +35,7 @@ public class AliasManager {
         // Check that alias is not an existing command.
         for (Command command : Command.values()) {
             if (command.name().equalsIgnoreCase(alias)) {
-                String template = ResourceHandler.getString("aliasManager.aliasConflict");
+                String template = Store.getResourceHandler().getString("aliasManager.aliasConflict");
                 response = MessageFormat.format(template, alias);
                 return response;
             }
@@ -46,16 +46,16 @@ public class AliasManager {
             Command previousCommand = aliases.putIfAbsent(alias.toLowerCase(), command);
             // If `previousCommand` is not `null`, then the alias is already in use.
             if (previousCommand == null) {
-                String template = ResourceHandler.getString("aliasManager.addAlias");
+                String template = Store.getResourceHandler().getString("aliasManager.addAlias");
                 response = MessageFormat.format(template, alias.toLowerCase(), commandString.toLowerCase());
             } else {
-                String template = ResourceHandler.getString("aliasManager.aliasInUse");
+                String template = Store.getResourceHandler().getString("aliasManager.aliasInUse");
                 response = MessageFormat.format(template, alias.toLowerCase(),
                         previousCommand.toString().toLowerCase());
             }
         } catch (IllegalArgumentException e) {
             // `commandString` does not correspond to a command.
-            String template = ResourceHandler.getString("aliasManager.invalidCommand");
+            String template = Store.getResourceHandler().getString("aliasManager.invalidCommand");
             response = MessageFormat.format(template, commandString);
         }
 
@@ -73,10 +73,10 @@ public class AliasManager {
 
         String response;
         if (previousCommand == null) {
-            String template = ResourceHandler.getString("aliasManager.aliasNotFound");
+            String template = Store.getResourceHandler().getString("aliasManager.aliasNotFound");
             response = MessageFormat.format(template, alias.toLowerCase());
         } else {
-            String template = ResourceHandler.getString("aliasManager.removeAlias");
+            String template = Store.getResourceHandler().getString("aliasManager.removeAlias");
             response = MessageFormat.format(template, alias.toLowerCase());
         }
 
@@ -112,7 +112,7 @@ public class AliasManager {
     @Override
     public String toString() {
         StringBuilder formattedList =
-                new StringBuilder(ResourceHandler.getString("aliasManager.listAliasesPrefix") + "\n");
+                new StringBuilder(Store.getResourceHandler().getString("aliasManager.listAliasesPrefix") + "\n");
         List<String> keys = new ArrayList<>(aliases.keySet());
         IntStream.range(0, aliases.size())
                 .mapToObj(i -> String.format("%d. %s -> %s\n", i + 1,

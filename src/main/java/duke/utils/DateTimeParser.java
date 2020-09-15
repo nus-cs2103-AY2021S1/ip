@@ -31,7 +31,7 @@ public class DateTimeParser {
             try {
                 localDateTime = LocalDate.parse(dateTimeString, dateFormatter).atStartOfDay();
             } catch (DateTimeParseException e2) {
-                throw new DukeException(ResourceHandler.getString("exception.invalidDateTime"));
+                throw new DukeException(Store.getResourceHandler().getString("exception.invalidDateTime"));
             }
         }
         return localDateTime;

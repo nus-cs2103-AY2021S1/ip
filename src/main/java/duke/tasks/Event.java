@@ -4,7 +4,7 @@ import java.text.MessageFormat;
 import java.time.LocalDateTime;
 
 import duke.utils.DateTimeStringFormatter;
-import duke.utils.ResourceHandler;
+import duke.utils.Store;
 
 /**
  * A specialised {@code Task} that starts and ends at a specific time.
@@ -73,8 +73,8 @@ public class Event extends Task implements Schedulable {
      */
     @Override
     public String toString() {
-        return MessageFormat.format(ResourceHandler.getString("event.toString"), super.toString(),
-                DateTimeStringFormatter.formatDateTime(dateTime));
+        return MessageFormat.format(Store.getResourceHandler().getString("event.toString"),
+                super.toString(), DateTimeStringFormatter.formatDateTime(dateTime));
     }
 
     /**

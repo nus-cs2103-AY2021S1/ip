@@ -2,7 +2,7 @@ package duke.controllers;
 
 import duke.Repl;
 import duke.messages.DukeResponse;
-import duke.utils.ResourceHandler;
+import duke.utils.Store;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
 import javafx.fxml.FXML;
@@ -43,7 +43,7 @@ public class MainWindow extends AnchorPane {
         BooleanBinding isUserInputEmpty = Bindings.isEmpty(userInput.textProperty());
         sendButton.disableProperty().bind(isUserInputEmpty);
         dialogContainer.getChildren().add(
-                DialogBox.getDukeDialog(ResourceHandler.getString("repl.greeting"), dukeImage));
+                DialogBox.getDukeDialog(Store.getResourceHandler().getString("repl.greeting"), dukeImage));
     }
 
     /**

@@ -10,6 +10,10 @@ public class Store {
     private static final TaskManager taskManager = new TaskManager();
     /** {@code AliasManager} object to keep track of aliases. */
     private static final AliasManager aliasManager = new AliasManager();
+    /** {@code ResourceHandler} object to retrieve string resources. */
+    private static final ResourceHandler resourceHandler = new ResourceHandler();
+    /** {@code ConfigManager} object to manage the configuration of the application. */
+    private static final ConfigManager configManager = new ConfigManager("./data/config.txt");
 
     /**
      * Constructs a new {@code Store} object. This constructor is private to prevent instantiation.
@@ -32,5 +36,23 @@ public class Store {
      */
     public static AliasManager getAliasManager() {
         return aliasManager;
+    }
+
+    /**
+     * Returns the {@code ResourceHandler} object for retrieving string resources.
+     *
+     * @return the {@code ResourceHandler} object for retrieving string resources.
+     */
+    public static ResourceHandler getResourceHandler() {
+        return resourceHandler;
+    }
+
+    /**
+     * Returns the {@code ConfigManager} object that is managing the configuration of the application.
+     *
+     * @return the {@code ConfigManager} object that is managing the configuration of the application.
+     */
+    public static ConfigManager getConfigManager() {
+        return configManager;
     }
 }

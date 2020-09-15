@@ -6,7 +6,6 @@ import duke.enums.Command;
 import duke.exceptions.DukeException;
 import duke.messages.DukeResponse;
 import duke.utils.PrettyPrinter;
-import duke.utils.ResourceHandler;
 import duke.utils.Store;
 
 /**
@@ -28,7 +27,7 @@ public class Repl {
      * Runs the REPL.
      */
     public static void run() {
-        prettyPrinter.print(ResourceHandler.getString("repl.greeting"));
+        prettyPrinter.print(Store.getResourceHandler().getString("repl.greeting"));
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
             DukeResponse dukeResponse = getResponse(line);
@@ -58,7 +57,7 @@ public class Repl {
         } catch (DukeException e) {
             dukeResponse = new DukeResponse(e.getMessage());
         } catch (IllegalArgumentException e) {
-            dukeResponse = new DukeResponse(ResourceHandler.getString("repl.unknownCommand"));
+            dukeResponse = new DukeResponse(Store.getResourceHandler().getString("repl.unknownCommand"));
         }
         return dukeResponse;
     }
