@@ -59,5 +59,3 @@ The number can be checked with the command `list`.
 ![mark 1](Mark1.png) ![mark2](Mark2.png)
 
 Format: `complete`, `[task number]`
-
-## Cucumber
