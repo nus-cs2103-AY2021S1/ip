@@ -3,17 +3,21 @@ package duke;
 import duke.tasks.DeadLineTask;
 import duke.tasks.EventTask;
 import duke.tasks.TodoTask;
-import duke.textstoreandprint.TextPrinter;
+import duke.text.TextCacher;
 
+import java.nio.file.Path;
 import java.time.format.DateTimeParseException;
 
 public class CommandParserAndLogic {
 
     TaskList taskList;
+    Path pathToSave;
     String[] current;
+    boolean hasEnded = false;
 
-    public CommandParserAndLogic(TaskList taskList) {
+    public CommandParserAndLogic(TaskList taskList, Path path) {
         this.taskList = taskList;
+        this.pathToSave = path;
     }
 
     /**
@@ -36,13 +40,13 @@ public class CommandParserAndLogic {
     private boolean commandCheck(String string) {
         switch (string) {
             case "!commands":
-                TextPrinter.printCommands();
+                TextCacher.cacheCommands();
                 return true;
             case "bye":
-//                byeLogic();
+                byeLogic();
                 return true;
             case "list":
-                taskList.printOut();
+                listLogic();
                 return true;
             case "done":
                 doneLogic();
@@ -54,7 +58,7 @@ public class CommandParserAndLogic {
                 toDoLogic();
                 return true;
             case "deadline":
-                deadlineLogic();
+                deadLineLogic();
                 return true;
             case "event":
                 eventLogic();
@@ -63,43 +67,53 @@ public class CommandParserAndLogic {
                 findLogic();
                 return true;
             default:
-                TextPrinter.printCommandNotFoundError();
+                TextCacher.cacheCommandNotFoundError();
                 return false;
         }
     }
 
-//    private void byeLogic() {
-//        WindowDisplay.endWindow();
-//    }
+    private void byeLogic() {
+        FileManager.saveList(taskList, pathToSave);
+        this.hasEnded = true;
+    }
+
+    private void listLogic() {
+        TextCacher.cacheTextStandard(taskList.listOutTasks());
+    }
 
     private void doneLogic() {
         if (current.length == 1) {
-            TextPrinter.printTaskNumNotSpecifiedError();
+            TextCacher.cacheTaskNumNotSpecifiedError();
         } else {
-            taskList.markDone(Integer.parseInt(current[1]));
+            try {
+                TextCacher.cacheTextStandard(taskList.markDone(Integer.parseInt(current[1])));
+            } catch (IndexOutOfBoundsException e) {
+                TextCacher.cacheTaskNotFoundError();
+            }
         }
     }
 
     private void toDoLogic() {
         if (current.length == 1) {
-            TextPrinter.printDescriptionNotFoundError();
+            TextCacher.cacheDescriptionNotFoundError();
         } else {
-            taskList.addTask(new TodoTask(current[1]));
+            TextCacher.cacheTextStandard(taskList.addTask(new TodoTask(current[1])));
         }
     }
 
-    private void deadlineLogic() {
+    private void deadLineLogic() {
         if (current.length == 1) {
-            TextPrinter.printDescriptionNotFoundError();
+            TextCacher.cacheDescriptionNotFoundError();
         } else {
             String[] details = current[1].split("/by", 2);
             if (details.length == 1) {
-                TextPrinter.printTimeNotFoundError();
+                TextCacher.cacheTimeNotFoundError();
             } else {
                 try {
-                    taskList.addTask(new DeadLineTask(details[0], MyDateTime.parse(details[1])));
+                    TextCacher.cacheTextStandard(taskList.addTask(new DeadLineTask(details[0], MyDateTime.parse(details[1]))));
                 } catch (DateTimeParseException e) {
-                    TextPrinter.printDateTimeFormatError();
+//                    System.out.println(e.getMessage());
+                    TextCacher.cacheDateTimeFormatError();
                 }
             }
         }
@@ -107,16 +121,16 @@ public class CommandParserAndLogic {
 
     private void eventLogic() {
         if (current.length == 1) {
-            TextPrinter.printDescriptionNotFoundError();
+            TextCacher.cacheDescriptionNotFoundError();
         } else {
             String[] details = current[1].split("/at", 2);
             if (details.length == 1) {
-                TextPrinter.printTimeNotFoundError();
+                TextCacher.cacheTimeNotFoundError();
             } else {
                 try {
-                    taskList.addTask(new EventTask(details[0], MyDateTime.parse(details[1])));
+                    TextCacher.cacheTextStandard(taskList.addTask(new EventTask(details[0], MyDateTime.parse(details[1]))));
                 } catch (DateTimeParseException e) {
-                    TextPrinter.printDateTimeFormatError();
+                    TextCacher.cacheDateTimeFormatError();
                 }
             }
         }
@@ -124,17 +138,21 @@ public class CommandParserAndLogic {
 
     private void deleteLogic() {
         if (current.length == 1) {
-            TextPrinter.printTaskNumNotSpecifiedError();
+            TextCacher.cacheTaskNumNotSpecifiedError();
         } else {
-            taskList.deleteTask(Integer.parseInt(current[1]));
+            try {
+                TextCacher.cacheTextStandard(taskList.deleteTask(Integer.parseInt(current[1])));
+            } catch (IndexOutOfBoundsException e) {
+                TextCacher.cacheTaskNotFoundError();
+            }
         }
     }
 
     private void findLogic() {
         if (current.length == 1) {
-            TextPrinter.printNoSearchTermError();
+            TextCacher.cacheNoSearchTermError();
         } else {
-            taskList.search(current[1]);
+            TextCacher.cacheTextStandard(taskList.search(current[1]));
         }
     }
 }

@@ -1,6 +1,7 @@
 package duke.tasks;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class EventTask extends Task {
 
@@ -18,7 +19,7 @@ public class EventTask extends Task {
 
     @Override
     public String toString() {
-        return indicator + super.toString() + " (Date: " + date.toString() + ")";
+        return indicator + super.toString() + " (Date: " + date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")) + ")";
     }
 
     @Override

@@ -1,6 +1,6 @@
 package duke.tasks;
 
-import duke.textstoreandprint.TextStore;
+import duke.text.TextStore;
 
 public abstract class Task {
 

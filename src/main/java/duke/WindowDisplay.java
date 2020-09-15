@@ -1,6 +1,7 @@
 package duke;
 
-import duke.textstoreandprint.TextPrinter;
+import duke.text.TextCacher;
+import javafx.animation.PauseTransition;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -13,8 +14,10 @@ import javafx.stage.Stage;
 import javafx.scene.layout.Region;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.util.Duration;
 
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class WindowDisplay extends Application {
 
@@ -28,12 +31,16 @@ public class WindowDisplay extends Application {
 
     private TaskList taskList;
     private Path pathToSave;
-    private Ui ui;
-    private static boolean hasEnded = false;
+    private CommandParserAndLogic commandParserAndLogic;
+
+    private Stage stagePointer;
 
     @Override
     public void start(Stage stage) {
         //Step 1. Setting up required components
+
+        //Setting up pointer
+        stagePointer = stage;
 
         //The container for the content of the chat to scroll.
         scrollPane = new ScrollPane();
@@ -82,31 +89,13 @@ public class WindowDisplay extends Application {
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
-        // My stuffs
-        TextPrinter.setDialogBox(dialogContainer, duke);
-        TextPrinter.printStartMessage();
+        // My setup for this to work
 
-        String home = System.getProperty("user.home");
-        java.nio.file.Path path = java.nio.file.Paths.get(home, "Documents", "ipSave.txt");
-
-        pathToSave = path;
-        taskList = FileManager.readFromSave(path);
-        ui = new Ui(taskList);
-        TextPrinter.printPromptMsg();
+        this.mySetup();
 
         // my stuff ends
 
-        //Step 3. Add functionality to handle user input.
-        sendButton.setOnMouseClicked((event) -> {
-            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-            userInput.clear();
-        });
-
-        userInput.setOnAction((event) -> {
-            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-            userInput.clear();
-        });
-        //Part 3. Add functionality to handle user input.
+        // Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput();
         });
@@ -116,48 +105,71 @@ public class WindowDisplay extends Application {
         });
     }
 
-    /**
-     * Iteration 1:
-     * Creates a label with the specified text and adds it to the dialog container.
-     * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
-     */
-    private Label getDialogLabel(String text) {
-        // You will need to import `javafx.scene.control.Label`.
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
+    // below are private methods only used in this class
 
-        return textToAdd;
+    private void mySetup() {
+        TextCacher.cacheStartMessage();
+        flushTextCache();
+
+        String home = System.getProperty("user.home");
+        pathToSave = Paths.get(home, "Documents", "ipSave.txt");
+
+        taskList = FileManager.readFromSave(pathToSave);
+        commandParserAndLogic = new CommandParserAndLogic(taskList, pathToSave);
+        // set up done
+        TextCacher.cachePromptMsg();
+        flushTextCache();
     }
 
     /**
-     * Iteration 2:
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() {
+        // echos input to the text row
         Label userText = new Label(userInput.getText());
+
+        // sends input into the command chain to do its logic and get a return text
         Label dukeText = new Label(getResponse(userInput.getText()));
-//        dialogContainer.getChildren().addAll(
-//                new DialogBox(userText, new ImageView(user)),
-//                new DialogBox(dukeText, new ImageView(duke))
-//        );
+
+        // sends them out onto the display
+        dialogContainer.getChildren().addAll(
+                new DialogBox(userText, new ImageView(user)),
+                new DialogBox(dukeText, new ImageView(duke))
+        );
         userInput.clear();
+
+        // checks if user has ended the program with a command
+        if (commandParserAndLogic.hasEnded) {
+            endLogic();
+        }
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Sends input into the parsing and command logic
+     * @return The text cached in the TextCacher cached by the logic
      */
     private String getResponse(String input) {
-        dialogContainer.getChildren().add(new DialogBox(new Label(input), new ImageView(user)));
-        ui.handle(input);
-        return "space";
+        commandParserAndLogic.handleInput(input);
+        return TextCacher.getStore();
     }
 
-    // personal private methods below
-//    public static void endWindow() {
-//        hasEnded = true;
-//    }
+    private void endLogic() {
+        try {
+            TextCacher.cacheEndMessage();
+            flushTextCache();
+
+            PauseTransition delay = new PauseTransition(Duration.seconds(5));
+            delay.setOnFinished( event -> stagePointer.close() );
+            delay.play();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void flushTextCache() {
+        dialogContainer.getChildren().add(
+                new DialogBox(new Label(TextCacher.getStore()), new ImageView(duke)));
+    }
 }
 

@@ -4,11 +4,18 @@ import duke.tasks.DeadLineTask;
 import duke.tasks.EventTask;
 import duke.tasks.Task;
 import duke.tasks.TodoTask;
-import duke.textstoreandprint.TextPrinter;
-import duke.textstoreandprint.TextStore;
 
-import java.io.*;
+import duke.text.TextCacher;
+
+
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.BufferedReader;
+
 import java.nio.file.Path;
+
 import java.time.format.DateTimeParseException;
 
 public class FileManager {
@@ -25,8 +32,9 @@ public class FileManager {
             PrintWriter pw = new PrintWriter(fw);
 
             pw.print(taskList.allSaveString());
-            TextPrinter.standardPrint(TextStore.savingToTextFile + "\n" + "file saved at:\n" + path.toString());
             pw.close();
+
+            TextCacher.cacheTasksSavedToTextFile(path);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -48,10 +56,10 @@ public class FileManager {
             boolean directoryExists = java.nio.file.Files.exists(path);
 
             if (directoryExists) {
-                TextPrinter.standardPrint(TextStore.loadingSave + "\n" + TextStore.saveFound);
+                TextCacher.cacheSaveFound();
                 taskList = readSaveToTaskListObject(path);
             } else {
-                TextPrinter.printStandAlone(TextStore.loadingSave + "\n" + TextStore.saveNotFound);
+                TextCacher.cacheSaveNotFound();
             }
         } catch (IOException e) {
             e.printStackTrace();

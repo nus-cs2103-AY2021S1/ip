@@ -1,7 +1,6 @@
 package duke;
 
 import duke.tasks.Task;
-import duke.textstoreandprint.TextPrinter;
 
 import java.util.ArrayList;
 
@@ -11,19 +10,21 @@ public class TaskList {
 
     /**
      * Adds an task object to this TaskList object
-     * Prints out a graphic saying the task has been added and how many there are total
+     * Returns a string saying the task has been added and how many there are total
+     * Or alternatively task is not added because it has a duplicate
      *
      * @param task
+     * @return information string
      */
-    public void addTask(Task task) {
+    public String addTask(Task task) {
         int duplicateTaskNum = findDuplicate(task);
         if (duplicateTaskNum == -1) {
             taskList.add(task);
-            TextPrinter.standardPrint("Got it. I've added this task:\n  " +
+            return ("Got it. I've added this task:\n  " +
                     task.toString() + "\n" +
                     "Now you have " + size() + " tasks in the list.");
         } else {
-            TextPrinter.standardPrint("Task already exists\n" +
+            return ("Task already exists\n" +
                     taskList.get(duplicateTaskNum).toString() + "\n" +
                     "No new task is added");
         }
@@ -31,7 +32,7 @@ public class TaskList {
 
     /**
      * Adds an task object to this TaskList object
-     * Does not print anything
+     * Used for loading from save file
      *
      * @param task
      */
@@ -44,10 +45,11 @@ public class TaskList {
     }
 
     /**
-     * Prints out all the tasks in this list
-     * Prints along with the top and bottom graphic from TextStore
+     * Sends all the tasks in this list back in a string
+     *
+     * @return A header followed by a list of all the tasks
      */
-    public void printOut() {
+    public String listOutTasks() {
         StringBuilder temp = new StringBuilder("Here are the tasks in your list:");
         int counter = 1;
         for (Task item: taskList) {
@@ -55,15 +57,16 @@ public class TaskList {
             temp.append(counter).append(". ").append(item.toString());
             counter++;
         }
-        TextPrinter.standardPrint(temp.toString());
+        return temp.toString();
     }
 
     /**
      * Finds and returns all tasks with descriptions that contains the string provided
      *
      * @param string
+     * @return A header followed by a list of matching tasks
      */
-    public void search(String string) {
+    public String search(String string) {
         StringBuilder temp = new StringBuilder("Here are the matching tasks in your list:");
         int counter = 1;
         for (Task item: taskList) {
@@ -73,7 +76,7 @@ public class TaskList {
                 counter++;
             }
         }
-        TextPrinter.standardPrint(temp.toString());
+        return temp.toString();
     }
 
     /**
@@ -94,33 +97,47 @@ public class TaskList {
         }
     }
 
-    public void markDone(int position) {
+    /**
+     * Marks a task as done with a given position of the task in the list
+     *
+     * @param position of task in list
+     * @return information string
+     * @throws IndexOutOfBoundsException indicating position out of bounds of list
+     */
+    public String markDone(int position) throws IndexOutOfBoundsException {
         try {
 
             if (taskList.get(position - 1).markDone()) {
-                TextPrinter.standardPrint("beri gude, finish that thing liao\n  " +
+                return ("beri gude, finish that thing liao\n  " +
                         taskList.get(position - 1).toString());
             } else {
-                TextPrinter.standardPrint("Task alr finish liao\n  " +
+                return ("Task alr finish liao\n  " +
                         taskList.get(position - 1).toString());
             }
 
         } catch (IndexOutOfBoundsException e) {
-            TextPrinter.printTaskNotFoundError();
+            throw e;
         }
     }
 
-    public void deleteTask(int position) {
+    /**
+     * Deletes a task at a given position in the list
+     *
+     * @param position of task in list
+     * @return information string
+     * @throws IndexOutOfBoundsException indicating position out of bounds of list
+     */
+    public String deleteTask(int position) throws IndexOutOfBoundsException {
         try {
 
             Task task = taskList.get(position - 1);
             taskList.remove(position - 1);
-            TextPrinter.standardPrint("Noted. I've removed this task:\n  " +
+            return ("Noted. I've removed this task:\n  " +
                     task.toString() + "\n" +
                     "Now you have " + size() + " tasks in the list.");
 
         } catch (IndexOutOfBoundsException e) {
-            TextPrinter.printTaskNotFoundError();
+            throw e;
         }
     }
 
