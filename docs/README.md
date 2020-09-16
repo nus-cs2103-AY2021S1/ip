@@ -1,6 +1,6 @@
 # User Guide
 
-![image](../other/app-preview.gif)
+![Screenshot](Ui.gif)
 
 ## Features 
 
@@ -51,8 +51,6 @@ Expected outcome:
 
 `[T][x] <task name>`
 
-## Usage
-
 ### `event <event name> /at <DD-MM-YYYY>`
 
 Adds the event to your list of tasks
@@ -65,8 +63,6 @@ Expected outcome:
 
 `[E][x] <event name> (at: 09 Sep 2020 11.59pm)`
 
-## Usage
-
 ### `deadline <deadline name> /by <DD-MM-YYYY>` 
 
 Adds the deadline to your list of tasks
@@ -78,8 +74,6 @@ Example of usage:
 Expected outcome:
 
 `[D][x] <event name> (by: 09 Sep 2020 11.59pm)`
-
-## Usage
 
 ### `find <keyword>` - 
 
@@ -94,8 +88,6 @@ Expected outcome:
 `1. [E][x] meeting for CS2103 (at: 14 Sep 2020 10.00pm)`
 `2. [E][x] CCAmeeting (at: 20 Sep 2020 7.00am)`
 
-## Usage
-
 ### `date <DD-MM-YYYY>` - 
 
 Displays a list of tasks containing the keyword.
@@ -108,8 +100,6 @@ Expected outcome:
 
 `1. [E][x] meeting for CS2103 (at: 14 Sep 2020 10.00pm)`
 `2. [T][x] Group Project Task (at: 14 Sep 2020 7.00am)`
-
-## Usage
 
 ### `tag <index> <tag>` - 
 
@@ -124,8 +114,6 @@ Expected outcome:
 `1. [E][x] meeting for CS2103 (at: 14 Sep 2020 10.00pm)`
 `2. [T][x] Group Project Task (at: 14 Sep 2020 7.00am) #urgent`
 
-## Usage
-
 ### `findtag <tag>` - 
 
 Display a list of tasks with the specified tag.
@@ -138,8 +126,6 @@ Expected outcome:
 
 `1. [E][x] meeting for CS2103 (at: 14 Sep 2020 10.00pm) #urgent #important`
 `2. [T][x] Group Project Task (at: 14 Sep 2020 7.00am) #abc #urgent`
-
-## Usage
 
 ### `untag <tag>` - 
 
@@ -167,8 +153,6 @@ Expected outcome:
 `1. [E][x] meeting for CS2103 (at: 14 Sep 2020 10.00pm) #urgent #important`
 `2. [T][x] Group Project Task (at: 14 Sep 2020 7.00am) #abc`
 
-## Usage
-
 ### `delete <index>` - 
 
 Deletes the task at the specified index. You need to use the list feature to view the task indices.
@@ -180,8 +164,6 @@ Example of usage:
 Expected outcome:
 
 `1. [T][x] Group Project Task (at: 14 Sep 2020 7.00am) #abc #urgent`
-
-## Usage
 
 ### `done <index>` - 
 
