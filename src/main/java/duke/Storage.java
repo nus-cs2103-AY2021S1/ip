@@ -41,7 +41,9 @@ public class Storage {
                 lst.add(Converter.add(task));
             }
         } catch (FileNotFoundException ex) {
-            ex.printStackTrace();
+            System.out.println(ex);
+        } catch (IllegalTaskTypeException ex) {
+            System.out.println(ex);
         }
     }
 

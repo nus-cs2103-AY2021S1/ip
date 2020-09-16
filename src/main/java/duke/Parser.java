@@ -2,7 +2,6 @@ package duke;
 
 import duke_exceptions.*;
 
-@SuppressWarnings({"ALL", "CheckStyle"})
 public class Parser {
     // constant SPACE and LINE for format purposes
     private static final String SPACE = "     ";
@@ -253,7 +252,7 @@ public class Parser {
     private String handleAdd(TaskList lst, String command, TaskType taskType) {
         String description;
         try {
-            description = command.split(" ", 2)[EXTRA];
+            description = command.split(" ")[EXTRA];
         } catch (IndexOutOfBoundsException ex) {
             switch (taskType) {
             case T:

@@ -31,7 +31,6 @@ public class Ui {
         // there was a SUNDAY between last login date and today (exclusive)
         LocalDate dateIterator = TaskList.getLastLoginDate()
                 .plus(1, ChronoUnit.DAYS);
-        System.out.println(dateIterator);
         while (dateIterator.isBefore(today)) {
             if (today.getDayOfWeek().equals(DayOfWeek.SUNDAY)) {
                 TaskList.resetNumberOfDoneTasks();
@@ -51,9 +50,9 @@ public class Ui {
         Scanner scanner = new Scanner(System.in);
         // hand over to Parser class to handle all commands
         while (scanner.hasNextLine()) {
-            String currentCommand = scanner.nextLine();
-            System.out.println(new Parser(currentCommand).getRespond(lst));
-            if (currentCommand.equals("bye")) {
+            String command = scanner.nextLine();
+            System.out.println(new Parser(command).getRespond(lst));
+            if (command.equals("bye")) {
                 scanner.close();
                 return;
             }
