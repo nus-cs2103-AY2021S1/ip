@@ -1,20 +1,23 @@
-# User Guide
+# Your life Asistant Chat Bot - KK
 
-## Features 
+This is a chatbot that can help you keep track of your to do list. It's named is KK. Given below are instructions on how to use it. 
+      _      _
+| | / /| | / /
+| |/ / | |/ /
+|   <  |   <
+|_|\_\ |_|\_\
 
-### Feature 1 
-Description of feature.
 
-## Usage
+## Sample commands include: 
 
-### `Keyword` - Describe action
+**list** This shows the list of things you have added
 
-Describe action and its outcome.
+**event** <content> /at <time> This adds an event at the stipulated time
 
-Example of usage: 
+**deadline** <content> /by <time> This adds a deadline by the stipulated time
 
-`keyword (optional arguments)`
+**todo** <content> This adds a todo to the bot
 
-Expected outcome:
+**done** <index> This marks the thing at index index as completed
 
-`outcome`
+**delete** <index> This deletes the thing at index index
