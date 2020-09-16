@@ -38,6 +38,11 @@ public class Storage {
     public TaskList load() throws DukeException {
         try {
             File file = new File(filePath);
+            // Add directory if it does not exist
+            file.getParentFile().mkdirs();
+            if (!file.exists()) {
+                file.createNewFile();
+            }
             FileReader fr = new FileReader(file);
             BufferedReader br = new BufferedReader(fr);
 
