@@ -29,16 +29,22 @@ public class GuiParser {
      * @param input Current input string of the user.
      * @param taskList Current list of tasks of the user.
      * @param storage Current storage of the user.
-     * @throws DukeException
+     * @param gui Gui object.
+     * @throws DukeUnknownCommandException If an unknown command is used.
+     * @throws DukeInvalidTaskQueryException If an invalid task query is used.
+     * @throws DukeInvalidArgumentException If an invalid argument is used.
+     * @throws DukeInvalidDateException If an invalid date format is used.
+     * @throws DukeEmptyDescriptionException If an empty description is used.
      * @throws FileNotFoundException
      */
-    public String interpretGui(String input, TaskList taskList, Storage storage)
-            throws DukeException, FileNotFoundException {
+    public String interpretGui(String input, TaskList taskList, Storage storage, Gui gui)
+            throws DukeUnknownCommandException, DukeInvalidTaskQueryException, DukeInvalidArgumentException,
+            DukeInvalidDateException, DukeEmptyDescriptionException, FileNotFoundException {
         assert taskList != null : "TaskList should not be null";
         assert storage != null : "Storage should not be null";
 
         if (input.equals(BYE)) {
-            return "Bye. Hope to see you again soon!";
+            return gui.printExitBot();
         }
 
         ArrayList<Task> list = taskList.getList();
@@ -48,7 +54,7 @@ public class GuiParser {
         }
 
         if (input.equals(HELP)) {
-            return helpInterface();
+            return gui.printHelpInterface();
         }
 
         if (input.contains(SPACE)) {
@@ -67,7 +73,7 @@ public class GuiParser {
                 case EVENT:
                     return dealWithEventGui(input, indexOfSpace, taskList, list, storage);
                 case FIND:
-                    return dealWithFindGui(input, indexOfSpace, list);
+                    return dealWithFindGui(input, indexOfSpace, list, gui);
                 default:
                     throw new DukeUnknownCommandException();
             }
@@ -85,21 +91,6 @@ public class GuiParser {
             }
         }
 
-    }
-
-    /**
-     * Returns a help interface.
-     *
-     * @return
-     */
-    private String helpInterface() {
-        String helpInterface = "List of available commands: \ntodo - creates a todo (e.g todo read book)" +
-                "\ndeadline - creates a deadline with a date (e.g deadline return book /by 2019-10-15)" +
-                "\nevent - creates an event with a date (e.g event go library /at 2019-10-15)" +
-                "\ndone - sets item at index to done (e.g done 1)" +
-                "\ndelete - deletes item at index (e.g delete 1)" +
-                "\nfind - finds task (e.g find book)";
-        return helpInterface;
     }
 
     /**
@@ -128,15 +119,16 @@ public class GuiParser {
      * @param indexOfSpace Index of space.
      * @param list List of tasks.
      * @param storage Storage object.
-     * @throws DukeInvalidTaskException
+     * @throws DukeInvalidTaskQueryException
      * @throws FileNotFoundException
      */
-    private String setDoneGui(String input, int indexOfSpace, ArrayList<Task> list, Storage storage) throws DukeException, FileNotFoundException {
+    private String setDoneGui(String input, int indexOfSpace, ArrayList<Task> list, Storage storage)
+            throws DukeInvalidTaskQueryException, FileNotFoundException {
         assert indexOfSpace > -1 : "Index of space should not be negative";
 
         int num = Integer.parseInt(input.substring(indexOfSpace + 1));
         if (list.size() < num) {
-            throw new DukeInvalidTaskException();
+            throw new DukeInvalidTaskQueryException();
         } else {
             Task taskToSetToDone = list.get(num - 1);
             taskToSetToDone.setDone();
@@ -152,16 +144,16 @@ public class GuiParser {
      * @param taskList TaskList object.
      * @param list list of tasks
      * @param storage
-     * @throws DukeInvalidTaskException
+     * @throws DukeInvalidTaskQueryException
      * @throws FileNotFoundException
      */
     private String dealWithDeleteGui(String input, int indexOfSpace, TaskList taskList, ArrayList<Task> list, Storage storage)
-            throws DukeException, FileNotFoundException {
+            throws DukeInvalidTaskQueryException, FileNotFoundException {
         assert indexOfSpace > -1 : "Index of space should not be negative";
 
         int num = Integer.parseInt(input.substring(indexOfSpace + 1));
         if (list.size() < num) {
-            throw new DukeInvalidTaskException();
+            throw new DukeInvalidTaskQueryException();
         } else {
             Task taskToDelete = list.get(num - 1);
             taskList.remove(num - 1);
@@ -265,8 +257,9 @@ public class GuiParser {
      * @param input Input string.
      * @param indexOfSpace Index of space.
      * @param list List of tasks.
+     * @param gui Gui object.
      */
-    private String dealWithFindGui(String input, int indexOfSpace, ArrayList<Task> list) {
+    private String dealWithFindGui(String input, int indexOfSpace, ArrayList<Task> list, Gui gui) {
         assert indexOfSpace > -1 : "Index of space should not be negative";
 
         String nameOfItemToBeFound = input.substring(indexOfSpace + 1);
@@ -278,7 +271,7 @@ public class GuiParser {
             }
         }
         if (newList.isEmpty()) {
-            return "We are unable to find any task that match your query.";
+            return gui.printNoQueryResult();
         } else {
             StringBuilder listOutput = new StringBuilder();
             for (int j = 0; j < newList.size(); j++) {

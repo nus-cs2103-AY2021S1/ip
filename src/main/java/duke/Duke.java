@@ -42,7 +42,7 @@ public class Duke {
                     break;
                 }
                 GuiParser guiParser = new GuiParser();
-                guiParser.interpretGui(input, tasks, storage);
+                guiParser.interpretGui(input, tasks, storage, gui);
             } catch (DukeException | FileNotFoundException e) {
                 System.out.println(e.getMessage());
             }
@@ -53,7 +53,7 @@ public class Duke {
     public String getResponseGui(String input) {
         try {
             GuiParser guiParser = new GuiParser();
-            return guiParser.interpretGui(input, tasks, storage);
+            return guiParser.interpretGui(input, tasks, storage, gui);
         } catch (DukeException | FileNotFoundException e) {
             return e.getMessage();
         }
