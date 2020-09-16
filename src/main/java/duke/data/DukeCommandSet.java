@@ -13,6 +13,7 @@ import duke.command.HelpCommand;
 import duke.command.ListCommand;
 import duke.command.TagCommand;
 import duke.command.TodoCommand;
+import duke.command.UntagCommand;
 import duke.exception.ExceptionMessage;
 import duke.exception.UnknownCommandException;
 
@@ -40,6 +41,7 @@ public class DukeCommandSet {
         registerCommand(new FindCommand());
         registerCommand(new HelpCommand());
         registerCommand(new TagCommand());
+        registerCommand(new UntagCommand());
     }
 
     private void registerCommand(Command command) {

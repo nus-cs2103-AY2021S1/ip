@@ -177,4 +177,16 @@ public class UiResponse {
 
         UiPrint.drawLine(UiPrint.STAR, 50);
     }
+
+    /**
+     * Reports that the task has been untagged.
+     * @param task the untagged task
+     */
+    public void reportUntagTask(Task task) {
+        UiPrint.drawLine(UiPrint.STAR, 50);
+
+        System.out.println("The tag of " + task.getDescription() + " has been removed.");
+
+        UiPrint.drawLine(UiPrint.STAR, 50);
+    }
 }

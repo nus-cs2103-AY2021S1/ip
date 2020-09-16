@@ -31,4 +31,7 @@ public class CommandFormat {
 
     public static final String TAG_CMD_FORMAT =
             "tag <task index> <tag>";
+
+    public static final String UNTAG_CMD_FORMAT =
+            "untag <task index>";
 }
