@@ -28,6 +28,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Method to prioritise a task at index.
+     * @param index user input.
+     * @return the prioritised task.
+     */
     public static Task prioritise(String index) {
         int i = Integer.parseInt(index);
         Task target = tasks.get(i - 1);

@@ -7,9 +7,9 @@ import java.util.ArrayList;
  */
 
 public class Task implements Comparable<Task> {
+    protected Priority priority;
     private String description;
     private Boolean isDone;
-    protected Priority priority;
     protected enum Priority {
         HIGH,
         DEFAULT

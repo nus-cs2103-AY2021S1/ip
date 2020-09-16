@@ -25,6 +25,9 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/meimei.jpeg"));
 
+    /**
+     * Initialise a MainWindow.
+     */
     @FXML
     public void initialize() {
         scrollPane.setStyle("-fx-background: rgba(190, 144, 212, 0.5)");

@@ -196,7 +196,7 @@ public class Duke extends Application {
     private Label getDialogLabel(String text) {
         Label textToAdd = new Label(text);
         textToAdd.setWrapText(true);
-        textToAdd.setPadding(new Insets(5,5,5,5));
+        textToAdd.setPadding(new Insets(5, 5 , 5 , 5));
 
         return textToAdd;
     }
