@@ -1,5 +1,6 @@
 package DateTime;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -25,6 +26,13 @@ public class DateTimeManager {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("d-MM-uuuu HHmm");
         LocalDateTime dt = LocalDateTime.parse(s, format);
         return dt;
+    }
+
+    public static LocalDate setDate(CharSequence s) {
+        assert s != null;
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("d-MM-uuuu");
+        LocalDate date = LocalDate.parse(s, format);
+        return date;
     }
 
     /**

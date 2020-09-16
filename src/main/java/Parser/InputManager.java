@@ -1,8 +1,11 @@
 package Parser;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+import DateTime.DateTimeManager;
 import Errors.ErrorExceptions;
 import Tasks.TaskManager;
 
@@ -42,11 +45,24 @@ public class InputManager {
             return runFilter(sc);
         } else if (current.equals("find")) {
             return runFind(sc, input);
+        } else if (current.equals("view")) {
+            return runViewSchedule(sc);
         } else { // add tasks
             return runAdd(current, input);
         }
     }
 
+    public static String runViewSchedule(Scanner sc) {
+        try {
+            String date = sc.next();
+            LocalDate d = DateTimeManager.setDate(date);
+            return ParseViewSchedules.execute2(d);
+        } catch (NoSuchElementException e) {
+//            return ParseViewSchedules.execute3();
+            return "Missing date for view command!";
+        }
+
+    }
     /**
      * Runs the method for receiving "Bye" command.
      *
