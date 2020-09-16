@@ -86,13 +86,38 @@ public class TaskList {
 
     /**
      *
+     *
      * @param index
      * @param tagDescription
+     * @return
      */
-    public void tagItem(int index, String tagDescription) {
+    public boolean tagItem(int index, String tagDescription) {
         String task = lines.get(index);
-        String taggedTask = task + " #" + tagDescription;
-        lines.set(index, taggedTask);
+        if (task.contains(" #")) {
+            return false;
+        } else {
+            String taggedTask = task + " #" + tagDescription;
+            lines.set(index, taggedTask);
+            return true;
+        }
+    }
+
+    /**
+     * removes the tag from a tagged task.
+     *
+     * @param index the tagged task to be untagged
+     * @return true if a tag is removed, false otherwise
+     */
+    public boolean removeTag(int index) {
+        String task = lines.get(index);
+        int startIndex = task.indexOf(" #");
+        if (startIndex < 0) {
+            return false;
+        } else {
+            task = task.substring(0, startIndex);
+            lines.set(index, task);
+            return true;
+        }
     }
 
     /**

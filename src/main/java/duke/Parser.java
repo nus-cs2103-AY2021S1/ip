@@ -36,6 +36,20 @@ public class Parser {
     }
 
     /**
+     * Checks if a string contains the # character
+     *
+     * @param input the string to be checked
+     * @return true if the string contains "#", false otherwise.
+     */
+    public boolean noHashTag(String input) {
+        if (input.contains("#")) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    /**
      * Parses the input given by the users. The method checks if the user's input is a done, list, delete, bye or add
      * command and executes the appropriate response. If the input is invalid, a DukeException is thrown.
      *
@@ -44,6 +58,9 @@ public class Parser {
      * @throws DukeException The exception explaining why the input was invalid
      */
     public String parse(String inputString) throws DukeException {
+        if (!noHashTag(inputString)) { //checks if the input contains "#" as it will cause problems.
+            throw new DukeException("Your input contains the # character, don't do that :(");
+        }
         //Checks if the input string is a done command
         if (inputString.indexOf("done ") == 0) {
             try {
@@ -93,7 +110,7 @@ public class Parser {
                 ArrayList<String> matchingTasks = lines.find(keyword);
                 return Ui.listMatchingTasks(matchingTasks);
             }
-        } else if (inputString.indexOf("tag ") == 0) {
+        } else if (inputString.indexOf("tag ") == 0) { //If the user input is a tag command
             boolean missingTagDetails = inputString.length() <= 6
                     || inputString.length() == 7 && inputString.lastIndexOf(" ") == 6;
             if (missingTagDetails) {
@@ -101,27 +118,52 @@ public class Parser {
             } else {
                 String taskIndex = inputString.substring(4, 6);
                 boolean singleDigit = taskIndex.contains(" ");
-                if (singleDigit) {
+                if (singleDigit) { // if the tag index is a single digit
                     try {
                         int index = Integer.parseInt(taskIndex.substring(0, 1));
+                        if (index < 0 || index > lines.getList().size()) {
+                            throw new DukeException("No such task exists!");
+                        }
                         String description = inputString.substring(6);
-                        lines.tagItem(index - 1, description);
-                        return Ui.taggedTask(lines.getTask(index - 1));
+                        boolean tagged = lines.tagItem(index - 1, description);
+                        return Ui.taggedTask(lines.getTask(index - 1), tagged);
                     } catch (NumberFormatException e) {
                         throw new DukeException("That is not a valid index input!");
                     }
                 } else {
                     try {
                         int index = Integer.parseInt(taskIndex.substring(0, 2));
+                        if (index < 0 || index > lines.getList().size()) {
+                            throw new DukeException("No such task exists!");
+                        }
                         String description = inputString.substring(7);
-                        lines.tagItem(index - 1, description);
-                        return Ui.taggedTask(lines.getTask(index - 1));
+                        boolean tagged = lines.tagItem(index - 1, description);
+                        return Ui.taggedTask(lines.getTask(index - 1), tagged);
                     } catch (NumberFormatException e) {
                         throw new DukeException("That is not a valid index input!");
                     }
                 }
             }
-        } else {
+        } else if (inputString.indexOf("untag ") == 0) { //if the input is an untag command
+            boolean missingIndex = inputString.length() <= 6;
+            if (missingIndex) {
+                throw new DukeException("Which task are you trying to untag?");
+            } else {
+                try {
+                    int index = Integer.parseInt(inputString.substring(6));
+                    boolean tagRemoved = false;
+                    if (index < 0 || index > lines.getList().size()) {
+                        throw new DukeException("No such task exists!");
+                    }
+                    if (lines.removeTag(index - 1)) {
+                        tagRemoved = true;
+                    }
+                    return Ui.untaggedTask(lines.getTask(index - 1), tagRemoved);
+                } catch (NumberFormatException e) {
+                    throw new DukeException("What kind of task index is that?!");
+                }
+            }
+        } else { //Probably a task command, checks which one it is, if any.
             Task task = null;
             if (inputString.indexOf("todo ") == 0) {
                 boolean emptyDescription = inputString.length() == 5;

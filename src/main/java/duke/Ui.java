@@ -96,15 +96,41 @@ public class Ui {
     }
 
     /**
-     * returns a statement confirming that a task has been tagged
+     * Returns a message representing the tagged task or an error message depending on the supplied
+     * boolean.
      *
-     * @param task the task string representing the tagged task
-     * @return the string representing the message shown upon tagging a task
+     * @param task the potentially tagged task
+     * @param tagged the boolean representing if the task is tagged or not
+     * @return the message representing the outcome
      */
-    public static String taggedTask(String task) {
-        String message = divider + "Noted. The following task has been tagged.";
-        message = message + task + "\n" + divider + "\n";
+    public static String taggedTask(String task, boolean tagged) {
+        String message = "";
+        if (tagged) {
+            message = divider + "Noted. The following task has been tagged.\n";
+            message = message + task + "\n" + divider + "\n";
+        } else {
+            message = divider + "Hey, the task has already been tagged! Remove the tag first!\n" + divider;
+        }
         return message;
+    }
+
+    /**
+     * Prints out messages depending if a task was successfully untagged or not
+     *
+     * @param task the task that might have been untagged
+     * @param removed true if the task is untagged, false otherwise
+     * @return the message representing the outcome
+     */
+    public static String untaggedTask(String task, boolean removed) {
+        if (removed) {
+            String message = divider + "Noted. The following task has been untagged!\n";
+            message = message + task + "\n" + divider + "\n";
+            return message;
+        } else {
+            String message = divider + "The task did not have a tag to begin with!\n";
+            message = message + divider;
+            return message;
+        }
     }
 
     /**
@@ -143,8 +169,8 @@ public class Ui {
 
 
     /**
-     * Handles DukeExceptions{@link DukeException} thrown by duke.Duke package methods by returning a string representing
-     * the error.
+     * Handles DukeExceptions{@link DukeException} thrown by duke.Duke package methods by returning a string
+     * representing the error.
      *
      * @param e The DukeException to be handled.
      * @return the string representing the exception.
