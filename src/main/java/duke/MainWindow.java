@@ -23,10 +23,12 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.jpg"));
+    //Image retrieved from https://www.pinterest.com/pin/484559241150248458/
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    //Image retrieved from https://despicableme.fandom.com/wiki/Bob
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
-    private final String greeting = "Bello from the Majestic King Bob! What can King Bob do for you?";
+    private final String greeting = "Bello from the Majestic KING BOB. What can KING BOB do for you?";
 
     /**
      * Initializes the scrollPane of Chat bot when program first runs.

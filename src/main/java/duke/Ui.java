@@ -38,7 +38,7 @@ public class Ui {
      */
     public void setByeMessage() {
         resetMessage();
-        responseMessage.append("Banana! King Bob is sad to see you go. Farewell my friend!");
+        responseMessage.append("Banana! KING BOB is sad to see you go. Farewell my friend!");
     }
 
     /**

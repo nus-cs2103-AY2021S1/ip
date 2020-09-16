@@ -1,5 +1,7 @@
 package duke.command;
 
+import java.util.stream.Stream;
+
 import duke.DukeException;
 import duke.Parser;
 import duke.Storage;
@@ -9,8 +11,6 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.Todo;
-
-import java.util.stream.Stream;
 
 /**
  * Represents command that is specific to the add command.

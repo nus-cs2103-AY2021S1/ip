@@ -1,0 +1,62 @@
+.root {
+    -fx-font-family: "American Typewriter";
+}
+
+.background {
+    /*
+    Image retrieved from https://www.pinterest.co.kr/pin/661114420275950559/
+     */
+    -fx-background-image: url('../images/background.png');
+    -fx-background-position: center;
+    -fx-background-size: contain;
+}
+
+.dialog {
+    -fx-font-size: 13.0;
+    -fx-text-fill: black;
+    -fx-padding: 10.0;
+    -fx-background-insets: 3.0;
+    -fx-background-radius: 7.0;
+    -fx-background-color: #fff691;
+    -fx-font-family: "American Typewriter";
+}
+
+.sendButton {
+    -fx-font-size: 13.0;
+    -fx-text-fill: white;
+    -fx-padding: 10.0;
+    -fx-background-insets: 3.0;
+    -fx-background-radius: 7.0;
+    -fx-background-color: #ff6b6b;
+    -fx-font-family: "American Typewriter";
+}
+
+.userInput {
+    -fx-font-size: 13.0;
+    -fx-text-fill: black;
+    -fx-padding: 10.0;
+    -fx-background-insets: 3.0;
+    -fx-background-radius: 7.0;
+    -fx-background-color: #c9eaff;
+    -fx-font-family: "American Typewriter";
+}
+
+.user {
+    -fx-font-size: 13.0;
+    -fx-text-fill: #7d7451;
+    -fx-padding: 10.0;
+    -fx-background-insets: 3.0;
+    -fx-background-radius: 7.0;
+    -fx-background-color: #ffeb87;
+    -fx-font-family: "American Typewriter";
+}
+
+.kingbob {
+    -fx-font-size: 13.0;
+    -fx-text-fill: white;
+    -fx-padding: 10.0;
+    -fx-background-insets: 3.0;
+    -fx-background-radius: 7.0;
+    -fx-background-color: #7d7451;
+    -fx-font-family: "American Typewriter";
+}
