@@ -16,7 +16,8 @@ public class DoneCommand extends Command {
      */
     public DoneCommand() {
         names = new String[] { "done" };
-        description = "Marks a task as done using its index\nFormat: " + CommandFormat.DONE_CMD_FORMAT;
+        description = "Marks a task as done using its index.";
+        format = CommandFormat.DONE_CMD_FORMAT;
     }
 
     /**
@@ -32,7 +33,7 @@ public class DoneCommand extends Command {
         int taskIndex = Integer.parseInt(str);
 
         Task task = duke.getTaskList().getTask(taskIndex);
-        task.setTaskDone(true);
+        task.setDone(true);
 
         response(task, duke);
     }

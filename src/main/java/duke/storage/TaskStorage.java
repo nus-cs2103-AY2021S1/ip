@@ -91,7 +91,7 @@ public class TaskStorage {
 
             Task task = stringToTask(taskString);
 
-            task.setTaskDone(isTaskDone);
+            task.setDone(isTaskDone);
             task.setTag(tag);
 
             tasks.add(task);
@@ -116,7 +116,7 @@ public class TaskStorage {
         for (Task task : tasks) {
             taskWriter.append(taskToString(task) + '\n');
 
-            String taskState = task.isTaskDone() + " " + task.getTag() + '\n';
+            String taskState = task.isDone() + " " + task.getTag() + '\n';
             taskStateWriter.append(taskState);
         }
         taskWriter.close();

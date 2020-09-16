@@ -3,7 +3,6 @@ package duke.gui;
 import java.io.IOException;
 
 import duke.Duke;
-import duke.command.CommandFormat;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -101,7 +100,13 @@ public class DukeGuiWindow extends BorderPane {
      */
     @FXML
     public void showAllCommands() {
-        String response = duke.getResponse(CommandFormat.HELP_CMD_FORMAT);
-        dukeMessage.setText(response);
+        AllCommandsWindow.display(duke);
+    }
+
+    /**
+     * Shows tasks table
+     */
+    public void showAllTasks() {
+        TaskListWindow.display(duke);
     }
 }

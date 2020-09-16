@@ -10,7 +10,6 @@ import duke.ui.UiPrint;
 public class ToDo extends Task {
 
     private ToDo(String icon, String description, String taskInfo) {
-
         super(icon, description, taskInfo);
     }
 

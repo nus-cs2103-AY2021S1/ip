@@ -13,7 +13,8 @@ public class EventCommand extends Command {
      */
     public EventCommand() {
         names = new String[] { "event" };
-        description = "Creates an event task\nFormat: " + CommandFormat.EVENT_CMD_FORMAT;
+        description = "Creates an event task.";
+        format = CommandFormat.EVENT_CMD_FORMAT;
     }
 
     /**

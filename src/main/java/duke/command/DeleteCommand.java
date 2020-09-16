@@ -16,7 +16,8 @@ public class DeleteCommand extends Command {
      */
     public DeleteCommand() {
         names = new String[] { "delete" };
-        description = "Deletes a task using its index\nFormat: " + CommandFormat.DELETE_CMD_FORMAT;
+        description = "Deletes a task using its index.";
+        format = CommandFormat.DELETE_CMD_FORMAT;
     }
 
     /**

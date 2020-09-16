@@ -9,7 +9,8 @@ public class HelpCommand extends Command {
      */
     public HelpCommand() {
         names = new String[] { "help" };
-        description = "Lists descriptions of all commands.\nFormat: " + CommandFormat.HELP_CMD_FORMAT;
+        description = "Lists descriptions of all commands.";
+        format = CommandFormat.HELP_CMD_FORMAT;
     }
 
     @Override

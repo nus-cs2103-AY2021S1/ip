@@ -145,7 +145,7 @@ public class GuiResponse {
 
         for (String commandName : allCommands.keySet()) {
             response.append("\"" + commandName + "\"\n");
-            response.append(allCommands.get(commandName).getDescription() + "\n\n");
+            response.append(allCommands.get(commandName).getWholeDescription() + "\n\n");
         }
     }
 

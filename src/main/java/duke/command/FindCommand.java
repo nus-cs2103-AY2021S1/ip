@@ -18,7 +18,8 @@ public class FindCommand extends Command {
      */
     public FindCommand() {
         names = new String[] { "find" };
-        description = "Finds the tasks containing the keyword.\nFormat: " + CommandFormat.FIND_CMD_FORMAT;
+        description = "Finds the tasks containing the keyword.";
+        format = CommandFormat.FIND_CMD_FORMAT;
     }
 
     /**

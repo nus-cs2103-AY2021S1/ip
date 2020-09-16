@@ -9,6 +9,7 @@ public abstract class Command {
 
     protected String[] names;
     protected String description = "no description provided.";
+    protected String format = "no format provided.";
 
     /**
      * Do something.
@@ -26,10 +27,31 @@ public abstract class Command {
     }
 
     /**
-     * Gets the description of this command.
+     * Gets the whole description of this command, containing format.
      * @return command description
      */
+    public String getWholeDescription() {
+        return description + "\nFormat: " + format;
+    }
+
+    public String getName() {
+        String names = "";
+
+        for (String name : this.names) {
+            names += name + ", ";
+        }
+
+        // removes the ", " at the end
+        names = names.substring(0, names.length() - 2);
+
+        return names;
+    }
+
     public String getDescription() {
         return description;
+    }
+
+    public String getFormat() {
+        return format;
     }
 }
