@@ -1,9 +1,13 @@
+import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
     private static final String HOME = System.getProperty("user.home");
     private static final java.nio.file.Path PATH = java.nio.file.Paths.get(HOME, "ip", "data.txt");
+    private static boolean pathExists = java.nio.file.Files.exists(PATH);
+
+
 
     private static Ui ui = new Ui();
     private static Parser parser = new Parser();
@@ -52,6 +56,10 @@ public class Duke {
 
 
     static void initialize() throws IOException {
+        if (!pathExists) {
+            // do smth lmao
+        }
+
         Scanner myReader = new Scanner(PATH);
         int total = myReader.nextInt();
         tasklist = new TaskList(total);

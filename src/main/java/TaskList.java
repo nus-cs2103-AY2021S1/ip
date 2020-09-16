@@ -196,7 +196,11 @@ public class TaskList {
      * @return Completed task.
      * @throws IOException If FileWriter is unable to find file.
      */
-    public Task complete(int taskNumber) throws IOException {
+    public Task complete(int taskNumber) throws IOException, UnknownNumberException {
+        if (taskNumber <= 0 || taskNumber > total) {
+            throw new UnknownNumberException();
+        }
+
         Scanner myReader = new Scanner(PATH);
 
         String taskData = "";
@@ -217,7 +221,11 @@ public class TaskList {
      * @return Task to be deleted.
      * @throws IOException If FileWriter is unable to find file.
      */
-    public Task delete(int taskNumber) throws IOException {
+    public Task delete(int taskNumber) throws IOException, UnknownNumberException {
+        if (taskNumber <= 0 || taskNumber > total) {
+            throw new UnknownNumberException();
+        }
+
         Scanner myReader = new Scanner(PATH);
         String taskData = "";
         for (int i = -1; i <= taskNumber; i++) {
