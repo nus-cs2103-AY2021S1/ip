@@ -13,9 +13,9 @@ public abstract class Task {
     /**
      * Creates a Task object.
      *
-     * @param task
-     * @param isCompleted
-     * @param priority
+     * @param task Task details.
+     * @param isCompleted True if task is completed, false otherwise.
+     * @param priority Priority level of the task, if any.
      */
     public Task(String task, boolean isCompleted, int priority) {
         this.task = task;

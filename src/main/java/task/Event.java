@@ -15,9 +15,10 @@ public class Event extends Task {
     /**
      * Creates an Event object.
      *
-     * @param task Details of event.
+     * @param task Event details.
      * @param date Date of event.
-     * @param isCompleted Boolean to check whether task has been completed.
+     * @param isCompleted True if event is completed, false otherwise.
+     * @param priority Priority level of the event, if any.
      */
     public Event(String task, String date, boolean isCompleted, int priority) {
         super(task, isCompleted, priority);
@@ -31,7 +32,8 @@ public class Event extends Task {
 
     /**
      * An overridden method that returns a String with the Task type,
-     * event details, event date formatted in MMM d yyyy format.
+     * event details, event date formatted in MM dd yyyy format,
+     * and priority level of deadline, if any.
      *
      * @return String with all details of the event.
      */

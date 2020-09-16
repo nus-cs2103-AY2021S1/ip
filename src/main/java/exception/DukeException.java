@@ -6,6 +6,11 @@ package exception;
  */
 public class DukeException extends Exception {
 
+    /**
+     * Creates a DukeException object.
+     *
+     * @param s Error message.
+     */
     public DukeException(String s) {
         super(s);
     }

@@ -55,20 +55,6 @@ public class Duke extends Application {
     }
 
     /**
-     * Iteration 1:
-     * Creates a label with the specified text and adds it to the dialog container.
-     * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
-     */
-    private Label getDialogLabel(String text) {
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
-    }
-
-    /**
-     * Iteration 2:
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
@@ -83,8 +69,10 @@ public class Duke extends Application {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Gets the correct response that should be said by the bot following the user's input.
+     *
+     * @param input User's input.
+     * @return String containing the response by the bot according to the user's input.
      */
     public String getResponse(String input) {
         try {
@@ -94,6 +82,11 @@ public class Duke extends Application {
         }
     }
 
+    /**
+     * Retrieves the designated greeting whenever the program starts.
+     *
+     * @return String containing the greeting to be said by the bot when the program starts.
+     */
     public String getGreeting() {
         return ui.greet();
     }
@@ -115,10 +108,10 @@ public class Duke extends Application {
 
         scene = new Scene(mainLayout);
 
-        stage.setScene(scene); // Setting the stage to show our screen
+        stage.setScene(scene); // Setting the stage to show our screen.
         stage.show(); // Render the stage.
 
-        //Step 2. Formatting the window to look as expected
+        //Step 2. Formatting the window to look as expected.
         stage.setTitle("Duke");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
@@ -133,7 +126,6 @@ public class Duke extends Application {
         scrollPane.setVvalue(1.0);
         scrollPane.setFitToWidth(true);
 
-        // You will need to import `javafx.scene.layout.Region` for this.
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
         userInput.setPrefWidth(325.0);

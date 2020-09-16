@@ -15,9 +15,10 @@ public class Deadline extends Task {
     /**
      * Creates a Deadline object.
      *
-     * @param task Details of the deadline.
-     * @param date Date of deadline.
-     * @param isCompleted Boolean to check whether task is completed.
+     * @param task Deadline details.
+     * @param date Date of Deadline.
+     * @param isCompleted True if Deadline is completed, false otherwise.
+     * @param priority Priority level of the Deadline, if any.
      */
     public Deadline(String task, String date, boolean isCompleted, int priority) {
         super(task, isCompleted, priority);
@@ -31,7 +32,8 @@ public class Deadline extends Task {
 
     /**
      * An overridden method that returns a String with the Task type,
-     * deadline details, due date formatted in MMM d yyyy format.
+     * deadline details, due date formatted in MM dd yyyy format,
+     * and priority level of deadline, if any.
      *
      * @return String with all details of the deadline.
      */

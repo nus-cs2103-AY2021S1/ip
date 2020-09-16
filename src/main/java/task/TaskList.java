@@ -37,16 +37,29 @@ public class TaskList {
         return totalTasks;
     }
 
+    /**
+     * Checks whether the task list is empty.
+     *
+     * @return True if list is empty, false otherwise.
+     */
     public boolean isEmpty() {
         return list.isEmpty();
     }
 
+    /**
+     * Retrieves the task from the list at the specified index.
+     *
+     * @param x Index of task to be retrieved.
+     * @return Task.
+     */
     public Task get(int x) {
         return list.get(x);
     }
 
     /**
-     * Add task to current list of tasks.
+     * Adds task to current task list such that the tasks are in
+     * descending order of priority, with the tasks that have no
+     * priority level specified at the bottom of the list.
      *
      * @param t Task to be added.
      */

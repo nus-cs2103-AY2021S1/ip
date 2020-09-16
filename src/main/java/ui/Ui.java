@@ -24,8 +24,8 @@ public class Ui {
     /**
      * Creates a Ui object.
      *
-     * @param taskList
-     * @param storage
+     * @param taskList Current task list.
+     * @param storage Storage of the previous tasks.
      */
     public Ui(TaskList taskList, Storage storage) {
         this.list = taskList;
@@ -38,7 +38,6 @@ public class Ui {
      * Based on the command type, its respective method will be called to
      * carry out the command.
      * The updated list of tasks will be stored upon every command.
-     * Duke will end when users type "bye".
      *
      * @throws IOException
      */
@@ -103,6 +102,8 @@ public class Ui {
 
     /**
      * Greeting of users to signify the start of the program.
+     *
+     * @return String containing greeting.
      */
     public String greet() {
         String start = "Woof! I'm Nugget, your personal doggo.\nWhat can I do for you today?\n" +
@@ -113,12 +114,19 @@ public class Ui {
 
     /**
      * Good bye to signify the end of the program.
+     *
+     * @return String containing good bye.
      */
     public String end() {
         String text = "Goodbye! Let's play fetch again soon. :)\n";
         return text;
     }
 
+    /**
+     * Displays list of commands that user can type.
+     *
+     * @return String containing list of commands.
+     */
     public String help() {
         String text = "Here are the list of commands you can type:\n" +
                 "1. list - Shows the complete list of tasks you have\n" +
@@ -135,6 +143,8 @@ public class Ui {
 
     /**
      * Prints out the current list of tasks.
+     *
+     * @return String of the current task list.
      */
     public String list() {
         if (list.isEmpty()) {
@@ -154,6 +164,8 @@ public class Ui {
      * that was completed.
      *
      * @param taskNumber Task's number in the list.
+     *
+     * @return String containing the task that was completed.
      */
     public String done(int taskNumber) throws NumberOutOfRangeException {
         if (taskNumber <= 0 || taskNumber > list.getTotalTasks()) {
@@ -170,6 +182,8 @@ public class Ui {
      * Removes the task indicated from the list and prints out the task.
      *
      * @param taskNumber Task's number in the list.
+     *
+     * @return String containing the task that was deleted.
      */
     public String delete(int taskNumber) throws NumberOutOfRangeException {
         if (taskNumber <= 0 || taskNumber > list.getTotalTasks()) {
@@ -187,6 +201,8 @@ public class Ui {
      * Creates a new todo task.
      *
      * @param task Task details.
+     *
+     * @return String containing the new Todo added and the updated task list.
      */
     public String todo(String task, int priority) throws NumberOutOfRangeException {
         if (priority < 0) {
@@ -205,6 +221,8 @@ public class Ui {
      *
      * @param task Event details.
      * @param date Date of event.
+     *
+     * @return String containing the new Event added and the updated task list.
      */
     public String event(String task, String date, int priority) throws DateTimeParseException, NumberOutOfRangeException {
         if (priority < 0) {
@@ -223,6 +241,8 @@ public class Ui {
      *
      * @param task Deadline details.
      * @param date Date of deadline.
+     *
+     * @return String containing the new Deadline added and the updated task list.
      */
     public String deadline(String task, String date, int priority) throws DateTimeParseException, NumberOutOfRangeException {
         if (priority < 0) {
@@ -240,6 +260,8 @@ public class Ui {
      * Looks for tasks in the list that contains the keyword
      *
      * @param keyword Word that user wants to look out for in list of tasks.
+     *
+     * @return String containing the tasks that match the keyword.
      */
     public String find(String keyword) {
         int counter = 1;

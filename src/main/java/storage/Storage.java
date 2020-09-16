@@ -104,7 +104,7 @@ public class Storage {
     }
 
     /**
-     * Resets the file.
+     * Deletes all previous tasks inputted.
      *
      * @throws IOException
      */

@@ -6,6 +6,9 @@ package exception;
  */
 public class WrongCommandException extends DukeException {
 
+    /**
+     * Creates a WrongCommandException object.
+     */
     public WrongCommandException() {
         super("Sorry, I did not understand that. Please use the correct command words.");
     }
