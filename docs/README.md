@@ -19,9 +19,10 @@ Duke (Also known as Dwayne The Rock Johnson) is your friendly **productivity ass
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest duke.jar from here
+1. Download the latest duke.jar from [here](https://github.com/nicholas-gcc/ip/releases/download/A-Release/duke.jar)
 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds.
+![Ui](images/Ui.png)
 
 1. Type the command in the message box and press Enter to execute it. e.g. typing list and pressing Enter will give you a list of tasks.
 Some example commands you can try:
@@ -89,6 +90,23 @@ Each list element has a marker `[T]`, `[E]` or `[D]` to indicate whether the tas
 Each list element will show a tick symbol `[✔]` if the task is marked done, or a cross `[x]` if undone.
 
 Format: `list`
+
+### Locating task by keywords: `find`
+
+Finds persons whose names contain any of the given keywords.
+
+Format: `find KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g `hans` will match `Hans`
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Only the name is searched.
+* Only full words will be matched e.g. `Han` will not match `Hans`
+* Persons matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+
+Examples:
+* `find John` returns `john` and `John Doe`
+* `find alex david` returns `Alex Yeoh`, `David Li`<br>
 
 ### `Keyword` - Describe action
 
