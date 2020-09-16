@@ -60,7 +60,7 @@ public class Duke {
      * @return String representation of reminders of unfinished/urgent tasks.
      */
     public String getReminder() {
-        return parser.getUrgentTasks();
+        return tasks.getUrgentTasks();
     }
 
     /**
@@ -77,14 +77,13 @@ public class Duke {
             output = parser.parseUserInput(input);
 
             try {
-                storage.writeToFile(parser.getTasks());
+                storage.writeToFile(tasks.getTasks());
             } catch (IOException e) {
                 output = ui.displayUpdateFileError(e.getMessage());
             }
 
         } catch (DukeException e) {
-            String exceptionMessage = e.toString();
-            output = exceptionMessage;
+            output = e.toString();
         }
 
         return output;

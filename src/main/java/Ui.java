@@ -39,7 +39,7 @@ public class Ui {
      *
      * @param message is the essence of error.
      */
-    public static String displayUpdateFileError(String message) {
+    public String displayUpdateFileError(String message) {
         return "*Error: Unable to save changes to file*"
                 + "\n  Please check if your file still exists in your directory"
                 + "\n" + message;

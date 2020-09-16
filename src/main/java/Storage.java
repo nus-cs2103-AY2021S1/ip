@@ -11,12 +11,25 @@ import java.util.Scanner;
  * For reading and writing of the specified file.
  */
 public class Storage {
-    private static String filePath;
-    private static List<Task> savedTasks;
+
     private static final char TICK = '\u2713';
     private static final char CROSS = '\u2718';
     private static final char CONVERTED_TICK = '1';
     private static final char CONVERTED_CROSS = '0';
+
+    private static final int TYPE_START_INDEX = 1;
+    private static final int TYPE_END_INDEX = 2;
+    private static final int ISDONE_START_INDEX = 4;
+    private static final int ISDONE_END_INDEX = 5;
+    private static final int DATE_OFFSET_INDEX = 5;
+    private static final int DESCRIPTION_START_INDEX = 7;
+
+    private static final String DONE = "1";
+    private static final String DATE_OPEN_BRACKET = "(";
+    private static final String DATE_CLOSE_BRACKET = ")";
+
+    private String filePath;
+    private List<Task> savedTasks;
 
     /**
      * Creates a Storage object.
@@ -33,11 +46,8 @@ public class Storage {
      * Loads the file.
      * A java Scanner object is used to read the .txt file and temporarily
      * stores the data.
-     *
-     * @throws FileNotFoundException when file is not found from the
-     * given file path.
      */
-    public static void loadFileContent() {
+    public void loadFileContent() {
         File storedFile = new File(filePath); // create a File for the given file path;
 
         try {
@@ -45,7 +55,7 @@ public class Storage {
 
             while (scanner.hasNext()) {
                 String taskSummary = scanner.nextLine();
-                Storage.lineReader(taskSummary);
+                lineReader(taskSummary);
             }
 
         } catch (FileNotFoundException e) {
@@ -55,7 +65,9 @@ public class Storage {
                 if (!directory.exists() || !directory.isDirectory()) {
                     directory.mkdirs();
                 }
+
                 storedFile.createNewFile();
+
             } catch (IOException ex) {
                 System.out.println("Unable to open/create file: " + ex.toString());
             }
@@ -69,38 +81,53 @@ public class Storage {
      * @param task is the line String representation of task
      * read from the file.
      */
-    public static void lineReader(String task) {
-        String type = task.substring(1, 2);
-        String description = "";
-        String timeDescription = "";
+    public void lineReader(String task) {
+        String type = task.substring(TYPE_START_INDEX, TYPE_END_INDEX);
         boolean isDone = false;
 
-        if (task.substring(4, 5).equals("1")) {
+        if (task.substring(ISDONE_START_INDEX, ISDONE_END_INDEX).equals(DONE)) {
             isDone = true;
         }
 
         if (type.equals(Task.TODO_TASK)) {
-            int end = task.length();
-            description = task.substring(7, end);
-            Todo newTodo = new Todo(description, isDone);
-            Storage.savedTasks.add(newTodo);
+            todoReader(task, isDone);
 
         } else if (type.equals(Task.EVENT_TASK)) {
-            int start = task.indexOf("(");
-            int end = task.lastIndexOf(")");
-            timeDescription = task.substring(start + 5, end);
-            description = task.substring(7, start);
-            Event newEvent = new Event(description, timeDescription, isDone);
-            Storage.savedTasks.add(newEvent);
+            eventReader(task, isDone);
 
         } else if (type.equals(Task.DEADLINE_TASK)) {
-            int start = task.indexOf("(");
-            int end = task.lastIndexOf(")");
-            timeDescription = task.substring(start + 5, end);
-            description = task.substring(7, start);
-            Deadline newDeadline = new Deadline(description, timeDescription, isDone);
-            Storage.savedTasks.add(newDeadline);
+            deadlineReader(task, isDone);
         }
+    }
+
+    public void todoReader(String parsedTask, Boolean isDone) {
+        int end = parsedTask.length();
+        String description = parsedTask.substring(DESCRIPTION_START_INDEX, end);
+
+        Todo newTodo = new Todo(description, isDone);
+        savedTasks.add(newTodo);
+    }
+
+    public void eventReader(String parsedTask, Boolean isDone) {
+        int dateStart = parsedTask.indexOf(DATE_OPEN_BRACKET);
+        int dateEnd = parsedTask.lastIndexOf(DATE_CLOSE_BRACKET);
+
+        String timeDescription = parsedTask.substring(dateStart + DATE_OFFSET_INDEX, dateEnd);
+        String description = parsedTask.substring(DESCRIPTION_START_INDEX, dateStart);
+
+        Event newEvent = new Event(description, timeDescription, isDone);
+        savedTasks.add(newEvent);
+    }
+
+    public void deadlineReader(String parsedTask, Boolean isDone) {
+        int dateStart = parsedTask.indexOf(DATE_OPEN_BRACKET);
+        int dateEnd = parsedTask.lastIndexOf(DATE_CLOSE_BRACKET);
+
+        String timeDescription = parsedTask.substring(dateStart + DATE_OFFSET_INDEX, dateEnd);
+        String description = parsedTask.substring(DESCRIPTION_START_INDEX, dateStart);
+
+        Deadline newDeadline = new Deadline(description, timeDescription, isDone);
+        savedTasks.add(newDeadline);
     }
 
     /**
@@ -108,8 +135,8 @@ public class Storage {
      *
      * @return a list of Task objects.
      */
-    public static List<Task> getSavedTasks() {
-        return Storage.savedTasks;
+    public List<Task> getSavedTasks() {
+        return savedTasks;
     }
 
     /**
@@ -121,7 +148,7 @@ public class Storage {
      *
      * @throws IOException if file is somehow not found.
      */
-    public static void writeToFile(List<Task> tasksToWrite) throws IOException {
+    public void writeToFile(List<Task> tasksToWrite) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         int totalTasks = tasksToWrite.size();
 

@@ -1,4 +1,4 @@
 [T][1] Watch anime
 [E][0] CS2100 Assignment 1 (at: Sep 16 2020)
 [D][0] CS2103T Week 6 ip (by: Sep 17 2020)
-[T][0] Get parcel from ninjavan
+[T][1] Get parcel from ninjavan

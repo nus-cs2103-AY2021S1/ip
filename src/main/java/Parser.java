@@ -1,113 +1,36 @@
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
 /**
  * Represents a Parser object.
  * Handles the user input commands and executes them.
  */
 public class Parser {
-    private static TaskList tasks;
-    private final String IMPOSSIBLE_DATE = "2000-01-01";
+    private static final int START = 0;
+    private static final int MINIMUM_COMMAND_LENGTH = 3;
+    private static final int END_FOUR_CHARACTERS = 4;
+    private static final int END_FIVE_CHARACTERS = 5;
+    private static final int END_SIX_CHARACTERS = 6;
+    private static final int END_SEVEN_CHARACTERS = 7;
+    private static final int END_NINE_CHARACTERS = 9;
+
+    private static final String COMMAND_SEPARATOR = " ";
+    private static final String PARSE_BYE = "bye";
+    private static final String PARSE_LIST = "list";
+    private static final String PARSE_DONE = "done ";
+    private static final String PARSE_TODO = "todo ";
+    private static final String PARSE_FIND = "find ";
+    private static final String PARSE_EVENT = "event ";
+    private static final String PARSE_DELETE = "delete ";
+    private static final String PARSE_DEADLINE = "deadline ";
+
+    private TaskList taskManager;
 
     /**
      * Creates a Parser object.
      * It is used for identifying String inputs from user.
      *
-     * @param tasks TaskList object, required to interact with it.
+     * @param taskManager TaskList object, required to interact with it.
      */
-    public Parser(TaskList tasks) {
-        this.tasks = tasks;
-    }
-
-    /**
-     * Communicates with TaskList class and passes current Task object to TaskList class for storing.
-     *
-     * @param task to pass over Task object for storage.
-     */
-    public void store(Task task) {
-        this.tasks.store(task);
-        System.out.println("     Got it. I've added this task:\n"
-                + "       " + task);
-        System.out.println("     Now you have " + this.tasks.getLength() + " task(s) in the list.");
-    }
-
-    /**
-     * Communicates with TaskList class and gets current Task list to print for user to see.
-     */
-    public void displayList() {
-        List<Task> currLst = this.tasks.getTasks();
-        int size = currLst.size();
-        System.out.println("     Here are the task(s) in your list:");
-
-        int index = 1;
-        for (int i = 0; i < size; i++) {
-            System.out.println("     " + index + "." + currLst.get(i));
-            index++;
-        }
-    }
-
-    /**
-     * Communicates with TaskList class and passes current Task object to TaskList class for marking the Task as done.
-     *
-     * @param index of the particular Task in Task list.
-     */
-    public void markDone(int index) {
-        Task taskSubject = this.tasks.markDone(index);
-        System.out.println("     Nice! I've marked this task as done:\n"
-                + "       " + taskSubject);
-    }
-
-    /**
-     * Communicates with TaskList class and passes current Task object to TaskList class for removal.
-     *
-     * @param index of the particular Task in Task list.
-     */
-    public void delete(int index) {
-        Task taskSubject = this.tasks.remove(index);
-        System.out.println("     Noted. I've removed this task:\n"
-                + "       " + taskSubject
-                + "\n     Now you have " + this.tasks.getLength() + " task(s) in the list.");
-    }
-
-    /**
-     * Communicates with TaskList class and to get the current stored Task list.
-     */
-    public List<Task> getTasks() {
-        return tasks.getTasks();
-    }
-
-    /**
-     * Communicates with TaskList class and to get the current stored Task list.
-     * Filters the tasks based on the keyword searched.
-     *
-     * @param keyword String will be searched within all tasks.
-     * If matched, it will be printed.
-     */
-    public void findTask(String keyword) {
-        List<Task> allTasks = tasks.getTasks();
-        int fullSize = tasks.getLength();
-        List<Task> filteredTasks = new ArrayList<>();
-
-        for (int i = 0; i < fullSize; i++) {
-            Task task = allTasks.get(i);
-            String taskString = task.toString();
-            if (taskString.contains(keyword)) {
-                filteredTasks.add(task);
-            }
-        }
-
-        System.out.println("     Here are the matching task(s) in your list:");
-        int partialSize = filteredTasks.size();
-        int index = 1;
-
-        for (int i = 0; i < partialSize; i++) {
-            System.out.println("     " + index + "." + filteredTasks.get(i));
-            index++;
-        }
+    public Parser(TaskList taskManager) {
+        this.taskManager = taskManager;
     }
 
     /**
@@ -126,265 +49,90 @@ public class Parser {
      */
     public String parseUserInput(String str) throws DukeException {
         String trimmedStr = str.trim();
-        int commandSpace = str.indexOf(" ");
+        int commandSpace = str.indexOf(COMMAND_SEPARATOR);
 
-        if (trimmedStr.length() < 3) {
-            throw new DukeException("*Invalid command.*"
-                    + "\n  Duke Commands: bye, list, find, done, delete,"
-                    + "\n                               todo, event, deadline");
+        if (trimmedStr.length() < MINIMUM_COMMAND_LENGTH) {
+            ExceptionCommand exceptionCommand  = new ExceptionCommand(ExceptionCommand.INVALID_COMMAND);
+            throw new DukeException(exceptionCommand.getOutput());
         }
 
         assert trimmedStr.length() > 2 : "user input should not be empty/just white spaces";
 
-        if (str.equals("bye")) {
-            Thread t1 = new Thread(() -> {
-                try {
-                    TimeUnit.SECONDS.sleep(2);
-                    MainWindow.closeWindow();
-                } catch (InterruptedException ie) {
-                    System.out.println("Unable to sleep");
-                }
-            });
+        if (str.equals(PARSE_BYE)) {
+            ByeCommand byeCommand = new ByeCommand();
+            return byeCommand.getOutput();
 
-            t1.start();
-            return "See you again!";
+        } else if (str.equals(PARSE_LIST)) {
+            ListCommand listCommand = new ListCommand(taskManager);
+            return listCommand.getOutput();
 
-        } else if (str.equals("list")) {
-            List<Task> currLst = this.tasks.getTasks();
-            int size = currLst.size();
-            String output = "Here are the task(s) in your list:\n";
-
-            int index = 1;
-            for (int i = 0; i < size; i++) {
-                output = output + "  " + index + "." + currLst.get(i) + "\n";
-                index++;
-            }
-
-            return output;
-
-        } else if (commandSpace <= 0) {
-            throw new DukeException("*Invalid command.*"
-                    + "\n  Duke Commands: bye, list, find, done, delete,"
-                    + "\n                               todo, event, deadline");
+        } else if (commandSpace <= START) { //No space in user input
+            ExceptionCommand exceptionCommand  = new ExceptionCommand(ExceptionCommand.INVALID_COMMAND);
+            throw new DukeException(exceptionCommand.getOutput());
         }
 
         assert commandSpace > 0 : "There should be a spacing after command call from this point onwards";
 
-        if (str.substring(0, 5).equals("done ")) {
-            int length = str.length();
-            String index = str.substring(5, length);
-            int realIndex = Integer.parseInt(index) - 1;
+        if (str.substring(START, END_FIVE_CHARACTERS).equals(PARSE_DONE)) {
+            DoneCommand doneCommand = new DoneCommand(str, taskManager);
+            return doneCommand.getOutput();
 
-            if (realIndex >= this.tasks.getLength() || realIndex < 0) {
-                throw new DukeException("*Invalid task index, please try again.*");
-            }
+        } else if (str.substring(START, END_FIVE_CHARACTERS).equals(PARSE_TODO)) {
+            TodoCommand todoCommand = new TodoCommand(str, taskManager);
+            return todoCommand.getOutput();
 
-            assert this.tasks.getLength() >= realIndex + 1 : "There should be a task in task list to mark done";
+        } else if (str.substring(START, END_FIVE_CHARACTERS).equals(PARSE_FIND)) {
+            FindCommand findCommand = new FindCommand(str, taskManager);
+            return findCommand.getOutput();
 
-            Task taskSubject = this.tasks.markDone(realIndex);
-            return "Nice! I've marked this task as done:\n"
-                    + "  " + taskSubject;
-
-        } else if (str.substring(0, 5).equals("todo ")) {
-            int length = str.length();
-            if (length == 5) {
-                throw new DukeException("*Please fill in todo description*");
-            }
-
-            assert length > commandSpace + 1 : "There should be a description";
-
-            Todo newTodo = new Todo(str.substring(5, length));
-            this.tasks.store(newTodo);
-            return "Got it. I've added this task:\n"
-                    + "  " + newTodo + "\n"
-                    + "Now you have " + this.tasks.getLength() + " task(s) in the list.";
-
-        } else if (str.substring(0, 5).equals("find ")) {
-            int length = str.length();
-            if (length == 5) {
-                throw new DukeException("*Please fill in a keyword to find*");
-            }
-
-            assert length > commandSpace + 1 : "There should be a keyword";
-
-            String keyword = str.substring(5, length);
-            List<Task> allTasks = tasks.getTasks();
-            int fullSize = tasks.getLength();
-            List<Task> filteredTasks = new ArrayList<>();
-
-            for (int i = 0; i < fullSize; i++) {
-                Task task = allTasks.get(i);
-                String taskString = task.toString();
-                if (taskString.contains(keyword)) {
-                    filteredTasks.add(task);
-                }
-            }
-
-            String output = "Here are the matching task(s) in your list:\n";
-            int partialSize = filteredTasks.size();
-            int index = 1;
-            for (int i = 0; i < partialSize; i++) {
-                output = output + "  " + index + "." + filteredTasks.get(i) + "\n";
-                index++;
-            }
-            return output;
-
-        } else if (commandSpace <= 4) {
-            throw new DukeException("*Invalid command.*"
-                    + "\n  Duke Commands: bye, list, find, done, delete,"
-                    + "\n                               todo, event, deadline");
+        } else if (commandSpace <= END_FOUR_CHARACTERS) {
+            ExceptionCommand exceptionCommand = new ExceptionCommand(ExceptionCommand.INVALID_COMMAND);
+            throw new DukeException(exceptionCommand.getOutput());
         }
 
         assert str.length() > 4 : "The length of command with a space character should be > 4";
 
-        if (str.substring(0, 6).equals("event ")) {
-            int length = str.trim().length();
-            if (length == 5) {
-                throw new DukeException("*Please fill in event description*");
-            }
-
-            int timePrefix = str.indexOf("/at");
-            if (timePrefix < 0) {
-                throw new DukeException("*Please fill in event completion time in the following format:*\n"
-                        + "  eg. event CCA meeting /at YYYY-MM-DD");
-            }
-
-            LocalDate date;
-            String dateString = str.substring(timePrefix + 4, length);
+        if (str.substring(START, END_SIX_CHARACTERS).equals(PARSE_EVENT)) {
             try {
-                date = LocalDate.parse(dateString);
-            } catch (DateTimeParseException e) {
-                throw new DukeException("*Please fill in the time in the YYYY-MM-DD format*");
+                EventCommand eventCommand = new EventCommand(str, taskManager);
+                return eventCommand.getOutput();
+
+            } catch(DukeException de) {
+                ExceptionCommand exceptionCommand = new ExceptionCommand(ExceptionCommand.INVALID_DATE_FORMAT);
+                throw new DukeException(exceptionCommand.getOutput());
             }
 
-            Event newEvent = new Event(str.substring(6, timePrefix), date);
-            this.tasks.store(newEvent);
-            return "Got it. I've added this task:\n"
-                    + "  " + newEvent + "\n"
-                    + "Now you have " + this.tasks.getLength() + " task(s) in the list.";
-
-        } else if (commandSpace <= 5) {
-            throw new DukeException("*Invalid command.*"
-                    + "\n  Duke Commands: bye, list, find, done, delete,"
-                    + "\n                               todo, event, deadline");
+        } else if (commandSpace <= END_FIVE_CHARACTERS) {
+            ExceptionCommand exceptionCommand  = new ExceptionCommand(ExceptionCommand.INVALID_COMMAND);
+            throw new DukeException(exceptionCommand.getOutput());
         }
 
         assert str.length() > 5 : "The length of command with a space character should be > 5";
 
-        if (str.substring(0, 7).equals("delete ")) {
-            int length = str.length();
-            String index = str.substring(7, length);
-            int realIndex = Integer.parseInt(index) - 1;
+        if (str.substring(START, END_SEVEN_CHARACTERS).equals(PARSE_DELETE)) {
+            DeleteCommand deleteCommand = new DeleteCommand(str, taskManager);
+            return deleteCommand.getOutput();
 
-            if (realIndex >= this.tasks.getLength() || realIndex < 0) {
-                throw new DukeException("*Invalid task index, please try again.*");
-            }
-
-            assert this.tasks.getLength() >= realIndex + 1 : "There should be a task in task list to mark delete";
-
-            Task taskSubject = this.tasks.remove(realIndex);
-            return "Noted. I've removed this task:\n"
-                    + "  " + taskSubject + "\n"
-                    + "Now you have " + this.tasks.getLength() + " task(s) in the list.";
-
-        } else if (commandSpace <= 6) {
-            throw new DukeException("*Invalid command.*"
-                    + "\n  Duke Commands: bye, list, find, done, delete,"
-                    + "\n                               todo, event, deadline");
+        } else if (commandSpace <= END_SIX_CHARACTERS) {
+            ExceptionCommand exceptionCommand  = new ExceptionCommand(ExceptionCommand.INVALID_COMMAND);
+            throw new DukeException(exceptionCommand.getOutput());
         }
 
         assert str.length() > 6 : "The length of command with a space character should be > 6";
 
-        if (str.substring(0, 9).equals("deadline ")) {
-            int length = str.trim().length();
-            if (length == 9) {
-                throw new DukeException("*Please fill in deadline description*");
-            }
-
-            int timePrefix = str.indexOf("/by");
-            if (timePrefix < 0) {
-                throw new DukeException("*Please fill in deadline completion time in the following format:*\n"
-                        + "  eg. deadline return book to Jurong Regional Library /by YYYY-MM-DD");
-            }
-
-            LocalDate date;
-            String dateString = str.substring(timePrefix + 4, length);
+        if (str.substring(START, END_NINE_CHARACTERS).equals(PARSE_DEADLINE)) {
             try {
-                date = LocalDate.parse(dateString);
-            } catch (DateTimeParseException e) {
-                throw new DukeException("*Please fill in the time in the YYYY-MM-DD format*");
-            }
+                DeadlineCommand deadlineCommand = new DeadlineCommand(str, taskManager);
+                return deadlineCommand.getOutput();
 
-            Deadline newDeadline = new Deadline(str.substring(9, timePrefix), date);
-            this.tasks.store(newDeadline);
-            return "Got it. I've added this task:\n"
-                    + "  " + newDeadline + "\n"
-                    + "Now you have " + this.tasks.getLength() + " task(s) in the list.";
+            } catch(DukeException de) {
+                ExceptionCommand exceptionCommand = new ExceptionCommand(ExceptionCommand.INVALID_DATE_FORMAT);
+                throw new DukeException(exceptionCommand.getOutput());
+            }
 
         } else {
-            throw new DukeException("*Invalid command.*"
-                    + "\n  Duke Commands: bye, list, find, done, delete,"
-                    + "\n                               todo, event, deadline");
-        }
-    }
-
-    public String getUrgentTasks() {
-        List<Task> tasks = this.getTasks();
-        List<Task> filteredTasks = new ArrayList<>();
-        int size = tasks.size();
-        LocalDate now = LocalDate.now().plusDays(3);
-
-        for (int i = 0; i < size; i++) {
-            Task currentTask = tasks.get(i);
-            String taskType = currentTask.getType();
-            LocalDate taskTime;
-
-            if (taskType.equals(Task.EVENT_TASK)) {
-                Event currentEventTask = (Event)currentTask;
-                String formattedTime = currentEventTask.getFormattedTime();
-                DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MMM d yyyy");
-                taskTime = LocalDate.parse(formattedTime, dateFormatter);
-
-            } else if (taskType.equals(Task.DEADLINE_TASK)) {
-                Deadline currentDeadlineTask = (Deadline)currentTask;
-                String formattedTime = currentDeadlineTask.getFormattedTime();
-                DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MMM d yyyy");
-                taskTime = LocalDate.parse(formattedTime, dateFormatter);
-            } else {
-                taskTime = LocalDate.parse(IMPOSSIBLE_DATE);
-            }
-
-            if (!(currentTask.getType().equals(Task.TODO_TASK))
-                    && currentTask.getCompletionStatus() == false
-                    && now.isAfter(taskTime)) {
-                filteredTasks.add(currentTask);
-            }
-        }
-
-        for (int i = 0; i < size; i++) {
-            Task currentTask = tasks.get(i);
-            if (currentTask.getCompletionStatus() == false
-                    && currentTask.getType().equals(Task.TODO_TASK)) {
-                filteredTasks.add(currentTask);
-            }
-        }
-
-        if (filteredTasks.size() < 1) {
-            return "***Reminder:\n"
-                    + "There are no urgent tasks to be completed.\n"
-                    + "You can take a break! :)";
-
-        } else {
-            String output = "***Reminder:\n"
-                    + "Here are your tasks to be completed within 3 days:\n";
-            int partialSize = filteredTasks.size();
-            int index = 1;
-            for (int i = 0; i < partialSize; i++) {
-                output = output + "  " + index + "." + filteredTasks.get(i) + "\n";
-                index++;
-            }
-
-            return output;
+            ExceptionCommand exceptionCommand  = new ExceptionCommand(ExceptionCommand.INVALID_COMMAND);
+            throw new DukeException(exceptionCommand.getOutput());
         }
     }
 }
