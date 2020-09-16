@@ -7,7 +7,7 @@ the ability to undo changes.
 
 ![Ui](./Ui.png)
 
-## Feature 1 
+## Todo
 Add a Todo task.
 
 ### Usage
@@ -31,7 +31,7 @@ Okay! I've added the following task:
 ***********************
 ```
 
-## Feature 2
+## Deadline
 Add a Deadline.
 
 ### Usage
@@ -55,7 +55,7 @@ Okay! I've added the following deadline:
 ***********************
 ```
 
-## Feature 3
+## Event
 Add a Event.
 
 ### Usage
@@ -79,7 +79,7 @@ Okay! I've added the following event:
 ***********************
 ```
 
-## Feature 4
+## Done
 Mark a task as completed.
 
 ### Usage
@@ -103,7 +103,7 @@ Great! I've marked the following task as done:
 ***********************
 ```
 
-## Feature 5
+## Delete
 Delete a task.
 
 ### Usage
@@ -127,7 +127,7 @@ Okay, I've deleted the following task:
 ***********************
 ```
 
-## Feature 6
+## List
 View all tasks
 
 ### Usage
@@ -148,7 +148,7 @@ Here are the tasks in your list:
 2.[E][✘] Birthday party (at: 2020-09-16T20:00)
 ```
 
-## Feature 7
+## Find
 Find tasks by keyword
 
 ### Usage
@@ -173,7 +173,7 @@ Here are the matching tasks in your list:
 ***********************
 ```
 
-## Feature 8
+## Undo
 Undo previous commands
 
 ### Usage
@@ -216,7 +216,7 @@ Here are the tasks in your list:
 1.[T][✘] go to the gym
 ```
 
-## Feature 9
+## Exit
 Exit application
 
 ### Usage
