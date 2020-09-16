@@ -12,18 +12,20 @@ Mark tasks as done when they are completed.
 List all the existing tasks in the task list with their description and status.
 Time related to event task, and deadline to deadline task will also be shown.
 
+### Feature 4
+Search for tasks by keyword in their descriptions.
+
+### Feature 5
+Tag tasks with a specific tag.
 
 ## Usage
 
-### `help` - Lists all available commands or format and usage for a specified command.
-
-
-Describe action and its outcome.
+#### `help` - Lists all available commands with their formats and usages.
 
 Example of usage: 
 
-`keyword (optional arguments)`
+`help`
 
 Expected outcome:
 
-`outcome`
+`All possible commands with formats and usages specified. `
