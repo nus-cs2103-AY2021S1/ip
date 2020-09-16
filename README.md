@@ -1,26 +1,37 @@
-# Duke project template
+# JM's Duke
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+This is the user guide for JM's take on the CS2103T greenfield project _Duke_, a chatbot that uses the Command Line Interface (CLI).
 
-## Setting up in Intellij
+## Setting up
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+**Duke is best run with Java 11.**
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project dialog first)
-1. Set up the correct JDK version, as follows:
-   1. Click `Configure` > `Structure for New Projects` and then `Project Settings` > `Project` > `Project SDK`
-   1. If JDK 11 is listed in the drop down, select it. If it is not, click `New...` and select the directory where you installed JDK 11
-   1. Click `OK`
-1. Import the project into Intellij as follows:
-   1. Click `Open or Import`.
-   1. Select the project directory, and click `OK`
-   1. If there are any further prompts, accept the defaults.
-1. After the importing is complete, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()`. If the setup is correct, you should see something like the below:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+1. Download the jar file duke.jar.
+1. Move the jar file to a directory of your choice.
+1. Under the same directory, create a new folder and name it data.
+1. Double click on the jar file to run Duke. If the program does not open run it from the terminal with the command `java -jar duke.jar`.
+
+## Features
+Duke handles your tasks and reminds you of upcoming events/deadlines.
+1. **Adding tasks**
+   1. `todo`  
+      _Usage_: `todo [task description]`  
+      Adds a simple todo task to Duke's list. 
+   1. `deadline`  
+      _Usage_: `deadline [task description] /by _YYYY_-_MM_-_DD_ _HH_:_MM_`  
+      Adds a task to Duke's list with a deadline. Both date and time are required.
+   1. `event`  
+      _Usage_: `event [task description] /at _YYYY_-_MM_-_DD_ _HH_:_MM_`  
+      Adds an event with the time and date of the event to Duke's list. Both date and time are required.  
+1. **List your tasks:** `list`  
+   _Usage_: `list`  
+   Displays the list of all your tasks.  
+1. **Setting tasks as done:** `done`  
+   _Usage_: `done [position of task in the list as shown with the list command]`  
+   Sets a task of your choice to be done. The status of a done task is denoted by the ✔ symbol.
+1. **Delete a task:** `delete`  
+   _Usage_: `delete [position of task in the list as shown with the list command]`  
+   Deletes a task of your choice. **Be careful as this action is irreversible.**
+1. **Reminder:** `reminder`  
+   _Usage_: `reminder`  
+   Lists upcoming tasks within the week.  
