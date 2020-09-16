@@ -15,7 +15,8 @@ public class Deadline extends Task {
      * @param time         Time of event
      * @throws InvalidDateTimeException
      */
-    public Deadline(String description, String date, String time) throws InvalidDateTimeException, InvalidUpdateInputException {
+    public Deadline(String description, String date, String time) throws InvalidDateTimeException,
+            InvalidUpdateInputException {
         super(description);
         this.setDateTime(date, time);
     }

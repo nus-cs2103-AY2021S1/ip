@@ -40,7 +40,8 @@ public class Storage {
      * @throws FileNotFoundException
      * @throws InvalidDateTimeException
      */
-    public ArrayList<Task> getList() throws FileNotFoundException, InvalidDateTimeException, InvalidUpdateInputException {
+    public ArrayList<Task> getList() throws FileNotFoundException, InvalidDateTimeException,
+            InvalidUpdateInputException {
         Scanner sc = new Scanner(this.file);
         ArrayList<Task> list = new ArrayList<>();
 

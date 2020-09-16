@@ -15,7 +15,8 @@ public class Event extends Task {
      * @param time         Time of event
      * @throws InvalidDateTimeException
      */
-    public Event(String description, String date, String time) throws InvalidDateTimeException, InvalidUpdateInputException {
+    public Event(String description, String date, String time) throws InvalidDateTimeException,
+            InvalidUpdateInputException {
         super(description);
         this.setDateTime(date, time);
     }
