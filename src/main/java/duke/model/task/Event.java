@@ -46,4 +46,8 @@ public class Event extends Task {
     public String toDataString() {
         return String.format("E|%s|%s|%s", super.isDone, super.description, this.at);
     }
+
+    public LocalDate getAt() {
+        return at;
+    }
 }
