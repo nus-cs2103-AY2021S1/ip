@@ -29,8 +29,6 @@ Get help by typing "help".
 
 ## Usage
 
-Describe action and its outcome.
-
 - `Start DukeQ`
 
    ![](https://i.imgur.com/rxwISVd.png)
