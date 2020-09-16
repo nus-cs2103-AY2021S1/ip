@@ -33,7 +33,13 @@ Quack! Your list is here:
 ### Feature 2: Add a todo task
 Add a todo task to the task list: `todo`  
 
-Format: `todo [description]`  
+Format: `todo [description] /priority [priority]`  
+
+Remarks:  
+	• `[description]` can have spaces.  
+	• `[description]` is case-sensitive.  
+	• `[priority]` can take either `high`, `medium` or `low`.  
+	• `[priority]` is optional, if it is not indicated, priority is set to `low`.  
 
 Example: `todo do CS2103T iP increment`  
 
@@ -44,15 +50,20 @@ Quack Quack Quack. I've added this task:
 Master, you now have 5 items in the list! Quack! Quack!
 ```
 
-### Feature 2: Add a deadline task
+### Feature 3: Add a deadline task
 Add a deadline task to the task list: `deadline`  
 
 Format: `deadline [description] /by [date]` or `deadline [description] /by [date] [time]`  
 
-Example: `deadline CS2100 assignment /by 2020-09-18 23:59`  
+Remarks:  
+	• `[description]` can have spaces.  
+	• `[description]` is case-sensitive.
+	• `[time]` field is optional.  
+	• `[date]` `[time]` must follow this format YYYY-MM-DD HH:mm.  
+	• `priority]` can take either `high`, `medium` or `low`.  
+	• `[priority]` is optional, if it is not indicated, priority is set to `low`.  
 
-Remarks:
-	• 
+Example: `deadline CS2100 assignment /by 2020-09-18 23:59`  
 
 Expected example outcome:  
 ```
@@ -61,19 +72,125 @@ Quack Quack Quack. I've added this task:
 Master, you now have 6 items in the list! Quack! Quack!
 ```
 
+### Feature 4: Add an event task
+Add an event task to the task list: `event`  
 
-Description of feature.
+Format: `event [description] /at [date]` or `event [description] /at [date] [time]`  
 
-## Usage
+Remarks:  
+	• `[description]` can have spaces.  
+	• `[description]` is case-sensitive.
+	• `[time]` field is optional.  
+	• `[date]` `[time]` must follow this format YYYY-MM-DD HH:mm.  
+	• `[priority]` can take either `high`, `medium` or `low`.  
+	• `[priority]` is optional, if it is not indicated, priority is set to `low`.  
 
-### `Keyword` - Describe action
+Example: `event The International 10 /at 2021-08-15 /priority medium`  
 
-Describe action and its outcome.
+Expected example outcome:  
+```
+Quack Quack Quack. I've added this task: 
+    [E][✘] The International 10  (at: Aug 15 2021) (Priority: medium)
+Master, you now have 7 items in the list! Quack! Quack!
+```
 
-Example of usage: 
+### Feature 5: Delete a task in the task list  
+Delete a given task from your task list: `delete`  
 
-`keyword (optional arguments)`
+Format: `delete [index]`  
 
-Expected outcome:
+Remarks:  
+	• `[index]` in the index of the task appeared in the task list.  
+	
+Example: `delete 6`  
 
-`outcome`
+Expected example outcome:
+```
+Quackkk. I've removed this task for you: 
+    [D][✘] CS2100 assignment  (by: Sep 18 2020 23:59) (Priority: low)
+Master, you now have 6 items in the list! Quack! Quack!
+```
+
+### Feature 6: Indicate a task as done
+Indicate a given task as done: `done`  
+
+Format: `done [index]`  
+
+Remarks:  
+	• `[index]` in the index of the task appeared in the task list.  
+	
+Example: `done 2`  
+
+Expected example outcome:  
+```
+QUACKK! I've marked this task as done:
+    [T][✓] plan for date  (Priority: high)
+```
+
+Note that the corresponding task is changed from:  
+```
+[T][✘] plan for date  (Priority: high)
+```
+to
+```
+[T][✓] plan for date  (Priority: high)
+```
+
+### Feature 7: Find tasks
+Find tasks such that their description contains a given keyword: `find`  
+
+Format: `find [keyword]`  
+
+Remarks:  
+	• `keyword` is case sensitive. For instance `CS2100` will only match `CS2100`, and will not match `cs2100`.  
+	• `keyword` can contain only one complete word.  
+	
+Example: `find play`  
+
+Expected example outcome:  
+```
+Quack Quack! Here are the matching tasks in your list:
+    1.[T][✓] play dote (Priority: low)
+```
+
+### Feature 8: Sort the task list  
+Sort the task list according to either alphabetical order or priority order: `sort`  
+
+Format: `sort` or `sort priority`
+
+Example: `sort`  
+
+Expected example outcome:
+```
+Quack! Here is your task list sorted alphabetically:
+    1.[D][✘] CS2100 assignment  (by: Sep 18 2020 23:59) (Priority: low)
+    2.[E][✘] The International 10  (at: Aug 15 2021) (Priority: medium)
+    3.[T][✘] do CS2103T increment (Priority: low)
+    4.[T][✘] laundry (Priority: low)
+    5.[T][✓] plan for date  (Priority: high)
+    6.[T][✓] play dote (Priority: low)
+```
+
+Example: `sort priority`  
+
+Expected example outcome:  
+```
+Quack! Here is your task list sorted based on priority:
+    1.[T][✓] plan for date  (Priority: high)
+    2.[E][✘] The International 10  (at: Aug 15 2021) (Priority: medium)
+    3.[T][✓] play dote (Priority: low)
+    4.[T][✘] laundry (Priority: low)
+    5.[T][✘] do CS2103T increment (Priority: low)
+    6.[D][✘] CS2100 assignment  (by: Sep 18 2020 23:59) (Priority: low)
+```
+
+### Feature 9: Exit the program  
+
+Quit the program: `bye`  
+
+Format: `bye`  
+
+Example: `bye`  
+
+Expected outcome: The program is closed.
+
