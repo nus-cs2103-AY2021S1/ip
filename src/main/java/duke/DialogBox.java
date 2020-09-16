@@ -37,10 +37,14 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
+        dialog.setStyle("-fx-background-color: rgb(0, 98, 255); " +
+                "-fx-background-radius: 15;" +
+                "-fx-padding: 7.5;" +
+                "-fx-text-fill: rgb(255, 255, 255);" +
+                "-fx-border-color: rgb(255, 204, 229);" +
+                "-fx-border-radius: 15;");
 
         displayPicture.setImage(img);
-//        Circle clip = new Circle(45, 45, 40);
-//        displayPicture.setClip(clip);
     }
 
     /**
