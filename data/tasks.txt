@@ -6,3 +6,4 @@ D | 1 | do absolutely nothing | 10pm Thursday
 E | 0 | book eating | 3pm Sunday
 E | 1 | watch computing showcase | Tomorrow 3pm
 T | 0 | nothing
+T | 0 | something
