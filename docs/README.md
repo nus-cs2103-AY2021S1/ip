@@ -12,7 +12,7 @@ Delete a completed task
 Look up an existing task
 
 ### Indicate a finished Task
-Nark completed task as finished
+Mark completed task as finished
 
 ### Recurring task
 Set up tasks that are to be repeated weekly
@@ -30,10 +30,10 @@ Example of usage:
 
 Expected outcome:
 
-`added: [T][x]the dishes  `
-`0 finished tasks in the list  `
-`1 unfinished tasks in the list    `
-`----------------------------------`
+added: [T][x]the dishes  
+0 finished tasks in the list  
+1 unfinished tasks in the list    
+
 
 ### `deadline` - Add a task with a specific deadline
 
@@ -45,10 +45,10 @@ Example of usage:
 
 Expected outcome:
 
-`added: [D][x]my IP -----2019-12-02  `
-`0 finished tasks in the list  `
-`2 unfinished tasks in the list  `
-`----------------------------------`
+added: [D][x]my IP -----2019-12-02 `
+0 finished tasks in the list  
+2 unfinished tasks in the list  
+
 
 ### `done` - mark a task as done
 
@@ -60,9 +60,9 @@ Example of usage:
 
 Expected outcome: 
 
-`Nice I've marked this tasks as done  `
-`[D][√] my IP ------2019-12-02`
-`----------------------------------`
+Nice I've marked this tasks as done  
+[D][√] my IP ------2019-12-02
+
 
 ### `remove` - remove a task permanently
 
@@ -74,10 +74,10 @@ Example of usage:
 
 Expected outcome: 
 
-`removed:[T][x] the dishes ` 
-`0 finished tasks in the list  `
-`1 unfinished tasks in the list ` 
-`----------------------------------`
+removed:[T][x] the dishes  
+0 finished tasks in the list  
+1 unfinished tasks in the list 
+
 
 ### `weekly` - Add a task with a specific deadline. This task repeats weekly
 
@@ -89,10 +89,9 @@ Example of usage:
 
 Expected outcome:
 
-`added: [W][x]my IP -----2019-12-02  `
-`0 finished tasks in the list ` 
-`1 unfinished tasks in the list  `
-`----------------------------------`
+added: [W][x]my IP -----2019-12-02  
+0 finished tasks in the list 
+1 unfinished tasks in the list  
 
 ### `delete` - remove a recurring task
 
@@ -104,9 +103,9 @@ Example of usage:
 
 Expected outcome: 
 
-`removed:[D][x]my IP -----2019-12-02  ` 
-`added recurring:[D][x]my IP -----2019-12-02 `
-``----------------------------------`
+removed:[D][x]my IP -----2019-12-02  
+added recurring:[D][x]my IP -----2019-12-02 
+
 
 ### `help` - show the commands 
 
@@ -118,15 +117,15 @@ Example of usage:
 
 Expected outcome: 
 
-`--These are Jarvis Functions-- `
-`help`
-`list`
-`todo <taskName>`
-`done <index>`
-`deadline/weekly <taskName> /by 2/12/2019 1800`
-`find <taskName>`
-`delete <weeklyTaskIndex>`
-`remove <taskToRemovePermanently>`
-`----------------------------------`
+--These are Jarvis Functions-- 
+help
+list
+todo <taskName>
+done <index>
+deadline/weekly <taskName> /by 2/12/2019 1800
+find <taskName>
+delete <weeklyTaskIndex>
+remove <taskToRemovePermanently>
+
 
  
