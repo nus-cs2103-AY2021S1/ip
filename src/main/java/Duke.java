@@ -21,7 +21,7 @@ public class Duke  {
     
     public Duke() {
         this.ui = new Ui();
-        this.storage = new Storage("data/storage/duke.txt");
+        this.storage = new Storage("duke.txt");
         this.parser = new Parser();
         this.tasks = new TaskList(storage.load());
     }
