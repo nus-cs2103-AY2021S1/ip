@@ -8,7 +8,12 @@ import java.util.Scanner;
 import java.util.regex.Pattern;
 
 import duke.InvalidSaveException;
-import duke.task.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.RecurringDeadline;
+import duke.task.RecurringEvent;
+import duke.task.Task;
+import duke.task.ToDo;
 import duke.util.TaskList;
 
 /**

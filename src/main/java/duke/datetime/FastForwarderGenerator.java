@@ -1,11 +1,9 @@
 package duke.datetime;
 
-import duke.DukeException;
-
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Function;
+
+import duke.DukeException;
 
 /**
  * A Generator class that handles the logic of parsing strings to create the appropriate FastForwarder.

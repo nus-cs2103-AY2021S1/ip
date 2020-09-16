@@ -2,8 +2,6 @@ package duke.task;
 
 import duke.storage.PrintSummary;
 
-import java.util.regex.Pattern;
-
 /**
  * Encapsulates a Task with a description.
  *
@@ -11,12 +9,13 @@ import java.util.regex.Pattern;
  */
 public abstract class Task implements PrintSummary {
 
+    /** summary symbol for separating components */
+    public static final String SYMBOL_SEPARATOR = "|";
+
     /** summary symbol for representing the task is complete */
     protected static final String SYMBOL_DONE = "1";
     /** summary symbol for representing the task is not complete */
     protected static final String SYMBOL_NOT_DONE = "0";
-    /** summary symbol for separating components */
-    public static final String SYMBOL_SEPARATOR = "|";
 
     /** description of the task */
     private String description;

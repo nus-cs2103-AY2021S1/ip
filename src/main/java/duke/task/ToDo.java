@@ -1,8 +1,8 @@
 package duke.task;
 
-import duke.InvalidSaveException;
-
 import java.util.regex.Pattern;
+
+import duke.InvalidSaveException;
 
 /**
  * Encapsulates Tasks that are to be completed.
