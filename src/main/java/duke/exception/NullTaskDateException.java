@@ -12,10 +12,10 @@ public class NullTaskDateException extends DukeException {
 
         switch (command) {
         case "deadline":
-            timeCommand = " using '/by [parsable date]'";
+            timeCommand = " using '/by YYYY-MM-DD'";
             break;
         case "event":
-            timeCommand = " using '/at [parsable date]'";
+            timeCommand = " using '/at YYYY-MM-DD'";
             break;
         default:
             timeCommand = "";

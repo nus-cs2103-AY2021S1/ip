@@ -56,6 +56,7 @@ public class Parser {
         switch (commandWord) {
         case "bye":
         case "list":
+        case "help":
             break;
         case "done":
         case "delete":
@@ -66,7 +67,13 @@ public class Parser {
             }
             break;
         case "update":
-            parseForUpdates(words[1].trim());
+            try {
+                parseForUpdates(words[1].trim());
+            } catch (DukeException e) {
+                throw e;
+            } catch (Exception e) {
+                throw new NullIndexException(commandWord);
+            }
             break;
         case "todo":
         case "deadline":
@@ -122,9 +129,8 @@ public class Parser {
     }
 
     private void parseForUpdates(String trim) throws DukeException {
-        String[] updates = trim.split(" ", 3);
-
         try {
+            String[] updates = trim.split(" ", 3);
             parseForNumber(updates[0]);
             changeWord = updates[1];
 
