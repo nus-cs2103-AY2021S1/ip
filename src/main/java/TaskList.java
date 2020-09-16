@@ -16,6 +16,7 @@ public class TaskList {
      * @param input  description string of the task
      * @param type   a string to indicate the type/class of the task
      * @param byOrAt a date and time object to specify the timing of the task
+     * @return a string notification of successful saving
      */
     public static String write(String input, String type, DateAndTime byOrAt) {
 
@@ -44,14 +45,14 @@ public class TaskList {
             taskStorage.add(toBeAdded);
         }
         return "Got it. I've added this task: \n" + toBeAdded + "\n" +
-        "Now you have " + taskStorage.size() + " tasks in the list." ;
+                "Now you have " + taskStorage.size() + " tasks in the list.";
     }
 
     /**
      * Reads(prints) tasks stored in taskStorage.
      */
     public static String read() {
-        String starter = "Here are the tasks in your list:\n" ;
+        String starter = "Here are the tasks in your list:\n";
         StringBuilder content = new StringBuilder();
         for (int i = 0; i < taskStorage.size(); i++) {
             content.append(i + 1).append(".").append(taskStorage.get(i)).append("\n");
@@ -97,39 +98,41 @@ public class TaskList {
     }
 
     /**
+     * Check through the tasklist to spot any deadline tasks.
+     * If there are multiple deadlines, the nearest will be returned.
      *
-     * @return
+     * @return a string representation of the most urgent deadline task
      */
-    public static String remind(){
+    public static String remind() {
 
         ArrayList<Deadline> mostUrgent = new ArrayList<>();
 
-        for(Task task : TaskList.taskStorage){
+        for (Task task : TaskList.taskStorage) {
 
-            if(task instanceof Deadline){
+            if (task instanceof Deadline) {
 
-                 if(mostUrgent.isEmpty()){
-                     mostUrgent.add((Deadline) task);
-                 }
+                if (mostUrgent.isEmpty()) {
+                    mostUrgent.add((Deadline) task);
+                }
 
-                 if(((Deadline) task).compareTo(mostUrgent.get(0)) < 0){
-                     mostUrgent.remove(0);
-                     mostUrgent.add((Deadline) task);
-                 }
+                if (((Deadline) task).compareTo(mostUrgent.get(0)) < 0) {
+                    mostUrgent.remove(0);
+                    mostUrgent.add((Deadline) task);
+                }
 
-                 if(((Deadline) task).compareTo(mostUrgent.get(0)) == 0){
-                     if(task.description != mostUrgent.get(0).description) {
-                         mostUrgent.add((Deadline) task);
-                     }
-                 }
+                if (((Deadline) task).compareTo(mostUrgent.get(0)) == 0) {
+                    if (!task.description.equals(mostUrgent.get(0).description)) {
+                        mostUrgent.add((Deadline) task);
+                    }
+                }
             }
         }
 
-        if(mostUrgent.isEmpty()){
+        if (mostUrgent.isEmpty()) {
             return ("Nice ! No upcoming deadline :). ");
         }
 
-        String starter = "Your nearest deadline is: \n";
+        String starter = "Here is the nearest deadline(s) in your list: \n";
         StringBuilder content = new StringBuilder();
 
         for (Deadline deadline : mostUrgent) {

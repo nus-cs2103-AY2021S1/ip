@@ -2,7 +2,7 @@
  * Deadline class is a subclass of Task which holds information for this type of tasks with
  * a date and time (which is the deadline :) ).
  */
-public class Deadline extends Task implements Comparable<Deadline>{
+public class Deadline extends Task implements Comparable<Deadline> {
 
     protected DateAndTime by;
 
@@ -42,13 +42,14 @@ public class Deadline extends Task implements Comparable<Deadline>{
 
     /**
      * Overridden compareTo method to compare urgency in date and time for a deadline.
+     *
      * @param another the deadline task to compare with
      * @return -1 if urgency of this deadline is higher, 0 if equal and 1 if urgency of another
-     *     is higher
+     * is higher
      */
     @Override
-    public int compareTo(Deadline another){
-        if(!this.by.getDate().equals(another.by.getDate())){
+    public int compareTo(Deadline another) {
+        if (!this.by.getDate().equals(another.by.getDate())) {
             return this.by.getDate().compareTo(another.by.getDate());
         }
 

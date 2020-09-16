@@ -26,20 +26,21 @@ public class Duke extends Application {
     /**
      * Duke constructor to include a ui.
      */
-    public Duke(){
+    public Duke() {
         this.ui = new Ui();
     }
 
-    public Ui getUi(){
+    public Ui getUi() {
         return this.ui;
     }
 
     /**
      * Overridden start method, main entry point to GUI.
+     *
      * @param stage required stage to start
      */
     @Override
-    public void start(Stage stage){
+    public void start(Stage stage) {
 
         //Step 1. Setting up required components
         //The container for the content of the chat to scroll.
@@ -85,7 +86,7 @@ public class Duke extends Application {
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
 
-        AnchorPane.setLeftAnchor(userInput , 1.0);
+        AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
         //Step 3. Add functionality to handle user input.
@@ -104,6 +105,7 @@ public class Duke extends Application {
     /**
      * Iteration 1:
      * Creates a label with the specified text and adds it to the dialog container.
+     *
      * @param text String containing text to add
      * @return a label with the specified text that has word wrap enabled.
      */
@@ -138,7 +140,7 @@ public class Duke extends Application {
      */
     String getResponse(String input) {
 
-        return  this.ui.deal(input);
+        return this.ui.deal(input);
 
     }
 

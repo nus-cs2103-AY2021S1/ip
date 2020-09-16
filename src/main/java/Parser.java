@@ -28,11 +28,11 @@ public class Parser {
     public Parser() {
     }
 
-    public boolean isStarter(String input){
+    public boolean isStarter(String input) {
         return input.contains(STARTER);
     }
 
-    public boolean isReminder(String input){
+    public boolean isReminder(String input) {
         return input.contains(REMINDER);
     }
 

@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class TaskListTest {
 
     @Test
-    public void dummyTest(){
+    public void dummyTest() {
         assertEquals(2, 2);
     }
 
@@ -21,7 +21,7 @@ public class TaskListTest {
             exp.add(new ToDo("borrow book"));
             assertEquals(TaskList.taskStorage.toString(), exp.toString());
 
-        }catch (DukeException e){
+        } catch (DukeException e) {
             System.out.println(e.getMessage());
             throw e;
         }

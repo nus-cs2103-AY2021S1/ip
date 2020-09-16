@@ -15,6 +15,7 @@ public class Window extends Application {
 
     /**
      * Start the program as desired.
+     *
      * @param stage an anchoring point for the program
      */
     @Override

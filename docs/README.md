@@ -48,16 +48,96 @@ Nice! I have marked this task as done:
 ```
 
 Error Response :
-``````
+```I am afraid that it is not possible to delete an unknown task.```
 
-### `Keyword` - Describe action
+Note that the format of delete <seq number> operation is the same as done <seq number>.
 
-Describe action and its outcome.
+#### 3. `list` - Display all tasks in sequence
 
-Example of usage: 
+Example (User input command):
+```$xslt
+list
+```
 
-`keyword (optional arguments)`
+Expected Response :
+```
+Here are the tasks in your list:
+1.[E][✓] team meeting /at 2020-02-02 18:00 (at:
+2020 FEBRUARY 2 SUNDAY 18:00hr)
+2.[T][✓] borrow book
+```
 
-Expected outcome:
+If the list is empty, no tasks will be displayed following the sentence "Here are the tasks in your list:", although the sentence will still be displayed.
 
-`outcome`
+#### 4. `find <description>` - Search all tasks containing the description specified
+
+Example (User input command):
+```$xslt
+find borrow
+```
+
+Expected Response :
+```
+Here are the matching tasks in your list:
+1.[E][✓] borrow book from lib /at 2020-02-02 18:00 (at:
+2020 FEBRUARY 2 SUNDAY 18:00hr)
+2.[T][✓] borrow mask
+```
+
+If the list is empty, no tasks will be displayed following the sentence "Here are matching the tasks in your list:", although the sentence will still be displayed.
+
+#### 5. `reminder` - Display the nearest upcoming deadline(s)
+
+
+Example (User input command):
+```$xslt
+reminder 
+```
+
+Expected Response :
+```
+Here is the nearest deadline(s) in your list:
+1.[D][✘] borrow book from lib /at 2020-02-02 18:00 (at:
+2020 FEBRUARY 2 SUNDAY 18:00hr)
+```
+
+if there are no deadline tasks in the list, the response is:
+```
+Nice! No upcoming deadline :).
+```
+
+#### 6. `bye` - Display a goodbye message to and tell you to close the window
+
+Example (User input command):
+```$xslt
+bye 
+```
+
+Expected Response :
+```
+Bye. Hope to see you again soon! You can now close this window to quit me as a program.
+```
+
+#### 7. Exception Handling
+
+For all other commands that duke does not recognise, the default exception which is caused by illegal arguments will be thrown and the error message will be displayed.
+
+Expected Error Response
+
+```
+OOPS!!! I'm sorry, but I don't know what that means :-(
+```
+
+### Future Expansion Plan
+
+To further develop this software, some other functions and current features can be improved.
+
+They include:
+
+- Improve GUI to make it more appealing
+- Add check duplicate function
+- Add archive function
+
+among other.
+
+Hope you will have a good time using duke. 

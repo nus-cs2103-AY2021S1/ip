@@ -9,7 +9,7 @@ import java.util.Scanner;
  * so that the previous run's list will be available to users for reference.
  */
 public class Storage {
-;
+    ;
     private static final String home = "data";
 
     private static java.nio.file.Path path = java.nio.file.Paths.get(home, "duke.txt");
@@ -17,7 +17,9 @@ public class Storage {
     private static boolean directoryExists = java.nio.file.Files.exists(path);
 
     /**
-     * Retrieves stored tasks data from storage and print it for the user.
+     * Retrieve tasks stored from the duke.txt file on hard disk.
+     *
+     * @return a string representation of all tasks stored
      */
     public static String read() {
 
@@ -46,7 +48,7 @@ public class Storage {
 
                 while (sc.hasNextLine()) {
                     String item = sc.nextLine();
-                    i ++;
+                    i++;
                     String sequence = (i) + ".";
                     output = output + sequence + item + "\n";
 
