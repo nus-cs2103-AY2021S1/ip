@@ -1,5 +1,7 @@
 # User Guide
-
+Mocha is desktop app for managing tasks, optimized for use via a Command Line Interface (CLI) while having the benefits
+of a Graphical User Interface (GUI).
+ 
 ## Features 
 
 ### Creating a ToDo task : `todo`
