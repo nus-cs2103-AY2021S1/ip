@@ -42,6 +42,7 @@ public class Duke extends Application {
 
     public Duke(){
     }
+
     public Duke(String filePath) {
         //initialise ui and storage
         this.ui = new Ui();
@@ -49,7 +50,6 @@ public class Duke extends Application {
 
         //load the storage file into task list
         if (this.storage.load().isEmpty()) {
-
             // create new task list if empty file
             this.tasks = new TaskList();
         }else{
@@ -75,13 +75,42 @@ public class Duke extends Application {
         //The container for the content of the chat to scroll.
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
-        scrollPane.setContent(dialogContainer);
-
         userInput = new TextField();
-        Button sendButton = new Button("Send");
 
+        Button sendButton = new Button("Send");
         AnchorPane mainLayout = new AnchorPane();
+        Scene scene = new Scene(mainLayout);
+
+        setMainLayout(mainLayout, sendButton);
+
+        setDialogContainer();
+
+        setStage(stage, scene);
+
+        setScrollPane();
+
+        setUserInput();
+
+        setSendButton(sendButton);
+
+        setAnchorPane(sendButton);
+
+    }
+
+    private void setMainLayout(AnchorPane mainLayout, Button sendButton){
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
+        mainLayout.setPrefSize(500.0, 700.0);
+    }
+
+    private void setUserInput(){
+        userInput.setPrefWidth(525.0);
+
+        userInput.setOnAction((event) -> {
+            handleUserInput();
+        });
+    }
+
+    private void setDialogContainer(){
 
         // KaTo greats user in the chat window
         Label dukeText = new Label("Hello, Ka To here, how can I serve you?");
@@ -89,53 +118,51 @@ public class Duke extends Application {
                 DialogBox.getDukeDialog(dukeText, duke, dukeBackground)
         );
 
-        Scene scene = new Scene(mainLayout);
+        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
+        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+
+    }
+
+    private void setStage(Stage stage, Scene scene){
         stage.setScene(scene);
         stage.show();
 
-        stage.setTitle("Duke");
+        stage.setTitle("KaTo Task Manager");
         stage.setResizable(false);
-        stage.setMinHeight(600.0);
-        stage.setMinWidth(400.0);
+        stage.setMinHeight(800.0);
+        stage.setMinWidth(600.0);
+    }
 
+    private void setScrollPane(){
 
-        mainLayout.setPrefSize(400.0, 600.0);
-
-        scrollPane.setPrefSize(385, 535);
+        scrollPane.setContent(dialogContainer);
+        scrollPane.setPrefSize(593, 785);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
         scrollPane.setVvalue(1.0);
         scrollPane.setFitToWidth(true);
+    }
 
-        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
-        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
-
-        userInput.setPrefWidth(325.0);
-
-        sendButton.setPrefWidth(55.0);
-
+    private void setAnchorPane(Button button){
         AnchorPane.setTopAnchor(scrollPane, 1.0);
 
-        AnchorPane.setBottomAnchor(sendButton, 1.0);
-        AnchorPane.setRightAnchor(sendButton, 1.0);
+        AnchorPane.setBottomAnchor(button, 1.0);
+        AnchorPane.setRightAnchor(button, 1.0);
 
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
+    }
 
-        //Part 3. Add functionality to handle user input.
+    private void setSendButton(Button sendButton){
+
+        sendButton.setPrefWidth(75.0);
+
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput();
         });
-
-        userInput.setOnAction((event) -> {
-            handleUserInput();
-        });
-
     }
-
-
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.

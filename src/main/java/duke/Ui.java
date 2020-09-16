@@ -42,6 +42,26 @@ public class Ui {
     }
 
     /**
+     * Prints out the food left: "apple"
+     */
+
+    public void replyFood() {
+        System.out.println("Ka To:");
+        System.out.println(" ");
+        System.out.println("Only an apple pie");
+    }
+
+    /**
+     * Prints out the allowance left in the account;
+     */
+
+    public void replyAllowance() {
+        System.out.println("Ka To:");
+        System.out.println(" ");
+        System.out.println("I have checked, it is 2000000 SGD");
+    }
+
+    /**
      * Prints out the current task list
      *
      * @param taskList Task List to be read and printed

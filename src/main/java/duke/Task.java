@@ -6,15 +6,16 @@ package duke;
  */
 
 public class Task {
+
     private int status;
     private int category;
     private String command;
+
     protected static int DONE = 1;
     protected static int DOING = 2;
     protected static int TASK_TODO = 1;
     protected static int TASK_DEADLINE = 2;
     protected static int TASK_EVENT = 3;
-
 
     public Task(int category, int status, String command) {
         this.category = category;

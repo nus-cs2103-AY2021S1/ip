@@ -15,7 +15,6 @@ public class GUI {
         return Message_Bye;
     }
 
-
     /**
      * Returns the current task list in a single string
      *

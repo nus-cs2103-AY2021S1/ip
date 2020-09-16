@@ -45,7 +45,6 @@ public class DialogBox extends HBox {
         // set background
         this.setBackground(backgroundImage);
         this.setAlignment(Pos.TOP_RIGHT);
-
         this.getChildren().addAll(label, circle);
     }
 
