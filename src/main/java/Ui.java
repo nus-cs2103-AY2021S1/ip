@@ -45,6 +45,7 @@ public class Ui {
                 "help \n" +
                 "list\n" +
                 "todo <taskName>\n" +
+                "done <index>\n" +
                 "deadline/weekly <taskName> /by 2/12/2019 1800\n" +
                 "find <taskName>\n"+
                 "delete <weeklyTaskIndex> \n " +
