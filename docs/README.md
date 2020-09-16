@@ -1,6 +1,6 @@
 # Duke User Guide
 
-Duke is a desktop app for managing tasks, optimized for user via a Command
+Duke is a desktop app for managing tasks, optimized for use via a Command
 Line Interface (CLI) while still having the benefits of a Graphical User
 Interface (GUI). If you can type fast, Duke can get your tasks managed faster
 than traditional GUI apps.
@@ -15,7 +15,7 @@ than traditional GUI apps.
 4. Double-click the file to start the app. The GUI similar to the one below should appear
 in a few seconds.
 
-![Duke app](/Screenshot (279).png)
+![Duke app](Screenshot (279).png)
 
 ## Features
 
