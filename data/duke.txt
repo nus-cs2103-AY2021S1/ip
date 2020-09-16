@@ -1,8 +1,5 @@
-T | 1 |  CS3230 Project | CS3230
-D | 0 |  Finish CS2103 Homework | 2020-09-16 | CS2103
-E | 1 |  Maplestory Event | 9pm | 
-D | 0 |  Submit CS2100 Assignment | 2020-09-20 | CS2100
-E | 1 |  News | 10pm | Family
-T | 0 |  Have Breakfast | happy
-D | 0 |  Submit Assignment | 2020-09-20 | 
-E | 0 |  Have Lunch | 12 tomorrow | 
+T | 0 |  a | 
+T | 0 |  b | 
+T | 0 |  c | 
+T | 0 |  a | 
+T | 0 |  b | 

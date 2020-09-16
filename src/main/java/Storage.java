@@ -12,7 +12,6 @@ import java.util.Scanner;
 public class Storage { //deals with loading task and saving task in file
 
     private String filePath;
-    private File file;
 
     /**
      * Creates a new Storage object. Storage is initialised with filepath passed from Bot.java.
@@ -24,22 +23,12 @@ public class Storage { //deals with loading task and saving task in file
      */
     public Storage(String filePath) {
         this.filePath = filePath;
-
         try {
-            File myFile = new File(filePath);
-            boolean exists = myFile.exists();
-            if (!exists) {
-                myFile.createNewFile();
-                this.file = myFile;
-                System.out.println("new duke.txt created");
-            } else if (exists) {
-                this.file = myFile;
-                System.out.println("file exists");
-            } else {
-                throw new IOException();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+            File file = new File(filePath);
+            file.getParentFile().mkdir();
+            file.createNewFile();
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
         }
     }
 
@@ -55,7 +44,8 @@ public class Storage { //deals with loading task and saving task in file
     public ArrayList<Listing> load() {
         ArrayList<Listing> list = new ArrayList<>();
         try {
-            Scanner sc = new Scanner(this.file);
+            File file = new File("data/duke.txt");
+            Scanner sc = new Scanner(file);
             while (sc.hasNextLine()) {
                 String[] details = sc.nextLine().split(" \\| ");
                 switch (details[0]) {
@@ -98,7 +88,7 @@ public class Storage { //deals with loading task and saving task in file
      */
     public void save(ArrayList<Listing> list) {
         try {
-            FileWriter fileWriter = new FileWriter(filePath);
+            FileWriter fileWriter = new FileWriter("data/duke.txt");
             for (Listing listing : list) {
                 String[] details = listing.toArray();
                 String s = "";

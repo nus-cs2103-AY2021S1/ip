@@ -12,7 +12,7 @@ public class Bot {
 
     Printer printer = new Printer(); //ui
     Parser parser = new Parser();
-    Storage storage = new Storage("./data/duke.txt");
+    Storage storage = new Storage("data/duke.txt");
     TaskList taskList = new TaskList(storage.load());
     LocalDate localDate;
 
