@@ -82,7 +82,7 @@ public class Parser {
                 if (taskList.findListSize() < index) {
                     throw new InvalidRequestException("I could not find this task, please tell me a valid task index.");
                 }
-                if (index < 0) {
+                if (index <= 0) {
                     throw new InvalidRequestException("Task index is invalid, please tell me a valid one.");
                 }
 
@@ -103,7 +103,7 @@ public class Parser {
                 if (taskList.findListSize() < index) {
                     throw new InvalidRequestException("I could not find this task, please enter a valid task index.");
                 }
-                if (index < 0) {
+                if (index <= 0) {
                     throw new InvalidRequestException("Task index is invalid, please tell me a valid one.");
                 }
 

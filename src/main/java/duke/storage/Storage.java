@@ -26,7 +26,7 @@ public class Storage {
         taskList = taskList;
     }
 
-    private static final String FILE_PATH = "data/duke.txt";
+    private static final String FILE_PATH = "./duke.txt";
 
     public static void saveDataToFile(TaskList taskList) {
         try {

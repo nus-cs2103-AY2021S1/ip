@@ -22,6 +22,17 @@ public class Todo extends Task {
         return "T";
     }
 
+    public String[] toArray(){
+        String status;
+        if(this.isDone){
+            status = "1";
+        }else{
+            status = "0";
+        }
+        String[] result = new String[]{"T", status, this.name};
+        return result;
+    }
+
     /**
      * The toString method of Todo.
      *

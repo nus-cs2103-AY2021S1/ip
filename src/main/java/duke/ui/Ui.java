@@ -37,18 +37,19 @@ public class Ui {
 //        System.out.println("What can I do for you?");
 
         System.out.println("Hello!\n" +
-                "I'm Aqua, the (u̶s̶e̶l̶e̶s̶s̶ ̶b̶a̶k̶a̶) Goddess of water!\n" +
-                "Welcome to this parallel world where you (h̶a̶v̶e̶ ̶t̶o̶ ̶d̶o̶ ̶d̶e̶b̶u̶g̶g̶i̶n̶g̶ ̶7̶/̶2̶4̶)" +
+                "I'm Aqua, the (useless baka) Goddess of water!\n" +
+                "Welcome to this parallel world where you (have to do debugging 7/24)" +
                 "can go on an adventure and battle monsters!\n" +
-                "I'll help you track your missions until you defeat Devil King(C̶S̶2̶1̶0̶3̶T̶)!");
+                "I'll help you track your missions until you defeat Devil King(CS2103T)!");
     }
     public static String getGreeting() {
 
         String greeting = "Hello!\n" +
-                "I'm Aqua, the (u̶s̶e̶l̶e̶s̶s̶ ̶b̶a̶k̶a̶) Goddess of water!\n" +
-                "Welcome to this parallel world where you (h̶a̶v̶e̶ ̶t̶o̶ ̶d̶o̶ ̶d̶e̶b̶u̶g̶g̶i̶n̶g̶ ̶7̶/̶2̶4̶)" +
+                "I'm Aqua, the (useless baka) Goddess of water!\n" +
+                "Welcome to this parallel world where you (have to do debugging 7/24)" +
                 "can go on an adventure and battle monsters!\n" +
-                "I'll help you track your missions until you defeat Devil King(C̶S̶2̶1̶0̶3̶T̶)!";
+                "I'll help you track your missions until you defeat Devil King(CS2103T)!";
+
          return greeting;
     }
 
