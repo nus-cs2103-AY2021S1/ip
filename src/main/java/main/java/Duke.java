@@ -30,9 +30,9 @@ public class Duke extends Application{
     private Scene scene;
 
     private Image user = new Image(this.getClass().
-            getResourceAsStream("/image/DaUser.png"));
+            getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().
-            getResourceAsStream("/image/DaDuke.png"));
+            getResourceAsStream("/images/DaDuke.png"));
 
     public Duke() {
         ui = new Ui();
@@ -60,7 +60,6 @@ public class Duke extends Application{
      * launch the Duke application, initialize the robot.
      */
     public void run() {
-        ui.start();
         Parser parser = new Parser(tasks);
         parser.handleCommand();
         try {
@@ -97,9 +96,9 @@ public class Duke extends Application{
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
-        mainLayout.setPrefSize(400.0, 600.0);
+        mainLayout.setPrefSize(500.0, 800.0);
 
-        scrollPane.setPrefSize(385, 535);
+        scrollPane.setPrefSize(490, 750);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
@@ -108,9 +107,9 @@ public class Duke extends Application{
 
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
-        userInput.setPrefWidth(325.0);
+        userInput.setPrefWidth(425.0);
 
-        sendButton.setPrefWidth(55.0);
+        sendButton.setPrefWidth(68.0);
 
         AnchorPane.setTopAnchor(scrollPane, 1.0);
 
@@ -121,19 +120,21 @@ public class Duke extends Application{
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
         sendButton.setOnMouseClicked((event -> {
-            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-            userInput.clear();
+            handleUserInput();
         }));
 
         userInput.setOnAction((event -> {
-            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-            userInput.clear();
+            handleUserInput();
         }));
 
         dialogContainer.heightProperty().
                 addListener((observable -> scrollPane.setVvalue(1.0)));
 
         scene = new Scene(mainLayout);
+
+        Label greet = new Label(ui.greet());
+
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(greet, new ImageView(duke)));
 
         stage.setScene(scene);
         stage.show();
@@ -150,10 +151,14 @@ public class Duke extends Application{
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
-                new DialogBox(userText, new ImageView(user)),
-                new DialogBox(dukeText, new ImageView(duke))
+                DialogBox.getUserDialog(userText, new ImageView(user)),
+                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
         );
         userInput.clear();
+    }
+
+    private String getResponse(String input) {
+        return "Duke heard: " + input;
     }
 }
 

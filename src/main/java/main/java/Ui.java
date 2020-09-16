@@ -21,6 +21,10 @@ public class Ui {
         System.out.println("    ____________________________________________________________\n");
     }
 
+    public String greet() {
+        return "Hello from\n" + logo + "\n" + "     Hello! I'm Duke\n     What can I do for you?";
+    }
+
     /**
      * prints out the loading error message
      */
