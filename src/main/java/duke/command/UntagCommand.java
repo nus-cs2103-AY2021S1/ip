@@ -24,16 +24,24 @@ public class UntagCommand extends Command {
         int taskIndex = Integer.parseInt(str);
 
         Task task = duke.getTaskList().getTask(taskIndex);
-        task.setTag(Task.NO_TAG);
 
-        response(task, duke);
+        boolean wasTagged;
+
+        if (task.getTag().equals(Task.NO_TAG)) {
+            wasTagged = false;
+        } else {
+            wasTagged = true;
+            task.setTag(Task.NO_TAG);
+        }
+
+        response(task, wasTagged, duke);
     }
 
-    private void response(Task task, Duke duke) {
+    private void response(Task task, boolean wasTagged, Duke duke) {
         if (duke.getState().getUseGui()) {
-            duke.getGuiResponse().reportUntagTask(task);
+            duke.getGuiResponse().reportUntagTask(task, wasTagged);
         } else {
-            duke.getUiResponse().reportUntagTask(task);
+            duke.getUiResponse().reportUntagTask(task, wasTagged);
         }
     }
 

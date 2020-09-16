@@ -163,9 +163,13 @@ public class GuiResponse {
      * Reports that the task has been untagged.
      * @param task the untagged task
      */
-    public void reportUntagTask(Task task) {
+    public void reportUntagTask(Task task, boolean wasTagged) {
         resetResponse();
 
-        response.append("The tag of " + task.getDescription() + " has been removed.");
+        if (wasTagged) {
+            response.append("The tag of " + task.getDescription() + " has been removed.");
+        } else {
+            response.append(task.getDescription() + " was already untagged.");
+        }
     }
 }

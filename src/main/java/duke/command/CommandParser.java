@@ -34,7 +34,7 @@ public class CommandParser {
 
         String[] inputParts = inputLine.split(" ", 2);
         splitParts[0] = inputParts[0];
-        splitParts[1] = inputParts.length == 2 ? inputParts[1] : "";
+        splitParts[1] = inputParts.length == 2 ? inputParts[1].trim() : "";
 
         return splitParts;
     }
