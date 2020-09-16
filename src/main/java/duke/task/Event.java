@@ -37,10 +37,8 @@ public class Event extends Task {
     public Event(String taskDescription) throws DukeException {
         super(taskDescription.split(SPLITTER)[0]);
         String[] details = taskDescription.split(SPLITTER);
-        if (details.length < NUM_FIELDS_DESCRIPTION) {
-            throw new DukeException("Please specify a timing!");
-        } else if (details.length > NUM_FIELDS_DESCRIPTION) {
-            throw new DukeException("Please follow the format of \"{task} /at {event}\"");
+        if (details.length != NUM_FIELDS_DESCRIPTION) {
+            throw new DukeException("Please follow the format of \"{task} /at {event timing}\"");
         }
         processEventTimingString(taskDescription.split(SPLITTER)[1]);
     }

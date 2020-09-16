@@ -35,9 +35,7 @@ public class Deadline extends Task {
     public Deadline(String taskDescription) throws DukeException {
         super(taskDescription.split(SPLITTER)[0]);
         String[] details = taskDescription.split(SPLITTER);
-        if (details.length < NUM_FIELDS_DESCRIPTION) {
-            throw new DukeException("Please specify a deadline!");
-        } else if (details.length > NUM_FIELDS_DESCRIPTION) {
+        if (details.length != NUM_FIELDS_DESCRIPTION) {
             throw new DukeException("Please follow the format of \"{task} /by {deadline}\"");
         }
 

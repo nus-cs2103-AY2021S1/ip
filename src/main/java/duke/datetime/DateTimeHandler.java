@@ -14,7 +14,7 @@ import duke.util.Pair;
 public class DateTimeHandler {
 
     /** String representing standard datetime format used */
-    public static final String STANDARD_DATETIME_FORMAT_STRING = "dd-MM-uuuu HHmm";
+    public static final String STANDARD_DATETIME_FORMAT_STRING = "dd-MM-yyyy HHmm";
     /** String representing standard time format */
     public static final String STANDARD_2400_FORMAT_STRING = "HHmm";
     /** DateTimeFormatter object of standard datetime format */

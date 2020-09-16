@@ -56,10 +56,9 @@ public class DeleteCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        if (itemIndex > taskList.size()) {
-            throw new DukeException("No such item on the list!");
-        } else if (itemIndex <= 0) {
-            throw new DukeException("Please enter a valid number between 0 and " + taskList.size());
+        boolean isValidIndex = itemIndex <= taskList.size() && itemIndex > 0;
+        if (!isValidIndex) {
+            throw new DukeException("Please enter a valid number between 1 and " + taskList.size());
         }
 
         Task removedTask = taskList.remove(itemIndex);

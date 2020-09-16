@@ -11,7 +11,7 @@ public class DukeException extends Exception {
      * @param description description of the type of error encountered.
      */
     public DukeException(String description) {
-        super("OOPS!!! " + description);
+        super("Oh no! " + description);
     }
 
 }
