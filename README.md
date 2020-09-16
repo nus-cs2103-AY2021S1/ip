@@ -5,7 +5,7 @@
 programming language. The app uses the Command Line Interface (CLI), accompanied with a Graphical User 
 Interface (GUI).
 
-![](/docs/Ui.png)
+![](/docs/Ui.png?s=500)
 
 ## User Guide
 The user guide can be found [here](https://wakululuu.github.io/ip/).
