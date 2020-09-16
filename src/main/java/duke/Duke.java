@@ -102,7 +102,6 @@ public class Duke extends Application {
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(Ui.introduction(), duke));
-        System.out.println("reached here");
         scrollPane.setContent(dialogContainer);
         userInput = new TextField();
         sendButton = new Button("Send");
