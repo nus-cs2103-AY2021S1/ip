@@ -77,7 +77,7 @@ public class Ui {
         return "The following commands are supported:\n"
                 + " 1. todo [task description]\n"
                 + " 2. deadline [task description] /by [time]\n"
-                + " 3. event [task description] /by [time]\n"
+                + " 3. event [task description] /at [time]\n"
                 + " 4. list\n"
                 + " 5. delete [index]\n"
                 + " 6. done [index]\n"

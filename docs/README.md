@@ -168,7 +168,7 @@ Expected outcome:
 The following commands are supported:
  1. todo [task description]
  2. deadline [task description] /by [time]
- 3. event [task description] /by [time]
+ 3. event [task description] /at [time]
  4. list
  5. delete [index]
  6. done [index]
