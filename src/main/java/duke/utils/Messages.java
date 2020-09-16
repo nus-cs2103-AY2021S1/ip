@@ -9,6 +9,7 @@ public class Messages {
     public static final String MESSAGE_WELCOME = "Hello! I'm Duke\nWhat can I do for you?";
     public static final String MESSAGE_GOODBYE = "Bye. Hope to see you again soon!";
     public static final String MESSAGE_TASK_LISTED_OVERVIEW_FORMAT = "Now you have %1$d tasks in the list.";
+    public static final String MESSAGE_STATISTICS = "You have completed %1$d out of %2$d tasks.\nKeep it up!!";
 
     public static final String MESSAGE_INVALID_COMMAND = "Unknown command! Type 'help' if you are lost.\n";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";

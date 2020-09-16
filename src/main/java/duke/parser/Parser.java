@@ -20,6 +20,7 @@ import duke.commands.FindCommand;
 import duke.commands.HelpCommand;
 import duke.commands.IncorrectCommand;
 import duke.commands.ListCommand;
+import duke.commands.StatCommand;
 import duke.utils.Messages;
 
 /**
@@ -88,6 +89,9 @@ public class Parser {
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
+
+        case StatCommand.COMMAND_WORD:
+            return new StatCommand();
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
