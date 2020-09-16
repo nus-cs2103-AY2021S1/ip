@@ -25,10 +25,14 @@ tasks management done faster than traditional GUI apps.
 
 ## Quick start
 1. Ensure you have Java `11` or above installed in your Computer.  
+
 2. Download the latest `Mushy.jar` from [here](https://github.com/GabrielTeo/ip/releases/tag/A-Release)  
+
 3. Copy the file to the folder you want to use as the *home folder* for your Mushy program.  
+
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds.  
 ![welcome page](welcome.png)  
+
 5. Type the command in the command box and press Enter to execute it.  
 e.g. typing `help` and pressing Enter will display a list of commands.  
 Some example commands you can try:
@@ -37,6 +41,7 @@ Some example commands you can try:
    Adds a todo task named `meet friend` to the task list.
    * **`delete`**`3` : Deletes the 3rd task shown in the current list.
    * **`bye`** : Exits the app.  
+
 6. Refer to the [Features](#features) below for details of each command.
 
 ---
@@ -45,10 +50,13 @@ Some example commands you can try:
 > ℹ️  **Notes about the command format:**
 > - Words in `UPPER_CASE` are the parameters to be supplied by the user.  
 > e.g. in `todo DESCRIPTION`, `DESCRIPTION` is a parameter which can be used as `todo meet friend`.  
+>
 > - Items in square brackets are optional.  
 > e.g. `deadline DESCRIPTION /by DATE [TIME]` can be used as `deadline book report /by 15/9/2020` or as `deadline book report /by 15/9/2020 2359`  
+>
 > - Items with `...` after them can be used one or multiple times.  
 > e.g. `find KEYWORD...` can be used as `find read` or `find read book`.  
+>
 > - Order of parameters must be fixed.  
 > e.g. if the command specifies `event DESCRIPTION /at PERIOD`, `event /at PERIOD DESCRIPTION` is **not** acceptable.
 
