@@ -64,11 +64,11 @@ Example of usage:
 Expected outcome:
 
 `1. [T][✘] wash clothes`  
-`   Tags: No tags yet`  
+`Tags: No tags yet`  
 `2. [D][✘] homework (by: 20 Sep 2020, 18:00)`  
-`   Tags: No tags yet`  
+`Tags: No tags yet`  
 `3. [E][✘] company retreat (at: 30 Sep 2020)`  
-`   Tags: No tags yet`
+`Tags: No tags yet`
 
 ### Tag a task - `tag`
 Format: `tag TASK_INDEX TAGS...`
