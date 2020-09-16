@@ -1,16 +1,23 @@
 # Duke Chatbot User Guide
 
 
-1. [**Introduction**](Introduction)
-2. [**Quick Start**](Quick Start)
+1. [**Introduction**](#Introduction)
+2. [**Quick Start**](#Quick Start)
 3. [**Features**](#Features)
-    1. [Listing all tasks: `list`](Listing all tasks: `list`)
-    2. [Adding a task: `add`](Adding a task: `add`)
-    3. [Marking a task as done: `done`](Marking a task as done: `done`)
-    4. [Deleting a task: `delete`](Deleting a task: `delete`)
-    5. [Finding tasks by name: `find`](Finding tasks by name: `find`) 
-    6. [Exiting the program: `bye`](Exiting the program: `bye`)   
-    7. [Saving/loading data](Saving/loading data)   
+
+    3.1. [Listing all tasks: `list`](#1.Listing all tasks: `list`)
+    
+    3.2. [Adding a task](#2.Adding a task)
+    
+    3.3. [Marking a task as done: `done`](#3.Marking a task as done: `done`)
+    
+    3.4. [Deleting a task: `delete`](#4.Deleting a task: `delete`)
+    
+    3.5. [Finding tasks by name: `find`](#5.Finding tasks by name: `find`) 
+    
+    3.6. [Exiting the program: `bye`](#6.Exiting the program: `bye`)   
+    
+    3.7. [Saving/loading data](#7.Saving/loading data)   
 
 ## Introduction
 Welcome to the Duke Chatbot User Guide! Duke Chatbot are for users who prefer to use a desktop application for their task management. Duke Chatbot is optimised for users who prefer to use the Command Line Interface (CLI) while reaping the visual benefits of a Graphical User Interface (GUI).
@@ -33,7 +40,7 @@ Duke Chatbot has several features to help you manage your tasks. Sounds interest
 
 ## Features 
 
-3.1 [Listing all tasks: `list`](Listing all tasks: `list`)
+##### 1. Listing all tasks: `list`
 
 List all of your tasks.
 
@@ -41,7 +48,7 @@ Format: `list`
 
 <img src="https://github.com/AaronnSeah/ip/blob/master/src/main/resources/images/list.png" width="400">
 
-3.2 [Adding a task: `add`](Adding a task: `add`)
+##### 2. Adding a task: `add`
 
 Add a new task.
 
@@ -70,7 +77,7 @@ Adding a Deadline Task
 
 <img src="https://github.com/AaronnSeah/ip/blob/master/src/main/resources/images/deadline.png" width="400">
 
-3.3 [Marking a task as done: `done`](Marking a task as done: `done`)
+##### 3. #Marking a task as done: `done`
 
 Mark the task to be done.
 
@@ -84,7 +91,7 @@ The <task number> is the number ordering in the list for the task you would like
 
 <img src="https://github.com/AaronnSeah/ip/blob/master/src/main/resources/images/done.png" width="400">
 
-3.4 [Deleting a task: `delete`](Deleting a task: `delete`)
+##### 4. Deleting a task: `delete`
 
 Deletes a task from the application.
 
@@ -99,7 +106,7 @@ The <task number> is the number ordering in the list for the task you would like
 <img src="https://github.com/AaronnSeah/ip/blob/master/src/main/resources/images/delete.png" width="400">
 
 
-3.5 [Finding tasks by name: `find`](Finding tasks by name: `find`) 
+##### 5. Finding tasks by name: `find`
 Find tasks by name.
 Format: `find <keyword>`
 The order of tasks that appear (if it is non-empty) is as follows:
@@ -110,13 +117,13 @@ The order of tasks that appear (if it is non-empty) is as follows:
 <img src="https://github.com/AaronnSeah/ip/blob/master/src/main/resources/images/find.png" width="400">
 
 
-3.6 [Exiting the program: `bye`](Exiting the program: `bye`) 
+##### 6. Exiting the program: `bye`
 
 Exits the application.
 
 Format: `bye`
   
-3.7 [Saving/loading data](Saving/loading data)   
+##### 7. Saving/loading data
 
 The tasks you have entered will be loaded on the application start up.
 
