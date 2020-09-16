@@ -46,7 +46,7 @@ public class DeadlineTest {
             new Deadline(input2);
             fail();
         } catch (Exception e) {
-            assertTrue(e.getMessage().contains("Please specify a deadline!"));
+            assertTrue(e.getMessage().contains("Please follow the format "));
         }
     }
 
