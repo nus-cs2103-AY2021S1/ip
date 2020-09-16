@@ -8,8 +8,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-import java.io.FileNotFoundException;
-
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -25,8 +23,8 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/ethan.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/anotherEthan.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/dukeUser.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/dukeBot.png"));
 
     @FXML
     public void initialize() {
@@ -43,7 +41,7 @@ public class MainWindow extends AnchorPane {
      * the dialog container. Clears the user input after processing.
      */
     @FXML
-    private void handleUserInput() throws FileNotFoundException, DukeException {
+    private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponseGui(input);
         dialogContainer.getChildren().addAll(
@@ -54,7 +52,7 @@ public class MainWindow extends AnchorPane {
     }
 
     private void printIntro() {
-        DialogBox intro = DialogBox.getDukeDialog("Hello from Duke! What can I do for you?", new Image(this.getClass().getResourceAsStream("/images/anotherEthan.png")));
+        DialogBox intro = DialogBox.getDukeDialog("Hello from Duke! What can I do for you?", new Image(this.getClass().getResourceAsStream("/images/dukeBot.png")));
         dialogContainer.getChildren().addAll(intro);
     }
 }
