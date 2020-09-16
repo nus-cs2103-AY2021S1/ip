@@ -7,7 +7,7 @@ Duke provides a fast and convenient way to keep track of all your tasks, events 
 
 ## Features 
 
-### [Viewing help](#viewing-help): `assist` 
+### [Viewing help](#help): `assist` 
 
 ### Adding a ToDo: `todo` 
 
@@ -27,7 +27,7 @@ Duke provides a fast and convenient way to keep track of all your tasks, events 
 
 ## Usage
 
-### Viewing help: `assist`
+### <a name="help"> Viewing help:</a> `assist`
 Shows a list of available commands. 
 
 Format: `assist`
