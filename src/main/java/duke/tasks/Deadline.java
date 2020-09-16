@@ -9,10 +9,10 @@ import duke.DukeException;
 /**
  * Represents tasks that need to be done before a specific date.
  */
-public class Deadline extends Task{
+public class Deadline extends Task {
     private char type = 'D';
     private LocalDate date;
-    private final String BY = "to be digested by: ";
+    private final String by = "to be digested by: ";
 
     /**
      * Creates a Deadline instance.
@@ -32,7 +32,7 @@ public class Deadline extends Task{
 
     @Override
     public String toString() {
-        return String.format("[%c]%s %s%s", type, super.toString(), BY,
+        return String.format("[%c]%s %s%s", type, super.toString(), by,
                 date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")));
     }
 

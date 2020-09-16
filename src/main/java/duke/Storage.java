@@ -48,10 +48,10 @@ public class Storage {
             try {
                 fileStats.createNewFile();
                 FileWriter fw = new FileWriter(this.fileStats);
-                fw.write( "0\n0\n0");
+                fw.write("0\n0\n0");
                 fw.close();
             } catch (IOException e) {
-                    throw new DukeException("Unable to create statistics file...");
+                throw new DukeException("Unable to create statistics file...");
             }
         }
     }

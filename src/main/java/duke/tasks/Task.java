@@ -31,6 +31,11 @@ public class Task {
 
     }
 
+    /**
+     * Returns a string in a custom format that represent the task to be saved in local file.
+     *
+     * @return A string in a custom format that represent the task to be saved.
+     */
     public String saveToString() {
         int check = isDone ? 1 : 0;
         return String.format("%d | %s", check, task);

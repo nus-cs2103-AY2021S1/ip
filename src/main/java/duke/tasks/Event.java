@@ -12,7 +12,7 @@ import duke.DukeException;
 public class Event extends Task {
     private char type = 'E';
     private LocalDate date;
-    private final String AT = "to be digested at: ";
+    private final String at = "to be digested at: ";
 
     /**
      * Creates an Event instance.
@@ -32,7 +32,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return String.format("[%c]%s %s%s", type, super.toString(), AT,
+        return String.format("[%c]%s %s%s", type, super.toString(), at,
                 date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")));
     }
 

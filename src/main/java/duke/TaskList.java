@@ -32,14 +32,18 @@ public class TaskList {
      * @return A string representation of all the current tasks.
      */
     public String listAllTasks() {
-        String res = "";
-        for (int i = 0; i < taskList.size(); i++) {
-            res += String.format("%d. %s", i + 1, taskList.get(i));
-            if (i < taskList.size() - 1) {
-                res += "\n";
+        if (taskList.size() <= 0) {
+            return "There's nothing in my stomach right now :c";
+        } else {
+            String res = "";
+            for (int i = 0; i < taskList.size(); i++) {
+                res += String.format("%d. %s", i + 1, taskList.get(i));
+                if (i < taskList.size() - 1) {
+                    res += "\n";
+                }
             }
+            return res;
         }
-        return res;
     }
 
     /**
