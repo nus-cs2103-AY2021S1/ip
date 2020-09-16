@@ -1,4 +1,8 @@
-package duke;
+package duke.logic;
+
+import duke.exception.DukeException;
+import duke.exception.ErrorMessage;
+import duke.task.Task;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

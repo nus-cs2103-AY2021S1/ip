@@ -1,4 +1,6 @@
-package duke;
+package duke.ui;
+
+import duke.logic.Duke;
 
 import java.io.IOException;
 
@@ -22,6 +24,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            stage.setTitle("Duke");
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
         } catch (IOException e) {

@@ -1,5 +1,7 @@
-package duke;
+package duke.logic;
 
+import duke.command.Command;
+import duke.exception.DukeException;
 
 /**
  * Represents the Duke bot, which has a task list, a storage space and a user interface.
