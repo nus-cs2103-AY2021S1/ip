@@ -13,10 +13,9 @@ let the _Capo_, ***Vito Corleone*** know and he'll make sure you don't miss it.
 ![firstimg](../src/main/resources/images/godfather3.png)
 
 
-Here's how someone might use ***The Godfather***: 
+Here's how someone might use ***The Godfather***:
+ 
 ![Interaction Gif](./screenshots/interaction.gif)
-
-
 
 
 
@@ -43,6 +42,10 @@ Here's how someone might use ***The Godfather***:
     - [`find SEARCH_TERM` - Describe action](#find-search_term---describe-action)
   - [Deleting your Tasks](#deleting-your-tasks)
     - [`delete TASK_ID` - deletes specified task](#delete-task_id---deletes-specified-task)
+  - [Saving your Data](#saving-your-data)
+- [How it Works](#how-it-works)
+- [Coming Soon!](#coming-soon)
+- [Acknowledgements](#acknowledgements)
 
 # Features 
 Below are some features that ***Godfather*** supports. You may type out commands in any case you wish. He understands that
@@ -213,10 +216,10 @@ Deletes a single task of that ID.
 your data will still be safe.
 
 # How it Works
-
 todo
 
 # Coming Soon!
+todo
 
 # Acknowledgements
 
@@ -225,6 +228,6 @@ todo
 * Gifs cropped from [this online tool](http://gifgifs.com/crop/)
 * Background GIF taken from [Christian Blanchard](http://christianblanchard.com/hs-cinemagraph/)
 * Marilyn Monroe's picture from [PNG Guru](https://www.pngguru.com/free-transparent-background-png-clipart-zpbso)
-* Marlon Brado's picture from [??? todo](https://example.com)
+* Marlon Brando's picture from [??? todo](https://example.com)
  
 
