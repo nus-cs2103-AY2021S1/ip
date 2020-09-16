@@ -33,6 +33,14 @@ public class Task {
     }
 
     /**
+     * Returns true if isDone is true.
+     * @return true if isDone is true.
+     */
+    public boolean isDone() {
+        return this.isDone;
+    }
+
+    /**
      * Sets the task as done.
      */
     public void setDone() {

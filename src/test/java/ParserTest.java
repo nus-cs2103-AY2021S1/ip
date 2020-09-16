@@ -22,7 +22,8 @@ public class ParserTest {
      */
     @Test
     public void runTodoTest() throws DukeException {
-        Parser.run("todo reading");
+        Parser.run(CommandString.CLEAR).process();
+        Parser.run("todo reading").process();
         Parser.reloadTaskList();
         Task expected = new Todo("reading");
         boolean isExist = false;
@@ -35,7 +36,7 @@ public class ParserTest {
             }
         }
 
-        Parser.run(CommandString.CLEAR);
+        Parser.run(CommandString.CLEAR).process();
         assertTrue(isExist);
     }
 
@@ -44,7 +45,7 @@ public class ParserTest {
      */
     @Test
     public void runDeadlineTest() throws DukeException {
-        Parser.run("deadline eating /by 2020-08-30");
+        Parser.run("deadline eating /by 2020-08-30").process();
         Task expected = new Deadline("eating", new Time("2020-08-30").toString());
         boolean isExist = false;
 
@@ -56,7 +57,7 @@ public class ParserTest {
             }
         }
 
-        Parser.run(CommandString.CLEAR);
+        Parser.run(CommandString.CLEAR).process();
         assertTrue(isExist);
     }
 
@@ -65,7 +66,7 @@ public class ParserTest {
      */
     @Test
     public void runEventTest() throws DukeException {
-        Parser.run("event working /by 2020-08-30");
+        Parser.run("event working /by 2020-08-30").process();
         Task expected = new Event("working", new Time("2020-08-30").toString());
         boolean isExist = false;
 
@@ -77,7 +78,7 @@ public class ParserTest {
             }
         }
 
-        Parser.run(CommandString.CLEAR);
+        Parser.run(CommandString.CLEAR).process();
         assertTrue(isExist);
     }
 
@@ -86,19 +87,14 @@ public class ParserTest {
      */
     @Test
     public void runDeleteTest() throws DukeException {
-        Parser.run(CommandString.CLEAR);
-        Parser.run("event working /by 2020-08-30");
-        Parser.run("delete 1");
-        Task expected = new Event("working", new Time("2020-08-30").toString());
-        boolean isDeleted = true;
+        Parser.run(CommandString.CLEAR).process();
+        Parser.run("event working /by 2020-08-30").process();
+        Parser.run("delete 1").process();
+        boolean isDeleted = false;
 
+        Parser.reloadTaskList();
         int size = Parser.getTaskList().getTaskList().size();
-        for (int i = 0; i < size; i++) {
-            Task currentTask = Parser.getTaskList().getTaskList().get(i);
-            if (currentTask.toString().equals(expected.toString())) {
-                isDeleted = false;
-            }
-        }
+        isDeleted = size == 0;
 
         assertTrue(isDeleted);
     }
@@ -108,22 +104,16 @@ public class ParserTest {
      */
     @Test
     public void runDoneTest() throws DukeException {
-        Parser.run(CommandString.CLEAR);
-        Parser.run("event working /by 2020-08-30");
-        Parser.run("done 1");
-        Task expected = new Event("working", new Time("2020-08-30").toString());
-        expected.setDone();
+        Parser.run(CommandString.CLEAR).process();
+        Parser.run("event working /on 2020-08-30").process();
+        Parser.run("done 1").process();
         boolean isDone = false;
 
-        int size = Parser.getTaskList().getTaskList().size();
-        for (int i = 0; i < size; i++) {
-            Task currentTask = Parser.getTaskList().getTaskList().get(i);
-            if (currentTask.toString().equals(expected.toString())) {
-                isDone = true;
-            }
-        }
+        Parser.reloadTaskList();
+        Task task = Parser.getTaskList().getTaskList().get(0);
+        isDone = task.isDone();
 
-        Parser.run(CommandString.CLEAR);
+        Parser.run(CommandString.CLEAR).process();
         assertTrue(isDone);
     }
 

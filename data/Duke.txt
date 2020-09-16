@@ -1,3 +1,0 @@
-[D][?] t p (by: Wednesday_Sep_16_2020_23:59)
-[T][?] CS2103T lesson
-[E][?] lesson (on: Thursday_Sep_17_2020_16:00)

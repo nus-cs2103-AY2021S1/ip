@@ -61,7 +61,7 @@ public class FormatTest {
      */
     @Test
     public void formatStringToTaskTest2() throws DukeException {
-        String string = "[D][✘] eating (by: Aug_30_2020)";
+        String string = "[D][✘] eating (by: Sunday_Aug_30_2020_00:00)";
         Task expected = new Deadline("eating", new Time("2020-08-30").toString());
         Task deadline = Format.decodeTask(string);
         assertEquals(deadline.toString(), expected.toString());
@@ -73,7 +73,7 @@ public class FormatTest {
      */
     @Test
     public void formatStringToTaskTest3() throws DukeException {
-        String string = "[E][✘] eating (at: Aug_30_2020)";
+        String string = "[E][✘] eating (at: Sunday_Aug_30_2020_00:00)";
         Task expected = new Event("eating", new Time("2020-08-30").toString());
         Task event = Format.decodeTask(string);
         assertEquals(event.toString(), expected.toString());
