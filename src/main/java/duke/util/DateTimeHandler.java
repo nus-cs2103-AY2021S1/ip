@@ -1,4 +1,4 @@
-package duke;
+package duke.util;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -20,12 +20,13 @@ public class DateTimeHandler {
         List<String> formatStrings = Arrays.asList("yyyy-MM-dd HHmm", "yyyy-MM-d HHmm", "dd/MM/yyyy HHmm",
                 "dd/M/yyyy HHmm", "d/MM/yyyy HHmm", "d/M/yyyy HHmm", "dd-MM-yyyy HHmm", "dd-M-yyyy HHmm",
                 "d-MM-yyyy HHmm", "d-M-yyyy HHmm");
-        try {
-            for (String formatString : formatStrings) {
+
+        for (String formatString : formatStrings) {
+            try {
                 return LocalDateTime.parse(dateString, DateTimeFormatter.ofPattern(formatString));
+            } catch (DateTimeParseException e) {
+                //dateString will not be interpreted to contain a Date and Time
             }
-        } catch (DateTimeParseException e) {
-            //dateString will not be interpreted to contain a Date and Time
         }
         return null;
     }
@@ -41,12 +42,13 @@ public class DateTimeHandler {
     public static LocalDate tryParseDate(String dateString) {
         List<String> formatStrings = Arrays.asList("yyyy-MM-dd", "yyyy-MM-d", "dd/MM/yyyy", "d/MM/yyyy",
                 "dd/M/yyyy", "d/M/yyyy", "dd-MM-yyyy", "dd-M-yyyy", "d-MM-yyyy", "d-M-yyyy");
-        try {
-            for (String formatString : formatStrings) {
+
+        for (String formatString : formatStrings) {
+            try {
                 return LocalDate.parse(dateString, DateTimeFormatter.ofPattern(formatString));
+            } catch (DateTimeParseException e) {
+                //dateString will not be interpreted to contain a Date
             }
-        } catch (DateTimeParseException e) {
-            //dateString will not be interpreted to contain a Date
         }
         return null;
     }

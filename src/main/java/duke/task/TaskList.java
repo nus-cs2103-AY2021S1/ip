@@ -1,4 +1,6 @@
-package duke;
+package duke.task;
+
+import duke.exception.DukeException;
 
 import java.util.List;
 import java.util.stream.Collectors;

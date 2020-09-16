@@ -1,4 +1,4 @@
-package duke;
+package duke.command;
 
 /**
  * Represents command type with input format.

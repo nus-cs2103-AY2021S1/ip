@@ -1,4 +1,9 @@
-package duke;
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.task.*;
+import duke.ui.Ui;
+import duke.util.Storage;
 
 /**
  * Represents an add command to add a task into the current list of stored tasks.

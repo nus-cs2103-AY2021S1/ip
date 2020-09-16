@@ -1,4 +1,8 @@
-package duke;
+package duke.command;
+
+import duke.task.TaskList;
+import duke.ui.Ui;
+import duke.util.Storage;
 
 /**
  * Represents a find command to find tasks which match a particular search description.

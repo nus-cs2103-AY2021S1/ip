@@ -1,18 +1,22 @@
-package duke;
+package duke.command;
+
+import duke.task.TaskList;
+import duke.ui.Ui;
+import duke.util.Storage;
 
 /**
- * Represents a list command to list the current stored tasks.
+ * Represents an exit command to exit the program.
  */
-public class ListCommand extends Command {
+public class ExitCommand extends Command {
 
     /**
-     * Initializes a list command.
+     * Initializes an exit command.
      */
-    public ListCommand() {
+    public ExitCommand() {
     }
 
     /**
-     * Lists the current stored tasks.
+     * Prints the exit message.
      *
      * @param taskList The existing task list.
      * @param ui       The UI instance which handles Duke's user interface.
@@ -20,7 +24,7 @@ public class ListCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.listStoredTasks(taskList.getStoredTasks());
+        ui.processClose();
     }
 
     /**
@@ -31,6 +35,6 @@ public class ListCommand extends Command {
      */
     @Override
     public boolean isInProgram() {
-        return true;
+        return false;
     }
 }

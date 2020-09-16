@@ -1,4 +1,4 @@
-package duke;
+package duke.task;
 
 /**
  * Represents task type with initial.

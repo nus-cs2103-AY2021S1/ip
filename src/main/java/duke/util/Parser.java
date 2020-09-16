@@ -1,4 +1,7 @@
-package duke;
+package duke.util;
+
+import duke.command.*;
+import duke.exception.DukeException;
 
 import java.util.Arrays;
 

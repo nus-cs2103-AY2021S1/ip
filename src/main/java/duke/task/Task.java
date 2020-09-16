@@ -1,4 +1,4 @@
-package duke;
+package duke.task;
 
 import java.util.Arrays;
 
@@ -60,7 +60,7 @@ public class Task {
      *
      * @return If Task is Done.
      */
-    protected boolean isDone() {
+    public boolean isDone() {
         return isDone;
     }
 

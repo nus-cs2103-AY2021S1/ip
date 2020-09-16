@@ -1,7 +1,9 @@
+package duke;
+
 import java.io.IOException;
 
-import duke.Duke;
-import duke.GraphicalUi;
+import duke.controllers.MainWindow;
+import duke.ui.GraphicalUi;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
