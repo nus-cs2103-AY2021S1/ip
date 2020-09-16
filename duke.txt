@@ -1,6 +1,8 @@
-deadline egges /by 7pm
+deadline egges /by  7pm
 done
-event something /at 2020/12/01
-todo babanna
-todo pen
-todo banana
+event something / /at 2020/12/01
+todo egg
+todo egg egg
+todo egg e
+deadline something /by 12
+event nothing /at 12

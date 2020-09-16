@@ -1,5 +1,7 @@
 package task;
 
+import duke.Parser;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -13,13 +15,12 @@ public class Deadline extends Task{
         if(line.isBlank()){
             throw new EmptyStringException("Deadline cannot be empty.");
         }
-        String[] command = line.split(" \\/by ");
-        this.item = command[0];
-        this.time = command[1];
+        String[] data = Parser.splitTime(line);
+        this.item = data[0];
+        this.time = data[1];
         this.isParsedDate = false;
         try {
-            DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy/MM/dd");
-            this.dateTime = LocalDate.parse(this.time, format);
+            dateTime = Parser.parseTime(this.time);
             this.isParsedDate = true;
         }
         catch (Exception e){

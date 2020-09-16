@@ -2,15 +2,26 @@ package duke;
 
 import task.Task;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /**
  * duke.Parser is a utility class that helps to decode duke.Duke text commands.
  */
 public class Parser {
     /**
-     * Utility method to extract time from the task
+     * Split time data from the task
      */
-    public static void parseTime(){
+    public static String[] splitTime(String line){
+        return line.split(" \\/by | \\/at ");
+    }
 
+    /**
+     * Parse time data from the task
+     */
+    public static LocalDate parseTime(String timeString){
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        return LocalDate.parse(timeString, format);
     }
 
     /**

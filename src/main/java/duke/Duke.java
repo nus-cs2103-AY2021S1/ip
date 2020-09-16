@@ -11,6 +11,7 @@ public class Duke {
     private TaskList taskList;
 
     private String executeBye(){
+        assert false;
         return "Bye. Hope to see you again soon!";
     }
 
