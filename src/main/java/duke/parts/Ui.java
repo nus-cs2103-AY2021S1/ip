@@ -49,7 +49,7 @@ public class Ui {
     public String showDelete(Task removed, int numLeft) {
         String taskLeft = printNumTask(numLeft);
         String output = "Task removed: " + "\n"
-                                + INDENT + removed.getOutput() + "\n"
+                                + removed.getOutput() + "\n"
                                 + taskLeft;
         System.out.println(output);
         return output;
@@ -66,7 +66,7 @@ public class Ui {
         String output = printNumTask(arrTask.size()) + "\n";
         output += "Here are the tasks in your list:\n";
         for (int i = 0; i < arrTask.size(); i++) {
-            output += String.format("%s%d. %s", INDENT, i + 1, arrTask.get(i).getOutput());
+            output += String.format("%d. %s", i + 1, arrTask.get(i).getOutput());
             if (i < arrTask.size() - 1) {
                 output += "\n";
             }
@@ -84,7 +84,7 @@ public class Ui {
      */
     public String printNew(Task task, String type, int numTask) {
         String output = String.format("Adding %s to the list:\n", type)
-                        + INDENT + String.format("%s\n", task.getOutput())
+                                + String.format("%s\n", task.getOutput())
                                 + printNumTask(numTask);
         System.out.println(output);
         return output;
@@ -102,7 +102,7 @@ public class Ui {
         } else {
             String output = "Here are the items that match\n";
             for (int i = 0; i < arr.size(); i++) {
-                output += String.format("%s%d) %s", INDENT, i + 1,
+                output += String.format("%d) %s", i + 1,
                         arr.get(i).getOutput()) + "\n";
             }
             System.out.println(output);
@@ -125,7 +125,7 @@ public class Ui {
      * @return Message for the user.
      */
     public String printDone(Task task) {
-        String output = "Nice! I've marked this task as done: \n" + INDENT;
+        String output = "Nice! I've marked this task as done: \n";
         output += task.getOutput();
         System.out.println(output);
         return output;
