@@ -11,7 +11,7 @@ public class Ui {
      */
     public static String showWelcome() {
         return "Hello, I'm Pico, no time to waste. "
-                + "\nLet's start started!"
+                + "\nLet's get started!"
                 + "\nWhat shall we do now?";
     }
 
