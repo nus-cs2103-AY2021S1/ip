@@ -20,7 +20,7 @@ Expected outcome:
 `[T][✘] wash clothes`  
 `Now you have 1 task(s) in your list.`
 
-###Add a new Deadline - `deadline`
+### Add a new Deadline - `deadline`
 Format: `deadline DESCRIPTION /by DATE [TIME]`
 
 Adds a new Deadline task to the list. This task requires minimally a date, and optionally
@@ -36,7 +36,7 @@ Expected outcome:
 `[D][✘] homework (by: 20 Sep 2020, 18:00)`  
 `Now you have 2 task(s) in your list.`
 
-###Add a new Event - `event`
+### Add a new Event - `event`
 Format: `event DESCRIPTION /at DATE [TIME]`
 
 Adds a new Event task to the list. This task requires minimally a date, and optionally
@@ -52,7 +52,7 @@ Expected outcome:
 `[E][✘] company retreat (at: 30 Sep 2020)`  
 `Now you have 3 task(s) in your list.`
 
-###List tasks - `list`
+### List tasks - `list`
 Format: `list`
 
 Prints out all tasks in the list, including the tags associated to the tasks.
@@ -70,7 +70,7 @@ Expected outcome:
 `3. [E][✘] company retreat (at: 30 Sep 2020)`  
 `   Tags: No tags yet`
 
-###Tag a task - `tag`
+### Tag a task - `tag`
 Format: `tag TASK_INDEX TAGS...`
 
 Adds provided tags (minimally 1) to a task at the specified `TASK_INDEX`. The index refers to the index
@@ -84,7 +84,7 @@ Expected outcome:
 
 `Alright, I have added the tags!`
 
-###Remove tags - `rmtag`
+### Remove tags - `rmtag`
 Format: `rmtag TASK_INDEX TAGS_TO_REMOVE...`
 
 Removes provided tags (minimally 1) from a task at the specified `TASK_INDEX`, if they exist. The index refers to the index
@@ -99,7 +99,7 @@ Expected outcome:
 `Done!`  
 `One or more tags provided do not exist in the task, so I skipped them.`
 
-###Mark task as done - `done`
+### Mark task as done - `done`
 Format: `done TASK_INDEX`
 
 Marks the task at the specified `TASK_INDEX` as done. The index refers to the index
@@ -114,7 +114,7 @@ Expected outcome:
 `Nice! I've marked this task as done:`  
 `[T][✓] wash clothes`
 
-###Delete a task - `delete`
+### Delete a task - `delete`
 Format: `delete TASK_INDEX`
 
 Deletes the task at the specified `TASK_INDEX` as done. The index refers to the index
@@ -129,7 +129,7 @@ Expected outcome:
 `Noted. I've removed this task:`  
 `[E][✘] company retreat (at: 30 Sep 2020)`
 
-###Find task(s) using keyword- `find`
+### Find task(s) using keyword- `find`
 Format: `find KEYWORD`
 
 Finds and prints tasks that contain the provided keyword in their description.
@@ -142,7 +142,8 @@ Expected outcome:
 
 `1. [T][✓] wash clothes`
 
-###Find task(s) using keyword - `find`
+### Find task(s) using keyword - `find`
+
 Format: `find KEYWORD`
 
 Finds and prints tasks that contain the provided keyword in their description.
@@ -155,20 +156,20 @@ Expected outcome:
 
 `1. [T][✓] wash clothes`
 
-###Exiting the program - `bye`
+### Exiting the program - `bye`
 Format: `bye`
 
 Exits the program. The program will close after a short delay.
 
-###Saving the data
+### Saving the data
 List data are saved in the hard disk automatically after any command that makes
 any changes in the task list.
 
-##Appendix
-###Date and time formats
+## Appendix
+### Date and time formats
 The accepted date and time formats in this app are listed below:
 
-Date:
+#### Date:
 
 | Format | Example |
 | ------- | -------- |
@@ -179,7 +180,7 @@ Date:
 
 The slashes ( / ) can be replaced with hyphens ( - ).
 
-Time:
+#### Time:
 
 | Format | Example |
 | ------ | ------- |
