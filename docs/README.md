@@ -31,9 +31,9 @@ The user can add new tasks into ZeldaBot. The tasks can be a :
 
 **Command:**
 
- **Todo** - todo 'todo <task details>'
-- **Deadline** - deadline '<task details>'/'<Date & Time in yyyy-mm-dd format>'
-- **Event** - event '<task details>'/'<Date & Time in yyyy-mm-dd format>'
+- **Todo** - todo 'task details'
+- **Deadline** - deadline 'task details'/'Date & Time in yyyy-mm-dd format'
+- **Event** - event 'task details'/'Date & Time in yyyy-mm-dd format'
 
 **Usage:**
 
@@ -67,7 +67,7 @@ Marks the completion of an existing task, indicated by a cross or a tick. The nu
 
 **Command:**
 
-- done 'task index'
+done 'task index'
 
 **Usage:**
 
@@ -107,7 +107,7 @@ Deletes a tasks in your list of task. The number after "delete" is the index of 
 
 **Command:**
 
-- delete 'index number of task'
+delete 'index number of task'
 
 **Usage:**
 
@@ -128,7 +128,7 @@ Searches for a task in your list of tasks with a keyword which bears similaritie
 
 **Command:**
 
-- find 'keyword matching task description'
+find 'keyword matching task description'
 
 **Usage:**
             
@@ -212,5 +212,4 @@ Update the description or duedate of an existing task in your list of task.
 ---
     
 # Thanks for reading this user guide!
-
     
