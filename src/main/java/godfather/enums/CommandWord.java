@@ -16,10 +16,10 @@ public enum CommandWord {
                  "Deadlines keep track of when you need to get things done by.\n" + "The syntax for it is:\n"
                          + "\u2764 \"deadline <description of the deadline> /by <date & time string>\"\n"
                          + "\u2764 <date & time string> is <date> <time> separated by a space character\n"
-                         + "\u2764 <date> can be in any of the following formats: MMM dd yyy, d/M/yyyy, yyyy/M/d\n"
+                         + "\u2764 <date> can be in any of the following formats: d/M/yyyy, yyyy/M/d\n"
                          + "\u2764 <time> can be written as HHmm in 24h time\n"
                          + "here's a valid example:\n"
-                         + " \t\"make an offer you can't refuse /by 2020/12/2 2359\""),
+                         + "\"deadline make an offer you can't refuse /by 2020/12/2 2359\""),
     EVENT_CMD("event", "Events keep track of when you have events.\n"
             + "The syntax for it is:\n"
             + "\u2764 \"event <description of the event> /at <date & timeInfo string>\"\n"

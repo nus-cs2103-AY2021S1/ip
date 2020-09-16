@@ -10,7 +10,7 @@ import java.util.stream.Stream;
  */
 public enum DateTimeFormat {
     // Add Formats for date and time here as needed...
-    DATE_OUTPUT_FORMATTER1("MMM dd yyy"), DATE_INPUT_FORMATTER1("d/M/yyyy"), DATE_INPUT_FORMATTER2("yyyy/M/d"),
+    DATE_OUTPUT_FORMATTER1("MMM/d/yyyy"), DATE_INPUT_FORMATTER1("d/M/yyyy"), DATE_INPUT_FORMATTER2("yyyy/M/d"),
     TIME_FORMATTER("HHmm"), INVALID;
     private DateTimeFormatter formatter;
     DateTimeFormat() {
