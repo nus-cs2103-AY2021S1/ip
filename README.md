@@ -1,7 +1,25 @@
-# Alfred
+# Alfred User Guide
 
 Alfred is a personal assistant chat bot that lets you manage tasks, events and deadlines.
 
+* [Features](#features)
+    * [Manage tasks](#manage-tasks)
+    * [Mark tasks as done](#mark-tasks-as-done)
+    * [Task search](#task-search)
+* [Usage](#usage)
+    * [`todo` - Create a new ToDo task](#todo---create-a-new-todo-task)
+    * [`event` - Create a new Event task](#event---create-a-new-event-task)
+    * [`deadline` - Create a new Deadline task](#deadline---create-a-new-deadline-task)
+    * [`list` - List all tasks](#list---list-all-tasks)
+    * [`done` - Mark a task as done](#done---mark-a-task-as-done)
+    * [`delete` - Delete a task](#delete---delete-a-task)
+    * [`find` - Find tasks based on a keyword](#find---find-tasks-based-on-a-keyword)
+    * [`date` - Find tasks based on a date](#date---find-tasks-based-on-a-date)
+    * [`help` - Get help on the different commands available](#help---get-help-on-the-different-commands-available)
+    * [`bye` - Quits the application](#bye---quits-the-application)
+ * [Credits](#credits)
+    
+   
 ## Features 
 
 ### Manage tasks
