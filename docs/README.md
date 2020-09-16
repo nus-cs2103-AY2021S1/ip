@@ -5,10 +5,8 @@ Junimo is a personal task manager that allows you to add, store, delete, find an
 1. Ensure that you have Java `11` or above installed in your Computer.
 2. Download the latest `Junimo.jar` from [here](https://github.com/jeannetoh99/ip/releases/tag/A-Release).
 3. Copy the file to the folder you want to use as the *home folder* for Junimo.
-4. Double-click the file to start the app. The GUI similar to that below should appear in a few seconds. 
-
-   ![Sample Junimo GUI](https://github.com/jeannetoh99/ip/blob/master/docs/Ui.png?raw=true)
-   
+4. Double-click the file to start the app. The GUI similar to that below should appear in a few seconds. <br/>
+![Sample Junimo GUI](https://github.com/jeannetoh99/ip/blob/master/docs/Ui.png?raw=true) <br/>
 5. Talk to Junimo to get it to manage your tasks for you! :)
 6. Refer to [Features](#features) below for details of each command.
 
