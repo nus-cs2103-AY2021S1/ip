@@ -100,7 +100,7 @@ public class Parser {
      * @return boolean to indicate if the number is between 0 and the number of Task in tasks.
      */
     private static boolean checkForValidTaskNumber(int taskNumber, TaskList tasks) {
-        return taskNumber >= 0 || taskNumber < tasks.getNumberOfTask();
+        return taskNumber >= 0 && taskNumber < tasks.getNumberOfTask();
     }
 
     /**
