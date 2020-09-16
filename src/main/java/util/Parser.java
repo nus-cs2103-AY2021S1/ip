@@ -133,12 +133,14 @@ public class Parser {
                 // splits command desc to get command date
                 splitValue = commandDesc.split("/by ");
                 commandDate = splitValue[1];
+                commandDesc = splitValue[0];
                 resultantCommand = new AddCommand("DEADLINE", commandDesc, commandDate);
             } else {
                 this.validateCommandDesc(commandDesc, Action.EVENT);
                 // splits command desc to get command date
                 splitValue = commandDesc.split("/at ");
                 commandDate = splitValue[1];
+                commandDesc = splitValue[0];
                 resultantCommand = new AddCommand("EVENT", commandDesc, commandDate);
             }
             break;

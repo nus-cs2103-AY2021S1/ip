@@ -98,7 +98,7 @@ public class Task {
         if (tag == null) {
             return task;
         } else {
-            return task + tag.toString();
+            return task + "\n" + tag.toString();
         }
     }
 }
