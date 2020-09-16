@@ -80,7 +80,9 @@ Adds an deadline tasking with the 'task details' as well as Date and Time into P
     Steady! I add... wait ah...
         ADDED: [D][X] eat steak (by: 14 Nov 2020, 11:00AM)
     Now you got 3 tasks
-![image](./add-deadline.png)   
+
+![image](./add-deadline.png)  
+
 ---
 
 ### 2. Storage and Retrieval of Tasks  <a name="storage"></a>
