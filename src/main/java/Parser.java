@@ -2,10 +2,11 @@ import java.util.ArrayList;
 
 public class Parser {
 
-    private TaskList taskList;
+    private TaskList taskList, archiveList;
 
-    public Parser(TaskList taskList){
+    public Parser(TaskList taskList, TaskList archiveList){
         this.taskList = taskList;
+        this.archiveList = archiveList;
     }
 
     /**
@@ -40,6 +41,9 @@ public class Parser {
             case FIND:
                 allTasks = parseFind(command.getTaskContent());
                 return (Ui.printFind(allTasks));
+            case ARCHIVE:
+                task = parseArchive(command.getTaskContent());
+                return (Ui.printArchive(task, taskList.getUndoneCount()));
             case INVALID:
                 throw new CommandException(command.echo() + " is an invalid command.\n"+
                         "please try another one.");
@@ -135,7 +139,7 @@ public class Parser {
     }
 
     /**
-     * Parse the content of a Done command and ask taskList to finish it.
+     * Parse the content of a  command and ask taskList to finish it.
      * @param content content of parsed command
      * @return a Task object indicates the requested task
      * @throws DukeException
@@ -154,6 +158,32 @@ public class Parser {
                     "You only have " + String.format("%d",taskList.getSize()) + " tasks on your list.");
         } catch (Exception e) {
             throw new WrongDescriptionException("The description of 'DELETE' should be an integer.\n"
+                    + "Please re-enter your command.");
+        }
+    }
+
+    /**
+     * Parse the content of a Done command and ask taskList to finish it.
+     * @param content content of parsed command
+     * @return a Task object indicates the requested task
+     * @throws DukeException
+     * @throws WrongDescriptionException
+     * @throws EmptyDescriptionException
+     */
+    public Task parseArchive(String content) throws
+            DukeException, WrongDescriptionException, EmptyDescriptionException{
+        try {
+            if (content.length() < 1)
+                throw new EmptyDescriptionException("ARCHIVE");
+            int index = Integer.parseInt(content) - 1;
+            Task tmp = taskList.deleteTask(index);
+            archiveList.addTask(tmp);
+            return tmp;
+        } catch (IndexOutOfBoundsException e){
+            throw new DukeException("Sorry, I can't do that for you.\n"+
+                    "You only have " + String.format("%d",taskList.getSize()) + " tasks on your list.");
+        } catch (Exception e) {
+            throw new WrongDescriptionException("The description of 'ARCHIVE' should be an integer.\n"
                     + "Please re-enter your command.");
         }
     }

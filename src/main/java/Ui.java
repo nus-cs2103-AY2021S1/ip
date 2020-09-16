@@ -126,6 +126,21 @@ public class Ui {
     }
 
     /**
+     * Inform the used a task is archived and print additional information on screen
+     *
+     * @param task the deleted task
+     * @param undoneCount number of tasks in the list that has not been done.
+     */
+    static public String printArchive(Task task, int undoneCount) {
+        String tmp = Ui.print("Nice! I've achived following task:");
+        if (task.checkDone())
+            tmp = tmp + Ui.print("  ["+task.getTaskType()+"][X] " + task.toString());
+        else
+            tmp = tmp +Ui.print("  ["+task.getTaskType()+"][ ] " + task.toString());
+        return (tmp + Ui.print(String.format("Now you have %d tasks waiting to be done.", undoneCount)));
+    }
+
+    /**
      * Inform the used a task is done and print the information on screen
      *
      * @param task the finished task

@@ -10,6 +10,7 @@ public enum Command{
     EVENT,
     DELETE,
     FIND,
+    ARCHIVE,
     INVALID;
 
     static private String originalCommand = ""; //originalCommand stores the original command (case sensitive)

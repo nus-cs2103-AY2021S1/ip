@@ -25,6 +25,17 @@ public class TaskList {
         return undoneCount;
     }
 
+
+    /**
+     * Take in a task, add it to the totoList and returns it.
+     * @param task a task object
+     * @return the task itself
+     */
+    public Task addTask(Task task) {
+        this.todoList.add(task);
+        return task;
+    }
+
     /**
      * Create a new TodoTask, add it to the totoList and returns it.
      * @param taskContent content of TodoTask
