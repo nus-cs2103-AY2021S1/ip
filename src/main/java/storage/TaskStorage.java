@@ -162,10 +162,18 @@ public class TaskStorage extends Storage {
         while (line != null) {
             Pattern p = Pattern.compile("\\[(.*?)\\]");
             Matcher m = p.matcher(line);
-            m.find();
-            String taskType = m.group(1);
-            m.find();
-            String completionState = m.group(1);
+            String taskType;
+            String completionState;
+            if (m.find()) {
+                taskType = m.group(1);
+            } else {
+                throw new DukeException("Task type cannot be found.");
+            }
+            if (m.find()) {
+                completionState = m.group(1);
+            } else {
+                throw new DukeException("Completion state cannot be found");
+            }
             int pos = m.end();
 
             // check for completion
