@@ -1,33 +1,40 @@
 .background {
     /* Image retrieved from:
-       https://www.deviantart.com/urlogicfails/art/1966-Batman-and-Robin-Phone-Background-554954684
+       https://www.teahub.io/viewwp/moJbbT_batman-cute-kawaii-cute-batman-cartoon-wallpaper-hd/
     */
     -fx-background-image: url('../images/background.png');
+    -fx-background-size: contain;
     -fx-background-position: bottom;
 }
 
-.dialog, .sendButton, .userInput {
+.dialog, .sendButton, .userInput, .alfred {
     -fx-background-insets: 5;
-    -fx-background-radius: 10;
+    -fx-background-radius: 7;
     -fx-border-insets: 5;
-    -fx-border-radius: 10;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.6), 8, 0.4, 0.0, 0.0);
+    -fx-border-radius: 7;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.6), 5, 0.4, 0.0, 0.0);
     -fx-font-size: 13;
     -fx-padding: 10;
+    -fx-font-family: "American Typewriter";
 }
 
 .dialog {
-    -fx-background-color: EEEECC;
-    -fx-text-fill: black;
-}
-
-.userInput {
-    -fx-background-color: rgb(78, 97, 109);
+    -fx-background-color: rgb(105, 153, 93);
     -fx-text-fill: white;
 }
 
+.alfred {
+    -fx-background-color: rgb(232, 93, 117);
+    -fx-text-fill: white;
+}
+
+.userInput {
+    -fx-background-color: rgb(248, 233, 233);
+    -fx-text-fill: black;
+}
+
 .sendButton {
-    -fx-background-color: rgb(84, 67, 56);
+    -fx-background-color: rgb(57, 70, 72);
     -fx-text-fill: white;
 }
 

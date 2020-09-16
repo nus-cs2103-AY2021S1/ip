@@ -58,6 +58,8 @@ public class DialogBox extends HBox {
     public static DialogBox getAlfredDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
+        db.dialog.getStyleClass().remove(".dialog");
+        db.dialog.getStyleClass().add("alfred");
         return db;
     }
 }
