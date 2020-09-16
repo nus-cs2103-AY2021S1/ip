@@ -45,7 +45,7 @@ TASKNUMBER is the id of the task that you would want to mark as done.
 
 Example: `done 1`
 
-##Deletes a Task: `delete`
+## Deletes a Task: `delete`
 Delete a task from the task list.
 
 Format: `delete TASKNUMBER`
@@ -54,7 +54,7 @@ TASKNUMBER is the id of the task that you would want to delete.
 
 Example: `delete 1`
 
-##Snooze a task: `snooze`
+## Snooze a task: `snooze`
 
 Snooze a task, and change the date of the `event` or `deadline` (could be earlier or later).
 
@@ -64,13 +64,13 @@ TASKNUMBER is the id of the task that you would want to snooze.
 
 DATE is the new desired date of the task.
 
-##Lists all the tasks: `list`
+## Lists all the tasks: `list`
 
 Lists all the tasks in the list.
 
 Format: `list`
 
-##Exit and save the task list: `bye`
+## Exit and save the task list: `bye`
 
 Exists and save all the current tasks to a txt file in the hard drive.
 
