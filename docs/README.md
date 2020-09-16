@@ -1,19 +1,20 @@
 # User Guide
 
-* Quick Start
-* Features
-    * Add a task with a tag
-    * Delete a task
-    * Mark a task as done
-    * List all tasks
-    * Find tasks with a keyword
-    * View all tags
-    * Find tasks with a tag
-    * Exit the Program 
+* [Quick Start](#quick-start)
+* [Features](#features)
+    * [Add a task with a tag](#add-a-task-with-a-tag)
+    * [Delete a task](#delete-a-task)
+    * [Mark a task as done](#mark-a-task-as-done)
+    * [List all tasks](#list-all-tasks)
+    * [Find tasks with a keyword](#find-tasks-with-a-keyword)
+    * [View all tags](#view-all-tags)
+    * [Find tasks with a tag](#find-tasks-with-a-tag)
+    * [Exit the Program](#exit-the-program)
+* [Acknowledgements](#acknowledgements)
 
 ## Quick Start
 1. Ensure you have Java 11 or above installed in your Computer.
-2. Download the latest Duke.jar.
+2. Download the latest Duke.jar from [here](https://github.com/hanweic53/ip/releases/tag/A-Release).
 3. Copy the file to the folder you want to use as the home folder for Duke.
 4. Double-click the file, and Duke will run. 
 
@@ -134,3 +135,7 @@ Exits the Program.
 
 Format: `bye` 
 
+## Acknowledgements
+Images used in this project:    
+[Duke Avatar](https://www.vippng.com/preview/iiTmbmi_baby-child-monster-cartoon-cute-girl-people-cute/)     
+[User Avatar](https://www.pngocean.com/gratis-png-clipart-fmrfk)

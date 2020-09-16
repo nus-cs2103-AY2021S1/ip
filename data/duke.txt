@@ -2,4 +2,4 @@ T | 1 | read book
 D | 0 | tutorial3 | 11/10/2020, 2000 @CS2100
 E | 0 | graded assignment | 01/01/2021, 1200
 E | 1 | labSubmission | 12/10/2020, 2359 @CS2100
-E | 0 | dddg | 10/10/2020, 1900
+T | 0 | return book @NationalLibrary
