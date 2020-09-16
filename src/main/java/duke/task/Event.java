@@ -56,7 +56,7 @@ public class Event extends Task {
 
     @Override
     public String buildSaveString() {
-        return super.buildSaveString() + "/"  + this.date + " " + this.timeStart + "-" + this.timeEnd;
+        return super.buildSaveString() + "/" + this.date + " " + this.timeStart + "-" + this.timeEnd;
     }
 
     /**
@@ -67,6 +67,7 @@ public class Event extends Task {
     @Override
     public String toString() {
         return "[Event]" + super.toString() + " "
-                + "(at: " + this.date + " " + this.timeStart + "-" + this.timeEnd + ")";
+                + "(at: " + this.date + " " + this.timeStart + "-" + this.timeEnd + ") "
+                + "Priority: " + super.getPriorityLevel();
     }
 }

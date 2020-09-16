@@ -1,23 +1,11 @@
 package duke;
 
-import duke.command.AddCommand;
-import duke.command.Command;
-import duke.command.CommandType;
-import duke.command.DeleteCommand;
-import duke.command.DeleteTaskCommand;
-import duke.command.DoneCommand;
-import duke.command.DoneTaskCommand;
-import duke.command.ExitCommand;
-import duke.command.FindCommand;
-import duke.command.FindTaskCommand;
-import duke.command.HelpCommand;
-import duke.command.ListCommand;
-import duke.command.ResetCommand;
-import duke.command.TaskCommand;
-import duke.command.TaskTypeCommand;
+import duke.command.*;
 import duke.exception.DukeException;
+import duke.exception.InvalidPriorityLevelException;
 import duke.exception.InvalidTaskTypeException;
 import duke.exception.UnknownCommandException;
+import duke.task.PriorityLevel;
 import duke.task.TaskType;
 
 
@@ -36,6 +24,10 @@ public class Parser {
             command = parseDone(input);
         } else if (Parser.prevCommand.getCommandType().equals(CommandType.FIND)) {
             command = parseFind(input);
+        } else if (Parser.prevCommand.getCommandType().equals(CommandType.PRIORITY)) {
+            command = parsePriority(input);
+        } else if (Parser.prevCommand.getCommandType().equals(CommandType.PRIORITYLEVEL)) {
+            command = parsePriorityLevel(input, prevCommand);
         } else {
             switch (input) {
             case "help":
@@ -55,6 +47,9 @@ public class Parser {
                 break;
             case "find":
                 command = new FindCommand();
+                break;
+            case "priority":
+                command = new PriorityCommand();
                 break;
             case "bye":
                 command = new ExitCommand();
@@ -113,5 +108,27 @@ public class Parser {
 
     public static Command parseFind(String input) {
         return new FindTaskCommand(input);
+    }
+
+    public static Command parsePriority(String input) {
+        int taskNum = Integer.parseInt(input);
+        return new PriorityLevelCommand(taskNum);
+    }
+
+    public static Command parsePriorityLevel(String input, Command command) throws
+            InvalidPriorityLevelException {
+        assert command.getCommandType().equals(CommandType.PRIORITYLEVEL)
+                : "Command type should be PRIORITYLEVEL";
+        PriorityLevelCommand c = (PriorityLevelCommand) command;
+        switch (input.toLowerCase()) {
+        case "high":
+            return new PrioritySetCommand(c.getTaskNum(), PriorityLevel.HIGH);
+        case "medium":
+            return new PrioritySetCommand(c.getTaskNum(), PriorityLevel.MEDIUM);
+        case "low":
+            return new PrioritySetCommand(c.getTaskNum(), PriorityLevel.LOW);
+        default:
+            throw new InvalidPriorityLevelException();
+        }
     }
 }

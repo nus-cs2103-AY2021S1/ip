@@ -7,6 +7,7 @@ public class Task {
     protected String description;
     protected boolean isDone;
     protected TaskType taskType;
+    protected PriorityLevel priorityLevel;
 
     /**
      * Creates a duke.task.Task object
@@ -18,6 +19,7 @@ public class Task {
         this.description = description;
         this.isDone = false;
         this.taskType = taskType;
+        this.priorityLevel = PriorityLevel.UNDEFINED;
     }
 
     /**
@@ -32,6 +34,7 @@ public class Task {
         this.description = description;
         this.isDone = isDone;
         this.taskType = taskType;
+        this.priorityLevel = PriorityLevel.UNDEFINED;
     }
 
     /**
@@ -40,7 +43,7 @@ public class Task {
      * @return Either a tick or cross.
      */
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+        return (this.isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
     /**
@@ -49,14 +52,14 @@ public class Task {
      * @return Description of task.
      */
     public String getDescription() {
-        return description;
+        return this.description;
     }
 
     /**
      * Changes the task's isDone to true.
      */
     public void markAsDone() {
-        isDone = true;
+        this.isDone = true;
     }
 
     /**
@@ -65,7 +68,7 @@ public class Task {
      * @return Either true or false.
      */
     public boolean isDone(){
-        return isDone;
+        return this.isDone;
     }
 
     /**
@@ -77,21 +80,46 @@ public class Task {
         return taskType;
     }
 
+    public PriorityLevel getPriorityLevel() {
+        return this.priorityLevel;
+    }
+
+    public void setPriorityLevel(PriorityLevel priorityLevel) {
+        this.priorityLevel = priorityLevel;
+    }
+
     public String buildSaveString() {
         String type = "";
         switch (this.taskType) {
-            case TODO:
-                type = "T";
-                break;
-            case DEADLINE:
-                type = "D";
-                break;
-            case EVENT:
-                type = "E";
-                break;
+        case TODO:
+            type = "T";
+            break;
+        case DEADLINE:
+            type = "D";
+            break;
+        case EVENT:
+            type = "E";
+            break;
+        default:
         }
-        String doneStatus = isDone ? "1" : "0";
-        return type + "|" + doneStatus + "|" + this.description;
+        String priority = "";
+        switch (this.priorityLevel) {
+        case HIGH:
+            priority = "H";
+            break;
+        case MEDIUM:
+            priority = "M";
+            break;
+        case LOW:
+            priority = "L";
+            break;
+        case UNDEFINED:
+            priority = "U";
+            break;
+        default:
+        }
+        String doneStatus = this.isDone ? "1" : "0";
+        return type + "|" + doneStatus + "|" + priority + "|" + this.description;
     }
 
     /**

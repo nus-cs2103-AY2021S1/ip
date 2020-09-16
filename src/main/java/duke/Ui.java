@@ -8,7 +8,7 @@ import duke.task.Task;
  * Supports interactions with user.
  */
 public class Ui {
-    protected static final String[] CMD_ARR = {"help", "add", "list", "done", "delete", "date", "bye"};
+    protected static final String[] CMD_ARR = {"help", "add", "list", "done", "delete", "find", "priority", "bye"};
     protected static final String DIVIDER = "____________________________________________________________";
     protected static final String LOGO = " __________________________________________________________\n"
             + "|                                                          |\n"
@@ -138,6 +138,18 @@ public class Ui {
         String s = "Alright, the following task has been removed:\n"
                 + task.toString()
                 + "You now have " + taskList.getTaskListSize() + " tasks on your list\n";
+        System.out.println(s);
+        return s;
+    }
+
+    /**
+     * Displays the acknowledgement of the task that the user deleted from the list of tasks.
+     * @param taskList List of tasks.
+     * @param taskNum duke.task.Task that was deleted.
+     */
+    public String printPrioritySetAcknowledgement(TaskList taskList, int taskNum) {
+        String s = "Alright, the following task priority has been updated:\n"
+                + taskList.getTask(taskNum - 1).toString() + "\n";
         System.out.println(s);
         return s;
     }
