@@ -5,13 +5,25 @@ plugins {
     id 'com.github.johnrengelman.shadow' version '5.1.0'
 }
 
+apply plugin: 'application'
+//your code
+applicationDefaultJvmArgs = ["--module-path javafx-sdk-11.0.2/lib --add-modules javafx.controls,javafx.fxml -ea"]
+
 repositories {
     mavenCentral()
+}
+
+configurations {
+    // configuration that holds jars to include in the jar
+    extraLibs
 }
 
 jar {
     manifest {
         attributes 'Main-Class': 'duke.main.Launcher'
+    }
+    from {
+        configurations.extraLibs.collect { it.isDirectory() ? it : zipTree(it) }
     }
 }
 
@@ -35,6 +47,18 @@ dependencies {
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'win'
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'mac'
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'linux'
+    extraLibs group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'win'
+    extraLibs group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'mac'
+    extraLibs group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'linux'
+    extraLibs group: 'org.openjfx', name: 'javafx-controls', version: javaFxVersion, classifier: 'win'
+    extraLibs group: 'org.openjfx', name: 'javafx-controls', version: javaFxVersion, classifier: 'mac'
+    extraLibs group: 'org.openjfx', name: 'javafx-controls', version: javaFxVersion, classifier: 'linux'
+    extraLibs group: 'org.openjfx', name: 'javafx-fxml', version: javaFxVersion, classifier: 'win'
+    extraLibs group: 'org.openjfx', name: 'javafx-fxml', version: javaFxVersion, classifier: 'mac'
+    extraLibs group: 'org.openjfx', name: 'javafx-fxml', version: javaFxVersion, classifier: 'linux'
+    extraLibs group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'win'
+    extraLibs group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'mac'
+    extraLibs group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'linux'
 }
 
 test {
