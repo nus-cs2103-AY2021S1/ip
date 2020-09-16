@@ -1,2 +1,5 @@
 T | 0 | attend tutorial
 D | 0 | do homework | 2020-05-19 2200
+T | 0 | buy food
+T | 0 | eat
+T | 0 | buy friends

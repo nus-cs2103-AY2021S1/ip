@@ -3,6 +3,7 @@ package main.java;
 import bob.Parser;
 import bob.command.AddCommand;
 import bob.command.Command;
+import bob.exception.BobDateTimeParseException;
 import bob.exception.BobException;
 
 import bob.task.Deadline;
@@ -24,7 +25,7 @@ public class BobParserTest {
     }
 
     @Test
-    public void parse_Deadline_success(){
+    public void parse_Deadline_success() throws BobDateTimeParseException {
         Command c = null;
         try {
             c = Parser.parse("deadline do homework /by 2020-05-20 1700");
@@ -35,7 +36,7 @@ public class BobParserTest {
     }
 
     @Test
-    public void parse_Event_success() {
+    public void parse_Event_success() throws BobDateTimeParseException {
         Command c = null;
         try {
             c = Parser.parse("event do homework /at 2020-05-20 1700 to 2020-05-20 1800");
