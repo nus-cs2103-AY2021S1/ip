@@ -10,7 +10,7 @@ public class DukeTest {
     public void dateTimeConverter_processTime_success() {
         assertEquals(
                 new DateTimeConverter(FormatStyle.MEDIUM,
-                        FormatStyle.SHORT).processTime("10/12/2020 1300"),
+                        FormatStyle.SHORT).processTime("todo", "10/12/2020 1300"),
                 "Dec 10, 2020, 1:00 PM");
     }
 
