@@ -3,8 +3,8 @@ package duke.gui;
 import java.io.IOException;
 
 import duke.Duke;
-import duke.exception.DukeException;
 import duke.Ui;
+import duke.exception.DukeException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
