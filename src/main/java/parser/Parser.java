@@ -94,7 +94,7 @@ public class Parser {
                 throw new TrackingException("deadline");
             }
 
-            String[] temp = descriptionDate.split(" /by ", 1);
+            String[] temp = descriptionDate.split(" /by ");
 
             //Checks for validity of the processed input.
             if (temp.length == 1) {
