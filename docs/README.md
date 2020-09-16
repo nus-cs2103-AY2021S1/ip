@@ -46,7 +46,7 @@ Example:
 Outcome:   
 ```
  Got it. I've added this task:
- [T][?] CS2101 Homework 
+ [T][✘] CS2101 Homework 
  Now you have 5 tasks in the list.
 ```
 
@@ -62,7 +62,7 @@ Example:
 Outcome:   
 ```
  Got it. I've added this task:
- [E][?] CS2101 Homework (at: Sep 16 2020 12:00)
+ [E][✘] CS2101 Homework (at: Sep 16 2020 12:00)
  Now you have 6 tasks in the list.
 ```
 
@@ -78,7 +78,7 @@ Example:
 Outcome:   
 ```
  Got it. I've added this task:
- [D][?] CS2101 Homework (at: Sep 16 2020 12:00)
+ [D][✘] CS2101 Homework (at: Sep 16 2020 12:00)
  Now you have 6 tasks in the list.
 ```
 
@@ -94,7 +94,7 @@ Example:
 Outcome:   
 ```
  Nice! I've marked this task as done:
- [T][?] CS2101 Homework
+ [T][✓] CS2101 Homework
 ```
 
 ### Delete a task: `delete`
@@ -109,7 +109,7 @@ Example:
 Outcome:   
 ```
  Noted. I've removed this task:
- [T][?] CS2101 Homework
+ [T][✓] CS2101 Homework
  Now you have 5 tasks in the list.
 ```
 
@@ -125,7 +125,7 @@ Example:
 Outcome:   
 ```
  Here is a list of task that is due within 2 days:
- 1. [E][?] CS2101 Homework (at: Sep 16 2020 12:00)
+ 1. [E][✘] CS2101 Homework (at: Sep 16 2020 12:00)
 ```
 
 ### Find task that matches a keyword: `find`
@@ -140,8 +140,8 @@ Example:
 Outcome:   
 ```
  There are 2 matching tasks in your list:
- 1. [T][?] CS2101 Homework
- 2. [E][?] CS2101 Homework (at: Sep 16 2020 12:00)
+ 1. [T][✓] CS2101 Homework
+ 2. [E][✘] CS2101 Homework (at: Sep 16 2020 12:00)
 ```
 
 ### List all task: `list`
@@ -156,11 +156,11 @@ Example:
 Outcome:   
 ```
  Here are the tasks in your list:
- 1. [T][?] do CS2103T
- 2. [T][?] read Es2660
- 3. [E][?] read book (at: Dec 21 2020 12:12)
- 4. [T][?] CS2101 Homework
- 5. [E][?] CS2101 Homework (at: Sep 16 2020 12:00)
+ 1. [T][✓] do CS2103T
+ 2. [T][✓] read Es2660
+ 3. [E][✘] read book (at: Dec 21 2020 12:12)
+ 4. [T][✓] CS2101 Homework
+ 5. [E][✘] CS2101 Homework (at: Sep 16 2020 12:00)
 ```
 
 ### Viewing help: `help`
@@ -206,15 +206,15 @@ Q: How do I transfer my data to another Computer?
 A: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous duke home folder.
 
 ## Command Summary
-| Action  | Format/ example |
-| ------------- | ------------- |
-| todo  | `todo <NUMBER>` <br> eg., `todo CS2101 Homework`  |
-| event  | `event <task> /at <YYYY-MM-DD HH:MM>` <br> eg., `event CS2101 Homework /at 2020-09-16 12:00`  |
-| deadline  | `deadline <task> /at <YYYY-MM-DD HH:MM>` <br> eg., `deadline CS2101 Homework /at 2020-09-16 12:00`  |
-| done  | `done <NUMBER>` <br> eg., `done 3`  |
-| delete | `delete <NUMBER>` <br> eg., `delete 2`  |
-| reminder  | `reminder <NUMBER>` <br> eg., `reminder 2`  |
-| find  | `find <keyword>` <br> eg., `find cs2101`  |
-| list  | `list` |
-| help  | `help`|
-| bye  | `bye`  |
+| Action  | Format/ example 
+| ------------- | ------------- 
+| todo  | `todo <NUMBER>` <br> eg., `todo CS2101 Homework`  
+| event  | `event <task> /at <YYYY-MM-DD HH:MM>` <br> eg., `event CS2101 Homework /at 2020-09-16 12:00`  
+| deadline  | `deadline <task> /at <YYYY-MM-DD HH:MM>` <br> eg., `deadline CS2101 Homework /at 2020-09-16 12:00`  
+| done  | `done <NUMBER>` <br> eg., `done 3`  
+| delete | `delete <NUMBER>` <br> eg., `delete 2`  
+| reminder  | `reminder <NUMBER>` <br> eg., `reminder 2`  
+| find  | `find <keyword>` <br> eg., `find cs2101`  
+| list  | `list` 
+| help  | `help`
+| bye  | `bye`  
