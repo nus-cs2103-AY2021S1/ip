@@ -44,7 +44,7 @@ public class Duke{
             Command command = Parser.parse(input);
             return command.execute(tasks, ui, storage);
         } catch (DukeException e) {
-            return ui.showError(e.getMessage());
+            return ui.showError(e.toString());
         }
     }
 }
