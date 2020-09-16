@@ -24,8 +24,9 @@ public class ShowFunctionCommand extends Command {
         String seven = "done [task index]: to mark the specific task as completed.";
         String eight = "filter [d-MM-uuuu]: to show all the tasks with this date.";
         String nine = "find [keyword]: to find all tasks with that has the keywords in its name.";
+        String ten = "view [d-MM-uuuu]: to view the tasks in order on that day.";
         result = result + one + nLine + two + nLine + three + nLine + four + nLine + five
-                + nLine + six + nLine + seven + nLine + eight + nLine + nine;
+                + nLine + six + nLine + seven + nLine + eight + nLine + nine + nLine + ten;
         return result;
     }
 }
