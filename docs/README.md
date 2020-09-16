@@ -18,7 +18,7 @@ Opus is fast and easy to use.
 
 ## Quick Start
 
-1. Download opus.jar.
+1. Download opus.jar [here](https://github.com/justintzuriel/ip/releases/tag/A-Release).
  
 2. Copy the file to the folder you want to use as the home folder for Opus.
  
