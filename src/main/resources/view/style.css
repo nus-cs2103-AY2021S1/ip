@@ -5,13 +5,8 @@
     -fx-text-alignment: left;
 }
 
-
 #dialogContainer {
-    -fx-background-image:url('/images/background.jpg');
-    -fx-background-size: stretch;
-    -fx-background-repeat: no-repeat;
-    -fx-background-position: center;
-    -fx-background-attachment: fixed;
+    -fx-background-color: #181818;
 }
 
 .sendButton {

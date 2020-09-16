@@ -6,7 +6,6 @@ import java.time.format.DateTimeFormatter;
 /**
  * Represents a wrapper class over {@link LocalDateTime}.
  */
-
 public class DukeDateTime {
     private LocalDateTime dateTime;
 

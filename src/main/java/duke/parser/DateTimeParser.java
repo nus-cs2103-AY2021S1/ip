@@ -17,10 +17,10 @@ import duke.utils.Messages;
  */
 
 public class DateTimeParser {
-    private static final String[] DATE_TIME_PATTERNS_WITH_TIME = {"d/M/yyyy H:mm", "d/M/yyyy h:mm a", "d/M/yyyy Hmm",
-            "d MMM yyyy H:mm", "d MMM yyyy h:mm a", "d MMM yyyy Hmm", "d MMMM yyyy H:mm", "d MMMM yyyy h:mm a",
-            "d MMMM yyyy Hmm", "d-M-yyyy H:mm", "d-M-yyyy h:mm a", "d-M-yyyy Hmm", "yyyy-M-d h:mm a",
-            "yyyy-M-d Hmm", "d/M/yyyy ha", "d/M/yyyy h:mma", "d/MMM/yyyy ha", "d/MMM/yyyy h:mma"};
+    private static final String[] DATE_TIME_PATTERNS_WITH_TIME = {"d MMM yyyy H:mm", "d MMM yyyy Hmm", "d MMM yyyy h:mm a",
+        "d MMMM yyyy H:mm", "d MMMM yyyy Hmm", "d-M-yyyy H:mm", "d-M-yyyy Hmm", "d-M-yyyy h:mm a",
+        "d/M/yyyy H:mm", "d/M/yyyy Hmm", "d/M/yyyy h:mm a", "d/M/yyyy h:mma", "d/M/yyyy ha", "d/MMM/yyyy h:mma",
+        "d/MMM/yyyy ha", "yyyy-M-d Hmm", "yyyy-M-d h:mm a"};
 
     /**
      * Parses the input into a {@link DukeDateTime} object.
