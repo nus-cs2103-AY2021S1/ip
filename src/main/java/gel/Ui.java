@@ -95,7 +95,7 @@ public class Ui {
         StringBuilder listOfTask = new StringBuilder("    Here are the task(s) in your list:");
         for (int i = 1; i <= taskList.size(); i++) {
             Task task = taskList.get(i - 1);
-            listOfTask.append("\n    ").append(i).append(".").append(task);
+            listOfTask.append("\n    ").append(i).append(". ").append(task);
         }
         return listOfTask.toString();
     }
