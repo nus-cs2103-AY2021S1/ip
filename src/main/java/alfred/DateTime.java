@@ -7,8 +7,8 @@ import java.time.format.DateTimeParseException;
 
 public class DateTime {
 
-    private LocalDate date;
-    private LocalTime time;
+    private final LocalDate date;
+    private final LocalTime time;
 
     private DateTime(LocalDate date, LocalTime time) {
         this.date = date;

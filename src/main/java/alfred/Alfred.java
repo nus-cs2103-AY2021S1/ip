@@ -1,6 +1,5 @@
 package alfred;
 
-import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -66,8 +65,6 @@ public class Alfred {
             return ui.getNextResponse();
         } catch (AlfredException e) {
             return e.getMessage();
-        } catch (IOException e) {
-            return "Error: Task could not be saved.";
         }
     }
 }

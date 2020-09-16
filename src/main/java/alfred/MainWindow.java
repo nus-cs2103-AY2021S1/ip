@@ -26,10 +26,10 @@ public class MainWindow extends AnchorPane {
     private Alfred alfred;
 
     // Image retrieved from https://www.pngfind.com/mpng/hwwTTi_free-png-download-lego-batman-movie-clipart-png/
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
 
     // Image retrieved from https://www.pngfind.com/mpng/TRwRibh_alfred-lego-batman-movie-lego-batman-alfred-png/
-    private Image alfredImage = new Image(this.getClass().getResourceAsStream("/images/alfred.png"));
+    private final Image alfredImage = new Image(this.getClass().getResourceAsStream("/images/alfred.png"));
 
     /**
      * Initializes the user interface and displays the welcome message.
