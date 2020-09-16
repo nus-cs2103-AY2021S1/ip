@@ -19,58 +19,36 @@ import java.util.Scanner;
  */
 public class Parser {
 
-    public static String logo = "      ____        _        \n"
-            + "     |  _ \\ _   _| | _____ \n"
-            + "     | | | | | | | |/ / _ \\\n"
-            + "     | |_| | |_| |   <  __/\n"
-            + "     |____/ \\__,_|_|\\_\\___|\n";
+    public static TaskList taskList;
 
-    static TaskList taskList;
 
     /**
-     * Construct a new paerser.
-     * No parameter. Assign a new TaskList to taskList.
+     * Sets taskList for Parser.
+     * @param list TaskList that manages tasks.
      */
-    public Parser(){
-        taskList = new TaskList();
+    public static void setTaskList(TaskList list) {
+        taskList = list;
     }
 
-    /**
-     * Print out the greetings.
-     */
-    public static void greet(){
-
-        System.out.println("Hello from\n" + logo);
-
-        System.out.println("What can I do for you?");
-
-    }
-
-    /**
-     * Print out the goodbye words.
-     */
-    public static void exit(){
-        System.out.println("Bye. Hope to see you again soon!");
-    }
-
-    /**
-     * Print out the command received.
-     * @param command Take in a command.
-     */
-    public static void echo(String command){
-        System.out.println(command);
-    }
 
     /**
      * Process a command sentence.
      * @param command Take in the command to be processed.
      * @throws Exception Throws an exception if the command can not be interpreted.
      */
-    public static void processCommand(String command) throws Exception {
+    public static String processCommand(String command) throws Exception {
 
         if(command.equals("list")){
 
-            taskList.printTaskList();
+            return taskList.printTaskList();
+
+        }else if(command.contains("hi")){
+
+            return "Hi!";
+
+        }else if(command.contains("bye")){
+
+            return "Bye!";
 
         }else{
 
@@ -100,7 +78,7 @@ public class Parser {
                     throw new InvalidRequestException("Task index is invalid, please enter a valid one.");
                 }
 
-                taskList.markAsDone(index);
+                return taskList.markAsDone(index);
 
             }else if(words[0].equals("delete")){
 
@@ -121,20 +99,8 @@ public class Parser {
                     throw new InvalidRequestException("Task index is invalid, please enter a valid one.");
                 }
 
-                taskList.deleteTask(index);
+                return taskList.deleteTask(index);
 
-                int size = taskList.findListSize();
-
-
-                if(size == 0){
-                    System.out.println("Now your task list is empty.");
-                }
-                else if(size == 1){
-                    System.out.println("Now you have 1 task in the list.");
-                }
-                else{
-                    System.out.println("Now you have " + size + " tasks in the list");
-                }
 
             }else if(words[0].equals("find")){
 
@@ -142,15 +108,7 @@ public class Parser {
                     throw new InvalidKeyException("Sorry, I can only handle one keyword.");
                 }
 
-                ArrayList<Task> tasksFound = taskList.findTask(words[1]);
-                if(tasksFound.size()==0){
-                    System.out.println("Sorry, no task related to "+words[1]+ " is found.");
-                }else{
-                    System.out.println("Here are the tasks found: ");
-                    for(Task task: tasksFound){
-                        System.out.println(task.toString());
-                    }
-                }
+                return taskList.findTask(words[1]);
 
             } else{
 
@@ -212,53 +170,10 @@ public class Parser {
 
                 }
 
-                taskList.addTask(newTask);
+                return taskList.addTask(newTask);
 
             }
         }
     }
-
-    /**
-     * Process the whole chunk of input command.
-     */
-    public void processInput(){
-
-        greet();
-
-        Scanner input = new Scanner(System.in);
-
-        String command;
-
-        while(input.hasNext()){
-
-            try{
-                command = input.nextLine();
-
-                if(command.equals("bye")){
-
-                    exit();
-
-                    input.close();
-
-                    break;
-
-                }else{
-
-                    processCommand(command);
-
-                    Storage storage = new Storage(taskList);
-
-                    storage.saveDataToFile();
-
-                }
-            } catch(Exception e){
-
-                System.out.println(e.getMessage());
-
-            }
-
-        }
-    }
-
 
 }

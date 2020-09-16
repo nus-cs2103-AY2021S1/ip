@@ -17,10 +17,17 @@ public class Task {
     /**
      * Mark the task as done.
      */
-    public void markAsDone(){
+    public String markAsDone(){
         this.isDone = true;
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(this.toString());
+        String result = "Nice! I've marked this task as done:"+"\n";
+//        System.out.println("Nice! I've marked this task as done:");
+//        System.out.println(this.toString());
+        result = result + this.toString() + "\n";
+        return result;
+    }
+
+    public void setStatus(String status){
+        isDone = status.equals("true");
     }
 
     /**
@@ -34,8 +41,11 @@ public class Task {
      * Print out the description of the task.
      * @param index The position index of the task in a list of tasks.
      */
-    public void showTask(int index){
-        System.out.println(index + ". " +this.toString());
+    public String showTask(int index){
+        String result = "";
+        result = result+index + ". " +this.toString()+"\n";
+//        System.out.println(index + ". " +this.toString());
+        return result;
     }
 
     public String getType(){
