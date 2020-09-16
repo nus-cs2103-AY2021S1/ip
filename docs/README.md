@@ -361,3 +361,5 @@ All the respective categories and their amounts are neatly presented in a table
 format.
 
 ![](Display.png)
+
+**All command words are case-insensitive but are presented in uppercase to make them more distinct.*
