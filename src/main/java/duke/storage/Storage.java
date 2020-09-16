@@ -165,7 +165,7 @@ public class Storage {
      * @param tasks List of tasks to be saved
      * @throws IOException
      */
-    private void saveTasksToList(BufferedWriter bw, TaskList tasks) throws IOException{
+    private void saveTasksToList(BufferedWriter bw, TaskList tasks) throws IOException {
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
             TaskType taskType = task.returnTaskType();

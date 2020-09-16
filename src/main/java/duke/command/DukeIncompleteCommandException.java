@@ -7,11 +7,9 @@ package duke.command;
  */
 public class DukeIncompleteCommandException extends DukeRunTimeException {
     /**
-     * Constructs a DukeIncompleteCommandException
-     *
-     * @param errorMessage  Error message of the exception.
+     * Constructs a DukeIncompleteCommandException with error message.
      */
-    public DukeIncompleteCommandException(String errorMessage) {
-        super(errorMessage);
+    public DukeIncompleteCommandException() {
+        super("The command is incomplete Poppins :D");
     }
 }

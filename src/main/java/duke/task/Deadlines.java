@@ -26,7 +26,7 @@ public class Deadlines extends TimedTask {
         try {
             this.localDateTime = LocalDateTime.parse(by, DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));;
         } catch (DateTimeParseException e) {
-            throw new DukeDateTimeParseException("Please input the date and time in YYYY-MM-DD hhmm format"
+            throw new DukeDateTimeParseException("Please tell me the date and time in YYYY-MM-DD hhmm format"
                     + " with the correct values\n\teg. deadline hackathon /by 2014-12-25 1630");
         }
 

@@ -8,10 +8,14 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="650.0" styleClass="anchorPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="duke.ui.MainWindow">
   <children>
-    <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="550.0" prefWidth="700.0" vvalue="1.0" AnchorPane.bottomAnchor="49.60000000000002" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-      <content>
-        <VBox fx:id="dialogContainer" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="650.0" prefHeight="0.0" prefWidth="650.0" />
-      </content>
+    <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" hvalue="1.0" prefHeight="550.0" prefWidth="700.0" vvalue="1.0" AnchorPane.bottomAnchor="49.60000000000002" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <content>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+               <children>
+              <VBox fx:id="dialogContainer" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="650.0" prefHeight="0.0" prefWidth="650.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+               </children>
+            </AnchorPane>
+         </content>
     </ScrollPane>
     <TextField fx:id="userInput" layoutY="550.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" onAction="#handleUserInput" prefHeight="50.0" prefWidth="650.0" styleClass="textField" AnchorPane.bottomAnchor="-0.3999999999999986" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-0.39999999999997726" />
     <Button fx:id="sendButton" layoutX="560.0" layoutY="557.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="39.0" prefWidth="75.0" text="Send" AnchorPane.bottomAnchor="3.799999999999997" AnchorPane.rightAnchor="14.799999999999997" />

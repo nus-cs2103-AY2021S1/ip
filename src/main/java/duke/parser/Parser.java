@@ -28,8 +28,8 @@ public class Parser {
             return new Command(CommandType.DELETETASK, taskInfo);
         } else if (taskInfo.startsWith("find")) {
             return new Command(CommandType.FINDMATCHINGTASK, taskInfo);
-        } else if (taskInfo.startsWith("duplicate")) {
-            return new Command(CommandType.DUPLICATE, taskInfo);
+        } else if (taskInfo.startsWith("duplicates")) {
+            return new Command(CommandType.DUPLICATES, taskInfo);
         } else if (taskInfo.startsWith("remove duplicates")) {
             return new Command(CommandType.REMOVEDUPLICATES, taskInfo);
         } else if (taskInfo.startsWith("clear please")) {

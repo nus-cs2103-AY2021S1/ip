@@ -67,7 +67,7 @@ public class Command {
             case DELETETASK:
                 dukeResponse =  tasks.deleteTask(taskInfo);
                 break;
-            case DUPLICATE:
+            case DUPLICATES:
                 List<String> duplicateList = tasks.detectDuplicates();
                 dukeResponse =  findDuplicateTasks(duplicateList);
                 break;
@@ -122,6 +122,9 @@ public class Command {
         for (int i = 0; i < tasks.size(); i++) {
             toPrint += String.format("\n\t\t%d. %s", i + 1, tasks.get(i));
         }
+        toPrint = tasks.size() == 0
+            ? "There are no tasks in your list. Add some more Poppins! :D"
+            : toPrint;
         return toPrint;
     }
 
@@ -136,23 +139,23 @@ public class Command {
         String done = "done ";
         String requiredTask = taskInfo.replace("done", "").trim();
         if (taskInfo.length() <= done.length()) {
-            throw new DukeIndexOutOfBoundsException("The task you want to mark is invalid");
+            throw new DukeIndexOutOfBoundsException("The task you want to mark is invalid :(");
         }
         int taskNo;
         try {
             taskNo = Integer.parseInt(requiredTask);
         } catch (NumberFormatException err) {
-            throw new DukeIndexOutOfBoundsException("The task you want to mark is invalid");
+            throw new DukeNumberFormatException("Please input a number for the task you want to delete :D");
         }
         if (taskNo < 1 || taskNo > tasks.size()) {
-            throw new DukeIndexOutOfBoundsException("The task you want to mark is invalid");
+            throw new DukeIndexOutOfBoundsException("The task you want to mark is invalid :(");
         }
         int index = taskNo - 1;
         assert index >= 0 : "Index should not be lesser than 0";
         Task task = tasks.remove(index).doneTask();
         assert task != null : "Task should not be null";
         tasks.add(index, task);
-        return "\tNice! I've marked this task as done:" + "\n\t\t" + task;
+        return "\tYessiree! This task is marked done and dusted!" + "\n\t\t" + task;
     }
 
     /**
@@ -164,7 +167,7 @@ public class Command {
      */
     private String handleToDo(TaskList tasks, String taskInfo) throws DukeInvalidCommandException {
         if (taskInfo.trim().equals("todo")) {
-            throw new DukeInvalidCommandException("The command is incomplete Poppins :D");
+            throw new DukeIncompleteCommandException();
         }
         String requiredTask = taskInfo.replace("todo", "").trim();
         assert taskInfo.length() > 0 : "taskInfo should not be empty";
@@ -184,12 +187,12 @@ public class Command {
         // splits task to 2 segments - task information and date
         String[] stringArr = taskWithBy.split("/by", 2);
         if (stringArr.length != 2) {
-            throw new DukeInvalidCommandException("The command is incomplete Poppins :D");
+            throw new DukeIncompleteCommandException();
         }
         String requiredTask = stringArr[0].trim();
         String by = stringArr[1].trim();
         if (requiredTask.length() == 0 || by.length() == 0) {
-            throw new DukeInvalidCommandException("The command is incomplete Poppins :D");
+            throw new DukeIncompleteCommandException();
         }
         assert requiredTask.length() > 0 : "taskInfo should not be empty";
         assert by.length() > 0 : "by should not be empty";
@@ -209,12 +212,12 @@ public class Command {
         // splits task to 2 segments - task information and date
         String[] stringArr = taskWithAt.split("/at", 2);
         if (stringArr.length != 2) {
-            throw new DukeInvalidCommandException("The command is incomplete Poppins :D");
+            throw new DukeIncompleteCommandException();
         }
         String requiredTask = stringArr[0].trim();
         String at = stringArr[1].trim();
         if (requiredTask.length() == 0 || at.length() == 0) {
-            throw new DukeInvalidCommandException("The command is incomplete Poppins :D");
+            throw new DukeIncompleteCommandException();
         }
         assert requiredTask.length() > 0 : "taskInfo should not be empty";
         assert at.length() > 0 : "at should not be empty";
@@ -235,8 +238,8 @@ public class Command {
         List<Task> matchList = tasks.returnMatchingTasks(taskInfos);
         assert matchList != null : "matchList should not be null";
         String dukeResponse = matchList.size() == 0
-            ? "Sorry Poppins I am unable to find any matches."
-            : "\tHere are the matching tasks in your list:";
+            ? "Sorry Poppins I am unable to find any matches. I swear I've really tried :("
+            : "\tYes I've found it! Here are the matching tasks in your list:";
         String matches = IntStream
             .range(0, matchList.size())
             .mapToObj(i -> String.format("\n\t\t%d. %s", i + 1, matchList.get(i)))
@@ -256,6 +259,9 @@ public class Command {
         String duplicates = IntStream.range(0, duplicateTaskList.size())
             .mapToObj(i -> String.format("\n\t\t%d. %s", i + 1, duplicateTaskList.get(i)))
             .reduce("", (prevStr, nextStr) -> prevStr + nextStr);
+        dukeResponse = duplicateTaskList.size() == 0
+            ? "\tHaven't seen any duplicate tasks around Poppins :)"
+            : dukeResponse;
         return dukeResponse += duplicates;
     }
 
@@ -266,8 +272,14 @@ public class Command {
      * @return String of duke response containing new task list.
      */
     private String removeDuplicates(TaskList tasks) {
+        int originalTaskListSize = tasks.size();
         tasks.removeDuplicatesExceptFirst();
-        String dukeResponse = "\tDuplicates removed. Only first copies remain.\n";
+        String dukeResponse;
+        if (tasks.size() == originalTaskListSize) {
+            dukeResponse = "\tNo duplicates to be removed Poppins :D";
+            return dukeResponse;
+        }
+        dukeResponse = "\tAll duplicates removed. Only first copies remain! :)\n";
         dukeResponse += printList(tasks);
         return dukeResponse;
     }
@@ -279,8 +291,8 @@ public class Command {
      */
     private String clearTaskList(TaskList tasks) {
         tasks.clear();
-        String dukeResponse = "\tList cleared.\n";
-        dukeResponse += printList(tasks);
+        String dukeResponse = "\t*Snap* Tasks wiped from list!\n"
+            + "You have no more tasks in the list.";
         return dukeResponse;
     }
 
@@ -297,10 +309,10 @@ public class Command {
             "add (homework) to the list with the (specified deadline)";
         dukeResponse += "\n\n\t'event (Christmas) /at (2020-12-25 1600)' : I will " +
             "add (Christmas) event to the list at the (specified time)";
-        dukeResponse += "\n\n\t'find book' : I will find any task that matches book.";
+        dukeResponse += "\n\n\t'find book' : I will find any task that contains the word 'book'.";
         dukeResponse += "\n\n\t'delete 2' : I will delete task 2 from the list.";
         dukeResponse += "\n\n\t'done 3' : I will mark task 3 in the list as complete.";
-        dukeResponse += "\n\n\t'duplicate' : I will list you all the duplicate tasks.";
+        dukeResponse += "\n\n\t'duplicates' : I will list you all the duplicate tasks.";
         dukeResponse += "\n\n\t'remove duplicates' : I will remove all duplicate tasks except the first copy of each task.";
         dukeResponse += "\n\n\t'clear please' : I will clear the tasks list for you.";
         dukeResponse += "\n\n\t'bye' : I will go away ... quietly :(";

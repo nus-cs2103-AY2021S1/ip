@@ -15,7 +15,7 @@ public enum CommandType {
         HANDLEVENT,
         DELETETASK,
         FINDMATCHINGTASK,
-        DUPLICATE,
+        DUPLICATES,
         REMOVEDUPLICATES,
         CLEAR,
         HELP,

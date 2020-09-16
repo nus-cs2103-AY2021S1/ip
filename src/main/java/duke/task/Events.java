@@ -27,7 +27,7 @@ public class Events extends TimedTask {
             this.localDateTime = LocalDateTime.parse(at, DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));;
         } catch (DateTimeParseException e) {
             throw new DukeDateTimeParseException(
-                "Please input the date and time in YYYY-MM-DD hhmm format"
+                "Please tell me the date and time in YYYY-MM-DD hhmm format"
                     + " with the correct values\n\teg. event hackathon /at 2014-12-25 1630");
         }
 

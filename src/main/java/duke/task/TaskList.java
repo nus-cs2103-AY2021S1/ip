@@ -74,7 +74,7 @@ public class TaskList {
      */
     public String addTask(Task task) {
         taskList.add(task);
-        return "\tGot it. I've added this task:" + "\n\t\t" + task
+        return "\tYou got it Poppins! I've added this task:" + "\n\t\t" + task
             + String.format("\n\tNow you have %d tasks in the list.", taskList.size());
     }
 
@@ -88,21 +88,21 @@ public class TaskList {
     public String deleteTask(String taskInfo) throws DukeIndexOutOfBoundsException {
         String delete = "delete";
         if (taskInfo.trim().length() <= delete.length()) {
-            throw new DukeIndexOutOfBoundsException("The task you want to delete is invalid");
+            throw new DukeIndexOutOfBoundsException("The task you want to delete is invalid :(");
         }
         String taskNoString = taskInfo.replace("delete", "").trim();
         int taskNo;
         try {
             taskNo = Integer.parseInt(taskNoString);
         } catch (NumberFormatException err) {
-            throw new DukeNumberFormatException("Please input a number for the task you want to delete.");
+            throw new DukeNumberFormatException("Please input a number for the task you want to delete :D");
         }
         if (taskNo < STARTINDEX || taskNo > taskList.size()) {
-            throw new DukeIndexOutOfBoundsException("The task you want to delete is invalid");
+            throw new DukeIndexOutOfBoundsException("The task you want to delete is invalid :(");
         }
         int index = taskNo - 1;
         Task t = taskList.remove(index);
-        return "\tNoted. I've removed this task:" + "\n\t\t" + t
+        return "\tYou got it Poppins! I've removed this task:" + "\n\t\t" + t
             + String.format("\n\tNow you have %d tasks in the list.", taskList.size());
     }
 
@@ -130,7 +130,7 @@ public class TaskList {
                         matchList.add(matchTask);
                     }
                 } catch (PatternSyntaxException e) {
-                    throw new DukeInvalidCommandException("Sorry Poppins but I'm not sure about this command :)");
+                    throw new DukeInvalidCommandException("Sorry Poppins but I don't understand what I need to find :(");
                 }
             }
         });
