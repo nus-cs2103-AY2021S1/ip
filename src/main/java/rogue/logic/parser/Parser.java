@@ -12,7 +12,7 @@ import rogue.model.argument.Argument;
  */
 public class Parser {
     /** Message for when user input is not a known {@code Action}. */
-    private static final String ERROR_UNKNOWN_COMMAND = "sToP TrYiNg tO FoOl mE. %s iS An uNkNoWn cOmMaNd.";
+    private static final String ERROR_UNKNOWN_COMMAND = "Stop trying to fool me. %s is an unknown command.";
 
     /**
      * Creates an {@code Executable} to be run by {@code Rogue}.

@@ -13,11 +13,11 @@ import java.util.List;
  */
 public class FindDirective implements Executable {
     /** Message for when the search yields no results. */
-    private static final String MESSAGE_FIND_FAILURE = "oF CoUrSe nOtHiNg iS FoUnD. "
-            + "DoN'T YoU EvEn rEmEmBeR ThE TaSkS YoU AdDeD?";
+    private static final String MESSAGE_FIND_FAILURE = "Of course nothing is found. "
+            + "Don't you even remember the tasks you added?";
 
     /** Message for when there is at least one search result. */
-    private static final String MESSAGE_FIND_SUCCESS = "wHaT? iS NaP TiMe oVeR? hErE ArE YoUr tAsKs tHeN:";
+    private static final String MESSAGE_FIND_SUCCESS = "What? Is nap time over? Here are your tasks then:";
 
     private final String description; // Defaults to ""
     private final int numOfDays; // Defaults to maximum value of integer

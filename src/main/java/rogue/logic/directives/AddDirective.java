@@ -19,12 +19,12 @@ import java.time.LocalDate;
  */
 public class AddDirective implements Executable {
     /** Message for when the action does not match any valid task. */
-    private static final String ERROR_INVALID_TASK = "sToP TrYiNg tO FoOl mE."
-            + " sUcH A TaSk cAnNoT Be aDdEd.";
+    private static final String ERROR_INVALID_TASK = "Stop trying to fool me."
+            + " Such a task cannot be added.";
 
     /** Message upon adding a {@code Task} successfully. */
-    private static final String MESSAGE_ADD_SUCCESS = "sInCe yOu'rE So hElPlEsS, i'lL ReMeMbEr \"%s\" FoR YoU.\n"
-            + "yOu hAvE MaDe mE ReMeMbEr %d tAsK(s).";
+    private static final String MESSAGE_ADD_SUCCESS = "Since you're so helpless, I'll remember \"%s\" for you.\n"
+            + "You have made me remember %d task(s).";
 
     private final Action action;
     private final String description;

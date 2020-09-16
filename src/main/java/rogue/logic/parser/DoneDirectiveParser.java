@@ -12,8 +12,8 @@ public class DoneDirectiveParser {
     private static final String OPTION_INDEX = "/i";
 
     /** Message for when the index is missing. */
-    private static final String ERROR_INCORRECT_INDEX = "sToP TrYiNg tO FoOl mE. tHe \"done\" ComMand"
-            + " mUsT Be FolLoWed bY tHe InDEx Of THe TAsK.";
+    private static final String ERROR_INCORRECT_INDEX = "Stop trying to fool me. The \"done\" command"
+            + " must be followed by the index of the task.";
 
     /**
      * Creates a {@code DoneDirective} for a {@code Task}.

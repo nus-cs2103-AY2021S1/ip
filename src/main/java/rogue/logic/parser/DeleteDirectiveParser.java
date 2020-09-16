@@ -12,8 +12,8 @@ public class DeleteDirectiveParser {
     private static final String OPTION_INDEX = "/i";
 
     /** Message for when the index is missing. */
-    private static final String ERROR_INCORRECT_INDEX = "sToP TrYiNg tO FoOl mE. tHe \"delete\" ComMand"
-            + " mUsT Be FolLoWed bY tHe InDEx Of THe TAsK.";
+    private static final String ERROR_INCORRECT_INDEX = "Stop trying to fool me. The \"delete\" command"
+            + " must be followed by the index of the task.";
 
     /**
      * Creates a {@code DeleteDirective} for a {@code Task}.

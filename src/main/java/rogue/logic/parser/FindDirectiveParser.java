@@ -15,12 +15,12 @@ public class FindDirectiveParser {
     private static final String OPTION_SEARCH_DAYS = "/days";
 
     /** Message when no search terms are provided. */
-    private static final String ERROR_MISSING_SEARCH_TERM = "sToP TrYiNg tO FoOl mE. "
-            + "fInD MuSt bE FoLlOwEd bY a SeArCh cOnDiTiOn.";
+    private static final String ERROR_MISSING_SEARCH_TERM = "Stop trying to fool me. "
+            + "The \"find\" command must be followed by a search condition.";
 
     /** Message when the number of days provided is not an integer. */
-    private static final String ERROR_INCORRECT_DAYS = "sToP TrYiNg tO FoOl mE. "
-            + " dAyS ShOuLd bE A NuMbEr.";
+    private static final String ERROR_INCORRECT_DAYS = "Stop trying to fool me. "
+            + " The number of days should be a number.";
 
     /**
      * Creates a {@code FindDirective} for a {@code Task}.

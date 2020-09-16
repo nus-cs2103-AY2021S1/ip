@@ -21,8 +21,8 @@ public class ArgumentParser {
     public static final Pattern PATTERN_OPTIONS = Pattern.compile("(/[\\w-]+)\\s+([\\w\\s-]+)");
 
     /** Message for empty or invalid user inputs. */
-    private static final String ERROR_INVALID_INPUT = "dO YoU NoT KnOw tHe cOmMaNdS?"
-            + "i cOuLd cOnSiDeR TeLlInG YoU If yOu bEgGeD Me fOr hElP.";
+    private static final String ERROR_INVALID_INPUT = "Do you not know the commands?"
+            + "I could consider telling you if you begged for help.";
 
     /**
      * Parses the input into an {@code Action} and its corresponding options.

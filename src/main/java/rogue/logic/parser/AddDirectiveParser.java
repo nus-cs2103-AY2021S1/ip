@@ -23,20 +23,20 @@ public class AddDirectiveParser {
     private static final String OPTION_EVENT_DATETIME = "/at";
 
     /** Message for when the description is missing. */
-    private static final String ERROR_MISSING_DESC = "sToP TrYiNg tO FoOl mE. "
-            + "a taSK MuSt bE FoLlOwEd bY A DesCrIpTiOn.";
+    private static final String ERROR_MISSING_DESC = "Stop trying to fool me. "
+            + "A task must be followed by a description.";
 
     /** Message for when the date is missing from a datetime. */
-    private static final String ERROR_MISSING_DATE = "sToP TrYiNg tO FoOl mE."
-            + " tHe dAtE MuSt cOmE RiGhT AfTeR \"%s\".";
+    private static final String ERROR_MISSING_DATE = "Stop trying to fool me."
+            + " The date must come right after \"%s\".";
 
     /** Message for when the format of the dead is incorrect. */
-    private static final String ERROR_INCORRECT_DATE_FORMAT = "sToP TrYiNg tO FoOl mE."
-            + " dAtE MuSt bE In yEaR-MoNtH-DaY FoRmAt.";
+    private static final String ERROR_INCORRECT_DATE_FORMAT = "Stop trying to fool me."
+            + " The date must be in year-month-date format.";
 
     /** Message for when the action does not match any valid task. */
-    private static final String ERROR_INVALID_TASK = "sToP TrYiNg tO FoOl mE."
-            + " sUcH A TaSk cAnNoT Be aDdEd.";
+    private static final String ERROR_INVALID_TASK = "Stop trying to fool me."
+            + " Such a task cannot be added.";
 
     /**
      * Creates an {@code AddDirective} for a {@code Task}.

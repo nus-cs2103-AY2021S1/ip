@@ -21,7 +21,8 @@ public class ListDirective implements Executable {
     @Override
     public Report execute(Storage storage, TaskList tasks, Ui ui) {
         StringBuilder builder = new StringBuilder();
-        builder.append("dO YoU ReAlLy nEeD Me tO NaMe tHeM OuT foR yOu?\n");
+        builder.append("Do you really need me to name them out for you?\n");
+        builder.append("\n");
 
         int i = 0;
         for (Task task : tasks.getTaskList()) {
