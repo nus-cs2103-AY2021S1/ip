@@ -8,7 +8,7 @@ public class FindTaskCommand extends Command {
     protected String keyword;
 
     public FindTaskCommand(String keyword) {
-        super(CommandType.FIND);
+        super(CommandType.FINDTASK);
         this.keyword = keyword;
     }
 
