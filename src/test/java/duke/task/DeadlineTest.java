@@ -22,7 +22,8 @@ public class DeadlineTest {
         Deadline deadline = Deadline.createDeadline(description);
         deadline.addTags(new String[]{"deadline1", "deadline2", "deadline3"});
         String saveString = deadline.toSaveString();
-        String expected = "0deadline " + description + " " + Task.TAGS_DELIMITER + "#deadline1 #deadline2 #deadline3";
+        String expected = "0deadline " + description + " "
+                + Task.TAGS_DELIMITER + " " + "#deadline1 #deadline2 #deadline3";
         assertEquals(expected, saveString);
     }
 

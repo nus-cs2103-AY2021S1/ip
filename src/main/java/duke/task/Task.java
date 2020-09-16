@@ -7,7 +7,7 @@ import java.util.List;
 
 // Parent class for all types of tasks that can be created by the user.
 public abstract class Task {
-    public static final String TAGS_DELIMITER = "//tags ";
+    public static final String TAGS_DELIMITER = "//tags";
     private static final String SYMBOL_DONE = "O";
     private static final String SYMBOL_NOT_DONE = "X";
 
@@ -76,7 +76,7 @@ public abstract class Task {
         if (tags.isEmpty()) {
             return "";
         }
-        return TAGS_DELIMITER + stringifyTags();
+        return TAGS_DELIMITER + " " + stringifyTags();
     }
 
     @Override
