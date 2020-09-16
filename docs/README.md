@@ -21,7 +21,9 @@ Luke is the **go-to desktop app for managing tasks, deadlines, and events**. Opt
 
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.
 
-<img src="https://github.com/gsmoon97/luke/blob/master/docs/Ui.png" alt="Welcome GUI" width="250"/>
+<p align="center">
+  <img src="https://github.com/gsmoon97/luke/blob/master/docs/Welcome.png" alt="Welcome GUI" width="300"/>
+</p>
 
 5. Type the command in the command box and press Enter to execute it. 
 e.g. typing `list` and pressing Enter will list out the current tasks.
@@ -37,8 +39,7 @@ Some example commands you can try:
 
 6. Refer to the Features below for details of each command.
 
-##Features
-
+## Features
 >  :information_source: Notes about the command format:
 >
 > * Words in UPPER_CASE are the parameters to be supplied by the user.
