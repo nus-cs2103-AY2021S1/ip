@@ -1,20 +1,51 @@
 # User Guide
 
-## Features 
-
-### Feature 1 
-Description of feature.
-
 ## Usage
 
-### `Keyword` - Describe action
+##### Misc
 
-Describe action and its outcome.
+exit program
+```
+bye/b
+```
 
-Example of usage: 
+##### Viewing & querying tasks
 
-`keyword (optional arguments)`
+List task details: id, description, time stamp etc...
+```
+list/l
+```
 
-Expected outcome:
+Search for matches in tasks, return the id
+```
+find/f,<keywords>
+```
 
-`outcome`
+##### Updating tasks
+
+Indicate a task is complete
+```
+done/do,<task id>
+```
+
+Delete a task
+```
+delete/del,<task id>
+```
+
+##### Creating tasks
+
+Add a task to todos
+```
+todo/t,<task name> 
+```
+
+Add a task with a deadline
+```
+deadline/de,<task name>,<time> 
+```
+ 
+Add an event
+```
+event/e,<task name>,<time>
+```
