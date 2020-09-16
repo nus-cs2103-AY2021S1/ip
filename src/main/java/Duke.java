@@ -11,7 +11,8 @@ public class Duke {
     private TaskManager taskManager;
     private Storage fileHandler;
 
-    public Duke(String filePath) throws IOException {
+    public Duke() throws IOException {
+        String filePath = "data/duke.txt";
         this.fileHandler = new Storage(filePath);
         this.taskManager = new TaskManager();
 
@@ -37,16 +38,21 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
 
         System.out.println(logo +"Hello! I'm Duke\n" + "What can I do for you?");
-        Duke duke = new Duke("data/duke.txt");
+        Duke duke = new Duke();
+        duke.run();
     }
 
     private void run() throws IOException {
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
-        Command command = Parser.parseInput(input);
 
-        assert command != null;
-        System.out.println(command.handle(input, taskManager, fileHandler));
+        while (input != null) {
+            Command command = Parser.parseInput(input);
+            assert command != null;
+            System.out.println(command.handle(input, taskManager, fileHandler));
+            input = scanner.nextLine();
+        }
+        scanner.close();
     }
 
     /**
@@ -55,13 +61,13 @@ public class Duke {
      */
     public String getResponse(String input) throws IOException {
         String trimmedInput = input.trim();
-        String e = DukeExceptionHandler.handleException(trimmedInput);
-        if (e != null) {
+        // String e = DukeExceptionHandler.handleException(trimmedInput);
+/*        if (e != null) {
             return e;
-        } else {
+        } else {*/
             Command command = Parser.parseInput(trimmedInput);
             assert command != null;
             return command.handle(trimmedInput, taskManager, fileHandler);
-        }
+        // }
     }
 }

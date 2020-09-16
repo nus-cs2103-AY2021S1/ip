@@ -25,8 +25,8 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/duke1.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/duke2.png"));
 
     @FXML
     public void initialize() {
@@ -56,11 +56,10 @@ public class MainWindow extends AnchorPane {
                 );
                 userInput.clear();
             }
-
-        } catch (FileNotFoundException e) {
+/*        } catch (FileNotFoundException e) {
             System.out.println("File not found!");
 
-        } catch(IOException e) {
+        */}catch(IOException e) {
             System.out.println("OOPS something went wrong!");
         }
     }
