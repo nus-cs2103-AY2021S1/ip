@@ -1,5 +1,2 @@
-T | 1 | buy chicken
 T | 0 | attend tutorial
-D | 0 | do homework | 2020-05-19 2100
-E | 0 | meet friends | 2020-05-19 2200 to 2020-05-19 2300
-D | 1 | do homework | 2020-05-20 0800
+D | 0 | do homework | 2020-05-19 2200

@@ -18,15 +18,10 @@ public class UI {
     /**
      * Prints out a greeting from Bob to the user.
      */
+
     public static String greet() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
         String greetings = "Hello! I'm Bob\nWhat can I do for you?";
-        String exit = "Bye! Hope to see you again.";
-        return "Hello from\n" + logo + greetings;
+        return greetings;
     }
 
     /**

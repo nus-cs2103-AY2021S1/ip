@@ -38,6 +38,7 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    //@@Author
     public MainWindow() {
         this.bob = new Bob("data/save.txt");
         try {
