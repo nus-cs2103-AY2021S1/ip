@@ -51,11 +51,12 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
-        if (input.equals("bye")) {
+        if (input.equals("/bye")) {
             // Create a timer so that the user has time to read the goodbye message
             new Timer().schedule(new TimerTask() {
                 public void run () {
                     Platform.exit();
+                    System.exit(0);
                 }
             }, 2000);
         }
