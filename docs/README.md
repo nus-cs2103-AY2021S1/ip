@@ -18,11 +18,12 @@
     3.6. [Exiting the program: `bye`](#6-Exiting-the-program-bye)   
     
     3.7. [Saving/loading data](#7-Savingloading-data)   
+<br><br>
 
 ## Introduction
 Welcome to the Duke Chatbot User Guide! Duke Chatbot are for users who prefer to use a desktop application for their task management. Duke Chatbot is optimised for users who prefer to use the Command Line Interface (CLI) while reaping the visual benefits of a Graphical User Interface (GUI).
 Duke Chatbot has several features to help you manage your tasks. Sounds interesting? Head over to [**Quick Start**](#Quick-Start) to get started!
-
+<br><br>
 
 
 ## Quick Start
@@ -35,7 +36,7 @@ Duke Chatbot has several features to help you manage your tasks. Sounds interest
 
 * Now you can explore the features of Duke Chatbot!
 * Head over to [**Features**](#Features) for detailed explanation of each command.
-
+<br><br>
 
 
 ## Features 
