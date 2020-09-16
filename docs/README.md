@@ -140,7 +140,7 @@ Here are the tasks in your list:
 The task to be marked is indicated by the index after the `done` command, you can view the index of the task by typing `list`.
 
 Format:
-`done INTEGER`
+`done INDEX`
 
 Example of usage: 
 
@@ -156,7 +156,7 @@ Nice! I've marked this task as done:
 The task to be deleted is indicated by the index after the `done` command, you can view the index of the task by typing `list`.
 
 Format:
-`delete INTEGER`
+`delete INDEX`
 
 Example of usage: 
 
@@ -190,7 +190,7 @@ Here are the matching tasks in your list:
 The task to be reminded is indicated by the index after the `remind` command, you can view the index of the task by typing `list`. Also, state whether to activate or deactivate the reminder using `y` for yes, `n` for no after the `remind` command.
 
 Format:
-`remind INTEGER Y/N`
+`remind INDEX Y/N`
 
 Example of usage: 
 
@@ -236,6 +236,21 @@ Expected outcome:
 ```
 Bye ^.^, Hope to see you again soon!!!
 ```
+
+## Command Summary
+
+Action | Command | Format, Examples
+-------|---------|-----------------
+Add a ToDo task | `todo` | `todo DESCRIPTION`<br/><br/>e.g.`todo duke`
+Add an Event task | `event` | `event DESCRIPTION /at DATE`<br/><br/>e.g.`event party /at 2020-11-11 2312`
+Add a Deadline task | `deadline` | `deadline DESCRIPTION /by DATE`<br/><br/>e.g.`deadline project duke /by 2020-11-11 2312`
+Delete a task | `delete` | `delete INDEX `<br/><br/>e.g.`delete 3`
+Mark a task as completed | `done` | `done INDEX`<br/><br/>e.g.`done 1`
+Show your list of tasks | `list` | `list`
+Find tasks | `find` | `find KEYWORD`<br/><br/>e.g.`find duke`
+Set a task on reminder | `remind` | `remind INDEX Y/N`<br/><br/>e.g. `remind 1 y`
+View all commands | `help` | `help`
+Exit the program | `bye` | `bye`
 
 ## FAQ
 **Where does duke store its task?** <br/>
