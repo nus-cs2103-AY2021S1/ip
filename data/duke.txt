@@ -3,3 +3,4 @@
 [T][0] piano practice #funn
 [D][0] iP #cs2103T /by 2020-09-10
 [E][0] piano exam #piano /at 2020-08-09
+[T][0] mum's birthday #family
