@@ -34,7 +34,7 @@ can type fast, Dukenizer can neatly organize your tasks and notes faster than tr
 
 4. Double-click the file to start the app, or run `java -jar <folder path>\duke.jar` in your terminal.
 The GUI similar to the below should appear in a few seconds.
-![Dukenizer start page](start_page.png)
+<br>![Dukenizer start page](start_page.PNG)
 
 5. Type the command in the command box and press Enter to execute it. 
 e.g. typing `help` and pressing enter will show you all the available commands
@@ -74,7 +74,7 @@ Format: `deadline <description> /by <yyyy-MM-dd HH:mm>`
 
 Examples:
 - `deadline homework /by 2019-12-01 00:11`
-![add_deadline](add_deadline.PNG)
+<br>![add_deadline](add_deadline.PNG)
 
 ### Adding an event: `event`
 
@@ -84,7 +84,7 @@ Format: `event <description> /at <yyyy-MM-dd HH:mm>`
 
 Examples:
 - `event birthday party /at 2020-08-22 23:32`
-![add_event](add_event.PNG)
+<br>![add_event](add_event.PNG)
 
 ### Listing all tasks: `list`
 
@@ -126,7 +126,7 @@ Format: `find <description>`
 
 Examples:
 - find `party` returns `birthday party`
-![find](find.PNG)
+<br>![find](find.PNG)
 
 ### Adding a note: `note`
 
@@ -137,7 +137,7 @@ Format: `note <description>`
 Examples:
 - `note iron man 2 is nice`
 - `note Bob is 5cm taller than me`
-![note](note.PNG)
+<br>![note](note.PNG)
 
 ### Listing all notes: `notes`
 Lists all the notes in Dukenizer.
@@ -147,7 +147,7 @@ Format: `notes`
 Examples:
 - `note Bob is 5am taller` followed by `notes` lists the
 notes in your note list.
-![notes](notes.PNG)
+<br>![notes](notes.PNG)
 
 ### Removing a note: `RemoveNote`
 
