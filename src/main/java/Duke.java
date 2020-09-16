@@ -61,9 +61,13 @@ public class Duke {
         try {
             Command c = Parser.parse(input);
             return c.execute(tasks, ui, storage);
-        } catch (DukeException | ParseException e) {
+        } catch (DukeException e) {
             return ui.showError(e.getMessage());
         } catch (IOException e) {
+            return ui.showError(e.getMessage());
+        } catch (ParseException e) {
+            return ui.showError(e.getMessage());
+        } catch (Exception e) {
             return ui.showError(e.getMessage());
         }
     }

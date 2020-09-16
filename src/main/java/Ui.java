@@ -51,7 +51,7 @@ public class Ui {
      * @param tasks
      * @return String
      */
-    public String printAllTask(TaskList tasks) {
+    public String printAllTask(TaskList tasks) throws IndexExceedException {
         int numTask = 0;
         String output = "Here are the tasks in your list:\n";
         while (numTask < tasks.size()) {

@@ -56,7 +56,10 @@ public class TaskList {
      * @param pos int
      * @return Task
      */
-    public Task getTask(int pos) {
+    public Task getTask(int pos) throws IndexExceedException {
+        if (pos + 1 > tasks.size()) {
+            throw new IndexExceedException();
+        }
         return tasks.get(pos);
     }
 
@@ -83,20 +86,24 @@ public class TaskList {
      * @param args
      */
     public static void main(String[] args) {
-        ArrayList<Task> tasksArrayList = new ArrayList<>();
-        String[] tempDateTime1 = {"11-09-2020", "18:00"};
-        String[] tempDateTime2 = {"11-09-2020", "10:00"};
-        String[] tempDate1 = {"09/09/2020"};
-        String[] tempDate2 = {"12/09/2020"};
-        tasksArrayList.add(new Todo("read book"));
-        tasksArrayList.add(new Deadline("return book", LocalDate.now()));
-        tasksArrayList.add(new Deadline("return book", Parser.changeDate(tempDate1)));
-        tasksArrayList.add(new Deadline("return book", Parser.changeDate(tempDate2)));
-        tasksArrayList.add(new Event("dinner with family", Parser.changeDateAndTime(tempDateTime1)));
-        tasksArrayList.add(new Event("dinner with friends", Parser.changeDateAndTime(tempDateTime2)));
-        TaskList tasks = new TaskList(tasksArrayList);
-        tasks.sortByDueDateTime();
-        Ui ui = new Ui();
-        System.out.println(ui.printAllTask(tasks));
+        try {
+            ArrayList<Task> tasksArrayList = new ArrayList<>();
+            String[] tempDateTime1 = {"11-09-2020", "18:00"};
+            String[] tempDateTime2 = {"11-09-2020", "10:00"};
+            String[] tempDate1 = {"09/09/2020"};
+            String[] tempDate2 = {"12/09/2020"};
+            tasksArrayList.add(new Todo("read book"));
+            tasksArrayList.add(new Deadline("return book", LocalDate.now()));
+            tasksArrayList.add(new Deadline("return book", Parser.changeDate(tempDate1)));
+            tasksArrayList.add(new Deadline("return book", Parser.changeDate(tempDate2)));
+            tasksArrayList.add(new Event("dinner with family", Parser.changeDateAndTime(tempDateTime1)));
+            tasksArrayList.add(new Event("dinner with friends", Parser.changeDateAndTime(tempDateTime2)));
+            TaskList tasks = new TaskList(tasksArrayList);
+            tasks.sortByDueDateTime();
+            Ui ui = new Ui();
+            System.out.println(ui.printAllTask(tasks));
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 }

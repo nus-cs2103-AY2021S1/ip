@@ -182,7 +182,7 @@ public class Command {
      * @throws IOException
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidTodoDescripDukeException,
-            InvalidDeadlineDescripDukeException, InvalidEventDescripDukeException,
+            InvalidDeadlineDescripDukeException, InvalidEventDescripDukeException, IndexExceedException,
             InvalidFirstDukeException, ParseException, IOException {
 
         switch (commandType) {
