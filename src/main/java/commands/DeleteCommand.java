@@ -16,6 +16,6 @@ public class DeleteCommand extends Command {
     public CommandResult execute(TaskList tasks, Storage storage) {
         tasks.deleteTask(index);
         // rewrite storage
-        return new CommandResult("Task has be deleted");
+        return new CommandResult("Task has been deleted");
     }
 }
