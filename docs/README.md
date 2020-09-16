@@ -1,5 +1,6 @@
 # Junimo User Guide
 Junimo is a personal task manager that allows you to add, store, delete, find and archive tasks :)
+<br />
 
 ## Quick Start
 1. Ensure that you have Java `11` or above installed in your Computer.
@@ -9,6 +10,7 @@ Junimo is a personal task manager that allows you to add, store, delete, find an
 ![Sample Junimo GUI](https://github.com/jeannetoh99/ip/blob/master/docs/Ui.png?raw=true) <br/>
 5. Talk to Junimo to get it to manage your tasks for you! :)
 6. Refer to [Features](#features) below for details of each command.
+<br />
 
 ## Features
 There are in total 10 features on Junimo for users for you to use. <br/>
@@ -25,7 +27,7 @@ Feature | Description
 `unarchive TASK_INDEX` | Unarchives the task at specified index in archives list.
 `archives` | Displays the list of tasks in archives.
 `bye` | Exits the Junimo application.
-
+<br />
 
 ### 1. Adding a todo: `todo`
 Adds a todo to the task list.
@@ -42,7 +44,7 @@ Expected outcome:
 added: [T][✘] read book.
 Now you have 5 tasks in the list.
 ```
-
+<br />
 
 ### 2. Adding a deadline: `deadline`
 Adds a deadline to the task list.
@@ -59,7 +61,7 @@ Expected outcome:
 added: [D][✘] do project (by: Sep 26 2020).
 Now you have 6 tasks in the list.
 ```
-
+<br />
 
 ### 3. Adding an event: `event`
 Adds an event to the task list.
@@ -76,6 +78,7 @@ Expected outcome:
 added: [E][✘] party (at: the beach).
 Now you have 7 tasks in the list.
 ```
+<br />
 
 ### 4. Viewing your tasks: `list`
 Displays the current task list.
@@ -98,6 +101,7 @@ Here are the tasks in your list:
 6. [D][✘] do project (by: Sep 26 2020)
 7. [E][✘] party (at: the beach)
 ```
+<br />
 
 ### 5. Marking tasks as done: `done`
 Marks the task at the specified index in the task list as done.
@@ -114,6 +118,7 @@ Expected outcome:
 Nice! I've marked this task as done:
 [T][✓] read book
 ```
+<br />
 
 ### 6. Finding Tasks using Keyword: `find`
 Displays the list of tasks with the keyword found in their descriptions.
@@ -132,6 +137,7 @@ Here are the matching tasks in your list:
 2. [D][✓] write book (by: Dec 12 2020)
 3. [T][✓] read book
 ```
+<br />
 
 ### 7. Archive tasks: `archive`
 Archives the task at specified index in task list.
@@ -148,6 +154,7 @@ Expected outcome:
 The following task has been archived:
 [D][✘] do project (by: Sep 26 2020)
 ```
+<br />
 
 ### 8. Unarchive tasks: `unarchive`
 Unarchives the task at specified index in archives list.
@@ -164,6 +171,7 @@ Expected outcome:
 The following task has been unarchived:
 [D][✘] do project (by: Sep 26 2020)
 ```
+<br />
 
 ### 9. View your archives: `archives`
 Displays the list of tasks in archives.
@@ -180,6 +188,7 @@ Expected outcome:
 Here are the archived tasks in your list:
 1. [T][✘] archive this
 ```
+<br />
 
 ### 10. Exit the program: `bye`
 Exits the Junimo application.
