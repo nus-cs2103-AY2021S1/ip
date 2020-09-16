@@ -37,18 +37,6 @@ Enters the sleep mode where the chatbot ceases to respond until the correct comm
 
 ## Usage
 
-### `Keyword` - Describe action
-
-Describe action and its outcome.
-
-Example of usage: 
-
-`keyword (optional arguments)`
-
-Expected outcome:
-
-`outcome`
-
 ### `help` - Requests for the Command Guide
 
 Displays for the Command Guide requested.
