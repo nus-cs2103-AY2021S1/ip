@@ -1,0 +1,9 @@
+T|0|do cs2103T quiz |#homework
+T|0| review cs2103T ip |#homework#project
+T|0| watch batman|
+E|0|watch batman|2020-12-04 21:00|#movie
+D|0|do cs2103T quiz|2020-12-04 21:00|#homework
+T|0|sdf |#aalkdsj
+T|0| asldjf|
+E|0|sddf|lksdj|#w
+T|0|o|

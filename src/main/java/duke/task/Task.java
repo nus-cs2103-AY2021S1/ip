@@ -22,19 +22,19 @@ public class Task {
             while (!input.substring(start, start + 4).equals("todo")) {
                 start++;
             }
-            return input.substring(start + 5);
+            return input.substring(Math.min(start + 5, input.length() - 1));
         } else if (type == TaskType.DEADLINE) {
             int start = 0;
             while (!input.substring(start, start + 8).equals("deadline")) {
                 start++;
             }
-            return input.substring(start + 9);
+            return input.substring(Math.min(start + 9, input.length() - 1));
         } else {
             int start = 0;
             while (!input.substring(start, start + 5).equals("event")) {
                 start++;
             }
-            return input.substring(start + 6);
+            return input.substring(Math.min(start + 6, input.length() - 1));
         }
     }
 
@@ -73,7 +73,7 @@ public class Task {
         if (end >= len) {
             end = len - 1;
         }
-        if (start + 4 < end - 1 || start > end) {
+        if (start + 4 > end - 1 || start > end) {
             return "";
         }
         return input.substring(start + 4, (input.charAt(end) != '#' ? end + 1 : end - 1));

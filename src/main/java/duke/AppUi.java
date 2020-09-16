@@ -191,7 +191,7 @@ public class AppUi extends Ui {
      * @return the Tasks of finding result for matching keyword
      */
     public String getFindResult(ArrayList<Task> list) {
-        StringBuilder res = new StringBuilder("Here are the matching tasks in your list:");
+        StringBuilder res = new StringBuilder("Here are the matching tasks in your list:\n");
         for (int i = 0; i < list.size(); i++) {
             res.append(String.format("%d. ", i + 1)).append(list.get(i).toString()).append("\n");
         }
@@ -213,10 +213,10 @@ public class AppUi extends Ui {
     public static String getLogo(){
         return "Hello from\n"
                 + " ___            _        \n"
-                + "|  _  \\  _   _  | |  _    ___ \n"
-                + "| | |  |  | | | |   | |/ /      / _ \\\n"
-                + "| |_|  |  | |_| |   |  <     |  __/\n"
-                + "|___/  \\__,_|_ |  |\\_ \\ ___|\n"
+                + "|  _  \\  _   _  | |  _  __ \n"
+                + "| | |  |  | | | | | | |/ /   / _ \\\n"
+                + "| |_|  |  | |_| | | | \\ \\ |  __/\n"
+                + "|___/  \\__,_|_|  \\_\\\\ __|\n"
                 + "o(=*T*=)m\n";
     }
 }
