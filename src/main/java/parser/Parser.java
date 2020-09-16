@@ -68,6 +68,8 @@ public class Parser {
             if (line.length() < 7 || !line.contains("at")) {
                 throw new IncompleteInputException();
             } else {
+                taskDetails = line.substring(6, line.indexOf('/') - 1);
+
                 if (line.contains("/p")) {
                     String priorityLine = line.substring(line.lastIndexOf("/p"));
 
@@ -80,7 +82,6 @@ public class Parser {
                 } else {
                     date = line.substring(line.lastIndexOf("at") + 3);
                 }
-                taskDetails = line.substring(6, line.indexOf('/') - 1);
             }
 
         } else if (line.contains("deadline")) {
@@ -88,6 +89,8 @@ public class Parser {
             if (line.length() < 10 || !line.contains("by")) {
                 throw new IncompleteInputException();
             } else {
+                taskDetails = line.substring(9, line.indexOf('/') - 1);
+
                 if (line.contains("/p")) {
                     String priorityLine = line.substring(line.lastIndexOf("/p"));
 
@@ -100,7 +103,6 @@ public class Parser {
                 } else {
                     date = line.substring(line.lastIndexOf("by") + 3);
                 }
-                taskDetails = line.substring(9, line.indexOf('/') - 1);
             }
 
         } else if (line.contains("done")) {

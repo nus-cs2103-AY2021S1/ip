@@ -2,7 +2,6 @@ package task;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.PriorityQueue;
 
 /**
  * <h1>TaskList class</h1>
@@ -11,14 +10,12 @@ import java.util.PriorityQueue;
 public class TaskList {
     private List<Task> list;
     private int totalTasks;
-    private PriorityQueue<Task> priorityQueue;
 
     /**
      * Creates a TaskList object.
      */
     public TaskList() {
         list = new ArrayList<>();
-        priorityQueue = new PriorityQueue<>();
         totalTasks = 0;
     }
 
@@ -59,12 +56,16 @@ public class TaskList {
             list.add(t);
         } else {
             for (int i = 0; i < totalTasks; i++) {
-                if (list.get(i).getPriority() == tP) {
+                if (list.get(i).getPriority() == 0) {
+                    list.add(i, t);
+                    break;
+                } else if (list.get(i).getPriority() > tP) {
                     list.add(i, t);
                     break;
                 }
             }
         }
+        list.add(t);
         totalTasks++;
     }
 

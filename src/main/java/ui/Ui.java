@@ -97,8 +97,7 @@ public class Ui {
             toReturn += "\n";
 
         } catch (DateTimeParseException e) {
-            toReturn += "Wrong date format. Please follow this format: YYYY-MM-DD.";
-            toReturn += "\n";
+            toReturn += "Wrong date format. Please follow this format: YYYY-MM-DD.\n";
         }
 
         toReturn += LINE;
@@ -193,7 +192,7 @@ public class Ui {
      * @param task Task details.
      */
     public String todo(String task, int priority) throws NumberOutOfRangeException {
-        if (priority < 0 || priority > list.getTotalTasks() + 1) {
+        if (priority < 0) {
             throw new NumberOutOfRangeException();
         } else {
             Todo todo = new Todo(task, false, priority);
@@ -211,7 +210,7 @@ public class Ui {
      * @param date Date of event.
      */
     public String event(String task, String date, int priority) throws DateTimeParseException, NumberOutOfRangeException {
-        if (priority < 0 || priority > list.getTotalTasks() + 1) {
+        if (priority < 0) {
             throw new NumberOutOfRangeException();
         } else {
             Event event = new Event(task, date, false, priority);
@@ -229,7 +228,7 @@ public class Ui {
      * @param date Date of deadline.
      */
     public String deadline(String task, String date, int priority) throws DateTimeParseException, NumberOutOfRangeException {
-        if (priority < 0 || priority > list.getTotalTasks() + 1) {
+        if (priority < 0) {
             throw new NumberOutOfRangeException();
         } else {
             Deadline deadline = new Deadline(task, date, false, priority);
