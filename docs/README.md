@@ -1,8 +1,8 @@
 # Fei User Guide
 
 ## Introduction
-Fei is a Task Manager application, it uses Command Line Interface(CLI). 
-It can help people (who prefers typing to voice/mouse command) to manage their tasks more efficiently.
+Fei is a Task Manager application; it uses the Command Line Interface(CLI). 
+It can help people (who prefer typing to voice/mouse command) to manage their tasks more efficiently.
 
 ## User interface
 ![UI](Ui.png)
@@ -23,7 +23,7 @@ It can help people (who prefers typing to voice/mouse command) to manage their t
 * Delete a task:
     **`delete`**
 
-* Find all tasks that matches the given keyword:
+* Find all tasks that match the given keyword:
     **`find`**
     
 * Show an overall statistics of undone tasks:
@@ -53,8 +53,8 @@ Now you have 1 tasks in the list.
 ```
 
 ### 2. `deadline DESCRIPTION /by TIME` - Add *deadline* task to the list.
-Tips: If you input the time in format yyyy-mm-dd, a more readable format will be display.
-Otherwise your time will be displayed in your input format.
+Tips: If you input the time in format yyyy-mm-dd, a more readable format will be displayed.
+Otherwise, your time will be displayed in your input format.
 
 Example of usage: 
 
@@ -135,7 +135,7 @@ Now you have 2 tasks in the list.
 ```
 
 ### Find Command
-### `find KEYWORD` - Find all tasks that matches the given keyword.
+### `find KEYWORD` - Find all tasks that match the given keyword.
 Example of usage: 
 
 * `find ip`
@@ -148,7 +148,7 @@ Here are the matching tasks in your list:
 ```
 
 ### Statistic Command
-### `stats` - Show an overall statistics of undone tasks.
+### `stats` - Show overall statistics of undone tasks.
 Example of usage: 
 
 * `stats`
@@ -182,7 +182,7 @@ You can replace '[xxx]' with your own input.
 ```
 
 ### Exit Command
-### `bye`, `exit` - Show goodbye message, and exit the application.
+### `bye`, `exit` - Show goodbye message and exit the application.
 Example of usage: 
 
 * `bye`
