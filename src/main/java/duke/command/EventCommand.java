@@ -1,15 +1,17 @@
 package duke.command;
 
+import duke.exception.DukeException;
 import duke.main.Directory;
 import duke.storage.DukeFileWriter;
 import duke.task.Event;
 import duke.task.Task;
+import duke.tools.Format;
 import duke.tools.Time;
 
+/**
+ * Represents a event command.
+ */
 public class EventCommand implements Command {
-    protected static final String FUNCTION = "[" + CommandString.EVENT
-            + "] <detail> /on <when>";
-
     private final String detail;
     private final Time on;
 
@@ -24,10 +26,12 @@ public class EventCommand implements Command {
     }
 
     @Override
-    public Response process() {
+    public Response process() throws DukeException {
         Task task = new Event(detail, on.toString());
         DukeFileWriter data = new DukeFileWriter(Directory.FILEDIRECTORY, true);
         data.writeToFile(task.toString());
-        return new Response(task.toString());
+        return new Response(
+                new Format<>(task).toString()
+        );
     }
 }

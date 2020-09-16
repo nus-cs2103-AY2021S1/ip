@@ -12,7 +12,7 @@ public class TaskList<T> {
     private List<T> taskList;
 
     /**
-     * Constructs a TaskList.
+     * Constructs a task list.
      */
     public TaskList() {
         this.taskList = new ArrayList<>();
@@ -29,9 +29,9 @@ public class TaskList<T> {
     }
 
     /**
-     * Gets all Tasks in the list.
+     * Gets all tasks in the list.
      *
-     * @return The arrayList which stores all the tasks.
+     * @return the arrayList which stores all the tasks.
      */
     public List<T> getTaskList() {
         return this.taskList;

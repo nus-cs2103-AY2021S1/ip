@@ -11,7 +11,7 @@ public class Duke {
     private Ui ui;
 
     /**
-     * Constructs Duke object.
+     * Constructs a Duke program.
      */
     public Duke() {
         this.ui = new Ui();
@@ -20,7 +20,7 @@ public class Duke {
     /**
      * Gets the Ui object in Duke.
      *
-     * @return The Ui object.
+     * @return the Ui object.
      */
     public Ui getUi() {
         return this.ui;
@@ -29,8 +29,8 @@ public class Duke {
     /**
      * Returns the response after user input.
      *
-     * @param input String of user input.
-     * @return The response of the user input.
+     * @param input string of user input.
+     * @return the response to the user input.
      */
     public Response getResponse(String input) throws DukeException {
         return ui.getCommand(input).process();

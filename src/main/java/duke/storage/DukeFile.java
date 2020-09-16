@@ -9,7 +9,6 @@ import java.util.List;
 
 import duke.exception.DukeException;
 import duke.exception.Exceptions;
-import duke.main.Duke;
 
 /**
  * Makes general approaches to access a file given a directory.
@@ -18,9 +17,9 @@ public class DukeFile {
     protected Path path;
 
     /**
-     * Constructs a DukeFile object.
+     * Constructs a Duke file.
      *
-     * @param path A string which contains
+     * @param path a string which contains
      *             the directory of the file
      *             that is to be read.
      */
@@ -31,7 +30,7 @@ public class DukeFile {
     /**
      * Checks if the file in the path exists.
      *
-     * @return True if the file described in the path exists.
+     * @return true if the file described in the path exists.
      */
     protected boolean doesFileExist() {
         return Files.exists(path);
@@ -45,7 +44,6 @@ public class DukeFile {
             Files.createDirectories(path.getParent());
             Files.createFile(path);
         } catch (IOException e) {
-//            System.out.println(DukeException.fileAlreadyExistException());
             throw new DukeException(Exceptions.FILEALREADYEXIST);
         }
     }
@@ -53,7 +51,7 @@ public class DukeFile {
     /**
      * Reads the content of the file in the path.
      *
-     * @return A list of Strings that represent the tasks.
+     * @return a list of Strings that represent the tasks.
      */
     protected List<String> readFile() throws DukeException {
         try {
@@ -67,7 +65,7 @@ public class DukeFile {
      * Writes the taskStrings List into the file
      * with the class field path.
      *
-     * @param taskStrings A List of String with task information.
+     * @param taskStrings a List of String with task information.
      */
     protected void write(List<String> taskStrings) throws DukeException {
         try {
@@ -80,7 +78,6 @@ public class DukeFile {
             writer.flush();
             writer.close();
         } catch (IOException e) {
-//            System.out.println(DukeException.fileWritingException());
             throw new DukeException(Exceptions.WRITINGEXCEPTION);
         }
     }

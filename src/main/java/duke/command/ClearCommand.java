@@ -5,9 +5,10 @@ import duke.main.Directory;
 import duke.main.Statement;
 import duke.storage.DukeFileEditor;
 
+/**
+ * Represents a clear command.
+ */
 public class ClearCommand implements Command {
-    protected static final String FUNCTION = "[" + CommandString.CLEAR + "]";
-
     @Override
     public Response process() throws DukeException {
         DukeFileEditor deleteAll = new DukeFileEditor(Directory.FILEDIRECTORY);

@@ -9,11 +9,18 @@ import duke.task.TaskList;
 import duke.tools.FormatString;
 import duke.tools.Parser;
 
+/**
+ * Represents a delete command that deletes respective
+ * in Duke program.
+ */
 public class DeleteCommand implements Command {
-    protected static final String FUNCTION = "[" + CommandString.DELETE + "] <task index>";
-
     private final int num;
 
+    /**
+     * Constructs a <code>DeleteCommand</code>.
+     *
+     * @param num the index of the task to be deleted.
+     */
     public DeleteCommand(int num) {
         this.num = num;
     }
@@ -28,7 +35,7 @@ public class DeleteCommand implements Command {
         String response =
                 Statement.DELETE.toString()
                         + task
-                        + FormatString.NEXTLINE.toString()
+                        + FormatString.NEXT_LINE.toString()
                         + String.format
                         (Statement.REPORT.toString(), taskList.getTaskList().size());
 

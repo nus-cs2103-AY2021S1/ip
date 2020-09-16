@@ -1,3 +1,4 @@
+import duke.exception.DukeException;
 import duke.tools.Format;
 import duke.tools.Time;
 import duke.task.Deadline;
@@ -59,7 +60,7 @@ public class FormatTest {
      * This is when the input is of a task of Deadline.
      */
     @Test
-    public void formatStringToTaskTest2() {
+    public void formatStringToTaskTest2() throws DukeException {
         String string = "[D][✘] eating (by: Aug_30_2020)";
         Task expected = new Deadline("eating", new Time("2020-08-30").toString());
         Task deadline = Format.decodeTask(string);
@@ -71,7 +72,7 @@ public class FormatTest {
      * This is when the input is of a task of Event.
      */
     @Test
-    public void formatStringToTaskTest3() {
+    public void formatStringToTaskTest3() throws DukeException {
         String string = "[E][✘] eating (at: Aug_30_2020)";
         Task expected = new Event("eating", new Time("2020-08-30").toString());
         Task event = Format.decodeTask(string);

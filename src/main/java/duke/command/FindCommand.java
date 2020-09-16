@@ -7,11 +7,16 @@ import duke.storage.DukeFileReader;
 import duke.task.Task;
 import duke.task.TaskList;
 
+/**
+ * Represents a find command.
+ */
 public class FindCommand implements Command {
-    protected static final String FUNCTION = "[" + CommandString.FIND + "] <keyword(s)>";
-
     private final String[] content;
 
+    /**
+     * Constructs a <code>FindCommand</code>.
+     * @param content a string of keywords to be matched with tasks.
+     */
     public FindCommand(String[] content) {
         this.content = content;
     }

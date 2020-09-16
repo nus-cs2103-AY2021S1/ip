@@ -59,9 +59,9 @@ public class Parser {
      * Returns true if the input from the
      * user is "bye".
      *
-     * @param inputFromClient Input from the
+     * @param inputFromClient input from the
      *                        user.
-     * @return Returns true if input is "bye".
+     * @return true if input is "bye".
      */
     public boolean isEnd(String inputFromClient) {
         return inputFromClient.equals(CommandString.BYE);
@@ -70,7 +70,7 @@ public class Parser {
     /**
      * Runs the Parser.
      *
-     * @param order The order is the string after
+     * @param order the order is the string after
      *              being shortened by Format.shorten().
      */
     public static Command run(String order) throws DukeException {
@@ -155,7 +155,7 @@ public class Parser {
      * Finds the related content from the task details
      * of the tasks in the taskList.
      *
-     * @param content The user input content.
+     * @param content the user input content.
      */
     public static Command find(String content) {
         try {
@@ -181,7 +181,7 @@ public class Parser {
      * This is done by first deleting the required task
      * and then add in a new task.
      *
-     * @return String that contains all tasks after update.
+     * @return string that contains all tasks after update.
      */
     public static Command update() {
         //The number of the task to update is in taskDetail.
@@ -221,8 +221,8 @@ public class Parser {
      * task time if the command is to
      * add a new task.
      *
-     * @param description The user input.
-     * @return Returns a string array whose
+     * @param description the user input.
+     * @return a string array whose
      *         length is 3 and first element
      *         is the command string, second
      *         element is the task detail,
@@ -259,7 +259,7 @@ public class Parser {
 
         //time of the description is found
         if (separator < len - 1) {
-            extract[taskTime] = Format.shorten(description.substring(separator + 1));
+            extract[taskTime] = Format.shorten(description.substring(separator));
         }
 
         assert (separator < len - 1 && extract[taskTime] != null)

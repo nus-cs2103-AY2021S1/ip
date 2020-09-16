@@ -16,9 +16,9 @@ import duke.tools.Time;
 public class DukeFileEditor extends DukeFile {
 
     /**
-     * Constructs a DukeFileEditor object.
+     * Constructs a Duke file editor.
      *
-     * @param path A string which contains
+     * @param path a string which contains
      *             the directory of the file
      *             that is to be read.
      */
@@ -31,7 +31,7 @@ public class DukeFileEditor extends DukeFile {
      * provided by the Directory class
      * with the corresponding line number.
      *
-     * @param lineNum The index of task that the user want to
+     * @param lineNum the index of task that the user want to
      *                delete.
      */
     public void deleteLine(int lineNum) throws DukeException {
@@ -55,7 +55,7 @@ public class DukeFileEditor extends DukeFile {
      * Sets the corresponding
      * task to be marked as done in Duke.txt.
      *
-     * @param lineNum The index of task that the user want to
+     * @param lineNum the index of task that the user want to
      *                delete.
      */
     public void setTaskDone(int lineNum) throws DukeException {
@@ -75,9 +75,9 @@ public class DukeFileEditor extends DukeFile {
     /**
      * Updates the corresponding task and returns the string of the task.
      *
-     * @param lineNum The lineNum of the Task shown by list command.
-     * @param input The detail that the user wants to change to.
-     * @return The string of the Task being updated.
+     * @param lineNum the lineNum of the Task shown by list command.
+     * @param input the detail that the user wants to change to.
+     * @return the string of the Task being updated.
      */
     public Task update(int lineNum, String command, String input) throws DukeException {
         List<String> taskStrings = readFile();
@@ -86,7 +86,11 @@ public class DukeFileEditor extends DukeFile {
         StringBuilder editedTask = new StringBuilder(requiredTask[0] + " ");
 
         if (command.equals(CommandString.UPDATE_DETAIL)) {
-            editedTask.append(input).append(" ").append(requiredTask[len - 2]).append(requiredTask[len - 1]);
+            if (requiredTask[0].equals("T")) {
+                editedTask.append(input);
+            } else {
+                editedTask.append(input).append(" ").append(requiredTask[len - 2]).append(requiredTask[len - 1]);
+            }
         } else if (command.equals(CommandString.UPDATE_TIME)) {
             for (int i = 1; i < len - 1; i++) {
                 editedTask.append(requiredTask[i]).append(" ");

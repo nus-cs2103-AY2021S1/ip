@@ -13,8 +13,7 @@ import duke.exception.Exceptions;
 
 
 /**
- * Converts the time string
- * of format "yyyy-MM-dd" into "MMM_d_yyyy".
+ * Converts the time string to <code>LocalDateTime</code>.
  */
 public class Time {
     private final String[] timeFormatString = new String[]{
@@ -24,11 +23,6 @@ public class Time {
         "M/d[_HHmm]",
         "d[_HHmm]",
         "HHmm"
-
-//        "d/M[/uuuu][ HHmm]", "d-M[-uuuu][ HHmm]",
-//        "M/d[/uuuu][ HHmm]", "M-d[-uuuu][ HHmm]",
-//        "uuuu/M/d[ HHmm]", "uuuu-M-d[ HHmm]",
-//        "d-MMM[-uuuu][ HHmm]", "d MMM[ HHmm]"
     };
     private final List<DateTimeFormatter> dateTimeFormatterList = createTimeFormat();
     private LocalDateTime localDateTime;
@@ -36,7 +30,7 @@ public class Time {
     /**
      * Constructs a Time.
      *
-     * @param time A string of format
+     * @param time a string of format
      *             of "yyyy-mm-dd".
      */
     public Time(String time) throws DukeException {
@@ -47,17 +41,17 @@ public class Time {
     //https://www.codota.com/code/java/methods/java.time.format.DateTimeFormatterBuilder/appendPattern
     private List<DateTimeFormatter> createTimeFormat() {
         List<DateTimeFormatter> result = new ArrayList<>();
-        for (int i = 0; i < timeFormatString.length; i++) {
+        for (String s : timeFormatString) {
             result.add(
                     new DateTimeFormatterBuilder()
-                    .appendPattern(timeFormatString[i])
-                    .parseDefaulting(ChronoField.YEAR, LocalDateTime.now().getYear())
-                    .parseDefaulting(ChronoField.MONTH_OF_YEAR, LocalDateTime.now().getMonthValue())
-                    .parseDefaulting(ChronoField.DAY_OF_MONTH, LocalDateTime.now().getDayOfMonth())
-                    .parseDefaulting(ChronoField.HOUR_OF_DAY, 0)
-                    .parseDefaulting(ChronoField.MINUTE_OF_HOUR, 0)
-                    .parseDefaulting(ChronoField.SECOND_OF_MINUTE, 0)
-                    .toFormatter()
+                            .appendPattern(s)
+                            .parseDefaulting(ChronoField.YEAR, LocalDateTime.now().getYear())
+                            .parseDefaulting(ChronoField.MONTH_OF_YEAR, LocalDateTime.now().getMonthValue())
+                            .parseDefaulting(ChronoField.DAY_OF_MONTH, LocalDateTime.now().getDayOfMonth())
+                            .parseDefaulting(ChronoField.HOUR_OF_DAY, 0)
+                            .parseDefaulting(ChronoField.MINUTE_OF_HOUR, 0)
+                            .parseDefaulting(ChronoField.SECOND_OF_MINUTE, 0)
+                            .toFormatter()
             );
         }
         return result;
@@ -74,18 +68,6 @@ public class Time {
         // Need to change to command
         throw new DukeException(Exceptions.TIMEFORMATEXCEPTION);
     }
-
-//    public static LocalDateTime parseDateTime(String dateTimeString) throws InvalidCommandException {
-//        for (int i = 0; i < KNOWN_DT_FORMATS.size(); i++) {
-//            try {
-//                return LocalDateTime.parse(dateTimeString, KNOWN_DT_FORMATS.get(i));
-//            } catch (DateTimeParseException ex) {
-//                // ignore
-//            }
-//        }
-//
-//        throw new InvalidCommandException("Invalid datetime! Please use 24h format for time");
-//    }
 
     @Override
     public String toString() {

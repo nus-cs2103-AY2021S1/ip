@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import duke.exception.DukeException;
+import duke.exception.Exceptions;
 
 /**
  * Writes the information into the file provided in the Directory class.
@@ -15,12 +16,12 @@ public class DukeFileWriter extends DukeFile {
     private boolean appendToFile;
 
     /**
-     * Constructs a DukeFileWriter object.
+     * Constructs a Duke file writer.
      *
-     * @param path A string which contains
+     * @param path a string which contains
      *             the directory of the file
      *             that is to be read.
-     * @param appendToFile A boolean of if the user want to make
+     * @param appendToFile a boolean of if the user want to make
      *                       the DukeFileWriter work immediately.
      */
     public DukeFileWriter(String path, boolean appendToFile) {
@@ -32,9 +33,9 @@ public class DukeFileWriter extends DukeFile {
      * Writes the input into the file whose path is from the
      * Directory class.
      *
-     * @param input The input from the users.
+     * @param input the input from the users.
      */
-    public void writeToFile (String input) {
+    public void writeToFile (String input) throws DukeException {
         try {
             if (appendToFile) {
                 Files.write(path, (input + "\n").getBytes(),
@@ -45,7 +46,7 @@ public class DukeFileWriter extends DukeFile {
                 write(inputList);
             }
         } catch (IOException | DukeException ex) {
-            System.out.println(DukeException.fileWritingException());
+            throw new DukeException(Exceptions.WRITINGEXCEPTION);
         }
     }
 }

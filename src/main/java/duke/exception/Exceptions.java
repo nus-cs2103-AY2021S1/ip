@@ -46,7 +46,8 @@ public enum Exceptions {
     TIMEFORMATEXCEPTION {
         @Override
         public String toString() {
-            return "OOPS!!! Your time format seems incorrect, please follow yyyy-mm-dd";
+            return "OOPS!!! Your time format seems incorrect,"
+                    + "use <help> to get the correct format";
         }
     },
 

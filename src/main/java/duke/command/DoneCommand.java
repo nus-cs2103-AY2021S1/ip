@@ -6,14 +6,18 @@ import duke.main.Statement;
 import duke.storage.DukeFileEditor;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.tools.Format;
 import duke.tools.Parser;
 
+/**
+ * Represents a done command.
+ */
 public class DoneCommand implements Command {
-    protected static final String FUNCTION = "[" + CommandString.DONE + "] <task index>";
-
     private final int num;
 
+    /**
+     * Constructs a <code>DoneCommand</code>.
+     * @param num the index of the task to be marked as done.
+     */
     public DoneCommand(int num) {
         this.num = num;
     }

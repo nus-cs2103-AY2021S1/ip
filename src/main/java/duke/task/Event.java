@@ -7,11 +7,11 @@ public class Event extends Task {
     private String time;
 
     /**
-     * Constructs a Event object.
+     * Constructs a event task.
      *
-     * @param description A string describing
+     * @param description a string describing
      *                    the task.
-     * @param on A string recording the time
+     * @param on a string recording the time
      *           of the task.
      */
     public Event(String description, String on) {

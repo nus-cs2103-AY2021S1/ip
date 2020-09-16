@@ -3,7 +3,7 @@ package duke.command;
 import duke.main.Statement;
 
 /**
- * Contains all String for the commands.
+ * a class that contains all String for the commands.
  */
 public class CommandString {
     //Name of different commands.
@@ -33,8 +33,18 @@ public class CommandString {
     public static final String CLEAR_DESCRIPTION = "Clear all stored tasks";
     public static final String UPDATE_DESCRIPTION = "Update a task by time or detail";
 
-    private static final String[] names =
-            new String[]{TODO, DEADLINE, EVENT, BYE, LIST, DONE, DELETE, FIND, CLEAR, UPDATE};
+    private static final String[] namesAndFunctions = new String[]{
+        "[" + TODO + "] <detail>",
+        "[" + DEADLINE + "] <detail> /by <when>",
+        "[" + EVENT + "] <detail> /on <when>",
+        "[" + BYE + "]",
+        "[" + LIST + "]",
+        "[" + DONE + "] <task index>",
+        "[" + DELETE + "] <task index>",
+        "[" + FIND + "] <keyword(s)>",
+        "[" + CLEAR + "]",
+        "[" + UPDATE + "] <task index> <detail/time> /to <content you want to change>"
+    };
 
     private static final String[] descriptions = new String[]{
         TODO_DESCRIPTION, DEADLINE_DESCRIPTION, EVENT_DESCRIPTION, BYE_DESCRIPTION,
@@ -50,10 +60,10 @@ public class CommandString {
         String format = "%s - %s\n";
         StringBuilder result = new StringBuilder(Statement.HELP.toString());
 
-        assert names.length == descriptions.length : "check the length of names and descriptions";
+        assert namesAndFunctions.length == descriptions.length : "check the length of names and descriptions";
 
-        for (int i = 0; i < names.length; i++) {
-            result.append(String.format(format, names[i], descriptions[i]));
+        for (int i = 0; i < namesAndFunctions.length; i++) {
+            result.append(String.format(format, namesAndFunctions[i], descriptions[i]));
         }
         return result;
     }

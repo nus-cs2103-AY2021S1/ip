@@ -1,18 +1,17 @@
 package duke.command;
 
+import duke.exception.DukeException;
 import duke.main.Directory;
 import duke.storage.DukeFileWriter;
 import duke.task.Deadline;
 import duke.task.Task;
-import duke.task.Todo;
+import duke.tools.Format;
 import duke.tools.Time;
 
-import java.time.LocalDateTime;
-
+/**
+ * Represents a deadline command.
+ */
 public class DeadlineCommand implements Command {
-    protected static final String FUNCTION = "[" + CommandString.DEADLINE
-            + "] <detail> /by <when>";
-
     private final String detail;
     private final Time by;
 
@@ -28,10 +27,12 @@ public class DeadlineCommand implements Command {
     }
 
     @Override
-    public Response process() {
+    public Response process() throws DukeException {
         Task task = new Deadline(detail, by.toString());
         DukeFileWriter data = new DukeFileWriter(Directory.FILEDIRECTORY, true);
         data.writeToFile(task.toString());
-        return new Response(task.toString());
+        return new Response(
+                new Format<>(task).toString()
+        );
     }
 }

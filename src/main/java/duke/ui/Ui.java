@@ -1,11 +1,11 @@
 package duke.ui;
 
 import duke.command.Command;
+import duke.command.Response;
 import duke.exception.DukeException;
 import duke.main.Statement;
 import duke.tools.Format;
 import duke.tools.Parser;
-import duke.command.Response;
 
 /**
  * Interacts with the user.
@@ -23,7 +23,7 @@ public class Ui {
     /**
      * Returns the Parser object in this Ui.
      *
-     * @return Parse object in this Ui.
+     * @return parse object in this Ui.
      */
     public Parser getParser() {
         return this.parser;
@@ -32,7 +32,7 @@ public class Ui {
     /**
      * Responds after the user keyed in the input.
      *
-     * @return String of the response from Duke.
+     * @return string of the response from Duke.
      */
     public Command getCommand(String input) throws DukeException {
         String extract = conciseInput(input);
@@ -43,7 +43,7 @@ public class Ui {
      * Eliminates the spaces
      * around the user input.
      *
-     * @return A string with spaces around it.
+     * @return a string with spaces around it.
      */
     public String conciseInput(String input) {
         return Format.shorten(input);

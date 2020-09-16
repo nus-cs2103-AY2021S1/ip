@@ -4,14 +4,7 @@ package duke.tools;
  * Contains all the format related strings.
  */
 public enum FormatString {
-    UNDERSCORE {
-        @Override
-        public String toString() {
-            return "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
-        }
-    },
-
-    NEXTLINE {
+    NEXT_LINE {
         @Override
         public String toString() {
             return "\n";

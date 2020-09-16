@@ -33,14 +33,11 @@ public class Format<T> {
     }
 
     /**
-     * This method only can be used when the content
-     * is of the type of String.
-     *
-     * Returns a Format object whose content has been
+     * Returns a string whose content has been
      * shortened by eliminating the extra spaces at the
      * beginning of the content and at the end of the content.
      *
-     * @return The above described Format object.
+     * @return the above described Format object.
      */
     public static String shorten(String input) {
         int length = input.length();
@@ -66,10 +63,10 @@ public class Format<T> {
      * This method only can be used when the content
      * is of the type of String.
      *
-     * Returns Task whose output of toString method
+     * Returns task whose output of toString method
      * is equal to the content.
      *
-     * @return Task whose output of toString method
+     * @return task whose output of toString method
      *         is equal to the content.
      */
     public static Task decodeTask(String input) {
@@ -110,7 +107,7 @@ public class Format<T> {
         if (this.content instanceof Task) {
             return Statement.TASKADDED.toString()
                     + content
-                    + FormatString.NEXTLINE.toString()
+                    + FormatString.NEXT_LINE.toString()
                     + String.format(Statement.REPORT.toString(), Parser.getTaskList().getTaskList().size());
         }
 

@@ -1,4 +1,5 @@
 import duke.command.CommandString;
+import duke.exception.DukeException;
 import duke.tools.Parser;
 import duke.tools.Time;
 import duke.task.Deadline;
@@ -20,7 +21,7 @@ public class ParserTest {
      * Tests the "todo" command.
      */
     @Test
-    public void runTodoTest() {
+    public void runTodoTest() throws DukeException {
         Parser.run("todo reading");
         Parser.reloadTaskList();
         Task expected = new Todo("reading");
@@ -42,7 +43,7 @@ public class ParserTest {
      * Tests the "deadline" command.
      */
     @Test
-    public void runDeadlineTest() {
+    public void runDeadlineTest() throws DukeException {
         Parser.run("deadline eating /by 2020-08-30");
         Task expected = new Deadline("eating", new Time("2020-08-30").toString());
         boolean isExist = false;
@@ -63,7 +64,7 @@ public class ParserTest {
      * Tests the "event" command.
      */
     @Test
-    public void runEventTest() {
+    public void runEventTest() throws DukeException {
         Parser.run("event working /by 2020-08-30");
         Task expected = new Event("working", new Time("2020-08-30").toString());
         boolean isExist = false;
@@ -84,7 +85,7 @@ public class ParserTest {
      * Tests the "delete" command.
      */
     @Test
-    public void runDeleteTest() {
+    public void runDeleteTest() throws DukeException {
         Parser.run(CommandString.CLEAR);
         Parser.run("event working /by 2020-08-30");
         Parser.run("delete 1");
@@ -106,7 +107,7 @@ public class ParserTest {
      * Tests the "done" command.
      */
     @Test
-    public void runDoneTest() {
+    public void runDoneTest() throws DukeException {
         Parser.run(CommandString.CLEAR);
         Parser.run("event working /by 2020-08-30");
         Parser.run("done 1");

@@ -1,17 +1,17 @@
 package duke.task;
 
 /**
- * Represents a Deadline task.
+ * Represents a deadline task.
  */
 public class Deadline extends Task {
     protected String time;
 
     /**
-     * Constructs a Deadline object.
+     * Constructs a deadline task.
      *
-     * @param description A string describing
+     * @param description a string describing
      *                    the task.
-     * @param by A string recording the time
+     * @param by a string recording the time
      *           of the task.
      */
     public Deadline(String description, String by) {

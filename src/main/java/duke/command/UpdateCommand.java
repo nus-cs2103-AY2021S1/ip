@@ -5,11 +5,13 @@ import duke.main.Directory;
 import duke.main.Statement;
 import duke.storage.DukeFileEditor;
 import duke.task.Task;
+import duke.tools.Format;
 
+/**
+ * Represents a update command which can update time or
+ * detail of one task in the task list.
+ */
 public class UpdateCommand implements Command {
-    protected static final String FUNCTION = "[" + CommandString.UPDATE
-            + "] <task index> <detail/time> /to <content you want to change>";
-
     private final int lineNum;
     private final String detailOrTime;
     private final String input;
@@ -31,6 +33,8 @@ public class UpdateCommand implements Command {
     public Response process() throws DukeException {
         DukeFileEditor editor = new DukeFileEditor(Directory.FILEDIRECTORY);
         Task task = editor.update(lineNum, detailOrTime, input);
-        return new Response(Statement.UPDATE.toString() + task);
+        return new Response(
+                new Format<>(Statement.UPDATE.toString() + task).toString()
+        );
     }
 }

@@ -43,7 +43,7 @@ public class MainWindow extends AnchorPane {
     /**
      * Sets the Duke object to the given duke.
      *
-     * @param duke Input Duke object.
+     * @param duke input Duke object.
      */
     public void setDuke(Duke duke) {
         this.duke = duke;

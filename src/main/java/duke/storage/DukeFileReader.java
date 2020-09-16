@@ -16,9 +16,9 @@ import duke.tools.Format;
 public class DukeFileReader extends DukeFile {
 
     /**
-     * Constructs a DukeFileReader object.
+     * Constructs a Duke file reader.
      *
-     * @param path A string which contains
+     * @param path a string which contains
      *             the directory of the file
      *             that is to be read.
      */
@@ -46,10 +46,9 @@ public class DukeFileReader extends DukeFile {
     }
 
     /**
-     * Finds the Tasks whose detail contains
-     * the content.
+     * Finds the tasks whose detail contains the content.
      *
-     * @param strings User input.
+     * @param strings user input.
      */
     public TaskList<Task> matchContent(String[] strings) throws DukeException {
         TaskList<Task> taskList = new TaskList<>();

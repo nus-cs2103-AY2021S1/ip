@@ -30,6 +30,11 @@ public class DialogBox extends HBox {
     @FXML
     private HBox chatRow;
 
+    /**
+     * Constructs a <code>DialogBox</code>.
+     * @param text a string of input places in the box.
+     * @param img an image representing the speaking person.
+     */
     private DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -55,10 +60,24 @@ public class DialogBox extends HBox {
         setAlignment(Pos.CENTER_LEFT);
     }
 
+    /**
+     * Generates the user dialog.
+     *
+     * @param text the input from the user.
+     * @param img the image of the user.
+     * @return a <code>DialogBox</code> of the user.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Generates the Duke dialog.
+     *
+     * @param text the input from Duke.
+     * @param img the image of Duke.
+     * @return a <code>DialogBox</code> of Duke.
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var dialogBox = new DialogBox(text, img);
         dialogBox.flip();
