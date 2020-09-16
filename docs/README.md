@@ -35,8 +35,8 @@ You have 1 tasks in your list now.
 
 ### 2. Create a `deadline` task 
 **Command**: `deadline <description> /by <date and time>` <br/>
-**Note: Date and time has to be in the format:** <br/>
-**dd/mm/yyyy hh:mm** <br/>
+**Note:** <br/> 
+Date and time has to be in the format: dd/mm/yyyy hh:mm <br/>
 **Function**: Creates a new deadline task and adds it to the user's list of tasks. <br/>
 **Example of usage**: 
 ```
@@ -51,8 +51,8 @@ You have 1 tasks in your list now.
 
 ### 3. Create an `event` task 
 **Command**: `event <description> /at <date and time>` <br/>
-**Note: Date and time has to be in the format:** <br/>
-**dd/mm/yyyy hh:mm** <br/>
+**Note:** <br/> 
+Date and time has to be in the format: dd/mm/yyyy hh:mm <br/>
 **Function**: Creates a new event task and adds it to the user's list of tasks. <br/>
 **Example of usage**: 
 ```
@@ -107,8 +107,8 @@ Here are the tasks that I have found:
 
 ### 7. `Find` a task by `date`
 **Command**: `find_by_date <date>` <br/>
-**Note: Date has to be in the format:** <br/>
-**dd/mm/yyyy** <br/>
+**Note:** <br/>
+Date has to be in the format: dd/mm/yyyy <br/>
 **Function**: Finds and displays all tasks matching the search date. <br/>
 **Example of usage**: 
 ```
