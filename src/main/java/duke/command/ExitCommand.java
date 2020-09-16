@@ -14,6 +14,7 @@ import duke.ui.UiForGui;
  */
 public class ExitCommand extends Command {
 
+    /** Valid words to invoke the exit command */
     public static final List<String> COMMAND_WORDS = new ArrayList<>(List.of("bye", "b"));
 
     /**
@@ -25,7 +26,7 @@ public class ExitCommand extends Command {
     }
 
     /**
-     * Executes the command and terminates the program.
+     * Executes the command in the CLI version of Duke and terminates the program.
      *
      * @param tasks The list of tasks in the program.
      * @param ui The Ui object being used in the program.
@@ -36,6 +37,13 @@ public class ExitCommand extends Command {
         ui.showGoodbye();
     }
 
+    /**
+     * Executes the command in the GUI version of Duke and terminates the program.
+     *
+     * @param tasks The list of tasks in the program.
+     * @param uiForGui The UiForGui object being used in the program.
+     * @param storage The Storage object being used in the program.
+     */
     @Override
     public String execute(TaskList tasks, UiForGui uiForGui, Storage storage) {
         return uiForGui.showGoodbye();

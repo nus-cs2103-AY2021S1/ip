@@ -17,7 +17,9 @@ import duke.ui.UiForGui;
  */
 public class AddTodoCommand extends AddCommand {
 
+    /** Valid words to invoke the add to-do command */
     public static final List<String> COMMAND_WORDS = new ArrayList<>(List.of("todo", "td", "t"));
+
     private String taskDescription;
 
     /**
@@ -30,7 +32,7 @@ public class AddTodoCommand extends AddCommand {
     }
 
     /**
-     * Executes the command. If successful, it will add a to-do task to the task list.
+     * Executes the command in the CLI version of Duke. If successful, it will add a to-do task to the task list.
      *
      * @param tasks The list of tasks in the program.
      * @param ui The Ui object being used in the program.
@@ -48,6 +50,13 @@ public class AddTodoCommand extends AddCommand {
         }
     }
 
+    /**
+     * Executes the command in the GUI version of Duke. If successful, it will add a to-do task to the task list.
+     *
+     * @param tasks The list of tasks in the program.
+     * @param uiForGui The UiForGui object being used in the program.
+     * @param storage The Storage object being used in the program.
+     */
     @Override
     public String execute(TaskList tasks, UiForGui uiForGui, Storage storage) {
         Task newTask = new ToDo(taskDescription);

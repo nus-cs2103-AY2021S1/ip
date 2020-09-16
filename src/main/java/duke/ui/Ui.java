@@ -6,7 +6,7 @@ import duke.TaskList;
 import duke.task.Task;
 
 /**
- * Handles all interactions with the user.
+ * Handles all interactions with the user in the CLI version of Duke.
  */
 public class Ui {
 

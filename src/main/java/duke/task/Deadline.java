@@ -10,7 +10,9 @@ import java.time.format.DateTimeFormatter;
  */
 public class Deadline extends Task {
 
+    /** The task type symbol that is used in the program to represent a deadline task */
     public static final String TASK_TYPE_SYMBOL = "[D]";
+
     private static final String TASK_TYPE_NAME = "deadline";
     private static final String DATE_TIME_FORMAT = "d MMM yyyy @ hh:mma";
 

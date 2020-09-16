@@ -6,8 +6,12 @@ package duke.task;
  */
 public class Task {
 
+    /** Symbol for indicating that a task is completed, in the memory save file */
     public static final int DONE_SYMBOL_MEMORY = 1;
+
+    /** Symbol for indicating that a task has not been completed, in the memory save file */
     public static final int NOT_DONE_SYMBOL_MEMORY = 0;
+
     private static final String DONE_SYMBOL_GUI = "\u2713";
     private static final String NOT_DONE_SYMBOL_GUI = "\u2718";
     private static final String DONE_SYMBOL_CLI = "✓";
@@ -49,11 +53,6 @@ public class Task {
         this.taskTypeName = taskTypeName;
     }
 
-    /**
-     * Indicates if the task is completed or not.
-     *
-     * @return "✓" if the task is completed; "✘" if it is not completed.
-     */
     private String getStatusIconForGui() {
         return (isDone ? DONE_SYMBOL_GUI : NOT_DONE_SYMBOL_GUI);
     }

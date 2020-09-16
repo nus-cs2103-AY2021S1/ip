@@ -17,8 +17,12 @@ import duke.ui.UiForGui;
  */
 public class AddEventCommand extends AddCommand {
 
+    /** Valid words to invoke the add event command */
     public static final List<String> COMMAND_WORDS = new ArrayList<>(List.of("event", "ev", "e"));
+
+    /** Delimiter that separates the task's description and location */
     public static final String COMMAND_SPLIT_WORD = "/at";
+
     private String taskDescription;
     private String taskLocation;
 
@@ -34,7 +38,7 @@ public class AddEventCommand extends AddCommand {
     }
 
     /**
-     * Executes the command. If successful, it will add an event task to the task list.
+     * Executes the command in the CLI version of Duke. If successful, it will add an event task to the task list.
      *
      * @param tasks The list of tasks in the program.
      * @param ui The Ui object being used in the program.
@@ -52,6 +56,13 @@ public class AddEventCommand extends AddCommand {
         }
     }
 
+    /**
+     * Executes the command in the GUI version of Duke. If successful, it will add an event task to the task list.
+     *
+     * @param tasks The list of tasks in the program.
+     * @param uiForGui The UiForGui object being used in the program.
+     * @param storage The Storage object being used in the program.
+     */
     @Override
     public String execute(TaskList tasks, UiForGui uiForGui, Storage storage) {
         Task newTask = new Event(taskDescription, taskLocation);

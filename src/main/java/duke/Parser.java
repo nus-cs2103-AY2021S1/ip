@@ -37,6 +37,7 @@ public class Parser {
      *
      * @param fullCommand The user command to be parsed.
      * @return The appropriate command to be executed.
+     * @throws WrongFormatException If the user command is wrongly formatted.
      */
     public static Command parse(String fullCommand) throws WrongFormatException {
         String[] commandWords = fullCommand.split(" ");

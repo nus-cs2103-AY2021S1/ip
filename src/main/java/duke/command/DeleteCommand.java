@@ -17,8 +17,12 @@ import duke.ui.UiForGui;
  */
 public class DeleteCommand extends Command {
 
+    /** Valid words to invoke the delete command */
     public static final List<String> COMMAND_WORDS = new ArrayList<>(List.of("delete", "del"));
+
+    /** Strict number of arguments expected for the delete command */
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 2;
+
     private int taskIndex;
     private int userSpecifiedIndex;
 
@@ -33,7 +37,7 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Executes the command. If successful, it will remove a task from the task list.
+     * Executes the command in the CLI version of Duke. If successful, it will remove a task from the task list.
      *
      * @param tasks The list of tasks in the program.
      * @param ui The Ui object being used in the program.
@@ -57,6 +61,15 @@ public class DeleteCommand extends Command {
         }
     }
 
+    /**
+     * Executes the command in the GUI version of Duke. If successful, it will remove a task from the task list.
+     *
+     * @param tasks The list of tasks in the program.
+     * @param uiForGui The UiForGui object being used in the program.
+     * @param storage The Storage object being used in the program.
+     * @throws TaskIndexOutOfBoundsException If the index of the task specified by the user is not present in the task
+     * list.
+     */
     @Override
     public String execute(TaskList tasks, UiForGui uiForGui, Storage storage) throws TaskIndexOutOfBoundsException {
         try {

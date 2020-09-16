@@ -6,7 +6,9 @@ package duke.task;
  */
 public class Event extends Task {
 
+    /** The task type symbol that is used in the program to represent an event task */
     public static final String TASK_TYPE_SYMBOL = "[E]";
+
     private static final String TASK_TYPE_NAME = "event";
 
     /** The venue where the task is to be done */

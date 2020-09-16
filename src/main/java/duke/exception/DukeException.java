@@ -6,8 +6,12 @@ package duke.exception;
  */
 public class DukeException extends Exception {
 
+    /** Describes the error that occurred in more detail to the user */
     protected String additionalErrorDescription;
 
+    /**
+     * Creates and initializes a DukeException object.
+     */
     public DukeException(String additionalErrorDescription) {
         this.additionalErrorDescription = additionalErrorDescription;
     }

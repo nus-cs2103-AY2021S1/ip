@@ -11,10 +11,10 @@ import duke.ui.UiForGui;
 import javafx.application.Platform;
 
 /**
- * Represents the Duke chat bot. Duke can keep a record of user's inputs as a list of tasks, mark them as completed
- * when they are done, and show the user the list of tasks upon request. This list of tasks will be written to the
- * user's hard disk such that it can be saved and loaded. Currently, Duke supports 3 types of tasks: to-do, deadline
- * and event tasks.
+ * Represents the Duke chat bot a.k.a. Star Bot. Duke can keep a record of user's inputs as a list of tasks, mark them
+ * as completed when they are done, and show the user the list of tasks upon request. This list of tasks will be
+ * written to the user's hard disk such that it can be saved and loaded. Currently, Duke supports 3 types of tasks:
+ * to-do, deadline and event tasks.
  */
 public class Duke {
     /** The relative path in which the save file is located */

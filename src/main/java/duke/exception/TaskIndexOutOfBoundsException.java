@@ -7,7 +7,7 @@ package duke.exception;
 public class TaskIndexOutOfBoundsException extends DukeException {
 
     /**
-     * Creates and initializes an TaskIndexOutOfBoundsException object.
+     * Creates and initializes a TaskIndexOutOfBoundsException object.
      *
      * @param index The index specified by the user.
      */

@@ -14,10 +14,12 @@ import duke.ui.UiForGui;
  */
 public class ListCommand extends Command {
 
+    /** Valid words to invoke the list command */
     public static final List<String> COMMAND_WORDS = new ArrayList<>(List.of("list", "ls", "l"));
 
     /**
-     * Executes the command and lists out the tasks in the task list and presents them to the user.
+     * Executes the command in the CLI version of Duke and lists out the tasks in the task list and presents them to
+     * the user.
      *
      * @param tasks The list of tasks in the program.
      * @param ui The Ui object being used in the program.
@@ -28,6 +30,14 @@ public class ListCommand extends Command {
         ui.showTaskList(tasks);
     }
 
+    /**
+     * Executes the command in the GUI version of Duke and lists out the tasks in the task list and presents them to
+     * the user.
+     *
+     * @param tasks The list of tasks in the program.
+     * @param uiForGui The UiForGui object being used in the program.
+     * @param storage The Storage object being used in the program.
+     */
     @Override
     public String execute(TaskList tasks, UiForGui uiForGui, Storage storage) {
         return uiForGui.showTaskList(tasks);

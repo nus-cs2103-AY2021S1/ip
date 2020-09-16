@@ -5,7 +5,9 @@ package duke.task;
  */
 public class ToDo extends Task {
 
+    /** The task type symbol that is used in the program to represent a to-do task */
     public static final String TASK_TYPE_SYMBOL = "[T]";
+
     private static final String TASK_TYPE_NAME = "todo";
 
     /**
