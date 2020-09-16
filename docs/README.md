@@ -67,7 +67,7 @@ Example of usage:
 
 `delete 3`
 
-### `list` - Deletes a task in Duke
+### `list` - List all tasks added to Duke
 
 Lists all tasks added to Duke.
 
@@ -75,7 +75,7 @@ Example of usage:
 
 `list`
 
-### `find` - Deletes a task in Duke
+### `find` - Finds a task in Duke
 
 Finds task matching specified keyword in Duke. Keyword has to be specified.
 
@@ -83,7 +83,7 @@ Example of usage:
 
 `find book`
 
-### `statistics` - Deletes a task in Duke
+### `statistics` - Show statistics of tasks in Duke
 
 Deletes a task in Duke. Task number has to be specified.
 
