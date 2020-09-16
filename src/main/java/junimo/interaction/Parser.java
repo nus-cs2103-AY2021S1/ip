@@ -58,7 +58,7 @@ public class Parser {
             }
             try {
                 boolean isDone = Boolean.parseBoolean(br.readLine());
-                parseAddTaskCommand(line, isDone, false, isArchive);
+                parseAddTaskCommand(line, isDone, isArchive);
             } catch (IllegalArgumentException e) {
                 if (!isFileCorrupted) {
                     String errMessage = "WARNING: Your stored data appears to be in a corrupted format. "
@@ -150,7 +150,7 @@ public class Parser {
         case "deadline":
         case "event":
             try {
-                return new Response(parseAddTaskCommand(inputCommand, false, true, false),
+                return new Response(parseAddTaskCommand(inputCommand, false, false),
                         false);
             } catch (IllegalArgumentException ex) {
                 String errMessage = ex.getMessage();
@@ -165,7 +165,7 @@ public class Parser {
         }
     }
 
-    private String parseAddTaskCommand(String input, boolean isDone, boolean shouldEcho, boolean isArchive) {
+    private String parseAddTaskCommand(String input, boolean isDone, boolean isArchive) {
         String[] splitInput = input.split(" ", 2);
         String taskType = splitInput[0];
 
@@ -175,7 +175,7 @@ public class Parser {
                 Task newTask = new Todo(splitInput[1], isDone);
                 return isArchive
                         ? taskList.addArchivedTask(newTask)
-                        : taskList.addTask(newTask, shouldEcho);
+                        : taskList.addTask(newTask);
             } else if (input.matches(TaskInputPattern.BLANK_TODO.pattern)) {
                 throwEmptyFieldException("todo", "description");
             } else {
@@ -191,7 +191,7 @@ public class Parser {
                 Task newTask = new Deadline(deadlineDesc, by, isDone);
                 return isArchive
                         ? taskList.addArchivedTask(newTask)
-                        : taskList.addTask(newTask, shouldEcho);
+                        : taskList.addTask(newTask);
             } else if (input.matches(TaskInputPattern.BLANK_DEADLINE_DESC.pattern)
                     || input.matches(TaskInputPattern.BLANK_DEADLINE_DATE.pattern)) {
                 throwEmptyFieldException("deadline", "description", "date");
@@ -208,7 +208,7 @@ public class Parser {
                 Task newTask = new Event(eventDesc, at, isDone);
                 return isArchive
                         ? taskList.addArchivedTask(newTask)
-                        : taskList.addTask(newTask, shouldEcho);
+                        : taskList.addTask(newTask);
             } else if (input.matches(TaskInputPattern.BLANK_EVENT_DESC.pattern)
                     || input.matches(TaskInputPattern.BLANK_EVENT_LOC.pattern)) {
                 throwEmptyFieldException("event", "description", "location");

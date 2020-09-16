@@ -1,6 +1,5 @@
 package junimo.task;
 
-import junimo.task.Deadline;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
@@ -11,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class DeadlineTest {
     @Test
-    public void constructorTest() {
+    public void constructor_validArguments() {
         // Test with correct arguments
         Deadline deadline1 = new Deadline("Eat Apple", "2020-12-12", false);
         Deadline deadline2 = new Deadline("Write paper", "2022-01-21", true);
@@ -25,20 +24,20 @@ public class DeadlineTest {
     }
 
     @Test
-    public void invalidDateConstructorTest1() {
+    public void constructor_invalidDateInCorrectFormat_exceptionThrown() {
         // Test with incorrect arguments
         assertThrows(IllegalArgumentException.class, () ->
                 new Deadline("Eat Ice cream", "2023-90-23", true));
     }
 
     @Test
-    public void invalidDateConstructorTest2() {
+    public void constructor_invalidDateInWrongFormat_exceptionThrown() {
         assertThrows(IllegalArgumentException.class, () ->
                 new Deadline("Do work", "wrong date", false));
     }
 
     @Test
-    public void getParsedTaskTest() {
+    public void getParsedTask_validArguments() {
         Deadline deadline = new Deadline("Eat Apple", "2020-12-12", true);
         String expectedParsedTask = "deadline Eat Apple /by 2020-12-12" + System.lineSeparator()
                 + "true" + System.lineSeparator();
@@ -53,7 +52,7 @@ public class DeadlineTest {
     }
 
     @Test
-    public void equalsTest() {
+    public void equals_equalDeadlines() {
         Deadline deadline1 = new Deadline("Eat Apple", "2020-12-12", true);
         Deadline deadline2 = new Deadline("Eat Apple", "2020-12-12", true);
         assertTrue(deadline1.equals(deadline2));

@@ -1,6 +1,5 @@
 package junimo.task;
 
-import junimo.task.Event;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -9,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class EventTest {
 
     @Test
-    public void constructorTest() {
+    public void constructor() {
         // Test with correct arguments
         Event event1 = new Event("Eat Apple", "NUS", false);
         Event event2 = new Event("Write paper", "Matt's House", true);
@@ -23,7 +22,7 @@ public class EventTest {
     }
 
     @Test
-    public void getParsedTaskTest() {
+    public void getParsedTask() {
         Event event = new Event("Eat Apple", "NUS", true);
         String expectedParsedTask = "event Eat Apple /at NUS" + System.lineSeparator()
                 + "true" + System.lineSeparator();
@@ -38,7 +37,7 @@ public class EventTest {
     }
 
     @Test
-    public void equalsTest() {
+    public void equals() {
         Event event1 = new Event("Eat Apple", "NUS", true);
         Event event2 = new Event("Eat Apple", "NUS", true);
         assertTrue(event1.equals(event2));

@@ -30,35 +30,35 @@ public class TaskListTest {
     }
 
     @Test
-    public void emptyConstructorTest() {
+    public void constructor() {
         TaskList taskList = new TaskList();
         assertEquals(new ArrayList<Task>(), taskList.getTaskList());
     }
 
     @Test
-    public void addCorrectFormatTest() {
+    public void addTask_validArguments() {
         TaskList taskList = new TaskList();
         for (SampleTask sampleTask : SampleTask.values()) {
-            taskList.addTask(sampleTask.task, false);
+            taskList.addTask(sampleTask.task);
         }
         assertEquals(getCorrectFormatExpectedTaskList(), taskList.getTaskList());
     }
 
     @Test
-    public void markTaskAsDoneTest() {
+    public void markTaskAsDone() {
         TaskList taskList = new TaskList();
         for (SampleTask sampleTask : SampleTask.values()) {
-            taskList.addTask(sampleTask.task, false);
+            taskList.addTask(sampleTask.task);
         }
         taskList.markTaskAsDone("1");
         assertEquals("[\u2713]", taskList.getTaskList().get(0).getCheckBox());
     }
 
     @Test
-    public void deleteTaskTest() {
+    public void deleteTask() {
         TaskList taskList = new TaskList();
         for (SampleTask sampleTask : SampleTask.values()) {
-            taskList.addTask(sampleTask.task, false);
+            taskList.addTask(sampleTask.task);
         }
         taskList.deleteTask("2");
         List<Task> expectedTaskList = getCorrectFormatExpectedTaskList();

@@ -67,7 +67,7 @@ public class MainWindow extends AnchorPane {
             waitThenExit();
         }
     }
-    
+
     private void waitThenExit() {
         new Timer().schedule(new TimerTask() {
             public void run () {

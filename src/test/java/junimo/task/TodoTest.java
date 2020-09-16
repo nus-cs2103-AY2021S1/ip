@@ -1,15 +1,13 @@
 package junimo.task;
 
-import junimo.task.Todo;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TodoTest {
 
     @Test
-    public void constructorTest() {
+    public void constructor() {
         // Test with correct arguments
         Todo todo1 = new Todo("Eat Apple", false);
         Todo todo2 = new Todo("Write paper", true);
@@ -21,7 +19,7 @@ public class TodoTest {
     }
 
     @Test
-    public void getParsedTaskTest() {
+    public void getParsedTask() {
         Todo todo = new Todo("Eat Apple", true);
         String expectedParsedTask = "todo Eat Apple" + System.lineSeparator()
                 + "true" + System.lineSeparator();
@@ -39,6 +37,6 @@ public class TodoTest {
     public void equalsTest() {
         Todo todo1 = new Todo("Eat Apple", true);
         Todo todo2 = new Todo("Eat Apple", true);
-        assertTrue(todo1.equals(todo2));
+        assertEquals(todo2, todo1);
     }
 }
