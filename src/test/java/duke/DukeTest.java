@@ -23,7 +23,7 @@ public class DukeTest {
     @Test
     public void deadlineTest() {
         assertEquals(new Deadline("study ", "23 November 2019").toString(),
-                "[DEADLINE] [✘] study (by:23 November 2019)");
+                "[DEADLINE] [\u2718] study (by:23 November 2019)");
     }
 
     /**
@@ -32,6 +32,6 @@ public class DukeTest {
     @Test
     public void eventTest() {
         assertEquals(new Event("Hackathon ", "NUS U town").toString(),
-                "[EVENT] [✘] Hackathon (at:NUS U town)");
+                "[EVENT] [\u2718] Hackathon (at:NUS U town)");
     }
 }
