@@ -1,6 +1,9 @@
 package task;
 
+import java.util.Objects;
+
 import util.Tag;
+
 
 /**
  * Represents a Task, providing implementation of a general task.
@@ -56,7 +59,7 @@ public class Task {
     /**
      * Returns boolean indicating if task has been tagged.
      *
-     * @return boolean indicating if task has beent tagged.
+     * @return boolean indicating if task has been tagged.
      */
     public boolean isTagged() {
         return tag != null;
@@ -85,6 +88,26 @@ public class Task {
      */
     public String getDescription() {
         return this.description;
+    }
+
+    /**
+     * Return true if object is of type task and has the same fields.
+     *
+     * @param o Object to test equality.
+     * @return true if object is of type task and has the same fields.
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Task task = (Task) o;
+        return isDone == task.isDone
+                && Objects.equals(description, task.description)
+                && Objects.equals(tag, task.tag);
     }
 
     /**
