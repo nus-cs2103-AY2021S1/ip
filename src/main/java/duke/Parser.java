@@ -138,7 +138,7 @@ public class Parser {
             String eventEndTimeFormatted = eventTimeOutputFormat.format(eventEndTime);
             String dateAndTimeFormatted = (eventDateFormatted
                     + " " + eventStartTimeFormatted + " - " + eventEndTimeFormatted);
-            Task newEventTask = new Deadline(eventParts[0].trim(), dateAndTimeFormatted);
+            Task newEventTask = new Event(eventParts[0].trim(), dateAndTimeFormatted);
             return newEventTask;
 
         } catch (Exception e) {
