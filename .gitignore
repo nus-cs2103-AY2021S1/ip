@@ -15,3 +15,8 @@ bin/
 
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT
+
+gradle/
+gradlew*
+
+tasks.ser

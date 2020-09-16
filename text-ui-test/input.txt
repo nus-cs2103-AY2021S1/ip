@@ -1,0 +1,4 @@
+event project meeting /at 2019-12-01
+deadline return book /by 2019-12-02
+list
+bye
