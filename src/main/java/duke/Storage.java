@@ -5,11 +5,9 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 
+import java.nio.file.Path;
 import java.time.LocalDate;
 
 import java.util.ArrayList;
@@ -19,14 +17,14 @@ import java.util.ArrayList;
  */
 public class Storage {
 
-    String filepath;
+    Path filepath;
 
     /**
      * Constructor for a new driver system.
      *
      * @param filepath  the file path of the schedule text file
      */
-    public Storage(String filepath) {
+    public Storage(Path filepath) {
         this.filepath = filepath;
     }
 
@@ -36,20 +34,34 @@ public class Storage {
      * @param task      the task that's to be written into the text file
      */
     public void write(Task task) throws IOException {
-        FileWriter todoWriter = new FileWriter(this.filepath, true);
-        todoWriter.write(task.splitToString());
-        todoWriter.close();
+
+        File saveFile = filepath.toFile();
+        try {
+            if (!saveFile.exists()) {
+                saveFile.getParentFile().mkdirs();
+            }
+            FileWriter todoWriter = new FileWriter(saveFile, true);
+            todoWriter.write(task.splitToString());
+            todoWriter.close();
+        } catch (IOException ioe) {
+            System.out.println("Couldn't save to file :(");
+        }
     }
 
-    /**
-     * Loads a schedule file.
-     *
-     * @return  a TaskList that has all the tasks in the schedule text file
-     */
+
+        /**
+         * Loads a schedule file.
+         *
+         * @return  a TaskList that has all the tasks in the schedule text file
+         */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> todoList = new ArrayList<Task>();
+        File saveFile = filepath.toFile();
+        if(!saveFile.exists()) {
+            return new ArrayList<Task>();
+        }
         try {
-            BufferedReader reader = new BufferedReader(new FileReader(this.filepath));
+            BufferedReader reader = new BufferedReader(new FileReader(saveFile));
             String line = null;
             while ((line = reader.readLine()) != null) {
                 String[] taskArr = line.split("/");
@@ -62,6 +74,7 @@ public class Storage {
                 }
             }
         } catch (IOException e) {
+            System.out.println(e.getMessage());
             throw new DukeException("error! i couldn't read the data file correctly, please do a system check!");
         }
 
@@ -74,7 +87,8 @@ public class Storage {
      * @param tl      the TaskList that's to be over written into the text file
      */
     public void overwrite(TaskList tl) throws IOException {
-        FileWriter todoWriter = new FileWriter(this.filepath, false);
+        File saveFile = filepath.toFile();
+        FileWriter todoWriter = new FileWriter(saveFile, false);
         for (Task task: tl.todoList) {
             todoWriter.write(task.splitToString());
         }

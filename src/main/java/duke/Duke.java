@@ -6,6 +6,8 @@ import duke.task.Task;
 import javafx.application.Application;
 
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.ParseException;
 
 import javafx.application.Application;
@@ -28,7 +30,9 @@ public class Duke{
      */
     public Duke() {
         ui = new Ui();
-        storage = new Storage("src/main/java/duke/text/todo.txt");
+        String home = System.getProperty("user.dir");
+        Path savePath = Paths.get(home, "text", "todo.txt");
+        storage = new Storage(savePath);
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
