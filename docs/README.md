@@ -11,6 +11,7 @@ Duke is a desktop app for managing Tasks, with functionality to add, delete, sav
 *A Todo is a Task that contains only a description, and nothing else.*
 
 **Format:** `add DESCRIPTION` 
+
 ___
 
 ### Adding a Deadline: `deadline`
@@ -24,6 +25,7 @@ ___
 **Examples:**
 *  `deadline Quiz1 /by 2020-09-20` Sets new Deadline called `Quiz1` that is due on `Sep 20th 2020`.
 *  `deadline complete task 1, 2, 3 /by 2021-01-01` 
+
 ___
 
 ### Adding an Event: `event`
@@ -37,6 +39,7 @@ ___
 **Examples:**
 *  `event meeting /at 2020-09-14`
 *  `event New Year Countdown /at 2020-12-31` 
+
 ___
 
 ## Usage
@@ -47,6 +50,7 @@ ___
 **Example of usage:** 
 
 `delete 2` Deletes the second Task in the `list`
+
 ___
 
 ### `done` - Marking a Task as Done:
@@ -64,6 +68,7 @@ ___
 > Task not yet marked done are shown with `[ ]`:
 >
 > e.g. `1.[T][ ] Return Book`
+
 ___
 
 ### `list` - Listing all Tasks:
@@ -73,6 +78,7 @@ ___
 **Examples:** 
 
 `list`
+
 ___
 
 ### `update` - Updating an existing Task:
@@ -104,6 +110,7 @@ ___
 * `update 1` -> `new description /at 2020-01-01`
 * `update 1` -> `/by 2020-01-01` 
 * `update 1` -> `/at 2020-01-01` 
+
 ___
 
 ### `find` - Searching for a Task:
@@ -114,6 +121,7 @@ ___
 
 **Examples:** 
 `find meeting` Returns Tasks that have the word `meeting` in their description.
+
 ___
 
 ## Saving the data :
