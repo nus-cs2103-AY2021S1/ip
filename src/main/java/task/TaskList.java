@@ -94,6 +94,6 @@ public class TaskList {
 
     @Override
     public String toString() {
-        return "Now you have " + totalTasks + " tasks in your list.";
+        return "Now you have " + totalTasks + " task(s) in your list.";
     }
 }

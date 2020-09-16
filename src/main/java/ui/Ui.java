@@ -137,7 +137,7 @@ public class Ui {
                 "6. event <event details> /at <date in YYYY-MM-DD> - Adds an event\n" +
                 "7. deadline <deadline details> /by <date in YYYY-MM-DD> -  Adds a deadline\n" +
                 "\nOptional: Adding a '/p <priority level>' tag at the end of a task command" +
-                "adds a priority level to your task!\n The default priority level is 0.\n";
+                " adds a priority level to your task!\n The default priority level is 0.\n";
         return text;
     }
 
