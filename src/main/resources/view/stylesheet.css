@@ -1,4 +1,7 @@
 .background {
+    /* Image retrieved from:
+       https://www.deviantart.com/urlogicfails/art/1966-Batman-and-Robin-Phone-Background-554954684
+    */
     -fx-background-image: url('../images/background.png');
     -fx-background-position: bottom;
 }

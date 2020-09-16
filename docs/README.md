@@ -1,7 +1,5 @@
 # User Guide
 
-Duke is a personal assistant chat bot that lets you manage tasks, events and deadlines.
-
 ## Features 
 
 ### Manage tasks
@@ -103,7 +101,7 @@ Expected outcome:
 
 `Nice! I've marked this task as done.`
 
-`[T][✓] Duke user guide`
+`[T][✓] Alfred user guide`
 
 ### `delete` - Delete a task.
 
@@ -121,7 +119,7 @@ Expected outcome:
 
 `Nice! I've deleted this task.`
 
-`[T][✓] Duke user guide`
+`[T][✓] Alfred user guide`
 
 `Now you have 5 tasks left in your list.`
 
@@ -193,4 +191,7 @@ Expected outcome:
 
 ## Credits
 
-The GUI was created with help from a JavaFX tutorial [here](https://se-education.org/guides/tutorials/javaFx.html).
+* The GUI was created with help from a JavaFX tutorial [here](https://se-education.org/guides/tutorials/javaFx.html).
+* The Batman image was retrieved from [here](https://www.pngfind.com/mpng/hwwTTi_free-png-download-lego-batman-movie-clipart-png/).
+* The Alfred image was retrieved from [here](https://www.pngfind.com/mpng/TRwRibh_alfred-lego-batman-movie-lego-batman-alfred-png/).
+* The background image was retrieved from [here](https://www.deviantart.com/urlogicfails/art/1966-Batman-and-Robin-Phone-Background-554954684).
