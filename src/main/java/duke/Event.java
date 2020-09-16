@@ -39,9 +39,9 @@ public class Event extends Task {
     public String getDateAndTimeBracket() {
 
         if (this.time == null) {
-            return String.format("(by: %s)", this.date.format(dateFormatter));
+            return String.format("(on: %s)", this.date.format(dateFormatter));
         } else {
-            return String.format("(by: %s, %s)", this.date.format(dateFormatter), timeFormatter.format(this.time));
+            return String.format("(on: %s, %s)", this.date.format(dateFormatter), timeFormatter.format(this.time));
         }
     }
 

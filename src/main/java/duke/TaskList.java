@@ -117,15 +117,14 @@ public class TaskList {
             int taskNumber = Integer.parseInt(sanitiseInput(input[1]));
             validateIndex(taskNumber);
             this.deletedTaskIndex = taskNumber;
-            deletedTask = storedTasks.get(taskNumber - 1);
-            storedTasks.remove(deletedTask);
+            deletedTask = storedTasks.remove(taskNumber - 1);
         } catch (DukeException err) {
             this.deletedTaskIndex = UNINITIALISED_INDEX;
             return Ui.dukeErrorMessage(err);
         }
         return Ui.deletedMessage(deletedTask, storedTasks.size());
     }
-
+    
     /**
      * Returns the index of the most recently deleted task.
      * 
@@ -183,12 +182,18 @@ public class TaskList {
      */
     public String returnSearchedTask(String[] input) {
         ArrayList<Task> relevantTasks = new ArrayList<>();
-        String searchWord = input[1];
-        for (Task t : storedTasks) {
-            if (t.getDescription().contains(searchWord)) {
-                relevantTasks.add(t);
+        try {
+            String searchWord = input[1];
+            for (Task t : storedTasks) {
+                boolean containsSearchWord = t.getDescription().contains(searchWord);
+                if (containsSearchWord) {
+                    relevantTasks.add(t);
+                }
             }
+        } catch (Exception err) {
+            return Ui.dukeErrorMessage(new DukeException("Please enter a search term, Your Majesty."));
         }
+        
         return Ui.printRelevantTasksUi(relevantTasks);
     }
 
@@ -262,12 +267,16 @@ public class TaskList {
     }
     
     public String getTasksForADate(String[] input) {
-        LocalDate date = LocalDate.parse(input[1]);
         ArrayList<Task> relevantTasks = new ArrayList<>();
-        for (Task t : storedTasks) {
-            if (t.getDate() != null && t.getDate().equals(date)) {
-                relevantTasks.add(t);
+        try {
+            LocalDate date = LocalDate.parse(input[1]);
+            for (Task t : storedTasks) {
+                if (t.getDate() != null && t.getDate().equals(date)) {
+                    relevantTasks.add(t);
+                }
             }
+        } catch (Exception err) {
+            return Ui.dukeErrorMessage(new DukeException("Please input a valid date, Your Majesty."));
         }
         return Ui.printScheduleForDate(relevantTasks);
     }
