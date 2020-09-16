@@ -15,10 +15,10 @@ Manage different kinds of tasks depending on what you need - ToDos, Deadlines, E
 
 ## Getting Started
 
-Download latest release from https://github.com/chrystalquek/ip/releases
-Double click on the jar file and the application page will appear.
+Download latest release from <https://github.com/chrystalquek/ip/releases> .Double click on the jar file and the
+ application page will appear.
 
-If you want to use the Command Line Interface, git clone https://github.com/chrystalquek/ip. From the terminal, navigate to the directory of the project and run the Duke class.
+If you want to use the Command Line Interface, git clone <https://github.com/chrystalquek/ip>. From the terminal, navigate to the directory of the project and run the Duke class.
  Duke will start responding to what you type in the terminal.
 
 ## Usage
