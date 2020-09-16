@@ -5,9 +5,9 @@
 2. [**Quick Start**](#Quick-Start)
 3. [**Features**](#Features)
 
-    3.1. [Listing all tasks: `list`](#1.-Listing-all-tasks:-`list`)
+    3.1. [Listing all tasks: `list`](#1.-Listing-all-tasks:-list`)
     
-    3.2. [Adding a task](#2.-Adding-a-task)
+    3.2. [Adding a task](#2-Adding-a-task)
     
     3.3. [Marking a task as done: `done`](#3.-Marking-a-task-as-done:-`done`)
     
