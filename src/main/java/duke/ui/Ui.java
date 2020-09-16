@@ -2,6 +2,8 @@ package duke.ui;
 
 import duke.parser.Parser;
 import duke.storage.Storage;
+import duke.tasks.TaskList;
+
 
 import java.util.Scanner;
 
@@ -85,6 +87,7 @@ public class Ui {
                     Storage.saveDataToFile(Parser.taskList);
 
                 }
+
             } catch (Exception e) {
 
                 System.out.println(e.getMessage());

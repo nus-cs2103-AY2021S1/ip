@@ -105,10 +105,10 @@ public class Parser {
 
                 return taskList.deleteTask(index);
 
-
             } else if (words[0].equals("find")) {
 
                 if (words.length > 2) {
+
                     throw new InvalidKeyException("Sorry, I can only handle one keyword.");
                 }
 
