@@ -163,3 +163,27 @@ Exits the program. The program will close after a short delay.
 ###Saving the data
 List data are saved in the hard disk automatically after any command that makes
 any changes in the task list.
+
+##Appendix
+###Date and time formats
+The accepted date and time formats in this app are listed below:
+
+Date:
+
+| Format | Example |
+| ------- | -------- |
+| yyyy/M/d | 2020/3/21 |
+| d/M/yyyy | 3/12/2020 |
+| yyyy/MMM/d | 2020/Mar/21 |
+| d/MMM/yyyy | 21/Mar/2020 |
+
+The slashes ( / ) can be replaced with hyphens ( - ).
+
+Time:
+
+| Format | Example |
+| ------ | ------- |
+| HH[:]mm | 1800, 18:00 |
+| h:mma | 7:20pm |
+| h.mma | 7.20am |
+| ha | 10pm |
