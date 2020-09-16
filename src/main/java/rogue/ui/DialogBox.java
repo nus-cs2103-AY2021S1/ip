@@ -18,7 +18,6 @@ import javafx.scene.image.WritableImage;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.scene.text.Font;
 
 /**
  * This control represents a dialog box consisting of an ImageView to represent the speaker's face
@@ -110,18 +109,18 @@ public class DialogBox extends HBox {
      */
     private void setStyle(Style style) {
         switch (style) {
-            case USER:
-                dialogContainer.setStyle("-fx-background-radius: 1.5em 0 1.5em 1.5em;");
-                break;
+        case USER:
+            dialogContainer.setStyle("-fx-background-radius: 1.5em 0 1.5em 1.5em;");
+            break;
 
-            case ROGUE:
-                dialogContainer.setStyle("-fx-background-radius: 0 1.5em 1.5em 1.5em;"
-                        + "-fx-background-color: #30D158;");
-                break;
+        case ROGUE:
+            dialogContainer.setStyle("-fx-background-radius: 0 1.5em 1.5em 1.5em;"
+                    + "-fx-background-color: #30D158;");
+            break;
 
-            default:
-                // Should not reach here
-                break;
+        default:
+            // Should not reach here
+            break;
         }
     }
 

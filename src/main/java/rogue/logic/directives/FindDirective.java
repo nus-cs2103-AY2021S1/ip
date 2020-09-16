@@ -22,16 +22,42 @@ public class FindDirective implements Executable {
     private final String description; // Defaults to ""
     private final int numOfDays; // Defaults to maximum value of integer
 
+    /**
+     * Constructs a {@code FindDirective}.
+     *
+     * Searches for tasks using their descriptions. Matches all tasks
+     * that have the search term in their descriptions.
+     *
+     * @param description The search term.
+     */
     public FindDirective(String description) {
         this.description = description;
         this.numOfDays = Integer.MAX_VALUE;
     }
 
+    /**
+     * Constructs a {@code FindDirective}.
+     *
+     * Searches for tasks using their dates. Matches all tasks that are due
+     * in a certain number of days (relative to system date).
+     *
+     * @param numOfDays The number of days.
+     */
     public FindDirective(int numOfDays) {
         this.description = "";
         this.numOfDays = numOfDays;
     }
 
+    /**
+     * Constructs a {@code FindDirective}.
+     *
+     * Searches for tasks using both their descriptions and dates.
+     * Matches all tasks that have the search term in their descriptions
+     * and are due in a certain number of days (relative to system date).
+     *
+     * @param description   The search term.
+     * @param numOfDays     The number of days (from system date).
+     */
     public FindDirective(String description, int numOfDays) {
         this.description = description;
         this.numOfDays = numOfDays;
