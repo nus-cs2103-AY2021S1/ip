@@ -212,4 +212,5 @@ Update the description or duedate of an existing task in your list of task.
 ---
     
 # Thanks for reading this user guide!
+![image](https://d2skuhm0vrry40.cloudfront.net/2017/articles/1/8/8/7/1/7/8/zelda-breath-of-the-wild-walkthrough-guide-tips-4857-148829841233.jpg/EG11/resize/564x-1/quality/75/format/jpg)
     
