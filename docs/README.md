@@ -17,7 +17,7 @@
     
     3.6. [Exiting the program: `bye`](#6-Exiting-the-program-bye)   
     
-    3.7. [Saving/loading data](#7-Saving-/-loading-data)   
+    3.7. [Saving/loading data](#7-Savingloading-data)   
 
 ## Introduction
 Welcome to the Duke Chatbot User Guide! Duke Chatbot are for users who prefer to use a desktop application for their task management. Duke Chatbot is optimised for users who prefer to use the Command Line Interface (CLI) while reaping the visual benefits of a Graphical User Interface (GUI).
@@ -63,6 +63,7 @@ You can add 3 kinds of tasks:
 * **Adding a Todo Task**
     * format: `todo <task name>`
 <img src="https://github.com/AaronnSeah/ip/blob/master/src/main/resources/images/todo.png" width="400">
+<br><br>
 
 * **Adding an Event Task**
     * Format: `event <task name> /at <date> <start time>-<end time>`
@@ -70,6 +71,7 @@ You can add 3 kinds of tasks:
     * Format for <start time> and <end time>: HH:MM
     * Note the `-` between the <start time> and <end time>        
 <img src="https://github.com/AaronnSeah/ip/blob/master/src/main/resources/images/event.png" width="400">
+<br><br>
 
 * **Adding a Deadline Task**
     * Format: `deadline <task name> /by <date> <time>`
@@ -111,12 +113,16 @@ The <task number> is the number ordering in the list for the task you would like
 
 ### 5. Finding tasks by name: `find`
 Find tasks by name.
+
 Format: `find <keyword>`
+
 The order of tasks that appear (if it is non-empty) is as follows:
-    1. tasks whose name matches exactly with the search keyword. e.g. "book" and "book"
-    2. tasks whose one of the space-delimited name matches exactly with the search keyword. e.g. "book signing" and "book"
-    3. tasks whose name matches contains search keyword. e.g. "book signing" and "k s"
-    
+1. tasks whose name matches exactly with the search keyword. e.g. "book" and "book" respectively.
+
+2. tasks whose one of the space-delimited name matches exactly with the search keyword. e.g. "book signing" and "book" respectively.
+
+3. tasks whose name matches contains search keyword. e.g. "book signing" and "k s" respectively.
+
 <img src="https://github.com/AaronnSeah/ip/blob/master/src/main/resources/images/find.png" width="400">
 <br><br><br><br>
 
