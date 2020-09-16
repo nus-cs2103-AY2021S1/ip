@@ -33,6 +33,10 @@ public class DukeGuiWindow extends BorderPane {
         this.duke = duke;
         this.stage = stage;
 
+        // sets up style
+        stage.getScene().getStylesheets().add("view/DarkTheme.css");
+
+        // handles close request
         stage.setOnCloseRequest(event -> {
             event.consume();
             try {
@@ -42,6 +46,7 @@ public class DukeGuiWindow extends BorderPane {
             }
         });
 
+        // makes Duke greet the user
         duke.getGuiResponse().greet();
         dukeMessage.setText(duke.getGuiResponse().getResponse());
     }

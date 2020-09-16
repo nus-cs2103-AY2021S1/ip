@@ -40,6 +40,8 @@ public class ExitWindow {
 
         Scene scene = new Scene(root);
 
+        scene.getStylesheets().add("view/ExitWindowStyle.css");
+
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setTitle("Exit");
         stage.setScene(scene);
