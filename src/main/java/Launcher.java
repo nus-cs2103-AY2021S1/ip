@@ -7,7 +7,6 @@ public class Launcher {
      * @param args
      */
     public static void main(String[] args) {
-        assert(false) : "shld be false";
         Application.launch(Main.class, args);
     }
 }

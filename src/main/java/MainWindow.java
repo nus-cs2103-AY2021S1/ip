@@ -1,12 +1,15 @@
+import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
+import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -17,18 +20,28 @@ public class MainWindow extends AnchorPane {
     @FXML
     private VBox dialogContainer;
     @FXML
-    private TextField userInput;
-    @FXML
-    private Button sendButton;
+    private HBox userInput;
 
     private Duke duke;
-
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        //hide scrollbar
+        scrollPane.hbarPolicyProperty().setValue(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.vbarPolicyProperty().setValue(ScrollPane.ScrollBarPolicy.NEVER);
+
+        String openingMsg = "hey hey im Poco" + "\n"
+                            + "type 'help' to view a list of commands"
+                            + "\n" + "type 'bye' to exit";
+        Label text = new Label(openingMsg);
+        text.setStyle("-fx-text-fill: #D0D0D0; -fx-font-family:\"consolas\"; -fx-font-size:14px; -fx-font-weight:bold;");
+        text.setPadding(new Insets(10, 0,10, 10));
+        dialogContainer.getChildren().remove(userInput);
+        dialogContainer.getChildren().addAll(
+                text,
+                userInput
+        );
     }
 
     public void setDuke(Duke d) {
@@ -41,12 +54,26 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
-        String input = userInput.getText();
+        TextField field = (TextField) userInput.getChildren().get(1);
+        String input = field.getText();
         String response = duke.getResponse(input);
+        dialogContainer.getChildren().remove(userInput);
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(new Label(input), new ImageView(userImage)),
-                DialogBox.getDukeDialog(new Label(response), new ImageView(dukeImage))
+                DialogBox.getUserDialog(new Label(input)),
+                DialogBox.getDukeDialog(new Label(response)),
+                userInput
         );
-        userInput.clear();
+
+        if (input.equals("bye")) {
+            TimerTask task = new TimerTask() {
+                public void run() {
+                    Platform.exit();
+                    System.exit(0);
+                }
+            };
+            Timer timer = new Timer("Timer");
+            timer.schedule(task, 700L);
+        }
+        field.clear();
     }
 }

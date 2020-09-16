@@ -44,6 +44,7 @@ public class Command {
         commands.put("find", new Cmd(taskList::find, "find_(task description)"));
         commands.put("list", new Cmd(taskList::displayList, "list"));
         commands.put("postpone", new Cmd(taskList::postpone, "postpone_(indexOfTask)/(dd/MM/yyyy HH:mm)"));
+        commands.put("bye", new Cmd((input) -> "See you again!", ""));
     }
 
     /**
