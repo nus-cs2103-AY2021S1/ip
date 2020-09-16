@@ -173,7 +173,9 @@ The following commands are supported:
  5. delete [index]
  6. done [index]
  7. find [keywords]
- 8. exit
+ 8. stats
+ 9. help
+ 10. exit
 You can replace '[xxx]' with your on input.
 ```
 

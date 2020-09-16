@@ -82,7 +82,9 @@ public class Ui {
                 + " 5. delete [index]\n"
                 + " 6. done [index]\n"
                 + " 7. find [keywords]\n"
-                + " 8. exit\n"
+                + " 8. stats\n"
+                + " 9. help\n"
+                + " 10. exit/bye\n"
                 + "You can replace '[xxx]' with your on input.\n";
     }
 
