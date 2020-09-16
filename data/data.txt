@@ -1,0 +1,8 @@
+T//0// stuff
+T//1// stuff 2
+T//0// stuff 3
+D//0// 2019 deadline//2019-01-01
+D//0// dec deadline//2020-12-01
+E//0// Jan event//2020-01-01
+E//0// june event//2020-06-06
+E//0// dec event //2020-12-01
