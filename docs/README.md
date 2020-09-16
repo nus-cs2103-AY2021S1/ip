@@ -28,7 +28,7 @@ can type fast, Dukenizer can neatly organize your tasks and notes faster than tr
 ## Quick start 
 1. Ensure that you have Java 11 installed on your computer
 
-2. Download the latest `duke.jar` from [here]().
+2. Download the latest `duke.jar` from [here](https://github.com/CodyChew/ip/releases/download/A-Release/duke.jar).
 
 3. Copy the file to the folder you want to use as the _home folder_ for your Dukenizer.
 
