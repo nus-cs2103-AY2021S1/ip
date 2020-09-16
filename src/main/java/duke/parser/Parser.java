@@ -38,7 +38,7 @@ public class Parser {
      * @throws DukeException DukeException if command is not in legal form.
      */
     public static String parseCommand(String command) throws DukeException {
-        if (command.equals("hi") || command.equals("bye") || command.equals("list")) {
+        if (command.equals("bye") || command.equals("list")) {
             return parseOneWordCommand(command);
         } else {
             String[] strArr = command.split(" ", 2);
@@ -77,8 +77,6 @@ public class Parser {
      */
     public static String parseOneWordCommand(String command) throws DukeException {
         switch (command) {
-        case "hi":
-            return Ui.greet();
         case "bye":
             Storage.writeToFile(taskList);
             isExit = true;
@@ -183,14 +181,11 @@ public class Parser {
             String[] deadlineArr = userInput.split(" /by ", 2);
             if (deadlineArr.length != 2) {
                 throw new DukeException("Wrong format when describing a deadline.");
-            } else if (TimeParser.isValidTime(deadlineArr[1])) {
-                System.out.println(deadlineArr[1]);
+            } else {
                 String deadlineTime = TimeParser.parseTime(deadlineArr[1]);
                 Deadline deadline = new Deadline(deadlineArr[0], deadlineTime);
                 taskList.addTask(deadline);
                 return taskList.addedTaskToString(deadline);
-            } else {
-                throw new DukeException("Wrong format when describing a date.");
             }
         }
     }
@@ -209,13 +204,11 @@ public class Parser {
             String[] eventArr = userInput.split(" /at ", 2);
             if (eventArr.length != 2) {
                 throw new DukeException("Wrong format when describing an event.");
-            } else if (TimeParser.isValidTime(eventArr[1])) {
+            } else {
                 String eventTime = TimeParser.parseTime(eventArr[1]);
                 Event event = new Event(eventArr[0], eventTime);
                 taskList.addTask(event);
                 return taskList.addedTaskToString(event);
-            } else {
-                throw new DukeException("Wrong format when describing a date.");
             }
         }
     }

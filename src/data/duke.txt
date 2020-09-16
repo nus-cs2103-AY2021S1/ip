@@ -1,5 +1,0 @@
-D  1  return book  Sep 22 2020
-E  1  team meeting  Sep 15 2020
-T  1  shopping  #clothes
-T  0  write email  #to Alice
-E  1  art exhibition  Sep 22 2020

@@ -39,6 +39,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Returns file for storage.
+     *
+     * @return File.
+     * @throws DukeException Duke exception.
+     */
     public static File setupStorage() throws DukeException {
         Path currentRelativePath = Paths.get("");
         String s = currentRelativePath.toAbsolutePath().toString();
@@ -66,7 +72,7 @@ public class Storage {
      * @param data Task info in data array.
      * @param taskList TaskList that manages tasks.
      */
-    public static void memoryProcessor(String[] data, TaskList taskList) {
+    public static void memoryProcessor(String[] data, TaskList taskList) throws DukeException {
         switch (data[0]) {
         case "T":
             ToDo todo = new ToDo(data[2]);
@@ -102,7 +108,7 @@ public class Storage {
             taskList.addTask(event);
             break;
         default:
-
+            throw new DukeException("Error loading from storage");
         }
     }
 
