@@ -14,14 +14,20 @@ public class UndoCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui) throws DukeException {
-        prevCommand.undo(tasks);
-        ui.displayUndoCommand();
+        if (prevCommand != null) {
+            prevCommand.undo(tasks);
+            ui.displayUndoCommand();
+        }
     }
 
     @Override
     public String executeWithOutput(TaskList tasks, Ui ui) throws DukeException {
-        prevCommand.undo(tasks);
-        return ui.getUndoCommandResponseAsString();
+        if (prevCommand != null) {
+            prevCommand.undo(tasks);
+            return ui.getUndoCommandResponseAsString();
+        }
+
+        throw DukeException.badUndoException();
     }
 
     @Override

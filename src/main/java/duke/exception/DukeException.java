@@ -81,4 +81,12 @@ public class DukeException extends Exception {
         return new DukeBadFindException();
     }
 
+    /**
+     * Generates a DukeException when an Undo command is given with no previous undoable commands
+     * @return DukeException object signifying no undoable commands have been given
+     */
+    public static DukeException badUndoException() {
+        return new DukeBadUndoException();
+    }
+
 }
