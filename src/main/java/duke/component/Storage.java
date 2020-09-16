@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileOutputStream;
+import java.nio.file.Files;
 
 /**
  * Utility class to help write to and modify .txt files
@@ -28,6 +29,7 @@ public class Storage {
      * @throws IOException
      */
     public void writeToFile(Task task) throws IOException {
+
         FileWriter fw = new FileWriter(this.filePath, true);
 
         String writtenTask = task.getIdentifier() + describeTask(task);

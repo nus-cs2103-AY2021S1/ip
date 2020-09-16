@@ -22,21 +22,13 @@ public class Duke {
      * No-argument constructor for duke
      */
     public Duke() {
-        this.ui = new Ui();
-        this.storage = new Storage("data/duke.txt");
-        this.tasks = new TaskList();
-    }
+        String filePath = getPathName();
 
-    /**
-     * constructor for Duke
-     *
-     * @param filePath String to determine the path of duke.txt file to write to
-     */
-    public Duke(String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
         this.tasks = new TaskList();
     }
+
 
     public String getResponse(String input) {
         Parser parser = new Parser(tasks, storage);
@@ -45,6 +37,15 @@ public class Duke {
             Platform.exit();
         }
         return parser.parse(input);
+    }
+
+    //credit to Ziyang-98 for help on file issues
+    private String getPathName() {
+        boolean ifPathDirExists = System.getProperty("user.dir").endsWith("CS2103 IP");
+        return ifPathDirExists
+                ? "data/duke.txt"
+                // Creates a save file on the user's home directory if user is not in ip directory
+                : System.getProperty("user.dir") + "/duke.txt";
     }
 
     /**
