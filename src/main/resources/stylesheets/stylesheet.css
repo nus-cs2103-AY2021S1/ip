@@ -1,0 +1,9 @@
+#dialog {
+  -fx-background-color: #fffebf;
+  -fx-background-radius: 7px;
+} 
+
+#backgroundContainer {
+  -fx-background-image: url('/images/background.png');
+  -fx-background-size: 540 1080;
+}
