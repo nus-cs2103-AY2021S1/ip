@@ -132,7 +132,7 @@ public class TaskList {
 
         Task task = tasks.get(taskNum);
         task.changeDate(date);
-        return "The new task is as follows: " + task.toString();
+        return "The new task is as follows: \n" + task.toString();
     }
 
 

@@ -149,15 +149,6 @@ public class Parser {
         String result = "";
 
         try {
-            if (isValidInput(fullInput)) {
-
-            }
-        } catch (DukeException e) {
-            result = e.toString();
-        }
-
-
-        try {
             isValidInput(fullInput);
 
             if (fullInput.equals("list")) {
