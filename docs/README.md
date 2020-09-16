@@ -241,14 +241,14 @@ Bye ^.^, Hope to see you again soon!!!
 
 Action | Command | Format, Examples
 -------|---------|-----------------
-Add a ToDo task | `todo` | `todo DESCRIPTION`<br/><br/>e.g.`todo duke`
-Add an Event task | `event` | `event DESCRIPTION /at DATE`<br/><br/>e.g.`event party /at 2020-11-11 2312`
-Add a Deadline task | `deadline` | `deadline DESCRIPTION /by DATE`<br/><br/>e.g.`deadline project duke /by 2020-11-11 2312`
-Delete a task | `delete` | `delete INDEX `<br/><br/>e.g.`delete 3`
-Mark a task as completed | `done` | `done INDEX`<br/><br/>e.g.`done 1`
-Show your list of tasks | `list` | `list`
-Find tasks | `find` | `find KEYWORD`<br/><br/>e.g.`find duke`
+Add todo | `todo` | `todo DESCRIPTION`<br/><br/>e.g.`todo duke`
+Add event | `event` | `event DESCRIPTION /at DATE`<br/><br/>e.g.`event party /at 2020-11-11 2312`
+Add deadline | `deadline` | `deadline DESCRIPTION /by DATE`<br/><br/>e.g.`deadline project duke /by 2020-11-11 2312`
 Set a task on reminder | `remind` | `remind INDEX Y/N`<br/><br/>e.g. `remind 1 y`
+Mark a task as completed | `done` | `done INDEX`<br/><br/>e.g.`done 1`
+Delete task | `delete` | `delete INDEX `<br/><br/>e.g.`delete 3`
+Find a task | `find` | `find KEYWORD`<br/><br/>e.g.`find duke`
+Show all tasks | `list` | `list`
 View all commands | `help` | `help`
 Exit the program | `bye` | `bye`
 
