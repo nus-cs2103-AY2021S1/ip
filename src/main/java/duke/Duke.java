@@ -37,6 +37,10 @@ public class Duke {
             return newCmd.toString();
         } else {
             try {
+                if (input.equals("/cancel")) {
+                    // replace the current command with a cancel command
+                    cmd = commandHandler.parseCommand(input);
+                }
                 cmd.execute(input);
                 return cmd.toString();
             } catch (DukeException e) {
