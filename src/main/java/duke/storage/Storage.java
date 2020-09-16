@@ -18,7 +18,7 @@ import duke.data.task.ToDo;
  * file path specified.
  */
 public class Storage {
-    private String filePath;
+    private final String filePath;
 
     public Storage(String filePath) {
         this.filePath = filePath;

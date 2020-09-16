@@ -47,6 +47,8 @@ public class Duke {
      * Prints the welcome message, takes in and parses user input.
      */
     public void run() {
+        assert ui != null & tasks != null
+                & storage != null;
         ui.greeting();
         Scanner scanner = new Scanner(System.in);
         Command command;
@@ -60,8 +62,10 @@ public class Duke {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Processes user input from the GUI version of the app and
+     * returns a response.
+     * @param input User input.
+     * @return Response from parsing user input.
      */
     public String getResponse(String input) {
         Command command = parser.parseUserInput(input);

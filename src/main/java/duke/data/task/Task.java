@@ -14,6 +14,7 @@ public class Task {
      * @param description The description describes the task.
      */
     public Task(String description) {
+        assert !description.equals("");
         this.description = description;
         this.isDone = false;
     }
