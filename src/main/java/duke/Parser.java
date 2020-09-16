@@ -1,5 +1,6 @@
 package duke;
 
+import java.time.DateTimeException;
 import java.util.ArrayList;
 
 /**
@@ -100,6 +101,8 @@ public class Parser {
         } catch (ArrayIndexOutOfBoundsException e) {
             // if the user doesn't follow the correct format after the keyword "event"
             return Warnings.getInvalidEventMsg();
+        } catch (DateTimeException e) {
+            return Warnings.getInvalidDateMsg();
         }
     }
 
@@ -114,6 +117,8 @@ public class Parser {
         } catch (ArrayIndexOutOfBoundsException e) {
             // if the user doesn't follow the correct format after the keyword "deadline"
             return Warnings.getInvalidDeadlineMsg();
+        } catch (DateTimeException e) {
+            return Warnings.getInvalidDateMsg();
         }
     }
 

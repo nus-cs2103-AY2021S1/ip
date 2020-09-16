@@ -16,9 +16,9 @@ public class Warnings extends Ui {
         assert tasksSize >= 0 : "Task size should not be less than 0.";
         String warningMsg = " [• ▂ •]What? "
                 + "\n I couldn't find this task, please re-enter a valid task index!"
-                + "\n And make sure you follow this format - 'done <Task_Index>'."
-                + "\n You have " + tasksSize + " tasks in total."
-                + "\n **Type 'help' to see what I can do. |^_^|";
+                + "\n And make sure you follow this format - 'done <Task_Index (Start from 1)>'."
+                + "\n\n You have " + tasksSize + " tasks in total."
+                + "\n\n **Type 'help' to see what I can do. |^_^|";
         System.out.println(warningMsg);
         return warningMsg;
     }
@@ -32,7 +32,7 @@ public class Warnings extends Ui {
         String warningMsg = " [• ▂ •]What? "
                 + "\n OOPS!!! The description of a todo cannot be empty."
                 + "\n And make sure you follow this format - 'todo <task name>'."
-                + "\n **Type 'help' to see what I can do. |^_^|";
+                + "\n\n **Type 'help' to see what I can do. |^_^|";
         System.out.println(warningMsg);
         return warningMsg;
     }
@@ -45,8 +45,9 @@ public class Warnings extends Ui {
     public static String getInvalidDeadlineMsg() {
         String warningMsg = " [• ▂ •]What? "
                 + "\n OOPS!!! The description or/and deadline of a deadline task cannot be empty."
-                + "\n And make sure you follow this format - 'deadline <task name> /by <task deadline>'."
-                + "\n **Type 'help' to see what I can do. |^_^|";
+                + "\n And make sure you follow this format - 'deadline <task name> /by "
+                + "<task deadline - 'yyyy-MM-dd HH:mm'>'."
+                + "\n\n **Type 'help' to see what I can do. |^_^|";
         System.out.println(warningMsg);
         return warningMsg;
     }
@@ -59,8 +60,9 @@ public class Warnings extends Ui {
     public static String getInvalidEventMsg() {
         String warningMsg = " [• ▂ •]What? "
                 + "\n OOPS!!! The description or/and event timing of a event task cannot be empty."
-                + "\n And make sure you follow this format - 'event <event name> /at <event timing>'."
-                + "\n **Type 'help' to see what I can do. |^_^|";
+                + "\n And make sure you follow this format - 'event <event name> "
+                + "/at <event timing - 'yyyy-MM-dd HH:mm'>'."
+                + "\n\n **Type 'help' to see what I can do. |^_^|";
         System.out.println(warningMsg);
         return warningMsg;
     }
@@ -73,7 +75,7 @@ public class Warnings extends Ui {
     public static String getInvalidInputMsg() {
         String warningMsg = " [• ▂ •]What? "
                 + "\n OOPS!!! I'm sorry, but I don't know what that means."
-                + "\n **Type 'help' to see what I can do. |^_^|";
+                + "\n\n **Type 'help' to see what I can do. |^_^|";
         System.out.println(warningMsg);
         return warningMsg;
     }
@@ -88,9 +90,9 @@ public class Warnings extends Ui {
         assert tasksSize >= 0 : "Task size should not be less than 0.";
         String warningMsg = " [• ▂ •]What? "
                 + "\n I couldn't find this task, please re-enter a valid task index!"
-                + "\n And make sure you follow this format - 'delete <Task_Index>'."
-                + "\n You have " + tasksSize + " tasks in total."
-                + "\n **Type 'help' to see what I can do. |^_^|";
+                + "\n And make sure you follow this format - 'delete <Task_Index (Start from 1)>'."
+                + "\n\n You have " + tasksSize + " tasks in total."
+                + "\n\n **Type 'help' to see what I can do. |^_^|";
         System.out.println(warningMsg);
         return warningMsg;
     }
@@ -104,7 +106,7 @@ public class Warnings extends Ui {
     public static String getInvalidFileInputMsg(IOException e) {
         String warningMsg1 = " [• ▂ •]What? "
                 + "\n Invalid data inside data/taskList.txt file..."
-                + "\n Details:";
+                + "\n\n Details:";
         System.out.println(warningMsg1);
         System.err.println(e);
         String warningMsg = warningMsg1 + "\n" + e;
@@ -120,7 +122,7 @@ public class Warnings extends Ui {
     public static String getInvalidFileOutputMsg(IOException e) {
         String warningMsg1 = " [• ▂ •]What? "
                 + "\n Errors occurred when try to write data into data/taskList.txt file..."
-                + "\n Details:";
+                + "\n\n Details:";
         System.out.println(warningMsg1);
         System.err.println(e);
 
@@ -137,9 +139,9 @@ public class Warnings extends Ui {
     public static String getInvalidArchiveMsg(int tasksSize) {
         String warningMsg = " [• ▂ •]What? "
                 + "\n I couldn't archive this task, please re-enter a valid task index!"
-                + "\n And make sure you follow this format - 'archive <Task_Index>'."
-                + "\n You have " + tasksSize + " tasks in total."
-                + "\n **Type 'help' to see what I can do. |^_^|";
+                + "\n And make sure you follow this format - 'archive <Task_Index (Start from 1)>'."
+                + "\n\n You have " + tasksSize + " tasks in total."
+                + "\n\n **Type 'help' to see what I can do. |^_^|";
         System.out.println(warningMsg);
         return warningMsg;
     }
@@ -152,7 +154,15 @@ public class Warnings extends Ui {
     public static String getInvalidFindMsg() {
         String warningMsg = " [• ▂ •]What? "
                 + "\n Please make sure you follow this format - 'find <Keyword>'."
-                + "\n **Type 'help' to see what I can do. |^_^|";
+                + "\n\n **Type 'help' to see what I can do. |^_^|";
+        System.out.println(warningMsg);
+        return warningMsg;
+    }
+
+    public static String getInvalidDateMsg() {
+        String warningMsg = " [• ▂ •]What? "
+                + "\n Please make sure you follow this format when enter date - 'yyyy-MM-dd HH:mm'."
+                + "\n\n **Type 'help' to see what I can do. |^_^|";
         System.out.println(warningMsg);
         return warningMsg;
     }
