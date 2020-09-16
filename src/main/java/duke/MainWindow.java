@@ -59,6 +59,13 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
 
+        String response = duke.getResponse(input);
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(input, userImage),
+                DialogBox.getDukeDialog(response, dukeImage)
+        );
+        userInput.clear();
+
         if (input.equals("bye")) {
             Platform.runLater(() -> {
                 try {
@@ -69,14 +76,6 @@ public class MainWindow extends AnchorPane {
                 }
             });
         }
-
-
-        String response = duke.getResponse(input);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
-        );
-        userInput.clear();
     }
 
     private void exitPlatform() throws InterruptedException {
