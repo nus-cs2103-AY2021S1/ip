@@ -2,7 +2,7 @@
 Duke is a personal task manager that helps to add, store, delete, find and sort tasks for you. :smile:
 
 ## Duke GUI
-![Duke GUI](/docs/Ui.png)
+![Duke GUI](./Ui.png)
 
 ## Setting Up
 Download the latest relase of Duke.jar to start using Duke.
