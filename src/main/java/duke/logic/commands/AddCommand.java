@@ -120,6 +120,14 @@ public class AddCommand extends Command {
         }
     }
 
+    /**
+     * Detects if new Deadline is a duplicate of a previous Deadline.
+     *
+     * @param tm TaskManager that handles tasks in memory.
+     * @param description Description associated with new Deadline.
+     * @param dlDate Date associated with the new Deadline.
+     * @return True if a duplicate Deadline is present, false otherwise.
+     */
     private boolean isDuplicateDeadline(TaskManager tm, String description, LocalDate dlDate) {
         ArrayList<Task> duplicatesList = tm.findTasks(description);
         if (duplicatesList.isEmpty()) {
@@ -139,6 +147,14 @@ public class AddCommand extends Command {
         return false;
     }
 
+    /**
+     * Detects if a new Event is a duplicate of a previous Event.
+     *
+     * @param tm TaskManager that handles tasks in memory.
+     * @param description Description associated with new Event.
+     * @param eventDate Date associated with the new Event.
+     * @return True if a duplicate Event is present, false otherwise.
+     */
     private boolean isDuplicateEvent(TaskManager tm, String description, LocalDate eventDate) {
         ArrayList<Task> duplicatesList = tm.findTasks(description);
         if (duplicatesList.isEmpty()) {
@@ -158,6 +174,13 @@ public class AddCommand extends Command {
         return false;
     }
 
+    /**
+     * Detects if a new ToDo is a duplicate of a previous ToDo.
+     *
+     * @param tm TaskManager that handles tasks in memory.
+     * @param description Description associated with the new ToDo.
+     * @return True if a duplicate ToDo is present, false otherwise.
+     */
     private boolean isDuplicateToDo(TaskManager tm, String description) {
         ArrayList<Task> duplicatesList = tm.findTasks(description);
         if (duplicatesList.isEmpty()) {

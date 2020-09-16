@@ -19,7 +19,7 @@ public class CommandParser {
      *
      * @param command String input by user
      * @return Command object the corresponds to the user input
-     * @throws DukeException If command is not on the recogised list of commands.
+     * @throws DukeException If command is not on the recognised list of commands.
      */
     public static Command parse(String command) throws DukeException {
         String[] extractedCommand = command.split(" ", 2);
