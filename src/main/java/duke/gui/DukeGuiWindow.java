@@ -3,6 +3,7 @@ package duke.gui;
 import java.io.IOException;
 
 import duke.Duke;
+import duke.version.Version;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -11,6 +12,8 @@ import javafx.stage.Stage;
 
 public class DukeGuiWindow extends BorderPane {
 
+    @FXML
+    private Label version;
     @FXML
     private TextField userInput;
     @FXML
@@ -48,6 +51,9 @@ public class DukeGuiWindow extends BorderPane {
         // makes Duke greet the user
         duke.getGuiResponse().greet();
         dukeMessage.setText(duke.getGuiResponse().getResponse());
+
+        // version
+        version.setText(Version.CURRENT_VERSION);
     }
 
     /**

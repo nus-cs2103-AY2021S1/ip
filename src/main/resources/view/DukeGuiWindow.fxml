@@ -33,7 +33,7 @@
             <HBox spacing="5.0">
                <children>
                   <Label styleClass="bottom-label" text="Version:" />
-                  <Label styleClass="bottom-label" text="1.0" />
+                  <Label fx:id="version" styleClass="bottom-label" text="1.0" />
                   <Region prefHeight="17.0" prefWidth="117.0" />
                   <Label styleClass="bottom-label" text="Message:" />
                   <Label fx:id="messageLabel" styleClass="bottom-label" text="None" />
