@@ -3,6 +3,8 @@
  */
 public class DukeException extends IllegalArgumentException {
 
+    String dukeMessage;
+
     /**
      * Produces an exception with a specified message.
      *
@@ -10,6 +12,7 @@ public class DukeException extends IllegalArgumentException {
      */
     public DukeException(String message) {
         super(message);
+        this.dukeMessage = message;
     }
 
     /**
@@ -20,6 +23,7 @@ public class DukeException extends IllegalArgumentException {
      */
     public DukeException(String message, Throwable cause) {
         super(message, cause);
+        this.dukeMessage = message;
     }
 
     /**
@@ -29,7 +33,7 @@ public class DukeException extends IllegalArgumentException {
      */
     @Override
     public String toString() {
-        return this.getMessage();
+        return this.dukeMessage;
     }
 
 }

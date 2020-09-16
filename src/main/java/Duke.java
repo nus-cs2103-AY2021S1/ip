@@ -23,12 +23,9 @@ public class Duke extends Application {
 
     private final Ui ui;
 
-//        String logo = " ____        _        \n"
-//                + "|  _ \\ _   _| | _____ \n"
-//                + "| | | | | | | |/ / _ \\\n"
-//                + "| |_| | |_| |   <  __/\n"
-//                + "|____/ \\__,_|_|\\_\\___|\n";
-
+    /**
+     * Duke constructor to include a ui.
+     */
     public Duke(){
         this.ui = new Ui();
     }

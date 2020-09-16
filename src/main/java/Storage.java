@@ -9,8 +9,7 @@ import java.util.Scanner;
  * so that the previous run's list will be available to users for reference.
  */
 public class Storage {
-
-    //public static String home = System.getProperty("src/data/duke.txt");
+;
     private static final String home = "data";
 
     private static java.nio.file.Path path = java.nio.file.Paths.get(home, "duke.txt");
@@ -39,7 +38,7 @@ public class Storage {
             }
 
             File myFile = path.toFile();
-            StringBuilder output = new StringBuilder();
+            String output = "";
             int i = 0;
 
             if (!myFile.createNewFile()) {
@@ -48,7 +47,8 @@ public class Storage {
                 while (sc.hasNextLine()) {
                     String item = sc.nextLine();
                     i ++;
-                    output = new StringBuilder(i + "." + output.toString() + "\n" + item);
+                    String sequence = (i) + ".";
+                    output = output + sequence + item + "\n";
 
                 }
                 sc.close();
@@ -78,9 +78,14 @@ public class Storage {
             FileWriter fw = new FileWriter(path.toFile());
             for (Task task : newTaskStorage) {
                 String[] formatter = task.toString().split(" ");
+
                 fw.write(formatter[0] + " " +
                         formatter[1] + " " +
-                        (formatter.length > 2 ? formatter[2] : ""));
+                        (formatter.length > 2 ? formatter[2] + " " +
+                                formatter[3] + " " +
+                                formatter[4]
+                                : "") + "\n");
+
             }
 
             fw.close();

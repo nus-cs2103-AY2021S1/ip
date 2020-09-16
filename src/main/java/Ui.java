@@ -67,7 +67,7 @@ public class Ui {
         int ref = Integer.parseInt(Character.toString(
                 input.charAt(Parser.DONE_VALID.length() - 1))) - 1;
 
-        if (TaskList.taskStorage.get(ref) == null) {
+        if (ref >= TaskList.taskStorage.size()) {
             return new DukeException("I am afraid that it is not possible" +
                     "to do an unknown task.").toString();
         }
@@ -93,7 +93,7 @@ public class Ui {
         int ref = Integer.parseInt(Character.toString(
                 input.charAt(Parser.DEL_VALID.length() - 1))) - 1;
 
-        if (TaskList.taskStorage.get(ref) == null) {
+        if (ref >= TaskList.taskStorage.size()) {
             return new DukeException("I am afraid that it is not possible" +
                     "to delete an unknown task.").toString();
         }
