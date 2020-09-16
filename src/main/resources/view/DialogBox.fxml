@@ -7,11 +7,14 @@
 
 <fx:root alignment="TOP_RIGHT" maxWidth="1.7976931348623157E308" prefWidth="500.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label fx:id="dialog" text="Label" wrapText="true">
+        <Label fx:id="dialog" maxHeight="-Infinity" minHeight="-Infinity" style="-fx-border-color: #000; -fx-border-radius: 12; -fx-background-color: #ffa591; -fx-background-radius: 12;" text="Label" wrapText="true">
          <padding>
-            <Insets bottom="5.0" left="5.0" right="15.0" top="5.0" />
+            <Insets bottom="5.0" left="5.0" right="15.0" />
          </padding></Label>
-        <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" />
+        <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" style="-fx-image: Circle;">
+         <HBox.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </HBox.margin></ImageView>
     </children>
     <padding>
         <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
