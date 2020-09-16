@@ -145,7 +145,7 @@ Lists all the notes in Dukenizer.
 Format: `notes`
 
 Examples:
-- `note Bob is 5am taller` followed by `notes` lists the
+- `note Bob is 5cm taller` followed by `notes` lists the
 notes in your note list.
 <br>![notes](notes.PNG)
 
