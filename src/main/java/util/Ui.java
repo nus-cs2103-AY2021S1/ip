@@ -21,17 +21,17 @@ public class Ui {
     public String showHelp() {
         return "I am Serina, your personal toDo Manager. These are the commands you can issue me: " + "\n"
                 + "1. list" + " => lists all your current tasks " + "\n"
-                + "3. todo {task description} => creates a new to do task with given description " + "\n"
-                + "4. deadline {task description} /by {YYYY-MM-DD HHMM} => creates a new task with given "
+                + "2. todo {task description} => creates a new to do task with given description " + "\n"
+                + "3. deadline {task description} /by {YYYY-MM-DD HHMM} => creates a new task with given "
                 + "description and deadline" + "\n"
-                + "5. event {task description} /at {YYYY-MM-DD HHMM} => creates a new task with given "
+                + "4. event {task description} /at {YYYY-MM-DD HHMM} => creates a new task with given "
                 + "description and event time" + "\n"
-                + "6. done {task number} => marks the given task as done" + "\n"
-                + "7. delete {task number} => deletes the given task" + "\n"
-                + "8. tag {task number} {tag name} => tag selected task with given tag name" + "\n"
-                + "9. tag {task number} delete => delete tag from selected task" + "\n"
-                + "10. find {query} => lists out tasks based on your query" + "\n"
-                + "11. bye => makes me go to sleep";
+                + "5. done {task number} => marks the given task as done" + "\n"
+                + "6. delete {task number} => deletes the given task" + "\n"
+                + "7. tag {task number} {tag name} => tag selected task with given tag name" + "\n"
+                + "8. tag {task number} delete => delete tag from selected task" + "\n"
+                + "9. find {query} => lists out tasks based on your query" + "\n"
+                + "10. bye => makes me go to sleep";
     }
 
     /**
