@@ -6,6 +6,8 @@ import duke.Duke;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -15,6 +17,7 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
     private Duke duke = new Duke();
+    private Image appLogo = new Image(this.getClass().getResourceAsStream("/images/corgi.png"));
 
     @Override
     public void start(Stage stage) {
@@ -27,6 +30,7 @@ public class Main extends Application {
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.setTitle("Doggo");
+            stage.getIcons().add(appLogo);
             stage.show();
 
         } catch (IOException e) {
