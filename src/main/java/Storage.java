@@ -59,7 +59,6 @@ public class Storage {
         if (file.exists()) {
             return (ArrayList<String>) Files.readAllLines(Paths.get(fileName));
         } else {
-            //file.createNewFile();
             return new ArrayList<>();
         }
     }

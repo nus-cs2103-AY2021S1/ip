@@ -2,6 +2,9 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+/**
+ * Represents a command that adds tasks.
+ */
 public class AddCommand extends Command {
 
     private String taskType;
@@ -15,6 +18,14 @@ public class AddCommand extends Command {
         this.taskDescription = splitInput[1].trim();
     }
 
+    /**
+     * Handles input entered by the user by. The method adds the task to the task manager and saves the input.
+     * @param input input entered by the user.
+     * @param taskManager task manager that contains a list of tasks.
+     * @param fileHandler saves the input into a file.
+     * @return String that contains information of the task that was added to the task list.
+     * @throws IOException
+     */
     public String handle(String input, TaskManager taskManager, Storage fileHandler) throws IOException {
 
         if (this.taskType.equals("todo")) {

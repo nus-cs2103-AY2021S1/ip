@@ -1,3 +1,6 @@
+/**
+ * Represents an exception where there is an incorrect number of arguments in an input.
+ */
 public class IncorrectInputNumberException extends DukeException {
     public IncorrectInputNumberException(String message) {
         super(message);

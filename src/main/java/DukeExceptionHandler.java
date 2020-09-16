@@ -25,6 +25,11 @@ public class DukeExceptionHandler {
         return null;
     }
 
+    /**
+     * Handles input that has the wrong number of arguments in an add command for a deadline task.
+     * @param text user input.
+     * @return Error message.
+     */
     public static String handleIncorrectDeadlineInputException(String text) {
         if (text.split("/").length != 2) {
             IncorrectInputNumberException error = new IncorrectInputNumberException(text);
@@ -33,6 +38,11 @@ public class DukeExceptionHandler {
         return null;
     }
 
+    /**
+     * Handles input that has the wrong number of arguments in an add command for an event task.
+     * @param text user input.
+     * @return Error message.
+     */
     public static String handleIncorrectEventInputException(String text) {
         String[] splitText = text.split("/");
         if (splitText.length != 2) {

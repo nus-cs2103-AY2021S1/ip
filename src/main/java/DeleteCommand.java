@@ -1,5 +1,8 @@
 import java.io.IOException;
 
+/**
+ * Deletes a task from the task list.
+ */
 public class DeleteCommand extends Command {
 
     private int taskNum;
@@ -11,6 +14,14 @@ public class DeleteCommand extends Command {
         this.taskNum = Integer.parseInt(splitInput[1]);
     }
 
+    /**
+     * Deletes a task from the task list.
+     * @param input input entered by user.
+     * @param taskManager task manager that contains a list of tasks.
+     * @param fileHandler saves the input into a file.
+     * @return String message of the task that was deleted.
+     * @throws IOException
+     */
     public String handle(String input, TaskManager taskManager, Storage fileHandler) throws IOException {
         if (taskManager.getTaskList().isEmpty() || taskManager.getTaskList().size() < taskNum) {
             return "There's nothing to delete!";
