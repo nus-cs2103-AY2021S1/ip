@@ -12,7 +12,7 @@ import java.io.IOException;
  */
 public class Main extends Application {
 
-    private Fei fei = new Fei("./data/tasks.txt");
+    private Fei fei = new Fei("./tasks.txt");
 
     @Override
     public void start(Stage stage) {

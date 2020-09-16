@@ -34,12 +34,9 @@ public class Ui {
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
             String description = task.getDescription();
-            String[] words = description.split(" ");
-            for (String word : words) {
-                if (word.equals(keyword)) {
-                    matches++;
-                    response.append(String.format("%d. %s\n", i + 1, task));
-                }
+            if (description.contains(keyword)) {
+                matches++;
+                response.append(String.format("%d. %s\n", i + 1, task));
             }
         }
         return matches == 0 ? "No matching task found." : response.toString();
@@ -73,7 +70,7 @@ public class Ui {
                 + "There are still %d task(s) left.\n", done, total, total - done);
     }
 
-    public String helpMessage() {
+    public static String helpMessage() {
         return "The following commands are supported:\n"
                 + " 1. todo [task description]\n"
                 + " 2. deadline [task description] /by [time]\n"
@@ -85,7 +82,7 @@ public class Ui {
                 + " 8. stats\n"
                 + " 9. help\n"
                 + " 10. exit/bye\n"
-                + "You can replace '[xxx]' with your on input.\n";
+                + "You can replace '[xxx]' with your own input.\n";
     }
 
 }

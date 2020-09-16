@@ -50,7 +50,6 @@ public class Parser {
         if (words.length == 1) {
             return parseSingleWord(command);
         }
-
         String description = cmd.split(" ", 2)[1];
         return parseMultiWord(command, description);
 
@@ -127,22 +126,28 @@ public class Parser {
         }
     }
 
-    private static Command parseDeadline(String description) {
+    private static Command parseDeadline(String description) throws FeiException {
         String[] contentAndDate = description.split(" /by ");
-        assert contentAndDate.length == 2 : FeiException.deadlineException();
-        Deadline ddl = new Deadline(contentAndDate[0], contentAndDate[1]);
-        return new AddCommand(ddl);
+        if (contentAndDate.length == 2) {
+            Deadline ddl = new Deadline(contentAndDate[0], contentAndDate[1]);
+            return new AddCommand(ddl);
+        } else {
+            throw FeiException.deadlineException();
+        }
     }
 
-    private static Command parseEvent(String description) {
+    private static Command parseEvent(String description) throws FeiException {
         String[] contentAndTime = description.split(" /at ");
-        assert contentAndTime.length == 2 : FeiException.eventException();
-        Event e = new Event(contentAndTime[0], contentAndTime[1]);
-        return new AddCommand(e);
+        if (contentAndTime.length == 2) {
+            Event e = new Event(contentAndTime[0], contentAndTime[1]);
+            return new AddCommand(e);
+        } else {
+            throw FeiException.eventException();
+        }
+
     }
 
     private static Command parseFind(String description) {
-        assert description.split(" ").length == 2 : FeiException.findException();
         return new FindCommand(description);
     }
 

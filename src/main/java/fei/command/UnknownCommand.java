@@ -8,8 +8,10 @@ import fei.tool.Ui;
 public class UnknownCommand extends Command {
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws FeiException {
-        throw FeiException.defaultException();
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return FeiException.defaultException().getMessage()
+                + "\n"
+                + Ui.helpMessage();
     }
 
 }

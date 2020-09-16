@@ -52,7 +52,9 @@ I've added this task:
 Now you have 1 tasks in the list.
 ```
 
-### 2. `deadline DESCRIPTION /by TIME` - Add *deadline* task to the list
+### 2. `deadline DESCRIPTION /by TIME` - Add *deadline* task to the list.
+Tips: If you input the time in format yyyy-mm-dd, a more readable format will be display.
+Otherwise your time will be displayed in your input format.
 
 Example of usage: 
 
@@ -176,7 +178,7 @@ The following commands are supported:
  8. stats
  9. help
  10. exit
-You can replace '[xxx]' with your on input.
+You can replace '[xxx]' with your own input.
 ```
 
 ### Exit Command

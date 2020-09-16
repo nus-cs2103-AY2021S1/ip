@@ -23,7 +23,7 @@ public class Fei {
         ui = new Ui();
         storage = new Storage(filePath);
         tasks = new TaskList();
-        isExit = false;
+        assert isExit == false: isExit = false;
         try {
             tasks = storage.load();
         } catch (FeiException e) {

@@ -39,6 +39,9 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().addAll(
                 DialogBox.getBotDialog(Ui.greeting(), bot)
         );
+        dialogContainer.getChildren().addAll(
+                DialogBox.getBotDialog("Oh, by the way, if you haven't read the user guide yet.\n" + Ui.helpMessage(), bot)
+        );
     }
 
     /**

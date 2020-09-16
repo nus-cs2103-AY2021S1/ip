@@ -48,7 +48,7 @@ public class Storage {
      */
     public void update(TaskList tasks) throws FeiException {
         try {
-            FileWriter writer = new FileWriter("./data/tasks.txt", false);
+            FileWriter writer = new FileWriter("./tasks.txt", false);
 
             for (Task task : tasks) {
                 writer.write(task.savedFormat() + '\n');
