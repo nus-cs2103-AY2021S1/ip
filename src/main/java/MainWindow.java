@@ -6,8 +6,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 /**
@@ -56,10 +54,7 @@ public class MainWindow extends AnchorPane {
                 );
                 userInput.clear();
             }
-/*        } catch (FileNotFoundException e) {
-            System.out.println("File not found!");
-
-        */}catch(IOException e) {
+        } catch (IOException | InvalidInputException e) {
             System.out.println("OOPS something went wrong!");
         }
     }

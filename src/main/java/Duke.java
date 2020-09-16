@@ -35,7 +35,7 @@ public class Duke {
      * @param args user input.
      * @throws IOException
      */
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InvalidInputException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -56,9 +56,12 @@ public class Duke {
         String input = scanner.nextLine();
 
         while (input != null) {
-            Command command = Parser.parseInput(input);
-            assert command != null;
-            System.out.println(command.handle(input, taskManager, fileHandler));
+            try {
+                Command command = Parser.parseInput(input);
+                System.out.println(command.handle(input, taskManager, fileHandler));
+            } catch (InvalidInputException e) {
+                System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
+            }
             input = scanner.nextLine();
         }
         scanner.close();
@@ -70,15 +73,18 @@ public class Duke {
      * @return String response of the duke program in response to the user input.
      * @throws IOException
      */
-    public String getResponse(String input) throws IOException {
+    public String getResponse(String input) throws IOException, InvalidInputException {
         String trimmedInput = input.trim();
         String e = DukeExceptionHandler.handleException(trimmedInput);
         if (e != null) {
             return e;
         } else {
-            Command command = Parser.parseInput(trimmedInput);
-            assert command != null;
-            return command.handle(trimmedInput, taskManager, fileHandler);
+            try {
+                Command command = Parser.parseInput(trimmedInput);
+                return command.handle(trimmedInput, taskManager, fileHandler);
+            } catch (InvalidInputException e2) {
+                throw new InvalidInputException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+            }
          }
     }
 }

@@ -8,7 +8,7 @@ public class Parser {
      * @param input user input.
      * @return Command that corresponds to the input.
      */
-    public static Command parseInput(String input) {
+    public static Command parseInput(String input) throws InvalidInputException {
 
         if (input.equals("list")) {
             return new ListCommand();
@@ -27,7 +27,7 @@ public class Parser {
         } else if (input.contains("priority")) {
             return new PriorityCommand(input);
         } else {
-            return null;
+            throw new InvalidInputException(input);
         }
     }
 }

@@ -1,7 +1,7 @@
 /**
  * Represents exceptions thrown in Duke.
  */
-public class DukeException {
+public class DukeException extends Exception {
 
     private final String message;
 
