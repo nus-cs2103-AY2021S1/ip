@@ -30,7 +30,7 @@ Example of usage:
 Expected outcome:
 
     Got it. I've added this task:
-     [T][X] read book
+     [T][!!!!] read book
     Now you have 1 task(s) in the list.
     
 ### `deadline` - Adds a deadline task.
@@ -43,7 +43,7 @@ Example of usage:
 Expected outcome:
 
     Got it. I've added this task:
-     [D][X] submission (by: Feb 19 2020 1800)
+     [D][!!!!] submission (by: Feb 19 2020 1800)
     Now you have 2 task(s) in the list.
     
 ### `event` - Adds an event task.
@@ -56,7 +56,7 @@ Example of usage:
 Expected outcome:
 
     Got it. I've added this task:
-     [E][X] party (at: Feb 6 2020 1400)
+     [E][!!!!] party (at: Feb 6 2020 1400)
     Now you have 3 task(s) in the list.
 
 ### `list` - Displays all the tasks in the tasks list.
@@ -68,9 +68,9 @@ Example of usage:
 
 Expected outcome:
 
-    1.[T][X] read book
-    2.[D][X] submission (by: Feb 19 2020 1800)
-    3.[E][X] party (at: Feb 6 2020 1400)
+    1.[T][!!!!] read book
+    2.[D][!!!!] submission (by: Feb 19 2020 1800)
+    3.[E][!!!!] party (at: Feb 6 2020 1400)
     
 ### `done` - Marks a task as done.
 By typing the `done` command followed by the index of the task, a user can mark that task as done.
@@ -82,7 +82,7 @@ Example of usage:
 Expected outcome:
 
     Nice! I've marked this task as done:
-    [T][/] read book
+    [T][Done] read book
 
 ### `delete` - Deletes the task from the tasks list.
 By typing the `delete` command followed by the index of the task, a user can delete that task from the tasks list.
@@ -94,7 +94,7 @@ Example of usage:
 Expected outcome:
 
     Noted. I've removed this task:
-     [D][X] submission (by: Feb 19 2020 1800)
+     [D][!!!!] submission (by: Feb 19 2020 1800)
     Now you have 2 task(s) in the list.
         
 ### `find` - Displays all the tasks that contains the keyword provided.
@@ -107,7 +107,7 @@ Example of usage:
 Expected outcome:
 
     Here are the matching tasks in your list:
-    1.[T][/] read book
+    1.[T][Done] read book
         
 ### `bye` - Terminates the app.
 By typing the `bye` command, a user can exit from the duke program.
