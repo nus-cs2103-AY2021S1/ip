@@ -12,6 +12,7 @@ public class GuiSideEffects {
     public boolean guiReportExit;
     public boolean guiShowAllCommands;
     public boolean guiReportTagTask;
+    public boolean guiReportUntagTask;
     //CHECKSTYLE:ON: VisibilityModifier
 
     private GuiSideEffects() {
@@ -36,5 +37,6 @@ public class GuiSideEffects {
         guiReportExit = false;
         guiShowAllCommands = false;
         guiReportTagTask = false;
+        guiReportUntagTask = false;
     }
 }

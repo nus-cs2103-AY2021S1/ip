@@ -51,4 +51,9 @@ public class UiStub extends UiResponse {
     public void reportTagTask(Task task) {
         sideEffects.uiReportTagTask = true;
     }
+
+    @Override
+    public void reportUntagTask(Task task) {
+        sideEffects.uiReportUntagTask = true;
+    }
 }

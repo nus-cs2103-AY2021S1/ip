@@ -51,4 +51,9 @@ public class GuiStub extends GuiResponse {
     public void reportTagTask(Task task) {
         sideEffects.guiReportTagTask = true;
     }
+
+    @Override
+    public void reportUntagTask(Task task) {
+        sideEffects.guiReportUntagTask = true;
+    }
 }

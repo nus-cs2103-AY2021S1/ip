@@ -1,19 +1,16 @@
 package duke.command;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.fail;
-
-import duke.ui.UiSideEffects;
-import org.junit.jupiter.api.Test;
-
 import duke.DukeStub;
 import duke.exception.ExceptionMessage;
 import duke.exception.InvalidIndexException;
+import duke.ui.UiSideEffects;
+import org.junit.jupiter.api.Test;
 
-public class DoneCommandTest {
+import static org.junit.jupiter.api.Assertions.*;
 
-    private final DoneCommand command = new DoneCommand();
+public class UntagCommandTest {
+
+    private final UntagCommand command = new UntagCommand();
 
     private final DukeStub dukeStub = new DukeStub();
 
@@ -22,7 +19,7 @@ public class DoneCommandTest {
     @Test
     public void constructorTest() {
         try {
-            new DoneCommand();
+            new UntagCommand();
         } catch (Exception exception) {
             fail(exception.getMessage());
         }
@@ -35,7 +32,7 @@ public class DoneCommandTest {
         try {
             command.execute(normalInput, dukeStub);
 
-            assertEquals(true, uiSideEffects.uiReportDoneTask);
+            assertEquals(true, uiSideEffects.uiReportUntagTask);
 
             uiSideEffects.reset();
         } catch (Exception exception) {
