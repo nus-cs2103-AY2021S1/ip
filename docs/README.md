@@ -1,6 +1,6 @@
 # User Guide
 
-Are you tired of forgetting what you are supposed to do? Need someone to help keep track of your progress?\
+Are you tired of forgetting what you are supposed to do? Need someone to help keep track of your work progress?\
 Say hi to Bearimy, your personal assistant that will help you keep track of all your tasks! Read on to find out what he is capable of.
 
 ## **Features** 
