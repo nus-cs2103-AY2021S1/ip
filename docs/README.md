@@ -195,7 +195,7 @@ Example of usage:
 Expected outcome:
 
 ```
-Nice! I've marked this task as done:
+Incredible! I've marked this task as done:
     [T][✓] Watch Lecture
 ```
 

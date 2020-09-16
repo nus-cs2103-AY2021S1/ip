@@ -30,7 +30,7 @@ public class DoneCommandTest extends CommandTests {
             taskList.add(toDo2);
             taskList.add(toDo3);
             // Tests
-            assertEquals("Nice! I've marked this task as done:\n    [T][\u2713] test2\n",
+            assertEquals("Incredible! I've marked this task as done:\n    [T][\u2713] test2\n",
                 sc1.execute(taskList, ui, storage));
             System.out.println();
             assertTrue(storage.getTasks().get(1).isDone());

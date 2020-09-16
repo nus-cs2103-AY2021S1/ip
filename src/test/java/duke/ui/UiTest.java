@@ -32,7 +32,7 @@ public class UiTest {
     @Test
     public void testMarkTaskAsDone() {
         toDo.markAsDone();
-        assertEquals("Nice! I've marked this task as done:\n    [T][\u2713] test\n", ui.markTaskAsDone(toDo));
+        assertEquals("Incredible! I've marked this task as done:\n    [T][\u2713] test\n", ui.markTaskAsDone(toDo));
     }
 
     /**

@@ -59,7 +59,7 @@ public class Keyword {
     public static final String EMPTY_STRING_ERROR = "String builder is empty!";
     public static final String WELCOME_MESSAGE = "Welcome back";
     public static final String GOODBYE_MESSAGE = "Bye! Hope to see you again soon!";
-    public static final String TASK_MARKED_MESSAGE = "Nice! I've marked this task as done:";
+    public static final String TASK_MARKED_MESSAGE = "Incredible! I've marked this task as done:";
     public static final String TASK_DELETED_MESSAGE = "Noted. I've removed this task:";
     public static final String FOUR_SPACES = "    ";
     public static final String NUM_OF_TASKS_MESSAGE = "Now you have %d tasks in the list.";
