@@ -30,7 +30,7 @@ public class WeeklyTask extends Task {
     }
 
     /**
-     * Encode task into a String to be saved in text file.
+     * Encodes task into a String to be saved in text file.
      * @return String of encoded task details.
      */
     public String toEncoding() {
