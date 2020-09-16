@@ -5,8 +5,9 @@ import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
-
-
+/**
+ * Command to set tasks as done.
+ */
 public class DoneCommand extends Command {
     private String taskIdString;
 
@@ -15,12 +16,11 @@ public class DoneCommand extends Command {
     }
 
     /**
-     * Sets specified duke.task in duke.tasklist as completed and updates Storage.
-     *
+     * Sets specified task in tasklist as completed and updates Storage.
      * @param taskList
      * @param ui
      * @param storage
-     * @throws DukeException
+     * @throws DukeException when task is not properly specified.
      * @return the Duke response to show user
      */
     @Override

@@ -17,9 +17,9 @@ public class Duke {
     private static boolean exit;
     private boolean isResponseDukeException;
 
-    public Duke() {
+    public Duke(String pathName) {
         this.ui = new Ui();
-        this.storage = new Storage();
+        this.storage = new Storage(pathName);
         try {
             this.taskList = new TaskList(this.storage.load());
         } catch (DukeException e) {
@@ -49,9 +49,14 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke().run();
+        new Duke("src/main/java/duke/data/duke.txt").run();
     }
 
+    /**
+     * Takes user input and gets the Duke response.
+     * @param input the user input.
+     * @return Duke response.
+     */
     public String getResponse(String input) {
         try {
             Command command = Parser.parse(input);
@@ -63,6 +68,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Checks if Duke threw a DukeException.
+     * @return boolean representing whether a DukeException was thrown.
+     */
     public boolean getIsResponseDukeException() {
         return this.isResponseDukeException;
     }

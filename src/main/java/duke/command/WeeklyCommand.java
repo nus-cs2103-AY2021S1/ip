@@ -6,6 +6,9 @@ import duke.task.WeeklyTask;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Command to create a new weekly recurring task.
+ */
 public class WeeklyCommand extends Command {
     private String taskDetails;
 
@@ -16,12 +19,11 @@ public class WeeklyCommand extends Command {
     /**
      * Creates new weekly recurring task with date and time, adds the next instance of the task to TaskList
      * then updates the Storage.
-     *
      * @param taskList
      * @param ui
      * @param storage
      * @return the Duke response to show user
-     * @throws DukeException
+     * @throws DukeException when task description is not specified.
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {

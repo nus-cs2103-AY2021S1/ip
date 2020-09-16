@@ -4,6 +4,9 @@ import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Command to close Duke Application.
+ */
 public class ByeCommand extends Command {
     public ByeCommand(){}
 

@@ -16,7 +16,6 @@ public class Ui {
 
     /**
      * Reads in input from user.
-     *
      * @return the input from user.
      */
     public String getUserInput() {
@@ -24,8 +23,7 @@ public class Ui {
     }
 
     /**
-     * Greets the user.
-     * Runs when program is opened.
+     * Greets the user. Runs when program is opened.
      */
     public void welcome() {
         String open = "_______________________________________ \n"
@@ -37,8 +35,7 @@ public class Ui {
 
     /**
      * Prints Duke's response with dividing lines
-     *
-     * @param response
+     * @param response Duke's response
      */
     public void printResponse(String response) {
         System.out.println(LINE + response + "\n" + LINE);

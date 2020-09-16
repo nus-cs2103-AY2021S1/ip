@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * Contains the duke.task list.
  */
 public class TaskList {
-    public ArrayList<Task> taskList;
+    private ArrayList<Task> taskList;
 
     public TaskList() {
         this.taskList = new ArrayList<>();

@@ -4,6 +4,9 @@ import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Command called when Duke is launched to greet the user.
+ */
 public class GreetCommand extends Command {
     public GreetCommand() {}
 

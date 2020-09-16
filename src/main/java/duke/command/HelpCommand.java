@@ -3,12 +3,14 @@ import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Command for displaying list of valid commands to user.
+ */
 public class HelpCommand extends Command {
     public HelpCommand() {};
 
     /**
      * Prints out list of valid commands.
-     *
      * @param taskList
      * @param ui
      * @param storage

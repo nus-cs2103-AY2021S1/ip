@@ -2,7 +2,6 @@ package duke.parser;
 
 import duke.command.*;
 import duke.command.FindCommand;
-
 import duke.exception.DukeException;
 
 /**
@@ -12,16 +11,22 @@ public class Parser {
 
     /**
      * Determines which Command should be called based on user input.
-     *
      * @param userInput the input given by user.
      * @return The Command to be executed.
      * @throws DukeException if a Command is called without required details.
      */
     public static Command parse(String userInput) throws DukeException {
+        // Split userInput into the command word and command information
         String[] inputSplit = userInput.split(" ", 2);
         return determineCommand(inputSplit);
     }
 
+    /**
+     * Determines which Command should be called based on user input.
+     * @param inputSplit the userInput split into command word and command information.
+     * @return The Command to be executed.
+     * @throws DukeException if a Command is called without required details.
+     */
     private static Command determineCommand(String[] inputSplit) throws DukeException {
         String userCommand = inputSplit[0];
         if (userCommand.equals("bye")) {

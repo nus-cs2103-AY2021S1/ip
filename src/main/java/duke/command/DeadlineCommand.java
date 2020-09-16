@@ -6,6 +6,9 @@ import duke.task.Deadline;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Command to create new deadline task.
+ */
 public class DeadlineCommand extends Command {
     private String deadlineDetails;
 
@@ -14,12 +17,11 @@ public class DeadlineCommand extends Command {
     }
 
     /**
-     * Creates new duke.task with deadline, adds duke.task to TaskList then updates the Storage.
-     *
+     * Creates new deadline task, adds task to TaskList then updates the Storage.
      * @param taskList the list of tasks.
      * @param ui
      * @param storage
-     * @throws DukeException
+     * @throws DukeException when task details are not specified.
      * @return the Duke response to show user
      */
     @Override

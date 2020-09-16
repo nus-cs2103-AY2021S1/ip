@@ -4,12 +4,14 @@ import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Command to display the entire list of tasks.
+ */
 public class ListCommand extends Command {
     public ListCommand() {}
 
     /**
      * Prints out the entire list of tasks.
-     *
      * @param taskList
      * @param ui
      * @param storage

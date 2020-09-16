@@ -1,15 +1,14 @@
 package duke.command;
 
 import duke.exception.DukeException;
-
 import duke.storage.Storage;
-
 import duke.task.ToDo;
-
 import duke.tasklist.TaskList;
-
 import duke.ui.Ui;
 
+/**
+ * Command to create a new todo task.
+ */
 public class TodoCommand extends Command {
     private String todoDetails;
     public TodoCommand(String todoDetails) {
@@ -17,12 +16,11 @@ public class TodoCommand extends Command {
     }
 
     /**
-     * Creates new duke.task, adds duke.task to TaskList then updates the Storage.
-     *
+     * Creates new task, adds task to TaskList then updates the Storage.
      * @param taskList the list of tasks
      * @param ui
      * @param storage
-     * @throws DukeException
+     * @throws DukeException when task description is not specified.
      * @return the Duke response to show user
      */
     @Override

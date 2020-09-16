@@ -5,6 +5,9 @@ import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Command to delete task from taskList.
+ */
 public class DeleteCommand extends Command {
     private String taskIdString;
 
@@ -13,12 +16,11 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Deletes specified duke.task from duke.tasklist and updates Storage.
-     *
+     * Deletes specified task from tasklist and updates Storage.
      * @param taskList
      * @param ui
      * @param storage
-     * @throws DukeException
+     * @throws DukeException when task to delete is not specified properly.
      * @return the Duke response to show user
      */
     @Override
@@ -36,9 +38,9 @@ public class DeleteCommand extends Command {
                 return response;
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("Please specify which duke.task you want to delete!");
+            throw new DukeException("Please specify which task you want to delete!");
         } catch (NumberFormatException e) {
-            throw new DukeException("Please specify which task you have completed!");
+            throw new DukeException("Please specify which task you want to delete!");
         }
     }
 

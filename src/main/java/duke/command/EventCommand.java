@@ -1,15 +1,14 @@
 package duke.command;
 
 import duke.exception.DukeException;
-
 import duke.storage.Storage;
-
 import duke.task.Event;
-
 import duke.tasklist.TaskList;
-
 import duke.ui.Ui;
 
+/**
+ * Command to create new event task.
+ */
 public class EventCommand extends Command {
     private String eventDetails;
 
@@ -19,12 +18,11 @@ public class EventCommand extends Command {
 
     /**
      * Creates new event with date and time, adds event to TaskList then updates the Storage.
-     *
      * @param taskList the list of tasks.
      * @param ui
      * @param storage
      * @return the Duke response to show user
-     * @throws DukeException
+     * @throws DukeException when event task details are not specified.
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {

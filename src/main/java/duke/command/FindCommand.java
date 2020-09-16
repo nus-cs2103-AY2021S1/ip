@@ -4,6 +4,9 @@ import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Command to filter tasks by keyword.
+ */
 public class FindCommand extends Command {
     private String keyword;
 
@@ -13,7 +16,6 @@ public class FindCommand extends Command {
 
     /**
      * Prints tasks that match the search keyword.
-     *
      * @param taskList
      * @param ui
      * @param storage

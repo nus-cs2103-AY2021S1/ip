@@ -7,8 +7,8 @@ import java.time.format.DateTimeParseException;
 import java.time.LocalDate;
 
 public class Deadline extends Task {
-    protected String by;
-    protected LocalDateTime byDateTime;
+    private String by;
+    private LocalDateTime byDateTime;
 
     public Deadline(String description, String by, boolean isDone) throws DukeException {
         super(description, isDone);
@@ -28,9 +28,8 @@ public class Deadline extends Task {
     }
 
     /**
-     * Encode duke.task into a String to be saved in text file.
-     *
-     * @return String of encoded duke.task details.
+     * Encode deadline task into a String to be saved in text file.
+     * @return String of encoded deadline task details.
      */
     public String toEncoding() {
         int completedBinary = this.completed ? 1 : 0;
@@ -40,7 +39,6 @@ public class Deadline extends Task {
     /**
      * Converts the deadline details into a format readable by Java LocalDateTime API.
      * Format of "yyyy-mm-ddThh:mm:ss" required
-     *
      * @return String of converted deadline details.
      */
     private String reformateDateTime() {
@@ -53,6 +51,11 @@ public class Deadline extends Task {
         return dateSplit[2] + "-" + dateSplit[1] + "-" + dateSplit[0] + "T" + hour + ":" + minute + ":00";
     }
 
+    /**
+     * Checks if deadline task is due on a specified date.
+     * @param dateFilter the specified date.
+     * @return boolean whether the task is due on the date.
+     */
     public boolean isDate(LocalDate dateFilter) {
         return this.byDateTime.toLocalDate().equals(dateFilter);
     }

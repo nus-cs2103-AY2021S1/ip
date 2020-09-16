@@ -18,13 +18,12 @@ import java.util.Scanner;
 public class Storage {
     private static File file;
 
-    public Storage() {
-        this.file = new File("src/main/java/duke/data/duke.txt");
+    public Storage(String pathName) {
+        this.file = new File(pathName);
     }
 
     /**
      * Reads the tasks saved in text file and collate them into a list.
-     *
      * @return ArrayList of tasks from loaded file.
      * @throws DukeException when error is encountered while reading text file.
      */
@@ -44,7 +43,6 @@ public class Storage {
 
     /**
      * Creates a new empty file in the specified file path.
-     *
      * @throws IOException
      */
     private void createNewEmptyFile() throws IOException {
@@ -54,7 +52,6 @@ public class Storage {
 
     /**
      * Loads all the tasks from the text file into a task list.
-     *
      * @param fileScanner the text file scanner.
      * @return ArrayList of tasks corresponding to those in the text file.
      */
@@ -70,11 +67,11 @@ public class Storage {
 
     /**
      * Creates a new task based on the String taken from the text file.
-     *
      * @param task a single line from the text file.
      * @return Task corresponding to the parameter String task.
      */
     private Task createTask(String task) throws DukeException {
+        // Saved string needs to be split into taskType, taskIsDone, taskDescription and task details.
         String[] taskSplit = task.split(">", 4);
         String taskType = taskSplit[0];
         boolean taskIsDone = taskSplit[1].equals("1") ? true : false;
@@ -97,7 +94,6 @@ public class Storage {
 
     /**
      * Saves the tasks in the TaskList into a text file.
-     *
      * @param taskList the TaskList containing all the tasks to be saved.
      * @throws DukeException when error is encountered while saving text file.
      */

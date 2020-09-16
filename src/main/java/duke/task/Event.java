@@ -5,11 +5,10 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Date;
 
 public class Event extends Task {
-    protected String at;
-    protected LocalDateTime atDateTime;
+    private String at;
+    private LocalDateTime atDateTime;
 
     public Event(String description, String at, boolean isDone) throws DukeException {
         super(description, isDone);
@@ -30,7 +29,6 @@ public class Event extends Task {
 
     /**
      * Encode task into a String to be saved in text file.
-     *
      * @return String of encoded task details.
      */
     public String toEncoding() {
@@ -41,7 +39,6 @@ public class Event extends Task {
     /**
      * Converts the event details into a format readable by Java LocalDateTime API.
      * Format of "yyyy-mm-ddThh:mm:ss" required
-     *
      * @return String of converted event details.
      */
     private String reformateDateTime() {
@@ -54,6 +51,11 @@ public class Event extends Task {
         return dateSplit[2] + "-" + dateSplit[1] + "-" + dateSplit[0] + "T" + hour + ":" + minute + ":00";
     }
 
+    /**
+     * Checks if event task occurs on a specified date.
+     * @param dateFilter the specified date.
+     * @return boolean whether the task is due on the date.
+     */
     public boolean isDate(LocalDate dateFilter) {
         return this.atDateTime.toLocalDate().equals(dateFilter);
     }
