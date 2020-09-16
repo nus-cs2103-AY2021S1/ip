@@ -35,6 +35,9 @@ Duke handles your tasks and reminds you of upcoming events/deadlines.
 1. **Reminder:** `reminder`  
    _Usage_: `reminder`  
    Lists upcoming tasks within the week.  
+1. **Find task by keyword:** `find`  
+   _Usage_: `find [keyword]`  
+   Finds and lists tasks containing the keyword.
 1. **Exit:** `bye`  
    _Usage_: `bye`  
    Exits Duke and saves your list to the storage file in the data folder. **Duke will save your tasks to the file only if you exit with this command.**
