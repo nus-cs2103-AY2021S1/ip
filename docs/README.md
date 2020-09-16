@@ -103,12 +103,12 @@ I have cleared the list!
 <u><strong> Updated UI v1.2 on 14/09/2020: </strong></u>
 ![GUI v1.2](Ui.png)
 <u><strong> Updated UI v1.1 on 05/09/2020: </strong></u>
-![GUI v1.1](../data/images/ui%20v1.1.PNG)
-![GUI v1.1](../data/images/ui%20v1.1_2%20PNG.PNG)
+![GUI v1.1](images/ui%20v1.1.PNG)
+![GUI v1.1](images/ui%20v1.1_2%20PNG.PNG)
 
 
 <br><u><strong>New GUI on JavaFXML UI 01/09/2020: v1.0</strong></u>\
-![GUI v0.1](../data/images/king_gui_v0.1.PNG)
+![GUI v0.1](images/king_gui_v0.1.PNG)
 
 
 <strong><u>UPDATE: Deprecated method 01/09/2020:</u> King now runs on javaFXML GUI.</strong>\
