@@ -16,7 +16,7 @@ This user guide format heavily references https://se-education.org/addressbook-l
 
 1. Copy the file to the folder you want to use as the _home folder_ for Butler.
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note that the app contains some sample data.<br>
+1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds.<br>
    ![Ui](StartingPage.png)
 
 1. Type the command in the command box at the bottom of the screen and press Enter to execute it. e.g. typing **`list`** and pressing Enter will show you the current list of tasks.<br>
