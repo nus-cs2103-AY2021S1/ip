@@ -31,5 +31,8 @@ public class Deadline extends Task {
     }
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + deadline + ")"; }
+        TimeParser inputTime = new TimeParser(deadline);
+        String outputTime = inputTime.timeConverter();
+        return "D" + " | " + super.fileFormat() + " | " + outputTime;
+    }
 }

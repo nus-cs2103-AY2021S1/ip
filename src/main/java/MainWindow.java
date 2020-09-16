@@ -58,7 +58,6 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
         if (Bill.isEnded()) {
-            System.out.println("here");
             PauseTransition delay = new PauseTransition((Duration.seconds(delayTime)));
             delay.setOnFinished(event -> System.exit(0));
             delay.play();

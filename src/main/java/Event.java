@@ -30,7 +30,9 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + duration + ")";
+        TimeParser inputTime = new TimeParser(duration);
+        String outputTime = inputTime.timeConverter();
+        return "E" + " | " + super.fileFormat() + " | " + outputTime;
     }
 }
 
