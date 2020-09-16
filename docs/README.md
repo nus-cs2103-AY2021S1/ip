@@ -145,7 +145,7 @@ Expected outcome: A window containing the table of all commands pops up.
 
 **3 Ways of Saving Task Data in Duke**
 
-* Click `File` -> `Save`.
+* Click `File` -> `Save`
 * Choose `Yes` in Exit window.
 
 ![GitHub Logo](ExitWindow.png)
