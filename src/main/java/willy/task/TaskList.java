@@ -99,7 +99,7 @@ public class TaskList {
      * @return All the tasks in the list.
      */
     public String readList() {
-        String list = Willy.getStyle();
+        String list = "\n";
         if (listOfTasks.size() == 0) {
             list += Response.EMPTY_LIST;
         } else {
@@ -152,7 +152,7 @@ public class TaskList {
             }
         }
 
-        String filteredList = Willy.getStyle() + "\n";
+        String filteredList = "\n";
         if (keyList.size() == 0) {
             filteredList = filteredList + "\t" + Response.NON_MATCHING_TASK + "\n";
         } else {

@@ -5,11 +5,13 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import javax.swing.*;
+
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -17,6 +19,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import willy.store.TaskStore;
@@ -32,19 +37,19 @@ public class Willy extends Application {
 
     private static TaskStore storage;
     private static String lastGreeting = "bye";
-    private static String style = "\t_____________________________________________________________________________\n";
+    private static String style = "\t_________________________________________________________________\n";
     private static String logo = "__       ____       __\n"
             + "\\  \\    /    \\    /  /\n"
             + " \\  \\  /  /\\  \\  /  /\n"
             + "  \\  \\/  /  \\  \\/  /\n"
-            + "   \\____/     \\___/ ILLY ~(^-^)~\n" +
-            "\tYour personal life secretary\n";
-    private static String introGUI = "\t __       ___        __\n"
-            + "\t \\  \\    /    \\     /  /\n"
-            + "\t  \\  \\  /  /\\  \\  /  /\n"
-            + "\t   \\  \\/  /  \\  \\/  /\n"
-            + "\t    \\___/     \\__/ ILLY ~(^-^)~\n" +
-            "\t    Your personal life secretary\n";
+            + "   \\____/     \\___/ ILLY ~(^-^)~\n"
+            + "\tYour personal life secretary\n";
+    private static String introGUI = " __       ___        __\n"
+            + " \\  \\    /    \\     /  /\n"
+            + "  \\  \\  /  /\\  \\  /  /\n"
+            + "   \\  \\/  /  \\  \\/  /\n"
+            + "    \\___/     \\__/ ILLY ~(^-^)~\n"
+            + "    Your personal life secretary\n";
     private static boolean isOnJavaFX;
 
     public Willy() {
@@ -71,7 +76,7 @@ public class Willy extends Application {
     }
 
     public static String response(String message) {
-        return  style + "\t" + message + "\n" + style;
+        return "\n\t" + message + "\n" + style;
     }
 
     @Override
@@ -87,22 +92,22 @@ public class Willy extends Application {
         stage.setTitle("Willy"); // Stage Name
 
         // Responsible for Willy image (NOT FUNCTIONING)
-        // Solution below adapted from https://www.tutorialspoint.com/javafx/javafx_images.htm
-        FileInputStream inputstream = new FileInputStream("asset/Willy.jpg");
-        Image image = new Image(inputstream);
+        // Solution below adapted from https://stackoverflow.com/questions/22848829/how-do-i-add-an-image-inside-a-rectangle-or-a-circle-in-javafx
+        FileInputStream inputStream = new FileInputStream("asset/willy.png");
+        Image image = new Image(inputStream);
         ImageView imageView = new ImageView(image);
-        imageView.setX(50);
-        imageView.setY(25);
-        imageView.setFitHeight(100);
-        imageView.setFitWidth(50);
-        imageView.setPreserveRatio(true);
-        imageView.setCache(true);
-        Group willyImage = new Group(imageView);
+        imageView.setFitHeight(70);
+        imageView.setFitWidth(60);
+        StackPane imageContainer = new StackPane();
+        imageContainer.getChildren().addAll(new Circle(48), imageView);
+
 
         // Responsible for Willy Greetings & Input Section
         Label willy = new Label(introGUI);
         Greet startDuke = new Greet();
         Label botCommand = new Label(startDuke.toString());
+        Label userInput = new Label();
+        Text botResponse = new Text();
         willy.setAlignment(Pos.CENTER);
         TextField inputField = new TextField();
         inputField.setPromptText("State tasks to track");
@@ -112,23 +117,49 @@ public class Willy extends Application {
         // Handles Actions of Buttons
         enterButton.setOnAction(action -> {
                 String message = inputField.getText();
+                userInput.setText("\t   " + message);
                 inputField.clear();
-                botCommand.setText(parser.parse(message, true)); // Returns Response
+                botResponse.setText(parser.parse(message, true)); // Returns Response
         });
         clearButton.setOnAction(action -> {
             inputField.clear();
         });
 
-        // Putting together Layout Components
+        // Putting together Intro Components
         HBox willyIntro = new HBox();
         willyIntro.setSpacing(10);
-        willyIntro.getChildren().addAll(willyImage, willy);
-        HBox hbox = new HBox(); // Positions components in a horizontal row
-        hbox.setSpacing(10);
-        hbox.setPadding(new Insets(10, 20, 5, 30));
-        hbox.getChildren().addAll(inputField, enterButton, clearButton);
+        willyIntro.setPadding(new Insets(20, 20, 0, 30));
+        willyIntro.getChildren().addAll(imageContainer, willy);
+
+        // Putting together input components
+        HBox inputContainer = new HBox();
+        inputContainer.setSpacing(10);
+        inputContainer.setPadding(new Insets(5, 20, 20, 30));
+        inputContainer.getChildren().addAll(inputField, enterButton, clearButton);
+
+        // Putting together response components
+        Rectangle typingContainer = new Rectangle(330,48);
+        typingContainer.setFill(Color.rgb(203, 202, 254));
+        StackPane inputStack = new StackPane();
+        inputStack.getChildren().addAll(typingContainer, inputContainer);
+        Rectangle userInputContainer = new Rectangle(330,20);
+        userInputContainer.setFill(Color.rgb(180, 157, 253));
+        StackPane userInputStack = new StackPane();
+        userInput.setTextFill(Color.WHITE);
+        userInputStack.getChildren().addAll(userInputContainer, userInput);
+        userInputStack.setAlignment(userInput, Pos.CENTER_LEFT);
+
+        // Responsible for BotResponse
+        ScrollPane botResponseContainer = new ScrollPane();
+        botResponseContainer.setFitToWidth(true);
+        botResponseContainer.setMaxHeight(200);
+        botResponseContainer.setMinViewportHeight(210);
+        botResponseContainer.setContent(botResponse);
+
+
+        // Combine everything together
         VBox vbox = new VBox(); // Positions components in a vertical column
-        vbox.getChildren().addAll(willyIntro, botCommand, hbox);
+        vbox.getChildren().addAll(willyIntro, botCommand, inputStack, userInputStack, botResponseContainer);
 
         StackPane layout = new StackPane();
         layout.getChildren().addAll(vbox);

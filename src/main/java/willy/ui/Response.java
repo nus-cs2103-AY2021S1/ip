@@ -1,22 +1,6 @@
 package willy.ui;
 
 public enum Response {
-    //    private final String NON_EXISTENT_TASK_MESSAGE = "Task does not exist, please check the list again or add
-    //    the task first ~";
-//    private final String TASK_DONE_MESSAGE = "Niceee I've marked this task as done!";
-//    private final String NO_MATCHING_TASK_MESSAGE = "There are no matching tasks found in the list. Try something
-//    else?";
-//    private final String MATCHING_TASK_MESSAGE = "Here are the matching tasks in your list:";
-//    private final String ADD_TASK_RESPONSE = "Ay here is the task you just added:\n";
-//    private final String REMOVE_TASK_RESPONSE = "Okai here is the task you just deleted:\n";
-//    private final String EMPTY_LIST_RESPONSE = "\tThere is no task in your list:>\n";
-//    private final String NON_EMPTY_LIST_RESPONSE = "\tHere are the tasks in your list to jolt ur memory:>\n";
-//    private final String UPDATE_TASK_RESPONSE = "Okay, Here's the task you just updated:\n";
-//    private final String MISSING_INFO_MESSAGE = "Hmmm are you missing description/deadline of the task? \n\tCheck
-//    and" +
-//            " try again?";
-//    private final String NO_TASK_MESSAGE = "Please add in a task!";
-//    private final String NO_SENSE_MESSAGE = "Hmmm sorry I'm not sure what you are saying, try something else?:(";
     INCOMPLETE_INFO {
         @Override
         public String toString() {
