@@ -1,5 +1,7 @@
 package bot.task;
 
+import bot.util.DateParser;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -12,7 +14,9 @@ public class Event extends Task {
 
     public Event(String name, String timePeriod) {
         super(name);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        String dateFormat = DateParser.determineDateFormat(timePeriod);
+        assert dateFormat != null;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(dateFormat.strip());
         this.timePeriod = LocalDateTime.parse(timePeriod, formatter);
     }
 

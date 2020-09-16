@@ -1,45 +1,22 @@
 package bot.task;
 
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import bot.util.DateParser;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
-import java.util.Map;
+
+
 
 /**
  * A special type of task characterised by the input "/by" which implies the importance of the deadline.
  */
 public class Deadline extends Task {
-    private static final Map<String, String> DATE_FORMAT_REGEXPS = new HashMap<String, String>();
-
-    public static void loadDateFormats(String filePath) throws IOException {
-        String content = Files.readString(Paths.get(filePath), StandardCharsets.UTF_8);
-        String[] items = content.split("\n");
-        for (String item : items) {
-            if (item.length() != 0) {
-                String[] words = item.split(" \\| ");
-                DATE_FORMAT_REGEXPS.put(words[0], words[1]);
-            }
-        }
-    }
-
     private LocalDateTime deadline;
-
-    public String determineDateFormat(String dateString) {
-        for (String regexp : DATE_FORMAT_REGEXPS.keySet()) {
-            if (dateString.strip().toLowerCase().matches(regexp)) {
-                return DATE_FORMAT_REGEXPS.get(regexp);
-            }
-        }
-        return null; // Unknown format.
-    }
 
     public Deadline(String name, String deadline) {
         super(name);
-        String dateFormat = determineDateFormat(deadline);
+        String dateFormat = DateParser.determineDateFormat(deadline);
+        assert dateFormat != null;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(dateFormat.strip());
         this.deadline = LocalDateTime.parse(deadline, formatter);
     }

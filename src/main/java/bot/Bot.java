@@ -1,7 +1,7 @@
 package bot;
 
 import bot.command.Command;
-import bot.task.Deadline;
+import bot.util.DateParser;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -10,7 +10,7 @@ import java.util.Scanner;
  * Encompasses the UI, logic, model and all other factors that make up the application.
  */
 public class Bot {
-    public static String dateFormatPath = "./src/main/resources/dateFormats/dateFormats.txt";
+    private String dateFormatPath = "./src/main/resources/dateFormats/dateFormats.txt";
     private String name;
     private Storage storage;
     private TaskList taskList;
@@ -30,7 +30,7 @@ public class Bot {
         this.parser = new Parser();
         try {
             this.taskList = new TaskList(storage.loadFileContents());
-            Deadline.loadDateFormats(dateFormatPath);
+            DateParser.loadDateFormats(dateFormatPath);
         } catch (IOException e) {
             ui.showLoadingError();
             this.taskList = new TaskList();
