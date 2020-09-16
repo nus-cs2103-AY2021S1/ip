@@ -24,7 +24,8 @@ Duke Chatbot has several features to help you manage your tasks. Sounds interest
 * Double-click the downloaded `duke.jar` to launch the app!
 * The GUI below should appear after a few seconds.
 
-![image](https://github.com/AaronnSeah/ip/blob/master/src/main/resources/images/startUp.png?s=200)
+<img src="https://github.com/AaronnSeah/ip/blob/master/src/main/resources/images/startUp.png" width="400">
+
 * Now you can explore the features of Duke Chatbot!
 * Head over to [**Features**](Features) for detailed explanation of each command.
 
@@ -38,7 +39,7 @@ List all of your tasks.
 
 Format: `list`
 
-![image](https://github.com/AaronnSeah/ip/blob/master/src/main/resources/images/list.png)
+<img src="https://github.com/AaronnSeah/ip/blob/master/src/main/resources/images/list.png" width="400">
 
 3.2 [Adding a task: `add`](Adding a task: `add`)
 
@@ -53,21 +54,21 @@ You can add 3 kinds of tasks:
 
 Adding a Todo Task
 * format: `todo <task name>`
-![image](https://github.com/AaronnSeah/ip/blob/master/src/main/resources/images/todo.png)
+<img src="https://github.com/AaronnSeah/ip/blob/master/src/main/resources/images/todo.png" width="400">
 
 Adding an Event Task
 * format: `event <task name> /at <date> <start time>-<end time>`
 * format for <date>: DD/MM/YYYY
 * format for <start time> and <end time>: HH:MM
 * do note the `-` between the <start time> and <end time>        
-![image](https://github.com/AaronnSeah/ip/blob/master/src/main/resources/images/event.png)
+<img src="https://github.com/AaronnSeah/ip/blob/master/src/main/resources/images/event.png" width="400">
 
 Adding a Deadline Task
 * format: `deadline <task name> /by <date> <time>`
 * format for <date>: DD/MM/YYYY
 * format for <time>: HH:MM
 
-![image](https://github.com/AaronnSeah/ip/blob/master/src/main/resources/images/deadline.png)
+<img src="https://github.com/AaronnSeah/ip/blob/master/src/main/resources/images/deadline.png" width="400">
 
 3.3 [Marking a task as done: `done`](Marking a task as done: `done`)
 
@@ -81,7 +82,7 @@ To find the <task number>, use the `list` command.
 
 The <task number> is the number ordering in the list for the task you would like to mark as done.
 
-![image](https://github.com/AaronnSeah/ip/blob/master/src/main/resources/images/delete.png)
+<img src="https://github.com/AaronnSeah/ip/blob/master/src/main/resources/images/done.png" width="400">
 
 3.4 [Deleting a task: `delete`](Deleting a task: `delete`)
 
@@ -95,7 +96,7 @@ To find the <task number>, use the `list` command.
 
 The <task number> is the number ordering in the list for the task you would like to mark as done.
 
-![image](https://github.com/AaronnSeah/ip/blob/master/src/main/resources/images/done.png)
+<img src="https://github.com/AaronnSeah/ip/blob/master/src/main/resources/images/delete.png" width="400">
 
 
 3.5 [Finding tasks by name: `find`](Finding tasks by name: `find`) 
@@ -106,7 +107,7 @@ The order of tasks that appear (if it is non-empty) is as follows:
     2. tasks whose one of the space-delimited name matches exactly with the search keyword. e.g. "book signing" and "book"
     3. tasks whose name matches contains search keyword. e.g. "book signing" and "k s"
     
-![image](https://github.com/AaronnSeah/ip/blob/master/src/main/resources/images/find.png)
+<img src="https://github.com/AaronnSeah/ip/blob/master/src/main/resources/images/find.png" width="400">
 
 
 3.6 [Exiting the program: `bye`](Exiting the program: `bye`) 
