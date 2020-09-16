@@ -1,23 +1,23 @@
 # Duke Chatbot User Guide
 
 
-1. [**Introduction**](#Introduction)
-2. [**Quick Start**](#Quick-Start)
-3. [**Features**](#Features)
+1. [**Introduction**](#introduction)
+2. [**Quick Start**](#quick-start)
+3. [**Features**](#features)
 
-    3.1. [Listing all tasks: `list`](#1-Listing-all-tasks-list)
+    3.1. [Listing all tasks: `list`](#1-listing-all-tasks-list)
     
-    3.2. [Adding a task](#2-Adding-a-task)
+    3.2. [Adding a task](#2-adding-a-task)
     
-    3.3. [Marking a task as done: `done`](#3-Marking-a-task-as-done-done)
+    3.3. [Marking a task as done: `done`](#3-marking-a-task-as-done-done)
     
-    3.4. [Deleting a task: `delete`](#4-Deleting-a-task-delete)
+    3.4. [Deleting a task: `delete`](#4-deleting-a-task-delete)
     
-    3.5. [Finding tasks by name: `find`](#5-Finding-tasks-by-name-find) 
+    3.5. [Finding tasks by name: `find`](#5-finding-tasks-by-name-find) 
     
-    3.6. [Exiting the program: `bye`](#6-Exiting-the-program-bye)   
+    3.6. [Exiting the program: `bye`](#6-exiting-the-program-bye)   
     
-    3.7. [Saving/loading data](#7-Savingloading-data)   
+    3.7. [Saving/loading data](#7-savingloading-data)   
 <br><br>
 
 ## Introduction
