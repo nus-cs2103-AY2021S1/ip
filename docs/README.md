@@ -103,8 +103,8 @@ Example of usage:
 
 Expected outcome: 
 
-removed:[D][x]my IP -----2019-12-02  
-added recurring:[D][x]my IP -----2019-12-02 
+removed:[W][x]my IP -----2019-12-02  
+added recurring:[W][x]my IP -----2019-12-02 
 
 
 ### `help` - show the commands 
@@ -120,12 +120,12 @@ Expected outcome:
 --These are Jarvis Functions-- 
 help
 list
-todo <taskName>
-done <index>
-deadline/weekly <taskName> /by 2/12/2019 1800
-find <taskName>
-delete <weeklyTaskIndex>
-remove <taskToRemovePermanently>
+todo (taskName)
+done (index)
+deadline/weekly (taskName) /by 2/12/2019 1800
+find (taskName)
+delete (weeklyTaskIndex)
+remove (taskToRemovePermanently)
 
 
  
