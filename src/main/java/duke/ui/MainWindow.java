@@ -9,7 +9,6 @@ import duke.commands.CommandResult;
 import duke.utils.Messages;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -57,7 +56,7 @@ public class MainWindow extends AnchorPane {
         String userInputText = userInput.getText();
         CommandResult result = duke.executeCommand(userInputText);
         String response = duke.getResponse(result);
-        if (result.isExitCommand()) {
+        if (result.isExit()) {
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(userInputText, userImage),
                     DialogBox.getDukeDialog(response, dukeByeImage)

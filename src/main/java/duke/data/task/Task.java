@@ -58,6 +58,10 @@ public abstract class Task {
         this.isDone = true;
     }
 
+    public boolean taskIsDone() {
+        return this.isDone;
+    }
+
     /**
      * Returns the string of the task to be added into the local storage file.
      * @return The string of the task in the local storage file

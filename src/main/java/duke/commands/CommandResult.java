@@ -17,7 +17,7 @@ public class CommandResult {
     /** The resulted list of tasks that was produced by the command. */
     public final List<? extends Task> taskList;
 
-    private boolean isExit = false;
+    private boolean exit = false;
 
     /**
      * Constructs a {@code CommandResult}.
@@ -33,10 +33,10 @@ public class CommandResult {
      * @param feedbackToUser The message to be shown to the user.
      * @param isExit True if the command was an exit command, false otherwise.
      */
-    public CommandResult(String feedbackToUser, boolean isExit) {
+    public CommandResult(String feedbackToUser, boolean exit) {
         this.feedbackToUser = feedbackToUser;
         this.taskList = null;
-        this.isExit = isExit;
+        this.exit = exit;
     }
 
     /**
@@ -59,8 +59,8 @@ public class CommandResult {
     /**
      * Returns {@code True} if the command is an exit command.
      */
-    public boolean isExitCommand() {
-        return isExit;
+    public boolean isExit() {
+        return exit;
     }
 
     /**
