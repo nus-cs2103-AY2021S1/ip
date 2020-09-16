@@ -96,14 +96,16 @@ public class Parser {
 
         try {
             switch (type) {
-            case "list":
-                return new ListCommand();
             case "bye":
                 return new ExitCommand();
-            case "todo":
-                return new AddCommand(new Todo(splitCommand[1]));
+            case "list":
+                return new ListCommand();
+            case "sort":
+                return new SortCommand();
             case "find":
                 return new FindCommand(splitCommand[1]);
+            case "todo":
+                return new AddCommand(new Todo(splitCommand[1]));
             case "deadline":
                 return new AddCommand(parseDeadline(splitCommand[1]));
             case "event":
