@@ -1,5 +1,10 @@
 # User Guide
 
+## Application Snapshot
+![alt text][ss]
+
+[ss]: Ui.png
+
 ## Features
 
 **Notes about the command format:**  
@@ -70,11 +75,11 @@ Now you have 4 tasks in the list
 
 Shows a list of all tasks in the task list.
 
-Format: ```list```
+Format: `list`
 
 Example of usage: 
 
-```list```
+`list`
 
 Expected outcome:  
 ```
