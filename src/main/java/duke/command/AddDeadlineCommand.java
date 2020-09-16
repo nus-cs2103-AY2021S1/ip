@@ -50,29 +50,9 @@ public class AddDeadlineCommand extends AddCommand {
         InvalidDeadlineException, InvalidDateException, FileUpdateFailException, DuplicateTaskException {
 
         String[] parsedArr = TaskParser.parseTaskDescription(description, TaskType.DEADLINE);
-        String deadline = getDeadline(parsedArr);
-        String taskDetails = getTaskDetails(parsedArr);
+        String taskDetails = TaskParser.getTaskDetails(parsedArr);
+        String deadline = TaskParser.getTime(parsedArr);
         LocalDateTime dateTime = DateTimeParser.getDateTime(deadline);
         return addTask(new Deadline(taskDetails, dateTime), taskList, ui, storage);
-    }
-
-    /**
-     * Retrieves the task details from the parsed input.
-     *
-     * @param arr Parsed array.
-     * @return Details of Deadline task.
-     */
-    private String getTaskDetails(String[] arr) {
-        return arr[0];
-    }
-
-    /**
-     * Retrieves the deadline of this {@code Deadline} task.
-     *
-     * @param arr Parsed array.
-     * @return Due date of Deadline task.
-     */
-    private String getDeadline(String[] arr) {
-        return arr[1];
     }
 }
