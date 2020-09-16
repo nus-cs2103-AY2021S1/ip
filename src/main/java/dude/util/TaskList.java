@@ -48,4 +48,24 @@ public class TaskList {
         }
         return FALSE;
     }
+
+    public ArrayList<Task> search(String keywords) {
+        ArrayList<Task> matchList = new ArrayList<>();
+        String[] keywordArray = keywords.split(" ");
+        boolean allMatch;
+        String curr;
+        for (Task task : tasks) {
+            allMatch = true;
+            for (int i = 0; i < keywordArray.length; i++) {
+                curr = keywordArray[i];
+                if (!task.getDescription().toLowerCase().contains(curr.toLowerCase())) {
+                    allMatch = false;
+                }
+            }
+            if (allMatch) {
+                matchList.add(task);
+            }
+        }
+        return matchList;
+    }
 }

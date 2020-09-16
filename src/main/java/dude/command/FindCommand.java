@@ -35,12 +35,7 @@ public class FindCommand extends Command {
      * @throws CommandException
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws CommandException {
-        ArrayList<Task> searchList = new ArrayList<>();
-        for (Task task : tasks.getTasks()) {
-            if (task.getDescription().toLowerCase().contains(keyWord.toLowerCase())) {
-                searchList.add(task);
-            }
-        }
+        ArrayList<Task> searchList = tasks.search(keyWord);
         Command command = new ListCommand("list");
         command.execute(new TaskList(searchList), ui, storage);
         if (searchList.size() == 0) {

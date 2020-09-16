@@ -36,6 +36,7 @@ Format: `list`
 ### Locating a task by name: `find` todo <a name="find"></a>
 Finds tasks whose descriptions contains the given keyword.
 Format: `find KEYWORD`
+* The search is case-insensitive. e.g `teSt` will match `Test`
 
 ### Deleting a task: `delete` todo <a name="delete"></a>
 Deletes the specified task from Dude Bot.
