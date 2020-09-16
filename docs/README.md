@@ -114,7 +114,7 @@ Expected outcome:
 >[T] [✓] read book   
 >You have 2 writing(s) on your scroll as of now.  
 
-### <a name="find>Finding tasks with a search term</a>: `find`  
+### <a name="find">Finding tasks with a search term</a>: `find`  
 Returns a list of tasks related to the desired search term.   
 
 Format: `find SEARCH_TERM`  
