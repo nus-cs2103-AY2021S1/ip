@@ -7,7 +7,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 /**
@@ -17,11 +16,12 @@ import java.util.stream.Collectors;
 public class TaskList {
     private static final String DONE_MESSAGE = "Good job! This task is now marked done:";
     private static final String DELETED_MESSAGE = "Alright! This task is now deleted:";
-    private static final String LIST_HINT = "(Use 'list' command to see your updated list.)";
+    private static final String LIST_HINT = "(type 'list' to see changes.)";
     private static final String NO_MATCH_MESSAGE = "No matches found!";
     private static final String UPDATED_MESSAGE = "Got it! Your task has been updated.";
     private List<Task> tasks;
     private int numOfPendingTasks;
+    private boolean toReturnAsValid = true;
 
     TaskList() {
         this.tasks = new ArrayList<>();
@@ -69,17 +69,21 @@ public class TaskList {
      */
     public int getTaskID(Parser parser) throws DukeException {
         if (tasks.isEmpty()) {
+            validate(false);
             throw new EmptyTasksException("Task is empty");
         }
         if (Objects.isNull(parser.getTaskNumber())) {
+            validate(false);
             throw new NullIndexException("Target is null");
         }
 
         int target = parser.getTaskNumber() - 1;
         if (!isWithinValidRange(target)) {
+            validate(false);
             throw new RangeIndexException("Range is invalid");
         }
 
+        validate(true);
         return target;
     }
 
@@ -98,8 +102,10 @@ public class TaskList {
             targetTask.markAsDone();
             decrementPendingTasks();
             String toReturn = DONE_MESSAGE + "\n" + targetTask;
+            validate(true);
             return Ui.displayMessage(toReturn);
         } catch (DukeException e) {
+            validate(false);
             return Ui.displayMessage(e.toString());
         }
     }
@@ -120,9 +126,10 @@ public class TaskList {
             }
 
             String toReturn = DELETED_MESSAGE + "\n" + targetTask;
-
+            validate(true);
             return Ui.displayMessage(toReturn);
         } catch (DukeException e) {
+            validate(false);
             return Ui.displayMessage(e.toString());
         }
     }
@@ -146,11 +153,13 @@ public class TaskList {
 
             String toReturn = "'" + taskName + "' added to list!\n"
                     + tasks.get(size - 1) + "\n"
-                    + "You now have " + size + " task(s) in your list.\n"
+                    + "You now have " + size + " task(s) in your list.\n\n"
                     + LIST_HINT;
 
+            validate(true);
             return Ui.displayMessage(toReturn);
         } catch (DukeException e) {
+            validate(false);
             return Ui.displayMessage(e.toString());
         }
     }
@@ -165,23 +174,25 @@ public class TaskList {
         List<Task> matches = getMatchingTask(parser.comparator);
 
         if (matches.isEmpty()) {
+            validate(false);
             return Ui.displayMessage(NO_MATCH_MESSAGE);
         } else {
             int count = 1;
             StringBuilder toReturn = new StringBuilder(String.format("Found %d match(es) for '%s':", matches.size(), parser.comparator));
 
             for (Task task : matches) {
-                toReturn.append(String.format("   %d. %s", count, task.toString()));
+                toReturn.append(String.format("\n   %d. %s", count, task.toString()));
                 count++;
             }
 
+            validate(true);
             return Ui.displayMessage(toReturn.toString());
         }
     }
 
     private List<Task> getMatchingTask(String comparator) {
-        List<Task> matchingTasks = new ArrayList<>();
-        if (!hasComparator) {
+        boolean noComparator = comparator.isBlank();
+        if (noComparator) {
             return new ArrayList<>();
         } else {
             return tasks.stream()
@@ -221,8 +232,10 @@ public class TaskList {
                     + "  from:  " + clonedTask + "\n"
                     + "  to:    " + targetTask + "\n\n"
                     + LIST_HINT;
+            validate(true);
             return Ui.displayMessage(toReturn);
         } catch (DukeException | CloneNotSupportedException e) {
+            validate(false);
             return Ui.displayMessage(e.toString());
         }
     }
@@ -239,7 +252,7 @@ public class TaskList {
     }
 
     /**
-     * Class getter routines.
+     * Class getter and setter routines.
      */
     public List<Task> getTasks() {
         return tasks;
@@ -247,6 +260,14 @@ public class TaskList {
 
     public int getNumOfPendingTasks() {
         return numOfPendingTasks;
+    }
+
+    public boolean isToReturnAsValid() {
+        return toReturnAsValid;
+    }
+
+    private void validate(boolean toReturnAsValid) {
+        this.toReturnAsValid = toReturnAsValid;
     }
 }
 

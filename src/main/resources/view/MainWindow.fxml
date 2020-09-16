@@ -16,7 +16,7 @@
         <TextField fx:id="userInput" accessibleRole="TOOLTIP" layoutX="6.0" layoutY="557.0" onAction="#handleUserInput" prefHeight="32.0" prefWidth="306.0" promptText="Your commands here..." AnchorPane.bottomAnchor="11.0" />
         <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="546.0" prefWidth="400.0" vvalue="1.0">
          <content>
-                <VBox fx:id="dialogContainer" prefHeight="539.0" prefWidth="381.0" />
+                <VBox fx:id="dialogContainer" focusTraversable="true" prefHeight="546.0" prefWidth="382.0" style="-fx-background-color: dimgray"/>
          </content>
         </ScrollPane>
     </children>

@@ -8,6 +8,7 @@ import duke.exception.DukeException;
 public class Duke {
     private Storage storage;
     private TaskList taskList;
+    private boolean willReturnAsValid;
 
     /**
      * Initialises Duke with a given file save path.
@@ -27,59 +28,58 @@ public class Duke {
         }
     }
 
+    private String checkMessage(String message, boolean isValid) {
+        willReturnAsValid = isValid;
+        return message;
+    }
+
     /**
      * Runs the initialised Duke.
      */
     public String run(String input) {
-        Parser parser = new Parser();
-
-        Ui.displayWelcome();
-
-        String toReturn = "";
-
         try {
+            Parser parser = new Parser();
             parser.setCommandLine(input);
             String command = parser.getCommandWord();
 
             switch (command) {
             case "bye":
                 storage.save(taskList);
-                toReturn += Ui.displayGoodbye();
-                break;
+                return checkMessage(Ui.displayGoodbye(), true);
             case "list":
-                toReturn += Ui.displayList(taskList);
-                break;
+                return checkMessage(Ui.displayList(taskList), true);
+            case "help":
+                return checkMessage(Ui.displayHelp(), true);
             case "done":
-                toReturn += taskList.done(parser);
-                break;
+                return checkMessage(taskList.done(parser), taskList.isToReturnAsValid());
             case "delete":
-                toReturn += taskList.delete(parser);
-                break;
+                return checkMessage(taskList.delete(parser), taskList.isToReturnAsValid());
             case "find":
-                toReturn += taskList.find(parser);
-                break;
+                return checkMessage(taskList.find(parser), taskList.isToReturnAsValid());
             case "update":
-                toReturn += taskList.update(parser);
-                break;
+                return checkMessage(taskList.update(parser), taskList.isToReturnAsValid());
             case "deadline":
             case "event":
             case "todo":
-                toReturn += taskList.add(parser);
-                break;
+                return checkMessage(taskList.add(parser), taskList.isToReturnAsValid());
             default:
                 assert false : command;
             }
         } catch (DukeException e) {
-            toReturn += Ui.displayMessage(e.toString());
+            return checkMessage(Ui.displayMessage(e.toString()), false);
         } catch (Exception e) {
             e.printStackTrace();
-            toReturn += Ui.displayMessage(e.getMessage());
+            return checkMessage(Ui.displayMessage(e.getMessage()), false);
         }
-        return toReturn;
+        return input;
     }
 
     public String getResponse(String input) {
         return run(input);
+    }
+
+    public boolean getWillReturnAsValid() {
+        return willReturnAsValid;
     }
 }
 
