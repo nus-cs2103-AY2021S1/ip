@@ -19,6 +19,8 @@ import javafx.scene.layout.VBox;
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
+    private static final String GREETINGS = "Woof! I'm your favourite Doggo!\n"
+        + "How can I help you?";
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -27,11 +29,7 @@ public class MainWindow extends AnchorPane {
     private TextField userInput;
     @FXML
     private Button sendButton;
-
     private Duke duke;
-    private final static String GREETINGS = "Woof! I'm your favourite Doggo!\n"
-        + "How can I help you?";
-
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/pug.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/corgi.png"));
     private Image backgroundImage = new Image(this.getClass().getResourceAsStream("/images/bgimg.png"));
@@ -58,7 +56,8 @@ public class MainWindow extends AnchorPane {
     }
 
     public void setDialogBackground() {
-        BackgroundImage bg = new BackgroundImage(backgroundImage, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT,
+        BackgroundImage bg = new BackgroundImage(backgroundImage, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.REPEAT,
+            BackgroundPosition.DEFAULT,
             new BackgroundSize(0, 0, false, false, true, false));
         dialogContainer.setBackground(new Background(bg));
     }
