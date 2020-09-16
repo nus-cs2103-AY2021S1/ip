@@ -28,7 +28,6 @@ public class Duke {
      */
     public Duke() {
         ui = new Ui();
-
         storage = new Storage(FILE_PATH);
         archivedStorage = new Storage(ARCHIVE_PATH);
 
