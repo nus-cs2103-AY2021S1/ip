@@ -1,9 +1,8 @@
 package luke.task;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
+import java.util.Locale;
 
 /**
  * Represents a task and its deadline for the user.
@@ -26,17 +25,17 @@ public class Deadline extends Task {
         return stringifyBy();
     }
 
-    public String stringifyBy() {
-        return by.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+    private String stringifyBy() {
+        return by.format(DateTimeFormatter.ofPattern("MMM d, yyyy", Locale.ENGLISH));
     }
 
     @Override
     public String toDataString() {
-        return String.format("D|%s|%s", super.toDataString(), this.getBy());
+        return String.format("D|%s|%s", super.toDataString(), this.by);
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + stringifyBy() + ")";
+        return "[D]" + super.toString() + " (by: " + this.getBy() + ")";
     }
 }

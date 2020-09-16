@@ -1,6 +1,6 @@
 package luke;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -17,11 +17,11 @@ public class TaskListTest {
     //    I have referred to viscount-master for this part of the code
     private static final List<Task> DUMMY_TASKS = Arrays.asList(
             new Todo("do 1"),
-            new Deadline("do 2", LocalDateTime.of(2020, 2, 22, 22, 22)),
-            new Event("do 3", "March 3rd"),
+            new Deadline("do 2", LocalDate.of(2020, 2, 22)),
+            new Event("do 3", LocalDate.of(2020, 3, 3)),
             new Todo("do 4"),
-            new Deadline("do 5", LocalDateTime.of(2020, 5, 5, 5, 55)),
-            new Event("do 6", "June 6th"));
+            new Deadline("do 5", LocalDate.of(2020, 5, 5)),
+            new Event("do 6", LocalDate.of(2020, 6, 6)));
 
     //    I have referred to viscount-master for this part of the code
     @Test

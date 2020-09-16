@@ -2,7 +2,6 @@ package luke;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 import luke.commands.AddCommand;
 import luke.commands.Command;
@@ -14,6 +13,7 @@ import luke.commands.ListCommand;
 import luke.exception.LukeDateTimeException;
 import luke.exception.LukeEmptyCommandException;
 import luke.exception.LukeException;
+import luke.exception.LukeLoadingDataException;
 import luke.exception.LukeUnknownCommandException;
 import luke.task.Deadline;
 import luke.task.Event;
@@ -24,24 +24,31 @@ import luke.task.Todo;
  * Represents a Parser to interpret task and command.
  */
 public class Parser {
+
     /**
+     *
      * Parses a line that contains information about a task
      * to generate the corresponding task.
      *
      * @param taskStr the line that contains information about a task
      * @return the corresponding task
-     * @throws LukeException if insufficient details are given for a task
      */
-    public static Task parseTask(String taskStr) throws LukeException {
-        assert taskStr != "" : "Task should not be empty.";
+    public static Task parseTask(String taskStr) throws LukeLoadingDataException {
+        assert taskStr.equals("") : "Task should not be empty.";
         String[] taskDetails = taskStr.split("\\|");
-        Task parsedTask = null;
-        if (taskDetails[0].equals("T")) {
+        Task parsedTask;
+        switch (taskDetails[0]) {
+        case "T":
             parsedTask = new Todo(taskDetails[2]);
-        } else if (taskDetails[0].equals("D")) {
+            break;
+        case "D":
             parsedTask = new Deadline(taskDetails[2], LocalDate.parse(taskDetails[3]));
-        } else if (taskDetails[0].equals("E")) {
-            parsedTask = new Event(taskDetails[2], taskDetails[3]);
+            break;
+        case "E":
+            parsedTask = new Event(taskDetails[2], LocalDate.parse(taskDetails[3]));
+            break;
+        default:
+            throw new LukeLoadingDataException("loading data");
         }
         if (taskDetails[1].equals("1")) {
             parsedTask.markAsDone();
@@ -58,7 +65,7 @@ public class Parser {
      * @throws LukeException if command is given in incorrect format
      */
     public static Command parseCommand(String input) throws LukeException {
-        assert input != "" : "User input should not be empty.";
+        assert input.equals("") : "User input should not be empty.";
         String[] commandSplit = input.trim().split(" ", 2);
         String commandType = commandSplit[0].trim();
         try {
@@ -82,8 +89,8 @@ public class Parser {
             default:
                 throw new LukeUnknownCommandException(commandType);
             }
-        } catch (DateTimeException e) {
-            throw new LukeDateTimeException(e.getMessage());
+        } catch (LukeException e) {
+            throw new LukeException(e.getMessage());
         }
     }
 
@@ -96,7 +103,7 @@ public class Parser {
         }
     }
 
-    private static Command parseDeadlineCommand(String[] commandSplit) throws LukeEmptyCommandException {
+    private static Command parseDeadlineCommand(String[] commandSplit) throws LukeException {
         try {
             String[] deadlineDetails = commandSplit[1].trim().split("/by");
             String deadlineDescription = deadlineDetails[0].trim();
@@ -104,17 +111,21 @@ public class Parser {
             return new AddCommand(new Deadline(deadlineDescription, by));
         } catch (IndexOutOfBoundsException e) {
             throw new LukeEmptyCommandException(commandSplit[0]);
+        } catch (DateTimeException e) {
+            throw new LukeDateTimeException("deadline");
         }
     }
 
-    private static Command parseEventCommand(String[] commandSplit) throws LukeEmptyCommandException {
+    private static Command parseEventCommand(String[] commandSplit) throws LukeException {
         try {
             String[] eventDetails = commandSplit[1].trim().split("/at");
             String eventDescription = eventDetails[0].trim();
-            String at = eventDetails[1].trim();
+            LocalDate at = LocalDate.parse(eventDetails[1].trim());
             return new AddCommand(new Event(eventDescription, at));
         } catch (IndexOutOfBoundsException e) {
             throw new LukeEmptyCommandException(commandSplit[0]);
+        } catch (DateTimeException e) {
+            throw new LukeDateTimeException("event");
         }
     }
 

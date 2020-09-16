@@ -1,2 +1,2 @@
-E|0|team meeting|5pm
-T|0|eat fried chicken|
+T|1|eat fried chicken|
+E|0|buy an apple|2020-02-02

@@ -1,7 +1,10 @@
 package luke;
 
 import luke.exception.LukeException;
+import luke.exception.LukeNoResultException;
 import luke.task.Task;
+
+import java.util.List;
 
 /**
  * Represents Ui that directly interacts with user.
@@ -86,6 +89,27 @@ public class Ui {
                 taskSummary += String.format("-> %d.%s\n", i + 1, current);
             }
             return String.format("%s", taskSummary);
+        }
+    }
+
+    /**
+     * Show find result to the user.
+     *
+     * @param tasks list of current tasks
+     * @param keyword given keyword used to find tasks
+     * @return result of finding task with the given keyword
+     */
+    public String showFindResult(TaskList tasks, String keyword) {
+        try {
+            List<Task> result = tasks.findTask(keyword);
+            String resultStr = String.format("Here are the tasks that contain the keyword '%s'\n", keyword);
+            for (int i = 0; i < result.size(); i++) {
+                Task current = result.get(i);
+                resultStr += String.format("-> %s\n", current);
+            }
+            return resultStr;
+        } catch (LukeNoResultException e) {
+            return e.getMessage();
         }
     }
 

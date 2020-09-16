@@ -1,13 +1,8 @@
 package luke.commands;
 
-import java.util.List;
-
 import luke.Storage;
 import luke.TaskList;
 import luke.Ui;
-import luke.exception.LukeException;
-import luke.exception.LukeNoResultException;
-import luke.task.Task;
 
 /**
  * Represents a command to find matching tasks.
@@ -28,18 +23,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public String execute(Storage storage, TaskList tasks, Ui ui) throws LukeException {
-        try {
-            List<Task> result = tasks.findTask(this.keyword);
-            String resultStr = "Here are the tasks in your list.\n";
-            for (int i = 0; i < result.size(); i++) {
-                Task current = result.get(i);
-                resultStr += String.format("%d.%s\n", i + 1, current);
-            }
-            return resultStr;
-        } catch (LukeNoResultException e) {
-            throw e;
-        }
-
+    public String execute(Storage storage, TaskList tasks, Ui ui) {
+        return ui.showFindResult(tasks, keyword);
     }
 }

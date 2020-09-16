@@ -18,7 +18,7 @@ public class ExitCommand extends Command {
     }
 
     @Override
-    public String execute(Storage storage, TaskList tasks, Ui ui) throws LukeException {
+    public String execute(Storage storage, TaskList tasks, Ui ui) {
         System.exit(0);
         return ui.showExitResult();
     }
