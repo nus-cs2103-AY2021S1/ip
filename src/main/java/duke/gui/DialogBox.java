@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.control.Control;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -49,6 +50,10 @@ public class DialogBox extends HBox {
         dialog.setTextAlignment(TextAlignment.LEFT);
         dialog.setOpacity(0.8);
 
+        dialog.setMaxWidth(Control.USE_PREF_SIZE);
+        dialog.setMaxHeight(Control.USE_PREF_SIZE);
+
+
         displayPicture.setImage(img);
     }
 
@@ -60,7 +65,7 @@ public class DialogBox extends HBox {
         var db = new DialogBox(text, img);
         db.flip();
         //db.dialog.setStyle("-fx-background-color: #43a192; -fx-background-radius : 15");
-        db.dialog.setStyle("-fx-background-color: #5db0a7; -fx-background-radius : 15");
+        db.dialog.setStyle("-fx-background-color: #287da8; -fx-background-radius : 15");
         return db;
     }
 

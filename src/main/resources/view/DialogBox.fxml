@@ -9,12 +9,12 @@
     <padding>
         <Insets bottom="2.0" left="10.0" right="10.0" top="2.0" />
     </padding>
-    <TextFlow fx:id="dialog" style="-fx-background-color: #098571; -fx-background-radius: 15;" HBox.hgrow="ALWAYS">
+    <TextFlow fx:id="dialog" style="-fx-background-color: #96ceeb; -fx-background-radius: 15;">
         <HBox.margin>
             <Insets bottom="15.0" left="10.0" right="5.0" top="15.0" />
         </HBox.margin>
         <padding>
-            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+            <Insets bottom="8.0" left="10.0" right="10.0" top="10.0" />
         </padding>
     </TextFlow>
     <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="89.0" pickOnBounds="true" preserveRatio="true" scaleX="0.7" scaleY="0.7" translateY="-14.0">
