@@ -1,17 +1,20 @@
 package bot.util;
 
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class DateParser {
     private static final Map<String, String> DATE_FORMAT_REGEXPS = new HashMap<String, String>();
 
     public static void loadDateFormats(String filePath) throws IOException {
-        String content = Files.readString(Paths.get(filePath), StandardCharsets.UTF_8);
+        InputStream in = DateParser.class.getResourceAsStream(filePath);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+        String content = reader.lines().collect(Collectors.joining("\n"));
         String[] items = content.split("\n");
         for (String item : items) {
             if (item.length() != 0) {

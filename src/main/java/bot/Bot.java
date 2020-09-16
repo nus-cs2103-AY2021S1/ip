@@ -11,7 +11,7 @@ import java.util.Scanner;
  * Encompasses the UI, logic, model and all other factors that make up the application.
  */
 public class Bot {
-    private String dateFormatPath = "./src/main/resources/dateFormats/dateFormats.txt";
+    private String dateFormatPath = "/dateFormats/dateFormats.txt";
     private String name;
     private Storage storage;
     private TaskList taskList;
