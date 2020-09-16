@@ -35,7 +35,7 @@ public class TaskList {
         StringBuffer buffer = new StringBuffer();
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
-            if (task.getDescription().toLowerCase().contains(searchTerm) || task.getDate().toLowerCase().contains(searchTerm)) {
+            if (task.toString().toLowerCase().contains(searchTerm)) {
                 buffer.append(i + 1 + ". " + task.toString() + "\n");
             }
         }

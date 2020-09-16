@@ -3,7 +3,9 @@ package duke.core;
 import java.io.File;
 
 import duke.command.Command;
+import duke.command.EndCommand;
 import duke.exception.DukeException;
+import javafx.application.Platform;
 import javafx.scene.image.Image;
 
 /**
@@ -51,6 +53,9 @@ public class Duke {
         try {
             Command command = parser.parse(input);
             String reply = command.execute(taskList, storage, ui);
+            if (command instanceof EndCommand) {
+                Platform.exit();
+            }
             return reply;
         } catch (DukeException e) {
             return e.getMessage();
