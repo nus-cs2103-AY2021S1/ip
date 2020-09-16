@@ -4,11 +4,11 @@ import java.time.LocalDate;
 
 import duke.command.AddCommand;
 import duke.command.Command;
+import duke.command.DateCommand;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
-import duke.command.DateCommand;
 import duke.command.InputCommand;
 import duke.command.ListCommand;
 
@@ -16,9 +16,9 @@ import duke.command.ListCommand;
  * Represents a parser that parses the input of users.
  */
 public class Parser {
-    private static int todoSubstringIndex = 5;
-    private static int deadlineSubstringIndex = 9;
-    private static int eventSubstringIndex = 6;
+    private static final int TODO_SUBSTRING_INDEX = 5;
+    private static final int DEADLINE_SUBSTRING_INDEX = 9;
+    private static final int EVENT_SUBSTRING_INDEX = 6;
 
     /**
      * Parses the user's input.
@@ -48,7 +48,9 @@ public class Parser {
         case DELETE:
             return new DeleteCommand(input);
         case TODO:
+            //Fallthrough
         case DEADLINE:
+            //Fallthrough
         case EVENT:
             return new AddCommand(input, inputCommand);
         case DATE:
@@ -97,7 +99,7 @@ public class Parser {
      */
     public static String getTodoDescription(String input) throws DukeException {
         try {
-            return input.substring(todoSubstringIndex);
+            return input.substring(TODO_SUBSTRING_INDEX);
         } catch (Exception e) {
             throw new DukeException("Todo cannot be empty!");
         }
@@ -111,7 +113,7 @@ public class Parser {
     public static String[] getDeadlineStrings(String input) {
         assert input != null : "There is no input";
         String[] parsedInput = input.split(" /by ");
-        parsedInput[0] = parsedInput[0].substring(deadlineSubstringIndex);
+        parsedInput[0] = parsedInput[0].substring(DEADLINE_SUBSTRING_INDEX);
         return parsedInput;
     }
 
@@ -123,7 +125,7 @@ public class Parser {
     public static String[] getEventTimeStrings(String input) {
         assert input != null : "There is no input";
         String[] parsedInput = input.split(" /at ");
-        parsedInput[0] = parsedInput[0].substring(eventSubstringIndex);
+        parsedInput[0] = parsedInput[0].substring(EVENT_SUBSTRING_INDEX);
         return parsedInput;
     }
 

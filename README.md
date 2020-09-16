@@ -3,6 +3,8 @@
 _KING BOB_ is a chat bot that helps you organise your daily tasks (bananas). Make his Highness happy by giving him more 
 tasks (bananas)!
  
+![Image of KING BOB](https://raw.githubusercontent.com/kkangs0226/ip/master/docs/Ui.png)
+ 
 Below are instructions on how to use _KING BOB_.
 
 - Features
@@ -92,7 +94,8 @@ Example of command:
 
 Expected result:
 ```
-
+Banana! I’ve marked this task as done:
+      [T][✘] read book
 ```
 
 ### `delete` - Delete a task 
@@ -105,7 +108,11 @@ Example of command:
 - `delete 1`
 
 Expected result:
-
+```
+Banana! banana has been eaten. Burp!
+      [T][✘] read book
+   Now you have 2 banana(s) in your list! Nom nom..
+```
 
 ### `date` - Find a task by its date
 This command finds tasks based on its event or deadline date. 
@@ -117,9 +124,12 @@ Example of command:
 - `date 2020-09-30`
 
 Expected result: 
+```
+Bananas! Here are your bananas..
+[D][✘] project (by: Sep 30 2020)
+```
 
-
-### find - Find a task by its keyword
+### `find` - Find a task by its keyword
 This command finds tasks by keywords in the task description. 
 
 Format: 
@@ -129,13 +139,19 @@ Example of command:
 - `find project`
 
 Expected result: 
-
+```
+Bananas! Here are your bananas..
+[D][✘] project (by: Sep 30 2020)
+```
 
 Example of command: 
 - `find book`  
 
 Expected result: 
-
+```
+Bananas! Here are your bananas..
+[T][✘] read book
+```
 
 ### `bye` - Exits application
 This command exits the application. 
@@ -147,4 +163,10 @@ Expected result:
 The app quits. 
   
   
+## Credits
+
+* Images retrieved from:
+  * [Background](https://www.pinterest.co.kr/pin/661114420275950559/)
+  * [User icon](https://www.pinterest.com/pin/484559241150248458/)
+  * [KING BOB icon](https://despicableme.fandom.com/wiki/Bob)
   
