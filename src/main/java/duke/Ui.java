@@ -16,7 +16,8 @@ public class Ui {
     public static String welcome() {
         String footer= "Your Majesty, I am your loyal Duke.\n " +
                 "I offer a range of administrative services. Do type 'assist' to see the comprehensive list.\n";
-        return footer + printDashedLineBreak();
+//        return footer + printDashedLineBreak();
+        return footer;
     }
 
     /**
