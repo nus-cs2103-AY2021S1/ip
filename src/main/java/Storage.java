@@ -45,7 +45,7 @@ public class Storage {
             t = (TaskList) in.readObject();
             in.close();
             fileIn.close();
-            t.loadMessage = "Successfully loaded from storage. " + t.numTasks();
+            t.loadMessage = "Successfully loaded from storage. " + t.numTasks() + t.toString();
             return t;
         } catch (FileNotFoundException i) {
             return new TaskList();
