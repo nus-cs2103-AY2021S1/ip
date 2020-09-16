@@ -21,17 +21,17 @@ Duke is a **desktop chat bot for managing and storing tasks**. Why try to rememb
 
       * **`todo`**`Call my mom` : Adds a todo task `Call my mom` to the list.
       
-      * **`deadline`**`Submit homework`**`/by`** `2020/05/04 0800`: Adds a deadline task `Submit homework` to the list to do by `Monday, 4 May 2020 08:00AM`.
+      * **`deadline`**`Submit homework`**` /by`** `2020/05/04 0800`: Adds a deadline task `Submit homework` to the list to do by `Monday, 4 May 2020 08:00AM`.
       
-      * **`event`**`Blackpink concert`**`/at`** `2020/05/04 0800`: Adds an event task `Blackpink concert` to the list to happen by `Monday, 4 May 2020 08:00AM`.
+      * **`event`**`Blackpink concert`**` /at`** `2020/05/04 0800`: Adds an event task `Blackpink concert` to the list to happen by `Monday, 4 May 2020 08:00AM`.
 
       * **`done`**`3` : Marks the 3rd Task shown in the list as done.
       
       * **`delete`**`3` : Deletes the 3rd Task shown in the list.
       
-      * **`event`**`3 d/BTS concert dt2020/06/04 0900`: Updates the 3rd Task shown in the list with the new description and datetime.
+      * **`event`**`3 d/BTS concert dt/2020/06/04 0900`: Updates the 3rd Task shown in the list with the new description and datetime.
 
-      * **`find`**`apple`: Finds all tasks containing `apple`.      
+      * **`find`**`concert`: Finds all tasks containing `concert`.      
       
       * **`bye`** : Exits the app.
 
