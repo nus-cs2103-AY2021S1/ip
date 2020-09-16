@@ -32,7 +32,7 @@ public class AddDirectiveParser {
 
     /** Message for when the format of the dead is incorrect. */
     private static final String ERROR_INCORRECT_DATE_FORMAT = "Stop trying to fool me."
-            + " The date must be in year-month-date format.";
+            + " The date must be in dd-MM-yyyy format.";
 
     /** Message for when the action does not match any valid task. */
     private static final String ERROR_INVALID_TASK = "Stop trying to fool me."
