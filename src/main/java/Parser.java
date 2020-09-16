@@ -102,6 +102,7 @@ public class Parser {
             }
         }
 
+
     private static String successfulCommand (Ui ui, TaskList taskList, String firstCommandWord,
                                             String secondCommandWord, String filePath){
         Task t = new Task("");
@@ -135,8 +136,8 @@ public class Parser {
         }
         if (t.description != "") {
             taskList.addTask(t);
-            Storage.updateTasks(taskList.getNoOfTasks(), taskList.list, filePath);
-            return ui.addSuccessful(t, taskList);
+            Storage.updateTasks(taskList.getNoOfTasks() - 1, taskList.list, filePath);
+            return ui.addSuccessful(t, taskList.getNoOfTasks() - 1 );
         } else {
             return s;
         }

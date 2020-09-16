@@ -11,15 +11,24 @@ public class Ui {
     private static final String LINE_TOP =    "╭⋟───────────────────────────❀• *₊。❀°。─╮\n";
     private static final String LINE_BOTTOM = "╰──────────────────────────────────────⋞╯\n";
     private static final String HELP = "Here are the list of commands that Marco understands:\n" +
-            "- help                                    [get a full list of commands and their usage]\n" +
-            "- bye                                     [say goodbye to Marco]\n" +
-            "- list                                    [list down all existing tasks in the task list]\n" +
-            "- done TASK_NUMBER                        [mark the task indexed at TASK_NUMBER as done]\n" +
-            "- find KEY_WORD                           [search for tasks contains KEY_WORD in description]\n" +
-            "- delete TASK_NUMBER                      [delete the task indexed at TASK_NUMBER]\n" +
-            "- todo DESCRIPTION                        [add a todo task with DESCRIPTION]\n" +
-            "- event DESCRIPTION /at YYYY-MM-DD        [add an event with DESCRIPTION at YYYY-MM-DD]\n" +
-            "- deadline DESCRIPTION /by YYYY-MM-DD     [add a deadline with DESCRIPTION at YYYY-MM-DD]\n";
+            "- help\n" +
+            "[get a full list of commands and their usage]\n" +
+            "- bye\n" +
+            "[say goodbye to Marco]\n" +
+            "- list\n" +
+            "[list down all existing tasks in the task list]\n" +
+            "- done TASK_NUMBER\n" +
+            "[mark the task indexed at TASK_NUMBER as done]\n" +
+            "- find KEY_WORD\n" +
+            "[search for tasks contains KEY_WORD in description]\n" +
+            "- delete TASK_NUMBER\n" +
+            "[delete the task indexed at TASK_NUMBER]\n" +
+            "- todo DESCRIPTION\n" +
+            "[add a todo task with DESCRIPTION]\n" +
+            "- event DESCRIPTION /at YYYY-MM-DD\n" +
+            "[add an event with DESCRIPTION at YYYY-MM-DD]\n" +
+            "- deadline DESCRIPTION /by YYYY-MM-DD\n" +
+            "[add a deadline with DESCRIPTION at YYYY-MM-DD]\n";
 
 
 
@@ -125,9 +134,9 @@ public class Ui {
     }
 
     // ADD RELATED
-    public String addSuccessful(Task added, TaskList list) {
+    public String addSuccessful(Task added, int noOfTasks) {
         String stringToReturn = LINE_TOP + "Got it. I've added this task: \n"
-                                + added + "\n" + "Now you have " + list.getNoOfTasks() +
+                                + added + "\n" + "Now you have " + noOfTasks +
                                  " tasks in the list.\n " + LINE_BOTTOM ;
         return stringToReturn;
     }
