@@ -75,7 +75,7 @@ Expected outcome:
 
 `[D][x] <event name> (by: 09 Sep 2020 11.59pm)`
 
-### `find <keyword>` - 
+### `find <keyword>` 
 
 Displays a list of tasks containing the keyword.
 
@@ -88,7 +88,7 @@ Expected outcome:
 `1. [E][x] meeting for CS2103 (at: 14 Sep 2020 10.00pm)`
 `2. [E][x] CCAmeeting (at: 20 Sep 2020 7.00am)`
 
-### `date <DD-MM-YYYY>` - 
+### `date <DD-MM-YYYY>` 
 
 Displays a list of tasks containing the keyword.
 
@@ -101,7 +101,7 @@ Expected outcome:
 `1. [E][x] meeting for CS2103 (at: 14 Sep 2020 10.00pm)`
 `2. [T][x] Group Project Task (at: 14 Sep 2020 7.00am)`
 
-### `tag <index> <tag>` - 
+### `tag <index> <tag>` 
 
 Adds the tag to your task. You need to use the list feature to view the task indices.
 
@@ -114,7 +114,7 @@ Expected outcome:
 `1. [E][x] meeting for CS2103 (at: 14 Sep 2020 10.00pm)`
 `2. [T][x] Group Project Task (at: 14 Sep 2020 7.00am) #urgent`
 
-### `findtag <tag>` - 
+### `findtag <tag>` 
 
 Display a list of tasks with the specified tag.
 
@@ -127,7 +127,7 @@ Expected outcome:
 `1. [E][x] meeting for CS2103 (at: 14 Sep 2020 10.00pm) #urgent #important`
 `2. [T][x] Group Project Task (at: 14 Sep 2020 7.00am) #abc #urgent`
 
-### `untag <tag>` - 
+### `untag <tag>` 
 
 Removes the tag from all tasks
 
@@ -140,7 +140,7 @@ Expected outcome:
 `1. [E][x] meeting for CS2103 (at: 14 Sep 2020 10.00pm) #important`
 `2. [T][x] Group Project Task (at: 14 Sep 2020 7.00am) #abc`
 
-### `untag <index> <tag>` - 
+### `untag <index> <tag>` 
 
 Removes the tag from tasks at the specified index number. You need to use the list feature to view the task indices. 
 
@@ -153,7 +153,7 @@ Expected outcome:
 `1. [E][x] meeting for CS2103 (at: 14 Sep 2020 10.00pm) #urgent #important`
 `2. [T][x] Group Project Task (at: 14 Sep 2020 7.00am) #abc`
 
-### `delete <index>` - 
+### `delete <index>` 
 
 Deletes the task at the specified index. You need to use the list feature to view the task indices.
 
@@ -165,7 +165,7 @@ Expected outcome:
 
 `1. [T][x] Group Project Task (at: 14 Sep 2020 7.00am) #abc #urgent`
 
-### `done <index>` - 
+### `done <index>` 
 
 Marks the task at specific index as done. You need to use the list feature to view the task indices.
 
