@@ -37,11 +37,11 @@ public class Ui {
      */
     public String welcomeMessage() {
         // Introduction at the beginning of the chat
-        return SERVANT_SPEAK
-                + "    Greetings my Liege.\n"
+        String response = "Greetings my Liege.\n"
                 + "    Why have you summoned me?\n\n"
                 + "    You may type \"help\" for a list"
                 + " of available commands.\n";
+        return response;
     }
 
     /**
@@ -51,8 +51,7 @@ public class Ui {
      * @return String.
      */
     public String availableCommands() {
-         return SERVANT_SPEAK
-                + "    These are your available commands my Lord:\n\n"
+        String response = "These are your available commands my Lord:\n\n"
                 + "    help - Show list of available commands\n"
                 + "    todo <Description of task>"
                 + " - To add a normal to do task\n"
@@ -69,6 +68,7 @@ public class Ui {
                 + "    find <keyword> - Find tasks based on keyword input\n"
                 + "    done <task number> - Mark task as done\n"
                 + "    delete <task number> - Delete task from list\n";
+        return response;
     }
 
     /**
@@ -81,11 +81,11 @@ public class Ui {
      */
     public String taskAddedMessage(Task task, int size) {
         assert (size >= 0);
-        return SERVANT_SPEAK
-                + "    As you wish Sire. I have added the task:\n       "
+        String response = "As you wish Sire. I have added the task:\n       "
                 + task.toString() + "\n"
                 + "    Now you have " + size
                 + " tasks in the list.\n";
+        return response;
     }
 
     /**
@@ -96,9 +96,9 @@ public class Ui {
      * @return String.
      */
     public String markAsDoneMessage(Task task) {
-        return SERVANT_SPEAK
-                + "    As you wish Sire. I have marked this task as done:\n"
+        String response = "As you wish Sire. I have marked this task as done:\n"
                 + "       " + task.toString();
+        return response;
     }
 
     /**
@@ -109,9 +109,9 @@ public class Ui {
      * @return String.
      */
     public String taskDeletedMessage(Task task) {
-        return SERVANT_SPEAK
-                + "    As you wish Sire. I removed this task:\n"
+        String response = "As you wish Sire. I removed this task:\n"
                 + "       " + task.toString();
+        return response;
     }
 
     /**
@@ -121,9 +121,9 @@ public class Ui {
      * @return String.
      */
     public String allTasksToString(ArrayList<Task> userTasks) {
-        return SERVANT_SPEAK
-                + "    Here are your tasks your Majesty:\n"
+        String response = "Here are your tasks your Majesty:\n"
                 + new TaskList(userTasks).toString();
+        return response;
     }
 
     /**
@@ -134,10 +134,10 @@ public class Ui {
      * @return String.
      */
     public String allTasksDoneToString(ArrayList<Task> userTasksDone) {
-        return SERVANT_SPEAK
-                + "    Here are all the tasks that you have"
+        String response = "Here are all the tasks that you have"
                 + " done your Majesty:\n"
                 + new TaskList(userTasksDone).toString();
+        return response;
     }
 
     /**
@@ -148,10 +148,10 @@ public class Ui {
      * @return String.
      */
     public String allTasksNotDoneToString(ArrayList<Task> userTasksNotDone) {
-        return SERVANT_SPEAK
-                + "    Here are all the tasks that you have"
+        String response = "Here are all the tasks that you have"
                 + " not done your Majesty:\n"
                 + new TaskList(userTasksNotDone).toString();
+        return response;
     }
 
     /**
@@ -161,9 +161,9 @@ public class Ui {
      * @return String.
      */
     public String toDosToString(ArrayList<Task> userToDos) {
-        return SERVANT_SPEAK
-                + "    Here are all your to do tasks your Majesty:\n"
+        String response = "Here are all your to do tasks your Majesty:\n"
                 + new TaskList(userToDos).toString();
+        return response;
     }
 
     /**
@@ -174,10 +174,10 @@ public class Ui {
      * @return String.
      */
     public String toDosDoneToString(ArrayList<Task> userToDosDone) {
-        return SERVANT_SPEAK
-                + "    Here are all the to do tasks that you have"
+        String response = "Here are all the to do tasks that you have"
                 + " done your Majesty:\n"
                 + new TaskList(userToDosDone).toString();
+        return response;
     }
 
     /**
@@ -188,10 +188,10 @@ public class Ui {
      * @return String.
      */
     public String toDosNotDoneToString(ArrayList<Task> userToDosNotDone) {
-        return SERVANT_SPEAK
-                + "    Here are all the to do tasks that you have"
+        String response = "Here are all the to do tasks that you have"
                 + " not done your Majesty:\n"
                 + new TaskList(userToDosNotDone).toString();
+        return response;
     }
 
     /**
@@ -201,9 +201,9 @@ public class Ui {
      * @return String.
      */
     public String deadlinesToString(ArrayList<Task> userDeadlines) {
-        return SERVANT_SPEAK
-                + "    Here are all your tasks with a deadline your Majesty:\n"
+        String response = "Here are all your tasks with a deadline your Majesty:\n"
                 + new TaskList(userDeadlines).toString();
+        return response;
     }
 
     /**
@@ -214,10 +214,10 @@ public class Ui {
      * @return String.
      */
     public String deadlinesDoneToString(ArrayList<Task> userDeadlinesDone) {
-        return SERVANT_SPEAK
-                + "    Here are all your tasks with a deadline that you have"
+        String response = "Here are all your tasks with a deadline that you have"
                 + " done your Majesty:\n"
                 + new TaskList(userDeadlinesDone).toString();
+        return response;
     }
 
     /**
@@ -228,10 +228,10 @@ public class Ui {
      * @return String.
      */
     public String deadlinesNotDoneToString(ArrayList<Task> userDeadlinesNotDone) {
-        return SERVANT_SPEAK
-                + "    Here are all your tasks with a deadline that you have"
+        String response = "Here are all your tasks with a deadline that you have"
                 + " not done your Majesty:\n"
                 + new TaskList(userDeadlinesNotDone).toString();
+        return response;
     }
 
     /**
@@ -241,9 +241,9 @@ public class Ui {
      * @return String.
      */
     public String eventsToString(ArrayList<Task> userEvents) {
-        return SERVANT_SPEAK
-                + "    Here are all your events your Majesty:\n"
+        String response = "Here are all your events your Majesty:\n"
                 + new TaskList(userEvents).toString();
+        return response;
     }
 
     /**
@@ -254,10 +254,10 @@ public class Ui {
      * @return String.
      */
     public String eventsDoneToString(ArrayList<Task> userEventsDone) {
-        return SERVANT_SPEAK
-                + "    Here are all your events that you have"
+        String response = "Here are all your events that you have"
                 + " done your Majesty:\n"
                 + new TaskList(userEventsDone).toString();
+        return response;
     }
 
     /**
@@ -268,10 +268,10 @@ public class Ui {
      * @return String.
      */
     public String eventsNotDoneToString(ArrayList<Task> userEventsNotDone) {
-        return SERVANT_SPEAK
-                + "    Here are all your events that you have"
+        String response = "Here are all your events that you have"
                 + " not done your Majesty:\n"
                 + new TaskList(userEventsNotDone).toString();
+        return response;
     }
 
     /**
@@ -283,10 +283,10 @@ public class Ui {
      * @return String.
      */
     public String filteredTasksByKeywordToString(ArrayList<Task> filteredTasks, String keyword) {
-        return SERVANT_SPEAK
-                + "    Here are all the tasks containing "
+        String response = "Here are all the tasks containing "
                 + keyword + " your Majesty:\n"
                 + new TaskList(filteredTasks).toString();
+        return response;
     }
 
     /**
@@ -295,9 +295,9 @@ public class Ui {
      * @return String.
      */
     public String byeMessage() {
-        return SERVANT_SPEAK
-                + "    It was a pleasure to serve you my Liege.\n"
+        String response = "It was a pleasure to serve you my Liege.\n"
                 + "    Till next time.";
+        return response;
     }
 
     /**
