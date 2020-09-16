@@ -118,7 +118,7 @@ Mark a task as done: `done`
 Format: `done INDEX`
 
 Example: 
-* `done 1`
+* `done 6`
 * `done 20`
 
 Expected outcome:
@@ -155,7 +155,7 @@ Tag a task: `tag`
 Format: `tag INDEX DESCRIPTION`
 
 Example: 
-* `tag 1 Happy`
+* `tag 6 Happy`
 * `tag 2 Urgent`
 
 Expected outcome:
@@ -168,10 +168,6 @@ Format: `exit`
 
 Example: 
 * `exit`
-
-Expected outcome:
-<img src="exit.png" alt="exit Command" width="600" height="400"/>
-
 
 ## 4. Command Summary 
 Action | Format
