@@ -40,9 +40,8 @@ public class FindCommand extends Command {
         // uses filter method defined in TaskList class
         List<Task> filteredTasks = lst.filter(query);
         result.append(ui.showFindStatement(filteredTasks.isEmpty()));
-        for (int i = 0; i < filteredTasks.size(); i++) {
-            int taskNum = i + 1;
-            Task task = filteredTasks.get(i);
+        for (Task task : filteredTasks) {
+            int taskNum = lst.indexOf(task) + 1;
             result.append(ui.showTask(task, taskNum));
         }
         assert result.length() != 0 : "Response should not be empty";

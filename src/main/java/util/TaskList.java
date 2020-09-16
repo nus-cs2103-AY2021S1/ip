@@ -109,6 +109,15 @@ public class TaskList {
     }
 
     /**
+     * Returns a index of a task in the list.
+     *
+     * @return index of a task in the list.
+     */
+    public int indexOf(Task task) {
+        return lst.indexOf(task);
+    }
+
+    /**
      * Returns a list of tasks based on the query.
      *
      * @param query String representing the search query.
