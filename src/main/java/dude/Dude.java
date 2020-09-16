@@ -48,9 +48,9 @@ public class Dude {
         try {
             Command inputCommand = Parser.parse(input);
             inputCommand.execute(tasks, ui, storage);
-            return new DialogWrapper(ui.getMessage(), inputCommand.getExitStatus());
+            return new DialogWrapper(ui.getMessage(), inputCommand.getExitStatus(), false);
         } catch (CommandException | InvalidArgumentException | InvalidCommandException e) {
-            return new DialogWrapper(e.getMessage(), false);
+            return new DialogWrapper(e.getMessage(), false, true);
         }
     }
 

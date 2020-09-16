@@ -50,7 +50,8 @@ public class MainWindow extends AnchorPane {
         } else {
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userImage),
-                    DialogBox.getDukeDialog(response.getMessage(), dukeImage)
+                    response.hasError() ? DialogBox.getDukeErrorDialog(response.getMessage(), dukeImage)
+                            : DialogBox.getDukeDialog(response.getMessage(), dukeImage)
             );
             userInput.clear();
         }
