@@ -22,6 +22,12 @@ public class Storage {
     private File databaseFile;
     private FileWriter fw;
 
+    /**
+     * Creates a new Storage object that stores a reference to a file.
+     * If the file does not exist yet, creates the file.
+     * @param directoryName String path to directory where the file is stored
+     * @param fileName Name of file
+     */
     public Storage(String directoryName, String fileName) {
         assert directoryName != null && fileName != null : "Directory and file names should be non-null strings";
         this.directoryName = directoryName;
@@ -35,6 +41,13 @@ public class Storage {
         databaseFile = new File(directoryName + fileName);
     }
 
+    /**
+     * Returns a list of {@code Task} objects corresponding to the information
+     * stored in the database file.
+     * @return Previously saved list of tasks.
+     * @throws DukeException When the information stored in the database file cannot be parsed.
+     * @throws IOException If an I/O error occurred.
+     */
     public List<Task> generateTaskList() throws DukeException, IOException {
         List<Task> tempTaskList = new ArrayList<>();
 
@@ -52,6 +65,12 @@ public class Storage {
         return tempTaskList;
     }
 
+    /**
+     * Converts the existing task list into a format that can be parsed upon re-opening
+     * the Duke program and writes it to the database file.
+     * @param tl List of tasks to be saved.
+     * @throws IOException If an I/O error occurred.
+     */
     public void saveTaskList(TaskList tl) throws IOException {
         fw = new FileWriter(directoryName + fileName);
         fw.write(tl.formatForSave());

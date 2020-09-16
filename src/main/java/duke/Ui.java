@@ -23,6 +23,9 @@ public class Ui {
         sc = new Scanner(System.in);
     }
 
+    /**
+     * Displays a basic greeting.
+     */
     public void greet() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"

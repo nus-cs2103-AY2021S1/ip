@@ -28,4 +28,9 @@ public class EventCommand implements Command {
     public boolean isExit() {
         return false;
     }
+
+    @Override
+    public boolean isMassCommand() {
+        return false;
+    }
 }

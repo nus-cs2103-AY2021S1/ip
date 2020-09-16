@@ -11,6 +11,12 @@ public class DeadlineCommand implements Command {
     private final LocalDate deadlineTime;
     private final String deadlineDesc;
 
+    /**
+     * Creates a new DeadlineCommand object which will create a new {@code Deadline} object
+     * when the execute() method is called.
+     * @param deadlineDesc information about the {@code Deadline} to be added
+     * @param deadlineTime time by which the {@code Deadline} is expected to be completed
+     */
     public DeadlineCommand(String deadlineDesc, LocalDate deadlineTime) {
         this.deadlineDesc = deadlineDesc;
         this.deadlineTime = deadlineTime;
@@ -25,6 +31,11 @@ public class DeadlineCommand implements Command {
 
     @Override
     public boolean isExit() {
+        return false;
+    }
+
+    @Override
+    public boolean isMassCommand() {
         return false;
     }
 }
