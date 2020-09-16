@@ -49,7 +49,9 @@ Example of usage:
 
 Expected outcome:
 
-`[T][x] <task name>`
+```
+[T][x] <task name>
+```
 
 ### `event <event name> /at <DD-MM-YYYY>`
 
@@ -61,7 +63,9 @@ Example of usage:
 
 Expected outcome:
 
-`[E][x] <event name> (at: 09 Sep 2020 11.59pm)`
+```
+[E][x] <event name> (at: 09 Sep 2020 11.59pm)
+```
 
 ### `deadline <deadline name> /by <DD-MM-YYYY>` 
 
@@ -73,7 +77,9 @@ Example of usage:
 
 Expected outcome:
 
-`[D][x] <event name> (by: 09 Sep 2020 11.59pm)`
+```
+[D][x] <event name> (by: 09 Sep 2020 11.59pm)
+```
 
 ### `find <keyword>` 
 
@@ -116,8 +122,7 @@ Example of usage:
 Expected outcome:
 
 ```
-1. [E][x] meeting for CS2103 (at: 14 Sep 2020 10.00pm)
-2. [T][x] Group Project Task (at: 14 Sep 2020 7.00am) #urgent
+[T][x] Group Project Task (at: 14 Sep 2020 7.00am) #urgent
 ```
 
 ### `findtag <tag>` 
@@ -175,7 +180,9 @@ Example of usage:
 
 Expected outcome:
 
-`1. [T][x] Group Project Task (at: 14 Sep 2020 7.00am) #abc #urgent`
+```
+1. [T][x] Group Project Task (at: 14 Sep 2020 7.00am) #abc #urgent
+```
 
 ### `done <index>` 
 
@@ -187,7 +194,9 @@ Example of usage:
 
 Expected outcome:
 
-`1. [T][✔] Group Project Task (at: 14 Sep 2020 7.00am) #abc #urgent`
+```
+1. [T][✔] Group Project Task (at: 14 Sep 2020 7.00am) #abc #urgent
+```
 
 ### `bye`
 
