@@ -16,7 +16,8 @@ Adds a todo task to the task list.
 
 Format: ```todo DESCRIPTION```
 
-Example of usage:  
+Example of usage: 
+
 ```todo read book```
 
 Expected outcome:  
@@ -34,7 +35,8 @@ The date must be present.
 
 Format: ```deadline DESCRIPTION /by DATE [TIME]```
 
-Example of usage:  
+Example of usage: 
+
 ```deadline return book /by 01/01/2020 1200```
 
 Expected Outcome:  
@@ -53,7 +55,8 @@ Format 1: ```event DESCRIPTION /at START_DATE-END_DATE START_TIME-END_TIME```
 
 Format 2: ```event DESCRIPTION /at START_DATE START_TIME-END_TIME```
 
-Example of usage:  
+Example of usage: 
+
 ```event project meeting /at 01/01/2020 1400-1800```
 
 Expected outcome:  
@@ -69,7 +72,8 @@ Shows a list of all tasks in the task list.
 
 Format: ```list```
 
-Example of usage:  
+Example of usage: 
+
 ```list```
 
 Expected outcome:  
@@ -89,7 +93,8 @@ Format: ```delete INDEX```
 * Deletes the task at the specified ```INDEX```.
 * The index must be a positive integer 1, 2, 3, ...  
 
-Example of usage:  
+Example of usage: 
+
 ```delete 5```
 
 Expected outcome:  
@@ -107,7 +112,8 @@ Format: ```done INDEX```
 * Marks a task as done at the specified ```INDEX```.
 * The index must be a positive integer 1, 2, 3, ...  
 
-Example of usage:  
+Example of usage: 
+
 ```done 2```
 
 Expected outcome:
@@ -125,7 +131,8 @@ Format: ```find KEYWORD```
 * Only the description is searched.
 * Keyword can be matched partailly, e.g. ```boo``` will match ```book```.
 
-Example of usage:  
+Example of usage: 
+
 ```find book```
 
 Expected outcome:  
@@ -151,8 +158,9 @@ Format: ```priority INDEX PRIORITY_NUMBER```
 * ```PRIORITY_NUMBER``` can only take positive integers ranging from 1 to 4.
 * The index must be a positive integer 1, 2, 3, ...  
 
-Example of usage:  
-`priority 1 2`
+Example of usage: 
+
+```priority 1 2```
 
 Expected outcome:  
 ```
@@ -168,19 +176,20 @@ Format: ```bye```
 
 ### 10. Saving the data
 
-Task List data are saved automatically after any command that changes the data. There is no need to save manually.
+Task List data are saved automatically after any command that changes the data. 
+There is no need to save manually.
 
 ---
 
 ### Command Summary
-Action | Format
----|---
-Add todo | ```todo DESCRIPTION```
-Add deadline | ```deadline DESCRIPTION /by DATE [TIME]```
-Add event | <ul><li>```event DESCRIPTION /at START_DATE-END_DATE START_TIME-END_TIME```</li><li>```event DESCRIPTION /at START_DATE START_TIME-END_TIME```</li></ul>
-List | ```list```
-Delete | ```delete INDEX```
-Done | ```done INDEX```
-Find | ```find KEYWORD```
-Priority | ```priority INDEX PRIORITY_NUMBER```
-Bye | ```bye```
+1. add todo: ```todo DESCRIPTION```
+2. add deadline: ```deadline DESCRIPTION /by DATE [TIME]```
+3. add event: 
+    * ```event DESCRIPTION /at START_DATE-END_DATE START_TIME-END_TIME```
+    * ```event DESCRIPTION /at START_DATE START_TIME-END_TIME```
+4. list: ```list```
+5. delete: ```delete INDEX```
+6. done: ```done INDEX```
+7. find: ```find KEYWORD```
+8. priority: ```priority INDEX PRIORITY_NUMBER```
+9. bye: ```bye```
