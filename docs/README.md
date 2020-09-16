@@ -53,7 +53,7 @@ Master, you now have 5 items in the list! Quack! Quack!
 ### Feature 3: Add a deadline task
 Add a deadline task to the task list: `deadline`  
 
-Format: `deadline [description] /by [date]` or `deadline [description] /by [date] [time]`  
+Format: `deadline [description] /by [date] /priority [priority]` or `deadline [description] /by [date] [time] /priority [priority]`  
 
 Remarks:  
 	• `[description]` can have spaces.  
@@ -75,7 +75,7 @@ Master, you now have 6 items in the list! Quack! Quack!
 ### Feature 4: Add an event task
 Add an event task to the task list: `event`  
 
-Format: `event [description] /at [date]` or `event [description] /at [date] [time]`  
+Format: `event [description] /at [date] /priority [priority]` or `event [description] /at [date] [time] /priority [priority]`  
 
 Remarks:  
 	• `[description]` can have spaces.  
