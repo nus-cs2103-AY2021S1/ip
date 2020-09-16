@@ -48,7 +48,7 @@ List all of your tasks.
 Format: `list`
 
 <img src="https://github.com/AaronnSeah/ip/blob/master/src/main/resources/images/list.png" width="400">
-<br><br><br><br>
+<br><br>
 
 ### 2. Adding a task
 
@@ -81,7 +81,7 @@ You can add 3 kinds of tasks:
     * Format for `<time>`: HH:MM
 
 <img src="https://github.com/AaronnSeah/ip/blob/master/src/main/resources/images/deadline.png" width="400">
-<br><br><br><br>
+<br><br>
 
 ### 3. Marking a task as done: `done`
 
@@ -96,7 +96,7 @@ To find the `<task number>`, use the `list` command.
 The `<task number>` is the number ordering in the list for the task you would like to mark as done.
 
 <img src="https://github.com/AaronnSeah/ip/blob/master/src/main/resources/images/done.png" width="400">
-<br><br><br><br>
+<br><br>
 
 ### 4. Deleting a task: `delete`
 
@@ -111,7 +111,7 @@ To find the `<task number>`, use the `list` command.
 The `<task number>` is the number ordering in the list for the task you would like to mark as done.
 
 <img src="https://github.com/AaronnSeah/ip/blob/master/src/main/resources/images/delete.png" width="400">
-<br><br><br><br>
+<br><br>
 
 ### 5. Finding tasks by name: `find`
 Find your tasks by name.
@@ -126,14 +126,14 @@ The order of tasks that appear (if it is non-empty) is as follows:
 3. tasks whose name matches contains search keyword. e.g. "book signing" and "k s" respectively.
 
 <img src="https://github.com/AaronnSeah/ip/blob/master/src/main/resources/images/find.png" width="400">
-<br><br><br><br>
+<br><br>
 
 ### 6. Exiting the program: `bye`
 
 Exits the application.
 
 Format: `bye`
-<br><br><br><br>
+<br><br>
 
 ### 7. Saving/loading data
 
