@@ -42,106 +42,127 @@ public class Ui {
         return sc.nextLine().toLowerCase();
     }
 
-    public void displayError(String errorMsg) {
+    public String displayError(String errorMsg) {
         System.out.println(errorMsg);
+        return errorMsg;
     }
 
     /**
      * Displays the divider that separates different actions.
      */
-    public void printDivider() {
+    public String printDivider() {
         System.out.println(DIVIDER);
+        return DIVIDER;
     }
 
     /**
      * Displays a prompt for the user to enter additional input.
      */
-    public void printAdditionActionMessage() {
+    public String printAdditionActionMessage() {
         this.printDivider();
         System.out.println("What else would you like to do?");
         this.printDivider();
+        return "What else would you like to do?";
     }
 
     /**
      * Displays the goodbye message.
      */
-    public void printGoodbyeMessage() {
+    public String printGoodbyeMessage() {
         this.printDivider();
         System.out.println("Bye! See you around :)");
         this.printDivider();
+        return "Bye! See you around :)";
     }
 
     /**
      * Displays the list of commands the user can enter.
      */
-    public void printHelp() {
-        System.out.println("Here are the commands you can use:");
+    public String printHelp() {
+        String s = "Here are the commands you can use:\n";
         for (int i = 0; i < CMD_ARR.length; i++) {
-            System.out.println((i + 1) + ". " + CMD_ARR[i]);
+            s += (i + 1) + ". " + CMD_ARR[i] + "\n";
         }
+        System.out.println(s);
+        return s;
     }
 
     /**
      * Displays the types of tasks the user can enter.
      */
-    public void printTaskTypes() {
-        System.out.println("What kind of task is it?");
-        System.out.print(" - Todo\n"
+    public String printTaskTypes() {
+        String s = "What kind of task is it?\n"
+                + " - Todo\n"
                 + " - Deadline\n"
-                + " - Event\n");
+                + " - Event\n";
+        System.out.println(s);
+        return s;
     }
 
     /**
      * Displays the prompt for the user to enter the task.
      */
-    public void printEnterTaskPrompt() {
-        System.out.println("Please enter the task");
+    public String printEnterTaskPrompt() {
+        String s = "Please enter the task";
+        System.out.println();
+        return s;
     }
 
     /**
      * Displays the example for the deadline format.
      */
-    public void printDeadlineExample() {
-        System.out.println("Please enter the task followed by the date and time of the deadline");
-        System.out.println("e.g., submit report ,11/10/2019 1700");
+    public String printDeadlineExample() {
+        String s = "Please enter the task followed by the date and time of the deadline\n"
+                + "e.g., submit report ,11/10/2019 1700\n";
+        System.out.println(s);
+        return s;
     }
 
     /**
      * Displays the example for the duke.task.Event format.
      */
-    public void printEventExample() {
-        System.out.println("Please enter the event followed by the date and time of the event");
-        System.out.println("e.g., team project meeting ,2/10/2019 1400-1600");
+    public String printEventExample() {
+        String s = "Please enter the event followed by the date and time of the event\n"
+                + "e.g., team project meeting ,2/10/2019 1400-1600";
+        System.out.println(s);
+        return s;
     }
 
     /**
      * Displays the acknowledgement of the user's added task.
      * @param taskList List of tasks.
      */
-    public void printAddAcknowledgement(TaskList taskList) {
-        System.out.println("Alright, I've added this task:");
-        System.out.println(taskList.getMostRecentTask().toString());
-        System.out.println("You now have " + taskList.getTaskListSize() + " tasks on your list");
+    public String printAddAcknowledgement(TaskList taskList) {
+        String s = "Alright, I've added this task:\n"
+                + taskList.getMostRecentTask().toString() + "\n"
+                + "You now have " + taskList.getTaskListSize() + " tasks on your list\n";
+        System.out.println(s);
+        return s;
     }
 
     /**
      * Displays the tasks currently on the list of tasks.
      * @param taskList List of tasks.
      */
-    public void printList(TaskList taskList) {
-        System.out.println("These are the tasks on your list:");
+    public String printList(TaskList taskList) {
+        String s = "These are the tasks on your list:\n";
         for (int j = 0; j < taskList.getTaskListSize(); j++) {
-            System.out.println((j + 1)
+            s += (j + 1)
                     + ". "
-                    + taskList.getTask(j).toString());
+                    + taskList.getTask(j).toString()
+                    + "\n";
         }
+        System.out.println(s);
+        return s;
     }
 
     /**
      * Displays the prompt for the user to specify which task is done.
      */
-    public void printDonePrompt() {
-        System.out.println("Which task do you want to mark as done?");
+    public String printDonePrompt() {
+        String s = "Which task do you want to mark as done?";
+        System.out.println(s);
+        return s;
     }
 
     /**
@@ -149,27 +170,21 @@ public class Ui {
      * @param taskList List of tasks.
      * @param taskNum duke.task.Task specified to be changed to done.
      */
-    public void printDoneAcknowledgement(TaskList taskList, int taskNum) {
-        System.out.println("Good job! This task is now marked as done:");
-        System.out.println(taskList.getTask(taskNum - 1).toString());
-    }
-
-    /**
-     * Displays the exception message for trying to reference an out of bounds index and
-     * prompts the user to enter correct input.
-     *
-     * @param e ArrayIndexOutOfBoundsException.
-     */
-    public void showIndexOutOfBoundsException(IndexOutOfBoundsException e){
-        System.out.println();
-        System.out.println();
+    public String printDoneAcknowledgement(TaskList taskList, int taskNum) {
+        String s = "Good job! This task is now marked as done:\n"
+                + taskList.getTask(taskNum - 1).toString()
+                + "\n";
+        System.out.println(s);
+        return s;
     }
 
     /**
      * Displays the prompt for the user to delete a task.
      */
-    public void printDeletePrompt() {
-        System.out.println("Which task do you want to delete?");
+    public String printDeletePrompt() {
+        String s = "Which task do you want to delete?\n";
+        System.out.println(s);
+        return s;
     }
 
     /**
@@ -177,23 +192,32 @@ public class Ui {
      * @param taskList List of tasks.
      * @param task duke.task.Task that was deleted.
      */
-    public void printDeleteAcknowledgement(TaskList taskList, Task task) {
-        System.out.println("Alright, the following task has been removed:");
-        System.out.println(task.toString());
-        System.out.println("You now have " + taskList.getTaskListSize() + " tasks on your list");
+    public String printDeleteAcknowledgement(TaskList taskList, Task task) {
+        String s = "Alright, the following task has been removed:\n"
+                + task.toString()
+                + "You now have " + taskList.getTaskListSize() + " tasks on your list\n";
+        System.out.println(s);
+        return s;
     }
 
-    public void printFindPrompt() {
-        System.out.println("What are you trying to find? Search using a keyword.");
+    public String printFindPrompt() {
+        String s = "What are you trying to find? Search using a keyword.\n";
+        System.out.println(s);
+        return s;
     }
 
-    public void printFoundTasksHeader() {
-        System.out.println("These are the tasks that match the keyword:");
+    public String printFoundTasksHeader() {
+        String s = "These are the tasks that match the keyword:\n";
+        System.out.println(s);
+        return s;
     }
 
-    public void printTask(TaskList taskList, int taskNum) {
-        System.out.println((taskNum + 1)
+    public String printTask(TaskList taskList, int taskNum) {
+        String s = (taskNum + 1)
                 + ". "
-                + taskList.getTask(taskNum).toString());
+                + taskList.getTask(taskNum).toString()
+                + "\n";
+        System.out.println(s);
+        return s;
     }
 }

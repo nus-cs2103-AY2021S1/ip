@@ -6,10 +6,11 @@ import duke.Ui;
 public class ExitCommand extends Command {
 
     public ExitCommand() {
-        super(true);
+        super(CommandType.EXIT);
     }
 
     @Override
-    public void execute(Ui ui, TaskList taskList) {
+    public String execute(Ui ui, TaskList taskList) {
+        return ui.printGoodbyeMessage();
     }
 }

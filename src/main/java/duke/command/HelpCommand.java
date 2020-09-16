@@ -6,11 +6,11 @@ import duke.Ui;
 public class HelpCommand extends Command {
 
     public HelpCommand() {
-        super(false);
+        super(CommandType.HELP);
     }
 
     @Override
-    public void execute(Ui ui, TaskList taskList) {
-        ui.printHelp();
+    public String execute(Ui ui, TaskList taskList) {
+        return ui.printHelp();
     }
 }

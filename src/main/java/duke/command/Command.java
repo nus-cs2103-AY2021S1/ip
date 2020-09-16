@@ -5,15 +5,19 @@ import duke.Ui;
 import duke.exception.DukeException;
 
 public abstract class Command {
-    protected boolean isExitCommand = false;
+    protected CommandType commandType;
 
-    public Command(boolean isExitCommand) {
-        this.isExitCommand = isExitCommand;
+    public Command(CommandType commandType) {
+        this.commandType = commandType;
     }
 
+    public CommandType getCommandType() {
+        return this.commandType;
+    }
+    
     public boolean isExitCommand() {
-        return this.isExitCommand;
+        return commandType.equals(CommandType.EXIT);
     }
 
-    public abstract void execute(Ui ui, TaskList taskList) throws DukeException;
+    public abstract String execute(Ui ui, TaskList taskList) throws DukeException;
 }

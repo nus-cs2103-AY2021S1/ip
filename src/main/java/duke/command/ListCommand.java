@@ -7,14 +7,14 @@ import duke.exception.EmptyListException;
 public class ListCommand extends Command {
 
     public ListCommand() {
-        super(false);
+        super(CommandType.LIST);
     }
 
     @Override
-    public void execute(Ui ui, TaskList taskList) throws EmptyListException {
+    public String execute(Ui ui, TaskList taskList) throws EmptyListException {
         if (taskList.isEmpty()) {
             throw new EmptyListException();
         }
-        ui.printList(taskList);
+        return ui.printList(taskList);
     }
 }

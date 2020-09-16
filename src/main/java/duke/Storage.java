@@ -16,6 +16,10 @@ import java.util.List;
 public class Storage {
     protected String filepath;
 
+    public Storage() {
+        this.filepath = "";
+    }
+
     public Storage(String filepath) {
         this.filepath = filepath;
     }
