@@ -23,6 +23,13 @@ public class Storage {
     }
 
     /**
+     * Creates directory for storage.
+     */
+    public void createDirectory() {
+        // create directory
+        new File(filePath).mkdirs();
+    }
+    /**
      * Read the given file path and parse each line and added them into ArrayList of Task.
      *
      * @param filepath
@@ -59,7 +66,6 @@ public class Storage {
      * @throws IOException
      */
     public void saveToFile(ArrayList<Task> taskArr) throws IOException {
-        assert (!filePath.isEmpty());
         File oldFile = new File(filePath);
         oldFile.delete();
         File newFile = new File(filePath);

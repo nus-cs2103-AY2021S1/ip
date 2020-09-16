@@ -24,6 +24,7 @@ public class Duke {
             tasks = new TaskList(storage.load());
         } catch (FileNotFoundException e) {
             tasks = new TaskList();
+            storage.createDirectory();
         } finally {
             System.out.println("Duke is started!");
         }
