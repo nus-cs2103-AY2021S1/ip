@@ -9,6 +9,6 @@ public enum InputCommand {
     DELETE,
     INVALID,
     BYE,
-    GET_TASK,
+    DATE,
     FIND,
 }

@@ -9,7 +9,7 @@ import duke.task.TaskList;
 /**
  * Represents command that is specific to the get command.
  */
-public class GetCommand extends Command {
+public class DateCommand extends Command {
 
     private String input;
 
@@ -17,7 +17,7 @@ public class GetCommand extends Command {
      * Creates GetCommand object.
      * @param input input of user.
      */
-    public GetCommand(String input) {
+    public DateCommand(String input) {
         this.isExit = false;
         this.input = input;
     }

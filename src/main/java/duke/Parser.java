@@ -8,7 +8,7 @@ import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
-import duke.command.GetCommand;
+import duke.command.DateCommand;
 import duke.command.InputCommand;
 import duke.command.ListCommand;
 
@@ -51,8 +51,8 @@ public class Parser {
         case DEADLINE:
         case EVENT:
             return new AddCommand(input, inputCommand);
-        case GET_TASK:
-            return new GetCommand(input);
+        case DATE:
+            return new DateCommand(input);
         case FIND:
             return new FindCommand(input);
         default:
