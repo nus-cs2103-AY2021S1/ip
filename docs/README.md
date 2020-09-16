@@ -53,6 +53,6 @@ Add an deadline with the name DEADLINE_NAME. It accepts the 4 different formats 
 
 Shows all tasks whose name has the substring NAME.
 
-### Find delete 	INDEX`
+### Find delete `INDEX`
 
 Delete task at index INDEX (Index starts with 1)
