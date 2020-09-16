@@ -1,2 +1,3 @@
-T | 0 | read book | -
-D | 0 | essay submission (by: 15 Oct 2020) | 2020-10-15
+D | 0 | history essay (by: 12 Oct 2020) | 2020-10-12
+E | 0 | project meeting (at: 15 Oct 2020) | 2020-10-15
+T | 1 | sleep | -

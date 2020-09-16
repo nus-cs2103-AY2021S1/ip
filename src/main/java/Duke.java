@@ -3,7 +3,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 /**
- * The class with the chat bot dealing with the user's inputs.
+ * The class with the chat bot that deals with the user's inputs.
  */
 public class Duke {
 
@@ -34,7 +34,12 @@ public class Duke {
         }
     }
 
-    public String getResponse(String input) throws DukeException {
+    /**
+     * Gets the response from Duke with the given input.
+     * @param input String from user.
+     * @return A String containing duke's response.
+     */
+    public String getResponse(String input) {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMM yyyy");
         String trimmed = input.trim();
@@ -60,11 +65,10 @@ public class Duke {
 
         case "find":   // finds the task even if the keyword matches the task partially
 
+            String[] keyWords = last.split(" ");
             ArrayList<Task> findTasks = new ArrayList<>();
-            for (Task task : taskList.getTasks()) {
-                if (task.getDescription().contains(last)) {
-                    findTasks.add(task);
-                }
+            for (String keyWord : keyWords) {
+                ui.handleMatchingTasks(keyWord, taskList.getTasks(), findTasks);
             }
             return ui.printMatchingTasks(findTasks);
 

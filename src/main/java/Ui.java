@@ -18,18 +18,10 @@ public class Ui {
 
     /**
      * Prints out the given message.
-     * @param message
+     * @param message message to be printed.
      */
     public void printMessage(String message) {
         System.out.println(message);
-    }
-
-    /**
-     * Reads the next line from the scanner.
-     * @return the next line
-     */
-    public String readInput() {
-        return sc.nextLine();
     }
 
     /**
@@ -40,59 +32,53 @@ public class Ui {
     }
 
     /**
-     * Prints the welcome message for the user.
-     */
-    public String welcome() {
-        return "Wazzup! I am Duke the Nuke \uD83D\uDE08\n"
-                + "What do you want?\n";
-    }
-
-    /**
-     * Prints the exit message for the user.
+     * @return the exit message for the user.
      */
     public String exit() {
 
-        return "Sayonara!\n";
+        return "Sayonara! \uD83D\uDE1C \uD83D\uDE1C \uD83D\uDE1C\n";
     }
 
     /**
-     * Prints the "invalid input" error message.
+     * @return the "invalid input" error message.
      */
     public String invalidInput() {
 
-        return "☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n";
+        return "I don't know what that means. Please try again \uD83D\uDE11\n";
     }
 
     /**
-     * Prints the addTask message.
+     * @return the addTask message.
      */
     public String addTask() {
 
-        return "Got it. I've added this task:\n";
+        return "\uD83D\uDE0E Got it. I've added this task:\n";
     }
 
     /**
-     * Prints the removeTask message.
+     * @return the removeTask message.
      */
     public String removeTask() {
 
-        return "Noted. I've removed this task:\n";
+        return "\uD83D\uDE0E Noted. I've removed this task:\n";
     }
 
     /**
-     * Prints the doneTask message.
+     * @return the doneTask message.
      */
     public String doneTask() {
 
-        return "Nice! I've marked this task as done:\n";
+        return "\uD83D\uDE0E Nice! I've marked this task as done:\n";
     }
 
     /**
-     * Prints the showList message with the list of tasks.
+     * Lists out the tasks.
+     * @param taskList list containing the tasks.
+     * @return the showList message with the list of tasks.
      */
     public String showList(ArrayList<Task> taskList) {
 
-        String header = "Here are the tasks in your list:\n";
+        String header = "\uD83D\uDE0E Here are the tasks in your list:\n";
         Iterator<Task> iter = taskList.iterator();
         int index = 1;
         String message = "";
@@ -107,19 +93,22 @@ public class Ui {
     }
 
     /**
-     * Prints the statement with the number of tasks.
+     * Shows total number of tasks.
      * @param tasks the list containing the tasks.
+     * @return the statement with the number of tasks.
      */
     public String showNumberOfTasks(ArrayList<Task> tasks) {
         return "Now you have " + tasks.size() + " tasks in the list.\n";
     }
 
     /**
-     * Prints the matchingTasks message with the matching tasks.
+     * Finds matching tasks.
+     * @param findTasks the list containing the tasks.
+     * @return the matchingTasks message with the matching tasks.
      */
     public String printMatchingTasks(ArrayList<Task> findTasks) {
 
-        String header = "Here are the matching tasks in your list:\n";
+        String header = "\uD83D\uDE0E Here are the matching tasks in your list:\n";
         String found = "";
         int index = 1;
         for (Task tsk : findTasks) {
@@ -131,6 +120,34 @@ public class Ui {
         }
         return header + found;
 
+    }
+
+    /**
+     * Handles the possible matching tasks.
+     * @param keyWord the string to match.
+     * @param originalList original list of tasks.
+     * @param newList new list for the tasks to be added.
+     */
+    public void handleMatchingTasks(String keyWord, ArrayList<Task> originalList, ArrayList<Task> newList) {
+        for (Task task : originalList) {
+            if (task.getDescription().contains(keyWord) && !newList.contains(task)) {
+                newList.add(task);
+            }
+        }
+    }
+
+    /**
+     * @return the "incorrect index" message.
+     */
+    public String printIncorrectIndexMessage() {
+        return "Please enter the correct index of the task \uD83D\uDE11\n";
+    }
+
+    /**
+     * @return the "incorrect task and date" message.
+     */
+    public String printIncorrectTaskOrDateMessage() {
+        return "Please enter the correct format for the task and date \uD83D\uDE11\n";
     }
 }
 
