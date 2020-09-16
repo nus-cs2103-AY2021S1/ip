@@ -10,10 +10,14 @@ import java.util.regex.Pattern;
 
 /**
  * Encapsulates a recurring event.
+ * Recurring tasks assumes that the user frequently closes and reopens this app.
+ * Upon initialization, Duke will read from the save and interpret the summaries and load them into storage.
+ * During this process, for recurring tasks, if the end timing has passed, the task is pushed forward by the
+ * specified interval.
  */
 public class RecurringEvent extends Event {
 
-    /** Symbol represneting a Recurring Event object */
+    /** Symbol representing a Recurring Event object */
     public static final String SYMBOL = "R" + Event.SYMBOL;
     /** Number of separate fields in a event save summary */
     private static final int NUM_FIELDS_SUMMARY = 5;

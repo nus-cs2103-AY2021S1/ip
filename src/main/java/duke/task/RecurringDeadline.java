@@ -10,6 +10,10 @@ import java.util.regex.Pattern;
 
 /**
  * Encapsulates a recurring deadline.
+ * Recurring tasks assumes that the user frequently closes and reopens this app.
+ * Upon initialization, Duke will read from the save and interpret the summaries and load them into storage.
+ * During this process, for recurring tasks, if the end timing has passed, the task is pushed forward by the
+ * specified interval.
  */
 public class RecurringDeadline extends Deadline {
 
