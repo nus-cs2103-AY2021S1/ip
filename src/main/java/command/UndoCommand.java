@@ -35,11 +35,11 @@ public class UndoCommand extends Command {
             throws IOException, DukeException {
         ArrayList<String> pastCommands = commandStorage.load();
         int numberOfCommands = pastCommands.size();
-        if (numberOfCommands <= 1) {
+        if (numberOfCommands <= 0) {
             throw new DukeException("There are no past actions in this session.");
         }
 
-        String lastCommand = pastCommands.get(numberOfCommands - 2);
+        String lastCommand = pastCommands.get(numberOfCommands - 1);
         String[] lastCommandSplit = lastCommand.split(" ");
         String actionType = lastCommandSplit[0];
 
@@ -65,7 +65,8 @@ public class UndoCommand extends Command {
         }
         case "list":
         case "find":
-            throw new DukeException("Past action cannot be reverted.");
+        case "undo":
+            throw new DukeException(pastCommands.toString() + "Past action cannot be reverted.");
         default:
             throw new DukeException("Past command is an unrecognisable one!");
         }
