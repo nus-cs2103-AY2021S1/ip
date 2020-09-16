@@ -87,7 +87,7 @@ Expected outcome: <br />
 `2. [E][✘] CS2103T Finals (APPEAR at: 01 December 2020 12:00-14:00)`.
 
 ### Search for task(s) on specified date
-To check for task(s) occuring on a particular day, make use of the command `check YYYY:MM:DD`, press `Enter` to execute.
+To check for task(s) occuring on a particular day, make use of the command `check YYYY/MM/DD`, press `Enter` to execute.
 
 Example of usage:
 `check 2020/09/18`
