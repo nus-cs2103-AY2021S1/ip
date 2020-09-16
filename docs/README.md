@@ -112,6 +112,7 @@ Format: `update INDEX [d/DESCRIPTION] [dt/YYYY/MM/DD HHMM]`
 * Updates the task at the specified `INDEX`. The index refers to the index number shown in the displayed task list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
+* Note that todo tasks can only update description **d/**.
 
 ### Finding tasks : `find`
 
@@ -140,6 +141,7 @@ Action | Format, Examples
 **Todo** | `todo DESCRIPTION` <br> e.g., `todo Call my mom`
 **Deadline** | `deadline DESCRIPTION /by YYYY/MM/DD HHMM` <br> e.g., `deadline Submit homework /by 2020/05/04 0800`
 **Event** | `event DESCRIPTION /by YYYY/MM/DD HHMM` <br> e.g., `event Blackpink concert /at 2020/05/04 0800`
+**Update** | `update INDEX [d/DESCRIPTION] [dt/YYYY/MM/DD HHMM]` <br> e.g., `update 3 d/BTS concert dt/2020/06/04 0900`
 **Done** | `done INDEX`<br> e.g., `done 3`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Find** | `find KEYWORD`<br> e.g., `find concert`
