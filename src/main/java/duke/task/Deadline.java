@@ -5,7 +5,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Represents tasks that need to be done before a specific date.
+ * Represents tasks that need to be done before a specific date and optionally time.
  */
 public class Deadline extends Task {
     /** The date by which this task must be done. */

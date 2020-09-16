@@ -6,7 +6,7 @@ import java.time.LocalTime;
 import duke.DukeException;
 
 /**
- * Represents tasks without any date attached to it.
+ * Represents tasks without any date or time attached to it.
  */
 public class Todo extends Task {
 

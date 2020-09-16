@@ -5,7 +5,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Represents tasks that occur at a specific time.
+ * Represents tasks that occur at a specific date and optionally time.
  */
 public class Event extends Task {
     /** The date at which this task occurs. */
