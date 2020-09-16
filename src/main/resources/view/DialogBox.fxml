@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Text?>
 
-<fx:root alignment="TOP_RIGHT" prefHeight="200.0" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="TOP_RIGHT" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <Text fx:id="dialog" lineSpacing="0.2" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
          <effect>
@@ -17,7 +17,7 @@
          </HBox.margin></Text>
         <ImageView fx:id="displayPicture" fitHeight="78.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true">
          <HBox.margin>
-            <Insets top="40.0" />
+            <Insets right="10.0" />
          </HBox.margin></ImageView>
     </children>
     <padding>

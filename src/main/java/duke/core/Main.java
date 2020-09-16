@@ -26,6 +26,7 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
+            stage.setTitle("Dutch Task Tracker");
             stage.show();
             DialogBox box = DialogBox.getDukeDialog("Hello", dukeImage);
         } catch (IOException e) {
