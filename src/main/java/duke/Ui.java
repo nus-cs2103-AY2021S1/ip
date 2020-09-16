@@ -1,14 +1,13 @@
 package duke;
 
-import duke.task.Task;
-
 import java.util.Scanner;
+
+import duke.task.Task;
 
 /**
  * Supports interactions with user.
  */
 public class Ui {
-    protected Scanner sc;
     protected static final String[] CMD_ARR = {"help", "add", "list", "done", "delete", "date", "bye"};
     protected static final String DIVIDER = "____________________________________________________________";
     protected static final String LOGO = " __________________________________________________________\n"
@@ -21,6 +20,7 @@ public class Ui {
             + "| |____/_/     \\_\\_|  \\_\\\\____/|_| \\_|____/ \\____/  |_|    |\n"
             + "|                                                          |\n"
             + "|__________________________________________________________|\n";
+    protected Scanner sc;
 
     public Ui (Scanner sc) {
         this.sc = sc;
@@ -87,51 +87,11 @@ public class Ui {
         return s;
     }
 
-    /**
-     * Displays the types of tasks the user can enter.
-     */
-    public String printTaskTypes() {
-        String s = "What kind of task is it?\n"
-                + " - Todo\n"
-                + " - Deadline\n"
-                + " - Event\n";
+    public String printPrompt(String s) {
         System.out.println(s);
         return s;
     }
 
-    /**
-     * Displays the prompt for the user to enter the task.
-     */
-    public String printEnterTaskPrompt() {
-        String s = "Please enter the task";
-        System.out.println();
-        return s;
-    }
-
-    /**
-     * Displays the example for the deadline format.
-     */
-    public String printDeadlineExample() {
-        String s = "Please enter the task followed by the date and time of the deadline\n"
-                + "e.g., submit report ,11/10/2019 1700\n";
-        System.out.println(s);
-        return s;
-    }
-
-    /**
-     * Displays the example for the duke.task.Event format.
-     */
-    public String printEventExample() {
-        String s = "Please enter the event followed by the date and time of the event\n"
-                + "e.g., team project meeting ,2/10/2019 1400-1600";
-        System.out.println(s);
-        return s;
-    }
-
-    /**
-     * Displays the acknowledgement of the user's added task.
-     * @param taskList List of tasks.
-     */
     public String printAddAcknowledgement(TaskList taskList) {
         String s = "Alright, I've added this task:\n"
                 + taskList.getMostRecentTask().toString() + "\n"
@@ -157,16 +117,7 @@ public class Ui {
     }
 
     /**
-     * Displays the prompt for the user to specify which task is done.
-     */
-    public String printDonePrompt() {
-        String s = "Which task do you want to mark as done?";
-        System.out.println(s);
-        return s;
-    }
-
-    /**
-     * Displays the acknowledgement of a task status being changed to done.
+     * Displays the acknowledgement of a task being updated to done.
      * @param taskList List of tasks.
      * @param taskNum duke.task.Task specified to be changed to done.
      */
@@ -174,15 +125,6 @@ public class Ui {
         String s = "Good job! This task is now marked as done:\n"
                 + taskList.getTask(taskNum - 1).toString()
                 + "\n";
-        System.out.println(s);
-        return s;
-    }
-
-    /**
-     * Displays the prompt for the user to delete a task.
-     */
-    public String printDeletePrompt() {
-        String s = "Which task do you want to delete?\n";
         System.out.println(s);
         return s;
     }
@@ -196,18 +138,6 @@ public class Ui {
         String s = "Alright, the following task has been removed:\n"
                 + task.toString()
                 + "You now have " + taskList.getTaskListSize() + " tasks on your list\n";
-        System.out.println(s);
-        return s;
-    }
-
-    public String printFindPrompt() {
-        String s = "What are you trying to find? Search using a keyword.\n";
-        System.out.println(s);
-        return s;
-    }
-
-    public String printFoundTasksHeader() {
-        String s = "These are the tasks that match the keyword:\n";
         System.out.println(s);
         return s;
     }

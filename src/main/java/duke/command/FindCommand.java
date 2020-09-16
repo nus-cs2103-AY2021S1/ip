@@ -15,6 +15,6 @@ public class FindCommand extends Command {
         if (taskList.isEmpty()) {
             throw new EmptyListException();
         }
-        return ui.printFindPrompt();
+        return ui.printPrompt("What are you trying to find? Search using a keyword.\n");
     }
 }

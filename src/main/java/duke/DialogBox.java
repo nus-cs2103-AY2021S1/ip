@@ -1,6 +1,5 @@
 package duke;
 
-
 import java.io.IOException;
 import java.util.Collections;
 
@@ -60,4 +59,3 @@ public class DialogBox extends HBox {
         return db;
     }
 }
-

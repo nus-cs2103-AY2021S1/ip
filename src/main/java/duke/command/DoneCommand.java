@@ -15,6 +15,6 @@ public class DoneCommand extends Command {
         if (taskList.isEmpty()) {
             throw new EmptyListException();
         }
-        return ui.printDonePrompt();
+        return ui.printPrompt("Which task do you want to mark as done?\n");
     }
 }

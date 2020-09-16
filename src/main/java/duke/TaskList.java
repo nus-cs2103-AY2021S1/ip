@@ -1,16 +1,16 @@
 package duke;
 
-import duke.task.Task;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import duke.task.Task;
 
 /**
  * Supports actions involving adding, removing and storing tasks in a list.
  */
 public class TaskList {
-    List<Task> tasks;
+    private List<Task> tasks;
 
     /**
      * Creates an empty duke.TaskList object.
