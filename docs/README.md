@@ -117,15 +117,15 @@ Example of usage:
 
 Expected outcome: 
 
---These are Jarvis Functions-- 
-help
-list
-todo (taskName)
-done (index)
-deadline/weekly (taskName) /by 2/12/2019 1800
-find (taskName)
-delete (weeklyTaskIndex)
-remove (taskToRemovePermanently)
+--These are Jarvis Functions-- <br/>
+help <br/>
+list<br/>
+todo (taskName)<br/>
+done (index)<br/>
+deadline/weekly (taskName) /by 2/12/2019 1800<br/>
+find (taskName)<br/>
+delete (weeklyTaskIndex)<br/>
+remove (taskToRemovePermanently)<br/>
 
 
  
