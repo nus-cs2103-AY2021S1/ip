@@ -53,8 +53,8 @@ Now you have 1 tasks in the list.
 ```
 
 ### 2. `deadline DESCRIPTION /by TIME` - Add *deadline* task to the list.
-Tips: If you input the time in format yyyy-mm-dd, a more readable format will be displayed.
-Otherwise, your time will be displayed in your input format.
+Tips: If you input a valid time in the format of yyyy-mm-dd, a more readable format will be displayed.
+Otherwise, the time will be displayed in your input format, you can input any string you want. (e.g. tonight)
 
 Example of usage: 
 
@@ -193,5 +193,3 @@ Expected outcome:
 GoodBye, baby.
 Hope to see you again soon!
 ```
-
-

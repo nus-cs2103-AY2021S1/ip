@@ -40,7 +40,9 @@ public class FeiException extends Exception {
 
     public static FeiException deadlineParseException() {
         return new FeiException("Sorry, I can't parse the time format of your input. \n"
-                + "Try it in this format: yyyy-mm-dd (e.g. 2020-01-01).");
+                + "I will continue store the deadline in your input format.\n"
+                + "If you prefer a more readable format.\n"
+                + "Use 'yyyy-mm-dd' after '/by' (e.g. 2020-01-01).");
     }
 
     public static FeiException loadingException() {
@@ -49,10 +51,6 @@ public class FeiException extends Exception {
 
     public static FeiException writingException() {
         return new FeiException("Something went wrong during writing process. The saved file might not be correct.");
-    }
-
-    public static FeiException findException() {
-        return new FeiException("Sorry. You can only input one keyword for searching.");
     }
 
 }
