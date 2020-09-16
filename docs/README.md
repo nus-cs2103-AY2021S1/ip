@@ -10,7 +10,7 @@
 Be it your todos you've yet to do, your deadlines that you've promised to keep to or events that you have to attent,
 let the _Capo_, ***Vito Corleone*** know and he'll make sure you don't miss it. 
 
-![firstimg](../src/main/resources/images/godfather3.png)
+![firstimg](./screenshots/godfather3.png)
 
 
 Here's how someone might use ***The Godfather***:
