@@ -98,6 +98,9 @@ public class Parser {
             case "sort":
                 tasks.sort();
                 break;
+            case "bye":
+                System.exit(0);
+                break;
             default:
                 throw new DukeException("I'm sorry, but I don't know what that means :-(");
             }
