@@ -142,7 +142,7 @@ public class Duke {
             return ui.displayMessages("Um, gimme a valid date.");
         } catch (IllegalArgumentException e) {
             return ui.displayMessages("Um, I don't get what you're saying.");
-        } catch (InvalidInputException | IOException e) {
+        } catch (InvalidInputException | IOException | IndexOutOfBoundsException e) {
             return ui.displayMessages(e.getMessage());
         }
     }

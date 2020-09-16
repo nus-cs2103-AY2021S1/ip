@@ -17,7 +17,16 @@ public class TaskList {
         tasks.add(task);
     }
 
-    public void deleteTask(int index) {
+    /**
+     * Removes the Task at the given index from the TaskList.
+     *
+     * @param index the index to remove at
+     * @throws IndexOutOfBoundsException if the index is less than zero, or greater than the length of the list - 1.
+     */
+    public void deleteTask(int index) throws IndexOutOfBoundsException {
+        if (index < 0 || index >= tasks.size()) {
+            throw new IndexOutOfBoundsException("Give me a valid index >:(");
+        }
         tasks.remove(index);
     }
 
@@ -33,7 +42,10 @@ public class TaskList {
         return tasks;
     }
 
-    public Task getTask(int index) {
+    public Task getTask(int index) throws IndexOutOfBoundsException {
+        if (index < 0 || index >= tasks.size()) {
+            throw new IndexOutOfBoundsException("Give me a valid index >:(");
+        }
         return tasks.get(index);
     }
 
