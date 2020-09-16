@@ -1,8 +1,15 @@
 package duke;
 
+import java.util.Optional;
+
 import duke.command.Command;
 import duke.parser.Parser;
 import duke.task.TaskList;
+import javafx.application.Platform;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+
+
 
 /**
  * Represents a functional chat-bot that helps to keep track of todo, deadline and event tasks.
@@ -75,7 +82,18 @@ public class Duke {
         } catch (DukeException e) {
             return (ui.showError(e.getMessage()));
         }
-        return "Thanks for using me! Goodbye!";
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
+                "Are you sure you want to exit?",
+                ButtonType.YES, ButtonType.NO);
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.YES) {
+            Platform.exit();
+            System.exit(0);
+        } else {
+            return "Okay! Continue typing your commands!";
+        }
+        return null;
     }
 
     /**

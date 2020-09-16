@@ -11,7 +11,7 @@ import duke.DateTime;
 public class TaskList {
 
     /** Stores the description of the Task. */
-    private ArrayList<Task> tasks;
+    private final ArrayList<Task> tasks;
 
     /**
      * Initialises the task list with an empty ArrayList.

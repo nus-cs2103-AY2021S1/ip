@@ -130,9 +130,9 @@ public class Ui {
      * @return String to be printed out to welcome the user.
      */
     public String showWelcome() {
-        String logo = "___          __        \n"
+        String logo = "___              __        \n"
                     + "| __\\___ __| | _____ \n"
-                    + "| | | | | | | |/ \uD83D\uDD34 \uD83D\uDD34 \\\n"
+                    + "| | | | | | | |/ \uD83D\uDD34 \uD83D\uDD34 \\ ___\n"
                     + "| |_| | |_| |   <  \\__/\n"
                     + "|____/\\__,|_|\\_\\___|\n";
 

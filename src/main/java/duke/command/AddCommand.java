@@ -21,7 +21,7 @@ import duke.task.Todo;
 public class AddCommand extends Command {
 
     /** Done status of the task associated with the command. */
-    private boolean isDone;
+    private final boolean isDone;
 
     /**
      * Creates a new AddCommand and initialises its default done status to false.
