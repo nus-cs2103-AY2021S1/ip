@@ -71,7 +71,7 @@ public class Duke extends Application {
 
     @Override
     public void start(Stage stage) {
-
+        //The better Gui includes a chat background and a circular profile page
         //The container for the content of the chat to scroll.
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
