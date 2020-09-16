@@ -274,7 +274,7 @@ public class Duke {
         this.taskList.writeToFile();
 
         try {
-            Thread.sleep(1000);
+            Thread.sleep(2000);
         } catch (Exception ignored) {
             // Failed thread sleep is ignored,
             // exit Duke normally.

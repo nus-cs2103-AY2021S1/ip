@@ -17,8 +17,8 @@ public class Ui {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
 
-    private static final String START_MESSAGE = "Hello! I'm Duke!\nWhat can I do for you?";
-    private static final String END_MESSAGE = "Bye. Hope to see you again soon!";
+    private static final String START_MESSAGE = "Whassup I'm Gilth Sebert,\nyour friendly task manager!\nWhatchu wanna do today?";
+    private static final String END_MESSAGE = "Bye bye and remember to study hard!";
 
     private final Scanner sc;
 

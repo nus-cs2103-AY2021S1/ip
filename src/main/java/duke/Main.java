@@ -39,7 +39,7 @@ public class Main extends Application {
 
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
-            stage.setTitle("CS for Lyfe!");
+            stage.setTitle("CS Task Manager");
             stage.setScene(scene);
 
             this.initialiseDuke(fxmlLoader);

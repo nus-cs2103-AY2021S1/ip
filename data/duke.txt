@@ -1,5 +1,6 @@
-T,1,indiv project
-T,0,work
 T,1,teamproj
+T,0,work
 E,1,2101 meeting,2020-02-02
 D,1,2101 slides,2020-02-03
+T,0,stuff
+T,0,more stuff
