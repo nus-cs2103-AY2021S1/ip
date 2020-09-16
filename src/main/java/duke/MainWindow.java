@@ -3,6 +3,7 @@ package duke;
 import java.io.IOException;
 
 import duke.task.Task;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -57,6 +58,9 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void handleUserInput() throws IOException {
         String input = userInput.getText();
+        if (input.equals("bye")) {
+            Platform.exit();
+        }
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog("[User] " + input, userImage),

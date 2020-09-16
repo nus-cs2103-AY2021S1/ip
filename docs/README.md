@@ -69,3 +69,8 @@ Expected outcome: `duplicate task added to list as per normal`
 Format: `no`\
 Example of usage: `no`\
 Expected outcome: `duplicate task will not be added to list`
+
+### `bye` - Exits the application
+Format: `bye`\
+Example of usage: `bye`\
+Expected outcome: `application terminates`

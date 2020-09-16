@@ -37,6 +37,10 @@ public class Parser {
         Parser.storage = storage;
     }
 
+    public static boolean getExitStatus() {
+        return Parser.isExit;
+    }
+
     private static String outputDoneMessage(int taskToMark) throws IOException {
         String output = "Task Accomplished! I've marked this task as done:\n";
         tasks.get(taskToMark).markAsDone();

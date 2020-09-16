@@ -1,6 +1,7 @@
 package duke;
 
 import java.io.IOException;
+import java.util.Scanner;
 
 /**
  * Main class that runs the Duke program
@@ -44,5 +45,23 @@ public class Duke {
      */
     public static TaskList getTasks() {
         return tasks;
+    }
+
+    public void run() throws IOException {
+        Parser.setTasks(tasks);
+        Parser.setStorage(storage);
+        boolean isExit = false;
+        Scanner sc = new Scanner(System.in);
+        while (!isExit) {
+            String command = sc.nextLine();
+            System.out.println("_____________________________________");
+            System.out.println(Parser.parse(command));
+            isExit = Parser.getExitStatus();
+            System.out.println("_____________________________________");
+        }
+    }
+
+    public static void main(String[] args) throws IOException {
+        new Duke("./duke.txt").run();
     }
 }
