@@ -57,7 +57,7 @@ public class FixedDurationTaskWithDateTime extends FixedDurationTask {
             return;
         }
         try {
-            String[] dateTimeSplit = dateTime.split(" ");
+            String[] dateTimeSplit = dateTime.split("\\s+");
             LocalDate date = parseDate(dateTimeSplit[0]);
             LocalTime time = parseTime(dateTimeSplit[1]);
             setStartDateTime(date, time);

@@ -72,6 +72,9 @@ public class TaskList {
             task = new Todo(description);
             break;
         case "deadline":
+            if (!description.contains(" /by ")) {
+                throw new DukeException("Oops, incorrect format!\nSay 'help' to learn about the commands!");
+            }
             try {
                 split = description.split(" /by ");
                 desc = split[0];
@@ -82,6 +85,9 @@ public class TaskList {
             }
             break;
         case "event":
+            if (!description.contains(" /at ")) {
+                throw new DukeException("Oops, incorrect format!\nSay 'help' to learn about the commands!");
+            }
             try {
                 split = description.split(" /at ");
                 desc = split[0];
@@ -92,6 +98,9 @@ public class TaskList {
             }
             break;
         case "fixed":
+            if (!description.contains(" /for ")) {
+                throw new DukeException("Oops, incorrect format!\nSay 'help' to learn about the commands!");
+            }
             try {
                 split = description.split(" /for ");
                 desc = split[0];

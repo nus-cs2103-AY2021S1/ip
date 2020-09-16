@@ -26,7 +26,7 @@ public abstract class TaskWithDateTime extends Task {
     public TaskWithDateTime(String type, String description, String dateTime) throws DukeException {
         super(type, description);
         try {
-            String[] dateTimeSplit = dateTime.split(" ");
+            String[] dateTimeSplit = dateTime.split("\\s+");
             date = parseDate(dateTimeSplit[0]);
             if (dateTimeSplit.length < 2) {
                 time = Optional.empty();
@@ -50,7 +50,7 @@ public abstract class TaskWithDateTime extends Task {
     public TaskWithDateTime(String type, String description, String dateTime, boolean isDone) throws DukeException {
         super(type, description, isDone);
         try {
-            String[] dateTimeSplit = dateTime.split(" ");
+            String[] dateTimeSplit = dateTime.split("\\s+");
             date = parseDate(dateTimeSplit[0]);
             if (dateTimeSplit.length < 2) {
                 time = Optional.empty();
@@ -74,7 +74,7 @@ public abstract class TaskWithDateTime extends Task {
     }
 
     private LocalTime parseTime(String raw) {
-        if (!raw.contains("!") || !raw.contains(".")) {
+        if (!raw.contains(":") || !raw.contains(".")) {
             raw += ":00";
         }
         String timeString = String.format("%1$" + 5 + "s",

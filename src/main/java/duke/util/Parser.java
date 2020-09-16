@@ -21,7 +21,7 @@ import java.util.Arrays;
 public class Parser {
 
     private static String[] format(String raw) {
-        return raw.split(" ");
+        return raw.split("\\s+");
     }
 
     /**
@@ -52,6 +52,9 @@ public class Parser {
      * @throws DukeException when parsing of the input fails.
      */
     public static Command parse(String input) throws DukeException {
+        if (input.contains("|")) {
+            return new InvalidCommand("Sorry you cannot use '|' because that's my favorite character :P");
+        }
         String[] parsed = Parser.format(input);
         String command = Parser.getCommand(parsed);
 
