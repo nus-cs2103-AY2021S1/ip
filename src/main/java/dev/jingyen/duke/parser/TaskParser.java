@@ -24,7 +24,7 @@ public class TaskParser {
      * @param line the input to parse
      * @return a dev.jingyen.duke.model.Task which was parsed from the String
      */
-    public static Task parse(String line) {
+    public static Task parse(String line) throws InvalidInputException, DateTimeParseException {
         String[] tokens = line.split("\\|");
         String taskType = tokens[0];
         boolean isDone = Boolean.parseBoolean(tokens[1]);
@@ -100,7 +100,7 @@ public class TaskParser {
      * @throws InvalidTaskException if the input is malformed
      */
     // TODO: Consider some cleaner way of validating, perhaps a factory method for each dev.jingyen.duke.model.Task
-    public static Task parseInput(Command command, String input) throws InvalidTaskException {
+    public static Task parseInput(Command command, String input) throws InvalidTaskException, DateTimeParseException {
         assert command != null;
         assert input != null && !input.isBlank();
         switch (command) {

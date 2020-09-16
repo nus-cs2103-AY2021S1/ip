@@ -1,6 +1,8 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 import org.junit.jupiter.api.Test;
 
@@ -29,6 +31,10 @@ class TaskParserTest {
         Deadline result = TaskParser.parseDeadline(isDone, taskName, deadlineStr);
 
         assertEquals(deadline, result);
+
+        String invalidDate = "not a valid date string";
+        assertThrows(DateTimeParseException.class, () ->
+                TaskParser.parseDeadline(isDone, taskName, invalidDate));
     }
 
     @Test

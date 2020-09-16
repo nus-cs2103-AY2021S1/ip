@@ -7,10 +7,12 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
 import dev.jingyen.duke.model.Task;
+import dev.jingyen.duke.parser.InvalidInputException;
 import dev.jingyen.duke.parser.TaskParser;
 
 public class Storage {
@@ -27,7 +29,7 @@ public class Storage {
      * @throws IOException if a problem was encountered while trying to access the file at <code>filePath</code>
      */
     // TODO: 26/8/20 Add more relevant error for parsing
-    public List<Task> load() throws IOException {
+    public List<Task> load() throws IOException, InvalidInputException, DateTimeParseException {
         List<Task> tasks = new ArrayList<>();
         try (var br = new BufferedReader(new FileReader(filePath))) {
             String line;

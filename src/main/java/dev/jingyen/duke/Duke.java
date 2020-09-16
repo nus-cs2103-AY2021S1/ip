@@ -2,6 +2,7 @@ package dev.jingyen.duke;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -137,6 +138,8 @@ public class Duke {
             default:
                 return ui.displayMessages("Um, I don't get what you're saying.");
             }
+        } catch (DateTimeParseException e) {
+            return ui.displayMessages("Um, gimme a valid date.");
         } catch (IllegalArgumentException e) {
             return ui.displayMessages("Um, I don't get what you're saying.");
         } catch (InvalidInputException | IOException e) {
@@ -144,7 +147,7 @@ public class Duke {
         }
     }
 
-    private String addTask(Command command, String input) throws InvalidTaskException {
+    private String addTask(Command command, String input) throws InvalidTaskException, DateTimeParseException {
         Task task = TaskParser.parseInput(command, input);
         tasks.addTask(task);
         return ui.displayMessages(
