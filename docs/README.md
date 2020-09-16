@@ -55,14 +55,14 @@ Expected outcome:
 
 `[T][✗] chicken nuggets`
 
-### `deadline {task description} \by {date}` - adds a deadline task
+### `deadline {task description} /by {date}` - adds a deadline task
 
 Adds a deadline task to current task list, to be done by the specified date.
 Date input takes the format yyyy/mm/dd or yyyy-mm-dd.
 
 Example of usage: 
 
-`deadline strawberry yoghurt \by 2020-09-21`
+`deadline strawberry yoghurt /by 2020-09-21`
 
 Expected outcome:
 
@@ -70,14 +70,14 @@ Expected outcome:
 
 `[D][✗] strawberry yoghurt to be digested by: Sep 21 2020`
 
-### `event {task description} \a {date}` - adds an event task
+### `event {task description} /a {date}` - adds an event task
 
 Adds an event task to current task list, to be done at the specified date.
 Date input takes the format yyyy/mm/dd or yyyy-mm-dd.
 
 Example of usage: 
 
-`event crocodile meat \at 2020-09-18`
+`event crocodile meat /at 2020-09-18`
 
 Expected outcome:
 
