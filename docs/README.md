@@ -28,7 +28,6 @@ tasks management done faster than traditional GUI apps.
 2. Download the latest `Mushy.jar` from [here](https://github.com/GabrielTeo/ip/releases/tag/A-Release)
 3. Copy the file to the folder you want to use as the *home folder* for your Mushy program.
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds.  
-
 ![welcome page](welcome.png)  
 
 5. Type the command in the command box and press Enter to execute it. 
