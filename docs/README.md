@@ -206,15 +206,16 @@ Q: How do I transfer my data to another Computer?
 A: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous duke home folder.
 
 ## Command Summary
-Action  | Format/ example  
-------------- | -------------  
-todo  | `todo <NUMBER>` <br> eg., `todo CS2101 Homework`  
-event  | `event <task> /at <YYYY-MM-DD HH:MM>` <br> eg., `event CS2101 Homework /at 2020-09-16 12:00`  
-deadline  | `deadline <task> /at <YYYY-MM-DD HH:MM>` <br> eg., `deadline CS2101 Homework /at 2020-09-16 12:00`  
-done  | `done <NUMBER>` <br> eg., `done 3`  
-delete | `delete <NUMBER>` <br> eg., `delete 2`  
-reminder  | `reminder <NUMBER>` <br> eg., `reminder 2`  
-find  | `find <keyword>` <br> eg., `find cs2101`  
-list  | `list`  
-help  | `help`  
-bye  | `bye`  
+
+Action  | Format/ example
+------------- | -------------
+todo  | `todo <NUMBER>` <br> eg., `todo CS2101 Homework`
+event  | `event <task> /at <YYYY-MM-DD HH:MM>` <br> eg., `event CS2101 Homework /at 2020-09-16 12:00`
+deadline  | `deadline <task> /at <YYYY-MM-DD HH:MM>` <br> eg., `deadline CS2101 Homework /at 2020-09-16 12:00`
+done  | `done <NUMBER>` <br> eg., `done 3`
+delete | `delete <NUMBER>` <br> eg., `delete 2`
+reminder  | `reminder <NUMBER>` <br> eg., `reminder 2`
+find  | `find <keyword>` <br> eg., `find cs2101`
+list  | `list`
+help  | `help`
+bye  | `bye`
