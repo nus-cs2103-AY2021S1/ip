@@ -18,7 +18,6 @@ import java.time.format.DateTimeParseException;
  * Deals with interaction with the users.
  */
 public class Ui {
-    private static final String LINE = "______________________________________\n";
     private TaskList list;
     private Storage storage;
 
@@ -49,7 +48,6 @@ public class Ui {
         String date = "";
         String toReturn = "";
         int priority;
-        toReturn += LINE;
 
         try {
             Parser parser = new Parser(input);
@@ -100,7 +98,6 @@ public class Ui {
             toReturn += "Wrong date format. Please follow this format: YYYY-MM-DD.\n";
         }
 
-        toReturn += LINE;
         return toReturn;
     }
 
@@ -110,7 +107,7 @@ public class Ui {
     public String greet() {
         String start = "Woof! I'm Nugget, your personal doggo.\nWhat can I do for you today?\n" +
                 "FYI: You can type 'help' for the commands available.\n";
-        String text = LINE + start + LINE;
+        String text = start;
         return text;
     }
 
@@ -124,15 +121,15 @@ public class Ui {
 
     public String help() {
         String text = "Here are the list of commands you can type:\n" +
-                "list - Shows the complete list of tasks you have\n" +
-                "find <keyword> - Shows tasks in your task list that match the keyword\n" +
-                "done <task number> - Marks the task as completed\n" +
-                "delete <task number> - Deletes the task from your list\n" +
-                "todo <task>- Adds a todo task\n" +
-                "event <event details> /at <date in YYYY-MM-DD> - Adds an event\n" +
-                "deadline <deadline details> /by <date in YYYY-MM-DD> -  Adds a deadline\n" +
-                "\nOptional: Adding a '/p <priority level>' tag at the end of a task command\n" +
-                "adds a priority level to your task! The default priority level is 0.\n";
+                "1. list - Shows the complete list of tasks you have\n" +
+                "2. find <keyword> - Shows tasks in your task list that match the keyword\n" +
+                "3. done <task number> - Marks the task as completed\n" +
+                "4. delete <task number> - Deletes the task from your list\n" +
+                "5. todo <task>- Adds a todo task\n" +
+                "6. event <event details> /at <date in YYYY-MM-DD> - Adds an event\n" +
+                "7. deadline <deadline details> /by <date in YYYY-MM-DD> -  Adds a deadline\n" +
+                "\nOptional: Adding a '/p <priority level>' tag at the end of a task command" +
+                "adds a priority level to your task!\n The default priority level is 0.\n";
         return text;
     }
 
@@ -141,7 +138,7 @@ public class Ui {
      */
     public String list() {
         if (list.isEmpty()) {
-            return "You have no tasks, go out and have fun!\n";
+            return "You have no tasks, come play fetch with me!\n";
         } else {
             String header = "Here is your to-do list:\n";
             String text = header;

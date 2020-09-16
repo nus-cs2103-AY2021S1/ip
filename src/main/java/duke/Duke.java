@@ -45,7 +45,7 @@ public class Duke extends Application {
     public Duke() {
         storage = new Storage();
         try {
-            // storage.clear();
+            storage.clear();
             taskList = new TaskList(storage.readData());
             ui = new Ui(taskList, storage);
         } catch (IOException e) {
