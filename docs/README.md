@@ -1,20 +1,40 @@
 # User Guide
+Welcome to the Sparkles ChatBot User Guide!
 
 ## Features 
+1. Track your tasks
+2. Support TODO, DEADLINE and EVENT
 
-### Feature 1 
-Description of feature.
+### More
+Allow you to track your todo, deadline and event task.
 
 ## Usage
+Command format:
 
-### `Keyword` - Describe action
+**Words in caps are parameters.**
 
-Describe action and its outcome.
+Format 1: `COMMAND`
 
-Example of usage: 
+1. `list`
+2. `bye`
 
-`keyword (optional arguments)`
+Format 2: `COMMAND DESCRIPTION`
 
-Expected outcome:
+1. `todo DESCRIPTION`
 
-`outcome`
+Format 3: `COMMAND DESCRIPTION DATE(yyyy-mm-dd) TIME(hh:mm)`
+
+1. `deadline DESCRIPTION DATE(yyyy-mm-dd) TIME(hh:mm)`
+
+Format 4: `COMMAND DESCRIPTION DATE(yyyy-mm-dd)`
+
+1. `event DESCRIPTION DATE(yyyy-mm-dd)`
+
+Format 5: `COMMAND NUMBER(list number)`
+
+1. `done NUMBER`
+2. `delete NUMBER`
+
+**Commands are not case sensitive**
+e.g `todo DESCRIPTION` is the same as `TODO DESCRIPTION`
+

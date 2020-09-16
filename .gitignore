@@ -15,3 +15,24 @@ bin/
 
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT
+src/main/java/sparkles/Sparkles.class
+src/main/java/sparkles/SparklesException.class
+src/main/java/sparkles/command/Command.class
+src/main/java/sparkles/command/DeleteCommand.class
+src/main/java/sparkles/command/DoneCommand.class
+src/main/java/sparkles/command/ExitCommand.class
+src/main/java/sparkles/command/ShowListCommand.class
+src/main/java/sparkles/command/TaskUnclearCommand.class
+src/main/java/sparkles/command/addcommand/AddCommand.class
+src/main/java/sparkles/command/addcommand/AddDeadlineCommand.class
+src/main/java/sparkles/command/addcommand/AddEventCommand.class
+src/main/java/sparkles/command/addcommand/AddTodoCommand.class
+src/main/java/sparkles/task/Deadline.class
+src/main/java/sparkles/task/Event.class
+src/main/java/sparkles/task/Task.class
+src/main/java/sparkles/task/TaskList.class
+src/main/java/sparkles/task/Todo.class
+src/main/java/sparkles/util/Parser.class
+src/main/java/sparkles/util/Storage.class
+src/main/java/sparkles/util/Ui.class
+META-INF/MANIFEST.MF
