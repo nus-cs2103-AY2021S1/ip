@@ -67,9 +67,9 @@ Format: `find KEYWORD`
 
 Examples: 
 * `find book` - will return all task that has the keyword `book`.
-* `find borrow book` - will return all the task that has the keyword `borrow book`.
+* `find borrow book` - will return all the task that has the keywords `borrow` and `book`.
  
-## Updating a task completely: `update task'
+## Updating a task completely: `update task`
 Replaces an existing task in the task list with another task. 
 
 Format: `update task INDEX`
