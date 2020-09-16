@@ -1,9 +1,9 @@
 package duke;
 
-import static javafx.application.Platform.exit;
+import java.util.Timer;
+import java.util.TimerTask;
 
-import java.util.concurrent.TimeUnit;
-
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -60,12 +60,7 @@ public class MainWindow extends AnchorPane {
                     DialogBox.getDukeDialog(response, dukeImage));
             userInput.clear();
             if (response == byeMessage) {
-                try {
-                    TimeUnit.SECONDS.sleep(1);
-                } catch (Exception e) {
-                    System.out.println(e.getMessage());
-                }
-                exit();
+                exitApplication();
             }
         } catch (DukeException e) {
             response = e.getMessage();
@@ -74,5 +69,17 @@ public class MainWindow extends AnchorPane {
                     DialogBox.getDukeDialogError(response, dukeImage));
             userInput.clear();
         }
+    }
+
+    private void exitApplication() {
+        TimerTask time = new TimerTask() {
+            @Override
+            public void run() {
+                Platform.exit();
+                System.exit(0);
+            }
+        };
+        Timer delayTime = new Timer();
+        delayTime.schedule(time, 1500);
     }
 }
