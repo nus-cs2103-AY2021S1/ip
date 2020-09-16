@@ -28,6 +28,10 @@ public class TextBox extends VBox {
     private static final String PATH_RIGHT_TRIANGLE = "M0,0 L-10,10 L-10,0 L0,0";
     /** vertical gap between text box peak and circle image peak */
     private static final double BUFFER_TOP = 10;
+    /** leftward box colour */
+    private static final Color LEFTWARD_COLOR = Color.SKYBLUE;
+    /** rightward box colour */
+    private static final Color RIGHTWARD_COLOR = Color.LIGHTGREEN;
 
     /**
      * Constructs a text box with the relevant text placed in a chat bubble.
@@ -45,12 +49,13 @@ public class TextBox extends VBox {
         //Adds a small triangle to the appropriate side to mimic a text box
         HBox hBox = new HBox();
         SVGPath lowerTriangle = new SVGPath();
-        lowerTriangle.setFill(Color.SKYBLUE);
         if (left) {
             lowerTriangle.setContent(PATH_LEFT_TRIANGLE);
+            lowerTriangle.setFill(LEFTWARD_COLOR);
             hBox.getChildren().addAll(lowerTriangle, textLabel);
         } else {
             lowerTriangle.setContent(PATH_RIGHT_TRIANGLE);
+            lowerTriangle.setFill(RIGHTWARD_COLOR);
             hBox.getChildren().addAll(textLabel, lowerTriangle);
         }
         hBox.setSpacing(-1); //forces both shapes to overlap with each other
@@ -67,7 +72,8 @@ public class TextBox extends VBox {
                         CORNER_RADIUS, CORNER_RADIUS, false)
                 : new CornerRadii(CORNER_RADIUS, 0,
                         CORNER_RADIUS, CORNER_RADIUS, false);
-        BackgroundFill backgroundFill = new BackgroundFill(Color.SKYBLUE,
+        BackgroundFill backgroundFill = new BackgroundFill(
+                left ? LEFTWARD_COLOR : RIGHTWARD_COLOR,
                 cornerRadii,
                 new Insets(0));
         Background textBackground = new Background(backgroundFill);
