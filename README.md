@@ -59,6 +59,16 @@ This feature allows users to find the list of command to use
 *E.g*: help
 
 
+###  **Save the task : save**
+
+This feature allows users to save the task after they have added them.
+
+*Usage*: i have add some tasks and i want to add them now.
+
+*Format*: save
+
+*E.g*: save
+
 
 ### **Add a general ToDo task : todo**
 

@@ -136,6 +136,10 @@ public class Parser {
         listOfContent.addTask(event);
         return listOfContent.addStringTask(event);
     }
+    protected static String processSaveCommand() {
+        String message = "The list has been save successfully! \n";
+        return message;
+    }
     protected static String processHelpCommand() {
         String toDoCommand = "Use TODO to add a new task. Format todo [taskName], Eg: todo ip \n";
         String deleteCommand = "\n Use DELETE a new task. Format delete [taskIndex], Eg: delete 5 \n";
@@ -169,6 +173,10 @@ public class Parser {
         }
         if (input.equals("help")) {
             return processHelpCommand();
+        }
+        if (input.equals("save")) {
+            Storage.write(listOfContent);
+            return processSaveCommand();
         }
         if (input.equals("list")) {
             return listOfContent.showAllContent();

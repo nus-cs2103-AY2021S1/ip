@@ -54,6 +54,7 @@ public class Storage {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        message = message + "\n remember to use \"save\" command to save the tasks you have added";
         return message;
     }
 

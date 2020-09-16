@@ -22,8 +22,8 @@ public class TaskList {
         boolean containDuplicate = false;
         for (int i = 0; i < totalTasks; i = i + 1) {
             if (listOfContents.get(i).isImported) {
-                if (listOfContents.get(i).toString().contains(task.toString().substring(8))
-                        && listOfContents.get(i).toString().contains(task.toString().substring(0, 1))) {
+                if (task.toString().contains(listOfContents.get(i).toString().substring(8))
+                        && task.toString().contains(listOfContents.get(i).toString().substring(0, 1))) {
                     containDuplicate = true;
                     break;
                 }
