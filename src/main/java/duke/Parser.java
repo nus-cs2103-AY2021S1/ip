@@ -172,7 +172,7 @@ public class Parser {
      */
     public void biggerThanSizeOfTasksHelper(int taskNumber, int sizeOfTasks) throws TaskNotFoundException {
         try {
-            if (taskNumber > sizeOfTasks || taskNumber == 0) {
+            if (taskNumber > sizeOfTasks || taskNumber <= 0) {
                 throw new TaskNotFoundException("Task not found :(");
             }
         } catch (Exception e) {
