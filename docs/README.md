@@ -88,9 +88,9 @@ Example of usage: `find work`
 
 Adds a command alias with the specified keyword.
 
-Format: `alias KEYWORD = COMMAND`
+Format: `alias KEYWORD=COMMAND`
 
-Example of usage: `alias del = delete`
+Example of usage: `alias del=delete`
 
 ### Quit Opus - `bye`
 
@@ -99,3 +99,7 @@ Quits the Opus application.
 Format: `bye`
 
 Example of usage: `bye`
+
+## Credits
+
+- [SE-EDU JavaFX Tutorial](https://se-education.org/guides/tutorials/javaFx.html).
