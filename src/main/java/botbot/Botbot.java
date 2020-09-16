@@ -1,10 +1,10 @@
 package botbot;
 
 import botbot.commands.Command;
+import botbot.tasks.TaskList;
 import botbot.ui.Ui;
 import botbot.utils.Parser;
 import botbot.utils.Storage;
-import botbot.utils.TaskList;
 
 /**
  * Represents the chatbot.

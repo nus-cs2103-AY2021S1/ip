@@ -3,11 +3,10 @@ package botbot.commands;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
-import botbot.utils.CommandValidator;
-import botbot.utils.Storage;
-import botbot.utils.TaskList;
-import botbot.ui.Ui;
 import botbot.tasks.Task;
+import botbot.tasks.TaskList;
+import botbot.ui.Ui;
+import botbot.utils.Storage;
 
 public class EditCommand extends Command {
     public static final String COMMAND_FORMAT = "edit INDEX [/desc NEW_DESCRIPTION] [/at NEW_TIME_OF_EVENT] "

@@ -7,6 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import botbot.commands.Command;
+import botbot.commands.CommandValidator;
 import botbot.commands.DeadlineCommand;
 import botbot.commands.DeleteCommand;
 import botbot.commands.EditCommand;

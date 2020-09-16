@@ -1,7 +1,7 @@
 package botbot.ui;
 
-import botbot.utils.TaskList;
 import botbot.tasks.Task;
+import botbot.tasks.TaskList;
 
 /**
  * Represents the UI of Botbot.

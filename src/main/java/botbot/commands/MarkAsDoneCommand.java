@@ -1,11 +1,10 @@
 package botbot.commands;
 
-import botbot.utils.CommandValidator;
-import botbot.utils.Storage;
-import botbot.utils.TaskList;
-import botbot.ui.Ui;
 import botbot.tasks.Task;
+import botbot.tasks.TaskList;
 import botbot.tasks.TaskStatus;
+import botbot.ui.Ui;
+import botbot.utils.Storage;
 
 /**
  * Marks a task in the task list as done.
