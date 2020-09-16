@@ -10,7 +10,7 @@ public class EventCommand extends Command {
     public static final String COMMAND_WORD = "event";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Creates an event with a description and date of event.\n"
-            + "Example: " + COMMAND_WORD + " CS2103T Lecture /at 2020-10-10";
+            + "Example: " + COMMAND_WORD + " CS2103T Lecture /at 2020-10-10\n";
     private Event event;
 
     public EventCommand(String description, LocalDate date) {

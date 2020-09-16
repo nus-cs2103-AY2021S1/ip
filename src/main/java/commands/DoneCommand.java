@@ -7,7 +7,7 @@ public class DoneCommand extends Command {
     public static final String COMMAND_WORD = "done";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Marks a task in the task list as completed.\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + "Example: " + COMMAND_WORD + " 1\n";
     private final int index;
     public DoneCommand(int index) {
         this.index = index; // check for index > 0 and < tasks.size

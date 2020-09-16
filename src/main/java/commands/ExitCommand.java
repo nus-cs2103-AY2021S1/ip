@@ -6,7 +6,7 @@ import duke.storage.Storage;
 public class ExitCommand extends Command {
     public static final String COMMAND_WORD = "bye";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Exits the program.\n"
-            + "Example: " + COMMAND_WORD;
+            + "Example: " + COMMAND_WORD + "\n";
 
     @Override
     public CommandResult execute(TaskList tasks, Storage storage) {

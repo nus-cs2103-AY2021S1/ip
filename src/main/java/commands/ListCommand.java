@@ -7,7 +7,7 @@ public class ListCommand extends Command {
     public static final String COMMAND_WORD = "list";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Displays the full list of tasks added.\n"
-            + "Example: " + COMMAND_WORD;
+            + "Example: " + COMMAND_WORD + "\n";
     @Override
     public CommandResult execute(TaskList tasks, Storage storage) {
         String message = "";

@@ -8,7 +8,7 @@ public class FindCommand extends Command {
     public static final String COMMAND_WORD = "find";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Displays a list of tasks matching the search terms.\n"
-            + "Example: " + COMMAND_WORD + " CS";
+            + "Example: " + COMMAND_WORD + " CS\n";
     private String searchPhrase;
     public FindCommand(String searchPhrase) {
         assert !searchPhrase.trim().equals("");

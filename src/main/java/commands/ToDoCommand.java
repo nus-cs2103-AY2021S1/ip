@@ -10,7 +10,7 @@ public class ToDoCommand extends Command {
     public static final String COMMAND_WORD = "todo";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Creates a simple task with only a description.\n"
-            + "Example: " + COMMAND_WORD + " code Facebook";
+            + "Example: " + COMMAND_WORD + " code Facebook\n";
     private final Task toDo;
 
     /**
