@@ -48,7 +48,7 @@ Format: `list`
 
 <img src="https://github.com/AaronnSeah/ip/blob/master/src/main/resources/images/list.png" width="400">
 
-##### 2. Adding a task: `add`
+##### 2. Adding a task
 
 Add a new task.
 
