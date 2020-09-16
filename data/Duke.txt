@@ -1,6 +1,2 @@
-     1.[D][?] he (by: sunday)
-     2.[D][?] to (by: sunday)
-     3.[T][?] hey
-     4.[D][?] tod (by: 2020/12/21)
-     5.[D][?] r (by: Dec. 20 2020 23:02)
-     6.[T][?] heyyy
+     1.[D][?] CS2103 iP (by: Sep. 28 2020 23:59)
+     2.[T][?] FIN2704 Quiz 1
