@@ -1,7 +1,5 @@
 package duke.storage;
 
-import duke.tasks.*;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -19,23 +17,16 @@ import duke.tasks.Event;
 import duke.tasks.TaskList;
 
 
+
 public class Storage {
 
-    private static final String FILE_PATH = "data/duke.txt";
     private TaskList taskList;
 
-    /**
-     * Constructs a Storage object
-     * @param taskList The TaskList that is to be set as the taskList of this Storage object
-     */
-    public Storage(TaskList taskList) {
+    public Storage(TaskList taskList){
         taskList = taskList;
     }
 
-    /**
-     * Writes the list of tasks to duke.txt.
-     * @param taskList The list of tasks to be written in the file
-     */
+    private static final String FILE_PATH = "data/duke.txt";
 
     public static void saveDataToFile(TaskList taskList) {
         try {
@@ -50,11 +41,6 @@ public class Storage {
         }
     }
 
-
-    /**
-     * Reads data from the file.
-     * @return The list of tasks in the file
-     */
     public static TaskList read() {
         try {
             ArrayList<Task> listOfTasks = new ArrayList<>();
@@ -78,9 +64,7 @@ public class Storage {
                         listOfTasks.add(deadline);
                         break;
                     case "E":
-
                         Task event = new Event(wordsParsed[2], wordsParsed[3]);
-
                         event.setStatus(isTaskDone);
                         listOfTasks.add(event);
                         break;
