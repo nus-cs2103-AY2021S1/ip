@@ -6,7 +6,7 @@ import java.util.Scanner;
  */
 public class Ui {
     private Scanner sc;
-    private String line = "_________________________________________";
+    private String line = "";
 
     public Ui() {
         sc = new Scanner(System.in);
@@ -23,10 +23,10 @@ public class Ui {
     public String sayHi() {
         String str = ("\t" + line + "\n"
                 + "\tHi I am RollRoll :D\n"
-                + "\tYour Todo-list helper teehee\n"
-                + "\tTell me the following words and i will \n\thelp you track your tasks:\n"
+                + "\tYour Todo-list helper teehee <3\n"
+                + "\tTell me the following commands and i will \n\thelp you track your tasks:\n"
                 + "\t\t 1. todo <task>\n"
-                + "\t\t 2. deadline <task> /by <YYYY-MM-DD>\n"
+                + "\t\t 2. deadline <task> /by \n\t\t<YYYY-MM-DD>\n"
                 + "\t\t 3. event <task> /at <YYYY-MM-DD>\n"
                 + "\t\t 4. done <number of the task>\n"
                 + "\t\t 5. delete <number of the task>\n"
