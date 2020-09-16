@@ -32,6 +32,8 @@ public class Duke {
         } catch (DukeException | IOException e) {
             ui.showLoadingError();
             tasks = new TaskList();
+
+            System.err.println(e);
         }
     }
 
@@ -76,7 +78,7 @@ public class Duke {
      * @param args arguments to be passed to the main method. Any array can be used with no change in effect.
      */
     public static void main(String[] args) {
-        new Duke("./data/tasks.txt").run();
+        new Duke("/data/tasks.txt").run();
     }
 
     /**

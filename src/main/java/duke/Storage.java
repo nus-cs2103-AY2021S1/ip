@@ -1,5 +1,6 @@
 package duke;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -29,8 +30,13 @@ public class Storage {
      * @throws IOException If there is an error in Files operations
      */
     public Storage(String filePath) throws IOException {
-        if (!Files.exists(Paths.get(filePath))) {
-            Files.createFile(Paths.get(filePath));
+        // make file path directory if non existent
+        File file = new File(filePath);
+        file.getParentFile().mkdirs();
+
+        // create file if it does not exist
+        if (!file.exists()) {
+            file.createNewFile();
         }
         this.filePath = filePath;
     }
