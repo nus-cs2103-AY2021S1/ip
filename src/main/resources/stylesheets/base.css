@@ -11,6 +11,10 @@
     -fx-font-family: 'Fira Code Bold';
 }
 
+.error-dialog-box .label {
+    -fx-text-fill: #FF0000;
+}
+
 .label {
     -fx-font-family: 'Fira Code';
 }

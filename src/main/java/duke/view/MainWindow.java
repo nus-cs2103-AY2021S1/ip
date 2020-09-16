@@ -13,7 +13,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
@@ -28,8 +27,6 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private final Duke duke;
-    private final Image userImage;
-    private final Image dukeImage;
 
     /**
      * The main window for Duke,
@@ -38,8 +35,6 @@ public class MainWindow extends AnchorPane {
      */
     public MainWindow(Duke duke) {
         this.duke = duke;
-        this.userImage = new Image(this.getClass().getResourceAsStream("/images/user-solid.png"));
-        this.dukeImage = new Image(this.getClass().getResourceAsStream("/images/crown-solid.png"));
 
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("/views/MainWindow.fxml"));
@@ -50,7 +45,7 @@ public class MainWindow extends AnchorPane {
             e.printStackTrace();
         }
 
-        this.dialogContainer.getChildren().add(DialogBox.getDukeDialog(this.duke.getWelcome(), this.dukeImage));
+        this.dialogContainer.getChildren().add(DialogBox.getDukeDialog(this.duke.getWelcome()));
     }
 
     @FXML
@@ -61,12 +56,17 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = this.userInput.getText();
+
+        this.dialogContainer.getChildren().add(DialogBox.getUserDialog(input));
+
         Response response = this.duke.getResponse(this.userInput.getText());
 
-        this.dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, this.userImage),
-                DialogBox.getDukeDialog(response.getMessage(), this.dukeImage)
-        );
+        if (response.isError()) {
+            this.dialogContainer.getChildren().add(DialogBox.getErrorDialog(response.getMessage()));
+        } else {
+            this.dialogContainer.getChildren().add(DialogBox.getDukeDialog(response.getMessage()));
+        }
+
         this.userInput.clear();
 
         if (response.isExit()) {

@@ -10,6 +10,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
 public class DialogBox extends HBox {
+    private static final Image userImage = new Image(DialogBox.class.getResourceAsStream("/images/user-solid.png"));
+    private static final Image dukeImage = new Image(DialogBox.class.getResourceAsStream("/images/crown-solid.png"));
+
     @FXML
     private Label dialog;
     @FXML
@@ -29,14 +32,21 @@ public class DialogBox extends HBox {
         this.displayPicture.setImage(img);
     }
 
-    public static DialogBox getUserDialog(String text, Image img) {
-        DialogBox dialogBox = new DialogBox(text, img);
+    public static DialogBox getUserDialog(String text) {
+        DialogBox dialogBox = new DialogBox(text, DialogBox.userImage);
         dialogBox.getStyleClass().add("user-dialog-box");
 
         return dialogBox;
     }
 
-    public static DialogBox getDukeDialog(String text, Image img) {
-        return new DialogBox(text, img);
+    public static DialogBox getDukeDialog(String text) {
+        return new DialogBox(text, DialogBox.dukeImage);
     }
+
+    public static DialogBox getErrorDialog(String text) {
+        DialogBox dialogBox = new DialogBox(text, DialogBox.dukeImage);
+        dialogBox.getStyleClass().add("error-dialog-box");
+
+        return dialogBox;
+    };
 }
