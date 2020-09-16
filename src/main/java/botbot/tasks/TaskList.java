@@ -38,16 +38,6 @@ public class TaskList extends LinkedList<Task> {
     }
 
     /**
-     * Deletes a task in the task list.
-     *
-     * @param id ID of task to be deleted.
-     */
-    public void delete(int id) {
-        assert size() > 0 && id <= size() : "Invalid ID to delete";
-        remove(id);
-    }
-
-    /**
      * Edits a task in the task list.
      *
      * @param id ID of task to be edited.
