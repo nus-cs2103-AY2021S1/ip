@@ -1,5 +1,8 @@
 package duke.util;
 
+/**
+ * Contains parse related functions.
+ */
 public class ParseUtil {
 
     /**
