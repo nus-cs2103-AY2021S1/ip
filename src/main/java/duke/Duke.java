@@ -4,7 +4,10 @@ import duke.component.Parser;
 import duke.component.Storage;
 import duke.component.Ui;
 import duke.task.TaskList;
+import javafx.application.Application;
+import javafx.application.Platform;
 
+import javax.swing.*;
 import java.util.Scanner;
 
 /**
@@ -37,6 +40,10 @@ public class Duke {
 
     public String getResponse(String input) {
         Parser parser = new Parser(tasks, storage);
+        if (input.equals("bye")) {
+            JOptionPane.showMessageDialog(null, "Goodbye, hope to see you again!");
+            Platform.exit();
+        }
         return parser.parse(input);
     }
 
@@ -62,6 +69,6 @@ public class Duke {
      * @param args
      */
     public static void main(String[] args) {
-        new Duke("data/duke.txt").run();
+        new Duke().run();
     }
 }

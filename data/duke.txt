@@ -47,3 +47,9 @@ T | 0 | live life
 T | 0 | live life
 T | 1 | Get abs
 D | 0 | CS2103 homework Aug 8 2020E | 0 | Concert Aug 10 2020
+T | 0 | live life
+T | 0 | live life
+T | 0 | live life
+T | 0 | read book
+T | 0 | Read book
+D | 0 | Homework Aug 8 2020D | 0 | Do CS2100 homework Aug 8 2020E | 0 | Foo Fighters concert Jul 12 2020

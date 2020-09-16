@@ -93,11 +93,15 @@ public class Parser {
                         return Ui.printList(tasks.getList());
 
                     }
-                    case "find":
+                    case "find": {
 
                         assert !description.equals("") : "Nothing to find!";
 
                         return tasks.find(input.substring(5));
+                    }
+                    case "bye": {
+                        System.exit(0);
+                    }
                     default:
                         return finalErrorMessage();
                 }
