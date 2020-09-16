@@ -20,6 +20,7 @@ import java.util.Scanner;
 public class Parser {
 
     public static TaskList taskList;
+    private static boolean canClose = false;
 
 
     /**
@@ -44,11 +45,14 @@ public class Parser {
 
             return taskList.printTaskList();
 
-        } else if (command.contains("hi")) {
+        } else if (command.contains("hi") || command.contains("hello")) {
 
-            return "Hi!";
+            return "Hi!" + "\n"
+                    + "What do you want to know about your tasks?";
 
         } else if (command.contains("bye")) {
+
+            canClose = true;
 
             return "Bye!";
 
@@ -61,7 +65,7 @@ public class Parser {
             assert numberOfWords >= 1 : "Command is incomplete!";
 
             if (numberOfWords == 0) {
-                throw new InvalidRequestException("Command is empty. Please enter a valid command.");
+                throw new InvalidRequestException("Command is empty. Please tell me a valid command.");
             }
 
             if (words[0].equals("done")) {
@@ -70,16 +74,16 @@ public class Parser {
                     throw new InvalidRequestException("Which task would you like to mark as done?");
                 }
                 if (numberOfWords > 2) {
-                    throw new InvalidRequestException("Sorry. I can only handle one task at a time.");
+                    throw new InvalidRequestException("Sorry. I can only handle one task at a time!!");
                 }
 
                 Integer index = Integer.parseInt(words[1]);
 
                 if (taskList.findListSize() < index) {
-                    throw new InvalidRequestException("I could not find this task, please enter a valid task index.");
+                    throw new InvalidRequestException("I could not find this task, please tell me a valid task index.");
                 }
                 if (index < 0) {
-                    throw new InvalidRequestException("Task index is invalid, please enter a valid one.");
+                    throw new InvalidRequestException("Task index is invalid, please tell me a valid one.");
                 }
 
                 return taskList.markAsDone(index);
@@ -100,7 +104,7 @@ public class Parser {
                     throw new InvalidRequestException("I could not find this task, please enter a valid task index.");
                 }
                 if (index < 0) {
-                    throw new InvalidRequestException("Task index is invalid, please enter a valid one.");
+                    throw new InvalidRequestException("Task index is invalid, please tell me a valid one.");
                 }
 
                 return taskList.deleteTask(index);
@@ -137,7 +141,7 @@ public class Parser {
                     String content = command.split(" ", 2)[1];
 
                     if (content.split(" /at ").length < 2) {
-                        throw new InvalidEventException("Please enter both the name as well as the period of time of the event!");
+                        throw new InvalidEventException("Please tell me both the name as well as the period of time of the event!");
                     }
 
                     String name = content.split(" /at ")[0];
@@ -155,7 +159,7 @@ public class Parser {
                     String content = command.split(" ", 2)[1];
 
                     if (content.split(" /by ").length < 2) {
-                        throw new InvalidDeadlineException("Please enter both the name as well as the due date of the event!");
+                        throw new InvalidDeadlineException("Please tell me both the name as well as the due date of the event!");
                     }
 
                     String name = content.split(" /by ")[0];
@@ -180,6 +184,10 @@ public class Parser {
 
             }
         }
+    }
+
+    public static boolean canClose() {
+        return canClose;
     }
 
 }

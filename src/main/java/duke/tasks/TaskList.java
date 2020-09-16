@@ -124,7 +124,8 @@ public class TaskList {
         assert taskSize > initialSize : "OOPS! Adding task failed.";
 
         String result = "Got it. I've added this task:" + "\n" + task.toString() + "\n"
-                + "Now you have " + taskSize + " tasks in the list." + "\n";
+                + "Now you have " + taskSize + " tasks in the list." + "\n"
+                + "Good luck with the quest!\n";
 
         return result;
     }

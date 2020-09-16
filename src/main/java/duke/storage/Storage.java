@@ -49,9 +49,9 @@ public class Storage {
             while (scanner.hasNextLine()) {
                 String currentLine = scanner.nextLine();
                 String[] wordsParsed = currentLine.split(" \\| ");
-                String isTaskDone = wordsParsed[1].equals("1")
-                        ? "true"
-                        : "false";
+                boolean isTaskDone = wordsParsed[1].equals("1")
+                        ? true
+                        : false;
                 switch (wordsParsed[0]) {
                     case "T":
                         Task todo = new Todo(wordsParsed[2]);

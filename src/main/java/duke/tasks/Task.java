@@ -38,6 +38,9 @@ public class Task {
     public void setStatus(String status) {
         isDone = status.equals("true");
     }
+    public void setStatus(boolean status) {
+        isDone = status;
+    }
 
     /**
      * Prints out the name of the task.

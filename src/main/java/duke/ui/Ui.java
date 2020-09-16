@@ -1,5 +1,6 @@
 package duke.ui;
 
+import com.sun.security.jgss.GSSUtil;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.tasks.TaskList;
@@ -11,7 +12,7 @@ import java.util.Scanner;
  * User Interface
  */
 public class Ui {
-    public static String logo = "      ____        _        \n"
+    public static String logo = "   _____  \n"
             + "     |  _ \\ _   _| | _____ \n"
             + "     | | | | | | | |/ / _ \\\n"
             + "     | |_| | |_| |   <  __/\n"
@@ -31,10 +32,24 @@ public class Ui {
      */
     public static void greet() {
 
-        System.out.println("Hello from\n" + logo);
+//        System.out.println("Hello from\n" + logo);
+//
+//        System.out.println("What can I do for you?");
 
-        System.out.println("What can I do for you?");
+        System.out.println("Hello!\n" +
+                "I'm Aqua, the (u̶s̶e̶l̶e̶s̶s̶ ̶b̶a̶k̶a̶) Goddess of water!\n" +
+                "Welcome to this parallel world where you (h̶a̶v̶e̶ ̶t̶o̶ ̶d̶o̶ ̶d̶e̶b̶u̶g̶g̶i̶n̶g̶ ̶7̶/̶2̶4̶)" +
+                "can go on an adventure and battle monsters!\n" +
+                "I'll help you track your missions until you defeat Devil King(C̶S̶2̶1̶0̶3̶T̶)!");
+    }
+    public static String getGreeting() {
 
+        String greeting = "Hello!\n" +
+                "I'm Aqua, the (u̶s̶e̶l̶e̶s̶s̶ ̶b̶a̶k̶a̶) Goddess of water!\n" +
+                "Welcome to this parallel world where you (h̶a̶v̶e̶ ̶t̶o̶ ̶d̶o̶ ̶d̶e̶b̶u̶g̶g̶i̶n̶g̶ ̶7̶/̶2̶4̶)" +
+                "can go on an adventure and battle monsters!\n" +
+                "I'll help you track your missions until you defeat Devil King(C̶S̶2̶1̶0̶3̶T̶)!";
+         return greeting;
     }
 
     /**

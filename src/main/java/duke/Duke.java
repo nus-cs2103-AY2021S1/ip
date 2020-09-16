@@ -11,7 +11,11 @@ import duke.ui.Ui;
 public class Duke {
 
     public Ui ui;
+    private boolean canClose = false;
 
+    /**
+     * Construct a duke object.
+     */
     public Duke(){
         ui = new Ui();
         TaskList taskList = Storage.read();
@@ -34,14 +38,28 @@ public class Duke {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Get the response.
+     * @param input User input
+     * @return The response we get from the parser
      */
     public String getResponse(String input) {
         try {
-            return Parser.processCommand(input);
+            String response = Parser.processCommand(input);
+            Storage.saveDataToFile(Parser.taskList);
+            if (Parser.canClose()) {
+                this.canClose = true;
+            }
+            return response;
         } catch (Exception e) {
             return e.getMessage();
         }
+    }
+
+    /**
+     *
+     * @return
+     */
+    public boolean canClose() {
+        return canClose;
     }
 }

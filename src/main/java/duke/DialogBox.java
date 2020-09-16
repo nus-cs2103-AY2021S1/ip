@@ -3,16 +3,22 @@ package duke;
 import java.io.IOException;
 import java.util.Collections;
 
+import javafx.scene.shape.Circle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 
 /**
  * An example of a custom control using FXML.
@@ -37,6 +43,8 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         displayPicture.setImage(img);
+        setBackground();
+        setCircledIcon();
     }
 
     /**
@@ -58,4 +66,16 @@ public class DialogBox extends HBox {
         db.flip();
         return db;
     }
+
+    private void setCircledIcon() {
+        Circle profileCircle = new Circle(50, 50, 60);
+        displayPicture.setClip(profileCircle);
+    }
+
+    private void setBackground() {
+        Background dukeBackground = new Background(new BackgroundFill(
+                Color.POWDERBLUE, new CornerRadii(20), new Insets(5, 5, 5, 5)));
+        this.setBackground(dukeBackground);
+    }
+
 }

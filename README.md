@@ -24,3 +24,158 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
    | |_| | |_| |   <  __/
    |____/ \__,_|_|\_\___|
    ```
+
+## Aim
+Duke is a task managing application that helps you keep track of your task list.
+
+## Feature List
+- Show all of the tasks in the list
+- Add a task of a specific type(Todo/Deadline/Event) into the list
+- Delete a task from the list
+- Search for related tasks by keyword
+- mark a task as done
+- Store the list in a local txt file
+- Load the list from the local txt file
+
+## Future Expansion Plan
+- Tag function: give each task a tag
+- Search by tag
+- Priority function: give each a priority number
+- List the tasks by priority
+- List the tasks of a specific type(Deadline/Event/Todo)
+
+## User Guide
+
+### 1. `hi` - Greet 
+User input format: `hi`
+
+Example: 
+```$xslt
+hi
+```
+
+Expected Outcome:
+```
+Hi!
+```
+
+### 2. `list` - List all of the tasks
+User input format: `list`
+
+Example: 
+```$xslt
+list
+```
+
+Expected Outcome:
+```
+Here are the tasks in your list:
+1. [T][✓] homework
+2. [T][✘] ip
+3. [D][✘] quiz (by: 9月 18 2019)
+```
+
+### 3. `todo` - Add a Todo task to the list
+User input format: `todo DESCRIPTION`
+
+Example: 
+```$xslt
+todo CS2103S Quiz
+```
+
+Expected Outcome:
+```
+Got it. I've added this task:
+[T][✘] CS2103 Quiz
+Now you have 4 tasks in the list.
+```
+
+### 4. `deadline` - Add a Deadline task to the list
+User input format: `deadline DESCRIPTION /by YYYY-MM-DD`
+
+Example: 
+```$xslt
+Got it. I've added this task:
+[D][✘] CS2103S ip (by: 2020-09-18)
+Now you have 5 tasks in the list.
+```
+
+Expected Outcome:
+```
+Got it. I've added this task:
+[E][✘] CS2101 OP meeting (at: Wednesday 9pm)
+Now you have 6 tasks in the list.
+```
+### 5. `event` - Add an Event task to the list
+User input format: `event DESCRIPTION /at TIME`
+
+Example: 
+```$xslt
+event CS2101 OP meeting /at Wednesday 9pm
+```
+
+Expected Outcome:
+```
+Got it. I've added this task:
+[E][✘] CS2101 OP meeting (at: Wednesday 9pm)
+Now you have 6 tasks in the list.
+```
+### 5. `done` - Mark a task as done
+User input format: `done INDEX`
+
+Example: 
+```$xslt
+done 4
+```
+
+Expected Outcome:
+```
+Nice! I've marked this task as done:
+[T][✓] CS2103 Quiz
+```
+
+### 6. `find` - Search for related tasks by keyword
+User input format: `find KEYWORD`
+
+Example: 
+```$xslt
+find 2103
+```
+
+Expected Outcome:
+```
+Here are the tasks found: 
+[T][✘] 2103
+[T][✓] CS2103 Quiz
+[D][✘] CS2103S ip (by: 2020-09-18)
+```
+
+### 7. `delete` - Delete a task from the task list
+User input format: `delete INDEX`
+
+Example: 
+```$xslt
+delete 2
+```
+
+Expected Outcome:
+```
+Noted. I've removed this task:
+[T][✘] 2103
+Now you have 5 tasks in the list
+```
+### 8. `bye` - Exit from the Duke application
+User input format: `bye`
+
+Example: 
+```$xslt
+bye
+```
+
+Expected Outcome:
+```
+Bye. Hope to see you again soon!
+
+The main window of the application closes.
+The programme stops and you will exit from the application.
+```
