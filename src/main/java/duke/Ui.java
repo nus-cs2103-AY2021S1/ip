@@ -17,7 +17,7 @@ public class Ui {
      * Prints out a string which gives a greeting to the user
      */
     public void displayGreeting() {
-        System.out.println(getGreetingResponseAsString());
+        System.out.printf("%s\n%s\n%s", HORIZONTAL_RULE, getGreetingResponseAsString(), HORIZONTAL_RULE);
     }
 
     /**
@@ -26,16 +26,14 @@ public class Ui {
      * @return String representing bot's opening greeting
      */
     public String getGreetingResponseAsString() {
-        return HORIZONTAL_RULE
-                + "\n" + HELLO_MESSAGE
-                + "\n" + HORIZONTAL_RULE;
+        return HELLO_MESSAGE;
     }
 
     /**
      * Prints out a string for when the program exits
      */
     public void displayExit() {
-        System.out.println(getExitResponseAsString());
+        System.out.printf("%s\n%s\n%s", HORIZONTAL_RULE, getExitResponseAsString(), HORIZONTAL_RULE);
     }
 
     /**
@@ -44,9 +42,7 @@ public class Ui {
      * @return String representing bot's response
      */
     public String getExitResponseAsString() {
-        return HORIZONTAL_RULE
-                + "\n" + BYE_MESSAGE
-                + "\n" + HORIZONTAL_RULE;
+        return BYE_MESSAGE;
     }
 
     /**
@@ -55,7 +51,7 @@ public class Ui {
      * @param tasks TaskList containing found Tasks
      */
     public void printFindResult(TaskList tasks) {
-        System.out.println(getFindResultAsString(tasks));
+        System.out.printf("%s\n%s\n%s", HORIZONTAL_RULE, getFindResultAsString(tasks), HORIZONTAL_RULE);
     }
 
     /**
@@ -74,7 +70,7 @@ public class Ui {
      * @param tasks TaskList consisting of items to be printed
      */
     public void printList(TaskList tasks) {
-        System.out.println(getPrintListResponseAsString(tasks));
+        System.out.printf("%s\n%s\n%s%n", HORIZONTAL_RULE, getPrintListResponseAsString(tasks), HORIZONTAL_RULE);
     }
 
     /**
@@ -88,23 +84,23 @@ public class Ui {
     }
 
     private String getPrintListResponseAsString(TaskList tasks, String message) {
-        String res = HORIZONTAL_RULE + "\n" + message + "\n";
+        String res = message + "\n";
 
         for (int i = 1; i <= tasks.numTasks(); i++) {
             Task item = tasks.getTask(i - 1);
             String fullItem = i + ". " + item.toString();
 
-            res += "\n" + fullItem + "\n";
+            res += "\n" + fullItem;
         }
 
-        return res + HORIZONTAL_RULE;
+        return res;
     }
 
     /**
      * Prints out string for when the user has completed a task
      */
     public void displayCompleteTask() {
-        System.out.println(getCompleteTaskResponseAsString());
+        System.out.printf("%s\n%s\n%s", HORIZONTAL_RULE, getCompleteTaskResponseAsString(), HORIZONTAL_RULE);
     }
 
     /**
@@ -113,9 +109,7 @@ public class Ui {
      * @return String representing bot's response
      */
     public String getCompleteTaskResponseAsString() {
-        return HORIZONTAL_RULE
-                + "\nCongratulations, you actually did something\n"
-                + HORIZONTAL_RULE;
+        return "Congratulations, you actually did something";
     }
 
     /**
@@ -125,7 +119,7 @@ public class Ui {
      * @param size Number of items in the TaskList
      */
     public void displayAddTask(Task task, int size) {
-        System.out.println(getAddTaskResponseAsString(task, size));
+        System.out.printf("%s\n%s\n%s", HORIZONTAL_RULE, getAddTaskResponseAsString(task, size), HORIZONTAL_RULE);
     }
 
     /**
@@ -136,11 +130,9 @@ public class Ui {
      * @return String representing bot's response
      */
     public String getAddTaskResponseAsString(Task task, int size) {
-        return HORIZONTAL_RULE
-                + "\nOne more task added for you sire\n"
+        return "One more task added for you sire\n"
                 + task.toString()
-                + "\nYou have " + size + " tasks. Enjoy!\n"
-                + HORIZONTAL_RULE;
+                + "\nYou have " + size + " tasks. Enjoy!";
     }
 
     /**
@@ -150,7 +142,8 @@ public class Ui {
      * @param size Number of items remaining in the TaskList
      */
     public void displayDeleteTask(Task removedTask, int size) {
-        System.out.println(getDeleteTaskResponseAsString(removedTask, size));
+        System.out.printf("%s\n%s\n%s", HORIZONTAL_RULE, getDeleteTaskResponseAsString(removedTask, size),
+                HORIZONTAL_RULE);
     }
 
     /**
@@ -161,18 +154,16 @@ public class Ui {
      * @return String representing bot's response
      */
     public String getDeleteTaskResponseAsString(Task removedTask, int size) {
-        return HORIZONTAL_RULE
-                + "\nFinished so soon? Fine I've removed the following task. Good day.\n"
+        return "Finished so soon? Fine I've removed the following task. Good day.\n"
                 + "    " + removedTask
-                + "\nYou have " + size + "tasks. Enjoy!\n"
-                + HORIZONTAL_RULE;
+                + "\nYou have " + size + "tasks. Enjoy!\n";
     }
 
     /**
      * Prints out a string for when the user undoes a command
      */
     public void displayUndoCommand() {
-        System.out.println(getUndoCommandResponseAsString());
+        System.out.printf("%s\n%s\n%s", HORIZONTAL_RULE, getUndoCommandResponseAsString(), HORIZONTAL_RULE);
     }
 
     /**
@@ -181,16 +172,14 @@ public class Ui {
      * @return String respresenting bot's response
      */
     public String getUndoCommandResponseAsString() {
-        return HORIZONTAL_RULE
-                + "\nWhy do I always have to clean up after you\n"
-                + HORIZONTAL_RULE;
+        return "Why do I always have to clean up after you";
     }
 
     /**
      * Prints out a string for when there is an error loading the stored data
      */
     public void showLoadingError() {
-        System.out.println(getLoadingErrorAsString());
+        System.out.printf("%s\n%s\n%s", HORIZONTAL_RULE, getLoadingErrorAsString(), HORIZONTAL_RULE);
     }
 
     /**
@@ -199,8 +188,6 @@ public class Ui {
      * @return String representing laoding error message
      */
     public String getLoadingErrorAsString() {
-        return HORIZONTAL_RULE
-                + "\nSomething messed up with your hard disk file i don't really know what. Figure it out.\n"
-                + HORIZONTAL_RULE;
+        return "Something messed up with your hard disk file i don't really know what. Figure it out.";
     }
 }
