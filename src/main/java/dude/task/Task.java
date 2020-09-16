@@ -1,6 +1,5 @@
 package dude.task;
 
-import java.io.ObjectOutputStream;
 
 /**
  * The class that contains the key functionality of a task.
