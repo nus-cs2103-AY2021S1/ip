@@ -4,6 +4,7 @@ import duke.Duke;
 import duke.exception.ExceptionMessage;
 import duke.exception.InvalidIndexException;
 import duke.task.Task;
+import duke.util.ParseUtil;
 
 /**
  * DeleteCommand asks DukeTaskList to remove the task with the input index.
@@ -43,17 +44,8 @@ public class DeleteCommand extends Command {
         }
     }
 
-    private boolean canParseInt(String str) {
-        try {
-            Integer.parseInt(str);
-            return true;
-        } catch (NumberFormatException exception) {
-            return false;
-        }
-    }
-
     private void checkException(String str) {
-        if (!canParseInt(str)) {
+        if (!ParseUtil.canParseInteger(str)) {
             String errMessage = ExceptionMessage.getInvalidIndexMessage(str);
             throw new InvalidIndexException(errMessage);
         }

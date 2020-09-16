@@ -6,6 +6,7 @@ import duke.exception.ExceptionMessage;
 import duke.exception.IncorrectFormatException;
 import duke.exception.InvalidIndexException;
 import duke.task.Task;
+import duke.util.ParseUtil;
 
 public class TagCommand extends Command {
 
@@ -51,7 +52,7 @@ public class TagCommand extends Command {
             throw new IncorrectFormatException(errMessage);
         }
 
-        if (!canParseInt(splitStr[0])) {
+        if (!ParseUtil.canParseInteger(splitStr[0])) {
             String errMessage = ExceptionMessage.getInvalidIndexMessage(splitStr[0]);
             throw new InvalidIndexException(errMessage);
         }
@@ -59,15 +60,6 @@ public class TagCommand extends Command {
         if (splitStr[1].isBlank()) {
             String errMessage = ExceptionMessage.BLANK_TAG_MESSAGE;
             throw new BlankTagException(errMessage);
-        }
-    }
-
-    private boolean canParseInt(String str) {
-        try {
-            Integer.parseInt(str);
-            return true;
-        } catch (NumberFormatException exception) {
-            return false;
         }
     }
 }

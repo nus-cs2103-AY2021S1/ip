@@ -4,6 +4,7 @@ import duke.Duke;
 import duke.exception.ExceptionMessage;
 import duke.exception.InvalidIndexException;
 import duke.task.Task;
+import duke.util.ParseUtil;
 
 /**
  * DoneCommand marks the task with the index as done, reports to the user.
@@ -44,17 +45,8 @@ public class DoneCommand extends Command {
         }
     }
 
-    private boolean canParseInt(String str) {
-        try {
-            Integer.parseInt(str);
-            return true;
-        } catch (NumberFormatException exception) {
-            return false;
-        }
-    }
-
     private void checkException(String str) {
-        if (!canParseInt(str)) {
+        if (!ParseUtil.canParseInteger(str)) {
             String errMessage = ExceptionMessage.getInvalidIndexMessage(str);
             throw new InvalidIndexException(errMessage);
         }
