@@ -6,14 +6,19 @@ import java.nio.file.Path;
  * Represents an interactive bot to handle tasks.
  */
 public class Duke {
+    /** Storage handles load to/from saved file. */
     private Storage storage;
+    /** Ui handles user interaction. */
     private Ui ui;
+    /** A list that contains tasks. */
     private final TaskList lst = new TaskList();
 
     /** Empty constructor. */
     public Duke() { }
 
-    /** Constructor with a valid file path. */
+    /** Constructor with a valid file path.
+     * @param filePath the file path
+     */
     public Duke(final Path filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -59,6 +64,10 @@ public class Duke {
         ui.run(lst);
     }
 
+    /**
+     *  Executes duke bot with a given path.
+     * @param args input string (not used)
+     */
     public static void main(final String[] args) throws Exception {
         java.nio.file.Path path = java.nio.file.Paths.get(
                 System.getProperty("user.home"), "ip", "start.txt");

@@ -5,23 +5,69 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Represents a task list contains the task list e.g.,
- * it has operations to add/delete tasks in the list
+ * Represents a task list contains the task list.
  */
 public class TaskList {
     private final List<Task> lst = new ArrayList<>();
-    public static int numberOfDoneTasks;
-    public static LocalDate lastLoginDate;
+    private static int numberOfDoneTasks;
+    private static LocalDate lastLoginDate;
 
+    /** Returns number of done tasks.
+     * @return number of done tasks
+     */
+    public static int getNumberOfDoneTasks() {
+        return numberOfDoneTasks;
+    }
+
+    /** Returns last log in date.
+     * @return last log in date
+     */
+    public static LocalDate getLastLoginDate() {
+        return lastLoginDate;
+    }
+
+    /** Resets number of done tasks as 0. */
+    public static void resetNumberOfDoneTasks() {
+        numberOfDoneTasks = 0;
+    }
+
+    /** Sets number of done tasks as input i. */
+    public static void setNumberOfDoneTasks(final int i) {
+        numberOfDoneTasks = i;
+    }
+
+    /** Increments number of done tasks by 1. */
+    public static void incrementNumberOfDoneTasks() {
+        numberOfDoneTasks++;
+    }
+
+    /** Sets last log in data as date. */
+    public static void setLastLoginDate(final LocalDate date) {
+        lastLoginDate = date;
+    }
+
+    /**
+     * Returns the array list task list.
+     * @return task list
+     */
     public List<Task> getLst() {
         return lst;
     }
 
-    public void add(Task task) {
+    /**
+     * Adds a task to the task list.
+     * @param task task to be added
+     */
+    public void add(final Task task) {
         lst.add(task);
     }
 
-    public void addOfType(String message, TaskType taskType) {
+    /**
+     * Adds a task of a certain type to the task list.
+     * @param message task message
+     * @param taskType task type
+     */
+    public void addOfType(final String message, final TaskType taskType) {
         switch (taskType) {
         case T:
             lst.add(new Todo(message));
@@ -32,18 +78,33 @@ public class TaskList {
         case E:
             lst.add(new Event(message));
             break;
+        // We only use this method in our own implementation
+        // with specified task type T, D, or E,
+        // thus task type is always valid.
+        // No need to throw exception
+        default:
         }
     }
 
+    /** Returns size of task list in int form.
+     * @return list size
+     */
     public int size() {
         return lst.size();
     }
 
-    public Task get(int i) {
+    /** Returns the task from task list at index i.
+     * @param i index
+     * @return the (i+1)th task in the list
+     */
+    public Task get(final int i) {
         return lst.get(i);
     }
 
-    public void delete(int i) {
+    /** Deletes the task from task list at index i.
+     * @param i index
+     */
+    public void delete(final int i) {
         lst.remove(i);
     }
 }

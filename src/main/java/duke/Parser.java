@@ -7,20 +7,23 @@ public class Parser {
     private static final String SPACE = "     ";
     private static final String INDENT = "      ";
     private static final String MORE_INDENT = "        ";
-    private static final String LINE = "_____________________________________________\n";
+    private static final String LINE =
+            "_____________________________________________\n";
 
     /**
-     * Returns formatted string, adding SPACE and LINE
+     * Returns formatted string, adding SPACE and LINE.
      *
      * @param input string to be formatted
      * @return formatted string
      */
-    public static String format(String input) {
+    public static String format(final String input) {
         return SPACE + LINE + INDENT + input + "\n" + SPACE + LINE;
     }
 
     // command split indicators
+    @SuppressWarnings("checkstyle:MemberName")
     private final int PRIOR = 0;
+    @SuppressWarnings("checkstyle:MemberName")
     private final int EXTRA = 1;
 
     // current command: the whole line
@@ -36,7 +39,7 @@ public class Parser {
     }
 
     /**
-     * Returns the bye message called by user input "bye"
+     * Returns the bye message called by user input "bye".
      *
      * @return formatted bye message
      */
@@ -46,7 +49,7 @@ public class Parser {
     }
 
     /**
-     * Returns the list message called by user input "list"
+     * Returns the list message called by user input "list".
      *
      * @return formatted list message
      */
@@ -56,7 +59,7 @@ public class Parser {
     }
 
     /**
-     * Returns a raw list without any formatting
+     * Returns a raw list without any formatting.
      *
      * @return a raw list string
      */
@@ -71,7 +74,7 @@ public class Parser {
     }
 
     /**
-     * Returns a formatted list message
+     * Returns a formatted list message.
      *
      * @param content the raw list
      * @return a formatted string of "content"
@@ -81,7 +84,7 @@ public class Parser {
     }
 
     /**
-     * Returns a response message of complicated commands
+     * Returns a response message of complicated commands.
      *
      * @param lst the task list
      * @param command the command to be processed
@@ -120,7 +123,7 @@ public class Parser {
     }
 
     /**
-     * Returns boolean value indicating whether the command is valid
+     * Returns boolean value indicating whether the command is valid.
      * The command is valid if it consists of COMMAND_TYPE + " " + EXTRA_MESSAGE
      *
      * @param command the command to be processed
@@ -164,7 +167,7 @@ public class Parser {
         assert index < lst.size();
 
         task.setDone();
-        TaskList.numberOfDoneTasks++;
+        TaskList.incrementNumberOfDoneTasks();
         String messageMarked = "Nice! I've marked this task as done:\n";
         return format(messageMarked + MORE_INDENT + task.print());
     }
@@ -197,7 +200,6 @@ public class Parser {
         assert index < lst.size();
 
         lst.delete(index);
-        TaskList.numberOfDoneTasks++;
 
         String messageDelete = "Noted. I've removed this task:\n";
         return format(messageDelete + MORE_INDENT + task.print() + getListCountMessage(lst));

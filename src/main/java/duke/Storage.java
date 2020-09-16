@@ -1,5 +1,6 @@
 package duke;
 
+import duke_exceptions.IllegalTaskTypeException;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -7,28 +8,34 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.time.LocalDate;
 import java.util.Scanner;
-import duke_exceptions.*;
 
 /**
  * Represents a storage and deals with loading tasks from
- * the file and saving tasks in the file
+ * the file and saving tasks in the file.
  */
 public class Storage {
+    @SuppressWarnings({"checkstyle:JavadocVariable", "CheckStyle"})
     private final File file;
-    Storage(Path path) {
+    Storage(final Path path) {
         this.file = new File(path.toString());
     }
 
-    public void writeToList(TaskList lst) throws IllegalTaskTypeException {
+    /**
+     * Writes content of saved file to task list (and store extra information).
+     * @param lst the task list to be written to
+     */
+    public void writeToList(final TaskList lst)
+            throws IllegalTaskTypeException {
         try {
             Scanner scanner = new Scanner(file);
             // a pure number stored in the saved file, guaranteed to be there
             String tempNumberOfDoneTasks = scanner.nextLine();
-            TaskList.numberOfDoneTasks = Integer.parseInt(tempNumberOfDoneTasks);
+            TaskList.setNumberOfDoneTasks(Integer.parseInt(
+                    tempNumberOfDoneTasks));
 
             // a date stored in the saved file, guaranteed to be there
             String tempLastLoginDate = scanner.nextLine();
-            TaskList.lastLoginDate = LocalDate.parse(tempLastLoginDate);
+            TaskList.setLastLoginDate(LocalDate.parse(tempLastLoginDate));
 
             while (scanner.hasNextLine()) {
                 String task = scanner.nextLine();
@@ -39,10 +46,14 @@ public class Storage {
         }
     }
 
-    public void writeToFile(TaskList lst) throws IOException {
+    /**
+     * Writes content of task list to saved file (and store extra information).
+     * @param lst the task list to be written from
+     */
+    public void writeToFile(final TaskList lst) throws IOException {
         FileWriter fileWriter = new FileWriter(file);
         String content;
-        fileWriter.write(TaskList.numberOfDoneTasks + "\n");
+        fileWriter.write(TaskList.getNumberOfDoneTasks() + "\n");
         fileWriter.write(LocalDate.now() + "\n");
         for (int i = 0; i < lst.size(); i++) {
             Task task = lst.get(i);

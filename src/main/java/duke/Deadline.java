@@ -6,10 +6,19 @@ package duke;
  * a task associated a date as deadline
  */
 public class Deadline extends Task {
+    /** Constructor.
+     *  Initialises message.
+     *  @param message deadline message
+     */
     Deadline(final String message) {
         super(message);
     }
 
+    /** Constructor.
+     *  Initialises message, isDone.
+     *  @param message deadline message
+     *  @param isDone status of deadline task
+     */
     Deadline(final String message, final boolean isDone) {
         super(message, isDone);
     }
@@ -17,7 +26,7 @@ public class Deadline extends Task {
     /**
      * Returns the single character string
      * denoting task type.
-     * In this case, "D" denoting deadline
+     * @return "D" denoting deadline
      */
     @Override
     public String getPureTypeLetter() {
@@ -26,7 +35,7 @@ public class Deadline extends Task {
 
     /**
      * Returns the task type notation with square brackets.
-     * In this case, "[D]" denoting deadline
+     * @return "[D]" denoting deadline
      */
     @Override
     public String getTypeLetter() {
@@ -35,7 +44,7 @@ public class Deadline extends Task {
 
     /**
      * Returns the print message of this deadline.
-     * Contains [D] + [done/undone notation] + message
+     * @return string of form: [D] + [done/undone notation] + message
      */
     @Override
     public String getPrintMessage() {
@@ -44,6 +53,7 @@ public class Deadline extends Task {
 
     /**
      * Returns the message of this deadline.
+     * @return message
      */
     @Override
     public String getStoreMessage() {

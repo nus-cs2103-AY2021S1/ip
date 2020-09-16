@@ -5,16 +5,16 @@ package duke;
  * a message and a status (whether it is done)
  */
 
-public class Task {
+public abstract class Task {
     private final String message;
     private boolean isDone;
 
-    Task(String message) {
+    Task(final String message) {
         this.message = message;
         this.isDone = false;
     }
 
-    Task(String message, boolean isDone) {
+    Task(final String message, final boolean isDone) {
         this.message = message;
         this.isDone = isDone;
     }
@@ -31,29 +31,21 @@ public class Task {
         return isDone ? 1 : 0;
     }
 
-    public String getPureTypeLetter() {
-        //dummy value
-        return "";
+    public String print() {
+        return getTypeLetter() + getStatusIcon() + getPrintMessage();
     }
 
     public void setDone() {
         this.isDone = true;
     }
 
-    public String getTypeLetter() {
-        // dummy value
-        return "";
-    }
+    public abstract String getPureTypeLetter();
 
-    public String getPrintMessage() {
-        return "";
-    }
+    public abstract String getTypeLetter();
 
-    public String getStoreMessage() {
-        return "";
-    }
+    public abstract String getPrintMessage();
 
-    public String print() {
-        return getTypeLetter() + getStatusIcon() + getPrintMessage();
-    }
+    public abstract String getStoreMessage();
+
+
 }

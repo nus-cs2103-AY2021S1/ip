@@ -12,13 +12,15 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
     // changed duke initialisation
-    final java.nio.file.Path path = java.nio.file.Paths.get(System.getProperty("user.home"), "ip","start.txt");
+    final java.nio.file.Path path = java.nio.file.Paths.get(
+            System.getProperty("user.home"), "ip","start.txt");
     private final Duke duke = new Duke(path);
 
     @Override
     public void start(Stage stage) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(
+                    Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
@@ -28,6 +30,4 @@ public class Main extends Application {
             e.printStackTrace();
         }
     }
-
-
 }
