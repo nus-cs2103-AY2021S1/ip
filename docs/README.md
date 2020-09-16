@@ -12,7 +12,7 @@ Luke is the **go-to desktop app for managing tasks, deadlines, and events**. Opt
     * Listing out current tasks : `list`
     * Finding specific tasks : `find`
 
-##Quick start
+## Quick start
 1. Ensure you have Java `11` or above installed in your Computer.
 
 2. Download the latest `luke.jar` from here.
