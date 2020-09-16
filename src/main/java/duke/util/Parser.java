@@ -22,7 +22,7 @@ public class Parser {
         try {
             return new SimpleDateFormat(strDate.length() > 11 ? formatWithMin : formatWithoutMin).parse(strDate);
         } catch (ParseException e) {
-            throw new DukeException("Sorry! Wrong time format!");
+            throw new DukeException(MagicStrings.ERROR_TIME_FORMAT_INCORRECT);
         }
     }
 
