@@ -65,14 +65,14 @@ public class Event extends Task {
         }
         Event event = new Event(description, by, tags);
         try {
-            LocalDate date = LocalDate.parse(changeDateFormat(command));
+            LocalDate date = LocalDate.parse(reverseDateFormatOrder(changeDateFormat(command)));
             event.setDate(date);
         } catch (Exception e) {
             //e.printStackTrace();
             System.out.println("Exception at Event first of method first catch block");
         }
         try {
-            LocalTime time = LocalTime.parse(getLocalTime(command));
+            LocalTime time = LocalTime.parse(insertSemicolon(getLocalTime(command)));
             event.setTime(time);
         } catch (Exception e) {
             //e.printStackTrace();

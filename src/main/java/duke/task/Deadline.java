@@ -65,14 +65,14 @@ public class Deadline extends Task {
         }
         Deadline deadline = new Deadline(description, by, tags);
         try {
-            LocalDate date = LocalDate.parse(changeDateFormat(command));
+            LocalDate date = LocalDate.parse(reverseDateFormatOrder(changeDateFormat(command)));
             deadline.setDate(date);
         } catch (Exception e) {
             //e.printStackTrace();
             System.out.println("Exception at Deadline first of method first catch block");
         }
         try {
-            LocalTime time = LocalTime.parse(getLocalTime(command));
+            LocalTime time = LocalTime.parse(insertSemicolon(getLocalTime(command)));
             deadline.setTime(time);
         } catch (Exception e) {
             //e.printStackTrace();

@@ -45,8 +45,10 @@ public class TaskList {
      * @throws IOException for reading file
      */
     public static ArrayList<Task> readTextFile2List(BufferedReader reader) throws IOException {
-        assert reader != null : "BufferedReader passed into readTextFile2List is null";
         ArrayList<Task> list = new ArrayList<>();
+        if (reader == null) {
+            return list;
+        }
         String line;
         while ((line = reader.readLine()) != null) {
             String[] part = line.split("\\|");

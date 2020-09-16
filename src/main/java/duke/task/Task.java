@@ -52,7 +52,7 @@ public class Task {
         if (end + 3 >= len) {
             end = len + 1;
         }
-        return input.substring(0, end - 1);
+        return input.substring(0, Math.max(0, end - 1));
     }
 
     /**
@@ -77,6 +77,44 @@ public class Task {
             return "";
         }
         return input.substring(start + 4, (input.charAt(end) != '#' ? end + 1 : end - 1));
+    }
+
+    /**
+     * Changes DD-MM-YYYY to YYYY-MM-DD
+     * @param input the input date
+     * @return date string in YYYY-MM-DD
+     */
+    public static String reverseDateFormatOrder(String input) {
+        if (input == null) {
+            return null;
+        }
+
+        String[] parts = input.split("-");
+        if (parts.length != 3) {
+            return null;
+        }
+        if (parts[0].length() == 4) {
+            return input;
+        } else if (parts[0].length() == 1) {
+            return parts[2] + "-" + parts[1] + "-0" + parts[0];
+        } else if (parts[0].length() == 2) {
+            return parts[2] + "-" + parts[1] + "-" + parts[0];
+        } else {
+            return input;
+        }
+    }
+
+    /**
+     * Inserts semi-colon in between hours and minutes
+     * @param input the input time
+     * @return the formatted time String
+     */
+    public static String insertSemicolon(String input) {
+        if (input.length() == 4) {
+            return input.substring(0, 2) + ":" + input.substring(2);
+        } else {
+            return input;
+        }
     }
 
     /**
