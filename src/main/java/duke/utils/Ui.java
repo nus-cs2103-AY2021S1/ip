@@ -133,21 +133,19 @@ public class Ui {
      * return helpMessage
      */
     public String helpMessage() {
-        String message = "Sample commands include: list This shows the list of things you have added\n"
+        String message = "list\n"
                 + "\n"
-                + "event <content> /at <time> This adds an event at the stipulated time\n"
+                + "event <content> /at <time> \n"
                 + "\n"
-                + "deadline <content> /by <time> This adds a deadline by the stipulated time\n"
+                + "deadline <content> /by <time> \n"
                 + "\n"
-                + "todo <content> This adds a todo to the bot\n"
+                + "todo <content>\n"
                 + "\n"
-                + "done <index> This marks the thing at index index as completed\n"
+                + "done <index>\n"
                 + "\n"
-                + "delete <index> This deletes the thing at index index\n"
+                + "delete <index>\n"
                 + "\n"
-                + "bye This closes the chatbot\n"
-                + "\n"
-                + "More to be expected...";
+                + "bye\n";
         return message;
     }
 
