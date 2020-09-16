@@ -28,12 +28,13 @@ public class TaskParser {
 
     /**
      * Throws an {@code Exception} specific to the {@code TaskType}.
+     *
      * @param taskType Task type of task.
      * @throws InvalidDeadlineException If deadline is not formatted correctly.
      * @throws InvalidEventException If Event is not formatted correctly.
      */
     private static void throwException(TaskType taskType) throws InvalidDeadlineException, InvalidEventException {
-        switch(taskType) {
+        switch (taskType) {
         case DEADLINE:
             throw new InvalidDeadlineException();
         case EVENT:
@@ -83,6 +84,7 @@ public class TaskParser {
 
     /**
      * Retrieves the task details of a task from a parsed String array.
+     *
      * @param arr Parsed String array.
      * @return Task details of task.
      */
