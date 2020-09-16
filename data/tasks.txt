@@ -1,1 +1,2 @@
-T|1|eat chicken|eat#nugget
+T|1|CS3243 tutorial|
+D|1|CS3244 project|2020-09-29|
