@@ -71,7 +71,7 @@ You can add 3 kinds of tasks:
     * Format: `event <task name> /at <date> <start time>-<end time>`
     * Format for `<date>`: DD/MM/YYYY
     * Format for `<start time>` and `<end time>`: HH:MM
-    * Note the `-` between the <start time> and <end time>        
+    * Note the `-` between the `<start time>` and `<end time>`        
 <img src="https://github.com/AaronnSeah/ip/blob/master/src/main/resources/images/event.png" width="400">
 <br><br>
 
