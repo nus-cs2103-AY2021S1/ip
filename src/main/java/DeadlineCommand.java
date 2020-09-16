@@ -9,7 +9,7 @@ public class DeadlineCommand extends Command {
     public String execute() {
         String result;
         try {
-            if(arguments == null || arguments == "") {
+            if(arguments == null || arguments.equals("")) {
                 throw new DukeIllegalArgumentException("", DukeException.DukeExceptionType.DEADLINE);
             }
             String[] deadlineArguments = Parser.splitDeadlineArguments(arguments);

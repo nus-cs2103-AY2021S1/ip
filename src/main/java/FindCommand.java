@@ -7,7 +7,7 @@ public class FindCommand extends Command {
     public String execute() {
         String result;
         try {
-            if(arguments == null || arguments == "") {
+            if(arguments == null || arguments.equals("")) {
                 throw new DukeIllegalArgumentException("", DukeException.DukeExceptionType.FIND);
             }
             String word = arguments;

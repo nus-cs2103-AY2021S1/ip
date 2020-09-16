@@ -7,7 +7,7 @@ public class DoneCommand extends Command {
     public String execute() {
         String result;
         try {
-            if(arguments == null || arguments == "") {
+            if(arguments == null || arguments.equals("")) {
                 throw new DukeIllegalArgumentException("", DukeException.DukeExceptionType.DONE);
             }
             int index = Integer.parseInt(arguments);
