@@ -1,6 +1,6 @@
 # User Guide
 
-![Grandma application](https://i.imgur.com/G2UjJNJ.png)
+![Grandma application](https://i.imgur.com/Ge20QYq.png)
 
 ## Features 
 
@@ -18,31 +18,31 @@ The grandma task mananger application caters to the younger generation using cru
 
     todo {description} #{tag} /by DDMMYY HHMM
 
->>**entries are case sensitive**
+>**entries are case sensitive**
 
 ### Adding "deadline" task - adds a task with deadline into grandma.
 
     deadline {description} #{tag} /by DDMMYY HHMM
 
->>**entries are case sensitive**
+>**entries are case sensitive**
 
 ### Adding "event" task - adds an event task into grandma.
 
     event {description} #{tag} /at DDMMYY HHMM
 
->>**entries are case sensitive**
+>**entries are case sensitive**
 
 ### Delete task - delete a task from grandma.
 
     delete {task number}
 
->>*task number can be viewed using list*
+>*task number can be viewed using list*
 
 ### Complete task - mark a task as complete in grandma.
 
     done {task number}
 
->>*task number can be viewed using list*
+>*task number can be viewed using list*
 
 ### List tasks - view the list of tasks in grandma.
 
@@ -52,7 +52,7 @@ The grandma task mananger application caters to the younger generation using cru
 
     find {keyword}
 
->>*the find function is case insensitive*
+>*the find function is case insensitive*
 
 ### Exit grandma - Save information and leave the application.
 
