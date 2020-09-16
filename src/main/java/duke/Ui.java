@@ -15,7 +15,7 @@ public class Ui {
      * Pops initial message and passes to Parser to interact with user.
      * @param lst the list to contain tasks
      */
-    public void run(final TaskList lst) {
+    public void run(TaskList lst) {
         // set up greetings and old list from file
         LocalDate today = LocalDate.now();
         String messageHello = Parser.format("Hello! I'm Duke - your personal "

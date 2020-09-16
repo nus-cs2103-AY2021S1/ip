@@ -10,7 +10,7 @@ public class Event extends Task {
      *  Initialises message.
      * @param message todo message
      */
-    Event(final String message) {
+    Event(String message) {
         super(message);
     }
 
@@ -19,7 +19,7 @@ public class Event extends Task {
      * @param message event message
      * @param isDone event task state
      */
-    Event(final String message, final boolean isDone) {
+    Event(String message, boolean isDone) {
         super(message, isDone);
     }
 

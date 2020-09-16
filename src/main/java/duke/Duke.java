@@ -19,7 +19,7 @@ public class Duke {
     /** Constructor with a valid file path.
      * @param filePath the file path
      */
-    public Duke(final Path filePath) {
+    public Duke(Path filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
     }
@@ -68,7 +68,7 @@ public class Duke {
      *  Executes duke bot with a given path.
      * @param args input string (not used)
      */
-    public static void main(final String[] args) throws Exception {
+    public static void main(String[] args) throws Exception {
         java.nio.file.Path path = java.nio.file.Paths.get(
                 System.getProperty("user.home"), "ip", "start.txt");
         new Duke(path).run();

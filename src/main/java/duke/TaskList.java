@@ -32,7 +32,7 @@ public class TaskList {
     }
 
     /** Sets number of done tasks as input i. */
-    public static void setNumberOfDoneTasks(final int i) {
+    public static void setNumberOfDoneTasks(int i) {
         numberOfDoneTasks = i;
     }
 
@@ -42,7 +42,7 @@ public class TaskList {
     }
 
     /** Sets last log in data as date. */
-    public static void setLastLoginDate(final LocalDate date) {
+    public static void setLastLoginDate(LocalDate date) {
         lastLoginDate = date;
     }
 

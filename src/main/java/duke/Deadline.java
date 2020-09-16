@@ -10,7 +10,7 @@ public class Deadline extends Task {
      *  Initialises message.
      *  @param message deadline message
      */
-    Deadline(final String message) {
+    Deadline(String message) {
         super(message);
     }
 
@@ -19,7 +19,7 @@ public class Deadline extends Task {
      *  @param message deadline message
      *  @param isDone status of deadline task
      */
-    Deadline(final String message, final boolean isDone) {
+    Deadline(String message, boolean isDone) {
         super(message, isDone);
     }
 

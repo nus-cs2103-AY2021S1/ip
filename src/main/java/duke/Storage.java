@@ -14,9 +14,8 @@ import java.util.Scanner;
  * the file and saving tasks in the file.
  */
 public class Storage {
-    @SuppressWarnings({"checkstyle:JavadocVariable", "CheckStyle"})
-    private final File file;
-    Storage(final Path path) {
+    private File file;
+    Storage(Path path) {
         this.file = new File(path.toString());
     }
 
@@ -24,7 +23,7 @@ public class Storage {
      * Writes content of saved file to task list (and store extra information).
      * @param lst the task list to be written to
      */
-    public void writeToList(final TaskList lst)
+    public void writeToList(TaskList lst)
             throws IllegalTaskTypeException {
         try {
             Scanner scanner = new Scanner(file);
@@ -50,7 +49,7 @@ public class Storage {
      * Writes content of task list to saved file (and store extra information).
      * @param lst the task list to be written from
      */
-    public void writeToFile(final TaskList lst) throws IOException {
+    public void writeToFile(TaskList lst) throws IOException {
         FileWriter fileWriter = new FileWriter(file);
         String content;
         fileWriter.write(TaskList.getNumberOfDoneTasks() + "\n");

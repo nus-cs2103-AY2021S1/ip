@@ -9,12 +9,12 @@ public abstract class Task {
     private final String message;
     private boolean isDone;
 
-    Task(final String message) {
+    Task(String message) {
         this.message = message;
         this.isDone = false;
     }
 
-    Task(final String message, final boolean isDone) {
+    Task(String message, boolean isDone) {
         this.message = message;
         this.isDone = isDone;
     }

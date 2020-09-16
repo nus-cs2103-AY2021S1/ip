@@ -2,6 +2,7 @@ package duke;
 
 import duke_exceptions.*;
 
+@SuppressWarnings({"ALL", "CheckStyle"})
 public class Parser {
     // constant SPACE and LINE for format purposes
     private static final String SPACE = "     ";
@@ -16,22 +17,19 @@ public class Parser {
      * @param input string to be formatted
      * @return formatted string
      */
-    public static String format(final String input) {
+    public static String format(String input) {
         return SPACE + LINE + INDENT + input + "\n" + SPACE + LINE;
     }
 
     // command split indicators
-    @SuppressWarnings("checkstyle:MemberName")
     private final int PRIOR = 0;
-    @SuppressWarnings("checkstyle:MemberName")
     private final int EXTRA = 1;
 
     // current command: the whole line
     private final String command;
 
     /**
-     * Constructor of Parser
-     *
+     * Constructor of Parser.
      * @param command current command
      */
     Parser(String command) {

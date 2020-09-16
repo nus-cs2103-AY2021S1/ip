@@ -10,7 +10,6 @@ import java.time.format.DateTimeFormatter;
  */
 
 public final class Converter {
-    private Converter() { }
     /**
      * Returns a formatted string transforming from "/at" to ":(at)".
      * Assume the input string must contain "/at"
@@ -18,7 +17,7 @@ public final class Converter {
      * @param s input string
      * @return a formatted string
      */
-    static String at(final String s) {
+    static String at(String s) {
         String first = s.split("/at ")[0];
         String second = s.split("/at ")[1];
         LocalDate date = LocalDate.parse(second);
@@ -33,7 +32,7 @@ public final class Converter {
      * @param s input string
      * @return a formatted string
      */
-    public static String by(final String s) {
+    public static String by(String s) {
         String first = s.split("/by ")[0];
         String second = s.split("/by ")[1];
         LocalDate date = LocalDate.parse(second);
@@ -48,7 +47,7 @@ public final class Converter {
      * @return a Task object
      * @throws IllegalArgumentException  if cannot detect task type correctly
      */
-    static Task add(final String s) throws IllegalTaskTypeException {
+    static Task add(String s) throws IllegalTaskTypeException {
         String taskType = s.split(" ; ")[0];
         String isDone = s.split(" ; ")[1];
         String message = s.split(" ; ")[2];
@@ -72,7 +71,7 @@ public final class Converter {
      *           here, we assume the input number is correct
      * @return boolean status
      */
-    static boolean getStatus(final int i) {
+    static boolean getStatus(int i) {
         return i != 0;
     }
 }

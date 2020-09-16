@@ -10,7 +10,7 @@ public class Todo extends Task {
      *  Initialises message.
      * @param message todo message
      */
-    public Todo(final String message) {
+    public Todo(String message) {
         super(message);
     }
 
@@ -19,7 +19,7 @@ public class Todo extends Task {
      * @param message todo message
      * @param isDone todo task state
      */
-    Todo(final String message, final boolean isDone) {
+    Todo(String message, boolean isDone) {
         super(message, isDone);
     }
 
