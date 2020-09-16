@@ -12,7 +12,7 @@ import duke.DukeException;
 public class Deadline extends Task{
     private char type = 'D';
     private LocalDate date;
-    private final String BY = "best consumed by: ";
+    private final String BY = "to be digested by: ";
 
     /**
      * Creates a Deadline instance.

@@ -49,7 +49,8 @@ public class Ui {
      */
     public String showWelcome() {
 
-        return "Hello I am " + NAME + "\n" + LOGO + "\n" + "Feed me some stuff! :3";
+        return "Hello I am " + NAME + "\n" + LOGO + "\n" + "Feed me some stuff! :3\n"
+                + "If you are unsure where to start, type help to see all the available commands! :D";
     }
 
     /**

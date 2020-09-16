@@ -6,6 +6,7 @@ import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
+import duke.command.HelpCommand;
 import duke.command.ListCommand;
 import duke.command.OwoCommand;
 import duke.command.StatsCommand;
@@ -31,7 +32,8 @@ public class Parser {
         String[] splitCommand = userInput.split(" ", 2);
         String commandWord = splitCommand[0];
         switch (commandWord) {
-
+        case HelpCommand.COMMAND_WORD:
+            return new HelpCommand();
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
         case OwoCommand.COMMAND_WORD:

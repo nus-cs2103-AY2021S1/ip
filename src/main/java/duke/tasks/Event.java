@@ -12,7 +12,7 @@ import duke.DukeException;
 public class Event extends Task {
     private char type = 'E';
     private LocalDate date;
-    private final String AT = "bought at: ";
+    private final String AT = "to be digested at: ";
 
     /**
      * Creates an Event instance.
