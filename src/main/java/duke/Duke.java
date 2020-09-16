@@ -31,10 +31,10 @@ public class Duke {
     public String getResponse(String input) {
         // If a command has not been set yet or if the ongoing command has been completed
         if (cmd == null || cmd.isDone()) {
-            Command cmd = commandHandler.parseCommand(input);
-            cmd.init(taskManager, ui);
-            setCommand(cmd);
-            return cmd.toString();
+            Command newCmd = commandHandler.parseCommand(input);
+            newCmd.init(taskManager, ui);
+            setCommand(newCmd);
+            return newCmd.toString();
         } else {
             try {
                 cmd.execute(input);
