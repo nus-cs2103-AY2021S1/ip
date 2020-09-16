@@ -30,6 +30,7 @@ public abstract class Command {
      * @param tm TaskManager that handles tasks in memory.
      * @param ui User interface that interacts with the user.
      * @param storage Storage class that handles saving and loading from file.
+     * @return Response generated after command is executed.
      * @throws DukeException If command is not properly formatted.
      */
     public abstract String execute(TaskManager tm, Ui ui, Storage storage) throws DukeException;

@@ -28,6 +28,7 @@ public class FindCommand extends Command {
      * @param tm TaskManager that handles tasks in memory.
      * @param ui User interface that interacts with the user.
      * @param storage Storage class that handles saving and loading from file.
+     * @return Matching tasks if any, 'not found' message if none.
      * @throws DukeException If search term is not provided.
      */
     @Override

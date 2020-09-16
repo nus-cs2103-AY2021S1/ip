@@ -26,6 +26,7 @@ public class DoneCommand extends Command {
      * @param tm TaskManager that handles tasks in memory.
      * @param ui User interface that interacts with the user.
      * @param storage Storage class that handles saving and loading from file.
+     * @return Confirmation of task marked as done.
      * @throws DukeException If command is not properly formatted.
      */
     @Override

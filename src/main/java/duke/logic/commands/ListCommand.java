@@ -28,6 +28,7 @@ public class ListCommand extends Command {
      * @param tm TaskManager that handles tasks in memory.
      * @param ui User interface that interacts with the user.
      * @param storage Storage class that handles saving and loading from file.
+     * @return List of tasks if any, 'empty list' message if none.
      * @throws DukeException If command is not properly formatted.
      */
     @Override

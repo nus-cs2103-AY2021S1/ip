@@ -19,6 +19,9 @@ public class Duke {
     private TaskManager tm;
     private Ui ui;
 
+    // Current exit status. Acts as exit signal for MainWindow.
+    private boolean isExit;
+
     /**
      * Constructor for Duke class.
      * Initiates the User Interface and tries to load save file from disk.
@@ -32,6 +35,7 @@ public class Duke {
             ui.showLoadingError();
             tm = new TaskManager();
         }
+        isExit = false;
     }
 
     /**
@@ -43,9 +47,29 @@ public class Duke {
     public String getResponse(String input) {
         try {
             Command c = CommandParser.parse(input);
+            isExit = c.isExit();
             return c.execute(tm, ui, storage);
         } catch (DukeException e) {
             return e.getMessage();
         }
+    }
+
+    /**
+     * Returns the current exit status.
+     * Acts as a exit signal for MainWindow.
+     *
+     * @return Current isExit value.
+     */
+    public boolean getExitStatus() {
+        return isExit;
+    }
+
+    /**
+     * Passes Welcome message from Ui class to MainWindow.
+     *
+     * @return Welcome message.
+     */
+    public String getWelcomeMessage() {
+        return ui.showWelcome();
     }
 }

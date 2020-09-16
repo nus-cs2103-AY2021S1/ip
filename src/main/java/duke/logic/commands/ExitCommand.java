@@ -1,11 +1,7 @@
 package duke.logic.commands;
 
-import java.io.IOException;
-import java.util.ArrayList;
-
 import duke.exceptions.DukeException;
 import duke.model.TaskManager;
-import duke.model.task.Task;
 import duke.storage.Storage;
 import duke.ui.Ui;
 
@@ -29,6 +25,7 @@ public class ExitCommand extends Command {
      * @param tm TaskManager that handles tasks in memory.
      * @param ui User interface that interacts with the user.
      * @param storage Storage class that handles saving and loading from file.
+     * @return Goodbye message.
      * @throws DukeException If command is not properly formatted.
      */
     @Override

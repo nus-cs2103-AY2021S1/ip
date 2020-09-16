@@ -1,7 +1,6 @@
 package duke.ui;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import duke.model.task.Task;
 
@@ -41,17 +40,9 @@ public class Ui {
     }
 
     /**
-     * Prints error message from an Exception.
-     * @param e Exception to be printed.
-     */
-    public void showError(Exception e) {
-        System.out.println(e.getMessage());
-    }
-
-    /**
      * Prints error message from failing to load save file.
      */
     public void showLoadingError() {
-        System.out.println("Failed to load from file. Initiating new instance.");
+        System.out.println("Unable to load or find save file. Initiating new instance.");
     }
 }
