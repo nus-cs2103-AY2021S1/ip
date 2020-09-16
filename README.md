@@ -37,7 +37,7 @@ Users can dictate the size of duke!
 
 ## Download Link
 
-Download the JAR file [here!](https://github.com/seanjyjy/ip/releases) You can launch the app by either clicking on the jar file or `java -jar Duke-0.1.4.jar` in the path where you have the jar file.
+Download the JAR file [here!](https://github.com/seanjyjy/ip/releases/tag/A-Release) You can launch the app by either clicking on the jar file or `java -jar Duke-0.1.4.jar` in the path where you have the jar file.
 
 ## Setting up in Intellij
 
