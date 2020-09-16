@@ -1,26 +1,73 @@
-# Duke project template
+# Duke - User Guide
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+Duke is a slick chatbot that helps you **manage your tasks and events efficiently**.
 
-## Setting up in Intellij
+## Commands
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+Duke makes use of a **Command Line Interface (CLI)**, which makes it suitable for users who are able to type fast.
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project dialog first)
-1. Set up the correct JDK version, as follows:
-   1. Click `Configure` > `Structure for New Projects` and then `Project Settings` > `Project` > `Project SDK`
-   1. If JDK 11 is listed in the drop down, select it. If it is not, click `New...` and select the directory where you installed JDK 11
-   1. Click `OK`
-1. Import the project into Intellij as follows:
-   1. Click `Open or Import`.
-   1. Select the project directory, and click `OK`
-   1. If there are any further prompts, accept the defaults.
-1. After the importing is complete, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()`. If the setup is correct, you should see something like the below:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+The following are possible commands that you can make with Duke.
+
+### Add Tasks
+
+Duke recognises three types of tasks, which are named '**Todo**', '**Deadline**' and '**Event**' respectively.
+
+#### Adding a 'Todo'
+
+A '**Todo**' is a simple task that is not associated with any deadline or time of occurence.
+
+Format | Example
+------------ | -------------
+`todo <task description>` | `todo Learn Java Programming`
+
+#### Adding a 'Deadline'
+
+A '**Deadline**' is a task that has a deadline associated with it.
+
+Format | Example
+------------ | -------------
+`deadline <task description> /by DD-MM-YYYY HHMM` | `deadline CS2103 Individual Project /by 18-09-2020 1200`
+
+#### Adding an 'Event'
+
+An '**Event**' is a task that has a time of occurrence associated with it.
+
+Format | Example
+------------ | -------------
+`event <task description> /at DD-MM-YYYY HHMM` | `event LeetCode and Chill Session /at 21-09-2020 2100`
+
+### Display List of Tasks
+
+To display the list of tasks that is stored in Duke, simply enter the command '`list`'.
+
+### Mark Tasks as Done
+
+The following allows you to mark a particular task in the task list as Done.
+
+Format | Example
+------------ | -------------
+`done <task number>` | `done 1`
+
+### Delete Tasks
+
+The following allows you to delete a particular task in the task list.
+
+Format | Example
+------------ | -------------
+`delete <task number>` | `done 2`
+
+### Find Tasks by Keyword
+
+The following allows you to find a particular task whose description matches your search query.
+
+Format | Example
+------------ | -------------
+`find <search query>` | `find LeetCode and Chill`
+
+### Sort Tasks in Alphabetical Order
+
+To sort the list of tasks in alphabetical order, simply enter the command '`sort`'.
+
+### Exit Chatbot
+
+To exit the Duke chatbot, simply enter the command '`bye`'.
