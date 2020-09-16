@@ -159,7 +159,7 @@ Example:
 
 Exits the program.
 
-> ℹ️The application closes **3 seconds** after the command is called.
+> ℹ️ The application closes **3 seconds** after the command is called.
 
 Format: `bye`
 
