@@ -14,6 +14,8 @@ Example of usage:
 `help`
 
 Expected outcome:
+
+
 ![help](./help.png)
 
 ---
