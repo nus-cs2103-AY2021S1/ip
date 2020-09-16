@@ -31,18 +31,19 @@ public class EventTest {
     @Test
     void stringConversion_onSameDate() throws DukeException {
         Event event = new Event("Test", "01/01/2020 0700-1400");
-        assertEquals("[E][✘] Test (at: Wed, 1 January 2020, 7:00am - 2:00pm)", event.toString());
+        assertEquals("[E][✘][4] Test (at: Wed, 1 January 2020, 7:00AM - 2:00PM)", event.toString());
     }
 
     @Test
     void stringConversion_onDifferentDate() throws DukeException {
         Event event = new Event("Test", "01/01/2020-02/01/2020 0700-1400");
-        assertEquals("[E][✘] Test (at: Wed, 1 January 2020 - Thu, 2 January 2020, 7:00am - 2:00pm)", event.toString());
+        assertEquals("[E][✘][4] Test (at: Wed, 1 January 2020 - Thu, 2 January 2020, 7:00AM - 2:00PM)",
+                event.toString());
     }
 
     @Test
     void serializeTest() throws DukeException {
         Event event = new Event("Test", "01/01/2020-02/01/2020 0700-1400");
-        assertEquals("E | 0 | Test | 01/01/2020-02/01/2020 0700-1400", event.serialize());
+        assertEquals("E | 0 | 4 | Test | 01/01/2020-02/01/2020 0700-1400", event.serialize());
     }
 }

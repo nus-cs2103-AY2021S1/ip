@@ -32,7 +32,7 @@ public class TaskListTest {
     @Test
     void getTaskId_validTaskId() throws DukeException {
         addTask();
-        assertEquals("[✘] Test", taskList.get(1).toString());
+        assertEquals("[✘][4] Test", taskList.get(1).toString());
     }
 
     @Test

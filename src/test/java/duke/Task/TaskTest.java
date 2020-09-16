@@ -24,7 +24,7 @@ public class TaskTest {
 
     @Test
     void stringConversion() {
-        assertEquals("[✘] Test", task.toString());
+        assertEquals("[✘][4] Test", task.toString());
     }
 
     @Test

@@ -9,12 +9,12 @@ public class ToDoTest {
     @Test
     void stringConversion() {
         ToDo todo = new ToDo("Test");
-        assertEquals("[T][✘] Test", todo.toString());
+        assertEquals("[T][✘][4] Test", todo.toString());
     }
 
     @Test
     void serializeTest() {
         ToDo todo = new ToDo("Test");
-        assertEquals("T | 0 | Test", todo.serialize());
+        assertEquals("T | 0 | 4 | Test", todo.serialize());
     }
 }
