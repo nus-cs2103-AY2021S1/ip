@@ -161,7 +161,7 @@ public class Duke {
 
         //When command does not match any of those above
         default:
-            throw new DukeException(ui.showError("OOPS!!! I don't know what does it mean by: \"" + input + "\""));
+            throw new DukeException(ui.showError("ARRRRRRR!!!!! I don't know what \"" + input + "\" means"));
         }
         assert !response.equals("") : "Error, none of the case catch the command";
         return response;

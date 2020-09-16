@@ -62,7 +62,7 @@ public class Ui {
      * @param err Error Message to print out.
      */
     public String showError(String err) {
-        String line = "*******************************************************";
+        String line = "************************************************************";
         return String.format("%s\n%s\n%s", line, err, line);
     }
 
