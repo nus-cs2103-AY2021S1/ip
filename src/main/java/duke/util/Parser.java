@@ -132,11 +132,11 @@ public class Parser {
                 throw new DukeException("Did you include /by?");
             } else if (indexOfBy == 1) {
                 throw new DukeException("Did you include a description?");
-            } else {
-                String description = generateStringFromArray(inputInformation, 1, indexOfBy);
-                String by = generateStringFromArray(inputInformation, indexOfBy + 1, inputInformation.length);
-                return new AddCommand(CommandType.DEADLINE, description, by);
             }
+            String description = generateStringFromArray(inputInformation, 1, indexOfBy);
+            String by = generateStringFromArray(inputInformation, indexOfBy + 1, inputInformation.length);
+            return new AddCommand(CommandType.DEADLINE, description, by);
+
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Your deadline description or deadline can't be empty...");
         }
@@ -156,11 +156,10 @@ public class Parser {
                 throw new DukeException("Did you include /at?");
             } else if (indexOfAt == 1) {
                 throw new DukeException("Did you include a description?");
-            } else {
-                String description = generateStringFromArray(inputInformation, 1, indexOfAt);
-                String at = generateStringFromArray(inputInformation, indexOfAt + 1, inputInformation.length);
-                return new AddCommand(CommandType.EVENT, description, at);
             }
+            String description = generateStringFromArray(inputInformation, 1, indexOfAt);
+            String at = generateStringFromArray(inputInformation, indexOfAt + 1, inputInformation.length);
+            return new AddCommand(CommandType.EVENT, description, at);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Your event description or event period can't be empty...");
         }
