@@ -15,6 +15,10 @@ import java.util.Collections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.image.Image;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.Background;
+import javafx.scene.paint.Color;
+import javafx.scene.layout.CornerRadii;
 
 /**
  * Creates user and Duke dialog boxes in GUI.
@@ -66,7 +70,13 @@ public class DialogBox extends HBox {
      * @return User's DialogBox with specified text and image.
      */
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        var db = new DialogBox(text, img);
+        Insets insets = new Insets(0,0,0,0);
+        BackgroundFill backgroundFill = new BackgroundFill(Color.web("#BFC8D7"),
+                new CornerRadii(30), new Insets(6, 2, 5, 6));
+        Background background = new Background(backgroundFill);
+        db.setBackground(background);
+        return db;
     }
 
     /**
@@ -79,6 +89,10 @@ public class DialogBox extends HBox {
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
+        BackgroundFill backgroundFill = new BackgroundFill(Color.web("#E2D2D2"),
+                new CornerRadii(30), new Insets(6, 2, 5, 6));
+        Background background = new Background(backgroundFill);
+        db.setBackground(background);
         return db;
     }
 }
