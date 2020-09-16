@@ -2,7 +2,6 @@ package duke.command;
 
 import duke.exception.DukeException;
 import duke.main.Directory;
-import duke.main.Statement;
 import duke.storage.DukeFileEditor;
 import duke.task.Task;
 import duke.tools.Format;
