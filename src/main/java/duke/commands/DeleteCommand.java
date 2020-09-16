@@ -32,13 +32,20 @@ public class DeleteCommand extends Command {
 
     /**
      * Sets the utility tools <code>tm</code> and <code>ui</code>.
-     * In addition, it sets the initial response to ask for the task number to be deleted.
+     * Checks if there are any tasks in the task manager. If there are tasks, this will set the response to ask
+     * for a task number to delete.
+     * If not, then the command will be set as done and set a response indicating that there are no tasks to delete.
      * @param tm the task manager.
      * @param ui the ui.
      */
     @Override
     public void init(TaskManager tm, Ui ui) {
         setUtility(tm, ui);
-        setResponse(ui.askTaskNumToDelete());
+        if (tm.isEmpty()) {
+            setDone();
+            setResponse("The task list is empty.");
+        } else {
+            setResponse(ui.askTaskNumToDelete());
+        }
     }
 }
