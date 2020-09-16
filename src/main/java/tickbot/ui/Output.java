@@ -15,7 +15,7 @@ public class Output {
     private static Map<String, String> usages = new HashMap<>() {
         private static final long serialVersionUID = 1L;
         {
-            put("help", "help <command>");
+            put("help", "help [<command>]");
             put("bye", "bye");
             put("done", "done <index>");
             put("delete", "delete <index>");
