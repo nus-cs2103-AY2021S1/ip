@@ -137,9 +137,12 @@ Format: `[clear]`
 
 &nbsp;
 
-### `find` - find the tasks containing keywords from the user
+### `find` - find the tasks containing each or all keywords from the user
 
 Format: `[find] <space> <keywords>`
+
+Example:
+* `find tutorial lesson` finds tasks that contains `tutorial` or `lesson` or `tutorial lesson`.
 
 ![findImage](./image/find.png)
 
@@ -150,9 +153,11 @@ Format: `[find] <space> <keywords>`
 Format: `[update] <space> <index> <space> <detail/time> <space> </to> <content>`
 
 Example: 
-* `update 4 time /to 2359` update the time of the 4th task in the list to 2359 of the present day
+* `update 2 detail to CS2103T lesson` update the detail of the 2nd task to `CS2103T lesson`. 
+* `update 3 time /to 1600` update the time of the 3rd task to `2359` of the present day.
 
-![updateImage](./image/update.png)
+![updateDetailImage](./image/update_detail.png)
+![updateTimeImage](./image/update_time.png)
 
 &nbsp;
 

@@ -24,15 +24,6 @@ public class Format<T> {
     }
 
     /**
-     * Returns the content in the Format object.
-     *
-     * @return content.
-     */
-    public T getContent() {
-        return this.content;
-    }
-
-    /**
      * Returns a string whose content has been
      * shortened by eliminating the extra spaces at the
      * beginning of the content and at the end of the content.
@@ -70,7 +61,7 @@ public class Format<T> {
      *         is equal to the content.
      */
     public static Task decodeTask(String input) {
-        String[] inputArray = input.split(FormatString.SPACE.toString());
+        String[] inputArray = input.split(" ");
         char typeOfTask = inputArray[0].charAt(1);
         boolean isDone = false;
 
@@ -79,19 +70,27 @@ public class Format<T> {
         }
 
         Task task;
+        StringBuilder details = new StringBuilder(inputArray[1]);
+        int lenOfArray = inputArray.length;
 
         if (typeOfTask == 'T') {
-            task = new Todo(inputArray[1]);
+            for (int i = 2; i < lenOfArray; i++) {
+                details.append(" ").append(inputArray[i]);
+            }
+            task = new Todo(details.toString());
         } else {
-            int lenOfArray = inputArray.length;
             int lenOfLastInArray = inputArray[lenOfArray - 1].length();
             String time = inputArray[lenOfArray - 1]
                     .substring(0, lenOfLastInArray - 1)
                     .substring(0, lenOfLastInArray - 1);
+
+            for (int i = 2; i < lenOfArray - 2; i++) {
+                details.append(" ").append(inputArray[i]);
+            }
             if (typeOfTask == 'D') {
-                task = new Deadline(inputArray[1], time);
+                task = new Deadline(details.toString(), time);
             } else {
-                task = new Event(inputArray[1], time);
+                task = new Event(details.toString(), time);
             }
         }
 
@@ -100,6 +99,19 @@ public class Format<T> {
         }
 
         return task;
+    }
+
+    /**
+     * Returns a string with update statement.
+     * Especially designed for <code>UpdateCommand</code>
+     *
+     * @return a string with update statement.
+     */
+    public String updateFormat() {
+        return Statement.UPDATE.toString()
+                + content
+                + FormatString.NEXT_LINE.toString()
+                + String.format(Statement.REPORT.toString(), Parser.getTaskList().getTaskList().size());
     }
 
     @Override

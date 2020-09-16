@@ -33,8 +33,6 @@ public class UpdateCommand implements Command {
     public Response process() throws DukeException {
         DukeFileEditor editor = new DukeFileEditor(Directory.FILEDIRECTORY);
         Task task = editor.update(lineNum, detailOrTime, input);
-        return new Response(
-                new Format<>(Statement.UPDATE.toString() + task).toString()
-        );
+        return new Response(new Format<>(task).updateFormat());
     }
 }

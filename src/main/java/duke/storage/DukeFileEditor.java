@@ -86,10 +86,13 @@ public class DukeFileEditor extends DukeFile {
         StringBuilder editedTask = new StringBuilder(requiredTask[0] + " ");
 
         if (command.equals(CommandString.UPDATE_DETAIL)) {
-            if (requiredTask[0].equals("T")) {
+            if (requiredTask[0].substring(1, 2).equals("T")) {
                 editedTask.append(input);
             } else {
-                editedTask.append(input).append(" ").append(requiredTask[len - 2]).append(requiredTask[len - 1]);
+                editedTask.append(input).append(" ")
+                        .append(requiredTask[len - 2])
+                        .append(" ")
+                        .append(requiredTask[len - 1]);
             }
         } else if (command.equals(CommandString.UPDATE_TIME)) {
             for (int i = 1; i < len - 1; i++) {
@@ -104,6 +107,7 @@ public class DukeFileEditor extends DukeFile {
         assert editedTask != null : "command is neither time or detail";
 
         taskStrings.add(lineNum - 1, editedTask.toString());
+        write(new ArrayList<>());
         write(taskStrings);
         return Format.decodeTask(editedTask.toString());
     }

@@ -209,6 +209,10 @@ public class Parser {
                 return new DukeException(Exceptions.NUMBEREXCESSEXCEPTION);
             }
 
+            if (!command.equals(CommandString.UPDATE_DETAIL) && !command.equals(CommandString.UPDATE_TIME)) {
+                return new DukeException(Exceptions.UPDATEFORMATEXCEPTION);
+            }
+
             return new UpdateCommand(index, command, taskToUpdate);
         } catch (NumberFormatException e) {
             return new DukeException(Exceptions.NUMBERFORMATEXCEPTION);
