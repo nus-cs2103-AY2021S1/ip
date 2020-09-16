@@ -1,6 +1,5 @@
 package duke;
 
-import java.util.Scanner;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -29,111 +28,15 @@ public class Duke extends Application {
     private final Image user = new Image(this.getClass().getResourceAsStream("/images/doge.jpg"));
     private final Image duke = new Image(this.getClass().getResourceAsStream("/images/catie.jpg"));
 
-    public Duke(String filePath) {
-        ui = new Ui();
-        parser = new Parser();
-        storage = new Storage(filePath);
-        list = new TaskList(storage.load());
-    }
-
     public Duke() {
         ui = new Ui();
         parser = new Parser();
         storage = new Storage("data/Duke.txt");
         list = new TaskList(storage.load());
     }
-    
-    /**
-     * Runs the Duke in the terminal.
-     */
-    protected void run() {
-        Scanner sc = new Scanner(System.in);
-        Instruction thisInstruction;
-        Deadline thisDeadline;
-        String thisTaskname;
-        String thisTime;
-        String keyword;
-        Task thisTask;
-        String input;
-        int number;
-        
-        ui.greet();
-        input = sc.nextLine();
-        
-        while(!input.equals("bye")) {
-            System.out.println("    -x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-");
-            thisInstruction = parser.load(input);
-            try {
-                if (thisInstruction == Instruction.LIST) {
-                    ui.printList(list.getList());
-                } else if (thisInstruction == Instruction.DONE) {
-                    number = Character.getNumericValue(input.charAt(input.length() - 1));
-                    thisTask = list.get(number - 1);
-                    thisTask.markAsDone();
-                    list.set(number - 1, thisTask);
-                    ui.markAsDone(thisTask);
-                    storage.updateList(list.getList());
-                } else if (thisInstruction == Instruction.DELETE) {
-                    number = Character.getNumericValue(input.charAt(input.length() - 1));
-                    thisTask = list.get(number - 1);
-                    list.remove(number - 1);
-                    ui.deletedTask(thisTask, list.getList());
-                    storage.updateList(list.getList());
-                } else if (thisInstruction == Instruction.FIND) {
-                    keyword = input.substring(5);
-                    ui.printFoundTask(keyword, list.getList());
-                } else {
-                    if (thisInstruction == Instruction.DEADLINE) {
-                        if (input.length() < 10) {
-                            throw new DukeException("     The taskname of a deadline cannot be empty.");
-                        }
-                        ui.printSuccess();
-                        thisTaskname = input.substring(9, input.indexOf('/') - 1);
-                        thisTime = input.substring(input.indexOf('/') + 4);
-                        thisDeadline = new Deadline(thisTaskname, false, thisTime);
-                        thisDeadline.updateDateTime();
-                        list.add(thisDeadline);
-                    } else if (thisInstruction == Instruction.EVENT) {
-                        if (input.length() < 7) {
-                            throw new DukeException("     The taskname of a event cannot be empty.");
-                        }
-                        ui.printSuccess();
-                        thisTaskname = input.substring(6, input.indexOf('/') - 1);
-                        thisTime = input.substring(input.indexOf('/') + 4);
-                        list.add(new Event(thisTaskname, false, thisTime));
-                    } else if (thisInstruction == Instruction.TODO) {
-                        if (input.length() < 6) {
-                            throw new DukeException("     The taskname of a todo cannot be empty.");
-                        }
-                        ui.printSuccess();
-                        thisTaskname = input.substring(5);
-                        list.add(new Todo(thisTaskname, false));
-                    } else {
-                        throw new DukeException("     I'm sorry, but I don't know what that means :-(");
-                    }
-                    storage.updateList(list.getList());
-                    ui.updatedTask(list.getList());
-                }
-            } catch (DukeException ex) {
-                ui.printError(ex);
-            }
-            ui.printLine();
-            input = sc.nextLine();
-        }
-        ui.bye();
-    }
-
-    /**
-     * Starts the running process of the Duke in the terminal.
-     */
-    public static void main(String[] args) {
-        new Duke("data/Duke.txt").run();
-    }
 
     @Override
     public void start(Stage stage) {
-        //Step 1. Setting up required components
-
         //The container for the content of the chat to scroll.
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
@@ -149,8 +52,7 @@ public class Duke extends Application {
 
         stage.setScene(scene);
         stage.show();
-
-        //Step 2. Formatting the window to look as expected
+        
         stage.setTitle("Duke");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
@@ -178,8 +80,7 @@ public class Duke extends Application {
 
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
-
-        //Step 3. Add functionality to handle user input.
+        
         sendButton.setOnMouseClicked((event) -> handleUserInput());
 
         userInput.setOnAction((event) -> handleUserInput());
