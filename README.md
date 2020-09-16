@@ -18,7 +18,7 @@ Below are instructions on how to use _KING BOB_.
   - find
   - bye  
   
- ## Features
+## Features
   
 ### `todo` - Add a new Todo task
 This command adds a new Todo task to the user's list of tasks.
