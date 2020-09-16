@@ -1,6 +1,6 @@
 # User Guide
 
-<img src="Ui.png" alt="Duke Showcase" width="450" height="500"/>
+<img src="Ui.png" alt="Duke Showcase" width="450" height="600"/>
 
 Poring the Chatbot is a Maplestory and Ragnarok inspired Personal Assistant Chatbot. Poring assists you by storing and 
 tracking your to-dos, deadlines and events.
@@ -67,7 +67,7 @@ Example:
 * `todo Nap`
 
 Expected outcome:
-<img src="todo.png" alt="Help Command" width="600" height="400"/>
+<img src="todo.PNG" alt="Help Command" width="600" height="400"/>
     
     
 Add a deadline: `deadline`
@@ -82,7 +82,7 @@ Example:
 * `deadline Watch Lecture /by 2020-10-02`
 
 Expected outcome:
-<img src="deadline.png" alt="Help Command" width="600" height="400"/>
+<img src="deadline.PNG" alt="Help Command" width="600" height="400"/>
     
     
 Add a event: `event`
@@ -96,7 +96,7 @@ Example:
 * `event Follow Up With Lecturer /at afternoon-ish`
 
 Expected outcome:
-<img src="event.png" alt="Help Command" width="600" height="400"/>
+<img src="event.PNG" alt="Help Command" width="600" height="400"/>
 
 List all tasks: `list`
 
@@ -122,7 +122,7 @@ Example:
 * `done 20`
 
 Expected outcome:
-<img src="done.png" alt="done Command" width="600" height="400"/>
+<img src="done.PNG" alt="done Command" width="600" height="400"/>
 
 Delete a task: `delete`
 - Deletes the task regardless of completion status
@@ -134,7 +134,7 @@ Example:
 * `delete 20`
 
 Expected outcome:
-<img src="delete.png" alt="delete Command" width="600" height="400"/>
+<img src="delete.PNG" alt="delete Command" width="600" height="400"/>
 
 Find a task: `find`
 - Searches the recorded tasks using the specified description and returns the details of the found task
@@ -146,7 +146,7 @@ Example:
 * `find Happy`
 
 Expected outcome:
-<img src="find.png" alt="find Command" width="600" height="400"/>
+<img src="find.PNG" alt="find Command" width="600" height="400"/>
 
 Tag a task: `tag`
 - Tags the task with a specified description
@@ -159,7 +159,7 @@ Example:
 * `tag 2 Urgent`
 
 Expected outcome:
-<img src="tag.png" alt="tag Command" width="600" height="400"/>
+<img src="tag.PNG" alt="tag Command" width="600" height="400"/>
 
 Exiting the program: `exit`
 - Closes the program
