@@ -18,7 +18,7 @@
                 <VBox fx:id="dialogContainer" prefWidth="388.0">
                     <VBox prefWidth="300.0">
                         <padding>
-                            <Insets bottom="0" left="55" right="50" top="15.0" />
+                            <Insets bottom="0" left="63" right="50" top="15.0" />
                         </padding>
                         <Label fx:id="welcomeMessage" wrapText="true"/>
                     </VBox>
