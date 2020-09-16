@@ -34,4 +34,18 @@ public class Event extends Task {
         return String.format("%s | %d | %s | %s - %s", this.type, isDoneRep, this.name,
                                 this.start.toString(), this.end.getTime());
     }
+
+    /**
+     * Returns the start date of the Event.
+     */
+    public TaskDate getStartDate() {
+        return this.start;
+    }
+
+    /**
+     * Returns the end date of the Event.
+     */
+    public TaskDate getEndDate() {
+        return this.end;
+    }
 }

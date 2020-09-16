@@ -58,6 +58,42 @@ public class TaskList {
     }
 
     /**
+     * Marks the Task at the specified position as NOT done.
+     *
+     * @throws CartonaException if the given task is already done
+     */
+    public void uncompleteTask(int taskNum) throws CartonaException {
+        Task toUncomplete = null;
+
+        try {
+            toUncomplete = taskArrayList.get(taskNum - 1);
+        } catch (IndexOutOfBoundsException e) {
+            throw new CartonaException("Error: Task with that number does not exist.");
+        }
+
+        if (!toUncomplete.checkIfDone()) {
+            throw new CartonaException(String.format("Error: Task %d is not done.", taskNum));
+        }
+
+        toUncomplete.uncomplete();
+    }
+
+    /**
+     * Replaces the Task at the specified position with a replacement Task.
+     *
+     * @throws CartonaException if the task number argument is invalid.
+     */
+    public void editTask(int taskIdToEdit, Task replacementTask) throws CartonaException {
+        try {
+            taskArrayList.remove(taskIdToEdit - 1);
+        } catch (IndexOutOfBoundsException e) {
+            throw new CartonaException("Error: Task with that number does not exist.");
+        }
+
+        taskArrayList.add(taskIdToEdit - 1, replacementTask);
+    }
+
+    /**
      * Gets a string representation of the TaskList
      * Tasks are listed in order and are separated by a newline.
      *

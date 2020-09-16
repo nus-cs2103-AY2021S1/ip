@@ -70,8 +70,7 @@ public class Parser {
         return new Event(eventName, false, startDateTime, endDateTime);
     }
 
-    private Task parseTaskToAdd(String consoleArg) throws EmptyTaskDescriptionException, InvalidTaskTimeException,
-            UnknownCommandException, InvalidInputException {
+    private Task parseTaskToAdd(String consoleArg) throws InvalidInputException {
 
         // checks if there is any text after "add "
         if (consoleArg.length() <= 4) {
@@ -149,6 +148,22 @@ public class Parser {
             } catch (NumberFormatException e) {
                 throw new InvalidInputException("Error: Invalid number argument after 'delete'");
             }
+        case ("undone"):
+            try {
+                if (words.length < 2) {
+                    throw new InvalidInputException("Error: No number argument after 'delete'");
+                }
+
+                int taskIdToUncomplete = Integer.parseInt(words[1]);
+
+                if (taskIdToUncomplete < 1) {
+                    throw new InvalidInputException("Error: Task numbers start from 1");
+                }
+
+                return new UndoneCommand(taskIdToUncomplete);
+            } catch (NumberFormatException e) {
+                throw new InvalidInputException("Error: Invalid number argument after 'delete'");
+            }
         case ("find"):
             if (userInput.length() <= 5) {
                 throw new InvalidInputException("Error: Please specify search keyword");
@@ -157,6 +172,15 @@ public class Parser {
             String keyword = userInput.substring(5);
 
             return new FindTaskCommand(keyword);
+        case ("edit"):
+            if (words.length <= 4) {
+                throw new InvalidInputException("Error: Edit parameters missing");
+            }
+
+            Integer taskIdToEdit = Integer.parseInt(words[2]);
+
+            // Pass on edit string to Command
+            return new EditCommand(taskIdToEdit, userInput);
         default:
             throw new UnknownCommandException("Error: Invalid command keyword!");
         }

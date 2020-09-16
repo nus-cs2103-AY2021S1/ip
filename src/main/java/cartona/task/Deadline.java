@@ -29,4 +29,11 @@ public class Deadline extends Task {
         int isDoneRep = this.isDone ? 1 : 0;
         return String.format("%s | %d | %s | %s", this.type, isDoneRep, this.name, this.dueTime);
     }
+
+    /**
+     * Returns the due date of the Deadline.
+     */
+    public TaskDate getDueTime() {
+        return this.dueTime;
+    }
 }
