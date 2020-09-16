@@ -57,23 +57,24 @@ public class Parser {
             InvalidDoneException, InvalidTaskNumberException, NoTaskContentException,
             NoTaskDateTimeException, InvalidCommandException,
             InvalidDeleteException, InvalidTaskDateException, NoFindContentException, InvalidTaskDateTimeException {
-        if (input.equals("bye")) {
+        String trimmedInput = input.trim();
+        if (trimmedInput.equals("bye")) {
             return new ByeCommand();
-        } else if (input.equals("list")) {
+        } else if (trimmedInput.equals("list")) {
             return parseList(tasks);
-        } else if (input.startsWith("done")) {
-            return parseDone(input, tasks);
-        } else if (input.startsWith("todo") || input.startsWith("deadline") || input.startsWith("event")) {
-            return parseAddTask(input);
-        } else if (input.startsWith("delete")) {
-            return parseDelete(input, tasks);
-        } else if (input.startsWith("retrieve")) {
-            return parseRetrieve(input);
-        } else if (input.startsWith("find")) {
-            return parseFind(input);
-        } else if (input.equals("sort")) {
-            return parseSort(input, tasks);
-        } else if (input.equals("help")) {
+        } else if (trimmedInput.startsWith("done")) {
+            return parseDone(trimmedInput, tasks);
+        } else if (trimmedInput.startsWith("todo") || trimmedInput.startsWith("deadline") || trimmedInput.startsWith("event")) {
+            return parseAddTask(trimmedInput);
+        } else if (trimmedInput.startsWith("delete")) {
+            return parseDelete(trimmedInput, tasks);
+        } else if (trimmedInput.startsWith("retrieve")) {
+            return parseRetrieve(trimmedInput);
+        } else if (trimmedInput.startsWith("find")) {
+            return parseFind(trimmedInput);
+        } else if (trimmedInput.equals("sort")) {
+            return parseSort(trimmedInput, tasks);
+        } else if (trimmedInput.equals("help")) {
             return new HelpCommand();
         } else {
             throw new InvalidCommandException();
@@ -292,7 +293,7 @@ public class Parser {
         String[] splitInput = input.split(" ", 2);
         boolean hasContent = checkForContent(splitInput);
 
-        if (!hasContent || splitInput[1].trim().equals("")) {
+        if (!hasContent) {
             throw new NoFindContentException();
         }
         String content = splitInput[1];

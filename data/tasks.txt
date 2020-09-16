@@ -1,8 +1,9 @@
-T | 0 | sleep
+T | 1 | sleep
 T | 1 | homework
 T | 0 | asjd
 T | 0 | 
 T | 0 | sd
+T | 0 | hello hello
 D | 0 | jsn | 12/10/1212 12:09
 D | 0 | jsn | 12/10/1212 12:12
 D | 0 | d  | 12/12/1212 12:12
@@ -13,4 +14,4 @@ E | 0 | aks | 12/10/1212 12:12
 E | 0 | jdk | 12/12/1212 12:12
 E | 0 | /at | 12/12/1212 12:12
 E | 0 | aks | 12/12/1212 12:13
-T | 0 | hello hello
+T | 0 |   deadli
