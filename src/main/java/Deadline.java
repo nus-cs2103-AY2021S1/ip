@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Class to represent a deadline object.
@@ -54,4 +55,5 @@ public class Deadline extends TimedTask {
         }
         return newDeadline;
     }
+
 }
