@@ -1,7 +1,7 @@
 # User Guide
 Duke is bored, and will assist you in organising your tasks!
 
-Duke is a desktop task managing, and is used via a Command Line Interface (CLI).
+Duke is a desktop task managing app, and is used via a Command Line Interface (CLI).
 
 ## Features 
 
@@ -140,6 +140,7 @@ Example of usage:
 
 Expected outcome:
 
+`Here's what I found:`  
 `1. [T][✓] wash clothes`
 
 ### Find task(s) using keyword - `find`

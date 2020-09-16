@@ -28,6 +28,6 @@ public class FindCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         assertArgumentsValid(tasks, ui, storage);
-        ui.botOutput(tasks.listTasksWithKeyword(keyword));
+        ui.botOutput("Here's what I found:\n" + tasks.listTasksWithKeyword(keyword));
     }
 }

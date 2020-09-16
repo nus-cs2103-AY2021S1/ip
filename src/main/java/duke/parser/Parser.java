@@ -156,7 +156,7 @@ public class Parser {
             throw new DukeException("You have to tell me what to tag(s) to delete!");
         }
 
-        String[] tagsToRemove = commandArgArr[1].split(" ", 2);
+        String[] tagsToRemove = commandArgArr[1].split(" ");
         return new RemoveTagCommand(taskIdx, tagsToRemove);
     }
 
