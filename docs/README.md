@@ -1,20 +1,22 @@
 # User Guide
-
+This is a regular Duke (Todo list app) with only 1 fancy feature (C-MassOps).
+Basic Ui only.
 ## Features 
 
-### Feature 1 
-Description of feature.
+### Mass operations
+Able to remove multiple tasks at once, and set multiple tasks to done.
 
 ## Usage
 
-### `Keyword` - Describe action
+### `list` - list all tasks
 
-Describe action and its outcome.
+Shows a list of all tasks.
 
 Example of usage: 
 
-`keyword (optional arguments)`
+`list`
 
 Expected outcome:
+`1. [D] [✓] Buy eggs (by: 7pm)
+2. [T] [✗] Sell eggs`
 
-`outcome`
