@@ -1,3 +1,4 @@
+import java.util.Arrays;
 /**
  * The Parser object is in charge of separating the details of the user input into a String array.
  * Typically, the command is split into [command, detail, deadline].
@@ -75,7 +76,7 @@ public class Parser {
                         s[1] = s1; // enter detail into final array
                         break;
                     }
-                    s1 = s1 + details[counter] + " "; //build string of detail
+                    s1 = s1 + " " + details[counter]; //build string of detail
                 }
                 for (counter++; counter < details.length; counter++) {
                     if (counter == details.length - 1) {
@@ -96,13 +97,16 @@ public class Parser {
                 break;
             case ("find"):
                 s[1] = details[1];
+                break;
             case ("tag"):
                 if (details.length < 3) {
                     s[1] = null;
                     s[2] = null;
+                    break;
                 } else {
                     s[1] = details[1];
                     s[2] = details[2];
+                    break;
                 }
             default:
                 break;

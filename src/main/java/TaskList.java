@@ -134,7 +134,7 @@ public class TaskList {
                 + "     Here are the matching tasks and their corresponding order!:\n";
         for (int i = 0; i < list.size(); i++) {
             Listing listing = list.get(i);
-            if (list.get(i).title.contains(message)) {
+            if (list.get(i).title.contains(message) || list.get(i).tags.contains(message)) {
                 output += "     " + (i + 1) + "." + listing.toString() + "\n";
             }
         }
