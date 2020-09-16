@@ -1,7 +1,6 @@
 package rogue.logic.parser;
 
 import rogue.logic.directives.Executable;
-import rogue.logic.directives.ExitDirective;
 import rogue.logic.directives.ListDirective;
 import rogue.logic.parser.exceptions.IncorrectInputException;
 import rogue.model.argument.Argument;
@@ -30,9 +29,6 @@ public class Parser {
         Argument args = ArgumentParser.parseArgs(input);
 
         switch (args.getAction()) {
-        case EXIT:
-            return new ExitDirective();
-
         case LIST:
             return new ListDirective();
 

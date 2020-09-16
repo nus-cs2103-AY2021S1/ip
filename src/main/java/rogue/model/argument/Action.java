@@ -16,7 +16,6 @@ public enum Action {
     FIND ("find"),
     DELETE ("delete"),
     MARK_AS_DONE ("done"),
-    EXIT ("bye"),
     INVALID ("");
 
     /** Stores keyword to action mappings. */
