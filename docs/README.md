@@ -2,7 +2,7 @@
 
 Patrick Star Bot is a chat bot for keeping track of simple tasks. It is based on the characters of *Patrick Star* and *Man Ray* from the hit Nickelodeon television show, *SpongeBob SquarePants*.
 
-![Image of chat bot](./Ui.PNG)
+![Image of chat bot](./Ui.png)
 
 ## Features 
 * `todo` - adds a to do task with neither specific date nor time
@@ -38,7 +38,7 @@ Example of usage:
 
 Expected outcome:
 
-![todo maths homework](./images/todoExample.PNG)
+![todo maths homework](./images/todoExample.png)
 
 
 ### `deadline` - adds a deadline task
@@ -55,7 +55,7 @@ Examples of usage:
 
 Expected outcome:
 
-![deadline assignment 1 /by 11 September 2011 and deadline assignment 2 /by 18 October 2011 23:50](./images/deadlineExample.PNG)
+![deadline assignment 1 /by 11 September 2011 and deadline assignment 2 /by 18 October 2011 23:50](./images/deadlineExample.png)
 
 
 ### `event` - adds an event task
@@ -72,7 +72,7 @@ Examples of usage:
 
 Expected outcome:
 
-![event New Year's Day /at 1 Jan 2011 and event birthday party /at 2/2/2011 12:00](./images/eventExample.PNG)
+![event New Year's Day /at 1 Jan 2011 and event birthday party /at 2/2/2011 12:00](./images/eventExample.png)
 
 
 ### `list` - lists out all tasks
@@ -87,7 +87,7 @@ Example of usage:
 
 Expected outcome:
 
-![list](./images/listExample.PNG)
+![list](./images/listExample.png)
 
 
 ### `done` - marks task as done
@@ -102,7 +102,7 @@ Example of usage:
 
 Expected outcome:
 
-![done 1](./images/doneExample.PNG)
+![done 1](./images/doneExample.png)
 
 
 ### `delete` - delete task
@@ -117,7 +117,7 @@ Example of usage:
 
 Expected outcome:
 
-![delete 1](./images/deleteExample.PNG)
+![delete 1](./images/deleteExample.png)
 
 
 ### `view` - view tasks on a date
@@ -132,7 +132,7 @@ Example of usage:
 
 Expected outcome:
 
-![view 01/01/2011](./images/viewExample.PNG)
+![view 01/01/2011](./images/viewExample.png)
 
 
 ### `find` - find tasks with the keyword
@@ -147,7 +147,7 @@ Example of usage:
 
 Expected outcome:
 
-![find assignment](./images/findExample.PNG)
+![find assignment](./images/findExample.png)
 
 
 ### `bye` - exits the chat bot.
