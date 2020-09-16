@@ -139,6 +139,7 @@ Example:
 * `delete 20`
 
 Expected outcome:
+
 <img src="delete.PNG" alt="delete Command" width="600" height="400"/>
 
 Find a task: `find`
