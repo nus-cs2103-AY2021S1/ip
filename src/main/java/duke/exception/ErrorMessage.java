@@ -1,4 +1,4 @@
-package duke;
+package duke.exception;
 
 public enum ErrorMessage {
     INVALID_COMMAND_TYPE("Please enter a valid command type!"),

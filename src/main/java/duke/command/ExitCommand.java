@@ -1,4 +1,7 @@
-package duke;
+package duke.command;
+
+import duke.logic.Tasklist;
+import duke.logic.Storage;
 
 /**
  * Represents a Command to exit Duke.

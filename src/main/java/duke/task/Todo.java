@@ -1,5 +1,4 @@
-package duke;
-
+package duke.task;
 
 /**
  * Represents a simple Task without a deadline or time of occurrence.

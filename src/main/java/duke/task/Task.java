@@ -1,5 +1,4 @@
-package duke;
-
+package duke.task;
 
 /**
  * Represents a Task which can be added to or deleted from a task
