@@ -21,6 +21,7 @@
 
 * Click `Save` under `File` menu.
 * Choose `Yes` in Exit window.
+
 ![GitHub Logo](docs/ExitWindow.png)
 * Use `bye` command to exit the application.
 
