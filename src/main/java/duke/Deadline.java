@@ -21,7 +21,7 @@ public class Deadline extends Task {
         super(description);
 
         this.byDateTime = DateTimeHandler.tryParseDateTime(by);
-        if (byDateTime == null) {
+        if (!DateTimeHandler.isDateTimeParsed(byDateTime)) {
             this.byDate = DateTimeHandler.tryParseDate(by);
         }
         this.by = by;
@@ -38,7 +38,7 @@ public class Deadline extends Task {
     public Deadline(String description, boolean isDone, String by) {
         super(description, isDone);
         this.byDateTime = DateTimeHandler.tryParseDateTime(by);
-        if (byDateTime == null) {
+        if (!DateTimeHandler.isDateTimeParsed(byDateTime)) {
             this.byDate = DateTimeHandler.tryParseDate(by);
         }
         this.by = by;

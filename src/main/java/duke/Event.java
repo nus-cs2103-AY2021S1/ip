@@ -21,7 +21,7 @@ public class Event extends Task {
         super(description);
 
         this.atDateTime = DateTimeHandler.tryParseDateTime(at);
-        if (atDateTime == null) {
+        if (!DateTimeHandler.isDateTimeParsed(atDateTime)) {
             this.atDate = DateTimeHandler.tryParseDate(at);
         }
         this.at = at;
@@ -38,7 +38,7 @@ public class Event extends Task {
     public Event(String description, boolean isDone, String at) {
         super(description, isDone);
         this.atDateTime = DateTimeHandler.tryParseDateTime(at);
-        if (atDateTime == null) {
+        if (!DateTimeHandler.isDateTimeParsed(atDateTime)) {
             this.atDate = DateTimeHandler.tryParseDate(at);
         }
         this.at = at;
