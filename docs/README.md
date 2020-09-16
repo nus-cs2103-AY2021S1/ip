@@ -7,7 +7,7 @@ optimized for use via a Command Line Interface (CLI)
 while still having the benefits of a Graphical User Interface (GUI). 
 The name 'Duke' was inspired by Duke, the Java Mascot.
 
-![Duke Logo](../src/main/resources/images/javaduke.jpg)
+![Duke Logo](./javaduke.jpg)
 
 ## Quick Start 
 
