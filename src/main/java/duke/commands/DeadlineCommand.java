@@ -39,7 +39,7 @@ public class DeadlineCommand extends Command {
         case 1:
             setDeadlineDate(input);
             tm.addDeadline(new Deadline(deadlineName, deadlineDate));
-            setResponse("Deadline added"); // TODO: refactor this line
+            setResponse("Deadline added");
             setDone();
             break;
         }

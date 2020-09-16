@@ -49,7 +49,7 @@ public class EventCommand extends Command {
         case 2:
             setEventEndTime(input);
             tm.addEvent(new Event(eventName, eventStartTime, eventEndTime));
-            setResponse("Event added"); // TODO: refactor this
+            setResponse("Event added");
             setEventEndTime(input);
             setDone();
         }

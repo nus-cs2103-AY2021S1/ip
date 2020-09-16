@@ -19,7 +19,7 @@ public class TodoCommand extends Command {
     public boolean execute(String input) throws DukeException {
         tm.addTodo(new Todo(input));
         setDone();
-        setResponse("Todo added"); // TODO: refactor this
+        setResponse("Todo added");
         return true;
     }
 
