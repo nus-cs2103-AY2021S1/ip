@@ -1,5 +1,5 @@
 # User Interface
-<p align="center"><img width="100%" src="Ui.png"/></p>
+<p align="center"><img width="100%" src="docs/Ui.png"/></p>
 
 # About duke
 The duke bot is a desktop app for managing task, optimized for use via a Command Line Interface (CLI). If you can type fast, duke bot can track your tasks faster than traditional GUI apps.  
