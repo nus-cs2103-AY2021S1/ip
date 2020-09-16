@@ -14,7 +14,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 
 public class DialogBox extends HBox {
 
@@ -34,13 +34,16 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
+        Rectangle rectangle = new Rectangle(
+                displayPicture.getFitWidth() / 1.3, displayPicture.getFitHeight() / 1.3
+        );
+        rectangle.setArcWidth(100);
+        rectangle.setArcHeight(100);
+        rectangle.setStroke(Color.BLUEVIOLET);
+        rectangle.setStrokeWidth(5);
+        displayPicture.setClip(rectangle);
+        displayPicture.setPreserveRatio(true);
         displayPicture.setImage(img);
-        Circle circle = new Circle(30);
-        circle.setStroke(Color.WHITE);
-        circle.setStrokeWidth(5);
-        circle.setCenterX(displayPicture.getFitWidth() / 2);
-        circle.setCenterY(displayPicture.getFitHeight() / 2);
-        displayPicture.setClip(circle);
     }
 
     /**
