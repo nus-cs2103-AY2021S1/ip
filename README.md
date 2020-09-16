@@ -37,4 +37,4 @@ Duke handles your tasks and reminds you of upcoming events/deadlines.
    Lists upcoming tasks within the week.  
 1. **Exit:** `bye`  
    _Usage_: `bye`  
-   Exits Duke and saves your list to the storage file in the data folder. **Duke will only save your tasks to the file if you exit with this command.**
+   Exits Duke and saves your list to the storage file in the data folder. **Duke will save your tasks to the file only if you exit with this command.**
