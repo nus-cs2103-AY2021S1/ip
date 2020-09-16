@@ -18,7 +18,7 @@ public class Duke{
     public Duke() {
         ui = new Ui();
         storage = new Storage("data/duke.txt");
-        archiveStorage = new Storage("data/duke.txt.achive");
+        archiveStorage = new Storage("data/duke.txt.archive");
         tasks = new TaskList(storage.load());
         archives = new TaskList(archiveStorage.load());
         parser = new Parser(tasks, archives);
@@ -27,7 +27,7 @@ public class Duke{
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
-        archiveStorage = new Storage(filePath+".achive");
+        archiveStorage = new Storage(filePath+".archive");
         tasks = new TaskList(storage.load());
         archives = new TaskList(archiveStorage.load());
         parser = new Parser(tasks, archives);
@@ -36,7 +36,9 @@ public class Duke{
     public String getResponse(String input){
         String tmp = ui.read(input, parser);
         storage.save(tasks.getTodoList());
-        archiveStorage.save(tasks.getTodoList());
+        archiveStorage.save(archives.getTodoList());
+        System.out.println("todo: " + tasks.getTodoList().size());
+        System.out.println("archive: " + archives.getTodoList().size());
         return tmp;
     }
 
