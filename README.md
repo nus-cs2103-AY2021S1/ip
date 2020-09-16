@@ -14,10 +14,12 @@ This is a project from a greenfield Java project. It's named after the Java masc
 1. <b>Extensive Testing Using JUnit</b>
 
 70 JUnit tests were written to test most of the commands and checks to ensure everything works well.
+<p align="center"><img src="docs/70test.png" width="90%"/></p>
 
 2. <b>Scalable in size</b>
 
 Users can dictate the size of duke!
+<p align="center"><img src="docs/resize.gif" width="90%"/></p>
 
 ## Features 
 * Add different types of task _e.g._ `todo`, `deadline`, `event`
