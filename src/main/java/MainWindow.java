@@ -31,9 +31,7 @@ public class MainWindow extends AnchorPane {
         scrollPane.hbarPolicyProperty().setValue(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.vbarPolicyProperty().setValue(ScrollPane.ScrollBarPolicy.NEVER);
 
-        String openingMsg = "hey hey im Poco" + "\n"
-                            + "type 'help' to view a list of commands"
-                            + "\n" + "type 'bye' to exit";
+        String openingMsg = "hey hey im Poco";
         Label text = new Label(openingMsg);
         text.setStyle("-fx-text-fill: #D0D0D0; -fx-font-family:\"consolas\"; -fx-font-size:14px; -fx-font-weight:bold;");
         text.setPadding(new Insets(10, 0,10, 10));
