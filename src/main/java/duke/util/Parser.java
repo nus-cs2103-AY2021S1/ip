@@ -232,11 +232,11 @@ public class Parser {
         }
 
         if (moreThanOneWord) {
-            throw new DukeException("MORE THAN ONE WORD DETECTED IN ALIAS");
+            throw new DukeException("MORE THAN ONE WORD DETECTED IN KEYWORD");
         } else if (hasNoAlias) {
-            throw new DukeException("NO ALIAS DETECTED");
+            throw new DukeException("NO KEYWORD DETECTED");
         } else if (isACommandType) {
-            throw new DukeException("COMMAND AS ALIAS DETECTED");
+            throw new DukeException("COMMAND AS KEYWORD DETECTED");
         }
 
         boolean endsWithEquals = idxOfEquals + 1 >= mapping.length();
