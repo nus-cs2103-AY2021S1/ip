@@ -17,7 +17,7 @@ public class Main extends Application {
     /**
      * A duke instance for the programme to start.
      */
-    private final Duke duke = new Duke("data/duke.txt");
+    private final Duke duke = new Duke("duke.txt");
 
     @Override
     public void start(Stage stage) {

@@ -18,6 +18,7 @@ public class InvalidCommand extends Command {
 
     /**
      * Constructs an invalid command.
+     *
      * @param command The invalid command.
      */
     public InvalidCommand(String command) {

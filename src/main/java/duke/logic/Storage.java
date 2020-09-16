@@ -31,16 +31,19 @@ public class Storage {
     /**
      * Initializes a storage instance for a particular file path.
      *
-     * @param filePath The path of the file.
+     * @param dataPath The path of the file.
      */
-    public Storage(String filePath) {
+    public Storage(String dataPath) {
+        String rootPath = System.getProperty("user.dir");
+        String directoryPath = rootPath + File.separator + "data";
+        String filePath = directoryPath + File.separator + dataPath;
+        File dataFolder = new File(directoryPath);
+        dataFolder.mkdir();
         this.file = new File(filePath);
-        if (!file.exists()) {
-            try {
-                file.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        try {
+            file.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

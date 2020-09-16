@@ -80,6 +80,7 @@ public class Ui {
 
     /**
      * Returns string representation of the message when the list of tasks is sorted.
+     *
      * @return The message indicating the list has been sorted
      */
     public String showSortMessage(List<Task> tasks) {

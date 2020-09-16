@@ -5,7 +5,9 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import duke.command.Command;
 import duke.command.CommandType;
@@ -44,7 +46,7 @@ public class Parser {
         String[] splitCommand = fullCommand.split(" ", 2);
         CommandType type = CommandType.getCommandType(splitCommand[0]);
 
-        boolean hasOnlyOneWord = splitCommand.length < 2;
+        boolean hasOnlyOneWord = splitCommand.length < 2 || splitCommand[1].isBlank();
         boolean isMissingTaskDescription = isTask(type) && hasOnlyOneWord;
         boolean isMissingTaskNumber = isDoneOrDeleteCommand(type) && hasOnlyOneWord;
         boolean isMissingFindKeyword = type == CommandType.FIND && hasOnlyOneWord;
@@ -64,23 +66,22 @@ public class Parser {
         case TODO:
         case DEADLINE:
         case EVENT:
-            String details = splitCommand[1];
+            String details = splitCommand[1].trim();
             command = parseAddCommand(type, details);
             break;
         case DELETE: {
-            String taskNumber = splitCommand[1];
+            String taskNumber = splitCommand[1].trim();
             command = new DeleteCommand(taskNumber);
             break;
         }
         case DONE: {
-            String taskNumber = splitCommand[1];
+            String taskNumber = splitCommand[1].trim();
             command = new DoneCommand(taskNumber);
             break;
         }
         case FIND:
-            String keyword = splitCommand[1];
-            String[] keywords = keyword.split(" ");
-            command = new FindCommand(keywords);
+            String keyword = splitCommand[1].trim();
+            command = parseFindCommand(keyword);
             break;
         case LIST:
             command = new ListCommand();
@@ -158,8 +159,20 @@ public class Parser {
         }
     }
 
+    private static Command parseFindCommand(String details) {
+        List<String> validKeywords = Arrays.stream(details.split(" "))
+                .filter(keyword -> !keyword.isEmpty())
+                .collect(Collectors.toList());
+        String[] keywords = new String[validKeywords.size()];
+        for (int i = 0; i < keywords.length; i++) {
+            keywords[i] = validKeywords.get(i);
+        }
+        return new FindCommand(keywords);
+    }
+
     /**
      * Returns the task in the list after parsing the task number.
+     *
      * @param taskNumber The task number.
      * @param tasks The list of tasks.
      * @return The task in the list corresponding to the correct task number.
