@@ -16,12 +16,12 @@
     <children>
       <StackPane maxHeight="1.7976931348623157E308" maxWidth="400.0">
          <children>
-              <Label fx:id="dialog" alignment="CENTER" contentDisplay="CENTER" ellipsisString="" graphicTextGap="0.0" lineSpacing="0.1" opacity="0.8" style="-fx-background-color: #33adff; -fx-background-radius: 10;" text="Label" textFill="WHITE">
+              <Label fx:id="dialog" alignment="CENTER" contentDisplay="CENTER" ellipsisString="" graphicTextGap="0.0" opacity="0.8" style="-fx-background-color: #33adff; -fx-font-family: monospace; -fx-background-radius: 10;" text="Label" textFill="WHITE" wrapText="true">
                <padding>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </padding>
                <font>
-                  <Font name="Consolas" size="12.0" />
+                  <Font name="Monospaced Regular" size="11.5" />
                </font>
             </Label>
          </children>
