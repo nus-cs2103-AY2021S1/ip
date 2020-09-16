@@ -78,7 +78,7 @@ Adds a new weekly task to current list of tasks. Only the next upcoming instance
 
 Format: `weekly <task> /every <day> <hhmm>`
 
-Example of usage: `weekly task four /every mon 1315`
+Example of usage: `weekly task four /every monday 1315`
 
 Expected outcome:
 ```
