@@ -141,7 +141,9 @@ Expected outcome:
 ### <a name="archive"></a> Feature 6: Archive
 Archive function provides a way to archive tasks from the active task list, 
 so that the user can remove tasks from the list but still keep a record of them in the archive task list.
-####<a name="archive-task"></a>Feature 6.1: Archive a task
+
+
+#### <a name="archive-task"></a> Feature 6.1: Archive a task
 This command removes a specific task from the active task list, and adds it to the archived task list.
 ##### Usage:
 
