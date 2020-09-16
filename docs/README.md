@@ -29,7 +29,7 @@ tasks management done faster than traditional GUI apps.
 3. Copy the file to the folder you want to use as the *home folder* for your Mushy program.
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds.  
 
-![welcome page](/docs/welcome.png)  
+![welcome page](welcome.png)  
 
 5. Type the command in the command box and press Enter to execute it. 
 e.g. typing `help` and pressing Enter will display a list of commands.  
@@ -57,7 +57,7 @@ Some example commands you can try:
 ### Viewing help: `help`
 Shows a message displaying all the commands.  
 
-![help page](/docs/help.png)  
+![help page](help.png)  
 
 Format: `help`  
 
@@ -76,7 +76,7 @@ Expected outcome:
 `[T][✘] read book`  
 `Now you have 3 tasks in the list.`  
 
-![todo page](/docs/todo.png)
+![todo page](todo.png)
 
 ### Adding a deadline task: `deadline`
 Adds a deadline task to the list of tasks.  
@@ -123,7 +123,7 @@ Expected outcome:
 `3. [D][✘] return book (by: Jun 6 2020)`  
 `4. [E][✘] project meeting (at: Aug 6th 2-4pm)`  
 
-![list page](/docs/list.png)
+![list page](list.png)
 
 ### Marking a task as done: `done`
 Marks a task as done.  
@@ -139,7 +139,7 @@ Expected outcome:
 `Nice! I've marked this task as done:`  
 `[✓] project meeting`  
 
-![done page](/docs/done.png)
+![done page](done.png)
 
 ### Locating tasks by name: `find`
 Finds tasks whose description contain any of the given keywords.  
@@ -159,7 +159,7 @@ Expected outcome:
 `2. [T][✓] read book`  
 `3. [D][✘] return book (by: Jun 6 2020)`  
 
-![find page](/docs/find.png)
+![find page](find.png)
 
 ### Deleting a task: `delete`
 Deletes the specified task.  
@@ -176,7 +176,7 @@ Expected outcome:
 `[T][✓] borrow book`  
 `Now you have 7 tasks in the list.`  
 
-![delete page](/docs/delete.png)
+![delete page](delete.png)
 
 ### Exiting the program: `bye`
 Exits the program.  
@@ -197,6 +197,7 @@ previous Mushy home folder.
 ---
 
 ## Command summary
+ 
 Action | Format | Examples
 ------ | ------ | --------
 **Help** | `help`
