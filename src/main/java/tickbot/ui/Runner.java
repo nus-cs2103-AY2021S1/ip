@@ -118,11 +118,10 @@ public class Runner {
     void tag(String[] args) {
         try {
             int index = Integer.parseInt(args[1]) - 1;
-            for (int i = 1; i < args.length; i++) {
-                String tag = args[i];
-                tasks.get(index).addTag(tag);
-            }
-        } catch (NumberFormatException err) {
+            String[] tags = Arrays.copyOfRange(args, 2, args.length);
+            tasks.addTags(index, tags);
+            Output.printMessage("Tag(s) added.");
+        } catch (NumberFormatException | ArrayIndexOutOfBoundsException err) {
             Output.printMessage("Invalid Syntax.");
             Output.printMessage("Usage: tag <task_index> [<tag_name> ...]");
         } catch (IndexOutOfBoundsException err) {

@@ -66,4 +66,12 @@ public class TaskList {
         storage.update(tasks);
         return true;
     }
+
+    public void addTags(int index, String[] tags) {
+        Task task = tasks.get(index);
+        for (String tag : tags) {
+            task.addTag(tag);
+        }
+        storage.update(tasks);
+    }
 }

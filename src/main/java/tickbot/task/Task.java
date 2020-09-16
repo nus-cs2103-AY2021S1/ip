@@ -73,6 +73,10 @@ public abstract class Task {
         tags.add(tag);
     }
 
+    public List<String> getTags() {
+        return tags;
+    }
+
     @Override
     public String toString() {
         String timeMarker = getTimeMarker();

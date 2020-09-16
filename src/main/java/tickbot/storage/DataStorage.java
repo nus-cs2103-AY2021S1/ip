@@ -47,22 +47,26 @@ public class DataStorage {
                 boolean completed = Objects.equals(parts[1], "1");
                 switch (parts[0]) {
                 case "T": {
-                    task = new Todo(completed, parts[2]);
+                    task = new Todo(completed, parts[3]);
                     break;
                 }
                 case "E": {
-                    LocalDateTime time = LocalDateTime.parse(parts[3]);
-                    task = new Event(completed, parts[2], time);
+                    LocalDateTime time = LocalDateTime.parse(parts[4]);
+                    task = new Event(completed, parts[3], time);
                     break;
                 }
                 case "D": {
-                    LocalDateTime time = LocalDateTime.parse(parts[3]);
-                    task = new Deadline(completed, parts[2], time);
+                    LocalDateTime time = LocalDateTime.parse(parts[4]);
+                    task = new Deadline(completed, parts[3], time);
                     break;
                 }
                 default: {
                     throw new CorruptedDataException();
                 }
+                }
+                String[] tags = parts[2].split("#");
+                for (String tag : tags) {
+                    task.addTag(tag);
                 }
                 tasks.add(task);
             }
@@ -91,6 +95,7 @@ public class DataStorage {
                 String[] line = new String[] {
                     task.getTaskType(),
                     task.isCompleted() ? "1" : "0",
+                    String.join("#", task.getTags()),
                     task.getContent(),
                     Objects.toString(task.getTime()) // time could be null
                 };

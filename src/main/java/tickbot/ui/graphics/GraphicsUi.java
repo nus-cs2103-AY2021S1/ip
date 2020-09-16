@@ -51,6 +51,7 @@ public class GraphicsUi extends Application implements Ui {
                 if (!running) {
                     Platform.exit();
                 }
+                userInput.clear();
             }
         };
         sendButton.addEventHandler(MouseEvent.MOUSE_CLICKED, handler);
