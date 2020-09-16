@@ -1,0 +1,3 @@
+T | true | finish ip
+D | false | ip final version | Sep 18 2020
+T | false | 2100 lectures

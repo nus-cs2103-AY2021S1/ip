@@ -1,0 +1,23 @@
+todo
+deadline
+delete
+done
+event
+hello
+todo finish ip
+todo join sports club
+deadline finish ip
+deadline finish ip /by tonight
+deadline return book /by June 6th
+deadline finish ip /by 2020-08-28
+event 2101 op1 meeting
+event 2101 op1 meeting /at Tomorrow 2pm
+event es2600 presentation /at Aug 27th 4-6pm
+list
+done 1
+list
+delete 2
+delete 5
+done 5
+list
+bye
