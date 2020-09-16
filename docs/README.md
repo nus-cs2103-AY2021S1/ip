@@ -1,30 +1,33 @@
 # User Guide
-Welcome to Duke, your loyal personal assistant chatbot!  
+Welcome to Duke, your loyal personal assistant chatbot! 
 Duke provides a fast and convenient way to keep track of all your tasks, events and deadlines.
+
+[Features](#features)  
+[Usage](#usage)
 
 ## Features 
 
-#### Viewing help: `assist` 
+### [Viewing help](#viewing-help): `assist` 
 
-#### Adding a ToDo: `todo` 
+### Adding a ToDo: `todo` 
 
-#### Adding a Deadline: `deadline` 
+### Adding a Deadline: `deadline` 
 
-#### Adding an Event: `event` 
+### Adding an Event: `event` 
 
-#### Marking tasks as done: `conquer` 
+### Marking tasks as done: `conquer` 
 
-#### Deleting a task: `delete` 
+### Deleting a task: `delete` 
 
-#### Finding tasks with a search term: `find` 
+### Finding tasks with a search term: `find` 
 
-#### Viewing the schedule for a day: `schedule` 
+### Viewing the schedule for a day: `schedule` 
 
-#### Exiting: `dismiss` 
+### Exiting: `dismiss` 
 
 ## Usage
 
-#### Viewing help: `assist`
+### Viewing help: `assist`
 Shows a list of available commands. 
 
 Format: `assist`
@@ -46,7 +49,7 @@ Expected outcome:
 >
 >Now, how may I serve you?
 
-#### Adding a ToDo: `todo`
+### Adding a ToDo: `todo`
 Adds a todo task to your list.
 
 Format: `todo TASK`
@@ -58,7 +61,7 @@ Expected outcome:
 >[T] [✘] read book  
 >You have 1 writing(s) on your scroll as of now.
 
-#### Adding a Deadline: `deadline`
+### Adding a Deadline: `deadline`
 Adds a deadline task to your list.  
 
 Format:`deadline TASK /by DATE [TIME]`  
@@ -72,7 +75,7 @@ Expected outcome:
 >[D] [✘] project (by: Sep 18 2020, 11.59pm)  
 >You have 2 writing(s) on your scroll as of now.  
 
-#### Adding an Event: `event`  
+### Adding an Event: `event`  
 Adds an event task to your list.  
 
 Format:`event TASK /on DATE [TIME]`  
@@ -86,7 +89,7 @@ Expected outcome:
 >[E] [✘] workshop (on: Sep 23 2020, 7.30pm)  
 >You have 3 writing(s) on your scroll as of now.   
 
-#### Marking tasks as done: `conquer`
+### Marking tasks as done: `conquer`
 Marks a desired task as done.  
 
 Format: `conquer INDEX`  
@@ -98,7 +101,7 @@ Expected outcome:
 >As you wish, Your Majesty. I have marked this as conquered.  
 >[T] [✓] read book 
 
-#### Deleting tasks: `delete`
+### Deleting tasks: `delete`
 Deletes a desired task from your list.    
 
 Format: `delete INDEX`  
@@ -111,7 +114,7 @@ Expected outcome:
 >[T] [✓] read book   
 >You have 2 writing(s) on your scroll as of now.  
 
-#### Finding tasks with a search term: `find`  
+### Finding tasks with a search term: `find`  
 Returns a list of tasks related to the desired search term.   
 
 Format: `find SEARCH_TERM`  
@@ -124,7 +127,7 @@ Expected outcome:
 >1. [T] [✘] buy cat food  
 >2. [E] [✘] foodie gathering (on: Sep 30 2020, 6.00pm)  
 
-#### Viewing the schedule for a day: `schedule`  
+### Viewing the schedule for a day: `schedule`  
 Returns an unordered list of tasks on the desired day.   
 Format: `schedule DATE`  
 * `DATE` specified must be in YYYY-MM-DD format.
@@ -137,7 +140,7 @@ Expected outcome:
 >2. [D] [✘] assignment 1 (by: Sep 18 2020, 11:59pm)  
 
 
-#### Exiting: `dismiss`
+### Exiting: `dismiss`
 Exits the application.  
 
 Format: `dismiss`
