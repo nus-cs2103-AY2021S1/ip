@@ -159,7 +159,7 @@ public class UiResponse {
 
         for (String commandName : allCommands.keySet()) {
             description = "\"" + commandName + "\"\n";
-            description += allCommands.get(commandName).getDescription();
+            description += allCommands.get(commandName).getWholeDescription();
             System.out.println(description + "\n");
         }
 

@@ -12,7 +12,8 @@ public class ExitCommand extends Command {
      */
     public ExitCommand() {
         names = new String[] { "bye" };
-        description = "Ends the program.\nFormat: " + CommandFormat.EXIT_CMD_FORMAT;
+        description = "Ends the program.";
+        format = CommandFormat.EXIT_CMD_FORMAT;
     }
 
     /**

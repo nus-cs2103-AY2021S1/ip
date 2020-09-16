@@ -13,7 +13,8 @@ public class UntagCommand extends Command {
      */
     public UntagCommand() {
         names = new String[] { "untag" };
-        description = "Deletes the tag of the task with the given index.\nFormat: " + CommandFormat.UNTAG_CMD_FORMAT;
+        description = "Deletes the tag of the task with the given index.";
+        format = CommandFormat.UNTAG_CMD_FORMAT;
     }
 
     @Override

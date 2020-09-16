@@ -1,6 +1,7 @@
 package duke.task;
 
 import duke.exception.ExceptionMessage;
+import duke.time.Time;
 import duke.ui.UiPrint;
 
 /**
@@ -8,10 +9,11 @@ import duke.ui.UiPrint;
  */
 public class Task {
 
-    public static final String NO_TAG = "no tag";
+    public static final String NO_TAG = "Nil";
 
     private String icon;
     private String description;
+    private Time time;
     private String taskInfo;
     private String tag;
     private boolean isDone;
@@ -19,15 +21,13 @@ public class Task {
     protected Task(String icon, String description, String taskInfo) {
         this.icon = icon;
         this.description = description;
+        time = Time.stringToTime("Nil");
         this.taskInfo = taskInfo;
         tag = NO_TAG;
         isDone = false;
     }
 
-    /**
-     * Marks the task as done.
-     */
-    public void setTaskDone(boolean isDone) {
+    public void setDone(boolean isDone) {
         this.isDone = isDone;
     }
 
@@ -39,11 +39,7 @@ public class Task {
         return "task";
     }
 
-    /**
-     * Returns is the task done.
-     * @return is the task done
-     */
-    public boolean isTaskDone() {
+    public boolean isDone() {
         return isDone;
     }
 
@@ -74,5 +70,40 @@ public class Task {
     public void setTag(String tag) {
         assert !tag.isBlank() : ExceptionMessage.BLANK_TAG_MESSAGE;
         this.tag = tag;
+    }
+
+    public Time getTime() {
+        return time;
+    }
+
+    public void setTime(Time time) {
+        this.time = time;
+    }
+
+    public String getIcon() {
+        String taskType;
+        if (icon.equals(UiPrint.DEADLINE_ICON)) {
+            taskType = "Deadline";
+        } else if (icon.equals(UiPrint.EVENT_ICON)) {
+            taskType = "Event";
+        } else if (icon.equals(UiPrint.TODO_ICON)) {
+            taskType = "Todo";
+        } else {
+            return "Error!!!";
+        }
+
+        return taskType;
+    }
+
+    public String getIsDone() {
+        String isDone;
+
+        if (this.isDone) {
+            isDone = "done";
+        } else {
+            isDone = "not done yet";
+        }
+
+        return isDone;
     }
 }

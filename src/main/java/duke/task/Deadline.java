@@ -12,11 +12,9 @@ import duke.ui.UiPrint;
  */
 public class Deadline extends Task {
 
-    private Time deadline;
-
     private Deadline(String icon, String description, String deadline, String taskInfo) {
         super(icon, description, taskInfo);
-        this.deadline = Time.stringToTime(deadline);
+        setTime(Time.stringToTime(deadline));
     }
 
     @Override
@@ -57,6 +55,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return super.toString() + " (by: " + deadline + ")";
+        return super.toString() + " (by: " + getTime() + ")";
     }
 }

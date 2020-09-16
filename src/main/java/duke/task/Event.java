@@ -12,11 +12,9 @@ import duke.ui.UiPrint;
  */
 public class Event extends Task {
 
-    private Time time;
-
     private Event(String icon, String description, String time, String taskInfo) {
         super(icon, description, taskInfo);
-        this.time = Time.stringToTime(time);
+        setTime(Time.stringToTime(time));
     }
 
     @Override
@@ -57,6 +55,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return super.toString() + " (at: " + time + ")";
+        return super.toString() + " (at: " + getTime() + ")";
     }
 }

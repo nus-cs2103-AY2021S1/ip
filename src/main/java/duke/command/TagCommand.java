@@ -15,7 +15,8 @@ public class TagCommand extends Command {
      */
     public TagCommand() {
         names = new String[] { "tag" };
-        description = "Tags a task in the task list with some string.\nFormat: " + CommandFormat.TAG_CMD_FORMAT;
+        description = "Tags a task in the task list with some string.";
+        format = CommandFormat.TAG_CMD_FORMAT;
     }
 
     /**
