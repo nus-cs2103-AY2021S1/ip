@@ -21,16 +21,6 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Returns true if command terminates Duke.
-     *
-     * @return the boolean to continue Duke.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
-
-    /**
      * Executes the AddCommand with the following TaskList, Ui and Storage classes.
      * The input task will be added to the TaskList. The Ui will return the output
      * to the user. The storage will update with the new TaskList.

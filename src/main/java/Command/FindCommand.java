@@ -32,16 +32,6 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Returns a true or false to terminate Duke.
-     *
-     * @return boolean that does not terminate Duke.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
-
-    /**
      * Executes the FindCommand and searches within the tasklist for the tasks that correspond.
      * The ui will return the tasks that were found. The storage will not be affected.
      *
@@ -54,7 +44,7 @@ public class FindCommand extends Command {
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         if (taskList.getTaskList().isEmpty()) {
             throw new DukeException(
-                    "La lista de tareas está actualmente vacía, agregue una tarea antes de encontrar una.");
+                    "La lista de tareas esta actualmente vacia, agregue una tarea antes de encontrar una.");
         }
         for (Task task : taskList.getTaskList()) {
             if (task.toString().contains(wordToFind)) {
@@ -62,7 +52,7 @@ public class FindCommand extends Command {
             }
         }
         if (listOfIncludedTasks.isEmpty()) {
-            throw new DukeException("Lo sentimos, ninguna de las tareas coincide con sus criterios de búsqueda.");
+            throw new DukeException("Lo sentimos, ninguna de las tareas coincide con sus criterios de busqueda.");
         } else {
             output = ui.showFoundList(listOfIncludedTasks);
             return output;

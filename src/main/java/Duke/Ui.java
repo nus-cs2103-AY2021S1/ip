@@ -39,8 +39,8 @@ public class Ui {
      * @param error the error message to be printed.
      * @return the output to be returned to the user.
      */
-    public String showError(String error) {
-        return error;
+    public String showError(String error) throws DukeException {
+        throw new DukeException(error);
     }
 
     /**

@@ -24,7 +24,7 @@ public class Duke {
      *
      * @param filePath the file path where data is stored.
      */
-    public Duke(String filePath) {
+    public Duke(String filePath) throws DukeException {
         ui = new Ui();
         storage = new Storage(filePath);
         tasks = new TaskList(storage.load(ui));

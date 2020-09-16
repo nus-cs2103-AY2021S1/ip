@@ -13,16 +13,6 @@ import duke.Ui;
 public class ListCommand extends Command {
 
     /**
-     * Returns true if command terminates Duke.
-     *
-     * @return the boolean to continue Duke.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
-
-    /**
      * Executes the ListCommand by sending the TaskList to be printed to the Ui.
      * The Ui will then display the TaskList to the user. TaskList and Storage will
      * not be affected.
@@ -36,7 +26,7 @@ public class ListCommand extends Command {
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         if (taskList.getTaskList().isEmpty()) {
-            throw new DukeException("☹ OOPS !!! La lista está vacía. ¡Agregue una nueva tarea!");
+            throw new DukeException("OOPS !!! La lista esta vacia. Agregue una nueva tarea!");
         }
         output = ui.showList(taskList);
         return output;

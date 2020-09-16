@@ -26,7 +26,7 @@ public class Repeater {
      */
     public static LocalDateTime correctDate(Task task) {
         LocalDateTime taskTime = task.getTime();
-        LocalDateTime currentTime = LocalDateTime.parse(LocalDateTime.now().format(SAVE_READ_DATETIME_FORMAT));
+        LocalDateTime currentTime = LocalDateTime.now();
         while (taskTime.isBefore(currentTime)) {
             switch (task.getFrequency().toString()) {
             case "daily":

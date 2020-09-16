@@ -26,16 +26,6 @@ public class DoneCommand extends Command {
     }
 
     /**
-     * Returns true if command terminates Duke.
-     *
-     * @return the boolean to continue Duke.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
-
-    /**
      * Executes the DoneCommand with the following TaskList, Ui and Storage classes.
      * The completed task in the TaskList at the position will change its status to completed.
      * The Ui will return the output to be displayed to the user. The storage will update
@@ -55,7 +45,7 @@ public class DoneCommand extends Command {
             output = ui.showDone(taskList.getTaskList().get(taskPosition));
             return output;
         } else {
-            throw new DukeException("☹ OOPS !!! ¡Esta tarea aún no existe!");
+            throw new DukeException("OOPS !!! Esta tarea aun no existe!");
         }
     }
 }

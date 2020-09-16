@@ -15,8 +15,8 @@ public class ExitCommand extends Command {
      * Terminates Duke and informs the Ui to inform the User.
      *
      * @param taskList the TaskList to be updated.
-     * @param ui the Ui that interacts with the user.
-     * @param storage the Storage that is updated with TaskList.
+     * @param ui       the Ui that interacts with the user.
+     * @param storage  the Storage that is updated with TaskList.
      * @return output to be displayed to the user.
      */
     @Override
@@ -24,13 +24,5 @@ public class ExitCommand extends Command {
         output = ui.showExit();
         return output;
     }
-
-    /**
-     * Returns true if command terminates Duke.
-     *
-     * @return boolean that terminates Duke.
-     */
-    public boolean isExit() {
-        return true;
-    }
 }
+

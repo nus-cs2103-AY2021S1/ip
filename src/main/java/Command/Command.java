@@ -31,6 +31,4 @@ public abstract class Command {
      * @throws DukeException throws exception that prints error message.
      */
     public abstract String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
-
-    public abstract boolean isExit();
 }

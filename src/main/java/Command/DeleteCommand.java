@@ -26,16 +26,6 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Returns true if command terminates Duke.
-     *
-     * @return the boolean to continue Duke.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
-
-    /**
      * Executes the DeleteCommand with the following TaskList, Ui and Storage classes.
      * The task at the given position will be removed from the TaskList. The Ui will
      * return the output to be displayed to the user. The storage will update with the
@@ -55,7 +45,7 @@ public class DeleteCommand extends Command {
             output = ui.showDeleted(taskList.getTaskList().get(taskPosition));
             return output;
         } else {
-            throw new DukeException("☹ OOPS !!! ¡Esta tarea aún no existe!");
+            throw new DukeException("OOPS !!! Esta tarea aun no existe!");
         }
     }
 }

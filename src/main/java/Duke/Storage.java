@@ -58,7 +58,7 @@ public class Storage {
      * @param ui the ui that will inform the user of errors in loading the tasks.
      * @return the lists of task that will be given to TaskList.
      */
-    public ArrayList<Task> load(Ui ui) {
+    public ArrayList<Task> load(Ui ui) throws DukeException {
         ArrayList<Task> listOfTasks = new ArrayList<>();
         try {
             Scanner sc1 = new Scanner(dukeFile);

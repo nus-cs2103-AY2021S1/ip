@@ -1,5 +1,6 @@
 package command;
 
+import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -26,16 +27,6 @@ public class IncorrectCommand extends Command {
     }
 
     /**
-     * Returns true if command terminates Duke.
-     *
-     * @return the boolean to continue Duke.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
-
-    /**
      * Executes the IncorrectCommand by updated the Ui with the message to be displayed
      * to the user as an error message. TaskList and Storage will not be affected.
      *
@@ -45,7 +36,7 @@ public class IncorrectCommand extends Command {
      * @return output to be displayed to the user.
      */
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         output = ui.showError(errorMessage);
         return output;
     }

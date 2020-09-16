@@ -68,7 +68,7 @@ public class Parser {
             if (restOfCommand.isEmpty()) {
                 return new ExitCommand();
             } else {
-                return new IncorrectCommand("OOPS !!! Lo siento, pero no sé qué significa eso :-(");
+                return new IncorrectCommand("OOPS !!! Lo siento, pero no se que significa eso :-(");
             }
         case COMMAND_COMPLETE_TASK:
             return handleDone(restOfCommand);
@@ -85,7 +85,7 @@ public class Parser {
         case COMMAND_REPEAT:
             return handleRepeat(restOfCommand);
         default:
-            return new IncorrectCommand("OOPS !!! Lo siento, pero no sé qué significa eso :-(");
+            return new IncorrectCommand("OOPS !!! Lo siento, pero no se que significa eso :-(");
         }
     }
 
@@ -97,13 +97,13 @@ public class Parser {
      */
     private static Command handleDone(String restOfCommand) {
         if (restOfCommand.isEmpty()) {
-            return new IncorrectCommand("☹ OOPS !!! La descripción de una tarea no puede estar vacía.");
+            return new IncorrectCommand("OOPS !!! La descripcion de una tarea no puede estar vacia.");
         }
         int positionDone;
         try {
             positionDone = Integer.parseInt(restOfCommand);
         } catch (NumberFormatException e) {
-            return new IncorrectCommand("☹ OOPS !!! Incapaz de completar");
+            return new IncorrectCommand("OOPS !!! Incapaz de completar");
         }
         positionDone = positionDone - 1;
         return new DoneCommand(positionDone);
@@ -117,13 +117,13 @@ public class Parser {
      */
     private static Command handleDelete(String restOfCommand) {
         if (restOfCommand.isEmpty()) {
-            return new IncorrectCommand("☹ OOPS !!! La descripción de una tarea no puede estar vacía.");
+            return new IncorrectCommand("OOPS !!! La descripcion de una tarea no puede estar vacia.");
         }
         int positionDone;
         try {
             positionDone = Integer.parseInt(restOfCommand);
         } catch (NumberFormatException e) {
-            return new IncorrectCommand("☹ OOPS !!! Incapaz de completar");
+            return new IncorrectCommand("OOPS !!! Incapaz de completar");
         }
         positionDone = positionDone - 1;
         return new DeleteCommand(positionDone);
@@ -137,10 +137,10 @@ public class Parser {
      */
     private static Command handleDeadline(String restOfCommand) {
         if (restOfCommand.isEmpty()) {
-            return new IncorrectCommand("☹ OOPS !!! La descripción de una tarea no puede estar vacía.");
+            return new IncorrectCommand("OOPS !!! La descripcion de una tarea no puede estar vacia.");
         }
         if (!restOfCommand.contains(DATE_DEADLINE)) {
-            return new IncorrectCommand("☹ OOPS !!! Debe establecer una fecha límite para esta tarea.");
+            return new IncorrectCommand("OOPS !!! Debe establecer una fecha limite para esta tarea.");
         }
         assert restOfCommand.contains(DATE_DEADLINE);
         int byPosition = restOfCommand.indexOf(DATE_DEADLINE);
@@ -151,7 +151,7 @@ public class Parser {
             date = LocalDateTime.parse(dateDescription, SAVE_READ_DATETIME_FORMAT);
         } catch (DateTimeParseException e) {
             return new IncorrectCommand(
-                    "☹ OOPS !!! Formato de fecha y hora incorrecto. Formatee como dd/MM/yyyy HHmm");
+                    "OOPS !!! Formato de fecha y hora incorrecto. Formatee como dd/MM/yyyy HHmm");
         }
         Deadline newDeadline = new Deadline(taskDescription);
         newDeadline.setTime(date);
@@ -166,10 +166,10 @@ public class Parser {
      */
     private static Command handleEvent(String restOfCommand) {
         if (restOfCommand.isEmpty()) {
-            return new IncorrectCommand("☹ OOPS !!! La descripción de una tarea no puede estar vacía.");
+            return new IncorrectCommand("OOPS !!! La descripción de una tarea no puede estar vacia.");
         }
         if (!restOfCommand.contains(DATE_EVENT)) {
-            return new IncorrectCommand("☹ OOPS !!! Debe establecer la hora del evento para esta tarea.");
+            return new IncorrectCommand("OOPS !!! Debe establecer la hora del evento para esta tarea.");
         }
         assert restOfCommand.contains(DATE_EVENT);
         int atPosition = restOfCommand.indexOf(DATE_EVENT);
@@ -180,7 +180,7 @@ public class Parser {
             date = LocalDateTime.parse(dateDescription, SAVE_READ_DATETIME_FORMAT);
         } catch (DateTimeParseException e) {
             return new IncorrectCommand(
-                    "☹ OOPS !!! Formato de fecha y hora incorrecto. Formatee como dd/MM/yyyy HHmm");
+                    "OOPS !!! Formato de fecha y hora incorrecto. Formatee como dd/MM/yyyy HHmm");
         }
         Event newEvent = new Event(taskDescription);
         newEvent.setTime(date);
@@ -202,16 +202,16 @@ public class Parser {
     private static Command handleRepeat(String restOfCommand) {
         int positionRepeat;
         if (restOfCommand.isEmpty()) {
-            return new IncorrectCommand("☹ OOPS !!! La descripción de una tarea no puede estar vacía.");
+            return new IncorrectCommand("OOPS !!! La descripción de una tarea no puede estar vacia.");
         }
         String[] splitWords = restOfCommand.split(" ");
         if (splitWords.length < 2) {
-            return new IncorrectCommand("☹ OOPS !!! No entiendo lo que estás diciendo, ¡inténtalo de nuevo!");
+            return new IncorrectCommand("OOPS !!! No entiendo lo que estas diciendo, ¡intentalo de nuevo!");
         }
         try {
             positionRepeat = Integer.parseInt(splitWords[0]);
         } catch (NumberFormatException e) {
-            return new IncorrectCommand("☹ OOPS !!! No entiendo lo que estás diciendo, ¡inténtalo de nuevo!");
+            return new IncorrectCommand("OOPS !!! No entiendo lo que estas diciendo, ¡intentalo de nuevo!");
         }
         for (FrequencyOfRecurrence frequency : FrequencyOfRecurrence.values()) {
             if (splitWords[1].equals(frequency.toString())) {
@@ -221,6 +221,6 @@ public class Parser {
         assert !restOfCommand.contains(FrequencyOfRecurrence.daily.toString());
         assert !restOfCommand.contains(FrequencyOfRecurrence.weekly.toString());
         assert !restOfCommand.contains(FrequencyOfRecurrence.monthly.toString());
-        return new IncorrectCommand("☹ OOPS !!! No entiendo lo que estás diciendo, ¡inténtalo de nuevo!");
+        return new IncorrectCommand("OOPS !!! No entiendo lo que estas diciendo, ¡intentalo de nuevo!");
     }
 }

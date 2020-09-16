@@ -18,6 +18,9 @@ public class Main extends Application {
 
     private Duke duke = new Duke("D:/uni/CS2103T/Duke(iP)/ip/data/tasks.txt");
 
+    public Main() throws DukeException {
+    }
+
     /**
      * Initializes Duke Application.
      *
@@ -29,6 +32,7 @@ public class Main extends Application {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
+            stage.setTitle("Spanish Duke");
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
