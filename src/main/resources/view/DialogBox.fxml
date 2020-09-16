@@ -6,9 +6,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" style="-fx-background-color: transparent;" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label fx:id="dialog" alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="45.0" style="-fx-border-radius: 10; -fx-border-width: 0.5; -fx-border-color: white;" text="Label" wrapText="true">
+        <Label fx:id="dialog" alignment="CENTER_RIGHT" style="-fx-background-radius: 5px; -fx-background-color: black;" text="Label" textFill="WHITE" wrapText="true">
          <font>
             <Font name="High Tower Text" size="14.0" />
          </font>
@@ -16,14 +16,14 @@
             <Insets />
          </opaqueInsets>
          <HBox.margin>
-            <Insets right="30.0" />
+            <Insets />
          </HBox.margin>
          <padding>
-            <Insets right="2.0" />
+            <Insets bottom="2.0" left="3.0" right="3.0" top="2.0" />
          </padding></Label>
-        <ImageView fx:id="displayPicture" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="displayPicture" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-radius: 10px; -fx-focus-color: transparent;">
          <HBox.margin>
-            <Insets left="10.0" right="10.0" />
+            <Insets left="5.0" right="5.0" />
          </HBox.margin></ImageView>
     </children>
     <padding>

@@ -38,8 +38,8 @@ public class Ui {
     public String welcomeMessage() {
         // Introduction at the beginning of the chat
         String response = "Greetings my Liege.\n"
-                + "    Why have you summoned me?\n\n"
-                + "    You may type \"help\" for a list"
+                + "Why have you summoned me?\n\n"
+                + "You may type \"help\" for a list"
                 + " of available commands.\n";
         return response;
     }
@@ -52,22 +52,22 @@ public class Ui {
      */
     public String availableCommands() {
         String response = "These are your available commands my Lord:\n\n"
-                + "    help - Show list of available commands\n"
-                + "    todo <Description of task>"
+                + "help - Show list of available commands\n"
+                + "todo <Description of task>"
                 + " - To add a normal to do task\n"
-                + "    deadline <Description of task>"
+                + "deadline <Description of task>"
                 + " /by <Date in YYYY-MM-DD> <Time in hh:mm>"
                 + " - To add a task with a deadline\n"
-                + "    event <Description of event>"
+                + "event <Description of event>"
                 + " /at <Date in YYYY-MM-DD> <Time in hh:mm>"
                 + " - To add an event\n"
-                + "    list all/todos/deadlines/events"
+                + "list all/todos/deadlines/events"
                 + " - List all <task type> tasks\n"
-                + "    list all/todos/deadlines/events done/not done"
+                + "list all/todos/deadlines/events done/not done"
                 + " - List <task type> tasks that are <done/not done>\n"
-                + "    find <keyword> - Find tasks based on keyword input\n"
-                + "    done <task number> - Mark task as done\n"
-                + "    delete <task number> - Delete task from list\n";
+                + "find <keyword> - Find tasks based on keyword input\n"
+                + "done <task number> - Mark task as done\n"
+                + "delete <task number> - Delete task from list\n";
         return response;
     }
 
@@ -83,7 +83,7 @@ public class Ui {
         assert (size >= 0);
         String response = "As you wish Sire. I have added the task:\n       "
                 + task.toString() + "\n"
-                + "    Now you have " + size
+                + "Now you have " + size
                 + " tasks in the list.\n";
         return response;
     }
@@ -296,7 +296,7 @@ public class Ui {
      */
     public String byeMessage() {
         String response = "It was a pleasure to serve you my Liege.\n"
-                + "    Till next time.";
+                + "Till next time.";
         return response;
     }
 
