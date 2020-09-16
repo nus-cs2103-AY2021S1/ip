@@ -9,10 +9,35 @@ Duke is a **desktop chat bot for managing and storing tasks**. Why try to rememb
 
 1. Download the latest `Duke-0.2-all.jar` from [here](https://github.com/ChenXJ98/ip/releases/tag/v0.1.2).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your QuickCache.
+1. Copy the file to the folder you want to use as the _home folder_ for your Duke.
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+1. Right-click the file and open the app. The GUI similar to the below should appear in a few seconds. <br>
    ![Ui](Ui.png)
+
+1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+      Some example commands you can try:
+
+      * **`list`** : Lists all Tasks.
+
+      * **`todo`**`Call my mom` : Adds a todo task `Call my mom` to the list.
+      
+      * **`deadline`**`Submit homework`**`/by`** `2020/05/04 0800`: Adds a deadline task `Submit homework` to the list to do by `Monday, 4 May 2020 08:00AM`.
+      
+      * **`event`**`Blackpink concert`**`/at`** `2020/05/04 0800`: Adds an event task `Blackpink concert` to the list to happen by `Monday, 4 May 2020 08:00AM`.
+
+      * **`done`**`3` : Marks the 3rd Task shown in the list as done.
+      
+      * **`delete`**`3` : Deletes the 3rd Task shown in the list.
+      
+      * **`event`**`3 d/BTS concert dt2020/06/04 0900`: Updates the 3rd Task shown in the list with the new description and datetime.
+
+      * **`find`**`apple`: Finds all tasks containing `apple`.      
+      
+      * **`bye`** : Exits the app.
+
+   1. Refer to the [Features](#features) below for details of each command.
+
+---
 
 ## Features 
 
