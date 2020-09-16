@@ -21,6 +21,6 @@ public class ListCommand extends UserCommand {
      */
     @Override
     public String execute(TaskList taskList, Ui ui) {
-        return ui.printResponse("Here are the task in your task list\n") + ui.printList(taskList);
+        return ui.printResponse("Here are the tasks in your task list:") + ui.printList(taskList);
     }
 }
