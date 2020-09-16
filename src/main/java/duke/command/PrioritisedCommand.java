@@ -1,13 +1,13 @@
 package duke.command;
 
+import java.util.List;
+
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.response.Response;
 import duke.task.Task;
 import duke.task.TaskPriority;
-
-import java.util.List;
 
 /**
  * Represents a priority command.
@@ -34,7 +34,8 @@ public class PrioritisedCommand extends Command {
             throw new DukeException("There are no tasks in your list with " + this.priority + " priority.");
         }
 
-        StringBuilder output = new StringBuilder("Here are the tasks in your list with " + this.priority + " priority.\n");
+        StringBuilder output = new StringBuilder("Here are the tasks in your list with "
+                + this.priority + " priority.\n");
 
         for (Task task : prioritisedTasks) {
             output.append(taskList.getTasks().indexOf(task) + 1).append(".").append(task).append('\n');

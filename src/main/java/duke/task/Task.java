@@ -47,6 +47,11 @@ public abstract class Task {
         return this.priority.equals(priority);
     }
 
+    /**
+     * Return a boolean indicating if the task contains all the tags in the given list.
+     * @param tags A list of tags.
+     * @return true if the task contains all the given tags.
+     */
     public boolean hasTags(List<String> tags) {
         if (tags.isEmpty()) {
             return this.tags.isEmpty();

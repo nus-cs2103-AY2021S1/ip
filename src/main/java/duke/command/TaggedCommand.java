@@ -1,13 +1,12 @@
 package duke.command;
 
+import java.util.List;
+
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.response.Response;
 import duke.task.Task;
-
-import java.time.format.DateTimeFormatter;
-import java.util.List;
 
 /**
  * Represents a tag command.
