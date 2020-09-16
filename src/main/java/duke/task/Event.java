@@ -1,4 +1,4 @@
-package duke;
+package duke.task;
 
 /**
  * A task that happens at a certain time.

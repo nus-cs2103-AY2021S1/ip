@@ -1,4 +1,4 @@
-package duke;
+package duke.task;
 
 /**
  * A task that need to be done by a certain deadline.

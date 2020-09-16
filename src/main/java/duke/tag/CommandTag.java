@@ -1,4 +1,4 @@
-package duke;
+package duke.tag;
 
 /**
  * List of supported commands and tags converted to String format

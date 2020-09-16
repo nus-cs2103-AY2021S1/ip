@@ -1,4 +1,4 @@
-package duke;
+package duke.exception;
 
 /**
  * Handle error when using invalid command.

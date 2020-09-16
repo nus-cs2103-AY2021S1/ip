@@ -1,4 +1,6 @@
-package duke;
+package duke.ui;
+
+import duke.utility.MyString;
 
 /**
  * UI to interact with user

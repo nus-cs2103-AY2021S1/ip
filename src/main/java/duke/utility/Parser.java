@@ -1,4 +1,6 @@
-package duke;
+package duke.utility;
+
+import duke.tag.CommandTag;
 
 /**
  * Parse command into specific command type for handling.

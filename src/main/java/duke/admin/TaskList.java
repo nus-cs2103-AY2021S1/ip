@@ -1,4 +1,9 @@
-package duke;
+package duke.admin;
+
+import duke.exception.DukeException;
+import duke.tag.CommandTag;
+import duke.task.*;
+import duke.utility.MyString;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -193,8 +198,8 @@ public class TaskList {
         String getTime = "";
         for (int i = 0; i < cmd.length(); ++i) {
             if (cmd.startsWith(CommandTag.AT_TAG, i)) {
-                getName = cmd.substring(CommandTag.EVENT.length(), i);
-                getTime = cmd.substring(i + CommandTag.AT_TAG.length());
+                getName = cmd.substring(CommandTag.EVENT.length(), i).trim();
+                getTime = cmd.substring(i + CommandTag.AT_TAG.length()).trim();
                 break;
             }
         }
@@ -311,13 +316,13 @@ public class TaskList {
         String to = "";
         for (int i = CommandTag.DO_WITHIN.length(); i < cmd.length(); ++i) {
             if (cmd.startsWith(CommandTag.BETWEEN_TAG, i)) {
-                getName = cmd.substring(CommandTag.DO_WITHIN.length(), i);
+                getName = cmd.substring(CommandTag.DO_WITHIN.length(), i).trim();
                 for (int j = i + CommandTag.DO_WITHIN.length(); j < cmd.length(); ++j) {
                     if (!cmd.startsWith(CommandTag.AND_TAG, j)) {
                         continue;
                     }
-                    from = cmd.substring(i + CommandTag.DO_WITHIN.length(), j);
-                    to = cmd.substring(j + CommandTag.AND_TAG.length());
+                    from = cmd.substring(i + CommandTag.DO_WITHIN.length(), j).trim();
+                    to = cmd.substring(j + CommandTag.AND_TAG.length()).trim();
                     break;
                 }
                 break;

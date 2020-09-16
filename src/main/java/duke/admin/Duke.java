@@ -1,4 +1,10 @@
-package duke;
+package duke.admin;
+
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.ui.Ui;
+import duke.utility.MyString;
+import duke.utility.Parser;
 
 /**
  * Duke best chatbot hehe.
