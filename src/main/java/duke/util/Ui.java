@@ -147,7 +147,7 @@ public class Ui {
         };
         StringBuilder sb = new StringBuilder("Here are the available commands:\n");
         for (String command: commands) {
-            sb.append(" - ").append(command).append("\n");
+            sb.append("- ").append(command).append("\n");
         }
         String additionalInfo = "Fields: <required> [optional]"
                 + "\nDate: YYYY-MM-DD or today/tomorrow"

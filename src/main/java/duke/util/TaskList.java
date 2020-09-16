@@ -72,7 +72,7 @@ public class TaskList {
             task = new Todo(description);
             break;
         case "deadline":
-            if (!description.contains(" /by ")) {
+            if (hasInvalidKeyword(" /by ", description)) {
                 throw new DukeException("Oops, incorrect format!\nSay 'help' to learn about the commands!");
             }
             try {
@@ -85,7 +85,7 @@ public class TaskList {
             }
             break;
         case "event":
-            if (!description.contains(" /at ")) {
+            if (hasInvalidKeyword(" /at ", description)) {
                 throw new DukeException("Oops, incorrect format!\nSay 'help' to learn about the commands!");
             }
             try {
@@ -98,7 +98,7 @@ public class TaskList {
             }
             break;
         case "fixed":
-            if (!description.contains(" /for ")) {
+            if (hasInvalidKeyword(" /for ", description)) {
                 throw new DukeException("Oops, incorrect format!\nSay 'help' to learn about the commands!");
             }
             try {
@@ -111,6 +111,22 @@ public class TaskList {
             }
         }
         return task;
+    }
+
+    private static boolean hasInvalidKeyword(String keyword, String text) {
+        if (!text.contains(keyword)) {
+            return true;
+        }
+        int count = 0;
+        for (int i = 0; i < text.length() - keyword.length(); i++) {
+            if (text.startsWith(keyword, i)) {
+                count++;
+            }
+            if (count > 1) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
