@@ -31,9 +31,6 @@ public class DialogBox extends HBox {
     /** The radius of the circular clip for the image. */
     private static final double RADIUS_CIRCLE_CLIP = 25.0;
 
-    /** The radius for the shadow effect behind the image. */
-    private static final double RADIUS_DROP_SHADOW = 5.0;
-
     @FXML
     private HBox dialogContainer;
     @FXML
@@ -126,28 +123,11 @@ public class DialogBox extends HBox {
 
     /**
      * Clips the display picture into a circle.
-     *
-     * Solution adapted from
-     * https://stackoverflow.com/questions/20489908/border-radius-and-shadow-on-imageview
      */
     private void clipPictureToCircle() {
         // Clips image to a circle.
         Circle clip = new Circle(RADIUS_CIRCLE_CLIP, RADIUS_CIRCLE_CLIP, RADIUS_CIRCLE_CLIP);
         displayPicture.setClip(clip);
-
-        // Snapshots rounded image.
-        SnapshotParameters params = new SnapshotParameters();
-        params.setFill(Color.TRANSPARENT);
-        WritableImage img = displayPicture.snapshot(params, null);
-
-        // Removes the clip so that effects show.
-        displayPicture.setClip(null);
-
-        // Applies shadow effect.
-        displayPicture.setEffect(new DropShadow(RADIUS_DROP_SHADOW, Color.BLACK));
-
-        // Restores the snapshot of the rounded image.
-        displayPicture.setImage(img);
     }
 
     /**

@@ -7,7 +7,7 @@
 <fx:root styleClass="dialog-root" alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.0" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@../css/rogue.css">
   <children>
     <HBox fx:id="dialogContainer" styleClass="dialog-text-container">
-      <Label fx:id="dialog" styleClass="dialog-text" text="Label" wrapText="true" minHeight="-Infinity" />
+      <Label fx:id="dialog" styleClass="dialog-text" wrapText="true" />
     </HBox>
     <HBox styleClass="dialog-image-container">
       <ImageView fx:id="displayPicture" styleClass="dialog-image" fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true" />
