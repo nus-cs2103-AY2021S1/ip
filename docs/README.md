@@ -20,50 +20,85 @@ On running the application successfully, you should see the pop-up window.
 </ul>
 
 ## Usage
-#### `todo <task>` - Adds a new task 
+### `todo <task>` - Adds a new task 
 Adds a new task to list.  
 
-Example of usage: 
-`todo running`
+Example of usage: `todo running`  
+<strong>Outcome:</strong>  
+````
+Got it. I've added this task:  
+    [T][?] running  
+Now you have 1 tasks in the list.
+````
 
-
-#### `event <task> /at <time>` - Adds a new event
+### `event <task> /at <time>` - Adds a new event
 Adds a new event to list.  
 
-Example of usage: 
-`event marathon /at 2pm`
-
-#### `deadline <task> /by <date> <time>` - Adds a new deadline
+Example of usage: `event marathon /at 2pm`  
+<strong>Outcome:</strong>  
+````
+Got it. I've added this task:  
+    [T][?] marathon (at: 2pm)  
+Now you have 1 tasks in the list.
+````
+### `deadline <task> /by <date> <time>` - Adds a new deadline
 Adds a new deadline to list.  
 
-Example of usage: 
-`deadline homework /by 23/10/2020 1400`
+Example of usage: `deadline homework /by 23/10/2020 1400`  
+<strong>Outcome:</strong>  
+````
+Got it. I've added this task:  
+    [T][?] homework (by: Friday, Oct 23, 2020 2.00 pm) 
+Now you have 1 tasks in the list.
+````
 
-#### `delete [list of task numbers]` - Deletes tasks
-Deletes all the tasks with the task numbers.  
+### `delete [list of task numbers]` - Deletes tasks
+Deletes all the tasks with the task numbers. 
 
-Example of usage: 
-`delete 1 2 3`  
-Outcome: deletes task 1, task 2 and task 3.
+Example of usage: `delete 1 2 3`  
+<strong>Outcome:</strong>  
+````
+I have deleted the following item:  
+    [T][?] running  
+	[E][?] marathon (at: 2pm)  
+	[T][?] sing  
+You got 2 task(s) left.
+````
 
-#### `find [list of keywords]` - Find tasks with given keywords
+### `find [list of keywords]` - Find tasks with given keywords
 Find all the tasks with at least 1 of the matching keyword.  
 
 Example of usage: 
 `find run sing jump`  
-Outcome: finds tasks that contains at least 1 of the keywords provided.
+<strong>Outcome:</strong>  
+````
+I found 3 items with the given keyword(s):
+	1. [T][?] run
+	2. [T][?] sing
+	3. [T][?] jumping
+````
 
-#### `list` - Returns all the tasks in the list
+### `list` - Returns all the tasks in the list
 Shows all the tasks currently stored in the list.
 
-Example of usage: 
-`list`  
+Example of usage: `list`  
+<strong>Outcome:</strong>  
+````
+There are 4 items in your list:
+	1. [E][?] marathon (at: 2pm)
+	2. [T][?] run
+	3. [T][?] sing
+	4. [T][?] jumping
+````
 
-#### `clear list` - Removes all the tasks in the list
+### `clear list` - Removes all the tasks in the list
 Remove all the tasks in the list.
-
 Example of usage: 
 `clear list`  
+<strong>Outcome:</strong>  
+````
+I have cleared the list!
+````
 ## Releases
 <u><strong> Updated UI v1.2 on 14/09/2020: </strong></u>
 ![GUI v1.2](Ui.png)
