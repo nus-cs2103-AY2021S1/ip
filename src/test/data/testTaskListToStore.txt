@@ -1,0 +1,3 @@
+todo - 0 - Make tea tonight!
+event - 0 - Midterm Test - Sep 30th 2020
+deadline - 1 - Submit tutorial - tonight!
