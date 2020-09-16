@@ -35,8 +35,8 @@ public class Ui {
 
     public static String sayHello() {
         LocalDate today = LocalDate.now();
-        String messageHello = Parser.format("Hello! I'm Duke - your personal "
-                + "task manager\n" + "      " + "Today is " + today
+        String messageHello = Parser.format("Hello! I'm Duke"
+                + "\n" + "      " + "Today is " + today
                 .format(DateTimeFormatter.ofPattern("MMM d yyyy")) + "\n      "
                 + "Last login was " + TaskList.getLastLoginDate()
                 .format(DateTimeFormatter.ofPattern("MMM d yyyy"))

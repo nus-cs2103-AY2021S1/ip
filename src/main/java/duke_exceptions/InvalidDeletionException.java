@@ -16,6 +16,6 @@ public class InvalidDeletionException extends Exception {
      */
     @Override
     public String toString() {
-        return "OOPS!!! Deletion index is invalid.";
+        return "Deletion index is invalid.";
     }
 }

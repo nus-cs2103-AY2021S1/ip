@@ -17,7 +17,7 @@ public class Parser {
      * @return formatted string
      */
     public static String format(String input) {
-        return SPACE + LINE + INDENT + input + "\n" + SPACE + LINE;
+        return /*SPACE + LINE +*/ INDENT + input + "\n" /*+ SPACE + LINE*/;
     }
 
     // command split indicators
@@ -77,7 +77,7 @@ public class Parser {
      * @return a formatted string of "content"
      */
     private String formatList(String content, String message) {
-        return SPACE + LINE + SPACE + message + "\n" + content + SPACE + LINE;
+        return /*SPACE + LINE + */SPACE + message + "\n" + content /*+ SPACE + LINE*/;
     }
 
     /**
@@ -254,7 +254,7 @@ public class Parser {
     private String handleAdd(TaskList lst, String command, TaskType taskType) {
         String description;
         try {
-            description = command.split(" ")[EXTRA];
+            description = command.split(" ", 2)[EXTRA];
         } catch (IndexOutOfBoundsException ex) {
             switch (taskType) {
             case T:

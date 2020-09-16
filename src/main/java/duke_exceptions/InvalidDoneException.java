@@ -16,6 +16,6 @@ public class InvalidDoneException extends Exception {
      */
     @Override
     public String toString() {
-        return "OOPS!!! Done index is invalid.";
+        return "Done index is invalid.";
     }
 }

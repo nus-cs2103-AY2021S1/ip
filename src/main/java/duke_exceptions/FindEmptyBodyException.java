@@ -16,6 +16,6 @@ public class FindEmptyBodyException extends EmptyBodyException {
      */
     @Override
     public String toString() {
-        return "OOPS!!! Empty find is invalid.";
+        return "Empty find is invalid.";
     }
 }

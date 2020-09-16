@@ -16,6 +16,6 @@ public class EventEmptyBodyException extends EmptyBodyException {
      */
     @Override
     public String toString() {
-        return "OOPS!!! The description of an event cannot be empty.";
+        return "The description of an event cannot be empty.";
     }
 }

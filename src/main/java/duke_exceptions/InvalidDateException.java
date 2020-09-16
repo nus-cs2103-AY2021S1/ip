@@ -15,6 +15,6 @@ public class InvalidDateException extends Exception {
      */
     @Override
     public String toString() {
-        return "OOPS!!! Date is invalid.";
+        return "Date is invalid.";
     }
 }

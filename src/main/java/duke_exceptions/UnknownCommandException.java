@@ -15,7 +15,7 @@ public class UnknownCommandException extends IndexOutOfBoundsException {
      */
     @Override
     public String toString() {
-        return "OOPS!!! I'm sorry, but I don't know what that means :-(";
+        return "I'm sorry, but I don't know what that means.";
 
     }
 }

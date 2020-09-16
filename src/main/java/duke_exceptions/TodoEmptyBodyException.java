@@ -16,6 +16,6 @@ public class TodoEmptyBodyException extends EmptyBodyException {
      */
     @Override
     public String toString() {
-        return "OOPS!!! The description of a todo cannot be empty.";
+        return "The description of a todo cannot be empty.";
     }
 }

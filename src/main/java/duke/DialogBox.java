@@ -2,25 +2,28 @@ package duke;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import java.io.IOException;
-import javafx.fxml.FXMLLoader;
+import javafx.scene.shape.Circle;
+import javafx.scene.text.Font;
 
 public class DialogBox extends HBox {
-    @FXML
-    private Label dialog;
-    private Label text;
+    protected Label text;
     private ImageView displayPicture;
+    private Circle circle;
+    private Font font = new Font("Baskerville", 14);
 
     public DialogBox(Label l, ImageView iv) {
         text = l;
         displayPicture = iv;
+
+        text.setMinWidth(35);
+        text.setMinHeight(30);
+        text.setFont(font);
+        text.setAlignment(Pos.CENTER);
 
         text.setWrapText(true);
         displayPicture.setFitWidth(80.0);
@@ -30,37 +33,29 @@ public class DialogBox extends HBox {
         this.getChildren().addAll(text, displayPicture);
     }
 
-    private DialogBox(String text, Image img) {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(MainWithUi.class.getResource("/view/DialogBox.fxml"));
-            fxmlLoader.setController(this);
-            fxmlLoader.setRoot(this);
-            fxmlLoader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public DialogBox(Label l, Circle c) {
+        text = l;
+        circle = c;
 
-        dialog.setText(text);
-        displayPicture.setImage(img);
+        text.setMinWidth(35);
+        text.setMinHeight(30);
+        text.setFont(font);
+        text.setAlignment(Pos.CENTER);
+
+        text.setWrapText(true);
+
+        this.setAlignment(Pos.TOP_RIGHT);
+        this.getChildren().addAll(text, c);
     }
 
     /**
      * Flips the dialog box such that the ImageView is on the left and text on the right.
      */
-    private void flip() {
+    protected void flip() {
         this.setAlignment(Pos.TOP_LEFT);
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         FXCollections.reverse(tmp);
         this.getChildren().setAll(tmp);
     }
 
-    public static DialogBox getUserDialog(Label l, ImageView iv) {
-        return new DialogBox(l, iv);
-    }
-
-    public static DialogBox getDukeDialog(Label l, ImageView iv) {
-        var db = new DialogBox(l, iv);
-        db.flip();
-        return db;
-    }
 }

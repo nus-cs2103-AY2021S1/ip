@@ -15,7 +15,7 @@ public class IllegalTaskTypeException extends Exception {
      */
     @Override
     public String toString() {
-        return "OOPS!!! Cannot detect task type";
+        return "Cannot detect task type";
     }
 }
 

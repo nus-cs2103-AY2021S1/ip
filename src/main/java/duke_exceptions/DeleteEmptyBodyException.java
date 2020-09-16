@@ -16,6 +16,6 @@ public class DeleteEmptyBodyException extends EmptyBodyException {
      */
     @Override
     public String toString() {
-        return "OOPS!!! Empty deletion is invalid.";
+        return "Empty deletion is invalid.";
     }
 }

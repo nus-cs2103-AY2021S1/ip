@@ -6,15 +6,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
+import javafx.scene.layout.*;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.scene.layout.Region;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+
 
 public class MainWithUi extends Application {
     private ScrollPane scrollPane;
@@ -26,10 +25,6 @@ public class MainWithUi extends Application {
     private Image dukePic = new Image(this.getClass().getResourceAsStream("/images/DaDuke.jpg"));
     private java.nio.file.Path path = java.nio.file.Paths.get(System.getProperty("user.home"), "ip","start.txt");
     private Duke dukeBot = new Duke(path);
-    Circle circle = new Circle(80);
-    Color c = Color.web("0077FF");
-    //setFill(new ImagePattern(userPic));
-
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -38,6 +33,7 @@ public class MainWithUi extends Application {
         //The container for the content of the chat to scroll.
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
+
         scrollPane.setContent(dialogContainer);
 
         userInput = new TextField();
@@ -49,20 +45,18 @@ public class MainWithUi extends Application {
         scene = new Scene(mainLayout);
 
         stage.setScene(scene);
-        //scene.setFill(Color.BLACK);
+        stage.setOpacity(0.95);
         stage.show();
 
         //Step 2. Formatting the window to look as expected
-        stage.setTitle("Dukebot");
-        stage.setResizable(true);
+        stage.setTitle("Duke");
+        stage.setResizable(false);
         stage.setMinHeight(600.0);
-        stage.setMinWidth(450.0);
-        stage.setMaxHeight(1000.0);
-        stage.setMaxWidth(450.0);
+        stage.setMinWidth(400.0);
 
-        mainLayout.setPrefSize(450.0, 600.0);
+        mainLayout.setPrefSize(400.0, 600.0);
 
-        scrollPane.setPrefSize(385, 535);
+        scrollPane.setPrefSize(390, 535);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
@@ -71,9 +65,8 @@ public class MainWithUi extends Application {
 
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
-        userInput.setPrefWidth(385.0);
-
-        sendButton.setPrefWidth(60.0);
+        userInput.setPrefWidth(335.0);
+        sendButton.setPrefWidth(55.0);
 
         AnchorPane.setTopAnchor(scrollPane, 1.0);
 
@@ -104,8 +97,6 @@ public class MainWithUi extends Application {
                 e.printStackTrace();
             }
         });
-
-        // more code to be added here later
     }
 
     /**
@@ -116,9 +107,18 @@ public class MainWithUi extends Application {
     private void handleUserInput() throws Exception {
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
+
+        Circle cu = new Circle(40);
+        cu.setFill(new ImagePattern(userPic));
+
+        Circle cd = new Circle(40);
+        cd.setFill(new ImagePattern(dukePic));
+
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new ImageView(userPic)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(dukePic))
+                DialogBoxUser.getUserDialog(userText, cu),
+                new Text(""),
+                DialogBoxDuke.getDukeDialog(dukeText, cd),
+                new Text("")
         );
         userInput.clear();
     }
@@ -127,9 +127,15 @@ public class MainWithUi extends Application {
         dukeBot.start();
         Label dukeTextHello = new Label(Ui.sayHello());
         Label dukeTextList = new Label(getResponse("list"));
+
+        Circle cd = new Circle(40);
+        cd.setFill(new ImagePattern(dukePic));
+
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(dukeTextHello, new ImageView(dukePic)),
-                DialogBox.getDukeDialog(dukeTextList, new ImageView(dukePic))
+                DialogBoxDuke.getDukeDialog(dukeTextHello, cd),
+                new Text(""),
+                DialogBoxDuke.getDukeDialog(dukeTextList, cd),
+                new Text("")
         );
     }
 
