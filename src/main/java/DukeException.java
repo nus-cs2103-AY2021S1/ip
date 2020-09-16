@@ -7,7 +7,10 @@ public class DukeException extends Exception {
         TODO,
         EVENT,
         DEADLINE,
-        VIEW_SCHEDULE
+        VIEW_SCHEDULE,
+        DELETE,
+        DONE,
+        FIND
     }
 
     DukeExceptionType dukeExceptionType;

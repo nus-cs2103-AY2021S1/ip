@@ -129,7 +129,7 @@ public class Ui {
         }
         StringBuilder output = new StringBuilder();
         if(temp.size() > 0) {
-            output.append("Here these patties match your description:");
+            output.append("Here these patties match your description:").append("\n");
             for (int i = 1; i <= temp.size(); i++) {
                 //print out task with numbering
                 output.append(String.format("%s. %s%n", i, temp.getTask(i).toString())).append("\n");

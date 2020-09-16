@@ -1,10 +1,12 @@
 public abstract class Command {
-    private TaskList taskList;
-    private Ui ui;
+    protected TaskList taskList;
+    protected Ui ui;
+    protected String arguments;
     
-    Command(TaskList taskList, Ui ui) {
+    Command(TaskList taskList, Ui ui, String arguments) {
         this.taskList = taskList;
         this.ui = ui;
+        this.arguments = arguments;
     }
     
     public abstract String execute();

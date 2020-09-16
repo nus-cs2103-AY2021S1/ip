@@ -26,28 +26,21 @@ public class Duke {
         this.parser = new Parser(ui, taskList, storage);
         storage.loadTasksOnSavedFile(taskList,ui);
     }
-    
-    public Ui getUi() {
-        return this.ui;
-    }
-    
-    public TaskList getTaskList() {
-        return taskList;
-    }
-    
-    public Storage getStorage() {
-        return storage;
-    }
-    
+
     /**
      * Returns the response of the parser as a String after parsing the user input.
      * @param input user input
      * @return Returns the response of the parser as a String after parsing the user input.
      */
     public String getResponse(String input) {
-        storage.saveTasksToSavedFile(taskList, ui);
-        return parser.parseAndProcessInput(input);
-        
+        try {
+            Command command = parser.parseInputIntoCommand(input);
+            String response = command.execute();
+            storage.saveTasksToSavedFile(taskList, ui);
+            return response;
+        } catch (DukeUnknownArgumentException e) {
+            return ui.showErrorMessage(e);
+        }
     }
     
 }

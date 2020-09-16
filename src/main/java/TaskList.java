@@ -57,7 +57,6 @@ public class TaskList {
     public TaskList getTasksOnDate(String date) {
         LocalDate userInputDate = LocalDate.parse(date,
                 DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-        System.out.println(userInputDate.toString());
         TaskList tasksOnDate = new TaskList();
         for(Task task: tasks) {
             if(task instanceof TimedTask) {
