@@ -85,8 +85,10 @@ Example of usage:
 
 Expected outcome:
 
-`1. [E][x] meeting for CS2103 (at: 14 Sep 2020 10.00pm)`
-`2. [E][x] CCAmeeting (at: 20 Sep 2020 7.00am)`
+```
+1. [E][x] meeting for CS2103 (at: 14 Sep 2020 10.00pm)
+2. [E][x] CCAmeeting (at: 20 Sep 2020 7.00am)
+```
 
 ### `date <DD-MM-YYYY>` 
 
@@ -94,12 +96,14 @@ Displays a list of tasks containing the keyword.
 
 Example of usage: 
 
-`find meeting`
+`date 14-09-2020`
 
 Expected outcome:
 
-`1. [E][x] meeting for CS2103 (at: 14 Sep 2020 10.00pm)`
-`2. [T][x] Group Project Task (at: 14 Sep 2020 7.00am)`
+```
+1. [E][x] meeting for CS2103 (at: 14 Sep 2020 10.00pm)
+2. [T][x] Group Project Task (at: 14 Sep 2020 7.00am)
+```
 
 ### `tag <index> <tag>` 
 
@@ -111,8 +115,10 @@ Example of usage:
 
 Expected outcome:
 
-`1. [E][x] meeting for CS2103 (at: 14 Sep 2020 10.00pm)`
-`2. [T][x] Group Project Task (at: 14 Sep 2020 7.00am) #urgent`
+```
+1. [E][x] meeting for CS2103 (at: 14 Sep 2020 10.00pm)
+2. [T][x] Group Project Task (at: 14 Sep 2020 7.00am) #urgent
+```
 
 ### `findtag <tag>` 
 
@@ -124,8 +130,10 @@ Example of usage:
 
 Expected outcome:
 
-`1. [E][x] meeting for CS2103 (at: 14 Sep 2020 10.00pm) #urgent #important`
-`2. [T][x] Group Project Task (at: 14 Sep 2020 7.00am) #abc #urgent`
+```
+1. [E][x] meeting for CS2103 (at: 14 Sep 2020 10.00pm) #urgent #important
+2. [T][x] Group Project Task (at: 14 Sep 2020 7.00am) #abc #urgent
+```
 
 ### `untag <tag>` 
 
@@ -137,8 +145,10 @@ Example of usage:
 
 Expected outcome:
 
-`1. [E][x] meeting for CS2103 (at: 14 Sep 2020 10.00pm) #important`
-`2. [T][x] Group Project Task (at: 14 Sep 2020 7.00am) #abc`
+```
+1. [E][x] meeting for CS2103 (at: 14 Sep 2020 10.00pm) #important
+2. [T][x] Group Project Task (at: 14 Sep 2020 7.00am) #abc
+```
 
 ### `untag <index> <tag>` 
 
@@ -150,8 +160,10 @@ Example of usage:
 
 Expected outcome:
 
-`1. [E][x] meeting for CS2103 (at: 14 Sep 2020 10.00pm) #urgent #important`
-`2. [T][x] Group Project Task (at: 14 Sep 2020 7.00am) #abc`
+```
+1. [E][x] meeting for CS2103 (at: 14 Sep 2020 10.00pm) #urgent #important
+2. [T][x] Group Project Task (at: 14 Sep 2020 7.00am) #abc
+```
 
 ### `delete <index>` 
 
