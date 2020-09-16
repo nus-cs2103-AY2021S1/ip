@@ -15,14 +15,14 @@ import java.util.regex.Pattern;
  */
 public class ArgumentParser {
     /** A valid input follows the pattern {@code <command> /<option1> <value1> (/<option2> <value2>...)} */
-    public static final Pattern PATTERN_VALID_INPUT = Pattern.compile("\\s*([\\w\\s-]+)\\s*(?:/[\\w\\s-]+)*");
+    public static final Pattern PATTERN_VALID_INPUT = Pattern.compile("\\s*([\\w\\s-]+)\\s*(?:/.+)*");
 
     /** An option-value pair follows the pattern {@code /<option> <value>}. */
-    public static final Pattern PATTERN_OPTIONS = Pattern.compile("(/[\\w-]+)\\s+([\\w\\s-]+)");
+    public static final Pattern PATTERN_OPTIONS = Pattern.compile("(/[\\w-]+)\\s+([^/]+)");
 
     /** Message for empty or invalid user inputs. */
     private static final String ERROR_INVALID_INPUT = "Do you not know the commands?"
-            + "I could consider telling you if you begged for help.";
+            + " I could consider telling you if you begged for help.";
 
     /**
      * Parses the input into an {@code Action} and its corresponding options.
