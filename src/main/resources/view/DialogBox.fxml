@@ -1,26 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.Bloom?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="206.0" prefWidth="424.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="TOP_RIGHT" prefHeight="200.0" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label fx:id="dialog" text="Label" wrapText="true">
-         <font>
-            <Font name="Arial" size="12.0" />
-         </font>
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets></Label>
-        <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="86.0" pickOnBounds="true" preserveRatio="true" />
+        <Text fx:id="dialog" lineSpacing="0.2" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+         <effect>
+            <Bloom />
+         </effect>
+         <HBox.margin>
+            <Insets top="10.0" />
+         </HBox.margin></Text>
+        <ImageView fx:id="displayPicture" fitHeight="78.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true">
+         <HBox.margin>
+            <Insets top="40.0" />
+         </HBox.margin></ImageView>
     </children>
     <padding>
         <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
     </padding>
    <opaqueInsets>
-      <Insets bottom="10.0" />
+      <Insets bottom="10.0" top="10.0" />
    </opaqueInsets>
 </fx:root>
