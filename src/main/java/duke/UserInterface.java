@@ -95,7 +95,7 @@ public class UserInterface {
     }
 
     public String showExitMessage() {
-        return outputUi(BYE_MESSAGE_LINE_1,BYE_MESSAGE_LINE_2);
+        return outputUi(BYE_MESSAGE_LINE_1, BYE_MESSAGE_LINE_2);
     }
 
     public String showInvalidDateFormatGiven() {

@@ -53,7 +53,7 @@ public class MainWindow extends AnchorPane {
     }
 
     public void greetUser() {
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(duke.greetDukeUser(),dukeImage));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(duke.greetDukeUser(), dukeImage));
     }
 
 }

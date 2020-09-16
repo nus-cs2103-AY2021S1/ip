@@ -230,7 +230,7 @@ public class Duke {
 
     }
 
-    private String schedule(String[] parsedUserInput){
+    private String schedule(String[] parsedUserInput) {
         try {
             scheduler.instantiateTasksList(this.tasksList);
 

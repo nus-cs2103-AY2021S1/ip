@@ -92,6 +92,6 @@ public class Parser {
      */
     LocalDateTime parseDateTimeFromTxtFile(String dateTime) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy h:mm a");
-        return LocalDateTime.parse(dateTime,formatter);
+        return LocalDateTime.parse(dateTime, formatter);
     }
 }

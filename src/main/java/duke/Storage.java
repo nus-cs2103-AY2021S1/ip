@@ -36,9 +36,9 @@ public class Storage {
         logger.setLevel(Level.WARNING);
         try {
             if (file.createNewFile()) {
-                logger.log(Level.INFO,"Tasks file created");
+                logger.log(Level.INFO, "Tasks file created");
             } else {
-                logger.log(Level.INFO,"Tasks file exist");
+                logger.log(Level.INFO, "Tasks file exist");
             }
         } catch (IOException e) {
             e.printStackTrace();

@@ -22,7 +22,7 @@ public class Scheduler {
     public List<Task> getTaskByDate(LocalDateTime beforeDate) {
         List<Task> tasksBeforeDate = new ArrayList<Task>();
 
-        for(int i = 0; i < tasksList.getNumOfTask(); i++) {
+        for (int i = 0; i < tasksList.getNumOfTask(); i++) {
             Task task = tasksList.getTask(i);
             Optional<LocalDateTime> localDateTimeOptional = task.getLocalDateTime();
             if (localDateTimeOptional.isPresent()) {
