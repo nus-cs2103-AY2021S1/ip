@@ -11,7 +11,7 @@ import static duke.ui.Ui.LINE_SEPARATOR;
  */
 public class TaskList {
 
-    private ArrayList<Task> tasks;
+    private final ArrayList<Task> tasks;
 
     /**
      * Constructs a task list containing the elements of the specifies ArrayList of tasks,

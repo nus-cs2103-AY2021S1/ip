@@ -20,9 +20,9 @@ import static duke.ui.Message.showError;
  */
 public class Duke {
 
-    private Storage storage;
+    private final Storage storage;
     private TaskList tasks;
-    private Ui ui;
+    private final Ui ui;
 
     public Duke() {
         this(STORAGE_FILEPATH);

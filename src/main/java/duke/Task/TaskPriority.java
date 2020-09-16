@@ -6,7 +6,7 @@ enum TaskPriority {
     MEDIUM(3),
     LOW(4);
 
-    private int priorityValue;
+    private final int priorityValue;
 
     TaskPriority(int value) {
         this.priorityValue = value;
