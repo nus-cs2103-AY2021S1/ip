@@ -83,7 +83,7 @@ Date format: `YYYY/MM/dd` or `YYYY-MM-dd`
 
 Date alternatives: `today` or `tomorrow` or select from dropdown calendar in GUI
 
-Time format (24 hr): `hh:mm` or `hh.mm`
+Time format (24 hr): `HH:mm`
 
 \> Example of usage:
 
@@ -108,7 +108,7 @@ Date format: `YYYY/MM/dd` or `YYYY-MM-dd`
 
 Date alternatives: `today` or `tomorrow` or select from dropdown calendar in GUI
 
-Time format (24 hr): `hh:mm` or `hh.mm`
+Time format (24 hr): `HH:mm`
 
 \> Example of usage:
 
@@ -150,11 +150,13 @@ now you have 4 tasks in the list!
 ### `start` - Starts a Fixed Duration Task
 Format: `start <task number> <date> <time>`
 
+Alternative: `start <task number> now` to set current date time
+
 Date format: `YYYY/MM/dd` or `YYYY-MM-dd`
 
 Date alternatives: `today` or `tomorrow` or select from dropdown calendar in GUI
 
-Time format (24 hr): `hh:mm` or `hh.mm`
+Time format (24 hr): `HH:mm`
 
 \> Example of usage:
 
@@ -174,6 +176,8 @@ Okay I've set this task's start date time:
 ### `done` - Marks Task as done
 Format: `done <task number>`
 
+Alternative: `done all`
+
 \> Example of usage:
 
 ```
@@ -192,9 +196,11 @@ Okay I've marked this task as done:
 ### `remove`/`delete` - Removes a Task
 Format: `remove <task number>`
 
-Alternative: `delete <task number>`
+Alternative command: `delete`
 
 Alternative: `remove all` to clear the task list
+
+Alternative: `remove done` to remove all tasks that are done
 
 \> Example of usage:
 
@@ -253,7 +259,7 @@ Here are the tasks in your list:
 Format: `find <keyword>`
 
 Tasks with description matching the entire string will be filtered, substrings are not filtered.
-For example, `"end"` will pick up description `"end of chapter"` but not `"find girlfriend"`.
+For example, `"friend"` will get description `"lunch with friend"` but not `"find girlfriend"`.
 
 \> Example of usage:
 
