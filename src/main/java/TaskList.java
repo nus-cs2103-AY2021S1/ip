@@ -88,6 +88,7 @@ public class TaskList {
      */
     public void modifyTime(int index, LocalTime newTime) {
         Task taskToBeModified = taskList.get(index);
+
         if (taskToBeModified instanceof Deadline) {
             Deadline task = (Deadline) taskToBeModified;
             taskList.set(index, task.changeTime(newTime));
@@ -104,6 +105,7 @@ public class TaskList {
      */
     public void modifyDate(int index, LocalDate newDate) {
         Task taskToBeModified = taskList.get(index);
+
         if (taskToBeModified instanceof Deadline) {
             Deadline task = (Deadline) taskToBeModified;
             taskList.set(index, task.changeDate(newDate));
@@ -116,55 +118,71 @@ public class TaskList {
     //Method that converts the saved tasks in the file which is in String format
     //into Task objects in the task list.
     private static Task convertToTask(String line) {
-        DateTimeFormatter myDateFormat = DateTimeFormatter.ofPattern("d MMM yyyy");
-        DateTimeFormatter myTimeFormat = DateTimeFormatter.ofPattern("h:mm a");
+
         if (line.startsWith("[T]", 2)) {
-            //It is a todo task
-            String[] parts = line.split(" ", 2);
-
-            if (line.contains("[✘]")) {
-                return new Task(parts[1]);
-            } else {
-                return new Task(parts[1]).markDone();
-            }
+            //It is an simple Task.
+            return convertToTodoTask(line);
         } else if (line.startsWith("[E]", 2)) {
-            //It is an event task
-            String[] parts = line.split(" ", 2);
-            String[] split = parts[1].split("\\(at:");
 
-            String desc = split[0];
-            String timeInfo = split[1].split("\\)")[0];
-
-            String[] dateTime = timeInfo.trim().split(", ");
-            String date = dateTime[1];
-            String time = dateTime[2];
-            if (line.contains("[✘]")) {
-
-                return new Event(desc, LocalDate.parse(date, myDateFormat), LocalTime.parse(time, myTimeFormat));
-            } else {
-
-                return new Event(desc, LocalDate.parse(date, myDateFormat),
-                        LocalTime.parse(time, myTimeFormat)).markDone();
-            }
+            //It is an event task.
+            return convertToEventTask(line);
         } else {
             //Is a deadline task
-            String[] parts = line.split(" ", 2);
-            String[] split = parts[1].split("\\(by:");
+            return convertToDeadlineTask(line);
+        }
+    }
 
-            String desc = split[0];
-            String timeInfo = split[1].split("\\)")[0];
+    private static Task convertToTodoTask(String line) {
+        String[] parts = line.split(" ", 2);
 
-            String[] dateTime = timeInfo.trim().split(", ");
-            String date = dateTime[1];
-            String time = dateTime[2];
-            if (line.contains("[✘]")) {
+        if (line.contains("[✘]")) {
+            return new Task(parts[1]);
+        } else {
+            return new Task(parts[1]).markDone();
+        }
+    }
 
-                return new Deadline(desc, LocalDate.parse(date, myDateFormat), LocalTime.parse(time, myTimeFormat));
-            } else {
+    private static Event convertToEventTask(String line) {
+        DateTimeFormatter myDateFormat = DateTimeFormatter.ofPattern("d MMM yyyy");
+        DateTimeFormatter myTimeFormat = DateTimeFormatter.ofPattern("h:mm a");
 
-                return new Deadline(desc, LocalDate.parse(date, myDateFormat),
-                        LocalTime.parse(time, myTimeFormat)).markDone();
-            }
+        String[] parts = line.split(" ", 2);
+        String[] split = parts[1].split("\\(at:");
+
+        String desc = split[0];
+        String timeInfo = split[1].split("\\)")[0];
+
+        String[] dateTime = timeInfo.trim().split(", ");
+        String date = dateTime[1];
+        String time = dateTime[2];
+
+        if (line.contains("[✘]")) {
+            return new Event(desc, LocalDate.parse(date, myDateFormat), LocalTime.parse(time, myTimeFormat));
+        } else {
+            return new Event(desc, LocalDate.parse(date, myDateFormat),
+                    LocalTime.parse(time, myTimeFormat)).markDone();
+        }
+    }
+
+    private static Deadline convertToDeadlineTask(String line) {
+        DateTimeFormatter myDateFormat = DateTimeFormatter.ofPattern("d MMM yyyy");
+        DateTimeFormatter myTimeFormat = DateTimeFormatter.ofPattern("h:mm a");
+
+        String[] parts = line.split(" ", 2);
+        String[] split = parts[1].split("\\(by:");
+
+        String desc = split[0];
+        String timeInfo = split[1].split("\\)")[0];
+
+        String[] dateTime = timeInfo.trim().split(", ");
+        String date = dateTime[1];
+        String time = dateTime[2];
+
+        if (line.contains("[✘]")) {
+            return new Deadline(desc, LocalDate.parse(date, myDateFormat), LocalTime.parse(time, myTimeFormat));
+        } else {
+            return new Deadline(desc, LocalDate.parse(date, myDateFormat),
+                    LocalTime.parse(time, myTimeFormat)).markDone();
         }
     }
 }

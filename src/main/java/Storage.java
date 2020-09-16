@@ -3,9 +3,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -15,22 +12,33 @@ import java.time.LocalTime;
 public class Storage {
 
     private TaskList taskList;
-    private boolean isInitialised;
+    private String filepath;
 
     /**
-     * Constructor of the storage object that stores the user's tasks.
+     * Constructor of the Storage object.
+     * @param filepath The filepath in which we are going to save our tasks.
      */
-    public Storage() {
+    public Storage(String filepath) {
         this.taskList = new TaskList();
-        isInitialised = false;
-    }
+        File file = new File(filepath);
 
-    /**
-     * Checks if storage is initialised.
-     * @return boolean Returns true if storage is initialised and false otherwise.
-     */
-    public boolean isInitialised() {
-        return this.isInitialised;
+        try {
+            file.getParentFile().mkdirs();
+
+            //Create the file if it does not exist.
+            file.createNewFile();
+        } catch (Exception e) {
+            //Create new file throws error
+            System.out.println("Error");
+        }
+
+        this.filepath = filepath;
+
+        try {
+            this.taskList.generateList(file);
+        } catch (FileNotFoundException e) {
+            System.out.println("Error");
+        }
     }
 
     /**
@@ -94,94 +102,33 @@ public class Storage {
         this.taskList.modifyDate(index, newDate);
     }
 
-    /**
-     * Retrieves the file containing the saved tasks in the user's computer.
-     * @throws FileNotFoundException If the file is not found.
-     * @throws IOException If the parent directory does not exists.
-     */
-    public void initialise() throws FileNotFoundException, IOException {
-        this.isInitialised = true;
 
-        String home = System.getProperty("user.home");
-        Path path = Paths.get(home, "ip", "src", "main", "java", "Data");
+    private void resetFile() throws IOException {
+        FileWriter fw = new FileWriter(this.filepath, false);
+        fw.close();
+    }
 
-        boolean directoryExists = Files.exists(path);
+    private void rewriteFile() throws IOException {
+        FileWriter fw = new FileWriter(this.filepath);
+        BufferedWriter bw = new BufferedWriter(fw);
 
-        if (!directoryExists) {
-            throw new FileNotFoundException();
+        for (int i = 0; i < this.taskList.size(); i++) {
+            Task task = this.taskList.getTask(i);
+            bw.write((i + 1) + "." + task.toString());
+
+            //Writes each task on a new line
+            bw.newLine();
         }
 
-        File file1 = new File(home + "/ip/src/main/java/Data/Duke.txt");
-        File file2 = new File(home + "/ip/src/main/java/Data/Duke2.txt");
-
-        //Checks which file is to be read and generated into the TaskList
-        if (file1.exists()) {
-            this.taskList.generateList(file1);
-        } else if (file2.exists()) {
-            this.taskList.generateList(file2);
-        } else {
-            //If no file creates a new empty file
-            Path newPath = Files.createFile(Path.of(home + "/ip/src/main/java/Data/Duke.txt"));
-            File newFile = new File(String.valueOf(newPath));
-
-            this.taskList.generateList(newFile);
-        }
+        bw.close();
     }
 
     /**
-     * Saves the user's tasks in a file at the end of the program.
-     * @throws IOException If the parent directory is not found.
-     * @throws FileNotFoundException If the file is lost or deleted.
+     * Saves all the tasks that the user currently has.
+     * @throws IOException If the file path does not exist.
      */
-    public void save() throws IOException, FileNotFoundException {
-
-        String home = System.getProperty("user.home");
-        Path path = Paths.get(home, "ip", "src", "main", "java", "Data");
-
-        boolean directoryExists = Files.exists(path);
-
-        //Checks if directory is unchanged
-        if (!directoryExists) {
-            throw new FileNotFoundException();
-        }
-
-        File file1 = new File(home + "/ip/src/main/java/Data/Duke.txt");
-        if (file1.exists()) {
-            //Creates new file to store the new tasks
-            Files.createFile(Path.of(home + "/ip/src/main/java/Data/Duke2.txt"));
-            FileWriter fw = new FileWriter(home + "/ip/src/main/java/Data/Duke2.txt");
-            BufferedWriter bw = new BufferedWriter(fw);
-
-            //Delete the old file1 so that it will not be read the next time Duke is activated
-            Files.delete(Paths.get(home + "/ip/src/main/java/Data/Duke.txt"));
-
-            for (int i = 0; i < this.taskList.size(); i++) {
-                Task task = this.taskList.getTask(i);
-                bw.write((i + 1) + "." + task.toString());
-
-                //Writes each task on a new line
-                bw.newLine();
-            }
-
-            bw.close();
-        } else {
-            //Creates new file to store the new tasks
-            Files.createFile(Path.of(home + "/ip/src/main/java/Data/Duke.txt"));
-            FileWriter fw = new FileWriter(home + "/ip/src/main/java/Data/Duke.txt");
-            BufferedWriter bw = new BufferedWriter(fw);
-
-            //Delete the old file so that it will not be read the next time Duke is activated
-            Files.delete(Paths.get(home + "/ip/src/main/java/Data/Duke2.txt"));
-
-            for (int i = 0; i < this.taskList.size(); i++) {
-                Task task = this.taskList.getTask(i);
-                bw.write((i + 1) + "." + task.toString());
-
-                //Writes the task on a new line
-                bw.newLine();
-            }
-
-            bw.close();
-        }
+    public void save() throws IOException {
+        resetFile();
+        rewriteFile();
     }
 }

@@ -30,24 +30,14 @@ public class Duke extends Application {
     /**
      * Constructor of the Duke chat bot.
      */
-    public Duke() {
-        this.storage = new Storage();
-        this.ui = UI.initialise(this.storage);
+    public Duke(String filepath) {
+        this.storage = new Storage(filepath);
+        this.ui = UI.getAccessTo(this.storage);
     }
 
-    /**
-     * Activates the storage of the Duke bot and runs the bot.
-     */
-    public void run() {
-        try {
-            this.storage.initialise();
-        } catch (Exception e) {
-            this.ui.showError(e);
-        }
-    }
 
     public String startUpMessage() {
-        return this.ui.startUpMessage();
+        return this.ui.showStartMessage();
     }
 
     @Override
@@ -160,8 +150,7 @@ public class Duke extends Application {
      * @param args Unused.
      */
     public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.run();
+        Duke duke = new Duke("data/tasks.txt");
     }
 }
 

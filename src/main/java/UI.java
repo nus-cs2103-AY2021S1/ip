@@ -10,29 +10,29 @@ public class UI {
 
     private Storage storage;
     private Parser parser;
-    private String updateStatus;
+    private String updateType;
     private int updateIndex;
 
     private UI(Storage storage) {
         this.storage = storage;
         this.parser = new Parser();
-        this.updateStatus = "Not updating";
+        this.updateType = "Not updating";
         this.updateIndex = -1;
     }
 
     /**
-     * Initialises the UI with the storage.
+     * Initialises the UI with the storage, so that UI can now access the storage information.
      * @param storage The storage that the UI is going to have access to.
      * @return UI The UI that is now ready to communicate with the storage.
      */
-    public static UI initialise(Storage storage) {
+    public static UI getAccessTo(Storage storage) {
         return new UI(storage);
     }
 
     /**
      * Reads a starting message at the start of UI.
      */
-    public String startUpMessage() {
+    public String showStartMessage() {
         return "Hi! I'm Duke" + "\n" + this.readSavedTasks() + "\n" + "What can I do for you?";
     }
 
@@ -54,16 +54,19 @@ public class UI {
         }
     }
 
-    private String getListOfMatches(String keyword) {
+    private String getListOfMatches(String ... keywords) {
         int size = this.storage.getSizeofTasks();
         int increment = 1;
 
         String listOfMatches = " Here are the matching tasks in your list:";
 
-        for (int i = 0; i < size; i++) {
-            if (this.storage.getTaskFromList(i).toString().contains(keyword)) {
-                listOfMatches += "\n" + "  " + increment + ". " + this.storage.getTaskFromList(i).toString();
-                increment++;
+        for (int i = 0; i < keywords.length; i++) {
+            String keyword = keywords[i];
+            for (int j = 0; j < size; j++) {
+                if (this.storage.getTaskFromList(j).toString().contains(keyword)) {
+                    listOfMatches += "\n" + "  " + increment + ". " + this.storage.getTaskFromList(j).toString();
+                    increment++;
+                }
             }
         }
 
@@ -89,24 +92,9 @@ public class UI {
      * @throws IOException If there is an error with the user input.
      */
     public String processInput(String input) throws IOException {
-        if (!this.storage.isInitialised()) {
-            return "Storage not initialised!";
-        }
-
         try {
-
             if (this.isUpdating()) {
-                int updateStatus = this.parser.processUpdate(input, this.updateStatus);
-
-                Task taskToChange = this.storage.getTaskFromList(this.updateIndex);
-
-                this.proceedUpdate(updateStatus, input);
-
-                Task taskChangedTo = this.storage.getTaskFromList(this.updateIndex);
-                this.updateStatus = "Not updating";
-                this.updateIndex = -1;
-
-                return "Updated:" + "\n" + taskToChange + "\n" + "    ↓" + "\n" + taskChangedTo;
+                return this.processUpdate(input);
             }
 
             int parseResult = this.parser.parse(input, this.storage.getSizeofTasks());
@@ -116,56 +104,107 @@ public class UI {
                 return this.readSavedTasks();
             }
             if (isDoneCommand(parseResult)) {
-                int index = this.parser.getIndex(input);
-                this.storage.markDone(index);
-
-                return "Nice! I've marked this task as done:"
-                        + "\n" + "  " + this.storage.getTaskFromList(index).toString();
+                return processDoneCommand(input);
             }
             if (isDeleteCommand(parseResult)) {
-                int index = this.parser.getIndex(input);
-                Task toBeDeleted = this.storage.getTaskFromList(index);
-                this.storage.deleteTask(index);
-
-                return "Noted. I've removed this task:" + "\n" + "  " + toBeDeleted
-                        + "\n" + "Now you have " + (this.storage.getSizeofTasks()) + " tasks in the list.";
+                return processDeleteCommand(input);
             }
             if (isFindCommand(parseResult)) {
-                String keyword = this.parser.getKeyword(input);
-
-                return getListOfMatches(keyword);
+                return processFindCommand(input);
             }
             if (isUpdateCommand(parseResult)) {
-                //Get update type: time, task, desc, date
-                String updateType = this.parser.getUpdateType(input);
-                int index = this.parser.getUpdateIndex(input) - 1;
-                String taskType = this.storage.getTaskType(index);
-
-                this.parser.verifyTaskCanUpdate(updateType, taskType);
-
-                this.updateStatus = updateType;
-                this.updateIndex = index;
-
-                return "Ok, Please type in the new " + updateType;
+                return verifyUpdateCommand(input);
             }
             if (parser.isTerminateCommand(input)) {
-                this.storage.save();
-
-                return "See you again!";
+                return processTerminateCommand();
             }
-
             //If reached here, means input must be a task command
-            Task newTask = this.parser.getTask(input);
-            this.storage.addTask(newTask);
-
-            return "Got it. I've added this task:"
-                    + "\n" + "  " + this.storage.getTaskFromList(this.storage.getSizeofTasks() - 1)
-                    + "\n" + "Now you have " + this.storage.getSizeofTasks() + " tasks in the list.";
+            return processTaskCommand(input);
         } catch (InvalidCommandException e) {
             return e + "\n" + "Please enter a valid command";
         } catch (InvalidInputException e) {
             return e + "\n" + "Please enter a valid input";
         }
+    }
+
+    private String processUpdate(String input) {
+
+        if (this.parser.isAbortUpdate(input)) {
+            this.updateType = "Not updating";
+            this.updateIndex = -1;
+
+            return "Update aborted.";
+        }
+
+        Task taskToBeChange = this.storage.getTaskFromList(this.updateIndex);
+
+        try {
+            int updateStatus = this.parser.checkInputMatchesUpdate(input, this.updateType);
+            this.proceedUpdate(updateStatus, input);
+        } catch (InvalidCommandException e) {
+            return e.toString() + "\nType \"abort\" to cancel update.";
+        } catch (InvalidInputException e) {
+            return e.toString() + "\nType \"abort\" to cancel update.";
+        }
+
+        Task taskChangedTo = this.storage.getTaskFromList(this.updateIndex);
+
+        this.updateType = "Not updating";
+        this.updateIndex = -1;
+
+        return "Updated:" + "\n" + taskToBeChange + "\n" + "    ↓" + "\n" + taskChangedTo;
+    }
+
+    private String processDoneCommand(String input) {
+        int index = this.parser.getIndex(input);
+        this.storage.markDone(index);
+
+        return "Nice! I've marked this task as done:"
+                + "\n" + "  " + this.storage.getTaskFromList(index).toString();
+    }
+
+    private String processDeleteCommand(String input) {
+        int index = this.parser.getIndex(input);
+        Task toBeDeleted = this.storage.getTaskFromList(index);
+        this.storage.deleteTask(index);
+
+        return "Noted. I've removed this task:" + "\n" + "  " + toBeDeleted
+                + "\n" + "Now you have " + (this.storage.getSizeofTasks()) + " tasks in the list.";
+    }
+
+    private String processFindCommand(String input) {
+        String[] keywords = this.parser.getKeyword(input);
+        return getListOfMatches(keywords);
+    }
+
+    private String verifyUpdateCommand(String input) throws InvalidCommandException {
+        //Get update type: time, task, desc, date
+        String updateType = this.parser.getUpdateType(input);
+        int index = this.parser.getIndex(input);
+        String taskType = this.storage.getTaskType(index);
+
+        //Check if the task at the index can be updated this way
+        this.parser.verifyTaskCanUpdate(updateType, taskType);
+
+        this.updateType = updateType;
+        this.updateIndex = index;
+
+        return "Ok, please type in the new " + updateType + "," + "\nor type \"abort\" to cancel update.";
+    }
+
+    private String processTerminateCommand() throws IOException {
+        this.storage.save();
+
+        return "See you again!";
+    }
+
+    private String processTaskCommand(String input) throws InvalidInputException, InvalidCommandException {
+        Task newTask = this.parser.getTask(input);
+        this.storage.addTask(newTask);
+
+        return "Got it. I've added this task:"
+                + "\n" + "  " + this.storage.getTaskFromList(this.storage.getSizeofTasks() - 1)
+                + "\n" + "Now you have " + this.storage.getSizeofTasks() + " tasks in the list.";
     }
 
     private void proceedUpdate(int updateStatus, String input) throws InvalidInputException, InvalidCommandException {
@@ -196,7 +235,7 @@ public class UI {
     }
 
     private boolean isUpdating() {
-        return !this.updateStatus.equals("Not updating");
+        return !this.updateType.equals("Not updating");
     }
 
     private boolean isListCommand(int num) {

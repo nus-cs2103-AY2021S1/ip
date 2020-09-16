@@ -1,6 +1,7 @@
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
+import java.util.Arrays;
 
 /**
  * Parses input by the user and identifies the commands.
@@ -30,10 +31,10 @@ public class Parser {
         if (isListCommand(input)) {
             return LIST_COMMAND;
         } else if (isDoneCommand(input)) {
-            verifyDoneCommand(input, sizeOfList);
+            verifyDoneOrDeleteCommand(input, sizeOfList);
             return DONE_COMMAND;
         } else if (isDeleteCommand(input)) {
-            verifyDeleteCommand(input, sizeOfList);
+            verifyDoneOrDeleteCommand(input, sizeOfList);
             return DELETE_COMMAND;
         } else if (isFindCommand(input)) {
             verifyFindCommand(input);
@@ -47,30 +48,31 @@ public class Parser {
     }
 
     /**
-     * Retrieves the index for a delete or done command in the input string.
+     * Retrieves the index for a delete, done or update command in the input string.
      * @param input The user input.
      * @return int The index of the task which the user wants to delete/mark as done.
      */
     public int getIndex(String input) {
-        String[] parts = input.split(" ");
-        return Integer.parseInt(parts[1]) - 1;
-    }
+        String[] words = getStringTokens(input);
 
-    public int getUpdateIndex(String input) {
-        return Integer.parseInt(input.trim().split("\\W+")[2]);
+        if (isUpdateCommand(input.trim())) {
+            return Integer.parseInt(words[2]) - 1;
+        }
+        return Integer.parseInt(words[1]) - 1;
     }
 
     /**
-     * Retrieves the keyword for a find command in the input string.
+     * Retrieves the keywords for a find command in the input string.
      * @param input The user input.
      * @return String The keyword that the user is looking for.
      */
-    public String getKeyword(String input) {
-        return input.trim().split(" ", 2)[1].trim();
+    public String[] getKeyword(String input) {
+        String[] tokens = getStringTokens(input);
+        return Arrays.copyOfRange(tokens, 1, tokens.length);
     }
 
     public String getUpdateType(String input) {
-        return input.trim().split("\\W+")[1];
+        return getStringTokens(input)[1];
     }
 
     /**
@@ -82,7 +84,7 @@ public class Parser {
     public void verifyTaskCanUpdate(String updateType, String taskType) throws InvalidCommandException {
         if (updateType.equals("time") || updateType.equals("date")) {
             if (taskType.equals("Task")) {
-                throw new InvalidCommandException("Sorry, can't update the task this way");
+                throw new InvalidCommandException("Sorry, can't update the task this way.");
             }
         }
     }
@@ -95,44 +97,40 @@ public class Parser {
      * @throws InvalidCommandException If command is of invalid format.
      */
     public Task getTask(String input) throws InvalidInputException, InvalidCommandException {
-        String[] parts = input.trim().split(" ", 2);
+        String[] words = getStringTokens(input);
+        String taskType = words[0];
+
+        if (taskType.isBlank()) {
+            throw new InvalidInputException("Please input something!");
+        }
 
         try {
-            if (input.startsWith("todo")) {
-                //Verify the todo command is of the correct format
-                verifyTodo(input);
+            if (taskType.equals("todo")) {
+                String description = getDescription(words);
 
-                return new Task(parts[1]);
+                return new Task(description);
             }
 
-            if (input.startsWith("deadline")) {
-                //Verify the deadline command has the format "deadline ___ /by ___
-                verifyDeadline(input);
+            if (taskType.equals("deadline")) {
+                String keyword = "/by";
 
-                //Split into description and date, time info
-                String[] split = parts[1].split("/by");
+                String description = getDescription(words, keyword);
+                LocalDate date = getDate(words, keyword);
+                LocalTime time = getTime(words, keyword);
 
-                //Should be of format yyyy-mm-dd x:x
-                LocalDate date = getDate(split[1]);
-                LocalTime time = getTime(split[1]);
-
-                return new Deadline(split[0], date, time);
+                return new Deadline(description, date, time);
             }
 
-            if (input.startsWith("event")) {
-                //Verify the event command has the format "event ___ /at ___
-                verifyEvent(input);
+            if (taskType.equals("event")) {
+                String keyword = "/at";
 
-                //Split into description and date, time info
-                String[] split = parts[1].split("/at");
+                String description = getDescription(words, keyword);
+                LocalDate date = getDate(words, keyword);
+                LocalTime time = getTime(words, keyword);
 
-                //Should be of format yyyy-mm-dd x:x
-                LocalDate date = getDate(split[1]);
-                LocalTime time = getTime(split[1]);
-
-                return new Event(split[0], date, time);
+                return new Event(description, date, time);
             } else {
-                throw new InvalidInputException("Sorry, I don't know what that means :(");
+                throw new InvalidInputException("Sorry, I don't know what " + "\"" + input + "\"" + " means.");
             }
         } catch (InvalidCommandException e) {
             throw e;
@@ -148,7 +146,7 @@ public class Parser {
      * @return int The status of the update.
      * @throws InvalidCommandException If the input does not match the update type that the user is initiating.
      */
-    public int processUpdate(String input, String updateType) throws InvalidCommandException {
+    public int checkInputMatchesUpdate(String input, String updateType) throws InvalidCommandException {
         String trimmedInput = input.trim();
         int changeDate = 1;
         int changeTime = 2;
@@ -178,83 +176,19 @@ public class Parser {
         return changeDesc;
     }
 
-    private static void verifyTodo(String input) throws InvalidCommandException {
-        String[] parts = input.split(" ");
+    private static void verifyDoneOrDeleteCommand(String input, int numOfTasks) throws InvalidCommandException {
+        String[] words = getStringTokens(input);
 
-        if (parts.length <= 1) {
-            throw new InvalidCommandException("Sorry, the description of a todo cannot be empty :(");
-        }
-    }
-
-    private static void verifyDeadline(String input) throws InvalidCommandException {
-        if (!input.contains(" /by ")) {
-            throw new InvalidCommandException(
-                    "Sorry, missing /by keyword, make sure to leave a space before and after the /by keyword!");
+        if (words.length == 1) {
+            throw new InvalidCommandException("Please give an index.");
         }
 
-        //Checks if there is a spacing after the deadline word
-        if (input.charAt(8) != ' ') {
-            throw new InvalidCommandException("Sorry please leave a space after the deadline command!");
+        if (words.length > 2) {
+            throw new InvalidCommandException("Sorry wrong format!");
         }
 
-        String[] parts = input.split(" ", 2);
-
-        //Parts 1 should include the description + " /by " + date and time info
-        if (parts[1].startsWith("/by")) {
-            throw new InvalidCommandException("Sorry, missing deadline description :(");
-        }
-
-        //Split into description and date, time info
-        String[] split = parts[1].split("/by");
-
-        if (split.length <= 1 || split[1].isBlank()) {
-            throw new InvalidCommandException("Sorry, missing deadline time and date :(");
-        }
-
-        if (split[0].isBlank()) {
-            throw new InvalidCommandException("Sorry, missing deadline description :(");
-        }
-    }
-
-    private static void verifyEvent(String input) throws InvalidCommandException {
-        if (!input.contains(" /at ")) {
-            throw new InvalidCommandException(
-                    "Sorry, missing /at keyword, make sure to leave a space before and after the /at keyword!");
-        }
-
-        //Checks if there is a spacing after the deadline word
-        if (input.charAt(5) != ' ') {
-            throw new InvalidCommandException("Sorry please leave a space after the event command!");
-        }
-
-        String[] parts = input.split(" ", 2);
-
-        //Parts 1 should include the description + " /by " + date and time info
-        if (parts[1].startsWith("/at")) {
-            throw new InvalidCommandException("Sorry, missing event description :(");
-        }
-
-        //Split into description and date, time info
-        String[] split = parts[1].split("/at");
-
-        if (split.length <= 1 || split[1].isBlank()) {
-            throw new InvalidCommandException("Sorry, missing event time and date :(");
-        }
-
-        if (split[0].isBlank()) {
-            throw new InvalidCommandException("Sorry, missing event description :(");
-        }
-    }
-
-    private static boolean isDeleteCommand(String input) {
-        String[] parts = input.split(" ");
-        return parts[0].equals("delete") && parts.length == 2;
-    }
-
-    private static void verifyDeleteCommand(String input, int numOfTasks) throws InvalidCommandException {
         try {
-            String[] parts = input.split(" ");
-            int index = Integer.parseInt(parts[1]) - 1;
+            int index = Integer.parseInt(words[1]) - 1;
 
             boolean numInRange = index > -1 && index < numOfTasks;
 
@@ -262,63 +196,29 @@ public class Parser {
                 throw new InvalidCommandException("Number is invalid!");
             }
         } catch (NumberFormatException e) {
-            throw new InvalidCommandException(("Please input number after the delete command!"));
+            throw new InvalidCommandException(("Please input number after the command!"));
         }
-    }
-
-    //Checks if starts with done and is two parts
-    private static boolean isDoneCommand(String input) {
-        String[] parts = input.split(" ");
-        return parts[0].equals("done") && parts.length == 2;
-    }
-
-    //Checks if number input is within taskList range and valid
-    private static void verifyDoneCommand(String input, int numOfTasks) throws InvalidCommandException {
-        try {
-            String[] parts = input.split(" ");
-            int index = Integer.parseInt(parts[1]) - 1;
-
-            boolean numInRange = index > -1 && index < numOfTasks;
-
-            if (!numInRange) {
-                throw new InvalidCommandException("Number is invalid!");
-            }
-        } catch (NumberFormatException e) {
-            throw new InvalidCommandException(("Please input number after the done command!"));
-        }
-    }
-
-    private static boolean isFindCommand(String input) {
-        return input.startsWith("find");
     }
 
     private static void verifyFindCommand(String input) throws InvalidCommandException {
-        if (input.length() == 4 || input.split(" ").length < 2) {
-            throw new InvalidCommandException("find what?");
-        } else if (!(input.charAt(4) == ' ')) {
-            throw new InvalidCommandException("Please make sure there is a space after the find keyword!");
+        String[] tokens = getStringTokens(input);
+        if (tokens.length < 2) {
+            throw new InvalidCommandException("Find what?");
         }
-    }
-
-    private static boolean isUpdateCommand(String input) {
-
-        //Checks if there is a spacing after update keyword
-        String[] parts = input.split(" ");
-
-        return parts[0].equals("update");
     }
 
     private static void verifyUpdateCommand(String input, int numOfTasks) throws InvalidCommandException {
-        //Split the verify command into 3 parts, the command, what to update and the number
-        String[] words = input.split("\\W+");
+        String[] words = getStringTokens(input);
 
+        //Should have 3 parts, the "update" command, the update type and the index.
         if (words.length != 3) {
-            throw new InvalidCommandException("Sorry wrong format");
+            throw new InvalidCommandException("Sorry wrong format.");
         }
 
-        if (!words[1].equals("time") && !words[1].equals("date") && !words[1].equals("task")
-                && !words[1].equals("desc")) {
-            throw new InvalidCommandException("Sorry I can't update that");
+        String updateType = words[1];
+        if (!updateType.equals("time") && !updateType.equals("date") && !updateType.equals("task")
+                && !updateType.equals("desc")) {
+            throw new InvalidCommandException("Sorry I can't update that.");
         }
 
         try {
@@ -334,8 +234,24 @@ public class Parser {
 
     }
 
-    public static boolean isListCommand(String input) {
+    private static boolean isListCommand(String input) {
         return input.equals("list");
+    }
+
+    private static boolean isDoneCommand(String input) {
+        return input.startsWith("done");
+    }
+
+    private static boolean isDeleteCommand(String input) {
+        return input.startsWith("delete");
+    }
+
+    private static boolean isFindCommand(String input) {
+        return input.startsWith("find");
+    }
+
+    private static boolean isUpdateCommand(String input) {
+        return input.startsWith("update");
     }
 
     /**
@@ -344,48 +260,108 @@ public class Parser {
      * @return boolean True if command is equals to "bye", returns false otherwise.
      */
     public boolean isTerminateCommand(String input) {
-        return input.equals("bye");
+        return input.trim().equals("bye");
     }
 
-    private static LocalDate getDate(String string) throws InvalidCommandException {
-        //Currently only accepts date in yyyy-mm-dd format
-        try {
-            //Removing the whitespace before and after the string
-            String timeDate = string.trim();
+    public boolean isAbortUpdate(String input) {
+        return input.trim().equals("abort");
+    }
 
-            //Split into date + time
-            String[] parts = timeDate.split(" ", 2);
+    private static String[] getStringTokens(String input) {
+        return input.trim().split("\\s+");
+    }
 
-            if (parts.length < 2) {
-                throw new InvalidCommandException("Missing time");
+    private static String getDescription (String[] inputWords, String keyword) throws InvalidCommandException {
+        int keywordIndex = -1;
+        boolean hasKeyword = false;
+
+        for (int i = 0; i < inputWords.length; i++) {
+            if (inputWords[i].equals(keyword)) {
+                keywordIndex = i;
+                hasKeyword = true;
+                break;
             }
+        }
 
-            String date = parts[0].trim();
+        if (!hasKeyword) {
+            throw new InvalidCommandException("Missing " + keyword + " keyword!");
+        }
 
-            return LocalDate.parse(date);
+        String description = "";
+        for (int i = 1; i < keywordIndex; i++) {
+            description += inputWords[i] + " ";
+        }
+
+        if (description.isBlank()) {
+            throw new InvalidCommandException("Missing task description!");
+        }
+
+        return description;
+    }
+
+    private static String getDescription(String[] inputWords) throws InvalidCommandException {
+        if (inputWords.length <= 1 || inputWords[1].isBlank()) {
+            throw new InvalidCommandException("Missing task description!");
+        }
+
+        String description = "";
+        for (int i = 1; i < inputWords.length; i++) {
+            description += inputWords[i] + " ";
+        }
+        return description;
+    }
+
+    private static LocalDate getDate(String[] inputWords, String keyword) throws InvalidCommandException {
+        int keywordIndex = -1;
+        boolean hasKeyword = false;
+
+        for (int i = 0; i < inputWords.length; i++) {
+            if (inputWords[i].equals(keyword)) {
+                keywordIndex = i;
+                hasKeyword = true;
+                break;
+            }
+        }
+
+        if (!hasKeyword) {
+            throw new InvalidCommandException("Missing " + keyword + " keyword!");
+        }
+
+        try {
+            String taskDate = inputWords[keywordIndex + 1];
+            LocalDate date = LocalDate.parse(taskDate);
+            return date;
         } catch (DateTimeParseException e) {
-            throw new InvalidCommandException("Please give your date in yyyy-mm-dd format!");
+            throw new InvalidCommandException("Wrong date format!");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new InvalidCommandException("Missing date!");
         }
     }
 
-    private static LocalTime getTime(String string) throws InvalidCommandException {
-        //Currently only accepts time in x:x format
-        try {
-            //Removing the whitespace before and after the string
-            String timeDate = string.trim();
+    private static LocalTime getTime(String[] inputWords, String keyword) throws InvalidCommandException {
+        int keywordIndex = -1;
+        boolean hasKeyword = false;
 
-            //Split into date + time
-            String[] parts = timeDate.split(" ", 2);
-
-            if (parts.length < 2) {
-                throw new InvalidCommandException("Missing time");
+        for (int i = 0; i < inputWords.length; i++) {
+            if (inputWords[i].equals(keyword)) {
+                keywordIndex = i;
+                hasKeyword = true;
+                break;
             }
+        }
 
-            String date = parts[1].trim();
+        if (!hasKeyword) {
+            throw new InvalidCommandException("Missing " + keyword + " keyword!");
+        }
 
-            return LocalTime.parse(date);
+        try {
+            String taskTime = inputWords[keywordIndex + 2];
+            LocalTime time = LocalTime.parse(taskTime);
+            return time;
         } catch (DateTimeParseException e) {
-            throw new InvalidCommandException("Please give your time in hh:mm format!");
+            throw new InvalidCommandException("Wrong time format!");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new InvalidCommandException("Missing time!");
         }
     }
 }

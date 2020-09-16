@@ -29,8 +29,6 @@ public class MainWindow extends AnchorPane {
     }
 
     public void setDuke(Duke d) {
-        d.run();
-
         //Runs the welcome message in the chat GUI with the saved tasks
         dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(d.startUpMessage(), dukeImage));
         duke = d;

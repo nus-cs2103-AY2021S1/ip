@@ -8,8 +8,7 @@ import org.junit.jupiter.api.Test;
 
 class TaskListTest {
 
-    private String home = System.getProperty("user.home");
-    private File testFile = new File(home + "/ip/src/main/java/Data/TestFile.txt");
+    private File testFile = new File("data/TestFile.txt");
 
     @Test
     void generateList_validFile() {
