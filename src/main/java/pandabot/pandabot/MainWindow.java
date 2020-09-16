@@ -27,7 +27,7 @@ public class MainWindow extends AnchorPane {
 
     private PandaBot pandaBot;
 
-    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/cat.jpg"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.jpg"));
     private final Image pandaBotImage = new Image(this.getClass().getResourceAsStream("/images/panda notetaker.png"));
 
     /**
