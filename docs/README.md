@@ -2,19 +2,21 @@
 
 ## Features 
 
-### Feature 1 
-Description of feature.
+### Add a Task
+syntax: todo/event/deadline description /at/by time
 
-## Usage
+### List all task
+syntax: list
 
-### `Keyword` - Describe action
+### Delete a task 
+syntax: list INDEX
 
-Describe action and its outcome.
+### Finish a task
+syntax: done INDEX
 
-Example of usage: 
 
-`keyword (optional arguments)`
+### Find a task
+syntax: find KEYWORD
 
-Expected outcome:
-
-`outcome`
+### Close the program
+syntax: bye
