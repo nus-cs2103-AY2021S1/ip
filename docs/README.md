@@ -169,7 +169,7 @@ Example of usage:
 `help`
 
 Expected outcome:  
-![Image of Help command](./images/help.png)
+![Image of Help command](./images/newHelp.png)
 
 ### Feature 9
 Pocus helps you to exit the application.
