@@ -64,6 +64,7 @@ You can add 3 kinds of tasks:
 
 * **Adding a Todo Task**
     * format: `todo <task name>`
+    
 <img src="https://github.com/AaronnSeah/ip/blob/master/src/main/resources/images/todo.png" width="400">
 <br><br>
 
