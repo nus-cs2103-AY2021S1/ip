@@ -123,12 +123,12 @@ Sorts all current tasks in chronological order.
 ## Usage
 
 ### `sort`
+Sorts all tasks according to their type in the following order: Todo, Deadline, Event.
+Then, within each type of tasks, they are sorted in chronological order.
 
 Example of usage: 
 
 `sort`
-Sorts all tasks according to their type in the following order: Todo, Deadline, Event.
-Then, within each type of tasks, they are sorted in chronological order.
 
 Expected outcome:
 
