@@ -23,6 +23,7 @@ Users are able to add tasks of 3 following types:
 ##### `todo / t` - Add an Todo task
 
 Format:
+
 `todo (your task description)`
 
 Example of usage: 
@@ -36,6 +37,7 @@ Expected outcome:
 ##### `deadline / dl` - Add an Deadline task
 
 Format:
+
 `deadline (your task description) /by (time)`
 
 Example of usage: 
@@ -49,6 +51,7 @@ Expected outcome:
 ##### `event / e` - Add an Event task
 
 Format:
+
 `event (your task description) /at (time)`
 
 Example of usage: 
@@ -70,6 +73,7 @@ Users are able to list all tasks or using keyword:
 ##### `list / ls` - List all the tasks
 
 Format:
+
 `list`
 
 Expected outcome:
@@ -79,6 +83,7 @@ Expected outcome:
 ##### `find / f` - Find all the tasks containing the keyword
 
 Format:
+
 `find (keyword)`
 
 Example of usage: 
@@ -97,6 +102,7 @@ Users are able to mark a certain task as done.
 ##### `done` - Mark done a certain task
 
 Format:
+
 `done (task index)`
 
 Example of usage: 
@@ -115,6 +121,7 @@ Users are able to remove a certain task from task list.
 ##### `delete / remove / del` - Remove a certain task
 
 Format:
+
 `delete (task index)`
 
 Example of usage: 
