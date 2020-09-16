@@ -6,16 +6,16 @@ If you can type fast, Milk can manage your tasks faster than traditional GUI app
 
 1. [Quick start](#quick-start)
 1. [Features](#features)
-    1. [Adding a todo: `todo`](#todo)
-    1. [Adding a deadline: `deadline`](#deadline)
-    1. [Adding an event: `event`](#event)
-    1. [Listing all tasks: `list`](#list)
-    1. [Marking a task as done: `done`](#done)
-    1. [Deleting a task: `delete`](#delete)
-    1. [Finding tasks: `find`](#find)
-    1. [Finding deadlines/events occuring on a specific date: `date`](#date)
-    1. [Obtaining statistics about managed tasks: `stats`](#stats)
-    1. [Exiting the program: `bye`](#bye)
+    1. [Adding a todo: `todo`](#adding-a-todo-todo)
+    1. [Adding a deadline: `deadline`](#adding-a-deadline-deadline)
+    1. [Adding an event: `event`](#adding-an-event-event)
+    1. [Listing all tasks: `list`](#listing-all-tasks-list)
+    1. [Marking a task as done: `done`](#marking-a-task-as-done-done)
+    1. [Deleting a task: `delete`](#deleting-a-task-delete)
+    1. [Finding tasks: `find`](#finding-tasks-find)
+    1. [Finding deadlines/events occuring on a specific date: `date`](#finding-deadlinesevents-occuring-on-a-specific-date-date)
+    1. [Obtaining statistics about managed tasks: `stats`](#obtaining-statistics-about-managed-tasks-stats)
+    1. [Exiting the program: `bye`](#exiting-the-program-bye)
 1. [FAQ](#faq)
 1. [Command summary](#command-summary)
 1. [Troubleshooting](#troubleshooting)
@@ -45,7 +45,7 @@ Some example commands you can try:
 
 ## Features
 
-> ℹ️**Notes about the command format:**
+> ℹ️ **Notes about the command format:**
 >* Commands are case-sensitive.
 >* Words in `UPPER_CASE` are the parameters to be supplied by the user. <br>
 >e.g. in `todo DESCRIPTION`, `DESCRIPTION` is a parameter which can be used as `todo read book`
