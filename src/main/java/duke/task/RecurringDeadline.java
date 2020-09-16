@@ -61,7 +61,7 @@ public class RecurringDeadline extends Deadline {
 
     @Override
     public String toString() {
-        return super.toString() + String.format(" (Recurring Interval: %s)", recurringDetails);
+        return super.toString() + String.format(" (Interval: %s)", recurringDetails);
     }
 
     @Override
