@@ -3,14 +3,13 @@ package duke;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import duke.commands.AddCommand;
-import duke.commands.CheckCommand;
-import duke.commands.Command;
-import duke.commands.ErrorCommand;
-import duke.commands.PrintlistCommand;
-import duke.commands.RemoveCommand;
-import duke.commands.SearchCommand;
-import duke.task.*;
+import duke.commands.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Priority;
+import duke.task.Task;
+import duke.task.TaskType;
+import duke.task.ToDo;
 
 
 /**
@@ -26,6 +25,9 @@ public class Parser {
      * recognise user input
      */
     public static Command manage(String input) throws DukeException {
+        if (input.equals("bye")) {
+            return new ExitCommand();
+        }
         if (input.equals("list")) {
             return new PrintlistCommand();
         } else if (input.contains("check")) {
@@ -213,16 +215,24 @@ public class Parser {
         int level = 1;
         level = Integer.parseInt(priorityString);
         Priority priority;
-        switch (level) {
+        /*switch (level) {
             case 2 :
-                priority = Priority.MEDIUM;
-                break;
+            priority = Priority.Medium;
+            break;
+
             case 3 :
                 priority = Priority.HIGH;
                 break;
             default :
                 priority = Priority.LOW;
                 break;
+        }*/
+        if (level == 1) {
+            priority = Priority.LOW;
+        } else if (level == 2) {
+            priority = Priority.MEDIUM;
+        } else {
+            priority = Priority.HIGH;
         }
         System.out.println("success");
         if (taskType == TaskType.T) {

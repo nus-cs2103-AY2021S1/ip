@@ -10,6 +10,8 @@ REM compile the code into the bin folder
 javac  -cp ..\src -Xlint:none -d ..\bin ..\src\main\java\duke\*.java
 javac  -cp ..\src -Xlint:none -d ..\bin ..\src\main\java\duke\task\*.java
 javac  -cp ..\src -Xlint:none -d ..\bin ..\src\main\java\duke\commands\*.java
+javac  -cp ..\src -Xlint:none -d ..\bin ..\src\main\java\*.java
+
 IF ERRORLEVEL 1 (
     echo ********** BUILD FAILURE **********
     PAUSE

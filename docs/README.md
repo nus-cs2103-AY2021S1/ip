@@ -1,11 +1,30 @@
 # User Guide
 
+
+##Quick start
+
+1. Ensure you have Java `11` or above installed in your Computer.
+
+2. You can download the latest version of DogeBot [here](https://github.com/davidcaiqifan/ip/releases/tag/Level8)
+
+3. Download the `.jar` file and copy the file to the folder you want to use as the home folder for your DogeBot.
+
+4. Double-click the file to start the app. You should be able to see the following in a few seconds.
+
+![Image of DogeBot](https://github.com/davidcaiqifan/ip/tree/master/docs/Ui.png)
+
+Type the command in the command box and press Enter to execute it. e.g. typing list and pressing Enter will display all tasks.
+Some example commands you can try:
+
+_**list :**_ Lists all tasks.
+
+_**remove 3**_ : Deletes the 3rd task shown in the current list.
+
+**_bye_** : Exits the app.
+
+Refer to the Features below for details of each command.
 ## Features 
 
-### Feature 1 
-To-do list
-
-## Usage
 
 ### `Add task` 
 
@@ -137,6 +156,7 @@ _Doge found the following tasks you asked for!_
 Use the keyword **_-PL_** followed by a number from _**1**_ to _**3**_ to indicate 
 priority level of the task, with _**1**_ being the lowest priority and _**3**_ being the highest priority.
 Otherwise, the default priority level is _low._
+
 Example of usage: 
 
 _todo feed doge -PL3_
@@ -144,3 +164,15 @@ _todo feed doge -PL3_
 Expected outcome:
 
 _Added to list : [HIGH] feed doge_ 
+
+### `Exit application` 
+
+Use the keyword **_bye_** 
+
+Example of usage: 
+
+_bye_
+
+Expected outcome:
+
+_Doge would like to see you soon!_ 

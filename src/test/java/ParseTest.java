@@ -1,16 +1,14 @@
-import duke.DukeException;
-import duke.Parser;
-import duke.commands.AddCommand;
-import duke.commands.Command;
-import duke.task.Event;
-import duke.task.Priority;
-import duke.task.Task;
-import duke.task.TaskType;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+
+import duke.DukeException;
+import duke.Parser;
+import duke.commands.AddCommand;
+import duke.task.Event;
+import duke.task.Priority;
 
 public class ParseTest {
     @Test

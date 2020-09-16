@@ -1,6 +1,7 @@
 package duke;
 
 import java.util.List;
+import java.util.Scanner;
 
 import duke.task.Task;
 import duke.task.TaskList;
@@ -11,7 +12,13 @@ import duke.task.TaskList;
  * Encapsulates the user interface.
  */
 public class Ui {
+    private Scanner scanner;
 
+    public Ui() {
+    }
+    public Ui(Scanner sc) {
+        this.scanner = sc;
+    }
     /**
      * Prints the default welcome message.
      */
@@ -147,14 +154,26 @@ public class Ui {
     }
 
     /**
-     * Prints number of tasks left
-     * @param listSize number of tasks left
+     * Prints number of tasks left.
+     * @param listSize number of tasks left.
      */
     public String printNumberOfTasks(int listSize) {
         String returnStr;
         returnStr = "You have a total of " + listSize + " tasks" + "\n"
                 + "--------------------------------------";
         System.out.println(returnStr);
+        return returnStr;
+    }
+
+    /**
+     * Returns Goodbye message.
+     * @return Bye message.
+     */
+    public String byeMessage() {
+        String returnStr = "Doge would like to see you soon!";
+        if (scanner != null) {
+            scanner.close();
+        }
         return returnStr;
     }
 }

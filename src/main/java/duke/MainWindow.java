@@ -1,5 +1,9 @@
 package duke;
 
+import static javafx.application.Platform.exit;
+
+import java.util.concurrent.TimeUnit;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -26,6 +30,9 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/rsz_1pepe.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/rsz_1doge.png"));
 
+    /**
+     * Initializes dialogcontainer
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -46,11 +53,20 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         String response;
         try {
+            String byeMessage = "Doge would like to see you soon!";
             response = duke.getResponse(input);
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userImage),
                     DialogBox.getDukeDialog(response, dukeImage));
             userInput.clear();
+            if (response == byeMessage) {
+                try {
+                    TimeUnit.SECONDS.sleep(1);
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+                exit();
+            }
         } catch (DukeException e) {
             response = e.getMessage();
             dialogContainer.getChildren().addAll(
