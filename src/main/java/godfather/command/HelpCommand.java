@@ -1,6 +1,7 @@
 package godfather.command;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 import godfather.TaskList;
@@ -30,6 +31,9 @@ public class HelpCommand implements Command {
     }
     @Override
     public String execute(TaskList tasks, Ui ui) throws VitoException, IOException {
+        ArrayList<String> lines = new ArrayList<>();
+        lines.add(CommandWord.HELP_CMD.getHelpMsg());
+        ui.display(lines);
         return topic.getHelpMsg();
     }
     @Override

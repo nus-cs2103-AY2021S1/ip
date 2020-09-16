@@ -9,8 +9,8 @@ import godfather.ui.TextUi;
 import godfather.ui.Ui;
 
 /**
- * Drives the personal assistant using a UI, along with a parser to make sense of user inputs and
- * executing commands on a list of tasks that are read/written from local storage
+ * Drives the personal assistant using a UI, along with a parser to make sense of user inputs and executing commands on
+ * a list of tasks that are read/written from local storage
  */
 public class VitoCorleone extends Thread {
     private TaskList tasks;
