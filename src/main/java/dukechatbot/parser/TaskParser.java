@@ -71,9 +71,14 @@ public class TaskParser {
         } catch (IndexOutOfBoundsException exception) {
             throw new IndexOutOfBoundsException(
                     "\u2639 OOPS!!! The date, start and end time of an event cannot be empty.\n"
-                            + DukeConstants.INDENT 
+                            + DukeConstants.INDENT
                             + "They must be in the form \"DD/MM/YYYY HH:MM-HH:MM\".");
-        }
+        } catch (DateTimeParseException exception) {
+                throw new IndexOutOfBoundsException(
+                        "\u2639 OOPS!!! The date, start and end time of an event\n"
+                                + DukeConstants.INDENT
+                                + "must be in the form \"DD/MM/YYYY HH:MM-HH:MM\".");
+            }
     }
     
     public static Task parseTaskFromDisk(String[] components) throws NoSuchElementException {
