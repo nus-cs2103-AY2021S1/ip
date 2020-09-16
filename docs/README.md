@@ -70,7 +70,7 @@ Expected outcome:
 
 `[D][✗] strawberry yoghurt to be digested by: Sep 21 2020`
 
-### `event {task description} /a {date}` - adds an event task
+### `event {task description} /at {date}` - adds an event task
 
 Adds an event task to current task list, to be done at the specified date.
 Date input takes the format yyyy/mm/dd or yyyy-mm-dd.
