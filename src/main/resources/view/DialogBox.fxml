@@ -10,7 +10,7 @@
 
 <fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
     <children>
-        <Label fx:id="dialog" alignment="CENTER" contentDisplay="CENTER" minHeight="73.0" minWidth="186.0" styleClass="textbg" stylesheets="@../images/style.css" text="Label" textAlignment="JUSTIFY">
+        <Label fx:id="dialog" alignment="CENTER" contentDisplay="CENTER" minHeight="73.0" minWidth="186.0" styleClass="textbg" stylesheets="@../images/style.css" text="Label" textAlignment="JUSTIFY" wrapText="true">
          <effect>
             <Blend>
                <topInput>

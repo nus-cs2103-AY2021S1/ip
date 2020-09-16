@@ -38,6 +38,9 @@ public class Parser {
      */
 
     private boolean isValidDate(String dateString) throws DateTimeException {
+        if (dateString.length() != 10) {
+            throw new DateTimeException();
+        }
         String[] dateArray = dateString.split("-");
         // Checks if the date and time are in the correct format.
         if (dateArray.length != 3
@@ -91,11 +94,15 @@ public class Parser {
                 throw new TrackingException("deadline");
             }
 
-            String[] temp = descriptionDate.split(" /by ");
+            String[] temp = descriptionDate.split(" /by ", 1);
+
+            //Checks for validity of the processed input.
+            if (temp.length == 1) {
+                throw new TrackingException("event");
+            }
             String description = temp[0];
             String deadlineString = temp[1];
 
-            //Checks for validity of the processed input.
             if (description.length() == 0) {
                 throw new DescriptionException("deadline");
             }
@@ -116,10 +123,15 @@ public class Parser {
             }
 
             String[] temp = descriptionDate.split(" /at ");
+
+            //Checks for validity of processed input.
+            if (temp.length == 1) {
+                throw new TrackingException("event");
+            }
+
             String description = temp[0];
             String atString = temp[1];
 
-            //Checks for validity of processed input.
             if (description.length() == 0) {
                 throw new DescriptionException("event");
             }
