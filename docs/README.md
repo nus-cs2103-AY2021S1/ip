@@ -1,6 +1,6 @@
 # User Guide
 
-Duke is your friendly **productivity assistant chatbot**. Simply **type into the message box** and send your inputs and Duke's got your back!
+Duke (Also known as Dwayne The Rock Johnson) is your friendly **productivity assistant chatbot**. Simply **type into the message box** and send your inputs and Duke's got your back!
 
 * Quick Start
 * Features
@@ -35,10 +35,60 @@ Some example commands you can try:
 
 ## Features 
 
-### Feature 1 
-Description of feature.
+<div markdown="block" class="alert alert-info">
 
-## Usage
+**:information_source: Notes about the command format:**<br>
+
+* Fields after deadline/event descriptions should be followed by a `/` and a preposition such as `by` or `at` with no whitespace in between. The subsequent field takes in a date in the `YYYY-MM-DD` format with a whitespace before the field. Any other date format is not able to be accepted.<br> 
+e.g. `deadline Homework /by 2020-08-08` creates a deadline for homework at `2020-08-28`, but using `2020-28-08` will not be accepted.  
+
+* The commands `done` and `delete` need to be followed by a `whitespace` and an `integer` greater than 0 and less than or equals to the size of the task list.<br>
+  e.g `done 1` will mark the first task as done, `delete 1` will mark the first task as deleted from the list but `done 0` or `delete` will both neither be accepted inputs.
+
+* The task-identifying commands `todo`, `deadline` and `event` must have text input after these fields.<br>
+e.g. `todo Read a book` is an accepted input, but `todo` is not
+
+* The input and commands are case sensitive.<br>
+e.g. `todo Read a book` is an accepted input, but `Todo read a book` is not
+
+</div>
+
+### Adding a todo: `todo`
+
+Adds a todo task to the task list.
+
+Format: `todo TASK_DESCRIPTION`
+
+Examples:
+* `todo Exercise and get some abs`
+
+### Adding a deadline: `deadline`
+
+Adds a deadline to the task list.
+
+Format: `deadline TASK_DESCRIPTION /PREPOSITION YYYY-MM-DD`
+
+Examples:
+* `deadline Exercise and get some abs /by 2020-08-28`
+* `deadline Do homework /by 2017-09-22`
+
+### Adding an event: `event`
+
+Adds an event to the task list.
+
+Format: `event TASK_DESCRIPTION /PREPOSITION YYYY-MM-DD`
+
+Examples:
+* `event Science conference /on 2019-06-11`
+* `event Roy's party /at 2018-09-14`
+
+### Listing all tasks : `list`
+
+Shows a list of all persons in the task list, sorted by todos at the top and by dates of deadlines/events in chronological order (from soonest to latest).<br>
+Each list element has a marker `[T]`, `[E]` or `[D]` to indicate whether the task is of type `todo`, `event` or `deadline` respectively.<br>
+Each list element will show a tick symbol `[✔]` if the task is marked done, or a cross `[x]` if undone.
+
+Format: `list`
 
 ### `Keyword` - Describe action
 
