@@ -1,7 +1,8 @@
 # Zelda Bot User Guide
 This is simple chat bot application I created for my CS2103 Project. The aesthetics of the bot is inspired by my favourite childhood game: Legend of Zelda.
 
-! [alt text](https://zelda.gamepedia.com/File:CoH_Link_Sprite.gif)
+! [alt text](link.gif)
+! [alt text](princess.gif)
 
 
 
@@ -66,7 +67,7 @@ Marks the completion of an existing task, indicated by a cross or a tick. The nu
 
 **Command:**
 
-- done '<task index>'
+- done 'task index'
 
 **Usage:**
 
@@ -106,7 +107,7 @@ Deletes a tasks in your list of task. The number after "delete" is the index of 
 
 **Command:**
 
-- delete '<index number of task>'
+- delete 'index number of task'
 
 **Usage:**
 
@@ -127,7 +128,7 @@ Searches for a task in your list of tasks with a keyword which bears similaritie
 
 **Command:**
 
-- find '<keyword matching task description>'
+- find 'keyword matching task description'
 
 **Usage:**
             
@@ -168,8 +169,8 @@ Display all the tasks you have for a particular date or month. First character o
 
 **Command:**
 
-- schedule '<month>'
-- schedule '<date>'
+- schedule 'month'
+- schedule 'date'
 
 **Usage:**
 
@@ -193,7 +194,7 @@ Update the description or duedate of an existing task in your list of task.
 
 **Command:**
 
-- update '<index of task you want to update>' '<date or desc>' '<new duedate or new description>'
+- update 'index of task you want to update' 'date or desc' 'new duedate or new description	'
 
 **Usage:**
         
