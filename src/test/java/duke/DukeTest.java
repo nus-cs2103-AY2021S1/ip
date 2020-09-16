@@ -63,7 +63,7 @@ public class DukeTest {
     public void getResponseTest() {
 
 
-        assertEquals("Bye. Hope to see you again soon!", duke.getResponse("bye"));
+        assertEquals("Shutting down... Hope to see you again soon!", duke.getResponse("bye"));
 
         assertEquals("Got it. I've added this task:\n"
                 + "[T][✘] valid todo\n"

@@ -22,7 +22,7 @@ public class Ui {
      * Returns a string representation for exiting the program.
      */
     public String printExit() {
-        String s = "Bye. Hope to see you again soon!";
+        String s = "Shutting down... Hope to see you again soon!";
         return s;
     }
 

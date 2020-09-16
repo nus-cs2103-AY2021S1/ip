@@ -20,6 +20,7 @@ public class Duke {
     private NoteList notes;
     private TaskList tasks;
     private Ui ui;
+    private boolean isExit;
 
     /**
      * Constructs a Duke object from a specified filePath. If a valid .txt file containing
@@ -29,6 +30,8 @@ public class Duke {
      * @param taskStoragePath Relative filepath for storing task list from project source.
      */
     public Duke(String taskStoragePath, String noteStoragePath) {
+
+        isExit = false;
 
         //initialize User interface
         ui = new Ui();
@@ -78,11 +81,20 @@ public class Duke {
         //execute correct command
         try {
             Command c = Parser.parse(input);
+            this.isExit = c.isExit();
             output += c.execute(tasks, notes, ui, storage, noteStorage);
         } catch (DukeException e) {
             output += ui.showError(e.getMessage());
         }
-
         return output;
+    }
+
+    /**
+     * Returns the exit status of Dukenizer.
+     *
+     * @return Exit status.
+     */
+    public boolean getExitStatus() {
+        return this.isExit;
     }
 }
