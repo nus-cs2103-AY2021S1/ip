@@ -112,7 +112,7 @@ public class Ui {
     public String checkList(String task, String taskStatus) {
         String returnStr;
         returnStr = "--------------------------------------" + "\n"
-                + "Such wow! I have completed the following duke.task!" + "\n"
+                + "Such wow! I have completed the following task!" + "\n"
                 + task + " [" + taskStatus + "]" + "\n"
                 + "--------------------------------------\n";
         System.out.println(returnStr);
@@ -142,10 +142,6 @@ public class Ui {
         returnStr = "--------------------------------------" + "\n"
                 + "Added to list : " + print + "\n"
                 + "--------------------------------------\n";
-        /*System.out.println("--------------------------------------");
-        //System.out.println("Added to duke.task list : " + print);
-        System.out.println("Added to list : " + print);
-        System.out.println("--------------------------------------");*/
         System.out.println(returnStr);
         return returnStr;
     }
