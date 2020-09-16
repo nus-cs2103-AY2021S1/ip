@@ -11,7 +11,7 @@ graphics are inspired by my all time favorite game:
 # Thunderbolt Features 
 
 For the PikaDuke Bot, I have implemented the following features:
-
+(click on the bolded word to get to the command details)
 1. [**`Adding`**](#addition) of tasks to the bot.   
 2. [**`Storage & Retrieval`**](#storage) of tasks in local drive.  
 3. [**`Listing`**](#listing) of all existing tasks.  
