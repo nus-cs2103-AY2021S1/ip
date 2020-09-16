@@ -12,7 +12,7 @@ Duke is a **desktop chat bot for managing and storing tasks**. Why try to rememb
 1. Copy the file to the folder you want to use as the _home folder_ for your Duke.
 
 1. Right-click the file and open the app. The GUI similar to the below should appear in a few seconds. <br>
-   ![Ui](Ui.png)
+   ![Ui](images/StartUi.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
       Some example commands you can try:
@@ -40,6 +40,34 @@ Duke is a **desktop chat bot for managing and storing tasks**. Why try to rememb
 ---
 
 ## Features 
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the command format:**<br>
+
+* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+  e.g. in `todo DESCRIPTION`, `DESCRIPTION` is a parameter which can be used as `todo Call my mom`.
+
+* Items in square brackets are optional, but at least one needs to be used.<br>
+  e.g `update INDEX [d/DESCRIPTION] [dt/DATETIME]` can be used as `update 3 d/sleep`, or as `update 3 dt/2020/10/16 1600`, or as `update 3 d/sleep dt/2020/10/16 1600`.
+
+</div>
+
+### Viewing help : `help`
+
+Shows a message explaning how to use the app.
+
+Format: `help`
+
+### Listing all tasks : `list`
+
+Shows a list of all tasks currently created and stored.
+
+Format: `list`
+
+
+
+
 
 ### Feature 1 
 Description of feature.
