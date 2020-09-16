@@ -43,6 +43,8 @@ public class DukeGui extends Application implements Ui {
     @Override
     public void start(Stage stage) {
 
+        //@@author Jeffry Lum
+        //Reused from https://se-education.org/guides/tutorials/javaFxPart2.html with minor modifications
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
@@ -96,6 +98,7 @@ public class DukeGui extends Application implements Ui {
         });
 
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+        //@@author
 
         duke = new Duke(this);
         CompletableFuture.runAsync(() -> duke.run());
