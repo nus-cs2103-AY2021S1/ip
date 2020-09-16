@@ -13,25 +13,25 @@ The name 'Duke' was inspired by Duke, the Java Mascot.
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `duke.jar` from [here](https://github.com/tanwayne890/ip/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for your Duke.
 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](./Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+1. Type the command in the command box and press Enter to execute it. e.g. typing **`list`** and pressing Enter will show the tasks list.<br>
    Some example commands you can try:
 
-   * **`list`** : Lists all contacts.
+   * **`list`** : Lists all tasks.
 
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * **`todo`**`read book` : Adds a todo task named `read book` to the tasks list.
+   
+   * **`deadline`**`return book` : Adds a deadline task named `return book` to the tasks list.
+   
+   * **`event`**`borrow book` : Adds a event task named `borrow book` to the tasks list.
 
-   * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
-
-   * **`clear`** : Deletes all contacts.
-
-   * **`exit`** : Exits the app.
+   * **`delete`**`3` : Deletes the 3rd task shown in the current list.
 
 1. Refer to the [Features](#features) below for details of each command.
 
@@ -53,21 +53,25 @@ Example of usage:
 
 `todo read book`
 
-Expected outcome:
-
-`Got it!...`
-
 ### Adds *deadline* tasks: `deadline` 
 
 Save a deadline tasks into the list.
 
 Format: `deadline DESCRIPTION /by DATE/MONTH/YEAR`
 
+Example of usage:
+
+`deadline CS2103T User guide /by 21/07/2020`
+
 ### Adds *event* tasks: `event` 
 
 Save an event tasks into the list.
 
-Format: `event DESCRIPTION /at DATE/MONTH/YEAR`
+Format: `event DESCRIPTION /at DATE/MONTH/YEAR HOUR:MINUTES`
+
+Example of usage:
+
+`event Google interview /at 15/06/2020 12:00`
 
 ### Delete a tasks: `delete` 
 
@@ -75,11 +79,19 @@ Delete a task in the list by given index.
 
 Format: `delete INDEX`
 
+Example of usage:
+
+`delete 1`
+
 ### Find keyword: `find` 
 
 Find all matching task by given description.
 
 Format: `find DESCRIPTION`
+
+Example of usage:
+
+`find book`
 
 ### Mark a task as done: `done` 
 
@@ -87,8 +99,19 @@ Mark a task as done by its index.
 
 Format: `done INDEX`
 
+Example of usage:
+
+`done 1`
+
 ### Sort the task list : `sort` 
 
 Sort the task list by date or by description.
 
 Format: `sort by date` / `sort by description`
+
+Example of usage:
+
+`sort by date` or `sort by description`
+
+### Saving the data
+Duke's data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
