@@ -26,13 +26,16 @@ public class MainWindow extends AnchorPane {
     private Rogue rogue;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image rogueImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     /**
      * Scrolls down to the end every time the height of the dialog container changes.
      */
     @FXML
     public void initialize() {
+        assert userImage != null : "Image for user cannot be null!";
+        assert rogueImage != null : "Image for rogue cannot be null!";
+
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
@@ -50,7 +53,7 @@ public class MainWindow extends AnchorPane {
         String response = rogue.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getRogueDialog(response, dukeImage)
+                DialogBox.getRogueDialog(response, rogueImage)
         );
         userInput.clear();
     }

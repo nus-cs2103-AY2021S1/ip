@@ -1,0 +1,74 @@
+.root {
+    -fx-font-family: Calibri, Candara, Segoe, Segoe UI, Optima, Arial, sans-serif;
+}
+
+/** Main */
+
+.main-container {
+    -fx-background-color: #242526;
+}
+
+.main-name-label {
+    -fx-text-fill: #FFFFFF;
+}
+
+.main-scroll-pane {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+    -fx-background-color: #3E4042;
+}
+
+.main-scroll-pane > .viewport {
+    -fx-background-color: transparent;
+}
+
+.main-footer-container {
+    -fx-padding: 0 0 0 20px;
+}
+
+.main-input-field {
+    -fx-padding: 0.333333em 0.583em 0.333333em 0.583em;
+    -fx-background-insets: 0, 1px;
+    -fx-background-radius: 3px, 2px;
+    -fx-cursor: text;
+}
+
+.main-input-button {
+    -fx-font-size: 24px;
+    -fx-text-fill: #FFFFFF;
+    -fx-background-color: transparent;
+    -fx-cursor: hand;
+}
+
+/** DialogBox */
+
+.dialog-root {
+    -fx-padding: 1.4em 0.8em 1.4em 0.8em;
+}
+
+.dialog-text-container {
+    -fx-padding: 0.8em;
+    -fx-background-radius: 24px;
+    -fx-background-color: #0A84FF;
+}
+
+.dialog-text {
+    -fx-padding: 0.5em;
+    -fx-font-size: 13.5px;
+    -fx-text-fill: #FFFFFF;
+}
+
+.dialog-image-container {
+    -fx-padding: 0 2em 0 2em;
+}
+
+/** Scroll Bar */
+
+.scroll-bar:horizontal, .scroll-bar:vertical {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar:horizontal .thumb, .scroll-bar:vertical .thumb {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 2em;
+}
