@@ -1,8 +1,8 @@
 package fei.task;
 
 public class Task {
-    private static String TICK = "\u2713";
-    private static String CROSS = "\u2718";
+    private static String tick = "\u2713";
+    private static String cross = "\u2718";
 
     protected String description;
     protected boolean isDone;
@@ -22,7 +22,7 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? TICK : CROSS);
+        return (isDone ? tick : cross);
     }
 
     public void markAsDone() {

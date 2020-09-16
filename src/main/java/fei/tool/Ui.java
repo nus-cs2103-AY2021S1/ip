@@ -73,7 +73,7 @@ public class Ui {
                 + "There are still %d task(s) left.\n", done, total, total - done);
     }
 
-    public String HelpMessage() {
+    public String helpMessage() {
         return "The following commands are supported:\n"
                 + " 1. todo [task description]\n"
                 + " 2. deadline [task description] /by [time]\n"

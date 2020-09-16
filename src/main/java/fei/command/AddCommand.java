@@ -34,8 +34,8 @@ public class AddCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) throws FeiException {
         String error = "";
         if (task instanceof Deadline) {
-            try {(
-                    (Deadline) task).parseTime();
+            try {
+                ((Deadline) task).parseTime();
             } catch (FeiException alisonException) {
                 error += alisonException.getMessage() + "\n";
             }

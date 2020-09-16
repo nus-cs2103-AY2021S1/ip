@@ -129,20 +129,20 @@ public class Parser {
 
     private static Command parseDeadline(String description) {
         String[] contentAndDate = description.split(" /by ");
-        assert contentAndDate.length == 2: FeiException.deadlineException();
+        assert contentAndDate.length == 2 : FeiException.deadlineException();
         Deadline ddl = new Deadline(contentAndDate[0], contentAndDate[1]);
         return new AddCommand(ddl);
     }
 
     private static Command parseEvent(String description) {
         String[] contentAndTime = description.split(" /at ");
-        assert contentAndTime.length == 2: FeiException.eventException();
+        assert contentAndTime.length == 2 : FeiException.eventException();
         Event e = new Event(contentAndTime[0], contentAndTime[1]);
         return new AddCommand(e);
     }
 
     private static Command parseFind(String description) {
-        assert description.split(" ").length == 2: FeiException.findException();
+        assert description.split(" ").length == 2 : FeiException.findException();
         return new FindCommand(description);
     }
 
