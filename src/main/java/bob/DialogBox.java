@@ -28,7 +28,10 @@ public class DialogBox extends HBox {
     @FXML
     private Label dialog;
     @FXML
+    private Label dialogError;
+    @FXML
     private Circle displayPicture;
+
 
     private DialogBox(String text, Image img) {
         try {
@@ -45,6 +48,25 @@ public class DialogBox extends HBox {
         dialog.setText(text);
     }
 
+    private DialogBox(String text, Image img, boolean isError) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
+            fxmlLoader.setController(this);
+            fxmlLoader.setRoot(this);
+            fxmlLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        displayPicture.setStroke(Color.DODGERBLUE);
+        displayPicture.setFill(new ImagePattern(img));
+        displayPicture.setEffect(new DropShadow(+25d, 0d, +2d, Color.DODGERBLUE));
+        if (isError) {
+            dialogError.setText(text);
+        } else {
+            dialog.setText(text);
+        }
+    }
+
     /**
      * Flips the dialog box such that the ImageView is on the left and text on the right.
      */
@@ -59,8 +81,8 @@ public class DialogBox extends HBox {
         return new DialogBox(text, img);
     }
 
-    public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+    public static DialogBox getDukeDialog(String text, Image img, boolean isError) {
+        var db = new DialogBox(text, img, isError);
         db.flip();
         return db;
     }

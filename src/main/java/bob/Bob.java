@@ -52,15 +52,11 @@ public class Bob {
     }
 
 
-    String getResponse(String input) {
-        try {
+    String getResponse(String input) throws BobException {
             String command = input;
             Command c = Parser.parse(command);
             assert c != null : "A command should be provided";
             return c.execute(tasks, uI, storage);
-        } catch (BobException e) {
-            return uI.printError(e.getMessage());
-        }
     }
 }
 

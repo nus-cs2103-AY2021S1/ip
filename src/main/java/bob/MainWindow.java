@@ -1,5 +1,6 @@
 package bob;
 
+import bob.exception.BobException;
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -49,7 +50,7 @@ public class MainWindow extends AnchorPane {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(UI.greet(), dukeImage));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(UI.greet(), dukeImage,false));
     }
 
 
@@ -60,11 +61,20 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = bob.getResponse(input);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
-        );
+        String response = null;
+        try {
+            response = bob.getResponse(input);
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input, userImage),
+                    DialogBox.getDukeDialog(response, dukeImage, false)
+            );
+        } catch (BobException e) {
+            response = e.getMessage();
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input, userImage),
+                    DialogBox.getDukeDialog(response, dukeImage, true)
+            );
+        }
         if (response == "Bye! I hope to see you soon! \n[This window will close in 3 seconds.]") {
 
             Duration delay = Duration.seconds(3);
