@@ -16,7 +16,6 @@ public class ErrorCommand extends Command {
      */
     @Override
     public boolean execute(String input) {
-        // TODO: refactor this to the ui class
         return true;
     }
 
