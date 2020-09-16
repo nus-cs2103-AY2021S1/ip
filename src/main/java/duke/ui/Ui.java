@@ -9,15 +9,15 @@ import duke.task.TaskList;
  * A class that deals with all interactions with the user.
  */
 public class Ui {
-    private static final String MESSAGE_GREETING = "Hello~ I'm Duke!\n" + "What can I do for you?";
-    private static final String MESSAGE_FAREWELL = "Goodbye~";
-    private static final String MESSAGE_DONE = "Nice! I've set this task as done~";
-    private static final String MESSAGE_ADD_TASK = "Got it~ I've added this task:";
-    private static final String MESSAGE_NUMBER_OF_TASKS = "You now have %d tasks in the list~";
-    private static final String MESSAGE_REMOVE_TASK = "Alright~ I've removed this task:";
-    private static final String MESSAGE_LIST = "Here are your tasks~";
-    private static final String MESSAGE_FIND = "Here are the matching tasks in your list~";
-    private static final String MESSAGE_ARCHIVE = "Understood~ Your tasks have been archived~";
+    private static final String MESSAGE_GREETING = "Hey kid,\n" + "How can grandpa help you?";
+    private static final String MESSAGE_FAREWELL = "Come visit again soon!";
+    private static final String MESSAGE_DONE = "Good job kid!";
+    private static final String MESSAGE_ADD_TASK = "Got it, I've added this task:";
+    private static final String MESSAGE_NUMBER_OF_TASKS = "You still have %d tasks left.";
+    private static final String MESSAGE_REMOVE_TASK = "Alright, I've removed this task:";
+    private static final String MESSAGE_LIST = "Here are your tasks:";
+    private static final String MESSAGE_FIND = "Were these what you were looking for?";
+    private static final String MESSAGE_ARCHIVE = "Got it, I've saved them somewhere else.";
     private Scanner sc;
     public Ui() {
         sc = new Scanner(System.in);
