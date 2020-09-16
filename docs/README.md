@@ -205,7 +205,7 @@ Great! The task below is marked as done:
    [T][✓] play the violin
 ```
 
-## 3.6 `delete` - Delete a task
+### 3.6 `delete` - Delete a task
 Deletes a specific task, when the user input is in the right format,
 namely `delete INDEX`, INDEX being the index number of that task in the current 
 list.
@@ -219,7 +219,7 @@ Okay. The task below is deleted from your list:
 Now there are 3 tasks in total in your list.
 ```
 
-## 3.7 `find` - Find tasks matching a keyword
+### 3.7 `find` - Find tasks matching a keyword
 Finds the tasks with names that matches the keyword, when the user input is in the right format,
 namely `find KEYWORD`, and returns a list consisting of these tasks.
  
@@ -231,7 +231,7 @@ Here are the task or tasks that matches the keyword:
 1. [D][✘] do homework (by: Sep 26 2020)
 ```
 
-## 3.8 `bye` - Exit the program
+### 3.8 `bye` - Exit the program
 The program will exit when the command `bye` is entered.
 
 Example of usage: `bye`
@@ -242,7 +242,7 @@ Bye! I look forward to meeting you next time!
 ```
 The program exits.
 
-## 3.9 `help` - Display the help message
+### 3.9 `help` - Display the help message
 Displays the help message.
 
 Example of usage: `help`
