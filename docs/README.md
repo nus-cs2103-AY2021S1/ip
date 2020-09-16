@@ -22,7 +22,7 @@ Duke (Also known as Dwayne The Rock Johnson) is your friendly **productivity ass
 1. Download the latest duke.jar from [here](https://github.com/nicholas-gcc/ip/releases/download/A-Release/duke.jar)
 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds.
-![Ui](images/Ui.png)
+![]<img src="/docs/Ui.png" width="498" height="784">
 
 1. Type the command in the message box and press Enter to execute it. e.g. typing list and pressing Enter will give you a list of tasks.
 Some example commands you can try:
