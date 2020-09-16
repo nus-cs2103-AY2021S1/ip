@@ -60,6 +60,7 @@ You can add 3 kinds of tasks:
 1. **Todo Task**
 2. **Event Task**
 3. **Deadline Task**
+<br><br>
 
 * **Adding a Todo Task**
     * format: `todo <task name>`
@@ -90,9 +91,9 @@ Mark the task to be done.
 
 Format: `done <task number>`
 
-To find the <task number>, use the `list` command.
+To find the `<task number>`, use the `list` command.
 
-The <task number> is the number ordering in the list for the task you would like to mark as done.
+The `<task number>` is the number ordering in the list for the task you would like to mark as done.
 
 <img src="https://github.com/AaronnSeah/ip/blob/master/src/main/resources/images/done.png" width="400">
 <br><br><br><br>
@@ -105,9 +106,9 @@ Deletes a task from the application.
 
 Format: `delete <task number>`
 
-To find the <task number>, use the `list` command.
+To find the `<task number>`, use the `list` command.
 
-The <task number> is the number ordering in the list for the task you would like to mark as done.
+The `<task number>` is the number ordering in the list for the task you would like to mark as done.
 
 <img src="https://github.com/AaronnSeah/ip/blob/master/src/main/resources/images/delete.png" width="400">
 <br><br><br><br>
