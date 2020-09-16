@@ -1,6 +1,7 @@
 package command;
 
 import java.io.IOException;
+import java.time.DateTimeException;
 
 import task.DeadlineTask;
 import task.EventTask;
@@ -94,6 +95,10 @@ public class AddCommand extends Command {
             }
         } catch (IOException e) {
             result = ui.showError(e.getMessage());
+        } catch (DateTimeException e) {
+            result = ui.showError("Please enter a valid date");
+        } catch (ArrayIndexOutOfBoundsException | StringIndexOutOfBoundsException e) {
+            result = ui.showError("Be sure to write the date in the correct format");
         }
         assert !result.isEmpty() : "Response should not be empty";
         return result;
