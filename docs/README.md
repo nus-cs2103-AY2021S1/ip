@@ -198,7 +198,7 @@ previous Mushy home folder.
 
 ## Command summary
  
-Action | Format | Examples
+**Action** | **Format** | **Examples**
 ------ | ------ | --------
 **Help** | `help`
 **Todo** | `todo DESCRIPTION` | `todo read book`
