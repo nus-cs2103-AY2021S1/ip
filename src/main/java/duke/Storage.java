@@ -35,25 +35,20 @@ public class Storage {
             if (f.createNewFile()) {
                 // file does not exist
                 savedFiles = "A data file has been created for you\n";
-//                System.out.println("A data file has been created for you");
             } else {
                 // file exist
                 savedFiles = "Here are your existing tasks\n";
-//                System.out.println("Here are your existing tasks");
                 Scanner s = new Scanner(f);
                 while (s.hasNext()) {
                     String taskStr = s.nextLine();
                     savedFiles = savedFiles + taskStr + "\n";
-//                    System.out.println(taskStr);
                     // load the task
                     Task savedTask = Parser.parseTaskFromStorage(taskStr);
                     taskList.getTasks().add(savedTask);
                 }
             }
             savedFiles = savedFiles + "What do you want to do today?\n";
-//            System.out.println("What do you want to do today?");
         } catch (IOException e) {
-//            System.out.println(e.getMessage());
             savedFiles = e.getMessage();
         }
         return savedFiles;

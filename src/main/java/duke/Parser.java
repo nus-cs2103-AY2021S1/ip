@@ -114,7 +114,7 @@ public class Parser {
      * @param taskStr The task string from storage file.
      * @return Task.
      */
-    public static Task parseTask(String taskStr) {
+    public static Task parseTask(String taskStr) throws DukeException {
         String[] splits = taskStr.split(" ", 2);
         String taskType = splits[0].toLowerCase();
         String taskBody = splits[1];
@@ -125,18 +125,30 @@ public class Parser {
             newTask = new Todo(taskBody.trim());
         } else if (taskType.equals("deadline")) {
             // deadline return book /by 2020-12-15
-            String[] splits1 = taskBody.split("/by", 2);
-            String description = splits1[0].trim();
-            String timeStr = Parser.standardizeTimeString(splits1[1]);
-            LocalDate time = LocalDate.parse(timeStr);
-            newTask = new Deadline(description, time);
+            if (taskBody.contains("/by")) {
+                String[] splits1 = taskBody.split("/by", 2);
+                String description = splits1[0].trim();
+                String timeStr = Parser.standardizeTimeString(splits1[1]);
+                LocalDate time = LocalDate.parse(timeStr);
+                newTask = new Deadline(description, time);
+            } else if (taskBody.contains("/at")) {
+                throw new DukeException("The format is wrong. Please use \"by/\"!");
+            } else {
+                throw new DukeException("Please provide a time for a deadline :D");
+            }
         } else {
             // event project meeting /at 2020-10-15
-            String[] splits1 = taskBody.split("/at", 2);
-            String description = splits1[0].trim();
-            String timeStr = Parser.standardizeTimeString(splits1[1]);
-            LocalDate time = LocalDate.parse(timeStr);
-            newTask = new Event(description, time);
+            if (taskBody.contains("/at")) {
+                String[] splits1 = taskBody.split("/at", 2);
+                String description = splits1[0].trim();
+                String timeStr = Parser.standardizeTimeString(splits1[1]);
+                LocalDate time = LocalDate.parse(timeStr);
+                newTask = new Event(description, time);
+            } else if (taskBody.contains("/by")) {
+                throw new DukeException("The format is wrong. Please use \"at/\"!");
+            } else {
+                throw new DukeException("Please provide a time for an event :D");
+            }
         }
         return newTask;
     }
