@@ -3,8 +3,8 @@ This is a regular Duke (Todo list app) with only 1 feature (C-MassOps).
 Basic Ui only.
 ## Sneakpeak
 <img src="https://github.com/urieltan/ip/blob/master/docs/Ui.png?raw=true" style="
-	width: 50%;
-	height: 50%;">
+	width: 10%;
+	height: 10%;">
 
 ## Features 
 
