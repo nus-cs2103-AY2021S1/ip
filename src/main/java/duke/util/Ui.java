@@ -34,10 +34,8 @@ public class Ui {
      * @return the printed message.
      */
     public String greet() {
-        String textToPrint = "Opus is online.\n"
+        return "Opus is online.\n"
                 + "Enter a prompt.";
-        printWithFormatting(textToPrint);
-        return textToPrint;
     }
 
     /**
@@ -46,9 +44,7 @@ public class Ui {
      * @return the printed message.
      */
     public String sayBye() {
-        String textToPrint = "Terminating connection.";
-        printWithFormatting(textToPrint);
-        return textToPrint;
+        return "Terminating connection.";
     }
 
     /**
@@ -65,7 +61,6 @@ public class Ui {
             output.append("\n").append(id).append(". ").append(task);
             id++;
         }
-        printWithFormatting(output.toString());
         assert id == tasks.size() + 1;
         return output.toString();
     }
@@ -84,7 +79,6 @@ public class Ui {
             output.append("\n").append(id).append(". ").append(task);
             id++;
         }
-        printWithFormatting(output.toString());
         assert id == tasks.size() + 1;
         return output.toString();
     }
@@ -97,10 +91,8 @@ public class Ui {
      */
     public String printDoneMessage(Task task) {
         assert task != null;
-        String textToPrint = "Affirmative. Task set as done:\n"
+        return "Affirmative. Task set as done:\n"
                 + "   " + task;
-        printWithFormatting(textToPrint);
-        return textToPrint;
     }
 
     /**
@@ -112,11 +104,9 @@ public class Ui {
      */
     public String printDeleteMessage(Task task, int size) {
         assert task != null && size >= 0;
-        String textToPrint = "Affirmative. Task eliminated:\n"
+        return "Affirmative. Task eliminated:\n"
                 + "   " + task + "\n"
                 + "You have " + size + " tasks left.";
-        printWithFormatting(textToPrint);
-        return textToPrint;
     }
 
     /**
@@ -128,11 +118,9 @@ public class Ui {
      */
     public String printAddMessage(Task task, int size) {
         assert task != null && size >= 0;
-        String textToPrint = "Affirmative. Task added:\n"
+        return "Affirmative. Task added:\n"
                 + "   " + task + "\n"
                 + "Now you have " + size + " tasks in the list.";
-        printWithFormatting(textToPrint);
-        return textToPrint;
     }
 
     /**
@@ -144,22 +132,7 @@ public class Ui {
      */
     public String printAliasMessage(String alias, String type) {
         assert alias != null && type != null;
-        String textToPrint = "Affirmative. Mapping added:\n"
+        return "Affirmative. Mapping added:\n"
                 + "   " + alias + " -> " + type;
-        printWithFormatting(textToPrint);
-        return textToPrint;
-    }
-
-    /**
-     * Formats and prints a string.
-     *
-     * @param toPrint string to print.
-     */
-    public void printWithFormatting(String toPrint) {
-        assert toPrint != null;
-        String line = "____________________________________________________________";
-        System.out.println(line);
-        System.out.println(toPrint);
-        System.out.println(line + "\n");
     }
 }
