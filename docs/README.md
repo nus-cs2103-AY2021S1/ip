@@ -1,6 +1,6 @@
 # User Guide
 
-## Features 
+## Features: A summary of Jarvis's commands
 
 ### Feature 1 
 Description of feature.
