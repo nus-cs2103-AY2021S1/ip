@@ -3,10 +3,10 @@ package dude.command;
 import java.util.ArrayList;
 
 import dude.task.Task;
+import dude.ui.Ui;
 import dude.util.CommandException;
 import dude.util.Storage;
 import dude.util.TaskList;
-import dude.ui.Ui;
 
 /**
  * The command gets the items in the tasklist that contains the keyword.

@@ -57,7 +57,7 @@ public class Parser {
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new InvalidArgumentException("Sorry, your argument cannot be empty!");
-        } catch ( IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             throw new InvalidCommandException("Sorry, your command is not recognised!");
         }
     }

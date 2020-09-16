@@ -3,10 +3,10 @@ package dude.command;
 import java.io.IOException;
 
 import dude.task.Todo;
+import dude.ui.Ui;
 import dude.util.CommandException;
 import dude.util.Storage;
 import dude.util.TaskList;
-import dude.ui.Ui;
 
 /**
  * The command creates a todo task and adds it to the tasklist when executed.

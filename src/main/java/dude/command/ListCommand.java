@@ -1,9 +1,9 @@
 package dude.command;
 
+import dude.ui.Ui;
 import dude.util.CommandException;
 import dude.util.Storage;
 import dude.util.TaskList;
-import dude.ui.Ui;
 
 /**
  * The command gets the ui class to list all of the current tasks.
