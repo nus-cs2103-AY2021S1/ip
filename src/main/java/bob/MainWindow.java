@@ -31,7 +31,7 @@ public class MainWindow extends AnchorPane {
     private Bob bob;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/User.png"));
+    private Image bobImage = new Image(this.getClass().getResourceAsStream("/images/Bob.png"));
 
 
     @FXML
@@ -50,7 +50,7 @@ public class MainWindow extends AnchorPane {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(UI.greet(), dukeImage,false));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(UI.greet(), bobImage));
     }
 
 
@@ -66,13 +66,13 @@ public class MainWindow extends AnchorPane {
             response = bob.getResponse(input);
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userImage),
-                    DialogBox.getDukeDialog(response, dukeImage, false)
+                    DialogBox.getDukeDialog(response, bobImage)
             );
         } catch (BobException e) {
             response = e.getMessage();
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userImage),
-                    DialogBox.getDukeDialog(response, dukeImage, true)
+                    DialogBox.getDukeDialogError(response, bobImage)
             );
         }
         if (response == "Bye! I hope to see you soon! \n[This window will close in 3 seconds.]") {

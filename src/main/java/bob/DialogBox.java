@@ -28,14 +28,12 @@ public class DialogBox extends HBox {
     @FXML
     private Label dialog;
     @FXML
-    private Label dialogError;
-    @FXML
     private Circle displayPicture;
 
 
-    private DialogBox(String text, Image img) {
+    private DialogBox(String text, Image img, String path) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource(path));
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
@@ -46,25 +44,6 @@ public class DialogBox extends HBox {
         displayPicture.setFill(new ImagePattern(img));
         displayPicture.setEffect(new DropShadow(+25d, 0d, +2d, Color.DODGERBLUE));
         dialog.setText(text);
-    }
-
-    private DialogBox(String text, Image img, boolean isError) {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
-            fxmlLoader.setController(this);
-            fxmlLoader.setRoot(this);
-            fxmlLoader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        displayPicture.setStroke(Color.DODGERBLUE);
-        displayPicture.setFill(new ImagePattern(img));
-        displayPicture.setEffect(new DropShadow(+25d, 0d, +2d, Color.DODGERBLUE));
-        if (isError) {
-            dialogError.setText(text);
-        } else {
-            dialog.setText(text);
-        }
     }
 
     /**
@@ -78,12 +57,22 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        var db = new DialogBox(text, img, "/view/DialogBoxUser.fxml");
+        return db;
     }
 
-    public static DialogBox getDukeDialog(String text, Image img, boolean isError) {
-        var db = new DialogBox(text, img, isError);
+    public static DialogBox getDukeDialog(String text, Image img) {
+        var db = new DialogBox(text, img, "/view/DialogBox.fxml");
         db.flip();
         return db;
     }
+
+    public static DialogBox getDukeDialogError(String text, Image img) {
+        var db = new DialogBox(text, img, "/view/DialogBoxError.fxml");
+        db.flip();
+        db.displayPicture.setStroke(Color.CRIMSON);
+        db.displayPicture.setEffect(new DropShadow(+25d, 0d, +2d, Color.CRIMSON));
+        return db;
+    }
+
 }
