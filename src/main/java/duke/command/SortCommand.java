@@ -1,4 +1,8 @@
-package duke;
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.logic.Tasklist;
+import duke.logic.Storage;
 
 public class SortCommand extends Command {
 

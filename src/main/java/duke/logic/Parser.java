@@ -7,6 +7,7 @@ import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.command.SortCommand;
 
 import duke.exception.DukeException;
 import duke.exception.ErrorMessage;
