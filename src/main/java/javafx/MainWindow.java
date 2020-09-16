@@ -23,6 +23,9 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
+    /*
+    Images taken from https://unsplash.com/s/photos/dog (Royalty free)
+     */
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.jpg"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.jpg"));
 
