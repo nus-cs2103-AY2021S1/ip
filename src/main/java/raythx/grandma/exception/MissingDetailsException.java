@@ -5,6 +5,6 @@ package raythx.grandma.exception;
  */
 public class MissingDetailsException extends DukeException {
     public MissingDetailsException() {
-        super("Whr da hell yur description or #tag at..?");
+        super("Sumtin wong with yur description or #tag..?");
     }
 }
