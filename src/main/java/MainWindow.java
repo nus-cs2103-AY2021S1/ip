@@ -22,8 +22,8 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Pumpkin.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Ghost.png"));
 
     @FXML
     public void initialize() {
@@ -35,7 +35,7 @@ public class MainWindow extends AnchorPane {
     }
 
     public void welcome() {
-        String welcomeMessage = "Hello! I'm Duke\n" + "What can I do for you?";
+        String welcomeMessage = "Hello! I'm Boo!\n" + "What can I do for you?";
         dialogContainer.getChildren().add(
                 DialogBox.getDukeDialog(welcomeMessage, dukeImage)
         );
