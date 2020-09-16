@@ -69,16 +69,16 @@ You can add 3 kinds of tasks:
 
 * **Adding an Event Task**
     * Format: `event <task name> /at <date> <start time>-<end time>`
-    * Format for <date>: DD/MM/YYYY
-    * Format for <start time> and <end time>: HH:MM
+    * Format for `<date>`: DD/MM/YYYY
+    * Format for `<start time>` and `<end time>`: HH:MM
     * Note the `-` between the <start time> and <end time>        
 <img src="https://github.com/AaronnSeah/ip/blob/master/src/main/resources/images/event.png" width="400">
 <br><br>
 
 * **Adding a Deadline Task**
     * Format: `deadline <task name> /by <date> <time>`
-    * Format for <date>: DD/MM/YYYY
-    * Format for <time>: HH:MM
+    * Format for `<date>`: DD/MM/YYYY
+    * Format for `<time>`: HH:MM
 
 <img src="https://github.com/AaronnSeah/ip/blob/master/src/main/resources/images/deadline.png" width="400">
 <br><br><br><br>
