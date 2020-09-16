@@ -13,6 +13,7 @@ Below are the 3 types of tasks supported in DuekBT:
 2. Double click the jar file to run the application.
 3. Welcome page will be automatically loaded (Shown below).
 4. Enter a command to start chatting with DukeBT.
+<br><br>
 ![Welcome Screen Image](Pics/welcome.png)
 
 ## Features 
