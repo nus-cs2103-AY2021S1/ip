@@ -2,6 +2,10 @@ package duke;
 
 import task.*;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 public class Duke {
     private static final String FILEPATH = "duke.txt";
     private TaskList taskList;
@@ -19,22 +23,50 @@ public class Duke {
         return replyBuilder.toString();
     }
 
-    private String executeRemove(String input){
-        String indexStr = input.replaceAll("[^0-9]", "");
-        int index = Integer.parseInt(indexStr) - 1;
-        Task t = taskList.remove(index);
-        String reply = "Noted. I've removed this task:\n"
-                +"\t" + t + "\n"
-                + "\t" + "Now you have " + taskList.size() + " tasks in the list.";
+    private String executeRemove(String indexCommand){
+        String[] indexes = indexCommand.split(" ");
+        ArrayList<Integer> indexIntArraylist = new ArrayList<Integer>();
+        for(String indexStr : indexes) {
+            try {
+                int index = Integer.parseInt(indexStr) - 1;
+                indexIntArraylist.add(index);
+            }
+            catch(Exception e){
+                return "Encountered error, " + indexStr + " is not a number";
+            }
+        }
+        indexIntArraylist.sort(Collections.reverseOrder());
+        String reply = "";
+        for(int index : indexIntArraylist){
+            Task t = taskList.remove(index);
+            reply = reply + "\t" + t + "\n";
+        }
+        reply = "Noted. I've removed the tasks:\n"
+                + reply
+                + "Now you have " + taskList.size() + " tasks in the list.";
         return reply;
     }
 
-    private String executeDone(String input){
-        String indexStr = input.replaceAll("[^0-9]", "");
-        int index = Integer.parseInt(indexStr) - 1;
-        taskList.get(index).setDone();
-        return "Nice! I've marked this task as done:\n"
-                + taskList.get(index);
+    private String executeDone(String indexCommand) {
+        String[] indexes = indexCommand.split(" ");
+        ArrayList<Integer> indexIntArraylist = new ArrayList<Integer>();
+        for (String indexStr : indexes) {
+            try {
+                int index = Integer.parseInt(indexStr) - 1;
+                indexIntArraylist.add(index);
+            } catch (Exception e) {
+                return "Encountered error, " + indexStr + " is not a number";
+            }
+        }
+        indexIntArraylist.sort(Collections.reverseOrder());
+        String reply = "";
+        for (int index : indexIntArraylist) {
+            taskList.get(index).setDone();
+            reply = reply + "\t" + taskList.get(index) + "\n";
+        }
+        reply = "Nice! I've marked these tasks as done:\n"
+                + reply;
+        return reply;
     }
 
     private String executeFind(String[] command){
@@ -92,8 +124,7 @@ public class Duke {
         String reply = "";
         try {
             String[] commands = Parser.parseCommand(input);
-            String command_1 = commands[0];
-            switch(command_1){
+            switch(commands[0]){
             case "bye":
                 reply = executeBye();
                 break;
@@ -101,11 +132,11 @@ public class Duke {
                 reply = executeList();
                 break;
             case "remove":
-                reply = executeRemove(input);
+                reply = executeRemove(commands[1]);
                 Storage.saveTasks(FILEPATH, taskList);
                 break;
             case "done":
-                reply = executeDone(input);
+                reply = executeDone(commands[1]);
                 Storage.saveTasks(FILEPATH, taskList);
                 break;
             case "find":

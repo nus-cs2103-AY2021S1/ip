@@ -1,9 +1,6 @@
-todo hello world
-done
-todo eggs
-done
 deadline egges /by 7pm
 done
 event something /at 2020/12/01
-todo done
-todo eeeeeeeeeeeeeeeeeeeeeeeeeestahoesnuthanseotuasntoheusntahouesnahtunseathseonhtunasthuanostehu
+todo babanna
+todo pen
+todo banana
