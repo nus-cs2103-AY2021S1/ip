@@ -1,9 +1,0 @@
-T|1|something|fun
-T|1|something|sad|2022-01-31|20:21
-E|1|exciting!!|eggcitez|2021-01-30|19:21
-E|1|exciting!!|yay
-D|1|homework|hw|2023-01-28|23:59
-T|1|even more homework|omg
-D|1|homework|hw|2022-03-28|23:58
-E|1|exciting!!|eggcitez|2020-09-30|13:24
-T|1|something|sad|2020-03-31|10:00
