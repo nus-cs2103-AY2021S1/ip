@@ -56,15 +56,15 @@ public class TaskList {
                 Task t = new Task("");
                 String[] array;
                 String OLD_FORMAT = "MMM dd yyyy";
-                String NEW_FORMAT = "yyyy/MM/dd";
+                String NEW_FORMAT = "yyyy-MM-dd";
 
                 switch (type) {
                     case "T":
                         t = new ToDo(description, isDone);
                         break;
 
-                    case "deadline":
-                        array = description.split("(by: ");
+                    case "D":
+                        array = description.split("\\(by: ");
 
                         String oldDateString = array[1];
                         String newDateString;
@@ -81,8 +81,8 @@ public class TaskList {
                         t = new Deadline(array[0], isDone, newDateString);
                         break;
 
-                    case "event":
-                        array = description.split("(at: ");
+                    case "E":
+                        array = description.split("\\(at: ");
 
                         String oldDateStr = array[1];
                         String newDateStr;
@@ -96,7 +96,7 @@ public class TaskList {
                         }
                         simpleDateFormat.applyPattern(NEW_FORMAT);
                         newDateStr = simpleDateFormat.format(date);
-                        t = new Deadline(array[0], isDone, newDateStr);
+                        t = new Event(array[0], isDone, newDateStr);
                         break;
 
                     default:

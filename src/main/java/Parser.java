@@ -1,4 +1,5 @@
 import java.io.FileNotFoundException;
+import java.util.Arrays;
 
 /**
  * Represents a parser that deals with making sense of the user command.
@@ -16,7 +17,7 @@ public class Parser {
      * @return String Response to be returned
      */
     public static String respond(String command, Ui ui, TaskList taskList, String filePath) {
-        String[] pieces = command.split(" ", 3);
+        String[] pieces = command.split(" ", 2);
         assert (pieces[0] != null) : "Incorrect splitting.";
         if (command.equals("bye")) { // terminating command
             return ui.bye();
@@ -31,7 +32,9 @@ public class Parser {
                 TaskList tasks;
                 String s = "";
                 try {
+                    //s = storage.load();
                     tasks = new TaskList(storage.load());
+                    s = tasks.list.get(1).toString();
                     s = ui.returnAllTasks(tasks);
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
@@ -81,13 +84,14 @@ public class Parser {
                 }
             }
         } else if (pieces[0].equals("tag")) {
-            int task = Integer.parseInt(pieces[1]); // get the task number
+            String[] p = pieces[1].split(" ");
+            int task = Integer.parseInt(p[0]); // get the task number
             if (task > taskList.noOfTasks) {
                 return ui.uncreatedTask(); // task has not been created
             } else {
                 assert (taskList.list.get(task - 1) != null) : "Incorrect index.";
                 Task cur = taskList.list.get(task - 1);
-                String tag = pieces[2];
+                String tag = p[1];
                 cur.setTag(tag);
                 Storage.updateTasks(taskList.getNoOfTasks(), taskList.list, filePath);
                 return ui.setTagSuccessful(tag,cur);
@@ -106,6 +110,7 @@ public class Parser {
                                             String secondCommandWord, String filePath){
         Task t = new Task("");
         String[] array;
+        String s = "";
         switch (firstCommandWord) {
             case "todo":
                 t = new ToDo(secondCommandWord);
@@ -125,7 +130,7 @@ public class Parser {
                 if (array.length == 1) {
                     ui.missingEventTime();
                 } else {
-                    t = new Deadline(array[0], array[1]);
+                    t = new Event(array[0], array[1]);
                 }
                 break;
 
@@ -137,7 +142,7 @@ public class Parser {
             Storage.updateTasks(taskList.getNoOfTasks(), taskList.list, filePath);
             return ui.addSuccessful(t, taskList);
         } else {
-            return "";
+            return s;
         }
     }
 

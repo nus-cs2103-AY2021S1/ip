@@ -16,4 +16,9 @@ public class ToDo extends Task {
         super(description, isDone, "T");
     }
 
+    @Override
+    public String toString() {
+        return super.toString() + (this.tag == null ? "" : (" <" + this.tag + ">"));
+    }
+
 }

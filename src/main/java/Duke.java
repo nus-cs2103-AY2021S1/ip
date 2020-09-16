@@ -39,8 +39,8 @@ public class Duke extends Application {
     private Button sendButton;
     private Scene scene;
 
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/user.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/duke.png"));
+    private Image k = new Image(this.getClass().getResourceAsStream("/images/k.png"));
+    private Image marco = new Image(this.getClass().getResourceAsStream("/images/marco.png"));
 
     private static final String LINE_TOP =    "╭⋟──────────❀• *₊。❀°。─╮\n";
     private static final String LINE_BOTTOM = "╰─────────────────────⋞╯\n";
@@ -99,7 +99,7 @@ public class Duke extends Application {
         //The container for the content of the chat to scroll.
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
-        dialogContainer.setSpacing(20.0);
+        dialogContainer.setSpacing(25.0);
         scrollPane.setContent(dialogContainer);
 
         userInput = new TextField();
@@ -114,7 +114,7 @@ public class Duke extends Application {
         stage.show();
 
         //Step 2. Formatting the window to look as expected
-        stage.setTitle("Duke - Chat Bot");
+        stage.setTitle("♡ Marco ♡");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
         stage.setMinWidth(500.0);
@@ -150,7 +150,7 @@ public class Duke extends Application {
 
         //Display welcome messages when the user opens the chat bot.
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(new Label(new Ui().greet()), new ImageView(duke)));
+                DialogBox.getDukeDialog(new Label(new Ui().greet()), new ImageView(marco)));
 
         //Handle user input sent by clicking.
         sendButton.setOnMouseClicked((event) -> {
@@ -177,8 +177,8 @@ public class Duke extends Application {
         Label userText = new Label(formattedInput);
         Label dukeText = new Label(getResponse(userInput.getText(),testBot));
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+                DialogBox.getUserDialog(userText, new ImageView(k)),
+                DialogBox.getDukeDialog(dukeText, new ImageView(marco))
         );
         userInput.clear();
     }

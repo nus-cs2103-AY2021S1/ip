@@ -13,13 +13,16 @@ public class Ui {
 
 
 
-    private static final String GREETING= "Hello! I'm Duke from the chat bot universe ~ \n" +
-            "Nice to meet you! \n" +
-            "I'll be your task manager from now onwards.\n";
+    private static final String GREETING= "Yo ~ This is M-A-R-C-O Marco!ヾ(≧∇≦*)ゝ \n" +
+            "The best task manager from the Puppy Universe U｡･ｪ･｡U \n" +
+            "Is there anything that I can do for you?\n" +
+            "Type 'help' to view the list of commands available \n";
 
-    private static final String BYE = "Awwww, I guess you are gonna leave... \n" +
-            "I'll keep track of your tasks nicely. \n" +
-            "Text me if you wanna talk again! Have a nice day!\n";
+    private static final String BYE = "Awwww, I guess you are gonna leave... o(TヘTo) \n" +
+            "Marco will keep track of your tasks nicely! \n" +
+            "Call me when you need me! " +
+            "Marco is always here waiting for you ☀♪ ~ " +
+            "Bye~ Have a nice day~ (●'◡'●)ﾉ♥ \n";
 
 
     public Ui() {
