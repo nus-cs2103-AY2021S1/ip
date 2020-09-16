@@ -96,8 +96,7 @@ public class TextAndTaskConverter {
      */
     public static LocalTime getTime(String input) {
         String[] splitInput = input.split("/", 2);
-        String trimText = splitInput
-        [1].trim();
+        String trimText = splitInput[1].trim();
 
         if (!trimText.contains(" ")) {
             //for deadline because it only takes in the date

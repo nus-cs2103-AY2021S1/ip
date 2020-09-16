@@ -11,7 +11,7 @@ public class DukeExceptionHandler {
     public static String handleException(String text) {
 
         if (text.equals("todo") || text.equals("deadline") || text.equals("event")
-                || text.equals("done") || text.equals("delete")|| text.equals("find")) {
+                || text.equals("done") || text.equals("delete") || text.equals("find")) {
             NoDescriptionException error = new NoDescriptionException(text);
             return error.toString();
 
@@ -22,7 +22,26 @@ public class DukeExceptionHandler {
             InvalidInputException error = new InvalidInputException(text);
             return error.toString();
         }
+        return null;
+    }
 
+    public static String handleIncorrectDeadlineInputException(String text) {
+        if (text.split("/").length != 2) {
+            IncorrectInputNumberException error = new IncorrectInputNumberException(text);
+            return error.toString();
+        }
+        return null;
+    }
+
+    public static String handleIncorrectEventInputException(String text) {
+        String[] splitText = text.split("/");
+        if (splitText.length != 2) {
+            IncorrectInputNumberException error = new IncorrectInputNumberException(text);
+            return error.toString();
+        } else if (splitText[1].trim().split(" ").length != 2) {
+            IncorrectInputNumberException error = new IncorrectInputNumberException(text);
+            return error.toString();
+        }
         return null;
     }
 }

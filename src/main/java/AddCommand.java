@@ -31,6 +31,12 @@ public class AddCommand extends Command {
             //if the task is a deadline task
             String task = this.taskDescription.replace("/by", "/");
 
+            String e = DukeExceptionHandler.handleIncorrectDeadlineInputException(task);
+
+            if (e != null) {
+                return e;
+            }
+
             String taskName = TextAndTaskConverter.getTaskName(task);
             LocalDate date = TextAndTaskConverter.getDate(task);
 
@@ -45,6 +51,12 @@ public class AddCommand extends Command {
         } else {
             //if task is an event task
             String task = this.taskDescription.replace("/at", "/");
+
+            String e = DukeExceptionHandler.handleIncorrectEventInputException(task);
+
+            if (e != null) {
+                return e;
+            }
 
             String taskName = TextAndTaskConverter.getTaskName(task);
             LocalDate date = TextAndTaskConverter.getDate(task);
