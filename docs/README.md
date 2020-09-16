@@ -11,6 +11,7 @@ Duke is a desktop app for managing Tasks, with functionality to add, delete, sav
 *A Todo is a Task that contains only a description, and nothing else.*
 
 **Format:** `add DESCRIPTION` 
+___
 
 ### Adding a Deadline: `deadline`
 *A Task that contains a description, as well as the date for which it is due.*
@@ -23,6 +24,7 @@ Duke is a desktop app for managing Tasks, with functionality to add, delete, sav
 **Examples:**
 *  `deadline Quiz1 /by 2020-09-20` Sets new Deadline called `Quiz1` that is due on `Sep 20th 2020`.
 *  `deadline complete task 1, 2, 3 /by 2021-01-01` 
+___
 
 ### Adding an Event: `event`
 *A Task that contains a description, as well as the date when the event occurs.*
@@ -35,6 +37,7 @@ Duke is a desktop app for managing Tasks, with functionality to add, delete, sav
 **Examples:**
 *  `event meeting /at 2020-09-14`
 *  `event New Year Countdown /at 2020-12-31` 
+___
 
 ## Usage
 ### `delete` - Deleting a Task:
@@ -44,6 +47,7 @@ Duke is a desktop app for managing Tasks, with functionality to add, delete, sav
 **Example of usage:** 
 
 `delete 2` Deletes the second Task in the `list`
+___
 
 ### `done` - Marking a Task as Done:
 
@@ -60,6 +64,7 @@ Duke is a desktop app for managing Tasks, with functionality to add, delete, sav
 > Task not yet marked done are shown with `[ ]`:
 >
 > e.g. `1.[T][ ] Return Book`
+___
 
 ### `list` - Listing all Tasks:
 
@@ -68,6 +73,7 @@ Duke is a desktop app for managing Tasks, with functionality to add, delete, sav
 **Examples:** 
 
 `list`
+___
 
 ### `update` - Updating an existing Task:
 
@@ -77,6 +83,7 @@ Duke is a desktop app for managing Tasks, with functionality to add, delete, sav
 1. `update TASKNUMBER`
 2. `[DESCRIPTION] [/by DEADLINE] [/at EVENTTIME]` 
 3. `y` or `n` 
+
 > Specify Task number of the target. Task number can be seen with `list`.
 
 > In a single line, you may enter a new `DESCRIPTION`, as well as:
@@ -97,6 +104,7 @@ Duke is a desktop app for managing Tasks, with functionality to add, delete, sav
 * `update 1` -> `new description /at 2020-01-01`
 * `update 1` -> `/by 2020-01-01` 
 * `update 1` -> `/at 2020-01-01` 
+___
 
 ### `find` - Searching for a Task:
 
@@ -106,11 +114,11 @@ Duke is a desktop app for managing Tasks, with functionality to add, delete, sav
 
 **Examples:** 
 `find meeting` Returns Tasks that have the word `meeting` in their description.
+___
 
-## Saving the data
+## Saving the data :
 
 Data is saved in the hard disk automatically after any command that changes the Task list. Saving is not required.
-
 
 ## Exiting the program : 
 
