@@ -13,7 +13,7 @@
 1. **Copy** the jar file to the directory you want to use as the *home directory* for the application.
 1. `Double click` the jar file or enter `java -jar duke.jar` in console to run the program.
 1. The window shown above should appear.
-1. *Well done!* Now you start using Duke!
+1. *Well done!* Now you can start using Duke!
 
 ## Setting up in Intellij for Developers
 
