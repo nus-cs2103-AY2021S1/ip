@@ -15,7 +15,7 @@ than traditional GUI apps.
 4. Double-click the file to start the app. The GUI similar to the one below should appear
 in a few seconds.
 
-![Duke app](https://github.com/CalistaIo/ip/docs/Screenshot (279).png)
+![Duke](Screenshot (279).png)
 
 ## Features
 
