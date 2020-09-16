@@ -9,6 +9,7 @@ import java.util.Map;
  * to execute the corresponding actions.
  */
 public enum Action {
+    HELP ("help"),
     ADD_TODO ("todo"),
     ADD_DEADLINE ("deadline"),
     ADD_EVENT ("event"),
