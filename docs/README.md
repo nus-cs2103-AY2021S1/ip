@@ -21,7 +21,7 @@
 
 ## Introduction
 Welcome to the Duke Chatbot User Guide! Duke Chatbot are for users who prefer to use a desktop application for their task management. Duke Chatbot is optimised for users who prefer to use the Command Line Interface (CLI) while reaping the visual benefits of a Graphical User Interface (GUI).
-Duke Chatbot has several features to help you manage your tasks. Sounds interesting? Head over to [**Quick Start**](Quick Start) to get started!
+Duke Chatbot has several features to help you manage your tasks. Sounds interesting? Head over to [**Quick Start**](#Quick-Start) to get started!
 
 
 
@@ -34,7 +34,7 @@ Duke Chatbot has several features to help you manage your tasks. Sounds interest
 <img src="https://github.com/AaronnSeah/ip/blob/master/src/main/resources/images/startUp.png" width="400">
 
 * Now you can explore the features of Duke Chatbot!
-* Head over to [**Features**](Features) for detailed explanation of each command.
+* Head over to [**Features**](#Features) for detailed explanation of each command.
 
 
 
@@ -64,20 +64,20 @@ Adding a Todo Task
 <img src="https://github.com/AaronnSeah/ip/blob/master/src/main/resources/images/todo.png" width="400">
 
 Adding an Event Task
-* format: `event <task name> /at <date> <start time>-<end time>`
-* format for <date>: DD/MM/YYYY
-* format for <start time> and <end time>: HH:MM
-* do note the `-` between the <start time> and <end time>        
+* Format: `event <task name> /at <date> <start time>-<end time>`
+* Format for <date>: DD/MM/YYYY
+* Format for <start time> and <end time>: HH:MM
+* Note the `-` between the <start time> and <end time>        
 <img src="https://github.com/AaronnSeah/ip/blob/master/src/main/resources/images/event.png" width="400">
 
 Adding a Deadline Task
-* format: `deadline <task name> /by <date> <time>`
-* format for <date>: DD/MM/YYYY
-* format for <time>: HH:MM
+* Format: `deadline <task name> /by <date> <time>`
+* Format for <date>: DD/MM/YYYY
+* Format for <time>: HH:MM
 
 <img src="https://github.com/AaronnSeah/ip/blob/master/src/main/resources/images/deadline.png" width="400">
 
-##### 3. #Marking a task as done: `done`
+### 3. Marking a task as done: `done`
 
 Mark the task to be done.
 
@@ -91,7 +91,7 @@ The <task number> is the number ordering in the list for the task you would like
 
 <img src="https://github.com/AaronnSeah/ip/blob/master/src/main/resources/images/done.png" width="400">
 
-##### 4. Deleting a task: `delete`
+### 4. Deleting a task: `delete`
 
 Deletes a task from the application.
 
@@ -106,7 +106,7 @@ The <task number> is the number ordering in the list for the task you would like
 <img src="https://github.com/AaronnSeah/ip/blob/master/src/main/resources/images/delete.png" width="400">
 
 
-##### 5. Finding tasks by name: `find`
+### 5. Finding tasks by name: `find`
 Find tasks by name.
 Format: `find <keyword>`
 The order of tasks that appear (if it is non-empty) is as follows:
@@ -117,13 +117,13 @@ The order of tasks that appear (if it is non-empty) is as follows:
 <img src="https://github.com/AaronnSeah/ip/blob/master/src/main/resources/images/find.png" width="400">
 
 
-##### 6. Exiting the program: `bye`
+### 6. Exiting the program: `bye`
 
 Exits the application.
 
 Format: `bye`
   
-##### 7. Saving/loading data
+### 7. Saving/loading data
 
 The tasks you have entered will be loaded on the application start up.
 
