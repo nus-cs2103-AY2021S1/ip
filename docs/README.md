@@ -160,7 +160,7 @@ Example of usage:
 
 Expected outcome:
 
-`Here are your search results: 3. [E][X] Birthday Party (at: 21 Oct 2020 5:00PM)`
+`Here are your search results: 2. [E][X] Birthday Party (at: 21 Oct 2020 5:00PM)`
 
 ---
 
