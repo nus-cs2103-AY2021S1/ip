@@ -1,5 +1,4 @@
 import javafx.animation.PauseTransition;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -14,6 +13,7 @@ import javafx.util.Duration;
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
+    private static final double delayTime = 1;
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -22,9 +22,7 @@ public class MainWindow extends AnchorPane {
     private TextField userInput;
     @FXML
     private Button sendButton;
-
     private Bill duke;
-
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/bill.png"));
 
@@ -60,8 +58,9 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
         if (Bill.isEnded()) {
-            PauseTransition delay = new PauseTransition((Duration.seconds(1)));
-            delay.setOnFinished(event -> Platform.exit());
+            System.out.println("here");
+            PauseTransition delay = new PauseTransition((Duration.seconds(delayTime)));
+            delay.setOnFinished(event -> System.exit(0));
             delay.play();
         }
     }

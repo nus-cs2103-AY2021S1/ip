@@ -22,10 +22,11 @@ public class Bill {
 
     public String getResponse(String input) {
         try {
+            String response = parse.processInput(input);
             if (Parser.isEnded()) {
                 this.isEnded = true;
             }
-            return parse.processInput(input);
+            return response;
         } catch (InvalidException e) {
             return Ui.getErrorMessage(e.getMessage());
         }

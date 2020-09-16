@@ -1,3 +1,5 @@
 T | ✘ | hey
-T | ✘ | li
+T | ✓ | li
 T | ✘ | lin
+T | ✘ | list
+T | ✘ | hii
