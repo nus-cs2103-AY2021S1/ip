@@ -99,11 +99,11 @@ public class Duke extends Application {
 
     private void setMainLayout(AnchorPane mainLayout, Button sendButton){
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
-        mainLayout.setPrefSize(500.0, 700.0);
+        mainLayout.setPrefSize(400.0, 600.0);
     }
 
     private void setUserInput(){
-        userInput.setPrefWidth(525.0);
+        userInput.setPrefWidth(345.0);
 
         userInput.setOnAction((event) -> {
             handleUserInput();
@@ -129,14 +129,14 @@ public class Duke extends Application {
 
         stage.setTitle("KaTo Task Manager");
         stage.setResizable(false);
-        stage.setMinHeight(800.0);
-        stage.setMinWidth(600.0);
+        stage.setMinHeight(600.0);
+        stage.setMinWidth(400.0);
     }
 
     private void setScrollPane(){
 
         scrollPane.setContent(dialogContainer);
-        scrollPane.setPrefSize(593, 785);
+        scrollPane.setPrefSize(385, 575);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
@@ -157,7 +157,7 @@ public class Duke extends Application {
 
     private void setSendButton(Button sendButton){
 
-        sendButton.setPrefWidth(75.0);
+        sendButton.setPrefWidth(55.0);
 
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput();
