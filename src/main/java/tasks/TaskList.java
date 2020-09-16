@@ -38,6 +38,9 @@ public class TaskList {
      * @param index Represents the index of the item to be removed.
      */
     public void removeTask(int index) {
+        Task removed = this.taskList.get(index);
+        String removedDescription = removed.taskDesc;
+        tasksDescription.remove(removedDescription);
         this.taskList.remove(index);
     }
 

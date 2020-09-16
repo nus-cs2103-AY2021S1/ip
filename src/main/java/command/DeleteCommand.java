@@ -36,8 +36,13 @@ public class DeleteCommand extends Command {
                     "\t☹ OOPS!!! The description of a delete operation cannot be empty / invalid index.");
         }
 
-        int index = Integer.parseInt(super.input.substring(INPUT_INDEX));
-        if (index >= tasks.getTasks().size() || index < 0) {
+        int index;
+        try {
+            index = Integer.parseInt(super.input.substring(INPUT_INDEX));
+        } catch (NumberFormatException e) {
+            throw new InvalidInputException("What you entered is not a number!");
+        }
+        if (index > tasks.getTasks().size() || index <= 0) {
             throw new InvalidInputException(
                     "\t☹ OOPS!!! The description of a delete operation cannot be empty / invalid index.");
         }

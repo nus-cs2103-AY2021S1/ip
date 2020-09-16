@@ -29,9 +29,10 @@ public class ToDoCommand extends Command {
             throws InvalidInputException, InvalidSaveFileException {
 
         final int INPUT_INDEX = 5;
+        final String TASK_DESCRIPTION = super.input;
 
         //Check if input is empty.
-        if (super.input.length() <= INPUT_INDEX) {
+        if (TASK_DESCRIPTION.length() <= INPUT_INDEX || TASK_DESCRIPTION.substring(INPUT_INDEX).isBlank()) {
             throw new InvalidInputException("☹ OOPS!!! The description of a todo cannot be empty.");
         }
 

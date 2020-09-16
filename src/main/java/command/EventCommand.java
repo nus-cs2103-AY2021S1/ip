@@ -64,12 +64,14 @@ public class EventCommand extends Command {
 
     private void checkValidity() throws InvalidInputException {
 
+        if (super.input.length() <= INPUT_INDEX) {
+            throw new InvalidInputException("The description of an event cannot be empty.");
+        }
+
         String[] splitWord = super.input.split("/");
         String description = splitWord[0].substring(INPUT_INDEX);
 
-        if (super.input.length() <= INPUT_INDEX) {
-            throw new InvalidInputException("The description of an event cannot be empty.");
-        } else if (splitWord.length != 2) {
+        if (splitWord.length != 2) {
             throw new InvalidInputException("Please use /at to indicate event time,"
                     + " and only 1 forward slash throughout");
         } else if (description.charAt(description.length() - 1) != ' ') {

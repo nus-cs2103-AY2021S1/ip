@@ -35,14 +35,16 @@ public class DoneCommand extends Command {
             throw new InvalidInputException("\t☹ OOPS!!! Please specify which task you want to complete!");
         }
 
-        int completed = Integer.parseInt(super.input.substring(INPUT_INDEX));
         try {
+            int completed = Integer.parseInt(super.input.substring(INPUT_INDEX));
             Task current = tasks.getTasks().get(completed - 1);
             current.completeTask();
             storage.saveFile(tasks.getTasks());
             return ui.printOutput("\tNice! I've marked this task as done:\n" + "\t\t" + current.toString());
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidInputException("\tIndex out of bounds! Please try again.");
+        } catch (NumberFormatException err) {
+            throw new InvalidInputException("Please enter a number!");
         }
     }
 }

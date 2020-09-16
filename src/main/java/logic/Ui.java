@@ -21,7 +21,8 @@ public class Ui {
                 + "4. deadline ..... => to add a Deadline task to the list\n"
                 + "5. done x => to complete task #x\n"
                 + "6. delete y => to delete task #y\n"
-                + "7. exit => to save the tasks and exit Duke\n";
+                + "7. find abcd => to find a task with abcd in its description\n"
+                + "8. exit => to save the tasks and exit Duke\n";
         result += "________________________________________________\n";
         return result;
     }

@@ -66,12 +66,14 @@ public class DeadlineCommand extends Command {
 
     private void checkValidity() throws InvalidInputException {
 
+        if (super.input.length() <= INPUT_INDEX) {
+            throw new InvalidInputException("The description of a deadline cannot be empty.");
+        }
+
         String[] splitWord = super.input.split("/");
         String description = splitWord[0].substring(INPUT_INDEX);
 
-        if (super.input.length() <= INPUT_INDEX) {
-            throw new InvalidInputException("The description of a deadline cannot be empty.");
-        } else if (splitWord.length != 2) {
+        if (splitWord.length != 2) {
             throw new InvalidInputException("Please use /by to indicate deadline, and only 1 forward slash throughout");
         } else if (description.charAt(description.length() - 1) != ' ') {
             throw new InvalidInputException("The formatting of your entry is wrong. Be sure to leave"
