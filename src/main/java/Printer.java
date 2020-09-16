@@ -51,7 +51,7 @@ public class Printer {
      * Prints the undefinedExceptionMessage message.
      */
     protected String undefinedExceptionMessage() {
-        String output = LINE + "\n" + "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-("
+        String output = LINE + "\n" + "     ): OOPS!!! I'm sorry, but I don't know what that means :-("
                 + "\n" + LINE;
         return output;
     }
