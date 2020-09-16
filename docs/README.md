@@ -129,7 +129,7 @@ Examples:
 * `find s` returns `swim`, `swimming`
 * `find book` returns `read book`, `return book`
 
-<img src="https://user-images.githubusercontent.com/65069982/93290752-024f3080-f814-11ea-8562-0a2a2f83f209.png" height="150">
+   <img src="https://user-images.githubusercontent.com/65069982/93290752-024f3080-f814-11ea-8562-0a2a2f83f209.png" height="150">
 
 ### Finding deadlines/events occuring on a specific date: `date`
 
@@ -140,7 +140,7 @@ Format: `date DATE`
 Example:
 * `date 2020-06-06`
 
-<img src="https://user-images.githubusercontent.com/65069982/93291787-a043fa80-f816-11ea-82e8-6d21e1f92d21.png" height="150">
+    <img src="https://user-images.githubusercontent.com/65069982/93291787-a043fa80-f816-11ea-82e8-6d21e1f92d21.png" height="150">
 
 ### Obtaining statistics about managed tasks: `stats`
 
@@ -150,9 +150,10 @@ Format: `stats`
 * The number of tasks that you have completed in this session will be shown. A session starts when the application is launched and ends when the application is closed.
 * The number of uncompleted tasks in your list of tasks will be shown **only if** you still have uncompleted tasks.
 
-Example: `stats`
+Example:
+* `stats`
 
-<img src="https://user-images.githubusercontent.com/65069982/93291952-fa44c000-f816-11ea-9b4d-ac55a11c0590.png" height="150">
+    <img src="https://user-images.githubusercontent.com/65069982/93291952-fa44c000-f816-11ea-9b4d-ac55a11c0590.png" height="150">
 
 ### Exiting the program: `bye`
 
