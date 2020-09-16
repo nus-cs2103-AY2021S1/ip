@@ -22,15 +22,19 @@ public class Ui {
         System.out.println("What can i do for you?");
     }
 
+    /**
+     * Displays the introduction to the user indicating that Duke is running for GUI.
+     * @return the introduction.
+     */
     public static String intro(boolean isChat) {
         String str1 = "Hi! I'm BrawlyDuke!\n";
         String str2 = "I am your personal assistant cowboy here to keep track of tasks\n";
         String str3 = "What can i do for you?\n";
         String str4 = "The 3 main features you can keep track of are todo, deadline, task";
-        return  str1 + str2 + str3 + str4;
+        return str1 + str2 + str3 + str4;
     }
     /**
-     * Displays an indicator that the list is about to be shown
+     * Displays an indicator that the list is about to be shown.
      */
     public static void tasks(TaskList list) {
         System.out.println("        Here are the tasks in your list:");
@@ -41,6 +45,10 @@ public class Ui {
         }
     }
 
+    /**
+     * Displays an indicator that the list is about to be shown for GUI.
+     * @return the task added.
+     */
     public static String tasks(TaskList list, boolean isChat) {
         String string1 = "Here are the tasks in your list:\n";
         String string2 = "";
@@ -70,6 +78,10 @@ public class Ui {
         System.out.println("        Bye have a good day!");
     }
 
+    /**
+     * Displays a goodbye message for GUI.
+     * @return the goodbye message.
+     */
     public static String finish(boolean isChat) {
         return "Bye have a good day!";
     }
@@ -85,6 +97,11 @@ public class Ui {
         System.out.println("        you now have " + listSize + " tasks on the list");
     }
 
+    /**
+     * Displays to the user the task that has been deleted for GUI.
+     * @param deleted the deleted task
+     * @param listSize the size of the list
+     */
     public static String deleteMessage(String deleted, int listSize, boolean isChat) {
         String string1 = "\nNoted I've removed this task\n";
         String string2 = deleted + "\n";
@@ -103,6 +120,12 @@ public class Ui {
         System.out.println("        you now have " + listSize + " tasks on the list");
     }
 
+    /**
+     * Displays to the user the task that has been added for GUI.
+     * @param task the added task
+     * @param listSize the size of the list
+     * @return the added task.
+     */
     public static String addedTaskMessage(Task task, int listSize, boolean isChat) {
         String string1 = "\nGot it I have added this task:\n";
         String string2 = task.toString() + "\n";
@@ -120,6 +143,12 @@ public class Ui {
         System.out.println("        [" + isDone + "] " + description);
     }
 
+    /**
+     * Displays to the user the task that has been completed.
+     * @param isDone indicating that the task is done
+     * @param description the description of the task
+     * @return the done message.
+     */
     public static String doneMessage(boolean isDone, String description, boolean isChat) {
         String string1 = "\nI have marked this as done:\n";
         String string2 = "[" + isDone + "] " + description + "\n";
@@ -137,6 +166,11 @@ public class Ui {
         }
     }
 
+    /**
+     * Displays to the user a list of all the tasks which watch the given phrase.
+     * @param list a new condensed list which match the phrase
+     * @return the tasks found
+     */
     public static String printFoundTask(TaskList list, boolean isChat) {
         String string1 = ("I have found these matching tasks in your list:");
         String fullList = "";
@@ -145,20 +179,29 @@ public class Ui {
         }
         return fullList;
     }
-    //ggjhgjh
+
+    /**
+     * Prints instructions for the user on how to add different tasks.
+     * @param helpTopic the specific topic the user needs help on
+     */
     public static void printHelpInstructions(String helpTopic) {
         if (helpTopic.equals("deadline")) {
             System.out.println("For deadlines type 'deadline ' + 'your deadline' + '/by' + specific 'timing' ");
             System.out.println("in the format: YYYY-MM-DD");
         } else if (helpTopic.equals("event")) {
             System.out.println("For events type 'event ' + 'your event' + '/at' + specific 'location'");
-        }else if (helpTopic.equals("todo")) {
+        } else if (helpTopic.equals("todo")) {
             System.out.println("For todo type 'todo ' + 'your task'");
         } else {
             System.out.println("sorry this is not a valid help command");
         }
     }
 
+    /**
+     * Prints instructions for the user on how to add different tasks.
+     * @param helpTopic the specific topic the user needs help on
+     * @return the help instructions
+     */
     public String printHelpInstructions(String helpTopic, boolean isChat) {
         if (helpTopic.equals("deadline")) {
             String str1 = "For deadlines type 'deadline ' + 'your deadline' + '/by' + specific 'timing'\n";
@@ -166,7 +209,7 @@ public class Ui {
             return str1 + str2;
         } else if (helpTopic.equals("event")) {
             return "For events type 'event ' + 'your event' + '/at' + specific 'location'";
-        }else if (helpTopic.equals("todo")) {
+        } else if (helpTopic.equals("todo")) {
             return "For todo type 'todo ' + 'your task'";
         } else {
             return "sorry this is not a valid help command";

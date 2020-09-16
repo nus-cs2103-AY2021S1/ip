@@ -53,7 +53,7 @@ public class DeleteCommand extends Command {
         if (num < 0 || num > list.size() + 1) {
             return "☹ OOPS!!! there is no such task";
         } else {
-        return ui.deleteMessage(deletedMessage, list.size(), true);
+            return ui.deleteMessage(deletedMessage, list.size(), true);
         }
     }
 }

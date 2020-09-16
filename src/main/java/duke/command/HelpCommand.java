@@ -4,9 +4,9 @@ import duke.Storage;
 import duke.Ui;
 import duke.task.TaskList;
 
-public class HelpCommand extends Command{
+public class HelpCommand extends Command {
 
-    public HelpCommand(String command){
+    public HelpCommand(String command) {
         super(command, false);
     }
 
