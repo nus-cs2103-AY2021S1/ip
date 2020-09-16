@@ -11,7 +11,7 @@
 
 4. Double-click the file to start the app. You should be able to see the following in a few seconds.
 
-![Image of DogeBot](https://github.com/davidcaiqifan/ip/tree/master/docs/Ui.png)
+![Image of DogeBot](https://github.com/davidcaiqifan/ip/blob/master/docs/Ui.png)
 
 Type the command in the command box and press Enter to execute it. e.g. typing list and pressing Enter will display all tasks.
 Some example commands you can try:
