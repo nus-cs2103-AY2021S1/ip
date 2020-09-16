@@ -1,5 +1,4 @@
-T | 1 | math assignment
-T | 0 | buy pencil
-D | 0 | return book | 2020-09-25T23:59
-E | 0 | project meeting | 2020-09-18T13:00
-E | 0 | birthday party | 2020-09-20T16:00
+T | 1 | buy dinner
+D | 0 | assignment | 2020-09-18T23:59
+D | 0 | return book | 2020-09-25T21:00
+E | 0 | cca cohesion | 2020-09-30T19:00
