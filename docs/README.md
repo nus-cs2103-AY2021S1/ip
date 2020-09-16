@@ -5,7 +5,7 @@
 2. [**Quick Start**](#Quick-Start)
 3. [**Features**](#Features)
 
-    3.1. [Listing all tasks: `list`](#1-Listing-all-tasks-list`)
+    3.1. [Listing all tasks: `list`](#1-Listing-all-tasks-list)
     
     3.2. [Adding a task](#2-Adding-a-task)
     
@@ -17,7 +17,7 @@
     
     3.6. [Exiting the program: `bye`](#6-Exiting-the-program-bye)   
     
-    3.7. [Saving/loading data](#7-Saving-loading-data)   
+    3.7. [Saving/loading data](#7-Saving/loading-data)   
 
 ## Introduction
 Welcome to the Duke Chatbot User Guide! Duke Chatbot are for users who prefer to use a desktop application for their task management. Duke Chatbot is optimised for users who prefer to use the Command Line Interface (CLI) while reaping the visual benefits of a Graphical User Interface (GUI).
