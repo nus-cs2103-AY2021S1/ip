@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import duke.Duke;
 import duke.Main;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -12,6 +13,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import util.Ui;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -28,6 +30,8 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
+    private final Ui ui;
+
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.jpg"));
     private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Serina.jpg"));
 
@@ -35,6 +39,7 @@ public class MainWindow extends AnchorPane {
      * Creates a new Main Window UI
      */
     public MainWindow() {
+        ui = new Ui();
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             fxmlLoader.setController(this);
@@ -78,5 +83,9 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+        if (response.equals(ui.showGoodbye())) {
+            Platform.exit();
+            System.exit(0);
+        }
     }
 }
