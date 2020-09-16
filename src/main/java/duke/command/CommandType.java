@@ -9,6 +9,7 @@ public enum CommandType {
     DONE,
     DONETASK,
     FIND,
+    FINDTASK,
     HELP,
     LIST,
     RESET,

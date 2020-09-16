@@ -92,23 +92,33 @@ public class Duke {
                 case ADD:
                     command.execute(ui, taskList);
                     command = Parser.parseTaskType(input);
+                    assert command.getCommandType().equals(CommandType.TASKTYPE)
+                            : "Command type should be TASKTYPE";
                     command.execute(ui, taskList);
                     command = Parser.parseTask(input, command);
+                    assert command.getCommandType().equals(CommandType.TASK)
+                            : "Command type should be TASK";
                     command.execute(ui, taskList);
                     break;
                 case DELETE:
                     command.execute(ui, taskList);
                     command = Parser.parseDelete(input);
+                    assert command.getCommandType().equals(CommandType.DELETETASK)
+                            : "Command type should be DELETETASK";
                     command.execute(ui, taskList);
                     break;
                 case DONE:
                     command.execute(ui, taskList);
                     command = Parser.parseDone(input);
+                    assert command.getCommandType().equals(CommandType.DONETASK)
+                            : "Command type should be DONETASK";
                     command.execute(ui, taskList);
                     break;
                 case FIND:
                     command.execute(ui, taskList);
                     command = Parser.parseFind(input);
+                    assert command.getCommandType().equals(CommandType.FINDTASK)
+                            : "Command type should be FINDTASK";
                     command.execute(ui, taskList);
                     break;
                 default:

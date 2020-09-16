@@ -73,6 +73,8 @@ public class Parser {
 
     public static Command parseTask(String input, Command command) throws
             DukeException {
+        assert command.getCommandType().equals(CommandType.TASKTYPE)
+                : "Command type should be TASKTYPE";
         TaskTypeCommand c = (TaskTypeCommand) command;
         switch (c.getTaskType()) {
         case TODO:
