@@ -1,5 +1,3 @@
-D | 0 | read book | Dec 20 2020 8:20 PM
-D | 0 | loooooooooong task | Dec 20 2020 8:20 PM
-E | 0 | loooooooooooooooong event | Dec 20 2020 8:20 PM
-T | 0 | loooooooooooong todo
-T | 0 | nfjwfnwjkfnkfnjknajklnfjwahaijafjkdslafjksldfjkdslfjkdfjkwl
+T | 1 | Buy groceries for dinner
+D | 0 | CS2100 Assignment | Sep 18 2020 12:00 PM
+E | 0 | LeetCode and Chill | Sep 21 2020 9:00 PM
