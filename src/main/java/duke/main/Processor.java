@@ -132,7 +132,8 @@ public class Processor {
         // check whether the date time format is correct
         Parser.isValidDate(deadLineTime, hasTime);
         boolean hasPriority = Parser.hasPriority(userInput);
-
+        System.out.println(deadLineTime);
+        System.out.println(hasTime);
         Task deadLine;
         if (hasPriority) {
             String priority = Parser.getPriority(userInput);

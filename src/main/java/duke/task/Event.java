@@ -10,6 +10,7 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
     private LocalDate eventTime;
     private LocalDateTime time;
+    private boolean hasTime;
 
     /**
      * Initializes an event task.
@@ -23,6 +24,7 @@ public class Event extends Task {
     public Event(
             String description, String time, boolean hasTime, boolean isDone, String priority) {
         super(description, isDone, priority);
+        this.hasTime = hasTime;
         if (!hasTime) {
             this.eventTime = LocalDate.parse(time);
         } else {
@@ -39,7 +41,8 @@ public class Event extends Task {
     @Override
     public String getStorageString() {
         return "E | " + this.getStatusIcon() + " | " + this.description
-            + " | " + this.time + " | " + this.priority.toString() + "\n";
+                + " | " + (!this.hasTime ? this.eventTime : this.time)
+                + " | " + this.priority.toString() + "\n";
     }
 
     @Override

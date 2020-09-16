@@ -10,6 +10,7 @@ import java.time.format.DateTimeFormatter;
 public class DeadLine extends Task {
     private LocalDate deadLine;
     private LocalDateTime deadLineWithTime;
+    private boolean hasTime;
 
     /**
      * Initializes a deadline task.
@@ -23,6 +24,7 @@ public class DeadLine extends Task {
     public DeadLine(
             String description, String time, boolean hasTime, boolean isDone, String priority) {
         super(description, isDone, priority);
+        this.hasTime = hasTime;
         if (!hasTime) {
             this.deadLine = LocalDate.parse(time);
         } else {
@@ -39,7 +41,8 @@ public class DeadLine extends Task {
     @Override
     public String getStorageString() {
         return "D | " + this.getStatusIcon() + " | " + this.description
-                + " | " + this.deadLine + " | " + this.priority.toString() + "\n";
+                + " | " + (!hasTime ? this.deadLine : this.deadLineWithTime)
+                + " | " + this.priority.toString() + "\n";
     }
 
     @Override
