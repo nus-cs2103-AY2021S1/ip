@@ -6,24 +6,27 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
-
-<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="450.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="450.0"
+         type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label fx:id="dialog" alignment="TOP_LEFT" minHeight="-Infinity" minWidth="-Infinity" style="-fx-padding: 6; -fx-background-radius: 10; -fx-background-color: black;" text="Label" textFill="WHITE">
+        <Label fx:id="dialog" alignment="TOP_LEFT" minHeight="-Infinity" minWidth="-Infinity"
+               style="-fx-padding: 6; -fx-background-radius: 10; -fx-background-color: lightcoral;" text="Label"
+               textFill="WHITE">
             <HBox.margin>
-                <Insets bottom="1.0" left="2.0" right="4.0" top="1.0" />
+                <Insets bottom="1.0" left="2.0" right="4.0" top="1.0"/>
             </HBox.margin>
             <font>
-                <Font name="Futura Medium" size="12.0" />
+                <Font name="Futura Medium" size="12.0"/>
             </font>
         </Label>
         <StackPane prefHeight="98.0" prefWidth="82.0">
             <children>
-                <ImageView fx:id="displayPicture" fitHeight="98.0" fitWidth="98.0" pickOnBounds="true" preserveRatio="true" />
+                <ImageView fx:id="displayPicture" fitHeight="98.0" fitWidth="98.0" pickOnBounds="true"
+                           preserveRatio="true"/>
             </children>
         </StackPane>
     </children>
     <padding>
-        <Insets bottom="10.0" left="2.0" right="2.0" top="10.0" />
+        <Insets bottom="10.0" left="2.0" right="2.0" top="10.0"/>
     </padding>
 </fx:root>
