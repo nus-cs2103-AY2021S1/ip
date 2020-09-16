@@ -9,21 +9,21 @@ Duck is a highly-intelligent bot that would be able to help to track your day-to
 
 ## Features 
 1. **Adding tasks**: 
-    a. **`todo`**
-    b. **`deadline`**
-    c. **`event`**
+    1. **`todo`**
+    2. **`deadline`**
+    3. **`event`**
 2. **Other task list operations**
-    a. **`list`**
-    b. **`find`**
-    c. **`done`**
-    d. **`delete`**
-    e. **`clear`**
+    1. **`list`**
+    2. **`find`**
+    3. **`done`**
+    4. **`delete`**
+    5. **`clear`**
 3. **Dealing with duplicates**.
-    a. **`duplicates`**
-    b. **`remove duplicates`**
+    1. **`duplicates`**
+    2. **`remove duplicates`**
 4. **Other operations**: 
-    a. **`help`**
-    b. **`bye`**
+    1. **`help`**
+    2. **`bye`**
 
 
 
