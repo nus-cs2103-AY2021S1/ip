@@ -1,2 +1,3 @@
-[D] [X][DRP]everything by:17/09/2020 1200
-[E] [O][MRP]block event at:17/09/2020 1100
+[T] [X]return spanish book
+[D] [O][DRP]return spanish book by:20/09/2020 1600
+[E] [X][NRP]return spanish book at:20/09/2020 1600

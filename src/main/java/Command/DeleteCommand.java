@@ -40,9 +40,9 @@ public class DeleteCommand extends Command {
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         if (taskPosition < taskList.getTaskList().size() && taskPosition >= 0) {
+            output = ui.showDeleted(taskList.getTaskList().get(taskPosition));
             taskList.getTaskList().remove(taskPosition);
             storage.updateStorage(taskList);
-            output = ui.showDeleted(taskList.getTaskList().get(taskPosition));
             return output;
         } else {
             throw new DukeException("OOPS !!! Esta tarea aun no existe!");

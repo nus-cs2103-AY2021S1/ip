@@ -85,7 +85,7 @@ public class Ui {
      * @return the output to be returned to the user.
      */
     public String showDeleted(Task task) {
-        return "Célebre. He eliminado esta tarea:" + "\n" + task;
+        return "Celebre. He eliminado esta tarea:" + "\n" + task;
     }
 
     /**
@@ -114,7 +114,7 @@ public class Ui {
      * @return the output to be returned to the user.
      */
     public String showFoundList(ArrayList<Task> foundTaskList) {
-        StringBuilder outputMessage = new StringBuilder("Aquí están las tareas coincidentes en su lista:");
+        StringBuilder outputMessage = new StringBuilder("Aqui estan las tareas coincidentes en su lista:");
         assert foundTaskList.size() > 0;
         for (int i = 0; i < foundTaskList.size(); i++) {
             outputMessage.append("\n").append(i + 1).append(". ").append(foundTaskList.get(i).toString());
