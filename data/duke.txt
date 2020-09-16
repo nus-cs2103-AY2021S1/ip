@@ -1,2 +1,2 @@
 Deadline | done | submit homework | 23/04/2020 12:00 PM
-ToDo | done | borrow book
+Event | done | swimming | 23/05/2020 12:30 PM

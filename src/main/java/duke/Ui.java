@@ -97,9 +97,8 @@ public class Ui {
      * Returns and marks task as done.
      * @param tasks Arraylist of tasks.
      * @param pos Index in arraylist.
-     * @throws DukeException When index < 0 or index > tasks.size().
      */
-    public String displayDone(ArrayList<Task> tasks, int pos) throws DukeException {
+    public String displayDone(ArrayList<Task> tasks, int pos) {
         String taskMarkedAsDone = tasks.get(pos - 1).toString();
         return "Great work! I've marked this task as done:\n"
                 + taskMarkedAsDone

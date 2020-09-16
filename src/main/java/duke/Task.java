@@ -1,7 +1,5 @@
 package duke;
 
-import java.time.LocalDate;
-
 /**
  * Represents a task.
  */

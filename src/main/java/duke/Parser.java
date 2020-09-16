@@ -21,7 +21,7 @@ public class Parser {
             throw new DukeException(
                     "You have keyed in an invalid command or format!\n"
                             + "(Valid commands: todo, deadline, event, list,"
-                            + " delete, bye, done, find)");
+                            + " delete, bye, done, find, schedule)");
         }
         return command;
     }
@@ -58,7 +58,7 @@ public class Parser {
             throw new DukeException(
                     "You have keyed in an invalid command!\n"
                             + "(Valid commands: todo, deadline,"
-                            + " event, list, delete, bye, done, find)");
+                            + " event, list, delete, bye, done, find, schedule)");
         }
     }
 }

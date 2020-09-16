@@ -1,6 +1,11 @@
 package duke;
 
+/**
+ * Represents a schedule command for a class.
+ */
 public class ScheduleCommand extends Command {
+
+    /** User input as string */
     private final String userInput;
 
     /**
