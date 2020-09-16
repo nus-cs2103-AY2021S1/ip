@@ -67,6 +67,7 @@ Example:
 * `todo Nap`
 
 Expected outcome:
+
 <img src="todo.PNG" alt="Help Command" width="600" height="400"/>
     
     
@@ -82,6 +83,7 @@ Example:
 * `deadline Watch Lecture /by 2020-10-02`
 
 Expected outcome:
+
 <img src="deadline.PNG" alt="Help Command" width="600" height="400"/>
     
     
@@ -96,6 +98,7 @@ Example:
 * `event Follow Up With Lecturer /at afternoon-ish`
 
 Expected outcome:
+
 <img src="event.PNG" alt="Help Command" width="600" height="400"/>
 
 List all tasks: `list`
@@ -109,7 +112,8 @@ Example:
 * `list`
 
 Expected outcome:
-<img src="list.png" alt="list" width="600" height="400"/>
+
+<img src="list.PNG" alt="list" width="600" height="600"/>
 
 Mark a task as done: `done`
 - Sets the task in the list as done but does not delete them
@@ -122,6 +126,7 @@ Example:
 * `done 20`
 
 Expected outcome:
+
 <img src="done.PNG" alt="done Command" width="600" height="400"/>
 
 Delete a task: `delete`
@@ -146,6 +151,7 @@ Example:
 * `find Happy`
 
 Expected outcome:
+
 <img src="find.PNG" alt="find Command" width="600" height="400"/>
 
 Tag a task: `tag`
@@ -159,6 +165,7 @@ Example:
 * `tag 2 Urgent`
 
 Expected outcome:
+
 <img src="tag.PNG" alt="tag Command" width="600" height="400"/>
 
 Exiting the program: `exit`
@@ -170,6 +177,7 @@ Example:
 * `exit`
 
 ## 4. Command Summary 
+
 Action | Format
 -------| ------------------
 todo | `todo DESCRIPTION`
