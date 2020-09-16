@@ -147,7 +147,7 @@ public class Duke {
 
         switch (keywordCommand) {
         case INVALID:
-            statusMessage = String.format("OOPS!!! I'm sorry, but I don't know what `%s` means :-(", msgArr[0]);
+            statusMessage = String.format("Yo whatchu mean by `%s`???", msgArr[0]);
             break;
         case LIST:
             statusMessage = this.taskList.toString();

@@ -56,7 +56,7 @@ public class DukeList {
     public String add(String descriptionString) throws DukeException {
         Task newTask = addHelper(descriptionString);
 
-        return "Got it. I've added this task:\n"
+        return "Orite, I've added this:\n"
                 + String.format("\t%s\n", newTask.toString())
                 + String.format("%s", this.getListStats());
     }
@@ -130,16 +130,16 @@ public class DukeList {
                 break;
             default:
                 String invalidCommand = strArr[0];
-                throw new DukeInvalidCommandException(String.format("OOPS!!! I'm sorry, but I don't know what `%s` means :-(", invalidCommand));
+                throw new DukeInvalidCommandException(String.format("Yo whatchu mean by `%s`???", invalidCommand));
             }
 
             assert newTask != null;
             return newTask;
 
         } catch (DukeNoDescriptionException e) {
-            throw new DukeInvalidDescriptionException(String.format("OOPS!!! The description of a `%s` cannot be empty.", taskType));
+            throw new DukeInvalidDescriptionException(String.format("Hey hey where's my description for `%s`?", taskType));
         } catch (DukeNoDateException e) {
-            throw new DukeInvalidDescriptionException(String.format("OOPS!!! The description of `%s` is invalid.", taskType));
+            throw new DukeInvalidDescriptionException(String.format("Mate  you gave me an invalid description for `%s`!", taskType));
         }
     }
 
@@ -156,7 +156,7 @@ public class DukeList {
         Task targetTask = this.taskList.get(index - 1);
         targetTask.markAsDone();
 
-        return String.format("Nice! I've marked this task as done:\n\t%s", targetTask.toString());
+        return String.format("Orite, this is marked as done:\n\t%s", targetTask.toString());
     }
 
 
@@ -170,7 +170,7 @@ public class DukeList {
      */
     public String delete(int index) throws IndexOutOfBoundsException {
         Task removedTask = this.taskList.remove(index - 1);
-        return "Noted. I've removed this task:\n"
+        return "Okay, removed this:\n"
                 + String.format("\t%s\n", removedTask.toString())
                 + String.format("%s", this.getListStats());
     }
@@ -185,7 +185,7 @@ public class DukeList {
      */
     public String find(String keyword) {
         List<String> matchedTasks = new ArrayList<>();
-        matchedTasks.add("Here are the matching tasks in your list:");
+        matchedTasks.add("Here's what I found man:");
 
         for (int i = 0; i < this.taskList.size(); i++) {
             Task currTask = this.taskList.get(i);
@@ -197,7 +197,7 @@ public class DukeList {
         if (matchedTasks.size() > 1) {
             return String.join("\n", matchedTasks);
         } else {
-            return "No matching tasks found!";
+            return "There's nothing found!";
         }
 
     }
@@ -210,12 +210,12 @@ public class DukeList {
      */
     public String sort() {
         if (this.taskList.size() == 0) {
-            return "List is empty, there's nothing to sort!";
+            return "List is empty yo! Ain't nothing to sort!";
         }
 
         Collections.sort(this.taskList);
 
-        return "Tasks sorted chronologically:\n" + this.toString();
+        return "Yes yes, tasks sorted chronologically:\n" + this.toString();
 
     }
 
@@ -251,17 +251,17 @@ public class DukeList {
      * @return String representation of statistics of the list.
      */
     private String getListStats() {
-        return String.format("Now you have %d tasks in the list.", this.taskList.size());
+        return String.format("You have %d tasks in the list man! Get your stuff done asap", this.taskList.size());
     }
 
 
     @Override
     public String toString() {
         if (this.taskList.size() == 0) {
-            return "List is currently empty!";
+            return "You list is empty bruh!";
         } else {
             StringBuilder outputString = new StringBuilder();
-            outputString.append("Here are the tasks in your list:\n");
+            outputString.append("Get your stuff done:\n");
 
             for (int i = 0; i < this.taskList.size(); i++) {
                 String currTaskStr = String.format("%d: %s", i + 1, this.taskList.get(i).toString());
