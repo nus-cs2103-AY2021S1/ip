@@ -25,13 +25,13 @@ public class Deadline extends Task {
     }
 
     @Override
-    public String toString() {
+    public String getDescription() {
         return "[D][" + getStatusIcon()
                 + "]" + description + "(by:" + getDeadline() + ")";
     }
 
     @Override
     public void printDescription() {
-        System.out.println(toString());
+        System.out.println(getDescription());
     }
 }

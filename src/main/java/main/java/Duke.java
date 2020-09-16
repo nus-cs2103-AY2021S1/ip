@@ -1,6 +1,7 @@
 package main.java;
 
 import java.io.IOException;
+import java.util.Scanner;
 
 /**
  * Represents a robot who can help the user to make todo list.
@@ -10,6 +11,7 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+    Scanner sc = new Scanner(System.in);
 
     public Duke(String filePath) {
         ui = new Ui();
@@ -27,14 +29,12 @@ public class Duke {
      */
     public void run() {
         ui.start();
-        Parser parser = new Parser(tasks);
-        parser.handleCommand();
-        try {
-            parser.updateFile();
-        } catch (IOException e) {
-            System.out.println(e);
-            System.out.println("IOException from FileWriter!!");
-            return;
+        boolean flag = true;
+        Parser parser = new Parser(tasks, true);
+        while(flag) {
+            String input = sc.nextLine();
+            System.out.println(parser.handleCommand(input));
+            flag = parser.getFlag();
         }
     }
 

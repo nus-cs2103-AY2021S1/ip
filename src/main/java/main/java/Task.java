@@ -38,4 +38,8 @@ public class Task {
     public void printDescription() {
         System.out.println("[" + getStatusIcon() + "] " + description);
     }
+
+    public String getDescription() {
+        return "[" + getStatusIcon() + "] " + description;
+    }
 }

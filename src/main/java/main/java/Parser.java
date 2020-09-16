@@ -13,10 +13,74 @@ import java.util.Scanner;
 public class Parser {
     Scanner sc;
     TaskList taskList;
+    boolean flag;
 
-    public Parser(TaskList taskList) {
+    public Parser(TaskList taskList, boolean flag) {
         this.sc = new Scanner(System.in);
         this.taskList = taskList;
+        this.flag = flag;
+    }
+
+    public String handleCommand(String input) {
+        sc = new Scanner(input);
+        String command = sc.next();
+
+        switch (command) {
+            case "bye":
+                return handleBye();
+
+            case "list":
+                return handleList();
+
+            case "done":
+                try {
+                    return handleDone();
+                } catch (DukeException e) {
+                    return "     " + e.getMessage();
+                }
+
+            case "delete":
+                try {
+                    return handleDelete();
+                } catch (DukeException e) {
+                    return "     " + e.getMessage();
+                }
+
+            case "todo":
+                try {
+                    return handleTodo();
+                } catch (DukeException e) {
+                    return "     " + e.getMessage();
+                }
+
+            case "deadline":
+                try {
+                    return handleDeadline();
+                } catch (DukeException e) {
+                    return "     " + e.getMessage();
+                }
+
+            case "event":
+                try {
+                    return handleEvent();
+                } catch (DukeException e) {
+                    return "     " + e.getMessage();
+                }
+
+            case "find":
+                try {
+                    return handleFind();
+                } catch (DukeException e) {
+                    return "     " + e.getMessage();
+                }
+
+            default:
+                try {
+                    return handleDefault();
+                } catch (DukeException e) {
+                    return "     " + e.getMessage();
+                }
+        }
     }
 
     /**
@@ -109,30 +173,33 @@ public class Parser {
     /**
      * handles instruction "bye"
      */
-    public void handleBye() {
-        System.out.println("    ____________________________________________________________");
-        System.out.println("     Bye. Hope to see you again soon!");
-        System.out.println("    ____________________________________________________________\n");
-        return;
+    public String handleBye() {
+        flag = false;
+        try {
+            this.updateFile();
+        } catch (IOException e) {
+            System.out.println(e);
+            System.out.println("IOException from FileWriter!!");
+        }
+        return "     Bye. Hope to see you again soon!";
     }
 
     /**
      * handles instruction "list"
      */
-    public void handleList() {
-        System.out.println("    ____________________________________________________________");
-        System.out.println("     Here are the tasks in your list:");
+    public String handleList() {
+        String listOutput = "";
+        listOutput += "     Here are the tasks in your list:\n";
         for (int i = 0; i < taskList.size(); i++) {
-            System.out.print("     " + (i + 1) + ".");
-            taskList.get(i).printDescription();
+            listOutput += "     " + (i + 1) + "." + taskList.get(i).getDescription() + "\n";
         }
-        System.out.println("    ____________________________________________________________\n");
+        return listOutput;
     }
 
     /**
      * handles instruction "done"
      */
-    public void handleDone() throws DukeException {
+    public String handleDone() throws DukeException {
         String doneCommand = sc.nextLine();
         int index = 0;
         if (doneCommand.isEmpty()) {
@@ -141,27 +208,24 @@ public class Parser {
         try {
             index = Integer.parseInt(doneCommand.stripLeading());
         } catch (NumberFormatException e) {
-            System.out.println("    ____________________________________________________________");
-            System.out.println("     \u2639 Please enter a valid integer!!");
-            System.out.println("    ____________________________________________________________\n");
-            return;
+            return "     \u2639 Please enter a valid integer!!";
         }
         if (index > taskList.size()) {
             throw new DukeException("\u2639 Your number is too large!!");
         }
         Task currentTask = taskList.get(index - 1);
+
+        String doneOutput = "";
         currentTask.markAsDone();
-        System.out.println("    ____________________________________________________________");
-        System.out.println("     Nice! I've marked this task as done:");
-        System.out.print("     ");
-        currentTask.printDescription();
-        System.out.println("    ____________________________________________________________\n");
+        doneOutput += "     Nice! I've marked this task as done:\n     ";
+        doneOutput += currentTask.getDescription();
+        return doneOutput;
     }
 
     /**
      * handles instruction "delete"
      */
-    public void handleDelete() throws DukeException {
+    public String handleDelete() throws DukeException {
         String deleteCommand = sc.nextLine();
         int index = 0;
         if (deleteCommand.isEmpty()) {
@@ -170,67 +234,66 @@ public class Parser {
         try {
             index = Integer.parseInt(deleteCommand.stripLeading());
         } catch (NumberFormatException e) {
-            System.out.println("    ____________________________________________________________");
-            System.out.println("     \u2639 Please enter a valid integer!!");
-            System.out.println("    ____________________________________________________________\n");
-            return;
+            return "     \u2639 Please enter a valid integer!!";
         }
         if (index > taskList.size()) {
             throw new DukeException("\u2639 Your number is too large!!");
         }
         Task currentTask = taskList.get(index - 1);
         taskList.remove(index - 1);
-        System.out.println("    ____________________________________________________________");
-        System.out.println("     Noted! I've removed this task:");
-        System.out.print("     ");
-        currentTask.printDescription();
-        System.out.println("     Now you have " + taskList.size() + " tasks in the list.");
-        System.out.println("    ____________________________________________________________\n");
+        String deleteOutput = "";
+        deleteOutput += "     Noted! I've removed this task:\n     ";
+        deleteOutput += currentTask.getDescription();
+        deleteOutput += "\n     Now you have " + taskList.size() + " tasks in the list.";
+        return deleteOutput;
     }
 
     /**
      * handles instruction "find"
      */
-    public void handleFind() throws DukeException {
+    public String handleFind() throws DukeException {
         String input = sc.nextLine();
         if (input.isEmpty()) {
             throw new DukeException("\u2639 OOPS!!! I need to know the keyword!!");
         }
         String keyword = input.replaceFirst(" ", "");
-        System.out.println("    ____________________________________________________________");
-        System.out.println("     Here are the matching tasks in your list:");
+        String output = "";
+        output += "     Here are the matching tasks in your list:\n";
         for (int i = 0, count = 1; i < taskList.size(); i++) {
             if (taskList.get(i).description.contains(keyword)) {
-                System.out.print("     " + count + ".");
-                taskList.get(i).printDescription();
+                output += "     " + count + "." + taskList.get(i).getDescription();
                 count++;
             }
         }
-        System.out.println("    ____________________________________________________________\n");
+        return output;
     }
 
     /**
      * handles instruction "todo"
      */
-    public void handleTodo() throws DukeException {
+    public String handleTodo() throws DukeException {
+        if (!sc.hasNextLine()) {
+            throw new DukeException("\u2639 OOPS!!! The description of a todo cannot be empty.");
+        }
         String todoDescription = sc.nextLine();
         if (todoDescription.isEmpty()) {
             throw new DukeException("\u2639 OOPS!!! The description of a todo cannot be empty.");
         }
         Todo todo = new Todo(todoDescription);
         taskList.add(todo);
-        System.out.println("    ____________________________________________________________");
-        System.out.println("     Got it. I've added this task:");
-        System.out.print("       ");
-        todo.printDescription();
-        System.out.println("     Now you have " + taskList.size() + " tasks in the list.");
-        System.out.println("    ____________________________________________________________\n");
+        String output = "";
+        output += "Got it. I've added this task:       \n" + todo.getDescription();
+        output += "\nNow you have " + taskList.size() + " tasks in the list.";
+        return output;
     }
 
     /**
      * handles instruction "deadline"
      */
-    public void handleDeadline() throws DukeException {
+    public String handleDeadline() throws DukeException {
+        if (!sc.hasNextLine()) {
+            throw new DukeException("\u2639 OOPS!!! The description of a deadline cannot be empty.");
+        }
         String deadlineCommand = sc.nextLine();
         if (deadlineCommand.isEmpty()) {
             throw new DukeException("\u2639 OOPS!!! The description of a deadline cannot be empty.");
@@ -245,18 +308,19 @@ public class Parser {
         LocalDate date = LocalDate.parse(time, formatter);
         Deadline deadline = new Deadline(deadlineDescription, date);
         taskList.add(deadline);
-        System.out.println("    ____________________________________________________________");
-        System.out.println("     Got it. I've added this task:");
-        System.out.print("        ");
-        deadline.printDescription();
-        System.out.println("     Now you have " + taskList.size() + " tasks in the list.");
-        System.out.println("    ____________________________________________________________\n");
+        String output = "";
+        output += "Got it. I've added this task:        \n" + deadline.getDescription();
+        output += "\nNow you have " + taskList.size() + " tasks in the list.";
+        return output;
     }
 
     /**
      * handles instruction "event"
      */
-    public void handleEvent() throws DukeException{
+    public String handleEvent() throws DukeException{
+        if (!sc.hasNextLine()) {
+            throw new DukeException("\u2639 OOPS!!! The description of a event cannot be empty.");
+        }
         String eventCommand = sc.nextLine();
         if (eventCommand.isEmpty()) {
             throw new DukeException("\u2639 OOPS!!! The description of an event cannot be empty.");
@@ -269,19 +333,17 @@ public class Parser {
         String date = strings[1];
         Event event = new Event(eventDescription, date);
         taskList.add(event);
-        System.out.println("    ____________________________________________________________");
-        System.out.println("     Got it. I've added this task:");
-        System.out.print("        ");
-        event.printDescription();
-        System.out.println("     Now you have " + taskList.size() + " tasks in the list.");
-        System.out.println("    ____________________________________________________________\n");
+        String output = "";
+        output += "Got it. I've added this task:        \n";
+        output += event.getDescription() + "Now you have " + taskList.size() + " tasks in the list.";
+        return output;
     }
 
     /**
      * throws exceptions when the command is wrongly typed
      * @throws DukeException
      */
-    public void handleDefault() throws DukeException {
+    public String handleDefault() throws DukeException {
         throw new DukeException("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 
@@ -317,5 +379,9 @@ public class Parser {
         }
         fw.close();
         fwAppend.close();
+    }
+
+    public boolean getFlag() {
+        return flag;
     }
 }
