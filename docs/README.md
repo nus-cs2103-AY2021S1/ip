@@ -9,10 +9,12 @@ Below are the 3 types of tasks supported in DuekBT:
 3. [E] Events: tasks with a specific date-time to indicate when the event will occur
 
 ## Getting started
-1. Download the latest version of DukeBT file.
-2. Double click the jar file to run the application.
-3. Welcome page will be automatically loaded (Shown below).
-4. Enter a command to start chatting with DukeBT.
+1. Install java 11 and above into your PC
+2. Download the latest version of DukeBT file [here](https://github.com/yanbingtao/ip/releases/download/v0.2/duke.jar).
+3. Double click the jar file to run the application.
+4. Welcome page will be automatically loaded (Shown below).
+5. Enter a command to start chatting with DukeBT.
+6. User's data will be saved under the same directory of the downloaded jar file, in the folder named "data"
 <br><br>
 ![Welcome Screen Image](Pics/welcome.png)
 
