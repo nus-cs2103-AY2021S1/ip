@@ -25,8 +25,8 @@ public class MainWindow extends AnchorPane {
 
     private Rogue rogue;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image rogueImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.jpg"));
+    private Image rogueImage = new Image(this.getClass().getResourceAsStream("/images/Rogue.jpg"));
 
     /**
      * Scrolls down to the end every time the height of the dialog container changes.
