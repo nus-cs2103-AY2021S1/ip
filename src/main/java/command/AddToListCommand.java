@@ -90,22 +90,37 @@ public class AddToListCommand extends Command {
                 throw new DukeException("Description of task cannot be empty!");
             }
             String task = inputMsg.split("/")[0];
+            if (task.length() <= 9) {
+                throw new DukeException("Task name cannot be empty!");
+            }
             String taskName = task.substring(9, task.length() - 1);
-            String inputDeadline = inputMsg.split("/", 2)[1].substring(3);
-            LocalDateTime deadline = processDate(inputDeadline);
-            newTask = new Deadline(taskName, false, deadline);
-            break;
+            try {
+                String inputDeadline = inputMsg.split("/", 2)[1].substring(3);
+                LocalDateTime deadline = processDate(inputDeadline);
+                newTask = new Deadline(taskName, false, deadline);
+                break;
+            } catch (Exception e) {
+                throw new DukeException("Please enter event details!");
+            }
         }
         case "event": {
             if (numOfWords <= 1) {
                 throw new DukeException("Description of task cannot be empty!");
             }
             String task = inputMsg.split("/")[0];
+            if (task.length() <= 6) {
+                throw new DukeException("Task name cannot be empty!");
+            }
             String taskName = task.substring(6, task.length() - 1);
-            String inputDeadline = inputMsg.split("/", 2)[1].substring(3);
-            LocalDateTime deadline = processDate(inputDeadline);
-            newTask = new Event(taskName, false, deadline);
-            break;
+
+            try {
+                String inputDeadline = inputMsg.split("/", 2)[1].substring(3);
+                LocalDateTime deadline = processDate(inputDeadline);
+                newTask = new Event(taskName, false, deadline);
+                break;
+            } catch (Exception e) {
+                throw new DukeException("Please enter event details!");
+            }
         }
         default:
             // when user keys in unregistered action
