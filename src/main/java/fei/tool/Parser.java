@@ -17,11 +17,11 @@ public class Parser {
      * @throws FeiException when it is none of the known task.
      */
     public static Task parseTask(String taskString) throws FeiException {
-        String[] words = taskString.split(" \\| ");
-        String type = words[0];
-        boolean isDone = Boolean.parseBoolean(words[1]);
-        String description = words[2];
         try {
+            String[] words = taskString.split(" \\| ");
+            String type = words[0];
+            boolean isDone = Boolean.parseBoolean(words[1]);
+            String description = words[2];
             switch (type) {
             case "T":
                 return new ToDo(description, isDone);
