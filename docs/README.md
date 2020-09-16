@@ -1,6 +1,6 @@
 # User Guide
 
-![Claude Screenshot](/docs/Ui.png)
+![Claude Screenshot](./Ui.png)
 
 Claude is a chatbot written in `Java 11` that can be used as a personal task manager. 
 The current version supports tracking of todos, events, and deadlines. 
@@ -26,6 +26,7 @@ Adds a deadline-type task to the existing task list.
 Format: `dateline DESCRIPTION /by DATE`
 * `DESCRIPTION` should contain the description of the event to be added.
 * `DATE` should contain the deadline of the task to be added, in a `YYYY-MM-DD` format.
+* Duplicate tasks with the same description and deadline will not be added. Instead, an alert is show to the user.
 
 Example:
 * `dateline CS2103 iP Final Submission /by 2020-09-18`
@@ -37,6 +38,7 @@ Adds an event-type task to the existing task list.
 Format: `event DESCRIPTION /at DATE`
 * `DESCRIPTION` should contain the description of the event to be added.
 * `DATE` should contain the date of the event to be added, in a `YYYY-MM-DD` format.
+* Duplicate events with the same description and date will not be added. Instead, an alert is show to the user.
 
 Examples:
 * `event CS2103 Tutorial /on 2020-09-17`
@@ -48,6 +50,7 @@ Adds a todo-type task to the existing task list.
 
 Format: `todo DESCRIPTION`
 * `DESCRIPTION` should contain the description of the task to be added.
+* Duplicate tasks with the same description will not be added. Instead, an alert is show to the user.
 
 Example:
 * `todo Catch Pokemon`
