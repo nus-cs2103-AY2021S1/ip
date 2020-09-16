@@ -13,6 +13,7 @@ import java.util.TimerTask;
 public class Duke {
     private final static String FILE_PATH = System.getProperty("user.dir") + "/data/duke.txt";
     private final static String ARCHIVE_PATH = System.getProperty("user.dir") + "/data/archive.txt";
+    private final static String DATA_PATH = System.getProperty("user.dir") + "/data/";
 
     private Ui ui;
     private Storage storage;
@@ -36,6 +37,8 @@ public class Duke {
             tasks = new TaskList(storage.load());
             archivedTasks = new TaskList(archivedStorage.load());
         } catch (FileNotFoundException e) {
+            File newData = new File(DATA_PATH);
+            newData.mkdir();
             File newFile = new File(FILE_PATH);
             File newArchive = new File(ARCHIVE_PATH);
             try {
@@ -70,13 +73,13 @@ public class Duke {
      * @return a String with the response
      */
      String getResponse(String input) {
-         if(input.equals("bye")) {
+         if (input.equals("bye")) {
              new Timer().schedule(new TimerTask() {
                  public void run() {
                      Platform.exit();
                      System.exit(0);
                  }
-             } , 2000);
+             } , 1000);
          }
          run(input);
          return this.output;

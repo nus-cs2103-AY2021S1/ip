@@ -74,14 +74,13 @@ public class Parser {
             throw new DukeException("☹ OOPS!!! Please specify which task to archive");
         } else {
             String taskToArchive = splitInput[1];
-                int taskNumberInt = Integer.parseInt(taskToArchive) - 1; //task number to archive
+            int taskNumberInt = Integer.parseInt(taskToArchive) - 1;
 
-                if (taskNumberInt + 1 > list.getLength()) {
-                    throw new DukeException("☹ OOPS!!! Your task number is out of bounds");
-                } else {
-                    Task archivedTask =  list.get(taskNumberInt);
-                    return list.archiveTask(taskNumberInt, archives);
-                }
+            if (taskNumberInt + 1 > list.getLength()) {
+                throw new DukeException("☹ OOPS!!! Your task number is out of bounds");
+            } else {
+                return list.archiveTask(taskNumberInt, archives);
+            }
         }
     }
 
@@ -170,11 +169,9 @@ public class Parser {
             } else {
                 String description = information[0];
                 String by = information[1];
-
                 try {
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
                     LocalDateTime dateTime = LocalDateTime.parse(by, formatter);
-
                     Deadline newDeadline = new Deadline(description, dateTime);
 
                     return list.addTask(newDeadline);

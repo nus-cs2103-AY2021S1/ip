@@ -94,13 +94,18 @@ public class Storage {
      */
     public static void rewriteList(String path, ArrayList<Task> todoList ) {
         try {
-            String allTasks = formatString(todoList.get(0));
-            for (int i = 1; i < todoList.size(); i++) {
-                Task t = todoList.get(i);
-                String s = formatString(t);
-                allTasks = allTasks + "\n" + s;
+            if (todoList.size() == 0) {
+                writeToFile(path, "");
+            } else {
+                String allTasks = formatString(todoList.get(0));
+
+                for (int i = 1; i < todoList.size(); i++) {
+                    Task t = todoList.get(i);
+                    String s = formatString(t);
+                    allTasks = allTasks + "\n" + s;
+                }
+                writeToFile(path, allTasks);
             }
-            writeToFile(path, allTasks);
         } catch (IOException e) {
             System.out.println("exception");
         }
