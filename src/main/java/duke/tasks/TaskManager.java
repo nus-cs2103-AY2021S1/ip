@@ -215,6 +215,14 @@ public class TaskManager {
         return todos.size() + deadlines.size() + events.size();
     }
 
+    /**
+     * Checks if the task manager has any tasks.
+     * @return <code>true</code> if there are no tasks.
+     */
+    public boolean isEmpty() {
+        return getTotalNumberOfItems() == 0;
+    }
+
     @Override
     public String toString() {
         return "This is an instance of a task manager";
