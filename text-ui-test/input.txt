@@ -19,4 +19,8 @@ list
 delete 3
 delete 12
 list
+deadline dl3 /by 202012011301
+event dl4 /by 20201201 1401
+deadline dl5 /by 14:01 081220
+deadline dl6 /by 14:01 0812201
 bye

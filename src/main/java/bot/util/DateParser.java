@@ -21,12 +21,12 @@ public class DateParser {
         }
     }
 
-    public static String determineDateFormat(String dateString) {
+    public static String determineDateFormat(String dateString) throws InvalidInputException {
         for (String regexp : DATE_FORMAT_REGEXPS.keySet()) {
             if (dateString.strip().toLowerCase().matches(regexp)) {
                 return DATE_FORMAT_REGEXPS.get(regexp);
             }
         }
-        return null; // Unknown format.
+        throw new InvalidInputException("Bruh, the date format is wrong");
     }
 }

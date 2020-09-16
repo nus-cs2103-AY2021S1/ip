@@ -4,6 +4,7 @@ import bot.task.Deadline;
 import bot.task.Event;
 import bot.task.Task;
 import bot.task.Todo;
+import bot.util.InvalidInputException;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -28,7 +29,7 @@ public class Storage {
      * @return ArrayList of Tasks
      * @throws IOException
      */
-    public ArrayList<Task> loadFileContents() throws IOException {
+    public ArrayList<Task> loadFileContents() throws IOException, InvalidInputException {
         ArrayList<Task> taskList = new ArrayList<>();
         File f = new File(filePath);
         File dir = new File(f.toPath().getParent().toString());
@@ -65,7 +66,7 @@ public class Storage {
         fw.close();
     }
 
-    private Task lineToObj(String line) {
+    private Task lineToObj(String line) throws InvalidInputException {
         String[] words = line.split(" \\| ");
         assert words.length != 0;
         char firstChar = line.charAt(0);

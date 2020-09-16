@@ -1,6 +1,7 @@
 package bot.task;
 
 import bot.util.DateParser;
+import bot.util.InvalidInputException;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -13,18 +14,18 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
     private LocalDateTime deadline;
 
-    public Deadline(String name, String deadline) {
+    public Deadline(String name, String deadline) throws InvalidInputException {
         super(name);
         String dateFormat = DateParser.determineDateFormat(deadline);
-        assert dateFormat != null;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(dateFormat.strip());
         this.deadline = LocalDateTime.parse(deadline, formatter);
     }
 
-    public Deadline(String name, String deadline, boolean done) {
+    public Deadline(String name, String deadline, boolean done) throws InvalidInputException {
         super(name, done);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        this.deadline = LocalDateTime.parse(deadline, formatter);
+        String dateFormat = DateParser.determineDateFormat(deadline);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(dateFormat.strip());
+        this.deadline = LocalDateTime.parse(deadline.strip(), formatter);
     }
 
     /**

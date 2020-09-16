@@ -2,6 +2,7 @@ package bot;
 
 import bot.command.Command;
 import bot.util.DateParser;
+import bot.util.InvalidInputException;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -26,12 +27,12 @@ public class Bot {
     public Bot(String name, String filePath) {
         this.name = name;
         this.ui = new Ui(this.name);
-        this.storage = new Storage(filePath);
         this.parser = new Parser();
         try {
-            this.taskList = new TaskList(storage.loadFileContents());
             DateParser.loadDateFormats(dateFormatPath);
-        } catch (IOException e) {
+            this.storage = new Storage(filePath);
+            this.taskList = new TaskList(storage.loadFileContents());
+        } catch (IOException | InvalidInputException e) {
             ui.showLoadingError();
             this.taskList = new TaskList();
         }
