@@ -19,7 +19,7 @@
 
 ## Features 
 
-#### Creates a new ToDo task
+### Creates a new ToDo task
 
 Command: `todo`
 
@@ -29,7 +29,7 @@ Example: `todo read book`
 
 Expected outcome: *Todo* task created **if there is no duplications**.
 
-#### Creates a new Event task
+### Creates a new Event task
 
 Command: `event`
 
@@ -39,7 +39,7 @@ Example: `event have dinner /at 18:00`
 
 Expected outcome: *Event* task created **if there is no duplications**.
 
-#### Creates a new Deadline task
+### Creates a new Deadline task
 
 Command: `deadline`
 
@@ -49,7 +49,7 @@ Example: `deadline return book /by next Firday`
 
 Expected outcome: *Deadline* task created **if there is no duplications**.
 
-#### Lists current tasks
+### Lists current tasks
 
 Command: `list`
 
@@ -59,7 +59,7 @@ Example: `list`
 
 Expected outcome: A list of current tasks shown.
 
-#### Deletes a task using an index
+### Deletes a task using an index
 
 Command: `delete`
 
@@ -69,7 +69,7 @@ Example: `delete 1`
 
 Expected outcome: The task with the given index is deleted.
 
-#### Tags a task
+### Tags a task
 
 Command: `tag`
 
@@ -79,7 +79,7 @@ Example: `tag 2 This is a tag...`
 
 Expected outcome: The task with the given index is tagged with the input tag string.
 
-#### Removes the tag of a task
+### Removes the tag of a task
 
 Command: `untag`
 
@@ -89,7 +89,7 @@ Example: `untag 2`
 
 Expected outcome: The tag of  the task with the given index is removed.
 
-#### Marks a task as done
+### Marks a task as done
 
 Command: `done`
 
@@ -99,7 +99,7 @@ Example: `done 3`
 
 Expected outcome: The task with the given index is marked as done.
 
-#### Finds tasks using a keyword (does not have to be a word)
+### Finds tasks using a keyword (does not have to be a word)
 
 Command: `find`
 
@@ -109,7 +109,7 @@ Example: `find re`
 
 Expected outcome: All tasks that contains the keyword in their description are shown.
 
-#### Shows all available commands
+### Shows all available commands
 
 Command: `help`
 
@@ -119,7 +119,7 @@ Example: `help`
 
 Expected outcome: Descriptions and formats of all commands are shown.
 
-#### Exits the application
+### Exits the application
 
 Command: `bye`
 
@@ -129,7 +129,7 @@ Example: `bye`
 
 Expected outcome: All current tasks are saved, and the application ends.
 
-#### Shows the table of current tasks
+### Shows the table of current tasks
 
 Method: Click `View` -> `Task List...`
 
