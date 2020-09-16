@@ -1,4 +1,3 @@
-incomplete todo something
-incomplete todo another
-incomplete todo emo
-incomplete todo more
+complete todo Water the garden
+incomplete event Orientation camp at NUS /at 2020-12-12 2020-12-15
+incomplete deadline submit assignment /by 2020-10-06
