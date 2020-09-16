@@ -37,6 +37,14 @@ public enum CommandType {
     }
 
     /**
+     * Returns string representation of the command type.
+     * @return string representation of command type.
+     */
+    public String getType() {
+        return type;
+    }
+
+    /**
      * Returns the corresponding CommandType that matches its string representation.
      *
      * @param type The type of command.

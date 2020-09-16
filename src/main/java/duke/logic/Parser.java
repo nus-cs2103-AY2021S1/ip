@@ -116,13 +116,18 @@ public class Parser {
         String keyword = type == CommandType.DEADLINE ? "/by" : "/at";
         String[] keywordSplit = details.split(keyword);
 
+        String description = keywordSplit[0].trim();
+        if (description.isBlank()) {
+            throw new DukeMissingTaskDescriptionException(type.getType());
+        }
+
         boolean isMissingKeyword = keywordSplit.length < 2;
         if (isMissingKeyword) {
             throw new DukeMissingTaskKeywordException("\"" + keyword + "\"");
         }
 
-        String description = keywordSplit[0].trim();
         LocalDateTime dateTime = parseDateTime(keywordSplit[1].trim());
+
         return type == CommandType.DEADLINE
                 ? new DeadlineCommand(description, dateTime)
                 : new EventCommand(description, dateTime);

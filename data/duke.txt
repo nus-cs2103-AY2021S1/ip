@@ -1,7 +1,6 @@
 T | 1 | buy dinner
-T | 0 | buy book
-T | 0 | read
-D | 1 | return book | 2020-08-20T23:59
 D | 0 | assignment | 2020-09-18T23:59
 D | 0 | return book | 2020-09-25T21:00
 E | 0 | cca cohesion | 2020-09-30T19:00
+D | 0 | iP | 2020-09-18T23:59
+E | 0 | e | 2020-01-01T23:59
