@@ -10,3 +10,7 @@
 .user-speech-bubble {
     -fx-background-color: #CBEEC2;
 }
+
+.error-speech-bubble {
+    -fx-background-color: #FFE4E1;
+}

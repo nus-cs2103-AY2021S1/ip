@@ -1,7 +1,5 @@
 package duke.command;
 
-import java.io.IOException;
-
 import duke.Event;
 import duke.Storage;
 import duke.TaskList;
@@ -10,6 +8,8 @@ import duke.exception.InvalidDateTimeException;
 import duke.exception.InvalidEventInputException;
 import duke.exception.InvalidUpdateInputException;
 import duke.exception.NullEventInputException;
+
+import java.io.IOException;
 
 /**
  * EventCommand deals with event input.
@@ -23,9 +23,12 @@ public class EventCommand extends Command {
      * @throws NullEventInputException
      */
     public EventCommand(String input) throws NullEventInputException {
-        if (input.length() == 0) {
+        boolean isEmptyInput = input.trim().length() == 0;
+        boolean isNotEmptyInput = !isEmptyInput;
+        if (isEmptyInput) {
             throw new NullEventInputException();
         }
+        assert isNotEmptyInput;
         this.input = input;
     }
 

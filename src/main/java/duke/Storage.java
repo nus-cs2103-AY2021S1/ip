@@ -1,14 +1,14 @@
 package duke;
 
+import duke.exception.InvalidDateTimeException;
+import duke.exception.InvalidUpdateInputException;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
-
-import duke.exception.InvalidDateTimeException;
-import duke.exception.InvalidUpdateInputException;
 
 /**
  *  Storage deals with loading tasks from the file and saving tasks in the file.

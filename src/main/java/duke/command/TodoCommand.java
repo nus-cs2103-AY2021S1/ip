@@ -1,12 +1,12 @@
 package duke.command;
 
-import java.io.IOException;
-
 import duke.Storage;
 import duke.TaskList;
 import duke.ToDo;
 import duke.Ui;
 import duke.exception.InvalidTodoInputException;
+
+import java.io.IOException;
 
 /**
  * TodoCommand deals with todo input.
@@ -20,7 +20,7 @@ public class TodoCommand extends Command {
      * @throws InvalidTodoInputException
      */
     public TodoCommand(String input) throws InvalidTodoInputException {
-        boolean isInvalidInput = input.length() == 0;
+        boolean isInvalidInput = input.trim().length() == 0;
         boolean isValidInput = ! isInvalidInput;
 
         if (isInvalidInput) {
@@ -28,7 +28,7 @@ public class TodoCommand extends Command {
         }
 
         assert isValidInput;
-        this.input = input.trim();
+        this.input = input;
     }
 
     @Override
