@@ -24,7 +24,6 @@ public class TextToTaskListConverter {
             objectInputStream.close();
             return taskList;
         } catch (FileNotFoundException e) {
-            System.out.println("File not found.Creating new save file");
             return new TaskList();
         } catch (IOException e) {
             e.printStackTrace();

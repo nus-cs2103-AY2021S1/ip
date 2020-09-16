@@ -10,7 +10,7 @@ import duke.ui.Ui;
  */
 public class DoneCommand extends UserCommand {
 
-    private static final String DEFAULT_MESSAGE = "Nice! I've marked this task as done: " + "\n" + "[\u2713]";
+    private static final String DEFAULT_MESSAGE = "Nice! I've marked this task as done: " + "\n" + "[\u2713] ";
 
     /**
      * @param userInput User's input.
@@ -24,7 +24,7 @@ public class DoneCommand extends UserCommand {
      * @param index String representation of the index of the Task to be marked as done.
      * @param taskSize Size of the TaskList.
      * @return
-     * @throws InvalidDoneCommandException
+     * @throws InvalidDoneCommandException Exception thrown when an invalid done command is inputted.5
      */
     public boolean checkInputRange(String index, int taskSize) throws InvalidDoneCommandException {
         try {

@@ -34,8 +34,8 @@ public class ToDoCommand extends UserCommand {
             throw new EmptyToDoException();
         } else {
             String todoString = userInput.substring(5);
-            DuplicateChecker duplicateChecker = new DuplicateChecker(todoString, taskList
-                    , Task.TaskType.ToDo);
+            DuplicateChecker duplicateChecker = new DuplicateChecker(todoString, taskList,
+                    Task.TaskType.ToDo);
             if (duplicateChecker.checkForDuplicates()) {
                 throw new DuplicateException();
             } else {

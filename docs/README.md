@@ -25,7 +25,7 @@ Expected outcome:
 
 ### `event` - Adds an event task
 
-Adds an event task to the list of tasks. Date must be specified in <b>YYYY-MM-DD</b> format.
+Adds an event task to the list of tasks. Date must be specified in <b>YYYY-MM-DD</b> or <b>YYYY/MM/DD</b> format.
 
 Example of usage:
 
@@ -40,7 +40,7 @@ Expected outcome:
 
 ### `deadline` - Adds a deadline task
 
-Adds a deadline task to the list of tasks. Date must be specified in <b>YYYY-MM-DD</b> format.
+Adds a deadline task to the list of tasks. Date must be specified in <b>YYYY-MM-DD</b> or <b>YYYY/MM/DD</b> format.
 
 Example of usage:
 
@@ -67,8 +67,8 @@ Expected outcome:
 `1. [T][✗] CS2103T quiz`\
 `2. [E][✗] examinations`\
 `[at: SATURDAY, Sep 19 2020]`\
-`3. [D][✗] assignment`
-`[by: SATURDAY, Sep 19 2020]`\
+`3. [D][✗] assignment`\
+`[by: SATURDAY, Sep 19 2020]`
 
 ### `done` - Mark task as done
 
@@ -107,5 +107,5 @@ Example of usage:
 Expected outcome:
 
 `Here are the search results:`\
-`1. [D][✗] assignment`
-` [by: SATURDAY, Sep 19 2020]`\
+`1. [D][✗] assignment`\
+` [by: SATURDAY, Sep 19 2020]`

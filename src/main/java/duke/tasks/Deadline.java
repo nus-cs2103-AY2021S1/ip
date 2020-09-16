@@ -24,8 +24,8 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + getStatusIcon() + super.toString() + "\n[ by: "
-                + TimeFormatter.prettyDate(localDate) + " ]";
+        return "[D]" + getStatusIcon() + super.toString() + " [by: "
+                + TimeFormatter.prettyDate(localDate) + "]";
     }
 
     @Override

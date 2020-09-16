@@ -39,8 +39,8 @@ public class EventCommand extends UserCommand {
         String at = eventArr[1].substring(eventArr[1].indexOf("at") + 3);
         String eventString = eventArr[0].substring(6);
         LocalDate localEventDate = TimeFormatter.localDate(at);
-        DuplicateChecker duplicateChecker = new DuplicateChecker(eventString, localEventDate, taskList
-                , Task.TaskType.Event);
+        DuplicateChecker duplicateChecker = new DuplicateChecker(eventString, localEventDate, taskList,
+                Task.TaskType.Event);
         if (duplicateChecker.checkForDuplicates()) {
             throw new DuplicateException();
         } else {

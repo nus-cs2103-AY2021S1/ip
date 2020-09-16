@@ -14,12 +14,12 @@ public class TimeFormatter {
     /**
      * Convert string input to LocalDate
      *
-     * @param Date User's date string input.
+     * @param inputDate User's date string input.
      * @return LocalDate corresponding to the string input.
      */
-    public static LocalDate localDate(String Date) throws DukeException {
+    public static LocalDate localDate(String inputDate) throws DukeException {
         try {
-            String date = Date.trim().replaceAll("/", "-");
+            String date = inputDate.trim().replaceAll("/", "-");
             LocalDate localDate = LocalDate.parse(date);
             return localDate;
         } catch (DateTimeParseException ex) {
@@ -32,7 +32,7 @@ public class TimeFormatter {
      * @return String representation of date.
      */
     public static String prettyDate(LocalDate localDate) {
-        return localDate.getDayOfWeek() + ", " + localDate.getMonth().name().substring(0, 3)
-                + " " + localDate.getDayOfMonth() + " " + localDate.getYear();
+        return localDate.getMonth().name().substring(0, 3) + " " + localDate.getDayOfMonth() + " "
+                + localDate.getYear();
     }
 }
