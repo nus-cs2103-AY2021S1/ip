@@ -1,10 +1,10 @@
 package raythx.grandma.exception;
 
 /**
- * Checked exception as a result of being unable to load task.
+ * Checked exception as a result of missing description or tag.
  */
-public class MissingTagException extends DukeException {
-    public MissingTagException() {
-        super("Whr da hell yur #tag at..?");
+public class MissingDetailsException extends DukeException {
+    public MissingDetailsException() {
+        super("Whr da hell yur description or #tag at..?");
     }
 }

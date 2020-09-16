@@ -96,7 +96,7 @@ public class Event extends Task {
             assert date == null;
             return "[" + tag + "] " + super.toString();
         } else {
-            return "[" + tag + "] " + super.toString() + "\n            (by: "
+            return "[" + tag + "] " + super.toString() + "\n            (at: "
                     + date.format(DateTimeFormatter.ofPattern(OUTPUT_DATE_FORMAT))
                     + ", " + time.format(DateTimeFormatter.ofPattern(OUTPUT_TIME_FORMAT)) + ")";
         }

@@ -1,7 +1,7 @@
 package raythx.grandma.command;
 
 import raythx.grandma.exception.DukeException;
-import raythx.grandma.exception.MissingTagException;
+import raythx.grandma.exception.MissingDetailsException;
 import raythx.grandma.exception.WrongDescriptionException;
 import raythx.grandma.storage.Storage;
 import raythx.grandma.task.Task;
@@ -23,7 +23,7 @@ public class AddTodoCommand extends AddCommand {
         String[] hashtagSplit = descriptionSplit[0].split(" #", 2);
         Task task;
         if (hashtagSplit.length == 1) {
-            throw new MissingTagException();
+            throw new MissingDetailsException();
         } else if (descriptionSplit.length == 1) {
             task = new ToDo(hashtagSplit[0], hashtagSplit[1]);
         } else if (descriptionSplit.length == 2) {
