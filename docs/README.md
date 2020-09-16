@@ -72,8 +72,7 @@ Format: ```list```
 Example of usage:  
 ```list```
 
-Expected outcome:
-
+Expected outcome:  
 ```
 Here are the tasks in your list:
 1.[T][✓][4] read book
@@ -122,9 +121,9 @@ Expected outcome:
 Find tasks whose description contains the given keyword.
 
 Format: ```find KEYWORD```  
-* The search is case-sensitive, e.g. `book` will not match `BOOK`.
+* The search is case-sensitive, e.g. ```book``` will not match ```BOOK```.
 * Only the description is searched.
-* Keyword can be matched partailly, e.g. `boo` will match `book`.
+* Keyword can be matched partailly, e.g. ```boo``` will match ```book```.
 
 Example of usage:  
 ```find book```
@@ -148,8 +147,8 @@ The priority number ranges from 1 to 4:
 
 By default, tasks that will be added to the task list will all have the priority number 4 initially.
 
-Format: `priority INDEX PRIORITY_NUMBER`  
-* `PRIORITY_NUMBER` can only take positive integers ranging from 1 to 4.
+Format: ```priority INDEX PRIORITY_NUMBER```  
+* ```PRIORITY_NUMBER``` can only take positive integers ranging from 1 to 4.
 * The index must be a positive integer 1, 2, 3, ...  
 
 Example of usage:  
@@ -174,14 +173,14 @@ Task List data are saved automatically after any command that changes the data. 
 ---
 
 ### Command Summary
-| Action | Format |
-|---|---|
-| Add todo | `todo DESCRIPTION` |
-| Add deadline | `deadline DESCRIPTION /by DATE [TIME]` |
-| Add event | <ul><li>`event DESCRIPTION /at START_DATE-END_DATE START_TIME-END_TIME`</li><li>`event DESCRIPTION /at START_DATE START_TIME-END_TIME`</li></ul> |
-| List | `list`|
-| Delete | `delete INDEX` |
-| Done | `done INDEX` |
-| Find | `find KEYWORD` |
-| Priority | `priority INDEX PRIORITY_NUMBER` |
-| Bye | `bye` |
+Action | Format
+---|---
+Add todo | ```todo DESCRIPTION```
+Add deadline | ```deadline DESCRIPTION /by DATE [TIME]```
+Add event | <ul><li>```event DESCRIPTION /at START_DATE-END_DATE START_TIME-END_TIME```</li><li>```event DESCRIPTION /at START_DATE START_TIME-END_TIME```</li></ul>
+List | ```list```
+Delete | ```delete INDEX```
+Done | ```done INDEX```
+Find | ```find KEYWORD```
+Priority | ```priority INDEX PRIORITY_NUMBER```
+Bye | ```bye```
