@@ -11,8 +11,7 @@ command line instructions to interact with the users.
 6. Display the existing list of tasks
 7. Add a new friend to the friend list
 8. Delete an existing friend from your friend list
-9. Update the information of a friend in your friend list
-10. Display the existing list of friends
+9. Display the existing list of friends
 
 ### Feature 1
 Add a new task to the current task list. A new task can be a ToDo, Deadline 
@@ -39,8 +38,6 @@ Add a new friend to the current friend list
 ### Feature 8
 Delete a friend from the current friend list
 ### Feature 9
-Update the information of a friend (e.g. name, phone number, relationship status) in your current friend list 
-### Feature 10
 Display an entire list of friends
 ## Usage
 
@@ -166,7 +163,7 @@ Delete a friend in the friend list based on its index in the list
 
 Example of usage: 
 
-`delete 1`
+`fdelete 1`
 
 Expected outcome:
 
@@ -182,19 +179,4 @@ Expected outcome:
 ```
 Here are all your friends:
 1. Charles (number: 91234567, isClose: true)
-```
-
-### `update <index> /phone number <new phone number>` - Update information of a particular friend
-
-Update the phone number of the friend based on the index in the friend list
-
-Example of usage: 
-
-`update 2 /phone number 81234567`
-
-Expected outcome:
-
-```
-Update the info of Bella:
-1. Belle (number: 81234567, isClose: false)
 ```

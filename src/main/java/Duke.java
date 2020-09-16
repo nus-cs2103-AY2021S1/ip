@@ -19,7 +19,7 @@ public class Duke {
         this.friendList = new FriendList();
         try {
             taskList = new TaskList(storage.loadData());
-        } catch (Exception e) {
+        } catch (Exception | IncorrectInputException e) {
             System.out.println("tasklist not loaded");
         }
     }
@@ -33,7 +33,7 @@ public class Duke {
         this.friendList = new FriendList();
         try {
             taskList = new TaskList(storage.loadData());
-        } catch (Exception e) {
+        } catch (Exception | IncorrectInputException e) {
             e.printStackTrace();
         }
     }
@@ -43,7 +43,7 @@ public class Duke {
      * @throws IOException
      * @throws IncorrectInputException
      */
-    public void run() throws IOException, IncorrectInputException {
+    public void run() throws IncorrectInputException {
         ui.greeting();
         boolean isExit = false;
         while (!isExit) {
@@ -53,9 +53,9 @@ public class Duke {
                 Command c = Parser.parse(fullCommand);
                 c.execute(taskList, ui, storage);
                 isExit = c.isExit();
-            } catch (IOException e) {
-                System.out.println(e.getMessage());
-//                ui.showError(e.getMessage());
+            } catch (Exception e) {
+//                System.out.println(e.getMessage());
+                e.printStackTrace();
             } finally {
                 ui.showLine();
             }
@@ -69,10 +69,13 @@ public class Duke {
      * @throws IOException
      * @throws IncorrectInputException
      */
-    public String getResponse(String input) throws IOException, IncorrectInputException {
-        Command c = Parser.parse(input);
-//        return c.execute();
-        return c.execute(this.taskList, this.ui, this.storage);
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(this.taskList, this.ui, this.storage);
+        } catch (IncorrectInputException | EmptyInputException | IOException e) {
+            return e.getMessage();
+        }
     }
 
     public static void main(String[] args) throws IOException, IncorrectInputException {

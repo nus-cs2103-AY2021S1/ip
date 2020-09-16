@@ -1,7 +1,6 @@
 public class Friend {
 
     private String name;
-    private String birthday;
     private int phoneNumber;
     private boolean isClose;
 
@@ -11,7 +10,6 @@ public class Friend {
      */
     public Friend(String name) {
         this.name = name;
-        this.birthday = "01/01/2000";
         this.phoneNumber = 91234567;
         this.isClose = false;
     }
@@ -19,13 +17,11 @@ public class Friend {
     /**
      * Constructor for the class.
      * @param name
-     * @param birthday
      * @param phoneNumber
      * @param isClose
      */
-    public Friend(String name, String birthday, int phoneNumber, boolean isClose) {
+    public Friend(String name, int phoneNumber, boolean isClose) {
         this.name = name;
-        this.birthday = birthday;
         this.phoneNumber = phoneNumber;
         this.isClose = isClose;
     }
@@ -60,5 +56,14 @@ public class Friend {
      */
     public String getName() {
         return this.name;
+    }
+
+    /**
+     * Get a string of the details of the friend.
+     * @return a string of the friend.
+     */
+    @Override
+    public String toString() {
+        return this.name + " (number: " + this.phoneNumber + ", isClose: " + this.isClose + ")";
     }
 }

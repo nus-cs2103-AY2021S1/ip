@@ -9,15 +9,16 @@ public class Parser {
      * Generate a corresponding command based of the input.
      * @param s
      * @return a corresponding command.
-     * @throws IncorrectInputException
+     * @throws IncorrectInputException, EmptyInputException
      */
-    public static Command parse(String s) throws IncorrectInputException {
-        int j = s.indexOf(' ');
-        String firstWord = "";
-        if (j > -1) {
-            firstWord = s.substring(0, j);
-        } else {
-            firstWord = s;
+    public static Command parse(String s) throws IncorrectInputException, EmptyInputException {
+        String[] arr = s.split(" ");
+        String firstWord = arr[0].trim();
+        char x;
+        int i = -1;
+        if (firstWord.equals("done") || firstWord.equals("delete") || firstWord.equals("fdelete")) {
+            x = s.charAt(s.length() - 1);
+            i = Character.getNumericValue(x);
         }
         switch (firstWord) {
             case "bye":
@@ -25,22 +26,18 @@ public class Parser {
             case "list":
                 return new ListCommand();
             case "done":
-                char x = s.charAt(s.length() - 1);
-                int i = Character.getNumericValue(x);
                 return new DoneCommand(i);
             case "find":
-                String description = s.substring(j + 1);
+                String description = s.substring(firstWord.length() + 2).trim();
                 return new FindCommand(description);
             case "delete":
-                char y = s.charAt(s.length() - 1);
-                int k = Character.getNumericValue(y);
-                return new DeleteCommand(k);
+                return new DeleteCommand(i);
             case "todo":
                 if (s.length() != "todo".length()) {
                     ToDo toDo = new ToDo(s.replace("todo ", ""));
                     return new AddCommand(toDo);
                 } else {
-                    throw new IncorrectInputException("☹ OOPS!!! The description of a todo cannot be empty.");
+                    throw new EmptyInputException("todo");
                 }
             case "deadline":
                 if (s.length() != "deadline".length()) {
@@ -53,7 +50,7 @@ public class Parser {
                     Deadline deadline = new Deadline(value[0].replace("deadline ", ""), dateTime);
                     return new AddCommand(deadline);
                 } else {
-                    throw new IncorrectInputException("☹ OOPS!!! The description of an deadline cannot be empty.");
+                    throw new EmptyInputException("deadline");
                 }
             case "event":
                 if (s.length() != "event".length()) {
@@ -61,10 +58,21 @@ public class Parser {
                     Event event = new Event(value[0].replace("event ", ""), value[1]);
                     return new AddCommand(event);
                 } else {
-                    throw new IncorrectInputException("☹ OOPS!!! The description of an event cannot be empty.");
+                    throw new EmptyInputException("event");
                 }
+            case "flist":
+                return new FriendListCommand();
+            case "fdelete":
+                return new DeleteFriendCommand(i);
+            case "friend":
+                String[] info = s.split(" /name ");
+                String[] segmentedDetails = info[1].split("/phone number ");
+                String[] finalSplit = segmentedDetails[1].split("/isClose ");
+                Friend friend = new Friend(segmentedDetails[0].trim(), Integer.valueOf(finalSplit[0].trim()),
+                        Boolean.valueOf(finalSplit[1].trim()));
+                return new AddFriendCommand(friend);
             default:
-                return new HelpCommand();
+                throw new IncorrectInputException("Sorry, wrong input lah");
         }
     }
 }

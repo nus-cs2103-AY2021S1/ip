@@ -1,6 +1,6 @@
-public class IncorrectInputException extends Exception {
+public class IncorrectInputException extends Throwable {
 
-    public IncorrectInputException(String e) {
-        super(e);
+    public IncorrectInputException(String s) {
+        super(s);
     }
 }

@@ -24,7 +24,7 @@ public class TaskList {
     }
 
     /**
-     * add a new task.
+     * Add a new task.
      * @param t
      */
     public void addTask(Task t) {
@@ -32,7 +32,7 @@ public class TaskList {
     }
 
     /**
-     * delete the specified task.
+     * Delete the specified task.
      * @param i
      */
     public void delete(int i) {

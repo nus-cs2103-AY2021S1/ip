@@ -23,7 +23,7 @@ public class FriendList {
      * Delete the friend from your friend list.
      * @param pos
      */
-    public void deleteFriend(int pos) {
+    public void delete(int pos) {
         friends.remove(pos);
     }
 
@@ -31,7 +31,15 @@ public class FriendList {
      * Add new friend.
      * @param friend
      */
-    public void addFriend(Friend friend) {
+    public void add(Friend friend) {
         friends.add(friend);
+    }
+
+    /**
+     * Get the current list of friends
+     * @return a list of friends.
+     */
+    public List<Friend> getList() {
+        return friends;
     }
 }

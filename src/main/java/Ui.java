@@ -1,3 +1,4 @@
+import java.awt.desktop.SystemEventListener;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -50,6 +51,20 @@ public class Ui {
     }
 
     /**
+     * Generate the list of friends.
+     */
+    public String generateFriendList(FriendList friendList) {
+        String list = "Here are all your friends:\n";
+        System.out.println("Here are the tasks in your list:");
+        for (int i = 0; i < friendList.getList().size(); i++) {
+            Friend friend = friendList.getList().get(i);
+            System.out.println((i + 1) + ". " + friend.toString());
+            list += (i + 1) + ". " + friend.toString() + "\n";
+        }
+        return list;
+    }
+
+    /**
      * Generate a message to inform user task is successfully added.
      * @param task
      * @return a String of the message.
@@ -58,6 +73,13 @@ public class Ui {
         System.out.println("Got it. I've added this task:");
         System.out.println(task.printTask());
         return "Got it. I've added this task: \n" + task.printTask();
+    }
+
+    public String addFriend(Friend friend) {
+        System.out.println("Added a new friend:");
+        System.out.println(friend.toString());
+        System.out.println("Now you have 1 friend in the list");
+        return "Added a new friend: \n" + friend.toString() + "\nNow you have 1 friend in the list";
     }
 
     /**
@@ -69,6 +91,16 @@ public class Ui {
         System.out.println("Noted. I've removed this task:");
         System.out.println(task.printTask());
         return "Noted. I've removed this task:\n" + task.printTask();
+    }
+
+    /**
+     * Generate a message to inform user friend is successfully deleted.
+     * @param friend
+     * @return a String of the message.
+     */
+    public String deleteFriend(Friend friend) {
+        System.out.println("Noted. I've unfriend " + friend.toString());
+        return "Noted. I've unfriend " + friend.toString();
     }
 
     /**
