@@ -1,5 +1,6 @@
 package duke.tools;
 
+import duke.exception.DukeException;
 import duke.main.Statement;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -107,7 +108,8 @@ public class Format<T> {
      *
      * @return a string with update statement.
      */
-    public String updateFormat() {
+    public String updateFormat() throws DukeException {
+        Parser.reloadTaskList();
         return Statement.UPDATE.toString()
                 + content
                 + FormatString.NEXT_LINE.toString()
@@ -116,6 +118,12 @@ public class Format<T> {
 
     @Override
     public String toString() {
+        try {
+            Parser.reloadTaskList();
+        } catch (DukeException e) {
+            e.printStackTrace();
+        }
+
         if (this.content instanceof Task) {
             return Statement.TASKADDED.toString()
                     + content
