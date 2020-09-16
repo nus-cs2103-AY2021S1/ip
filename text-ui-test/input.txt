@@ -1,0 +1,17 @@
+hello
+list
+todo hello
+todo
+event hello /at world
+event hello
+event
+deadline hello /by world
+deadline hello
+deadline
+list
+done 1
+done 2
+done 3
+done 0
+list
+bye
