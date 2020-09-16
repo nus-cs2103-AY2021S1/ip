@@ -16,11 +16,10 @@ public class AddFriendCommand extends Command{
      * Generate a list of tasks to user.
      * @param friends
      * @param ui
-     * @param storage
      * @return a String to reply user.
      * @throws IOException
      */
-    public String execute(FriendList friends, Ui ui, Storage storage) throws IOException {
+    public String execute(FriendList friends, Ui ui) throws IOException {
         friends.add(friend);
         return ui.addFriend(this.friend);
     }
@@ -44,5 +43,13 @@ public class AddFriendCommand extends Command{
      */
     public boolean isExit() {
         return false;
+    }
+
+    /**
+     * Check if the command is a friend command
+     * @return true
+     */
+    public boolean isFriendCommand() {
+        return true;
     }
 }

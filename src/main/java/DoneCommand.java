@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 public class DoneCommand extends Command {
 
     private int i;
@@ -21,10 +23,22 @@ public class DoneCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         Task task = tasks.getList().get(this.i - 1);
         task.markAsDone();
-        tasks.setTask(this.i, task);
+        tasks.set(this.i, task);
         // update task in storage
 //            storage.saveTask(this.task);
-        return  ui.completedTask(task) + "\n" + tasks.printTaskSize();
+        return  ui.completedTask(task) + "\n" + tasks.printSize();
+    }
+
+    /**
+     * Not reference to
+     * @param friends
+     * @param ui
+     * @return null
+     * @throws IOException
+     */
+    @Override
+    public String execute(FriendList friends, Ui ui) throws IOException {
+        return null;
     }
 
     /**
@@ -33,6 +47,14 @@ public class DoneCommand extends Command {
      */
     @Override
     public boolean isExit() {
+        return false;
+    }
+
+    /**
+     * Check if the command is a friend command
+     * @return false
+     */
+    public boolean isFriendCommand() {
         return false;
     }
 }

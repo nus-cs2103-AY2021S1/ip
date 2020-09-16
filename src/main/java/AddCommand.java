@@ -22,14 +22,24 @@ public class AddCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
-            tasks.addTask(this.task);
+            tasks.add(this.task);
             storage.saveTask(this.task);
-//            ui.addTask(this.task);
-            return ui.addTask(this.task) + "\n" + tasks.printTaskSize();
+            return ui.addTask(this.task) + "\n" + tasks.printSize();
         } catch (IOException e) {
-//            System.out.println("to be changed");
             return e.getMessage();
         }
+    }
+
+    /**
+     * Not reference to
+     * @param friends
+     * @param ui
+     * @return null
+     * @throws IOException
+     */
+    @Override
+    public String execute(FriendList friends, Ui ui) throws IOException {
+        return null;
     }
 
     /**
@@ -38,6 +48,14 @@ public class AddCommand extends Command {
      */
     @Override
     public boolean isExit() {
+        return false;
+    }
+
+    /**
+     * Check if the command is a friend command
+     * @return false
+     */
+    public boolean isFriendCommand() {
         return false;
     }
 }

@@ -16,11 +16,31 @@ public class ListCommand extends Command {
     }
 
     /**
+     * Not reference to
+     * @param friends
+     * @param ui
+     * @return null
+     * @throws IOException
+     */
+    @Override
+    public String execute(FriendList friends, Ui ui) throws IOException {
+        return null;
+    }
+
+    /**
      * To show if the programme can end.
      * @return a boolean
      */
     @Override
     public boolean isExit() {
+        return false;
+    }
+
+    /**
+     * Check if the command is a friend command
+     * @return false
+     */
+    public boolean isFriendCommand() {
         return false;
     }
 }

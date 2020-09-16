@@ -172,7 +172,7 @@ Noted. I've unfriend Charles (number: 91234567, isClose: true)
 ```
 ### `flist` - List out all friends in your friend list
 
-List all your friends in your current friend list
+List all your friends in your current friend list. Note that friend list is not saved to the hard disk.
 
 Expected outcome:
 

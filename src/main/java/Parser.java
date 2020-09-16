@@ -65,12 +65,16 @@ public class Parser {
             case "fdelete":
                 return new DeleteFriendCommand(i);
             case "friend":
-                String[] info = s.split(" /name ");
-                String[] segmentedDetails = info[1].split("/phone number ");
-                String[] finalSplit = segmentedDetails[1].split("/isClose ");
-                Friend friend = new Friend(segmentedDetails[0].trim(), Integer.valueOf(finalSplit[0].trim()),
-                        Boolean.valueOf(finalSplit[1].trim()));
-                return new AddFriendCommand(friend);
+                if (s.length() != "friend".length()) {
+                    String[] info = s.split(" /name ");
+                    String[] segmentedDetails = info[1].split("/phone number ");
+                    String[] finalSplit = segmentedDetails[1].split("/isClose ");
+                    Friend friend = new Friend(segmentedDetails[0].trim(), Integer.valueOf(finalSplit[0].trim()),
+                            Boolean.valueOf(finalSplit[1].trim()));
+                    return new AddFriendCommand(friend);
+                } else {
+                    throw new EmptyInputException("friend");
+                }
             default:
                 throw new IncorrectInputException("Sorry, wrong input lah");
         }

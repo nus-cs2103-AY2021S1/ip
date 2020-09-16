@@ -22,10 +22,22 @@ public class DeleteCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         Task deletedTask = tasks.getList().get(this.i - 1);
-        tasks.delete(this.i - 1);
+        tasks.delete(this.i);
         // delete file in storage
 //            storage.saveTask(this.task);
-        return ui.deleteTask(deletedTask) + "\n" + tasks.printTaskSize();
+        return ui.deleteTask(deletedTask) + "\n" + tasks.printSize();
+    }
+
+    /**
+     * Not reference to
+     * @param friends
+     * @param ui
+     * @return null
+     * @throws IOException
+     */
+    @Override
+    public String execute(FriendList friends, Ui ui) throws IOException {
+        return null;
     }
 
     /**
@@ -34,6 +46,14 @@ public class DeleteCommand extends Command {
      */
     @Override
     public boolean isExit() {
+        return false;
+    }
+
+    /**
+     * Check if the command is a friend command
+     * @return false
+     */
+    public boolean isFriendCommand() {
         return false;
     }
 }

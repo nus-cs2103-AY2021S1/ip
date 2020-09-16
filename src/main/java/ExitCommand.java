@@ -16,11 +16,31 @@ public class ExitCommand extends Command{
     }
 
     /**
+     * Not reference to
+     * @param friends
+     * @param ui
+     * @return null
+     * @throws IOException
+     */
+    @Override
+    public String execute(FriendList friends, Ui ui) throws IOException {
+        return null;
+    }
+
+    /**
      * Check if the command is an exit command.
      * @return true.
      */
     @Override
     public boolean isExit() {
         return true;
+    }
+
+    /**
+     * Check if the command is a friend command
+     * @return false
+     */
+    public boolean isFriendCommand() {
+        return false;
     }
 }

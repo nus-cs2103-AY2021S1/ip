@@ -27,7 +27,7 @@ public class TaskList {
      * Add a new task.
      * @param t
      */
-    public void addTask(Task t) {
+    public void add(Task t) {
         list.add(t);
     }
 
@@ -44,7 +44,7 @@ public class TaskList {
      * @param i
      * @param newTask
      */
-    public void setTask(int i, Task newTask) {
+    public void set(int i, Task newTask) {
         this.list.set(i - 1, newTask);
     }
 
@@ -52,7 +52,7 @@ public class TaskList {
      * Generate a string with the task size.
      * @return a String indicating the task size.
      */
-    public String printTaskSize() {
+    public String printSize() {
         return ("Now you have " + this.list.size() +
                 (this.list.size() > 1 ? " tasks" : " task") + " on the list");
     }

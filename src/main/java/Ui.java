@@ -41,11 +41,9 @@ public class Ui {
      */
     public String generateList(TaskList taskList) {
         String list = "Here are the tasks in your list:\n";
-        System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < taskList.getList().size(); i++) {
             Task t = taskList.getList().get(i);
-            System.out.println((i + 1) + ". " + t.printTask());
-            list += (i + 1) + ". " + t.printTask() + "\n";
+            list += "\n" + (i + 1) + ". " + t.printTask();
         }
         return list;
     }
@@ -55,11 +53,9 @@ public class Ui {
      */
     public String generateFriendList(FriendList friendList) {
         String list = "Here are all your friends:\n";
-        System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < friendList.getList().size(); i++) {
             Friend friend = friendList.getList().get(i);
-            System.out.println((i + 1) + ". " + friend.toString());
-            list += (i + 1) + ". " + friend.toString() + "\n";
+            list += "\n" + (i + 1) + ". " + friend.toString();
         }
         return list;
     }
@@ -70,15 +66,10 @@ public class Ui {
      * @return a String of the message.
      */
     public String addTask(Task task) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println(task.printTask());
         return "Got it. I've added this task: \n" + task.printTask();
     }
 
     public String addFriend(Friend friend) {
-        System.out.println("Added a new friend:");
-        System.out.println(friend.toString());
-        System.out.println("Now you have 1 friend in the list");
         return "Added a new friend: \n" + friend.toString() + "\nNow you have 1 friend in the list";
     }
 
@@ -88,8 +79,6 @@ public class Ui {
      * @return a String of the message.
      */
     public String deleteTask(Task task) {
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(task.printTask());
         return "Noted. I've removed this task:\n" + task.printTask();
     }
 
@@ -99,7 +88,6 @@ public class Ui {
      * @return a String of the message.
      */
     public String deleteFriend(Friend friend) {
-        System.out.println("Noted. I've unfriend " + friend.toString());
         return "Noted. I've unfriend " + friend.toString();
     }
 
@@ -109,8 +97,6 @@ public class Ui {
      * @return a String of the message.
      */
     public String completedTask(Task task) {
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(task.printTask());
         return "Nice! I've marked this task as done:\n" + task.printTask();
     }
 
@@ -119,7 +105,6 @@ public class Ui {
      * @return a String of the message.
      */
     public String exit() {
-        System.out.println("Bye. Hope to see you again soon!");
         this.scanner.close();
         return "Bye. Hope to see you again soon!";
     }

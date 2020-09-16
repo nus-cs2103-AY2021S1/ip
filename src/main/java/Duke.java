@@ -1,13 +1,11 @@
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 public class Duke {
 
     private Storage storage;
     private Ui ui;
     private TaskList taskList;
-    FriendList friendList;
+    private FriendList friendList;
 
     /**
      * Constructor for Duke.
@@ -29,12 +27,12 @@ public class Duke {
      */
     public Duke() {
         this.ui = new Ui();
-        this.storage = new Storage("tasklist.txt");
+        this.storage = new Storage();
         this.friendList = new FriendList();
         try {
             taskList = new TaskList(storage.loadData());
         } catch (Exception | IncorrectInputException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
     }
 
@@ -51,11 +49,11 @@ public class Duke {
                 String fullCommand = ui.readCommand();
                 ui.showLine();
                 Command c = Parser.parse(fullCommand);
-                c.execute(taskList, ui, storage);
+                System.out.println(c.isFriendCommand() ? c.execute(this.friendList, this.ui)
+                        : c.execute(this.taskList, this.ui, this.storage));
                 isExit = c.isExit();
             } catch (Exception e) {
-//                System.out.println(e.getMessage());
-                e.printStackTrace();
+                System.out.println(e.getMessage());
             } finally {
                 ui.showLine();
             }
@@ -72,7 +70,8 @@ public class Duke {
     public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
-            return c.execute(this.taskList, this.ui, this.storage);
+            return c.isFriendCommand() ? c.execute(this.friendList, this.ui)
+                    : c.execute(this.taskList, this.ui, this.storage);
         } catch (IncorrectInputException | EmptyInputException | IOException e) {
             return e.getMessage();
         }

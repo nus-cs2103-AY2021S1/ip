@@ -1,11 +1,9 @@
 import java.io.*;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Storage {
 
@@ -19,9 +17,25 @@ public class Storage {
     public Storage(String filepath) {
         this.filepath = Paths.get(filepath);
         this.file = this.filepath.toAbsolutePath().toFile();
-
         if (!file.exists()) {
             file.mkdirs();
+        }
+    }
+
+    /**
+     * Constructor for Storage
+     */
+    public Storage() {
+        try {
+            String currentDirectory = System.getProperty("user.dir") + "/tasks";
+            File parent = new File(currentDirectory);
+            if (!parent.exists()) {
+                parent.mkdirs();
+            }
+            this.file = new File(parent + "/tasklist.txt");
+            file.createNewFile();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -31,12 +45,11 @@ public class Storage {
      * @throws FileNotFoundException
      */
     public ArrayList<Task> loadData() throws FileNotFoundException, IncorrectInputException {
-        try (BufferedReader reader = Files.newBufferedReader(this.filepath)) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(file.getAbsolutePath()))) {
             ArrayList<Task> list = new ArrayList<>();
             String data;
             reader.readLine();
             while ((data = reader.readLine()) != null) {
-//                String data = reader.nextLine();
                 boolean isDone = data.contains("| 1 |") ? true : false;
                 String[] arr = data.split(" \\| ", 4);
                 String description = arr[2];
@@ -66,7 +79,7 @@ public class Storage {
             }
             return list;
         } catch (IOException e) {
-            throw new IncorrectInputException("erm temp to change later");
+            return new ArrayList<Task>();
         }
     }
 
@@ -76,8 +89,7 @@ public class Storage {
      * @throws IOException
      */
     public void saveTask(Task task) throws IOException {
-        BufferedWriter file = new BufferedWriter(new FileWriter(
-                String.valueOf(filepath), true));
+        BufferedWriter file = new BufferedWriter(new FileWriter(this.file.getAbsolutePath(), true));
         file.newLine();
         file.write(task.toSave());
         file.close();
