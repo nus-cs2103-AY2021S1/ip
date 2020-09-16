@@ -33,7 +33,7 @@ A JavaFX-Powered Task Manager App
 This is a java project created for CS2103T Software Engineering for AY2020/2021 Semester 1.
 
 Author: Lum Jian Yang Sean <br/>
-Version: 0.1.3 <br/>
+Version: 0.1.4 <br/>
 Release Date: 14 Sepetember 2020 <br/>
 Github: <a href="http://github.com/seanjyjy">https://github.com/seanjyjy</a> <br />
 
@@ -45,7 +45,7 @@ https://www.oracle.com/technetwork/java/javase/downloads/jdk11-downloads-5066655
 </a>
 
 * Mac / Linux / Windows <br/>
-    Double click the jar file to run or `java -jar Duke-0.1.3.jar` in the path where you have the jar file.
+    Double click the jar file to run or `java -jar Duke-0.1.4.jar` in the path where you have the jar file.
 
 ## Features 
 * Add different types of task _e.g._ `todo`, `deadline`, `event`
@@ -57,6 +57,11 @@ https://www.oracle.com/technetwork/java/javase/downloads/jdk11-downloads-5066655
 * Exit and save the data _e.g._ `bye`
 * Case-insensitive commands allowed _e.g._ `TODO`, `EveNT`
 * Platform compatibility with Windows, MacOS, Linux
+* Responsive ui
+* Informative responses when encountered wrong commands.
+* Prevents duplicated tasks.
+
+
 
 ## Usage
 
@@ -66,7 +71,7 @@ https://www.oracle.com/technetwork/java/javase/downloads/jdk11-downloads-5066655
    
    
 ### `deadline`
-Deadline is a task with description, a completion status, a reminder status and a date. Note that the date format must follow either `dd/MM/yy HH:mm` or `dd/MM/yy`. By default reminder status is set to false and could only be activated/deactivated using the `remind` command.
+Deadline is a task with description, a completion status, a reminder status and a date. Note that the date format must follow either `yyyy/mm/dd HH:mm` or `yyyy/mm/dd`. By default reminder status is set to false and could only be activated/deactivated using the `remind` command.
 
 Format:
 `deadline DESCRIPTION /by DATE`
@@ -83,7 +88,7 @@ Now you have <Int> tasks in the list.
 ```
 
 ### `event`
-Event is a task with description, a completion status, a reminder status and a date. Note that the date format must follow either `dd/MM/yy HH:mm` or `dd/MM/yy`. By default reminder status is set to false and could only be activated/deactivated using the `remind` command.
+Event is a task with description, a completion status, a reminder status and a date. Note that the date format must follow either `yyyy/mm/dd HH:mm` or `yyyy/mm/dd`. By default reminder status is set to false and could only be activated/deactivated using the `remind` command.
 
 Format:
 `event DESCRIPTION /at DATE`
