@@ -10,7 +10,7 @@ public class ParseViewSchedules extends Parse {
         return ViewScheduleCommand.execute2(timeDate);
     }
 
-    public static String execute3() {
-        return ViewScheduleCommand.execute3();
-    }
+//    public static String execute3() {
+//        return ViewScheduleCommand.execute3();
+//    }
 }

@@ -44,16 +44,16 @@ public class ViewScheduleCommand extends Command {
         return result;
     }
 
-    public static String execute3() {
-        ArrayList<task> clone = TaskManager.getStore();
-        clone = sortByDateTime(clone);
-        String result = "Here are your tasks for in order " + System.lineSeparator();
-        int count = 1;
-        for (task t : clone) {
-            result += "    " + count + ". " + TaskManager.read(t) + System.lineSeparator();
-            count++;
-        }
-        return result;
-
-    }
+//    public static String execute3() {
+//        ArrayList<task> clone = TaskManager.getStore();
+//        clone = sortByDateTime(clone);
+//        String result = "Here are your tasks for in order " + System.lineSeparator();
+//        int count = 1;
+//        for (task t : clone) {
+//            result += "    " + count + ". " + TaskManager.read(t) + System.lineSeparator();
+//            count++;
+//        }
+//        return result;
+//
+//    }
 }

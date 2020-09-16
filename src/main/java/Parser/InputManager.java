@@ -58,7 +58,8 @@ public class InputManager {
             LocalDate d = DateTimeManager.setDate(date);
             return ParseViewSchedules.execute2(d);
         } catch (NoSuchElementException e) {
-            return ParseViewSchedules.execute3();
+//            return ParseViewSchedules.execute3();
+            return "Missing date for view command!";
         }
 
     }
