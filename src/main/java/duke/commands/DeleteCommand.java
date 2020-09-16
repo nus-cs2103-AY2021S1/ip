@@ -27,6 +27,7 @@ public class DeleteCommand extends Command {
      * @param taskList Task list which contains the current task.
      * @param ui Ui object to interact with the user.
      * @param storage Storage object to read or save the task list in the hardware.
+     * @return String message of the command.
      * @throws InvalidDeleteFormatException If the format of delete command is wrong.
      * @throws IncorrectDeleteInputException If the string after delete command is not a number or does
      * not fall within the valid range.

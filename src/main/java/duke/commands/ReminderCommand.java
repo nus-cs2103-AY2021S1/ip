@@ -25,6 +25,7 @@ public class ReminderCommand extends Command {
      * @param taskList Task list which contains the current task.
      * @param ui Ui object to interact with the user.
      * @param storage Storage object to read or save the task list in the hardware.
+     * @return String message of the command.
      * @throws InvalidReminderFormatException If the format of reminder command is wrong.
      * @throws IncorrectReminderInputException If the string after reminder command is not a number or is less
      * than 1.

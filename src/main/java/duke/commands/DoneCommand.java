@@ -27,9 +27,11 @@ public class DoneCommand extends Command {
      * @param taskList Task list which contains the current task.
      * @param ui Ui object to interact with the user.
      * @param storage Storage object to read or save the task list in the hardware.
+     * @return String message of the command.
      * @throws InvalidDoneFormatException If the format of done command is wrong.
      * @throws IncorrectDoneInputException If the string after done command is not a number or does
      * not fall within the valid range.
+     * @throws TaskCompletedException If the task is already completed.
      */
     @Override
     public String executeCommand(TaskList taskList, Ui ui, Storage storage) throws InvalidDoneFormatException,

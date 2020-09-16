@@ -36,6 +36,7 @@ public class AddCommand extends Command {
      *
      * @param taskList Task list which contains the current task.
      * @param ui Ui object to interact with the user.
+     * @return String message of the command.
      * @param storage Storage object to read or save the task list in the hardware.
      * @throws InvalidToDoFormatException If todo command format is wrong.
      * @throws InvalidDeadlineFormatException If deadline command format is wrong.
