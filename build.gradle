@@ -48,7 +48,7 @@ application {
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "dutchTaskManager"
     archiveClassifier = null
 }
 
