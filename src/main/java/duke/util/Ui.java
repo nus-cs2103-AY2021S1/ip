@@ -141,15 +141,18 @@ public class Ui {
                 "event <description> /at <date> [time]",
                 "deadline <description> /by <date> [time]",
                 "fixed <description> /for <duration>",
-                "done <task no./all>", "remove <task no./all>",
+                "done <task no./all>", "remove <task no./all/done>",
                 "sort <name/type/datetime>",
-                "start <task no.> <date> <time>"
+                "start <task no.> <date time/now>"
         };
         StringBuilder sb = new StringBuilder("Here are the available commands:\n");
         for (String command: commands) {
             sb.append(" - ").append(command).append("\n");
         }
-        sb.append("\nFields: <required> [optional]");
+        String additionalInfo = "Fields: <required> [optional]"
+                + "\nDate: YYYY-MM-DD or today/tomorrow"
+                + "\nTime: HH:MM (24 hr format)";
+        sb.append("\n").append(additionalInfo).append("\n\nRefer to user guide for the complete guide :)");
         return sb.toString();
     }
 
@@ -161,6 +164,13 @@ public class Ui {
         return "Your list has been cleared!! Yay~";
     }
 
+    /**
+     * Gets the message when removing of done tasks in the list is successful.
+     * @return the message.
+     */
+    public String getRemoveDoneMessage() {
+        return "All completed tasks have been removed :)";
+    }
     /**
      * Gets the message when there is attempt to sort an empty list.
      * @return the message.

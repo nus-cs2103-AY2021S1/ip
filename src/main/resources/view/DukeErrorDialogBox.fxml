@@ -16,7 +16,7 @@
          <HBox.margin>
             <Insets />
          </HBox.margin></ImageView>
-        <Label fx:id="dialog" graphicTextGap="8.0" lineSpacing="1.0" style="-fx-background-color: #f44d5e;" styleClass="roundify" stylesheets="@../images/stylesheet.css" text="Sorry I do not know what that means :(&#10;Sorry I do not know what that means :(&#10;Sorry I do not know what that means :(&#10;Sorry I do not know what that means :(&#10;Sorry I do not know what that means :(&#10;Sorry I do not know what that means :(&#10;Sorry I do not know what that means :(&#10;Sorry I do not know what that means :(" textFill="WHITE" wrapText="true">
+        <Label fx:id="dialog" graphicTextGap="8.0" lineSpacing="1.0" maxWidth="250.0" style="-fx-background-color: #f44d5e;" styleClass="roundify" stylesheets="@../images/stylesheet.css" text="Sorry I do not know what that means :(&#10;Sorry I do not know what that means :(&#10;Sorry I do not know what that means :(&#10;Sorry I do not know what that means :(&#10;Sorry I do not know what that means :(&#10;Sorry I do not know what that means :(&#10;Sorry I do not know what that means :(&#10;Sorry I do not know what that means :(" textFill="WHITE" wrapText="true">
          <font>
             <Font name="Segoe UI" size="12.0" />
          </font>

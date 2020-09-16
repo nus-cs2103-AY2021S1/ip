@@ -9,7 +9,7 @@
 
 <fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="405.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label fx:id="dialog" graphicTextGap="8.0" lineSpacing="1.0" style="-fx-background-color: #42A6FE;" styleClass="roundify" stylesheets="@../images/stylesheet.css" text="hey tebby, delete my life please" textFill="WHITE" wrapText="true">
+        <Label fx:id="dialog" graphicTextGap="8.0" lineSpacing="1.0" maxWidth="250.0" style="-fx-background-color: #42A6FE;" styleClass="roundify" stylesheets="@../images/stylesheet.css" text="oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo" textFill="WHITE" wrapText="true">
          <HBox.margin>
             <Insets right="15.0" top="5.0" />
          </HBox.margin>

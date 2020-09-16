@@ -64,8 +64,7 @@ public class TaskList {
         Task task = new Todo("");
         String[] split;
         String desc;
-        description = description.trim();
-        if (description.isEmpty()) {
+        if (description.isBlank()) {
             throw new DukeException("Description cannot be empty!");
         }
         switch (type) {
@@ -144,6 +143,12 @@ public class TaskList {
         list.clear();
     }
 
+    /**
+     * Removes all tasks that are done.
+     */
+    public void removeDoneTasks() {
+        list.removeIf(Task::getDone);
+    }
     /**
      * Replaces a task at the given index.
      * @param i the index.

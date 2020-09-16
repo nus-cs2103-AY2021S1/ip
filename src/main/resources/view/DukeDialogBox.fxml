@@ -19,7 +19,7 @@
             </ImageView>
          </children>
       </StackPane>
-        <Label fx:id="dialog" graphicTextGap="8.0" lineSpacing="1.0" style="-fx-background-color: #42A6FE;" styleClass="dukespeech" stylesheets="@../images/stylesheet.css" text="UWU UWU UWU" textFill="WHITE" wrapText="true">
+        <Label fx:id="dialog" graphicTextGap="8.0" lineSpacing="1.0" maxWidth="250.0" style="-fx-background-color: #42A6FE;" styleClass="dukespeech" stylesheets="@../images/stylesheet.css" text="UWU UWU UWU" textFill="WHITE" wrapText="true">
          <font>
             <Font name="Segoe UI" size="12.0" />
          </font>

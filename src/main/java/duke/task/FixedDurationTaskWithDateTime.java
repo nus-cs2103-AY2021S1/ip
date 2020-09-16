@@ -50,6 +50,12 @@ public class FixedDurationTaskWithDateTime extends FixedDurationTask {
      * @param dateTime the user input containing the date and time.
      */
     public void parseDateTime(String dateTime) throws DukeException {
+        if (dateTime.equals("now")) {
+            LocalDate date = LocalDate.now();
+            LocalTime time = LocalTime.now();
+            setStartDateTime(date, time);
+            return;
+        }
         try {
             String[] dateTimeSplit = dateTime.split(" ");
             LocalDate date = parseDate(dateTimeSplit[0]);
@@ -78,8 +84,7 @@ public class FixedDurationTaskWithDateTime extends FixedDurationTask {
 
     private LocalTime parseTime(String raw) {
         String timeString = String.format("%1$" + 5 + "s",
-                raw.replace(".", ":"))
-                .replace(" ", "0");
+                raw.replace(" ", "0"));
         return LocalTime.parse(timeString);
     }
 

@@ -7,14 +7,16 @@ import duke.util.Storage;
 import duke.util.DukeException;
 
 /**
- * The remove command is in charge of removing a task or
- * clearing the entire task list.
+ * The remove command is in charge of removing tasks by
+ * specific task number, tasks that are done, or clearing the entire list.
  */
 public class RemoveCommand implements Command {
 
     private final int index;
 
-    private final boolean isEntireList;
+    private final boolean isRemoveEntireList;
+
+    private final boolean isRemoveDone;
 
     /**
      * Constructs the remove command which targets a task.
@@ -22,15 +24,18 @@ public class RemoveCommand implements Command {
      */
     public RemoveCommand(int index) {
         this.index = index;
-        isEntireList = false;
+        isRemoveEntireList = false;
+        isRemoveDone = false;
     }
 
     /**
-     * Constructs the remove command which targets the entire task list.
+     * Constructs the remove command which targets the entire task list
+     * or targets tasks that are done.
      */
-    public RemoveCommand() {
+    public RemoveCommand(String type) {
+        isRemoveEntireList = type.equals("all");
+        isRemoveDone = type.equals("done");
         index = -1;
-        isEntireList = true;
     }
 
     /**
@@ -51,10 +56,17 @@ public class RemoveCommand implements Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        if (isEntireList) {
+        if (isRemoveEntireList) {
             tasks.removeAll();
             storage.update(tasks.getList());
             String msg = ui.getClearListMessage();
+            ui.sendMessage(msg);
+            return msg;
+        }
+        if (isRemoveDone) {
+            tasks.removeDoneTasks();
+            storage.update(tasks.getList());
+            String msg = ui.getRemoveDoneMessage();
             ui.sendMessage(msg);
             return msg;
         }
