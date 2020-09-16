@@ -51,6 +51,24 @@ You can search for a task by keywords. Duke will find all the tasks with the key
 
 * find [KEYWORD]
 
+### Change to another task list / Create a new task list: switch
+If you want to switch to another task list, user switch order.
+
+* switch [TASK LIST NAME]
+
+If you want to create a new empty task list, you can also use switch order.
+
+* switch [NEW TASK LIST NAME]
+
+### View current/all task list:
+To view current task list you are using now, use this order:
+
+* current list
+
+To view all task list you have created, use this order:
+ 
+* all list
+
 ### Exit Duke: bye
 Say bye to Duke and you will exit the app. Don't worry, all your data is stored in disk.
 
