@@ -35,18 +35,18 @@ public class GraphicsUi extends Application implements Ui {
      * Performs the basic logic of the main loop.
      */
     public void performLogic() {
-        DialogStream stream = new DialogStream(this);
+        OutputDialogStream outputStream = new OutputDialogStream(this);
+        InputDialogStream inputStream = new InputDialogStream(this);
         Parser parser = new Parser();
-        Output.setPrintStream(stream);
-        Output.setPrefix("");
+        Output.setPrintStream(outputStream);
         Output.printMessage("Hello, this is Tickbot! How can I help you?");
         EventHandler<MouseEvent> handler = new EventHandler<>() {
             @Override
             public void handle(MouseEvent event) {
                 String command = userInput.getText();
-                Output.setPrefix("==> ");
+                Output.setPrintStream(inputStream);
                 Output.printMessage(command);
-                Output.setPrefix("");
+                Output.setPrintStream(outputStream);
                 boolean running = parser.executeCommand(command);
                 if (!running) {
                     Platform.exit();
@@ -57,10 +57,17 @@ public class GraphicsUi extends Application implements Ui {
     }
 
     /**
-     * Creates a dialog in the main UI.
+     * Creates a output dialog in the main UI.
      */
-    public void writeDialog(String text) {
-        Dialog dialog = new Dialog(text);
+    public void writeOutputDialog(String text) {
+        Dialog dialog = new OutputDialog(text);
+        dialogContainer.getChildren().add(dialog);
+    }
+    /**
+     * Creates a input dialog in the main UI.
+     */
+    public void writeInputDialog(String text) {
+        Dialog dialog = new InputDialog(text);
         dialogContainer.getChildren().add(dialog);
     }
 
@@ -98,13 +105,24 @@ public class GraphicsUi extends Application implements Ui {
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
         scrollPane.setVvalue(1.0);
         scrollPane.setFitToWidth(true);
+        String scrollPaneStyle = 
+                "-fx-border-color: grey;" +
+                "-fx-focus-color: transparent;" +
+                "-fx-faint-focus-color: transparent;";
+        scrollPane.setStyle(scrollPaneStyle);
         // dialog container styles
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
         // send button styles
         sendButton.setPrefSize(58.0, 40.0);
+        String sendButtonStyle = "-fx-background-radius: 3em;";
+        sendButton.setStyle(sendButtonStyle);
         // user input styles
         userInput.setPrefSize(340.0, 40.0);
-        // userInput.setPrefHeight(30.0);
+        String userInputStyle = 
+                "-fx-border-color: grey;"
+              + "-fx-focus-color: transparent;"
+              + "-fx-faint-focus-color: transparent;";
+        userInput.setStyle(userInputStyle);
         // anchor pane styles
         AnchorPane.setTopAnchor(scrollPane, 1.0);
         AnchorPane.setBottomAnchor(sendButton, 1.0);

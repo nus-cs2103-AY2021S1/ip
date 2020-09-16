@@ -11,7 +11,6 @@ import java.util.Map.Entry;
 public class Output {
     private static final String TIME_FORMAT = "<yyyy-MM-dd[ HH:mm[:ss]]>";
     private static PrintStream printStream = System.out;
-    private static String prefix = "  ";
 
     private static Map<String, String> usages = new HashMap<>() {
         private static final long serialVersionUID = 1L;
@@ -40,20 +39,11 @@ public class Output {
     }
 
     /**
-     * Sets the prefix string while printing out a message.
-     * <p>Two spaces are used if not set.</p>
-     * @param prefix The new prefix string.
-     */
-    public static void setPrefix(String prefix) {
-        Output.prefix = prefix;
-    }
-
-    /**
      * Displays a message in text UI.
      * <p>A line break will be appended to the message.</p>
      */
     public static void printMessage(String message) {
-        printStream.println(prefix + message);
+        printStream.println(message);
     }
 
     /**

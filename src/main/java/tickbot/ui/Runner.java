@@ -53,7 +53,11 @@ public class Runner {
     void done(String[] args) {
         try {
             int index = Integer.parseInt(args[1]) - 1;
-            tasks.complete(index);
+            if (tasks.complete(index)) {
+                Output.printMessage("Task completed.");
+            } else {
+                Output.printMessage("Task has already been marked as completed.");
+            }
         } catch (NumberFormatException err) {
             Output.printMessage("Invalid Syntax.");
             Output.printMessage("Usage: done <task_index>");

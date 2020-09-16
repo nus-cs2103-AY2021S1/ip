@@ -9,22 +9,13 @@ import java.io.PrintStream;
  * the GUI to create a dialog with the output text.</p>
  */
 public class DialogStream extends PrintStream {
-    private GraphicsUi ui;
 
     /**
-     * Initializes the dialog stream with the GUI it will be used in.
-     * @param ui The GUI the stream will be used in.
+     * Initializes a dialog stream.
      */
-    public DialogStream(GraphicsUi ui) {
+    public DialogStream() {
         super(new OutputStream() {
             public void write(int c) { } // do nothing
         });
-        this.ui = ui;
-    }
-
-    @Override
-    public void println(String text) {
-        super.println(text);
-        ui.writeDialog(text);
     }
 }
