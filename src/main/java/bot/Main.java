@@ -3,7 +3,11 @@ package bot;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.control.SplitPane;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -24,7 +28,15 @@ public class Main extends Application {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
-            stage.setScene(scene);
+            Label titleLabel = new Label("S\nT\nR\nA\nW\n \nB\nO\nT\n");
+            titleLabel.setFont(new Font("Arial", 56));
+            VBox rightControl = new VBox(titleLabel);
+
+            SplitPane splitPane = new SplitPane();
+            splitPane.getItems().addAll(scene.getRoot(), rightControl);
+            Scene mainScene = new Scene(splitPane);
+
+            stage.setScene(mainScene);
             stage.setTitle("STRAW BOT :)");
             fxmlLoader.<MainWindow>getController().setDuke("Straw Bot", "./assets/userData.txt");
             stage.show();

@@ -39,7 +39,6 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         Background bg = new Background(new BackgroundImage(bgImage, null, null , null , null));
         this.dialogContainer.setBackground(bg);
-
     }
 
     public void setDuke(String botName, String filePath) {
@@ -58,7 +57,7 @@ public class MainWindow extends AnchorPane {
      * the dialog container. Clears the user input after processing.
      */
     @FXML
-    private void handleUserInput() {
+    public void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
