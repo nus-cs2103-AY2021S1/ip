@@ -20,7 +20,7 @@ public class Main extends Application {
     public void start(Stage stage) {
         try {
             duke.onStart(true);
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/DukeGui.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/DukeGuiWindow.fxml"));
             BorderPane bp = fxmlLoader.load();
             Scene scene = new Scene(bp);
             stage.setScene(scene);
