@@ -17,7 +17,7 @@ import java.util.Scanner;
  * <code>Storage</code> handles all file read and writes.
  */
 public class Storage {
-    final static String TASKS_TEXT_FILE_PATH = "src/main/resources/tasks.txt";
+    final static String TASKS_TEXT_FILE_PATH = "./data/tasks.txt";
 
     /**
      * Loads the information from the file "duke.tasks.txt" into a
@@ -77,6 +77,7 @@ public class Storage {
             try {
                 System.out.println("File \"tasks.txt\" does not exist. Attempting to create one for you.");
                 File file = new File(TASKS_TEXT_FILE_PATH);
+                file.getParentFile().mkdirs();
                 file.createNewFile();
                 System.out.println("Successfully created file tasks.txt");
                 return tm;
