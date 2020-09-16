@@ -32,7 +32,7 @@ This user guide format heavily references https://se-education.org/addressbook-l
 
    * **`bye`** : Exits the app.
 
-1. Refer to the [Features](#features-and-list-of-commands) below for details of each command.
+1. Refer to the [Features and List of Commands](#features-and-list-of-commands) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -55,8 +55,8 @@ Shows a list of all tasks in the task list.
 Format: `list`
 
 * Each task has two tags in front of the summary of the task. The tags `[T]`, `[D]`, `[E]` means that the task is a todo task, deadline task and event task respectively. The tags `[N]`, `[Y]` means that the task is incomplete and complete respectively. 
-* The reply from Butler will also include the number of tasks in the task list.
-* A sample output is shown here.<br>![ListOfTasks](ListOfTasks.png)
+* The reply from Butler will also include the number of tasks in the task list.<br>
+![ListOfTasks](ListOfTasks.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -68,8 +68,8 @@ Format: `todo SUMMARY`
 
 Examples:
 * `todo Water the garden`
-* `todo Walk the dog`
-* ![ToDoTask](ToDoTask.png)
+* `todo Walk the dog`<br>
+![ToDoTask](ToDoTask.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -77,14 +77,14 @@ Examples:
 
 Adds a deadline task to the task list. 
 
-* Dates are to be written in YYYY-MM-DD format.
-
 Format: `deadline SUMMARY /by DEADLINE`
+
+* Dates are to be written in YYYY-MM-DD format.
 
 Examples:
 * `deadline Submit math assignment /by 2020-12-12`
-* `deadline Send in resume and cover letter /by 2020-10-31`
-* ![DeadlineTask](DeadlineTask.png)
+* `deadline Send in resume and cover letter /by 2020-10-31`<br>
+![DeadlineTask](DeadlineTask.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -92,14 +92,14 @@ Examples:
 
 Adds an event task to the task list. 
 
-* Dates are to be given in YYYY-MM-DD format.
-
 Format: `deadline SUMMARY /at STARTDATE ENDDATE`
+
+* Dates are to be given in YYYY-MM-DD format.
 
 Examples:
 * `event Science convention at Expo /at 2020-12-12 2020-12-15`
-* `event Orientation camp at NUS /at 2020-10-31 2020-11-01`
-* ![EventTask](EventTask.png)
+* `event Orientation camp at NUS /at 2020-10-31 2020-11-01`<br>
+![EventTask](EventTask.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -116,8 +116,8 @@ Format: `done INDEX...`
 
 Examples:
 * `done 1` marks the 1st task as complete.
-* `done 2 3 5` mark tasks 2, 3, 5 as complete.
-* ![DoneCommand](DoneCommand.png)
+* `done 2 3 5` mark tasks 2, 3, 5 as complete.<br>
+![DoneCommand](DoneCommand.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -132,8 +132,8 @@ Format: `delete INDEX`
 * The index **must be a positive integer** 1, 2, 3,... etc.
 
 Examples:
-* `delete 2` deletes the 2nd task in the task list.
-* ![DeleteCommand](DeleteCommand.png)
+* `delete 2` deletes the 2nd task in the task list.<br>
+![DeleteCommand](DeleteCommand.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -151,8 +151,8 @@ Format: `find KEYWORD`
 
 Examples:
 * `find assignment`
-* `find math assignment`
-* ![FindCommand](FindCommand.png)
+* `find math assignment`<br>
+![FindCommand](FindCommand.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -169,8 +169,8 @@ Format: `undo UNDO_COUNT`
 
 Examples: 
 * `undo 2` undoes the recent 2 changes to the task list.
-* `undo 1` undoes the most recent change to the task list.
-* ![UndoCommand](UndoCommand.png)
+* `undo 1` undoes the most recent change to the task list.<br>
+![UndoCommand](UndoCommand.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
