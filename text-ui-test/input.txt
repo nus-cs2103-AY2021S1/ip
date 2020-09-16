@@ -1,0 +1,17 @@
+sampleName
+help
+list
+todo borrow book
+deadline return book /by 2020-08-27 18:00
+event project meeting /at 2020-09-25 10:00
+done
+list
+done 1
+find book
+delete 4
+help me
+list
+find
+deadline
+event interview /at 2020-20-20
+bye

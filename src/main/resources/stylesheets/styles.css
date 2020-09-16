@@ -1,0 +1,60 @@
+#userInput {
+    -fx-background-color: #eee3e7;
+    -fx-font-size: 15px;
+    -fx-border-color: black;
+    -fx-border-width: 2 0 0 0;
+}
+
+#sendButton {
+    -fx-background-color: #eee3e7;
+    -fx-font-size: 17px;
+    -fx-font-weight: bold;
+    -fx-border-color: black;
+    -fx-border-width: 2 0 0 2;
+    //-fx-border-radius: 5px;
+}
+
+#scrollPane {
+    -fx-background-color: #ddd3ee;
+}
+
+#dialogContainer {
+    -fx-background-color: #eec9d2;
+}
+
+.focus {
+    -fx-text-fill: black;
+    -fx-font-size: 15px;
+    -fx-background-color: #eee3e7;
+    -fx-background-radius: 10;
+    -fx-padding: 15 15;
+    -fx-border-color: #851e3e;
+    -fx-border-width: 2 2;
+    -fx-border-radius: 10;
+    -fx-effect: dropshadow(gaussian, grey, 5, 0, 2, 2)
+}
+
+.user {
+    -fx-text-fill: black;
+    -fx-font-size: 15px;
+    -fx-background-color: white;
+    -fx-background-radius: 10;
+    -fx-padding: 15 15;
+    -fx-border-color: #851e3e;
+    -fx-border-width: 2 2;
+    -fx-border-radius: 10;
+    -fx-effect: dropshadow(gaussian, grey, 5, 0, 2, 2)
+}
+
+.error {
+    -fx-text-fill: red;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-background-color: #eee3e7;
+    -fx-background-radius: 10;
+    -fx-padding: 15 15;
+    -fx-border-color: #851e3e;
+    -fx-border-width: 2 2;
+    -fx-border-radius: 10;
+    -fx-effect: dropshadow(gaussian, grey, 5, 0, 2, 2)
+}

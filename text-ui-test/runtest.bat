@@ -1,13 +1,17 @@
 @ECHO OFF
 
+SET MY_PATH=C:\Users\Rui Ling\Desktop\uni y2s1\cs2103t\ip
+SET JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF-8
+
 REM create bin directory if it doesn't exist
-if not exist ..\bin mkdir ..\bin
+if not exist "%MY_PATH%\bin" mkdir "%MY_PATH%\bin"
 
 REM delete output from previous run
 del ACTUAL.TXT
 
 REM compile the code into the bin folder
-javac  -cp ..\src -Xlint:none -d ..\bin ..\src\main\java\Duke.java
+dir /s /B ..\src\main\java\*.java > sources.txt
+javac  -cp "%MY_PATH%\src\main\java" -Xlint:none -d "%MY_PATH%\bin" "%MY_PATH%\src\main\java\Duke.java"
 IF ERRORLEVEL 1 (
     echo ********** BUILD FAILURE **********
     exit /b 1
@@ -15,7 +19,7 @@ IF ERRORLEVEL 1 (
 REM no error here, errorlevel == 0
 
 REM run the program, feed commands from input.txt file and redirect the output to the ACTUAL.TXT
-java -classpath ..\bin Duke < input.txt > ACTUAL.TXT
+java -classpath "%MY_PATH%\bin" Duke < input.txt > ACTUAL.TXT
 
 REM compare the output to the expected output
 FC ACTUAL.TXT EXPECTED.TXT
