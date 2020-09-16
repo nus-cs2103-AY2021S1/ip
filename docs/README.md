@@ -1,6 +1,7 @@
 # User Guide
 ByteMe is a desktop scheduling app to help you manage your daily tasks. It is optimized for use via a Command Line Interface (CLI).
-##Quick Start
+
+## Quick Start
 1. Ensure you have Java 11 or higher version installed on your computer.
 2. Download release `V0.2` of `duke.jar`.
 3. Start `duke.jar`.
