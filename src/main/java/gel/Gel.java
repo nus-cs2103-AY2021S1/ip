@@ -55,6 +55,12 @@ public class Gel {
         new Gel(STORAGE_LOCATION).run();
     }
 
+    /**
+     * Return response fo Gel bot with given input.
+     *
+     * @param input given by user.
+     * @return data acquired by user.
+     */
     public String getResponse(String input) {
         try {
             return parser.parseUserInput(input);

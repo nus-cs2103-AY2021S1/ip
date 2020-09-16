@@ -19,8 +19,8 @@ import gel.task.Todo;
  */
 public class Storage {
 
-    private String filePath;
-    private String directoryPath;
+    private final String filePath;
+    private final String directoryPath;
 
     /**
      * Constructs Storage class at saves data at given filepath.

@@ -65,6 +65,7 @@ public class Parser {
 
     /**
      * Translates user input into something understandable by the task planner.
+     *
      * @param input User's input.
      * @return A string to print on the GUI.
      * @throws IOException If file could not be updated.

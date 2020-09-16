@@ -11,6 +11,12 @@ public class Deadline extends Task {
     protected String byString;
     protected LocalDateTime by;
 
+    /**
+     * Construct a Deadline task.
+     *
+     * @param description Description of task.
+     * @param by Deadline of task. in LocalDateTime format.
+     */
     public Deadline(String description, LocalDateTime by) {
         super(description);
         this.byString = by.format(DateTimeFormatter.ofPattern("dd MMM uuuu HH:mm"));

@@ -14,6 +14,10 @@ public class Main extends Application {
 
     private Gel gel = new Gel("data/tasks.txt");
 
+    /**
+     * Starts the Gel bot using given Stage.
+     * @param stage given stage.
+     */
     @Override
     public void start(Stage stage) {
         try {
