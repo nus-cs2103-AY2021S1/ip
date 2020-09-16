@@ -22,7 +22,7 @@ Alternatively, you can double-click on the `jar` file at step 4 to start Duke.
 > 
 > Words in `UPPER_CASE` are the parameters to be supplied by the user. 
 > e.g. in `todo NAME`, `NAME` is a parameter which can be used as `event abc /at 2020-02-02`.
-]
+
 ### Add a Todo Task: `todo`
 
 Creates a new non-dated todo item.
