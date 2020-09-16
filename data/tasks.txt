@@ -1,3 +1,3 @@
-E | 1 | asd | 2020-10-22T19:00
-T | 1 | call me tmr
-T | 0 | new 
+T | 0 | Math Assignment 1
+D | 1 | Software Project 2 | 2020-08-22T21:00
+E | 0 | Friend Meeting | 2020-09-01T20:00
