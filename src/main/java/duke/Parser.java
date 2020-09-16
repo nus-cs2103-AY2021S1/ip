@@ -51,7 +51,7 @@ public class Parser {
             if (commandWordArray.length != 1) {
                 return new UnknownCommand(firstWord);
             }
-            return new ByeCommand(firstWord, true);
+            return new ByeCommand(firstWord);
         case LIST:
             if (commandWordArray.length != 1) {
                 return new UnknownCommand(firstWord);

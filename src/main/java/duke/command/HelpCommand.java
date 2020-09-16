@@ -20,6 +20,6 @@ public class HelpCommand extends Command {
 
     @Override
     public boolean equals(Object obj) {
-        return obj instanceof ListCommand;
+        return obj instanceof HelpCommand;
     }
 }

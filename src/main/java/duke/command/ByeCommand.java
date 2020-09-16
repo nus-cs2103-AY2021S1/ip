@@ -14,9 +14,8 @@ public class ByeCommand extends Command {
     /**
      * Class constructor.
      * @param command String parsed by Parser object.
-     * @param isExit Boolean indicating if chat bot should shut down.
      */
-    public ByeCommand(String command, boolean isExit) {
+    public ByeCommand(String command) {
         super(command, true);
     }
 
