@@ -10,7 +10,7 @@ Duke allows a user to add a todo (task without any date/time attached to it), de
 Duke allows a user to remove an existing task from the list.
 
 ### Viewing the tasks list
-Duke allows a user to view all the tasks available.
+Duke allows a user to view all the tasks available in the list.
 
 ### Marking a task as done
 Duke allows a user to mark a task as done.
