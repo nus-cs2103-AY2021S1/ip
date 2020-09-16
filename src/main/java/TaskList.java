@@ -55,8 +55,13 @@ public class TaskList {
         return taskList.get(index);
     }
 
-    public void changeTask(int index, Task task) {
-        this.taskList.set(index, task);
+    /**
+     * Changes the task at the specified index.
+     * @param index The index of the task that we wish to change.
+     * @param newTask The new task that is about to replace the old one.
+     */
+    public void changeTask(int index, Task newTask) {
+        this.taskList.set(index, newTask);
     }
 
     /**
@@ -77,6 +82,11 @@ public class TaskList {
         taskList.set(index, taskList.get(index).markDone());
     }
 
+    /**
+     * Changes the description of the task at the specified index.
+     * @param index The index of the task that we are wish to change the description of.
+     * @param newDesc The new description of the task.
+     */
     public void changeDescription(int index, String newDesc) {
         taskList.set(index, taskList.get(index).changeDesc(newDesc));
     }

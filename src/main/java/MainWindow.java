@@ -28,6 +28,10 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Sets up Duke for the chat interface.
+     * @param d Duke bot.
+     */
     public void setDuke(Duke d) {
         //Runs the welcome message in the chat GUI with the saved tasks
         dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(d.startUpMessage(), dukeImage));

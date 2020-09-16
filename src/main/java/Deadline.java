@@ -27,15 +27,30 @@ public class Deadline extends Task {
         this.dueTime = dueTime;
     }
 
+    /**
+     * Changes the description of a deadline task.
+     * @param newDesc The new description of the deadline task.
+     * @return Deadline A new deadline task that has the same state as before but different description.
+     */
     @Override
     public Deadline changeDesc(String newDesc) {
         return new Deadline(newDesc, this.dueDate, this.dueTime, this.isComplete);
     }
 
+    /**
+     * Changes the time of a deadline task.
+     * @param newTime The new time of the deadline task.
+     * @return Deadline A new deadline task that has the same state as before but different time.
+     */
     public Deadline changeTime(LocalTime newTime) {
         return new Deadline(this.description, this.dueDate, newTime, this.isComplete);
     }
 
+    /**
+     * Changes the date of a deadline task.
+     * @param newDate The new date of the deadline task.
+     * @return Deadline A new deadline task that has the same state as before but different date.
+     */
     public Deadline changeDate(LocalDate newDate) {
         return new Deadline(this.description, newDate, this.dueTime, this.isComplete);
     }

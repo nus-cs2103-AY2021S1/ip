@@ -71,6 +71,11 @@ public class Parser {
         return Arrays.copyOfRange(tokens, 1, tokens.length);
     }
 
+    /**
+     * Gets the type of update that the user requests based on their update command.
+     * @param input The user's input.
+     * @return String The update type the user is requesting for.
+     */
     public String getUpdateType(String input) {
         return getStringTokens(input)[1];
     }
@@ -140,8 +145,8 @@ public class Parser {
     }
 
     /**
-     * Processes the update that the user has input.
-     * @param input The user input which is suppose to match his update type.
+     * Checks if the user has correctly inputted the update that they have requested for.
+     * @param input The user's input.
      * @param updateType The update type that the user is initiating.
      * @return int The status of the update.
      * @throws InvalidCommandException If the input does not match the update type that the user is initiating.
@@ -255,14 +260,19 @@ public class Parser {
     }
 
     /**
-     * Checks if input is "bye" which is the terminating command
-     * @param input The user input.
+     * Checks if input is "bye" which is the terminating command.
+     * @param input The user's input.
      * @return boolean True if command is equals to "bye", returns false otherwise.
      */
     public boolean isTerminateCommand(String input) {
         return input.trim().equals("bye");
     }
 
+    /**
+     * Checks if input is "abort" which is terminates the update.
+     * @param input The user's input.
+     * @return boolean True if command equals to "abort", returns false otherwise.
+     */
     public boolean isAbortUpdate(String input) {
         return input.trim().equals("abort");
     }

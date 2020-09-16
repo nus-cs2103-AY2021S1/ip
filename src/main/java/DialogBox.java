@@ -38,6 +38,7 @@ public class DialogBox extends HBox {
 
         displayPicture.setClip(new Circle(50, 50, 50));
 
+        //Sets the user's dialog box of a different colour.
         if (isUser) {
             this.dialog.setStyle("-fx-background-color: #d4c69e;");
         }
@@ -54,10 +55,22 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Gets the user's dialog box with the user input and the user image.
+     * @param text The user's input message.
+     * @param img The user's image.
+     * @return DialogBox The user's dialog box.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img, true);
     }
 
+    /**
+     * Gets the duke's dialog box with duke's response and duke's image.
+     * @param text Duke's response.
+     * @param img Duke's image.
+     * @return DialogBox Duke's dialog box.
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img, false);
         db.flip();

@@ -49,6 +49,11 @@ public class Storage {
         return this.taskList.size();
     }
 
+    /**
+     * Gets the type of the task at the specifies index.
+     * @param index The index of the task that we want to get the type.
+     * @return String The type of the task.
+     */
     public String getTaskType(int index) {
         return this.taskList.getTask(index).getClass().getName();
     }
@@ -86,22 +91,50 @@ public class Storage {
         return this.taskList.getTask(index);
     }
 
-    public void replaceTask(int index, Task task) {
-        this.taskList.changeTask(index, task);
+    /**
+     * Replaces the task at the specified index with a new task.
+     * @param index The index of the task that we want to replace.
+     * @param newTask The new task that is going to replace the old task.
+     */
+    public void replaceTask(int index, Task newTask) {
+        this.taskList.changeTask(index, newTask);
     }
 
+    /**
+     * Changes the description of the task at the specified index.
+     * @param index The index of the task whose description we want to change.
+     * @param newDesc The new description of the task.
+     */
     public void changeDesc(int index, String newDesc) {
         this.taskList.changeDescription(index, newDesc);
     }
 
+    /**
+     * Changes the time of the task at the specified index.
+     * @param index The index of the task that we wish to change the time of.
+     * @param newTime The new time of the task.
+     */
     public void changeTime(int index, LocalTime newTime) {
         this.taskList.modifyTime(index, newTime);
     }
 
+    /**
+     * Changes the date of the task at the specified index.
+     * @param index The index of the task that we wish to change the date of.
+     * @param newDate The new date of the task.
+     */
     public void changeDate(int index, LocalDate newDate) {
         this.taskList.modifyDate(index, newDate);
     }
 
+    /**
+     * Saves all the tasks that the user currently has.
+     * @throws IOException If the file path does not exist.
+     */
+    public void save() throws IOException {
+        resetFile();
+        rewriteFile();
+    }
 
     private void resetFile() throws IOException {
         FileWriter fw = new FileWriter(this.filepath, false);
@@ -121,14 +154,5 @@ public class Storage {
         }
 
         bw.close();
-    }
-
-    /**
-     * Saves all the tasks that the user currently has.
-     * @throws IOException If the file path does not exist.
-     */
-    public void save() throws IOException {
-        resetFile();
-        rewriteFile();
     }
 }

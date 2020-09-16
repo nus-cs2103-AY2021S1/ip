@@ -1,7 +1,6 @@
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -35,7 +34,10 @@ public class Duke extends Application {
         this.ui = UI.getAccessTo(this.storage);
     }
 
-
+    /**
+     * Reads the greeting message by Duke bot and reads the current saved tasks.
+     * @return String The greeting message and the saved tasks.
+     */
     public String startUpMessage() {
         return this.ui.showStartMessage();
     }
@@ -99,25 +101,9 @@ public class Duke extends Application {
 
         //Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
-
     }
 
     /**
-     * Iteration 1:
-     * Creates a label with the specified text and adds it to the dialog container.
-     * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
-     */
-    private Label getDialogLabel(String text) {
-        // You will need to import `javafx.scene.control.Label`.
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
-    }
-
-    /**
-     * Iteration 2:
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
@@ -130,10 +116,10 @@ public class Duke extends Application {
         userInput.clear();
     }
 
-
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Gets Duke's response based on the user's input.
+     * @param input The user's input.
+     * @return String The response by Duke.
      */
     String getResponse(String input) {
         try {

@@ -62,7 +62,7 @@ Example:
 Find tasks which contains any of the keyword.
 
 Format: `find KEYWORD`
-* The search is case-insensitive.
+* The search is case-sensitive.
 * The full task will be searched 
 
 Examples: 
@@ -91,29 +91,29 @@ Examples:
 * `update desc 1` - updates the description of the task at index 1.
 * `update desc 4` - updates the description of the task at index 4.
 
-## Updating an event or a deadline's time: `update time`
+## Updating an event's or a deadline's time: `update time`
 Updates the time of an existing event or task with a deadline in the task list.
 
 Format: `update time INDEX`
 * Updates the time of the task at the specified `INDEX`. The index refers to the index number shown in the displayed task list.
-The index must be a **positive integer**.*
+The index must be a **positive integer**.
 
 Examples: 
 * `update time 1` - updates the time of the task at index 1.
 * `update time 4` - updates the time of the task at index 4.
 
-## Updating an event or a deadline's date: `update date`
+## Updating an event's or a deadline's date: `update date`
 Updates the date of an existing event or task with a deadline in the task list.
 
 Format: `update date INDEX`
 * Updates the date of the task at the specified `INDEX`. The index refers to the index number shown in the displayed task list.
-The index must be a **positive integer**.*
+The index must be a **positive integer**.
 
 Examples: 
 * `update date 1` - updates the date of the task at index 1.
 * `update date 4` - updates the date of the task at index 4.
 
-##Exiting the program and saving the program: `bye`
-Exits the program and saves all the changes made. 
+## Exiting the program and saving the program: `bye`
+Exits the program and saves all the changes made to task list. 
 
 Format: `bye`
