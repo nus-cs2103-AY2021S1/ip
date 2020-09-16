@@ -14,16 +14,7 @@
 1. `Double click` the jar file or enter `java -jar duke.jar` in console to run the program.
 1. The window shown above should appear.
 1. *Well done!* Now you can start using Duke!
-
-## Saving Task Data
-
-**3 Ways of Saving Task Data in Duke**
-
-* Click `Save` under `File` menu.
-* Choose `Yes` in Exit window.
-
-![GitHub Logo](docs/ExitWindow.png)
-* Use `bye` command to exit the application.
+1. Refer to the [User Guide](https://ma-yueran.github.io/ip/) for more information.
 
 ## Setting up in Intellij for Developers
 
