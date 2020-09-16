@@ -44,7 +44,7 @@ public class TaskList extends ArrayList<Task> {
             if (count != 1) {
                 builder.append('\n');
             }
-            builder.append(count++ + "." + task.toString());
+            builder.append(count++ + ". " + task.toString());
         }
         return builder.toString();
     }
