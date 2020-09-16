@@ -40,7 +40,7 @@ public class Ui {
                                 "5. conquer [NUMBER]: Marks the particular item on your scroll as DONE\n" +
                                     "6. delete [NUMBER]: Deletes the particular item from your scroll\n" +
                                         "7. find [KEYWORD]: Returns a list of relevant items on your scroll\n" +
-                                            "8. schedule [DATE in YYYY-MM-DD format]: Returns a list of items on this date\n" +
+                                            "8. schedule [DATE]: Returns a list of items on this date\n" +
                                                 "9. dismiss: This will be my cue to leave.\n";
         String ending = "Now, how may I serve you?\n";
         return greeting + commandList + ending;
@@ -104,6 +104,7 @@ public class Ui {
             return "Your scroll is currently empty, Your Majesty.";
         } 
         StringBuilder response = new StringBuilder();
+        response.append("Your scroll as requested, Your Majesty:\n");
         for (Task task : storedTasks) {
             response.append(String.format("%s.%s\n", storedTasks.indexOf(task) + 1, task));
         }
@@ -116,6 +117,7 @@ public class Ui {
             return "There doesn't seem to be any relevant writings, Your Majesty.";
         }
         StringBuilder response = new StringBuilder();
+        response.append("These are the relevant writings, Your Majesty:\n");
         for (Task task : relevantTasks) {
             response.append(String.format("%s.%s\n", relevantTasks.indexOf(task) + 1, task));
         }
@@ -132,6 +134,7 @@ public class Ui {
             return "You have no writings for this date, Your Majesty.";
         }
         StringBuilder response = new StringBuilder();
+        response.append("Here are the writings you requested, Your Majesty:\n");
         for (Task task : scheduledTasks) {
             response.append(String.format("%s.%s\n", scheduledTasks.indexOf(task) + 1, task));
         }
