@@ -67,7 +67,7 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
             </ScrollPane>
-            <ScrollPane prefHeight="37.0" prefWidth="540.0" vbarPolicy="NEVER" VBox.vgrow="ALWAYS">
+            <ScrollPane prefHeight="37.0" prefWidth="540.0" vbarPolicy="NEVER" VBox.vgrow="NEVER">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0">
                      <children>
