@@ -6,7 +6,7 @@ This is the user guide for JM's take on the CS2103T greenfield project _Duke_, a
 
 **Duke is best run with Java 11.**
 
-1. Download the jar file duke.jar.
+1. Download the jar file `duke.jar`.
 1. Move the jar file to a directory of your choice.
 1. Under the same directory, create a new folder and name it data.
 1. Double click on the jar file to run Duke. If the program does not open run it from the terminal with the command `java -jar duke.jar`.
@@ -35,3 +35,6 @@ Duke handles your tasks and reminds you of upcoming events/deadlines.
 1. **Reminder:** `reminder`  
    _Usage_: `reminder`  
    Lists upcoming tasks within the week.  
+1. **Exit:** `bye`  
+   _Usage_: `bye`  
+   Exits Duke and saves your list to the storage file in the data folder. **Duke will only save your tasks to the file if you exit with this command.**
