@@ -38,17 +38,13 @@ public class Ui {
      * Returns a string representation of greeting message.
      */
     public String printGreeting() {
-
-        String logo =
-                " ___         _                    \n"
-                        + "|  _ \\ _   _| |  ____   _____ _____ _____    __  ____\n"
-                        + "| | | |  |  |  | | / / _ \\|  __  |__  __|___    | / _ \\|  _  \\\n"
-                        + "| |_| |  |_|  |   <  __/| |   | |__||__ /    /_<  __/|     /\n"
-                        + "|___/ \\__,_|_|\\_\\___|| |  | |______|______|\\___||_|\\__\\ \n";
-
-        String s = "Hello from\n" + logo + "\n"
-                + "Hello! Dukenizer is back!\nWhat can I do for you?\n\n"
-                + "Type 'help' for more info!";
+        String s = "Hello! Dukenizer is back!\nWhat can I do for you?\n\n"
+                + "Some things you can do:\n"
+                + "1) list: see your task list!\n"
+                + "2) notes: see all your notes!\n"
+                + "3) todo <description>: add a new task!\n"
+                + "4) note <description>: add a new note!\n\n"
+                + "Type 'help' to see the full list of commands!";
 
         return s;
 
@@ -194,7 +190,7 @@ public class Ui {
      */
     public String printHelp() {
         String s = "List of commands:\n"
-                + "1) list\n-Lists the items in your task list.\n\n"
+                + "1) list -Lists the items in your task list.\n\n"
                 + "2) todo <description>\n-Adds a To-Do task with the description to your task list.\n\n"
                 + "3) deadline <description> /by <yyyy-MM-dd HH:mm>\n-Adds a task with a description "
                 + "and a deadline to your task list. E.g. deadline sample task 1 /by 2020-09-12 23:22\n\n"
@@ -203,9 +199,9 @@ public class Ui {
                 + "5) done <item number>\n-Marks the task at item number index in your task list as \"done\"\n\n"
                 + "6) delete <item number>\n-Deletes the task at item number index in your task list\n\n"
                 + "7) find <description>\n-Finds all tasks in your task list with the description search term\n\n"
-                + "8) note <description>\n-Adds a note with the description in Dukenizer. E.g. note i am 1.8m\n\n"
-                + "9) notes\n-Lists all your notes in Dukenizer.\n\n"
-                + "10) RemoveNote <note index>\n-Removes a note at the specified index in your note list\n\n";
+                + "8) note <description> -Adds a note with the description in Dukenizer. E.g. note i am 1.8m\n\n"
+                + "9) notes -Lists all your notes in Dukenizer.\n\n"
+                + "10) RemoveNote <note index>\n-Removes a note at the specified index in your note list\n";
 
 
         return s;

@@ -39,7 +39,8 @@ public class DialogBox extends HBox {
         if (isUser) {
             dialog.setStyle("-fx-background-color: #99CCFF; -fx-background-radius: 10;  -fx-padding: 10 10 10 10");
         } else {
-            dialog.setStyle("-fx-background-color: #f6db7f; -fx-background-radius: 10;  -fx-padding: 10 10 10 10");
+            dialog.setStyle("-fx-background-color: #f6db7f; -fx-background-radius: 10;  -fx-padding: 10 10 10 10;");
+
         }
         displayPicture.setImage(img);
     }

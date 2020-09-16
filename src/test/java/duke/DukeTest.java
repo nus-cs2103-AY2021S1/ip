@@ -104,16 +104,13 @@ public class DukeTest {
 
     @Test
     public void getGreetingTest() {
-        assertEquals("Hello from\n"
-                + " ___         _                    \n"
-                + "|  _ \\ _   _| |  ____   _____ _____ _____    __  ____\n"
-                + "| | | |  |  |  | | / / _ \\|  __  |__  __|___    | / _ \\|  _  \\\n"
-                + "| |_| |  |_|  |   <  __/| |   | |__||__ /    /_<  __/|     /\n"
-                + "|___/ \\__,_|_|\\_\\___|| |  | |______|______|\\___||_|\\__\\ \n"
-                + "\n"
-                + "Hello! Dukenizer is back!\n"
-                + "What can I do for you?\n\n"
-                + "Type 'help' for more info!", duke.getGreeting());
+        assertEquals("Hello! Dukenizer is back!\nWhat can I do for you?\n\n"
+                + "Some things you can do:\n"
+                + "1) list: see your task list!\n"
+                + "2) notes: see all your notes!\n"
+                + "3) todo <description>: add a new task!\n"
+                + "4) note <description>: add a new note!\n\n"
+                + "Type 'help' to see the full list of commands!", duke.getGreeting());
     }
 
 }
