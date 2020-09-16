@@ -21,18 +21,16 @@ public class Parser {
         assert (pieces[0] != null) : "Incorrect splitting.";
         if (command.equals("bye")) { // terminating command
             return ui.bye();
-        } else if (command.equals("Hi")) {
-            return ui.greet();
+        } else if (command.equals("help")) {
+            return ui.getHelp();
         } else if (command.equals("list")) { // listing command
             if (taskList.list.isEmpty()) {
                 return ui.emptyList();
             } else {
-                //return ui.returnAllTasks(taskList);
                 Storage storage = new Storage(filePath);
                 TaskList tasks;
                 String s = "";
                 try {
-                    //s = storage.load();
                     tasks = new TaskList(storage.load());
                     s = ui.returnAllTasks(tasks);
                 } catch (FileNotFoundException e) {
@@ -65,7 +63,6 @@ public class Parser {
                 } catch (NumberFormatException e) {
                     return ui.incorrectDoneFormat();
                 }
-
             }
         } else if (pieces[0].equals("delete")) { // delete command
             if (pieces.length == 1) {

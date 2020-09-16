@@ -10,6 +10,16 @@ public class Ui {
     private final PrintStream out;
     private static final String LINE_TOP =    "╭⋟───────────────────────────❀• *₊。❀°。─╮\n";
     private static final String LINE_BOTTOM = "╰──────────────────────────────────────⋞╯\n";
+    private static final String HELP = "Here are the list of commands that Marco understands:\n" +
+            "- help                                    [get a full list of commands and their usage]\n" +
+            "- bye                                     [say goodbye to Marco]\n" +
+            "- list                                    [list down all existing tasks in the task list]\n" +
+            "- done TASK_NUMBER                        [mark the task indexed at TASK_NUMBER as done]\n" +
+            "- find KEY_WORD                           [search for tasks contains KEY_WORD in description]\n" +
+            "- delete TASK_NUMBER                      [delete the task indexed at TASK_NUMBER]\n" +
+            "- todo DESCRIPTION                        [add a todo task with DESCRIPTION]\n" +
+            "- event DESCRIPTION /at YYYY-MM-DD        [add an event with DESCRIPTION at YYYY-MM-DD]\n" +
+            "- deadline DESCRIPTION /by YYYY-MM-DD     [add a deadline with DESCRIPTION at YYYY-MM-DD]\n";
 
 
 
@@ -50,6 +60,10 @@ public class Ui {
      */
     public String bye() {
         return LINE_TOP + BYE + LINE_BOTTOM;
+    }
+
+    public String getHelp() {
+        return this.HELP;
     }
 
     /**
