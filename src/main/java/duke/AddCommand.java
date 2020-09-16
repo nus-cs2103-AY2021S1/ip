@@ -56,7 +56,7 @@ public class AddCommand extends Command {
                 throw new DukeException("I don't get what you're saying :(");
             }
         } catch (DateTimeException | DukeException error) {
-            System.out.println("Please provide valid date and time");
+            System.out.println("Please provide valid date and time in the following format YYYY-MM-DD");
         }
         assert newTask != null : "Task cannot be null";
         taskList.addTask(newTask);

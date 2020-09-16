@@ -97,19 +97,29 @@ public class Ui {
 
     /**
      * Prints the message informing the user of the number of tasks in list.
-     * 
+     *
      * @param taskList tasklist of the user.
-     * @return 
+     * @return a String object of the number of tasks in list.
      */
     public String showTaskTotal(TaskList taskList) {
         int total = taskList.getSize();
         return ("You now have " + Integer.toString(total) + " task(s) in the list.");
     }
-    
+
+    /**
+     * Prints a message on current tasks that are not overdue.
+     *
+     * @return a String object of the current tasks that are not overdue.
+     */
     public String showNotOverdue() {
         return ("These are your current tasks:" + "\n");
     }
-    
+
+    /**
+     * Prints a message on current tasks that are overdue.
+     *
+     * @return a String object of the current tasks that are overdue.
+     */
     public String showOverdue() {
         return ("These are your overdue tasks:" + "\n");
     }

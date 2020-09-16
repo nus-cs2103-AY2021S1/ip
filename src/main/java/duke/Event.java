@@ -11,7 +11,7 @@ public class Event extends Task {
 
     /**
      * Constructor for a Event object
-     * 
+     *
      * @param description The description of the task;
      * @param at The timing of the task;
      */
@@ -22,7 +22,7 @@ public class Event extends Task {
 
     /**
      * Returns a string representation of a Event object to be stored in the storage.
-     * 
+     *
      * @return A String representing the code of the task stored in the storage.
      */
     @Override
@@ -33,7 +33,7 @@ public class Event extends Task {
 
     /**
      * Returns a string representation of a Event object.
-     * 
+     *
      * @return A String containing the description and completion status of the Event object.
      */
     @Override

@@ -4,14 +4,14 @@ package duke;
  * The Parser class deals with making sense of the user command.
  */
 public class Parser {
-    
-    public static Command start() {
+
+    public static Command giveReminders() {
         return new ReminderCommand();
     }
 
     /**
      * Reads the user input and determines which command to execute.
-     * 
+     *
      * @param command User input.
      * @return Command The type of command to execute.
      * @throws DukeException
@@ -22,7 +22,7 @@ public class Parser {
         } else if (command.equals("list")) {
             return new ListCommand();
         } else if (command.matches("^done\\s+\\d+$")) {
-            int number = Integer.parseInt(command.split("\\s+")[1]);
+            int number = Integer.parseInt(command.split("\\s+")[1]) - 1;
             return new CompleteCommand(number);
         } else if (command.equals("todo") || command.startsWith("todo ")) {
             if (command.length() <= 5 || command.substring(5).trim().isEmpty()) {
@@ -63,4 +63,3 @@ public class Parser {
         }
     }
 }
-    

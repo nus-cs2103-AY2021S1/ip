@@ -1,7 +1,7 @@
 package duke;
 
 /**
- * Represents a command to exit.
+ * Represents a command to exit Duke.
  */
 public class ExitCommand extends Command {
     

@@ -23,8 +23,8 @@ public abstract class Command {
      * @param ui The Ui instance responsible for interacting with the user.
      * @param storage The storage instance responsible for loading and storing the tasks.
      * @return String representation of the response of Duke.
-     * @throws DukeException
-     * @throws IOException
+     * @throws DukeException If command is invalid.
+     * @throws IOException If tasks cannot be saved.
      */
     public abstract String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException, IOException;
 }

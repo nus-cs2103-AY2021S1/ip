@@ -3,13 +3,7 @@ package duke;
 import java.io.IOException;
 
 /**
- * The Duke program represents a person assistant
- * chatbot that helps the user manage tasks and store them
- * in a list according to the user input.
- * 
- * @author York Tat
- * @version 1.0
- * @since 2020-08-14
+ * Represents the driver class to run Duke.
  */
 public class Duke {
     
@@ -17,13 +11,10 @@ public class Duke {
     private TaskList taskList;
     private Ui ui;
     
-    public Duke() {
-    }
-
     /**
-     * Creates a new Duke chatbot that saves and loads tasks from the given filePath
-     * 
-     * @param filePath
+     * Creates a new Duke chatbot that saves and loads tasks from the given filePath.
+     *
+     * @param filePath The file path for the storage.
      */
     public Duke(String filePath) {
         this.ui = new Ui();
@@ -35,16 +26,26 @@ public class Duke {
             this.taskList = new TaskList();
         }
     }
-    
+
+    /**
+     * Returns a String representation of all the reminders.
+     *
+     * @return The reminders of the user.
+     * @throws IOException if file is not laoded properly.
+     * @throws DukeException if reminder command is not executed properly.
+     */
     public String giveReminders() throws IOException, DukeException {
-        Command start = Parser.start();
+        Command start = Parser.giveReminders();
         return start.execute(taskList, ui, store);
     }
-    
+
     /**
-     * Runs the chatbot until an exit command is issued.
+     * Returns a String respresentation of the response of Duke.
+     *
+     * @param input The user input message.
+     * @return The response of Duke.
      */
-    public String run(String input) {
+    public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
             assert !c.equals("") : "Command cannot be empty";
@@ -53,16 +54,15 @@ public class Duke {
             return ui.showError(e.getMessage());
         }
     }
-    
-    public String showWelcomeMessage() throws DukeException, IOException {
-        try {
-            return this.ui.greetUser() + "\n" + giveReminders();
-        } catch (DukeException | IOException e) {
-            return e.getMessage();
-        }
-    }
-    
-    public String getResponse(String input) {
-        return run(input);
+
+    /**
+     * Greets the user with a welcome message.
+     * 
+     * @return A welcome message with reminders.
+     * @throws IOException if file is not laoded properly.
+     * @throws DukeException if reminder command is not executed properly.
+     */
+    public String showWelcomeMessage() throws IOException, DukeException {
+        return this.ui.greetUser() + "\n" + giveReminders();
     }
 }

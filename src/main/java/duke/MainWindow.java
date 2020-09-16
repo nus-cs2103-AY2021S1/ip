@@ -1,5 +1,6 @@
 package duke;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -28,11 +29,19 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/bo-chan.png"));
 
+    /**
+     * Initialises the main window.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Sets up Duke.
+     *
+     * @param d The Duke object.
+     */
     public void setDuke(Duke d) {
         duke = d;
     }
@@ -50,16 +59,21 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
-    }
-    
-    public void showWelcomeMessage() throws IOException, DukeException {
-        try {
-            String message = duke.showWelcomeMessage();
-            dialogContainer.getChildren().add(
-                    DialogBox.getDukeDialog(message, dukeImage)
-            );
-        } catch (DukeException | IOException e) {
-            System.out.println(e.getMessage());
+        if (input.equals("bye")) {
+            Platform.exit();
         }
+    }
+
+    /**
+     * Greets the user with a welcome message.
+     *
+     * @throws IOException if tasks are not loaded properly.
+     * @throws DukeException if command is not executed properly.
+     */
+    public void showWelcomeMessage() throws IOException, DukeException {
+        String message = duke.showWelcomeMessage();
+        dialogContainer.getChildren().add(
+                DialogBox.getDukeDialog(message, dukeImage)
+        );
     }
 }
