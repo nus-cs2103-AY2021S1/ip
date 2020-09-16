@@ -41,13 +41,12 @@ public class Response {
      * 
      * @param tasks The list of the tasks in the list.
      */
-    public Response(Task[] tasks) {
+    public Response(Task[] tasks, Tag tag) {
         this.tasks = tasks;
-        this.tag = Tag.LIST;
+        this.tag = tag;
     }
 
     public String getResponse() {
-        String line = "    __________________________________________________________ \n";
         String linesOfText = "";
         if (this.tag == Tag.LIST) {
             for (int i = 0; i < this.tasks.length; i++) {
@@ -74,12 +73,17 @@ public class Response {
                         + String.format("Now you have %d tasks in the list. \n", numOfTasks);
             }
         } else if (this.tag == Tag.FIND ) {
-            for (int i = 0; i < this.tasks.length; i++) {
+            try {
                 linesOfText += "     "
-                        + "Here are the matching tasks in your list: \n"
-                        + "       "
-                        + this.tasks[i]
-                        + "\n";
+                        + "Here are the matching tasks in your list: \n";
+                for (int i = 0; i < this.tasks.length; i++) {
+                    linesOfText += "       "
+                            + this.tasks[i]
+                            + "\n";
+                }
+            } catch (NullPointerException e) {
+                Response msg = new Response(new String[]{"There is no matching tasks!"});
+                System.out.println(msg.getResponse());
             }
         } else {
             for (int i = 0; i < this.texts.length; i++) {
@@ -87,7 +91,7 @@ public class Response {
                         + this.texts[i] + "\n";
             }
         }
-        String output = line + linesOfText + line;
+        String output = linesOfText;
         return output;
     }
 }

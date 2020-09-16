@@ -28,7 +28,7 @@ public class Event extends Task {
         } else {
             done = "✗";
         }
-        return String.format("E | %s | %s", done, this.description, this.time);
+        return String.format("E | %s | %s | %s", done, this.description, this.time);
     }
 
     /**
