@@ -1,2 +1,1 @@
-[D][✘] return book (by: Sep 01 2020)
-[E][✘] project meeting (at: Sep 01 2020)
+[T][✘] read book
