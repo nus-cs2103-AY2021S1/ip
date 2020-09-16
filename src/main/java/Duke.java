@@ -29,9 +29,9 @@ import javafx.scene.image.ImageView;
  * who can manage simple tasks for users.
  */
 public class Duke extends Application {
-    private Storage storage;
-    private TaskList tasks;
-    private Ui ui;
+    protected Storage storage;
+    protected TaskList tasks;
+    protected Ui ui;
 
     private ScrollPane scrollPane;
     private VBox dialogContainer;
@@ -150,7 +150,7 @@ public class Duke extends Application {
 
         //Display welcome messages when the user opens the chat bot.
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(new Label(new Ui().greet()), new ImageView(marco)));
+                DialogBox.getDukeDialog(new Ui().greet(), marco));
 
         //Handle user input sent by clicking.
         sendButton.setOnMouseClicked((event) -> {
@@ -169,16 +169,14 @@ public class Duke extends Application {
      * the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() {
-
-
         Duke testBot = new Duke("data/tasks.txt");
         String formattedInput = LINE_TOP + "                     "
                               + userInput.getText() + '\n' + LINE_BOTTOM;
         Label userText = new Label(formattedInput);
         Label dukeText = new Label(getResponse(userInput.getText(),testBot));
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new ImageView(k)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(marco))
+                DialogBox.getUserDialog(formattedInput, k),
+                DialogBox.getDukeDialog(getResponse(userInput.getText(),testBot), marco)
         );
         userInput.clear();
     }
