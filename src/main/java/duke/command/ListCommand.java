@@ -1,3 +1,5 @@
+package duke.command;
+
 public class ListCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.listTasks(tasks);

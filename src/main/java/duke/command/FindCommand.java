@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+package duke.command;
 
 public class FindCommand extends Command {
     private String keyword;
