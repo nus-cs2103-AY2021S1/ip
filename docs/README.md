@@ -3,7 +3,7 @@
 
 1. [**Introduction**](Introduction)
 2. [**Quick Start**](Quick Start)
-3. [**Features**](Features)
+3. [**Features**](#Features)
     1. [Listing all tasks: `list`](Listing all tasks: `list`)
     2. [Adding a task: `add`](Adding a task: `add`)
     3. [Marking a task as done: `done`](Marking a task as done: `done`)
@@ -74,7 +74,7 @@ Adding a Deadline Task
 
 Mark the task to be done.
 
-:warning: You mark a task to be undone.
+:warning: You cannot mark a task to be undone.
 
 Format: `done <task number>`
 
