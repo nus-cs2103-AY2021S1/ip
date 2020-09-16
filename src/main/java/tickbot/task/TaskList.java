@@ -67,6 +67,12 @@ public class TaskList {
         return true;
     }
 
+    /**
+     * Add tags to a task.
+     * <p> The data storage would be updated. </p>
+     * @param index The index of the task to add tags.
+     * @param tags The tags to be added.
+     */
     public void addTags(int index, String[] tags) {
         Task task = tasks.get(index);
         for (String tag : tags) {

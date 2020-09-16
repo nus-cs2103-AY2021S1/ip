@@ -106,10 +106,9 @@ public class GraphicsUi extends Application implements Ui {
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
         scrollPane.setVvalue(1.0);
         scrollPane.setFitToWidth(true);
-        String scrollPaneStyle = 
-                "-fx-border-color: grey;" +
-                "-fx-focus-color: transparent;" +
-                "-fx-faint-focus-color: transparent;";
+        String scrollPaneStyle = "-fx-border-color: grey;"
+                + "-fx-focus-color: transparent;"
+                + "-fx-faint-focus-color: transparent;";
         scrollPane.setStyle(scrollPaneStyle);
         // dialog container styles
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
@@ -119,8 +118,7 @@ public class GraphicsUi extends Application implements Ui {
         sendButton.setStyle(sendButtonStyle);
         // user input styles
         userInput.setPrefSize(340.0, 40.0);
-        String userInputStyle = 
-                "-fx-border-color: grey;"
+        String userInputStyle = "-fx-border-color: grey;"
               + "-fx-focus-color: transparent;"
               + "-fx-faint-focus-color: transparent;";
         userInput.setStyle(userInputStyle);
