@@ -71,7 +71,7 @@ https://www.oracle.com/technetwork/java/javase/downloads/jdk11-downloads-5066655
    
    
 ### `deadline`
-Deadline is a task with description, a completion status, a reminder status and a date. Note that the date format must follow either `yyyy/mm/dd HH:mm` or `yyyy/mm/dd`. By default reminder status is set to false and could only be activated/deactivated using the `remind` command.
+Deadline is a task with description, a completion status, a reminder status and a date. Note that the date format must follow either `yyyy-mm-dd HH:mm` or `yyyy-mm-dd`. By default reminder status is set to false and could only be activated/deactivated using the `remind` command.
 
 Format:
 `deadline DESCRIPTION /by DATE`
@@ -88,7 +88,7 @@ Now you have <Int> tasks in the list.
 ```
 
 ### `event`
-Event is a task with description, a completion status, a reminder status and a date. Note that the date format must follow either `yyyy/mm/dd HH:mm` or `yyyy/mm/dd`. By default reminder status is set to false and could only be activated/deactivated using the `remind` command.
+Event is a task with description, a completion status, a reminder status and a date. Note that the date format must follow either `yyyy-mm-dd HH:mm` or `yyyy-mm-dd`. By default reminder status is set to false and could only be activated/deactivated using the `remind` command.
 
 Format:
 `event DESCRIPTION /at DATE`
