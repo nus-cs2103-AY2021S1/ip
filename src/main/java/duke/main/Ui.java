@@ -159,7 +159,11 @@ public class Ui {
             String taskDetailWithLineBreak = addLineBreak(taskDetail);
             message = message + indentMessage(taskNumber + "." + taskDetailWithLineBreak);
         }
-        return message;
+        if (numOfTasks == 0) {
+            return "Your task list is empty";
+        } else {
+            return message;
+        }
     }
 
     /**

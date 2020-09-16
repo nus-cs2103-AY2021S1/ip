@@ -20,6 +20,7 @@ public class Duke {
      * hard disk and a task list object being created after the saved task list file is saved.
      * If the directory to the saved task list file is not found, an IOException error will be raised
      * and caught.
+     *
      * @param fileName Name of the saved task list file.
      */
     public Duke(String fileName) {
@@ -50,6 +51,7 @@ public class Duke {
 
     /**
      * Gets the Duke's response with with respect to user's input.
+     *
      * @param userInput The input from the user.
      * @return Duke's response to be displayed through the GUI.
      */
@@ -57,6 +59,7 @@ public class Duke {
         StringBuilder response = new StringBuilder();
         try {
             String command = Parser.getCommand(userInput);
+            storage.formTaskList();
             if (command.equals("bye")) {
                 Processor.handleByeCommand(response, ui);
             } else if (command.equals("list")) {
@@ -81,6 +84,9 @@ public class Duke {
             storage.writeTasks(tasks);
         } catch (DukeException error) {
             String errorMessage = error.toString();
+            response.append(errorMessage);
+        } catch (IOException err) {
+            String errorMessage = err.getMessage();
             response.append(errorMessage);
         } finally {
             return response.toString();

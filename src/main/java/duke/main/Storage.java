@@ -71,10 +71,10 @@ public class Storage {
         File file = new File(this.storagePath);
         if (!folder.exists()) {
             folder.mkdirs();
-            throw new IOException("Folder data does not exist");
+            throw new IOException("Folder data does not exist! Please restart the program!");
         } else if (folder.exists() && !file.isFile()) {
             file.createNewFile();
-            throw new IOException("duke.txt does not exist");
+            throw new IOException("duke.txt does not exist! Please restart the program!");
         }
         Scanner sc = new Scanner(file);
         List<String> tasks = new ArrayList<>();
