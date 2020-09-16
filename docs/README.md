@@ -66,7 +66,7 @@ Example of usage:
 `clear list`  
 ## Releases
 <u><strong> Updated UI v1.2 on 14/09/2020: </strong></u>
-![GUI v1.2](Ui.PNG)
+![GUI v1.2](Ui.png)
 <u><strong> Updated UI v1.1 on 05/09/2020: </strong></u>
 ![GUI v1.1](../data/images/ui%20v1.1.PNG)
 ![GUI v1.1](../data/images/ui%20v1.1_2%20PNG.PNG)
