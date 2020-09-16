@@ -109,7 +109,7 @@ Example of usage:
 
 Expected outcome:
 
-`The following task has been marked as done: 1. [D][X] Prepare for CS2103 exam (by: 20 Oct 2020 12:00PM)`
+`The following task has been marked as done: 1. [D][✓] Prepare for CS2103 exam (by: 20 Oct 2020 12:00PM)`
 
 ---
 
