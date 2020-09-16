@@ -210,7 +210,7 @@ public class Command {
         String taskType = inputSplitByWhiteSpace[0];
         Keyword taskTypeEnum = Keyword.valueOf(taskType.toUpperCase());
         if (inputSplitByWhiteSpace.length <= 1) {
-            throw new EmptyTaskException("☹ OOPS!!! The description of a " + taskType + " cannot "
+            throw new EmptyTaskException("\u2639 OOPS!!! The description of a " + taskType + " cannot "
                     + "be empty.");
         } else {
             switch (taskTypeEnum) {
