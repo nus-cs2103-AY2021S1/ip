@@ -1,3 +1,5 @@
 D | 0 | read book | Dec 20 2020 8:20 PM
 D | 0 | loooooooooong task | Dec 20 2020 8:20 PM
 E | 0 | loooooooooooooooong event | Dec 20 2020 8:20 PM
+T | 0 | loooooooooooong todo
+T | 0 | nfjwfnwjkfnkfnjknajklnfjwahaijafjkdslafjksldfjkdslfjkdfjkwl
