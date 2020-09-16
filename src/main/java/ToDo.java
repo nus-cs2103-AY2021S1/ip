@@ -59,6 +59,6 @@ public class ToDo extends Listing {
     @Override
     public String toString() {
         return this.tags.isEmpty() ? "[T]" + super.doneness() + this.title
-                : "[T]" + super.doneness() + this.title + " tags:" + this.tags.toString();
+                : "[T]" + super.doneness() + this.title + "\n        tags:" + this.tags.toString();
     }
 }

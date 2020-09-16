@@ -1,6 +1,6 @@
-T | 1 |  a | a, happy
-T | 1 |  b | 
-D | 1 |  c | 2012-02-02 | 
-E | 1 |  d | 2 | 
-D | 0 |  e | 2012-02-02 | check
-E | 0 |  f | 3 | check
+T | 1 |  CS3243 Assignment | CS3243, Difficult
+T | 1 |  CS3230 Project | CS3230
+D | 0 |  Finish CS2103 Homework | 2020-09-16 | CS2103
+E | 1 |  Maplestory Event | 9pm | 
+D | 0 |  Submit CS2100 Assignment | 2020-09-20 | CS2100
+E | 0 |  News | 10pm | Family

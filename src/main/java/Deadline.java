@@ -73,7 +73,7 @@ public class Deadline extends Listing {
         return this.tags.isEmpty() ? "[D]" + super.doneness() + this.title + " (by:"
                 + deadLine.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")"
                 : "[D]" + super.doneness() + this.title + " (by:"
-                + deadLine.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")" + " tags:" + this.tags;
+                + deadLine.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")" + "\n        tags:" + this.tags;
     }
 
 }
