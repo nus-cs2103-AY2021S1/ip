@@ -17,7 +17,8 @@
         <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="557.0" prefWidth="500.0"
                     vvalue="1.0">
             <content>
-                <VBox fx:id="dialogContainer" prefHeight="552.0" prefWidth="488.0" />
+                <VBox fx:id="dialogContainer" prefHeight="552.0" prefWidth="488.0"
+                      style="-fx-background-color: #dda0dd"/>
             </content>
         </ScrollPane>
     </children>
