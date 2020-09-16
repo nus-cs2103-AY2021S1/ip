@@ -1,44 +1,26 @@
-# Dutch Task Tracker
+# Duke project template
 
-Dutch Task Tracker is a task tracking application (as the name implies). It was made for the iP part of CS2103 at NUS. 
-With this application, one can track different kinds of tasks and their deadlines. It was named after the character "Dutch van der Linde" from 
-the video game "Red Dead Redemption 2".
+This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
 
-## User Guide
-### Adding tasks
-There are 3 kinds of tasks that can be added. The command syntax is also shown below.
-1. Todo: todo **taskDescription**
-2. Events: event **taskDescription** /at **date** 
-3. Deadlines: deadline **taskDescription** /by **date**
-  
-Take note that the **date** has to be in YYYY-MM-DD format.
-   
-The application will then return a confirmation message if the task was added successfully, and an error message if some part of the command was wrong.
+## Setting up in Intellij
 
-### Listing tasks
-The syntax for listing all currently stored tasks: list
+Prerequisites: JDK 11, update Intellij to the most recent version.
 
-The application will then list all currently stored tasks, as well as its index number.
-
-### Deleting tasks
-The syntax for deletion is as follows: delete **taskIndex**
-   
-The **taskIndex** refers the number attached to the task when "list" is used.
-
-### Tagging tasks
-The syntax for tagging is as follows: tag **taskIndex** **tagDescription**
-
-The **taskIndex** refers the number attached to the task when "list" is used.
-
-The **tagDescription** should be a string with not spaces within.
-
-### Find tasks
-The syntax for searching is as follows: find **searchTerm**
-
-The application will then list all the tasks that contain the search term fully. For dates, the input has be in DD-MMM-YYYY format.
-The search is not case-sensitive.
-
-### Saving and exiting
-The syntax for exiting is as follows: bye
-
-This will save your current task list into a .txt file and exit the applicaiton.
+1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project dialog first)
+1. Set up the correct JDK version, as follows:
+   1. Click `Configure` > `Structure for New Projects` and then `Project Settings` > `Project` > `Project SDK`
+   1. If JDK 11 is listed in the drop down, select it. If it is not, click `New...` and select the directory where you installed JDK 11
+   1. Click `OK`
+1. Import the project into Intellij as follows:
+   1. Click `Open or Import`.
+   1. Select the project directory, and click `OK`
+   1. If there are any further prompts, accept the defaults.
+1. After the importing is complete, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()`. If the setup is correct, you should see something like the below:
+   ```
+   Hello from
+    ____        _        
+   |  _ \ _   _| | _____ 
+   | | | | | | | |/ / _ \
+   | |_| | |_| |   <  __/
+   |____/ \__,_|_|\_\___|
+   ```
