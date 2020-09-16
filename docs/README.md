@@ -57,6 +57,11 @@ https://www.oracle.com/technetwork/java/javase/downloads/jdk11-downloads-5066655
 * Exit and save the data _e.g._ `bye`
 * Case-insensitive commands allowed _e.g._ `TODO`, `EveNT`
 * Platform compatibility with Windows, MacOS, Linux
+* Responsive ui
+* Informative responses when encountered wrong commands.
+* Prevents duplicated tasks.
+
+
 
 ## Usage
 
