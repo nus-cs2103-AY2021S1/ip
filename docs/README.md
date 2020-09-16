@@ -20,7 +20,7 @@ Expected outcome:
 
 ---
 
-### Feature 2
+### Feature 2:
 Add todo task, deadline task or event task.
 
 #### Usage
@@ -62,7 +62,7 @@ Expected outcome:
 
 ---
 
-### Feature 3
+### Feature 3:
 List all current tasks
 
 #### Usage
@@ -96,7 +96,7 @@ Expected outcome:
 
 ---
 
-### Feature 4:
+### Feature 5:
 Mark task as done
 
 #### Usage
@@ -113,7 +113,7 @@ Expected outcome:
 
 ---
 
-### Feature 4:
+### Feature 6:
 Tag task with one tag
 
 #### Usage
@@ -130,7 +130,7 @@ Expected outcome:
 
 ---
 
-### Feature 5:
+### Feature 7:
 Delete tag from task
 
 #### Usage
@@ -147,7 +147,7 @@ Expected outcome:
 
 ---
 
-### Feature 6:
+### Feature 8:
 Find tasks based on query
 
 #### Usage
@@ -164,7 +164,7 @@ Expected outcome:
 
 ---
 
-### Feature 6:
+### Feature 9:
 Exit application
 
 #### Usage
