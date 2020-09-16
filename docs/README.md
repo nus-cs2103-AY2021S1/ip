@@ -25,7 +25,7 @@ can type fast, Dukenizer can neatly organize your tasks and notes faster than tr
     * [Exiting the program: `bye`](#exiting-the-program-bye)
 * [Command summary](#command-summary)
 
-##Quick start 
+## Quick start 
 1. Ensure that you have Java 11 installed on your computer
 
 2. Download the latest `duke.jar` from [here]().
