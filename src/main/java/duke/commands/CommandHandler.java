@@ -28,6 +28,8 @@ public class CommandHandler {
             return new DeleteCommand();
         case "/find":
             return new FindCommand();
+        case "/cancel":
+            return new CancelCommand();
         default:
             return new ErrorCommand();
         }
