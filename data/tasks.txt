@@ -1,3 +1,0 @@
-D | 1 | CS2100 Assignment | Sep 18 2020 12:00 PM
-E | 1 | LeetCode and Chill | Sep 21 2020 9:00 PM
-T | 0 | Read 'Lord of the Rings'
