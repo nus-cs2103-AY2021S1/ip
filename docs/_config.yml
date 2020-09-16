@@ -1,1 +1,5 @@
 theme: jekyll-theme-minimal
+title: Opus
+description: A desktop application to simplify your task management needs.
+logo: ./Icon.png
+show_downloads: "true"
