@@ -6,7 +6,7 @@ import java.time.LocalTime;
 /**
  * Supports the creation of duke.task.Deadline objects.
  */
-public class Deadline extends Task{
+public class Deadline extends Task {
     protected LocalDate date;
     protected LocalTime time;
 
@@ -47,7 +47,7 @@ public class Deadline extends Task{
 
     @Override
     public String buildSaveString() {
-        return super.buildSaveString() + "/"  + this.date + " " + this.time;
+        return super.buildSaveString() + "/" + this.date + " " + this.time;
     }
 
     /**
@@ -59,6 +59,7 @@ public class Deadline extends Task{
     public String toString() {
         return "[Deadline]"
                 + super.toString() + " "
-                + "(by: " + this.date + " " + this.time + ")";
+                + "(by: " + this.date + " " + this.time + ") "
+                + "Priority: " + super.getPriorityLevel();
     }
 }

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import duke.task.PriorityLevel;
 import duke.task.Task;
 
 /**
@@ -88,5 +89,9 @@ public class TaskList {
      */
     public boolean isEmpty() {
         return tasks.isEmpty();
+    }
+
+    public void setTaskPriorityLevel(int i, PriorityLevel priorityLevel) {
+        tasks.get(i).setPriorityLevel(priorityLevel);
     }
 }

@@ -11,11 +11,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.TaskType;
-import duke.task.Todo;
+import duke.task.*;
 
 public class Storage {
     protected String filepath;
@@ -67,9 +63,13 @@ public class Storage {
         String taskType = taskStringSplit[0];
         String doneStatus = taskStringSplit[1];
         boolean isDone = doneStatus.equals("1") ? true : false;
-        String info = taskStringSplit[2];
+        String priority = taskStringSplit[2];
+        PriorityLevel priorityLevel = getPriorityLevel(priority);
+        String info = taskStringSplit[3];
         if (taskType.equals("T")) {
-            return new Todo(info, TaskType.TODO, isDone);
+            Todo todo = new Todo(info, TaskType.TODO, isDone);
+            todo.setPriorityLevel(priorityLevel);
+            return todo;
         } else {
             String[] infoSplit = info.split("/");
             String description = infoSplit[0];
@@ -77,12 +77,16 @@ public class Storage {
             LocalDate date = LocalDate.parse(dateAndTimeSplit[0]);
             if (taskType.equals("D")) {
                 LocalTime time = LocalTime.parse(dateAndTimeSplit[1]);
-                return new Deadline(description, TaskType.DEADLINE, isDone, date, time);
+                Deadline deadline = new Deadline(description, TaskType.DEADLINE, isDone, date, time);
+                deadline.setPriorityLevel(priorityLevel);
+                return deadline;
             } else {
                 String[] timePeriod = dateAndTimeSplit[1].split("-");
                 LocalTime timeStart = LocalTime.parse(timePeriod[0]);
                 LocalTime timeEnd = LocalTime.parse(timePeriod[1]);
-                return new Event(description, TaskType.EVENT, isDone, date, timeStart, timeEnd);
+                Event event = new Event(description, TaskType.EVENT, isDone, date, timeStart, timeEnd);
+                event.setPriorityLevel(priorityLevel);
+                return event;
             }
         }
     }
@@ -94,5 +98,17 @@ public class Storage {
             tasks.add(task);
         }
         return tasks;
+    }
+
+    public static PriorityLevel getPriorityLevel(String priority) {
+        if (priority.equals("H")) {
+            return PriorityLevel.HIGH;
+        } else if (priority.equals("M")) {
+            return PriorityLevel.MEDIUM;
+        } else if (priority.equals("L")) {
+            return PriorityLevel.LOW;
+        } else {
+            return PriorityLevel.UNDEFINED;
+        }
     }
 }
