@@ -1,6 +1,7 @@
 # User Interface
-![GitHub Logo](/Ui.png)
-Format: ![Alt Text](url)
+<p align="center"><img width="100%" src="Ui.png"/></p>
+
+
 # User Guide
 The duke bot is a desktop app for managing task, optimized for use via a Command Line Interface (CLI). If you can type fast, duke bot can track your tasks faster than traditional GUI apps. 
 ## Table of contents
@@ -22,7 +23,7 @@ The duke bot is a desktop app for managing task, optimized for use via a Command
 ## Quick Start
 1. Ensure you have Java 11 or above installed in your Computer.
 
-2. Download the latest duke.jar from here.
+2. Download the latest duke.jar from [here](url).
 
 3. Copy the file to the folder you want to use as the home folder for your duke bot.
 
