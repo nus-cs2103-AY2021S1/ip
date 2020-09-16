@@ -2,29 +2,21 @@
 
 ## Features: A summary of Jarvis's commands
 
-### help
-Tells you all the available commands. 
+### Add a Task
+Add task that is to be completed into Jarvis
 
-### todo 
-add a task 
+### Delete a Task 
+Delete a completed task
 
-### deadline
-add a task with a specific deadline
+### Find a Task
+Look up an existing task
 
-### weekly 
-add a task that is recurring weekly
+### Indicate a finished Task
+Nark completed task as finished
 
-### delete 
-used to delete a weekly task. A new weekly task will then be generated for the next week.
+### Recurring task
+Set up tasks that are to be repeated weekly
 
-### remove
-used to permanently remove a task. 
-
-### list
-view all the task you have
-
-### find
-used to find a task
 
 ## Usage
 
