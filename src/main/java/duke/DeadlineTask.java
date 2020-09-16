@@ -1,8 +1,10 @@
 package duke;
 
 import java.util.Date;
+
 public class DeadlineTask extends Task {
-    private Date time;
+    private final Date time;
+
     public DeadlineTask(
             Boolean isDone,
             String name,

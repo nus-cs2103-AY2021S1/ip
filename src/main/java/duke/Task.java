@@ -2,7 +2,7 @@ package duke;
 
 public class Task implements java.io.Serializable {
     private Boolean isDone; // Whether a task is complete
-    private String name; // The task name
+    private final String name; // The task name
 
     public Task(Boolean isDone, String name) {
         this.isDone = isDone;

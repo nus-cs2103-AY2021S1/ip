@@ -1,11 +1,8 @@
 package duke;
 
-import java.io.StreamCorruptedException;
 import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.Date;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Parser {
     public static Integer parseInt(String str) {

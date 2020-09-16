@@ -1,6 +1,5 @@
 package duke;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class FindCommand implements Command {
@@ -16,7 +15,7 @@ public class FindCommand implements Command {
         String taskStrings = "";
         for (Task task : Tasks) {
             taskStrings += "\n" + task.toString();
-        };
+        }
         return taskStrings;
     }
 }

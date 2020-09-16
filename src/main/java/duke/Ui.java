@@ -6,9 +6,9 @@ import java.util.Scanner;
  * Implements User interface
  */
 public class Ui {
-    private Storage store;
-    private TaskList tasks;
-    private Scanner reader;
+    private final Storage store;
+    private final TaskList tasks;
+    private final Scanner reader;
 
     /**
      * Initialize personal assistant with a store for user input

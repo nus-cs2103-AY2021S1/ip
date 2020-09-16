@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class EventTask extends Task {
     Date time;
+
     public EventTask(
             Boolean isDone,
             String name,

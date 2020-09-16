@@ -1,15 +1,15 @@
 package duke;
 
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.layout.Region;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -23,10 +23,45 @@ public class Duke extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private final Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private final Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     private Ui ui;
+
+    public static void main(String[] args) {
+        String welcomeGraphic = "                      .,,uod8B8bou,,.\n" +
+                "              ..,uod8BBBBBBBBBBBBBBBBRPFT?l!i:.\n" +
+                "         ,=m8BBBBBBBBBBBBBBBRPFT?!||||||||||||||\n" +
+                "         !...:!TVBBBRPFT||||||||||!!^^\"\"'   ||||\n" +
+                "         !.......:!?|||||!!^^\"\"'            ||||\n" +
+                "         !.........||||                     ||||\n" +
+                "         !.........||||       Welcome!      ||||\n" +
+                "         !.........||||                     ||||\n" +
+                "         !.........||||      I am your      ||||\n" +
+                "         !.........||||  personal assistant ||||\n" +
+                "         !.........||||       Zachary       ||||\n" +
+                "         `.........||||                    ,||||\n" +
+                "          .;.......||||               _.-!!|||||\n" +
+                "   .,uodWBBBBb.....||||       _.-!!|||||||||!:'\n" +
+                "!YBBBBBBBBBBBBBBb..!|||:..-!!|||||||!iof68BBBBBb....\n" +
+                "!..YBBBBBBBBBBBBBBb!!||||||||!iof68BBBBBBRPFT?!::   `.\n" +
+                "!....YBBBBBBBBBBBBBBbaaitf68BBBBBBRPFT?!:::::::::     `.\n" +
+                "!......YBBBBBBBBBBBBBBBBBBBRPFT?!::::::;:!^\"`;:::       `.\n" +
+                "!........YBBBBBBBBBBRPFT?!::::::::::^''...::::::;         iBBbo.\n" +
+                "`..........YBRPFT?!::::::::::::::::::::::::;iof68bo.      WBBBBbo.\n" +
+                "  `..........:::::::::::::::::::::::;iof688888888888b.     `YBBBP^'\n" +
+                "    `........::::::::::::::::;iof688888888888888888888b.     `\n" +
+                "      `......:::::::::;iof688888888888888888888888888888b.\n" +
+                "        `....:::;iof688888888888888888888888888888888899fT!\n" +
+                "          `..::!8888888888888888888888888888888899fT|!^\"'\n" +
+                "            `' !!988888888888888888888888899fT|!^\"'\n" +
+                "                `!!8888888888888888899fT|!^\"'\n" +
+                "                  `!988888888899fT|!^\"'\n" +
+                "                    `!9899fT|!^\"'\n\n\n";
+        System.out.println(welcomeGraphic);
+        Ui ui = new Ui();
+        ui.run();
+    }
 
     @Override
     public void start(Stage stage) {
@@ -78,7 +113,7 @@ public class Duke extends Application {
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
 
-        AnchorPane.setLeftAnchor(userInput , 1.0);
+        AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
         //Step 3. Add functionality to handle user input.
@@ -96,6 +131,7 @@ public class Duke extends Application {
     /**
      * Iteration 1:
      * Creates a label with the specified text and adds it to the dialog container.
+     *
      * @param text String containing text to add
      * @return a label with the specified text that has word wrap enabled.
      */
@@ -127,40 +163,5 @@ public class Duke extends Application {
      */
     private String getResponse(String input) {
         return this.ui.handleInput(input);
-    }
-
-    public static void main(String[] args) {
-        String welcomeGraphic = "                      .,,uod8B8bou,,.\n" +
-                "              ..,uod8BBBBBBBBBBBBBBBBRPFT?l!i:.\n" +
-                "         ,=m8BBBBBBBBBBBBBBBRPFT?!||||||||||||||\n" +
-                "         !...:!TVBBBRPFT||||||||||!!^^\"\"'   ||||\n" +
-                "         !.......:!?|||||!!^^\"\"'            ||||\n" +
-                "         !.........||||                     ||||\n" +
-                "         !.........||||       Welcome!      ||||\n" +
-                "         !.........||||                     ||||\n" +
-                "         !.........||||      I am your      ||||\n" +
-                "         !.........||||  personal assistant ||||\n" +
-                "         !.........||||       Zachary       ||||\n" +
-                "         `.........||||                    ,||||\n" +
-                "          .;.......||||               _.-!!|||||\n" +
-                "   .,uodWBBBBb.....||||       _.-!!|||||||||!:'\n" +
-                "!YBBBBBBBBBBBBBBb..!|||:..-!!|||||||!iof68BBBBBb....\n" +
-                "!..YBBBBBBBBBBBBBBb!!||||||||!iof68BBBBBBRPFT?!::   `.\n" +
-                "!....YBBBBBBBBBBBBBBbaaitf68BBBBBBRPFT?!:::::::::     `.\n" +
-                "!......YBBBBBBBBBBBBBBBBBBBRPFT?!::::::;:!^\"`;:::       `.\n" +
-                "!........YBBBBBBBBBBRPFT?!::::::::::^''...::::::;         iBBbo.\n" +
-                "`..........YBRPFT?!::::::::::::::::::::::::;iof68bo.      WBBBBbo.\n" +
-                "  `..........:::::::::::::::::::::::;iof688888888888b.     `YBBBP^'\n" +
-                "    `........::::::::::::::::;iof688888888888888888888b.     `\n" +
-                "      `......:::::::::;iof688888888888888888888888888888b.\n" +
-                "        `....:::;iof688888888888888888888888888888888899fT!\n" +
-                "          `..::!8888888888888888888888888888888899fT|!^\"'\n" +
-                "            `' !!988888888888888888888888899fT|!^\"'\n" +
-                "                `!!8888888888888888899fT|!^\"'\n" +
-                "                  `!988888888899fT|!^\"'\n" +
-                "                    `!9899fT|!^\"'\n\n\n";
-        System.out.println(welcomeGraphic);
-        Ui ui = new Ui();
-        ui.run();
     }
 }

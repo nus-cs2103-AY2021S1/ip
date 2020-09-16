@@ -1,9 +1,7 @@
 package duke;
 
 import java.io.*;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.nio.file.Files;
+
 /**
  * Provides a handle to hard disk storage
  */

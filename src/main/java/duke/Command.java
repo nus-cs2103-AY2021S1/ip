@@ -5,5 +5,5 @@ package duke;
  */
 public interface Command {
     // Execute the command and return the response
-    public String execute();
+    String execute();
 }

@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class TaskList implements java.io.Serializable {
-    private ArrayList<Task> store;
+    private final ArrayList<Task> store;
 
     public TaskList(ArrayList<Task> store) {
         this.store = store;
@@ -14,6 +14,7 @@ public class TaskList implements java.io.Serializable {
     public TaskList() {
         this.store = new ArrayList<>();
     }
+
     public void addTask(Task task) {
         store.add(task);
         assert store.size() >= 0;
@@ -28,6 +29,7 @@ public class TaskList implements java.io.Serializable {
         System.out.println("duke.Task deleted:");
         System.out.println(task);
     }
+
     public String completeTask(Integer taskIndex) {
         // If the task doesn't exist (It's index is missing)
         if (taskIndex < 0 || taskIndex >= store.size()) {
@@ -51,7 +53,7 @@ public class TaskList implements java.io.Serializable {
     public String dumpTasks() {
         // Format the store output as a string
         String data = "";
-        for ( Task task : store ) {
+        for (Task task : store) {
             data += task.toString() + "\n";
         }
         return data;
