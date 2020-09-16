@@ -1,12 +1,15 @@
 package duke.command;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.fail;
+
+import org.junit.jupiter.api.Test;
+
 import duke.DukeStub;
 import duke.exception.ExceptionMessage;
 import duke.exception.InvalidIndexException;
 import duke.ui.UiSideEffects;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class UntagCommandTest {
 
