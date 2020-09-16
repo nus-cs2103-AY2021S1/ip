@@ -10,7 +10,7 @@ Below are the 3 types of tasks supported in DuekBT:
 
 ## Getting started
 1. Make sure Java 11 or above is installed into your PC
-2. Download the latest version of DukeBT file [here](https://github.com/yanbingtao/ip/releases/download/v0.2/duke.jar).
+2. Download the latest version of DukeBT file [here](https://github.com/yanbingtao/ip/releases).
 3. Double click the jar file to run the application.
 4. Welcome page will be automatically loaded (Shown below).
 5. Enter a command to start chatting with DukeBT.
