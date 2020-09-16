@@ -35,8 +35,7 @@ Graphical User Interface (GUI)
 
 ### 2. Quick Start
 1. Ensure you have Java 11 or above installed in your computer
-
-2. Download the latest duke.jar from 
+2. Download the latest duke.jar from [here](https://github.com/IlyaRin/ip/releases/tag/A-Release)
 3. Double click the file to start the app.
 4. Type the command in the input box and press Enter to execute it
 
