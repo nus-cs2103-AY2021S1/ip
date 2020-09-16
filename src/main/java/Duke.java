@@ -46,7 +46,7 @@ public class Duke {
      */
     public String getResponse(String input) {
         storage.saveTasksToSavedFile(taskList, ui);
-        return parser.parseInput(input);
+        return parser.parseAndProcessInput(input);
         
     }
     
