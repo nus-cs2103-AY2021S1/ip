@@ -8,7 +8,6 @@ import duke.command.Command;
 import duke.data.DukeCommandSet;
 import duke.exception.DukeException;
 import duke.task.Task;
-import duke.ui.UiPrint;
 
 public class GuiResponse {
 
@@ -80,7 +79,6 @@ public class GuiResponse {
     public void reportDoneTask(Task task) {
         resetResponse();
 
-        response.append(UiPrint.getLine(UiPrint.STAR, 50));
         response.append("Nice, I've marked this task as done: \n");
         response.append(task + "\n");
     }
