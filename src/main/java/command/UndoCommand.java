@@ -66,7 +66,7 @@ public class UndoCommand extends Command {
         case "list":
         case "find":
         case "undo":
-            throw new DukeException(pastCommands.toString() + "Past action cannot be reverted.");
+            throw new DukeException("Past action cannot be reverted.");
         default:
             throw new DukeException("Past command is an unrecognisable one!");
         }

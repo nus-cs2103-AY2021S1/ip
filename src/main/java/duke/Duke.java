@@ -2,12 +2,14 @@ package duke;
 
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.ArrayList;
 
 import command.Command;
 import controller.MainWindow;
 import exception.DukeException;
 import storage.CommandStorage;
 import storage.TaskStorage;
+import task.Task;
 
 /**
  * A Duke object represents the chat bot which responds to users' inputs.
@@ -34,7 +36,8 @@ public class Duke {
         taskStorage = new TaskStorage(filePath + "duke.txt");
         commandStorage = new CommandStorage(filePath + "commands.txt", null);
         try {
-            tasks = new TaskList(taskStorage.load());
+            ArrayList<Task> currList = taskStorage.load();
+            tasks = new TaskList(currList);
         } catch (DukeException | IOException | ParseException e) {
             tasks = new TaskList();
         }

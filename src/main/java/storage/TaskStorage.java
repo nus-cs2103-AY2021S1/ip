@@ -138,7 +138,7 @@ public class TaskStorage extends Storage {
      */
     public ArrayList<Task> load() throws DukeException, IOException, ParseException {
         File file = new File(this.filePath);
-        if (!file.exists()) {
+        if (!file.exists() || file.length() == 0) {
             throw new DukeException("There are no saved tasks.");
         }
         FileReader fr = new FileReader(file);
@@ -173,7 +173,7 @@ public class TaskStorage extends Storage {
             isCompleted = completionState.equals("done");
 
             Task currTask;
-            if (taskType.equals("T")) { // task.Todo
+            if (taskType.equals("T")) { // Todo
                 String taskName = line.substring(pos + 1);
                 currTask = new Todo(taskName, isCompleted);
             } else {
@@ -184,12 +184,12 @@ public class TaskStorage extends Storage {
                 String taskDate = taskNameAndDate.split("\\)")[0].split("\\(")[1].substring(4);
                 LocalDateTime taskTime = getDate(taskDate);
 
-                if (taskType.equals("D")) { // task.Deadline
+                if (taskType.equals("D")) { // Deadline
                     currTask = new Deadline(taskName, isCompleted, taskTime);
-                } else if (taskType.equals("E")) { // task.Event
+                } else if (taskType.equals("E")) { // Event
                     currTask = new Event(taskName, isCompleted, taskTime);
                 } else {
-                    throw new DukeException("task.Task type is not recognised.");
+                    throw new DukeException("Task type is not recognised.");
                 }
             }
             pastTasks.add(currTask);
