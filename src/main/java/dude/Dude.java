@@ -3,6 +3,7 @@ package dude;
 import java.io.FileNotFoundException;
 
 import dude.command.Command;
+import dude.command.ListCommand;
 import dude.ui.DialogWrapper;
 import dude.ui.Ui;
 import dude.util.CommandException;
@@ -17,6 +18,7 @@ import dude.util.TaskList;
  */
 public class Dude {
     private static final String FILEPATH = "./data/tasks.txt";
+    private static final String UPDATE = "list";
     private final Storage storage;
     private final Ui ui;
     private TaskList tasks;
@@ -52,6 +54,10 @@ public class Dude {
         } catch (CommandException | InvalidArgumentException | InvalidCommandException e) {
             return new DialogWrapper(e.getMessage(), false, true);
         }
+    }
+
+    public void updateListView() {
+        new ListCommand(UPDATE);
     }
 
     /**

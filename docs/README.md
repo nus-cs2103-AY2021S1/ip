@@ -1,5 +1,4 @@
 # User Guide
-
 * Features
     * [Adding a ToDo task: `todo`](#todo)
     * [Adding a Deadline task: `deadline`](#deadline)
