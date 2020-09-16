@@ -1,9 +1,9 @@
 package duke.storage;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,7 +32,8 @@ public class Storage {
      * @param filePath File path of where the saved task list will be stored.
      */
     public Storage(String filePath) {
-        this.filePath = Paths.get(filePath);
+        String directory = System.getProperty("user.dir");
+        this.filePath = Path.of(directory, filePath);
     }
 
     /**
@@ -63,8 +64,9 @@ public class Storage {
      *
      * @return true if the file path contains a directory and returns false otherwise.
      */
-    private boolean containsDirectory() {
-        return filePath.toString().contains("\\");
+    private boolean containsFile() {
+        File file = new File(String.valueOf(filePath));
+        return file.exists();
     }
 
     /**
@@ -75,8 +77,8 @@ public class Storage {
      */
     private TaskList createNewFile() throws InvalidPathException {
         try {
-            // If a a directory is specified in the file path
-            if (containsDirectory()) {
+            // If a directory is specified in the file path
+            if (!containsFile()) {
                 // Creates the directory to store the task list file
                 Files.createDirectories(filePath.getParent());
             }
