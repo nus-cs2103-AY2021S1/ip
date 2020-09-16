@@ -26,7 +26,7 @@ public class ErrorCommand extends Command {
      */
     @Override
     public void init(TaskManager tm, Ui ui) {
-        setResponse("Oops, you gave an invalid command!");
+        setResponse("Oops, you gave an invalid command! Commands need to start a with \"/\".");
         setDone();
     }
 }
