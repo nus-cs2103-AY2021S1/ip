@@ -12,7 +12,8 @@ public class Ui {
     }
 
     public String byeMessage() {
-        return "Bye. Hope to see you again soon!\n";
+        return "GoodBye, baby.\n"
+                + "Hope to see you again soon!\n";
     }
 
     public String showList(TaskList tasks) {
@@ -22,24 +23,26 @@ public class Ui {
         StringBuilder response = new StringBuilder("Here are the tasks in your list:\n");
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
-            response.append(String.format("%d.%s\n", i + 1, task));
+            response.append(String.format("%d. %s\n", i + 1, task));
         }
         return response.toString();
     }
 
     public String showMatching(TaskList tasks, String keyword) {
         StringBuilder response = new StringBuilder("Here are the matching tasks in your list:\n");
+        int matches = 0;
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
             String description = task.getDescription();
             String[] words = description.split(" ");
             for (String word : words) {
                 if (word.equals(keyword)) {
-                    response.append(String.format("%d.%s%\n", i + 1, task));
+                    matches++;
+                    response.append(String.format("%d. %s\n", i + 1, task));
                 }
             }
         }
-        return response.toString();
+        return matches == 0 ? "No matching task found." : response.toString();
     }
 
     public String markDoneMsg(Task task) {
@@ -72,14 +75,14 @@ public class Ui {
 
     public String HelpMessage() {
         return "The following commands are supported:\n"
-                + "1. todo [task description]\n"
-                + "2. deadline [task description] /by [time]\n"
-                + "3. event [task description] /by [time]\n"
-                + "4. list\n"
-                + "5. delete [index]\n"
-                + "6. done [index]\n"
-                + "7. find [keywords]\n"
-                + "8. exit\n"
+                + " 1. todo [task description]\n"
+                + " 2. deadline [task description] /by [time]\n"
+                + " 3. event [task description] /by [time]\n"
+                + " 4. list\n"
+                + " 5. delete [index]\n"
+                + " 6. done [index]\n"
+                + " 7. find [keywords]\n"
+                + " 8. exit\n"
                 + "You can replace '[xxx]' with your on input.\n";
     }
 

@@ -142,7 +142,7 @@ public class Parser {
     }
 
     private static Command parseFind(String description) {
-        assert description.split(" ").length == 1: FeiException.findException();
+        assert description.split(" ").length == 2: FeiException.findException();
         return new FindCommand(description);
     }
 

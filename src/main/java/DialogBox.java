@@ -39,6 +39,7 @@ public class DialogBox extends HBox {
         }
         dialog.setText(text);
         displayPicture.setImage(img);
+        setSpacing(7);
     }
 
     /**
