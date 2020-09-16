@@ -1,5 +1,7 @@
 package duke;
 
+import java.util.ArrayList;
+
 import duke.command.Command;
 import duke.exception.DukeException;
 import duke.task.TaskList;
@@ -8,8 +10,6 @@ import duke.ui.TerminalUi;
 import duke.ui.Ui;
 import duke.util.Parser;
 import duke.util.Storage;
-
-import java.util.ArrayList;
 
 /**
  * Duke, more commonly known as Duck, is a Personal Assistant Chat Bot that

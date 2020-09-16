@@ -1,8 +1,8 @@
 package duke.ui;
 
-import duke.task.Task;
-
 import java.util.List;
+
+import duke.task.Task;
 
 public abstract class Ui {
     protected static final String LINE = "_________________________________________________";

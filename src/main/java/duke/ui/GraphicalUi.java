@@ -1,8 +1,8 @@
 package duke.ui;
 
-import duke.task.Task;
-
 import java.util.List;
+
+import duke.task.Task;
 
 public class GraphicalUi extends Ui {
     private static String greetingMessage = GREETING_MESSAGE;

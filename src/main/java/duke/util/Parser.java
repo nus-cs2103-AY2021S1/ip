@@ -1,9 +1,16 @@
 package duke.util;
 
-import duke.command.*;
-import duke.exception.DukeException;
-
 import java.util.Arrays;
+
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.CommandType;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.exception.DukeException;
 
 /**
  * Parses user input as commands.

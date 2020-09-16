@@ -1,9 +1,9 @@
 package duke.task;
 
-import duke.util.DateTimeHandler;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+
+import duke.util.DateTimeHandler;
 
 /**
  * Represents an event task with a time and date period.
