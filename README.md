@@ -9,7 +9,7 @@
 
 **Prerequisites: Java 11 or later installed.**
 
-1. **Download** the latest version of Duke `(a jar file)` from the website.
+1. **Download** the latest version of Duke `(a jar file)` from the [website](https://github.com/Ma-Yueran/ip/releases).
 1. **Copy** the jar file to the directory you want to use as the *home directory* for the application.
 1. `Double click` the jar file or enter `java -jar duke.jar` in console to run the program.
 1. The window shown above should appear.
