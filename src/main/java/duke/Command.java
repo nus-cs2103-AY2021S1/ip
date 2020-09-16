@@ -11,7 +11,7 @@ public enum Command {
     DELETE,
     DONE,
     PRINT_TASKS,
-    PRIORITIZE,
+    PRIORITISE,
     FIND,
     ERROR,
     BYE

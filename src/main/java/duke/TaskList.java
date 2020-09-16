@@ -28,7 +28,7 @@ public class TaskList {
         }
     }
 
-    public static Task prioritize(String index) {
+    public static Task prioritise(String index) {
         int i = Integer.parseInt(index);
         Task target = tasks.get(i - 1);
         target.setPriority(Task.Priority.HIGH);

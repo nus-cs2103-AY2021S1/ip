@@ -94,7 +94,7 @@ public class Ui {
                 + "\n Now you have " + size + " tasks in the list.";
     }
 
-    public static String prioritzeTask(Task task) {
+    public static String prioritseTask(Task task) {
         return "Yay I have prioritized this task:\n" + task;
     }
 

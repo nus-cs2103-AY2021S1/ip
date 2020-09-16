@@ -33,8 +33,8 @@ public class Parser {
                     return Command.EVENT;
                 } else if (key.equals("deadline")) {
                     return Command.DEADLINE;
-                } else if (key.equals("prioritize")) {
-                    return Command.PRIORITIZE;
+                } else if (key.equals("prioritise")) {
+                    return Command.PRIORITISE;
                 }else {
                     return Command.ERROR;
                 }
