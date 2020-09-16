@@ -65,12 +65,12 @@ public class Storage {
                         identifier = thisLine.charAt(8);
                         status = thisLine.charAt(11) == '\u2713';
                         if (identifier == 'D') {
-                            Deadline thisDeadline = new Deadline(thisLine.substring(14, thisLine.indexOf('(') - 2),
+                            Deadline thisDeadline = new Deadline(thisLine.substring(14, thisLine.indexOf('(') - 1),
                                     status, thisLine.substring((thisLine.indexOf(':') + 2), thisLine.indexOf(')')));
                             thisDeadline.updateDateTime();
                             list.add(thisDeadline);
                         } else if (identifier == 'E') {
-                            Event thisEvent = new Event(thisLine.substring(14, thisLine.indexOf('(') - 2),
+                            Event thisEvent = new Event(thisLine.substring(14, thisLine.indexOf('(') - 1),
                                     status, thisLine.substring((thisLine.indexOf(':') + 2), thisLine.indexOf(')')));
                             list.add(thisEvent);
                         } else {

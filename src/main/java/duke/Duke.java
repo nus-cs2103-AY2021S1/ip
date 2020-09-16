@@ -26,8 +26,8 @@ public class Duke extends Application {
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
-    private final Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private final Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private final Image user = new Image(this.getClass().getResourceAsStream("/images/doge.jpg"));
+    private final Image duke = new Image(this.getClass().getResourceAsStream("/images/catie.jpg"));
 
     public Duke(String filePath) {
         ui = new Ui();
