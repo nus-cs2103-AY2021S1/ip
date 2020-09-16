@@ -5,6 +5,7 @@ import java.util.concurrent.CompletableFuture;
 import duke.gui.DialogBox;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -20,6 +21,13 @@ import javafx.stage.Stage;
  */
 public class DukeGui extends Application implements Ui {
 
+    /** Default padding for dialogContainer */
+    private static final double DEFAULT_PADDING = 7.0;
+    /** Default spacing for dialogContainer */
+    private static final double DEFAULT_SPACING = 7.0;
+
+    //@@author Jeffry Lum
+    //Reused from https://se-education.org/guides/tutorials/javaFxPart2.html with minor modifications
     // JavaFX pieces
     private ScrollPane scrollPane;
     private VBox dialogContainer;
@@ -43,8 +51,6 @@ public class DukeGui extends Application implements Ui {
     @Override
     public void start(Stage stage) {
 
-        //@@author Jeffry Lum
-        //Reused from https://se-education.org/guides/tutorials/javaFxPart2.html with minor modifications
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
@@ -76,6 +82,10 @@ public class DukeGui extends Application implements Ui {
 
         // You will need to import `javafx.scene.layout.Region` for this.
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
+        // Sets padding between the dialog container and the edge of the GUI.
+        dialogContainer.setPadding(new Insets(DEFAULT_PADDING));
+        // Sets a gap between each dialog box.
+        dialogContainer.setSpacing(DEFAULT_SPACING);
 
         userInput.setPrefWidth(325.0);
 
