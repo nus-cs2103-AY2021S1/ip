@@ -17,7 +17,7 @@ public class ToDoTest {
     @Test
     public void testTodoToString() {
         Task toDo = new ToDo("read book");
-        String expectedFormat = "[T][!!!!] read book";
+        String expectedFormat = "[T][X] read book";
         assertEquals(expectedFormat, toDo.toString());
     }
 

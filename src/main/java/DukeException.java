@@ -1,15 +1,15 @@
-
 /**
  * The DukeException class extends the Exception class and
- * handles any input error e.g. InvalidCommand, IncompleteCommand
+ * it handles the input error by the client, such as invalid
+ * command, as well as non-existent task enquired
+ * by the client.
  */
 public class DukeException extends Exception {
 
     /**
      * Constructs a new DukeException instance.
      *
-     * @param message An error message informing and instructing
-     * the user of the incorrect command and how they can try again
+     * @param message User-friendly error message
      */
     public DukeException(String message) {
         super(message);
@@ -20,8 +20,10 @@ public class DukeException extends Exception {
      *
      * @return The error message.
      */
+    @Override
     public String toString() {
         return getMessage();
     }
+
 }
 

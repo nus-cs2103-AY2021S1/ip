@@ -17,7 +17,7 @@ public class EventTest {
     public void testEventToString() {
         LocalDate date = LocalDate.parse("2020-02-05", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         Task event = new Event("project meeting", date, "2-4pm");
-        String expectedFormat = "[E][!!!!] project meeting at Feb 5 2020 2-4pm";
+        String expectedFormat = "[E][X] project meeting (at: Feb 5 2020 2-4pm)";
         assertEquals(expectedFormat, event.toString());
     }
 

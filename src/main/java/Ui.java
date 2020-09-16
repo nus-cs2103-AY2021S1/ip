@@ -1,8 +1,9 @@
-import java.util.ArrayList;
+import java.util.List;
 
 /**
- * Handles the user interface provided to the user.
+ * Handles the (command line) user interface provided to the user.
  * The Ui class provides utility methods to show various message types.
+ * Messages will be displayed in standard output.
  */
 public class Ui {
 
@@ -13,22 +14,46 @@ public class Ui {
     }
 
     /**
+     * Prints the string.
+     *
+     * @param s The string.
+     */
+    private void print(String s) {
+        System.out.println(s);
+    }
+
+    /**
      * Prints all the tasks stored in the given list.
      *
-     * @param task_list The list containing all the tasks.
-     * @throws DukeInvalidCommandException If the task list is empty.
+     * @param tasks The list containing all the tasks.
+     * @throws DukeInvalidTaskException If the list of tasks is empty.
      */
-    public void displayTaskList(ArrayList<Task> task_list) throws DukeInvalidCommandException {
-        if (task_list.size() == 0) {
-            throw new DukeInvalidCommandException("There are no task_list in the list");
+    public void displayTasks(List<Task> tasks) throws DukeInvalidTaskException {
+        if (tasks.size() == 0) {
+            throw new DukeInvalidTaskException("There are no remaining tasks in the list");
         }
 
-        System.out.println("    ____________________________________________________________\n" +
-                           "     Here are the tasks in your list:");
-        for (int i = 1; i <= task_list.size(); i++) {
-            System.out.println("     " + i + "." + task_list.get(i-1));
+        print("Here are the tasks in your list:");
+        for (int i = 1; i <= tasks.size(); i++) {
+            print(i + "." + tasks.get(i - 1));
         }
-        System.out.println("    ____________________________________________________________");
+    }
+
+    /**
+     * Prints the list of all the tasks matching a string keyword.
+     *
+     * @param tasks The list containing all the tasks.
+     * @throws DukeInvalidTaskException If the task is not found.
+     */
+    public void displayFoundTasks(List<Task> tasks) throws DukeInvalidTaskException {
+        if (tasks.size() == 0) {
+            throw new DukeInvalidTaskException("There are no matching tasks in your list");
+        }
+
+        print("Here are the matching tasks in your list:");
+        for (int i = 1; i <= tasks.size(); i++) {
+            print(i + "." + tasks.get(i - 1));
+        }
     }
 
     /**
@@ -37,47 +62,32 @@ public class Ui {
      * @param e The error that is being raised.
      */
     public void printError(Exception e) {
-        System.out.println(e.toString());
-        System.out.println("Please try again.");
+        print(e.toString());
+        print("Please try again.");
     }
 
     /**
      * Prints the invalid date format error message.
      */
     public void printInvalidDateFormatError() {
-        System.out.println("Invalid Date Format!");
-        System.out.println("Please enter the date as yyyy-mm-dd");
+        print("Please enter the date as yyyy-mm-dd followed by the time e.g. 2020-01-01 2359");
+        print("Try again.");
     }
 
-
     /**
-     * Displays a greeting by Duke when the program first starts up.
+     * Displays a greeting by Duke.
      */
-    public void hello() {
-        String logo = "      ____        _        \n"
-                + "     |  _ \\ _   _| | _____ \n"
-                + "     | | | | | | | |/ / _ \\\n"
-                + "     | |_| | |_| |   <  __/\n"
-                + "     |____/ \\__,_|_|\\_\\___|\n";
-
-        String hello = "    ____________________________________________________________\n" +
-                "     Hello! I'm Duke\n" + logo +
-                "     What can I do for you?\n" +
-                "    ____________________________________________________________\n";
-
-        System.out.println(hello);
+    public String greet() {
+        return "Hello King Robert\nWhat does your Grace need from the Hand?\n";
 
     }
 
     /**
-     * Displays a bye message when client inputs bye, followed by..
-     * the termination of the Duke program.
+     * Displays the goodbye message.
+     * followed by a horizontal line.
      */
-    public void bye() {
-        String bye = "    ____________________________________________________________\n" +
-                "     Bye. Hope to see you again soon!\n" +
-                "    ____________________________________________________________\n";
-        System.out.println(bye);
+    public void printBye() {
+        print("I hope I have served you well my Lord. Seven Blessings to You, Your Grace!");
         System.exit(0);
     }
 

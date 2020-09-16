@@ -14,13 +14,10 @@ public class DeadlineTest {
      * Tests the deadline's toString method for the valid format.
      */
     @Test
-    public void dummyTest(){
-        assertEquals(2, 3);
-    }
     public void testDeadlineToString() {
         LocalDate date = LocalDate.parse("2020-02-02", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         Task deadLine = new Deadline("return book", date, "1800");
-        String expectedFormat = "[D][!!!!] return book by Feb 2 2020 1800";
+        String expectedFormat = "[D][X] return book (by: Feb 2 2020 1800)";
         assertEquals(expectedFormat, deadLine.toString());
     }
 

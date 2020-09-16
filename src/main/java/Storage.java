@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-import java.util.Scanner;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -7,13 +5,17 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 /**
  * Storage class abstracts the I/O method of
- * reading tasks from a file and writing tasks onto a file
+ * reading and writing tasks from a file.
  */
 public class Storage {
-    private static ArrayList<Task> task_list;
+
+    private static ArrayList<Task> tasks;
 
     /**
      * Constructs a Storage instance.
@@ -22,81 +24,92 @@ public class Storage {
     }
 
     /**
-     * Loads the tasks onto a task_list from the file specified.
+     * Loads the tasks from the file.
      *
      * @return The List of all the tasks loaded from the file.
      * @throws IOException If an I/O error occurred.
      */
     public ArrayList<Task> loadFile() throws IOException {
-        task_list = new ArrayList<Task>();
+        tasks = new ArrayList<>();
         File file = getFile();
         Scanner sc = new Scanner(file);
         while (sc.hasNextLine()) {
             String[] taskContent = sc.nextLine().split("\\|");
-            String task_type = taskContent[0];
+            String taskType = taskContent[0];
             Boolean task_completion = Boolean.parseBoolean(taskContent[1]);
             String description = taskContent[2];
-            switch (task_type) {
-                case "T":
-                    Task todo = new ToDo(description);
-                    if (task_completion) {
-                        todo.complete();
-                    }
-                    task_list.add(todo);
-                    break;
-                case "D":
-                    Task deadline = new Deadline(description, getDate(taskContent[3]), getTime(taskContent[3]));
-                    if (task_completion) {
-                        deadline.complete();
-                    }
-                    task_list.add(deadline);
-                    break;
-                case "E":
-                    Task event = new Event(description, getDate(taskContent[3]), getTime(taskContent[3]));
-                    if (task_completion) {
-                        event.complete();
-                    }
-                    task_list.add(event);
-                    break;
-                default:
-                    break;
+            switch (taskType) {
+            case "T":
+                Task toDo = new ToDo(description);
+                if (task_completion) {
+                    toDo.markAsDone();
+                }
+                tasks.add(toDo);
+                break;
+            case "D":
+                Task deadLine = new Deadline(description, getDate(taskContent[3]), getTime(taskContent[3]));
+                if (task_completion) {
+                    deadLine.markAsDone();
+                }
+                tasks.add(deadLine);
+                break;
+            case "E":
+                Task event = new Event(description, getDate(taskContent[3]), getTime(taskContent[3]));
+                if (task_completion) {
+                    event.markAsDone();
+                }
+                tasks.add(event);
+                break;
+            default:
+                break;
             }
         }
-        return task_list;
+        return tasks;
     }
 
-
+    /**
+     * Extracts the date of the task from the given string.
+     *
+     * @param s The string provided.
+     * @return a LocalDate
+     */
     private LocalDate getDate(String s) {
         return LocalDate.parse(s.substring(3, 13));
     }
 
+    /**
+     * Extracts the time of the task from the given string.
+     *
+     * @param s The string provided.
+     * @return time in the format of a String
+     */
     private String getTime(String s) {
         return s.substring(14);
     }
 
     /**
-     * Saves the List of tasks to a file
+     * Saves the List of tasks to the file.
      *
-     * @param task_list The list of tasks.
+     * @param tasks The list of tasks.
      * @throws IOException If an I/O error occurred.
      */
-    public void createFile(ArrayList<Task> task_list) throws IOException {
+    public void saveFile(List<Task> tasks) throws IOException {
         File file = getFile();
         FileWriter writer = new FileWriter(file);
-        for (Task task : task_list) {
+        for (Task task : tasks) {
             if (task instanceof ToDo) {
-                writer.write("T|" + task.task_completion + "|" + task.task_info + "\n");
+                writer.write("T|" + task.isDone + "|" + task.description + "\n");
             } else if (task instanceof Deadline) {
-                writer.write("D|" + task.task_completion + "|" + task.task_info + "|by " + ((Deadline) task).date + " " + ((Deadline) task).time + "\n");
+                writer.write("D|" + task.isDone + "|" + task.description + "|by " + ((Deadline) task).date + " " + ((Deadline) task).time + "\n");
             } else if (task instanceof Event) {
-                writer.write("E|" + task.task_completion + "|" + task.task_info + "|at " + ((Event) task).date + " " +((Event) task).time + "\n");
+                writer.write("E|" + task.isDone + "|" + task.description + "|at " + ((Event) task).date + " " + ((Event) task).time + "\n");
             }
         }
         writer.close();
     }
 
     /**
-     * Creates a file to store the list of tasks if the file does not exist,
+     * Creates a file to store Duke's data if the file does not exist,
      * otherwise returns the existing file containing Duke's data.
      *
      * @return File, the file containing Duke's data.
@@ -110,6 +123,5 @@ public class Storage {
         }
         return new File(path.toString());
     }
-
 }
 

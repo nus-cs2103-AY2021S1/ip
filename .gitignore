@@ -13,14 +13,5 @@ src/main/resources/docs/
 *.iml
 bin/
 
-/text-ui-test/ACTUAL.txt
-text-ui-test/EXPECTED-UNIX.TXT
-src/main/java/Deadline.class
-src/main/java/Duke.class
-src/main/java/Event.class
-src/main/java/Task.class
-src/main/java/ToDo.class
-src/main/java/DukeException.class
-src/main/java/DukeIncompleteCommandException.class
-src/main/java/DukeInvalidCommandException.class
-src/main/java/DukeInvalidCommandException.java
+desktop.ini
+CS2103T Java Coding Style - IntelliJ.editorconfig

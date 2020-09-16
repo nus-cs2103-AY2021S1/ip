@@ -1,15 +1,13 @@
-
 /**
  * The DukeInvalidTaskException class extends the DukeException
- * class and it handles the invalid task command format entered by the client.
+ * class and it handles the non-existent task enquired by the client.
  */
 public class DukeInvalidTaskException extends DukeException {
 
     /**
      * Constructs a new DukeInvalidTaskException instance.
      *
-     * @param message An error message informing and instructing
-     * the user of the incorrect command and how they can try again
+     * @param message User-friendly error message
      */
     public DukeInvalidTaskException(String message) {
         super(message);
@@ -20,8 +18,10 @@ public class DukeInvalidTaskException extends DukeException {
      *
      * @return The error message.
      */
+    @Override
     public String toString() {
         return getMessage();
     }
 
 }
+

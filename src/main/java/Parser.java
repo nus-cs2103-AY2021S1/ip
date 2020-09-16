@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 /**
  * Parser class describes the behaviour of a
- * parser that parses commands entered by the client
+ * parser that parses commands entered by the client.
  */
 public class Parser {
 
@@ -12,38 +12,29 @@ public class Parser {
     public Parser() {
     }
 
+    private Scanner sc = new Scanner(System.in);
+
     /**
      * Verifies whether the string entered
      * is a valid command. It will throw an exception if
-     * the command is not valid
+     * the command is not valid (i.e. if the argument has no description
+     * or the format of the command is not proper).
+     *
      * @param command The command string entered by the client.
      * @return The String, regarding the type of the command entered.
      * @throws DukeInvalidCommandException If the command is not valid.
-     * @throws DukeIncompleteCommandException If the command is not complete
      */
-    public String checkCommand(String command) throws DukeInvalidCommandException, DukeIncompleteCommandException {
+    public String checkCommand(String command) throws DukeInvalidCommandException {
         if (command.split(" ").length != 1) {
             return getCommand(command);
         }
 
-        String wrongCommand = getCommand(command);
-        if (wrongCommand.equals("todo") || wrongCommand.equals("deadline") || wrongCommand.equals("event")) {
-            throw new DukeIncompleteCommandException(String.format(
-                            "    ____________________________________________________________\n" +
-                            "     ☹ OOPS!!! The description of a %s cannot be empty.\n" +
-                            "    ____________________________________________________________\n", wrongCommand));
+        String wrongCmd = getCommand(command);
+        if (wrongCmd.equals("todo") || wrongCmd.equals("deadline") || wrongCmd.equals("event")) {
+            throw new DukeInvalidCommandException(":( OOPS!!! The description of a " + wrongCmd
+                    + " cannot be " + "empty.");
         }
-
-        else if (wrongCommand.equals("delete") || wrongCommand.equals("done")) {
-            throw new DukeIncompleteCommandException(String.format(
-                    "    ____________________________________________________________\n" +
-                    "     ☹ OOPS!!! Please indicate the index of the task which you would like to %s.\n" +
-                    "    ____________________________________________________________\n", wrongCommand.equals("done") ? "mark as done" : wrongCommand));
-        }
-
-        throw new DukeInvalidCommandException("    ____________________________________________________________\n" +
-                                              "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
-                                              "    ____________________________________________________________");
+        throw new DukeInvalidCommandException(":( OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 
     /**
@@ -56,9 +47,16 @@ public class Parser {
         return command.split(" ")[0];
     }
 
-    protected String trimCommand(String task_type, String command) {
-        return command.replace(task_type, "").trim();
+    /**
+     * Trims the command of leading and trailing spaces.
+     *
+     * @param command The command string entered by the client.
+     * @return The String, regarding the command entered.
+     */
+    public String trimCommand(String excepted, String command) {
+        return command.replace(excepted, "").trim();
     }
+
 }
 
 
