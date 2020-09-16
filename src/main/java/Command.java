@@ -47,7 +47,7 @@ public enum Command{
         String[] splitedCommand = command.split(" ");
         action = splitedCommand[0];
         if (splitedCommand.length > 1) {
-            taskContent = String.join("",
+            taskContent = String.join(" ",
                     Arrays.copyOfRange(splitedCommand,
                                 1,
                                 splitedCommand.length)
