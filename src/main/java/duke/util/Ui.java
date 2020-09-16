@@ -1,7 +1,6 @@
 package duke.util;
 
 import java.util.List;
-import java.util.Scanner;
 
 import duke.task.Task;
 
@@ -9,24 +8,6 @@ import duke.task.Task;
  * Represents the user interface of the Duke program, dealing with input and output.
  */
 public class Ui {
-
-    private final Scanner sc;
-
-    /**
-     * Initializes a newly created Ui with a Scanner.
-     */
-    public Ui() {
-        this.sc = new Scanner(System.in);
-    }
-
-    /**
-     * Returns the user input.
-     *
-     * @return user input.
-     */
-    public String getInput() {
-        return sc.nextLine();
-    }
 
     /**
      * Greets the user.
