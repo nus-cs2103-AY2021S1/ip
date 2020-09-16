@@ -40,7 +40,7 @@ Duke Chatbot has several features to help you manage your tasks. Sounds interest
 
 ## Features 
 
-##### 1. Listing all tasks: `list`
+### 1. Listing all tasks: `list`
 
 List all of your tasks.
 
@@ -48,7 +48,7 @@ Format: `list`
 
 <img src="https://github.com/AaronnSeah/ip/blob/master/src/main/resources/images/list.png" width="400">
 
-##### 2. Adding a task
+### 2. Adding a task
 
 Add a new task.
 
@@ -59,21 +59,21 @@ You can add 3 kinds of tasks:
 2. Event Task
 3. Deadline Task
 
-Adding a Todo Task
-* format: `todo <task name>`
+* Adding a Todo Task
+    * format: `todo <task name>`
 <img src="https://github.com/AaronnSeah/ip/blob/master/src/main/resources/images/todo.png" width="400">
 
-Adding an Event Task
-* Format: `event <task name> /at <date> <start time>-<end time>`
-* Format for <date>: DD/MM/YYYY
-* Format for <start time> and <end time>: HH:MM
-* Note the `-` between the <start time> and <end time>        
+* Adding an Event Task
+    * Format: `event <task name> /at <date> <start time>-<end time>`
+    * Format for <date>: DD/MM/YYYY
+    * Format for <start time> and <end time>: HH:MM
+    * Note the `-` between the <start time> and <end time>        
 <img src="https://github.com/AaronnSeah/ip/blob/master/src/main/resources/images/event.png" width="400">
 
-Adding a Deadline Task
-* Format: `deadline <task name> /by <date> <time>`
-* Format for <date>: DD/MM/YYYY
-* Format for <time>: HH:MM
+* Adding a Deadline Task
+    * Format: `deadline <task name> /by <date> <time>`
+    * Format for <date>: DD/MM/YYYY
+    * Format for <time>: HH:MM
 
 <img src="https://github.com/AaronnSeah/ip/blob/master/src/main/resources/images/deadline.png" width="400">
 
