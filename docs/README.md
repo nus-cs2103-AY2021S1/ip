@@ -60,6 +60,22 @@ Shows a list of all tasks in Spongebot Patty Flipper.
 
 Format: `list`
 
+
+
+### Marking a task as done: `done`
+
+Marks a specified task from Spongebot Patty Flipper as done.
+
+Format: `done INDEX`
+
+* Marks the task at the specified INDEX as done
+* The index refers to the index number shown on the displayed task list
+* The index **must be a positive integer** 1, 2, 3, ...
+
+Example:
+
+* `done 1` : Marks the 1st task in the list as done.
+
 ### Deleting a task: `Delete`
 
 Deletes a specified task from Spongebot Patty Flipper.
