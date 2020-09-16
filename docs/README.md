@@ -1,7 +1,7 @@
 # Zelda Bot User Guide
 This is simple chat bot application I created for my CS2103 Project. The aesthetics of the bot is inspired by my favourite childhood game: Legend of Zelda.
 
-![image](UI.png)
+[image](UI.png)
 
 
 
