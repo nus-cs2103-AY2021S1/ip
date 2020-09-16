@@ -6,4 +6,4 @@ T|play lol|false
 D|return book|false|Oct 15 2019
 E| date |false| tmr
 T|hahahah|false
-E|           oh no |false| tmr
+E|oh   no|false|sunday

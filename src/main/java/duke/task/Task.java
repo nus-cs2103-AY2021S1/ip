@@ -3,7 +3,7 @@ package duke.task;
 /**
  * This class represent tasks
  */
-public class Task {
+public abstract class Task {
     private final String description;
     private boolean isDone;
 
@@ -49,16 +49,12 @@ public class Task {
      * Represent the task in an audience-friendly form.
      * To be overwritten by child class.
      */
-    public String getStatus() {
-        return "";
-    }
+    public abstract String getStatus();
 
     /**
      * Represent the task in a suitable form to store data.
      * To be overwritten by child class.
      */
-    public String getDataFormat() {
-        return "";
-    }
+    public abstract String getDataFormat();
     //...
 }
