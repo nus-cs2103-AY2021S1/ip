@@ -24,7 +24,7 @@ Duke Chatbot has several features to help you manage your tasks. Sounds interest
 * Double-click the downloaded `duke.jar` to launch the app!
 * The GUI below should appear after a few seconds.
 
-![image](https://github.com/AaronnSeah/ip/blob/master/src/main/resources/images/startUp.png)
+![image](https://github.com/AaronnSeah/ip/blob/master/src/main/resources/images/startUp.png?s=200)
 * Now you can explore the features of Duke Chatbot!
 * Head over to [**Features**](Features) for detailed explanation of each command.
 
