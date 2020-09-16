@@ -10,7 +10,7 @@ Opus is fast and easy to use.
 - [Requirements](#requirements)
 - [Quick Start](#quick-start)
 - [Features and Usage](#features-and-usage)
-
+- [Credits](#credits)
 
 ## Requirements
 
