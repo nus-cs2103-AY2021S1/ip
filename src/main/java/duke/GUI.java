@@ -8,6 +8,7 @@ package duke;
 
 public class GUI {
     private static final String Message_Bye = "I am happy to serve you. See you soon!";
+
     GUI() {
     }
 

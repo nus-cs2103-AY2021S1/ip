@@ -1,4 +1,5 @@
 1.[DeadLine][✘] homework /by: Sep 09 2020
 2.[Event][✓] play /at: Sep 09 2020
-3.[ToDo][✘] fishing
+3.[ToDo][✓] fishing
 4.[Event][✘] play /at: Sep 09 2020
+5.[DeadLine][✘]  finish 2103T ip work   /by: Sep 18 2020

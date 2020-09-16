@@ -1,7 +1,6 @@
 package duke;
 
 import java.io.InputStream;
-import java.io.PrintStream;
 import java.util.Scanner;
 
 /**
@@ -11,7 +10,6 @@ import java.util.Scanner;
 
 public class Ui {
     protected final Scanner input;
-    protected final PrintStream output;
     private static final String Message_GREETING
                     = "Hello :))!  I'm your daily manager, Ka To! Welcome Back! \n"
                     + "how could I serve you now? \n"
@@ -21,12 +19,11 @@ public class Ui {
                     + "I am happy to serve you. See you soon!";
 
     public Ui() {
-        this(System.in, System.out);
+        this(System.in);
     }
 
-    public Ui(InputStream in, PrintStream out) {
+    public Ui(InputStream in) {
         this.input = new Scanner(in);
-        this.output = out;
     }
 
     public void printGreet() {
