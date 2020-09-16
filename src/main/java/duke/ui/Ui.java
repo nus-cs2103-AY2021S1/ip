@@ -1,9 +1,11 @@
 package duke.ui;
 
+import duke.command.Command;
+import duke.exception.DukeException;
 import duke.main.Statement;
 import duke.tools.Format;
 import duke.tools.Parser;
-import duke.tools.Response;
+import duke.command.Response;
 
 /**
  * Interacts with the user.
@@ -32,11 +34,8 @@ public class Ui {
      *
      * @return String of the response from Duke.
      */
-    public String getResponse(String input) {
+    public Command getCommand(String input) throws DukeException {
         String extract = conciseInput(input);
-        if (parser.isEnd(extract)) {
-            return exit();
-        }
         return Parser.run(extract);
     }
 
@@ -55,18 +54,6 @@ public class Ui {
      * a user will receive at the start of Duke operation.
      */
     public String greet() {
-        return new Format<>(
-                new Response(Statement.GREET.toString()))
-                .toString();
-    }
-
-    /**
-     * Prints the ending words that
-     * a user will receive after he inputs "bye"
-     */
-    public String exit() {
-        return new Format<>(
-                new Response(Statement.BYE.toString()))
-                .toString();
+        return new Response(Statement.GREET.toString()).toString();
     }
 }

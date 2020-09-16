@@ -74,5 +74,12 @@ public enum Statement {
         public String toString() {
             return "Now you have %d tasks in the list.";
         }
+    },
+
+    HELP {
+        @Override
+        public String toString() {
+            return "Glad to help! These are the functions I have now.\n";
+        }
     }
 }

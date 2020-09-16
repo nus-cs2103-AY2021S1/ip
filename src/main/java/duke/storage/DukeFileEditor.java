@@ -4,11 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import duke.command.CommandString;
-import duke.main.Statement;
+import duke.exception.DukeException;
 import duke.task.Task;
 import duke.tools.Format;
 import duke.tools.FormatString;
-import duke.tools.Response;
 import duke.tools.Time;
 
 /**
@@ -35,7 +34,7 @@ public class DukeFileEditor extends DukeFile {
      * @param lineNum The index of task that the user want to
      *                delete.
      */
-    public void deleteLine(int lineNum) {
+    public void deleteLine(int lineNum) throws DukeException {
         if (doesFileExist()) {
             List<String> taskStrings = super.readFile();
             taskStrings.remove(lineNum - 1);
@@ -47,7 +46,7 @@ public class DukeFileEditor extends DukeFile {
      * Clears all tasks recorded in the file
      * with directory in the FileDirectory in Directory class.
      */
-    public void clearFile() {
+    public void clearFile() throws DukeException {
         List<String> newList = new ArrayList<>();
         super.write(newList);
     }
@@ -59,7 +58,7 @@ public class DukeFileEditor extends DukeFile {
      * @param lineNum The index of task that the user want to
      *                delete.
      */
-    public void setTaskDone(int lineNum) {
+    public void setTaskDone(int lineNum) throws DukeException {
         if (doesFileExist()) {
             List<String> taskStrings = readFile();
             String requiredTask = taskStrings.remove(lineNum - 1);
@@ -80,33 +79,28 @@ public class DukeFileEditor extends DukeFile {
      * @param input The detail that the user wants to change to.
      * @return The string of the Task being updated.
      */
-    public String update(int lineNum, String command, String input) {
+    public Task update(int lineNum, String command, String input) throws DukeException {
         List<String> taskStrings = readFile();
         String[] requiredTask = taskStrings.remove(lineNum - 1).split(" ");
         int len = requiredTask.length;
-        String editedTask = requiredTask[0] + " ";
+        StringBuilder editedTask = new StringBuilder(requiredTask[0] + " ");
 
-        if (command.equals(CommandString.UPDATEDETAIL)) {
-            editedTask += input + " " + requiredTask[len - 2] + requiredTask[len - 1];
-        } else if (command.equals(CommandString.UPDATETIME)) {
+        if (command.equals(CommandString.UPDATE_DETAIL)) {
+            editedTask.append(input).append(" ").append(requiredTask[len - 2]).append(requiredTask[len - 1]);
+        } else if (command.equals(CommandString.UPDATE_TIME)) {
             for (int i = 1; i < len - 1; i++) {
-                editedTask += requiredTask[i] + " ";
+                editedTask.append(requiredTask[i]).append(" ");
             }
             Time time = new Time(input);
-            editedTask += time.toString() + ")";
+            editedTask.append(time.toString()).append(")");
         } else {
             editedTask = null;
         }
 
         assert editedTask != null : "command is neither time or detail";
 
-        taskStrings.add(lineNum - 1, editedTask);
+        taskStrings.add(lineNum - 1, editedTask.toString());
         write(taskStrings);
-        Task task = Format.decodeTask(editedTask);
-        Response response = new Response(
-                Statement.UPDATE.toString() + task
-        );
-
-        return new Format<>(response).toString();
+        return Format.decodeTask(editedTask.toString());
     }
 }

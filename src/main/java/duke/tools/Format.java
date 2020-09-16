@@ -108,21 +108,13 @@ public class Format<T> {
     @Override
     public String toString() {
         if (this.content instanceof Task) {
-            return FormatString.UNDERSCORE.toString()
-                    + FormatString.NEXTLINE.toString()
-                    + Statement.TASKADDED.toString()
+            return Statement.TASKADDED.toString()
                     + content
                     + FormatString.NEXTLINE.toString()
-                    + String.format(Statement.REPORT.toString(), Parser.getTaskList().getTaskList().size())
-                    + FormatString.NEXTLINE.toString()
-                    + FormatString.UNDERSCORE;
+                    + String.format(Statement.REPORT.toString(), Parser.getTaskList().getTaskList().size());
         }
 
-        return FormatString.UNDERSCORE.toString()
-                + FormatString.NEXTLINE.toString()
-                + content
-                + FormatString.NEXTLINE.toString()
-                + FormatString.UNDERSCORE.toString();
+        return content.toString();
     }
 }
 

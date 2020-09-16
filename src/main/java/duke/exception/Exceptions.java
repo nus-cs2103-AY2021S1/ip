@@ -1,7 +1,5 @@
 package duke.exception;
 
-import duke.tools.FormatString;
-
 /**
  * Contains all String for the exception error message.
  */
@@ -38,8 +36,7 @@ public enum Exceptions {
     FILEEXCEPTION {
         @Override
         public String toString() {
-            return FormatString.FOURSPACE.toString()
-                    + "OOPS!!!\n"
+            return "OOPS!!!\n"
                     + "The file exists but is a directory rather than a regular file,\n"
                     + "or does not exist but cannot be created,\n"
                     + "or cannot be opened for any other reason";

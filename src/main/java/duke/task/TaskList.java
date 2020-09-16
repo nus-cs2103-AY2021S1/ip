@@ -1,6 +1,7 @@
 package duke.task;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Represents a list that contains different tasks.
@@ -8,7 +9,7 @@ import java.util.ArrayList;
  * @param <T> The data type of the object in the task list.
  */
 public class TaskList<T> {
-    private ArrayList<T> taskList;
+    private List<T> taskList;
 
     /**
      * Constructs a TaskList.
@@ -32,7 +33,7 @@ public class TaskList<T> {
      *
      * @return The arrayList which stores all the tasks.
      */
-    public ArrayList<T> getTaskList() {
+    public List<T> getTaskList() {
         return this.taskList;
     }
 

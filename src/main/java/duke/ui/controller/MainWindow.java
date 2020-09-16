@@ -1,5 +1,6 @@
 package duke.ui.controller;
 
+import duke.exception.DukeException;
 import duke.main.Duke;
 import duke.tools.Format;
 import javafx.animation.PauseTransition;
@@ -55,10 +56,10 @@ public class MainWindow extends AnchorPane {
      * the dialog container. Clears the user input after processing.
      */
     @FXML
-    private void handleUserInput() {
+    private void handleUserInput() throws DukeException {
         String input = userInput.getText();
         Format<String> format = new Format<>(input);
-        String response = duke.getResponse(input);
+        String response = duke.getResponse(input).toString();
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(format.toString(), userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
@@ -75,8 +76,11 @@ public class MainWindow extends AnchorPane {
      * when the user types in "bye" command.
      */
     private void closeWindow() {
+        //Disable the functions of the user input and send button.
         userInput.setOnAction(null);
         sendButton.setOnAction(null);
+
+        //Pause for a second before exit.
         PauseTransition delay = new PauseTransition(Duration.seconds(1));
         delay.setOnFinished(event -> System.exit(0));
         delay.play();

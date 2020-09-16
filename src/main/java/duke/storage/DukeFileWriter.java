@@ -44,7 +44,7 @@ public class DukeFileWriter extends DukeFile {
                 inputList.add(input);
                 write(inputList);
             }
-        } catch (IOException ex) {
+        } catch (IOException | DukeException ex) {
             System.out.println(DukeException.fileWritingException());
         }
     }

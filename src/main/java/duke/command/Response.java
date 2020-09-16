@@ -1,4 +1,6 @@
-package duke.tools;
+package duke.command;
+
+import duke.tools.Format;
 
 /**
  * Make response to the user's input.
@@ -19,6 +21,6 @@ public class Response {
 
     @Override
     public String toString() {
-        return this.response;
+        return new Format<>(response).toString();
     }
 }

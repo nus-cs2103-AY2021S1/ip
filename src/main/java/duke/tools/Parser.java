@@ -1,17 +1,24 @@
 package duke.tools;
 
+import duke.command.ByeCommand;
+import duke.command.ClearCommand;
+import duke.command.Command;
 import duke.command.CommandString;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.EventCommand;
+import duke.command.FindCommand;
+import duke.command.HelpCommand;
+import duke.command.ListCommand;
+import duke.command.TodoCommand;
+import duke.command.UpdateCommand;
 import duke.exception.DukeException;
+import duke.exception.Exceptions;
 import duke.main.Directory;
-import duke.main.Statement;
-import duke.storage.DukeFileEditor;
 import duke.storage.DukeFileReader;
-import duke.storage.DukeFileWriter;
-import duke.task.Deadline;
-import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.task.Todo;
 
 /**
  * Deals with the strings from the client
@@ -43,7 +50,7 @@ public class Parser {
     /**
      * Refreshes the taskList.
      */
-    public static void reloadTaskList() {
+    public static void reloadTaskList() throws DukeException {
         taskList = new TaskList<>();
         taskList = new DukeFileReader(Directory.FILEDIRECTORY).loadFile();
     }
@@ -66,7 +73,7 @@ public class Parser {
      * @param order The order is the string after
      *              being shortened by Format.shorten().
      */
-    public static String run(String order) {
+    public static Command run(String order) throws DukeException {
 
         extract = new String[3];
         extract = extract(order);
@@ -75,12 +82,20 @@ public class Parser {
 
         reloadTaskList();
 
-        if (order.equals(CommandString.LIST)) {
-            return new Format<>(Statement.LIST.toString() + taskList).toString();
+        if (order.equals(CommandString.BYE)) {
+            return new ByeCommand();
+        } else if (order.equals(CommandString.LIST)) {
+            return new ListCommand();
         } else {
 
             if (order.length() > 0) {
                 switch (extract[command]) {
+                case CommandString.BYE:
+                    return new ByeCommand();
+                case CommandString.LIST:
+                    return new ListCommand();
+                case CommandString.HELP:
+                    return new HelpCommand();
                 case CommandString.DONE:
                     return done();
                 case CommandString.DELETE:
@@ -105,20 +120,16 @@ public class Parser {
      * Sets done the corresponding
      * task on both the taskList and Duke.txt.
      */
-    public static String done() {
+    public static Command done() {
         try {
             int num = Integer.parseInt(extract[taskDetail]);
             if (num > taskList.getTaskList().size()) {
-                return DukeException.numberExcessException();
+                return new DukeException(Exceptions.NUMBEREXCESSEXCEPTION);
             } else {
-                Task task = taskList.getTaskList().get(num - 1);
-                task.setDone();
-                DukeFileEditor dukeFileEditor = new DukeFileEditor(Directory.FILEDIRECTORY);
-                dukeFileEditor.setTaskDone(num);
-                return new Format<>(new Response(Statement.DONE.toString() + task)).toString();
+                return new DoneCommand(num);
             }
         } catch (NumberFormatException e) {
-            return DukeException.numberFormatException();
+            return new DukeException(Exceptions.NUMBERFORMATEXCEPTION);
         }
     }
 
@@ -126,28 +137,17 @@ public class Parser {
      * Deletes the corresponding
      * task on both the taskList and Duke.txt.
      */
-    public static String delete() {
+    public static Command delete() {
         try {
             int num = Integer.parseInt(extract[taskDetail]);
 
             if (num > taskList.getTaskList().size()) {
-                return DukeException.numberExcessException();
+                return new DukeException(Exceptions.NUMBEREXCESSEXCEPTION);
             } else {
-                Task task = taskList.getTaskList().get(num - 1);
-                taskList.getTaskList().remove(num - 1);
-                DukeFileEditor dukeFileEditor = new DukeFileEditor(Directory.FILEDIRECTORY);
-                dukeFileEditor.deleteLine(num);
-
-                String response =
-                        Statement.DELETE.toString()
-                                + task
-                                + FormatString.NEXTLINE.toString()
-                                + String.format
-                                (Statement.REPORT.toString(), taskList.getTaskList().size());
-                return new Format<>(new Response(response)).toString();
+                return new DeleteCommand(num);
             }
         } catch (NumberFormatException e) {
-            return DukeException.numberFormatException();
+            return new DukeException(Exceptions.NUMBERFORMATEXCEPTION);
         }
     }
 
@@ -157,20 +157,12 @@ public class Parser {
      *
      * @param content The user input content.
      */
-    public static String find(String content) {
+    public static Command find(String content) {
         try {
-            taskList = new TaskList<>();
-            DukeFileReader dukeFileReader = new DukeFileReader(Directory.FILEDIRECTORY);
-            taskList = dukeFileReader.matchContent(content);
-
-            Response response = new Response(
-                    Statement.FIND.toString()
-                            + taskList.toString()
-            );
-
-            return new Format<>(response).toString();
+            String[] contentArray = content.split(" ");
+            return new FindCommand(contentArray);
         } catch (Exception e) {
-            return DukeException.findDetailMissingException();
+            return new DukeException(Exceptions.FINDDETAILMISSINGEXCEPTION);
         }
 
     }
@@ -179,16 +171,8 @@ public class Parser {
      * Clears all records in the file from the
      * directory in Directory class.
      */
-    public static String clear() {
-        DukeFileEditor deleteAll = new DukeFileEditor(Directory.FILEDIRECTORY);
-        deleteAll.clearFile();
-        taskList = new TaskList<>();
-
-        Response response = new Response(
-                Statement.CLEAR.toString()
-        );
-
-        return new Format<>(response).toString();
+    public static Command clear() {
+        return new ClearCommand();
     }
 
     /**
@@ -199,7 +183,7 @@ public class Parser {
      *
      * @return String that contains all tasks after update.
      */
-    public static String update() {
+    public static Command update() {
         //The number of the task to update is in taskDetail.
         String[] indexAndTypeOfUpdate = extract[taskDetail].split(" ");
 
@@ -209,7 +193,7 @@ public class Parser {
         //Checks if there are more things other than
         //one index and one partToUpdate.
         if (indexAndTypeOfUpdate.length > 2) {
-            return DukeException.updateFormatException();
+            return new DukeException(Exceptions.UPDATEFORMATEXCEPTION);
         }
 
         //Extract the index.
@@ -222,13 +206,12 @@ public class Parser {
             int index = Integer.parseInt(indexInString);
 
             if (index > taskList.getTaskList().size()) {
-                return DukeException.numberExcessException();
+                return new DukeException(Exceptions.NUMBEREXCESSEXCEPTION);
             }
 
-            return new DukeFileEditor(Directory.FILEDIRECTORY)
-                    .update(index, command, taskToUpdate);
+            return new UpdateCommand(index, command, taskToUpdate);
         } catch (NumberFormatException e) {
-            return DukeException.numberFormatException();
+            return new DukeException(Exceptions.NUMBERFORMATEXCEPTION);
         }
     }
 
@@ -267,8 +250,6 @@ public class Parser {
             return extract;
         }
 
-        assert pointer != separator : "pointer or separator calculation is wrong";
-
         //details of the description is found
         extract[taskDetail] = Format.shorten(description.substring(pointer + 1, separator));
 
@@ -294,7 +275,7 @@ public class Parser {
      * level, which is essentially the input from the
      * user.
      */
-    public static String identifier() {
+    public static Command identifier() throws DukeException {
         String identity = extract[command];
         String detail = extract[taskDetail];
         String time = extract[taskTime];
@@ -303,46 +284,29 @@ public class Parser {
         if (!identity.equals(CommandString.TODO)
                 & !identity.equals(CommandString.EVENT)
                 & !identity.equals(CommandString.DEADLINE)) {
-            return DukeException.inputFormatException();
+            return new DukeException(Exceptions.INPUTFORMATEXCEPTION);
         }
-
-        assert identity.equals(CommandString.TODO)
-                || identity.equals(CommandString.EVENT)
-                || identity.equals(CommandString.DEADLINE)
-                : "commands other todo or event or deadline passed filter";
 
         //situation that there is no detail of the task, throw error
         if (detail == null) {
-            return DukeException.emptyTaskException();
+            return new DukeException(Exceptions.EMPTYTASKEXCEPTION);
         }
 
-        Task task;
         if (identity.equals(CommandString.TODO)) {
-
-            task = new Todo(detail);
-
+            return new TodoCommand(detail);
         } else {
             try {
                 Time date = new Time(time);
 
                 if (identity.equals(CommandString.DEADLINE)) {
-                    task = new Deadline(detail, date.toString());
+                    return new DeadlineCommand(detail, date);
                 } else {
-                    task = new Event(detail, date.toString());
+                    return new EventCommand(detail, date);
                 }
             } catch (Exception e) {
-                return DukeException.timeFormatException();
+                return new DukeException(Exceptions.TIMEFORMATEXCEPTION);
             }
         }
-
-        assert task != null : "condition set above appears incorrect logic";
-
-        taskList.addMemory(task);
-        DukeFileWriter data = new DukeFileWriter(Directory.FILEDIRECTORY, true);
-        data.writeToFile(task.toString());
-        Format<Task> responseWithFormat =
-                new Format<>(task);
-        return responseWithFormat.toString();
     }
 
 

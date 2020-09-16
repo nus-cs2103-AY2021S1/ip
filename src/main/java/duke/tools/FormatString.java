@@ -39,13 +39,6 @@ public enum FormatString {
         }
     },
 
-    FOURSPACE {
-        @Override
-        public String toString() {
-            return "    ";
-        }
-    },
-
     EMPTY {
         @Override
         public String toString() {

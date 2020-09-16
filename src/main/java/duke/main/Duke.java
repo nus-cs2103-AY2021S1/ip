@@ -1,5 +1,7 @@
 package duke.main;
 
+import duke.command.Response;
+import duke.exception.DukeException;
 import duke.ui.Ui;
 
 /**
@@ -30,8 +32,8 @@ public class Duke {
      * @param input String of user input.
      * @return The response of the user input.
      */
-    public String getResponse(String input) {
-        return ui.getResponse(input);
+    public Response getResponse(String input) throws DukeException {
+        return ui.getCommand(input).process();
     }
 
 }

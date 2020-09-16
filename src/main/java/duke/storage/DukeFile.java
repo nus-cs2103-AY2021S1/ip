@@ -8,6 +8,8 @@ import java.nio.file.Paths;
 import java.util.List;
 
 import duke.exception.DukeException;
+import duke.exception.Exceptions;
+import duke.main.Duke;
 
 /**
  * Makes general approaches to access a file given a directory.
@@ -38,12 +40,13 @@ public class DukeFile {
     /**
      * Creates a new file in the path.
      */
-    protected void createFile() {
+    protected void createFile() throws DukeException {
         try {
             Files.createDirectories(path.getParent());
             Files.createFile(path);
         } catch (IOException e) {
-            System.out.println(DukeException.fileAlreadyExistException());
+//            System.out.println(DukeException.fileAlreadyExistException());
+            throw new DukeException(Exceptions.FILEALREADYEXIST);
         }
     }
 
@@ -52,12 +55,11 @@ public class DukeFile {
      *
      * @return A list of Strings that represent the tasks.
      */
-    protected List<String> readFile() {
+    protected List<String> readFile() throws DukeException {
         try {
             return Files.readAllLines(path);
         } catch (IOException e) {
-            System.out.println(DukeException.fileException());
-            return null;
+            throw new DukeException(Exceptions.FILEEXCEPTION);
         }
     }
 
@@ -67,7 +69,7 @@ public class DukeFile {
      *
      * @param taskStrings A List of String with task information.
      */
-    protected void write(List<String> taskStrings) {
+    protected void write(List<String> taskStrings) throws DukeException {
         try {
             BufferedWriter writer = Files.newBufferedWriter(path);
             for (String taskString : taskStrings) {
@@ -78,7 +80,8 @@ public class DukeFile {
             writer.flush();
             writer.close();
         } catch (IOException e) {
-            System.out.println(DukeException.fileWritingException());
+//            System.out.println(DukeException.fileWritingException());
+            throw new DukeException(Exceptions.WRITINGEXCEPTION);
         }
     }
 }
