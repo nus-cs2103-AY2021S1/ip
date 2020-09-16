@@ -1,6 +1,9 @@
 package duke.exception;
 
-public class EmptyTaskException extends MissingElementException {
+/**
+ * Exception thrown when the task is empty.
+ */
+public class EmptyTaskException extends DukeException {
     public EmptyTaskException() {
         super("A task cannot be empty.");
     }

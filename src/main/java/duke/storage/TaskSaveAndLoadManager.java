@@ -46,7 +46,6 @@ public class TaskSaveAndLoadManager {
      */
     public TaskManager loadTaskManager() throws IOException {
         List<String> loadedData = FileReadWrite.loadFromSavedFile();
-        // System.out.println(loadedData.get(0));
         ArrayList<Task> taskList = new ArrayList<>();
         if (loadedData != null) {
             for (String string : loadedData) {

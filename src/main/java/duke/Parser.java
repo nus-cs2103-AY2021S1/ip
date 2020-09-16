@@ -18,6 +18,7 @@ import duke.exception.DukeException;
 import duke.exception.EmptyTaskException;
 import duke.exception.InvalidDateTimeInputException;
 import duke.exception.InvalidNumberInputException;
+import duke.exception.InvalidTaskFormatException;
 import duke.exception.MissingDescriptionException;
 import duke.exception.MissingTaskIndexException;
 import duke.exception.UnexpectedInputException;
@@ -43,9 +44,9 @@ public class Parser {
      * @throws DukeException thrown when there is any exception during the parsing process.
      */
     public static Command parse(String userInput) throws DukeException {
-        int i = userInput.trim().indexOf(' ');
         String command = userInput;
         String detail = "";
+        int i = userInput.trim().indexOf(' ');
         if (i > 0) {
             command = userInput.substring(0, i);
             detail = userInput.substring(i).trim();
@@ -116,22 +117,25 @@ public class Parser {
         if (detail.strip().equals("")) {
             throw new MissingDescriptionException(TaskType.DEADLINE);
         } else {
-            if (!detail.contains("#")) {
-                String descriptionAndTime = detail.replace("/by", "%");
-                String description = descriptionAndTime.split("%")[0];
-                String time = descriptionAndTime.split("%")[1];
-                DateAndTime dateAndTime = parseTime(time.trim());
-                return new DeadlineTask(description, false, dateAndTime, null);
-            } else {
-                int i = detail.indexOf("#");
-                String newDetail = detail.substring(0, i);
-                String descriptionAndTime = newDetail.replace("/by", "%");
-                String description = descriptionAndTime.split("%")[0];
-                String time = descriptionAndTime.split("%")[1];
-                DateAndTime dateAndTime = parseTime(time.trim());
-                TagList taglist = parseTag(detail);
-                System.out.println(taglist.getTagList().size());
-                return new DeadlineTask(description, false, dateAndTime, taglist);
+            try {
+                if (!detail.contains("#")) {
+                    String descriptionAndTime = detail.replace("/by", "%");
+                    String description = descriptionAndTime.split("%")[0];
+                    String time = descriptionAndTime.split("%")[1];
+                    DateAndTime dateAndTime = parseTime(time.trim());
+                    return new DeadlineTask(description, false, dateAndTime, null);
+                } else {
+                    int i = detail.indexOf("#");
+                    String newDetail = detail.substring(0, i);
+                    String descriptionAndTime = newDetail.replace("/by", "%");
+                    String description = descriptionAndTime.split("%")[0];
+                    String time = descriptionAndTime.split("%")[1];
+                    DateAndTime dateAndTime = parseTime(time.trim());
+                    TagList taglist = parseTag(detail);
+                    return new DeadlineTask(description, false, dateAndTime, taglist);
+                }
+            } catch (IndexOutOfBoundsException e) {
+                throw new InvalidTaskFormatException();
             }
         }
     }
@@ -140,15 +144,19 @@ public class Parser {
         if (detail.strip().equals("")) {
             throw new MissingDescriptionException(TaskType.EVENT);
         } else {
-            String descriptionAndTime = detail.replace("/at", "%");
-            String description = descriptionAndTime.split("%")[0];
-            String time = descriptionAndTime.split("%")[1];
-            DateAndTime dateAndTime = parseTime(time.trim());
-            if (!detail.contains("#")) {
-                return new EventTask(description, false, dateAndTime, null);
-            } else {
-                TagList taglist = parseTag(detail);
-                return new EventTask(description, false, dateAndTime, taglist);
+            try {
+                String descriptionAndTime = detail.replace("/at", "%");
+                String description = descriptionAndTime.split("%")[0];
+                String time = descriptionAndTime.split("%")[1];
+                DateAndTime dateAndTime = parseTime(time.trim());
+                if (!detail.contains("#")) {
+                    return new EventTask(description, false, dateAndTime, null);
+                } else {
+                    TagList taglist = parseTag(detail);
+                    return new EventTask(description, false, dateAndTime, taglist);
+                }
+            } catch (IndexOutOfBoundsException e) {
+                throw new InvalidTaskFormatException();
             }
         }
     }
@@ -176,7 +184,6 @@ public class Parser {
                 res.addTag(currTag);
             }
         }
-        System.out.println(res.getTagList().size());
         return res;
     }
 
