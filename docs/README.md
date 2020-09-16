@@ -1,7 +1,7 @@
 # User Guide
 
 ## Introduction
-Duke is a Task Manager application which helps you to organize and set up your tasks, events and deadlines.
+Duke is a Task Manager application which helps you to organize and set up your to-do tasks, events and deadlines.
 
 ## Features 
 Overview of available features:  
