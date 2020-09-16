@@ -1,6 +1,7 @@
 # User Guide
 
 Butler is a **desktop app for managing tasks, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Butler can manage your tasks faster than traditional GUI apps.
+This user guide format is heavily referenced from https://se-education.org/addressbook-level3/UserGuide.html
 
 * Table of Contents
 {:toc}
