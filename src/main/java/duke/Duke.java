@@ -47,15 +47,6 @@ public class Duke {
     }
 
     private void run() {
-        Storage storage;
-        TaskList taskList;
-        try {
-            storage = new Storage(dest);
-            taskList = storage.loadTaskList();
-        } catch (IOException e) {
-            ui.printNicely(e.getMessage());
-            return;
-        }
         assert(taskList != null);
         assert(storage != null);
         ui.greet();
