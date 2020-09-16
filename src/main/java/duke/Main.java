@@ -21,6 +21,7 @@ public class Main extends Application {
     public void start(Stage stage) {
         MainWindow mw = new MainWindow();
         Scene scene = new Scene(mw);
+        stage.setTitle("Serina");
         stage.setScene(scene);
         mw.setDuke(duke);
         mw.initialize();
