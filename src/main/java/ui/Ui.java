@@ -1,17 +1,17 @@
 package ui;
 
-import storage.Storage;
-import parser.Parser;
-import exception.DukeException;
-import exception.NumberOutOfRangeException;
-import task.Task;
-import task.Todo;
-import task.Event;
-import task.Deadline;
-import task.TaskList;
-
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
+
+import exception.DukeException;
+import exception.NumberOutOfRangeException;
+import parser.Parser;
+import storage.Storage;
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.TaskList;
+import task.Todo;
 
 /**
  * <h1>User Interface class</h1>
@@ -106,8 +106,8 @@ public class Ui {
      * @return String containing greeting.
      */
     public String greet() {
-        String start = "Woof! I'm Nugget, your personal doggo.\nWhat can I do for you today?\n" +
-                "FYI: You can type 'help' for the commands available.\n";
+        String start = "Woof! I'm Nugget, your personal doggo.\nWhat can I do for you today?\n"
+                + "FYI: You can type 'help' for the commands available.\n";
         String text = start;
         return text;
     }
@@ -128,16 +128,16 @@ public class Ui {
      * @return String containing list of commands.
      */
     public String help() {
-        String text = "Here are the list of commands you can type:\n" +
-                "1. list - Shows the complete list of tasks you have\n" +
-                "2. find <keyword> - Shows tasks in your task list that match the keyword\n" +
-                "3. done <task number> - Marks the task as completed\n" +
-                "4. delete <task number> - Deletes the task from your list\n" +
-                "5. todo <task>- Adds a todo task\n" +
-                "6. event <event details> /at <date in YYYY-MM-DD> - Adds an event\n" +
-                "7. deadline <deadline details> /by <date in YYYY-MM-DD> -  Adds a deadline\n" +
-                "\nOptional: Adding a '/p <priority level>' tag at the end of a task command" +
-                " adds a priority level to your task!\n The default priority level is 0.\n";
+        String text = "Here are the list of commands you can type:\n"
+                + "1. list - Shows the complete list of tasks you have\n"
+                + "2. find <keyword> - Shows tasks in your task list that match the keyword\n"
+                + "3. done <task number> - Marks the task as completed\n"
+                + "4. delete <task number> - Deletes the task from your list\n"
+                + "5. todo <task>- Adds a todo task\n"
+                + "6. event <event details> /at <date in YYYY-MM-DD> - Adds an event\n"
+                + "7. deadline <deadline details> /by <date in YYYY-MM-DD> -  Adds a deadline\n"
+                + "\nOptional: Adding a '/p <priority level>' tag at the end of a task command"
+                + " adds a priority level to your task!\n The default priority level is 0.\n";
         return text;
     }
 
@@ -224,7 +224,8 @@ public class Ui {
      *
      * @return String containing the new Event added and the updated task list.
      */
-    public String event(String task, String date, int priority) throws DateTimeParseException, NumberOutOfRangeException {
+    public String event(String task, String date, int priority)
+            throws DateTimeParseException, NumberOutOfRangeException {
         if (priority < 0) {
             throw new NumberOutOfRangeException();
         } else {
@@ -244,7 +245,8 @@ public class Ui {
      *
      * @return String containing the new Deadline added and the updated task list.
      */
-    public String deadline(String task, String date, int priority) throws DateTimeParseException, NumberOutOfRangeException {
+    public String deadline(String task, String date, int priority)
+            throws DateTimeParseException, NumberOutOfRangeException {
         if (priority < 0) {
             throw new NumberOutOfRangeException();
         } else {

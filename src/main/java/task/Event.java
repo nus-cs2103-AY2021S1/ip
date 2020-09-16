@@ -39,7 +39,8 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        String text = "[E]" + super.toString() + " (at: " + localDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        String text = "[E]" + super.toString() + " (at: "
+                + localDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
         if (getPriority() != 0) {
             return text + " (priority: " + getPriority() + ")";
         } else {

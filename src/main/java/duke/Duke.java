@@ -1,12 +1,8 @@
 package duke;
 
-import storage.Storage;
-import ui.Ui;
-import task.TaskList;
-import javafx.DialogBox;
-
 import java.io.IOException;
 
+import javafx.DialogBox;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -19,6 +15,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import storage.Storage;
+import task.TaskList;
+import ui.Ui;
 
 
 /**
@@ -45,7 +44,7 @@ public class Duke extends Application {
     public Duke() {
         storage = new Storage();
         try {
-            // storage.clear();
+            storage.clear();
             taskList = new TaskList(storage.readData());
             ui = new Ui(taskList, storage);
         } catch (IOException e) {

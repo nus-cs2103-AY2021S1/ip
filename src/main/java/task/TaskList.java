@@ -78,7 +78,6 @@ public class TaskList {
                 }
             }
         }
-        list.add(t);
         totalTasks++;
     }
 

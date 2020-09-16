@@ -39,7 +39,8 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        String text = "[D]" + super.toString() + " (by: " + localDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        String text = "[D]" + super.toString() + " (by: "
+                + localDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
         if (getPriority() != 0) {
             return text + " (priority: " + getPriority() + ")";
         } else {

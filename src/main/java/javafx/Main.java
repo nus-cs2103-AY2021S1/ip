@@ -1,9 +1,8 @@
 package javafx;
 
-import javafx.MainWindow;
 import java.io.IOException;
-import duke.Duke;
 
+import duke.Duke;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
