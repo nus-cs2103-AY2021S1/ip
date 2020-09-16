@@ -36,10 +36,10 @@ public class EventCommand extends Command {
                 tasks.add(newEvent);
                 return ui.addTaskText(newEvent, tasks);
             } catch (Exception e) {
-                return new DukeException("Please input a proper date for your event~").toString();
+                return new DukeException("Write the date properly. (YYYY-MM-DD)").toString();
             }
         } else {
-            return new DukeException("The description of an event cannot be empty~").toString();
+            return new DukeException("Your event needs a description, kid.").toString();
         }
     }
 

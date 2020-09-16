@@ -37,7 +37,7 @@ public class DeleteCommand extends Command {
             tasks.remove(deleteTaskRef - 1);
             return ui.deleteTaskText(deleteTask, tasks);
         } catch (Exception e) {
-            return new DukeException("Please provide a valid task number to delete~").toString();
+            return new DukeException("Tell grandpa which task to delete.").toString();
         }
     }
 

@@ -35,10 +35,10 @@ public class DeadlineCommand extends Command {
                 tasks.add(newDeadline);
                 return ui.addTaskText(newDeadline, tasks);
             } catch (Exception e) {
-                return new DukeException("Please input a proper due date for your deadline~").toString();
+                return new DukeException("Write the date properly. (YYYY-MM-DD)").toString();
             }
         } else {
-            return new DukeException("The description of a deadline cannot be empty~").toString();
+            return new DukeException("Your deadline needs a description, kid.").toString();
         }
     }
 

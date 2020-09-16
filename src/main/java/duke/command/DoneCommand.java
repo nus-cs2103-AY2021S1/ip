@@ -36,7 +36,7 @@ public class DoneCommand extends Command {
             doneTask.setDone();
             return ui.doneText(doneTask);
         } catch (Exception e) {
-            return new DukeException("Please input a valid task number~").toString();
+            return new DukeException("Tell grandpa which task you completed.").toString();
         }
     }
 

@@ -21,10 +21,10 @@ public class ArchiveCommand extends Command {
                 taskList.newList();
                 return ui.archiveText();
             } catch (Exception e) {
-                return new DukeException("Please provide a valid archive path~").toString();
+                return new DukeException("Grandpa doesn't know what file that is.").toString();
             }
         } else {
-            return new DukeException("Please provide an archive path~").toString();
+            return new DukeException("Grandpa doesn't know where to save it.").toString();
         }
     }
 

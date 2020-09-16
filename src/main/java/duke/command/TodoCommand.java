@@ -34,7 +34,7 @@ public class TodoCommand extends Command {
             tasks.add(newTodo);
             return ui.addTaskText(newTodo, tasks);
         } catch (Exception e) {
-            return new DukeException("The description of a todo cannot be empty~").toString();
+            return new DukeException("Your todo needs a description, kid.").toString();
         }
     }
 

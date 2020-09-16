@@ -98,11 +98,11 @@ public class Storage {
                 } else if (temp instanceof Deadline) {
                     Deadline tempDeadline = (Deadline) temp;
                     fileWriter.write("D" + seperator + doneStatus + seperator
-                            + tempDeadline.getTaskName() + seperator + tempDeadline.getDeadlineDate());
+                            + tempDeadline.getTaskName() + seperator + tempDeadline.getDeadlineDate() + "\n");
                 } else if (temp instanceof Event) {
                     Event tempEvent = (Event) temp;
                     fileWriter.write("E" + seperator + doneStatus + seperator
-                            + tempEvent.getTaskName() + seperator + tempEvent.getEventDate());
+                            + tempEvent.getTaskName() + seperator + tempEvent.getEventDate() + "\n");
                 }
             }
             fileWriter.close();
