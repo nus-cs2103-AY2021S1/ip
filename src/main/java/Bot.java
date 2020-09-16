@@ -92,6 +92,8 @@ public class Bot {
                     String tagDetail = dateInfo;
                     output = taskList.tagListing(tagNumber, tagDetail, printer, storage);
                     return output;
+                case ("exit"):
+                    return "exit";
                 default:
                     throw new UndefinedException();
             }

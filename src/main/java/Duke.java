@@ -1,6 +1,7 @@
 import java.io.IOException;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -54,7 +55,9 @@ public class Duke extends Application {
      */
     String getResponse(String input) { //where to get response
         String output = bot.serve(input);
-
+        if (input.equals("exit")) {
+            Platform.exit();
+        }
         return "Duke heard: " + output;
     }
 
