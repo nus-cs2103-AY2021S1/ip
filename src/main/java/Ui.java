@@ -112,7 +112,6 @@ public class Ui {
     public String errorWithLoading() {
         return ("☹ OOPS!!! Your file cannot be loaded :-(");
     }
-<<<<<<< HEAD
 
     public String printFindTask(TaskList task) {
         String str;
@@ -136,13 +135,10 @@ public class Ui {
     public String printInvalidKeyword() {
         return ("☹ OOPS!!! Please tell me a keyword!");
     }
-||||||| 1cb78ba
-=======
 
     public String printPrioritizeTask(TaskList list, int num) {
         return ("\t" + line + "\n\tNoted. I've prioritized this task:\n\t  "
                 + list.getList().get(num - 1)
                 + "\n\t" + line);
     }
->>>>>>> 9add1ed834983e187ad56fdfc20287695369ee95
 }
