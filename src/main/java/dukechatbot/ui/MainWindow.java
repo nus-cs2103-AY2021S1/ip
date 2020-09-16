@@ -1,11 +1,9 @@
 package dukechatbot.ui;
 
-import java.util.Arrays;
 import java.util.Objects;
 
 import dukechatbot.duke.Duke;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;

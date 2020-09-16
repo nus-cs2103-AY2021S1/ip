@@ -91,7 +91,7 @@ public class CommandParser {
             return input.split("\\s+", 2)[1];
         } catch (IndexOutOfBoundsException exception) {
             throw new IndexOutOfBoundsException(
-                    "\u2639 OOPS!!! The description of a task cannot be empty.");
+                    "\u2639 OOPS!!! This command requires a non-empty argument.");
         }
     }
 }

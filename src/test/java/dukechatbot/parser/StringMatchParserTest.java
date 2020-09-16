@@ -38,4 +38,20 @@ public class StringMatchParserTest {
         StringMatchEnum result = StringMatchParser.match(actual, subStr);
         assertEquals(StringMatchEnum.FULL_MATCH, result);
     }
+
+    @Test
+    void emptyspace_no_match() {
+        String actual = "lol 123 name book";
+        String subStr = "   ";
+        StringMatchEnum result = StringMatchParser.match(actual, subStr);
+        assertEquals(StringMatchEnum.NO_MATCH, result);
+    }
+
+    @Test
+    void blankinput_no_match() {
+        String actual = "lol 123 name book";
+        String subStr = "";
+        StringMatchEnum result = StringMatchParser.match(actual, subStr);
+        assertEquals(StringMatchEnum.NO_MATCH, result);
+    }
 }

@@ -12,8 +12,12 @@ import dukechatbot.enums.StringMatchEnum;
 public class StringMatchParser {
     public static StringMatchEnum match(String actual, String substring) {
         String lowerCaseActual = actual.toLowerCase();
-        String lowerCaseSubstr = substring.toLowerCase();
-
+        String lowerCaseSubstr = substring.toLowerCase().trim();
+        
+        if (lowerCaseSubstr.isBlank()) {
+            return NO_MATCH;
+        }
+        
         if (lowerCaseActual.equals(lowerCaseSubstr)) {
             return FULL_MATCH;
         }
