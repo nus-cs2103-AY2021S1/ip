@@ -38,6 +38,10 @@ public class MainWindow extends AnchorPane {
         duke = d;
     }
 
+    public void dukeWelcome() {
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(duke.welcomeMessage(), dukeImage));
+    }
+
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.

@@ -18,8 +18,8 @@ public class Ui {
     /**
      * Prints a welcome message for the user.
      */
-    static String welcome() {
-        return "Konichiwa! Welcome to Kaizen\n"
+    public void welcome() {
+        this.message = "Konichiwa! Welcome to Kaizen\n"
                 + "I am Kai, what can I do for you today?\n";
     }
 

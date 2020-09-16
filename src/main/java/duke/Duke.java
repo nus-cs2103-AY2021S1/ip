@@ -25,6 +25,16 @@ public class Duke {
         }
     }
 
+    /**
+     *  Returns welcome message upon start of program.
+     * @return welcome message
+     */
+    public String welcomeMessage() {
+        this.ui.clearMessage();
+        this.ui.welcome();
+        return ui.toString();
+    }
+
     public String getResponse(String userInput) {
         try {
             ui.clearMessage();
