@@ -73,6 +73,11 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses a string input containing commas.
+     * @param input String input.
+     * @return An arraylist for the elements in the input string that were separated by commas.
+     */
     public static ArrayList<String> checkCommas(String input) {
         ArrayList<String> returnArray = new ArrayList<>();
         if (input.contains(",")) {
@@ -200,6 +205,7 @@ public class Parser {
                 + parseDate.getMonth() + " " + parseDate.getYear();
     }
 
+    @SuppressWarnings("checkstyle:Indentation")
     private static Task handlePriority(String input, TaskType taskType) {
         String priorityString = input.substring(input.indexOf("-PL") + 3);
         System.out.println(input);
