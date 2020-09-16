@@ -102,7 +102,7 @@ public class Parser {
         // TODO: implement multiple edits at once eg. edit 1 /start <start> /end <end>
 
         String missingArgsMessage = "Couldn't edit item. To edit an item, talk to me using the format:\n"
-                + "edit <task number> <what to edit> <edited content>";
+                + "edit TASK_NUMBER WHAT_TO_EDIT NEW_VALUE";
 
         // split around /start, /end or /date
         String[] argsSplit = ParsingHelper.splitAround(args, "\\s+/((start)|(end)|(date)|(description))\\s+",
@@ -131,7 +131,7 @@ public class Parser {
 
     static Event parseEvent(String args) throws DukeParsingException {
         String missingArgsMessage = "Couldn't add event! To add an event, talk to me using the format "
-                + "event <description> /at <start>-<end>!";
+                + "event DESCRIPTION /at START-END!";
 
         String[] argsSplit = ParsingHelper.splitAround(args, "\\s+/at\\s+", missingArgsMessage);
         String description = argsSplit[0];
@@ -146,7 +146,7 @@ public class Parser {
 
     static Deadline parseDeadline(String args) throws DukeParsingException {
         String[] argsSplit = ParsingHelper.splitAround(args, "\\s+/by\\s+", "Couldn't add deadline! "
-                + "To add a deadline, talk to me using the format deadline <description> /by <date>!");
+                + "To add a deadline, talk to me using the format deadline DESCRIPTION /by DATE!");
         String description = argsSplit[0];
         Date date = ParsingHelper.parseDate(argsSplit[1]);
         return new Deadline(description, date);

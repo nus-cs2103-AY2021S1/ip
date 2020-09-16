@@ -46,7 +46,7 @@ class ParsingHelper {
             return dateOnly.parse(dateString);
         } catch (ParseException e) {
             throw new DukeParsingException("Invalid date format! I only understand dates in the format day/month/year"
-                    + " time or day/month/year. Eg. 15/01/2020 17:00 for 15th January 5pm");
+                    + " 24h time or day/month/year. Eg. 15/01/2020 17:00 for 15th January 5pm");
         }
 
     }
