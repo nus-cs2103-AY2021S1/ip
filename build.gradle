@@ -44,11 +44,12 @@ test {
 }
 
 application {
-    mainClassName = "Duke"
+    mainClassName = "dev.jingyen.duke.Launcher"
 }
 
 shadowJar {
     archiveBaseName = "duke"
+    archiveVersion = "0.2"
     archiveClassifier = null
 }
 
