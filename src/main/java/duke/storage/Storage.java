@@ -65,7 +65,7 @@ public class Storage {
      * @return Task string
      */
     public String serializeTask(Task task) {
-        if (task instanceof ToDo || task instanceof Deadline || task instanceof Event) {
+        if (task instanceof Task) {
             char status = task.getIsDone() ? '1' : '0';
             String description = task.getDescription();
 
@@ -73,8 +73,10 @@ public class Storage {
                 return String.format("T | %c | %s\n", status, description);
             } else if (task instanceof Deadline) {
                 return String.format("D | %c | %s | %s\n", status, description, ((Deadline) task).getDoByStr());
-            } else {
+            } else if (task instanceof Event) {
                 return String.format("E | %c | %s | %s\n", status, description, ((Event) task).getTimeStr());
+            } else {
+                return String.format("T | %c | %s\n", status, description);
             }
         } else {
             throw new RuntimeException("Task is invalid. File might be corrupted.");

@@ -16,6 +16,10 @@ public class MagicStrings {
             "Sorry. Please use the correct format: done <order of task in the list>";
     public static final String ERROR_DELETE_FORMAT_INCORRECT =
             "Sorry. Please use the correct format: delete <order of task in the list>";
+    public static final String ERROR_FIND_FORMAT_INCORRECT =
+            "Sorry. Please use the correct format: find <keyword>";
+    public static final String ERROR_EDIT_FORMAT_INCORRECT =
+            "Sorry. Please use the correct format: edit <task index> <new description>";
     public static final String ERROR_COMMAND_FORMAT_INCORRECT =
             "Sorry. I do not understand what that means :')";
     public static final String ERROR_TIME_FORMAT_INCORRECT =

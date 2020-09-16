@@ -3,6 +3,7 @@ package duke.task;
 import java.util.ArrayList;
 import java.util.List;
 
+import duke.Duke;
 import duke.DukeException;
 import duke.ui.Ui;
 import duke.util.MagicStrings;
@@ -72,9 +73,12 @@ public class TaskList {
     /**
      * Sets the task's isDone status to true.
      *
-     * @param index Index of the task in the task list.
+     * @param command User's command.
      */
-    public String markTaskAsDone(int index, Ui ui) throws DukeException {
+    public String markTaskAsDone(String command, Ui ui) throws DukeException {
+        String[] split = Parser.splitCommand(command);
+        int index = Integer.parseInt(split[1]) - 1;
+
         Task task = this.tasks.get(index);
         Task updatedTask = new Task(task.description, true);
 
@@ -91,9 +95,12 @@ public class TaskList {
     /**
      * Removes the (index + 1)th task from the task list.
      *
-     * @param index Index of the to-be-deleted task in the task list.
+     * @param command Index of the to-be-deleted task in the task list.
      */
-    public String deleteTask(int index, Ui ui) throws DukeException {
+    public String deleteTask(String command, Ui ui) throws DukeException {
+        String[] split = Parser.splitCommand(command);
+        int index = Integer.parseInt(split[1]) - 1;
+
         try {
             Task task = this.tasks.get(index);
             this.tasks.remove(task);
@@ -112,11 +119,15 @@ public class TaskList {
      */
     public String editTask(String command, Ui ui) throws DukeException {
         try {
-            String[] split = Parser.splitCommand(command);
-            int index = Integer.parseInt(split[0]);
-            String newDesc = split[1];
+            String[] keyword = Parser.splitCommand(command);
+            String[] rest = Parser.splitCommand(keyword[1]);
+
+            int index = Integer.parseInt(rest[0]) - 1;
+            String newDesc = rest[1];
+
             Task task = tasks.get(index);
             Task newTask;
+
             if (task instanceof ToDo) {
                 newTask = new ToDo(newDesc, task.getIsDone());
             } else if (task instanceof Deadline) {
@@ -128,25 +139,29 @@ public class TaskList {
             }
             this.tasks.set(index, newTask);
             return ui.printTaskEdited(newTask);
-        } catch (IndexOutOfBoundsException e) {
-            throw new DukeException(MagicStrings.ERROR_INDEX_OUT_OF_BOUNDS);
-        } catch (NumberFormatException e) {
-            throw new DukeException(MagicStrings.ERROR_DELETE_FORMAT_INCORRECT);
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
+            throw new DukeException(MagicStrings.ERROR_EDIT_FORMAT_INCORRECT);
         }
     }
 
     /**
      * Returns the list of tasks.
      */
-    public TaskList findTask(String taskKeyword) {
-        List<Task> matchedTasks = new ArrayList<>();
+    public TaskList findTask(String command) throws DukeException {
+        try {
+            String[] split = Parser.splitCommand(command);
 
-        for (Task task : this.tasks) {
-            if (task.getDescription().contains(taskKeyword)) {
-                matchedTasks.add(task);
+            List<Task> matchedTasks = new ArrayList<>();
+
+            for (Task task : this.tasks) {
+                if (task.getDescription().contains(split[1])) {
+                    matchedTasks.add(task);
+                }
             }
+            return new TaskList(matchedTasks);
+        } catch (IndexOutOfBoundsException | NumberFormatException e) {
+            throw new DukeException(MagicStrings.ERROR_FIND_FORMAT_INCORRECT);
         }
-        return new TaskList(matchedTasks);
     }
 
     /**
