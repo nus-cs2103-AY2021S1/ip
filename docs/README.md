@@ -27,7 +27,7 @@ Duke Chatbot has several features to help you manage your tasks. Sounds interest
 
 ## Quick Start
 * Ensure that you have `java 11` installed on your computer.
-* Download the latest `duke.jar` [here]().
+* Download the latest `duke.jar` [here](https://github.com/AaronnSeah/ip/releases).
 * Double-click the downloaded `duke.jar` to launch the app!
 * The GUI below should appear after a few seconds.
 
