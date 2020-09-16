@@ -3,6 +3,7 @@ package duke;
 import java.util.List;
 
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -52,19 +53,6 @@ public class Duke extends Application {
         }
         ui.welcome();
     }
-    /*
-    public Duke() {
-        filePath = "data";
-        ui = new Ui();
-        storage = new Storage("data");
-        try {
-            tasks = new TaskList(storage.load());
-        } catch (DukeException e) {
-            ui.showLoadingError();
-            tasks = new TaskList();
-        }
-    }
-    */
 
     /**
      * Main method to get duke to start running and ask for user input
@@ -181,7 +169,6 @@ public class Duke extends Application {
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
-        // more code to be added here later
         //Step 3. Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
             dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
@@ -209,9 +196,9 @@ public class Duke extends Application {
      * @return a label with the specified text that has word wrap enabled.
      */
     private Label getDialogLabel(String text) {
-        // You will need to import `javafx.scene.control.Label`.
         Label textToAdd = new Label(text);
         textToAdd.setWrapText(true);
+        textToAdd.setPadding(new Insets(5,5,5,5));
 
         return textToAdd;
     }

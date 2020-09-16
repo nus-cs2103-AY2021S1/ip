@@ -26,7 +26,7 @@ public class Ui {
     }
 
     public static String welcome() {
-        return "Hello! I'm meimei ^_^\nI could scream at you all day!";
+        return "Hello! I'm meimei ^_^\nWhat can I do for you?";
     }
 
     /**

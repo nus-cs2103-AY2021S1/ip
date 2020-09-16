@@ -27,7 +27,9 @@ public class MainWindow extends AnchorPane {
 
     @FXML
     public void initialize() {
+        scrollPane.setStyle("-fx-background: rgba(190, 144, 212, 0.5)");
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(Ui.welcome(), dukeImage));
     }
 
     public void setDuke(Duke d) {
