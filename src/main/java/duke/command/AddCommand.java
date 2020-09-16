@@ -1,5 +1,10 @@
 package duke.command;
 
+import duke.task.Task;
+import duke.TaskList;
+import duke.Ui;
+import duke.Storage;
+
 public class AddCommand extends Command {
     private Task task;
     
@@ -15,6 +20,26 @@ public class AddCommand extends Command {
     
     public boolean isExit() {
         return false;
+    }
+    
+    @Override
+    public String toString() {
+        return task.toString();
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+
+        if (!(obj instanceof AddCommand)) {
+            return false;
+        }
+
+        AddCommand command = (AddCommand) obj;
+
+        return command.toString().equals(toString());
     }
     
 }

@@ -10,7 +10,7 @@ public class Task {
         this.isDone = false;
     }
     
-    protected String writeMessage() {
+    public String writeMessage() {
         return "";
     }
 

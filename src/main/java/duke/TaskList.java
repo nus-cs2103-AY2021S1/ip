@@ -1,6 +1,7 @@
 package duke;
 
 import java.util.ArrayList;
+import duke.task.Task;
 
 public class TaskList {
     private ArrayList<Task> tasks;
@@ -50,6 +51,35 @@ public class TaskList {
     
     public int size() {
         return this.tasks.size();
+    }
+
+    @Override
+    public String toString() {
+        String str = "";
+        for (int i = 0; i < tasks.size(); i++) {
+            str += (i + 1) + ": " + tasks.get(i);
+
+            if (i != tasks.size() - 1) {
+                str += "\n";
+            }
+        }
+
+        return str;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+
+        if (!(obj instanceof TaskList)) {
+            return false;
+        }
+
+        TaskList tasks = (TaskList) obj;
+
+        return tasks.toString().equals(toString());
     }
     
 }

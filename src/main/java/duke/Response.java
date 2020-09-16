@@ -1,5 +1,7 @@
 package duke;
 
+import duke.task.Task;
+
 public class Response {
     enum Tag {
         LIST,

@@ -1,5 +1,11 @@
 package duke.command;
 
+import duke.TaskList;
+import duke.Ui;
+import duke.Storage;
+import duke.DukeException;
+import duke.task.Task;
+
 public class DoneCommand extends Command {
     private int idx;
 

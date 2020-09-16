@@ -1,11 +1,17 @@
 package duke;
 
+import duke.task.Deadline;
+import duke.task.Task;
+import duke.task.Todo;
+import duke.task.Event;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Storage {
     private File file;
@@ -20,22 +26,22 @@ public class Storage {
             Scanner s = new Scanner(this.file);
             while (s.hasNext()) {
                 String line = s.nextLine();
-                String[] task = line.split(" ");
+                String[] task = line.split(" \\| ");
                 if (task[0].equals("T")) {
-                    Task todo = new Todo(task[4]);
-                    if (task[2].equals("✓")) {
+                    Task todo = new Todo(task[2]);
+                    if (task[1].equals("✓")) {
                         todo.markDone();
                     }
                     tasks.add(todo);
                 } else if (task[0].equals("D")) {
-                    Task deadline = new Deadline(task[4], LocalDateTime.parse(task[6]));
-                    if (task[2].equals("✓")) {
+                    Task deadline = new Deadline(task[2], LocalDateTime.parse(task[3]));
+                    if (task[1].equals("✓")) {
                         deadline.markDone();
                     }
                     tasks.add(deadline);
                 } else if (task[0].equals("E")) {
-                    Task event = new Event(task[4], LocalDateTime.parse(task[6]));
-                    if (task[2].equals("✓")) {
+                    Task event = new Event(task[2], LocalDateTime.parse(task[3]));
+                    if (task[1].equals("✓")) {
                         event.markDone();
                     }
                     tasks.add(event);

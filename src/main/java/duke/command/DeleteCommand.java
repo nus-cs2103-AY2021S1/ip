@@ -1,5 +1,8 @@
 package duke.command;
 
+import duke.*;
+import duke.task.Task;
+
 public class DeleteCommand extends Command {
     private int idx;
 
