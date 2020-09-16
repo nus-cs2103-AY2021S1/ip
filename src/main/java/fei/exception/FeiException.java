@@ -40,9 +40,9 @@ public class FeiException extends Exception {
 
     public static FeiException deadlineParseException() {
         return new FeiException("Sorry, I can't parse the time format of your input. \n"
-                + "I will continue store the deadline in your input format.\n"
-                + "If you prefer a more readable format.\n"
-                + "Use 'yyyy-mm-dd' after '/by' (e.g. 2020-01-01).");
+                + "I will continue store the deadline with your input.\n"
+                + "\nIf you prefer a more readable format,"
+                + " try using 'yyyy-mm-dd' after '/by' (e.g. 2020-01-01).\n");
     }
 
     public static FeiException loadingException() {
