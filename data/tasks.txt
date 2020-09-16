@@ -5,5 +5,8 @@ T | 0 | asd
 T | 0 | asdf
 T | 1 | temp
 T | 1 | this
-T | 0 | this
-T | 0 | try this
+T | 0 | Do my laundry
+D | 0 | Submit math homework  | 2020-10-04
+E | 0 | Go for communications class  | 2020-09-20
+T | 0 | jUst trY thIs
+E | 0 | john trying to do this  | 2020-12-12
