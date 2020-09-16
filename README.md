@@ -18,10 +18,10 @@ Duke handles your tasks and reminds you of upcoming events/deadlines.
       _Usage_: `todo [task description]`  
       Adds a simple todo task to Duke's list. 
    1. `deadline`  
-      _Usage_: `deadline [task description] /by _YYYY_-_MM_-_DD_ _HH_:_MM_`  
+      _Usage_: `deadline [task description] /by YYYY-MM-DD HH:MM`  
       Adds a task to Duke's list with a deadline. Both date and time are required.
    1. `event`  
-      _Usage_: `event [task description] /at _YYYY_-_MM_-_DD_ _HH_:_MM_`  
+      _Usage_: `event [task description] /at YYYY-MM-DD HH:MM`  
       Adds an event with the time and date of the event to Duke's list. Both date and time are required.  
 1. **List your tasks:** `list`  
    _Usage_: `list`  
