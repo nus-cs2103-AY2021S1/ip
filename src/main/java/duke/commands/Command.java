@@ -33,7 +33,7 @@ public abstract class Command {
      * Different child command classes will have different behaviours
      * when the method <code>execute</code> is called.
      * @param input the user input.
-     * @return a boolean value indicating whether or not the program should continue running.
+     * @return <code>true</code>
      * @throws DukeException if an exception has occured while executing the command.
      */
     public abstract boolean execute(String input) throws DukeException;
@@ -60,7 +60,7 @@ public abstract class Command {
      */
     public boolean isDone() {
         return isDone;
-    };
+    }
 
     protected void setDone() {
         isDone = true;
