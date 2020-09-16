@@ -20,7 +20,7 @@ Creates a new Deadline task.
 
 Format: `deadline TASK_DESCRIPTION /by DATE TIME`
 * `DATE` is in DD/MM/YYYY format.
-* `TIME` is in HH:MM format (24 hour clock).
+* `TIME` is in HH:MM (24 hour clock) format.
 
 Example of usage:
 * `deadline iP project /by 16/08/2020 23:59`
@@ -34,7 +34,7 @@ Creates a new Event task.
 
 Format: `event TASK_DESCRIPTION /by DATE START_TIME-END_TIME`
 * `DATE` is in DD/MM/YYYY format.
-* `START_TIME` and `END_TIME` is in HH:MM format (24 hour clock).
+* `START_TIME` and `END_TIME` is in HH:MM (24 hour clock) format.
 
 Example of usage:
 * `event project meeting /at 14/08/2020 21:00-22:00`
