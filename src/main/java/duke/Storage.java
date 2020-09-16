@@ -20,9 +20,9 @@ public class Storage {
     }
 
     /**
-     * Reads a file and update the List of tasks
-     * @return a list of Tasks in recognisable string format
-     * @throws DukeException if file is not found
+     * Reads a file and update the List of tasks.
+     * @return a list of Tasks in recognisable string format.
+     * @throws DukeException if file is not found.
      */
     public List<String> load() throws DukeException {
         try {
@@ -39,9 +39,9 @@ public class Storage {
     }
 
     /**
-     * Updates the current list in duke against the database
-     * @param store the current list of tasks
-     * @param filePath the file path of the database
+     * Updates the current list in duke against the database.
+     * @param store the current list of tasks.
+     * @param filePath the file path of the database.
      */
 
     public static void updateDatabase(List<Task> store, String filePath) {
@@ -63,10 +63,10 @@ public class Storage {
     }
 
     /**
-     * Writes a given text to file
-     * @param filePath of the given file
-     * @param textToAdd input text
-     * @throws IOException if file not found
+     * Writes a given text to file.
+     * @param filePath of the given file.
+     * @param textToAdd input text.
+     * @throws IOException if file not found.
      */
 
     public static void writeToFile(String filePath, String textToAdd) throws IOException {
@@ -76,10 +76,10 @@ public class Storage {
     }
 
     /**
-     * Adds on a given text to existing strings in file specified by the filePath
-     * @param filePath of the specified file to run
-     * @param textToAppend the given text
-     * @throws IOException if file not found
+     * Adds on a given text to existing strings in file specified by the filePath.
+     * @param filePath of the specified file to run.
+     * @param textToAppend the given text.
+     * @throws IOException if file not found.
      */
 
     public static void appendToFile(String filePath, String textToAppend) throws IOException {

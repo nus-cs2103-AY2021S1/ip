@@ -8,8 +8,8 @@ public class DukeException extends Exception {
     private String msg;
 
     /**
-     * Constructor for a duke exception
-     * @param msg a text to be printed out
+     * Constructor for a duke exception.
+     * @param msg a text to be printed out.
      */
     public DukeException(String msg) {
         this.msg = msg;

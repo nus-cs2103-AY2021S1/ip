@@ -18,7 +18,7 @@ public class TaskList {
     }
 
     /**
-     * updating the taskList from the database if file is found
+     * updating the taskList from the database if file is found.
      * @param listOfTask to be created.
      */
     TaskList(List<String> listOfTask) {
@@ -36,9 +36,9 @@ public class TaskList {
     }
 
     /**
-     * method to mark a task in the list as done
-     * @param remain index of the task in list
-     * @return task specified
+     * method to mark a task in the list as done.
+     * @param remain index of the task in list.
+     * @return task specified.
      */
 
     public static Task doneTask(String remain) throws DukeException {
@@ -54,9 +54,9 @@ public class TaskList {
     }
 
     /**
-     * method to add a todo item into the list
-     * @param command description of a todo
-     * @return a new todo task
+     * method to add a todo item into the list.
+     * @param command description of a todo.
+     * @return a new todo task.
      */
 
     public static Task createTodo(String command) throws DukeException {
@@ -69,9 +69,9 @@ public class TaskList {
     }
 
     /**
-     * method to add an Event into the list
-     * @param command description of an event
-     * @return a new event task
+     * method to add an Event into the list.
+     * @param command description of an event.
+     * @return a new event task.
      */
 
     public static Task createEvent(String command) throws DukeException {
@@ -88,9 +88,9 @@ public class TaskList {
     }
 
     /**
-     * method to add a deadline into the list
-     * @param command description of an event
-     * @return a new deadline task
+     * method to add a deadline into the list.
+     * @param command description of an event.
+     * @return a new deadline task.
      */
     public static Task createDeadline(String command) {
         try {
@@ -107,8 +107,8 @@ public class TaskList {
     }
 
     /**
-     * method to recall the list of tasks
-     * @return
+     * Method to recall the list of tasks.
+     * @return list of task.
      */
     public List<Task> getTaskList() {
         Collections.sort(tasks);
@@ -116,12 +116,11 @@ public class TaskList {
     }
 
     /**
-     * Void method to add a task in string format from file
-     * @param task to be added to arraylist of tasks
-     * @param store the arraylist of tasks stored
+     * Void method to add a task in string format from file.
+     * @param task to be added to arraylist of tasks.
+     * @param store the arraylist of tasks stored.
      */
     public static void addTaskFromFile(String task, ArrayList<Task> store) {
-        //assert task.split(" ").length >= 4;
         String taskFormat = task.split(" #", 2)[0];
         String priority = task.split(" #", 2)[1];
         String typeOfTask = taskFormat.split(" ", 2)[0];
@@ -156,9 +155,9 @@ public class TaskList {
     }
 
     /**
-     * Void method to search for a task with a given keyword
-     * @param name of the keyword
-     * @return list of tasks with specified keyword in string format
+     * Void method to search for a task with a given keyword.
+     * @param name of the keyword.
+     * @return list of tasks with specified keyword in string format.
      */
     public static List<Task> findTask(String name) {
         List<Task> result = new ArrayList<>();
@@ -171,8 +170,8 @@ public class TaskList {
     }
 
     /**
-     * method to delete a specific task at the index of the list
-     * @param command the specified index
+     * method to delete a specific task at the index of the list.
+     * @param command the specified index.
      */
 
     public static Task deleteTask(String command) {
@@ -184,8 +183,8 @@ public class TaskList {
     }
 
     /**
-     * Method to get the size of the task list
-     * @return size of list
+     * Method to get the size of the task list.
+     * @return size of list.
      */
     public int getSize() {
         return tasks.size();

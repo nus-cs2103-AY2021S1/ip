@@ -12,9 +12,9 @@ public class Event extends Task {
     protected LocalDate at;
 
     /**
-     * Constructor for an event task
+     * Constructor for an event task.
      * @param description
-     * @param at the specified time
+     * @param at the specified time.
      */
     public Event(String description, String at) {
         super(description);
@@ -22,18 +22,18 @@ public class Event extends Task {
     }
 
     /**
-     * Overloaded constructor for an event task
+     * Overloaded constructor for an event task.
      * @param description
-     * @param at the specified time
-     * @param isDone is the event completed
+     * @param at the specified time.
+     * @param isDone is the event completed.
      */
     Event(String description, String at, boolean isDone) {
         super(description, isDone);
         this.at = LocalDate.parse(at);
     }
     /**
-     * convert a Task string to a format that is "[task] [done/not done] /at [date]"
-     * @return a formatted string to be stored in a file
+     * convert a Task string to a format that is "[task] [done/not done] /at [date]".
+     * @return a formatted string to be stored in a file.
      */
     @Override
     public String inputStyle() {

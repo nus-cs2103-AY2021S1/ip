@@ -16,7 +16,7 @@ public class Task implements Comparable<Task> {
     }
 
     /**
-     * Constructor for a task with a name
+     * Constructor for a task with a name.
      * @param name
      */
     public Task(String name) {
@@ -26,9 +26,9 @@ public class Task implements Comparable<Task> {
     }
 
     /**
-     * Overloaded constructor for a task with a name
+     * Overloaded constructor for a task with a name.
      * @param name
-     * @param isDone if the task is completed
+     * @param isDone if the task is completed.
      */
     public Task(String name, boolean isDone) {
         this.description = name;
@@ -44,9 +44,9 @@ public class Task implements Comparable<Task> {
     }
 
     /**
-     * method to add tasks from given string format
-     * @param task task in a string format
-     * @param store the list of tasks
+     * method to add tasks from given string format.
+     * @param task task in a string format.
+     * @param store the list of tasks.
      */
 
     public static void addTaskFromFile(String task, ArrayList<Task> store) {
@@ -81,8 +81,8 @@ public class Task implements Comparable<Task> {
     }
 
     /**
-     * display icon for a done/not done task
-     * @return
+     * display icon for a done/not done task.
+     * @return specific icon.
      */
     public String getStatusIcon() {
         return (isDone) ? "\u2713" : "\u2718";

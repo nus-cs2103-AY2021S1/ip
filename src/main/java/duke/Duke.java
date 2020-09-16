@@ -60,7 +60,6 @@ public class Duke extends Application {
      */
 
     public String run(String input) {
-        //...
         assert !input.isEmpty();
         Parser p = new Parser();
 
@@ -105,7 +104,6 @@ public class Duke extends Application {
             default:
                 return input;
             }
-            //return input;
         } catch (DukeException e) {
             return Ui.showError(e);
         }
@@ -192,7 +190,7 @@ public class Duke extends Application {
     /**
      * Iteration 1:
      * Creates a label with the specified text and adds it to the dialog container.
-     * @param text String containing text to add
+     * @param text String containing text to add.
      * @return a label with the specified text that has word wrap enabled.
      */
     private Label getDialogLabel(String text) {

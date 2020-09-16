@@ -6,6 +6,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Readfile class to read data from file and update Duke.
+ */
 public class ReadFile {
     static void printFileContents(String filePath) throws FileNotFoundException {
         File f = new File(filePath); // create a File for the given file path
@@ -23,7 +26,7 @@ public class ReadFile {
     }
 
     /**
-     * The main method to test out the ReadFile file
+     * The main method to test out the ReadFile file.
      * @param args
      */
     public static void main(String[] args) {

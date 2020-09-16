@@ -9,9 +9,9 @@ public class Parser {
     Parser() { }
 
     /**
-     * split up the user input and recognise the executable functions
-     * @param input user input
-     * @return command type
+     * split up the user input and recognise the executable functions.
+     * @param input user input.
+     * @return command type.
      */
     public Command parse(String input) {
         if (input.contains("list")) {
@@ -21,7 +21,6 @@ public class Parser {
         } else {
             try {
                 String key = input.split(" ", 2)[0];
-                String command = input.split(" ", 2)[1];
                 if (key.contains("done")) {
                     return Command.DONE;
                 } else if (key.equals("find")) {

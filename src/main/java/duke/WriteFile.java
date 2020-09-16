@@ -3,6 +3,10 @@ package duke;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ * WriteFile class to write task data from duke to specified file location.
+ */
+
 public class WriteFile {
     static void writeToFile(String filePath, String textToAdd) throws IOException {
         FileWriter fw = new FileWriter(filePath);

@@ -13,8 +13,8 @@ public class Deadline extends Task {
 
     /**
      * Constructor for a deadline event.
-     * @param description of the event
-     * @param by deadline speicified
+     * @param description of the event.
+     * @param by deadline specified.
      */
     public Deadline(String description, String by) {
         super(description);
@@ -23,9 +23,9 @@ public class Deadline extends Task {
 
     /**
      * Overloaded constructor for a deadline event with a description.
-     * @param description of the event
-     * @param by deadline specified
-     * @param isDone of the deadline event
+     * @param description of the event.
+     * @param by deadline specified.
+     * @param isDone of the deadline event.
      */
     public Deadline(String description, String by, boolean isDone) {
         super(description, isDone);
@@ -33,8 +33,8 @@ public class Deadline extends Task {
     }
 
     /**
-     * convert a Task string to a format that is "[task] [done/not done] /by [date]"
-     * @return a formatted string to be stored in a file
+     * convert a Task string to a format that is "[task] [done/not done] /by [date]".
+     * @return a formatted string to be stored in a file.
      */
     @Override
     public String inputStyle() {

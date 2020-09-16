@@ -10,12 +10,11 @@ public class Ui {
     private Scanner sc = new Scanner(System.in);
 
     public Ui() {
-        //System.out.println("Hello! I'm meimei ^_^\nI could scream at you all day!");
     }
 
     /**
-     * Method to return command error message
-     * @return error message
+     * Method to return command error message.
+     * @return error message.
      */
     public static String commandError() {
         return "Command not found";
@@ -44,9 +43,9 @@ public class Ui {
     }
 
     /**
-     * Method to return the list of task containing keyword
+     * Method to return the list of task containing keyword.
      * @param taskList
-     * @return list of task in string format
+     * @return list of task in string format.
      */
     public static String tasksFound(List<Task> taskList) {
         if (taskList.isEmpty()) {
@@ -61,17 +60,17 @@ public class Ui {
     }
 
     /**
-     * Method to print exception messages
-     * @param exception type of duke exception
-     * @return exception message
+     * Method to print exception messages.
+     * @param exception type of duke exception.
+     * @return exception message.
      */
     public static String dukeException(DukeException exception) {
         return exception.toString();
     }
 
     /**
-     * duke asks for new user input
-     * @return the user input
+     * duke asks for new user input.
+     * @return the user input.
      */
     public String ask() {
         return sc.nextLine();
@@ -86,9 +85,9 @@ public class Ui {
     }
 
     /**
-     * method to print a task that was successfully added
-     * @param task the added one
-     * @param size of the list
+     * method to print a task that was successfully added.
+     * @param task the added one.
+     * @param size of the list.
      */
     public static String addedTask(Task task, int size) {
         return "Got it. I've added this task:\n" + task
@@ -104,8 +103,8 @@ public class Ui {
     }
 
     /**
-     * method to print a deleted task
-     * @param task that was deleted
+     * method to print a deleted task.
+     * @param task that was deleted.
      */
     public static String deletedTask(Task task) {
         return "Meimei will forget about this task:\n" + task;
