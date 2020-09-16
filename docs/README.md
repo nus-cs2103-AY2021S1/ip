@@ -2,29 +2,30 @@
 
 ## Features 
 
-### Feature 1 
+### Start 
 DukeQ starts by greeting the user, simply echos commands entered by the user, and exits when the user types bye.
 
-### Feature 2 
+### Store
 Store whatever text entered by the user and display them back to the user when requested.
 
-### Feature 3 
+### Mark Done 
 Mark tasks as done.
 
-### Feature 4
+### Track Tasks
 Track three types of tasks - ToDos, Deadlines, and Events.
 
-### Feature 5
+### Delete Tasks
 Delete tasks from the list.
 
-### Feature 6
+### Save Tasks
 Save the tasks in the hard disk automatically whenever the task list changes. Load the data from the hard disk when DukeQ starts up.
 
-### Feature 7
+### Find Tasks
 Find a task by searching for a keyword.
 
-### Feature 8
+### Help
 Get help by typing "help".
+
 
 ## Usage
 
