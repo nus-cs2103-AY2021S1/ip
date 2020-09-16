@@ -14,7 +14,7 @@ public class FindTaskCommand extends Command {
 
     @Override
     public String execute(Ui ui, TaskList taskList) {
-        String s = ui.printFoundTasksHeader();
+        String s = ui.printPrompt("These are the tasks that match the keyword:\n");
         for (int i = 0; i < taskList.getTaskListSize(); i++) {
             Task task = taskList.getTask(i);
             if (task.getDescription().contains(keyword)) {

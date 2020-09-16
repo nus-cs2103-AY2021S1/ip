@@ -3,7 +3,6 @@ package duke.command;
 import duke.TaskList;
 import duke.Ui;
 import duke.exception.EmptyListException;
-import duke.exception.NonExistentTaskException;
 
 public class DeleteCommand extends Command {
 
@@ -12,11 +11,10 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public String execute(Ui ui, TaskList taskList) throws EmptyListException,
-            NonExistentTaskException {
+    public String execute(Ui ui, TaskList taskList) throws EmptyListException {
         if (taskList.isEmpty()) {
             throw new EmptyListException();
         }
-        return ui.printDeletePrompt();
+        return ui.printPrompt("Which task do you want to delete?\n");
     }
 }

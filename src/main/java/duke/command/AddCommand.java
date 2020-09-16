@@ -12,6 +12,9 @@ public class AddCommand extends Command {
 
     @Override
     public String execute(Ui ui, TaskList taskList) {
-        return ui.printTaskTypes();
+        return ui.printPrompt("What kind of task is it?\n"
+                + " - Todo\n"
+                + " - Deadline\n"
+                + " - Event\n");
     }
 }

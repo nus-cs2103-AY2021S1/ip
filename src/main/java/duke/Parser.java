@@ -1,7 +1,20 @@
 package duke;
 
-import duke.command.*;
-
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.CommandType;
+import duke.command.DeleteCommand;
+import duke.command.DeleteTaskCommand;
+import duke.command.DoneCommand;
+import duke.command.DoneTaskCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.FindTaskCommand;
+import duke.command.HelpCommand;
+import duke.command.ListCommand;
+import duke.command.ResetCommand;
+import duke.command.TaskCommand;
+import duke.command.TaskTypeCommand;
 import duke.exception.DukeException;
 import duke.exception.InvalidTaskTypeException;
 import duke.exception.UnknownCommandException;
