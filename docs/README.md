@@ -16,7 +16,7 @@ Junimo is a personal task manager that allows you to add, store, delete, find an
 There are in total 10 features on Junimo for users for you to use. <br/>
 
 Feature | Description
-------- | -----------
+:------ | :----------
 `todo DESCRIPTION` | Adds a todo to the task list.
 `deadline DESCRIPTION /by YYYY-MM-DD` | Adds a deadline to the task list.
 `event DESCRIPTION /at LOCATION` | Adds an event to the task list.
@@ -27,7 +27,7 @@ Feature | Description
 `unarchive TASK_INDEX` | Unarchives the task at specified index in archives list.
 `archives` | Displays the list of tasks in archives.
 `bye` | Exits the Junimo application.
-<br />
+
 
 ### 1. Adding a todo: `todo`
 Adds a todo to the task list.
