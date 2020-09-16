@@ -54,7 +54,7 @@ The following allows you to delete a particular task in the task list.
 
 Format | Example
 ------------ | -------------
-`delete <task number>` | `done 2`
+`delete <task number>` | `delete 2`
 
 ### Find Tasks by Keyword
 
