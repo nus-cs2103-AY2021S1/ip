@@ -135,7 +135,8 @@ public class FileManager {
             } else if (type == 'E') {
                 return 3;
             } else {
-                throw new ErrorExceptions("Error: Wrong item type detected, file might be corrupted!");
+                throw new ErrorExceptions("Error: Wrong item type detected, file might be corrupted!"
+                        + System.lineSeparator() + type);
             }
         } catch (NoSuchElementException e) {
             throw new ErrorExceptions("Failed to load saved file (Type)" + System.lineSeparator()

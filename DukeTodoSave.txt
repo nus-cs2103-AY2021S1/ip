@@ -1,20 +1,9 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-[T][X] gradle test 
-[T][X] GUI added 
-[T][X] GUI added 
-=======
+[T][X] gradle test
+[T][X] GUI added
 [E][X] add (at: 11 Nov 1111 1100)
 [T][X] todo1 
 [E][X] event 1 (at: 22 Feb 2222 1100)
->>>>>>> master
-=======
-[T][X] gradle test 
-[E][X] add (at: 11 Nov 1111 1100)
-[T][X] todo1 
-[E][X] event 1 (at: 22 Feb 2222 1100)
-[T][X] test 
->>>>>>> master
+[T][X] test
 [D][X] number 2 (by: 21 Feb 2222 1100)
 [D][X] number 3 (by: 21 Feb 2222 1000)
 [E][X] number 4 (at: 21 Feb 2222 1300)
