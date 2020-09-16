@@ -55,12 +55,15 @@ public class Duke {
             MainWindow.endDuke();
             return ui.endDuke();
         }
-        commandStorage.writeToFile(input);
+
+        String output;
         try {
             Command command = parser.processMsg(input);
-            return command.execute(input, tasks, ui, commandStorage);
+            output = command.execute(input, tasks, ui, commandStorage);
         } catch (DukeException | ParseException e) {
             return e.getMessage();
         }
+        commandStorage.writeToFile(input);
+        return output;
     }
 }
