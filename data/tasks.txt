@@ -1,3 +1,3 @@
-1.[T][✓] study         <urgent>
-2.[E][✓] study (at: Sep 10 2020)
-3.[D][✘] exam (by: Oct 23 2020) <important>
+1.[T][✓] dance practice
+2.[E][✘] Marco's Bday (at: Oct 02 2020)
+3.[D][✘] prepare git (by: Sep 28 2020) <urgent>

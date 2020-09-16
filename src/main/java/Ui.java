@@ -8,8 +8,8 @@ import java.util.Scanner;
 public class Ui {
     private final Scanner in;
     private final PrintStream out;
-    private static final String LINE_TOP =    "╭⋟────────────────────────────❀• *₊。❀°。─╮\n";
-    private static final String LINE_BOTTOM = "╰───────────────────────────────────────⋞╯\n";
+    private static final String LINE_TOP =    "╭⋟───────────────────────────❀• *₊。❀°。─╮\n";
+    private static final String LINE_BOTTOM = "╰──────────────────────────────────────⋞╯\n";
 
 
 

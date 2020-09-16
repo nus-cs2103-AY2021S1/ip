@@ -34,7 +34,6 @@ public class Parser {
                 try {
                     //s = storage.load();
                     tasks = new TaskList(storage.load());
-                    s = tasks.list.get(1).toString();
                     s = ui.returnAllTasks(tasks);
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();

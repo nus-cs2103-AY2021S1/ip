@@ -24,8 +24,8 @@ public class MainWindow extends AnchorPane {
 
     private Image k = new Image(this.getClass().getResourceAsStream("/images/k.png"));
     private Image marco = new Image(this.getClass().getResourceAsStream("/images/marco.png"));
-    private static final String LINE_TOP =    "╭⋟──────────❀• *₊。❀°。─╮\n";
-    private static final String LINE_BOTTOM = "╰─────────────────────⋞╯\n";
+    private static final String LINE_TOP =    "╭⋟──────────────❀• *₊。❀°。─╮\n";
+    private static final String LINE_BOTTOM = "╰─────────────────────────⋞╯\n";
 
     @FXML
     public void initialize() {
@@ -46,7 +46,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         Duke testBot = new Duke("data/tasks.txt");
-        String formattedInput = LINE_TOP + "                     "
+        String formattedInput = LINE_TOP
                 + userInput.getText() + '\n' + LINE_BOTTOM;
         Label userText = new Label(formattedInput);
         Label dukeText = new Label(getResponse(userInput.getText(),testBot));
