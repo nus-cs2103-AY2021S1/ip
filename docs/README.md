@@ -52,7 +52,7 @@ Format: `list`
 
 ### 2. Adding a task
 
-Add a new task.
+Add a new task to your task management application.
 
 A newly added task is not done by default.
 
@@ -85,7 +85,7 @@ You can add 3 kinds of tasks:
 
 ### 3. Marking a task as done: `done`
 
-Mark the task to be done.
+Mark your task as completed.
 
 :warning: You cannot mark a task to be undone.
 
@@ -100,7 +100,7 @@ The `<task number>` is the number ordering in the list for the task you would li
 
 ### 4. Deleting a task: `delete`
 
-Deletes a task from the application.
+Deletes your task from the application.
 
 :warning: You cannot recover a deleted task.
 
@@ -114,7 +114,7 @@ The `<task number>` is the number ordering in the list for the task you would li
 <br><br><br><br>
 
 ### 5. Finding tasks by name: `find`
-Find tasks by name.
+Find your tasks by name.
 
 Format: `find <keyword>`
 
