@@ -2,9 +2,11 @@
 
 ## Getting Started
 1. Ensure you have Java 11 installed on your computer.
-2. Download the [latest version of jimmy.jar](https://github.com/chewypiano/ip).
+2. Download the [latest version of jimmy.jar](https://github.com/chewypiano/ip/releases/tag/A-Release).
 3. Copy the file to the folder you want to use as the home folder of your Jimmy program.
-
+4. Open your Command Prompt (for windows) or Terminal (for MAC) and change directory to the source folder of jimmy.jar as shown in the example below:\
+`cd User/Desktop/ExampleSourceFolder`
+5. Next, run the command `java -jar jimmy.jar` and the GUI for Jimmy should appear.
 5. Type a command in the text box to execute it. For example, typing `help` and pressing `Send` will
 provide useful information to navigate the app and use it optimally.
 6. Refer to the Features section below for details of each command.
