@@ -7,11 +7,6 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.Optional;
 
-import botbot.tasks.Deadline;
-import botbot.tasks.Event;
-import botbot.tasks.Task;
-import botbot.tasks.Todo;
-
 /**
  * Represents the Botbot task list.
  */
