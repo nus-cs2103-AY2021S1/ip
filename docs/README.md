@@ -29,7 +29,7 @@ Duke is a **desktop chat bot for managing and storing tasks**. Why try to rememb
       
       * **`delete`**`3` : Deletes the 3rd Task shown in the list.
       
-      * **`event`**`3 d/BTS concert dt/2020/06/04 0900`: Updates the 3rd Task shown in the list with the new description and datetime.
+      * **`update`**`3 d/BTS concert dt/2020/06/04 0900`: Updates the 3rd Task shown in the list with the new description and datetime.
 
       * **`find`**`concert`: Finds all tasks containing `concert`.      
       
@@ -65,23 +65,84 @@ Shows a list of all tasks currently created and stored.
 
 Format: `list`
 
+### Adding a todo task: `todo`
 
+Adds a todo task to the list.
 
+Format: `todo DESCRIPTION`
 
+### Adding a deadline task: `deadline`
 
-### Feature 1 
-Description of feature.
+Adds a deadline task to the list.
 
-## Usage
+Format: `deadline DESCRIPTION /by YYYY/MM/DD HHMM`
 
-### `Keyword` - Describe action
+### Adding an event task: `event`
 
-Describe action and its outcome.
+Adds an event task to the list.
 
-Example of usage: 
+Format: `event DESCRIPTION /at YYYY/MM/DD HHMM`
 
-`keyword (optional arguments)`
+### Complete a task : `done`
 
-Expected outcome:
+Completes the specified task from the list.
 
-`outcome`
+Format: `done INDEX`
+
+* Deletes the task at the specified `INDEX`.
+* The index refers to the index number shown in the displayed task list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+### Deleting a task : `delete`
+
+Deletes the specified task from the list.
+
+Format: `delete INDEX`
+
+* Deletes the task at the specified `INDEX`.
+* The index refers to the index number shown in the displayed task list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+### Updating a task : `update`
+
+Updates a task in the list.
+
+Format: `update INDEX [d/DESCRIPTION] [dt/YYYY/MM/DD HHMM]`
+
+* Updates the task at the specified `INDEX`. The index refers to the index number shown in the displayed task list. The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+
+### Finding tasks : `find`
+
+Finds tasks from the list containing matching keyword.
+
+Format: `find KEYWORD`
+
+* Finds all tasks containing `KEYWORD`.
+
+### Exiting the program : `bye`
+
+Exits the program.
+
+Format: `bye`
+
+### Saving the data
+
+AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+
+---
+
+## Command summary
+
+Action | Format, Examples
+--------|------------------
+**Todo** | `todo DESCRIPTION` <br> e.g., `todo Call my mom`
+**Deadline** | `deadline DESCRIPTION /by YYYY/MM/DD HHMM` <br> e.g., `deadline Submit homework /by 2020/05/04 0800`
+**Event** | `event DESCRIPTION /by YYYY/MM/DD HHMM` <br> e.g., `event Blackpink concert /at 2020/05/04 0800`
+**Done** | `done INDEX`<br> e.g., `done 3`
+**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Find** | `find KEYWORD`<br> e.g., `find concert`
+**List** | `list`
+**Help** | `help`
+**Exit** | `bye`
