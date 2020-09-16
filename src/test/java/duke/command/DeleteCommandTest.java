@@ -1,17 +1,18 @@
 package duke.command;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.LinkedList;
+import java.util.Queue;
+
+import org.junit.jupiter.api.Test;
+
 import duke.action.Action;
 import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.task.Todo;
 import duke.ui.Ui;
-import org.junit.jupiter.api.Test;
-
-import java.util.LinkedList;
-import java.util.Queue;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DeleteCommandTest {
 

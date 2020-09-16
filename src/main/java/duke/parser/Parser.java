@@ -31,28 +31,27 @@ public class Parser {
         } else {
             suffix = "";
         }
-
-        switch (prefix) {
-            case TodoCommand.COMMAND_WORD:
-                return prepareTodo(suffix);
-            case DeadlineCommand.COMMAND_WORD:
-                return prepareDeadline(suffix);
-            case EventCommand.COMMAND_WORD:
-                return prepareEvent(suffix);
-            case DoneCommand.COMMAND_WORD:
-                return prepareDone(suffix);
-            case DeleteCommand.COMMAND_WORD:
-                return prepareDelete(suffix);
-            case ListCommand.COMMAND_WORD:
-                return prepareList(suffix);
-            case FindCommand.COMMAND_WORD:
-                return prepareFind(suffix);
-            case ExitCommand.COMMAND_WORD:
-                return new ExitCommand();
-            case UpdateCommand.COMMAND_WORD:
-                return prepareUpdate(suffix);
-            default:
-                throw new DukeException();
+        switch(prefix) {
+        case TodoCommand.COMMAND_WORD:
+            return prepareTodo(suffix);
+        case DeadlineCommand.COMMAND_WORD:
+            return prepareDeadline(suffix);
+        case EventCommand.COMMAND_WORD:
+            return prepareEvent(suffix);
+        case DoneCommand.COMMAND_WORD:
+            return prepareDone(suffix);
+        case DeleteCommand.COMMAND_WORD:
+            return prepareDelete(suffix);
+        case ListCommand.COMMAND_WORD:
+            return prepareList(suffix);
+        case FindCommand.COMMAND_WORD:
+            return prepareFind(suffix);
+        case ExitCommand.COMMAND_WORD:
+            return new ExitCommand();
+        case UpdateCommand.COMMAND_WORD:
+            return prepareUpdate(suffix);
+        default:
+            throw new DukeException();
         }
     }
 

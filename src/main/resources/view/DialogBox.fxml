@@ -21,7 +21,7 @@
                   <AmbientLight color="CHARTREUSE" lightOn="true" BorderPane.alignment="CENTER" />
                </right>
                <center>
-                <Label fx:id="dialog" minHeight="-Infinity" prefWidth="282.0" text="Label" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
+                <Label fx:id="dialog" minHeight="-Infinity" prefWidth="282.0" text="Label" wrapText="true" BorderPane.alignment="CENTER">
                      <font>
                         <Font name="MS Mincho" size="13.0" />
                      </font>
