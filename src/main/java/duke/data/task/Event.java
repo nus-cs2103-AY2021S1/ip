@@ -9,24 +9,28 @@ import java.util.Locale;
  * signifying the time of the event.
  */
 public class Event extends Task {
-    private LocalDate time;
+    private LocalDate date;
 
     /**
      * Constructor for Event, initialises the description and time
      * of event.
      * @param description description of the task.
-     * @param time the time the event starts.
+     * @param date the time the event starts.
      */
-    public Event(String description, LocalDate time) {
+    public Event(String description, LocalDate date) {
         super(description);
-        this.time = time;
+        this.date = date;
+    }
+
+    public LocalDate getDate() {
+        return date;
     }
 
     @Override
     public String toString() {
-        String month = time.getMonth().getDisplayName(TextStyle.SHORT, Locale.forLanguageTag("en"));
-        int day = time.getDayOfMonth();
-        int year = time.getYear();
+        String month = date.getMonth().getDisplayName(TextStyle.SHORT, Locale.forLanguageTag("en"));
+        int day = date.getDayOfMonth();
+        int year = date.getYear();
         String timeDisplay = String.format("%d %s %d", day, month, year);
         return "[E]" + super.toString() + String.format(" (at: %s)", timeDisplay);
     }

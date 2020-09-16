@@ -5,7 +5,7 @@ package duke.ui;
  */
 public class Ui {
     private static final String SPACING = "         ";
-    private static final String DIVIDER = "_______________________________________________________";
+    public static final String DIVIDER = "_______________________________________________________";
 
     /**
      * Displays a welcome message to the user.

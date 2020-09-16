@@ -22,6 +22,10 @@ public class Deadline extends Task {
         this.dueDate = dueDate;
     }
 
+    public LocalDate getDueDate() {
+        return dueDate;
+    }
+
     @Override
     public String toString() {
         String month = dueDate.getMonth().getDisplayName(TextStyle.SHORT, Locale.forLanguageTag("en"));

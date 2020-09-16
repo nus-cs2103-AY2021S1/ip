@@ -2,6 +2,7 @@ package commands;
 
 import duke.data.task.TaskList;
 import duke.storage.Storage;
+import duke.ui.Ui;
 
 public class HelpCommand extends Command {
     public static final String COMMAND_WORD = "help";
@@ -11,14 +12,16 @@ public class HelpCommand extends Command {
 
     @Override
     public CommandResult execute(TaskList tasks, Storage storage) {
-        return new CommandResult(
-    DeadlineCommand.MESSAGE_USAGE
-                + "\n" + DoneCommand.MESSAGE_USAGE
+        return new CommandResult(DoneCommand.MESSAGE_USAGE
                 + "\n" + ExitCommand.MESSAGE_USAGE
-                + "\n" + EventCommand.MESSAGE_USAGE
                 + "\n" + FindCommand.MESSAGE_USAGE
                 + "\n" + HelpCommand.MESSAGE_USAGE
                 + "\n" + ListCommand.MESSAGE_USAGE
+                + "\n" + ReminderCommand.MESSAGE_USAGE
+                + "\n" + Ui.DIVIDER
+                + "\n" + "Commands to create new Tasks..."
+                + "\n" + DeadlineCommand.MESSAGE_USAGE
+                + "\n" + EventCommand.MESSAGE_USAGE
                 + "\n" + ToDoCommand.MESSAGE_USAGE
         );
     }

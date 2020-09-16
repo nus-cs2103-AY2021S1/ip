@@ -60,8 +60,8 @@ public class Storage {
      *                 The elements are in the order: task identifier, description, date.
      */
     private void loadEvent(List<Task> tasks, String[] taskInfo) {
-        String description = taskInfo[1];
-        Task task = new Event(description, LocalDate.parse(taskInfo[2]));
+        String description = taskInfo[2].trim();
+        Task task = new Event(description, LocalDate.parse(taskInfo[3].trim()));
         if (taskInfo[0].contains("1")) {
             task.markAsDone();
         }
@@ -75,8 +75,8 @@ public class Storage {
      *                 The elements are in the order: task identifier, description, date.
      */
     private void loadDeadline(List<Task> tasks, String[] taskInfo) {
-        String description = taskInfo[1];
-        Task task = new Deadline(description, LocalDate.parse(taskInfo[2]));
+        String description = taskInfo[2].trim();
+        Task task = new Deadline(description, LocalDate.parse(taskInfo[3].trim()));
         if (taskInfo[0].contains("1")) {
             task.markAsDone();
         }
@@ -90,7 +90,7 @@ public class Storage {
      *                 The elements are in the order: task identifier, description.
      */
     private void loadToDo(List<Task> tasks, String[] taskInfo) {
-        String description = taskInfo[1];
+        String description = taskInfo[2].trim();
         Task task = new ToDo(description);
         if (taskInfo[0].contains("1")) {
             task.markAsDone();
@@ -104,16 +104,39 @@ public class Storage {
      */
     public void save(Task task) {
         try {
-            FileWriter fileWriter = new FileWriter(filePath, true);
-            String[] strings = task.toString().split("\\|");
-            String isDone = task.getIsDone() ? "1" : "0";
-            String description = strings[2];
-            fileWriter.write(strings[0] + " | " + isDone + " | " + description + "\n");
-            fileWriter.close();
+            if (task instanceof ToDo) {
+                writeToDo(task);
+            } else if (task instanceof Event || task instanceof Deadline) {
+                writeEventOrDeadline(task);
+            }
         } catch (IOException ioException) {
             System.out.println("An error has occurred");
             ioException.printStackTrace();
         }
+    }
+
+    private void writeEventOrDeadline(Task task) throws IOException {
+        FileWriter fileWriter = new FileWriter(filePath, true);
+        String[] strings = task.toString().split("\\|");
+        String isDone = task.getIsDone() ? "1" : "0";
+        String description = task.getDescription();
+        String date = "";
+        if (task instanceof Event) {
+            date += ((Event) task).getDate().toString();
+        } else if (task instanceof Deadline) {
+            date += ((Deadline) task).getDueDate().toString();
+        }
+        fileWriter.write(strings[0] + " | " + isDone + " | " + description + "| " + date + "\n");
+        fileWriter.close();
+    }
+
+    private void writeToDo(Task task) throws IOException {
+        FileWriter fileWriter = new FileWriter(filePath, true);
+        String[] strings = task.toString().split("\\|");
+        String isDone = task.getIsDone() ? "1" : "0";
+        String description = task.getDescription();
+        fileWriter.write(strings[0] + " | " + isDone + " | " + description + "\n");
+        fileWriter.close();
     }
 
 }

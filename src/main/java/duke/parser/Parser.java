@@ -4,16 +4,7 @@ import java.time.LocalDate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import commands.Command;
-import commands.DeadlineCommand;
-import commands.DoneCommand;
-import commands.EventCommand;
-import commands.ExitCommand;
-import commands.FindCommand;
-import commands.HelpCommand;
-import commands.IncorrectCommand;
-import commands.ListCommand;
-import commands.ToDoCommand;
+import commands.*;
 
 /**
  * Parses user input.
@@ -51,6 +42,8 @@ public class Parser {
             return prepareFind(arguments);
         case DoneCommand.COMMAND_WORD:
             return prepareDone(arguments);
+        case ReminderCommand.COMMAND_WORD:
+            return new ReminderCommand();
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
         case HelpCommand.COMMAND_WORD: // Fallthrough

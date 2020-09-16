@@ -21,7 +21,7 @@ public class Duke {
     private TaskList tasks;
     private Parser parser;
     private Ui ui;
-    private String filePath = "data/tasks.txt";
+    private String filePath = "tasks.txt";
 
     /**
      * Constructor for Duke class, initialises objects
