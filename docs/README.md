@@ -8,7 +8,7 @@ while still having the benefits of a Graphical User Interface (GUI).
 
 ## Getting Started
 1. Ensure that you have Java `11` or above installed in your computer.
-2. You can find the latest version of Duke [here](https://github.com/jonasngs/ip/releases/tag/v0.2).
+2. You can find the latest version of Duke [here](https://github.com/jonasngs/ip/releases/tag/A-Release).
 3. Download the `Duke.jar` file and copy the jar file to the folder you want to use as the home folder for Duke.
 4. Double click the file to start the application.
 4. You should be able to see the following application in a few seconds:
