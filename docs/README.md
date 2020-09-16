@@ -24,8 +24,8 @@ There are three types of tasks that the user can enter into the program:
 2. Deadline
 3. Event
 
-#### `todo` - Adding a Todo task
-Format: `todo TODO_DESCRIPTION`  
+#### `todo` or `t` - Adding a Todo task
+Format: `todo TODO_DESCRIPTION` or `t TODO_DESCRIPTION` 
 Adds a Todo task to the program.  
 The description of the todo task is written in the TODO_DESCRIPTION.  
 TODO_DESCRIPTION cannot be left blank.  
@@ -42,8 +42,9 @@ Hai! I have added this task to your list:
 You now have 1 tasks in your list. Gambatte!
 ```  
 
-#### `deadline` - Adding a Deadline task
+#### `deadline` or `d` - Adding a Deadline task
 Format: `deadline DEADLINE_DESCRIPTION /by DEADLINE_ENDDATE DEADLINE_ENDTIME`  
+or `d DEADLINE_DESCRIPTION /by DEADLINE_ENDDATE DEADLINE_ENDTIME`
 Adds a Deadline task to the program.  
 The description of the deadline task is written in the DEADLINE_DESCRIPTION.
 The Deadline date is written in the DEADLINE_ENDDATE. DEADLINE_ENDDATE must be written in YYYY-MM-DD format.  
@@ -62,7 +63,7 @@ Hai! I have added this task to your list:
 You now have 2 tasks in your list. Gambatte!
 ```  
 
-#### `event` - Adding an Event task
+#### `event` or `e` - Adding an Event task
 Format: `event EVENT_DESCRIPTION /at EVENT_AT`  
 Adds an event task to the program.
 The description of the event task is written in the EVENT_DESCRIPTION.  
