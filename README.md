@@ -47,24 +47,24 @@ java -jar out/artifacts/ip_jar/ip.jar
 
 ##### Misc
 ```
-bye # exit program
+bye/b # exit program
 ```
 
 ##### Viewing & querying tasks
 ```
-list # List task details: id, description, time stamp etc...
-find,<keywords> # Search for matches in tasks, return the id
+list/l # List task details: id, description, time stamp etc...
+find/f,<keywords> # Search for matches in tasks, return the id
 ```
 
 ##### Updating tasks
 ```
-done,<task id> # Indicate a task is complete
-delete,<task id> # Delete a task
+done/do,<task id> # Indicate a task is complete
+delete/del,<task id> # Delete a task
 ```
 
 ##### Creating tasks
 ```
-todo,<task name> # Add a task to todos
-deadline,<task name>,<time>
-event,<task name>,<time>
+todo/t,<task name> # Add a task to todos
+deadline/de,<task name>,<time>
+event/e,<task name>,<time>
 ```
