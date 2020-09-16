@@ -9,13 +9,14 @@ import duke.tasks.TaskManager;
  */
 public class ExitCommand extends Command {
     /**
-     * Returns <code>false</code> so that the program will stop running.
+     * Returns true.
+     * Note that this method won't be called for ExitCommand.
      * @param input the user input.
-     * @return <code>false</code>
+     * @return <code>true</code>
      */
     @Override
     public boolean execute(String input) {
-        return false;
+        return true;
     }
 
     /**
