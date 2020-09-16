@@ -64,7 +64,9 @@ Adds an event tasking with the 'task details' as well as Date and Time into Pika
     Steady! I add... wait ah...
         ADDED: [E][X] eat shabusai (at: 14 Nov 2020, 12:00PM)
     Now you got 2 tasks
-![image](./add-event.png)   
+    
+![image](./add-event.png)  
+
 - **Deadline** - `deadline <task details> /by <Date & Time>`
 
 Adds an deadline tasking with the 'task details' as well as Date and Time into PikaDuke. 
