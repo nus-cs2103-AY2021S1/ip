@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
@@ -28,12 +29,14 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private Duke duke;
-    private final static String GREETINGS = "Woof! I'm your favourite Doggo :) \n"
+    private final static String GREETINGS = "Woof! I'm your favourite Doggo!\n"
         + "How can I help you?";
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/pug.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/corgi.png"));
     private Image backgroundImage = new Image(this.getClass().getResourceAsStream("/images/bgimg.png"));
+    private Image sendIcon = new Image(this.getClass().getResourceAsStream("/images/send.png"));
+    private ImageView sendLogo = new ImageView(sendIcon);
 
     /**
      * Initialises the new GUI window.
@@ -41,6 +44,12 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         setDialogBackground();
+
+        //Button
+        sendLogo.setFitHeight(20);
+        sendLogo.setFitWidth(20);
+        sendButton.setGraphic(sendLogo);
+
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().addAll(
             DialogBox.getDukeDialog(GREETINGS, dukeImage)
