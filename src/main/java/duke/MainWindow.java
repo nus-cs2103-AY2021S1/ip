@@ -19,6 +19,8 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
+    private boolean isTerminated;
+
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
@@ -28,22 +30,43 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(Ui.sayHi(), dukeImage));
     }
 
+    public void terminateDuke() {
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.exit(0);
+    }
+
     public void setDuke(Duke d) {
         duke = d;
+        isTerminated = false;
     }
 
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
+
     @FXML
     private void handleUserInput() {
+        //if(isTerminated) terminateDuke();
         String input = userInput.getText();
-        String response = duke.getResponse(input);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
-        );
+        String response = "";
+        try {
+            response = duke.getResponse(input);
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input, userImage),
+                    DialogBox.getDukeDialog(response, dukeImage)
+            );
+        } catch (DukeException terminateDuke) {
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input, userImage),
+                    DialogBox.getDukeDialog(Ui.sayBye(), dukeImage)
+            );
+            isTerminated = true;
+        }
         userInput.clear();
     }
 }

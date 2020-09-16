@@ -10,7 +10,7 @@ public class Duke {
     private final Storage storage = new Storage(FILE_PATH);
     private TaskList tasks;
 
-    public String getResponse(String input) {
+    public String getResponse(String input) throws DukeException {
         return handleCommand(input);
     }
 
@@ -22,48 +22,46 @@ public class Duke {
         tasks = new TaskList(storage.readData());
     }
 
-
     /**
      * Parse command to tasks to handle.
      * @param cmd User's command
      * @return Duke's response
      */
-    private String handleCommand(String cmd) {
-        MyString respond = new MyString();
+    private String handleCommand(String cmd) throws DukeException {
+        MyString response = new MyString();
 
         Parser.CommandType commandType = Parser.getType(cmd);
         switch (commandType) {
             // commands handled by TaskList
             case LIST:
-                tasks.handleList(respond);
+                tasks.handleList(response);
                 break;
             case DELETE:
-                tasks.handleDelete(cmd, respond);
+                tasks.handleDelete(cmd, response);
                 break;
             case FIND:
-                tasks.handleFind(cmd, respond);
+                tasks.handleFind(cmd, response);
                 break;
             case DONE:
-                tasks.handleDone(cmd, respond);
+                tasks.handleDone(cmd, response);
                 break;
             case TODO:
-                tasks.handleToDo(cmd, respond);
+                tasks.handleToDo(cmd, response);
                 break;
             case EVENT:
-                tasks.handleEvent(cmd, respond);
+                tasks.handleEvent(cmd, response);
                 break;
             case DEADLINE:
-                tasks.handleDeadline(cmd, respond);
+                tasks.handleDeadline(cmd, response);
                 break;
             case DO_WITHIN:
-                tasks.handleDoWithin(cmd, respond);
+                tasks.handleDoWithin(cmd, response);
                 break;
             // commands handled by UI only
             case BYE:
-                Ui.sayBye(respond);
-                break;
+                throw new DukeException("");
             case INVALID:
-                Ui.invalidCommand(respond);
+                Ui.invalidCommand(response);
                 break;
             default:
                 break;
@@ -71,6 +69,6 @@ public class Duke {
 
         storage.updateDataFile(tasks.getArrayList());
 
-        return respond.toString();
+        return response.toString();
     }
 }

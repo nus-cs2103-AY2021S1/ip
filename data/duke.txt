@@ -1,5 +1,7 @@
-4
+6
 W|study with Daryl|false|false|false
 T|study |true
-D|study cs2103t|false|false
+D|study cs2103t|true|false
 T|play lol|false
+D|return book|false|Oct 15 2019
+E| date |false| tmr

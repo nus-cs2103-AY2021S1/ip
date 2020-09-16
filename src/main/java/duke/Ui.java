@@ -24,8 +24,8 @@ public class Ui {
         return logo;
     }
 
-    public static void sayBye(MyString response) {
-        response.addNewLines("Bye. Hope to see you again soon!");
+    public static String sayBye() {
+        return "Bye. Hope to see you again soon!";
     }
 
     public static void invalidCommand(MyString response) {
