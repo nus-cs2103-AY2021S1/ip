@@ -18,10 +18,14 @@ Alternatively, you can double-click on the `jar` file at step 4 to start Duke.
 
 ## Usage
 
-> Note:
+>Note:
 > 
-> Words in `UPPER_CASE` are the parameters to be supplied by the user. 
-> e.g. in `todo NAME`, `NAME` is a parameter which can be used as `event abc /at 2020-02-02`.
+>Words in `UPPER_CASE` are the parameters to be supplied by the user. 
+>e.g. in `todo NAME`, `NAME` is a parameter which can be used as `event abc /at 2020-02-02`.
+>
+>`DATE` should be in the format `YYYY-MM-DD`.
+>
+>`INDEX` should be a positive integer.
 
 ### Add a Todo Task: `todo`
 
