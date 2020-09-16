@@ -33,7 +33,7 @@ public class TaskList {
     }
 
     /**
-     * This mmethod adds task to the list.
+     * This method adds task to the list.
      *
      * @param task The task to be added to the list.
      */
