@@ -14,6 +14,8 @@ public class Luke {
 
     /**
      * Creates a Luke object with the given filepath.
+     *
+     * @param filePath path of the data file that contains the current list of tasks
      */
     public Luke(String filePath) {
         this.storage = new Storage(filePath);

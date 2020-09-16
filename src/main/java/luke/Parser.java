@@ -32,6 +32,7 @@ public class Parser {
      *
      * @param taskStr the line that contains information about a task
      * @return the corresponding task
+     * @throws LukeLoadingDataException If fails to load data
      */
     public static Task parseTask(String taskStr) throws LukeLoadingDataException {
         assert taskStr.equals("") : "Task should not be empty.";

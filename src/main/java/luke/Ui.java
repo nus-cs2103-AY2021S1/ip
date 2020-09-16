@@ -28,6 +28,7 @@ public class Ui {
     /**
      * Show error message to the user.
      *
+     * @param e exception
      * @return error message
      */
     public String showError(LukeException e) {

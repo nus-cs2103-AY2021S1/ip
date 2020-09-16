@@ -3,7 +3,6 @@ package luke;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -35,7 +34,8 @@ public class Storage {
     /**
      * Reads task list from the file.
      *
-     * @return Latest task list.
+     * @return the current task list
+     * @throws LukeException If fails to load data
      */
     public List<Task> load() throws LukeException {
         createDataFolderDir();
@@ -61,11 +61,11 @@ public class Storage {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(this.dataFileDir, false))) {
             // write task to hard disk (./data/tasks.txt)
             // for each task inside the TaskList, toDataString, then write to file
-            String dataString = "";
+            StringBuilder dataString = new StringBuilder();
             for (int i = 0; i < tasks.getSize(); i++) {
-                dataString += tasks.getTask(i).toDataString() + "\n";
+                dataString.append(tasks.getTask(i).toDataString()).append("\n");
             }
-            bw.write(dataString);
+            bw.write(dataString.toString());
             bw.flush();
         } catch (IOException e) {
             e.printStackTrace();
@@ -82,13 +82,11 @@ public class Storage {
     private List<Task> loadDataFile() throws LukeException {
         List<Task> tasks = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(this.dataFileDir))) {
-            String readLine = null;
+            String readLine;
             while ((readLine = br.readLine()) != null) {
                 Task parsedTask = Parser.parseTask(readLine);
                 tasks.add(parsedTask);
             }
-        } catch (FileNotFoundException e) {
-            throw new LukeException(e.getMessage());
         } catch (IOException e) {
             throw new LukeException(e.getMessage());
         }

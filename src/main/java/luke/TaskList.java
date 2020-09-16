@@ -32,7 +32,7 @@ public class TaskList {
      * Retrieves the task that corresponds to the given index.
      *
      * @param i index of the task
-     * @return The task that corresponds to the given index
+     * @return the task that corresponds to the given index
      */
     public Task getTask(int i) {
         return this.tasks.get(i);
@@ -41,7 +41,7 @@ public class TaskList {
     /**
      * Retrieves the number of tasks inside the current tasklist.
      *
-     * @return The size of tasks inside the current tasklist
+     * @return the size of tasks inside the current tasklist
      */
     public int getSize() {
         return this.tasks.size();
@@ -52,6 +52,7 @@ public class TaskList {
      * within the current list of tasks.
      *
      * @param taskNumber the index of the task to be deleted
+     * @return the task that has been deleted
      */
     public Task deleteTask(int taskNumber) {
         int idx = taskNumber - 1;
@@ -65,6 +66,7 @@ public class TaskList {
      * within the current list of tasks.
      *
      * @param taskNumber the index of the task to be deleted
+     * @return the task that has been marked as done
      */
     public Task doTask(int taskNumber) {
         int idx = taskNumber - 1;
@@ -78,6 +80,8 @@ public class TaskList {
      * within the current list of tasks.
      *
      * @param input the given keyword used to find a task
+     * @return the list of tasks that matches the keyword
+     * @throws LukeNoResultException If there is no search result
      */
     public List<Task> findTask(String input) throws LukeNoResultException {
         ArrayList<Task> result = new ArrayList<>();
