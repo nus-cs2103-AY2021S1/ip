@@ -81,4 +81,4 @@ Finds and displays items containing the given phrase.
 Format: `find KEYWORD`
 
 ### Saving the list
-Duke automatically saves the task list after any changes, so there is no need to save manually. The task list is saved in the file **data/tasklist.txt**, which is relative to the directory that the JAR file for Duke is in.
+Duke automatically saves the task list after any changes, so there is no need to save manually. The task list is saved in the file **data/tasks.txt**, which is relative to the directory that the JAR file for Duke is in.
