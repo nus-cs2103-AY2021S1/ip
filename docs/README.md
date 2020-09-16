@@ -1,7 +1,7 @@
 # Zelda Bot User Guide
 This is simple chat bot application I created for my CS2103 Project. The aesthetics of the bot is inspired by my favourite childhood game: Legend of Zelda.
 
-! [ScreenShot](UI.pngf)
+! [ScreenShot](UI.png)
 
 
 
@@ -9,19 +9,19 @@ This is simple chat bot application I created for my CS2103 Project. The aesthet
 # **Zelda Features**
 
 The following features have been implemented in Zelda Bot:
-1. **Adding** of tasks to the bot.
-2. **Marking Completion** for completed tasks.
-3. **Listing** of all existing tasks.
-4. **Deleting** existing tasks.
-5. **Searching** for tasks using keywords.
-6. **Sorting** tasks according by order of their duedate (if any).
-7. **Viewing Schedule** for a particular month/date.
-8. **Updating** the description or duedate (if any) of a particular task.
+1. [**`Adding`**](#addition) of tasks to the bot.
+2. [**`Marking Completion`**](#marking) for completed tasks.
+3. [**`Listing`**](#list) of all existing tasks.
+4. [**`Deleting`**](#delete) existing tasks.
+5. [**`Searching`**](#search) for tasks using keywords.
+6. [**`Sorting`**](#sort) tasks according by order of their duedate (if any).
+7. [**`Viewing Schedule`**](#schedule) for a particular month/date.
+8. [**`Updating`**](#update) the description or duedate (if any) of a particular task.
 
 ## Feature Details
 
 ___
-### 1. Adding of tasks
+### 1. Adding of tasks <a name="addition"></a>
 
 The user can add new tasks into ZeldaBot. The tasks can be a :
 - deadline
@@ -61,7 +61,7 @@ The user can add new tasks into ZeldaBot. The tasks can be a :
         your list!
 ---
 
-### 2. Marking completion of tasks
+### 2. Marking completion of tasks <a name="marking"></a>
 
 Marks the completion of an existing task, indicated by a cross or a tick. The number of "done" in the command is the index of the task in your list.
 
@@ -80,7 +80,7 @@ done 'task index'
         
 ---
 
-### 3. Listing of tasks
+### 3. Listing of tasks <a name="list"></a>
 
 List all existing tasks in your list.
 
@@ -101,7 +101,7 @@ List all existing tasks in your list.
         
 ---
 
-### 4. Deleting tasks
+### 4. Deleting tasks <a name="delete"></a>
 
 Deletes a tasks in your list of task. The number after "delete" is the index of the task in your list.
 
@@ -122,7 +122,7 @@ delete 'index number of task'
         
 ---
 
-### 5. Searching for tasks
+### 5. Searching for tasks <a name="search"></a>
 
 Searches for a task in your list of tasks with a keyword which bears similarities to the description of the task.
 
@@ -142,7 +142,7 @@ find 'keyword matching task description'
         
 ---
 
-### 6. Sort tasks
+### 6. Sort tasks <a name="sort"></a>
 
 Sorts deadlines and events in your list in order of their duedate, then insert all the todos at the end of the sorted list.
 
@@ -163,7 +163,7 @@ Sorts deadlines and events in your list in order of their duedate, then insert a
     
 ---
 
-### 7. View schedule for a particular date or month
+### 7. View schedule for a particular date or month <a name="schedule"></a>
 
 Display all the tasks you have for a particular date or month. First character of input month must be capitalized and input date must be in yyyy-mm-dd format.
 
@@ -188,7 +188,7 @@ Display all the tasks you have for a particular date or month. First character o
         
 ---
 
-### 8. Update task
+### 8. Update task <a name="update"></a>
 
 Update the description or duedate of an existing task in your list of task.
 
