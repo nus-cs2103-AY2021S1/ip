@@ -2,7 +2,7 @@
 
 > This individual project is a 
   *greenfield project* as part of **CS2103: Software Engineering**. It is inspired by Marlon Brando's 
-  depiction of the titular character of Vito Corleone, ***The Godfather***, . A person of poise, control and composure; users of this application
+  depiction of the titular character of Vito Corleone, ***The Godfather***. A person of poise, control and composure; users of this application
   may find themselves emulating him after keeping track of their tasks.
 
 
@@ -10,7 +10,7 @@
 Be it your todos you've yet to do, your deadlines that you've promised to keep to or events that you have to attent,
 let the _Capo_, ***Vito Corleone*** know and he'll make sure you don't miss it. 
 
-![firstimg](./screenshots/godfather3.png)
+![Marlon Brando](./screenshots/godfather3.png)
 
 
 Here's how someone might use ***The Godfather***:
