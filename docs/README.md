@@ -17,8 +17,9 @@ This will be used for clearing the entire task list.
 
 ![](ClearData.png)
 
-You have the option to purge the entire tasklist. Before doing so 
-you will be prompted for your password.
+By typing in `clear data`, you have the option to purge the entire tasklist. Before doing so 
+you will be prompted for your password. Upon successful authentication, you will trash the entire task
+list.
 
 ### Saving tasks - `todo | event | deadline`
 
@@ -26,15 +27,12 @@ you will be prompted for your password.
 
 You can save tasks in the form of todo, event or deadline to your list.
 Todo tasks requires no dates as compared to the other two.
+Date format is either 2 forms: 
+ - `MM/dd/yyyy`
+ - `yyyy-mm-dd`
 
 ### Done/Deleting task - `done | delete 1 2 3 4 ... n`
 
 ![](Done.png) | ![](Delete.png)
 
-Example of usage: 
-
-`keyword (optional arguments)`
-
-Expected outcome:
-
-`outcome`
+There are options for you to complete/delete either 1 or multiple tasks in a single command.
