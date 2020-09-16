@@ -16,12 +16,28 @@ public class Ui {
         parser = new Parser();
     }
 
+    public String greetings(){
+        return "Hi, this is Duke the All-Knowing task manager.\n"
+                + "Here is my command list, please follow exactly:\n"
+                + "bye\n"
+                + "list\n"
+                + "find <feature>\n"
+                + "done <seq number>\n"
+                + "delete <seq number>\n"
+                + "todo <description>\n"
+                + "event <description> /at <2020-02-02> <18:00>\n"
+                + "deadline <description> /by <2020-02-02> <18:00>\n"
+                + "reminder\n"
+                + "Hope we have a good time together :).\n";
+    }
+
     /**
      * A helper which deals with the Bye instruction.
      * @return a string to say bye to the user
      */
     private String dealBye(){
-        return " Bye. Hope to see you again soon!";
+        return " Bye. Hope to see you again soon!\n"
+                + "You can now close this window to quit me as a program.";
     }
 
     /**
@@ -52,8 +68,8 @@ public class Ui {
                 input.charAt(Parser.DONE_VALID.length() - 1))) - 1;
 
         if (TaskList.taskStorage.get(ref) == null) {
-            return ("I am afraid that it is not possible" +
-                    "to do an unknown task.");
+            return new DukeException("I am afraid that it is not possible" +
+                    "to do an unknown task.").toString();
         }
 
         assert TaskList.taskStorage.get(ref) != null;
@@ -78,16 +94,16 @@ public class Ui {
                 input.charAt(Parser.DEL_VALID.length() - 1))) - 1;
 
         if (TaskList.taskStorage.get(ref) == null) {
-            return ("I am afraid that it is not possible" +
-                    "to delete an unknown task.");
+            return new DukeException("I am afraid that it is not possible" +
+                    "to delete an unknown task.").toString();
         }
 
         assert TaskList.taskStorage.get(ref) != null;
 
-        TaskList.delete(ref);
+        String result = TaskList.delete(ref);
         Storage.write(TaskList.taskStorage);
 
-        return TaskList.delete(ref);
+        return result;
     }
 
     /**
@@ -98,22 +114,26 @@ public class Ui {
     private String dealTodo(String input){
 
         if (!parser.isValidTodo(input)) {
-            return ("The description of a todo cannot be empty lah.");
+            return new DukeException(
+                    "The description of a todo cannot be empty lah."
+            ).toString();
         }
 
         description = input.substring(Parser.TODO_VALIDATION.length(),
                 Parser.TODO_VALIDATION.length() + 1);
 
         if (parser.isEmptyDescription(description)) {
-            return ("OOPS!!! The description of a todo cannot be empty.");
+            return new DukeException(
+                    "OOPS!!! The description of a todo cannot be empty."
+            ).toString();
         }
 
         correctedInput = input.substring(Parser.TODO_VALIDATION.length());
         byOrAt = new DateAndTime();
-        TaskList.write(correctedInput, Parser.TODO, byOrAt);
+        String result = TaskList.write(correctedInput, Parser.TODO, byOrAt);
         Storage.write(TaskList.taskStorage);
 
-        return TaskList.write(correctedInput, Parser.TODO, byOrAt);
+        return result;
 
     }
 
@@ -125,14 +145,18 @@ public class Ui {
     private String dealEvent(String input){
 
         if (!parser.isValidEvent(input)){
-            return ("The description of an event cannot be empty lah.");
+            return new DukeException(
+                    "The description of an event cannot be empty lah."
+            ).toString();
         }
 
         description = input.substring(Parser.EVT_VALIDATION.length(),
                 Parser.EVT_VALIDATION.length() + 1);
 
         if(parser.isEmptyDescription(description)){
-            return ("The description of an event cannot be empty lah.");
+            return new DukeException(
+                    "The description of an event cannot be empty lah."
+            ).toString();
         }
 
         String dateAndTime = input.substring(input.indexOf("/")
@@ -143,10 +167,10 @@ public class Ui {
 
         byOrAt = new DateAndTime(dateAndTime);
         correctedInput = input.substring(Parser.EVT_VALIDATION.length());
-        TaskList.write(correctedInput, Parser.EVT, byOrAt);
+        String result = TaskList.write(correctedInput, Parser.EVT, byOrAt);
         Storage.write(TaskList.taskStorage);
 
-        return TaskList.write(correctedInput, Parser.EVT, byOrAt);
+        return result;
 
     }
 
@@ -158,14 +182,18 @@ public class Ui {
     private String dealDeadline(String input){
 
         if(!parser.isValidDeadline(input)){
-            return ("The description of a deadline cannot be empty lah.");
+            return new DukeException(
+                    "The description of a deadline cannot be empty lah."
+            ).toString();
         }
 
         description = input.substring(Parser.DDL_VALIDATION.length(),
                 Parser.DDL_VALIDATION.length() + 1);
 
         if (parser.isEmptyDescription(description)) {
-            return ("The description of a deadline cannot be empty lah.");
+            return new DukeException(
+                    "The description of a deadline cannot be empty lah."
+            ).toString();
         }
 
         String dateAndTime = input.substring(input.indexOf("/")
@@ -176,15 +204,27 @@ public class Ui {
 
         byOrAt = new DateAndTime(dateAndTime);
         correctedInput = input.substring(Parser.DDL_VALIDATION.length());
-        TaskList.write(correctedInput, Parser.DDL, byOrAt);
+        String result = TaskList.write(correctedInput, Parser.DDL, byOrAt);
         Storage.write(TaskList.taskStorage);
 
-        return TaskList.write(correctedInput, Parser.DDL, byOrAt);
+        return result;
 
     }
 
     private String dealReminder(){
         return TaskList.remind();
+    }
+
+    private String dealStarter(){
+
+                String logo = " ____        _        \n"
+                            + "|  _ \\ _   _| | _____ \n"
+                            + "| | | | | | | |/ / _ \\\n"
+                            + "| |_| | |_| |   <  __/\n"
+                            + "|____/ \\__,_|_|\\_\\___|\n";
+
+        return "Hello from \n" + logo;
+
     }
 
     /**
@@ -194,7 +234,9 @@ public class Ui {
      */
     public String deal(String input) {
 
-        Storage.read();
+        if(parser.isStarter(input)){
+            return dealStarter();
+        }
 
         if (parser.isReminder(input)){
             return dealReminder();
@@ -232,7 +274,9 @@ public class Ui {
             return dealDeadline(input);
         }
 
-        return ("OOPS!!! I'm sorry, but I don't know what that means :-(");
+        return new DukeException(
+                "OOPS!!! I'm sorry, but I don't know what that means :-("
+        ).toString();
 
     }
 

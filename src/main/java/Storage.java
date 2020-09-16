@@ -20,45 +20,49 @@ public class Storage {
     /**
      * Retrieves stored tasks data from storage and print it for the user.
      */
-    public static void read() {
+    public static String read() {
 
         try {
 
             File storage = new File(home);
 
             if (!directoryExists) {
-                System.out.println("I am sorry, but the folder does not exist yet.\n" +
-                        "Let me create one for you now :).");
+
+                String warning = ("I am sorry, but the folder does not exist yet.\n" +
+                        "Let me create one for you now :).\n");
 
                 if (storage.mkdir()) {
-                    System.out.println("Folder is created");
+                    return (warning + "Folder is created");
                 } else {
-                    System.out.println("Folder cannot be created");
+                    return (warning + "Folder cannot be created");
                 }
             }
 
             File myFile = path.toFile();
+            StringBuilder output = new StringBuilder();
+            int i = 0;
 
             if (!myFile.createNewFile()) {
                 Scanner sc = new Scanner(myFile);
 
                 while (sc.hasNextLine()) {
                     String item = sc.nextLine();
-                    System.out.println(item);
+                    i ++;
+                    output = new StringBuilder(i + "." + output.toString() + "\n" + item);
 
                 }
                 sc.close();
-                System.out.println("All items successfully shown");
+                return (output + "\n" + "All items successfully shown!");
 
             } else {
-                System.out.println("I am sorry, but the file does not exist yet.\n" +
+                return ("I am sorry, but the file does not exist yet.\n" +
                         "Please create one.");
             }
 
         } catch (IOException e) {
 
             e.printStackTrace();
-            //throw e;
+            return e.getMessage();
 
         }
     }

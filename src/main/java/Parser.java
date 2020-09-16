@@ -20,11 +20,16 @@ public class Parser {
     public final static String BYORAT = "/by ";
     public final static String FIND = "find";
     public final static String REMINDER = "reminder";
+    public final static String STARTER = "Enter ";
 
     /**
      * Constructs a Parser object to tackle the user inputs/commands.
      */
     public Parser() {
+    }
+
+    public boolean isStarter(String input){
+        return input.contains(STARTER);
     }
 
     public boolean isReminder(String input){

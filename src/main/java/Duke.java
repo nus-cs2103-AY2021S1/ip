@@ -18,60 +18,50 @@ public class Duke extends Application {
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private final Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private final Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
-//    /**
-//     * The main method which handles users and calls relevant methods:
-//     * Storage is called to print out stored tasks on the hard disk from the previous run,
-//     * Ui is called to handle user inputs/ commands specifically.
-//     *
-//     * @param args standard format
-//     */
-//    public static void main(String[] args) {
+    private final Ui ui;
+
 //        String logo = " ____        _        \n"
 //                + "|  _ \\ _   _| | _____ \n"
 //                + "| | | | | | | |/ / _ \\\n"
 //                + "| |_| | |_| |   <  __/\n"
 //                + "|____/ \\__,_|_|\\_\\___|\n";
-//        System.out.println("Hello from\n" + logo +
-//                "People call me Duke the All-Knowing ," +
-//                "ask me anything by typing a line.");
-//
-//        Storage.read();
-//
-//        Ui ui = new Ui();
-//        ui.deal();
-//
-//    }
 
+    public Duke(){
+        this.ui = new Ui();
+    }
+
+    public Ui getUi(){
+        return this.ui;
+    }
+
+    /**
+     * Overridden start method, main entry point to GUI.
+     * @param stage required stage to start
+     */
     @Override
     public void start(Stage stage){
 
         //Step 1. Setting up required components
-
         //The container for the content of the chat to scroll.
+
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
-
         userInput = new TextField();
-        sendButton = new Button("Send");
+        Button sendButton = new Button("Send!");
 
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
-        scene = new Scene(mainLayout);
+        Scene scene = new Scene(mainLayout);
 
         stage.setScene(scene);
         stage.show();
 
-        // more code to be added here later
-        //added now (part 2)
-
-        stage.setTitle("Duke");
+        stage.setTitle("Duke The All-Knowing");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);
@@ -86,6 +76,7 @@ public class Duke extends Application {
         scrollPane.setFitToWidth(true);
 
         // You will need to import `javafx.scene.layout.Region` for this.
+
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
         userInput.setPrefWidth(325.0);
@@ -133,6 +124,7 @@ public class Duke extends Application {
      * the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() {
+
         String userText = userInput.getText();
         String dukeText = getResponse(userInput.getText());
         dialogContainer.getChildren().addAll(
@@ -140,6 +132,7 @@ public class Duke extends Application {
                 DialogBox.getDukeDialog(dukeText, duke)
         );
         userInput.clear();
+
     }
 
     /**
@@ -148,8 +141,7 @@ public class Duke extends Application {
      */
     String getResponse(String input) {
 
-        Ui ui = new Ui();
-        return  ui.deal(input);
+        return  this.ui.deal(input);
 
     }
 

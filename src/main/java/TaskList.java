@@ -102,7 +102,7 @@ public class TaskList {
      */
     public static String remind(){
 
-        ArrayList<Deadline> mostUrgent = new ArrayList<>(0);
+        ArrayList<Deadline> mostUrgent = new ArrayList<>();
 
         for(Task task : TaskList.taskStorage){
 
@@ -118,7 +118,9 @@ public class TaskList {
                  }
 
                  if(((Deadline) task).compareTo(mostUrgent.get(0)) == 0){
-                     mostUrgent.add((Deadline) task);
+                     if(task.description != mostUrgent.get(0).description) {
+                         mostUrgent.add((Deadline) task);
+                     }
                  }
             }
         }
