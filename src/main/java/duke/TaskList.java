@@ -24,7 +24,7 @@ public class TaskList {
     }
 
     public void deleteTask(int index) {
-        taskList.remove(index - 1);
+        taskList.remove(index);
     }
 
     public void markTaskAsDone(int index) throws TaskCompletedException {
