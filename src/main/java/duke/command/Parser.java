@@ -33,11 +33,6 @@ public class Parser {
      * @return "Bob's" response to user commands
      */
     public static String parseCommands(String userCommand, Ui ui, Storage storage) {
-        // If you continue to input commands after saying "bye"
-        if (ui.hasExited()) {
-            return ui.showAlreadyExitedMessage();
-        }
-
         // For single-word user commands
         if (UserCommands.EXIT.getCommandWord().equals(userCommand)) {
             return ui.showGoodbyeMessage();

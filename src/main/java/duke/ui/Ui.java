@@ -29,17 +29,6 @@ public class Ui {
     }
 
     /**
-     * Displays to the user that they have already exited the program and is required to close and reopen the program if
-     * the user wishes to continue using the program.
-     *
-     * @return Message notifying user to close and reopen program to continue using the program.
-     */
-    public String showAlreadyExitedMessage() {
-        return "Why are you still here? You have already said bye to me....." + SKIPLINE
-                + "If you want to continue to talk please close and reopen me :D";
-    }
-
-    /**
      * Displays the standard goodbye message "Bob" gives to users when users exit the program.
      *
      * @return Goodbye message by "Bob".
