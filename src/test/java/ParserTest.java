@@ -1,9 +1,9 @@
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
+
+import org.junit.jupiter.api.Test;
+
 import duke.Parser;
-import org.testng.annotations.Test;
-
-import java.util.Calendar;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class ParserTest {
     @Test
@@ -14,11 +14,11 @@ public class ParserTest {
     @Test
     public void parseDate() {
         try {
-            Calendar calendar = Calendar.getInstance();
-            assertEquals(
-                    Parser.parseDate("12-04-1998").getTime(),
-                    883238400000L
-                    );
+            long actual = Parser
+                    .parseDate("12-04-1998")
+                    .getTime();
+            long expected = 883238400000L;
+            assertEquals(actual, expected);
         } catch (Exception e) {
             fail();
         }

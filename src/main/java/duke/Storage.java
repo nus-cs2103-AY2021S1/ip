@@ -1,6 +1,12 @@
 package duke;
 
-import java.io.*;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 /**
  * Provides a handle to hard disk storage

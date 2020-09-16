@@ -15,11 +15,19 @@ public class TaskList implements java.io.Serializable {
         this.store = new ArrayList<>();
     }
 
+    /**
+     * Adds a task
+     * @param task
+     */
     public void addTask(Task task) {
         store.add(task);
         assert store.size() >= 0;
     }
 
+    /**
+     * Delete a task
+     * @param taskIndex
+     */
     public void deleteTask(int taskIndex) {
         if (taskIndex < 0 || taskIndex >= store.size()) {
             throw new MissingTaskException();
@@ -30,6 +38,11 @@ public class TaskList implements java.io.Serializable {
         System.out.println(task);
     }
 
+    /**
+     * Complete a task
+     * @param taskIndex
+     * @return the result
+     */
     public String completeTask(Integer taskIndex) {
         // If the task doesn't exist (It's index is missing)
         if (taskIndex < 0 || taskIndex >= store.size()) {
@@ -42,6 +55,10 @@ public class TaskList implements java.io.Serializable {
         return String.format("duke task marked as complete: %s", task);
     }
 
+    /**
+     * List of tasks
+     * @return
+     */
     public String list() {
         String listText = "";
         for (int i = 0; i < store.size(); i++) {
@@ -50,6 +67,10 @@ public class TaskList implements java.io.Serializable {
         return listText;
     }
 
+    /**
+     * Dump all the task as a formatted string
+     * @return
+     */
     public String dumpTasks() {
         // Format the store output as a string
         String data = "";
@@ -59,9 +80,14 @@ public class TaskList implements java.io.Serializable {
         return data;
     }
 
+    /**
+     * Find a task
+     * @param text
+     * @return
+     */
     public ArrayList<Task> find(String text) {
         List<Task> matchedTasks = store.stream().filter(
-                task -> task.getName().contains(text)
+            task -> task.getName().contains(text)
         ).collect(Collectors.toList());
 
         return new ArrayList<>(matchedTasks);

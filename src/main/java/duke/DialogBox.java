@@ -13,6 +13,11 @@ public class DialogBox extends HBox {
     private final Label text;
     private final ImageView displayPicture;
 
+    /**
+     * Creates a dialog box
+     * @param l
+     * @param iv
+     */
     public DialogBox(Label l, ImageView iv) {
         text = l;
         displayPicture = iv;

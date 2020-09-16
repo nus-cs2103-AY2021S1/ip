@@ -19,6 +19,9 @@ public class Ui {
         reader = new Scanner(System.in);
     }
 
+    /**
+     * Start the cli
+     */
     public void run() {
         System.out.println("> What can I do for you?");
         getUserCommands();

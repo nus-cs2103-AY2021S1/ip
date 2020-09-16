@@ -3,8 +3,13 @@ package duke;
 import java.util.Date;
 
 public class EventTask extends Task {
-    Date time;
+    private Date time;
 
+    /**
+     * @param isDone
+     * @param name
+     * @param time
+     */
     public EventTask(
             Boolean isDone,
             String name,

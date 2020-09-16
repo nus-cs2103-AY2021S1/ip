@@ -5,6 +5,12 @@ import java.util.Date;
 public class DeadlineTask extends Task {
     private final Date time;
 
+    /**
+     * Create a new deadline task
+     * @param isDone
+     * @param name
+     * @param time
+     */
     public DeadlineTask(
             Boolean isDone,
             String name,

@@ -1,8 +1,12 @@
 package duke;
 
 public class DoneCommand implements Command {
-    Storage store;
+    private Storage store;
 
+    /**
+     * Update task status in store
+     * @param store
+     */
     public DoneCommand(Storage store) {
         this.store = store;
     }
