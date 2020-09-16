@@ -7,7 +7,7 @@ import java.io.IOException;
  */
 public class Warnings extends Ui {
     /**
-     * Display warning message when invalid done task index is given.
+     * Displays and returns warning message when invalid done task index is given.
      *
      * @param tasksSize Size of the user's task list.
      * @return System warning message.
@@ -24,7 +24,7 @@ public class Warnings extends Ui {
     }
 
     /**
-     * Display warning message when invalid ToDoTask input entered.
+     * Displays and returns warning message when invalid ToDoTask input entered.
      *
      * @return System warning message.
      */
@@ -38,7 +38,7 @@ public class Warnings extends Ui {
     }
 
     /**
-     * Display warning message when invalid DeadlineTask input entered.
+     * Displays and returns warning message when invalid DeadlineTask input entered.
      *
      * @return System warning message.
      */
@@ -53,7 +53,7 @@ public class Warnings extends Ui {
     }
 
     /**
-     * Display warning message when invalid EventTask input entered.
+     * Displays and returns warning message when invalid EventTask input entered.
      *
      * @return System warning message.
      */
@@ -68,7 +68,7 @@ public class Warnings extends Ui {
     }
 
     /**
-     * Display warning message when Parser cannot recognize the input.
+     * Displays and returns warning message when Parser cannot recognize the input.
      *
      * @return System warning message.
      */
@@ -81,7 +81,7 @@ public class Warnings extends Ui {
     }
 
     /**
-     * Display warning message when invalid delete input entered.
+     * Displays and returns warning message when invalid delete input entered.
      *
      * @param tasksSize Size of the user's task list.
      * @return System warning message.
@@ -98,7 +98,7 @@ public class Warnings extends Ui {
     }
 
     /**
-     * Display warning message when error occurs while loading data file.
+     * Displays and returns warning message when error occurs while loading data file.
      *
      * @param e Exception message.
      * @return System warning message.
@@ -114,7 +114,7 @@ public class Warnings extends Ui {
     }
 
     /**
-     * Display warning message when error occurs while saving into data file.
+     * Displays and returns warning message when error occurs while saving into data file.
      *
      * @param e Exception message.
      * @return System warning message.
@@ -131,7 +131,7 @@ public class Warnings extends Ui {
     }
 
     /**
-     * Display warning message when error occurs while try to archive a task.
+     * Displays and returns warning message when error occurs while try to archive a task.
      *
      * @param tasksSize Number of tasks in active TaskList.
      * @return System warning message.
@@ -147,7 +147,7 @@ public class Warnings extends Ui {
     }
 
     /**
-     * Display warning message when error occurs while try to find tasks.
+     * Displays and returns warning message when error occurs while try to find tasks.
      *
      * @return System warning message.
      */
@@ -159,6 +159,11 @@ public class Warnings extends Ui {
         return warningMsg;
     }
 
+    /**
+     * Displays and returns warning message when error occurs while use enters a wrong date-time format.
+     *
+     * @return System warning message.
+     */
     public static String getInvalidDateMsg() {
         String warningMsg = " [• ▂ •]What? "
                 + "\n Please make sure you follow this format when enter date - 'yyyy-MM-dd HH:mm'."

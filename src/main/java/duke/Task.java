@@ -30,7 +30,7 @@ public class Task {
     }
 
     /**
-     * Get the status of the task ("✓" or "✗").
+     * Gets the status of the task ("✓" or "✗").
      *
      * @return The icon representing the status of the task.
      */
@@ -41,7 +41,7 @@ public class Task {
     }
 
     /**
-     * Get the status of the task ("1" means done / "0" means not done).
+     * Gets the status of the task ("1" means done / "0" means not done).
      *
      * @return The int representing the status of the task
      */

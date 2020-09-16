@@ -229,7 +229,7 @@ public class Ui {
     }
 
     /**
-     * Prints and returns out all tasks that match the keyword stored in the task list.
+     * Prints and returns all tasks that match the keyword stored in the task list.
      *
      * @param keyword      A string of keyword to find the matching tasks.
      * @param matchedTasks An ArrayList of all the tasks that match with the keyword.

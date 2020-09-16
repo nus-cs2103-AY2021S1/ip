@@ -59,7 +59,7 @@ public class Storage {
         assert !filePath.isEmpty() : "Data filePath is missing.";
         try {
             ArrayList<Task> tasks = taskList.getTaskList();
-            saveUpdatedTaks(tasks, filePath);
+            saveUpdatedTasks(tasks, filePath);
         } catch (IOException e) {
             Warnings.getInvalidFileOutputMsg(e);
         }
@@ -75,12 +75,12 @@ public class Storage {
         return getSavedTasks(archivedFilePath);
     }
 
-    private ArrayList<Task> getSavedTasks(String archivedFilePath) {
-        ArrayList<Task> archivedTasks = new ArrayList<>();
+    private ArrayList<Task> getSavedTasks(String filePath) {
+        ArrayList<Task> taskArrayList = new ArrayList<>();
         try {
-            File archivedFile = new File(archivedFilePath);
-            if (archivedFile.exists()) {
-                FileReader fileReader = new FileReader(archivedFile);
+            File file = new File(filePath);
+            if (file.exists()) {
+                FileReader fileReader = new FileReader(file);
                 BufferedReader bufferedReader = new BufferedReader(fileReader);
                 String lineData = bufferedReader.readLine();
                 while (lineData != null) {
@@ -89,7 +89,7 @@ public class Storage {
                             ? true
                             : false;
 
-                    addDifferentTypeOfTask(archivedTasks, lineSegment, isDone);
+                    addDifferentTypeOfTask(taskArrayList, lineSegment, isDone);
                     lineData = bufferedReader.readLine();
                 }
                 bufferedReader.close();
@@ -98,7 +98,7 @@ public class Storage {
         } catch (IOException e) {
             Warnings.getInvalidFileInputMsg(e);
         }
-        return archivedTasks;
+        return taskArrayList;
     }
 
     /**
@@ -110,20 +110,20 @@ public class Storage {
         assert !archivedFilePath.isEmpty() : "Archived data filePath is missing.";
         try {
             ArrayList<Task> archivedTasks = archivedTaskList.getArchivedTaskList();
-            saveUpdatedTaks(archivedTasks, archivedFilePath);
+            saveUpdatedTasks(archivedTasks, archivedFilePath);
         } catch (IOException e) {
             Warnings.getInvalidFileOutputMsg(e);
         }
     }
 
-    private void saveUpdatedTaks(ArrayList<Task> archivedTasks, String archivedFilePath) throws IOException {
-        File archivedFile = new File(archivedFilePath);
-        archivedFile.getParentFile().mkdirs();
+    private void saveUpdatedTasks(ArrayList<Task> taskArrayList, String filePath) throws IOException {
+        File file = new File(filePath);
+        file.getParentFile().mkdirs();
         FileWriter fileWriter;
 
-        fileWriter = new FileWriter(archivedFile, false);
+        fileWriter = new FileWriter(file, false);
 
-        for (Task task : archivedTasks) {
+        for (Task task : taskArrayList) {
             fileWriter.write(task.writeToFile() + "\n");
         }
         fileWriter.close();

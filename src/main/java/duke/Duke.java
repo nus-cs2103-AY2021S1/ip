@@ -26,7 +26,7 @@ public class Duke {
     }
 
     /**
-     *
+     * Initialises required objects.
      */
     public Duke() {
         String filePath = "data/tasks.txt";
