@@ -197,6 +197,7 @@ public class Parser {
         for (Task task : matches.getList()) {
             if (counter == tasks.size()) {
                 string += counter + "." + task.toString();
+                counter++;
             } else {
                 string += counter + "." + task.toString() + "\n";
                 counter++;
