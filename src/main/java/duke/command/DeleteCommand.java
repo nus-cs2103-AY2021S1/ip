@@ -38,7 +38,7 @@ public class DeleteCommand extends Command {
             response = tasks.taskDelete(index, ui);
             storage.save(tasks.convertToFile());
         } else {
-            throw new DukeException("    Invalid index entry for done command.");
+            throw new DukeException("Invalid index entry for done command.");
         }
         return response;
     }

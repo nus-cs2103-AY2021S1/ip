@@ -14,7 +14,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke("./src/main/java/duke/Data/data.txt", "./src/main/java/duke/Data");
+    private Duke duke = new Duke("./Data/data.txt", "./Data");
 
 
     @Override
@@ -25,9 +25,12 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
+            fxmlLoader.<MainWindow>getController().setStage(stage);
             stage.show();
+            ap.setPrefSize(400.0, 600.0);
         } catch (IOException e) {
             e.printStackTrace();
         }
+        stage.setTitle("Duke");
     }
 }

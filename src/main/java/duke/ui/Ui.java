@@ -26,15 +26,15 @@ public class Ui {
 
     /** Prints welcome message. */
     public String showWelcome() {
-        String logo = "     ____        _        \n"
-                + "    |  _ \\ _   _| | _____ \n"
-                + "    | | | | | | | |/ / _ \\\n"
-                + "    | |_| | |_| |   <  __/\n"
-                + "    |____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("    Welcome to \n" + logo + "\n    Your personal assistant :)");
+        String logo = "\n____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
+        System.out.println("Yoohoo \uD83D\uDE1B \uD83D\uDC2F" + logo + "\nis reporting for duty! \uD83E\uDDB8\u200D");
         showLine();
         showLine();
-        return "    Welcome to \n" + logo + "\n    Your personal assistant :)" + showLine() + showLine();
+        return "Yoohoo \uD83D\uDE1B \uD83D\uDC2F" + "\nDuke reporting for duty! \uD83E\uDDB8\u200D";
     }
 
     /** Prints a breakLine. */
@@ -63,7 +63,7 @@ public class Ui {
     /** Prints exit statement. */
     public String showExit() {
         System.out.println("    Bye. Hope to see you again soon!");
-        return "    Bye. Hope to see you again soon!";
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
@@ -73,7 +73,7 @@ public class Ui {
      */
     public String printTask(int counter, Task task) {
         System.out.println("    " + counter + ": " + task.toString());
-        return "    " + counter + ": " + task.toString();
+        return counter + ": " + task.toString();
     }
 
     /**
@@ -81,7 +81,8 @@ public class Ui {
      */
     public String printResult() {
         System.out.println("    Here are the matching tasks in your list:");
-        return "    Here are the matching tasks in your list:";
+        return "Hehe found them \uD83D\uDE1B\n\n"
+                + "Here are the matching tasks in your list:";
     }
 
     /**
@@ -92,8 +93,8 @@ public class Ui {
     public String addTask(int listSize, Task task) {
         System.out.println("    Got it. I've added this task: \n     " + task.toString());
         System.out.println("    Now you have " + listSize + " tasks in the list.");
-        return "    Got it. I've added this task: \n     " + task.toString()
-                + "\n    Now you have " + listSize + " tasks in the list.";
+        return "Got it. I've added this task: \n" + task.toString()
+                + "\nNow you have " + listSize + " tasks in the list.";
     }
 
     /**
@@ -103,8 +104,8 @@ public class Ui {
     public String markDone(Task task) {
         System.out.println("    Nice! I've marked this task as done:");
         System.out.println("    " + task.toString());
-        return "    Nice! I've marked this task as done:"
-                + "\n    " + task.toString();
+        return "Nice! I've marked this task as done:"
+                + "\n" + task.toString();
     }
 
     /**
@@ -116,9 +117,9 @@ public class Ui {
         System.out.println("    Noted. I've removed this task:");
         System.out.println("    " + task.toString());
         System.out.println("    Now you have " + listSize + " tasks in the list.");
-        return "    Noted. I've removed this task:"
-                + "\n    " + task.toString()
-                + "\n    Now you have " + listSize + " tasks in the list.";
+        return "Noted. I've removed this task:"
+                + "\n" + task.toString()
+                + "\nNow you have " + listSize + " tasks in the list.";
     }
 
 }

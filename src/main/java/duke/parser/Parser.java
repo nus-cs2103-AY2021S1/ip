@@ -23,14 +23,15 @@ import duke.exception.DukeException;
 public class Parser {
 
     private static String unknownCommandMessage = "OOPS!!! I've not yet learned what that means."
-            + "Please enter a valid command :) "
+            + " Please enter a valid command :) "
             + "\n\nAdditionally, do note that the description cannot be empty "
             + "for the following commands:"
             + "\n1. event"
             + "\n2. deadline"
             + "\n3. done"
             + "\n4. delete"
-            + "\n5. find";
+            + "\n5. find"
+            + "\n6. view";
 
     private static boolean isValidDescription(String[] userInput) throws DukeException {
         if (userInput.length == 1 || userInput[1].equals("")) {
@@ -45,23 +46,34 @@ public class Parser {
 
         String[] content = userInput[1].split(keyword, 2);
         if (content.length == 1 || content[0].equals("")) {
-            throw new DukeException("OOPS!!! It seems we can't find your event description.");
+            throw new DukeException("It seems you've not used the appropriate "
+                    + "command syntax. \uD83D\uDE1E\n\nPlease use the following formatting:"
+                    + "\nevent DESCRIPTION /at DD.MM.YY HHmm or\n"
+                    + "deadline DESCRIPTION /by DD.MM.YY HHmm");
         }
         if (content[1].equals("")) {
-            throw new DukeException("OOPS!!! We can't seem to find your event time. Please type "
-                    + "/by before your preferred timing");
+            throw new DukeException("Beep bop!!! We can't seem to find your event time. "
+                    + "\uD83D\uDE1E\n\nPlease type "
+                    + (eventType.equals("deadline") ? "/by" : "/at")
+                    + " before your preferred timing");
         }
         try {
             String[] dateTime = content[1].split(" ", 3);
+
+            if (dateTime.length != 3) {
+                throw new DukeException("Beep bop!!! We can't seem to find your event time. "
+                        + "\uD83D\uDE1E");
+            }
+
             LocalDate localDate = LocalDate.from(dateFormatter.parse(dateTime[1]));
             LocalTime localTime = LocalTime.from(timeFormatter.parse(dateTime[2]));
             return new AddCommand(eventType, content[0], localDate, localTime);
 
         } catch (DateTimeParseException error) {
-            throw new DukeException("OOPS!!! It seems like you've provided us "
-                    + "with the wrong date time format for your event. "
-                    + "Please structure it as dd.mm.yy HHmm where H refers to hour and m refers to min"
-                    + "\n\n For example, 05.02.20 1200 represents 5th Feb 2020, 12pm");
+            throw new DukeException("It seems like you've provided us "
+                    + "with the wrong date time format for your event. \uD83D\uDE1E"
+                    + "\n\nPlease structure it as dd.mm.yy HHmm where H refers to hour and m refers to min"
+                    + "\n\nFor example, 05.02.20 1200 represents 5th Feb 2020, 12pm");
         }
     }
 
@@ -110,6 +122,8 @@ public class Parser {
         switch (userWord[0]) {
         case "view":
             return new ViewDayCommand(userWord[1], dateFormatter);
+            // Fallthrough
+
         case "find":
             return new FindCommand(userWord[1]);
             //Fallthrough

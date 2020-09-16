@@ -38,7 +38,7 @@ public class DoneCommand extends Command {
             response = tasks.taskDone(index, ui);
             storage.save(tasks.convertToFile());
         } else {
-            throw new DukeException("    Invalid index entry for done command.");
+            throw new DukeException("Invalid index entry for done command.");
         }
         return response;
     }

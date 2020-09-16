@@ -1,0 +1,16 @@
+.anchor {
+    -fx-background-image:url('../images/bg2.jpg');
+    -fx-background-size: cover;
+    -fx-background-position: center bottom;
+    -fx-background: transparent;
+
+}
+
+.text-bubble {
+    -fx-background-color: #6886c5;
+    -fx-background-radius: 12px;
+}
+
+.v-box {
+    -fx-background: transparent;
+}

@@ -215,6 +215,8 @@ Command syntax:  `bye`
 
 > **Note:**
 > Do not add any other parameters or descriptions behind the list word to trigger this command successfully.
+
+
 # Command syntax summary
 
 Action | Command Syntax & Example Application

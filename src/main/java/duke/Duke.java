@@ -23,6 +23,9 @@ public class Duke {
     /** Ui object to print user messages. */
     private Ui ui;
 
+    /** Boolean object to indicate if the user wants to close duke */
+    private boolean isExit;
+
     public Duke() {
 
     }
@@ -51,33 +54,25 @@ public class Duke {
      */
     public String run(String command) {
 
-        String response = ui.showLine(); // show the divider line ("_______")
+        String response = ""; // show the divider line ("_______")
 
         try {
             String fullCommand = command;
             Command c = Parser.parse(fullCommand);
-            response = response + c.execute(tasks, ui, storage);
-            //isExit = c.isExit();
+            response = c.execute(tasks, ui, storage);
+            this.isExit = c.isExit();
         } catch (DukeException e) {
-            response = response + "\n" + ui.showError(e.getMessage());
+            response = ui.showError(e.getMessage());
         } finally {
-            response = response + "\n" + ui.showLine();
+            return response;
         }
-        return response;
     }
 
     public String welcome() {
         return ui.showWelcome();
     }
 
-    /**
-     * Starts up the application.
-     * Allow users to set the file and folder path for the data file.
-     * @param args Command line arguments for the program.
-
-    public static void main(String[] args) {
-        new Duke("./src/main/java/duke/Data/data.txt", "./src/main/java/duke/Data").run();
+    public boolean isExit() {
+        return this.isExit;
     }
-    */
-
 }

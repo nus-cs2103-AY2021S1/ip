@@ -57,7 +57,7 @@ public class TaskList {
      */
     public String printList(Ui ui) {
         int counter = 1;
-        String response = "";
+        String response = ui.printResult();
         for (Task task: this.listOfTasks) {
             response = response + "\n" + ui.printTask(counter, task);
             counter += 1;
@@ -152,7 +152,7 @@ public class TaskList {
             }
         }
         if (result.size() == 0) {
-            throw new DukeException("    No matching task found :(");
+            throw new DukeException("No matching task found \uD83D\uDE48");
         }
         int counter = 1;
         String response = ui.printResult();
@@ -174,11 +174,11 @@ public class TaskList {
         for (String t: listOfTasks) {
             String[] task = t.split("///", 4);
             if (task.length != 4) {
-                throw new DukeException("    Error in data file dividers ///");
+                throw new DukeException("Error in data file dividers ///");
             }
 
             if (!task[1].equals("1") && !task[1].equals("0")) {
-                throw new DukeException("    Error encountered in reading task done status." + task[1]);
+                throw new DukeException("Error encountered in reading task done status." + task[1]);
             }
 
             switch (task[0]) {
@@ -199,7 +199,7 @@ public class TaskList {
                 break;
 
             default:
-                throw new DukeException("    Error parsing file.");
+                throw new DukeException("Error parsing file.");
             }
         }
     }
@@ -207,7 +207,7 @@ public class TaskList {
     private void DateTimeParser(String[] parseString, String EventType) throws DukeException {
         String[] dateTime = parseString[3].split(" ", 2);
         if (dateTime.length != 2) {
-            throw new DukeException("    Error in date time formatting encountered in data file");
+            throw new DukeException("Error in date time formatting encountered in data file");
         }
         try {
             LocalDate localDate = LocalDate.parse(dateTime[0]);
@@ -224,7 +224,7 @@ public class TaskList {
             }
             this.listOfTasks.add(task);
         } catch (DateTimeParseException e) {
-            throw new DukeException("    Error in date time formatting encountered in data file");
+            throw new DukeException("Error in date time formatting encountered in data file");
         }
     }
 
@@ -236,7 +236,7 @@ public class TaskList {
             }
         }
         if (result.size() == 0) {
-            throw new DukeException("    No matching task found :(");
+            throw new DukeException("No matching task found :(");
         }
         int counter = 1;
         String response = ui.printResult();
