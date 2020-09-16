@@ -5,7 +5,7 @@ import duke.task.TaskList;
 import duke.utils.Ui;
 
 /**
- * Represents command that delete a task from the duke.Duke's task list upon execution
+ * Represents command that delete a task from the duke.KK's task list upon execution
  */
 
 public class DeleteCommand extends Command {

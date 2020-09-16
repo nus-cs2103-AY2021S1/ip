@@ -7,17 +7,17 @@ import duke.utils.Parser;
 import duke.utils.Ui;
 
 /**
- * Represents a chat bot call duke.Duke.
+ * Represents a chat bot call duke.KK.
  */
-public class Duke {
+public class KK {
 
     private TaskList tasks;
     private Ui ui;
 
     /**
-     * Constructor for Duke class.
+     * Constructor for KK class.
      */
-    public Duke(String path, String fileName) {
+    public KK(String path, String fileName) {
         ui = new Ui();
         tasks = new TaskList(path, fileName);
     }
@@ -52,9 +52,4 @@ public class Duke {
         Command c = Parser.parse(command);
         return c.execute(tasks, ui);
     }
-
-    public static void main(String[] args) {
-        new Duke("data/", "duke.txt").run();
-    }
-
 }

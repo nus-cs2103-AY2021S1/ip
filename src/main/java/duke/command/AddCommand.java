@@ -8,7 +8,7 @@ import duke.task.ToDo;
 import duke.utils.Ui;
 
 /**
- * Represents command that add a task to the duke.Duke's task list upon execution
+ * Represents command that add a task to the duke.KK's task list upon execution
  */
 
 public class AddCommand extends Command {

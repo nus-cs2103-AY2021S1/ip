@@ -4,7 +4,7 @@ import duke.task.TaskList;
 import duke.utils.Ui;
 
 /**
- * Represents command that displays current task list in duke.Duke upon execution.
+ * Represents command that displays current task list in duke.KK upon execution.
  */
 public class ListCommand extends Command {
 

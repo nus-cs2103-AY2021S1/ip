@@ -5,7 +5,7 @@ import duke.task.TaskList;
 import duke.utils.Ui;
 
 /**
- * Represents command that change a task status to done in the duke.Duke's task list upon execution
+ * Represents command that change a task status to done in the duke.KK's task list upon execution
  */
 public class DoneCommand extends Command {
     private int index;

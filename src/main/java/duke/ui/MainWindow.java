@@ -1,6 +1,6 @@
 package duke.ui;
 
-import duke.Duke;
+import duke.KK;
 import duke.exceptions.DukeException;
 import duke.utils.Ui;
 import javafx.fxml.FXML;
@@ -24,29 +24,28 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Duke duke;
+    private KK duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Pikachu.png"));
 
     /**
-     * initialize Duke and print help message.
+     * initialize KK and print help message.
      */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(new Ui().welcomeMessge(), dukeImage),
-                DialogBox.getDukeDialog(new Ui().helpMessage(), dukeImage)
+                DukeDialogBox.getDukeDialog(new Ui().welcomeMessge(), dukeImage),
+                DukeDialogBox.getDukeDialog(new Ui().helpMessage(), dukeImage)
         );
     }
 
-    public void setDuke(Duke d) {
+    public void setDuke(KK d) {
         duke = d;
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * Creates two dialog boxes, one echoing user input and the other containing KK's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     @FXML
@@ -59,8 +58,8 @@ public class MainWindow extends AnchorPane {
             e.printStackTrace();
         }
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                UserDialogBox.getUserDialog(input),
+                DukeDialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
     }

@@ -4,7 +4,7 @@ import duke.task.TaskList;
 import duke.utils.Ui;
 
 /**
- * Represents command that stops the duke.Duke from running upon execution.
+ * Represents command that stops the duke.KK from running upon execution.
         */
 public class ExitCommand extends Command {
     @Override
