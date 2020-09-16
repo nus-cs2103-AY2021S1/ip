@@ -5,12 +5,13 @@
   depiction of the titular character of Vito Corleone, ***The Godfather***. A person of poise, control and composure; users of this application
   may find themselves emulating him after keeping track of their tasks.
 
-
 ***Godfather*** makes sure you stick to your word and complete the tasks that you want to get done. 
 Be it your todos you've yet to do, your deadlines that you've promised to keep to or events that you have to attent,
 let the _Capo_, ***Vito Corleone*** know and he'll make sure you don't miss it. 
 
 ![Marlon Brando](./screenshots/godfather3.png)
+
+![Current Workflow Status](https://github.com/rtshkmr/ip/workflows/maidenWorkflow/badge.svg)
 
 
 Here's how someone might use ***The Godfather***:
