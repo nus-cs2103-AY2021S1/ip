@@ -19,11 +19,13 @@ deadlines and events.
 5. [Delete a task](#delete-a-task)
 6. [Mark a task as complete](#mark-task-complete)
 7. [Exit](#exit)
+8. [Cancel](#cancel)
+9. [Error](#error)
 
 ### Add a todo
 Adds a todo
 
-Format: `todo`, `<todo name>`
+Format: `/todo`, `<todo name>`
 
 Example:
 ![todo](Todo.png)
@@ -31,17 +33,17 @@ Example:
 ### Add a deadline
 Adds a deadline.
 
-Format: `deadline`, `<deadline name>`, `<deadline due date>`
+Format: `/deadline`, `<deadline name>`, `<deadline due date>`
 
 Deadline due date should be given in this format: `dd mm yyyy`
 
 Example:
-![deadline](Deadline.png)
+![deadline 1](Deadline1.png) ![deadline 2](Deadline2.png)
 
 ### Add an event
 Adds an event
 
-Format: `event`, `<event name>`, `<event start time>`, `<event end time>`
+Format: `/event`, `<event name>`, `<event start time>`, `<event end time>`
 
 Event timings should be given in this format: `dd mm yyyy HH:mm`
 
@@ -52,7 +54,7 @@ Example:
 ### List all tasks
 Lists all tasks
 
-Format: `list`
+Format: `/list`
 
 Example:
 ![list](List.png)
@@ -62,7 +64,7 @@ Deletes a task. Task is indicated by its number in the list.
 
 The number can be checked with the command `list`.
 
-Format: `delete`, `<task number>`
+Format: `/delete`, `<task number>`
 
 Example:
 
@@ -73,16 +75,34 @@ Marks a task as completed. Task is indicated by its number in the list.
 
 The number can be checked with the command `list`.
 
-Format: `complete`, `<task number>`
+Format: `/complete`, `<task number>`
 
 Example:
 
-![mark 1](Mark1.png) ![mark2](Mark2.png)
+![completed 1](Complete1.png) ![completed 2](Complete2.png)
 
 ### Exit
 Exits the application.
 
-Format: `bye`
+Format: `/bye`
 
 Example:
+
 ![bye](Bye.png)
+
+### Cancel
+Cancels an ongoing command.
+
+Format: `/cancel`
+
+Example:
+
+![cancel 1](Cancel1.png) ![cancel 2](Cancel2.png)
+
+### Error
+Displays an error message when a command is expected but 
+a wrong one is given.
+
+Example:
+
+![error](Error.png)
