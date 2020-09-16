@@ -18,7 +18,6 @@ import duke.task.ToDo;
 /**
  * Represents a file location that user's input. Capable of reading from and writing to the file.
  */
-@SuppressWarnings("checkstyle:Regexp")
 public class Storage {
     private static final String DEFAULT_SAVE_LOCATION = "data/duke.txt";
     private static final DukeException FILE_NOT_FOUND = new DukeException("Can't find the File. Please ensure that:\n"

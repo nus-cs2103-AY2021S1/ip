@@ -1,4 +1,5 @@
-package graphicinterface;
+
+package graphic_interface;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -11,9 +12,11 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 
 /**
  * An example of a custom control using FXML.
@@ -24,7 +27,7 @@ public class DialogBox extends HBox {
     @FXML
     private Label dialog;
     @FXML
-    private ImageView displayPicture;
+    private Circle displayPicture;
 
     private DialogBox(String text, Image img) {
         try {
@@ -40,7 +43,8 @@ public class DialogBox extends HBox {
         dialog.setText(text);
         dialog.setMinHeight(Region.USE_PREF_SIZE);
         dialog.setMinWidth(Region.USE_PREF_SIZE);
-        displayPicture.setImage(img);
+        displayPicture.setStroke(Color.AQUAMARINE);
+        displayPicture.setFill(new ImagePattern(img));
     }
 
     /**
@@ -59,6 +63,15 @@ public class DialogBox extends HBox {
 
     public static DialogBox getDukeDialog(String text, Image img) {
         DialogBox db = new DialogBox(text, img);
+        db.setStyle("-fx-background-color: #AEF0A8");
+        db.flip();
+        return db;
+    }
+
+    public static DialogBox getDukeWarning(String text, Image img) {
+        DialogBox db = new DialogBox(text, img);
+        db.displayPicture.setStroke(Color.RED);
+        db.setStyle("-fx-background-color: #eb3434");
         db.flip();
         return db;
     }

@@ -20,7 +20,7 @@ public class Ui {
      * Return Welcome Message according to default's style.
      */
     public String showWelcome() {
-        return show("duke.Duke at your service. How may I help?");
+        return show("Duke at your service. How may I help?");
     }
 
     /**
@@ -71,6 +71,6 @@ public class Ui {
      */
     public String showBye() {
         return show("Bye. See you again\n"
-                + "Window will close in 2 seconds");
+                + "Window will close in 3 seconds");
     }
 }
