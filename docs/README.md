@@ -9,21 +9,21 @@ Duke provides a fast and convenient way to keep track of all your tasks, events 
 
 ### [Viewing help](#help): `assist` 
 
-### Adding a ToDo: `todo` 
+### [Adding a ToDo](#todo): `todo` 
 
-### Adding a Deadline: `deadline` 
+### [Adding a Deadline](#deadline): `deadline` 
 
-### Adding an Event: `event` 
+### [Adding an Event](#event): `event` 
 
-### Marking tasks as done: `conquer` 
+### [Marking tasks as done](#done): `conquer` 
 
-### Deleting a task: `delete` 
+### [Deleting a task](#delete): `delete` 
 
-### Finding tasks with a search term: `find` 
+### [Finding tasks with a search term](#find): `find` 
 
-### Viewing the schedule for a day: `schedule` 
+### [Viewing the schedule for a day](#schedule): `schedule` 
 
-### Exiting: `dismiss` 
+### [Exiting](#exit): `dismiss` 
 
 ## Usage
 
@@ -49,7 +49,7 @@ Expected outcome:
 >
 >Now, how may I serve you?
 
-### Adding a ToDo: `todo`
+### <a name="todo">Adding a ToDo</a>: `todo`
 Adds a todo task to your list.
 
 Format: `todo TASK`
@@ -61,7 +61,7 @@ Expected outcome:
 >[T] [✘] read book  
 >You have 1 writing(s) on your scroll as of now.
 
-### Adding a Deadline: `deadline`
+### <a name="deadline">Adding a Deadline</a>: `deadline`
 Adds a deadline task to your list.  
 
 Format:`deadline TASK /by DATE [TIME]`  
@@ -75,7 +75,7 @@ Expected outcome:
 >[D] [✘] project (by: Sep 18 2020, 11.59pm)  
 >You have 2 writing(s) on your scroll as of now.  
 
-### Adding an Event: `event`  
+### <a name="event">Adding an Event</a>: `event`  
 Adds an event task to your list.  
 
 Format:`event TASK /on DATE [TIME]`  
@@ -89,7 +89,7 @@ Expected outcome:
 >[E] [✘] workshop (on: Sep 23 2020, 7.30pm)  
 >You have 3 writing(s) on your scroll as of now.   
 
-### Marking tasks as done: `conquer`
+### <a name="done">Marking tasks as done</a>: `conquer`
 Marks a desired task as done.  
 
 Format: `conquer INDEX`  
@@ -101,7 +101,7 @@ Expected outcome:
 >As you wish, Your Majesty. I have marked this as conquered.  
 >[T] [✓] read book 
 
-### Deleting tasks: `delete`
+### <a name="delete">Deleting tasks</a>: `delete`
 Deletes a desired task from your list.    
 
 Format: `delete INDEX`  
@@ -114,7 +114,7 @@ Expected outcome:
 >[T] [✓] read book   
 >You have 2 writing(s) on your scroll as of now.  
 
-### Finding tasks with a search term: `find`  
+### <a name="find>Finding tasks with a search term</a>: `find`  
 Returns a list of tasks related to the desired search term.   
 
 Format: `find SEARCH_TERM`  
@@ -127,7 +127,7 @@ Expected outcome:
 >1. [T] [✘] buy cat food  
 >2. [E] [✘] foodie gathering (on: Sep 30 2020, 6.00pm)  
 
-### Viewing the schedule for a day: `schedule`  
+### <a name="schedule">Viewing the schedule for a day</a>: `schedule`  
 Returns an unordered list of tasks on the desired day.   
 Format: `schedule DATE`  
 * `DATE` specified must be in YYYY-MM-DD format.
@@ -140,7 +140,7 @@ Expected outcome:
 >2. [D] [✘] assignment 1 (by: Sep 18 2020, 11:59pm)  
 
 
-### Exiting: `dismiss`
+### <a name="exit">Exiting</a>: `dismiss`
 Exits the application.  
 
 Format: `dismiss`
