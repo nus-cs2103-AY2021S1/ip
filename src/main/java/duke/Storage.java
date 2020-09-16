@@ -23,8 +23,7 @@ public class Storage {
      * Writes content of saved file to task list (and store extra information).
      * @param lst the task list to be written to
      */
-    public void writeToList(TaskList lst)
-            throws IllegalTaskTypeException {
+    public void writeToList(TaskList lst) {
         try {
             Scanner scanner = new Scanner(file);
             // a pure number stored in the saved file, guaranteed to be there
@@ -40,9 +39,8 @@ public class Storage {
                 String task = scanner.nextLine();
                 lst.add(Converter.add(task));
             }
-        } catch (FileNotFoundException ex) {
-            System.out.println(ex);
-        } catch (IllegalTaskTypeException ex) {
+            scanner.close();
+        } catch (FileNotFoundException | IllegalTaskTypeException ex) {
             System.out.println(ex);
         }
     }

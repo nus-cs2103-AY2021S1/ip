@@ -25,7 +25,7 @@ public class Parser {
     private final int EXTRA = 1;
 
     // current command: the whole line
-    private final String command;
+    private String command;
 
     /**
      * Constructor of Parser.
@@ -163,8 +163,10 @@ public class Parser {
         assert index > 0;
         assert index < lst.size();
 
-        task.setDone();
-        TaskList.incrementNumberOfDoneTasks();
+        if (!task.getStatus()) {
+            task.setDone();
+            TaskList.incrementNumberOfDoneTasks();
+        }
         String messageMarked = "Nice! I've marked this task as done:\n";
         return format(messageMarked + MORE_INDENT + task.print());
     }

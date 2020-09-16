@@ -8,7 +8,7 @@ import java.util.List;
  * Represents a task list contains the task list.
  */
 public class TaskList {
-    private final List<Task> lst = new ArrayList<>();
+    private List<Task> lst = new ArrayList<>();
     private static int numberOfDoneTasks;
     private static LocalDate lastLoginDate;
 
@@ -58,7 +58,7 @@ public class TaskList {
      * Adds a task to the task list.
      * @param task task to be added
      */
-    public void add(final Task task) {
+    public void add(Task task) {
         lst.add(task);
     }
 
@@ -67,7 +67,7 @@ public class TaskList {
      * @param message task message
      * @param taskType task type
      */
-    public void addOfType(final String message, final TaskType taskType) {
+    public void addOfType(String message, TaskType taskType) {
         switch (taskType) {
         case T:
             lst.add(new Todo(message));
@@ -97,14 +97,14 @@ public class TaskList {
      * @param i index
      * @return the (i+1)th task in the list
      */
-    public Task get(final int i) {
+    public Task get(int i) {
         return lst.get(i);
     }
 
     /** Deletes the task from task list at index i.
      * @param i index
      */
-    public void delete(final int i) {
+    public void delete(int i) {
         lst.remove(i);
     }
 }

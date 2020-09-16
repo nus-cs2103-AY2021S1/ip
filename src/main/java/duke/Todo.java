@@ -47,7 +47,7 @@ public class Todo extends Task {
      */
     @Override
     public String getPrintMessage() {
-        return Converter.by(getMessage());
+        return getMessage();
     }
 
     /**

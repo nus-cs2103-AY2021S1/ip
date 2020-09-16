@@ -17,6 +17,23 @@ public class Ui {
      */
     public void run(TaskList lst) {
         // set up greetings and old list from file
+        System.out.println(sayHello());
+        System.out.println(getInitialList(lst));
+
+        // set up scanner for interaction
+        Scanner scanner = new Scanner(System.in);
+        // hand over to Parser class to handle all commands
+        while (scanner.hasNextLine()) {
+            String command = scanner.nextLine();
+            System.out.println(new Parser(command).getRespond(lst));
+            if (command.equals("bye")) {
+                scanner.close();
+                return;
+            }
+        }
+    }
+
+    public static String sayHello() {
         LocalDate today = LocalDate.now();
         String messageHello = Parser.format("Hello! I'm Duke - your personal "
                 + "task manager\n" + "      " + "Today is " + today
@@ -43,20 +60,11 @@ public class Ui {
             dateIterator = dateIterator.plus(1, ChronoUnit.DAYS);
         }
 
-        System.out.println(messageHello);
-        System.out.println(new Parser("list").getRespond(lst));
+        return messageHello;
+    }
 
-        // set up scanner for interaction
-        Scanner scanner = new Scanner(System.in);
-        // hand over to Parser class to handle all commands
-        while (scanner.hasNextLine()) {
-            String command = scanner.nextLine();
-            System.out.println(new Parser(command).getRespond(lst));
-            if (command.equals("bye")) {
-                scanner.close();
-                return;
-            }
-        }
+    public String getInitialList(TaskList lst) {
+        return new Parser("list").getRespond(lst);
     }
 
 }

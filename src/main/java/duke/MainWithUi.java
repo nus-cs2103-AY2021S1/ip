@@ -8,12 +8,13 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.scene.layout.Region;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-
-import java.time.format.DateTimeFormatter;
 
 public class MainWithUi extends Application {
     private ScrollPane scrollPane;
@@ -21,10 +22,14 @@ public class MainWithUi extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
-    private final Image userPic = new Image(this.getClass().getResourceAsStream("/images/DaUser.jpg"));
-    private final Image dukePic = new Image(this.getClass().getResourceAsStream("/images/DaDuke.jpg"));
-    private final java.nio.file.Path path = java.nio.file.Paths.get(System.getProperty("user.home"), "ip","start.txt");
-    private final Duke dukeBot = new Duke(path);
+    private Image userPic = new Image(this.getClass().getResourceAsStream("/images/DaUser.jpg"));
+    private Image dukePic = new Image(this.getClass().getResourceAsStream("/images/DaDuke.jpg"));
+    private java.nio.file.Path path = java.nio.file.Paths.get(System.getProperty("user.home"), "ip","start.txt");
+    private Duke dukeBot = new Duke(path);
+    Circle circle = new Circle(80);
+    Color c = Color.web("0077FF");
+    //setFill(new ImagePattern(userPic));
+
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -44,15 +49,18 @@ public class MainWithUi extends Application {
         scene = new Scene(mainLayout);
 
         stage.setScene(scene);
+        //scene.setFill(Color.BLACK);
         stage.show();
 
         //Step 2. Formatting the window to look as expected
-        stage.setTitle("Duke");
+        stage.setTitle("Dukebot");
         stage.setResizable(true);
         stage.setMinHeight(600.0);
-        stage.setMinWidth(400.0);
+        stage.setMinWidth(450.0);
+        stage.setMaxHeight(1000.0);
+        stage.setMaxWidth(450.0);
 
-        mainLayout.setPrefSize(400.0, 600.0);
+        mainLayout.setPrefSize(450.0, 600.0);
 
         scrollPane.setPrefSize(385, 535);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
@@ -61,19 +69,18 @@ public class MainWithUi extends Application {
         scrollPane.setVvalue(1.0);
         scrollPane.setFitToWidth(true);
 
-        // You will need to import `javafx.scene.layout.Region` for this.
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
-        userInput.setPrefWidth(325.0);
+        userInput.setPrefWidth(385.0);
 
-        sendButton.setPrefWidth(55.0);
+        sendButton.setPrefWidth(60.0);
 
         AnchorPane.setTopAnchor(scrollPane, 1.0);
 
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
 
-        AnchorPane.setLeftAnchor(userInput , 1.0);
+        AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
         //Scroll down to the end every time dialogContainer's height changes.
@@ -117,18 +124,12 @@ public class MainWithUi extends Application {
     }
 
     private void handleAtStart() throws Exception {
-        // task counter to be implemented
-        // dummy number "1" here
-        String messageHello = Parser.format("Hello! I'm Duke - your personal task manager\n" + "      " +
-                "Today is " + java.time.LocalDate.now().format(DateTimeFormatter.ofPattern("MMM d yyyy")) + "\n      " + "You have done "
-                + 1 + " task(s) in the past week." + "\n      Keep up the good work!!!");
-        Label dukeText0 = new Label(messageHello);
-        // load file at start
         dukeBot.start();
-        Label dukeText1 = new Label(getResponse("list"));
+        Label dukeTextHello = new Label(Ui.sayHello());
+        Label dukeTextList = new Label(getResponse("list"));
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(dukeText0, new ImageView(dukePic)),
-                DialogBox.getDukeDialog(dukeText1, new ImageView(dukePic))
+                DialogBox.getDukeDialog(dukeTextHello, new ImageView(dukePic)),
+                DialogBox.getDukeDialog(dukeTextList, new ImageView(dukePic))
         );
     }
 

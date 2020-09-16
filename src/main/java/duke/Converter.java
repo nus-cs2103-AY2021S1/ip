@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter;
  * Represents methods to manipulate with formats, e.g. dates
  */
 
-public final class Converter {
+public class Converter {
     /**
      * Returns a formatted string transforming from "/at" to ":(at)".
      * Assume the input string must contain "/at"

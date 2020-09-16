@@ -1,5 +1,6 @@
 package duke;
 
+import java.io.IOException;
 import java.nio.file.Path;
 
 /**
@@ -11,7 +12,7 @@ public class Duke {
     /** Ui handles user interaction. */
     private Ui ui;
     /** A list that contains tasks. */
-    private final TaskList lst = new TaskList();
+    private TaskList lst = new TaskList();
 
     /** Empty constructor. */
     public Duke() { }
@@ -37,7 +38,7 @@ public class Duke {
      *  run, and clean up (load to file).
      *  Duke's main working function
      */
-    public void run() throws Exception {
+    public void run() throws IOException {
         start();
         uiRun();
         end();
@@ -46,14 +47,14 @@ public class Duke {
     /**
      *  Initialises task list from saved file.
      */
-    public void start() throws Exception {
+    public void start() {
         storage.writeToList(lst);
     }
 
     /**
      *  Saves task list to saved file.
      */
-    public void end() throws Exception {
+    public void end() throws IOException {
         storage.writeToFile(lst);
     }
 
