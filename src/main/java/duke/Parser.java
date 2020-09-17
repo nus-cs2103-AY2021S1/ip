@@ -239,7 +239,7 @@ public class Parser {
             }
         }
 
-        String messageMatching = "Here are the matching tasks in your list:";
+        String messageMatching = "Here are the matching task(s) in your list:";
         return formatList(taskPrint(subList), messageMatching);
     }
 
