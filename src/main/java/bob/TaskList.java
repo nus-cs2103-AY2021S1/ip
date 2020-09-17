@@ -83,11 +83,21 @@ public class TaskList {
      */
     public TaskList contains(String keyWord) throws BobIndexOutOfBoundsException {
         TaskList keyWordTasks = new TaskList();
-        for(int i = 1; i < this.size(); i++) {
+        for (int i = 1; i < this.size(); i++) {
             if (this.get(i).toString().contains(keyWord)) {
                 keyWordTasks.add(this.get(i));
             }
         }
         return keyWordTasks;
+    }
+
+    public void deleteAll() {
+        list.clear();
+    }
+
+    public void markAllDone() {
+        for (Task task: list) {
+            task.markAsDone();
+        }
     }
 }

@@ -118,6 +118,9 @@ public class Parser {
         int index = 0;
         try {
             String[] split = command.split(" ");
+            if (split[1].equals("all")) {
+                return new DoneCommand(-1);
+            }
             index = Integer.parseInt(split[1]);
         } catch (NumberFormatException e) {
             throw new BobNumberFormatException();
@@ -131,6 +134,9 @@ public class Parser {
         int index;
         try {
             String[] split = command.split(" ");
+            if (split[1].equals("all")) {
+                return new DeleteCommand(-1);
+            }
             index = Integer.parseInt(split[1]);
         } catch (NumberFormatException e) {
             throw new BobNumberFormatException();

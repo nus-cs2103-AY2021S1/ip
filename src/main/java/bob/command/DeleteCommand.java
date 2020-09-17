@@ -37,10 +37,18 @@ public class DeleteCommand extends Command {
         assert storage != null : "Storage should be provided";
         assert ui != null : "A UI should be provided";
 
-        String message = ui.deleteTask(tasks, index);
-        tasks.delete(index);
-        storage.updateSave(tasks);
-        return message;
+
+        if (index == -1) {
+            String message = ui.deleteAll(tasks);
+            tasks.deleteAll();
+            storage.updateSave(tasks);
+            return message;
+        } else {
+            String message = ui.deleteTask(tasks, index);
+            tasks.delete(index);
+            storage.updateSave(tasks);
+            return message;
+        }
     }
 
 }

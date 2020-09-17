@@ -12,7 +12,8 @@ public class BobNumberFormatException extends BobException {
      */
     @Override
     public String getMessage() {
-        return "Please provide only the index of a task on the list to mark it as done or to delete it.\nHere's the "
-                + "format: \n\tdelete/done [index]";
+        return "Please provide only the index of a task on the list to mark it as done or to delete it. "
+                + "\nOtherwise, you could choose to apply the action to all tasks. \nHere's the "
+                + "format: \n\tdelete/done [index]/all";
     }
 }

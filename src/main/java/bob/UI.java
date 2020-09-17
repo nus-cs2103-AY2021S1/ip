@@ -124,6 +124,22 @@ public class UI {
                 + "\n\t" + tasks.get(index).toString();
     }
 
+    public String markAllDone(TaskList tasks) {
+        if (tasks.isEmpty()) {
+            return "There are no tasks to mark as done.";
+        } else {
+            return "Noted. I have marked all tasks as done.";
+        }
+    }
+
+    public String deleteAll(TaskList tasks) {
+        if (tasks.isEmpty()) {
+            return "There are no tasks to delete.";
+        } else {
+            return "Noted. All tasks have been deleted.";
+        }
+    }
+
     public String exit() {
         return "Bye! I hope to see you soon! \n[This window will close in 3 seconds.]";
     }

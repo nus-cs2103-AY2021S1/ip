@@ -37,8 +37,14 @@ public class DoneCommand extends Command {
         assert storage != null : "Storage should be provided";
         assert ui != null : "A UI should be provided";
 
-        tasks.get(index).markAsDone();
-        storage.updateSave(tasks);
-        return ui.markAsDone(tasks, index);
+        if (index == -1) {
+            tasks.markAllDone();
+            storage.updateSave(tasks);
+            return ui.markAllDone(tasks);
+        } else {
+            tasks.get(index).markAsDone();
+            storage.updateSave(tasks);
+            return ui.markAsDone(tasks, index);
+        }
     }
 }
