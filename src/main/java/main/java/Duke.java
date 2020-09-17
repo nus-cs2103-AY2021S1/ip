@@ -13,6 +13,7 @@ import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
+import java.util.Scanner;
 
 /**
  * Represents a robot who can help the user to make todo list.
@@ -44,6 +45,7 @@ public class Duke extends Application{
             tasks = new TaskList();
         }
     }
+    Scanner sc = new Scanner(System.in);
 
     public Duke(String filePath) {
         ui = new Ui();
@@ -60,14 +62,13 @@ public class Duke extends Application{
      * launch the Duke application, initialize the robot.
      */
     public void run() {
-        Parser parser = new Parser(tasks);
-        parser.handleCommand();
-        try {
-            parser.updateFile();
-        } catch (IOException e) {
-            System.out.println(e);
-            System.out.println("IOException from FileWriter!!");
-            return;
+        ui.start();
+        boolean flag = true;
+        Parser parser = new Parser(tasks, true);
+        while(flag) {
+            String input = sc.nextLine();
+            System.out.println(parser.handleCommand(input));
+            flag = parser.getFlag();
         }
     }
 

@@ -16,4 +16,9 @@ public class Todo extends Task {
     public void printDescription() {
         System.out.println("[T][" + getStatusIcon() + "]" + description);
     }
+
+    @Override
+    public String getDescription() {
+        return "[T][" + getStatusIcon() + "]" + description;
+    }
 }
