@@ -61,9 +61,21 @@ class ParserTest {
     public void testRunAll1() throws IOException {
         ClassLoader classLoader = getClass().getClassLoader();
         String input = Files.readString(Path.of(classLoader.getResource("file/" + "input1.txt").getFile()));
-        System.out.println(input);
-        String[] lineInput = input.split("\n");
         String expectedOutput = Files.readString(Path.of(classLoader.getResource("file/" + "output1.txt").getFile()));
+        String[] lineInput = input.split("\n");
+        StringBuilder output = new StringBuilder();
+        for (String s : lineInput) {
+            output.append(parser.run(s));
+        }
+        Assertions.assertEquals(expectedOutput, output.toString());
+    }
+
+    @org.junit.jupiter.api.Test
+    public void testRunAll2() throws IOException {
+        ClassLoader classLoader = getClass().getClassLoader();
+        String input = Files.readString(Path.of(classLoader.getResource("file/" + "input2.txt").getFile()));
+        String expectedOutput = Files.readString(Path.of(classLoader.getResource("file/" + "output2.txt").getFile()));
+        String[] lineInput = input.split("\n");
         StringBuilder output = new StringBuilder();
         for (String s : lineInput) {
             output.append(parser.run(s));
