@@ -1,9 +1,8 @@
 # User Guide
 
-## Features 
-
-### Feature 1 
-Description of feature.
+## Poco
+### About
+Poco is a simple todo-list chatbot
 
 ## Usage
 
