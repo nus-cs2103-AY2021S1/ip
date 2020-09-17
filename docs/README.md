@@ -3,11 +3,20 @@
 ## Quick start
 
 1. Ensure you have Java 11 or above installed in your Computer.
-2. Download the latest address book.jar from [here](https://github.com/tengjianling/ip/releases/tag/A-Release)
-3. Copy the file to the folder you want to use as the *home folder* for your Duke chatbot.
-4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds.![Screenshot 2020-09-15 at 4.48.10 PM](/Users/tengjianling/Library/Application Support/typora-user-images/Screenshot 2020-09-15 at 4.48.10 PM.png)
 
-5. Type the command in the chat box and press Enter to execute it. e.g typing `list` and pressing Enter will list out all the tasks currently in the task list.
+2. Download the latest address book.jar from [here](https://github.com/tengjianling/ip/releases/tag/A-Release)
+
+3. Copy the file to the folder you want to use as the *home folder* for your Duke chatbot.
+
+4. Open Command-Line-Interface (CLI)
+
+5. `cd` into the directory where the jar file is located
+
+6. Enter the following command: `java -jar duke.jar`
+
+7. The chatbot should open
+
+8. Type the command in the chat box and press Enter to execute it. e.g typing `list` and pressing Enter will list out all the tasks currently in the task list.
 
    Some example commands you can try:
 
@@ -20,7 +29,7 @@
    - `find hello hello`: Lists out the tasks in the task list that contains the phrase 'hello hello'.
    - `bye`: Exits the app.
 
-6. Refer to the Features below for details of each command.
+9. Refer to the Features below for details of each command.
 
 
 
