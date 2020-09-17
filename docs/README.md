@@ -1,8 +1,10 @@
 # Duke-it Task Manager User Guide
 
-Duke-it is a desktop application for managing tasks by typing commands, while also having a Graphical User Interface (GUI)
+Duke-it is a desktop application for managing tasks by typing commands, while also having a Graphical User Interface (GUI).
 
- <img src="Ui.png" width=30% height=30% class="img-responsive" alt="">
+<p align="center">
+  <img src="Ui.png" width="50%" height="50%" alt="">
+</p>
 
 * [Features](#features)
 * [Feature Details](#feature-details)
@@ -17,7 +19,7 @@ Duke-it is a desktop application for managing tasks by typing commands, while al
 1. **Find** - finds task containing given keywords
 1. **Help** - lists all available commands
 1. **List** - lists all tasks
-1. **Todo** -- creates a new todo task
+1. **Todo** - creates a new todo task
 1. **Sort** - sorts the task list by oldest date first
 
 ## Feature Details
@@ -38,7 +40,10 @@ bye
 
 Expected outcome:
 
-`Bye. Hope to see you again soon!` and subsequently app closes.
+```
+Bye. Hope to see you again soon!
+``` 
+and subsequently the app closes.
 
 ---
 
