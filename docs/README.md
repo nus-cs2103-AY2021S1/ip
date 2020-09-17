@@ -27,7 +27,7 @@ Expected outcome:
 
 `Got it. I've added this task:`\
 `[T][X] CS2103T quiz`\
-` Now you have 1 tasks in the list`
+`Now you have 1 tasks in the list`
 
 ### `event` - Adds an event task
 
@@ -41,7 +41,7 @@ Expected outcome:
 
 `Got it. I've added this task:`\
 `[E][X] examinations [at: SEP 19 2020]`\
-` Now you have 2 tasks in the list`
+`Now you have 2 tasks in the list`
 
 ### `deadline` - Adds a deadline task
 
@@ -55,7 +55,7 @@ Expected outcome:
 
 `Got it. I've added this task:`\
 `[D][✗] assignment [by: SEP 19 2020]`\
-` Now you have 3 tasks in the list`
+`Now you have 3 tasks in the list`
 
 ### `list` - Lists all tasks
 
@@ -111,7 +111,7 @@ Expected outcome:
 `Here are the search results:`\
 `1. [D][✗] assignment [by: SEP 19 2020]`
 
-### - Detect duplicate tasks
+### Detect duplicate tasks
 
 Prompts the user when a task that already exists in the list is being added
 This feature is case-insensitive.
