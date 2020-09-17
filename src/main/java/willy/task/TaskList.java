@@ -110,8 +110,6 @@ public class TaskList {
                 list = list + "\t" + (i + 1) + ". " + task + "\n";
             }
         }
-
-        list = list + Willy.getStyle();
         return list;
     }
 
@@ -162,8 +160,6 @@ public class TaskList {
                         + "\t  " + (i + 1) + "." + task + "\n";
             }
         }
-
-        filteredList = filteredList + Willy.getStyle();
         return filteredList;
     }
 }

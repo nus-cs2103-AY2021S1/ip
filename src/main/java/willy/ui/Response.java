@@ -28,7 +28,7 @@ public enum Response {
     MATCHING_TASK {
         @Override
         public String toString() {
-            return "Okay, Here's the task you just updated:\n";
+            return "Okay, Here's the task you are finding:\n";
         }
     },
     REMOVE_TASK {

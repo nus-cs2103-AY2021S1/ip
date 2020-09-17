@@ -12,6 +12,7 @@ Willy is a desktop app that helps you to **manage your activities** in the form 
 * Find a task: `find`
 * Edit a task in the list: `edit`
 * Show list of tasks: `list`
+
 ---------
 
 ## Quick start

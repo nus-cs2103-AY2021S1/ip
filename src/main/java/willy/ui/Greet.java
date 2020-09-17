@@ -7,8 +7,9 @@ public class Greet {
     private String originalGreeting;
     private String greeting;
     private final String STYLE = "\t_________________________________________________________________\n";
-    private final String START_GREETING = "\tHello I'm Willy and I am here for u! \n" +
-            "\tTell me what u need to do and I will help u keep track of it :)\n";
+    private final String START_GREETING = "\tHello I'm Willy and I am here for u! \n"
+            + "\tTell me what u need to do and I will help u keep track of it :)\n"
+            + STYLE;
     private final String EXIT_GREETING = "\t  Byee See you again soon!:)\n";
 
     public Greet() {
@@ -28,7 +29,7 @@ public class Greet {
         } else if (originalGreeting.equals("bye")) {
             greeting = EXIT_GREETING;
         }
-        String response = "\n" + greeting + STYLE;
+        String response = "\n" + greeting;
         return response;
     }
 }

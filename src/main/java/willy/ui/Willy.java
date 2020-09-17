@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -22,6 +23,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 
 import willy.store.TaskStore;
@@ -76,7 +78,7 @@ public class Willy extends Application {
     }
 
     public static String response(String message) {
-        return "\n\t" + message + "\n" + style;
+        return "\n\t" + message + "\n" ;
     }
 
     @Override
@@ -110,6 +112,7 @@ public class Willy extends Application {
         Text botResponse = new Text();
         willy.setAlignment(Pos.CENTER);
         TextField inputField = new TextField();
+        inputField.setPrefWidth(220);
         inputField.setPromptText("State tasks to track");
         Button enterButton = new Button("Enter");
         Button clearButton = new Button("Clear");
@@ -117,7 +120,7 @@ public class Willy extends Application {
         // Handles Actions of Buttons
         enterButton.setOnAction(action -> {
                 String message = inputField.getText();
-                userInput.setText("\t   " + message);
+                userInput.setText(message + "\t   ");
                 inputField.clear();
                 botResponse.setText(parser.parse(message, true)); // Returns Response
         });
@@ -138,28 +141,43 @@ public class Willy extends Application {
         inputContainer.getChildren().addAll(inputField, enterButton, clearButton);
 
         // Putting together response components
-        Rectangle typingContainer = new Rectangle(330,48);
-        typingContainer.setFill(Color.rgb(203, 202, 254));
-        StackPane inputStack = new StackPane();
-        inputStack.getChildren().addAll(typingContainer, inputContainer);
-        Rectangle userInputContainer = new Rectangle(330,20);
+//        Rectangle typingContainer = new Rectangle(330,48);
+//        typingContainer.setFill(Color.rgb(203, 202, 254));
+//        StackPane inputStack = new StackPane();
+//        inputStack.getChildren().addAll(typingContainer, inputContainer);
+
+        Rectangle userInputContainer = new Rectangle(330,40);
         userInputContainer.setFill(Color.rgb(180, 157, 253));
         StackPane userInputStack = new StackPane();
         userInput.setTextFill(Color.WHITE);
+        // Solution below from https://stackoverflow.com/questions/12341672/make-portion-of-a-text-bold-in-a-javafx-label-or-text
+        userInput.setStyle("-fx-font-weight: bold");
         userInputStack.getChildren().addAll(userInputContainer, userInput);
-        userInputStack.setAlignment(userInput, Pos.CENTER_LEFT);
+        userInputStack.setAlignment(userInput, Pos.CENTER_RIGHT);
 
         // Responsible for BotResponse
+        // Solution adapted from https://www.jackrutorial.com/2020/04/how-to-set-background-color-ofscrollpane-in-javafx.html
         ScrollPane botResponseContainer = new ScrollPane();
-        botResponseContainer.setFitToWidth(true);
-        botResponseContainer.setMaxHeight(200);
-        botResponseContainer.setMinViewportHeight(210);
-        botResponseContainer.setContent(botResponse);
+        botResponseContainer.setStyle("-fx-background: #EBE9F7; -fx-border-color: #262626;");
+        botResponseContainer.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+        botResponseContainer.setPrefViewportHeight(160);
+        botResponseContainer.setPrefViewportWidth(180);
+        TextFlow text = new TextFlow(botResponse);
+        text.setPrefWidth(300);
+        text.setPadding(new Insets(10, 5, 0, 5));
+        botResponseContainer.setContent(text);
+
+        // Bot and User Interaction Container
+        VBox interactionBox = new VBox();
+        interactionBox.setPadding(new Insets(5, 20, 10, 30));
+        interactionBox.setSpacing(10);
+        interactionBox.setMinHeight(200);
+        interactionBox.getChildren().addAll(userInputStack, botResponseContainer);
 
 
         // Combine everything together
         VBox vbox = new VBox(); // Positions components in a vertical column
-        vbox.getChildren().addAll(willyIntro, botCommand, inputStack, userInputStack, botResponseContainer);
+        vbox.getChildren().addAll(willyIntro, botCommand, interactionBox, inputContainer);
 
         StackPane layout = new StackPane();
         layout.getChildren().addAll(vbox);
