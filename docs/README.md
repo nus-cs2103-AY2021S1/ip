@@ -9,7 +9,7 @@ still having the benefits of a **Graphical User Interface(GUI)**.Therefore this 
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-2. You can download the latest version of DogeBot [here](https://github.com/davidcaiqifan/ip/releases/tag/Level8)
+2. You can download the latest version of DogeBot [here](https://github.com/davidcaiqifan/ip/releases/tag/A-Release)
 
 3. Download the `.jar` file and copy the file to the folder you want to use as the home folder for your DogeBot.
 

@@ -9,7 +9,7 @@ public class Duke {
      * Runs the duke.Duke programme
      * @param args main args
      */
-    public static void run(String[] args) {
+    public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Storage storage = new Storage("\\save.txt");
         Ui ui = new Ui(sc);
