@@ -56,7 +56,7 @@ public class EditCommand extends Command {
             return ui.showErrorResponse(e.getMessage());
         }
         
-        storage.save(tasks);
+        storage.save(tasks, 0);
         return ui.showEditResponse(task);
     }
 }

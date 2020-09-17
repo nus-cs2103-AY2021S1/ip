@@ -37,7 +37,7 @@ public class MarkAsDoneCommand extends Command {
             assert task != null : "Empty task";
             task.markAsDone();
             assert task.getStatus().equals(TaskStatus.DONE.getStrValue()) : "Mark task as done unsuccessful";
-            storage.save(tasks);
+            storage.save(tasks, 0);
             return ui.showMarkAsDoneResponse(task);
         } catch (IndexOutOfBoundsException e) {
             return ui.showErrorResponse(CommandValidator.ERROR_MESSAGE_INVALID_TASK_ID);

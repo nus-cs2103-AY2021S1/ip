@@ -35,7 +35,7 @@ public class DeleteCommand extends Command {
             Task task = tasks.get(id);
             assert task != null : "Empty task";
             tasks.remove(id);
-            storage.save(tasks);
+            storage.save(tasks, 0);
             return ui.showDeleteResponse(task, tasks.size());
         } catch (IndexOutOfBoundsException e) {
             return ui.showErrorResponse(CommandValidator.ERROR_MESSAGE_INVALID_TASK_ID);

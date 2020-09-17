@@ -32,7 +32,7 @@ public class AddCommand extends Command {
     public String execute(Storage storage, TaskList tasks, Ui ui) {
         tasks.add(task);
         assert tasks.size() > 0 : "Empty task list after adding task";
-        storage.save(tasks);
+        storage.save(tasks, 0);
         return ui.showAddResponse(task, tasks.size());
     }
 }

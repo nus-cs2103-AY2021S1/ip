@@ -116,31 +116,49 @@ public class Storage {
      * Saves the current task list in the storage.
      *
      * @param tasks Task list to be saved.
+     * @param numOfAttempts Number of previous attempts to save.
      */
-    public void save(TaskList tasks) {
+    public void save(TaskList tasks, int numOfAttempts) {
         try {
-            FileWriter fw = new FileWriter(filePath);
-            
-            for (Task task : tasks) {
-                List<String> temp = new LinkedList<>();
-                temp.add(String.valueOf(task.getType()));
-                temp.add(task.getStatus());
-                temp.add(task.getDescription());
-                if (task instanceof Deadline) {
-                    temp.add(task.getBy().toString());
-                } else if (task instanceof Event) {
-                    temp.add(task.getAt().toString());
-                } else {
-                    assert task instanceof Todo : "Invalid task type";
-                }
-                String data = String.join("|", temp);
-                fw.write(data + "\n");
-            }
-            
-            fw.close();
+            writeToDataFile(tasks);
         } catch (IOException e) {
             e.printStackTrace();
-            assert false;
+            retrySave(tasks, numOfAttempts);
+        }
+    }
+    
+    private void writeToDataFile(TaskList tasks) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+
+        for (Task task : tasks) {
+            List<String> temp = new LinkedList<>();
+            temp.add(String.valueOf(task.getType()));
+            temp.add(task.getStatus());
+            temp.add(task.getDescription());
+            if (task instanceof Deadline) {
+                temp.add(task.getBy().toString());
+            } else if (task instanceof Event) {
+                temp.add(task.getAt().toString());
+            } else {
+                assert task instanceof Todo : "Invalid task type";
+            }
+            String data = String.join("|", temp);
+            fw.write(data + "\n");
+        }
+
+        fw.close();
+    }
+    
+    private void retrySave(TaskList tasks, int numOfAttempts) {
+        File file = new File(filePath);
+        file.getParentFile().mkdirs();
+        
+        if (!file.isFile()) {
+            createDataFile(file);
+        }
+        
+        if (numOfAttempts <= 2) {
+            save(tasks, ++numOfAttempts);
         }
     }
 }
