@@ -9,13 +9,12 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 public class DialogBoxDuke extends DialogBox {
-    private final Color color = Color.rgb(238,160,178);
-    private final CornerRadii corn = new CornerRadii(10);
-    private final Insets insets = new Insets(-2,0,-2,3);
-    private final Background background = new Background(new BackgroundFill(color, corn, insets));
-
     public DialogBoxDuke(Label l, Circle c) {
         super(l, c);
+        Color color = Color.rgb(238,160,178);
+        CornerRadii corn = new CornerRadii(10);
+        Insets insets = new Insets(-2,0,-2,3);
+        Background background = new Background(new BackgroundFill(color, corn, insets));
         text.setBackground(background);
     }
 

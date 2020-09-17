@@ -10,14 +10,14 @@ import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 
 public class DialogBox extends HBox {
+    @SuppressWarnings("CanBeFinal")
     protected Label text;
-    private Circle imageHolder;
-    private Font font = new Font("Baskerville", 14);
 
     public DialogBox(Label l, Circle c) {
         text = l;
-        imageHolder = c;
 
+        @SuppressWarnings("SpellCheckingInspection")
+        Font font = new Font("Baskerville", 14);
         text.setMinWidth(35);
         text.setMinHeight(30);
         text.setFont(font);
@@ -25,7 +25,7 @@ public class DialogBox extends HBox {
         text.setWrapText(true);
 
         this.setAlignment(Pos.TOP_RIGHT);
-        this.getChildren().addAll(text, imageHolder);
+        this.getChildren().addAll(text, c);
     }
 
     /**

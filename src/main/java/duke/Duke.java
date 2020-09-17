@@ -12,6 +12,7 @@ public class Duke {
     /** Ui handles user interaction. */
     private Ui ui;
     /** A list that contains tasks. */
+    @SuppressWarnings("CanBeFinal")
     private TaskList lst = new TaskList();
 
     /** Empty constructor. */

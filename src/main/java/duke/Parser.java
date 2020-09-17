@@ -7,8 +7,6 @@ public class Parser {
     private static final String SPACE = "     ";
     private static final String INDENT = "      ";
     private static final String MORE_INDENT = "        ";
-    private static final String LINE =
-            "_____________________________________________\n";
 
     /**
      * Returns formatted string, adding SPACE and LINE.
@@ -25,6 +23,7 @@ public class Parser {
     private final int EXTRA = 1;
 
     // current command: the whole line
+    @SuppressWarnings("CanBeFinal")
     private String command;
 
     /**
@@ -300,14 +299,19 @@ public class Parser {
      */
     public String getRespond(TaskList lst) {
         String messageRespond;
-        if (command.equals("bye")) {
+        switch (command) {
+        case "bye":
             messageRespond = handleBye();
-        } else if (command.equals("list")) {
+            break;
+        case "list":
             messageRespond = handleList(lst);
-        } else if (command.equals("help")) {
+            break;
+        case "help":
             messageRespond = handleHelp();
-        } else {
+            break;
+        default:
             messageRespond = handleComplicatedCommands(lst, command);
+            break;
         }
         return messageRespond;
     }

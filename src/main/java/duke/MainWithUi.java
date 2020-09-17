@@ -16,12 +16,13 @@ import javafx.stage.Stage;
 import javafx.scene.image.Image;
 
 
+@SuppressWarnings("ALL")
 public class MainWithUi extends Application {
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
+
+    @SuppressWarnings("CanBeFinal")
     private Image userPic = new Image(this.getClass()
             .getResourceAsStream("/images/DaUser.jpg"));
     private Image dukePic = new Image(this.getClass()
@@ -33,7 +34,8 @@ public class MainWithUi extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         //Step 1. Setting up required components
-
+        Button sendButton;
+        Scene scene;
         //The container for the content of the chat to scroll.
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();

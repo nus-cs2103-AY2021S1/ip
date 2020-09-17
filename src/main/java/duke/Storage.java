@@ -13,6 +13,7 @@ import java.util.Scanner;
  * Represents a storage and deals with loading tasks from
  * the file and saving tasks in the file.
  */
+@SuppressWarnings("ALL")
 public class Storage {
     private File file;
     Storage(Path path) {

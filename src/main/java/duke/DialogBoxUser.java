@@ -9,13 +9,13 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 public class DialogBoxUser extends DialogBox {
-    private final Color col = Color.rgb(190,231,223);
-    private final CornerRadii corn = new CornerRadii(10);
-    private final Insets insets = new Insets(-2,1,-2,0);
-    private final Background background = new Background(new BackgroundFill(col, corn, insets));
 
     public DialogBoxUser(Label l, Circle c) {
         super(l, c);
+        Color col = Color.rgb(190,231,223);
+        CornerRadii corn = new CornerRadii(10);
+        Insets insets = new Insets(-2,1,-2,0);
+        Background background = new Background(new BackgroundFill(col, corn, insets));
         text.setBackground(background);
     }
 

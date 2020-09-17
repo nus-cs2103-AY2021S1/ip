@@ -8,6 +8,7 @@ import java.util.List;
  * Represents a task list contains the task list.
  */
 public class TaskList {
+    @SuppressWarnings("CanBeFinal")
     private List<Task> lst = new ArrayList<>();
     private static int numberOfDoneTasks;
     private static LocalDate lastLoginDate;
