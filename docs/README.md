@@ -77,7 +77,7 @@ Format: `deadline DEADLINE /by DATE`
 
 Examples:
 
-* 'deadline finish homework /by 2020-10-10`
+* `deadline finish homework /by 2020-10-10`
 * `deadline return library book /by 2020-12-02 2359`
 
 ### Adding an Event: `event`
@@ -93,7 +93,7 @@ Format: `event EVENT /at DATE`
 Examples:
 
 * `event attend concert /at 2020-09-28 1600`
-* `event project meeting /at 2020-09-15 1800`
+* `event project meeting /at 2020-09-15`
 
 ### Deleting specific tasks: `delete`
 
@@ -102,8 +102,7 @@ Deletes specific tasks from the task list.
 Format: `delete TASK_NUMBER...`
 
 * At least one task number must be specified.
-* Task numbers specified must be valid i.e. they refer to actual tasks.
-* The task numbers specified refer to the indices of the tasks as shown in the task list.
+* Task numbers specified refer to the indices of the tasks in the task list.
 * The index of a particular task can be found by entering the command `list`.
 * The task numbers do not have to be specified in any particular order.
 
@@ -125,14 +124,13 @@ Marks a specific task as done.
 Format: `done TASK_NUMBER`
 
 * There must be exactly one task number specified.
-* Task numbers specified must be valid i.e. they refer to actual tasks.
-* The task number specified refers to the index of the task as shown in the task list.
+* The task number specified refers to the index of the task in the task list.
 * The index of a particular task can be found by entering the command `list`.
 
 Examples:
 
-`done 1`
-`done 10`
+* `done 1`
+* `done 10`
 
 ### Finding tasks: `find`
 
