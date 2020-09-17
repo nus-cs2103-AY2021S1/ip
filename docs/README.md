@@ -33,10 +33,10 @@ Here's how someone might use ***The Godfather***:
     - [`event EVENT_DESCRIPTION /at  DATE_STRING START_TIME-ENDTIME` - *create an event*](#event-event_description-at-date_string-start_time-endtime---create-an-event)
   - [Completing your Tasks](#completing-your-tasks)
     - [`done TASK_ID` - *mark the task as done*](#done-task_id---mark-the-task-as-done)
-    - [Finding your Tasks](#finding-your-tasks)
+  - [Finding your Tasks](#finding-your-tasks)
     - [`find SEARCH_TERM` - *query for tasks matching a search term*](#find-search_term---query-for-tasks-matching-a-search-term)
   - [Deleting your Tasks](#deleting-your-tasks)
-    - [`delete TASK_ID` - deletes a specified task](#delete-task_id---deletes-a-specified-task)
+    - [`delete TASK_ID` - *deletes a specified task*](#delete-task_id---deletes-a-specified-task)
   - [Saving your Data](#saving-your-data)
 - [How it Works](#how-it-works)
 - [Coming Soon!](#coming-soon)
@@ -192,7 +192,7 @@ Finds the tasks with descriptions that match the **exact search term, case sensi
 be delete-able.
 
 
-### `delete TASK_ID` - deletes a specified task
+### `delete TASK_ID` - *deletes a specified task*
 
 Deletes a single task of that ID.
 
