@@ -1,5 +1,4 @@
-4
+3
 T|buy a new laptop|false
-E|CS2101 OP1|true|Friday 8-10am
 W|watch netflix|true|8pm|10pm
 E|x|true|y

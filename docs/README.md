@@ -3,11 +3,28 @@ Rock is a **desktop application for managing and scheduling your tasks,
 optimized for use via a Command Line Interface (CLI)** while still having
 the benefits of a Graphical User Interface (GUI). It is a convenient platform
 for you to keep track of all your upcoming tasks like deadlines and events.
+* [List of all features](#features)
+    * [Switching the rock: `switch`](#switching-the-rock-switch)
+    * [Adding a to-do task: `todo`](#adding-a-to-do-task-todo)
+    * [Adding an event task: `event`](#adding-an-event-task-event)
+    * [Adding a deadline task: `deadline`](#adding-a-deadline-task-deadline)
+    * [Adding a do-with-in task: `dowithin`](#adding-a-do-with-in-task-dowithin)
+    * [Listing all tasks: `list`](#listing-all-tasks-list)
+    * [Deleting a task: `delete`](#deleting-a-task-delete)
+    * [Locating tasks by description: `find`](#locating-tasks-by-description-find)
+    * [Marking a task as done: `done`](#marking-a-task-as-done-done)
+    * [Exiting the program: `bye`](#exiting-the-program-bye)
+    * [Saving the data](#saving-the-data)
 
 ## Features 
 Notes about command format:
 * Words in `UPPER_CASE` are the parameters supplied by you.
 * Example: event `YOUR_EVENT` /at `TIME_OF_THE_EVENT`
+
+### Switching the rock: `switch`
+Switchs to another rock that will interact with you.
+
+Format: `switch`
 
 ### Adding a to-do task: `todo`
 Adds to the list: a to-do task that needs to be done.
@@ -101,3 +118,17 @@ There is no need to save manually.
 * `find KEYWORD`
 * `done INDEX`
 * `bye`
+
+## Command Summary
+|Action|Format|
+|:---:|:---:|
+|Switching the rock|`switch`|
+|Adding a to-do task|`todo DESCRIPTION`|
+|Adding an event task|`event DESCRIPTION /at TIME`|
+|Adding a deadline task|`deadline DESCRIPTION /by TIME`|
+|Adding a do-with-in task|`dowithin DESCRIPTION /between START_TIME /and END_TIME`|
+|Listing all tasks|`list`|
+|Deleting a task|`delete INDEX`|
+|Locating tasks by description|`find KEYWORD`|
+|Marking a task as done|`done INDEX`|
+|Exiting the program|`bye`|
