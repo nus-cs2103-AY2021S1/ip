@@ -12,7 +12,7 @@ import rock.task.DoWithinPeriodTasks;
 import rock.task.Event;
 import rock.task.Task;
 import rock.task.Todo;
-import rock.utility.MyString;
+import rock.utility.RockResponse;
 
 /**
  * Class controls of storing and loading data.
@@ -158,7 +158,7 @@ public class Storage {
      * @return String represent the new format.
      */
     public static String listToDataString(ArrayList<Task> tasks) {
-        MyString res = new MyString();
+        RockResponse res = new RockResponse();
         res.addNewLines(Integer.toString(tasks.size()));
         for (int i = 1; i <= tasks.size(); ++i) {
             res.addNewLines(tasks.get(i - 1).getDataFormat());

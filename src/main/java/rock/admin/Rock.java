@@ -3,7 +3,7 @@ package rock.admin;
 import rock.exception.RockException;
 import rock.storage.Storage;
 import rock.ui.Ui;
-import rock.utility.MyString;
+import rock.utility.RockResponse;
 import rock.utility.Parser;
 
 /**
@@ -35,7 +35,7 @@ public class Rock {
      */
     private String handleCommand(String cmd) throws RockException {
         cmd = cmd.trim();
-        MyString response = new MyString();
+        RockResponse response = new RockResponse();
 
         Parser.CommandType commandType = Parser.getType(cmd);
         switch (commandType) {

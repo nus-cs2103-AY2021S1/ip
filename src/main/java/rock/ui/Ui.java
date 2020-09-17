@@ -1,6 +1,6 @@
 package rock.ui;
 
-import rock.utility.MyString;
+import rock.utility.RockResponse;
 
 /**
  * UI to interact with user
@@ -26,7 +26,7 @@ public class Ui {
         return "Bye. I am going back to working out!";
     }
 
-    public static void invalidCommand(MyString response) {
+    public static void invalidCommand(RockResponse response) {
         response.addNewLines("Hey you, that is an invalid command!");
     }
 }
