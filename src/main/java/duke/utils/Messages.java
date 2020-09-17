@@ -6,7 +6,7 @@ package duke.utils;
 public class Messages {
 
     public static final String MESSAGE_INIT_FAILED = "Failed to initialise task list application. Exiting...";
-    public static final String MESSAGE_WELCOME = "Hello! I'm Duke\nWhat can I do for you?";
+    public static final String MESSAGE_WELCOME = "Hello! I'm Stormy :)\nWhat can I do for you?";
     public static final String MESSAGE_GOODBYE = "Bye. Hope to see you again soon!";
     public static final String MESSAGE_TASK_LISTED_OVERVIEW_FORMAT = "Now you have %1$d tasks in the list.";
     public static final String MESSAGE_STATISTICS = "You have completed %1$d out of %2$d tasks.\nKeep it up!!";

@@ -8,7 +8,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import duke.data.TaskList;
-import duke.data.exception.IllegalValueException;
 
 /**
  * Represents the file used to store task list data.
@@ -18,15 +17,9 @@ public class Storage {
     /** Default file path used if the user doesn't provide the file name. */
     private static final String DEFAULT_STORAGE_FILEPATH = "src/storageData/duke.txt";
 
-    private String filePath;
-    private File file;
-    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE, dd MMM yyyy hh:mm a");
-
-    public static class InvalidStorageFilePathException extends IllegalValueException {
-        public InvalidStorageFilePathException(String message) {
-            super(message);
-        }
-    }
+    private final String filePath;
+    private final File file;
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE, dd MMM yyyy hh:mm a");
 
     public static class StorageOperationException extends Exception {
         public StorageOperationException(String message) {
@@ -35,22 +28,30 @@ public class Storage {
     }
 
     /**
-     * @throws InvalidStorageFilePathException if the default path is invalid
+     * @throws StorageOperationException if the default path is invalid
      */
-    public Storage() throws InvalidStorageFilePathException {
+    public Storage() throws StorageOperationException {
         this(DEFAULT_STORAGE_FILEPATH);
     }
 
     /**
      * Creates a {@code Storage}.
      * @param filePath A valid file path.
-     * @throws InvalidStorageFilePathException if the given file path is invalid
+     * @throws StorageOperationException if the file cannot be created
      */
-    public Storage(String filePath) throws InvalidStorageFilePathException {
-        this.filePath = filePath;
-        this.file = new File(filePath);
-        if (!this.file.exists()) {
-            throw new InvalidStorageFilePathException("File not found.");
+    public Storage(String filePath) throws StorageOperationException {
+        try {
+            this.filePath = filePath;
+            this.file = new File(filePath);
+            if (!this.file.exists()) {
+                File directory = new File(file.getParent());
+                if (!directory.exists()) {
+                    directory.mkdirs();
+                }
+                file.createNewFile();
+            }
+        } catch (IOException e) {
+            throw new StorageOperationException("Oops, an error occurred while creating a new file!");
         }
     }
 

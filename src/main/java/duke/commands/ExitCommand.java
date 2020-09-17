@@ -7,8 +7,9 @@ public class ExitCommand extends Command {
 
     public static final String COMMAND_WORD = "exit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Exits the program.\n"
-            + "\tExample: " + COMMAND_WORD;
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + " :\nExits the program.\n"
+            + "  Example: " + COMMAND_WORD;
 
     public static final String MESSAGE_EXIT_ACKNOWLEDGMENT = "Exiting Duke as requested...";
 

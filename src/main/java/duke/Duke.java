@@ -4,9 +4,7 @@ import java.io.FileNotFoundException;
 
 import duke.commands.Command;
 import duke.commands.CommandResult;
-import duke.commands.ExitCommand;
 import duke.data.TaskList;
-import duke.data.exception.IllegalValueException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.ui.Ui;
@@ -22,32 +20,16 @@ public class Duke {
     private TaskList taskList;
 
     /**
-     * Creates a {@code Duke} object.
+     * Sets up the required objects, TaskList, Storage and UI
+     * and gets the task list from the storage.
      */
     public Duke() {
-        startDuke();
-    }
-
-    public static void main(String[] args) {
-        new Duke().run();
-    }
-
-    /** Runs the program until termination.  */
-    public void run() {
-        runCommandLoopUntilExitCommand();
-    }
-
-    /**
-     * Sets up the required objects, loads up the data from the storage file, and prints the welcome message.
-     */
-    public String startDuke() {
         try {
             this.ui = new Ui();
             this.storage = new Storage();
             this.taskList = storage.load();
-            return ui.getWelcomeMessage();
-        } catch (Storage.StorageOperationException | FileNotFoundException | IllegalValueException e) {
-            return ui.getInitFailedMessage();
+        } catch (Storage.StorageOperationException | FileNotFoundException e) {
+            System.out.println("An error occurred while loading the task list. Please rerun the program again.");
         }
     }
 
@@ -74,21 +56,7 @@ public class Duke {
             storage.save(taskList);
             return result;
         } catch (Exception e) {
-            throw new RuntimeException();
-        }
-    }
-
-    /** Reads the user command and executes it, until the user issues the exit command.  */
-    private void runCommandLoopUntilExitCommand() {
-        try {
-            Command command;
-            do {
-                String userInput = ui.getUserCommand();
-                command = new Parser().parseCommand(userInput);
-            } while (!ExitCommand.isExit(command));
-            storage.save(taskList);
-        } catch (Storage.StorageOperationException e) {
-            e.printStackTrace();
+            return new CommandResult(e.getMessage());
         }
     }
 
