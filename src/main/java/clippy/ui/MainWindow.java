@@ -35,7 +35,7 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog("Hello! I'm Clippy.Clippy \n" +
+                DialogBox.getDukeDialog("Hello! I'm Clippy \n" +
                         "What can I do for you?\n", clippyImage)
         );
         
