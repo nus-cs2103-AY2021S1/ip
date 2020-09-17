@@ -1,6 +1,6 @@
 # Duke User Guide
 
-Duke (nicknamed ALIEN) is a schedule tracker that remembers your tasks for you so you do not have to.
+Duke (nicknamed ALIEN) is a schedule tracker that remembers and manages your tasks for you so you do not have to.
 
 ## Features 
 
