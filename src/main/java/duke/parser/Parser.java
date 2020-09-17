@@ -1,11 +1,18 @@
 package duke.parser;
 
-import duke.command.*;
+import duke.command.ByeCommand;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ErrorCommand;
+import duke.command.EventCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.ScheduleCommand;
+import duke.command.ToDoCommand;
 import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
-
-import java.util.Arrays;
 
 /**
  * Represent a parser to parse user input.
@@ -20,9 +27,9 @@ public class Parser {
      */
     public String parse(String input, TaskList tasks, Storage storage) {
         assert input != null && tasks != null && storage != null;
-        
+
         String[] args = input.split(" ", 2);
-            
+
         try {
             switch (args[0]) {
             case "bye":

@@ -6,18 +6,17 @@ import java.util.Scanner;
  * Represent the user interface for the Duke program.
  */
 public class Ui {
-    private final String DIVIDER = "----------------------------------------------------------------------------------";
     public static final String LOGO = " ____        _        \n"
                               + "|  _ \\ _   _| | _____ \n"
                               + "| | | | | | | |/ / _ \\\n"
                               + "| |_| | |_| |   <  __/\n"
                               + "|____/ \\__,_|_|\\_\\___|\n";
-
+    private final String divider = "----------------------------------------------------------------------------------";
     /**
      * Print the divider line to the standard output.
      */
     public void showLine() {
-        System.out.println(DIVIDER);
+        System.out.println(divider);
     }
 
     /**
@@ -47,7 +46,6 @@ public class Ui {
      */
     public String readInput() {
         Scanner sc = new Scanner(System.in);
-        
         return sc.nextLine();
     }
 }

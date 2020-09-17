@@ -4,13 +4,18 @@ import duke.exception.DukeException;
 import duke.task.TaskList;
 
 public class FindCommand extends Command {
-    TaskList tasks;
-    
+    private TaskList tasks;
+
+    /**
+     * Constructor for FindCommand class.
+     * @param args
+     * @param tasks
+     */
     public FindCommand(String[] args, TaskList tasks) {
         super.args = args;
         this.tasks = tasks;
     }
-    
+
     @Override
     public String execute() throws DukeException {
         if (args.length < 2) {

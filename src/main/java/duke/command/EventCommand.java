@@ -6,15 +6,21 @@ import duke.task.Event;
 import duke.task.TaskList;
 
 public class EventCommand extends Command {
-    TaskList tasks;
-    Storage storage;
+    private TaskList tasks;
+    private Storage storage;
 
+    /**
+     * Constructor for EventCommand class.
+     * @param args
+     * @param tasks
+     * @param storage
+     */
     public EventCommand(String[] args, TaskList tasks, Storage storage) {
         super.args = args;
         this.tasks = tasks;
         this.storage = storage;
     }
-    
+
     @Override
     public String execute() throws DukeException {
         if (args.length < 2) {
@@ -39,7 +45,7 @@ public class EventCommand extends Command {
         }
 
         String dateTimeRegex = "\\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01]) ([1-9]|1[012]):([0-5][0-9]) [ap]m";
-        
+
         if (!at.matches(dateTimeRegex)) {
             return new ErrorCommand("OOPS!!! The date-time format must be yyyy-mm-dd h:mm am/pm.").execute();
         }

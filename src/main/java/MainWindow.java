@@ -26,6 +26,9 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/userIcon.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/dukeBot.png"));
 
+    /**
+     * Initialize the main window when program is booted up.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -35,7 +38,7 @@ public class MainWindow extends AnchorPane {
     public void setDuke(Duke d) {
         duke = d;
     }
-    
+
     public void setWindow(Stage window) {
         this.window = window;
     }
@@ -53,7 +56,7 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
-        
+
         if (input.equals("bye")) {
             window.close();
         }

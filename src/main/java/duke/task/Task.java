@@ -6,12 +6,21 @@ package duke.task;
 public class Task {
     protected String description;
     protected boolean isDone;
-    
+
+    /**
+     * Constructor for Task class.
+     * @param description
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
 
+    /**
+     * Constructor for Task class that can initialize value of isDone.
+     * @param description
+     * @param isDone
+     */
     public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;

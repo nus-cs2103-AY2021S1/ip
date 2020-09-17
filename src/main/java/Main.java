@@ -32,7 +32,7 @@ public class Main extends Application {
             e.printStackTrace();
         }
     }
-    
+
     public void close() {
         window.close();
     }

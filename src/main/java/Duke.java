@@ -6,26 +6,33 @@ import duke.ui.Ui;
 /**
  * Represent the main class to run the Duke program.
  */
-public class Duke  {
+public class Duke {
     private Ui ui;
     private Storage storage;
     private Parser parser;
     private TaskList tasks;
-    
+
+    /**
+     * Constructor for Duke class.
+     * @param filePath file path to the saved data
+     */
     public Duke(String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
         this.parser = new Parser();
         this.tasks = new TaskList(storage.load());
     }
-    
+
+    /**
+     * Constructor for Duke class that initializes filepath to duke.txt.
+     */
     public Duke() {
         this.ui = new Ui();
         this.storage = new Storage("duke.txt");
         this.parser = new Parser();
         this.tasks = new TaskList(storage.load());
     }
-    
+
     /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.

@@ -6,15 +6,21 @@ import duke.task.Task;
 import duke.task.TaskList;
 
 public class DeleteCommand extends Command {
-    TaskList tasks;
-    Storage storage;
-    
+    private TaskList tasks;
+    private Storage storage;
+
+    /**
+     * Constructor for DeleteCommand class.
+     * @param args
+     * @param tasks
+     * @param storage
+     */
     public DeleteCommand(String[] args, TaskList tasks, Storage storage) {
         super.args = args;
         this.tasks = tasks;
         this.storage = storage;
     }
-    
+
     @Override
     public String execute() throws DukeException {
         if (args.length < 2) {
@@ -25,7 +31,7 @@ public class DeleteCommand extends Command {
 
         try {
             inputNumber = Integer.parseInt(args[1]);
-        } catch(NumberFormatException e) {
+        } catch (NumberFormatException e) {
             return new ErrorCommand("OOPS!!! Argument must be an integer.").execute();
         }
 

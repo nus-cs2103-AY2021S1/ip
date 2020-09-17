@@ -6,15 +6,21 @@ import duke.task.Task;
 import duke.task.TaskList;
 
 public class DoneCommand extends Command {
-    TaskList tasks;
-    Storage storage;
-    
+    private TaskList tasks;
+    private Storage storage;
+
+    /**
+     * Constructor for DoneCommand class.
+     * @param args
+     * @param tasks
+     * @param storage
+     */
     public DoneCommand(String[] args, TaskList tasks, Storage storage) {
         super.args = args;
         this.tasks = tasks;
         this.storage = storage;
     }
-    
+
     @Override
     public String execute() throws DukeException {
         if (args.length < 2) {
@@ -25,7 +31,7 @@ public class DoneCommand extends Command {
 
         try {
             inputNumber = Integer.parseInt(args[1]);
-        } catch(NumberFormatException e) {
+        } catch (NumberFormatException e) {
             throw new DukeException("OOPS!!! Argument must be an integer.");
         }
 
@@ -38,9 +44,9 @@ public class DoneCommand extends Command {
         }
 
         int index = inputNumber - 1;
-        
+
         assert index < tasks.size();
-        
+
         Task targetTask = tasks.get(index);
 
         if (targetTask.getStatus()) {
@@ -49,7 +55,7 @@ public class DoneCommand extends Command {
 
         targetTask.setDone();
         tasks.updateStorage(storage);
-        
+
         return "Nice! I've marked this task as done: \n\t" + targetTask;
     }
 }

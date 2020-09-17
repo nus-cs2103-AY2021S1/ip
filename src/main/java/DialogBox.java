@@ -58,7 +58,12 @@ public class DialogBox extends HBox {
         db.flip();
         return db;
     }
-    
+
+    /**
+     * Initializes the program to output welcome message when booted up.
+     * @param img
+     * @return DialogBox
+     */
     public static DialogBox initDukeDialog(Image img) {
         String welcomeMsg = "Welcome to Duke!!!";
         return getDukeDialog(welcomeMsg, img);

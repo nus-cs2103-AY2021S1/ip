@@ -1,10 +1,5 @@
 package duke.storage;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -13,16 +8,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+
 /**
  * Represents a storage for the data (TaskList) of Duke program.
  */
 public class Storage {
     private String filePath;
-    
+
     public Storage(String filePath) {
         this.filePath = filePath;
     }
-    
+
     private void readFileAndUpdateList(Scanner sc, List<Task> list) {
         while (sc.hasNext()) {
             String[] data = sc.nextLine().split("/");
@@ -43,21 +43,23 @@ public class Storage {
                 additional = data[3];
                 list.add(new Event(description, additional, status));
                 break;
+            default:
+                break;
             }
         }
     }
 
     /**
      * Return the list of tasks previously saved in the filepath specified.
-     * 
+     *
      * @return list of tasks
      */
     public List<Task> load() {
         List<Task> list = new ArrayList<>();
-        
+
         try {
             File file = new File(this.filePath);
-            
+
             if (file.exists()) {
                 Scanner sc = new Scanner(file);
 
@@ -65,11 +67,11 @@ public class Storage {
             } else {
                 String[] path = filePath.split("/");
                 String[] dirPath = new String[path.length - 1];
-                
+
                 for (int i = 0; i < path.length - 1; i++) {
                     dirPath[i] = path[i];
                 }
-                
+
                 File dir = new File(String.join("/", dirPath));
                 dir.mkdir();
                 file.createNewFile();
@@ -79,13 +81,13 @@ public class Storage {
         } catch (IOException e) {
             System.out.println("Something went wrong " + e.getMessage());
         }
-        
+
         return list;
     }
 
     /**
      * Update the storage with the given list of tasks.
-     * 
+     *
      * @param list list of tasks
      */
     public void update(List<Task> list) {
