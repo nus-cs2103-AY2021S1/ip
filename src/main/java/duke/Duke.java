@@ -4,7 +4,7 @@ import duke.command.Command;
 import duke.exception.DukeException;
 
 /**
- * Dook the all purpose chatbot to serve your human needs. Made from the finest IDEs, Dook will be the most
+ * Duke the all purpose chatbot to serve your human needs. Made from the finest IDEs, Duke will be the most
  * efficient task list you have ever laid your hands upon.
  */
 public class Duke {
@@ -13,10 +13,19 @@ public class Duke {
     private TaskList tasks;
 
     /**
-     * To instantiate a Dook instance.
+     * To instantiate a Duke instance.
      */
     public Duke() {
         storage = new Storage("./data");
+        tasks = new TaskList(storage);
+    }
+
+    /**
+     * Instantiate Duke instance with custom Storage.
+     * @param s  Custom Storage to be used with duke.
+     */
+    public Duke(Storage s) {
+        storage = s;
         tasks = new TaskList(storage);
     }
 
@@ -28,5 +37,9 @@ public class Duke {
         } catch (DukeException e) {
             return e.toString();
         }
+    }
+
+    public TaskList getTasks() {
+        return tasks;
     }
 }
