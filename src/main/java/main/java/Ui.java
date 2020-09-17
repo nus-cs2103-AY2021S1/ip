@@ -22,7 +22,7 @@ public class Ui {
     }
 
     public String greet() {
-        return "Hello from\n" + logo + "\n" + "     Hello! I'm Duke\n     What can I do for you?";
+        return "Hello from\n" + logo + "     Hello! I'm Duke\n     What can I do for you?";
     }
 
     /**

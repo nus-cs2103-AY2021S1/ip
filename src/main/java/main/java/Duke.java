@@ -35,6 +35,8 @@ public class Duke extends Application{
     private Image duke = new Image(this.getClass().
             getResourceAsStream("/images/DaDuke.png"));
 
+    Scanner sc = new Scanner(System.in);
+
     public Duke() {
         ui = new Ui();
         storage = new Storage("./command.txt");
@@ -45,7 +47,6 @@ public class Duke extends Application{
             tasks = new TaskList();
         }
     }
-    Scanner sc = new Scanner(System.in);
 
     public Duke(String filePath) {
         ui = new Ui();
@@ -149,7 +150,7 @@ public class Duke extends Application{
     }
 
     private void handleUserInput() {
-        Label userText = new Label(userInput.getText());
+        Label userText = new Label("ME:   " + userInput.getText() + "   ");
         Label dukeText = new Label(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(user)),
@@ -159,7 +160,9 @@ public class Duke extends Application{
     }
 
     private String getResponse(String input) {
-        return "Duke heard: " + input;
+        //return "Duke heard: " + input;
+        Parser parser = new Parser(tasks, true);
+        return parser.handleCommand(input);
     }
 }
 
