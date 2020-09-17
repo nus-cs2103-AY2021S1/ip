@@ -1,12 +1,18 @@
----
-layout: page
-title: User Guide
----
+# User Guide
 
 Duke (Also known as Dwayne The Rock Johnson) is your friendly **productivity assistant chatbot**. Simply **type into the message box** and send your inputs and Duke's got your back!
 
-* Table of Contents
-{:toc}
+* Quick Start
+* Features
+  * Adding a todo: `todo`
+  * Adding a deadline: `deadline`
+  * Adding an event: `event`
+  * Marking task as done: `done`
+  * Listing all tasks: `list`
+  * Deleting a task: `delete`
+  * Finding a task: `find`
+  * Exiting the program: `bye`
+* Command Summary
 
 --------------------------------------------------------------------------------------------------------------------
 
