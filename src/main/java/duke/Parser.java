@@ -90,8 +90,6 @@ public class Parser {
         switch(command) {
         case "bye":
             return new ByeCommand();
-        case "save":
-            return new SaveCommand();
         case "list":
             return new ListCommand();
         default:
@@ -128,6 +126,9 @@ public class Parser {
 
     private Command storageCommand(String[] input) throws DukeException {
         String command = input[0];
+        if (command.equals("save")) {
+            return new SaveCommand();
+        }
         if (input.length != 2) {
             throw new DukeException("Invalid Input. " + command + "should be followed by the filePath");
         }
@@ -136,8 +137,6 @@ public class Parser {
             return new ArchiveCommand(input[1]);
         case "load":
             return new LoadCommand(input[1]);
-        case "save":
-            throw new DukeException("Arrr.....To save, just key in 'save' and nothing else");
         default:
             throwNoSuchCommandException();
         }
