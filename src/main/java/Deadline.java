@@ -5,10 +5,10 @@ public class Deadline extends Task {
 
     protected LocalDateTime by;
 
-    public Deadline(String name, String by, boolean isDone) throws DukeException {
+    private Deadline(String name, String by, boolean isDone) throws DukeException {
         super(name, TaskType.DEADLINE, isDone);
         try {
-            this.by = LocalDateTime.parse(by.substring(1), Duke.dateTimeFormat);
+            this.by = LocalDateTime.parse(by.substring(1), Ui.dateTimeFormat);
         } catch (Exception e) {
             throw new DukeWrongFormattingException();
         }
@@ -17,6 +17,10 @@ public class Deadline extends Task {
 
     /**
      * Adds a new deadline to the task list.
+     * @param inputSuffix String containing the description and dateTime of the new deadline.
+     * @param taskList The taskList to have the new task added to.
+     * @param isDone Boolean representing if the deadline has been done.
+     * @param shouldAnnounce A boolean representing if the creation of the deadline should be displayed in the GUI.
      */
     public static void newDeadline(String inputSuffix, TaskList taskList, boolean isDone, boolean shouldAnnounce)
             throws DukeException {
@@ -36,11 +40,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return String.format("[D]%s(by: %s)", super.toString(), by.format(Duke.dateTimeFormat));
-    }
-
-    public String toData() {
-        return String.format("[D]%s/by %s", super.toString(), by.format(Duke.dateTimeFormat));
+        return String.format("[D]%s(by: %s)", super.toString(), by.format(Ui.dateTimeFormat));
     }
 
     @Override

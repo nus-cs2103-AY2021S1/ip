@@ -2,8 +2,13 @@ public class Parser {
 
     /**
      * Considers the command input and performs actions accordingly.
+     * @param inputPrefix The command in string form, decides the instruction to be carried out.
+     * @param inputSuffix The parameters of the command in string form, may contain multiple parameters.
+     * @param taskList The taskList that might perform instructions based on what the command is.
+     * @param mainWindow The mainWindow that will be displaying a response, or that will close, based on what the
+     *                   command is.
      */
-    public static void handleInput(String inputPrefix, String inputSuffix, TaskList taskList, Duke dukeApp)
+    public static void handleInput(String inputPrefix, String inputSuffix, TaskList taskList, MainWindow mainWindow)
             throws Exception {
         switch (inputPrefix) {
         case "list":
@@ -28,7 +33,7 @@ public class Parser {
             taskList.lookFor(inputSuffix);
             break;
         case "bye":
-            dukeApp.exit();
+            mainWindow.exit();
             break;
         default:
             throw new DukeNoSuchInputException();

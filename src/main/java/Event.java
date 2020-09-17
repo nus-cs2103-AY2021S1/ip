@@ -5,10 +5,10 @@ public class Event extends Task {
 
     protected LocalDateTime at;
 
-    public Event(String name, String at, boolean isDone) throws DukeException {
+    private Event(String name, String at, boolean isDone) throws DukeException {
         super(name, TaskType.EVENT, isDone);
         try {
-            this.at = LocalDateTime.parse(at.substring(1), Duke.dateTimeFormat);
+            this.at = LocalDateTime.parse(at.substring(1), Ui.dateTimeFormat);
         } catch (Exception e) {
             throw new DukeWrongFormattingException();
         }
@@ -17,6 +17,10 @@ public class Event extends Task {
 
     /**
      * Adds a new event to the task list.
+     * @param inputSuffix String containing the description and dateTime of the new event.
+     * @param taskList The taskList to have the new event added to.
+     * @param isDone Boolean representing if the task has been done.
+     * @param shouldAnnounce A boolean representing if the creation of the event should be displayed in the GUI.
      */
     public static void newEvent(String inputSuffix, TaskList taskList, boolean isDone, boolean shouldAnnounce)
             throws DukeException {
@@ -36,11 +40,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return String.format("[E]%s(at: %s)", super.toString(), at.format(Duke.dateTimeFormat));
-    }
-
-    public String toData() {
-        return String.format("[E]%s/at %s", super.toString(), at.format(Duke.dateTimeFormat));
+        return String.format("[E]%s(at: %s)", super.toString(), at.format(Ui.dateTimeFormat));
     }
 
     @Override

@@ -1,29 +1,26 @@
-import javafx.scene.control.Label;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
-
-import java.time.LocalDateTime;
-import java.util.Scanner;
 
 public class Ui {
 
+    protected static DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
     private static final String LINE = "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-";
-    private static final Scanner INPUT = new Scanner(System.in);
-    private static final String LOGO = " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
+    private static final String INTRO = "Greetings, I am the Dragon Of The West, otherwise known as Iroh, "
+            + "how may I serve you today?";
     private static Image userPic;
     private static Image dukePic;
     private static TextField userInput;
     private static VBox dialogContainer;
-    private static Duke dukeApp;
+    private static MainWindow mainWindow;
 
     /**
      * Takes in inputs, and passes them to the Parser to perform actions.
+     * @param nextInput The input in string form, to be parsed by the parser.
+     * @param taskList The taskList that performs the appropriate functions based on the input.
      */
     public static void processInput(String nextInput, TaskList taskList) {
 
@@ -31,7 +28,7 @@ public class Ui {
         String inputPrefix = inputParts[0];
         String inputSuffix = inputParts.length == 1 ? "" : inputParts[1];
         try {
-            Parser.handleInput(inputPrefix, inputSuffix, taskList, dukeApp);
+            Parser.handleInput(inputPrefix, inputSuffix, taskList, mainWindow);
         } catch (DukeException dukeException) {
             printWithLines(dukeException + "\n");
         } catch (Exception e) {
@@ -39,6 +36,10 @@ public class Ui {
         }
     }
 
+    /**
+     * Extracts the text from the dialogueContainer that will be used as the input.
+     * @param taskList The taskList that performs the appropriate functions based on the input.
+     */
     public static void startInput(TaskList taskList) {
         String input = userInput.getText();
         dialogContainer.getChildren().add(DialogBox.getUserDialog(input, userPic));
@@ -47,7 +48,8 @@ public class Ui {
     }
 
     /**
-     * Prints the desired output with decorative lines.
+     * Displays the desired output with decorative lines in the GUI.
+     * @param output The output to be displayed in string form.
      */
     public static void printWithLines(String output) {
         System.out.println(LINE + "\n" + output + LINE);
@@ -56,6 +58,7 @@ public class Ui {
 
     /**
      * Checks if a given string only has spaces, or if it's an empty string.
+     * @param string The string to be checked for blanks.
      */
     public static boolean isBlankString(String string) {
         if (string.length() != 0) {
@@ -68,18 +71,25 @@ public class Ui {
         return true;
     }
 
-    public static void initialise(TextField newUserInput,
-                                  VBox newDialogContainer,
-                                  Duke newDuke,
+    /**
+     * Initialises the class by assigning objects to the static variables.
+     * @param userInput The textField to be assigned.
+     * @param dialogContainer The vBox to be assigned.
+     * @param mainWindow The mainWindow to be assigned.
+     * @param user The image to be assigned that will represent the user.
+     * @param duke The image to be assigned that will represent the bot.
+     */
+    public static void initialise(TextField userInput,
+                                  VBox dialogContainer,
+                                  MainWindow mainWindow,
                                   Image user,
                                   Image duke) {
-        userInput = newUserInput;
-        dialogContainer = newDialogContainer;
-        dukeApp = newDuke;
+        Ui.userInput = userInput;
+        Ui.dialogContainer = dialogContainer;
+        Ui.mainWindow = mainWindow;
         userPic = user;
         dukePic = duke;
-        printWithLines("Hello! My name is Duketh Puketh III, but you can call me\n" + LOGO
-                + "\n How may I help you today? :)\n The date and time is now "
-                + LocalDateTime.now().format(Duke.dateTimeFormat) + "\n");
+        printWithLines(INTRO + LocalDateTime.now().format(dateTimeFormat) + "\n");
     }
+
 }

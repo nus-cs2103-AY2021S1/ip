@@ -7,13 +7,13 @@ import java.io.IOException;
 
 public class Storage {
 
-    private static String filePath = "./src/main/data/duke.txt";
+    private static final String FILEPATH = "./src/main/data/duke.txt";
 
     /**
      * Attempts to load an existing save file.
      */
     public static TaskList loadFromMem() throws DukeException {
-        File saveFile = new File(filePath);
+        File saveFile = new File(FILEPATH);
         if (saveFile.exists()) {
             return convertToTaskList();
         } else {
@@ -23,12 +23,12 @@ public class Storage {
 
     /**
      * Creates a new file that contains the saved tasks.
+     * @param data The data to be read and converted to a save file, obtained from calling toString() on a taskList.
      */
     public static void createNewSave(String data) throws DukeException {
         new File("./src/main/data").mkdirs();
         try {
-            new File(filePath).createNewFile();
-            File newFile = new File(filePath);
+            File newFile = new File(FILEPATH);
             writeToFile(data, newFile);
         } catch (IOException e) {
             throw new DukeException();
@@ -44,7 +44,7 @@ public class Storage {
     private static TaskList convertToTaskList() throws DukeException {
         TaskList taskList = new TaskList();
         try {
-            BufferedReader br = new BufferedReader(new FileReader(filePath));
+            BufferedReader br = new BufferedReader(new FileReader(FILEPATH));
             br.lines().forEach(s -> {
                 try {
                     convertToTask(s, taskList);
@@ -63,7 +63,7 @@ public class Storage {
 
         if (line.startsWith("O", 4)) {
             isDone = true;
-        } else if (line.startsWith("Ø", 4)) {
+        } else if (line.startsWith("X", 4)) {
             isDone = false;
         } else {
             throw new DukeException();

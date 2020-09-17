@@ -5,7 +5,7 @@ public class Task {
     private final String name;
     private boolean isDone;
 
-    public Task(String name, TaskType taskType) throws DukeEmptyDescException {
+    protected Task(String name, TaskType taskType) throws DukeEmptyDescException {
         if (Ui.isBlankString(name)) {
             throw new DukeEmptyDescException(taskType);
         } else {
@@ -14,7 +14,7 @@ public class Task {
         }
     }
 
-    public Task(String name, TaskType taskType, boolean isDone) throws DukeEmptyDescException {
+    protected Task(String name, TaskType taskType, boolean isDone) throws DukeEmptyDescException {
         if (Ui.isBlankString(name)) {
             throw new DukeEmptyDescException(taskType);
         } else {
@@ -25,7 +25,7 @@ public class Task {
 
 
     private String getStatusIcon() {
-        return (isDone ? "Ø" : "O"); //return tick or X symbols
+        return (isDone ? "O" : "X"); //return tick or X symbols
     }
 
     /**
@@ -35,6 +35,11 @@ public class Task {
         isDone = true;
     }
 
+    /**
+     * Checks if the task contains a keyword.
+     * @param key Keyword to be searched.
+     * @return Boolean representing if the keyword.
+     */
     public boolean hasKeyword(String key) {
         String[] words = name.split(" ");
         for (String word : words) {
@@ -48,10 +53,6 @@ public class Task {
     @Override
     public String toString() {
         return String.format("[%s] %s", getStatusIcon(), name);
-    }
-
-    public String toData() {
-        return toString();
     }
 
     @Override
