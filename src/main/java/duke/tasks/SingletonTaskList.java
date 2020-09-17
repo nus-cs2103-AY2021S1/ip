@@ -50,12 +50,12 @@ public class SingletonTaskList {
      */
     public String delete(int idx) throws TaskOutOfBoundException {
         try {
-            String message = Printer.printDelete(tasks.get(idx - 1), tasks.size() - 1);
-            tasks.remove(idx - 1);
+            String message = Printer.printDelete(tasks.get(idx), tasks.size() - 1);
+            tasks.remove(idx);
             storage.update(tasks);
             return message;
         } catch (IndexOutOfBoundsException e) {
-            throw new TaskOutOfBoundException("task number out of bound", idx);
+            throw new TaskOutOfBoundException("task number out of bound", idx + 1);
         }
     }
 

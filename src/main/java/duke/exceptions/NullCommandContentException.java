@@ -1,6 +1,6 @@
 package duke.exceptions;
 
-public class NullCommandContentException extends Exception {
+public class NullCommandContentException extends DukeException {
 
     private String typeOfCommand;
 

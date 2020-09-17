@@ -49,18 +49,19 @@ public class MainWindow extends AnchorPane {
         userInput.focusedProperty().addListener(this.inputFocusListener);
     }
 
+    @FXML
     private void handleFocusedInputField(ObservableValue<? extends Boolean> observableValue,
                                          Boolean oldVal, Boolean newVal) {
         if (newVal) {
             userInput.setStyle("-fx-background-radius: 10");
             userPanel.setPadding(new Insets(3, 5, 3, 5));
-            userPanel.setSpacing(10.0);
+            userPanel.setSpacing(10);
             userInput.setPrefWidth(325);
         } else {
             userInput.setStyle("-fx-background-radius: 30");
             userPanel.setPadding(new Insets(3, 5, 3, 25));
             userInput.setPrefWidth(275);
-            userPanel.setSpacing(25.0);
+            userPanel.setSpacing(30.0);
         }
     }
 

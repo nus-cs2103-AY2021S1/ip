@@ -2,7 +2,7 @@ package duke.exceptions;
 
 import duke.utils.Constants;
 
-public class DurationFormatException extends Exception {
+public class DurationFormatException extends DukeException {
     private DurationErrorType errorType;
 
     /**

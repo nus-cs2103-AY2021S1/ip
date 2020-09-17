@@ -2,7 +2,7 @@ package duke.exceptions;
 
 import java.util.Objects;
 
-public class TaskNotSpecifyException extends Exception {
+public class TaskNotSpecifyException extends DukeException {
 
     private String typeOfCommand;
 

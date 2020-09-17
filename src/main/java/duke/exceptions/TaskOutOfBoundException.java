@@ -1,6 +1,6 @@
 package duke.exceptions;
 
-public class TaskOutOfBoundException extends Exception {
+public class TaskOutOfBoundException extends DukeException {
 
     private int taskNum;
 

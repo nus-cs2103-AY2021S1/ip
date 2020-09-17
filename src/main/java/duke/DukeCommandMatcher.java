@@ -1,18 +1,17 @@
 package duke;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.util.Objects;
 
+import duke.command.meta_commands.ContentMetaCommand;
+import duke.command.meta_commands.DurationMetaCommand;
+import duke.command.meta_commands.MetaCommand;
+import duke.command.meta_commands.TimeMetaCommand;
 import duke.exceptions.CommandNotFoundException;
-import duke.exceptions.DateFormatException;
-import duke.exceptions.DurationFormatException;
-import duke.exceptions.LackOfTimeException;
-import duke.exceptions.NullCommandContentException;
+import duke.exceptions.DukeException;
 import duke.exceptions.NullCommandException;
-import duke.exceptions.TaskNotSpecifyException;
-import duke.exceptions.TaskOutOfBoundException;
+import duke.parsers.CommandParser;
 import duke.storage.Storage;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
@@ -21,7 +20,6 @@ import duke.tasks.Task;
 import duke.tasks.ToDo;
 import duke.ui.Printer;
 import duke.utils.Constants;
-import duke.utils.UtilFunction;
 
 
 /**
@@ -29,10 +27,12 @@ import duke.utils.UtilFunction;
  */
 public class DukeCommandMatcher {
 
-    private static final List<String> commandList = new ArrayList<>(Arrays.asList(Constants.LISTPATTERN,
-            Constants.EXITPATTERN, Constants.DONEPATTERN, Constants.TODOPATTERN, Constants.DEADLINEPATTERN,
-            Constants.EVENTPATTERN, Constants.DELETEPATTERN, Constants.FINDPATTERN, Constants.HELPPATTERN
-    ));
+
+    private static final String DURATION_DELIMITER = " ~ ";
+    private static final DateTimeFormatter STANDARD_DATE_TIME_FORMATTER =
+            new DateTimeFormatterBuilder().appendPattern("MMM d yyyy")
+                    .optionalStart().appendPattern(" HH:mm")
+                    .optionalEnd().toFormatter();
 
     private SingletonTaskList taskList;
 
@@ -44,51 +44,40 @@ public class DukeCommandMatcher {
      * Match the command to corresponding behavior.
      * @param command
      * @return message of implementation
-     * @throws CommandNotFoundException when command is not found
-     * @throws NullCommandException when the command is empty
-     * @throws LackOfTimeException when event/deadline command lacks time
-     * @throws NullCommandContentException when todo/event/deadline lacks content
-     * @throws TaskOutOfBoundException when done/delete is implemented on task that does not exist
-     * @throws TaskNotSpecifyException when the task to be done/deleted is not specified
-     * @throws DateFormatException when input date format is not in the standard format
+     * @throws DukeException when error occurs during Duke implementation
      */
-    public String handleCommand(String command) throws CommandNotFoundException, NullCommandException,
-            LackOfTimeException, NullCommandContentException, TaskOutOfBoundException, TaskNotSpecifyException,
-            DateFormatException, DurationFormatException {
+    public String handleCommand(String command) throws DukeException {
         if (Objects.equals(command, "")) {
             throw new NullCommandException(command);
         }
 
-        //get the first command
-        String[] splitCommand = command.split("\\s+", 2);
-        //check if the command is in the list
-        for (String commandPattern: commandList) {
-            //the command is in the list
-            if (UtilFunction.matchPattern(commandPattern, splitCommand[0])) {
-                switch (commandPattern) {
-                case Constants.EXITPATTERN:
-                    return handleExit();
-                case Constants.LISTPATTERN:
-                    return handleList();
-                case Constants.DONEPATTERN:
-                    return handleDone(splitCommand);
-                case Constants.TODOPATTERN:
-                    return handleTodo(splitCommand);
-                case Constants.DEADLINEPATTERN:
-                    return handleDeadline(splitCommand);
-                case Constants.EVENTPATTERN:
-                    return handleEvent(splitCommand);
-                case Constants.DELETEPATTERN:
-                    return handleDelete(splitCommand);
-                case Constants.FINDPATTERN:
-                    return handleFind(splitCommand);
-                case Constants.HELPPATTERN:
-                    return handleHelp();
-                default:
-                    break;
-                }
-            }
+        CommandParser parser = new CommandParser(command);
+        MetaCommand outcome = parser.parse();
+
+
+        switch (outcome.getType()) {
+        case EXIT:
+            return handleExit();
+        case LIST:
+            return handleList();
+        case DONE:
+            return handleDone(outcome);
+        case TODO:
+            return handleTodo(outcome);
+        case DEADLINE:
+            return handleDeadline(outcome);
+        case EVENT:
+            return handleEvent(outcome);
+        case DELETE:
+            return handleDelete(outcome);
+        case FIND:
+            return handleFind(outcome);
+        case HELP:
+            return handleHelp();
+        default:
+            break;
         }
+
         throw new CommandNotFoundException(command);
     }
 
@@ -105,85 +94,42 @@ public class DukeCommandMatcher {
         return taskList.listAll();
     }
 
-    private String handleDone(String[] targetTask) throws TaskOutOfBoundException, TaskNotSpecifyException {
-        try {
-            int targetTaskPos = Integer.parseInt(targetTask[1]) - 1;
-            return taskList.setTaskDone(targetTaskPos);
-        } catch (IndexOutOfBoundsException e) {
-            throw new TaskNotSpecifyException("task to be done not specified", "DONE");
-        }
+    private String handleDone(MetaCommand metaCommand) throws DukeException {
+        String idxStr = ((ContentMetaCommand) metaCommand).getContent();
+        int targetTaskPos = Integer.parseInt(idxStr) - 1;
+        return taskList.setTaskDone(targetTaskPos);
     }
 
-    private String handleTodo(String[] todoStr) throws NullCommandContentException {
-        ToDo todo;
-        try {
-            String todoContent = todoStr[1];
-            todo = new ToDo(todoContent);
-        } catch (NullPointerException | IndexOutOfBoundsException e) {
-            throw new NullCommandContentException("Description cannot be null", "Todo");
-        }
+    private String handleTodo(MetaCommand metaCommand) {
+        String content = ((ContentMetaCommand) metaCommand).getContent();
+        ToDo todo = new ToDo(content);
         return handleAdd(todo);
     }
 
-    private String handleDeadline(String[] deadlineStr) throws NullCommandContentException, LackOfTimeException,
-            DateFormatException {
-        Deadline deadline;
-        String[] splitDeadline;
-        try {
-            String deadlineContent = deadlineStr[1];
-            splitDeadline = deadlineContent.split("/", 2);
-        } catch (IndexOutOfBoundsException e) {
-            throw new NullCommandContentException("Description cannot be null", "Deadline");
-        }
-
-        try {
-            String standardDate = UtilFunction.formatDateTimeToStandard(splitDeadline[1]);
-            deadline = new Deadline(splitDeadline[0], standardDate);
-        } catch (IndexOutOfBoundsException e) {
-            throw new LackOfTimeException("The time cannot be empty", "Duke.Deadline");
-        }
+    private String handleDeadline(MetaCommand metaCommand) {
+        String content = ((ContentMetaCommand) metaCommand).getContent();
+        String time = STANDARD_DATE_TIME_FORMATTER.format(((TimeMetaCommand) metaCommand).getTime());
+        Deadline deadline = new Deadline(content, time);
         return handleAdd(deadline);
     }
 
-    private String handleEvent(String[] eventStr) throws NullCommandContentException, LackOfTimeException,
-            DateFormatException, DurationFormatException {
-        Event event;
-        String[] splitEventStr;
-        try {
-            String eventContent = eventStr[1];
-            splitEventStr = eventContent.split("/", 2);
-            if (eventContent.trim().isEmpty()) {
-                throw new IndexOutOfBoundsException();
-            }
-        } catch (IndexOutOfBoundsException e) {
-            throw new NullCommandContentException("Description cannot be null", "Event");
-        }
-        try {
-            String standardDate = UtilFunction.formatDurationToStandard(splitEventStr[1]);
-            event = new Event(splitEventStr[0], standardDate);
-        } catch (IndexOutOfBoundsException e) {
-            throw new LackOfTimeException("The time cannot be empty", "Event");
-        }
+    private String handleEvent(MetaCommand metaCommand) {
+        String content = ((DurationMetaCommand) metaCommand).getContent();
+        String startTime = STANDARD_DATE_TIME_FORMATTER.format(((DurationMetaCommand) metaCommand).getStartTime());
+        String endTime = STANDARD_DATE_TIME_FORMATTER.format(((DurationMetaCommand) metaCommand).getEndTime());
+        Event event = new Event(content, startTime + DURATION_DELIMITER + endTime);
         return handleAdd(event);
     }
 
-    private String handleDelete(String[] deleteStr) throws TaskNotSpecifyException, TaskOutOfBoundException {
-        int taskToDelete;
-        try {
-            taskToDelete = Integer.parseInt(deleteStr[1]);
-            return taskList.delete(taskToDelete);
-        } catch (IndexOutOfBoundsException | NumberFormatException e) {
-            throw new TaskNotSpecifyException("task to deletion not specified", "DELETE");
-        }
+    private String handleDelete(MetaCommand metaCommand) throws DukeException {
+        String idxStr = ((ContentMetaCommand) metaCommand).getContent();
+        int targetTaskPos = Integer.parseInt(idxStr) - 1;
+        return taskList.delete(targetTaskPos);
     }
 
-    private String handleFind(String[] findStr) throws NullCommandContentException {
-        try {
-            String queryKey = findStr[1];
-            return taskList.query(queryKey);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            throw new NullCommandContentException("no query body", "FIND");
-        }
+    private String handleFind(MetaCommand metaCommand) {
+        String queryKey = ((ContentMetaCommand) metaCommand).getContent();
+        return taskList.query(queryKey);
     }
 
     private String handleHelp() {

@@ -1,6 +1,6 @@
 package duke.exceptions;
 
-public class NullCommandException extends Exception {
+public class NullCommandException extends DukeException {
     /**
      * Constructor of null command exception.
      * @param err error message
