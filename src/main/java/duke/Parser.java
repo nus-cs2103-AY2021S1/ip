@@ -61,7 +61,7 @@ public class Parser {
             throw new EmptyArgumentException("deadline's description");
         }
         if (!input.matches("deadline .+/by \\d{4}-\\d{1,2}-\\d{1,2} \\d{4}")) {
-            throw new InvalidArgumentException("deadline's description (proper date format: yyyy-mm-dd HHmm)");
+            throw new InvalidArgumentException("deadline's description/time");
         }
         String[] split = input.substring(9).split("/by");
         String dateTimeString = split[1].stripLeading();
@@ -74,7 +74,7 @@ public class Parser {
             throw new EmptyArgumentException("event's description");
         }
         if (!input.matches("event .+/at \\d{4}-\\d{1,2}-\\d{1,2} \\d{4}")) {
-            throw new InvalidArgumentException("event description (proper date format: yyyy-mm-dd HHmm)");
+            throw new InvalidArgumentException("event description/datetime");
         }
         String[] split = input.substring(6).split("/at");
         String dateTimeString = split[1].stripLeading();

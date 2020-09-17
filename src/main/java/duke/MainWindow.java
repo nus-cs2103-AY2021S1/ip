@@ -1,21 +1,20 @@
 package duke;
 
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
-import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.VBox;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
     @FXML
-    public ImageView header;
+    private ImageView header;
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -29,6 +28,9 @@ public class MainWindow extends AnchorPane {
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/spongebob.png"));
     private Image headerImg = new Image(this.getClass().getResourceAsStream("/images/header.jpg"));
 
+    /**
+     * To Initialise MainWindow View component.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -36,6 +38,9 @@ public class MainWindow extends AnchorPane {
         header.setImage(headerImg);
     }
 
+    /**
+     * To set Duke instance for component.
+     */
     public void setDuke(Duke d) {
         duke = d;
     }
@@ -47,6 +52,9 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
+        if (input.isBlank()) {
+            return;
+        }
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
@@ -56,6 +64,9 @@ public class MainWindow extends AnchorPane {
         scrollPane.setPannable(true);
     }
 
+    /**
+     * Show welcome message to user.
+     */
     @FXML
     public void showWelcome() {
         String welcomeMsg = "I'm ready, I'm ready, I'm ready...\n Oh hey there what can I do for you today?";

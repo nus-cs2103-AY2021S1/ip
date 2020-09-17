@@ -26,7 +26,7 @@ public class Main extends Application {
             // Set Up Styles
             scene.getStylesheets().add("/view/DialogBox.css");
             scene.getStylesheets().add("/view/MainWindow.css");
-            stage.initStyle(StageStyle.UNDECORATED);
+            stage.initStyle(StageStyle.UTILITY);
             stage.setScene(scene);
             stage.setResizable(false);
 

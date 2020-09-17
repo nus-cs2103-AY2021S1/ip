@@ -12,6 +12,6 @@ public class EmptyArgumentException extends DukeException {
 
     @Override
     public String toString () {
-        return String.format("%s cant be empty bro", arg);
+        return String.format("%s cant be empty patrick!!", arg);
     }
 }

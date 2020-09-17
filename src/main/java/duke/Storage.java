@@ -12,7 +12,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import duke.task.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.FixedDurationTask;
+import duke.task.Task;
+import duke.task.Todo;
 
 /**
  * Deals with all Storage operations.
@@ -23,6 +27,11 @@ public class Storage {
     private String directory;
 
 
+    /**
+     * To initialise a Storage object.
+     *
+     * @param directory  Directory where storage file will be stored.
+     */
     public Storage(String directory) {
         this.directory = directory;
         path = Paths.get(directory + "/data.txt");
@@ -38,12 +47,12 @@ public class Storage {
             String[] args = str.split(" \\| ");
 
             // Deconstruct Task
-            String TaskType = args[0];
+            String taskType = args[0];
             boolean isDone = args[1].equals("1");
             String description = args[2];
 
             Task task;
-            switch (TaskType) {
+            switch (taskType) {
             case "T":
                 task = new Todo(description);
                 if (isDone) {

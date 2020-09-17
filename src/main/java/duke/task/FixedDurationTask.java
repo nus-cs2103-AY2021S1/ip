@@ -1,9 +1,5 @@
 package duke.task;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Objects;
-
 public class FixedDurationTask extends Task {
     private String duration;
 
