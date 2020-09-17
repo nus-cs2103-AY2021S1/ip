@@ -12,9 +12,9 @@ Duke (Also known as Dwayne The Rock Johnson) is your friendly **productivity ass
   * Deleting a task: `delete`
   * Finding a task: `find`
   * Exiting the program: `bye`
-* FAQ
 * Command Summary
 
+--------------------------------------------------------------------------------------------------------------------
 
 ## Quick Start
 
@@ -34,6 +34,8 @@ Some example commands you can try:
 * **`delete`**`2`: Deletes the second task on the task list and lists remaining tasks
 * **`done`**`1`: Marks first task on the task list as done
 * **`find`**`homework`: Finds tasks containing the keywords `homework`
+
+--------------------------------------------------------------------------------------------------------------------
 
 ## Features 
 
@@ -139,3 +141,16 @@ Examples:
 Exits the program.
 
 Format: `bye`
+
+--------------------------------------------------------------------------------------------------------------------
+
+Action | Format, Examples
+--------|------------------
+**todo** | `todo TASK_DESCRIPTION` <br> e.g., `todo Read book`
+**event** | `event TASK_DESCRIPTION /PREPOSITION YYYY-MM-DD` <br> e.g., `event Science conference /at 2020-08-08`
+**deadline** | `deadline TASK_DESCRIPTION /PREPOSITION YYYY-MM-DD` <br> e.g., `deadline Return books /by 2020-05-07`
+**list** | `list`
+**delete** | `delete INDEX`<br> e.g., `delete 3`
+**done** | `edit INDEX`<br> e.g.,`done 2`
+**find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find Return books`
+**bye** | `bye`
