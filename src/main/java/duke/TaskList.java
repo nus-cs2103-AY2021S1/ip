@@ -161,8 +161,11 @@ public class TaskList {
      * @param str The string input containing the new description
      */
     public String updateTask(Ui ui, String str)
-            throws ArrayIndexOutOfBoundsException, UnknownCommandException {
+            throws ArrayIndexOutOfBoundsException, UnknownCommandException, DukeErrorException {
         String[] command = str.trim().split(" ", 2);
+        if (command[0].length() > 1) {
+            throw new DukeErrorException("Follow this format: update TASKID TASKTYPE NEWDESCRIPTION /by NEWDATE");
+        }
         int index = Integer.parseInt(command[0]) - 1;
         if (index > this.tasks.size() || index < 0) {
             throw new ArrayIndexOutOfBoundsException();

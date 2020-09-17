@@ -102,7 +102,7 @@ public class Duke {
         } else if (command.equals(Commands.UPDATE)) {
             try {
                 return tl.updateTask(ui, splitted[1]);
-            } catch (UnknownCommandException | ArrayIndexOutOfBoundsException e) {
+            } catch (DukeErrorException | UnknownCommandException | ArrayIndexOutOfBoundsException e) {
                 return e.toString();
             }
         } else {
