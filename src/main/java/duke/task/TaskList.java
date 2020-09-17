@@ -71,6 +71,19 @@ public class TaskList {
         }
     }
 
+    public String filterTasksByDescription(String description) {
+        ArrayList<Task> filtered = new ArrayList<>();
+        String descriptionLower = description.toLowerCase();
+
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).getDescription().toLowerCase().contains(descriptionLower)) {
+                filtered.add(tasks.get(i));
+            }
+        }
+
+        return tasks2String(filtered);
+    }
+
     /**
      * Adds a TODO task to the existing taskList. The task is marked as undone by default.
      * Returns a string representation of the added task.

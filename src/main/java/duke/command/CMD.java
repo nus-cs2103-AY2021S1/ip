@@ -8,5 +8,6 @@ public enum CMD {
     EVENT,
     DONE,
     DELETE,
+    FIND,
     DEFAULT
 }

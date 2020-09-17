@@ -112,6 +112,13 @@ public class Parser {
                 throw new DukeException("U MUST ONLY PUT INDEX OV TASK LULS");
             }
 
+        case FIND:
+            if (rest.isEmpty()) {
+                throw new DukeException("ME FINKZ DAT U NED 2 ENTR NAYM 4 UR TODO ITEM LULZ");
+            } else {
+                return new FindCommand(rest);
+            }
+
         case DEFAULT:
             return new Command();
         }
