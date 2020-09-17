@@ -56,6 +56,7 @@ before a specific date.
 #### Format
 
 `deadline <task description> /by <YYYY-MM-DD>`
+NOTE: You have to provide the date in the exact `YYYY-MM-DD` format.
 
 #### Usage
 Example of usage:
@@ -66,6 +67,54 @@ Expected outcome:
 `Got it. I've added this task:` <br>
 `[T][X] exercise at the gym` <br>
 `Now you have 1 task in the list` <br>
+
+### Adding an event task: `event`
+Adds an event task for Clippy to keep track of. You should add a task as an event when the task occurs 
+at a specific date/time period.
+
+#### Format
+
+`event <task description> /at <date/time period>`
+NOTE: You do not have to follow any format for `<date/time period>`.
+#### Usage
+Example of usage:
+* `event java workshop /at Tuesday 6-7pm`
+
+Expected outcome:
+
+`Got it. I've added this task:` <br>
+`[T][X] exercise at the gym` <br>
+`Now you have 1 task in the list` <br>
+
+### Listing all tasks: `list`
+Shows a list of all tasks being managed by Clippy.
+
+#### Format
+
+`list`
+
+### Adding an event task: `event`
+Adds an event task for Clippy to keep track of. You should add a task as an event when the task occurs 
+at a specific date/time period.
+
+#### Format
+
+`event <task description> /at <date/time period>`
+NOTE: You do not have to follow any format for `<date/time period>`.
+#### Usage
+Example of usage:
+* `event java workshop /at Tuesday 6-7pm`
+
+Expected outcome:
+
+`Got it. I've added this task:` <br>
+`[T][X] exercise at the gym` <br>
+`Now you have 1 task in the list` <br>
+
+
+
+
+
 
 
 ## Command Summary
