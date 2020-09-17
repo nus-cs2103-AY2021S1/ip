@@ -38,7 +38,7 @@ GUI apps.
    - `list` : Displays all the tasks that you have in your list.
    - `done 1` : Marks task number 1 as done.
    - `find laundry` : Finds all tasks based on their description using the keyword *laundry*.
-6. Refer to the Features below for more details of each command.  
+6. Refer to the [Features](https://michael-setia.github.io/ip/#features) below for more details of each command.  
 
 ## Features 
 
