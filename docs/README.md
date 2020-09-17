@@ -3,6 +3,8 @@
 ##### Like cats? Like anime? Need someone to help you manage your busy life?
 ##### Neko-chan is the perfect companion for you.
 
+![Screenshot](./Ui.png)
+
 ## Features 
 
 - [Add Tasks - Todos, Deadlines & Events](#add-tasks)
@@ -180,6 +182,10 @@ Expected outcome:
 So this is how the future looks like...
 ```
 
+## Uninstallation
+
+To uninstall Neko-chan, simply delete the `Neko.jar` file and remove the `nekochan` folder in your home directory.
+
 ## Accepted Date & Time Formats
 * `DD MMM YYYY` (E.g 1 Sep 2020)
 * `D/M/YYYY` (E.g 1/9/2020)
@@ -198,7 +204,7 @@ you may omit the number of days, hours or minutes, and they are assumed to be 0.
 
 ## Advanced Features
 
-### Command Line Mode
+### Text UI Mode
 
 If for any reason, you prefer to use Neko-chan in the command line environment, you can do so by executing the following
 `java -jar Neko.jar -mode cli`.
