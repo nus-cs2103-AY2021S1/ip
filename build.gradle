@@ -30,10 +30,16 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
 }
 
-mainClassName = "SpanishDuke"
+application {
+    mainClassName = 'Launcher'
+}
 
 apply plugin: 'com.github.johnrengelman.shadow'
 
 checkstyle {
     toolVersion "7.6.1"
+}
+
+shadowJar {
+    archiveFileName = "SpanishDuke.jar"
 }

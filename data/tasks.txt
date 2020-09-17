@@ -1,3 +1,4 @@
 [T] [X]return spanish book
-[D] [O][DRP]return spanish book by:20/09/2020 1600
+[D] [X][DRP]return spanish book by:20/09/2020 1600
 [E] [X][NRP]return spanish book at:20/09/2020 1600
+[E] [X][NRP]study st2334 at:20/09/2020 1600
