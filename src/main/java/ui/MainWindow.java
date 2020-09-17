@@ -58,5 +58,17 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+        if (input.equals("bye")) {
+            new Thread(() -> {
+                try {
+                    Thread.sleep(400);
+                    System.exit(0);
+                } catch (InterruptedException e) {
+                    dialogContainer.getChildren().add(
+                            DialogBox.getDukeDialog("DukeBot exiting!", dukeImage)
+                    );
+                }
+            }).start();
+        }
     }
 }
