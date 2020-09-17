@@ -52,7 +52,7 @@ public class Parser {
                     + "deadline DESCRIPTION /by DD.MM.YY HHmm");
         }
         if (content[1].equals("")) {
-            throw new DukeException("Beep bop!!! We can't seem to find your event time. "
+            throw new DukeException("Beep bop!!! We can't seem to find your task time. "
                     + "\uD83D\uDE1E\n\nPlease type "
                     + (eventType.equals("deadline") ? "/by" : "/at")
                     + " before your preferred timing");

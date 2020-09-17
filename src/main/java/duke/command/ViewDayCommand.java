@@ -31,8 +31,8 @@ public class ViewDayCommand extends Command {
             throw new DukeException("It seems like you've provided us "
                     + "with the wrong date format for your event. \uD83D\uDE1E"
                     + "\n\nPlease structure it as dd.mm.yy where d refers to day, m refers to month"
-                    + "and y refers to year"
-                    + "\n\nFor example, 05.02.20 1200 represents 5th Feb 2020, 12pm");
+                    + " and y refers to year"
+                    + "\n\nFor example, 05.02.20 represents 5th Feb 2020");
         }
     }
 }

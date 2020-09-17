@@ -6,15 +6,15 @@ Duke is a revolutionary **chatbot desktop app that keeps track of your tasks for
 * Quick Start
 * Features
 	1.  Adding a task : 
-			1. Todo : [``` todo```](https://avalionnet.github.io/ip/#Todo)
-			2. Event : [```event```](https://avalionnet.github.io/ip/#Event)
-			3. Deadline : [```deadline```](https://avalionnet.github.io/ip/#Deadline)
+		1.  Todo : [``` todo```](https://avalionnet.github.io/ip/#Todo)
+		2. Event : [```event```](https://avalionnet.github.io/ip/#Event)
+		3. Deadline : [```deadline```](https://avalionnet.github.io/ip/#Deadline)
 	2.	Viewing tasks :
 			1.	View all saved tasks : ``` list```
 			2.	View all tasks on a particular date : ```view```
 			3.	Find a task by name/description : ``` find```
 	3.	Mark a task as done : ``` done```
-	4. Delete a task : ``` delete```
+	4.  Delete a task : ``` delete```
 	5.	Exit the program: ``` bye```
 * Command Syntax Summary
 
@@ -22,29 +22,30 @@ Duke is a revolutionary **chatbot desktop app that keeps track of your tasks for
 
 Installing Duke is fairly simple and 5 minutes is all you will need. Mark the list as you complete the steps below!
 
- - [x]  Ensure that you have Java `11` or above installed on your computer. 
+ -[x]  Ensure that you have Java `11` or above installed on your computer. 
  - To find out the Java version you have installed, click [here](https://www.java.com/en/download/help/version_manual.xml). 
  - If Java is not installed on your computer, click [here](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html) to download it. 
- - [x]  Download the latest `duke.jar` software from [here](https://github.com/avalionnet/ip/releases).
+ -[x]  Download the latest `duke.jar` software from [here](https://github.com/avalionnet/ip/releases).
  
- - [x]  Save the file to the folder you want Duke to be installed in. 
- - [x]  Double-click the `duke.jar` file to start the app. 
+ -[x]  Save the file to the folder you want Duke to be installed in. 
+ -[x]  Double-click the `duke.jar` file to start the app. 
  - **Note that Duke will automatically create an additional `data` folder in this 	directory to save your tasks upon starting the program for the first time.
  - You should observe the following GUI appearing :
- **INSERT GUI HERE**
+ 
+![Intro Image of Duke Chatbot](https://github.com/Avalionnet/ip/blob/master/docs/Demo.png)
 
 # Tutorial
 Here are some features you can try upon your first launch of duke. Type the following commands in the input field at the bottom of the GUI and hit enter or click on the send button. Observe what happens.
     
-- [x]   **`todo`**`Complete weekly programming quiz`  : 
+- [x]  **`todo`**`Complete weekly programming quiz`  : 
 		Adds a task with the description  `Complete weekly programming quiz`  to your task list.
-- [x]    **`list`**  : Lists all tasks scheduled
+- [x]  **`list`**  : Lists all tasks scheduled
 
 - [x]  **`done`**`1`  : Marks the 1st task shown in the task list as done.
 
-- [x]   **`delete`**`1`  : Deletes the 1st task shown in the task list.
+- [x]  **`delete`**`1`  : Deletes the 1st task shown in the task list.
         
-- [x]   **`bye`**  : Exits the app.
+- [x]  **`bye`**  : Exits the app.
 - [x] Refer to the Features Section below for more commands that Duke supports.
 
 ### **User Guide Command Formatting :**  
@@ -65,12 +66,14 @@ Here are some features you can try upon your first launch of duke. Type the foll
 
 Calling the **todo** command adds a todo task to the task list. A **todo** task contains only requires a description and will not accept an accompanying date or time. To add tasks with date and time, refer to the [deadline](https://avalionnet.github.io/ip/#Deadline) or [event](https://avalionnet.github.io/ip/#Event) commands.
 
-Command Syntax: `todo DESCRIPTION`
+Format: `todo DESCRIPTION`
 
 > Examples:
 > 
 > -   `todo Celebrate Teacher's Day`
 > -   `todo Complete GEQ1000 Quiz`
+>
+![Image of Todo Command](https://github.com/Avalionnet/ip/blob/master/docs/Todo.png)
 
 ### `Event`
 
@@ -83,6 +86,8 @@ Format: `event DESCRIPTION /at DATE TIME`
 -   `event CS2101 OP1 /at 15.09.20 1000`
 -   `event Hackathon Finale /at 19.09.20 0900` 
 
+![Event Image of Duke Chatbot](https://github.com/Avalionnet/ip/blob/master/docs/Event.png)
+
  >**Important Note :** 
 > - The delimiter **/at must be added** between the `DESCRIPTION` and `DATE` of the event.
 > - The date specified must be set in the future and must follow the format **dd.mm.yy**
@@ -91,6 +96,7 @@ Format: `event DESCRIPTION /at DATE TIME`
 > - Any time specified must be in the **HHmm** format. 
  (i.e. 2100 to denote 9 p.m)
  >- Please ensure that there is a space between all key parameters for accurate parsing by Duke.
+
 
 ### `Deadline`
 
@@ -103,6 +109,8 @@ Format: `deadline DESCRIPTION /by DATE TIME`
 -   `deadline CS2100 lab 2 /by 20.09.20 1000`
 -   `deadline Art competition submission /by 30.10.20 2100` 
 
+![Deadline Image of Duke Chatbot](https://github.com/Avalionnet/ip/blob/master/docs/Deadline.png)
+
  >**Important Note :** 
 > - The delimiter **/by must be added** between the `DESCRIPTION` and `DATE` of the event.
 > - The date specified must be set in the future and must follow the format **dd.mm.yy**
@@ -111,8 +119,6 @@ Format: `deadline DESCRIPTION /by DATE TIME`
 > - Any time specified must be in the **HHmm** format. 
  (i.e. 2100 to denote 9 p.m)
  >- Please ensure that there is a space between all key parameters for accurate parsing by Duke.
-
-![Image of Duke Chatbot]()
 
 ## 2. Viewing tasks 
 
@@ -125,16 +131,13 @@ Format:  `list`
 > **Note:**
 > Do not add any other parameters or descriptions behind the list word to trigger this command successfully.
 
-![Image of List Command]()
+![Image of List Command](https://github.com/Avalionnet/ip/blob/master/docs/List.png)
 
 ### b. View all tasks on a particular date : `view`
 
 Finds tasks that match the specified date. Only works with tasks that support date and time values like `deadline` or `event` tasks.
 
 Format:  `view DATE`
-
-
-
 
 **Examples:**  For illustration purposes, let us assume that your current task list contains the following tasks:
  1. todo buy dinner 
@@ -144,6 +147,9 @@ Format:  `view DATE`
 -   `find 29.10.20`  returns  tasks **2 and 4**
 -   `find 18.09.20`  returns  task **3**
 -    task 1 will never be returned 
+
+![Image of View Command](https://github.com/Avalionnet/ip/blob/master/docs/View.png)
+
 
 > **Note:** 
 > - The date specified must be set in the future and must follow the format **dd.mm.yy**
@@ -163,6 +169,8 @@ Format:  `find KEYWORD [MORE_KEYWORDS]`
 -   `find iPhone cable`  returns task 1
 -   `find dinner` returns no task 
 
+![Image of Find Command](https://github.com/Avalionnet/ip/blob/master/docs/List.png)
+
 > **Note:**
 > -   The search only works on task descriptions.
 > -   The search is case-sensitive. e.g  `Henry`  will match  `Henry` and not `henry`
@@ -170,14 +178,12 @@ Format:  `find KEYWORD [MORE_KEYWORDS]`
 > -   Partial words will also be matched e.g.  `iP`  will match  `iPhone`
 > -   Only tasks matching all keywords specified will be returned  e.g.  `treat Henry`  will not match with  `treat Peter`,   `treat ***` or `*** Henry` where *** refers to an arbitrary value.
 
-![Image of Find Command]()
-
 
 ## 3. Marking a completed task : `done`
 
 Mark a task as complete or done. This adds a tick symbol beside the targeted task.
 
-Command syntax:  **`done`**`TASK_INDEX`
+Format:  **`done`**`TASK_INDEX`
 
 -   Marks the task at the specified  `TASK_INDEX` as done.
 -   First, use the `list` command to find the index of the task you want to mark as done. 
@@ -187,17 +193,21 @@ Command syntax:  **`done`**`TASK_INDEX`
 > **Note:**
 >  The task index must reference an existing task in the task list.
 
-![Image of Done Command]()
+![Image of Done Command](https://github.com/Avalionnet/ip/blob/master/docs/Done.png)
 
 
 ## 4. Deleting a task : `delete`
 
 Deletes the specified task from the task list.
 
+Format:  **`delete`**`TASK_INDEX`
+
 -   Deletes the task at the specified  `TASK_INDEX` from the task list.
 -   First, use the `list` command to find the index of the task you want to delete. 
 -   The `TASK_INDEX` here refers to the number shown beside the accompanying task in the task list after displaying it with the`list` command.
 -   Please use a  **positive integer**  (eg. 1, 2, 3 …) for the index value to successfully mark a task as done.
+
+![Image of Done Command](https://github.com/Avalionnet/ip/blob/master/docs/Delete.png)
 
 > **Note:**
 >  The task index must reference an existing task in the task list.
