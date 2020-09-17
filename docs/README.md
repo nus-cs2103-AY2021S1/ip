@@ -33,7 +33,7 @@ Table of contents
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * **`list`** : Lists all tasks.
+   * **`list`** : List all tasks.
 
    * **`todo`**`study hard` : Adds a todo task named `study hard` to the Duke chatbot.
 
@@ -44,7 +44,7 @@ Table of contents
 1. Refer to the [Features](#features) below for details of each command.
 ## Features 
 
-### Viewing help: `help`
+### 1. Viewing help: `help`
 Shows a message listing all commands and how to use them.
 
 Format: `help`
@@ -83,8 +83,8 @@ Here are the things that I can do for you!
   bye
 ```
 
-### Adding a task: `todo/deadline/event`
-#### Todo task: `todo`
+### 2. Adding a task: `todo/deadline/event`
+#### 2.1 Todo task: `todo`
 Adds a todo task to the chatbot. 
 
 Format: `todo <task description>`
@@ -101,7 +101,7 @@ Got it. I've added this task:
 Now you have 1 task(s) in the list.
 ```
 
-#### Deadline task: `deadline`
+#### 2.2 Deadline task: `deadline`
 Adds a deadline task to the chatbot. 
 
 Format: `deadline <task description> /by <task timing (yyyy-mm-dd HH:MM)>`
@@ -118,7 +118,7 @@ Got it. I've added this task:
 Now you have 2 task(s) in the list.
 ```
 
-#### Event task: `event`
+#### 2.3 Event task: `event`
 Adds an event task to the chatbot. 
 
 Format: `event <task description> /at <task timing (yyyy-mm-dd HH:MM)>`
@@ -135,7 +135,7 @@ Got it. I've added this task:
 Now you have 3 task(s) in the list.
 ```
 
-### Listing all tasks: `list`
+### 3. Listing all tasks: `list`
 Shows a list of all tasks saved in the chatbot.
 
 Format: `list`
@@ -153,7 +153,7 @@ Task(s) in your list:
  3. [E][✘] dinner party (at: Sep 20 2020 12:30 PM)
 ```
 
-### Listing upcoming tasks: `upcoming`
+### 4. Listing upcoming tasks: `upcoming`
 Shows a list of all deadline/event tasks in a week saved in the chatbot.
 
 Format: `upcoming`
@@ -169,7 +169,7 @@ Here are the upcoming tasks (in a week)!
  2. [E][✘] dinner party (at: Sep 20 2020 12:30 PM)
 ```
 
-### Finding tasks by keyword: `find`
+### 5. Finding tasks by keyword: `find`
 Shows a list of all tasks that contains the given keyword.
 
 Format: `find <keyword>`
@@ -186,7 +186,7 @@ Found some matching tasks:
  2. [D][✘] cs2103 proj (by: Sep 17 2020 11:59 PM)
 ```
 
-### Marking a task as done: `done`
+### 6. Marking a task as done: `done`
 Marks the specified task as done.
 
 Format: `done <task number>`
@@ -201,7 +201,7 @@ Ok! I've marked this task as done:
     [T][✓] study cs2103
 ```
 
-### Deleting a task: `delete`
+### 7. Deleting a task: `delete`
 Deletes the specified task from the chatbot.
 
 Format: `delete <task number>`
@@ -218,7 +218,7 @@ No problem. I've removed this task:
  Now you have 2 task(s) in the list.
 ```
 
-### Exiting the program: `bye`
+### 8. Exiting the program: `bye`
 Exits the program.
 
 Format: `bye`
@@ -233,6 +233,6 @@ Expected outcome:
 Goodbye! Come back soon!
 ```
 
-### Saving the data
+### 9. Saving the data
 Duke's data are saved in the hard disk automatically after any commands that changes it.
 There is no need to save the data manually. 
