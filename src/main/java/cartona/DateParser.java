@@ -17,11 +17,11 @@ import cartona.task.TaskDate;
  */
 public class DateParser {
     /**
-     * Parses the date from a user's input.
-     * @return The date represented by a TaskDate
+     * Parses the TaskDate from a user's input.
+     * @return A TaskDate representing the date and time.
      * @throws InvalidTaskTimeException if there is an error in formatting of the date or time.
      */
-    public static TaskDate parseDate(String dateString) throws InvalidTaskTimeException {
+    public static TaskDate parseTaskDate(String dateString) throws InvalidTaskTimeException {
         try {
             LocalDateTime dateTime = LocalDateTime.parse(dateString,
                     DateTimeFormatter.ofPattern("yyyy/MM/dd HHmm"));
@@ -31,6 +31,12 @@ public class DateParser {
             throw new InvalidTaskTimeException("Date/time formatting error: " + e.getMessage());
         }
     }
+
+    /**
+     * Parses the LocalDate from a user's input.
+     *
+     * @return the LocalDate
+     */
 
     /**
      * Parses the date of a new Event input string to get the start or end date of the event

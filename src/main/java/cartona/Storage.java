@@ -28,7 +28,7 @@ public class Storage {
      * Creates a Storage object that uses the file in the path specified.
      * @param pathString The path of the text file used.
      */
-    Storage(String pathString) {
+    public Storage(String pathString) {
         this.pathString = pathString;
     }
 

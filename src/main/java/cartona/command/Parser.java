@@ -1,8 +1,10 @@
 package cartona.command;
 
 import cartona.DateParser;
+
 import cartona.exception.EmptyTaskDescriptionException;
 import cartona.exception.InvalidInputException;
+import cartona.exception.InvalidTaskIdException;
 import cartona.exception.InvalidTaskTimeException;
 import cartona.exception.UnknownCommandException;
 
@@ -42,7 +44,7 @@ public class Parser {
             throw new InvalidTaskTimeException("Error: Please enter a valid time for the deadline");
         }
 
-        TaskDate dateTime = DateParser.parseDate(time);
+        TaskDate dateTime = DateParser.parseTaskDate(time);
         return new Deadline(deadlineName, false, dateTime);
     }
 

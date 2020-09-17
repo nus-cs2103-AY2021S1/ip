@@ -13,13 +13,15 @@ import java.time.format.DateTimeFormatter;
 public class TaskDate {
     private LocalDateTime dateTime;
 
-    TaskDate(LocalDate date, String time) {
+    public TaskDate(LocalDate date, String time) {
         this.dateTime = date.atTime(LocalTime
                                     .parse(time, DateTimeFormatter.ofPattern("HHmm")));
     }
 
     /**
      * Creates a TaskDate object with the given date and time.
+     *
+     * @param dateTime The LocalDateTime object signifying the date and time of the TaskDate.
      */
     public TaskDate(LocalDateTime dateTime) {
         this.dateTime = dateTime;

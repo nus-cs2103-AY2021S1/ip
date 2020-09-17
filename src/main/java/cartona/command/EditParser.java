@@ -12,6 +12,8 @@ import cartona.task.TaskDate;
 import cartona.task.TaskList;
 import cartona.task.Todo;
 
+import java.time.LocalDate;
+
 public class EditParser {
 
     private Task parseTodo(String[] editFields, Todo taskToEdit) throws InvalidEditFieldException {
@@ -47,7 +49,7 @@ public class EditParser {
                 break;
             case ("due"):
                 String dateString = nextField.substring(4);
-                dueTime = DateParser.parseDate(dateString);
+                dueTime = DateParser.parseTaskDate(dateString);
                 break;
             default:
                 throw new InvalidEditFieldException("Error: Unrecognised field name in Deadline");
@@ -60,8 +62,12 @@ public class EditParser {
     private Event parseEvent(String[] editFields, Event taskToEdit) throws InvalidTaskTimeException,
             InvalidEditFieldException {
         String name = taskToEdit.getName();
+
         TaskDate startDate = taskToEdit.getStartDate();
         TaskDate endDate = taskToEdit.getEndDate();
+
+        String startTime = startDate.getTime();
+        String endTime = taskToEdit.getEndDate().getTime();
 
         for (int i = 1; i < editFields.length; i++) {
             String nextField = editFields[i];
@@ -74,14 +80,18 @@ public class EditParser {
             case ("name"):
                 name = nextField.substring(5);
                 break;
+            case ("date"):
+                startDate = DateParser.parseTaskDate(nextField.substring(5) + " " + startTime);
+                endDate = DateParser.parseTaskDate(nextField.substring(5) + " " + endTime);
+                break;
             case ("start"):
-                String startString = nextField.substring(6);
-                startDate = DateParser.parseDate(startString);
+                startTime = nextField.substring(6);
+                startDate = new TaskDate(startDate.getDate(), startTime);
                 break;
             case ("end"):
-                String endString = nextField.substring(4);
-                endDate = DateParser.parseDate(endString);
-                 break;
+                endTime = nextField.substring(4);
+                endDate = new TaskDate(endDate.getDate(), endTime);
+                break;
             case ("range"):
                 String rangeString = nextField.substring(6);
                 startDate = DateParser.parseRangeFromStorage(rangeString, true);
