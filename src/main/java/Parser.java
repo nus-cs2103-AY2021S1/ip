@@ -56,6 +56,9 @@ public class Parser {
                     } else {
                         assert (taskList.list.get(task - 1) != null) : "Incorrect index.";
                         Task cur = taskList.list.get(task - 1);
+                        if (cur.getStatus()) {
+                            return ui.duplicatedMarkDone();
+                        }
                         cur.markAsDone();
                         Storage.updateTasks(taskList.getNoOfTasks(), taskList.list, filePath);
                         return ui.markDoneSuccessful(cur);

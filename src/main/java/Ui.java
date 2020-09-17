@@ -189,6 +189,12 @@ public class Ui {
         return stringToReturn;
     }
 
+    public String duplicatedMarkDone() {
+        Exception ex = new InvalidInputException("Hey, this task is already done!");
+        String stringToReturn = LINE_TOP + ex.getMessage() + "\n" + LINE_BOTTOM;
+        return stringToReturn;
+    }
+
     /**
      * This method is used to warn the user that the task referred to has not been created.
      */
