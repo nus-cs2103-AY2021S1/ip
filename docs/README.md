@@ -28,13 +28,13 @@ Duke store your data locally so they will not be lost between uses
 
 ## Usage
 
-### `hello` - Start the program
+### `hello` - Start the bot
 
 If the program is sleeping, type `hello` to wake it up.
 
 **Command:** `hello`
 
-### `bye` - Close the program
+### `bye` - Make the bot into sleep mode
 
 If the program is working, type `bye` to exit the program.
 When the program is sleeping, any input command except `hello` will be responded 
@@ -44,7 +44,14 @@ with the `zzz...I'm sleeping` message.
 
 >**_NOTE:_**
 >`bye` only put the chat bot into sleep mode, not closing the chat window. 
->You have to manually close the window yourself
+>You have to manually close the window by using `close` command 
+>or press the X button on the top right corner
+
+### `close` - Close the GUI
+
+You can use `close` to close the GUI
+
+**Command:** `close`
 
 ### `todo` - Add a todo task
 
