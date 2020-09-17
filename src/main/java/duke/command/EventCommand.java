@@ -54,6 +54,9 @@ public class EventCommand extends Command {
         try {
             assert super.input.contains("/at") : "Event does not have keyword command.";
             String[] split = super.input.substring(6).split("/at ", 2);
+            if (split.length < 2) {
+                throw new InvalidInputException("OOPS!!! Input format is incorrect!\n");
+            }
             DateTimeFormatter formatter = Storage.FORMATTER;
             LocalDateTime date = LocalDateTime.parse(split[1], formatter);
             Task event = new Event(split[0], date);

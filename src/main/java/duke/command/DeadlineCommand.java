@@ -54,6 +54,9 @@ public class DeadlineCommand extends Command {
         try {
             assert super.input.contains("/by") : "Deadline does not have keyword command.";
             String[] split = super.input.substring(9).split("/by ", 2);
+            if (split.length < 2) {
+                throw new InvalidInputException("OOPS!!! Input format is incorrect!\n");
+            }
             DateTimeFormatter formatter = Storage.FORMATTER;
             LocalDateTime date = LocalDateTime.parse(split[1], formatter);
             Task deadline = new Deadline(split[0], date);

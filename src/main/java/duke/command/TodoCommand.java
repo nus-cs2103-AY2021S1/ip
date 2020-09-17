@@ -32,10 +32,12 @@ public class TodoCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage)
             throws InvalidInputException, InvalidFileException {
-        if (super.input.length() <= 5) {
+        if (super.input.substring(4).contains("  ")
+                | super.input.length() <= 5) {
             throw new InvalidInputException(
-                    "OOPS!!! The description of a todo cannot be empty.\n");
+                    "OOPS!!! Todo description is empty!!\n");
         }
+
         Task todoTask = new Todo(super.input.substring(5));
         tasks.addTask(todoTask);
         storage.save(tasks);

@@ -34,7 +34,7 @@ public class Ui {
      * Display welcome message with duke logo to user.
      */
     public String showWelcomeMessage() {
-        return "Hello from\n" + logo + "\nHello! I'm Duke \nWhat can I do for you?\n"
+        return "Hello! I'm Duke \nWhat can I do for you?\n"
                 + "Use the command 'help' for more information!";
     }
 
