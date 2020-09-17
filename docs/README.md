@@ -5,6 +5,7 @@ Duke is a desktop app for managing Tasks, with functionality to add, delete, sav
 {:toc}
   
 ##Quick start
+
 1. Ensure you have Java 11 or above installed in your Computer.
 
 2. Download the latest Duke.jar from [here](https://ethan-l-m-e.github.io/ip/).
@@ -40,14 +41,14 @@ Duke is a desktop app for managing Tasks, with functionality to add, delete, sav
   
 </div>
 
-### Adding a Todo: `todo`
+### `todo` - Adding a Todo: 
 *A Todo is a Task that contains only a description, and nothing else.*
 
 **Format:** `add DESCRIPTION` 
 
 ___
 
-### Adding a Deadline: `deadline`
+### `deadline` - Adding a Deadline: 
 *A Task that contains a description, as well as the date for which it is due.*
 
 **Format:** `deadline DESCRIPTION​ /by YYYY-MM-DD`
@@ -61,7 +62,7 @@ ___
 
 ___
 
-### Adding an Event: `event`
+### `event` - Adding an Event: 
 *A Task that contains a description, as well as the date when the event occurs.*
 
 **Format:** `event DESCRIPTION /at YYYY-MM-DD`
@@ -76,6 +77,7 @@ ___
 ___
 
 ## Usage
+
 ### `delete` - Deleting a Task:
 
 *Deletes the Task with the specified Task number.*
