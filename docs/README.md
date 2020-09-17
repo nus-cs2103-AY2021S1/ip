@@ -1,5 +1,7 @@
 # User Guide
 
+![screenshot](Ui.png)
+
 ## Features 
 
 ### Create deadline
