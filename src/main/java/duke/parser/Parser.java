@@ -135,20 +135,24 @@ public class Parser {
      */
     private static DoneCommand parseDone(String input, TaskList tasks) throws InvalidDoneException,
             InvalidTaskNumberException {
-        assert input.startsWith("done") : "input should start with done";
-        String[] splitInput = input.split(" ");
-        boolean hasContent = checkForContent(splitInput);
+        try {
+            assert input.startsWith("done") : "input should start with done";
+            String[] splitInput = input.split(" ");
+            boolean hasContent = checkForContent(splitInput);
 
-        if (!hasContent || !splitInput[1].matches("[0-9]+")) {
-            throw new InvalidDoneException();
-        }
+            if (!hasContent || !splitInput[1].matches("-?[0-9]+")) {
+                throw new InvalidDoneException();
+            }
 
-        int taskNumber = Integer.parseInt(splitInput[1]) - 1;
-        boolean isValidTaskNumber = checkForValidTaskNumber(taskNumber, tasks);
-        if (!isValidTaskNumber) {
-            throw new InvalidTaskNumberException();
+            int taskNumber = Integer.parseInt(splitInput[1]) - 1;
+            boolean isValidTaskNumber = checkForValidTaskNumber(taskNumber, tasks);
+            if (!isValidTaskNumber) {
+                throw new InvalidTaskNumberException("OOPS!!! No such task available.");
+            }
+            return new DoneCommand(taskNumber);
+        } catch (NumberFormatException e) {
+            throw new InvalidTaskNumberException("OOPS!!! Task Number is invalid.");
         }
-        return new DoneCommand(taskNumber);
     }
 
     /**
@@ -247,20 +251,24 @@ public class Parser {
      */
     private static DeleteCommand parseDelete(String input, TaskList tasks) throws InvalidDeleteException,
             InvalidTaskNumberException {
-        assert input.startsWith("delete") : "input should start with delete";
+        try {
+            assert input.startsWith("delete") : "input should start with delete";
 
-        String[] splitInput = input.split(" ");
-        boolean hasContent = checkForContent(splitInput);
-        if (!hasContent || !splitInput[1].matches("[0-9]+")) {
-            throw new InvalidDeleteException();
-        }
+            String[] splitInput = input.split(" ");
+            boolean hasContent = checkForContent(splitInput);
+            if (!hasContent || !splitInput[1].matches("-?[0-9]+")) {
+                throw new InvalidDeleteException();
+            }
 
-        int taskNumber = Integer.parseInt(splitInput[1]) - 1;
-        boolean isValidTaskNumber = checkForValidTaskNumber(taskNumber, tasks);
-        if (!isValidTaskNumber) {
-            throw new InvalidTaskNumberException();
+            int taskNumber = Integer.parseInt(splitInput[1]) - 1;
+            boolean isValidTaskNumber = checkForValidTaskNumber(taskNumber, tasks);
+            if (!isValidTaskNumber) {
+                throw new InvalidTaskNumberException("OOPS!!! No such task available.");
+            }
+            return new DeleteCommand(taskNumber);
+        } catch (NumberFormatException e) {
+            throw new InvalidTaskNumberException("OOPS!!! Task Number is invalid.");
         }
-        return new DeleteCommand(taskNumber);
     }
 
     /**

@@ -6,18 +6,18 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="duke.ui.MainWindow">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="820.0" prefWidth="546.0" xmlns="http://javafx.com/javafx/11.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="duke.ui.MainWindow">
   <!--
   @@author nweiyue-resued
   Reused from https://github.com/erisjacey/ip/blob/master/src/main/resources/view/DialogBox.fxml
   with minor modifications
   -->
   <children>
-    <TextField fx:id="userInput" styleClass="user-input" layoutY="558.0" onAction="#handleUserInput" prefHeight="41.0" prefWidth="324.0" AnchorPane.bottomAnchor="1.0" />
-    <Button fx:id="sendButton" styleClass="send-button" layoutX="324.0" layoutY="558.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="41.0" prefWidth="76.0" text="Send" />
-    <ScrollPane fx:id="scrollPane" styleClass="scroll-bar" hbarPolicy="NEVER" hvalue="1.0" prefHeight="557.0" prefWidth="400.0" vvalue="1.0">
+    <TextField fx:id="userInput" styleClass="user-input" layoutY="560.0" onAction="#handleUserInput" prefHeight="56.0" prefWidth="460.0" AnchorPane.bottomAnchor="1.0" />
+    <Button fx:id="sendButton" styleClass="send-button" layoutX="460.0" layoutY="762.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="56.0" prefWidth="84.0" text="SEND" />
+    <ScrollPane fx:id="scrollPane" styleClass="scroll-bar" hbarPolicy="NEVER" hvalue="1.0" prefHeight="760.0" prefWidth="546.0" vvalue="1.0">
       <content>
-        <VBox fx:id="dialogContainer" prefHeight="552.0" prefWidth="388.0" />
+        <VBox fx:id="dialogContainer" prefHeight="755.0" prefWidth="534.0" />
       </content>
     </ScrollPane>
   </children>

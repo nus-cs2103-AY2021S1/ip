@@ -7,8 +7,10 @@ public class InvalidTaskNumberException extends DukeException {
 
     /**
      * Constructs an InvalidTaskNumberException.
+     *
+     * @param errorMessage ErrorMessage to be shown.
      */
-    public InvalidTaskNumberException() {
-        super("OOPS!!! Task Number is invalid.");
+    public InvalidTaskNumberException(String errorMessage) {
+        super(errorMessage);
     }
 }

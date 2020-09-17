@@ -47,7 +47,7 @@
     -fx-text-fill: white;
     -fx-font-size: 15px;
     -fx-font-weight: bold;
-    -fx-font-family: Roboto Light;
+    -fx-font-family: "Roboto Thin";
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0.5, 0.0, 0.0);
 }
 
@@ -59,7 +59,7 @@
     -fx-background-insets: 5px;
     -fx-text-fill: white;
     -fx-font-size: 15px;
-    -fx-font-family: Lucida Console;
+    -fx-font-family: "Roboto Thin";
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0.5, 0.0, 0.0);
 }
 

@@ -30,7 +30,7 @@
             <children>
                 <Label fx:id="dialog" styleClass="chat-label" lineSpacing="5.0" text="Label" wrapText="true">
                     <font>
-                        <Font name="Lucida Console" size="12.0" />
+                        <Font name="Roboto Thin" size="12.0" />
                     </font>
                 </Label>
             </children>
