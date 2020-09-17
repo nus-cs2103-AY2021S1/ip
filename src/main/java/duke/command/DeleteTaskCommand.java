@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.ImageType;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -10,7 +11,7 @@ public class DeleteTaskCommand extends Command {
     protected int taskNum;
 
     public DeleteTaskCommand(int taskNum) {
-        super(CommandType.DELETETASK);
+        super(CommandType.DELETETASK, ImageType.TICK);
         this.taskNum = taskNum;
     }
 

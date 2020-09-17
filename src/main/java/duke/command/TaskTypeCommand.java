@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.ImageType;
 import duke.TaskList;
 import duke.Ui;
 import duke.exception.InvalidTaskTypeException;
@@ -9,7 +10,7 @@ public class TaskTypeCommand extends Command {
     protected TaskType taskType;
 
     public TaskTypeCommand(TaskType taskType) {
-        super(CommandType.TASKTYPE);
+        super(CommandType.TASKTYPE, ImageType.PENDING);
         this.taskType = taskType;
     }
 

@@ -1,6 +1,7 @@
 package duke.command;
 
 
+import duke.ImageType;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -16,7 +17,7 @@ public class TaskCommand extends Command {
     protected String inputToAdd;
 
     public TaskCommand(TaskType taskType, String inputToAdd) {
-        super(CommandType.TASK);
+        super(CommandType.TASK, ImageType.TICK);
         this.taskType = taskType;
         this.inputToAdd = inputToAdd;
     }

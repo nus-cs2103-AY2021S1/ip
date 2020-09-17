@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.ImageType;
 import duke.TaskList;
 import duke.Ui;
 import duke.exception.EmptyListException;
@@ -7,7 +8,7 @@ import duke.exception.EmptyListException;
 public class PriorityCommand extends Command {
 
     public PriorityCommand() {
-        super(CommandType.PRIORITY);
+        super(CommandType.PRIORITY, ImageType.PENDING);
     }
 
     @Override

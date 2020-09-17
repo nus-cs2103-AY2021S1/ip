@@ -29,7 +29,7 @@ public class Parser {
         } else if (Parser.prevCommand.getCommandType().equals(CommandType.PRIORITYLEVEL)) {
             command = parsePriorityLevel(input, prevCommand);
         } else {
-            switch (input) {
+            switch (input.toLowerCase()) {
             case "help":
                 command = new HelpCommand();
                 break;

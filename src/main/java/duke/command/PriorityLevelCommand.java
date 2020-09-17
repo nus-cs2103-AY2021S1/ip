@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.ImageType;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -10,7 +11,7 @@ public class PriorityLevelCommand extends Command {
     protected int taskNum;
 
     public PriorityLevelCommand(int taskNum) {
-        super(CommandType.PRIORITYLEVEL);
+        super(CommandType.PRIORITYLEVEL, ImageType.PENDING);
         this.taskNum = taskNum;
     }
 

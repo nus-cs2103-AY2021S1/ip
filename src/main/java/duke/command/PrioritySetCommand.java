@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.ImageType;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -11,7 +12,7 @@ public class PrioritySetCommand extends Command {
     protected PriorityLevel priorityLevel;
 
     public PrioritySetCommand(int taskNum, PriorityLevel priorityLevel) {
-        super(CommandType.PRIORITYSET);
+        super(CommandType.PRIORITYSET, ImageType.TICK);
         this.taskNum = taskNum;
         this.priorityLevel = priorityLevel;
     }

@@ -70,9 +70,10 @@ public class Ui {
      */
     public String printGoodbyeMessage() {
         this.printDivider();
-        System.out.println("Bye! See you around :)");
+        System.out.println("Bye! See you around");
         this.printDivider();
-        return "Bye! See you around :)";
+        return "Your work has been saved!\n"
+                + "You can close the application now\n";
     }
 
     /**

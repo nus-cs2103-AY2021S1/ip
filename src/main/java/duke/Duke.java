@@ -4,21 +4,12 @@ import java.util.Scanner;
 
 import duke.command.CommandType;
 import duke.command.ResetCommand;
-import javafx.application.Application;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
-import javafx.stage.Stage;
-import javafx.scene.layout.Region;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
 import duke.command.Command;
 import duke.exception.DukeException;
@@ -36,14 +27,11 @@ public class Duke {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
-
 
     public Duke() {
         ui = new Ui(new Scanner(System.in));
-        storage = new Storage();
-        taskList = new TaskList();
+        storage = new Storage("./data/tasks.txt");
+        taskList = TaskList.generateTaskList(storage);
     }
 
     /**
@@ -141,7 +129,7 @@ public class Duke {
      * @param input User input.
      * @return Returns a Duke response as a String.
      */
-    public String getResponse(String input) {
+    public String getResponseText(String input) {
         try {
             Command command = Parser.parse(input);
             Parser.setPrevCommand(command);
@@ -149,6 +137,15 @@ public class Duke {
         } catch (DukeException e) {
             Parser.setPrevCommand(new ResetCommand());
             return ui.displayError(e.getMessage());
+        }
+    }
+
+    public ImageType getResponseImageType(String input) {
+        try {
+            Command command = Parser.parse(input);
+            return command.getImageType();
+        } catch (DukeException e) {
+            return e.getImageType();
         }
     }
 }

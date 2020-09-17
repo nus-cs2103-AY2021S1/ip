@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.ImageType;
 import duke.TaskList;
 import duke.Ui;
 
@@ -7,7 +8,7 @@ import duke.Ui;
 public class AddCommand extends Command {
 
     public AddCommand() {
-        super(CommandType.ADD);
+        super(CommandType.ADD, ImageType.PENDING);
     }
 
     @Override

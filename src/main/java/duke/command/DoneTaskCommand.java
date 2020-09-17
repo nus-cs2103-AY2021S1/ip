@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.ImageType;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -10,7 +11,7 @@ public class DoneTaskCommand extends Command {
     protected int taskNum;
 
     public DoneTaskCommand(int taskNum) {
-        super(CommandType.DONETASK);
+        super(CommandType.DONETASK, ImageType.TICK);
         this.taskNum = taskNum;
     }
 

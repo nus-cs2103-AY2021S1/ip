@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.ImageType;
 import duke.TaskList;
 import duke.Ui;
 import duke.exception.EmptyListException;
@@ -7,7 +8,7 @@ import duke.exception.EmptyListException;
 public class DeleteCommand extends Command {
 
     public DeleteCommand() {
-        super(CommandType.DELETE);
+        super(CommandType.DELETE, ImageType.PENDING);
     }
 
     @Override
