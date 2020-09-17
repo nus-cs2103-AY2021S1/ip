@@ -33,7 +33,7 @@ Keyword | Action | Usage
 #### Note: Use the `bye` command for exiting the application! If not your changes will not be saved.
 ## Example 
 
-#####Starting with an empty task list:
+Starting with an empty task list:
 
 Example execution | Expected outcome
 ------------|-----------------
@@ -42,7 +42,8 @@ Example execution | Expected outcome
 `deadline Math assignment 1 /at 02/02/2020` | `[Deadline] [✘] Math assignment 1 (by: 2 Feb 2020)`
 `find assignment` | `[Deadline] [✘] Math assignment 1 (by: 2 Feb 2020)`
 
-#####Following the previous example
+Following the previous example
+
 Example execution | Expected outcome
 ------------|-----------------
 `done 2` | `[Event] [✓] Mom's Birthday (at: 22 Feb 2020)`
