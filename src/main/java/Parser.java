@@ -46,7 +46,7 @@ public class Parser {
      * @return String array containing schedule time in the second index.
      */
     public static String[] splitScheduleArguments(String input) {
-        return input.split(" /on ", 2);
+        return input.split("/on ", 2);
     }
     
 
@@ -64,7 +64,7 @@ public class Parser {
         if (commandAndArguments.length < 2) {
             //insufficient arguments
             arguments = null;
-        } else { 
+        } else {
             arguments = commandAndArguments[1];
         }
         switch (command) {
