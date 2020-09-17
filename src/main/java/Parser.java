@@ -6,13 +6,15 @@ import java.util.List;
  */
 public class Parser {
     private static final String DELIMITER = " ";
+    private static final int MAX_COMMAND_LENGTH = 2;
+
     /**
      * Splits what the user types in to 2 parts
      * @param command
      * @return a 2 sized String array that is related to a command
      */
     public static String[] parse(String command) {
-        return command.split(DELIMITER, 2);
+        return command.split(DELIMITER, MAX_COMMAND_LENGTH);
     }
 
     /**
@@ -23,7 +25,7 @@ public class Parser {
      * @throws DukeException
      */
     public static int getTaskIndex(String[] commands, List<Task> taskList) throws DukeException {
-        if (commands.length < 2) {
+        if (commands.length < MAX_COMMAND_LENGTH) {
             throw new DukeException("Please put a number to select a task for the \""
                    + commands[0] + "\" action!");
         }
@@ -46,7 +48,7 @@ public class Parser {
      * @throws DukeException
      */
     public static void checkValidAddCommand(String[] commands) throws DukeException {
-        if (commands.length < 2) {
+        if (commands.length < MAX_COMMAND_LENGTH) {
             throw new DukeException("The description of a " + commands[0] + " cannot be empty.");
         }
     }

@@ -6,6 +6,8 @@ import java.time.format.DateTimeFormatter;
  */
 public class Deadline extends Task {
     private LocalDate date;
+    private static final int MAX_COMMAND_LENGTH = 2;
+
 
     public Deadline(String name, String dateString) {
         this(name, dateString, false);
@@ -24,7 +26,7 @@ public class Deadline extends Task {
      */
     public static Deadline create(String description) throws DukeException {
         String[] keywords = description.split(" /by ", 2);
-        if (keywords.length < 2) {
+        if (keywords.length < MAX_COMMAND_LENGTH) {
             throw new DukeException("☹ OOPS!!! Add a date using \" /by YYYY-MM-DD\".");
         }
         return new Deadline(keywords[0], keywords[1]);
