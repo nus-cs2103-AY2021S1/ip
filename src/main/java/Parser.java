@@ -80,6 +80,8 @@ public class Parser {
             return new FindCommand(taskList, ui, arguments);
         case "done":
             return new DoneCommand(taskList, ui, arguments);
+        case "event":
+            return new EventCommand(taskList, ui, arguments);
         case "deadline":
             return new DeadlineCommand(taskList, ui, arguments);
         case "todo":
