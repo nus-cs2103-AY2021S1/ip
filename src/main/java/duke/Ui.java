@@ -2,8 +2,8 @@ package duke;
 
 /** Utility methods for generating stylised CLI outputs */
 public class Ui {
-    private static final String LINE_DIVIDER = "\t_______________________________________________________\n";
-    private static final String LOGO = " ____        _        \n"
+    private static final String LINE_DIVIDER = "\n";
+    private static final String LOGO = " ____\n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
@@ -12,7 +12,7 @@ public class Ui {
     /** Prints out the greeting */
     public static String greet() {
         StringBuilder s = new StringBuilder("Hello from\n" + LOGO);
-        s.append("Hello! I'm Duke\n\tWhat can I do for you?");
+        s.append("Hello! I'm Duke\nWhat can I do for you?");
         return s.toString();
     }
 
