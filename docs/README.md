@@ -17,7 +17,7 @@ exit|Saves current list of tasks and exits Duke|exit
 
 ### Feature 1 
 
-<h4>View existing items
+<h4>View existing items</h4>
 
 To view all the items that you currently have in Duke.
 
@@ -32,7 +32,7 @@ Expected outcome:
 
 ### Feature 2
 
-<h4>Create a Deadline task
+<h4>Create a Deadline task</h4>
 
 Adds a Deadline task into Duke.
 
@@ -48,7 +48,7 @@ Expected outcome:
 
 ### Feature 3
 
-<h4>Create an Event task
+<h4>Create an Event task</h4>
 
 Adds a Event task into Duke.
 
@@ -64,7 +64,7 @@ Expected outcome:
 
 ### Feature 4
 
-<h4>Create a To-Do task
+<h4>Create a To-Do task</h4>
 
 Adds a To-Do task into Duke.
 
@@ -80,7 +80,7 @@ Expected outcome:
 
 ### Feature 5
 
-<h4>Complete a Task
+<h4>Complete a Task</h4>
 
 Mark a specific task in Duke as complete.
 
@@ -96,7 +96,7 @@ Expected outcome:
 
 ### Feature 6
 
-<h4>Remove a Task
+<h4>Remove a Task</h4>
 
 Delete and remove a task from Duke.
 
@@ -112,7 +112,7 @@ Expected outcome:
 
 ### Feature 7
 
-<h4>Finding tasks
+<h4>Finding tasks</h4>
 
 Type in a keyword into this command to find a certain task that matches what you are looking for.
 
@@ -128,7 +128,7 @@ Expected outcome:
 
 ### Feature 8
 
-<h4>Exit Duke
+<h4>Exit Duke</h4>
 
 To save your current lists of tasks and exit Duke. This will close the Duke GUI.
 
