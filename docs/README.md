@@ -150,6 +150,7 @@ Now you have 1 tasks in the list.
 Exits the program.
 
 Example of usage:
+
 `bye`
 
 Example of outcome:
