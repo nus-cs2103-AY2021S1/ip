@@ -29,6 +29,8 @@ Eg. `delete 2` deletes the second task in the list.
 Displays all the tasks that contains the key word.
 
 Eg. `find book` displays all the tasks that contains `book`.
+#### `bye`
+Says bye to Duke and exits the app.
 ##Acknowledgement
 JavaFX tutorial @SE-EDU/guides
 
