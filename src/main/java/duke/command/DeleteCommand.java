@@ -30,9 +30,10 @@ public class DeleteCommand extends Command {
      */
     @Override
     public void perform(TaskList t) {
+        tasks = t;
         task = t.get(taskNumber);
         int a = tasks.getSize();
-        tasks.delete(taskNumber - 1);
+        tasks.delete(taskNumber);
         assert tasks.getSize() == a - 1;
     }
 

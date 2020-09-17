@@ -14,7 +14,10 @@ import duke.command.ListCommand;
 import duke.command.TodoCommand;
 
 import duke.exception.DeadlineIncompleteException;
+import duke.exception.DeadlineMissingDateException;
 import duke.exception.DeleteIncompleteException;
+import duke.exception.EventMissingDateException;
+import duke.exception.InvalidFormatTaskNumberException;
 import duke.exception.DeleteOutOfListException;
 import duke.exception.DoneIncompleteException;
 import duke.exception.DoneOutOfListException;
@@ -62,6 +65,25 @@ public class Parser {
      * @throws InvalidInputException If user's input is invalid.
      */
     public static void checkInput(String... input) throws InvalidInputException {
+        checkInvalidCommand(input);
+        checkIncompleteCommand(input);
+        checkInvalidTaskNumber(input);
+        checkMissingDate(input);
+    }
+
+    /**
+     * Check for empty or invalid command name from the user input.
+     *
+     * @param input The input from the user.
+     * @throws NoInputException If the input is empty or just whitespace.
+     * @throws UnknownInputException If the parser does not know the input.
+     */
+    private static void checkInvalidCommand(String[] input) throws NoInputException, UnknownInputException {
+        // Check for empty input.
+        if (input.length == 0) {
+            throw new NoInputException();
+        }
+
         // Store the first word from the input which should be the command type.
         String command = input[0];
 
@@ -74,7 +96,24 @@ public class Parser {
         if (isNotValidCommand(command)) {
             throw new UnknownInputException();
         }
+    }
 
+    /**
+     * Checks for incomplete input.
+     *
+     * @param input The input from the user.
+     * @throws DoneIncompleteException If user only specifies "done".
+     * @throws DeadlineIncompleteException If user only specifies "deadline".
+     * @throws EventIncompleteException If user only specifies "event".
+     * @throws TodoIncompleteException If user only specifies "todo".
+     * @throws DeleteIncompleteException If user only specifies "delete".
+     * @throws FindIncompleteException If user only specifies "find".
+     */
+    private static void checkIncompleteCommand(String[] input) throws DoneIncompleteException,
+            DeadlineIncompleteException, EventIncompleteException, TodoIncompleteException,
+                    DeleteIncompleteException, FindIncompleteException {
+        // Store the first word from the input which should be the command type.
+        String command = input[0];
         // Check for incomplete command.
         if (input.length == 1) {
             switch (command) {
@@ -94,9 +133,26 @@ public class Parser {
                 break;
             }
         }
+    }
 
+    /**
+     * Checks for invalid task number.
+     *
+     * @param input The input from the user.
+     * @throws InvalidFormatTaskNumberException If the task number is not an integer.
+     * @throws DoneOutOfListException If the task number is zero or negative.
+     */
+    private static void checkInvalidTaskNumber(String[] input) throws InvalidFormatTaskNumberException,
+        DoneOutOfListException, DeleteOutOfListException {
+        // Store the first word from the input which should be the command type.
+        String command = input[0];
         // Check for invalid task number.
         if (command.equals("done")) {
+            try {
+                Integer.parseInt(input[1]);
+            } catch (NumberFormatException e) {
+                throw new InvalidFormatTaskNumberException();
+            }
             int taskNumber = Integer.parseInt(input[1]);
             if (isNotValidTaskNumber(taskNumber)) {
                 throw new DoneOutOfListException();
@@ -105,10 +161,45 @@ public class Parser {
 
         // Check for invalid task number.
         if (command.equals("delete")) {
+            try {
+                Integer.parseInt(input[1]);
+            } catch (NumberFormatException e) {
+                throw new InvalidFormatTaskNumberException();
+            }
             int taskNumber = Integer.parseInt(input[1]);
             if (isNotValidTaskNumber(taskNumber)) {
                 throw new DeleteOutOfListException();
             }
+        }
+    }
+
+    /**
+     * Checks for missing dates.
+     *
+     * @param input The input from the user.
+     * @throws InvalidInputException If the user does not input the date of the task.
+     */
+    private static void checkMissingDate(String[] input) throws InvalidInputException {
+        // Store the first word from the input which should be the command type.
+        String command = input[0];
+        // Check for missing date.
+        if (command.equals("deadline")) {
+            for (String s : input) {
+                if (s.equals("/by")) {
+                    return;
+                }
+            }
+            throw new DeadlineMissingDateException();
+        }
+
+        // Check for missing date.
+        if (command.equals("event")) {
+            for (String s : input) {
+                if (s.equals("/at")) {
+                    return;
+                }
+            }
+            throw new EventMissingDateException();
         }
     }
 

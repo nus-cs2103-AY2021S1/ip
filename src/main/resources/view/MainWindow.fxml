@@ -8,9 +8,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: darkblue;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="duke.Ui.MainWindow">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: darkblue;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="duke.ui.MainWindow">
     <children>
-        <Button fx:id="sendButton" layoutX="321.0" layoutY="564.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="27.0" prefWidth="73.0" style="-fx-background-color: blue; -fx-background-radius: 10px;" text="Ask Popi" textFill="WHITE">
+        <Button fx:id="sendButton" layoutX="321.0" layoutY="564.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="27.0" prefWidth="73.0" style="-fx-background-color: blue; -fx-background-radius: 10px;" text="Ask Popii" textFill="WHITE">
          <font>
             <Font name="Carlito" size="14.0" />
          </font></Button>

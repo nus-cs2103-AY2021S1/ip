@@ -11,6 +11,6 @@ public class NoInputException extends InvalidInputException {
      */
     @Override
     public String getMessage() {
-        return " No input detected.";
+        return " Sorry, no input was detected :(";
     }
 }

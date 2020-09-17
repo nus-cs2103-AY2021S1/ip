@@ -1,4 +1,4 @@
-package duke.Ui;
+package duke.ui;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -15,16 +15,24 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
 /**
- * An example of a custom control using FXML.
  * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
+    /** Label of the dialog. **/
     @FXML
     private Label dialog;
+    /** Image that will be displayed in the dialog. **/
     @FXML
     private ImageView displayPicture;
 
+    /**
+     * Constructs a DialogBox.
+     *
+     * @param type Type of the DialogBox.
+     * @param text Text inside the dialog.
+     * @param img Image of the user profile.
+     */
     private DialogBox(String type, String text, Image img) {
         String dialogBoxPath = "/view/UserDialogBox.fxml";
         if (type.equals("duke")) {
@@ -38,7 +46,6 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         dialog.setText(text);
         displayPicture.setImage(img);
     }
@@ -53,11 +60,25 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Gets dialog box for the user.
+     *
+     * @param text Text inside the dialog.
+     * @param img Image of the user profile.
+     * @return A DialogBox.
+     */
     @FXML
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox("user", text, img);
     }
 
+    /**
+     * Gets dialog box for Duke.
+     *
+     * @param text Text inside the dialog.
+     * @param img Image of the user profile.
+     * @return A DialogBox.
+     */
     @FXML
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox("duke", text, img);
