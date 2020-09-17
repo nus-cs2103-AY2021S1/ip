@@ -17,7 +17,7 @@ public class Parser {
      * @param userInput String to be processed.
      */
     public void parse(String userInput) {
-        this.splitUserInput = userInput.split(" ", 2);
+        this.splitUserInput = userInput.strip().split(" ", 2);
     }
     
 

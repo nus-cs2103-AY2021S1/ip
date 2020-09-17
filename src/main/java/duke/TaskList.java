@@ -23,7 +23,7 @@ public class TaskList {
         this.conqueredTaskIndex = UNINITIALISED_INDEX;
         this.deletedTaskIndex = UNINITIALISED_INDEX;
     }
-    
+
     /**
      * Checks whether an empty task description is given and throws a DukeException.
      *
@@ -33,7 +33,7 @@ public class TaskList {
     public void validateAdd(String[] task) throws DukeException {
         boolean isMissingDetails = task.length == 1;
         boolean hasEmptySpaceAsDetails = task.length > 1 && task[1].trim().length() == 0;
-        
+
         if (isMissingDetails || hasEmptySpaceAsDetails) {
             throw new DukeException("Do give me more details about this " + task[0] + ", Your Majesty.");
         }
@@ -49,13 +49,23 @@ public class TaskList {
     public void validateSlashCommands(String[] task) throws DukeException {
         boolean isDeadline = task[0].equalsIgnoreCase("deadline");
         boolean isEvent = task[0].equalsIgnoreCase("event");
-        boolean containsKeywordBy = task[1].split("/by ", 2).length > 1;
-        boolean containsKeywordOn =  task[1].split("/on ", 2).length > 1;
-        
+        boolean containsKeywordBy = task[1].contains("/by");
+        boolean containsKeywordOn =  task[1].contains("/on");
+
         if (isDeadline && !containsKeywordBy) {
             throw new DukeException("Use /by for deadlines, Your Majesty.");
         } else if (isEvent && !containsKeywordOn) {
             throw new DukeException("Use /on for events, Your Majesty.");
+        }
+        
+        boolean hasEmptyDeadlineDescription = task[1].split(" ", 2)[0].equals("/by");
+        boolean hasEmptyEventDescription = task[1].split(" ", 2)[0].equals("/on");
+        
+        if (isDeadline && containsKeywordBy && hasEmptyDeadlineDescription) {
+            throw new DukeException("Do give me more details about this deadline, Your Majesty.");
+        } 
+        if (isEvent && containsKeywordOn && hasEmptyEventDescription) {
+            throw new DukeException("Do give me more details about this event, Your Majesty.");
         }
     }
 
@@ -106,7 +116,7 @@ public class TaskList {
 
     /**
      * Deletes a specified task and returns Duke's response as a String.
-     * 
+     *
      * @param input User's input.
      * @return Duke's response as a String.
      */
@@ -124,10 +134,10 @@ public class TaskList {
         }
         return Ui.deletedMessage(deletedTask, storedTasks.size());
     }
-    
+
     /**
      * Returns the index of the most recently deleted task.
-     * 
+     *
      * @return Index of the most recently deleted task.
      */
     public int getDeletedTaskIndex() {
@@ -136,7 +146,7 @@ public class TaskList {
 
     /**
      * Marks a specified task as done and returns Duke's response as a String.
-     * 
+     *
      * @param input User's input.
      * @return Duke's response as a String.
      */
@@ -153,13 +163,13 @@ public class TaskList {
             this.conqueredTaskIndex = UNINITIALISED_INDEX;
             return Ui.dukeErrorMessage(err);
         }
-        
+
         return Ui.conqueredMessage(conqueredTask);
     }
 
     /**
      * Returns index of the most recently conquered task.
-     * 
+     *
      * @return Index of the most recently conquered task.
      */
     public int getConqueredTaskIndex() {
@@ -193,29 +203,29 @@ public class TaskList {
         } catch (Exception err) {
             return Ui.dukeErrorMessage(new DukeException("Please enter a search term, Your Majesty."));
         }
-        
+
         return Ui.printListOfTasksUi(relevantTasks);
     }
 
     /**
      * Adds a specified ToDo to the list and returns Duke's response as a String.
-     * 
+     *
      * @param input User's input.
      * @return Duke's response as a String.
      */
     public String addTodoAndGetMessage(String[] input) {
-       try {
-           validateAdd(input);
-           handleAddTask(new ToDo(input[1]));
-       } catch (DukeException err) {
-           return Ui.dukeErrorMessage(err);
-       }
-       return Ui.addedMessage(this.addedTask, this.storedTasks.size());
+        try {
+            validateAdd(input);
+            handleAddTask(new ToDo(input[1]));
+        } catch (DukeException err) {
+            return Ui.dukeErrorMessage(err);
+        }
+        return Ui.addedMessage(this.addedTask, this.storedTasks.size());
     }
 
     /**
      * Adds a specified task to the list.
-     * 
+     *
      * @param t Specified task to be added.
      */
     public void handleAddTask(Task t) {
@@ -225,7 +235,7 @@ public class TaskList {
 
     /**
      * Adds a specified Deadline to the list and returns Duke's response as a String.
-     * 
+     *
      * @param input User's input.
      * @return Duke's response as a String.
      */
@@ -242,7 +252,7 @@ public class TaskList {
 
     /**
      * Adds a specified Event to the list and returns Duke's response as a String.
-     * 
+     *
      * @param input User's input.
      * @return Duke's response as a String.
      */
@@ -259,13 +269,13 @@ public class TaskList {
 
     /**
      * Returns the most recently added task.
-     * 
+     *
      * @return Most recently added task.
      */
     public Task getAddedTask() {
         return this.addedTask;
     }
-    
+
     public String getTasksForADate(String[] input) {
         ArrayList<Task> relevantTasks = new ArrayList<>();
         try {
