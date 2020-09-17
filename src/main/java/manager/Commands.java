@@ -44,6 +44,11 @@ public enum Commands {
         public String toString() {
             return "Get task list --> list\n";
         }
+    }, STATS {
+        @Override
+        public String toString() {
+            return "Get task statistics --> stats\n";
+        }
     }, TAG {
         @Override
         public String toString() {

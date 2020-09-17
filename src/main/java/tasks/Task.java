@@ -1,5 +1,7 @@
 package tasks;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -126,4 +128,16 @@ public abstract class Task {
         }
         return false;
     }
+
+    /**
+     * Obtains the formatted date of the task.
+     * @return formatted date
+     */
+    public abstract LocalDate getDate();
+
+    /**
+     * Obtains the formatted date and time of the task.
+     * @return formatted date and time
+     */
+    public abstract LocalDateTime getDateTime();
 }

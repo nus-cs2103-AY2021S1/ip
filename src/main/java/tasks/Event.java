@@ -67,6 +67,22 @@ public class Event extends Task {
     }
 
     /**
+     * Obtains the formatted date of the event.
+     * @return formatted date
+     */
+    public LocalDate getDate() {
+        return this.formattedDate;
+    }
+
+    /**
+     * Obtains the formatted date and time of the event.
+     * @return formatted date and time
+     */
+    public LocalDateTime getDateTime() {
+        return this.formattedDateTime;
+    }
+
+    /**
      * Returns the string that represents the event.
      *
      * @return the string consisting of the tag,

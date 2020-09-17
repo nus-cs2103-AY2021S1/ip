@@ -67,6 +67,24 @@ public class Deadline extends Task {
     }
 
     /**
+     * Obtains the formatted date of the deadline.
+     * @return formatted date
+     */
+    @Override
+    public LocalDate getDate() {
+        return this.formattedDate;
+    }
+
+    /**
+     * Obtains the formatted date and time of the deadline.
+     * @return formatted date and time
+     */
+    @Override
+    public LocalDateTime getDateTime() {
+        return this.formattedDateTime;
+    }
+
+    /**
      * Returns the string that represents the deadline.
      *
      * @return the string consisting of the tag,

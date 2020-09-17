@@ -80,6 +80,9 @@ public class Ui {
         case TAG:
             this.taskList.tagTask(index, input);
             break;
+        case STATS:
+            new Statistics(this.taskList).printStatistics();
+            break;
         default:
             assert false : "Unknown action type";
             break;

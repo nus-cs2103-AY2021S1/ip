@@ -38,6 +38,8 @@ public class Parser {
                 this.parseList();
             } else if (input.equals("help")) {
                 this.parseHelp();
+            } else if (input.equals("stats")) {
+                this.parseStatistics();
             } else if (input.equals("delete all")) {
                 this.parseDeleteAll();
             } else if (input.startsWith("find")) {
@@ -85,6 +87,10 @@ public class Parser {
 
     private void parseHelp() {
         this.converter.convertAction(Commands.HELP, 0, "");
+    }
+
+    private void parseStatistics() {
+        this.converter.convertAction(Commands.STATS, 0, "");
     }
 
     private void parseDeleteAll() {

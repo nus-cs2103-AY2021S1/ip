@@ -1,4 +1,8 @@
 package tasks;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 import exceptions.InvalidDescriptionException;
 
 /**
@@ -49,5 +53,22 @@ public class Todo extends Task {
     @Override
     public String databaseString() {
         return "T | " + super.databaseString();
+    }
+
+    /**
+     * Obtains the formatted date of the todo, which is null.
+     * @return null
+     */
+    @Override
+    public LocalDate getDate() {
+        return null;
+    }
+
+    /**
+     * Obtains the formatted date and time of the todo, which is null.
+     * @return null
+     */
+    public LocalDateTime getDateTime() {
+        return null;
     }
 }
