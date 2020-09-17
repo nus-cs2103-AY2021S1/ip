@@ -7,8 +7,8 @@ package duke.task;
 public abstract class Task implements Comparable<Task> {
 
     // String constants for labelling state of task
-    protected static final String CROSS = "✗";
-    protected static final String CHECK = "✓";
+    protected static final String CROSS = "\u2717";
+    protected static final String CHECK = "\u2713";
 
     // instance fields
     protected String desc; // description of task
