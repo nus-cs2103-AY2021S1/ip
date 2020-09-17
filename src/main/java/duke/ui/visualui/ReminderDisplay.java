@@ -8,7 +8,6 @@ import static duke.util.Keyword.KEYWORD_TICK;
 import static duke.util.Keyword.KEYWORD_TODO;
 
 import java.io.IOException;
-import java.util.Arrays;
 
 import duke.task.Deadline;
 import duke.task.Event;
