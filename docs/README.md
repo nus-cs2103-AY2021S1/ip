@@ -1,4 +1,4 @@
- [1.Setting up IntelliJ](#setting-up intellij)
+
 
 # User Guide for Project Bill
 

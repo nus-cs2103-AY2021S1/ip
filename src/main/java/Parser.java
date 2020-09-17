@@ -136,7 +136,11 @@ public class Parser {
             int dateLength = isDone[isDone.length - 2].length();
             String slashFirst = String.valueOf(isDone[isDone.length - 2].charAt(2));
             String slashSecond = String.valueOf(isDone[isDone.length - 2].charAt(5));
-            if (timeLength < 4 || dateLength < 10 || !slashFirst.equals("/") || !slashSecond.equals("/")) {
+            if (timeLength < 4 || dateLength < 10 ) {
+                throw new InvalidDeadlineException("Fail to add task :( . "
+                        + "Please check the time and date format again. "
+                        + "The correct format should be dd/mm/yyyy tttt. Eg: 02/08/2019 1800");
+            } else if (!slashFirst.equals("/") || !slashSecond.equals("/")) {
                 throw new InvalidDeadlineException("Fail to add task :( . "
                         + "Please check the time and date format again. "
                         + "The correct format should be dd/mm/yyyy tttt. Eg: 02/08/2019 1800");
@@ -170,8 +174,12 @@ public class Parser {
             int dateLength = isDone[isDone.length - 2].length();
             String slashFirst = String.valueOf(isDone[isDone.length - 2].charAt(2));
             String slashSecond = String.valueOf(isDone[isDone.length - 2].charAt(5));
-            if (timeLength < 4 || dateLength < 10 || !slashFirst.equals("/") || !slashSecond.equals("/")) {
-                throw new InvalidDeadlineException("Fail to add task :( . "
+            if (timeLength < 4 || dateLength < 10 ) {
+                throw new InvalidEventException("Fail to add task :( . "
+                        + "Please check the time and date format again. "
+                        + "The correct format should be dd/mm/yyyy tttt. Eg: 02/08/2019 1800");
+            } else if (!slashFirst.equals("/") || !slashSecond.equals("/")) {
+                throw new InvalidEventException("Fail to add task :( . "
                         + "Please check the time and date format again. "
                         + "The correct format should be dd/mm/yyyy tttt. Eg: 02/08/2019 1800");
             }
