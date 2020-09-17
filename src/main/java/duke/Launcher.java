@@ -8,6 +8,7 @@ import javafx.application.Application;
 public class Launcher {
     /**
      * Runs Duke chat-bot.
+     *
      * @param args Main method arguments.
      */
     public static void main(String[] args) {

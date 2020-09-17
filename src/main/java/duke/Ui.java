@@ -8,10 +8,10 @@ import java.util.List;
  */
 public class Ui {
     private static final String logo = " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
+        + "|  _ \\ _   _| | _____ \n"
+        + "| | | | | | | |/ / _ \\\n"
+        + "| |_| | |_| |   <  __/\n"
+        + "|____/ \\__,_|_|\\_\\___|\n";
     private static StringBuilder response;
 
     /**
@@ -23,6 +23,9 @@ public class Ui {
         response.append("\n");
     }
 
+    /**
+     * print the message to greet the user
+     */
     public static void greet() {
         println("Hello from\n" + logo);
         println("Hello! I'm Duke");

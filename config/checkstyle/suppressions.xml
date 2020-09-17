@@ -5,7 +5,9 @@
         "https://checkstyle.org/dtds/suppressions_1_2.dtd">
 
 <suppressions>
-    <suppress checks="JavadocType" files=".*Test\.java"/>
-    <suppress checks="MissingJavadocMethodCheck" files=".*Test\.java"/>
-    <suppress checks="CustomImportOrder" files=".*\.java"/>
+  <suppress checks="JavadocType" files=".*Test\.java"/>
+  <suppress checks="MissingJavadocMethodCheck" files=".*Test\.java"/>
+  <suppress checks="DeclarationOrder" files=".*\.java"/>
+  <suppress checks="CommentsIndentation" files=".*\.java"/>
+  <suppress checks="EmptyCatchBlock" files=".*\.java"/>
 </suppressions>

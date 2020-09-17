@@ -20,6 +20,10 @@ public abstract class Task {
         this.isDone = false;
     }
 
+    public static String dateToString(LocalDate date) {
+        return DateTimeFormatter.ofPattern("MMM d yyyy").format(date);
+    }
+
     /**
      * use to mark this task as done
      */
@@ -31,10 +35,6 @@ public abstract class Task {
     public String toString() {
         char sign = (isDone ? '✓' : '✗');
         return String.format("[%c] %s", sign, desc);
-    }
-
-    public static String dateToString(LocalDate date) {
-        return DateTimeFormatter.ofPattern("MMM d yyyy").format(date);
     }
 
     /**

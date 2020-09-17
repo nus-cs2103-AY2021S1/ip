@@ -71,6 +71,7 @@ public class Storage {
                     break;
                 }
                 tasks.add(new Event(desc, at));
+                break;
             default:
                 throw new IllegalStateException("The data file is corrupted");
             }

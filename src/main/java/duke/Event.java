@@ -19,6 +19,11 @@ public class Event extends Task {
         this.happenAt = Parser.parseDate(happenAt);
     }
 
+    /**
+     * @param desc     description of the event
+     * @param happenAt the time that it happens
+     * @param endAt    the time that it ends
+     */
     public Event(String desc, String happenAt, String endAt) {
         super(desc);
         this.happenAt = Parser.parseDate(happenAt);

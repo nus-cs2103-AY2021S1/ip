@@ -25,7 +25,7 @@ class LogicController {
             } else if (command.startsWith("done")) {
                 taskList.markDone(command.substring(4));
             } else if (command.startsWith("deadline") || command.startsWith("event")
-                    || command.startsWith("todo")) {
+                || command.startsWith("todo")) {
                 taskList.addTask(command);
             } else if (command.startsWith("delete")) {
                 taskList.delete(command.substring(6));

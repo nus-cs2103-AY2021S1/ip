@@ -8,12 +8,15 @@ package duke;
  * The main driver of the program
  */
 public class Duke {
-    /**
-     * The entry point to the program
-     */
     private final TaskList taskList;
     private final LogicController logicController;
 
+    /**
+     * Constructor for Duke
+     * Use to prepare the program before start replying to users
+     *
+     * @param filename the name of the data file
+     */
     public Duke(String filename) {
         if (filename.isEmpty()) {
             taskList = new TaskList();

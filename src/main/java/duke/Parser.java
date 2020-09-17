@@ -4,11 +4,19 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Class to store methods for parsing
+ */
 public class Parser {
-    static String[] dateFormats = new String[]{"yyyy-MM-dd", "dd-MM-yyyy", "yyyy/MM/dd", "dd/MM/yyyy", "MMM d yyyy",
-        "d MMM yyyy"};
+    private static final String[] dateFormats = new String[]{"yyyy-MM-dd", "dd-MM-yyyy", "yyyy/MM/dd", "dd/MM/yyyy",
+        "MMM d yyyy", "d MMM yyyy"};
 
-    static public LocalDate parseDate(String input) throws IllegalArgumentException {
+    /**
+     * @param input the date to be parsed
+     * @return a parsed date
+     * @throws IllegalArgumentException exception if the date cannot be parsed to one of the pre-specified format
+     */
+    public static LocalDate parseDate(String input) throws IllegalArgumentException {
         for (String it : dateFormats) {
             try {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern(it);
