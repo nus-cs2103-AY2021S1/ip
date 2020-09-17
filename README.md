@@ -21,7 +21,7 @@ Alfred is a personal assistant chat bot that lets you manage tasks, events and d
     * [`bye` - Quits the application](#bye---quits-the-application)
  * [Credits](#credits)
     
-    
+  
 ## Features 
 
 ### Manage tasks
@@ -41,7 +41,7 @@ This function creates and saves a new ToDo task.
 
 Format:
 
-`todo task_name`
+`todo TASK_NAME`
 
 Example of usage: 
 
@@ -57,7 +57,7 @@ This function creates and saves a new Event task.
 
 Format:
 
-`event event_name /at event_time`
+`event EVENT_NAME /at EVENT_TIME`
 
 Example of usage: 
 
@@ -69,7 +69,7 @@ Expected outcome:
 
 * `[E][✘] concert (at: 12 December 2020)`
 * `[E][✘] concert (at: 30 December 2020, 11:59 PM)`
-* `[E][✘] concert (at: 12 December 2020, 2:30 PM)`
+* `[E][✘] concert (at: 20 September 2020, 2:30 PM)`
 
 ### `deadline` - Create a new Deadline task.
 
@@ -77,7 +77,7 @@ This function creates and saves a new Deadline task.
 
 Format:
 
-`deadline deadline_name /by deadline_time`
+`deadline DEADLINE_NAME /by DEADLINE_TIME`
 
 Example of usage: 
 
@@ -89,7 +89,7 @@ Expected outcome:
 
 * `[D][✘] project (by: 12 December 2020)`
 * `[D][✘] project (by: 30 December 2020, 11:59 PM)`
-* `[D][✘] project (by: 12 December 2020, 2:30 PM)`
+* `[D][✘] project (by: 20 September 2020, 2:30 PM)`
 
 ### `list` - List all tasks.
 
@@ -101,11 +101,11 @@ Example of usage:
 
 Expected outcome:
 
- `1. [T][✘] buy milk`
- 
- `2. [E][✘] concert (at: 12 December 2020)`
- 
- `3. [D][✘] project (by: 30 December 2020, 11:59 PM)`
+ ```
+1. [T][✘] buy milk
+2. [E][✘] concert (at: 12 December 2020)
+3. [D][✘] project (by: 30 December 2020, 11:59 PM)
+```
 
 ### `done` - Mark a task as done.
 
@@ -113,7 +113,7 @@ This function marks a task as done.
 
 Format:
 
-`done task_id`
+`done TASK_ID`
 
 Example of usage: 
 
@@ -121,9 +121,10 @@ Example of usage:
 
 Expected outcome:
 
-`Nice! I've marked this task as done.`
-
-`[T][✓] Alfred user guide`
+```
+Nice! I've marked this task as done.
+[T][✓] Alfred user guide
+```
 
 ### `delete` - Delete a task.
 
@@ -131,7 +132,7 @@ This function deletes a task.
 
 Format:
 
-`delete task_id`
+`delete TASK_ID`
 
 Example of usage: 
 
@@ -139,11 +140,11 @@ Example of usage:
 
 Expected outcome:
 
-`Nice! I've deleted this task.`
-
-`[T][✓] Alfred user guide`
-
-`Now you have 5 tasks left in your list.`
+```
+Nice! I've deleted this task.
+[T][✓] Alfred user guide
+Now you have 5 tasks left in your list.
+```
 
 ### `find` - Find tasks based on a keyword.
 
@@ -151,7 +152,7 @@ This function finds tasks in the list based on a keyword.
 
 Format:
 
-`find keyword`
+`find KEYWORD`
 
 Example of usage: 
 
@@ -177,7 +178,7 @@ This function finds tasks in the list based on a date.
 
 Format:
 
-`date date_of_task`
+`date DATE_OF_TASK`
 
 Example of usage: 
 
@@ -189,7 +190,7 @@ Expected outcome:
 
 ### `help` - Get help on the different commands available.
 
-This function links the user to the user guide.
+This function redirects the user to the user guide.
 
 Example of usage: 
 
@@ -197,7 +198,7 @@ Example of usage:
 
 Expected outcome:
 
-`Please check (user_guide_link) for more details`
+`Please visit http://pr4aveen.github.io/ip for more infromatin on the commands available`
 
 ### `bye` - Quits the application.
 
