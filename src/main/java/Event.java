@@ -25,7 +25,7 @@ public class Event extends Task {
         if (keywords.length < 2) {
             throw new DukeException("Add a time using \" /at <time>\".");
         }
-        assert keywords.length == 2: "description length should be 2";
+        assert keywords.length == 2 : "description length should be 2";
         return new Event(keywords[0], keywords[1]);
     }
     public String toString() {

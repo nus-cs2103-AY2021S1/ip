@@ -20,7 +20,7 @@ public class TaskList {
         if (commands.length < 2) {
             throw new DukeException("Please give a search term!");
         }
-        assert commands.length == 2: "command array length should be 2";
+        assert commands.length == 2 : "command array length should be 2";
         String searchTerm = commands[1];
         for (int i = 0; i < tasks.size(); i++) {
             Task currentTask = tasks.get(i);
@@ -63,7 +63,7 @@ public class TaskList {
         int index = Parser.getTaskIndex(commands, tasks);
         Task task = tasks.get(index);
         task.markDone();
-        assert task.isCompleted == true: "Task should be completed";
+        assert task.isCompleted == true : "Task should be completed";
         return task;
     }
 
