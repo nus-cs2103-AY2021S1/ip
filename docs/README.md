@@ -78,6 +78,7 @@ Displays a message explaining how to access the user guide.
 `help`
 
 Expected outcome:
+
 ![help outcome](./UG images/help%20command.png)
 
 ### Adding a task: `todo`, `deadline`, `event`
@@ -93,6 +94,7 @@ Example of usage:
 * `todo exercise at the gym`
 
 Expected outcome:
+
 ![todoEO](./UG%20images/todo%20EO.png)
 
 
@@ -108,6 +110,7 @@ Example of usage:
 * `deadline sign up for hackathon /by 2020-09-30`
 
 Expected outcome:
+
 ![todoEO](./UG%20images/deadline%20EO.png)
 
 
@@ -124,6 +127,7 @@ Example of usage:
 * `event java workshop /at Tuesday 6-7pm`
 
 Expected outcome:
+
 ![todoEO](./UG%20images/event%20EO.png)
 
 
@@ -133,6 +137,7 @@ Shows a list of all tasks being managed by Clippy.
 `list`
 
 Expected outcome:
+
 ![todoEO](./UG%20images/list%20EO.png)
 
 
@@ -154,10 +159,12 @@ Updates the details of an existing task being managed by Clippy. Suppose you mad
 Example of usage:
 * `event birthday party /at 25 Nov 1-4pm` <br> `update 1 19th birthday party` <br> updates the description of the 1st task in the list to 19th birthday party.
 Expected outcome:
+
 ![todoEO](./UG%20images/update%201%20EO.png)
 
 * `update 1 19th birthday party /at 25 Nov 5-10pm` <br> updates the description and date/time of the 1st task in the list to 19th birthday party at 25 Nov 5-10pm.
 Expected outcome:
+
 ![todoEO](./UG%20images/update%202%20EO.png)
 
 
@@ -174,6 +181,7 @@ Example of usage:
 * `done 2` marks the 2nd task in the list as completed
 
 Expected outcome:
+
 ![todoEO](./UG%20images/mark%20as%20done%20EO.png)
 
 
@@ -192,6 +200,7 @@ Example of usage:
 * `todo buy xbox` <br> `todo buy ps5` <br> `find buy` <br> returns 2 tasks with description ‘buy xbox’ and ‘buy ps5’
 
 Expected outcome:
+
 ![todoEO](./UG%20images/find%20EO.png)
 
 ### Deleting a task: `delete`
@@ -207,6 +216,7 @@ Example of usage:
 * `list` followed by `delete 2` deletes the 2nd task in the task list.
 
 Expected outcome:
+
 ![todoEO](./UG%20images/delete%20EO.png)
 
 ### Exiting the program: `bye`
