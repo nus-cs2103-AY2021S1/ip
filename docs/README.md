@@ -37,8 +37,8 @@ Adds a new Deadline task to the task manager. A Deadline task is a task with a d
 
 If the deadline is in any of the formats: `'yyyy-MM-dd HHmm', 'yyyy-MM-d HHmm', 'dd/MM/yyyy HHmm', 'dd/M/yyyy HHmm', 'd/MM/yyyy HHmm', 
 'd/M/yyyy HHmm', 'dd-MM-yyyy HHmm"', 'dd-M-yyyy HHmm', 'd-MM-yyyy HHmm', 'd-M-yyyy HHmm', 'yyyy-MM-dd', 'yyyy-MM-d', 'dd/MM/yyyy', 
-'d/MM/yyyy', 'dd/M/yyyy', 'd/M/yyyy', 'dd-MM-yyyy', 'dd-M-yyyy', 'd-MM-yyyy' and 'd-M-yyyy'`, it will be represented as 
-`'MMM dd yyyy, h:mm a' or 'MMM dd yyyy'`.
+'d/MM/yyyy', 'dd/M/yyyy', 'd/M/yyyy', 'dd-MM-yyyy', 'dd-M-yyyy', 'd-MM-yyyy'` and `'d-M-yyyy'`, it will be represented as 
+`'MMM dd yyyy, h:mm a'` or `'MMM dd yyyy'`.
 
 Format: `deadline TASK_DESCRIPTION /by DEADLINE`
 
@@ -51,7 +51,6 @@ Expected outcome:
 Quack! I have added: 
 [D][X] Tuck Ducks in Bed (by: Jul 19 2020, 12:00 AM)
 My duck senses tell me you have 6 tasks in the list.
-
 ```
 
 ### Deleting a task: `delete` 
@@ -94,8 +93,8 @@ Quack! I have marked this task as done:
 Adds a new Event task to the task manager. An Event task is a task with a description and a event time/date.
 If the event time/date is in any of the formats: `'yyyy-MM-dd HHmm', 'yyyy-MM-d HHmm', 'dd/MM/yyyy HHmm', 'dd/M/yyyy HHmm', 'd/MM/yyyy HHmm', 
 'd/M/yyyy HHmm', 'dd-MM-yyyy HHmm"', 'dd-M-yyyy HHmm', 'd-MM-yyyy HHmm', 'd-M-yyyy HHmm', 'yyyy-MM-dd', 'yyyy-MM-d', 'dd/MM/yyyy', 
-'d/MM/yyyy', 'dd/M/yyyy', 'd/M/yyyy', 'dd-MM-yyyy', 'dd-M-yyyy', 'd-MM-yyyy' and 'd-M-yyyy'`, it will be represented as 
-`'MMM dd yyyy, h:mm a' or 'MMM dd yyyy'`.
+'d/MM/yyyy', 'dd/M/yyyy', 'd/M/yyyy', 'dd-MM-yyyy', 'dd-M-yyyy', 'd-MM-yyyy'` and `'d-M-yyyy'`, it will be represented as 
+`'MMM dd yyyy, h:mm a'` or `'MMM dd yyyy'`.
 
 Format: `event TASK_DESCRIPTION /at EVENT_TIME_DATE`
 
