@@ -15,16 +15,6 @@ public class ParserTest {
         assertEquals(2, Parser.parseCommandId("3"));
         assertEquals(5, Parser.parseCommandId("6"));
     }
-    
-    @Test
-    public void parseCommandId_assertionErrorThrown() {
-        try {
-            Parser.parseCommandId("  ");
-            fail();
-        } catch (AssertionError e) {
-            assertEquals("Args provided is blank", e.getMessage());
-        }
-    }
 
     @Test
     public void parseCommandId_exceptionThrown() {
