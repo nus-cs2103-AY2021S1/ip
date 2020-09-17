@@ -58,6 +58,8 @@ public class Parser {
             if (arr1.length == 1) {
                 throw new MissingDurationException("event");
             }
+            assert arr1.length > 2;
+
             arr[1] = arr1[0];
             arr[2] = arr1[1];
         } else {

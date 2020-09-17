@@ -44,6 +44,7 @@ public class TaskList {
      */
     public String markAsDone(int i) throws InvalidTaskNumberException {
         Task t;
+
         try {
             t = this.list.get(i - 1).taskDone();
         } catch (IndexOutOfBoundsException e) {
@@ -61,6 +62,7 @@ public class TaskList {
      */
     public String remove(int i) throws InvalidTaskNumberException {
         Task t;
+
         try {
             t = this.list.get(i - 1);
         } catch (IndexOutOfBoundsException e) {
