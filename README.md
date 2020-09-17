@@ -10,7 +10,7 @@ Users may interact with Bob by providing commands via a Command Line Interface (
 ![Image of BobUi](https://github.com/Caleblyx/ip/blob/master/docs/Ui.png)
 
 ## User Guide
-Take a look at the [User Guide](https://github.com/Caleblyx/ip/blob/master/docs/README.md) for more details.
+Take a look at the [User Guide](https://caleblyx.github.io/ip/) for more details.
 ####Quick start
 1. Ensure you have Java 11 or above installed.
 2. Download the latest version of `Bob.jar` from [releases](https://github.com/Caleblyx/ip/releases).
