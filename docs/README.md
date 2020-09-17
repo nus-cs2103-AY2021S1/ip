@@ -12,6 +12,9 @@ Hello! I'm Duke, your friendly task manager.
 How can I help you today?
 ```
 
+## Download
+Download the jar file from releases.
+
 ## Features 
 
 ### Stores your tasks 
