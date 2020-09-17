@@ -3,6 +3,10 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
 
+import duke.exceptions.DukeException;
+import duke.logic.tasks.Deadline;
+import duke.logic.tasks.Task;
+
 public class DeadlineTest {
     @Test
     public void testDeadlinePrinting_correctFormat_success() throws DukeException {

@@ -2,6 +2,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
+import duke.logic.tasks.Task;
+import duke.logic.tasks.Todo;
+
 public class TodoTest {
     @Test
     public void testTodoPrinting_doneTodo_success() {
