@@ -7,12 +7,17 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -60,12 +65,27 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        var db = new DialogBox(text, img);
+        BackgroundFill back = new BackgroundFill(
+                Color.web("#cfe8d5"),
+                new CornerRadii(20),
+                new Insets(5, 5, 5, 5)
+        );
+        Background background = new Background(back);
+        db.setBackground(background);
+        return db;
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
+        BackgroundFill back = new BackgroundFill(
+                Color.web("#c5dae3"),
+                new CornerRadii(20),
+                new Insets(5, 5, 5, 5)
+        );
+        Background background = new Background(back);
+        db.setBackground(background);
         db.setTranslateX(0);
         db.dialog.setStyle("-fx-background-radius: 0px 10px 10px 10px");
         db.dialog.setTranslateX(5);

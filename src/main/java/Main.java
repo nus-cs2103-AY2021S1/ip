@@ -23,6 +23,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             scene.getStylesheets().add("/view/main.css");
+            stage.setTitle("Duke the Helpful Chatbot :)");
             stage.getIcons().add(new Image(this.getClass().getResourceAsStream("/images/icon.png")));
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
