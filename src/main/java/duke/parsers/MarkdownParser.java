@@ -6,8 +6,8 @@ import java.util.Objects;
 
 import duke.exceptions.DukeException;
 import duke.ui.gui.markdown.Markdown;
-import duke.ui.gui.markdown.Tag;
 import duke.ui.gui.markdown.NormText;
+import duke.ui.gui.markdown.Tag;
 
 
 public class MarkdownParser implements Parser<List<Markdown>> {

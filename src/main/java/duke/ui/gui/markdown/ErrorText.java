@@ -14,7 +14,7 @@ public class ErrorText extends NormText {
 
     @Override
     public Node create() {
-        Text text =  (Text) super.create();
+        Text text = (Text) super.create();
         text.setFill(Color.RED);
         text.setFont(Font.font(null, FontWeight.BOLD, DEFAULT_TEXT_SIZE));
         return text;
