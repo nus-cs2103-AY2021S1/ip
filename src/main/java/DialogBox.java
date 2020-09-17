@@ -40,7 +40,8 @@ public class DialogBox extends HBox {
         circle.setRadius(40);
         
         displayPicture.setClip(circle);
-        dialog.setStyle("-fx-background-color: yellow;" + "-fx-background-radius: 50;");
+        dialog.setStyle("-fx-background-color: yellow;" + "-fx-background-radius: 20;" 
+                + "-fx-min-width: 50; -fx-end-margin: 20");
         dialog.setPadding(new Insets(12));
         
         dialog.setText(text);
@@ -62,7 +63,8 @@ public class DialogBox extends HBox {
         circle.setRadius(30);
 
         displayPicture.setClip(circle);
-        dialog.setStyle("-fx-background-color: pink;" + "-fx-background-radius: 50;");
+        dialog.setStyle("-fx-background-color: pink;" + "-fx-background-radius: 20;" 
+                + "-fx-min-width: 250; -fx-end-margin: 20");
         dialog.setPadding(new Insets(12));
 
     }

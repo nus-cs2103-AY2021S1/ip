@@ -42,7 +42,7 @@ test {
 }
 
 application {
-    mainClassName = "Main"
+    mainClassName = "Launcher"
 }
 
 shadowJar {
@@ -57,3 +57,5 @@ checkstyle {
 run{
     standardInput = System.in
 }
+
+
