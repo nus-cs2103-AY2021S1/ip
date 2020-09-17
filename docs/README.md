@@ -22,7 +22,7 @@ Duke (Also known as Dwayne The Rock Johnson) is your friendly **productivity ass
 
 1. Download the latest duke.jar from [here](https://github.com/nicholas-gcc/ip/releases/download/A-Release/duke.jar)
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Take note this image reflects the state of the GUI after adding some sample commands so yours may look empty initially.
+1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Take note this image reflects the state of the GUI after adding some sample commands so yours may look empty initially.<br>
 ![]<img src="/docs/Ui.png" width="374.5" height="588">
 
 1. Type the command in the message box and press Enter to execute it. e.g. typing list and pressing Enter will give you a list of tasks.
@@ -72,7 +72,7 @@ Format: `deadline TASK_DESCRIPTION /PREPOSITION YYYY-MM-DD`
 
 Examples:
 * `deadline Exercise and get some abs /by 2020-08-28`
-* `deadline Do homework /by 2017-09-22`
+* `deadline Do homework /due 2017-09-22`
 
 ### Adding an event: `event`
 
@@ -94,29 +94,27 @@ Format: `list`
 
 ### Locating task by keywords: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds tasks whose descriptions contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* The search is case-sensitive. e.g `book` will not match task description `read Book`
+* The order of the keywords matter. e.g. `read book` will match `book read`
+* Only the task description is searched, and `find` returns all types of tasks `todo`, `deadline`, `event`.
+* Partial words will be matched e.g. `boo` will match task description `read books`
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+* `find books` will match the task descriptions `Read book` and `Borrow books` (if both tasks exist)
 
-### `Keyword` - Describe action
+### Deleting a person : `delete`
 
-Describe action and its outcome.
+Deletes the specified person from the address book.
 
-Example of usage: 
+Format: `delete INDEX`
 
-`keyword (optional arguments)`
+* Deletes the task at the specified `INDEX`, and reprints the new list.
+* The index refers to the index number shown in the displayed task list.
+* The index **must be a positive integer** 1, 2, 3, …​ and be less than or equals to the size of the list.
 
-Expected outcome:
-
-`outcome`
+Examples:
+* `delete 2` deletes the 2nd task in the task list.
