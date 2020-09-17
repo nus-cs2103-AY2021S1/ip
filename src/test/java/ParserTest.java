@@ -67,7 +67,7 @@ public class ParserTest {
         try {
             assertEquals(true, Parser.parse("abcd") instanceof Command);
         } catch (DukeException e) {
-            assertEquals("Sorry, didn't get that :( "
+            assertEquals("Oh no, didn't get that :( "
                     + "Try again or press 'help' to find out more!", e.getMessage());
         }
     }
