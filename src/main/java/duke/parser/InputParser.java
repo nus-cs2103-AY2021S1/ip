@@ -69,7 +69,7 @@ public class InputParser {
         }
 
         if (input.startsWith("find ")) {
-            return CommandType.LIST_BY_KEYWORD;
+            return CommandType.LIST;
         }
 
         if (input.startsWith("done ")) {
@@ -143,6 +143,10 @@ public class InputParser {
 
         if (input.equals("list events not done")) {
             return CommandType.LIST_EVENTS_NOT_DONE;
+        }
+
+        if (input.startsWith("find ")) {
+            return CommandType.LIST_BY_KEYWORD;
         }
 
         return CommandType.INVALID_COMMAND;
