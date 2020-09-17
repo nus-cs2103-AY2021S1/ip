@@ -5,7 +5,7 @@
 **Duke** is an application that can help you to *manage tasks*. It supports *saving*, *editing*, *deleting* and 
 *displaying* **tasks** using simple **commands**.
 
-## Getting Started
+## Quick Start
 
 **Prerequisites: Java 11 or later installed.**
 

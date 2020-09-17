@@ -19,9 +19,7 @@
 
 ## Features 
 
-### Creates a new ToDo task
-
-Command: `todo`
+### Creating a new ToDo task: `todo`
 
 Format: `todo <task description>`
 
@@ -29,9 +27,7 @@ Example: `todo read book`
 
 Expected outcome: *Todo* task created **if there is no duplications**.
 
-### Creates a new Event task
-
-Command: `event`
+### Creating a new Event task: `event`
 
 Format: `event <task description> /at <time>`
 
@@ -39,9 +35,7 @@ Example: `event have dinner /at 18:00`
 
 Expected outcome: *Event* task created **if there is no duplications**.
 
-### Creates a new Deadline task
-
-Command: `deadline`
+### Creating a new Deadline task: `deadline`
 
 Format: `deadline <task description> /by <time>`
 
@@ -49,9 +43,7 @@ Example: `deadline return book /by next Firday`
 
 Expected outcome: *Deadline* task created **if there is no duplications**.
 
-### Lists current tasks
-
-Command: `list`
+### Listing current tasks: `list`
 
 Format: `list`
 
@@ -59,9 +51,7 @@ Example: `list`
 
 Expected outcome: A list of current tasks shown.
 
-### Deletes a task using an index
-
-Command: `delete`
+### Deleting a task using an index: `delete`
 
 Format: `delete <task index>`
 
@@ -69,9 +59,7 @@ Example: `delete 1`
 
 Expected outcome: The task with the given index is deleted.
 
-### Tags a task
-
-Command: `tag`
+### Tagging a task: `tag`
 
 Format: `tag <task index> <tag>`
 
@@ -79,9 +67,7 @@ Example: `tag 2 This is a tag...`
 
 Expected outcome: The task with the given index is tagged with the input tag string.
 
-### Removes the tag of a task
-
-Command: `untag`
+### Removing the tag of a task: `untag`
 
 Format: `untag <task index>`
 
@@ -89,9 +75,7 @@ Example: `untag 2`
 
 Expected outcome: The tag of  the task with the given index is removed.
 
-### Marks a task as done
-
-Command: `done`
+### Marking a task as done: `done`
 
 Format: `done <task index>`
 
@@ -99,9 +83,9 @@ Example: `done 3`
 
 Expected outcome: The task with the given index is marked as done.
 
-### Finds tasks using a keyword (does not have to be a word)
+### Finding tasks using a keyword: `find`
 
-Command: `find`
+(The *keyword* does not have to be a word)
 
 Format: `find <keyword>`
 
@@ -109,9 +93,7 @@ Example: `find re`
 
 Expected outcome: All tasks that contains the keyword in their description are shown.
 
-### Shows all available commands
-
-Command: `help`
+### Showing all available commands: `help`
 
 Format: `help`
 
@@ -119,9 +101,7 @@ Example: `help`
 
 Expected outcome: Descriptions and formats of all commands are shown.
 
-### Exits the application
-
-Command: `bye`
+### Exiting the application: `bye`
 
 Format: `bye`
 
@@ -129,13 +109,13 @@ Example: `bye`
 
 Expected outcome: All current tasks are saved, and the application ends.
 
-### Shows the table of current tasks
+### Showing the table of current tasks
 
 Method: Click `View` -> `Task List...`
 
 Expected outcome: A window containing the table of tasks pops up.
 
-### Shows the table of all commands
+### Showing the table of all commands
 
 Method: Click `Help` -> `Commands...`
 
