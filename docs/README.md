@@ -41,7 +41,10 @@ For the details of each command, refer to the [Features](##Features) below.
 <h5>Notes</h5>
 <font>
 Words in UPPER_CASE are the parameters to be supplied by the user.
-e.g. in todo TITLE, TITLE is a parameter which can be used as todo homework.
+e.g. in todo TITLE, TITLE is a parameter which can be used as todo homework.  
+<br/>
+<br/>
+In the Graphic Display, dialogue in Red Box indicates a Warning or error.
 </font>
 </blockquote>
 

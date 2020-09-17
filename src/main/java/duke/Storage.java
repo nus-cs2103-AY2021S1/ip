@@ -75,18 +75,17 @@ public class Storage {
                 fw.close();
                 return;
             }
-
-            for (String currentFilePath: filePaths) {
-                File currentFile = new File(currentFilePath);
-                if (isWritableFilePath(filePath)) {
-                    FileWriter fw = new FileWriter(currentFile);
-                    fw.write("");
-                    for (String s: data) {
-                        fw.append(s + "\n");
-                    }
-                    fw.close();
-                }
+            File currentFile = new File(filePaths[0]);
+            if (!isWritableFilePath(filePath)) {
+                throw new DukeException("Specified location is not writable");
             }
+            FileWriter fw = new FileWriter(currentFile);
+            fw.write("");
+            for (String s: data) {
+                fw.append(s + "\n");
+            }
+            fw.close();
+
         } catch (IOException err) {
             throw new DukeException("File Path is a directory -OR- Can't create file at location");
         }
