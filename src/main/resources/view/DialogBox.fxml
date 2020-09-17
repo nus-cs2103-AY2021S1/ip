@@ -6,9 +6,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" style="-fx-border-color: #ffffad; -fx-border-width: 5; -fx-background-color: #b7ffad;" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="TOP_RIGHT" minHeight="-Infinity" prefWidth="400.0" style="-fx-background-color: transparent;" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label fx:id="dialog" prefHeight="99.0" prefWidth="273.0" text="Label" textAlignment="CENTER" textFill="#656565" wrapText="true">
+        <Label fx:id="dialog" prefWidth="273.0" style="-fx-border-color: black; -fx-background-color: lavender; -fx-border-radius: 5; -fx-padding: 10;" textFill="#656565" HBox.hgrow="ALWAYS" wrapText="true">
          <font>
             <Font name="Segoe UI Semibold" size="18.0" />
          </font></Label>

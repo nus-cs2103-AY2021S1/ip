@@ -6,8 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 
 
 /**
@@ -25,8 +24,8 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/whip.png"));
-    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/cryLaugh.png"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
+    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/duke.png"));
 
     @FXML
     public void initialize() {
