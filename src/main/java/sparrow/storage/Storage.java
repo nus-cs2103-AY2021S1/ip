@@ -29,8 +29,8 @@ public class Storage {
 
     private final Path path;
 
-    public Storage() throws Exception {
-        this(DEFAULT_FILE_PATH);
+    public Storage() {
+        path = Path.of(DEFAULT_FILE_PATH);
     }
 
     /**

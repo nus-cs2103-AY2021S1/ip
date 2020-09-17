@@ -3,6 +3,7 @@ package sparrow;
 import java.util.Scanner;
 
 import sparrow.commands.Command;
+import sparrow.data.exceptions.IncorrectCommandException;
 import sparrow.data.task.TaskList;
 import sparrow.data.trivia.VocabList;
 import sparrow.parser.Parser;
@@ -54,11 +55,15 @@ public class Sparrow {
         Parser parser = new Parser();
         boolean isExit = false;
         while (!isExit) {
-            String command = sc.nextLine();
-            Command c = parser.parseCommand(command);
-            String result = c.execute(tasks, vocabList, ui, storage);
-            ui.replyToUser(result);
-            isExit = c.getIsExit();
+            try {
+                String command = sc.nextLine();
+                Command c = parser.parseCommand(command);
+                String result = c.execute(tasks, vocabList, ui, storage);
+                ui.replyToUser(result);
+                isExit = c.getIsExit();
+            } catch (IncorrectCommandException ice) {
+                ui.replyToUser(ice.getMessage());
+            }
         }
     }
 
@@ -68,9 +73,13 @@ public class Sparrow {
      * @return Reply to user.
      */
     public String getResponse(String userInput) {
-        Parser parser = new Parser();
-        Command c = parser.parseCommand(userInput);
-        return c.execute(tasks, vocabList, ui, storage);
+        try {
+            Parser parser = new Parser();
+            Command c = parser.parseCommand(userInput);
+            return c.execute(tasks, vocabList, ui, storage);
+        } catch (IncorrectCommandException ice) {
+            return ice.getMessage();
+        }
     }
 
     /**

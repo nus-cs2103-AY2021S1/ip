@@ -30,7 +30,7 @@ public class FilterCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, VocabList vocabList, Ui ui, Storage storage) {
-        ArrayList<Task> matchingTasks = tasks.filterList(date);
+        ArrayList<Task> matchingTasks = tasks.filterTasks(date);
         if (matchingTasks.size() == 0) {
             return MESSAGE_FIND_FAILURE;
         } else {

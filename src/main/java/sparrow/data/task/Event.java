@@ -28,4 +28,12 @@ public class Event extends Task {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
         return String.format("[E]%s (at: %s)", super.toString(), this.date.format(formatter));
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return this == other
+                || (other instanceof Event
+                && description.equals(((Event) other).description)
+                && date.equals(((Event) other).date));
+    }
 }

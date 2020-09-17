@@ -18,4 +18,10 @@ public class IncorrectCommand extends Command {
         return feedbackToUser;
     }
 
+    @Override
+    public boolean equals(Object other) {
+        return this == other
+                || (other instanceof IncorrectCommand
+                && feedbackToUser.equals(((IncorrectCommand) other).feedbackToUser));
+    }
 }

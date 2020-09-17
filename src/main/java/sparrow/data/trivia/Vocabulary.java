@@ -46,4 +46,12 @@ public class Vocabulary {
     public String toString() {
         return String.format("%s: %s", word, define());
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this
+                || (other instanceof Vocabulary
+                && word.equals(((Vocabulary) other).word)
+                && define().equals(((Vocabulary) other).define()));
+    }
 }
