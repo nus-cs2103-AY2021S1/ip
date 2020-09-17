@@ -1,6 +1,6 @@
 # User Guide
 
-Welcome to the Duke created by Yongyan to help you mange your tasks.
+Welcome to the Duke.Duke created by Yongyan to help you mange your tasks.
 
 ## Content
 * [Introduction](#introduction)
@@ -22,7 +22,7 @@ Release Date: 16/09/2020
 ## Getting Started
 
 1. Download and install Java JDK 11.
-2. Double click the `Duke.jar` or run `java -jar Duke.jar`
+2. Double click the `Duke.Duke.jar` or run `java -jar Duke.Duke.jar`
 
 ## Features List
 All the commands are case-sensitive.
@@ -34,7 +34,7 @@ All the commands are case-sensitive.
 * Find tasks by a keyword e.g. `find`
 * Exit and save the changed data e.g. `bye`
 
-![Ui](Ui.png)
+![Duke.Ui](Duke.Ui.png)
 
 ## Usage
 
@@ -82,7 +82,7 @@ You can find a task by the keyword. It executes rough search for tasks based on 
 Format: `find KEYWORD`
 
 ### `bye`
-The Duke will be closed and any change of tasks will be stored.
+The Duke.Duke will be closed and any change of tasks will be stored.
 
 Format: `bye`
 

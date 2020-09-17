@@ -1,3 +1,5 @@
+package Duke;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -55,7 +57,7 @@ public class Storage {
             System.out.println("Sorry, DUKE can't find saved todo list."+
                     " Please contact developers.");
         } catch (ParseErrorException e) {
-            System.out.println("This ParseErrorException should not happen"+
+            System.out.println("This Duke.ParseErrorException should not happen"+
                     " Please contact developers");
         }
         return taskList;

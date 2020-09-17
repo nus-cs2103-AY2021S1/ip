@@ -1,3 +1,5 @@
+package Duke;
+
 import java.util.ArrayList;
 
 public class TaskList {
@@ -37,9 +39,9 @@ public class TaskList {
     }
 
     /**
-     * Create a new TodoTask, add it to the totoList and returns it.
-     * @param taskContent content of TodoTask
-     * @return a newly created Task
+     * Create a new Duke.TodoTask, add it to the totoList and returns it.
+     * @param taskContent content of Duke.TodoTask
+     * @return a newly created Duke.Task
      */
     public Task addTodoTask(String taskContent) {
         Task task = new TodoTask(taskContent);
@@ -48,10 +50,10 @@ public class TaskList {
     }
 
     /**
-     * Create a new DeadlineTask, add it to the totoList and returns it.
-     * @param taskContent content of DeadlineTask
-     * @param time deadline of DeadlineTask
-     * @return a newly created Task
+     * Create a new Duke.DeadlineTask, add it to the totoList and returns it.
+     * @param taskContent content of Duke.DeadlineTask
+     * @param time deadline of Duke.DeadlineTask
+     * @return a newly created Duke.Task
      * @throws ParseErrorException
      */
     public Task addDeadlineTask(String taskContent, String time) throws ParseErrorException{
@@ -61,10 +63,10 @@ public class TaskList {
     }
 
     /**
-     * Create a new EventTask, add it to the totoList and returns it.
-     * @param taskContent content of EventTask
-     * @param time deadline of EventTask
-     * @return a newly created Task
+     * Create a new Duke.EventTask, add it to the totoList and returns it.
+     * @param taskContent content of Duke.EventTask
+     * @param time deadline of Duke.EventTask
+     * @return a newly created Duke.Task
      * @throws ParseErrorException
      */
     public Task addEventTask(String taskContent, String time) throws ParseErrorException{

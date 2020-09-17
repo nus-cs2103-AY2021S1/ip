@@ -1,5 +1,6 @@
+package Duke;
+
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * Represents a user interface and is in charge of printing contents to screen
@@ -13,7 +14,7 @@ public class Ui {
                         "    _|      _|    _|              _|    _|  _|    _|       \n" +
                         "    _|        _|_|                _|_|_|      _|_|     _|  ";
         System.out.println("Hello from\n" + logo);
-        System.out.println("This is a Duke Project.\n");
+        System.out.println("This is a Duke.Duke Project.\n");
         System.out.println("What you are going to do today?");
     }
 

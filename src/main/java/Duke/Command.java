@@ -1,3 +1,5 @@
+package Duke;
+
 import java.util.Arrays;
 
 public enum Command{
@@ -18,7 +20,7 @@ public enum Command{
     static private String taskContent = "";
     Command(){}
 
-//    Command(String command){
+//    Duke.Command(String command){
 //        this.command = command.toUpperCase();
 //        this.originalCommand = command;
 //    }
@@ -34,7 +36,7 @@ public enum Command{
     static String getAction() { return action; }
 
     /**
-     * Returns a Command object that enumerate original command
+     * Returns a Duke.Command object that enumerate original command
      *
      * @param command a string that contains the command
      * @return enumerated command

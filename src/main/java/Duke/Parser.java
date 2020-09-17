@@ -1,3 +1,5 @@
+package Duke;
+
 import java.util.ArrayList;
 
 public class Parser {
@@ -12,7 +14,7 @@ public class Parser {
     /**
      * Run commands and seperate them according to types
      * @param command the command
-     * @throws DukeException an DukeException that stores the information to be printed
+     * @throws DukeException an Duke.DukeException that stores the information to be printed
      * @throws Exception
      */
     public String runCommand(Command command) throws DukeException, Exception{
@@ -55,9 +57,9 @@ public class Parser {
     }
 
     /**
-     * Parse the content of TodoTask and pass parsed content to taskList
+     * Parse the content of Duke.TodoTask and pass parsed content to taskList
      * @param content content of parsed event
-     * @return a Task object
+     * @return a Duke.Task object
      * @throws EmptyDescriptionException
      */
     public Task parseTodoTask(String content) throws EmptyDescriptionException{
@@ -67,9 +69,9 @@ public class Parser {
     }
 
     /**
-     * Parse the content of DeadlineTask and pass parsed content to taskList
+     * Parse the content of Duke.DeadlineTask and pass parsed content to taskList
      * @param content content of parsed event
-     * @return a Task object
+     * @return a Duke.Task object
      * @throws EmptyDescriptionException
      * @throws ParseErrorException
      * @throws WrongDescriptionException
@@ -91,9 +93,9 @@ public class Parser {
     }
 
     /**
-     * Parse the content of EventTask and pass parsed content to taskList
+     * Parse the content of Duke.EventTask and pass parsed content to taskList
      * @param content content of parsed task
-     * @return a Task object
+     * @return a Duke.Task object
      * @throws EmptyDescriptionException
      * @throws ParseErrorException
      * @throws WrongDescriptionException
@@ -117,7 +119,7 @@ public class Parser {
     /**
      * Parse the content of a Delete command and ask taskList to delete it.
      * @param content content of parsed command
-     * @return a Task object indicates the requested task
+     * @return a Duke.Task object indicates the requested task
      * @throws DukeException
      * @throws WrongDescriptionException
      * @throws EmptyDescriptionException
@@ -141,7 +143,7 @@ public class Parser {
     /**
      * Parse the content of a  command and ask taskList to finish it.
      * @param content content of parsed command
-     * @return a Task object indicates the requested task
+     * @return a Duke.Task object indicates the requested task
      * @throws DukeException
      * @throws WrongDescriptionException
      * @throws EmptyDescriptionException
@@ -165,7 +167,7 @@ public class Parser {
     /**
      * Parse the content of a Done command and ask taskList to finish it.
      * @param content content of parsed command
-     * @return a Task object indicates the requested task
+     * @return a Duke.Task object indicates the requested task
      * @throws DukeException
      * @throws WrongDescriptionException
      * @throws EmptyDescriptionException

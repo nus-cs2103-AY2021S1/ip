@@ -1,8 +1,8 @@
-import java.time.LocalDate;
+package Duke;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.time.format.FormatStyle;
 
 public class EventTask extends Task{
     private String taskType = "E";
