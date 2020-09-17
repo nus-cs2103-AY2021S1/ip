@@ -34,6 +34,9 @@ public class PriorityCommand extends Command{
      * @throws DukeException If input is not recognised.
      */
     public String execute(TaskList taskList, Ui ui, Storage storage) throws IOException, DukeException {
+        if (taskIndex >= taskList.size() || taskIndex < 0) {
+            throw new DukeException("Sorry there's no such index for your task :(");
+        }
         Task taskToMark = taskList.get(taskIndex);
         taskToMark.setPriorityLevel(priorityLevel);
         taskList.set(taskIndex, taskToMark);

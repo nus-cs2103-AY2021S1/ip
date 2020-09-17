@@ -32,6 +32,9 @@ public class DoneCommand extends Command {
      * @throws DukeException If input is not recognised.
      */
     public String execute(TaskList taskList, Ui ui, Storage storage) throws IOException, DukeException {
+        if (index >= taskList.size() || index < 0) {
+            throw new DukeException("Sorry there's no such index for your task :(");
+        }
         Task doneTask = taskList.setDoneTask(index);
         String outputString = ui.printDoneMessage(doneTask);
         outputString += super.execute(taskList, ui, storage);
