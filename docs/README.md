@@ -1,5 +1,8 @@
 
 # User Guide
+Stormy is a personal task manager that helps a person keep track of their tasks, deadlines and events.
+
+Created by: Wen Jin
 
 * Table of Contents
 {:toc}
