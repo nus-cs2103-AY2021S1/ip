@@ -1,2 +1,2 @@
-D | 0 | cs2103 proj | 2020-09-17 23:59
-E | 0 | dinner party | 2020-09-20 12:30
+D | 1 | cs2103 proj | 2020-09-17 23:59
+E | 0 | dinner party | 2020-09-20 12:30T | 0 | buy groceries
