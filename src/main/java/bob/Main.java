@@ -24,6 +24,7 @@ public class Main extends Application {
     public void start(Stage stage) {
         AnchorPane anchorPane = new MainWindow();
         Scene scene = new Scene(anchorPane);
+        stage.setTitle("Bob, the personal assistant");
         stage.setScene(scene);
         stage.show();
     }

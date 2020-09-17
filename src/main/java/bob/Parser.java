@@ -17,6 +17,7 @@ import bob.exception.BobIncompleteEventDescriptionException;
 import bob.exception.BobIncorrectRescheduleFormatException;
 import bob.exception.BobIncorrectSnoozeFormatException;
 import bob.exception.BobNoDescriptionException;
+import bob.exception.BobNotAnEventException;
 import bob.exception.BobNumberFormatException;
 
 import bob.task.Deadline;
@@ -69,6 +70,10 @@ public class Parser {
         Task task = null;
         if (command.contains("todo")) {
             try {
+                String description = command.substring(TODO_DESCRIPTION_INDEX);
+                if (description.isEmpty()) {
+                    throw new BobNoDescriptionException();
+                }
                 task = new Todo(command.substring(TODO_DESCRIPTION_INDEX));
             } catch (StringIndexOutOfBoundsException e) {
                 throw new BobNoDescriptionException();
@@ -81,6 +86,9 @@ public class Parser {
                     throw new BobIncompleteDeadlineDescriptionException();
                 }
                 String description = command.substring(DEADLINE_DESCRIPTION_INDEX, index - 1);
+                if (description.isEmpty()) {
+                    throw new BobIncompleteDeadlineDescriptionException();
+                }
                 String deadline = command.substring(index + 4);
                 task = new Deadline(description, deadline);
             } catch (StringIndexOutOfBoundsException e) {
@@ -94,6 +102,9 @@ public class Parser {
                     throw new BobIncompleteEventDescriptionException();
                 }
                 String description = command.substring(EVENT_DESCRIPTION_INDEX, index - 1);
+                if (description.isEmpty()) {
+                    throw new BobIncompleteDeadlineDescriptionException();
+                }
                 String period = command.substring(index + 4);
                 task = new Event(description, period);
             } catch (StringIndexOutOfBoundsException e) {
@@ -106,8 +117,11 @@ public class Parser {
     static Command parseDone(String command) throws BobException {
         int index = 0;
         try {
-            index = Integer.parseInt(command.substring(command.length() - 1));
+            String[] split = command.split(" ");
+            index = Integer.parseInt(split[1]);
         } catch (NumberFormatException e) {
+            throw new BobNumberFormatException();
+        } catch (IndexOutOfBoundsException e) {
             throw new BobNumberFormatException();
         }
         return new DoneCommand(index);
@@ -116,8 +130,11 @@ public class Parser {
     static Command parseDelete(String command) throws BobException {
         int index;
         try {
-            index = Integer.parseInt(command.substring(command.length() - 1));
+            String[] split = command.split(" ");
+            index = Integer.parseInt(split[1]);
         } catch (NumberFormatException e) {
+            throw new BobNumberFormatException();
+        } catch (IndexOutOfBoundsException e) {
             throw new BobNumberFormatException();
         }
         return new DeleteCommand(index);
