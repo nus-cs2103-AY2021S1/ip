@@ -76,7 +76,7 @@ public class Storage {
         while (fileSc.hasNextLine()) {
             Task newItem;
             String taskString = fileSc.nextLine();
-            newItem = Parser.parseFileItemToTask(taskString);
+            newItem = Parser.parseFileItem(taskString);
             itemList.add(newItem);
         }
         return itemList;

@@ -33,7 +33,8 @@ public class Duke {
      * @throws IOException If fails to take user input or create/access data management file
      */
     public void run() throws DukeException, IOException {
-        //welcoming message
+        /*** welcoming message */
+
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -43,7 +44,7 @@ public class Duke {
         System.out.println("Hello! Duke at your service. Please name your request." +
                 "\nAll dates should be in the form of YYYY-MM-DD: ");
 
-        // Take user Input
+        /**** User Input */
         ui.takeUserInput(storage);
 
     }
