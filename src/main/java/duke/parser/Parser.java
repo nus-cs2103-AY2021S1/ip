@@ -16,6 +16,8 @@ public class Parser {
      * @throws DukeException
      */
     public static Command parse(String userInput) throws DukeException {
+        assert !userInput.isEmpty() : "userInput cannot be empty";
+
         int space_idx = userInput.indexOf(' ');
         CMD cmd;
 

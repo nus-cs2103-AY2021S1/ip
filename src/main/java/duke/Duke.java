@@ -26,6 +26,8 @@ public class Duke {
     }
 
     public String getResponse(String input) {
+        assert !input.isEmpty() : "input cannot be empty";
+
         try {
             Command c = Parser.parse(input);
             return c.getResponse(tasks, storage);

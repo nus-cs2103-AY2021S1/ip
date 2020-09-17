@@ -1,5 +1,8 @@
 package duke.datetime;
 
+import duke.Duke;
+import duke.DukeException;
+
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -16,6 +19,7 @@ public class DateTimeUtility {
      * @return the format of the input dataString (whether it's of a Date,  DateTime or normal String format)
      */
     public static DateTimeFormat checkDateTimeType(String dateStr) {
+        assert !dateStr.isEmpty() : "dateStr should not be empty";
         try {
             LocalDateTime.parse(dateStr);
             return DateTimeFormat.DateTime;
@@ -46,16 +50,25 @@ public class DateTimeUtility {
      * @return Another string of the correct standardised output format
      */
 
-    public static String formatString(String dateStr, DateTimeFormat format) {
+    public static String formatString(String dateStr, DateTimeFormat format) throws DukeException {
+        assert !dateStr.isEmpty() : "dateStr should not be empty";
+        assert format != null : "format cannot be null";
+
         switch(format) {
         case DateTime:
             try {
                 return LocalDateTime.parse(dateStr).format(OUTPUT_DATETIME_FMT);
-            } catch (DateTimeException e) {}
+            } catch (DateTimeException e) {
+                throw new DukeException("Datetime format " + format
+                                         + " does not match that of input string " + dateStr);
+            }
         case Date:
             try {
                 return LocalDate.parse(dateStr).format(OUTPUT_DATE_FMT);
-            } catch (DateTimeException e) {}
+            } catch (DateTimeException e) {
+                throw new DukeException("Datetime format " + format
+                                         + " does not match that of input string " + dateStr);
+            }
 
         default:
             return dateStr;
@@ -70,22 +83,35 @@ public class DateTimeUtility {
      * @return
      */
     public static String formatString(String dateStr) {
-        return DateTimeUtility.formatString(dateStr, DateTimeUtility.checkDateTimeType(dateStr));
+        try {
+            return DateTimeUtility.formatString(dateStr, DateTimeUtility.checkDateTimeType(dateStr));
+        } catch (DukeException e) {
+            return dateStr;
+        }
+
     }
 
     public static int compare(LocalDate a, LocalDate b) {
+        assert a != null : "a cannot be null";
+        assert b != null : "b cannot be null";
         return a.compareTo(b);
     }
 
     public static int compare(LocalDateTime a, LocalDateTime b) {
+        assert a != null : "a cannot be null";
+        assert b != null : "b cannot be null";
         return a.compareTo(b);
     }
 
     public static int compare(LocalDate a, LocalDateTime b) {
+        assert a != null : "a cannot be null";
+        assert b != null : "b cannot be null";
         return a.compareTo(b.toLocalDate());
     }
 
     public static int compare(LocalDateTime a, LocalDate b) {
+        assert a != null : "a cannot be null";
+        assert b != null : "b cannot be null";
         return a.toLocalDate().compareTo(b);
     }
 
@@ -100,10 +126,12 @@ public class DateTimeUtility {
      * @throws DateTimeException
      */
     public static int compare(String a, String b) throws DateTimeException {
+        assert !a.isEmpty() : "a cannot be empty";
+        assert !b.isEmpty() : "b cannot be empty";
+
         DateTimeFormat aType = DateTimeUtility.checkDateTimeType(a);
         DateTimeFormat bType = DateTimeUtility.checkDateTimeType(b);
 
-        //check all possible cases!
         if (aType == DateTimeFormat.Date) {
             if (bType == DateTimeFormat.Date) {
                 return DateTimeUtility.compare(LocalDate.parse(a, OUTPUT_DATE_FMT), LocalDate.parse(b, OUTPUT_DATE_FMT));

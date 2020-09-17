@@ -21,6 +21,8 @@ public class TaskList {
      * @throws DukeException
      */
     public TaskList(ArrayList<String> tasksStr) throws DukeException {
+        assert !tasksStr.isEmpty() : "tasksStr cannot be empty";
+
         this.tasks = new ArrayList<>();
         for (String taskStr : tasksStr) {
             this.tasks.add(TaskList.parseTaskFromString(taskStr));
@@ -51,6 +53,8 @@ public class TaskList {
      * @throws DukeException
      */
     public String filterTasksByDate(String by) throws DukeException {
+        assert !by.isEmpty() : "by cannot be empty";
+
         if (DateTimeUtility.checkDateTimeType(by) == DateTimeFormat.String) {
             throw new DukeException("U NID 2 GIV CORRECT DATE FOMAT!");
         } else {
@@ -72,6 +76,7 @@ public class TaskList {
     }
 
     public String filterTasksByDescription(String description) {
+        assert !description.isEmpty() : "description cannot be empty";
         ArrayList<Task> filtered = new ArrayList<>();
         String descriptionLower = description.toLowerCase();
 
@@ -92,6 +97,8 @@ public class TaskList {
      * @return
      */
     public String addTodo(String name) {
+        assert !name.isEmpty() : "name cannot be empty";
+
         Todo newTask = new Todo(name);
         tasks.add(newTask);
         return newTask.toString();
@@ -105,6 +112,9 @@ public class TaskList {
      * @return
      */
     public String addDeadline(String name, String by) {
+        assert !name.isEmpty() : "name cannot be empty";
+        assert !by.isEmpty() : "by cannot be empty";
+
         Deadline newTask = new Deadline(name, by);
         tasks.add(newTask);
         return newTask.toString();
@@ -118,6 +128,9 @@ public class TaskList {
      * @return
      */
     public String addEvent(String name, String by) {
+        assert !name.isEmpty() : "name cannot be empty";
+        assert !by.isEmpty() : "by cannot be empty";
+
         Event newTask = new Event(name, by);
         tasks.add(newTask);
         return newTask.toString();
@@ -168,6 +181,8 @@ public class TaskList {
      * @throws DukeException
      */
     public static Task parseTaskFromString(String str) throws DukeException {
+        assert !str.isEmpty() : "str cannot be empty";
+
         Task task;
         String[] temp = str.split("]");
         String taskType = String.valueOf(temp[0].charAt(1));
