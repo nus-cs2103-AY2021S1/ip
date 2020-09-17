@@ -38,7 +38,7 @@ public class DoneCommand extends SimpleCommand {
      * @throws FileUpdateFailException If file in storage fails to get updated.
      */
     public String execute(TaskList taskList, Ui ui, Storage storage) throws InvalidSimpleCommandException,
-        InvalidTaskNumberException, TaskAlreadyDoneException, FileUpdateFailException {
+            InvalidTaskNumberException, TaskAlreadyDoneException, FileUpdateFailException {
         checkValidity(input, SimpleCommandType.DONE, taskList);
         int digit = Integer.parseInt(input);
         Task current = taskList.get(digit - 1);

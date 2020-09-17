@@ -97,7 +97,7 @@ public class Storage {
      * @throws InvalidFileFormatException File is formatted wrongly.
      */
     private void loadTasks(ArrayList<Task> taskList, BufferedReader bufferedReader) throws IOException,
-        InvalidFileFormatException {
+            InvalidFileFormatException {
 
         String header = bufferedReader.readLine();
         if (header != null) {
@@ -114,7 +114,7 @@ public class Storage {
      * @throws InvalidFileFormatException File is formatted wrongly.
      */
     private void readFile(ArrayList<Task> taskList, BufferedReader bufferedReader) throws IOException,
-        InvalidFileFormatException {
+            InvalidFileFormatException {
 
         String line = bufferedReader.readLine();
         while (line != null) {
@@ -166,6 +166,6 @@ public class Storage {
     private String convertToCsvFormat(Task task) {
         assert task != null;
         return String.format(CSV_FORMAT,
-            task.getTaskName(), task.getDescription(), task.getTimeFrame(), task.getTime(), task.getStatus());
+                task.getTaskName(), task.getDescription(), task.getTimeFrame(), task.getTime(), task.getStatus());
     }
 }

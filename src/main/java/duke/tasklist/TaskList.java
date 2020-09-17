@@ -112,8 +112,8 @@ public class TaskList {
     public TaskList matchAll(String input) {
         TaskList taskList = new TaskList();
         tasks.stream()
-            .filter(task -> task.match(input))
-            .forEach(taskList::add);
+                .filter(task -> task.match(input))
+                .forEach(taskList::add);
         return taskList;
     }
 

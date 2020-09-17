@@ -68,7 +68,7 @@ public class TaskParser {
      * @throws EmptyTimeException If time of event is not specified.
      */
     public static String[] parseTaskDescription(String description, TaskType taskType)
-        throws InvalidDeadlineException, InvalidEventException, EmptyTimeException {
+            throws InvalidDeadlineException, InvalidEventException, EmptyTimeException {
 
         String[] inputArr = deconstructInput(description, taskType);
         if (inputArr.length < ARRAY_SIZE) {

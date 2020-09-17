@@ -37,7 +37,7 @@ public class AddToDoCommand extends AddCommand {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws EmptyToDoException,
-        FileUpdateFailException, DuplicateTaskException {
+            FileUpdateFailException, DuplicateTaskException {
         if (taskDetails.isEmpty()) {
             throw new EmptyToDoException();
         }

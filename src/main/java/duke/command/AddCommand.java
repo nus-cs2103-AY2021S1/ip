@@ -24,7 +24,7 @@ public abstract class AddCommand extends Command {
      * @throws FileUpdateFailException If storage file fails to get updated.
      */
     protected String addTask(Task newTask, TaskList taskList, Ui ui, Storage storage) throws DuplicateTaskException,
-        FileUpdateFailException {
+            FileUpdateFailException {
         if (taskList.contains(newTask)) {
             throw new DuplicateTaskException();
         }

@@ -36,7 +36,7 @@ public class Ui {
         StringBuilder stringBuilder = new StringBuilder();
         int numOfStrings = args.length;
         IntStream.range(0, numOfStrings)
-            .forEach(i -> appendWithNewLine(stringBuilder, args[i]));
+                .forEach(i -> appendWithNewLine(stringBuilder, args[i]));
         assert (stringBuilder.length() > 0) : EMPTY_STRING_ERROR;
         return stringBuilder.toString();
     }
@@ -54,7 +54,7 @@ public class Ui {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(header).append(LINE_SEPARATOR);
         IntStream.range(0, numOfCommands)
-            .forEach(i -> appendWithNewLine(stringBuilder, labelString(array[i], i)));
+                .forEach(i -> appendWithNewLine(stringBuilder, labelString(array[i], i)));
         return stringBuilder.toString();
     }
 

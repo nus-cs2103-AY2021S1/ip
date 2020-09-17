@@ -42,7 +42,7 @@ public class AddEventCommand extends AddCommand {
      * @throws DuplicateTaskException If the new task to be added already exists in the current {@code TaskList}.
      */
     public String execute(TaskList taskList, Ui ui, Storage storage) throws EmptyTimeException, InvalidEventException,
-        InvalidDeadlineException, FileUpdateFailException, DuplicateTaskException {
+            InvalidDeadlineException, FileUpdateFailException, DuplicateTaskException {
         String[] resultArr = TaskParser.parseTaskDescription(description, TaskType.EVENT);
         String taskDetails = TaskParser.getTaskDetails(resultArr);
         String timeFrame = TaskParser.getTime(resultArr);

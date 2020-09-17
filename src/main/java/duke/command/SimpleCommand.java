@@ -20,7 +20,7 @@ public abstract class SimpleCommand extends Command {
      * @throws InvalidTaskNumberException When the number is not within the size of the TaskList.
      */
     protected void checkValidity(String input, SimpleCommandType simpleCommandType, TaskList taskList)
-        throws InvalidSimpleCommandException, InvalidTaskNumberException {
+            throws InvalidSimpleCommandException, InvalidTaskNumberException {
         if (!isNumber(input)) {
             throw new InvalidSimpleCommandException(simpleCommandType);
         }

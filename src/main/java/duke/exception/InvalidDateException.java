@@ -18,6 +18,6 @@ public class InvalidDateException extends DukeException {
      */
     public InvalidDateException() {
         super(Ui.stringFormatter(INVALID_DATE_ERR_ONE, INVALID_DATE_ERR_TWO, DATE_TIME_INPUT_FORMAT,
-            DATE_INPUT_FORMAT, TIME_INPUT_FORMAT));
+                DATE_INPUT_FORMAT, TIME_INPUT_FORMAT));
     }
 }
