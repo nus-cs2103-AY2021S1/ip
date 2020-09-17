@@ -1,5 +1,6 @@
 package duke.commands;
 
+import static duke.util.Keyword.KEYWORD_CROSS;
 import static duke.util.Keyword.KEYWORD_LIST_EMPTY_MSG;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -54,13 +55,14 @@ public class ListCommandTest {
                 tasks.add(new ToDo("hello world" + i));
             }
             ListCommand command = new ListCommand(new String[]{"list"});
+            String cross = "[" + KEYWORD_CROSS + "]";
             String dukeReply = (String) method.invoke(command, tasks, ui);
             String expected = "Here are the tasks in your list:\n"
-                + "1. [T][✘] hello world0\n"
-                + "2. [T][✘] hello world1\n"
-                + "3. [T][✘] hello world2\n"
-                + "4. [T][✘] hello world3\n"
-                + "5. [T][✘] hello world4\n\n";
+                + "1. [T]" + cross + " hello world0\n"
+                + "2. [T]" + cross + " hello world1\n"
+                + "3. [T]" + cross + " hello world2\n"
+                + "4. [T]" + cross + " hello world3\n"
+                + "5. [T]" + cross + " hello world4\n\n";
             assertEquals(dukeReply, expected);
         } catch (IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
