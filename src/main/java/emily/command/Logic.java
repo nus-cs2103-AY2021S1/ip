@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import emily.exception.DukeException;
 import emily.storage.TaskList;
+import emily.task.Deadline;
 import emily.task.Task;
 
 
@@ -74,7 +75,7 @@ public class Logic {
             outputLines.add("Here are the tasks on " + formattedDate + " in your list");
             counter = 1;
             for (Task t : lsSameDate) {
-                outputLines.add("- " + t);
+                outputLines.add(counter + ". " + t);
                 counter++;
             }
             break;
@@ -139,6 +140,12 @@ public class Logic {
             if (shortened.equals("view")) {
                 throw new DukeException("Missing date");
             }
+            try {
+                String timestamp = input.substring(5);
+                new Deadline("test", timestamp); //check if timestamp is valid
+            } catch (ArrayIndexOutOfBoundsException | java.time.DateTimeException e) {
+                throw new DukeException("Format of timeline should be yyyy-mm-dd");
+            }
             c = Command.VIEW;
         } else if (input.contains("delete")) {
             if (shortened.equals("delete")) {
@@ -169,11 +176,16 @@ public class Logic {
                 throw new DukeException("Missing keyword");
             }
             c = Command.FIND;
-        } else if (input.contains("edit")) {
+        } else if (input.contains("edit")) { //edit task description
             if (shortened.equals("edit")) {
                 throw new DukeException("Index cannot be found");
-            } else if (shortened.length()<7) {
+            } else if (shortened.length() < 7) {
                 throw new DukeException("Please add description");
+            }
+            int index = Character.getNumericValue(input.charAt(5));
+
+            if(index >= currentTasklistSize){
+                throw new DukeException("Index given is out of bounds");
             }
             c = Command.EDIT;
         } else { //Unrecognised command given by the user
