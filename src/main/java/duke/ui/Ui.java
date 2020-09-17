@@ -18,7 +18,7 @@ public class Ui {
      * @return Reply to the user command.
      */
     public static String showWelcome() {
-        String welcomeMessage = "HOWDY!!!!! WELCOME TO BIKINI BOTTOM! "
+        String welcomeMessage = "HOWDY!!!!! WELCOME TO BIKINI BOTTOM!\n"
                 + "I'm Sandy Cheeks, what can I do for yer?\n"
                 + "Try typin' \"help\" to see what commands you can use!";
         return welcomeMessage;
@@ -59,7 +59,7 @@ public class Ui {
                 + "event *task description* /at *date+time*: adds a task that\n"
                 + "starts at a specific time and ends at a specific time\n"
                 + "(date and time to be written in yyyy-mm-dd HHMM format)\n"
-                + "eg karate competition /at 2019-10-15 1200\n"
+                + "eg event karate competition /at 2019-10-15 1200\n"
                 + "\n"
                 + "done *task number*: marks the task with that number as done\n"
                 + "eg done 1\n"
@@ -70,7 +70,7 @@ public class Ui {
                 + "update *task number* /name *task name*: updates the name of the task with "
                 + "that number from the list\n" + "update 1 /name help spongebob\n"
                 + "\n"
-                + "update *task number* /date *task name*: (only for deadline or event tasks!) "
+                + "update *task number* /date *task date*: (only for deadline or event tasks!) "
                 + "updates the date and time of the task with that number from the list\n"
                 + "update 1 /date 2020-02-20 1200\n"
                 + "\n"
