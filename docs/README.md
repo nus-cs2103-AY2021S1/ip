@@ -7,14 +7,12 @@ Description of feature.
 
 ## Usage
 
-### `Keyword` - Describe action
-
-Describe action and its outcome.
+### `todo` - adds a Todo task
 
 Example of usage: 
 
-`keyword (optional arguments)`
+`todo_(task description)`
 
 Expected outcome:
 
-`outcome`
+`Poco has added (task description) to your list`
