@@ -296,14 +296,15 @@ public class UiManager implements UserInteractionUi, CommandInteractionUi {
                 + " delete [Task Number] - Deletes the task number\n"
                 + " \t(Specify in numeric format!) Eg: \"delete 3\"\n"
                 + " find [keyword] - Finds related Tasks containing the keyword\n"
-                + " sort [tag] - Sorts the tasks with the tag\n"
-                + "* SEE TASK INPUT INSTRUCTIONS FOR MORE ABOUT TASKS", false),
+                + " sort [tag] - Sorts the tasks with the tag", false),
 
         TaskInputInstruction("TASK INPUT INSTRUCTIONS:\n"
                 + "PLEASE AVOID USING THE VERTICAL BAR \"|\" IN YOUR TASK INSTRUCTIONS\n"
                 + " todo [Task Description] - Inputs a TODO DukeTask\n"
-                + " deadline [Task Description] /by [Date] - Inputs a DEADLINE DukeTask, using INDICATOR /by\n"
-                + " event [Task Description] /at [Date] - Inputs an EVENT DukeTask, using INDICATOR /at\n"
+                + " deadline [Task Description] /by [Date]\n"
+                + " \tInputs a DEADLINE DukeTask, using INDICATOR /by\n"
+                + " event [Task Description] /at [Date]\n"
+                + " \tInputs an EVENT DukeTask, using INDICATOR /at\n"
                 + " sort [tag] - TAGS are: \"all\", \"deadline\" or \"event\"", false),
 
         TaskInputSpecification("TO NOTE:\n"
