@@ -158,6 +158,7 @@ Updates the details of an existing task being managed by Clippy. Suppose you mad
 ### Usage
 Example of usage:
 * `event birthday party /at 25 Nov 1-4pm` <br> `update 1 19th birthday party` <br> updates the description of the 1st task in the list to 19th birthday party.
+
 Expected outcome:
 
 ![todoEO](./UG%20images/update%201%20EO.png)
