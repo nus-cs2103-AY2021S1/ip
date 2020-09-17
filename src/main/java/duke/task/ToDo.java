@@ -1,3 +1,5 @@
+package duke.task;
+
 /**
  * Represents a "to do" task with a description.
  */
@@ -7,7 +9,7 @@ public class ToDo extends Task {
     }
 
     @Override
-    protected String toData() {
+    public String toData() {
         return "T | " + super.toData();
     }
 

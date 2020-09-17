@@ -1,3 +1,5 @@
+import duke.Duke;
+
 import java.io.IOException;
 
 import javafx.application.Application;

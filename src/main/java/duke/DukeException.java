@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * Represents an exception that is thrown by duke.
  */

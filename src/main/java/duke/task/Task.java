@@ -1,3 +1,5 @@
+package duke.task;
+
 /**
  * Represents a task with a description and a boolean.
  */
@@ -14,11 +16,11 @@ public class Task {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
-    protected String getDescription() {
+    public String getDescription() {
         return description;
     }
 
-    protected void makeDone() {
+    public void makeDone() {
         isDone = true;
     }
 
@@ -26,7 +28,7 @@ public class Task {
         return description.contains(keyword);
     }
 
-    protected String toData() {
+    public String toData() {
         String done = isDone ? "1" : "0";
         return done + " | " + description;
     }

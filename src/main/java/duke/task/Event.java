@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.DukeException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -18,7 +22,7 @@ public class Event extends Task {
     }
 
     @Override
-    protected String toData() {
+    public String toData() {
         return "E | " + super.toData() + " | " + at;
     }
 
