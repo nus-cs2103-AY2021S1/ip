@@ -47,7 +47,7 @@ public enum Commands {
     }, TAG {
         @Override
         public String toString() {
-            return "Tag task --> #<tag name> <task no.>\n";
+            return "Tag task --> #<tag name (without spacing)> <task no.>\n";
         }
     }, TODO {
         @Override

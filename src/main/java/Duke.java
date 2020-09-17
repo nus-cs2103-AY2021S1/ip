@@ -46,16 +46,25 @@ public class Duke {
      */
     public String start() {
         ByteArrayOutputStream output = new ByteArrayOutputStream();
-        PrintStream printStream = new PrintStream(output);
-        PrintStream old = System.out;
-        System.setOut(printStream);
+        PrintStream stream = initializePrintStream(output);
 
         printGreeting();
         this.parser.parseSavedTasks();
 
-        System.out.flush();
-        System.setOut(old);
+        setOutput(stream);
         return output.toString();
+    }
+
+    private PrintStream initializePrintStream(ByteArrayOutputStream outputStream) {
+        PrintStream printStream = new PrintStream(outputStream);
+        PrintStream output = System.out;
+        System.setOut(printStream);
+        return output;
+    }
+
+    private void setOutput(PrintStream stream) {
+        System.out.flush();
+        System.setOut(stream);
     }
 
     /**

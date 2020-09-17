@@ -78,7 +78,7 @@ public class TaskList {
         int currentIndex = 1;
         System.out.println("Oohhh look at me! Here are the matching tasks in your list:");
         for (Task task : this.taskList) {
-            if (task.getDescription().contains(toFind)) {
+            if (task.getDescription().contains(toFind) || task.searchTag(toFind)) {
                 System.out.println(currentIndex + "." + task.toString());
                 currentIndex++;
             }

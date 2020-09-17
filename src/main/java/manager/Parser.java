@@ -151,7 +151,7 @@ public class Parser {
 
         if (isNumberedCommand) {
             int index = Integer.parseInt(words[1]) - 1;
-            boolean isValidNumber = index < this.converter.getTotalTasks();
+            boolean isValidNumber = index < this.converter.getTotalTasks() && index >= 0;
 
             if (!isValidNumber) {
                 throw new InvalidNumberException("Oohhh, the number entered is invalid, but don't worry! "

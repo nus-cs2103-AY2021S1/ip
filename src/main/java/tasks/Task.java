@@ -65,17 +65,22 @@ public abstract class Task {
      * @return the string consisting of the done status and description
      */
     public String toString() {
-        String tags = "";
-        for (String tag : this.tags) {
-            if (tag == null || tag.equals("")) {
-                continue;
-            }
-            tags = tags + "#" + tag + " ";
-        }
+        String tags = createTagString();
         return tags.equals("")
                 ? "[" + getStatusIcon() + "] " + this.description
                 : "[" + getStatusIcon() + "] " + this.description
                         + " (" + tags.substring(0, tags.length() - 1) + ")";
+    }
+
+    private String createTagString() {
+        StringBuilder tags = new StringBuilder();
+        for (String tag : this.tags) {
+            if (tag == null || tag.equals("")) {
+                continue;
+            }
+            tags.append("#").append(tag).append(" ");
+        }
+        return tags.toString();
     }
 
     /**
@@ -85,6 +90,11 @@ public abstract class Task {
      */
     public String databaseString() {
         String doneStatus = this.isDone ? "true" : "false";
+        String tags = createTagsDataString();
+        return doneStatus + " | " + this.description + " | " + tags;
+    }
+
+    private String createTagsDataString() {
         StringBuilder tags = new StringBuilder();
         for (String tag : this.tags) {
             if (tag == null || tag.equals("")) {
@@ -92,14 +102,28 @@ public abstract class Task {
             }
             tags.append(tag).append(" ");
         }
-        return doneStatus + " | " + this.description + " | " + tags;
+        return tags.toString();
     }
 
     /**
      * Adds a tag to the task.
-     * @param tagName
+     * @param tagName as provided
      */
     public void tagTask(String tagName) {
         this.tags.add(tagName);
+    }
+
+    /**
+     * Searches a tag by the tag name.
+     * @param name as specified tag name
+     * @return true if tag contains a part of specified tag name, else false.
+     */
+    public boolean searchTag(String name) {
+        for (String tag : this.tags) {
+            if (tag.contains(name)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
