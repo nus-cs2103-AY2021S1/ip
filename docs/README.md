@@ -3,7 +3,7 @@
 ## Getting Started
 
 1. Ensure that you have Java `11` or above installed on your device.
-2. You can find the latest version of Mattbot [here](provide link later).
+2. You can find the latest version of mattbot [here](provide link later).
 3. Download the `mattbot.jar` file and open to start the application.
 4. Run the jar file.
 5. Enter commands into the textbox and click `Send`.
