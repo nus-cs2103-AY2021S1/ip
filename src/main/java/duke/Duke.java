@@ -17,7 +17,7 @@ class Duke {
      *
      * @param filePath File path to load history, and to save history.
      */
-    Duke(String filePath) {
+    Duke(String filePath) { 
         ui = new Ui();
         storage = new Storage(filePath);
         try {
