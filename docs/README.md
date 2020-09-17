@@ -3,6 +3,13 @@
 ## Introduction
 Duke is a Task Manager application which helps you to organize and set up your to-do tasks, events and deadlines.
 
+## Quick Start  
+  1. Ensure you have Java `11` or above installed in your Computer.
+  2. Download the latest `duke-v0.2.jar` from [here](https://github.com/ducbinh2611/ip/releases/tag/A-Release).
+  3. Copy the file to the folder you want to use as the home folder for your Duke.
+  4. Double-click `duke-v0.2.jar` to start the application. The GUI should appear with a greeting  
+    • If you encounter `duke.txt file does not exist` error. Close the application and run it again, the error will be fixed.
+
 ## Features 
 Overview of available features:  
   * `list`  
