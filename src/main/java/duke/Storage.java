@@ -54,6 +54,8 @@ public class Storage {
             file.getParentFile().mkdirs();
             try {
                 file.createNewFile();
+
+                assert file.exists();
             } catch (IOException e) {
                 Ui.displayMessage(e.getMessage());
             }
@@ -87,6 +89,7 @@ public class Storage {
                         }
                     }
                 }
+                assert file.exists();
             } catch (IndexOutOfBoundsException e) {
                 Ui.displayMessage("Sorry your duke.txt file is corrupt!");
             } catch (Exception e) {
