@@ -17,7 +17,7 @@ public class Deadlines extends Task {
      * @param name name of deadline
      * @param dateTime date and time of deadline in the form of a string
      */
-    Deadlines(String name, String dateTime) {
+    Deadlines(String name, String dateTime) throws DukeException {
         super(name, dateTime, "");
     }
 

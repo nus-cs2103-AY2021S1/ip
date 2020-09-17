@@ -80,7 +80,7 @@ public class Storage {
      * @throws DukeException when it is unable to load file from file path
      */
     public List<Task> loadFile() throws DukeException {
-        Scanner sc = null;
+        Scanner sc;
         try {
             sc = new Scanner(path);
         } catch (IOException e) {
@@ -89,6 +89,7 @@ public class Storage {
         List<Task> tasks = new ArrayList<>();
         while (sc.hasNextLine()) {
             String type = sc.nextLine();
+            assert !type.isBlank();
             String done = sc.nextLine();
             String name = sc.nextLine();
             if (type.equals("ToDo")) {

@@ -17,7 +17,7 @@ public class Events extends Task {
      * Event constructor to initialize a event object with the name and time
      * @param name name of event
      */
-    Events(String name, String startDateTime, String endDateTime) {
+    Events(String name, String startDateTime, String endDateTime) throws DukeException {
         super(name, startDateTime, endDateTime);
     }
 

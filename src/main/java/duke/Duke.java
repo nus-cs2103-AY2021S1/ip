@@ -52,55 +52,90 @@ public class Duke {
         String[] inputArray = input.split(" ", 2);
         String userCommand = inputArray[0];
         switch (userCommand) {
-        case "bye":
-            output += ui.bye();
-            return output;
-        case "list":
-            output += ui.printList(taskList.getTasks());
-            return output;
-        case "done":
-            output += ui.doneTask(taskList.done(Integer.parseInt(inputArray[1])));
-            output += ui.listCount(taskList.countList());
-            storage.saveFile(taskList.getTasks());
-            return output;
-        case "todo":
-            output += ui.addTask(taskList.addTodo(inputArray[1]));
-            output += ui.listCount(taskList.countList());
-            storage.saveFile(taskList.getTasks());
-            return output;
-        case "deadline":
-            output += ui.addTask(taskList.addDeadline(inputArray[1]));
-            output += ui.listCount(taskList.countList());
-            storage.saveFile(taskList.getTasks());
-            return output;
-        case "event":
-            output += ui.addTask(taskList.addEvent(inputArray[1]));
-            output += ui.listCount(taskList.countList());
-            storage.saveFile(taskList.getTasks());
-            return output;
-        case "delete":
-            output += ui.deleteTask(taskList.delete(inputArray[1]));
-            output += ui.listCount(taskList.countList());
-            storage.saveFile(taskList.getTasks());
-            return output;
-        case "find":
-            output += ui.foundWord(taskList.findWord(inputArray[1]));
-            return output;
-        case "reschedule":
-            String[] specificationsArray = inputArray[1].split(" ",2);
-            output += ui.rescheduledTask(taskList.rescheduleTask(specificationsArray[0],specificationsArray[1]));
-            storage.saveFile(taskList.getTasks());
-            return output;
-        case "snooze":
-            output += ui.rescheduledTask(taskList.rescheduleTask(inputArray[1],"1"));
-            storage.saveFile(taskList.getTasks());
-            return output;
-        case "help":
-            output += ui.helpString();
-            return output;
-        default:
-            throw new DukeException("Sorry I don't know what you mean. \n" +
-                    "Type help to see the list of commands available!");
+            case "":
+                throw new DukeException("Avoid starting commands with blank spaces!");
+            case "bye":
+                output += ui.bye();
+                Main.closeDuke();
+                return output;
+            case "list":
+                output += ui.printList(taskList.getTasks());
+                return output;
+            case "done":
+                if (inputArray.length == 2) {
+                    output += ui.doneTask(taskList.done(Integer.parseInt(inputArray[1])));
+                    output += ui.listCount(taskList.countList());
+                    storage.saveFile(taskList.getTasks());
+                    return output;
+                } else {
+                    throw new DukeException("Please specify the index of the task to set as done!");
+                }
+            case "todo":
+                if (inputArray.length == 2) {
+                    output += ui.addTask(taskList.addTodo(inputArray[1]));
+                    output += ui.listCount(taskList.countList());
+                    storage.saveFile(taskList.getTasks());
+                    return output;
+                } else {
+                    throw new DukeException("Please key in the name of the todo!");
+                }
+            case "deadline":
+                if (inputArray.length == 2) {
+                    output += ui.addTask(taskList.addDeadline(inputArray[1]));
+                    output += ui.listCount(taskList.countList());
+                    storage.saveFile(taskList.getTasks());
+                    return output;
+                } else {
+                    throw new DukeException("Please key in more information about the deadline!");
+                }
+            case "event":
+                if (inputArray.length == 2) {
+                    output += ui.addTask(taskList.addEvent(inputArray[1]));
+                    output += ui.listCount(taskList.countList());
+                    storage.saveFile(taskList.getTasks());
+                    return output;
+                } else {
+                    throw new DukeException("Please key in more information about the event!");
+                }
+            case "delete":
+                if (inputArray.length == 2) {
+                    output += ui.deleteTask(taskList.delete(inputArray[1]));
+                    output += ui.listCount(taskList.countList());
+                    storage.saveFile(taskList.getTasks());
+                    return output;
+                } else {
+                    throw new DukeException("Please specify the index of the task to delete!");
+                }
+            case "find":
+                if (inputArray.length == 2) {
+                    output += ui.foundWord(taskList.findWord(inputArray[1]));
+                    return output;
+                } else {
+                    throw new DukeException("Please specify the word you want to search for!");
+                }
+            case "reschedule":
+                try {
+                    String[] specificationsArray = inputArray[1].split(" ", 2);
+                    output += ui.rescheduledTask(taskList.rescheduleTask(specificationsArray[0], specificationsArray[1]));
+                    storage.saveFile(taskList.getTasks());
+                    return output;
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    throw new DukeException("Please specify the index and a new date and time!");
+                }
+            case "snooze":
+                if (inputArray.length == 2) {
+                    output += ui.rescheduledTask(taskList.snoozeTask(inputArray[1]));
+                    storage.saveFile(taskList.getTasks());
+                    return output;
+                } else {
+                    throw new DukeException("Please specify the index of task and number of hours to snooze!");
+                }
+            case "help":
+                output += ui.helpString();
+                return output;
+            default:
+                throw new DukeException("Sorry I don't know what you mean. \n" +
+                        "Type help to see the list of commands available!");
         }
     }
 }
