@@ -12,22 +12,26 @@ public class TaskListTest {
     @Test
     public void doneTask_success() throws Exception {
         ArrayList<Task> tasks = new ArrayList<>();
+        ArrayList<Integer> taskIndexes = new ArrayList<>();
         tasks.add(new Todo("read book"));
+        taskIndexes.add(1);
         TaskList taskList = new TaskList(tasks);
-        assertTrue(taskList.doneTask(1).isDone);
+        assertTrue(taskList.doneTasks(taskIndexes).get(0).isDone);
     }
 
     @Test
     public void doneTask_taskIndexOutOfBounds_exceptionThrown() {
         ArrayList<Task> tasks = new ArrayList<>();
+        ArrayList<Integer> taskIndexes = new ArrayList<>();
         tasks.add(new Todo("read book"));
+        taskIndexes.add(2);
         TaskList taskList = new TaskList(tasks);
         try {
-            assertTrue(taskList.doneTask(2).isDone);
+            assertTrue(taskList.doneTasks(taskIndexes).get(1).isDone);
             fail();
         } catch (Exception e) {
             assertEquals(
-                    "☹ OOPS!!! Please enter a valid task index to be marked as done.", 
+                    "OOPS!!! Please enter a valid task index or task indexes to be marked as done.", 
                     e.getMessage());
         }
     }
@@ -35,23 +39,27 @@ public class TaskListTest {
     @Test
     public void deleteTask_success() throws Exception {
         ArrayList<Task> tasks = new ArrayList<>();
+        ArrayList<Integer> taskIndexes = new ArrayList<>();
         tasks.add(new Todo("read book"));
+        taskIndexes.add(1);
         TaskList taskList = new TaskList(tasks);
-        taskList.deleteTask(1);
+        taskList.deleteTasks(taskIndexes);
         assertTrue(taskList.getMyTaskList().isEmpty());
     }
 
     @Test
     public void deleteTask_taskIndexOutOfBounds_exceptionThrown() {
         ArrayList<Task> tasks = new ArrayList<>();
+        ArrayList<Integer> taskIndexes = new ArrayList<>();
         tasks.add(new Todo("read book"));
+        taskIndexes.add(2);
         TaskList taskList = new TaskList(tasks);
         try {
-            taskList.deleteTask(2);
+            taskList.deleteTasks(taskIndexes);
             fail();
         } catch (Exception e) {
             assertEquals(
-                    "☹ OOPS!!! Please enter a valid task index to be deleted.",
+                    "OOPS!!! Please enter a valid task index or task indexes todo to be deleted.",
                     e.getMessage());
         }
     }

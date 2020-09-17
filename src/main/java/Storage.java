@@ -31,7 +31,7 @@ public class Storage {
             //noinspection ResultOfMethodCallIgnored
             file.createNewFile();
         } catch (IOException e) {
-            throw new DukeException("☹ OOPS!!! There was an error creating a save file.");
+            throw new DukeException("OOPS!!! There was an error creating a save file.");
         }
         assert file.exists() : "File should exist.";
         try {
@@ -43,7 +43,7 @@ public class Storage {
             }
             return taskList;
         } catch (FileNotFoundException | DukeException e) {
-            throw new DukeException("☹ OOPS!!! There was an error while loading the file");
+            throw new DukeException("OOPS!!! There was an error while loading the file");
         }
     }
 
@@ -55,21 +55,26 @@ public class Storage {
      * @throws DukeException if input string is in the wrong format.
      */
     private Task getTask(String taskString) throws DukeException {
+        final int DESCRIPTION_INDEX = 8;
+        final int IS_DONE_INDEX = 4;
         try {
             Task currentTask = null;
             if (taskString.startsWith("T")) {
-                currentTask = new Todo(taskString.substring(8));
+                currentTask = new Todo(taskString.substring(DESCRIPTION_INDEX));
             } else {
-                int index = taskString.lastIndexOf(" |");
-                String dateTime = taskString.substring(index + 3);
+                int timeIndex = taskString.lastIndexOf(" |");
+                String dateTime = taskString.substring(timeIndex + 3);
                 if (taskString.startsWith("D")) {
-                    currentTask = new Deadline(taskString.substring(8, index), LocalDate.parse(dateTime));
+                    currentTask = new Deadline(taskString.substring(DESCRIPTION_INDEX, timeIndex),
+                            LocalDate.parse(dateTime));
                 } else if (taskString.startsWith("E")) {
-                    currentTask = new Event(taskString.substring(8, index), LocalDate.parse(dateTime));
+                    currentTask = new Event(taskString.substring(DESCRIPTION_INDEX, timeIndex),
+                            LocalDate.parse(dateTime));
                 } 
             }
             assert currentTask != null : "Invalid task description.";
-            if (taskString.charAt(4) == '1') {
+            
+            if (taskString.charAt(IS_DONE_INDEX) == '1') {
                 currentTask.markAsDone();
             }
             return currentTask;
@@ -93,7 +98,7 @@ public class Storage {
             }
             fileWriter.close();
         } catch (IOException e) {
-            throw new DukeException("☹ OOPS!!! Unable to update tasks.");
+            throw new DukeException("OOPS!!! Unable to update tasks.");
         }
     }
 }

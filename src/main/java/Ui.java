@@ -1,5 +1,8 @@
 import java.util.ArrayList;
 
+/**
+ * Encapsulates the UI object, in charge of interacting with the user.
+ */
 public class Ui {
 
     private static final String LOGO =

@@ -18,11 +18,11 @@ public class Parser {
 
 
     /**
-     * Returns a task index for a done or delete user input.
+     * Returns a list of task indexes for a done or delete user input.
      *
      * @param input       user input.
      * @param commandType type of command, either a done or delete.
-     * @return an integer representing a task index.
+     * @return an arrayList of integer representing the task indexes.
      * @throws DukeException if input has an invalid format.
      */
     private static ArrayList<Integer> getTaskIndexes(String input, String commandType) throws DukeException {
@@ -47,6 +47,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the given string of indexes into an arrayList of indexes.
+     * 
+     * @param taskIndexString string containing indexes separated by spaces.
+     * @param taskIndexes arrayList containing the indexes.
+     * @return an arrayList of integers.
+     * @throws NumberFormatException if input string has an invalid format.
+     */
     private static ArrayList<Integer> parseIndexString(
             String taskIndexString, ArrayList<Integer> taskIndexes) throws NumberFormatException {
         

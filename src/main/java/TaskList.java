@@ -2,13 +2,16 @@ import java.util.ArrayList;
 import java.util.function.Consumer;
 
 /**
- * Encapsulates a taskList class, contains a list of tasks and supports operations that adds, deletes or
+ * Encapsulates a taskList object, contains a list of tasks and supports operations that adds, deletes or
  * finds tasks, or marks tasks as done.
  */
 public class TaskList {
 
+    /**
+     * Represents the list of tasks.
+     */
     private final ArrayList<Task> myTaskList;
-
+    
     TaskList() {
         myTaskList = new ArrayList<>();
     }
@@ -28,7 +31,15 @@ public class TaskList {
     public void addNewTask(Task newTask) {
         myTaskList.add(newTask);
     }
-    
+
+    /**
+     * Updates the tasks with the given indexes and function.
+     * 
+     * @param taskIndexes indexes of tasks to be updated.
+     * @param updateTask function used to update a task, either mark as done or delete.
+     * @return an arrayList of the updated tasks.
+     * @throws IndexOutOfBoundsException if task indexes given are out of range.
+     */
     ArrayList<Task> updateTasks(ArrayList<Integer> taskIndexes,
                                 Consumer<Task> updateTask) throws IndexOutOfBoundsException {
         

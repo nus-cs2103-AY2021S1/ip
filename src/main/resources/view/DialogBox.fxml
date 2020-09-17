@@ -9,7 +9,7 @@
     <children>
         <Label fx:id="dialog" text="Label" textFill="BLUE" wrapText="true">
          <padding>
-            <Insets right="20.0" />
+            <Insets left="20.0" right="20.0" />
          </padding></Label>
         <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" />
     </children>

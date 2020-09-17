@@ -19,7 +19,7 @@ public class AddCommand extends Command {
      * @param ui ui used to show the added task.
      * @param storage storage used to store the taskList.
      * @return a string representation of the added task.
-     * @throws DukeException if updateTask fails.
+     * @throws DukeException if updateTasks fails.
      */
     @Override
     String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
