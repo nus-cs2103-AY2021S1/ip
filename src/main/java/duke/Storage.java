@@ -1,6 +1,6 @@
 package duke;
 
-import duke_exceptions.IllegalTaskTypeException;
+import duke.exceptions.IllegalTaskTypeException;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -13,7 +13,7 @@ import java.util.Scanner;
  * Represents a storage and deals with loading tasks from
  * the file and saving tasks in the file.
  */
-@SuppressWarnings("ALL")
+
 public class Storage {
     private File file;
     Storage(Path path) {

@@ -1,4 +1,4 @@
-package duke_exceptions;
+package duke.exceptions;
 
 /**
  * Represents a Delete Empty Body Exception. A <code>Delete EmptyBody

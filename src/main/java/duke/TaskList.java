@@ -32,7 +32,9 @@ public class TaskList {
         numberOfDoneTasks = 0;
     }
 
-    /** Sets number of done tasks as input i. */
+    /** Sets number of done tasks as input i.
+     * @param i the new number of done tasks
+     */
     public static void setNumberOfDoneTasks(int i) {
         numberOfDoneTasks = i;
     }
@@ -42,7 +44,9 @@ public class TaskList {
         numberOfDoneTasks++;
     }
 
-    /** Sets last log in data as date. */
+    /** Sets last log in data as date.
+     * @param date the date to be set as last log in date
+     */
     public static void setLastLoginDate(LocalDate date) {
         lastLoginDate = date;
     }

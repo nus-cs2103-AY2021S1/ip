@@ -1,4 +1,4 @@
-package duke_exceptions;
+package duke.exceptions;
 
 /**
  * Represents an Invalid Done Exception . An <code>Invalid Done Exception

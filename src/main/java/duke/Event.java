@@ -51,7 +51,7 @@ public class Event extends Task {
     }
 
     /**
-     * Returns the message of this event
+     * Returns the message of this event.
      * @return message
      */
     @Override

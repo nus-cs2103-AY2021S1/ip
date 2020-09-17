@@ -5,6 +5,7 @@ package duke;
  * A <code>Deadline</code> object corresponds to
  * a task associated a date as deadline
  */
+
 public class Deadline extends Task {
     /** Constructor.
      *  Initialises message.

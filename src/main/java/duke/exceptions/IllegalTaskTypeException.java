@@ -1,4 +1,4 @@
-package duke_exceptions;
+package duke.exceptions;
 
 /**
  * Represents an Illegal Task Type Exception. An <code>Illegal Task Type

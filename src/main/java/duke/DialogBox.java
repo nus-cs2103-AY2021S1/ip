@@ -9,12 +9,19 @@ import javafx.scene.layout.HBox;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 
+@SuppressWarnings("CheckStyle")
 public class DialogBox extends HBox {
     @SuppressWarnings("CanBeFinal")
-    protected Label text;
+    // The label containing text to be added in DialogBox.
+    private Label text;
 
-    public DialogBox(Label l, Circle c) {
-        text = l;
+    /** Constructor for DialogBox.
+     *
+     * @param label label containing text
+     * @param circle circle-shaped image
+     */
+    public DialogBox(Label label, Circle circle) {
+        text = label;
 
         @SuppressWarnings("SpellCheckingInspection")
         Font font = new Font("Baskerville", 14);
@@ -25,16 +32,25 @@ public class DialogBox extends HBox {
         text.setWrapText(true);
 
         this.setAlignment(Pos.TOP_RIGHT);
-        this.getChildren().addAll(text, c);
+        this.getChildren().addAll(text, circle);
     }
 
     /**
-     * Flips the dialog box such that the ImageView is on the left and text on the right.
+     * Flips the dialog box such that the ImageView is on the left and
+     * text on the right.
      */
     protected void flip() {
         this.setAlignment(Pos.TOP_LEFT);
-        ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
+        ObservableList<Node> tmp = FXCollections
+                .observableArrayList(this.getChildren());
         FXCollections.reverse(tmp);
         this.getChildren().setAll(tmp);
+    }
+
+    /**
+     * Returns the label instance named text;
+     */
+    protected Label getText() {
+        return text;
     }
 }

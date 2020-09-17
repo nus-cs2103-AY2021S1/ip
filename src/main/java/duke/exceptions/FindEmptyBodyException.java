@@ -1,4 +1,4 @@
-package duke_exceptions;
+package duke.exceptions;
 
 /**
  * Represents a Find Empty Body Exception. A <code>Find EmptyBody

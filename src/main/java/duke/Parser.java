@@ -1,6 +1,6 @@
 package duke;
 
-import duke_exceptions.*;
+import duke.exceptions.*;
 
 public class Parser {
     // constant SPACE and LINE for format purposes
@@ -23,7 +23,6 @@ public class Parser {
     private final int EXTRA = 1;
 
     // current command: the whole line
-    @SuppressWarnings("CanBeFinal")
     private String command;
 
     /**
@@ -47,6 +46,7 @@ public class Parser {
     /**
      * Returns the list message called by user input "list".
      *
+     * @param lst the task list to be handled
      * @return formatted list message
      */
     private String handleList(TaskList lst) {
@@ -57,13 +57,15 @@ public class Parser {
     /**
      * Returns a raw list without any formatting.
      *
+     * @param lst the task list to be printed
      * @return a raw list string
      */
     private String taskPrint(TaskList lst) {
         StringBuilder listContent = new StringBuilder();
         int counter = 1;
         for (Task task : lst.getLst()) {
-            listContent.append(INDENT).append(counter).append(".").append(task.print()).append("\n");
+            listContent.append(INDENT).append(counter).append(".")
+                    .append(task.print()).append("\n");
             counter++;
         }
         return listContent.toString();
@@ -73,6 +75,7 @@ public class Parser {
      * Returns a formatted list message.
      *
      * @param content the raw list
+     * @param message the opening statement for print a list
      * @return a formatted string of "content"
      */
     private String formatList(String content, String message) {
@@ -136,7 +139,7 @@ public class Parser {
     }
 
     /**
-     * Returns a response string for "done" command
+     * Returns a response string for "done" command.
      *
      * @param lst the task list
      * @param command the command to be processed
@@ -171,7 +174,7 @@ public class Parser {
     }
 
     /**
-     * Returns a response string for "delete" command
+     * Returns a response string for "delete" command.
      *
      * @param lst the task list
      * @param command the command to be processed
@@ -200,22 +203,25 @@ public class Parser {
         lst.delete(index);
 
         String messageDelete = "Noted. I've removed this task:\n";
-        return format(messageDelete + MORE_INDENT + task.print() + getListCountMessage(lst));
+        return format(messageDelete
+                + MORE_INDENT + task.print() + getListCountMessage(lst));
 
     }
 
     /**
-     * Returns a string listing all tasks in the task list
+     * Returns a string listing all tasks in the task list.
      *
      * @param lst the task list
      * @return a string listing all tasks in lst
      */
     private String getListCountMessage(TaskList lst) {
-        return "\n" + INDENT + "Now you have " + lst.size() + " task(s) in the list.";
+        return "\n" + INDENT + "Now you have " + lst.size()
+                + " task(s) in the list.";
     }
 
     /**
-     * Returns a response string listing all tasks containing the searching string
+     * Returns a response string
+     * listing all tasks containing the searching string.
      *
      * @param lst the task list
      * @param command the command to be processed
@@ -243,7 +249,7 @@ public class Parser {
     }
 
     /**
-     * Returns a response string for a new task command
+     * Returns a response string for a new task command.
      *
      * @param lst the task list
      * @param command the command to be processed
@@ -262,6 +268,7 @@ public class Parser {
                 return format(new DeadlineEmptyBodyException().toString());
             case E:
                 return format(new EventEmptyBodyException().toString());
+            default:
             }
             return format(new UnknownCommandException().toString());
         }
@@ -269,11 +276,12 @@ public class Parser {
         lst.addOfType(description, taskType);
         // a message to be printed when invoking a todo, event, or deadline
         String messageAdded = "Got it. I've added this task:\n";
-        return format(messageAdded + MORE_INDENT + getMostRecentTask(lst).print() + getListCountMessage(lst));
+        return format(messageAdded + MORE_INDENT
+                + getMostRecentTask(lst).print() + getListCountMessage(lst));
     }
 
     /**
-     * Returns the most recent task in the task list
+     * Returns the most recent task in the task list.
      *
      * @param lst the task list
      * @return the most recent task
@@ -292,7 +300,7 @@ public class Parser {
     }
 
     /**
-     * Returns respond message to be printed generated from user input
+     * Returns respond message to be printed generated from user input.
      *
      * @param lst the task list
      * @return respond message by Duke

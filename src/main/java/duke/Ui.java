@@ -35,6 +35,10 @@ public class Ui {
         }
     }
 
+    /** Returns hello message from duke and also sets up last log in
+     *  date and number of done tasks if necessary.
+     * @return a string response
+     */
     public static String sayHello() {
         LocalDate today = LocalDate.now();
         String messageHello = Parser.format("Hello! I'm Duke"
@@ -65,8 +69,12 @@ public class Ui {
         return messageHello;
     }
 
+    /** Returns a help list of all commands duke can recognise.
+     * @return list of commands
+     */
     public static String listOfCommands() {
-        String welcomeMessage = "      " + "Here are some magic spells I understand:";
+        String welcomeMessage = "      "
+                + "Here are some magic spells I understand:";
         String addCommand = INDENT + "todo <something>"
                 + INDENT + "event <something> /at yyyy-mm-dd"
                 + INDENT + "deadline <something> /by yyyy-mm-dd";
@@ -83,7 +91,11 @@ public class Ui {
                 + helpMessage;
     }
 
-
+    /** Returns the saved list content as a string.
+     *
+     * @param lst the saved task list
+     * @return the task list content
+     */
     public String getInitialList(TaskList lst) {
         return new Parser("list").getRespond(lst);
     }

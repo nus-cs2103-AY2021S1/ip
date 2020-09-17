@@ -1,4 +1,4 @@
-package duke_exceptions;
+package duke.exceptions;
 
 /**
  * Represents an Event Empty Body Exception. An <code>Event Empty Body

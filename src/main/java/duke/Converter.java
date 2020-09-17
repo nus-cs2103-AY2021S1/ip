@@ -1,6 +1,6 @@
 package duke;
 
-import duke_exceptions.IllegalTaskTypeException;
+import duke.exceptions.IllegalTaskTypeException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -42,6 +42,9 @@ public class Converter {
 
     /**
      * Returns a Task object specified by the input string.
+     * Since this method is ensured to be called properly
+     * (by implementation in class Parser),
+     * it will not invoke exception thrown and terminate the program.
      *
      * @param s input message string
      * @return a Task object

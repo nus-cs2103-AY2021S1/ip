@@ -1,4 +1,4 @@
-package duke_exceptions;
+package duke.exceptions;
 
 /**
  * Represents a Todo Empty Body Exception. A <code>Todo EmptyBody

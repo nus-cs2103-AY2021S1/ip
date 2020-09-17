@@ -10,16 +10,28 @@ import javafx.scene.shape.Circle;
 
 public class DialogBoxUser extends DialogBox {
 
-    public DialogBoxUser(Label l, Circle c) {
-        super(l, c);
-        Color col = Color.rgb(190,231,223);
+    /** Constructor for DialogBoxDuke.
+     *
+     * @param label label containing text
+     * @param circle circle-shaped image
+     */
+    public DialogBoxUser(Label label, Circle circle) {
+        super(label, circle);
+        Color col = Color.rgb(190, 231, 223);
         CornerRadii corn = new CornerRadii(10);
-        Insets insets = new Insets(-2,1,-2,0);
-        Background background = new Background(new BackgroundFill(col, corn, insets));
-        text.setBackground(background);
+        Insets insets = new Insets(-2, 1, -2, 0);
+        Background background = new Background(
+                new BackgroundFill(col, corn, insets));
+        getText().setBackground(background);
     }
 
-    public static DialogBox getUserDialog(Label l, Circle c) {
-        return new DialogBoxUser(l, c);
+    /** Creates a new User DialogBox.
+     *
+     * @param label label containing text
+     * @param circle circle-shaped image
+     * @return a User DialogBox
+     */
+    public static DialogBox getUserDialog(Label label, Circle circle) {
+        return new DialogBoxUser(label, circle);
     }
 }

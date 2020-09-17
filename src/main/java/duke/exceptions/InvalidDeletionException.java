@@ -1,4 +1,4 @@
-package duke_exceptions;
+package duke.exceptions;
 
 /**
  * Represents an Invalid Deletion Exception. An <code>Invalid Deletion

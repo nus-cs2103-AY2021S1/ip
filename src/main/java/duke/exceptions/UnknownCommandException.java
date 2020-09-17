@@ -1,4 +1,4 @@
-package duke_exceptions;
+package duke.exceptions;
 
 /**
  * Represents a Unknown Command Exception. A <code>Unknown Command
