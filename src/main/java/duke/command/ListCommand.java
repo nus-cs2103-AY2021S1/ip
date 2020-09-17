@@ -16,8 +16,4 @@ public class ListCommand implements Command {
         return false;
     }
 
-    @Override
-    public boolean isMassCommand() {
-        return false;
-    }
 }

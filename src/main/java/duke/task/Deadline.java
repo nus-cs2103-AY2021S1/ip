@@ -19,6 +19,11 @@ public class Deadline extends Task {
         this.deadline = deadline;
     }
 
+    public Deadline(String description, Priority p, LocalDate deadline) {
+        super(description, p, "D");
+        this.deadline = deadline;
+    }
+
     @Override
     public String getSaveFormat() {
         return super.getSaveFormat() + Storage.LINE + deadline;

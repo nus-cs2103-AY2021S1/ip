@@ -16,6 +16,7 @@ public class Ui {
     private static final String DASH = ("\u2500").repeat(5);
     private static final String GREETING = "Hello! I'm Duke \n"
             + "What can I do for you?";
+    private static final String TASK_PRIORITY_ADDED = "Got it. I've added a priority to this task: \n";
 
     private Scanner sc;
 
@@ -76,5 +77,7 @@ public class Ui {
         return rawInput.trim();
     }
 
-
+    public String displayTaskAddPriority(Task task) {
+        return printMessage(TASK_PRIORITY_ADDED + task.toString());
+    }
 }

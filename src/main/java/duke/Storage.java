@@ -11,6 +11,7 @@ import java.util.Scanner;
 import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
+import duke.task.Priority;
 import duke.task.Task;
 import duke.task.Todo;
 
@@ -86,16 +87,31 @@ public class Storage {
         boolean isDone = taskCharacteristics[1].equals("1");
         String type = taskCharacteristics[0];
         String desc = taskCharacteristics[2];
+        Priority priority = getPriority(taskCharacteristics[3]);
         switch (type) {
         case ("T"):
-            return new Todo(desc);
+            return new Todo(desc, priority);
         case ("D"):
-            return new Deadline(desc, LocalDate.parse(taskCharacteristics[3]));
+            return new Deadline(desc, priority, LocalDate.parse(taskCharacteristics[4]));
         case ("E"):
-            return new Event(desc, LocalDate.parse(taskCharacteristics[3]));
+            return new Event(desc, priority, LocalDate.parse(taskCharacteristics[4]));
         default:
             throw new DukeException(type,
                     DukeException.ExceptionType.UNEXPECTED_INPUT_IN_FILE);
+        }
+    }
+
+    private Priority getPriority(String priorityStr) {
+        System.out.println(priorityStr);
+        switch (priorityStr) {
+        case "HIGH":
+            return Priority.HIGH;
+        case "MEDIUM":
+            return Priority.MEDIUM;
+        case "LOW":
+            return Priority.LOW;
+        default:
+            return Priority.UNDEFINED;
         }
     }
 }

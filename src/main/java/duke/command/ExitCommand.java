@@ -19,11 +19,6 @@ public class ExitCommand implements Command {
     }
 
     @Override
-    public boolean isMassCommand() {
-        return false;
-    }
-
-    @Override
     public boolean equals(Object obj) {
         return obj == this || obj instanceof ExitCommand;
     }

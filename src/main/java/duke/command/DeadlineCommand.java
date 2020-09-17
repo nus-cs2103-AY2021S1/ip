@@ -34,8 +34,4 @@ public class DeadlineCommand implements Command {
         return false;
     }
 
-    @Override
-    public boolean isMassCommand() {
-        return false;
-    }
 }
