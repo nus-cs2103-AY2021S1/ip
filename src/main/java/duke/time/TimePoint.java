@@ -39,7 +39,6 @@ public class TimePoint {
 
         } catch (DukeInputException e) {
             // If failed, return a string-based representation of a timing instead
-            System.out.println(e.getMessage());
             return new TimePoint(timeInfoString);
         }
     }
