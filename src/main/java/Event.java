@@ -30,6 +30,7 @@ public class Event extends Task {
             throw new DukeEmptyDescException(TaskType.EVENT);
         } else {
             String at = eventParts[1];
+            System.out.println(at);
             if (Ui.isBlankString(at)) {
                 throw new DukeEmptyDescException(TaskType.EVENT);
             } else {
@@ -41,6 +42,11 @@ public class Event extends Task {
     @Override
     public String toString() {
         return String.format("[E]%s(at: %s)", super.toString(), at.format(Ui.dateTimeFormat));
+    }
+
+    @Override
+    public String toData() {
+        return String.format("[E]%s/at %s", super.toString(), at.format(Ui.dateTimeFormat));
     }
 
     @Override

@@ -21,7 +21,7 @@ public class DukeEmptyDescException extends DukeException {
 
     @Override
     public String toString() {
-        return super.toString() + String.format("You can't have an empty description for this %s task silly!",
+        return super.toString() + String.format("You can't have an empty description for this %s task silly!\n",
                 type);
     }
 

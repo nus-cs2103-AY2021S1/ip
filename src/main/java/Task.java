@@ -50,6 +50,14 @@ public class Task {
         return false;
     }
 
+    /**
+     * Converts the task into a string that can be read by the Storage class.
+     * @return Data representing the task.
+     */
+    public String toData() {
+        return toString();
+    }
+
     @Override
     public String toString() {
         return String.format("[%s] %s", getStatusIcon(), name);

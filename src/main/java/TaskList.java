@@ -99,7 +99,7 @@ public class TaskList extends ArrayList<Task> {
     public String toData() {
         StringBuilder list = new StringBuilder();
         for (Task task: this) {
-            list.append(task.toString()).append("\n");
+            list.append(task.toData()).append("\n");
         }
         return list.toString();
     }

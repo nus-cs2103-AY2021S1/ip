@@ -30,6 +30,7 @@ public class Deadline extends Task {
             throw new DukeEmptyDescException(TaskType.EVENT);
         } else {
             String by = deadlineParts[1];
+            System.out.println(by);
             if (Ui.isBlankString(by)) {
                 throw new DukeEmptyDescException(TaskType.EVENT);
             } else {
@@ -41,6 +42,11 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return String.format("[D]%s(by: %s)", super.toString(), by.format(Ui.dateTimeFormat));
+    }
+
+    @Override
+    public String toData() {
+        return String.format("[D]%s/by %s", super.toString(), by.format(Ui.dateTimeFormat));
     }
 
     @Override
