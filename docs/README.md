@@ -47,7 +47,7 @@ Example of usage:
 Expected outcome:
 ```
 Got it. I've added this task:
-    [T][X] buy bread
+    [T][✗] buy bread
 Now you have 4 task(s) in the list.
 ```
 
@@ -61,7 +61,7 @@ Example of usage:
 Expected outcome:
 ```
 Got it. I've added this task:
-    [E][X] midterm exam (at: 31-05-2020 12:00PM)
+    [E][✗] midterm exam (at: 31-05-2020 12:00PM)
 Now you have 5 task(s) in the list.
 ```
 
@@ -75,7 +75,7 @@ Example of usage:
 Expected outcome:
 ```
 Got it. I've added this task:
-    [D][X] submit draft (by: 17-09-2020 2:00PM)
+    [D][✗] submit draft (by: 17-09-2020 2:00PM)
 Now you have 6 task(s) in the list.
 ```
 
@@ -89,7 +89,7 @@ Example of usage:
 Expected outcome:
 ```
 Nice! I've marked this task as done:
-    [T][O] buy bread
+    [T][✓] buy bread
 ```
 
 ### `delete` - Delete a task
@@ -102,7 +102,7 @@ Example of usage:
 Expected outcome:
 ```
 Noted. I've removed this task:
-    [D][X] CS assignment (by: 04-08-2020 11:59PM)
+    [D][✗] CS assignment (by: 04-08-2020 11:59PM)
 Now you have 5 task(s) in the list.
 ```
 
@@ -116,11 +116,11 @@ Example of usage:
 Expected outcome:
 ```
 There are currently 5 tasks in your list.
-1. [T][O] return book
-2. [E][O] study session (at: 02-05-2020 6:00PM)
-3. [T][O] buy bread
-4. [E][X] midterm exam (at: 31-05-2020 12:00PM)
-5. [D][X] submit draft (by: 17-09-2020 2:00PM)
+1. [T][✓] return book
+2. [E][✓] study session (at: 02-05-2020 6:00PM)
+3. [T][✓] buy bread
+4. [E][✗] midterm exam (at: 31-05-2020 12:00PM)
+5. [D][✗] submit draft (by: 17-09-2020 2:00PM)
 ```
 
 ### `sort` - sort tasks
@@ -134,11 +134,11 @@ Expected outcome:
 ```
 Your list has been sorted.
 There are currently 5 tasks in your list.
-1. [T][O] buy bread
-2. [E][X] midterm exam (at: 31-05-2020 12:00PM)
-3. [T][O] return book
-4. [E][O] study session (at: 02-05-2020 6:00PM)
-5. [D][X] submit draft (by: 17-09-2020 2:00PM)
+1. [T][✓] buy bread
+2. [E][✗] midterm exam (at: 31-05-2020 12:00PM)
+3. [T][✓] return book
+4. [E][✓] study session (at: 02-05-2020 6:00PM)
+5. [D][✗] submit draft (by: 17-09-2020 2:00PM)
 ```
 
 ### `find` - find tasks based on keyword
@@ -151,7 +151,7 @@ Example of usage:
 Expected Outcome:
 ```
 Here are the task(s) that match the keyword given
-1. [T][O] buy bread
+1. [T][✓] buy bread
 ```
 
 ### `bye` - exit the bot
