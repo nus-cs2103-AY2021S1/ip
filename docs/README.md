@@ -97,3 +97,6 @@ Action | Format, Examples
 **Find** | `find [KEYWORD(s)]`<br> e.g. `find read book`
 **List** | `list`
  ***View List of Commands** | `help`
+ 
+ ## Acknowledgement
+ - Willy profile picture:  Taken with permission from cute ghost sticker pack designed by vibs. 
