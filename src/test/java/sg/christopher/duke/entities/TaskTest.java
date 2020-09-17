@@ -8,7 +8,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class TaskTest {
     @Test
     public void task_shouldBeCreatable() {
+        @SuppressWarnings("unused")
         Task task = new Task("mock desc");
+
         return;
     }
 

@@ -20,8 +20,11 @@ import javafx.scene.layout.HBox;
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
+    @SuppressWarnings("unused")
     @FXML
     private Label dialog;
+
+    @SuppressWarnings("unused")
     @FXML
     private ImageView displayPicture;
 
