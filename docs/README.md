@@ -7,6 +7,18 @@ can help you keep track of your tasks faster than traditional GUI apps.
 1. About this document
 2. Quick start
 3. Features
+    1. Viewing help : `help`
+    2. Adding a task: `todo`, `deadline`, `event`
+        1. Adding a todo task: `todo`
+        2. Adding a deadline task: `deadline`
+        3. Adding an event task: `event`
+    3. Listing all tasks : `list`
+    4. Updating a task : `update`
+    5. Marking a task as done: `done`
+    6. Searching for a task by keyword: `find`
+    7. Deleting a task : `delete`
+    8. Exiting the program : `bye`
+    9. Saving the data
 4. FAQ
 5. Command Summary
 
@@ -43,11 +55,11 @@ Example of usage:
 Expected outcome:
 
 `Got it. I've added this task:` <br>
-`[T][X] exercise at the gym` <br>
+`[T][✗] exercise at the gym` <br>
 `Now you have 1 task in the list` <br>
 
 `Got it. I've added this task:` <br>
-`[T][X] visit the theme park` <br>
+`[T][✗] visit the theme park` <br>
 `Now you have 2 tasks in the list` <br>
 
 ### Adding a deadline task: `deadline`
@@ -93,28 +105,100 @@ Shows a list of all tasks being managed by Clippy.
 
 `list`
 
-### Adding an event task: `event`
-Adds an event task for Clippy to keep track of. You should add a task as an event when the task occurs 
-at a specific date/time period.
+### Updating a task: `update`
+Updates the details of an existing task being managed by Clippy. Suppose you made a mistake when entering the description of an event. You can use `update` to edit the event’s description.
 
 #### Format
 
-`event <task description> /at <date/time period>`
-NOTE: You do not have to follow any format for `<date/time period>`.
+`update <index> <new task description> [/by|/at <new time/date>] `
+
+* Updates the task at the specified <index>. 
+* The index refers to the index number shown in the displayed tasks list after using the list command. 
+* The index must be a positive integer 1, 2, 3, …​
+* Existing description will be updated to the input description.
+* Optional: `/by` or `/at` command can be added at the end, followed by <new date/time>, if you want to update the description and date/time of a deadline or event task.
+* NOTE:
+  * A todo task does not have a date/time and the /by or /at command cannot be used when updating a todo
+  * Use `/by` command when the task is a deadline
+  * Use `/at` command when the task is an event
+
 #### Usage
 Example of usage:
-* `event java workshop /at Tuesday 6-7pm`
+* `update 1 19th birthday party` updates the description of the 1st task in the list to 19th birthday party.
+* `update 1 19th birthday party /at 25 Nov 5-10pm` updates the description and date/time of the 1st task in the list to 19th birthday party at 25 Nov 5-10pm.
 
-Expected outcome:
+### Marking a task as done: `done`
+Marks a task as done when you have completed the task. This helps you to keep track of which tasks are done and not done.
 
-`Got it. I've added this task:` <br>
-`[T][X] exercise at the gym` <br>
-`Now you have 1 task in the list` <br>
+#### Format
+
+`done <index>`
+
+* Marks the task at the specified <index> as done. 
+* The index refers to the index number shown in the displayed tasks list after using the list command. 
+* The index must be a positive integer 1, 2, 3, …​
+* Clippy will change the status icon of the specified task from [✗] to [✓]
 
 
+#### Usage
+Example of usage:
+* 'done 2' marks the 2nd task in the list as completed
+
+### Searching for a task by keyword: `find`
+Finds tasks whose description contains the given keyword.
+
+#### Format
+
+`find <keyword>`
+
+* The search is case-sensitive. e.g. if ‘exercise’ tasks exists,  find Exercise will not be able to find this task. find exercise will return the task.
+* Searches through only the description of tasks.
+* Words that contain the keyword as a prefix will be matched e.g. exer will match exercise
+* All tasks matching the keyword prefix will be returned
+
+#### Usage
+Example of usage:
+* `find workshop` returns 2 tasks with description ‘java workshop’ and ‘python workshop’
+
+### Deleting a task: `delete`
+Deletes the specified task from Clippy.
+
+#### Format
+
+`delete <index>`
+
+* Deletes the task at the specified index.
+* The index refers to the index number shown in the displayed tasks list after using the list command. 
+* The index must be a positive integer 1, 2, 3, …​
+
+#### Usage
+Example of usage:
+* `list` followed by `delete 2` deletes the 2nd task in the task list.
+
+### Exiting the program: `bye`
+Exits the program.
+
+#### Format
+
+`bye`
+
+### Saving the data
+
+Clippy’s data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 
+## FAQ
+Q: How do I transfer my data to another Computer?
 
-
+A: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Clippy home folder.
 
 ## Command Summary
+Action | Format, Example usage
+----- | ------
+Add | `todo <task description>` <br> `deadline <task description> /by <YYYY-MM-DD>` <br> `event <task description> /at <date/time period>` <br> e.g. `event java workshop​ /at Tuesday 6-7pm`
+List | `list`
+Update | `update <task index> <new task description> [/by (OR) /at <new time/date>]` <br> e.g. `update 1 19th birthday party /at 25 Nov 5-10pm`
+Mark as done | `done <index>` <br> e.g. `done 2`
+Find | `find <keyword>` <br> e.g. `find workshop`
+Delete | `delete <index>` <br> e.g. `delete 5`
+Help | `help`
