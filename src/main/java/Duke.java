@@ -77,12 +77,19 @@ public class Duke {
         }
     }
 
+<<<<<<< HEAD
     /**
      * Parser class deals with making sense of user command.
      */
     public static class Parser {
         private final String userInput;
         private final TaskList savedTaskList;
+=======
+    public static void main (String[]args) throws DukeException {
+        new Duke("listStore.ser").run("Hello");
+    }
+     
+>>>>>>> branch-A-Assertions
 
         Parser(String nextLine, TaskList inputs) {
             this.userInput = nextLine;
@@ -238,7 +245,11 @@ public class Duke {
         }
 
         /**
+<<<<<<< HEAD
          * Saves TaskList in a file which is based on the filepath in the Storage Class.
+=======
+         * Saves tasks in file specified by the filepath.
+>>>>>>> branch-A-Assertions
          *
          * @param list of input tasks to be saved
          * @catch IOException
@@ -302,8 +313,12 @@ public class Duke {
         }
 
         /**
+<<<<<<< HEAD
          * Identifies task specified by the user and invokes taskDone() method from Input class to mark task as done.
          * Saves the resulting list to a hard disk.
+=======
+         * Marks task, as specified by user, as done.
+>>>>>>> branch-A-Assertions
          *
          * @return A string representing Duke's response to be shown to user
          * @param nextLine representing user input
@@ -327,8 +342,12 @@ public class Duke {
         }
 
         /**
+<<<<<<< HEAD
          * Identifies task specified by the user and removes the task from the list.
          * Saves the resulting list to the hard disk.
+=======
+         * removes task, as specified by the user, from list.
+>>>>>>> branch-A-Assertions
          *
          * @return A string representing Duke's response to be shown to user
          * @param nextLine, represents user input
@@ -355,8 +374,12 @@ public class Duke {
         }
 
         /**
+<<<<<<< HEAD
          * Adds a to-do object to the list based on user input.
          * Saves the resulting list to a hard disk.
+=======
+         * Adds a to-do object to the list, and saves the list to hard disk.
+>>>>>>> branch-A-Assertions
          *
          * @return A string representing Duke's response to be shown to user
          * @param nextLine, represents user input
@@ -408,8 +431,12 @@ public class Duke {
         }
 
         /**
+<<<<<<< HEAD
          * Adds an event object to the list based on user input.
          * Saves the resulting list to a hard disk.
+=======
+         * Adds an event object to the list, and saves the list to hard disk.
+>>>>>>> branch-A-Assertions
          *
          * @return A string representing Duke's response to be shown to user
          * @param nextLine, represents user input
@@ -434,6 +461,17 @@ public class Duke {
             } catch (java.time.format.DateTimeParseException e) {
                 return "Please provide proper date format!";
             }
+<<<<<<< HEAD
+=======
+            int charLoc = nextLine.indexOf("/at");
+            Event event = new Event(nextLine.substring(6, charLoc), nextLine.substring(charLoc + 4));
+            inputs.add(event);
+            int count = inputs.size();
+            storage.writeToFile(inputs);
+            assert inputs != null;
+            return ("Got it. I've added this task: \n" + "  [E][x] " + event.content
+                    + event.printTime + "\n Now you have " + count + " tasks in the list");
+>>>>>>> branch-A-Assertions
         }
 
         /**
@@ -536,8 +574,15 @@ public class Duke {
      */
     public static class UI {
 
+<<<<<<< HEAD
         /**
          * Prints 'Loading Error!' if DukeException is caught while constructing Duke Object.
+=======
+        /** 
+         * Guides the TaskList based on user command.
+         * 
+         * @throws DukeException
+>>>>>>> branch-A-Assertions
          */
         void showLoadingError() {
             System.out.println("Loading Error!");
