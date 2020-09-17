@@ -1,2 +1,3 @@
-T | 1 | 32fdgfdsagfdsa
-T | 1 | trfevfgdsgf
+T | 0 | buy groceries
+E | 0 | John's 21st birthday party | 23 SEPTEMBER 2020
+D | 0 | CS2345 assignment | 10 OCTOBER 2020
