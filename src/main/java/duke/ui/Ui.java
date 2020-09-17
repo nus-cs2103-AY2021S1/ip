@@ -81,7 +81,7 @@ public class Ui {
      */
     public String printResult() {
         System.out.println("    Here are the matching tasks in your list:");
-        return "Hehe found them \uD83D\uDE1B\n\n"
+        return "Hehe found them \uD83D\uDE1B\n"
                 + "Here are the matching tasks in your list:";
     }
 
@@ -120,6 +120,10 @@ public class Ui {
         return "Noted. I've removed this task:"
                 + "\n" + task.toString()
                 + "\nNow you have " + listSize + " tasks in the list.";
+    }
+
+    public String resultEmpty() {
+        return "Hmm, it appears that your list is empty";
     }
 
 }

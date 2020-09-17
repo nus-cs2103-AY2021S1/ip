@@ -6,6 +6,11 @@
 
 }
 
+.input_box {
+    -fx-text-fill: #000839;
+    -fx-prompt-text-fill: white;
+}
+
 .text-bubble {
     -fx-background-color: #6886c5;
     -fx-background-radius: 12px;

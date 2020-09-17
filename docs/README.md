@@ -6,13 +6,13 @@ Duke is a revolutionary **chatbot desktop app that keeps track of your tasks for
 * Quick Start
 * Features
 	1.  Adding a task : 
-			a. Todo : [``` todo```](https://avalionnet.github.io/ip/#Todo)
-			b. Event : [```event```](https://avalionnet.github.io/ip/#Event)
-			c. Deadline : [```deadline```](https://avalionnet.github.io/ip/#Deadline)
+			1. Todo : [``` todo```](https://avalionnet.github.io/ip/#Todo)
+			2. Event : [```event```](https://avalionnet.github.io/ip/#Event)
+			3. Deadline : [```deadline```](https://avalionnet.github.io/ip/#Deadline)
 	2.	Viewing tasks :
-			a.	View all saved tasks : ``` list```
-			b.	View all tasks on a particular date : ```view```
-			c.	Find a task by name/description : ``` find```
+			1.	View all saved tasks : ``` list```
+			2.	View all tasks on a particular date : ```view```
+			3.	Find a task by name/description : ``` find```
 	3.	Mark a task as done : ``` done```
 	4. Delete a task : ``` delete```
 	5.	Exit the program: ``` bye```
@@ -22,13 +22,13 @@ Duke is a revolutionary **chatbot desktop app that keeps track of your tasks for
 
 Installing Duke is fairly simple and 5 minutes is all you will need. Mark the list as you complete the steps below!
 
- - [ ] Ensure that you have Java `11` or above installed on your computer. 
+ - [x]  Ensure that you have Java `11` or above installed on your computer. 
  - To find out the Java version you have installed, click [here](https://www.java.com/en/download/help/version_manual.xml). 
  - If Java is not installed on your computer, click [here](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html) to download it. 
- - [ ] Download the latest `duke.jar` software from [here](https://github.com/avalionnet/ip/releases).
+ - [x]  Download the latest `duke.jar` software from [here](https://github.com/avalionnet/ip/releases).
  
- - [ ] Save the file to the folder you want Duke to be installed in. 
- - [ ] Double-click the `duke.jar` file to start the app. 
+ - [x]  Save the file to the folder you want Duke to be installed in. 
+ - [x]  Double-click the `duke.jar` file to start the app. 
  - **Note that Duke will automatically create an additional `data` folder in this 	directory to save your tasks upon starting the program for the first time.
  - You should observe the following GUI appearing :
  **INSERT GUI HERE**
@@ -36,16 +36,16 @@ Installing Duke is fairly simple and 5 minutes is all you will need. Mark the li
 # Tutorial
 Here are some features you can try upon your first launch of duke. Type the following commands in the input field at the bottom of the GUI and hit enter or click on the send button. Observe what happens.
     
-- [ ]   **`todo`**`Complete weekly programming quiz`  : 
+- [x]   **`todo`**`Complete weekly programming quiz`  : 
 		Adds a task with the description  `Complete weekly programming quiz`  to your task list.
-- [ ]   **`list`**  : Lists all tasks scheduled
+- [x]    **`list`**  : Lists all tasks scheduled
 
-- [ ]  **`done`**`1`  : Marks the 1st task shown in the task list as done.
+- [x]  **`done`**`1`  : Marks the 1st task shown in the task list as done.
 
-- [ ]   **`delete`**`1`  : Deletes the 1st task shown in the task list.
+- [x]   **`delete`**`1`  : Deletes the 1st task shown in the task list.
         
-- [ ]  **`bye`**  : Exits the app.
-- [ ] Refer to the Features Section below for more commands that Duke supports.
+- [x]   **`bye`**  : Exits the app.
+- [x] Refer to the Features Section below for more commands that Duke supports.
 
 ### **User Guide Command Formatting :**  
 
@@ -78,11 +78,11 @@ Calling the **event** command adds an event task to the task list. An **event** 
 
 Format: `event DESCRIPTION /at DATE TIME`
 
-> **Examples:**
-> 
-> -   `event CS2101 OP1 /at 15.09.20 1000`
-> -   `event Hackathon Finale /at 19.09.20 0900`
-> 
+**Examples:**
+
+-   `event CS2101 OP1 /at 15.09.20 1000`
+-   `event Hackathon Finale /at 19.09.20 0900` 
+
  >**Important Note :** 
 > - The delimiter **/at must be added** between the `DESCRIPTION` and `DATE` of the event.
 > - The date specified must be set in the future and must follow the format **dd.mm.yy**
@@ -98,11 +98,11 @@ Calling the **deadline** command adds a deadline task to the task list. A **dead
 
 Format: `deadline DESCRIPTION /by DATE TIME`
 
-> **Examples:**
-> 
-> -   `deadline CS2100 lab 2 /at 20.09.20 1000`
-> -   `deadline Art competition submission /at 30.10.20 2100`
-> 
+**Examples:**
+
+-   `deadline CS2100 lab 2 /by 20.09.20 1000`
+-   `deadline Art competition submission /by 30.10.20 2100` 
+
  >**Important Note :** 
 > - The delimiter **/by must be added** between the `DESCRIPTION` and `DATE` of the event.
 > - The date specified must be set in the future and must follow the format **dd.mm.yy**
@@ -136,16 +136,15 @@ Format:  `view DATE`
 
 
 
-> **Examples:**
->  For illustration purposes, let us assume that your current task list contains the following tasks:
->  1. todo buy dinner 
->  2. event attend housewarming party /at 29.10.20  1000
->  3. deadline submit CS2103T user guide /by 18.09.20 2359
->  4. event halo meetup /at 29.10.20 0900
-> -   `find 29.10.20`  returns  tasks **2 and 4**
-> -   `find 18.09.20`  returns  task **3**
-> -    task 1 will never be returned
-> 
+**Examples:**  For illustration purposes, let us assume that your current task list contains the following tasks:
+ 1. todo buy dinner 
+ 2. event attend housewarming party /at 29.10.20  1000
+ 3. deadline submit CS2103T user guide /by 18.09.20 2359
+ 4. event halo meetup /at 29.10.20 0900
+-   `find 29.10.20`  returns  tasks **2 and 4**
+-   `find 18.09.20`  returns  task **3**
+-    task 1 will never be returned 
+
 > **Note:** 
 > - The date specified must be set in the future and must follow the format **dd.mm.yy**
 > Note that a single digit day or month must also be accompanied by a 0 in front.
@@ -159,15 +158,11 @@ Find tasks in the task list with descriptions that match or contains the given k
 
 Format:  `find KEYWORD [MORE_KEYWORDS]`
 
-> **Examples:**
-> For illustration purposes, let us assume that your current task list contains the following tasks:
->  1) todo return Henry his iPhone cable 
->  2) todo treat Henry to lunch
->  3) deadline pass Henry the completed source code /by 20.10.22
-> -   `find Henry`  returns  tasks **1 , 2 and 3**
-> -   `find iPhone cable`  returns task 1
-> -   `find dinner` returns no task
-> 
+**Examples:** For illustration purposes, let us assume that your current task list contains the following tasks:  1) todo return Henry his iPhone cable   2) todo treat Henry to lunch  3) deadline pass Henry the completed source code /by 20.10.22
+-   `find Henry`  returns  tasks **1 , 2 and 3**
+-   `find iPhone cable`  returns task 1
+-   `find dinner` returns no task 
+
 > **Note:**
 > -   The search only works on task descriptions.
 > -   The search is case-sensitive. e.g  `Henry`  will match  `Henry` and not `henry`

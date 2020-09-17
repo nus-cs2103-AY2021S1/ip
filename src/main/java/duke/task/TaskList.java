@@ -57,6 +57,9 @@ public class TaskList {
      */
     public String printList(Ui ui) {
         int counter = 1;
+        if (this.listOfTasks.isEmpty()) {
+            return ui.resultEmpty();
+        }
         String response = ui.printResult();
         for (Task task: this.listOfTasks) {
             response = response + "\n" + ui.printTask(counter, task);
