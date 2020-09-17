@@ -6,7 +6,7 @@ users to perform a variety of task related functions.
 Duke is optimized for use via a **Command Line Interface** (CLI) 
 while still having the benefits of a Graphical User Interface (GUI).
 
-## Getting Started
+## Quick Start
 1. Ensure that you have Java `11` or above installed in your computer.
 2. You can find the latest version of Duke [here](https://github.com/jonasngs/ip/releases/tag/A-Release).
 3. Download the `Duke.jar` file and copy the jar file to the folder you want to use as the home folder for Duke.
@@ -15,9 +15,9 @@ while still having the benefits of a Graphical User Interface (GUI).
 ![DukeStart Image](./DukeStart.png)
 
 5. Enter commands into the command box located at the bottom of the application and click `Send` to execute it.
-6. Refer to the functions below for details of each command.
+6. Refer to the features below for details for each command.
 
-## Duke Functions and Commands
+## Features
 
 ### 1. Create a `todo` task 
 **Command**: `todo <description>` <br/>
@@ -36,7 +36,10 @@ You have 1 tasks in your list now.
 ### 2. Create a `deadline` task 
 **Command**: `deadline <description> /by <date and time>` <br/>
 **Note:** <br/> 
-Date and time has to be in the format: dd/mm/yyyy hh:mm <br/>
+* Date and time has to be in the format: dd/mm/yyyy hh:mm <br/>
+* dd is day, mm is month, yyyy is year. hh is hour in 24-hour format, mm is minutes.
+* No other date and time format is allowed except for the one mentioned above. <br/>
+
 **Function**: Creates a new deadline task and adds it to the user's list of tasks. <br/>
 **Example of usage**: 
 ```
@@ -52,7 +55,10 @@ You have 1 tasks in your list now.
 ### 3. Create an `event` task 
 **Command**: `event <description> /at <date and time>` <br/>
 **Note:** <br/> 
-Date and time has to be in the format: dd/mm/yyyy hh:mm <br/>
+* Date and time has to be in the format: dd/mm/yyyy hh:mm <br/>
+* dd is day, mm is month, yyyy is year. hh is hour in 24-hour format, mm is minutes.
+* No other date and time format is allowed except for the one mentioned above. <br/>
+
 **Function**: Creates a new event task and adds it to the user's list of tasks. <br/>
 **Example of usage**: 
 ```
@@ -108,7 +114,10 @@ Here are the tasks that I have found:
 ### 7. `Find` a task by `date`
 **Command**: `find_by_date <date>` <br/>
 **Note:** <br/>
-Date has to be in the format: dd/mm/yyyy <br/>
+* Date has to be in the format: dd/mm/yyyy <br/>
+* dd is day, mm is month, yyyy is year.
+* No other date format is allowed except for the one mentioned above. <br/>
+
 **Function**: Finds and displays all tasks matching the search date. <br/>
 **Example of usage**: 
 ```
