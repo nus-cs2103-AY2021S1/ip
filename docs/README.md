@@ -15,8 +15,8 @@ Overview of available features:
     • `sort`  
     • `bye` 
 >
-### Feature 1: View the task list
-View all the tasks in your current task list: `list` 
+### Feature 1: Viewing the task list
+Views all the tasks in your current task list: `list` 
 
 Format: `list`  
 
@@ -31,16 +31,16 @@ Quack! Your list is here:
     4.[T][✘] laundry (Priority: low)
 ```
 
-### Feature 2: Add a todo task
-Add a todo task to the task list: `todo`  
+### Feature 2: Adding a todo task
+Adds a todo task to the task list: `todo`  
 
 Format: `todo [description] /priority [priority]`  
 
 Remarks:  
 >• `[description]` can have spaces.  
 	• `[description]` is case-sensitive.  
-	• `[priority]` can take either `high`, `medium` or `low`.  
-	• `[priority]` is optional, if it is not indicated, priority is set to `low`.  
+	• `[priority]` can take one of `high`, `medium` or `low`.  
+	• `[priority]` is optional. If it is not indicated, priority is set to `low`.  
 >
 Example: `todo do CS2103T iP increment`  
 
@@ -51,8 +51,8 @@ Quack Quack Quack. I've added this task:
 Master, you now have 5 items in the list! Quack! Quack!
 ```
 
-### Feature 3: Add a deadline task
-Add a deadline task to the task list: `deadline`  
+### Feature 3: Adding a deadline task
+Adds a deadline task to the task list: `deadline`  
 
 Format: `deadline [description] /by [date] /priority [priority]` or `deadline [description] /by [date] [time] /priority [priority]`  
 
@@ -61,8 +61,8 @@ Remarks:
 	• `[description]` is case-sensitive.
 	• `[time]` field is optional.  
 	• `[date]` `[time]` must follow this format YYYY-MM-DD HH:mm.  
-	• `priority]` can take either `high`, `medium` or `low`.  
-	• `[priority]` is optional, if it is not indicated, priority is set to `low`.  
+	• `priority]` can take one of `high`, `medium` or `low`.  
+	• `[priority]` is optional. If it is not indicated, priority is set to `low`.  
 >
 Example: `deadline CS2100 assignment /by 2020-09-18 23:59`  
 
@@ -73,8 +73,8 @@ Quack Quack Quack. I've added this task:
 Master, you now have 6 items in the list! Quack! Quack!
 ```
 
-### Feature 4: Add an event task
-Add an event task to the task list: `event`  
+### Feature 4: Adding an event task
+Adds an event task to the task list: `event`  
 
 Format: `event [description] /at [date] /priority [priority]` or `event [description] /at [date] [time] /priority [priority]`  
 
@@ -83,8 +83,8 @@ Remarks:
 	• `[description]` is case-sensitive.
 	• `[time]` field is optional.  
 	• `[date]` `[time]` must follow this format YYYY-MM-DD HH:mm.  
-	• `[priority]` can take either `high`, `medium` or `low`.  
-	• `[priority]` is optional, if it is not indicated, priority is set to `low`.  
+	• `[priority]` can take one of `high`, `medium` or `low`.  
+	• `[priority]` is optional. If it is not indicated, priority is set to `low`.  
 >
 Example: `event The International 10 /at 2021-08-15 /priority medium`  
 
@@ -95,8 +95,8 @@ Quack Quack Quack. I've added this task:
 Master, you now have 7 items in the list! Quack! Quack!
 ```
 
-### Feature 5: Delete a task in the task list  
-Delete a given task from your task list: `delete`  
+### Feature 5: Deleting a task in the task list  
+Deletes a given task from your task list: `delete`  
 
 Format: `delete [index]`  
 
@@ -112,8 +112,8 @@ Quackkk. I've removed this task for you:
 Master, you now have 6 items in the list! Quack! Quack!
 ```
 
-### Feature 6: Indicate a task as done
-Indicate a given task as done: `done`  
+### Feature 6: Marking a task as done
+Marks a given task as done: `done`  
 
 Format: `done [index]`  
 
@@ -137,8 +137,8 @@ to
 [T][✓] plan for date  (Priority: high)
 ```
 
-### Feature 7: Find tasks
-Find tasks such that their description contains a given keyword: `find`  
+### Feature 7: Finding tasks
+Finds tasks such that their description contains a given keyword: `find`  
 
 Format: `find [keyword]`  
 
@@ -154,8 +154,8 @@ Quack Quack! Here are the matching tasks in your list:
     1.[T][✓] play dote (Priority: low)
 ```
 
-### Feature 8: Sort the task list  
-Sort the task list according to either alphabetical order or priority order: `sort`  
+### Feature 8: Sorting the task list  
+Sorts the task list according to either alphabetical order or priority order: `sort`  
 
 Format: `sort` or `sort priority`
 
@@ -185,9 +185,8 @@ Quack! Here is your task list sorted based on priority:
     6.[D][✘] CS2100 assignment  (by: Sep 18 2020 23:59) (Priority: low)
 ```
 
-### Feature 9: Exit the program  
-
-Quit the program: `bye`  
+### Feature 9: Exiting the program  
+Exits the program: `bye`  
 
 Format: `bye`  
 
