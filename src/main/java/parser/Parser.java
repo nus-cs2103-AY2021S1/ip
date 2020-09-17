@@ -77,7 +77,7 @@ public class Parser {
             try {
                 int taskNumberInt = Integer.parseInt(taskToArchive) - 1;
 
-                if (taskNumberInt + 1 > list.getLength()) {
+                if (taskNumberInt + 1 > list.getLength() || taskNumberInt <= 0) {
                     throw new DukeException("☹ OOPS!!! Your task number is out of bounds");
                 } else {
                     return list.archiveTask(taskNumberInt, archives);
@@ -100,7 +100,7 @@ public class Parser {
             try {
                 int taskNumberInt = Integer.parseInt(taskNumberString) - 1;
 
-                if (taskNumberInt + 1 > list.getLength()) {
+                if (taskNumberInt + 1 > list.getLength() || taskNumberInt <= 0) {
                     throw new DukeException("☹ OOPS!!! Your task number is out of bounds");
                 } else {
                     Task t = list.get(taskNumberInt);
@@ -122,7 +122,7 @@ public class Parser {
             try {
                 int taskNumberInt = Integer.parseInt(taskNumberString) - 1;
 
-                if (taskNumberInt + 1 > list.getLength()) {
+                if (taskNumberInt + 1 > list.getLength() || taskNumberInt <= 0) {
                     throw new DukeException("☹ OOPS!!! Your task number is out of bounds");
                 } else {
                     return list.removeTask(taskNumberInt);
