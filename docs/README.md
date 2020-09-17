@@ -155,6 +155,7 @@ Updates the details of an existing task being managed by Clippy. Suppose you mad
   * A todo task does not have a date/time and the `/by` or `/at` command cannot be used when updating a todo
   * Use `/by` command when the task is a deadline
   * Use `/at` command when the task is an event
+
 #### Usage
 Example of usage:
 * `event birthday party /at 25 Nov 1-4pm` <br> `update 1 19th birthday party` <br> updates the description of the 1st task in the list to 19th birthday party.
@@ -163,6 +164,7 @@ Expected outcome:
 ![todoEO](./UG%20images/update%201%20EO.png)
 
 * `update 1 19th birthday party /at 25 Nov 5-10pm` <br> updates the description and date/time of the 1st task in the list to 19th birthday party at 25 Nov 5-10pm.
+
 Expected outcome:
 
 ![todoEO](./UG%20images/update%202%20EO.png)
