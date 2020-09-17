@@ -14,6 +14,7 @@ If you can type fast, AB3 can get your contact management tasks done faster than
     * [Deleting task: `delete`](https://github.com/seantaysl/ip#delete---delete-selected-task-from-list)
     * [Updating task: `update`](https://github.com/seantaysl/ip#update---update-selected-task-in-list)
     * [Exiting bot: `bye`](https://github.com/seantaysl/ip#bye---shuts-down-duke-bot)
+* [Command Summary](https://github.com/seantaysl/ip#command-summary)
 
 ## Quick Start
 1. Ensure you have java 11 or above installed in your Computer.
@@ -122,3 +123,17 @@ Shuts down Duke bot and closes the window.
 Format: `bye`
 
 Example of usage: `bye`
+
+## Command Summary
+
+Action | format
+-------|-------
+help | `help`
+list | `list`
+find | `find [keyword]` 
+todo | `todo borrow book`
+deadline | `deadline [taskname] /by [yyyy-MM-dd HHmm]` 
+event | `event [taskname] /at [yyyy-MM-dd HHmm]` 
+delete | `delete [index or 'all']` 
+update | `update [index] ['name' or 'time'] [input]` 
+bye | `bye`
