@@ -75,6 +75,7 @@ Expected outcome:
 - Bye: Ends the conversation with Awesome-O
     "bye"
 ```
+![help](expected-outcomes/help.png)
 
 ### <a name="list"></a>2.`list`
 
@@ -98,6 +99,7 @@ Awesome-O now shows you your tasks:
 2. [E][✘] play warcraft (at: 18 Sep 2020, 11:00 PM)
 3. [D][✘] submit this project (by: 18 Sep 2020, 11:59 PM)
 ```
+![list](expected-outcomes/list.png)
 
 ### <a name="done"></a>3. `done`
 
@@ -120,6 +122,7 @@ Expected outcome:
 Awesome-O marked this task as done:
    [E][✓] play warcraft (at: 18 Sep 2020, 11:00 PM)
 ```
+![done](expected-outcomes/done.png]
 
 ### <a name="delete"></a>4. `delete`
 
@@ -142,6 +145,7 @@ Awesome-O removed this task:
    [T][✓] hello world
 Now you have 2 tasks in the list.
 ```
+![delete](expected-outcomes/delete.png)
 
 ### <a name="clear"></a>5. `clear`
 
@@ -162,6 +166,7 @@ Expected outcome:
 ```
 Awesome-O has cleared all tasks.
 ```
+![clear](expected-outcomes/clear.png)
 
 ### <a name="todo"></a>6.i. `todo`
 
@@ -186,6 +191,7 @@ Awesome-O added this task:
    [T][✘] hello world
 Now you have 1 tasks in the list.
 ```
+![todo](expected-outcomes/todo.png)
 
 ### <a name="event"></a>6.ii `event`
 
@@ -211,8 +217,8 @@ Expected outcome:
 Awesome-O added this task:
    [E][✘] play warcraft (at: 18 Sep 2020, 11:00 PM)
 Now you have 2 tasks in the list.
-
 ```
+![event](expected-outcomes/event.png)
 
 ### <a name="deadline"></a>6.iii `deadline`
 
@@ -239,7 +245,7 @@ Awesome-O added this task:
    [D][✘] submit this project (by: 18 Sep 2020, 11:59 PM)
 Now you have 3 tasks in the list.
 ```
-
+![deadline](expected-outcomes/deadline.png)
 
 ### <a name="find"></a>7. `find`
 
@@ -261,6 +267,7 @@ Expected outcome:
 Awesome-O shows you the tasks that match the keyword:
 1. [E][✘] play warcraft (at: 18 Sep 2020, 11:00 PM)
 ```
+![find](expected-outcomes/find.png)
 
 ### <a name="schedule"></a>8. `schedule`
 
@@ -285,6 +292,7 @@ Awesome-O shows you the tasks scheduled on this day:
 1. [E][✘] play warcraft (at: 18 Sep 2020, 11:00 PM)
 2. [D][✘] submit this project (by: 18 Sep 2020, 11:59 PM)
 ```
+![schedule](expected-outcomes/schedule.png)
 
 ### <a name="bye"></a>9. `bye`
 
@@ -306,3 +314,4 @@ Expected outcome:
 Awesome-O thanks you for talking to him.
 Awesome-O WILL MISS YOU.
 ```
+![bye](expected-outcomes/bye.png)
