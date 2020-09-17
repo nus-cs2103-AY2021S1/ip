@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="500.0" styleClass="main-container" stylesheets="@../css/rogue.css" xmlns="http://javafx.com/javafx/11.0.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="rogue.ui.MainWindow">
+  <children>
+    <HBox layoutY="597.0" styleClass="main-footer-container">
+      <TextField fx:id="userInput" onAction="#handleUserInput" prefHeight="41.0" prefWidth="420.0" promptText="Enter your inputs here." styleClass="main-input-field" AnchorPane.bottomAnchor="1.0" />
+      <Button fx:id="sendButton" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="41.0" prefWidth="58.0" styleClass="main-input-button" text="➤" />
+    </HBox>
+    <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="585.0" prefWidth="500.0" styleClass="main-scroll-pane" vvalue="1.0">
+      <content>
+        <VBox fx:id="dialogContainer" prefHeight="545.0" prefWidth="486.0" />
+      </content>
+    </ScrollPane>
+  </children>
+</AnchorPane>
