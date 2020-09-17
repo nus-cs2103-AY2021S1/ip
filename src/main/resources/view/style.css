@@ -17,8 +17,8 @@ VBox {
 
 .text-field {
     -fx-background-color: #AAA8B5
-    -fx-background-insets: 0, 0 0 1 0 ;
-    -fx-background-radius: 1 ;
+    -fx-background-insets: 0, 0, 0, 1, 0;
+    -fx-background-radius: 1;
     -fx-padding: 1,20,2,2;
     -fx-border-color: grey;
     -fx-border-width: 2;
