@@ -34,6 +34,7 @@ public class Rock {
      * @return Duke's response
      */
     private String handleCommand(String cmd) throws RockException {
+        cmd = cmd.trim();
         MyString response = new MyString();
 
         Parser.CommandType commandType = Parser.getType(cmd);
