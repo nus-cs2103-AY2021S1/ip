@@ -1,4 +1,4 @@
-package main.java.duke;
+package duke;
 
 import java.util.Scanner;
 import main.java.duke.task.TaskList;
@@ -15,10 +15,8 @@ public class Ui {
         DONE("Oh goody... You actually accomplished something!!\n  "),
         ADD("You're making me feel tired... But if you insist:\n  "),
         DELETE("Oh, getting lazy are we? I approve. I've removed this:\n  "),
-        UPDATEINPUT("You're so troublesome... What updated task description do you want?"),
-        UPDATEDTASK("Donezorimasu. Your task is now:\n  "),
-        EXCEPTION("Jesus, what are you doing?"),
-        INVALIDINPUT("Invalid input, dummy."),
+        UPDATEINPUT("You're so troublesome... What updated duke.task description do you want?"),
+        UPDATEDTASK("Donezorimasu. Your duke.task is now:\n  "),
         LOADINGERROR("Something went wrong when loading the data file. \nGuess you'll be starting from zero.");
 
         private final String line;
@@ -49,6 +47,9 @@ public class Ui {
     }
 
     public void showDeleteTask(Task t) {
+//        String s = Speech.DELETE.line + t;
+//        System.out.println(s);
+//        return s;
         System.out.println(Speech.DELETE.line + t);
     }
 

@@ -1,9 +1,6 @@
-package main.java.duke;
+package duke;
 
 import main.java.duke.task.TaskList;
-import main.java.duke.Storage;
-import main.java.duke.Ui;
-import main.java.duke.Parser;
 import main.java.duke.command.Command;
 import main.java.duke.dukeexception.DukeException;
 

@@ -1,36 +1,34 @@
 package main.java.duke.task;
 
-import main.java.duke.task.Task;
-import main.java.duke.Ui;
-
 import java.util.ArrayList;
+import main.java.duke.task.Task;
 
 public class TaskList {
     private ArrayList<Task> taskList = new ArrayList<Task>();
 
     public TaskList() {}
 
-    /** Adds a given task to the taskList.
+    /** Adds a given duke.task to the taskList.
      *
-     * @param t task to be added.
+     * @param t duke.task to be added.
      */
     public void addTask(Task t) {
         taskList.add(t);
     }
 
-    /** Deletes a specified task from the taskList.
+    /** Deletes a specified duke.task from the taskList.
      *
-     * @param taskNumber index of the task to be deleted in taskList.
+     * @param taskNumber index of the duke.task to be deleted in taskList.
      */
     public void deleteTask(int taskNumber) {
         taskList.remove(taskNumber);
     }
 
-    /** Updates a specified task to a new description.
+    /** Updates a specified duke.task to a new description.
      *
-     * @param taskNumber index of the task to be updated in taskList.
-     * @param newTaskDesc new description to update the task with.
-     * @return the edited task.
+     * @param taskNumber index of the duke.task to be updated in taskList.
+     * @param newTaskDesc new description to update the duke.task with.
+     * @return the edited duke.task.
      */
     public Task updateTaskDesc(int taskNumber, String newTaskDesc) {
         Task taskToBeEdited = taskList.get(taskNumber);

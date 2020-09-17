@@ -1,18 +1,18 @@
 package main.java.duke.command;
 
 import main.java.duke.task.TaskList;
-import main.java.duke.Ui;
-import main.java.duke.Storage;
+import duke.Ui;
+import duke.Storage;
 import main.java.duke.dukeexception.DukeException;
 
 public abstract class Command {
-//    private String command;
+//    private String duke.command;
 //
 //    private Set<String> terminationCommands = new HashSet<String>(
 //            Arrays.asList("bye", "toodles", "farewell", "sayonara"));
 //
-//    public Command(String command) {
-//        this.command = command;
+//    public Command(String duke.command) {
+//        this.duke.command = duke.command;
 //    }
 
     public abstract boolean isExit();

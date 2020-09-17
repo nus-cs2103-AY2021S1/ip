@@ -1,4 +1,4 @@
-package main.java.duke;
+package duke;
 
 import main.java.duke.command.Command;
 import main.java.duke.command.ListCommand;
@@ -44,7 +44,7 @@ public class Parser {
         String commandType = getCommandType(fullCommand);
 
         if (commandType.equals(LIST)) {
-            // list is the only command that takes only one word and nothing after a space
+            // list is the only duke.command that takes only one word and nothing after a space
             return new ListCommand();
         }
         if (terminationCommands.contains(commandType)) {
@@ -54,11 +54,11 @@ public class Parser {
             throw new InvalidTaskException();
         }
 
-        // valid command that is not list
+        // valid duke.command that is not list
         if (!fullCommand.contains(" ")) {
-            throw new main.java.duke.dukeexception.InvalidInputException("Did you put your task info after a space?");
+            throw new main.java.duke.dukeexception.InvalidInputException("Did you put your duke.task info after a space?");
         }
-        // take the part of the command without commandType
+        // take the part of the duke.command without commandType
         String info = fullCommand.split(" ", 2)[1];
 
         switch (commandType) {
@@ -67,13 +67,13 @@ public class Parser {
                     int taskNumber = parseInt(info) - 1;
                     return new DoneCommand(taskNumber);
                 } catch (Exception e) {
-                    throw new main.java.duke.dukeexception.InvalidInputException("Specify the task number correctly.");
+                    throw new main.java.duke.dukeexception.InvalidInputException("Specify the duke.task number correctly.");
                 }
             case TODO:
                 try {
                     return new TodoCommand(info);
                 } catch (Exception e) {
-                    throw new main.java.duke.dukeexception.InvalidInputException("Did you put your task after a space?");
+                    throw new main.java.duke.dukeexception.InvalidInputException("Did you put your duke.task after a space?");
                 }
             case EVENT:
                 try {
@@ -81,7 +81,7 @@ public class Parser {
                     return new EventCommand(descAndDate[0], LocalDate.parse(descAndDate[1]));
                 } catch (Exception e) {
                     throw new main.java.duke.dukeexception.InvalidInputException("Format for dates is yyyy-mm-dd. " +
-                            "Also, did you put a task before and date after ' /at '?");
+                            "Also, did you put a duke.task before and date after ' /at '?");
                 }
             case DEADLINE:
                 try {
@@ -89,22 +89,22 @@ public class Parser {
                     return new DeadlineCommand(descAndDate[0], LocalDate.parse(descAndDate[1]));
                 } catch (Exception e) {
                     throw new main.java.duke.dukeexception.InvalidInputException("Format for dates is yyyy-mm-dd. " +
-                            "Also, did you put a task before and deadline after ' /by '?");
+                            "Also, did you put a duke.task before and deadline after ' /by '?");
                 }
             case DELETE:
                 try {
                     int taskNumber = parseInt(info) - 1;
                     return new DeleteCommand(taskNumber);
                 } catch (Exception e) {
-                    throw new main.java.duke.dukeexception.InvalidInputException("Specify the task number correctly.");
+                    throw new main.java.duke.dukeexception.InvalidInputException("Specify the duke.task number correctly.");
                 }
             case UPDATE:
                 try {
                     int taskNumber = parseInt(info) - 1;
-                    String newTaskDesc = new main.java.duke.Ui().readUpdateDesc();
+                    String newTaskDesc = new Ui().readUpdateDesc();
                     return new UpdateCommand(taskNumber, newTaskDesc);
                 } catch (Exception e) {
-                    throw new main.java.duke.dukeexception.InvalidInputException("Specify the task number correctly.");
+                    throw new main.java.duke.dukeexception.InvalidInputException("Specify the duke.task number correctly.");
                 }
             default:
                 throw new InvalidTaskException();

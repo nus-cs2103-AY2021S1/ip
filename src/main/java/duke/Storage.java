@@ -1,4 +1,4 @@
-package main.java.duke;
+package duke;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -62,7 +62,7 @@ public class Storage {
                 line = sc.nextLine();
             }
 
-            // dissect info of a task contained in one line
+            // dissect info of a duke.task contained in one line
             String[] info = line.split("/");
             String taskType = info[0];
             boolean done = (parseInt(info[1]) == 1);  // 1 stands for done, 0 for undone
@@ -98,7 +98,7 @@ public class Storage {
 
     /** Creates a file at the storage object's filePath if necessary,
      * and returns a TaskList of tasks described in that file.
-     * Essentially, the initialisation function for Duke's task list.
+     * Essentially, the initialisation function for Duke's duke.task list.
      *
      * @return TaskList generated from file at dataDir/filePath
      */

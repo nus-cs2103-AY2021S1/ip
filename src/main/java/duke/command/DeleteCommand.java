@@ -1,8 +1,8 @@
 package main.java.duke.command;
 
 import main.java.duke.task.TaskList;
-import main.java.duke.Ui;
-import main.java.duke.Storage;
+import duke.Ui;
+import duke.Storage;
 
 public class DeleteCommand extends Command {
     int taskNumber;
