@@ -117,5 +117,5 @@ Format: `delete INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​ and be less than or equals to the size of the list.
 
 Examples:
-* `delete 2` deletes the 2nd task in the task list.<br>
-![]<img src="/docs/DeleteExample.png" width="374.5" height="588">
+* `delete 2` deletes the 2nd task in the task list.
+![]<img src="/docs/DeleteExample.PNG" width="374.5" height="588">
