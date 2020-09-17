@@ -159,6 +159,7 @@ Outcome:
 command is used.
 
 ## Command summary
+
 Action | Format
 ---------|-----------
 **List** | <code>list</code>
