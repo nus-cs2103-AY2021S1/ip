@@ -1,9 +1,7 @@
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Collection;
 import java.util.Scanner;
 
 import cartona.DateParser;
@@ -14,7 +12,12 @@ import cartona.command.Parser;
 import cartona.exception.CartonaException;
 import cartona.exception.InvalidInputException;
 
-import cartona.task.*;
+import cartona.task.Deadline;
+import cartona.task.Event;
+import cartona.task.TaskDate;
+import cartona.task.TaskList;
+import cartona.task.Todo;
+
 
 import cartona.ui.Ui;
 import org.junit.jupiter.api.Test;
@@ -109,7 +112,7 @@ public class CartonaTest {
         String testTxtString = "./src/test/addtasktest.txt";
         Path path = Path.of(testTxtString);
 
-        Runnable inputTest = () -> {
+        Runnable editTest = () -> {
             TaskList taskList = new TaskList();
             Parser parser = new Parser();
             Ui ui = new Ui();   // not used
@@ -134,47 +137,55 @@ public class CartonaTest {
                 Command editDeadlineName = parser.parseCommand("edit 2 /name test3");
                 addDeadline.execute(taskList, ui, storage);
                 editDeadlineName.execute(taskList, ui, storage);
-                assertEquals(taskList.getTask(2).toString(),
-                        new Deadline("test3", false, DateParser.parseTaskDate("2020/08/30 1800"))
-                                    .toString());
+                assertEquals(new Deadline("test3", false,
+                                                DateParser.parseTaskDate("2020/08/30 1800"))
+                                .toString(),
+                        taskList.getTask(2).toString());
 
                 Command editDeadlineDue = parser.parseCommand("edit 2 /due 2020/09/10 0800");
                 editDeadlineDue.execute(taskList, ui, storage);
-                assertEquals(taskList.getTask(2).toString(),
-                        new Deadline("test3", false, DateParser.parseTaskDate("2020/09/10 0800"))
-                                .toString());
+                assertEquals(new Deadline("test3", false,
+                                                DateParser.parseTaskDate("2020/09/10 0800"))
+                                .toString(),
+                        taskList.getTask(2).toString());
+
 
 
                 // Test editing Commands
                 Command addEvent = parser.parseCommand("add event test3 /at 2020/08/30 2000 2200");
+                addEvent.execute(taskList, ui, storage);
+
                 Event originalEvent = (Event) taskList.getTask(3);
                 TaskDate startDate = originalEvent.getStartDate();
                 TaskDate endDate = originalEvent.getEndDate();
 
-                addEvent.execute(taskList, ui, storage);
 
                 Command editEventName = parser.parseCommand("edit 3 /name test4");
                 editEventName.execute(taskList, ui, storage);
-                assertEquals(taskList.getTask(3),
-                        new Event("test4", false, startDate, endDate));
+                assertEquals(new Event("test4", false, startDate, endDate).toString(),
+                        taskList.getTask(3).toString());
 
                 Command editEventDate = parser.parseCommand("edit 3 /date 2020/09/30");
                 editEventDate.execute(taskList, ui, storage);
                 TaskDate newStart = DateParser.parseTaskDate("2020/09/30 2000");
                 TaskDate newEnd = DateParser.parseTaskDate("2020/09/30 2200");
-                assertEquals(taskList.getTask(3).toString(),
-                        new Event("test4", false, newStart, newEnd).toString());
+                assertEquals(new Event("test4", false, newStart, newEnd).toString(),
+                        taskList.getTask(3).toString());
 
                 Command editEventStart = parser.parseCommand("edit 3 /start 1000");
                 Command editEventEnd = parser.parseCommand("edit 3 /end 2100");
                 TaskDate newStart2 = DateParser.parseTaskDate("2020/09/30 1000");
                 TaskDate newEnd2 = DateParser.parseTaskDate("2020/09/30 2100");
-                assertEquals(taskList.getTask(3).toString(),
-                        new Event("test4", false, newStart2, newEnd2));
+                editEventStart.execute(taskList, ui, storage);
+                editEventEnd.execute(taskList, ui, storage);
+                assertEquals(new Event("test4", false, newStart2, newEnd2).toString(),
+                        taskList.getTask(3).toString());
 
             } catch (CartonaException e) {
                 e.printStackTrace();
             }
         };
+
+        assertDoesNotThrow(() -> editTest.run());
     }
 }
