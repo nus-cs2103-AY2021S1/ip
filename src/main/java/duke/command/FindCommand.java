@@ -40,7 +40,7 @@ public class FindCommand extends Command{
             finalString += "\n" + counter + "." + task.toString();
         }
 
-        return ui.returnReply("Na, I found this:" + finalString);
+        return ui.returnFindReply(finalString);
     }
 
     private List<Task> findMatchingTasks(TaskList tasks) {

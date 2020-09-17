@@ -41,7 +41,7 @@ public class Duke {
     }
 
     /**
-     * Runs the bot.
+     * Runs the bot in the terminal.
      */
     public void run() {
         this.ui.showLine();
@@ -77,6 +77,7 @@ public class Duke {
             Command command = Parser.parse(input);
             response = command.execute(tasks, storage, ui);
         } catch (DukeException e) {
+            e.printStackTrace();
             response = ui.returnError(e.getMessage());
         }
 

@@ -12,7 +12,7 @@ public class ExitCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, Storage storage, Ui ui) throws DukeException {
-        return ui.returnReply("Ok bye bye! C u again :P");
+        return ui.returnExitReply();
     }
 
     @Override

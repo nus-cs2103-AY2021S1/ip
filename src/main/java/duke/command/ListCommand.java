@@ -12,7 +12,7 @@ public class ListCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, Storage storage, Ui ui) throws DukeException {
-        return ui.returnReply("Na, here is your list lah:" + tasks.toString());
+        return ui.returnListReply(tasks);
     }
 
     @Override

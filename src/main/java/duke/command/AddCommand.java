@@ -55,8 +55,7 @@ public class AddCommand extends Command {
 
         tasks.addTask(task, storage);
 
-        return ui.returnReply("Orh. I added:" + "\n  " + task.toString()
-                    + "\nNow you got " + tasks.getListLength() + " things in the list.");
+        return ui.returnReply(this, task, tasks);
     }
 
     /**
@@ -73,7 +72,7 @@ public class AddCommand extends Command {
             LocalDateTime dateTime = LocalDateTime.parse(dateTimeString, FORMATTER);
 
             return new Deadline(taskName, dateTime);
-        } catch (DateTimeParseException e) {
+        } catch (Exception e) {
             throw new WrongDateTimeException(this.commandType, "/by");
         }
     }
@@ -92,7 +91,7 @@ public class AddCommand extends Command {
             LocalDateTime dateTime = LocalDateTime.parse(dateTimeString, FORMATTER);
 
             return new Event(taskName, dateTime);
-        } catch (DateTimeParseException e) {
+        } catch (Exception e) {
             throw new WrongDateTimeException(this.commandType, "/at");
         }
     }
