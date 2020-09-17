@@ -183,6 +183,7 @@ A: Run the application on the computer and overwrite the empty data file with yo
 your previous computer.
 
 ## Command Summary
+
 Action | Format, Examples
 ------------ | -------------
 Add | eg. todo do laundry <br> eg. deadline assignment /by 23/09/2020 23:59 <br> eg. event birthday /at 23/09/2020 19:00
