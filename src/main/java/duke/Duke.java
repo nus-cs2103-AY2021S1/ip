@@ -31,7 +31,7 @@ public class Duke extends Application {
     public Duke() {
         ui = new Ui();
         parser = new Parser();
-        storage = new Storage("data/Duke.txt");
+        storage = new Storage("Duke.txt");
         list = new TaskList(storage.load());
     }
 
