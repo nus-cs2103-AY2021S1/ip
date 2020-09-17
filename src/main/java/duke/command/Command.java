@@ -2,7 +2,6 @@ package duke.command;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
 import duke.exception.DukeException;
 
 public interface Command {
@@ -10,11 +9,9 @@ public interface Command {
      * Executes a given command.
      *
      * @param tasks  TaskList to be manipulated.
-     * @param ui  Ui Object to handle user interactions.
      * @param store  Storage object to manage saving of data.
      * @throws DukeException
      */
-    public void execute(TaskList tasks, Ui ui, Storage store) throws DukeException;
     public String execute(TaskList tasks, Storage store) throws DukeException;
 
     /**

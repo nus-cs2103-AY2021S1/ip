@@ -74,7 +74,7 @@ public class Storage {
                 break;
             default:
                 assert false : "Data File has unknown types";
-                System.out.println(Ui.INDENT + "Corrupted Data Entry found : " + str);
+                System.out.println("Corrupted Data Entry found : " + str);
             }
         }
         return tasks;
@@ -112,19 +112,18 @@ public class Storage {
      * @param tasks  TaskList to be initialised.
      */
     public void initialiseTasks(List<Task> tasks) {
-        System.out.print(Ui.DIVIDER);
         memoryFile = new File(path.toString());
         if (Files.exists(path)) {
-            System.out.println(Ui.INDENT + "Loading Tasks from Memory...");
+            System.out.println("Loading Tasks from Memory...");
             try {
                 List<Task> memoryList = parseData(memoryFile);
                 tasks.addAll(memoryList);
             } catch (FileNotFoundException e) {
-                System.out.println(Ui.INDENT + "Error loading data.");
+                System.out.println("Error loading data.");
             }
-            System.out.println(Ui.INDENT + "Load Successful!");
+            System.out.println("Load Successful!");
         } else {
-            System.out.println(Ui.INDENT + "No Memory Found.");
+            System.out.println("No Memory Found.");
             File directory = new File(this.directory);
             if (!directory.exists()) {
                 directory.mkdirs();
@@ -133,14 +132,13 @@ public class Storage {
             try {
 
                 FileWriter fw = new FileWriter(path.toString());
-                System.out.println(Ui.INDENT + "Creating new memory file..");
+                System.out.println("Creating new memory file..");
                 fw.write("");
                 fw.close();
-                System.out.println(Ui.INDENT + "Done.");
+                System.out.println("Done.");
             } catch (IOException e) {
-                System.out.print(Ui.INDENT + e.getMessage());
+                System.out.print(e.getMessage());
             }
         }
-        System.out.print(Ui.DIVIDER);
     }
 }

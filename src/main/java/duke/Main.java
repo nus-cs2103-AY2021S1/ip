@@ -22,6 +22,8 @@ public class Main extends Application {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
+
+            // Set Up Styles
             scene.getStylesheets().add("/view/DialogBox.css");
             scene.getStylesheets().add("/view/MainWindow.css");
             stage.initStyle(StageStyle.UNDECORATED);

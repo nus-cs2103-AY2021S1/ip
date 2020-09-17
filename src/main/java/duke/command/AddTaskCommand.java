@@ -4,7 +4,6 @@ import java.util.Objects;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
 import duke.exception.DukeException;
 import duke.task.Task;
 
@@ -14,13 +13,6 @@ public class AddTaskCommand implements Command {
 
     public AddTaskCommand(Task task) {
         this.task = task;
-    }
-
-    @Override
-    public void execute(TaskList tasks, Ui ui, Storage store) throws DukeException {
-        tasks.addTask(task);
-        ui.print("Got it. I've added this task:\n  " + task.toString() + "\nNow you have " + tasks.size()
-                + " tasks in the list.");
     }
 
     @Override

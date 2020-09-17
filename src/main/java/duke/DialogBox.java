@@ -29,7 +29,7 @@ public class DialogBox extends HBox {
 
     private DialogBox(String text, Image img, String chatStyle) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Ui.class.getResource("/view/DialogBox.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(Duke.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
