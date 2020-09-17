@@ -1,10 +1,15 @@
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * TaskList contains the task list e.g., it has operations to add/delete tasks in the list
  */
 public class TaskList {
-    private List<Task> tasks;
+    private final List<Task> tasks;
+
+    TaskList() {
+        this(new ArrayList<>());
+    }
 
     TaskList(List<Task> tasks) {
         this.tasks = tasks;
@@ -25,7 +30,7 @@ public class TaskList {
         for (int i = 0; i < tasks.size(); i++) {
             Task currentTask = tasks.get(i);
             if (currentTask.name.contains(searchTerm)) {
-                stringBuilder.append((i + 1) + "." + currentTask.toString() + '\n');
+                stringBuilder.append((i + 1) + ". " + currentTask.toString() + '\n');
             }
         }
         if (stringBuilder.length() == 0) {
@@ -94,7 +99,7 @@ public class TaskList {
         }
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {
-            stringBuilder.append((i + 1) + "." + tasks.get(i) + "\n");
+            stringBuilder.append(i + 1).append(". ").append(tasks.get(i)).append("\n");
         }
         stringBuilder.setLength(stringBuilder.length() - 1);
         return stringBuilder.toString();

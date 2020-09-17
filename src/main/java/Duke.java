@@ -1,5 +1,6 @@
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -19,8 +20,10 @@ import javafx.stage.Stage;
  * Duke is a Personal Assistant bot that helps you to keep track of various tasks.
  */
 public class Duke extends Application {
+    private static final String DEFAULT_FILE_NAME = "default_tasks.txt";
     private TaskList tasks;
     private Storage storage;
+    private Path saveFolder = Paths.get(System.getProperty("user.dir"), "data");
     private Ui ui;
 
     private ScrollPane scrollPane;
@@ -37,10 +40,13 @@ public class Duke extends Application {
      */
     public Duke() {
         ui = new Ui();
-        String home = System.getProperty("user.dir");
-        Path savePath = Paths.get(home, "data", "duke.txt");
-        this.storage = new Storage(savePath);
-        this.tasks = new TaskList(storage.load());
+        this.storage = new Storage(saveFolder.resolve(DEFAULT_FILE_NAME));
+        try {
+            this.tasks = new TaskList(storage.load());
+        } catch (DukeException dukeException) {
+            ui.show(ui.getExceptionMessage(dukeException));
+            this.tasks = new TaskList();
+        }
     }
 
     public static void main(String[] args) {
@@ -215,12 +221,22 @@ public class Duke extends Application {
         case "delete":
             task = tasks.deleteTask(commands);
             return ui.getDeleteMessage(task, tasks);
+        case "save":
+            storage.save(tasks);
+            return ui.getSaveMessage(tasks, storage);
         case "bye":
             storage.save(tasks);
             return ui.getByeMessage();
         case "find":
             String result = tasks.getSearchResult(commands);
             return ui.getSearchResults(result);
+        case "load":
+            Parser.checkValidSaveFile(commands);
+            Storage newStorage = new Storage(saveFolder.resolve(commands[1] + ".txt"));
+            List<Task> newTasks = newStorage.load();
+            this.tasks = new TaskList(newTasks);
+            this.storage = newStorage;
+            return ui.getChangeSavePathMessage(tasks, storage);
         default:
             throw new DukeException("I'm sorry, but I don't know what that means");
         }
