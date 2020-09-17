@@ -51,9 +51,9 @@ public class Storage {
      * @return
      */
     String stringMaker(int startIndex, String[] splits, String str) {
-        return startIndex >= splits.length - 1
+        return startIndex > splits.length - 1
                  ? str
-                 : stringMaker(startIndex + 1, splits, splits[startIndex] + " ");
+                 : stringMaker(startIndex + 1, splits, (str.length() > 0 ? str + " " + splits[startIndex] : str + splits[startIndex]));
     }
 
     /**
@@ -67,22 +67,38 @@ public class Storage {
             if (lineCounter() == 0) {
                 return arr;
             } else {
-                int counter = 0;
                 Scanner s = new Scanner(file);
                 while (s.hasNextLine()) {
                     String task = s.nextLine();
+                    String[] splits = task.split(" ");
+                    String name = splits[1];
+                    Character icon = splits[0].charAt(4);
                     if (task.charAt(1) == 'T') {
-                        arr.add(new Todo(task.substring(7)));
+                        Todo t = new Todo(name);
+                        if (icon == '1') {
+                            t.taskIsDone();
+                        } else {
+                            t.taskIsNotDone();
+                        }
+                        arr.add(t);
                     } else if (task.charAt(1) == 'D') {
-                        String[] splits = task.split(" ");
-                        String name = splits[1];
                         String deadline = stringMaker(3, splits, "");
-                        arr.add(new Deadline(name, deadline));
+                        Deadline d = new Deadline(name, deadline.substring(0, deadline.length() - 1));
+                        if (icon == '1') {
+                            d.taskIsDone();
+                        } else {
+                            d.taskIsNotDone();
+                        }
+                        arr.add(d);
                     } else {
-                        String[] splits = task.split(" ");
-                        String name = splits[1];
                         String deadline = stringMaker(3, splits, "");
-                        arr.add(new Event(name, deadline));
+                        Event e = new Event(name, deadline.substring(0, deadline.length() - 1));
+                        if (icon == '1') {
+                            e.taskIsDone();
+                        } else {
+                            e.taskIsNotDone();
+                        }
+                        arr.add(e);
                     }
                 }
                 return arr;
@@ -112,9 +128,9 @@ public class Storage {
             }
             String indicator = t.getIndicator();
             String icon = t.getIcon();
-            assert (indicator.equals("[T]") || indicator.equals("[D]") || indicator.equals("[E]"))
-                    && (icon.equals("[" + "\u2713" + "] ") || icon.equals("[" + "\u2718" + "] "));
-            String text = indicator + icon + t.getName() + toPrint + "\n";
+            assert (indicator.equals("[T]") || indicator.equals("[D]") || indicator.equals("[E]"));
+            String text = indicator + (icon.equals("[" + "\u2713" + "] ") ? "[1] " : "[0] ")
+                    + t.getName() + toPrint + "\n";
 
             fw.write(text);
         }
