@@ -1,10 +1,7 @@
 package duke;
 
 import duke.command.*;
-import duke.exception.DukeException;
-import duke.exception.InvalidPriorityLevelException;
-import duke.exception.InvalidTaskTypeException;
-import duke.exception.UnknownCommandException;
+import duke.exception.*;
 import duke.task.PriorityLevel;
 import duke.task.TaskType;
 
@@ -96,23 +93,35 @@ public class Parser {
         }
     }
 
-    public static Command parseDelete(String input) {
-        int taskNum = Integer.parseInt(input);
-        return new DeleteTaskCommand(taskNum);
+    public static Command parseDelete(String input) throws WrongFormatException {
+        try {
+            int taskNum = Integer.parseInt(input);
+            return new DeleteTaskCommand(taskNum);
+        } catch (NumberFormatException e) {
+            throw new WrongFormatException();
+        }
     }
 
-    public static Command parseDone(String input) {
-        int taskNum = Integer.parseInt(input);
-        return new DoneTaskCommand(taskNum);
+    public static Command parseDone(String input) throws WrongFormatException {
+        try {
+            int taskNum = Integer.parseInt(input);
+            return new DoneTaskCommand(taskNum);
+        } catch (NumberFormatException e) {
+            throw new WrongFormatException();
+        }
     }
 
     public static Command parseFind(String input) {
         return new FindTaskCommand(input);
     }
 
-    public static Command parsePriority(String input) {
-        int taskNum = Integer.parseInt(input);
-        return new PriorityLevelCommand(taskNum);
+    public static Command parsePriority(String input) throws WrongFormatException {
+        try {
+            int taskNum = Integer.parseInt(input);
+            return new PriorityLevelCommand(taskNum);
+        } catch (NumberFormatException e) {
+            throw new WrongFormatException();
+        }
     }
 
     public static Command parsePriorityLevel(String input, Command command) throws

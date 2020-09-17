@@ -138,6 +138,7 @@ public class Ui {
     public String printDeleteAcknowledgement(TaskList taskList, Task task) {
         String s = "Alright, the following task has been removed:\n"
                 + task.toString()
+                + "\n"
                 + "You now have " + taskList.getTaskListSize() + " tasks on your list\n";
         System.out.println(s);
         return s;

@@ -45,18 +45,6 @@ public class Duke {
         taskList = TaskList.generateTaskList(storage);
     }
 
-    /**
-     * Starts the Duke application.
-     *
-     * @param args Array of command-line arguments.
-     */
-    public static void main(String[] args) {
-        Duke duke = new Duke("./data/tasks.txt");
-        duke.start();
-        duke.runUntilExitCommand();
-        duke.exit();
-    }
-
     private void start() {
         ui.start(taskList);
     }
