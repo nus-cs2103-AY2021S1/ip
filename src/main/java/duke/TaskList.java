@@ -89,8 +89,14 @@ public class TaskList {
      * @param index Index of task to be removed.
      * @return return deleted Task object.
      */
-    public Task remove(int index) {
-        return tasks.remove(index);
+    public Task remove(int index) throws WriteToStorageException {
+        Task removedTask = tasks.remove(index);
+        try {
+            store.rewriteData(tasks);
+        } catch (IOException e) {
+            throw new WriteToStorageException();
+        }
+        return removedTask;
     }
 
     /**

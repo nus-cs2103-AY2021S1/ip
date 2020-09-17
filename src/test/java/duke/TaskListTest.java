@@ -13,10 +13,6 @@ import duke.task.Todo;
 class TaskListTest {
 
     @Test
-    void getStore() {
-        //TODO
-    }
-    @Test
     void addTask() throws WriteToStorageException {
         Task task = new Todo("hello world");
         TaskList tasks = new TaskList(new StorageStub());
@@ -32,21 +28,5 @@ class TaskListTest {
         tasks.addTask(task);
         tasks.doneTask(0);
         assertTrue(tasks.getTask(0).isDone());
-    }
-
-    @Test
-    void testToString() {
-    }
-
-    @Test
-    void getTask() {
-    }
-
-    @Test
-    void size() {
-    }
-
-    @Test
-    void remove() {
     }
 }

@@ -100,6 +100,18 @@ Expected outcome:
 
 ![fdtask_outcome](fdtask_outcome.png)
 
+### `find QUERY` - Completes a task.
+
+Searches through your tasklist to find tasks whose description contains your query
+
+Example of usage: 
+
+`find patrick`
+
+Expected outcome:
+
+![find_outcome](find_outcome.png)
+
 ### `done TASK_ID` - Completes a task.
 
 Marks a Task as done. TASK_ID can be found using `list`
