@@ -10,8 +10,6 @@ public abstract class Task {
     protected boolean isCompleted = false;
     protected String name;
 
-
-
     protected Task (String name, boolean isCompleted) {
         this.name = name;
         this.isCompleted = isCompleted;

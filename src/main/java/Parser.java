@@ -64,6 +64,8 @@ public class Parser {
         if (commands.length < MAX_COMMAND_LENGTH) {
             throw new DukeException("The filename cannot be blank!");
         }
+
+        //Solution below adapted from https://www.rgagnon.com/javadetails/java-check-if-a-filename-is-valid.html
         File f = new File(commands[1] + ".txt");
         try {
             f.getCanonicalPath();
