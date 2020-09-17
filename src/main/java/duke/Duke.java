@@ -10,6 +10,7 @@ import duke.util.Ui;
 import java.io.IOException;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 
 import javafx.stage.Stage;
@@ -83,6 +84,9 @@ public class Duke extends Application {
 
         try {
             Command c = Parser.parse(input);
+            if (c.isExit() == true) {
+                Platform.exit();
+            }
             output += c.execute(taskList, ui, storage);
         } catch (DukeException | IOException e) {
             output += ui.showError(e.getMessage());
