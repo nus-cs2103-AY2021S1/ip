@@ -16,7 +16,27 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
 4. After the importing is complete, locate the `src/main/java/Launcher.java` file, right-click it, and choose `Run Launcher.main()`. 
     * If errors arise due to missing packages or dependencies, please install them before running Duke.
 5. If the setup is correct, a GUI window should appear and you should see something like the below:
-<br/> ![ScreenShot](https://github.com/yeohhq/ip/blob/master/src/main/resources/images/Default.png)
+<br/> ![ScreenShot](https://github.com/yeohhq/ip/blob/branch-A-UserGuide/src/main/resources/images/Default.png?raw=true)
+
+
+## Types of Tasks
+1. **Todo**: Simple Todo task.
+2. **Deadline**:  Deadline task that needs to be completed by a specified date.
+3. **Event**: Event task specified to be held on a certain date/location.
+
+## Command List and Format
+To view the full list of commands, enter any input that is not identified below.
+
+| Command    | Format                                      |
+|------------|---------------------------------------------|
+| `list`     | `list`                                      |
+| `todo`     | `todo` {description}                        |
+| `event`    | `event` {description} `/at` {location/date} |
+| `deadline` | `deadline` {description} `/by` {YYYY-MM-DD} |
+| `done`     | `done` {integer task number}                |
+| `delete`   | `delete` {integer task number}              |
+| `find`     | `find` {keyword to find}                    |
+| `tag`      | `tag` {integer task number} {tag word}      |
 
 ## Usage
 
