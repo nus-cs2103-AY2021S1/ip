@@ -1,4 +1,5 @@
 # User Guide
+Duke is a chatbot that helps you to keep track of your various tasks.
 
 ## Features 
 List of commands include:
