@@ -2,7 +2,7 @@
 
 ## Application UI
 
-![Image of LanaDelTaco](https://github.com/gabztcr/ip/blob/master/docs/Ui.png)
+![Image of LanaDelTaco](https://gabztcr.github.io/ip/Ui.png)
 
 ## Features 
 
