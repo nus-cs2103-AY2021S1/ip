@@ -44,7 +44,7 @@ test {
 }
 
 application {
-    mainClassName = "sg.christopher.duke.Duke"
+    mainClassName = "sg.christopher.duke.Launcher"
 }
 
 shadowJar {
