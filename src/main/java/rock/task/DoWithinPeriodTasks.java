@@ -2,8 +2,8 @@ package rock.task;
 
 /**
  * A task that need to be done within a certain period.
- * Command syntax: dowithin + description + /from + startTime + /to + endTime
- * Example:        dowithin CS2103T Quiz /from every Friday /to the next Monday
+ * Command syntax: dowithin + description + /between + startTime + /and + endTime
+ * Example:        dowithin CS2103T Quiz /between every Friday /and the next Monday
  */
 public class DoWithinPeriodTasks extends Task {
     private final String from;

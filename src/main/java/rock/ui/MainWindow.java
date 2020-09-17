@@ -59,18 +59,20 @@ public class MainWindow extends AnchorPane {
     }
 
     private void switchRock(String input) {
+        Image nextUserImage = currentUserImage;
         if (fakeRockImage.equals(currentRockImage)) {
             currentRockImage = realRockImage;
-            currentUserImage = happyUserImage;
+            nextUserImage = happyUserImage;
 
         } else if (realRockImage.equals(currentRockImage)) {
             currentRockImage = fakeRockImage;
-            currentUserImage = sadUserImage;
+            nextUserImage = sadUserImage;
         }
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, currentUserImage),
                 DialogBox.getDukeDialog(Ui.saySwitch(), currentRockImage)
         );
+        currentUserImage = nextUserImage;
         isTerminated = true;
     }
 

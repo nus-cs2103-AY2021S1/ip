@@ -40,6 +40,10 @@ public class TaskList {
      * @param response
      */
     public void handleList(MyString response) {
+        if(getSize() == 0) {
+            response.addNewLines("You don't have any task left!");
+            return;
+        }
         response.addNewLines("Here are the tasks in your list:");
         // list with index
         for (int i = 1; i <= getSize(); ++i) {
@@ -59,12 +63,12 @@ public class TaskList {
         int c = 0;
         for (int i = 0; i < value.length(); ++i) {
             if ('0' > value.charAt(i) || value.charAt(i) > '9') {
-                throw new RockException("Index should be an integer");
+                throw new RockException("Index should be an integer.");
             }
             c = c * 10 + value.charAt(i) - '0';
         }
         if (0 > c || c > getSize()) {
-            throw new RockException("Index is out of range");
+            throw new RockException("Index is out of range.");
         }
         return c;
     }
