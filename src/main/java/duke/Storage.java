@@ -92,15 +92,22 @@ public class Storage {
     }
 
     /**
-     * Updates file by added a new task.
+     * Updates file by adding a new task.
      *
      * @param task Task to be added to file.
+     * @param isFirstTask Whether task to be added is the first in the file.
      * @throws DukeException If task cannot be parsed or file cannot be written to.
      */
-    public void update(Task task) throws SaveFailureException {
+    public void update(Task task, boolean isFirstTask) throws SaveFailureException {
         try {
-            FileWriter fileWriter = new FileWriter(this.taskFile, true);
-            fileWriter.write("\n" + parseToStorage(task));
+            FileWriter fileWriter = null;
+            if (isFirstTask) {
+                fileWriter = new FileWriter(this.taskFile);
+                fileWriter.write(parseToStorage(task));
+            } else {
+                fileWriter = new FileWriter(this.taskFile, true);
+                fileWriter.write("\n" + parseToStorage(task));
+            }
             fileWriter.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -225,7 +232,7 @@ public class Storage {
             return new Event(taskName, dateTime);
         } else {
             throw new LoadFailureException("Cannot identify the type of tasks in file."
-                    + "\nProbably wrong format?");
+                    + "\nProbably wrong format? I overwrite ah!");
         }
     }
 }

@@ -35,7 +35,7 @@ public class Duke {
         try {
             this.tasks = new TaskList(storage.load());
         } catch (DukeException e) {
-            // todo
+            System.out.println(e.getMessage());
             this.tasks = new TaskList();
         }
     }

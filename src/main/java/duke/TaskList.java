@@ -40,7 +40,9 @@ public class TaskList {
      */
     public void addTask(Task task, Storage storage) throws DukeException {
         this.list.add(task);
-        storage.update(task);
+        assert this.list.size() > 0 : "No task added.";
+        boolean isFirstTask = this.list.size() <= 1;
+        storage.update(task, isFirstTask);
     }
 
     /**
