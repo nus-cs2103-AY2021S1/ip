@@ -74,12 +74,16 @@ public class Parser {
             throw new DukeException("☹ OOPS!!! Please specify which task to archive");
         } else {
             String taskToArchive = splitInput[1];
-            int taskNumberInt = Integer.parseInt(taskToArchive) - 1;
+            try {
+                int taskNumberInt = Integer.parseInt(taskToArchive) - 1;
 
-            if (taskNumberInt + 1 > list.getLength()) {
-                throw new DukeException("☹ OOPS!!! Your task number is out of bounds");
-            } else {
-                return list.archiveTask(taskNumberInt, archives);
+                if (taskNumberInt + 1 > list.getLength()) {
+                    throw new DukeException("☹ OOPS!!! Your task number is out of bounds");
+                } else {
+                    return list.archiveTask(taskNumberInt, archives);
+                }
+            } catch (NumberFormatException e) {
+                throw new DukeException("☹ OOPS!!! Invalid task number.");
             }
         }
     }
