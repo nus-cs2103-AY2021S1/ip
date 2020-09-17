@@ -35,6 +35,6 @@ public class Duke {
     }
 
     public static void main(String[] args) throws Exception {
-        new Duke("/Users/juanlie/cs2103t/pw2/ip/data").run();
+        new Duke("data").run();
     }
 }

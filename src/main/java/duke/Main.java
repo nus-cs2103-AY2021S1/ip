@@ -13,7 +13,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke("/Users/juanlie/cs2103t/pw2/ip/data");
+    private Duke duke = new Duke("data");
 
     public Main() throws Exception {
     }

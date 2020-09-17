@@ -164,8 +164,24 @@ public class Ui {
      * Prints out the list of tasks when the user inputs in "list"
      * @throws Exception
      */
-    public String respondToList() throws Exception {
-        return s.printList();
+    public String respondToList(ArrayList<Task> arr) throws Exception {
+        int counter = 1;
+        String str = "Here are the tasks in your list: ";
+        for (Task t: arr) {
+            String keyword = "";
+            String toPrint = "";
+            if (t instanceof Deadline) {
+                keyword = "by";
+                toPrint = " (" + keyword + ": " + t.getTime() + ")";
+            } else if (t instanceof Event) {
+                keyword = "at";
+                toPrint = " (" + keyword + ": " + t.getTime() + ")";
+            }
+            String taskStr = t.getIndicator() + t.getIcon() + t.getName() + toPrint;
+            str += "\n" + counter + ". " + taskStr;
+            counter++;
+        }
+        return str;
     }
 
     /**

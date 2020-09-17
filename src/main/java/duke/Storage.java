@@ -15,7 +15,7 @@ public class Storage {
 
     Storage(String path) {
         this.filepath = path;
-        this.file = new File(path);
+        this.file = new File(filepath);
         this.actions = new Stack<>();
     }
 
@@ -25,23 +25,7 @@ public class Storage {
      * @throws IOException
      */
     boolean create() throws IOException {
-        return !file.exists() ? file.createNewFile() : false;
-    }
-
-    /**
-     * Reads the hard disk and prints the list.
-     * @throws FileNotFoundException
-     */
-    String printList() throws FileNotFoundException {
-        Scanner s = new Scanner(file);
-        int counter = 1;
-        String str = "Here are the tasks in your list: ";
-        while (s.hasNextLine()) {
-            String task = s.nextLine();
-            str += "\n" + counter + ". " + task;
-            counter++;
-        }
-        return str;
+        return !file.exists() && file.createNewFile();
     }
 
     /**

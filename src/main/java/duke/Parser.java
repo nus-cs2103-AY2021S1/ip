@@ -75,7 +75,7 @@ public class Parser {
         if (arr.size() == 0) {
             return ui.respondToEmptyList();
         } else {
-            return ui.respondToList();
+            return ui.respondToList(arr);
         }
     }
 

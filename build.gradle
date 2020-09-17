@@ -41,6 +41,7 @@ test {
         showStackTraces true
         showStandardStreams = false
     }
+    systemProperty "file.encoding", "utf-8"
 }
 
 application {
@@ -58,4 +59,11 @@ checkstyle {
 
 run{
     standardInput = System.in
+    systemProperty "file.encoding", "utf-8"
+}
+
+compileJava.options.encoding = 'UTF-8'
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
 }
