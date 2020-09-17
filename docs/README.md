@@ -5,16 +5,16 @@ Duke is a Task Manager application which helps you to organize and set up your t
 
 ## Features 
 Overview of available features:  
->• `list`  
-    • `todo`  
-    • `deadline`  
-    • `event`  
-    • `delete`  
-    • `done`  
-    • `find`  
-    • `sort`  
-    • `bye` 
->
+  * `list`  
+  * `todo`  
+  * `deadline`  
+  * `event`  
+  * `delete`  
+  * `done`  
+  * `find`  
+  * `sort`  
+  * `bye` 
+
 ### Feature 1: Viewing the task list
 Views all the tasks in your current task list: `list` 
 
@@ -37,11 +37,11 @@ Adds a todo task to the task list: `todo`
 Format: `todo [description] /priority [priority]`  
 
 Remarks:  
->• `[description]` can have spaces.  
-	• `[description]` is case-sensitive.  
-	• `[priority]` can take one of `high`, `medium` or `low`.  
-	• `[priority]` is optional. If it is not indicated, priority is set to `low`.  
->
+  * `[description]` can have spaces.  
+  * `[description]` is case-sensitive.  
+  * `[priority]` can take one of `high`, `medium` or `low`.  
+  * `[priority]` is optional. If it is not indicated, priority is set to `low`.  
+
 Example: `todo do CS2103T iP increment`  
 
 Expected example outcome:
@@ -57,13 +57,13 @@ Adds a deadline task to the task list: `deadline`
 Format: `deadline [description] /by [date] /priority [priority]` or `deadline [description] /by [date] [time] /priority [priority]`  
 
 Remarks:  
->• `[description]` can have spaces.  
-	• `[description]` is case-sensitive.
-	• `[time]` field is optional.  
-	• `[date]` `[time]` must follow this format YYYY-MM-DD HH:mm.  
-	• `priority]` can take one of `high`, `medium` or `low`.  
-	• `[priority]` is optional. If it is not indicated, priority is set to `low`.  
->
+  * `[description]` can have spaces.  
+  * `[description]` is case-sensitive.
+  * `[time]` field is optional.  
+  * `[date]` `[time]` must follow this format YYYY-MM-DD HH:mm.  
+  * `[priority]` can take one of `high`, `medium` or `low`.  
+  * `[priority]` is optional. If it is not indicated, priority is set to `low`.  
+
 Example: `deadline CS2100 assignment /by 2020-09-18 23:59`  
 
 Expected example outcome:  
@@ -79,13 +79,13 @@ Adds an event task to the task list: `event`
 Format: `event [description] /at [date] /priority [priority]` or `event [description] /at [date] [time] /priority [priority]`  
 
 Remarks:  
->• `[description]` can have spaces.  
-	• `[description]` is case-sensitive.
-	• `[time]` field is optional.  
-	• `[date]` `[time]` must follow this format YYYY-MM-DD HH:mm.  
-	• `[priority]` can take one of `high`, `medium` or `low`.  
-	• `[priority]` is optional. If it is not indicated, priority is set to `low`.  
->
+  * `[description]` can have spaces.  
+  * `[description]` is case-sensitive.
+  * `[time]` field is optional.  
+  * `[date]` `[time]` must follow this format YYYY-MM-DD HH:mm.  
+  * `[priority]` can take one of `high`, `medium` or `low`.  
+  * `[priority]` is optional. If it is not indicated, priority is set to `low`.  
+
 Example: `event The International 10 /at 2021-08-15 /priority medium`  
 
 Expected example outcome:  
@@ -101,8 +101,8 @@ Deletes a given task from your task list: `delete`
 Format: `delete [index]`  
 
 Remarks:  
->• `[index]` in the index of the task appeared in the task list.  
->	
+  * `[index]` in the index of the task appeared in the task list.  
+	
 Example: `delete 6`  
 
 Expected example outcome:
@@ -118,8 +118,8 @@ Marks a given task as done: `done`
 Format: `done [index]`  
 
 Remarks:  
->• `[index]` in the index of the task appeared in the task list.  
->	
+  * `[index]` in the index of the task appeared in the task list.  
+	
 Example: `done 2`  
 
 Expected example outcome:  
@@ -143,9 +143,9 @@ Finds tasks such that their description contains a given keyword: `find`
 Format: `find [keyword]`  
 
 Remarks:  
->• `keyword` is case sensitive. For instance `CS2100` will only match `CS2100`, and will not match `cs2100`.  
-	• `keyword` can contain only one complete word.  
->	
+  * `keyword` is case sensitive. For instance `CS2100` will only match `CS2100`, and will not match `cs2100`.  
+  * `keyword` can contain only one complete word.  
+	
 Example: `find play`  
 
 Expected example outcome:  
