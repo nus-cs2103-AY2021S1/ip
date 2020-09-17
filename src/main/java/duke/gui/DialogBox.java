@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 /**
@@ -27,13 +28,14 @@ public class DialogBox extends HBox {
     private ImageView displayPicture;
 
     /**
-     * Generator for a <code>DialogBox</code>. Customizes the text, image and font of the displayed contents.
+     * Constructor for a <code>DialogBox</code>. Customizes the text, image and font of the displayed contents.
      *
      * @param text Text for display in <code>dialog</code>.
      * @param img Image for display in <code>displayPicture</code>.
      * @param font Font to be used for text.
+     * @param color Color to be used for text.
      */
-    private DialogBox(String text, Image img, Font font) {
+    private DialogBox(String text, Image img, Font font, Color color) {
 
         // Load component from FXML
         try {
@@ -47,8 +49,20 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         dialog.setFont(font);
+        dialog.setTextFill(color);
         displayPicture.setImage(img);
 
+    }
+
+    /**
+     * Constructor that defaults text color to black.
+     *
+     * @param text Text for display in <code>dialog</code>.
+     * @param img Image for display in <code>displayPicture</code>.
+     * @param font Font to be used for text.
+     */
+    private DialogBox(String text, Image img, Font font) {
+        this(text, img, font, Color.BLACK);
     }
 
     /**
@@ -82,12 +96,29 @@ public class DialogBox extends HBox {
      * @return Initialized <code>DialogBox</code> for Duke's messages for display in GUI.
      */
     public static DialogBox getDukeDialog(String text, Image img, Font font) {
-        var db = new DialogBox(text, img, font);
+        DialogBox db = new DialogBox(text, img, font);
 
         // Flips contents so that avatar image for Duke is on the left.
         db.flip();
 
         return db;
     }
+
+    /**
+     * Creates a <code>DialogBox</code> for a warning by Duke.
+     *
+     * @param text Duke output text.
+     * @param img Duke avatar image.
+     * @param font Font for Duke's text.
+     * @return Initialized <code>DialogBox</code> for Duke's warning for display in GUI.
+     */
+    public static DialogBox getDukeWarningDialog(String text, Image img, Font font) {
+        DialogBox db = new DialogBox(text, img, font, Color.RED);
+
+        db.flip();
+
+        return db;
+    }
+
 
 }

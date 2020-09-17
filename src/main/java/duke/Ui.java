@@ -76,10 +76,11 @@ public class Ui {
 
     /**
      * Prints error message of <code>Exception</code> using <code>Exception.getMessage()</code>.
+     * Depending on implementation, <code>outputHandler</code> may handle a warning differently from a normal output.
      * @param e <code>Exception</code> whose error message is to be printed.
      */
     public void displayException(Exception e) {
-        this.displayNow(e.getMessage());
+        this.outputHandler.printWarning(e.getMessage());
     }
 
     /**
