@@ -12,7 +12,7 @@ public class Duke {
      * The entry point to the program
      */
     private final TaskList taskList;
-    private final Parser parser;
+    private final LogicController logicController;
 
     public Duke(String filename) {
         if (filename.isEmpty()) {
@@ -22,10 +22,10 @@ public class Duke {
         }
         Ui.init();
         Ui.greet();
-        parser = new Parser(taskList);
+        logicController = new LogicController(taskList);
     }
 
     public String getResponse(String input) {
-        return parser.run(input);
+        return logicController.run(input);
     }
 }

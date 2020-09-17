@@ -3,10 +3,10 @@ package duke;
 /**
  * Handle user input and control the program's logic
  */
-class Parser {
+class LogicController {
     private final TaskList taskList;
 
-    Parser(TaskList taskList) {
+    LogicController(TaskList taskList) {
         this.taskList = taskList;
     }
 
