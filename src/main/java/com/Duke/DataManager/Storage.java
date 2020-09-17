@@ -87,7 +87,7 @@ public class Storage {
                         taskList.add(new Event(dataArr[1], LocalTime.parse(dataArr[2]), LocalTime.parse(dataArr[3]), false, LocalDate.parse(dataArr[4])));
                     }
                 } else if ("D".equals(dataArr[0])) {
-                    if (dataArr[4].equals("Y")) {
+                    if (dataArr[3].equals("Y")) {
                         taskList.add(new Deadline(dataArr[1], LocalDate.parse(dataArr[2]), true));
                     } else {
                         taskList.add(new Deadline(dataArr[1], LocalDate.parse(dataArr[2]), false));

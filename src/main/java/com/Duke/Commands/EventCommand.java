@@ -28,15 +28,15 @@ public class EventCommand extends Command{
     @Override
     public String execute() {
         try {
-            String[] splitList2 = splitList[1].split(" /on ", 2);
+            String[] splitList2 = splitList[1].split("/on", 2);
             String[] splitList3 = splitList2[1].split("/at ", 2);
             String[] splitList4 = splitList3[1].split("-", 2);
             System.out.println(splitList3[0]);
             System.out.println(splitList4[0]);
             System.out.println(splitList4[1]);
             Event event = new Event(splitList2[0],
-                    LocalTime.parse(splitList4[0]),
-                    LocalTime.parse(splitList4[1]),
+                    LocalTime.parse(splitList4[0].trim()),
+                    LocalTime.parse(splitList4[1].trim()),
                     false,
                     LocalDate.parse(splitList3[0].trim()));
             return UI.eventCalled(taskList,event);
