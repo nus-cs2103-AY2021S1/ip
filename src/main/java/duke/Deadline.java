@@ -3,33 +3,23 @@ package duke;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Deadline extends Task {
+public class Deadline extends TimedTask {
 
-    protected LocalDate date;
-    protected String time;
-
-    public Deadline(String description, LocalDate by, String time) {
-        super(description);
-        this.date = by;
-        this.time = time;
+    public Deadline(String description, LocalDate date) {
+        super(description, date);
     }
 
-    public Deadline(String description, boolean isDone, LocalDate date, String time) {
-        super(description, isDone);
-        this.date = date;
-        this.time = time;
+    public Deadline(String description, boolean isDone, LocalDate date) {
+        super(description, isDone, date);
     }
 
     @Override
     public String toText() {
-        String str = super.toText("D");
-        str += "| " + this.date.format(Common.BASIC_FORMATTER) + " | " + this.time;
-        return str;
+        super.toText("D");
     }
 
     @Override
     public String toString() {
-        String dateOutput = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-        return "[D]" + super.toString() + " (by: " + dateOutput + " " + time + ")";
+        super.toString("D");
     }
 }

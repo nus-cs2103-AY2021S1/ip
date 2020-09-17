@@ -1,27 +1,24 @@
 package duke;
 
-public class Event extends Task {
-    protected String at;
+import java.time.LocalDate;
 
-    public Event(String description, String at) {
-        super(description);
-        this.at = at;
+public class Event extends TimedTask {
+
+    public Event(String description, LocalDate date) {
+        super(description, date);
     }
 
-    public Event(String description, String at, boolean isDone) {
-        super(description, isDone);
-        this.at = at;
+    public Event(String description, LocalDate date, boolean isDone) {
+        super(description, isDone, date);
     }
 
     @Override
     public String toText() {
-        String str = super.toText("E");
-        str += "| " + this.at;
-        return str;
+        super.toText("E");
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        super.toString("E");
     }
 }
