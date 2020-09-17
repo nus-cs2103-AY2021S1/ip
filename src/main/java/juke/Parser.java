@@ -124,7 +124,7 @@ public class Parser {
             throw new UnknownTimeException("No at time added");
         }
 
-        String[] newSplitArr = inputText.substring(6).split("/at ");
+        String[] newSplitArr = inputText.substring(6).split(" /at ");
 
         if (newSplitArr.length == 1) {
             throw new EmptyTimeException("No time entered");
@@ -143,7 +143,7 @@ public class Parser {
             throw new UnknownTimeException("No by time added");
         }
 
-        String[] newSplitArr = inputText.substring(9).split("/by ");
+        String[] newSplitArr = inputText.substring(9).split(" /by ");
 
         if (newSplitArr.length == 1) {
             throw new EmptyTimeException("No time entered");

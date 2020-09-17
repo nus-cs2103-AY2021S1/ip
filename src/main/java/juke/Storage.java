@@ -15,8 +15,6 @@ import juke.task.Event;
 import juke.task.Task;
 import juke.task.Todo;
 
-
-
 /**
  * Represents a Storage class that handles all the hard-disk storage of the Tasklist.
  */
