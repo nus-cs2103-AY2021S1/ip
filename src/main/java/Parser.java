@@ -134,16 +134,18 @@ public class Parser {
         } else {
             int timeLength = isDone[isDone.length - 1].length();
             int dateLength = isDone[isDone.length - 2].length();
-            String slashFirst = String.valueOf(isDone[isDone.length - 2].charAt(2));
-            String slashSecond = String.valueOf(isDone[isDone.length - 2].charAt(5));
             if (timeLength < 4 || dateLength < 10 ) {
                 throw new InvalidDeadlineException("Fail to add task :( . "
                         + "Please check the time and date format again. "
                         + "The correct format should be dd/mm/yyyy tttt. Eg: 02/08/2019 1800");
-            } else if (!slashFirst.equals("/") || !slashSecond.equals("/")) {
-                throw new InvalidDeadlineException("Fail to add task :( . "
-                        + "Please check the time and date format again. "
-                        + "The correct format should be dd/mm/yyyy tttt. Eg: 02/08/2019 1800");
+            } else {
+                String slashFirst = String.valueOf(isDone[isDone.length - 2].charAt(2));
+                String slashSecond = String.valueOf(isDone[isDone.length - 2].charAt(5));
+                if (!slashFirst.equals("/") || !slashSecond.equals("/")) {
+                    throw new InvalidDeadlineException("Fail to add task :( . "
+                            + "Please check the time and date format again. "
+                            + "The correct format should be dd/mm/yyyy tttt. Eg: 02/08/2019 1800");
+                }
             }
         }
         int index = input.indexOf("/by");
@@ -172,16 +174,18 @@ public class Parser {
         } else {
             int timeLength = isDone[isDone.length - 1].length();
             int dateLength = isDone[isDone.length - 2].length();
-            String slashFirst = String.valueOf(isDone[isDone.length - 2].charAt(2));
-            String slashSecond = String.valueOf(isDone[isDone.length - 2].charAt(5));
             if (timeLength < 4 || dateLength < 10 ) {
                 throw new InvalidEventException("Fail to add task :( . "
                         + "Please check the time and date format again. "
                         + "The correct format should be dd/mm/yyyy tttt. Eg: 02/08/2019 1800");
-            } else if (!slashFirst.equals("/") || !slashSecond.equals("/")) {
-                throw new InvalidEventException("Fail to add task :( . "
-                        + "Please check the time and date format again. "
-                        + "The correct format should be dd/mm/yyyy tttt. Eg: 02/08/2019 1800");
+            } else {
+                String slashFirst = String.valueOf(isDone[isDone.length - 2].charAt(2));
+                String slashSecond = String.valueOf(isDone[isDone.length - 2].charAt(5));
+                if (!slashFirst.equals("/") || !slashSecond.equals("/")) {
+                    throw new InvalidEventException("Fail to add task :( . "
+                            + "Please check the time and date format again. "
+                            + "The correct format should be dd/mm/yyyy tttt. Eg: 02/08/2019 1800");
+                }
             }
         }
         int index = input.indexOf("/at");
