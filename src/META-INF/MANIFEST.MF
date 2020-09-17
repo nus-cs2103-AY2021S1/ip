@@ -1,2 +1,2 @@
 Manifest-Version: 1.0
-Main-Class: main.java.Duke
+Main-Class: main.java.Launcher
