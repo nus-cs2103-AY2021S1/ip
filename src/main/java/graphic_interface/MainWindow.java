@@ -3,6 +3,7 @@ package graphic_interface;
 
 import duke.Duke;
 import duke.DukeException;
+import duke.Ui;
 import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -97,7 +98,7 @@ public class MainWindow extends AnchorPane {
                     DialogBox.getDukeDialog(response, dukeImage)
             );
         } catch (DukeException err) {
-            dialogContainer.getChildren().add(DialogBox.getDukeWarning(err.getMessage(), angerImage));
+            dialogContainer.getChildren().add(DialogBox.getDukeWarning(Ui.showError(err.getMessage()), angerImage));
         } finally {
             userInput.clear();
             if (this.isFinished) {

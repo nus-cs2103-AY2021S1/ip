@@ -32,7 +32,7 @@ public class Parser {
      * @param input The input from the users.
      * @return a String array that contains different components of the input.
      */
-    public Command createCommand(String input) throws DukeException {
+    public Command createCommandFromInput(String input) throws DukeException {
         String[] inputComponents = splitIntoComponents(input);
         String command = inputComponents[0];
 
@@ -76,16 +76,12 @@ public class Parser {
     private boolean isCreateTask(String command) {
         return Arrays.asList(TASK_TYPES).contains(command);
     }
+
     private boolean isRelatedToStorage(String command) {
         return Arrays.asList(MEMORY_COMMAND_TYPES).contains(command);
     }
-    /**
-     * Return respective Command when users enter a word.
-     * @param command The word entered by user.
-     * @return respective command.
-     * @throws DukeException if there is error creating the Command.
-     */
-    public Command singleWordCommand(String command) throws DukeException {
+
+    private Command singleWordCommand(String command) throws DukeException {
         switch(command) {
         case "bye":
             return new ByeCommand();

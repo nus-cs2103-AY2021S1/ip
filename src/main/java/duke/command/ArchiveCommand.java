@@ -21,7 +21,7 @@ public class ArchiveCommand implements Command {
      * @param tasks The tasklist to save the data to.
      * @param terminationFunction Function to run if this is the bye command.
      * @return The success message.
-     * @throws DukeException when there is error carrying out the command.
+     * @throws DukeException when there is problem executing the Command.
      */
     @Override
     public String execute(Storage storage, TaskList tasks, Runnable terminationFunction) throws DukeException {

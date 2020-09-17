@@ -1,10 +1,7 @@
 
 package duke;
 
-import java.util.Arrays;
-
 import duke.command.Command;
-import duke.task.Task;
 /**
  * Responsible for interpreting the input and interacting with the User.
  */
@@ -43,7 +40,7 @@ public class Duke {
      * @return Either Success Message or Error Message due to bad formatting.
      */
     public String processInput(String input, Runnable terminationFunction) throws DukeException {
-        Command command = parser.createCommand(input);
+        Command command = parser.createCommandFromInput(input);
         assert command != null : "Error in Parser";
         return command.execute(storage, tasks, terminationFunction);
     }

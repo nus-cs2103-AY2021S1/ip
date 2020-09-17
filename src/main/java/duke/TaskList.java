@@ -159,6 +159,9 @@ public class TaskList {
         return output;
     }
 
+    /**
+     * Replace the current data with archived data.
+     */
     public void loadArchivedTasks(ArrayList<Task> dataRead) {
         this.tasks = dataRead;
     }
