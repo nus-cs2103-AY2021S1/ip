@@ -23,22 +23,19 @@ class LogicController {
             } else if (command.equals("list")) {
                 taskList.list();
             } else if (command.startsWith("done")) {
-                taskList.markDone(command.substring(5));
+                taskList.markDone(command.substring(4));
             } else if (command.startsWith("deadline") || command.startsWith("event")
                     || command.startsWith("todo")) {
                 taskList.addTask(command);
             } else if (command.startsWith("delete")) {
-                taskList.delete(command.substring(7));
+                taskList.delete(command.substring(6));
             } else if (command.startsWith("find")) {
-                taskList.find(command.substring(5));
+                taskList.find(command.substring(4));
             } else {
-                throw new IllegalArgumentException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                throw new IllegalArgumentException();
             }
         } catch (IllegalArgumentException e) {
             Ui.printException(e);
-        } catch (StringIndexOutOfBoundsException e) {
-            Ui.printException(new IllegalArgumentException("☹ OOPS!!! I'm sorry, but I don't know what that means"
-                    + " :-("));
         }
         return Ui.getResponse();
     }

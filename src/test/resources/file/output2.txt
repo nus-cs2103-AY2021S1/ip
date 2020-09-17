@@ -12,21 +12,17 @@ Got it. I've added this task:
 Now you have 3 tasks in the list.
 
 Got it. I've added this task:
-[D][✗] sample (by: Oct 15 2019)
+[D][✗] sample (by: Oct 19 2020)
 Now you have 4 tasks in the list.
 
-Got it. I've added this task:
-[D][✗] sample (by: Oct 15 2019)
-Now you have 5 tasks in the list.
-
+☹ OOPS!!! I can't recognize the date provided
 Got it. I've added this task:
 [T][✗] sample
-Now you have 6 tasks in the list.
+Now you have 5 tasks in the list.
 
 Here are the tasks in your list:
 1.[D][✗] sample (by: Oct 15 2019)
 2.[E][✗] sample (between: Oct 15 2019 and Oct 16 2019)
 3.[D][✗] sample (by: Oct 15 2019)
-4.[D][✗] sample (by: Oct 15 2019)
-5.[D][✗] sample (by: Oct 15 2019)
-6.[T][✗] sample
+4.[D][✗] sample (by: Oct 19 2020)
+5.[T][✗] sample

@@ -39,39 +39,47 @@ public class TaskList {
     private void addTodo(String desc) {
         desc = desc.trim();
         if (desc.isEmpty()) {
-            throw new IllegalArgumentException("☹ OOPS!!! The description of a todo cannot be empty.");
+            throw new IllegalArgumentException();
         }
         tasks.add(new Todo(desc));
     }
 
     private void addDeadline(String desc) {
         desc = desc.trim();
-        if (desc.isEmpty()) {
-            throw new IllegalArgumentException("☹ OOPS!!! Missing arguments for deadline task");
+        if (!desc.contains("/by")) {
+            throw new IllegalArgumentException();
         }
-        String newDesc = desc.substring(0, desc.indexOf('/') - 1);
-        String time = desc.substring(desc.indexOf('/') + 4);
+        String[] elements = desc.split("/by");
+        if (elements.length != 2) {
+            throw new IllegalArgumentException();
+        }
+        String newDesc = elements[0].trim();
+        String time = elements[1].trim();
         tasks.add(new Deadline(newDesc, time));
     }
 
-    private void addEvent(String event) {
-        event = event.trim();
-        if (event.isEmpty()) {
-            throw new IllegalArgumentException("☹ OOPS!!! Missing arguments for event task");
+    private void addEvent(String desc) {
+        desc = desc.trim();
+        if (desc.isEmpty()) {
+            throw new IllegalArgumentException();
         }
-        if (event.contains("/between")) {
-            String[] elements = event.split("/between");
+        if (desc.contains("/between")) {
+            String[] elements = desc.split("/between");
             String[] times = elements[1].split("and");
             if (times.length != 2) {
-                throw new IllegalArgumentException("☹ OOPS!!! Invalid dates provided");
+                throw new IllegalArgumentException();
             }
             String newDesc = elements[0].trim();
             String happenAt = times[0].trim();
             String endAt = times[1].trim();
             tasks.add(new Event(newDesc, happenAt, endAt));
         } else {
-            String newDesc = event.substring(0, event.indexOf('/') - 1);
-            String time = event.substring(event.indexOf('/') + 4);
+            String[] elements = desc.split("/at");
+            if (elements.length != 2) {
+                throw new IllegalArgumentException();
+            }
+            String newDesc = elements[0].trim();
+            String time = elements[1].trim();
             tasks.add(new Event(newDesc, time));
         }
     }
@@ -92,7 +100,7 @@ public class TaskList {
                 addEvent(command.substring(5));
             }
         } catch (DateTimeParseException e) {
-            throw new IllegalArgumentException("☹ OOPS!!! Invalid dates provided");
+            throw new IllegalArgumentException();
         }
         Ui.addTask(tasks);
         saveToDisk();
@@ -104,6 +112,7 @@ public class TaskList {
      * @param command raw String contains the task id to mark as done
      */
     public void markDone(String command) {
+        command = command.trim();
         int num = Integer.parseInt(command) - 1;
         tasks.get(num).setDone();
         Ui.markDone(tasks.get(num));
@@ -116,10 +125,15 @@ public class TaskList {
      * @param command raw String contains the task id to delete from the list
      */
     public void delete(String command) {
-        int num = Integer.parseInt(command) - 1;
-        Task cur = tasks.remove(num);
-        Ui.delete(cur, tasks);
-        saveToDisk();
+        command = command.trim();
+        try {
+            int num = Integer.parseInt(command) - 1;
+            Task cur = tasks.remove(num);
+            Ui.delete(cur, tasks);
+            saveToDisk();
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException();
+        }
     }
 
     /**

@@ -48,7 +48,7 @@ class LogicControllerTest {
     @org.junit.jupiter.api.Test
     void testRunEventBetweenMissingArgument() {
         String response = logicController.run("event return book /between 2019-10-15");
-        Assertions.assertTrue(response.contains("☹ OOPS!!! Invalid dates provided"));
+        Assertions.assertTrue(response.contains("☹ OOPS!!! I'm sorry, but I don't know what that means :-("));
     }
 
     @org.junit.jupiter.api.Test

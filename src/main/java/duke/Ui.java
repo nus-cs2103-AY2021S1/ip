@@ -84,6 +84,10 @@ public class Ui {
      * @param e the exception to be printed
      */
     public static void printException(IllegalArgumentException e) {
+        if (e.getMessage() == null) {
+            println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            return;
+        }
         println(e.getMessage());
     }
 
