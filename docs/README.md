@@ -1,6 +1,5 @@
----
-title: User Guide
----
+
+# User Guide
 
 * Table of Contents
 {:toc}
