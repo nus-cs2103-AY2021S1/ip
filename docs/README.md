@@ -1,20 +1,31 @@
 # User Guide
 
 ## Features 
+### `help`
+Displays all the available instructions in Duke.
+### `list`
+Displays all the tasks added in Duke.
+###`todo DESCRIPTION`
+Adds a simple task.
 
-### Feature 1 
-Description of feature.
+Eg. `todo read book`
+### `deadline DESCRIPTION /by DATE(mm-dd-yyyy)`
+Adds a task to be done by a date.
 
-## Usage
+Eg. `deadline return book /by 09-30-2020`
+### `event DESCRIPTION /at DATE(mm-dd-yyyy)`
+Adds a task to be done at a date.
 
-### `Keyword` - Describe action
+Eg. `event borrow book /at 09-30-2020`
+### `done INDEX`
+Marks the task at a specific index as done.
 
-Describe action and its outcome.
+Eg. `done 2` marks the second task in the list as done.
+### `delete INDEX`
+Delete the task at a specific index.
 
-Example of usage: 
+Eg. `delete 2` deletes the second task in the list.
+### `find KEYWORD`
+Displays all the tasks that contains the key word.
 
-`keyword (optional arguments)`
-
-Expected outcome:
-
-`outcome`
+Eg. `find book` displays all the tasks that contains `book`.
