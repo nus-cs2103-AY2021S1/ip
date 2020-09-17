@@ -64,6 +64,16 @@ public class DateTimeHandler {
     }
 
     /**
+     * Checks if date information is parsed as LocalDate.
+     *
+     * @param date LocalDate object.
+     * @return If date information is parsed as LocalDate.
+     */
+    private static boolean isDateParsed(LocalDate date) {
+        return date != null;
+    }
+
+    /**
      * Generates a string for printing from either the LocalDateTime object, LocalDate object, or date time String.
      *
      * @param dateTimeString String representing date and/or time information.
@@ -72,9 +82,9 @@ public class DateTimeHandler {
      * @return String representing the date time information for printing.
      */
     public static String generateDateTimeFormat(String dateTimeString, LocalDate date, LocalDateTime dateTime) {
-        if (dateTime != null) {
+        if (isDateTimeParsed(dateTime)) {
             return dateTime.format(DateTimeFormatter.ofPattern("MMM dd yyyy, h:mm a"));
-        } else if (date != null) {
+        } else if (isDateParsed(date)) {
             return date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
         } else {
             return dateTimeString;
