@@ -23,7 +23,7 @@ public class DoWithin extends Task{
     }
 
     public String getWithinPeriod(){
-        return "(within: " + dateStart.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + "-" + dateEnd.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")" ;
+        return "(within: " + dateStart.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " - " + dateEnd.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")" ;
     }
 
     /**

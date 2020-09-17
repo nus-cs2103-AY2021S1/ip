@@ -7,7 +7,9 @@ import com.Duke.Tasks.Event;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
-
+/**
+ * This class acts as a model for the execution of the EventCommand
+ */
 public class EventCommand extends Command{
 
     private final String[] splitList;
@@ -18,7 +20,10 @@ public class EventCommand extends Command{
         this.taskList = taskList;
     }
 
-
+    /**
+     * Simulates Duke executing the Event Command
+     * @return The response to the command "event"
+     */
     @Override
     public String execute() {
         try {

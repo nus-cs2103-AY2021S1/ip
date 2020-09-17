@@ -5,6 +5,9 @@ import com.Duke.Tasks.Task;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class models the list of pending or done tasks managed by Duke
+ */
 public class TaskList {
     public final List<Task> ls;
 
@@ -16,6 +19,12 @@ public class TaskList {
         return ls.size();
     }
 
+    /**
+     * This method takes a int which represents the position of the task and
+     * sets the task to be done
+     * @param task
+     * @throws DukeException
+     */
     public void setDone(int task) throws DukeException {
         assert task > 0 : "Invalid task entered";
         if(task>ls.size()){
@@ -25,7 +34,12 @@ public class TaskList {
         }
     }
 
-
+    /**
+     * Takes a hint string to find all tasks within the tasklist with similar task
+     * names
+     * @param hint
+     * @return a list of tasks with similar task names to the hint
+     */
     public TaskList findTask(String hint){
         assert hint !=null : "I couldn't understand the hint please try again";
         TaskList containsHint = new TaskList(new ArrayList<>());
@@ -42,6 +56,13 @@ public class TaskList {
         return this.ls;
     }
 
+    /**
+     * Takes a int position of the task within this list and removes it
+     * from the task list
+     * @param task
+     * @return returns the delete message to be displayed on GUI
+     * @throws DukeException
+     */
     public String delete(int task) throws DukeException {
         if(task>ls.size()) {
             throw new DukeException("You don't have that many tasks");

@@ -1,2 +1,7 @@
-E*bday*20:00*21:30*2020-11-20*Y
-W*homework *2020-11-20*2020-11-21*N
+T*hw*Y
+T*hw*N
+T*hw*N
+T*hw*N
+T*hw*N
+T*hw*N
+W*homework *2020-09-17*2020-10-11*N

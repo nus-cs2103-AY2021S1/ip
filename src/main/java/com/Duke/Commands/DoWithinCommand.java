@@ -6,7 +6,9 @@ import com.Duke.Tasks.DoWithin;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-
+/**
+ * This class acts as a model for the execution of the DoWithinCommand
+ */
 public class DoWithinCommand extends Command{
     private final String[] splitList;
     private final TaskList taskList;
@@ -17,8 +19,8 @@ public class DoWithinCommand extends Command{
     }
 
     /**
-     * Simulates Duke executing the Deadline Command
-     * @return The response to the command "deadline"
+     * Simulates Duke executing the Do Within Command
+     * @return The response to the command "do"
      */
     public String execute() {
         try {

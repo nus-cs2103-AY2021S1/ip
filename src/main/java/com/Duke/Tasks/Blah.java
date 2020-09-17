@@ -1,7 +1,5 @@
 package com.Duke.Tasks;
 
-import com.Duke.TaskManager.DukeException;
-
 /**
  * Class that encapsulates the blah Input
  */
