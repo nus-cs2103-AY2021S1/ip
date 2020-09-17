@@ -1,5 +1,0 @@
-[T]|?|study
-[D]|?|project|19/09/2020 23:59
-[E]|?|meeting|19/09/2020 10:00
-[T]|?|homework
-[T]|?|sleep

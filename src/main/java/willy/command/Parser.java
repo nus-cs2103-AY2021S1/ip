@@ -21,12 +21,19 @@ public class Parser {
         this.list = list;
     }
 
+    private String provideHelp() {
+        String commands = Format.TODO + "\n" + Format.DEADLINE + "\n" + Format.EVENT
+                + "\n" + Format.DONE + "\n" + Format.DELETE + "\n" + Format.EDIT
+                + "\n" + Format.FIND + "\n" + Format.LIST;
+        return commands;
+    }
+
     /**
      * Creates the various types of Tasks to be added to the list.
      * @param message Input by the user.
      * @return String version of the task being added to the list.
      */
-    private String taskCreator(String message) {
+    private String createTask(String message) {
         String response = "";
         if (message.contains("todo")) {
             try {
@@ -34,7 +41,7 @@ public class Parser {
                 TodoTask newTask = new TodoTask(activity, TaskSymbol.TODO);
                 response = list.addToList(newTask);
             } catch (Exception e) {
-                WillyException error = new WillyException(Response.NO_TASK.toString() + Format.TODO);
+                WillyException error = new WillyException(Response.NO_TASK.toString() + Format.TODO.toString());
                 response = error.toString();
             }
         }
@@ -70,17 +77,18 @@ public class Parser {
         }
         return response;
     }
+
     /**
      * Edit Tasks in the List by replacing it with a new version of the task.
      * @param taskNum Number representing the task in the list that is selected to be edited.
-     * @param message Input by the user.
+     * @param truncatedMessage Input by the user.
      * @return String version of the task that will replace the old task in the list.
      */
-    private String taskEditor(int taskNum, String message) {
+    private String editTask(int taskNum, String truncatedMessage) {
         String response = "";
-        if (message.contains("todo")) {
+        if (truncatedMessage.contains("todo")) {
             try {
-                String activity = message.substring(5);
+                String activity = truncatedMessage.substring(5);
                 TodoTask newTask = new TodoTask(activity, TaskSymbol.TODO);
                 response = list.updateTask(taskNum, newTask);
             } catch (Exception e) {
@@ -90,11 +98,11 @@ public class Parser {
         }
 
         // Deadline input format: dd/MM/yyyy HHmm, output format: dd MMM yyyy HH:mm a
-        if (message.contains("deadline")) {
+        if (truncatedMessage.contains("deadline")) {
             try {
-                int separatorIndex = message.indexOf("/");
-                String activity = message.substring(9, separatorIndex - 1);
-                String deadline = message.substring(separatorIndex + 4);
+                int separatorIndex = truncatedMessage.indexOf("/");
+                String activity = truncatedMessage.substring(9, separatorIndex - 1);
+                String deadline = truncatedMessage.substring(separatorIndex + 4);
                 DeadlineTask newTask = new DeadlineTask(deadline, activity, TaskSymbol.DEADLINE);
                 response = list.updateTask(taskNum, newTask);
 
@@ -105,11 +113,11 @@ public class Parser {
         }
 
         // Deadline input format: dd/MM/yyyy HH:mm, output format: dd MMM yyyy HH:mm a
-        if (message.contains("event")) {
+        if (truncatedMessage.contains("event")) {
             try {
-                int separatorIndex = message.indexOf("/");
-                String activity = message.substring(6, separatorIndex - 1);
-                String duration = message.substring(separatorIndex + 4);
+                int separatorIndex = truncatedMessage.indexOf("/");
+                String activity = truncatedMessage.substring(6, separatorIndex - 1);
+                String duration = truncatedMessage.substring(separatorIndex + 4);
                 EventTask newTask = new EventTask(duration, activity, TaskSymbol.EVENT);
                 response = list.updateTask(taskNum, newTask);
             } catch (Exception e) {
@@ -154,7 +162,7 @@ public class Parser {
             response = list.removeTask(taskNum);
 
         } else if (keyword.contains("todo") || message.contains("deadline") || message.contains("event")) {
-            response = taskCreator(message);
+            response = createTask(message);
 
         } else if (keyword.contains("find")) {
             assert message.length() > 5 : "Please insert a keyword for us to find";
@@ -169,12 +177,13 @@ public class Parser {
                 int taskNum = Integer.parseInt(message.substring(5, 6));
                 int separatorIndex = message.indexOf(">");
                 String taskMessage = message.substring(separatorIndex + 2);
-                response = taskEditor(taskNum, taskMessage);
-            } catch(Exception e) {
+                response = editTask(taskNum, taskMessage);
+            } catch (Exception e) {
                 WillyException error = new WillyException(Format.EDIT.toString());
                 response = error.toString();
             }
-
+        } else if (message.equals("help")) {
+            response = provideHelp();
         } else {
             WillyException error = new WillyException(Response.NO_SENSE.toString());
             response = error.toString();
