@@ -28,12 +28,12 @@ public class Duke {
 
     /**
      * Constructs new Duke object with default save file directory and default <code>OutputHandler</code>.
-     * Defaults save file directory to "/data/data.txt".
+     * Defaults save file directory to "data/data.txt".
      * Defaults <code>OutputHandler</code> displays to <code>System.out</code>.
      * Attempts to load the save file from the default directory.
      */
     public Duke() {
-        this(Path.of("/data", "data.txt"));
+        this(Path.of("data", "data.txt"));
     }
 
     /**
@@ -49,13 +49,13 @@ public class Duke {
 
     /**
      * Constructs new Duke object with custom <code>OutputHandler</code> and default save file directory.
-     * Defaults save file directory to "/data/data.txt".
+     * Defaults save file directory to "data/data.txt".
      * Attempts to load the save file from the default directory.
      *
      * @param outputHandler Custom <code>OutputHandler</code>.
      */
     public Duke(OutputHandler outputHandler) {
-        this(Path.of("/data", "data.txt"), outputHandler);
+        this(Path.of("data", "data.txt"), outputHandler);
     }
 
     /**

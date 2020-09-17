@@ -67,9 +67,9 @@ public class SaveManager {
             }
 
             // Throw DukeSaveDataException for not being able to load from save file
-            throw new DukeSaveDataException("Unable to load from save file - " + e.toString());
+            throw new DukeSaveDataException("Unable to load from save file - Creating new save file");
         } catch (IOException e) {
-            throw new DukeSaveDataException("Unable to load from save file - " + e.toString());
+            throw new DukeSaveDataException("Unable to load from save file - Creating new save file");
         }
 
     }
