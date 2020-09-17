@@ -1,5 +1,6 @@
 package duke;
 
+import duke.command.AboutCommand;
 import duke.command.ByeCommand;
 import duke.command.Command;
 import duke.command.DeadlineCommand;
@@ -38,6 +39,8 @@ public class Parser {
                 return new ListCommand();
             case "remind":
                 return new RemindCommand();
+            case "about":
+                return new AboutCommand();
             default:
                 break;
             }

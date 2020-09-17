@@ -37,7 +37,7 @@ public class MainWindow extends AnchorPane {
     /**
      * Duke avatar image.
      */
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/galaxybrain.jpg"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/dukebrain.jpg"));
 
     /**
      * Default font for user.

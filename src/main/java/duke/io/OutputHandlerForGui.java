@@ -29,7 +29,7 @@ public class OutputHandlerForGui extends OutputHandler {
      */
     @Override
     public void printNow(String output) {
-        mainWindow.handleDukeResponse(output + "\n");
+        mainWindow.handleDukeResponse(output + "\n\n");
     }
 
     /**

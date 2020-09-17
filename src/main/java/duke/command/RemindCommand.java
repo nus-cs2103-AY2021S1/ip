@@ -26,8 +26,6 @@ public class RemindCommand extends Command {
     @Override
     public void execute(Ui ui, TaskManager taskManager, SaveManager saveManager) {
 
-
-
         TaskManager deadlines = filterDeadlinesFromTaskManager(taskManager);
 
         // Output message to screen depending on number of deadlines present.
