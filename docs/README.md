@@ -34,8 +34,7 @@ _**botbot**_ :robot: is a desktop app for managing tasks.
   - e.g. `todo DESCRIPTION`: The user should specify a `DESCRIPTION`. A sample command is `todo send
    mail`.
 - Items in `[SQUARE_BRACKETS]` are optional fields.
-  - e.g. `edit INDEX [DESCRIPTION] [/at AT] [/by BY]`: The user can specify a `DESCRIPTION`, `AT` 
-  and/or `BY`.
+  - e.g. `event DESCRIPTION /at DATE [TIME]`: The user can specify a `DATE` with or without a `TIME`.
 
 <br /><br>
 ### Add a deadline: `deadline`
@@ -87,10 +86,10 @@ Format: `edit INDEX [/d DESCRIPTION] [/at DATE_OF_EVENT [TIME_OF_EVENT]] [/by DA
 - Specifying a field will overwrite the existing value of that field.
 - At least one of the optional fields must be provided.
 - For a to-do, only the `DESCRIPTION` can be edited.
-- For a deadline, only the `DESCRIPTION`, `BY_DATE` and `BY_TIME` can be edited.
-- For an event, only the `DESCRIPTION`, `AT_DATE` and `AT_TIME` can be edited.
-- `AT_DATE` and `AT_DATE` must follow the `D-M-YYYY` format.
-- `AT_TIME` and `BY_TIME` must follow the `HHMM` format.
+- For a deadline, only the `DESCRIPTION`, `DATE_OF_DEADLINE` and `TIME_OF_DEADLINE` can be edited.
+- For an event, only the `DESCRIPTION`, `DATE_OF_EVENT` and `TIME_OF_EVENT` can be edited.
+- `DATE_OF_DEADLINE` and `DATE_OF_EVENT` must follow the `D-M-YYYY` format.
+- `TIME_OF_DEADLINE` and `TIME_OF_EVENT` must follow the `HHMM` format.
 
 Examples:
 - `edit 2 /d call tammy /at 16-9-2020 0000` edits the description and time of the 2nd task on the task 
@@ -143,7 +142,7 @@ Action | Format
 ------ | ------
 Add | `deadline DESCRIPTION /by DATE [TIME]`<br /><br>`event DESCRIPTION /at DATE [TIME]`<br /><br>`todo DESCRIPTION`
 Delete | `delete INDEX`
-Edit | `edit INDEX [/d DESCRIPTION] [/at AT_DATE [AT_TIME]] [/by BY_DATE [BY_TIME]]`
+Edit | `edit INDEX [/d DESCRIPTION] [/at DATE_OF_EVENT [TIME_OF_EVENT]] [/by DATE_OF_DEADLINE [TIME_OF_DEADLINE]]`
 Exit | `bye`
 Mark as done | `done INDEX`
 Search | `find KEYPHRASE`
