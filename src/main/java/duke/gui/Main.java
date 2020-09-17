@@ -20,6 +20,7 @@ public class Main extends Application {
             AnchorPane ap = loader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            stage.setTitle("TODO-ke");
             loader.<MainWindow>getController().setDuke(duke);
             stage.show();
         } catch (IOException e) {
