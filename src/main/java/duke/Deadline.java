@@ -9,16 +9,16 @@ import java.time.format.DateTimeFormatter;
  */
 public class Deadline extends Task {
 
-    private final LocalDate deadline;
+    public final LocalDate deadline;
 
     Deadline(String desc, String deadline) {
         super(desc);
-        this.deadline = LocalDate.parse(deadline);
+        this.deadline = Parser.parseDate(deadline);
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[D]" + super.toString() + " (by: " + DateTimeFormatter.ofPattern("MMM d yyyy").format(deadline) + ")";
     }
 
     /**
