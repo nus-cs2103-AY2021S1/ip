@@ -32,8 +32,8 @@ public class Ui {
      * @return a String containing the Exception to be shown.
      */
     public static String showException(Exception e) {
-        System.out.println(e);
-        return e.toString();
+        System.out.println(e.getMessage());
+        return e.getMessage();
     }
 
     /**

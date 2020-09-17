@@ -62,7 +62,7 @@ public class Parser {
             break;
         default:
             throw new DukeException("What's that? Please mention one of \"list\", \"done\", \"todo\", " +
-                    "\"deadline\", \"event\", or \"bye\".");
+                    "\"deadline\", \"event\", \"find\", or \"bye\".");
         }
 
         assert command.getType().equals(commandType);
