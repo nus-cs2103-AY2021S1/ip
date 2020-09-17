@@ -2,9 +2,7 @@
 
 Duke-it is a desktop application for managing tasks by typing commands, while also having a Graphical User Interface (GUI)
 
-<p align="center">
- <img src="Ui.png" width=30% height=30%>
-</p>
+ <img src="Ui.png" width=30% height=30% class="img-responsive" alt="">
 
 * [Features](#features)
 * [Feature Details](#feature-details)
