@@ -8,6 +8,6 @@ public class InvalidIndexException extends DukeException {
      * Constructor for InvalidIndexException class.
      */
     public InvalidIndexException() {
-        super("OOPS!!! The index you have chosen is out of bounds");
+        super("OOPS! Command was not executed! Please choose an index that is within range.");
     }
 }

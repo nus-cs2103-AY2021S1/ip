@@ -25,4 +25,25 @@ public class Todo extends Task {
     public Todo(String input, boolean isComplete, String[] tags) {
         super(input, isComplete, tags);
     }
+
+    /**
+     * Converts the task to a suitable string that can be saved to the .txt file.
+     *
+     * @return String describing the task.
+     */
+    public String getSaveString() {
+        int completeSymbol = this.isComplete ? 1 : 0;
+        return String.format("%s|%d|%s|%s", SYMBOL, completeSymbol, title, convertTagsToString("/"));
+    }
+
+    /**
+     * Overrides the standard toString method.
+     *
+     * @return A string describing the task.
+     */
+    @Override
+    public String toString() {
+        String completeSymbol = this.isComplete ? "[/]" : "[X]";
+        return String.format("[%s]%s %s %s", SYMBOL, completeSymbol, title, convertTagsToString(""));
+    }
 }

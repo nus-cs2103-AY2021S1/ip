@@ -28,7 +28,8 @@ public class Storage {
     /**
      * Constructor for Storage class.
      */
-    public Storage() {}
+    public Storage() {
+    }
 
     /**
      * Combines all tasks into 1 long string separated by newlines.

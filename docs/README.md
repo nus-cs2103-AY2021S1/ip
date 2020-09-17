@@ -18,11 +18,11 @@ Use `delete INDEX` to delete the task at the specified index.
 Use `help` for Duke to give you some instructions and tips in case you have forgotten any commands.
 
 ### Exiting Duke
-Use `bye` to save your data and exit the programme.
+Use `bye` to exit the programme.
 
 ## Usage
 
-### `list`
+#### `list`
 
 Example of usage: 
 
@@ -30,9 +30,11 @@ Example of usage:
 
 Expected outcome:
 
-`Here are your tasks: ...` If no such tasks exists it will return `None`.
+`Here are your tasks: ...` If no such tasks exists it will return `No tasks found.`
 
-### `find`
+### Commands related to searching for tasks
+
+#### `find`
 
 Example of usage: 
 
@@ -40,9 +42,11 @@ Example of usage:
 
 Expected outcome:
 
-All tasks that contain all the keywords. If no such tasks exists it will return `None`.
+All tasks that contain all the keywords. If no such tasks exists it will return `No tasks found.`
 
-### `done`
+### Commands related to changing a task's status
+
+#### `done`
 
 Example of usage: 
 
@@ -54,10 +58,9 @@ Expected outcome:
 
 `Nice! I've marked this task as done: [TASK IN QUESTION]` 
 
-If the specified index is not within range, the response will be `duke.exception.InvalidIndexException: OOPS!!! The index you have 
-chosen is out of bounds`
+If the specified index is not within range, the response will be `OOPS! Command was not executed! Please choose an index that is within range.`
 
-### `delete`
+#### `delete`
 
 Example of usage: 
 
@@ -69,52 +72,62 @@ Expected outcome:
 
 `Nice! I've removed this task: [TASK IN QUESTION] Now you have XYZ tasks in the list.` 
 
-If the specified index is not within range, the response will be `duke.exception.InvalidIndexException: OOPS!!! The index you have 
-chosen is out of bounds`
+If the specified index is not within range, the response will be `OOPS! Command was not executed! Please choose an index that is within range.`
 
-### `todo`
+### Commands related to task creation
+
+You can add a tag to any tag by simply writing a `#` followed by the word.
+
+Example: `do #work today` contains the tag `work`.
+#### `todo`
 
 Creates a todo task.
 
 Example of usage: 
 
-`todo DESCRIPTION` Description cannot be empty. It must contain at least 1 nonspace character.
+`todo DESCRIPTION` Description cannot be empty and must start exactly 1 space after `todo`.
 
 Expected outcome:
 
 `Got it. I've added this task:[TASK IN QUESTION] Now you have XYZ tasks in the list.`
 
-If description is invalid, the response will be: `duke.exception.InvalidDescriptionException: OOPS!!! The description of a task cannot be empty`
+If description is empty or has erroneous spacing, the response will be: `OOPS! Task was not added! Please start your description exactly 1 space after the task type. Type 'help' to see the appropriate format.`
 
-### `event`
-
-Creates an event task.
-
-Example of usage: 
-
-`event DESCRIPTION /at TIMING` Description and timing cannot be empty. They must contain at least 1 nonspace character.
-
-Expected outcome:
-
-`Got it. I've added this task: [TASK IN QUESTION] Now you have XYZ tasks in the list.`
-
-If description or timing is invalid, the response will be: `duke.exception.InvalidDescriptionException: OOPS!!! The description of a task cannot be empty`
-
-### `deadline`
+#### `event`
 
 Creates an event task.
 
 Example of usage: 
 
-`event DESCRIPTION /by TIMING` Description and timing cannot be empty. They must contain at least 1 nonspace character.
+`event DESCRIPTION /at TIMING` Description cannot be empty and must start exactly 1 space after `event`. Timing must be in `yyyy-MM-dd` format.
 
 Expected outcome:
 
 `Got it. I've added this task: [TASK IN QUESTION] Now you have XYZ tasks in the list.`
 
-If description or timing is invalid, the response will be: `duke.exception.InvalidDescriptionException: OOPS!!! The description of a task cannot be empty`
+If description is empty or has erroneous spacing, the response will be: `OOPS! Task was not added! Please start your description exactly 1 space after the task type. Type 'help' to see the appropriate format.`
 
-### `help`
+if the timing is in invalid format, the response will be: `"OOPS! Task was not added! Please use the yyyy-MM-dd format for your date.`
+
+#### `deadline`
+
+Creates a deadline task.
+
+Example of usage: 
+
+`deadline DESCRIPTION /by TIMING` Description cannot be empty and must start exactly 1 space after `deadline`. Timing must be in `yyyy-MM-dd` format.
+
+Expected outcome:
+
+`Got it. I've added this task: [TASK IN QUESTION] Now you have XYZ tasks in the list.`
+
+If description is empty or has erroneous spacing, the response will be: `OOPS! Task was not added! Please start your description exactly 1 space after the task type. Type 'help' to see the appropriate format.`
+
+If the timing is in invalid format, the response will be: `"OOPS! Task was not added! Please use the yyyy-MM-dd format for your date.`
+
+### Commands related to getting help
+
+#### `help`
 
 Example of usage: 
 
@@ -123,6 +136,8 @@ Example of usage:
 Expected outcome:
 
 `Don't panic! I am here. Here are some useful commands: ...`
+
+### Commands related to exiting Duke
 
 ### `bye`
 

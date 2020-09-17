@@ -10,7 +10,6 @@ import duke.misc.TaskList;
 public class Duke {
 
     private TaskList taskList;
-    private Parser parser;
 
     /**
      * Constructor for Duke class
@@ -38,6 +37,6 @@ public class Duke {
             }
         }
         assert taskList.isInitialised();
-        return parser.allocate(input, taskList);
+        return Parser.allocate(input, taskList);
     }
 }

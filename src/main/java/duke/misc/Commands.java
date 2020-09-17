@@ -1,10 +1,10 @@
 package duke.misc;
 
-final class Constants {
+public final class Commands {
     /**
      * Actionable keywords.
      */
-    static final String BYE = "bye";
+    public static final String BYE = "bye";
     static final String LIST = "list";
     static final String FIND = "find";
     static final String DONE = "done";

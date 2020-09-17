@@ -3,8 +3,7 @@ package duke.task;
 /**
  * Task class to represent a task to be manipulated by Duke.
  */
-public class Task {
-    public static final String SYMBOL = "T";
+public abstract class Task {
     protected String title;
     protected boolean isComplete;
     protected String[] tags;
@@ -56,19 +55,5 @@ public class Task {
      *
      * @return String describing the task.
      */
-    public String getSaveString() {
-        int completeSymbol = this.isComplete ? 1 : 0;
-        return String.format("%s|%d|%s|%s", SYMBOL, completeSymbol, title, convertTagsToString("/"));
-    }
-
-    /**
-     * Overrides the standard toString method.
-     *
-     * @return A string describing the task.
-     */
-    @Override
-    public String toString() {
-        String completeSymbol = this.isComplete ? "[/]" : "[X]";
-        return String.format("[%s]%s %s %s", SYMBOL, completeSymbol, title, convertTagsToString(""));
-    }
+    public abstract String getSaveString();
 }

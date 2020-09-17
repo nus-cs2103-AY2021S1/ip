@@ -8,6 +8,6 @@ public class InvalidTypeException extends DukeException {
      * Constructor for InvalidTypeException class.
      */
     public InvalidTypeException() {
-        super("OOPS!!! I'm sorry, but I don't know what that means :-(");
+        super("OOPS! Command was not executed! Please use a valid command. Type 'help' for more information.");
     }
 }

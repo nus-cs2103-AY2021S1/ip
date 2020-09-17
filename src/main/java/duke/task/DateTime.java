@@ -9,7 +9,7 @@ import java.time.format.DateTimeParseException;
  */
 public class DateTime {
     static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    private LocalDate date = LocalDate.now();
+    private LocalDate date;
 
     /**
      * Constructor for the DateTime class.
@@ -17,9 +17,8 @@ public class DateTime {
      * @param date Defaults to today if the date passed in is invalid.
      */
     public DateTime(String date) {
-        if (isValidFormat(date)) {
-            this.date = LocalDate.parse(date);
-        }
+        assert (isValidFormat(date));
+        this.date = LocalDate.parse(date);
     }
 
     /**

@@ -1,5 +1,7 @@
 package duke.misc;
 
+import static duke.misc.Commands.FIND;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -13,7 +15,7 @@ import duke.task.Task;
  * TaskList class to store all the tasks in Duke.
  */
 public class TaskList {
-    private static final String SEARCH_FORMAT = "find [^ ]+.+";
+    private static final String SEARCH_FORMAT = String.format("%s [^ ]+.+", FIND);
     private ArrayList<Task> items;
     private Storage storage;
     private boolean isInitialised;
@@ -29,9 +31,10 @@ public class TaskList {
 
     /**
      * Function to read in data from .txt file.
-     * @throws IOException In case data has errors
+     *
+     * @throws IOException          In case data has errors
      * @throws InvalidTypeException In cases data has an invalid type.
-     * @throws InvalidDataException In case data is invalid.
+     * @throws InvalidDataException In case data is invalid (.txt file is corrupted).
      */
     public void initialise() throws IOException, InvalidTypeException, InvalidDataException {
         try {
@@ -57,6 +60,8 @@ public class TaskList {
 
     /**
      * Exit function for TaskList class, writes data to .txt file.
+     *
+     * @throws IOException In case there are errors when writing the data.
      */
     public void saveData() throws IOException {
         try {
@@ -73,22 +78,21 @@ public class TaskList {
      */
     public String add(Task toAdd) {
         this.items.add(toAdd);
-        return String.format("    Got it. I've added this task:\n    %s\n    "
-                +
-                "Now you have %d tasks in the list.", toAdd, this.items.size());
+        return String.format(Ui.ADD_TASK_MESSAGE, toAdd, this.items.size());
     }
 
     /**
      * Gets all tasks in TaskList
+     *
      * @return A formatted string.
      */
     public String display() {
-        String res = "Here are your tasks:\n";
-        for (int i = 0; i < this.items.size(); i++) {
-            res += String.format("    %d.%s\n", i + 1, this.items.get(i));
+        String res = Ui.LIST_MESSAGE;
+        for (int i = 0; i < items.size(); i++) {
+            res += String.format("    %d.%s\n", i + 1, items.get(i));
         }
         if (items.size() == 0) {
-            res += "    None";
+            res = Ui.EMPTY_LIST_MESSAGE;
         }
         return res;
     }
@@ -100,12 +104,12 @@ public class TaskList {
      * @return A formatted string.
      */
     public String display(ArrayList<Task> arrayList) {
-        String res = "Here are your tasks:\n";
+        String res = Ui.LIST_MESSAGE;
         for (int i = 0; i < arrayList.size(); i++) {
             res += String.format("    %d.%s\n", i + 1, arrayList.get(i));
         }
         if (arrayList.size() == 0) {
-            res += "    None";
+            res = Ui.EMPTY_LIST_MESSAGE;
         }
         return res;
     }
@@ -122,7 +126,7 @@ public class TaskList {
             throw new InvalidDescriptionException();
         }
         ArrayList<Task> temp = new ArrayList<>();
-        for (Task task : this.items) {
+        for (Task task : items) {
             if (task.toString().contains(keyWord.substring(5))) {
                 temp.add(task);
             }
@@ -143,7 +147,7 @@ public class TaskList {
         }
         Task t = this.items.get(idx);
         t.complete();
-        return String.format("    Nice! I've marked this task as done:\n    %s", t);
+        return String.format(Ui.COMPLETE_TASK_MESSAGE, t);
     }
 
     /**
@@ -159,8 +163,6 @@ public class TaskList {
         }
         Task t = this.items.get(idx);
         this.items.remove(idx);
-        return String.format("    Nice! I've removed this task:\n    %s\n    "
-                +
-                "Now you have %d tasks in the list.", t, this.items.size());
+        return String.format(Ui.DELETE_TASK_MESSAGE, t, this.items.size());
     }
 }
