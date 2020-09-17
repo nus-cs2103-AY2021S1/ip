@@ -5,6 +5,6 @@ package duke.exceptions;
  */
 public class FileLoadFailException extends DukeException {
     public FileLoadFailException() {
-        super("There was a problem loading the file.");
+        super("Oh no, there was a problem loading the file.");
     }
 }

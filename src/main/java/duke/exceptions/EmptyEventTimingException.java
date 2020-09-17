@@ -8,7 +8,7 @@ public class EmptyEventTimingException extends DukeException {
      * Represents an empty event timing exception.
      */
     public EmptyEventTimingException() {
-        super("The duration of this task cannot be empty.\n"
+        super("Oh no, The duration of this task cannot be empty.\n"
                 + "Please re-enter the desired event task\n"
                 + "(e.g. event xxx /at yyyy-mm-dd HH:mm)");
     }

@@ -5,6 +5,6 @@ package duke.exceptions;
  */
 public class StorageUpdateFailException extends DukeException {
     public StorageUpdateFailException() {
-        super("Failed to update tasks to storage. Please try again.");
+        super("Oh no, failed to update tasks to storage. Please try again.");
     }
 }

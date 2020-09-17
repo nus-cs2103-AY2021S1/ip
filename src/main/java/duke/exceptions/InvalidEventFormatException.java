@@ -8,7 +8,7 @@ public class InvalidEventFormatException extends DukeException {
      * Represents an invalid event format exception.
      */
     public InvalidEventFormatException() {
-        super("Please enter a valid event task\n"
+        super("Oh no, please enter a valid event task\n"
                 + "(e.g. event xxx /at yyyy-mm-dd HH:mm)");
     }
 }

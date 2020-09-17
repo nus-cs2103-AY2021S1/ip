@@ -35,6 +35,7 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
     private Image backgroundImage = new Image(this.getClass().getResourceAsStream("/images/background.png"));
+    private Image errorImage = new Image(this.getClass().getResourceAsStream("/images/error_pic.png"));
 
     private BackgroundImage backgroundImageCreated = new BackgroundImage(backgroundImage,
             BackgroundRepeat.REPEAT,
@@ -72,10 +73,15 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().addAll(DialogBox.getUserDialog(input, userImage));
         // delay duke's output to come awhile after user's input
         PauseTransition delayDukeOutput = new PauseTransition(Duration.seconds(0.3));
-        delayDukeOutput.setOnFinished(event ->
-                dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(response, dukeImage)));
-        delayDukeOutput.play();
+        delayDukeOutput.setOnFinished(event -> {
+            if (response.startsWith("Oh no")) {
+                dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(response, errorImage));
+            } else {
+                dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(response, dukeImage));
+            }
+        });
 
+        delayDukeOutput.play();
         userInput.clear();
 
         // delay exiting program

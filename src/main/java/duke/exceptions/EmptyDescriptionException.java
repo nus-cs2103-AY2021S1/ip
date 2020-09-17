@@ -5,6 +5,6 @@ package duke.exceptions;
  */
 public class EmptyDescriptionException extends DukeException {
     public EmptyDescriptionException() {
-        super("I can't add a task without a description :(");
+        super("Oh no, I can't add a task without a description :(");
     }
 }

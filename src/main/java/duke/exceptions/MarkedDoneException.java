@@ -5,6 +5,6 @@ package duke.exceptions;
  */
 public class MarkedDoneException extends DukeException {
     public MarkedDoneException() {
-        super("You have already marked this task as done!");
+        super("Oh no, you have already marked this task as done!");
     }
 }

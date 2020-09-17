@@ -5,6 +5,6 @@ package duke.exceptions;
  */
 public class InvalidTaskException extends DukeException {
     public InvalidTaskException() {
-        super("Hmm.. I dont think you have that task in your list.");
+        super("Oh no.. I dont think you have that task in your list.");
     }
 }
