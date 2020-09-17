@@ -1,6 +1,7 @@
-# duke.Duke project template
+# AY20/21 Sem 1 CS2103 iP (Project Duke)
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+This is a greenfield Java project built for CS2103 iP. It is a chatbot that stores a user's task, deadlines or events.
+The project centralises around the theme of Sanrio character Gudetama. The bot is called GuDukeTama to pay homage to the Java mascot _Duke_.
 
 ## Setting up in Intellij
 
