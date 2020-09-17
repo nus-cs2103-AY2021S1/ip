@@ -5,7 +5,7 @@ can help you keep track of your tasks faster than traditional GUI apps.
 
 
 
-## Table of Content
+# Table of Content
 1. About this document
 2. Quick start
 3. Features
@@ -26,7 +26,7 @@ can help you keep track of your tasks faster than traditional GUI apps.
 
 
 
-## About this document
+# 1. About this document
 This document shows you all the features in Clippy and helps you familiarise with the commands. 
 
 Note the following symbols and formatting used in this document:
@@ -61,7 +61,7 @@ or
 
 
 
-## Quick start
+# 2. Quick start
 1. Ensure you have Java 11 or above installed in your Computer.
 2. Download the latest clippy.jar from https://github.com/wang-jun-hao/ip.
 3. Copy the file to the folder you want to use as the home folder for your Clippy.
@@ -71,25 +71,25 @@ or
 
 
 
-## Features 
-### Viewing help: `help`
+# 3. Features 
+## 3.1 Viewing help: `help`
 Displays a message explaining how to access the user guide.
-#### Format
+### Format
 `help`
 
 Expected outcome:
 
 ![help outcome](./UG images/help%20command.png)
 
-### Adding a task: `todo`, `deadline`, `event`
+## 3.2 Adding a task: `todo`, `deadline`, `event`
 Adds a task for Clippy to keep track of.
 
 
-### Adding a todo task: `todo`
+## 3.2.1 Adding a todo task: `todo`
 Adds a todo task for Clippy to keep track of. You should add a task as a todo when the task does not have a date/time attached to it.
-#### Format
+### Format
 `todo <task description>`
-#### Usage
+### Usage
 Example of usage:
 * `todo exercise at the gym`
 
@@ -98,14 +98,14 @@ Expected outcome:
 ![todoEO](./UG%20images/todo%20EO.png)
 
 
-### Adding a deadline task: `deadline`
+## 3.2.2 Adding a deadline task: `deadline`
 Adds a deadline task for Clippy to keep track of. You should add a task as a deadline when the task needs to be done 
 before a specific date.
-#### Format
+### Format
 `deadline <task description> /by <YYYY-MM-DD>`
 
 ![Note Icon](./UG%20images/info.png): You have to provide the date in the exact `YYYY-MM-DD` format.
-#### Usage
+### Usage
 Example of usage:
 * `deadline sign up for hackathon /by 2020-09-30`
 
@@ -114,15 +114,14 @@ Expected outcome:
 ![todoEO](./UG%20images/deadline%20EO.png)
 
 
-
-### Adding an event task: `event`
+## 3.2.3 Adding an event task: `event`
 Adds an event task for Clippy to keep track of. You should add a task as an event when the task occurs 
 at a specific date/time period.
-#### Format
+### Format
 `event <task description> /at <date/time period>`
 
 ![Note Icon](./UG%20images/info.png): You do not have to follow any format for `<date/time period>`.
-#### Usage
+### Usage
 Example of usage:
 * `event java workshop /at Tuesday 6-7pm`
 
@@ -131,9 +130,9 @@ Expected outcome:
 ![todoEO](./UG%20images/event%20EO.png)
 
 
-### Listing all tasks: `list`
+## 3.3 Listing all tasks: `list`
 Shows a list of all tasks being managed by Clippy.
-#### Format
+### Format
 `list`
 
 Expected outcome:
@@ -141,9 +140,9 @@ Expected outcome:
 ![todoEO](./UG%20images/list%20EO.png)
 
 
-### Updating a task: `update`
+## 3.4 Updating a task: `update`
 Updates the details of an existing task being managed by Clippy. Suppose you made a mistake when entering the description of an event. You can use `update` to edit the event’s description.
-#### Format
+### Format
 `update <index> <new task description> [/by|/at <new time/date>] `
 
 * Updates the task at the specified `index`. 
@@ -156,7 +155,7 @@ Updates the details of an existing task being managed by Clippy. Suppose you mad
   * Use `/by` command when the task is a deadline
   * Use `/at` command when the task is an event
 
-#### Usage
+### Usage
 Example of usage:
 * `event birthday party /at 25 Nov 1-4pm` <br> `update 1 19th birthday party` <br> updates the description of the 1st task in the list to 19th birthday party.
 Expected outcome:
@@ -170,15 +169,15 @@ Expected outcome:
 ![todoEO](./UG%20images/update%202%20EO.png)
 
 
-### Marking a task as done: `done`
+## 3.5 Marking a task as done: `done`
 Marks a task as done when you have completed the task. This helps you to keep track of which tasks are done and not done.
-#### Format
+### Format
 `done <index>`
 * Marks the task at the specified `index` as done. 
 * The `index` refers to the index number shown in the displayed tasks list after using the list command. 
 * The `index` must be a positive integer 1, 2, 3, ...
 * Clippy will change the status icon of the specified task from [✗] to [✓]
-#### Usage
+### Usage
 Example of usage:
 * `done 2` marks the 2nd task in the list as completed
 
@@ -187,9 +186,9 @@ Expected outcome:
 ![todoEO](./UG%20images/mark%20as%20done%20EO.png)
 
 
-### Searching for a task by keyword: `find`
+## 3.6 Searching for a task by keyword: `find`
 Finds tasks whose description contains the given keyword.
-#### Format
+### Format
 `find <keyword>`
 
 * The search is case-sensitive. e.g. if ‘exercise’ tasks exists, `find Exercise` will not be able to find this task. `find exercise` will return the task.
@@ -197,7 +196,7 @@ Finds tasks whose description contains the given keyword.
 * Words that contain the keyword as a prefix will be matched e.g. `exer` will match `exercise`.
 * All tasks matching the keyword prefix will be returned.
 
-#### Usage
+### Usage
 Example of usage:
 * `todo buy xbox` <br> `todo buy ps5` <br> `find buy` <br> returns 2 tasks with description ‘buy xbox’ and ‘buy ps5’
 
@@ -205,15 +204,15 @@ Expected outcome:
 
 ![todoEO](./UG%20images/find%20EO.png)
 
-### Deleting a task: `delete`
+## 3.7 Deleting a task: `delete`
 Deletes the specified task from Clippy.
-#### Format
+### Format
 `delete <index>`
 
 * Deletes the task at the specified `index`.
 * The `index` refers to the index number shown in the displayed tasks list after using the list command. 
 * The `index` must be a positive integer 1, 2, 3, …​
-#### Usage
+### Usage
 Example of usage:
 * `list` followed by `delete 2` deletes the 2nd task in the task list.
 
@@ -221,25 +220,25 @@ Expected outcome:
 
 ![todoEO](./UG%20images/delete%20EO.png)
 
-### Exiting the program: `bye`
+## 3.8 Exiting the program: `bye`
 Exits the program.
-#### Format
+### Format
 `bye`
 
 
-### Saving the data
+## 3.9 Saving the data
 Clippy’s data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 
 
-## FAQ
+# FAQ
 Q: How do I transfer my data to another Computer?
 
 A: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Clippy home folder.
 
 
 
-## Command Summary
+# Command Summary
 Action | Format, Example usage
 ----- | ------
 Add | `todo <task description>` <br> `deadline <task description> /by <YYYY-MM-DD>` <br> `event <task description> /at <date/time period>` <br> e.g. `event java workshop​ /at Tuesday 6-7pm`
