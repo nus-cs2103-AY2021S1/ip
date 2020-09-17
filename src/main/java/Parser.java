@@ -53,14 +53,15 @@ public class Parser {
         return input.split(" /on ", 2);
     }
     
-    
+
     /**
      * Parses user input into the application's corresponding command.
-     * @param input the user input as a String.
+     * @param input the user input into the application as a String.
      * @return Command to be executed based on user input.
+     * @throws DukeUnknownArgumentException when user puts in a command
+     * not recognised by the method.
      */
     public Command parseInputIntoCommand(String input) throws DukeUnknownArgumentException {
-        String result;
         String[] commandAndArguments = splitCommandAndInstructions(input);
         String command = commandAndArguments[0];
         String arguments;
