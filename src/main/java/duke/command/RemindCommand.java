@@ -26,19 +26,11 @@ public class RemindCommand extends Command {
     @Override
     public void execute(Ui ui, TaskManager taskManager, SaveManager saveManager) {
 
-        DateTime date = DateTime.getToday();
 
-        // Get all deadlines due on date that have not been completed
-        TaskManager deadlines = new TaskManager(taskManager
-                .filter(task -> task instanceof Deadline)
-                .filter(task -> !task.getDoneStatus())
-                .getAllTasks()
-                .stream()
-                .map(deadline -> (Deadline) deadline)
-                .filter(deadline -> deadline.getDeadline() instanceof DateTime)
-                .filter(deadline -> ((DateTime) deadline.getDeadline()).hasSameDate(date))
-                .collect(Collectors.toList()));
 
+        TaskManager deadlines = filterDeadlinesFromTaskManager(taskManager);
+
+        // Output message to screen depending on number of deadlines present.
         if (deadlines.isEmpty()) {
             ui.queueMessageToDisplay("You have no deadlines for today :D");
         } else {
@@ -48,6 +40,22 @@ public class RemindCommand extends Command {
 
             assert deadlines.size() > 0;
         }
+
+    }
+
+    private TaskManager filterDeadlinesFromTaskManager(TaskManager taskManager) {
+
+        DateTime date = DateTime.getToday();
+
+        return new TaskManager(taskManager
+                .filter(task -> task instanceof Deadline)
+                .filter(task -> !task.getDoneStatus())
+                .getAllTasks()
+                .stream()
+                .map(deadline -> (Deadline) deadline)
+                .filter(deadline -> deadline.getDeadline() instanceof DateTime)
+                .filter(deadline -> ((DateTime) deadline.getDeadline()).hasSameDate(date))
+                .collect(Collectors.toList()));
 
     }
 

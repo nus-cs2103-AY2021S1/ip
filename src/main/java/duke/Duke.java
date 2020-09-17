@@ -143,7 +143,7 @@ public class Duke {
 
     /**
      * Runs through processes to be done after loading data.
-     * Currently just asks UI to send greeting to user.
+     * Asks UI to send greeting to user, then reminds them of deadlines due today.
      */
     public void initialize() {
         this.ui.displayGreet();
