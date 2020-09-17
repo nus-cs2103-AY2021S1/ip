@@ -1,4 +1,5 @@
 package main.java.duke.task;
+
 import main.java.duke.task.Task;
 
 import java.time.LocalDate;
@@ -12,9 +13,9 @@ public class Event extends Task {
         this.at = at;
     }
 
-    public void editDate(LocalDate newAt) {
-        this.at = newAt;
-    }
+//    public void editDate(LocalDate newAt) {
+//        this.at = newAt;
+//    }
 
     @Override
     public String toString() {

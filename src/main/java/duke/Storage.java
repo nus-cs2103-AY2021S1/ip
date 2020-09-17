@@ -1,5 +1,11 @@
 package duke;
 
+import main.java.duke.task.Todo;
+import main.java.duke.task.Deadline;
+import main.java.duke.task.Event;
+import main.java.duke.task.TaskList;
+import main.java.duke.dukeexception.InvalidTaskException;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -8,12 +14,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.Scanner;
-
-import main.java.duke.task.Todo;
-import main.java.duke.task.Deadline;
-import main.java.duke.task.Event;
-import main.java.duke.task.TaskList;
-import main.java.duke.dukeexception.InvalidTaskException;
 
 import static java.lang.Integer.parseInt;
 
@@ -38,9 +38,9 @@ public class Storage {
             dataDir.mkdirs();
         }
 
-        File f = new File(filePath);
-        if (!f.exists()) {
-            f.createNewFile();
+        File dataFile = new File(filePath);
+        if (!dataFile.exists()) {
+            dataFile.createNewFile();
         }
     }
 
@@ -56,7 +56,7 @@ public class Storage {
         TaskList tl = new TaskList();
 
         String line;
-        while(sc.hasNextLine()) {
+        while (sc.hasNextLine()) {
             line = sc.nextLine();
             if (line.isEmpty()) {
                 line = sc.nextLine();
@@ -109,13 +109,12 @@ public class Storage {
 
     /** Saves the tasks from the given TaskList into the file at dataDir/filePath
      *
-     * @param tasks  most-updated TaskList while Duke is running
+     * @param taskList most-updated TaskList while Duke is running
      */
-    public void save(TaskList tasks) throws IOException {
+    public void save(TaskList taskList) throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
-
-        for (int i = 0; i < tasks.getSize(); i++) {
-            writer.write("\n" + tasks.getTask(i).saveToFile());
+        for (int i = 0; i < taskList.getSize(); i++) {
+            writer.write("\n" + taskList.getTask(i).saveToFile());
         }
         writer.close();
     }

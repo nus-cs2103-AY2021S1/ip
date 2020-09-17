@@ -1,11 +1,11 @@
 package main.java.duke.command;
 
 import main.java.duke.task.TaskList;
+import main.java.duke.dukeexception.DukeException;
 import duke.Ui;
 import duke.Storage;
 
 import java.io.IOException;
-import main.java.duke.dukeexception.DukeException;
 
 public class TerminationCommand extends Command {
     public TerminationCommand() {}

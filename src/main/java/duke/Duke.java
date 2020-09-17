@@ -12,17 +12,17 @@ import main.java.duke.dukeexception.DukeException;
 
 public class Duke {
     private Storage storage;
-    private TaskList tasks;
+    private TaskList taskList;
     private Ui ui;
 
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
-            tasks = storage.load();
+            taskList = storage.load();
         } catch (Exception e) {
             ui.showLoadingError();
-            tasks = new TaskList();
+            taskList = new TaskList();
         }
     }
 
@@ -33,7 +33,7 @@ public class Duke {
             try {
                 String fullCommand = ui.readCommand();
                 Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
+                c.execute(taskList, ui, storage);
                 isExit = c.isExit();
             } catch (DukeException e) {
                 ui.showError(e.getMessage());

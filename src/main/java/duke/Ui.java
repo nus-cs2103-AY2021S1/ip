@@ -1,8 +1,9 @@
 package duke;
 
-import java.util.Scanner;
 import main.java.duke.task.TaskList;
 import main.java.duke.task.Task;
+
+import java.util.Scanner;
 
 public class Ui {
     public Ui() {}
@@ -17,7 +18,8 @@ public class Ui {
         DELETE("Oh, getting lazy are we? I approve. I've removed this:\n  "),
         UPDATEINPUT("You're so troublesome... What updated duke.task description do you want?"),
         UPDATEDTASK("Donezorimasu. Your duke.task is now:\n  "),
-        LOADINGERROR("Something went wrong when loading the data file. \nGuess you'll be starting from zero.");
+        LOADINGERROR("Something went wrong when loading the data file. "
+                + "\nGuess you'll be starting from zero.");
 
         private final String line;
 
@@ -59,7 +61,8 @@ public class Ui {
 
     public void showNumberOfTasksLeft(TaskList taskList) {
         int length = taskList.getSize();
-        System.out.println("\nYou now have " + length + (length == 1 ? " thing" : " things") + " in your list");
+        System.out.println("\nYou now have " + length
+                + (length == 1 ? " thing" : " things") + " in your list");
     }
 
     public void showLoadingError() {

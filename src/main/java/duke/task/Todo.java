@@ -1,4 +1,5 @@
 package main.java.duke.task;
+
 import main.java.duke.task.Task;
 
 public class Todo extends Task {

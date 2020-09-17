@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DeadlineCommandTest {
     @Test
-    void isExit_false() {
+    void isExit_normalDeadline_falseReturned() {
         assertEquals(false, new DeadlineCommand("deadline1", LocalDate.parse("2020-09-23")).isExit());
     }
 }

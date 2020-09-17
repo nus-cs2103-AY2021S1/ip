@@ -1,4 +1,5 @@
 package main.java.duke.task;
+
 import main.java.duke.task.Task;
 
 import java.time.LocalDate;
@@ -12,9 +13,9 @@ public class Deadline extends Task {
         this.by = by;
     }
 
-    public void editDate(LocalDate newBy) {
-        this.by = newBy;
-    }
+//    public void editDate(LocalDate newBy) {
+//        this.by = newBy;
+//    }
 
     @Override
     public String toString() {
