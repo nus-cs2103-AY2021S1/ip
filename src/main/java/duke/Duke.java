@@ -60,7 +60,7 @@ public class Duke {
         case "schedule":
             return tasks.getTasksForADate(parser.getSplitUserInput());
         default:
-            return Ui.printWrongInputErrorMessage();
+            return Ui.printInvalidCommmandErrorMessage();
         }
     }
 

@@ -12,43 +12,56 @@ public class Ui {
 
     /**
      * Displays welcome message.
+     * 
+     * @return Welcome message string.
      */
     public static String welcome() {
-        String footer= "Your Majesty, I am your loyal Duke.\n " +
-                "I offer a range of administrative services. Do type 'assist' to see the comprehensive list.\n";
-//        return footer + printDashedLineBreak();
-        return footer;
-    }
-
-    /**
-     * Displays a dashed line break that is 32 dashes long.
-     */
-    public static String printDashedLineBreak() {
-        String dashedLine = "- ";
-        return dashedLine.repeat(33);
+        StringBuilder response = new StringBuilder();
+        String greeting = "Your Majesty, I am your loyal Duke.\n ";
+        response.append(greeting);
+        String instruction = "I offer a range of administrative services. Type 'assist' to see the comprehensive list.\n";
+        response.append(instruction);
+        return response.toString();
     }
 
     /**
      * Displays list of possible user commands.
+     * 
+     * @return List of commands.
      */
     public static String assist() {
-        String greeting = "Greetings, Your Majesty.\n " +
-                "Use any of these commands to access my quality services:\n";
-        String commandList = "1. todo [TASK]: Adds a todo to your scroll\n" +
-                    "2. deadline [TASK] /by [DATE AND/OR TIME]: Adds a deadline to your scroll\n" + 
-                        "3. event [TASK] /on [DATE AND/OR TIME]: Adds an event to your scroll\n" +
-                            "4. scroll: Displays your scroll - your list of tasks\n" +
-                                "5. conquer [NUMBER]: Marks the particular item on your scroll as DONE\n" +
-                                    "6. delete [NUMBER]: Deletes the particular item from your scroll\n" +
-                                        "7. find [KEYWORD]: Returns a list of relevant items on your scroll\n" +
-                                            "8. schedule [DATE]: Returns a list of items on this date\n" +
-                                                "9. dismiss: This will be my cue to leave.\n";
+        StringBuilder response = new StringBuilder();
+        String greeting = "Greetings, Your Majesty.\n";
+        response.append(greeting);
+        String todoHelp = "1. todo [TASK]: Adds a todo to your scroll\n";
+        String deadlineHelp = "2. deadline [TASK] /by [DATE AND/OR TIME]: Adds a deadline to your scroll\n";
+        String eventHelp = "3. event [TASK] /on [DATE AND/OR TIME]: Adds an event to your scroll\n";
+        String scrollHelp = "4. scroll: Displays your scroll - your list of tasks\n";
+        String conquerHelp = "5. conquer [NUMBER]: Marks the particular item on your scroll as DONE\n";
+        String deleteHelp = "6. delete [NUMBER]: Deletes the particular item from your scroll\n";
+        String findHelp = "7. find [KEYWORD]: Returns a list of relevant items on your scroll\n";
+        String scheduleHelp = "8. schedule [DATE]: Returns a list of items on this date\n";
+        String dismissHelp = "9. dismiss: This will be my cue to leave.\n";
         String ending = "Now, how may I serve you?\n";
-        return greeting + commandList + ending;
+        
+        response.append(todoHelp);
+        response.append(deadlineHelp);
+        response.append(eventHelp);
+        response.append(scrollHelp);
+        response.append(conquerHelp);
+        response.append(deleteHelp);
+        response.append(findHelp);
+        response.append(scheduleHelp);
+        response.append(dismissHelp);
+        
+        response.append(ending);
+        return response.toString();
     }
 
     /**
      * Displays goodbye message.
+     * 
+     * @return Goodbye message.
      */
     public static String dismiss() {
         return "Your wish is my command, Your Majesty. Till I see you again. \n";
@@ -56,7 +69,9 @@ public class Ui {
 
     /**
      * Displays error message.
+     * 
      * @param e DukeException.
+     * @return Error message.         
      */
     public static String dukeErrorMessage(DukeException e) {
         return e.getMessage() + "\n";
@@ -64,7 +79,9 @@ public class Ui {
 
     /**
      * Displays marked task as done message.
+     * 
      * @param t Task that has been marked as done.
+     * @return Marked as done message.
      */
     public static String conqueredMessage(Task t) {
         assert (t != null);
@@ -75,8 +92,10 @@ public class Ui {
 
     /**
      * Displays deleted task message.
+     * 
      * @param t Task that has been deleted.
      * @param size Size of current list of stored tasks.
+     * @return Deleted task message.
      */
     public static String deletedMessage(Task t, int size) {
         assert (t != null);
@@ -88,8 +107,10 @@ public class Ui {
 
     /**
      * Displays added task message.
+     * 
      * @param t Task that has been added.
      * @param size Size of current list of stored tasks.
+     * @return Added task message.
      */
     public static String addedMessage(Task t, int size) {
         assert (t != null);
@@ -98,47 +119,33 @@ public class Ui {
         String information = String.format("You have %s writing(s) on your scroll as of now. \n", size);
         return response + addedTask + information;
     }
-    
-    public static String printAllTasksUi(ArrayList<Task> storedTasks) {
+
+    /**
+     * Prints a list of tasks.
+     * 
+     * @param storedTasks List of tasks to be printed.
+     * @return Printed list of tasks.
+     */
+    public static String printListOfTasksUi(ArrayList<Task> storedTasks) {
         assert (storedTasks != null);
         if (storedTasks.size() == 0) {
-            return "Your scroll is currently empty, Your Majesty.";
+            return "I have come up on empty, Your Majesty.";
         } 
         StringBuilder response = new StringBuilder();
-        response.append("Your scroll as requested, Your Majesty:\n");
+        response.append("As requested, Your Majesty:\n");
         for (Task task : storedTasks) {
             response.append(String.format("%s.%s\n", storedTasks.indexOf(task) + 1, task));
         }
         return response.toString();
     }
-    
-    public static String printRelevantTasksUi(ArrayList<Task> relevantTasks) {
-        assert (relevantTasks != null);
-        if (relevantTasks.size() == 0) {
-            return "There doesn't seem to be any relevant writings, Your Majesty.";
-        }
-        StringBuilder response = new StringBuilder();
-        response.append("These are the relevant writings, Your Majesty:\n");
-        for (Task task : relevantTasks) {
-            response.append(String.format("%s.%s\n", relevantTasks.indexOf(task) + 1, task));
-        }
-        return response.toString();
-    }
-    
-    public static String printWrongInputErrorMessage() {
+
+    /**
+     * Prints a list of tasks.
+     *
+     * @return Invalid command message.
+     */
+    public static String printInvalidCommmandErrorMessage() {
         return "I'm afraid I don't understand that command, Your Majesty.";
     }
-    
-    public static String printScheduleForDate(ArrayList<Task> scheduledTasks) {
-        assert (scheduledTasks != null);
-        if (scheduledTasks.size() == 0) {
-            return "You have no writings for this date, Your Majesty.";
-        }
-        StringBuilder response = new StringBuilder();
-        response.append("Here are the writings you requested, Your Majesty:\n");
-        for (Task task : scheduledTasks) {
-            response.append(String.format("%s.%s\n", scheduledTasks.indexOf(task) + 1, task));
-        }
-        return response.toString();
-    }
+
 }

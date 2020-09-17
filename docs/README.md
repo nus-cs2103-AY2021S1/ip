@@ -15,6 +15,8 @@ Duke provides a fast and convenient way to keep track of all your tasks, events 
 
 ### [Adding an Event](#event): `event` 
 
+### [Viewing all tasks](#scroll): `scroll` 
+
 ### [Marking tasks as done](#done): `conquer` 
 
 ### [Deleting a task](#delete): `delete` 
@@ -89,6 +91,18 @@ Expected outcome:
 >[E] [✘] workshop (on: Sep 23 2020, 7.30pm)  
 >You have 3 writing(s) on your scroll as of now.   
 
+### <a name="scroll">Viewing all tasks</a>: `scroll`
+Displays your current list of tasks.   
+Format:`scroll`  
+
+Example usage: `scroll`  
+
+Expected outcome:  
+>As requested, Your Majesty:  
+>1. [T] [✘] read book   
+>2. [D] [✘] project (by: Sep 18 2020, 11.59pm)    
+>3. [E] [✘] workshop (on: Sep 23 2020, 7.30pm)
+
 ### <a name="done">Marking tasks as done</a>: `conquer`
 Marks a desired task as done.  
 
@@ -123,7 +137,7 @@ Format: `find SEARCH_TERM`
 Example usage: `find food`
 
 Expected outcome: 
->These are the relevant writings, Your Majesty:  
+>As requested, Your Majesty:  
 >1. [T] [✘] buy cat food  
 >2. [E] [✘] foodie gathering (on: Sep 30 2020, 6.00pm)  
 
@@ -135,7 +149,7 @@ Format: `schedule DATE`
 Example usage: `schedule 2020-09-18`
 
 Expected outcome: 
->Here are the writings you requested, Your Majesty:  
+>As requested, Your Majesty:  
 >1. [D] [✘] iP (by: Sept 18 2020, 11:59pm)  
 >2. [D] [✘] assignment 1 (by: Sep 18 2020, 11:59pm)  
 

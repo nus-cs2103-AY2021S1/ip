@@ -54,6 +54,7 @@ checkstyle {
     toolVersion = '8.29'
 }
 
+
 run{
     standardInput = System.in
 }

@@ -101,7 +101,7 @@ public class TaskList {
      * Prints all stored tasks.
      */
     public String printAllTasks() {
-        return Ui.printAllTasksUi(storedTasks);
+        return Ui.printListOfTasksUi(storedTasks);
     }
 
     /**
@@ -194,7 +194,7 @@ public class TaskList {
             return Ui.dukeErrorMessage(new DukeException("Please enter a search term, Your Majesty."));
         }
         
-        return Ui.printRelevantTasksUi(relevantTasks);
+        return Ui.printListOfTasksUi(relevantTasks);
     }
 
     /**
@@ -276,8 +276,8 @@ public class TaskList {
                 }
             }
         } catch (Exception err) {
-            return Ui.dukeErrorMessage(new DukeException("Please input a valid date, Your Majesty."));
+            return Ui.dukeErrorMessage(new DukeException("Please input a valid date in YYYY-MM-DD format, Your Majesty."));
         }
-        return Ui.printScheduleForDate(relevantTasks);
+        return Ui.printListOfTasksUi(relevantTasks);
     }
 }
