@@ -13,6 +13,9 @@ public class Task {
     /** Boolean to indicate if the Task is done */
     protected boolean isDone;
 
+    /** TaskType to represent the type of task */
+    protected TaskType taskType;
+
     /**
      * Constructs a <code>Task</code> object with a description.
      * This Task is marked as undone.
@@ -60,6 +63,10 @@ public class Task {
      */
     public String getDescription() {
         return description;
+    }
+
+    public TaskType getTaskType() {
+        return taskType;
     }
 
     /**

@@ -14,6 +14,7 @@ public class Todo extends Task {
      */
     public Todo(String description) {
         super(description);
+        this.taskType = TaskType.TODO;
     }
 
     /**
@@ -25,6 +26,7 @@ public class Todo extends Task {
      */
     public Todo(String description, boolean isDone) {
         super(description, isDone);
+        this.taskType = TaskType.TODO;
     }
 
     /**

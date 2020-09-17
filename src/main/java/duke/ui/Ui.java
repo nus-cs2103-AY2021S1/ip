@@ -54,7 +54,7 @@ public class Ui {
     }
 
     /**
-     * Displays messages.
+     * Displays messages from Duke.
      *
      * @param message Message to be printed.
      */

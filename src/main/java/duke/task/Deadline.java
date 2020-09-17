@@ -17,6 +17,7 @@ public class Deadline extends TimedTask {
      */
     public Deadline(String description, String by) {
         super(description, by);
+        this.taskType = TaskType.DEADLINE;
     }
 
     /**
@@ -29,6 +30,7 @@ public class Deadline extends TimedTask {
      */
     public Deadline(String description, boolean isDone, String by) {
         super(description, isDone, by);
+        this.taskType = TaskType.DEADLINE;
     }
 
     /**

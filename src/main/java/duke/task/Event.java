@@ -17,6 +17,7 @@ public class Event extends TimedTask {
      */
     public Event(String description, String at) {
         super(description, at);
+        this.taskType = TaskType.EVENT;
     }
 
     /**
@@ -29,6 +30,7 @@ public class Event extends TimedTask {
      */
     public Event(String description, boolean isDone, String at) {
         super(description, isDone, at);
+        this.taskType = TaskType.EVENT;
     }
 
     /**

@@ -15,7 +15,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    /** Duke object to run receive user inputs and run commands */
+    /** Duke object to receive user inputs and run commands */
     private Duke duke = new Duke();
 
     @Override

@@ -6,7 +6,7 @@ import duke.storage.Storage;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
-import duke.task.Todo;
+import duke.task.TaskType;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
@@ -19,11 +19,11 @@ public class SortCommand extends Command {
     private static final Comparator<Task> TASK_COMPARATOR = new Comparator<Task>() {
         @Override
         public int compare(Task o1, Task o2) {
-            if (o1 instanceof Todo) {
+            if (o1.getTaskType() == TaskType.TODO) {
                 return compareTodo(o2);
-            } else if (o1 instanceof Deadline) {
+            } else if (o1.getTaskType() == TaskType.DEADLINE) {
                 return compareDeadline((Deadline) o1, o2);
-            } else {
+            } else { // unable to create default branch to throw exception due to override method
                 return compareEvent((Event) o1, o2);
             }
         }
@@ -37,16 +37,16 @@ public class SortCommand extends Command {
     }
 
     private static int compareTodo(Task t2) {
-        if (t2 instanceof Todo) {
+        if (t2.getTaskType() == TaskType.TODO) {
             return 0;
         }
         return -1;
     }
 
     private static int compareDeadline(Deadline d1, Task t2) {
-        if (t2 instanceof Todo) {
+        if (t2.getTaskType() == TaskType.TODO) {
             return 1;
-        } else if (t2 instanceof Event) {
+        } else if (t2.getTaskType() == TaskType.EVENT) {
             return -1;
         } else {
             Deadline d2 = (Deadline) t2;
@@ -55,7 +55,7 @@ public class SortCommand extends Command {
     }
 
     private static int compareEvent(Event e1, Task t2) {
-        if (t2 instanceof Event) {
+        if (t2.getTaskType() == TaskType.EVENT) {
             Event e2 = (Event) t2;
             return e1.getDateTime().compareTo(e2.getDateTime());
         }
