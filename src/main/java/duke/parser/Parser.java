@@ -22,20 +22,24 @@ import duke.exception.DukeException;
  */
 public class Parser {
 
+    private static String suggestion = "\n\nAdditionally, do note that the description cannot be empty "
+            + "for the following commands:"
+            + "\n1. todo"
+            + "\n2. event"
+            + "\n3. deadline"
+            + "\n4. done"
+            + "\n5. delete"
+            + "\n6. find"
+            + "\n7. view";
+
     private static String unknownCommandMessage = "OOPS!!! I've not yet learned what that means."
             + " Please enter a valid command :) "
-            + "\n\nAdditionally, do note that the description cannot be empty "
-            + "for the following commands:"
-            + "\n1. event"
-            + "\n2. deadline"
-            + "\n3. done"
-            + "\n4. delete"
-            + "\n5. find"
-            + "\n6. view";
+            + suggestion;
 
     private static boolean isValidDescription(String[] userInput) throws DukeException {
         if (userInput.length == 1 || userInput[1].equals("")) {
-            throw new DukeException(unknownCommandMessage);
+            throw new DukeException("Hmm, it seems some of your arguments are missing."
+            + suggestion);
         }
         return true;
     }
@@ -65,8 +69,22 @@ public class Parser {
                         + "\uD83D\uDE1E");
             }
 
+            LocalDate currentDate = LocalDate.now();
+            LocalTime currentTime = LocalTime.now();
             LocalDate localDate = LocalDate.from(dateFormatter.parse(dateTime[1]));
             LocalTime localTime = LocalTime.from(timeFormatter.parse(dateTime[2]));
+
+            if (localDate.isBefore(currentDate)) {
+                throw new DukeException("Strange... It seems that your task occurred "
+                        + "in the past...\nUnfortunately, I'm not yet equipped with the "
+                        +"ability to time travel...");
+            }
+            if (localDate.isEqual(currentDate) && localTime.isBefore(currentTime)) {
+                throw new DukeException("Strange... It seems that your task occurred "
+                        + "in the past...\nUnfortunately, I'm not yet equipped with the "
+                        +"ability to time travel...");
+            }
+
             return new AddCommand(eventType, content[0], localDate, localTime);
 
         } catch (DateTimeParseException error) {

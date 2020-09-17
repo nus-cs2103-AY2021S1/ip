@@ -58,6 +58,7 @@ public class Duke {
 
         try {
             String fullCommand = command;
+            fullCommand = fullCommand.trim();
             Command c = Parser.parse(fullCommand);
             response = c.execute(tasks, ui, storage);
             this.isExit = c.isExit();
