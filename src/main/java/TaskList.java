@@ -28,6 +28,9 @@ public class TaskList {
                 stringBuilder.append((i + 1) + "." + currentTask.toString() + '\n');
             }
         }
+        if (stringBuilder.length() == 0) {
+            return "";
+        }
         stringBuilder.setLength(stringBuilder.length() - 1);
         return stringBuilder.toString();
     }
