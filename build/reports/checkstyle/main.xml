@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="8.29">
+<file name="C:\Users\dracu\Documents\ip\src\main\java\mattbot\DialogBox.java">
+</file>
+<file name="C:\Users\dracu\Documents\ip\src\main\java\mattbot\Duke.java">
+</file>
+<file name="C:\Users\dracu\Documents\ip\src\main\java\mattbot\Launcher.java">
+</file>
+<file name="C:\Users\dracu\Documents\ip\src\main\java\mattbot\Main.java">
+</file>
+<file name="C:\Users\dracu\Documents\ip\src\main\java\mattbot\MainWindow.java">
+</file>
+<file name="C:\Users\dracu\Documents\ip\src\main\java\mattbot\command\AddDeadlineCommand.java">
+</file>
+<file name="C:\Users\dracu\Documents\ip\src\main\java\mattbot\command\AddEventCommand.java">
+</file>
+<file name="C:\Users\dracu\Documents\ip\src\main\java\mattbot\command\AddTodoCommand.java">
+</file>
+<file name="C:\Users\dracu\Documents\ip\src\main\java\mattbot\command\Command.java">
+</file>
+<file name="C:\Users\dracu\Documents\ip\src\main\java\mattbot\command\CompletedCommand.java">
+</file>
+<file name="C:\Users\dracu\Documents\ip\src\main\java\mattbot\command\DeleteCommand.java">
+</file>
+<file name="C:\Users\dracu\Documents\ip\src\main\java\mattbot\command\ExitCommand.java">
+</file>
+<file name="C:\Users\dracu\Documents\ip\src\main\java\mattbot\command\FilterDateCommand.java">
+</file>
+<file name="C:\Users\dracu\Documents\ip\src\main\java\mattbot\command\FindCommand.java">
+</file>
+<file name="C:\Users\dracu\Documents\ip\src\main\java\mattbot\command\ListCommand.java">
+</file>
+<file name="C:\Users\dracu\Documents\ip\src\main\java\mattbot\command\ShowFunctionCommand.java">
+</file>
+<file name="C:\Users\dracu\Documents\ip\src\main\java\mattbot\command\ViewScheduleCommand.java">
+</file>
+<file name="C:\Users\dracu\Documents\ip\src\main\java\mattbot\command\WrongCommand.java">
+</file>
+<file name="C:\Users\dracu\Documents\ip\src\main\java\mattbot\dateTime\DateTimeManager.java">
+<error line="1" column="9" severity="warning" message="Name &apos;mattbot.dateTime&apos; must match pattern &apos;^[a-z]+(\.[a-z][a-z0-9]{1,})*$&apos;." source="com.puppycrawl.tools.checkstyle.checks.naming.PackageNameCheck"/>
+</file>
+<file name="C:\Users\dracu\Documents\ip\src\main\java\mattbot\errors\ErrorExceptions.java">
+</file>
+<file name="C:\Users\dracu\Documents\ip\src\main\java\mattbot\file\FileManager.java">
+</file>
+<file name="C:\Users\dracu\Documents\ip\src\main\java\mattbot\parser\InputManager.java">
+</file>
+<file name="C:\Users\dracu\Documents\ip\src\main\java\mattbot\parser\Parse.java">
+</file>
+<file name="C:\Users\dracu\Documents\ip\src\main\java\mattbot\parser\ParseAddTask.java">
+</file>
+<file name="C:\Users\dracu\Documents\ip\src\main\java\mattbot\parser\ParseCompleted.java">
+</file>
+<file name="C:\Users\dracu\Documents\ip\src\main\java\mattbot\parser\ParseDelete.java">
+</file>
+<file name="C:\Users\dracu\Documents\ip\src\main\java\mattbot\parser\ParseExit.java">
+</file>
+<file name="C:\Users\dracu\Documents\ip\src\main\java\mattbot\parser\ParseFilter.java">
+</file>
+<file name="C:\Users\dracu\Documents\ip\src\main\java\mattbot\parser\ParseFind.java">
+</file>
+<file name="C:\Users\dracu\Documents\ip\src\main\java\mattbot\parser\ParseList.java">
+</file>
+<file name="C:\Users\dracu\Documents\ip\src\main\java\mattbot\parser\ParseShow.java">
+</file>
+<file name="C:\Users\dracu\Documents\ip\src\main\java\mattbot\parser\ParseViewSchedules.java">
+</file>
+<file name="C:\Users\dracu\Documents\ip\src\main\java\mattbot\tasks\Deadline.java">
+</file>
+<file name="C:\Users\dracu\Documents\ip\src\main\java\mattbot\tasks\Event.java">
+</file>
+<file name="C:\Users\dracu\Documents\ip\src\main\java\mattbot\tasks\TaskManager.java">
+<error line="32" column="14" severity="warning" message="Name &apos;Task&apos; must match pattern &apos;^[a-z][a-zA-Z0-9]*$&apos;." source="com.puppycrawl.tools.checkstyle.checks.naming.LocalVariableNameCheck"/>
+</file>
+<file name="C:\Users\dracu\Documents\ip\src\main\java\mattbot\tasks\Todo.java">
+</file>
+<file name="C:\Users\dracu\Documents\ip\src\main\java\mattbot\tasks\task.java">
+<error line="8" column="14" severity="warning" message="Name &apos;task&apos; must match pattern &apos;^[A-Z][a-zA-Z0-9]*$&apos;." source="com.puppycrawl.tools.checkstyle.checks.naming.TypeNameCheck"/>
+</file>
+<file name="C:\Users\dracu\Documents\ip\src\main\java\mattbot\uI\InitiateParser.java">
+<error line="1" column="9" severity="warning" message="Name &apos;mattbot.uI&apos; must match pattern &apos;^[a-z]+(\.[a-z][a-z0-9]{1,})*$&apos;." source="com.puppycrawl.tools.checkstyle.checks.naming.PackageNameCheck"/>
+</file>
+<file name="C:\Users\dracu\Documents\ip\src\main\java\mattbot\uI\UserInterface.java">
+<error line="1" column="9" severity="warning" message="Name &apos;mattbot.uI&apos; must match pattern &apos;^[a-z]+(\.[a-z][a-z0-9]{1,})*$&apos;." source="com.puppycrawl.tools.checkstyle.checks.naming.PackageNameCheck"/>
+</file>
+</checkstyle>

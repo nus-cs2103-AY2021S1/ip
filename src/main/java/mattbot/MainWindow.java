@@ -4,10 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.stream.Stream;
 
-import mattbot.Parser.InputManager;
-import mattbot.Tasks.TaskManager;
-import mattbot.UI.UserInterface;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -15,6 +11,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import mattbot.parser.InputManager;
+import mattbot.tasks.TaskManager;
+import mattbot.uI.UserInterface;
+
 
 
 /**
@@ -87,7 +87,6 @@ public class MainWindow extends AnchorPane {
         );
         Stream<String> results = Duke.convertToStream(input);
         results.forEach(reply -> {
-//            System.out.println("REPLY: " + reply);
             String response = Duke.getResponse(reply);
             dialogContainer.getChildren().addAll(
                     DialogBox.getDukeDialog(response, dukeImage)
