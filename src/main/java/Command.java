@@ -8,5 +8,5 @@ public abstract class Command {
      * @param storage the storage used
      * @throws DukeException throws exceptions that fail to fulfil command requirements
      */
-    public abstract void execute(TaskList inputTasks, Storage storage) throws DukeException;
+    public abstract void execute(TaskList inputTasks, Storage storage, Ui ui) throws DukeException;
 }

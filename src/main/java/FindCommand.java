@@ -18,7 +18,7 @@ public class FindCommand extends Command{
      * @param storage the storage used
      * @throws DukeException throws exceptions that fail to fulfil command requirements
      */
-    public void execute(TaskList inputTasks, Storage storage) throws DukeException{
-        inputTasks.findKeyword(keyword);
+    public void execute(TaskList inputTasks, Storage storage, Ui ui) throws DukeException{
+        inputTasks.findKeyword(keyword, ui);
     }
 }

@@ -19,8 +19,8 @@ public class DoneCommand extends Command{
      * @param storage the storage used
      * @throws DukeException throws exceptions that fail to fulfil command requirements
      */
-    public void execute(TaskList inputTasks, Storage storage) throws DukeException{
-        inputTasks.doneTask(taskIndex);
+    public void execute(TaskList inputTasks, Storage storage, Ui ui) throws DukeException{
+        inputTasks.doneTask(taskIndex, ui);
         storage.writeToFile(inputTasks);
     }
 }

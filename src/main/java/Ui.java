@@ -7,15 +7,29 @@ public class Ui {
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
+    private String reply;
 
+
+    public Ui(){
+        reply = "";
+    }
     /**
      * shows hello message
      */
-    public static void showWelcome(){
-        System.out.println("Hello from\n" + logo);
-        String hello = "Hello! I'm Duke";
-        String question = "What can I do for you?";
-        System.out.println(hello + "\n" + question);
+    public static String showWelcome(){
+        return "Hello from\n" + logo + "Hello! I'm Duke" + "\n" + "What can I do for you?";
+    }
+
+    public void addResponse(String message){
+        reply = (message + "\n");
+    }
+
+    public String getReply(){
+        return reply;
+    }
+
+    public void clearReply(){
+        reply = "";
     }
 
     /**

@@ -26,9 +26,9 @@ public class TaskList {
      * add a task in list
      * @param task the task to be added
      */
-    public void addTask(Task task){
+    public void addTask(Task task, Ui ui){
         tasks.add(task);
-        System.out.println("Got it. I've added this task:" + "\n" + " " + task.toString() + "\n"
+        ui.addResponse("Got it. I've added this task:" + "\n" + " " + task.toString() + "\n"
                 + "Now you have " + getSize() + " tasks in the list");
     }
 
@@ -36,10 +36,10 @@ public class TaskList {
      * delete a task in list
      * @param taskIndex index of task to be deleted
      */
-    public void deleteTask(int taskIndex){
-        Task deleted = tasks.get(taskIndex);
-        tasks.remove(taskIndex);
-        System.out.println("Noted. I've removed this task: " + "\n" +
+    public void deleteTask(int taskIndex, Ui ui){
+        Task deleted = tasks.get(taskIndex - 1);
+        tasks.remove(taskIndex - 1);
+        ui.addResponse("Noted. I've removed this task: " + "\n" +
                 deleted.toString() + "\n" + "Now you have " + getSize() + " tasks in the list.");
     }
 
@@ -47,26 +47,28 @@ public class TaskList {
      * done a task in list
      * @param taskIndex index of task to be done
      */
-    public void doneTask(int taskIndex){
-        tasks.get(taskIndex).markAsDone();
+    public void doneTask(int taskIndex, Ui ui){
+        tasks.get(taskIndex - 1).markAsDone();
+        ui.addResponse("Congrats! You are done with task " + taskIndex);
     }
 
     /**
      * show all tasks in the list in string format
      */
-    public void showTaskList(){
-        System.out.println("Here are the tasks in your list:" + "\n");
+    public void showTaskList(Ui ui){
+        String listStrings = "";
         for (int i = 0; i < getSize(); i++) {
             Integer listNum = i + 1;
-            System.out.println(listNum.toString() + "." + tasks.get(i).toString());
+            listStrings += listNum.toString() + "." + tasks.get(i).toString() + "\n";
         }
+        ui.addResponse("Here are the tasks in your list:" + "\n" + listStrings);
     }
 
     /**
      * find tasks matching a particular keyword
      * @param keyword the keyword to be found
      */
-    public void findKeyword(String keyword){
+    public void findKeyword(String keyword, Ui ui){
         ArrayList<Task> keyTasks = new ArrayList<>();
         for(int i = 0; i < getSize(); i++){
             if(this.tasks.get(i).description.contains(keyword)){
@@ -75,13 +77,13 @@ public class TaskList {
         }
 
         if(keyTasks.size() == 0){
-            System.out.println("Sorry there is no matching task :-(");
+            ui.addResponse("Sorry there is no matching task :-(");
         }
 
-        System.out.println("Here are the matching tasks in your list:\n");
+        ui.addResponse("Here are the matching tasks in your list:\n");
         for(int i = 0; i < keyTasks.size(); i++){
             Integer listNum = i + 1;
-            System.out.println(listNum.toString() + "." + keyTasks.get(i).toString());
+            ui.addResponse(listNum.toString() + "." + keyTasks.get(i).toString());
         }
     }
 }

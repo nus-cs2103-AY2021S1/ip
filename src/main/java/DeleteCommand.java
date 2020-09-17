@@ -17,8 +17,8 @@ public class DeleteCommand extends Command{
      * @param inputTasks the list of tasks used
      * @param storage the storage used
      */
-    public void execute(TaskList inputTasks, Storage storage){
-        inputTasks.deleteTask(taskIndex);
+    public void execute(TaskList inputTasks, Storage storage, Ui ui){
+        inputTasks.deleteTask(taskIndex, ui);
         storage.writeToFile(inputTasks);
     }
 }

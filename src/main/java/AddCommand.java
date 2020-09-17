@@ -18,8 +18,8 @@ public class AddCommand extends Command{
      * @param inputTasks the list of tasks used
      * @param storage the storage used
      */
-    public void execute(TaskList inputTasks, Storage storage){
-        inputTasks.addTask(this.task);
+    public void execute(TaskList inputTasks, Storage storage, Ui ui){
+        inputTasks.addTask(this.task, ui);
         storage.writeToFile(inputTasks);
     }
 }
