@@ -7,7 +7,7 @@
 
 <fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
     <children>
-        <Label fx:id="dialog" text="Label" textOverrun="CLIP" wrapText="true" minHeight="-Infinity" style="-fx-font-weight: bolder; -fx-text-fill: #FFFFFF; -fx-border-color: #A78195; -fx-background-color: #A78195; -fx-border-radius: 10px; -fx-background-radius: 10px; -fx-min-height: 30px; -fx-min-width: 100px; -fx-padding: 5px;">
+        <Label fx:id="dialog" graphicTextGap="10.0" minHeight="-Infinity" text="Label" textFill="WHITE" textOverrun="CLIP" wrapText="true" style="-fx-border-color: #A78195; -fx-background-color: #A78195; -fx-border-radius: 10px; -fx-background-radius: 10px; -fx-padding: 5px;">
             <HBox.margin>
                 <Insets left="10.0" right="10.0" />
             </HBox.margin>
