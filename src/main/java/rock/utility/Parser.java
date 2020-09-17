@@ -21,10 +21,6 @@ public class Parser {
         SWITCH;
     }
 
-    public Parser() {
-
-    }
-
     /**
      * Parse user's commands to CommandType that other method can understand.
      * @param cmd User's command.

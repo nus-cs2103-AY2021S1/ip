@@ -1,7 +1,5 @@
 package rock.admin;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -12,6 +10,7 @@ import rock.task.DoWithinPeriodTasks;
 import rock.task.Event;
 import rock.task.Task;
 import rock.task.Todo;
+import rock.utility.DateFormatter;
 import rock.utility.MyString;
 
 /**
@@ -26,21 +25,6 @@ public class TaskList {
      */
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
-    }
-
-    /**
-     * Format data to the form of [MMM d yyyy]
-     * @param str unformatted date
-     * @return formatted date
-     */
-    private String formatDate(String str) {
-        LocalDate d;
-        try {
-            d = LocalDate.parse(str);
-        } catch (Exception e) {
-            return str;
-        }
-        return d.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
     public ArrayList<Task> getArrayList() {
@@ -186,7 +170,7 @@ public class TaskList {
             ArrayList<String> arr = parseDeadline(cmd);
             String getName = arr.get(0);
             String getDeadline = arr.get(1);
-            getDeadline = formatDate(getDeadline);
+            getDeadline = DateFormatter.formatDate(getDeadline);
             Deadline deadline = new Deadline(getName, getDeadline);
 
             response.addNewLines("Got it. I've added this task: ");
@@ -235,7 +219,7 @@ public class TaskList {
             ArrayList<String> arr = parseEvent(cmd);
             String getName = arr.get(0);
             String getTime = arr.get(1);
-            getTime = formatDate(getTime);
+            getTime = DateFormatter.formatDate(getTime);
             Event event = new Event(getName, getTime);
 
             response.addNewLines("Got it. I've added this task: ");

@@ -19,11 +19,4 @@ public class CommandTag {
     public static final String AT_TAG = "/at";
     public static final String BETWEEN_TAG = "/between";
     public static final String AND_TAG = "/and";
-
-    /**
-     * Constructor
-     */
-    public CommandTag() {
-
-    }
 }

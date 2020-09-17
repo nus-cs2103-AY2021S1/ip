@@ -8,7 +8,6 @@ import rock.task.Todo;
 
 public class TaskListTest {
     @Test
-
     public void getArrayListTest() {
         ArrayList<Task> tasks = new ArrayList<>();
         tasks.add(new Todo("1"));
