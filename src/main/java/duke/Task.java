@@ -6,6 +6,10 @@ public class Task {
     public static final int DONE = 1;
     public static final int NOT_DONE = 0;
 
+    public enum Type {
+        TODO, DEADLINE, EVENT
+    }
+
     public Task(String description) {
         this.description = description;
         this.isDone = false;
@@ -24,16 +28,16 @@ public class Task {
         return (isDone ? "\u2714" : "\u2718"); //return tick or X symbols
     }
 
-    public void markAsDone() {
-        this.isDone = true;
-    }
-
     /**
      * Getter method for description.
      * @return Description of task.
      */
     public String getDescription() {
         return this.description;
+    }
+
+    public void markAsDone() {
+        this.isDone = true;
     }
 
     @Override
