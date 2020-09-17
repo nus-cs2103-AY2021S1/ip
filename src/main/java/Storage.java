@@ -8,19 +8,31 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-
-
+/**
+ * Represents the Storage class. It is a class consists of methods
+ * related to storing the list of tasks and reading the file when the
+ * users just started it and save the file when the user quit.
+ */
 public class Storage {
     private static String filePath;
     private static File file;
     private static List<Task> listOfContents = new ArrayList<Task>();
 
 
+    /**
+     * Constructor for Storage class.
+     *
+     * @param filePath The file path.
+     */
     Storage (String filePath) {
         this.file = file;
         this.filePath = filePath;
     }
 
+    /**
+     * read the content in the file name bill.txt
+     * @param filePath The file path to be read the file.
+     */
     protected static String checkFile(String filePath) throws FileNotFoundException {
 
         Path currentRelativePath = Paths.get("");
@@ -59,8 +71,8 @@ public class Storage {
     }
 
     /**
-     * read the content of the file in bill.txt
-     * @param file The file to be read.
+     * read the content in the file name bill.txt
+     * @param file The file path to be read the file.
      */
     public static String read(File file) throws FileNotFoundException {
         Scanner scanner = new Scanner(file);
@@ -90,6 +102,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Returns the list of tasks that the users have stored in the file.
+     *
+     * @return The list of tasks that the users have stored in the file.
+     */
     public static List<Task> getListOfContents() {
         return listOfContents;
     }

@@ -1,6 +1,9 @@
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents a TaskList class and consists of methods to handle things that related to the list of tasks.
+ */
 public class TaskList {
     private List<Task> listOfContents;
     /**
@@ -9,6 +12,9 @@ public class TaskList {
     TaskList() {
         listOfContents = new ArrayList<>();
     }
+    /**
+     * Constructor for TaskList object that already consists a list of tasks.
+     */
     TaskList(List<Task> listOfContents) {
         this.listOfContents = listOfContents;
     }

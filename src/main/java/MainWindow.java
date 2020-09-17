@@ -26,11 +26,19 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/bill.png"));
 
+    /**
+     * Initializes the Application.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Sets the Bill object. Showing the welcoming message to user when they first open the application.
+     *
+     * @param d The Bill object
+     */
     public void setDuke(Bill d) {
         duke = d;
         dialogContainer.getChildren().addAll(
@@ -38,12 +46,6 @@ public class MainWindow extends AnchorPane {
         );
     }
 
-    @FXML
-    void showAction() {
-        dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(Ui.welcome_message(), dukeImage)
-        );
-    }
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.

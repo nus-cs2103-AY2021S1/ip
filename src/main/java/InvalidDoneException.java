@@ -1,3 +1,8 @@
+
+/**
+ * Represents an InvalidDoneException class and handles the exceptions related
+ * to invalid DONE command.
+ */
 public class InvalidDoneException extends InvalidException {
 
     /**

@@ -1,3 +1,7 @@
+
+/**
+ * Represents a Event class and consists of methods related to Event Task assigned.
+ */
 public class Event extends Task {
 
     protected String duration;
@@ -28,6 +32,9 @@ public class Event extends Task {
         return "E" + " | " + super.fileFormat() + " | " + outputTime;
     }
 
+    /**
+     * Override the toString() method to suit the need of the EVENT class.
+     */
     @Override
     public String toString() {
         TimeParser inputTime = new TimeParser(duration);

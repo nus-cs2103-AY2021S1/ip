@@ -1,3 +1,7 @@
+/**
+ * Represents a Parser class and consists of methods to process user command.
+ */
+
 public class Parser {
 
     private static TaskList listOfContent;
@@ -11,10 +15,19 @@ public class Parser {
     public static boolean exit(String input) {
         return input.equals("bye");
     }
+
+    /**
+     * Returns a boolean to indicate whether user want to end the application.
+     * @return Returns a boolean. Return true is the users want to end the program and false otherwise.
+     */
     public static boolean isEnded() {
         return isEnded;
     }
 
+    /**
+     * Returns the list of tasks the users have added.
+     * @return Returns the tasks list that contains the tasks that users have added.
+     */
     public TaskList getListOfContent() {
         return listOfContent;
     }
@@ -25,6 +38,12 @@ public class Parser {
     public static void initiateTaskList(TaskList list) {
         listOfContent = list;
     }
+    /**
+     * Process a user's DONE command.
+     *
+     * @param input A string that consist of user's command.
+     * @return The action that Bill will execute after process the command.
+     */
     protected static String processDoneCommand(String input) throws InvalidException {
 
         String[] isDone = input.split(" ");
@@ -48,6 +67,12 @@ public class Parser {
         current.setTaskAsDone();
         return current.timeConverted();
     }
+    /**
+     * Process a user's DELETE command.
+     *
+     * @param input A string that consist of user's command.
+     * @return The action that Bill will execute after process the command.
+     */
     protected static String processDeleteCommand(String input) throws InvalidException {
 
         String[] isDone = input.split(" ");
@@ -73,6 +98,12 @@ public class Parser {
         int noOfTasksLeft = listOfContent.getSizeOfList();
         return listOfContent.removeTask(index - 1);
     }
+    /**
+     * Process a user's TODO command.
+     *
+     * @param input A string that consist of user's command.
+     * @return The action that Bill will execute after process the command.
+     */
     protected static String processTodoCommand(String input) throws InvalidException {
         String[] isDone = input.split(" ");
         String firstChar = isDone[0];
@@ -84,6 +115,12 @@ public class Parser {
         listOfContent.addTask(newTask);
         return listOfContent.addStringTask(newTask);
     }
+    /**
+     * Process a user's DEADLINE command.
+     *
+     * @param input A string that consist of user's command.
+     * @return The action that Bill will execute after process the command.
+     */
     protected static String processDeadlineCommand(String input) throws InvalidException {
         String[] isDone = input.split(" ");
         String firstChar = isDone[0];
@@ -97,7 +134,9 @@ public class Parser {
         } else {
             int timeLength = isDone[isDone.length - 1].length();
             int dateLength = isDone[isDone.length - 2].length();
-            if (timeLength < 4 || dateLength < 10) {
+            String slashFirst = String.valueOf(isDone[isDone.length - 2].charAt(2));
+            String slashSecond = String.valueOf(isDone[isDone.length - 2].charAt(5));
+            if (timeLength < 4 || dateLength < 10 || !slashFirst.equals("/") || !slashSecond.equals("/")) {
                 throw new InvalidDeadlineException("Fail to add task :( . "
                         + "Please check the time and date format again. "
                         + "The correct format should be dd/mm/yyyy tttt. Eg: 02/08/2019 1800");
@@ -110,11 +149,17 @@ public class Parser {
         listOfContent.addTask(deadline);
         return listOfContent.addStringTask(deadline);
     }
+    /**
+     * Process a user's EVENT command.
+     *
+     * @param input A string that consist of user's command.
+     * @return The action that Bill will execute after process the command.
+     */
     protected static String processEventCommand(String input) throws InvalidException {
         String[] isDone = input.split(" ");
         String firstChar = isDone[0];
         if (isDone.length == 1) {
-            throw new InvalidDeadlineException("OOPS!!! The description of a task cannot be empty."
+            throw new InvalidEventException("OOPS!!! The description of a task cannot be empty."
                     + "please provide me with the name and time of the task");
         }
         if (input.split("/at").length < 2) {
@@ -123,7 +168,9 @@ public class Parser {
         } else {
             int timeLength = isDone[isDone.length - 1].length();
             int dateLength = isDone[isDone.length - 2].length();
-            if (timeLength < 4 || dateLength < 10) {
+            String slashFirst = String.valueOf(isDone[isDone.length - 2].charAt(2));
+            String slashSecond = String.valueOf(isDone[isDone.length - 2].charAt(5));
+            if (timeLength < 4 || dateLength < 10 || !slashFirst.equals("/") || !slashSecond.equals("/")) {
                 throw new InvalidDeadlineException("Fail to add task :( . "
                         + "Please check the time and date format again. "
                         + "The correct format should be dd/mm/yyyy tttt. Eg: 02/08/2019 1800");
@@ -136,12 +183,23 @@ public class Parser {
         listOfContent.addTask(event);
         return listOfContent.addStringTask(event);
     }
+    /**
+     * Process a user's SAVE command.
+     *
+     * @return The action that Bill will execute after process the command.
+     */
     protected static String processSaveCommand() {
         String message = "The list has been save successfully! \n";
         return message;
     }
+    /**
+     * Process a user's HELP command.
+     *
+     * @return The action that Bill will execute after process the command.
+     */
     protected static String processHelpCommand() {
         String toDoCommand = "Use TODO to add a new task. Format todo [taskName], Eg: todo ip \n";
+        String saveCommand = "\n Use SAVE to save the tasks added. Format save, Eg: save \n";
         String deleteCommand = "\n Use DELETE a new task. Format delete [taskIndex], Eg: delete 5 \n";
         String findCommand = "\n Use FIND to find a new task. Format find [taskName], Eg: find ip \n";
         String eventCommand = "\n Use EVENT to add a new task with date and time. "
@@ -153,7 +211,7 @@ public class Parser {
         String byeCommand = "\n Use BYE to exit from the application. Format: bye. Eg: bye \n";
         String ending = "\n Please use the above mentioned command, other command are not supported :( ";
         return toDoCommand + deleteCommand
-                + findCommand
+                + findCommand + saveCommand
                 + eventCommand + deadlineCommand + listCommand + doneCommand + byeCommand + ending;
     }
 

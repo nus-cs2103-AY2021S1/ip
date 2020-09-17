@@ -2,6 +2,10 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a TimeParser and consists of methods related to
+ * processs the string that represent the time and convert it to the desired form.
+ */
 public class TimeParser {
 
     private String inputTime;

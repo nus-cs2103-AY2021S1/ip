@@ -1,6 +1,9 @@
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+/**
+ * Represents Ui class and consists of methods to handle things that related to User Interaction.
+ */
 public class Ui {
 
     private static final String horizontal_line = "------------------------------------------";

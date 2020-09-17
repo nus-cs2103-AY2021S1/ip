@@ -1,3 +1,7 @@
+/**
+ * Represents an InvalidTodoException class and handles the exceptions related
+ * to a invalid TODO tasks assign.
+ */
 public class InvalidTodoException extends InvalidException {
 
     /**

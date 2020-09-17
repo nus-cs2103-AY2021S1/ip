@@ -1,3 +1,7 @@
+
+/**
+ * Represents a Todo class and consists of methods to handle things that related to Todo Task.
+ */
 public class ToDo extends Task {
 
     /**
@@ -23,6 +27,9 @@ public class ToDo extends Task {
         return "T" + " | " + super.fileFormat();
 
     }
+    /**
+     * Override the toString() method to suit the need of the TODO class.
+     */
     @Override
     public String toString() {
         return "T" + " | " + super.fileFormat(); }

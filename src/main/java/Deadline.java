@@ -1,3 +1,7 @@
+
+/**
+ * Represents a Deadline class and consists of methods related to Deadline Task assigned.
+ */
 public class Deadline extends Task {
 
     protected String deadline;
@@ -29,6 +33,9 @@ public class Deadline extends Task {
         return "D" + " | " + super.fileFormat() + " | " + outputTime;
 
     }
+    /**
+     * Override the toString() method to suit the need of the DEADLINE class.
+     */
     @Override
     public String toString() {
         TimeParser inputTime = new TimeParser(deadline);

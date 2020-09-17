@@ -8,14 +8,23 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
- * A GUI for Duke using FXML.
+ * A GUI for Bill using FXML.
  */
 public class Main extends Application {
 
     private Bill duke = new Bill();
 
+    /**
+     * Constructor for the Main class.
+     *
+     */
     public Main() throws IOException {
     }
+    /**
+     * Starts the application.
+     *
+     * @param stage
+     */
     @Override
     public void start(Stage stage) {
         try {

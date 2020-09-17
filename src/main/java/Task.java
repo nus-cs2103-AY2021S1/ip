@@ -1,3 +1,7 @@
+
+/**
+ * Represents a Task class and consists of methods to handle things that related to the Task.
+ */
 public class Task {
     protected String newTask;
     protected boolean isDone;
@@ -13,12 +17,23 @@ public class Task {
         this.isDone = false;
         this.isImported = false;
     }
+    /**
+     * Constructs a task when the task is imported from previous saved file.
+     *
+     * @param newTask Name of the task.
+     * @param isDone whether the task has been mark done.
+     */
     protected Task(String newTask, boolean isDone) {
         this.newTask = newTask;
         this.isDone = isDone;
         this.isImported = true;
     }
 
+    /**
+     * Returns a string representing the status of the task.
+     *
+     * @return Icon of the status of the task.
+     */
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
