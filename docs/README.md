@@ -21,7 +21,7 @@ Duke can be used for managing three types of tasks:
 
 4. Double-click the file to start the app. The GUI similar to the one below should appear in a few seconds.
 
-![Ui](https://github.com/CalistaIo/ip/blob/master/docs/Ui.png)
+![Ui](Ui.png)
 
 5. Type the command in the command box and click on the Send button to execute it.
 
