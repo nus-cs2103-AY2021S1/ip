@@ -13,7 +13,8 @@ public class ExitCommand implements Command {
 
     @Override
     public String execute(TaskList tasks, Storage store) throws DukeException {
-        return "Bye bye!!!";
+        System.exit(0);
+        return "";
     }
 
     @Override

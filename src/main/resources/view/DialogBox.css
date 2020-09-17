@@ -1,0 +1,15 @@
+.spongebobBubble {
+    -fx-background-color: #ffff00;
+    -fx-background-radius: 15;
+    -fx-border-width: 3;
+    -fx-border-color: rgb(208, 202, 23);
+    -fx-border-radius: 15;
+}
+
+.patrickBubble {
+    -fx-background-color: pink;
+    -fx-background-radius: 15;
+    -fx-border-width: 3;
+    -fx-border-color: hotpink;
+    -fx-border-radius: 15;
+}

@@ -12,7 +12,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.*;
 
 /**
  * An example of a custom control using FXML.
@@ -24,8 +24,10 @@ public class DialogBox extends HBox {
     private Label dialog;
     @FXML
     private ImageView displayPicture;
+    @FXML
+    private HBox chatBubble;
 
-    private DialogBox(String text, Image img) {
+    private DialogBox(String text, Image img, String chatStyle) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Ui.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -37,6 +39,8 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         displayPicture.setImage(img);
+        chatBubble.getStyleClass().add(chatStyle);
+        dialog.setMinHeight(Region.USE_PREF_SIZE);
     }
 
     /**
@@ -50,11 +54,11 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        return new DialogBox(text, img, "patrickBubble");
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+        var db = new DialogBox(text, img, "spongebobBubble");
         db.flip();
         return db;
     }
