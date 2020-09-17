@@ -1,21 +1,24 @@
-# Duke project template
+# Duke project - Individual project for CS2103 
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+This is a project for a todo-list named Duke.
 
-## Setting up in Intellij
-
-Prerequisites: JDK 11, update Intellij to the most recent version.
-
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project dialog first)
-1. Set up the correct JDK version, as follows:
-   1. Click `Configure` > `Structure for New Projects` and then `Project Settings` > `Project` > `Project SDK`
-   1. If JDK 11 is listed in the drop down, select it. If it is not, click `New...` and select the directory where you installed JDK 11
-   1. Click `OK`
-1. Import the project into Intellij as follows:
-   1. Click `Open or Import`.
-   1. Select the project directory, and click `OK`
-   1. If there are any further prompts, accept the defaults.
-1. After the importing is complete, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()`. If the setup is correct, you should see something like the below:
-   ```
-   Hello from Duke
-   ```
+## How to use
+Duke supports several commands:
+1. `list`
+This will list all the things to be done.
+2. `done <number>` 
+Mark the entry with the index number presented as done
+3. `todo <description>`
+Adds a todo to the list
+4. `deadline <description> /by <date>`
+Adds a thing to do with a deadline
+5. `event <description> /at <date>`
+Adds an event to the list
+6. `help`
+Shows the help message
+7. `find <description>`
+Finds a task that matches (part of, or the entire) description
+8. `delete <number>`
+Deletes the entry with the corresponding index number
+9. `bye`
+Exits Duke.
