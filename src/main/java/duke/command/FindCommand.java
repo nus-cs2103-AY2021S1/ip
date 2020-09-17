@@ -1,32 +1,30 @@
 package duke.command;
 
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
-import duke.task.Task;
-
-import duke.dukeexception.DukeException;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.dukeexception.DukeException;
+import duke.task.Task;
 
 /**
- * Command that finds tasks that contain a given keyword when executed.
+ * Command that finds tasks that match a keyword or keywords (either partially or fully)
+ * when executed.
  */
-public class FindCommand extends Command{
-    /** Keyword to be searched for */
+public class FindCommand extends Command {
+    /** String to be searched for */
     private final String description;
 
     /**
-     * Public constructor. Removes whitespaces of <code>description</code>
-     * when assigning to class variable, and converts keyword to lower case
+     * Public constructor. Converts string entered by user to lower case
      * for simplicity.
      *
      * @param description Keyword that user wants to search for amongst tasks.
      */
     public FindCommand(String description) {
-        this.description = description.replaceAll("\\s","").toLowerCase();
+        this.description = description.toLowerCase();
     }
 
     @Override
@@ -44,16 +42,26 @@ public class FindCommand extends Command{
     }
 
     private List<Task> findMatchingTasks(TaskList tasks) {
+        String[] keywords = description.split(" ");
         List<Task> resultList = new ArrayList<>();
 
         for (int i = 1; i <= tasks.getListLength(); i++) {
             Task task = tasks.getTask(i);
-            if (task.getTaskName().toLowerCase().contains(this.description)) {
+            if (hasMatch(keywords, task)) {
                 resultList.add(task);
             }
         }
 
         return resultList;
+    }
+    
+    private boolean hasMatch(String[] keywords, Task task) {
+        boolean isMatching = false;
+        String simpleTaskName = task.getTaskName().toLowerCase();
+        for (String keyword : keywords) {
+            isMatching = isMatching || simpleTaskName.contains(keyword);
+        }
+        return isMatching;
     }
 
     @Override
