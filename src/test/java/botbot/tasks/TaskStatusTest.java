@@ -30,7 +30,7 @@ public class TaskStatusTest {
 
     @Test
     public void getStatusIcon() {
-        assertEquals("\u2713", TaskStatus.DONE.getStrValue());
-        assertEquals("\u2717", TaskStatus.NOT_DONE.getStrValue());
+        assertEquals("\u2713", TaskStatus.DONE.getStatusIcon());
+        assertEquals("\u2717", TaskStatus.NOT_DONE.getStatusIcon());
     }
 }

@@ -40,10 +40,10 @@ public class UiTest {
     
     @Test
     public void showDeleteResponse() {
-        assertEquals("ok! I've removed this task:\n  \nyou now have 0 task in your list\n",
+        assertEquals("ok! I've removed this task:\n  task\nyou now have 0 task in your list\n",
                 new UiStub().showDeleteResponse(null, 0));
-        assertEquals("ok! I've removed this task:\n  \nyou now have 5 tasks in your list\n",
-                new UiStub().showDeleteResponse(null, 0));
+        assertEquals("ok! I've removed this task:\n  task\nyou now have 5 tasks in your list\n",
+                new UiStub().showDeleteResponse(null, 5));
     }
     
     @Test
