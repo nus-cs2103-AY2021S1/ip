@@ -46,6 +46,12 @@ public class MainWindow extends AnchorPane {
      * @param input
      */
     public void terminateRock(String input) {
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException ex) {
+            Thread.currentThread().interrupt();
+        }
+        System.exit(0);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, currentUserImage),
                 DialogBox.getDukeDialog(Ui.sayBye(), currentRockImage)

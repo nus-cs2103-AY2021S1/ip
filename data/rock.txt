@@ -1,4 +1,4 @@
 3
 T|buy a new laptop|false
-W|watch netflix|true|8pm|10pm
 E|x|true|y
+T|cak|false
