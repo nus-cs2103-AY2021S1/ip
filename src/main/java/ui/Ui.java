@@ -20,6 +20,7 @@ import task.Todo;
 public class Ui {
     private TaskList list;
     private Storage storage;
+    private boolean isBye;
 
     /**
      * Creates a Ui object.
@@ -30,6 +31,11 @@ public class Ui {
     public Ui(TaskList taskList, Storage storage) {
         this.list = taskList;
         this.storage = storage;
+        this.isBye = false;
+    }
+
+    public boolean isBye() {
+        return isBye;
     }
 
     /**
@@ -118,6 +124,7 @@ public class Ui {
      * @return String containing good bye.
      */
     public String end() {
+        isBye = true;
         String text = "Goodbye! Let's play fetch again soon. :)\n";
         return text;
     }
