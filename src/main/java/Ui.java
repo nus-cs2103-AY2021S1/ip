@@ -41,8 +41,7 @@ public class Ui {
 
     public static void startInput(TaskList taskList) {
         String input = userInput.getText();
-        Label userText = new Label(input);
-        dialogContainer.getChildren().add(DialogBox.getUserDialog(userText, new ImageView(userPic)));
+        dialogContainer.getChildren().add(DialogBox.getUserDialog(input, userPic));
         processInput(input, taskList);
         userInput.clear();
     }
@@ -52,8 +51,7 @@ public class Ui {
      */
     public static void printWithLines(String output) {
         System.out.println(LINE + "\n" + output + LINE);
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(new Label(LINE + "\n" + output + LINE),
-                new ImageView(dukePic)));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(LINE + "\n" + output + LINE, dukePic));
     }
 
     /**
