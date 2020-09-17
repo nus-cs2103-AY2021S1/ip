@@ -170,7 +170,7 @@ Marks the task as done whereby the task is displayed with a preceding ✓ symbol
 ![doneSS](./screenshots/doneCommand.png)
 
 
-### Finding your Tasks
+## Finding your Tasks
 
 ***Godfather*** can find your tasks for you as long as you know what you're looking for.
 
