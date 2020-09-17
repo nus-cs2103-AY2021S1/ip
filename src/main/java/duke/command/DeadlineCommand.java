@@ -49,7 +49,10 @@ public class DeadlineCommand extends Command {
             throw new InvalidInputException("OOPS!!! The description of a deadline cannot be empty.\n");
         }
         if (!containsKeyword(super.input)) {
-            throw new InvalidInputException("OOPS!!! Please use '/by' keyword\n");
+            throw new InvalidInputException("OOPS!!! Please use '/by' keyword.\n");
+        }
+        if (!super.input.substring(9, 10).equals(" ")) {
+            throw new InvalidInputException("OOPS!!! Deadline format is incorrect.\n");
         }
         try {
             assert super.input.contains("/by") : "Deadline does not have keyword command.";

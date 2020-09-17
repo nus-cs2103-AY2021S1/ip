@@ -53,7 +53,7 @@ public class FindCommand extends Command {
         } else {
             String result = ui.printMessage(TASK_FOUND_MESSAGE);
             for (int j = 0; j < tasksFound.size(); j++) {
-                result = result + ui.printMessage((j + 1) + "." + tasksFound.get(j));
+                result = result + ui.printMessage((j + 1) + "." + tasksFound.get(j)) + "\n";
             }
             return result;
         }

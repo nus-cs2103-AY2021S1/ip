@@ -1,6 +1,5 @@
 package duke;
 
-import duke.Parser;
 import duke.command.Command;
 import duke.command.EventCommand;
 import duke.exceptions.DukeException;

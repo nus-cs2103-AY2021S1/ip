@@ -51,6 +51,9 @@ public class EventCommand extends Command {
         if (!containsKeyword(super.input)) {
             throw new InvalidInputException("OOPS!!! Please use '/at' keyword\n");
         }
+        if (!super.input.substring(6, 7).equals(" ")) {
+            throw new InvalidInputException("OOPS!!! Event format is incorrect.\n");
+        }
         try {
             assert super.input.contains("/at") : "Event does not have keyword command.";
             String[] split = super.input.substring(6).split("/at ", 2);
