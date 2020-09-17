@@ -65,13 +65,14 @@ public class Parser {
             case ("undo"):
             case ("done"):
             case ("delete"):
-            case ("find"):
             case ("view"):
                 return this.processList(com, index);
             case ("todo"):
             case ("deadline"):
             case ("event"):
                 return this.processTask(com, task, date);
+            case ("find"):
+                return this.processFind(task);
             case ("note"):
                 return this.processNote(task);
             default:
@@ -104,7 +105,8 @@ public class Parser {
                         + "undo <task number> - mark the specified task as not done\n"
                         + "delete <task number> - deletes the specified task from the list\n"
                         + "find <keyword> - provides a list of the tasks containing the keyword in its description.\n"
-                        + "view <task number> - views the task and showing the note attached to the task.";
+                        + "view <task number> - views the task and showing the note attached to the task.\n"
+                        + "note <task number> <note content>\nn";
             default:
                 throw new DukeException("Sorry, I did not understand: " + command
                         + "\nUse \"help\" to look at available commands.");
@@ -186,11 +188,6 @@ public class Parser {
                 throw new DukeException("Please choose a task to delete, with \"delete <task number>\"");
             }
             return list.deleteItem(parsedIndex);
-        case("find"):
-            if (index.equals("")) {
-                throw new DukeException("Please input a word to find tasks with, using \"find <word>\"");
-            }
-            return list.findWord(index);
         case ("view"):
             if (index.equals("")) {
                 throw new DukeException("Please choose a task to view, using \"view <task number>\"");
@@ -221,6 +218,20 @@ public class Parser {
         int index = Integer.parseInt(matcher.group(1)) - 1;
         String note = matcher.group(2);
         return this.list.editNote(index, note);
+    }
+
+    /**
+     * Helpeer function to process find command
+     *
+     * @param word The String word to find in the description of every task.
+     * @return String representation of a list with all the matching tasks.
+     * @throws DukeException A custom Exception that carries a message for the user if thrown.
+     */
+    private String processFind(String word) throws DukeException {
+        if (word.equals("")) {
+            throw new DukeException("Please input a word to find tasks with, using \"find <word>\"");
+        }
+        return list.findWord(word);
     }
 
     /**
