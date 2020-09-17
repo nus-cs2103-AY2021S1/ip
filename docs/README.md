@@ -178,6 +178,7 @@ Marks a task as done when you have completed the task. This helps you to keep tr
 * The `index` refers to the index number shown in the displayed tasks list after using the list command. 
 * The `index` must be a positive integer 1, 2, 3, ...
 * Clippy will change the status icon of the specified task from [✗] to [✓]
+
 ### Usage
 Example of usage:
 * `done 2` marks the 2nd task in the list as completed
@@ -213,6 +214,7 @@ Deletes the specified task from Clippy.
 * Deletes the task at the specified `index`.
 * The `index` refers to the index number shown in the displayed tasks list after using the list command. 
 * The `index` must be a positive integer 1, 2, 3, …​
+
 ### Usage
 Example of usage:
 * `list` followed by `delete 2` deletes the 2nd task in the task list.
@@ -240,6 +242,7 @@ A: Install the app in the other computer and overwrite the empty data file it cr
 
 
 # 5. Command Summary
+
 Action | Format, Example usage
 ------ | ------
 Add | `todo <task description>` <br> `deadline <task description> /by <YYYY-MM-DD>` <br> `event <task description> /at <date/time period>` <br> e.g. `event java workshop​ /at Tuesday 6-7pm`
