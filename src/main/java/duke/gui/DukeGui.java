@@ -38,6 +38,7 @@ public class DukeGui extends Application {
             // Display GUI
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            stage.setTitle("Duke");
             fxmlLoader.<MainWindow>getController().setDukeGui(this);
             stage.show();
 
