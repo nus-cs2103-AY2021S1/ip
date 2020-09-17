@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import exception.DukeException;
+import magic.Format;
+import magic.MyString;
 import task.Deadline;
 import task.Event;
 import task.Task;
@@ -16,9 +18,9 @@ import task.ToDo;
 public class Storage {
 
     // Read file
-    private File f;
-    private String dir;
-    private String fileName;
+    private final File f;
+    private final String dir;
+    private final String fileName;
 
     /**
      * Constructor creates the data folder and txt if not yet created.
@@ -35,12 +37,12 @@ public class Storage {
         this.f = new File(this.dir, filename);
         if (!dir.exists()) {
             if (!dir.mkdir()) {
-                throw new DukeException("Cannot create directory");
+                throw new DukeException(MyString.ERROR_DIRECTORY);
             }
         }
         if (!f.exists()) {
             if (!this.f.createNewFile()) {
-                throw new DukeException("Cannot create data text file");
+                throw new DukeException(MyString.ERROR_DATA_FILE);
             }
         }
     }
@@ -57,20 +59,22 @@ public class Storage {
         Scanner sc = new Scanner(f);
         while (sc.hasNextLine()) {
             String input = sc.nextLine();
-            String[] inputSplit = input.split("/");
+            String[] inputSplit = input.split(MyString.DATA_TASK_SEP);
 
+            //Assert length is at least 2
             assert inputSplit.length >= 2;
+
             Task task;
             switch (inputSplit[0]) {
-            case "T":
+            case MyString.DATA_TODO_SYMBOL:
                 // two inputs
                 task = new ToDo(inputSplit[3]);
                 break;
-            case "D":
+            case MyString.DATA_DEADLINE_SYMBOL:
                 //three inputs
                 task = new Deadline(inputSplit[3], inputSplit[4]);
                 break;
-            case "E":
+            case MyString.DATA_EVENT_SYMBOL:
                 //three inputs
                 task = new Event(inputSplit[3], inputSplit[4]);
                 break;
@@ -83,7 +87,7 @@ public class Storage {
             }
 
             String tagName = inputSplit[2];
-            if (!tagName.equals("")) {
+            if (!tagName.isEmpty()) {
                 task.setTag(tagName);
             }
 
@@ -110,7 +114,8 @@ public class Storage {
      * @throws IOException thrown when file cannot be found.
      */
     public void markDoneData(int order) throws IOException {
-        editData(order, "true", 1);
+        String data = String.valueOf(true);
+        editData(order, data, 1);
     }
 
     /**
@@ -122,17 +127,18 @@ public class Storage {
     public void deleteData(int order) throws IOException {
         //New text
         Scanner reader = new Scanner(f);
-        String newData = "";
+        StringBuilder newData = new StringBuilder();
         for (int i = 0; reader.hasNextLine(); i++) {
             if (i != order - 1) {
-                newData = newData + reader.nextLine() + "\n";
+                String dataLine = String.format(Format.DATA, reader.nextLine());
+                newData.append(dataLine);
             } else {
                 reader.nextLine();
             }
 
         }
 
-        writeData(newData, false);
+        writeData(newData.toString(), false);
 
     }
 
@@ -167,20 +173,23 @@ public class Storage {
      * @throws IOException thrown when file cannot be found.
      */
     public void editData(int order, String data, int type) throws IOException {
-        String newData = "";
+        StringBuilder newData = new StringBuilder();
         Scanner reader = new Scanner(f);
 
         for (int i = 0; reader.hasNextLine(); i++) {
+            String dataLine;
             if (i == order - 1) {
-                String[] oldData = reader.nextLine().split("/");
+                String[] oldData = reader.nextLine().split(MyString.DATA_TASK_SEP);
                 oldData[type] = data;
-                String parsedData = String.join("/", oldData);
-                newData = newData + parsedData + "\n";
+                String parsedData = String.join(MyString.DATA_TASK_SEP, oldData);
+                dataLine = String.format(Format.DATA, parsedData);
             } else {
-                newData = newData + reader.nextLine() + "\n";
+                String line = reader.nextLine();
+                dataLine = String.format(Format.DATA, line);
             }
+            newData.append(dataLine);
         }
 
-        writeData(newData, false);
+        writeData(newData.toString(), false);
     }
 }

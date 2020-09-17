@@ -2,13 +2,14 @@ package converter;
 
 import command.Mode;
 import exception.DukeException;
+import magic.MyString;
 import task.Deadline;
 import task.Event;
 import task.Task;
 import task.ToDo;
 
 public class Parser {
-    private static final String DELIMITER = " ";
+    private static final String SEP = MyString.CMD_DELIMITER;
 
     /**
      * Based on the input, return the correct command mode.
@@ -18,11 +19,11 @@ public class Parser {
      * @throws DukeException thrown when no mode can be found for the input
      */
     public static Mode mode(String input) throws DukeException {
-        String command = input.split(Parser.DELIMITER)[0].toUpperCase();
+        String command = input.split(Parser.SEP)[0].toUpperCase();
         try {
             return Mode.valueOf(command);
         } catch (IllegalArgumentException e) {
-            throw new DukeException("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new DukeException(MyString.ERROR_INPUT_ERROR);
         }
     }
 
@@ -34,40 +35,40 @@ public class Parser {
      * @throws DukeException thrown when no task can be returned for the corresponding task.
      */
     public static Task task(String input) throws DukeException {
-        assert input.split(Parser.DELIMITER).length >= 2 : "At least 2 inputs";
-        String command = input.split(Parser.DELIMITER)[0];
+        assert input.split(Parser.SEP).length >= 2 : MyString.ERROR_INVALID_ARGUMENT;
+        String command = input.split(Parser.SEP)[0];
 
         switch (command) {
-        case ToDo.COMMAND:
+        case MyString.CMD_TODO:
             return parseToDo(input);
-        case Deadline.COMMAND:
+        case MyString.CMD_DEADLINE:
             return parseDeadline(input);
-        case Event.COMMAND:
+        case MyString.CMD_EVENT:
             return parseEvent(input);
         default:
-            throw new DukeException("\u2639 OOPS!!! I'm sorry, but this is an invalid command :-(");
+            throw new AssertionError(MyString.ERROR_INVALID_TASK);
         }
     }
 
     private static ToDo parseToDo(String input) {
-        String name = input.split(ToDo.COMMAND)[1].trim();
-        assert name.length() > 0 : "Empty Desc";
+        String name = input.split(MyString.CMD_TODO)[1].trim();
+        assert name.length() > 0 : MyString.EMPTY_DESC;
         return new ToDo(name);
     }
 
     private static Deadline parseDeadline(String input) throws DukeException {
-        String name = input.split(Deadline.DELIMITER)[0].split(Deadline.COMMAND)[1].trim();
-        String by = input.split(Deadline.DELIMITER)[1].trim();
-        assert by.length() > 0 : "Empty Date";
-        assert name.length() > 0 : "Empty Desc";
+        String name = input.split(MyString.CMD_DEADLINE_BY)[0].split(MyString.CMD_DEADLINE)[1].trim();
+        String by = input.split(MyString.CMD_DEADLINE_BY)[1].trim();
+        assert by.length() > 0 : MyString.EMPTY_DESC;
+        assert name.length() > 0 : MyString.EMPTY_DESC;
         return new Deadline(name, by);
     }
 
     private static Event parseEvent(String input) {
-        String name = input.split(Event.DELIMITER)[0].split(Event.COMMAND)[1].trim();
-        String at = input.split(Event.DELIMITER)[1].trim();
-        assert at.length() > 0 : "Empty Date";
-        assert name.length() > 0 : "Empty Desc";
+        String name = input.split(MyString.CMD_EVENT_AT)[0].split(MyString.CMD_EVENT)[1].trim();
+        String at = input.split(MyString.CMD_EVENT_AT)[1].trim();
+        assert at.length() > 0 : MyString.EMPTY_DESC;
+        assert name.length() > 0 : MyString.EMPTY_DESC;
         return new Event(name, at);
 
     }
@@ -81,10 +82,10 @@ public class Parser {
      */
     public static int order(String input) throws DukeException {
         try {
-            return Integer.parseInt(input.split(Parser.DELIMITER)[1]);
+            return Integer.parseInt(input.split(Parser.SEP)[1]);
 
         } catch (NumberFormatException e) {
-            throw new DukeException("\u2639 OOPS!!! Please enter an integer!");
+            throw new DukeException(MyString.ERROR_INTEGER);
 
         }
 
@@ -95,9 +96,13 @@ public class Parser {
      *
      * @param input Raw command input as String.
      * @return Sub name to search for.
+     * @throws DukeException when input has too few arguments
      */
-    public static String findName(String input) {
-        return input.split(Parser.DELIMITER, 2)[1].trim();
+    public static String findName(String input) throws DukeException{
+        if (input.split(Parser.SEP).length<2) {
+            throw new DukeException (MyString.ERROR_INVALID_DESC);
+        }
+        return input.split(Parser.SEP, 2)[1].trim();
     }
 
     /**
@@ -105,8 +110,12 @@ public class Parser {
      *
      * @param input Raw command input as String
      * @return Name of tag
+     * @throws DukeException when input has too few arguments
      */
-    public static String getTag(String input) {
-        return input.split(Parser.DELIMITER, 3)[2].trim();
+    public static String getTag(String input) throws DukeException{
+        if (input.split(Parser.SEP).length<3) {
+            throw new DukeException (MyString.ERROR_INVALID_DESC);
+        }
+        return input.split(Parser.SEP, 3)[2].trim();
     }
 }

@@ -5,14 +5,12 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 import exception.DukeException;
+import magic.Format;
+import magic.MyString;
 
 public class Deadline extends Task {
-    public static final String COMMAND = "deadline";
-    public static final String DELIMITER = "/by";
     private static final DateTimeFormatter MY_DATE_FORMATTER =
-            DateTimeFormatter.ofPattern("LLL dd uuuu");
-    private static final String DISPLAY_SYMBOL = "[D]";
-    private static final String PARSED_SYMBOL = "D";
+            DateTimeFormatter.ofPattern(Format.LOCAL_DATE);
     private final String by;
     private final String byFormat;
     private final LocalDate date;
@@ -32,27 +30,26 @@ public class Deadline extends Task {
             this.date = LocalDate.parse(by);
             this.byFormat = this.date.format(MY_DATE_FORMATTER);
         } catch (DateTimeParseException e) {
-            throw new DukeException("Invalid date Format.\nPlease input in the following format:\n"
-                    + "YYYY-mm-dd");
+            throw new DukeException(MyString.ERROR_INVALID_DATE);
         }
 
     }
 
     @Override
     public String getParsedData() {
-        String[] args = new String[]{Deadline.PARSED_SYMBOL, String.valueOf(super.isDone),
+        String[] args = new String[]{MyString.DATA_DEADLINE_SYMBOL, String.valueOf(super.isDone),
             super.tag, super.name, this.by};
-        return String.join(Task.DELIMITER, args);
+        return String.join(MyString.DATA_TASK_SEP, args);
     }
 
     @Override
     public String toString() {
         String tag = "";
-        if (!super.tag.equals("")) {
+        if (!super.tag.isEmpty()) {
             tag = Task.TAG_ICON + super.tag;
         }
 
-        return String.format("%s%s (by: %s) %s", Deadline.DISPLAY_SYMBOL,
+        return String.format(Format.DISPLAY_DEADLINE, MyString.DATA_DEADLINE_SYMBOL,
                 super.toString(), this.byFormat, tag);
     }
 }

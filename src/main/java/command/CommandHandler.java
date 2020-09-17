@@ -53,7 +53,7 @@ public class CommandHandler {
 
             } else if (mode == Mode.LIST) {
                 // List all tasks
-                output.append(Ui.showListTasks(taskList));
+                output.append(Ui.showListTask(taskList));
 
             } else if (mode == Mode.BYE) {
                 // Exit now

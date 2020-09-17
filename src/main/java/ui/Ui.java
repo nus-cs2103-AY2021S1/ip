@@ -1,5 +1,7 @@
 package ui;
 
+import magic.Format;
+import magic.MyString;
 import task.Task;
 import task.TaskList;
 
@@ -9,15 +11,14 @@ public class Ui {
      * Prints welcome message.
      */
     public static String showWelcome() {
-        return "Hello! I'm Duke\n"
-                + "What can I do for you?";
+        return MyString.WELCOME;
     }
 
     /**
      * Prints goodbye message
      */
     public static String goodbye() {
-        return "Bye. Hope to see you again soon!";
+        return MyString.GOODBYE;
     }
 
     /**
@@ -26,8 +27,8 @@ public class Ui {
      * @param task Task to print
      */
     public static String showAddTask(Task task, int size) {
-        String totalTasksString = showTotalTasks(size);
-        return String.format("Go it. I've added this task:\n%s\n%s",
+        String totalTasksString = showTotalTask(size);
+        return String.format(Format.ADD_TASK_HEADER,
                 task.toString(), totalTasksString);
     }
 
@@ -37,7 +38,7 @@ public class Ui {
      * @param task Task to print
      */
     public static String showDoneTask(Task task) {
-        return String.format("Nice! I've marked this task as done:\n%s", task);
+        return String.format(Format.DONE_TASK_HEADER, task);
     }
 
     /**
@@ -46,8 +47,8 @@ public class Ui {
      * @param task Task to print
      */
     public static String showRemovedTask(Task task, int size) {
-        String totalTasksString = showTotalTasks(size);
-        return String.format("Noted. I've removed this task:\n%s\n%s",
+        String totalTasksString = showTotalTask(size);
+        return String.format(Format.REMOVE_TASK_HEADER,
                 task.toString(), totalTasksString);
     }
 
@@ -56,13 +57,13 @@ public class Ui {
      *
      * @param size number of tasks in the list.
      */
-    public static String showTotalTasks(int size) {
-        assert size >= 0 : "Invalid Size";
+    public static String showTotalTask(int size) {
+        assert size >= 0 : MyString.ERROR_INVALID_SIZE;
         if (size == 0) {
-            return "TaskList is empty! Please add a task first.";
+            return Format.TOTAL_TASK_HEADER_EMPTY;
         } else {
             String plural = size != 1 ? "tasks" : "task";
-            return String.format("Now you have %d %s in the list.", size, plural);
+            return String.format(Format.TOTAL_TASK_HEADER, size, plural);
         }
     }
 
@@ -73,7 +74,12 @@ public class Ui {
      * @return Formatted string result.
      */
     public static String showFindTask(TaskList result) {
-        return String.format("Here are the matching tasks in your list:\n%s", result.listToString());
+        String list = result.listToString();
+        if (list.isEmpty()) {
+            return Format.FIND_TASK_HEADER_EMPTY;
+        }
+        return String.format(Format.FIND_TASK_HEADER,
+                result.listToString());
     }
 
     /**
@@ -91,7 +97,7 @@ public class Ui {
      * @return Formatted String result.
      */
     public static String showTaggedTask(Task task) {
-        return String.format("Noted. The following task has been tagged!\n%s",
+        return String.format(Format.TAGGED_TASK_HEADER,
                 task.toString());
     }
 
@@ -100,13 +106,13 @@ public class Ui {
      * @param taskList Task List to print
      * @return  Formatted String result.
      */
-    public static String showListTasks(TaskList taskList) {
+    public static String showListTask(TaskList taskList) {
         String list = taskList.listToString();
-        if (!list.isEmpty()) {
-            return String.format("No matching tasks found");
+        if (list.isEmpty()) {
+            return Format.LIST_TASK_HEADER_EMPTY;
         }
 
-        return String.format("Here are the tasks in your list:\n%s",
+        return String.format(Format.LIST_TASK_HEADER,
                 taskList.listToString());
     }
 }

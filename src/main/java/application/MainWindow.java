@@ -13,6 +13,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import magic.MyString;
 import ui.Ui;
 
 public class MainWindow extends Application {
@@ -34,7 +35,7 @@ public class MainWindow extends Application {
         scrollPane.setContent(dialogContainer);
 
         userInput = new TextField();
-        sendButton = new Button("Send");
+        sendButton = new Button(MyString.SEND_BUTTON);
 
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
@@ -60,7 +61,7 @@ public class MainWindow extends Application {
 
     private void adjustSize(AnchorPane mainLayout, Stage stage) {
         //RESIZE
-        stage.setTitle("duke");
+        stage.setTitle(MyString.WINDOWS_TITLE);
         stage.setResizable(false);
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);

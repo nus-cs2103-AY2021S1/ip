@@ -3,6 +3,8 @@ package task;
 import java.util.ArrayList;
 
 import exception.DukeException;
+import magic.Format;
+import magic.MyString;
 
 public class TaskList {
 
@@ -37,7 +39,7 @@ public class TaskList {
         try {
             return dukeList.remove(order - 1);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("\u2639 OOPS!!! Looks like we can't find the task.\nPlease enter a valid index");
+            throw new DukeException(MyString.ERROR_INVALID_INDEX);
         }
     }
 
@@ -53,7 +55,7 @@ public class TaskList {
             task.setDone();
             return task;
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("\u2639 OOPS!!! Looks like we can't find the task.\nPlease enter a valid index");
+            throw new DukeException(MyString.ERROR_INVALID_INDEX);
         }
 
     }
@@ -68,7 +70,8 @@ public class TaskList {
         for (int i = 0; i < dukeList.size(); i++) {
             int order = i + 1;
             String taskString = dukeList.get(i).toString();
-            String line = String.format("%d. %s\n", order, taskString);
+            String line = String.format(Format.DISPLAY_TASK_AS_LIST,
+                    order, taskString);
             output.append(line);
         }
 
@@ -104,13 +107,13 @@ public class TaskList {
     }
 
     public Task setTag(int order, String tagName) throws DukeException {
-        assert !tagName.isEmpty() : "Empty Desc";
+        assert !tagName.isEmpty() : MyString.ERROR_INVALID_DESC;
         try {
             Task task = dukeList.get(order - 1);
             task.setTag(tagName);
             return task;
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("\u2639 OOPS!!! Looks like we can't find the task.\nPlease enter a valid index");
+            throw new DukeException(MyString.ERROR_INVALID_INDEX);
         }
     }
 }
