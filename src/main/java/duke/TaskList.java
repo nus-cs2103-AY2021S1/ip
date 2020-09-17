@@ -10,8 +10,8 @@ import java.util.List;
 public class TaskList {
     @SuppressWarnings("CanBeFinal")
     private List<Task> lst = new ArrayList<>();
-    private static int numberOfDoneTasks;
-    private static LocalDate lastLoginDate;
+    private static int numberOfDoneTasks = 0;
+    private static LocalDate lastLoginDate = LocalDate.now();
 
     /** Returns number of done tasks.
      * @return number of done tasks
