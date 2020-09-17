@@ -6,7 +6,9 @@ import duke.TaskList;
 import duke.Ui;
 
 public class SaveCommand implements Command {
-
+    /**
+     * Return Command to save current progress into the default file.
+     */
     public SaveCommand() {
     }
 

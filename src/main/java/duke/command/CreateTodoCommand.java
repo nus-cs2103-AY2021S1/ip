@@ -5,7 +5,9 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 import duke.task.Task;
-
+/**
+ * Represents the Command to create a Todo
+ */
 public class CreateTodoCommand implements Command {
     private String taskTitle;
 

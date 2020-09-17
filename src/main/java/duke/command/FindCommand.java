@@ -5,9 +5,16 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
+/**
+ * Represents the Command to find tasks with keyword.
+ */
 public class FindCommand implements Command {
     private String keyword;
-
+    /**
+     * Return new Command that will find all tasks that contains the keyword.
+     * @param keyword The keyword to search in the TaskList.
+     * @throws DukeException when there is error creating the command
+     */
     public FindCommand(String keyword) {
         this.keyword = keyword;
     }

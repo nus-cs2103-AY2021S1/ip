@@ -5,10 +5,17 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 import duke.task.Task;
-
+/**
+ * Represents the Command to delete a task
+ */
 public class DeleteCommand implements Command {
     private int taskIndex;
 
+    /**
+     * Return new Command that will delete an Event.
+     * @param taskIndex Index of the task to be deleted.
+     * @throws DukeException when there is error creating the command
+     */
     public DeleteCommand(int taskIndex) throws DukeException {
         this.taskIndex = taskIndex;
     }

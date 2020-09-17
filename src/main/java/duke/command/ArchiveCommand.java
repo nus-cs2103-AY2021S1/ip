@@ -5,6 +5,9 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
+/**
+ * Represents the Archive Command
+ */
 public class ArchiveCommand implements Command {
     private String filePath;
 
@@ -12,6 +15,14 @@ public class ArchiveCommand implements Command {
         this.filePath = filePath;
     }
 
+    /**
+     * Execute the Archive Action.
+     * @param storage Storage to save data to.
+     * @param tasks The tasklist to save the data to.
+     * @param terminationFunction Function to run if this is the bye command.
+     * @return The success message.
+     * @throws DukeException when there is error carrying out the command.
+     */
     @Override
     public String execute(Storage storage, TaskList tasks, Runnable terminationFunction) throws DukeException {
         storage.saveToFile(tasks.toSaveFormat(), filePath);

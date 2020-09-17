@@ -5,7 +5,9 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 import duke.task.Task;
-
+/**
+ * Represents the Command to create an Event
+ */
 public class CreateEventCommand implements Command {
     private String title;
     private String detail;

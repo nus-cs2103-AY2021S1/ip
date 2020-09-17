@@ -1,9 +1,18 @@
 package duke.command;
 
-import duke.*;
+import duke.DukeException;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 
 public class LoadCommand implements Command {
     private String filePath;
+
+    /**
+     * Returns the command to load.
+     * @param filePath to load the archived data.
+     * @throws DukeException when there is error executing the command.
+     */
     public LoadCommand(String filePath) throws DukeException {
         if (filePath.equals("")) {
             throw new DukeException("Invalid Input. 'load' should be followed by the filePath");

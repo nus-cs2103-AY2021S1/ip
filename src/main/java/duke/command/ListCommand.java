@@ -5,10 +5,11 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
+/**
+ * Represents the command to list all the tasks.
+ */
 public class ListCommand implements Command {
-    public ListCommand() {
-    }
-
+    public ListCommand() {}
     /**
      * Execute the command.
      *

@@ -6,9 +6,16 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
+/**
+ * Represents the Command to mark the task as done.
+ */
 public class DoneCommand implements Command {
     private int taskRank;
-
+    /**
+     * Return new Command that will delete an Event.
+     * @param taskRank Index of the task to be marked done.
+     * @throws DukeException when there is error creating the command
+     */
     public DoneCommand(int taskRank) {
         this.taskRank = taskRank;
     }
