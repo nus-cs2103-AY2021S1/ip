@@ -24,7 +24,7 @@ public class Duke {
         } catch (DukeException e) {
             reply = e.toString();
         }
-        return "Duke: " + reply;
+        return "Duck: " + reply;
     }
 }
 
