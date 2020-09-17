@@ -22,7 +22,7 @@ public class Duke {
      * Constructor for the Duke application.
      */
     public Duke() {
-        File f = new File("D:\\24092014\\Joven\\UNI STUFF\\CS2103\\IP\\task.txt");
+        File f = new File("/task.txt");
         Storage storage = new Storage(f);
         TaskList taskList = new TaskList(storage.loadFile());
         UI ui = new UI(taskList, storage);

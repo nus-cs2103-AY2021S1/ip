@@ -29,7 +29,7 @@ public class DukeTest {
 
     @BeforeAll
     public static void setUp() {
-        File f = new File("D:\\24092014\\Joven\\UNI STUFF\\CS2103\\IP\\task.txt");
+        File f = new File("/task.txt");
         storage = new Storage(f);
         shelf = new TaskList(storage.loadFile());
         ui = new UI(shelf, storage);
