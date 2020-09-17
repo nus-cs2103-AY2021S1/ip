@@ -12,12 +12,19 @@ public class UI {
 
     private static Printable greetingMessage = () -> "Hello! I'm Duke \nWhat can I do for you?";
     private static Printable goodbyeMessage = () -> "Bye. Hope to see you again soon!";
+    private static final String TASK_COMPLETION_MESSAGE = "Nice! I've marked this task as done:\n[✓] ";
+    private static final String TASK_DELETION_MESSAGE = "Noted. I've removed this task:\n" +
+            "%s%s %s\n" +
+            "Now you have %d tasks in the list.";
+    private static final String TASK_ADDITION_MESSAGE = "Got it. i've added this task:\n %s%s %s\n" +
+            "Now you have %d tasks in the list.";
+    
 
     /**
      * Generates greeting message for user
      */
     public void greetUser() {
-        System.out.println("Hello from\n" + LOGO);
+        introduceDuke();
         speak(greetingMessage);
     }
 
@@ -34,7 +41,7 @@ public class UI {
      * @param task Completed Task as input
      */
     public String taskCompletedMessage(Task task) {
-        return "Nice! I've marked this task as done:\n[✓] " + task.toString();
+        return TASK_COMPLETION_MESSAGE + task.toString();
     }
 
     /**
@@ -42,16 +49,13 @@ public class UI {
      * @param task Task to be deleted as input
      */
     public String taskDeletedMessage (Task task) {
-        assert task!=null : "The task to be deleted cannot be null";
-        return String.format("Noted. I've removed this task:\n" +
-                "%s%s %s\n" +
-                "Now you have %d tasks in the list.",task.getTaskSymbol(),task.getSymbol(),task.toString(),Task.remainingTasks());
+
+        return String.format(TASK_DELETION_MESSAGE,task.getTaskSymbol(),task.getSymbol(),task.toString(),Task.remainingTasks());
     }
     
     public String taskAddedMessage (Task task) {
-        assert task!=null : "Null task cannot be added";
-        return String.format("Got it. i've added this task:\n %s%s %s\n" +
-                "Now you have %d tasks in the list.", task.getTaskSymbol(), task.getSymbol(), task.toString(), Task.remainingTasks());
+        return String.format(TASK_ADDITION_MESSAGE, task.getTaskSymbol(), task.getSymbol(), task.toString(), Task.remainingTasks());
+
     }
 
     /**
@@ -59,19 +63,9 @@ public class UI {
      * @param taskList list of tasks as input
      */
     public static String listTasks (TaskList taskList) {
-        int i;
-        StringBuilder sb = new StringBuilder();
-        for (i = 0 ; i < taskList.getTotalTask() ; i++) {
-            Task task = taskList.get(i);
-            if (i==taskList.getTotalTask()-1) {
-                sb.append(String.format("%d.%s %s",i+1,task.getSymbol(),task));
-            } else {
-                sb.append(String.format("%d.%s %s\n", i+1,task.getSymbol(), task));
-            }
-        }
-        Printable task = () -> sb.toString();
-        
-        return task.print();
+        StringBuilder sb = createStringBuilder();
+        addTaskToStringBuilder(sb,taskList);
+        return sb.toString();
     }
     
 
@@ -80,4 +74,32 @@ public class UI {
         System.out.println(printable.print() + "\n");
         System.out.println("------------------------------------------------------");
     }
+    
+    private static void introduceDuke() {
+        System.out.println("Hello from");
+        System.out.println(LOGO);
+    }
+    
+    private static StringBuilder createStringBuilder() {
+        return new StringBuilder();
+    }
+    
+    private static StringBuilder addTaskToStringBuilder(StringBuilder sb, TaskList taskList) {
+        int i;
+        for (i = 0 ; i < taskList.getTotalTask() ; i++) {
+            Task task = taskList.get(i);
+            if (i==taskList.getTotalTask()-1) {
+                sb.append(String.format("%d.%s %s",i+1,task.getSymbol(),task));
+            } else {
+                sb.append(String.format("%d.%s %s\n", i+1,task.getSymbol(), task));
+            }
+        }
+        return sb;
+    }
+    
+    public static String parseInput (String input) {
+        return input.toLowerCase();
+    }
+    
+    
 }

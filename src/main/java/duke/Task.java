@@ -43,6 +43,10 @@ public abstract class Task {
     public static void decrementTask() {
         Task.total --;
     }
+    
+    public boolean contains(String keyword) {
+        return description.contains(keyword);
+    }
     @Override
     public boolean equals(Object other) {
         if (this.getClass().equals(other.getClass())) {

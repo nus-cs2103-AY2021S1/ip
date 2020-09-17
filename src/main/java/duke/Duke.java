@@ -1,14 +1,16 @@
 package duke;
 
-
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 
 public class Duke extends Application{
+    
+    private static final String GREET_TEXT = "Hello World!";
+    private TaskList taskList;
+    private UI userInterface = new UI();
 
     @Override
     public void start(Stage stage) {
@@ -20,58 +22,40 @@ public class Duke extends Application{
     }
     
     private String getGreetText() {
-        return "Hello World!";
+        return GREET_TEXT;
     }
-
-    private TaskList taskList;
-    private UI userInterface = new UI();
     
-    
-
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     */
     String getResponse(String input)  {
-        String command = input.toLowerCase();
-        try {
-            if (command.equals("bye")) {
-                Storage.writeToFile(taskList);
-                return userInterface.goodbye();
-            } else if (command.equals("list")) {
-
-               return userInterface.listTasks(taskList);
-
-            } else if (command.split("\\s+")[0].equals("find")) {
-                String keyword = Parser.parseKeyWord(command);
-                return UI.listTasks(taskList.search(keyword));
-                
-            } else if (command.split("\\s+")[0].equals("done")) {
-                Task task = taskList.get(Integer.parseInt(command.split("\\s+")[1]) - 1);
-                task.setDone();
-                return userInterface.taskCompletedMessage(task);
-                
-            }else if (command.split("\\s+")[0].equals("delete")){
-                if (command.split("\\s+").length != 2) {
-                    throw new IllegalUserInputException("PLease specify the correct argument number");
-                }
-                try {
-                    int i = Integer.parseInt(command.split("\\s+")[1]);
-                    Task.decrementTask();
-                    Task task = taskList.get(i-1);
-                    taskList.deleteTaskIndex(i-1);
-                    return userInterface.taskDeletedMessage(task);
-                } catch (TaskListError e) {
-                    System.out.println(e.getDetails());
-                }
-            } else {
-                   return storeInput(input, taskList, userInterface);
-            }
-            
-        }catch (IOException | IllegalArgumentException e) {
-            System.out.println(e);
+        String command = parseInput(input);
+        
+        if (isExitCommand(command)) {
+            writeDataToFile(taskList);
+            return getGoodbyeMessage();
+        } 
+        
+        if (isListCommand(command)) {
+            return listAllTasks();
+        } 
+        
+        if (isFindCommand(command)) {
+            String keyword = getKeyWord(command);
+            return listAllSearchResults(keyword);
         }
-        return "Something went wrong!";
+        
+        if (isCompletedCommand(command)) {
+            Task task = getTask(command);
+            task.setDone();
+            return getTaskCompletionMessage(task);
+        } 
+        
+        if (isDeleteCommand(command)){
+            if (isInvalidDeleteCommand(command)) {
+                throw new IllegalUserInputException("Please specify the correct argument number");
+            }
+            return deleteTask(command);
+        } else {
+            return storeInput(input, taskList, userInterface);
+        }
     }
     
     public Duke() {
@@ -165,5 +149,76 @@ public class Duke extends Application{
         assert task!=null : "Task should not be null";
         taskList.addTask(task);
         return userInterface.taskAddedMessage(task);
+    }
+    
+    private String parseInput(String input) {
+        return UI.parseInput(input);
+    }
+    private boolean isExitCommand(String command) {
+        return command.equals("bye");
+    }
+    
+    private void writeDataToFile(TaskList taskList) {
+        try {
+            Storage.writeToFile(taskList);
+        } catch (IOException | IllegalArgumentException e) {
+            System.out.println(e);
+        }
+    }
+    
+    private String getGoodbyeMessage() {
+        return userInterface.goodbye();
+    }
+    
+    private boolean isListCommand(String command) {
+        return command.equals("list");
+    }
+    
+    private String listAllTasks() {
+        return userInterface.listTasks(taskList);
+    }
+    
+    private boolean isFindCommand(String command) {
+        return command.split("\\s+")[0].equals("find");
+    }
+    
+    private String getKeyWord (String command) {
+        return Parser.parseKeyWord(command);
+    }
+    
+    private String listAllSearchResults(String keyword) {
+        return UI.listTasks(taskList.search(keyword));
+    }
+    
+    private boolean isCompletedCommand(String command) {
+        return command.split("\\s+")[0].equals("done");
+    }
+    
+    private Task getTask(String command) {
+        return taskList.get(Integer.parseInt(command.split("\\s+")[1]) - 1);
+    }
+    
+    private String getTaskCompletionMessage(Task task) {
+        return userInterface.taskCompletedMessage(task);
+    }
+    
+    private boolean isDeleteCommand(String command) {
+        return command.split("\\s+")[0].equals("delete");
+    }
+    
+    private boolean isInvalidDeleteCommand(String command) {
+        return command.split("\\s+").length != 2;
+    }
+    
+    private String deleteTask(String command) {
+        try {
+            int i = Integer.parseInt(command.split("\\s+")[1]);
+            Task.decrementTask();
+            Task task = taskList.get(i-1);
+            taskList.deleteTaskIndex(i-1);
+            return userInterface.taskDeletedMessage(task);
+        } catch (TaskListError e) {
+            return e.getDetails();
+        }
     }
 }
