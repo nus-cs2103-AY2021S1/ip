@@ -13,7 +13,7 @@ todo|Add a new To-Do task to Duke|todo read book
 done|Complete the task at the given number|done 2
 delete|Delete the task at the given number|delete 3
 find|Find tasks in Duke that contains the keyword given|find kiwi
-exit|Saves current list of tasks and exits Duke|exit
+bye|Saves current list of tasks and exits Duke|bye
 
 ### Feature 1 
 
@@ -134,7 +134,7 @@ To save your current lists of tasks and exit Duke. This will close the Duke GUI.
 
 Example of usage: 
 
-    exit
+    bye
 
 Expected outcome:
 

@@ -32,7 +32,7 @@ public class DoneCommand extends Command {
         final int INPUT_INDEX = 5;
         //Check if task was specified
         if (super.input.length() <= INPUT_INDEX) {
-            throw new InvalidInputException("\t☹ OOPS!!! Please specify which task you want to complete!");
+            throw new InvalidInputException("☹ OOPS!!! Please specify which task you want to complete!");
         }
 
         try {
@@ -40,9 +40,9 @@ public class DoneCommand extends Command {
             Task current = tasks.getTasks().get(completed - 1);
             current.completeTask();
             storage.saveFile(tasks.getTasks());
-            return ui.printOutput("\tNice! I've marked this task as done:\n" + "\t\t" + current.toString());
+            return ui.printOutput("Nice! I've marked this task as done:\n" + current.toString());
         } catch (IndexOutOfBoundsException e) {
-            throw new InvalidInputException("\tIndex out of bounds! Please try again.");
+            throw new InvalidInputException("Index out of bounds! Please try again.");
         } catch (NumberFormatException err) {
             throw new InvalidInputException("Please enter a number!");
         }

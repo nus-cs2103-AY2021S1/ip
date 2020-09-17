@@ -73,14 +73,17 @@ public class DeadlineCommand extends Command {
         String[] splitWord = super.input.split("/");
         String description = splitWord[0].substring(INPUT_INDEX);
 
-        if (splitWord.length != 2) {
+        if (description.isBlank()) {
+            throw new InvalidInputException("The description of a deadline cannot be empty.");
+        } else if (splitWord.length != 2) {
             throw new InvalidInputException("Please use /by to indicate deadline, and only 1 forward slash throughout");
         } else if (description.charAt(description.length() - 1) != ' ') {
             throw new InvalidInputException("The formatting of your entry is wrong. Be sure to leave"
                     + " a space between the description and deadline");
-        } else if (!splitWord[1].substring(0, DEADLINE_INDEX).equals("by ")) {
-            System.out.println(splitWord[1].substring(0, DEADLINE_INDEX));
-            throw new InvalidInputException("Please indicate the start of the deadline by using /by exclusively.");
+        } else if (splitWord[1].length() < DEADLINE_INDEX
+                || !splitWord[1].substring(0, DEADLINE_INDEX).equals("by ")) {
+            throw new InvalidInputException("Please indicate the start of the deadline by using /by exclusively."
+            + " Deadline format: yyyy-mm-dd HH:mm e.g. 2020-08-23 16:45");
         }
     }
 }

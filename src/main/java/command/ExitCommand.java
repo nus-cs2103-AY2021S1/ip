@@ -24,6 +24,6 @@ public class ExitCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidSaveFileException {
         storage.saveFile(tasks.getTasks());
-        return ui.printOutput("\tBye. Hope to see you again soon!");
+        return ui.printOutput("Bye. Hope to see you again soon!");
     }
 }

@@ -110,7 +110,7 @@ public class Storage {
 
         String datetime = entry.substring(DATETIME_INDEX, entry.length() - 1);
         LocalDateTime ldt = LocalDateTime.parse(datetime, dateTimeFormat);
-        Deadline deadline = new Deadline(entry.substring(DESC_INDEX, DATETIME_INDEX - 1),
+        Deadline deadline = new Deadline(entry.substring(DESC_INDEX, DATETIME_INDEX - 6),
                 ldt);
         if (entry.contains("✓")) {
             deadline.completeTask();
@@ -127,7 +127,7 @@ public class Storage {
 
         String datetime = entry.substring(DATETIME_INDEX, entry.length() - 1);
         LocalDateTime ldt = LocalDateTime.parse(datetime, dateTimeFormat);
-        Event event = new Event(entry.substring(DESC_INDEX, DATETIME_INDEX - 1),
+        Event event = new Event(entry.substring(DESC_INDEX, DATETIME_INDEX - 6),
                 ldt);
         if (entry.contains("✓")) {
             event.completeTask();

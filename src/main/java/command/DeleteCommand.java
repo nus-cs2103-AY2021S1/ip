@@ -33,7 +33,7 @@ public class DeleteCommand extends Command {
         //Check if description is empty
         if (super.input.length() <= INPUT_INDEX) {
             throw new InvalidInputException(
-                    "\t☹ OOPS!!! The description of a delete operation cannot be empty / invalid index.");
+                    "☹ OOPS!!! The description of a delete operation cannot be empty / invalid index.");
         }
 
         int index;
@@ -44,12 +44,12 @@ public class DeleteCommand extends Command {
         }
         if (index > tasks.getTasks().size() || index <= 0) {
             throw new InvalidInputException(
-                    "\t☹ OOPS!!! The description of a delete operation cannot be empty / invalid index.");
+                    "☹ OOPS!!! The description of a delete operation cannot be empty / invalid index.");
         }
         Task task = tasks.getTasks().get(index - 1);
         tasks.removeTask(index - 1);
         storage.saveFile(tasks.getTasks());
-        return ui.printOutput("\tNoted. I've removed this task:\n" + "\t" + task.toString()
-                + "\n\tNow you have " + tasks.getTasks().size() + " tasks in the list.");
+        return ui.printOutput("Noted. I've removed this task:\n" + task.toString()
+                + "\nNow you have " + tasks.getTasks().size() + " tasks in the list.");
     }
 }

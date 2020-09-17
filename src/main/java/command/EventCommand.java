@@ -71,15 +71,18 @@ public class EventCommand extends Command {
         String[] splitWord = super.input.split("/");
         String description = splitWord[0].substring(INPUT_INDEX);
 
-        if (splitWord.length != 2) {
+        if (description.isBlank()) {
+            throw new InvalidInputException("The description of an event cannot be empty.");
+        } else if (splitWord.length != 2) {
             throw new InvalidInputException("Please use /at to indicate event time,"
                     + " and only 1 forward slash throughout");
         } else if (description.charAt(description.length() - 1) != ' ') {
             throw new InvalidInputException("The formatting of your entry is wrong. Be sure to leave"
                     + " a space between the description and event timing");
-        } else if (!splitWord[1].substring(0, EVENT_INDEX).equals("at ")) {
-            System.out.println(splitWord[1].substring(0, EVENT_INDEX));
-            throw new InvalidInputException("Please indicate the start of the event by using /at exclusively.");
+        } else if (splitWord[1].length() < EVENT_INDEX
+                || !splitWord[1].substring(0, EVENT_INDEX).equals("at ")) {
+            throw new InvalidInputException("Please indicate the start of the event by using /at exclusively."
+            + " Event timing format: yyyy-mm-dd HH:mm e.g. 2020-08-23 16:45");
         }
     }
 }

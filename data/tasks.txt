@@ -1,3 +1,7 @@
-[T][✘] CS2103T Individual Project user guide 
-[E][✘] CS2103T Tutorial (at: 09:00 Sep 16 2020)
-[D][✘] CS2103T Individual Project (by: 23:59 Sep 18 2020)
+[E][✓] pingpong (at: 19:00 Sep 9 2020)
+[D][✘] ostriches (by: 10:00 Sep 9 2020)
+[E][✓] pingping (at: 19:00 Sep 9 2020)
+[E][✘] pingpingo (at: 19:00 Sep 9 2020)
+[D][✘] kang (by: 10:00 Sep 9 2020)
+[E][✘] ice (at: 10:00 Sep 9 2020)
+[D][✘] lllll (by: 10:00 Sep 9 2020)
