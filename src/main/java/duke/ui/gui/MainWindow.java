@@ -8,8 +8,9 @@ import duke.DukeCommandMatcher;
 import duke.parsers.MarkdownParser;
 import duke.storage.Storage;
 import duke.ui.Printer;
+import duke.ui.gui.markdown.ErrorText;
 import duke.ui.gui.markdown.Markdown;
-import duke.ui.gui.markdown.Text;
+import duke.ui.gui.markdown.NormText;
 import duke.utils.Constants;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -50,7 +51,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        Text greetingText = new Text(Constants.GREETING);
+        NormText greetingText = new NormText(Constants.GREETING);
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(Arrays.asList(greetingText), dukeImage));
         userInput.focusedProperty().addListener(this.inputFocusListener);
     }
@@ -81,7 +82,7 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         //handle input
         if (!Objects.equals(input.trim(), "")) {
-            Text inputText = new Text(input);
+            NormText inputText = new NormText(input);
             dialogContainer.getChildren().add(DialogBox.getUserDialog(Arrays.asList(inputText), userImage));
             handleDukeOutput(input);
             userInput.clear();
@@ -97,7 +98,7 @@ public class MainWindow extends AnchorPane {
             List<Markdown> markdownList = mdParser.parse();
             DialogBox db;
             if (Objects.equals(response, Constants.EXITRESPONSE)) {
-                Text byeText = new Text(Printer.printBye());
+                NormText byeText = new NormText(Printer.printBye());
                 db = DialogBox.getDukeDialog(Arrays.asList(byeText), dukeImage);
                 userInput.setEditable(false);
                 userInput.setStyle("-fx-background-color: grey;");
@@ -108,7 +109,7 @@ public class MainWindow extends AnchorPane {
             }
             dialogContainer.getChildren().add(db);
         } catch (Exception e) {
-            Text exceptionText = new Text(e.getMessage());
+            ErrorText exceptionText = new ErrorText(e.getMessage());
             dialogContainer.getChildren().add(DialogBox.getDukeDialog(Arrays.asList(exceptionText), dukeImage));
         }
     }

@@ -7,7 +7,7 @@ import java.util.Objects;
 import duke.exceptions.DukeException;
 import duke.ui.gui.markdown.Markdown;
 import duke.ui.gui.markdown.Tag;
-import duke.ui.gui.markdown.Text;
+import duke.ui.gui.markdown.NormText;
 
 
 public class MarkdownParser implements Parser<List<Markdown>> {
@@ -28,14 +28,14 @@ public class MarkdownParser implements Parser<List<Markdown>> {
             String text = parsedStr.substring(0, tagStartIdx);
             String tag = parsedStr.substring(startIdx, endIdx);
             if (!Objects.equals(text, "")) {
-                result.add(new Text(text));
+                result.add(new NormText(text));
             }
             result.add(new Tag(tag));
             parsedStr = parsedStr.substring(endIdx + Tag.END_PATTERN.length());
         }
 
         if (!Objects.equals(parsedStr, "")) {
-            result.add(new Text(parsedStr));
+            result.add(new NormText(parsedStr));
         }
         return result;
     }
