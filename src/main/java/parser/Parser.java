@@ -146,7 +146,7 @@ public class Parser {
                 int listNumber = i + 1;
                 Task currentTask = temp.get(i);
 
-                text += "\n" + "     " + listNumber + "." + currentTask.toString();
+                text += "\n" + listNumber + "." + currentTask.toString();
             }
             return text;
         }
