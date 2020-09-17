@@ -160,7 +160,6 @@ command is used.
 
 ## Command summary
 Action | Format
-
 ---------|-----------
 **List** | <code>list</code>
 **Find** | <code>find {keyword or phrase}</code>
