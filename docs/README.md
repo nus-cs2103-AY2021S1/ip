@@ -47,7 +47,8 @@ Expected outcome:
 >6. delete [NUMBER]: Deletes the particular item from your scroll
 >7. find [KEYWORD]: Returns a list of relevant items on your scroll
 >8. schedule [DATE]: Returns a list of items on this date
->9. dismiss: This will be my cue to leave.  
+>9. assist: Displays a list of available commands.  
+>10. dismiss: This will be my cue to leave.
 >
 >Now, how may I serve you?
 

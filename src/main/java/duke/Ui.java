@@ -41,7 +41,8 @@ public class Ui {
         String deleteHelp = "6. delete [NUMBER]: Deletes the particular item from your scroll\n";
         String findHelp = "7. find [KEYWORD]: Returns a list of relevant items on your scroll\n";
         String scheduleHelp = "8. schedule [DATE]: Returns a list of items on this date\n";
-        String dismissHelp = "9. dismiss: This will be my cue to leave.\n";
+        String assistHelp = "9. assist: Displays a list of available commands.\n";
+        String dismissHelp = "10. dismiss: This will be my cue to leave.\n";
         String ending = "Now, how may I serve you?\n";
         
         response.append(todoHelp);
@@ -52,6 +53,7 @@ public class Ui {
         response.append(deleteHelp);
         response.append(findHelp);
         response.append(scheduleHelp);
+        response.append(assistHelp);
         response.append(dismissHelp);
         
         response.append(ending);
