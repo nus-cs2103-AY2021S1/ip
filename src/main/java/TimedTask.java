@@ -51,8 +51,8 @@ public class TimedTask extends Task {
     }
 
     /**
-     * Returns a String in the format which the TimedTask is saved. 
-     * @return a String in the format which the TimedTask is saved. 
+     * Returns a String in the format which the TimedTask is saved.
+     * @return a String in the format which the TimedTask is saved.
      */
     @Override
     public String encode() {

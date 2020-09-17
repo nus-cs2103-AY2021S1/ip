@@ -58,11 +58,11 @@ public class TaskList {
         LocalDate userInputDate = LocalDate.parse(date,
                 DateTimeFormatter.ofPattern("dd-MM-yyyy"));
         TaskList tasksOnDate = new TaskList();
-        for(Task task: tasks) {
-            if(task instanceof TimedTask) {
+        for (Task task: tasks) {
+            if (task instanceof TimedTask) {
                 LocalDateTime taskDateTime = ((TimedTask) task).getDateTime();
                 LocalDate taskDate = taskDateTime.toLocalDate();
-                if(taskDate.equals(userInputDate)) {
+                if (taskDate.equals(userInputDate)) {
                     tasksOnDate.addTask(task);
                 }
             }

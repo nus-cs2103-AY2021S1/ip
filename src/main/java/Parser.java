@@ -1,17 +1,13 @@
-import java.time.format.DateTimeParseException;
-
 /**
  * Parser class deals with making sense of user input.
  */
 public class Parser {
     private final Ui ui;
     private final TaskList taskList;
-    private final Storage storage;
     
-    Parser(Ui ui, TaskList taskList, Storage storage) {
+    Parser(Ui ui, TaskList taskList) {
         this.ui = ui;
         this.taskList = taskList;
-        this.storage = storage;
     }
 
     /**
@@ -65,11 +61,11 @@ public class Parser {
         String[] commandAndArguments = splitCommandAndInstructions(input);
         String command = commandAndArguments[0];
         String arguments;
-        if(commandAndArguments.length < 2) {
+        if (commandAndArguments.length < 2) {
             //insufficient arguments
             arguments = null;
-        } else {
-           arguments = commandAndArguments[1];
+        } else { 
+            arguments = commandAndArguments[1];
         }
         switch (command) {
         case "bye":

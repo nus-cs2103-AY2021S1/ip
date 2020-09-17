@@ -73,7 +73,7 @@ public class Ui {
      */
     public String showCurrentTasks(TaskList taskList) {
         StringBuilder output = new StringBuilder();
-        if(taskList.size() > 0) {
+        if (taskList.size() > 0) {
             output.append("Here are the patties on your cooking station:" + "\n");
             for (int i = 1; i <= taskList.size(); i++) {
                 //print out task with numbering
@@ -105,8 +105,8 @@ public class Ui {
     public String showTasksAfterMarkDone(int index, TaskList taskList) {
         assert(index < taskList.size());
         Task task = taskList.getTask(index);
-        return "Nice! I've marked this patty as cooked:" +  "\n" +
-                task.toString();
+        return "Nice! I've marked this patty as cooked:" + "\n"
+                + task.toString();
     }
 
     /**
@@ -121,14 +121,14 @@ public class Ui {
         assert(!word.isEmpty());
         assert(taskList.size() > 0);
         TaskList temp = new TaskList();
-        for(int i = 1; i <= taskList.size(); i++) {
+        for (int i = 1; i <= taskList.size(); i++) {
             Task task = taskList.getTask(i);
-            if(task.getName().contains(word)) {
+            if (task.getName().contains(word)) {
                 temp.addTask(task);
             }
         }
         StringBuilder output = new StringBuilder();
-        if(temp.size() > 0) {
+        if (temp.size() > 0) {
             output.append("Here these patties match your description:").append("\n");
             for (int i = 1; i <= temp.size(); i++) {
                 //print out task with numbering

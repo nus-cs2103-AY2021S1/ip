@@ -9,7 +9,7 @@ public class TodoCommand extends Command {
     public String execute() {
         String result;
         try {
-            if(arguments == null || arguments.equals("")) {
+            if (arguments == null || arguments.equals("")) {
                 throw new DukeIllegalArgumentException("", DukeException.DukeExceptionType.TODO);
             }
             String todoName = arguments;

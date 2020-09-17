@@ -6,9 +6,10 @@ public class Task {
     protected String icon; //tick or cross
     protected String name;
     protected String taskType;
-
-    private final static String TICK = "O";
+    
     private final static String CROSS = "X";
+    private final static String TICK = "O";
+    
 
     /**
      * Constructor to create a Task object.
@@ -35,8 +36,8 @@ public class Task {
     }
     
     /**
-     * Returns a String in the format which the Task is saved. 
-     * @return a String in the format which the Task is saved. 
+     * Returns a String in the format which the Task is saved.
+     * @return a String in the format which the Task is saved.
      */
     public String encode() {
         return isDone

@@ -13,7 +13,7 @@ public class DukeException extends Exception {
         FIND
     }
 
-    DukeExceptionType dukeExceptionType;
+    protected DukeExceptionType dukeExceptionType;
 
     /**
      * Constructor that creates a DukeException.
@@ -35,7 +35,7 @@ public class DukeException extends Exception {
     }
     
     @Override
-    public String toString(){
+    public String toString() {
         return String.format("Error: %s", getMessage());
     }
 }

@@ -1,5 +1,6 @@
-import org.junit.Test;
 import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
 
 public class TaskListTest {
     
@@ -25,5 +26,4 @@ public class TaskListTest {
         taskList.deleteTask(1);
         assertEquals(1, taskList.size());
     }
-    
 }

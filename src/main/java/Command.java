@@ -8,6 +8,10 @@ public abstract class Command {
         this.ui = ui;
         this.arguments = arguments;
     }
-    
+
+    /**
+     * Executes the command and returns the applications corresponding output.
+     * @return application's corresponding output as a String.
+     */
     public abstract String execute();
 }

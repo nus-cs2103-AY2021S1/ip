@@ -1,9 +1,9 @@
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
-import java.io.IOException;
-import java.io.BufferedReader;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.FileReader;
 
 /**
@@ -29,10 +29,10 @@ public class Storage {
         File savedTasks = new File(filePath);
         boolean exists = savedTasks.exists();
         try {
-            if(exists) {
+            if (exists) {
                 BufferedWriter taskWriter = new BufferedWriter(new FileWriter(filePath));
                 StringBuilder currentTasks = new StringBuilder();
-                for(int i = 1; i <= taskList.size(); i++) {
+                for (int i = 1; i <= taskList.size(); i++) {
                     currentTasks.append(taskList.getTask(i).encode());
                     currentTasks.append("\n");
                 }
@@ -42,7 +42,7 @@ public class Storage {
             } else { //file does not exist, create new file
                 boolean isCreated = savedTasks.createNewFile();
                 saveTasksToSavedFile(taskList, ui);
-                if(isCreated) {
+                if (isCreated) {
                     ui.showSuccessMessage("New save file created");
                 } else {
                     ui.showErrorMessage("Failed to create save file");
@@ -62,7 +62,7 @@ public class Storage {
         try {
             BufferedReader taskReader = new BufferedReader(new FileReader(filePath));
             String line = taskReader.readLine();
-            while(line != null) {
+            while (line != null) {
                 processTask(line, taskList, ui);
                 line = taskReader.readLine();
             }
@@ -87,16 +87,16 @@ public class Storage {
         Boolean isDone = task[1].equals("1");
         String taskName = task[2];
         String taskDateTime = null;
-        if(task.length > 3) {
+        if (task.length > 3) {
             taskDateTime = task[3];
         }
-        if(line.startsWith("T")) {
+        if (line.startsWith("T")) {
             Todo newTodo = new Todo(taskName, isDone);
             taskList.addTask(newTodo);
-        } else if(line.startsWith("E")) {
+        } else if (line.startsWith("E")) {
             Event newEvent = new Event(taskName, isDone, taskDateTime);
             taskList.addTask(newEvent);
-        } else if(line.startsWith("D")) {
+        } else if (line.startsWith("D")) {
             Deadline newDeadline = new Deadline(taskName, isDone, taskDateTime);
             taskList.addTask(newDeadline);
         } else {

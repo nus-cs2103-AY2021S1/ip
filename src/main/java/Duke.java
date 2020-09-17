@@ -6,13 +6,16 @@ public class Duke {
     private final TaskList taskList;
     private final Ui ui;
     private final Parser parser;
-    
+
+    /**
+     * Constructor that creates a Duke object.
+     */
     public Duke() {
         this.ui = new Ui();
         this.storage = new Storage(".//.//.//savedTasks.txt");
         this.taskList = new TaskList();
-        this.parser = new Parser(ui, taskList, storage);
-        storage.loadTasksOnSavedFile(taskList,ui);
+        this.parser = new Parser(ui, taskList);
+        storage.loadTasksOnSavedFile(taskList, ui);
     }
     
     /**
@@ -23,8 +26,8 @@ public class Duke {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
         this.taskList = new TaskList();
-        this.parser = new Parser(ui, taskList, storage);
-        storage.loadTasksOnSavedFile(taskList,ui);
+        this.parser = new Parser(ui, taskList);
+        storage.loadTasksOnSavedFile(taskList, ui);
     }
 
     /**
@@ -42,5 +45,4 @@ public class Duke {
             return ui.showErrorMessage(e);
         }
     }
-    
 }
