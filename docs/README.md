@@ -33,8 +33,8 @@ A JavaFX-Powered Task Manager App
 This is a java project created for CS2103T Software Engineering for AY2020/2021 Semester 1.
 
 Author: Lum Jian Yang Sean <br/>
-Version: 0.1.4 <br/>
-Release Date: 14 Sepetember 2020 <br/>
+Version: 0.1.5 <br/>
+Release Date: 17 Sepetember 2020 <br/>
 Github: <a href="http://github.com/seanjyjy">https://github.com/seanjyjy</a> <br />
 
 ### Getting Started
@@ -44,8 +44,12 @@ Download and install jdk 11 from: <a href="https://www.oracle.com/technetwork/ja
 https://www.oracle.com/technetwork/java/javase/downloads/jdk11-downloads-5066655.html
 </a>
 
+## Download Link
+
+Download the JAR file [here!](https://github.com/seanjyjy/ip/releases/tag/A-Release) You can launch the app by either clicking on the jar file or `java -jar Duke-0.1.5.jar` in the path where you have the jar file.
+
 * Mac / Linux / Windows <br/>
-    Double click the jar file to run or `java -jar Duke-0.1.4.jar` in the path where you have the jar file.
+    Double click the jar file to run or `java -jar Duke-0.1.5.jar` in the path where you have the jar file.
 
 ## Features 
 * Add different types of task _e.g._ `todo`, `deadline`, `event`
