@@ -14,8 +14,8 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Storage {
-    private final static String filePath = "list.txt";
-    private final static String archivePath = "archived.txt";
+    private final static String filePath = "./list.txt";
+    private final static String archivePath = "./archived.txt";
 
     /**
      * Converts parameters of a task into a string representation used in storage

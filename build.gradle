@@ -48,12 +48,15 @@ compileTestJava.options.encoding = "UTF-8"
 javadoc.options.encoding = "UTF-8"
 
 application {
-    mainClassName = "seedu.duke.Duke"
+    mainClassName = "gui.Launcher"
 }
 
 shadowJar {
     archiveBaseName = "duke"
     archiveClassifier = null
+    manifest {
+        attributes "Main-Class": "$mainClassName"
+    }
 }
 
 checkstyle {

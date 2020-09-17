@@ -52,6 +52,7 @@ public class DialogBox extends HBox {
         displayPicture.setImage(img);
 
         dialog.setText(text);
+        dialog.setWrapText(true);
         dialog.setPadding(new Insets(10, 15, 10, 15));
         if (dir == Direction.USER) {
             dialog.setStyle("-fx-background-color: #64FF64; " +

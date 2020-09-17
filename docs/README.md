@@ -38,9 +38,9 @@ satisfies format `yyyy-MM-dd` then it will be converted into format `Month dd yy
 
 Example of usage: 
 
-`Event Group meeting /at Monday`
+`event Group meeting /at Monday`
 
-`Deadline Return book /by 2020-12-31`
+`deadline Return book /by 2020-12-31`
 
 Expected outcome:
 ```
@@ -133,13 +133,13 @@ Noted! I've archived this task:
 You can always use <list archived> command to show archived tasks :)
 ```
 
-### `list archive` - view all archived tasks
+### `list archived` - view all archived tasks
 
 Lists out all tasks that have been archived.
 
 Example of usage: 
 
-`list archive`
+`list archived`
 
 Expected outcome:
 
@@ -149,6 +149,8 @@ Expected outcome:
 
 Invalid commands or parameters and unexpected exceptions (such as file accessing) may cause Duke to 
 display an error message to the user.
+
+Tips: please be reminded that commands are case-sensitive.
 
 Example of error-arsing commands: 
 
