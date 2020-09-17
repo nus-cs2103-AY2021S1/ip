@@ -1,6 +1,0 @@
-5
-T|buy a new laptop|false
-E|CS2101 OP1|false|Friday 8-10am
-W|watch neflix|false|8pm|10pm
-D|CS4234 Assignment 3|false|Week 7
-D|CS2103T IP|false|Sep 18 2020

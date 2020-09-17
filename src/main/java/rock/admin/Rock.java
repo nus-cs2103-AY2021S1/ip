@@ -12,7 +12,7 @@ import rock.utility.Parser;
  */
 public class Rock {
     // File to store data should be directly in folder data, any name is acceptable.
-    private static final String FILE_PATH = "data/duke.txt";
+    private static final String FILE_PATH = "data/rock.txt";
     private final Storage storage = new Storage(FILE_PATH);
     private TaskList tasks;
 
