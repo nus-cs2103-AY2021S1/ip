@@ -6,7 +6,7 @@ for use through a **Command Line Interface** (CLI) while providing a minimalisti
 
 ## Quick Start
 1. Ensure you have Java 11 or above installed in your computer.
-2. Download "Duke.jar" from [here]().
+2. Download "Duke.jar" from [here](https://github.com/chan-j-d/ip/releases).
 3. Copy the file to the desired location where you would normally access it.
 4. Double-click the file to start the app. The GUI will look similar to the image below. Upon using it for the first 
 time, a new folder named "data" will be created in the same directory in order to store task data. <br />
@@ -19,7 +19,7 @@ in-order below.
     4. <code>list</code>: Lists all current task. Notice that the task is now marked as complete.
     5. <code>delete 1</code>: Deletes the 1st task. 
     6. <code>bye</code>: Closes the app.
-6. Refer to the [features]() below for more commands and the details of each command.
+6. Refer to the [features](https://github.com/chan-j-d/ip/tree/master/docs#features) below for more commands and the details of each command.
 
 ## Features 
 Note the following about the command format:
