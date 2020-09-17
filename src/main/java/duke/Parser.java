@@ -17,7 +17,6 @@ import duke.command.LoadCommand;
 import duke.command.SaveCommand;
 
 
-
 public class Parser {
     private static final String[] TASK_TYPES = {"todo", "event", "deadline"};
     private static final String[] MEMORY_COMMAND_TYPES = {"save", "archive", "load"};
