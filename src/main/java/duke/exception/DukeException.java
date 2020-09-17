@@ -9,6 +9,8 @@ public class DukeException extends Throwable {
     private static final String TASK_NO_DESCRIPTION = "Invalid, there is missing information.";
     private static final String TASK_INVALID_TYPE = "Invalid, not an accepted task type.";
     private static final String TASK_INVALID_DATE = "Invalid date. Please enter the date in YYYY-MM-DD format.";
+    private static final String TASK_INVALID_PRIORITY = "Invalid priority. "
+        + "Please enter either 'high', 'medium' or 'low'.";
     private String word;
     private ExceptionType type;
 
@@ -19,7 +21,7 @@ public class DukeException extends Throwable {
         NO_TIMEFRAME_PROVIDED,
         INVALID_TIMEFRAME,
         REQUESTED_NONEXISTENT_ITEM,
-
+        INVALID_PRIORITY
     }
 
     public DukeException(ExceptionType type) {
@@ -49,6 +51,8 @@ public class DukeException extends Throwable {
             return TASK_INVALID_TYPE;
         case REQUESTED_NONEXISTENT_ITEM:
             return TASK_INDEX_OUT_OF_BOUNDS;
+        case INVALID_PRIORITY:
+            return TASK_INVALID_PRIORITY;
         default:
             return "There is an error. Try again.";
         }

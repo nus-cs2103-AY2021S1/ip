@@ -11,8 +11,11 @@ import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.MarkDoneCommand;
+import duke.command.PriorityCommand;
 import duke.command.TodoCommand;
 import duke.exception.DukeException;
+import duke.exception.DukeException.ExceptionType;
+import duke.task.Priority;
 
 /**
  * Contains methods for processing user input, converting it to a {@link Command}
@@ -51,6 +54,11 @@ public class Parser {
             } else if (inputByParts[0].equals("find")) {
                 String toFind = inputByParts[1];
                 return new FindCommand(toFind);
+            } else if (inputByParts[0].equals("priority")) {
+                String[] taskInfo = inputByParts[1].split(" ");
+                int taskNumber = Integer.parseInt(taskInfo[0]);
+                Priority priority = getPriority(taskInfo[1]);
+                return new PriorityCommand(taskNumber, priority);
             } else {
                 String taskType = inputByParts[0];
                 validateTaskType(taskType);
@@ -58,9 +66,22 @@ public class Parser {
                 return parseNewTaskInput(taskType, description);
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException(DukeException.ExceptionType.NO_DESCRIPTION_PROVIDED);
+            throw new DukeException(ExceptionType.NO_DESCRIPTION_PROVIDED);
         } catch (NumberFormatException e) {
-            throw new DukeException(DukeException.ExceptionType.INVALID_NUMBER_INPUT);
+            throw new DukeException(ExceptionType.INVALID_NUMBER_INPUT);
+        }
+    }
+
+    private static Priority getPriority(String inputByPart) throws DukeException {
+        switch (inputByPart) {
+        case "high":
+            return Priority.HIGH;
+        case "medium":
+            return Priority.MEDIUM;
+        case "low":
+            return Priority.LOW;
+        default:
+            throw new DukeException(ExceptionType.INVALID_PRIORITY);
         }
     }
 

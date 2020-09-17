@@ -9,8 +9,18 @@ import duke.Storage;
 public class Deadline extends Task {
     private LocalDate deadline;
 
+    /**
+     * Creates a new Deadline object that represents a task with a due date.
+     * @param description information about the task
+     * @param deadline date by which the task is expected to be completed
+     */
     public Deadline(String description, LocalDate deadline) {
         super(description, "D");
+        this.deadline = deadline;
+    }
+
+    public Deadline(String description, Priority p, LocalDate deadline) {
+        super(description, p, "D");
         this.deadline = deadline;
     }
 

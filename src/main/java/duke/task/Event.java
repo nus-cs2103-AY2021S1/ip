@@ -13,6 +13,11 @@ public class Event extends Task {
         this.date = date;
     }
 
+    public Event(String description, Priority p, LocalDate date) {
+        super(description, p, "E");
+        this.date = date;
+    }
+
     @Override
     public String getSaveFormat() {
         return super.getSaveFormat() + Storage.LINE + date;

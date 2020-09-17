@@ -24,6 +24,9 @@ public class Duke {
     private Button sendButton;
     private TextField userInput;
 
+    /**
+     * Creates a new Duke object that loads input from the database file.
+     */
     public Duke() {
         try {
             ui = new Ui();
@@ -36,6 +39,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the program on the Command Line Interface until
+     * a valid exit input is typed in by the user.
+     */
     public void run() {
         ui.greet();
         boolean isExit = false;

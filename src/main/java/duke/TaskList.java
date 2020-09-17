@@ -31,6 +31,11 @@ public class TaskList {
         return res.toString();
     }
 
+    /**
+     * Returns information about the {@code Task} objects in its list in a
+     * String format for saving.
+     * @return String representation of list of tasks for saving.
+     */
     public String formatForSave() {
         StringBuilder res = new StringBuilder();
         for (Task t : taskList) {
@@ -52,6 +57,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Returns a new {@code TaskList} object containing a subset of the tasks whose
+     * descriptions contain the phrase specified.
+     * @param phrase String phrase to search the list of tasks against.
+     * @return New {@code TaskList} object containing a subset of the tasks.
+     */
     public TaskList findTasks(String phrase) {
         List<Task> searchResult = new ArrayList<>();
         for (Task task: taskList) {

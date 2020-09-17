@@ -21,6 +21,11 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
+    /**
+     * Creates a new DialogBox object which displays some text and an image side by side.
+     * @param text Text to be displayed.
+     * @param im Image to be displayed.
+     */
     public DialogBox(String text, Image im) {
         try {
             FXMLLoader loader = new FXMLLoader(Main.class.getResource("/view/DialogBox.fxml"));
