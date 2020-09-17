@@ -31,7 +31,7 @@ Duke Chatbot is a **desktop app for managing tasks and scehdules**. This chatbot
 
 <h3>Adding a task</h3>
 
-<h3>Adding a ToDo task:<code>todo</code></3>
+<h3>Adding a ToDo task:<code>todo</code></h3>
 
 Adds a todo task to the tasklist.
 
