@@ -200,6 +200,9 @@ public class Parser {
      * handles instruction "done"
      */
     public String handleDone() throws DukeException {
+        if (!sc.hasNextLine()) {
+            throw new DukeException("\u2639 OOPS!!! I need to know the index of the task to be done!");
+        }
         String doneCommand = sc.nextLine();
         int index = 0;
         if (doneCommand.isEmpty()) {
@@ -226,6 +229,9 @@ public class Parser {
      * handles instruction "delete"
      */
     public String handleDelete() throws DukeException {
+        if (!sc.hasNextLine()) {
+            throw new DukeException("\u2639 OOPS!!! I need to know the index of the task to be deleted!");
+        }
         String deleteCommand = sc.nextLine();
         int index = 0;
         if (deleteCommand.isEmpty()) {
