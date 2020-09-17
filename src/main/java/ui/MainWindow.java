@@ -61,7 +61,7 @@ public class MainWindow extends AnchorPane {
         if (input.equals("bye")) {
             new Thread(() -> {
                 try {
-                    Thread.sleep(400);
+                    Thread.sleep(450);
                     System.exit(0);
                 } catch (InterruptedException e) {
                     dialogContainer.getChildren().add(
