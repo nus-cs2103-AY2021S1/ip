@@ -1,7 +1,8 @@
-package duke;
+package duke.gui;
 
 import java.io.IOException;
 
+import duke.Duke;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -14,7 +15,7 @@ import javafx.scene.layout.VBox;
 
 
 /**
- * Controller for duke.MainWindow. Provides the layout for the other controls.
+ * Controller for duke.gui.MainWindow. Provides the layout for the other controls.
  * Adapted from <a href="https://se-education.org/guides/tutorials/javaFxPart4.html">this guide</a>.
  */
 public class MainWindow extends AnchorPane {

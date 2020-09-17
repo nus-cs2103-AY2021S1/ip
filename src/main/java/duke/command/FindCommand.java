@@ -54,7 +54,7 @@ public class FindCommand extends Command {
 
         return resultList;
     }
-    
+
     private boolean hasMatch(String[] keywords, Task task) {
         boolean isMatching = false;
         String simpleTaskName = task.getTaskName().toLowerCase();

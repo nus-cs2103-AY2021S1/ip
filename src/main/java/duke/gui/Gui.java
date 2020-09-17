@@ -1,5 +1,6 @@
-package duke;
+package duke.gui;
 
+import duke.Duke;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
@@ -16,6 +17,7 @@ public class Gui extends Application {
     public void start(Stage stage) {
         AnchorPane ap = new MainWindow(duke);
         Scene scene = new Scene(ap);
+        stage.setTitle("Meimei Bot");
         stage.setScene(scene);
         stage.show();
     }
