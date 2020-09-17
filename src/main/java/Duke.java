@@ -94,8 +94,9 @@ public class Duke extends Application {
 
         stage.setScene(scene);
         stage.show();
+        stage.getIcons().add(new Image(this.getClass().getResourceAsStream("/images/DaDuke.png")));
 
-        stage.setTitle("Duke");
+        stage.setTitle("Duke - Personal Task Assistant");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);
