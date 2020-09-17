@@ -225,6 +225,7 @@ Expected outcome:
 ```
 Here are the task(s)/deadline(s) happening on: 2020-09-17
 1.[E][✘] Intelligence Expo (at: September 17 2020)
+2.[T][✘] Fix nginx server
 ```
 
 ### `bye` - Terminates the application
