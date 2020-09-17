@@ -20,13 +20,13 @@ public class AboutCommand extends Command {
     public void execute(Ui ui, TaskManager taskManager, SaveManager saveManager) {
 
         String[] messages = {
-                "Hi! Duke's a friendly chatbot here to help you keep track of your life!",
-                "Duke will be the galaxy brain that you wished you could be :D",
-                "",
-                "Author: Wang Zijun (GitHub: WangZijun97)",
-                "",
-                ">>> Credits:",
-                "flaticon.com for the user icon image"
+            "Hi! Duke's a friendly chatbot here to help you keep track of your life!",
+            "Duke will be the galaxy brain that you wished you could be :D",
+            "",
+            "Author: Wang Zijun (GitHub: WangZijun97)",
+            "",
+            ">>> Credits:",
+            "flaticon.com for the user icon image"
         };
 
         for (String s : messages) {
