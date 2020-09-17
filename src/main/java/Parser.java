@@ -42,10 +42,22 @@ public class Parser {
             return new DeadlineCommand(userCommand);
         case ("t"):
         case ("todo") :
-            return new ToDoCommand(userCommand);
         case ("f"):
         case ("find") :
-            return new FindCommand(userCommand);
+            if (commandArgs.length == 1) {
+                throw new MissingDescriptionException();
+            } else {
+                String description = "";
+                for (int i = 1; i < commandArgs.length; i++) {
+                    description += commandArgs[i] + " ";
+                }
+                description.trim();
+                if (commandArgs[0].equals("t") || commandArgs[0].equals("todo")) {
+                    return new ToDoCommand(description);
+                } else {
+                    return new FindCommand(description);
+                }
+            }
         default :
             return new UnknownCommand(userCommand);
         }

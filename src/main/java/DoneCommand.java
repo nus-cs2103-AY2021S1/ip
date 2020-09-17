@@ -23,23 +23,16 @@ public class DoneCommand implements Command {
      * @throws InvalidNumberFromCommandException If the number provided with the done command is invalid.
      */
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        String[] commandArgs = COMMAND.split(" ");
-
-        if (commandArgs.length < 2) {
-            throw new MissingNumberFromCommandException();
+        int taskLength = taskList.TASKS.size();
+        if (TASK_NUMBER < 0 || TASK_NUMBER > taskLength) {
+            throw new InvalidNumberFromCommandException();
         } else {
-            int taskLength = taskList.TASKS.size();
-            int taskNumber = Integer.parseInt(commandArgs[1]) - 1;
-            if (taskNumber < 0 || taskNumber > taskLength) {
-                throw new InvalidNumberFromCommandException();
-            } else {
-                Task t = taskList.TASKS.get(taskNumber);
-                taskList.markAsDone(taskNumber);
-                storage.write(taskList.TASKS);
-                ui.showLine();
-                ui.doneCommandSuccessMessage(taskNumber + 1, t);
-                ui.showLine();
-            }
+            Task t = taskList.TASKS.get(TASK_NUMBER);
+            taskList.markAsDone(TASK_NUMBER);
+            storage.write(taskList.TASKS);
+            ui.showLine();
+            ui.doneCommandSuccessMessage(TASK_NUMBER + 1, t);
+            ui.showLine();
         }
     }
 
