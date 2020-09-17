@@ -5,7 +5,7 @@ public class Ui {
      * @return opening string.
      */
     public static String opening() {
-        return "Hello! I'm Duke!\nWhat can I do for you?";
+        return "Hello! I'm Lana del Taco!\nWhat can I do for you?";
     }
 
     /**
