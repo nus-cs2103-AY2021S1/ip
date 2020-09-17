@@ -71,7 +71,7 @@ public class Duke {
                     Action a = actionQueue.peek();
                     Optional<Action> next = a.receiveInputAndGetNextAction(
                             userInput);
-                    actionQueue.poll(); // remove action if successfully completed.
+                    actionQueue.poll(); //Action removed if successfully completed.
                     next.ifPresent(x-> x.prompt(ui));
                     next.ifPresent(actionQueue::add);
 

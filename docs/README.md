@@ -1,11 +1,44 @@
 # User Guide
 Duke is a desktop app for managing Tasks, with functionality to add, delete, save, update, & mark Tasks as done.
 
-## Features 
-* Items in `UPPER_CASE` brackets are parameters to be entered by the user.
+* Table of Contents
+{:toc}
+  
+##Quick start
+1. Ensure you have Java 11 or above installed in your Computer.
+
+2. Download the latest Duke.jar from [here](https://ethan-l-m-e.github.io/ip/).
+
+3. Copy the file to the folder you want to use as the home folder for your AddressBook.
+
+4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.
+  
+    * **`list`** : Lists all Tasks.
+  
+    * **`todo`**`example` : Adds a Task with description `example` to the Task List.
+    
+    * **`dealine`**`Deadline1 /by 2020-09-19` : Adds a Deadline Task with description `Deadline1` and due date `Sep 19th 2020` to the Task List.
+    
+    * **`event`**`EventA /at 2020-09-19` : Adds an Event Task with description `EventA` and event time `Sep 19th 2020` to the Task List.
+  
+    * **`delete`**`3` : Deletes the 3rd Task shown in the Task List.
+  
+    * **`update 1`** : Edits the first task in the Task List.
+  
+    * **`exit`** : Exits the app.
+  
+## Features
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the command format:**<br>
+
+* Items in `UPPER_CASE` brackets are parameters to be entered by the user.<br>
   e.g. `todo DESCRIPTION`, where `DESCRIPTION` is a parameter to be supplied, such as `todo Assignment 1`
-* Items in square brackets `[]` are optional fields.
+* Items in square brackets `[]` are optional fields.<br>
   e.g. `DESCRIPTION [/at YYYY-MM-DD]`, can be used as `eventA /at 2021-01-01` or also as just `eventA`
+  
+</div>
 
 ### Adding a Todo: `todo`
 *A Todo is a Task that contains only a description, and nothing else.*

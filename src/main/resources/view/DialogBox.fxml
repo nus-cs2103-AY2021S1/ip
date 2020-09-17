@@ -11,9 +11,9 @@
 
 <fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/10.0.2" xmlns:fx="http://javafx.com/fxml/1">
   <children>
-      <FlowPane prefHeight="0.0" prefWidth="306.0">
+      <FlowPane prefHeight="62.0" prefWidth="327.0">
          <children>
-            <BorderPane prefHeight="15.0" prefWidth="306.0" style="-fx-background-color: #ccffff; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-width: 2; -fx-border-color: #33cccc;">
+            <BorderPane prefHeight="18.0" prefWidth="326.0" style="-fx-background-color: #ccffff; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-width: 2; -fx-border-color: #33cccc;">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -30,7 +30,7 @@
             </BorderPane>
          </children>
       </FlowPane>
-    <ImageView fx:id="displayPicture" fitHeight="79.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" />
+    <ImageView fx:id="displayPicture" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" />
   </children>
   <padding>
     <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
