@@ -7,8 +7,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
 public class Storage {
     static String path;
+    File file;
+    ArrayList<Task> itemList = new ArrayList<>();
+
+
 
     static void todoToFile(Task task) throws IOException {
         FileWriter appendFile = new FileWriter(path, true);
@@ -18,10 +23,7 @@ public class Storage {
         appendFile.close();
     }
 
-    File file;
-    //Scanner fileSc;
-    //Object to store the list
-    ArrayList<Task> itemList = new ArrayList<>();
+
 
     public Storage (String path) throws IOException {
         this.path = path;
@@ -30,6 +32,7 @@ public class Storage {
             file.createNewFile();
         }
     }
+
 
     public void modifyWithList(ArrayList<Task> list) throws IOException {
         FileWriter clearFile = new FileWriter(path);
@@ -52,7 +55,7 @@ public class Storage {
         while (fileSc.hasNextLine()) {
             Task newItem;
             String taskString = fileSc.nextLine();
-            newItem = Parser.parseFileItem(taskString);
+            newItem = Parser.parseFileItemToTask(taskString);
             itemList.add(newItem);
         }
         return itemList;

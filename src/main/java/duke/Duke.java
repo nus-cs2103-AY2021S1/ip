@@ -2,9 +2,7 @@ package duke;
 
 import java.io.IOException;
 
-
 public class Duke {
-    //functions to edit file
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
@@ -16,10 +14,8 @@ public class Duke {
     }
 
 
-
     public void run() throws DukeException, IOException {
-        /*** welcoming message */
-
+        //welcoming message
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -29,10 +25,11 @@ public class Duke {
         System.out.println("Hello! Duke at your service. Please name your request." +
                 "\nAll dates should be in the form of YYYY-MM-DD: ");
 
-        /**** User Input */
+        // Take user Input
         ui.takeUserInput(storage);
 
     }
+
 
     public static void main(String[] args) throws DukeException, IOException {
         new Duke("src/main/java/duke/todo.txt").run();
