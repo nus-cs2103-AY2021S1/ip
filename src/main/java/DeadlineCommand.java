@@ -32,7 +32,8 @@ public class DeadlineCommand extends Command {
             String description = string.split(" /by ")[0]; // split the stirng by "/by ", take first half
             String time = string.split(" /by ")[1];
             String date = getLocalDate(time);
-            Task newTask = new Deadline(description, date);
+            String des = description + " (by: " + date + ")";
+            Task newTask = new Deadline(des);
             list.getList().add(newTask);
             s = ui.printAddTask(newTask, list.getList().size());
         } catch (IndexOutOfBoundsException e) {

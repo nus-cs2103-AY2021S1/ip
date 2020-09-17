@@ -2,11 +2,9 @@
  * Represents a event task.
  */
 public class Event extends Task {
-    private String time;
 
-    public Event(String description, String time) {
+    public Event(String description) {
         super(description);
-        this.time = time;
     }
 
     public Event(String description, boolean isDone) {
@@ -14,7 +12,6 @@ public class Event extends Task {
     }
 
     public String toString() {
-        return "[E]" + super.toString()
-                + " (at: " + time + ")";
+        return "[E]" + super.toString();
     }
 }

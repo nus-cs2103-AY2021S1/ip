@@ -31,7 +31,8 @@ public class EventCommand extends Command {
             String description = string.split(" /at ")[0]; // split the stirng by "/at ", take first half
             String time = string.split(" /at ")[1];
             String date = getLocalDate(time);
-            Task newTask = new Event(description, date);
+            String des = description + " (by: " + date + ")";
+            Task newTask = new Event(des);
             list.getList().add(newTask);
             s = ui.printAddTask(newTask, list.getList().size());
         } catch (IndexOutOfBoundsException e) {

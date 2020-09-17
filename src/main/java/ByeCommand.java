@@ -21,8 +21,6 @@ public class ByeCommand extends Command {
         try {
             s = ui.sayBye();
             storage.writeToFile(list);
-            // to get out of loop and terminate the program
-            isExit = true;
         } catch (IOException E) {
             s = ui.errorWithFile();
         }
