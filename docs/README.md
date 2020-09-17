@@ -26,14 +26,14 @@ Duke is a **desktop application optimized for use via a Command Line Interface**
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `ip.jar` from [here](https://github.com/nweiyue/ip/releases/tag/A-Jar).
+1. Download the latest `duke.jar` from [here](https://github.com/nweiyue/ip/releases/tag/A-Release).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your Duke.
 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. <br>
    <img src="/docs/StartPage.png" alt="StartPage"/>
 
-1. Type the command in the command box and press ENTER/click on the `Send` button to execute it. e.g., typing **`help`** and pressing ENTER will send a response message from Duke.<br>\
+1. Type the command in the command box and press ENTER/click on the `Send` button to execute it. e.g., typing **`help`** and pressing ENTER will send a short user-guide message from Duke.<br>\
    Some example commands you can try:
 
    * **`list`** : Lists all tasks in Duke.
@@ -62,6 +62,9 @@ Duke is a **desktop application optimized for use via a Command Line Interface**
 * Date and Time in angle brackets have to follow a certain format.<br>
   e.g., `deadline CS2103T ip /by <dd/MM/yyyy HH:mm>` can be used as `deadline CS2103T ip /by 15/09/2020 23:59`.
   
+* Leading and trailing whitespaces will be ignored.<br>
+  e.g., `   delete 1   ` will be read as `delete 1`.
+  
 </div>
 
 ### Viewing help: `help`
@@ -86,7 +89,7 @@ Here is what you can do with me:
    * delete <task number>: delete the task from your list
    * done <task number>: mark the task as complete
    * retrieve <dd/MM/yyyy>: retrieves the tasks due on or happening on this date
-   * find <keyword(s)>: retrieves the tasks that contain the keyword(s)
+   * find <keyword>: retrieves the tasks that contain the keyword
    * sort: sorts your list by their task type and then by their dates and time if any
    * bye: exit the application
 ```
@@ -225,7 +228,7 @@ Retrieves tasks from the exisiting list of tasks.
 
 Format: `retrieve <dd/MM/yyyy>`
 
-* Retrieves all deadlines and events that have the same date as the date specified by user.
+* Retrieves all deadlines and events that have the same date as specified by user.
 
 Example of usage: 
 
@@ -236,16 +239,17 @@ Expected outcome:
 ```
 Here are the deadlines and events happening on 23 October 2020:
    1.[D][✘] ST2334 Assignment 1 (by: 23 October 2020, 12:00 PM) 
+   2.[E][✘] CS2100 Lab 4 (at: 23 October 2020, 06:00 PM)
 ```
 
 ### Finding tasks by keyword: `find`
 
-Finds tasks which content(description and date/time) contain the keyword.
+Finds tasks which description contains the keyword.
 
 Format: `find KEYWORD`
 
 * The search is case-sensitive. e.g., `homework` will not match `Homework`
-* Words do not have to matched fully e.g., `home` will not match `homework`
+* Words that are longer than the keyword do not have to matched fully e.g., `home` will match `homework` but `homework` will not match `home`
 
 Example of usage: 
 
@@ -267,7 +271,7 @@ Sorts tasks in the exisiting list of tasks.
 Format: `sort`
 
 * The sorting will result in **todos** at the top followed by **deadlines** then **events**
-* For **deadlines** and **events**, they will be further dorted by their date and time from earliest to latest
+* For **deadlines** and **events**, they will be further sorted by their date and time from earliest to latest
 * For **todos** and **deadlines** or **events** with the same date and time, original order will persist
 
 Example of usage: 
