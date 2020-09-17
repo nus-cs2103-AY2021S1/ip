@@ -2,7 +2,7 @@
 
 **Rogue is a task manager that takes the form of a chatbot.**
 
-![Screenshot of Rogue](Ui.png){:height="452px" width="329px"}
+<img src="Ui.png" width="329" height="452" /> 
 
 It is a desktop application that provides an interactive way to organize your tasks through its command-line interface.
 If you enjoy typing, Rogue may give you a productivity boost.
