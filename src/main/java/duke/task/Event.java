@@ -3,7 +3,6 @@ package duke.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Date;
 
 /**
  * Encapsulates an event task.
@@ -33,11 +32,11 @@ public class Event extends Task {
         this.at = at;
     }
 
-    public void updateTaskDescription(String newDescription) {
+    protected void updateTaskDescription(String newDescription) {
         this.description = newDescription;
     }
 
-    public void updateTaskTime(String newTime) throws YooException {
+    protected void updateTaskTime(String newTime) throws YooException {
         try {
             this.at = LocalDate.parse(newTime);
         } catch (DateTimeParseException e) {

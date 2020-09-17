@@ -61,27 +61,27 @@ public class Ui {
         return "Update successful! (＾◡＾)\n" + t;
     }
 
-    public String showHelp() {
-        return "List of Yoo's commands!\n \n" +
-                "todo: add Todo task\n" +
-                "       todo DESCRIPTION\n" +
-                "deadline: add Deadline task\n" +
-                "       deadline DESCRIPTION /by YYYY-MM-DD\n" +
-                "event: add Event task\n" +
-                "       event DESCRIPTION /at YYYY-MM-DD\n" +
-                "bye: ends convo with Yoo\n" +
-                "delete: deletes a task\n" +
-                "       delete INDEX\n" +
-                "done: marks a task as completed\n" +
-                "       done INDEX\n" +
-                "find: find tasks with matching keyword\n" +
-                "       find KEYWORD\n" +
-                "help: displays list of Yoo's commands\n" +
-                "list: shows list of tasks\n" +
-                "update: updates task description or time\n" +
-                "       update INDEX /d DESCRIPTION\n" +
-                "       update INDEX /t YYYY-MM-DD\n" +
-                "\nDo refer to the User Guide for more details!";
+    protected String showHelp() {
+        return "List of Yoo's commands!\n \n"
+                 + "todo: add Todo task\n"
+                + "       todo DESCRIPTION\n"
+                + "deadline: add Deadline task\n"
+                + "       deadline DESCRIPTION /by YYYY-MM-DD\n"
+                + "event: add Event task\n"
+                + "       event DESCRIPTION /at YYYY-MM-DD\n"
+                + "bye: ends convo with Yoo\n"
+                + "delete: deletes a task\n"
+                + "       delete INDEX\n"
+                + "done: marks a task as completed\n"
+                + "       done INDEX\n"
+                + "find: find tasks with matching keyword\n"
+                + "       find KEYWORD\n"
+                + "help: displays list of Yoo's commands\n"
+                + "list: shows list of tasks\n"
+                + "update: updates task description or time\n"
+                + "       update INDEX /d DESCRIPTION\n"
+                + "       update INDEX /t YYYY-MM-DD\n"
+                + "\nDo refer to the User Guide for more details!";
     }
 }
 

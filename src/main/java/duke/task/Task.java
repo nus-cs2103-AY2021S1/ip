@@ -1,7 +1,5 @@
 package duke.task;
 
-import java.time.format.DateTimeParseException;
-
 /**
  * Represents a task.
  */

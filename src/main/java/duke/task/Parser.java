@@ -80,7 +80,7 @@ public class Parser {
 
         //if original task list is empty
         if (tasks.length() == 0) {
-           return ui.showCannotFindKeyword();
+            return ui.showCannotFindKeyword();
         }
 
         //searching for matching keywords
@@ -114,7 +114,7 @@ public class Parser {
             int index = Integer.parseInt(taskIndexAndInfo[0]);
 
             //if index is within range of task list
-            if(index <= tasks.length() && index > 0) {
+            if (index <= tasks.length() && index > 0) {
                 Task t = tasks.get(index - 1);
                 return executeTaskUpdate(taskIndexAndInfo, t, ui);
             } else {

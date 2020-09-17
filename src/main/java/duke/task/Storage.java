@@ -56,7 +56,7 @@ public class Storage {
             //dataFile exists but duke does not
             } else if (dataFile.exists()) {
                 assert !duke.exists();
-                    duke.createNewFile();
+                duke.createNewFile();
 
             //both files do not exist
             } else {
