@@ -4,10 +4,11 @@ package duke;
  * The Parser class deals with making sense of the user command.
  */
 public class Parser {
-
+    
     public static Command giveReminders() {
         return new ReminderCommand();
     }
+     
 
     /**
      * Reads the user input and determines which command to execute.
@@ -17,56 +18,55 @@ public class Parser {
      * @throws DukeException
      */
     public static Command parse(String command) throws DukeException {
-        String[] inputArray = command.split(" ", 2);
-        String inputCommand = inputArray[0];
-        String inputDetails = inputArray[1];
-        String[] taskParams;
-        switch (inputCommand) {
-        case "bye":
+        if (command.equals("bye")) {
             return new ExitCommand();
-        case "list":
+        } else if (command.equals("list")) {
             return new ListCommand();
-        case "delete":
-            if (inputArray.length == 1 || inputArray[1].trim().equals("")) {
+        } else if (command.matches("^done\\s+\\d+$")) {
+            int number = Integer.parseInt(command.split("\\s+")[1]) - 1;
+            return new CompleteCommand(number);
+        } else if (command.equals("todo") || command.startsWith("todo ")) {
+            if (command.length() <= 5 || command.substring(5).trim().isEmpty()) {
+                throw new DukeException("Please use the format: todo (DESCRIPTION)");
+            }
+            String description = command.substring(5);
+            return new AddCommand(TaskType.TODO, description);
+        } else if (command.equals("deadline") || command.startsWith("deadline ")) {
+            if (command.length() <= 9 || command.substring(9).trim().isEmpty()) {
+                throw new DukeException("Please use the format: deadline (DESCRIPTION) /by (YYYY-MM-DD)");
+            }
+            String[] split = command.substring(9).split("/by ");
+            if (split.length != 2) {
+                throw new DukeException("Please use the format: event (DESCRIPTION) /at (YYYY-MM-DD)");
+            }
+            String description = split[0];
+            String by = split[1];
+            return new AddCommand(TaskType.DEADLINE, description, by);
+        } else if (command.equals("event") || command.startsWith("event ")) {
+            if (command.length() <= 6 || command.substring(6).trim().isEmpty()) {
+                throw new DukeException("Please use the format: event (DESCRIPTION) /at (YYYY-MM-DD)");
+            }
+            String[] split = command.substring(6).split("/at ");
+            if (split.length != 2) {
+                throw new DukeException("Please use the format: event (DESCRIPTION) /at (YYYY-MM-DD)");
+            }
+            String description = split[0];
+            String at = split[1];
+            return new AddCommand(TaskType.EVENT, description, at);
+        } else if (command.equals("delete") || command.startsWith("delete ")) {
+            if (command.length() < 8 || command.substring(7).trim().isEmpty()) {
                 throw new DukeException("Which task do you want to delete?");
             }
-            Integer indexOfDeletedTask = Integer.parseInt(inputDetails.trim());
-            return new CompleteCommand(indexOfDeletedTask);
-        case "done":
-            if (inputArray.length == 1 || inputArray[1].trim().equals("")) {
-                throw new DukeException("Which task do you want to complete?");
-            }
-            Integer indexOfCompletedTask = Integer.parseInt(inputDetails.trim());
-            return new CompleteCommand(indexOfCompletedTask);
-        case "find":
-            if (inputArray.length == 1 || inputArray[1].trim().equals("")) {
+            String item = command.substring(7).trim();
+            int number = Integer.parseInt(item) - 1;
+            return new DeleteCommand(number);
+        } else if (command.equals("find") || command.startsWith("find ")) {
+            if (command.length() < 6 || command.substring(5).trim().isEmpty()) {
                 throw new DukeException("Which task do you want to find?");
             }
-            return new FindCommand(inputDetails.trim());
-        case "todo":
-            if (inputArray.length == 1 || inputArray[1].trim().equals("")) {
-                throw new DukeException("Please enter the description of your todo");
-            }
-            return new AddCommand(TaskType.TODO, inputDetails.trim());
-        case "deadline":
-            if (inputArray.length == 1 || inputArray[1].trim().equals("")) {
-                throw new DukeException("Please enter the description and deadline of your task");
-            }
-            taskParams = inputDetails.trim().split("/by ");
-            if (taskParams.length != 2) {
-                throw new DukeException("Please use the format: deadline (DESCRIPTION) /by " + "(YYYY-MM-DD)");
-            }
-            return new AddCommand(TaskType.DEADLINE, taskParams[0], taskParams[1]);
-        case "event":
-            if (inputArray.length == 1 || inputArray[1].trim().equals("")) {
-                throw new DukeException("Please enter the description of your event task");
-            }
-            taskParams = inputDetails.trim().split("/at ");
-            if (taskParams.length != 2) {
-                throw new DukeException("Please use the format: event (DESCRIPTION) /at " + "(YYYY-MM-DD)");
-            }
-            return new AddCommand(TaskType.EVENT, taskParams[0], taskParams[1]);
-        default:
+            String keyword = command.substring(5).trim();
+            return new FindCommand(keyword);
+        } else {
             throw new DukeException("I'm sorry, but I don't know what that means :(");
         }
     }
