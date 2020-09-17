@@ -25,7 +25,7 @@ public class Task {
 
 
     public String getStatusIcon() {
-        return ((this.status == DONE) ? "\u2713" : "\u2718");
+        return ((this.status == DONE) ? "v" : "x");
     }
 
     /**

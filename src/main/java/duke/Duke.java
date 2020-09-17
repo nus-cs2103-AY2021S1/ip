@@ -40,7 +40,7 @@ public class Duke extends Application {
     private Image userBackground = new Image(this.getClass().getResourceAsStream("/images/background2.png"));
     private Image dukeBackground = new Image(this.getClass().getResourceAsStream("/images/Sea.png"));
 
-    public Duke(){
+    public Duke() {
     }
 
     public Duke(String filePath) {
@@ -52,7 +52,7 @@ public class Duke extends Application {
         if (this.storage.load().isEmpty()) {
             // create new task list if empty file
             this.tasks = new TaskList();
-        }else{
+        } else {
             this.tasks = new TaskList(storage.load());
         }
     }
@@ -97,20 +97,17 @@ public class Duke extends Application {
 
     }
 
-    private void setMainLayout(AnchorPane mainLayout, Button sendButton){
+    private void setMainLayout(AnchorPane mainLayout, Button sendButton) {
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
         mainLayout.setPrefSize(400.0, 600.0);
     }
 
-    private void setUserInput(){
+    private void setUserInput() {
         userInput.setPrefWidth(345.0);
-
-        userInput.setOnAction((event) -> {
-            handleUserInput();
-        });
+        userInput.setOnAction((event) -> handleUserInput());
     }
 
-    private void setDialogContainer(){
+    private void setDialogContainer() {
 
         // KaTo greats user in the chat window
         Label dukeText = new Label("Hello, Ka To here, how can I serve you?");
@@ -155,7 +152,7 @@ public class Duke extends Application {
 
     }
 
-    private void setSendButton(Button sendButton){
+    private void setSendButton(Button sendButton) {
 
         sendButton.setPrefWidth(55.0);
 
@@ -195,7 +192,7 @@ public class Duke extends Application {
 
         if (this.storage.load().isEmpty()) {
             this.tasks = new TaskList();
-        }else{
+        } else {
             this.tasks = new TaskList(storage.load());
         }
         // get the KaTo response
@@ -203,8 +200,6 @@ public class Duke extends Application {
 
         return "Ka To: \n" + output;
     }
-
-
 
     public static void main(String[] args) {
         String filePath = "./data/duke.txt";

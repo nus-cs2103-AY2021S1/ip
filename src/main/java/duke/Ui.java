@@ -189,12 +189,16 @@ public class Ui {
      * @param taskList TaskList taskList to be searched within
      */
 
-    public void printFound(String keyWord, TaskList taskList){
+    public void printFound(String keyWord, TaskList taskList) {
+
         for (int i = 1; i < taskList.taskCounts + 1; i++) {
+
             Task task = taskList.tasks.get(i - 1);
+
             if (task.toString().contains(keyWord)) {
                 System.out.println("" + i + "." + task);
             }
+
         }
     }
 }

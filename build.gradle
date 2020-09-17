@@ -2,7 +2,7 @@ plugins {
     id 'java'
     id 'application'
     //id 'checkstyle'
-    id 'com.github.johnrengelman.shadow' version '5.1.0'
+    id "com.github.johnrengelman.shadow" version "6.0.0"
 }
 
 repositories {
@@ -46,7 +46,7 @@ test {
 }
 
 application {
-    mainClassName = "duke.Duke"
+    mainClassName = "duke.Launcher"
 }
 
 shadowJar {

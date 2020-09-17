@@ -61,7 +61,7 @@ public class Parser {
      * Processes the command "tasks" and prints the task list
      */
 
-    private static void processTasksCommand(TaskList taskList, Ui ui){
+    private static void processTasksCommand(TaskList taskList, Ui ui) {
         if (taskList.tasks.isEmpty()) {
             ui.printEmptyList();
         } else {
@@ -73,12 +73,12 @@ public class Parser {
      * Processes the command "done + number" and marks the relative task done
      */
 
-    private static void processDoneCommand(TaskList taskList, Ui ui, String filePath,  String[] portions){
+    private static void processDoneCommand(TaskList taskList, Ui ui, String filePath,  String[] portions) {
         if (portions.length == 1) {
             ui.failToMarkDone();
         } else {
             int taskNumber = Integer.parseInt(portions[1]);
-            if (taskNumber > taskList.taskCounts) {
+            if (taskNumber < 1 || taskNumber > taskList.taskCounts) {
                 ui.failToFindTask();
             } else {
                 Task task = taskList.tasks.get(taskNumber - 1);
@@ -93,12 +93,12 @@ public class Parser {
      * Processes the command "delete + number" and deletes the relative task
      */
 
-    private static void processDeleteCommand(TaskList taskList, Ui ui, String filePath,  String[] portions){
+    private static void processDeleteCommand(TaskList taskList, Ui ui, String filePath,  String[] portions) {
         if (portions.length == 1) {
             ui.failToDelete();
         } else {
             int taskNumber = Integer.parseInt(portions[1]);
-            if (taskNumber > taskList.taskCounts) {
+            if (taskNumber < 1 || taskNumber > taskList.taskCounts) {
                 ui.failToFindTask();
             } else {
                 Task task = taskList.tasks.get(taskNumber - 1);
@@ -127,7 +127,7 @@ public class Parser {
      * Updates the storage if task is valid
      */
 
-    private static void processToDoCommand(TaskList taskList, Ui ui, String[] portions, String filePath){
+    private static void processToDoCommand(TaskList taskList, Ui ui, String[] portions, String filePath) {
         boolean isCorrectCommand = true;
 
         if (portions.length == 1) {
@@ -140,16 +140,16 @@ public class Parser {
 
             boolean hasDuplicates = false;
             //find duplicates
-            for(int i = 0; i < taskList.taskCounts; i++){
+            for (int i = 0; i < taskList.taskCounts; i++) {
                 if (taskList.tasks.get(i).toString().equals(toDo.toString())) {
                     hasDuplicates = true;
                     break;
                 }
             }
             //add task if no duplicates
-            if(hasDuplicates){
+            if (hasDuplicates) {
                 ui.findDuplicates();
-            }else {
+            } else {
                 taskList.addTask(toDo);
                 ui.addTaskSuccessful(toDo, taskList);
             }
@@ -162,7 +162,7 @@ public class Parser {
      * updates the storage if the task is valid
      */
 
-    private static void processDeadlineCommand(TaskList taskList, Ui ui, String[] portions, String filePath){
+    private static void processDeadlineCommand(TaskList taskList, Ui ui, String[] portions, String filePath) {
         boolean isCorrectCommand = true;
         boolean includesTime = false;
         String detail = "";
@@ -172,12 +172,12 @@ public class Parser {
             isCorrectCommand = false;
         }
 
-        if(isCorrectCommand){
+        if (isCorrectCommand) {
             String[] deadlineSplitter = portions[1].split("/by ");
             if (deadlineSplitter.length == 1) {
                 ui.failToFindTime();
 
-            }else {
+            } else {
                 detail = deadlineSplitter[0];
                 date = deadlineSplitter[1];
                 includesTime = true;
@@ -196,9 +196,9 @@ public class Parser {
                 }
             }
             //add task if no duplicates
-            if(hasDuplicates){
+            if (hasDuplicates) {
                 ui.findDuplicates();
-            }else {
+            } else {
                 taskList.addTask(deadline);
                 ui.addTaskSuccessful(deadline, taskList);
             }

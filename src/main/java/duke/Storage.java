@@ -42,7 +42,6 @@ public class Storage {
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
                 inputs.add(data);
-
             }
             myReader.close();
         } catch (FileNotFoundException e) {
@@ -54,7 +53,6 @@ public class Storage {
                 Files.createDirectories(path);
 
                 System.out.println("Directory is created!");
-
             } catch (IOException error) {
                 System.err.println("Failed to create directory!" + error.getMessage());
             }

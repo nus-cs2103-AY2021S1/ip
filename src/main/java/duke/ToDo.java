@@ -10,4 +10,8 @@ public class ToDo extends Task {
         super(category, status, command);
     }
 
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }

@@ -85,7 +85,7 @@ public class ParserGUI {
             return ui.failToMarkDone();
         } else {
             int taskNumber = Integer.parseInt(portions[1]);
-            if (taskNumber > taskList.taskCounts) {
+            if (taskNumber < 1 || taskNumber > taskList.taskCounts) {
                 return ui.failToFindTask();
             } else {
                 Task task = taskList.tasks.get(taskNumber - 1);
@@ -106,7 +106,7 @@ public class ParserGUI {
             return ui.failToDelete();
         } else {
             int taskNumber = Integer.parseInt(portions[1]);
-            if (taskNumber > taskList.taskCounts) {
+            if (taskNumber < 1 || taskNumber > taskList.taskCounts) {
                 return ui.failToFindTask();
             } else {
                 Task task = taskList.tasks.get(taskNumber - 1);
@@ -208,7 +208,6 @@ public class ParserGUI {
         if (portions.length == 1) {
             return ui.failToFindDetails();
         }
-
 
         String[] eventSplitter = portions[1].split("/at ");
         if (eventSplitter.length == 1) {

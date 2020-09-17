@@ -1,0 +1,10 @@
+food
+allowance
+tasks
+todo ip project
+deadline ip /by 2020-09-16
+event tp /at 2020-09-17
+done 2
+delete 2
+find ip
+bye

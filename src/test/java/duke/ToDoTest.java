@@ -12,6 +12,7 @@ public class ToDoTest {
     @Test
     public void ToDoTest(){
         ToDo toDo = new ToDo(Task.TASK_TODO, Task.DONE, "Homework");
-        assertEquals(toDo.toString(), "[ToDo][✓] Homework");
+        assertEquals(toDo.toString(), "[ToDo][v] Homework");
+
     }
 }
