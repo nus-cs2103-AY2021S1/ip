@@ -23,7 +23,8 @@ Willy is a desktop app that helps you to **manage your activities** in the form 
 
 1. Copy the file to the folder you want to use as the _home folder_ for your WillyBot.
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.
+<br><br>
    ![Ui](Ui.png)
    
 ## Usage
