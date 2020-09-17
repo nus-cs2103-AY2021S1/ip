@@ -2,13 +2,23 @@ package duke;
 
 import java.io.IOException;
 
-
+/**
+ * The Duke program implements an application that simulates a smart task manager with the name Duke.
+ * The program takes in user inputs with various formats and process them as tasks to be finished.
+ *
+ */
 public class Duke {
-    //functions to edit file
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructor of the class.
+     * Returns a new Duke object.
+     * @param filePath The path or intended path of the data management file
+     * @throws IOException If data management file fails to be created or accessed.
+     * @throws DukeException If other errors occur.
+     */
     public Duke(String filePath) throws IOException, DukeException {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -16,7 +26,12 @@ public class Duke {
     }
 
 
-
+    /**
+     * Runs the Duke program.
+     * Prompt user to key in their input with a welcome message
+     * @throws DukeException If user input is of incorrect format or other unidentified error occurs
+     * @throws IOException If fails to take user input or create/access data management file
+     */
     public void run() throws DukeException, IOException {
         /*** welcoming message */
 
@@ -34,6 +49,12 @@ public class Duke {
 
     }
 
+    /**
+     * Creates a new Duke object and runs the program
+     * @param args
+     * @throws DukeException
+     * @throws IOException
+     */
     public static void main(String[] args) throws DukeException, IOException {
         new Duke("src/main/java/duke/todo.txt").run();
 
