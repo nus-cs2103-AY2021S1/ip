@@ -15,9 +15,9 @@ Boo Task Manager is a desktop app for managing tasks. This is a CS2103T individu
 * [FAQ](#faq)
 * [Command Summary](#command-summary)
     
-##Features 
+## Features 
 
-###Adding a task: add
+### Adding a task: add
 Users are able to add 3 types of tasks to the application.
 1. Todo
 1. Deadline
@@ -64,7 +64,7 @@ Got it. I've added this task:
 Now you have 3 tasks in the list.
 ```
 
-###Listing all tasks: list
+### Listing all tasks: list
 Users are able to view all the tasks in the list.
 
 Example of usage:
@@ -79,7 +79,7 @@ Here are the tasks in your list:
 3.[E][✘] Sam's birthday party (at: 26 Sep 2020 19:00)
 ```
 
-###Marking a task complete: done
+### Marking a task complete: done
 Users are able to mark a task as complete once they have finished the task.
 The task number refers to the number in the list.
 
@@ -95,7 +95,7 @@ Nice! I've marked this task as done:
 [T][✓] Do laundry
 ```
 
-###Delete a task: delete
+### Delete a task: delete
 Users are able to delete a task from the list.
 The task number refers to the number in the list.
 
@@ -112,7 +112,7 @@ Noted. I've removed this task:
 Now you have 2 tasks in the list.
 ```
 
-###Search for tasks: find
+### Search for tasks: find
 Users are able to search for tasks in the list matching the keywords.
 
 Finding a task: `find <keywords>`
@@ -128,7 +128,7 @@ Here are the tasks in your list:
 1.[E][✘] Sam's birthday party (at: 26 Sep 2020 19:00)
 ```
 
-###Archive a task: archive
+### Archive a task: archive
 Users are able to archive tasks. These archived tasks will be saved into an archive file.
 The task number refers to the number in the list.
 
@@ -146,7 +146,7 @@ Noted. I've archived this task:
 Now you have 1 tasks in the list.
 ```
 
-###Exiting the program: bye
+### Exiting the program: bye
 Exits the program.
 
 Example of usage:
@@ -157,7 +157,7 @@ Example of outcome:
 Bye. Hope to see you again soon!
 ```
 
-###Error handling
+### Error handling
 Should users key in any command in the wrong format, the application will inform the user of the error.
 An example below illustrates what will happen if the user does not key in the task description for a todo
 task.
@@ -172,17 +172,17 @@ Example of outcome:
 ☹ OOPS!!! The description of a todo cannot be empty.
 ```
 
-###Saving the data
+### Saving the data
 The data is saved automatically after any command that changes the data. 
 There is no need to manually save.
 
-##FAQ
+## FAQ
 Q: How do i transfer my data from one computer to another?
 
 A: Run the application on the computer and overwrite the empty data file with your data file from 
 your previous computer.
 
-##Command Summary
+## Command Summary
 Action | Format, Examples
 ------------ | -------------
 Add | eg. todo do laundry <br> eg. deadline assignment /by 23/09/2020 23:59 <br> eg. event birthday /at 23/09/2020 19:00
