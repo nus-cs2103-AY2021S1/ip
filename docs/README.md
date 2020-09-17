@@ -23,7 +23,8 @@ Willy is a desktop app that helps you to **manage your activities** in the form 
 
 1. Copy the file to the folder you want to use as the _home folder_ for your WillyBot.
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.
+1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds.
+ The image below is just an example containing some sample data which will not be present in your application.
 <br><br>
    ![Ui](Ui.png)
    
@@ -90,9 +91,9 @@ Example of usage: `list`
 Action | Format, Examples
 --------|------------------
 **Add task** | Add todo task: `todo [TASK]` <br> e.g. `todo homework` <br> Add deadline task: `deadline [TASK] /by [DATE] [TIME]` <br> e.g. `deadline project /by 20/20/2020 18:00` <br> Add event task: `event [TASK] /at [DATE] [TIME]` <br> e.g. `event project meeting /at 20/20/2020 18:00`
-**Update Task** | `done [TASK NUMBER]` <br> e.g., `done 3`
-**Delete Task** | `delete [TASK NUMBER]`<br> e.g., `delete 3`
-**Edit** | `edit [TASK NUMBER]`<br> e.g., `edit 3`
-**Find** | `find [KEYWORD(s)]`<br> e.g., `find read book`
+**Update Task** | `done [TASK NUMBER]` <br> e.g. `done 3`
+**Delete Task** | `delete [TASK NUMBER]`<br> e.g. `delete 3`
+**Edit** | `edit [TASK NUMBER]`<br> e.g. `edit 3`
+**Find** | `find [KEYWORD(s)]`<br> e.g. `find read book`
 **List** | `list`
  ***View List of Commands** | `help`
