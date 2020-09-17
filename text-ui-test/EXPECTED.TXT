@@ -1,7 +1,107 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+----------------------------------------
+  Hello! I am JonasBot! Nice to meet you :)
+  ______  _____  __  ____     __     _______
+ |__  __||  __ | | \ |  |    /_ \    |   ___|
+    | |  | | | | |  \|  |   //_\ \   |  |___
+ _  | |  | | | | | |\   |  / ____ \  |____  |
+| |_| |  | |_| | | | \  | / /    \ \ _____| |
+|_____|  |_____| |_|  \_|/_/      \_\|______|
+                  _____   ______  ________
+                  |  _ \ |  _  | |__   __|
+                  | |_| || | | |    | |
+                  |    / | | | |    | |
+                  |  _ \ | |_| |    | |
+                  | |_| ||     |    | |
+                  |_____/|_____|    |_|
 
+  I am a task manager bot that will keep track of all your tasks.
+
+  To view a list of all my commands, input '/commands'
+
+  Now that you are familiar with the commands, how may I assist you today?
+----------------------------------------
+----------------------------------------
+  Success! This todo task has been added:
+	[T][✗] do cs2103T project
+  You have 1 tasks in your list now.
+----------------------------------------
+----------------------------------------
+  Success! This deadline task has been added:
+	[D][✗] finish week 2 requirements (by: Monday)
+  You have 2 tasks in your list now.
+----------------------------------------
+----------------------------------------
+  Success! This event task has been added:
+	[E][✗] cs2103T lecture (at: Fri 4-6pm)
+  You have 3 tasks in your list now.
+----------------------------------------
+----------------------------------------
+Here is a list of all your tasks:
+	1. [T][✗] do cs2103T project
+	2. [D][✗] finish week 2 requirements (by: Monday)
+	3. [E][✗] cs2103T lecture (at: Fri 4-6pm)
+----------------------------------------
+----------------------------------------
+  Nice! I've marked this task as done:
+	[D][✓] finish week 2 requirements (by: Monday)
+----------------------------------------
+----------------------------------------
+Oh no! Invalid Task! The task does not exist, try again.
+----------------------------------------
+----------------------------------------
+Oh no! Invalid Task! The task does not exist, try again.
+----------------------------------------
+----------------------------------------
+Oh no! Invalid Function! Input '/commands' for a list of all my commands.
+----------------------------------------
+----------------------------------------
+  Success! This deadline task has been added:
+	[D][✗] finish week 1 post lecture quiz (by: Saturday)
+  You have 4 tasks in your list now.
+----------------------------------------
+----------------------------------------
+  Success! This todo task has been added:
+	[T][✗] read up on week 2 topics
+  You have 5 tasks in your list now.
+----------------------------------------
+----------------------------------------
+  Nice! I've marked this task as done:
+	[D][✓] finish week 1 post lecture quiz (by: Saturday)
+----------------------------------------
+----------------------------------------
+  Found it! This task has been successfully deleted:
+	[D][✓] finish week 2 requirements (by: Monday)
+  You have 4 tasks in your list now.
+----------------------------------------
+----------------------------------------
+  Found it! This task has been successfully deleted:
+	[T][✗] do cs2103T project
+  You have 3 tasks in your list now.
+----------------------------------------
+----------------------------------------
+Oh no! Your deadline task description is empty and/or is missing a time stamp. The task cannot be created.
+ Type '/commands' to view the correct command for task creation.
+----------------------------------------
+----------------------------------------
+Oh no! Your deadline task description is empty and/or is missing a time stamp. The task cannot be created.
+ Type '/commands' to view the correct command for task creation.
+----------------------------------------
+----------------------------------------
+Oh no! Your deadline task is missing a description. Please try again!
+Type '/commands' to view the correct command for task creation!
+----------------------------------------
+----------------------------------------
+Oh no! Invalid Task! The task does not exist, try again.
+----------------------------------------
+----------------------------------------
+Oh no! The task ID you provided is not valid. Input '/commands' to view a list of my commands.
+----------------------------------------
+----------------------------------------
+Here is a list of all your tasks:
+	1. [E][✗] cs2103T lecture (at: Fri 4-6pm)
+	2. [D][✓] finish week 1 post lecture quiz (by: Saturday)
+	3. [T][✗] read up on week 2 topics
+----------------------------------------
+----------------------------------------
+  GoodBye and I hope to see you soon! Have a fantastic day!
+----------------------------------------
