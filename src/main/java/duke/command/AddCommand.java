@@ -1,23 +1,38 @@
 package duke.command;
 
-import duke.task.Task;
+import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import duke.Storage;
+import duke.task.Task;
 
+/**
+ * Creates an add command object.
+ */
 public class AddCommand extends Command {
     private Task task;
     
     public AddCommand(Task task) {
         this.task = task;
     }
-    
+
+    /**
+     * Executes the command.
+     * 
+     * @param tasks The list of existing tasks.
+     * @param ui The ui that handles user interaction.
+     * @param storage The storage that stores the list of existing tasks.
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.add(this.task);
         ui.showAddMessage(this.task, tasks);
         storage.writeFile(tasks);
     }
-    
+
+    /**
+     * Determines if the command is an exit command.
+     * 
+     * @return Always false.
+     */
     public boolean isExit() {
         return false;
     }

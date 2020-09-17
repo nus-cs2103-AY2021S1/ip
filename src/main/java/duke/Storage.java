@@ -10,16 +10,25 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Scanner;
 
+/**
+ * Creates a storage of the tasks.
+ */
 public class Storage {
     private File file;
     
     public Storage(String filePath) {
         this.file = new File(filePath);
     }
-    
+
+    /**
+     * Loads the content of the file into an array list of tasks
+     * 
+     * @return An array list of tasks
+     * @throws DukeException
+     */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<Task>();
         try {
@@ -54,10 +63,15 @@ public class Storage {
         }
         return tasks;
     }
-    
+
+    /**
+     * Writes the tasks in the TaskList into the file.
+     * 
+     * @param tasks A list of tasks to be written into the file.
+     */
     public void writeFile(TaskList tasks) {
         try {
-            FileWriter fw = new FileWriter(file);
+            FileWriter fw = new FileWriter(this.file);
             fw.write(tasks.getList());
             fw.close();
         } catch (IOException e) {
