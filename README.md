@@ -120,7 +120,7 @@ Example:
 
 Closes Spongebot Patty Flipper.
 
-# 
+
 
 ## FAQ:
 
@@ -128,7 +128,6 @@ Q: How do I start the application?
 
 A: In the command prompt/terminal: java -jar spongebot.jar
 
-# 
 
 ## Author
 
