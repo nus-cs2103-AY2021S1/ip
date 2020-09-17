@@ -71,7 +71,7 @@ https://www.oracle.com/technetwork/java/javase/downloads/jdk11-downloads-5066655
    
    
 ### `deadline`
-Deadline is a task with description, a completion status, a reminder status and a date. Note that the date format must follow either `yyyy/mm/dd HH:mm` or `yyyy/mm/dd`. By default reminder status is set to false and could only be activated/deactivated using the `remind` command.
+Deadline is a task with description, a completion status, a reminder status and a date. Note that the date format must follow either `yyyy-mm-dd HHmm` or `yyyy-mm-dd`. By default reminder status is set to false and could only be activated/deactivated using the `remind` command.
 
 Format:
 `deadline DESCRIPTION /by DATE`
@@ -88,7 +88,7 @@ Now you have <Int> tasks in the list.
 ```
 
 ### `event`
-Event is a task with description, a completion status, a reminder status and a date. Note that the date format must follow either `yyyy/mm/dd HH:mm` or `yyyy/mm/dd`. By default reminder status is set to false and could only be activated/deactivated using the `remind` command.
+Event is a task with description, a completion status, a reminder status and a date. Note that the date format must follow either `yyyy-mm-dd HHmm` or `yyyy-mm-dd`. By default reminder status is set to false and could only be activated/deactivated using the `remind` command.
 
 Format:
 `event DESCRIPTION /at DATE`
@@ -140,7 +140,7 @@ Here are the tasks in your list:
 The task to be marked is indicated by the index after the `done` command, you can view the index of the task by typing `list`.
 
 Format:
-`done INTEGER`
+`done INDEX`
 
 Example of usage: 
 
@@ -156,7 +156,7 @@ Nice! I've marked this task as done:
 The task to be deleted is indicated by the index after the `done` command, you can view the index of the task by typing `list`.
 
 Format:
-`delete INTEGER`
+`delete INDEX`
 
 Example of usage: 
 
@@ -190,7 +190,7 @@ Here are the matching tasks in your list:
 The task to be reminded is indicated by the index after the `remind` command, you can view the index of the task by typing `list`. Also, state whether to activate or deactivate the reminder using `y` for yes, `n` for no after the `remind` command.
 
 Format:
-`remind INTEGER Y/N`
+`remind INDEX Y/N`
 
 Example of usage: 
 
@@ -236,6 +236,21 @@ Expected outcome:
 ```
 Bye ^.^, Hope to see you again soon!!!
 ```
+
+## Command Summary
+
+Action | Command | Format, Examples
+-------|---------|-----------------
+Add todo | `todo` | `todo DESCRIPTION`<br/><br/>e.g.`todo duke`
+Add event | `event` | `event DESCRIPTION /at DATE`<br/><br/>e.g.`event party /at 2020-11-11 2312`
+Add deadline | `deadline` | `deadline DESCRIPTION /by DATE`<br/><br/>e.g.`deadline project duke /by 2020-11-11 2312`
+Set a task on reminder | `remind` | `remind INDEX Y/N`<br/><br/>e.g. `remind 1 y`
+Mark a task as completed | `done` | `done INDEX`<br/><br/>e.g.`done 1`
+Delete task | `delete` | `delete INDEX `<br/><br/>e.g.`delete 3`
+Find a task | `find` | `find KEYWORD`<br/><br/>e.g.`find duke`
+Show all tasks | `list` | `list`
+View all commands | `help` | `help`
+Exit the program | `bye` | `bye`
 
 ## FAQ
 **Where does duke store its task?** <br/>
