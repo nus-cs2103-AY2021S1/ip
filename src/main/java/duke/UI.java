@@ -49,11 +49,13 @@ public class UI {
      * @param task Task to be deleted as input
      */
     public String taskDeletedMessage (Task task) {
+
         return String.format(TASK_DELETION_MESSAGE,task.getTaskSymbol(),task.getSymbol(),task.toString(),Task.remainingTasks());
     }
     
     public String taskAddedMessage (Task task) {
         return String.format(TASK_ADDITION_MESSAGE, task.getTaskSymbol(), task.getSymbol(), task.toString(), Task.remainingTasks());
+
     }
 
     /**

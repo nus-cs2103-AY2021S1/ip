@@ -31,6 +31,7 @@ public class TaskList {
     }
     
     public void deleteTaskIndex(int index) {
+        assert getTotalTask() > 0 : "Task list is empty!";
         try {
             taskList.remove(index);
         } catch (IndexOutOfBoundsException e) {
