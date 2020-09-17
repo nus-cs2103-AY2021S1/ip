@@ -1,13 +1,14 @@
 package rock.ui;
 
-import rock.admin.Rock;
-import rock.exception.RockException;
 import javafx.fxml.FXML;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import rock.admin.Rock;
+import rock.exception.RockException;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -31,12 +32,19 @@ public class MainWindow extends AnchorPane {
     private final Image realRockImage = new Image(this.getClass().getResourceAsStream("/images/RealRock.png"));
     private Image currentRockImage = fakeRockImage;
 
+    /**
+     * Init rock UI and say Hi to the user
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(Ui.sayHi(), currentRockImage));
     }
 
+    /**
+     * Say bye to the user and terminate program.
+     * @param input
+     */
     public void terminateRock(String input) {
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, currentUserImage),
@@ -83,20 +91,20 @@ public class MainWindow extends AnchorPane {
         try {
             response = rock.getResponse(input);
             dialogContainer.getChildren().addAll(
-                    DialogBox.getUserDialog(input, currentUserImage),
-                    DialogBox.getDukeDialog(response, currentRockImage)
+                DialogBox.getUserDialog(input, currentUserImage),
+                DialogBox.getDukeDialog(response, currentRockImage)
             );
         } catch (RockException ex) {
             switch (ex.getMessage()) {
-                case "terminate":
-                    terminateRock(input);
-                    break;
-                case "switch":
-                    switchRock(input);
-                    break;
-                default:
-                    displayMessage(ex);
-                    break;
+            case "terminate":
+                terminateRock(input);
+                break;
+            case "switch":
+                switchRock(input);
+                break;
+            default:
+                displayMessage(ex);
+                break;
             }
         }
         userInput.clear();

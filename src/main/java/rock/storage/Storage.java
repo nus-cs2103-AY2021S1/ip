@@ -1,14 +1,18 @@
 package rock.storage;
 
-import rock.task.*;
-import rock.utility.MyString;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import rock.task.Deadline;
+import rock.task.DoWithinPeriodTasks;
+import rock.task.Event;
+import rock.task.Task;
+import rock.task.Todo;
+import rock.utility.MyString;
 
 /**
  * Class controls of storing and loading data.
@@ -33,7 +37,10 @@ public class Storage {
         ArrayList<String> arr = new ArrayList<>();
         arr.add("");
         for (int j = 0; j < str.length(); ++j) {
-            if (str.charAt(j) == '|') { arr.add(""); continue; }
+            if (str.charAt(j) == '|') {
+                arr.add("");
+                continue;
+            }
             arr.set(arr.size() - 1, arr.get(arr.size() - 1) + str.charAt(j));
         }
         return arr;
@@ -49,25 +56,27 @@ public class Storage {
             File myObj = new File(filePath);
             Scanner myReader = new Scanner(myObj);
             int n = 0;
-            if(myReader.hasNextInt()) n = Integer.parseInt(myReader.nextLine());
+            if (myReader.hasNextInt()) {
+                n = Integer.parseInt(myReader.nextLine());
+            }
             for (int i = 1; i <= n; ++i) {
                 String str = myReader.nextLine();
                 ArrayList<String> arr = parseData(str);
                 switch (arr.get(0)) {
-                    case "T":
-                        addToDo(tasks, arr);
-                        break;
-                    case "D":
-                        addDeadline(tasks, arr);
-                        break;
-                    case "E":
-                        addEvent(tasks, arr);
-                        break;
-                    case "W":
-                        addDoWithin(tasks, arr);
-                        break;
-                    default:
-                        break;
+                case "T":
+                    addToDo(tasks, arr);
+                    break;
+                case "D":
+                    addDeadline(tasks, arr);
+                    break;
+                case "E":
+                    addEvent(tasks, arr);
+                    break;
+                case "W":
+                    addDoWithin(tasks, arr);
+                    break;
+                default:
+                    break;
                 }
             }
             myReader.close();
@@ -154,7 +163,6 @@ public class Storage {
         for (int i = 1; i <= tasks.size(); ++i) {
             res.addNewLines(tasks.get(i - 1).getDataFormat());
         }
-        //tasks.forEach((n) -> { res += n.getType() + "|" + n).getDescription() + "|" + tasks.get(i - 1).isDone + "\n"});
         return res.toString();
     }
 }

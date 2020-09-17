@@ -1,9 +1,10 @@
-import rock.task.Task;
-import rock.admin.TaskList;
-import rock.task.Todo;
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
+import rock.admin.TaskList;
+import rock.task.Task;
+import rock.task.Todo;
 
 public class TaskListTest {
     @Test

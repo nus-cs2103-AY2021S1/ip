@@ -1,7 +1,7 @@
 package rock;
 
-import rock.ui.Main;
 import javafx.application.Application;
+import rock.ui.Main;
 
 /**
  * Launcher for Rock.

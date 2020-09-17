@@ -1,28 +1,24 @@
 package rock.admin;
 
-import rock.exception.RockException;
-import rock.tag.CommandTag;
-import rock.task.*;
-import rock.utility.MyString;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import rock.exception.RockException;
+import rock.tag.CommandTag;
+import rock.task.Deadline;
+import rock.task.DoWithinPeriodTasks;
+import rock.task.Event;
+import rock.task.Task;
+import rock.task.Todo;
+import rock.utility.MyString;
 
 /**
  * Represent the list that stores all the tasks and handle new tasks.
  */
 public class TaskList {
     private ArrayList<Task> tasks;
-
-    public ArrayList<Task> getArrayList() {
-        return tasks;
-    }
-
-    public int getSize() {
-        return tasks.size();
-    }
 
     /**
      * Constructor.
@@ -47,6 +43,14 @@ public class TaskList {
         return d.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
+    public ArrayList<Task> getArrayList() {
+        return tasks;
+    }
+
+    public int getSize() {
+        return tasks.size();
+    }
+
     /**
      * Handle command: list
      * @param response
@@ -63,17 +67,21 @@ public class TaskList {
 
     /**
      * Convert string to index
-     * @param value
-     * @return
+     * @param value String
+     * @return c index
      * @throws RockException
      */
     private int stringToIndex(String value) throws RockException {
         int c = 0;
         for (int i = 0; i < value.length(); ++i) {
-            if ('0' > value.charAt(i) || value.charAt(i) > '9') throw new RockException("Index should be an integer");
+            if ('0' > value.charAt(i) || value.charAt(i) > '9') {
+                throw new RockException("Index should be an integer");
+            }
             c = c * 10 + value.charAt(i) - '0';
         }
-        if (0 > c || c > getSize()) throw new RockException("Index is out of range");
+        if (0 > c || c > getSize()) {
+            throw new RockException("Index is out of range");
+        }
         return c;
     }
 
@@ -111,12 +119,14 @@ public class TaskList {
     /**
      * get description of the taks
      * @param cmd
-     * @return
+     * @return getName
      * @throws RockException
      */
     private String parseToDo(String cmd) throws RockException {
         String getName = cmd.substring(CommandTag.TODO.length()).trim();
-        if (getName.length() == 0) throw new RockException("The description of a todo cannot be empty.");
+        if (getName.length() == 0) {
+            throw new RockException("The description of a todo cannot be empty.");
+        }
         return getName;
     }
 
@@ -144,7 +154,7 @@ public class TaskList {
     /**
      * get information of deadline.
      * @param cmd
-     * @return
+     * @return getName + getDeadline
      * @throws RockException
      */
     private ArrayList<String> parseDeadline(String cmd) throws RockException {
@@ -157,8 +167,12 @@ public class TaskList {
                 break;
             }
         }
-        if (getName.length() == 0) throw new RockException("The description of a deadline cannot be empty.");
-        if (getDeadline.length() == 0) throw new RockException("The time of a deadline cannot be empty.");
+        if (getName.length() == 0) {
+            throw new RockException("The description of a deadline cannot be empty.");
+        }
+        if (getDeadline.length() == 0) {
+            throw new RockException("The time of a deadline cannot be empty.");
+        }
         return new ArrayList<>(Arrays.asList(getName, getDeadline));
     }
 
@@ -188,8 +202,8 @@ public class TaskList {
 
     /**
      * get information on event.
-     * @param cmd
-     * @return
+     * @param cmd User's command
+     * @return List of (Name, Time)
      * @throws RockException
      */
     private ArrayList<String> parseEvent(String cmd) throws RockException {
@@ -202,8 +216,12 @@ public class TaskList {
                 break;
             }
         }
-        if (getName.length() == 0) throw new RockException("The description of a event cannot be empty.");
-        if (getTime.length() == 0) throw new RockException("The time of a event cannot be empty.");
+        if (getName.length() == 0) {
+            throw new RockException("The description of a event cannot be empty.");
+        }
+        if (getTime.length() == 0) {
+            throw new RockException("The time of a event cannot be empty.");
+        }
         return new ArrayList<>(Arrays.asList(getName, getTime));
     }
 
@@ -233,8 +251,8 @@ public class TaskList {
 
     /**
      * get information on delete.
-     * @param cmd
-     * @return
+     * @param cmd User command
+     * @return Index
      * @throws RockException
      */
     private int parseDelete(String cmd) throws RockException {
@@ -264,13 +282,15 @@ public class TaskList {
 
     /**
      * get information on find.
-     * @param cmd
-     * @return
+     * @param cmd User command
+     * @return Pattern needed
      * @throws RockException
      */
     private String parseFind(String cmd) throws RockException {
         String pattern = cmd.substring(CommandTag.FIND.length()).trim();
-        if (pattern.length() == 0) throw new RockException("The pattern of a find cannot be empty.");
+        if (pattern.length() == 0) {
+            throw new RockException("The pattern of a find cannot be empty.");
+        }
         return pattern;
     }
 
@@ -303,7 +323,7 @@ public class TaskList {
     /**
      * get information on dowithin
      * @param cmd
-     * @return
+     * @return List of (Name, from, to)
      * @throws RockException
      */
     private ArrayList<String> parseDoWithin(String cmd) throws RockException {
@@ -324,9 +344,15 @@ public class TaskList {
                 break;
             }
         }
-        if (getName.length() == 0) throw new RockException("The description of a dowithin cannot be empty.");
-        if (from.length() == 0) throw new RockException("The start time of a dowithin cannot be empty.");
-        if (to.length() == 0) throw new RockException("The end time of a dowithin cannot be empty.");
+        if (getName.length() == 0) {
+            throw new RockException("The description of a dowithin cannot be empty.");
+        }
+        if (from.length() == 0) {
+            throw new RockException("The start time of a dowithin cannot be empty.");
+        }
+        if (to.length() == 0) {
+            throw new RockException("The end time of a dowithin cannot be empty.");
+        }
         return new ArrayList<>(Arrays.asList(getName, from, to));
     }
 

@@ -1,13 +1,12 @@
-import rock.task.Todo;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import rock.task.Todo;
 
 public class TodoTest {
     @Test
 
-    public void getStatusTest() {
+    public void getDataFormatTest() {
         Todo todo = new Todo("test");
-        assert(todo.getStatus().substring(0, 2).equals("[T]"));
+        assert(todo.getDataFormat().equals("T|test|false"));
     }
 }
