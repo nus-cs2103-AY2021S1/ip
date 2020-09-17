@@ -107,7 +107,7 @@ Example:
 
 Find tasks that fall on a specific date in Spongebot Patty Flipper.
 
-Format: `schedule /on DATE
+Format: `schedule /on DATE`
 
 * DATE_AND_TIME format is in DD-MM-YYYY
 
