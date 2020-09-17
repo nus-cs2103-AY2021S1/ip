@@ -84,8 +84,9 @@ Chubbs also stores them in your computer.
 
 ### 9. List of commands
 
-| Command: | meow |
-|----------|------|
+| Command: | meow                                                            |
+|----------|-----------------------------------------------------------------|
+| Guide:   | Allows you view the entire list of commands with proper formats |
 
 ![meow](https://github.com/jimvae/ip/blob/branch-A-UserGuide/src/main/resources/images/screenshots/meow.png?raw=true)
 
