@@ -2,6 +2,7 @@ package duke.util;
 
 import duke.commands.*;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Scanner;
 
 /**
@@ -20,7 +21,7 @@ public class Parser {
         Scanner scanner = new Scanner(inputLine);
         String action = scanner.next();
         int index;
-        String remainingString;
+        String remainingString = (scanner.hasNext()) ? scanner.nextLine() : "";
         String[] parsedStrings;
 
         switch (action) {
@@ -31,24 +32,21 @@ public class Parser {
             case "todo":
             case "deadline":
             case "event":
-                remainingString = scanner.nextLine();
                 parsedStrings = parseAddCommandString(action, remainingString);
                 return new AddCommand(parsedStrings);
             case "priority":
-                remainingString = scanner.nextLine();
                 Object[] parsedObjects = parsePriorityCommandString(remainingString);
                 int taskIndex = (int) parsedObjects[0];
                 String priorityLevel = (String) parsedObjects[1];
                 return new PriorityCommand(taskIndex, priorityLevel);
 
             case "find":
-                remainingString = scanner.nextLine();
                 return new FindCommand(remainingString);
             case "done":
-                index = scanner.nextInt() - 1;
+                index = getTaskIndex(remainingString);
                 return new DoneCommand(index);
             case "delete":
-                index = scanner.nextInt() - 1;
+                index = getTaskIndex(remainingString);
                 return new DeleteCommand(index);
             default:
                 throw new DukeException("Sorry, I'm not sure what that means :(");
@@ -56,9 +54,25 @@ public class Parser {
     }
 
     /**
+     * Helper method: Get the index out of the user input.
+     * @param remainingString remaining string apart from command type.
+     * @return index of the Task to be manipulated.
+     * @throws DukeException
+     */
+    public static int getTaskIndex(String remainingString) throws DukeException {
+        try {
+            int intValue = Integer.valueOf(remainingString.trim());
+            return intValue - 1;
+        } catch (NumberFormatException e) {
+            throw new DukeException("Type an index number pls :(");
+        }
+    }
+
+    /**
      * Helper method to parse the remaining string from the input line for new Task.
      * @param taskType Type of task.
      * @param remainingString String that contains the description (and due).
+     * @return parsed values as parameters for priority command.
      * @throws DukeException
      */
     public static String[] parseAddCommandString(String taskType, String remainingString) throws DukeException {
@@ -97,8 +111,17 @@ public class Parser {
     }
 
 
+    /**
+     * Helper method to parse the remaining string from the input line for setting new priority.
+     * @param remainingString remaining string apart from command type.
+     * @return parsed values as parameters for priority command.
+     * @throws DukeException
+     */
     public static Object[] parsePriorityCommandString(String remainingString) throws DukeException {
         String[] splitStrings = remainingString.trim().split(" ");
+        if (splitStrings.length < 2) {
+            throw new DukeException("Whats the priority??");
+        }
 
         try {
             int taskIndex = Integer.valueOf(splitStrings[0]) - 1;
