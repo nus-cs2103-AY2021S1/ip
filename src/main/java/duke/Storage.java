@@ -67,25 +67,25 @@ public class Storage {
                     if (arr[0].equals("T")) {
                         String desc = arr[2];
                         if (arr[1].equals("1")) {
-                            list.addToList(new Todo(desc).taskDone());
+                            list.list.add(new Todo(desc).taskDone());
                         } else {
-                            list.addToList(new Todo(desc));
+                            list.list.add(new Todo(desc));
                         }
                     } else if (arr[0].equals("D")) {
                         String desc = arr[2];
                         String by = arr[3];
                         if (arr[1].equals("1")) {
-                            list.addToList(new Deadline(desc, by).taskDone());
+                            list.list.add(new Deadline(desc, by).taskDone());
                         } else {
-                            list.addToList(new Deadline(desc, by));
+                            list.list.add(new Deadline(desc, by));
                         }
                     } else if (arr[0].equals("E")) {
                         String desc = arr[2];
                         String at = arr[3];
                         if (arr[1].equals("1")) {
-                            list.addToList(new Event(desc, at).taskDone());
+                            list.list.add(new Event(desc, at).taskDone());
                         } else {
-                            list.addToList(new Event(desc, at));
+                            list.list.add(new Event(desc, at));
                         }
                     }
                 }

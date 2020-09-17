@@ -6,12 +6,12 @@ import java.util.ArrayList;
  * A list for Duke to store Tasks in.
  */
 public class TaskList {
-    private int count;
-    private ArrayList<Task> list;
+    public ArrayList<Task> previousList;
+    public ArrayList<Task> list;
 
     private TaskList() {
-        count = 0;
         list = new ArrayList<>();
+        previousList = null;
     }
 
     /**
@@ -28,12 +28,13 @@ public class TaskList {
      * @return
      */
     public String addToList(Task t) {
-        this.count = this.count + 1;
+        this.saveRevert();
+
         this.list.add(t);
 
         return "Got it. I've added this task:\n\t"
                 + t.toString()
-                + "\n\tNow you have " + count + " tasks in the list.";
+                + "\n\tNow you have " + this.list.size() + " tasks in the list.";
     }
 
     /**
@@ -43,10 +44,13 @@ public class TaskList {
      * @throws InvalidTaskNumberException If index specified is out of bounds.
      */
     public String markAsDone(int i) throws InvalidTaskNumberException {
+        this.saveRevert();
+
         Task t;
 
         try {
             t = this.list.get(i - 1).taskDone();
+            this.list.set(i - 1, t);
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidTaskNumberException();
         }
@@ -61,6 +65,8 @@ public class TaskList {
      * @throws InvalidTaskNumberException If index specified is out of bounds.
      */
     public String remove(int i) throws InvalidTaskNumberException {
+        this.saveRevert();
+
         Task t;
 
         try {
@@ -69,10 +75,9 @@ public class TaskList {
             throw new InvalidTaskNumberException();
         }
         this.list.remove(i - 1);
-        this.count = this.count - 1;
         return "Noted. I've removed this task:\n\t"
                 + t.toString()
-                + "\n\tNow you have " + count + " tasks in the list.";
+                + "\n\tNow you have " + this.list.size() + " tasks in the list.";
     }
 
     /**
@@ -98,6 +103,18 @@ public class TaskList {
 
     }
 
+    public String undo() throws InvalidInputException{
+        if (this.previousList == null) {
+            throw new InvalidInputException("There is nothing to undo!");
+        }
+
+        this.list.clear();
+        this.list.addAll(this.previousList);
+        this.previousList = null;
+
+        return "I have undone your previous command!\n" + this.toString();
+    }
+
     /**
      * Generates a String to be stored in the save file, duke.txt.
      * @return A String of all the Tasks in this Task List.
@@ -118,17 +135,22 @@ public class TaskList {
         return str;
     }
 
-    public int getCount() {
-        return this.count;
-    }
-
     public ArrayList<Task> getList() {
         return this.list;
     }
 
+    public void saveRevert() {
+        if (this.previousList == null) {
+            this.previousList = new ArrayList<>();
+        }
+
+        this.previousList.clear();
+        this.previousList.addAll(this.list);
+    }
+
     @Override
     public String toString() {
-        if (this.count == 0) {
+        if (this.list.size() == 0) {
             return "There are no tasks in your list";
         }
 

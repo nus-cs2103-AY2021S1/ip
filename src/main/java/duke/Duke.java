@@ -139,6 +139,11 @@ public class Duke {
                 msg = taskList.find(parsedInput[1]);
                 break;
 
+            case "undo":
+                msg = taskList.undo();
+                storage.writeToFile(taskList.listToTxt());
+                break;
+
             case "done":
                 int n;
                 try {

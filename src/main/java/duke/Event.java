@@ -21,6 +21,17 @@ public class Event extends Task {
         this.type = "E";
     }
 
+    private Event(String desc, String at, boolean isDone) throws DateTimeParseException {
+        super(desc, isDone);
+        this.deadline = LocalDateTime.parse(at);
+        this.type = "E";
+    }
+
+    @Override
+    public Event taskDone() {
+        return new Event(this.getDescription(), this.getDeadline(), true);
+    }
+
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + this.formatDeadline("MMM d yyyy") + ")";

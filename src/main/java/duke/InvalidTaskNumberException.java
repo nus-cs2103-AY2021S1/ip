@@ -3,7 +3,7 @@ package duke;
 public class InvalidTaskNumberException extends Exception {
 
     public InvalidTaskNumberException() {
-        super("☹ OOPS!!! The task number specified is incorrect.");
+        super("OOPS!!! The task number specified is incorrect.");
     }
 
 }

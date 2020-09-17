@@ -20,6 +20,8 @@ public class Parser {
 
         } else if (arr[0].equalsIgnoreCase("find")) {
 
+        } else if (arr[0].equalsIgnoreCase("undo")) {
+
         } else if (arr[0].equalsIgnoreCase("done")) {
             if (arr.length == 1) {
                 throw new MissingDescriptionException("done");

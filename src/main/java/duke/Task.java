@@ -22,6 +22,11 @@ public class Task {
         this.isDone = false;
     }
 
+    public Task(String desc, boolean isDone) {
+        this.description = desc;
+        this.isDone = isDone;
+    }
+
     public String getStatusIcon() {
         return (isDone ? "D" : "X"); //return tick or X symbols
     }
@@ -44,6 +49,7 @@ public class Task {
                 : this.deadline.toString();
     }
 
+
     public String formatDeadline(String s) {
         return deadline.format(DateTimeFormatter.ofPattern(s));
     }
@@ -52,8 +58,7 @@ public class Task {
      * @return The Task that has been 'done'
      */
     public Task taskDone() {
-        this.isDone = true;
-        return this;
+        return new Task(this.description, this.isDone);
     }
 
     @Override

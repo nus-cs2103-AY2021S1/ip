@@ -21,6 +21,17 @@ public class Deadline extends Task {
         this.type = "D";
     }
 
+    private Deadline(String desc, String by, boolean isDone) throws DateTimeParseException {
+        super(desc, isDone);
+        this.deadline = LocalDateTime.parse(by);
+        this.type = "D";
+    }
+
+    @Override
+    public Deadline taskDone() {
+        return new Deadline(this.getDescription(), this.getDeadline(), true);
+    }
+
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + this.formatDeadline("MMM d yyyy") + ")";

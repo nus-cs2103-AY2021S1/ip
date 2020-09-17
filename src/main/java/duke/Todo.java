@@ -13,6 +13,16 @@ public class Todo extends Task {
         this.type = "T";
     }
 
+    private Todo(String desc, boolean isDone) {
+        super(desc, isDone);
+        this.type = "T";
+    }
+
+    @Override
+    public Todo taskDone() {
+        return new Todo(this.getDescription(), true);
+    }
+
     @Override
     public String toString() {
         return "[T]" + super.toString();
