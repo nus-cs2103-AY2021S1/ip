@@ -27,7 +27,6 @@ public class Ui {
             + "%s\nyou now have %d task%s in your list\n";
     private static final String RESPONSE_EDIT = "ok! I've edited the task to:\n" + INDENT + "%s";
     private static final String RESPONSE_ERROR = "oops! %s\n";
-    private static final String RESPONSE_EXIT = "bye! see you soon!";
     private static final String RESPONSE_FIND_MATCH = "here is the match in your list:\n%s";
     private static final String RESPONSE_FIND_MATCHES = "here are the matches in your list:\n%s";
     private static final String RESPONSE_FIND_NO_MATCH = "there are no matches in your list!\n";
@@ -45,16 +44,6 @@ public class Ui {
      */
     public static String greet() {
         return RESPONSE_GREET;
-    }
-
-    /**
-     * Displays the exit message.
-     *
-     * @return Exit message.
-     */
-    public static String exit() {
-        assert false : "System not terminated successfully";
-        return RESPONSE_EXIT;
     }
     
     static String makePlural(int count) {

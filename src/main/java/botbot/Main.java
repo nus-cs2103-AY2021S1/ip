@@ -28,6 +28,7 @@ public class Main extends Application {
      * Closes the main stage of Botbot.
      */
     public static void closeStage() {
+        assert mainStage.isShowing() : "Attempt to close main stage that is not showing";
         mainStage.close();
     }
 
@@ -44,6 +45,7 @@ public class Main extends Application {
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
+            assert false;
         }
     }
 }

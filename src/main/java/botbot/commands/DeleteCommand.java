@@ -33,6 +33,7 @@ public class DeleteCommand extends Command {
     public String execute(Storage storage, TaskList tasks, Ui ui) {
         try {
             Task task = tasks.get(id);
+            assert task != null : "Empty task";
             tasks.remove(id);
             storage.save(tasks);
             return ui.showDeleteResponse(task, tasks.size());

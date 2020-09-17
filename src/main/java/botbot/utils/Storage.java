@@ -48,9 +48,10 @@ public class Storage {
             return createDataFile(file);
         }
     }
+    
     private List<Task> readDataFile() {
         Scanner sc = createFileScanner();
-        assert sc != null;
+        assert sc != null : "Scanner not created";
         return extractTasks(sc);
     }
     
@@ -59,7 +60,7 @@ public class Storage {
         try {
             file = new FileInputStream(filePath);
         } catch (FileNotFoundException e) {
-            System.out.println("oops! your data file is missing!");
+            assert false : "Data file not found";
             return null;
         }
         return new Scanner(file);
@@ -106,7 +107,7 @@ public class Storage {
             return new LinkedList<>();
         } catch (IOException e) {
             e.printStackTrace();
-            return null;
+            assert false;
         }
     }
 
@@ -138,6 +139,7 @@ public class Storage {
             fw.close();
         } catch (IOException e) {
             e.printStackTrace();
+            assert false;
         }
     }
 }

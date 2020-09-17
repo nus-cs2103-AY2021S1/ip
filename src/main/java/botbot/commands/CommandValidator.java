@@ -69,6 +69,7 @@ public class CommandValidator {
         
         try {
             LocalDateTime by = Parser.parseDateTime(byStr);
+            assert !description.isBlank() : "Blank description";
             return new DeadlineCommand(description, by);
         } catch (DateTimeParseException e) {
             return new InvalidCommand(ERROR_MESSAGE_INVALID_FORMAT_DATETIME);
@@ -96,6 +97,7 @@ public class CommandValidator {
         
         try {
             LocalDateTime at = Parser.parseDateTime(atStr);
+            assert !description.isBlank() : "Blank description";
             return new EventCommand(description, at);
         } catch (DateTimeParseException e) {
             return new InvalidCommand(ERROR_MESSAGE_INVALID_FORMAT_DATETIME);

@@ -146,12 +146,10 @@ public abstract class Task {
     }
 
     public void setAt(LocalDateTime at) {
-        assert at != null;
         this.at = Optional.ofNullable(at);
     }
 
     public void setBy(LocalDateTime by) {
-        assert by != null;
         this.by = Optional.ofNullable(by);
     }
 }

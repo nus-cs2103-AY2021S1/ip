@@ -49,7 +49,7 @@ public class TaskList extends LinkedList<Task> {
      */
     public void edit(int id, Optional<String> description, Optional<LocalDateTime> at,
             Optional<LocalDateTime> by) throws IllegalArgumentException {
-        assert size() > 0 && id <= size() : "Invalid ID to edit";
+        assert size() > 0 && id >= 0 && id < size() : "Invalid ID to edit";
         Task task = get(id);
         if (task instanceof Todo) {
             at.ifPresent(x -> {

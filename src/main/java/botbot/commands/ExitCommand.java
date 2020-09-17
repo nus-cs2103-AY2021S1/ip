@@ -18,12 +18,13 @@ public class ExitCommand extends Command {
      * @param storage Storage to save task list to.
      * @param tasks Task list of the bot.
      * @param ui Ui to show response of execution.
-     * @return Response of execution.
+     * @return Null.
      */
     @Override
     public String execute(Storage storage, TaskList tasks, Ui ui) {
         Main.closeStage();
         System.exit(SUCCESS_STATUS_CODE);
-        return Ui.exit();
+        assert false : "System not terminated successfully";
+        return null;
     }
 }

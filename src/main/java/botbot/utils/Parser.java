@@ -83,7 +83,6 @@ public class Parser {
      * @throws NumberFormatException If input does not contain a parsable integer.
      */
     public static int parseCommandId(String args) throws NumberFormatException {
-        assert !args.isBlank() : "Args provided is blank";
         return Integer.parseInt(args) - 1;
     }
 

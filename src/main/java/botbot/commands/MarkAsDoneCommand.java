@@ -34,6 +34,7 @@ public class MarkAsDoneCommand extends Command {
     public String execute(Storage storage, TaskList tasks, Ui ui) {
         try {
             Task task = tasks.get(id);
+            assert task != null : "Empty task";
             task.markAsDone();
             assert task.getStatus().equals(TaskStatus.DONE.getStrValue()) : "Mark task as done unsuccessful";
             storage.save(tasks);
