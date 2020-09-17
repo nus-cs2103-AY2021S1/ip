@@ -98,6 +98,9 @@ public class Ui {
      * @return String to be printed out.
      */
     public String printList(TaskList taskList) {
+        if (taskList.totalTask() <= 0) {
+            return " There are no tasks in the task list!";
+        }
         String returnString = " Here are the tasks in your list: ";
         for (int i = 0; i < taskList.totalTask(); i++) {
             returnString += "\n " + (i + 1) + ". " + taskList.getTask(i).toString();
@@ -112,7 +115,7 @@ public class Ui {
      * @return String to be printed out.
      */
     public String showError(String errorMessage) {
-        return "\t "
+        return " "
                 + errorMessage;
     }
     /**
