@@ -224,11 +224,11 @@ public class Storage {
     private Task createTask(String taskTypeString,
                             String taskName,
                             LocalDateTime dateTime) throws LoadFailureException {
-        if (taskTypeString == TODO_TASK) {
+        if (taskTypeString.equals(TODO_TASK)) {
             return new Todo(taskName);
-        } else if (taskTypeString == DEADLINE_TASK) {
+        } else if (taskTypeString.equals(DEADLINE_TASK)) {
             return new Deadline(taskName, dateTime);
-        } else if (taskTypeString == EVENT_TASK) {
+        } else if (taskTypeString.equals(EVENT_TASK)) {
             return new Event(taskName, dateTime);
         } else {
             throw new LoadFailureException("Cannot identify the type of tasks in file."
