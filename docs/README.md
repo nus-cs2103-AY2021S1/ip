@@ -12,6 +12,7 @@ Commands have a general format: [command] [description]
 1. Ensure you have Java 11 or higher installed on your system.
 1. Download `elon.jar` from this repository and run it with `java -jar elon.jar`.
 1. You should see the introduction screen appear:
+
 ![Elon introduction screen](Ui_Intro_Screen.png)
 
 ## Features
