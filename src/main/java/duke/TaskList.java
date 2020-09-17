@@ -1,5 +1,6 @@
 package duke;
 
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -61,6 +62,9 @@ public class TaskList {
         if (event.contains("/between")) {
             String[] elements = event.split("/between");
             String[] times = elements[1].split("and");
+            if (times.length != 2) {
+                throw new IllegalArgumentException("☹ OOPS!!! Invalid dates provided");
+            }
             String newDesc = elements[0].trim();
             String happenAt = times[0].trim();
             String endAt = times[1].trim();
@@ -79,12 +83,16 @@ public class TaskList {
      * @param command raw string contains the detail of the task to be added
      */
     public void addTask(String command) {
-        if (command.startsWith("todo")) {
-            addTodo(command.substring(4));
-        } else if (command.startsWith("deadline")) {
-            addDeadline(command.substring(8));
-        } else if (command.startsWith("event")) {
-            addEvent(command.substring(5));
+        try {
+            if (command.startsWith("todo")) {
+                addTodo(command.substring(4));
+            } else if (command.startsWith("deadline")) {
+                addDeadline(command.substring(8));
+            } else if (command.startsWith("event")) {
+                addEvent(command.substring(5));
+            }
+        } catch (DateTimeParseException e) {
+            throw new IllegalArgumentException("☹ OOPS!!! Invalid dates provided");
         }
         Ui.addTask(tasks);
         saveToDisk();

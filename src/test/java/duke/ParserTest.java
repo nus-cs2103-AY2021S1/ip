@@ -1,13 +1,12 @@
 package duke;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 
 class ParserTest {
     private static Parser parser;
@@ -24,38 +23,52 @@ class ParserTest {
 
     @org.junit.jupiter.api.Test
     void testRunDeadline1() {
-        parser.run("deadline return book /by 2019-10-15");
+        String response = parser.run("deadline return book /by 2019-10-15");
+        Assertions.assertTrue(response.contains("[D][✗] return book (by: Oct 15 2019"));
     }
 
     @org.junit.jupiter.api.Test
     void testRunEvent1() {
-        parser.run("event return book /at 2019-10-15");
+        String response = parser.run("event return book /at 2019-10-15");
+        Assertions.assertTrue(response.contains("[E][✗] return book (at: Oct 15 2019"));
     }
 
     @org.junit.jupiter.api.Test
     void testRunEvent2() {
-        System.out.println(parser.run("event return book /between 2019-10-15 and 2019-10-16"));
+        String response = parser.run("event return book /between 2019-10-15 and 2019-10-16");
+        Assertions.assertTrue(response.contains("[E][✗] return book (between: Oct 15 2019 and Oct 16 2019)"));
     }
 
     @org.junit.jupiter.api.Test
     void testRunTodo1() {
-        parser.run("todo return book");
+        String response = parser.run("todo return book");
+        Assertions.assertTrue(response.contains("[T][✗] return book"));
     }
 
-    static String readFile(String filename) throws IOException {
-        ClassLoader classLoader = ParserTest.class.getClassLoader();
-        return Files.readString(Path.of(classLoader.getResource("file/" + filename).getFile()));
+    @org.junit.jupiter.api.Test
+    void testRunEventBetweenMissingArgument() {
+        String response = parser.run("event return book /between 2019-10-15");
+        Assertions.assertTrue(response.contains("☹ OOPS!!! Invalid dates provided"));
     }
 
-    @Test
-    void testRunAll1() throws IOException {
-        String input = ParserTest.readFile("input1.txt");
+    @org.junit.jupiter.api.Test
+    void testRunEventAtMissingArgument() {
+        String response = parser.run("event return book /at");
+        Assertions.assertTrue(response.contains("☹ OOPS!!! I'm sorry, but I don't know what that means :-("));
+    }
+
+    @org.junit.jupiter.api.Test
+    public void testRunAll1() throws IOException {
+        ClassLoader classLoader = getClass().getClassLoader();
+        String input = Files.readString(Path.of(classLoader.getResource("file/" + "input1.txt").getFile()));
+        System.out.println(input);
         String[] lineInput = input.split("\n");
-        String expectedOutput = ParserTest.readFile("output1.txt");
+        String expectedOutput = Files.readString(Path.of(classLoader.getResource("file/" + "output1.txt").getFile()));
         StringBuilder output = new StringBuilder();
-        for (String line : lineInput) {
-            output.append(parser.run(line));
+        for (String s : lineInput) {
+            output.append(parser.run(s));
         }
         Assertions.assertEquals(expectedOutput, output.toString());
     }
 }
+

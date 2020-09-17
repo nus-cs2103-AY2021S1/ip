@@ -3,4 +3,3 @@ deadline sample /by 2019-10-15
 event sample /between 2019-10-15 and 2019-10-16
 deadline sample /at 2019-10-15
 todo sample
-bye

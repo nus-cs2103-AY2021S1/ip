@@ -32,7 +32,7 @@ public class Ui {
      * print the feedback after adding a task
      */
     public static void addTask(List<Task> lst) {
-        println("Got it. I've added this task: ");
+        println("Got it. I've added this task:");
         println(lst.get(lst.size() - 1));
         println(String.format("Now you have %d tasks in the list.%n", lst.size()));
     }
