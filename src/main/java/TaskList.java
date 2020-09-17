@@ -84,6 +84,9 @@ public class TaskList {
 
     @Override
     public String toString() {
+        if (tasks.size() == 0) {
+            return "No tasks!";
+        }
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {
             stringBuilder.append((i + 1) + "." + tasks.get(i) + "\n");
