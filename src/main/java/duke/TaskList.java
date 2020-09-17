@@ -81,8 +81,7 @@ public class TaskList {
         String listAsString = "";
         int count = 1;
         for (Task i : this.taskList) {
-            listAsString = listAsString.concat("    "
-                    + count + ". "
+            listAsString = listAsString.concat(count + ". "
                     + i.toString()) + "\n";
             count++;
         }
