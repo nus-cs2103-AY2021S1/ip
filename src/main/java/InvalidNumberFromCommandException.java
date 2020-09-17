@@ -1,7 +1,7 @@
 /**
  * Class to hold the InvalidNumberFromDoneCommandException message of a InvalidNumberFromDoneCommandException.
  */
-public class InvalidNumberFromDoneCommandException extends DukeException {
+public class InvalidNumberFromCommandException extends DukeException {
 
     /**
      * Custom message of a InvalidNumberFromDoneCommandException, reminding the user to type in a valid number

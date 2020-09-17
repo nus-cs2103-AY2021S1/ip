@@ -1,6 +1,6 @@
 public class Parser {
 
-    public static Command interpret(String userCommand) {
+    public static Command interpret(String userCommand) throws DukeException{
 
         String[] commandArgs = userCommand.split(" ");
 
@@ -12,10 +12,28 @@ public class Parser {
         case ("list") :
             return new ListCommand();
         case ("done") :
-            return new DoneCommand(userCommand);
+            if (commandArgs.length < 2) {
+                throw new MissingNumberFromCommandException();
+            } else {
+                try {
+                    int taskNumber = Integer.parseInt(commandArgs[1]) - 1;
+                    return new DoneCommand(taskNumber);
+                } catch (NumberFormatException e) {
+                    throw new InvalidNumberFromCommandException();
+                }
+            }
         case ("del"):
         case ("delete") :
-            return new DeleteCommand(userCommand);
+            if (commandArgs.length < 2) {
+                throw new MissingNumberFromCommandException();
+            } else {
+                try {
+                    int taskNumber = Integer.parseInt(commandArgs[1]) - 1;
+                    return new DeleteCommand(taskNumber);
+                } catch (NumberFormatException e) {
+                    throw new InvalidNumberFromCommandException();
+                }
+            }
         case ("e"):
         case ("event") :
             return new EventCommand(userCommand);

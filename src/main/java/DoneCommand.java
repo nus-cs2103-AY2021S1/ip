@@ -3,13 +3,13 @@
  */
 public class DoneCommand implements Command {
 
-    protected final String COMMAND;
+    protected final int TASK_NUMBER;
 
     /**
      * constructor
      */
-    public DoneCommand(String command) {
-        this.COMMAND = command;
+    public DoneCommand(int taskNumber) {
+        this.TASK_NUMBER = taskNumber;
     }
 
     /**
@@ -20,7 +20,7 @@ public class DoneCommand implements Command {
      * @param ui Responsible for printing to console after execution.
      * @param storage Stores tasks in a text format.
      * @throws MissingNumberFromCommandException If the done command is missing a number.
-     * @throws InvalidNumberFromDoneCommandException If the number provided with the done command is invalid.
+     * @throws InvalidNumberFromCommandException If the number provided with the done command is invalid.
      */
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         String[] commandArgs = COMMAND.split(" ");
@@ -31,7 +31,7 @@ public class DoneCommand implements Command {
             int taskLength = taskList.TASKS.size();
             int taskNumber = Integer.parseInt(commandArgs[1]) - 1;
             if (taskNumber < 0 || taskNumber > taskLength) {
-                throw new InvalidNumberFromDoneCommandException();
+                throw new InvalidNumberFromCommandException();
             } else {
                 Task t = taskList.TASKS.get(taskNumber);
                 taskList.markAsDone(taskNumber);
