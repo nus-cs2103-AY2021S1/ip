@@ -11,11 +11,14 @@ import command.ByeCommand;
 import command.Command;
 import command.CreateDeadLineTaskCommand;
 import command.CreateEventTaskCommand;
+import command.CreateNewAliasCommand;
 import command.CreateTodoTaskCommand;
+import command.DelAliasCommand;
 import command.DelTaskCommand;
 import command.FindTaskByDateCommand;
 import command.FindTaskByKeywordCommand;
 import command.GetTaskListCommand;
+import command.InvalidCommand;
 import command.MarkTaskDoneCommand;
 
 /**
@@ -37,17 +40,46 @@ public class Parser {
         BufferedReader br = new BufferedReader(fr); //creates a buffering character input stream
         String line = br.readLine();
         while (line != null) {
-            String[] aliasAndCommand = line.split("\\|");
-            String alias = aliasAndCommand[0];
-            String command = aliasAndCommand[1];
+            populateMap(line);
             line = br.readLine();
-            aliasToCommandMap.put(alias, command);
         }
         fr.close();
     }
 
     public Parser() {
         this.aliasToCommandMap = new HashMap<>();
+    }
+
+    private void populateMap(String aliasCommandPair) {
+        String[] aliasAndCommand = aliasCommandPair.split("\\|");
+        String alias = aliasAndCommand[0];
+        String command = aliasAndCommand[1];
+        aliasToCommandMap.put(alias, command);
+    }
+
+    private boolean aliasDoesNotExist(String alias) {
+        return this.aliasToCommandMap.get(alias) == null;
+    }
+
+    public String createNewAlias(String ...parameters) throws DukeExceptions.AliasAlreadyExistException {
+        String alias = parameters[0].toLowerCase();
+        String command = parameters[1].toLowerCase();
+        if (aliasDoesNotExist(alias)) {
+            this.aliasToCommandMap.put(alias,command);
+            return alias + " -> " + command;
+        } else {
+            throw new DukeExceptions.AliasAlreadyExistException(alias);
+        }
+    }
+
+    public String deleteAlias(String ...parameters) throws DukeExceptions.AliasDoesNotExistException {
+        String alias = parameters[0].toLowerCase();
+        if (aliasDoesNotExist(alias)) {
+            throw new DukeExceptions.AliasDoesNotExistException(alias);
+        } else {
+            this.aliasToCommandMap.remove(alias);
+            return alias + " has been removed.";
+        }
     }
 
     private String getCommandFrom(String alias) {
@@ -66,7 +98,7 @@ public class Parser {
      * @return Command based on user input
      * @throws IllegalArgumentException if user input does not match the appropriate commands
      */
-    public Command parse(String input) throws IllegalArgumentException {
+    public Command parse(String input) {
         assert input.length() > 0 : "no input given";
         Scanner sc = new Scanner(input);
         String alias = sc.next();
@@ -81,17 +113,21 @@ public class Parser {
         case "delete":
             return new DelTaskCommand(parameters.strip());
         case "event":
-            return new CreateEventTaskCommand(parameters.split("/at"));
+            return new CreateEventTaskCommand(parameters.strip().split("/at"));
         case "deadline" :
-            return new CreateDeadLineTaskCommand(parameters.split("/by"));
+            return new CreateDeadLineTaskCommand(parameters.strip().split("/by"));
         case "todo":
             return new CreateTodoTaskCommand(parameters);
         case "bye":
             return new ByeCommand();
         case "find":
-            return new FindTaskByKeywordCommand(sc.nextLine().strip());
+            return new FindTaskByKeywordCommand(parameters.strip());
+        case "alias":
+            return new CreateNewAliasCommand(parameters.strip().split(" "));
+        case "deletealias":
+            return new DelAliasCommand(parameters.strip().split(" "));
         default:
-            throw new IllegalArgumentException();
+            return new InvalidCommand();
         }
     }
 

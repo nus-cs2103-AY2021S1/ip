@@ -2,7 +2,7 @@ package command;
 
 import java.time.format.DateTimeParseException;
 
-import duke.Storage;
+import duke.Parser;
 import duke.TaskList;
 
 
@@ -12,7 +12,7 @@ public class FindTaskByDateCommand extends Command {
     }
 
     @Override
-    public Result execute(TaskList taskList, Storage storage) {
+    public Result execute(TaskList taskList, Parser parser) {
         String message;
         try {
             String dueDate = parameters[0];

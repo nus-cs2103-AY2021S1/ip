@@ -56,10 +56,11 @@ public class Storage {
      *
      * @throws IOException if there is an error retrieving the file
      */
-    public void save(HashMap<String, String> aliases) throws IOException {
+    public void save(Parser parser) throws IOException {
+        HashMap<String, String> aliasCommandMap = parser.getAliasToCommandMap();
         FileWriter updateFile = new FileWriter(this.filePath);
-        for (String alias : aliases.keySet()) {
-            updateFile.write(alias + "\\|" + aliases.get(alias));
+        for (String alias : aliasCommandMap.keySet()) {
+            updateFile.write(alias + "|" + aliasCommandMap.get(alias) + "\n");
         }
         updateFile.close();
     }

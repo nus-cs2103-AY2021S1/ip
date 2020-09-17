@@ -18,8 +18,6 @@ public class Duke {
     private boolean isRunning = true;
     /** ArrayList to hold all tasks keyed in by the user for the session */
     private TaskList taskList;
-    /** UI where the user will interact with the Dukebot */
-    private final Ui ui;
     /** Parser which handles user input */
     private final Parser parser;
     /** Storage which manages the saving of tasks from the session into the hard disk  */
@@ -32,20 +30,17 @@ public class Duke {
     public Duke() {
         Parser parser;
         TaskList taskList;
-        this.ui = new Ui();
         this.taskStorage = new Storage("./data/data.txt");
         this.aliasStorage = new Storage("./data/alias.txt");
         try {
             parser = new Parser(this.aliasStorage.load());
             taskList = new TaskList(this.taskStorage.load());
         } catch (IOException e) {
-            this.ui.printLoadingError();
             parser = new Parser();
             taskList = new TaskList();
         }
         this.parser = parser;
         this.taskList = taskList;
-        this.ui.printGreeting();
     }
 
     /**
@@ -53,7 +48,9 @@ public class Duke {
      * @return the greeting message
      */
     public String greet() {
-        return this.ui.printGreeting();
+        String greeting = "Sorry :( duke.Duke is getting some upgrades at the moment.\n"
+                + "This is Tron, temporarily standing in for duke.Duke, how may I assist you ?\n";
+        return greeting;
     }
 
     /**
@@ -71,10 +68,18 @@ public class Duke {
     private void updateFile() {
         try {
             this.taskStorage.save(this.taskList);
-            this.aliasStorage.save(this.parser.getAliasToCommandMap());
+            this.aliasStorage.save(this.parser);
         } catch (IOException e) {
-            this.ui.printErrorInSaving();
+            System.out.println("Master i am unable to save the file!");
         }
+    }
+
+    /**
+     *
+     */
+    private void exit() {
+        this.updateFile();
+        this.isRunning = false;
     }
 
     /**
@@ -85,10 +90,9 @@ public class Duke {
     public Result run(String userInput) {
         Command command = this.parser.parse(userInput);
         if (command.getClass() == ByeCommand.class) {
-            this.updateFile();
-            this.isRunning = false;
+            this.exit();
         }
-        Result result = command.execute(this.taskList, this.taskStorage);
+        Result result = command.execute(this.taskList, this.parser);
         return result;
     }
 
@@ -98,21 +102,12 @@ public class Duke {
      */
     public static void main(String[] args) {
         Duke duke = new Duke();
-        duke.greet();
         Scanner sc = new Scanner(System.in); //scans for input
-        String userInput;
-
+        String command;
         while (duke.isRunning()) {
-            userInput = sc.nextLine();
-            try {
-                System.out.print(duke.run(userInput));
-            } catch (IllegalArgumentException e) {
-                DukeExceptions.printUnrecognizableCommandError();
-            }
+            command = sc.nextLine();
+            Result result = duke.run(command);
+            System.out.println(result.toString());
         }
-    }
-
-    public String returnUnrecognizableCommandError() {
-        return DukeExceptions.printUnrecognizableCommandError();
     }
 }

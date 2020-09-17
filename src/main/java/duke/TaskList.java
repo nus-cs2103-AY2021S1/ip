@@ -68,16 +68,15 @@ public class TaskList {
      * @param parameters the description of the task
      * @return the Todo task
      */
-    public Task addTodoTask(String ...parameters) throws DukeExceptions.IncompleteCommandException {
+    public Task addTodoTask(String ...parameters) throws DukeExceptions.InsufficientParametersException {
         if (descriptionIsPresent(parameters)) {
-            //assert parameters.length > 0 && !parameters[0].isBlank(): "insufficient amount of parameters";
             String taskDescription = parameters[0];
             Task newTask = new Todo(taskDescription);
             this.taskList.add(newTask);
             return newTask;
         } else {
             String errorMessage = "Master the description of Todo cannot be empty\n";
-            throw new DukeExceptions.IncompleteCommandException(errorMessage);
+            throw new DukeExceptions.InsufficientParametersException(errorMessage);
         }
     }
 
@@ -87,17 +86,16 @@ public class TaskList {
      * @param parameters the description of the task
      * @return the Event task
      */
-    public Task addEventTask(String ...parameters) throws DukeExceptions.IncompleteCommandException {
-        if (!descriptionIsPresent(parameters)) {
-            String errorMessage = "Master the description of Event cannot be empty\n";
-            throw new DukeExceptions.IncompleteCommandException(errorMessage);
-        } else {
-            //assert parameters.length == 2 : "insufficient amount of parameters";
+    public Task addEventTask(String ...parameters) throws DukeExceptions.InsufficientParametersException {
+        if (descriptionIsPresent(parameters) && dateIsPresent(parameters)) {
             String eventDescription = parameters[0].strip();
             LocalDateTime eventDate = LocalDateTime.parse(parameters[1].strip(), formatter);
             Task newTask = new Event(eventDescription, eventDate);
             this.taskList.add(newTask);
             return newTask;
+        } else {
+            String errorMessage = "Master the description of Event cannot be empty\n";
+            throw new DukeExceptions.InsufficientParametersException(errorMessage);
         }
     }
 
@@ -107,17 +105,16 @@ public class TaskList {
      * @param parameters the description of the task
      * @return the Event task
      */
-    public Task addDeadlineTask(String ...parameters) throws DukeExceptions.IncompleteCommandException {
-        if (!descriptionIsPresent(parameters)) {
-            String errorMessage = "Master the description of Event cannot be empty\n";
-            throw new DukeExceptions.IncompleteCommandException(errorMessage);
-        } else {
-            //assert parameters.length == 2 : "insufficient amount of parameters";
+    public Task addDeadlineTask(String ...parameters) throws DukeExceptions.InsufficientParametersException {
+        if (descriptionIsPresent(parameters) && dateIsPresent(parameters)) {
             String eventDescription = parameters[0].strip();
             LocalDateTime eventDate = LocalDateTime.parse(parameters[1].strip(), formatter);
             Task newTask = new Deadline(eventDescription, eventDate);
             this.taskList.add(newTask);
             return newTask;
+        } else {
+            String errorMessage = "Master the description of Event cannot be empty\n";
+            throw new DukeExceptions.InsufficientParametersException(errorMessage);
         }
     }
 
@@ -186,9 +183,14 @@ public class TaskList {
      * @param index
      * @return Returns the task that was marked as completed
      */
-    public Task completeTask(int index) {
-        this.getTask(index).markDone();
-        return this.getTask(index);
+    public Task completeTask(int index) throws DukeExceptions.TaskIsDoneException {
+        Task task = this.getTask(index);
+        if (task.isDone()) {
+            throw new DukeExceptions.TaskIsDoneException(String.valueOf(index));
+        } else {
+            this.getTask(index).markDone();
+            return this.getTask(index);
+        }
     }
 
     public Task getTask(int index) {

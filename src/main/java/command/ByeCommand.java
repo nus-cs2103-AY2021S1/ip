@@ -1,6 +1,6 @@
 package command;
 
-import duke.Storage;
+import duke.Parser;
 import duke.TaskList;
 
 public class ByeCommand extends Command {
@@ -10,9 +10,7 @@ public class ByeCommand extends Command {
     }
 
     @Override
-    public Result execute(TaskList taskList, Storage storage) {
+    public Result execute(TaskList taskList, Parser parser) {
         return new Result("Adios, pleasure to serve you!\n", executedSuccessfully);
     }
-
-
 }

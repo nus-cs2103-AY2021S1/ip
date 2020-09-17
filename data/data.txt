@@ -1,8 +1,3 @@
-D|0|shave|2020-01-01T18:00
-T|0|read book
-T|0|asdfa
-T|0|asdf
-T|0|asdf
-T|0|dfasdf
-T|0|1
-D|0|event|2020-01-01T19:00
+T|0|cu hair
+T|0|creae suff
+T|0|this tmr

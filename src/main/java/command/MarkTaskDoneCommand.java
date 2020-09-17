@@ -1,6 +1,7 @@
 package command;
 
-import duke.Storage;
+import duke.DukeExceptions;
+import duke.Parser;
 import duke.TaskList;
 import task.Task;
 
@@ -10,7 +11,7 @@ public class MarkTaskDoneCommand extends Command {
     }
 
     @Override
-    public Result execute(TaskList taskList, Storage storage) {
+    public Result execute(TaskList taskList, Parser parser) {
         String message;
         try {
             int index = Integer.parseInt(parameters[0].strip()) - 1;
@@ -25,7 +26,9 @@ public class MarkTaskDoneCommand extends Command {
         } catch (NumberFormatException e) {
             message = "Master please enter a task number so that I know which to handle.\n";
             return new Result(message, executedUnsuccessfully);
+        } catch(DukeExceptions.TaskIsDoneException e) {
+            message = "Master task is already marked done.\n";
+            return new Result(message, executedUnsuccessfully);
         }
     }
-
 }

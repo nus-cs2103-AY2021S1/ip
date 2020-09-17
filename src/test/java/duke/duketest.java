@@ -7,6 +7,7 @@ import duke.DukeExceptions;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 public class duketest {
@@ -35,6 +36,13 @@ public class duketest {
         Duke testDuke = new Duke();
         String userInput = "done";
         assertFalse(testDuke.run(userInput).isSuccessful());
+    }
+
+    @Test
+    public void testCommands4(){
+        Duke testDuke = new Duke();
+        String userInput = "alias li list";
+        assertTrue(testDuke.run(userInput).isSuccessful());
     }
 
 

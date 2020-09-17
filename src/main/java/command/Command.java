@@ -1,6 +1,6 @@
 package command;
 
-import duke.Storage;
+import duke.Parser;
 import duke.TaskList;
 
 /**
@@ -31,7 +31,10 @@ public abstract class Command {
 
     /**
      * Execute the command
+     * @param taskList the current list of task
      * @return The result of executing the command
      */
-    public abstract Result execute(TaskList taskList, Storage storage);
+    public abstract Result execute(TaskList taskList, Parser parser);
+
+
 }
