@@ -14,7 +14,7 @@ Duck helps you to manage your tasks faster than traditional GUI apps.
 
 3. Open your terminal.
  
-4. Navigate to the _home folder_ for your Duck.
+4. Navigate to the _home folder_ for your Duck in your terminal.
 
 5. Run `java -jar duke.jar` to start. The GUI similar to the below should appear in a few seconds. 
    ![Duke](Ui.png)
