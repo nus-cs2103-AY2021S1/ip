@@ -232,14 +232,14 @@ Clippy’s data is saved in the hard disk automatically after any command that c
 
 
 
-# FAQ
+# 4. FAQ
 Q: How do I transfer my data to another Computer?
 
 A: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Clippy home folder.
 
 
 
-# Command Summary
+# 5. Command Summary
 Action | Format, Example usage
 ------ | ------
 Add | `todo <task description>` <br> `deadline <task description> /by <YYYY-MM-DD>` <br> `event <task description> /at <date/time period>` <br> e.g. `event java workshop​ /at Tuesday 6-7pm`
