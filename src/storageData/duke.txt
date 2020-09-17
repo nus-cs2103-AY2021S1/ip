@@ -4,3 +4,4 @@ E/X/project meeting/Sun, 18 Oct 2020 02:30 PM
 T/X/join sports club
 T/O/walk dog
 D/X/submit assignment/Mon, 07 Sep 2020 11:59 PM
+T/X/read book

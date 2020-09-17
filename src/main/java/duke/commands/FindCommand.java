@@ -19,7 +19,7 @@ public class FindCommand extends Command {
             + "  Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "  Example: " + COMMAND_WORD + " book return meeting";
 
-    public static final String MESSAGE_SUCCESS = "We have found %1$d task(s) related to your keyword(s).";
+    public static final String MESSAGE_SUCCESS = "Stormy have found %1$d task(s) related to your keyword(s).";
 
     private final Set<String> keywords;
 
