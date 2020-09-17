@@ -1,4 +1,4 @@
-package Duke;
+package duke;
 
 public class WrongDescriptionException extends DukeException{
     public WrongDescriptionException(String message){

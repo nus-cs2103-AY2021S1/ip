@@ -4,7 +4,7 @@ _|_|_|_|_|    _|_|                _|_|_|      _|_|     _|
     _|      _|    _|  _|_|_|_|_|  _|    _|  _|    _|   _|  
     _|      _|    _|              _|    _|  _|    _|       
     _|        _|_|                _|_|_|      _|_|     _|  
-This is a Duke.Duke Project.
+This is a duke.duke Project.
 
 What you are going to do today?
 >     The following task has been added to your list:

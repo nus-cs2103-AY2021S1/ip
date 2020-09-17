@@ -1,5 +1,5 @@
-import Duke.EventTask;
-import Duke.ParseErrorException;
+import duke.EventTask;
+import duke.ParseErrorException;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
