@@ -12,13 +12,17 @@ public class Duke extends Application{
 
     @Override
     public void start(Stage stage) {
-        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Label helloWorld = new Label(getGreetText()); // Creating a new Label control
         Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
 
         stage.setScene(scene); // Setting the stage to show our screen
         stage.show(); // Render the stage.
     }
     
+    private String getGreetText() {
+        return "Hello World!";
+    }
+
     private TaskList taskList;
     private UI userInterface = new UI();
     
@@ -67,7 +71,7 @@ public class Duke extends Application{
         }catch (IOException | IllegalArgumentException e) {
             System.out.println(e);
         }
-        return "Somethign went wrong!";
+        return "Something went wrong!";
     }
     
     public Duke() {
@@ -157,11 +161,9 @@ public class Duke extends Application{
         } else {
             throw new IllegalUserInputException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
-
-        if (task != null) {
-            taskList.addTask(task);
-            return userInterface.taskAddedMessage(task);
-        }
-        return "Something went wrong!";
+        
+        assert task!=null : "Task should not be null";
+        taskList.addTask(task);
+        return userInterface.taskAddedMessage(task);
     }
 }

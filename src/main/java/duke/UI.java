@@ -42,12 +42,14 @@ public class UI {
      * @param task Task to be deleted as input
      */
     public String taskDeletedMessage (Task task) {
+        assert task!=null : "The task to be deleted cannot be null";
         return String.format("Noted. I've removed this task:\n" +
                 "%s%s %s\n" +
                 "Now you have %d tasks in the list.",task.getTaskSymbol(),task.getSymbol(),task.toString(),Task.remainingTasks());
     }
     
     public String taskAddedMessage (Task task) {
+        assert task!=null : "Null task cannot be added";
         return String.format("Got it. i've added this task:\n %s%s %s\n" +
                 "Now you have %d tasks in the list.", task.getTaskSymbol(), task.getSymbol(), task.toString(), Task.remainingTasks());
     }
