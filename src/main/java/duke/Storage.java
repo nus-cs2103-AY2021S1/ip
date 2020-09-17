@@ -24,24 +24,26 @@ public class Storage {
      * Writes content of saved file to task list (and store extra information).
      * @param lst the task list to be written to
      */
-    public void writeToList(TaskList lst) {
+    public void writeToList(TaskList lst) throws IOException {
         try {
-            Scanner scanner = new Scanner(file);
-            // a pure number stored in the saved file, guaranteed to be there
-            String tempNumberOfDoneTasks = scanner.nextLine();
-            TaskList.setNumberOfDoneTasks(Integer.parseInt(
-                    tempNumberOfDoneTasks));
+            if (!file.createNewFile()) {
+                Scanner scanner = new Scanner(file);
+                // a pure number stored in the saved file, guaranteed to be there
+                String tempNumberOfDoneTasks = scanner.nextLine();
+                TaskList.setNumberOfDoneTasks(Integer.parseInt(
+                        tempNumberOfDoneTasks));
 
-            // a date stored in the saved file, guaranteed to be there
-            String tempLastLoginDate = scanner.nextLine();
-            TaskList.setLastLoginDate(LocalDate.parse(tempLastLoginDate));
+                // a date stored in the saved file, guaranteed to be there
+                String tempLastLoginDate = scanner.nextLine();
+                TaskList.setLastLoginDate(LocalDate.parse(tempLastLoginDate));
 
-            while (scanner.hasNextLine()) {
-                String task = scanner.nextLine();
-                lst.add(Converter.add(task));
+                while (scanner.hasNextLine()) {
+                    String task = scanner.nextLine();
+                    lst.add(Converter.add(task));
+                }
+                scanner.close();
             }
-            scanner.close();
-        } catch (FileNotFoundException | IllegalTaskTypeException ex) {
+        } catch (IllegalTaskTypeException ex) {
             System.out.println(ex);
         }
     }
