@@ -68,8 +68,9 @@ public class DialogBox extends HBox {
     }
 
     private void setCircledIcon() {
-        Circle profileCircle = new Circle(50, 50, 60);
-        displayPicture.setClip(profileCircle);
+        Circle img = new Circle(50, 50, 60);
+
+        displayPicture.setClip(img);
     }
 
     private void setBackground() {
