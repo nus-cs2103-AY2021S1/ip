@@ -1,6 +1,2 @@
-T | ✓ | play dote | low
-T | ✓ | plan for date  | high
-T | ✘ | laundry | low
-T | ✘ | do CS2103T increment | low
-D | ✘ | CS2100 assignment  | 2020-09-18T23:59 | low
-E | ✘ | The International 10  | 2021-08-15 | medium
+T | ✘ | laundry  | medium
+E | ✘ | The International 10  | 2021-08-15 | high
