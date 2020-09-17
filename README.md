@@ -9,7 +9,24 @@ Users may interact with Bob by providing commands via a Command Line Interface (
 
 ![Image of BobUi](https://github.com/Caleblyx/ip/blob/master/docs/Ui.png)
 
-## Instructions for setting up in Intellij
+##[User Guide](https://github.com/Caleblyx/ip/blob/master/docs/README.md)
+####Quick start
+1. Ensure you have Java 11 or above installed.
+2. Download the latest version of `Bob.jar` from [releases](https://github.com/Caleblyx/ip/releases).
+3. Find a home for Bob! Move `Bob.jar` to your preferred home directory for the program. Note that data 
+used by Bob will be stored in this directory.
+4. Execute Bob.jar by double-clicking it (or your preferred method).
+
+After following the steps above, Bob's chat box should appear. Input commands in the field bar to interact 
+with Bob.
+
+More details can be found in the [User Guide](https://github.com/Caleblyx/ip/blob/master/docs/README.md)
+
+
+
+
+
+## Instructions for setting up in Intellij for Developers
 
 Prerequisites: JDK 11, update Intellij to the most recent version.
 
@@ -22,12 +39,12 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
    1. Click `Open or Import`.
    1. Select the project directory, and click `OK`
    1. If there are any further prompts, accept the defaults.
-1. After the importing is complete, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()`. If the setup is correct, you should see something like the below:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+1. After the importing is complete, locate the `src/main/bob/Bob.java` file, right-click it, and choose `Run Bob.main()`. If the setup is correct, the Command Line Interface of Bob
+should initialise.
+  
+## Acknowledgements
+* Bob's profile picture sourced from [PNGGuru](https://www.pngguru.com/free-transparent-background-png-clipart-kvkde)
+* Third party libraries used: [JavaFX](https://openjfx.io/) and [JUnit](https://junit.org/junit5/)
+
+##[Contributors](https://github.com/Caleblyx/ip/blob/master/CONTRIBUTORS.md)
+Take a look at the [contributors](https://github.com/Caleblyx/ip/blob/master/CONTRIBUTORS.md) page.
