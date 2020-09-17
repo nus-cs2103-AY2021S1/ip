@@ -5,6 +5,12 @@
 public abstract class Task {
     protected boolean isCompleted = false;
     protected String name;
+    private static final String CHECKMARK = "\u2713";
+    private static final String CROSS = "\u2718";
+    private static final String SAVE_COMPLETED_STATUS = "1";
+    private static final String SAVE_NOT_COMPLETED_STATUS = "0";
+
+
 
     protected Task (String name, boolean isCompleted) {
         this.name = name;
@@ -20,7 +26,7 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        String completionStatus = isCompleted ? "[\u2713]" : "[\u2718]";
+        String completionStatus = "[" + (isCompleted ? CHECKMARK : CROSS) + "]";
         return completionStatus + " " + name;
     }
 
@@ -29,7 +35,7 @@ public abstract class Task {
      * @return string format to be written into a file
      */
     public String toSaveFormat() {
-        String completionStatus = isCompleted ? "1" : "0";
+        String completionStatus = isCompleted ? SAVE_COMPLETED_STATUS : SAVE_NOT_COMPLETED_STATUS;
         return completionStatus + " | " + name;
     }
 }
