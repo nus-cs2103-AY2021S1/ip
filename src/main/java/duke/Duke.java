@@ -2,8 +2,6 @@ package duke;
 
 import duke.commands.Command;
 
-import javax.swing.*;
-
 /**
  * Represents the main Duke who acts as the user's personal assistant.
  */
@@ -70,8 +68,7 @@ public class Duke {
         } catch (DukeException e) {
             response = e.getMessage();
         } finally {
-//            ui.showLine();
-//            response = response + "reached finally block";
+            // no code is needed here
         }
         return response;
     }

@@ -12,7 +12,8 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import javafx.scene.shape.Circle;
 
 /**
@@ -21,14 +22,15 @@ import javafx.scene.shape.Circle;
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
+    private static final double SIZE = 99;
+    private static final double RADIUS = SIZE / 2;
+
     @FXML
     private Label dialog;
     @FXML
     private ImageView displayPicture;
 
     private Circle clip = new Circle();
-    private final static double SIZE = 99;
-    private final static double RADIUS = SIZE / 2;
 
     private DialogBox(String text, Image img) {
         try {
@@ -70,9 +72,9 @@ public class DialogBox extends HBox {
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.dialog.setStyle("-fx-background-color: #e6e6ff"); // purple
-        db.setStyle("-fx-alignment: CENTER_RIGHT");
         db.dialog.setMinHeight(Region.USE_PREF_SIZE);
         db.flip();
+        db.setStyle("-fx-alignment: CENTER_LEFT");
         return db;
     }
 }

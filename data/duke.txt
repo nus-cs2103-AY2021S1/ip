@@ -1,3 +1,4 @@
 D | 0 | parents meeting | Dec 25 2020
 E | 0 | project meeting | Oct 15 2020
 T | 0 | borrow book
+T | 0 | walk

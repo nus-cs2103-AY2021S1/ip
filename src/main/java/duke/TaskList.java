@@ -34,6 +34,7 @@ public class TaskList {
     }
     /**
      * Lists out all the tasks in the list.
+     * @return A string that shows all tasks.
      */
     public String listTasks() {
         assert tasks.size() >= 0 : "Number of tasks cannot be negative";
@@ -54,6 +55,7 @@ public class TaskList {
     /**
      * Lists out all the tasks on a specific date.
      * @param date The specific date.
+     * @return A string that shows the tasks on the specific date.
      */
     public String listTasksOn(LocalDate date) {
         try {
@@ -88,9 +90,10 @@ public class TaskList {
     /**
      * Marks the task as done.
      * @param taskNo The task number in the list.
+     * @return A string that shows the done task.
      */
     public String doneTask(int taskNo) {
-        assert taskNo >= 0: "taskNo cannot be negative";
+        assert taskNo >= 0 : "taskNo cannot be negative";
         try {
             checkTaskList(taskNo);
             Task completedTask = tasks.get(taskNo - 1);
@@ -107,9 +110,10 @@ public class TaskList {
     /**
      * Adds a task to the task list.
      * @param newTask The new task to add.
+     * @return A string that shows the new task.
      */
     public String addTask(Task newTask) {
-        assert newTask != null: "newTask cannot be null";
+        assert newTask != null : "newTask cannot be null";
         tasks.add(newTask);
         String response = Ui.ADD_MSG + "\n"
                 + newTask + "\n"
@@ -120,9 +124,10 @@ public class TaskList {
     /**
      * Deletes a task on the task list.
      * @param taskNo The task number of the to be deleted task on the list.
+     * @return A string that shows the deleted task.
      */
     public String deleteTask(int taskNo) {
-        assert taskNo >= 0: "taskNo cannot be negative";
+        assert taskNo >= 0 : "taskNo cannot be negative";
         try {
             checkTaskList(taskNo);
             if (tasks.size() <= 0) {
@@ -147,9 +152,10 @@ public class TaskList {
     /**
      * Searches tasks that match the keyword.
      * @param keyword The keyword provided by the user.
+     * @return A string that shows the matching task.
      */
     public String searchKeyword(String keyword) {
-        assert keyword != "": "keyword cannot be empty";
+        assert keyword != "" : "keyword cannot be empty";
         try {
             checkTaskList();
             ArrayList<Task> taskList = new ArrayList<>();
@@ -176,6 +182,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Update the date of a task specified by taskNo.
+     * @param taskNo The task number.
+     * @param date The new date.
+     * @return A string that shows the updated task.
+     */
     public String updateDate(int taskNo, LocalDate date) {
         assert taskNo >= 0 : "taskNo cannot be negative";
         try {
@@ -196,6 +208,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Update the description of a task specified by taskNo.
+     * @param taskNo The task number.
+     * @param content The new description.
+     * @return A string that shows the updated task.
+     */
     public String updateTaskDescription(int taskNo, String content) {
         assert taskNo >= 0 : "taskNo cannot be negative";
         try {
@@ -212,6 +230,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Mark a done task as undone.
+     * @param taskNo The task number.
+     * @return A string that shows the updated task.
+     */
     public String undoTask(int taskNo) {
         assert taskNo >= 0 : "taskNo cannot be negative";
         try {

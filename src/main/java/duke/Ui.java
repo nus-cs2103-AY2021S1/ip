@@ -1,25 +1,21 @@
 package duke;
 
-import java.security.PublicKey;
 import java.util.Scanner;
 
 /**
  * Provides user interaction for Duke.
  */
 public class Ui {
+    public static final String ADD_MSG = "Got it. I've added this task:";
+    public static final String EMPTY_TASK_LIST_MSG = "You don't have any tasks.";
+    public static final String DELETE_MSG = "Noted. I've removed this task:";
+    public static final String DONE_MSG = "Nice! I've marked this task as done:";
+    public static final String INVALID_TASK_NO_MSG = "Please provide a correct task number.";
+    public static final String LIST_TASK_MSG = "Here are the tasks in your list:";
+
     private int lengthOfLine = 55;
     private String line;
     private Scanner sc;
-
-    // Messages
-    // Exceptions
-    public static final String EMPTY_TASK_LIST_MSG = "You don't have any tasks.";
-    public static final String INVALID_TASK_NO_MSG = "Please provide a correct task number.";
-    // Duke
-    public static final String LIST_TASK_MSG = "Here are the tasks in your list:";
-    public static final String DONE_MSG = "Nice! I've marked this task as done:";
-    public static final String ADD_MSG = "Got it. I've added this task:";
-    public static final String DELETE_MSG = "Noted. I've removed this task:";
 
     /**
      * Constructor of Ui.

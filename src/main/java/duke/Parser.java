@@ -4,7 +4,15 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.regex.Pattern;
 
-import duke.commands.*;
+import duke.commands.AddCommand;
+import duke.commands.Command;
+import duke.commands.DateCommand;
+import duke.commands.DeleteCommand;
+import duke.commands.DoneCommand;
+import duke.commands.ExitCommand;
+import duke.commands.FindCommand;
+import duke.commands.ListCommand;
+import duke.commands.UpdateCommand;
 import duke.todo.Deadline;
 import duke.todo.Event;
 import duke.todo.Task;
@@ -64,7 +72,7 @@ public class Parser {
             } else if (commandWord.equals("find")) {
                 return new FindCommand(commandBody);
             } else if (commandWord.equals("edit")) {
-                String parts[] = commandBody.split(" ", 3);
+                String[] parts = commandBody.split(" ", 3);
                 int taskNo = Integer.parseInt(parts[0].trim());
                 String type = parts[1].trim();
                 if (parts.length == 2) {
@@ -136,7 +144,7 @@ public class Parser {
             } else {
                 throw new DukeException("Please provide a time for a deadline :D");
             }
-        } else {
+        } else if (taskType.equals("event")) {
             // event project meeting /at 2020-10-15
             if (taskBody.contains("/at")) {
                 String[] splits1 = taskBody.split("/at", 2);
@@ -149,6 +157,8 @@ public class Parser {
             } else {
                 throw new DukeException("Please provide a time for an event :D");
             }
+        } else {
+            throw new DukeException("Sorry, I don't understand what you are saying :(((");
         }
         return newTask;
     }
