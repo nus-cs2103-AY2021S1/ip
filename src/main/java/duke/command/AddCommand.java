@@ -62,7 +62,7 @@ public class AddCommand extends Command {
      * Creates Deadline object.
      *
      * @return Deadline object as created according to user's specifications.
-     * @throws WrongDateTimeException When date and time are given in the wrong format.
+     * @throws WrongDateTimeException When date and time are not given or are given in the wrong format.
      */
     private Deadline createDeadline() throws WrongDateTimeException {
         try {
@@ -72,7 +72,7 @@ public class AddCommand extends Command {
             LocalDateTime dateTime = LocalDateTime.parse(dateTimeString, FORMATTER);
 
             return new Deadline(taskName, dateTime);
-        } catch (Exception e) {
+        } catch (DateTimeParseException | IndexOutOfBoundsException e) {
             throw new WrongDateTimeException(this.commandType, "/by");
         }
     }
@@ -81,7 +81,7 @@ public class AddCommand extends Command {
      * Creates Event object.
      *
      * @return Event object as created according to user's specifications.
-     * @throws WrongDateTimeException When date and time are given in the wrong format.
+     * @throws WrongDateTimeException When date and time are not given or are given in the wrong format.
      */
     private Event createEvent() throws WrongDateTimeException {
         try {
@@ -91,7 +91,7 @@ public class AddCommand extends Command {
             LocalDateTime dateTime = LocalDateTime.parse(dateTimeString, FORMATTER);
 
             return new Event(taskName, dateTime);
-        } catch (Exception e) {
+        } catch (DateTimeParseException | IndexOutOfBoundsException e) {
             throw new WrongDateTimeException(this.commandType, "/at");
         }
     }
