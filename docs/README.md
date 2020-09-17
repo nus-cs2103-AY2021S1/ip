@@ -19,40 +19,40 @@ Graphical User Interface (GUI) is added for better user accessibility.
 Words in UPPER_CASE are the parameters to be supplied by the user.
 Items in curly brackets are date formats.
 
-### List `list`
+### List: `list`
 
-Shows a list of all tasks.
+Shows a list of all the user's tasks.
 
-### Exit `bye`
+### Exit: `bye`
 
 Terminates the programme
 
-### Add a todo task `todo TASK_NAME`
+### Add a todo task: `todo TASK_NAME`
 
 Add a task with the name TASK_NAME.
 
-### Mark a task as Done `done INDEX`
+### Mark a task as Done: `done INDEX`
 
 Item at INDEX is marked as done (Index starts at 1)
 
-### Add an Event `event EVENT_NAME /at {yyyyMMddHHmm}`
+### Add an Event: `event EVENT_NAME /at {yyyyMMddHHmm}`
 or `event EVENT_NAME /at {yyyyMMdd HHmm}`
 or `event EVENT_NAME /at {HH:mm ddMMyy}`
 or `event EVENT_NAME /at {yyyy-MM-dd HH:mm}`
 
 Add an event with the name EVENT_NAME. It accepts the 4 different formats of date.
 
-### Add an Deadline `event DEADLINE_NAME /by {yyyyMMddHHmm}`
+### Add a Deadline: `deadline DEADLINE_NAME /by {yyyyMMddHHmm}`
 or `event DEADLINE_NAME /by {yyyyMMdd HHmm}`
 or `event DEADLINE_NAME /by {HH:mm ddMMyy}`
 or `event DEADLINE_NAME /by {yyyy-MM-dd HH:mm}`
 
-Add an deadline with the name DEADLINE_NAME. It accepts the 4 different formats of date.
+Add a deadline with the name DEADLINE_NAME. It accepts the 4 different formats of date.
 
-### Find `find NAME`
+### Find: `find NAME`
 
 Shows all tasks whose name has the substring NAME.
 
-### Find delete `INDEX`
+### Delete: `delete INDEX`
 
 Delete task at index INDEX (Index starts at 1)
