@@ -136,8 +136,8 @@ public class Parser {
         }
         if (t.description != "") {
             taskList.addTask(t);
-            Storage.updateTasks(taskList.getNoOfTasks() - 1, taskList.list, filePath);
-            return ui.addSuccessful(t, taskList.getNoOfTasks() - 1 );
+            Storage.updateTasks(taskList.getNoOfTasks() , taskList.list, filePath);
+            return ui.addSuccessful(t, taskList.getNoOfTasks());
         } else {
             return s;
         }

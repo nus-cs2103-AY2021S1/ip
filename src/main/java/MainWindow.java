@@ -48,8 +48,7 @@ public class MainWindow extends AnchorPane {
         Duke testBot = new Duke("data/tasks.txt");
         String formattedInput = LINE_TOP
                 + userInput.getText() + '\n' + LINE_BOTTOM;
-        Label userText = new Label(formattedInput);
-        Label dukeText = new Label(getResponse(userInput.getText(),testBot));
+
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(formattedInput, k),
                 DialogBox.getDukeDialog(getResponse(userInput.getText(),testBot),marco)
