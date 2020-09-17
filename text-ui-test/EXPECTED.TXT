@@ -5,3 +5,60 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+----------
+Hello. What can I do for you?
+----------
+
+----------
+Got it. I've added this task:
+[T][X] Walk my pet
+Now you have 1 task(s) in the list.
+----------
+
+----------
+Got it. I've added this task:
+[E][X] CS2103T tutorial (at: Thursday 5pm)
+Now you have 2 task(s) in the list.
+----------
+
+----------
+Got it. I've added this task:
+[D][X] CS2103T homework (by: Friday 1159)
+Now you have 3 task(s) in the list.
+----------
+
+----------
+Here are the tasks in your list:
+1. [T][X] Walk my pet
+2. [E][X] CS2103T tutorial (at: Thursday 5pm)
+3. [D][X] CS2103T homework (by: Friday 1159)
+You have 3 task(s) in your list.
+----------
+
+----------
+Nice! I've marked this task as done:
+[T][Y] Walk my pet
+----------
+
+----------
+Nice! I've marked this task as done:
+[E][Y] CS2103T tutorial (at: Thursday 5pm)
+----------
+
+----------
+Nice! I've marked this task as done:
+[D][Y] CS2103T homework (by: Friday 1159)
+----------
+
+----------
+Here are the tasks in your list:
+1. [T][Y] Walk my pet
+2. [E][Y] CS2103T tutorial (at: Thursday 5pm)
+3. [D][Y] CS2103T homework (by: Friday 1159)
+You have 3 task(s) in your list.
+----------
+
+----------
+Bye. Hope to see you again soon!
+----------
+

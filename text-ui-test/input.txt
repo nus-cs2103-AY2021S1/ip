@@ -1,0 +1,9 @@
+todo Walk my pet
+event CS2103T tutorial /at Thursday 5pm
+deadline CS2103T homework /by Friday 1159
+list
+done 1
+done 2
+done 3
+list
+bye
