@@ -28,7 +28,7 @@ public class HelpDirective implements Executable {
         builder.append("\n");
 
         builder.append("1. help: lists all available actions and their options.\n");
-        builder.append("2. todo ![/d description_String]: adds a ToDo with a description\n");
+        builder.append("2. todo ![/d description_String]: adds a todo with a description\n");
         builder.append("3. event ![/d description_String] ![/at date_dd-MM-yyyy]: adds an event"
                 + " with a description and date.\n");
         builder.append("4. deadline ![/d description_String] ![/by date_dd-MM-yyyy]: adds a deadline"
