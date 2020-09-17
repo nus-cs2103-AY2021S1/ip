@@ -32,6 +32,9 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/LukeDaKing.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/LukeDaDuke.png"));
 
+    /**
+     * Initializes the main window of the gui.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -42,6 +45,11 @@ public class MainWindow extends AnchorPane {
                         ));
     }
 
+    /**
+     * Sets duke object to duke variable.
+     *
+     * @param d Duke object.
+     */
     @FXML
     public void setDuke(Duke d) {
         duke = d;
@@ -50,6 +58,9 @@ public class MainWindow extends AnchorPane {
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
+     * Solution below adapted from https://github.com/pennhanlee/ip
+     *
+     * @author pennhanlee
      */
     @FXML
     private void handleUserInput() {
