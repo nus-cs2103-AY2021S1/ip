@@ -31,7 +31,7 @@ This document shows you all the features in Clippy and helps you familiarise wit
 
 Note the following symbols and formatting used in this document:
 
-![Note Icon](https://www.iconsdb.com/icons/download/red/info-16.png): This symbol indicates important information
+![Note Icon](./UG%20images/info.png): This symbol indicates important information
 <br/><br/><br/>
 `list`: Words in grey mark-up indicates that this is a command that you can type into the command line and executed.
 <br/><br/><br/>
@@ -102,7 +102,7 @@ before a specific date.
 #### Format
 `deadline <task description> /by <YYYY-MM-DD>`
 
-![Note Icon](https://www.iconsdb.com/icons/download/red/info-16.png): You have to provide the date in the exact `YYYY-MM-DD` format.
+![Note Icon](./UG%20images/info.png): You have to provide the date in the exact `YYYY-MM-DD` format.
 #### Usage
 Example of usage:
 * `deadline sign up for hackathon /by 2020-09-30`
@@ -118,7 +118,7 @@ at a specific date/time period.
 #### Format
 `event <task description> /at <date/time period>`
 
-![Note Icon](https://www.iconsdb.com/icons/download/red/info-16.png): You do not have to follow any format for `<date/time period>`.
+![Note Icon](./UG%20images/info.png): You do not have to follow any format for `<date/time period>`.
 #### Usage
 Example of usage:
 * `event java workshop /at Tuesday 6-7pm`
@@ -146,7 +146,7 @@ Updates the details of an existing task being managed by Clippy. Suppose you mad
 * The `index` must be a positive integer 1, 2, 3, ...
 * Existing description will be updated to the input description.
 * Optional: `/by` or `/at` command can be added at the end, followed by `<new date/time>`, if you want to update the description and date/time of a deadline or event task.
-* ![Note Icon](https://www.iconsdb.com/icons/download/red/info-16.png) Note the following:
+* ![Note Icon](./UG%20images/info.png) Note the following:
   * A todo task does not have a date/time and the `/by` or `/at` command cannot be used when updating a todo
   * Use `/by` command when the task is a deadline
   * Use `/at` command when the task is an event
