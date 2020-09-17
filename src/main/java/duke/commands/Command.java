@@ -35,6 +35,7 @@ public abstract class Command {
      * Display out the number of task in the user's list.
      *
      * @param tasks the task object containing the list of task.
+     * @return Returns a String representing the number of tasks in the list.
      */
     public String printNumTask(TaskList tasks) {
         return String.format("Now you have %d tasks in the list.\n", tasks.size());
