@@ -4,7 +4,11 @@
 /*.iml
 
 #data files
-/data/
+/data/duke.txt
+
+/javafx-sdk-11.0.2/
+
+/output/
 
 # Gradle build files
 /.gradle/
