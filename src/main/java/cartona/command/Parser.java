@@ -1,8 +1,10 @@
 package cartona.command;
 
 import cartona.DateParser;
+
 import cartona.exception.EmptyTaskDescriptionException;
 import cartona.exception.InvalidInputException;
+import cartona.exception.InvalidTaskIdException;
 import cartona.exception.InvalidTaskTimeException;
 import cartona.exception.UnknownCommandException;
 
@@ -42,7 +44,7 @@ public class Parser {
             throw new InvalidTaskTimeException("Error: Please enter a valid time for the deadline");
         }
 
-        TaskDate dateTime = DateParser.parseDate(time);
+        TaskDate dateTime = DateParser.parseTaskDate(time);
         return new Deadline(deadlineName, false, dateTime);
     }
 
@@ -70,8 +72,7 @@ public class Parser {
         return new Event(eventName, false, startDateTime, endDateTime);
     }
 
-    private Task parseTaskToAdd(String consoleArg) throws EmptyTaskDescriptionException, InvalidTaskTimeException,
-            UnknownCommandException, InvalidInputException {
+    private Task parseTaskToAdd(String consoleArg) throws InvalidInputException {
 
         // checks if there is any text after "add "
         if (consoleArg.length() <= 4) {
@@ -139,13 +140,41 @@ public class Parser {
                     throw new InvalidInputException("Error: No number argument after 'delete'");
                 }
 
-                int taskIdToComplete = Integer.parseInt(words[1]);
+                Integer taskIdToComplete;
+
+                try {
+                    taskIdToComplete = Integer.parseInt(words[1]);
+                } catch (NumberFormatException e) {
+                    throw new InvalidTaskIdException("Error: Task ID is invalid");
+                }
 
                 if (taskIdToComplete < 1) {
                     throw new InvalidInputException("Error: Task numbers start from 1");
                 }
 
                 return new DoneCommand(taskIdToComplete);
+            } catch (NumberFormatException e) {
+                throw new InvalidInputException("Error: Invalid number argument after 'delete'");
+            }
+        case ("undone"):
+            try {
+                if (words.length < 2) {
+                    throw new InvalidInputException("Error: No number argument after 'delete'");
+                }
+
+                Integer taskIdToUncomplete;
+
+                try {
+                    taskIdToUncomplete = Integer.parseInt(words[1]);
+                } catch (NumberFormatException e) {
+                    throw new InvalidTaskIdException("Error: Task ID is invalid");
+                }
+
+                if (taskIdToUncomplete < 1) {
+                    throw new InvalidInputException("Error: Task numbers start from 1");
+                }
+
+                return new UndoneCommand(taskIdToUncomplete);
             } catch (NumberFormatException e) {
                 throw new InvalidInputException("Error: Invalid number argument after 'delete'");
             }
@@ -157,6 +186,20 @@ public class Parser {
             String keyword = userInput.substring(5);
 
             return new FindTaskCommand(keyword);
+        case ("edit"):
+            if (words.length < 4) {
+                throw new InvalidInputException("Error: Edit parameters missing");
+            }
+
+            Integer taskIdToEdit;
+            try {
+                taskIdToEdit = Integer.parseInt(words[1]);
+            } catch (NumberFormatException e) {
+                throw new InvalidTaskIdException("Error: Task ID is invalid");
+            }
+
+            // Pass on edit string to Command
+            return new EditCommand(taskIdToEdit, userInput);
         default:
             throw new UnknownCommandException("Error: Invalid command keyword!");
         }

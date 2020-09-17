@@ -26,7 +26,7 @@ public abstract class Task {
     }
 
     /**
-     * Sets isDone to true
+     * Sets isDone to true.
      *
      * @throws CartonaException if the task is already done
      */
@@ -37,8 +37,31 @@ public abstract class Task {
         this.isDone = true;
     }
 
+    /**
+     * Sets isDone to false.
+     *
+     * @throws CartonaException if the task is not done
+     */
+    public void uncomplete() throws CartonaException {
+        if (!this.isDone) {
+            throw new CartonaException(String.format(("Error: Task %s is not done yet"), this.toString()));
+        }
+
+        this.isDone = false;
+    }
+
+    /**
+     * Returns the name of the Task.
+     */
     public String getName() {
         return this.name;
+    }
+
+    /**
+     * Returns the 1-character String denoting the type of the Task.
+     */
+    public String getType() {
+        return this.type;
     }
 
     /**
@@ -49,9 +72,9 @@ public abstract class Task {
     @Override
     public String toString() {
         if (this.isDone) {
-            return String.format("[✔] %s", name);
+            return String.format("[\u2713] %s", name);
         } else {
-            return String.format("[✖] %s", name);
+            return String.format("[\u2717] %s", name);
         }
     }
 

@@ -35,7 +35,7 @@ public class Ui {
     }
 
     /**
-     * Returns a message reflecting the successful adding of a task.
+     * Returns a message reflecting the successful adding of a Task.
      * @param task The task that was added.
      * @param taskListSize The current size of the TaskList.
      */
@@ -47,7 +47,7 @@ public class Ui {
     }
 
     /**
-     * Returns a message reflecting the successful deletion of a task.
+     * Returns a message reflecting the successful deletion of a Task.
      * @param task The task that was deleted.
      * @param taskListSize The current size of the TaskList.
      */
@@ -60,15 +60,26 @@ public class Ui {
     }
 
     /**
-     * Returns a message reflecting the successful completion of a task.
+     * Returns a message reflecting the successful completion of a Task.
      * @param task The task that was marked as completed.
      */
     public String printTaskDoneMessage(Task task) {
         return String.format(HORIZONTAL_LINE
-                + "     Nice! I've marked this task as done:%n"
+                + "     Nice! I've marked this task as not done:%n"
                 + "       %s%n"
                 + HORIZONTAL_LINE,
                     task);
+    }
+
+    /**
+     * Returns a message reflecting the successful edit of a Task.
+     */
+    public String printTaskEditMessage(int taskIdToEdit, Task task) {
+        return String.format(HORIZONTAL_LINE
+                + "     Nice! I've edited task %d:"
+                + "       %s%n"
+                + HORIZONTAL_LINE,
+                    taskIdToEdit, task);
     }
 
     /**
