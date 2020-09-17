@@ -21,16 +21,6 @@ public class UiTest {
     }
     
     @Test
-    public void exit() {
-        try {
-            Ui.exit();
-            fail();
-        } catch (AssertionError e) {
-            assertEquals("System not terminated successfully", e.getMessage());
-        }
-    }
-    
-    @Test
     public void showAddResponse() {
         assertEquals("ok! I've added this task:\n  task\nyou now have 1 task in your list\n",
                 new UiStub().showAddResponse(null, 1));
