@@ -241,7 +241,7 @@ A: Install the app in the other computer and overwrite the empty data file it cr
 
 # Command Summary
 Action | Format, Example usage
------ | ------
+------ | ------
 Add | `todo <task description>` <br> `deadline <task description> /by <YYYY-MM-DD>` <br> `event <task description> /at <date/time period>` <br> e.g. `event java workshop​ /at Tuesday 6-7pm`
 List | `list`
 Update | `update <task index> <new task description> [/by (OR) /at <new time/date>]` <br> e.g. `update 1 19th birthday party /at 25 Nov 5-10pm`
