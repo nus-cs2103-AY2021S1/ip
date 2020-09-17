@@ -40,15 +40,12 @@ public class Storage {
      * @param userTasks list of tasks to be saved.
      */
     public void saveToFile(ArrayList<Task> userTasks) {
-//        Path folderPath = Paths.get("..", "..", "..", "data");
         Path folderPath = Paths.get("data");
         if (!Files.exists(folderPath)) {
             File folderDir = new File(folderPath.toString());
             folderDir.mkdir();
         }
 
-//        String filePath = Paths.get("..", "..", "..", "data", "Tasklist.txt")
-//                .toString();
         String filePath = Paths.get("data", "Tasklist.txt")
                 .toString();
 
@@ -69,7 +66,6 @@ public class Storage {
      */
     public ArrayList<Task> readFromFile() {
 
-//        Path folderPath = Paths.get("..", "..", "..", "data");
         Path folderPath = Paths.get("data");
         if (!Files.exists(folderPath)) {
             File folderDir = new File(folderPath.toString());
@@ -78,7 +74,6 @@ public class Storage {
 
         ArrayList<Task> savedTasks = new ArrayList<Task>();
 
-//        Path filePath = Paths.get("..", "..", "..", "data", "Tasklist.txt");
         Path filePath = Paths.get("data", "Tasklist.txt");
         if (!Files.exists(filePath)) {
             return savedTasks;
