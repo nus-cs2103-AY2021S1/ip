@@ -122,3 +122,8 @@ Usage: `bye`
 Example of usage: `bye`
 
 Expected outcome: Program will close in 5 seconds.
+
+## Acknowledgement
+Cat picture is from [Chi's Sweet Home](https://en.wikipedia.org/wiki/Chi%27s_Sweet_Home) by Kanata Konami.
+All rights belongs to the original creator.
+No copyright infringement intended.
