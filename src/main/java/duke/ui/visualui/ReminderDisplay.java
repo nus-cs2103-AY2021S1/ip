@@ -168,7 +168,6 @@ public class ReminderDisplay extends VBox {
      * @param taskDetails A list of details regarding the task.
      */
     private void createReminderList(String ... taskDetails) {
-        System.out.println(Arrays.deepToString(taskDetails));
         Text[] dateText = getDateText(taskDetails);
         Text[] timeText = getTimeText(taskDetails);
         Text[] descriptionText = createText(taskDetails[2] + TEXT_COLON, taskDetails[0]);
