@@ -14,8 +14,8 @@ public class StatCommand extends Command {
     public static final String COMMAND_WORD = "stat";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Displays the number of tasks that have been completed.\n"
-            + "\tExample: " + COMMAND_WORD;
+            + " :\nDisplays the number of tasks that have been completed.\n"
+            + "  Example: " + COMMAND_WORD;
 
     @Override
     public CommandResult execute() {

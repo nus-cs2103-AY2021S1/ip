@@ -12,11 +12,12 @@ public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all tasks whose description contain any of "
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + " :\nFinds all tasks whose description contain any of "
             + "the specified keywords (case-sensitive) and \n"
             + "displays them as a list with index numbers.\n"
-            + "\tParameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "\tExample: " + COMMAND_WORD + " book return meeting";
+            + "  Parameters: KEYWORD [MORE_KEYWORDS]...\n"
+            + "  Example: " + COMMAND_WORD + " book return meeting";
 
     public static final String MESSAGE_SUCCESS = "We have found %1$d task(s) related to your keyword(s).";
 

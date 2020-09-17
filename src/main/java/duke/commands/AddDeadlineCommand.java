@@ -11,9 +11,10 @@ public class AddDeadlineCommand extends AddCommand {
 
     public static final String COMMAND_WORD = "deadline";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a deadline to the task list.\n"
-            + "\tParameters: DESCRIPTION /by DATE TIME\n"
-            + "\tExample: " + COMMAND_WORD + " return book /by 23/09/2020 1800";
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + " :\nAdds a deadline to the task list.\n"
+            + "  Parameters: DESC /by DATE TIME\n"
+            + "  Example: " + COMMAND_WORD + " return book /by 23/09/2020 1800";
 
     protected final Deadline toAdd;
 
