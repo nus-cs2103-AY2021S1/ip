@@ -1,5 +1,6 @@
 package duke;
 
+import duke.command.FindCommand;
 import main.java.duke.command.Command;
 import main.java.duke.command.ListCommand;
 import main.java.duke.command.DoneCommand;
@@ -27,11 +28,12 @@ public class Parser {
     static final String COMMAND_EVENT = "event";
     static final String COMMAND_DELETE = "delete";
     static final String COMMAND_UPDATE = "update";
+    static final String COMMAND_FIND = "find";
     static final Set<String> terminationCommands = new HashSet<String>(
             Arrays.asList("bye", "toodles", "farewell", "sayonara"));
     static final Set<String> nonTerminationCommands = new HashSet<String>(
             Arrays.asList(COMMAND_LIST, COMMAND_DONE, COMMAND_TODO, COMMAND_DEADLINE,
-                    COMMAND_EVENT, COMMAND_DELETE, COMMAND_UPDATE));
+                    COMMAND_EVENT, COMMAND_DELETE, COMMAND_UPDATE, COMMAND_FIND));
 
     public Parser() {}
 
@@ -58,7 +60,7 @@ public class Parser {
 
         // valid duke.command that is not list
         if (!fullCommand.contains(" ")) {
-            throw new main.java.duke.dukeexception.InvalidInputException("Did you put your duke.task info after a space?");
+            throw new InvalidInputException("Did you put your task info after a space?");
         }
         // take the part of the duke.command without commandType
         String info = fullCommand.split(" ", 2)[1];
@@ -69,36 +71,35 @@ public class Parser {
                 int taskNumber = parseInt(info) - 1;
                 return new DoneCommand(taskNumber);
             } catch (Exception e) {
-                throw new main.java.duke.dukeexception.InvalidInputException("Specify the duke.task number correctly.");
+                throw new InvalidInputException("Specify the task number correctly.");
             }
         case COMMAND_TODO:
             try {
                 return new TodoCommand(info);
             } catch (Exception e) {
-                throw new main.java.duke.dukeexception.InvalidInputException("Did you put your duke.task after a space?");
+                throw new InvalidInputException("Did you put your task after a space?");
             }
         case COMMAND_EVENT:
             try {
                 String[] descAndDate = info.split(" /at ");
                 return new EventCommand(descAndDate[0], LocalDate.parse(descAndDate[1]));
             } catch (Exception e) {
-                throw new main.java.duke.dukeexception.InvalidInputException("Format for dates is yyyy-mm-dd. " +
-                        "Also, did you put a duke.task before and date after ' /at '?");
+                throw new InvalidInputException("Format for dates is yyyy-mm-dd. " +
+                        "Also, did you put a task before and date after ' /at '?");
             }
         case COMMAND_DEADLINE:
             try {
                 String[] descAndDate = info.split(" /by ");
                 return new DeadlineCommand(descAndDate[0], LocalDate.parse(descAndDate[1]));
             } catch (Exception e) {
-                throw new main.java.duke.dukeexception.InvalidInputException("Format for dates is yyyy-mm-dd. " +
-                        "Also, did you put a duke.task before and deadline after ' /by '?");
+                throw new InvalidInputException("Format for dates is yyyy-mm-dd. " +
+                        "Also, did you put a task before and deadline after ' /by '?");
             }
         case COMMAND_DELETE:
             try {
-                int taskNumber = parseInt(info) - 1;
-                return new DeleteCommand(taskNumber);
+                return new FindCommand(info);
             } catch (Exception e) {
-                throw new main.java.duke.dukeexception.InvalidInputException("Specify the duke.task number correctly.");
+                throw new InvalidInputException("Somehow your input is wrong.");
             }
         case COMMAND_UPDATE:
             try {
@@ -106,7 +107,13 @@ public class Parser {
                 String newTaskDesc = new Ui().readUpdateDesc();
                 return new UpdateCommand(taskNumber, newTaskDesc);
             } catch (Exception e) {
-                throw new main.java.duke.dukeexception.InvalidInputException("Specify the duke.task number correctly.");
+                throw new InvalidInputException("Specify the task number correctly.");
+            }
+        case COMMAND_FIND:
+            try {
+                return new FindCommand(info);
+            } catch (Exception e) {
+                throw new InvalidInputException("Specify the task number correctly.");
             }
         default:
             throw new InvalidTaskException();
