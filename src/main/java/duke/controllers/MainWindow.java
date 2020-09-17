@@ -2,6 +2,7 @@ package duke.controllers;
 
 import duke.Repl;
 import duke.messages.DukeResponse;
+import duke.utils.CommandHistory;
 import duke.utils.Store;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
@@ -10,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -33,15 +35,25 @@ public class MainWindow extends AnchorPane {
     /** Image that is shown alongside the chatbot's messages. */
     private final Image dukeImage =
             new Image(this.getClass().getResourceAsStream("/images/Pomeranian with Sunglasses.png"));
+    /** {@code CommandHistory} object to keep track of the user input history. */
+    private final CommandHistory commandHistory = new CommandHistory(50);
 
     /**
      * Initialises the MainWindow.
      */
     @FXML
     public void initialize() {
+        // Bind the scroll pane's height to that of the dialog container.
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+
+        // Disable the send button when the user input is empty.
         BooleanBinding isUserInputEmpty = Bindings.isEmpty(userInput.textProperty());
         sendButton.disableProperty().bind(isUserInputEmpty);
+
+        // Set up cycling through command history.
+        userInput.setOnKeyPressed(event -> handleKeyPress(event.getCode()));
+
+        // Display greetings.
         dialogContainer.getChildren().add(
                 DialogBox.getDukeDialog(Store.getResourceHandler().getString("repl.greeting"), dukeImage));
     }
@@ -55,20 +67,42 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
 
+        // Do nothing if user input is empty.
         if (input.isEmpty()) {
             return;
         }
 
+        // Push user input into command history.
+        commandHistory.addCommand(input);
+
+        // Process the user input.
         DukeResponse dukeResponse = Repl.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(dukeResponse.toString(), dukeImage)
         );
+
         userInput.clear();
 
+        // Terminate the application if the signal to exit is received.
         if (dukeResponse.shouldExit()) {
             Stage stage = (Stage) userInput.getScene().getWindow();
             stage.close();
         }
+    }
+
+    private void handleKeyPress(KeyCode keyCode) {
+        switch (keyCode) {
+        case UP:
+            userInput.setText(commandHistory.navigateUp());
+            break;
+        case DOWN:
+            userInput.setText(commandHistory.navigateDown());
+            break;
+        default:
+            return;
+        }
+        // Set the caret position to the end of the string.
+        userInput.positionCaret(userInput.getLength());
     }
 }
