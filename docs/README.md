@@ -44,7 +44,7 @@ Example of usage:
 
 Expected outcome:
 
-![todo](./image/todo.png)
+![todo](./images/todo.png)
 
 ### `deadline` - Add a new Deadline
 
@@ -58,7 +58,7 @@ Example of usage:
 
 Expected outcome:
 
-![deadline](./image/deadline.png)
+![deadline](./images/deadline.png)
 
 ### `event` - Add a new Event
 
@@ -72,7 +72,7 @@ Example of usage:
 
 Expected outcome:
 
-![event](./image/event.png)
+![event](./images/event.png)
 
 ### `list` - View all tasks
 
@@ -86,7 +86,7 @@ Example of usage:
 
 Expected outcome:
 
-![list](./image/list.png)
+![list](./images/list.png)
 
 ### `delete` - Delete a task
 
@@ -100,7 +100,7 @@ Example of usage:
 
 Expected outcome:
 
-![delete](./image/delete.png)
+![delete](./images/delete.png)
 
 ### `done` - Mark a task as done
 
@@ -114,7 +114,7 @@ Example of usage:
 
 Expected outcome:
 
-![done](./image/done.png)
+![done](./images/done.png)
 
 ### `find` - Search for tasks
 
@@ -128,7 +128,7 @@ Example of usage:
 
 Expected outcome:
 
-![find](./image/find.png)
+![find](./images/find.png)
 
 ### `bye` - Save and exit
 
@@ -142,4 +142,4 @@ Example of usage:
 
 Expected outcome:
 
-![bye](./image/bye.png)
+![bye](./images/exit.png)
