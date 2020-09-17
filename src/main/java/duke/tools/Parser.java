@@ -172,7 +172,12 @@ public class Parser {
      * directory in Directory class.
      */
     public static Command clear() {
-        return new ClearCommand();
+        if (extract[taskDetail] == null || extract[taskDetail].equals(CommandString.CLEAR_ALL)) {
+            return new ClearCommand();
+        } else if (extract[taskDetail].equals(CommandString.CLEAR_DONE)) {
+            return new ClearCommand(extract[taskDetail]);
+        }
+        return new DukeException(Exceptions.CLEARFORMATIONEXCEPTION);
     }
 
     /**

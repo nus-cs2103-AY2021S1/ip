@@ -33,6 +33,7 @@ public class DukeFileEditor extends DukeFile {
      *
      * @param lineNum the index of task that the user want to
      *                delete.
+     * @throws DukeException throws when readFile() or write() has error.
      */
     public void deleteLine(int lineNum) throws DukeException {
         if (doesFileExist()) {
@@ -45,10 +46,35 @@ public class DukeFileEditor extends DukeFile {
     /**
      * Clears all tasks recorded in the file
      * with directory in the FileDirectory in Directory class.
+     *
+     * @throws DukeException throws when write() has error.
      */
     public void clearFile() throws DukeException {
         List<String> newList = new ArrayList<>();
         super.write(newList);
+    }
+
+    /**
+     * Clears all completed tasks in the file
+     *
+     * @throws DukeException throws when readFile() or write() has error.
+     */
+    public void clearDoneTask() throws DukeException {
+        if (doesFileExist()) {
+            List<Integer> removeList = new ArrayList<>();
+            List<String> taskStrings = super.readFile();
+            for (int i = 0; i < taskStrings.size(); i++) {
+                if (taskStrings.get(i).substring(4, 5).equals(FormatString.TICK.toString())) {
+                    removeList.add(i);
+                }
+            }
+
+            for (int i = removeList.size() - 1; i >= 0; i--) {
+                taskStrings.remove(i);
+            }
+            super.write(new ArrayList<>());
+            super.write(taskStrings);
+        }
     }
 
     /**
@@ -57,6 +83,7 @@ public class DukeFileEditor extends DukeFile {
      *
      * @param lineNum the index of task that the user want to
      *                delete.
+     * @throws DukeException throws when readFile() or write() has error.
      */
     public void setTaskDone(int lineNum) throws DukeException {
         if (doesFileExist()) {
@@ -78,6 +105,7 @@ public class DukeFileEditor extends DukeFile {
      * @param lineNum the lineNum of the Task shown by list command.
      * @param input the detail that the user wants to change to.
      * @return the string of the Task being updated.
+     * @throws DukeException throws when readFile() or write() has error.
      */
     public Task update(int lineNum, String command, String input) throws DukeException {
         List<String> taskStrings = readFile();

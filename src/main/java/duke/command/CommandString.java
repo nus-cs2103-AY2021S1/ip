@@ -16,6 +16,8 @@ public class CommandString {
     public static final String DELETE = "delete";
     public static final String FIND = "find";
     public static final String CLEAR = "clear";
+    public static final String CLEAR_ALL = "all";
+    public static final String CLEAR_DONE = "done";
     public static final String UPDATE = "update";
     public static final String UPDATE_TIME = "time";
     public static final String UPDATE_DETAIL = "detail";

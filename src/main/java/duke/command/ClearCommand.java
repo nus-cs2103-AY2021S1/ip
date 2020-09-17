@@ -9,10 +9,25 @@ import duke.storage.DukeFileEditor;
  * Represents a clear command.
  */
 public class ClearCommand implements Command {
+    private final String command;
+
+    public ClearCommand(String command) {
+        this.command = command;
+    }
+
+    public ClearCommand() {
+        this.command = "all";
+    }
+
     @Override
     public Response process() throws DukeException {
-        DukeFileEditor deleteAll = new DukeFileEditor(Directory.FILEDIRECTORY);
-        deleteAll.clearFile();
+        DukeFileEditor clear = new DukeFileEditor(Directory.FILEDIRECTORY);
+
+        if (command.equals(CommandString.CLEAR_ALL)) {
+            clear.clearFile();
+        } else {
+            clear.clearDoneTask();
+        }
 
         return new Response(Statement.CLEAR.toString());
     }

@@ -79,5 +79,13 @@ public enum Exceptions {
             return "Your update command format is incorrect.\n"
                     + "please use: update <number to update> <detail/time> /to <content>";
         }
+    },
+
+    CLEARFORMATIONEXCEPTION {
+        @Override
+        public String toString() {
+            return "Seems that your clear format is incorrect.\n"
+                    + "Check 'help' to find the correct one";
+        }
     }
 }

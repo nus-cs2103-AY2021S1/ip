@@ -55,6 +55,13 @@ public enum Statement {
         }
     },
 
+    CLEAR_DONE {
+        @Override
+        public String toString() {
+            return "Your completed tasks have been cleared.\n";
+        }
+    },
+
     UPDATE {
         @Override
         public String toString() {

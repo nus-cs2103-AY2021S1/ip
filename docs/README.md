@@ -4,13 +4,29 @@ Duke is a desktop chat bot that can help you manage your tasks. It is optimized 
 Command Line interface and automatic save such that you can note it faster than conventional 
 task manager application.  
 
+* [Features](#features)
+    * [Task management](#1-task-management)
+    * [Task view](#2-task-view)
+    * [Various time format support](#3-various-time-format-support)
+* [Usage](#Usage)
+    * [help - view all functions](#View-all-functions)
+    * [todo - create a todo task](#todo)
+    * [deadline - create a task with a deadline](#deadline)
+    * [event - create an event task](#event)
+    * [done - mark a task as done](#done)
+    * [delete - delete a task](#delete)
+    * [list - view all tasks](#list)
+    * [clear - delete all tasks](#clear)
+    * [find - find the tasks containing keywords from the user](#find)
+    * [update - update the detail or time of an existing task](#update)
+
 &nbsp;
 
 ------------------------------------------------------------------------------
 
 ## Features 
 
-### 1. Task assignment
+### 1. Task management
 Add tasks conveniently with easy commands:
 * Assign
     * Simple todo tasks, `todo`.
@@ -18,6 +34,8 @@ Add tasks conveniently with easy commands:
     * Events to attend, `event`.
 * Mark tasks as done, `done`.
 * Delete tasks, `delete`.
+* Update tasks, `update`.
+* Clear all tasks, `clear`
 
 &nbsp;
 
@@ -64,18 +82,23 @@ Show all the functions and respective usage, `help`.
 
 &nbsp;
 
-### `todo` - Create a todo task
+### `todo` 
+
+`todo` - create a todo task.
 
 Format: `[todo] <detail>`
 
 Example:
+
 * `todo homework` creates a new todo task `homework` that is yet done.
 
 ![todoImage](./image/todo.png)
 
 &nbsp;
 
-### `deadline` - Create a task with a deadline
+### `deadline` 
+
+`deadline` - create a task with a deadline.
 
 Format: `[deadline] <space> <detail> <space> </by> <Date and/or time>`
 
@@ -87,7 +110,9 @@ Example:
 
 &nbsp;
 
-### `event` - Create a event to attend
+### `event`
+
+`event` - create a event to attend.
 
 Format: `[event] <space> <detail> <space> </on> <Date and/or time>`
 
@@ -99,7 +124,9 @@ Example:
 
 &nbsp;
 
-### `done` - Mark a task as done
+### `done`
+
+`done` - mark a task as done.
 
 Format: `[done] <index>`
 
@@ -110,7 +137,9 @@ Example:
 
 &nbsp;
 
-### `delete` - delete a task
+### `delete`
+
+`delete` - delete a task.
 
 Format: `[delete] <index>`
 
@@ -121,7 +150,9 @@ Example:
 
 &nbsp;
 
-### `list` - view all tasks in the list
+### `list`
+
+`list` - view all tasks in the list.
 
 Format: `[list]`
 
@@ -129,15 +160,25 @@ Format: `[list]`
 
 &nbsp;
 
-### `clear` - delete all the tasks
+### `clear`
 
-Format: `[clear]`
+`clear` - delete all the tasks.
 
-![clearImage](./image/clear.png)
+Format: `[clear] <all/done/(leave empty)>`
+
+Example:
+* `clear` and `clear all` clears all the tasks in the list.
+* `clear done` clears completed tasks only.
+
+
+![clearAllImage](./image/clear.png)
+![clearDoneImage](./image/clearDone.png)
 
 &nbsp;
 
-### `find` - find the tasks containing each or all keywords from the user
+### `find`
+
+`find` - find the tasks containing each or all keywords from the user.
 
 Format: `[find] <space> <keywords>`
 
@@ -148,7 +189,9 @@ Example:
 
 &nbsp;
 
-### `update` - update the detail or time of an existing task
+### `update`
+
+`update` - update the detail or time of an existing task
 
 Format: `[update] <space> <index> <space> <detail/time> <space> </to> <content>`
 
@@ -161,7 +204,9 @@ Example:
 
 &nbsp;
 
-### `bye` - exit the program
+### `bye`
+
+`bye` - exit the program
 
 Format: `bye`
 
