@@ -153,8 +153,8 @@ Example:
 Format: `[update] <space> <index> <space> <detail/time> <space> </to> <content>`
 
 Example: 
-* `update 2 detail to CS2103T lesson` update the detail of the 2nd task to `CS2103T lesson`. 
-* `update 3 time /to 1600` update the time of the 3rd task to `2359` of the present day.
+* `update 2 detail /to CS2103T lesson` update the detail of the 2nd task to `CS2103T lesson`. 
+* `update 3 time /to 1600` update the time of the 3rd task to `1600` of the present day.
 
 ![updateDetailImage](./image/update_detail.png)
 ![updateTimeImage](./image/update_time.png)

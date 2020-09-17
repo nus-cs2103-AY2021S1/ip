@@ -32,6 +32,8 @@ public class DeleteCommand implements Command {
         DukeFileEditor dukeFileEditor = new DukeFileEditor(Directory.FILEDIRECTORY);
         dukeFileEditor.deleteLine(num);
 
+        Parser.reloadTaskList();
+        taskList = Parser.getTaskList();
         String response =
                 Statement.DELETE.toString()
                         + task
