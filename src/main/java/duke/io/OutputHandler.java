@@ -41,6 +41,14 @@ public class OutputHandler {
     }
 
     /**
+     * Display a given warning immediately using <code>printNow()</code>
+     * @param warning Warning to be displayed.
+     */
+    public void printWarning(String warning) {
+        printNow(warning);
+    }
+
+    /**
      * Checks if <code>outputBuffer</code> is empty.
      *
      * @return Whether <code>outputBuffer</code> is empty.

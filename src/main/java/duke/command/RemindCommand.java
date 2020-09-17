@@ -14,10 +14,10 @@ import duke.time.DateTime;
 public class RemindCommand extends Command {
 
     /**
-     * Filter all not done <code>Deadline</code>s from <code>taskManager</code> with date set to today, as returned by
+     * Get all not done <code>Deadline</code>s from <code>taskManager</code> with date set to today, as returned by
      * <code>DateTime.getToday()</code>, then reminds the user about them.
-     * Note: Only <code>DateTime</code> dated deadlines can be filtered. If the <code>Deadline</code> is
-     * initialized with a <code>TimePoint</code> that relies on a description, it will not be filtered.
+     * Note: Only <code>DateTime</code> dated deadlines will be displayed. If the <code>Deadline</code> is
+     * initialized with a <code>TimePoint</code> that relies on a description, it will be filtered away.
      *
      * @param ui Print-out and display manager.
      * @param taskManager <code>Task</code> manipulation manager.

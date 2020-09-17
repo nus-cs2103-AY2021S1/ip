@@ -102,4 +102,16 @@ public class MainWindow extends AnchorPane {
         );
     }
 
+    /**
+     * Creates a <code>DialogBox</code> for a given warning from Duke.
+     *
+     * @param warning Warning generated when Duke tried to handle user input.
+     */
+    public void handleDukeWarning(String warning) {
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeWarningDialog(warning, dukeImage, dukeFont)
+        );
+    }
+
+
 }

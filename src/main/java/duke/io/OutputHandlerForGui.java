@@ -32,4 +32,14 @@ public class OutputHandlerForGui extends OutputHandler {
         mainWindow.handleDukeResponse(output + "\n");
     }
 
+    /**
+     * Display a given warning immediately via the GUI, skipping ahead of the buffered items.
+     * GUI-based implementation of warning display is handled differently from a normal response.
+     * @param warning Warning to be displayed.
+     */
+    @Override
+    public void printWarning(String warning) {
+        mainWindow.handleDukeWarning(warning);
+    }
+
 }
