@@ -1,5 +1,5 @@
-package main.java.task;
-import main.java.task.Task;
+package main.java.duke.task;
+import main.java.duke.task.Task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

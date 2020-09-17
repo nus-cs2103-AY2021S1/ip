@@ -1,4 +1,4 @@
-package main.java.task;
+package main.java.duke.task;
 
 public class Task {
     protected String description;
