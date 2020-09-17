@@ -1,6 +1,12 @@
-package Duke;
+package duke;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintStream;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -62,8 +68,11 @@ public class Storage {
      */
     public void writeFile(List<Task> data) throws FileNotFoundException {
         final PrintStream oldStdout = System.out;
-        PrintStream ps = new PrintStream("./log.txt");
+        PrintStream ps = new PrintStream(pathname);
         System.setOut(ps);
+        for (int i = 0; i < data.size(); i++) {
+            System.out.printf("     %d.%s\n", i + 1, data.get(i).toString());
+        }
         System.setOut(oldStdout);
     }
 
@@ -99,8 +108,9 @@ public class Storage {
             return 11;
         case "DEC":
             return 12;
+        default:
+            throw new IOException();
         }
-        throw new IOException();
     }
 
     /**

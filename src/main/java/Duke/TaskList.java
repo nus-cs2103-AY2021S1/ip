@@ -1,9 +1,9 @@
-package Duke;
+package duke;
 
 import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Represents the list of the todo events.
@@ -39,19 +39,17 @@ public class TaskList {
      * @param input the input from the user.
      * @param ui user interaction object.
      * @param storage storage object.
+     * @return String result for GUI.
      * @throws DukeException handles the exception when running the Duke bot.
      * @throws FileNotFoundException handles the exception of file not found.
-     * @return String result for GUI
      */
     public String done(String input, Ui ui, Storage storage) throws DukeException, FileNotFoundException {
         String res;
         if (input.length() <= 5) {
-            // Exception: eg. done
             throw new DukeException("      OOPS!!! The description of done is incomplete.");
         }
         int n = Integer.parseInt(input.substring(5)) - 1;
         if (n > data.size() || n < 0) {
-            //Exception: eg. done 999
             throw new DukeException("      OOPS!!! The index is out of bounds.");
         }
         data.get(n).done();
@@ -65,19 +63,18 @@ public class TaskList {
      * @param input the input from the user.
      * @param ui user interaction object.
      * @param storage storage object.
+     * @return String result for GUI.
      * @throws DukeException handles the exception when running the Duke bot.
      * @throws FileNotFoundException handles the exception of file not found.
-     * @return String result for GUI
+
      */
     public String delete(String input, Ui ui, Storage storage) throws DukeException, FileNotFoundException {
         String res;
         if (input.length() <= 7) {
-            // Exception: eg. delete
             throw new DukeException("      OOPS!!! The description of delete is incomplete.");
         }
         int n = Integer.parseInt(input.substring(7)) - 1;
         if (n > data.size() || n < 0) {
-            //Exception: eg. delete 999
             throw new DukeException("      OOPS!!! The index is out of bounds.");
         }
         res = ui.printDeletePre(data, n);
@@ -87,18 +84,25 @@ public class TaskList {
         return res;
     }
 
+    /**
+     * Adds a duration task into the list.
+     * @param input the input from the user.
+     * @param ui user interaction object.
+     * @param storage storage object.
+     * @return String result for GUI.
+     * @throws DukeException handles the exception when running the Duke bot.
+     * @throws FileNotFoundException handles the exception of file not found.
+     */
     public String durationTask(String input, Ui ui, Storage storage) throws DukeException, FileNotFoundException {
         String res = "";
         if (input.length() <= 13) {
-            // Exception: eg. durationtask
             throw new DukeException("      OOPS!!! The description of a duration task cannot be empty.");
         }
         String[] ss = input.split(" ");
-        if (ss.length != 3) {
-            throw new DukeException("      OOPS!!! Please following the format: durationtask XXX Y");
+        if (ss.length != 3 || ss[2].length() != 2) {
+            throw new DukeException("      OOPS!!! Please following the format: durationtask XXX HH");
         }
         DurationTask t = new DurationTask(ss[1], Integer.parseInt(ss[2]));
-        assert t != null;
         data.add(t);
         res = ui.printTask(data, t);
         storage.writeFile(data);
@@ -110,9 +114,9 @@ public class TaskList {
      * @param input the input from the user.
      * @param ui user interaction object.
      * @param storage storage object.
+     * @return String result for GUI.
      * @throws DukeException handles the exception when running the Duke bot.
      * @throws FileNotFoundException handles the exception of file not found.
-     * @return String result for GUI
      */
     public String todo(String input, Ui ui, Storage storage) throws DukeException, FileNotFoundException {
         String res;
@@ -121,7 +125,6 @@ public class TaskList {
             throw new DukeException("      OOPS!!! The description of a todo cannot be empty.");
         }
         Todo task = new Todo(input.substring(5));
-        assert task != null;
         data.add(task);
         res = ui.printTask(data, task);
         storage.writeFile(data);
@@ -133,27 +136,30 @@ public class TaskList {
      * @param input the input from the user.
      * @param ui user interaction object.
      * @param storage storage object.
+     * @return String result for GUI.
      * @throws DukeException handles the exception when running the Duke bot.
      * @throws FileNotFoundException handles the exception of file not found.
-     * @return String result for GUI
      */
     public String deadline(String input, Ui ui, Storage storage) throws DukeException, FileNotFoundException {
         String res;
         if (input.length() <= 9) {
-            // Exception: eg. deadline
             throw new DukeException("      OOPS!!! The description of a deadline cannot be empty.");
         }
         String[] ss = input.split("/");
         if (ss.length != 4 || !ss[1].startsWith("by ")) {
-            throw new DukeException("      OOPS!!! Please following the format: deadline XXX /by X/X/XXXX XXXX");
+            throw new DukeException("      OOPS!!! Please following the format: \n"
+                    + "      deadline XXX /by DD/MM/YYYY HHMM");
         }
         int year = Integer.parseInt(ss[3].split(" ")[0]);
         int month = Integer.parseInt(ss[2]);
         int day = Integer.parseInt(ss[1].substring(3));
+        String[] time = ss[3].split(" ");
+        if (time.length == 1 || time[1].length() != 4) {
+            throw new DukeException("      OOPS!!! Please enter the time in correct format: HHMM");
+        }
         int hour = Integer.parseInt(ss[3].split(" ")[1].substring(0, 2));
         int minute = Integer.parseInt(ss[3].split(" ")[1].substring(2));
         Deadline task = new Deadline(ss[0].substring(9), LocalDateTime.of(year, month, day, hour, minute));
-        assert task != null;
         data.add(task);
         res = ui.printTask(data, task);
         storage.writeFile(data);
@@ -165,29 +171,31 @@ public class TaskList {
      * @param input the input from the user.
      * @param ui user interaction object.
      * @param storage storage object.
+     * @return String result for GUI.
      * @throws DukeException handles the exception when running the Duke bot.
      * @throws FileNotFoundException handles the exception of file not found.
-     * @return String result for GUI
      */
     public String event(String input, Ui ui, Storage storage) throws DukeException, FileNotFoundException {
         String res;
         if (input.length() <= 6) {
-            // Exception: eg. event
             throw new DukeException("      OOPS!!! The description of an event cannot be empty.");
         }
         String[] ss = input.split("/");
         if (ss.length != 4 || !ss[1].startsWith("at ")) {
             // Exception: eg. event meeting /Mon
-            throw new DukeException("\"      OOPS!!! Please following the format: event XXX /at X/X/XXXX XXXX");
+            throw new DukeException("      OOPS!!! Please following the format: \n"
+                    + "      event XXX /at DD/MM/YYYY HHMM");
         }
         int year = Integer.parseInt(ss[3].split(" ")[0]);
         int month = Integer.parseInt(ss[2]);
         int day = Integer.parseInt(ss[1].substring(3));
+        String[] time = ss[3].split(" ");
+        if (time.length == 1 || time[1].length() != 4) {
+            throw new DukeException("      OOPS!!! Please enter the time in correct format: HHMM");
+        }
         int hour = Integer.parseInt(ss[3].split(" ")[1].substring(0, 2));
         int minute = Integer.parseInt(ss[3].split(" ")[1].substring(2));
         Event task = new Event(ss[0].substring(6), LocalDateTime.of(year, month, day, hour, minute));
-        assert task != null;
-        System.out.println(task.getDescription());
         data.add(task);
         res = ui.printTask(data, task);
         storage.writeFile(data);
@@ -198,13 +206,13 @@ public class TaskList {
      * Finds all the tasks that contains the keyword.
      * @param input the input from the user.
      * @param ui user interaction object.
-     * @return String result for GUI
+     * @return String result for GUI.
      */
     public String find(String input, Ui ui) {
         String res;
         String keyword = input.substring(5);
         List<Task> filteredData = new ArrayList<>();
-        for(Task task : data) {
+        for (Task task : data) {
             findMatch(task, filteredData, keyword);
         }
         res = ui.printFind(filteredData);
@@ -218,7 +226,7 @@ public class TaskList {
      * @param keyword is the searching keyword.
      */
     private void findMatch(Task task, List<Task> filteredData, String keyword) {
-        if(task.getDescription().contains(keyword)) {
+        if (task.getDescription().contains(keyword)) {
             filteredData.add(task);
         }
     }

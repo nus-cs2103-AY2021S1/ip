@@ -1,4 +1,4 @@
-package Duke;
+package duke;
 
 import java.util.List;
 
@@ -115,6 +115,5 @@ public class Ui {
         }
         res += line + "\n";
         return res;
-
     }
 }

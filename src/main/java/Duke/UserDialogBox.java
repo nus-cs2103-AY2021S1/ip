@@ -1,18 +1,13 @@
-package Duke;
+package duke;
 
 import java.io.IOException;
-import java.util.Collections;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
+import javafx.scene.layout.HBox;
 
 /**
  * An example of a custom control using FXML.
@@ -39,6 +34,12 @@ public class UserDialogBox extends HBox {
         displayPicture.setImage(img);
     }
 
+    /**
+     * Gets the dialog of User.
+     * @param text the text of the dialog.
+     * @param img the image of User.
+     * @return a dialog box containing the text and the image of User.
+     */
     public static UserDialogBox getUserDialog(String text, Image img) {
         UserDialogBox db = new UserDialogBox(text, img);
         return db;

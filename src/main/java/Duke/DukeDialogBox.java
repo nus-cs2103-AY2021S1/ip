@@ -1,4 +1,4 @@
-package Duke;
+package duke;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -12,7 +12,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
+import javafx.scene.layout.HBox;
 
 /**
  * An example of a custom control using FXML.
@@ -49,7 +49,12 @@ public class DukeDialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
-
+    /**
+     * Gets the dialog of Duke.
+     * @param text the text of the dialog.
+     * @param img the image of Duke.
+     * @return a dialog box containing the text and the image of Duke.
+     */
     public static DukeDialogBox getDukeDialog(String text, Image img) {
         var db = new DukeDialogBox(text, img);
         db.flip();

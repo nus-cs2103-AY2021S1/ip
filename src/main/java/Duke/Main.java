@@ -1,10 +1,11 @@
-package Duke;
+package duke;
 
 import java.io.IOException;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -14,7 +15,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke("./log.txt");
+    private Duke duke = new Duke("src/main/java/duke/log.txt");
 
     @Override
     public void start(Stage stage) {
@@ -23,6 +24,7 @@ public class Main extends Application {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             stage.setTitle("Duke");
+            stage.getIcons().add(new Image(this.getClass().getResourceAsStream("/images/icon.png")));
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);

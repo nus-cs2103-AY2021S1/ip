@@ -9,6 +9,13 @@ repositories {
     mavenCentral()
 }
 
+mainClassName = 'duke.Launcher'
+jar {
+    manifest {
+        attributes "Main-Class": "$mainClassName"
+    }
+}
+
 dependencies {
     implementation 'junit:junit:4.12'
     implementation 'junit:junit:4.12'
@@ -44,7 +51,7 @@ test {
 }
 
 application {
-    mainClassName = "Duke"
+    mainClassName = "duke.Launcher"
 }
 
 shadowJar {
@@ -53,7 +60,7 @@ shadowJar {
 }
 
 checkstyle {
-    toolVersion = '8.23'
+    toolVersion = '8.29'
 }
 
 run{

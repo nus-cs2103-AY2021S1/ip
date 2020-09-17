@@ -1,4 +1,4 @@
-package Duke;
+package duke;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -26,6 +26,9 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Duke.png"));
 
+    /**
+     * initializes main window.
+     */
     @FXML
     public void initialize() {
         String line = "    ____________________________________________________________\n";
@@ -36,6 +39,10 @@ public class MainWindow extends AnchorPane {
         );
     }
 
+    /**
+     * Sets a Duke object.
+     * @param d Duke object.
+     */
     public void setDuke(Duke d) {
         duke = d;
     }
@@ -52,7 +59,7 @@ public class MainWindow extends AnchorPane {
                 UserDialogBox.getUserDialog(input, userImage),
                 DukeDialogBox.getDukeDialog(response, dukeImage)
         );
-        if(input.equals(("bye"))) {
+        if (input.equals(("bye"))) {
             System.exit(0);
         }
         userInput.clear();

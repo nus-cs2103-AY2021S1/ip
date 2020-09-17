@@ -7,4 +7,5 @@
 <suppressions>
   <suppress checks="JavadocType" files=".*Test\.java"/>
   <suppress checks="MissingJavadocMethodCheck" files=".*Test\.java"/>
+  <suppress checks="CustomImportOrder" files=".*Test\.java"/>
 </suppressions>
