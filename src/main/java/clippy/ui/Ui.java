@@ -16,6 +16,7 @@ public class Ui {
     private final static String MSG_UPDATED_TASK = "Ok! I have updated the task as follows:\n";
     private final static String MSG_NOW_NO_TASK = "Now you have no tasks in the list.";
     private final static String MSG_NOW_ONE_TASK = "Now you have 1 task in the list.";
+    private final static String MSG_HELP = "Refer to the user guide at https://https://wang-jun-hao.github.io/ip/";
 
 
 
@@ -30,7 +31,11 @@ public class Ui {
     public String showError(Exception e) {
         return e.getMessage();
     }
-    
+
+    public String showHelp() {
+        return MSG_HELP;
+    }
+
     public String showListWithTasksHeader() {
         return MSG_LIST_TASK_HAVE_TASK;
     }

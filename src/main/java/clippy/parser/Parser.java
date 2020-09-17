@@ -20,6 +20,8 @@ public class Parser {
             return new ExitCommand();
         } else if (input.equals("list")) {
             return new ListCommand();
+        } else if (input.equals("help")) {
+                return new HelpCommand();
         } else if (input.startsWith("delete")) {
             int indexOfTaskToDelete = Integer.parseInt(input.substring(7));
             return new DeleteCommand(indexOfTaskToDelete);
