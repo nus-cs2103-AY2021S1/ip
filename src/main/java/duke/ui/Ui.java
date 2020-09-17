@@ -5,7 +5,7 @@ import java.util.List;
 import duke.task.Task;
 
 public abstract class Ui {
-    protected static final String LINE = "_________________________________________________";
+    protected static final String LINE = "_______________________________________________";
     protected static final String GREETING_MESSAGE = "\n Quack! I am Duck"
             + "\n How can I help you today?\n";
     protected static final String EXIT_MESSAGE = "\n Waddling off now. See you soon! \n";
