@@ -23,8 +23,6 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
     @FXML
     private TextFlow txtF;
-    @FXML
-    private Button loadFileButton;
 
     private Duke duke;
 
@@ -38,25 +36,6 @@ public class MainWindow extends AnchorPane {
         String welcomeMessage = Ui.welcomeGreetings();
         Text text = new Text(welcomeMessage);
         txtF.getChildren().add(text);
-    }
-
-    /**
-     * Checks if user's data file is loaded successfully.
-     */
-    public void checkFileLoaded() {
-        boolean isFileLoaded = duke.getFileLoadedStatus();
-        String fileLoadedStatusMessage;
-
-        if (!isFileLoaded) {
-            fileLoadedStatusMessage = Ui.loadFileErrorMessage();
-
-        } else {
-            fileLoadedStatusMessage = Ui.loadFileSuccessMessage();
-        }
-
-        dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(fileLoadedStatusMessage, mascotImage)
-        );
     }
 
     /**

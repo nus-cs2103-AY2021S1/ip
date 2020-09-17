@@ -5,6 +5,8 @@ import java.time.format.DateTimeFormatter;
  * Represents a Deadline task which is a subclass of Task.
  */
 public class Deadline extends Task {
+    private final static String DATE_FORMAT = "MMM d yyyy";
+
     private LocalDate timeDescription;
     private String formattedTimeDescription;
 
@@ -18,7 +20,7 @@ public class Deadline extends Task {
     public Deadline(String description, LocalDate timeDescription) {
         super(description, Task.DEADLINE_TASK);
         this.timeDescription = timeDescription;
-        this.formattedTimeDescription = this.timeDescription.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        this.formattedTimeDescription = this.timeDescription.format(DateTimeFormatter.ofPattern(DATE_FORMAT));
     }
 
     /**

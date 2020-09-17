@@ -9,6 +9,7 @@ import java.util.List;
  */
 public class TaskList {
     private final String IMPOSSIBLE_DATE = "2000-01-01";
+    private final static String DATE_FORMAT = "MMM d yyyy";
 
     private List<Task> tasks;
 
@@ -85,13 +86,13 @@ public class TaskList {
             if (taskType.equals(Task.EVENT_TASK)) {
                 Event currentEventTask = (Event)currentTask;
                 String formattedTime = currentEventTask.getFormattedTime();
-                DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MMM d yyyy");
+                DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(DATE_FORMAT);
                 taskTime = LocalDate.parse(formattedTime, dateFormatter);
 
             } else if (taskType.equals(Task.DEADLINE_TASK)) {
                 Deadline currentDeadlineTask = (Deadline)currentTask;
                 String formattedTime = currentDeadlineTask.getFormattedTime();
-                DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MMM d yyyy");
+                DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(DATE_FORMAT);
                 taskTime = LocalDate.parse(formattedTime, dateFormatter);
 
             } else {

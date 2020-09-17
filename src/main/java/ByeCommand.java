@@ -1,6 +1,8 @@
 import java.util.concurrent.TimeUnit;
 
 public class ByeCommand extends Command {
+    private final static int TIMEOUT = 2;
+
     public ByeCommand() {
         super("See you again!");
     }
@@ -8,7 +10,7 @@ public class ByeCommand extends Command {
     public void closeProgram() {
         Thread t1 = new Thread(() -> {
             try {
-                TimeUnit.SECONDS.sleep(2);
+                TimeUnit.SECONDS.sleep(TIMEOUT);
                 MainWindow.closeWindow();
 
             } catch (InterruptedException ie) {

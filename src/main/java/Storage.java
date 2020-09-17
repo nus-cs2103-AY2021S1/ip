@@ -11,7 +11,6 @@ import java.util.Scanner;
  * For reading and writing of the specified file.
  */
 public class Storage {
-
     private static final char TICK = '\u2713';
     private static final char CROSS = '\u2718';
     private static final char CONVERTED_TICK = '1';
