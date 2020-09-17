@@ -27,9 +27,9 @@ public class Storage {
      * Saves the TaskList to the object path
      * @param taskList
      */
-    public void save(TaskList taskList) {
-        File saveFile = savePath.toFile();
+    public void save(TaskList taskList) throws DukeException {
         try {
+            File saveFile = savePath.toFile();
             if (!saveFile.exists()) {
                 saveFile.getParentFile().mkdirs();
                 saveFile.createNewFile();
@@ -40,8 +40,8 @@ public class Storage {
                 writer.append(task.toSaveFormat() + "\n");
             }
             writer.close();
-        } catch (IOException ioe) {
-            System.out.println("Couldn't save to file :(");
+        } catch (IOException | UnsupportedOperationException ex) {
+            throw new DukeException("Couldn't save to file :(");
         }
     }
 
@@ -49,7 +49,7 @@ public class Storage {
      * Loads the Task List from the file savePath.
      * @return a task list with the tasks loaded from the file
      */
-    public List<Task> load() {
+    public List<Task> load() throws DukeException {
         List<Task> taskList = new ArrayList<>();
         if (!savePath.toFile().exists()) {
             return taskList;
@@ -73,10 +73,13 @@ public class Storage {
                 }
             }));
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            throw new DukeException("Unable to load file from tasks!");
         }
         return taskList;
-
     }
 
+    @Override
+    public String toString() {
+        return savePath.getFileName().toString();
+    }
 }

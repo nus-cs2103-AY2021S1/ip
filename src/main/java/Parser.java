@@ -1,3 +1,5 @@
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -19,8 +21,8 @@ public class Parser {
 
     /**
      * Gets the task index of a task list using a command, something like "{command} {number}"
-     * @param commands
-     * @param taskList
+     * @param commands get command
+     * @param taskList list of tasks
      * @return a number related to the task list
      * @throws DukeException
      */
@@ -44,12 +46,29 @@ public class Parser {
 
     /**
      * Checks if the add command is valid, throws a duke exception if it is not
-     * @param commands
+     * @param commands command when adding task
      * @throws DukeException
      */
     public static void checkValidAddCommand(String[] commands) throws DukeException {
         if (commands.length < MAX_COMMAND_LENGTH) {
             throw new DukeException("The description of a " + commands[0] + " cannot be empty.");
+        }
+    }
+
+    /**
+     * Checks if the save file is valid, throws a duke exception if it is not
+     * @param commands command when saving file
+     * @throws DukeException
+     */
+    public static void checkValidSaveFile(String[] commands) throws DukeException {
+        if (commands.length < MAX_COMMAND_LENGTH) {
+            throw new DukeException("The filename cannot be blank!");
+        }
+        File f = new File(commands[1] + ".txt");
+        try {
+            f.getCanonicalPath();
+        } catch (IOException e) {
+            throw new DukeException("The filename \"" + commands[1] + "\" is invalid!");
         }
     }
 }

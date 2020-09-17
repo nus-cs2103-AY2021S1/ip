@@ -3,8 +3,8 @@
  * It extends the parent class Task and has a LocalDate at to represent the specified date
  */
 public class Event extends Task {
-    private String time;
     private static final int MAX_COMMAND_LENGTH = 2;
+    private String time;
     Event(String name, String time) {
         this(name, time, false);
     }
