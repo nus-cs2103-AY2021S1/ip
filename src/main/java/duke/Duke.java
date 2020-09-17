@@ -148,4 +148,17 @@ public class Duke {
             return e.getImageType();
         }
     }
+
+    public CommandType getCommandType(String input) {
+        try {
+            Command command = Parser.parse(input);
+            return command.getCommandType();
+        } catch (DukeException e) {
+            return CommandType.RESET;
+        }
+    }
+
+    public boolean isExitCommand(CommandType commandType) {
+        return commandType.equals(CommandType.EXIT);
+    }
 }
