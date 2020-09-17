@@ -1,0 +1,5 @@
+T,0,study for midterms
+D,0,CS2103T ip,2020-09-18T23:59
+E,0,Meet prof Damith,2020-09-23T14:00
+T,1,get groceries
+T,1,exercise
