@@ -248,5 +248,10 @@ Example of usage:
 `bye`
 
 Expected outcome:
+```
+----------------------------
+Bye! Hope to see you again soon! 
+----------------------------
+```
 
-Window closes and program exits. 
+Window closes and program exits after the message is shown. 

@@ -54,23 +54,11 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
+        System.out.println(response);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
-        if (response.contains("Bye! Hope to see you again soon!")) {
-            disableInput();
-        }
     }
-
-    /**
-     * Disables text field input from user.
-     */
-    public void disableInput() {
-        sendButton.setDisable(true);
-        userInput.setDisable(true);
-    }
-
-
 }

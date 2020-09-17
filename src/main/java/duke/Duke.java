@@ -50,7 +50,15 @@ public class Duke {
             output = command.execute(ui, tasks, storage);
 
             if (command.isExit()) {
-                System.exit(0);
+                Thread thread = new Thread(() -> {
+                    try {
+                        Thread.sleep(1500);
+                        System.exit(0);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                });
+                thread.start();
             }
         } catch (DukeException e) {
             output = ui.printError(e.getMessage());
