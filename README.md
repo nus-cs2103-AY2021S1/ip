@@ -4,7 +4,7 @@ This is a greenfield Java project built for CS2103 iP. It is a chatbot that stor
 The project centralises around the theme of Sanrio character Gudetama. The bot is called GuDukeTama to pay homage to the Java mascot _Duke_.
 
 ## Features
-Refer to User Guide: (To be updated)
+Refer to User Guide: https://vielheim.github.io/ip/
 
 ## Setup
 
