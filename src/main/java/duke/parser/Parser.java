@@ -2,6 +2,7 @@ package duke.parser;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 import duke.DukeException;
 import duke.exec.AddCommand;
@@ -47,7 +48,7 @@ public class Parser {
     public static Executable parse(String input) throws DukeException {
         String[] tokens = input.split("\\s+", 2); // the command and remaining details
         String command = tokens[0];
-        String remaining = tokens.length == 1 ? null : tokens[1].trim();
+        String remaining = tokens.length == 1 ? null : tokens[1].strip();
 
         String[] taskItems;
         String desc;
@@ -57,7 +58,7 @@ public class Parser {
         switch (command) {
         case LIST_COMMAND:
             if (remaining != null) {
-                throw DukeException.unspecificCommand();
+                throw DukeException.singleWordCommand();
             }
             return new ListCommand();
         case TODO_COMMAND:
@@ -68,37 +69,45 @@ public class Parser {
             return new AddCommand(task);
         case DEADLINE_COMMAND:
             if (remaining == null) {
-                throw DukeException.emptyDescription(); // empty description
+                throw DukeException.emptyTimeAndDescription(); // empty time and description
             }
 
             taskItems = remaining.split(" /by ");
-            desc = taskItems[0].trim();
+            desc = taskItems[0].strip();
 
             if (taskItems.length == 1) {
-                throw DukeException.emptyTimeDescription(); // empty time
+                throw DukeException.emptyTimeOrDescription(); // empty time or description
             }
 
-            LocalDateTime deadline = LocalDateTime.parse(taskItems[1].trim(), DATE_TIME_PARSE_FORMAT);
-            task = new Deadline(desc, deadline);
-            return new AddCommand(task);
+            try {
+                LocalDateTime deadline = LocalDateTime.parse(taskItems[1].strip(), DATE_TIME_PARSE_FORMAT);
+                task = new Deadline(desc, deadline);
+                return new AddCommand(task);
+            } catch (DateTimeParseException dateExcept) {
+                throw DukeException.invalidDateFormat();
+            }
         case EVENT_COMMAND:
             if (remaining == null) {
-                throw DukeException.emptyDescription(); // empty description
+                throw DukeException.emptyTimeAndDescription(); // empty time and description
             }
 
             taskItems = remaining.split(" /at ");
-            desc = taskItems[0].trim();
+            desc = taskItems[0].strip();
 
             if (taskItems.length == 1) {
-                throw DukeException.emptyTimeDescription(); // empty time
+                throw DukeException.emptyTimeOrDescription(); // empty time or description
             }
 
-            LocalDateTime eventDate = LocalDateTime.parse(taskItems[1].trim(), DATE_TIME_PARSE_FORMAT);
-            task = new Event(desc, eventDate);
-            return new AddCommand(task);
+            try {
+                LocalDateTime eventDate = LocalDateTime.parse(taskItems[1].strip(), DATE_TIME_PARSE_FORMAT);
+                task = new Event(desc, eventDate);
+                return new AddCommand(task);
+            } catch (DateTimeParseException dateExcept) {
+                throw DukeException.invalidDateFormat();
+            }
         case DONE_COMMAND:
             if (remaining == null) {
-                throw DukeException.invalidNumber();
+                throw DukeException.missingParameters();
             }
             try {
                 index = Integer.parseInt(remaining) - 1;
@@ -108,7 +117,7 @@ public class Parser {
             }
         case DELETE_COMMAND:
             if (remaining == null) {
-                throw DukeException.invalidNumber();
+                throw DukeException.missingParameters();
             }
             try {
                 index = Integer.parseInt(remaining) - 1;
@@ -124,12 +133,12 @@ public class Parser {
             return new FindCommand(desc);
         case SORT_COMMAND:
             if (remaining != null) {
-                throw DukeException.unspecificCommand();
+                throw DukeException.singleWordCommand();
             }
             return new SortCommand();
         case EXIT_COMMAND:
             if (remaining != null) {
-                throw DukeException.unspecificCommand();
+                throw DukeException.singleWordCommand();
             }
             return new ExitCommand();
         default:

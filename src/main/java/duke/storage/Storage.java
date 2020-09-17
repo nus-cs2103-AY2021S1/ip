@@ -61,7 +61,7 @@ public class Storage {
 
             // start reading and parsing
             while (reader.ready()) {
-                String current = reader.readLine().trim();
+                String current = reader.readLine().strip();
                 String[] tokens = current.split("\\s\\|\\s", 3);
                 String type = tokens[0];
                 boolean isDone = Integer.parseInt(tokens[1]) == 1;

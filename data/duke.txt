@@ -1,5 +1,4 @@
-T | 1 | return book
-E | 1 | study session | 02-05-2020 6:00PM
 T | 1 | buy bread
 E | 0 | midterm exam | 31-05-2020 12:00PM
+T | 1 | return book
 D | 0 | submit draft | 17-09-2020 2:00PM

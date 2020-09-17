@@ -11,20 +11,24 @@ public class DukeException extends Exception {
     // message constants
     private static final String EMPTY_DESCRIPTION = "OOPS!!! The description of "
             + "a task cannot be empty";
-    private static final String EMPTY_TIME = "OOPS!!! The description of "
-            + "a task with attached time cannot be empty";
+    private static final String EMPTY_TIME_AND_DESC = "OOPS!!! Please check that you have used"
+            + "\n" + "the correct tag and input" + "\n" + "both the description and time";
+    private static final String EMPTY_TIME_OR_DESC = "OOPS!!! Please check that you have not"
+            + "\n" + "missed out on either the description" + "\n" + "or the time";
 
     private static final String ALREADY_DONE_FRONT = "The task \'";
     private static final String ALREADY_DONE_END = "\' is already marked as done.";
 
-    private static final String INVALID_NUMBER = "Please specify a valid item number";
-    private static final String INVALID_INPUT = "Please input a number for this command";
+    private static final String INVALID_NUMBER = "Please give a valid item index.";
+    private static final String INVALID_INPUT = "Please ensure that you have given a number.";
+    private static final String INVALID_DATETIME = "Please input a correct date or give your"
+            + "\n" + "dates in the format yyyy-mm-dd HHmm";
 
-    private static final String UNSPECIFIC_COMMAND = "This is a single word command. Please try again";
-    private static final String MISSING_PARAMETERS = "This command requires more parameters. Please try again";
+    private static final String SINGLE_WORD_COMMAND = "This is a single word command.";
+    private static final String MISSING_PARAMETERS = "This command requires more parameters.";
 
     private static final String UNKNOWN_OPERATION = "OOPS!!! I'm sorry, "
-            + "but I don't know what that means :-(";
+            + "\n" + "but I don't know what that means :(";
 
     /**
      * Generic message DukeException constructor, used for
@@ -60,13 +64,24 @@ public class DukeException extends Exception {
     }
 
     /**
-     * creates an exception stating that the time description of a task
+     * creates an exception stating that the time and description of a task
+     * with time attached (event or deadline) that is to be created is taken
+     * to be empty, because of missing details or wrong tag
+     *
+     * @return exception indicating the time description is empty
+     */
+    public static DukeException emptyTimeAndDescription() {
+        return new DukeException(EMPTY_TIME_AND_DESC);
+    }
+
+    /**
+     * creates an exception stating that the time or description of a task
      * with time attached (event or deadline) that is to be created is empty
      *
      * @return exception indicating the time description is empty
      */
-    public static DukeException emptyTimeDescription() {
-        return new DukeException(EMPTY_TIME);
+    public static DukeException emptyTimeOrDescription() {
+        return new DukeException(EMPTY_TIME_OR_DESC);
     }
 
     /**
@@ -100,6 +115,17 @@ public class DukeException extends Exception {
     }
 
     /**
+     * creates an exception stating that the string passed
+     * as date to commands creating new tasks with associated time
+     * is in the wrong format
+     *
+     * @return exception indicating invalid date format
+     */
+    public static DukeException invalidDateFormat() {
+        return new DukeException(INVALID_DATETIME);
+    }
+
+    /**
      * creates an exception to state that the command
      * given does not require any additional arguments
      * as it is a single word command
@@ -107,8 +133,8 @@ public class DukeException extends Exception {
      * @return exception indicating command
      * is unspecific with unneeded additional details
      */
-    public static DukeException unspecificCommand() {
-        return new DukeException(UNSPECIFIC_COMMAND);
+    public static DukeException singleWordCommand() {
+        return new DukeException(SINGLE_WORD_COMMAND);
     }
 
     /**

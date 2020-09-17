@@ -53,7 +53,7 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
-        String input = userInput.getText().trim();
+        String input = userInput.getText().strip();
         assert !input.isEmpty() : "Input is empty"; // user input should not be empty
         String output;
 
