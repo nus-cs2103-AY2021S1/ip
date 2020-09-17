@@ -15,5 +15,7 @@ bin/
 
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT
+
 src/main/java/META-INF/MANIFEST.MF
+
 src/main/out/artifacts/ip_jar/ip.jar

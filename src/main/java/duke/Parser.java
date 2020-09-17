@@ -5,6 +5,12 @@ import java.util.ArrayList;
 
 public class Parser {
 
+    /**
+     * Parse a line from storage file and generate the corresponding task object.
+     * @param taskString String retrieved from storage file.
+     * @return The task item that was recorded.
+     * @throws DukeException If the String is of invalid format.
+     */
     static Task parseFileItem (String taskString) throws DukeException{
         if (taskString.startsWith("[T]")) {
             String name = taskString.substring(8);
@@ -37,6 +43,15 @@ public class Parser {
         }
     }
 
+
+    /**
+     * Parse user's input.
+     * Store the task created by the user into the storage file if applicable.
+     * @param userMessage User input.
+     * @param storage Storage item that contains information of data storage file.
+     * @throws DukeException If user input is of invalid format.
+     * @throws IOException For error with files.
+     */
     static void parseInput (String userMessage, Storage storage) throws DukeException, IOException {
         ArrayList<Task> itemList = storage.load();
 
