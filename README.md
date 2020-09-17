@@ -54,7 +54,7 @@ Example:
 
 * `event Event 1 /on 20-12-2000 1200` : Adds a Task of type Event with name "Event" on the 20 December 2000 at 12pm
 
-### Listing all tasks: `List`
+### Listing all tasks: `list`
 
 Shows a list of all tasks in Spongebot Patty Flipper.
 
@@ -76,7 +76,7 @@ Example:
 
 * `done 1` : Marks the 1st task in the list as done.
 
-### Deleting a task: `Delete`
+### Deleting a task: `delete`
 
 Deletes a specified task from Spongebot Patty Flipper.
 
