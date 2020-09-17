@@ -33,4 +33,11 @@ public class AddTaskCommand extends Command {
             return fee.getMessage();
         }
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return this == other
+                || (other instanceof AddTaskCommand
+                && toAdd.equals(((AddTaskCommand) other).toAdd));
+    }
 }

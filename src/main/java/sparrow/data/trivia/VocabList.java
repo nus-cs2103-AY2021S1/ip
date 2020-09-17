@@ -17,4 +17,8 @@ public class VocabList {
     public List<Vocabulary> getVocabList() {
         return vocabList;
     }
+
+    public void addVocab(Vocabulary toAdd) {
+        this.vocabList.add(toAdd);
+    }
 }

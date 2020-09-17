@@ -28,4 +28,12 @@ public class Deadline extends Task {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
         return String.format("[D]%s (by: %s)", super.toString(), this.dueDate.format(formatter));
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return this == other
+                || (other instanceof Deadline
+                && description.equals(((Deadline) other).description)
+                && dueDate.equals(((Deadline) other).dueDate));
+    }
 }

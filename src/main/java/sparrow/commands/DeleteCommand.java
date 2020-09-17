@@ -1,6 +1,7 @@
 package sparrow.commands;
 
 import sparrow.data.exceptions.FileErrorException;
+import sparrow.data.exceptions.SparrowException;
 import sparrow.data.task.Task;
 import sparrow.data.task.TaskList;
 import sparrow.data.trivia.VocabList;
@@ -25,7 +26,8 @@ public class DeleteCommand extends Command {
             storage.saveTaskListToFile(tasks);
             return String.format(MESSAGE_DELETE_TASK_SUCCESS, deletedTask);
         } catch (IndexOutOfBoundsException e) {
-            return "INDEX OUT OF BOUNDS";
+            return String.format(SparrowException.STANDARD_EXCEPTION_MESSAGE,
+                    "No task found at index specified.");
         } catch (FileErrorException fee) {
             return fee.getMessage();
         }

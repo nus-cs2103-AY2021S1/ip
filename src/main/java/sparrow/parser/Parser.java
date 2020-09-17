@@ -19,6 +19,7 @@ import sparrow.commands.HelpCommand;
 import sparrow.commands.IncorrectCommand;
 import sparrow.commands.ListCommand;
 import sparrow.commands.VocabCommand;
+import sparrow.data.exceptions.IncorrectCommandException;
 import sparrow.data.task.Deadline;
 import sparrow.data.task.Event;
 import sparrow.data.task.Todo;
@@ -55,15 +56,13 @@ public class Parser {
      * @param userInput Text entered by user.
      * @return Command to be executed.
      */
-    public Command parseCommand(String userInput) {
-        assert !userInput.isBlank() : "No input entered"; // do I need this assertion?
+    public Command parseCommand(String userInput) throws IncorrectCommandException {
         //@@author jonfoocy-reused
         //Reused from https://github.com/se-edu/addressbook-level2 with modifications,
         //including idea of preparing Commands.
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
-            // doesn't seem to enter this block
-            return new IncorrectCommand("Unknown Command");
+            throw new IncorrectCommandException("Command cannot be empty");
         }
 
         final String commandWord = matcher.group("commandWord");
@@ -105,14 +104,12 @@ public class Parser {
             return new ExitCommand();
 
         default:
-            //todo
             return new HelpCommand();
         }
         //@@author
     }
 
     private Command prepareAddTodo(String args) {
-        assert !args.isEmpty();
         final Matcher matcher = TODO_FORMAT.matcher(args.trim());
         if (!matcher.matches()) {
             return new IncorrectCommand("Description of a Todo can't be empty.");
@@ -123,7 +120,6 @@ public class Parser {
 
     // TODO: trim whitespace from end of deadline description
     private Command prepareAddDeadline(String args) {
-        assert !args.isEmpty();
         final Matcher matcher = DEADLINE_FORMAT.matcher((args.trim()));
         if (!matcher.matches()) {
             return new IncorrectCommand("Wrong deadline format.");
@@ -139,7 +135,6 @@ public class Parser {
 
     // TODO: trim whitespace from end of event description
     private Command prepareAddEvent(String args) {
-        assert !args.isEmpty();
         final Matcher matcher = EVENT_FORMAT.matcher((args.trim()));
         if (!matcher.matches()) {
             return new IncorrectCommand("Wrong event format.");
@@ -154,7 +149,6 @@ public class Parser {
     }
 
     private Command prepareDelete(String args) {
-        assert !args.isEmpty();
         try {
             int targetIndex = Integer.parseInt(args.trim());
             return new DeleteCommand(targetIndex);
@@ -164,7 +158,6 @@ public class Parser {
     }
 
     private Command prepareDone(String args) {
-        assert !args.isEmpty();
         try {
             int targetIndex = Integer.parseInt(args.trim());
             return new DoneCommand(targetIndex);
@@ -175,7 +168,6 @@ public class Parser {
 
     // TODO: add functionality to search by >1 keyword
     private Command prepareFind(String args) {
-        assert !args.isEmpty();
         final Matcher matcher = KEYWORDS_ARGS_FORMAT.matcher(args.trim());
         if (!matcher.matches()) {
             return new IncorrectCommand("Please pass a keyword to search for.");
@@ -184,10 +176,8 @@ public class Parser {
     }
 
     private Command prepareFilter(String args) {
-        assert !args.isEmpty();
         final Matcher matcher = FILTER_ARGS_FORMAT.matcher(args.trim());
         if (!matcher.matches()) {
-            System.out.println("Wrong filter format");
             return new IncorrectCommand("Please pass a proper date to filter by.");
         }
         try {
@@ -213,10 +203,8 @@ public class Parser {
         }
 
         if (matcher.group("definition") == null) {
-            System.out.println("no definition provided");
             return new VocabCommand(matcher.group("word"));
         } else {
-            System.out.println("definition provided");
             return new VocabCommand(matcher.group("word"), matcher.group("definition"));
         }
     }

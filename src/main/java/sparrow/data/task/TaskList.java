@@ -1,7 +1,6 @@
 package sparrow.data.task;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,13 +32,13 @@ public class TaskList {
     public void addTask(Task toAdd) {
         tasks.add(toAdd);
     }
+
     /**
      * Returns a task list matching the inputted date filter.
-     * @param dateFilter User's command and date to filter by.
+     * @param dateFilter User's date to filter by.
      * @return Filtered list based on input.
-     * @throws DateTimeParseException if date passed cannot be converted to a LocalDate object.
      */
-    public ArrayList<Task> filterList(LocalDate dateFilter) throws DateTimeParseException {
+    public ArrayList<Task> filterTasks(LocalDate dateFilter) {
         ArrayList<Task> filteredList = new ArrayList<>();
 
         for (Task task : tasks) {
