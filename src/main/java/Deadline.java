@@ -29,7 +29,7 @@ public class Deadline extends Task {
         if (keywords.length < MAX_COMMAND_LENGTH) {
             throw new DukeException("☹ OOPS!!! Add a date using \" /by YYYY-MM-DD\".");
         }
-        assert keywords.length == 2: "description length should be 2";
+        assert keywords.length == 2 : "description length should be 2";
         return new Deadline(keywords[0], keywords[1]);
     }
 
