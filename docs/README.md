@@ -1,7 +1,7 @@
 # DukeBot User Guide 
 
 ## User Interface
-![UI](docs/Ui.png)
+![UI](Ui.png)
 
 ## Features 
 
