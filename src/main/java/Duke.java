@@ -19,7 +19,7 @@ import java.util.Scanner;
  * Represents a robot who can help the user to make todo list.
  * A <code>Duke</code> object is an instance of such robots.
  */
-public class Duke extends Application{
+public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
@@ -81,86 +81,8 @@ public class Duke extends Application{
         new Duke("./command.txt").run();
     }
 
-    @Override
-    public void start(Stage stage) {
-        stage.setTitle("Duke");
-        stage.setResizable(false);
-        stage.setMinHeight(600.0);
-        stage.setMinWidth(400.0);
 
-        scrollPane = new ScrollPane();
-        dialogContainer = new VBox();
-        scrollPane.setContent(dialogContainer);
-
-        userInput = new TextField();
-        sendButton = new Button("send");
-
-        AnchorPane mainLayout = new AnchorPane();
-        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
-
-        mainLayout.setPrefSize(500.0, 800.0);
-
-        scrollPane.setPrefSize(490, 750);
-        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-
-        scrollPane.setVvalue(1.0);
-        scrollPane.setFitToWidth(true);
-
-        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
-
-        userInput.setPrefWidth(425.0);
-
-        sendButton.setPrefWidth(68.0);
-
-        AnchorPane.setTopAnchor(scrollPane, 1.0);
-
-        AnchorPane.setBottomAnchor(sendButton, 1.0);
-        AnchorPane.setRightAnchor(sendButton, 1.0);
-
-        AnchorPane.setLeftAnchor(userInput, 1.0);
-        AnchorPane.setBottomAnchor(userInput, 1.0);
-
-        sendButton.setOnMouseClicked((event -> {
-            handleUserInput();
-        }));
-
-        userInput.setOnAction((event -> {
-            handleUserInput();
-        }));
-
-        dialogContainer.heightProperty().
-                addListener((observable -> scrollPane.setVvalue(1.0)));
-
-        scene = new Scene(mainLayout);
-
-        Label greet = new Label(ui.greet());
-
-        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(greet, new ImageView(duke)));
-
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    private Label getDialogLabel(String text) {
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
-    }
-
-    private void handleUserInput() {
-        Label userText = new Label("ME:   " + userInput.getText() + "   ");
-        Label dukeText = new Label(getResponse(userInput.getText()));
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
-        );
-        userInput.clear();
-    }
-
-    private String getResponse(String input) {
-        //return "Duke heard: " + input;
+    public String getResponse(String input) {
         Parser parser = new Parser(tasks, true);
         return parser.handleCommand(input);
     }

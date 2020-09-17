@@ -1,6 +1,4 @@
-T|0| read book
 D|1| return |2020-10-09
-T|1| return book 
 D|0| buy book |2030-09-09
-T|1| sleep
 D|0| play |2020-09-08
+D|0| read this |2020-09-08

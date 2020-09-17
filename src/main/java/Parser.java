@@ -84,93 +84,6 @@ public class Parser {
     }
 
     /**
-     * Parses the user inputs and call corresponding methods to handle the instructions
-     */
-    public void handleCommand() {
-        while (true) {
-            String command = sc.next();
-            switch (command) {
-                case "bye":
-                    handleBye();
-                    return;
-
-                case "list":
-                    handleList();
-                    break;
-
-                case "done":
-                    try {
-                        handleDone();
-                    } catch (DukeException e) {
-                        System.out.println("    ____________________________________________________________");
-                        System.out.println("     " + e.getMessage());
-                        System.out.println("    ____________________________________________________________\n");
-                    }
-                    break;
-
-                case "delete":
-                    try {
-                        handleDelete();
-                    } catch (DukeException e) {
-                        System.out.println("    ____________________________________________________________");
-                        System.out.println("     " + e.getMessage());
-                        System.out.println("    ____________________________________________________________\n");
-                    }
-                    break;
-
-                case "todo":
-                    try {
-                        handleTodo();
-                    } catch (DukeException e) {
-                        System.out.println("    ____________________________________________________________");
-                        System.out.println("     " + e.getMessage());
-                        System.out.println("    ____________________________________________________________\n");
-                    }
-                    break;
-
-                case "deadline":
-                    try {
-                        handleDeadline();
-                    } catch (DukeException e) {
-                        System.out.println("    ____________________________________________________________");
-                        System.out.println("     " + e.getMessage());
-                        System.out.println("    ____________________________________________________________\n");
-                    }
-                    break;
-
-                case "event":
-                    try {
-                        handleEvent();
-                    } catch (DukeException e) {
-                        System.out.println("    ____________________________________________________________");
-                        System.out.println("     " + e.getMessage());
-                        System.out.println("    ____________________________________________________________\n");
-                    }
-                    break;
-
-                case "find":
-                    try {
-                        handleFind();
-                    } catch (DukeException e) {
-                        System.out.println("    ____________________________________________________________");
-                        System.out.println("     " + e.getMessage());
-                        System.out.println("    ____________________________________________________________\n");
-                    }
-                    break;
-
-                default:
-                    try {
-                        handleDefault();
-                    } catch (DukeException e) {
-                        System.out.println("    ____________________________________________________________");
-                        System.out.println("     " + e.getMessage());
-                        System.out.println("    ____________________________________________________________\n");
-                    }
-            }
-        }
-    }
-
-    /**
      * handles instruction "bye"
      */
     public String handleBye() {
@@ -267,7 +180,7 @@ public class Parser {
         output += "     Here are the matching tasks in your list:\n";
         for (int i = 0, count = 1; i < taskList.size(); i++) {
             if (taskList.get(i).description.contains(keyword)) {
-                output += "     " + count + "." + taskList.get(i).getDescription();
+                output += "     " + count + "." + taskList.get(i).getDescription() + "\n";
                 count++;
             }
         }
