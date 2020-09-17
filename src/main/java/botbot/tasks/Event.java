@@ -9,8 +9,8 @@ import botbot.utils.BotbotDateTimeFormatter;
  */
 public class Event extends Task {
     public static final char TYPE_CODE = 'E';
-    public static final String COMMAND_FORMAT = "event <description> /at <D-M-YYYY HHmm> (eg. 17-3-2020 0945 "
-            + "or 3-4-2020 with no time specified)";
+    public static final String COMMAND_FORMAT = "event DESCRIPTION /at DATE (D-M-YYYY) [TIME (HHmm)] (eg. "
+            + "17-3-2020 0945 or 3-4-2020 with no time specified)";
 
     /**
      * Creates an event.

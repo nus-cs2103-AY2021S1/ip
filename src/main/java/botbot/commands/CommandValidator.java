@@ -35,7 +35,7 @@ public class CommandValidator {
 
     private static final String ERROR_MESSAGE_INVALID_FORMAT = "invalid %s format! please follow '%s'!";
     private static final String ERROR_MESSAGE_INVALID_FORMAT_DATETIME = String.format(ERROR_MESSAGE_INVALID_FORMAT,
-            "date-time", "<D-M-YYYY HHmm> (eg. 17-3-2020 0945 or 3-4-2020 with no time specified)");
+            "date-time", "D-M-YYYY [HHmm] (eg. 17-3-2020 0945 or 3-4-2020 with no time specified)");
     private static final String ERROR_MESSAGE_INVALID_FORMAT_DEADLINE = String.format(ERROR_MESSAGE_INVALID_FORMAT,
             "command", Deadline.COMMAND_FORMAT);
     private static final String ERROR_MESSAGE_INVALID_FORMAT_EDIT = String.format(ERROR_MESSAGE_INVALID_FORMAT,
@@ -45,8 +45,8 @@ public class CommandValidator {
 
     private static final Pattern FORMAT_ARG_ADD_DEADLINE = Pattern.compile("(?<description>.*) /by (?<by>.*)");
     private static final Pattern FORMAT_ARG_ADD_EVENT = Pattern.compile("(?<description>.*) /at (?<at>.*)");
-    private static final Pattern FORMAT_ARGS_EDIT = Pattern.compile("(?<id>\\d+)(?<description>.+?)?"
-        + "(\\h+/at\\h*(?<at>.*?))?(\\h+/by\\h*(?<by>.*))?");
+    private static final Pattern FORMAT_ARGS_EDIT = Pattern.compile("(?<id>\\d+)(\\h+/d\\h+(?<description>.*?))?"
+        + "(\\h+/at\\h+(?<at>.*?))?(\\h+/by\\h+(?<by>.*))?");
 
     /**
      * Attempts to create a DeadlineCommand.

@@ -82,7 +82,7 @@ Example: `delete 3`
 ### Edit a task: `edit`
 Edits a task on the task list.
 
-Format: `edit INDEX [DESCRIPTION] [/at AT_DATE [AT_TIME]] [/by BY_DATE [BY_TIME]]`
+Format: `edit INDEX [/d DESCRIPTION] [/at DATE_OF_EVENT [TIME_OF_EVENT]] [/by DATE_OF_DEADLINE [TIME_OF_DEADLINE]]`
 - Edits the task at the specified `INDEX` on the task list.
 - Specifying a field will overwrite the existing value of that field.
 - At least one of the optional fields must be provided.
@@ -93,7 +93,7 @@ Format: `edit INDEX [DESCRIPTION] [/at AT_DATE [AT_TIME]] [/by BY_DATE [BY_TIME]
 - `AT_TIME` and `BY_TIME` must follow the `HHMM` format.
 
 Examples:
-- `edit 2 call tammy /at 16-9-2020 0000` edits the description and time of the 2nd task on the task 
+- `edit 2 /d call tammy /at 16-9-2020 0000` edits the description and time of the 2nd task on the task 
 list to `call tammy` and `16-9-2020 0000` respectively.
 - `edit 5 /by 31-12-2020` edits the deadline of the 5th task on the task list to `31-12-2020`.
 
@@ -143,7 +143,7 @@ Action | Format
 ------ | ------
 Add | `deadline DESCRIPTION /by DATE [TIME]`<br /><br>`event DESCRIPTION /at DATE [TIME]`<br /><br>`todo DESCRIPTION`
 Delete | `delete INDEX`
-Edit | `edit INDEX [DESCRIPTION] [/at AT_DATE [AT_TIME]] [/by BY_DATE [BY_TIME]]`
+Edit | `edit INDEX [/d DESCRIPTION] [/at AT_DATE [AT_TIME]] [/by BY_DATE [BY_TIME]]`
 Exit | `bye`
 Mark as done | `done INDEX`
 Search | `find KEYPHRASE`

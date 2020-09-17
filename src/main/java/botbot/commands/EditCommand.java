@@ -9,8 +9,9 @@ import botbot.ui.Ui;
 import botbot.utils.Storage;
 
 public class EditCommand extends Command {
-    public static final String COMMAND_FORMAT = "edit INDEX [/desc NEW_DESCRIPTION] [/at NEW_TIME_OF_EVENT] "
-            + "[/by NEW_DEADLINE_OF_TASK] (at least one of /desc, /at and /by must be provided)";
+    public static final String COMMAND_FORMAT = "edit INDEX [/d DESCRIPTION] [/at DATE_OF_EVENT "
+            + "[TIME_OF_EVENT]] [/by DATE_OF_DEADLINE [TIME_OF_DEADLINE]] (at least one of /d, /at or /by "
+            + "must be provided)";
     public static final String COMMAND_KEYWORD = "edit";
     private final int id;
     private final Optional<String> description;
