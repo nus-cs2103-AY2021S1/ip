@@ -1,5 +1,8 @@
 package duke;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /**
  * An abstract class to be inherited by more specific type of event
  */
@@ -28,6 +31,10 @@ public abstract class Task {
     public String toString() {
         char sign = (isDone ? '✓' : '✗');
         return String.format("[%c] %s", sign, desc);
+    }
+
+    public static String dateToString(LocalDate date) {
+        return DateTimeFormatter.ofPattern("MMM d yyyy").format(date);
     }
 
     /**
