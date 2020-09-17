@@ -1,3 +1,5 @@
+import javafx.application.Platform;
+
 import java.io.IOException;
 
 public class ByeCommand extends Command {
@@ -21,6 +23,16 @@ public class ByeCommand extends Command {
         try {
             s = ui.sayBye();
             storage.writeToFile(list);
+            // to get out of loop and terminate the program
+            Thread thread = new Thread(() -> {
+                try {
+                    Thread.sleep(1500);
+                    Platform.exit();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            });
+            thread.start();
         } catch (IOException E) {
             s = ui.errorWithFile();
         }
