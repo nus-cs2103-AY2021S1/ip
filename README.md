@@ -1,26 +1,125 @@
-# Duke project template
+# Duke Melvin Task Tracker
+Duke Melvin Task Tracker is a desktop app to manage your tasks,
+optimized for use via a Command Line Interface (CLI) while 
+still having the benefits of a Graphical User Interface (GUI). 
+If you can type fast, this app can allow you to manage your tasks
+faster than traditional GUI apps.
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+## Features 
 
-## Setting up in Intellij
+### Feature 1 - Add Task
+### Feature 2 - Mark Task as Done
+### Feature 3 - Delete Task
+### Feature 4 - Find task 
+### Feature 5 - List tasks
+### Feature 6 - Detect duplicate tasks
+## Usage
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+### `todo` - Adds a todo task
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project dialog first)
-1. Set up the correct JDK version, as follows:
-   1. Click `Configure` > `Structure for New Projects` and then `Project Settings` > `Project` > `Project SDK`
-   1. If JDK 11 is listed in the drop down, select it. If it is not, click `New...` and select the directory where you installed JDK 11
-   1. Click `OK`
-1. Import the project into Intellij as follows:
-   1. Click `Open or Import`.
-   1. Select the project directory, and click `OK`
-   1. If there are any further prompts, accept the defaults.
-1. After the importing is complete, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()`. If the setup is correct, you should see something like the below:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+Adds a todo task to the list of tasks.
+
+Example of usage: 
+
+`todo CS2103T quiz`
+
+Expected outcome:
+
+`Got it. I've added this task:`\
+`[T][X] CS2103T quiz`\
+` Now you have 1 tasks in the list`
+
+### `event` - Adds an event task
+
+Adds an event task to the list of tasks. Date must be specified in <b>YYYY-MM-DD</b> or <b>YYYY/MM/DD</b> format.
+
+Example of usage:
+
+`event examinations /at 2020-09-19`
+
+Expected outcome:
+
+`Got it. I've added this task:`\
+`[E][X] examinations [at: SEP 19 2020]`\
+` Now you have 2 tasks in the list`
+
+### `deadline` - Adds a deadline task
+
+Adds a deadline task to the list of tasks. Date must be specified in <b>YYYY-MM-DD</b> or <b>YYYY/MM/DD</b> format.
+
+Example of usage:
+
+`deadline assignment /by 2020-09-19`
+
+Expected outcome:
+
+`Got it. I've added this task:`\
+`[D][✗] assignment [by: SEP 19 2020]`\
+` Now you have 3 tasks in the list`
+
+### `list` - Lists all tasks
+
+Lists all tasks. Each task is given an index starting from 1.
+
+Example of usage:
+
+`list`
+
+Expected outcome:
+
+`Here are the tasks in your list:`\
+`1. [T][✗] CS2103T quiz`\
+`2. [E][✗] examinations [at: SEP 19 2020]`\
+`3. [D][✗] assignment [by: SEP 19 2020]`
+
+### `done` - Mark task as done
+
+Mark a task specified by the index as done.
+
+Example of usage:
+
+`done 1`
+
+Expected outcome:
+
+`Nice I've marked this task as done:`\
+`1. [T][✓] CS2103T quiz`
+
+### `delete` - Delete a task
+
+Deletes a task specified by the index. Index is obtained through `list`.
+
+Example of usage:
+
+`delete 1`
+
+Expected outcome:
+
+`Noted. I've removed this task:`\
+`[T][✓] CS2103T quiz`\
+`Now you have 2 tasks in the list`
+
+### `find` - Find a task
+
+Finds a task specified by the given keyword.
+Example of usage:
+
+`find assignment`
+
+Expected outcome:
+
+`Here are the search results:`\
+`1. [D][✗] assignment [by: SEP 19 2020]`
+
+### - Detect duplicate tasks
+
+Prompts the user when a task that already exists in the list is being added
+This feature is case-insensitive.
+
+Example of usage:
+
+`deadline aSsiGnment /by 2020-09-19`
+
+Expected outcome:
+
+`There appears to be a duplicate task`

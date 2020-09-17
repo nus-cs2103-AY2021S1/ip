@@ -1,4 +1,9 @@
-# User Guide
+# Duke Melvin Task Tracker
+Duke Melvin Task Tracker is a desktop app to manage your tasks,
+optimized for use via a Command Line Interface (CLI) while 
+still having the benefits of a Graphical User Interface (GUI). 
+If you can type fast, this app can allow you to manage your tasks
+faster than traditional GUI apps.
 
 ## Features 
 
@@ -7,6 +12,7 @@
 ### Feature 3 - Delete Task
 ### Feature 4 - Find task 
 ### Feature 5 - List tasks
+### Feature 6 - Detect duplicate tasks
 ## Usage
 
 ### `todo` - Adds a todo task
@@ -34,8 +40,7 @@ Example of usage:
 Expected outcome:
 
 `Got it. I've added this task:`\
-`[E][X] examinations `\
-`[at: SATURDAY, Sep 19 2020]`\
+`[E][X] examinations [at: SEP 19 2020]`\
 ` Now you have 2 tasks in the list`
 
 ### `deadline` - Adds a deadline task
@@ -49,8 +54,7 @@ Example of usage:
 Expected outcome:
 
 `Got it. I've added this task:`\
-`[D][✗] assignment`\
-` [by: SATURDAY, Sep 19 2020]`\
+`[D][✗] assignment [by: SEP 19 2020]`\
 ` Now you have 3 tasks in the list`
 
 ### `list` - Lists all tasks
@@ -65,10 +69,8 @@ Expected outcome:
 
 `Here are the tasks in your list:`\
 `1. [T][✗] CS2103T quiz`\
-`2. [E][✗] examinations`\
-`[at: SATURDAY, Sep 19 2020]`\
-`3. [D][✗] assignment`\
-`[by: SATURDAY, Sep 19 2020]`
+`2. [E][✗] examinations [at: SEP 19 2020]`\
+`3. [D][✗] assignment [by: SEP 19 2020]`
 
 ### `done` - Mark task as done
 
@@ -107,5 +109,17 @@ Example of usage:
 Expected outcome:
 
 `Here are the search results:`\
-`1. [D][✗] assignment`\
-` [by: SATURDAY, Sep 19 2020]`
+`1. [D][✗] assignment [by: SEP 19 2020]`
+
+### - Detect duplicate tasks
+
+Prompts the user when a task that already exists in the list is being added
+This feature is case-insensitive.
+
+Example of usage:
+
+`deadline aSsiGnment /by 2020-09-19`
+
+Expected outcome:
+
+`There appears to be a duplicate task`
