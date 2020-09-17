@@ -9,6 +9,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -24,8 +26,10 @@ public class MainWindow extends AnchorPane {
 
 	private Duke duke;
 
-	private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-	private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+	private Image userImage = new Image(this.getClass().getResourceAsStream("/images/chickuser.png"));
+	private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/secretarybird.png"));
+
+	private boolean isExit = false;
 
 	@FXML
 	public void initialize() {
@@ -39,7 +43,7 @@ public class MainWindow extends AnchorPane {
 
 	@FXML
 	private void showWelcome() {
-		String response = duke.welcome();
+		String response = duke.welcomeGui();
 		dialogContainer.getChildren().add(
 				DialogBox.getDukeDialog(response, dukeImage)
 		);
@@ -51,20 +55,24 @@ public class MainWindow extends AnchorPane {
 	 */
 	@FXML
 	private void handleUserInput() {
+		handleExit();
 		String input = userInput.getText();
 		String response = duke.getResponse(input);
+		if(input.equals("bye")) {
+			isExit = true;
+		}
 		dialogContainer.getChildren().addAll(
-				DialogBox.getUserDialog(input, userImage),
-				DialogBox.getDukeDialog(response, dukeImage)
+				DialogBox.getUserDialog("[in chick language]\n" + input, userImage),
+				DialogBox.getDukeDialog("[in bird language]\n" +response, dukeImage)
 		);
 		userInput.clear();
 	}
+
 	@FXML
-	private void greeting() {
-		String response = duke.getResponse("Greetings, I'm Duke.");
-		dialogContainer.getChildren().addAll(
-				DialogBox.getDukeDialog(response, dukeImage)
-		);
-		userInput.clear();
+	private void handleExit() {
+		if (isExit) {
+			Stage stage = (Stage) scrollPane.getScene().getWindow();
+			stage.close();
+		}
 	}
 }

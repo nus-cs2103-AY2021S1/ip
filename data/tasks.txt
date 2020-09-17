@@ -1,2 +1,6 @@
 [D][✗] iP (by: 16 Sep 2020, 11:59 PM) #OMFG
-[T][✗] eat dinner #hungry
+[T][✓] eat dinner #hungry
+[E][✗] Graduation! (at: 2021 ) #/n
+[T][✗] eat dinner#/n
+[E][✓] my birthday (at: my place) #/n
+[D][✗] user guide (by: 17 Sep 2020, 11:59 PM) #GG

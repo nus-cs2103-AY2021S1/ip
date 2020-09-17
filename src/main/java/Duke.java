@@ -63,10 +63,17 @@ public class Duke {
             }
         }
     }
-    
-    public String welcome(){
-        assert ui!=null : "ui has not been instantiated.";
-        return ui.welcome();
+
+    /**
+     * Returns the greeting for Gui
+     * @return
+     */
+    public String welcomeGui() {
+        return "[in bird language]\n"
+                + "Hello there! I'm Secretary Bird! *chirps warmly*\n"
+                + "How can I help you? *chirps curiously*\n"
+                + "P.S. My species is literally named secretary bird!\n"
+                + "*chirps punly*\n";
     }
 
     /**
