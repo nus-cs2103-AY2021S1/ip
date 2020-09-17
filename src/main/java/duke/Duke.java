@@ -12,7 +12,6 @@ import duke.ui.Ui;
  * Represents a duke.Duke chatbot that can store, delete, mark tasks as done and display them.
  */
 public class Duke {
-
     private Ui ui;
     private Storage storage;
     private TaskList tasks;
@@ -61,39 +60,5 @@ public class Duke {
         } catch (DukeException e) {
             return ui.showError(e.getMessage());
         }
-    }
-
-    /**
-     * Displays a welcome message and runs the chatbot,
-     * continuously receiving user input and executing them accordingly.
-     * Used for running on CLI.
-     */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-
-        while (!isExit) {
-            try {
-                String inputData = ui.readCommand();
-                ui.showLine();
-                Command c = Parser.parse(inputData);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
-        }
-    }
-
-    /**
-     * Runs a duke.Duke object with a file at filePath of "data/duke.txt".
-     *
-     * @param args
-     */
-    public static void main(String[] args) {
-        Duke dukeObj = new Duke("data/duke.txt");
-        dukeObj.run();
     }
 }

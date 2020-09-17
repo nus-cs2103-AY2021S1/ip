@@ -7,6 +7,8 @@ import java.time.format.DateTimeFormatter;
  * Represents a task that is an event with a description and timing
  */
 public class Event extends Task {
+    private static final String TEXTFILE_DATE_FORMAT = "yyyy-MM-dd HH:mm";
+    private static final String OUTPUT_DATE_FORMAT = "MMM d yyyy hh:mm a";
     private LocalDateTime timing;
 
     /**
@@ -50,12 +52,12 @@ public class Event extends Task {
     @Override
     public String toTxtFileFormat() {
         return "E" + super.toTxtFileFormat() + " | "
-                + this.timing.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+                + this.timing.format(DateTimeFormatter.ofPattern(TEXTFILE_DATE_FORMAT));
     }
 
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: "
-                + this.timing.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mm a")) + ")";
+                + this.timing.format(DateTimeFormatter.ofPattern(OUTPUT_DATE_FORMAT)) + ")";
     }
 }
