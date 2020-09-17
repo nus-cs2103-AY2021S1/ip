@@ -1,8 +1,15 @@
-# Duke project template
+# Bob, the personal assistant
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+This project was created using Java Object Oriented Programming from a greenfield Java projects project template for a software engineering module (CS2103T) 
+at the National University of Singapore. 
 
-## Setting up in Intellij
+It is named Bob, the personal assistant, and functions primarily to track pending tasks of the user. 
+
+Users may interact with Bob by providing commands via a Command Line Interface (CLI) or a simple chat box Graphical User Interface (GUI). 
+
+![Image of BobUi](https://github.com/Caleblyx/ip/blob/master/docs/Ui.png)
+
+## Instructions for setting up in Intellij
 
 Prerequisites: JDK 11, update Intellij to the most recent version.
 
