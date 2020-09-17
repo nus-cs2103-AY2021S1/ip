@@ -1,11 +1,11 @@
 # User Guide
 
-##Introduction
+## Introduction
 
 _DogeBot_ is a desktop app for managing tasks and its optimized for use via **Command Line Interface(CLI)** while
 still having the benefits of a **Graphical User Interface(GUI)**.Therefore this app is suitable for fast typers.
 
-##Quick start
+## Quick start
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
