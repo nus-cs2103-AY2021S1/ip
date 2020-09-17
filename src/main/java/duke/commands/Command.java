@@ -1,7 +1,5 @@
 package duke.commands;
 
-import static duke.util.Keyword.KEYWORD_COMMAND_ERR;
-
 import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
@@ -22,13 +20,6 @@ public abstract class Command {
      */
     Command(String[] inputArr) {
         this.inputArr = inputArr;
-    }
-
-    /**
-     * Print the error message when duke crashes.
-     */
-    public static void printErr() {
-        System.out.println(KEYWORD_COMMAND_ERR);
     }
 
     /**

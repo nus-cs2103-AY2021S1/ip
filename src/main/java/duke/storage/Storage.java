@@ -14,7 +14,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import duke.commands.Command;
 import duke.exception.UnknownCommandException;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -106,7 +105,7 @@ public class Storage {
             }
             savingFileInfo(file, tasks);
         } catch (IOException e) {
-            Command.printErr();
+            e.printStackTrace();
         }
     }
 
@@ -151,7 +150,7 @@ public class Storage {
                 line = bufferedReader.readLine();
             }
         } catch (IOException | UnknownCommandException e) {
-            Command.printErr();
+            e.printStackTrace();
         }
     }
 }

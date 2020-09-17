@@ -1,9 +1,0 @@
-todo,task 1,1,1
-event,2020-12-11T23:59,abc123,1,1
-deadline,2020-10-10T23:59,123bac,0,0
-todo,task 4,0,0
-event,2020-10-09T21:00,Projectduke5,0,0
-event,2020-12-11T23:58,abc123,0,0
-todo,project duke,0,0
-event,2020-12-11T23:12,Project Duke,0,0
-deadline,2020-12-02T21:00,Project Duke,0,1

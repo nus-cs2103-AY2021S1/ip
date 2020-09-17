@@ -44,7 +44,6 @@ public class Keyword {
 
     // Notification message
     public static final String KEYWORD_ADD_NOTIFICATION = "Got it. I've added this task:";
-    public static final String KEYWORD_COMMAND_ERR = "Sorry something went wrong. Duke crashed X.X";
     public static final String KEYWORD_DELETE_NOTIFICATION = "Noted. I've removed this task:";
     public static final String KEYWORD_FIND_SUCCESS = "Here are the matching tasks in your list:";
     public static final String KEYWORD_HELP_DISPLAY_MESSAGE = "Here are the list of commands available:\n";
