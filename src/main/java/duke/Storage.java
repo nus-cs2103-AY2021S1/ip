@@ -4,8 +4,12 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.format.DateTimeParseException;
-import java.util.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+import java.util.Scanner;
 
 /**
  * handle loading files and saving program's data to disk
@@ -57,19 +61,16 @@ public class Storage {
             case "event":
                 String at = data.poll();
                 if (!data.isEmpty()) {
-                    Event event = null;
                     try {
-                        event = new Event(desc, at, data.peek());
-                    } catch (DateTimeParseException e) {
-                    }
-                    if (event != null) {
-                        data.poll();
-                        tasks.add(event);
+                        LocalDate date = Parser.parseDate(data.peek());
+                    } catch (IllegalArgumentException e) {
+                        tasks.add(new Event(desc, at));
                         break;
                     }
+                    tasks.add(new Event(desc, at, data.poll()));
+                    break;
                 }
                 tasks.add(new Event(desc, at));
-                break;
             default:
                 throw new IllegalStateException("The data file is corrupted");
             }
