@@ -11,16 +11,16 @@ Duke-it is a desktop application for managing tasks by typing commands, while al
 * [Quick start](#quick-start)
 
 ## Features
-1. **Bye** - exits the application
-1. **Deadline** - creates a new deadline task
-1. **Delete** - deletes a task
-1. **Done** - marks a task as complete
-1. **Event** - creates a new event task
-1. **Find** - finds task containing given keywords
-1. **Help** - lists all available commands
-1. **List** - lists all tasks
-1. **Todo** - creates a new todo task
-1. **Sort** - sorts the task list by oldest date first
+1. [**Bye**](#1-bye) - exits the application
+1. [**Deadline**](#2-deadline) - creates a new deadline task
+1. [**Delete**](#3-delete) - deletes a task
+1. [**Done**](#4-done) - marks a task as complete
+1. [**Event**](#5-event) - creates a new event task
+1. [**Find**](#6-find) - finds task containing given keywords
+1. [**Help**](#7-help) - lists all available commands
+1. [**List**](#8-list) - lists all tasks
+1. [**Todo**](#9-todo) - creates a new todo task
+1. [**Sort**](#10-sort) - sorts the task list by oldest date first
 
 ## Feature Details
 
