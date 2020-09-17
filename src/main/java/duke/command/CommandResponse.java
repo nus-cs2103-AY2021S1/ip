@@ -4,8 +4,9 @@ package duke.command;
  * Represents the command response after executing a command.
  */
 public class CommandResponse {
-
+    /** The string representation of response. */
     private final String response;
+    /** Indicates whether the command response is an exit response. */
     private final boolean isExit;
 
     /**

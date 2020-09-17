@@ -18,7 +18,6 @@ import duke.task.ToDo;
  * Deals with making sense of the user command.
  */
 public class Parser {
-
     /**
      * Parses the command from the user so that the chat bot can understand.
      *
@@ -56,13 +55,13 @@ public class Parser {
                 throw new IllegalArgumentException();
             }
         } catch (NumberFormatException e) {
-            throw new DukeException("SORRY!!! Task number is not valid.");
+            throw new DukeException("SORRY! The task number is not valid.");
         } catch (IllegalArgumentException e) {
-            throw new DukeException("SORRY!!! I don't know what that means :-(");
+            throw new DukeException("SORRY! I don't know what that means.");
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("SORRY!!! The description of a task cannot be empty.");
+            throw new DukeException("SORRY! The description of a task cannot be empty.");
         } catch (DateTimeParseException e) {
-            throw new DukeException("SORRY!!! Wrong date format encountered!");
+            throw new DukeException("SORRY! Try a different date format.");
         }
     }
 }

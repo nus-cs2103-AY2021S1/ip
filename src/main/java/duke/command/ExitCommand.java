@@ -9,7 +9,6 @@ import duke.Ui;
  * Represents a command to exit from the program.
  */
 public class ExitCommand extends Command {
-
     /**
      * Creates a new exit command.
      */

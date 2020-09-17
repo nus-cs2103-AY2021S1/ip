@@ -9,7 +9,7 @@ import duke.task.Task;
  * Represents a list which stores tasks.
  */
 public class TaskList {
-
+    /** Represents the tasks in the specified task list. */
     private final List<Task> tasks;
 
     /**
@@ -128,7 +128,7 @@ public class TaskList {
     public String toString() {
         StringBuilder orderedList = new StringBuilder();
         for (int i = 1; i <= this.tasks.size(); i++) {
-            orderedList.append("\n\t").append(i).append(".").append(this.tasks.get(i - 1));
+            orderedList.append("\n  ").append(i).append(". ").append(this.tasks.get(i - 1));
         }
         return orderedList.toString();
     }

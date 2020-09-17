@@ -8,7 +8,6 @@ import duke.TaskList;
  * Represents a command that the user gives.
  */
 public abstract class Command {
-
     /**
      * Creates a new command.
      */
