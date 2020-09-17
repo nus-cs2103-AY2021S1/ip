@@ -2,7 +2,7 @@
 
 **Rogue is a task manager that takes the form of a chatbot.**
 
-![Screenshot of Rogue](Ui.png)
+![Screenshot of Rogue](Ui.png){:height="452px" width="329px"}
 
 It is a desktop application that provides an interactive way to organize your tasks through its command-line interface.
 If you enjoy typing, Rogue may give you a productivity boost.
@@ -138,11 +138,11 @@ _Example_
 
 Do you really need me to name them out for you?
 
-1. [T][&#2717;] Pat a chinchilla
-2. [D][&#2717;] Submit team report (by: Sep 30 2020)
+1. [T][✗] Pat a chinchilla
+2. [D][✗] Submit team report (by: Sep 30 2020)
 
 // Marks entry with index 2 as complete
-// i.e. [D][&#2713;] Submit team report (by: Sep 30 2020)
+// i.e. [D][✓] Submit team report (by: Sep 30 2020)
 
 > done /i 2
 
@@ -166,11 +166,11 @@ _Example_
 
 Do you really need me to name them out for you?
 
-1. [T][&#2717;] Pat a chinchilla
-2. [D][&#2717;] Submit team report (by: Sep 30 2020)
+1. [T][✗] Pat a chinchilla
+2. [D][✗] Submit team report (by: Sep 30 2020)
 
 // Deletes entry with index 2
-// i.e. [D][&#2717;] Submit team report (by: Sep 30 2020)
+// i.e. delete [D][✗] Submit team report (by: Sep 30 2020)
 
 > delete /i 2
 
