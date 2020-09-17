@@ -24,16 +24,6 @@ public class DoneCommand implements Command {
     }
 
     /**
-     * Returns false because command does not exit.
-     *
-     * @return false.
-     */
-    @Override
-    public boolean shouldExit() {
-        return false;
-    }
-
-    /**
      *
      * @param tasks The TaskList for Duke.
      * @param ui The Ui to show responses or error messages.

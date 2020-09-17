@@ -25,16 +25,6 @@ public class DeleteCommand implements Command {
     }
 
     /**
-     * Returns false because command does not exit.
-     *
-     * @return false.
-     */
-    @Override
-    public boolean shouldExit() {
-        return false;
-    }
-
-    /**
      * Performs the deleting of task from task list.
      *
      * @param tasks The TaskList to delete the task from.

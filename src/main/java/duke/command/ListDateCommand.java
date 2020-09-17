@@ -19,16 +19,6 @@ public class ListDateCommand implements Command {
     }
 
     /**
-     * Returns false because command does not exit.
-     *
-     * @return false.
-     */
-    @Override
-    public boolean shouldExit() {
-        return false;
-    }
-
-    /**
      * Performs the printing of all the Task on the specified date.
      *
      * @param tasks The TaskList for Duke.

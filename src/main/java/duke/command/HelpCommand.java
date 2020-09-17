@@ -8,17 +8,6 @@ import duke.task.TaskList;
  * Represents a list of available instructions.
  */
 public class HelpCommand implements Command {
-
-    /**
-     * Returns false because command does not exit.
-     *
-     * @return false.
-     */
-    @Override
-    public boolean shouldExit() {
-        return false;
-    }
-
     /**
      * Performs the action to be taken.
      *

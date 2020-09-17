@@ -1,9 +1,12 @@
 package duke.response;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
+
 import org.junit.jupiter.api.Test;
+
 import duke.backend.Storage;
 import duke.command.AddCommand;
 import duke.command.HelpCommand;
@@ -27,7 +30,7 @@ public class ParserTest {
     public static final String VALID_DEADLINE = "deadline task2 /by 15/9/2020 1800";
     public static final String INVALID_DEADLINE = "deadline task2 ";
     public static final String VALID_EVENT = "event task3 /at 15/9/2020 1700";
-    public static final String INVALID_EVENT= "event task4 /at ";
+    public static final String INVALID_EVENT = "event task4 /at ";
 
     private final TaskList taskList1 = new TaskList();
     private final TaskList taskList2 = new TaskList();

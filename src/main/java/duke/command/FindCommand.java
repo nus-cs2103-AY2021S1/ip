@@ -21,16 +21,6 @@ public class FindCommand implements Command {
     }
 
     /**
-     * Returns false because command does not exit.
-     *
-     * @return false.
-     */
-    @Override
-    public boolean shouldExit() {
-        return false;
-    }
-
-    /**
      * Performs an action of searching the tasks by key word.
      * Prints out the list of task containing the keyword.
      *

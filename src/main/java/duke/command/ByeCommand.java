@@ -9,17 +9,6 @@ import duke.task.TaskList;
  */
 public class ByeCommand implements Command {
     /**
-     * Returns true because command exits.
-     *
-     * @return true.
-     */
-    @Override
-    public boolean shouldExit() {
-        return true;
-    }
-
-
-    /**
      * Performs the printing of bye message on Ui.
      *
      * @param tasks The TaskList for Duke.

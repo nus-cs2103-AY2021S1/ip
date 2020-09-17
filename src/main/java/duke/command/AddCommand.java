@@ -24,16 +24,6 @@ public class AddCommand implements Command {
     }
 
     /**
-     * Returns false because command does not exit.
-     *
-     * @return false.
-     */
-    @Override
-    public boolean shouldExit() {
-        return false;
-    }
-
-    /**
      * Performs the corresponding action of the command.
      *
      * @param tasks The TaskList to add the task to.

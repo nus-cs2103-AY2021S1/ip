@@ -9,13 +9,6 @@ import duke.task.TaskList;
  */
 public interface Command {
     /**
-     * Returns true if command exits, false otherwise.
-     *
-     * @return true if command exits, false otherwise.
-     */
-    boolean shouldExit();
-
-    /**
      * Performs the action to be taken.
      *
      * @param tasks   The TaskList to add the task to.

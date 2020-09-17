@@ -9,16 +9,6 @@ import duke.task.TaskList;
  */
 public class ListCommand implements Command {
     /**
-     * Returns false because command does not exit.
-     *
-     * @return false.
-     */
-    @Override
-    public boolean shouldExit() {
-        return false;
-    }
-
-    /**
      * Performs the printing of list of Tasks in TaskList.
      * @param tasks The TaskList for Duke.
      * @param ui The Ui to show responses or error messages.

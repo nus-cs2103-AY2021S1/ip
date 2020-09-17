@@ -10,16 +10,6 @@ import duke.task.TaskList;
  */
 public class UnknownCommand implements Command {
     /**
-     * Returns false because command does not exit.
-     *
-     * @return false.
-     */
-    @Override
-    public boolean shouldExit() {
-        return false;
-    }
-
-    /**
      * Performs the printing of an unknown input error message.
      *
      * @param tasks The TaskList to add the task to.
