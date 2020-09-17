@@ -10,16 +10,7 @@ public class Duke {
 
     /**
      * Constructor that creates a Duke object.
-     * @param file the file task sessions will be saved in
      */
-    public Duke(String file) {
-        this.ui = new Ui();
-        this.storage = new Storage(file);
-        this.taskList = new TaskList();
-        this.parser = new Parser(ui, taskList, storage);
-        storage.load(taskList, ui);
-    }
-
     public Duke() {
         this.ui = new Ui();
         this.storage = new Storage(".//SAVED-TASKS.txt");
@@ -29,9 +20,20 @@ public class Duke {
 
     }
 
-
+    /**
+     * Obtains the Duke response depending on the user input
+     * @param input user's input into Duke
+     * @return String containing Duke's response
+     */
     public String getResponse(String input) {
-        return parser.action(input);
+        try {
+            Command command = parser.parse(input);
+            String response = command.action();
+            storage.saveTasks(taskList, ui);
+            return response;
+        } catch (DukeException e) {
+            return ui.printDukeError(e);
+        }
     }
 }
 

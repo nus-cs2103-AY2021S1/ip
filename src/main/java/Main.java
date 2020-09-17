@@ -13,6 +13,10 @@ public class Main extends Application {
 
     private Duke duke = new Duke();
 
+    /**
+     * Creates a window with the chosen title for the bot
+     * @param stage window object
+     */
     @Override
     public void start(Stage stage) {
         try {

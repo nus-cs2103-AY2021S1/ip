@@ -5,7 +5,7 @@ import java.io.IOException;
  */
 public class Ui {
 
-    public final static String HORIZONTAL_LINE = "________________________________________________________" + "\n";
+    public static final String HORIZONTAL_LINE = "________________________________________________________" + "\n";
 
     /**
      * Constructor that creates a Ui object, with a Scanner that reads user input.
@@ -153,6 +153,11 @@ public class Ui {
         return tasks.toString();
     }
 
+    /**
+     * Prints to user an error message when a task that already exists is being added
+     * @param e a DukeDuplicateException containing an error message
+     * @return DukeDuplicationException message
+     */
     public String printDuplicateError(DukeDuplicateException e) {
         return e.getMessage() + "\n";
     }

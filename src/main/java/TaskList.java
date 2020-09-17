@@ -42,6 +42,11 @@ public class TaskList {
         return this.taskList.size();
     }
 
+    /**
+     * Returns true if the newTask already exists in the task list
+     * @param newTask task input by the user
+     * @return true if there is a duplicate task
+     */
     public boolean hasDuplicate(Task newTask) {
         for (Task task : taskList) {
             if (newTask.equals(task)) {

@@ -25,6 +25,9 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/megantheestallion.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/cardib.png"));
 
+    /**
+     * Initializes the dialogbox
+     */
     @FXML
     public void initialize() {
         assert(userImage != null);
@@ -37,10 +40,6 @@ public class MainWindow extends AnchorPane {
         this.duke = duke;
     }
 
-    /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
-     */
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
@@ -63,6 +62,9 @@ public class MainWindow extends AnchorPane {
         );
     }
 
+    /**
+     * Closes the window when the exit condition is input
+     */
     @FXML
     void closeStage() {
         Stage stage = (Stage) userInput.getScene().getWindow();

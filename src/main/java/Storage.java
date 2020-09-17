@@ -6,7 +6,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import java.util.Arrays;
 
 /**
  * Storage class that handles the reading and writing process from a designated text file,
