@@ -2,7 +2,7 @@
 
 > This individual project is a 
   *greenfield project* as part of **CS2103: Software Engineering**. It is inspired by Marlon Brando's 
-  depiction of the titular character of Vito Corleone, ***The Godfather***. A person of poise, control and composure; users of this application
+  depiction of the titular character of ***The Godfather***, Vito Corleone. A person of poise, control and composure; users of this application
   may find themselves emulating him after keeping track of their tasks.
 
 ***Godfather*** makes sure you stick to your word and complete the tasks that you want to get done. 
@@ -135,7 +135,7 @@ Deadlines help keep track of tasks that have to be done by a particular date and
     For the technically savvy, these formats are outlined in the `DateTimeFormat.java` enumeration class, and allows 
     anyone to add other DateTimeFormats of their choice. Custom date formats can be used because of this easy extensibility.
     
-* `Godfather` currently accepts only `HHmm` as the time format e.g. `2359`. Similar to Date formats, custom
+* ***Godfather*** currently accepts only `HHmm` as the time format e.g. `2359`. Similar to Date formats, custom
 time formats may be added in the `DateTimeFormat.java` enumeration class. 
 
 **Expected Outcome:**
