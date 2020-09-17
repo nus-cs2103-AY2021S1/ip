@@ -5,7 +5,6 @@
 ### Feature 1 - deadline record
 Users can enter deadline tasks. Users need to enter task name, /by and date in the format of YYYY-MM-DD.
 
-## Usage
 
 ### `deadline` - Command to record deadline tasks. 
 
@@ -14,13 +13,12 @@ Example of usage:
 `deadline ip /by 2020-09-18`
 
 Expected outcome:
-
-`String`
- #####_____________________________________________
- Got it. I've added this task:
- #####[D][✘] deadline ip (by Sep 18 2020)
- ##### Now you have 1 tasks in the list.
- #####_____________________________________________
+    
+    _____________________________________________
+    Got it. I've added this task:
+    [D][✘] deadline ip (by Sep 18 2020)
+    Now you have 1 tasks in the list.
+    _____________________________________________
 
 ### Feature 2 - event record
 Users can enter event name. Users need to enter event name, /at and date in the format of YYYY-MM-DD.
