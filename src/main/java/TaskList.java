@@ -55,6 +55,7 @@ public class TaskList {
      *
      * @param pos int
      * @return Task
+     * @throws IndexExceedException
      */
     public Task getTask(int pos) throws IndexExceedException {
         if (pos + 1 > tasks.size()) {

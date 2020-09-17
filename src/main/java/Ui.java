@@ -50,6 +50,7 @@ public class Ui {
      *
      * @param tasks
      * @return String
+     * @throws IndexExceedException
      */
     public String printAllTask(TaskList tasks) throws IndexExceedException {
         int numTask = 0;

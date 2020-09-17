@@ -119,7 +119,7 @@ public class Command {
      * @return Task
      * @throws InvalidDeadlineDescripDukeException
      */
-    private Task createDeadline() throws InvalidDeadlineDescripDukeException, ParseException {
+    private Task createDeadline() throws InvalidDeadlineDescripDukeException {
         if (commandArr.length == 1) {
             throw new InvalidDeadlineDescripDukeException();
         }
@@ -177,13 +177,13 @@ public class Command {
      * @throws InvalidTodoDescripDukeException
      * @throws InvalidDeadlineDescripDukeException
      * @throws InvalidEventDescripDukeException
-     * @throws InvalidFirstDukeException
      * @throws ParseException
      * @throws IOException
+     * @throws IndexExceedException
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidTodoDescripDukeException,
             InvalidDeadlineDescripDukeException, InvalidEventDescripDukeException, IndexExceedException,
-            InvalidFirstDukeException, ParseException, IOException {
+            ParseException, IOException {
 
         switch (commandType) {
         case PRINT_ALL_TASKS:
