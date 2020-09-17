@@ -3,3 +3,5 @@ Event | true | movie | 2020-08-08
 Todo | false | eat
 Deadline | false | homework | 2020-08-25
 Todo | false | sleep
+Todo | false | eat
+Todo | false | eat
