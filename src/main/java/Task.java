@@ -20,11 +20,8 @@ public class Task {
     }
 
     public String getIcon(){
-        if(isCompleted){
-            return "[✓] ";
-        } else {
-            return "[✗] ";
-        }
+        String icon = isCompleted ? "\u2713" : "\u2717";
+        return String.format("[%s]", icon);
     }
 
     public String getName(){

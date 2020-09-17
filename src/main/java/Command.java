@@ -39,15 +39,15 @@ public class Command {
             case "done" : {
                 int index;
                 if (inputLine.length < 2) {
-                    throw new DukeException("", DukeExceptionType.NO_DESCRIPTION, Commands.DONE);
+                    return new DukeException("", DukeExceptionType.NO_DESCRIPTION, Commands.DONE).getMessage();
                 }
                 try {
                     index = Integer.parseInt(inputLine[1]);
                 } catch (NumberFormatException e) {
-                    throw new DukeException("", DukeExceptionType.WRONG_DESCRIPTION, Commands.DONE);
+                    return new DukeException("", DukeExceptionType.WRONG_DESCRIPTION, Commands.DONE).getMessage();
                 }
                 if (index < 1 || index > tasks.getSize()) {
-                    throw new DukeException("", DukeExceptionType.WRONG_DESCRIPTION, Commands.DONE);
+                    return new DukeException("", DukeExceptionType.WRONG_DESCRIPTION, Commands.DONE).getMessage();
                 }
                 tasks.markDone(index);
                 storage.save(tasks);
@@ -56,15 +56,15 @@ public class Command {
             case "delete" : {
                 int index;
                 if (inputLine.length < 2) {
-                    throw new DukeException("", DukeExceptionType.NO_DESCRIPTION, Commands.DELETE);
+                    return new DukeException("", DukeExceptionType.NO_DESCRIPTION, Commands.DELETE).getMessage();
                 }
                 try {
                     index = Integer.parseInt(inputLine[1]);
                 } catch (NumberFormatException e) {
-                    throw new DukeException("", DukeExceptionType.WRONG_DESCRIPTION, Commands.DELETE);
+                    return new DukeException("", DukeExceptionType.WRONG_DESCRIPTION, Commands.DELETE).getMessage();
                 }
                 if (index < 1 || index > tasks.getSize()) {
-                    throw new DukeException("", DukeExceptionType.WRONG_DESCRIPTION, Commands.DELETE);
+                    return new DukeException("", DukeExceptionType.WRONG_DESCRIPTION, Commands.DELETE).getMessage();
                 }
                 Task task = tasks.getTask(index);
                 tasks.deleteTask(index);
@@ -73,7 +73,7 @@ public class Command {
             }
             case "todo" : {
                 if (inputLine.length < 2) {
-                    throw new DukeException("todo needs description", DukeExceptionType.NO_DESCRIPTION, Commands.TODO);
+                    return new DukeException("todo needs description", DukeExceptionType.NO_DESCRIPTION, Commands.TODO).getMessage();
                 } else {
                     StringBuilder description = new StringBuilder();
                     for(int i = 1; i < inputLine.length; i++){
@@ -97,10 +97,10 @@ public class Command {
                     description.append(inputLine[index]).append(" ");
                     index++;
                     if(index == inputLine.length){
-                        throw new DukeException("", DukeExceptionType.EMPTY_TIME, Commands.DEADLINE);
+                        return new DukeException("", DukeExceptionType.EMPTY_TIME, Commands.DEADLINE).getMessage();
                     }
                     if(description.length() < 1){
-                        throw new DukeException("", DukeExceptionType.NO_DESCRIPTION, Commands.DEADLINE);
+                        return new DukeException("", DukeExceptionType.NO_DESCRIPTION, Commands.DEADLINE).getMessage();
                     }
                 }
                 index++;
@@ -109,7 +109,7 @@ public class Command {
                     index++;
                 }
                 if(deadline.length() < 1){
-                    throw new DukeException("", DukeExceptionType.EMPTY_TIME, Commands.DEADLINE);
+                    return new DukeException("", DukeExceptionType.EMPTY_TIME, Commands.DEADLINE).getMessage();
                 }
                 deadline.deleteCharAt(deadline.length() - 1);
                 try{
@@ -119,7 +119,7 @@ public class Command {
                     return ui.uiForAdd(tasks, task);
                 } catch (DateTimeParseException e){
                     System.err.println("Please use yyyy-mm-dd");
-                    throw new DukeException("Please use dd-MM-yyyy", DukeExceptionType.WRONG_TIME, Commands.DEADLINE);
+                    return new DukeException("Please use dd-MM-yyyy", DukeExceptionType.WRONG_TIME, Commands.DEADLINE).getMessage();
                 }
             }
             case "event" :{
@@ -127,18 +127,18 @@ public class Command {
                 StringBuilder description = new StringBuilder();
                 StringBuilder time = new StringBuilder();
                 if (inputLine.length < 2) {
-                    throw new DukeException("", DukeExceptionType.NO_DESCRIPTION, Commands.EVENT);
+                    return new DukeException("", DukeExceptionType.NO_DESCRIPTION, Commands.EVENT).getMessage();
                 }
                 int index = 1;
                 while(!inputLine[index].equals("/at")){
                     description.append(inputLine[index]).append(" ");
                     index++;
                     if(index == inputLine.length){
-                        throw new DukeException("", DukeExceptionType.EMPTY_TIME, Commands.EVENT);
+                        return new DukeException("", DukeExceptionType.EMPTY_TIME, Commands.EVENT).getMessage();
                     }
                 }
                 if(description.length() < 1){
-                    throw new DukeException("", DukeExceptionType.NO_DESCRIPTION, Commands.EVENT);
+                    return new DukeException("", DukeExceptionType.NO_DESCRIPTION, Commands.EVENT).getMessage();
                 }
                 index++;
                 while(index < inputLine.length){
@@ -146,7 +146,7 @@ public class Command {
                     index++;
                 }
                 if(time.length() < 1){
-                    throw new DukeException("", DukeExceptionType.EMPTY_TIME, Commands.EVENT);
+                    return new DukeException("", DukeExceptionType.EMPTY_TIME, Commands.EVENT).getMessage();
                 }
                 time.deleteCharAt(time.length() - 1);
                 try{
@@ -156,12 +156,12 @@ public class Command {
                     return ui.uiForAdd(tasks, task);
                 } catch (DateTimeParseException e){
                     System.err.println("Please use yyyy-mm-dd format for time");
-                    throw new DukeException("Please use dd-MM-yyyy HHmm format", DukeExceptionType.WRONG_TIME, Commands.EVENT);
+                    return new DukeException("Please use dd-MM-yyyy HHmm format", DukeExceptionType.WRONG_TIME, Commands.EVENT).getMessage();
                 }
             }
             case "find" : {
                 if (inputLine.length < 2) {
-                    throw new DukeException("find needs keyword", DukeExceptionType.NO_DESCRIPTION, Commands.FIND);
+                    return new DukeException("find needs keyword", DukeExceptionType.NO_DESCRIPTION, Commands.FIND).getMessage();
                 } else {
                     StringBuilder description = new StringBuilder();
                     for (int i = 1; i < inputLine.length; i++) {
@@ -172,7 +172,7 @@ public class Command {
                 }
             }
             default:
-                throw new DukeException("", DukeExceptionType.INVALID_TASK);
+                return new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(", DukeExceptionType.INVALID_TASK).getMessage();
         }
     }
 
