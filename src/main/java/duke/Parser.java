@@ -40,6 +40,22 @@ public class Parser {
     static void parseInput (String userMessage, Storage storage) throws DukeException, IOException {
         ArrayList<Task> itemList = storage.load();
 
+        if (userMessage.startsWith("find")) {
+            ArrayList<Task> selectedTasks = new ArrayList<>();
+            String searchedItem = userMessage.substring(5);
+            for (Task task: itemList) {
+                if (task.name.contains(searchedItem)) {
+                    selectedTasks.add(task);
+                }
+            }
+            System.out.println("Here are the matching tasks in your list: ");
+            for (int i = 0; i < selectedTasks.size(); i++) {
+                Task task = selectedTasks.get(i);
+                System.out.println((i+1) + " " + task.toString());
+            }
+            return;
+        }
+
         if (!userMessage.equals("bye") && !userMessage.equals("list")
                 && !userMessage.contains("done") && !userMessage.contains("delete")) {
             Task newItem;
