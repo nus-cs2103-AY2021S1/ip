@@ -3,14 +3,14 @@ package duke;
 /**
  * TODO class extends Task class to represent a task that does not have a specific time.
  */
-public class TODO extends Task {
+public class Todo extends Task {
 
     /**
      * Constructor
      * @param name Name of the todo task.
      * @param status Completion status of the task
      */
-    public TODO(String name, Status status) {
+    public Todo(String name, Status status) {
         super(name, status);
     }
 

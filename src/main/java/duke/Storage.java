@@ -49,6 +49,7 @@ public class Storage {
      * @param list List of tasks to be written.
      * @throws IOException If data management file fails to be created or accessed.
      */
+
     public void modifyWithList(ArrayList<Task> list) throws IOException {
         FileWriter clearFile = new FileWriter(path);
         clearFile.write("");
@@ -76,7 +77,7 @@ public class Storage {
         while (fileSc.hasNextLine()) {
             Task newItem;
             String taskString = fileSc.nextLine();
-            newItem = Parser.parseFileItem(taskString);
+            newItem = Parser.parseFileItemToTask(taskString);
             itemList.add(newItem);
         }
         return itemList;

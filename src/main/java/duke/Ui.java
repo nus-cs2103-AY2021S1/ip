@@ -25,6 +25,7 @@ public class Ui {
     }
 
 
+
     /**
      * Handles user input.
      * Passes valid user input to Parser class for further process.
@@ -35,19 +36,13 @@ public class Ui {
     public void takeUserInput(Storage storage) throws IOException, DukeException {
         while (sc.hasNextLine()) {
             String userMessage = sc.nextLine();
-
             //exit
             if (userMessage.equals("bye")) {
                 System.out.println("Bye! Nice serving you. Hope to see you again soon! :D");
                 break;
-            } else {
-                Parser.parseInput(userMessage, storage);
             }
+            Parser.parseInput(userMessage, storage);
         }
     }
-
-
-
-
 
 }

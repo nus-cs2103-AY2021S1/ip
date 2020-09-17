@@ -2,11 +2,13 @@ package duke;
 
 import java.io.IOException;
 
+
 /**
  * The Duke program implements an application that simulates a smart task manager with the name Duke.
  * The program takes in user inputs with various formats and process them as tasks to be finished.
  *
  */
+
 public class Duke {
     private Storage storage;
     private TaskList tasks;
@@ -26,15 +28,16 @@ public class Duke {
     }
 
 
+
     /**
      * Runs the Duke program.
      * Prompt user to key in their input with a welcome message
      * @throws DukeException If user input is of incorrect format or other unidentified error occurs
      * @throws IOException If fails to take user input or create/access data management file
      */
-    public void run() throws DukeException, IOException {
-        /*** welcoming message */
 
+    public void run() throws DukeException, IOException {
+        //welcoming message
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -44,10 +47,11 @@ public class Duke {
         System.out.println("Hello! Duke at your service. Please name your request." +
                 "\nAll dates should be in the form of YYYY-MM-DD: ");
 
-        /**** User Input */
+        // Take user Input
         ui.takeUserInput(storage);
 
     }
+
 
     /**
      * Creates a new Duke object and runs the program
@@ -55,6 +59,7 @@ public class Duke {
      * @throws DukeException
      * @throws IOException
      */
+
     public static void main(String[] args) throws DukeException, IOException {
         new Duke("src/main/java/duke/todo.txt").run();
 
