@@ -6,11 +6,11 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root alignment="TOP_RIGHT" minHeight="-Infinity" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" scaleShape="false" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" scaleShape="false" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label fx:id="dialog" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: white; -fx-border-color: blue;" text="Label" textAlignment="JUSTIFY" wrapText="true">
+        <Label fx:id="dialog" style="-fx-border-radius: 5; -fx-label-padding: 5; -fx-background-radius: 5; -fx-background-color: skyblue;" text="Label" textAlignment="JUSTIFY" textFill="#0013bf" wrapText="true">
          <font>
-            <Font name="Microsoft JhengHei" size="12.0" />
+            <Font name="Arial" size="12.0" />
          </font></Label>
         <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" />
     </children>
