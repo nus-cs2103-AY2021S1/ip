@@ -1,7 +1,5 @@
 package duke.ui;
 
-import java.io.File;
-
 import duke.Duke;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -30,7 +28,7 @@ public class MainWindow extends AnchorPane {
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
-    private Media soundEffect = new Media(new File("./src/main/resources/audio/DaDukeReply.mp3").toURI().toString());
+    private Media soundEffect = new Media(this.getClass().getResource("/audio/DaDukeReply.mp3").toExternalForm());
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
