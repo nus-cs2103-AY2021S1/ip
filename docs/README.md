@@ -28,7 +28,7 @@ Example of usage:
 * `todo Do my laundry`
 
 Expected outcome:  
-![todo outcome](rss\todo.png "todo")
+![todo outcome](rss\todo.PNG "todo")
 
 
 ### Adding a Deadline task: `deadline` <a name="deadline"></a>
@@ -39,7 +39,7 @@ Example of usage:
 * `deadline Submit math homework /by 2020-10-04`
 
 Expected outcome:  
-![deadline outcome](rss\deadline.png "deadline")
+![deadline outcome](rss\deadline.PNG "deadline")
 
 ### Adding an Event task: `event`: todo <a name="event"></a>
 Adds an Event task to Dude Bot.
@@ -49,7 +49,7 @@ Example of usage:
 * `event Go for communications class /at 2020-09-20`
 
 Expected outcome:  
-![event outcome](rss\event.png "event")
+![event outcome](rss\event.PNG "event")
 
 ### Listing all task: `list` todo <a name="list"></a>
 Shows a list of all tasks in Dude Bot.
@@ -67,7 +67,7 @@ Example of usage:
 * `find this try`
 
 Expected outcome:  
-![find outcome](rss\find.png "find")
+![find outcome](rss\find.PNG "find")
 
 ### Deleting a task: `delete` todo <a name="delete"></a>
 Deletes the specified task from Dude Bot.
