@@ -1,5 +1,6 @@
 package main.java.duke.command;
 
+import main.java.duke.command.Command;
 import main.java.duke.task.Deadline;
 import main.java.duke.task.TaskList;
 import duke.Ui;

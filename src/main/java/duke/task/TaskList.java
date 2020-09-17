@@ -48,4 +48,15 @@ public class TaskList {
     public Task getTask(int i) {
         return taskList.get(i);
     }
+
+//    public TaskList find(String keyword) {
+//        TaskList foundTasks = new TaskList();
+//        String substring = keyword.substring(0, 4); // take a substring of length 4 to match more
+//        for (Task t : taskList) {
+//            if (t.toString().contains(keyword)) {
+//
+//            }
+//        }
+//
+//    }
 }
