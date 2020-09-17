@@ -1,13 +1,10 @@
 package bob.task;
 
-import bob.Bob;
-import bob.exception.BobDateTimeException;
 import bob.exception.BobDateTimeParseException;
-import bob.exception.BobException;
 
 import java.time.DateTimeException;
-import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 
 /**
@@ -28,8 +25,10 @@ public class Event extends Task {
     /**The format of outputted dates and times by the class. */
     private static final DateTimeFormatter OUTPUT_DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("MMM d yyyy HHmm");
 
+    /**Index of the end of the first provided date and time.*/
     private static final int END_OF_FIRST_DATE_TIME_INDEX = 15;
 
+    /**Index of the start of the second provided date and time.*/
     private static final int START_OF_SECOND_DATE_TIME_INDEX = 19;
 
     /**
@@ -80,6 +79,12 @@ public class Event extends Task {
         return this.start.format(OUTPUT_DATE_TIME_FORMAT).toString() + " to " + this.end.format(OUTPUT_DATE_TIME_FORMAT).toString();
     }
 
+    /**
+     * Reschedules the period of an event to be of a provided period.
+     *
+     * @param newPeriod the period that the event should be rescheduled to.
+     * @throws BobDateTimeParseException if the provided dates and time do not have the format INPUT_DATE_TIME_FORMAT.
+     */
     public void reschedule(String newPeriod) throws BobDateTimeParseException {
         try {
             this.start = LocalDateTime.parse(newPeriod.substring(0, END_OF_FIRST_DATE_TIME_INDEX), INPUT_DATE_TIME_FORMAT);

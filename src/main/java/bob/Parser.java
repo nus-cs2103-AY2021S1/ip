@@ -65,6 +65,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns the appropriate AddCommand after parsing a text Command.
+     *
+     * @param command a string command requesting the addition of a task.
+     * @return an AddCommand to fulfill the addition of a task.
+     * @throws BobException if exceptions are thrown.
+     */
     static Command parseTask(String command) throws BobException {
         Task task = null;
         if (command.contains("todo")) {
@@ -113,6 +120,13 @@ public class Parser {
         return new AddCommand(task);
     }
 
+    /**
+     * Returns a DoneCommand after parsing a String command.
+     *
+     * @param command A string command requesting to mark a task as done.
+     * @return a DoneCommand which marks a task as done.
+     * @throws BobException if exceptions are thrown.
+     */
     static Command parseDone(String command) throws BobException {
         int index = 0;
         try {
@@ -129,6 +143,13 @@ public class Parser {
         return new DoneCommand(index);
     }
 
+    /**
+     * Returns a DeleteCommand after parsing a String command.
+     *
+     * @param command A string command requesting to delete a task.
+     * @return a DeleteCommand which deletes a task.
+     * @throws BobException if exceptions are thrown.
+     */
     static Command parseDelete(String command) throws BobException {
         int index;
         try {
@@ -145,6 +166,13 @@ public class Parser {
         return new DeleteCommand(index);
     }
 
+    /**
+     * Returns a FindCommand after parsing a String command.
+     *
+     * @param command A string command requesting to find tasks consisting of keywords.
+     * @return a FindCommand which finds tasks consisting of keywords.
+     * @throws BobException if exceptions are thrown.
+     */
     static Command parseFind(String command) throws BobException {
         try {
             String keywords = command.substring(FIND_KEYWORD_INDEX);
@@ -157,6 +185,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns a SnoozeCommand after parsing a String command.
+     *
+     * @param command a String command requesting to snooze a deadline.
+     * @return a SnoozeCommand which snoozes a deadline.
+     * @throws BobException if exceptions are thrown.
+     */
     static Command parseSnooze(String command) throws BobException {
         try {
             String[] split = command.split("/");
@@ -170,6 +205,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns a RescheduleCommand after parsing a String command.
+     *
+     * @param command a String command requesting to reschedule an event.
+     * @return a RescheduleCommand which reschedules an event.
+     * @throws BobException if exceptions are thrown.
+     */
     static Command parseReschedule(String command) throws BobException {
         try {
             String[] split = command.split("/");

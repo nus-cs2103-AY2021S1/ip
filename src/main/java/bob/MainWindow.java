@@ -19,30 +19,63 @@ import java.io.IOException;
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
+    /**
+     * Enables scrolling in the MainWindow.
+     */
     @FXML
     private ScrollPane scrollPane;
+
+    /**
+     * A container for all DialogBoxes.
+     */
     @FXML
     private VBox dialogContainer;
+
+    /**
+     * Text to be displayed in the MainWindow's dialogBox.
+     */
     @FXML
     private TextField userInput;
+
+    /**
+     * A button that can be interacted with to send messages.
+     */
     @FXML
     private Button sendButton;
 
+    /**
+     * An instance of Bob.
+     */
     private Bob bob;
 
+    /**
+     * The user's profile picture.
+     */
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.png"));
+
+    /**
+     * Bob's profile picture.
+     */
     private Image bobImage = new Image(this.getClass().getResourceAsStream("/images/Bob.png"));
 
 
+    /**
+     * Initialises the scroll pane of the MainWindow.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    //@@Author
+
+    /**
+     * Constructs a MainWindow to display user input and Bob's responses.
+     */
     public MainWindow() {
         this.bob = new Bob("data/save.txt");
         try {
+            //@@author sc-arecrow
+            //Adapted from https://github.com/sc-arecrow/ip/blame/master/src/main/java/viscount/gui/MainWindow.java
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/MainWindow.fxml"));
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);

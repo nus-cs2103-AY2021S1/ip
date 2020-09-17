@@ -11,12 +11,13 @@ import bob.UI;
 public abstract class Command {
 
     /**
-     * Executes the command by updating the TaskList and Storage accordingly, and printing out
+     * Executes the command by updating the TaskList and Storage accordingly, and returning
      * the appropriate message from the UI.
      *
      * @param tasks the TaskList consisting of all tasks tracked by Bob.
      * @param ui the UI which prints out all messages corresponding to the Command.
      * @param storage the Storage which manages all saved data to be updated.
+     * @return the message provided by the UI.
      * @throws BobException if any errors arise.
      */
     public abstract String execute(TaskList tasks, UI ui, Storage storage) throws BobException;

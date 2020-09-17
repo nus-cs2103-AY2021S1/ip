@@ -26,12 +26,13 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Creates a TaskList of tasks that contains key words or phrases, that is then printed out by the UI
-     * alongside appropriate messages.
+     * Creates a TaskList of tasks that contains key words or phrases, that is then return in message by the UI
+     * alongside other appropriate messages.
      *
      * @param tasks the TaskList consisting of all tasks tracked by Bob.
      * @param ui the UI which prints out all messages corresponding to the Command.
      * @param storage the Storage which manages all saved data to be updated.
+     * @return the message provided by the UI.
      * @throws BobException
      */
     @Override

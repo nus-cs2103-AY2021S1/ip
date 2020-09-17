@@ -3,9 +3,8 @@ package bob.task;
 import bob.exception.BobDateTimeParseException;
 
 import java.time.DateTimeException;
-import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeParseException;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Encapsulates a task with a deadline.
@@ -55,11 +54,11 @@ public class Deadline extends Task {
 
 
     /**
-     * Returns a String representation of the deadline with the format of outputFormatter.
+     * Changes the deadline of the task to a provided new deadline.
      *
-     * @return a String representation of the deadline with the format of outputFormatter.
+     * @param newDeadline the deadline of the task to be changed to
+     * @throws BobDateTimeParseException if newDeadline does not have the format of INPUT_DATE_TIME_FORMAT
      */
-
     public void snooze(String newDeadline) throws BobDateTimeParseException {
         try {
             this.deadline = LocalDateTime.parse(newDeadline, INPUT_DATE_TIME_FORMAT);
@@ -69,6 +68,12 @@ public class Deadline extends Task {
             throw new BobDateTimeParseException();
         }
     }
+
+    /**
+     * Returns a String representation of the deadline with the format of outputFormatter.
+     *
+     * @return a String representation of the deadline with the format of outputFormatter.
+     */
     public String getDeadline() {
         return this.deadline.format(OUTPUT_DATE_TIME_FORMAT).toString();
     }

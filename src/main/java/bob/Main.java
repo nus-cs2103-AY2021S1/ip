@@ -1,10 +1,6 @@
 package bob;
 
-import java.io.IOException;
-
-import bob.MainWindow;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -14,12 +10,17 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
+    /**
+     * An empty constructor.
+     */
     public Main() {
 
     }
 
-    private Bob bob = new Bob();
-
+    /**
+     * Initialises the Graphical User Interface of Bob.
+     * @param stage the stage of the GUI.
+     */
     @Override
     public void start(Stage stage) {
         AnchorPane anchorPane = new MainWindow();

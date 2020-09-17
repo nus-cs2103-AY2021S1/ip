@@ -11,11 +11,12 @@ import bob.UI;
 public class ExitCommand extends Command {
 
     /**
-     * Executes nothing.
+     * Returns the exit message.
      *
      * @param tasks the TaskList consisting of all tasks tracked by Bob.
      * @param ui the UI which prints out all messages corresponding to the Command.
      * @param storage the Storage which manages all saved data to be updated.
+     * @return the message provided by the UI.
      * @throws BobException
      */
     @Override
@@ -24,9 +25,9 @@ public class ExitCommand extends Command {
     }
 
     /**
-     * Returns false to indicate that Bob may terminate.
+     * Returns true to indicate that Bob may terminate.
      *
-     * @return false.
+     * @return true.
      */
     @Override
     public boolean isExit() {

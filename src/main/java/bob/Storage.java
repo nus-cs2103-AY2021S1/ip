@@ -161,6 +161,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Returns a task after loading String data.
+     *
+     * @param data the data of a task.
+     * @return a task which matches the provided data.
+     * @throws BobDateTimeParseException if deadlines or events have dates which do not comply with the correct format.
+     */
     public Task loadTask(String data) throws BobDateTimeParseException {
         String[] taskDataArr = data.split("\\|");
         char firstChar = taskDataArr[0].charAt(0);

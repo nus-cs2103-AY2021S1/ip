@@ -4,14 +4,25 @@ import bob.command.Command;
 import bob.exception.BobException;
 import javafx.scene.Scene;
 
+/**
+ * This class encapsulates Bob, the personal assistant.
+ */
 public class Bob {
 
-    private Scene scene;
+    /** A list consisting of tasks tracked by Bob. */
     private TaskList tasks = new TaskList();
+
+    /** Handles storage and access of data used by Bob. */
     private Storage storage;
+
+    /** Presents an interface to the user */
     private UI uI;
 
 
+    /** Constructs a Bob with a provided filePath
+     *
+     * @param filePath the filePath of the file for data storage and access.
+     */
     public Bob(String filePath) {
         uI = new UI();
         storage = new Storage(filePath);
@@ -25,10 +36,16 @@ public class Bob {
         }
     }
 
+    /**
+     * An empty constructor.
+     */
     public Bob() {
 
     }
 
+    /**
+     * Initialises Bob to accept input and provide responses.
+     */
     public void run() {
         System.out.println(uI.greet());
 
@@ -47,11 +64,22 @@ public class Bob {
         }
     }
 
+    /**
+     * Constructs Bob and initialises it.
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         new Bob("data/save.txt").run();
     }
 
-
+    /**
+     * Returns the response of Bob with input provided from the user.
+     *
+     * @param input provided by the user.
+     * @return a response from Bob.
+     * @throws BobException if exceptions occur.
+     */
     String getResponse(String input) throws BobException {
             String command = input;
             Command c = Parser.parse(command);

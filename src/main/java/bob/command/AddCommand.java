@@ -22,11 +22,12 @@ public class AddCommand extends Command {
 
     /**
      * Executes the command to add the task to TaskList and update the Storage data accordingly.
-     * It also calls on the provided UI to print out the appropriate messages.
+     * It also calls on the provided UI to return the appropriate messages.
      *
      * @param tasks the TaskList consisting of all tasks tracked by Bob.
      * @param ui the UI which prints out all messages corresponding to the Command.
      * @param storage the Storage which manages all saved data to be updated.
+     * @return the message provided by the UI.
      * @throws BobIOException if Storage's text file does not exist.
      */
     @Override

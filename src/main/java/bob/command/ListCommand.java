@@ -11,11 +11,12 @@ import bob.UI;
 public class ListCommand extends Command {
 
     /**
-     * Executes the command by calling on the UI to print out the contents of a TaskList.
+     * Executes the command by calling on the UI to return the contents of a TaskList in a message.
      *
      * @param tasks the TaskList consisting of all tasks tracked by Bob.
      * @param ui the UI which prints out all messages corresponding to the Command.
      * @param storage the Storage which manages all saved data to be updated.
+     * @return the message provided by the UI.
      * @throws BobIndexOutOfBoundsException
      */
     @Override

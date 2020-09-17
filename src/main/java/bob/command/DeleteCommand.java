@@ -23,11 +23,13 @@ public class DeleteCommand extends Command {
 
     /**
      * Executes the command to delete the task from the TaskList and update the Storage data accordingly.
-     * It also calls on the provided UI to print out the appropriate messages.
+     * It also calls on the provided UI to return the appropriate messages.
+     * Deletes all tasks from the TaskList if the provided index is equal to -1.
      *
      * @param tasks the TaskList consisting of all tasks tracked by Bob.
      * @param ui the UI which prints out all messages corresponding to the Command.
      * @param storage the Storage which manages all saved data to be updated.
+     * @return the message provided by the UI.
      * @throws BobIOException if Storage's text file does not exist.
      * @throws BobIndexOutOfBoundsException if the index of the task to be deleted does not exist on TaskList.
      */

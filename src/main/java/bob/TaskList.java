@@ -91,10 +91,16 @@ public class TaskList {
         return keyWordTasks;
     }
 
+    /**
+     * Deletes all tasks in the TaskList.
+     */
     public void deleteAll() {
         list.clear();
     }
 
+    /**
+     * Marks all tasks in the TaskList as done.
+     */
     public void markAllDone() {
         for (Task task: list) {
             task.markAsDone();
