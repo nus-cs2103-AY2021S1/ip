@@ -1,7 +1,7 @@
 # User Guide
-_Meimei_ is a desktop app for managing tasks, using both Command Line Interface (CLI) and Graphical User 
-Interface (GUI), you can have a better user experience. If your prefer typing with only a few easy 
-to remember commands, _Meimei_ is an easy-to-use GUI for you to have an overview of all your daily tasks.
+__Duke__ is a desktop app for managing tasks, using both Command Line Interface (CLI) and Graphical User 
+Interface (GUI), so that you can have a better user experience when interacting with the bot named _Meimei_. If your prefer typing with only a few easy 
+to remember commands, __Duke__ is an easy-to-use GUI for you to have an overview of all your daily tasks.
 
 ## Features 
 Words in UPPER_CASE are the parameters to be supplied by the user. 
