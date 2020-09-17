@@ -11,6 +11,9 @@ import duke.exception.DukeException;
 import duke.exception.EmptyToDoException;
 import duke.task.ToDo;
 
+/**
+ * Tests for the adding of todo tasks.
+ */
 public class AddToDoCommandTest extends CommandTests {
 
     /**

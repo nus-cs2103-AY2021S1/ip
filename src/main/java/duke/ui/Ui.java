@@ -122,6 +122,8 @@ public class Ui {
 
     /**
      * Retrieves the empty task list message.
+     *
+     * @return Empty task list message.
      */
     public String emptyTaskList() {
         return stringFormatter(EMPTY_TASK_LIST_MESSAGE);

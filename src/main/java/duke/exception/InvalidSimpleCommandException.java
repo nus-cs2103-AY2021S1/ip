@@ -13,6 +13,8 @@ public class InvalidSimpleCommandException extends DukeException {
 
     /**
      * Initializes the InvalidSimpleCommandException object with the error message suggesting the proper format.
+     *
+     * @param simpleCommandType Type of simple command, either delete or done.
      */
     public InvalidSimpleCommandException(SimpleCommandType simpleCommandType) {
         super(getMessage(simpleCommandType));

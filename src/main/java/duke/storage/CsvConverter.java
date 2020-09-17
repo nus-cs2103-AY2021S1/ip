@@ -28,6 +28,7 @@ public class CsvConverter {
      *
      * @param input CSV format of task.
      * @return Task corresponding to the csv string.
+     * @throws InvalidFileFormatException If file in storage is formatted incorrectly.
      */
     protected static Task parseToTask(String input) throws InvalidFileFormatException {
         String[] resultArr = parseString(input);

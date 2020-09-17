@@ -128,6 +128,7 @@ public class Storage {
      * Updates the task list in the storage.
      *
      * @param taskList Task list.
+     * @throws FileUpdateFailException If file in storage fails to update.
      */
     public void updateFile(TaskList taskList) throws FileUpdateFailException {
         try {

@@ -8,6 +8,9 @@ import org.junit.jupiter.api.Test;
 import duke.exception.DukeException;
 import duke.task.ToDo;
 
+/**
+ * Tests for the deletion of commands.
+ */
 public class DeleteCommandTest extends CommandTests {
 
     /**
