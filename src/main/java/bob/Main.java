@@ -23,6 +23,8 @@ public class Main extends Application {
      */
     @Override
     public void start(Stage stage) {
+        //@@author sc-arecrow
+        //Adapted from https://github.com/sc-arecrow/ip/blame/master/src/main/java/viscount/Main.java
         AnchorPane anchorPane = new MainWindow();
         Scene scene = new Scene(anchorPane);
         stage.setTitle("Bob, the personal assistant");

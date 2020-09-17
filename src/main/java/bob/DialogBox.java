@@ -116,6 +116,7 @@ public class DialogBox extends HBox {
      * @param color The color for the picture's border and effects to be set to.
      */
     public void setDisplayPictureColor(Color color) {
+        //Solution adapted from: https://www.youtube.com/watch?v=54fEFYx34vk
         displayPicture.setStroke(color);
         displayPicture.setEffect(new DropShadow(+25d, 0d, +2d, color));
     }
