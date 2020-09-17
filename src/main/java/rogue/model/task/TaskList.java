@@ -77,16 +77,20 @@ public class TaskList {
     }
 
     /**
-     * Finds {@code Task} that are due to happen in the specified number of days.
+     * Finds {@code Task} whose dates fall in range of the start and end date.
      *
+     * The start date is the current system date.
+     * The end date is the current system date offset by the number of days specified by the user.
+     *
+     * All tasks within the date range are displayed (start and end date inclusive).
      * Overdue {@code Task} are not included in the search.
      *
      * @param numOfDays The number of days.
      * @return A {@code TaskList} for all matching {@code Task}
      */
     public TaskList searchByDays(int numOfDays) {
-        LocalDate startDate = LocalDate.now();
-        LocalDate endDate = startDate.plusDays(numOfDays + 1); // Add 1 to include end date
+        LocalDate startDate = LocalDate.now().minusDays(1); // -1 to include start date in search
+        LocalDate endDate = LocalDate.now().plusDays(numOfDays).plusDays(1); // +1 to include end date in search
 
         List<Task> matchingTasks = tasks.stream()
                 .filter(task -> task.getDate().isAfter(startDate) && task.getDate().isBefore(endDate))
