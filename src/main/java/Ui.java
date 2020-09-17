@@ -10,7 +10,7 @@ public class Ui {
     protected static DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
     private static final String LINE = "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-";
     private static final String INTRO = "Greetings, I am the Dragon Of The West, otherwise known as Iroh, "
-            + "how may I serve you today?";
+            + "how may I serve you today? The date and time now is: ";
     private static Image userPic;
     private static Image dukePic;
     private static TextField userInput;
