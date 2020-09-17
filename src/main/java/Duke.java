@@ -181,8 +181,8 @@ public class Duke {
                 throw new InvalidInputException("Missing task deadline");
             }
 
-            String name = input.split(" /")[0].substring(9);
-            String deadline = input.split("/")[1].substring(3);
+            String name = input.split("/by")[0].trim().substring(9);
+            String deadline = input.split("/by")[1].trim();
             task = new Deadline(name, deadline);
         } else {
             // case: event
@@ -201,8 +201,8 @@ public class Duke {
                 throw new InvalidInputException("Missing event date");
             }
 
-            String name = input.split(" /")[0].substring(6);
-            String time = input.split("/")[1].substring(3);
+            String name = input.split("/at")[0].trim().substring(6);
+            String time = input.split("/at")[1].trim();
             task = new Event(name, time);
         }
 

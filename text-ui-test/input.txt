@@ -1,6 +1,6 @@
 todo borrow book
-deadline return book /by Sunday
-event group meeting /at 4th Aug 2pm
+deadline return book /by 12/12/2020 1400
+event group meeting /at 11-12-2020
 todo join a club
 list
 done 4
@@ -10,9 +10,9 @@ done 2
 list
 todo
 event
-event /at 10
+event /at 12-11-2020 1545
 event watch netflix /at
-event watch netflix /at 10
+event watch netflix /at 12/12/2020 1545
 deadline
 deadline /by Monday
 deadline assignment /by
