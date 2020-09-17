@@ -3,13 +3,15 @@
 ## Features 
 List of commands include:
 
-### Feature 1 - '''list'''
+### Feature 1 - ```list```
 Shows a list of all tasks currently in the task list.
-Format: 'list'
 
-### Feature 2 - '''todo'''
-Adds a to-do task, with a given description
-Format: 'todo' TASK_DESCRIPTION
+Format: `list`
+
+### Feature 2 - ```todo```
+Adds a to-do task, with a given description.
+
+Format: `todo` TASK_DESCRIPTION
 
 ## Usage
 
