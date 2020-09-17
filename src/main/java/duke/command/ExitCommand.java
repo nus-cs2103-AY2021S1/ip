@@ -10,6 +10,7 @@ import duke.ui.Ui;
 public class ExitCommand extends Command {
     /**
      * Initiates the termination of the bot.
+     *
      * @param tasks {@link TaskList} containing list of tasks.
      * @param ui {@link Ui} object.
      * @param storage {@link Storage} object.

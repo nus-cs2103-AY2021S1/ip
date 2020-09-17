@@ -24,6 +24,7 @@ public class Ui {
 
     /**
      * Shows an error message from a {@link DukeException} to the user.
+     *
      * @param e Exception containing the error message.
      */
     public void showError(DukeException e) {

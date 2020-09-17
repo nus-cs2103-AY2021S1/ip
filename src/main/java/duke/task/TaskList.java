@@ -21,6 +21,7 @@ public class TaskList {
 
     /**
      * Creates a {@code TaskList} from existing data.
+     *
      * @param storage {@link Storage} object that will load the data.
      * @throws DukeException If the data fails to load.
      */
@@ -50,6 +51,7 @@ public class TaskList {
 
     /**
      * Finds and list tasks with description containing the keyword.
+     *
      * @param keyword Keyword for the search.
      * @return Tasks containing the keyword.
      */
@@ -72,6 +74,7 @@ public class TaskList {
 
     /**
      * Serializes the {@code TaskList} into a format that can be stored.
+     *
      * @return Serialized data of the list.
      */
     public String serializeList() {

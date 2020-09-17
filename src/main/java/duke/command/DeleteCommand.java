@@ -15,6 +15,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Creates a new {@code DeleteCommand}.
+     *
      * @param taskIdx Index of the task to be deleted.
      */
     public DeleteCommand(int taskIdx) {
@@ -23,6 +24,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Deletes the task
+     *
      * @param tasks {@link TaskList} containing list of tasks.
      * @param ui {@link Ui} object.
      * @param storage {@link Storage} object.

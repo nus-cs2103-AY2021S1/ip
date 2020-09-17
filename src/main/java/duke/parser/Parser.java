@@ -21,8 +21,9 @@ public class Parser {
 
     /**
      * Parses user's input.
+     *
      * @param inputCommand Input command from the user.
-     * @return An executable command.
+     * @return An executable {@link Command}.
      * @throws DukeException If command provided is invalid.
      */
     public static Command parse(String inputCommand) throws DukeException {
@@ -87,7 +88,7 @@ public class Parser {
             }
             return new AddCommand(taskType, deadlineContents);
         case EVENT:
-            String[] eventContents = taskDetail.split( " /at ");
+            String[] eventContents = taskDetail.split(" /at ");
             if (eventContents.length < 2) {
                 throw new DukeException("You need to tell me when this event is happening!");
             }

@@ -15,6 +15,7 @@ public class DoneCommand extends Command {
 
     /**
      * Creates a new {@code DoneCommand}.
+     *
      * @param taskIdx Index of the task to mark as done.
      */
     public DoneCommand(int taskIdx) {
@@ -23,6 +24,7 @@ public class DoneCommand extends Command {
 
     /**
      * Marks a task as done.
+     *
      * @param tasks {@link TaskList} containing list of tasks.
      * @param ui {@link Ui} object.
      * @param storage {@link Storage} object.

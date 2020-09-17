@@ -19,6 +19,7 @@ public class DateTimeParser {
 
     /**
      * Parses datetime input from the user.
+     *
      * @param input Datetime input from the user.
      * @return Parsed {@link DateTime}.
      * @throws DukeException If the input datetime is of an invalid format.

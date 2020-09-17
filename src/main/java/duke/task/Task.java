@@ -24,6 +24,7 @@ public abstract class Task {
 
     /**
      * Creates a brand new {@code Task}.
+     *
      * @param description Description of the task.
      */
     public Task(String description) {
@@ -81,6 +82,7 @@ public abstract class Task {
 
     /**
      * Adds tags to the task.
+     *
      * @param newTags Tags to be added.
      */
     public void addTags(List<String> newTags) {
@@ -90,6 +92,7 @@ public abstract class Task {
 
     /**
      * Remove a tag, if it exists.
+     *
      * @param tagToRemove Tag to be removed.
      * @return Whether the provided tag is removed from the list.
      */
@@ -100,6 +103,7 @@ public abstract class Task {
 
     /**
      * Processes serialized tag data and adds them to the task.
+     *
      * @param tags Tags to be added, in a serialized format.
      */
     public void addTagsFromData(String tags) {

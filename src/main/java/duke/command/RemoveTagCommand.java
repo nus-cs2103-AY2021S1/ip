@@ -9,12 +9,16 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Class representing a command to remove tags from tasks.
+ */
 public class RemoveTagCommand extends Command {
     private final int taskIdx;
     private final List<String> tagsToRemove;
 
     /**
      * Creates a new {@code TagCommand}.
+     *
      * @param taskIdx Index of the task to be processed.
      * @param tagsToRemove Tags to be removed from the task.
      */
@@ -25,6 +29,7 @@ public class RemoveTagCommand extends Command {
 
     /**
      * Executes the command and deletes the tags from the task.
+     *
      * @param tasks {@link TaskList} containing list of tasks.
      * @param ui {@link Ui} object.
      * @param storage {@link Storage} object.

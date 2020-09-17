@@ -10,6 +10,7 @@ public class Event extends Task {
 
     /**
      * Creates a brand new {@code Event}.
+     *
      * @param description Description of the event.
      * @param at Time that the event is happening at.
      */
@@ -23,6 +24,13 @@ public class Event extends Task {
         super(data);
     }
 
+    /**
+     * Loads and initializes a {@code Event} with pre-existing data.
+     *
+     * @param data Event data.
+     * @return A Event task containing the data provided.
+     * @throws DukeException If data provided is of an invalid form.
+     */
     public static Event loadFromData(String[] data) throws DukeException {
         return new Event(data);
     }

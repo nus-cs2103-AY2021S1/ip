@@ -18,6 +18,7 @@ public class TagCommand extends Command {
 
     /**
      * Creates a new {@code TagCommand}.
+     *
      * @param taskIdx Index of the task to be tagged.
      * @param tags Tags to be added to the task.
      */
@@ -28,6 +29,7 @@ public class TagCommand extends Command {
 
     /**
      * Executes the command and adds the tags to the task.
+     *
      * @param tasks {@link TaskList} containing list of tasks.
      * @param ui {@link Ui} object.
      * @param storage {@link Storage} object.

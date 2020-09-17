@@ -11,6 +11,7 @@ import duke.ui.Ui;
 public class InvalidCommand extends Command {
     /**
      * Throws an exception that is to be caught by the bot.
+     *
      * @param tasks List of tasks.
      * @param ui Ui object.
      * @param storage Storage object.

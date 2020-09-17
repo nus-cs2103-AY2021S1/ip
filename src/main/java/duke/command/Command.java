@@ -12,6 +12,7 @@ public abstract class Command {
 
     /**
      * Executes the command.
+     *
      * @param tasks {@link TaskList} containing list of tasks.
      * @param ui {@link Ui} object.
      * @param storage {@link Storage} object.
@@ -21,6 +22,7 @@ public abstract class Command {
 
     /**
      * Method to assert that the arguments supplied to a command execution are valid.
+     *
      * @param tasks {@link TaskList} containing list of tasks.
      * @param ui {@link Ui} object.
      * @param storage {@link Storage} object.
@@ -33,6 +35,7 @@ public abstract class Command {
 
     /**
      * Checks whether the command is an exit command.
+     *
      * @return Whether the command is an exit command.
      */
     public boolean isExit() {

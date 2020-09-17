@@ -21,6 +21,7 @@ public class AddCommand extends Command {
 
     /**
      * Creates a new {@code AddCommand}.
+     *
      * @param taskType Type of the task to be created.
      * @param taskContent Contents of the task.
      */
@@ -31,6 +32,7 @@ public class AddCommand extends Command {
 
     /**
      * Executes the command and creates the respective tasks.
+     *
      * @param tasks {@link TaskList} containing list of tasks.
      * @param ui {@link Ui} object.
      * @param storage {@link Storage} object.

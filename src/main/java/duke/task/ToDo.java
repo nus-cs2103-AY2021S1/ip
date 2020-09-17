@@ -8,6 +8,7 @@ import duke.exception.DukeException;
 public class ToDo extends Task {
     /**
      * Creates a brand new {@code ToDo}.
+     *
      * @param description Description of the todo.
      */
     public ToDo(String description) {
@@ -19,6 +20,13 @@ public class ToDo extends Task {
         super(data);
     }
 
+    /**
+     * Loads and initializes a {@code ToDo} with pre-existing data.
+     *
+     * @param data Todo data.
+     * @return A Todo task containing the data provided.
+     * @throws DukeException If data provided is of an invalid form.
+     */
     public static ToDo loadFromData(String[] data) throws DukeException {
         return new ToDo(data);
     }
