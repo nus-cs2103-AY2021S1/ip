@@ -1,6 +1,21 @@
 # User Guide
 Duke is a desktop app for managing tasks. Duke keeps track of ongoing and finished tasks. Duke offers an interactive and easy way to manage your time. 
 
+## Quick Start
+
+1. Download `duke.jar` file from [github](https://github.com/ijavierja/ip/releases).
+
+2. Ensure you have Java `11` or above installed.
+
+3. Choose the home folder and make a copy of the file there.
+
+4. Double-click the file to start the app.
+
+5. A GUI should start.<br>
+   ![Ui](docs/Ui.png) 
+
+6. Refer to the [Usage](#usage) below for the details of each command.
+
 ## Features 
 
 ###  Task Management
