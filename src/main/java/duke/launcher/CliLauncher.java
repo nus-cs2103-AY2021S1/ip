@@ -1,9 +1,9 @@
 package duke.launcher;
 
-import duke.Duke;
+import duke.DukeCli;
 
 public class CliLauncher {
     public static void main(String[] args) {
-        Duke.launchDuke();
+        DukeCli.launchDuke();
     }
 }

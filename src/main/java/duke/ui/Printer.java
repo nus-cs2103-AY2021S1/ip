@@ -40,7 +40,7 @@ public class Printer {
      */
     public static String printNoTaskReminder() {
         String message = "😝You don't have any task in the schedule yet~~\n"
-                + "use todo/deadline/event command to create your tasks~";
+                + "Use todo/deadline/event command to create your tasks~";
         UtilFunction.printLimit(message);
         return message;
     }
@@ -90,17 +90,15 @@ public class Printer {
      * @return all available commands
      */
     public static String printListCommands() {
-        String commandList = "help: list out all the available commands\n"
-                + "done <task number>: Mark the task as done. \n"
-                + "todo <task content>: Create a todo task. A todo has no deadline.\n"
-                + "deadline <task content> /<" + Constants.DF_LOCAL_TIME
-                + ">: Create a deadline task. Remember to input your date of deadline.\n"
-                + "event <task content> /<" + Constants.DF_LOCAL_TIME
-                + ">: Create an event task. An event has a duration.\n"
-                + "find <query key>: find the task by your query key.\n"
-                + "delete <task number>: delete your task.\n"
-                + "li?st?: list out all the tasks that you have.\n"
-                + "bye: turn off the Duke.\n";
+        String commandList = "<tag>Help</tag>: List all available commands. "
+                + "\n<tag>Done</tag>: Mark the task as done. "
+                + "\n<tag>Todo</tag>: Create a todo task. "
+                + "\n<tag>Deadline</tag>: Create a deadline task. "
+                + "\n<tag>Event</tag>: Create your event task. "
+                + "\n<tag>Find</tag>: Find task by query key. "
+                + "\n<tag>Delete</tag>: Delete one of your task. "
+                + "\n<tag>Li?st?</tag>: List out all existing tasks. "
+                + "\n<tag>Bye</tag>: Turn off the Duke. ";
         System.out.println(commandList);
         return commandList;
     }

@@ -112,7 +112,7 @@ public class CommandParser implements Parser<MetaCommand> {
         try {
             String content = input[1].trim();
             splitContent = content.split(TIME_DELIMITER, 2);
-            tmc.setContent(content);
+            tmc.setContent(splitContent[0]);
             if (content.isEmpty()) {
                 throw new IndexOutOfBoundsException();
             }
@@ -141,7 +141,7 @@ public class CommandParser implements Parser<MetaCommand> {
             if (content.isEmpty()) {
                 throw new IndexOutOfBoundsException();
             }
-            dmc.setContent(content);
+            dmc.setContent(splitInput[0]);
         } catch (IndexOutOfBoundsException e) {
             throw new NullCommandContentException("Description cannot be null", "Event");
         }

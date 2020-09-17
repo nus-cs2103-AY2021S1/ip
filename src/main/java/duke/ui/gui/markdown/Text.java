@@ -1,4 +1,24 @@
 package duke.ui.gui.markdown;
 
-public class Text {
+import javafx.scene.Node;
+import javafx.scene.control.Label;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+
+public class Text implements Markdown {
+    private static final int DEFAULT_TEXT_SIZE = 12;
+    private String text;
+
+    public Text(String text) {
+        this.text = text;
+    }
+
+    @Override
+    public Node create() {
+        Label text = new Label(this.text);
+        text.setMaxWidth(180);
+        text.setWrapText(true);
+        text.setLineSpacing(2);
+        return text;
+    }
 }

@@ -6,13 +6,14 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.text.TextFlow?>
 <fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="390.0" spacing="5" stylesheets="@../css/dialog_box.css" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <HBox fx:id="fullInfo" alignment="BOTTOM_LEFT">
             <Label fx:id="timeStamp" text="timeStamp" wrapText="true" />
             <VBox fx:id="nameAndDialog" xmlns:fx="http://javafx.com/fxml" >
                     <Label fx:id="name" text="name" wrapText="true" />
-                    <Label fx:id="dialog" text="Label" maxWidth="200" wrapText="true" />
+                    <TextFlow fx:id="dialog" maxWidth="200" />
             </VBox>
         </HBox>
 

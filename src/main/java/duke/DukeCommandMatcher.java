@@ -110,6 +110,7 @@ public class DukeCommandMatcher {
         String content = ((ContentMetaCommand) metaCommand).getContent();
         String time = STANDARD_DATE_TIME_FORMATTER.format(((TimeMetaCommand) metaCommand).getTime());
         Deadline deadline = new Deadline(content, time);
+        System.out.println("deadline time: " + deadline.getTask());
         return handleAdd(deadline);
     }
 

@@ -2,7 +2,9 @@ package duke.ui.gui;
 
 import java.io.IOException;
 import java.util.Collections;
+import java.util.List;
 
+import duke.ui.gui.markdown.Markdown;
 import duke.utils.UtilFunction;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,6 +18,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.TextFlow;
 
 /**
  * An example of a custom control using FXML.
@@ -24,7 +27,7 @@ import javafx.scene.shape.Circle;
  */
 public class DialogBox extends HBox {
     @FXML
-    private Label dialog;
+    private TextFlow dialog;
     @FXML
     private Label name;
     @FXML
@@ -36,7 +39,7 @@ public class DialogBox extends HBox {
     @FXML
     private Label timeStamp;
 
-    private DialogBox(String text, Image img, boolean isUser) {
+    private DialogBox(List<Markdown> markdownList, Image img, boolean isUser) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -55,8 +58,11 @@ public class DialogBox extends HBox {
             dialog.setStyle("-fx-background-color: #ffffff");
         }
 
-        dialog.setText(text);
+        for (Markdown markdown : markdownList) {
+            dialog.getChildren().add(markdown.create());
+        }
         dialog.setMinHeight(Label.USE_PREF_SIZE);
+        dialog.setLineSpacing(2);
         timeStamp.setText(UtilFunction.getCurrentTime());
         //move to fxml
         displayPicture.setRadius(20);
@@ -80,11 +86,11 @@ public class DialogBox extends HBox {
 
     }
 
-    public static DialogBox getUserDialog(String text, Image img) {
+    public static DialogBox getUserDialog(List<Markdown> text, Image img) {
         return new DialogBox(text, img, true);
     }
 
-    public static DialogBox getDukeDialog(String text, Image img) {
+    public static DialogBox getDukeDialog(List<Markdown> text, Image img) {
         var db = new DialogBox(text, img, false);
         db.flip();
         return db;

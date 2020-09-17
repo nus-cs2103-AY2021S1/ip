@@ -3,7 +3,7 @@ package duke;
 import duke.ui.Cli;
 import duke.utils.Constants;
 
-public class Duke {
+public class DukeCli {
     /**
      * Launch Duke.
      */
