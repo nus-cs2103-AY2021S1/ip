@@ -24,6 +24,8 @@ public class Ui {
             + "  deadline <task description> /by <task timing (yyyy-mm-dd HH:MM)>\n\n"
             + "- See list of tasks:\n"
             + "  list\n\n"
+            + "- See upcoming list of tasks:\n"
+            + "  upcoming\n\n"
             + "- Mark a task as done:\n"
             + "  done <number>\n\n"
             + "- Delete a task:\n"

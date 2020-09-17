@@ -70,6 +70,9 @@ Here are the things that I can do for you!
 - See list of tasks:
   list
 
+- See upcoming list of tasks:
+  upcoming
+
 - Mark a task as done:
   done <number>
 
