@@ -75,7 +75,7 @@ public class DateTimeProcessor {
             String meridian = hour > 12 ? "PM" : "AM";
             return month.toString() + " " + day + " "
                     + year + " " + (hour > 12 ? hour - 12 : hour)
-                    + ":" + min + " " + meridian;
+                    + ":" + (min < 10 ? "0" + min : min) + " " + meridian;
         } else if (possibleDate.isPresent()) {
             LocalDate dateTime = possibleDate.get();
             Month month = dateTime.getMonth();
