@@ -245,7 +245,7 @@ public class Duke {
         case EXIT:
             new Thread(() -> {
                 try {
-                    Thread.sleep(3000);
+                    Thread.sleep(1500);
                     Platform.runLater(() -> stage.close());
                 } catch (Exception e) {
                     e.printStackTrace();
