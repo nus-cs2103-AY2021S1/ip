@@ -6,6 +6,7 @@ import duck.ui.MainWindow;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -15,6 +16,9 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
         try {
+            stage.setTitle("Duck");
+            Image icon = new Image(this.getClass().getResourceAsStream("/images/duck.png"));
+            stage.getIcons().add(icon);
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             MainWindow mainWindow = new MainWindow();
             fxmlLoader.setController(mainWindow);
