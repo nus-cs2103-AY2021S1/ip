@@ -5,13 +5,14 @@ import java.util.List;
  * It has functions that will help in parsing user commands
  */
 public class Parser {
+    private static final String DELIMITER = " ";
     /**
      * Splits what the user types in to 2 parts
      * @param command
      * @return a 2 sized String array that is related to a command
      */
     public static String[] parse(String command) {
-        return command.split(" ", 2);
+        return command.split(DELIMITER, 2);
     }
 
     /**
@@ -26,15 +27,17 @@ public class Parser {
             throw new DukeException("Please put a number to select a task for the \""
                    + commands[0] + "\" action!");
         }
+        int index;
         try {
-            int index = Integer.parseInt(commands[1]);
-            Task task = taskList.get(index - 1);
-            return index - 1;
-        } catch (NumberFormatException nfe) {
+            index = Integer.parseInt(commands[1]);
+            taskList.get(index - 1);
+        } catch (NumberFormatException numberFormatException) {
             throw new DukeException("Please input an actual number e.g. 1, 2, 3.");
-        } catch (IndexOutOfBoundsException iobe) {
+        } catch (IndexOutOfBoundsException indexOutOfBoundsException) {
             throw new DukeException("Please select a valid task.");
         }
+
+        return index - 1;
     }
 
     /**
