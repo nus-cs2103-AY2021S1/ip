@@ -8,8 +8,11 @@ The project centralises around the theme of Sanrio character Gudetama. The bot i
 Prerequisites: JDK 11, Gradle.
 
 To run the app: (To be updated)
-1. Download the .jar file from the releases and run it.
+1. Download the .jar file from the releases and run it.  
+
 _or_
+
+
 1. Clone the repository
 2. Using your IDE (eg. Intellij), open the build.gradle file inside the repository
 3. When prompted, choose 'open as project' and let gradle setup the project
