@@ -1,5 +1,7 @@
 # User Guide
 
+![](Ui.png)
+
 Straw bot is a desktop app for managing todo tasks, optimized for use via a Command Line Interface.
 Graphical User Interface (GUI) is added for better user accessibility.
 
