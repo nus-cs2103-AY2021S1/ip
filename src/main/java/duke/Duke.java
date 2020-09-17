@@ -18,14 +18,14 @@ public class Duke {
     private TaskList tasks;
     /**
      * Constructs a Duke object and initialises the TaskList, Ui and Storage.
-     * @param filepath location of the save file containing the list of tasks.
+     * @param directoryPath location of the save file containing the list of tasks.
      */
-    public Duke (String filepath) {
+    public Duke (String directoryPath) {
         tasks = new TaskList();
         ui = new Ui();
-        storage = new Storage(filepath);
+        storage = new Storage(directoryPath);
         try {
-            storage.pullList(tasks);
+            storage.loadList(tasks);
         } catch (Exception e) {
             ui.printError(e);
         }

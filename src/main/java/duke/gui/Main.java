@@ -14,9 +14,10 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private static final String filepath = "duke.txt";
+    private static final String filepath = ".../duke.txt";
+    private static final String DIRECTORY_PATH = System.getProperty("user.dir") + "/data/";
 
-    private Duke duke = new Duke(filepath);
+    private Duke duke = new Duke(DIRECTORY_PATH);
 
     @Override
     public void start(Stage stage) {
