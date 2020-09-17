@@ -15,22 +15,22 @@ Don't worry, Doraemon TaskList is here to help! Doraemon TaskList is a simple ap
 
 ## Features 
 1. **Adding Tasks**: adds a task into the task list.
-   + **`todo`**: adds a *todo* task to the list.
-   + **`deadline`**: adds a *deadline* task to the list.
-   + **`event`**: adds an *event* task to the list.
+   + [**`todo`**](#todo): adds a *todo* task to the list.
+   + [**`deadline`**](#deadline): adds a *deadline* task to the list.
+   + [**`event`**](#event): adds an *event* task to the list.
 2. **Listing Tasks**: shows a list of task(s) from the task list.
-   + **`list`**: shows all the task(s) in the task list.
-   + **`list <date>`**: shows the list of deadline(s)/event(s) on that date.
-3. **`done`**: marks the task at a specified index as *done*.
-4. **`delete`**: removes a task from the list.
-5. **`find`**: search for task(s) that contains the specified keyword(s).
-6. **`help`**: shows the list of available commands and their instructions.
-7. **`bye`**: exits the application.
+   + [**`list`**](#list): shows all the task(s) in the task list.
+   + [**`list <date>`**](#listdate): shows the list of deadline(s)/event(s) on that date.
+3. [**`done`**](#done): marks the task at a specified index as *done*.
+4. [**`delete`**](#delete): removes a task from the list.
+5. [**`find`**](#find): search for task(s) that contains the specified keyword(s).
+6. [**`help`**](#help): shows the list of available commands and their instructions.
+7. [**`bye`**](#bye): exits the application.
 
 ## Feature Details
 
 ### 1. Adding Tasks
-#### 1a. **`todo`** - Adds a *todo* task to the task list.
+#### <a name="todo"></a>1a. **`todo`** - Adds a *todo* task to the task list.
 **Example of Usage:** `todo task1` 
 
 Adds a *todo* task with description task1 to the list. 
@@ -42,7 +42,7 @@ This task contains the description with no specified date/time.
 ![todo](./screenshot/todo.png)
 
 
-#### 1b. **`deadline`** - Adds a *deadline* task to the task list.
+#### <a name="deadline"></a>1b. **`deadline`** - Adds a *deadline* task to the task list.
 **Example of Usage:** `deadline task2 /by 14/9/2020 1200`
 
 Adds a *deadline* task with description task2 and date 14/9/2020, time 1200.
@@ -56,7 +56,7 @@ eg. `deadline task2 /by 14/9/2020`
 ![deadline](./screenshot/deadline.png)
 
 
-#### 1c. **`event`** - Adds a *event* task to the task list.
+#### <a name="event"></a>1c. **`event`** - Adds a *event* task to the task list.
 **Example of Usage:** `event task3 /at 14/9/2020 1200`
 
 Adds a *event* task with description task3 and date 14/9/2020, time 1200.
@@ -70,7 +70,7 @@ eg. `event task3 /by 14/9/2020`
 ![event](./screenshot/event.png)
 
 ### 2. List
-#### 2a. **`list`** - List all task(s) in the task list. 
+#### <a name="list"></a>2a. **`list`** - List all task(s) in the task list. 
 **Example of Usage:** `list`
 
 **Expected outcome:**
@@ -78,7 +78,7 @@ eg. `event task3 /by 14/9/2020`
 ![list](./screenshot/list.png)
 
 
-#### 2b. **`list <date>`** - List all task(s) falling on that date.
+#### <a name="listdate"></a>2b. **`list <date>`** - List all task(s) falling on that date.
 **Example of Usage:** `list 14/9/2020`
 
 **Expected outcome:**
@@ -86,7 +86,7 @@ eg. `event task3 /by 14/9/2020`
 ![list_date](./screenshot/listdate.png)
 
 
-### 3. **`done`** - Mark a task as completed.
+### <a name="done"></a>3. **`done`** - Mark a task as completed.
 **Example of Usage:** `done 1`
 
 Marks the task of *index 1* from the task list as completed. The list shows a tick instead of cross.
@@ -96,7 +96,7 @@ Marks the task of *index 1* from the task list as completed. The list shows a ti
 ![done](./screenshot/done.png)
 
 
-### 4. **`delete`** - Removes a task from the task list.
+### <a name="delete"></a>4. **`delete`** - Removes a task from the task list.
 **Example of Usage:** `delete 1`
 
 Removes the task of *index 1* from the task list.
@@ -106,7 +106,7 @@ Removes the task of *index 1* from the task list.
 ![delete](./screenshot/delete.png)
 
 
-### 5. **`find`** - Searches for all the task(s) that contains the keyword(s).
+### <a name="find"></a>5. **`find`** - Searches for all the task(s) that contains the keyword(s).
 **Example of Usage:** `find task`
 
 Finds all the task that contains the word *task* from the task list.
@@ -116,7 +116,7 @@ Finds all the task that contains the word *task* from the task list.
 ![find](./screenshot/find.png)
 
 
-### 6. **`help`** - Shows the list of available commands and their instructions.
+### <a name="help"></a>6. **`help`** - Shows the list of available commands and their instructions.
 **Example of Usage:** `help`
 
 **Expected outcome:**
@@ -124,7 +124,7 @@ Finds all the task that contains the word *task* from the task list.
 ![help](./screenshot/help.png)
 
 
-### 7. **`bye`** - Use when you want to exit the application.
+### <a name="bye"></a>7. **`bye`** - Use when you want to exit the application.
 **Example of Usage:** `bye`
 
 **Expected outcome:** A bye message appears and application closes after 1.5 seconds.
