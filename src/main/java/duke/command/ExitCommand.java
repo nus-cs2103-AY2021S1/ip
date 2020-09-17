@@ -15,7 +15,6 @@ public class ExitCommand extends Command {
      * Creates an <code>ExitCommand</code> object.
      */
     public ExitCommand() {
-        super();
     }
 
     /**

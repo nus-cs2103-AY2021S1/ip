@@ -1,6 +1,7 @@
 package duke.parser;
 
 import duke.command.CloneCommand;
+import duke.command.CloseCommand;
 import duke.command.Command;
 import duke.command.DeadlineCommand;
 import duke.command.DeleteCommand;
@@ -103,8 +104,17 @@ public class Parser {
             return createUpdateCommand(splitInput);
         }
 
+        boolean isCloseCommand = splitInput[0].equals(CloseCommand.COMMAND);
+        if (isCloseCommand && hasNoFollowUp) {
+            return createCloseCommand();
+        }
+
         // unregonised command
         return new Command();
+    }
+
+    private static Command createCloseCommand() {
+        return new CloseCommand();
     }
 
     private static Command createUpdateCommand(String[] splitInput) throws DukeException {
