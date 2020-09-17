@@ -4,6 +4,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class TimedTask extends Task {
+
+    public static DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("d/M/yyyy");
+    public static DateTimeFormatter OUTPUT_DATE_FORMATTER = DateTimeFormatter.ofPattern("MMM d yyyy");
+
     protected LocalDate date;
 
     TimedTask(String description, LocalDate date) {
@@ -19,13 +23,13 @@ public class TimedTask extends Task {
     @Override
     public String toText(String taskLetter) {
         String str = super.toText(taskLetter);
-        str += "| " + this.date.format(Common.DATE_FORMATTER);
+        str += "| " + this.date.format(DATE_FORMATTER);
         return str;
     }
 
     public String toString(String taskLetter) {
-        String dateOutput = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-        return String.format("[%s]%s (by: %t", taskLetter, super.toString(), dateOutput);
+        String dateFormatted = date.format(OUTPUT_DATE_FORMATTER);
+        return String.format("[%s]%s (by: %s)", taskLetter, super.toString(), dateFormatted);
     }
 
 }

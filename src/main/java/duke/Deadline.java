@@ -15,11 +15,11 @@ public class Deadline extends TimedTask {
 
     @Override
     public String toText() {
-        super.toText("D");
+        return super.toText("D");
     }
 
     @Override
     public String toString() {
-        super.toString("D");
+        return super.toString("D");
     }
 }

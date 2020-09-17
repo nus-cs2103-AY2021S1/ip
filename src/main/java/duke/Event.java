@@ -14,11 +14,11 @@ public class Event extends TimedTask {
 
     @Override
     public String toText() {
-        super.toText("E");
+        return super.toText("E");
     }
 
     @Override
     public String toString() {
-        super.toString("E");
+        return super.toString("E");
     }
 }

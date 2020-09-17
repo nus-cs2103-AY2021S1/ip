@@ -1,57 +1,34 @@
 package duke;
 
-import java.util.Scanner;
-
 public class Ui {
-//    private final Scanner sc;
-
-//    public Ui() {
-//        this.sc = new Scanner(System.in);
-//    }
-
-//    /**
-//     * Creates a 'frame' for the output that is being printed
-//     *
-//     * @param s The output that is going to get printed.
-//     */
-    public static void printMessage(String s) {
-        String output = String.format("____________________________________________________________\n%s\n"
-                + "____________________________________________________________\n", s);
-        System.out.println(output);
-    }
 
     /**
      * Prints message in exception.
      *
      * @param e Duke Exception
      */
-    public static void printException(Exception e) {
-        String errorMessage = "Whoops! Something went wrong...  DukeException: " + e.getMessage();
-        printMessage(errorMessage);
+    public static String printException(Exception e) {
+        String errorMessage = "Whoops! Something went wrong...\nError: " + e.getMessage();
+        return errorMessage;
     }
 
-
-    public void showWelcomeMessage() {
-        String greetings = "Hello! I'm Duke, your personal assistant.\nWhat can I do for you?";
-        printMessage(greetings);
+    public static String informTaskDone(Task task) {
+        return "Nice! I've marked this task as done:\n" + task;
     }
 
-    public void showStartFailedMessage() {
-        String errorMessage = "An error occurred in during initialisation :(";
-        printMessage(errorMessage);
+    public static String informTaskDeleted(Task task) {
+        return "Alright! I've removed this task:\n" + task;
     }
 
-    public void showGoodbyeMessage() {
-        String byeMessage = "Bye. Take care!!";
-        printMessage(byeMessage);
+    public static String informNumberOfTasksRemaining(TaskList taskList) {
+        return "\nNow you have " + taskList.size() + " tasks in the list.";
     }
 
-//    /**
-//     * Returns what the user input.
-//     *
-//     * @return One line of user input.
-//     */
-//    public String getUserInput() {
-//        return sc.nextLine();
-//    }
+    public static String informNewTask(Task task) {
+        return "Roger. I've added this task:\n" + task;
+    }
+
+    public static String informInvalidCommand() {
+        return "I'm sorry, but I don't know what that means :(";
+    }
 }

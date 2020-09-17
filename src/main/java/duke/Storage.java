@@ -18,53 +18,77 @@ public class Storage {
     // read file contents and return a String
     private static String readFileContents(String filePath) throws FileNotFoundException {
         File f = new File(filePath);
-        String content = "";
-        Scanner s = new Scanner(f);
-        while (s.hasNext()) {
-            content += s.nextLine() + System.lineSeparator();
+        String fileContentsInString = "";
+        Scanner scanner = new Scanner(f);
+        while (scanner.hasNext()) {
+            fileContentsInString += scanner.nextLine() + System.lineSeparator();
         }
-        s.close();
-        return content;
+        scanner.close();
+        return fileContentsInString;
     }
 
-    private static ArrayList<Task> createTaskList(String content) {
-        ArrayList<Task> list = new ArrayList<>();
-        Scanner s = new Scanner(content);
-        while (s.hasNext()) {
-            String line = s.nextLine();
-            String[] arr = line.split("\\|");
-            String type = arr[0].trim();
-            int status = Integer.parseInt(arr[1].trim());
-            String description = arr[2].trim();
-            if (type.equals("T")) {
-                list.add(new ToDo(description, status == Task.DONE));
+    private static ArrayList<Task> createTaskList(String content) throws DukeException {
+        ArrayList<Task> newTaskList = new ArrayList<>();
+        Scanner scanner = new Scanner(content);
+        while (scanner.hasNext()) {
+            String lineOfText = scanner.nextLine();
+            String[] splitText = lineOfText.split("\\|");
+            String typeOfTask = splitText[0].trim();
+            int statusOfTask = Integer.parseInt(splitText[1].trim());
+            String taskDescription = splitText[2].trim();
+            if (typeOfTask.equals("T")) {
+                createTodoTask(newTaskList, statusOfTask, taskDescription);
             } else {
-                String additionalInfo = arr[3].trim();
-                if (type.equals("D")) {
-                    String dateInString = additionalInfo;
-                    String time = arr[4].trim();
-                    list.add(new Deadline(description, status == Task.DONE, LocalDate.parse(dateInString, Common.BASIC_FORMATTER), time));
+                String date = splitText[3].trim();
+                if (typeOfTask.equals("D")) {
+                    createTimedTask(newTaskList, statusOfTask, taskDescription, date, Task.Type.DEADLINE);
+                } else if (typeOfTask.equals("E")) {
+                    createTimedTask(newTaskList, statusOfTask, taskDescription, date, Task.Type.EVENT);
                 } else {
-                    list.add(new Event(description, additionalInfo, status == Task.DONE));
+                    throw new DukeException("Cannot create invalid type of task!");
                 }
             }
         }
-        s.close();
-        return list;
+        scanner.close();
+        return newTaskList;
+    }
+
+    private static void createTimedTask(ArrayList<Task> newTaskList, int statusOfTask, String taskDescription,
+                                        String date, Task.Type type) {
+        LocalDate formattedDate = LocalDate.parse(date, TimedTask.DATE_FORMATTER);
+        if (type == Task.Type.EVENT) {
+            newTaskList.add(new Event(taskDescription, formattedDate, statusOfTask == Task.DONE));
+        } else {
+            newTaskList.add(new Deadline(taskDescription, statusOfTask == Task.DONE, formattedDate));
+        }
+
+    }
+
+    private static void createTodoTask(ArrayList<Task> list, int statusOfTask, String taskDescription) {
+        list.add(new ToDo(taskDescription, statusOfTask == Task.DONE));
     }
 
     /**
      * Creates an ArrayList of Tasks using the contents of the file.
+     *
      * @return An ArrayList of Tasks.
      * @throws FileNotFoundException If the file does not exist in the FilePath.
      */
-    public ArrayList<Task> load() throws FileNotFoundException {
-        String contentsInString = Storage.readFileContents(this.filePath);
-        return createTaskList(contentsInString);
+    public ArrayList<Task> load() throws DukeException {
+        try {
+            String fileContents = Storage.readFileContents(this.filePath);
+            return createTaskList(fileContents);
+        } catch (FileNotFoundException e) {
+            throw new DukeException("File not found!");
+        } catch (DukeException e) {
+            throw e;
+        }
+
     }
 
     /**
      * Creates a file to so that we are able to save all the tasks in the TaskList.
+     *
      * @throws IOException If the directory of the file being created doesn't exist.
      */
     public void createFile() throws IOException {
@@ -72,19 +96,31 @@ public class Storage {
         file.createNewFile();
     }
 
-    private static void writeToFile(String filePath, String textToAdd) throws IOException {
-        FileWriter fw = new FileWriter(filePath);
-        fw.write(textToAdd);
-        fw.close();
+    private static void writeToFile(String filePath, String textToAdd) throws DukeException {
+        try {
+            FileWriter fw = new FileWriter(filePath);
+            fw.write(textToAdd);
+            fw.close();
+        } catch (IOException e) {
+            throw new DukeException("Error writing to file during Save");
+        }
     }
-
-    //TODO: Throw DukeException
 
     /**
      * Saves all the tasks in TaskList to a text file.
+     *
      * @param taskList TaskList containing all the existing tasks entered by user.
      */
-    public void save(TaskList taskList) {
+    public void save(TaskList taskList) throws DukeException {
+        String dataToSave = readDataFromTaskList(taskList);
+        try {
+            writeToFile(this.filePath, dataToSave);
+        } catch (DukeException e) {
+            throw e;
+        }
+    }
+
+    private String readDataFromTaskList(TaskList taskList) {
         String dataToSave = "";
         for (int i = 0; i < taskList.size(); i++) {
             Task currentTask = taskList.get(i);
@@ -94,11 +130,6 @@ public class Storage {
                 dataToSave += currentTask.toText() + System.lineSeparator();
             }
         }
-        try {
-            writeToFile(this.filePath, dataToSave);
-        } catch (IOException e) {
-            System.out.println("Error saving data to disk");
-            e.printStackTrace();
-        }
+        return dataToSave;
     }
 }

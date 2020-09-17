@@ -54,8 +54,8 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(greetings, dukeImage));
     }
 
-    public void printException(Exception e) {
-        String errorMessage = "Whoops! Something went wrong...\nDukeException: " + e.getMessage();
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(errorMessage, dukeImage));
-    }
+//    public void printException(Exception e) {
+//        String errorMessage = "Whoops! Something went wrong...\nDukeException: " + e.getMessage();
+//        dialogContainer.getChildren().add(DialogBox.getDukeDialog(errorMessage, dukeImage));
+//    }
 }
