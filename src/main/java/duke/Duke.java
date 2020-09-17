@@ -65,14 +65,4 @@ public class Duke {
     public void uiRun() {
         ui.run(lst);
     }
-
-    /**
-     *  Executes duke bot with a given path.
-     * @param args input string (not used)
-     */
-    public static void main(String[] args) throws Exception {
-        java.nio.file.Path path = java.nio.file.Paths.get(
-                System.getProperty("user.home"), "ip", "/data/start.txt");
-        new Duke(path).run();
-    }
 }

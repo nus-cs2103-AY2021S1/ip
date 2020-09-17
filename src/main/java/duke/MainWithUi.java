@@ -31,7 +31,7 @@ public class MainWithUi extends Application {
     private Image dukePic = new Image(this.getClass()
             .getResourceAsStream("/images/DaDuke.jpg"));
     private java.nio.file.Path path = java.nio.file.Paths
-            .get(System.getProperty("user.home"), "ip", "/data/start.txt");
+            .get(System.getProperty("user.home"), "ip", "/start.txt");
     private Duke dukeBot = new Duke(path);
 
     @Override
