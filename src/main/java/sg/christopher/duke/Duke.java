@@ -96,6 +96,7 @@ public class Duke {
             return "ERROR: Task no. not found. Does that task exist?";
         }
         task.markAsDone();
+        DataManager.writeList(savedItems);
 
         return "Nice! I've marked this task as done:\n" + taskNo + ". " + task;
     }
