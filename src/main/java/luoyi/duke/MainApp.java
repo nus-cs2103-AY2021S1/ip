@@ -28,7 +28,6 @@ public class MainApp extends Application {
             stage.setScene(scene);
             stage.setTitle("CatBot");
             stage.getIcons().add(new Image(MainApp.class.getResourceAsStream("/images/icon.jpg")));
-            stage.setResizable(false);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
         } catch (IOException e) {
