@@ -1,6 +1,14 @@
-# User Guide for Duke
+# User Guide for Pipboy
 
 ![](Ui.png) | ![](Help.png)
+
+## Getting Started
+
+1. Download the Jar file from releases.
+
+2. Ensure you have downloaded jdk 11.
+
+3. Run the pipboy.jar file.
 
 ## Features 
  
