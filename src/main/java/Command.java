@@ -34,17 +34,17 @@ public class Command {
 
         //init all the duke commands
         commands.put("todo", new Cmd((input) -> taskList.add(input, false),
-                            "todo_(task description)"));
+                            "todo (task description)"));
         commands.put("deadline", new Cmd((input) -> taskList.add(input, false),
-                "deadline_(task description)/(dd/MM/yyyy HH:mm)"));
+                "deadline (task description)/(dd/MM/yyyy HH:mm)"));
         commands.put("event", new Cmd((input) -> taskList.add(input, true),
-                "event_(event description)/(dd/MM/yyyy HH:mm)"));
-        commands.put("done", new Cmd(taskList::done, "done_(indexOfTask)"));
-        commands.put("delete", new Cmd(taskList::delete, "delete_(indexOfTask)"));
-        commands.put("find", new Cmd(taskList::find, "find_(task description)"));
+                "event (event description)/(dd/MM/yyyy HH:mm)"));
+        commands.put("done", new Cmd(taskList::done, "done (indexOfTask)"));
+        commands.put("delete", new Cmd(taskList::delete, "delete (indexOfTask)"));
+        commands.put("find", new Cmd(taskList::find, "find (task description)"));
         commands.put("list", new Cmd(taskList::displayList, "list"));
-        commands.put("postpone", new Cmd(taskList::postpone, "postpone_(indexOfTask)/(dd/MM/yyyy HH:mm)"));
-        commands.put("bye", new Cmd((input) -> "See you again!", ""));
+        commands.put("postpone", new Cmd(taskList::postpone, "postpone (indexOfTask)/(dd/MM/yyyy HH:mm)"));
+        commands.put("bye", new Cmd((input) -> "See you again!", "bye"));
     }
 
     /**
