@@ -20,10 +20,27 @@ public class Ui {
     }
 
     /**
+     * Prints all the commands available for DukeBB.
+     */
+    public String printHelpMessage() {
+        String string = "Commands available:\n";
+        string += "- list : list out all tasks.\n";
+        string += "- todo <description> : adds a to-do task\n";
+        string += "- event <description> /at YYYY-MM-DD : adds an event task\n";
+        string += "- deadline <description> /by YYYY-MM-DD : adds a deadline task\n";
+        string += "- delete <index> : delete a task at that index\n";
+        string += "- done <index> : mark a task at that index as done\n";
+        string += "- priority <index> <priority_type> : mark a task at that index with a priority type\n";
+        string += "- find <keyword> : search for a task with keyword\n";
+        string += "- bye : exits the program\n";
+        return string;
+    }
+
+    /**
      * Prints a welcome message when duke.Duke runs.
      */
     public String printWelcomeMessage() {
-        String string = "Hello! I'm duke.Duke baby :)\n" + "What can I do for you?";
+        String string = "Hello! I'm DukeBB :)\n" + "What can I do for you?";
         return string;
     }
 

@@ -25,6 +25,8 @@ public class Parser {
         String[] parsedStrings;
 
         switch (action) {
+            case "help":
+                return new HelpCommand();
             case "list":
                 return new ListCommand();
             case "bye":
