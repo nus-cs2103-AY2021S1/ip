@@ -1,0 +1,2 @@
+[D][✓] return book (by: 13:56 Aug 23 2020)
+[E][✘] project meeting (at: 13:58 Aug 26 2020)

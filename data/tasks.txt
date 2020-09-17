@@ -1,0 +1,3 @@
+[T][✘] CS2103T Individual Project user guide 
+[E][✘] CS2103T Tutorial (at: 09:00 Sep 16 2020)
+[D][✘] CS2103T Individual Project (by: 23:59 Sep 18 2020)
