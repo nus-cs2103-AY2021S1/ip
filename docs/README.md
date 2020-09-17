@@ -9,8 +9,9 @@ Chubbs also stores them in your computer.
  3. *Event*: Task that will occur at a specific date/time.
  
 ## Features and Commands
+
 Features | Commands
------------- | -------------
+|------------ | -------------|
 |1. Adds a todo task | `todo  {description}` |
 |2. Adds a deadline task |`deadline  {description}  /by  {yyyy-MM-dd  HH:mm}`|
 |3. Adds an even task | `event  {description}  /at  {yyyy-MM-dd HH:mm}`|
@@ -25,54 +26,63 @@ Features | Commands
 ##  Features Walkthrough
 
 ### 1. Adding a todo task 
+
 Command |  `todo  {description}`
 ------------ | -------------
  
 ![event](https://github.com/jimvae/ip/blob/branch-A-UserGuide/src/main/resources/images/screenshots/todo.png?raw=true)
 
 ### 2. Adding a deadline task
+
 Command: | `deadline  {description}  /by  {yyyy-MM-dd  HH:mm}`
 ------------ | -------------
 
 ![deadline](https://github.com/jimvae/ip/blob/branch-A-UserGuide/src/main/resources/images/screenshots/deadline.png?raw=true)
 
 ### 3. Adding an event task
+
 Command: | `event  {description}  /at  {yyyy-MM-dd HH:mm}`
 ------------ | -------------
 
 ![event](https://github.com/jimvae/ip/blob/branch-A-UserGuide/src/main/resources/images/screenshots/event.png?raw=true)
 
 ### 4. Displaying all tasks
+
 Command: | `list`
 ------------ | -------------
 
 ![list](https://github.com/jimvae/ip/blob/branch-A-UserGuide/src/main/resources/images/screenshots/list.png?raw=true)
 
 ### 5. Marking your task as done
+
 Command: | `done  {task number}`
 ------------ | -------------
 
 ![done](https://github.com/jimvae/ip/blob/branch-A-UserGuide/src/main/resources/images/screenshots/done.png?raw=true)
 
 ### 6. Deleting your task
+
 Command: | `delete  {task number}`
 ------------ | -------------
 
 ![delete](https://github.com/jimvae/ip/blob/branch-A-UserGuide/src/main/resources/images/screenshots/delete.png?raw=true)
 
 ### 7. Finding your task
+
 Command: | `find  {keyword}`
 ------------ | -------------
 
 ![find](https://github.com/jimvae/ip/blob/branch-A-UserGuide/src/main/resources/images/screenshots/find.png?raw=true)'
 
 ### 8. Reminders this week
+
 Command: | `reminder`
 ------------ | -------------
 
 ![reminder](https://github.com/jimvae/ip/blob/branch-A-UserGuide/src/main/resources/images/screenshots/reminder.png?raw=true)
 
 ### 9. List of commands
+
 Command: | `meow`
 ------------ | -------------
 
