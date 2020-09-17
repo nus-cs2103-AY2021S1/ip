@@ -2,6 +2,7 @@
 Duke can help you manage and save your tasks!
 
 ![Duke user interface](https://github.com/chshen1998/ip/blob/master/docs/Ui.png)
+![Duke user interface](https://github.com/chshen1998/ip/blob/master/docs/Ui.png?raw=true)
 
 ## Types of Tasks
 1. Todo: Tasks that do not have date/time associated with it.
