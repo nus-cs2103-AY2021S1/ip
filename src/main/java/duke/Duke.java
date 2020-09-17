@@ -48,7 +48,7 @@ public class Duke {
     /**
      *  Initialises task list from saved file.
      */
-    public void start() {
+    public void start() throws IOException {
         storage.writeToList(lst);
     }
 
@@ -72,7 +72,7 @@ public class Duke {
      */
     public static void main(String[] args) throws Exception {
         java.nio.file.Path path = java.nio.file.Paths.get(
-                System.getProperty("user.home"), "ip", "start.txt");
+                System.getProperty("user.home"), "ip", "/data/start.txt");
         new Duke(path).run();
     }
 }
