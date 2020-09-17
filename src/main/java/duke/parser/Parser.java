@@ -17,12 +17,13 @@ import duke.command.SortCommand;
 import duke.exception.InvalidCommandException;
 import duke.exception.InvalidDeleteException;
 import duke.exception.InvalidDoneException;
+import duke.exception.InvalidTaskContentException;
 import duke.exception.InvalidTaskDateException;
 import duke.exception.InvalidTaskDateTimeException;
 import duke.exception.InvalidTaskNumberException;
 import duke.exception.NoFindContentException;
 import duke.exception.NoTaskContentException;
-import duke.exception.NoTaskDateTimeException;
+import duke.exception.NoTaskDateException;
 import duke.exception.NoTaskException;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -45,7 +46,7 @@ public class Parser {
      * @throws InvalidDoneException  If user inputs a done command without specifying a number.
      * @throws InvalidTaskNumberException  If user inputs a number that is not valid.
      * @throws NoTaskContentException  If user inputs an add task command without a description and/or date/time.
-     * @throws NoTaskDateTimeException  If user inputs an add deadline or add event command without date/time.
+     * @throws NoTaskDateException  If user inputs an retrieve command without date.
      * @throws InvalidTaskDateTimeException If user inputs a add deadline or add event command
      * with a wrong date/time format.
      * @throws InvalidCommandException  If user inputs an unknown command.
@@ -55,8 +56,9 @@ public class Parser {
      */
     public static Command parse(String input, TaskList tasks) throws NoTaskException,
             InvalidDoneException, InvalidTaskNumberException, NoTaskContentException,
-            NoTaskDateTimeException, InvalidCommandException,
-            InvalidDeleteException, InvalidTaskDateException, NoFindContentException, InvalidTaskDateTimeException {
+            NoTaskDateException, InvalidCommandException,
+            InvalidDeleteException, InvalidTaskDateException, InvalidTaskContentException,
+            NoFindContentException, InvalidTaskDateTimeException {
         String trimmedInput = input.trim();
         if (trimmedInput.equals("bye")) {
             return new ByeCommand();
@@ -64,7 +66,9 @@ public class Parser {
             return parseList(tasks);
         } else if (trimmedInput.startsWith("done")) {
             return parseDone(trimmedInput, tasks);
-        } else if (trimmedInput.startsWith("todo") || trimmedInput.startsWith("deadline") || trimmedInput.startsWith("event")) {
+        } else if (trimmedInput.startsWith("todo")
+                || trimmedInput.startsWith("deadline")
+                || trimmedInput.startsWith("event")) {
             return parseAddTask(trimmedInput);
         } else if (trimmedInput.startsWith("delete")) {
             return parseDelete(trimmedInput, tasks);
@@ -153,13 +157,14 @@ public class Parser {
      * @param input User input to Duke.
      * @return AddTaskCommand that add Tasks
      * @throws NoTaskContentException  If user inputs a add task command without a description and/or date/time.
-     * @throws NoTaskDateTimeException  If user inputs an add deadline or add event command without date/time.
+     * @throws InvalidTaskContentException  If user inputs an add deadline or add event command
+     * without description and/or date/time.
      * @throws InvalidTaskDateTimeException If user inputs a add deadline or add event command
      * with a wrong date/time format.
      * @throws InvalidCommandException  If user inputs an unknown command.
      */
     private static AddTaskCommand parseAddTask(String input) throws NoTaskContentException,
-            NoTaskDateTimeException, InvalidTaskDateTimeException, InvalidCommandException {
+            InvalidTaskContentException, InvalidTaskDateTimeException, InvalidCommandException {
         String[] splitInput = input.split(" ", 2);
         String taskWord = splitInput[0];
         boolean hasContent = checkForContent(splitInput);
@@ -184,17 +189,18 @@ public class Parser {
      *
      * @param content User input after the task word.
      * @return AddTaskCommand.
-     * @throws NoTaskDateTimeException  If user inputs an deadline command without date/time.
+     * @throws NoTaskContentException  If user inputs an deadline command without description and/or date/time.
      * @throws InvalidTaskDateTimeException  If user input an add deadline command with a wrong date/time format.
      */
-    private static AddTaskCommand parseAddDeadline(String content) throws NoTaskDateTimeException,
-            InvalidTaskDateTimeException {
+    private static AddTaskCommand parseAddDeadline(String content) throws InvalidTaskDateTimeException,
+            InvalidTaskContentException {
         try {
             String[] splitContent = content.split(" /by ", 2);
-            boolean hasDateTime = checkForContent(splitContent);
-            if (!hasDateTime) {
-                throw new NoTaskDateTimeException(
-                        "OOPS!!! The date/time of a deadline cannot be empty.");
+            boolean hasValidContent = checkForContent(splitContent);
+            if (!hasValidContent) {
+                assert splitContent.length == 1 : "size of splitContent must be one";
+                throw new InvalidTaskContentException(
+                        "OOPS!!! Enter \"deadline <description> /by <dd/MM/yyyy HH:mm>\" to add a new deadline!");
             }
             String description = splitContent[0];
             String by = splitContent[1];
@@ -209,17 +215,18 @@ public class Parser {
      *
      * @param content User input after the task word.
      * @return AddTaskCommand.
-     * @throws NoTaskDateTimeException  If user inputs an add event command without date/time.
+     * @throws InvalidTaskContentException  If user inputs an add event command without description and/or date/time.
      * @throws InvalidTaskDateTimeException  If user input an add event command with a wrong date/time format.
      */
-    private static AddTaskCommand parseAddEvent(String content) throws NoTaskDateTimeException,
+    private static AddTaskCommand parseAddEvent(String content) throws InvalidTaskContentException,
             InvalidTaskDateTimeException {
         try {
             String[] splitContent = content.split(" /at ", 2);
-            boolean hasDateTime = checkForContent(splitContent);
-            if (!hasDateTime) {
-                throw new NoTaskDateTimeException(
-                        "OOPS!!! The date/time of an event cannot be empty.");
+            boolean hasValidContent = checkForContent(splitContent);
+            if (!hasValidContent) {
+                assert splitContent.length == 1 : "size of splitContent must be one";
+                throw new InvalidTaskContentException(
+                        "OOPS!!! Enter \"event <description> /at <dd/MM/yyyy HH:mm>\" to add a new event!");
             }
             String description = splitContent[0];
             String at = splitContent[1];
@@ -261,10 +268,10 @@ public class Parser {
      *
      * @param input User input to Duke.
      * @return RetrieveCommand.
-     * @throws NoTaskDateTimeException  If user input does not contain date and/or time.
+     * @throws NoTaskDateException  If user input does not contain date and/or time.
      * @throws InvalidTaskDateException  If user input an incorrect date and/or time format.
      */
-    private static RetrieveCommand parseRetrieve(String input) throws NoTaskDateTimeException,
+    private static RetrieveCommand parseRetrieve(String input) throws NoTaskDateException,
             InvalidTaskDateException {
         assert input.startsWith("retrieve") : "input should start with retrieve";
 
@@ -272,7 +279,7 @@ public class Parser {
             String[] splitInput = input.split(" ");
             boolean hasContent = checkForContent(splitInput);
             if (!hasContent) {
-                throw new NoTaskDateTimeException("OOPS!!! Please enter a date.");
+                throw new NoTaskDateException();
             }
             LocalDate date = LocalDate.parse(splitInput[1], DateTimeFormatter.ofPattern("dd/MM/yyyy"));
             return new RetrieveCommand(date);
