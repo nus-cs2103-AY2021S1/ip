@@ -1,20 +1,31 @@
-# User Guide
+# Duke User Guide
 
 ## Features 
 
-### Feature 1 
-Description of feature.
-
-## Usage
-
-### `Keyword` - Describe action
-
-Describe action and its outcome.
+### Adding a todo task
+Adds a todo task to your list of tasks.
+Format: `todo DESCRIPTION`
 
 Example of usage: 
 
-`keyword (optional arguments)`
+`todo return book`
 
 Expected outcome:
 
-`outcome`
+`Added this task to your list:`
+`[T][✘] return book`
+`You now have 4 task(s) in the list.`
+
+### Adding a todo task
+Adds a todo task to your list of tasks.
+Format: `todo DESCRIPTION`
+
+Example of usage: 
+
+`todo return book`
+
+Expected outcome:
+
+`Added this task to your list:`
+`[T][✘] return book`
+`You now have 4 task(s) in the list.`

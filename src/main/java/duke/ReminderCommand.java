@@ -37,19 +37,34 @@ public class ReminderCommand extends Command {
         for (Task task : taskList.getList()) {
             if (task instanceof Deadline) {
                 if (checkDeadlineOverdue((Deadline) task, today)) {
+                    if (task.isDone) {
+                        task.completeTask();
+                    }
                     notOverdue += task.toString() + "\n";
                 } else {
+                    if (task.isDone) {
+                        task.completeTask();
+                    }
                     overdue += task.toString() + "\n";
                 }
             }
             if (task instanceof Event) {
                 if (checkEventOverdue((Event) task, today)) {
+                    if (task.isDone) {
+                        task.completeTask();
+                    }
                     notOverdue += task.toString() + "\n";
                 } else {
+                    if (task.isDone) {
+                        task.completeTask();
+                    }
                     overdue += task.toString() + "\n";
                 }
             }
             if (task instanceof ToDo) {
+                if (task.isDone) {
+                    task.completeTask();
+                }
                 notOverdue += task.toString() + "\n";
             }
         }
