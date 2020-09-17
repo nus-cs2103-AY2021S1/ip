@@ -1,4 +1,2 @@
-D | ? | event attend consultation  | Sep 15 2020
-D | ? | event attend wedding  | Sep 25 2020
-D | ? | deadline return book  | Sep 20 2020
-T | ? | return book
+T | ✘ | return book
+D | ✘ | attend wedding  | Oct 19 2020
