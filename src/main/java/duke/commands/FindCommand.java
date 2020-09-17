@@ -19,8 +19,7 @@ public class FindCommand extends Command {
      * Initialize a FindCommand object.
      *
      * @param inputArr Array of length 2 that contains information of the user input
-     *                 At index 0, contains the type of command
-     *                 At index 1, contains the message of the command.
+     * Index 0 contains the type of command while Index 1 contains the message of the command.
      */
     public FindCommand(String[] inputArr) {
         super(inputArr);

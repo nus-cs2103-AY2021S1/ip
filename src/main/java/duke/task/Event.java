@@ -23,10 +23,9 @@ public class Event extends Task {
      * Initialize a event object the containing details of the task.
      *
      * @param description Details of the task.
-     * @param eventTime String format of the time. Either YYYY-MM-DD HHMM or
-     *                  YYYY-MM-DD(Will be reformatted with 2359 as HHMM).
+     * @param eventTime String format of the time.
      * @param isDone Boolean value of whether a task is completed.
-     * @param isReminderOn Boolean value of whether this task needs a reminder
+     * @param isReminderOn Boolean value of whether this task needs a reminder.
      */
     public Event(String description, String eventTime, boolean isDone, boolean isReminderOn) {
         super(description, isDone, isReminderOn, 0, LocalDateTime.parse(eventTime));

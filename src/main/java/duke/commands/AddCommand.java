@@ -33,9 +33,8 @@ public class AddCommand extends Command {
     /**
      * Initialize an AddCommand object.
      *
-     * @param inputArr Array of length 2 that contains information of the user input
-     *                 At index 0, contains the type of command
-     *                 At index 1, contains the message of the command.
+     * @param inputArr Array of length 2 that contains information of the user input.
+     * Index 0 contains the type of command while Index 1 contains the message of the command.
      */
     public AddCommand(String[] inputArr) {
         super(inputArr);

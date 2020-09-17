@@ -19,6 +19,7 @@ public class ToDo extends Task {
      *
      * @param description Details of the task.
      * @param isDone Boolean value of whether a task is completed.
+     * @param isReminderOn Boolean value of whether a task is set on reminder.
      */
     public ToDo(String description, boolean isDone, boolean isReminderOn) {
         super(description, isDone, isReminderOn, 1);

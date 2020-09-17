@@ -26,8 +26,7 @@ public class HelpCommand extends Command {
      * Initialize a HelpCommand object.
      *
      * @param inputArr Array of length 2 that contains information of the user input
-     *                 At index 0, contains the type of command
-     *                 At index 1, contains the message of the command.
+     * Index 0 contains the type of command while Index 1 contains the message of the command.
      */
     public HelpCommand(String[] inputArr) {
         super(inputArr);
@@ -43,9 +42,9 @@ public class HelpCommand extends Command {
     }
 
     /**
-     * Generate the list of commands available in Duke
+     * Generate the list of commands available in Duke.
      *
-     * @return A list of commands available in Duke
+     * @return A list of commands available in Duke.
      */
     private String getListOfCommands() {
         return KEYWORD_HELP_DISPLAY_MESSAGE + KEYWORD_HELP_LIST + KEYWORD_HELP_BYE

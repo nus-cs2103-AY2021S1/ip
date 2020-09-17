@@ -6,6 +6,7 @@ import static duke.util.Keyword.KEYWORD_EMPTY_EXCEPTION;
  * Thrown when user did not key in anything after their command.
  */
 public class EmptyTextException extends DukeException {
+
     /**
      * Initialize the EmptyTextException Object.
      *

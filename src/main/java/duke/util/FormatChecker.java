@@ -84,6 +84,7 @@ public class FormatChecker {
 
         boolean indexLessThanOrEqualsZero = parseInt(command[1]) <= 0;
         boolean indexGreaterThanSizeOfList = parseInt(command[1]) > tasks.size();
+
         if (indexLessThanOrEqualsZero || indexGreaterThanSizeOfList) {
             throw new InvalidFormatDeleteException();
         }
@@ -102,6 +103,7 @@ public class FormatChecker {
 
         boolean indexLessThanOrEqualsZero = parseInt(command[1]) <= 0;
         boolean indexGreaterThanSizeOfList = parseInt(command[1]) > tasks.size();
+
         if (indexLessThanOrEqualsZero || indexGreaterThanSizeOfList) {
             throw new InvalidFormatDoneException();
         }
@@ -120,6 +122,7 @@ public class FormatChecker {
         }
 
         String[] findDescription = command[1].split(KEYWORD_ONE_SPACE);
+
         if (findDescription.length > 1) {
             throw new InvalidFormatFindException();
         }
@@ -169,6 +172,7 @@ public class FormatChecker {
 
         boolean isYesCommand = reminderDescription[1].toLowerCase().equals(KEYWORD_YES);
         boolean isNoCommand = reminderDescription[1].toLowerCase().equals(KEYWORD_NO);
+
         if (!isYesCommand && !isNoCommand) {
             throw new InvalidFormatReminderException();
         }
@@ -179,6 +183,7 @@ public class FormatChecker {
 
         boolean indexLessThanOrEqualsZero = parseInt(reminderDescription[0]) <= 0;
         boolean indexGreaterThanSizeOfList = parseInt(reminderDescription[0]) > tasks.size();
+
         if (indexLessThanOrEqualsZero || indexGreaterThanSizeOfList) {
             throw new InvalidFormatReminderException();
         }

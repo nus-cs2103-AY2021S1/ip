@@ -18,8 +18,7 @@ public abstract class Command {
      * Initialize a Command object.
      *
      * @param inputArr Array of length 2 that contains information of the user input
-     *                 At index 0, contains the type of command
-     *                 At index 1, contains the message of the command.
+     * Index 0 contains the type of command while Index 1 contains the message of the command.
      */
     Command(String[] inputArr) {
         this.inputArr = inputArr;
@@ -47,6 +46,8 @@ public abstract class Command {
      * @param tasks Object contains the task list.
      * @param ui Object that deals with interactions with the user.
      * @param storage Object that deals with loading tasks from the file and saving tasks in the file
+     * @return A string representing the outcome of the command.
+     * @throws DukeException When the command is invalid, Duke exception will be thrown.
      */
     public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 }

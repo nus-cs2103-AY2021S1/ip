@@ -23,8 +23,7 @@ public class Deadline extends Task {
      * Initialize a deadline object the containing details of the task.
      *
      * @param description Details of the task.
-     * @param taskDeadline String format of the time. Either YYYY-MM-DD HHMM or
-     *                     YYYY-MM-DD(Will be reformatted with 2359 as HHMM).
+     * @param taskDeadline String format of the time.
      * @param isDone Boolean value of whether a task is completed.
      * @param isReminderOn Boolean value of whether this task needs a reminder.
      */

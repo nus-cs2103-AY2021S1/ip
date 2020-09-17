@@ -6,6 +6,7 @@ import static duke.util.Keyword.KEYWORD_DONE_EXCEPTION;
  * Thrown when user key in an invalid done format.
  */
 public class InvalidFormatDoneException extends DukeException {
+
     /**
      * Initialize the InvalidFormatDoneException Object.
      */

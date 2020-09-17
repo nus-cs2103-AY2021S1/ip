@@ -29,21 +29,21 @@ public class Storage {
     /**
      * Check if a particular task is completed.
      *
-     * @param s A string encoding whether a task is completed.
+     * @param completionStatus A string encoding whether a task is completed.
      * @return Returns true if the task is completed, false otherwise.
      */
-    private boolean isTaskDone(String s) {
-        return !s.equals(KEYWORD_STRING_ZERO);
+    private boolean isTaskDone(String completionStatus) {
+        return !completionStatus.equals(KEYWORD_STRING_ZERO);
     }
 
     /**
      * Check if a particular task has reminder on.
      *
-     * @param s A string encoding whether a task has reminder on.
+     * @param reminderStatus A string encoding whether a task has reminder on.
      * @return Returns true if the task has reminder on, false otherwise.
      */
-    private boolean isReminderOn(String s) {
-        return !s.equals(KEYWORD_STRING_ZERO);
+    private boolean isReminderOn(String reminderStatus) {
+        return !reminderStatus.equals(KEYWORD_STRING_ZERO);
     }
 
     /**

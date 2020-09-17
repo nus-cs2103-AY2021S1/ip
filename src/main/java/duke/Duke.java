@@ -29,8 +29,15 @@ public class Duke {
         ui = new Ui();
     }
 
-    //@@ Oleg Mikhailov
-    //Reused https://stackoverflow.com/questions/26311470/what-is-the-equivalent-of-javascript-settimeout-in-java
+    /**
+     * Run the command after a certain delay.
+     * All credits goes to,
+     * Author @@ Oleg Mikhailov
+     * Reused https://stackoverflow.com/questions/26311470/what-is-the-equivalent-of-javascript-settimeout-in-java
+     *
+     * @param runnable The command to be run.
+     * @param delay The amount of time to delay the command from being ran.
+     */
     public static void setTimeout(Runnable runnable, int delay) {
         new Thread(() -> {
             try {
