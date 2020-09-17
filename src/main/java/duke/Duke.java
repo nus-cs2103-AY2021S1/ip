@@ -14,6 +14,9 @@ import duke.util.Storage;
 /**
  * Duke, more commonly known as Duck, is a Personal Assistant Chat Bot that
  * helps a person to keep track of various tasks.
+ * The user may choose to run this chat bot
+ * via the Terminal (via src/main/java/duke/Duke) by choosing Run Duke.main(),
+ * or on a Graphical User Interface (via src/main/java/duke/Launcher by choosing Run Launcher.main().
  * Contains static attribute stored_task which stores task input from user.
  */
 public class Duke {
@@ -63,7 +66,7 @@ public class Duke {
     }
 
     /**
-     * Runs Duke chat bot.
+     * Runs Duke chat bot on the Terminal.
      */
     public void run() {
         TerminalUi terminalUi = ((TerminalUi) ui);
@@ -112,7 +115,8 @@ public class Duke {
     }
 
     /**
-     * Creates a duke object named duck and runs it.
+     * Run the Duck chat bot via the Terminal.
+     * Creates a duke object named duck with the storage file path and TerminalUi object, and runs it.
      **/
     public static void main(String[] args) {
         Duke duck = new Duke("data/duke.txt", new TerminalUi());
