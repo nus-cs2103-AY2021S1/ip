@@ -1,11 +1,6 @@
 # User Guide
 
-> This individual project is a 
-  *greenfield project* as part of **CS2103: Software Engineering**. It is inspired by Marlon Brando's 
-  depiction of the titular character of ***The Godfather***, Vito Corleone. A person of poise, control and composure; users of this application
-  may find themselves emulating him after keeping track of their tasks.
-
-***Godfather*** makes sure you stick to your word and complete the tasks that you want to get done. 
+> ***Godfather*** makes sure you stick to your word and complete the tasks that you want to get done. 
 Be it your todos you've yet to do, your deadlines that you've promised to keep to or events that you have to attent,
 let the _Capo_, ***Vito Corleone*** know and he'll make sure you don't miss it. 
 
@@ -21,43 +16,41 @@ Here's how someone might use ***The Godfather***:
 
 
 # Contents
-
 - [User Guide](#user-guide)
 - [Contents](#contents)
 - [Features](#features)
   - [Seeking Help](#seeking-help)
-    - [`help` - get help on syntax](#help---get-help-on-syntax)
+    - [`help` - *get help on syntax*](#help---get-help-on-syntax)
   - [Listing All Data](#listing-all-data)
-    - [`list` - list all tasks](#list---list-all-tasks)
+    - [`list` - *list all tasks*](#list---list-all-tasks)
   - [Exiting the Program](#exiting-the-program)
-    - [`bye` - terminate the program](#bye---terminate-the-program)
+    - [`bye` - *terminate the program*](#bye---terminate-the-program)
   - [Creating TODOs](#creating-todos)
-    - [`todo TASK_DESCRIPTION` - create tasks](#todo-task_description---create-tasks)
+    - [`todo TASK_DESCRIPTION` - *create a todo task*](#todo-task_description---create-a-todo-task)
   - [Creating Deadlines](#creating-deadlines)
-    - [`deadline DEADLINE_DESCRIPTION /by DATE TIME` - Create deadline](#deadline-deadline_description-by-date-time---create-deadline)
+    - [`deadline DEADLINE_DESCRIPTION /by DATE TIME` - *create a deadline task*](#deadline-deadline_description-by-date-time---create-a-deadline-task)
   - [Creating Events](#creating-events)
-    - [`event EVENT_DESCRIPTION /at  DATE_STRING START_TIME-ENDTIME` - create event](#event-event_description-at-date_string-start_time-endtime---create-event)
+    - [`event EVENT_DESCRIPTION /at  DATE_STRING START_TIME-ENDTIME` - *create an event*](#event-event_description-at-date_string-start_time-endtime---create-an-event)
   - [Completing your Tasks](#completing-your-tasks)
-    - [`done TASK_ID` - mark the task as done](#done-task_id---mark-the-task-as-done)
+    - [`done TASK_ID` - *mark the task as done*](#done-task_id---mark-the-task-as-done)
     - [Finding your Tasks](#finding-your-tasks)
-    - [`find SEARCH_TERM` - Describe action](#find-search_term---describe-action)
+    - [`find SEARCH_TERM` - *query for tasks matching a search term*](#find-search_term---query-for-tasks-matching-a-search-term)
   - [Deleting your Tasks](#deleting-your-tasks)
-    - [`delete TASK_ID` - deletes specified task](#delete-task_id---deletes-specified-task)
+    - [`delete TASK_ID` - deletes a specified task](#delete-task_id---deletes-a-specified-task)
   - [Saving your Data](#saving-your-data)
 - [How it Works](#how-it-works)
 - [Coming Soon!](#coming-soon)
 - [Acknowledgements](#acknowledgements)
-
 # Features 
-Below are some features that ***Godfather*** supports. You may type out commands in any case you wish. He understands that
-`hElP`,`HELP` and `help` mean the same thing.
+Below are some features that ***Godfather*** supports. Tasks exist as Todos, Deadline and Events.
+You may type out commands in any case you wish. He understands that `hElP`, `HELP` and `help` mean the same thing.
 
 ## Seeking Help 
 ***Godfather*** helps you remember the syntax for various commands. It is no disrespect to forget the nitty-gritty details but 
 finding out how to get it done is important. 
 
 
-### `help` - get help on syntax
+### `help` - *get help on syntax*
 
 Calling `help` will return a generic help page, passing it a command word, `help find`, will give specific
 help.
@@ -75,7 +68,7 @@ Godfather can give you all your remaining undone and done tasks in one go for yo
 
 
 
-### `list` - list all tasks
+### `list` - *list all tasks*
 
 Lists all remaining undone and done tasks that haven't been deleted.
 
@@ -91,7 +84,7 @@ Lists all remaining undone and done tasks that haven't been deleted.
 ## Exiting the Program 
 Helps you terminate the program safely.
 
-### `bye` - terminate the program
+### `bye` - *terminate the program*
 
 Simply exits the java application.
 
@@ -106,7 +99,7 @@ Program termination.
 ## Creating TODOs 
 Todos help loosely keep track of what tasks need to be done in the future.
 
-### `todo TASK_DESCRIPTION` - create tasks
+### `todo TASK_DESCRIPTION` - *create a todo task*
 
 Create a todo action by passing in a description for the task
 
@@ -122,7 +115,7 @@ Create a todo action by passing in a description for the task
 ## Creating Deadlines 
 Deadlines help keep track of tasks that have to be done by a particular date and time.
 
-### `deadline DEADLINE_DESCRIPTION /by DATE TIME` - Create deadline
+### `deadline DEADLINE_DESCRIPTION /by DATE TIME` - *create a deadline task*
 
 
 **Example of usage:** 
@@ -147,7 +140,7 @@ time formats may be added in the `DateTimeFormat.java` enumeration class.
 Events happen on a particular date and time
 
 
-### `event EVENT_DESCRIPTION /at  DATE_STRING START_TIME-ENDTIME` - create event
+### `event EVENT_DESCRIPTION /at  DATE_STRING START_TIME-ENDTIME` - *create an event*
 
 
 **Example of usage:** 
@@ -164,9 +157,9 @@ Events happen on a particular date and time
 ## Completing your Tasks
 Once you're done with you task, you'd want to mark them as done.
 
-### `done TASK_ID` - mark the task as done
+### `done TASK_ID` - *mark the task as done*
 
-Marks the task as done whereby the task is displayed with a preceding ✓ (for done) instead of ✘ symbol. 
+Marks the task as done whereby the task is displayed with a preceding ✓ symbol (for done) instead of ✘ symbol (for undone). 
 
 **Example of usage:** 
 
@@ -181,9 +174,9 @@ Marks the task as done whereby the task is displayed with a preceding ✓ (for d
 
 ***Godfather*** can find your tasks for you as long as you know what you're looking for.
 
-### `find SEARCH_TERM` - Describe action
+### `find SEARCH_TERM` - *query for tasks matching a search term*
 
-Finds the tasks with descriptions that match the exact search term, case sensitive, that the user passes in.
+Finds the tasks with descriptions that match the **exact search term, case sensitive,** that the user passes in.
 
 **Example of usage:** 
 
@@ -199,7 +192,7 @@ Finds the tasks with descriptions that match the exact search term, case sensiti
 be delete-able.
 
 
-### `delete TASK_ID` - deletes specified task
+### `delete TASK_ID` - deletes a specified task
 
 Deletes a single task of that ID.
 
