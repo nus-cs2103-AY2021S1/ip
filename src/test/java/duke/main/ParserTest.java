@@ -64,7 +64,7 @@ public class ParserTest {
             Parser.checkInput("");
             fail();
         } catch (DukeException e) {
-            assertEquals(" No input detected.", e.getMessage());
+            assertEquals(" Sorry, no input was detected :(", e.getMessage());
         }
     }
 

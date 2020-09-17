@@ -94,7 +94,7 @@ public class FindCommand extends Command {
             reply = " Here are the matching tasks in your list:";
             for (int i = 1; i <= tasks.getSize(); i++) {
                 Task t = tasks.get(i);
-                reply += "\n" + " " + (i + 1) + "." + t.toString();
+                reply += "\n" + " " + (i) + "." + t.toString();
             }
             return reply;
         } else {

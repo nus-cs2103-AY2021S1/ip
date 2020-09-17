@@ -79,7 +79,7 @@ public class Storage {
      * @return A String representation of the given Task that can be stored in the hard disk.
      * @throws InvalidTaskTypeException If the type of task in the file is invalid.
      */
-    private String convertToHardDisk(Task task) throws InvalidTaskTypeException {
+    String convertToHardDisk(Task task) throws InvalidTaskTypeException {
         String[] info = task.getInfo();
         assert info.length > 0;
         String taskType = info[0];
@@ -89,11 +89,11 @@ public class Storage {
 
         switch(taskType) {
         case "T":
-            assert info.length == 3;
+            assert info.length == 2;
             return taskType + " / " + isDone + " / " + description;
         case "D":
         case "E":
-            assert info.length == 4;
+            assert info.length == 3;
             return taskType + " / " + isDone + " / " + description + " / " + info[2];
         default:
             throw new InvalidTaskTypeException();
