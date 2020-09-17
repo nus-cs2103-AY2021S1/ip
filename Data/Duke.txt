@@ -1,4 +1,3 @@
 [T] false eat
 [T] true sleep
-[T] true eat
 [T] false fast
