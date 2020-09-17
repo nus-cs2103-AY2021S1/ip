@@ -19,14 +19,14 @@ public class DukeException extends Exception {
      * @param exceptionType type of error
      * @param command the command which results in the error
      */
-    public DukeException(String e, DukeExceptionType exceptionType, Commands command){
+    public DukeException(String e, DukeExceptionType exceptionType, Commands command) {
         super(e);
         this.exceptionType = exceptionType;
         this.command = command;
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         String error = "";
         switch (exceptionType){
             case EMPTY_TIME:
@@ -43,7 +43,7 @@ public class DukeException extends Exception {
                 error+= "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
                 break;
             case NO_DESCRIPTION:
-                switch (command){
+                switch (command) {
                     case DEADLINE:
                         error+= "Deadline task description cannot be empty";
                         break;
@@ -59,7 +59,7 @@ public class DukeException extends Exception {
                 }
                 break;
             case WRONG_DESCRIPTION:
-                switch (command){
+                switch (command) {
                     case DEADLINE:
                         error+= "Deadline command must be followed by '/by' and then a deadline";
                         break;
