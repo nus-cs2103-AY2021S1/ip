@@ -4,10 +4,10 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.util.Objects;
 
-import duke.command.meta_commands.ContentMetaCommand;
-import duke.command.meta_commands.DurationMetaCommand;
-import duke.command.meta_commands.MetaCommand;
-import duke.command.meta_commands.TimeMetaCommand;
+import duke.command.metacommands.ContentMetaCommand;
+import duke.command.metacommands.DurationMetaCommand;
+import duke.command.metacommands.MetaCommand;
+import duke.command.metacommands.TimeMetaCommand;
 import duke.exceptions.CommandNotFoundException;
 import duke.exceptions.DukeException;
 import duke.exceptions.NullCommandException;

@@ -1,20 +1,24 @@
 package duke.parsers;
 
+import java.time.LocalDateTime;
+
 import duke.command.Command;
-import duke.command.meta_commands.ContentMetaCommand;
-import duke.command.meta_commands.DurationMetaCommand;
-import duke.command.meta_commands.MetaCommand;
-import duke.command.meta_commands.TimeMetaCommand;
-import duke.exceptions.*;
-import duke.tasks.Event;
+import duke.command.metacommands.ContentMetaCommand;
+import duke.command.metacommands.DurationMetaCommand;
+import duke.command.metacommands.MetaCommand;
+import duke.command.metacommands.TimeMetaCommand;
+import duke.exceptions.CommandNotFoundException;
+import duke.exceptions.DukeException;
+import duke.exceptions.LackOfTimeException;
+import duke.exceptions.NullCommandContentException;
+import duke.exceptions.TaskNotSpecifyException;
 import duke.utils.Pair;
 
-import java.time.LocalDateTime;
 
 
 public class CommandParser implements Parser<MetaCommand> {
+    private static final String TIME_DELIMITER = "/";
     private String input;
-    private static String TIME_DELIMITER = "/";
 
     public CommandParser(String input) {
         this.input = input;
@@ -130,7 +134,7 @@ public class CommandParser implements Parser<MetaCommand> {
         return tmc;
     }
 
-    private MetaCommand handleDurationMetaCommand(Command command, String[] input) throws DukeException{
+    private MetaCommand handleDurationMetaCommand(Command command, String[] input) throws DukeException {
         DurationMetaCommand dmc = new DurationMetaCommand();
         dmc.setType(command);
         String[] splitInput;

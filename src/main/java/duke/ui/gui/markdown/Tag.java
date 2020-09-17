@@ -7,10 +7,10 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 public class Tag implements Markdown {
-    private static final String DEFAULT_TAG_COLOR = "#2eb8b8";
-    private static final int DEFAULT_TEXT_SIZE = 12;
     public static final String START_PATTERN = "<tag>";
     public static final String END_PATTERN = "</tag>";
+    private static final String DEFAULT_TAG_COLOR = "#2eb8b8";
+    private static final int DEFAULT_TEXT_SIZE = 12;
     private String tag;
 
     public Tag(String tag) {

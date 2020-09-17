@@ -1,14 +1,13 @@
 package duke.parsers;
 
-import duke.exceptions.DateFormatException;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+
 import duke.exceptions.DukeException;
 import duke.exceptions.DurationErrorType;
 import duke.exceptions.DurationFormatException;
 import duke.utils.Pair;
 
-import java.sql.Date;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 public class DurationParser implements Parser<Pair<LocalDateTime, LocalDateTime>> {
     private static final String DURATION_DELIMITER = "~";

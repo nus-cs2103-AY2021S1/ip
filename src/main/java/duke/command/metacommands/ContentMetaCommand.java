@@ -1,4 +1,4 @@
-package duke.command.meta_commands;
+package duke.command.metacommands;
 
 
 public class ContentMetaCommand extends MetaCommand {

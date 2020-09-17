@@ -2,8 +2,6 @@ package duke.ui.gui.markdown;
 
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 
 public class Text implements Markdown {
     private static final int DEFAULT_TEXT_SIZE = 12;

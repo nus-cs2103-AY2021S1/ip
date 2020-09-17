@@ -1,13 +1,14 @@
 package duke.parsers;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
 import duke.exceptions.DukeException;
 import duke.ui.gui.markdown.Markdown;
 import duke.ui.gui.markdown.Tag;
 import duke.ui.gui.markdown.Text;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 
 public class MarkdownParser implements Parser<List<Markdown>> {
     private String string;
