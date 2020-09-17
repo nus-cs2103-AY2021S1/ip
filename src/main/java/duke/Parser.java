@@ -15,7 +15,7 @@ public class Parser {
      * @return formatted string
      */
     public static String format(String input) {
-        return /*SPACE + LINE +*/ INDENT + input + "\n" /*+ SPACE + LINE*/;
+        return INDENT + input + "\n";
     }
 
     // command split indicators
@@ -76,7 +76,7 @@ public class Parser {
      * @return a formatted string of "content"
      */
     private String formatList(String content, String message) {
-        return /*SPACE + LINE + */SPACE + message + "\n" + content /*+ SPACE + LINE*/;
+        return SPACE + message + "\n" + content;
     }
 
     /**
