@@ -45,13 +45,13 @@ View all tasks via `list`.
 &nbsp;
 
 ### 3. Various time format support
-Use different time format for the convenience of time.
+* Use different time format for the convenience of time.
 Supported formats:<br>
 
 &nbsp;
 
 |Format | user input time | output|
-|:----- | :-----: | ----: |
+|:-----: | :-----: | :----: |
 |HHmm | 2359 | Wednesday_Sep_16_2020_23:59| 
 |d | 16 | Wednesday_Sep_16_2020_00:00|
 |d_HHmm | 16_2300 | Wednesday_Sep_16_2020_23:00|
@@ -66,6 +66,27 @@ Supported formats:<br>
 
 &nbsp;
 
+* Human communicative language for date and time support.
+    * Date support:
+        * `today` refers to `00:00` of current date.
+        * `tomorrow` refers to `00:00` of the next day of current date.
+    * Time support:
+        * `morning` refers to `08:00`.
+        * `noon` refers to `12:00`.
+        * `afternoon` refers to `14:00`.
+        * `night` refers to `20:00`.
+        * `midnight` refers to `23:59`.
+    * Notes: date must be provided before time is used.
+    e.g. `today`, `today morning` are supported but `morning` alone is not.
+
+&nbsp;
+
+* Examples are given here.
+
+|Format (Given today is 9/16/2020) | output|
+|:-----: | :----: |
+|`today`| Wednesday_Sep_16_2020_00:00 |
+|`today morning` | Wednesday_Sep_16_2020_08:00 |
 ------------------------------------------------------------------------------
 
 ## Usage
