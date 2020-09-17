@@ -23,7 +23,7 @@ Duke (Also known as Dwayne The Rock Johnson) is your friendly **productivity ass
 1. Download the latest duke.jar from [here](https://github.com/nicholas-gcc/ip/releases/download/A-Release/duke.jar)
 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Take note this image reflects the state of the GUI after adding some sample commands so yours may look empty initially.<br>
-![]<img src="/docs/Ui.png" width="374.5" height="588">
+<img src="/docs/Ui.png" width="374.5" height="588"><br>
 
 1. Type the command in the message box and press Enter to execute it. e.g. typing list and pressing Enter will give you a list of tasks.
 Some example commands you can try:
@@ -105,7 +105,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 Examples:
 * `find books` will match the task descriptions `Read book` and `Return books` (if both tasks exist)<br>
-![]<img src="/docs/FindExample.PNG" width="317.5" height="249.5">
+<img src="/docs/FindExample.PNG" width="317.5" height="249.5">
 
 ### Deleting a person : `delete`
 
@@ -119,7 +119,7 @@ Format: `delete INDEX`
 
 Examples:
 * `delete 2` deletes the 2nd task in the task list.<br>
-![]<img src="/docs/DeleteExample.PNG" width="374.5" height="588">
+<img src="/docs/DeleteExample.PNG" width="374.5" height="588">
 
 
 ### Marking a task as done : `done`
