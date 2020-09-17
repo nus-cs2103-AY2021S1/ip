@@ -40,7 +40,7 @@ Format: `todo DESCRIPTION`
 Examples:
 - `todo Clean the dishes`
 
-<h3>Adding a task with a deadline:<code>deadline</code></3>
+<h3>Adding a task with a deadline:<code>deadline</code></h3>
 
 Adds a task with a deadline to the tasklist. A task with a deadline needs to have a deadline date and time in the form `YYYY-MM-DD` and `HH:MM` respectively.
 
@@ -50,7 +50,7 @@ Example:
 - `deadline Project submisstion /by 2020-11-09 23:59`
 - `deadline Write my essay /by 2020-12-13 00:30`
 
-<h3>Adding an event task:<code>event</code></3>
+<h3>Adding an event task:<code>event</code></h3>
 
 Adds an event to the tasklist. An event needs to have an event date in the form `YYYY-MM-DD` and an event time range `HH:MM-HH:MM`.
 
