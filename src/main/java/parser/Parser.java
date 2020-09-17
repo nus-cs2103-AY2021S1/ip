@@ -176,7 +176,7 @@ public class Parser {
 
                     return list.addTask(newDeadline);
                 } catch (DateTimeException ex) {
-                    return "Please specify the date and time in this format dd/MM/yyy HH:mm";
+                    return "Please specify the date and time in this format dd/MM/yyyy HH:mm";
                 }
             }
         }
@@ -201,7 +201,7 @@ public class Parser {
 
                     return list.addTask(newEvent);
                 } catch (DateTimeException ex) {
-                    return "Please specify the date and time in this format dd/MM/yyy HH:mm";
+                    return "Please specify the date and time in this format dd/MM/yyyy HH:mm";
                 }
             }
         }
