@@ -1,14 +1,30 @@
 package duke;
 
-import duke.command.*;
-import duke.task.Event;
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
 import duke.task.Deadline;
+import duke.task.Event;
 import duke.task.Todo;
 
-import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
+import java.time.LocalDateTime;
 
+/**
+ * Creates a parser that parses the command.
+ */
 public class Parser {
+    /**
+     * Parses the command and decides the type of the command.
+     * 
+     * @param fullCommand A string of the command.
+     * @return A command object representing the command.
+     * @throws DukeException when the command is not valid.
+     */
     public static Command parse(String fullCommand) throws DukeException {
         if (fullCommand.equals("bye")) {
             return new ExitCommand();
@@ -57,8 +73,9 @@ public class Parser {
                                 Deadline deadline = new Deadline(description, byTime);
                                 return new AddCommand(deadline);
                             } catch (DateTimeParseException e) {
-                                throw new DukeException("Format of date and time is incorrect! Please fill in the date and time following the format below. \n" +
-                                        "       YYYY-MM-DDTHH:MM:SS");
+                                throw new DukeException("Format of date and time is incorrect! " 
+                                        + "Please fill in the date and time following the format below. \n" 
+                                        + "       YYYY-MM-DDTHH:MM:SS");
                             } catch (ArrayIndexOutOfBoundsException e) {
                                 throw new DukeException("☹ OOPS!!! The deadline cannot be empty.");
                             }

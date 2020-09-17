@@ -1,5 +1,8 @@
 package duke.task;
 
+/**
+ * Creates a task.
+ */
 public class Task {
 
     public String description;
@@ -9,7 +12,12 @@ public class Task {
         this.description = description;
         this.isDone = false;
     }
-    
+
+    /**
+     * Creates the message to be written into the local file.
+     * 
+     * @return A string representation of the task in the local file.
+     */
     public String writeMessage() {
         return "";
     }

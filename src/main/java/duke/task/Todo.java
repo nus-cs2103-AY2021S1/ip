@@ -1,5 +1,8 @@
 package duke.task;
 
+/**
+ * Creates a todo.
+ */
 public class Todo extends Task {
 
     /**

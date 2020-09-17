@@ -17,11 +17,9 @@ public class ParserTest {
         String command = "event date with girlfriend!! /at 2020-10-10T13:00";
         Event event = new Event("date with girlfriend!!", LocalDateTime.parse("2020-10-10T13:00"));
         AddCommand addCommand = new AddCommand(event);
-        
         Command c = Parser.parse(command);
         assertEquals(addCommand, c);
     }
-    
     @Test
     public void eventParsing_badDateFormat_exceptionThrown() {
         String command = "event make some sandwiches /at Sunday";
@@ -29,8 +27,10 @@ public class ParserTest {
             assertEquals(Parser.parse(command), Parser.parse(command));
             fail();
         } catch (DukeException e) {
-            assertEquals("Format of date and time is incorrect! Please fill in the date and time following the format below. \n" +
-                    "       YYYY-MM-DDTHH:MM:SS", e.getMessage());
+            assertEquals("Format of date and time is incorrect! " 
+                            + "Please fill in the date and time following the format below. \n"
+                            + "       YYYY-MM-DDTHH:MM:SS", 
+                    e.getMessage());
         }
     }
 }

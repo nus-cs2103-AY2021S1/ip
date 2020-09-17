@@ -2,6 +2,9 @@ package duke;
 
 import duke.task.Task;
 
+/**
+ * Creates a dialog box as a response.
+ */
 public class Response {
     enum Tag {
         LIST,
@@ -50,6 +53,11 @@ public class Response {
         this.tag = tag;
     }
 
+    /**
+     * Gets the string representation of the response.
+     * 
+     * @return The string representation of the response from duke.
+     */
     public String getResponse() {
         String linesOfText = "";
         if (this.tag == Tag.LIST) {

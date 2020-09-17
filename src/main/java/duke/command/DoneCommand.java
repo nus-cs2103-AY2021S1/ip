@@ -1,11 +1,14 @@
 package duke.command;
 
+import duke.DukeException;
+import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import duke.Storage;
-import duke.DukeException;
 import duke.task.Task;
 
+/**
+ * Creates a done command.
+ */
 public class DoneCommand extends Command {
     private int idx;
 
@@ -13,6 +16,14 @@ public class DoneCommand extends Command {
         this.idx = idx - 1;
     }
 
+    /**
+     * Executes the command.
+     *
+     * @param tasks The list of existing tasks.
+     * @param ui The ui that handles user interaction.
+     * @param storage The storage that stores the list of existing tasks.
+     * @throws DukeException when the command cannot be executed.
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             if (tasks.size() == 0) {
@@ -27,6 +38,11 @@ public class DoneCommand extends Command {
         }
     }
 
+    /**
+     * Determines if the command is an exit command.
+     * 
+     * @return Always false.
+     */
     public boolean isExit() {
         return false;
     }
