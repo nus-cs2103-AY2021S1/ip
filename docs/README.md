@@ -8,6 +8,7 @@ traditional GUI apps.
 This is **an implementation of [Project Duke](https://nus-cs2103-ay1920s2.github.io/website/se-book-adapted/projectDuke/index.html)**
 , an educational software project designed to take the new software developer through the steps of building
 a small software incrementally, while applying as many Java and SE techniques as possible along the way.
+![Example of Execution](https://github.com/Nahoyhp/ip/blob/master/docs/Ui.png)
 
 
 ## Setting up in Intellij
@@ -15,13 +16,13 @@ a small software incrementally, while applying as many Java and SE techniques as
 1. Download the latest ip.jar from [here](https://github.com/Nahoyhp/ip).
 1. Copy the file to the folder you want to use as the home folder.
    [] Make sure you have the priviledge to create a new directory and edit files within the directory.
-1. Double-click the file to start the app. The GUI should appear in a few seconds.
-1. Type the command in the command box and press Enter to execute it. 
-For the details of each command, refer to the [Features](##Features) below.
+1. Double-click the file to start the app. The GUI should appear in a few seconds (as shown below).
+1. Type the command in the command box and press Enter to execute it.  
+1. For the details of each command, refer to the [Features](##Features) below.
 
+![Image of GUI showing Welcome Message](https://github.com/Nahoyhp/ip/blob/master/docs/Welcome.png)
 
 ## Summary of Command  
-
 | Action | Format & Example |  
 |---|---|
 |Add a ToDo task | `todo EVENT_TITLE ` <br/> <br/> e.g: `todo Assigment 1`|  
