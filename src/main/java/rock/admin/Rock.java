@@ -1,22 +1,22 @@
-package duke.admin;
+package rock.admin;
 
-import duke.exception.DukeException;
-import duke.storage.Storage;
-import duke.ui.Ui;
-import duke.utility.MyString;
-import duke.utility.Parser;
+import rock.exception.RockException;
+import rock.storage.Storage;
+import rock.ui.Ui;
+import rock.utility.MyString;
+import rock.utility.Parser;
 
 /**
- * Duke best chatbot hehe.
+ * Rock best chatbot hehe.
  * Operate multiple method to handle the input from the user.
  */
-public class Duke {
+public class Rock {
     // File to store data should be directly in folder data, any name is acceptable.
     private final String FILE_PATH = "data/duke.txt";
     private final Storage storage = new Storage(FILE_PATH);
     private TaskList tasks;
 
-    public String getResponse(String input) throws DukeException {
+    public String getResponse(String input) throws RockException {
         return handleCommand(input);
     }
 
@@ -24,7 +24,7 @@ public class Duke {
      * Constructor.
      * Load previous tasks from data stored in FILE_PATH.
      */
-    public Duke() {
+    public Rock() {
         tasks = new TaskList(storage.readData());
     }
 
@@ -33,7 +33,7 @@ public class Duke {
      * @param cmd User's command
      * @return Duke's response
      */
-    private String handleCommand(String cmd) throws DukeException {
+    private String handleCommand(String cmd) throws RockException {
         MyString response = new MyString();
 
         Parser.CommandType commandType = Parser.getType(cmd);
@@ -65,10 +65,12 @@ public class Duke {
                 break;
             // commands handled by UI only
             case BYE:
-                throw new DukeException("");
+                throw new RockException("terminate");
             case INVALID:
                 Ui.invalidCommand(response);
                 break;
+            case SWITCH:
+                throw new RockException("switch");
             default:
                 break;
         }

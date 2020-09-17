@@ -1,4 +1,4 @@
-package duke.tag;
+package rock.tag;
 
 /**
  * List of supported commands and tags converted to String format
@@ -13,6 +13,7 @@ public class CommandTag {
     public static final String EVENT = "event";
     public static final String DO_WITHIN = "dowithin";
     public static final String BYE = "bye";
+    public static final String SWITCH = "switch";
 
     public static final String BY_TAG = "/by";
     public static final String AT_TAG = "/at";

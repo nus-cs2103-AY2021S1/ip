@@ -1,7 +1,7 @@
-package duke.storage;
+package rock.storage;
 
-import duke.task.*;
-import duke.utility.MyString;
+import rock.task.*;
+import rock.utility.MyString;
 
 import java.io.File;
 import java.io.FileNotFoundException;

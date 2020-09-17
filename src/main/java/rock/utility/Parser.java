@@ -1,6 +1,6 @@
-package duke.utility;
+package rock.utility;
 
-import duke.tag.CommandTag;
+import rock.tag.CommandTag;
 
 /**
  * Parse command into specific command type for handling.
@@ -17,7 +17,8 @@ public class Parser {
         DELETE,
         DO_WITHIN,
         FIND,
-        INVALID
+        INVALID,
+        SWITCH;
     }
 
     public Parser() {
@@ -48,6 +49,8 @@ public class Parser {
             return CommandType.FIND;
         } else if (cmd.startsWith(CommandTag.DO_WITHIN + " ")) {
             return CommandType.DO_WITHIN;
+        } else if (cmd.equals(CommandTag.SWITCH)) {
+            return CommandType.SWITCH;
         }
         return CommandType.INVALID;
     }

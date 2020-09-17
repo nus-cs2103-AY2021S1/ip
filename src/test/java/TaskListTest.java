@@ -1,6 +1,6 @@
-import duke.task.Task;
-import duke.admin.TaskList;
-import duke.task.Todo;
+import rock.task.Task;
+import rock.admin.TaskList;
+import rock.task.Todo;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

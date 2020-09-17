@@ -1,4 +1,4 @@
-package duke.task;
+package rock.task;
 
 /**
  * A task that need to be done.

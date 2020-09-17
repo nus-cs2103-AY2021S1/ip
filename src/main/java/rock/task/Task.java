@@ -1,4 +1,4 @@
-package duke.task;
+package rock.task;
 
 /**
  * This class represent tasks

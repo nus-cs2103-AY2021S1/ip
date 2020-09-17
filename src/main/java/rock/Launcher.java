@@ -1,10 +1,10 @@
-package duke;
+package rock;
 
-import duke.ui.Main;
+import rock.ui.Main;
 import javafx.application.Application;
 
 /**
- * Launcher for Luke.
+ * Launcher for Rock.
  */
 public class Launcher {
     public static void main(String[] args) {

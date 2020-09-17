@@ -1,14 +1,14 @@
-package duke.exception;
+package rock.exception;
 
 /**
  * Handle error when using invalid command.
  */
-public class DukeException extends Exception {
+public class RockException extends Exception {
     /**
      * Constructor.
      * @param message Message to show the user.
      */
-    public DukeException(String message) {
+    public RockException(String message) {
         super(message);
     }
 }

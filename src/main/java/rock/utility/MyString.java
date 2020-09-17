@@ -1,4 +1,4 @@
-package duke.utility;
+package rock.utility;
 
 /**
  * String that can be passed between classes and modified

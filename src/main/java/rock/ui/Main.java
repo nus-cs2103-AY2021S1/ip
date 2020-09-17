@@ -1,6 +1,6 @@
-package duke.ui;
+package rock.ui;
 
-import duke.admin.Duke;
+import rock.admin.Rock;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -14,7 +14,7 @@ import java.io.IOException;
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke();
+    private Rock rock = new Rock();
 
     @Override
     public void start(Stage stage) {
@@ -23,7 +23,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setDuke(duke);
+            fxmlLoader.<MainWindow>getController().setDuke(rock);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

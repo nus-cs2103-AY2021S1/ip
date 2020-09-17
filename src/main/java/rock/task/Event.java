@@ -1,4 +1,4 @@
-package duke.task;
+package rock.task;
 
 /**
  * A task that happens at a certain time.
