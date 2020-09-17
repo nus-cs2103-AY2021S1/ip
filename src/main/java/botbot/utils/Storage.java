@@ -109,6 +109,7 @@ public class Storage {
             e.printStackTrace();
             assert false;
         }
+        return null;
     }
 
     /**
