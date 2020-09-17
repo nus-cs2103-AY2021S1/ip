@@ -136,7 +136,7 @@ Expected outcome:
 ```
 
 
-## *Other features*
+## *Application features*
 
 ### `save` - saves current list to path
 
