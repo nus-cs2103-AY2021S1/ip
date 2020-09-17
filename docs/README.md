@@ -89,9 +89,10 @@ Example of usage: `list`
 
 Action | Format, Examples
 --------|------------------
-**Add task** | Add todo task: `todo [TASK]` <br> e.g. `todo homework`
+**Add task** | Add todo task: `todo [TASK]` <br> e.g. `todo homework` <br> Add deadline task: `deadline [TASK] /by [DATE] [TIME]` <br> e.g. `deadline project /by 20/20/2020 18:00` <br> Add event task: `event [TASK] /at [DATE] [TIME]` <br> e.g. `event project meeting /at 20/20/2020 18:00`
 **Update Task** | `done [TASK NUMBER]` <br> e.g., `done 3`
 **Delete Task** | `delete [TASK NUMBER]`<br> e.g., `delete 3`
 **Edit** | `edit [TASK NUMBER]`<br> e.g., `edit 3`
 **Find** | `find [KEYWORD(s)]`<br> e.g., `find read book`
 **List** | `list`
+ ***View List of Commands** | `help`
