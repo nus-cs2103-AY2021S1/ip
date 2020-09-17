@@ -1,4 +1,4 @@
-package duke.exception;
+package duke.backend.exception;
 
 /**
  * Represents an exception thrown because of invalid Stage file data.

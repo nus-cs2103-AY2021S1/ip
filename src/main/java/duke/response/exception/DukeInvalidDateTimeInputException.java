@@ -1,9 +1,11 @@
-package duke.exception;
+package duke.response.exception;
+
+import duke.command.exception.DukeCommandException;
 
 /**
  * Represents an exception thrown when the Date or Time input is invalid.
  */
-public class DukeInvalidDateTimeInputException extends DukeTaskException {
+public class DukeInvalidDateTimeInputException extends DukeCommandException {
     /**
      * Class constructor.
      *

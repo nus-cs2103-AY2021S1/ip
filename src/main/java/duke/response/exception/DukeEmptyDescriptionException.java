@@ -1,4 +1,4 @@
-package duke.exception;
+package duke.response.exception;
 
 /**
  * Represents an exception thrown when description of a Task is left empty.

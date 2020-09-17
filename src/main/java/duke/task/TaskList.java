@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import duke.exception.DukeInvalidIndexException;
+import duke.command.exception.DukeInvalidIndexException;
 import duke.response.Response;
 
 /**

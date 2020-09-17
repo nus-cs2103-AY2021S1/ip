@@ -1,4 +1,6 @@
-package duke.exception;
+package duke.backend.exception;
+
+import duke.common.exception.DukeException;
 
 /**
  * Represents an exception thrown when dealing with Storage.

@@ -18,13 +18,13 @@ import duke.command.HelpCommand;
 import duke.command.ListCommand;
 import duke.command.ListDateCommand;
 import duke.command.UnknownCommand;
-import duke.exception.DukeEmptyAtException;
-import duke.exception.DukeEmptyByException;
-import duke.exception.DukeEmptyDescriptionException;
-import duke.exception.DukeEmptyIndexException;
-import duke.exception.DukeEmptyKeywordException;
-import duke.exception.DukeInvalidDateTimeInputException;
-import duke.exception.DukeUnknownInputException;
+import duke.response.exception.DukeEmptyAtException;
+import duke.response.exception.DukeEmptyByException;
+import duke.response.exception.DukeEmptyDescriptionException;
+import duke.response.exception.DukeEmptyIndexException;
+import duke.response.exception.DukeEmptyKeywordException;
+import duke.response.exception.DukeInvalidDateTimeInputException;
+import duke.response.exception.DukeUnknownInputException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -97,7 +97,7 @@ public class Parser {
      * @throws DukeUnknownInputException         If user input is unknown.
      * @throws DukeInvalidDateTimeInputException If date and time inputted is erroneous.
      */
-    public static Command add(String command) throws DukeEmptyDescriptionException,
+    private static Command add(String command) throws DukeEmptyDescriptionException,
             DukeEmptyByException, DukeEmptyAtException, DukeUnknownInputException, DukeInvalidDateTimeInputException {
         if (command.startsWith("todo")) {
             try {
@@ -169,7 +169,7 @@ public class Parser {
      * @return DoneCommand with specific index.
      * @throws DukeEmptyIndexException If user did not input index.
      */
-    public static Command markAsDone(String command) throws DukeEmptyIndexException {
+    private static Command markAsDone(String command) throws DukeEmptyIndexException {
         try {
             int index;
             String[] tokens = command.split(" ");
@@ -187,7 +187,7 @@ public class Parser {
      * @return DeleteCommand with specific index.
      * @throws DukeEmptyIndexException If user did not input index.
      */
-    public static Command delete(String command) throws DukeEmptyIndexException {
+    private static Command delete(String command) throws DukeEmptyIndexException {
         int index;
         try {
             String[] tokens = command.split(" ");
@@ -205,7 +205,7 @@ public class Parser {
      * @return ListDateCommand with specific date.
      * @throws DukeInvalidDateTimeInputException If date and time inputted is erroneous.
      */
-    public static ListDateCommand listDate(String command) throws DukeInvalidDateTimeInputException {
+    private static ListDateCommand listDate(String command) throws DukeInvalidDateTimeInputException {
         try {
             String dateString = command.substring(5);
             String[] dateToken = dateString.split("/");
@@ -225,7 +225,7 @@ public class Parser {
      * @return FindCommand with specific keyword.
      * @throws DukeEmptyKeywordException If no keyword was inputted.
      */
-    public static FindCommand find(String command) throws DukeEmptyKeywordException {
+    private static FindCommand find(String command) throws DukeEmptyKeywordException {
         try {
             String[] tokens = command.split("find ");
             String keyword = tokens[1];

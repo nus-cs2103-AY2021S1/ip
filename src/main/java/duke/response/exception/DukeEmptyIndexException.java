@@ -1,4 +1,6 @@
-package duke.exception;
+package duke.response.exception;
+
+import duke.command.exception.DukeIndexException;
 
 /**
  * Represents an exception thrown when index is left empty.

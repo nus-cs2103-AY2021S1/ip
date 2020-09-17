@@ -1,9 +1,9 @@
-package duke.exception;
+package duke.command.exception;
 
 /**
  * Represents an exception thrown regarding indexes.
  */
-public class DukeIndexException extends DukeException {
+public class DukeIndexException extends DukeCommandException {
     /**
      * Class constructor.
      *

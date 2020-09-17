@@ -1,4 +1,4 @@
-package duke;
+package duke.task;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -9,13 +9,8 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import duke.exception.DukeInvalidIndexException;
+import duke.command.exception.DukeInvalidIndexException;
 import duke.response.Response;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.TaskList;
-import duke.task.Todo;
 
 public class TaskListTest {
     private TaskList taskList = new TaskList();

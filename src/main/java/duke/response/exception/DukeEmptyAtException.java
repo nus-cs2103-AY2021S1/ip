@@ -1,4 +1,4 @@
-package duke.exception;
+package duke.response.exception;
 
 /**
  * Represents an exception thrown when date is left empty for an Event.

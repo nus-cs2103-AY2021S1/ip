@@ -1,4 +1,4 @@
-package duke.exception;
+package duke.command.exception;
 
 /**
  * Represents an exception thrown when the index is out of Task List range.
