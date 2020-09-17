@@ -48,10 +48,10 @@ public class Parser {
         if (input.matches(command + "\\s*")) {
             throw new EmptyArgumentException(command + "'s description");
         }
-        if (!input.matches(command + " .+/duration .+")) {
+        if (!input.matches(command + " .+/for .+")) {
             throw new InvalidArgumentException(command + "'s description");
         }
-        String[] split = input.substring(command.length() + 1).split("/duration");
+        String[] split = input.substring(command.length() + 1).split("/for");
         String dateTimeString = split[1].stripLeading();
         return new AddTaskCommand(new FixedDurationTask(split[0].stripTrailing(), dateTimeString));
     }

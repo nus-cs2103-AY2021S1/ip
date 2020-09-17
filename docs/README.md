@@ -1,12 +1,16 @@
 # User Guide
+
+![spongebob](spongebob.png)
+
 Spongebob, the highly efficient/reknowned employee of the fine establishment that is the Krusty Krab, is now offering his services as your personal assistant to help you through this arduous CS life.
+
 
 ## Features 
 
 ### Multi-purpose Tasklist
 In this tasklist you will be able to add, delete different types of tasks in your tasklist. This includes:
 - TODOS -- A simple task such as "Feed Gary" or "Complete CS2103 IP submission"
-- FIXED_DURATION_TODOS -- For tasks with fixed durations "Complete 5x Burgers in 2hours)
+- FIXED_DURATION_TASKS -- For tasks with fixed durations "Complete 5x Burgers in 2hours)
 - DEADLINES -- For tasks with deadline, "Replenish Kelp stock by 20 March 2020"
 - EVENTS -- For events such as "Do nothing with patrick on 31 Feb 2020"
 
@@ -34,7 +38,7 @@ Example of usage:
 
 Expected outcome:
 
-`outcome`
+![list_outcome](list_outcome.png)
 
 ### `bye` - Closing Spongebob
 
@@ -46,7 +50,7 @@ Example of usage:
 
 Expected outcome:
 
-`outcome`
+`Program Closes.`
 
 ### `todo TASK_DESCRIPTION` - Create new TODO task.
 
@@ -66,23 +70,35 @@ Creates a new DEADLINE task.
 
 Example of usage: 
 
-`deadline buy kelp /by 2020-04-27 0600`
+`deadline replenish kelp /by 2020-04-28 0600`
 
 Expected outcome:
 
-`outcome`
+![deadline_outcome](deadline_outcome.png)
 
 ### `event TASK_DESCRIPTION /at YYYY-MM-DD HHmm` - Create new EVENT task.
 
-Creates a new TODO task.
+Creates a new EVENT task.
 
 Example of usage: 
 
-`deadline buy kelp /by 2020-04-27 0600`
+`event Showdown with Salley /at 2020-04-27 1330`
 
 Expected outcome:
 
-`outcome`
+![event_outcome](event_outcome.png)
+
+### `fdtask TASK_DESCRIPTION /for TASK_DURATION` - Create new FIXED_DURATION_TASK task.
+
+Creates a new FIXED_DURATION_TASK task.
+
+Example of usage: 
+
+`fdtask Do nothing with patrick /for 2 hours`
+
+Expected outcome:
+
+![fdtask_outcome](fdtask_outcome.png)
 
 ### `done TASK_ID` - Completes a task.
 
@@ -94,7 +110,7 @@ Example of usage:
 
 Expected outcome:
 
-`outcome`
+![done_outcome](done_outcome.png)
 
 ### `delete TASK_ID` - Deletes a task.
 
@@ -106,4 +122,4 @@ Example of usage:
 
 Expected outcome:
 
-`outcome`
+![delete_outcome](delete_outcome.png)
