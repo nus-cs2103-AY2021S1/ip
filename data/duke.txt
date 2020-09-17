@@ -1,2 +1,2 @@
-T | 0 | helloT
-T | 0 | HelloT | 0 | hello
+D | 0 | cs2103 proj | 2020-09-17 23:59
+E | 0 | dinner party | 2020-09-20 12:30
