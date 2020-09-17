@@ -110,7 +110,7 @@ public class TaskList {
         for (Task t : taskArrayList) {
             if (t.getDescription().contains(substring)) {
                 counter++;
-                sb.append(counter + "." + t.toString());
+                sb.append(counter + "." + t.toString() + "\n");
             }
         }
         if (counter > 0) {
