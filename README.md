@@ -13,8 +13,8 @@ This is a project from a greenfield Java project. It's named after the Java masc
 
 1. <b>Extensive Testing Using JUnit</b>
 
-74 JUnit tests were written to test most of the commands and checks to ensure everything works well.
-<p align="center"><img src="74test.png" width="90%"/></p>
+73 JUnit tests were written to test most of the commands and checks to ensure everything works well.
+<p align="center"><img src="73test.png" width="90%"/></p>
 
 2. <b>Scalable in size</b>
 

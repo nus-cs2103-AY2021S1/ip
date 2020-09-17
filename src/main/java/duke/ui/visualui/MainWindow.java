@@ -2,6 +2,8 @@ package duke.ui.visualui;
 
 import duke.Duke;
 import duke.commands.Command;
+import duke.commands.DeleteCommand;
+import duke.commands.DoneCommand;
 import duke.commands.ReminderCommand;
 import duke.parser.Parser;
 import duke.tasklist.TaskList;
@@ -71,7 +73,7 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
-        handleAddReminder(input);
+        handleInput(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, user),
                 DialogBox.getDukeDialog(response, stitch)
@@ -104,9 +106,12 @@ public class MainWindow extends AnchorPane {
      *
      * @param input User's input.
      */
-    private void handleAddReminder(String input) {
+    private void handleInput(String input) {
         Command command = Parser.parse(input);
-        if (command instanceof ReminderCommand) {
+        boolean isRemind = command instanceof ReminderCommand;
+        boolean isDone = command instanceof DoneCommand;
+        boolean isDelete = command instanceof DeleteCommand;
+        if (isDelete || isDone || isRemind) {
             TaskList taskList = duke.retrieveTaskList();
             loadReminderList(taskList);
         }
