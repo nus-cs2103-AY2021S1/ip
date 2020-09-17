@@ -1,6 +1,5 @@
 package duke.command.meta_commands;
 
-import duke.command.Command;
 
 public class ContentMetaCommand extends MetaCommand {
     private String content;
