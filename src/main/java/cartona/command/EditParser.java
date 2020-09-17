@@ -14,17 +14,18 @@ import cartona.task.Todo;
 
 public class EditParser {
 
-    private Task parseTodo(String[] editFields) throws InvalidEditFieldException {
+    private Task parseTodo(String[] editFields, Todo taskToEdit) throws InvalidEditFieldException {
 
         // Start from 1 because the first element will include the part of the string before the '/'
         String newField = editFields[1];
+        boolean isDone = taskToEdit.checkIfDone();
 
         // Check that field of the Todo to be edited is the name
         if (!newField.split(" ")[0].equals("name")) {
             throw new InvalidEditFieldException("Error: Unrecognized field name in Todo");
         }
 
-        return new Todo(newField.substring(5, newField.length() - 2), false);
+        return new Todo(newField.substring(5), isDone);
     }
 
     private Deadline parseDeadline(String[] editFields, Deadline taskToEdit) throws InvalidEditFieldException,
@@ -42,10 +43,10 @@ public class EditParser {
             switch (fieldName) {
 
             case ("name"):
-                name = nextField.substring(5, nextField.length() - 2);
+                name = nextField.substring(5);
                 break;
             case ("due"):
-                String dateString = nextField.substring(4, nextField.length() - 2);
+                String dateString = nextField.substring(4);
                 dueTime = DateParser.parseDate(dateString);
                 break;
             default:
@@ -64,23 +65,27 @@ public class EditParser {
 
         for (int i = 1; i < editFields.length; i++) {
             String nextField = editFields[i];
+
             String fieldName = nextField.split(" ")[0];
+            System.out.println(fieldName);
 
             switch (fieldName) {
 
             case ("name"):
-                name = nextField.substring(5, nextField.length() - 2);
+                name = nextField.substring(5);
                 break;
             case ("start"):
-                String startString = nextField.substring(6, nextField.length() - 2);
+                String startString = nextField.substring(6);
                 startDate = DateParser.parseDate(startString);
                 break;
             case ("end"):
-                String endString = nextField.substring(4, nextField.length() - 2);
+                String endString = nextField.substring(4);
                 endDate = DateParser.parseDate(endString);
-                break;
+                 break;
             case ("range"):
-                String rangeString = nextField.substring(6, nextField.length() - 2);
+                String rangeString = nextField.substring(6);
+                startDate = DateParser.parseRangeFromStorage(rangeString, true);
+                endDate = DateParser.parseRangeFromStorage(rangeString, false);
                 break;
             default:
                 throw new InvalidEditFieldException("Error: Unrecognised field name in Event");
@@ -98,12 +103,12 @@ public class EditParser {
 
         Task replacementTask = null;
 
-        String[] editFields = editString.split("/");
+        String[] editFields = editString.split(" /");
 
         switch (taskType) {
 
         case ("T"):
-            replacementTask = parseTodo(editFields);
+            replacementTask = parseTodo(editFields, (Todo) taskToEdit);
             break;
         case ("D"):
             replacementTask = parseDeadline(editFields, (Deadline) taskToEdit);

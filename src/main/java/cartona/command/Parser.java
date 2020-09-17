@@ -138,7 +138,13 @@ public class Parser {
                     throw new InvalidInputException("Error: No number argument after 'delete'");
                 }
 
-                int taskIdToComplete = Integer.parseInt(words[1]);
+                Integer taskIdToComplete;
+
+                try {
+                    taskIdToComplete = Integer.parseInt(words[1]);
+                } catch (NumberFormatException e) {
+                    throw new InvalidTaskIdException("Error: Task ID is invalid");
+                }
 
                 if (taskIdToComplete < 1) {
                     throw new InvalidInputException("Error: Task numbers start from 1");
@@ -154,7 +160,13 @@ public class Parser {
                     throw new InvalidInputException("Error: No number argument after 'delete'");
                 }
 
-                int taskIdToUncomplete = Integer.parseInt(words[1]);
+                Integer taskIdToUncomplete;
+
+                try {
+                    taskIdToUncomplete = Integer.parseInt(words[1]);
+                } catch (NumberFormatException e) {
+                    throw new InvalidTaskIdException("Error: Task ID is invalid");
+                }
 
                 if (taskIdToUncomplete < 1) {
                     throw new InvalidInputException("Error: Task numbers start from 1");
@@ -173,11 +185,16 @@ public class Parser {
 
             return new FindTaskCommand(keyword);
         case ("edit"):
-            if (words.length <= 4) {
+            if (words.length < 4) {
                 throw new InvalidInputException("Error: Edit parameters missing");
             }
 
-            Integer taskIdToEdit = Integer.parseInt(words[2]);
+            Integer taskIdToEdit;
+            try {
+                taskIdToEdit = Integer.parseInt(words[1]);
+            } catch (NumberFormatException e) {
+                throw new InvalidTaskIdException("Error: Task ID is invalid");
+            }
 
             // Pass on edit string to Command
             return new EditCommand(taskIdToEdit, userInput);
