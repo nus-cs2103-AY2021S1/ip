@@ -6,31 +6,18 @@ import duke.task.Task;
  * Deals with interactions with the user.
  */
 public class Ui {
-
-    private static final String DIVIDER_LINE = "__________________________________________________\n";
-
-    /**
-     * Prints a response to the user with 2 dividing lines.
-     *
-     * @param print is the response to the user with 2 dividing lines.
-     * @return a string containing the response to the user.
-     */
-    public static String printWithDivider(String print) {
-        return DIVIDER_LINE + print + "\n" + DIVIDER_LINE;
-    }
-
     /**
      * Prints a greeting to the user.
      */
     public static String printWelcome() {
-        return printWithDivider("Hello! I'm Duke\nWhat can I do for you?");
+        return "Hey I'm Ferb!\nHow can I help you today?";
     }
 
     /**
      * Prints an exit message to the user.
      */
     public static String printExit() {
-        return printWithDivider("Bye. Hope to see you again soon!");
+        return "See ya later alligator :-)";
     }
 
     /**
@@ -39,7 +26,7 @@ public class Ui {
      * @param taskList is the list of tasks to be printed.
      */
     public static String printList(TaskList taskList) {
-        return printWithDivider("Here are the tasks in your list:" + taskList);
+        return "Here are your tasks:" + taskList;
     }
 
     /**
@@ -48,7 +35,7 @@ public class Ui {
      * @param task is the task marked as done.
      */
     public static String printDoneTask(Task task) {
-        return printWithDivider("Nice! I've marked this task as done:\n\t" + task);
+        return "Awesome! You've done the following:\n  " + task;
     }
 
     /**
@@ -58,7 +45,7 @@ public class Ui {
      * @param taskList is the list of tasks in which the specified task was deleted from.
      */
     public static String printDeleteTask(Task task, TaskList taskList) {
-        return printWithDivider("Noted. I've removed this task:\n\t" + task + getNumOfTasks(taskList));
+        return "Alright! You don't have to worry about this:\n  " + task + getNumOfTasks(taskList);
     }
 
     /**
@@ -68,7 +55,7 @@ public class Ui {
      * @param taskList is the list in which the task was added to.
      */
     public static String printAddTask(Task task, TaskList taskList) {
-        return printWithDivider("Got it. I've added this task:\n\t" + task + getNumOfTasks(taskList));
+        return "Got it! I've added this task:\n  " + task + getNumOfTasks(taskList);
     }
 
     /**
@@ -78,7 +65,7 @@ public class Ui {
      * @param taskList is the task list to find the tasks with keyword from.
      */
     public static String printFindTasks(String keyword, TaskList taskList) {
-        return printWithDivider("Here are the matching tasks in your list:" + taskList.getMatchingTasks(keyword));
+        return "Hey look! I found matching tasks:" + taskList.getMatchingTasks(keyword);
     }
 
     /**
@@ -87,7 +74,7 @@ public class Ui {
      * @return the duplicate message.
      */
     public static String printDuplicateTask() {
-        return printWithDivider("Sorry!!! Duplicate detected.");
+        return "Oh no! Duplicate task detected.";
     }
 
     /**
@@ -100,9 +87,9 @@ public class Ui {
         int numOfTasks = taskList.getNumOfTasks();
         String msg = "";
         if (numOfTasks == 1) {
-            msg = String.format("\nNow you have %d task in the list.", numOfTasks);
+            msg = String.format("\n*You have %d task now*", numOfTasks);
         } else {
-            msg = String.format("\nNow you have %d tasks in the list.", numOfTasks);
+            msg = String.format("\n*You have %d tasks now*", numOfTasks);
         }
         return msg;
     }
@@ -113,6 +100,6 @@ public class Ui {
      * @param e is the exception in which we get the message from.
      */
     public static String showError(Exception e) {
-        return printWithDivider(e.getMessage());
+        return (e.getMessage());
     }
 }

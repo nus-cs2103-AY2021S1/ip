@@ -1,0 +1,3 @@
+T | 1 | Merdu
+D | 1 | midterms | 2020-10-01
+T | 1 | homework CS2106
