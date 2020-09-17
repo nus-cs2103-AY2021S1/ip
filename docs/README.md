@@ -55,4 +55,4 @@ Shows all tasks whose name has the substring NAME.
 
 ### Find delete `INDEX`
 
-Delete task at index INDEX (Index starts with 1)
+Delete task at index INDEX (Index starts at 1)
