@@ -11,7 +11,8 @@ Users may interact with Bob by providing commands via a Command Line Interface (
 
 ## User Guide
 Take a look at the [User Guide](https://caleblyx.github.io/ip/) for more details.
-####Quick start
+
+#### Quick start
 1. Ensure you have Java 11 or above installed.
 2. Download the latest version of `Bob.jar` from [releases](https://github.com/Caleblyx/ip/releases).
 3. Find a home for Bob! Move `Bob.jar` to your preferred home directory for the program. Note that data 
