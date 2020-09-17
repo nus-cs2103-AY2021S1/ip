@@ -11,7 +11,7 @@ Spongebot Patty Flipper is a JavaFX application used to **managing tasks, optimi
 5. Commands that can be executed in the command box and other important words are highlighted in `light blue`. e.g. type help and press Enter will open the help window. Some example commands you can try:
    - `list` : Lists all tasks in Spongebot Patty Flipper.
    - `todo Example` : Adds a Task of type Todo with the name "Example".
-   - `exit` : Exits the app.
+   - `bye` : Exits the app.
 
 ## Notes about the command format:
 
@@ -54,12 +54,11 @@ Example:
 
 * `event Event 1 /on 20-12-2000 1200` : Adds a Task of type Event with name "Event" on the 20 December 2000 at 12pm
 
-### Listing all tasks: `List`
+### Listing all tasks: `list`
 
 Shows a list of all tasks in Spongebot Patty Flipper.
 
 Format: `list`
-
 
 
 ### Marking a task as done: `done`
@@ -76,7 +75,7 @@ Example:
 
 * `done 1` : Marks the 1st task in the list as done.
 
-### Deleting a task: `Delete`
+### Deleting a task: `delete`
 
 Deletes a specified task from Spongebot Patty Flipper.
 
