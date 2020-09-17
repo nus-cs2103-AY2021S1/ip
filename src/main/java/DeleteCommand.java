@@ -17,8 +17,13 @@ public class DeleteCommand extends Command{
      * @param inputTasks the list of tasks used
      * @param storage the storage used
      */
+<<<<<<< HEAD
     public void execute(TaskList inputTasks, Storage storage, Ui ui){
         inputTasks.deleteTask(taskIndex, ui);
+=======
+    public void execute(TaskList inputTasks, Storage storage) throws DukeException {
+        inputTasks.deleteTask(taskIndex);
+>>>>>>> master
         storage.writeToFile(inputTasks);
     }
 }
