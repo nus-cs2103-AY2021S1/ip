@@ -284,6 +284,15 @@ public class Parser {
     }
 
     /**
+     * Returns list of commands available.
+     *
+     * @return a help message of list of commands available
+     */
+    private String handleHelp() {
+        return Ui.listOfCommands();
+    }
+
+    /**
      * Returns respond message to be printed generated from user input
      *
      * @param lst the task list
@@ -295,6 +304,8 @@ public class Parser {
             messageRespond = handleBye();
         } else if (command.equals("list")) {
             messageRespond = handleList(lst);
+        } else if (command.equals("help")) {
+            messageRespond = handleHelp();
         } else {
             messageRespond = handleComplicatedCommands(lst, command);
         }

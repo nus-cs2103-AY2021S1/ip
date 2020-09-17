@@ -1,18 +1,19 @@
 package duke;
 
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
 
 public class MainWithUi extends Application {
@@ -21,9 +22,12 @@ public class MainWithUi extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
-    private Image userPic = new Image(this.getClass().getResourceAsStream("/images/DaUser.jpg"));
-    private Image dukePic = new Image(this.getClass().getResourceAsStream("/images/DaDuke.jpg"));
-    private java.nio.file.Path path = java.nio.file.Paths.get(System.getProperty("user.home"), "ip","start.txt");
+    private Image userPic = new Image(this.getClass()
+            .getResourceAsStream("/images/DaUser.jpg"));
+    private Image dukePic = new Image(this.getClass()
+            .getResourceAsStream("/images/DaDuke.jpg"));
+    private java.nio.file.Path path = java.nio.file.Paths
+            .get(System.getProperty("user.home"), "ip","start.txt");
     private Duke dukeBot = new Duke(path);
 
     @Override
@@ -40,6 +44,8 @@ public class MainWithUi extends Application {
         sendButton = new Button("Send");
 
         AnchorPane mainLayout = new AnchorPane();
+        dialogContainer.setBackground(new Background(new BackgroundFill(Color
+                .rgb(232,223,231), CornerRadii.EMPTY, Insets.EMPTY)));
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
         scene = new Scene(mainLayout);
@@ -49,7 +55,7 @@ public class MainWithUi extends Application {
         stage.show();
 
         //Step 2. Formatting the window to look as expected
-        stage.setTitle("Duke");
+        stage.setTitle("Duke - Personal Task Manager (ง ˙o˙)ว");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);
@@ -101,23 +107,23 @@ public class MainWithUi extends Application {
 
     /**
      * Iteration 2:
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * Creates dialog boxes, containing user's input and Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() throws Exception {
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
 
-        Circle cu = new Circle(40);
-        cu.setFill(new ImagePattern(userPic));
+        Circle userPicHolder = new Circle(40);
+        userPicHolder.setFill(new ImagePattern(userPic));
 
-        Circle cd = new Circle(40);
-        cd.setFill(new ImagePattern(dukePic));
+        Circle dukePicHolder = new Circle(40);
+        dukePicHolder.setFill(new ImagePattern(dukePic));
 
         dialogContainer.getChildren().addAll(
-                DialogBoxUser.getUserDialog(userText, cu),
+                DialogBoxUser.getUserDialog(userText, userPicHolder),
                 new Text(""),
-                DialogBoxDuke.getDukeDialog(dukeText, cd),
+                DialogBoxDuke.getDukeDialog(dukeText, dukePicHolder),
                 new Text("")
         );
         userInput.clear();
@@ -126,15 +132,25 @@ public class MainWithUi extends Application {
     private void handleAtStart() throws Exception {
         dukeBot.start();
         Label dukeTextHello = new Label(Ui.sayHello());
+        Label dukeTextListOfCommands = new Label(Ui.listOfCommands());
         Label dukeTextList = new Label(getResponse("list"));
 
-        Circle cd = new Circle(40);
-        cd.setFill(new ImagePattern(dukePic));
+
+        Circle dukePicHolder1 = new Circle(40);
+        dukePicHolder1.setFill(new ImagePattern(dukePic));
+
+        Circle dukePicHolder2 = new Circle(40);
+        dukePicHolder2.setFill(new ImagePattern(dukePic));
+
+        Circle dukePicHolder3 = new Circle(40);
+        dukePicHolder3.setFill(new ImagePattern(dukePic));
 
         dialogContainer.getChildren().addAll(
-                DialogBoxDuke.getDukeDialog(dukeTextHello, cd),
+                DialogBoxDuke.getDukeDialog(dukeTextHello, dukePicHolder1),
                 new Text(""),
-                DialogBoxDuke.getDukeDialog(dukeTextList, cd),
+                DialogBoxDuke.getDukeDialog(dukeTextListOfCommands, dukePicHolder2),
+                new Text(""),
+                DialogBoxDuke.getDukeDialog(dukeTextList, dukePicHolder3),
                 new Text("")
         );
     }

@@ -11,6 +11,7 @@ import java.util.Scanner;
  * with the user
  */
 public class Ui {
+    private static final String INDENT = "\n      ";
     /**
      * Pops initial message and passes to Parser to interact with user.
      * @param lst the list to contain tasks
@@ -18,6 +19,7 @@ public class Ui {
     public void run(TaskList lst) {
         // set up greetings and old list from file
         System.out.println(sayHello());
+        System.out.println(listOfCommands());
         System.out.println(getInitialList(lst));
 
         // set up scanner for interaction
@@ -36,13 +38,13 @@ public class Ui {
     public static String sayHello() {
         LocalDate today = LocalDate.now();
         String messageHello = Parser.format("Hello! I'm Duke"
-                + "\n" + "      " + "Today is " + today
+                + INDENT + "Today is " + today
                 .format(DateTimeFormatter.ofPattern("MMM d yyyy")) + "\n      "
                 + "Last login was " + TaskList.getLastLoginDate()
                 .format(DateTimeFormatter.ofPattern("MMM d yyyy"))
-                + "\n      " + "You have done "
+                + INDENT + "You have done "
                 + TaskList.getNumberOfDoneTasks() + " task(s) in the past week."
-                + "\n      Keep up the good work!!!");
+                + INDENT + "Keep up the good work!!!");
 
         // reset done-task-counter if today is SUNDAY or
         // there was a SUNDAY between last login date and today (exclusive)
@@ -62,6 +64,25 @@ public class Ui {
 
         return messageHello;
     }
+
+    public static String listOfCommands() {
+        String welcomeMessage = "      " + "Here are some magic spells I understand:";
+        String addCommand = INDENT + "todo <something>"
+                + INDENT + "event <something> /at yyyy-mm-dd"
+                + INDENT + "deadline <something> /by yyyy-mm-dd";
+        String listCommand = INDENT + "list";
+        String doneCommand = INDENT + "done <index>";
+        String deleteCommand = INDENT + "delete <index>";
+        String findCommand = INDENT + "find <keyword>";
+        String byeCommand = INDENT + "bye";
+        String closeMessage = INDENT + "Try out yourself!!! :)";
+        String helpMessage = INDENT + "PS, if you cannot remember, fret not!!"
+                + INDENT + "Just type 'help' and I will come to your savor.";
+        return welcomeMessage + addCommand + listCommand + doneCommand
+                + deleteCommand + findCommand + byeCommand + closeMessage
+                + helpMessage;
+    }
+
 
     public String getInitialList(TaskList lst) {
         return new Parser("list").getRespond(lst);
