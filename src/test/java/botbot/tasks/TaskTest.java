@@ -1,52 +1,121 @@
 package botbot.tasks;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertNull;
+
+import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.Test;
 
-import botbot.exceptions.InvalidFormatException;
-
 public class TaskTest {
+    private static final LocalDateTime DATE_WITH_TIME = LocalDateTime.of(2021, 3, 17, 3, 45);
+    private static final LocalDateTime DATE_WITHOUT_TIME = LocalDateTime.of(2020, 5, 5, 3, 14, 15, 926535898);
+
     @Test
     public void getType() {
-        try {
-            assertEquals('D', new Deadline("deadline test /by 1-1-2020").getType());
-            assertEquals('D', new Deadline("test", true, "2020-01-01T03:14:15.926535898").getType());
-            assertEquals('E', new Event("event sample /at 31-12-2020 2359").getType());
-            assertEquals('E', new Event("sample", false, "2020-12-31T00:00").getType());
-            assertEquals('T', new Todo("todo test").getType());
-            assertEquals('T', new Todo("test", true).getType());
-        } catch (InvalidFormatException e) {
-            fail();
-        }
+        assertEquals('D', new Deadline("test1", DATE_WITH_TIME).getType());
+        assertEquals('D', new Deadline("test2", TaskStatus.DONE, DATE_WITHOUT_TIME.toString()).getType());
+        assertEquals('E', new Event("sample1", DATE_WITHOUT_TIME).getType());
+        assertEquals('E', new Event("sample2", TaskStatus.NOT_DONE, DATE_WITH_TIME.toString()).getType());
+        assertEquals('T', new Todo("test3").getType());
+        assertEquals('T', new Todo("test4", TaskStatus.DONE).getType());
     }
 
     @Test
     public void getDescription() {
-        try {
-            assertEquals("test", new Deadline("deadline test /by 1-1-2020").getDescription());
-            assertEquals("test", new Deadline("test", true, "2020-01-01T03:14:15.926535898").getDescription());
-            assertEquals("sample", new Event("event sample /at 31-12-2020 2359").getDescription());
-            assertEquals("sample", new Event("sample", false, "2020-12-31T00:00").getDescription());
-            assertEquals("test", new Todo("todo test").getDescription());
-            assertEquals("test", new Todo("test", true).getDescription());
-        } catch (InvalidFormatException e) {
-            fail();
-        }
+        assertEquals("test1", new Deadline("test1", DATE_WITH_TIME).getDescription());
+        assertEquals("test2", new Deadline("test2", TaskStatus.DONE, DATE_WITHOUT_TIME.toString())
+                .getDescription());
+        assertEquals("sample1", new Event("sample1", DATE_WITHOUT_TIME).getDescription());
+        assertEquals("sample2", new Event("sample2", TaskStatus.NOT_DONE, DATE_WITH_TIME.toString())
+                .getDescription());
+        assertEquals("test3", new Todo("test3").getDescription());
+        assertEquals("test4", new Todo("test4", TaskStatus.DONE).getDescription());
     }
 
     @Test
     public void getStatus() {
-        try {
-            assertEquals("0", new Deadline("deadline test /by 1-1-2020").getStatus());
-            assertEquals("1", new Deadline("test", true, "2020-01-01T03:14:15.926535898").getStatus());
-            assertEquals("0", new Event("event sample /at 31-12-2020 2359").getStatus());
-            assertEquals("0", new Event("sample", false, "2020-12-31T00:00").getStatus());
-            assertEquals("0", new Todo("todo test").getStatus());
-            assertEquals("1", new Todo("test", true).getStatus());
-        } catch (InvalidFormatException e) {
-            fail();
-        }
+        assertEquals("0", new Deadline("test1", DATE_WITH_TIME).getStatus());
+        assertEquals("1", new Deadline("test2", TaskStatus.DONE, DATE_WITHOUT_TIME.toString())
+                .getStatus());
+        assertEquals("0", new Event("sample1", DATE_WITHOUT_TIME).getStatus());
+        assertEquals("0", new Event("sample2", TaskStatus.NOT_DONE, DATE_WITH_TIME.toString())
+                .getStatus());
+        assertEquals("0", new Todo("test3").getStatus());
+        assertEquals("1", new Todo("test4", TaskStatus.DONE).getStatus());
+    }
+
+    @Test
+    public void markAsDone() {
+        Task deadline = new Deadline("test1", TaskStatus.NOT_DONE, DATE_WITHOUT_TIME.toString());
+        assertEquals("0", deadline.getStatus());
+        deadline.markAsDone();
+        assertEquals("1", deadline.getStatus());
+        
+        Task todo = new Todo("test2");
+        assertEquals("0", todo.getStatus());
+        todo.markAsDone();
+        assertEquals("1", todo.getStatus());
+    }
+
+    @Test
+    public void getAt_localDateTime() {
+        assertEquals(LocalDateTime.of(2020, 5, 5, 3, 14, 15, 926535898),
+                new Event("sample1", DATE_WITHOUT_TIME).getAt());
+        assertEquals(LocalDateTime.of(2021, 3, 17, 3, 45),
+                new Event("sample2", TaskStatus.NOT_DONE, DATE_WITH_TIME.toString()).getAt());
+    }
+     
+    @Test
+    public void getAt_null() {
+        assertNull(new Deadline("test1", DATE_WITH_TIME).getAt());
+        assertNull(new Deadline("test2", TaskStatus.DONE, DATE_WITHOUT_TIME.toString()).getAt());
+        assertNull(new Todo("test3").getAt());
+        assertNull(new Todo("test4", TaskStatus.DONE).getAt());
+    }
+
+    @Test
+    public void getBy_localDateTime() {
+        assertEquals(LocalDateTime.of(2021, 3, 17, 3, 45),
+                new Deadline("test1", DATE_WITH_TIME).getBy());
+        assertEquals(LocalDateTime.of(2020, 5, 5, 3, 14, 15, 926535898),
+                new Deadline("test2", TaskStatus.DONE, DATE_WITHOUT_TIME.toString()).getBy());
+    }
+    
+    @Test
+    public void getBy_null() {
+        assertNull(new Event("sample1", DATE_WITHOUT_TIME).getBy());
+        assertNull(new Event("sample2", TaskStatus.NOT_DONE, DATE_WITH_TIME.toString()).getBy());
+        assertNull(new Todo("test3").getBy());
+        assertNull(new Todo("test4", TaskStatus.DONE).getBy());
+    }
+
+    @Test
+    public void setDescription() {
+        Task deadline = new Deadline("test1", TaskStatus.NOT_DONE, DATE_WITHOUT_TIME.toString());
+        assertEquals("test1", deadline.getDescription());
+        deadline.setDescription("sample1");
+        assertEquals("sample1", deadline.getDescription());
+
+        Task todo = new Todo("test2");
+        assertEquals("test2", todo.getDescription());
+        todo.setDescription("sample2");
+        assertEquals("sample2", todo.getDescription());
+    }
+
+    @Test
+    public void setAt() {
+        Task event = new Event("test1", TaskStatus.NOT_DONE, DATE_WITHOUT_TIME.toString());
+        assertEquals(DATE_WITHOUT_TIME, event.getAt());
+        event.setAt(DATE_WITH_TIME);
+        assertEquals(DATE_WITH_TIME, event.getAt());
+    }
+
+    @Test
+    public void setBy() {
+        Task deadline = new Deadline("test1", TaskStatus.NOT_DONE, DATE_WITHOUT_TIME.toString());
+        assertEquals(DATE_WITHOUT_TIME, deadline.getBy());
+        deadline.setBy(DATE_WITH_TIME);
+        assertEquals(DATE_WITH_TIME, deadline.getBy());
     }
 }

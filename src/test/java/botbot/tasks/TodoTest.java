@@ -1,29 +1,14 @@
 package botbot.tasks;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 
 import org.junit.jupiter.api.Test;
 
 public class TodoTest {
     @Test
-    public void getAt() {
-        assertNull(new Todo("todo test").getAt());
-        assertNull(new Todo("test", true).getAt());
-        assertNull(new Todo("test", false).getAt());
-    }
-
-    @Test
-    public void getBy() {
-        assertNull(new Todo("todo test").getBy());
-        assertNull(new Todo("test", true).getBy());
-        assertNull(new Todo("test", false).getBy());
-    }
-
-    @Test
     public void testStringConversion() {
-        assertEquals("[T] [\u2718] test", new Todo("todo test").toString());
-        assertEquals("[T] [\u2713] sample", new Todo("sample", true).toString());
-        assertEquals("[T] [\u2718] test", new Todo("test", false).toString());
+        assertEquals("[T] [\u2718] test", new Todo("test").toString());
+        assertEquals("[T] [\u2713] sample", new Todo("sample", TaskStatus.DONE).toString());
+        assertEquals("[T] [\u2718] test", new Todo("test", TaskStatus.NOT_DONE).toString());
     }
 }

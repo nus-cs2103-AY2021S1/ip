@@ -57,7 +57,7 @@ public class Ui {
         return RESPONSE_EXIT;
     }
     
-    private static String makePlural(int count) {
+    static String makePlural(int count) {
         return (count > 1) ? PLURALITY_PLURAL : PLURALITY_SINGULAR;
     }
 
