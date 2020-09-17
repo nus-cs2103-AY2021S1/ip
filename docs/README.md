@@ -104,11 +104,12 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * Partial words will be matched e.g. `boo` will match task description `read books`
 
 Examples:
-* `find books` will match the task descriptions `Read book` and `Borrow books` (if both tasks exist)
+* `find books` will match the task descriptions `Read book` and `Return books` (if both tasks exist)<br>
+![]<img src="/docs/FindExample.PNG" width="317.5" height="249.5">
 
 ### Deleting a person : `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified task from the task list.
 
 Format: `delete INDEX`
 
@@ -117,5 +118,24 @@ Format: `delete INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​ and be less than or equals to the size of the list.
 
 Examples:
-* `delete 2` deletes the 2nd task in the task list.
+* `delete 2` deletes the 2nd task in the task list.<br>
 ![]<img src="/docs/DeleteExample.PNG" width="374.5" height="588">
+
+
+### Marking a task as done : `done`
+
+Marks a task as done and changes done symbol ([✔] or [x]) of the specified task on the task list.
+
+Format: `done INDEX`
+* Marks the task at the specified `INDEX` as done.
+* The index refers to the index number shown in the displayed task list.
+* The index **must be a positive integer** 1, 2, 3, …​ and be less than or equals to the size of the list.
+
+Examples:
+* `done 2` marks the 2nd task in the task list as done.<br>
+
+### Exiting the program : `bye`
+
+Exits the program.
+
+Format: `bye`
