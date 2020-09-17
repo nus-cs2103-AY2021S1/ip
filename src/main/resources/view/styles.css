@@ -1,0 +1,103 @@
+/*
+    @@author erisjacey-resued
+    Reused from https://github.com/tankangliang/ip/blob/master/src/main/resources/view/styles.css
+    with major modifications
+ */
+
+.chat-bubble {
+    -fx-spacing: 5.0;
+    -fx-background-color: rgba(238, 232, 170, 0.7);
+    -fx-background-radius: 15;
+}
+
+.chat-label {
+    -fx-text-fill: black;
+}
+
+.label-text {
+    -fx-text-fill: #2D3833;
+    -fx-font-size: 14px;
+    -fx-font-weight: bolder;
+    -fx-margin: 30;
+    -fx-background-color: white;
+    -fx-background-radius: 10;
+    -fx-padding: 5 5 5 15;
+    -fx-border-insets: 5px;
+    -fx-background-insets: 5px;
+}
+
+.dialog {
+    -fx-background-color: rgba(0,0,0,0);
+}
+
+
+.scroll-bar {
+    -fx-background-image:url("/images/background.jpg");
+    -fx-background-size: 100% 110%;
+    -fx-background-position: bottom center;
+    -fx-background: transparent;
+}
+
+.button {
+    -fx-background-color: steelblue;
+    -fx-background-radius: 10;
+    -fx-padding: 5px;
+    -fx-border-insets: 5px;
+    -fx-background-insets: 5px;
+    -fx-text-fill: white;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-font-family: Lucida Console;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0.5, 0.0, 0.0);
+}
+
+.user-input {
+    -fx-background-color: palegoldenrod;
+    -fx-background-radius: 10;
+    -fx-padding: 5 5 5 20;
+    -fx-border-insets: 5px;
+    -fx-background-insets: 5px;
+    -fx-text-fill: black;
+    -fx-font-size: 16px;
+    -fx-font-family: Lucida Console;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0.5, 0.0, 0.0);
+}
+
+
+.scroll-bar:horizontal .track,
+.scroll-bar:vertical .track {
+    -fx-background-color: palegoldenrod;
+    -fx-border-color: palegoldenrod;
+    -fx-background-radius: 0.0em;
+    -fx-border-radius: 2.0em;
+}
+
+.scroll-bar:horizontal .increment-button,
+.scroll-bar:horizontal .decrement-button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 0.0em;
+    -fx-padding: 0 0 10 0;
+}
+
+.scroll-bar:vertical .increment-button,
+.scroll-bar:vertical .decrement-button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 0.0em;
+    -fx-padding: 0 10 0 0;
+}
+
+
+.scroll-bar:vertical .increment-arrow,
+.scroll-bar:vertical .decrement-arrow{
+    -fx-shape: "";
+    -fx-padding: 0em;
+}
+
+.scroll-bar:horizontal .thumb,
+.scroll-bar:vertical .thumb {
+    -fx-background-color: steelblue;
+    -fx-background-insets: 1.0, 0.0, 0.0;
+    -fx-background-radius: 2.0em;
+}
+
+/* @@author */
