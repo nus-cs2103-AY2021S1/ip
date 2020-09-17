@@ -6,6 +6,8 @@ It supports attaching dates to tasks, so you can keep
 track of deadlines or events and even sort them by date
 to keep your priorities straight!
 
+**Duck**
+
 ![Duck Screenshot](./Ui.png)
 
 ## Features
