@@ -3,7 +3,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Event is a subclass of Task that handles all the event tasks by user.
+ * Event is a subclass of Task that handles all the event tasks added by user.
  */
 
 public class Event extends Task {
@@ -32,7 +32,7 @@ public class Event extends Task {
         this.at = LocalDate.parse(at);
     }
     /**
-     * convert a Task string to a format that is "[task] [done/not done] /at [date]".
+     * Method to convert a Task string to a format that is "[task] [done/not done] /at [date]".
      * @return a formatted string to be stored in a file.
      */
     @Override

@@ -1,7 +1,7 @@
 package duke;
 
 /**
- * Todo is a subclass of Task and handles all the todo event created by user.
+ * Todo is a subclass of Task that handles all the todo event added by user.
  */
 
 public class Todo extends Task {

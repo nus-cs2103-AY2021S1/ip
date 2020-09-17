@@ -18,7 +18,7 @@ public class DukeException extends Exception {
     @Override
     public String toString() {
         if (msg.equals("file not found")) {
-            return "no databse found! pls try again ^__^";
+            return "no database found! pls try again ^__^";
         } else if (msg.equals("command not found")) {
             return "Meimei doesn't understand this command!";
         } else if (msg.equals("time")) {

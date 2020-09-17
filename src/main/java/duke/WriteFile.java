@@ -14,14 +14,8 @@ public class WriteFile {
         fw.close();
     }
 
-    static void appendToFile(String filePath, String textToAppend) throws IOException {
-        FileWriter fw = new FileWriter(filePath, true); // create a FileWriter in append mode
-        fw.write(textToAppend);
-        fw.close();
-    }
-
     /**
-     * The main method to run the WriteFile file
+     * The main method to run the WriteFile file.
      * @param args
      */
     public static void main(String[] args) {

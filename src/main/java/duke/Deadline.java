@@ -3,7 +3,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Deadline as a subclass of Task that handles a deadline task.
+ * Deadline as a subclass of Task that handles a deadline task added by user.
  */
 
 public class Deadline extends Task {
