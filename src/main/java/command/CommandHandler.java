@@ -1,9 +1,10 @@
 package command;
 
+import java.io.IOException;
+
 import converter.Parser;
 import duke.Duke;
 import exception.DukeException;
-import java.io.IOException;
 import storage.Storage;
 import task.Task;
 import task.TaskList;
@@ -11,14 +12,21 @@ import ui.Ui;
 
 public class CommandHandler {
 
+    /**
+     * Give instructions to Bot based on the command given and return UI response. Contains the logic of the bot.
+     *
+     * @param input Raw user input in string.
+     * @param duke  Duke object.
+     * @return UI response as a string based on the command given.
+     */
     public static String execute(String input, Duke duke) {
         TaskList taskList = duke.getTaskList();
         Storage storage = duke.getStorage();
         StringBuilder output = new StringBuilder();
         try {
             Mode mode = Parser.mode(input);
-            if (mode == Mode.TODO || mode == Mode.DEADLINE ||
-                    mode == Mode.EVENT) {
+            if (mode == Mode.TODO || mode == Mode.DEADLINE
+                    || mode == Mode.EVENT) {
                 // Create and add task to task list
                 Task task = Parser.task(input);
                 taskList.add(task);
@@ -27,8 +35,7 @@ public class CommandHandler {
                 storage.addData(task);
 
                 // System output
-                output.append(Ui.showAddTask(task) + "\n")
-                        .append(Ui.showTotalTasks(taskList.getSize()));
+                output.append(Ui.showAddTask(task, taskList.getSize()));
 
             } else if (mode == Mode.DONE) {
                 // Mark Task as Done
@@ -42,12 +49,11 @@ public class CommandHandler {
                 int order = Parser.order(input);
                 Task task = taskList.remove(order);
                 storage.deleteData(order);
-                output.append(Ui.showRemovedTask(task)).append("\n")
-                        .append(Ui.showTotalTasks(taskList.getSize()));
+                output.append(Ui.showRemovedTask(task, taskList.getSize()));
 
             } else if (mode == Mode.LIST) {
                 // List all tasks
-                output.append(taskList.listToString());
+                output.append(Ui.showListTasks(taskList));
 
             } else if (mode == Mode.BYE) {
                 // Exit now
@@ -55,8 +61,8 @@ public class CommandHandler {
                 output.append(Ui.goodbye());
             } else if (mode == Mode.FIND) {
                 // Find tasks
-                String subName = Parser.name(input);
-                String result = taskList.find(subName);
+                String subName = Parser.findName(input);
+                TaskList result = taskList.find(subName);
                 output.append(Ui.showFindTask(result));
             } else if (mode == Mode.TAG) {
                 //Tag task

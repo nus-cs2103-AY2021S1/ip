@@ -8,6 +8,7 @@ import task.Task;
 import task.ToDo;
 
 public class Parser {
+    private static final String DELIMITER = " ";
 
     /**
      * Based on the input, return the correct command mode.
@@ -17,86 +18,95 @@ public class Parser {
      * @throws DukeException thrown when no mode can be found for the input
      */
     public static Mode mode(String input) throws DukeException {
-        String command = input.split(" ")[0];
-        switch (command) {
-        case "todo":
-            return Mode.TODO;
-        case "deadline":
-            return Mode.DEADLINE;
-        case "event":
-            return Mode.EVENT;
-        case "bye":
-            return Mode.BYE;
-        case "done":
-            return Mode.DONE;
-        case "delete":
-            return Mode.DELETE;
-        case "list":
-            return Mode.LIST;
-        case "find":
-            return Mode.FIND;
-        case "tag":
-            return Mode.TAG;
-        default:
+        String command = input.split(Parser.DELIMITER)[0].toUpperCase();
+        try {
+            return Mode.valueOf(command);
+        } catch (IllegalArgumentException e) {
             throw new DukeException("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 
     /**
      * Return the task corresponding to the input given
+     *
      * @param input input to interpret
      * @return A type of task will be returned.
      * @throws DukeException thrown when no task can be returned for the corresponding task.
      */
     public static Task task(String input) throws DukeException {
-        String command = input.split(" ")[0];
-        assert input.split(" ").length>=2: "At least 2 inputs";
+        assert input.split(Parser.DELIMITER).length >= 2 : "At least 2 inputs";
+        String command = input.split(Parser.DELIMITER)[0];
+
         switch (command) {
-        case "todo":
-            return toDo(input);
-        case "deadline":
-            return deadline(input);
-        case "event":
-            return event(input);
+        case ToDo.COMMAND:
+            return parseToDo(input);
+        case Deadline.COMMAND:
+            return parseDeadline(input);
+        case Event.COMMAND:
+            return parseEvent(input);
         default:
             throw new DukeException("\u2639 OOPS!!! I'm sorry, but this is an invalid command :-(");
         }
     }
 
-    private static ToDo toDo(String input) throws DukeException {
-        String[] inputSplit = input.split(" ");
-        String name = input.split("todo ")[1];
-        assert name.length()>0: "Empty Desc";
+    private static ToDo parseToDo(String input) {
+        String name = input.split(ToDo.COMMAND)[1].trim();
+        assert name.length() > 0 : "Empty Desc";
         return new ToDo(name);
     }
 
-    private static Deadline deadline(String input) {
-        String name = input.split(" /by ")[0].split("deadline ")[1];
-        String by = input.split(" /by ")[1];
-        assert by.length()>0: "Empty Date";
-        assert name.length()>0: "Empty Desc";
+    private static Deadline parseDeadline(String input) throws DukeException {
+        String name = input.split(Deadline.DELIMITER)[0].split(Deadline.COMMAND)[1].trim();
+        String by = input.split(Deadline.DELIMITER)[1].trim();
+        assert by.length() > 0 : "Empty Date";
+        assert name.length() > 0 : "Empty Desc";
         return new Deadline(name, by);
-
     }
 
-    private static Event event(String input) {
-        String name = input.split(" /at ")[0].split("event ")[1];
-        String at = input.split(" /at ")[1];
-        assert at.length()>0: "Empty Date";
-        assert name.length()>0: "Empty Desc";
+    private static Event parseEvent(String input) {
+        String name = input.split(Event.DELIMITER)[0].split(Event.COMMAND)[1].trim();
+        String at = input.split(Event.DELIMITER)[1].trim();
+        assert at.length() > 0 : "Empty Date";
+        assert name.length() > 0 : "Empty Desc";
         return new Event(name, at);
 
     }
 
-    public static int order(String input) {
-        return Integer.parseInt(input.split(" ")[1]);
+    /**
+     * Return specified order as an integer.
+     *
+     * @param input Raw command input as String.
+     * @return Order number as Integer.
+     * @throws DukeException when Raw command input given does not contain an integer.
+     */
+    public static int order(String input) throws DukeException {
+        try {
+            return Integer.parseInt(input.split(Parser.DELIMITER)[1]);
+
+        } catch (NumberFormatException e) {
+            throw new DukeException("\u2639 OOPS!!! Please enter an integer!");
+
+        }
+
     }
 
-    public static String name(String input) {
-        return input.split("find ")[1];
+    /**
+     * Returns the sub name to search for.
+     *
+     * @param input Raw command input as String.
+     * @return Sub name to search for.
+     */
+    public static String findName(String input) {
+        return input.split(Parser.DELIMITER, 2)[1].trim();
     }
 
+    /**
+     * Return name of tag as String
+     *
+     * @param input Raw command input as String
+     * @return Name of tag
+     */
     public static String getTag(String input) {
-        return input.split(" ")[2];
+        return input.split(Parser.DELIMITER, 3)[2].trim();
     }
 }

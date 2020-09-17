@@ -4,14 +4,13 @@ package task;
  * Super class for all types of tasks.
  */
 public class Task {
-    public final static String TICK = "\u2713";
-    public final static String CROSS = "\u2718";
-    public final static String DELIMITER = "/";
-    public final static String TAG_ICON = " #";
+    public static final char TICK = '\u2713';
+    public static final char CROSS = '\u2718';
+    public static final String DELIMITER = "/";
+    public static final String TAG_ICON = " #";
 
     protected final String name;
     protected boolean isDone;
-
     protected String tag;
 
     /**
@@ -20,7 +19,7 @@ public class Task {
      * @param name name of Task.
      */
     public Task(String name) {
-        assert name.length()>0: "Invalid Input";
+        assert name.length() > 0 : "Invalid Input";
         this.name = name;
         this.isDone = false;
         this.tag = "";
@@ -41,19 +40,20 @@ public class Task {
     /**
      * Formats task into the data format.
      *
-     * @return
+     * @return Task as Parsed Format.
      */
     public String getParsedData() {
         return String.valueOf(this.isDone) + Task.DELIMITER + this.name;
     }
 
-    public String toString() {
-        String symbol = isDone ? Task.TICK : Task.CROSS;
-        return "[" + symbol + "] " + name;
+    public void setTag(String tagName) {
+        this.tag = tagName;
     }
 
-    public void setTag (String tagName) {
-        this.tag = tagName;
+    @Override
+    public String toString() {
+        char symbol = isDone ? Task.TICK : Task.CROSS;
+        return String.format("[%c] %s", symbol, name);
     }
 }
 

@@ -1,16 +1,17 @@
 package storage;
 
-import exception.DukeException;
-import task.Deadline;
-import task.Event;
-import task.Task;
-import task.ToDo;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import exception.DukeException;
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.ToDo;
 
 public class Storage {
 
@@ -51,7 +52,7 @@ public class Storage {
      * @return list of tasks stored in the data file as an ArrayList
      * @throws IOException thrown when scanner is unable to read the file
      */
-    public ArrayList<Task> load() throws IOException {
+    public ArrayList<Task> load() throws IOException, DukeException {
         ArrayList<Task> dukeList = new ArrayList<>();
         Scanner sc = new Scanner(f);
         while (sc.hasNextLine()) {
@@ -61,20 +62,20 @@ public class Storage {
             assert inputSplit.length >= 2;
             Task task;
             switch (inputSplit[0]) {
-                case "T":
-                    // two inputs
-                    task = new ToDo(inputSplit[3]);
-                    break;
-                case "D":
-                    //three inputs
-                    task = new Deadline(inputSplit[3], inputSplit[4]);
-                    break;
-                case "E":
-                    //three inputs
-                    task = new Event(inputSplit[3], inputSplit[4]);
-                    break;
-                default:
-                    continue;
+            case "T":
+                // two inputs
+                task = new ToDo(inputSplit[3]);
+                break;
+            case "D":
+                //three inputs
+                task = new Deadline(inputSplit[3], inputSplit[4]);
+                break;
+            case "E":
+                //three inputs
+                task = new Event(inputSplit[3], inputSplit[4]);
+                break;
+            default:
+                continue;
             }
 
             if (Boolean.parseBoolean(inputSplit[1])) {
@@ -82,7 +83,7 @@ public class Storage {
             }
 
             String tagName = inputSplit[2];
-            if (!tagName.equals("")){
+            if (!tagName.equals("")) {
                 task.setTag(tagName);
             }
 
@@ -151,7 +152,7 @@ public class Storage {
     /**
      * Sets Tagname of Task.
      *
-     * @param order which order task to setTag.
+     * @param order   which order task to setTag.
      * @param tagName name of tag.
      * @throws IOException thrown when file cannot be found.
      */
@@ -165,7 +166,7 @@ public class Storage {
      * @param order which order task to setTag.
      * @throws IOException thrown when file cannot be found.
      */
-    public void editData(int order, String data, int type) throws IOException{
+    public void editData(int order, String data, int type) throws IOException {
         String newData = "";
         Scanner reader = new Scanner(f);
 

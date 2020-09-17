@@ -1,8 +1,9 @@
 package duke;
 
+import java.io.IOException;
+
 import command.CommandHandler;
 import exception.DukeException;
-import java.io.IOException;
 import storage.Storage;
 import task.TaskList;
 import ui.Ui;
@@ -13,8 +14,14 @@ public class Duke {
     private Storage storage;
     private boolean isExit = false;
 
-
-    public Duke (String dest, String fileName){
+    /**
+     * Instantiates Duke bot by loading Storage Data files into Tasklist. If data files or folders do not
+     * exist based on the destination and filename given, Duke bot creates path and file specified.
+     *
+     * @param dest
+     * @param fileName
+     */
+    public Duke(String dest, String fileName) {
 
         try {
             storage = new Storage(dest, fileName);
@@ -30,11 +37,14 @@ public class Duke {
         return CommandHandler.execute(input, this);
     }
 
-    public boolean isExit(){
+    /**
+     * @return
+     */
+    public boolean isExit() {
         return this.isExit;
     }
 
-    public TaskList getTaskList(){
+    public TaskList getTaskList() {
         return this.taskList;
     }
 
@@ -42,7 +52,7 @@ public class Duke {
         return this.storage;
     }
 
-    public void setExit(boolean isExit){
+    public void setExit(boolean isExit) {
         this.isExit = isExit;
     }
 }

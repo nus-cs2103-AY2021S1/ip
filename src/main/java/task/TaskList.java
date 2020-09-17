@@ -1,7 +1,8 @@
 package task;
 
-
 import java.util.ArrayList;
+
+import exception.DukeException;
 
 public class TaskList {
 
@@ -32,8 +33,12 @@ public class TaskList {
      * @param order the order to remove from the tasklist
      * @return the task that was removed.
      */
-    public Task remove(int order) {
-        return dukeList.remove(order - 1);
+    public Task remove(int order) throws DukeException {
+        try {
+            return dukeList.remove(order - 1);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("\u2639 OOPS!!! Looks like we can't find the task.\nPlease enter a valid index");
+        }
     }
 
     /**
@@ -42,10 +47,15 @@ public class TaskList {
      * @param order the order to mark as done.
      * @return the task that was marked done.
      */
-    public Task markDone(int order) {
-        Task task = dukeList.get(order - 1);
-        task.setDone();
-        return task;
+    public Task markDone(int order) throws DukeException {
+        try {
+            Task task = dukeList.get(order - 1);
+            task.setDone();
+            return task;
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("\u2639 OOPS!!! Looks like we can't find the task.\nPlease enter a valid index");
+        }
+
     }
 
     /**
@@ -54,12 +64,15 @@ public class TaskList {
      * @return the string of each task.
      */
     public String listToString() {
-        String output = "";
+        StringBuilder output = new StringBuilder();
         for (int i = 0; i < dukeList.size(); i++) {
-            output = output + (i + 1) + ". " + dukeList.get(i).toString() + "\n";
+            int order = i + 1;
+            String taskString = dukeList.get(i).toString();
+            String line = String.format("%d. %s\n", order, taskString);
+            output.append(line);
         }
 
-        return output;
+        return output.toString();
     }
 
     /**
@@ -71,23 +84,33 @@ public class TaskList {
         return dukeList.size();
     }
 
-    public String find (String subName) {
-        StringBuilder output = new StringBuilder();
-        int counter = 0;
-        for (Task t: dukeList) {
-            String s1 = t.getName().toLowerCase();
-            if(s1.contains(subName.toLowerCase())) {
-                output.append(counter + 1).append(".").append(t.toString()).append("\n");
-                counter +=1;
+    /**
+     * Return subList of tasks matching with subName
+     * @param subName Name to compare.
+     * @return TaskList of tasks whose names match subName
+     */
+    public TaskList find(String subName) {
+        TaskList subList = new TaskList(new ArrayList<>());
+        for (Task task : dukeList) {
+            String name = task.getName();
+            String s1 = name.toLowerCase();
+            String s2 = subName.toLowerCase();
+            if (s1.contains(s2)) {
+                subList.add(task);
             }
         }
 
-        return output.toString();
+        return subList;
     }
 
-    public Task setTag(int order, String tagName) {
-        Task task = dukeList.get(order - 1);
-        task.setTag(tagName);
-        return task;
+    public Task setTag(int order, String tagName) throws DukeException {
+        assert !tagName.isEmpty() : "Empty Desc";
+        try {
+            Task task = dukeList.get(order - 1);
+            task.setTag(tagName);
+            return task;
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("\u2639 OOPS!!! Looks like we can't find the task.\nPlease enter a valid index");
+        }
     }
 }
