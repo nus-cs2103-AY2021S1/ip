@@ -95,7 +95,7 @@ Example of command:
 Expected result:
 ```
 Banana! I’ve marked this task as done:
-      [T][✘] read book
+      [T][✓] read book
 ```
 
 ### `delete` - Delete a task 
@@ -110,7 +110,7 @@ Example of command:
 Expected result:
 ```
 Banana! banana has been eaten. Burp!
-      [T][✘] read book
+      [T][✓] read book
    Now you have 2 banana(s) in your list! Nom nom..
 ```
 
@@ -125,7 +125,7 @@ Example of command:
 
 Expected result: 
 ```
-Bananas! Here are your bananas..
+Banana! Here are your bananas..
 [D][✘] project (by: Sep 30 2020)
 ```
 
@@ -140,17 +140,17 @@ Example of command:
 
 Expected result: 
 ```
-Bananas! Here are your bananas..
+Banana! Here are your bananas..
 [D][✘] project (by: Sep 30 2020)
 ```
 
 Example of command: 
-- `find book`  
+- `find graduation`  
 
 Expected result: 
 ```
-Bananas! Here are your bananas..
-[T][✘] read book
+Banana! Here are your bananas..
+[E][✘] graduation night (at: Feb 19 2020)
 ```
 
 ### `bye` - Exits application
