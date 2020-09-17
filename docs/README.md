@@ -15,12 +15,12 @@ Don't worry, Doraemon TaskList is here to help! Doraemon TaskList is a simple ap
 
 ## Features 
 1. **Adding Tasks**: adds a task into the task list.
-    1. **`todo`**: adds a *todo* task to the list.
-    2. **`deadline`**: adds a *deadline* task to the list.
-    3. **`event`**: adds an *event* task to the list.
+   + **`todo`**: adds a *todo* task to the list.
+   + **`deadline`**: adds a *deadline* task to the list.
+   + **`event`**: adds an *event* task to the list.
 2. **Listing Tasks**: shows a list of task(s) from the task list.
-    1. **`list`**: shows all the task(s) in the task list.
-    1. **`list <date>`**: shows the list of deadline(s)/event(s) on that date.
+   + **`list`**: shows all the task(s) in the task list.
+   + **`list <date>`**: shows the list of deadline(s)/event(s) on that date.
 3. **`done`**: marks the task at a specified index as *done*.
 4. **`delete`**: removes a task from the list.
 5. **`find`**: search for task(s) that contains the specified keyword(s).
