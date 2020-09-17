@@ -24,7 +24,7 @@ public class FindCommand extends Command {
 
     /**
      * Overrides execute in {@link Command}.
-     * Executes the command to display all tasks containing the given keyword.
+     * Executes the command to display all tasks containing the given keyword(s).
      *
      * @param tasks The list of {@link Task}s.
      * @param storage The Storage object of Duke.

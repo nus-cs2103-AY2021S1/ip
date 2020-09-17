@@ -170,8 +170,8 @@ public class TaskList {
     /**
      * Returns all the {@link Task}s that contains the keyword.
      *
-     * @param keywords A String to search for.
-     * @return A formatted String of {@link Task}s with description that includes this keyword.
+     * @param keywords A variable number of Strings to search for.
+     * @return A formatted String of {@link Task}s with description that includes the given keywords.
      */
     public String showMatchingTasks(String... keywords) {
         List<Task> matchingTasks = tasks.stream()
