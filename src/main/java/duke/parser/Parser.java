@@ -36,81 +36,63 @@ public class Parser {
         // command: hello
         boolean hasStartSpecifier = splitInput[0].equals(StartCommand.COMMAND);
         boolean isStartCommand = hasStartSpecifier && hasNoFollowUp;
-        if (isStartCommand) {
-            return createStartCommand();
-        }
-
         // command: bye
         boolean hasExitSpecifier = splitInput[0].equals(ExitCommand.COMMAND);
         boolean isExitCommand = hasExitSpecifier && hasNoFollowUp;
-        if (isExitCommand) {
-            return createExitCommand();
-        }
-
         // command: list
         boolean hasListSpecifier = splitInput[0].equals(ListCommand.COMMAND);
         boolean isListCommand = hasListSpecifier && hasNoFollowUp;
-        if (isListCommand) {
-            return createListCommand();
-        }
-
         // command: delete [index]
         boolean isDeleteCommand = splitInput[0].equals(DeleteCommand.COMMAND);
-        if (isDeleteCommand) {
-            return createDeleteCommand(splitInput);
-        }
-
         // command: done [index]
         boolean isDoneCommand = splitInput[0].equals(DoneCommand.COMMAND);
-        if (isDoneCommand) {
-            return createDoneCommand(splitInput);
-        }
-
         //command: find [keyword(s)]
         boolean isFindCommand = splitInput[0].equals(FindCommand.COMMAND);
-        if (isFindCommand) {
-            return createFindCommand(splitInput);
-        }
-
         // command: todo [description]
         boolean isTodoCommand = splitInput[0].equals(ToDoCommand.COMMAND);
-        if (isTodoCommand) {
-            return createTodoCommand(splitInput);
-        }
-
         // command: deadline [description] /by [time]
         // or: event [description] /at [time]
         boolean isDeadlineCommand = splitInput[0].equals(DeadlineCommand.COMMAND);
         boolean isEventCommand = splitInput[0].equals(EventCommand.COMMAND);
-        if (isDeadlineCommand || isEventCommand) {
-            return createDeadlineOrEventCommand(splitInput);
-        }
-
         // command: undo
         boolean hasUndoSpecifier = splitInput[0].equals(UndoCommand.COMMAND);
         boolean isUndoCommand = hasUndoSpecifier && hasNoFollowUp;
-        if (isUndoCommand) {
-            return createUndoCommand();
-        }
-
         // command: clone [source index] or clone [source index] [destination index]
         boolean isCloneCommand = splitInput[0].equals(CloneCommand.COMMAND);
-        if (isCloneCommand) {
-            return createCloneCommand(splitInput);
-        }
-
+        // command: update [index] <optional>/description [description] <optional>/time [time]
         boolean isUpdateCommand = splitInput[0].equals(UpdateCommand.COMMAND);
-        if (isUpdateCommand) {
+        // command: close
+        boolean hasCloseSpecifier = splitInput[0].equals(CloseCommand.COMMAND);
+        boolean isCloseCommand = hasCloseSpecifier && hasNoFollowUp;
+
+        if (isStartCommand) { // command: hello
+            return createStartCommand();
+        } else if (isExitCommand) { // command: bye
+            return createExitCommand();
+        } else if (isListCommand) { // command : list
+            return createListCommand();
+        } else if (isDeleteCommand) { // command: delete
+            return createDeleteCommand(splitInput);
+        } else if (isDoneCommand) { // command: done [index]
+            return createDoneCommand(splitInput);
+        } else if (isFindCommand) { //command: find [keyword(s)]
+            return createFindCommand(splitInput);
+        } else if (isTodoCommand) { // command: todo [description]
+            return createTodoCommand(splitInput);
+        } else if (isDeadlineCommand || isEventCommand) { // command: deadline [description] /by [time]
+            // or: event [description] /at [time]
+            return createDeadlineOrEventCommand(splitInput);
+        } else if (isUndoCommand) { // command: undo
+            return createUndoCommand();
+        } else if (isCloneCommand) { // command: clone [source index] or clone [source index] [destination index]
+            return createCloneCommand(splitInput);
+        } else if (isUpdateCommand) { // command: update [index] (/description [description]) (/time [time])
             return createUpdateCommand(splitInput);
-        }
-
-        boolean isCloseCommand = splitInput[0].equals(CloseCommand.COMMAND);
-        if (isCloseCommand && hasNoFollowUp) {
+        } else if (isCloseCommand) { // command: close
             return createCloseCommand();
+        } else { // unrecognised command
+            return new Command();
         }
-
-        // unregonised command
-        return new Command();
     }
 
     private static Command createCloseCommand() {
