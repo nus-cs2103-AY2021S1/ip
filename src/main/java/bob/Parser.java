@@ -17,8 +17,7 @@ import bob.exception.BobIncompleteEventDescriptionException;
 import bob.exception.BobIncorrectRescheduleFormatException;
 import bob.exception.BobIncorrectSnoozeFormatException;
 import bob.exception.BobNoDescriptionException;
-import bob.exception.BobNotAnEventException;
-import bob.exception.BobNumberFormatException;
+import bob.exception.BobDeleteDoneFormatException;
 
 import bob.task.Deadline;
 import bob.task.Event;
@@ -123,9 +122,9 @@ public class Parser {
             }
             index = Integer.parseInt(split[1]);
         } catch (NumberFormatException e) {
-            throw new BobNumberFormatException();
+            throw new BobDeleteDoneFormatException();
         } catch (IndexOutOfBoundsException e) {
-            throw new BobNumberFormatException();
+            throw new BobDeleteDoneFormatException();
         }
         return new DoneCommand(index);
     }
@@ -139,16 +138,20 @@ public class Parser {
             }
             index = Integer.parseInt(split[1]);
         } catch (NumberFormatException e) {
-            throw new BobNumberFormatException();
+            throw new BobDeleteDoneFormatException();
         } catch (IndexOutOfBoundsException e) {
-            throw new BobNumberFormatException();
+            throw new BobDeleteDoneFormatException();
         }
         return new DeleteCommand(index);
     }
 
     static Command parseFind(String command) throws BobException {
         try {
-            return new FindCommand(command.substring(FIND_KEYWORD_INDEX));
+            String keywords = command.substring(FIND_KEYWORD_INDEX);
+            if (keywords.isEmpty()) {
+                throw new BobFindNoKeyWordsException();
+            }
+            return new FindCommand(keywords);
         } catch (StringIndexOutOfBoundsException e) {
             throw new BobFindNoKeyWordsException();
         }

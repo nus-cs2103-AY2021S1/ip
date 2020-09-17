@@ -3,7 +3,7 @@ package bob.exception;
 /**
  * An exception to be thrown when a required index is not provided.
  */
-public class BobNumberFormatException extends BobException {
+public class BobDeleteDoneFormatException extends BobException {
 
     /**
      * Returns a message that indicates a required index has not been provided, alongside a format to be followed.
