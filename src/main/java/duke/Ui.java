@@ -31,7 +31,7 @@ public class Ui {
      */
     public static String assist() {
         StringBuilder response = new StringBuilder();
-        String greeting = "Greetings, Your Majesty.\n";
+        String greeting = "Greetings, Your Majesty. Use any of these commands to access my quality services:\n";
         response.append(greeting);
         String todoHelp = "1. todo [TASK]: Adds a todo to your scroll\n";
         String deadlineHelp = "2. deadline [TASK] /by [DATE AND/OR TIME]: Adds a deadline to your scroll\n";
