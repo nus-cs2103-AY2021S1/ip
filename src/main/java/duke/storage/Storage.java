@@ -28,6 +28,11 @@ public class Storage {
      */
     private String directoryPath;
     private String filepath;
+
+    /**
+     * Constructs a new Storage object.
+     * @param directoryPath where the task data is stored.
+     */
     public Storage(String directoryPath) {
         this.directoryPath = directoryPath;
         this.filepath = directoryPath + "duke.txt";
@@ -43,7 +48,7 @@ public class Storage {
         if (!directory.exists()) {
             directory.mkdir();
         }
-        
+
         Path path = Paths.get(filepath);
         if (Files.exists(path)) {
             File file = new File(filepath);
@@ -105,7 +110,7 @@ public class Storage {
         Path path = Paths.get(filepath);
         List<String> savedTasks = new ArrayList<>();
         String seperator = " | ";
-        for (int i = 0; i <tasks.getSize(); i++) {
+        for (int i = 0; i < tasks.getSize(); i++) {
             Task temp = tasks.get(i);
             String doneStatus = "0";
             if (temp.checkDone()) {
@@ -125,7 +130,6 @@ public class Storage {
                         + tempEvent.getTaskName() + seperator + tempEvent.getEventDate());
             }
         }
-        
         try {
             Files.write(path, savedTasks, StandardCharsets.UTF_8);
         } catch (IOException e) {
@@ -143,7 +147,7 @@ public class Storage {
         Path path = Paths.get(archivePath);
         List<String> savedTasks = new ArrayList<>();
         String seperator = " | ";
-        for (int i = 0; i <tasks.getSize(); i++) {
+        for (int i = 0; i < tasks.getSize(); i++) {
             Task temp = tasks.get(i);
             String doneStatus = "0";
             if (temp.checkDone()) {
