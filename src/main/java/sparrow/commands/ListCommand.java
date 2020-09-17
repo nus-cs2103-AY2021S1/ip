@@ -1,6 +1,5 @@
 package sparrow.commands;
 
-import sparrow.data.exceptions.IncorrectCommandException;
 import sparrow.data.task.TaskList;
 import sparrow.data.trivia.VocabList;
 import sparrow.storage.Storage;
