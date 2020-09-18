@@ -1,10 +1,10 @@
 package seedu.duke;
 import java.io.IOException;
 
-import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.stage.Stage;
+import javafx.scene.image.Image;
+
+
 
 /**
  * The Duke program implements an application that simulates a smart task manager with the name Duke.
@@ -12,10 +12,17 @@ import javafx.stage.Stage;
  *
  */
 
-public class Duke extends Application {
+public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+    //private ScrollPane scrollPane;
+    //private VBox dialogContainer;
+    //private TextField userInput;
+    //private Button sendButton;
+    private Scene scene;
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/jiji.jpg"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/totoro.png"));
 
     /**
      * Constructor of the class.
@@ -79,13 +86,13 @@ public class Duke extends Application {
         new Duke("/Users/chengjiyuqing/Desktop/Year 2 Sem 1/CS2103T/ip/src/main/java/seedu/duke/todo.txt").run();
 
     }
-
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
-        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
-
-        primaryStage.setScene(scene); // Setting the stage to show our screen
-        primaryStage.show(); // Render the stage.
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    protected String getResponse(String input) throws IOException, DukeException {
+        return "Duke heard: "
+                + Parser.parseInput(input,
+                new Storage("/Users/chengjiyuqing/Desktop/Year 2 Sem 1/CS2103T/ip/src/main/java/seedu/duke/todo.txt"));
     }
 }
