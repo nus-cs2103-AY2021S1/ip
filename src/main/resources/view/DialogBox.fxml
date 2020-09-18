@@ -6,9 +6,9 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<fx:root alignment="TOP_RIGHT" prefHeight="82.0" prefWidth="403.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="375.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
   <children>
-    <Label fx:id="dialog" lineSpacing="2.0" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #4964EF#4964EF; -fx-border-radius: 10 3 10 10; -fx-background-radius: 10 3 10 10; -fx-label-padding: 6 6 6 6;" text="Test" textFill="WHITE" wrapText="true">
+    <Label fx:id="dialog" lineSpacing="2.0" maxWidth="285.0" style="-fx-background-color: #4964EF#4964EF; -fx-border-radius: 10 3 10 10; -fx-background-radius: 10 3 10 10; -fx-label-padding: 6 6 6 6;" text="Test" textFill="WHITE" wrapText="true">
          <font>
             <Font name="PT Sans" size="16.0" />
          </font>

@@ -1,3 +1,18 @@
 .scroll-pane .viewport {
        -fx-background-image: url("scrollpane-background.jpg");
 }
+
+.scroll-bar:vertical {
+    -fx-background-color: #343d52;
+}
+
+.scroll-bar:vertical .track {
+	-fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-background-radius: 0em;
+}
+
+.scroll-bar:vertical .thumb {
+	-fx-background-color: #989898;
+    -fx-background-radius: 5em;
+}
