@@ -56,7 +56,7 @@ public class Storage {
         } catch (FileNotFoundException e) {
             new File("./data").mkdirs();
             try {
-                new File("./src/main/data/olivia.txt").createNewFile();
+                new File("./data/olivia.txt").createNewFile();
             } catch (IOException ioe) {
                 throw new OliviaException(
                         "Sorry, the file couldn't be created!\n"

@@ -21,8 +21,7 @@ public class Ui {
      */
 
     public String showLoaded(TaskList tasks) {
-        StringBuilder ret = new StringBuilder("A save file has been found and loaded!\n"
-                + "Your current tasks are: \n");
+        StringBuilder ret = new StringBuilder("Your current tasks are: \n");
         int i = 0;
         if (tasks.size() == 0) {
             ret.append("... empty! Good work!\n");
