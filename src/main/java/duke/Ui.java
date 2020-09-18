@@ -3,6 +3,10 @@ package duke;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+<<<<<<< HEAD
+=======
+import duke.note.Note;
+>>>>>>> 30be54f066a39e7b0c786f432174ec425f103cb5
 import duke.task.Task;
 
 /**
@@ -28,9 +32,15 @@ public class Ui {
     }
 
     /**
+<<<<<<< HEAD
      * Returns the welcome message.
      *
      * @return The welcome message.
+=======
+     * A string of welcome message on GUI.
+     *
+     * @return String representation of welcome message on GUI.
+>>>>>>> 30be54f066a39e7b0c786f432174ec425f103cb5
      */
     public String showWelcomeMessage() {
         return "Hello! I'm Pat\n"
@@ -55,7 +65,7 @@ public class Ui {
     }
 
     /**
-     * Prints the message of adding a task.
+     * Returns a string of the message of adding a task.
      *
      * @param task  The task to be added.
      * @param tasks The task list.
@@ -64,9 +74,19 @@ public class Ui {
         Response msg = new Response(new Task[]{task}, Response.Tag.ADD, tasks.size());
         return msg.getResponse();
     }
+    
+    public String showAddNoteMessage(Note note, TaskList tasks) {
+        return "     "
+                + "Got it. I've added this note: \n"
+                + "       "
+                + note
+                + "\n"
+                + "     "
+                + String.format("Now you have %d notes in the list. \n", tasks.noteSize());
+    }
 
     /**
-     * Prints the message of deleting a task.
+     * Returns a string of the message of deleting a task.
      *
      * @param task  The task to be deleted.
      * @param tasks The task list.
@@ -76,13 +96,28 @@ public class Ui {
         return msg.getResponse();
     }
 
+    public String showDeleteNoteMessage(Note note, TaskList tasks) {
+        return "     "
+                + "Got it. I've removed this note: \n"
+                + "       "
+                + note
+                + "\n"
+                + "     "
+                + String.format("Now you have %d notes in the list. \n", tasks.noteSize());
+    }
+    
     /**
-     * Prints the list of the tasks.
+     * Returns a list of the tasks.
      *
      * @param tasks The task list.
      */
     public String listTasks(TaskList tasks) {
         Response list = new Response(tasks.getArray(), Response.Tag.LIST);
+        return list.getResponse();
+    }
+    
+    public String listNotes(TaskList tasks) {
+        Response list = new Response(tasks.getNotesArray(), Response.Tag.LISTNOTES);
         return list.getResponse();
     }
 
@@ -97,7 +132,7 @@ public class Ui {
     }
 
     /**
-     * Prints the list of tasks that match the searching keyword.
+     * Returns a list of tasks that match the searching keyword.
      *
      * @param tasks The tasks that match the searching keyword.
      */
@@ -107,7 +142,7 @@ public class Ui {
     }
 
     /**
-     * Prints the loading error when loading the local file.
+     * Returns the loading error when loading the local file.
      */
     public String showLoadingError() {
         Response msg = new Response(new String[]{"Folder or file does not exist yet! "
@@ -116,7 +151,7 @@ public class Ui {
     }
 
     /**
-     * Prints the error message.
+     * Returns a string of the error message.
      *
      * @param errMessage The error message.
      */
@@ -126,7 +161,7 @@ public class Ui {
     }
 
     /**
-     * Prints the bye message when exiting the program.
+     * Returns a string of the bye message when exiting the program.
      */
     public String showByeMessage() {
         Response msg = new Response(new String[]{"Bye. Hope to see you again soon!"});
