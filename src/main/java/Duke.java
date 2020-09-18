@@ -12,10 +12,17 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.time.DateTimeException;
 
 
 public class Duke extends Application{
+
+    private static final String PROJECT_ROOT = System.getProperty("user.dir");
+    private static final String DEFAULT_FILE_PATH = PROJECT_ROOT + File.separator + "src" + File.separator + "main"
+            + File.separator + "java" + File.separator + "tasks.txt";
+    private static final String DEFAULT_DIRECTORY = PROJECT_ROOT + File.separator + "src" + File.separator + "main"
+            + File.separator + "java";
 
     private Storage storage;
     private TaskList tasks;
@@ -30,20 +37,15 @@ public class Duke extends Application{
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
-    // constructor
-    public Duke(String filePath) {
-        ui = new Ui();
-        storage = new Storage(filePath);
-        tasks = new TaskList(storage.loadTasks());
-        System.out.println(ui.printGreetingMessage(storage.createResult));
-    }
 
     // empty constructor
     public Duke() {
         ui = new Ui();
-        storage = new Storage("src/main/java/tasks.txt");
+        storage = new Storage(DEFAULT_FILE_PATH, DEFAULT_DIRECTORY);
         tasks = new TaskList(storage.loadTasks());
         System.out.println(ui.printGreetingMessage(storage.createResult));
+        System.out.println(DEFAULT_FILE_PATH);
+        System.out.println(DEFAULT_DIRECTORY);
     }
 
     @Override

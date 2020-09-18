@@ -12,8 +12,14 @@ public class Storage {
     protected final File TASKFILE;
     protected String createResult = "";
 
+    private String filePath;
+    private String dirPath;
+
     // Constructor
-    public Storage(String filePath) {
+    public Storage(String filePath, String dirPath) {
+
+        this.filePath = filePath;
+        this.dirPath = dirPath;
 
         this.TASKFILE = new File(filePath);
 
