@@ -6,15 +6,31 @@ import java.io.FileReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+/**
+ * Storage object handles saving and loading of data for list of Task objects.
+ * Task objects are stored as String representations in specified .txt file.
+ *
+ * @author Hakiem Rasid
+ */
 public class Storage {
 
     private String filePath;
 
+    /**
+     * Constructor of Storage object.
+     *
+     * @param filePath Target .txt file for saving and loading of data.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
-    // Saves current Task list onto a text file
+    /**
+     * Sends data of list of Task objects as String to be saved onto
+     * target .txt file.
+     *
+     * @param taskList List of Task objects to be saved.
+     */
     public void saveData(ArrayList<Task> taskList) {
 
         try {
@@ -55,7 +71,13 @@ public class Storage {
         }
     }
 
-    // Returns ArrayList of Tasks from savedata text file
+    /**
+     * Returns list of Task objects after loading data from .txt file.
+     * Returns empty list if no data is found.
+     *
+     * @return List of Task objects if data is found and loaded. Empty list
+     * if no data is found.
+     */
     public ArrayList<Task> loadData() {
         ArrayList<Task> list = new ArrayList<>();
         try {

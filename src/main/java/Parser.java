@@ -1,9 +1,23 @@
+/**
+ * Parser object processes and makes sense ofuser input to be executed.
+ * Input validation is also done as inputs are parsed to ensure command
+ * Strings follow a specific format before they can be executed.
+ *
+ * @author Hakiem Rasid
+ */
 public class Parser {
 
     public static final String[] COMMANDS = {"todo", "deadline", "event", "list", "done", "bye", "delete",
         "clear", "unknown"};
 
-    // Process input String and returns Command to be executed
+    /**
+     * Returns Command object by processing user input.
+     *
+     * @param input User inputs as String.
+     * @return Command object
+     * @throws InvalidInputException If inputs are of incorrect format
+     * and cannot be parsed
+     */
     public Command parseCommand(String input) throws InvalidInputException {
         String[] strings = input.split(" ");
         Command command;
@@ -39,7 +53,14 @@ public class Parser {
         return validateCommand(command);
     }
 
-    // Checks validity of Command
+    /**
+     * Returns Command object after validating its contents.
+     *
+     * @param cmd Command object to be validated.
+     * @return Valid Command object that can be executed.
+     * @throws InvalidInputException If description of input Command
+     * is of incorrect format and cannot be parsed.
+     */
     public Command validateCommand(Command cmd) throws InvalidInputException {
         Command validCommand = new Command(CommandType.UNKNOWN, "Sorry, I don't understand!");
         switch(cmd.getType()) {
@@ -67,7 +88,15 @@ public class Parser {
         return validCommand;
     }
 
-    // Checks validity of DEADLINE and EVENT Commands
+    /**
+     * Returns valid Command object after input validity checks of
+     * DEADLINE and EVENT Commands.
+     *
+     * @param cmd Command object with CommandType DEADLINE or EVENT.
+     * @return Input Command object if description passes input validity checks.
+     * @throws InvalidInputException If description of Command object is of
+     * incorrect format.
+     */
     public Command checkDeadlineAndEventValidity(Command cmd) throws InvalidInputException {
         String cmdIdentifier;
 
@@ -102,7 +131,13 @@ public class Parser {
         return cmd;
     }
 
-    // Checks validity of TODO Command
+    /**
+     * Returns valid Command object after input validity checks of TODO Command.
+     *
+     * @param cmd Command object with CommandType TODO.
+     * @return Input Command object if description passes input validity checks.
+     * @throws InvalidInputException If description of Command object is of incorrect format.
+     */
     public Command checkToDoValidity(Command cmd) throws InvalidInputException {
         if (cmd.getDescription().split(" ").length == 1) {
             // throws exception if invalid input format: "todo" (missing task name)
@@ -111,7 +146,15 @@ public class Parser {
         return cmd;
     }
 
-    // Checks validity of DONE and DELETE Commands
+    /**
+     * Returns valid Command object after input validity checks of DONE or
+     * DELETE Commands.
+     *
+     * @param cmd Command object with CommandType DONE or DELETE.
+     * @return Input Command object if description passes input validity checks.
+     * @throws InvalidInputException If description of Command object is of
+     * incorrect format.
+     */
     public Command checkDoneAndDeleteValidity(Command cmd) throws InvalidInputException {
         String description = cmd.getDescription();
         if (description.split(" ").length == 1) {

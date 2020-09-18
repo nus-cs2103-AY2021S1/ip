@@ -1,32 +1,53 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 
+/**
+ * Command object has a CommandType to determine which specific command to execute
+ * and a description which contains the user input String. Command objects to be executed
+ * are always valid as input validation is done by the Parser object.
+ * Command object also handles manipulation of list of Task objects.
+ *
+ * @author Hakiem Rasid
+ */
 public class Command {
 
     public CommandType type;
     public String description;
 
+    /**
+     * Constructor for Command object.
+     *
+     * @param type Type of command to be executed as CommandType.
+     * @param description User input instruction as String.
+     */
     public Command(CommandType type, String description) {
         this.type = type;
         this.description = description;
     }
 
-    // Executes Command by manipulating input ArrayList
-    public ArrayList<Task> executeCommand(ArrayList<Task> tasks) throws InvalidInputException,
+    /**
+     * Returns list of Task objects after executing command.
+     *
+     * @param tasks List of Task objects to be manipulated.
+     * @return List of Task objects after changes made from executing command.
+     * @throws IndexOutOfBoundsException If index specified in DONE or DELETE command
+     * does not lie within range of list of Task objects.
+     */
+    public ArrayList<Task> executeCommand(ArrayList<Task> tasks) throws
             IndexOutOfBoundsException {
 
         switch (this.type) {
             case BYE:
-                System.out.println("Bye. Hope to see you again soon!");
+                Ui.byeMessage();
                 return tasks;
             case CLEAR:
                 if (Ui.promptConfirm(new Scanner(System.in))) {
                     // Reference to empty ArrayList
-                    System.out.println("Task list cleared!");
+                    Ui.clearedListMessage();
                     return new ArrayList<Task>();
                 } else {
                     // do nothing
-                    System.out.println("Did NOT clear your task list! Is there anything else?");
+                    Ui.didNotClearListMessage();
                     return tasks;
                 }
             case LIST:
@@ -34,7 +55,7 @@ public class Command {
                     // do nothing
                     return new ArrayList<Task>();
                 } else {
-                    printList(tasks);
+                    Ui.printList(tasks);
                     return tasks;
                 }
             case DONE:
@@ -52,7 +73,15 @@ public class Command {
         return tasks;
     }
 
-    // Marks select Task in ArrayList as done. Throws IndexOutOfBoundsException
+    /**
+     * Returns list of Task objects with specified Task object marked as done.
+     *
+     * @param tasks List of Task objects.
+     * @param input Keyword "done" followed by index of Task object to be marked done.
+     * @return List of updated Task objects.
+     * @throws IndexOutOfBoundsException If index specified in DONE Command
+     * does not lie within range of list of Task objects.
+     */
     public ArrayList<Task> markDone(ArrayList<Task> tasks, String input) throws
             IndexOutOfBoundsException {
 
@@ -61,10 +90,19 @@ public class Command {
 
         Task current = tasks.get(index - 1);
         current.completeTask();
-        System.out.println("Nice! I have marked this task as done:\n\t" + current.printTask());
+        Ui.markDoneMessage(current.printTask());
         return tasks;
     }
 
+    /**
+     * Returns updated list of Task objects after deleting Task at specified index.
+     *
+     * @param tasks List of Task objects to be manipulated.
+     * @param input Keyword "delete" followed by index of Task to be deleted.
+     * @return Updated list of Task objects.
+     * @throws IndexOutOfBoundsException If index specified in DELETE Command
+     * does not lie within range of list of Task objects.
+     */
     public ArrayList<Task> deleteTask(ArrayList<Task> tasks, String input) throws
             IndexOutOfBoundsException {
 
@@ -72,14 +110,20 @@ public class Command {
         int index = Integer.valueOf(input.split(" ")[1]);
 
         Task current = tasks.remove(index - 1);
-        System.out.println("Okay! I have removed this task:\n\t" + current.printTask());
-        System.out.println("Now you have " + tasks.size() + " tasks in your list");
+        Ui.deleteTaskMessage(current.printTask(), tasks.size());
         return tasks;
     }
 
     // Adds Task to list. Checks inputs and throws exceptions for invalid inputs
-    public ArrayList<Task> addTask(ArrayList<Task> tasks, String input) throws
-            InvalidInputException {
+
+    /**
+     * Returns updated list of Task objects after adding the specified Task.
+     *
+     * @param tasks List of Task obects to be manipulated.
+     * @param input Keyword of specified Task type followed by details of the Task.
+     * @return Updated List of Task objects.
+     */
+    public ArrayList<Task> addTask(ArrayList<Task> tasks, String input) {
 
         StringBuilder sb = new StringBuilder();
         String[] splitSpace = input.split(" ");
@@ -109,24 +153,23 @@ public class Command {
         }
 
         tasks.add(task);
-        System.out.println("Got it! Task added to list.");
-        System.out.println("\t" + task.printTask());
-        System.out.println("Now you have " + tasks.size() + " tasks in your list.");
+        Ui.addTaskMessage(task.printTask(), tasks.size());
         return tasks;
     }
 
-    // Prints all Tasks in an ordered list
-    public void printList(ArrayList<Task> tasks) {
-        System.out.println("Here are your tasks:");
-        for (int i = 0; i < tasks.size(); i++) {
-            System.out.println(i + 1 + ". " + tasks.get(i).printTask());
-        }
-    }
-
+    /**
+     * Returns the type of this Command object.
+     *
+     * @return Type of this Command object as CommandType.
+     */
     public CommandType getType() {
         return this.type;
     }
 
+    /**
+     * Returns description(user input instruction) of this Command object.
+     * @return Description of Command object as String.
+     */
     public String getDescription() {
         return this.description;
     }

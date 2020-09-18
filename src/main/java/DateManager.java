@@ -3,13 +3,24 @@ import java.util.Optional;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
 
+/**
+ * DateManager object parses valid String inputs from Deadline and Event
+ * objects to be stored as Date objects.
+ *
+ * @author Hakiem Rasid
+ */
 public class DateManager {
 
     private static String[] DATE_INPUT_FORMATS = {"invalid", "dd-MM-yyyy", "dd/MM/yyyy", "dd-MM-yyyy kkmm",
         "dd/MM/yyyy kkmm"};
     private static String[] DATE_OUTPUT_FORMATS = {"MMM dd yyyy", "MMM dd yyyy',' hh:mma"};
 
-    // returns Date object from valid string
+    /**
+     * Returns Optional containing Date if String is valid.
+     *
+     * @param str Input String to be parsed as Date object.
+     * @return Optional containing Date if String is valid. Empty Optional otherwise.
+     */
     public Optional<Date> getDate(String str) {
         try {
             if (getDateFormat(str).equals(DATE_INPUT_FORMATS[0])) {
@@ -26,8 +37,14 @@ public class DateManager {
         }
     }
 
+    /**
+     * Returns String representation of valid Date object.
+     *
+     * @param str Valid input String to be parsed as Date.
+     * @return String representation of Date.
+     */
     public String getDateAsString(String str) {
-        // assumes tjat str input has valid date format
+        // assumes that str input has valid date format
         // input checks done in Deadline and Event
 
         SimpleDateFormat sdf;
@@ -43,6 +60,13 @@ public class DateManager {
     }
 
     // return format of date String or invalid
+
+    /**
+     * Returns format of String input of a date.
+     *
+     * @param str String representation of a date/
+     * @return Format of Date object if input is valid. Returns "invalid" otherwise.
+     */
     public String getDateFormat(String str) {
         if (str.length() != DATE_INPUT_FORMATS[1].length() &&
                 str.length() != DATE_INPUT_FORMATS[3].length()) {
@@ -99,6 +123,13 @@ public class DateManager {
     }
 
     // checks validity integers in String representation of date
+
+    /**
+     * Checks validity of integers in String representation of a date.
+     *
+     * @param arr Array containing integers for day, month and year.
+     * @return True if integers form a valid date. False otherwise.
+     */
     private boolean isValidDateNumerals(String[] arr) {
         boolean isValid = true;
         if (Integer.parseInt(arr[0]) > 31) {
