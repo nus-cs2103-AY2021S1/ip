@@ -14,6 +14,11 @@ import task.Event;
 import task.Task;
 import task.Todo;
 
+/**
+ * Encapsulates a task list
+ *
+ * @author Ryan Lim
+ */
 public class TaskList {
     private final ArrayList<Task> taskList;
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
@@ -26,9 +31,9 @@ public class TaskList {
     }
 
     /**
-     *
-     * @param savedTasks
-     * @throws IOException
+     * Constructor to initialise a new task list with pre-existing tasks stored in the hard drive
+     * @param savedTasks the file containing all the saved tasks
+     * @throws IOException when there is an error in the file
      */
     public TaskList (File savedTasks) throws IOException {
         this.taskList = new ArrayList<Task>();
@@ -150,7 +155,6 @@ public class TaskList {
      * @param parameter a string representation of the keyword to be searched up
      * @return the string representation of all the task that contains the keyword
      */
-
     public String getTaskWithKeyword(String parameter) {
         String output = "";
         for (Task task : this.taskList) {
@@ -161,11 +165,10 @@ public class TaskList {
         return output;
     }
 
-
     /**
-     * Mark task at the index of the tasklist as done
+     * Mark task at the index of the task list as done
      *
-     * @param index
+     * @param index The index of the task in the task list
      * @return Returns the task that was marked as completed
      */
     public Task completeTask(int index) throws DukeExceptions.TaskIsDoneException {
@@ -190,16 +193,12 @@ public class TaskList {
         return this.taskList;
     }
 
-    public boolean isEmpty() {
-        return this.taskList.isEmpty();
-    }
-
     @Override
     public String toString() {
-        String output = "";
+        StringBuilder output = new StringBuilder();
         for (int i = 1; i < this.taskList.size() + 1; i++) {
-            output += String.valueOf(i) + ". " + this.taskList.get(i - 1).toString() + "\n";
+            output.append(String.valueOf(i)).append(". ").append(this.taskList.get(i - 1).toString()).append("\n");
         }
-        return output;
+        return output.toString();
     }
 }

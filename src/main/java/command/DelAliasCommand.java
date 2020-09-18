@@ -8,6 +8,11 @@ import duke.Storage;
 import duke.TaskList;
 import ui.Ui;
 
+/**
+ * Command to delete an alias to command map
+ *
+ * @author Ryanl Lim
+ */
 public class DelAliasCommand extends Command{
 
     public DelAliasCommand(String ...parameters){

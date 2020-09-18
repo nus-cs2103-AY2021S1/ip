@@ -1,9 +1,7 @@
 package duke;
 
 import java.io.IOException;
-import java.util.Scanner;
 
-import command.ByeCommand;
 import command.Command;
 import command.Result;
 import ui.Ui;
@@ -77,22 +75,32 @@ public class Duke {
     }
 
     /**
-     * Terminate duke
+     * Terminates the duke program.
      */
     private void exit() {
         this.isRunning = false;
     }
 
+    /**
+     * Retrieves the intended command to execute.
+     * @param userInput The command and the parameters given by the user.
+     * @return the command to be executed
+     */
     public Command getCommand(String userInput) {
         return this.parser.parse(userInput);
     }
 
+    /**
+     * Executes the given command
+     * @param command The command to be executed.
+     * @return The result from executing the command.
+     */
     public Result executeCommand(Command command) {
         return command.execute(this.taskList, this.parser, this.aliasStorage, this.taskStorage, ui);
     }
 
     /**
-     * activate duke
+     * To begin running the duke program.
      */
     public void run() {
         while (this.isRunning()) {
@@ -107,10 +115,6 @@ public class Duke {
         }
     }
 
-    /**
-     * main method of duke.java where duke is runned
-     * @param args
-     */
     public static void main(String[] args) {
         Duke duke = new Duke();
         duke.run();

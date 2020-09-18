@@ -10,7 +10,11 @@ import duke.TaskList;
 import task.Task;
 import ui.Ui;
 
-
+/**
+ * Command to create a new event task.
+ *
+ * @author Ryan Lim
+ */
 public class CreateEventTaskCommand extends Command {
     public CreateEventTaskCommand (String ...parameters) {
         super(parameters);

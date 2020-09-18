@@ -7,7 +7,11 @@ import duke.Storage;
 import duke.TaskList;
 import ui.Ui;
 
-
+/**
+ * Command to find all task due on a specified date.
+ *
+ * @author Ryan Lim
+ */
 public class FindTaskByDateCommand extends Command {
     public FindTaskByDateCommand(String ...parameter) {
         super(parameter);

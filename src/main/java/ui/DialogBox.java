@@ -51,6 +51,9 @@ public class DialogBox extends HBox {
         getChildren().setAll(tmp);
     }
 
+    /**
+     * sets the background colour for the duke bot dialog box
+     */
     private void setBackgroundColour() {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         HBox innerHBox = (HBox) tmp.get(0);

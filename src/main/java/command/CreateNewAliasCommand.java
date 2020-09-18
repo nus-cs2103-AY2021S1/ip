@@ -8,6 +8,11 @@ import duke.Storage;
 import duke.TaskList;
 import ui.Ui;
 
+/**
+ * Command to create a new alias to command map.
+ *
+ * @author Ryan Lim
+ */
 public class CreateNewAliasCommand extends Command{
 
     public CreateNewAliasCommand(String ...parameters) {

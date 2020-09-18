@@ -10,7 +10,13 @@ import duke.TaskList;
 import task.Task;
 import ui.Ui;
 
+/**
+ * Command to create deadline task.
+ *
+ * @Author Ryan Lim
+ */
 public class CreateDeadLineTaskCommand extends Command {
+
     public CreateDeadLineTaskCommand (String ...parameters) {
         super(parameters);
     }

@@ -5,6 +5,11 @@ import duke.Storage;
 import duke.TaskList;
 import ui.Ui;
 
+/**
+ * Command to signal for the exit of the dukeBot.
+ *
+ * @author  Ryan Lim
+ */
 public class ByeCommand extends Command {
 
     public ByeCommand() {

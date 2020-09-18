@@ -8,6 +8,11 @@ import duke.TaskList;
 import task.Task;
 import ui.Ui;
 
+/**
+ * Command to delete a task.
+ *
+ * @author Ryan Lim
+ */
 public class DelTaskCommand extends Command {
     public DelTaskCommand(String ...parameter) {
         super(parameter);

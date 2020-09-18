@@ -5,6 +5,11 @@ import duke.Storage;
 import duke.TaskList;
 import ui.Ui;
 
+/**
+ * Command to get the list of task for the user
+ *
+ * @author Ryan Lim
+ */
 public class GetTaskListCommand extends Command {
 
     @Override

@@ -62,6 +62,11 @@ public class MainWindow extends AnchorPane {
         });
     }
 
+    /**
+     * Dialog Box to be rendered when the command is executed successfully.
+     * @param input The user input.
+     * @param response The response of the duke bot.
+     */
     @FXML
     private void setSuccessExecutionDialog(String input, Result response) {
         dialogContainer.getChildren().addAll(
@@ -70,6 +75,11 @@ public class MainWindow extends AnchorPane {
         );
     }
 
+    /**
+     * Dialog Box to be rendered when the command is executed unsuccessfully.
+     * @param input The user input.
+     * @param response The response of the duke bot.
+     */
     @FXML
     private void setErrorDialog(String input, Result response) {
         dialogContainer.getChildren().addAll(
@@ -79,8 +89,7 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Handle user's input and render the respective dialog boxes
      */
     @FXML
     private void handleUserInput() {

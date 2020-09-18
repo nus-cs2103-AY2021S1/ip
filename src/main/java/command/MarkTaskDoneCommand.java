@@ -7,6 +7,11 @@ import duke.TaskList;
 import task.Task;
 import ui.Ui;
 
+/**
+ * Command to mark task as done
+ *
+ * @author Ryan Lim
+ */
 public class MarkTaskDoneCommand extends Command {
     public MarkTaskDoneCommand(String ...parameter) {
         super(parameter);

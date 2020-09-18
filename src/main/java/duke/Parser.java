@@ -27,7 +27,7 @@ import command.MarkTaskDoneCommand;
  * @author  Ryan Lim
  */
 public class Parser {
-    private HashMap<String, String> aliasToCommandMap;
+    private final HashMap<String, String> aliasToCommandMap;
 
     /**
      * Constructor for parser with custom alias as commands
@@ -46,10 +46,17 @@ public class Parser {
         fr.close();
     }
 
+    /**
+     * Constructor for parser with no existing aliases
+     */
     public Parser() {
         this.aliasToCommandMap = new HashMap<>();
     }
 
+    /**
+     * Loads any pre-existing aliases stored in the hard drive.
+     * @param aliasCommandPair The alias command pair obtained from the hard drive.
+     */
     private void populateMap(String aliasCommandPair) {
         String[] aliasAndCommand = aliasCommandPair.split("\\|");
         String alias = aliasAndCommand[0];
@@ -61,6 +68,13 @@ public class Parser {
         return this.aliasToCommandMap.get(alias) == null;
     }
 
+    /**
+     * Creates a new alias to command mapping
+     *
+     * @param parameters The alias and the command to map to
+     * @return the alias to command mapping in string format
+     * @throws DukeExceptions.AliasAlreadyExistException
+     */
     public String createNewAlias(String ...parameters) throws DukeExceptions.AliasAlreadyExistException {
         String alias = parameters[0].toLowerCase();
         String command = parameters[1].toLowerCase();
@@ -72,6 +86,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Deletes the specified alias to command mapping based on the alias.
+     *
+     * @param parameters The alias to delete.
+     * @return The alias itself when it is deleted successfully
+     * @throws DukeExceptions.AliasDoesNotExistException
+     */
     public String deleteAlias(String ...parameters) throws DukeExceptions.AliasDoesNotExistException {
         String alias = parameters[0].toLowerCase();
         if (aliasDoesNotExist(alias)) {
@@ -82,12 +103,18 @@ public class Parser {
         }
     }
 
+    /**
+     * To map the alias to a command if any.
+     *
+     * @param alias The alias input by the user.
+     * @return the string representing the command, the alias itself if there is no command mapping to the alias
+     */
     private String getCommandFrom(String alias) {
         String command = aliasToCommandMap.get(alias);
         return command == null ? alias : command;
     }
 
-    public HashMap<String, String> getAliasToCommandMap() {
+     public HashMap<String, String> getAliasToCommandMap() {
         return this.aliasToCommandMap;
     }
 

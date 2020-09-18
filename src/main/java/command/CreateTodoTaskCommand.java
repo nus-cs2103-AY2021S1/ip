@@ -9,6 +9,11 @@ import duke.TaskList;
 import task.Task;
 import ui.Ui;
 
+/**
+ * Command to create a new todo task.
+ *
+ * @author Ryan Lim
+ */
 public class CreateTodoTaskCommand extends Command {
 
     public CreateTodoTaskCommand (String ...parameters) {

@@ -5,6 +5,11 @@ import duke.Storage;
 import duke.TaskList;
 import ui.Ui;
 
+/**
+ * Command to find a task that contains the keyword
+ *
+ * @author Ryan Lim
+ */
 public class FindTaskByKeywordCommand extends Command {
     public FindTaskByKeywordCommand (String ...parameter) {
         super(parameter);
