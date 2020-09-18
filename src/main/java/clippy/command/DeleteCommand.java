@@ -6,7 +6,7 @@ import clippy.task.TaskList;
 import clippy.ui.Ui;
 
 public class DeleteCommand extends Command{
-    protected int indexOfTaskToDelete;
+    private int indexOfTaskToDelete;
     
     public DeleteCommand(int indexOfTaskToDelete) {
         this.indexOfTaskToDelete = indexOfTaskToDelete;

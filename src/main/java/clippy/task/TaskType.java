@@ -5,7 +5,7 @@ public enum TaskType {
     DEADLINE("D"),
     EVENT("E");
 
-    public String letter;
+    private String letter;
 
     TaskType(String letter) {
         this.letter = letter;
@@ -15,7 +15,5 @@ public enum TaskType {
     public String toString() {
         return letter;
     }
-
-
-
+    
 }

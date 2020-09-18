@@ -3,7 +3,7 @@ package clippy.ui;
 import clippy.task.Task;
 
 public class Ui {
-    private final static String MSG_GREET = "Hello! I'm Clippy.Clippy \n" +
+    private final static String MSG_GREET = "Hello! I'm Clippy \n" +
             "What can I do for you today?\n";
     private final static String MSG_EXIT = "Bye! Hope to see you again soon!";
     private final static String MSG_ADDED_TASK = "Got it. I've added this task:\n";
@@ -17,10 +17,8 @@ public class Ui {
     private final static String MSG_NOW_NO_TASK = "Now you have no tasks in the list.";
     private final static String MSG_NOW_ONE_TASK = "Now you have 1 task in the list.";
     private final static String MSG_HELP = "Refer to the user guide at https://https://wang-jun-hao.github.io/ip/";
-
-
-
-    public String showWelcome() {
+    
+    public static String showWelcome() {
         return MSG_GREET;
     }
 

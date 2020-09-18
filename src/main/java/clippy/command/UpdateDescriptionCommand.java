@@ -6,7 +6,7 @@ import clippy.task.TaskList;
 import clippy.ui.Ui;
 
 public class UpdateDescriptionCommand extends UpdateCommand {
-    final String newDescription;
+    private String newDescription;
     
     public UpdateDescriptionCommand(int indexOfTaskToUpdate, String newDescription) {
         super(indexOfTaskToUpdate);

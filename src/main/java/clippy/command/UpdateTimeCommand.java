@@ -7,7 +7,7 @@ import clippy.task.TaskList;
 import clippy.ui.Ui;
 
 public class UpdateTimeCommand extends UpdateCommand {
-    String newTime;
+    private String newTime;
 
     public UpdateTimeCommand(int indexOfTaskToUpdate, String newTime) {
         super(indexOfTaskToUpdate);

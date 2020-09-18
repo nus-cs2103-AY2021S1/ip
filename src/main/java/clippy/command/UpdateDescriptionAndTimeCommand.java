@@ -7,8 +7,8 @@ import clippy.task.TaskList;
 import clippy.ui.Ui;
 
 public class UpdateDescriptionAndTimeCommand extends UpdateCommand {
-    String newDescription;
-    String newTime;
+    private String newDescription;
+    private String newTime;
 
     public UpdateDescriptionAndTimeCommand(int indexOfTaskToUpdate, String newDescription, String newTime) {
         super(indexOfTaskToUpdate);

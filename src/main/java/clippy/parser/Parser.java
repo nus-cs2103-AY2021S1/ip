@@ -1,7 +1,23 @@
 package clippy.parser;
 
-import clippy.command.*;
-import clippy.exception.*;
+import clippy.command.Command;
+import clippy.command.ExitCommand;
+import clippy.command.ListCommand;
+import clippy.command.HelpCommand;
+import clippy.command.DeleteCommand;
+import clippy.command.DoneCommand;
+import clippy.command.FindCommand;
+import clippy.command.UpdateTimeCommand;
+import clippy.command.UpdateDescriptionAndTimeCommand;
+import clippy.command.UpdateDescriptionCommand;
+import clippy.command.AddToDoCommand;
+import clippy.command.AddDeadlineCommand;
+import clippy.command.AddEventCommand;
+
+import clippy.exception.EmptyDescriptionException;
+import clippy.exception.InvalidCommandException;
+import clippy.exception.EmptyDateTimeException;
+
 import clippy.task.TaskType;
 
 import java.util.Arrays;
@@ -21,7 +37,7 @@ public class Parser {
         } else if (input.equals("list")) {
             return new ListCommand();
         } else if (input.equals("help")) {
-                return new HelpCommand();
+            return new HelpCommand();
         } else if (input.startsWith("delete")) {
             int indexOfTaskToDelete = Integer.parseInt(input.substring(7));
             return new DeleteCommand(indexOfTaskToDelete);
@@ -36,7 +52,7 @@ public class Parser {
             int indexOfTaskToBeUpdated = Integer.parseInt(subInputs[1]);
             if (containsBackSlash(subInputs)) {
                 // update description of Deadline/Event OR update description of Deadline/Event + time
-                int indexOfBackSlash = findIndexOfBackSlash(subInputs);
+                int indexOfBackSlash = getIndexOfBackSlash(subInputs);
                 String[] timeInArray = Arrays.copyOfRange(subInputs, indexOfBackSlash + 1, length);
                 String time = String.join(" ", timeInArray);
                 if (indexOfBackSlash == 2) {
@@ -87,7 +103,7 @@ public class Parser {
         }
     }
     
-    private static int findIndexOfBackSlash(String[] subInputs) {
+    private static int getIndexOfBackSlash(String[] subInputs) {
         int length = subInputs.length;
         for (int i = 0; i < length; i++) {
             String subInput = subInputs[i];

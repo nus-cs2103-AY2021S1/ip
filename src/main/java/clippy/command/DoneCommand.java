@@ -6,7 +6,7 @@ import clippy.task.TaskList;
 import clippy.ui.Ui;
 
 public class DoneCommand extends Command {
-    protected int indexOfDoneTask;
+    private int indexOfDoneTask;
     
     public DoneCommand(int indexOfDoneTask) {
         this.indexOfDoneTask = indexOfDoneTask;

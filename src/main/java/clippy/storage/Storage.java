@@ -4,11 +4,17 @@ import clippy.exception.CorruptedFileException;
 import clippy.exception.InvalidDateFormatException;
 import clippy.exception.NoSavedFileException;
 import clippy.exception.UnableToCreateSaveFileException;
+
 import clippy.task.Task;
 import clippy.task.TaskGenerator;
 import clippy.task.TaskList;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.BufferedWriter;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 

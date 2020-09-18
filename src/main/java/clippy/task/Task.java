@@ -11,7 +11,7 @@ public abstract class Task {
     private final String SYMBOL_TICK = "\u2713";
     private final String SYMBOL_CROSS = "\u2718";
 
-    public Task(String desc) {
+    protected Task(String desc) {
         this.desc = desc;
         this.isDone = false;
     }

@@ -38,17 +38,13 @@ public class AddDeadlineCommand extends AddCommand {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws 
             InvalidDateFormatException {
-        try {
-            Task newTask = new Deadline(taskDescription, by);
-            tasks.add(newTask);
-            String output = ui.showAdded(newTask, tasks.size());
+        Task newTask = new Deadline(taskDescription, by);
+        tasks.add(newTask);
+        String output = ui.showAdded(newTask, tasks.size());
 
-            tasks.updateAllTaskIndices();
-            storage.save(tasks);
+        tasks.updateAllTaskIndices();
+        storage.save(tasks);
 
-            return output;
-        } catch (DateTimeParseException e) {
-            throw new InvalidDateFormatException();
-        }
+        return output;
     }
 }

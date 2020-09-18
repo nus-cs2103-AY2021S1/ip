@@ -7,7 +7,7 @@ import clippy.task.TaskList;
 import clippy.ui.Ui;
 
 public class AddEventCommand extends AddCommand {
-    protected String at;
+    private String at;
 
     public AddEventCommand(String taskDescription, String at) {
         super(taskDescription);

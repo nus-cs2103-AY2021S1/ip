@@ -7,7 +7,7 @@ public class EmptyDescriptionException extends ClippyException {
         super("Oh no! The description of a " + getTaskTypeString(taskType) + " cannot be empty.");
     }
     
-    public static String getTaskTypeString(TaskType taskType) {
+    private static String getTaskTypeString(TaskType taskType) {
         switch (taskType) {
         case TODO:
             return "todo";

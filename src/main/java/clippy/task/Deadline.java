@@ -8,7 +8,7 @@ import java.time.format.TextStyle;
 import java.util.Locale;
 
 public class Deadline extends Task {
-    protected LocalDate by;
+    private LocalDate by;
 
     public Deadline(String desc, String byString) throws InvalidDateFormatException {
         super(desc);
@@ -20,6 +20,7 @@ public class Deadline extends Task {
         }
     }
     
+    @Override
     public void updateTime(String newTime) {
         this.by = LocalDate.parse(newTime);
     }

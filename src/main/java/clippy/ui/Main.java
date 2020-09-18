@@ -10,7 +10,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
- * A GUI for clippy.Clippy using FXML.
+ * A GUI for Clippy using FXML.
  */
 public class Main extends Application {
 

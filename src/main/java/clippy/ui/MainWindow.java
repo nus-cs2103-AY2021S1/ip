@@ -13,7 +13,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 /**
- * Controller for Clippy.MainWindow. Provides the layout for the other controls.
+ * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
     @FXML
@@ -29,14 +29,13 @@ public class MainWindow extends AnchorPane {
 
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
     private final Image clippyImage = new Image(this.getClass().getResourceAsStream("/images/clippy.jpg"));
-    private static final int exitDelayInMiliSeconds = 2000;
+    private static final int EXIT_DELAY_IN_MILLI_SECONDS = 2000;
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog("Hello! I'm Clippy \n" +
-                        "What can I do for you?\n", clippyImage)
+                DialogBox.getDukeDialog(Ui.showWelcome(), clippyImage)
         );
         
     }
@@ -65,7 +64,7 @@ public class MainWindow extends AnchorPane {
                 public void run () { 
                     System.exit(0); 
                 }
-            }, exitDelayInMiliSeconds);
+            }, EXIT_DELAY_IN_MILLI_SECONDS);
             
         }
     }

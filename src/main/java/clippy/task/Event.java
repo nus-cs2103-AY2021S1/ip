@@ -1,7 +1,7 @@
 package clippy.task;
 
 public class Event extends Task {
-    protected String at;
+    private String at;
 
     public Event(String desc, String at) {
         super(desc);
@@ -9,6 +9,7 @@ public class Event extends Task {
         taskType = TaskType.EVENT;
     }
 
+    @Override
     public void updateTime(String newTime) {
         this.at = newTime;
     }
