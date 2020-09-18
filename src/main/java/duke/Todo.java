@@ -1,7 +1,7 @@
 package duke;
 
 /**
- * TODO class extends Task class to represent a task that does not have a specific time.
+ * Todo class extends Task class to represent a task that does not have a specific time.
  */
 public class Todo extends Task {
 
