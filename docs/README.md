@@ -14,7 +14,7 @@ Double click on duke.jar to start program.
 ### Commands and instructions
 
 Note: 
-* <INFO\> denotes information to be filled in by the user
+* <INFO|> denotes information to be filled in by the user
 * Date formats used are of the form date/month/year
 * Time formats used below are of a 24hr format (e.g. 2359)
 
@@ -24,16 +24,16 @@ Note:
 
 * Displays the following list of text commands in the window.
 
+1) !commands | returns a list of text commands
+1) list | lists out all the current tasks
+1) bye | saves the current tasks into a file and exits program
+1) done | format: "done <task number>", marks a task in the list as done
+1) todo | format: "todo <description>", creates a todo task
+1) deadline | format: "deadline <description> /by <dd/MM/yyyy HHmm>", creates a deadline task
+1) event | format: "event <description> /at <dd/MM/yyyy HHmm>", creates an event task
+1) delete | format: "delete <task number>", deletes a task in the list
+1) find | format: "find <string>", finds tasks with matching string
 
-    1) !commands \ returns a list of text commands
-    2) list \ lists out all the current tasks
-    3) bye \ saves the current tasks into a file and exits program
-    4) done \ format: "done <task number>", marks a task in the list as done
-    5) todo \ format: "todo <description>", creates a todo task
-    6) deadline \ format: "deadline <description> /by <dd/MM/yyyy HHmm>", creates a deadline task
-    7) event \ format: "event <description> /at <dd/MM/yyyy HHmm>", creates an event task
-    8) delete \ format: "delete <task number>", deletes a task in the list
-    9) find \ format: "find <string>", finds tasks with matching string
     
 #### View all the tasks in the list
 
