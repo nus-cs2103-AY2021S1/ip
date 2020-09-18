@@ -15,14 +15,17 @@ public abstract class PrintTaskCommand extends Command {
     /**
      * Prints all the tasks in the TaskList provided.
      *
-     * @param tasklist TaskList containing task to print.
+     * @param taskList TaskList containing task to print.
      * @param isFind   True if this method is printing tasks related to a keyword and false otherwise.
      * @return All the tasks in TaskList in String.
      */
-    public String outputTasksInTaskList(TaskList tasklist, boolean isFind) {
+    public String outputTasksInTaskList(TaskList taskList, boolean isFind) {
+        if (taskList.size() == 0) {
+            return Ui.informNoTaskInList();
+        }
         String output = String.format("Here are the %stasks in your list:", isFind ? "matching " : "");
-        for (int i = 0; i < tasklist.size(); i++) {
-            Task currentTask = tasklist.get(i);
+        for (int i = 0; i < taskList.size(); i++) {
+            Task currentTask = taskList.get(i);
             String num = Integer.toString(i + 1);
             output += "\n" + num + "." + currentTask;
         }
