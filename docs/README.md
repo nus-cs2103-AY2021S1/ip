@@ -23,6 +23,7 @@ Delete task             |delete {task index}
 Find task               |find {task description}
 Mark a task as completed|done {task index}
 List all completed task in the past week|statistic
+Save and exit DukeHub   |bye
          
 ## Usage
 
@@ -165,9 +166,22 @@ List all completed task in the past week|statistic
 `read book chapter 4`  
 `read book chapter 5`  
 
+### 10.`bye` 
+- saves and exit the application
+ 
+*Format*  
+`bye`
+  
+*Example of usage:*   
+`bye`
+ 
+*Expected outcome:*    
+`Bye, Have a Great Time!`  
+*`program closes after 1 second`*
+
 ##Credits
-*Image of the duke is taken from here https://coconuts.co/manila/lifestyle/maria-ozawa-staying-permanently-ph/\
-*Image of the user is taken from here https://www.instagram.com/yua_mikami/?hl=en
+* Image of the duke is taken from here https://coconuts.co/manila/lifestyle/maria-ozawa-staying-permanently-ph/\
+* Image of the user is taken from here https://www.instagram.com/yua_mikami/?hl=en
 
   
  
