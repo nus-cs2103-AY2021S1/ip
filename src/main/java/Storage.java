@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileWriter;
+import java.io.FilterOutputStream;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -32,7 +33,7 @@ public class Storage {
         }
     }
     
-    public void save(TaskList list) {
+    public void save(TaskList list) throws DukeException {
         try {
             FileWriter fileWriter = new FileWriter("taskList.txt");
             for (Task task : list.taskList) {
@@ -40,52 +41,41 @@ public class Storage {
             }
             fileWriter.close();
         } catch (IOException e) {
-            System.out.println("ERROR");
+            final String ERROR_MESSAGE = "ERROR: failed to save changes.";
+            throw new DukeException(ERROR_MESSAGE);
         }
     }
 
     public Task readFiles(String data) throws DukeException {
-
         assert data.length() > 0 : "input should not be empty";
-        final int DESCRIPTION = 8;
+        final int IS_DONE_INDEX = 4;
+        final int START_OF_DESCRIPTION_INDEX = 8;
+        Task task = null;
         if (data.startsWith("T")) {
-            String description = data.substring(DESCRIPTION);
-            Todo todo = new Todo(description);
-            todo.isDone = data.charAt(4) == '1';
-            return todo;
-            
-        } else if (data.startsWith("E")) {
-            int index = data.lastIndexOf("|");
-            final int DATE_AND_TIME = index + 2;
-            String description = data.substring(DESCRIPTION, index - 1);
-            String eventDate = data.substring(DATE_AND_TIME);
-            try {
-                LocalDate date = LocalDate.parse(eventDate);
-                Event event = new Event(description, date);
-                final int DONE = 4;
-                event.isDone = data.charAt(DONE) == '1';
-                return event;
-            } catch (DateTimeParseException e) {
-                throw new DukeException("Please key in the date in the format YYYY-MM-DD");
-            }
-
-        } else if (data.startsWith("D")) {
-            int index = data.lastIndexOf("|");
-            final int DATE_AND_TIME = index + 2;
-            String description = data.substring(DESCRIPTION, index - 1);
-            String deadlineDate = data.substring(DATE_AND_TIME);
-            try {
-                LocalDate date = LocalDate.parse(deadlineDate);
-                Deadline deadline = new Deadline(description, date);
-                final int DONE = 4;
-                deadline.isDone = data.charAt(DONE) == '1';
-                return deadline;
-            } catch (DateTimeParseException e) {
-                throw new DukeException("Please key in the date in the format YYYY-MM-DD");
-            }
-            
+            task = new Todo(data.substring(START_OF_DESCRIPTION_INDEX));
         } else {
-            throw new DukeException("ERROR: unknown task");
+            int index = data.lastIndexOf("|");
+            final int DATE_AND_TIME_INDEX = index + 2;
+            String description = data.substring(START_OF_DESCRIPTION_INDEX, index - 1);
+            String dateString = data.substring(DATE_AND_TIME_INDEX);
+            try {
+                LocalDate date = LocalDate.parse(dateString);
+                if (data.startsWith("E")) {
+                    task = new Event(description, date);
+                } else if (data.startsWith("D")) {
+                    task = new Deadline(description, date);
+                } else {
+                    final String ERROR_MESSAGE = "ERROR: unknown task";
+                    throw new DukeException(ERROR_MESSAGE);
+                }
+            } catch (DateTimeParseException e) {
+                final String ERROR_MESSAGE = "Please key in the date in the format YYYY-MM-DD";
+                throw new DukeException(ERROR_MESSAGE);
+            }    
+        } 
+        if (data.charAt(IS_DONE_INDEX) == '1') {
+            task.markAsDone();
         }
+        return task;
     }
 }

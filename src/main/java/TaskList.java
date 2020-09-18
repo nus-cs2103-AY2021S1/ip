@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.PriorityQueue;
+import java.util.function.Consumer;
 
 public class TaskList {
     public ArrayList<Task> taskList;
@@ -21,11 +22,24 @@ public class TaskList {
         return task;
     }
     
-    public Task deleteTask(int index) {
+    public Task updateTask(int index, Consumer<Task> update) throws DukeException {
         assert index > 0 : "index cannot be zero or negative";
-        Task task = taskList.get(index);
-        taskList.remove(index);
-        return task;
+        try {
+            Task task = taskList.get(index);
+            update.accept(task);
+            return task;
+        } catch (IndexOutOfBoundsException e) {
+            final String ERROR_MESSAGE = "ERROR: task index out of range";
+            throw new DukeException(ERROR_MESSAGE);
+        }
+    }
+    
+    public Task deleteTask(int index) throws DukeException {
+        return updateTask(index, task -> taskList.remove(task));
+    }
+    
+    public Task doneTask(int index) throws DukeException {
+       return updateTask(index, Task::markAsDone); 
     }
     
     public ArrayList<Task> getTaskList() {
@@ -34,25 +48,23 @@ public class TaskList {
 
     public String findTask(String display) {
         assert display.length() > 0 : "input cannot be empty";
-        ArrayList<String> matches = new ArrayList<>();
-        String task = display.substring(5);
+        StringBuilder matches = new StringBuilder();
         for (Task value : taskList) {
-            String currentTask = value.toString();
-            if (currentTask.contains(task)) {
-                matches.add(currentTask);
+            if (value.description.contains(display)) {
+                matches.append(value.toString()).append("\n");
             }
         }
-        StringBuilder reply = new StringBuilder("Here are the matching tasks in your list:\n");
-        for (String match : matches) {
-            reply.append(match).append("\n");
-        }
-        return reply.toString();
+        return matches.toString();
     }
     
     public void sortTasksByDate() {
         TaskComparator taskComparator = new TaskComparator();
         PriorityQueue<Task> priorityQueue = new PriorityQueue<>(taskComparator);
         priorityQueue.addAll(taskList);
-        taskList = new ArrayList<>(priorityQueue);
+        ArrayList<Task> sortedTaskList = new ArrayList<>();
+        while (! priorityQueue.isEmpty()) {
+            sortedTaskList.add(priorityQueue.poll());
+        }
+        taskList = sortedTaskList;
     }
 }

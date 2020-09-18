@@ -1,5 +1,5 @@
 /**
- * Encapsulates an add command with a Task object.
+ * Encapsulates an add command with a task.
  */
 public class AddCommand extends Command {
     /**
@@ -16,20 +16,22 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Adds a task into the task list 
-     * and updates the storage with the new task.
+     * Adds a task into the task list, updates the storage 
+     * with the new task and displays the ui for the added task.
      * @param tasks the task list which the task is to be added into.
      * @param ui the ui used to display the added task.
-     * @param storage the storage used to store the new task.
+     * @param storage the storage used to store the updated task list.
      * @return a string representation of the task to be added.
+     * @throws DukeException throws an exception when saving 
+     * the task list into the storage fails.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         tasks.addTask(task);
         storage.save(tasks);
         return ui.showAddedTask(task, tasks.taskListLength());
     }
-
+    
     @Override
     public boolean isExit() {
         return false;

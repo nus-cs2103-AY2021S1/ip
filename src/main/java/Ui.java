@@ -1,6 +1,3 @@
-import java.io.IOException;
-import java.util.Scanner;
-
 public class Ui {
     
     public String showLoadingError() {
@@ -12,14 +9,7 @@ public class Ui {
     }
     
     public String showWelcome() {
-//        String logo = " ____        _        \n"
-//                + "|  _ \\ _   _| | _____ \n"
-//                + "| | | | | | | |/ / _ \\\n"
-//                + "| |_| | |_| |   <  __/\n"
-//                + "|____/ \\__,_|_|\\_\\___|\n";
-//        String greeting = "Hello! I'm Duke \n" + "What can I do for you?";
-//        System.out.println("Hello from\n" + logo + "\n" + greeting);
-        return "Welcome!";
+        return "Welcome to Duke - your personal task organizer!";
     }
 
     public String showBye() {
@@ -60,7 +50,11 @@ public class Ui {
         return display.toString();
     } 
     
+    public String showTasksFound(String s) {
+        return "Here are the matching tasks in your list:\n" + s;
+    }
+    
     public String showSortedList(TaskList taskList) {
-        return "Here is your sorted list:\n" + showList(taskList);
+        return "Your list is now sorted!\n" + showList(taskList);
     }
 }
