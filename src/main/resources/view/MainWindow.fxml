@@ -8,19 +8,19 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.MainWindow">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.MainWindow">
     <children>
-        <Button fx:id="sendButton" layoutX="324.0" layoutY="501.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="98.0" prefWidth="76.0" text="Send">
+        <Button fx:id="sendButton" layoutX="424.0" layoutY="671.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="128.0" prefWidth="76.0" text="Send">
          <cursor>
             <Cursor fx:constant="DEFAULT" />
          </cursor></Button>
-        <TextArea fx:id="userInput" layoutY="558.0" prefHeight="98.0" prefWidth="324.0" promptText="Type /help for help" AnchorPane.bottomAnchor="1.0">
+        <TextArea fx:id="userInput" layoutY="558.0" prefHeight="128.0" prefWidth="424.0" promptText="Type /help for help" AnchorPane.bottomAnchor="1.0">
          <font>
-            <Font name="System Italic" size="12.0" />
+            <Font name="System Italic" size="16.0" />
          </font></TextArea>
-        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="502.0" prefWidth="400.0" vvalue="1.0">
+        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="672.0" prefWidth="500.0" vvalue="1.0">
             <content>
-                <VBox fx:id="dialogContainer" prefHeight="500.0" prefWidth="399.0" style="-fx-background-color: pink;" />
+                <VBox fx:id="dialogContainer" prefHeight="672.0" prefWidth="499.0" style="-fx-background-color: pink;" />
             </content>
         </ScrollPane>
     </children>
