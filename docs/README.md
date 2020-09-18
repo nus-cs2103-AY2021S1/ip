@@ -51,7 +51,7 @@ BaronBot is a taskbot that helps you manage your tasks. You can keep track of th
    Alright, I've added this task:
    [Event][✗] Team Meeting (at: 18 Sep 2020, 1800-1900) - Priority: UNDEFINED
    ```
-## Marking task as completed
+### Marking tasks as completed
 
 1. `done` - Mark a task as complete
 
