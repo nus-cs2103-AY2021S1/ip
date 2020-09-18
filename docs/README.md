@@ -122,6 +122,9 @@ This feature allows users to find the list of command to use
 ![helpCommand](./images/help.png)
 
 
+Navigate back to the feature list: [2. Features and Usage](#2-features-and-usage)
+
+
 ###  **2.2 Save the task : save**
 
 This feature allows users to save the task after they have added them.
@@ -137,6 +140,9 @@ This feature allows users to save the task after they have added them.
 ![saveCommand](./images/save.png)
 
 
+Navigate back to the feature list: [2. Features and Usage](#2-features-and-usage)
+
+
 ### **2.3 Add a general ToDo task : todo**
 
 This feature allows users to add a ToDo task to our current list
@@ -150,6 +156,10 @@ This feature allows users to add a ToDo task to our current list
 *Expected Outcome*:
 
 ![todoCommand](./images/todo.png)
+
+Navigate back to the feature list: [2. Features and Usage](#2-features-and-usage)
+
+
 
 ### **2.4 Add a Deadline task : deadline**
 
@@ -173,6 +183,8 @@ for this task,eg: due on 2020 August 2, 7pm
 2. for the day and month, it must be 
 two digit, for example, 2 must be written as 02 instead of just 2.
 3. the time must be 4 digit, for example, 8:12am must be written as 0812 instead of 812
+
+Navigate back to the feature list: [2. Features and Usage](#2-features-and-usage)
 
 
 ### **2.5 Adding an Event : event**
@@ -198,6 +210,9 @@ two digits, for example, 2 must be written as 02 instead of just 2.
 3. the time must be 4 digits, for example, 8:12am must be written as 0812 instead of 812
 
 
+Navigate back to the feature list: [2. Features and Usage](#2-features-and-usage)
+
+
 
 ### **2.6 Listing out all Tasks : list**
 
@@ -212,6 +227,10 @@ This feature allows users to list out all the tasks added to the list in the ord
 *Expected Outcome*:
 
 ![listCommand](./images/list.png)
+
+Navigate back to the feature list: [2. Features and Usage](#2-features-and-usage)
+
+
 
 ### **2.7 Marking a Task as done : done**
 
@@ -232,6 +251,10 @@ for the ip task is taken as 2.
 *Expected Outcome*:
 
 ![doneCommand](./images/done.png)
+
+
+Navigate back to the feature list: [2. Features and Usage](#2-features-and-usage)
+
 
 
 ### **2.8 Delete the task : delete**
@@ -255,6 +278,9 @@ for the ip task is taken as 3.
 ![deleteCommand](./images/delete.png)
 
 
+Navigate back to the feature list: [2. Features and Usage](#2-features-and-usage)
+
+
 ### **2.9 Find a certain task: find**
 
 This feature allows users to find a certain task from the list and look at the detail.
@@ -269,6 +295,11 @@ This feature allows users to find a certain task from the list and look at the d
 
 ![findCommand](./images/find.png)
 
+
+Navigate back to the feature list: [2. Features and Usage](#2-features-and-usage)
+
+
+
 ###  **2.10 Ending a session : bye**
 
 This feature allows users to quit the application after they have done what they want
@@ -280,3 +311,6 @@ This feature allows users to quit the application after they have done what they
 *Examples*: `bye`
  
 *Expected Outcome*: Your application should be closed in 1 second. 
+
+
+Navigate back to the feature list: [2. Features and Usage](#2-features-and-usage)
