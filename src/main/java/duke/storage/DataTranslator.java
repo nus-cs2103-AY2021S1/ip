@@ -54,7 +54,7 @@ public class DataTranslator {
                             : "String should either be T, D or E to represent the type of Task that is saved.";
                     break;
                 }
-            } catch (DukeException e) {
+            } catch (DukeException | IndexOutOfBoundsException e) {
                 formatter.print(e.getMessage());
             }
             if (parsedLine[1].equals("1")) {
@@ -64,7 +64,9 @@ public class DataTranslator {
             if (!parsedLine[2].equals("")) {
                 task.setTag(parsedLine[2]);
             }
-            taskManager.addTask(task);
+            if (task != null) {
+                taskManager.addTask(task);
+            }
         }
         return taskManager;
     }

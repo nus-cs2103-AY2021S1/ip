@@ -17,8 +17,8 @@ import duke.utils.Messages;
  */
 
 public class DateTimeParser {
-    private static final String[] DATE_TIME_PATTERNS_WITH_TIME = {"d MMM yyyy H:mm", "d MMM yyyy Hmm", "d MMM yyyy h:mm a",
-        "d MMMM yyyy H:mm", "d MMMM yyyy Hmm", "d-M-yyyy H:mm", "d-M-yyyy Hmm", "d-M-yyyy h:mm a",
+    private static final String[] DATE_TIME_PATTERNS_WITH_TIME = {"d MMM yyyy H:mm", "d MMM yyyy Hmm",
+        "d MMM yyyy h:mm a", "d MMMM yyyy H:mm", "d MMMM yyyy Hmm", "d-M-yyyy H:mm", "d-M-yyyy Hmm", "d-M-yyyy h:mm a",
         "d/M/yyyy H:mm", "d/M/yyyy Hmm", "d/M/yyyy h:mm a", "d/M/yyyy h:mma", "d/M/yyyy ha", "d/MMM/yyyy h:mma",
         "d/MMM/yyyy ha", "yyyy-M-d Hmm", "yyyy-M-d h:mm a"};
 
