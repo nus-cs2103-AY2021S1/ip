@@ -44,7 +44,7 @@ Examples:
 * `deadline Foobar /by 26/8`
 * `deadline Foobar /by 26/8 1:19 PM #with #tags !high`
 
-### Adding an event: `deadline`
+### Adding an event: `event`
 
 Adds an event to Duke. The priority must be one of NONE (default), LOW, MEDIUM or HIGH.
 If the time is not specified, it will default to midnight.
@@ -119,7 +119,7 @@ Examples:
 ### Find tasks due on a date: `due`
 
 Finds all tasks due on the specified date. The date must be in one of the following formats:
-                                           
+
 **Date:**
 
 * `26/8`
