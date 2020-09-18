@@ -18,17 +18,13 @@ import java.util.Optional;
 import java.util.Map;
 
 /**
- * Parser class that parses the user input.
+ * Parser class that parses the user input, finds the corresponding
+ * command, and returns an output String to be printed by the GUI.
  */
 
 public class Parser {
 
-    private final Wrapper wrapper;
-
-    public Parser(Wrapper wrapper) {
-        this.wrapper = wrapper;
-    }
-
+    /** Hashmap that maps an input string to a Command object */
     public static final Map<String, Command> COMMANDS = Map.of(
             "bye", new ExitCommand(),
             "done", new DoneCommand(),
@@ -40,6 +36,24 @@ public class Parser {
             "update", new UpdateCommand(),
             "deadline", new DeadlineCommand()
     );
+
+    /** Wrapper that contains Olivia's Storage, TaskList and Ui */
+    private final Wrapper wrapper;
+
+    /**
+     * Constructor that creates a Parser object with Olivia's current Wrapper..
+     * @param wrapper contains Olivia's Storage, TaskList and Ui objects.
+     */
+
+    public Parser(Wrapper wrapper) {
+        this.wrapper = wrapper;
+    }
+
+    /**
+     * Parses the input String from the user and activates the corresponding command.
+     * @param fullCommand input String from the user.
+     * @return output String to the user.
+     */
 
     public String parse(String fullCommand) {
         String[] parsedString = fullCommand.split(" ");

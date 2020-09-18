@@ -20,6 +20,7 @@ import olivia.util.OliviaException;
 
 public class Storage {
 
+    /** Filepath of save file. */
     private final String filePath;
 
     /**
