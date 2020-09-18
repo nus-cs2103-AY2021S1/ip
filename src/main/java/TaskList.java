@@ -29,6 +29,7 @@ public class TaskList {
      * @throws IndexOutOfBoundsException If the index specified is outside the range of the task list.
      */
     Task getTask(int index) throws IndexOutOfBoundsException{
+        assert index < this.taskList.size() : "Out of bound index in TaskList#getTask(int index)";
         return this.taskList.get(index);
     }
 
@@ -97,6 +98,7 @@ public class TaskList {
         if (index <= 0 || index > this.taskList.size()) {
             throw new DukeException("Invalid index, cannot find task.");
         }
+        assert index < this.taskList.size() : "Out of bound index in TaskList#setTaskDone(int index)";
         this.taskList.get(index-1).setDoneness(true);
         String message = "Nice job! I'll mark that as done:" + Ui.NEW_LINE + Ui.PADDING
                 + "  " + this.taskList.get(index-1).toString();
@@ -112,6 +114,7 @@ public class TaskList {
         if (index <= 0 || index > this.taskList.size()) {
             throw new DukeException("Invalid index, cannot find task.");
         }
+        assert index < this.taskList.size() : "Out of bound index in TaskList#deleteTask(int index)";
         Task task = this.taskList.get(index-1);
         this.taskList.remove(index-1);
         String numOfTasks = this.taskList.size() == 1 ? "1 task" : this.taskList.size() + " tasks";

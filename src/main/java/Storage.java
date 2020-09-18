@@ -74,6 +74,7 @@ public class Storage {
         String tasksString = "";
         for (int i = 0; i < tasks.countTotalTasks(); i++) {
             try {
+                assert i < tasks.countTotalTasks() : "Index of task is out of task list";
                 Task task = tasks.getTask(i);
                 tasksString += task.getSaveDataString() + Ui.NEW_LINE;
             } catch (IndexOutOfBoundsException ex) {
