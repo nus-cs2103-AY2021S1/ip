@@ -1,5 +1,8 @@
 import java.time.LocalDate;
 
+/**
+ * Encapsulates a Todo object.
+ */
 public class Todo extends Task {
 
     public Todo(String description) {
@@ -11,6 +14,10 @@ public class Todo extends Task {
         return LocalDate.MIN;
     }
 
+    /**
+     * Saves whether the task is done or not into storage.
+     * @return a string representation of the task.
+     */
     @Override
     public String saveTask() {
         return "T" + super.saveTask();

@@ -1,7 +1,9 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.Scanner;
 
+/**
+ * Encapsulates a parser object which scans user input.
+ */
 public class Parser {
 
     /**
@@ -9,6 +11,7 @@ public class Parser {
      * @param s the string.
      * @return Command which specifies the action taken.
      * @throws DukeException unidentified strings.
+     * @throws DukeException throws an exception when the format is wrong.
      */
     public static Command parse(String s) throws DukeException {
         assert s.length() > 0 : "input should not be empty";
@@ -46,6 +49,7 @@ public class Parser {
      *
      * @param s the string input starting with "done".
      * @return an integer which represents the index of the task.
+     * @throws DukeException throws an exception when the format is wrong.
      */
     public static int parseDone(String s) throws DukeException {
         final int DONE_WITH_SPACING = 5;
@@ -68,6 +72,7 @@ public class Parser {
      *
      * @param s the string input starting with "delete".
      * @return an integer.
+     * @throws DukeException throws an exception when the format is wrong.
      */
     public static int parseDelete(String s) throws DukeException {
         final int DELETE_WITH_SPACING = 7;
@@ -84,6 +89,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns the input string to be used to find matching tasks.
+     *
+     * @param s the string input starting with "find".
+     * @return the user input string.
+     * @throws DukeException throws an exception when the format is wrong.
+     */
     public static String parseFind(String s) throws DukeException {
         final int FIND_WITH_SPACING = 5;
         if (s.startsWith("find ") && s.length() > FIND_WITH_SPACING) {
@@ -96,8 +108,10 @@ public class Parser {
 
     /**
      * Returns a todo to be added into taskList.
+     *
      * @param s the string input starting with "todo".
      * @return a todo object.
+     * @throws DukeException throws an exception when the format is wrong.
      */
     public static Todo parseTodo(String s) throws DukeException {
         final int TODO_WITH_SPACING = 5;
@@ -117,8 +131,10 @@ public class Parser {
 
     /**
      * Returns a deadline to be added into taskList.
+     *
      * @param s the string input starting with "deadline".
      * @return a deadline.
+     * @throws DukeException throws an exception when the format is wrong.
      */
     public static Deadline parseDeadline(String s) throws DukeException {
         final int DEADLINE_WITH_SPACING = 9;
@@ -158,8 +174,10 @@ public class Parser {
 
     /**
      * Returns an event to be added into taskList.
+     *
      * @param s the string input starting with "event".
      * @return an event object.
+     * @throws DukeException throws an exception when the format is wrong.
      */
     public static Event parseEvent(String s) throws DukeException {
         final int EVENT_WITH_SPACING = 6;
@@ -175,7 +193,7 @@ public class Parser {
             int index = s.indexOf(SLASH);
             String trimmedDescription = s.substring(EVENT_WITH_SPACING, index).trim();
             if (trimmedDescription.length() == 0) {
-                throw new DukeException(EMPTY_DESCRIPTION_ERROR_MESSAGE); 
+                throw new DukeException(EMPTY_DESCRIPTION_ERROR_MESSAGE);
             }
             final int EVENT_DATE_INDEX = index + 4;
             if (s.substring(EVENT_DATE_INDEX).equals("")) {

@@ -1,6 +1,9 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Encapsulates an Event object.
+ */
 public class Event extends Task {
     protected LocalDate at;
 
@@ -14,6 +17,10 @@ public class Event extends Task {
         return at;
     }
 
+    /**
+     * Saves whether the task is done or not into storage.
+     * @return a string representation of the task.
+     */
     @Override
     public String saveTask() {
         return "E" + super.saveTask() + " | " + at;

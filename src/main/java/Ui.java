@@ -1,3 +1,7 @@
+/**
+ * Encapsulates an Ui object.
+ * Displays messages according to the user input.
+ */
 public class Ui {
     
     public String showLoadingError() {
