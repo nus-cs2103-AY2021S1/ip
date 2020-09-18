@@ -1,5 +1,7 @@
 package clippy.task;
 
+import clippy.exception.InvalidDateFormatException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.time.format.TextStyle;
@@ -8,10 +10,14 @@ import java.util.Locale;
 public class Deadline extends Task {
     protected LocalDate by;
 
-    public Deadline(String desc, String byString) throws DateTimeParseException {
+    public Deadline(String desc, String byString) throws InvalidDateFormatException {
         super(desc);
-        this.by = LocalDate.parse(byString);
-        taskType = TaskType.DEADLINE;
+        try {
+            this.by = LocalDate.parse(byString);
+            taskType = TaskType.DEADLINE;
+        } catch (DateTimeParseException e) {
+            throw new InvalidDateFormatException();
+        }
     }
     
     public void updateTime(String newTime) {

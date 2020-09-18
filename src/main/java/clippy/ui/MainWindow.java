@@ -29,7 +29,7 @@ public class MainWindow extends AnchorPane {
 
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
     private final Image clippyImage = new Image(this.getClass().getResourceAsStream("/images/clippy.jpg"));
-    private static final int exitDelayInSeconds = 2000;
+    private static final int exitDelayInMiliSeconds = 2000;
 
     @FXML
     public void initialize() {
@@ -65,7 +65,7 @@ public class MainWindow extends AnchorPane {
                 public void run () { 
                     System.exit(0); 
                 }
-            }, exitDelayInSeconds);
+            }, exitDelayInMiliSeconds);
             
         }
     }

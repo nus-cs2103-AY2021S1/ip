@@ -1,9 +1,11 @@
 package clippy.storage;
 
 import clippy.exception.CorruptedFileException;
+import clippy.exception.InvalidDateFormatException;
 import clippy.exception.NoSavedFileException;
 import clippy.exception.UnableToCreateSaveFileException;
 import clippy.task.Task;
+import clippy.task.TaskGenerator;
 import clippy.task.TaskList;
 
 import java.io.*;
@@ -17,7 +19,8 @@ public class Storage {
         this.filePath = filePath;
     }
     
-    public ArrayList<Task> load() throws CorruptedFileException, UnableToCreateSaveFileException, NoSavedFileException {
+    public ArrayList<Task> load() throws CorruptedFileException, UnableToCreateSaveFileException, 
+            NoSavedFileException, InvalidDateFormatException {
         try {
             ArrayList<Task> savedTaskList = new ArrayList<>();
             String folderPath = getFolderPath();

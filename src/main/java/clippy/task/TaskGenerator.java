@@ -1,26 +1,30 @@
-package clippy.storage;
+package clippy.task;
 
 import clippy.exception.CorruptedFileException;
-import clippy.task.Deadline;
-import clippy.task.Event;
-import clippy.task.Task;
-import clippy.task.ToDo;
+import clippy.exception.InvalidDateFormatException;
 
 public class TaskGenerator {
-    public static Task generateTask(String taskData) throws CorruptedFileException {
+    public static Task generateTask(String taskData) throws CorruptedFileException, InvalidDateFormatException {
         String[] taskSubData = taskData.split("\\|");
         String taskTypeLetter = taskSubData[0];
         Boolean isDone = taskSubData[1].equals("1");
         String taskDesc = taskSubData[2];
+        
+        // check for savefile corruption
+        if (!(taskSubData[1].equals("0") || taskSubData[1].equals("1"))) {
+            throw new CorruptedFileException();
+        }
         
         Task task;
         
         if (taskTypeLetter.equals("T")) {
             task = new ToDo(taskDesc);
         } else if (taskTypeLetter.equals("D")) {
-            task = new Deadline(taskDesc, taskSubData[3]);
+            String by = taskSubData[3];
+            task = new Deadline(taskDesc, by);
         } else if (taskTypeLetter.equals("E")) {
-            task = new Event(taskDesc, taskSubData[3]);
+            String at = taskSubData[3];
+            task = new Event(taskDesc, at);
         } else {
             throw new CorruptedFileException();
         }
