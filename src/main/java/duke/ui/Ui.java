@@ -20,7 +20,7 @@ public class Ui {
      * Shows the welcome interface.
      */
     public void showWelcome() {
-        System.out.println("\tHello!\n\tI am Baymax, your personal idle time companion."
+        System.out.println("Hello!\nI am Baymax, your personal idle time companion."
                 + "\n\tHow may I help you?");
     }
 
@@ -28,14 +28,14 @@ public class Ui {
      * Shows the farewell interface.
      */
     public void showFarewell() {
-        System.out.println("\tList saved!\n\tIt was my pleasure assisting you.\n\tSee you next time!");
+        System.out.println("List saved!\nIt was my pleasure assisting you.\nSee you next time!");
     }
 
     /**
      * Shows the list interface.
      */
     public void showList() {
-        System.out.println("\tHere are the tasks in your list:");
+        System.out.println("Here are the tasks in your list:");
     }
 
     /**
@@ -44,7 +44,7 @@ public class Ui {
      * @param task The task specified to be done
      */
     public void showDone(Task task) {
-        System.out.println("\tYou have finished " + task + "!\n\tMove on to the next one:");
+        System.out.println("You have finished " + task + "!\nMove on to the next one:");
     }
 
     /**
@@ -53,7 +53,7 @@ public class Ui {
      * @param task The task specified to add.
      */
     public void showAdd(Task task) {
-        System.out.println("\tYou have added " + task + "!\n\tNow you have these tasks:");
+        System.out.println("You have added " + task + "!\nNow you have these tasks:");
     }
 
     /**
@@ -62,14 +62,14 @@ public class Ui {
      * @param task The task specified to delete.
      */
     public void showDelete(Task task) {
-        System.out.println("\t" + task + " deleted. \n\tCheck out other tasks:");
+        System.out.println(task + " deleted. \nCheck out other tasks:");
     }
 
     /**
      * Shows date filtered list interface.
      */
     public void showDateFilterList() {
-        System.out.println("\tYou have these tasks on this date:");
+        System.out.println("You have these tasks on this date:");
     }
 
     /**
@@ -78,7 +78,7 @@ public class Ui {
      * @param key The key used to filter the list.
      */
     public void showFind(String key) {
-        System.out.println("\tYou have these tasks containing \"" + key + "\":");
+        System.out.println("You have these tasks containing \"" + key + "\":");
     }
 
     /**
@@ -104,6 +104,6 @@ public class Ui {
      * Shows loading error.
      */
     public void showLoadingError() {
-        System.out.println("\tError loading file.\n\tNew Duke Todo list created!");
+        System.out.println("Error loading file.\nNew Duke Todo list created!");
     }
 }

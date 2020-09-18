@@ -75,6 +75,7 @@ public class TaskList {
      * @return The task at the specified index in the list.
      */
     public Task getTaskAtIndex(int index) {
+        assert index <= list.size() + 1;
         return list.get(index - 1);
     }
 
