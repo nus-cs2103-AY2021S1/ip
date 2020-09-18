@@ -121,6 +121,7 @@ public class Parser {
         if (!sc.hasNextLine()) {
             throw new DukeException("\u2639 OOPS!!! I need to know the index of the task to be done!");
         }
+        assert sc.hasNextLine();
         String doneCommand = sc.nextLine();
         int index = 0;
         if (doneCommand.isEmpty()) {
@@ -150,6 +151,7 @@ public class Parser {
         if (!sc.hasNextLine()) {
             throw new DukeException("\u2639 OOPS!!! I need to know the index of the task to be deleted!");
         }
+        assert sc.hasNextLine();
         String deleteCommand = sc.nextLine();
         int index = 0;
         if (deleteCommand.isEmpty()) {
@@ -163,6 +165,7 @@ public class Parser {
         if (index > taskList.size()) {
             throw new DukeException("\u2639 Your number is too large!!");
         }
+        assert index <= taskList.size();
         Task currentTask = taskList.get(index - 1);
         taskList.remove(index - 1);
         String deleteOutput = "";
@@ -176,6 +179,10 @@ public class Parser {
      * handles instruction "find"
      */
     public String handleFind() throws DukeException {
+        if (!sc.hasNextLine()) {
+            throw new DukeException("\u2639 OOPS!!! I need to know the keyword!!");
+        }
+        assert sc.hasNextLine();
         String input = sc.nextLine();
         if (input.isEmpty()) {
             throw new DukeException("\u2639 OOPS!!! I need to know the keyword!!");
@@ -199,6 +206,7 @@ public class Parser {
         if (!sc.hasNextLine()) {
             throw new DukeException("\u2639 OOPS!!! The description of a todo cannot be empty.");
         }
+        assert sc.hasNextLine();
         String todoDescription = sc.nextLine();
         if (todoDescription.isEmpty()) {
             throw new DukeException("\u2639 OOPS!!! The description of a todo cannot be empty.");
@@ -218,6 +226,7 @@ public class Parser {
         if (!sc.hasNextLine()) {
             throw new DukeException("\u2639 OOPS!!! The description of a deadline cannot be empty.");
         }
+        assert sc.hasNextLine();
         String deadlineCommand = sc.nextLine();
         if (deadlineCommand.isEmpty()) {
             throw new DukeException("\u2639 OOPS!!! The description of a deadline cannot be empty.");
@@ -245,6 +254,7 @@ public class Parser {
         if (!sc.hasNextLine()) {
             throw new DukeException("\u2639 OOPS!!! The description of a event cannot be empty.");
         }
+        assert sc.hasNextLine();
         String eventCommand = sc.nextLine();
         if (eventCommand.isEmpty()) {
             throw new DukeException("\u2639 OOPS!!! The description of an event cannot be empty.");

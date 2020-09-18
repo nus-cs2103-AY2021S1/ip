@@ -44,3 +44,12 @@ jar {
         attributes 'Main-Class': "$mainClassName"
     }
 }
+
+task makeReleaseJar(type: Jar){
+    archiveName = 'TestSdk.jar'
+    from ('src/main/java')
+    destinationDir = file('build/libs')
+    manifest {
+        attributes 'Main-Class': "$mainClassName"
+    }
+}
