@@ -22,13 +22,16 @@ Duke is a revolutionary **chatbot desktop app that keeps track of your tasks for
 
 Installing Duke is fairly simple and 5 minutes is all you will need. Mark the list as you complete the steps below!
 
- -[x]  Ensure that you have Java `11` or above installed on your computer. 
+ 1. Ensure that you have Java `11` or above installed on your computer.
+  
  - To find out the Java version you have installed, click [here](https://www.java.com/en/download/help/version_manual.xml). 
  - If Java is not installed on your computer, click [here](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html) to download it. 
- -[x]  Download the latest `duke.jar` software from [here](https://github.com/avalionnet/ip/releases).
+ Download the latest `duke.jar` software from [here](https://github.com/avalionnet/ip/releases).
  
- -[x]  Save the file to the folder you want Duke to be installed in. 
- -[x]  Double-click the `duke.jar` file to start the app. 
+ 2. Save the file to the folder you want Duke to be installed in. 
+ 
+ 3. Double-click the `duke.jar` file to start the app. 
+ 
  - **Note that Duke will automatically create an additional `data` folder in this 	directory to save your tasks upon starting the program for the first time.
  - You should observe the following GUI appearing :
  
