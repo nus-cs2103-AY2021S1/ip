@@ -58,10 +58,6 @@ public class Command {
         taskList.getList().stream().forEach((task) -> msgForList.append("    ")
                     .append(taskList.getList().indexOf(task) + 1).append(". ")
                     .append(task.toString()).append("\n"));
-        //for (int i = 0; i < taskList.getSize(); i++) {
-        //    msgForList.append("    ").append(i + 1).append(". ").append(taskList.get(i).toString()).append("\n");
-        // }
-
         msgForList.append(Ui.SEPARATION_LINE);
         return msgForList.toString();
     }
