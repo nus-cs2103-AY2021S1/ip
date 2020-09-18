@@ -16,6 +16,7 @@ import java.io.BufferedReader;
 
 import java.nio.file.Path;
 
+import java.rmi.server.ExportException;
 import java.time.format.DateTimeParseException;
 
 public class FileManager {
@@ -61,25 +62,21 @@ public class FileManager {
             } else {
                 TextCacher.cacheSaveNotFound();
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            TextCacher.cacheSaveCorrupted();
         }
         return taskList;
     }
 
-    private static TaskList readSaveToTaskListObject(Path path) throws IOException {
+    private static TaskList readSaveToTaskListObject(Path path) throws Exception {
         TaskList taskList = new TaskList();
-        try {
-            FileReader fr = new FileReader(path.toFile());
-            BufferedReader br = new BufferedReader(fr);
+        FileReader fr = new FileReader(path.toFile());
+        BufferedReader br = new BufferedReader(fr);
 
-            String str;
-            while ((str = br.readLine()) != null) {
-                String info[] = str.split("/break/", 4);
-                taskList.loadInTask(infoToTask(info));
-            }
-        } catch (IOException e) {
-            throw e;
+        String str;
+        while ((str = br.readLine()) != null) {
+            String info[] = str.split("/break/", 4);
+            taskList.loadInTask(infoToTask(info));
         }
         return taskList;
     }

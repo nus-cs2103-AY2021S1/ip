@@ -63,6 +63,8 @@ public class TextCacher {
         cacheErrorMsg(TextStore.noSearchTermError);
     }
 
+    public static void cacheSaveCorrupted() { cacheErrorMsg(TextStore.saveCorrupted); }
+
     // Status and info msgs
 
     public static void cacheSaveFound() { cacheTextStandard(TextStore.saveFound);}

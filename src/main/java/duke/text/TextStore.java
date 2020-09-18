@@ -29,6 +29,10 @@ public class TextStore {
             "Please follow this format: <dd/MM/yyyy HHmm>";
     protected final static String noSearchTermError = "Error: search term not specified\n" +
             "Please check command formats using !commands";
+    protected final static String saveCorrupted = "Error:\n" +
+            "Save located but is found to be corrupt.\n" +
+            "No tasks loaded from save.\n" +
+            "Save will be overwritten on exit with \"bye\" command.";
 
     // Status msgs
     public final static String saveFound = "Status: previous save found and loaded";
