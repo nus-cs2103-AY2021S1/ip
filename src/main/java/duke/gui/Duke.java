@@ -11,7 +11,6 @@ import duke.tasks.TaskList;
 import duke.ui.Ui;
 import javafx.animation.PauseTransition;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -263,7 +262,7 @@ public class Duke extends Application {
 
         if (isExit) {
             PauseTransition pause = new PauseTransition(Duration.seconds(1));
-            pause.setOnFinished(event -> Platform.exit());
+            pause.setOnFinished(event -> System.exit(0));
             pause.play();
 
         }
