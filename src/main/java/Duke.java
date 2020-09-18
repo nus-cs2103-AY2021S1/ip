@@ -13,7 +13,8 @@ public class Duke {
     enum Commands {
         EXIT("BYE"), DELETE("DELETE "), LIST("LIST"),
         DONE("DONE "), TODO("TODO "), EVENT("EVENT "),
-        DEADLINE("DEADLINE "), DELETEALL("DELETE ALL"), HELP("HELP");
+        DEADLINE("DEADLINE "), DELETEALL("DELETE ALL"), HELP("HELP"),
+        FIND("FIND ");
         private final String str;
         Commands(String str){
             this.str = str;
