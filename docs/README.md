@@ -47,12 +47,13 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
 
 
 
-Tutorial on how to download the project for those new to git:
+*Tutorial on how to download the project for those new to git:*
 
 #### Download and try the Project
 
 1. Navigate to the [main page](https://github.com/BILLXYR/ip)
-2. Find the code download button.
+2. Find the code download button. An example is shown here: 
+![CodeDownload](./images/code.png)
 3. You can choose to use any of the three options
 4. Here i will explain more on the first option
    1. open your terminal and set up your git account
