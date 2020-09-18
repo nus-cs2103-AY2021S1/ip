@@ -20,20 +20,20 @@ Note:
 
 #### View all the commands
 
-* _**Format**_ | `!commands`
+* _**Format**_ `!commands`
 
 * Displays the following list of text commands in the window.
 
 
-    1) !commands | returns a list of text commands
-    2) list | lists out all the current tasks
-    3) bye | saves the current tasks into a file and exits program
-    4) done | format: "done <task number>", marks a task in the list as done
-    5) todo | format: "todo <description>", creates a todo task
-    6) deadline | format: "deadline <description> /by <dd/MM/yyyy HHmm>", creates a deadline task
-    7) event | format: "event <description> /at <dd/MM/yyyy HHmm>", creates an event task
-    8) delete | format: "delete <task number>", deletes a task in the list
-    9) find | format: "find <string>", finds tasks with matching string
+    1) !commands \ returns a list of text commands
+    2) list \ lists out all the current tasks
+    3) bye \ saves the current tasks into a file and exits program
+    4) done \ format: "done <task number>", marks a task in the list as done
+    5) todo \ format: "todo <description>", creates a todo task
+    6) deadline \ format: "deadline <description> /by <dd/MM/yyyy HHmm>", creates a deadline task
+    7) event \ format: "event <description> /at <dd/MM/yyyy HHmm>", creates an event task
+    8) delete \ format: "delete <task number>", deletes a task in the list
+    9) find \ format: "find <string>", finds tasks with matching string
     
 #### View all the tasks in the list
 
@@ -43,7 +43,7 @@ Note:
 
 #### Quit the program
 
-* _**Format**_ | `bye`
+* _**Format**_ `bye`
 
 * Saves the current tasks into a file and exits program.
 * File saved is a .txt file.
@@ -87,14 +87,14 @@ adds an event with the description: "birthday", and the time at 16/9/2020, 1300h
 
 #### Delete a task 
 
-* _**Format**_ | `delete <task number>`
+* _**Format**_ `delete <task number>`
 
 * _**Example:**_ `delete 1`, deletes task 1 from the list.
 
 * Deletes a designated task from the task list.
 #### Find a task
 
-* _**Format**_ | `find <string>`
+* _**Format**_ `find <string>`
 
 * _**Example:**_ `find test`, 
 displays all tasks with descriptions containing "test" partially or as a whole.
