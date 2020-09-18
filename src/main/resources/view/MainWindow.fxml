@@ -7,9 +7,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="394.0" style="-fx-background-color: #d3d3d3 #d3d3d3;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.MainWindow">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="394.0" style="-fx-background-color: #717786;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.MainWindow">
   <children>
-    <TextField fx:id="userInput" layoutX="5.0" layoutY="562.0" onAction="#handleUserInput" prefHeight="31.0" prefWidth="302.0" promptText="Write a message..." style="-fx-background-radius: 5 5 5 5;" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="87.0">
+    <TextField fx:id="userInput" layoutX="5.0" layoutY="562.0" onAction="#handleUserInput" prefHeight="31.0" prefWidth="302.0" promptText="Write a message..." style="-fx-background-radius: 5 5 5 5; -fx-background-color: #F5F5F5;" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="87.0">
          <font>
             <Font name="PT Sans" size="13.0" />
          </font></TextField>

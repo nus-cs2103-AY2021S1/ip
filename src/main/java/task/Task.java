@@ -1,5 +1,7 @@
 package task;
 
+import exception.DukeException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -48,8 +50,13 @@ public abstract class Task {
 
     /**
      * Marks the Task as done.
+     *
+     * @throws DukeException Thrown when task is already marked as done.
      */
-    public void markAsDone() {
+    public void markAsDone() throws DukeException {
+        if (this.isDone) {
+            throw new DukeException("The specified task is already marked as done");
+        }
         this.isDone = true;
     }
 

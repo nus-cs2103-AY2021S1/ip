@@ -1,5 +1,5 @@
 .scroll-pane .viewport {
-       -fx-background-image: url("scrollpane-background.jpg");
+    -fx-background-image: url("scrollpane-background.jpg");
 }
 
 .scroll-bar:vertical {

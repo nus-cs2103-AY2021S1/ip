@@ -20,7 +20,7 @@ Duke is a **desktop app for tracking down todos, deadlines and events for use vi
 
 ## Quick Start
 1. Ensure you have Java `11` or above installed in your Computer.
-2. Download the latest Duke.jar from [here](https://github.com/FH-30/ip/releases/tag/A-Release).
+2. Download the latest Duke.jar from [here](https://github.com/FH-30/ip/releases/tag/v0.3).
 3. Copy the file to the folder you want to use as the home folder for your AddressBook.
 4. Double-click the file to start the app. The GUI similar to the one below should appear in a few seconds. **If not able to, you can open terminal in that directory and run: `java -jar <filename>`**
 
@@ -36,7 +36,19 @@ Some example commands you can try:
 	* `bye`: Exits the app.
 6. Refer to the Features below for details of each command.
 
-## Features 
+## Features
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the command format:**<br>
+
+* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+  e.g. in `todo TASK`, `TASK` is a parameter which can be used as `todo wash car`.
+
+* Spacing before and after the command and input will automatically be ignored.<br>
+ e.g. the command `[some spacing] todo [some spacing] CS2103T project [some spacing]` will be interpreted as `todo CS2103T project`.
+
+</div> 
 
 ### Adding a task
 
