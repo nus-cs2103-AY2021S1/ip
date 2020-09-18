@@ -44,8 +44,8 @@ public class DialogBox extends HBox {
 
         dialog.setPadding(new Insets(10));
 
-        setBackgroundColor(Color.rgb(144,238,144));
-        
+        setBackgroundColor(Color.rgb(144, 238, 144));
+
         displayPicture.setImage(img);
     }
 

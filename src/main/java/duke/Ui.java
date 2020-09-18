@@ -3,8 +3,6 @@ package duke;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import duke.Response;
-import duke.TaskList;
 import duke.task.Task;
 
 /**
@@ -24,13 +22,18 @@ public class Ui {
         String[] greetingTexts = {"Hello! I'm Pat", "What can I do for you?"};
         Response greeting = new Response(greetingTexts);
         showLine();
-        return "     Hello from\n" 
+        return "     Hello from\n"
                 + logo
                 + greeting.getResponse();
     }
-    
+
+    /**
+     * A string of welcome message on GUI.
+     *
+     * @return String representation of welcome message on GUI.
+     */
     public String showWelcomeMessage() {
-        return "Hello! I'm Pat\n" 
+        return "Hello! I'm Pat\n"
                 + "What can I do for you?";
     }
 
@@ -52,7 +55,7 @@ public class Ui {
     }
 
     /**
-     * Prints the message of adding a task.
+     * Returns a string of the message of adding a task.
      *
      * @param task  The task to be added.
      * @param tasks The task list.
@@ -63,7 +66,7 @@ public class Ui {
     }
 
     /**
-     * Prints the message of deleting a task.
+     * Returns a string of the message of deleting a task.
      *
      * @param task  The task to be deleted.
      * @param tasks The task list.
@@ -74,7 +77,7 @@ public class Ui {
     }
 
     /**
-     * Prints the list of the tasks.
+     * Returns a list of the tasks.
      *
      * @param tasks The task list.
      */
@@ -94,7 +97,7 @@ public class Ui {
     }
 
     /**
-     * Prints the list of tasks that match the searching keyword.
+     * Returns a list of tasks that match the searching keyword.
      *
      * @param tasks The tasks that match the searching keyword.
      */
@@ -104,7 +107,7 @@ public class Ui {
     }
 
     /**
-     * Prints the loading error when loading the local file.
+     * Returns the loading error when loading the local file.
      */
     public String showLoadingError() {
         Response msg = new Response(new String[]{"Folder or file does not exist yet! "
@@ -113,7 +116,7 @@ public class Ui {
     }
 
     /**
-     * Prints the error message.
+     * Returns a string of the error message.
      *
      * @param errMessage The error message.
      */
@@ -123,7 +126,7 @@ public class Ui {
     }
 
     /**
-     * Prints the bye message when exiting the program.
+     * Returns a string of the bye message when exiting the program.
      */
     public String showByeMessage() {
         Response msg = new Response(new String[]{"Bye. Hope to see you again soon!"});
