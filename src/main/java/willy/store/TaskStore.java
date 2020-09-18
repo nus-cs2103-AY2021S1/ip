@@ -53,14 +53,14 @@ public class TaskStore {
                 String taskType = listOfTasks.get(i).getTaskType().toString();
 
                 if (taskType.equals("[T]")) {
-                    String taskStatus = task.getStatusIcon();
+                    String taskStatus = task.getStatusInStore();
                     String taskContent = task.getTask();
                     combinedTask = taskType + "|" + taskStatus + "|" + taskContent;
 
                 } else if (taskType.equals("[D]")) {
                     DeadlineTask deadlineTask = (DeadlineTask) listOfTasks.get(i);
                     String taskDeadline = deadlineTask.getStringDeadline();
-                    String taskStatus = deadlineTask.getStatusIcon();
+                    String taskStatus = deadlineTask.getStatusInStore();
                     String taskContent = deadlineTask.getTask();
                     combinedTask = taskType + "|" + taskStatus + "|" +
                             taskContent + "|" + taskDeadline;
@@ -68,7 +68,7 @@ public class TaskStore {
                 } else if (taskType.equals("[E]")) {
                     EventTask eventTask = (EventTask) listOfTasks.get(i);
                     String taskPeriod = eventTask.getStringPeriod();
-                    String taskStatus = eventTask.getStatusIcon();
+                    String taskStatus = eventTask.getStatusInStore();
                     String taskContent = eventTask.getTask();
                     combinedTask = taskType + "|" + taskStatus + "|" +
                             taskContent + "|" + taskPeriod;
@@ -105,7 +105,7 @@ public class TaskStore {
 
                 if (taskType.contains("T")) {
                     TodoTask newTask = new TodoTask(activity, TaskSymbol.TODO);
-                    if (taskStatus.contains("\u2713")) { //done
+                    if (taskStatus.contains("O")) { //done
                         newTask.setTaskDone(true);
                     }
                     listOfTasks.add(newTask);
@@ -113,7 +113,7 @@ public class TaskStore {
                 } else if (taskType.contains("D")) {
                     String deadline = taskComponents[3];
                     DeadlineTask newTask = new DeadlineTask(deadline, activity, TaskSymbol.DEADLINE);
-                    if (taskStatus.contains("\u2713")) { //done
+                    if (taskStatus.contains("O")) { //done
                         newTask.setTaskDone(true);
                     }
                     listOfTasks.add(newTask);
@@ -121,7 +121,7 @@ public class TaskStore {
                 } else if (taskType.contains("E")) {
                     String duration = taskComponents[3];
                     EventTask newTask = new EventTask(duration, activity, TaskSymbol.EVENT);
-                    if (taskStatus.contains("\u2713")) { //done
+                    if (taskStatus.contains("O")) { //done
                         newTask.setTaskDone(true);
                     }
                     listOfTasks.add(newTask);

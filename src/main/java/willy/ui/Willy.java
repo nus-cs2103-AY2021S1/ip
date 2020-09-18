@@ -1,11 +1,13 @@
 package willy.ui;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import static javafx.application.Platform.exit;
+
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 import javafx.application.Application;
+import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -15,6 +17,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -58,6 +61,7 @@ public class Willy extends Application {
     private TextField inputField = new TextField();
     private Button enterButton = new Button("Enter");
     private Button clearButton = new Button("Clear");
+    private StackPane userInputStack;
 
     private String provideHelp() {
         String commands = "Commands:" + "\n" + "1. todo [TASK]"
@@ -79,20 +83,36 @@ public class Willy extends Application {
         storage.createFile();
     }
 
+    public Willy(boolean boo) {
+        this.isOnJavaFX = boo;
+        storage = new TaskStore();
+        storage.createFile();
+    }
+
+    public static String getLastGreeting() {
+        return lastGreeting;
+    }
+
+    public static String response(String message) {
+        return "\n" + message + "\n";
+    }
+
     // Put together the interactionBox which consist of the displaying of user inputs and bot's response
     private VBox interactionBoxCreator() {
 
-        Rectangle userInputContainer = new Rectangle(330,40);
+        Rectangle userInputContainer = new Rectangle(330, 40);
         userInputContainer.setFill(Color.rgb(180, 157, 253));
         StackPane userInputStack = new StackPane();
         userInput.setTextFill(Color.WHITE);
-        // Solution below from https://stackoverflow.com/questions/12341672/make-portion-of-a-text-bold-in-a-javafx-label-or-text
+        // Code below from https://stackoverflow.com/questions/12341672/make-portion-of-a-text-bold-in-a-javafx-label
+        // -or-text
         userInput.setStyle("-fx-font-weight: bold");
         userInputStack.getChildren().addAll(userInputContainer, userInput);
         userInputStack.setAlignment(userInput, Pos.CENTER_RIGHT);
 
         // Responsible for BotResponse
-        // Solution adapted from https://www.jackrutorial.com/2020/04/how-to-set-background-color-ofscrollpane-in-javafx.html
+        // Code below adapted from https://www.jackrutorial
+        // .com/2020/04/how-to-set-background-color-ofscrollpane-in-javafx.html
         ScrollPane botResponseContainer = new ScrollPane();
         botResponseContainer.setStyle("-fx-background: #EBE9F7; -fx-border-color: #262626;");
         botResponseContainer.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
@@ -132,7 +152,7 @@ public class Willy extends Application {
     public void start(Stage stage) throws Exception {
         // normal code to start Willy
         new Willy(true);
-        ArrayList<Task> listOfTask  = storage.retrieveStorage();
+        ArrayList<Task> listOfTask = storage.retrieveStorage();
         TaskList list = new TaskList(listOfTask, storage);
         Parser parser = new Parser(list);
 
@@ -147,26 +167,43 @@ public class Willy extends Application {
         willy.setAlignment(Pos.CENTER);
 
         // Putting together Intro Components of the Bot which consist of the profile of the bot and it's greetings
-            // Responsible for Willy image
-            Image image = new Image("images/willy.png");
-            ImageView imageView = new ImageView(image);
-            imageView.setFitHeight(70);
-            imageView.setFitWidth(60);
-            StackPane imageContainer = new StackPane();
-            imageContainer.getChildren().addAll(new Circle(48), imageView);
+        // Responsible for Willy image
+        Image image = new Image("images/willy.png");
+        ImageView imageView = new ImageView(image);
+        imageView.setFitHeight(70);
+        imageView.setFitWidth(60);
+        StackPane imageContainer = new StackPane();
+        imageContainer.getChildren().addAll(new Circle(48), imageView);
 
-            // Combine all the components in introContainer
-            HBox willyIntro = new HBox();
-            willyIntro.setSpacing(10);
-            willyIntro.setPadding(new Insets(20, 20, 0, 30));
-            willyIntro.getChildren().addAll(imageContainer, willy);
+        // Combine all the components in introContainer
+        HBox willyIntro = new HBox();
+        willyIntro.setSpacing(10);
+        willyIntro.setPadding(new Insets(20, 20, 0, 30));
+        willyIntro.getChildren().addAll(imageContainer, willy);
 
         // Handles Actions of Buttons
         enterButton.setOnAction(action -> {
             String message = inputField.getText();
             userInput.setText(message + "\t   ");
             inputField.clear();
-            botResponse.setText(parser.parse(message, true)); // Returns Response
+            botResponse.setText(parser.parseCommand(message, true)); // Returns Response
+            if (message.equals(getLastGreeting())) {
+                exit();
+            }
+        });
+
+        // Solution below adapted from https://stackoverflow
+        // .com/questions/13880638/how-do-i-pick-up-the-enter-key-being-pressed-in-javafx2
+        inputField.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                String message = inputField.getText();
+                userInput.setText(message + "\t   ");
+                inputField.clear();
+                botResponse.setText(parser.parseCommand(message, true)); // Returns Response
+                if (message.equals(getLastGreeting())) {
+                    exit();
+                }
+            }
         });
         clearButton.setOnAction(action -> {
             inputField.clear();
@@ -183,27 +220,14 @@ public class Willy extends Application {
         Scene scene = new Scene(layout, 380, 480);
         stage.setScene(scene);
         stage.show(); // To display stage to users
+
     }
 
-    public Willy(boolean boo) {
-        this.isOnJavaFX = boo;
-        storage = new TaskStore();
-        storage.createFile();
-    }
-
-    public static String getLastGreeting() {
-        return lastGreeting;
-    }
-
-    public static String response(String message) {
-        return "\n" + message + "\n" ;
-    }
-
-    public static void main(String[] args) throws WillyException {
+    public static void main(String[] args) {
 
         new Willy();
         Scanner input = new Scanner(System.in);
-        ArrayList<Task> listOfTask  = storage.retrieveStorage();
+        ArrayList<Task> listOfTask = storage.retrieveStorage();
         TaskList list = new TaskList(listOfTask, storage);
         Parser parser = new Parser(list);
 
@@ -218,7 +242,7 @@ public class Willy extends Application {
                 break;
             }
 
-            parser.parse(message, false);
+            parser.parseCommand(message, false);
         }
         input.close();
     }

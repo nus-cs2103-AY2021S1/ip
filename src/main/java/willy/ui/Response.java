@@ -4,7 +4,7 @@ public enum Response {
     INCOMPLETE_INFO {
         @Override
         public String toString() {
-            return "Hmmm are you missing description/deadline of the task? Check and try again? \n";
+            return "Are you missing description/deadline of the task? Check and try again? \n";
         }
     },
     NO_TASK {
@@ -16,37 +16,37 @@ public enum Response {
     ADD_TASK {
         @Override
         public String toString() {
-            return "Ay here is the task you just added:\n";
+            return "\tAy here is the task you just added:\n";
         }
     },
     NON_MATCHING_TASK {
         @Override
         public String toString() {
-             return "There are no matching tasks found in the list. Try something else?";
+             return "\tThere are no matching tasks found in the list. Try something else?";
         }
     },
     MATCHING_TASK {
         @Override
         public String toString() {
-            return "Okay, Here's the task you are finding:\n";
+            return "Okay, Here's the task you are finding:";
         }
     },
     REMOVE_TASK {
         @Override
         public String toString() {
-            return "Okai here is the task you just deleted:\n";
+            return "\tOkay, Here is the task you just deleted:\n";
         }
     },
     DONE_TASK {
         @Override
         public String toString() {
-            return "Niceee I've marked this task as done!";
+            return "\tNice! I've marked this task as done!";
         }
     },
     UPDATE_TASK {
         @Override
         public String toString() {
-            return "Okay, Here's the task you just updated:\n";
+            return "\tOkay, Here's the task you just updated:\n";
         }
     },
     EMPTY_LIST {
@@ -64,7 +64,7 @@ public enum Response {
     NO_SENSE {
         @Override
         public String toString() {
-            return "Hmmm sorry I'm not sure what you are saying, try typing 'help' to view the list of commands available?";
+            return "Sorry I'm not sure what you are saying, try typing 'help' to view the list of commands available?";
         }
     }
 }
