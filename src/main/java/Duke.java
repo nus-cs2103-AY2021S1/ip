@@ -12,8 +12,6 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import javafx.application.Application;
@@ -45,8 +43,8 @@ public class Duke extends Application implements Initializable {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    console.setStyle("-fx-control-inner-background:#000000; -fx-font-family: Consolas; -fx-highlight-fill: #ffffff; -fx-highlight-text-fill: #000000; -fx-text-fill: #00f7ff; ");
-    command.setStyle("-fx-control-inner-background:#000000; -fx-font-family: Consolas; -fx-highlight-fill: #ffffff; -fx-highlight-text-fill: #000000; -fx-text-fill: #ffffff; ");
+    console.setStyle("-fx-font-family: Consolas;");
+    command.setStyle("-fx-font-family: Consolas;");
     String home = System.getProperty("user.home");
     String filePath = home + "/tasks.txt";
     taskList = new TaskList();
