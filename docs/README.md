@@ -1,6 +1,7 @@
 
-
 # User Guide for Project Bill
+
+* [1. Setting up IntelliJ](#1-setting-up-intellij)
 
 This is a desktop application that is designed for users to keep track
 of the various tasks they want to do. It is under the assumption that 
@@ -24,7 +25,7 @@ the different software engineering principle along the way.
    2. use this command to clone the project down to your computer: git clone https://github.com/BILLXYR/ip.git
    3. Then you can refer to the part below on how to open it with IntelliJ
 
-## 1.Setting up IntelliJ
+## 1. Setting up IntelliJ
 
 Prerequisites: JDK 11, update Intellij to the most recent version.
 
