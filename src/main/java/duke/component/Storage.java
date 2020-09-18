@@ -12,7 +12,7 @@ import java.io.FileOutputStream;
  * Utility class to help write to and modify .txt files
  */
 public class Storage {
-    String filePath;
+    private String filePath;
 
     /**
      * Constructor for storage class with details of directory
@@ -80,5 +80,9 @@ public class Storage {
         } catch (Exception e) {
             System.out.println("Problem reading file.");
         }
+    }
+
+    public String getFilePath() {
+        return filePath;
     }
 }

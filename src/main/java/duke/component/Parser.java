@@ -3,16 +3,21 @@ package duke.component;
 import duke.exception.*;
 import duke.task.*;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * Parser class to handle different user inputs
  */
 public class Parser {
-    TaskList tasks;
-    Storage storage;
+    private TaskList tasks;
+    private Storage storage;
 
     /**
      * Constructor for Parser object
@@ -102,6 +107,34 @@ public class Parser {
             }
         }
     }
+
+    public void load(String filePath) throws IOException {
+        File data = new File(filePath);
+        Scanner read = new Scanner(data);
+        ArrayList<Task> list = tasks.getTaskList();
+        while (read.hasNext()) {
+            String currLine = read.nextLine();
+            Scanner cL = new Scanner(currLine);
+
+            String type = cL.next();
+            System.out.println(type);
+            cL.next();
+            String isDone = cL.next();
+            cL.next();
+            if (type.equals("T")) {
+                String desc = cL.nextLine().substring(1);
+                Todo toAdd = new Todo(desc);
+                list.add(toAdd);
+            } else if (type.equals("D")) {
+                Deadline toAdd = new Deadline(cL.nextLine().substring(1));
+                list.add(toAdd);
+            } else if (type.equals("E")) {
+                Event toAdd = new Event(cL.nextLine().substring(1));
+                list.add(toAdd);
+            }
+        }
+    }
+
 
     /**
      * Static method to return a error message

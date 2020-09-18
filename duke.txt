@@ -1,12 +1,2 @@
 T | 1 | read book
-T | 0 | complete cs2103 assignmeent
-T | 0 | read book
-T | 0 | read book
-T | 0 | 
-T | 0 | Read Book
-E | 0 | birthday /at 2020-02-18Feb 18 2020null | 0 | CS2103T /by 2020-04-28Apr 28 2020T | 0 | read book
-T | 0 | answer questions
-T | 0 | water plants
-null | 0 | CS2103T ip /by 2020-09-18Sep 18 2020E | 0 | celebration /at 2020-10-02Oct 2 2020T | 0 | read book
-E | 1 | celebration /at 2020-10-10Oct 10 2020null | 1 | 2103 ip /by 2020-09-18Sep 18 2020
-T | 0 | drink water
+T | 0 | complete cs2103 assignmentT | 0 | read bookT | 0 | read book
