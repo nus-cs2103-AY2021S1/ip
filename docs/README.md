@@ -52,11 +52,11 @@ Duke is a task management bot that can keep track of your daily tasks and manage
 <br/>
     * `description`: the content of a certain note.
 
-## <a id="#3">3. Setting Up</a>
+## <a id="3">3. Setting Up</a>
 * Download the jar file [here] (https://github.com/patricktan6/ip/releases/tag/A-Release)
 * Open the jar file downloaded and you can start using it.
     
-## <a id="#4">4. Commands</a>
+## <a id="4">4. Commands</a>
 Command | Result
 ---------------- | ----------------
 `todo` [Description] | New todo task added to the task list with the tag `[T]`
