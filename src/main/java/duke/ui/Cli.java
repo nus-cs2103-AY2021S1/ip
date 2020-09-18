@@ -15,7 +15,7 @@ public class Cli implements Ui {
     private boolean shouldStop;
 
     /**
-     * Creates a new Cli.
+     * Starts Duke as a CLI program.
      */
     public Cli() {
         inputHandler = (String input) -> {};
@@ -61,9 +61,9 @@ public class Cli implements Ui {
      * Splits a string into lines with at most lineLength number of characters. This method does not account for
      * characters of differing widths (eg. tab character, or if non-monospace fonts are used).
      *
-     * @param string     the string to split.
-     * @param lineLength the maximum number of characters per line.
-     * @return a list of strings where each string corresponds to 1 line.
+     * @param string String to split.
+     * @param lineLength Maximum number of characters per line.
+     * @return List of strings where each string corresponds to 1 line.
      */
     static List<String> splitIntoLines(String string, int lineLength) {
         List<String> list = new ArrayList<>();

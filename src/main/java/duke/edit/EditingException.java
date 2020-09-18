@@ -8,7 +8,7 @@ public class EditingException extends Exception {
     /**
      * Creates a new EditingException.
      *
-     * @param message The error message to display to the user.
+     * @param message Error message to display to the user.
      */
     EditingException(String message) {
         super(message);

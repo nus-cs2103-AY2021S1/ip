@@ -67,9 +67,9 @@ public class DialogBox extends HBox {
     /**
      * Creates a DialogBox to display the user's inputs, with the display picture on the right and right-aligned text.
      *
-     * @param text The user's input text to display.
-     * @param image The user's display picture.
-     * @return A DialogBox to display the user's input.
+     * @param text User's input text to display.
+     * @param image User's display picture.
+     * @return DialogBox to display the user's input.
      */
     public static DialogBox getUserDialog(String text, Image image) {
         DialogBox db = new DialogBox(text, image);
@@ -82,7 +82,7 @@ public class DialogBox extends HBox {
      *
      * @param text Duke's response to display.
      * @param image Duke's display picture.
-     * @return A DialogBox to display Duke's responses.
+     * @return DialogBox to display Duke's responses.
      */
     public static DialogBox getDukeDialog(String text, Image image, boolean isError) {
         var db = new DialogBox(text, image);

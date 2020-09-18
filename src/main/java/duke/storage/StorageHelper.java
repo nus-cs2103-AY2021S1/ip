@@ -16,7 +16,7 @@ class StorageHelper {
      *
      * @param object Object to save to disk.
      * @param filepath Path to the file to write to.
-     * @throws FileWritingException If file cannot be written due to a IOException or SecurityException.
+     * @throws FileWritingException If file cannot be written due to an IOException or SecurityException.
      */
     static void save(Serializable object, String filepath) throws FileWritingException {
         File file = new File(filepath);
@@ -35,10 +35,10 @@ class StorageHelper {
     /**
      * Reads the contents of a file as a String and returns the object represented by the stored String.
      *
-     * @param deserializer Object which deserializes the String in the file.
+     * @param deserializer Deserializer which deserializes the String in the file.
      * @param filepath Path to file to read from.
      * @param <T> Type of object returned.
-     * @return The object that was stored in the file.
+     * @return Object that was stored in the file.
      * @throws FileMissingException If the file to read from is missing.
      * @throws FileReadingException If the file to read form is present, but cannot be read.
      * @throws DeserializingException If the file contents cannot be deserialized.

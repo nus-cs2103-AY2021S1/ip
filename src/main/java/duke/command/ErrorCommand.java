@@ -12,7 +12,7 @@ public class ErrorCommand implements Command {
     /**
      * Creates an ErrorCommand.
      *
-     * @param message the error message for Duke to show.
+     * @param message Error message for Duke to show.
      */
     public ErrorCommand(String message) {
         this.message = message;

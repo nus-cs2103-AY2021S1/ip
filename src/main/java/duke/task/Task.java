@@ -11,7 +11,7 @@ public class Task {
     /**
      * Creates a Task which has not been completed.
      *
-     * @param description description of the Task.
+     * @param description Description of the Task.
      */
     public Task(String description) {
         this(description, false);
@@ -20,8 +20,8 @@ public class Task {
     /**
      * Creates a Task.
      *
-     * @param description description of the Task.
-     * @param isDone whether this Task has been done.
+     * @param description Description of the Task.
+     * @param isDone Whether this Task has been done.
      */
     public Task(String description, boolean isDone) {
         this.description = sanitizeString(description);
@@ -32,7 +32,7 @@ public class Task {
     /**
      * Returns whether this Task has been done.
      *
-     * @return true if the task has been done, false otherwise.
+     * @return True if the task has been done, false otherwise.
      */
     public boolean isDone() {
         return done;
@@ -49,7 +49,7 @@ public class Task {
     /**
      * Returns a String describing this Task for Duke to display to the user.
      *
-     * @return a String describing this Task.
+     * @return String describing this Task.
      */
     public String displayString() {
         String doneString = done ? "✓" : "✗";
@@ -59,7 +59,7 @@ public class Task {
     /**
      * Returns the abbreviated type of this task used in the displayString() method.
      *
-     * @return a String describing the type of this Task.
+     * @return String describing the type of this Task.
      */
     protected String taskTypeString() {
         return "T";
@@ -68,7 +68,7 @@ public class Task {
     /**
      * Returns the description of this Task.
      *
-     * @return the description of this Task.
+     * @return Description of this Task.
      */
     public String getDescription() {
         return description;
@@ -77,7 +77,7 @@ public class Task {
     /**
      * Changes the description of this Task.
      *
-     * @param description The new description for this Task.
+     * @param description New description for this Task.
      */
     public void setDescription(String description) {
         this.description = sanitizeString(description);
@@ -96,8 +96,8 @@ public class Task {
      * Sanitizes the given String by replacing tabs with 4 spaces so that the Task can be safely serialized
      * as a tab delimited file.
      *
-     * @param s the string to sanitize.
-     * @return the sanitized string.
+     * @param s String to sanitize.
+     * @return Sanitized string.
      */
     protected static String sanitizeString(String s) {
         return s.replaceAll("\t", "    ");

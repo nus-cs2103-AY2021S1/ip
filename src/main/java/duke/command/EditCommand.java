@@ -22,8 +22,8 @@ public class EditCommand<T extends Task> implements Command {
     /**
      * Creates an EditCommand.
      *
-     * @param taskNumber The number of the Task to edit.
-     * @param edits The edits to apply.
+     * @param taskNumber Number of the Task to edit.
+     * @param edits Edits to apply.
      */
     @SafeVarargs
     public EditCommand(int taskNumber, Edit<? super T>... edits) {

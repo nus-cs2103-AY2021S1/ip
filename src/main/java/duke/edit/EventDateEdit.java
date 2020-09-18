@@ -15,8 +15,8 @@ public class EventDateEdit implements Edit<Event> {
     /**
      * Creates a new EventDateEdit which will change the start and end date of an Event.
      *
-     * @param newStart The new start Date of the Event.
-     * @param newEnd The new end Date of the Event.
+     * @param newStart New start Date of the Event.
+     * @param newEnd New end Date of the Event.
      */
     public EventDateEdit(Date newStart, Date newEnd) {
         start = newStart;
@@ -26,8 +26,8 @@ public class EventDateEdit implements Edit<Event> {
     /**
      * Creates a new EventDateEdit which will change either the start date or end date of an Event.
      *
-     * @param newDate The new start or end Date of the Event.
-     * @param type The type of date.
+     * @param newDate New start or end Date of the Event.
+     * @param type Type of date.
      */
     public EventDateEdit(Date newDate, EventDateType type) {
         if (type.equals(EventDateType.START)) {

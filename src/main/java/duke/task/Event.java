@@ -12,10 +12,10 @@ public class Event extends Task {
     /**
      * Creates an Event.
      *
-     * @param description description of the Event.
-     * @param isDone whether the Event has been done.
-     * @param start start Date of the Event.
-     * @param end ending Date of the Event.
+     * @param description Description of the Event.
+     * @param isDone Whether the Event has been done.
+     * @param start Start Date of the Event.
+     * @param end Ending Date of the Event.
      */
     public Event(String description, boolean isDone, Date start, Date end) {
         super(description, isDone);
@@ -26,9 +26,9 @@ public class Event extends Task {
     /**
      * Creates an Event which has not been completed.
      *
-     * @param description description of the Event.
-     * @param start start Date of the Event.
-     * @param end ending Date of the Event.
+     * @param description Description of the Event.
+     * @param start Start Date of the Event.
+     * @param end Ending Date of the Event.
      */
     public Event(String description, Date start, Date end) {
         this(description, false, start, end);
@@ -47,7 +47,7 @@ public class Event extends Task {
     /**
      * Returns the start date of this Event.
      *
-     * @return the start date.
+     * @return Start date.
      */
     public Date getStart() {
         return start;
@@ -56,7 +56,7 @@ public class Event extends Task {
     /**
      * Returns the end date of this Event.
      *
-     * @return the end date.
+     * @return End date.
      */
     public Date getEnd() {
         return end;
@@ -65,7 +65,7 @@ public class Event extends Task {
     /**
      * Changes the start date of this Event.
      *
-     * @param date The new start date.
+     * @param date New start date.
      */
     public void setStart(Date date) {
         this.start = date;
@@ -75,7 +75,7 @@ public class Event extends Task {
     /**
      * Changes the end date of this Event.
      *
-     * @param date The new end date.
+     * @param date New end date.
      */
     public void setEnd(Date date) {
         this.end = end;

@@ -13,7 +13,7 @@ public class DoneCommand implements Command {
     /**
      * Creates a DoneCommand.
      *
-     * @param taskNumber the number (1-based) of the Task to mark as done.
+     * @param taskNumber Number (1-based) of the Task to mark as done.
      */
     public DoneCommand(int taskNumber) {
         this.taskNumber = taskNumber;

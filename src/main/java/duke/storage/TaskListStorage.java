@@ -22,7 +22,7 @@ public class TaskListStorage {
     /**
      * Creates a new TaskListStorage which which read from and write to the specified file.
      *
-     * @param filepath the path to the file where the TaskList should be loaded from and saved to.
+     * @param filepath Path to the file where the TaskList should be loaded from and saved to.
      */
     public TaskListStorage(String filepath) {
         this.filepath = filepath;
@@ -33,8 +33,8 @@ public class TaskListStorage {
      * existing file cannot be found or read, or if the file has an invalid format. The TaskList returned will attempt
      * to save to the file every time it is modified.
      *
-     * @param ui the Ui this TaskList can interact with to display error or other messages to the user.
-     * @return an existing or new TaskList which saves to the file every time it is modified.
+     * @param ui Ui this TaskList can interact with to display error or other messages to the user.
+     * @return An existing or new TaskList which saves to the file every time it is modified.
      */
     public TaskList load(Ui ui) {
         final String createNewListMessage = "I'll create a new list of tasks.";

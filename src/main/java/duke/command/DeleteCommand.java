@@ -13,7 +13,7 @@ public class DeleteCommand implements Command {
     /**
      * Creates a DeleteCommand.
      *
-     * @param taskNumber the number (1-based) of the Task to delete.
+     * @param taskNumber Number (1-based) of the Task to delete.
      */
     public DeleteCommand(int taskNumber) {
         this.taskNumber = taskNumber;

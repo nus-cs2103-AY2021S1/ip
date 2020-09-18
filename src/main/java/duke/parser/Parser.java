@@ -27,8 +27,8 @@ public class Parser {
     /**
      * Returns the appropriate Command based on the given user input.
      *
-     * @param input the user input.
-     * @return a Command that should be executed in response to the user input.
+     * @param input User input.
+     * @return Command that should be executed in response to the user input.
      */
     public static Command parse(String input) {
         input = input.strip();

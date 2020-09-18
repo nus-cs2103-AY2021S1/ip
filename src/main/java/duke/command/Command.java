@@ -11,8 +11,8 @@ public interface Command {
     /**
      * Executes this Command.
      *
-     * @param ui the ui which the Command can interact with.
-     * @param list the TaskList which the Command can read and modify.
+     * @param ui Ui which the Command can interact with.
+     * @param list TaskList which the Command can read and modify.
      */
     public void execute(Ui ui, TaskList list);
 }

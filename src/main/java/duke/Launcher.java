@@ -9,8 +9,8 @@ import duke.ui.GuiLauncher;
 public class Launcher {
 
     /**
-     * Starts Duke either as a GUI or CLI program. To start Duke as a CLI program, the first value
-     * in args must be the String "cli". This can be done by running "java -jar duke.jar cli" in the
+     * Starts Duke either as a GUI or CLI program. To start Duke as a CLI program, the first String
+     * in args must be "cli". This can be done by running "java -jar duke.jar cli" in the
      * terminal. Otherwise, Duke is launched as a GUI.
      *
      * @param args Array of command line arguments.

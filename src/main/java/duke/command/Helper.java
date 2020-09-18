@@ -11,8 +11,8 @@ class Helper {
      * Checks if a Task number (1-based) is valid. Throws an {@link InvalidTaskNumberException} with a message
      * describing what is wrong if the number is invalid. Otherwise does nothing.
      *
-     * @param taskNumber the 1-based task number to validate.
-     * @param taskList   the task list.
+     * @param taskNumber 1-based task number to validate.
+     * @param taskList Task list.
      */
     static void validateTaskNumber(int taskNumber, TaskList taskList) throws InvalidTaskNumberException {
         if (taskList.size() == 0) {
@@ -30,8 +30,8 @@ class Helper {
     /**
      * Returns a numbered list of the given Tasks.
      *
-     * @param tasks the List of Tasks.
-     * @return a numbered list of Tasks.
+     * @param tasks List of Tasks.
+     * @return Numbered list of Tasks.
      */
     static String tasksToDisplayListString(List<Task> tasks) {
         StringBuilder sb = new StringBuilder();
@@ -45,8 +45,8 @@ class Helper {
     /**
      * Returns a numbered list of the given Tasks.
      *
-     * @param tasks the TaskList.
-     * @return a numbered list of Tasks.
+     * @param tasks TaskList.
+     * @return Numbered list of Tasks.
      */
     static String tasksToDisplayListString(TaskList tasks) {
         StringBuilder sb = new StringBuilder();
@@ -60,8 +60,8 @@ class Helper {
     /**
      * Returns a String describing the number of Tasks in a TaskList.
      *
-     * @param taskList the TaskList.
-     * @return a message describing the number of Tasks in the TaskList.
+     * @param taskList TaskList.
+     * @return Message describing the number of Tasks in the TaskList.
      */
     static String getNumberOfTasksString(TaskList taskList) {
         return String.format("Now you have %d item%s in your list.", taskList.size(), taskList.size() == 1 ? "" : "s");

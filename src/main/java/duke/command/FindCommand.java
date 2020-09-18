@@ -16,7 +16,7 @@ public class FindCommand implements Command {
     /**
      * Creates a FindCommand.
      *
-     * @param query the String query to search for.
+     * @param query String query to search for.
      */
     public FindCommand(String query) {
         this.query = query;

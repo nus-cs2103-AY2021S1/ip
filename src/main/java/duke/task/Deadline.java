@@ -11,9 +11,9 @@ public class Deadline extends Task {
     /**
      * Creates a Deadline.
      *
-     * @param description description of the Deadline.
-     * @param isDone whether the Deadline is due.
-     * @param date the date of the Deadline.
+     * @param description Description of the Deadline.
+     * @param isDone Whether the Deadline is due.
+     * @param date Date of the Deadline.
      */
     public Deadline(String description, boolean isDone, Date date) {
         super(description, isDone);
@@ -23,8 +23,8 @@ public class Deadline extends Task {
     /**
      * Creates a Deadline which has not been completed.
      *
-     * @param description description of the Deadline.
-     * @param date the date of the Deadline.
+     * @param description Description of the Deadline.
+     * @param date Date of the Deadline.
      */
     public Deadline(String description, Date date) {
         this(description, false, date);
@@ -43,7 +43,7 @@ public class Deadline extends Task {
     /**
      * Returns the Date when this Deadline is due.
      *
-     * @return the due Date.
+     * @return Due Date.
      */
     public Date getDate() {
         return date;
@@ -52,7 +52,7 @@ public class Deadline extends Task {
     /**
      * Changes the Date for this Deadline.
      *
-     * @param date The new due Date.
+     * @param date New due Date.
      */
     public void setDate(Date date) {
         this.date = date;
