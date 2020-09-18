@@ -1,10 +1,5 @@
 package duke;
 
-import duke.task.Deadline;
-import duke.task.Task;
-import duke.task.Todo;
-import duke.task.Event;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -13,19 +8,24 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 /**
  * Creates a storage of the tasks.
  */
 public class Storage {
     private File file;
-    
+
     public Storage(String filePath) {
         this.file = new File(filePath);
     }
 
     /**
      * Loads the content of the file into an array list of tasks
-     * 
+     *
      * @return An array list of tasks
      * @throws DukeException
      */
@@ -59,14 +59,15 @@ public class Storage {
                 }
             }
         } catch (FileNotFoundException e) {
-            throw new DukeException("Folder or file does not exist yet! Please make sure you have data/duke.txt in ip directory. ");
+            throw new DukeException("Folder or file does not exist yet! "
+                    + "Please make sure you have data/duke.txt in ip directory. ");
         }
         return tasks;
     }
 
     /**
      * Writes the tasks in the TaskList into the file.
-     * 
+     *
      * @param tasks A list of tasks to be written into the file.
      */
     public void writeFile(TaskList tasks) {
@@ -77,7 +78,7 @@ public class Storage {
         } catch (IOException e) {
             System.out.println("Something went wrong: " + e.getMessage());
         }
-        
+
     }
-    
+
 }

@@ -9,19 +9,17 @@ public class Duke {
     private Ui ui;
     private TaskList tasks;
     private Storage storage;
-
+    
     /**
      * Creates a duke object.
-     * 
-     * @param filePath The file path that contains the tasks.
      */
-    public Duke(String filePath) { 
+    public Duke() {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage("data/duke.txt");
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
-            ui.showLoadingError();
+            System.out.println(ui.showLoadingError());
             tasks = new TaskList();
         }
     }
@@ -30,17 +28,18 @@ public class Duke {
      * Runs the Duke program.
      */
     public void run() {
-        ui.showWelcome();
+        System.out.println(ui.showWelcome());
+        ui.showLine();
         boolean isExit = false;
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
                 ui.showLine();
                 Command c = Parser.parse(fullCommand);
-                c.execute(this.tasks, this.ui, this.storage);
+                System.out.println(c.execute(this.tasks, this.ui, this.storage));
                 isExit = c.isExit();
             } catch (DukeException e) {
-                ui.showError(e.getMessage());
+                System.out.println(ui.showError(e.getMessage()));
             } finally {
                 ui.showLine();
             }
@@ -48,9 +47,22 @@ public class Duke {
     }
 
     /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(this.tasks, this.ui, this.storage);
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
+    }
+    
+    /**
      * Creates a Duke object and runs the program.
      */
     public static void main(String[] args) {
-        new Duke("data/duke.txt").run();
+        new Duke().run();
     }
 }

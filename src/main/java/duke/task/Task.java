@@ -5,9 +5,14 @@ package duke.task;
  */
 public class Task {
 
-    public String description;
-    public boolean isDone;
+    protected String description;
+    protected boolean isDone;
 
+    /**
+     * Creates a task
+     *
+     * @param description The description of the task
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
@@ -15,7 +20,7 @@ public class Task {
 
     /**
      * Creates the message to be written into the local file.
-     * 
+     *
      * @return A string representation of the task in the local file.
      */
     public String writeMessage() {
@@ -27,6 +32,15 @@ public class Task {
      */
     public void markDone() {
         this.isDone = true;
+    }
+
+    /**
+     * Gets the description of the task.
+     *
+     * @return The description of the task.
+     */
+    public String getDescription() {
+        return this.description;
     }
 
     @Override

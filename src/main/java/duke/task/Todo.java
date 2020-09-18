@@ -7,7 +7,7 @@ public class Todo extends Task {
 
     /**
      * Creates a Todo object.
-     * 
+     *
      * @param description The description of the task.
      */
     public Todo(String description) {
@@ -16,7 +16,7 @@ public class Todo extends Task {
 
     /**
      * Returns the message to be saved in the hard disk.
-     * 
+     *
      * @return The string representation of this task in the local file.
      */
     @Override
@@ -32,7 +32,7 @@ public class Todo extends Task {
 
     /**
      * Returns the string representation of this task to the users when Duke receives list command.
-     * 
+     *
      * @return The string representation of this task.
      */
     @Override

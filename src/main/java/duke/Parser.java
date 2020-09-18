@@ -1,5 +1,8 @@
 package duke;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
+
 import duke.command.AddCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
@@ -11,16 +14,13 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
 
-import java.time.format.DateTimeParseException;
-import java.time.LocalDateTime;
-
 /**
  * Creates a parser that parses the command.
  */
 public class Parser {
     /**
      * Parses the command and decides the type of the command.
-     * 
+     *
      * @param fullCommand A string of the command.
      * @return A command object representing the command.
      * @throws DukeException when the command is not valid.
@@ -73,8 +73,8 @@ public class Parser {
                                 Deadline deadline = new Deadline(description, byTime);
                                 return new AddCommand(deadline);
                             } catch (DateTimeParseException e) {
-                                throw new DukeException("Format of date and time is incorrect! " 
-                                        + "Please fill in the date and time following the format below. \n" 
+                                throw new DukeException("Format of date and time is incorrect! "
+                                        + "Please fill in the date and time following the format below. \n"
                                         + "       YYYY-MM-DDTHH:MM:SS");
                             } catch (ArrayIndexOutOfBoundsException e) {
                                 throw new DukeException("☹ OOPS!!! The deadline cannot be empty.");
@@ -96,8 +96,9 @@ public class Parser {
                                 Event event = new Event(description, LocalDateTime.parse(at));
                                 return new AddCommand(event);
                             } catch (DateTimeParseException e) {
-                                throw new DukeException("Format of date and time is incorrect! Please fill in the date and time following the format below. \n" +
-                                        "       YYYY-MM-DDTHH:MM:SS");
+                                throw new DukeException("Format of date and time is incorrect! "
+                                        + "Please fill in the date and time following the format below. \n"
+                                        + "       YYYY-MM-DDTHH:MM:SS");
                             }
                         }
                     } catch (ArrayIndexOutOfBoundsException e) {
@@ -111,5 +112,5 @@ public class Parser {
             }
         }
     }
-    
+
 }
