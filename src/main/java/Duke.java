@@ -1,11 +1,13 @@
-import java.io.IOException;
-
-import duke.EmptyInputException;
-import duke.NoResponseException;
-import duke.Parser;
+import duke.DukeException;
 import duke.Storage;
+import duke.Parser;
 import duke.TaskList;
 import duke.Ui;
+
+
+import java.io.IOException;
+
+
 
 
 public class Duke {
@@ -34,7 +36,7 @@ public class Duke {
      *
      * @return String which a response from ui and will be shown on the GUI;
      */
-    protected String getResponse(String input) throws EmptyInputException, NoResponseException, IOException {
+    protected String getResponse(String input) throws DukeException, IOException {
         String response = parser.parse(input);
         if (parser.getIsEnd()) {
             this.storage.storeFile(tasks);

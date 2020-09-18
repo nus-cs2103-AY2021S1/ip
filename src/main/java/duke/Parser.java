@@ -1,5 +1,7 @@
 package duke;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class Parser {
@@ -77,51 +79,23 @@ public class Parser {
      *
      * @param userCommand User's command scanned by Ui.
      * @return A string of response from duke.
-     * @throws EmptyInputException Exceptions occur when the user's command cannot be understood
-     * @throws NoResponseException Exceptions occur when the user's command is incomplete
+     * @throws DukeException Exceptions occur when the response is not ideal.
      */
 
-    public String parse(String userCommand) throws EmptyInputException, NoResponseException {
-        String[] words = this.getDukeType(userCommand);
+    public String parse(String userCommand) throws DukeException {
         String dukeOutput = "";
+        String[] words = this.getDukeType(userCommand);
         assert this.currentType != null : "This command is not supported by Duke";
+
         switch (this.currentType) {
         case DEADLINE:
-            if (words.length == 1) {
-                throw new EmptyInputException("deadline");
-            }
-
-            String deadlineTask = "";
-            String deadlineDate = "";
-            int byPosition = 0;
-            for (int i = 1; i < words.length; i++) {
-                if (!words[i].equals("/by")) {
-                    deadlineTask = deadlineTask + words[i] + " ";
-                } else {
-                    byPosition = i;
-                    break;
-                }
-            }
-
-            for (int k = byPosition + 1; k < words.length; k++) {
-                if (k != words.length - 1) {
-                    deadlineDate = deadlineDate + words[k] + " ";
-                } else {
-                    deadlineDate = deadlineDate + words[k];
-                }
-            }
-            deadlineTask = deadlineTask.trim();
-            Deadline newDeadline = new Deadline(deadlineTask, deadlineDate);
-            this.tasks.add(newDeadline);
-            dukeOutput = this.userInteract.showAdd(newDeadline, this.tasks);
-
+            dukeOutput = this.handleDeadlineAndEvent(UserInput.DEADLINE, words);
             break;
 
         case TODO:
             if (words.length == 1) {
-                throw new EmptyInputException("todo");
+                throw DukeException.emptyDescriptionException();
             }
-
             String todoTask = "";
             for (int i = 1; i < words.length; i++) {
                 if (i != words.length - 1) {
@@ -137,49 +111,37 @@ public class Parser {
             break;
 
         case EVENT:
-            if (words.length == 1) {
-                throw new EmptyInputException("event");
-            }
-            String eventTask = "";
-            String eventDate = "";
-            int atPosition = 0;
-            for (int i = 1; i < words.length; i++) {
-                if (!words[i].equals("/at")) {
-                    eventTask = eventTask + words[i] + " ";
-                } else {
-                    atPosition = i;
-                    break;
-                }
-            }
-
-            for (int k = atPosition + 1; k < words.length; k++) {
-                if (k != words.length - 1) {
-                    eventDate = eventDate + words[k] + " ";
-                } else {
-                    eventDate = eventDate + words[k];
-                }
-            }
-            Event newEvent = new Event(eventTask, eventDate);
-            this.tasks.add(newEvent);
-            dukeOutput = this.userInteract.showAdd(newEvent, this.tasks);
-
+            dukeOutput = this.handleDeadlineAndEvent(UserInput.EVENT, words);
             break;
 
         case FIND:
             String keyWord = words[1];
             List<Task> matchedTasks = this.tasks.findMatchingTask(keyWord);
             dukeOutput = this.userInteract.showFind(matchedTasks);
-
             break;
 
         case DONE:
+            if (words.length == 1) {
+                throw DukeException.operationException();
+            }
             int number = Integer.parseInt(words[1]) - 1;
-            dukeOutput = this.userInteract.showDone(number, this.tasks);
+            if (number + 1 >= tasks.size()) {
+                throw DukeException.invalidIndexException();
+            } else {
+                dukeOutput = this.userInteract.showDone(number, this.tasks);
+            }
             break;
 
         case DELETE:
+            if (words.length == 1) {
+                throw DukeException.operationException();
+            }
             int index = Integer.parseInt(words[1]) - 1;
-            dukeOutput = this.userInteract.showDelete(index, this.tasks);
+            if (index + 1 >= tasks.size()) {
+                throw DukeException.invalidIndexException();
+            } else {
+                dukeOutput = this.userInteract.showDelete(index, this.tasks);
+            }
             break;
 
         case LIST:
@@ -196,8 +158,87 @@ public class Parser {
             break;
 
         default:
-            throw new NoResponseException();
+            throw DukeException.noResponseException();
         }
         return dukeOutput;
+    }
+    /**
+     * Handles event and deadline tasks which are fairly similar and return duke responses
+     *
+     * @param task is either deadline or event UserInput
+     * @param words is a string of user's command
+     *
+     * @return String which is duke response for deadline or event command
+     */
+    public String handleDeadlineAndEvent (UserInput task, String[] words) throws DukeException {
+        String dukeOutput = "";
+        if (words.length == 1) {
+            throw DukeException.emptyDescriptionException();
+        }
+        String taskName = "";
+        String taskDate = "";
+        int connectPosition = 0;
+        if (task == UserInput.DEADLINE ) {
+            for (int i = 1; i < words.length; i++) {
+                if (!words[i].equals("/by")) {
+                    taskName = taskName + words[i] + " ";
+                } else {
+                    connectPosition = i;
+                    break;
+                }
+            }
+        } else {
+            for (int i = 1; i < words.length; i++) {
+                if (!words[i].equals("/at")) {
+                    taskName = taskName + words[i] + " ";
+                } else {
+                    connectPosition = i;
+                    break;
+                }
+            }
+        }
+
+        if (connectPosition != 0) {
+            for (int k = connectPosition + 1; k < words.length; k++) {
+                if (k != words.length - 1) {
+                    taskDate = taskDate + words[k] + " ";
+                } else {
+                    taskDate = taskDate + words[k];
+                }
+            }
+        } else {
+            throw DukeException.missingConnectorException();
+        }
+
+        taskName = taskName.trim();
+
+        if (taskDate != "") {
+            taskDate = this.parseDate(taskDate);
+            if (task == UserInput.DEADLINE) {
+                Deadline newDeadline = new Deadline(taskName, taskDate);
+                this.tasks.add(newDeadline);
+                dukeOutput = this.userInteract.showAdd(newDeadline, this.tasks);
+            } else {
+                Event newEvent = new Event(taskName, taskDate);
+                this.tasks.add(newEvent);
+                dukeOutput = this.userInteract.showAdd(newEvent, this.tasks);
+            }
+        } else {
+            throw DukeException.dateException();
+        }
+        return dukeOutput;
+    }
+
+    /**
+     * Changes date into a string in the format of MMM dd yyyy.
+     *
+     */
+    public String parseDate(String date) throws DukeException {
+        try {
+            LocalDate ddl = LocalDate.parse(date);
+            return ddl.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        } catch (Exception exception) {
+            throw DukeException.deadlineParseException();
+        }
     }
 }

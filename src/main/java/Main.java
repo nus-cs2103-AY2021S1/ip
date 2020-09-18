@@ -12,7 +12,7 @@ import javafx.stage.Stage;
  */
 
 public class Main extends Application {
-    private String path = "." + File.separator + "data" + File.separator;
+    private String path = "data";
     private String fileName = "duke.txt";
 
     private Duke duke = new Duke(path, fileName);
