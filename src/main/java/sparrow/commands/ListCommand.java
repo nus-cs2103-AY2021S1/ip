@@ -10,7 +10,7 @@ public class ListCommand extends Command {
     public static final String COMMAND_WORD = "list";
     public static final String TASK_MESSAGE_SUCCESS = "Here are the tasks in your list: \n%s";
     public static final String VOCAB_MESSAGE_SUCCESS = "Here are the words in your list: \n%s";
-    public static final String HELP_MESSAGE = "Ye ought to specify either 'tasks' or 'vocab' after the 'list' command.";
+    public static final String HELP_MESSAGE = "Ye ought to specify 'tasks'/'vocab' after the 'list' command.";
 
     private final String data;
 
