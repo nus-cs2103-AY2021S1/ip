@@ -5,6 +5,21 @@ Patrick Star Bot is a chat bot for keeping track of simple tasks. It is based on
 ![Image of chat bot](./Ui.png)
 
 ## Features 
+
+### Types of tasks:
+* `Todo` - Todo tasks are tasks that are to be completed at some point in time but do not have a specific date or time associated to them.
+* `Deadline` - Deadline tasks are tasks that have to be completed by some specific date and optionally time.
+* `Event` - Event tasks are tasks that occur at a specific date and optionally time.
+
+### Date and times:
+* Deadlines and events require a date to be associated to them. Additionally, they can have a time associated to them.
+* Dates can be in the format `day/month/year`, `day-month-year`, `day month year`, `yyyy/mm/dd`, `yyyy-mm-dd` or `yyyy mm dd`.
+* For the formats where day comes first, i.e. `day/month/year`, `day-month-year` and `day month year`, day can be `03` or `3`, month is case-insensitive and can be `01` or `1` or `Jan` or `January`, and year can be `2011` or `11`.
+* For the formats where year comes first, i.e. `yyyy/mm/dd`, `yyyy-mm-dd` or `yyyy mm dd`, the year, month and day must be in their full numerical representaions e.g. `2012-03-07`.
+* Alternatively, dates can be days of the week: `Tuesday` or `Tues`, or the words `yesterday`, `today` and `tomorrow`. 
+* Time must be in the 24h format `HH:mm`.
+
+### List of commands:
 * `todo` - adds a to do task with neither specific date nor time
 * `deadline` - adds a deadline task with a specific date and optionally time to be completed by
 * `event` - adds an event task with a specific date and optionally time at which it occurs
@@ -15,16 +30,12 @@ Patrick Star Bot is a chat bot for keeping track of simple tasks. It is based on
 * `find` - finds all the tasks stored in the chat bot that contains the specified keyword
 * `bye` - exits the chat bot
 
-## Date and times:
-* Dates can be in the format `day/month/year`, `day-month-year`, `day month year`, `yyyy/mm/dd`, `yyyy-mm-dd` or `yyyy mm dd`.
-* For `day/month/year`, `day-month-year` and `day month year`, day can be `03` or `3`, month can be `01` or `1` or `Jan` or `January`, and year can be `2011` or `11`.
-* Alternatively, dates can be days of the week: `Tuesday` or `Tues`, or the words `yesterday`, `today` and `tomorrow`. 
-* Time must be in the 24h format `HH:mm`.
+
 
 ## Usage
 Note: 
-* Words in 'UPPER_CASE' are the parameters to be supplied by the user.
-* Items in square brackets are optional.
+* Words in `UPPER_CASE` are the parameters to be supplied by the user.
+* Items in square brackets i.e. `[` and `]` are optional.
 
 ### `todo` - adds a to do task
 
@@ -122,7 +133,7 @@ Expected outcome:
 
 ### `view` - view tasks on a date
 
-Shows all the tasks with the specified date.
+Shows all the tasks with the specified date. Note that view only works with dates and not times.
 
 Format: `view DATE`
 
