@@ -124,22 +124,28 @@ public class WindowDisplay extends Application {
      * the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() {
-        // echos input to the text row
-        Label userText = new Label(userInput.getText());
+        if (!commandParserAndLogic.hasEnded) { // stops users from interacting if it has already ended
 
-        // sends input into the command chain to do its logic and get a return text
-        Label dukeText = new Label(getResponse(userInput.getText()));
+            // echos input to the text row
+            Label userText = new Label(userInput.getText());
 
-        // sends them out onto the display
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
-        );
-        userInput.clear();
+            // sends input into the command chain to do its logic and get a return text
+            Label dukeText = new Label(getResponse(userInput.getText()));
 
-        // checks if user has ended the program with a command
-        if (commandParserAndLogic.hasEnded) {
-            endLogic();
+            // sends them out onto the display
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(userText, new ImageView(user)),
+                    DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+            );
+            userInput.clear();
+
+            // checks if user has ended the program with previous command
+            if (commandParserAndLogic.hasEnded) {
+                endLogic();
+            }
+        } else {
+            TextCacher.cacheStopDisturb();
+            flushTextCache();
         }
     }
 

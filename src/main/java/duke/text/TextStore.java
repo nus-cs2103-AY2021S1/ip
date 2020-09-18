@@ -6,13 +6,14 @@ public class TextStore {
     // Public messages means that they are referenced outside to craft messages with other strings (ie strings from task)
 
     // Bling msgs
-    protected final static String top = "-------------Bot made by Hendey Fan-------------";
-    protected final static String errorBling = "--------------!*!*!ERROR DETECTED!*!*!--------------";
-    protected final static String bottom = "-------------------------------------------------------";
-    protected final static String startMessage = "This is a task management bot made by Hendey Fan.\n" +
-            "       Bot is currently starting up BRRRRRRRRRRR";
+    protected final static String top = "----------------Bot made by Hendey Fan----------------";
+    protected final static String errorBling = "---------------!*!*!ERROR DETECTED!*!*!---------------";
+    protected final static String bottom = "------------------------------------------------------------";
+    protected final static String startMessage = " This is a task management bot made by Hendey Fan\n" +
+            "        Bot is currently starting up BRRRRRRRRRRR";
     protected final static String endMessage = "         oi don run away from ur tasks hor    \n" +
             "        Window will now close in 5 seconds";
+    protected final static String stopDisturb = "NO MORE COMMANDS FOR U >.< FINISH LIAO!";
 
     // Error msgs
     protected final static String taskNotFound = "Error: task not found :(";
@@ -48,7 +49,7 @@ public class TextStore {
                     "7) event | format: \"event <description> /at <dd/MM/yyyy HHmm>\", creates an event task\n" +
                     "8) delete | format: \"delete <task number>\", deletes a task in the list\n" +
                     "9) find | format: \"find <string>\", finds tasks with matching string";
-    protected final static String promptMsg = "Type \"!commands\" for a list of commands and formats :)";
+    protected final static String promptMsg = "Type \"!commands\" for a list of commands and formats";
 
     // Strings used by TaskList class
     public final static String listOutHeader = "Here are the tasks in your list:";

@@ -32,6 +32,8 @@ public class TextCacher {
 
     public static void cacheEndMessage() { cacheTextStandard(TextStore.endMessage);}
 
+    public static void cacheStopDisturb() { cacheTextStandard(TextStore.stopDisturb);}
+
     // Error msgs
     public static void cacheTaskNotFoundError() {
         cacheErrorMsg(TextStore.taskNotFound);
