@@ -21,7 +21,7 @@ public class Ui {
     private enum Speech {
         GREETING("My name? You don't need to know that. Stop bothering me already... "),
         BYE("Finally... don't come back if you can possibly help it, please."),
-        LIST("\nI wouldn't bother doing them if I were you."),
+        LIST("\nI wouldn't bother about them if I were you."),
         DONE("Oh goody... You actually accomplished something!!\n  "),
         ADD("You're making me feel tired... But if you insist, I've added this:\n  "),
         DELETE("Oh, getting lazy are we? I approve. I've removed this:\n  "),

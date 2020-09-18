@@ -22,6 +22,7 @@ public class Task {
         this.isDone = false;
     }
 
+    // Use of second constructor learnt from Lim Jia Rui Ryan's IP
     /**
      * Constructor for tasks loaded in from data file,
      * where it's known whether the task is done or not.
