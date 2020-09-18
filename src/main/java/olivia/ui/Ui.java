@@ -13,10 +13,11 @@ import olivia.util.OliviaException;
 public class Ui {
 
     /**
-     * Prints to user if the given save file has loaded successfully and the tasks found
-     * in the save file.
+     * Returns a String that represents if the given save file has loaded successfully
+     * and the tasks found in the save file.
      *
      * @param tasks a TaskList containing the tasks in the save file.
+     * @return a String that represents the tasks in the TaskList.
      */
 
     public String showLoaded(TaskList tasks) {
@@ -34,11 +35,12 @@ public class Ui {
     }
 
     /**
-     * Prints to user if a Task has successfully been added to the TaskList and
-     * the current number of Tasks in it.
+     * Returns a String that represents if a Task has successfully been added to the
+     * TaskList and the current number of Tasks in it.
      *
      * @param tasks the TaskList associated with the current Duke object.
      * @param task the Task that was added to the TaskList.
+     * @return a String with the added Task and the current number of Tasks in the list.
      */
 
     public String showAdd(TaskList tasks, Task task) {
@@ -48,9 +50,10 @@ public class Ui {
     }
 
     /**
-     * Prints to user if a Task has been marked as complete.
+     * Returns a String that represents if a Task has been marked as complete.
      *
      * @param task the Task that was marked as complete.
+     * @return a String denoting that the specified Task has been marked.
      */
 
     public String showDone(Task task) {
@@ -59,11 +62,12 @@ public class Ui {
     }
 
     /**
-     * Prints to user if a Task has successfully been deleted from the TaskList and
-     * the current number of Tasks in it.
+     * Returns a String that represents if a Task has successfully been deleted
+     * from the TaskList and the current number of Tasks in it.
      *
      * @param tasks the TaskList associated with the current Duke object.
      * @param task the Task that was deleted from the TaskList.
+     * @return a String denoting that the specified Task has been removed.
      */
 
     public String showDelete(TaskList tasks, Task task) {
@@ -73,10 +77,11 @@ public class Ui {
     }
 
     /**
-     * Prints to user if a DukeException has been caught, printing the corresponding
-     * error message.
+     * Returns a String that represents if a DukeException has been caught,
+     * printing the corresponding error message.
      *
-     * @param e a DukeException containing the error message
+     * @param e a DukeException containing the error message.
+     * @return a String with the error message.
      */
 
     public String showError(OliviaException e) {
@@ -84,9 +89,11 @@ public class Ui {
     }
 
     /**
-     * Prints to user a list of matching Tasks given a keyword to search for
+     * Returns a String that represents list of matching Tasks given a keyword
+     * to search for.
      *
-     * @param list a list of matching Tasks
+     * @param list a list of matching Tasks.
+     * @return a String of the list of tasks.
      */
 
     public String showFind(List<Task> list) {
@@ -99,9 +106,10 @@ public class Ui {
     }
 
     /**
-     * Prints to user the current Tasks found in the TaskList.
+     * Returns a String that represents the current Tasks found in the TaskList.
      *
-     * @param list the TaskList associated with the current Duke object
+     * @param list the TaskList associated with the current Duke object.
+     * @return a String of the list of tasks.
      */
 
     public String showList(TaskList list) {
@@ -118,7 +126,9 @@ public class Ui {
     }
 
     /**
-     * Prints a welcome message for the user.
+     * Returns a String that represents a welcome message for the user.
+     *
+     * @return a String of the welcome message.
      */
 
     public String welcome() {
