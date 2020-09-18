@@ -101,7 +101,6 @@ public class Duke extends Application{
             handleUserInput();
         });
 
-        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
         dialogContainer.getChildren().add(
                 DialogBox.getDukeDialog(Ui.showWelcome(), duke));
     }
