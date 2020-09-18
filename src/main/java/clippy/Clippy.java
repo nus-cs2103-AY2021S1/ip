@@ -8,9 +8,12 @@ import clippy.parser.Parser;
 
 import clippy.storage.Storage;
 
+import clippy.task.Task;
 import clippy.task.TaskList;
 
 import clippy.ui.Ui;
+
+import java.util.ArrayList;
 
 /**
  * Represents a task-tracking chat bot called Clippy with a Command Line Interface.
@@ -31,7 +34,8 @@ public class Clippy {
         storage = new Storage(filePath);
         
         try {
-            tasks = new TaskList(storage.load());
+            ArrayList<Task> loadedArrayListOfTask = storage.load();
+            tasks = new TaskList(loadedArrayListOfTask);
             tasks.updateAllTaskIndices();
         } catch (ClippyException e) {
             ui.showError(e);
@@ -44,13 +48,14 @@ public class Clippy {
      * Attempts to load saved tasks from the pre-defined save file.
      */
     public Clippy() {
-        String filePath = "./data/savefile.txt";
+        String preDefinedFilePath = "./data/savefile.txt";
         
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage(preDefinedFilePath);
         
         try {
-            tasks = new TaskList(storage.load());
+            ArrayList<Task> loadedArrayListOfTask = storage.load();
+            tasks = new TaskList(loadedArrayListOfTask);
             tasks.updateAllTaskIndices();
         } catch (ClippyException e) {
             ui.showError(e);

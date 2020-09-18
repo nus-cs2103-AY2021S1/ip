@@ -44,10 +44,7 @@ public class Storage {
             NoSavedFileException {
         try {
             File saveFile = getSaveFile();
-            
-            ArrayList<Task> savedTaskList = getArrayListOfTasksFromSaveFile(saveFile);
-            
-            return savedTaskList;
+            return getArrayListOfTasksFromSaveFile(saveFile);
         } catch (FileNotFoundException e) {
             File saveFile = new File(filePath);
             
@@ -82,11 +79,10 @@ public class Storage {
 
         while (fileReader.hasNextLine()) {
             String taskData = fileReader.nextLine();
-
             Task currTask = TaskGenerator.generateTask(taskData);
-
             savedTaskList.add(currTask);
         }
+        
         return savedTaskList;
     }
 
@@ -125,7 +121,8 @@ public class Storage {
 
         for (int i = 1; i <= numOfTasks; i++) {
             Task task = tasks.getTask(i);
-            bfWriter.write(task.generateSaveFileData());
+            String taskSaveFileData = task.generateSaveFileData();
+            bfWriter.write(taskSaveFileData);
             bfWriter.newLine();
         }
 
@@ -133,8 +130,13 @@ public class Storage {
     }
     
     private String getFolderPath() {
+        int indexOfLastSlash = getIndexOfLastSlash();
+        return filePath.substring(0, indexOfLastSlash);
+    }
+    
+    private int getIndexOfLastSlash() {
         int indexOfLastSlash = 0;
-        
+
         for (int i = filePath.length() - 1; i >= 0; i--) {
             if (filePath.charAt(i) == '/') {
                 indexOfLastSlash = i;
@@ -142,6 +144,6 @@ public class Storage {
             }
         }
         
-        return filePath.substring(0, indexOfLastSlash);
+        return indexOfLastSlash;
     }
 }

@@ -16,14 +16,14 @@ public class TaskGenerator {
      */
     public static Task generateTask(String taskData) throws CorruptedFileException {
         try {
-            String[] taskSubData = taskData.split("\\|");
+            String[] taskDataFields = taskData.split("\\|");
             
-            String taskTypeLetter = taskSubData[0];
-            String doneStatus = taskSubData[1];
-            String taskDesc = taskSubData[2];
+            String taskTypeLetter = taskDataFields[0];
+            String doneStatus = taskDataFields[1];
+            String taskDesc = taskDataFields[2];
             
             // check for save file corruption
-            if (!(doneStatus.equals("0") || doneStatus.equals("1"))) {
+            if (isCorruptStatus(doneStatus)) {
                 throw new CorruptedFileException();
             }
             
@@ -34,10 +34,10 @@ public class TaskGenerator {
             if (taskTypeLetter.equals("T")) {
                 task = new ToDo(taskDesc);
             } else if (taskTypeLetter.equals("D")) {
-                String by = taskSubData[3];
+                String by = taskDataFields[3];
                 task = new Deadline(taskDesc, by);
             } else if (taskTypeLetter.equals("E")) {
-                String at = taskSubData[3];
+                String at = taskDataFields[3];
                 task = new Event(taskDesc, at);
             } else {
                 throw new CorruptedFileException();
@@ -51,5 +51,9 @@ public class TaskGenerator {
         } catch (ArrayIndexOutOfBoundsException | InvalidDateFormatException e) {
             throw new CorruptedFileException();
         }
+    }
+    
+    private static boolean isCorruptStatus(String doneStatus) {
+        return !(doneStatus.equals("0") || doneStatus.equals("1"));
     }
 }

@@ -68,8 +68,8 @@ public class FindCommand extends Command {
         int i = 1;
 
         for (Task t : matchedTasks) {
-            String listIndexOfTaskStatement = "at List Index: " + t.getTaskIndexInList();
-            output += ui.showTaskWithIndex(i, t) + " " + listIndexOfTaskStatement + "\n";
+            String indexOfTaskInListStatement = "at List Index: " + t.getTaskIndexInList();
+            output += ui.showTaskWithIndex(i, t) + " " + indexOfTaskInListStatement + "\n";
             i++;
         }
         

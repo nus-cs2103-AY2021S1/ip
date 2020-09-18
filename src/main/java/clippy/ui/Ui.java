@@ -94,13 +94,13 @@ public class Ui {
      * @return A String showing successful deletion of the given task and the number of tasks remaining in the list.
      */
     public String showDeleted(Task task, int numOfRemainingTasks) {
-        String numOfRemainingTaskDescription = generateNumOfTasksNowStatement(numOfRemainingTasks);
+        String numOfRemainingTaskStatement = generateNumOfTasksStatement(numOfRemainingTasks);
         
-        return MSG_DELETED_TASK + task + "\n" + numOfRemainingTaskDescription;
+        return MSG_DELETED_TASK + task + "\n" + numOfRemainingTaskStatement;
     }
     
-    private String generateNumOfTasksNowStatement(int numOfTasks) {
-        assert numOfTasks >= 0 : "Negative number of remaining tasks";
+    private String generateNumOfTasksStatement(int numOfTasks) {
+        assert numOfTasks >= 0 : "Negative number of tasks";
         
         switch (numOfTasks) {
         case 0:
@@ -132,7 +132,7 @@ public class Ui {
     public String showAdded(Task task, int numOfTasks) {
         assert numOfTasks >= 0 : "Negative number of tasks";
         
-        String numOfTaskDescription = generateNumOfTasksNowStatement(numOfTasks);
+        String numOfTaskDescription = generateNumOfTasksStatement(numOfTasks);
         
         return MSG_ADDED_TASK + task + "\n" + numOfTaskDescription;
     }

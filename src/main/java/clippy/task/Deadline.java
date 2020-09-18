@@ -45,15 +45,29 @@ public class Deadline extends Task {
     
     @Override
     public String toString() {
-        int day = by.getDayOfMonth();
-        String month = by.getMonth().getDisplayName(TextStyle.SHORT_STANDALONE, Locale.ENGLISH);
-        int year = by.getYear();
+        int day = getDay();
+        String month = getMonth();
+        int year = getYear();
         String byString = "(by: " + month + " " + day + " " + year + ")";
         
         String taskTypeIndicator = "[" + taskType + "]";
 
         return taskTypeIndicator + super.toString() + " " + byString;
     }
+    
+    private int getDay() {
+        return by.getDayOfMonth();
+    }
+    
+    private String getMonth() {
+        return by.getMonth().getDisplayName(TextStyle.SHORT_STANDALONE, Locale.ENGLISH);
+    }
+    
+    private int getYear() {
+        return by.getYear();
+    }
+    
+    
 
     /**
      * Generates and return a String encapsulating details of the deadline to be stored in the save file.

@@ -22,12 +22,12 @@ public class ListCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        int numOfTasks = tasks.getSize();
-        assert numOfTasks >= 0 : "Negative number of tasks in Clippy.TaskList";
-
         if (tasks.isEmpty()) {
             return ui.showListNoTasks();
         }
+        
+        int numOfTasks = tasks.getSize();
+        assert numOfTasks >= 0 : "Negative number of tasks in Clippy.TaskList";
         
         String output = ui.showListWithTasksHeader() + "\n";
         

@@ -11,9 +11,6 @@ public abstract class Task {
     protected TaskType taskType;
     
     private int index;
-    
-    private final String SYMBOL_TICK = "\u2713";
-    private final String SYMBOL_CROSS = "\u2718";
 
     /**
      * Constructs a task object with done status initalised to false.
@@ -44,6 +41,9 @@ public abstract class Task {
     }
     
     private String getStatusIcon() {
+        String SYMBOL_TICK = "\u2713";
+        String SYMBOL_CROSS = "\u2718";
+        
         //return tick or X symbols
         return (isDone ? SYMBOL_TICK : SYMBOL_CROSS);
     }

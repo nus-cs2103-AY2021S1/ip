@@ -96,37 +96,120 @@ public class Parser {
         return new FindCommand(input.substring(5));
     }
     
-    private static UpdateCommand parseUpdate(String input) {
-        String[] subInputs = input.split(" ");
+    private static UpdateCommand parseUpdate(String input) throws InvalidCommandException {
+        int indexOfTask = getIndexOfTask(input);
         
-        int length = subInputs.length;
-        int indexOfTaskToBeUpdated = Integer.parseInt(subInputs[1]);
-        
-        if (hasBackSlash(subInputs)) {
-            // update description of Deadline/Event OR update description of Deadline/Event + time
-            int indexOfBackSlash = getIndexOfBackSlash(subInputs);
-            assert indexOfBackSlash >= 0 : "Invalid index of backslash";
-            
-            String[] timeInArray = Arrays.copyOfRange(subInputs, indexOfBackSlash + 1, length);
-            String time = String.join(" ", timeInArray);
-            
-            if (indexOfBackSlash == 2) {
-                // update time only
-                return new UpdateTimeCommand(indexOfTaskToBeUpdated, time);
-            } else {
-                // update description and time
-                String[] descriptionInArray = Arrays.copyOfRange(subInputs, 2, indexOfBackSlash);
-                String description = String.join(" ", descriptionInArray);
-                
-                return new UpdateDescriptionAndTimeCommand(indexOfTaskToBeUpdated, description, time);
-            }
+        if (isUpdatingDescriptionOnly(input)) {
+            return parseUpdateDescriptionOnly(input, indexOfTask);
+        } else if (isUpdatingTimeOnly(input)) {
+            return parseUpdateTimeOnly(input, indexOfTask);
+        } else if (isUpdatingDescriptionAndTime(input)) {
+            return parseUpdateDescriptionAndTime(input, indexOfTask);
         } else {
-            // update description of To-Do/Deadline/Event only
-            String[] descriptionInArray = Arrays.copyOfRange(subInputs, 2, length);
-            String description = String.join(" ", descriptionInArray);
-            
-            return new UpdateDescriptionCommand(indexOfTaskToBeUpdated, description);
+            throw new InvalidCommandException();
         }
+
+    }
+    
+    private static int getIndexOfTask(String input) {
+        String[] subInputs = input.split(" ");
+
+        return Integer.parseInt(subInputs[1]);
+    }
+
+    private static int getIndexOfBackSlashFieldInArray(String[] subInputs) {
+        int length = subInputs.length;
+        for (int i = 0; i < length; i++) {
+            String subInput = subInputs[i];
+            if (subInput.charAt(0) == '/') {
+                return i;
+            }
+        }
+        return -1;
+    }
+    
+    private static boolean isUpdatingDescriptionOnly(String input) {
+        if (input.contains(" /by ") || input.contains(" /at ")) {
+            return false;
+        }
+        return true;
+    }
+    
+    private static boolean isUpdatingTimeOnly(String input) {
+        String[] subInputs = input.split(" ");
+        int indexOfBackSlashFieldInArray = getIndexOfBackSlashFieldInArray(subInputs);
+        assert indexOfBackSlashFieldInArray >= 0 : "Invalid index of backslash";
+        
+        if (indexOfBackSlashFieldInArray == 2) {
+            return true;
+        }
+        return false;
+    }
+    
+    private static boolean isUpdatingDescriptionAndTime(String input) {
+        String[] subInputs = input.split(" ");
+        int indexOfBackSlashFieldInArray = getIndexOfBackSlashFieldInArray(subInputs);
+        assert indexOfBackSlashFieldInArray >= 0 : "Invalid index of backslash";
+
+        if (indexOfBackSlashFieldInArray > 2) {
+            return true;
+        }
+        return false;
+    }
+    
+    private static String getTimeOfUpdate(String input) throws InvalidCommandException {
+        String[] subInputs;
+        if (input.contains(" /at ")) {
+            subInputs = input.split(" /at ");
+        } else if (input.contains(" /by ")) {
+            subInputs = input.split(" /by ");
+        } else {
+            throw new InvalidCommandException();
+        }
+
+        return subInputs[1];
+    }
+    
+    private static String getDescriptionOfUpdate(String input) {
+        String[] subInputs;
+        if (input.contains(" /at ")) {
+            subInputs = input.split(" /at ");
+        } else if (input.contains(" /by ")) {
+            subInputs = input.split(" /by ");
+        } else {
+            subInputs = input.split(" /by ");
+        }
+        
+        String inputWithoutTime = subInputs[0];
+        
+        String[] inputWithoutTimeSubInputs = inputWithoutTime.split(" ");
+        
+        String[] descriptionInSplitArray = Arrays.copyOfRange(inputWithoutTimeSubInputs, 2, 
+                inputWithoutTimeSubInputs.length);
+        
+        String description = String.join(" ", descriptionInSplitArray);
+        
+        return description;
+    }
+    
+    private static UpdateTimeCommand parseUpdateTimeOnly(String input, int indexOfTask) throws 
+            InvalidCommandException {
+        String time = getTimeOfUpdate(input);
+        return new UpdateTimeCommand(indexOfTask, time);
+    }
+    
+    private static UpdateDescriptionAndTimeCommand parseUpdateDescriptionAndTime(String input, int indexOfTask) throws 
+            InvalidCommandException {
+        String description = getDescriptionOfUpdate(input);
+        String time = getTimeOfUpdate(input);
+        
+        return new UpdateDescriptionAndTimeCommand(indexOfTask, description, time);
+    }
+    
+    private static UpdateDescriptionCommand parseUpdateDescriptionOnly(String input, int indexOfTask) {
+        String description = getDescriptionOfUpdate(input);
+
+        return new UpdateDescriptionCommand(indexOfTask, description);
     }
 
     private static AddToDoCommand parseToDo(String input) throws EmptyDescriptionException {
@@ -134,7 +217,9 @@ public class Parser {
             throw new EmptyDescriptionException(TaskType.TODO);
         }
         
-        return new AddToDoCommand(input.substring(MIN_LENGTH_TO_DO - 1));
+        String toDoDescription = input.substring(MIN_LENGTH_TO_DO - 1);
+        
+        return new AddToDoCommand(toDoDescription);
     }
 
     private static AddDeadlineCommand parseDeadline(String input) throws EmptyDescriptionException, 
@@ -170,29 +255,5 @@ public class Parser {
         }
         
         return new AddEventCommand(taskDescription, at);
-    }
-    
-    private static int getIndexOfBackSlash(String[] subInputs) {
-        int length = subInputs.length;
-        for (int i = 0; i < length; i++) {
-            String subInput = subInputs[i];
-            if (subInput.charAt(0) == '/') {
-                return i;
-            }
-        }
-        return -1;
-    }
-
-    private static boolean hasBackSlash(String[] subInputs) {
-        int length = subInputs.length;
-        
-        for (int i = 0; i < length; i++) {
-            String subInput = subInputs[i];
-            if (subInput.charAt(0) == '/') {
-                return true;
-            }
-        }
-        
-        return false;
     }
 }
