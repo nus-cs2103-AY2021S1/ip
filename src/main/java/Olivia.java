@@ -11,7 +11,7 @@ import olivia.util.OliviaException;
 
 public class Olivia {
 
-    private static final String FILEPATH = "./src/main/data/olivia.txt";
+    private static final String FILEPATH = "./data/olivia.txt";
 
     private final Parser parser;
     private final Wrapper wrapper;

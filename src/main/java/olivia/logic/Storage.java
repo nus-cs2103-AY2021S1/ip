@@ -54,7 +54,7 @@ public class Storage {
             });
             return list;
         } catch (FileNotFoundException e) {
-            new File("./src/main/data").mkdirs();
+            new File("./data").mkdirs();
             try {
                 new File("./src/main/data/olivia.txt").createNewFile();
             } catch (IOException ioe) {
@@ -63,7 +63,7 @@ public class Storage {
                                 + "Please try again.");
             }
             throw new OliviaException(
-                    "    No save file found in [root]/src/main/data/olivia.txt.\n"
+                    "    No save file found in [root]/data/olivia.txt.\n"
                             + "    A file has been created by default.\n"
                             + "    If you'd like to import one, simply copy the file\n"
                             + "    over to the above location and rerun me!");

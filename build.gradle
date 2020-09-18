@@ -44,11 +44,11 @@ test {
 }
 
 application {
-    mainClassName = "Duke"
+    mainClassName = "Main"
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "olivia"
     archiveClassifier = null
 }
 
