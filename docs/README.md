@@ -9,7 +9,8 @@ This is a chatbot that can help you keep track of your to do list. It's named is
 
 **event** <content> /at <time> This adds an event at the stipulated time
 
-**deadline** <content> /by <time> This adds a deadline by the stipulated time
+**deadline** <content> /by <date and time> This adds a deadline by the stipulated date time. 
+date should be in the format of d/MM/yyyy time is in the format of HH:mm eg: 27/12/2020 16:40
 
 **todo** <content> This adds a todo to the bot
 

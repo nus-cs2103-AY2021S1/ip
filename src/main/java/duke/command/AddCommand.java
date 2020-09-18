@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.exceptions.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -35,7 +36,7 @@ public class AddCommand extends Command {
      * @param ui a UI object which can prints message to console
      */
     @Override
-    public String execute(TaskList tasks, Ui ui) {
+    public String execute(TaskList tasks, Ui ui) throws DukeException {
 
         Task task;
 

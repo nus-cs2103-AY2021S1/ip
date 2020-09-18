@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.exceptions.DukeException;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -16,15 +18,19 @@ public class Deadline extends Task {
     /**
      * Constructor for a Deadline Task.
      */
-    public Deadline(String description, String time) {
+    public Deadline(String description, String time) throws DukeException {
         super(description);
-        this.time = time;
-        String[] parts = time.split(" ");
-        String[] timeParts = parts[1].split(":");
-        int hour = Integer.parseInt(timeParts[0]);
-        int minute = Integer.parseInt(timeParts[1]);
-        date = LocalDate.parse(parts[0], DateTimeFormatter.ofPattern("d/MM/yyyy"));
-        dateTime = date.atTime(hour, minute);
+        try {
+            this.time = time;
+            String[] parts = time.split(" ");
+            String[] timeParts = parts[1].split(":");
+            int hour = Integer.parseInt(timeParts[0]);
+            int minute = Integer.parseInt(timeParts[1]);
+            date = LocalDate.parse(parts[0], DateTimeFormatter.ofPattern("d/MM/yyyy"));
+            dateTime = date.atTime(hour, minute);
+        } catch (Exception e) {
+             throw new DukeException("create deadline object failed");
+        }
     }
 
     /**
