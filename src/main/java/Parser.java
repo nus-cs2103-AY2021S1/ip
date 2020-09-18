@@ -59,6 +59,7 @@ public class Parser {
             break;
         case "bye":
             command = new ExitCommand();
+            break;
 
         default:
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");

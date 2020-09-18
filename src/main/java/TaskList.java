@@ -54,13 +54,8 @@ public class TaskList {
     public void showTaskList(Ui ui){
         String listStrings = "";
         for (int i = 0; i < getSize(); i++) {
-<<<<<<< HEAD
             Integer listNum = i + 1;
             listStrings += listNum.toString() + "." + tasks.get(i).toString() + "\n";
-=======
-            int listNum = i + 1;
-            System.out.println(listNum + "." + tasks.get(i).toString());
->>>>>>> master
         }
         ui.addResponse("Here are the tasks in your list:" + "\n" + listStrings);
     }
@@ -83,13 +78,8 @@ public class TaskList {
 
         ui.addResponse("Here are the matching tasks in your list:\n");
         for(int i = 0; i < keyTasks.size(); i++){
-<<<<<<< HEAD
             Integer listNum = i + 1;
             ui.addResponse(listNum.toString() + "." + keyTasks.get(i).toString());
-=======
-            int listNum = i + 1;
-            System.out.println(listNum + "." + keyTasks.get(i).toString());
->>>>>>> master
         }
     }
 }
