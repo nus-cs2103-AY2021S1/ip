@@ -10,6 +10,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
 /**
@@ -24,11 +26,14 @@ public class MainWindow extends AnchorPane {
     private TextField userInput;
     @FXML
     private Button sendButton;
+    @FXML
+    private Rectangle logoHeader;
 
     private Duke duke;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/User-logo.jpg"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Duke-logo.jpg"));
+    private Image logo = new Image(this.getClass().getResourceAsStream("/images/Header-logo.jpg"));
 
     @FXML
     public void initialize() {
@@ -37,6 +42,7 @@ public class MainWindow extends AnchorPane {
 
     public void setDuke(Duke d) {
         duke = d;
+        logoHeader.setFill(new ImagePattern(logo));
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog("Greetings from Duke, how may I \nbe of assistance to you?", dukeImage)
         );
