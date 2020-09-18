@@ -50,7 +50,7 @@ List all of your tasks that has been saved.
 
 #### Description
 
-Add a new task to your existing list of task. A new task is marked as incomplete (&#2718;) upon creation
+Add a new task to your existing list of task. A new task is marked as incomplete (&#E2;) upon creation
 
 #### Usage
 
