@@ -51,6 +51,7 @@ public class TaskList {
      * @param n Index of the task that is done.
      */
     public static String done(int n) {
+        assert tasks.size() > 0;
         tasks.get(n-1).setDone();
         return ui.done(n, tasks);
     }
@@ -60,6 +61,7 @@ public class TaskList {
      * @param n Index of the task to be deleted.
      */
     public static String delete(int n) {
+        assert tasks.size() > 0;
         String result;
         result = ui.delete(n, tasks);
         tasks.remove(n-1);

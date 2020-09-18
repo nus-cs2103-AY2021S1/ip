@@ -118,6 +118,7 @@ public class Ui {
      * @return command error message.
      */
     public static String showCommandError(DukeException e) {
+        assert e.getType() != null;
         String result = "";
         if (e.getType().equals("EmptyToDo")) {
             result = "OOPS!!! The description of a todo cannot be empty.";
