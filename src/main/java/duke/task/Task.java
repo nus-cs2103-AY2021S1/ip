@@ -28,7 +28,6 @@ public class Task {
     String[] getWords = taskName.split(" ");
     int numberMatches = 0;
     for (String word : getWords) {
-      //            System.out.println("keyword is:" + keyword);
       if (word.equals(keyword)) {
         numberMatches++;
       }
