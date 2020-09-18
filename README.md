@@ -1,26 +1,131 @@
-# Duke project template
+# User Guide
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+## Features 
 
-## Setting up in Intellij
+### 1. Add a task 
+Adds a task to task list. Types of tasks are **Todo, Event** and **Task.**
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+### 2. Delete a task
+Deletes a task from task list.
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project dialog first)
-1. Set up the correct JDK version, as follows:
-   1. Click `Configure` > `Structure for New Projects` and then `Project Settings` > `Project` > `Project SDK`
-   1. If JDK 11 is listed in the drop down, select it. If it is not, click `New...` and select the directory where you installed JDK 11
-   1. Click `OK`
-1. Import the project into Intellij as follows:
-   1. Click `Open or Import`.
-   1. Select the project directory, and click `OK`
-   1. If there are any further prompts, accept the defaults.
-1. After the importing is complete, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()`. If the setup is correct, you should see something like the below:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+### 3. Mark done
+Marks a task as done.
+
+### 4. Find a task
+Finds all tasks containing given keyword.
+
+### 5. Prioritize a task
+Moves a task to the top of task list and label it as **HIGH priority**.
+
+### 6. View all tasks
+Displays all tasks in the task list.
+
+###7. Exit
+Exits the bot.
+
+
+
+## Usage
+
+### `todo <task>` - Add a todo task to task list.
+
+Example of usage: 
+
+`todo wash clothes`
+
+Expected outcome:
+
+`Got it. I've added this task:`  
+ `[T][✘] wash clothes`  
+ `Now you have 1 task in the list.`
+
+### `event <task> /by <YYYY-MM-DD>` - Add a event task to task list.
+
+Example of usage: 
+
+`event meeting /at 2020-09-20`  
+
+Expected outcome:
+
+`Got it. I've added this task:`  
+ `[E][✘] meeting (by: Sep 20 2020)`  
+ `Now you have 2 tasks in the list.`
+
+### `deadline <task> /at <YYYY-MM-DD>` - Add a deadline task to task list.
+
+Example of usage: 
+
+`deadline quiz /by 2020-09-20`
+
+Expected outcome:
+
+`Got it. I've added this task:`  
+ `[D][✘] deadline quiz (by: Sep 20 2020)`  
+ `Now you have 3 task in the list.`
+
+### `delete <task number>` - Delete a task
+
+Example of usage: 
+
+`delete 1`  
+
+Expected outcome:
+
+`Noted. I've removed this task:`  
+ `[T][✘] wash clothes`  
+ `Now you have 2 tasks in the list.`
+
+### `done <task number>` - Mark a task as done.
+
+Example of usage: 
+
+`done 1`  
+
+Expected outcome:
+
+`Nice! I've marked this task as done:`  
+ `[E][✓] meeting (by: Sep 20 2020)`
+
+### `find <keyword>` - Finds all tasks containing given keyword.
+
+Example of usage: 
+
+`find quiz`  
+
+Expected outcome:
+
+`Here are the matching task(s) in your list:`  
+ `1.[D][✘] deadline quiz (by: Sep 20 2020)`
+
+### `prioritize <task number>` - Move a task to the top of task list and label it as **HIGH priority**.
+
+Example of usage: 
+
+`prioritize 1`  
+
+Expected outcome:
+
+`Noted. I've prioritized this task:`  
+ `[D][✘] deadline quiz (by: Sep 20 2020)`
+
+### `list` - Display all tasks in the task list.
+
+Example of usage: 
+
+`list`  
+
+Expected outcome:
+
+`Here are the tasks in your list:`    
+ `1.[D][✘] deadline quiz (by: Sep 20 2020) !!!HIGH priority!!!`  
+ `2.[E][✓] meeting (by: Sep 20 2020)`
+
+### `bye` - Exit the bot.
+
+Example of usage: 
+
+`bye`  
+
+Expected outcome:
+
+`Bye. Hope to see you again soon!`
