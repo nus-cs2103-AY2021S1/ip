@@ -363,3 +363,7 @@ format.
 ![](Display.png)
 
 **All command words are case-insensitive but are presented in uppercase to make them more distinct.*
+
+#### References
+
++ Code-base for JavaFX referenced from the [_JavaFX tutorial_ @SE-EDU/guides](https://se-education.org/guides/tutorials/javaFx.html)
