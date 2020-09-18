@@ -5,7 +5,7 @@ Spongebot Patty Flipper is a JavaFX application used to **managing tasks, optimi
 ## Quick Start
 
 1. Ensure you have Java 11 or above installed in your Computer.
-2. Download the latest spongebot.jar from here.
+2. Download the latest spongebot.jar from this repo's releases.
 3. Copy the file to the folder you want to use as the home folder for your Spongebot Patty Flipper.
 4. Double-click the file to start the app. The GUI should appear in a few seconds.
 5. Commands that can be executed in the command box and other important words are highlighted in `light blue`. e.g. type help and press Enter will open the help window. Some example commands you can try:
