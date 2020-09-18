@@ -31,7 +31,7 @@ public class EventCommand extends Command {
             String description = string.split(" /at ")[0]; // split the stirng by "/at ", take first half
             String time = string.split(" /at ")[1];
             String date = getLocalDate(time);
-            String des = description + " (by: " + date + ")";
+            String des = description + " (at: " + date + ")";
             Task newTask = new Event(des);
             list.getList().add(newTask);
             s = ui.printAddTask(newTask, list.getList().size());

@@ -1,5 +1,5 @@
-[✓] read (by: Sep 21 2020) !!!HIGH priority!!!
+[E][✘] d (by: Sep 21 2020) !!!HIGH priority!!!
 [T][✓] haha
 [D][✓] aaa (by: Sep 20 2020)
 [T][✘] wash clothes
-[E][✘] meeting (by: Sep 20 2020)
+[E][✘] meeting (at: Feb 20 2020)
