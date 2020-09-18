@@ -2,14 +2,13 @@
 Duke is a desktop dog to help you manage tasks in the form of todos, deadlines and events. It is optimised for use via Command Line Interface (CLI). If you can type fast, Duke can help you record your tasks faster than with a traditional GUI.
 
 ## Features 
-[Add a new Todo](#todo)
+[Add a new Todo](#add-a-new-todo-todo)
 ### Viewing help: `help`
 Displays features and the commands needed to use them.
 #### Usage
 Format: `/help`
 * Instructions will be displayed in the following format - GENERAL DESCRIPTION: input needed.
 
-#Todo
 ### Add a new ToDo: `todo`
 Adds a new ToDo task to the list.
 #### Usage
