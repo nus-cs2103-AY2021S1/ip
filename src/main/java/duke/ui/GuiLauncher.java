@@ -9,14 +9,14 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
- * A GUI for Duke using FXML.
+ * A class which launches the GUI for Duke.
  */
-public class Gui {
+public class GuiLauncher {
     public static class App extends Application {
         @Override
         public void start(Stage stage) throws Exception {
             try {
-                FXMLLoader fxmlLoader = new FXMLLoader(Gui.class.getResource("/view/MainWindow.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(GuiLauncher.class.getResource("/view/MainWindow.fxml"));
                 AnchorPane ap = fxmlLoader.load();
                 Scene scene = new Scene(ap);
                 stage.setScene(scene);
@@ -31,7 +31,7 @@ public class Gui {
     /**
      * Launches the JavaFX application.
      */
-    public Gui() {
+    public GuiLauncher() {
         Application.launch(App.class);
     }
 }

@@ -46,7 +46,7 @@ public class MainWindow extends AnchorPane implements Ui {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        new Duke(this); // TODO: think of a nicer way to do this
+        new Duke(this);
     }
 
     /**

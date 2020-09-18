@@ -2,20 +2,44 @@ package duke.ui;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
+import java.util.function.Consumer;
 
-// TODO: make this class implement Ui so that Duke can be launched in either GUI or CLI mode
+import duke.Duke;
+
 /**
- * This class is responsible for displaying Duke's responses on the screen.
+ * A command line user interface for Duke.
  */
-public class Cli {
+public class Cli implements Ui {
+    private Consumer<String> inputHandler;
+    private boolean shouldStop;
 
     /**
-     * Prints the given string to the console as a response from Duke, wrapping lines that exceed 68 characters in
-     * length.
-     *
-     * @param string the string to print.
+     * Creates a new Cli.
      */
-    public void say(String string) {
+    public Cli() {
+        inputHandler = (String input) -> {};
+        shouldStop = false;
+        new Duke(this);
+        run();
+    }
+
+    private void run() {
+        Scanner scanner = new Scanner(System.in);
+        while (!shouldStop) {
+            String input = scanner.nextLine();
+            inputHandler.accept(input);
+        }
+        scanner.close();
+    }
+
+    @Override
+    public void setInputHandler(Consumer<String> function) {
+        inputHandler = function;
+    }
+
+    @Override
+    public void say(String string, boolean isError) {
         final String indent = "  ";
         final int lineLength = 68;
         final String separator = indent + "_".repeat(lineLength);
@@ -28,6 +52,11 @@ public class Cli {
         System.out.println();
     }
 
+    @Override
+    public void stop() {
+        shouldStop = true;
+    }
+
     /**
      * Splits a string into lines with at most lineLength number of characters. This method does not account for
      * characters of differing widths (eg. tab character, or if non-monospace fonts are used).
@@ -36,8 +65,7 @@ public class Cli {
      * @param lineLength the maximum number of characters per line.
      * @return a list of strings where each string corresponds to 1 line.
      */
-    List<String> splitIntoLines(String string, int lineLength) {
-        // TODO: should this method be private instead?
+    static List<String> splitIntoLines(String string, int lineLength) {
         List<String> list = new ArrayList<>();
         String[] lines = string.split("\n");
         StringBuilder sb;

@@ -126,7 +126,7 @@ public class Parser {
             return new EditCommand<>(taskNumber, new DescriptionEdit(content));
         }
 
-        throw new DukeParsingException("You need to tell me what you want to edit!"); // TODO better help message
+        throw new DukeParsingException("You need to tell me what you want to edit!");
     }
 
     static Event parseEvent(String args) throws DukeParsingException {

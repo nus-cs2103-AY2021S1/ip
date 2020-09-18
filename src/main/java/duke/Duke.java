@@ -16,14 +16,6 @@ public class Duke {
      */
     public Duke(Ui ui) {
         TaskList taskList = new TaskListStorage("data/tasks.txt").load(ui);
-        // TODO: currently broken due to non-monospace font
-        // String logo =
-        //     " ____        _        \n"
-        //         + "|  _ \\ _   _| | _____ \n"
-        //         + "| | | | | | | |/ / _ \\\n"
-        //         + "| |_| | |_| |   <  __/\n"
-        //         + "|____/ \\__,_|_|\\_\\___|\n";
-        // sayLine(logo);
         ui.say("Hello, I'm Duke. What can I do for you?");
         ui.setInputHandler((String input) -> {
             Parser.parse(input).execute(ui, taskList);
