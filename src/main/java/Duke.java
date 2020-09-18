@@ -1,6 +1,3 @@
-/**
- * Main class
- */
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -23,12 +20,11 @@ public class Duke extends Application{
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/Duke.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/User.png"));
+    private final Image user = new Image(this.getClass().getResourceAsStream("/images/Duke.png"));
+    private final Image duke = new Image(this.getClass().getResourceAsStream("/images/User.png"));
 
     /**
      * Duke constructor
-     * @param filePath the file for storage of tasks
      */
     public Duke() {
         ui = new Ui();
@@ -36,6 +32,9 @@ public class Duke extends Application{
         inputTasks = new TaskList(storage.readFile("./data/duke.txt"));
     }
 
+    /**
+     * Start the stage
+     */
     @Override
     public void start(Stage stage) {
 
@@ -104,7 +103,7 @@ public class Duke extends Application{
 
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
         dialogContainer.getChildren().add(
-                DialogBox.getDukeDialog(ui.showWelcome(), duke));
+                DialogBox.getDukeDialog(Ui.showWelcome(), duke));
     }
 
     private Label getDialogLabel(String text) {

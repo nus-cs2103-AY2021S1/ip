@@ -18,6 +18,7 @@ public class DeleteCommand extends Command{
      * @param storage the storage used
      */
     public void execute(TaskList inputTasks, Storage storage, Ui ui){
+        assert taskIndex > 0;
         inputTasks.deleteTask(taskIndex, ui);
         storage.writeToFile(inputTasks);
     }

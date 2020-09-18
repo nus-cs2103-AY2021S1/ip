@@ -18,7 +18,8 @@ public class DoneCommand extends Command{
      * @param inputTasks the list of tasks used
      * @param storage the storage used
      */
-    public void execute(TaskList inputTasks, Storage storage, Ui ui) throws DukeException{
+    public void execute(TaskList inputTasks, Storage storage, Ui ui){
+        assert taskIndex > 0;
         inputTasks.doneTask(taskIndex, ui);
         storage.writeToFile(inputTasks);
     }

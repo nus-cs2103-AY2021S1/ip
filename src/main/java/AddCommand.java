@@ -17,8 +17,10 @@ public class AddCommand extends Command{
      * Execute the command
      * @param inputTasks the list of tasks used
      * @param storage the storage used
+     * @param the ui of the app
      */
     public void execute(TaskList inputTasks, Storage storage, Ui ui){
+        assert task != null;
         inputTasks.addTask(this.task, ui);
         storage.writeToFile(inputTasks);
     }

@@ -16,8 +16,10 @@ public class FindCommand extends Command{
      * Execute the command
      * @param inputTasks the list of tasks used
      * @param storage the storage used
+     * @param ui the ui of the app
      */
-    public void execute(TaskList inputTasks, Storage storage, Ui ui) throws DukeException{
+    public void execute(TaskList inputTasks, Storage storage, Ui ui){
+        assert keyword != null;
         inputTasks.findKeyword(keyword, ui);
     }
 }

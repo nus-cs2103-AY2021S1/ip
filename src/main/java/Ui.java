@@ -2,17 +2,20 @@
  * interactions between user and duke
  */
 public class Ui {
-    private static String logo = " ____        _        \n"
+    private static final String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
     private String reply;
 
-
+    /**
+     * Ui constructor
+     */
     public Ui(){
         reply = "";
     }
+
     /**
      * shows hello message
      */
@@ -20,6 +23,10 @@ public class Ui {
         return "Hello from\n" + logo + "Hello! I'm Duke" + "\n" + "What can I do for you?";
     }
 
+    /**
+     * Update reply
+     * @param message the message that duke replies
+     */
     public void addResponse(String message){
         reply = (message + "\n");
     }

@@ -21,6 +21,7 @@ public class TaskList {
     /**
      * add a task in list
      * @param task the task to be added
+     * @param ui the ui to show reply
      */
     public void addTask(Task task, Ui ui){
         tasks.add(task);
@@ -31,6 +32,7 @@ public class TaskList {
     /**
      * delete a task in list
      * @param taskIndex index of task to be deleted
+     * @param ui the ui to show reply
      */
     public void deleteTask(int taskIndex, Ui ui){
         Task deleted = tasks.get(taskIndex - 1);
@@ -42,6 +44,7 @@ public class TaskList {
     /**
      * done a task in list
      * @param taskIndex index of task to be done
+     * @param ui the ui to show reply
      */
     public void doneTask(int taskIndex, Ui ui){
         tasks.get(taskIndex - 1).markAsDone();
@@ -63,6 +66,7 @@ public class TaskList {
     /**
      * find tasks matching a particular keyword
      * @param keyword the keyword to be found
+     * @param ui the ui to show reply
      */
     public void findKeyword(String keyword, Ui ui){
         ArrayList<Task> keyTasks = new ArrayList<>();
