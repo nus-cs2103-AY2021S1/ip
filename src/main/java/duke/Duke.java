@@ -57,7 +57,7 @@ public class Duke {
             return output;
         case "done":
             if (inputArray.length == 2) {
-                output += ui.doneTask(taskList.done(Integer.parseInt(inputArray[1])));
+                output += ui.doneTask(taskList.done(inputArray[1]));
                 output += ui.listCount(taskList.countList());
                 storage.saveFile(taskList.getTasks());
                 return output;

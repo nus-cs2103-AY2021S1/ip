@@ -68,9 +68,13 @@ public class Task {
      * completedTask method which marks the task as completed
      * @return the completed task
      */
-    public Task completeTask() {
-        isDone = true;
-        return this;
+    public Task completeTask() throws DukeException {
+        if (isDone) {
+            throw new DukeException("Task is already completed!");
+        } else {
+            isDone = true;
+            return this;
+        }
     }
 
     /**

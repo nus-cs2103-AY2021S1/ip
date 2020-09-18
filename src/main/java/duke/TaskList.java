@@ -100,7 +100,7 @@ public class TaskList {
                 return temp;
             }
         } catch (NumberFormatException e) {
-            throw new DukeException("Please key in a number");
+            throw new DukeException("Please key in an index!");
         } catch (IndexOutOfBoundsException r) {
             throw new DukeException("The task does not exist");
         }
@@ -108,11 +108,18 @@ public class TaskList {
 
     /**
      * done method which sets a task as done
-     * @param num the integer of the task which the user wants to set as done
+     * @param numString the integer of the task which the user wants to set as done
      * @return returns the completed task
      */
-    public Task done(int num) {
-        return tasks.set(num - 1, tasks.get(num - 1).completeTask());
+    public Task done(String numString) throws DukeException {
+        try {
+            int num = Integer.parseInt(numString);
+            return tasks.set(num - 1, tasks.get(num - 1).completeTask());
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("The task does not exist!");
+        } catch (NumberFormatException e) {
+            throw new DukeException("Please key in an index!");
+        }
     }
 
     /**
