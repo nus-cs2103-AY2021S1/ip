@@ -22,4 +22,9 @@ public class Todo extends Task {
     @Override public String toString() {
         return "[T] " + this.getStatus().statusToSymbol() + this.getName();
     }
+
+    @Override
+    public String toStore() {
+        return this.toString();
+    }
 }

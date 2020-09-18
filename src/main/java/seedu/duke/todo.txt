@@ -1,2 +1,4 @@
 [T] [✘] sleeppp
 [T] [✘] sleep
+[T] [✘] study /from 2020-09-23 /by 2020-09-24
+[T] [✘] study
