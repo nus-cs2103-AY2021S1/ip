@@ -55,6 +55,12 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Returns a formatted DialogBox that is used to show user text
+     *
+     * @param text input text from the user
+     * @param img image of the user
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         DialogBox userDialog = new DialogBox(text, img);
         Background dialogBackground = new Background(
@@ -66,6 +72,12 @@ public class DialogBox extends HBox {
         return userDialog;
     }
 
+    /**
+     * Returns a formatted DialogBox that is used to show text returned from Cartona
+     *
+     * @param text text from the program to be displayed
+     * @param img image of Cartona
+     */
     public static DialogBox getCartonaDialog(String text, Image img) {
         var cartonaDialog = new DialogBox(text, img);
         cartonaDialog.flip();

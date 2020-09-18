@@ -1,6 +1,6 @@
 package cartona.command;
 
-import cartona.DateParser;
+import cartona.task.DateParser;
 
 import cartona.exception.EmptyTaskDescriptionException;
 import cartona.exception.InvalidInputException;

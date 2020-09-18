@@ -5,6 +5,12 @@ import cartona.exception.CartonaException;
 import cartona.task.TaskList;
 import cartona.ui.Ui;
 
+/**
+ * The FindCommand class, when executed, runs the steps required to find the list of tasks within the taskList that
+ * contain the search keyword.
+ *
+ * @author Jaya Rengam
+ */
 public class FindTaskCommand implements Command {
     private boolean isDone;
 
@@ -13,8 +19,6 @@ public class FindTaskCommand implements Command {
 
     FindTaskCommand(String searchKeyword) {
         this.isDone = false;
-
-
         this.searchKeyword = searchKeyword;
     }
 

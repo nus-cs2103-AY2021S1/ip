@@ -10,10 +10,6 @@ import cartona.task.TaskList;
  */
 public class Ui {
 
-    public Ui() {
-
-    }
-
     /**
      * Returns the given error message to the console.
      * @param errorMessage

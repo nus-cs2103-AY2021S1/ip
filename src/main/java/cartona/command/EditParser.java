@@ -1,6 +1,6 @@
 package cartona.command;
 
-import cartona.DateParser;
+import cartona.task.DateParser;
 import cartona.exception.CartonaException;
 import cartona.exception.InvalidEditFieldException;
 import cartona.exception.InvalidTaskTimeException;
@@ -11,8 +11,6 @@ import cartona.task.Task;
 import cartona.task.TaskDate;
 import cartona.task.TaskList;
 import cartona.task.Todo;
-
-import java.time.LocalDate;
 
 public class EditParser {
 
