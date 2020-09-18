@@ -29,7 +29,6 @@ public class Duke {
         try {
             tasks = new TaskList(storage.load());
         } catch (IOException | DateException e) {
-//            ui.printMessage(e.getMessage());
             e.printStackTrace();
             tasks = new TaskList();
         }

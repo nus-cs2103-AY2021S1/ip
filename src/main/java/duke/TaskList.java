@@ -1,6 +1,9 @@
 package duke;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.List;
 
 import duke.task.Deadline;
 import duke.task.Event;
@@ -145,7 +148,7 @@ public class TaskList {
      */
     public List<Task> getTasksWithWord(String keyword) {
         assert taskList != null;
-        assert ! keyword.isBlank();
+        assert !keyword.isBlank();
         List<Task> result = new ArrayList<>();
         for (Task task : taskList) {
             if (task.getName().contains(keyword)) {

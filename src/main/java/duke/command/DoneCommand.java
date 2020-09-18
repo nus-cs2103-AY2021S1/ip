@@ -2,9 +2,9 @@ package duke.command;
 
 import java.io.IOException;
 
-import duke.Ui;
 import duke.Storage;
 import duke.TaskList;
+import duke.Ui;
 import duke.task.Task;
 
 /**
@@ -45,7 +45,6 @@ public class DoneCommand extends Command {
             storage.saveData(taskList);
             return ui.completeSuccess(task);
         } catch (IOException e) {
-//            ui.printMessage(e.getMessage());
             return e.getMessage();
         }
     }

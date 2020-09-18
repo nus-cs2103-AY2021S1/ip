@@ -65,7 +65,8 @@ public class Parser {
         }
     }
 
-    private static String[] getSplitDescription(String[] commandArr, String splitBy, String message) throws MissingInformationException {
+    private static String[] getSplitDescription(String[] commandArr, String splitBy, String message) throws
+            MissingInformationException {
         String[] descriptionArr = commandArr[1].split(splitBy, 2);
         if (descriptionArr.length < 2 || descriptionArr[1].isBlank()) {
             throw new MissingInformationException(message);

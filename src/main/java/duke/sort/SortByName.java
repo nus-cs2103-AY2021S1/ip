@@ -1,8 +1,8 @@
 package duke.sort;
 
-import duke.task.Task;
-
 import java.util.Comparator;
+
+import duke.task.Task;
 
 public class SortByName implements Comparator<Task> {
     @Override

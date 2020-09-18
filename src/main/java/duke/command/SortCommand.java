@@ -1,13 +1,13 @@
 package duke.command;
 
+import java.io.IOException;
+
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 import duke.sort.SortBy;
 import duke.sort.SortByDate;
 import duke.sort.SortByName;
-
-import java.io.IOException;
 
 /**
  * Represents a command to sort the tasks the user has.

@@ -1,9 +1,9 @@
 package duke.sort;
 
+import java.util.Comparator;
+
 import duke.task.Task;
 import duke.task.TaskType;
-
-import java.util.Comparator;
 
 public class SortByDate implements Comparator<Task> {
     @Override

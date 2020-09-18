@@ -3,9 +3,9 @@ package duke.command;
 import java.io.IOException;
 import java.util.Date;
 
-import duke.Ui;
 import duke.Storage;
 import duke.TaskList;
+import duke.Ui;
 import duke.task.Task;
 import duke.task.TaskType;
 
@@ -70,7 +70,6 @@ public class AddCommand extends Command {
             return ui.addSuccess(task, taskList.getCount());
 
         } catch (IOException e) {
-//            ui.printMessage(e.getMessage());
             return e.getMessage();
         }
     }

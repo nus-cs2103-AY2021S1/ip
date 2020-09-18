@@ -1,8 +1,8 @@
 package duke.command;
 
-import duke.Ui;
 import duke.Storage;
 import duke.TaskList;
+import duke.Ui;
 
 /**
  * Represents the command when user exits the program.
