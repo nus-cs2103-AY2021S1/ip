@@ -1,11 +1,13 @@
 package duke.command;
 
-import duke.command.Command;
 import duke.task.Todo;
 import duke.task.TaskList;
 import duke.Ui;
 import duke.Storage;
 
+/**
+ * Command for adding a new <code>Todo</code> task to a <code>TaskList</code>.
+ */
 public class TodoCommand extends Command {
     String desc;
 

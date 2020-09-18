@@ -1,10 +1,12 @@
 package duke.command;
 
-import duke.command.Command;
 import duke.task.TaskList;
 import duke.Ui;
 import duke.Storage;
 
+/**
+ * Command for listing all tasks in a <code>TaskList</code>.
+ */
 public class ListCommand extends Command {
     public ListCommand() {}
 

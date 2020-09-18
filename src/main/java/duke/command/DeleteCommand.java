@@ -1,11 +1,13 @@
 package duke.command;
 
-import duke.command.Command;
 import duke.task.TaskList;
 import duke.dukeexception.InvalidInputException;
 import duke.Ui;
 import duke.Storage;
 
+/**
+ * Command for deleting a specified <code>Task</code> from the <code>taskList</code>
+ */
 public class DeleteCommand extends Command {
     int taskNumber;
 

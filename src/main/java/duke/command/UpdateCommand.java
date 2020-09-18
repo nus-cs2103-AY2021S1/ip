@@ -6,6 +6,9 @@ import duke.dukeexception.InvalidInputException;
 import duke.Ui;
 import duke.Storage;
 
+/**
+ * Command for updating the description of a specified task in a <code>TaskList</code>.
+ */
 public class UpdateCommand extends Command {
     int taskNumber;
     String newTaskDesc;

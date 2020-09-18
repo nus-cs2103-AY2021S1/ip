@@ -4,8 +4,8 @@ import duke.Main;
 import javafx.application.Application;
 
 /**
- * Serves as an entry point into our application.
  * A launcher class to work around classpath issues.
+ * Serves as an entry point into our JavaFX application.
  */
 public class Launcher {
     public static void main(String[] args) {

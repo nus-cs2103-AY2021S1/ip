@@ -1,6 +1,5 @@
 package duke.command;
 
-import duke.command.Command;
 import duke.task.Deadline;
 import duke.task.TaskList;
 import duke.Ui;
@@ -8,6 +7,9 @@ import duke.Storage;
 
 import java.time.LocalDate;
 
+/**
+ * Command for adding a new <code>Deadline</code> task to a <code>TaskList</code>.
+ */
 public class DeadlineCommand extends Command {
     String desc;
     LocalDate by;

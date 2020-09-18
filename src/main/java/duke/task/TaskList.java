@@ -1,35 +1,46 @@
 package duke.task;
 
-import duke.task.Task;
-
 import java.util.ArrayList;
 
+/**
+ * Contains Duke's list of tasks and operations for adding, deleting, updating,
+ * finding, and marking as done tasks in the list.
+ */
 public class TaskList {
+    /**
+     * List of <code>Task</code>s
+     */
     private ArrayList<Task> taskList = new ArrayList<Task>();
 
+    /**
+     * Default constructor
+     */
     public TaskList() {}
 
-    /** Adds a given duke.task to the taskList.
+    /**
+     * Adds a given <code>Task</code> to the <code>taskList</code>.
      *
-     * @param t duke.task to be added.
+     * @param t task to be added
      */
     public void addTask(Task t) {
         taskList.add(t);
     }
 
-    /** Deletes a specified duke.task from the taskList.
+    /**
+     * Deletes a specified task from the <code>taskList</code>.
      *
-     * @param taskNumber index of the duke.task to be deleted in taskList.
+     * @param taskNumber index of the task to be deleted in <code>taskList</code>
      */
     public void deleteTask(int taskNumber) {
         taskList.remove(taskNumber);
     }
 
-    /** Updates a specified duke.task to a new description.
+    /**
+     * Updates the description of a specified task.
      *
-     * @param taskNumber index of the duke.task to be updated in taskList.
-     * @param newTaskDesc new description to update the duke.task with.
-     * @return the edited duke.task.
+     * @param taskNumber  index of the task to be updated in <code>taskList</code>
+     * @param newTaskDesc new description to update the task to
+     * @return            the edited task
      */
     public Task updateTaskDesc(int taskNumber, String newTaskDesc) {
         Task taskToBeEdited = taskList.get(taskNumber);
@@ -37,18 +48,22 @@ public class TaskList {
         return taskToBeEdited;
     }
 
+    /**
+     * Marks a specified task as done by calling the <code>Task</code> method <code>markAsDone</code>.
+     *
+     * @param taskNumber  index of the task to be updated in <code>taskList</code>
+     */
     public void markAsDone(int taskNumber) {
         taskList.get(taskNumber).markAsDone();
     }
 
-    public int getSize() {
-        return taskList.size();
-    }
-
-    public Task getTask(int i) {
-        return taskList.get(i);
-    }
-
+    /**
+     * Searches for all tasks whose description contains a specified keyword,
+     * and returns a <code>TaskList</code> of all those tasks.
+     *
+     * @param keyword  the String used to search for tasks
+     * @return         a list of tasks with descriptions containing <code>keyword</code>
+     */
     public TaskList find(String keyword) {
         TaskList foundTasks = new TaskList(); // to be returned
 
@@ -65,5 +80,13 @@ public class TaskList {
         }
 
         return foundTasks;
+    }
+
+    public int getSize() {
+        return taskList.size();
+    }
+
+    public Task getTask(int i) {
+        return taskList.get(i);
     }
 }

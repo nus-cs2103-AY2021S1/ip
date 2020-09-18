@@ -13,10 +13,6 @@ public class Event extends Task {
         this.at = at;
     }
 
-//    public void editDate(LocalDate newAt) {
-//        this.at = newAt;
-//    }
-
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + at.getDayOfWeek() + ", "

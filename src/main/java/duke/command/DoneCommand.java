@@ -6,6 +6,9 @@ import duke.dukeexception.InvalidInputException;
 import duke.Ui;
 import duke.Storage;
 
+/**
+ * Command for marking a specified <code>Task</code> as done.
+ */
 public class DoneCommand extends Command {
     int taskNumber;
 

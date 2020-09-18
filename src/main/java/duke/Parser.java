@@ -1,16 +1,15 @@
 package duke;
 
-import duke.Ui;
-import duke.command.FindCommand;
 import duke.command.Command;
-import duke.command.ListCommand;
-import duke.command.DoneCommand;
-import duke.command.TodoCommand;
-import duke.command.EventCommand;
 import duke.command.DeadlineCommand;
 import duke.command.DeleteCommand;
-import duke.command.UpdateCommand;
+import duke.command.DoneCommand;
+import duke.command.EventCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
 import duke.command.TerminationCommand;
+import duke.command.TodoCommand;
+import duke.command.UpdateCommand;
 import duke.dukeexception.InvalidInputException;
 import duke.dukeexception.InvalidTaskException;
 
@@ -21,50 +20,79 @@ import java.util.Set;
 
 import static java.lang.Integer.parseInt;
 
+/**
+ * Makes sense of user input and parses it into appropriate <code>Command</code>s.
+ *
+ * @author Hui Ling
+ */
 public class Parser {
-    static final String COMMAND_LIST = "list";
-    static final String COMMAND_DONE = "done";
-    static final String COMMAND_TODO = "todo";
-    static final String COMMAND_DEADLINE = "deadline";
-    static final String COMMAND_EVENT = "event";
-    static final String COMMAND_DELETE = "delete";
-    static final String COMMAND_UPDATE = "update";
-    static final String COMMAND_FIND = "find";
-    static final Set<String> terminationCommands = new HashSet<String>(
+    /**
+     * String constants for accepted commands
+     */
+    private static final String COMMAND_LIST = "list";
+    private static final String COMMAND_DONE = "done";
+    private static final String COMMAND_TODO = "todo";
+    private static final String COMMAND_DEADLINE = "deadline";
+    private static final String COMMAND_EVENT = "event";
+    private static final String COMMAND_DELETE = "delete";
+    private static final String COMMAND_UPDATE = "update";
+    private static final String COMMAND_FIND = "find";
+    private static final Set<String> COMMANDS_TERMINATION = new HashSet<String>(
             Arrays.asList("bye", "toodles", "farewell", "sayonara"));
-    static final Set<String> nonTerminationCommands = new HashSet<String>(
+    private static final Set<String> COMMANDS_NON_TERMINATION = new HashSet<String>(
             Arrays.asList(COMMAND_LIST, COMMAND_DONE, COMMAND_TODO, COMMAND_DEADLINE,
                     COMMAND_EVENT, COMMAND_DELETE, COMMAND_UPDATE, COMMAND_FIND));
 
-    public Parser() {}
+    /**
+     * Sole constructor.
+     */
+    protected Parser() {}
 
-    private static String getCommandType(String fullCommand) {
-        return fullCommand.contains(" ")
-                ? fullCommand.split(" ")[0]
-                : fullCommand;  // list
+    /**
+     * Returns the command type of a user input string by taking the first word.
+     *
+     * @param userInput  entire user input string as-is
+     * @return a String that indicates command type
+     */
+    private static String getCommandType(String userInput) {
+        return userInput.contains(" ")
+                ? userInput.split(" ")[0]
+                : userInput;  // for "list"
     }
 
-    public static Command parse(String fullCommand) throws InvalidTaskException, InvalidInputException {
-        fullCommand = fullCommand.trim();
-        String commandType = getCommandType(fullCommand);
+    /**
+     * Parses user input string and returns a <code>Command</code> of type corresponding to
+     * the first word of the input string. Also separates all relevant fields like
+     * task description, task number and date (if any) in the input string,
+     * to put them into the constructor of the <code>Command</code>.
+     *
+     * @param userInput  entire user input string as-is
+     * @return a <code>Command</code> of a certain type
+     * @throws InvalidTaskException  if command type is not recognised
+     * @throws InvalidInputException if user input does not have the required fields for its command type
+     * @see Command
+     */
+    protected static Command parse(String userInput) throws InvalidTaskException, InvalidInputException {
+        userInput = userInput.trim();
+        String commandType = getCommandType(userInput);
 
         if (commandType.equals(COMMAND_LIST)) {
             // list is the only duke.command that takes only one word and nothing after a space
             return new ListCommand();
         }
-        if (terminationCommands.contains(commandType)) {
+        if (COMMANDS_TERMINATION.contains(commandType)) {
             return new TerminationCommand();
         }
-        if (!nonTerminationCommands.contains(commandType)) {
+        if (!COMMANDS_NON_TERMINATION.contains(commandType)) {
             throw new InvalidTaskException();
         }
 
         // valid duke.command that is not list
-        if (!fullCommand.contains(" ")) {
+        if (!userInput.contains(" ")) {
             throw new InvalidInputException("Did you put your task info after a space?");
         }
         // take the part of the duke.command without commandType
-        String info = fullCommand.split(" ", 2)[1];
+        String info = userInput.split(" ", 2)[1];
 
         switch (commandType) {
         case COMMAND_DONE:
@@ -85,8 +113,8 @@ public class Parser {
                 String[] descAndDate = info.split(" /at ");
                 return new EventCommand(descAndDate[0], LocalDate.parse(descAndDate[1]));
             } catch (Exception e) {
-                throw new InvalidInputException("Format for dates is yyyy-mm-dd. " +
-                        "Also, did you put a task before and date after ' /at '?");
+                throw new InvalidInputException("Format for dates is yyyy-mm-dd. "
+                        + "Also, did you put a task before and date after ' /at '?");
             }
         case COMMAND_DEADLINE:
             try {

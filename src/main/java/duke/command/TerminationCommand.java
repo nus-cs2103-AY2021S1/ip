@@ -8,6 +8,10 @@ import duke.Storage;
 
 import java.io.IOException;
 
+/**
+ * Command for terminating or stopping the app,
+ * which includes saving the current taskList to data file.
+ */
 public class TerminationCommand extends Command {
     public TerminationCommand() {}
 
