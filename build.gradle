@@ -4,6 +4,11 @@ plugins {
     id 'checkstyle'
     id "com.github.johnrengelman.shadow" version "6.0.0"
 }
+applicationDefaultJvmArgs = ["-Dfile.encoding=utf-8"]
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
 
 repositories {
     mavenCentral()
