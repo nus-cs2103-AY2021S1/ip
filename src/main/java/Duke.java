@@ -2,6 +2,7 @@ import java.io.*;
 import java.nio.file.Path;
 
 public class Duke {
+    // some comment change here to test stuff
     public static void main(String[] args) throws IOException {
         try {
             String home = System.getProperty("user.home");
