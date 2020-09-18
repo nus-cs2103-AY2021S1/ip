@@ -1,3 +1,5 @@
+// Credit: Chan Jun Da
+
 import olivia.ui.DialogBox;
 import javafx.application.Application;
 import javafx.scene.Scene;
