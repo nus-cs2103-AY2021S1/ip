@@ -27,9 +27,7 @@ the different software engineering principle along the way.
    * [2.9 Find a certain task: find](#29-find-a-certain-task-find)
    * [2.10 Ending a session : bye](#210-ending-a-session--bye)
 * [3. Code Summary](#3-code-summary)
- 
-   
-
+* [4. Useful Resources](#4-useful-resources)
 
 ## 1. Quick Start
 
@@ -336,3 +334,13 @@ Index | Command to Use | Format, examples |
 8 | Delete the task | `delete [task index]`, e.g, `delete 3` |
 9 | Find a certain task | `find [taskName]`, e.g., `find ip` |
 10 | Ending a session | `bye`, e.g., `bye` |
+
+
+## 4. Useful Resources
+
+1. [CheckStyle Tutorial](https://se-education.org/guides/tutorials/checkstyle.html)
+2. [Text UI Testing Tutorial](https://se-education.org/guides/tutorials/textUiTesting.html)
+3. [Working with Jar files Tutorial](https://se-education.org/guides/tutorials/jar.html)
+4. [Gradle Tutorial](https://se-education.org/guides/tutorials/gradle.html)
+5. [JavaFX Tutorial](https://se-education.org/guides/tutorials/javaFx.html)
+
