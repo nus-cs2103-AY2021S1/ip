@@ -7,15 +7,18 @@ import duke.TaskList;
 import task.Task;
 
 public class Ui {
-    Scanner sc = new Scanner(System.in);
+    private Scanner sc = new Scanner(System.in);
 
     public String getUserInput() {
         return sc.nextLine();
     }
 
-    public String displayResult(Result result) {
+    /**
+     * Displays result message to users.
+     * @param result result from executing command
+     */
+    public void displayResult(Result result) {
         System.out.println(result.toString());
-        return result.toString();
     }
 
     /**
@@ -123,7 +126,7 @@ public class Ui {
         if (listOfTask.isBlank()) {
             return "There is no task due on " + date + " User.\n";
         } else {
-            return "Here are the task due on " + date+ " :\n" + listOfTask;
+            return "Here are the task due on " + date + " :\n" + listOfTask;
         }
     }
 

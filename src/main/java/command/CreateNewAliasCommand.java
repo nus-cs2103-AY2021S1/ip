@@ -13,7 +13,7 @@ import ui.Ui;
  *
  * @author Ryan Lim
  */
-public class CreateNewAliasCommand extends Command{
+public class CreateNewAliasCommand extends Command {
 
     public CreateNewAliasCommand(String ...parameters) {
         super(parameters);
@@ -25,10 +25,10 @@ public class CreateNewAliasCommand extends Command{
             String mapping = parser.createNewAlias(this.parameters);
             aliasStorage.save(parser);
             return new Result(ui.newMappingMessage(mapping), executedSuccessfully);
-        } catch (ArrayIndexOutOfBoundsException e){
+        } catch (ArrayIndexOutOfBoundsException e) {
             return new Result(ui.inCompleteAliasCommandMessage(), executedSuccessfully);
         } catch (DukeExceptions.AliasAlreadyExistException e) {
-            return  new Result(ui.aliasAlreadyExistMessage(e.getMessage()), executedUnsuccessfully);
+            return new Result(ui.aliasAlreadyExistMessage(e.getMessage()), executedUnsuccessfully);
         } catch (IOException e) {
             return new Result(ui.fileIssueMessage(), executedUnsuccessfully);
         }

@@ -79,7 +79,7 @@ public class Parser {
         String alias = parameters[0].toLowerCase();
         String command = parameters[1].toLowerCase();
         if (aliasDoesNotExist(alias)) {
-            this.aliasToCommandMap.put(alias,command);
+            this.aliasToCommandMap.put(alias, command);
             return alias + " -> " + command;
         } else {
             throw new DukeExceptions.AliasAlreadyExistException(alias);
@@ -114,7 +114,7 @@ public class Parser {
         return command == null ? alias : command;
     }
 
-     public HashMap<String, String> getAliasToCommandMap() {
+    public HashMap<String, String> getAliasToCommandMap() {
         return this.aliasToCommandMap;
     }
 

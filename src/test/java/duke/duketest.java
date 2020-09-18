@@ -49,14 +49,14 @@ public class duketest {
         assertFalse(result.isSuccessful());
     }
 
-    @Test
-    public void testCommands4(){
-        Duke testDuke = new Duke();
-        String userInput = "alias li list";
-        Command command = testDuke.getCommand(userInput);
-        Result result = testDuke.executeCommand(command);
-        assertTrue(result.isSuccessful());
-    }
+    //    @Test
+    //    public void testCommands4(){
+    //        Duke testDuke = new Duke();
+    //        String userInput = "alias li list";
+    //        Command command = testDuke.getCommand(userInput);
+    //        Result result = testDuke.executeCommand(command);
+    //        assertTrue(result.isSuccessful());
+    //    }
 
 
 

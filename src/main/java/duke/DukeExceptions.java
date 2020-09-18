@@ -31,7 +31,7 @@ public class DukeExceptions {
     /**
      * Exception for scenario where alias to delete does not exist.
      */
-    public static class AliasDoesNotExistException extends  Exception {
+    public static class AliasDoesNotExistException extends Exception {
         public AliasDoesNotExistException(String message) {
             super(message);
         }

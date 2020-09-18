@@ -4,13 +4,10 @@ import java.io.IOException;
 
 import duke.Duke;
 import javafx.application.Application;
-import javafx.application.Platform;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 
 /**
  * A GUI for Duke using FXML.

@@ -13,7 +13,7 @@ import ui.Ui;
 /**
  * Command to create deadline task.
  *
- * @Author Ryan Lim
+ * @author Ryan Lim
  */
 public class CreateDeadLineTaskCommand extends Command {
 

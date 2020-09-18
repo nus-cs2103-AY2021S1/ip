@@ -29,7 +29,7 @@ public class MarkTaskDoneCommand extends Command {
             return new Result(message, executedUnsuccessfully);
         } catch (NumberFormatException e) {
             return new Result(ui.noIndexGivenMessage(), executedUnsuccessfully);
-        } catch(DukeExceptions.TaskIsDoneException e) {
+        } catch (DukeExceptions.TaskIsDoneException e) {
             return new Result(ui.taskAlreadyDoneMessage(), executedUnsuccessfully);
         }
     }
