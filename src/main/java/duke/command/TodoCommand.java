@@ -1,10 +1,10 @@
-package main.java.duke.command;
+package duke.command;
 
-import main.java.duke.command.Command;
-import main.java.duke.task.Todo;
-import main.java.duke.task.TaskList;
-import main.java.duke.Ui;
-import main.java.duke.Storage;
+import duke.command.Command;
+import duke.task.Todo;
+import duke.task.TaskList;
+import duke.Ui;
+import duke.Storage;
 
 public class TodoCommand extends Command {
     String desc;

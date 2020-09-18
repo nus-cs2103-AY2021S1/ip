@@ -1,9 +1,9 @@
 package duke.task;
 
-import main.java.duke.task.Deadline;
-import main.java.duke.task.TaskList;
-import main.java.duke.task.Todo;
-import main.java.duke.task.Event;
+import duke.task.Deadline;
+import duke.task.TaskList;
+import duke.task.Todo;
+import duke.task.Event;
 
 import org.junit.jupiter.api.Test;
 import java.time.LocalDate;

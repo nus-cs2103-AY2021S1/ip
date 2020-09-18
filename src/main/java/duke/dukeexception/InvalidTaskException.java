@@ -1,6 +1,6 @@
-package main.java.duke.dukeexception;
+package duke.dukeexception;
 
-import main.java.duke.dukeexception.DukeException;
+import duke.dukeexception.DukeException;
 
 public class InvalidTaskException extends DukeException {
     public InvalidTaskException() {

@@ -1,11 +1,10 @@
-package main.java.duke.command;
+package duke.command;
 
-import main.java.duke.command.Command;
-import main.java.duke.task.Task;
-import main.java.duke.task.TaskList;
-import main.java.duke.dukeexception.InvalidInputException;
-import main.java.duke.Ui;
-import main.java.duke.Storage;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.dukeexception.InvalidInputException;
+import duke.Ui;
+import duke.Storage;
 
 public class UpdateCommand extends Command {
     int taskNumber;
@@ -21,7 +20,7 @@ public class UpdateCommand extends Command {
             Task updatedTask = taskList.updateTaskDesc(taskNumber, newTaskDesc);
             return ui.showUpdateTask(updatedTask);
         } catch (Exception e) {
-            throw new InvalidInputException("Task does not exist");
+            throw new InvalidInputException("The task you specified does not exist.");
         }
     }
 

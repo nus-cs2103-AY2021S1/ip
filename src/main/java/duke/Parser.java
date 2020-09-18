@@ -1,18 +1,18 @@
-package main.java.duke;
+package duke;
 
-import main.java.duke.Ui;
-import main.java.duke.command.FindCommand;
-import main.java.duke.command.Command;
-import main.java.duke.command.ListCommand;
-import main.java.duke.command.DoneCommand;
-import main.java.duke.command.TodoCommand;
-import main.java.duke.command.EventCommand;
-import main.java.duke.command.DeadlineCommand;
-import main.java.duke.command.DeleteCommand;
-import main.java.duke.command.UpdateCommand;
-import main.java.duke.command.TerminationCommand;
-import main.java.duke.dukeexception.InvalidInputException;
-import main.java.duke.dukeexception.InvalidTaskException;
+import duke.Ui;
+import duke.command.FindCommand;
+import duke.command.Command;
+import duke.command.ListCommand;
+import duke.command.DoneCommand;
+import duke.command.TodoCommand;
+import duke.command.EventCommand;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.UpdateCommand;
+import duke.command.TerminationCommand;
+import duke.dukeexception.InvalidInputException;
+import duke.dukeexception.InvalidTaskException;
 
 import java.time.LocalDate;
 import java.util.Arrays;
@@ -93,28 +93,30 @@ public class Parser {
                 String[] descAndDate = info.split(" /by ");
                 return new DeadlineCommand(descAndDate[0], LocalDate.parse(descAndDate[1]));
             } catch (Exception e) {
-                throw new InvalidInputException("Format for dates is yyyy-mm-dd. " +
-                        "Also, did you put a task before and deadline after ' /by '?");
+                throw new InvalidInputException("Format for dates is yyyy-mm-dd. "
+                        + "Also, did you put a task before and deadline after ' /by '?");
             }
         case COMMAND_DELETE:
             try {
                 return new DeleteCommand(parseInt(info) - 1);
             } catch (Exception e) {
-                throw new InvalidInputException("Somehow your input is wrong.");
+                throw new InvalidInputException("Specify the task number correctly.");
             }
         case COMMAND_UPDATE:
             try {
-                int taskNumber = parseInt(info) - 1;
-                String newTaskDesc = new Ui().readUpdateDesc();
+                String[] numberAndDesc = info.split(" ", 2);
+                int taskNumber = parseInt(numberAndDesc[0]) - 1;
+                String newTaskDesc = numberAndDesc[1];
                 return new UpdateCommand(taskNumber, newTaskDesc);
             } catch (Exception e) {
-                throw new InvalidInputException("Specify the task number correctly.");
+                throw new InvalidInputException("Did you put a task number and a new description "
+                        + "separated by a space?");
             }
         case COMMAND_FIND:
             try {
                 return new FindCommand(info);
             } catch (Exception e) {
-                throw new InvalidInputException("Specify the task number correctly.");
+                throw new InvalidInputException("Somehow your input is wrong.");
             }
         default:
             throw new InvalidTaskException();

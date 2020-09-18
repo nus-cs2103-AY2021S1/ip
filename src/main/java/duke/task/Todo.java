@@ -1,6 +1,6 @@
-package main.java.duke.task;
+package duke.task;
 
-import main.java.duke.task.Task;
+import duke.task.Task;
 
 public class Todo extends Task {
     public Todo(String description) {

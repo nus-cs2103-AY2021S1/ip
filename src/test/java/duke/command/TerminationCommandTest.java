@@ -1,6 +1,6 @@
 package duke.command;
 
-import main.java.duke.command.TerminationCommand;
+import duke.command.TerminationCommand;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;

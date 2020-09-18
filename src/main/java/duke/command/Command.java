@@ -1,9 +1,9 @@
-package main.java.duke.command;
+package duke.command;
 
-import main.java.duke.task.TaskList;
-import main.java.duke.dukeexception.DukeException;
-import main.java.duke.Ui;
-import main.java.duke.Storage;
+import duke.task.TaskList;
+import duke.dukeexception.DukeException;
+import duke.Ui;
+import duke.Storage;
 
 public abstract class Command {
     public Command() {}

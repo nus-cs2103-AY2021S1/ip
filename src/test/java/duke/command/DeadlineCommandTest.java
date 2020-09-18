@@ -1,6 +1,6 @@
 package duke.command;
 
-import main.java.duke.command.DeadlineCommand;
+import duke.command.DeadlineCommand;
 
 import org.junit.jupiter.api.Test;
 

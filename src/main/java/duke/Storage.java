@@ -1,10 +1,10 @@
-package main.java.duke;
+package duke;
 
-import main.java.duke.task.Todo;
-import main.java.duke.task.Deadline;
-import main.java.duke.task.Event;
-import main.java.duke.task.TaskList;
-import main.java.duke.dukeexception.InvalidTaskException;
+import duke.task.Todo;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.TaskList;
+import duke.dukeexception.InvalidTaskException;
 
 import java.io.BufferedWriter;
 import java.io.File;

@@ -1,7 +1,7 @@
-package main.java.duke;
+package duke;
 
-import main.java.duke.task.TaskList;
-import main.java.duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Task;
 
 import java.util.Scanner;
 
@@ -12,12 +12,11 @@ public class Ui {
         GREETING("My name? You don't need to know that. Stop bothering me already... "),
         BYE("Finally... don't come back if you can possibly help it, please."),
         NEXTCOMMAND("What do you want now?"),
-        LIST("I wouldn't bother doing them if I were you."),
+        LIST("\nI wouldn't bother doing them if I were you."),
         DONE("Oh goody... You actually accomplished something!!\n  "),
-        ADD("You're making me feel tired... But if you insist:\n  "),
+        ADD("You're making me feel tired... But if you insist, I've added this:\n  "),
         DELETE("Oh, getting lazy are we? I approve. I've removed this:\n  "),
-        UPDATEINPUT("You're so troublesome... What updated duke.task description do you want?"),
-        UPDATEDTASK("Donezorimasu. Your duke.task is now:\n  "),
+        UPDATEDTASK("Donezorimasu. Your task is now:\n  "),
         LOADINGERROR("Something went wrong when loading the data file. "
                 + "\nGuess you'll be starting from zero.");
 
@@ -28,7 +27,7 @@ public class Ui {
         }
     }
 
-    public String showWelcome() {
+    public static String showWelcome() {
         return Speech.GREETING.line;
     }
 
@@ -58,7 +57,7 @@ public class Ui {
 
     public String showNumberOfTasksLeft(TaskList taskList) {
         int length = taskList.getSize();
-        return ("\nYou now have " + length
+        return ("\n\nYou now have " + length
                 + (length == 1 ? " thing" : " things") + " in your list");
     }
 
@@ -80,20 +79,11 @@ public class Ui {
     }
 
     // TODO: CHANGE THIS
-    public String readCommand() {
-        System.out.println(Speech.NEXTCOMMAND.line);
-        Scanner sc = new Scanner(System.in);
-        String command = sc.nextLine();
-//        sc.close();
-        return command;
-    }
-
-    // TODO: CHANGE THIS
-    public String readUpdateDesc() {
-        System.out.println(Speech.UPDATEINPUT.line);
-        Scanner sc = new Scanner(System.in);
-        String newDesc = sc.nextLine();
-//        sc.close();
-        return newDesc;
-    }
+//    public String readUpdateDesc() {
+//        System.out.println(Speech.UPDATEINPUT.line);
+//        Scanner sc = new Scanner(System.in);
+//        String newDesc = sc.nextLine();
+////        sc.close();
+//        return newDesc;
+//    }
 }
