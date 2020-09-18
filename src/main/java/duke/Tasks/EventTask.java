@@ -13,13 +13,15 @@ public class EventTask extends Task {
         this.date = date;
     }
 
-    public boolean equals(EventTask eventTask) {
-        return super.equals(eventTask) && this.date.equals(eventTask.date);
+    public boolean equals(Task task) {
+        return task instanceof EventTask &&
+                this.description.equals(task.description) &&
+                this.date.equals(((EventTask) task).date);
     }
 
     @Override
     public String toString() {
-        return indicator + super.toString() + " (Date: " + date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")) + ")";
+        return indicator + super.toString() + " (At: " + date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")) + ")";
     }
 
     @Override

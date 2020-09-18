@@ -107,6 +107,7 @@ public class WindowDisplay extends Application {
 
         stagePointer = stage;
 
+        // Location of save here
         Path pathToSave = Paths.get(System.getProperty("user.home"), "ipSave.txt");
         TaskList taskList = FileManager.readFromSave(pathToSave);
 

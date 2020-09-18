@@ -105,6 +105,7 @@ public class TaskList {
      * @throws IndexOutOfBoundsException indicating position out of bounds of list
      */
     public String markDone(int position) throws IndexOutOfBoundsException {
+        assert position < taskList.size() && position >= 0 : " IndexOutOfBounds when marking a task done";
         if (taskList.get(position - 1).markDone()) {
             return ("beri gude, finish that thing liao\n  " +
                     taskList.get(position - 1).toString());
@@ -122,6 +123,7 @@ public class TaskList {
      * @throws IndexOutOfBoundsException indicating position out of bounds of list
      */
     public String deleteTask(int position) throws IndexOutOfBoundsException {
+        assert position < taskList.size() && position >= 0 : " IndexOutOfBounds when deleting task";
         Task task = taskList.get(position - 1);
         taskList.remove(position - 1);
         return ("Noted. I've removed this task:\n  " +

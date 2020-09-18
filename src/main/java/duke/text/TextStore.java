@@ -6,23 +6,28 @@ public class TextStore {
     // Public messages means that they are referenced outside to craft messages with other strings (ie strings from task)
 
     // Bling msgs
-    protected final static String top = "--------------Bot made by Hendey Fan--------------";
-    protected final static String errorBling = "--------------!!!!!ERROR DETECTED!!!!!--------------";
-    protected final static String bottom = "--------------------------------------------------------";
+    protected final static String top = "------------------Bot made by Hendey Fan------------------";
+    protected final static String errorBling = "------------------!*!*!ERROR DETECTED!*!*!------------------";
+    protected final static String bottom = "---------------------------------------------------------------";
     protected final static String startMessage = "This is a chat bot made by Hendey Fan.\n" +
             "What can this magnificent bot do for you?";
-    protected final static String endMessage = "    oi don run away from ur tasks hor    ";
+    protected final static String endMessage = "             oi don run away from ur tasks hor    \n" +
+            "            Window will now close in 5 seconds";
 
     // Error msgs
     protected final static String taskNotFound = "Error: task not found :(";
     protected final static String commandNotFound = "Error: command does not exist :(\n" +
             "Type '!commands' for list of commands and instructions";
-    protected final static String descriptionNotFound = "Error: description of task cannot be empty";
-    protected final static String taskNumNotSpecified = "Error: task number not specified";
-    protected final static String timeNotFound = "Error: time not specified";
+    protected final static String descriptionNotFound = "Error: description of task cannot be empty\n" +
+            "Please check command formats using !commands";
+    protected final static String taskNumNotSpecified = "Error: task number not specified\n" +
+            "Please check command formats using !commands";
+    protected final static String timeNotFound = "Error: time not found\n" +
+            "Please check command formats using !commands";
     protected final static String dateTimeFormatError = "Error: date time in an incorrect format\n" +
             "Please follow this format: <dd/MM/yyyy HHmm>";
-    protected final static String noSearchTermError = "Error: search term not defined";
+    protected final static String noSearchTermError = "Error: search term not specified\n" +
+            "Please check command formats using !commands";
 
     // Status msgs
     public final static String saveFound = "Status: previous save found and loaded";
