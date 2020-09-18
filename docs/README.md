@@ -26,12 +26,17 @@ the different software engineering principle along the way.
    * [2.8 Delete the task : delete](#28-delete-the-task--delete)
    * [2.9 Find a certain task: find](#29-find-a-certain-task-find)
    * [2.10 Ending a session : bye](#210-ending-a-session--bye)
+* [3. Code Summary](#3-code-summary)
  
    
 
 
 ## 1. Quick Start
 
+  * [1.1 Run the project in intelliJ](#11-run-the-project-in-intellij)
+  * [1.2 Run the project in terminal](#12-run-the-project-in-terminal)
+   
+   
 ### 1.1 Run the project in intelliJ
 
 Prerequisites: JDK 11, update Intellij to the most recent version.
@@ -168,7 +173,7 @@ This feature allows users to add a task with deadline to our current list
 *Usage*: we want to add an ip task to our list and there is a deadline 
 for this task,eg: due on 2020 August 2, 7pm
 
-*Format*: `deadline [newTask] /by [date] [time]`
+*Format*: `deadline [newTask] /by DD/MM/YYYY HHmm`
 
 *Examples*: `deadline ip /by 02/08/2020 1900`
 
@@ -194,7 +199,7 @@ This feature allows users to add an event to our current list.
 *Usage*: we want to add an event to our list and there is a specific time for it.
 For example, it happens on 2020 August 2, 7pm
 
-*Format*: `event [newTask] /at [date] [time]`
+*Format*: `event [newTask] /at DD/MM/YYYY HHmm`
 
 *Examples*: `event assignment /at 02/08/2020 1900`
 
@@ -314,3 +319,20 @@ This feature allows users to quit the application after they have done what they
 
 
 Navigate back to the feature list: [2. Features and Usage](#2-features-and-usage)
+
+
+## 3. Code Summary
+
+
+Index | Command to Use | Format, examples |
+| ------------ | ------------ | ------------- |
+1 | Find the list of command | `help`, e.g.,`help` |
+2 | Save the task | `save`, e.g.,  `save` |
+3 | Add a general ToDo task | `todo [newTask]`, e.g., `todo ip` |                 
+4 | Add a Deadline task | `deadline [newTask] /by DD/MM/YYYY HHmm`, e.g, `deadline ip /by 02/08/2020 1900` |
+5 | Adding an Event | `event [newTask] /at DD/MM/YYYY HHmm`, e.g., `event assignment /at 02/08/2020 1900` |
+6 | Listing out all Tasks | `list`, e.g., `list` |
+7 | Marking a Task as done | `done [task index]`, e.g., `done 2` |
+8 | Delete the task | `delete [task index]`, e.g, `delete 3` |
+9 | Find a certain task | `find [taskName]`, e.g., `find ip` |
+10 | Ending a session | `bye`, e.g., `bye` |
