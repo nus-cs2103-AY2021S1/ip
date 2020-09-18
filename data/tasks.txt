@@ -1,0 +1,5 @@
+E | 0 | Go for communications class | 2020-09-20
+T | 1 | jUst trY thIs
+E | 0 | john trying to do this | 2020-12-12
+T | 0 | Check for overflow
+D | 0 | Submit final version  | 2020-09-16

@@ -1,7 +1,78 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+____________________________________________________________
+No existing user data file found. Welcome to the bot club:)
+____________________________________________________________
+
+____________________________________________________________
+Yo I'm Dood!!
+Anything I can do for you?
+The commands available are:
+list     | Shows the list of tasks on the bot.
+bye      | Exits the program
+done     | Marks the Task as done. Format is 'done {task index}.
+todo     | Creates a ToDo task. Format is 'Todo {description}.
+event    | Creates an Event task. Format is 'event {description} /at {date in YYYY-MM-DD}.
+deadline | Creates a DeadLine task. Format is 'deadline {description} /by {date in YY-MM-DD}.
+delete   | Deletes a Task. Format is ' delete {task index}
+____________________________________________________________
+
+____________________________________________________________
+Got it bro, I've added this task:
+  [T][✗] read lecture notes
+Now you have 1 tasks in the list.
+____________________________________________________________
+
+____________________________________________________________
+Sorry, Invalid date format!
+____________________________________________________________
+
+____________________________________________________________
+Sorry, Invalid date format!
+____________________________________________________________
+
+____________________________________________________________
+Here are the tasks in your list:
+1.[T][✗] read lecture notes
+
+____________________________________________________________
+
+____________________________________________________________
+Solid bro!! I've marked this task as done:
+[T][✓] read lecture notes
+
+____________________________________________________________
+
+____________________________________________________________
+Sorry! The task index you wanted to complete does not exist!
+____________________________________________________________
+
+____________________________________________________________
+Here are the tasks in your list:
+1.[T][✓] read lecture notes
+
+____________________________________________________________
+
+____________________________________________________________
+Got it bro, I've added this task:
+  [T][✗] buy new pens
+Now you have 2 tasks in the list.
+____________________________________________________________
+
+____________________________________________________________
+Here are the tasks in your list:
+1.[T][✓] read lecture notes
+2.[T][✗] buy new pens
+
+____________________________________________________________
+
+____________________________________________________________
+Sorry! The task index you wanted to complete does not exist!
+____________________________________________________________
+
+____________________________________________________________
+Sorry! The task index you wanted to complete does not exist!
+____________________________________________________________
+
+____________________________________________________________
+See you again!!
+____________________________________________________________
 

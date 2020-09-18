@@ -1,0 +1,2 @@
+T | 1 | read lecture notes
+T | 0 | buy new pens
