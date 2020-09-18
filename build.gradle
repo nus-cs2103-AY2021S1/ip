@@ -59,3 +59,14 @@ checkstyle {
 run{
     standardInput = System.in
 }
+
+sourceSets {
+    main {
+        java {
+            srcDir "src/java"
+        }
+        resources {
+            srcDir "src/resources"
+        }
+    }
+}
