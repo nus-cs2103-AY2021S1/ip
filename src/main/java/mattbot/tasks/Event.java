@@ -5,7 +5,7 @@ package mattbot.tasks;
  * Represents an Event task that is created by the user.
  * Stores the set if information of the task entered by the user.
  */
-public class Event extends task {
+public class Event extends Task {
 
     /**
      * Creates an Event object with the given values.

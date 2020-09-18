@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 /**
  * Represents a task that will be created by the user to be added into the list.
  */
-public class task {
+public class Task {
     protected static int count = 0;
     protected boolean completed;
     protected String name;
@@ -18,7 +18,7 @@ public class task {
      * @param name the name of the task.
      * @param type the type of task to be created.
      */
-    public task(String name, String type) {
+    public Task(String name, String type) {
         this.count++;
         this.name = name;
         this.completed = false;

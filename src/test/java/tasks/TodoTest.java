@@ -1,14 +1,19 @@
-package Tasks;
+package tasks;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
+import mattbot.tasks.Task;
+import mattbot.tasks.Todo;
+
+
+
 
 
 class TodoTest {
     final Todo t1 = new Todo("Test 1", "[T]");
-    final task t1Done = new Todo("Test 1", "[T]");
+    final Task t1Done = new Todo("Test 1", "[T]");
 
     @Test
     void taskName() {

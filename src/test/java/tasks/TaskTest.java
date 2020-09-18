@@ -1,4 +1,4 @@
-package Tasks;
+package tasks;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -7,15 +7,23 @@ import java.time.format.DateTimeFormatter;
 
 import org.junit.jupiter.api.Test;
 
+import mattbot.tasks.Deadline;
+import mattbot.tasks.Event;
+import mattbot.tasks.Task;
+import mattbot.tasks.Todo;
 
-class taskTest {
-    final task t1 = new Todo("Test 1", "[T]");
-    final task t2 = new Deadline("Test 2", "[D]");
-    final task t3 = new Event("Test 3", "[E]");
 
-    final task t1Done = new Todo("Test 1", "[T]");
-    final task t2Done = new Deadline("Test 2", "[D]");
-    final task t3Done = new Event("Test 3", "[E]");
+
+
+
+class TaskTest {
+    final Task t1 = new Todo("Test 1", "[T]");
+    final Task t2 = new Deadline("Test 2", "[D]");
+    final Task t3 = new Event("Test 3", "[E]");
+
+    final Task t1Done = new Todo("Test 1", "[T]");
+    final Task t2Done = new Deadline("Test 2", "[D]");
+    final Task t3Done = new Event("Test 3", "[E]");
 
     @Test
     void taskName() {

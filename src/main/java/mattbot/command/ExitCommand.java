@@ -1,6 +1,6 @@
 package mattbot.command;
 
-import mattbot.uI.UserInterface;
+import mattbot.ui.UserInterface;
 
 /**
  * Represents a command that exits the program.

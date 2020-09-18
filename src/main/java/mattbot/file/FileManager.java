@@ -10,13 +10,14 @@ import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-import mattbot.dateTime.DateTimeManager;
+import mattbot.datetime.DateTimeManager;
 import mattbot.errors.ErrorExceptions;
 import mattbot.tasks.Deadline;
 import mattbot.tasks.Event;
+import mattbot.tasks.Task;
 import mattbot.tasks.TaskManager;
 import mattbot.tasks.Todo;
-import mattbot.tasks.task;
+
 
 
 
@@ -46,10 +47,10 @@ public class FileManager {
      * @param store ArrayList that holds all the task.
      * @throws IOException error when editing the file.
      */
-    public static void edit(String location, ArrayList<task> store) throws IOException {
+    public static void edit(String location, ArrayList<Task> store) throws IOException {
         assert location.equals("") == false;
         FileWriter fw = new FileWriter(location);
-        for (task i : store) {
+        for (Task i : store) {
             fw.append(TaskManager.read(i));
             fw.write(System.lineSeparator());
         }
@@ -178,7 +179,7 @@ public class FileManager {
      * @param f saved file.
      * @param store ArrayList to store the tasks.
      */
-    public static void read(File f, ArrayList<task> store) {
+    public static void read(File f, ArrayList<Task> store) {
         assert f.exists();
         try {
             Scanner sc = new Scanner(f);

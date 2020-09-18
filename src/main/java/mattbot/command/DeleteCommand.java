@@ -3,9 +3,9 @@ package mattbot.command;
 import java.util.NoSuchElementException;
 
 import mattbot.errors.ErrorExceptions;
+import mattbot.tasks.Task;
 import mattbot.tasks.TaskManager;
-import mattbot.tasks.task;
-import mattbot.uI.UserInterface;
+import mattbot.ui.UserInterface;
 
 /**
  * Represents a command that deletes a task.
@@ -20,16 +20,16 @@ public class DeleteCommand extends Command {
      * @throws ErrorExceptions failed to find task.
      */
     public static String execute2(int i) throws ErrorExceptions {
-        task t;
+        Task t;
         int index = i;
         try {
             t = TaskManager.getTask(index);
             TaskManager.delete(index);
             UserInterface.done2();
             return "    " + TaskManager.read(t) + System.lineSeparator()
-                    + "The tracked Tasks.task has been deleted!";
+                    + "The tracked tasks.task has been deleted!";
         } catch (NoSuchElementException e) {
-            throw new ErrorExceptions("There is no suck Tasks.task!");
+            throw new ErrorExceptions("There is no suck tasks.task!");
         }
     }
 }

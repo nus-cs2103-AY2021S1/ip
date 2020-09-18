@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-import mattbot.dateTime.DateTimeManager;
+import mattbot.datetime.DateTimeManager;
 import mattbot.errors.ErrorExceptions;
 import mattbot.tasks.TaskManager;
 

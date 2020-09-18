@@ -1,4 +1,4 @@
-package mattbot.dateTime;
+package mattbot.datetime;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -8,7 +8,7 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 import mattbot.errors.ErrorExceptions;
-import mattbot.tasks.task;
+import mattbot.tasks.Task;
 
 
 /**
@@ -47,7 +47,7 @@ public class DateTimeManager {
      * @param date date and time in String form.
      * @throws ErrorExceptions wrong date and time format.
      */
-    public static void addDate(task task, String date) throws ErrorExceptions {
+    public static void addDate(Task task, String date) throws ErrorExceptions {
         assert task != null;
         assert date.equals("") == false;
         Scanner sc = new Scanner(date);

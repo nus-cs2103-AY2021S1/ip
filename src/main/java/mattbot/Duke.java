@@ -5,11 +5,7 @@ import java.util.Scanner;
 import java.util.stream.Stream;
 
 import javafx.application.Platform;
-import mattbot.uI.UserInterface;
-
-
-
-
+import mattbot.ui.UserInterface;
 
 
 /**
@@ -44,6 +40,11 @@ public class Duke {
         return comboCommandStream;
     }
 
+    /**
+     * Checks if the givin input contains comma at the end.
+     * @param word given string.
+     * @return boolean has comma?
+     */
     private static boolean gotComma(String word) {
         int lengthOfCurrent = word.length();
         boolean haveComma = false;

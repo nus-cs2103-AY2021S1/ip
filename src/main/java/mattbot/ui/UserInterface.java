@@ -1,9 +1,10 @@
-package mattbot.uI;
+package mattbot.ui;
 
 import java.util.stream.Stream;
 
+import mattbot.tasks.Task;
 import mattbot.tasks.TaskManager;
-import mattbot.tasks.task;
+
 
 /**
  * Represents a UserInterface that is used by the main program. The UserInterface class handles all
@@ -29,7 +30,6 @@ public class UserInterface {
     public static void done2() {
         System.out.println("Beep Boop Beep .....");
     }
-
     /**
      * Returns the starting message when the program first runs.
      *
@@ -39,7 +39,6 @@ public class UserInterface {
         return "Welcome to MattBot v1.0!" + System.lineSeparator()
                 + "How may I assist you today?";
     }
-
     /**
      * Returns the error message when an empty command is entered into the bot.
      *
@@ -59,9 +58,8 @@ public class UserInterface {
         assert input.equals("") == false;
         return InitiateParser.parser2(command);
     }
-
     /**
-     * Returns the ouput of the input message.
+     * Returns the output of the input message.
      * Determines if the user input is acceptable, whether it is null or not.
      * If the input is null, failed() is called.
      * If the input is not null, action() is called.
@@ -75,7 +73,6 @@ public class UserInterface {
             return action2(input);
         }
     }
-
     /**
      * Returns the value of the exit variable of the instance. This determines if the user entered the exit
      * command.
@@ -86,7 +83,6 @@ public class UserInterface {
         isExit = true;
         return "Awww, leaving so soon? Hope to see you again!";
     }
-
     /**
      * Returns the error message when an invalid command is entered by the user.
      *
@@ -95,20 +91,19 @@ public class UserInterface {
     public static String wrongCommand2() {
         return "Errroorrrr! Invalid command entered! Cannot compute!";
     }
-
     /**
      * Returns the message when a task is successfully added into the list.
      *
      * @param t the selected task to be added.
      * @return String the success or failed message.
      */
-    public static String addedTask2(task t) {
+    public static String addedTask2(Task t) {
         assert t != null;
         String result = "";
         String nLine = System.lineSeparator();
         String one = "Task has been successfully added!";
         String two = "    " + TaskManager.read(t);
-        String three = "MattBot is tracking " + TaskManager.storeIndex() + " number of Tasks.task!";
+        String three = "MattBot is tracking " + TaskManager.storeIndex() + " number of tasks.task!";
         result = result + one + nLine + two + nLine + three;
         return result;
     }

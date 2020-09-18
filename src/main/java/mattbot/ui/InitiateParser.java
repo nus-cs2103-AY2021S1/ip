@@ -1,4 +1,4 @@
-package mattbot.uI;
+package mattbot.ui;
 
 import mattbot.errors.ErrorExceptions;
 import mattbot.parser.InputManager;

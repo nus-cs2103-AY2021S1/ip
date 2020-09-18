@@ -5,17 +5,17 @@ import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-import mattbot.dateTime.DateTimeManager;
+import mattbot.datetime.DateTimeManager;
 import mattbot.errors.ErrorExceptions;
 import mattbot.file.FileManager;
-import mattbot.uI.UserInterface;
+import mattbot.ui.UserInterface;
 
 
 /**
  * Represents the object that handles all the actions carried out by the task.
  */
 public class TaskManager {
-    private static ArrayList<task> store = new ArrayList<>();
+    private static ArrayList<Task> store = new ArrayList<>();
     private static String fileDir;
 
     /**
@@ -29,23 +29,23 @@ public class TaskManager {
      * @throws ErrorExceptions if there is an error adding the date.
      */
     public static String newTask2(String name, String itype, String date, String fileDir) throws ErrorExceptions {
-        task Task;
+        Task task;
         assert name.equals("") == false;
         assert itype.equals("") == false;
         assert date.equals("") == false;
         assert fileDir.equals("") == false;
         if (itype.equals("Todo")) {
-            Task = new Todo(name, "[T]");
+            task = new Todo(name, "[T]");
         } else if (itype.equals("Deadline")) {
-            Task = new Deadline(name, "[D]");
-            DateTimeManager.addDate(Task, date);
+            task = new Deadline(name, "[D]");
+            DateTimeManager.addDate(task, date);
         } else {
-            Task = new Event(name, "[E]");
-            DateTimeManager.addDate(Task, date);
+            task = new Event(name, "[E]");
+            DateTimeManager.addDate(task, date);
         }
-        store.add(Task);
-        save(fileDir, Task);
-        return UserInterface.addedTask2(Task);
+        store.add(task);
+        save(fileDir, task);
+        return UserInterface.addedTask2(task);
     }
 
     /**
@@ -54,9 +54,9 @@ public class TaskManager {
      * @param index index of the task.
      * @return task selected task.
      */
-    public static task getTask(int index) {
+    public static Task getTask(int index) {
         assert index >= 0;
-        task t = store.get(index - 1);
+        Task t = store.get(index - 1);
         System.out.println(t.name);
         return t;
     }
@@ -66,7 +66,7 @@ public class TaskManager {
      *
      * @param t task.
      */
-    public static void completed(task t) {
+    public static void completed(Task t) {
         assert t != null;
         t.setDone();
         try {
@@ -106,7 +106,7 @@ public class TaskManager {
      * @param t task.
      * @return String message.
      */
-    public static String read(task t) {
+    public static String read(Task t) {
         assert t != null;
         String done = "";
         if (t.getTaskCompleted()) {
@@ -153,7 +153,7 @@ public class TaskManager {
      * @param fileDir file directory of the local save.
      * @param t task.
      */
-    public static void save(String fileDir, task t) {
+    public static void save(String fileDir, Task t) {
         assert fileDir.equals("") == false;
         assert t != null;
         try {
@@ -179,9 +179,9 @@ public class TaskManager {
      * @return ArrayList task store.
      *
      */
-    public static ArrayList<task> getStore() {
-        ArrayList<task> clone = new ArrayList<>();
-        for (task i : store) {
+    public static ArrayList<Task> getStore() {
+        ArrayList<Task> clone = new ArrayList<>();
+        for (Task i : store) {
             clone.add(i);
         }
         return clone;

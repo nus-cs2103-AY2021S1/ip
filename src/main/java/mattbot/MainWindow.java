@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.stream.Stream;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -13,7 +14,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import mattbot.parser.InputManager;
 import mattbot.tasks.TaskManager;
-import mattbot.uI.UserInterface;
+import mattbot.ui.UserInterface;
 
 
 
@@ -71,6 +72,10 @@ public class MainWindow extends AnchorPane {
         TaskManager.load(save);
     }
 
+    /**
+     * Sets the variable this.duke to the input duke parameter.
+     * @param d duke object.
+     */
     public void setDuke(Duke d) {
         duke = d;
     }
@@ -91,6 +96,9 @@ public class MainWindow extends AnchorPane {
             dialogContainer.getChildren().addAll(
                     DialogBox.getDukeDialog(response, dukeImage)
             );
+            if (reply.equals("bye ")) {
+                Platform.exit();
+            }
         });
         userInput.clear();
     }

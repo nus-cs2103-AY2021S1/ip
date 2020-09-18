@@ -5,8 +5,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import mattbot.errors.ErrorExceptions;
+import mattbot.tasks.Task;
 import mattbot.tasks.TaskManager;
-import mattbot.tasks.task;
 
 
 
@@ -20,10 +20,10 @@ public class FilterDateCommand extends Command {
      * @param date date to filter
      * @return ArrayList list of filtered tasks
      */
-    public static ArrayList<task> filter(LocalDate date) {
-        ArrayList<task> clone = TaskManager.getStore();
-        ArrayList<task> filtered = new ArrayList<>();
-        for (task t : clone) {
+    public static ArrayList<Task> filter(LocalDate date) {
+        ArrayList<Task> clone = TaskManager.getStore();
+        ArrayList<Task> filtered = new ArrayList<>();
+        for (Task t : clone) {
             LocalDateTime dateTime = t.getTaskDate();
             if (dateTime != null && dateTime.toLocalDate().equals(date)) {
                 filtered.add(t);
@@ -40,11 +40,11 @@ public class FilterDateCommand extends Command {
      * @throws ErrorExceptions wrong date format.
      */
     public static String execute2(LocalDate date) throws ErrorExceptions {
-        ArrayList<task> filtered = filter(date);
+        ArrayList<Task> filtered = filter(date);
         int count = 1;
         String result = "";
         result = result + "Here are your tasks on this date!";
-        for (task i : filtered) {
+        for (Task i : filtered) {
             result = result + System.lineSeparator();
             result = result + "    " + count + ". " + TaskManager.read(i);
             count++;

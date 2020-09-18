@@ -3,8 +3,8 @@ package mattbot.command;
 import java.util.ArrayList;
 
 import mattbot.errors.ErrorExceptions;
+import mattbot.tasks.Task;
 import mattbot.tasks.TaskManager;
-import mattbot.tasks.task;
 
 
 /**
@@ -20,11 +20,11 @@ public class FindCommand extends Command {
      * @throws ErrorExceptions
      */
     public static String execute2(String name) {
-        ArrayList<task> clone = TaskManager.getStore();
+        ArrayList<Task> clone = TaskManager.getStore();
         int count = 1;
         String result = "";
         result = result + "Here are your tasks with this keywords!";
-        for (task i : clone) {
+        for (Task i : clone) {
             if (i.getTaskName().contains(name)) {
                 result = result + System.lineSeparator();
                 result = result + "    " + count + ". " + TaskManager.read(i);

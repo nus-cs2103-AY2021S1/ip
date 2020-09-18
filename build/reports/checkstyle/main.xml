@@ -36,8 +36,7 @@
 </file>
 <file name="C:\Users\dracu\Documents\ip\src\main\java\mattbot\command\WrongCommand.java">
 </file>
-<file name="C:\Users\dracu\Documents\ip\src\main\java\mattbot\dateTime\DateTimeManager.java">
-<error line="1" column="9" severity="warning" message="Name &apos;mattbot.dateTime&apos; must match pattern &apos;^[a-z]+(\.[a-z][a-z0-9]{1,})*$&apos;." source="com.puppycrawl.tools.checkstyle.checks.naming.PackageNameCheck"/>
+<file name="C:\Users\dracu\Documents\ip\src\main\java\mattbot\datetime\DateTimeManager.java">
 </file>
 <file name="C:\Users\dracu\Documents\ip\src\main\java\mattbot\errors\ErrorExceptions.java">
 </file>
@@ -69,18 +68,14 @@
 </file>
 <file name="C:\Users\dracu\Documents\ip\src\main\java\mattbot\tasks\Event.java">
 </file>
+<file name="C:\Users\dracu\Documents\ip\src\main\java\mattbot\tasks\Task.java">
+</file>
 <file name="C:\Users\dracu\Documents\ip\src\main\java\mattbot\tasks\TaskManager.java">
-<error line="32" column="14" severity="warning" message="Name &apos;Task&apos; must match pattern &apos;^[a-z][a-zA-Z0-9]*$&apos;." source="com.puppycrawl.tools.checkstyle.checks.naming.LocalVariableNameCheck"/>
 </file>
 <file name="C:\Users\dracu\Documents\ip\src\main\java\mattbot\tasks\Todo.java">
 </file>
-<file name="C:\Users\dracu\Documents\ip\src\main\java\mattbot\tasks\task.java">
-<error line="8" column="14" severity="warning" message="Name &apos;task&apos; must match pattern &apos;^[A-Z][a-zA-Z0-9]*$&apos;." source="com.puppycrawl.tools.checkstyle.checks.naming.TypeNameCheck"/>
+<file name="C:\Users\dracu\Documents\ip\src\main\java\mattbot\ui\InitiateParser.java">
 </file>
-<file name="C:\Users\dracu\Documents\ip\src\main\java\mattbot\uI\InitiateParser.java">
-<error line="1" column="9" severity="warning" message="Name &apos;mattbot.uI&apos; must match pattern &apos;^[a-z]+(\.[a-z][a-z0-9]{1,})*$&apos;." source="com.puppycrawl.tools.checkstyle.checks.naming.PackageNameCheck"/>
-</file>
-<file name="C:\Users\dracu\Documents\ip\src\main\java\mattbot\uI\UserInterface.java">
-<error line="1" column="9" severity="warning" message="Name &apos;mattbot.uI&apos; must match pattern &apos;^[a-z]+(\.[a-z][a-z0-9]{1,})*$&apos;." source="com.puppycrawl.tools.checkstyle.checks.naming.PackageNameCheck"/>
+<file name="C:\Users\dracu\Documents\ip\src\main\java\mattbot\ui\UserInterface.java">
 </file>
 </checkstyle>

@@ -4,7 +4,7 @@ package mattbot.tasks;
  * Represents a Todo task that is created by the user.
  * Stores the set if information of the task entered by the user.
  */
-public class Todo extends task {
+public class Todo extends Task {
 
     /**
      * Creates an Event object with the given values.
