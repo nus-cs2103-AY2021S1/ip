@@ -1,6 +1,8 @@
 package duke;
 
+import javafx.animation.PauseTransition;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -19,6 +21,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
+import javafx.util.Duration;
 
 public class MainWithUi extends Application {
     private ScrollPane scrollPane;
@@ -168,6 +171,10 @@ public class MainWithUi extends Application {
     public String getResponse(String input) throws Exception {
         if (input.equals("bye")) {
             dukeBot.end();
+            userInput.setDisable(true);
+            PauseTransition delay = new PauseTransition(Duration.seconds(2));
+            delay.setOnFinished(event -> Platform.exit());
+            delay.play();
         }
         return new Parser(input).getRespond(dukeBot.getLst());
     }
