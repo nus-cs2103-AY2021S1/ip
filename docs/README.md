@@ -25,9 +25,12 @@ ByteMe is a **desktop scheduling app to help you manage your daily tasks**. It i
     * The following GUI will appear: 
     
       ![starting Image](./Starting.png)
-    * If the GUI cannot be started by double-clicking, open `duke.jar` in `Terminal/Command Prompt` depending on your system by the following command:
-        * `cd` home directory of `duke.jar` 
-        * `java -jar duke.jar`
+    * If you are receiving the following error when you double click `duke.jar`:
+     
+      ![Error Image](./Error.png)
+        * open `duke.jar` in `Terminal/Command Prompt` depending on your system by the following command:
+            * `cd` home directory of `duke.jar` 
+            * `java -jar duke.jar`
 4. Type the command in the text input field and press the `send` button to start your journey with ByteMe!
 5. For all commands, please follow the correct `Format` specified.
 
