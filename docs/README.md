@@ -1,4 +1,7 @@
 # Duke User Guide
+Duke is a chat bot used for managing your tasks, 
+and comes with a pleasing graphical interface that allows you
+to interact with Duke, your personal task manager.
 
 ## Features 
 

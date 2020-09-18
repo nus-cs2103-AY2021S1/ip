@@ -4,7 +4,6 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
@@ -304,7 +303,13 @@ public class Parser {
         String result = "";
 
         while (str != null) {
+            if (str.equals("")) {
+                return "Please give me a command!";
+            }
             if (str.equals("list")) {
+                if (store.size() == 0) {
+                    return "You currently have no tasks!";
+                }
                 int counter = 1;
 
                 for (Task task : store) {
@@ -316,13 +321,19 @@ public class Parser {
                 }
 
                 return result;
-            } else if (str.contains("done")) {
-                if (str.length() == 4) {
-                    throw new DukeException("\u2639 OOPS!!! Please state what task has been completed.");
-                }
+            } else if (str.startsWith("done")) {
 
+                String index = str.substring(5);
+                if (blankChecker(index) || str.length() == 4) {
+                    return "Please provide an index!";
+                }
                 int num = Integer.parseInt(str.substring(5)) - 1;
                 Task curr = store.get(num);
+
+                if (num > store.size()) {
+                    return "The number given is greater than the number of tasks!\n"
+                            + "Please provide a valid index";
+                }
 
                 if (curr.recurring && curr instanceof Deadlines) {
                     LocalDate date = ((Deadlines) curr).getDate();
@@ -348,13 +359,15 @@ public class Parser {
                 result = result + "Nice! I've marked this task as done:\n";
                 result = result + "  [" + curr.getStatusIcon() + "] " + curr.getDescription() + "\n";
                 return result;
-            } else if (str.contains("todo")) {
+            } else if (str.startsWith("todo")) {
                 try {
-                    if (str.length() == 4) {
-                        throw new DukeException("\u2639 OOPS!!! The description of a todo cannot be empty.");
+
+                    String description = str.substring(5);
+                    if (blankChecker(description) || str.length() == 4) {
+                        return "Please complete the command!";
                     }
 
-                    ToDos curr = new ToDos(str.substring(5));
+                    ToDos curr = new ToDos(description);
                     if (str.contains("recurring")) {
                         curr.recurring = true;
                         curr.removeRecurring();
@@ -388,11 +401,19 @@ public class Parser {
                     File yourFile = new File("duke.txt");
                     yourFile.createNewFile();
                 }
-            } else if (str.contains("deadline")) {
+            } else if (str.startsWith("deadline")) {
                 try {
-                    Deadlines curr = new Deadlines(str.substring(9));
-                    String description = curr.getDescription();
+
+                    String description = str.substring(9);
+                    if (blankChecker(description) || str.length() == 8) {
+                        return "Please complete the command!";
+                    }
+                    Deadlines curr = new Deadlines(description);
                     int index = description.indexOf("/") + 4;
+
+                    if (index == -1) {
+                        return "Please follow the format provided!";
+                    }
 
                     String deadline = description.substring(index);
 
@@ -442,11 +463,21 @@ public class Parser {
                     yourFile.createNewFile();
                     break;
                 }
-            } else if (str.contains("event")) {
+            } else if (str.startsWith("event")) {
                 try {
-                    Events curr = new Events(str.substring(6));
-                    String description = curr.getDescription();
+                    if (str.length() == 5) {
+                        return "Please complete the command!";
+                    }
+                    String description = str.substring(6);
+                    if (blankChecker(description) || str.length() == 5) {
+                        return "Please complete the command!";
+                    }
+                    Events curr = new Events(description);
                     int index = description.indexOf("/") + 4;
+
+                    if (index == -1) {
+                        return "Please follow the format provided!";
+                    }
 
                     String startTime = description.substring(index);
                     if (startTime.length() < 15) {
@@ -491,13 +522,15 @@ public class Parser {
                     yourFile.createNewFile();
                     break;
                 }
-            } else if (str.contains("delete")) {
+            } else if (str.startsWith("delete")) {
 
                 assert store.size() > 0 : "There are already no tasks!";
 
-                if (str.length() == 6) {
-                    throw new DukeException("\u2639 OOPS!!! Please specify what task to delete.");
+                String number = str.substring(7);
+                if (blankChecker(number) || str.length() == 6) {
+                    return "\u2639 OOPS!!! Please specify what task to delete.";
                 }
+
                 int num = Integer.parseInt(str.substring(7)) - 1;
                 if (num >= store.size()) {
                     return "The number provided is greater than the number of tasks!";
@@ -509,17 +542,25 @@ public class Parser {
                 result = result + curr.toString() + "\n";
                 result = result + "Now you have " + store.size() + " tasks in the list.\n";
                 return result;
-            } else if (str.contains("find")) {
+            } else if (str.startsWith("find")) {
+                if (str.length() == 4) {
+                    return "Please complete the command!";
+                }
+
                 TaskList tasks = new TaskList(store);
                 int index = str.indexOf(" ") + 1;
                 String query = str.substring(index);
+
+                if (blankChecker(query)) {
+                    return "Please provide a keyword!";
+                }
                 result = "Here's what I found:\n"
                         + tasks.finder(query);
                 if (result.equals("")) {
                     return "There is no such task in the task list!";
                 }
                 return result;
-            } else if (str.equals("bye")) {
+            } else if (str.startsWith("bye")) {
                 result = "Alright then cya again soon";
                 return result;
             } else {
@@ -528,5 +569,13 @@ public class Parser {
             }
         }
         return "I am unsure what command that is";
+    }
+
+    private boolean blankChecker(String str) {
+        boolean result = false;
+        if (str.isBlank()) {
+            result = true;
+        }
+        return result;
     }
 }
