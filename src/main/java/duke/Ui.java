@@ -8,31 +8,38 @@ import duke.task.Task;
  * Supports interactions with user.
  */
 public class Ui {
+
+    /**
+     * Array containing the commands a user can use.
+     */
     protected static final String[] CMD_ARR = {"Help", "List", "Add", "Done", "Delete", "Find", "Priority", "Bye"};
-    protected static final String DIVIDER = "____________________________________________________________";
-    protected static final String LOGO = " __________________________________________________________\n"
-            + "|                                                          |\n"
-            + "|  ____     _     _____   ____  _   _ ____   ____ _______  |\n"
-            + "| |  _ \\   / \\   |  __ \\ / __ \\| \\ | |  _ \\ / __ \\__   __| |\n"
-            + "| | |_) | /   \\  | |__) | |  | |  \\| | |_) | |  | | | |    |\n"
-            + "| |  _ < / /_\\ \\ |  _  /| |  | | . ` |  _ <| |  | | | |    |\n"
-            + "| | |_) / _____ \\| | \\ \\| |__| | |\\  | |_) | |__| | | |    |\n"
-            + "| |____/_/     \\_\\_|  \\_\\\\____/|_| \\_|____/ \\____/  |_|    |\n"
-            + "|                                                          |\n"
-            + "|__________________________________________________________|\n";
+
+    /**
+     * Scanner to get user input.
+     */
     protected Scanner sc;
 
+    /**
+     * Creates a Ui object.
+     * @param sc Scanner for user input.
+     */
     public Ui (Scanner sc) {
         this.sc = sc;
     }
 
+    /**
+     * Returns the error message of an exception.
+     * @param errorMsg Message representing the exception.
+     * @return Message representing the exception.
+     */
     public String displayError(String errorMsg) {
         System.out.println(errorMsg);
         return errorMsg;
     }
 
     /**
-     * Displays a prompt for the user to enter additional input.
+     * Returns a prompt for the user to enter additional input.
+     * @return Message to enter additional input.
      */
     public String printAdditionActionMessage() {
         System.out.println("What else would you like to do?");
@@ -40,7 +47,8 @@ public class Ui {
     }
 
     /**
-     * Displays the goodbye message.
+     * Returns the goodbye message.
+     * @return Goodbye message.
      */
     public String printGoodbyeMessage() {
         System.out.println("Bye! See you around");
@@ -48,7 +56,8 @@ public class Ui {
     }
 
     /**
-     * Displays the list of commands the user can enter.
+     * Returns the list of commands the user can enter.
+     * @return List of commands.
      */
     public String printHelp() {
         String s = "Here are the commands you can use:\n";
@@ -59,11 +68,21 @@ public class Ui {
         return s;
     }
 
+    /**
+     * Returns a prompt associated with a command.
+     * @param s Prompt from command.
+     * @return Prompt
+     */
     public String printPrompt(String s) {
         System.out.println(s);
         return s;
     }
 
+    /**
+     * Returns an acknowledgement that a task was added
+     * @param taskList List of tasks.
+     * @return Acknowledgement of the add.
+     */
     public String printAddAcknowledgement(TaskList taskList) {
         String s = "Alright, I've added this task:\n"
                 + taskList.getMostRecentTask().toString() + "\n"
@@ -73,8 +92,9 @@ public class Ui {
     }
 
     /**
-     * Displays the tasks currently on the list of tasks.
+     * Returns the tasks currently on the list of tasks.
      * @param taskList List of tasks.
+     * @return List of tasks.
      */
     public String printList(TaskList taskList) {
         String s = "These are the tasks on your list:\n";
@@ -89,9 +109,10 @@ public class Ui {
     }
 
     /**
-     * Displays the acknowledgement of a task being updated to done.
+     * Returns the acknowledgement of a task being updated to done.
      * @param taskList List of tasks.
-     * @param taskNum duke.task.Task specified to be changed to done.
+     * @param taskNum Task specified to be changed to done.
+     * @return Acknowledgement of the update.
      */
     public String printDoneAcknowledgement(TaskList taskList, int taskNum) {
         String s = "Good job! This task is now marked as done:\n"
@@ -102,9 +123,10 @@ public class Ui {
     }
 
     /**
-     * Displays the acknowledgement of the task that the user deleted from the list of tasks.
+     * Returns the acknowledgement of the task that the user deleted from the list of tasks.
      * @param taskList List of tasks.
-     * @param task duke.task.Task that was deleted.
+     * @param task Task that was deleted.
+     * @return Acknowledgement of the deletion.
      */
     public String printDeleteAcknowledgement(TaskList taskList, Task task) {
         String s = "Alright, the following task has been removed:\n"
@@ -116,9 +138,10 @@ public class Ui {
     }
 
     /**
-     * Displays the acknowledgement of the task that the user deleted from the list of tasks.
+     * Returns the acknowledgement of the updated priority level of a task.
      * @param taskList List of tasks.
-     * @param taskNum duke.task.Task that was deleted.
+     * @param taskNum Task that was updated.
+     * @return Acknowledgement of the updated priority level.
      */
     public String printPrioritySetAcknowledgement(TaskList taskList, int taskNum) {
         String s = "Alright, the following task priority has been updated:\n"
@@ -127,6 +150,12 @@ public class Ui {
         return s;
     }
 
+    /**
+     * Returns the string representation of a task on the task list.
+     * @param taskList List of tasks.
+     * @param taskNum Number on the list of the task.
+     * @return String representation of the task.
+     */
     public String printTask(TaskList taskList, int taskNum) {
         String s = (taskNum + 1)
                 + ". "

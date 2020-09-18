@@ -1,6 +1,5 @@
 package duke;
 
-import duke.command.CommandType;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -41,6 +40,11 @@ public class MainWindow extends AnchorPane {
         duke = d;
     }
 
+    /**
+     * Gets the correct image associated with a type.
+     * @param responseImageType Type of image
+     * @return Image corresponding to the type.
+     */
     private Image getResponseImage(ImageType responseImageType) {
         Image returnImage = dukeImageMain;
         switch (responseImageType) {

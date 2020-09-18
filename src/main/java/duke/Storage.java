@@ -11,19 +11,43 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import duke.task.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.PriorityLevel;
+import duke.task.Task;
+import duke.task.TaskType;
+import duke.task.Todo;
 
+/**
+ * Represents the storage location of the tasks.
+ */
 public class Storage {
+
+    /**
+     * File path to the file storing the tasks.
+     */
     protected String filepath;
 
+    /**
+     * Creates a Storage object.
+     */
     public Storage() {
         this.filepath = "";
     }
 
+    /**
+     * Creates a Storage object with a specific file path.
+     * @param filepath File path to storage file.
+     */
     public Storage(String filepath) {
         this.filepath = filepath;
     }
 
+    /**
+     * Returns a list of task that was loaded from the storage file.
+     * @return List of tasks.
+     * @throws Exception For when the method encounters exceptions in loading the file.
+     */
     public List<Task> load() throws Exception {
         File taskLocation = new File(filepath);
         FileReader fileReader = new FileReader(taskLocation);
@@ -38,6 +62,10 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Saves the tasks on the list to the storage file.
+     * @param taskList List of tasks.
+     */
     public static void saveTaskChanges(TaskList taskList) {
         File taskDir = new File("./data");
         if (!taskDir.exists()) {
@@ -58,6 +86,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Returns a task based on the information in the storage file.
+     * @param taskString Formatted string from the storage file.
+     * @return Task that was represented by that string.
+     */
     public static Task extractTask(String taskString) {
         String[] taskStringSplit = taskString.split("\\|");
         String taskType = taskStringSplit[0];
@@ -91,6 +124,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Returns a list of tasks.
+     * @param strings A list of formatted storage strings.
+     * @return List of tasks.
+     */
     public static List<Task> buildTasks(List<String> strings) {
         List<Task> tasks = new ArrayList<>();
         for (String taskString : strings) {
@@ -100,6 +138,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Returns the priority level of the formatted storage string.
+     * @param priority Formatted storage string.
+     * @return Priority level.
+     */
     public static PriorityLevel getPriorityLevel(String priority) {
         if (priority.equals("H")) {
             return PriorityLevel.HIGH;

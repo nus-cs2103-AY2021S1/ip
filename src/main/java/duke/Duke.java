@@ -2,27 +2,29 @@ package duke;
 
 import java.util.Scanner;
 
-import duke.command.CommandType;
-import duke.command.ResetCommand;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.VBox;
-import javafx.scene.image.Image;
-
-import duke.command.Command;
-import duke.exception.DukeException;
-
 /**
- * Starts Duke which a user can give
- * text commands to.
+ * Supports the creation of Duke which a user can give commands to.
  */
 public class Duke {
+
+    /**
+     * Storage location of the tasks.
+     */
     private Storage storage;
+
+    /**
+     * List of tasks
+     */
     private TaskList taskList;
+
+    /**
+     * Ui associated with Duke.
+     */
     private Ui ui;
 
+    /**
+     * Creates a Duke object.
+     */
     public Duke() {
         ui = new Ui(new Scanner(System.in));
         storage = new Storage("./data/tasks.txt");
@@ -31,8 +33,7 @@ public class Duke {
 
     /**
      * Creates a Duke object
-     *
-     * @param filePath  Location of file where data is stored.
+     * @param filePath Location of file where data is stored.
      */
     public Duke(String filePath) {
         ui = new Ui(new Scanner(System.in));
@@ -41,10 +42,9 @@ public class Duke {
     }
 
     /**
-     * Gets response for a user input.
-     *
+     * Gets a response for user input.
      * @param input User input.
-     * @return Returns a Duke response as a String.
+     * @return A response object containing the necessary information to update the GUI.
      */
     public DukeResponse getResponse(String input) {
         return DukeResponse.getDukeResponse(input, ui, taskList);
