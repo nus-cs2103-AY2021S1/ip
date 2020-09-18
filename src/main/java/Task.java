@@ -16,6 +16,14 @@ public class Task {
     }
 
     /**
+     * Returns a boolean value describing if the task is done.
+     * @return A boolean value describing if the task is done.
+     */
+    public boolean getDoneness() {
+        return this.isDone.booleanValue();
+    }
+
+    /**
      * Returns the name of the task.
      * @return Name of the task.
      */

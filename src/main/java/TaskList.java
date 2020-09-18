@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 public class TaskList {
@@ -41,6 +43,9 @@ public class TaskList {
     void addTask(Task task) throws DukeException {
         if (task.getName().length() == 0) {
             throw new DukeException(task.returnMissingNameError());
+        }
+        if (checkTaskAlreadyExists(task)) {
+            throw new DukeException("That task already exists in the task list");
         }
         this.taskList.add(task);
         String numOfTasks = this.taskList.size() == 1 ? "1 task" : this.taskList.size() + " tasks";
@@ -135,5 +140,28 @@ public class TaskList {
         this.taskList.clear();
         String message = "Noted. All tasks have been removed.";
         Ui.print(message);
+    }
+
+    // Two tasks are equivalent only if they have the same name and timing (if applicable)
+    private boolean checkTaskAlreadyExists(Task newTask) {
+        boolean doesExist = false;
+        for (Task task: this.taskList) {
+            boolean didDonenessChange = false;
+            if (task.getDoneness()) {
+                task.setDoneness(false);
+                didDonenessChange = true;
+            }
+            if (task.getSaveDataString().equals(newTask.getSaveDataString())) {
+                doesExist = true;
+                if (didDonenessChange) {
+                    task.setDoneness(true);
+                }
+                break;
+            }
+            if (didDonenessChange) {
+                task.setDoneness(true);
+            }
+        }
+        return doesExist;
     }
 }
