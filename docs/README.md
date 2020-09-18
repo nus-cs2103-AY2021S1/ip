@@ -133,12 +133,23 @@ Show all the available commands
 
 ## Usage
 
-### Help 
+### `Help`  
 1. The command is case insensitive, help, Help, HELP are all fine.
  
 Example of usage: 
 `Help`
 
+### Feature 7
+Exit Duke
+
+## Usage
+
+### `Bye`
+1. The command is case insensitive, bye, Bye, BYE are all fine.
+2. Once you exit Duke, textfield will be disabled, relaunch Duke to use again.
+ 
+Example of usage: 
+`Bye`
 
 
 

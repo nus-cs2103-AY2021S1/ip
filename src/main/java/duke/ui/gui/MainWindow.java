@@ -103,6 +103,7 @@ public class MainWindow extends AnchorPane {
                 userInput.setEditable(false);
                 userInput.setStyle("-fx-background-color: grey;");
                 userInput.focusedProperty().removeListener(this.inputFocusListener);
+                userInput.setPromptText("Restart to launch duke again!!");
             } else {
                 assert response != Constants.EXITRESPONSE : response;
                 db = DialogBox.getDukeDialog(markdownList, dukeImage);
