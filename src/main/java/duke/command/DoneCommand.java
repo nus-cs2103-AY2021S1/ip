@@ -19,20 +19,20 @@ public class DoneCommand extends Command {
     /**
      * Executes the command.
      *
-     * @param tasks The list of existing tasks.
-     * @param ui The ui that handles user interaction.
+     * @param tasks   The list of existing tasks.
+     * @param ui      The ui that handles user interaction.
      * @param storage The storage that stores the list of existing tasks.
      * @throws DukeException when the command cannot be executed.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             if (tasks.size() == 0) {
                 throw new IndexOutOfBoundsException();
             }
             Task doneTask = tasks.get(idx);
             doneTask.markDone();
-            ui.showDoneMessage(doneTask);
             storage.writeFile(tasks);
+            return ui.showDoneMessage(doneTask);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("The number does not exist!");
         }
@@ -40,7 +40,7 @@ public class DoneCommand extends Command {
 
     /**
      * Determines if the command is an exit command.
-     * 
+     *
      * @return Always false.
      */
     public boolean isExit() {

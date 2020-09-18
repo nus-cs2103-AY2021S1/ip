@@ -13,14 +13,15 @@ public class Response {
         NORMAL,
         FIND
     }
-    public Task[] tasks;
-    public String[] texts;
-    public Tag tag;
-    public int numOfTasks;
+
+    private Task[] tasks;
+    private String[] texts;
+    private Tag tag;
+    private int numOfTasks;
 
     /**
      * Creates the response of normal texts.
-     * 
+     *
      * @param texts An array of strings. Each string will be printed in one line.
      */
     public Response(String[] texts) {
@@ -31,9 +32,9 @@ public class Response {
     /**
      * Creates the response after receiving task related commands from the user
      * like adding task to the list.
-     * 
-     * @param tasks The task to be added or removed.
-     * @param tag Removal or addition of the task.
+     *
+     * @param tasks      The task to be added or removed.
+     * @param tag        Removal or addition of the task.
      * @param numOfTasks The number of Tasks in the list.
      */
     public Response(Task[] tasks, Tag tag, int numOfTasks) {
@@ -45,7 +46,7 @@ public class Response {
     /**
      * Creates the response after receiving some other task related commands from the user
      * like listing the tasks in the list.
-     * 
+     *
      * @param tasks The list of the tasks in the list.
      */
     public Response(Task[] tasks, Tag tag) {
@@ -55,7 +56,7 @@ public class Response {
 
     /**
      * Gets the string representation of the response.
-     * 
+     *
      * @return The string representation of the response from duke.
      */
     public String getResponse() {
@@ -66,13 +67,13 @@ public class Response {
             }
         } else if (this.tag == Tag.ADD) {
             for (int i = 0; i < this.tasks.length; i++) {
-                    linesOfText += "     "
-                            + "Got it. I've added this task: \n"
-                            + "       "
-                            + this.tasks[i]
-                            + "\n"
-                            + "     "
-                            + String.format("Now you have %d tasks in the list. \n", numOfTasks);
+                linesOfText += "     "
+                        + "Got it. I've added this task: \n"
+                        + "       "
+                        + this.tasks[i]
+                        + "\n"
+                        + "     "
+                        + String.format("Now you have %d tasks in the list. \n", numOfTasks);
             }
         } else if (this.tag == Tag.REMOVE) {
             for (int i = 0; i < this.tasks.length; i++) {
@@ -84,7 +85,7 @@ public class Response {
                         + "     "
                         + String.format("Now you have %d tasks in the list. \n", numOfTasks);
             }
-        } else if (this.tag == Tag.FIND ) {
+        } else if (this.tag == Tag.FIND) {
             try {
                 linesOfText += "     "
                         + "Here are the matching tasks in your list: \n";

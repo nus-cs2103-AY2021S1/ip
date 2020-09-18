@@ -1,12 +1,13 @@
 package duke;
 
-import duke.task.Deadline;
-import duke.task.Todo;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDateTime;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+
+import duke.task.Deadline;
+import duke.task.Todo;
 
 public class StorageTest {
     @Test

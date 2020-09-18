@@ -19,17 +19,17 @@ public class DeleteCommand extends Command {
     /**
      * Executes the command.
      *
-     * @param tasks The list of existing tasks.
-     * @param ui The ui that handles user interaction.
+     * @param tasks   The list of existing tasks.
+     * @param ui      The ui that handles user interaction.
      * @param storage The storage that stores the list of existing tasks.
      * @throws DukeException when the command cannot be executed.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             Task deletedTask = tasks.get(idx);
             tasks.delete(idx);
-            ui.showDeleteMessage(deletedTask, tasks);
             storage.writeFile(tasks);
+            return ui.showDeleteMessage(deletedTask, tasks);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("The number does not exist!");
         }
@@ -37,7 +37,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Determines if the command is an exit command.
-     * 
+     *
      * @return Always false.
      */
     public boolean isExit() {
