@@ -19,10 +19,10 @@ public class Ui {
      * @return welcome message from Duke.
      */
     public String getWelcomeMessage() {
-        String logo = " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
+        String logo = " " + "____             _        \n"
+            + "|   _  \\  _    _| | ____ \n"
+            + "| |  | |  |  | | |/ / _ \\\n"
+            + "| |_| |  |_| |   <| __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
         return "Hello from\n" + logo
             + "Hi! I'm Duke \nWhat can I do for you?\n";
