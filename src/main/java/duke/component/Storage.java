@@ -14,6 +14,11 @@ import java.io.FileOutputStream;
 public class Storage {
     String filePath;
 
+    /**
+     * Constructor for storage class with details of directory
+     * to store the .txt files
+     * @param filePath
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
@@ -37,6 +42,11 @@ public class Storage {
         fw.close();
     }
 
+    /**
+     * Static method to format task to be stored in the txt file.
+     * @param task
+     * @return String of task formatted
+     */
     public static String describeTask(Task task) {
         return " | " + (task.getIsDone() ? 1 : 0) + " | " + task.getDescription();
     }

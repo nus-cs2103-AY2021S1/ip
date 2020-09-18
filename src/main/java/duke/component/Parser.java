@@ -103,6 +103,11 @@ public class Parser {
         }
     }
 
+    /**
+     * Static method to return a error message
+     *
+     * @return String of error message
+     */
     public static String finalErrorMessage() {
         return "Input not understood";
     }
