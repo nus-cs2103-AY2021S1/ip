@@ -43,9 +43,6 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     public void initialize() {
-        // Bind the scroll pane's height to that of the dialog container.
-        scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-
         // Disable the send button when the user input is empty.
         BooleanBinding isUserInputEmpty = Bindings.isEmpty(userInput.textProperty());
         sendButton.disableProperty().bind(isUserInputEmpty);
@@ -56,6 +53,10 @@ public class MainWindow extends AnchorPane {
         // Display greetings.
         dialogContainer.getChildren().add(
                 DialogBox.getDukeDialog(Store.getResourceHandler().getString("repl.greeting"), dukeImage));
+
+        // Scroll to bottom of scroll pane on update.
+        dialogContainer.heightProperty().addListener((observable, oldValue, newValue) ->
+                scrollPane.setVvalue(1.0d));
     }
 
     /**
@@ -75,22 +76,31 @@ public class MainWindow extends AnchorPane {
         // Push user input into command history.
         commandHistory.addCommand(input);
 
-        // Process the user input.
+        // Execute the inputted command.
         DukeResponse dukeResponse = Repl.getResponse(input);
+
+        // Display the response from command execution.
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(dukeResponse.toString(), dukeImage)
         );
-
-        userInput.clear();
 
         // Terminate the application if the signal to exit is received.
         if (dukeResponse.shouldExit()) {
             Stage stage = (Stage) userInput.getScene().getWindow();
             stage.close();
         }
+
+        // Clear the user input.
+        userInput.clear();
     }
 
+    /**
+     * Handles key presses for `userInput`, displaying the command history on
+     * {@code KeyCode.UP} and {@code KeyCode.DOWN}.
+     *
+     * @param keyCode the key that was pressed by the user.
+     */
     private void handleKeyPress(KeyCode keyCode) {
         switch (keyCode) {
         case UP:
