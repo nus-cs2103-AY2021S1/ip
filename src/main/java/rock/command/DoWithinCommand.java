@@ -12,9 +12,9 @@ import rock.utility.RockResponse;
 public class DoWithinCommand {
     /**
      * get information on dowithin
-     * @param cmd
+     * @param cmd User's command
      * @return List of (Name, from, to)
-     * @throws RockException
+     * @throws RockException if command invalid
      */
     private static ArrayList<String> parseDoWithin(String cmd) throws RockException {
         String getName = "";
@@ -48,8 +48,8 @@ public class DoWithinCommand {
 
     /**
      * handle dowithin
-     * @param cmd
-     * @param response
+     * @param cmd User's command
+     * @param response Rock's response that need updated
      */
     public static void handle(String cmd, RockResponse response, TaskList tasks) {
         try {

@@ -49,7 +49,7 @@ public class TaskList {
 
     /**
      * Handle command: list
-     * @param response
+     * @param response Rock's response that need updated
      */
     public void handleList(RockResponse response) {
         ListCommand.handle(response, this);
@@ -57,8 +57,8 @@ public class TaskList {
 
     /**
      * Handle command: done
-     * @param cmd
-     * @param response
+     * @param cmd User's command
+     * @param response Rock's response that need updated
      */
     public void handleDone(String cmd, RockResponse response) {
         DoneCommand.handle(cmd, response, this);
@@ -66,8 +66,8 @@ public class TaskList {
 
     /**
      * Handle command: todo
-     * @param cmd
-     * @param response
+     * @param cmd User's command
+     * @param response Rock's response that need updated
      */
     public void handleToDo(String cmd, RockResponse response) {
         ToDoCommand.handle(cmd, response, this);
@@ -75,8 +75,8 @@ public class TaskList {
 
     /**
      * Handle command: deadline.
-     * @param cmd
-     * @param response
+     * @param cmd User's command
+     * @param response Rock's response that need updated
      */
     public void handleDeadline(String cmd, RockResponse response) {
         DeadlineCommand.handle(cmd, response, this);
@@ -84,8 +84,8 @@ public class TaskList {
 
     /**
      * Handle command: event.
-     * @param cmd
-     * @param response
+     * @param cmd User's command
+     * @param response Rock's response that need updated
      */
     public void handleEvent(String cmd, RockResponse response) {
         EventCommand.handle(cmd, response, this);
@@ -93,8 +93,8 @@ public class TaskList {
 
     /**
      * handle command: delete.
-     * @param cmd
-     * @param response
+     * @param cmd User's command
+     * @param response Rock's response that need updated
      */
     public void handleDelete(String cmd, RockResponse response) {
         DeleteCommand.handle(cmd, response, this);
@@ -102,8 +102,8 @@ public class TaskList {
 
     /**
      * handle command: find
-     * @param cmd
-     * @param response
+     * @param cmd User's command
+     * @param response Rock's response that need updated
      */
     public void handleFind(String cmd, RockResponse response) {
         FindCommand.handle(cmd, response, this);
@@ -111,8 +111,8 @@ public class TaskList {
 
     /**
      * handle dowithin
-     * @param cmd
-     * @param response
+     * @param cmd User's command
+     * @param response Rock's response that need updated
      */
     public void handleDoWithin(String cmd, RockResponse response) {
         DoWithinCommand.handle(cmd, response, this);

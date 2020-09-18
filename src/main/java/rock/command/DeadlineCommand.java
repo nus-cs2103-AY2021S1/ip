@@ -13,9 +13,9 @@ import rock.utility.RockResponse;
 public class DeadlineCommand {
     /**
      * get information of deadline.
-     * @param cmd
-     * @return getName + getDeadline
-     * @throws RockException
+     * @param cmd User's command
+     * @return list of (getName, getDeadline)
+     * @throws RockException If the command invalid
      */
     private static ArrayList<String> parseDeadline(String cmd) throws RockException {
         String getName = "";
@@ -38,8 +38,8 @@ public class DeadlineCommand {
 
     /**
      * Handle command: deadline.
-     * @param cmd
-     * @param response
+     * @param cmd User's command
+     * @param response Rock's response that need updated
      */
     public static void handle(String cmd, RockResponse response, TaskList tasks) {
         try {

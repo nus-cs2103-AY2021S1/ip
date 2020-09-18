@@ -11,7 +11,7 @@ public class DoneCommand {
      * get index
      * @param cmd user's command
      * @return index
-     * @throws RockException
+     * @throws RockException if index invalid
      */
     private static int parseDone(String cmd, int limit) throws RockException {
         String value = cmd.substring(CommandTag.DONE.length()).trim();
@@ -20,8 +20,8 @@ public class DoneCommand {
 
     /**
      * Handle command: done
-     * @param cmd
-     * @param response
+     * @param cmd User's command
+     * @param response Rock's response that need updated
      */
     public static void handle(String cmd, RockResponse response, TaskList tasks) {
         try {

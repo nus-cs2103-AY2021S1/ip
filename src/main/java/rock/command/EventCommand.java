@@ -15,7 +15,7 @@ public class EventCommand {
      * get information on event.
      * @param cmd User's command
      * @return List of (Name, Time)
-     * @throws RockException
+     * @throws RockException if invalid command
      */
     private static ArrayList<String> parseEvent(String cmd) throws RockException {
         String getName = "";
@@ -38,8 +38,8 @@ public class EventCommand {
 
     /**
      * Handle command: event.
-     * @param cmd
-     * @param response
+     * @param cmd User's command
+     * @param response Rock's response that need updated
      */
     public static void handle(String cmd, RockResponse response, TaskList tasks) {
         try {

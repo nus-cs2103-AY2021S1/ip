@@ -1,5 +1,7 @@
 package rock.admin;
 
+import java.util.Scanner;
+
 import rock.exception.RockException;
 import rock.storage.Storage;
 import rock.ui.Ui;
@@ -79,5 +81,24 @@ public class Rock {
         storage.updateDataFile(tasks.getArrayList());
 
         return response.toString();
+    }
+
+    /**
+     * Main to test
+     */
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        Rock rock = new Rock();
+        while (input.hasNextLine()) {
+            String cmd = input.nextLine();
+            try {
+                System.out.println(rock.handleCommand(cmd));
+            } catch (RockException ex) {
+                System.out.println(ex.getMessage());
+            }
+            if (cmd.equals("bye")) {
+                break;
+            }
+        }
     }
 }

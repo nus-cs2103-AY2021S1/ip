@@ -9,9 +9,9 @@ import rock.utility.RockResponse;
 public class ToDoCommand {
     /**
      * get description of the taks
-     * @param cmd
+     * @param cmd User's command
      * @return getName
-     * @throws RockException
+     * @throws RockException if invalid command
      */
     private static String parseToDo(String cmd) throws RockException {
         String getName = cmd.substring(CommandTag.TODO.length()).trim();
@@ -23,8 +23,8 @@ public class ToDoCommand {
 
     /**
      * Handle command: todo
-     * @param cmd
-     * @param response
+     * @param cmd User's command
+     * @param response Rock's response that need updated
      */
     public static void handle(String cmd, RockResponse response, TaskList tasks) {
         try {

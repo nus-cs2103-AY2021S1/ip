@@ -9,9 +9,9 @@ import rock.utility.StringToInt;
 public class DeleteCommand {
     /**
      * get information on delete.
-     * @param cmd User command
-     * @return Index
-     * @throws RockException
+     * @param cmd User's command
+     * @return index
+     * @throws RockException If the index invalid
      */
     private static int parseDelete(String cmd, int limit) throws RockException {
         String value = cmd.substring(CommandTag.DELETE.length()).trim();
@@ -20,8 +20,8 @@ public class DeleteCommand {
 
     /**
      * handle command: delete.
-     * @param cmd
-     * @param response
+     * @param cmd User's command
+     * @param response Rock's response that need updated
      */
     public static void handle(String cmd, RockResponse response, TaskList tasks) {
         try {

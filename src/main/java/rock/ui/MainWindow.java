@@ -22,8 +22,6 @@ public class MainWindow extends AnchorPane {
 
     private Rock rock;
 
-    private boolean isTerminated;
-
     private final Image sadUserImage = new Image(this.getClass().getResourceAsStream("/images/PepegaSad.png"));
     private final Image happyUserImage = new Image(this.getClass().getResourceAsStream("/images/PepegaHappy.png"));
     private Image currentUserImage = sadUserImage;
@@ -43,7 +41,7 @@ public class MainWindow extends AnchorPane {
 
     /**
      * Say bye to the user and terminate program.
-     * @param input
+     * @param input User's command
      */
     public void terminateRock(String input) {
         try {
@@ -56,12 +54,10 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getUserDialog(input, currentUserImage),
                 DialogBox.getDukeDialog(Ui.sayBye(), currentRockImage)
         );
-        isTerminated = true;
     }
 
     public void setDuke(Rock d) {
         rock = d;
-        isTerminated = false;
     }
 
     private void switchRock(String input) {
@@ -79,23 +75,17 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(Ui.saySwitch(), currentRockImage)
         );
         currentUserImage = nextUserImage;
-        isTerminated = true;
     }
 
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
-
-    private void displayMessage(RockException ex) {
-
-    }
-
     @FXML
     private void handleUserInput() {
         //if(isTerminated) terminateDuke();
         String input = userInput.getText();
-        String response = "";
+        String response;
         try {
             response = rock.getResponse(input);
             dialogContainer.getChildren().addAll(
@@ -111,7 +101,6 @@ public class MainWindow extends AnchorPane {
                 switchRock(input);
                 break;
             default:
-                displayMessage(ex);
                 break;
             }
         }
