@@ -14,40 +14,47 @@ public class Parser {
      */
 
     static Task parseFileItemToTask (String taskString) throws DukeException {
-        if (taskString.startsWith("[T]")) {
+        char status = taskString.charAt(5);
+        boolean isTodo = taskString.startsWith("[T]");
+        boolean isEvent = taskString.startsWith("[E]");
+        boolean isDeadline = taskString.startsWith("[D]");
+        assert (status == '\u2713' || status == '\u2718')
+                : "Data Storage Error: Task status not recognizable";
+        assert (isTodo || isDeadline || isEvent)
+                : "Data Storage Error: Task type not recognizable";
+        if (taskString.isBlank()) {
+            return null;
+        }
+        if (isTodo) {
             String name = taskString.substring(8);
-            if (taskString.charAt(5) == '\u2713') {
+            if (status == '\u2713') {
                 return new Todo(name, Task.Status.DONE);
-            } else if (taskString.charAt(5) == '\u2718') {
-                return new Todo(name, Task.Status.PENDING);
-            } else {
-                throw new DukeException("Status not recognizable");
             }
-        } else if (taskString.startsWith("[D]")) {
+            if (taskString.charAt(5) == '\u2718') {
+                return new Todo(name, Task.Status.PENDING);
+            }
+        }
+        if (isDeadline) {
             String name = taskString.split(" by: ")[0].substring(8);
             String dueDate = taskString.split(" by: ")[1];
-            if (taskString.charAt(5) == '\u2713') {
+            if (status == '\u2713') {
                 return new Deadline(name, Task.Status.DONE, dueDate);
-            } else if (taskString.charAt(5) == '\u2718') {
-                return new Deadline(name, Task.Status.PENDING, dueDate);
-            } else {
-                throw new DukeException("Status not recognizable");
             }
-        } else if (taskString.startsWith("[E]")) {
+            if (status == '\u2718') {
+                return new Deadline(name, Task.Status.PENDING, dueDate);
+            }
+        }
+        if (isEvent) {
             String name = taskString.split(" at: ")[0].substring(8);
             String dueDate = taskString.split(" at: ")[1];
-            if (taskString.charAt(5) == '\u2713') {
+            if (status == '\u2713') {
                 return new Event(name, Task.Status.DONE, dueDate);
-            } else if (taskString.charAt(5) == '\u2718') {
-                return new Event(name, Task.Status.PENDING, dueDate);
-            } else {
-                throw new DukeException("Status not recognizable");
             }
-        } else if (taskString.isEmpty() || taskString.isBlank()) {
-            return null;
-        } else {
-            throw new DukeException("error parsing storage file");
+            if (status == '\u2718') {
+                return new Event(name, Task.Status.PENDING, dueDate);
+            }
         }
+        return null;
     }
 
 
