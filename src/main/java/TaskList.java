@@ -1,4 +1,6 @@
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.time.LocalDate;
 public class TaskList {
     public ArrayList<Task> tasks;
 
@@ -84,6 +86,22 @@ public class TaskList {
         for(int i = 0; i < keyTasks.size(); i++){
             Integer listNum = i + 1;
             ui.addResponse(listNum.toString() + "." + keyTasks.get(i).toString());
+        }
+    }
+
+    public void snooze(int taskIndex, LocalDate newDate, Ui ui){
+        if(tasks.get(taskIndex - 1) instanceof Deadline){
+            Deadline editedTask = new Deadline(tasks.get(taskIndex - 1).description, newDate);
+            tasks.set(taskIndex - 1, editedTask);
+            ui.addResponse("Okay! You have snoozed task " + taskIndex + " to " +
+                    newDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy")));
+        }else if(tasks.get(taskIndex - 1) instanceof Event){
+            Event editedTask = new Event(tasks.get(taskIndex - 1).description, newDate);
+            tasks.set(taskIndex - 1, editedTask);
+            ui.addResponse("Okay! You have snoozed task " + taskIndex + " to " +
+                    newDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy")));
+        }else{
+            ui.addResponse("This task do not need to be snoozed");
         }
     }
 }

@@ -60,6 +60,14 @@ public class Parser {
         case "bye":
             command = new ExitCommand();
             break;
+        case "snooze":
+            if(input.length() == 6){
+                throw new DukeException("☹ OOPS!!! You cannot leave descriptions of a snooze empty");
+            } else {
+                taskIndex = Integer.parseInt(commandline[1]);
+                command = new SnoozeCommand(taskIndex, LocalDate.parse(commandline[2]));
+            }
+            break;
 
         default:
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
