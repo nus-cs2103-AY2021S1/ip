@@ -2,46 +2,99 @@ package duke;
 
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDate;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class ParserTest {
 
     @Test
     public void testParsingDeadline() {
-        String input = "deadline homework /by 31/12/2020 2359";
-        String expectedTime = "2359";
-        LocalDate expectedDate = LocalDate.parse("2020-12-31");
-        String expectedDescription = "homework";
-//        Command result = Parser.parseInput(input);
-//        AdditionalInfo resultInfo = result.getAdditionalInfo();
-//        assertEquals(expectedTime, resultInfo.getTime());
-//        assertEquals(expectedDescription, resultInfo.getTaskDescription());
-//        assertEquals(expectedDate, resultInfo.getDate());
-//        assertEquals(Command.CREATE_DEADLINE, result.getCommandType());
+        String input = "deadline homework /by 31/12/2020";
+        int expectedCommandType = Command.CREATE_DEADLINE;
+        TaskList taskList = new TaskList();
+        Command testCommand = Parser.parseInput(input, taskList);
+        assertEquals(expectedCommandType,testCommand.getCommandType());
+        try {
+            String output = testCommand.execute();
+            // executed successfully
+            assertEquals(1,1);
+        } catch (DukeException e) {
+            fail("Parsing has failed");
+        }
+    }
+
+    @Test
+    public void testParsingWrongDeadline() {
+        String input = "deadline homework /by 31-12-2020";
+        int expectedCommandType = Command.CREATE_DEADLINE;
+        TaskList taskList = new TaskList();
+        Command testCommand = Parser.parseInput(input, taskList);
+        assertEquals(expectedCommandType,testCommand.getCommandType());
+        try {
+            String output = testCommand.execute();
+        } catch (DukeException e) {
+            assertEquals(1,1);
+        }
     }
 
     @Test
     public void testParsingEvent() {
-        String input = "event Jean's Birthday /at Sentosa tomorrow";
-        String expectedTime = "Sentosa tomorrow";
-        String expectedDescription = "Jean's Birthday";
-//        Command result = Parser.parseInput(input);
-//        AdditionalInfo resultInfo = result.getAdditionalInfo();
-//        assertEquals(expectedDescription, resultInfo.getTaskDescription());
-//        assertEquals(expectedTime, resultInfo.getTime());
-//        assertEquals(Command.CREATE_EVENT, result.getCommandType());
+        String input = "event Jean's Birthday /at 2/3/2020";
+        int expectedCommandType = Command.CREATE_EVENT;
+        TaskList taskList = new TaskList();
+        Command testCommand = Parser.parseInput(input, taskList);
+        assertEquals(expectedCommandType,testCommand.getCommandType());
+        try {
+            String output = testCommand.execute();
+            // executed successfully
+            assertEquals(1,1);
+        } catch (DukeException e) {
+            fail("Parsing has failed");
+        }
     }
 
     @Test
+    public void testParsingEventWrongDate() {
+        String input = "event Jean's birthday /at 30-12-2020";
+        int expectedCommandType = Command.CREATE_EVENT;
+        TaskList taskList = new TaskList();
+        Command testCommand = Parser.parseInput(input, taskList);
+        assertEquals(expectedCommandType,testCommand.getCommandType());
+        try {
+            String output = testCommand.execute();
+        } catch (DukeException e) {
+            // supposed to throw exception
+            assertEquals(1,1);
+        }
+    }
+    @Test
     public void testParsingTodo() {
-        String input = "todo finish my 2103 assignments!";
-        String expectedDescription = "finish my 2103 assignments!";
-//        Command result = Parser.parseInput(input);
-//        AdditionalInfo resultInfo = result.getAdditionalInfo();
-//        assertEquals(expectedDescription, resultInfo.getTaskDescription());
-//        assertEquals(Command.CREATE_TODO, result.getCommandType());
+        String input = "todo homework";
+        int expectedCommandType = Command.CREATE_TODO;
+        TaskList taskList = new TaskList();
+        Command testCommand = Parser.parseInput(input, taskList);
+        assertEquals(expectedCommandType,testCommand.getCommandType());
+        try {
+            String output = testCommand.execute();
+            // executed successfully
+            assertEquals(1,1);
+        } catch (DukeException e) {
+            fail("Parsing has failed");
+        }
+    }
 
+    @Test
+    public void testParsingTodoFail() {
+        String input = "todo";
+        int expectedCommandType = Command.CREATE_TODO;
+        TaskList taskList = new TaskList();
+        Command testCommand = Parser.parseInput(input, taskList);
+        assertEquals(expectedCommandType,testCommand.getCommandType());
+        try {
+            String output = testCommand.execute();
+        } catch (DukeException e) {
+            // supposed to throw exception
+            assertEquals(1,1);
+        }
     }
 }
