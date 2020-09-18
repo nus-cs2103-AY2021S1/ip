@@ -12,8 +12,6 @@ Sparrow is a **desktop app for managing tasks and vocabulary, optimized for use 
   * [Locating task by name : `find`](#locating-task-by-name)
   * [Marking a task as completed : `done`](#marking-a-task)
   * [Deleting an item : `delete`](#deleting-an-item)
-    + [Deleting a task](#deleting-a-task)
-    + [Deleting a vocab](#deleting-a-vocab)
   * [Adding a vocab : `vocab`](#adding-a-vocab)
   * [Defining a word : `define`](#defining-a-word)
   * [Listing all tasks/vocab : `list`](#listing)
@@ -57,7 +55,8 @@ Adds a todo to the task list.
 
 Format: `todo <DESCRIPTION>`
 
-Example of usage: `todo find crew for ship`
+Example of usage: <br>
+`todo find crew for ship`
 
 Expected outcome:
 ```
