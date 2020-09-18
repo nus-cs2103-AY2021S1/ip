@@ -1,0 +1,24 @@
+todo buy ship
+todo sail to Tortuga
+wrong command
+todo
+todo find treasure
+deadline
+deadline find a crew
+deadline find a crew /by
+deadline find a crew /by end of Aug
+event
+event brethren's court meeting
+event brethren's court meeting /at
+event brethren's court meeting /at next Wed 2-4pm
+done
+done -5
+done 1000
+done 1
+delete
+delete -99
+delete 999
+delete 3
+list
+bye
+
