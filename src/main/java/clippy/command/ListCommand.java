@@ -23,11 +23,6 @@ public class ListCommand extends Command {
         return output;
     }
 
-    @Override 
-    public boolean isExit() {
-        return false;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {

@@ -7,8 +7,4 @@ public abstract class UpdateCommand extends Command {
         this.indexOfTaskToUpdate = indexOfTaskToUpdate;
     }
 
-    @Override
-    boolean isExit() {
-        return false;
-    }
 }

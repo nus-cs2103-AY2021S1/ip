@@ -11,8 +11,4 @@ public class HelpCommand extends Command {
         return ui.showHelp();
     }
 
-    @Override
-    boolean isExit() {
-        return false;
-    }
 }

@@ -23,8 +23,4 @@ public class DoneCommand extends Command {
         return output;
     }
 
-    @Override
-    boolean isExit() {
-        return false;
-    }
 }

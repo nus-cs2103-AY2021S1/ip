@@ -44,8 +44,4 @@ public class FindCommand extends Command {
         return output;
     }
 
-    @Override
-    boolean isExit() {
-        return false;
-    }
 }
