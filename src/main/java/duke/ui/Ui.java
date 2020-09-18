@@ -43,8 +43,8 @@ public class Ui {
      * Prints error message from failing to load save file.
      */
     public void showLoadingError() {
-        System.out.println("Unable to load or find save file. " +
-                "Save file is either not found or corrupted. " +
-                "Initiating new instance.");
+        System.out.println("Unable to load or find save file. "
+                + "Save file is either not found or corrupted. "
+                + "Initiating new instance.");
     }
 }
