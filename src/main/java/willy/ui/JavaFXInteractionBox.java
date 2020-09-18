@@ -1,15 +1,26 @@
 package willy.ui;
 
+import java.awt.*;
+
+import javax.swing.*;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextFlow;
+import javafx.scene.transform.Scale;
+import javafx.stage.Stage;
 
 /**
  * In charge of creating the interactionBox which consist of the displaying of user inputs and bot's response.
@@ -44,14 +55,19 @@ public class JavaFXInteractionBox {
      */
     public VBox interactionBoxCreator() {
 
-        Rectangle userInputContainer = new Rectangle(330, 40);
-        userInputContainer.setFill(Color.rgb(180, 157, 253));
         StackPane userInputStack = new StackPane();
+        // Code below adapted from https://www.youtube.com/watch?v=UzlXUlTD1Lo
+        userInput.prefWidthProperty().bind(userInputStack.widthProperty());
+        // Code below adapted from https://www.programcreek.com/java-api-examples/?class=javafx.scene.control.Label&method=setBackground
+        userInput.setBackground(new Background(new BackgroundFill(Color.rgb(180, 157, 253), new CornerRadii(2), new Insets(-3.5,0,-5,0) )));
+        userInput.setAlignment(Pos.CENTER_RIGHT);
         userInput.setTextFill(Color.WHITE);
         // Code below from https://stackoverflow.com/questions/12341672/make-portion-of-a-text-bold-in-a-javafx-label
         // -or-text
         userInput.setStyle("-fx-font-weight: bold");
-        userInputStack.getChildren().addAll(userInputContainer, userInput);
+        userInput.setTextAlignment(TextAlignment.RIGHT);
+        userInput.setWrapText(true);
+        userInputStack.getChildren().addAll(userInput);
         userInputStack.setAlignment(userInput, Pos.CENTER_RIGHT);
 
         // Responsible for BotResponse
@@ -61,7 +77,7 @@ public class JavaFXInteractionBox {
         botResponseContainer.setStyle("-fx-background: #EBE9F7; -fx-border-color: #262626;");
         botResponseContainer.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         botResponseContainer.setPrefViewportHeight(160);
-        botResponseContainer.setPrefViewportWidth(180);
+        botResponseContainer.setPrefViewportWidth(190);
         TextFlow text = new TextFlow(botResponse);
         text.setPrefWidth(300);
         text.setPadding(new Insets(7, 20, 5, 20));
@@ -69,9 +85,9 @@ public class JavaFXInteractionBox {
 
         // Bot and User Interaction Container
         VBox interactionBox = new VBox();
-        interactionBox.setPadding(new Insets(5, 20, 10, 30));
+        interactionBox.setPadding(new Insets(5, 20, 10, 20));
         interactionBox.setSpacing(10);
-        interactionBox.setMinHeight(200);
+        interactionBox.setPrefHeight(200);
         interactionBox.getChildren().addAll(userInputStack, botResponseContainer);
 
         return interactionBox;

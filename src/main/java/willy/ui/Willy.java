@@ -87,7 +87,7 @@ public class Willy extends Application {
         inputField.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
                 String message = inputField.getText();
-                JavaFXInteractionBox.userInput.setText(message + "\t   ");
+                JavaFXInteractionBox.userInput.setText(message + "\t   " );
                 inputField.clear();
                 JavaFXInteractionBox.botResponse.setText(parser.parseCommand(message, true)); // Returns Response
                 if (message.equals(Willy.getLastGreeting())) {
