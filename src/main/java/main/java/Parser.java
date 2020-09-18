@@ -60,6 +60,13 @@ public class Parser {
                     return "     " + e.getMessage();
                 }
 
+            case "FDTask":
+                try {
+                    return handleFDTask();
+                } catch (DukeException e) {
+                    return "     " + e.getMessage();
+                }
+
             case "event":
                 try {
                     return handleEvent();
@@ -234,6 +241,32 @@ public class Parser {
     }
 
     /**
+     * handles instruction "FDTask"
+     */
+    public String handleFDTask() throws DukeException{
+        if (!sc.hasNextLine()) {
+            throw new DukeException("\u2639 OOPS!!! The description of a FDTask cannot be empty.");
+        }
+        String FDCommand = sc.nextLine();
+        if (FDCommand.isEmpty()) {
+            throw new DukeException("\u2639 OOPS!!! The description of a FDTask cannot be empty.");
+        }
+        if (!FDCommand.contains("/for")) {
+            throw new DukeException("\u2639 OOPS!!! The duration of a FDTask cannot be empty.");
+        }
+        String[] strings = FDCommand.split("/for");
+        String FDDescription = strings[0];
+        String period = strings[1];
+        double hours = Double.valueOf(period);
+        FixedDurationTasks fixedDurationTasks = new FixedDurationTasks(FDDescription, hours);
+        taskList.add(fixedDurationTasks);
+        String output = "";
+        output += "Got it. I've added this task:        \n" + fixedDurationTasks.getDescription();
+        output += "\nNow you have " + taskList.size() + " tasks in the list.";
+        return output;
+    }
+
+    /**
      * handles instruction "event"
      */
     public String handleEvent() throws DukeException{
@@ -283,6 +316,9 @@ public class Parser {
                 int done = task.isDone? 1:0;
                 line = "D|" + done + "|" + task.description + "|" +
                         ((Deadline) task).deadline.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            } else if(task instanceof FixedDurationTasks) {
+                int done = task.isDone? 1:0;
+                line = "F|" + done + "|" + task.description + "|" + ((FixedDurationTasks) task).getHours();
             } else {
                 int done = task.isDone? 1:0;
                 line = "T|" + done + "|" + task.description + "|" + ((Event) task).time;
@@ -300,7 +336,4 @@ public class Parser {
         fwAppend.close();
     }
 
-    public boolean getFlag() {
-        return flag;
-    }
 }
