@@ -1,8 +1,17 @@
 # User Guide
 Duke is a desktop dog to help you manage tasks in the form of todos, deadlines and events. It is optimised for use via Command Line Interface (CLI). If you can type fast, Duke can help you record your tasks faster than with a traditional GUI.
 
-## Features 
+## Features
+[Viewing help](#viewing-help-help)
 [Add a new Todo](#add-a-new-todo-todo)
+[Add a new Event](#add-a-new-event-at)
+[Add a new Deadline](#add-a-new-deadline-by)
+[List out current tasks](#list-out-current-tasks-list)
+[Search for task](#search-for-task-using-keyword-find)
+[Delete a task](#delete-a-task-by-index-delete)
+[Mark a task as done](#mark-a-task-as-done-by-index-done)
+[Save and close the app](#save-and-close-the-app-bye)
+[Update a task](#update-a-task-by-index)
 ### Viewing help: `help`
 Displays features and the commands needed to use them.
 #### Usage
@@ -72,17 +81,6 @@ Format: `/find KEYWORD`
 Examples:
 * `/find submit`
 * `/find Arts`
-
-### Delete a Task by index: `delete`
-Deletes a task by its number within the list.
-#### Usage
-Format: `/delete INDEX`
-* Deletes a task by its number within the list.
-* INDEX has to be the number of an existing task.
-
-Examples:
-* `/delete 1` - this would delete the first task on the list.
-* `/delete 3` - this would delete the third task on the list.
 
 ### Delete a Task by index: `delete`
 Deletes a task by its number within the list.
