@@ -202,7 +202,8 @@ Closes the app and saves the list.
     
   </summary>
   
-Format: `bye`
+Format: `/bye`
 * Closes the app and saves the list in the save directory as the app.
 * If closed without this command, changes to the list will **not** be saved.
+* Any words before and after the command is ignored.
 </details>

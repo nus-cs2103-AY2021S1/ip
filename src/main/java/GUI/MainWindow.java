@@ -80,10 +80,5 @@ public class MainWindow extends AnchorPane {
                 dukeDialog
         );
         userInput.clear();
-        if (input.equals("bye")) {
-            UI.stop();
-            Storage.writeToFile();
-            System.exit(0);
-        }
     }
 }

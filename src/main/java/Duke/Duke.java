@@ -11,7 +11,7 @@ public class Duke {
      * @return
      */
     public String getResponse(String input) {
-        if (input.equals("bye")) {
+        if (input.equals("/bye")) {
             return "Bark bark! (Goodbye!)";
         }
         try {

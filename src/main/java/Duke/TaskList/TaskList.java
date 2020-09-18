@@ -62,7 +62,7 @@ public class TaskList {
                 "DISPLAY LIST: /list" + newLine + "SEARCH FOR A KEYWORD: " + "/find *text to search for*" +
                 newLine + "DELETE A TASK: /delete *index of task to delete*" + newLine +
                 "MARK A TASK AS DONE: /done *index of task finished" + newLine + "UPDATE A TASK: " +
-                "/update *index of task to update* *updated content of task*" + newLine + "SAVE AND CLOSE: bye";
+                "/update *index of task to update* *updated content of task*" + newLine + "SAVE AND CLOSE: /bye";
     }
 
     /**

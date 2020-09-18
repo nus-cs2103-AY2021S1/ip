@@ -1,7 +1,9 @@
 package Duke.commands;
 
 import Duke.DukeExceptions;
+import Duke.Storage;
 import Duke.TaskList.TaskList;
+import Duke.UI.UI;
 
 import java.io.FileReader;
 import java.io.File;
@@ -86,6 +88,11 @@ public class Parser {
 
                 case "UG":
                     return TaskList.getUG();
+
+                case "bye":
+                    UI.stop();
+                    Storage.writeToFile();
+                    System.exit(0);
 
                 default:
                     throw new DukeExceptions("Bark bark bark! (Please use me with proper commands!)");
