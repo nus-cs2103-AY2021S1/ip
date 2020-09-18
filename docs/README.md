@@ -4,7 +4,7 @@ Welcome to **Duke**, a Personal Assistant Chatbot that helps you keep track of t
 - [Features](#Features)
 - [Usage](#Usage)
 
-## Features 
+## <a name="Features">Features</a> 
 
 ### [Listing all tasks](#list): `list`
 
@@ -24,7 +24,7 @@ Welcome to **Duke**, a Personal Assistant Chatbot that helps you keep track of t
 
 ### [Exiting the application](#bye): `bye`
 
-## Usage
+## <a name="Usage">Usage</a>
 
 ### <a name="list">Listing all tasks</a>: `list`
 
