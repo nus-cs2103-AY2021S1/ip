@@ -55,7 +55,7 @@ _list_
 Expected outcome:
 
 Check out your missions!
-_1.  [T] [LOW] feed doge [?]_
+_1.  [T] [LOW] feed doge [✗]_
 
 _You have a total of 1 tasks_
 
@@ -106,7 +106,7 @@ Expected outcome:
 
 _Such wow! I have completed the following task!_
 
-_[LOW] feed dog [?]_
+_[LOW] feed dog [✓]_
 
 _You have a total of 1 tasks_
 
@@ -151,9 +151,9 @@ Expected outcome:
 
 _Doge found the following tasks you asked for!_
 
- _1.  [T] [LOW] feed doge [?]_
+ _1.  [T] [LOW] feed doge [✗]_
  
- _2.  [E] [LOW] east coast plan on WEDNESDAY 2 SEPTEMBER 2020 [?]_
+ _2.  [E] [LOW] east coast plan on WEDNESDAY 2 SEPTEMBER 2020 [✗]_
 
 ### `Set priority` 
 
