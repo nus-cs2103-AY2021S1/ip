@@ -17,8 +17,8 @@ import olivia.ui.ViewPane;
 
 public class OliviaGui extends Application {
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/gowon.png"));
-    private Image oliviaImage = new Image(this.getClass().getResourceAsStream("/images/olivia.png"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/gowon.png"));
+    private final Image oliviaImage = new Image(this.getClass().getResourceAsStream("/images/olivia.png"));
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
@@ -27,18 +27,17 @@ public class OliviaGui extends Application {
     private Olivia olivia;
 
     private void displayIntro() {
-        Label introText = new Label(olivia.welcome());
         dialogContainer.getChildren().addAll(
-                DialogBox.getOliviaDialog(introText, new ImageView(oliviaImage)));
+                DialogBox.getOliviaDialog(olivia.welcome(), new ImageView(oliviaImage)));
     }
 
     private void handleUserInput() {
-        Label userText = new Label(userInput.getText());
+        String userText = userInput.getText();
         Parser parser = olivia.getParser();
-        Label dukeText = new Label(parser.parse(userInput.getText()));
+        String oliviaText = parser.parse(userInput.getText());
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(userImage)),
-                DialogBox.getOliviaDialog(dukeText, new ImageView(oliviaImage))
+                DialogBox.getOliviaDialog(oliviaText, new ImageView(oliviaImage))
         );
         if (olivia.shouldExit()) {
             ((Stage) userInput.getScene().getWindow()).close();

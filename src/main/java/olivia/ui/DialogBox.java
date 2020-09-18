@@ -11,28 +11,27 @@ import javafx.scene.shape.Circle;
 
 public class DialogBox extends HBox {
 
-    private Label text;
+    /** default radius of user's image in the dialog box */
+    private static final double IMAGE_RADIUS = 35.0;
+    /** default spacing between dialog and text box */
+    private static final double SPACING = 10;
+
+    private TextBox text;
     private ImageView displayPicture;
 
-    /**
-     * Constructor that creates a DialogBox object.
-     *
-     * @param label the Label associated with the DialogBox object
-     * @param imageview an Image associated with the DialogBox
-     *                  object wrapped in an ImageView object
-     */
+    private DialogBox(String text, ImageView imageview, boolean left) {
+        this.text = left
+                ? TextBox.leftwardTextBox(text)
+                : TextBox.rightwardTextBox(text);
 
-    public DialogBox(Label label, ImageView imageview) {
-        text = label;
         displayPicture = imageview;
         imageview.setClip(new Circle(50, 50, 50));
-
-        text.setWrapText(true);
         displayPicture.setFitWidth(100.0);
         displayPicture.setFitHeight(100.0);
+        getChildren().addAll(this.text, displayPicture);
 
-        this.setAlignment(Pos.TOP_RIGHT);
-        this.getChildren().addAll(text, displayPicture);
+        setAlignment(Pos.TOP_RIGHT);
+        setSpacing(SPACING);
     }
 
     private DialogBox flip() {
@@ -43,12 +42,12 @@ public class DialogBox extends HBox {
         return this;
     }
 
-    public static DialogBox getUserDialog(Label l, ImageView iv) {
-        return new DialogBox(l, iv);
+    public static DialogBox getUserDialog(String message, ImageView iv) {
+        return new DialogBox(message, iv, false);
     }
 
-    public static DialogBox getOliviaDialog(Label l, ImageView iv) {
-        return new DialogBox(l, iv).flip();
+    public static DialogBox getOliviaDialog(String message, ImageView iv) {
+        return new DialogBox(message, iv, true).flip();
     }
 
 }
