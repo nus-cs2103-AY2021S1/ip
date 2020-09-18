@@ -17,7 +17,7 @@ import javafx.util.Duration;
 import meimei.MeimeiBot;
 
 /**
- * Controller for duke.gui.MainWindow. Provides the layout for the other controls.
+ * Controller for meimei.gui.MainWindow. Provides the layout for the other controls.
  * Adapted from <a href="https://se-education.org/guides/tutorials/javaFxPart4.html">this guide</a>.
  */
 public class MainWindow extends AnchorPane {
@@ -33,7 +33,7 @@ public class MainWindow extends AnchorPane {
 
     private final MeimeiBot meimeiBot;
 
-    private final Image userProfile = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private final Image userProfile = new Image(this.getClass().getResourceAsStream("/images/RalphProfile.png"));
     private final Image meimeiProfile = new Image(this.getClass().getResourceAsStream("/images/VanellopeProfile.png"));
 
     /**
@@ -54,11 +54,11 @@ public class MainWindow extends AnchorPane {
         }
 
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(this.meimeiBot.start(), meimeiProfile));
+        dialogContainer.getChildren().add(DialogBox.getMeimeiDialog(this.meimeiBot.start(), meimeiProfile));
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * Creates two dialog boxes, one echoing user input and the other containing the bot's reply and then appends them to
      * the dialog container. Clears the user input after processing. Exits if bot stops running.
      */
     @FXML
@@ -67,7 +67,7 @@ public class MainWindow extends AnchorPane {
         String response = meimeiBot.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userProfile),
-                DialogBox.getDukeDialog(response, meimeiProfile)
+                DialogBox.getMeimeiDialog(response, meimeiProfile)
         );
         userInput.clear();
 
