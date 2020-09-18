@@ -44,8 +44,8 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-        System.out.println("Hello! Duke at your service. Please name your request." +
-                "\nAll dates should be in the form of YYYY-MM-DD: ");
+        System.out.println("Hello! Duke at your service. Please name your request."
+                + "\nAll dates should be in the form of YYYY-MM-DD: ");
 
         // Take user Input
         ui.takeUserInput(storage);
