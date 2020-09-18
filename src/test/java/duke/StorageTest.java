@@ -1,4 +1,4 @@
-package seedu.duke;
+package duke;
 
 import org.junit.jupiter.api.Test;
 import java.io.FileWriter;

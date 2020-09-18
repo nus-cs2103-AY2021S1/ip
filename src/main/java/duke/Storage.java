@@ -1,4 +1,4 @@
-package seedu.duke;
+package duke;
 
 import java.io.File;
 import java.io.FileNotFoundException;
