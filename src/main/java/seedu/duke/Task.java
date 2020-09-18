@@ -26,8 +26,8 @@ public class Task {
         }
 
     }
-    String name;
-    Status status;
+    private String name;
+    private Status status;
 
     /**
      * Constructor
@@ -39,6 +39,12 @@ public class Task {
         this.status = status;
     }
 
+    String getName() {
+        return this.name;
+    }
+    Status getStatus() {
+        return this.status;
+    }
     /**
      * Change the status of the task to DONE
      */

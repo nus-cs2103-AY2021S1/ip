@@ -11,11 +11,24 @@ import java.util.Scanner;
  * Data and file manager of Duke
  */
 public class Storage {
-    static String path;
-    File file;
-    ArrayList<Task> itemList = new ArrayList<>();
+    private static String path;
+    private File file;
+    private ArrayList<Task> itemList = new ArrayList<>();
 
 
+    /**
+     * Constructor of the class.
+     * Creates a new Storage object.
+     * @param path The path to create (or access) the data management file.
+     * @throws IOException If file fails to be created or accessed.
+     */
+    public Storage (String path) throws IOException {
+        this.path = path;
+        file = new File(path);
+        if (!file.exists()) {
+            file.createNewFile();
+        }
+    }
     /**
      * Record a task into the data management file.
      * @param task Task to be recorded.
@@ -28,28 +41,11 @@ public class Storage {
         appendFile.write("\n");
         appendFile.close();
     }
-
-
-    /**
-     * Constructor of the class.
-     * Creates a new Storage object.
-     * @param path The path to create (or access) the data management file.
-     * @throws IOException If file fails to be created or accessed.
-     */
-    public Storage (String path) throws IOException {
-        this.path = path;
-        file = new File(path);
-        if (! file.exists()) {
-            file.createNewFile();
-        }
-    }
-
     /**
      * Rewrites the data management file with a new array of tasks.
      * @param list List of tasks to be written.
      * @throws IOException If data management file fails to be created or accessed.
      */
-
     public void modifyWithList(ArrayList<Task> list) throws IOException {
         FileWriter clearFile = new FileWriter(path);
         clearFile.write("");

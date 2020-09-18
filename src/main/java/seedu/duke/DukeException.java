@@ -5,7 +5,7 @@ package seedu.duke;
  */
 public class DukeException extends Exception {
     /**
-     * Contructor of the class.
+     * Constructor of the class.
      * Sends an error message to the user.
      * @param msg
      */

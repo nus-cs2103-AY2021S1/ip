@@ -8,11 +8,11 @@ import java.util.Scanner;
  * This class prompts user to input their message and react accordingly.
  */
 public class Ui {
-    Scanner sc;
+    private Scanner sc;
     //Object to store the list
-    ArrayList<Task> itemList = new ArrayList<>();
+    private ArrayList<Task> itemList = new ArrayList<>();
     //create file
-    String path = "out/todo.txt";
+    private String path = "/Users/chengjiyuqing/Desktop/Year 2 Sem 1/CS2103T/ip/src/main/java/seedu/duke/todo.txt";
 
     /**
      * Constructor of the class.
