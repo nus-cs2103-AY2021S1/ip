@@ -1,5 +1,5 @@
 # Duke User Guide
-Duke is a personal task manager that helps to add, store, delete, find and sort tasks for you. :smile:
+Duke is a personal task manager that helps to add, delete, find and sort tasks for you!
 
 ## Duke GUI
 ![Duke GUI](./Ui.png)
