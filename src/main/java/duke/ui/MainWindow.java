@@ -69,6 +69,7 @@ public class MainWindow extends AnchorPane {
         CommandResponse response = duke.getResponse(input);
         if (response.getShouldExit()) {
             Platform.exit();
+            System.exit(0);
         } else {
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userImage),

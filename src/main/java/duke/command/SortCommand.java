@@ -94,6 +94,7 @@ public class SortCommand extends Command {
     @Override
     public CommandResponse execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.getList().sort(TASK_COMPARATOR);
+        storage.save(tasks);
         boolean shouldExit = getIsExit();
         assert !shouldExit : "shouldExit should be false";
         return new CommandResponse(createResponseMessage(tasks), shouldExit);
