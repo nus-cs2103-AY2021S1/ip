@@ -118,17 +118,3 @@ There is no need to save manually.
 * `find KEYWORD`
 * `done INDEX`
 * `bye`
-
-## Command Summary
-|Action|Format|
-|:---:|:---:|
-|Switching the rock|`switch`|
-|Adding a to-do task|`todo DESCRIPTION`|
-|Adding an event task|`event DESCRIPTION /at TIME`|
-|Adding a deadline task|`deadline DESCRIPTION /by TIME`|
-|Adding a do-with-in task|`dowithin DESCRIPTION /between START_TIME /and END_TIME`|
-|Listing all tasks|`list`|
-|Deleting a task|`delete INDEX`|
-|Locating tasks by description|`find KEYWORD`|
-|Marking a task as done|`done INDEX`|
-|Exiting the program|`bye`|
