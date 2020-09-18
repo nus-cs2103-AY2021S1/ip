@@ -1,0 +1,5 @@
+T | 0 | ACC assignment
+T | 0 | CS assignment
+T | 0 | Essay
+D | 1 | School Fees | 2020-11-01
+E | 0 | Birthday Celebration | 2020-12-22

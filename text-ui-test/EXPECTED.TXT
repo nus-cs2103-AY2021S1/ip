@@ -1,7 +1,117 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+____________________________________________________
+Hello! I'm Duke
+What can I do for you?
+____________________________________________________
+
+I'm sorry, but I don't know what that means :-(
+Error! To add a todo, please enter 'todo [description]'.
+____________________________________________________
+Got it. I've added this task:
+[T][✘] read book
+Now you have 1 task in the list.
+____________________________________________________
+
+Error! To add a deadline, please enter 'deadline [description] /by [date/time]'.
+Error! To add a deadline, please enter 'deadline [description] /by [date/time]'.
+Error! To add a deadline, please enter 'deadline [description] /by [date/time]'.
+____________________________________________________
+Got it. I've added this task:
+[D][✘] return book (by: June 6th)
+Now you have 2 tasks in the list.
+____________________________________________________
+
+Error! To add an event, please enter 'event [description] /at [date/time]'.
+Error! To add an event, please enter 'event [description] /at [date/time]'.
+Error! To add an event, please enter 'event [description] /at [date/time]'.
+____________________________________________________
+Got it. I've added this task:
+[E][✘] project meeting (at: Aug 6th 2-4pm)
+Now you have 3 tasks in the list.
+____________________________________________________
+
+____________________________________________________
+Got it. I've added this task:
+[T][✘] join sports club
+Now you have 4 tasks in the list.
+____________________________________________________
+
+____________________________________________________
+Got it. I've added this task:
+[T][✘] borrow book
+Now you have 5 tasks in the list.
+____________________________________________________
+
+____________________________________________________
+Here are the tasks in your list:
+1.[T][✘] read book
+2.[D][✘] return book (by: June 6th)
+3.[E][✘] project meeting (at: Aug 6th 2-4pm)
+4.[T][✘] join sports club
+5.[T][✘] borrow book
+____________________________________________________
+
+Error! To mark a task as done, please enter 'done [task number]'.
+Error! Please enter a valid task number.
+Error! This task does not exist, please enter a valid task number.
+____________________________________________________
+Nice! I've marked this task as done:
+[✓] read book
+____________________________________________________
+
+____________________________________________________
+Here are the tasks in your list:
+1.[T][✓] read book
+2.[D][✘] return book (by: June 6th)
+3.[E][✘] project meeting (at: Aug 6th 2-4pm)
+4.[T][✘] join sports club
+5.[T][✘] borrow book
+____________________________________________________
+
+____________________________________________________
+Got it. I've added this task:
+[D][✘] return book (by: Sunday)
+Now you have 6 tasks in the list.
+____________________________________________________
+
+____________________________________________________
+Got it. I've added this task:
+[E][✘] project meeting (at: Mon 2-4pm)
+Now you have 7 tasks in the list.
+____________________________________________________
+
+____________________________________________________
+Here are the tasks in your list:
+1.[T][✓] read book
+2.[D][✘] return book (by: June 6th)
+3.[E][✘] project meeting (at: Aug 6th 2-4pm)
+4.[T][✘] join sports club
+5.[T][✘] borrow book
+6.[D][✘] return book (by: Sunday)
+7.[E][✘] project meeting (at: Mon 2-4pm)
+____________________________________________________
+
+Error! To delete a task, please enter 'delete [task number]'.
+Error! This task does not exist, please enter a valid task number.
+____________________________________________________
+Noted. I've removed this task:
+[D][✘] return book (by: June 6th)
+____________________________________________________
+
+____________________________________________________
+Noted. I've removed this task:
+[T][✘] join sports club
+____________________________________________________
+
+____________________________________________________
+Here are the tasks in your list:
+1.[T][✓] read book
+2.[E][✘] project meeting (at: Aug 6th 2-4pm)
+3.[T][✘] borrow book
+4.[D][✘] return book (by: Sunday)
+5.[E][✘] project meeting (at: Mon 2-4pm)
+____________________________________________________
+
+____________________________________________________
+Bye. Hope to see you again soon!
+____________________________________________________
 
