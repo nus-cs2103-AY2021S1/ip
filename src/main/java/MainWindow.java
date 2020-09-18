@@ -7,9 +7,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-
 import java.util.Timer;
 import java.util.TimerTask;
+
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -24,6 +24,9 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
+    /**
+     * initializes and adds label for opening text
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -34,8 +37,9 @@ public class MainWindow extends AnchorPane {
         String openingMsg = "hey hey im Poco \ntype 'help' to view a list of commands"
                                 + "\ntype 'format (cmd name)' to view the correct format \ntype 'bye' to exit";
         Label text = new Label(openingMsg);
-        text.setStyle("-fx-text-fill: #D0D0D0; -fx-font-family:\"consolas\"; -fx-font-size:14px; -fx-font-weight:bold;");
-        text.setPadding(new Insets(10, 0,10, 10));
+        text.setStyle("-fx-text-fill: #D0D0D0; -fx-font-family:\"consolas\";"
+                + "-fx-font-size:14px; -fx-font-weight:bold;");
+        text.setPadding(new Insets(10, 0, 10, 10));
         dialogContainer.getChildren().remove(userInput);
         dialogContainer.getChildren().addAll(
                 text,

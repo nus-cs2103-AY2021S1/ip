@@ -68,10 +68,11 @@ public class TaskList {
                 task = new Event(arr[0], ldt);
                 list.add(task);
                 break;
+            default:
+                return "Error adding task";
             }
-            return task != null ? "Poco has added " + task.toString() + " to your list"
-                    + "\n" + "Pending Tasks: " + list.size()
-                    : "Error: adding task";
+            return "Poco has added " + task.toString() + " to your list"
+                    + "\n" + "Pending Tasks: " + list.size();
         } catch (Exception e) {
             System.out.println(e);
             return "Error: Invalid time format";
