@@ -11,6 +11,7 @@ public class Parser {
 
     private static final List<String> formatStringsLocalDate = Arrays.asList("M/y", "d/M/y", "M-y", "d-M-y");
     private static final List<String> formatStringsLocalDateTime = Arrays.asList("d-M-y HH:mm", "d/M/y HH:mm");
+    private static final List<String> prohibitedInputSymbol = Arrays.asList("|", "[", "]", ")", "(");
 
     /**
      * Parse date and time string to LocalDateTime
@@ -24,7 +25,7 @@ public class Parser {
                 LocalDateTime localDateAndTime = LocalDateTime.parse(dateTimeString, formatter);
                 return localDateAndTime;
             } catch (Exception e) {
-                System.out.println(e.getMessage());
+                //System.out.println(e.getMessage());
             }
         }
         return null;
@@ -60,6 +61,7 @@ public class Parser {
         String time = dateAndTime[1];
         return tryParseLocalDateTime(date + " " + time);
     }
+
     /**
      * Change date array into LocalDate.
      *
@@ -74,14 +76,35 @@ public class Parser {
     }
 
     /**
+     * Check a string if contains prohibited symbol.
+     * Throw exception if the string contains prohibited symbol.
+     * @param fullCommand
+     * @throws SymbolNotAllowedException
+     */
+    public static void checkSymbolFromInput(String fullCommand) throws SymbolNotAllowedException {
+        boolean isAllowed = true;
+        for (String symbol: prohibitedInputSymbol) {
+            if (fullCommand.contains(symbol)) {
+                isAllowed = false;
+            }
+        }
+        if (isAllowed == false) {
+            throw new SymbolNotAllowedException();
+        }
+    }
+
+    /**
      * Parse a string into Command.
      * If the first letter is not recognised, throws InvalidFirstDukeException.
      *
      * @param fullCommand String
      * @return Command
      * @throws InvalidFirstDukeException
+     * @throws SymbolNotAllowedException
      */
-    public static Command parse(String fullCommand) throws InvalidFirstDukeException {
+    public static Command parse(String fullCommand) throws InvalidFirstDukeException, SymbolNotAllowedException {
+        checkSymbolFromInput(fullCommand);
+
         String[] commandArr = fullCommand.split(" "); // split input into string array
         Command command;
 
@@ -141,6 +164,5 @@ public class Parser {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-
     }
 }

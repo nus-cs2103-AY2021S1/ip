@@ -39,6 +39,20 @@ The name 'Duke' was inspired by Duke, the Java Mascot.
 
 ## Features 
 
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the command format:**<br>
+
+* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+  e.g. in `todo DESCRIPTION`, `DESCRIPTION` is a parameter which can be used as `todo read book`.
+
+* `First word` of a command belongs to a feature type. If the `first word` of the input is not recognised by Duke,<br>
+  Duke will not execute the given command.
+  
+* Command cannot include sensitive symbols. For example, `|`, `(`, `)`, `[` and `]`.
+
+</div>
+
 ### Lists all tasks: `list` 
 
 Lists all the tasks that is saved in the device.
@@ -48,6 +62,8 @@ Lists all the tasks that is saved in the device.
 Save a todo tasks into the list.
 
 Format: `todo DESCRIPTION`
+
+* `DESCRIPTION` cannot be blank.
 
 Example of usage: 
 
@@ -59,6 +75,8 @@ Save a deadline tasks into the list.
 
 Format: `deadline DESCRIPTION /by DATE/MONTH/YEAR`
 
+* `DESCRIPTION /by DATE/MONTH/YEAR` cannot be blank.
+
 Example of usage:
 
 `deadline CS2103T User guide /by 21/07/2020`
@@ -69,6 +87,8 @@ Save an event tasks into the list.
 
 Format: `event DESCRIPTION /at DATE/MONTH/YEAR HOUR:MINUTES`
 
+* `DESCRIPTION /at DATE/MONTH/YEAR HOUR:MINUTES` cannot be blank.
+
 Example of usage:
 
 `event Google interview /at 15/06/2020 12:00`
@@ -78,6 +98,8 @@ Example of usage:
 Delete a task in the list by given index.
 
 Format: `delete INDEX`
+
+* `INDEX` cannot exceed the number of things in the task list.
 
 Example of usage:
 
@@ -98,6 +120,8 @@ Example of usage:
 Mark a task as done by its index.
 
 Format: `done INDEX`
+
+* `INDEX` cannot exceed the number of things in the task list.
 
 Example of usage:
 
