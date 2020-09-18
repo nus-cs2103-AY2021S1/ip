@@ -81,6 +81,6 @@ public class Ui {
      * Informs user no task in TaskList.
      */
     public static String informNoTaskInList() {
-        return "Whoops! Your list is empty at the moment!";
+        return "Your list is empty at the moment!";
     }
 }
