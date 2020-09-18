@@ -1,5 +1,7 @@
 # User Guide
 
+## Deuk task tracker v1.2.1
+
 ## Features 
 
 ### Feature 1: Add tasks to tasklist
