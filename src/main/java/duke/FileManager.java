@@ -57,8 +57,8 @@ public class FileManager {
             boolean directoryExists = java.nio.file.Files.exists(path);
 
             if (directoryExists) {
-                TextCacher.cacheSaveFound();
                 taskList = readSaveToTaskListObject(path);
+                TextCacher.cacheSaveFound();
             } else {
                 TextCacher.cacheSaveNotFound();
             }
