@@ -14,6 +14,9 @@ public class Parser {
      */
 
     static Task parseFileItemToTask (String taskString) throws DukeException {
+        if (taskString.isBlank()) {
+            return null;
+        }
         char status = taskString.charAt(5);
         boolean isTodo = taskString.startsWith("[T]");
         boolean isTodoWithinPeriod = isTodo && taskString.contains("from: ");
@@ -23,12 +26,10 @@ public class Parser {
                 : "Data Storage Error: Task status not recognizable";
         assert (isTodo || isDeadline || isEvent)
                 : "Data Storage Error: Task type not recognizable";
-        if (taskString.isBlank()) {
-            return null;
-        }
+
         if (isTodoWithinPeriod) {
             String name = taskString.split("from: ")[0].substring(8);
-            String startDate = taskString.split("from")[1].split("by: ")[0];
+            String startDate = taskString.split("from: ")[1].split(" by: ")[0];
             String endDate = taskString.split("by: ")[1];
             if (status == '\u2713') {
                 return new TodoWithinPeriod(name, Task.Status.DONE, startDate, endDate);
@@ -136,12 +137,11 @@ public class Parser {
         //valid task entries
         Task newItem;
         if (userMessage.contains("/from ")) {
-            String name = userMessage.split("/from ")[0].substring(8);
-            String startDate = userMessage.split("/from ")[1].split("/by ")[0];
+            String name = userMessage.split("/from ")[0].substring(5);
+            String startDate = userMessage.split("/from ")[1].split(" /by ")[0];
             String endDate = userMessage.split("/by ")[1];
             newItem = new TodoWithinPeriod(name, Task.Status.PENDING, startDate, endDate);
-        }
-        if (userMessage.startsWith("todo")) {
+        } else if (userMessage.startsWith("todo")) {
             String name = userMessage.substring(5);
             if (!name.isEmpty() && !name.isBlank()) {
                 newItem = new Todo(name, Task.Status.PENDING);
@@ -165,7 +165,7 @@ public class Parser {
             String dueDate = userMessage.split("/by")[1].substring(1);
             newItem = new Deadline(name, Task.Status.PENDING, dueDate);
         } else if (userMessage.startsWith("event")) {
-            String name = userMessage.split("/at ")[0].substring(5);
+            String name = userMessage.split("/at ")[0].substring(6);
             if (!userMessage.contains("/at")) {
                 result = result + ("Sorry, incorrect format for Events. \n Please specify a time "
                         + "(and task name)");
@@ -184,7 +184,7 @@ public class Parser {
             return result;
         }
         Storage.todoToFile(newItem);
-        result = result + ("new task added: " + newItem.toString() + "\n");
+        result = result + ("new task added: \n" + newItem.toString() + "\n");
         result = result + ("You now have " + (itemList.size() + 1) + " tasks in your list!");
         return result;
     }
