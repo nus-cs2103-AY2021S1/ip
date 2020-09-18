@@ -16,13 +16,13 @@ public enum Response {
     ADD_TASK {
         @Override
         public String toString() {
-            return "\tAy here is the task you just added:\n";
+            return "Ay here is the task you just added:\n";
         }
     },
     NON_MATCHING_TASK {
         @Override
         public String toString() {
-             return "\tThere are no matching tasks found in the list. Try something else?";
+             return "There are no matching tasks found in the list. Try something else?";
         }
     },
     MATCHING_TASK {
@@ -34,31 +34,31 @@ public enum Response {
     REMOVE_TASK {
         @Override
         public String toString() {
-            return "\tOkay, Here is the task you just deleted:\n";
+            return "Okay, Here is the task you just deleted:\n";
         }
     },
     DONE_TASK {
         @Override
         public String toString() {
-            return "\tNice! I've marked this task as done!";
+            return "Nice! I've marked this task as done!";
         }
     },
     UPDATE_TASK {
         @Override
         public String toString() {
-            return "\tOkay, Here's the task you just updated:\n";
+            return "Okay, Here's the task you just updated:\n";
         }
     },
     EMPTY_LIST {
         @Override
         public String toString() {
-            return "\tThere is no task in your list:>\n";
+            return "There is no task in your list:>\n";
         }
     },
     NON_EMPTY_LIST {
         @Override
         public String toString() {
-            return "\tHere are the tasks in your list to jolt ur memory:>\n";
+            return "Here are the tasks in your list to jolt ur memory:>\n";
         }
     },
     NO_SENSE {

@@ -134,11 +134,11 @@ public class Parser {
     private String editTask(String message) {
         String response = "";
         try {
-            String keyword = obtainKeyword(message);
             int taskNum = getTaskNumber(message);
-
             int sign = message.indexOf(">");
             String taskMessage = message.substring(sign + 2);
+
+            String keyword = obtainKeyword(taskMessage);
 
             if (keyword.equals("todo")) {
                 response = updateTodoTask(taskNum, taskMessage);
@@ -152,7 +152,7 @@ public class Parser {
                 response = updateEventTask(taskNum, taskMessage);
             }
         } catch (Exception e) {
-            WillyException error = new WillyException(Format.EDIT.toString());
+            WillyException error = new WillyException(Response.INCOMPLETE_INFO + Format.EDIT.toString());
             response = error.toString();
         }
         return response;

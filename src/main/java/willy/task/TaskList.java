@@ -40,9 +40,9 @@ public class TaskList {
         storage.updateStorage(listOfTasks);
         String willyResponse = Willy.response(
                 Response.ADD_TASK
-                + "\t  " + task + "\n"
-                + "\tNow you have " + listOfTasks.size()
-                + " task(s), please don't forget!");
+                        + "  " + task + "\n"
+                        + "Now you have " + listOfTasks.size()
+                        + " task(s), please don't forget!");
 
         return willyResponse;
     }
@@ -53,7 +53,7 @@ public class TaskList {
      * @param taskNum Task number that the user wants the bot to remove.
      */
     public String removeTask(int taskNum) {
-        assert taskNum > 0 : "Please insert a task number greater than 0" ;
+        assert taskNum > 0 : "Please insert a task number greater than 0";
         try {
             int i = taskNum - 1;
             Task task = listOfTasks.get(i);
@@ -61,9 +61,9 @@ public class TaskList {
             storage.updateStorage(listOfTasks);
             String willyResponse = Willy.response(
                     Response.REMOVE_TASK
-                    + "\t  " + task + "\n"
-                    + "\tNow you have " + listOfTasks.size()
-                    + " task(s) left ~");
+                            + "  " + task + "\n"
+                            + "Now you have " + listOfTasks.size()
+                            + " task(s) left ~");
 
             return willyResponse;
 
@@ -74,20 +74,20 @@ public class TaskList {
     }
 
     public String updateTask(int taskNum, Task editedTask) {
-        assert taskNum > 0 : "Please insert a task number greater than 0" ;
+        assert taskNum > 0 : "Please insert a task number greater than 0";
         try {
             int i = taskNum - 1;
             listOfTasks.set(i, editedTask);
             storage.updateStorage(listOfTasks);
             String willyResponse = Willy.response(
                     Response.UPDATE_TASK
-                    + "\t  " + editedTask + "\n"
-                    + "\tNow you have " + listOfTasks.size()
-                    + " task(s), please don't forget!");
+                            + "  " + editedTask + "\n"
+                            + "Now you have " + listOfTasks.size()
+                            + " task(s), please don't forget!");
 
             return willyResponse;
 
-        } catch (Exception e){
+        } catch (Exception e) {
             WillyException error = new WillyException(Response.NO_TASK.toString());
             return error.toString();
         }
@@ -107,7 +107,7 @@ public class TaskList {
 
             for (int i = 0; i < listOfTasks.size(); i++) {
                 Task task = listOfTasks.get(i);
-                list = list + "\t" + (i + 1) + ". " + task + "\n";
+                list = list + (i + 1) + ". " + task + "\n";
             }
         }
         return list;
@@ -125,7 +125,7 @@ public class TaskList {
             Task task = listOfTasks.get(i);
             task.setTaskDone(true);
             storage.updateStorage(listOfTasks);
-            String willyResponse = Willy.response(Response.DONE_TASK + "\n\t   " + task);
+            String willyResponse = Willy.response(Response.DONE_TASK + "\n   " + task);
 
             return willyResponse;
 
@@ -152,12 +152,12 @@ public class TaskList {
 
         String filteredList = "\n";
         if (keyList.size() == 0) {
-            filteredList = filteredList + "\t" + Response.NON_MATCHING_TASK + "\n";
+            filteredList = filteredList + Response.NON_MATCHING_TASK + "\n";
         } else {
             for (int i = 0; i < keyList.size(); i++) {
                 Task task = keyList.get(i);
-                filteredList = filteredList + "\t" + Response.MATCHING_TASK + "\n"
-                        + "\t  " + (i + 1) + "." + task + "\n";
+                filteredList = filteredList + Response.MATCHING_TASK + "\n"
+                        + (i + 1) + "." + task + "\n";
             }
         }
         return filteredList;
