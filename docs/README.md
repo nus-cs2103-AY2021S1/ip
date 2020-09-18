@@ -5,8 +5,6 @@ As Duke is optimized for people who can type at high speeds, it has the potentia
   
 Download the latest Duke Jar from [here](https://github.com/hoperawr/ip/releases/tag/A-Release).  
 
-![screenshot](/docs/Ui.png)
-
 - [Quick start](#quick-start)
 - [Features](#features)
     1. [View all commands: `help`](#view-all-commands-help)
@@ -162,18 +160,79 @@ Expected outcome:
 `Bye. Hope to see you again soon!`
 
 ## Command Table
-Command | Format | Example
------- | ------ | --------
-`help` | `help` | `help`
-`todo` | `todo [NAME]` | `todo read book`
-`deadline` | `deadline [NAME] /at [DATE] [TIME]` | `deadline study /by 9/9/2020 2359`
-`event` | `event [NAME] /at [DATE] [TIME]-[TIME]` | `event meeting /at 9/10/2020 2:00 PM, 10 Oct 2020 1530`
-`list` | `list` |  `list`
-`done` | `done [INDEX]` | `done 2`
-`delete` | `delete [INDEX]` | `delete 1`
-`delete` | `delete all` | `delete all`
-`find` | `find [WORD]` | `find read`
-`reschedule` | `reschedule [INDEX] [DATE] [TIME]` | `reschedule 3 21/9/2020 1300`
-`reschedule` | `reschedule [INDEX] [DATE] [TIME]-[TIME]` | `reschedule 2 21/9/2020 1200-1300`
-`snooze` | `snooze [INDEX] [HOURS]` | `snooze 2 1`
-`bye` | `bye` | `bye`
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Format</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>help</code></td>
+<td><code>help</code></td>
+<td><code>help</code></td>
+</tr>
+<tr>
+<td><code>todo</code></td>
+<td><code>todo [NAME]</code></td>
+<td><code>todo read book</code></td>
+</tr>
+<tr>
+<td><code>deadline</code></td>
+<td><code>deadline [NAME] /at [DATE] [TIME]</code></td>
+<td><code>deadline study /by 9/9/2020 2359</code></td>
+</tr>
+<tr>
+<td><code>event</code></td>
+<td><code>event [NAME] /at [DATE] [TIME]-[TIME]</code></td>
+<td><code>event meeting /at 9/10/2020 2:00 PM, 10 Oct 2020 1530</code></td>
+</tr>
+<tr>
+<td><code>list</code></td>
+<td><code>list</code></td>
+<td><code>list</code></td>
+</tr>
+<tr>
+<td><code>done</code></td>
+<td><code>done [INDEX]</code></td>
+<td><code>done 2</code></td>
+</tr>
+<tr>
+<td><code>delete</code></td>
+<td><code>delete [INDEX]</code></td>
+<td><code>delete 1</code></td>
+</tr>
+<tr>
+<td><code>delete</code></td>
+<td><code>delete all</code></td>
+<td><code>delete all</code></td>
+</tr>
+<tr>
+<td><code>find</code></td>
+<td><code>find [WORD]</code></td>
+<td><code>find read</code></td>
+</tr>
+<tr>
+<td><code>reschedule</code></td>
+<td><code>reschedule [INDEX] [DATE] [TIME]</code></td>
+<td><code>reschedule 3 21/9/2020 1300</code></td>
+</tr>
+<tr>
+<td><code>reschedule</code></td>
+<td><code>reschedule [INDEX] [DATE] [TIME]-[TIME]</code></td>
+<td><code>reschedule 2 21/9/2020 1200-1300</code></td>
+</tr>
+<tr>
+<td><code>snooze</code></td>
+<td><code>snooze [INDEX] [HOURS]</code></td>
+<td><code>snooze 2 1</code></td>
+</tr>
+<tr>
+<td><code>bye</code></td>
+<td><code>bye</code></td>
+<td><code>bye</code></td>
+</tr>
+</tbody>
+</table>
