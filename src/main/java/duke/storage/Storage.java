@@ -45,24 +45,15 @@ public class Storage {
                 String[] command = line.split(" \\| ");
                 switch (command[0]) {
                 case "T":
-                    Task todo = new Task(TaskType.TODO, command[2]);
-                    if (command[1].equals("1")) {
-                        todo.setDone();
-                    }
+                    Task todo = loadTodo(command);
                     lst.add(todo);
                     break;
                 case "D":
-                    Task deadline = new Task(TaskType.DEADLINE, command[2], LocalDate.parse(command[3]));
-                    if (command[1].equals("1")) {
-                        deadline.setDone();
-                    }
+                    Task deadline = loadDeadline(command);
                     lst.add(deadline);
                     break;
                 case "E":
-                    Task event = new Task(TaskType.EVENT, command[2], LocalDate.parse(command[3]));
-                    if (command[1].equals("1")) {
-                        event.setDone();
-                    }
+                    Task event = loadEvent(command);
                     lst.add(event);
                     break;
                 default:
@@ -74,8 +65,31 @@ public class Storage {
         } catch (Exception e) {
             throw new DukeException("\tError loading history. " + e.getMessage());
         }
-
         return lst;
+    }
+
+    private Task loadTodo(String[] command) {
+        Task todo = new Task(TaskType.TODO, command[2]);
+        if (command[1].equals("1")) {
+            todo.setDone();
+        }
+        return todo;
+    }
+
+    private Task loadDeadline(String[] command) {
+        Task deadline = new Task(TaskType.DEADLINE, command[2], LocalDate.parse(command[3]));
+        if (command[1].equals("1")) {
+            deadline.setDone();
+        }
+        return deadline;
+    }
+
+    private Task loadEvent(String[] command) {
+        Task event = new Task(TaskType.EVENT, command[2], LocalDate.parse(command[3]));
+        if (command[1].equals("1")) {
+            event.setDone();
+        }
+        return event;
     }
 
     /**
