@@ -59,7 +59,7 @@ public class Task {
     public String getFileStatusIcon() { return (isCompleted) ? "1" : "0"; }
 
     public String fileString() {
-        return getFileStatusIcon() + " | " + description;
+        return getFileStatusIcon() + " | " +  priorityLevel + " | " + description;
     }
 
     /**

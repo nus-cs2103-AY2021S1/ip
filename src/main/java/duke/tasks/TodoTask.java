@@ -22,8 +22,9 @@ public class TodoTask extends Task {
      * @param isCompleted boolean check if task has been completed.
      * @throws DukeException
      */
-    public TodoTask(String description, boolean isCompleted) {
+    public TodoTask(String description, String priorityLevel, boolean isCompleted) {
         super(description);
+        this.priorityLevel = priorityLevel;
         this.isCompleted = isCompleted;
     }
 

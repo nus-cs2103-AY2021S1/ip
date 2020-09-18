@@ -13,7 +13,7 @@ public class EventTaskTest {
     public void StringAndFileFormatTest() throws DukeException {
         EventTask task1 = new EventTask("dinner", "2012-02-21 1900");
         assertEquals("[E] [\u2718] (P: nil) dinner (at: 21 FEBRUARY 2012)", task1.toString());
-        assertEquals("E | 0 | dinner | 21 FEBRUARY 2012", task1.fileString());
+        assertEquals("E | 0 | nil | dinner | 21 FEBRUARY 2012", task1.fileString());
     }
 
     @Test

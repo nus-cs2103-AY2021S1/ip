@@ -27,8 +27,9 @@ public class DeadlineTask extends Task {
      * @param isCompleted boolean check if task has been completed.
      * @throws DukeException
      */
-    public DeadlineTask(String description, String due, boolean isCompleted) throws DukeException {
+    public DeadlineTask(String description, String priorityLevel, String due, boolean isCompleted) throws DukeException {
         super(description);
+        this.priorityLevel = priorityLevel;
         this.due = new DukeDate(due);
         this.isCompleted = isCompleted;
     }

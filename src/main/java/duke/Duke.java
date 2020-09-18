@@ -100,7 +100,7 @@ public class Duke extends Application {
      * @param args
      */
     public static void main(String[] args) {
-        String filePath = "data/duke.txt";
+        String filePath = "dukeBB.txt";
         Duke duke = new Duke(filePath);
         duke.run();
     }

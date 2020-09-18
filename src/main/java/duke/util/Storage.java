@@ -38,14 +38,15 @@ public class Storage {
         String[] strings = fileString.split("[|]");
         String type = strings[0].trim();
         boolean isCompleted = strings[1].trim().equals("1");
-        String desc = strings[2].trim();
+        String priorityLevel = strings[2].trim();
+        String desc = strings[3].trim();
         switch (type) {
             case "T":
-                return new TodoTask(desc, isCompleted);
+                return new TodoTask(desc, priorityLevel, isCompleted);
             case "E":
-                return new EventTask(desc, strings[3].trim(), isCompleted);
+                return new EventTask(desc, priorityLevel, strings[4].trim(), isCompleted);
             case "D":
-                return new DeadlineTask(desc, strings[3].trim(), isCompleted);
+                return new DeadlineTask(desc, priorityLevel, strings[4].trim(), isCompleted);
             default:
                 throw new DukeException("unknown fileString");
         }

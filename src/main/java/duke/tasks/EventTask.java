@@ -28,9 +28,10 @@ public class EventTask extends Task{
      * @param isCompleted boolean check if task has been completed.
      * @throws DukeException
      */
-    public EventTask(String description, String due, boolean isCompleted) throws DukeException {
+    public EventTask(String description, String priorityLevel, String due, boolean isCompleted) throws DukeException {
         super(description);
         this.due = new DukeDate(due);
+        this.priorityLevel = priorityLevel;
         this.isCompleted = isCompleted;
     }
 
