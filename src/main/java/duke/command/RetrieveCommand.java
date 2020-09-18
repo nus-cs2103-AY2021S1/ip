@@ -60,6 +60,13 @@ public class RetrieveCommand extends Command {
         }
     }
 
+    /**
+     * Checks if a Task is a TimedTask and if it is, whether it
+     * has the same date as the the class variable date.
+     *
+     * @param t TaskList to retrieve the Task from.
+     * @return A boolean indicating if t has same date.
+     */
     private boolean checkIfSameDate(Task t) {
         if (t instanceof TimedTask) {
             TimedTask tt = (TimedTask) t;
@@ -68,6 +75,13 @@ public class RetrieveCommand extends Command {
         return false;
     }
 
+    /**
+     * Generates a response message to construct a CommandResponse.
+     * This message will be displayed to the User.
+     *
+     * @param tasks TaskList to retrieve the Task from
+     * @return A String to represent the message
+     */
     private String createResponseMessage(TaskList tasks) {
         if (tasks.getNumberOfTask() == 0) {
             return String.format(

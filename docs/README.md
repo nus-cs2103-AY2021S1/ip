@@ -90,7 +90,7 @@ Here is what you can do with me:
    * done <task number>: mark the task as complete
    * retrieve <dd/MM/yyyy>: retrieves the tasks due on or happening on this date
    * find <keyword>: retrieves the tasks that contain the keyword
-   * sort: sorts your list by their task type and then by their dates and time if any
+   * sort: sorts your list by their task type and then by their date and time if any
    * bye: exit the application
 ```
 

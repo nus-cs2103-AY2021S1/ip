@@ -36,7 +36,7 @@ public class HelpCommand extends Command {
                 + "* done <task number>: mark the task as complete\n\t "
                 + "* retrieve <dd/MM/yyyy>: retrieves the tasks due on or happening on this date\n\t "
                 + "* find <keyword>: retrieves the tasks that contain the keyword\n\t "
-                + "* sort: sorts your list by their task type and then by their dates and time if any\n\t "
+                + "* sort: sorts your list by their task type and then by their date and time if any\n\t "
                 + "* bye: exit the application";
         boolean shouldExit = getIsExit();
         assert !shouldExit : "shouldExit should be false";

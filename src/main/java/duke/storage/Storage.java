@@ -9,7 +9,6 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import duke.exception.DukeException;
 import duke.exception.InvalidDoneIndicatorException;
 import duke.exception.InvalidTaskTypeException;
 import duke.task.Deadline;
@@ -51,7 +50,7 @@ public class Storage {
     }
 
     /**
-     * Saves the Task into a text file.
+     * Saves the list of Task into a text file.
      *
      * @param tasks A list of Task.
      */
@@ -89,7 +88,7 @@ public class Storage {
                 try {
                     Task t = createTaskFromFile(sc.nextLine());
                     tasks.add(t);
-                } catch (DukeException e) {
+                } catch (InvalidDoneIndicatorException | InvalidTaskTypeException e) {
                     // Skip task creation
                 }
             }

@@ -36,6 +36,13 @@ public class SortCommand extends Command {
         super(false);
     }
 
+    /**
+     * Compares a Todo with another Task. To be used by TASK_COMPARATOR.
+     *
+     * @param t2 The other Task to compare with .
+     * @return An Integer to represent which Task should go first. 0 represents a tie-breaker
+     * while -1 represents the Todo should go first.
+     */
     private static int compareTodo(Task t2) {
         if (t2.getTaskType() == TaskType.TODO) {
             return 0;
@@ -43,6 +50,13 @@ public class SortCommand extends Command {
         return -1;
     }
 
+    /**
+     * Compares a Deadline with another Task. To be used by TASK_COMPARATOR.
+     *
+     * @param t2 The other Task to compare with.
+     * @return An Integer to represent which Task should go first. 0 represents a tie-breaker
+     * while -1 represents the Deadline should go first and 1 represents it should go after t2.
+     */
     private static int compareDeadline(Deadline d1, Task t2) {
         if (t2.getTaskType() == TaskType.TODO) {
             return 1;
@@ -54,6 +68,13 @@ public class SortCommand extends Command {
         }
     }
 
+    /**
+     * Compares an Event with another Task. To be used by TASK_COMPARATOR.
+     *
+     * @param t2 The other Task to compare with.
+     * @return An Integer to represent which Task should go first. 0 represents a tie-breaker
+     * while -1 represents the Event should go first and 1 represents it should go after t2.
+     */
     private static int compareEvent(Event e1, Task t2) {
         if (t2.getTaskType() == TaskType.EVENT) {
             Event e2 = (Event) t2;
@@ -78,6 +99,13 @@ public class SortCommand extends Command {
         return new CommandResponse(createResponseMessage(tasks), shouldExit);
     }
 
+    /**
+     * Generates a response message to construct a CommandResponse.
+     * This message will be displayed to the User.
+     *
+     * @param tasks TaskList to retrieve the Task from.
+     * @return A String to represent the message.
+     */
     private String createResponseMessage(TaskList tasks) {
         return tasks.toString().replaceFirst(
                 "Here are the tasks in your list",

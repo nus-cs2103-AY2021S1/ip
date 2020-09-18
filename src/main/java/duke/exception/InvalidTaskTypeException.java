@@ -9,7 +9,7 @@ public class InvalidTaskTypeException extends DukeException {
      * Constructs an InvalidTaskTypeException.
      */
     public InvalidTaskTypeException() {
-        super("OOPS!!! No such Task type.");
+        super("OOPS!!! No such task type.");
     }
 }
 

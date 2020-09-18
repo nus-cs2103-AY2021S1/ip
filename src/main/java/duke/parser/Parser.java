@@ -52,13 +52,14 @@ public class Parser {
      * @throws InvalidCommandException  If user inputs an unknown command.
      * @throws InvalidDeleteException  If user inputs a delete command without specifying a number.
      * @throws InvalidTaskDateException  If user input an incorrect date and/or time format.
+     * @throws InvalidTaskContentException If user input an add Task command with an invalid format.
      * @throws NoFindContentException  If user input does not contain any keywords to find.
      */
     public static Command parse(String input, TaskList tasks) throws NoTaskException,
             InvalidDoneException, InvalidTaskNumberException, NoTaskContentException,
-            NoTaskDateException, InvalidCommandException,
+            NoTaskDateException, InvalidTaskDateTimeException, InvalidCommandException,
             InvalidDeleteException, InvalidTaskDateException, InvalidTaskContentException,
-            NoFindContentException, InvalidTaskDateTimeException {
+            NoFindContentException {
         String trimmedInput = input.trim();
         if (trimmedInput.equals("bye")) {
             return new ByeCommand();
@@ -97,11 +98,11 @@ public class Parser {
     }
 
     /**
-     * Returns true if an taskNumber id between 0 and the number of Task in tasks.
+     * Returns true if an taskNumber is between 0 and the number of Task in tasks.
      * This method is to check that a number input by user is valid.
      *
      * @param taskNumber Number to be checked.
-     * @param tasks A Task List of containing Task.
+     * @param tasks A TaskList of containing Task.
      * @return boolean to indicate if the number is between 0 and the number of Task in tasks.
      */
     private static boolean checkForValidTaskNumber(int taskNumber, TaskList tasks) {
@@ -111,7 +112,7 @@ public class Parser {
     /**
      * Returns the ListCommand if user input is valid.
      *
-     * @param tasks TasksList use by Duke to store the tasks.
+     * @param tasks TasksList use by Duke to store the Task.
      * @return ListCommand.
      * @throws NoTaskException  If there is no Task in the TaskList.
      */
@@ -128,7 +129,7 @@ public class Parser {
      * Returns the DoneCommand if user input is valid.
      *
      * @param input User input to Duke.
-     * @param tasks TasksList use by Duke to store the tasks.
+     * @param tasks TasksList use by Duke to store the Task.
      * @return DoneCommand.
      * @throws InvalidDoneException  If user inputs a done command without specifying a number.
      * @throws InvalidTaskNumberException  If user inputs a number that is not valid.
@@ -159,11 +160,11 @@ public class Parser {
      * Returns AddTaskCommand to add Task if user input is valid.
      *
      * @param input User input to Duke.
-     * @return AddTaskCommand that add Tasks
+     * @return AddTaskCommand.
      * @throws NoTaskContentException  If user inputs a add task command without a description and/or date/time.
-     * @throws InvalidTaskContentException  If user inputs an add deadline or add event command
+     * @throws InvalidTaskContentException  If user inputs an add deadline or add event command.
      * without description and/or date/time.
-     * @throws InvalidTaskDateTimeException If user inputs a add deadline or add event command
+     * @throws InvalidTaskDateTimeException If user inputs a add deadline or add event command.
      * with a wrong date/time format.
      * @throws InvalidCommandException  If user inputs an unknown command.
      */
@@ -191,9 +192,9 @@ public class Parser {
     /**
      * Returns the AddTaskCommand if user input is valid.
      *
-     * @param content User input after the task word.
+     * @param content User input after the task type.
      * @return AddTaskCommand.
-     * @throws NoTaskContentException  If user inputs an deadline command without description and/or date/time.
+     * @throws InvalidTaskContentException  If user inputs an deadline command without description and/or date/time.
      * @throws InvalidTaskDateTimeException  If user input an add deadline command with a wrong date/time format.
      */
     private static AddTaskCommand parseAddDeadline(String content) throws InvalidTaskDateTimeException,
@@ -217,7 +218,7 @@ public class Parser {
     /**
      * Returns the AddTaskCommand if user input is valid.
      *
-     * @param content User input after the task word.
+     * @param content User input after the task type.
      * @return AddTaskCommand.
      * @throws InvalidTaskContentException  If user inputs an add event command without description and/or date/time.
      * @throws InvalidTaskDateTimeException  If user input an add event command with a wrong date/time format.
@@ -276,8 +277,8 @@ public class Parser {
      *
      * @param input User input to Duke.
      * @return RetrieveCommand.
-     * @throws NoTaskDateException  If user input does not contain date and/or time.
-     * @throws InvalidTaskDateException  If user input an incorrect date and/or time format.
+     * @throws NoTaskDateException  If user input does not contain date.
+     * @throws InvalidTaskDateException  If user input an incorrect date format.
      */
     private static RetrieveCommand parseRetrieve(String input) throws NoTaskDateException,
             InvalidTaskDateException {

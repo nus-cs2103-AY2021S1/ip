@@ -65,6 +65,11 @@ public class Task {
         return description;
     }
 
+    /**
+     * Returns the type of the Task.
+     *
+     * @return TaskType of the Task.
+     */
     public TaskType getTaskType() {
         return taskType;
     }

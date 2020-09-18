@@ -49,6 +49,13 @@ public class FindCommand extends Command {
         return new CommandResponse(createResponseMessage(filteredTasks), shouldExit);
     }
 
+    /**
+     * Generates a response message to construct a CommandResponse.
+     * This message will be displayed to the User.
+     *
+     * @param tasks TaskList to retrieve the Task from.
+     * @return A String to represent the message
+     */
     private String createResponseMessage(TaskList tasks) {
         if (tasks.getNumberOfTask() == 0) {
             return "You do not have any tasks containing " + "\"" + content + "\"!";
