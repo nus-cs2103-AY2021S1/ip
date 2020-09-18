@@ -52,15 +52,28 @@ public class Ui {
     /**
      * Show delete result to the user.
      *
-     * @param newTask task to be deleted
+     * @param deletedTask task to be deleted
      * @param numOfTasks number of current tasks
      * @return result of deleting task
      */
-    public String showDeleteResult(Task newTask, int numOfTasks) {
+    public String showDeleteResult(Task deletedTask, int numOfTasks) {
         assert numOfTasks >= 0 : "Number of tasks should not be negative";
         return String.format("The following task has been successfully deleted.\n"
                 + "-> %s\n"
-                + "Now you have %d tasks in your list.\n", newTask, numOfTasks);
+                + "Now you have %d tasks in your list.\n", deletedTask, numOfTasks);
+    }
+
+    /**
+     * Show mass delete result to the user.
+     *
+     * @param deletedTasks tasks to be deleted
+     * @param numOfTasks number of current tasks
+     * @return result of deleting tasks
+     */
+    public String showMassDeleteResult(List<Task> deletedTasks, int numOfTasks) {
+        assert numOfTasks >= 0 : "Number of tasks should not be negative";
+        return String.format("The specified tasks have been successfully deleted.\n"
+                + "Now you have %d tasks in your list.\n", numOfTasks);
     }
 
     /**
@@ -72,6 +85,16 @@ public class Ui {
     public String showDoneResult(Task newTask) {
         return String.format("The following task has been successfully marked as done.\n"
                 + "-> %s\n", newTask);
+    }
+
+    /**
+     * Show mass done result to the user.
+     *
+     * @param doneTasks tasks to be marked as done
+     * @return result of marking tasks as done
+     */
+    public String showMassDoneResult(List<Task> doneTasks) {
+        return String.format("The specified tasks have been successfully marked as done.\n");
     }
 
     /**

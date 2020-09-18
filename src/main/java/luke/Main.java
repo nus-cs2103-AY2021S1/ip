@@ -5,7 +5,9 @@ import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.ImagePattern;
 import javafx.stage.Stage;
 import luke.gui.MainWindow;
 
@@ -14,7 +16,7 @@ import luke.gui.MainWindow;
  */
 public class Main extends Application {
 
-    private Luke luke = new Luke(System.getProperty("user.dir"));
+    private final Luke luke = new Luke(System.getProperty("user.dir"));
 
     @Override
     public void start(Stage stage) {

@@ -2,6 +2,8 @@ package luke;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import luke.commands.AddCommand;
 import luke.commands.Command;
@@ -132,6 +134,14 @@ public class Parser {
 
     private static Command parseDeleteCommand(String[] commandSplit) throws LukeEmptyCommandException {
         try {
+            if (commandSplit[1].contains(",")) {
+                String[] rawTaskNumbers = commandSplit[1].split(",");
+                List<Integer> taskNumbers = new ArrayList<>();
+                for (int i = 0; i < rawTaskNumbers.length; i++) {
+                    taskNumbers.add(Integer.parseInt(rawTaskNumbers[i].trim()));
+                }
+                return new DeleteCommand(taskNumbers);
+            }
             return new DeleteCommand(Integer.parseInt(commandSplit[1]));
         } catch (IndexOutOfBoundsException e) {
             throw new LukeEmptyCommandException(commandSplit[0]);
@@ -140,6 +150,14 @@ public class Parser {
 
     private static Command parseDoneCommand(String[] commandSplit) throws LukeEmptyCommandException {
         try {
+            if (commandSplit[1].contains(",")) {
+                String[] rawTaskNumbers = commandSplit[1].split(",");
+                List<Integer> taskNumbers = new ArrayList<>();
+                for (int i = 0; i < rawTaskNumbers.length; i++) {
+                    taskNumbers.add(Integer.parseInt(rawTaskNumbers[i].trim()));
+                }
+                return new DoneCommand(taskNumbers);
+            }
             return new DoneCommand(Integer.parseInt(commandSplit[1]));
         } catch (IndexOutOfBoundsException e) {
             throw new LukeEmptyCommandException(commandSplit[0]);

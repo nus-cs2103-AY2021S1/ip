@@ -8,9 +8,9 @@ import luke.exception.LukeException;
  */
 public class Luke {
 
-    private Storage storage;
+    private final Storage storage;
     private TaskList tasks;
-    private Ui ui;
+    private final Ui ui;
 
     /**
      * Creates a Luke object with the given filepath.
