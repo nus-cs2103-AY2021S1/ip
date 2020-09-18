@@ -1,0 +1,17 @@
+todo finish level-6
+deadline ip /by thursday 12pm
+event dinner /at 7pm
+list
+todo
+deadline
+event
+deadline homework
+event dinner
+done 1
+done 4
+list
+delete 3
+list
+delete 5
+Blah
+bye
