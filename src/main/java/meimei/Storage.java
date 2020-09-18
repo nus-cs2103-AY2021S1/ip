@@ -11,9 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import meimei.dukeexception.DukeException;
-import meimei.dukeexception.LoadFailureException;
-import meimei.dukeexception.SaveFailureException;
+import meimei.botexception.BotException;
+import meimei.botexception.LoadFailureException;
+import meimei.botexception.SaveFailureException;
 import meimei.task.Deadline;
 import meimei.task.Event;
 import meimei.task.Task;
@@ -48,7 +48,7 @@ public class Storage {
      * Loads saved data from <code>taskFile</code>.
      *
      * @return List of tasks to be passed to a <code>TaskList</code> object
-     * @throws DukeException If file cannot be created, read or parsed.
+     * @throws BotException If file cannot be created, read or parsed.
      */
     public List<Task> load() throws LoadFailureException {
         if (!this.taskFile.exists()) {
@@ -96,7 +96,7 @@ public class Storage {
      *
      * @param task Task to be added to file.
      * @param isFirstTask Whether task to be added is the first in the file.
-     * @throws DukeException If task cannot be parsed or file cannot be written to.
+     * @throws BotException If task cannot be parsed or file cannot be written to.
      */
     public void update(Task task, boolean isFirstTask) throws SaveFailureException {
         try {
@@ -119,7 +119,7 @@ public class Storage {
      * Updates file with list when tasks are marked or deleted.
      *
      * @param list Updated list given by <code>TaskList</code> object.
-     * @throws DukeException If tasks cannot be parsed or file cannot be written to.
+     * @throws BotException If tasks cannot be parsed or file cannot be written to.
      */
     public void update(List<Task> list) throws SaveFailureException {
         try {
@@ -151,7 +151,7 @@ public class Storage {
      *          different from the string returned by <code>task.toString()</code>.
      *          e.g. "[T][✓] Homework" from <code>task.toString()</code> will be
      *          represented as "T | 1 | Homework".
-     * @throws DukeException If the type of the task cannot be recognised.
+     * @throws BotException If the type of the task cannot be recognised.
      */
     protected String parseToStorage(Task task) throws SaveFailureException {
         String taskTypeString = "";

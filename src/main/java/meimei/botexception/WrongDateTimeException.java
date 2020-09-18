@@ -1,4 +1,4 @@
-package meimei.dukeexception;
+package meimei.botexception;
 
 import meimei.command.CommandType;
 
@@ -7,7 +7,7 @@ import meimei.command.CommandType;
  * for <code>DEADLINE</code> and <code>EVENT</code> user commands from
  * <code>CommandType</code>.
  */
-public class WrongDateTimeException extends DukeException {
+public class WrongDateTimeException extends BotException {
 
     /**
      * Public constructor.

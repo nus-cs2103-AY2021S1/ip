@@ -1,9 +1,9 @@
-package meimei.dukeexception;
+package meimei.botexception;
 
 /**
  * Exception thrown when a non-valid user command is inputted.
  */
-public class NoCommandException extends DukeException {
+public class NoCommandException extends BotException {
 
     /**
      * Public constructor.

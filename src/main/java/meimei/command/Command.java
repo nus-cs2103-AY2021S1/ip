@@ -1,7 +1,7 @@
 package meimei.command;
 
 import meimei.Ui;
-import meimei.dukeexception.DukeException;
+import meimei.botexception.BotException;
 import meimei.Storage;
 import meimei.TaskList;
 
@@ -16,10 +16,10 @@ public abstract class Command {
      * @param tasks The user's tasks.
      * @param storage Handles updating the hard disk accordingly.
      * @param ui
-     * @throws DukeException If a DukeException is thrown in executing the command.
+     * @throws BotException If a BotException is thrown in executing the command.
      * @return response to user
      */
-    public abstract String execute(TaskList tasks, Storage storage, Ui ui) throws DukeException;
+    public abstract String execute(TaskList tasks, Storage storage, Ui ui) throws BotException;
 
     /**
      * Returns true when the command is an exit command and false otherwise.

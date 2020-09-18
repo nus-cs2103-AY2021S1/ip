@@ -33,11 +33,16 @@ public class MainWindow extends AnchorPane {
 
     private MeimeiBot meimeiBot;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/VanellopeProfile.png"));
+    private Image userProfile = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image meimeiProfile = new Image(this.getClass().getResourceAsStream("/images/VanellopeProfile.png"));
 
-    public MainWindow(MeimeiBot duke) {
-        this.meimeiBot = duke;
+    /**
+     * Public constructor for the main window of the bot's GUI.
+     *
+     * @param meimeiBot
+     */
+    public MainWindow(MeimeiBot meimeiBot) {
+        this.meimeiBot = meimeiBot;
 
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/MainWindow.fxml"));
@@ -49,7 +54,7 @@ public class MainWindow extends AnchorPane {
         }
 
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(this.meimeiBot.start(), dukeImage));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(this.meimeiBot.start(), meimeiProfile));
     }
 
     /**
@@ -61,8 +66,8 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         String response = meimeiBot.getResponse(input);
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getUserDialog(input, userProfile),
+                DialogBox.getDukeDialog(response, meimeiProfile)
         );
         userInput.clear();
 

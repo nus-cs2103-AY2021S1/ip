@@ -1,16 +1,16 @@
-package meimei.dukeexception;
+package meimei.botexception;
 
 /**
  * Represents exceptions unique to the bot.
  */
-public class DukeException extends Exception {
+public class BotException extends Exception {
 
     /**
      * Public constructor.
      *
      * @param message Error message.
      */
-    public DukeException(String message) {
+    public BotException(String message) {
         super(message);
     }
 

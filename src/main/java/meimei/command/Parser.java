@@ -1,8 +1,8 @@
 package meimei.command;
 
-import meimei.dukeexception.DukeException;
-import meimei.dukeexception.NoCommandException;
-import meimei.dukeexception.NoDescriptionException;
+import meimei.botexception.BotException;
+import meimei.botexception.NoCommandException;
+import meimei.botexception.NoDescriptionException;
 
 /**
  * Static class that parses user commands into executable bot commands represented
@@ -15,11 +15,11 @@ public class Parser {
      *
      * @param fullCommand User command (the full line of user input).
      * @return A bot command to be executed.
-     * @throws DukeException If description is missing for <code>AddCommand</code>,
+     * @throws BotException If description is missing for <code>AddCommand</code>,
      *                      <code>DeleteCommand</code> or <code>DoneCommand</code>,
      *                      or if user command does not match any <code>CommandType</code>.
      */
-    public static Command parse(String fullCommand) throws DukeException {
+    public static Command parse(String fullCommand) throws BotException {
         String[] commandElements = fullCommand.split(" ", 2);
         String commandString = commandElements[0];
         CommandType commandType = null;

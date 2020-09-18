@@ -1,8 +1,8 @@
 package meimei;
 
+import meimei.botexception.BotException;
 import meimei.command.Command;
 import meimei.command.Parser;
-import meimei.dukeexception.DukeException;
 
 /**
  * The Duke program is an interactive bot that offers commands to help the
@@ -44,7 +44,7 @@ public class MeimeiBot {
         this.isRunning = false;
         try {
             this.tasks = new TaskList(storage.load());
-        } catch (DukeException e) {
+        } catch (BotException e) {
             System.out.println(e.getMessage());
             this.tasks = new TaskList();
         }
@@ -65,7 +65,7 @@ public class MeimeiBot {
                 Command command = Parser.parse(fullCommand);
                 System.out.println(command.execute(this.tasks, this.storage, this.ui));
                 isRunning = !command.isExit();
-            } catch (DukeException e) {
+            } catch (BotException e) {
                 System.out.println(this.ui.returnError(e.getMessage()));
             } finally {
                 this.ui.showLine();
@@ -88,7 +88,7 @@ public class MeimeiBot {
             Command command = Parser.parse(input);
             response = command.execute(tasks, storage, ui);
             isRunning = !command.isExit();
-        } catch (DukeException e) {
+        } catch (BotException e) {
             e.printStackTrace();
             response = ui.returnError(e.getMessage());
         }

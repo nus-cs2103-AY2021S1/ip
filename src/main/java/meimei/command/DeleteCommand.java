@@ -3,8 +3,8 @@ package meimei.command;
 import meimei.Ui;
 import meimei.Storage;
 import meimei.TaskList;
-import meimei.dukeexception.DukeException;
-import meimei.dukeexception.WrongItemIndexException;
+import meimei.botexception.BotException;
+import meimei.botexception.WrongItemIndexException;
 import meimei.task.Task;
 
 /**
@@ -24,7 +24,7 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tasks, Storage storage, Ui ui) throws DukeException {
+    public String execute(TaskList tasks, Storage storage, Ui ui) throws BotException {
         try {
             int taskNum = Integer.parseInt(this.description);
             Task task = tasks.getTask(taskNum);
@@ -34,7 +34,7 @@ public class DeleteCommand extends Command {
         } catch (NumberFormatException e) {
             throw new WrongItemIndexException(CommandType.DELETE.toString().toLowerCase(),
                     tasks.getListLength());
-        } catch (DukeException dukeException) {
+        } catch (BotException dukeException) {
             throw dukeException;
         }
     }

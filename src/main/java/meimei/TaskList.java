@@ -3,7 +3,7 @@ package meimei;
 import java.util.ArrayList;
 import java.util.List;
 
-import meimei.dukeexception.DukeException;
+import meimei.botexception.BotException;
 import meimei.task.Task;
 
 /**
@@ -36,9 +36,9 @@ public class TaskList {
      *
      * @param task Task to be added.
      * @param storage Storage object that updates the relevant file on the hard disk.
-     * @throws DukeException If exception is thrown by the update method of the Storage class.
+     * @throws BotException If exception is thrown by the update method of the Storage class.
      */
-    public void addTask(Task task, Storage storage) throws DukeException {
+    public void addTask(Task task, Storage storage) throws BotException {
         this.list.add(task);
         assert this.list.size() > 0 : "No task added.";
         boolean isFirstTask = this.list.size() <= 1;
@@ -52,9 +52,9 @@ public class TaskList {
      *
      * @param taskNum Number that corresponds to the task to be deleted.
      * @param storage Storage object that updates the relevant file on the hard disk.
-     * @throws DukeException If exception is thrown by the update method of the Storage class.
+     * @throws BotException If exception is thrown by the update method of the Storage class.
      */
-    public void deleteTask(int taskNum, Storage storage) throws DukeException {
+    public void deleteTask(int taskNum, Storage storage) throws BotException {
         assert taskNum > 0;
         this.list.remove(taskNum - 1);
         storage.update(this.list);
@@ -67,9 +67,9 @@ public class TaskList {
      *
      * @param taskNum Number that corresponds to the task to be marked.
      * @param storage Storage object that updates the relevant file on the hard disk.
-     * @throws DukeException If exception is thrown by the update method of the Storage class.
+     * @throws BotException If exception is thrown by the update method of the Storage class.
      */
-    public void markDone(int taskNum, Storage storage) throws DukeException {
+    public void markDone(int taskNum, Storage storage) throws BotException {
         assert taskNum > 0;
         getTask(taskNum).markDone();
         storage.update(this.list);

@@ -7,8 +7,8 @@ import java.time.format.DateTimeParseException;
 import meimei.Storage;
 import meimei.TaskList;
 import meimei.Ui;
-import meimei.dukeexception.DukeException;
-import meimei.dukeexception.WrongDateTimeException;
+import meimei.botexception.BotException;
+import meimei.botexception.WrongDateTimeException;
 import meimei.task.Deadline;
 import meimei.task.Event;
 import meimei.task.Task;
@@ -41,7 +41,7 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tasks, Storage storage, Ui ui) throws DukeException {
+    public String execute(TaskList tasks, Storage storage, Ui ui) throws BotException {
         Task task;
         if (this.commandType == CommandType.TODO) {
             task = new Todo(this.description);
@@ -50,7 +50,7 @@ public class AddCommand extends Command {
         } else if (this.commandType == CommandType.EVENT) {
             task = createEvent();
         } else {
-            throw new DukeException("Something went wrong! Try again.");
+            throw new BotException("Something went wrong! Try again.");
         }
 
         tasks.addTask(task, storage);
