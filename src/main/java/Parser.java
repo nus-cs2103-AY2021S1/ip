@@ -1,9 +1,12 @@
+
+
 /**
  * A class which stores key words of commands and various comparing methods
  * used for checking and validation.
  */
 public class Parser {
-
+    public final static String HI = "hi";
+    public final static String HI_WITH_SPACE = "hi ";
     public final static String BYE = "bye";
     public final static String LIST = "list";
     public final static String DONE = "done";
@@ -26,6 +29,10 @@ public class Parser {
      * Constructs a Parser object to tackle the user inputs/commands.
      */
     public Parser() {
+    }
+
+    public boolean isHi(String input) {
+        return input.equals(HI) || input.equals(HI_WITH_SPACE);
     }
 
     public boolean isStarter(String input) {

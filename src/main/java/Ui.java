@@ -9,11 +9,28 @@ public class Ui {
     private String correctedInput;
     private DateAndTime byOrAt;
 
+    private final String logo = " ____        _        \n"
+            + "|  _ \\ _   _| | _____ \n"
+            + "| | | | | | | |/ / _ \\\n"
+            + "| |_| | |_| |   <  __/\n"
+            + "|____/ \\__,_|_|\\_\\___|\n";
+
+    private static boolean isExiting = false;
+
     /**
      * Constructs a ui object to handle user inputs.
      */
     public Ui() {
         parser = new Parser();
+    }
+
+    /**
+     * Getter method for the exiting status of Ui class.
+     *
+     * @return true if the instruction bye is entered, false otherwise
+     */
+    public boolean getExitingStatus() {
+        return Ui.isExiting;
     }
 
     /**
@@ -24,6 +41,7 @@ public class Ui {
     public String greetings() {
         return "Hi, this is Duke the All-Knowing task manager.\n"
                 + "Here is my command list, please follow exactly:\n"
+                + "hi\n"
                 + "bye\n"
                 + "list\n"
                 + "find <feature>\n"
@@ -42,8 +60,12 @@ public class Ui {
      * @return a string to say bye to the user
      */
     private String dealBye() {
+
+        isExiting = true;
+
         return " Bye. Hope to see you again soon!\n"
-                + "You can now close this window to quit me as a program.";
+                + "You can now close this window to quit me as a program."
+                + "(This window will close automatically after 5s.)";
     }
 
     /**
@@ -71,14 +93,15 @@ public class Ui {
      * @param input a string, which is text entered by the user
      * @return a task, which now has a completion state of a tick
      */
-    private String dealDone(String input) {
+    private String dealDone(String input) throws DukeException {
 
         int ref = Integer.parseInt(Character.toString(
                 input.charAt(Parser.DONE_VALID.length() - 1))) - 1;
 
         if (ref >= TaskList.taskStorage.size()) {
-            return new DukeException("I am afraid that it is not possible" +
-                    "to do an unknown task.").toString();
+            throw new DukeException(
+                    "I am afraid that it is not possible to do an unknown task."
+            );
         }
 
         assert TaskList.taskStorage.get(ref) != null;
@@ -98,14 +121,16 @@ public class Ui {
      * @param input a string, which is text entered by the user
      * @return a string representation of a task, which now has a completion state of a tick
      */
-    private String dealDelete(String input) {
+    private String dealDelete(String input) throws DukeException {
 
         int ref = Integer.parseInt(Character.toString(
                 input.charAt(Parser.DEL_VALID.length() - 1))) - 1;
 
         if (ref >= TaskList.taskStorage.size()) {
-            return new DukeException("I am afraid that it is not possible" +
-                    "to delete an unknown task.").toString();
+            throw new DukeException(
+                    "I am afraid that it is not possible" +
+                            "to delete an unknown task."
+            );
         }
 
         assert TaskList.taskStorage.get(ref) != null;
@@ -122,12 +147,12 @@ public class Ui {
      * @param input a string, which is text entered by the user
      * @return a string representation of a Todo task
      */
-    private String dealTodo(String input) {
+    private String dealTodo(String input) throws DukeException {
 
         if (!parser.isValidTodo(input)) {
-            return new DukeException(
+            throw new DukeException(
                     "The description of a todo cannot be empty lah."
-            ).toString();
+            );
         }
 
         description = input.substring(Parser.TODO_VALIDATION.length(),
@@ -154,21 +179,21 @@ public class Ui {
      * @param input a string, which is text entered by the user
      * @return a string representation of an Event task
      */
-    private String dealEvent(String input) {
+    private String dealEvent(String input) throws DukeException {
 
         if (!parser.isValidEvent(input)) {
-            return new DukeException(
+            throw new DukeException(
                     "The description of an event cannot be empty lah."
-            ).toString();
+            );
         }
 
         description = input.substring(Parser.EVT_VALIDATION.length(),
                 Parser.EVT_VALIDATION.length() + 1);
 
         if (parser.isEmptyDescription(description)) {
-            return new DukeException(
+            throw new DukeException(
                     "The description of an event cannot be empty lah."
-            ).toString();
+            );
         }
 
         String dateAndTime = input.substring(input.indexOf("/")
@@ -192,21 +217,21 @@ public class Ui {
      * @param input a string, which is text entered by the user
      * @return a string representation of a Deadline task
      */
-    private String dealDeadline(String input) {
+    private String dealDeadline(String input) throws DukeException {
 
         if (!parser.isValidDeadline(input)) {
-            return new DukeException(
+            throw new DukeException(
                     "The description of a deadline cannot be empty lah."
-            ).toString();
+            );
         }
 
         description = input.substring(Parser.DDL_VALIDATION.length(),
                 Parser.DDL_VALIDATION.length() + 1);
 
         if (parser.isEmptyDescription(description)) {
-            return new DukeException(
+            throw new DukeException(
                     "The description of a deadline cannot be empty lah."
-            ).toString();
+            );
         }
 
         String dateAndTime = input.substring(input.indexOf("/")
@@ -240,23 +265,34 @@ public class Ui {
      */
     private String dealStarter() {
 
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-
         return "Hello from \n" + logo;
 
     }
 
     /**
-     * Workhorse of the project, deal with all possible instructions exactly as desired.
+     * A helper which deal with the hi instruction to greet the user.
      *
-     * @param input string text from the user
-     * @return a string representing results of the instruction
+     * @return a string to greet the user
      */
-    public String deal(String input) {
+    private String dealHi() {
+        return (
+                "Hi, people call me duke the all-knowing, what can I do for you?"
+                        + logo
+        );
+    }
+
+    /**
+     * Workhorse of duke as a application. Handles all possible inputs exactly in the desired way.
+     *
+     * @param input user input commands
+     * @return result from the program
+     * @throws DukeException invalid arguments entered
+     */
+    public String deal(String input) throws DukeException {
+
+        if (parser.isHi(input)) {
+            return dealHi();
+        }
 
         if (parser.isStarter(input)) {
             return dealStarter();
@@ -298,9 +334,9 @@ public class Ui {
             return dealDeadline(input);
         }
 
-        return new DukeException(
+        throw new DukeException(
                 "OOPS!!! I'm sorry, but I don't know what that means :-("
-        ).toString();
+        );
 
     }
 

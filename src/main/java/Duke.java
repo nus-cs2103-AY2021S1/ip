@@ -30,9 +30,15 @@ public class Duke extends Application {
         this.ui = new Ui();
     }
 
+    /**
+     * Getter method for the ui of the duke object.
+     *
+     * @return ui of the duke object
+     */
     public Ui getUi() {
         return this.ui;
     }
+
 
     /**
      * Overridden start method, main entry point to GUI.
@@ -140,7 +146,17 @@ public class Duke extends Application {
      */
     String getResponse(String input) {
 
-        return this.ui.deal(input);
+        try {
+
+            return this.ui.deal(input);
+
+
+        } catch (DukeException e) {
+
+            return e.toString();
+
+        }
+
 
     }
 
