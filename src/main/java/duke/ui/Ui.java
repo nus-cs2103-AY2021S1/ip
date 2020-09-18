@@ -15,6 +15,9 @@ public class Ui {
     private static String deleteTaskFrondAlert = "Noted. I've removed this task:";
     private static String findTaskFrontAlert = "Here are the matching tasks in your list:";
     private static String updateTaskFrontAlert = "Noted. I have updated the task.";
+    private static String inputFormat = "Command format:\ntodo [sth]\nevent [sth] /at yyyy-mm-dd hhmm\n"
+            + "deadline [sth]/by yyyy-mm-dd hhmm\nlist\n"
+            + "done [index]\ndelete [index]\ncheck yyyy-mm-dd\nupdate [index] [new task]\nbye";
 
     /**
      * Returns greetings at the beginning.
@@ -23,6 +26,15 @@ public class Ui {
      */
     public String greetings() {
         return printAnswer("", greetings, "");
+    }
+
+    /**
+     * Returns a string representing input format at the beginning.
+     *
+     * @return a string representing input format at the beginning.
+     */
+    public String commandInputFormat() {
+        return printAnswer(inputFormat);
     }
 
     /**
