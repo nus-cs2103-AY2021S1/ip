@@ -55,9 +55,10 @@ public class Task {
 
     /**
      * Represents the <code>Task</code> as a <code>String</code> in the specific format
-     * for saving to data file, such that it can be read by
+     * for saving to data file, such that it can be read by <code>Storage</code>'s
+     * <code>loadInputFromFile</code> method after the app is closed and run again.
      *
-     * @return
+     * @return  a String representing the task in the format for saving to data file
      */
     public String saveToFile() {
         return isDone ? "1/" : "0/" + description;
