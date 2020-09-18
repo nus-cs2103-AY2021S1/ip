@@ -6,7 +6,7 @@ import olivia.resource.Wrapper;
 import olivia.util.OliviaException;
 
 /**
- * Duke is a bot that functions as a user's task manager.
+ * Olivia is a bot that functions as a user's task manager.
  */
 
 public class Olivia {

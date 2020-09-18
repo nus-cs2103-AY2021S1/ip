@@ -16,6 +16,10 @@ import javafx.stage.Stage;
 import olivia.logic.Parser;
 import olivia.ui.ViewPane;
 
+/**
+ * OliviaGui handles the frontend of the bot.
+ */
+
 public class OliviaGui extends Application {
 
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/gowon.png"));
@@ -27,10 +31,19 @@ public class OliviaGui extends Application {
     private Scene scene;
     private Olivia olivia;
 
+    /**
+     * Adds a DialogBox containing the introductory message to the user.
+     */
+
     private void displayIntro() {
         dialogContainer.getChildren().addAll(
                 DialogBox.getOliviaDialog(olivia.welcome(), new ImageView(oliviaImage)));
     }
+
+    /**
+     * Handles the user's input to Olivia, adding DialogBoxes containing the input
+     * as well as Olivia's return.
+     */
 
     private void handleUserInput() {
         String userText = userInput.getText();
