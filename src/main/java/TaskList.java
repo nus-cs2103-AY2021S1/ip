@@ -24,6 +24,9 @@ public class TaskList {
      */
 
     String add(String input, TaskType type) {
+        if (input.isBlank()) {
+            return "Blank task";
+        }
         Task task;
         switch(type) {
         case TODO:
@@ -145,7 +148,7 @@ public class TaskList {
             return "Error: specify a time using /";
         }
         String[] arr = input.split("/", 2);
-        int index = Integer.parseInt(input) - 1;
+        int index = Integer.parseInt(arr[0]) - 1;
         if (index < 0 || index >= list.size()) {
             index++;
             return "Poco cannot find the task: " + index;
