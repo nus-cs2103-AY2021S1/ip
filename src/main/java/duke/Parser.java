@@ -4,6 +4,7 @@ public class Parser {
 
     public static final String SPACE = " ";
     public static final String EMPTY_STRING = "";
+    public static final String COMMA = ",";
 
     public static boolean isBye(String input) {
         String firstWord = input.split(SPACE, 2)[0];

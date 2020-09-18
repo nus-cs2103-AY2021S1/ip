@@ -30,6 +30,14 @@ public class TaskList {
     }
 
     /**
+     * Removes task from TaskList
+     * @param task The specific task in TaskList to remove.
+     */
+    public void remove(Task task) {
+        this.mainList.remove(task);
+    }
+
+    /**
      * Gets the task in the TaskList.
      * @param index Index of task in TaskList to get.
      * @return Task.
