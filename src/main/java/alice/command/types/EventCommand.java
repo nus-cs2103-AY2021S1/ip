@@ -71,6 +71,10 @@ public class EventCommand implements Command {
             String description = arguments[0];
             String dateTime = arguments[1];
 
+            if (description.contains(" | ")) {
+                throw new InvalidCommandException("Invalid character detected in event description.");
+            }
+
             TaskDateTime eventDateTime = TaskDateTime.parseDateTime(dateTime);
             return new EventCommand(description, eventDateTime);
         } else {

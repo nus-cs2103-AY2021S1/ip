@@ -73,6 +73,11 @@ public class DeadlineCommand implements Command {
             String dateTime = arguments[1];
 
             TaskDateTime deadlineDt = TaskDateTime.parseDateTime(dateTime);
+
+            if (description.contains(" | ")) {
+                throw new InvalidCommandException("Invalid character detected in deadline description.");
+            }
+
             return new DeadlineCommand(description, deadlineDt);
         } else {
             // No /by marker

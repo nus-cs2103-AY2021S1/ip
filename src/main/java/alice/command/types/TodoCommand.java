@@ -55,6 +55,10 @@ public class TodoCommand implements Command {
             throw new InvalidCommandException("The todo description cannot be left empty.");
         }
 
+        if (description.contains(" | ")) {
+            throw new InvalidCommandException("Invalid character detected in todo description.");
+        }
+
         return new TodoCommand(description);
     }
 
