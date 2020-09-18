@@ -20,7 +20,7 @@ public class Ui {
      * Shows a line to dictate separation
      */
     public static String showLine() {
-        return "_______________________________________________________ \n";
+        return "______________________________________________\n";
     }
 
     /**

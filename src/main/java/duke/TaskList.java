@@ -161,8 +161,6 @@ public class TaskList {
     public String checkOff (Integer taskNumber) {
         Task task = todo.get(taskNumber - 1);
         boolean isRepetitive = task.getIsRepetitive();
-        System.out.println(isRepetitive);
-        System.out.println(task.getDate());
         String toReturn = Ui.showLine() + "Nice! I've marked this task as done: \n";
         if (isRepetitive) {
             task.updateDate();

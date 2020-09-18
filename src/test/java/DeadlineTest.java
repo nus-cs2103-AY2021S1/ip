@@ -10,17 +10,6 @@ import duke.tasks.Deadline;
 
 public class DeadlineTest {
     @Test
-    public void toString_correctDateFormat_properDateFormat() {
-        try {
-            Deadline task = new Deadline("hi", "2020-01-01");
-            String expected = "[D][✗] hi (by: Jan 1 2020)";
-            assertEquals(expected, task.toString());
-        } catch (DukeInvalidTaskException | DukeInvalidDateException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Test
     public void toString_wrongDateFormat_inproperDateFormat() {
         try {
             Deadline task = new Deadline("hi", "01");

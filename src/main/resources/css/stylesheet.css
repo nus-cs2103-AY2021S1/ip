@@ -1,0 +1,41 @@
+@font-face {
+    font-family: 'myDefaultFont', serif;
+    src: url("../fonts/static/EBGaramond-SemiBoldItalic.ttf");
+}
+
+.scroll-pane > .viewport {
+    -fx-background-color: transparent;
+}
+
+.scroll-pane {
+    -fx-background-color: #8fb9a8;
+    -fx-background-color: linear-gradient(to bottom, #8fb9a8, #FEFAD4);
+}
+
+.text-field {
+    -fx-background-color: #FEFAD4;
+    -fx-border-radius: 25;
+    -fx-padding: 5 20;
+    -fx-border-color: #8FB9A8;
+    -fx-end-margin: 10;
+    -fx-font-family: 'myDefaultFont';
+    -fx-font-size: 18;
+}
+
+.button {
+    -fx-border-radius: 25;
+    -fx-background-color: #FEFAD4;
+    -fx-border-color: #8FB9A8;
+    -fx-font-size: 18;
+    -fx-font-family: "myDefaultFont";
+}
+
+.label {
+    -fx-font-family: "myDefaultFont";
+    -fx-font-size: 12;
+    -fx-padding: 10;
+}
+
+.image-view {
+
+}
