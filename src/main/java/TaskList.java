@@ -2,6 +2,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+/**
+ * task list class
+ */
 public class TaskList {
 
     private ArrayList<Task> list = new ArrayList<>();
@@ -10,6 +13,15 @@ public class TaskList {
     public TaskList(ArrayList<Task> ls) {
         list.addAll(ls);
     }
+
+    /**
+     * parses string into
+     * corresponding task
+     * and adds it to the list
+     * @param input user input
+     * @param type task type
+     * @return output
+     */
 
     String add(String input, TaskType type) {
         Task task;
@@ -20,7 +32,7 @@ public class TaskList {
             break;
         case DEADLINE:
         case EVENT:
-            return parseTime(input, type);
+            return parseTimedTasks(input, type);
         default:
             return "Error adding task";
         }
@@ -29,7 +41,13 @@ public class TaskList {
 
     }
 
-    private String parseTime(String input, TaskType type) {
+    /**
+     * parses event and deadline tasks
+     * @param input user input
+     * @param type task type
+     * @return output
+     */
+    private String parseTimedTasks(String input, TaskType type) {
         if (!input.contains("/")) {
             return "Error: Specify a time using /";
         }
@@ -57,7 +75,11 @@ public class TaskList {
         }
     }
 
-
+    /**
+     * marks task as done
+     * @param input index of task
+     * @return output
+     */
     String done(String input) {
         int index = Integer.parseInt(input) - 1;
         if (index < 0 || index >= list.size()) {
@@ -69,6 +91,11 @@ public class TaskList {
                 + list.get(index).toString();
     }
 
+    /**
+     * deletes task
+     * @param input index of task
+     * @return output
+     */
     String delete(String input) {
         int index = Integer.parseInt(input) - 1;
         if (index < 0 || index >= list.size()) {
@@ -79,6 +106,12 @@ public class TaskList {
         return "Poco has deleted the task";
     }
 
+    /**
+     * finds tasks with description
+     * that matches user input
+     * @param match user input
+     * @return output
+     */
     String find(String match) {
         String s = "";
         for (Task task : list) {
@@ -90,6 +123,11 @@ public class TaskList {
         return s;
     }
 
+    /**
+     * displays all tasks in the list
+     * @param input user input
+     * @return output
+     */
     String displayList(String input) {
         if (list.size() == 0) {
             return "Yay, all done!";
@@ -97,10 +135,17 @@ public class TaskList {
         return this.toString();
     }
 
+    /**
+     * postpones a task to a new date
+     * @param input user input
+     * @return output
+     */
     String postpone(String input) {
+        if (!input.contains("/")) {
+            return "Error: specify a time using /";
+        }
         String[] arr = input.split("/", 2);
         int index = Integer.parseInt(input) - 1;
-        LocalDateTime ldt = LocalDateTime.parse(arr[1].trim(), formatter);
         if (index < 0 || index >= list.size()) {
             index++;
             return "Poco cannot find the task: " + index;
@@ -109,7 +154,13 @@ public class TaskList {
         if (task instanceof ToDo) {
             return "Poco cannot postpone a ToDo task";
         }
-        task.postpone(ldt);
+        try {
+            LocalDateTime ldt = LocalDateTime.parse(arr[1].trim(), formatter);
+            task.postpone(ldt);
+        } catch (Exception e) {
+            System.out.println(e);
+            return "Error: Invalid time format";
+        }
         return "Poco has postponed the task: " + task.toString();
     }
 

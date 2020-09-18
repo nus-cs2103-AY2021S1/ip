@@ -1,6 +1,11 @@
 import java.util.HashMap;
 import java.util.function.Function;
 
+/**
+ * in charge of parsing user input into
+ * the corresponding command and
+ * returning the correct output
+ */
 public class Command {
 
     private HashMap<String, Cmd> commands = new HashMap<>();
@@ -29,7 +34,7 @@ public class Command {
     }
 
     /**
-     * Basically all the commands are here lol
+     * constructor, initializes references to commands
      */
     public Command(Storage storage) {
         this.taskList = new TaskList(storage.loadFile());
@@ -53,9 +58,10 @@ public class Command {
     }
 
     /**
-     *
-     * @param input
-     * @return
+     * parses to command
+     * and runs command if found
+     * @param input user input
+     * @return output
      */
     public String parseToCommand(String input) {
         //for single-word commands e.g list
@@ -72,6 +78,11 @@ public class Command {
         return "Sorry, Poco did not understand";
     }
 
+    /**
+     * displays format for the given cmd
+     * @param cmd cmd to check format
+     * @return format
+     */
     public String displayFormat(String cmd) {
         if (commands.containsKey(cmd)) {
             Cmd fn = commands.get(cmd);

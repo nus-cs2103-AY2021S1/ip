@@ -6,14 +6,26 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * storage class in charge of loading and saving
+ * list into file (/data/duke.txt)
+ */
 public class Storage {
 
     private String filePath;
 
+    /**
+     * constructor, intializes file path
+     * @param filePath file path
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * loads file text into array list of task
+     * @return task list
+     */
     ArrayList<Task> loadFile() {
         initFile();
 
@@ -39,6 +51,10 @@ public class Storage {
         return ls;
     }
 
+    /**
+     * saves task list into file
+     * @param ls task list
+     */
     void saveFile(TaskList ls) {
         System.out.println("Saving...");
         File f = new File(this.filePath);

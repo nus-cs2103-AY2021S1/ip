@@ -8,6 +8,10 @@ public class DialogBox extends HBox {
 
     private Label text;
 
+    /**
+     * creates dialog box
+     * @param l text
+     */
     public DialogBox(Label l) {
         text = l;
         text.setStyle("-fx-text-fill: #D0D0D0; -fx-font-family:\"consolas\"; -fx-font-size:14px; -fx-font-weight:bold;");

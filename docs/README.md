@@ -86,7 +86,17 @@ Expected outcome:
 
 `Poco has postponed the task`
 
-### `bye` - exits the application
+### `format` - displays the correct format for a command
+
+Example of usage: 
+
+`format deadline`
+
+Expected outcome:
+
+`deadline (task description)/(dd/MM/yyyy HH:mm)`
 
 ### `help` - displays a list of commands
+
+### `bye` - exits the application
 
