@@ -44,6 +44,9 @@ public class Validator {
     public static void info(Command command, String info, boolean isTime) throws MugException {
         boolean isDeadline = command == Command.DEADLINE;
         boolean isEvent = command == Command.EVENT;
+        if (info.contains("|")) {
+            throw new MugException("Sorry!! Mug don't like to eat food with \"|\" :(");
+        }
         if (info.trim().equals("")) {
             if ((isTime && isDeadline)) {
                 throw new MugException("HEY!!! Feed me with {/by [date]}. Mug is hungry T_T");
