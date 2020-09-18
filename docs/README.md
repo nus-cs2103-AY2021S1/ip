@@ -19,7 +19,7 @@ Feature | Description
 `event NAMEOFEVENT /YYYY-MM-DD` | Creates an event and add it to list of tasks
 `find KEYWORD` | Search for any tasks based on the keyword given
 `list` | Shows the current list of tasks
-`sort` | Shows the current list of tasks sorted by name
+`sort` | Shows the current list of tasks sorted by task type
 `todo NAMEOFTODO` | Creates a todo and add it to list of tasks
 
 ## Usage of Features
