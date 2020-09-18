@@ -22,10 +22,12 @@
    3.8. [Deleting an alias: `deletealias`](#38-deleting-an-alias-deletealias)
    
    3.9. [Exiting the program: `bye`](#39-exiting-the-program-bye)
-   
-4. [Miscellaneous]()
  
 ## 1. Introduction
+
+Welcome to the Bit Chatbot User Guide! Bit Chatbot are meant for users who prefer to use a desktop application for their 
+task management.The Bit Chatbot is primarily targeted at users who prefer to use a Chatbot interface. Duke Chatbot has 
+several features to help you get started with managing your tasks. 
 
 ## 2. Quick start guide
 
