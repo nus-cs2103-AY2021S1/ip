@@ -83,7 +83,7 @@ public class Ui {
         String result = "";
         for (int i = 0; i < tasks.size(); i++) {
             if (tasks.get(i) != null) {
-                result += (i + 1) + ". " + tasks.get(i).toString();
+                result += (i + 1) + ". " + tasks.get(i).toString() + "\n";
             }
         }
         return result;

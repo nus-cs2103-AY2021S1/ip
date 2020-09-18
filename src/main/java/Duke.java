@@ -133,23 +133,6 @@ public class Duke extends Application{
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
-    /*
-        sendButton.setOnMouseClicked((event) -> {
-            dialogContainer.getChildren().addAll(
-                    getDialogLabel(userInput.getText()),
-                    getDialogLabel(getResponse(userInput.getText()))
-            );
-            userInput.clear();
-        });
-
-        userInput.setOnAction((event) -> {
-            dialogContainer.getChildren().addAll(
-                    getDialogLabel(userInput.getText()),
-                    getDialogLabel(getResponse(userInput.getText()))
-            );
-            userInput.clear();
-        });
-    */
         //Step 3. Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput();
@@ -161,22 +144,6 @@ public class Duke extends Application{
 
         //Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
-
-        // more code to be added here later
-    }
-
-    /**
-     * Iteration 1:
-     * Creates a label with the specified text and adds it to the dialog container.
-     * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
-     */
-    private Label getDialogLabel(String text) {
-        // You will need to import `javafx.scene.control.Label`.
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
     }
 
     /**
@@ -199,7 +166,6 @@ public class Duke extends Application{
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-
     private String getResponse(String input) {
         this.parser = new Parser(ui, tasks, storage);
         String response = "";
@@ -210,6 +176,4 @@ public class Duke extends Application{
         }
         return response;
     }
-
-
 }

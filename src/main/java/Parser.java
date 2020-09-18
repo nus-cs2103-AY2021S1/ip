@@ -75,7 +75,6 @@ public class Parser {
                 result = tasks.add(new ToDo(taskcommand));
             } else {
                 DukeException e = new DukeException("EmptyToDo");
-                result = ui.showCommandError(e);
                 throw e;
             }
             storage.record(tasks.getTasks());
@@ -87,7 +86,6 @@ public class Parser {
                 result = tasks.add(new Deadline(taskcommand, LocalDateTime.parse(time, formatter)));
             } else {
                 DukeException e = new DukeException("EmptyDeadline");
-                result = ui.showCommandError(e);
                 throw e;
             }
             storage.record(tasks.getTasks());
@@ -99,13 +97,11 @@ public class Parser {
                 result = tasks.add(new Deadline(taskcommand, LocalDateTime.parse(time, formatter)));
             } else {
                 DukeException e = new DukeException("EmptyEvent");
-                result = ui.showCommandError(e);
                 throw e;
             }
             storage.record(tasks.getTasks());
         } else {
             DukeException e = new DukeException("invalid");
-            result = ui.showCommandError(e);
             throw e;
         }
         return result;
