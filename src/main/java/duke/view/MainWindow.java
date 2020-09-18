@@ -23,8 +23,9 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
-    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/duke.png"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/img_user.png"));
+    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/img_duke.png"));
+    private final Image errorImage = new Image(this.getClass().getResourceAsStream("/images/img_error.png"));
 
     @FXML
     public void initialize() {
@@ -47,7 +48,11 @@ public class MainWindow extends AnchorPane {
         String response = duke.getResponse(input);
         assert response != null : "No response from Duke to GUI";
 
-        displayDuke(response);
+        if (response.startsWith("OOPS")) {
+            displayError(response);
+        } else {
+            displayDuke(response);
+        }
         if (response.equals(ExitCommand.EXIT_FLAG)) {
             System.exit(0);
         }
@@ -62,6 +67,12 @@ public class MainWindow extends AnchorPane {
     private void displayDuke(String msg) {
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(msg, dukeImage)
+        );
+    }
+
+    private void displayError(String err) {
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(err, errorImage)
         );
     }
 }

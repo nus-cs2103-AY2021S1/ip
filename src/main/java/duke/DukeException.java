@@ -16,6 +16,6 @@ public class DukeException extends Exception {
 
     @Override
     public String getMessage() {
-        return String.format("\u2639 OOPS!!! %s", super.getMessage());
+        return String.format("OOPS!!! %s", super.getMessage());
     }
 }

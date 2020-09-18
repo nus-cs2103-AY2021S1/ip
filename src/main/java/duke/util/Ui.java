@@ -36,7 +36,7 @@ public class Ui {
      */
     public String welcome(boolean isLoadSuccess) {
         if (isLoadSuccess) {
-            return writeOutput("Existing data loaded from file!",
+            return writeOutput("Existing data loaded from file!\n",
                     "Hello! I'm Duke", "What can I do for you?");
         } else {
             return writeOutput("Hello! I'm Duke", "What can I do for you?");
@@ -51,7 +51,7 @@ public class Ui {
      * @return output message
      */
     public String writeAdd(Task task, int size) {
-        return writeOutput("Got it. I've added this task:", task.toString(),
+        return writeOutput("Got it. I've added this task:", "\t" + task.toString(),
                 String.format("Now you have %d tasks in the list.", size));
     }
 
@@ -87,7 +87,7 @@ public class Ui {
         String[] outputs = new String[found.size() + 1];
         outputs[0] = "Here are the matching tasks in your list:";
         for (int i = 0; i < found.size(); i++) {
-            outputs[i + 1] = found.get(i).toString();
+            outputs[i + 1] = "\t" + found.get(i).toString();
         }
         return writeOutput(outputs);
     }
@@ -103,7 +103,7 @@ public class Ui {
         String[] outputs = new String[tasks.size() + 1];
         outputs[0] = String.format("The following tasks have been %s:", opDesc);
         for (int i = 0; i < tasks.size(); i++) {
-            outputs[i + 1] = tasks.get(i).toString();
+            outputs[i + 1] = "\t" + tasks.get(i).toString();
         }
         return writeOutput(outputs);
     }
