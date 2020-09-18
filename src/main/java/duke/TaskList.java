@@ -18,7 +18,6 @@ public class TaskList {
      * @param task Task to add.
      */
     public void add(Task task) {
-        assert task != null : "Task cannot be null";
         this.mainList.add(task);
     }
 
@@ -27,7 +26,6 @@ public class TaskList {
      * @param index Index of task in TaskList to remove.
      */
     public void remove(int index) {
-        assert index >= 0 : "Index of task cannot be smaller than 0";
         this.mainList.remove(index);
     }
 
@@ -37,7 +35,6 @@ public class TaskList {
      * @return Task.
      */
     public Task get(int index) {
-        assert index >= 0 : "Index of task cannot be smaller than 0";
         return this.mainList.get(index);
     }
 

@@ -1,7 +1,6 @@
 package duke;
 
-public class Command {
-    public static final int EXIT = 0;
+public abstract class Command {
     public static final int LIST = 1;
     public static final int DONE = 2;
     public static final int DELETE = 3;
@@ -12,15 +11,29 @@ public class Command {
     public static final int CREATE_EVENT = 13;
 
     private int commandType;
-    private AdditionalInfo info;
-
-    public Command(int commandType, AdditionalInfo additionalInfo) {
-        this.commandType = commandType;
-        this.info = additionalInfo;
-    }
+    protected Storage storage;
+    protected TaskList taskList;
+    protected String userInput;
 
     public Command(int commandType) {
         this.commandType = commandType;
+    }
+
+    public Command(int commandType, Storage storage, TaskList taskList) {
+        this.commandType = commandType;
+        this.storage = storage;
+        this.taskList = taskList;
+    }
+
+    public Command(int commandType, TaskList taskList, String userInput) {
+        this.commandType = commandType;
+        this.taskList = taskList;
+        this.userInput = userInput;
+    }
+
+    public Command(int commandType, TaskList taskList) {
+        this.commandType = commandType;
+        this.taskList = taskList;
     }
 
     /**
@@ -31,11 +44,5 @@ public class Command {
         return this.commandType;
     }
 
-    /**
-     * Getter method for additionalInfo.
-     * @return AdditionalInfo .
-     */
-    public AdditionalInfo getAdditionalInfo() {
-        return this.info;
-    }
+    public abstract String execute() throws DukeException;
 }

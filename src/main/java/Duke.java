@@ -1,16 +1,11 @@
-import duke.AdditionalInfo;
 import duke.Command;
-import duke.Deadline;
-import duke.Event;
+import duke.DukeException;
 import duke.Parser;
 import duke.Storage;
-import duke.Task;
 import duke.TaskList;
-import duke.ToDo;
 import duke.Ui;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 
@@ -31,91 +26,46 @@ public class Duke {
                 this.taskList = new TaskList(storage.load());
             } else if (dir.exists()) {
                 // case where only folder exist
-                storage.createFile();
-                this.taskList = new TaskList();
+                createFile();
             } else {
                 // case where folder does not exist
-                dir.mkdir();
-                storage.createFile();
-                this.taskList = new TaskList();
+                createDirectory(dir);
+                createFile();
             }
-        } catch (FileNotFoundException e) {
-//            MainWindow.printException(e);
-            // TODO: Show exception
+        } catch (DukeException e) {
+            Ui.printException(e);
             System.exit(1);
+        }
+    }
+
+    private void createDirectory(File dir) {
+        dir.mkdir();
+    }
+
+    private void createFile() throws DukeException {
+        try {
+            storage.createFile();
+            this.taskList = new TaskList();
         } catch (IOException e) {
-//            MainWindow.printException(e);
-            System.exit(1);
+            throw new DukeException("Error Creating File");
         }
     }
 
-    private String printTasks(TaskList tasklist, boolean isFind) {
-        String output = String.format("Here are the %stasks in your list:", isFind ? "matching " : "");
-        for (int i = 0; i < tasklist.size(); i++) {
-            Task currentTask = tasklist.get(i);
-            String num = Integer.toString(i + 1);
-            output += "\n" + num + "." + currentTask;
-        }
-        return output;
-    }
 
-    public String execute(Command command) {
-        String output = "";
-        int commandType = command.getCommandType();
-        boolean print = true;
-        if (commandType == Command.LIST) {
-            output += printTasks(this.taskList, false);
-        } else if (commandType == Command.DONE || commandType == Command.DELETE) {
-            int taskIndex = command.getAdditionalInfo().getTaskIndex();
-            Task selectedTask = taskList.get(taskIndex);
-            if (commandType == Command.DONE) {
-                selectedTask.markAsDone();
-                output += "Nice! I've marked this task as done:\n  " + selectedTask;
-            } else {
-                taskList.remove(taskIndex);
-                output += "Noted. I've removed this task:\n  " + selectedTask;
-            }
-            output += "\nNow you have " + taskList.size() + " tasks in the list.";
-        } else if (commandType == Command.EXIT) {
-            storage.save(taskList);
-            System.exit(0);
-        } else if (commandType == Command.INVALID) {
-            output = "Sorry, I don't understand that command..";
-        } else if (commandType == Command.FIND) {
-            String keyword = command.getAdditionalInfo().getDescription();
-            TaskList tempTaskList = new TaskList();
-            for (int i = 0; i < this.taskList.size(); i++) {
-                Task tempTask = taskList.get(i);
-                String taskDescription = tempTask.getDescription();
-                // contains will return true for "bookstore" when searching for "book"
-                // contains is case - sensitive "Book" and "book" is different
-                if (taskDescription.contains(keyword)) {
-                    tempTaskList.add(tempTask);
-                }
-            }
-            output += printTasks(tempTaskList, true);
-        } else {
-            Task newTask;
-            AdditionalInfo info = command.getAdditionalInfo();
-            if (commandType == Command.CREATE_TODO) {
-                newTask = new ToDo(info.getDescription());
-            } else if (commandType == Command.CREATE_DEADLINE) {
-                newTask = new Deadline(info.getDescription(), info.getDate(), info.getTime());
-            } else {
-                newTask = new Event(info.getDescription(), info.getTime());
-            }
-            taskList.add(newTask);
-            output += "Got it. I've added this task:\n  " + newTask;
-            output += "\nNow you have " + taskList.size() + " tasks in the list.";
-        }
-
-        return print ? output : "";
-    }
-
+    // TODO: Print exception should somewhere be in getResponse
     String getResponse(String input) {
         Command command;
-        command = Parser.parse(input);
-        return this.execute(command);
+        try {
+            if (Parser.isBye(input)) {
+                this.storage.save(this.taskList);
+                System.exit(0);
+            }
+            command = Parser.parseInput(input, storage, taskList);
+            return command.execute();
+        } catch (DukeException e) {
+            return Ui.printException(e);
+        }
+//        return this.execute(command);
     }
 
 //    private void run() {
