@@ -17,7 +17,7 @@ ByteMe is a **desktop scheduling app to help you manage your daily tasks**. It i
 
 ## Quick Start
 1. Ensure you have Java `11` or above installed on your computer.
-2. Download release `V0.3` of `duke.jar`.
+2. Download release `V0.3` of `duke.jar` from [here](https://github.com/xz0127/ip/releases/tag/v0.3).
 3. Copy the file to the folder of your choice
 3. Double click on `duke.jar` to start the GUI.
     * Note that Duke will automatically create folder `data` 
