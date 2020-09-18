@@ -1,5 +1,3 @@
-<link rel="stylesheet" type="text/css" media="all" href="assets/css/style.css" />
-
 # Duke | User Guide
 
 <div class="portrait-image-container">
