@@ -231,7 +231,7 @@ Action | Command Syntax & Example Application
 -------- | -----
 todo | `todo DESCRIPTION` e.g. `todo Celebrate Teacher's Day`
 event | `event DESCRIPTION /at DATE TIME` e.g. `event CS2101 OP1 /at 15.09.20 1000`
-deadline | `deadline DESCRIPTION /by DATE TIME` e.g.`deadline CS2100 lab 2 /at 20.09.20 1000`
+deadline | `deadline DESCRIPTION /by DATE TIME` e.g.`deadline CS2100 lab 2 /by 20.09.20 1000`
 list | `list`
 view | `view DATE` e.g. `view 12.12.20`
 find | `find KEYWORD [MORE_KEYWORDS]` e.g. `find my coffee`
