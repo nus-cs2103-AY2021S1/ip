@@ -140,6 +140,7 @@ Format: `/delete INDEX`
 Examples:
 * `/delete 1` - this would delete the first task on the list.
 * `/delete 3` - this would delete the third task on the list.
+</details>
 
 ### Mark a task as done by index: `done`
 Marks a task as done by its number within the list.
@@ -162,7 +163,11 @@ Examples:
 ### Update a task by index: `update`
 Updates the display text of a task within the list.
 <details>
-  <summary>**Usage**</summary>
+  <summary>
+    
+    Usage
+    
+  </summary>
   
 Format: `/update INDEX NEW_TEXT`
 * Updates task INDEX on the list to display NEW_TEXT.
@@ -176,7 +181,11 @@ Examples:
 ### Save list and close the app: `bye`
 Closes the app and saves the list.
 <details>
-  <summary>**Usage**</summary>
+  <summary>
+    
+    Usage
+    
+  </summary>
   
 Format: `bye`
 * Closes the app and saves the list in the save directory as the app.
