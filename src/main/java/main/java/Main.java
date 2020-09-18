@@ -15,6 +15,8 @@ public class Main extends Application {
 
     private Duke duke = new Duke();
 
+    //@@author {Ringo1225}-reused
+    //{reused code from https://se-education.org/guides/tutorials/javaFx.html}
     @Override
     public void start(Stage stage) {
         try {
@@ -30,4 +32,5 @@ public class Main extends Application {
             e.printStackTrace();
         }
     }
+    //@@author
 }

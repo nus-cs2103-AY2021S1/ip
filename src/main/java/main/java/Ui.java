@@ -1,5 +1,8 @@
 package main.java;
 
+//@@author {Ringo1225}-reused
+//{reused code from nus-cs2103-AY2021S1/ip
+// url: https://github.com/nus-cs2103-AY2021S1/ip}
 /**
  * The User Interface of the robot
  * It prints the greeting message and remind user to input
@@ -10,6 +13,8 @@ public class Ui {
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
+
+//@@author
 
     /**
      * prints out the logo and greeting message

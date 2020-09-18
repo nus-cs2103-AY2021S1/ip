@@ -11,6 +11,8 @@ import javafx.scene.layout.VBox;
 import main.java.DialogBox;
 import main.java.Duke;
 
+//@@author {Ringo1225}-reused
+//{reused code from https://se-education.org/guides/tutorials/javaFx.html}
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -56,3 +58,4 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
     }
 }
+//@@author
