@@ -27,7 +27,7 @@ public class TaskList {
     }
 
     /**
-     * Creates a TaskList from the given list of representations.
+     * Create a TaskList from the given list of representations.
      *
      * @param stringList List of string representations
      */
@@ -113,7 +113,7 @@ public class TaskList {
      * @return Task object added
      * @throws DukeException Duke-related exception due to erroneous inputs
      */
-    public Task addDDLTask(String taskAttr, boolean isEvent) throws DukeException {
+    public Task addTimedTask(String taskAttr, boolean isEvent) throws DukeException {
         Task newTask;
         String[] taskSplit;
         if (isEvent) {
@@ -207,7 +207,7 @@ public class TaskList {
      * Find tasks that contain the given key.
      *
      * @param key key to search for
-     * @return string representations of Tasks founc
+     * @return Tasks found
      */
     public List<Task> findTasks(String key) {
         List<Task> found = new ArrayList<>();
@@ -219,12 +219,22 @@ public class TaskList {
         return found;
     }
 
+    /**
+     * Marks all the tasks in the list ass done.
+     *
+     * @param tasks Tasks to be marked done
+     */
     public void massMarkDone(List<Task> tasks) {
         for (Task task : tasks) {
             task.markDone();
         }
     }
 
+    /**
+     * Deletes all the tasks given from the list.
+     *
+     * @param tasks Tasks to be deleted
+     */
     public void massDelete(List<Task> tasks) {
         boolean removeSuccess = taskList.removeAll(tasks);
         assert removeSuccess : "Tasks found were not removed";

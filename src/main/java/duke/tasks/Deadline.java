@@ -5,7 +5,7 @@ import java.time.LocalDate;
 /**
  * Class to define a deadline.
  */
-public class Deadline extends TaskDDL {
+public class Deadline extends TimedTask {
 
     /**
      * Creates a Deadline with the given task name and deadline.

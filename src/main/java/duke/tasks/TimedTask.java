@@ -6,17 +6,17 @@ import java.time.format.DateTimeFormatter;
 /**
  * Intermediate class to define Tasks with a deadline or timing.
  */
-public class TaskDDL extends Task {
+public class TimedTask extends Task {
 
     LocalDate ddl;
 
     /**
-     * Creates a TaskDDL with the given task name and deadline/timing.
+     * Creates a TimedTask with the given task name and deadline/timing.
      *
      * @param task Task name
      * @param ddl deadline/timing
      */
-    public TaskDDL(String task, LocalDate ddl) {
+    public TimedTask(String task, LocalDate ddl) {
         super(task);
         this.ddl = ddl;
     }

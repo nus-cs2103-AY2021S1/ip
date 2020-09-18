@@ -21,13 +21,21 @@ public class Storage {
     private boolean isLoadSuccess = false;
 
     /**
-     * Creates a Storage object to handle a file at the given file path.
+     * Create a Storage object to handle a file at the given file path.
+     *
+     * @param dirName name of the directory to store file in
+     * @param fileName name of the file to store data in
      */
     public Storage(String dirName, String fileName) {
         this.dirName = dirName;
         this.fileName = fileName;
     }
 
+    /**
+     * Returns whether loading data from the file was successful.
+     *
+     * @return true if loading from file was successful
+     */
     public boolean isLoaded() {
         return isLoadSuccess;
     }

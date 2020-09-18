@@ -5,7 +5,7 @@ import java.time.LocalDate;
 /**
  * Class to define an Event.
  */
-public class Event extends TaskDDL {
+public class Event extends TimedTask {
 
     /**
      * Creates an Event with the given task name and time

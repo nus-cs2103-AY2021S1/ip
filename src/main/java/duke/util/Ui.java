@@ -2,7 +2,6 @@ package duke.util;
 
 import duke.tasks.Task;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -21,7 +20,7 @@ public class Ui {
     }
 
     /**
-     * Reads input from the user.
+     * Reads input from the user (CLI specific method).
      *
      * @return user input
      */
@@ -31,6 +30,9 @@ public class Ui {
 
     /**
      * Outputs the welcome message to the user.
+     *
+     * @param isLoadSuccess true if data waas loaded from the file
+     * @return output message
      */
     public String welcome(boolean isLoadSuccess) {
         if (isLoadSuccess) {
@@ -46,6 +48,7 @@ public class Ui {
      *
      * @param task Task added
      * @param size size of the list
+     * @return output message
      */
     public String writeAdd(Task task, int size) {
         return writeOutput("Got it. I've added this task:", task.toString(),
@@ -56,6 +59,7 @@ public class Ui {
      * Outputs a Task being marked done.
      *
      * @param task Task marked done
+     * @return output message
      */
     public String writeDone(Task task) {
         return writeOutput("Nice! I've marked this task as done:", "\t" + task.toString());
@@ -66,6 +70,7 @@ public class Ui {
      *
      * @param task Task deleted
      * @param size size of the list
+     * @return output message
      */
     public String writeDelete(Task task, int size) {
         return writeOutput("Noted. I've removed this task:", "\t" + task.toString(),
@@ -75,7 +80,8 @@ public class Ui {
     /**
      * Outputs Tasks found from a search.
      *
-     * @param found string representations of Tasks found
+     * @param found Tasks found
+     * @return output message
      */
     public String writeSearch(List<Task> found) {
         String[] outputs = new String[found.size() + 1];
@@ -86,9 +92,16 @@ public class Ui {
         return writeOutput(outputs);
     }
 
-    public String writeMassOp(List<Task> tasks, String operation) {
+    /**
+     * Output Tasks modified using the mass operation.
+     *
+     * @param tasks Tasks modified
+     * @param opDesc description of the operation performed
+     * @return output message
+     */
+    public String writeMassOp(List<Task> tasks, String opDesc) {
         String[] outputs = new String[tasks.size() + 1];
-        outputs[0] = String.format("The following tasks have been %s:", operation);
+        outputs[0] = String.format("The following tasks have been %s:", opDesc);
         for (int i = 0; i < tasks.size(); i++) {
             outputs[i + 1] = tasks.get(i).toString();
         }
@@ -99,6 +112,7 @@ public class Ui {
      * Formats the messages to be output.
      *
      * @param messages messages to be output
+     * @return output message
      */
     public String writeOutput(String... messages) {
         StringBuilder finalOut = new StringBuilder();
@@ -114,8 +128,8 @@ public class Ui {
     /**
      * Closes the interface.
      */
-    public String exit() {
+    public void exit() {
         scanner.close();
-        return writeOutput("Bye. Hope to see you again soon!");
+        writeOutput("Bye. Hope to see you again soon!");
     }
 }

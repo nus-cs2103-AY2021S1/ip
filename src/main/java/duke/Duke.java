@@ -20,12 +20,17 @@ public class Duke {
     private TaskList taskList;
 
     /**
-     * Creates a Duke and initializes the individual components.
+     * Creates a Duke object.
      */
     public Duke() {
 
     }
 
+    /**
+     * Initialises the utility objects.
+     *
+     * @return welcome message
+     */
     public String init() {
         ui = new Ui();
         parser = new Parser();
@@ -34,13 +39,8 @@ public class Duke {
         return ui.welcome(storage.isLoaded());
     }
 
-    public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.run();
-    }
-
     /**
-     * Main running loop (non-GUI)
+     * Main running loop (CLI version)
      */
     public void run() {
         boolean keepGoing = true;
@@ -57,6 +57,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Processes the input and returns the output message.
+     *
+     * @param input input to be processed
+     * @return output message
+     */
     public String getResponse(String input) {
         try {
             Command command = parser.processInput(input);

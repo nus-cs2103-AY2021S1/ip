@@ -1,7 +1,15 @@
 package duke.util;
 
 import duke.DukeException;
-import duke.commands.*;
+
+import duke.commands.AddCommand;
+import duke.commands.Command;
+import duke.commands.DeleteCommand;
+import duke.commands.DoneCommand;
+import duke.commands.ExitCommand;
+import duke.commands.FindCommand;
+import duke.commands.ListCommand;
+import duke.commands.MassOpCommand;
 import duke.tasks.TaskType;
 
 /**
@@ -20,7 +28,7 @@ public class Parser {
     static final String MASS = "mass";
 
     /**
-     * Creates a Parser with the given classes.
+     * Create a Parser.
      */
     public Parser() {}
 
