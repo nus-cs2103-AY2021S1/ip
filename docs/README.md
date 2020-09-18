@@ -92,6 +92,7 @@ adds an event with the description: "birthday", and the time at 16/9/2020, 1300h
 * _**Example:**_ `delete 1`, deletes task 1 from the list.
 
 * Deletes a designated task from the task list.
+
 #### Find a task
 
 * _**Format**_ `find <string>`
