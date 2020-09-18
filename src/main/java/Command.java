@@ -68,12 +68,12 @@ public class Command {
      */
     public String todo(String command, Storage store, ArrayList<Task> storage)
             throws DukeException, FileNotFoundException {
-        if (command.equals("todo ")) {
-            throw new DukeException(command);
-        }
         String[] string = command.split("do ");
         if (string.length < 2) {
-            throw new DukeException("deadline");
+            throw new DukeException("todo");
+        }
+        if (string[1].isBlank()) {
+            throw new DukeException("todo");
         }
         String desc = string[1];
         Todo todo = new Todo(desc);
@@ -97,11 +97,15 @@ public class Command {
      */
     public String deadline(String command, Storage store, ArrayList<Task> storage)
             throws DukeException, FileNotFoundException {
-        if (command.equals("deadline ")) {
-            throw new DukeException("deadline");
-        }
         String[] string = command.split("/by ");
         if (string.length < 2) {
+            throw new DukeException("deadline");
+        }
+        if (string[1].isBlank()) {
+            throw new DukeException("deadline");
+        }
+        String[] desc = string[0].split("line ");
+        if (desc[1].isBlank()) {
             throw new DukeException("deadline");
         }
         Deadline deadline = new Deadline(string[0], string[1]);
@@ -124,11 +128,15 @@ public class Command {
      */
     public String event(String command, Storage store, ArrayList<Task> storage)
             throws DukeException, FileNotFoundException {
-        if (command.equals("event ")) {
-            throw new DukeException("event");
-        }
         String[] string = command.split("/at ");
         if (string.length < 2) {
+            throw new DukeException("event");
+        }
+        if (string[1].isBlank()) {
+            throw new DukeException("event");
+        }
+        String[] desc = string[0].split("ent ");
+        if (desc[1].isBlank()) {
             throw new DukeException("event");
         }
         Events event = new Events(string[0], string[1]);
