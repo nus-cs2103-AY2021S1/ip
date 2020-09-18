@@ -48,10 +48,9 @@ public class Storage {
      * @return time of deadline string
      */
     String stringMaker(int startIndex, String[] splits, String str) {
-        String word = splits[startIndex];
         return startIndex > splits.length - 1
-                 ? str
-                 : stringMaker(startIndex + 1, splits, (str.length() > 0 ? str + " " + word : str + word));
+                ? str
+                : stringMaker(startIndex + 1, splits, (str.length() > 0 ? str + " " + splits[startIndex] : str + splits[startIndex]));
     }
 
     /**
@@ -64,12 +63,13 @@ public class Storage {
             if (lineCounter() == 0) {
                 return arr;
             } else {
+                int counter = 0;
                 Scanner s = new Scanner(file);
                 while (s.hasNextLine()) {
                     String task = s.nextLine();
                     String[] splits = task.split(" ");
                     String name = splits[1];
-                    char icon = splits[0].charAt(4);
+                    Character icon = splits[0].charAt(4);
                     if (task.charAt(1) == 'T') {
                         Todo t = new Todo(name);
                         if (icon == '1') {
@@ -125,7 +125,8 @@ public class Storage {
             }
             String indicator = t.getIndicator();
             String icon = t.getIcon();
-            assert (indicator.equals("[T]") || indicator.equals("[D]") || indicator.equals("[E]"));
+            assert (indicator.equals("[T]") || indicator.equals("[D]") || indicator.equals("[E]"))
+                    && (icon.equals("[" + "\u2713" + "] ") || icon.equals("[" + "\u2718" + "] "));
             String text = indicator + (icon.equals("[" + "\u2713" + "] ") ? "[1] " : "[0] ")
                     + t.getName() + toPrint + "\n";
 

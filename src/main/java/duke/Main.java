@@ -13,7 +13,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private final Duke duke = new Duke("data.txt");
+    private Duke duke = new Duke("data.txt");
 
     public Main() throws Exception {
     }
