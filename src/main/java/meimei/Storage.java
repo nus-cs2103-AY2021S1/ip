@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import meimei.botexception.BotException;
 import meimei.botexception.LoadFailureException;
 import meimei.botexception.SaveFailureException;
 import meimei.task.Deadline;
@@ -30,7 +29,7 @@ public class Storage {
     public static final String TODO_TASK = "T";
     public static final String DEADLINE_TASK = "D";
     public static final String EVENT_TASK = "E";
-    public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("d MMM yyyy, h.m a");
+    public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("d MMM yyyy, h.mm a");
 
     /** File where data is stored */
     private final File taskFile;
