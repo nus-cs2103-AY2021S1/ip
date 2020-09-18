@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
-    private final String filepath;
-    private final File file;
+    private String filepath;
+    private File file;
 
     Storage(String path) {
         this.filepath = path;

@@ -1,7 +1,7 @@
 package duke;
 
 public class Duke {
-    private final Storage s;
+    private Storage s;
     private TaskList tasks;
     private Ui ui;
 
