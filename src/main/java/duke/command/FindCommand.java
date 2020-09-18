@@ -1,9 +1,9 @@
-package duke.command;
+package main.java.duke.command;
 
 import main.java.duke.command.Command;
 import main.java.duke.task.TaskList;
-import duke.Ui;
-import duke.Storage;
+import main.java.duke.Ui;
+import main.java.duke.Storage;
 
 public class FindCommand extends Command {
     String keyword;
@@ -12,9 +12,9 @@ public class FindCommand extends Command {
         this.keyword = keyword;
     }
 
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         TaskList foundTasks = taskList.find(keyword);
-        ui.showAllTasks(foundTasks);
+        return ui.showAllTasks(foundTasks);
     }
 
     public boolean isExit() {

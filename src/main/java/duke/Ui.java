@@ -1,4 +1,4 @@
-package duke;
+package main.java.duke;
 
 import main.java.duke.task.TaskList;
 import main.java.duke.task.Task;
@@ -28,58 +28,58 @@ public class Ui {
         }
     }
 
-    public void showWelcome() {
-        System.out.println(Speech.GREETING.line);
+    public String showWelcome() {
+        return Speech.GREETING.line;
     }
 
-    public void showGoodbye() {
-        System.out.println(Speech.BYE.line);
+    public String showGoodbye() {
+        return Speech.BYE.line;
     }
 
-    public void showDividerLine() {
-        System.out.println("------------------------------");
+    public String showDividerLine() {
+        return "------------------------------";
     }
 
-    public void showAddTask(Task t) {
-        System.out.println(Speech.ADD.line + "\n" + t);
+    public String showAddTask(Task t) {
+        return (Speech.ADD.line + "\n" + t);
     }
 
-    public void showDoneTask(Task t) {
-        System.out.println(Speech.DONE.line + t);
+    public String showDoneTask(Task t) {
+        return (Speech.DONE.line + t);
     }
 
-    public void showDeleteTask(Task t) {
-//        String s = Speech.DELETE.line + t;
-//        System.out.println(s);
-//        return s;
-        System.out.println(Speech.DELETE.line + t);
+    public String showDeleteTask(Task t) {
+        return (Speech.DELETE.line + t);
     }
 
-    public void showUpdateTask(Task t) {
-        System.out.println(Speech.UPDATEDTASK.line + t);
+    public String showUpdateTask(Task t) {
+        return (Speech.UPDATEDTASK.line + t);
     }
 
-    public void showNumberOfTasksLeft(TaskList taskList) {
+    public String showNumberOfTasksLeft(TaskList taskList) {
         int length = taskList.getSize();
-        System.out.println("\nYou now have " + length
+        return ("\nYou now have " + length
                 + (length == 1 ? " thing" : " things") + " in your list");
     }
 
-    public void showLoadingError() {
-        System.out.println(Speech.LOADINGERROR.line);
+    public String showLoadingError() {
+        return Speech.LOADINGERROR.line;
     }
 
-    public void showError(String errorMsg) {
-        System.out.println(errorMsg);
+    public String showError(String errorMsg) {
+        return errorMsg;
     }
 
-    public void showAllTasks(TaskList taskList) {
+    public String showAllTasks(TaskList taskList) {
+        String s = "";
         for (int i = 0; i < taskList.getSize(); i++) {
-            System.out.println(i + 1 + ". " + taskList.getTask(i));
+            s += (i + 1 + ". " + taskList.getTask(i) + "\n");
         }
-        System.out.println(Speech.LIST.line);
+        s += Speech.LIST.line;
+        return s;
     }
 
+    // TODO: CHANGE THIS
     public String readCommand() {
         System.out.println(Speech.NEXTCOMMAND.line);
         Scanner sc = new Scanner(System.in);
@@ -88,6 +88,7 @@ public class Ui {
         return command;
     }
 
+    // TODO: CHANGE THIS
     public String readUpdateDesc() {
         System.out.println(Speech.UPDATEINPUT.line);
         Scanner sc = new Scanner(System.in);

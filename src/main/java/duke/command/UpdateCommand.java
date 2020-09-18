@@ -4,8 +4,8 @@ import main.java.duke.command.Command;
 import main.java.duke.task.Task;
 import main.java.duke.task.TaskList;
 import main.java.duke.dukeexception.InvalidInputException;
-import duke.Ui;
-import duke.Storage;
+import main.java.duke.Ui;
+import main.java.duke.Storage;
 
 public class UpdateCommand extends Command {
     int taskNumber;
@@ -16,10 +16,10 @@ public class UpdateCommand extends Command {
         this.newTaskDesc = newTaskDesc;
     }
 
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws InvalidInputException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws InvalidInputException {
         try {
             Task updatedTask = taskList.updateTaskDesc(taskNumber, newTaskDesc);
-            ui.showUpdateTask(updatedTask);
+            return ui.showUpdateTask(updatedTask);
         } catch (Exception e) {
             throw new InvalidInputException("Task does not exist");
         }

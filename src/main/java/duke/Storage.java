@@ -1,4 +1,4 @@
-package duke;
+package main.java.duke;
 
 import main.java.duke.task.Todo;
 import main.java.duke.task.Deadline;

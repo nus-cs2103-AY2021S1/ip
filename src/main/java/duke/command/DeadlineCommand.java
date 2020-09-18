@@ -3,8 +3,8 @@ package main.java.duke.command;
 import main.java.duke.command.Command;
 import main.java.duke.task.Deadline;
 import main.java.duke.task.TaskList;
-import duke.Ui;
-import duke.Storage;
+import main.java.duke.Ui;
+import main.java.duke.Storage;
 
 import java.time.LocalDate;
 
@@ -17,11 +17,10 @@ public class DeadlineCommand extends Command {
         this.by = by;
     }
 
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         Deadline deadline = new Deadline(desc, by);
         taskList.addTask(deadline);
-        ui.showAddTask(deadline);
-        ui.showNumberOfTasksLeft(taskList);
+        return (ui.showAddTask(deadline) + ui.showNumberOfTasksLeft(taskList));
     }
 
     public boolean isExit() {

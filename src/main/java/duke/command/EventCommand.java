@@ -3,8 +3,8 @@ package main.java.duke.command;
 import main.java.duke.command.Command;
 import main.java.duke.task.Event;
 import main.java.duke.task.TaskList;
-import duke.Ui;
-import duke.Storage;
+import main.java.duke.Ui;
+import main.java.duke.Storage;
 
 import java.time.LocalDate;
 
@@ -17,11 +17,10 @@ public class EventCommand extends Command {
         this.at = at;
     }
 
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         Event event = new Event(desc, at);
         taskList.addTask(event);
-        ui.showAddTask(event);
-        ui.showNumberOfTasksLeft(taskList);
+        return (ui.showAddTask(event) + ui.showNumberOfTasksLeft(taskList));
     }
 
     public boolean isExit() {

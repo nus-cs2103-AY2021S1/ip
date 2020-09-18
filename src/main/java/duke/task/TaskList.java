@@ -50,13 +50,15 @@ public class TaskList {
     }
 
     public TaskList find(String keyword) {
-        TaskList foundTasks = new TaskList(); // to return this
+        TaskList foundTasks = new TaskList(); // to be returned
 
         // process the keyword to make it easier to match
         String searchTerm = keyword.toLowerCase();
 
         for (Task t : taskList) {
+            // process the task's string to make it easier to match
             String processedTaskString = t.toString().toLowerCase();
+
             if (processedTaskString.contains(searchTerm)) {
                 foundTasks.addTask(t);
             }

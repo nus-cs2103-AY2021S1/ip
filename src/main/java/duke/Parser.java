@@ -1,6 +1,7 @@
-package duke;
+package main.java.duke;
 
-import duke.command.FindCommand;
+import main.java.duke.Ui;
+import main.java.duke.command.FindCommand;
 import main.java.duke.command.Command;
 import main.java.duke.command.ListCommand;
 import main.java.duke.command.DoneCommand;
@@ -97,7 +98,7 @@ public class Parser {
             }
         case COMMAND_DELETE:
             try {
-                return new FindCommand(info);
+                return new DeleteCommand(parseInt(info) - 1);
             } catch (Exception e) {
                 throw new InvalidInputException("Somehow your input is wrong.");
             }
