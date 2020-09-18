@@ -21,8 +21,7 @@ Juan's Duke program is a personal tasks handler that keeps track of your daily t
 
 ### Quickstart
 1. Start Juan's Duke program.
-2. Duke will show up and look something like this.
-![Duke starting page](/Users/juanlie/cs2103t/pw2/ip/src/main/resources/images/Screenshot 2020-09-16 at 6.37.07 PM.jpg)
+2. Duke will show up in a form of a chat bot.
 3. Type the command in the user input box provided located at the bottom.
 4. Press enter or click send to send out the command. 
 Some command examples that you can try:
