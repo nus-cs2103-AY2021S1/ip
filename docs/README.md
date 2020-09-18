@@ -302,7 +302,7 @@ Action | Format, Example usage
 ------ | ------
 Add | `todo <task description>` <br> `deadline <task description> /by <YYYY-MM-DD>` <br> `event <task description> /at <date/time period>` <br> e.g. `event java workshop​ /at Tuesday 6-7pm`
 List | `list`
-Update | `update <task index> <new task description> [/by (OR) /at <new date/time>]` <br> e.g. `update 1 19th birthday party /at 25 Nov 5-10pm`
+Update | `update <task index> <new task description>` <br> `update <task index> (/by OR /at) <new date/time>` <br> `update <task index> <new task description> (/by OR /at) <new date/time>` <br> e.g. `update 1 19th birthday party /at 25 Nov 5-10pm`
 Mark as done | `done <index>` <br> e.g. `done 2`
 Find | `find <keyword>` <br> e.g. `find workshop`
 Delete | `delete <index>` <br> e.g. `delete 5`
