@@ -22,6 +22,11 @@ public class CommandParser {
      * @throws DukeException If command is not on the recognised list of commands.
      */
     public static Command parse(String command) throws DukeException {
+        // Disallow use of escape characters and symbols used internally by Storage class
+        if (command.contains("|") || command.contains("\\")) {
+            throw new DukeException("The characters \\ and | are forbidden!");
+        }
+
         String[] extractedCommand = command.split(" ", 2);
         switch(extractedCommand[0]) {
         case("bye"):
