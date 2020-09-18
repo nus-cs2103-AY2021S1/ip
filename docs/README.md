@@ -27,11 +27,7 @@ The name 'Duke' was inspired by Duke, the Java Mascot.
 
    * **`todo`**`read book` : Adds a todo task named `read book` to the tasks list.
    
-   * **`deadline`**`return book` : Adds a deadline task named `return book` to the tasks list.
-   
-   * **`event`**`borrow book` : Adds a event task named `borrow book` to the tasks list.
-
-   * **`delete`**`3` : Deletes the 3rd task shown in the current list.
+   * **`delete`**`1` : Deletes the 1st task shown in the current list.
 
 1. Refer to the [Features](#features) below for details of each command.
 
@@ -75,7 +71,8 @@ Save a deadline tasks into the list.
 
 Format: `deadline DESCRIPTION /by DATE/MONTH/YEAR`
 
-* `DESCRIPTION /by DATE/MONTH/YEAR` cannot be blank.
+* `DESCRIPTION` cannot be blank.
+* `DATE/MONTH/YEAR` cannot be blank.
 
 Example of usage:
 
@@ -87,7 +84,8 @@ Save an event tasks into the list.
 
 Format: `event DESCRIPTION /at DATE/MONTH/YEAR HOUR:MINUTES`
 
-* `DESCRIPTION /at DATE/MONTH/YEAR HOUR:MINUTES` cannot be blank.
+* `DESCRIPTION` cannot be blank.
+* `DATE/MONTH/YEAR HOUR:MINUTES` cannot be blank.
 
 Example of usage:
 
