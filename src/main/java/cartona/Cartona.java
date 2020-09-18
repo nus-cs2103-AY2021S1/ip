@@ -41,14 +41,14 @@ public class Cartona {
 
         try {
             if (!storage.checkAndCreateFile()) {
-                lineMessage = "     Existing list not found, creating new list\n";
+                lineMessage = " Existing list not found, creating new list\n";
             } else {
                 this.taskList = storage.getListFromStorage();
 
                 if (taskList.getSize() == 0) {
-                    lineMessage = "     Found an existing list, but it was empty!\n";
+                    lineMessage = " Found an existing list, but it was empty!\n";
                 } else {
-                    lineMessage = String.format("     Found an existing list at %s%n", storage.getPath());
+                    lineMessage = String.format(" Found an existing list at %s%n", storage.getPath());
                 }
             }
 

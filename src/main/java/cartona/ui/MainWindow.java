@@ -39,7 +39,7 @@ public class MainWindow extends AnchorPane {
     public void setCartona(Cartona cartona) {
         this.cartona = cartona;
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(cartona.load(), dukeImage)
+                DialogBox.getCartonaDialog(cartona.load(), dukeImage)
         );
     }
 
@@ -53,7 +53,7 @@ public class MainWindow extends AnchorPane {
         String response = cartona.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getCartonaDialog(response, dukeImage)
         );
         userInput.clear();
     }

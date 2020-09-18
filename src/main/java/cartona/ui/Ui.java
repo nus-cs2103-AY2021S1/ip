@@ -9,7 +9,6 @@ import cartona.task.TaskList;
  * @author Jaya Rengam
  */
 public class Ui {
-    private static final String HORIZONTAL_LINE = "    ____________________________________________________________\n";
 
     public Ui() {
 
@@ -21,17 +20,15 @@ public class Ui {
      */
     public String getErrorMessageFormatted(String errorMessage) {
         assert !(errorMessage.equals("")) : "Error message cannot be empty";
-        return String.format("%s     %s%n%s", HORIZONTAL_LINE, errorMessage, HORIZONTAL_LINE);
+        return String.format(" %s%n", errorMessage);
     }
 
     /**
      * Returns the startup message.
      */
     public String getWelcomeMessageFormatted() {
-        return String.format("%s     Hello! I'm Cartona.%n"
-                        + "     What can I do for you?"
-                        + "%n%s",
-                HORIZONTAL_LINE, HORIZONTAL_LINE);
+        return String.format(" Hello! I'm Cartona.%n"
+                        + " What can I do for you?");
     }
 
     /**
@@ -40,10 +37,9 @@ public class Ui {
      * @param taskListSize The current size of the TaskList.
      */
     public String printTaskAddingMessage(Task task, int taskListSize) {
-        return String.format("%s     Got it. I've added this task:%n       %s%n     "
-                            + "Now you have %d tasks in the list."
-                            + "%n%s",
-                HORIZONTAL_LINE, task, taskListSize, HORIZONTAL_LINE);
+        return String.format(" Got it. I've added this task:%n       %s%n     "
+                            + "Now you have %d tasks in the list.",
+                        task, taskListSize);
     }
 
     /**
@@ -52,10 +48,8 @@ public class Ui {
      * @param taskListSize The current size of the TaskList.
      */
     public String printTaskDeletionMessage(Task task, int taskListSize) {
-        return String.format(HORIZONTAL_LINE
-                + "     Noted. I've removed this task:%n       %s%n"
-                + "     Now you have %d tasks in the list.%n"
-                + HORIZONTAL_LINE,
+        return String.format(" Noted. I've removed this task:%n       %s%n"
+                + " Now you have %d tasks in the list.%n",
                     task, taskListSize);
     }
 
@@ -64,10 +58,8 @@ public class Ui {
      * @param task The task that was marked as completed.
      */
     public String printTaskDoneMessage(Task task) {
-        return String.format(HORIZONTAL_LINE
-                + "     Nice! I've marked this task as not done:%n"
-                + "       %s%n"
-                + HORIZONTAL_LINE,
+        return String.format(" Nice! I've marked this task as not done:%n"
+                + "   %s%n",
                     task);
     }
 
@@ -75,10 +67,8 @@ public class Ui {
      * Returns a message reflecting the successful edit of a Task.
      */
     public String printTaskEditMessage(int taskIdToEdit, Task task) {
-        return String.format(HORIZONTAL_LINE
-                + "     Nice! I've edited task %d:"
-                + "       %s%n"
-                + HORIZONTAL_LINE,
+        return String.format(" Nice! I've edited task %d:"
+                + "   %s%n",
                     taskIdToEdit, task);
     }
 
@@ -86,10 +76,8 @@ public class Ui {
      * Returns a numbered list of Tasks from the provided TaskList.
      */
     public String printTaskList(TaskList taskList) {
-        return String.format(HORIZONTAL_LINE
-                + "     Here are the tasks in your list:%n"
-                + "%s"
-                + HORIZONTAL_LINE,
+        return String.format(" Here are the tasks in your list:%n"
+                            + "%s",
                     taskList);
     }
 
@@ -99,10 +87,8 @@ public class Ui {
      * @param matchingTaskList the TaskList to be printed
      */
     public String printMatchingTaskList(TaskList matchingTaskList) {
-        return String.format(HORIZONTAL_LINE
-                        + "     Here are the matching tasks in your list:%n"
-                        + "%s"
-                        + HORIZONTAL_LINE,
+        return String.format(" Here are the matching tasks in your list:%n"
+                            + "%s",
                 matchingTaskList);
     }
 
@@ -110,8 +96,6 @@ public class Ui {
      * Returns the exit message.
      */
     public String printExitMessage() {
-        return String.format(HORIZONTAL_LINE
-                + "     List saved! Goodbye!%n"
-                + HORIZONTAL_LINE);
+        return String.format(" List saved! Goodbye!%n");
     }
 }

@@ -105,7 +105,7 @@ public class TaskList {
         String printedListString = "";
         for (Task task: taskArrayList) {
             counter++;
-            printedListString += String.format("     %d.%s%n", counter, task);
+            printedListString += String.format("  %d. %s%n", counter, task);
         }
         return printedListString;
     }

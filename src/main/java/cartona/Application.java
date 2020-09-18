@@ -10,7 +10,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
- * A GUI for Duke using FXML.
+ * A GUI for Cartona using FXML.
+ *
+ * @author Jaya Rengam
  */
 public class Application extends javafx.application.Application {
 
