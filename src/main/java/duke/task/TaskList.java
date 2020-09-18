@@ -56,7 +56,6 @@ public class TaskList {
         for (int i = 0; i < taskList.size(); i++) {
             outputString.append(String.format("%d. %s\n", i + 1, taskList.get(i).toString()));
         }
-        System.out.println(outputString);
         return outputString.toString();
     }
 

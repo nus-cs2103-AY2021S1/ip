@@ -4,6 +4,7 @@ import duke.task.TaskList;
 import duke.utility.Parser;
 import duke.utility.Statistic;
 import duke.utility.Storage;
+import javafx.application.Application;
 
 public class Duke {
 
@@ -29,19 +30,21 @@ public class Duke {
         } catch (DukeException e) {
             System.out.println("unable to load file");
         }
+
     }
 
     /**
      * Initiate the stop to the program
      * Save the stored tasks into the hard drive
      */
-    public void stop() {
+    public void save() {
         try {
             storage.saveTaskFile();
         } catch (DukeException e) {
             System.out.println(e.toString());
         }
     }
+
 
     /**
      * You should have your own function to generate a response to user input.
