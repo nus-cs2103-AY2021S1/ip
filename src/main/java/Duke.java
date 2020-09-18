@@ -61,6 +61,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Starts the Deuk programme and takes in commands through standard input.
+     */
     public void init() {
         Ui.sayHello(this.logo, this.introMessage);
         while (this.parser.hasNext()) {

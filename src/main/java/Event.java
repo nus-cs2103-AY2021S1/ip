@@ -12,6 +12,13 @@ public class Event extends Task {
         this.timingInSaveFormat = timingInSaveFormat;
     }
 
+    /**
+     * Creates an Event instance.
+     * @param name Name of Event task.
+     * @param timing Date of the Event task.
+     * @return A new Event instance.
+     * @throws DukeException If timing is in the wrong format (correct format: YYYY-MM-DD).
+     */
     public static Event createEvent(String name, String timing) throws DukeException {
         LocalDate localDate;
         try {
@@ -24,11 +31,22 @@ public class Event extends Task {
                 localDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")), timing);
     }
 
+    /**
+     * Returns the error message for the case where the name of the
+     * Event task is empty.
+     * @return Error message for missing name.
+     */
     @Override
     public String returnMissingNameError() {
         return "The name of an event task cannot be empty.";
     }
 
+    /**
+     * Returns the Event instance's Save Data String used by the Storage class when writing to
+     * duke data text file on disk.
+     * @see Storage#saveTasksToDisk(TaskList)
+     * @return The Save Data String of the Event instance.
+     */
     @Override
     public String getSaveDataString() {
         String saveData = "";
@@ -37,6 +55,10 @@ public class Event extends Task {
         return saveData;
     }
 
+    /**
+     * Returns String representation of the Event instance.
+     * @return String representation of the Event instance.
+     */
     @Override
     public String toString() {
         String marked = this.isDone ? "[✓] " : "[✗] ";

@@ -18,14 +18,30 @@ public class Parser {
         this.sc = sc;
     }
 
+    /**
+     * Returns a boolean describing if there are any more inputs by the user.
+     * @return Boolean value describing if there are any more user inputs.
+     */
     Boolean hasNext() {
         return sc.hasNext();
     }
 
+    /**
+     * Parses the user input by one line.
+     */
     void parseLine() {
         parsedLine = this.sc.nextLine().trim();
     }
 
+    /**
+     * Execute the command as per the user input and returns a boolean value
+     * describing if the exit command (bye) has been invoked by the user.
+     * If the exit command is invoked, the sayGoodbye() method from the Ui class is called.
+     * @param storage Storage instance used by the Duke instance.
+     * @param tasks TaskList instance used by the Duke instance.
+     * @see Ui#sayGoodbye(Storage, TaskList)
+     * @return Boolean value describing if the exit command has been called by the user.
+     */
     boolean executeCommand(Storage storage, TaskList tasks) {
         String input = this.parsedLine;
 
@@ -120,6 +136,5 @@ public class Parser {
         Ui.printError("Sorry I don't know what that means :(");
         return false;
     }
-
 
 }

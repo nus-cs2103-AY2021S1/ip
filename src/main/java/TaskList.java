@@ -14,26 +14,44 @@ public class TaskList {
 
     }
 
+    /**
+     * Returns the number of tasks in the task list.
+     * @return Number of tasks in the task list.
+     */
     Integer countTotalTasks() {
         return this.taskList.size();
     }
 
-    Task getTask(int index) {
+    /**
+     * Returns the task at the specified index in the task list.
+     * @param index The index of the task of interest in the task list.
+     * @return The Task instance found at the specified index in the task list.
+     * @throws IndexOutOfBoundsException If the index specified is outside the range of the task list.
+     */
+    Task getTask(int index) throws IndexOutOfBoundsException{
         return this.taskList.get(index);
     }
 
-    void addTask(Task obj) throws DukeException {
-        if (obj.getName().length() == 0) {
-            throw new DukeException(obj.returnMissingNameError());
+    /**
+     * Adds a Task instance to the task list.
+     * @param task Task instance to be added to the task list.
+     * @throws DukeException If the Task instance does not have a name.
+     */
+    void addTask(Task task) throws DukeException {
+        if (task.getName().length() == 0) {
+            throw new DukeException(task.returnMissingNameError());
         }
-        this.taskList.add(obj);
+        this.taskList.add(task);
         String numOfTasks = this.taskList.size() == 1 ? "1 task" : this.taskList.size() + " tasks";
         String message = "Got it. I've added the following task: " + Ui.NEW_LINE
-                + Ui.PADDING + "  " + obj.toString() + Ui.NEW_LINE
+                + Ui.PADDING + "  " + task.toString() + Ui.NEW_LINE
                 + Ui.PADDING + "Now you have "  + numOfTasks + " in total.";
         Ui.print(message);
     }
 
+    /**
+     * Display the list of tasks in the task list.
+     */
     void displayTasks() {
         if (this.taskList.size() == 0) {
             Ui.print("Your list is empty, try adding some tasks to it");
@@ -49,6 +67,11 @@ public class TaskList {
         Ui.print(output.toString());
     }
 
+    /**
+     * Sets the task at the specified index in the task list to done.
+     * @param index The index of the task in the task list.
+     * @throws DukeException If the index specified is outside the range of the task list.
+     */
     void setTaskDone(int index) throws DukeException {
         if (index <= 0 || index > this.taskList.size()) {
             throw new DukeException("Invalid index, cannot find task.");
@@ -59,6 +82,11 @@ public class TaskList {
         Ui.print(message);
     }
 
+    /**
+     * Deletes the task at the specified index in the task list.
+     * @param index The index of the task in the task list.
+     * @throws DukeException If the index specified is outside the range of the task list.
+     */
     void deleteTask(int index) throws DukeException {
         if (index <= 0 || index > this.taskList.size()) {
             throw new DukeException("Invalid index, cannot find task.");
@@ -72,6 +100,10 @@ public class TaskList {
         Ui.print(message);
     }
 
+    /**
+     * Deletes all tasks in the task list.
+     * @throws DukeException If the task list is already empty.
+     */
     void deleteAllTasks() throws DukeException {
         if (this.taskList.size() == 0) {
             throw new DukeException("Your list is already empty.");
