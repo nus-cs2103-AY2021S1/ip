@@ -13,6 +13,7 @@ public class Parser {
      *
      * @param commandString user input.
      * @return a {@code Command} object representing user actions.
+     * @throws UnknownCommandException - UnknownCommandException
      */
     public static Commands processInput(String commandString) throws UnknownCommandException {
         Commands cmd = Commands.valueOf(commandString);
@@ -36,6 +37,7 @@ public class Parser {
      *
      * @param splitted user input.
      * @return a {@code Command} object representing user actions.
+     * @throws DukeErrorException - DukeErrorException
      */
     public static Commands processCommand(String[] splitted) throws DukeErrorException {
         try {

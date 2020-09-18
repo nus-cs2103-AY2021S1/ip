@@ -37,6 +37,7 @@ public class Storage {
      * Adds a string to a file
      * @param filePath The file path (destination)
      * @param textToAppend The content of the file
+     * @throws IOException - IOException
      */
     public void appendToFile(String filePath, String textToAppend) throws IOException {
         FileWriter fw = new FileWriter(filePath); // create a FileWriter in append mode
@@ -47,6 +48,7 @@ public class Storage {
     /**
      * Create a new file to the filepath
      * @param filePath The file path (destination)
+     * @throws IOException - IOException
      */
     public void createFile(String filePath) throws IOException {
         File dataFolder = new File("data");
@@ -65,6 +67,8 @@ public class Storage {
      * @param tl TaskList object to add the tasks inside the file to the list
      * @param ui Ui object to print user display
      * @param filePath The file path (destination)
+     * @throws FileNotFoundException - FileNotFoundException
+     * @throws NullPointerException - NullPointerException
      */
     public String readFile(TaskList tl, Ui ui, String filePath)
             throws FileNotFoundException, NullPointerException {

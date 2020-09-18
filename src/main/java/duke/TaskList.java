@@ -36,6 +36,7 @@ public class TaskList {
      * @param str The string input.
      * @param isNew Boolean value that indicates the task is new or not.
      * @param isDone Boolean value that indicates the state of the task.
+     * @throws InvalidDeadlineException - InvalidDeadlineException
      */
     public String addDeadline(Ui ui, String str, boolean isNew, boolean isDone)
             throws InvalidDeadlineException {
@@ -74,6 +75,7 @@ public class TaskList {
      * @param str The string input.
      * @param isNew Boolean value that indicates the task is new or not.
      * @param isDone Boolean value that indicates the state of the task.
+     * @throws InvalidEventException - InvalidEventException
      */
     public String addEvent(Ui ui, String str, boolean isNew, boolean isDone)
             throws InvalidEventException {
@@ -112,6 +114,7 @@ public class TaskList {
      * @param str The string input.
      * @param isNew Boolean value that indicates the task is new or not.
      * @param isDone Boolean value that indicates the state of the task.
+     * @throws InvalidTodoException - InvalidTodoException
      */
     public String addTodo(Ui ui, String str, boolean isNew, boolean isDone)
             throws InvalidTodoException {
@@ -132,6 +135,7 @@ public class TaskList {
     /**
      * Deletes a task from the list.
      * @param index The index of the target object.
+     * @throws DukeErrorException - DukeErrorException
      */
     public String deleteTask(int index) throws DukeErrorException {
         if (index >= this.tasks.size() || index < 0) {
@@ -145,6 +149,7 @@ public class TaskList {
     /**
      * Makes the target task to be completed.
      * @param index The index of the target object.
+     * @throws DukeErrorException - DukeErrorException
      */
     public String makeDone(int index) throws DukeErrorException {
         if (index >= this.tasks.size() || index < 0) {
@@ -159,6 +164,9 @@ public class TaskList {
      * Updates a task
      * @param ui Ui object to print user display
      * @param str The string input containing the new description
+     * @throws ArrayIndexOutOfBoundsException - ArrayIndexOutOfBoundsException
+     * @throws UnknownCommandException - UnknownCommandException
+     * @throws DukeErrorException - DukeErrorException
      */
     public String updateTask(Ui ui, String str)
             throws ArrayIndexOutOfBoundsException, UnknownCommandException, DukeErrorException {
