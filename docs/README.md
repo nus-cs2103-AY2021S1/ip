@@ -255,18 +255,18 @@ Ends the Chatbot. Window will close automatically in a 1 second.
 
 ![Image of alias feature](./UiBye.png)
 
-##4. Summary of commands
+## 4. Summary of commands
 
 |Command       | Parameters                           |
 |:--------------:|:--------------------------------------|
-|`list`        |                                      |
-|`todo`        | <TASK_DESCRIPTION>                   |
-|`event`       | <TASK_DESCRIPTION> /at <DATE> <TIME> |
-|`deadline`    | <TASK_DESCRIPTION> /by <DATE> <TIME> |
-|`done`        | <TASK_INDEX>                         |
-|`delete`      | <TASK_INDEX>                         |
-|`find`        | <KEYWORD>                            |
-|`date`        | <DATE>                               |
-|`alias`       | <ALIAS> <COMMAND>                    |
-|`deleatealias`| <ALIAS>                              |
-|`bye`         |                                      |
+|`list`        |                                        |
+|`todo`        |  <TASK_DESCRIPTION>                    |
+|`event`       |  <TASK_DESCRIPTION> /at <DATE> <TIME>  |
+|`deadline`    |  <TASK_DESCRIPTION> /by <DATE> <TIME>  |
+|`done`        |  <TASK_INDEX>                          |
+|`delete`      |  <TASK_INDEX>                          |
+|`find`        |  <KEYWORD>                             |
+|`date`        |  <DATE>                                |
+|`alias`       |  <ALIAS> <COMMAND>                     |
+|`deleatealias`|  <ALIAS>                               |
+|`bye`         |                                        |
