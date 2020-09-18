@@ -69,6 +69,7 @@ Example of usage:
 ### Find a task 
 ##### `find TASK_NAME` 
 Find the task whose name starts with `TASK_NAME` or any of its sub-words
+
 Example of usage: 
 
 `find cook curry` will match any task with `cook` or `curry`
