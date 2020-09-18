@@ -70,7 +70,7 @@ Outcome:
 - A todo-task is added. The task can be seen when the <code>list</code> command is called.
 It will appear with the identifier <code>[T]</code> for todo.
 
-#### Adding Deadline-type task: <code>Deadline</code>
+#### Adding Deadline-type task: <code>deadline</code>
 Adds a task with a description and a deadline.
 
 Format: <code>deadline {description} /by {deadline}</code>
