@@ -18,6 +18,7 @@ public class Storage {
     private Path FILE_PATH;
     private final String dirName;
     private final String fileName;
+    private boolean isLoadSuccess = false;
 
     /**
      * Creates a Storage object to handle a file at the given file path.
@@ -27,14 +28,17 @@ public class Storage {
         this.fileName = fileName;
     }
 
+    public boolean isLoaded() {
+        return isLoadSuccess;
+    }
+
     /**
      * Initialises a TaskList by checking for pre-existing data and loading
      * if present, or creating an empty TaskList.
      *
-     * @param ui Ui object to handle user interface interactions
      * @return initialised TaskList
      */
-    public TaskList init(Ui ui) {
+    public TaskList init() {
         String home = System.getProperty("user.dir");
         FILE_PATH = java.nio.file.Paths.get(home, dirName);
         try {
@@ -50,7 +54,7 @@ public class Storage {
             java.nio.file.Files.createFile(FILE_PATH);
         } catch (FileAlreadyExistsException ignored) {
             taskList = new TaskList(loadList());
-            ui.writeOutput("Existing data loaded from file!");
+            isLoadSuccess = true;
         } catch (IOException e) {
             e.printStackTrace();
         }

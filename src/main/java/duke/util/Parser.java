@@ -17,6 +17,7 @@ public class Parser {
     static final String DELETE = "delete";
     static final String DONE = "done";
     static final String FIND = "find";
+    static final String MASS = "mass";
 
     /**
      * Creates a Parser with the given classes.
@@ -77,6 +78,11 @@ public class Parser {
                     throw new DukeException("Search key cannot be empty");
                 }
                 return new FindCommand(inputSplits[1]);
+            case MASS:
+                if (inputSplits.length < 2) {
+                    throw new DukeException("Operation cannot be empty");
+                }
+                return new MassOpCommand(inputSplits[1]);
             default:
                 throw new DukeException("I'm sorry, but I don't know what that means :(");
             }

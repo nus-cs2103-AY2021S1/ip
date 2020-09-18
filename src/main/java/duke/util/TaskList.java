@@ -209,14 +209,24 @@ public class TaskList {
      * @param key key to search for
      * @return string representations of Tasks founc
      */
-    public List<String> findTasks(String key) {
-        List<String> found = new ArrayList<>();
-        found.add("Here are the matching tasks in your list:");
+    public List<Task> findTasks(String key) {
+        List<Task> found = new ArrayList<>();
         for (Task task : taskList) {
             if (task.search(key)) {
-                found.add(task.toString());
+                found.add(task);
             }
         }
         return found;
+    }
+
+    public void massMarkDone(List<Task> tasks) {
+        for (Task task : tasks) {
+            task.markDone();
+        }
+    }
+
+    public void massDelete(List<Task> tasks) {
+        boolean removeSuccess = taskList.removeAll(tasks);
+        assert removeSuccess : "Tasks found were not removed";
     }
 }

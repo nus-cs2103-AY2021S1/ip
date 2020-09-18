@@ -26,7 +26,7 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public boolean run(TaskList taskList, Storage storage, Ui ui) throws DukeException {
+    public boolean runCLI(TaskList taskList, Storage storage, Ui ui) throws DukeException {
         runGUI(taskList, storage, ui);
         return true;
     }

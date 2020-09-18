@@ -2,6 +2,7 @@ package duke.util;
 
 import duke.tasks.Task;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -31,8 +32,13 @@ public class Ui {
     /**
      * Outputs the welcome message to the user.
      */
-    public void welcome() {
-        writeOutput("Hello! I'm duke.Duke", "What can I do for you?");
+    public String welcome(boolean isLoadSuccess) {
+        if (isLoadSuccess) {
+            return writeOutput("Existing data loaded from file!",
+                    "Hello! I'm Duke", "What can I do for you?");
+        } else {
+            return writeOutput("Hello! I'm Duke", "What can I do for you?");
+        }
     }
 
     /**
@@ -71,8 +77,22 @@ public class Ui {
      *
      * @param found string representations of Tasks found
      */
-    public String writeSearch(List<String> found) {
-        return writeOutput(found.toArray(new String[0]));
+    public String writeSearch(List<Task> found) {
+        String[] outputs = new String[found.size() + 1];
+        outputs[0] = "Here are the matching tasks in your list:";
+        for (int i = 0; i < found.size(); i++) {
+            outputs[i + 1] = found.get(i).toString();
+        }
+        return writeOutput(outputs);
+    }
+
+    public String writeMassOp(List<Task> tasks, String operation) {
+        String[] outputs = new String[tasks.size() + 1];
+        outputs[0] = String.format("The following tasks have been %s:", operation);
+        for (int i = 0; i < tasks.size(); i++) {
+            outputs[i + 1] = tasks.get(i).toString();
+        }
+        return writeOutput(outputs);
     }
 
     /**

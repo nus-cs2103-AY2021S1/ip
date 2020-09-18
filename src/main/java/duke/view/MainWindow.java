@@ -1,6 +1,7 @@
 package duke.view;
 
 import duke.Duke;
+import duke.commands.ExitCommand;
 import javafx.fxml.FXML;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -31,6 +32,7 @@ public class MainWindow extends AnchorPane {
     }
 
     public void setDuke(Duke duke) {
+        displayDuke(duke.init());
         this.duke = duke;
     }
 
@@ -46,6 +48,9 @@ public class MainWindow extends AnchorPane {
         assert response != null : "No response from Duke to GUI";
 
         displayDuke(response);
+        if (response.equals(ExitCommand.EXIT_FLAG)) {
+            System.exit(0);
+        }
     }
 
     private void displayUser(String msg) {

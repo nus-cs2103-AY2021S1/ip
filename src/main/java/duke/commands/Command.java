@@ -20,6 +20,6 @@ public abstract class Command {
      * @return true if program should continue after process is executed
      * @throws DukeException Duke-related exception due to processing
      */
-    public abstract boolean run(TaskList taskList, Storage storage, Ui ui) throws DukeException;
+    public abstract boolean runCLI(TaskList taskList, Storage storage, Ui ui) throws DukeException;
     public abstract String runGUI(TaskList taskList, Storage storage, Ui ui) throws DukeException;
 }

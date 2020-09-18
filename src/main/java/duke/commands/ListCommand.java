@@ -15,7 +15,7 @@ public class ListCommand extends Command {
     public ListCommand() {}
 
     @Override
-    public boolean run(TaskList taskList, Storage storage, Ui ui) {
+    public boolean runCLI(TaskList taskList, Storage storage, Ui ui) {
         runGUI(taskList, storage, ui);
         return true;
     }

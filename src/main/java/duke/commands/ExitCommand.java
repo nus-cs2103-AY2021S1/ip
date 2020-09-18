@@ -10,20 +10,21 @@ import duke.util.Ui;
  */
 public class ExitCommand extends Command {
 
+    public static final String EXIT_FLAG = "EXIT";
+
     /**
      * Creates ExitCommand object.
      */
     public ExitCommand() {}
 
     @Override
-    public boolean run(TaskList taskList, Storage storage, Ui ui) {
+    public boolean runCLI(TaskList taskList, Storage storage, Ui ui) {
         ui.exit();
         return false;
     }
 
     @Override
     public String runGUI(TaskList taskList, Storage storage, Ui ui) {
-        System.exit(0);
-        return ui.exit();
+        return ExitCommand.EXIT_FLAG;
     }
 }
