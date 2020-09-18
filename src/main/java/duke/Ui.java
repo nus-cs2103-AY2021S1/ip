@@ -20,6 +20,15 @@ public class Ui {
         return "Alright! I've removed this task:\n" + task;
     }
 
+    public static String informTasksDeleted(Task[] tasks) {
+        String userMessage = "Alright! I've removed the following tasks:\n";
+        for (int i = 0; i < tasks.length; i ++) {
+            int taskNumber = i + 1;
+            userMessage += String.format("%d. %s\n", taskNumber, tasks[i]);
+        }
+        return userMessage;
+    }
+
     public static String informNumberOfTasksRemaining(TaskList taskList) {
         return "\nNow you have " + taskList.size() + " tasks in the list.";
     }
