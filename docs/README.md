@@ -23,7 +23,7 @@ ByteMe is a desktop scheduling app to help you manage your daily tasks. It is op
     * Note that Duke will automatically create folder `data` 
       in the same directory of `duke.jar` to save the tasks.
     * The following GUI will appear: 
-        * ! [starting Image](./Starting.png)
+      ![starting Image](./Starting.png)
     * If the GUI cannot be started by double-clicking, open `duke.jar` in `Terminal/Command Prompt` depending on your system by the following command:
         * `cd` home directory of `duke.jar` 
         * `java -jar duke.jar`
@@ -53,7 +53,8 @@ ByteMe is a desktop scheduling app to help you manage your daily tasks. It is op
     * Example of usage: 
         * `todo finish lab` creates new task named `finish lab` in list
         * `todo do assignment` creates new task named `do assignment` in list
-    * ! [Todo Image](./Todo.png)
+        
+        ![Todo Image](./Todo.png)
     
 2. ### `event` - Adding a new event with a specific time
 
@@ -65,7 +66,7 @@ ByteMe is a desktop scheduling app to help you manage your daily tasks. It is op
     * Example of usage: 
         * `event project meeting /at 2020-09-13 19:00` creates new event named `project meeting` happening on `2020-09-13 19:00`
     
-    * ! [Event Image](./Event.png)
+        ![Event Image](./Event.png)
     
 3. ### `deadline` - Adding a new deadline with a specific time
 
@@ -77,7 +78,7 @@ ByteMe is a desktop scheduling app to help you manage your daily tasks. It is op
     * Example of usage: 
         * `deadline assignment /by 2020-09-13 19:00` creates new deadline named `assignment` to be done by `2020-09-13 19:00`
 
-    * ! [Deadline Image](./Deadline.png)
+        ![Deadline Image](./Deadline.png)
     
 4. ### `list` - Listing all the tasks.
 
@@ -89,7 +90,7 @@ ByteMe is a desktop scheduling app to help you manage your daily tasks. It is op
     * Example of usage: 
         * `list` lists all the tasks in your list
         
-    * ! [List Image](./List.png)
+        ![List Image](./List.png)
 
 5. ### `done` - Marking a task at a specific index as done
 
@@ -101,7 +102,7 @@ ByteMe is a desktop scheduling app to help you manage your daily tasks. It is op
 
         * `done 4` marks the 4th task in your list as done
         
-    * ! [Done Image](./Done.png)
+        ![Done Image](./Done.png)
 
 6. ### `delete` - Deleting a task at a specific index as done
 
@@ -114,7 +115,7 @@ ByteMe is a desktop scheduling app to help you manage your daily tasks. It is op
 
         * `delete 4` deletes the 4th task in your list as done
 
-    * ! [Delete Image](./Delete.png)
+        ![Delete Image](./Delete.png)
     
 7. ### `find` - Finding tasks by keywords
 
@@ -127,7 +128,7 @@ ByteMe is a desktop scheduling app to help you manage your daily tasks. It is op
 
         * `find meeting` finds and lists all the tasks which names contains `meeting`
     
-    * ! [Find Image](./Find.png)
+        ![Find Image](./Find.png)
     
 8. ### `free time` - Finding free time slots on a specific date
 
@@ -140,7 +141,7 @@ ByteMe is a desktop scheduling app to help you manage your daily tasks. It is op
 
         * `free time 2020-09-13` returns the free time slot on `2020-09-13`
     
-    * ! [Free Image](./Free.png)
+        ![Free Image](./Free.png)
     
 9. ### `bye` - Exiting the programme.
 
@@ -153,4 +154,4 @@ ByteMe is a desktop scheduling app to help you manage your daily tasks. It is op
 
         * `bye` exits the programme.
         
-    * ! [Bye Image](./Bye.png)
+        ![Bye Image](./Bye.png)
