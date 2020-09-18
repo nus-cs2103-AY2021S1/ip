@@ -10,8 +10,6 @@ import javafx.scene.shape.Circle;
 
 public class DialogBox extends HBox {
 
-    /** default radius of user's image in the dialog box */
-    private static final double IMAGE_RADIUS = 35.0;
     /** default spacing between dialog and text box */
     private static final double SPACING = 10;
 

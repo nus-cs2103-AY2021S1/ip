@@ -6,7 +6,7 @@ public class ViewPane extends ScrollPane {
 
     public ViewPane() {
         super();
-        this.setPrefSize(400, 535);
+        this.setPrefSize(420, 585);
         this.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         this.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 

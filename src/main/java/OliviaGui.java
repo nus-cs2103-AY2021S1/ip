@@ -64,10 +64,10 @@ public class OliviaGui extends Application {
 
         stage.setTitle("Olivia");
         stage.setResizable(false);
-        stage.setMinHeight(600.0);
-        stage.setMinWidth(400.0);
+        stage.setMinHeight(650.0);
+        stage.setMinWidth(420.0);
 
-        mainLayout.setPrefSize(400.0, 600.0);
+        mainLayout.setPrefSize(420.0, 650.0);
 
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
