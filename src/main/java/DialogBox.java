@@ -44,11 +44,10 @@ public class DialogBox extends HBox {
         //@@author jonfoocy-reused
         //Reused from https://github.com/lye-jw/duke with minor modifications
         if (role.equals("User")) {
-            this.setBackground(new Background(new BackgroundFill(Color.LIGHTSKYBLUE, new CornerRadii(20.0),
-                    new Insets(5, 5, 5, 5))));
+            dialog.setBackground(new Background(new BackgroundFill(Color.LIGHTSKYBLUE, new CornerRadii(20.0),
+                    new Insets(0))));
         } else if (role.equals("Sparrow")) {
-            this.setBackground(new Background(new BackgroundFill(Color.DARKGRAY, new CornerRadii(20.0),
-                    new Insets(5, 5, 5, 5))));
+            dialog.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, new CornerRadii(20.0), new Insets(0))));
         }
         //@@author
     }

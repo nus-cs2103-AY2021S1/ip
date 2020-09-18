@@ -24,6 +24,11 @@ public class DeleteCommand extends Command {
 
     private final String data;
 
+    /**
+     * Creates a DeleteCommand.
+     * @param data Type of data list to delete from (i.e. TaskList or VocabList).
+     * @param indexToDelete Number corresponding to task/vocab to be deleted.
+     */
     public DeleteCommand(String data, int indexToDelete) {
         super(indexToDelete);
         this.data = data;
