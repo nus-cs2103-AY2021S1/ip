@@ -13,14 +13,23 @@ import duke.dukeexception.DukeException;
  * @author Foo Jing Yi
  */
 public class Duke {
-    /** Storage object used by Duke to load from and write to hard disk */
+    /**
+     * Storage object used by Duke to load from and write to hard disk
+     */
     private Storage storage;
-    /** TaskList object that contains the list of tasks */
+    /**
+     * TaskList object that contains the list of tasks
+     */
     private TaskList tasks;
-    /** Ui object that deals with interactions with the user */
+    /**
+     * Ui object that deals with interactions with the user
+     */
     private Ui ui;
 
-    public Duke() {}
+    private boolean isRunning;
+
+    public Duke() {
+    }
 
     /**
      * Public class constructor that takes in the location of a file as a string
@@ -32,6 +41,7 @@ public class Duke {
     public Duke(String pathFile) {
         this.ui = new Ui();
         this.storage = new Storage(pathFile);
+        this.isRunning = false;
         try {
             this.tasks = new TaskList(storage.load());
         } catch (DukeException e) {
@@ -45,16 +55,16 @@ public class Duke {
      */
     public void run() {
         this.ui.showLine();
-        System.out.println(this.ui.returnWelcomeMsg());
+        this.isRunning = true;
+        System.out.println(start());
         this.ui.showLine();
-        boolean isExit = false;
-        while (!isExit) {
+        while (isRunning) {
             try {
                 String fullCommand = this.ui.readCommand();
                 this.ui.showLine();
                 Command command = Parser.parse(fullCommand);
                 System.out.println(command.execute(this.tasks, this.storage, this.ui));
-                isExit = command.isExit();
+                isRunning = !command.isExit();
             } catch (DukeException e) {
                 System.out.println(this.ui.returnError(e.getMessage()));
             } finally {
@@ -67,20 +77,26 @@ public class Duke {
         new Duke("data/tasks.txt").run();
     }
 
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     */
+    public String start() {
+        this.isRunning = true;
+        return this.ui.returnWelcomeMsg();
+    }
+
     public String getResponse(String input) {
-        String response = "Test";
+        String response;
         try {
             Command command = Parser.parse(input);
             response = command.execute(tasks, storage, ui);
+            isRunning = !command.isExit();
         } catch (DukeException e) {
             e.printStackTrace();
             response = ui.returnError(e.getMessage());
         }
 
         return response;
+    }
+
+    public boolean isRunning() {
+        return isRunning;
     }
 }

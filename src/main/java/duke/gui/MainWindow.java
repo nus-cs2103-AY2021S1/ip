@@ -3,6 +3,10 @@ package duke.gui;
 import java.io.IOException;
 
 import duke.Duke;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -11,14 +15,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-
-
+import javafx.util.Duration;
 
 /**
  * Controller for duke.gui.MainWindow. Provides the layout for the other controls.
  * Adapted from <a href="https://se-education.org/guides/tutorials/javaFxPart4.html">this guide</a>.
  */
 public class MainWindow extends AnchorPane {
+    public static final int EXIT_DELAY_TIME_IN_MILLISECONDS = 5000;
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -46,11 +50,12 @@ public class MainWindow extends AnchorPane {
         }
 
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(this.duke.start(), dukeImage));
     }
 
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * the dialog container. Clears the user input after processing. Exits if bot stops running.
      */
     @FXML
     private void handleUserInput() {
@@ -61,5 +66,12 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+
+        if (!duke.isRunning()) {
+            Duration delayDuration = new Duration(EXIT_DELAY_TIME_IN_MILLISECONDS);
+            KeyFrame keyFrame = new KeyFrame(delayDuration, x -> Platform.exit());
+            Timeline tl = new Timeline(keyFrame);
+            tl.play();
+        }
     }
 }
