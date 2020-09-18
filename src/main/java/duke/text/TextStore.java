@@ -9,8 +9,8 @@ public class TextStore {
     protected final static String top = "------------------Bot made by Hendey Fan------------------";
     protected final static String errorBling = "------------------!*!*!ERROR DETECTED!*!*!------------------";
     protected final static String bottom = "---------------------------------------------------------------";
-    protected final static String startMessage = "This is a chat bot made by Hendey Fan.\n" +
-            "What can this magnificent bot do for you?";
+    protected final static String startMessage = "    This is a task management bot made by Hendey Fan.\n" +
+            "           Bot is currently starting up BRRRRRRRRRRR";
     protected final static String endMessage = "             oi don run away from ur tasks hor    \n" +
             "            Window will now close in 5 seconds";
 
@@ -49,4 +49,8 @@ public class TextStore {
                     "8) delete | format: \"delete <task number>\", deletes a task in the list\n" +
                     "9) find | format: \"find <string>\", finds tasks with matching string";
     protected final static String promptMsg = "Type \"!commands\" for a list of commands and formats :)";
+
+    // Strings used by TaskList class
+    public final static String listOutHeader = "Here are the tasks in your list:";
+    public final static String searchListHeader = "Here are the matching tasks in your list:";
 }

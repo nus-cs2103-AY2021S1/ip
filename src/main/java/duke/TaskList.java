@@ -1,6 +1,7 @@
 package duke;
 
 import duke.tasks.Task;
+import duke.text.TextBuilder;
 
 import java.util.ArrayList;
 
@@ -20,13 +21,9 @@ public class TaskList {
         int duplicateTaskNum = findDuplicate(task);
         if (duplicateTaskNum == -1) {
             taskList.add(task);
-            return ("Got it. I've added this task:\n  " +
-                    taskList.size() + task.toString() + "\n" +
-                    "Now you have " + size() + " tasks in the list.");
+            return TextBuilder.buildTaskAddedSuccessMsg(task, taskList.size());
         } else {
-            return ("Task already exists:\n  " +
-                    (duplicateTaskNum + 1) + taskList.get(duplicateTaskNum).toString() + "\n" +
-                    "No new task is added");
+            return TextBuilder.buildDuplicateTaskMsg(taskList.get(duplicateTaskNum), duplicateTaskNum);
         }
     }
 
@@ -47,36 +44,26 @@ public class TaskList {
     /**
      * Sends all the tasks in this list back in a string
      *
-     * @return A header followed by a list of all the tasks
+     * @return a ArrayList of all the tasks
      */
-    public String listOutTasks() {
-        StringBuilder temp = new StringBuilder("Here are the tasks in your list:");
-        int counter = 1;
-        for (Task item: taskList) {
-            temp.append("\n");
-            temp.append(counter).append(". ").append(item.toString());
-            counter++;
-        }
-        return temp.toString();
+    public ArrayList<Task> allTasks() {
+        return taskList;
     }
 
     /**
      * Finds and returns all tasks with descriptions that contains the string provided
      *
      * @param string search term
-     * @return A header followed by a list of matching tasks
+     * @return a ArrayList of all the matching tasks
      */
-    public String search(String string) {
-        StringBuilder temp = new StringBuilder("Here are the matching tasks in your list:");
-        int counter = 1;
+    public ArrayList<Task> search(String string) {
+        ArrayList<Task> temp = new ArrayList<>();
         for (Task item: taskList) {
             if (item.getDescription().contains(string)) {
-                temp.append("\n");
-                temp.append(counter).append(". ").append(item.toString());
-                counter++;
+                temp.add(item);
             }
         }
-        return temp.toString();
+        return temp;
     }
 
     /**
@@ -106,13 +93,8 @@ public class TaskList {
      */
     public String markDone(int position) throws IndexOutOfBoundsException {
         assert position < taskList.size() && position >= 0 : " IndexOutOfBounds when marking a task done";
-        if (taskList.get(position - 1).markDone()) {
-            return ("beri gude, finish that thing liao\n  " +
-                    taskList.get(position - 1).toString());
-        } else {
-            return ("Task alr finish liao\n  " +
-                    taskList.get(position - 1).toString());
-        }
+        Task toBeMarked = taskList.get(position - 1);
+        return TextBuilder.buildMarkDoneMsg(toBeMarked, position);
     }
 
     /**
@@ -126,9 +108,7 @@ public class TaskList {
         assert position < taskList.size() && position >= 0 : " IndexOutOfBounds when deleting task";
         Task task = taskList.get(position - 1);
         taskList.remove(position - 1);
-        return ("Noted. I've removed this task:\n  " +
-                task.toString() + "\n" +
-                "Now you have " + size() + " tasks in the list.");
+        return TextBuilder.buildDeleteTaskMsg(task, position, taskList.size());
 
     }
 

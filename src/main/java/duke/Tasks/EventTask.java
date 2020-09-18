@@ -13,6 +13,7 @@ public class EventTask extends Task {
         this.date = date;
     }
 
+    @Override
     public boolean equals(Task task) {
         return task instanceof EventTask &&
                 this.description.equals(task.description) &&

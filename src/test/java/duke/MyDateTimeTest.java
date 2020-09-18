@@ -6,9 +6,9 @@ import java.time.format.DateTimeParseException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class DukeTest {
+public class MyDateTimeTest {
     @Test
-    public void MyDateTimeWrongValue(){
+    public void myDateTimeWrongValue(){
         try {
             MyDateTime.parse(" 12/34/5678 1234");
         } catch (DateTimeParseException e) {
@@ -17,7 +17,7 @@ public class DukeTest {
     }
 
     @Test
-    public void MyDateTimeWrongFormat(){
+    public void myDateTimeWrongFormat(){
         try {
             MyDateTime.parse(" 12/wrong");
         } catch (DateTimeParseException e) {
@@ -27,7 +27,7 @@ public class DukeTest {
 
 
     @Test
-    public void MyDateTimeLoadWrongValue(){
+    public void myDateTimeLoadWrongValue(){
         try {
             MyDateTime.load("1234-34-12T12:34");
         } catch (DateTimeParseException e) {
@@ -36,7 +36,7 @@ public class DukeTest {
     }
 
     @Test
-    public void MyDateTimeLoadWrongFormat(){
+    public void myDateTimeLoadWrongFormat(){
         try {
             MyDateTime.load("1234-wrong");
         } catch (DateTimeParseException e) {

@@ -13,6 +13,7 @@ public class DeadLineTask extends Task {
         this.date = date;
     }
 
+    @Override
     public boolean equals(Task task) {
         return task instanceof DeadLineTask &&
                 this.description.equals(task.description) &&

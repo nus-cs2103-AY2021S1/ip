@@ -3,7 +3,9 @@ package duke;
 import duke.tasks.DeadLineTask;
 import duke.tasks.EventTask;
 import duke.tasks.TodoTask;
+import duke.text.TextBuilder;
 import duke.text.TextCacher;
+import duke.text.TextStore;
 
 import java.nio.file.Path;
 import java.time.format.DateTimeParseException;
@@ -76,7 +78,8 @@ public class CommandParserAndLogic {
     }
 
     private void listLogic() {
-        TextCacher.cacheTextStandard(taskList.listOutTasks());
+        TextCacher.cacheTextStandard(
+                TextBuilder.buildTaskListMsg(TextStore.listOutHeader, taskList.allTasks()));
     }
 
     private void doneLogic() {
@@ -151,7 +154,8 @@ public class CommandParserAndLogic {
         if (current.length == 1) {
             TextCacher.cacheNoSearchTermError();
         } else {
-            TextCacher.cacheTextStandard(taskList.search(current[1]));
+            TextCacher.cacheTextStandard(
+                    TextBuilder.buildTaskListMsg(TextStore.searchListHeader, taskList.search(current[1])));
         }
     }
 }
