@@ -28,7 +28,7 @@ public class Ui {
      * Shows the farewell interface.
      */
     public void showFarewell() {
-        System.out.println("\tList saved!\n\tIt was my pleasure assisting you.\n\tSee you next Time!");
+        System.out.println("\tList saved!\n\tIt was my pleasure assisting you.\n\tSee you next time!");
     }
 
     /**

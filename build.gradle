@@ -5,6 +5,12 @@ plugins {
     id 'com.github.johnrengelman.shadow' version '5.1.0'
 }
 
+compileJava.options.encoding = 'UTF-8'
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
 repositories {
     mavenCentral()
 }
@@ -41,10 +47,12 @@ test {
         showStackTraces true
         showStandardStreams = false
     }
+
+    systemProperty "file.encoding", "utf-8"
 }
 
 application {
-    mainClassName = "duke.Duke"
+    mainClassName = "duke.Launcher"
 }
 
 shadowJar {
@@ -58,4 +66,5 @@ checkstyle {
 
 run{
     standardInput = System.in
+    systemProperty "file.encoding", "utf-8"
 }

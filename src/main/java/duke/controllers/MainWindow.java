@@ -1,7 +1,8 @@
 package duke.controllers;
 
 import duke.Duke;
-import duke.ui.DialogBox;
+import duke.exceptions.DukeException;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -23,6 +24,7 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private Duke duke;
+    private boolean isExit = false;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
@@ -30,6 +32,9 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog("Welcome to duke.", dukeImage)
+        );
     }
 
     public void setDuke(Duke d) {
@@ -43,11 +48,27 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getUserDialog(input, userImage)
         );
-        userInput.clear();
+        try {
+            String response = duke.getResponse(input);
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getDukeDialog(response, dukeImage)
+            );
+            if (response.contains("See you next time!")) {
+                isExit = true;
+            }
+        } catch (DukeException e) {
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getDukeDialog(e.getMessage(), dukeImage)
+            );
+        }
+
+        if (isExit) {
+            Platform.exit();
+        } else {
+            userInput.clear();
+        }
     }
 }

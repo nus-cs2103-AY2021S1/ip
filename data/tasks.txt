@@ -1,4 +1,4 @@
-D | 0 | what | 2019-01-01
+D | 0 | show | 2019-02-03
+T | 0 | hey
 T | 0 | what
-T | 0 | book
-T | 1 | what
+D | 1 | what | 2019-01-01

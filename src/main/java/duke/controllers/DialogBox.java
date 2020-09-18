@@ -1,9 +1,8 @@
-package duke.ui;
+package duke.controllers;
 
 import java.io.IOException;
 import java.util.Collections;
 
-import duke.controllers.MainWindow;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
