@@ -5,7 +5,7 @@ public class FindCommand implements Command {
     protected final String DESCRIPTION;
 
     public FindCommand(String description) {
-        this.DESCRIPTION = description;
+        this.DESCRIPTION = description.trim();
     }
 
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {

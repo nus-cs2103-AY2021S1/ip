@@ -120,7 +120,7 @@ public class Ui {
             System.out.println("     ☹ OOPS!!! I'm sorry, but I didn't find anything that matches \"" + query
                     + "\" :-(");
         } else {
-            System.out.println("     Here's what i found: ");
+            System.out.println("     Here's what I found: ");
             int counter = 1;
             for (Task t : results) {
                 System.out.println(counter + "." + t.toString());
