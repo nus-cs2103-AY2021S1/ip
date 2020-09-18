@@ -20,6 +20,11 @@ public abstract class Command {
         return type;
     }
 
+    /**
+     * Executes the command
+     * @param list the task list of the application.
+     * @return a String which is the message from the application.
+     */
     public abstract String act(TaskList list);
     public abstract String undo(TaskList list);
 }

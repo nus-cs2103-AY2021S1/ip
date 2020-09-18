@@ -1,6 +1,14 @@
 package DukeComponent;
 
-import Command.*;
+import Command.Command;
+import Command.AddCommand;
+import Command.DeleteCommand;
+import Command.DoneCommand;
+import Command.ListCommand;
+import Command.ErrorCommand;
+import Command.ExitCommand;
+import Command.FindCommand;
+import Command.UndoCommand;
 
 import Tasks.Deadline;
 import Tasks.Event;
@@ -78,7 +86,7 @@ public class Parser {
                 } else {
                     throw new DukeException(DukeException.IGNORE);
                 }
-            } else if (task.length > 0 && task[0].equals("todo")){
+            } else if (task.length > 0 && task[0].equals("todo")) {
                 throw new DukeException(DukeException.EMPTY);
             } else {
                 throw new DukeException(DukeException.IGNORE);

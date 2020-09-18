@@ -9,7 +9,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import Tasks.*;
+import Tasks.Task;
+import Tasks.Todo;
+import Tasks.Deadline;
+import Tasks.Event;
 
 /**
  * TaskList.Storage saves the list in a file so the state of the list can be preserved

@@ -3,7 +3,8 @@ package Command;
 import DukeComponent.Ui;
 import TaskList.TaskList;
 
-public class ListCommand extends Command{
+public class ListCommand extends Command {
+
     public ListCommand() {
         super(CommandType.LIST);
     }

@@ -11,8 +11,11 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    Duke duke = new Duke();
+    private Duke duke = new Duke();
 
+    /**
+     * A main entry point to the application.
+     */
     @Override
     public void start(Stage stage) {
         try {

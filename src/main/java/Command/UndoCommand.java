@@ -3,9 +3,10 @@ package Command;
 import DukeComponent.Ui;
 import TaskList.TaskList;
 
-public class UndoCommand extends Command{
+public class UndoCommand extends Command {
     Command lastCommand;
-    public UndoCommand(Command lastCommand){
+
+    public UndoCommand(Command lastCommand) {
         super(Command.CommandType.UNDO);
         this.lastCommand = lastCommand;
     }
