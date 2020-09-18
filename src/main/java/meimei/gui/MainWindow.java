@@ -31,15 +31,15 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private MeimeiBot meimeiBot;
+    private final MeimeiBot meimeiBot;
 
-    private Image userProfile = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image meimeiProfile = new Image(this.getClass().getResourceAsStream("/images/VanellopeProfile.png"));
+    private final Image userProfile = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private final Image meimeiProfile = new Image(this.getClass().getResourceAsStream("/images/VanellopeProfile.png"));
 
     /**
      * Public constructor for the main window of the bot's GUI.
      *
-     * @param meimeiBot
+     * @param meimeiBot Meimei Bot instance that is used for the GUI instance.
      */
     public MainWindow(MeimeiBot meimeiBot) {
         this.meimeiBot = meimeiBot;

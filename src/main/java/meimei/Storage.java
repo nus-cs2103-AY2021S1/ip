@@ -48,7 +48,7 @@ public class Storage {
      * Loads saved data from <code>taskFile</code>.
      *
      * @return List of tasks to be passed to a <code>TaskList</code> object
-     * @throws BotException If file cannot be created, read or parsed.
+     * @throws LoadFailureException If file cannot be created, read or parsed.
      */
     public List<Task> load() throws LoadFailureException {
         if (!this.taskFile.exists()) {
@@ -96,11 +96,11 @@ public class Storage {
      *
      * @param task Task to be added to file.
      * @param isFirstTask Whether task to be added is the first in the file.
-     * @throws BotException If task cannot be parsed or file cannot be written to.
+     * @throws SaveFailureException If task cannot be parsed or file cannot be written to.
      */
     public void update(Task task, boolean isFirstTask) throws SaveFailureException {
         try {
-            FileWriter fileWriter = null;
+            FileWriter fileWriter;
             if (isFirstTask) {
                 fileWriter = new FileWriter(this.taskFile);
                 fileWriter.write(parseToStorage(task));
@@ -119,7 +119,7 @@ public class Storage {
      * Updates file with list when tasks are marked or deleted.
      *
      * @param list Updated list given by <code>TaskList</code> object.
-     * @throws BotException If tasks cannot be parsed or file cannot be written to.
+     * @throws SaveFailureException If tasks cannot be parsed or file cannot be written to.
      */
     public void update(List<Task> list) throws SaveFailureException {
         try {
@@ -151,13 +151,13 @@ public class Storage {
      *          different from the string returned by <code>task.toString()</code>.
      *          e.g. "[T][✓] Homework" from <code>task.toString()</code> will be
      *          represented as "T | 1 | Homework".
-     * @throws BotException If the type of the task cannot be recognised.
+     * @throws SaveFailureException If the type of the task cannot be recognised.
      */
     protected String parseToStorage(Task task) throws SaveFailureException {
-        String taskTypeString = "";
+        String taskTypeString;
         String status = task.isDone() ? DONE : NOT_DONE;
         String taskName = task.getTaskName();
-        String taskDescription = "";
+        String taskDescription;
 
         if (task instanceof Todo) {
             taskTypeString = TODO_TASK;

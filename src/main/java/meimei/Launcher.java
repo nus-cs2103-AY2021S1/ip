@@ -1,7 +1,7 @@
 package meimei;
 
-import meimei.gui.Gui;
 import javafx.application.Application;
+import meimei.gui.Gui;
 
 /**
  * A launcher class to workaround classpath issues.

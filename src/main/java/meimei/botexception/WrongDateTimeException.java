@@ -11,7 +11,8 @@ public class WrongDateTimeException extends BotException {
 
     /**
      * Public constructor.
-     *  @param commandType Type of command i.e. deadline/event.
+     *
+     * @param commandType Type of command i.e. deadline/event.
      * @param separator Between description and date & time.
      */
     public WrongDateTimeException(CommandType commandType, String separator) {

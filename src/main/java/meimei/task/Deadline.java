@@ -19,7 +19,7 @@ public class Deadline extends Task {
      * @param taskName Name of the task as given by user.
      * @param dateTime LocalDateTime object representing the deadline of the task.
      */
-    public Deadline(String taskName, LocalDateTime dateTime)  {
+    public Deadline(String taskName, LocalDateTime dateTime) {
         super(taskName);
         this.dateTime = dateTime;
     }
@@ -35,7 +35,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " by: " +
-            this.dateTime.format(DateTimeFormatter.ofPattern("d MMM yyyy, h.m a"));
+        return "[D]" + super.toString() + " by: "
+                + this.dateTime.format(DateTimeFormatter.ofPattern("d MMM yyyy, h.m a"));
     }
 }

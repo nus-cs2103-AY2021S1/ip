@@ -1,9 +1,9 @@
 package meimei.command;
 
-import meimei.Ui;
-import meimei.botexception.BotException;
 import meimei.Storage;
 import meimei.TaskList;
+import meimei.Ui;
+import meimei.botexception.BotException;
 
 /**
  * Represents a (bot) command that can be executed by the bot.
@@ -15,9 +15,9 @@ public abstract class Command {
      *
      * @param tasks The user's tasks.
      * @param storage Handles updating the hard disk accordingly.
-     * @param ui
+     * @param ui User interface that presents bots replies in a user friendly way.
+     * @return Response to the user.
      * @throws BotException If a BotException is thrown in executing the command.
-     * @return response to user
      */
     public abstract String execute(TaskList tasks, Storage storage, Ui ui) throws BotException;
 

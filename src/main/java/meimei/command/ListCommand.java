@@ -3,7 +3,6 @@ package meimei.command;
 import meimei.Storage;
 import meimei.TaskList;
 import meimei.Ui;
-import meimei.botexception.BotException;
 
 /**
  * Command that displays the user's list of tasks when executed.
@@ -11,7 +10,7 @@ import meimei.botexception.BotException;
 public class ListCommand extends Command {
 
     @Override
-    public String execute(TaskList tasks, Storage storage, Ui ui) throws BotException {
+    public String execute(TaskList tasks, Storage storage, Ui ui) {
         return ui.returnListReply(tasks);
     }
 

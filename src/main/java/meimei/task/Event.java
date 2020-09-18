@@ -16,7 +16,7 @@ public class Event extends Task {
      * @param taskName Name of the task as given by user.
      * @param dateTime LocalDateTime object representing the date and time of the event.
      */
-    public Event(String taskName, LocalDateTime dateTime)  {
+    public Event(String taskName, LocalDateTime dateTime) {
         super(taskName);
         this.dateTime = dateTime;
     }

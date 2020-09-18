@@ -6,7 +6,6 @@ import java.util.List;
 import meimei.Storage;
 import meimei.TaskList;
 import meimei.Ui;
-import meimei.botexception.BotException;
 import meimei.task.Task;
 
 /**
@@ -28,7 +27,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tasks, Storage storage, Ui ui) throws BotException {
+    public String execute(TaskList tasks, Storage storage, Ui ui) {
         List<Task> resultList = findMatchingTasks(tasks);
 
         String finalString = "";

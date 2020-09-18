@@ -1,6 +1,7 @@
 package meimei;
 
 import java.util.Scanner;
+
 import meimei.command.AddCommand;
 import meimei.command.Command;
 import meimei.command.DeleteCommand;
@@ -20,10 +21,11 @@ public class Ui {
 
     /**
      * Displays the welcome message to the user.
-     * @return
+     *
+     * @return Welcome message as a string.
      */
     public String returnWelcomeMsg() {
-        return "Eh what's up! I'm Meimei" + "\nWhat you want ah?";
+        return "Eh harlow! I'm Meimei!" + "\nWhat you want ah?";
     }
 
     /**
@@ -46,10 +48,10 @@ public class Ui {
      * Returns a string with the response from the bot as given by executing a command.
      * Only for the following commands: AddCommand, DeleteCommand.
      *
-     * @return response from Duke
      * @param command The command that triggers this method in its execute method.
      * @param task Task involved in the reply.
      * @param tasks Full list of tasks.
+     * @return Response from Meimei Bot.
      */
     public String returnReply(Command command, Task task, TaskList tasks) {
         String reply = "";
