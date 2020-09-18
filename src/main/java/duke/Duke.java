@@ -24,8 +24,13 @@ public class Duke {
             taskList = new TaskList(filename);
         }
         Ui.init();
-        Ui.greet();
         logicController = new LogicController(taskList);
+    }
+
+    public static String getWelcomeMessage() {
+        Ui.init();
+        Ui.greet();
+        return Ui.getResponse();
     }
 
     public String getResponse(String input) {
