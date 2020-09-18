@@ -72,6 +72,7 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
         if (executionOutput.isExit()) {
             Platform.exit();
+            System.exit(0);
         }
     }
 }
