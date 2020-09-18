@@ -19,7 +19,7 @@
                <children>
                   <ImageView fitHeight="90.0" fitWidth="301.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../../Desktop/247e8aabb9a4cb67974e6800d648d703.png" />
+                        <Image url="@../images/DaBackground.png" />
                      </image>
                      <VBox.margin>
                         <Insets left="70.0" top="15.0" />
