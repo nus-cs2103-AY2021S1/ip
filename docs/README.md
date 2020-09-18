@@ -2,64 +2,65 @@
 This is a user guide for the personalised task manager, Duke.
 
 ## Features 
-
-### Adding 
-Add tasks to Duke. Tasks are classified as either 'todo', 'deadline' or 'event'.
-
-Todos are tasks without any date attached to it.
-Deadlines are tasks that has to be done before a specific date.
-Events are tasks that occur on a specific date.
-
-### Deleting 
-Delete tasks from Duke.
-
-### Completing 
-Complete tasks that are already added to Duke.
-
-### Finding
-Find task using specific keyword from tasks added to Duke.
-
-### Listing
-Lists all tasks added to Duke.
-
-### Viewing statistics
-View weekly statistics, such as number of tasks added and number of tasks completed.
+1. Add
+2. Delete
+3. Complete
+4. Find
+5. List
+6. View statistics
+7. Exit
 
 ## Usage
 
-### `todo` - Adds a new todo task to Duke
+### `todo {name}` - Adds a new todo task to Duke
 
+Todos are tasks without any date attached to it.
 Adds a todo to Duke. Name of task has to be specified after the todo command.
 
 Example of usage: 
 
 `todo eat`
 
-### `deadline` - Adds a new deadline task to Duke
+Expected output: 
 
-Adds a deadline to Duke. Name of task and date of task has to be specified after the todo command.
+`added!`
+`[todo][x] eat`
+`total task: 1`
+`:o`
+
+### `deadline {name} /by {date}` - Adds a new deadline task to Duke
+
+Deadlines are tasks that has to be done before a specific date.
+Adds a deadline to Duke. Name of task and date of task has to be specified after the todo command. Date has to be specified in YYYY-MM-DD format.
 
 Example of usage: 
 
 `deadline homework /by 2020-09-20`
 
-### `event` - Adds a new event task to Duke
+Expected output: 
 
-Adds an event to Duke. Name of task and date of task has to be specified after the todo command.
+`added!`
+`[deadline][x] homework (by: 20 Sep 2020)`
+`total task: 2`
+`:o`
+
+### `event {name} /at {date}` - Adds a new event task to Duke
+
+Events are tasks that occur on a specific date.
+Adds an event to Duke. Name of task and date of task has to be specified after the todo command. Date has to be specified in YYYY-MM-DD format.
 
 Example of usage: 
 
 `event birthday /at 2020-10-10`
 
-### `done` - Completes a task in Duke
+Expected output: 
 
-Completes a task in Duke. Task number has to be specified.
+`added!`
+`[event][x] birthday (at: 10 Oct 2020)`
+`total task: 3`
+`:o`
 
-Example of usage: 
-
-`done 5`
-
-### `delete` - Deletes a task in Duke
+### `delete {task number}` - Deletes a task in Duke
 
 Deletes a task in Duke. Task number has to be specified.
 
@@ -67,15 +68,27 @@ Example of usage:
 
 `delete 3`
 
-### `list` - List all tasks added to Duke
+Expected output: 
 
-Lists all tasks added to Duke.
+`removed!! ^^`
+`[event][x] birthday (at: 10 Oct 2020)`
+`total task: 2`
+`:o`
+
+### `done {task number}` - Completes a task in Duke
+
+Completes a task in Duke. Task number has to be specified.
 
 Example of usage: 
 
-`list`
+`done 5`
 
-### `find` - Finds a task in Duke
+Expected output: 
+
+`gfy youve managed to finish the following...`
+`[todo][o] read book`
+
+### `find {keyword}` - Finds a task in Duke
 
 Finds task matching specified keyword in Duke. Keyword has to be specified.
 
@@ -83,10 +96,32 @@ Example of usage:
 
 `find book`
 
+Expected output: 
+
+`1. [todo][o] eat`
+`2. [event][x] book club (at: 11 Oct 2020)`
+
+### `list` - List all tasks added to Duke
+
+Lists all tasks added to Duke.
+
+Expected output: 
+
+`1. [todo][x] book review`
+`2. [event][x] book club (at: 11 Oct 2020)`
+`3. [todo][o] eat`
+`4. [deadline][x] homework (by: 20 Sep 2020)`
+
 ### `statistics` - Show statistics of tasks in Duke
 
-Deletes a task in Duke. Task number has to be specified.
+Shows weekly statistics.
 
-Example of usage: 
+Expected output: 
 
-`statistics`
+`total tasks added: 3`
+`total tasks completed: 1`
+`total tasks deleted: 1`
+
+### `bye` - Terminates Duke
+
+Terminates Duke.

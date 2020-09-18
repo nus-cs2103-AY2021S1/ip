@@ -38,7 +38,7 @@ public class Statistics {
 
     Statistics reset() {
         if (isMonday) {
-            return new Statistics(0,0,0);
+            return new Statistics(0, 0, 0);
         } else {
             return this;
         }

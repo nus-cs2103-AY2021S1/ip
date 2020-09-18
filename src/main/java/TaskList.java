@@ -29,6 +29,12 @@ public class TaskList {
         return this.total;
     }
 
+    void initialize() throws IOException {
+        FileWriter fw = new FileWriter(PATH.toFile());
+        fw.write("0\n0 @ 0 @ 0");
+        fw.close();
+    }
+
     /**
      * Returns String representation of data of Task.
      *

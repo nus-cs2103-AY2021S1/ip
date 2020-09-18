@@ -7,8 +7,6 @@ public class Duke {
     private static final java.nio.file.Path PATH = java.nio.file.Paths.get(HOME, "ip", "data.txt");
     private static boolean pathExists = java.nio.file.Files.exists(PATH);
 
-
-
     private static Ui ui = new Ui();
     private static Parser parser = new Parser();
     private static TaskList tasklist;
@@ -57,7 +55,12 @@ public class Duke {
 
     static void initialize() throws IOException {
         if (!pathExists) {
-            // do smth lmao
+            File file = new File(String.valueOf(PATH));
+            file.getParentFile().mkdirs();
+            file.createNewFile();
+
+            tasklist = new TaskList(0);
+            tasklist.initialize();
         }
 
         Scanner myReader = new Scanner(PATH);
