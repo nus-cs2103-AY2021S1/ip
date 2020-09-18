@@ -4,22 +4,23 @@ DukeLUL is a desktop app for managing things that you need to get done.
 Chat with an incredibly annoying LULCAT and get so irritated that you'll
 complete your tasks in record time and close the app ASAP. 
 
-* Quick Start
-* Features
-    * Viewing help: `help`
-    * Adding a todo task: `todo`
-    * Adding a task with a deadline: `deadline`
-    * Adding an event task: `event`
-    * Listing all tasks: `list`
-    * Finding tasks: `find`
-    * Marking a task as done: `done`
-    * Deleting a task: `delete`
-    * Updating a task: `update`
-    * Exiting the program: `bye`
-    * Saving the data
-* FAQ
-* Command summary  
+* [Quick Start](#quick-start)
+* [Features](#features)
+    * [Viewing help: `help`](#viewing-help-help)
+    * [Adding a todo task: `todo`](#adding-a-todo-task-todo)
+    * [Adding a task with a deadline: `deadline`](#adding-a-task-with-a-deadline-deadline)
+    * [Adding an event task: `event`](#adding-an-event-task-event)
+    * [Listing all tasks: `list`](#listing-all-tasks-list)
+    * [Finding tasks: `find`](#finding-tasks-find)
+    * [Marking a task as done: `done`](#marking-a-task-as-done-done)
+    * [Deleting a task: `delete`](#deleting-a-task-delete)
+    * [Updating a task: `update`](#updating-a-task-update)
+    * [Exiting the program: `bye`](#exiting-the-program-bye)
+    * [Saving the data](#saving-the-data)
+* [FAQ](#FAQ)
+* [Command summary](#command-summary)  
 <br />
+
 ---
 
 ## Quick Start
@@ -53,111 +54,131 @@ This section describes a list of commands that you can use when chatting with LU
 
 ### Viewing help: `help`
 
-Displays all the possible commands for the app.
+<details>
+   <summary>Displays all the possible commands for the app.</summary>
 
-Format: `help`
+   Format: `help`
+</details>
 
 ### Adding a todo task: `todo`
 
-Adds a todo task to the tasklist
-Format: `todo TASK_DESCRIPTION`
-Examples: 
-* `todo Finish homework`
-* `todo Clean the house`
+<details>
+   <summary>Adds a todo task to the tasklist</summary>
+   
+   Format: `todo TASK_DESCRIPTION`
+   Examples: 
+   * `todo Finish homework`
+   * `todo Clean the house`
+</details>
 
 ### Adding a task with a deadline: `deadline`
 
-Adds a task to the tasklist with a deadline.
+<details>
+   <summary>Adds a task to the tasklist with a deadline.</summary>
+   
+   Format: `deadline TASK_DESCRIPTION \by DATE_TIME`
+   * Note that the `DATE_TIME`has to be entered with a `YYYY-MM-dd` or `YYYY-MM-ddThh:mm:ss` format to be
+     recognised as a date / datetime by the app. Otherwise, no filtering operations 
+     can be performed on it.
 
-Format: `deadline TASK_DESCRIPTION \by DATE_TIME`
-* Note that the `DATE_TIME`has to be entered with a `YYYY-MM-dd` or `YYYY-MM-ddThh:mm:ss` format to be
-  recognised as a date / datetime by the app. Otherwise, no filtering operations 
-  can be performed on it.
-
-Examples: 
-* `deadline Project 3 \by 2020-10-05`
-* `deadline Buy grocevires \by 2020-09-16T11:02`
+   Examples: 
+   * `deadline Project 3 \by 2020-10-05`
+   * `deadline Buy grocevires \by 2020-09-16T11:02`
+</details>
 
 ### Adding an event task: `event`
+<details>
+   <summary>Adds an event to the tasklist happening at a given date/time.</summary> 
 
-Adds an event to the tasklist happening at a given date/time. 
+   Format: `event EVENT_DESCRIPTION \at DATE_TIME`
+   * Note that the `DATE_TIME`has to be entered with a `YYYY-MM-dd` or `YYYY-MM-ddThh:mm:ss` format to be
+     recognised as a date / datetime by the app. Otherwise, no filtering operations 
+     can be performed on it.
 
-Format: `event EVENT_DESCRIPTION \at DATE_TIME`
-* Note that the `DATE_TIME`has to be entered with a `YYYY-MM-dd` or `YYYY-MM-ddThh:mm:ss` format to be
-  recognised as a date / datetime by the app. Otherwise, no filtering operations 
-  can be performed on it.
-
-Examples: 
-* `event Night cycling \at 2020-09-19T02:00`
-* `event Dad's birthday \at 2020-10-25`
+   Examples: 
+   * `event Night cycling \at 2020-09-19T02:00`
+   * `event Dad's birthday \at 2020-10-25`
+</details>
 
 ### Listing all tasks: `list`
 
-Shows a list of all tasks in the tasklist. 
+<details>
+   <summary>Shows a list of all tasks in the tasklist.</summary> 
 
-Format: `list [\by DATE_TIME]`
-* You can optionally specify a `DATE_TIME`to list all the deadlines and events that are due / happening before the given datetime.
-The `DATE_TIME` specified has to be of the format `YYYY-MM-dd` or `YYYY-MM-ddThh:mm:ss`
-to be valid.
+   Format: `list [\by DATE_TIME]`
+   * You can optionally specify a `DATE_TIME`to list all the deadlines and events that are due / happening before the given datetime.
+   The `DATE_TIME` specified has to be of the format `YYYY-MM-dd` or `YYYY-MM-ddThh:mm:ss`
+   to be valid.
 
-Examples: 
-* `list \by 2020-09-19T02:00`
-* `list \by 2020-10-25`
+   Examples: 
+   * `list \by 2020-09-19T02:00`
+   * `list \by 2020-10-25`
+</details>
 
 ### Finding tasks: `find`
 
-Finds tasks that contains the given keyphrase. 
+<details>
+   <summary>Finds tasks that contains the given keyphrase.</summary>
 
-Format: `find KEYPHRASE`
-* The search is not case-sensitive. e.g. `Cats` will match `cats`
-* Only the description of tasks / events is searched.
-* Only the whole phrase would be matched. e.g. `Happy` or `days` will not match `Happy days`
+   Format: `find KEYPHRASE`
+   * The search is not case-sensitive. e.g. `Cats` will match `cats`
+   * Only the description of tasks / events is searched.
+   * Only the whole phrase would be matched. e.g. `Happy` or `days` will not match `Happy days`
 
-Examples: 
-* `find birthday` returns `John's birthday` and `Weiming's birthday`
+   Examples: 
+   * `find birthday` returns `John's birthday` and `Weiming's birthday`
+</details>
 
 ### Marking a task as done: `done`
 
-Marks a task in the current tasklist as done.
+<details>
+   <summary>Marks a task in the current tasklist as done.</summary>
 
-Format: `done TASK_INDEX`
-* `TASK_INDEX` refers to the index of the task you wish to mark as done in the tasklist.
-To find the index of the task you would like to mark as done, use the `list` command.
- 
-Examples:
-* `done 3` marks the task at index 3 as done
+   Format: `done TASK_INDEX`
+   * `TASK_INDEX` refers to the index of the task you wish to mark as done in the tasklist.
+   To find the index of the task you would like to mark as done, use the `list` command.
+
+   Examples:
+   * `done 3` marks the task at index 3 as done
+</details>
 
 ### Deleting a task: `delete`
 
-Deletes a task from the current tasklist.
+<details>
+   <summary>Deletes a task from the current tasklist.</summary>
 
-Format: `delete TASK_INDEX`
-* `TASK_INDEX` refers to the index of the task you wish to delete in the tasklist.
-To find the index of the task you would like to delete, use the `list` command.
+   Format: `delete TASK_INDEX`
+   * `TASK_INDEX` refers to the index of the task you wish to delete in the tasklist.
+   To find the index of the task you would like to delete, use the `list` command.
 
-Examples: 
-* `delete 3` deletes the task at index 3 in the tasklist
+   Examples: 
+   * `delete 3` deletes the task at index 3 in the tasklist
+</details>
 
 ### Updating a task: `update`
 
-Updates the description or datetime of a task currently in the tasklist.
+<details>
+   <summary>Updates the description or datetime of a task currently in the tasklist.</summary>
 
-Format: `update TASK_INDEX [\date] NEW_VALUE`
-* `TASK_INDEX` refers to the index of the task you wish to update in the tasklist.
-  To find the index of the task you would like to update, use the `list` command.
-* If `\date` is specified, the date of the task will be updated to `NEW_VALUE`, otherwise
-the description of the task will be updated to `NEW_VALUE`. If the task at the given index
-does not have a specified datetime, an error will be thrown.
+   Format: `update TASK_INDEX [\date] NEW_VALUE`
+   * `TASK_INDEX` refers to the index of the task you wish to update in the tasklist.
+     To find the index of the task you would like to update, use the `list` command.
+   * If `\date` is specified, the date of the task will be updated to `NEW_VALUE`, otherwise
+   the description of the task will be updated to `NEW_VALUE`. If the task at the given index
+   does not have a specified datetime, an error will be thrown.
 
-Examples:
-* `update 3 Chinese homework` updates the description of the task at index 3 to "Chinese homework"
-* `update 3 \date 2020-09-02T12:00:05` updates the datetime of the task at index 3 to "Sep 2 2020, 12:00:05 PM"
+   Examples:
+   * `update 3 Chinese homework` updates the description of the task at index 3 to "Chinese homework"
+   * `update 3 \date 2020-09-02T12:00:05` updates the datetime of the task at index 3 to "Sep 2 2020, 12:00:05 PM"
+</details>
 
 ### Exiting the program: `bye`
 
-Exits the program.
+<details>
+   <summary>Exits the program.</summary>
 
-Format: `bye`
+   Format: `bye`
+</details>
 
 ### Saving the data
 
@@ -168,14 +189,30 @@ modifies the tasklist. There is no need to save manually.
 ---
 
 ## FAQ
+<details>
+   <summary>How can I inform the developers of bugs in the program?</summary>
 
-**Q:** How can I inform the developers of bugs in the program?
-
-**A:** You can open a new issue in this project's Github repository. These issues will be 
-reviewed on a regular basis. Click [here](https://docs.github.com/en/enterprise/2.15/user/articles/creating-an-issue) 
-to find out how to create a Github issue.
+   **A:** You can open a new issue in this project's Github repository. These issues will be 
+   reviewed on a regular basis. Click [here](https://docs.github.com/en/enterprise/2.15/user/articles/creating-an-issue) 
+   to find out how to create a Github issue.
+</details>
 
 ---
 
 ## Command Summary
+
+| **Action**    | **Format**                                   |
+|---------------| ---------------------------------------------|
+| Help          | `help`                                       |
+| Add todo      | `todo TASK_DESCRIPTION`                      |
+| Add deadline  | `deadline TASK_DESCRIPTION \by DATE_TIME`    |
+| Add event     | `event EVENT_DESCRIPTION \at DATE_TIME`      |
+| List          | `list [\by DATE_TIME]`                       |
+| Find          | `find KEYPHRASE`                             |
+| Mark done     | `done TASK_INDEX`                            |
+| Delete        | `delete TASK_INDEX`                          |
+| Update        | `update TASK_INDEX [\date] NEW_VALUE`        |
+| Exit          | `bye`                                        |
+
+
 
