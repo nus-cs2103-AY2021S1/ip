@@ -31,6 +31,9 @@ public class Parser {
             String taskDescription = getTaskDescription(inputs,command);
 
             switch (command) {
+            case HELP: {
+                return new Help(taskList,taskDescription).execute();
+            }
             case STATISTIC: {
                 return new IStatistic(taskList, taskDescription).execute();
             }

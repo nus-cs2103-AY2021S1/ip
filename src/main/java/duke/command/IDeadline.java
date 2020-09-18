@@ -5,7 +5,7 @@ import duke.task.Deadline;
 import duke.task.Task;
 import duke.task.TaskList;
 
-public class IDeadline extends Instruction{
+public class IDeadline extends Instruction {
 
     public IDeadline(TaskList taskList, String taskDescription) {
         super(taskList, taskDescription);

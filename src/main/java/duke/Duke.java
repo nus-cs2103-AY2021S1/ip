@@ -4,18 +4,16 @@ import duke.task.TaskList;
 import duke.utility.Parser;
 import duke.utility.Statistic;
 import duke.utility.Storage;
-import duke.utility.Ui;
 
 public class Duke {
 
     /** duke.task.TaskList class that stores and deals with the tasks **/
-    private TaskList taskList;
+    public TaskList taskList;
     /** duke.utility.Parser class that parse and deal with the commands given **/
     private Parser parser;
     /** duke.utility.Storage class that handles loads and saves the duke.task from/to hard drive **/
     private Storage storage;
-    /** UI class that is responsible for the interaction with the user **/
-    private Ui ui;
+
     private Statistic statistic;
 
     /**
@@ -25,12 +23,11 @@ public class Duke {
         statistic = new Statistic();
         taskList = new TaskList(statistic);
         parser = new Parser(taskList);
-        ui = new Ui();
 
         try {
             storage = new Storage(taskList, statistic);
         } catch (DukeException e) {
-            ui.showLoadingError();
+            System.out.println("unable to load file");
         }
     }
 
@@ -42,7 +39,7 @@ public class Duke {
         try {
             storage.saveTaskFile();
         } catch (DukeException e) {
-            ui.showSavingError();
+            System.out.println(e.toString());
         }
     }
 

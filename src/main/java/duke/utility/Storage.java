@@ -3,7 +3,10 @@ package duke.utility;
 import duke.DukeException;
 import duke.task.*;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -27,14 +30,15 @@ public class Storage {
         this.taskList = taskList;
         this.statistic = statistic;
         storageTaskPath = Paths.get(".", "data", "test.txt");
-        storageStatisticPath = Paths.get(".","data","statistic.txt");
-        getPath("test.txt");
-        getPath("statistic.txt");
+        storageStatisticPath = Paths.get(".", "data", "statistic.txt");
+        createPath("test.txt");
+        createPath("statistic.txt");
         loadTaskFile();
         loadStatisticFile();
     }
 
-    private void getPath(String fileName){
+    //Solution below adapted from http://zetcode.com/java/createdirectory/
+    private void createPath(String fileName) {
         Path path = Paths.get(".", "data", fileName);
         try {
             Path parentPath = path.getParent();
@@ -43,9 +47,8 @@ public class Storage {
             if (!Files.exists(path)) {
                 Files.createFile(path);
             }
-
         } catch (IOException e) {
-            System.out.println("unable to read file " + e.getMessage());
+            System.out.println("unable to create file " + e.getMessage());
         }
     }
 
@@ -116,7 +119,7 @@ public class Storage {
                 }
                 task = bf.readLine();
             }
-        } catch(IOException e){
+        } catch (IOException e) {
             throw new DukeException("unable to open file");
         }
     }

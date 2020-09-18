@@ -62,10 +62,14 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
-    private void circleClip(ImageView imageView){
-        Circle circle = new Circle(LENGTH /2);
-        circle.setCenterY(imageView.getY() + LENGTH/2);
-        circle.setCenterX(imageView.getX() + LENGTH/2);
+    //Solution below adapted from https://stackoverflow.com/questions/20489908/border-radius-and-shadow-on-imageview
+    /**
+     * Clips the image into a circle
+     */
+    private void circleClip(ImageView imageView) {
+        Circle circle = new Circle(LENGTH / 2);
+        circle.setCenterY(imageView.getY() + LENGTH / 2);
+        circle.setCenterX(imageView.getX() + LENGTH / 2);
         imageView.setClip(circle);
         SnapshotParameters parameters = new SnapshotParameters();
         parameters.setFill(Color.TRANSPARENT);

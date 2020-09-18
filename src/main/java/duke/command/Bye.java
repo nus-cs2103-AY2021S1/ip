@@ -1,6 +1,5 @@
 package duke.command;
 
-import duke.DukeException;
 import duke.task.TaskList;
 
 public class Bye extends Instruction {

@@ -10,12 +10,17 @@ import java.util.HashMap;
 
 public class Statistic {
 
-    private HashMap<Integer,ArrayList<String>> weeksInYear;
+    private HashMap<Integer, ArrayList<String>> weeksInYear;
 
-    public Statistic(){
+    public Statistic() {
         weeksInYear = new HashMap<>();
     }
 
+    /**
+     * add completed task to statistic
+     *
+     * @param task the completed task
+     */
     public void addCompletedTask(Task task) {
         LocalDate now = LocalDate.now();
         int weekNum = now.get(IsoFields.WEEK_OF_WEEK_BASED_YEAR);
@@ -24,6 +29,12 @@ public class Statistic {
         weeksInYear.get(weekNum).add(taskDescription);
     }
 
+    /**
+     * add past completed task to statistic
+     *
+     * @param taskName the completed task
+     * @param weekNum the week in which the task is completed in
+     */
     public void addPastTask(String taskName, int weekNum) {
         assert weekNum >= 0 : "file format is wrong";
         LocalDate now = LocalDate.now();
@@ -31,12 +42,15 @@ public class Statistic {
         weeksInYear.get(weekNum).add(taskName);
     }
 
-    public String getStatisticSummary(){
+    /**
+     * @return string of the completed task iun their respective week
+     */
+    public String getStatisticSummary() {
 
         LocalDate now = LocalDate.now();
         int weekNum = now.get(IsoFields.WEEK_OF_WEEK_BASED_YEAR);
 
-        if(weeksInYear.containsKey(weekNum-1)) {
+        if (weeksInYear.containsKey(weekNum - 1)) {
             ArrayList<String> week = weeksInYear.get(weekNum - 1);
             int numOfTask = week.size();
             StringBuilder output = new StringBuilder(String.format("task completed last week: %d\n", numOfTask));
@@ -46,17 +60,20 @@ public class Statistic {
             }
 
             return output.toString();
-        }else{
+        } else {
             return "no task done past week";
         }
     }
 
-    public String safeFileFormat(){
+    /**
+     * @return the string format of the completed task in which they are stored
+     */
+    public String safeFileFormat() {
         StringBuilder saveFormat = new StringBuilder();
-        for(int i=0;i<54;i++){
-            if(weeksInYear.containsKey(i)){
+        for (int i = 0; i < 54; i++) {
+            if (weeksInYear.containsKey(i)) {
                 StringBuilder temp = new StringBuilder(String.format("#D#%d\n", i));
-                for(String task : weeksInYear.get(i)){
+                for (String task : weeksInYear.get(i)) {
                     temp.append(String.format("%s\n", task));
                 }
                 saveFormat.append(temp);
@@ -65,15 +82,17 @@ public class Statistic {
         return saveFormat.toString();
     }
 
-    public void test(){
-        for(int i=0;i<60;i++){
-            if(weeksInYear.containsKey(i)){
-                System.out.println(i+"\n");
-                for(String task : weeksInYear.get(i)){
+    /*
+    public void test() {
+        for (int i = 0; i < 60; i++) {
+            if (weeksInYear.containsKey(i)) {
+                System.out.println(i + "\n");
+                for (String task : weeksInYear.get(i)) {
                     System.out.println(task);
                 }
             }
         }
     }
+    */
 }
 

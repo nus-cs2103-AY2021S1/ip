@@ -25,7 +25,7 @@ public abstract class Task {
         this.isDone = true;
     }
 
-    public String getTaskName(){
+    public String getTaskName() {
         return taskName;
     }
 
@@ -64,7 +64,12 @@ public abstract class Task {
         return taskName.contains(description);
     }
 
-    public boolean isDone(){
+    /**
+     * Check if input description is the same as duke.task description
+     *
+     * @return Boolean on whether the description matches
+     */
+    public boolean isDone() {
         return isDone;
     }
 

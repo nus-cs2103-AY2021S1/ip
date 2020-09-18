@@ -1,17 +1,20 @@
 package duke.task;
 
+import java.util.ArrayList;
+
 import duke.DukeException;
 import duke.utility.Statistic;
 
-import java.util.ArrayList;
 
 public class TaskList {
 
     /** ArrayList used store tasks **/
     private ArrayList<Task> taskList;
-    /** boolean value to check if there is any more updates to the tasks by the user **/
-    private boolean isUpdating = true;
+
     private Statistic statistic;
+
+    /** boolean value to check if there is any more updates to the tasks by the user **/
+    public boolean isUpdating = true;
 
     /**
      *Class constructor
@@ -34,7 +37,7 @@ public class TaskList {
         }
 
         Task doneTask = taskList.get(index);
-        if(doneTask.isDone){
+        if (doneTask.isDone) {
             throw new DukeException("This duke.task has already been completed idiot");
         }
         doneTask.complete();
@@ -128,7 +131,6 @@ public class TaskList {
      * @param index The index of the duke.task in the taskList
      * @throws DukeException  If the index is not within the range of tasks.
      */
-
     public String deleteTask(int index) throws DukeException {
         String outputString = "";
         System.out.println(index);
@@ -136,10 +138,10 @@ public class TaskList {
             throw new DukeException("please give a correct task index");
         }
 
-        if( index == -2){
+        if ( index == -2) {
             removeAll();
             return "removed all content bitch";
-        }else {
+        } else {
             outputString += taskList.get(index).printDeleteTask() + "\n";
             taskList.remove(index);
             outputString += printNumberOfTask(taskList.size());
@@ -147,12 +149,19 @@ public class TaskList {
         }
     }
 
-    public String getStatistic(){
+    /**
+     * @return a string of the completed task the previous week
+     */
+    public String getStatistic() {
         return statistic.getStatisticSummary();
     }
 
-    public void removeAll(){
-        while(!taskList.isEmpty()){
+
+    /**
+     * removes all task
+     */
+    public void removeAll() {
+        while (!taskList.isEmpty()) {
             taskList.remove(0);
         }
     }

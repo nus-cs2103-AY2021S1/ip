@@ -5,7 +5,7 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskList;
 
-public class IEvent extends Instruction{
+public class IEvent extends Instruction {
 
 
     public IEvent(TaskList taskList, String taskDescription) {

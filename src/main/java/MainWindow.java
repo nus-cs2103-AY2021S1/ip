@@ -12,6 +12,7 @@ import javafx.scene.paint.Color;
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
+
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -51,7 +52,6 @@ public class MainWindow extends AnchorPane {
                 userDialog,
                 dukeDialog
         );
-
 
         userInput.clear();
     }
