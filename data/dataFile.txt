@@ -1,3 +1,7 @@
 D | 1 | code #fun | 2020-10-05
 D | 1 | code #boring | 2020-05-06
 E | 1 | party #happy | 2020-09-08
+T | 0 | code | here
+T | 0 | code | here
+T | 0 | party #happy
+E | 0 | read\stuff | 2020-09-08

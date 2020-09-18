@@ -72,6 +72,9 @@ public class Parser {
 
     private static TagCommand processTag(String command) throws InvalidCommand {
         try {
+            if (command.contains("|")) {
+                throw new InvalidCommand(("Please do not use '|' in your commands!"));
+            }
             int taskIndex;
             try {
                 taskIndex = Integer.parseInt(command.substring(4, 5));
@@ -124,6 +127,9 @@ public class Parser {
 
     private static AddCommand processEvent(String command) throws InvalidCommand {
         try {
+            if (command.contains("|")) {
+                throw new InvalidCommand(("Please do not use '|' in your commands!"));
+            }
             String eventInput = command.substring(6);
             int indexSeparator = eventInput.indexOf("/at");
             if (indexSeparator == ITEM_NOT_FOUND_INDEX) {
@@ -144,6 +150,9 @@ public class Parser {
 
     private static AddCommand processDeadline(String command) throws InvalidCommand {
         try {
+            if (command.contains("|")) {
+                throw new InvalidCommand(("Please do not use '|' in your commands!"));
+            }
             String deadlineInput = command.substring(9);
             int indexSeparator = deadlineInput.indexOf("/by");
             if (indexSeparator == ITEM_NOT_FOUND_INDEX) {
@@ -164,6 +173,9 @@ public class Parser {
 
     private static AddCommand processToDo(String command) throws InvalidCommand {
         try {
+            if (command.contains("|")) {
+                throw new InvalidCommand(("Please do not use '|' in your commands!"));
+            }
             String taskToDo = command.substring(5);
             if (taskToDo.length() == 0) {
                 throw new InvalidCommand("OOPS!!! Please specify your task.");
