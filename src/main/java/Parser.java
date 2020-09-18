@@ -53,20 +53,44 @@ public class Parser {
      */
     boolean executeCommand(Storage storage, TaskList tasks) {
         String input = this.parsedLine.trim();
-
-        // we convert input to uppercase before checking to make commands case-insensitive
         if (input.toUpperCase().equals(Duke.Commands.EXIT.getString())) {
             Ui.sayGoodbye(storage, tasks);
             return true;
         }
+        if (parseShortCommands(input, tasks)) {
+            return false;
+        }
+
+        if (parseLongCommands(input, tasks)) {
+            return false;
+        }
+        Ui.printError("Sorry I don't know what that means :(");
+        return false;
+    }
+
+    private boolean parseShortCommands(String input, TaskList tasks) {
+        // we convert input to uppercase before checking to make commands case-insensitive
+
         if (input.toUpperCase().equals(Duke.Commands.LIST.getString())) {
             tasks.displayTasks();
-            return false;
+            return true;
         }
         if (input.toUpperCase().equals(Duke.Commands.HELP.getString())) {
             Ui.print(HELP_MSG);
-            return false;
+            return true;
         }
+        if (input.toUpperCase().equals(Duke.Commands.DELETEALL.getString())) {
+            try {
+                tasks.deleteAllTasks();
+            } catch (DukeException ex) {
+                Ui.printError(ex.getMessage());
+            }
+            return true;
+        }
+        return false;
+    }
+
+    private boolean parseLongCommands(String input, TaskList tasks) {
         if (input.length() >= 5 && input.substring(0,5).toUpperCase().equals(Duke.Commands.DONE.getString())) {
             try {
                 int index = Integer.parseInt(input.substring(5).trim());
@@ -76,24 +100,17 @@ public class Parser {
             } catch (DukeException ex) {
                 Ui.printError(ex.getMessage());
             }
-            return false;
+            return true;
         }
-        if (input.toUpperCase().equals(Duke.Commands.DELETEALL.getString())) {
-            try {
-                tasks.deleteAllTasks();
-            } catch (DukeException ex) {
-                Ui.printError(ex.getMessage());
-            }
-            return false;
-        }
+
         if (input.length() >= 5 && input.substring(0,5).toUpperCase().equals(Duke.Commands.FIND.getString())) {
             String searchTerm = input.substring(5).trim();
             if (searchTerm.length() == 0) {
                 Ui.printError("The search term entered is empty.");
-                return false;
+                return true;
             }
             tasks.displayTasksFound(searchTerm);
-            return false;
+            return true;
         }
         if (input.length() >= 7 && input.substring(0,7).toUpperCase().equals(Duke.Commands.DELETE.getString())) {
             try {
@@ -104,7 +121,7 @@ public class Parser {
             } catch (DukeException ex) {
                 Ui.printError(ex.getMessage());
             }
-            return false;
+            return true;
         }
         if (input.length() >= 5 && input.substring(0,5).toUpperCase().equals(Duke.Commands.TODO.getString())) {
             try {
@@ -113,7 +130,7 @@ public class Parser {
             } catch (DukeException ex) {
                 Ui.printError(ex.getMessage());
             }
-            return false;
+            return true;
         }
         if (input.length() >= 6 && input.substring(0,6).toUpperCase().equals(Duke.Commands.EVENT.getString())) {
             try {
@@ -130,7 +147,7 @@ public class Parser {
             } catch (DukeException ex) {
                 Ui.printError(ex.getMessage());
             }
-            return false;
+            return true;
         }
         if (input.length() >= 9 && input.substring(0,9).toUpperCase().equals(Duke.Commands.DEADLINE.getString())) {
             try {
@@ -148,10 +165,8 @@ public class Parser {
             } catch (DukeException ex) {
                 Ui.printError(ex.getMessage());
             }
-            return false;
+            return true;
         }
-
-        Ui.printError("Sorry I don't know what that means :(");
         return false;
     }
 
