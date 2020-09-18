@@ -19,6 +19,7 @@ public class TaskList {
     private static final String DESCRIPTION = "Here are the tasks in your list:\n";
     private static final String MUST_BE_NUMBER = "Index must be a number!\n";
     private static final String INVALID_DATE = "Invalid Date format!\n";
+    private static final String INVALID_FORMAT = "Invalid format!\n";
     private static final String MISSING_DIVIDER = "Missing Divider!\n";
     private static final String LINE_BREAK = "\n";
     private static final String SORT_TASK_TYPE = "SORTED BY TASK TYPE\n";
@@ -124,6 +125,8 @@ public class TaskList {
             return info;
         } catch (NumberFormatException err) {
             return MUST_BE_NUMBER;
+        } catch (ArrayIndexOutOfBoundsException err) {
+            return INVALID_FORMAT;
         } catch (DukeException err) {
             return err.getMessage();
         }
@@ -154,6 +157,8 @@ public class TaskList {
             return info;
         } catch (NumberFormatException err) {
             return MUST_BE_NUMBER;
+        } catch (ArrayIndexOutOfBoundsException err) {
+            return INVALID_FORMAT;
         } catch (DukeException err) {
             return err.getMessage();
         }
@@ -167,8 +172,9 @@ public class TaskList {
      */
     public String addToDoForGui(String userInput) {
         try {
-            checkForItem(userInput.substring(4), Keyword.TODO.label.strip()); //Length of "todo"
-            String task = userInput.substring(5);
+            checkForItem(userInput.substring(4), Keyword.TODO.label); //Length of "todo"
+            String[] splitUserInput = userInput.split(" ");
+            String task = splitUserInput[1];
             String info = ADD_TASK;
             Todo newToDo = new Todo(task);
             Storage.addTask(newToDo.getStorageString(TODO_SYMBOL));
@@ -179,6 +185,8 @@ public class TaskList {
             return info;
         } catch (DukeException | IOException err) {
             return err.getMessage();
+        } catch (ArrayIndexOutOfBoundsException err) {
+            return INVALID_FORMAT;
         }
     }
 
@@ -190,17 +198,20 @@ public class TaskList {
      */
     public String addDeadlineForGui(String userInput) {
         try {
-            checkForItem(userInput.substring(8), Keyword.DEADLINE.label.strip()); //Length of Event
+            checkForItem(userInput.substring(8), Keyword.DEADLINE.label); //Length of Event
             boolean isDividerFound = checkForDivider(userInput.substring(8));
             if (!isDividerFound) {
                 return MISSING_DIVIDER;
             }
-            int dateIndex = userInput.indexOf("/");
-            String task = userInput.substring(9, dateIndex);
+            String[] splitUserInput = userInput.split(" ");
+            String task = splitUserInput[1];
+            if (task.contains("/")) {
+                return INVALID_FORMAT;
+            }
             if (task.strip().equals("")) {
                 return MISSING_INFO;
             }
-            String time = userInput.substring(dateIndex + 1);
+            String time = splitUserInput[2].substring(1);
             String info = ADD_TASK;
             Deadline newDeadline = new Deadline(task, time);
             String formatDate = newDeadline.getFormattedDate();
@@ -214,6 +225,10 @@ public class TaskList {
             return err.getMessage();
         } catch (DateTimeParseException err) {
             return INVALID_DATE;
+        } catch (ArrayIndexOutOfBoundsException err) {
+            return INVALID_FORMAT;
+        } catch (StringIndexOutOfBoundsException err) {
+            return INVALID_FORMAT;
         }
     }
 
@@ -225,17 +240,20 @@ public class TaskList {
      */
     public String addEventForGui(String userInput) {
         try {
-            checkForItem(userInput.substring(5), Keyword.EVENT.label.strip()); //Length of Event
+            checkForItem(userInput.substring(5), Keyword.EVENT.label); //Length of Event
             boolean isDividerFound = checkForDivider(userInput.substring(5));
             if (!isDividerFound) {
                 return MISSING_DIVIDER;
             }
-            int dateIndex = userInput.indexOf("/");
-            String task = userInput.substring(6, dateIndex);
+            String[] splitUserInput = userInput.split(" ");
+            String task = splitUserInput[1];
+            if (task.contains("/")) {
+                return INVALID_FORMAT;
+            }
             if (task.strip().equals("")) {
                 return MISSING_INFO;
             }
-            String time = userInput.substring(dateIndex + 1);
+            String time = splitUserInput[2].substring(1);
             String info = ADD_TASK;
             Event newEvent = new Event(task, time);
             String formatDate = newEvent.getFormattedDate();
@@ -249,6 +267,10 @@ public class TaskList {
             return err.getMessage();
         } catch (DateTimeParseException err) {
             return INVALID_DATE;
+        } catch (ArrayIndexOutOfBoundsException err) {
+            return INVALID_FORMAT;
+        } catch (StringIndexOutOfBoundsException err) {
+            return INVALID_FORMAT;
         }
     }
 
@@ -280,6 +302,8 @@ public class TaskList {
             return info;
         } catch (DukeException err) {
             return err.getMessage();
+        } catch (ArrayIndexOutOfBoundsException err) {
+            return INVALID_FORMAT;
         }
     }
 

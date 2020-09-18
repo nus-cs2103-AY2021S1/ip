@@ -1,4 +1,4 @@
 T ~ 0 ~ run
 E ~ 0 ~ birthday  ~ Oct 8 2020
 D ~ 1 ~ homework  ~ Sep 12 2020
-D ~ 0 ~ hw  ~ Sep 17 2020
+D ~ 1 ~ hw  ~ Sep 17 2020
