@@ -37,23 +37,27 @@ public class Parser {
                     throw new DukeException("Please select the task that you want to mark done!");
                 }
                 int idx = Integer.parseInt(test[1]);
+                assert idx > 0: "Index is not valid! ";
                 return new DoneCommand(idx);
             } else if (test[0].equals("delete")) {
                 if (test.length == 1) {
                     throw new DukeException("Please select the task that you want to delete!");
                 }
                 int idx = Integer.parseInt(test[1]);
+                assert idx > 0: "Index is not valid! ";
                 return new DeleteCommand(idx);
             } else if (test[0].equals("find")) {
                 if (test.length == 1) {
                     throw new DukeException("Please include the keyword!");
                 }
                 String keyword = test[1];
+                assert keyword != null : "Missing keyword! ";
                 return new FindCommand(keyword);
             } else {
                 if (test[0].equals("todo")) {
                     try {
                         String description = fullCommand.split("todo ")[1];
+                        assert description != null : "Missing description! ";
                         Todo todo = new Todo(description);
                         return new AddCommand(todo);
                     } catch (ArrayIndexOutOfBoundsException err) {
@@ -68,7 +72,9 @@ public class Parser {
                         } else {
                             try {
                                 String description = str[0];
+                                assert description != null: "Missing description! ";
                                 String by = str[1].split("by ")[1];
+                                assert by != null: "Missing deadline! ";
                                 LocalDateTime byTime = LocalDateTime.parse(by);
                                 Deadline deadline = new Deadline(description, byTime);
                                 return new AddCommand(deadline);
@@ -92,7 +98,9 @@ public class Parser {
                         } else {
                             try {
                                 String description = str[0];
+                                assert description != null : "Missing description! ";
                                 String at = str[1];
+                                assert at != null: "Missing time! ";
                                 Event event = new Event(description, LocalDateTime.parse(at));
                                 return new AddCommand(event);
                             } catch (DateTimeParseException e) {
