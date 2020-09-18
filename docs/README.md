@@ -49,7 +49,8 @@ Adds a Deadline task to the program.
 The description of the deadline task is written in the DEADLINE_DESCRIPTION.
 The Deadline date is written in the DEADLINE_ENDDATE. DEADLINE_ENDDATE must be written in YYYY-MM-DD format.  
 The Deadline time is written in the DEADLINE_END TIME. DEADLINE_ENDTIME must be written in HH:MM format.  
-All of DEADLINE_DESCRIPTION, DEADLINE_ENDDATE and DEADLINE_ENDTIME cannot be left blank.  
+All of DEADLINE_DESCRIPTION and DEADLINE_ENDDATE cannot be left blank.  
+DEADLINE_ENDTIME is optional
 
 **Example of Usage:**
 ```
