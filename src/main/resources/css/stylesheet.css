@@ -1,6 +1,6 @@
 @font-face {
-    font-family: 'myDefaultFont', serif;
-    src: url("fonts/static/EBGaramond-SemiBoldItalic.ttf");
+    font-family: 'EB Garamond', serif;
+    src: url("EBGaramond-SemiBoldItalic.ttf");
 }
 
 .scroll-pane > .viewport {
@@ -18,7 +18,7 @@
     -fx-padding: 5 20;
     -fx-border-color: #8FB9A8;
     -fx-end-margin: 10;
-    -fx-font-family: 'myDefaultFont';
+    -fx-font-family: 'EB Garamond';
     -fx-font-size: 18;
 }
 
@@ -27,11 +27,11 @@
     -fx-background-color: #FEFAD4;
     -fx-border-color: #8FB9A8;
     -fx-font-size: 18;
-    -fx-font-family: "myDefaultFont";
+    -fx-font-family: "EB Garamond";
 }
 
 .label {
-    -fx-font-family: "myDefaultFont";
+    -fx-font-family: "EB Garamond";
     -fx-font-size: 12;
     -fx-padding: 10;
 }

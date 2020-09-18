@@ -86,7 +86,9 @@ public class TaskList {
             toReturn += "Got it. I've added this to task: \n" + task + "\n"
                     + "Now you have " + todo.size() + " tasks in the list \n"
                     + Ui.showLine();
-            String textToAppend = "\nE | 0 | " + splits[1] + " | " + splits[2] + " | " + splits[3];
+            String textToAppend = isRepetitive
+                                    ? "\nE | 0 | " + splits[1] + " | " + splits[2] + " | " + splits[3]
+                                    : "\nE | 0 | " + splits[1] + " | " + splits[2];
             storage.appendFile(textToAppend);
             return toReturn;
         } else if (splits.length > 1) {
@@ -117,7 +119,9 @@ public class TaskList {
             toReturn += "Got it. I've added this to task: \n" + task + "\n"
                     + "Now you have " + todo.size() + " tasks in the list \n"
                     + Ui.showLine();
-            String textToAppend = "\nD | 0 | " + splits[1] + " | " + splits[2] + " | " + splits[3];
+            String textToAppend = isRepetitive
+                                    ? "\nD | 0 | " + splits[1] + " | " + splits[2] + " | " + splits[3]
+                                    : "\nD | 0 | " + splits[1] + " | " + splits[2]   ;
             storage.appendFile(textToAppend);
             return toReturn;
         } else if (splits.length > 1) {

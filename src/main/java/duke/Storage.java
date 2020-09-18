@@ -30,7 +30,6 @@ public class Storage {
     public Storage(String filePath, String dataPath) {
         this.filePath = filePath;
         dataFile = new File(filePath);
-        System.out.println(dataFile.exists());
         try {
             if (dataFile.exists() == false) {
                 File createPath = new File(dataPath);
@@ -50,6 +49,8 @@ public class Storage {
      */
 
     public void appendFile (String task) {
+        //@@author yongmingyang-reused
+        //Reused from https://www.tutorialspoint.com/java/java_filewriter_class.htm with modifications
         try {
             FileWriter fw = new FileWriter(filePath, true);
             fw.write(task);

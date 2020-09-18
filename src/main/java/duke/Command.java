@@ -34,16 +34,12 @@ public class Command {
     public String execute(TaskList taskList, Ui ui) throws DukeException {
         assert taskList != null : "taskList cannot be null";
         assert ui != null : "ui should not be null";
-        System.out.println(taskList);
-        System.out.println("task refer to: " + task);
         switch (action) {
         case "help":
             return ui.showWelcomeMessage();
         case "bye":
             return ui.showEnd();
         case "list":
-            System.out.println("in list debug");
-            System.out.println(taskList.toString());
             return ui.showList(taskList.getList());
         case "done":
             String[] split = task.split("done ");

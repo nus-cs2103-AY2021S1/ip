@@ -3,6 +3,7 @@ package duke.gui;
 import duke.Duke;
 import duke.Ui;
 import duke.exception.DukeException;
+import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -12,6 +13,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import javafx.util.Duration;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -72,6 +75,15 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
+        if (response.equals(Ui.showEnd())) {
+            //@@author yongmingyang-reused
+            //Reused from https://stackoverflow.com/questions/27334455/ modified to suit
+
+            Stage stage = (Stage) sendButton.getScene().getWindow();
+            PauseTransition delay = new PauseTransition(Duration.seconds(5));
+            delay.setOnFinished( event -> stage.close() );
+            delay.play();
+        }
         userInput.clear();
     }
 }

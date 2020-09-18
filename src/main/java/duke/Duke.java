@@ -22,7 +22,6 @@ public class Duke {
      * Initializes a Duke object
      */
     public Duke() {
-        System.out.println(FILE_PATH);
         try {
             taskList = new TaskList(storage);
         } catch (DukeException err) {
