@@ -40,11 +40,10 @@ public class Ui {
     /**
      * Exit function for Duke
      *
-     * @return String of a bye greeting
+     * @return String Goodbye message
      */
     public static String exit() {
-        String exit = "Goodbye! Hope to see you soon!";
-        return exit;
+        return "Goodbye! Hope to see you soon!";
     }
 
 

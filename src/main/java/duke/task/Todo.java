@@ -1,19 +1,20 @@
 package duke.task;
 
-import duke.task.Task;
-
 public class Todo extends Task {
-    private  String identity;
+    private String identity;
 
+    /**
+     * Constructor for Todo class
+     * @param description
+     */
     public Todo(String description) {
         super(description);
         this.identity = "T";
     }
 
     /**
-     * Getter for identifier to help write tasks to duke.txt
-     *
-     * @return
+     * Getter method to retrieve type of task from instance
+     * @return identity String
      */
     @Override
     public String getIdentity() {

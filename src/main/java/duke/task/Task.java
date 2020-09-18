@@ -2,6 +2,7 @@ package duke.task;
 
 import java.time.LocalDate;
 
+// Task Layout adapted from @nicholas-gcc's ip code
 public class Task {
     protected String description;
     protected String identity;
@@ -13,15 +14,11 @@ public class Task {
         this.isDone = false;
     }
 
-    public Task(String description, LocalDate date) {
-        this.description = description;
-        this.date = date;
-    }
-
-    public Task(String description, LocalDate date, String identity) {
-        this.description = description;
-        this.date = date;
-        this.identity = identity;
+    /**
+     * Function to mark Task instance as done
+     */
+    public void markAsDone() {
+        isDone = true;
     }
 
     /**
@@ -32,22 +29,34 @@ public class Task {
         return identity;
     }
 
+    /**
+     * Function to get special status icon symbol done or not done
+     * @return String tick or cross
+     */
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
-    public void markAsDone() {
-        isDone = true;
-    }
-
+    /**
+     * Getter to return description of Task
+     * @return String of description
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * Getter to return whether Task is done
+     * @return boolean isDone
+     */
     public boolean getIsDone() {
         return isDone;
     }
 
+    /**
+     * Getter to return date of Task
+     * @return LocalDate
+     */
     public LocalDate getLocalDate() {
         assert !(this instanceof Todo) : "Todos have no dates!";
         return date;

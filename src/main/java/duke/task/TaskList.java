@@ -11,84 +11,101 @@ import java.util.Collections;
 public class TaskList {
     private ArrayList<Task> taskArrayList;
 
+    /**
+     * Constructor for TaskList class with no parameters
+     */
     public TaskList() {
         this.taskArrayList = new ArrayList<>();
     }
 
+    /**
+     * Getter to retrieve ArrayList taskArrayList from instance of TaskList
+     *
+     * @return taskArrayList
+     */
     public ArrayList<Task> getTaskList() {
         return taskArrayList;
     }
 
     /**
-     * Adds task to taskArrayList, writes to duke.txt file
+     * Method to add task to taskArrayList, writes to duke.txt file
      *
      * @param storage to write to duke.txt file
      * @param task to be printed and written
      * @throws IOException for errors relating to parsing of the file in the storage.writeToFile function
      */
-    public void addTask(Storage storage, Task task) throws IOException {
+    public void addTask(Task task, Storage storage) throws IOException {
         taskArrayList.add(task);
         storage.writeToFile(task);
     }
 
+    /**
+     * Method that checks if the specified task has a date
+     * @param task to check
+     * @return boolean
+     */
     public boolean hasDate(Task task) {
         return (task instanceof Deadline || task instanceof Event);
     }
 
+    /**
+     * Method to sort tasks by date
+     *
+     */
+    // @@author nicholas-gcc
+    // CS2103T tp teammate test
     public void sortDates() {
         Collections.sort(this.taskArrayList, (t1, t2) -> {
             if (t1 instanceof Todo && hasDate(t2)) {
                 return -1;
-                //sorts Todos with no date at the top of list
-            }
-            else if (hasDate(t1) && t2 instanceof Todo) {
+                // sorts Todos with no date at the top of list
+            } else if (hasDate(t1) && t2 instanceof Todo) {
                 return 1;
-            }
-            else if (t1 instanceof Todo && t2 instanceof Todo) {
+            } else if (t1 instanceof Todo && t2 instanceof Todo) {
                 return 0;
+            } else {
+                return t1.getLocalDate().compareTo(t2.getLocalDate());
             }
-            else return t1.getLocalDate().compareTo(t2.getLocalDate());
-
         });
     }
 
 
     /**
-     * prints list of tasks when user inputs "list"
+     * Method to prints list of tasks in taskArrayList
      *
+     * @return output String of tasks
      */
     public String printTasks() {
         sortDates();
-
         if (taskArrayList.size() == 0){
             return "There are no tasks!\n";
+        } else {
+            return Ui.printList(this.taskArrayList);
         }
-
-        String s = Ui.printList(this.taskArrayList);
-        return s;
     }
 
     /**
-     * removes task of ith position (in a 1 to n index) from arrayList and prints the resulting list
+     * Method to remove task of ith position (in a 1 to n index)
+     * from taskArrayList and prints the resulting list
      *
-     * @param i
+     * @param index
      * @throws DukeException
      */
-    public void delete(int i) throws DukeException {
-        if (i < 0 || i > taskArrayList.size()) {
+    public void delete(int index) throws DukeException {
+        if (index < 0 || index > taskArrayList.size()) {
             throw new DukeException("invalid task number");
         }
-        taskArrayList.remove(i - 1);
+        taskArrayList.remove(index - 1);
     }
 
     /**
      * Marks list in taskArrayList as done, updates entries in duke.txt file
      *
-     * @param i
+     * @param index index of element in the taskArrayList
      * @param storage
      */
-    public void setAllDone(int i, Storage storage) {
-        Task doneTask = taskArrayList.get(i - 1);
+    public void setAllDone(int index, Storage storage) {
+        Task doneTask = taskArrayList.get(index - 1);
         doneTask.markAsDone();
         storage.replaceDone(doneTask.getDescription());
     }

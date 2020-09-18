@@ -1,15 +1,12 @@
 package duke.component;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
+import duke.task.*;
 
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileOutputStream;
-import java.nio.file.Files;
 
 /**
  * Utility class to help write to and modify .txt files
@@ -22,7 +19,7 @@ public class Storage {
     }
 
     /**
-     * Appends task description to a .txt file
+     * Adds task description to a .txt file
      *
      * @param task
      * @throws IOException
@@ -33,11 +30,9 @@ public class Storage {
 
         if (task instanceof Deadline) {
             writtenTask += ((Deadline) task).getDate();
-        }
-        else if (task instanceof Event) {
+        } else if (task instanceof Event) {
             writtenTask += ((Event) task).getDate();
-        }
-        else writtenTask += "\n"; //adds a new line
+        } else writtenTask += "\n"; //adds a new line
         fw.write(writtenTask);
         fw.close();
     }
@@ -47,10 +42,11 @@ public class Storage {
     }
 
     /**
-     * helper function to update the done status of task
+     * Helper function to update the done status of task
      *
      * @param replaceWith
      */
+    // Credits to @nicholas-gcc for understanding and help with code.
     public void replaceDone(String replaceWith) {
         try {
             // input the file content to the StringBuffer "input"
@@ -64,9 +60,7 @@ public class Storage {
             }
             file.close();
             String inputStr = inputBuffer.toString();
-
             inputStr = inputStr.replace("| 0 | " + replaceWith, "| 1 | " + replaceWith);
-
 
             // write the new string with the replaced line OVER the same file
             FileOutputStream fileOut = new FileOutputStream(filePath);

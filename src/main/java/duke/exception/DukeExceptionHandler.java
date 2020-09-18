@@ -12,7 +12,6 @@ public class DukeExceptionHandler {
      * @return String of error message
      */
     public static String handleException(String input) {
-
         if (isEmptyDescription(input)) {
             //tasks created with no description
             InvalidDescriptionException error = new InvalidDescriptionException(input);
@@ -34,11 +33,20 @@ public class DukeExceptionHandler {
     }
 
     public static boolean isWrongInput(String input) {
-        if (!input.contains("todo") && !input.contains("deadline") && !input.contains("event")
-                && !input.contains("done") && !input.equals("list") && !input.contains("find") && !input.contains("bye")
-                && !input.contains("delete")) {
+        boolean CONTAINS_TODO = input.contains("todo");
+        boolean CONTAINS_DEADLINE = input.contains("deadline");
+        boolean CONTAINS_EVENT = input.contains("event");
+        boolean CONTAINS_DONE = input.contains("done");
+        boolean CONTAINS_LIST = input.equals("list");
+        boolean CONTAINS_FIND = input.contains("find");
+        boolean CONTAINS_BYE = input.contains("bye");
+        boolean CONTAINS_DELETE = input.contains("delete");
+
+        if (!CONTAINS_TODO && !CONTAINS_DEADLINE && !CONTAINS_EVENT && !CONTAINS_DONE && !CONTAINS_LIST &&
+                !CONTAINS_FIND && !CONTAINS_BYE && !CONTAINS_DELETE) {
             return true;
+        } else {
+            return false;
         }
-        else return false;
     }
 }

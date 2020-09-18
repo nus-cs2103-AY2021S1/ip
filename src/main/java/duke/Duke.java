@@ -32,7 +32,7 @@ public class Duke {
         return parser.parse(input);
     }
 
-    //credit to Ziyang-98 for help on file issues
+    // Credit to nicholas-gcc and Ziyang-98 for directory issues
     private String getPathName() {
         boolean ifPathDirExists = System.getProperty("user.dir").endsWith("CS2103 IP");
         return ifPathDirExists
@@ -44,7 +44,7 @@ public class Duke {
     /**
      * Driver method that handles input/output between user and system
      */
-    public void run() {
+    public void start() {
         ui.chat();
         Parser parser = new Parser(tasks, storage);
         Scanner sc = new Scanner(System.in);
@@ -63,6 +63,6 @@ public class Duke {
      * @param args
      */
     public static void main(String[] args) {
-        new Duke().run();
+        new Duke().start();
     }
 }
