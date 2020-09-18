@@ -115,7 +115,7 @@ public class TaskList {
             StringBuilder taskListString = new StringBuilder();
             for (int i = 1; i < myTaskList.size() + 1; i++) {
                 taskListString
-                        .append("     ")
+                        .append("   ")
                         .append(i)
                         .append(".")
                         .append(myTaskList.get(i - 1))

@@ -51,7 +51,7 @@ public class Ui {
     private String buildTaskString(ArrayList<Task> tasks) {
         StringBuilder taskString = new StringBuilder();
         for (Task task : tasks) {
-            taskString.append(task).append("\n       ");
+            taskString.append(task).append("\n   ");
         }
         return taskString.toString();
     }
