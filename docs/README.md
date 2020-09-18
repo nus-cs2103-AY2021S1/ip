@@ -133,7 +133,7 @@ ByteMe is a **desktop scheduling app to help you manage your daily tasks**. It i
     
 8. ### `free time` - Finding free time slots on a specific date
 
-    * Find free time slots on a specific date. A `date time` is required.
+    * Find free time slots on a specific date. A `date time` is required. `Event` is assumed to have a duration of 1 hour at `v0.3`.
     
     * Format
         * `free time YYYY-MM-DD`
