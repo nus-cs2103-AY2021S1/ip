@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--<?xml version="1.0" encoding="UTF-8"?> Not necessary, is default option -->
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Duke">
+  <top>
+    <VBox BorderPane.alignment="CENTER">
+      <children>
+        <HBox>
+               <children>
+                  <TextField fx:id="command" onAction="#handleItemEntered" promptText="Input command here">
+                     <HBox.margin>
+                        <Insets left="10.0" top="10.0" />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+               </VBox.margin></HBox>
+      </children>
+    </VBox>
+  </top>
+   <center>
+      <TextArea fx:id="console" editable="false" BorderPane.alignment="CENTER" />
+   </center>
+</BorderPane>

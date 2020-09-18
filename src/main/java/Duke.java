@@ -12,6 +12,8 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import javafx.application.Application;
@@ -21,6 +23,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 
@@ -35,10 +38,19 @@ public class Duke extends Application implements Initializable {
 
   @Override
   public void start(Stage stage) throws Exception {
-    Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-    stage.setTitle("Duke, your personal assistant");
-    stage.setScene(new Scene(root, 600, 600));
-    stage.show();
+    try {
+      FXMLLoader fxmlLoader = new FXMLLoader(Duke.class.getResource("/MainWindow.fxml"));
+      System.out.println(fxmlLoader);
+      BorderPane ap = fxmlLoader.load();
+      Scene scene = new Scene(ap);
+      stage.setScene(scene);
+      System.out.println(4);
+//    Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+//    stage.setScene(new Scene(root, 600, 600));
+      stage.show();
+    } catch (Exception e) {
+      System.out.println(e);
+    }
   }
 
   @Override
