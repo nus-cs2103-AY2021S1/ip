@@ -44,8 +44,6 @@ public class Duke extends Application{
         storage = new Storage(DEFAULT_FILE_PATH, DEFAULT_DIRECTORY);
         tasks = new TaskList(storage.loadTasks());
         System.out.println(ui.printGreetingMessage(storage.createResult));
-        System.out.println(DEFAULT_FILE_PATH);
-        System.out.println(DEFAULT_DIRECTORY);
     }
 
     @Override
