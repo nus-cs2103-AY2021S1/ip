@@ -89,9 +89,9 @@ public class UI {
         for (i = 0 ; i < taskList.getTotalTask() ; i++) {
             Task task = taskList.get(i);
             if (i==taskList.getTotalTask()-1) {
-                sb.append(String.format("%d.%s %s",i+1,task.getSymbol(),task));
+                sb.append(String.format("%d.%s %s %s %s",i+1,task.getSymbol(),task.getTaskSymbol(),task,task.displayTag()));
             } else {
-                sb.append(String.format("%d.%s %s\n", i+1,task.getSymbol(), task));
+                sb.append(String.format("%d.%s %s %s %s\n", i+1,task.getSymbol(),task.getTaskSymbol(),task,task.displayTag()));
             }
         }
         return sb;

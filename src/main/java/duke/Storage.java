@@ -1,12 +1,11 @@
 package duke;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.IOException;
 
 /**
  * Store and Retrieve tasks from the task list
@@ -59,13 +58,19 @@ public class Storage {
     public static Task generateTask(String taskString) {
         Task task = null;
         String [] arr = taskString.split("\\s+");
+        String tag;
         boolean isCompleted = booleanToString(arr[1]);
         if (arr[0].equals("[D]")) {
             task = generateDeadline(arr,isCompleted);
+            
         } else if (arr[0].equals("[E]")) {
+            tag = arr[4];
             task = new Event(arr[2],isCompleted,arr[3]);
+            task.reTag(tag);
         } else if (arr[0].equals("[T]")) {
+            tag=arr[3];
             task = new Todo(arr[2], isCompleted);
+            task.reTag(tag);
         } else {
             System.out.println("This task cannot be read: " + taskString);
         }
@@ -73,13 +78,16 @@ public class Storage {
     }
     
     private static Deadline generateDeadline(String[] arr, boolean isCompleted) {
-        String deadline = arr[arr.length-2] + " " +arr[arr.length-1];
+        String deadline = arr[arr.length-3] + " " +arr[arr.length-2];
+        String tag = arr[arr.length-1];
         String description = arr[2];
         int i;
         for (i =3 ; i < arr.length-2 ;i++) {
             description += " " + arr[i];
         }
-        return new Deadline(description,isCompleted,deadline);
+        Deadline dLine = new Deadline(description,isCompleted,deadline);
+        dLine.reTag(tag);
+        return dLine;
     }
     
     private static boolean booleanToString (String bool) {

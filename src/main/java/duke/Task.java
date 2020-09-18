@@ -1,14 +1,17 @@
 package duke;
 
 public abstract class Task {
+    private static final String NONE_TAG = "#NONE";
     protected String description;
     protected boolean isDone;
     protected static int total = 0;
+    protected String tag;
 
     public Task(String name, boolean isCompleted) {
         this.description = name;
         this.isDone = isCompleted;
         this.total ++;
+        this.tag = NONE_TAG;
     }
 
 
@@ -55,5 +58,20 @@ public abstract class Task {
         }
         return false;
     }
-
+    
+    public void addTag(String tag) {
+        this.tag = "#" + tag;
+    }
+    
+    public String getTag() {
+        return this.tag;
+    }
+    
+    public void reTag(String tag) {
+        this.tag = tag;
+    }
+    
+    public String displayTag() {
+        return tag.equals(NONE_TAG)? "":tag;
+    }
 }

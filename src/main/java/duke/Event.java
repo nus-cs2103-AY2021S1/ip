@@ -35,7 +35,7 @@ public class Event extends Task{
      * @return the storage of the event as a String
      */
     public String storeFormat() {
-        return String.format("%s %s %s %s",this.getTaskSymbol(),this.isDone(),this.description,this.duration);
+        return String.format("%s %s %s %s %s",this.getTaskSymbol(),this.isDone(),this.description,this.duration,this.getTag());
     }
     
     public String toString () {

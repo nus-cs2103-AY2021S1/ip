@@ -35,6 +35,11 @@ public class Duke{
             return getTaskCompletionMessage(task);
         } 
         
+        if (isAddTagCommand(command)) {
+            addTag(command);
+            return "ok tagged";
+        }
+        
         if (isDeleteCommand(command)){
             if (isInvalidDeleteCommand(command)) {
                 throw new IllegalUserInputException("Please specify the correct argument number");
@@ -193,6 +198,10 @@ public class Duke{
         return command.split("\\s+")[0].equals("delete");
     }
     
+    private boolean isAddTagCommand(String command) {
+        return command.split("\\s+")[0].equals("tag");
+    }
+    
     private boolean isInvalidDeleteCommand(String command) {
         return command.split("\\s+").length != 2;
     }
@@ -206,6 +215,19 @@ public class Duke{
             return userInterface.taskDeletedMessage(task);
         } catch (TaskListError e) {
             return e.getDetails();
+        }
+    }
+    
+    private void addTag(String command) {
+        try {
+            int i = Integer.parseInt(command.split("\\s+")[1]);
+            String tag = command.split("\\s+")[2];
+            Task task = taskList.get(i - 1);
+            task.addTag(tag);
+        } catch (TaskListError e) {
+            System.out.println("Invalid");
+        } catch (Exception e) {
+            System.out.println("Invalid output format");
         }
     }
 }

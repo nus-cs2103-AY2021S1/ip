@@ -1,3 +1,2 @@
-[T] false eat
-[T] true sleep
-[T] false fast
+[T] false eat #boring
+[D] true return book 2019-12-01 13:00 #ffs

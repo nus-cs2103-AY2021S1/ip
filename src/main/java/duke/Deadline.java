@@ -26,8 +26,9 @@ public class Deadline extends Task{
     }
 
     public String storeFormat() {
-        return String.format("%s %s %s %s",this.getTaskSymbol(),this.isDone(),this.description,this.deadline);
+        return String.format("%s %s %s %s %s",this.getTaskSymbol(),this.isDone(),this.description,this.deadline,this.getTag());
     }
+    
     public String toString () {
         return String.format("%s (by: %s %s)",this.description,date.format(DateTimeFormatter.ofPattern("MMM d yyyy")),time.toString());
     }
