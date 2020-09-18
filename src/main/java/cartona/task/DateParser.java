@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 import cartona.exception.InvalidTaskTimeException;
 import cartona.task.TaskDate;
@@ -64,8 +65,9 @@ public class DateParser {
                                     .atTime(LocalTime.parse(dateAndTimes[2],
                                             DateTimeFormatter.ofPattern("HHmm"))));
             }
-        } catch (DateTimeException e) {
-            throw new InvalidTaskTimeException("Date/time formatting error: " + e.getMessage());
+        } catch (DateTimeException | IndexOutOfBoundsException e) {
+            throw new InvalidTaskTimeException("Date/time formatting error: "
+                    + "please enter event dates in the format YYYY/MM/DD HHmm HHmm");
         }
     }
 
@@ -96,9 +98,8 @@ public class DateParser {
      * @throws InvalidTaskTimeException if there is an error in formatting of the date or time.
      */
     public static TaskDate parseDateFromStorage(String storedString) {
-
         LocalDateTime dateTime = LocalDateTime.parse(storedString,
-                                                     DateTimeFormatter.ofPattern("MMM dd yyyy HHmm"));
+                                    DateTimeFormatter.ofPattern("MMM dd yyyy HHmm"));
 
         return new TaskDate(dateTime);
     }

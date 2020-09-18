@@ -27,7 +27,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class CartonaTest {
     @Test
-    public void parserParseCommandTest() {
+    public void parserParseInvalidInputTest() {
         assertThrows(InvalidInputException.class, () -> new Parser().parseCommand("a"));
         assertThrows(InvalidInputException.class, () -> new Parser().parseCommand("add"));
         assertThrows(InvalidInputException.class, () -> new Parser().parseCommand("add "));
@@ -179,6 +179,13 @@ public class CartonaTest {
                 editEventStart.execute(taskList, ui, storage);
                 editEventEnd.execute(taskList, ui, storage);
                 assertEquals(new Event("test4", false, newStart2, newEnd2).toString(),
+                        taskList.getTask(3).toString());
+
+                Command editEventRange = parser.parseCommand("edit 3 /range 2020/10/30 0800 1000");
+                TaskDate newStart3 = DateParser.parseTaskDate("2020/10/30 0800");
+                TaskDate newEnd3 = DateParser.parseTaskDate("2020/10/30 1000");
+                editEventRange.execute(taskList, ui, storage);
+                assertEquals(new Event("test4", false, newStart3, newEnd3).toString(),
                         taskList.getTask(3).toString());
 
             } catch (CartonaException e) {

@@ -92,8 +92,8 @@ public class EditParser {
                 break;
             case ("range"):
                 String rangeString = nextField.substring(6);
-                startDate = DateParser.parseRangeFromStorage(rangeString, true);
-                endDate = DateParser.parseRangeFromStorage(rangeString, false);
+                startDate = DateParser.getRange(rangeString, true);
+                endDate = DateParser.getRange(rangeString, false);
                 break;
             default:
                 throw new InvalidEditFieldException("Error: Unrecognised field name in Event");
