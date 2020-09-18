@@ -68,9 +68,8 @@ public class Parser {
      * @param arr arraylist of current tasks
      * @param ui Ui object used to send replies to user
      * @return response from ui
-     * @throws Exception when ui faces an exception
      */
-    private static String listParser(ArrayList<Task> arr, Ui ui) throws Exception {
+    private static String listParser(ArrayList<Task> arr, Ui ui) {
         if (arr.size() == 0) {
             return ui.respondToEmptyList();
         } else {
@@ -83,9 +82,8 @@ public class Parser {
      * @param command command given by user
      * @param ui Ui object used to send replies to user
      * @return response from ui
-     * @throws Exception when ui faces an exception
      */
-    private static String findParser(String command, Ui ui) throws Exception {
+    private static String findParser(String command, Ui ui) {
         if (command.length() == 4) {
             return ui.respondToFindWrongSyntax();
         } else {

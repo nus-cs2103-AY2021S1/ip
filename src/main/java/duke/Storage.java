@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
-    private String filepath;
-    private File file;
+    private final String filepath;
+    private final File file;
 
     Storage(String path) {
         this.filepath = path;
@@ -27,7 +27,7 @@ public class Storage {
 
     /**
      * Counts the number of lines in the hard disk.
-     * @return int
+     * @return length of lines
      * @throws FileNotFoundException if file is not found
      */
     int lineCounter() throws FileNotFoundException {
@@ -69,7 +69,7 @@ public class Storage {
                     String task = s.nextLine();
                     String[] splits = task.split(" ");
                     String name = splits[1];
-                    Character icon = splits[0].charAt(4);
+                    char icon = splits[0].charAt(4);
                     if (task.charAt(1) == 'T') {
                         Todo t = new Todo(name);
                         if (icon == '1') {
