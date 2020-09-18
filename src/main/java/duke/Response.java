@@ -56,7 +56,13 @@ public class Response {
         this.tasks = tasks;
         this.tag = tag;
     }
-    
+
+    /**
+     * Creates the response after receiving command to list the notes.
+     *
+     * @param notes notes to be listed.
+     * @param tag   the tag of the command.
+     */
     public Response(Note[] notes, Tag tag) {
         this.notes = notes;
         this.tag = tag;

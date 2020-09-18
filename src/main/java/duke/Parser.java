@@ -3,7 +3,17 @@ package duke;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
-import duke.command.*;
+import duke.command.AddCommand;
+import duke.command.AddNoteCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DeleteNoteCommand;
+import duke.command.DescriptionCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.ListNoteCommand;
 import duke.note.Note;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -35,9 +45,9 @@ public class Parser {
         if (fullCommand.equals("listnote")) {
             return new ListNoteCommand();
         }
-        
+
         String[] test = fullCommand.split(" ");
-        
+
         // a note input
         if (test[0].equals("note")) {
             if (test.length == 1) {
@@ -54,7 +64,7 @@ public class Parser {
             Note note = new Note(title, description);
             return new AddNoteCommand(note);
         }
-        
+
         // a delete note input
         if (test[0].equals("delnote")) {
             if (test.length == 1) {
@@ -64,7 +74,7 @@ public class Parser {
             assert idx > 0 : "Index is not valid! ";
             return new DeleteNoteCommand(idx);
         }
-        
+
         // a description input
         if (test[0].equals("description")) {
             if (test.length == 1) {

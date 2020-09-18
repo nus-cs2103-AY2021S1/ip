@@ -65,7 +65,14 @@ public class Ui {
         Response msg = new Response(new Task[]{task}, Response.Tag.ADD, tasks.size());
         return msg.getResponse();
     }
-    
+
+    /**
+     * Returns a string of add note message.
+     *
+     * @param note  The note to be added.
+     * @param tasks The note list.
+     * @return the string of add note message.
+     */
     public String showAddNoteMessage(Note note, TaskList tasks) {
         return "     "
                 + "Got it. I've added this note: \n"
@@ -81,12 +88,20 @@ public class Ui {
      *
      * @param task  The task to be deleted.
      * @param tasks The task list.
+     * @return the string of the task delete message.
      */
     public String showDeleteMessage(Task task, TaskList tasks) {
         Response msg = new Response(new Task[]{task}, Response.Tag.REMOVE, tasks.size());
         return msg.getResponse();
     }
 
+    /**
+     * Returns a string of the message of deleting a note.
+     *
+     * @param note  The note to be deleted.
+     * @param tasks The note list.
+     * @return the string of the note delete message.
+     */
     public String showDeleteNoteMessage(Note note, TaskList tasks) {
         return "     "
                 + "Got it. I've removed this note: \n"
@@ -96,7 +111,7 @@ public class Ui {
                 + "     "
                 + String.format("Now you have %d notes in the list. \n", tasks.noteSize());
     }
-    
+
     /**
      * Returns a list of the tasks.
      *
@@ -106,7 +121,13 @@ public class Ui {
         Response list = new Response(tasks.getArray(), Response.Tag.LIST);
         return list.getResponse();
     }
-    
+
+    /**
+     * Returns a list of notes.
+     *
+     * @param tasks the note list.
+     * @return
+     */
     public String listNotes(TaskList tasks) {
         Response list = new Response(tasks.getNotesArray(), Response.Tag.LISTNOTES);
         return list.getResponse();

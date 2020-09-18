@@ -12,11 +12,20 @@ public class TaskList {
     private ArrayList<Task> tasks;
     private ArrayList<Note> notes;
 
+    /**
+     * Creates a task and note lists with an array list of tasks and an array list of notes.
+     *
+     * @param tasks an array list of tasks
+     * @param notes an array list of notes
+     */
     public TaskList(ArrayList<Task> tasks, ArrayList<Note> notes) {
         this.tasks = tasks;
         this.notes = notes;
     }
 
+    /**
+     * Creates a task list with empty lists of tasks and notes.
+     */
     public TaskList() {
         this.tasks = new ArrayList<Task>();
         this.notes = new ArrayList<Note>();
@@ -30,11 +39,21 @@ public class TaskList {
     public void add(Task task) {
         tasks.add(task);
     }
-    
+
+    /**
+     * Adds a note to the note list.
+     *
+     * @param note The note to be added.
+     */
     public void addNote(Note note) {
         notes.add(note);
     }
-    
+
+    /**
+     * Delete a note from the note list.
+     *
+     * @param idx The index of the note to be deleted.
+     */
     public void deleteNote(int idx) {
         notes.remove(idx);
     }
@@ -57,7 +76,13 @@ public class TaskList {
     public Task get(int idx) {
         return tasks.get(idx);
     }
-    
+
+    /**
+     * Gets the note of the index.
+     *
+     * @param idx The index of the note.
+     * @return the note requested.
+     */
     public Note getNote(int idx) {
         return notes.get(idx);
     }
@@ -70,7 +95,12 @@ public class TaskList {
     public Task[] getArray() {
         return this.tasks.toArray(new Task[0]);
     }
-    
+
+    /**
+     * Gets the array of the notes.
+     *
+     * @return an array of the notes.
+     */
     public Note[] getNotesArray() {
         return this.notes.toArray(new Note[0]);
     }
@@ -104,7 +134,12 @@ public class TaskList {
         }
         return list;
     }
-    
+
+    /**
+     * Returns the string of the list of notes.
+     *
+     * @return The string of the list of notes.
+     */
     public String getNoteList() {
         String list = "";
         for (int i = 0; i < notes.size(); i++) {
@@ -122,7 +157,12 @@ public class TaskList {
     public int size() {
         return this.tasks.size();
     }
-    
+
+    /**
+     * Gets the size of the note list.
+     *
+     * @return the size of the note list.
+     */
     public int noteSize() {
         return this.notes.size();
     }

@@ -21,6 +21,12 @@ public class Storage {
     private File file;
     private File notefile;
 
+    /**
+     * Creates a storage that stores the tasks and notes.
+     *
+     * @param filePath     file path for task file.
+     * @param noteFilePath file path for note file.
+     */
     public Storage(String filePath, String noteFilePath) {
         this.file = new File(filePath);
         this.notefile = new File(noteFilePath);
@@ -67,10 +73,16 @@ public class Storage {
         }
         return tasks;
     }
-    
+
+    /**
+     * Returns an array list of notes from the note list.
+     *
+     * @return an array list of notes.
+     * @throws DukeException
+     */
     public ArrayList<Note> loadNotes() throws DukeException {
         ArrayList<Note> notes = new ArrayList<Note>();
-        try{
+        try {
             Scanner s = new Scanner(this.notefile);
             while (s.hasNext()) {
                 String line = s.nextLine();
@@ -79,12 +91,17 @@ public class Storage {
                 notes.add(n);
             }
         } catch (FileNotFoundException e) {
-            throw new DukeException("Folder or file does not exist yet! " 
+            throw new DukeException("Folder or file does not exist yet! "
                     + "Please make sure you have data/notes.txt in ip directory. ");
         }
         return notes;
     }
-    
+
+    /**
+     * Writes the notes in to the note list file.
+     *
+     * @param tasks The note list.
+     */
     public void writeNoteFile(TaskList tasks) {
         try {
             FileWriter fw = new FileWriter(this.notefile);

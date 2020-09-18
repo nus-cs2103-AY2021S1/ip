@@ -30,7 +30,7 @@ public class ParserTest {
         } catch (DukeException e) {
             assertEquals("Format of date and time is incorrect! "
                             + "Please fill in the date and time following the format below. \n"
-                            + "       YYYY-MM-DDTHH:MM:SS",
+                            + "       YYYY-MM-DDTHH:MM",
                     e.getMessage());
         }
     }

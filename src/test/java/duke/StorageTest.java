@@ -12,14 +12,14 @@ import duke.task.Todo;
 public class StorageTest {
     @Test
     public void testSaveAndLoad() throws DukeException {
-        Storage s = new Storage("storageTest.txt");
+        Storage s = new Storage("storageTaskTest.txt", "storageNoteTest.txt");
         TaskList tasks = new TaskList();
         tasks.add(new Todo("buy a gift"));
         tasks.add(new Deadline("ask her out", LocalDateTime.parse("2020-10-08T21:00")));
         tasks.get(1).markDone();
         s.writeFile(tasks);
 
-        TaskList loadedTasks = new TaskList(s.load());
+        TaskList loadedTasks = new TaskList(s.load(), s.loadNotes());
         assertEquals(tasks, loadedTasks);
     }
 }
