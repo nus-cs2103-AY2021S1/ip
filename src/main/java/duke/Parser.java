@@ -1,9 +1,11 @@
 package duke;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 import duke.command.AddCommand;
+import duke.command.ClearCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
@@ -44,15 +46,17 @@ public class Parser {
                 String[] splitDeadline = splitCommand[1].split(" /by ", 2);
 
                 description = splitDeadline[0];
-                LocalDate dueDate = LocalDate.parse(splitDeadline[1]);
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                LocalDate dueDate = LocalDate.parse(splitDeadline[1], formatter);
                 Deadline deadline = new Deadline(description, dueDate);
                 return new AddCommand(deadline);
             case "EVENT":
                 // Split into description and event date
-                String[] splitEvent = splitCommand[1].split(" /at ", 2);
+                String[] splitEvent = splitCommand[1].split(" /on ", 2);
 
                 description = splitEvent[0];
-                LocalDate eventDate = LocalDate.parse(splitEvent[1]);
+                formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                LocalDate eventDate = LocalDate.parse(splitEvent[1], formatter);
                 Event event = new Event(description, eventDate);
                 return new AddCommand(event);
             case "DELETE":
@@ -68,6 +72,8 @@ public class Parser {
                 return new DoneCommand(taskNum);
             case "BYE":
                 return new ExitCommand();
+            case "CLEAR":
+                return new ClearCommand();
             default:
                 throw new IllegalArgumentException();
             }

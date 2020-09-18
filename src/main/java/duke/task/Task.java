@@ -26,7 +26,7 @@ public class Task {
      * @return '1' if the task is done or '0' if the task is not done.
      */
     public String getStatusIcon() {
-        return (isDone ? "1" : "0");
+        return (isDone ? "\u2713" : "\u2718");
     }
 
     /**
@@ -53,6 +53,6 @@ public class Task {
      */
     @Override
     public String toString() {
-        return "[" + getStatusIcon() + "] " + description;
+        return description;
     }
 }

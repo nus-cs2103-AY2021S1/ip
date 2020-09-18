@@ -46,7 +46,7 @@ public class Ui {
      * @return the welcome message.
      */
     public String generateWelcomeMessage() {
-        return "Hello! I'm Duke\n" + "What can I do for you?";
+        return "Duke here! How can I help?";
     }
 
     /**
@@ -55,7 +55,7 @@ public class Ui {
      * @return the farewell message.
      */
     public String generateExitMessage() {
-        return "Bye. I hope to see you again soon!";
+        return "Take care, see you soon!";
     }
 
     /**
@@ -94,8 +94,8 @@ public class Ui {
      * @return the generated message.
      */
     public String generateAddedMessage(Task task, TaskList tasks) {
-        return "Task added successfully!\n\t"
-                + task + generateNumOfTasksMessage(tasks);
+        return "Task added successfully!\n\n"
+                + task + "\n\n" + generateNumOfTasksMessage(tasks);
     }
 
     /**
@@ -105,7 +105,7 @@ public class Ui {
      * @return the generated message.
      */
     public String generateDoneMessage(Task task) {
-        return "Task completed successfully!\n\t" + task;
+        return "Task completed successfully!\n\n" + task;
     }
 
     /**
@@ -117,8 +117,8 @@ public class Ui {
      * @return the generated message.
      */
     public String generateDeletedMessage(Task task, TaskList tasks) {
-        return "Task deleted successfully!\n\t"
-                + task + generateNumOfTasksMessage(tasks);
+        return "Task deleted successfully!\n\n"
+                + task + "\n\n" + generateNumOfTasksMessage(tasks);
     }
 
     /**
@@ -128,7 +128,7 @@ public class Ui {
      * @return the generated message.
      */
     public String generateNumOfTasksMessage(TaskList tasks) {
-        return String.format("\nNow you have %d task(s) in the list.",
+        return String.format("Now you have %d task(s) in the list.",
                 tasks.getNumOfTasks());
     }
 
@@ -146,11 +146,20 @@ public class Ui {
      * Generates a message that a task was not added into the list
      * because a duplicate was detected.
      *
-     * @param task the task that was not successfully added
-     * @return the generated message
+     * @param task the task that was not successfully added.
+     * @return the generated message.
      */
     public String generateDuplicateMessage(Task task) {
-        return "The following task was not added as a duplicate was detected:\n"
+        return "The following task was not added as a duplicate was detected:\n\n"
                 + task;
+    }
+
+    /**
+     * Generates a message that the task list has been cleared.
+     *
+     * @return the generated message.
+     */
+    public String generateClearedMessage() {
+        return "All your tasks have been cleared!";
     }
 }

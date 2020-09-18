@@ -105,6 +105,13 @@ public class TaskList {
     }
 
     /**
+     * Clears all the tasks in the list.
+     */
+    public void clearTasks() {
+        tasks.clear();
+    }
+
+    /**
      * Retrieves a specific task from the task list.
      *
      * @param taskNum the number of the task to be retrieved.
@@ -135,7 +142,7 @@ public class TaskList {
         StringBuilder allTasks = new StringBuilder();
         for (int i = 1; i <= tasks.size(); i++) {
             int index = i - 1;
-            allTasks.append("\n").append(i).append(".").append(tasks.get(index));
+            allTasks.append("\n").append(i).append(".\t").append(tasks.get(index));
         }
         return allTasks.toString();
     }

@@ -29,7 +29,7 @@ public class Event extends Task {
      */
     public static Event load(String eventDetails) {
         // Split into type of task, status, description and event date
-        String[] splitEventDetails = eventDetails.split("\\|", 4);
+        String[] splitEventDetails = eventDetails.split("\\| ", 4);
 
         String status = splitEventDetails[1];
         String description = splitEventDetails[2];
@@ -80,7 +80,8 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + eventDate.format(
-                DateTimeFormatter.ofPattern("d MMM yyyy")) + ")";
+        return "[" + getStatusIcon() + "] Event - " + super.toString()
+                + " (on: " + eventDate.format(
+                        DateTimeFormatter.ofPattern("d MMM yyyy")) + ")";
     }
 }

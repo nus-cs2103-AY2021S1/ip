@@ -80,7 +80,8 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + dueDate.format(
-                DateTimeFormatter.ofPattern("d MMM yyyy")) + ")";
+        return "[" + getStatusIcon() + "] Deadline - " + super.toString()
+                + " (by: " + dueDate.format(
+                        DateTimeFormatter.ofPattern("d MMM yyyy")) + ")";
     }
 }
