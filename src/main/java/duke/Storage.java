@@ -17,6 +17,8 @@ import java.io.IOException;
 public class Storage {
     private static int globalIndex = 1;
     private int DONE_SYMBOL = 1;
+    private final String tempFilePath = "storage" + File.separator + "temp.txt";
+    private final String oldFilePath = "storage" + File.separator + "data.txt";
 
     /**
      * Creates an instance of a Storage.
@@ -109,7 +111,7 @@ public class Storage {
             System.out.println(e.getMessage());
         }
     }
-
+    
     /**
      * Removes a specific task from file containing stored tasks.
      * 
@@ -119,17 +121,15 @@ public class Storage {
         assert !(taskIndex <= 0) : "Task index is invalid";
         try {
             int index = 1;
-            String tempFilePath = "storage" + File.separator + "temp.txt";
-            String oldFilePath = "storage" + File.separator + "data.txt";
             File tempFile = new File(tempFilePath);
             FileReader fr = new FileReader(oldFilePath);
             BufferedReader br = new BufferedReader(fr);
+            
             String currentLine;
-            String[] task;
             FileWriter fw = new FileWriter(tempFile, true);
-
+            
             while ((currentLine = br.readLine()) != null) {
-                task = currentLine.split("\\|");
+                String[] task = currentLine.split("\\|");
                 if (Integer.parseInt(task[0]) != taskIndex) {
                     fw.write(index + "|" + task[1] + "|" + task[2] + "|" + task[3] + "\n");
                     index++;
@@ -155,17 +155,14 @@ public class Storage {
     public void overwriteInFile(int taskIndex) {
         assert !(taskIndex <= 0) : "Task index is invalid";
         try {
-            String tempFilePath = "storage" + File.separator + "temp.txt";
-            String oldFilePath = "storage" + File.separator + "data.txt";
             File tempFile = new File(tempFilePath);
             FileReader fr = new FileReader(oldFilePath);
             BufferedReader br = new BufferedReader(fr);
             String currentLine;
-            String[] task;
             FileWriter fw = new FileWriter(tempFile, true);
 
             while ((currentLine = br.readLine()) != null) {
-                task = currentLine.split("\\|");
+                String[] task = currentLine.split("\\|");
                 if (Integer.parseInt(task[0]) != taskIndex) {
                     fw.write(currentLine + "\n");
                 } else {
