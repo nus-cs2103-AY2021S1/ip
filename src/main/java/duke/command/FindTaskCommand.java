@@ -5,14 +5,32 @@ import duke.Ui;
 import duke.exception.NoMatchFoundException;
 import duke.task.Task;
 
+/**
+ * Represents a FindTaskCommand
+ */
 public class FindTaskCommand extends Command {
+
+    /**
+     * Keyword to match task descriptions to.
+     */
     protected String keyword;
 
+    /**
+     * Creates a FindTaskCommand object.
+     * @param keyword Keyword to be matched.
+     */
     public FindTaskCommand(String keyword) {
         super(CommandType.FINDTASK);
         this.keyword = keyword.toLowerCase();
     }
 
+    /**
+     * Executes a find task command.
+     * @param ui Ui associated with the command.
+     * @param taskList Task list associated with the command.
+     * @return List of tasks that match the keyword.
+     * @throws NoMatchFoundException For when no matches are found.
+     */
     @Override
     public String execute(Ui ui, TaskList taskList) throws NoMatchFoundException {
         boolean hasMatch = false;

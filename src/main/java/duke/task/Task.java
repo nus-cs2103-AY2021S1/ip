@@ -1,17 +1,31 @@
 package duke.task;
 
 /**
- * Supports creation of duke.task.Task objects and duke.task.Task actions.
+ * Supports creation of Task objects and Task actions.
  */
 public class Task {
+    /**
+     * The description of the task.
+     */
     protected String description;
+
+    /**
+     * Whether the task is done or not.
+     */
     protected boolean isDone;
+
+    /**
+     * The type of task.
+     */
     protected TaskType taskType;
+
+    /**
+     * The priority level of the task.
+     */
     protected PriorityLevel priorityLevel;
 
     /**
-     * Creates a duke.task.Task object
-     *
+     * Creates a Task object
      * @param description  Description of task.
      * @param taskType Type of task.
      */
@@ -25,7 +39,6 @@ public class Task {
     /**
      * Creates a duke.task.Task object with extra parameter that defines whether
      * task is done or not.
-     *
      * @param description Description of task.
      * @param taskType Type of task.
      * @param isDone Whether task is done or not.
@@ -39,7 +52,6 @@ public class Task {
 
     /**
      * Returns a tick if isDone is true and a cross otherwise.
-     *
      * @return Either a tick or cross.
      */
     public String getStatusIcon() {
@@ -48,7 +60,6 @@ public class Task {
 
     /**
      * Returns the description of the task.
-     *
      * @return Description of task.
      */
     public String getDescription() {
@@ -64,30 +75,40 @@ public class Task {
 
     /**
      * Checks if task is done or not.
-     *
      * @return Either true or false.
      */
-    public boolean isDone(){
+    public boolean isDone() {
         return this.isDone;
     }
 
     /**
      * Returns the type of task.
-     *
      * @return Type of task.
      */
     public TaskType getTaskType() {
         return taskType;
     }
 
+    /**
+     * Returns the priority level.
+     * @return Priority level.
+     */
     public PriorityLevel getPriorityLevel() {
         return this.priorityLevel;
     }
 
+    /**
+     * Assigns a priority level to the task
+     * @param priorityLevel Priority level of the task
+     */
     public void setPriorityLevel(PriorityLevel priorityLevel) {
         this.priorityLevel = priorityLevel;
     }
 
+    /**
+     * Builds a string in a format that can be saved.
+     * @return Formatted string for saving.
+     */
     public String buildSaveString() {
         String type = "";
         switch (this.taskType) {
@@ -123,9 +144,8 @@ public class Task {
     }
 
     /**
-     * Returns string representation of the duke.task.Task object.
-     *
-     * @return String representation of the duke.task.Task object.
+     * Returns string representation of the Task object.
+     * @return String representation of the Task object.
      */
     @Override
     public String toString() {

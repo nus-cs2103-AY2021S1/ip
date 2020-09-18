@@ -6,14 +6,22 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
 /**
- * Supports the creation of duke.task.Deadline objects.
+ * Supports the creation of Deadline objects.
  */
 public class Deadline extends Task {
+
+    /**
+     * The date of the deadline.
+     */
     protected LocalDate date;
+
+    /**
+     * The time of the deadline.
+     */
     protected LocalTime time;
 
     /**
-     * Creates a duke.task.Deadline object
+     * Creates a Deadline object.
      * @param description Description of task.
      * @param dateAndTime Date and time of the task.
      * @param taskType Type of task.
@@ -33,7 +41,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Creates a duke.task.Deadline object with extra parameters that defines date and time separately, and whether
+     * Creates a Deadline object with extra parameters that defines date and time separately, and whether
      * task is done or not.
      * @param description Description of task.
      * @param taskType Type of task.
@@ -47,15 +55,18 @@ public class Deadline extends Task {
         this.time = time;
     }
 
+    /**
+     * Adds the necessary formatting for a Deadline.
+     * @return Formatted string for saving.
+     */
     @Override
     public String buildSaveString() {
         return super.buildSaveString() + "/" + this.date + " " + this.time;
     }
 
     /**
-     * Returns string representation of the duke.task.Deadline object.
-     *
-     * @return String representation of the duke.task.Deadline object.
+     * Returns string representation of the Deadline object.
+     * @return String representation of the Deadline object.
      */
     @Override
     public String toString() {

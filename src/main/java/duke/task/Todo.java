@@ -1,12 +1,12 @@
 package duke.task;
 
 /**
- * Supports the creation of duke.task.Todo objects.
+ * Supports the creation of Todo objects.
  */
 public class Todo extends Task {
 
     /**
-     * Creates a duke.task.Todo object
+     * Creates a Todo object
      * @param description Description of task.
      * @param taskType Type of task.
      */
@@ -15,7 +15,7 @@ public class Todo extends Task {
     }
 
     /**
-     * Creates a duke.task.Todo object with extra parameter that defines whether
+     * Creates a Todo object with extra parameter that defines whether
      * task is done or not.
      * @param description Description of task.
      * @param taskType Type of task.
@@ -26,9 +26,8 @@ public class Todo extends Task {
     }
 
     /**
-     * Returns string representation of the duke.task.Todo object.
-     *
-     * @return String representation of the duke.task.Todo object.
+     * Returns string representation of the Todo object.
+     * @return String representation of the Todo object.
      */
     @Override
     public String toString() {

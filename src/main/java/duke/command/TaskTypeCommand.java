@@ -6,18 +6,40 @@ import duke.Ui;
 import duke.exception.InvalidTaskTypeException;
 import duke.task.TaskType;
 
+/**
+ * Represents a TaskTypeCommand.
+ */
 public class TaskTypeCommand extends Command {
+
+    /**
+     * Type of task.
+     */
     protected TaskType taskType;
 
+    /**
+     * Creates a TaskTypeCommand object.
+     * @param taskType Type of task.
+     */
     public TaskTypeCommand(TaskType taskType) {
         super(CommandType.TASKTYPE, ImageType.PENDING);
         this.taskType = taskType;
     }
 
+    /**
+     * Returns the type of task.
+     * @return Type of task.
+     */
     public TaskType getTaskType() {
         return taskType;
     }
 
+    /**
+     * Executes a task type command
+     * @param ui Ui associated with the command.
+     * @param taskList Task list associated with the command.
+     * @return Prompt for user to enter a task description including format examples where needed.
+     * @throws InvalidTaskTypeException For when the user enters an invalid task type.
+     */
     @Override
     public String execute(Ui ui, TaskList taskList) throws InvalidTaskTypeException {
         switch (taskType) {

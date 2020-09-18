@@ -6,15 +6,27 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
 /**
- * Supports the creation of duke.task.Event objects.
+ * Supports the creation of Event objects.
  */
 public class Event extends Task {
+
+    /**
+     * The date of the event.
+     */
     protected LocalDate date;
+
+    /**
+     * The time the event starts.
+     */
     protected LocalTime timeStart;
+
+    /**
+     * The time the event ends.
+     */
     protected LocalTime timeEnd;
 
     /**
-     * Creates an duke.task.Event object
+     * Creates an Event object
      * @param description Description of task.
      * @param dateAndTime Date and time of the task.
      * @param taskType Type of task.
@@ -40,7 +52,7 @@ public class Event extends Task {
     }
 
     /**
-     * Creates an duke.task.Event object with extra parameters that defines date and time separately, and whether
+     * Creates an Event object with extra parameters that defines date and time separately, and whether
      * task is done or not.
      * @param description Description of task.
      * @param taskType Type of task.
@@ -56,15 +68,18 @@ public class Event extends Task {
         this.timeEnd = timeEnd;
     }
 
+    /**
+     * Adds the necessary formatting for a Event.
+     * @return Formatted string for saving.
+     */
     @Override
     public String buildSaveString() {
         return super.buildSaveString() + "/" + this.date + " " + this.timeStart + "-" + this.timeEnd;
     }
 
     /**
-     * Returns string representation of the duke.task.Event object.
-     *
-     * @return String representation of the duke.task.Event object.
+     * Returns string representation of the Event object.
+     * @return String representation of the Event object.
      */
     @Override
     public String toString() {
