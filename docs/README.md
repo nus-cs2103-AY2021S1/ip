@@ -1,24 +1,20 @@
 # User Guide
+#CS2103
+
+![](User%20Guide/A4554726-F70E-4519-9B93-6C050A8DBC08.png)
 
 ## Features 
 The DukeBot can help you manage your tasks conveniently. There are 3 tasks for you to choose from:
 * Deadline (by a time)
-* Event (at a time or can happen in a period)
+* Event (at a time or can happen in a period of time)
 * Todo
-
-You can also list all the task you are having, mark them as done or delete them. 
-
-All of your data will also be stored and load again next time you start the app!
+You can also mark tasks as done or delete them. All of your data will also be stored and load again next time you start the app!
 
 ## Usage
-**Note** All time can be in any of the following format :
+**Note:** All time can be in any of the following format :
 ```
-"yyyy-MM-dd"
-"dd-MM-yyyy"
-"yyyy/MM/dd"
-"dd/MM/yyyy"
-"MMM d yyyy"
-"d MMM yyyy"
+"yyyy-MM-dd", "dd-MM-yyyy", "yyyy/MM/dd", "dd/MM/yyyy",
+    "MMM d yyyy", "d MMM yyyy"
 ```
 
 ### `event <description> /at <time>` 
@@ -35,7 +31,7 @@ Now you have 2 tasks in the list.
 ```
 
 ### `event <description> /between <time> and <time>` 
-Add an event that will happen at in a period
+Add an event that will happen at in a period of time
 
 Example of usage: 
 `event Roland Garros /between 09/06/2019 and 09/08/2019`
@@ -72,6 +68,7 @@ Got it. I've added this task:
 [T][✗] return book
 Now you have 3 tasks in the list.
 ```
+
 
 ### `list` 
 List all tasks you are having
