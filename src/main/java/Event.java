@@ -10,21 +10,29 @@ public class Event extends Task {
 
     public Event(String description, String at) {
         super(description);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yy-M-d H:mm");
         try {
-            this.atTime = LocalDateTime.parse(at, formatter);
-        } catch (DateTimeParseException e) {
-            System.out.println("Cannot parse event time.");
+            this.atTime = LocalDateTime.parse(at, formatter1);
+        } catch (DateTimeParseException e1) {
+            try {
+                this.atTime = LocalDateTime.parse(at, formatter2);
+            } catch (DateTimeParseException e2) {
+                System.out.println("Cannot parse event time:");
+                System.out.println(at);
+            }
         }
     }
 
     public Event(String description, boolean isDone, String at) {
         super(description, isDone);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yy-M-d H:mm");
         try {
-            this.atTime = LocalDateTime.parse(at, formatter);
-        } catch (DateTimeParseException e) {
-            System.out.println("Cannot parse event time, time set as null.");
+            this.atTime = LocalDateTime.parse(at, formatter1);
+        } catch (DateTimeParseException e1) {
+            try {
+                this.atTime = LocalDateTime.parse(at, formatter2);
+            } catch (DateTimeParseException e2) {
+                System.out.println("Cannot parse event time:");
+                System.out.println(at);
+            }
         }
     }
 

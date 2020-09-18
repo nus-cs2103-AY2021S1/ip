@@ -28,15 +28,15 @@ public class TaskParser {
         case "[D]": {
             int position = rest.indexOf("(by: ");
             String description = rest.substring(0, position - 1);
-            String by = rest.substring(position + 4, rest.length() - 1);
+            String by = rest.substring(position + 5, rest.length() - 1);
             result = new Deadline(description, isDone, by);
             break;
         }
         case "[E]": {
             int position = rest.indexOf("(at: ");
             String description = rest.substring(0, position - 1);
-            String at = rest.substring(position + 4, rest.length() - 1);
-            result = new Deadline(description, isDone, at);
+            String at = rest.substring(position + 5, rest.length() - 1);
+            result = new Event(description, isDone, at);
             break;
         }
         default: {

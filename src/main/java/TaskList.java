@@ -28,7 +28,7 @@ public class TaskList {
      * @param index - position of newTask after inserting
      */
     public void addTask(Task newTask, int index) {
-        if (index == -1) {
+        if (index == -1 || index > size()) {
             index = size();
         }
         tasks.add(index, newTask);

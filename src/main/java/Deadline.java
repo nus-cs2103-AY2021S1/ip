@@ -12,19 +12,28 @@ public class Deadline extends Task {
         super(description);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yy-M-d H:mm");
         try {
-            this.byTime = LocalDateTime.parse(by, formatter);
-        } catch (DateTimeParseException e) {
-            System.out.println("Cannot parse deadline time.");
+            this.byTime = LocalDateTime.parse(by, formatter1);
+        } catch (DateTimeParseException e1) {
+            try {
+                this.byTime = LocalDateTime.parse(by, formatter2);
+            } catch (DateTimeParseException e2) {
+                System.out.println("Cannot parse event time:");
+                System.out.println(by);
+            }
         }
     }
 
     public Deadline(String description, boolean isDone, String by) {
         super(description, isDone);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yy-M-d H:mm");
         try {
-            this.byTime = LocalDateTime.parse(by, formatter);
-        } catch (DateTimeParseException e) {
-            System.out.println("Cannot parse deadline time, time set as null.");
+            this.byTime = LocalDateTime.parse(by, formatter1);
+        } catch (DateTimeParseException e1) {
+            try {
+                this.byTime = LocalDateTime.parse(by, formatter2);
+            } catch (DateTimeParseException e2) {
+                System.out.println("Cannot parse event time:");
+                System.out.println(by);
+            }
         }
     }
 

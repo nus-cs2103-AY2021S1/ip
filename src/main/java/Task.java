@@ -1,7 +1,12 @@
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+
 /**
  * Class to handle fields and functions universal to all task types
  */
 public class Task {
+    protected DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yy-M-d H:mm");
+    protected DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
     protected String description;
     private boolean isDone;
 
