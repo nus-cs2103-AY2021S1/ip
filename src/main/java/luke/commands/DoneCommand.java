@@ -30,7 +30,7 @@ public class DoneCommand extends Command {
             Task doneTask = tasks.doTask(this.taskNumber);
             storage.save(tasks);
             return ui.showDoneResult(doneTask);
-        } catch (IndexOutOfBoundsException e) {
+        } catch (NullPointerException e) {
             throw new LukeIndexOutOfBoundsException(String.valueOf(this.taskNumber));
         }
     }

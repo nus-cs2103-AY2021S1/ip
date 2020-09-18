@@ -30,7 +30,7 @@ public class DeleteCommand extends Command {
             Task deletedTask = tasks.deleteTask(this.taskNumber);
             storage.save(tasks);
             return ui.showDeleteResult(deletedTask, tasks.getSize());
-        } catch (IndexOutOfBoundsException e) {
+        } catch (NullPointerException e) {
             throw new LukeIndexOutOfBoundsException(String.valueOf(this.taskNumber + 1));
         }
     }

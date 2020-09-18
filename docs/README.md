@@ -19,11 +19,7 @@ Luke is the **go-to desktop app for managing tasks, deadlines, and events**. Opt
 
 3. Copy the file to the folder you want to use as the home folder for your `Luke`.
 
-4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.
-
-<p align="center">
-  <img src="https://github.com/gsmoon97/luke/blob/master/docs/Welcome.png" alt="Welcome GUI" width="300"/>
-</p>
+4. Double-click the file to start the app. The GUI with a welcome message from Luke should appear in a few seconds.
 
 5. Type the command in the command box and press Enter to execute it. 
 e.g. typing `list` and pressing Enter will list out the current tasks.
@@ -40,13 +36,13 @@ Some example commands you can try:
 6. Refer to the Features below for details of each command.
 
 ## Features
->  :information_source: Notes about the command format:
+> Notes about the command format:
 >
 > * Words in UPPER_CASE are the parameters to be supplied by the user.
->e.g. in `todo DESCRIPTION`, `DESCRIPTION` is a parameter which can be used as `todo eat fried chicken`.
+>   e.g. in `todo DESCRIPTION`, `DESCRIPTION` is a parameter which can be used as `todo eat fried chicken`.
 >
 > * `DATE` parameter must be provided in the following format : `YYYY-MM-DD` 
->eg. 2020-02-02
+>   eg. 2020-02-02
 
 ### Adding new tasks : `todo`
 Adds a new task to the current list.
