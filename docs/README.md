@@ -167,7 +167,7 @@ Example of usage:
 
 Expected outcome:
 
-![update1EO](./UG%20images/update 1 EO.png)
+![update1EO](./UG%20images/update%201%20EO.png)
 
 
 ## 3.4.2 Updating a task's date/time
@@ -192,7 +192,7 @@ Example of usage:
 
 Expected outcome:
 
-![update2EO](./UG%20images/update 2 EO.png)
+![update2EO](./UG%20images/update%202%20EO.png)
 
 
 ## 3.4.3 Updating a task's description and date/time
@@ -218,7 +218,7 @@ Example of usage:
 
 Expected outcome:
 
-![update3EO](./UG%20images/update 3 EO.png)
+![update3EO](./UG%20images/update%203%20EO.png)
 
 
 
