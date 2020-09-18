@@ -1,14 +1,14 @@
 package duke;
 
 public class Duke {
-    private Storage s;
+    private final Storage s;
     private TaskList tasks;
     private Ui ui;
 
     /**
      * Creates a Duke class
-     * @param filePath
-     * @throws Exception
+     * @param filePath file path of the hard disk
+     * @throws Exception when s.create faces an exception
      */
     public Duke(String filePath) throws Exception {
 
@@ -24,12 +24,17 @@ public class Duke {
 
     /**
      * Runs the whole program.
-     * @throws Exception
      */
     public void run() {
         ui.start();
     }
 
+    /**
+     * Runs the command given by the user
+     * @param command user input
+     * @return String of Duke's reply
+     * @throws Exception when processCommand can't parse the command
+     */
     public String runCommand(String command) throws Exception {
         return Parser.processCommand(command, tasks, ui);
     }

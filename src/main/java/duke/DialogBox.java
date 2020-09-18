@@ -49,10 +49,22 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * To set up the user dialog everytime a user sends a command
+     * @param text user input
+     * @param img picture of user
+     * @return DialogBox object
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * To set up the duke dialog everytime duke replies
+     * @param text duke replies
+     * @param img picture of duke
+     * @return DialogBox object
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

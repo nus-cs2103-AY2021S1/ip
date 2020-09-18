@@ -9,11 +9,10 @@ public class Parser {
 
     /**
      * Processes all the commands given by the user and triggers functions correspondingly.
-     *
      * @param command command given by the user
      * @param tl the TaskList object defined in Duke.
      * @param ui the Ui object defined in Duke.
-     * @throws Exception
+     * @throws Exception when ui faces an exception
      */
     public static String processCommand(String command, TaskList tl, Ui ui) throws Exception {
         int indexOfSlash = command.indexOf('/');
@@ -33,7 +32,7 @@ public class Parser {
      * @param arr arraylist of current tasks
      * @param indexOfSlash index of '/' given in command
      * @param ui the ui object used to send replies to the user
-     * @return String
+     * @return response from ui
      * @throws Exception exception given by listParser
      */
     private static String parseCommand(String command, ArrayList<Task> arr, int indexOfSlash, Ui ui) throws Exception {
@@ -67,9 +66,9 @@ public class Parser {
     /**
      * Parses the list command and responds accordingly using the ui
      * @param arr arraylist of current tasks
-     * @param ui ui used to send replies to user
-     * @return String
-     * @throws Exception
+     * @param ui Ui object used to send replies to user
+     * @return response from ui
+     * @throws Exception when ui faces an exception
      */
     private static String listParser(ArrayList<Task> arr, Ui ui) throws Exception {
         if (arr.size() == 0) {
@@ -82,9 +81,9 @@ public class Parser {
     /**
      * Parses the find command and responds accordingly using the ui
      * @param command command given by user
-     * @param ui ui used to send replies to user
-     * @return String
-     * @throws Exception
+     * @param ui Ui object used to send replies to user
+     * @return response from ui
+     * @throws Exception when ui faces an exception
      */
     private static String findParser(String command, Ui ui) throws Exception {
         if (command.length() == 4) {
@@ -99,9 +98,9 @@ public class Parser {
      * Processes the done command and responds accordingly using the ui
      * @param command command given by user
      * @param arr arraylist of current tasks
-     * @param ui ui used to send replies to user
-     * @return String
-     * @throws Exception
+     * @param ui Ui object used to send replies to user
+     * @return response from ui
+     * @throws Exception when ui faces an exception
      */
     private static String doneParser(String command, ArrayList<Task> arr, Ui ui) throws Exception {
         if (command.length() == 4) {
@@ -119,10 +118,10 @@ public class Parser {
     /**
      * Processes the todo command and responds accordingly using the ui
      * @param command command given by user
-     * @param ui ui used to send replies to user
+     * @param ui Ui object used to send replies to user
      * @param indexOfSlash index of '/' given in command
-     * @return String
-     * @throws Exception
+     * @return response from ui
+     * @throws Exception when ui faces an exception
      */
     private static String todoParser(String command, Ui ui, int indexOfSlash) throws Exception {
         if (command.length() == 4 || indexOfSlash != -1) {
@@ -132,6 +131,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Processes the undo command and responds accordingly using the ui
+     * @param command command given by the user
+     * @param ui Ui object used to send replies to user
+     * @return response from ui
+     * @throws Exception when ui faces an exception
+     */
     private static String undoParser(String command, Ui ui) throws Exception {
         if (command.length() > 4) {
             return ui.respondToTodoWrongSyntax();
@@ -143,10 +149,10 @@ public class Parser {
     /**
      * Processes the event command and responds accordingly using the ui
      * @param command command given by user
-     * @param ui ui used to send replies to user
+     * @param ui Ui object used to send replies to user
      * @param indexOfSlash index of '/' given in command
-     * @return String
-     * @throws Exception
+     * @return response from ui
+     * @throws Exception when ui faces an exception
      */
     private static String eventParser(String command, Ui ui, int indexOfSlash) throws Exception {
         if (indexOfSlash == -1 || command.length() == 5
@@ -169,9 +175,9 @@ public class Parser {
      * Parses the delete command and responds accordingly using the ui
      * @param command command given by user
      * @param arr arraylist of current tasks
-     * @param ui ui used to send replies to user
-     * @return String
-     * @throws Exception
+     * @param ui Ui object used to send replies to user
+     * @return response from ui
+     * @throws Exception when ui faces an exception
      */
     private static String deleteParser(String command, ArrayList<Task> arr, Ui ui) throws Exception {
         if (command.length() == 6) {
@@ -189,10 +195,10 @@ public class Parser {
     /**
      * Processes the event command and responds accordingly using the ui
      * @param command command given by user
-     * @param ui ui used to send replies to user
+     * @param ui Ui object used to send replies to user
      * @param indexOfSlash index of '/' given in command
-     * @return String
-     * @throws Exception
+     * @return response from ui
+     * @throws Exception when ui faces an exception
      */
     private static String deadlineParser(String command, Ui ui, int indexOfSlash) throws Exception {
         if (indexOfSlash == -1 || command.length() == 8

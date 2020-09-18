@@ -5,9 +5,9 @@ import java.util.Stack;
 
 public class Ui {
     private boolean exited = false;
-    private TaskList tl;
-    private Storage s;
-    private Stack<String> actions;
+    private final TaskList tl;
+    private final Storage s;
+    private final Stack<String> actions;
 
     Ui(TaskList tl, Storage s) {
         this.tl = tl;
@@ -50,7 +50,7 @@ public class Ui {
      * @param t the task to print out
      */
     public static String print(ArrayList<Task> arr, Task t) {
-        String keyword = "";
+        String keyword;
         String toPrint = "";
         if (t instanceof Deadline) {
             keyword = "by";
@@ -74,7 +74,7 @@ public class Ui {
             String str = "Here are the matching tasks in your list:";
             int counter = 1;
             for (Task t: arr) {
-                String keyword = "";
+                String keyword;
                 String toPrint = "";
                 if (t instanceof Deadline) {
                     keyword = "by";
@@ -95,7 +95,7 @@ public class Ui {
      * @param arr arraylist of tasks
      */
     public static String printForDone(ArrayList<Task> arr, Task t) {
-        String keyword = "";
+        String keyword;
         String toPrint = "";
         if (t instanceof Deadline) {
             keyword = "by";
@@ -113,7 +113,7 @@ public class Ui {
      * @param arr arraylist of tasks
      */
     public static String printForUnDone(ArrayList<Task> arr, Task t) {
-        String keyword = "";
+        String keyword;
         String toPrint = "";
         if (t instanceof Deadline) {
             keyword = "by";
@@ -132,7 +132,7 @@ public class Ui {
      * @param t the task to print out
      */
     public static String printForDelete(ArrayList<Task> arr, Task t) {
-        String keyword = "";
+        String keyword;
         String toPrint = "";
         if (t instanceof Deadline) {
             keyword = "by";
@@ -162,13 +162,12 @@ public class Ui {
 
     /**
      * Prints out the list of tasks when the user inputs in "list"
-     * @throws Exception
      */
-    public String respondToList(ArrayList<Task> arr) throws Exception {
+    public String respondToList(ArrayList<Task> arr) {
         int counter = 1;
         String str = "Here are the tasks in your list: ";
         for (Task t: arr) {
-            String keyword = "";
+            String keyword;
             String toPrint = "";
             if (t instanceof Deadline) {
                 keyword = "by";
@@ -194,9 +193,8 @@ public class Ui {
     /**
      * Prints the filtered list.
      * @param searchWord the word on which the user wants to base their search.
-     * @throws Exception
      */
-    public String respondToFind(String searchWord) throws Exception {
+    public String respondToFind(String searchWord) {
         ArrayList<Task> temp = new ArrayList<>();
         for (Task t: tl.getArr()) {
             if (t.getName().contains(searchWord)) {
@@ -243,6 +241,7 @@ public class Ui {
 
     /**
      * Prints out the statement saying that todo has been added and updates the list
+     * @throws Exception when listWriter faces an exception
      */
     public String respondToTodo(String name) throws Exception {
         ArrayList<Task> arr = tl.getArr();
@@ -266,7 +265,7 @@ public class Ui {
      * Prints out a statement saying that an event has been added to the list and updates the list
      * @param name name of the event
      * @param time deadline of the event
-     * @throws Exception
+     * @throws Exception when listWriter faces an exception
      */
     public String respondToEvent(String name, String time) throws Exception {
         ArrayList<Task> arr = tl.getArr();
@@ -295,7 +294,7 @@ public class Ui {
     /**
      * Prints out a statement saying that the task has been deleted and updates the list
      * @param taskNumber task number of the task that is being deleted
-     * @throws Exception
+     * @throws Exception when listWriter faces an exception
      */
     public String respondToDelete(int taskNumber) throws Exception {
         ArrayList<Task> arr = tl.getArr();
@@ -325,7 +324,7 @@ public class Ui {
      * Prints out a statement saying that a deadline has been added to the list and updates the list
      * @param name name of the event
      * @param time deadline of the event
-     * @throws Exception
+     * @throws Exception when listWriter faces an exception
      */
     public String respondToDeadline(String name, String time) throws Exception {
         ArrayList<Task> arr = tl.getArr();
@@ -348,6 +347,11 @@ public class Ui {
         return actions.pop();
     }
 
+    /**
+     * Prints out the undo action, undoes the action, and updates the list
+     * @return response according to the undone action
+     * @throws Exception when listWriter faces an exception
+     */
     public String respondToUndo() throws Exception {
         if (actions.empty()) {
             return "Nothing to undo!";
