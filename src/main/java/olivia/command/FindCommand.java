@@ -8,11 +8,22 @@ import olivia.ui.Ui;
 
 import java.util.List;
 
+/**
+ * FindCommand class that searches for tasks containing the keyword, compiling it
+ * and returning it as a list.
+ */
+
 public class FindCommand implements Command {
+
+    /**
+     * Searches for tasks that contains the input keyword, then returns them in a list.
+     * @param wrapper contains Olivia's Storage, TaskList and Ui objects.
+     * @param input list that contains the input arguments for the command.
+     * @return output String to the user.
+     */
 
     @Override
     public String apply(Wrapper wrapper, List<String> input) {
-        Storage storage = wrapper.getStorage();
         TaskList tasks = wrapper.getTaskList();
         Ui ui = wrapper.getUi();
         if (input.size() == 0) {

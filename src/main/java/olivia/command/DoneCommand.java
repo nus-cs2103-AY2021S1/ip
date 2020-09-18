@@ -7,7 +7,18 @@ import olivia.ui.Ui;
 
 import java.util.List;
 
+/**
+ * DoneCommand class that represents a task being marked as completed.
+ */
+
 public class DoneCommand implements Command {
+
+    /**
+     * Marks a task indicated by the given index in the TaskList as done.
+     * @param wrapper contains Olivia's Storage, TaskList and Ui objects.
+     * @param input list that contains the input arguments for the command.
+     * @return output String to the user.
+     */
 
     @Override
     public String apply(Wrapper wrapper, List<String> input) {

@@ -16,7 +16,7 @@ public class Ui {
      * Prints to user if the given save file has loaded successfully and the tasks found
      * in the save file.
      *
-     * @param tasks a TaskList containing the tasks in the save file
+     * @param tasks a TaskList containing the tasks in the save file.
      */
 
     public String showLoaded(TaskList tasks) {

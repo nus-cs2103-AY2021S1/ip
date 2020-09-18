@@ -11,7 +11,19 @@ import olivia.ui.Ui;
 
 import java.util.List;
 
+/**
+ * UpdateCommand class that represents one of a task's fields being updated.
+ */
+
 public class UpdateCommand implements Command {
+
+    /**
+     * Updates one of the fields of the task indicated by the given index
+     * in the TaskList.
+     * @param wrapper contains Olivia's Storage, TaskList and Ui objects.
+     * @param input list that contains the input arguments for the command.
+     * @return output String to the user.
+     */
 
     @Override
     public String apply(Wrapper wrapper, List<String> input) {

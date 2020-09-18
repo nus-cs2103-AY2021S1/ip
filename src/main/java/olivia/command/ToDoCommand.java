@@ -9,7 +9,19 @@ import olivia.ui.Ui;
 
 import java.util.List;
 
+/**
+ * ToDoCommand class that represents a Deadline task being added to the
+ * TaskList.
+ */
+
 public class ToDoCommand implements Command {
+
+    /**
+     * Creates and stores a ToDo object in the TaskList if the input is valid.
+     * @param wrapper contains Olivia's Storage, TaskList and Ui objects.
+     * @param input list that contains the input arguments for the command.
+     * @return output String to the user.
+     */
 
     @Override
     public String apply(Wrapper wrapper, List<String> input) {
