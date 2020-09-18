@@ -1,4 +1,4 @@
-# User Guide
+# N Chat Bot
 
 ## Introduction
 This is a chat bot that helps you to keep track of your todos, deadlines, and events. 
