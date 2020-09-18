@@ -3,7 +3,7 @@ package duke.commands;
 import duke.storage.Storage;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
-import duke.ui.UI;
+import duke.ui.Ui;
 
 public class RemindCommand extends Command {
     public static final String COMMAND_WORD = "remind";
@@ -29,7 +29,7 @@ public class RemindCommand extends Command {
      * @return String of Duke response.
      */
     @Override
-    public String execute(TaskList taskList, UI ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         try {
             Task task = taskList.getTaskAtIndex(Integer.parseInt(commandDescription) + SIZE_OFFSET);
             task.setReminder();

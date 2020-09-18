@@ -19,6 +19,7 @@ import duke.commands.ListCommand;
 import duke.commands.RemindCommand;
 import duke.commands.SearchCommand;
 import duke.commands.TodoCommand;
+import duke.exceptions.InvalidDukeCommand;
 
 /**
  * Represents a Parser that will read User Input from the command
@@ -52,7 +53,7 @@ public class Parser {
      * @param s User input through command line.
      * @return Appropriate Command to be executed.
      */
-    public static Command parse(String s) {
+    public static Command parse(String s) throws InvalidDukeCommand {
         Matcher matcher = COMMAND_FORMAT.matcher((s.trim()));
         if (!matcher.matches()) {
             return new InvalidCommand();
@@ -98,7 +99,7 @@ public class Parser {
             return prepareSearch(commandBody.strip());
             //Fallthrough
         default:
-            return new InvalidCommand();
+            throw new InvalidDukeCommand();
 
         }
     }

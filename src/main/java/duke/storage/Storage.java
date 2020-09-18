@@ -6,7 +6,7 @@ import java.io.IOException;
 
 import duke.tasks.Task;
 import duke.tasks.TaskList;
-import duke.ui.UI;
+import duke.ui.Ui;
 
 /**
  * Represents the storage capabilities of Duke.
@@ -32,10 +32,10 @@ public class Storage {
      * Tries to load data from the given path.
      * If unable, creates a new file for Duke to use.
      *
-     * @param ui UI object.
+     * @param ui Ui object.
      * @return File that Duke will use to read/write data.
      */
-    public File loadData(UI ui) {
+    public File loadData(Ui ui) {
         assert ui != null;
         assert directoryPath != null;
         assert fileName != null;
@@ -57,9 +57,9 @@ public class Storage {
      * If unable, displays and error to the user.
      *
      * @param tasks List of tasks.
-     * @param ui UI object.
+     * @param ui Ui object.
      */
-    public String saveData(TaskList tasks, UI ui) {
+    public String saveData(TaskList tasks, Ui ui) {
         assert ui != null;
         assert tasks != null;
         assert directoryPath != null;

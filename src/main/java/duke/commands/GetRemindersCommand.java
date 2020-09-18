@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import duke.storage.Storage;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
-import duke.ui.UI;
+import duke.ui.Ui;
 
 public class GetRemindersCommand extends Command {
     public static final String COMMAND_WORD = "getReminders";
@@ -24,7 +24,7 @@ public class GetRemindersCommand extends Command {
      * @return String of Duke response.
      */
     @Override
-    public String execute(TaskList taskList, UI ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         assert ui != null;
         assert storage != null;
         try {

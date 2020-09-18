@@ -5,7 +5,7 @@ import duke.storage.Storage;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.tasks.ToDo;
-import duke.ui.UI;
+import duke.ui.Ui;
 
 /**
  * Represents a Todo command when the user wants to add
@@ -33,7 +33,7 @@ public class TodoCommand extends Command {
      * @return String of Duke response.
      */
     @Override
-    public String execute(TaskList taskList, UI ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         assert ui != null;
         assert storage != null;
         try {

@@ -6,7 +6,7 @@ import duke.exceptions.DukeException;
 import duke.storage.Storage;
 import duke.tasks.Deadline;
 import duke.tasks.TaskList;
-import duke.ui.UI;
+import duke.ui.Ui;
 
 /**
  * Represents a Deadline Command when the user inputs
@@ -55,7 +55,7 @@ public class DeadlineCommand extends Command {
      * @return String of Duke response.
      */
     @Override
-    public String execute(TaskList taskList, UI ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         Deadline deadlineTask;
         try {
             if (this.hasLocalDate) {

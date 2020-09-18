@@ -2,7 +2,7 @@ package duke.commands;
 
 import duke.storage.Storage;
 import duke.tasks.TaskList;
-import duke.ui.UI;
+import duke.ui.Ui;
 
 /**
  * Represents a command that is received from the user via the command line.
@@ -39,7 +39,7 @@ public class Command {
      * @param storage Storage object.
      * @return String of Duke response.
      */
-    public String execute(TaskList taskList, UI ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         return ui.showError("Can't execute generic command");
     }
 }

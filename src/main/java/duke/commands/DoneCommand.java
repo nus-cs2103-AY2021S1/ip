@@ -3,7 +3,7 @@ package duke.commands;
 import duke.storage.Storage;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
-import duke.ui.UI;
+import duke.ui.Ui;
 
 /**
  * Represents a Done command for when the user wants to mark
@@ -33,7 +33,7 @@ public class DoneCommand extends Command {
      * @return String of Duke response.
      */
     @Override
-    public String execute(TaskList taskList, UI ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         try {
             Task task = taskList.getTaskAtIndex(Integer.parseInt(commandDescription) + SIZE_OFFSET);
             task.setDone();

@@ -3,10 +3,12 @@ package duke.gui;
 import java.io.File;
 
 import duke.commands.Command;
+import duke.commands.InvalidCommand;
+import duke.exceptions.InvalidDukeCommand;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.tasks.TaskList;
-import duke.ui.UI;
+import duke.ui.Ui;
 import javafx.animation.PauseTransition;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -40,7 +42,7 @@ public class Duke extends Application {
     private Scene scene;
     private Storage store;
     private TaskList tasks;
-    private UI ui;
+    private Ui ui;
     private Image userImage;
     private Image dukeImage;
     private Image iconImage;
@@ -52,7 +54,7 @@ public class Duke extends Application {
      */
     public Duke() {
         store = new Storage("./data", "duke.txt");
-        this.ui = new UI();
+        this.ui = new Ui();
         File loadFile = store.loadData(ui);
         if (loadFile == null) {
             tasks = new TaskList();
@@ -75,7 +77,7 @@ public class Duke extends Application {
      * @param filePath name of text file to load.
      */
     public Duke(String directoryPath, String filePath) {
-        ui = new UI();
+        ui = new Ui();
         store = new Storage(directoryPath, filePath);
         File loadFile = store.loadData(ui);
         if (loadFile != null) {
@@ -93,13 +95,18 @@ public class Duke extends Application {
         ui.displayGreeting();
         boolean isExit = false;
         while (!isExit) {
-            String fullCommand = ui.readCommand();
-            Command command = Parser.parse(fullCommand);
-            command.execute(tasks, ui, store);
-            isExit = command.isExit();
-            if (!isExit) {
-                ui.displayBlankLine();
+            try {
+                String fullCommand = ui.readCommand();
+                Command command = Parser.parse(fullCommand);
+                command.execute(tasks, ui, store);
+                isExit = command.isExit();
+                if (!isExit) {
+                    ui.displayBlankLine();
+                }
+            } catch (InvalidDukeCommand e) {
+                new InvalidCommand().execute(tasks, ui, store);
             }
+
         }
     }
 
@@ -263,10 +270,15 @@ public class Duke extends Application {
     }
 
     private String getResponse(String input) {
-        Command command = Parser.parse(input);;
-        String response = command.execute(tasks, ui, store);
-        isExit = command.isExit();
-        return response;
+        try {
+            Command command = Parser.parse(input);;
+            String response = command.execute(tasks, ui, store);
+            isExit = command.isExit();
+            return response;
+        } catch (InvalidDukeCommand e) {
+            String response = new InvalidCommand().execute(tasks, ui, store);
+            return response;
+        }
     }
 
 }

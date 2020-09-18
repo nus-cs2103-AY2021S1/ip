@@ -10,7 +10,7 @@ import duke.tasks.Task;
 /**
  * Represents the User Interface that the user interacts with.
  */
-public class UI {
+public class Ui {
 
     private static final String BLANK_LINE = "";
 
@@ -19,7 +19,7 @@ public class UI {
     /**
      * Creates an instance of a User Interface.
      */
-    public UI() {
+    public Ui() {
         this.scanner = new Scanner(System.in);
     }
 
@@ -174,7 +174,7 @@ public class UI {
      * Displays blank line on screen.
      */
     public void displayBlankLine() {
-        System.out.println(UI.BLANK_LINE);
+        System.out.println(Ui.BLANK_LINE);
     }
 
     /**
