@@ -22,10 +22,11 @@ public class Parser {
     }
 
     private String provideHelp() {
+        String header = "LIST OF COMMANDS: " + "\n";
         String commands = Format.TODO + "\n" + Format.DEADLINE + "\n" + Format.EVENT
                 + "\n" + Format.DONE + "\n" + Format.DELETE + "\n" + Format.EDIT
                 + "\n" + Format.FIND + "\n" + Format.LIST;
-        return commands;
+        return header + commands;
     }
 
     /**
@@ -41,7 +42,7 @@ public class Parser {
                 TodoTask newTask = new TodoTask(activity, TaskSymbol.TODO);
                 response = list.addToList(newTask);
             } catch (Exception e) {
-                WillyException error = new WillyException(Response.NO_TASK.toString() + Format.TODO.toString());
+                WillyException error = new WillyException(Response.INCOMPLETE_INFO.toString() + Format.TODO.toString());
                 response = error.toString();
             }
         }
@@ -56,7 +57,7 @@ public class Parser {
                 response = list.addToList(newTask);
 
             } catch (Exception e) {
-                WillyException error = new WillyException(Response.NO_TASK.toString() + Format.DEADLINE);
+                WillyException error = new WillyException(Response.INCOMPLETE_INFO.toString() + Format.DEADLINE);
                 response = error.toString();
             }
         }
@@ -140,8 +141,8 @@ public class Parser {
         String response = "";
         String keyword = "";
 
-        if (message.length() > 4) {
-            keyword = message.substring(0, 6);
+        if (message.length() > 9) {
+            keyword = message.substring(0, 9);
         }
         if (isOnJavaFX) {
             if (message.equals(Willy.getLastGreeting())) {
@@ -161,7 +162,7 @@ public class Parser {
             int taskNum = Integer.parseInt(message.substring(7));
             response = list.removeTask(taskNum);
 
-        } else if (keyword.contains("todo") || message.contains("deadline") || message.contains("event")) {
+        } else if (keyword.contains("todo") || keyword.contains("deadline") || keyword.contains("event")) {
             response = createTask(message);
 
         } else if (keyword.contains("find")) {

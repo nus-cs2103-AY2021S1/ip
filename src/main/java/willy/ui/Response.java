@@ -4,7 +4,7 @@ public enum Response {
     INCOMPLETE_INFO {
         @Override
         public String toString() {
-            return "Hmmm are you missing description/deadline of the task? \n\tCheck and try again?";
+            return "Hmmm are you missing description/deadline of the task? Check and try again? \n";
         }
     },
     NO_TASK {
@@ -64,7 +64,7 @@ public enum Response {
     NO_SENSE {
         @Override
         public String toString() {
-            return "Hmmm sorry I'm not sure what you are saying, try something else?:(";
+            return "Hmmm sorry I'm not sure what you are saying, try typing 'help' to view the list of commands available?";
         }
     }
 }
