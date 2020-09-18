@@ -11,6 +11,6 @@ public class TodoIncompleteException extends InvalidInputException {
      */
     @Override
     public String getMessage() {
-        return " Oh no! Please specify the description of a todo.";
+        return " Oh no! Please specify the description of a Todo.";
     }
 }

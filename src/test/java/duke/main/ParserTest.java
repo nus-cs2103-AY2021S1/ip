@@ -54,7 +54,7 @@ public class ParserTest {
             Parser.checkInput("todo");
             fail();
         } catch (DukeException e) {
-            assertEquals(" Oh no! Please specify the description of a todo.", e.getMessage());
+            assertEquals(" Oh no! Please specify the description of a Todo.", e.getMessage());
         }
     }
 

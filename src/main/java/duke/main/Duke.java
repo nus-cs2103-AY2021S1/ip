@@ -1,26 +1,32 @@
 package duke.main;
 
-import duke.ui.Main;
-import duke.exception.StorageException;
-import javafx.application.Application;
+import java.io.IOException;
+import java.util.Date;
+import java.util.Scanner;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import duke.command.Command;
 import duke.exception.DukeException;
-
-import java.io.IOException;
-import java.util.Date;
-import java.util.Timer;
-import java.util.TimerTask;
+import duke.exception.StorageException;
+import duke.ui.Main;
+import javafx.application.Application;
 
 /**
  * Duke is a chatbot that can help us manage and store our various kinds of Task.
  */
 public class Duke {
-    /** Boolean to check if the system should terminate. **/
+    /**
+     * Boolean to check if the system should terminate.
+     **/
     private boolean shouldExit;
-    /** TaskList to store Tasks. */
+    /**
+     * TaskList to store Tasks.
+     */
     private TaskList tasks;
-    /** Storage to store data to hard disk */
+    /**
+     * Storage to store data to hard disk
+     */
     private final Storage storage;
 
     /**
@@ -39,13 +45,18 @@ public class Duke {
     }
 
     /**
-     * Runs Duke.
+     * Runs Duke with Graphical User Interface (GUI).
      */
     public void run() {
         // Launch GUI.
         Application.launch(Main.class, "");
     }
 
+    /**
+     * Gets status if Duke should terminate.
+     *
+     * @return true if Duke should terminate, otherwise false.
+     */
     public boolean getStatus() {
         return shouldExit;
     }
@@ -94,22 +105,26 @@ public class Duke {
     }
 
     /**
-     * Gets the size of the current TaskList
-     *
-     * @return The size of the current TaskList.
-     */
-    public int getTaskListSize() {
-        return tasks.getSize();
-    }
-
-    /**
      * Main method of duke.
      *
      * @param args Arguments.
      */
     public static void main(String[] args) {
         Duke duke = new Duke();
+        // uncomment to run Duke with CLI
+        // duke.runWithCli();
         duke.run();
+    }
+
+    /**
+     * Runs Duke with Command Line Input (CLI).
+     */
+    private void runWithCli() {
+        System.out.println("Hello Programmer! How can I help you?");
+        Scanner sc = new Scanner(System.in);
+        while (!shouldExit) {
+            System.out.println(getResponse(sc.nextLine().split(" ")));
+        }
     }
 }
 

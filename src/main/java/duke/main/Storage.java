@@ -11,15 +11,15 @@ import java.nio.file.Paths;
 
 import java.util.Scanner;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
-
 import duke.exception.CannotCreateFileException;
 import duke.exception.CannotMakeDirectoryException;
 import duke.exception.InvalidFormatFromHardDiskException;
 import duke.exception.InvalidTaskTypeException;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 
 /**
  * Storage is used to store Tasks to the hard disk from a TaskList. It can
