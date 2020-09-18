@@ -26,19 +26,25 @@ class LogicControllerTest {
     @Test
     void testRunDeadline1() {
         String response = logicController.run("deadline return book /by 2019-10-15");
-        Assertions.assertTrue(response.contains("[D][✗] return book (by: Oct 15 2019"));
+        Assertions.assertTrue(response.contains("[D][✗] return book (by: Oct 15 2019)"));
     }
 
     @Test
     void testRunEvent1() {
         String response = logicController.run("event return book /at 2019-10-15");
-        Assertions.assertTrue(response.contains("[E][✗] return book (at: Oct 15 2019"));
+        Assertions.assertTrue(response.contains("[E][✗] return book (at: Oct 15 2019)"));
     }
 
     @Test
     void testRunEvent2() {
         String response = logicController.run("event return book /between 2019-10-15 and 2019-10-16");
         Assertions.assertTrue(response.contains("[E][✗] return book (between: Oct 15 2019 and Oct 16 2019)"));
+    }
+
+    @Test
+    void testRunEvent3() {
+        String response = logicController.run("event return book /at 06/09/2019");
+        Assertions.assertTrue(response.contains("[E][✗] return book (at: Sep 6 2019)"));
     }
 
     @Test
