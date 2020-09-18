@@ -15,18 +15,19 @@ public class ToDoCommand implements Command {
     /**
      * Executes the todo command, causing add a task of type todo to the taskList,
      * provided that the command input is valid.
-     *
-     * @param taskList Used by Duke to keep track of tasks.
+     *  @param taskList Used by Duke to keep track of tasks.
      * @param ui Responsible for printing to console after execution.
      * @param storage Stores tasks in a text format.
+     * @return
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
             ToDo t = new ToDo(DESCRIPTION, false);
             taskList.addTask(t);
             storage.write(taskList.TASKS);
-            ui.showLine();
-            ui.createToDoSuccessMessage(t, taskList.TASKS.size());
-            ui.showLine();
+            String result = ui.showLine();
+            result += "\n" + ui.createToDoSuccessMessage(t, taskList.TASKS.size());
+            result += ui.showLine();
+        return result;
     }
 
     /**

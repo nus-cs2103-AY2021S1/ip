@@ -5,15 +5,14 @@ public class ByeCommand implements Command {
 
     /**
      * Executes the bye command, causing Duke to stop running.
-     *
-     * @param taskList Used by Duke to keep track of tasks.
+     *  @param taskList Used by Duke to keep track of tasks.
      * @param ui Responsible for printing to console after execution.
      * @param storage Stores tasks in a text format.
+     * @return
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.showLine();
-        ui.printGoodbyeMessage();
-        ui.showLine();
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        String result = ui.showLine() + "\n" + ui.printGoodbyeMessage() + ui.showLine();
+        return result;
     }
 
     /**

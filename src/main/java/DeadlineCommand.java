@@ -22,8 +22,9 @@ public class DeadlineCommand implements Command {
      * @throws MissingDescriptionException If the deadline command is missing a description.
      * @throws MissingTagException If the deadline command is missing a "/by" tag.
      * @throws MissingDateTimeException If the deadline command is missing a valid Date and Time.
+     * @return
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
 
         String[] commandArgs = COMMAND.split(" ");
 
@@ -39,9 +40,9 @@ public class DeadlineCommand implements Command {
             Deadline d = new Deadline(subCommandArgs[0], subCommandArgs[1], false);
             taskList.addTask(d);
             storage.write(taskList.TASKS);
-            ui.showLine();
-            ui.createDeadlineSuccessMessage(d, taskList.TASKS.size());
-            ui.showLine();
+            String result = ui.showLine() + "\n" + ui.createDeadlineSuccessMessage(d, taskList.TASKS.size())
+                    + ui.showLine();
+            return result;
         }
     }
 

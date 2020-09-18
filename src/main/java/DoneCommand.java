@@ -21,18 +21,19 @@ public class DoneCommand implements Command {
      * @param storage Stores tasks in a text format.
      * @throws MissingNumberFromCommandException If the done command is missing a number.
      * @throws InvalidNumberFromCommandException If the number provided with the done command is invalid.
+     * @return
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         int taskLength = taskList.TASKS.size();
-        if (TASK_NUMBER < 0 || TASK_NUMBER > taskLength) {
+        if (TASK_NUMBER < 0 || TASK_NUMBER >= taskLength) {
             throw new InvalidNumberFromCommandException();
         } else {
             Task t = taskList.TASKS.get(TASK_NUMBER);
             taskList.markAsDone(TASK_NUMBER);
             storage.write(taskList.TASKS);
-            ui.showLine();
-            ui.doneCommandSuccessMessage(TASK_NUMBER + 1, t);
-            ui.showLine();
+            String result = ui.showLine() + "\n" + ui.doneCommandSuccessMessage(TASK_NUMBER + 1, t)
+                    + ui.showLine();
+            return result;
         }
     }
 

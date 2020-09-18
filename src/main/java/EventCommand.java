@@ -22,8 +22,9 @@ public class EventCommand implements Command {
      * @throws MissingDescriptionException If the event command is missing a description.
      * @throws MissingTagException If the event command is missing a "/at" tag.
      * @throws MissingDateTimeException If the event command is missing a valid Date and Time.
+     * @return
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
 
         String[] commandArgs = COMMAND.split(" ");
 
@@ -34,14 +35,14 @@ public class EventCommand implements Command {
         } else if (commandArgs.length != 5) {
             throw new MissingDateTimeException();
         } else {
-            String subCommand = COMMAND.substring(9);
-            String[] subCommandArgs = subCommand.split("/at");
+            String subCommand = COMMAND.substring(5);
+            String[] subCommandArgs = subCommand.trim().split("/at");
             Event e = new Event(subCommandArgs[0], subCommandArgs[1], false);
             taskList.addTask(e);
             storage.write(taskList.TASKS);
-            ui.showLine();
-            ui.createEventSuccessMessage(e, taskList.TASKS.size());
-            ui.showLine();
+            String result = ui.showLine() + "\n" + ui.createEventSuccessMessage(e, taskList.TASKS.size())
+                    + ui.showLine();
+            return result;
         }
     }
 

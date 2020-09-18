@@ -1,4 +1,5 @@
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -14,9 +15,9 @@ import javafx.stage.Stage;
 
 public class Duke extends Application{
 
-    private final Storage STORAGE;
-    private final TaskList TASKS;
-    private final Ui UI;
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
 
     private ScrollPane scrollPane;
     private VBox dialogContainer;
@@ -29,16 +30,16 @@ public class Duke extends Application{
 
     // constructor
     public Duke(String filePath) {
-        UI = new Ui();
-        STORAGE = new Storage(filePath);
-        TASKS = new TaskList(STORAGE.loadTasks());
+        ui = new Ui();
+        storage = new Storage(filePath);
+        tasks = new TaskList(storage.loadTasks());
     }
 
     // empty constructor
     public Duke() {
-        UI = new Ui();
-        STORAGE = new Storage("src/main/java/tasks.txt");
-        TASKS = new TaskList(STORAGE.loadTasks());
+        ui = new Ui();
+        storage = new Storage("src/main/java/tasks.txt");
+        tasks = new TaskList(storage.loadTasks());
     }
 
     @Override
@@ -106,22 +107,24 @@ public class Duke extends Application{
 
     public void run() {
 
-        UI.printGreetingMessage(STORAGE.createResult);
+        ui.printGreetingMessage(storage.createResult);
 
         boolean isExit = false;
 
         while (!isExit) {
             try {
-                String fullCommand = UI.readCommand();
+                String fullCommand = ui.readCommand();
                 Command c = Parser.interpret(fullCommand);
-                c.execute(TASKS, UI, STORAGE);
+                String result = c.execute(tasks, ui, storage);
+                System.out.println(result);
                 isExit = c.isExit();
             } catch (DukeException e) {
-                UI.showLine();
-                UI.showErrorMessage(e.getMessage());
-                UI.showLine();
+                String errorMessage = ui.showLine() + "\n" + ui.showErrorMessage(e.getMessage())
+                        + "\n" + ui.showLine();
+                System.out.println(errorMessage);
             }
         }
+        Platform.exit();
     }
 
     /**
@@ -164,14 +167,20 @@ public class Duke extends Application{
      * @return Response string.
      */
     protected String getResponse(String input) {
-        return "Duke heard: " + input;
-        // Command c = Parser.interpret(input);
+        // return "Duke heard: " + input;
+        try {
+            Command c = Parser.interpret(input);
+            String output = c.execute(tasks, ui, storage);
+            return output;
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
     }
 
-    public static void main(String[] args) {
+    //public static void main(String[] args) {
 
         // the argument to the constructor is the file path (relative) where Duke will read and write tasks given to it
-        new Duke("src/main/java/tasks.txt").run();
+    //    new Duke("src/main/java/tasks.txt").run();
 
-    }
+    //}
 }

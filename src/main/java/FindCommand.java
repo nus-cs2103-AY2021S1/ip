@@ -8,16 +8,15 @@ public class FindCommand implements Command {
         this.DESCRIPTION = description.trim();
     }
 
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         ArrayList<Task> tasks = new ArrayList<>();
         for (Task t : taskList.TASKS) {
             if (t.description.matches("(.*)" + DESCRIPTION + "(.*)")) {
                 tasks.add(t);
             }
         }
-        ui.showLine();
-        ui.findResultMessage(tasks, DESCRIPTION);
-        ui.showLine();
+        String result = ui.showLine() + "\n" + ui.findResultMessage(tasks, DESCRIPTION) + ui.showLine();
+        return result;
     }
 
     public boolean isExit() {
