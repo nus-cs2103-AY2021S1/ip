@@ -10,6 +10,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class TaskListWindow {
@@ -59,10 +60,11 @@ public class TaskListWindow {
 
         // stage
         Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
         stage.setScene(scene);
         stage.setTitle("Tasks");
 
-        stage.show();
+        stage.showAndWait();
     }
 
     private static void initTasks(TableView<Task> table, Duke duke) {
