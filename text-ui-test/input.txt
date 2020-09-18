@@ -1,0 +1,19 @@
+add todo read book
+done 1
+del 1
+list
+add deadline return book
+add deadline return book /by June 6th
+add event project meeting
+add event project meeting /at Aug 6th 2-4pm
+add todo join sports club
+list
+done 1
+done 2
+del 2
+list
+add todo borrow book
+add deadline do homework /by no idea??? :)
+add todo
+list
+bye
