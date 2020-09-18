@@ -13,7 +13,7 @@ public class ParserTest {
             Parser.parse("deadline project /by 12");
         });
 
-        String expectedMessage = "OOPS!!! The date/time is not valid.";
+        String expectedMessage = "OOPS!!! The date or time is not valid.";
         String actualMessage = exception.getMessage();
         assertEquals(expectedMessage, actualMessage);
     }
@@ -24,7 +24,7 @@ public class ParserTest {
             Parser.parse("event project /at");
         });
 
-        String expectedMessage = "OOPS!!! The description or date cannot be empty.";
+        String expectedMessage = "OOPS!!! The date or time cannot be empty.";
         String actualMessage = exception.getMessage();
         assertEquals(expectedMessage, actualMessage);
     }
@@ -68,7 +68,7 @@ public class ParserTest {
             Parser.parse("delete");
         });
 
-        String expectedMessage = "OOPS!!! The description or date cannot be empty.";
+        String expectedMessage = "OOPS!!! The description cannot be empty.";
         String actualMessage = exception.getMessage();
         assertEquals(expectedMessage, actualMessage);
     }
@@ -79,7 +79,7 @@ public class ParserTest {
             Parser.parse("deadline homework /by 11 11 11 25:30");
         });
 
-        String expectedMessage = "OOPS!!! The date/time is not valid.";
+        String expectedMessage = "OOPS!!! The date or time is not valid.";
         String actualMessage = exception.getMessage();
         assertEquals(expectedMessage, actualMessage);
     }

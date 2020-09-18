@@ -13,7 +13,7 @@ public class Duke {
     private TaskList tasks;
 
     /**
-     * Creates a new Duke chat bot that saves and loads tasks from the given filepath.
+     * Creates a new chat bot that saves and loads tasks from the given filepath.
      *
      * @param filePath The file path to load tasks from and save tasks to.
      */

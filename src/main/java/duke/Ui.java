@@ -36,7 +36,7 @@ public class Ui {
     }
 
     /**
-     * Returns all the tasks in the specified Task list.
+     * Returns the tasks in the specified Task list.
      *
      * @param taskList The task list that contains the list of tasks to be printed.
      * @return The list of tasks from the specified task list, or none if there are no tasks in the task list.
@@ -58,7 +58,7 @@ public class Ui {
      * @return An acknowledgement that the task has been added.
      */
     public static String respondAddTask(Task task, TaskList taskList) {
-        assert task != null && taskList != null : "task and taskList cannot be null.";
+        assert task != null && taskList != null : "task or taskList cannot be null.";
         return "Got it. I've added this task: \n\t" + task + "\n" + getHowManyTasks(taskList);
     }
 
@@ -71,7 +71,7 @@ public class Ui {
      * @return An acknowledgement that the task has been removed.
      */
     public static String respondDeleteTask(Task task, TaskList taskList) {
-        assert task != null && taskList != null : "task and taskList cannot be null.";
+        assert task != null && taskList != null : "task or taskList cannot be null.";
         return "Noted. I've removed this task: \n\t" + task + "\n" + getHowManyTasks(taskList);
     }
 
@@ -87,7 +87,7 @@ public class Ui {
     }
 
     /**
-     * Prints the tasks that occur on the specified date.
+     * Returns the tasks that occur on the specified date.
      *
      * @param taskList The task list to get the tasks from.
      * @param localDate The date that you want to get the tasks for.
@@ -95,7 +95,7 @@ public class Ui {
      * @throws DukeException If there were some problems with getting the tasks on the date.
      */
     public static String respondViewTasks(TaskList taskList, LocalDate localDate) throws DukeException {
-        assert taskList != null && localDate != null : "taskList and localDate cannot be null.";
+        assert taskList != null && localDate != null : "taskList or localDate cannot be null.";
         TaskList taskListOnDate = taskList.getTaskListOnDate(localDate);
         if (taskListOnDate.getNumberOfTasks() == 0) {
             return "You do not have any tasks on this date.";
@@ -104,14 +104,14 @@ public class Ui {
     }
 
     /**
-     * Prints the tasks that contain the specified keyword.
+     * Returns the tasks that contain the specified keyword.
      *
      * @param taskList The task list to find the tasks in.
      * @param keyword The string that the tasks you are finding should contain.
      * @return The tasks that contain the keyword, or none if there are no tasks that contain the keyword.
      */
     public static String respondFindTasks(TaskList taskList, String keyword) {
-        assert taskList != null && keyword != null : "taskList and keyword cannot be null.";
+        assert taskList != null && keyword != null : "taskList or keyword cannot be null.";
         TaskList tasksWithKeyword = taskList.getTasksWithKeyword(keyword);
         if (tasksWithKeyword.getNumberOfTasks() == 0) {
             return "You do not have any tasks that contain this keyword.";
@@ -120,7 +120,7 @@ public class Ui {
     }
 
     /**
-     * Gets the number of tasks in the specified task list.
+     * Returns the number of tasks in the specified task list.
      *
      * @param taskList The task list to get the number of tasks from.
      * @return A string indicating the number of tasks in the specified task list.

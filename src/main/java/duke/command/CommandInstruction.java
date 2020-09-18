@@ -4,19 +4,13 @@ package duke.command;
  * Represents all valid commands that can be used.
  */
 public enum CommandInstruction {
-    LIST("list"),
-    BYE("bye"),
-    DONE("done"),
-    DELETE("delete"),
-    TODO("todo"),
-    DEADLINE("deadline"),
-    EVENT("event"),
-    VIEW("view"),
-    FIND("find");
-
-    private final String instruction;
-
-    CommandInstruction(String command) {
-        this.instruction = command;
-    }
+    LIST,
+    BYE,
+    DONE,
+    DELETE,
+    TODO,
+    DEADLINE,
+    EVENT,
+    VIEW,
+    FIND
 }

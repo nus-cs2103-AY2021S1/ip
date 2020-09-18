@@ -5,7 +5,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Represents tasks that need to be done before a specific date and optionally time.
+ * Represents tasks that need to be done before a specific date and time.
  */
 public class Deadline extends Task {
     /** The date by which this task must be done. */
@@ -14,7 +14,7 @@ public class Deadline extends Task {
     protected LocalTime byTime;
 
     /**
-     * Creates a new Deadline with the specified description and specified deadline date.
+     * Creates a new deadline with the specified description, specified date and specified time.
      *
      * @param description The description of the deadline.
      * @param byDate The date by which the task must be done.

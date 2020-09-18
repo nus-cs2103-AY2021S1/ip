@@ -6,12 +6,12 @@ import java.time.LocalTime;
 import duke.DukeException;
 
 /**
- * Represents tasks without any date or time attached to it.
+ * Represents tasks that need to be done but without any date or time attached to it.
  */
 public class Todo extends Task {
 
     /**
-     * Creates a new Todo with the specified description.
+     * Creates a new todo with the specified description.
      *
      * @param description The description of the todo.
      */
@@ -47,9 +47,14 @@ public class Todo extends Task {
      */
     @Override
     public LocalDate getDate() throws DukeException {
-        throw new DukeException("Todo tasks do not have dates associated to them.");
+        throw new DukeException("Todo tasks do not have a date associated to them.");
     }
 
+    /**
+     * Throws an exception since todos do not have times associated to them.
+     *
+     * @throws DukeException Since todos do not have times associated to them.
+     */
     @Override
     public LocalTime getTime() throws DukeException {
         throw new DukeException("Todo tasks do not have a time associated to them.");

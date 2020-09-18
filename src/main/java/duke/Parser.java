@@ -75,15 +75,19 @@ public class Parser {
             case FIND:
                 return new FindCommand(splitCommand[1]);
             default:
+                // Invalid instruction.
                 assert false : instruction;
-                throw new IllegalArgumentException();
+                throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         } catch (NumberFormatException e) {
+            // When the number given for done and delete is not valid.
             throw new DukeException("OOPS!!! The task number is not valid.");
         } catch (IllegalArgumentException e) {
+            // When the command cannot be understood.
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("OOPS!!! The description or date cannot be empty.");
+            // When there is no description after the command.
+            throw new DukeException("OOPS!!! The description cannot be empty.");
         }
     }
 
@@ -101,7 +105,7 @@ public class Parser {
      * Parses the input into a task of the specified task type with description, date and optionally time.
      *
      * @param taskType Type of the task to be returned.
-     * @param input The description, date and time in the format: description /separator date time.
+     * @param input The description, date and optionally time in the format: description /separator date time.
      * @return Task of the specified task type, description, date and optionally time.
      * @throws DukeException If there was a problem with creating a valid task.
      */
@@ -113,44 +117,62 @@ public class Parser {
         String potentialTime;
         LocalDate localDate;
         LocalTime localTime;
-
-        switch (taskType) {
-        case DEADLINE:
-            String[] splitDeadline = input.split(" /by ", 2);
-            description = splitDeadline[0];
-            dateTimeString = splitDeadline[1];
-            break;
-        case EVENT:
-            String[] splitEvent = input.split(" /at ", 2);
-            description = splitEvent[0];
-            dateTimeString = splitEvent[1];
-            break;
-        default:
-            assert false;
-            throw new DukeException("OOPS!!! There were some problems in making the task.");
+        // Check if there is a description or not.
+        if (input.startsWith("/")) {
+            throw new DukeException("OOPS!!! The description cannot be empty.");
         }
-        potentialTime = dateTimeString.substring(dateTimeString.lastIndexOf(" ") + 1);
-        localTime = parseTime(potentialTime);
+        // Try to split description and date.
+        try {
+            switch (taskType) {
+            case DEADLINE:
+                String[] splitDeadline = input.split(" /by ", 2);
+                description = splitDeadline[0];
+                dateTimeString = splitDeadline[1].replaceAll(" +", " ");
+                break;
+            case EVENT:
+                String[] splitEvent = input.split(" /at ", 2);
+                description = splitEvent[0];
+                dateTimeString = splitEvent[1].replaceAll(" +", " ");
+                break;
+            default:
+                assert false;
+                throw new DukeException("OOPS!!! There were some problems in making the task.");
+            }
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("OOPS!!! The date or time cannot be empty.");
+        }
+        // Try to parse time if it exists.
+        try {
+            potentialTime = dateTimeString.substring(dateTimeString.lastIndexOf(" ") + 1);
+            localTime = parseTime(potentialTime);
+        } catch (DukeException e) {
+            localTime = null;
+        }
+        // Parse date.
         if (localTime == null) {
             potentialDate = dateTimeString;
         } else {
             potentialDate = dateTimeString.substring(0, dateTimeString.lastIndexOf(" "));
         }
-        localDate = parseDate(potentialDate);
-        if (localDate == null && localTime == null) {
-            throw new DukeException("OOPS!!! The date/time is not valid.");
-        } else if (localDate == null && localTime != null) {
-            throw new DukeException("OOPS!!! The date is not valid.");
-        } else {
-            switch (taskType) {
-            case DEADLINE:
-                return new Deadline(description, localDate, localTime);
-            case EVENT:
-                return new Event(description, localDate, localTime);
-            default:
-                assert false;
-                throw new DukeException("OOPS!!! There were some problems in making the task.");
+        try {
+            localDate = parseDate(potentialDate);
+        } catch (DukeException e) {
+            if (localTime != null) {
+                throw new DukeException("OOPS!!! The date is not valid.");
+            } else {
+                throw new DukeException("OOPS!!! The date or time is not valid.");
             }
+        }
+        // Returns new deadline / event with the date and optionally time.
+        switch (taskType) {
+        case DEADLINE:
+            return new Deadline(description, localDate, localTime);
+        case EVENT:
+            return new Event(description, localDate, localTime);
+        default:
+            // Invalid task type.
+            assert false;
+            throw new DukeException("OOPS!!! There were some problems in making the task.");
         }
     }
 
@@ -167,11 +189,12 @@ public class Parser {
      * It can also parse dates that are y-M-d, y/M/d, y M d provided they are in the full numerical representations
      * of year, month and day e.g. 2011-01-11.
      *
-     * @param input The date to be parsed.
+     * @param date The date in string to be parsed.
      * @return Local date format of the input date.
+     * @throws DukeException If date cannot be parsed.
      */
-    private static LocalDate parseDate(String input) {
-        String parsedInput = input.trim().toUpperCase();
+    private static LocalDate parseDate(String date) throws DukeException {
+        String parsedInput = date.trim().toUpperCase();
         try {
             return parseLocalDateFromStringDate(parsedInput);
         } catch (IllegalArgumentException e) {
@@ -187,8 +210,8 @@ public class Parser {
         } catch (IllegalArgumentException e) {
             // Try the other ways to parse the date first.
         }
-        // By reaching here, it means that the date cannot be parsed and null is returned.
-        return null;
+        // By reaching here, it means that the date cannot be parsed and an exception is thrown.
+        throw new DukeException("OOPS!!! The date is not valid.");
     }
 
     /**
@@ -202,12 +225,12 @@ public class Parser {
      * It can also parse dates that are y-M-d, y/M/d, y M d provided they are in the full numerical representations
      * of year, month and day e.g. 2011-01-11.
      *
-     * @param date The date to be parsed.
+     * @param date The date in string to be parsed.
      * @return Local date format of the input date.
+     * @throws IllegalArgumentException If the date cannot be parsed as any of the accepted date formats.
      */
     private static LocalDate parseLocalDateFromStringDate(String date) {
-        for (int i = 0; i < DATE_FORMATS.size(); i++) {
-            String format = DATE_FORMATS.get(i);
+        for (String format : DATE_FORMATS) {
             try {
                 DateTimeFormatter dTF =
                         new DateTimeFormatterBuilder().parseCaseInsensitive()
@@ -215,20 +238,19 @@ public class Parser {
                                 .toFormatter();
                 return LocalDate.parse(date, dTF);
             } catch (DateTimeParseException e) {
-                if (i == DATE_FORMATS.size() - 1) {
-                    throw new IllegalArgumentException();
-                }
+                // We want to go through all the date formats first.
             }
         }
-        return null;
+        throw new IllegalArgumentException();
     }
 
     /**
      * Parses day of the week in string to the next such day in local date format.
      * Days of the week are Monday to Sunday.
      *
-     * @param day The day of the week.
+     * @param day The day of the week in string to be parsed.
      * @return Local date format of the day.
+     * @throws IllegalArgumentException If the day cannot be parsed as a day of the week.
      */
     private static LocalDate parseLocalDateFromDay(String day) {
         DayOfWeek parsedDay;
@@ -263,8 +285,9 @@ public class Parser {
     /**
      * Parses the relative day to the local date format. Relative days include yesterday, today and tomorrow.
      *
-     * @param day The relative day.
+     * @param day The relative day in string to be parsed.
      * @return Local date format of the relative day.
+     * @throws IllegalArgumentException If the day cannot be parsed as a relative day.
      */
     private static LocalDate parseLocalDateFromRelativeDay(String day) {
         switch (day) {
@@ -282,20 +305,22 @@ public class Parser {
     /**
      * Parses input time in the format of HH:mm to the local time format. HH must be in the 24 hours format.
      *
-     * @param potentialTime The input time to be parsed.
+     * @param time The time in string to be parsed.
      * @return The local time format of the input time.
+     * @throws DukeException If time cannot be parsed.
      */
-    private static LocalTime parseTime(String potentialTime) {
+    private static LocalTime parseTime(String time) throws DukeException {
         try {
             DateTimeFormatter dTF = new DateTimeFormatterBuilder()
                     .parseCaseInsensitive()
                     .appendPattern("HH:mm")
                     .toFormatter();
-            return LocalTime.parse(potentialTime, dTF);
+            return LocalTime.parse(time, dTF);
         } catch (DateTimeParseException e) {
-            //We want to go through all the possible time formats first.
-            // If no format can be found at all, then return null.
+            // We want to go through all the possible time formats first.
+            // Note however that currently there is only one accepted time format, HH:mm.
         }
-        return null;
+        // By reaching here, it means that the time cannot be parsed and an exception is thrown.
+        throw new DukeException("OOPS!!! The time is not valid.");
     }
 }

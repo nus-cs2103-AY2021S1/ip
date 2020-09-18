@@ -5,7 +5,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Represents tasks that occur at a specific date and optionally time.
+ * Represents tasks that occur at a specific date and time.
  */
 public class Event extends Task {
     /** The date at which this task occurs. */
@@ -14,7 +14,7 @@ public class Event extends Task {
     protected LocalTime atTime;
 
     /**
-     * Creates a new Event with the specified description and specified event date.
+     * Creates a new event with the specified description, specified date and specified time.
      *
      * @param description The description of the event.
      * @param atDate The date at which the event occurs.

@@ -69,6 +69,7 @@ public class Storage {
                     task = Parser.parseDateTimeTask(TaskType.EVENT, eventDescription + " /at " + eventDateTime);
                     break;
                 default:
+                    // Invalid task type.
                     assert false : splitTask[0];
                     throw new IllegalArgumentException();
                 }
@@ -80,7 +81,7 @@ public class Storage {
             return tasks;
         } catch (FileNotFoundException e) {
             throw new DukeException("OOPS!!! No saved tasks were found.");
-        } catch (IllegalArgumentException | ArrayIndexOutOfBoundsException | DateTimeParseException e) {
+        } catch (DukeException | IllegalArgumentException | ArrayIndexOutOfBoundsException | DateTimeParseException e) {
             throw new DukeException("OOPS!!! The previous tasks were not saved correctly.");
         }
     }
@@ -111,6 +112,7 @@ public class Storage {
                             + "\n");
                     break;
                 default:
+                    // Invalid task type.
                     assert false : task.getShortForm();
                     throw new IllegalArgumentException();
                 }
