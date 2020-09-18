@@ -87,7 +87,7 @@ public class Parser {
   private String handleDelete(String command) {
     int index;
     try {
-      index = Integer.parseInt(command.substring(7));
+      index = Integer.parseInt(command.substring(7)) - 1;
     } catch (IndexOutOfBoundsException e) {
       // no proper number given
       Printer.printTaskNotFound();
@@ -195,7 +195,7 @@ public class Parser {
 
     // get content after the slash
     if (index == -1 || index == content.length() - 1) {
-      return "No deadline given!";
+      return "No event time given!";
     }
 
     // for String formatting reasons, check if there is a space before the slash
