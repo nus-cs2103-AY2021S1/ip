@@ -1,5 +1,3 @@
-
-# User Guide
 Stormy is a personal task manager that helps a person keep track of their tasks, deadlines and events.
 
 Created by: Wen Jin
@@ -37,9 +35,7 @@ Created by: Wen Jin
 
 ## Features
 
-<div markdown="block" class="alert alert-info">
-
-**:information_source: Notes about the command format:**<br>
+**Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `todo DESC`, `DESC` is a parameter which can be used as `todo read book`.
@@ -49,8 +45,6 @@ Created by: Wen Jin
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[MORE_KEYWORDS]…​` can be used as ` ` (i.e. 0 times), `book`, `book clubs` etc.
-
-</div>
 
 | Feature name          | Description                                                               | Format
 |:---                   | :---                                                                      | :---
