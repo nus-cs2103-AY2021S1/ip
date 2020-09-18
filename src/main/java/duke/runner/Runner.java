@@ -18,7 +18,7 @@ public class Runner {
     run();
   }
 
-  /**
+  /*
    * Prints hello, goodbye, nd output of command executions. Also runs the event loop.
    */
   public static void run() {
@@ -27,15 +27,17 @@ public class Runner {
     duke.addObserver(new CLI());
 
     String input;
-    while (!Parser.isTerminate(input = sc.nextLine().trim())) {
+    while (true) {
       try {
+        input = sc.nextLine();
         Command command = Parser.parseCommand(input);
         command.execute(duke);
-      } catch (ParserException e) {
+        if (command.isExit()) {
+          break;
+        }
+      } catch (Exception e) { // TODO: break up exception catching
         System.out.println(e.getMessage());
       }
     }
-
-    System.out.println("Bye. Hope to see you again.");
   }
 }

@@ -2,17 +2,14 @@ package duke.command;
 
 import duke.duke.Duke;
 
-public class TodoCommand extends Command {
+public class ByeCommand extends Command {
 
-  private final String desc;
-
-  public TodoCommand(String desc) {
-    this.desc = desc;
+  public ByeCommand() {
   }
 
   @Override
   public void execute(Duke duke) throws Exception {
-    duke.addTodoTask(desc);
+    duke.removeAllObservers();
   }
 
   @Override
@@ -22,6 +19,6 @@ public class TodoCommand extends Command {
 
   @Override
   public boolean isExit() {
-    return false;
+    return true;
   }
 }

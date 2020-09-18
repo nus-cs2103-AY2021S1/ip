@@ -1,5 +1,6 @@
 package duke.utils;
 
+import duke.command.ByeCommand;
 import duke.command.Command;
 import duke.command.CommandEnum;
 import duke.command.CompleteTaskCommand;
@@ -9,26 +10,24 @@ import duke.command.EventCommand;
 import duke.command.ListTasksCommand;
 import duke.command.TodoCommand;
 import duke.exception.ParserException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * duke.utils.Parser is the class that handles input parsing. Given a string, it should determine
  * what command to execute and execute it.
  */
 public class Parser {
-  /**
-   * @param s command supplied
-   * @return true if it's an exit command, ignoring case
-   */
-  public static boolean isTerminate(String s) {
-    return CommandEnum.valueOf(s.toUpperCase()).equals(CommandEnum.TERMINATE);
-  }
+
+  private static final DateTimeFormatter DT_FORMAT = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 
   /**
    * @param s command supplied
    * @return a list of string (tasks) corresponding to command execution output
    */
   public static Command parseCommand(String s) throws ParserException {
-    String[] args = s.split("\\s+", 2);
+    String[] args = s.trim().split("\\s+", 2);
     CommandEnum cmdEnum;
     try {
       cmdEnum = CommandEnum.valueOf(args[0].toUpperCase());
@@ -37,38 +36,39 @@ public class Parser {
     }
 
     switch (cmdEnum) {
-      case TASK_LIST:
+      case BYE:
+        return new ByeCommand();
+      case LIST:
         return new ListTasksCommand();
-      case TASK_ADD_TODO: {
+      case TODO: {
         String todo = parseTodo(args[1]);
         return new TodoCommand(todo);
       }
-      case TASK_ADD_EVENT: {
+      case EVENT: {
         String[] inputArr = parseEvent(args[1]);
         return new EventCommand(inputArr[0], inputArr[1]);
       }
-      case TASK_ADD_DEADLINE: {
+      case DEADLINE: {
         String[] inputArr = parseDeadline(args[1]);
         return new DeadlineCommand(inputArr[0], inputArr[1]);
-      }
-      case TASK_SET_DONE: {
+      } case DONE: {
         int[] taskIdList = parseTaskIds(args[1]);
         return new CompleteTaskCommand(taskIdList[0]);
-//        for (int taskId : taskIdList) {
-//          Command command = new CompleteTaskCommand(taskId);
-//          command.execute(Duke.getInstance());
-//        }
       }
-      case TASK_DELETE: {
+      case DELETE: {
         int[] taskIdList = parseTaskIds(args[1]);
         return new DeleteTaskCommand(taskIdList[0]);
-//        for (int taskId : taskIdList) {
-//          Command command = new CompleteTaskCommand(taskId);
-//          command.execute(Duke.getInstance());
-//        }
       }
       default:
         throw new ParserException("No such command!");
+    }
+  }
+
+  public static LocalDateTime parseDateTime(String dateTimeString) throws ParserException {
+    try {
+      return LocalDateTime.parse(dateTimeString, DT_FORMAT);
+    } catch (DateTimeParseException e) {
+      throw new ParserException("DateTime format error.");
     }
   }
 
