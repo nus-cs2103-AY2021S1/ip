@@ -128,3 +128,13 @@ Expected outcome:
 Tasks marked as done: 
 [E][&#2717] pizza party (by: 1 Dec 2020)
 ```
+
+### `bye` - Exit the program
+
+Example of usage: 
+
+`bye`
+
+Expected outcome:
+
+`Program exits`
