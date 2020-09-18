@@ -9,5 +9,6 @@ public enum CMD {
     DONE,
     DELETE,
     FIND,
+    UPDATE,
     DEFAULT
 }

@@ -1,5 +1,5 @@
-duke.task.Task list (Last updated Sep 2 2020, 02:56:05 AM):
-1. [T][✓] hello
-2. [D][✗] homework (by: Mar 3 2020)
+duke.task.Task list (Last updated Sep 18 2020, 16:35:19 PM):
+1. [T][✓] timetimenlowe
+2. [D][✗] homework (by: Feb 2 2014)
 3. [E][✓] finish (at: Mar 4 2021, 12:00:00 PM)
 4. [T][✗] temp

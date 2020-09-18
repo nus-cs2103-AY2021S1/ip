@@ -18,7 +18,7 @@ public class Command {
         return this.isExit;
     }
 
-    public String getResponse(TaskList taskList, Storage storage) throws DukeException {
+    public String getResponse(TaskList tasklist, Storage storage) throws DukeException {
         return "CAN I HAZ CHEEZBURGER?";
     }
 

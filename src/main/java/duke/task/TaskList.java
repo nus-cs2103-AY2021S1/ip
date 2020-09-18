@@ -1,5 +1,6 @@
 package duke.task;
 
+import duke.Duke;
 import duke.DukeException;
 import duke.datetime.DateTimeFormat;
 import duke.datetime.DateTimeUtility;
@@ -150,6 +151,45 @@ public class TaskList {
             tasks.get(idx).setDone(true);
         }
     }
+
+    /**
+     * Updates an existing task in the taskList with a new description, accessed by index. Performs input
+     * validation on the task index and throws a DukeException if the input is invalid.
+     *
+     * @param idx
+     * @param newDescription
+     * @throws DukeException
+     */
+    public String updateTaskDescription(int idx, String newDescription) throws DukeException {
+        if (idx < 0 || idx >= tasks.size()) {
+            throw new DukeException("U DOAN HAS TASK WIF DIS LABEL");
+        } else {
+            tasks.get(idx).setDescription(newDescription);
+            return tasks.get(idx).toString();
+        }
+    }
+
+    /**
+     * Updates an existing task in the tasklist with a new date, accessed by index. Performs input
+     * validation on the task index and date and throws a DukeException if the input index is invalid,
+     * or if the task does not take in a date.
+     *
+     * @param idx
+     * @param newDate
+     * @throws DukeException
+     */
+
+    public String updateTaskDate(int idx, String newDate) throws DukeException {
+        if (idx < 0 || idx >= tasks.size()) {
+            throw new DukeException("U DOAN HAS TASK WIF DIS LABEL");
+        } else if (!(tasks.get(idx) instanceof TimedTask)) {
+            throw new DukeException("DIS TASK GOTS NO DATE FER UPDATE LULZ");
+        } else {
+            ((TimedTask)tasks.get(idx)).setByString(newDate);
+            return tasks.get(idx).toString();
+        }
+    }
+
 
     /**
      * Removes an existing task from the taskList by index and returns its string representation.

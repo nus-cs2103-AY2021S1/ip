@@ -14,10 +14,10 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public String getResponse(TaskList taskList, Storage storage) throws DukeException {
-        taskList.markTaskAsDone(this.idx);
-        storage.save(taskList);
-        return "TASK IZ NAO DUNZ!!!!1!11!\n" + "  " + taskList.getTaskByIdx(this.idx);
+    public String getResponse(TaskList tasklist, Storage storage) throws DukeException {
+        tasklist.markTaskAsDone(this.idx);
+        storage.save(tasklist);
+        return "TASK IZ NAO DUNZ!!!!1!11!\n" + "  " + tasklist.getTaskByIdx(this.idx);
     }
 
     @Override

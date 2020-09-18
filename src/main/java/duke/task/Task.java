@@ -14,6 +14,8 @@ public class Task {
 
     public String getDescription() { return this.description; };
 
+    public void setDescription(String description) { this.description = description; }
+
     public void setDone(boolean status) {
         this.isDone = status;
     }

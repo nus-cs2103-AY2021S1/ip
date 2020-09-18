@@ -11,11 +11,14 @@ public class TimedTask extends Task {
     public TimedTask(String description, String by) {
         super(description);
         this.byString = by;
-        this.format = DateTimeUtility.checkDateTimeType(by);
+    }
+
+    public void setByString(String byString) {
+        this.byString = byString;
     }
 
     public String formatBy() {
-        return DateTimeUtility.formatString(this.byString, this.format);
+        return DateTimeUtility.formatString(this.byString);
     }
 
     public String getByString() {

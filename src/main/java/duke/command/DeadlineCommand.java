@@ -17,10 +17,10 @@ public class DeadlineCommand extends Command {
     }
 
     @Override
-    public String getResponse(TaskList taskList, Storage storage) throws DukeException {
-        String msg = "I PUT NEW TING IN DA LIST\n  " + taskList.addDeadline(this.taskName, this.by)
-                + "\nNAO U HAS " + taskList.getNumberOfTasks() + " FINGS IN DA LIST LULZIES";
-        storage.save(taskList);
+    public String getResponse(TaskList tasklist, Storage storage) throws DukeException {
+        String msg = "I PUT NEW TING IN DA LIST\n  " + tasklist.addDeadline(this.taskName, this.by)
+                + "\nNAO U HAS " + tasklist.getNumberOfTasks() + " FINGS IN DA LIST LULZIES";
+        storage.save(tasklist);
         return msg;
     }
 

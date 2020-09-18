@@ -121,6 +121,33 @@ public class Parser {
                 return new FindCommand(rest);
             }
 
+        case UPDATE:
+            if (rest.isEmpty()) {
+                throw new DukeException("U MUST PUT DA INDEX OV TASK AN' NEW NAME LULZ");
+            }
+
+            int taskIdx;
+            String newInput;
+            try {
+                String parts[] = rest.split(" ", 2);
+                taskIdx = Integer.parseInt(parts[0]) - 1;
+                newInput = parts[1];
+            } catch (NumberFormatException e) {
+                throw new DukeException("U MUST PUT INDEX OV TASK LULS");
+            }
+
+            dateStrIdx = newInput.indexOf("/date");
+            if (dateStrIdx != -1) {
+                dateStr = newInput.substring(dateStrIdx + 5).trim();
+                if (DateTimeUtility.checkDateTimeType(dateStr) == DateTimeFormat.String) {
+                    throw new DukeException("U NID 2 GIV CORRECT DATE FOMAT!");
+                } else {
+                    return new UpdateCommand(taskIdx, dateStr, true);
+                }
+            } else {
+                return new UpdateCommand(taskIdx, newInput, false);
+            }
+
         case DEFAULT:
             return new Command();
         }

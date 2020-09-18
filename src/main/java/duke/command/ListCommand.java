@@ -28,14 +28,14 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public String getResponse(TaskList taskList, Storage storage) throws DukeException {
-        if (taskList.isEmpty()) {
+    public String getResponse(TaskList tasklist, Storage storage) throws DukeException {
+        if (tasklist.isEmpty()) {
             return "UR LIST HAZ NUTHIN LOLOL";
         } else {
             if (this.by.isEmpty()) {
-                return ("U HAS DEES TINGS IN UR LIST.\n" + taskList.toString());
+                return ("U HAS DEES TINGS IN UR LIST.\n" + tasklist.toString());
             } else {
-                String ret = taskList.filterTasksByDate(this.by);
+                String ret = tasklist.filterTasksByDate(this.by);
                 if (ret.isEmpty()) {
                     return "U HAZ NUTHIN DUE/HAPPENIN BY "
                                 + DateTimeUtility.formatString(this.by) + "!! LULZIES";

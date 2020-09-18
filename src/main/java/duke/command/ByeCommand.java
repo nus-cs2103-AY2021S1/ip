@@ -14,7 +14,7 @@ public class ByeCommand extends Command {
     }
 
     @Override
-    public String getResponse(TaskList taskList, Storage storage) throws DukeException {
+    public String getResponse(TaskList tasklist, Storage storage) throws DukeException {
         return "OKAIS I IZ GOIN 2 NOM BYEEEEE C U !!!1!1!!";
     }
 
