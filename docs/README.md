@@ -1,5 +1,4 @@
 # User Guide
-# Table of Contents
 
 ## Features <a name="Features"></a>
 
@@ -64,8 +63,8 @@ Example of usage:
 
 Expected outcome:
 
-` Nice! I've marked this task as done:
-         [T][✓] read books`
+` Nice! I've marked this task as done:`  
+         `[T][✓] read books`
          
 ### Feature 5 Delete a task
 Delete a certain task from the list.
@@ -102,7 +101,8 @@ Type `check` and the date to find the tasks that matches the date.
  
  Expected outcome:
  
-`[E][✘] work hard (at: 12 12 2020 12 : 21)`
+` Here are the matching tasks in your list:`  
+`1. [E][✘] work hard (at: 12 12 2020 12 : 21)`
 
 
 ### Feature 7 Find tasks by keyword
@@ -120,7 +120,8 @@ Find the tasks that matches the keyword.
  
  Expected outcome:
  
-`[E][✘] work hard (at: 12 12 2020 12 : 21)`
+` Here are all the tasks in your list:`  
+`1. [E][✘] work hard (at: 12 12 2020 12 : 21)`
 
 ### Feature 8 Update task information
 Update the date and time of a event/deadline task according to index.
