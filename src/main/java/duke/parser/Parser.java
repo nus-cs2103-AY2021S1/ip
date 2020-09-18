@@ -1,5 +1,6 @@
 package duke.parser;
 
+import duke.Duke;
 import duke.DukeException;
 import duke.command.*;
 import duke.datetime.DateTimeFormat;
@@ -40,63 +41,65 @@ public class Parser {
             dateStrIdx = rest.indexOf("/by");
             if (dateStrIdx == -1) {
                 return new ListCommand();
+            }
+
+            dateStr = rest.substring(dateStrIdx + 3).trim();
+            if (DateTimeUtility.checkDateTimeType(dateStr) != DateTimeFormat.String) {
+                return new ListCommand(dateStr);
             } else {
-                dateStr = rest.substring(dateStrIdx + 3).trim();
-                if (DateTimeUtility.checkDateTimeType(dateStr) == DateTimeFormat.String) {
-                    throw new DukeException("U NID 2 GIV CORRECT DATE FOMAT!");
-                } else {
-                    return new ListCommand(dateStr);
-                }
+                throw new DukeException("U NID 2 GIV CORRECT DATE FOMAT!");
             }
 
         case TODO:
-            if (rest.isEmpty()) {
-                throw new DukeException("ME FINKZ DAT U NED 2 ENTR NAYM 4 UR TODO ITEM LULZ");
-            } else {
+            if (!rest.isEmpty()) {
                 return new TodoCommand(rest);
+            } else {
+                throw new DukeException("ME FINKZ DAT U NED 2 ENTR NAYM 4 UR TODO ITEM LULZ");
             }
 
         case DEADLINE:
             if (rest.isEmpty()) {
                 throw new DukeException("ME FINKZ DAT U NED 2 ENTR NAYM 4 UR DEDLINE ITEM LULZ");
-            } else {
-                dateStrIdx = rest.indexOf("/by");
-                if (dateStrIdx == -1) {
-                    throw new DukeException("ME FINKZ U NED 2 GIV DATE 4 TIEM 4 DA DEDLINE USIN /by");
-                } else {
-                    item = rest.substring(0, dateStrIdx).trim();
-                    dateStr = rest.substring(dateStrIdx + 3).trim();
-
-                    if (item.isEmpty()) {
-                        throw new DukeException("ME FINKZ U NED 2 GIV DA DEDLINE A NAEM");
-                    } else if (dateStr.isEmpty()) {
-                        throw new DukeException("ME FINKZ U NED 2 PUT SUMTHIN 4 DA DATE OR TIEM");
-                    } else {
-                        return new DeadlineCommand(item, dateStr);
-                    }
-                }
             }
+
+            if (rest.indexOf("/by") == -1) {
+                throw new DukeException("ME FINKZ U NED 2 GIV DATE 4 TIEM 4 DA DEDLINE USIN /by");
+            }
+
+            dateStrIdx = rest.indexOf("/by");
+            item = rest.substring(0, dateStrIdx).trim();
+            dateStr = rest.substring(dateStrIdx + 3).trim();
+
+            if (!item.isEmpty() && !dateStr.isEmpty()) {
+                return new DeadlineCommand(item, dateStr);
+            } else if (item.isEmpty()) {
+                throw new DukeException("ME FINKZ U NED 2 GIV DA DEDLINE A NAEM");
+            } else {
+                throw new DukeException("ME FINKZ U NED 2 PUT SUMTHIN 4 DA DATE OR TIEM");
+            }
+
 
         case EVENT:
             if (rest.isEmpty()) {
                 throw new DukeException("ME FINKZ DAT U NED 2 ENTR NAYM 4 UR EVENT ITEM LULZ");
-            } else {
-                dateStrIdx = rest.indexOf("/at");
-                if (dateStrIdx == -1) {
-                    throw new DukeException("ME FINKZ U NED 2 GIV DATE 4 TIEM 4 DA EVENT USIN /at");
-                } else {
-                    item = rest.substring(0, dateStrIdx).trim();
-                    dateStr = rest.substring(dateStrIdx + 3).trim();
-
-                    if (item.isEmpty()) {
-                        throw new DukeException("ME FINKZ U NED 2 GIV DA EVENT A NAEM");
-                    } else if (dateStr.isEmpty()) {
-                        throw new DukeException("ME FINKZ U NED 2 PUT SUMTHIN 4 DA DATE OR TIEM");
-                    } else {
-                        return new EventCommand(item, dateStr);
-                    }
-                }
             }
+
+            if (rest.indexOf("/at") == -1) {
+                throw new DukeException("ME FINKZ U NED 2 GIV DATE 4 TIEM 4 DA EVENT USIN /at");
+            }
+
+            dateStrIdx = rest.indexOf("/at");
+            item = rest.substring(0, dateStrIdx).trim();
+            dateStr = rest.substring(dateStrIdx + 3).trim();
+
+            if (!item.isEmpty() && !dateStr.isEmpty()) {
+                return new EventCommand(item, dateStr);
+            } else if (item.isEmpty()) {
+                throw new DukeException("ME FINKZ U NED 2 GIV DA EVENT A NAEM");
+            } else {
+                throw new DukeException("ME FINKZ U NED 2 PUT SUMTHIN 4 DA DATE OR TIEM");
+            }
+
 
         case DONE:
             try {
@@ -115,10 +118,11 @@ public class Parser {
             }
 
         case FIND:
-            if (rest.isEmpty()) {
-                throw new DukeException("ME FINKZ DAT U NED 2 ENTR NAYM 4 UR TODO ITEM LULZ");
-            } else {
+            if (!rest.isEmpty()) {
                 return new FindCommand(rest);
+            } else {
+                throw new DukeException("ME FINKZ DAT U NED 2 ENTR NAYM 4 UR TODO ITEM LULZ");
+
             }
 
         case UPDATE:
@@ -128,6 +132,7 @@ public class Parser {
 
             int taskIdx;
             String newInput;
+
             try {
                 String parts[] = rest.split(" ", 2);
                 taskIdx = Integer.parseInt(parts[0]) - 1;
@@ -137,15 +142,16 @@ public class Parser {
             }
 
             dateStrIdx = newInput.indexOf("/date");
-            if (dateStrIdx != -1) {
-                dateStr = newInput.substring(dateStrIdx + 5).trim();
-                if (DateTimeUtility.checkDateTimeType(dateStr) == DateTimeFormat.String) {
-                    throw new DukeException("U NID 2 GIV CORRECT DATE FOMAT!");
-                } else {
-                    return new UpdateCommand(taskIdx, dateStr, true);
-                }
-            } else {
+
+            if (dateStrIdx == -1) {
                 return new UpdateCommand(taskIdx, newInput, false);
+            }
+
+            dateStr = newInput.substring(dateStrIdx + 5).trim();
+            if (!dateStr.isEmpty()) {
+                return new UpdateCommand(taskIdx, dateStr, true);
+            } else {
+                throw new DukeException("U CANNOT GIV EMPTY DATE!");
             }
 
         case DEFAULT:
