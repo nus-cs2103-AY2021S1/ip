@@ -6,9 +6,9 @@ Duke is a revolutionary **chatbot desktop app that keeps track of your tasks for
 * Quick Start
 * Features
 	1.  Adding a task : 
-		1.  Todo : [``` todo```](https://avalionnet.github.io/ip/#Todo)
-		2. Event : [```event```](https://avalionnet.github.io/ip/#Event)
-		3. Deadline : [```deadline```](https://avalionnet.github.io/ip/#Deadline)
+		1.  Todo : [``` todo```](https://avalionnet.github.io/ip/#todo)
+		2. Event : [```event```](https://avalionnet.github.io/ip/#event)
+		3. Deadline : [```deadline```](https://avalionnet.github.io/ip/#deadline)
 	2.	Viewing tasks :
 			1.	View all saved tasks : ``` list```
 			2.	View all tasks on a particular date : ```view```
@@ -26,7 +26,7 @@ Installing Duke is fairly simple and 5 minutes is all you will need. Mark the li
   
  - To find out the Java version you have installed, click [here](https://www.java.com/en/download/help/version_manual.xml). 
  - If Java is not installed on your computer, click [here](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html) to download it. 
- Download the latest `duke.jar` software from [here](https://github.com/avalionnet/ip/releases).
+ - Download the latest `duke.jar` software from [here](https://github.com/avalionnet/ip/releases).
  
  2. Save the file to the folder you want Duke to be installed in. 
  
