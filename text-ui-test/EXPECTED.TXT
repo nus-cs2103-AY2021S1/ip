@@ -1,7 +1,35 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+Hello there! My name is
+ ______   _____  _____  ___  ____   ________
+|_   _ `.|_   _||_   _||_  ||_  _| |_   __  |
+  | | `. \ | |    | |    | |_/ /     | |_ \_|
+  | |  | | | '    ' |    |  __'.     |  _| _
+ _| |_.' /  \ \__/ /    _| |  \ \_  _| |__/ |
+|______.'    `.__.'    |____||____||________|
+How may I assist you today?
+---------------------------
+Thank you for your input. The following task has been added to the list:
+ [T][✘] read book
+You have a total of 1 task in the list.
+---------------------------
+Thank you for your input. The following task has been added to the list:
+ [D][✘] return book (by: 5th of July 2018, 6pm)
+You have a total of 2 tasks in the list.
+---------------------------
+Thank you for your input. The following task has been added to the list:
+ [E][✘] project meeting (at: 12th of March 2019, 11am)
+You have a total of 3 tasks in the list.
+---------------------------
+These are the tasks in your list:
+1.[T][✘] read book
+2.[D][✘] return book (by: 5th of July 2018, 6pm)
+3.[E][✘] project meeting (at: 12th of March 2019, 11am)
+---------------------------
+The following task has been successfully removed:
+[T][✘] read book
+You have a total of 2 tasks in the list.
+---------------------------
+These are the matching tasks in your list:
+1.[D][✘] return book (by: 5th of July 2018, 6pm)
+---------------------------
+Tasks have been successfully saved to duke.txt!
+Goodbye. Hope to see you again soon!
