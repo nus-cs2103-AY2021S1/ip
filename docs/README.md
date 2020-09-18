@@ -87,7 +87,7 @@ Find tasks whose names contain the keyword.
 
 Format: `find KEYWORD`
 - `KEYWORD` cannot be empty
-- The search is case-insensitive. E.g. `tEsT` will match `test`.
+- The search is case-sensitive. E.g. `tEsT` will not match `test`.
 - Only the name is searched.
 - Part search will also match full words. E.g. `te` will match `test`.
 - The order of the keywords does not matter. E.g. `Exam Mock` will match `Mock Exam`.
