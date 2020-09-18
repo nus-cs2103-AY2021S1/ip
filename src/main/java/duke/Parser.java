@@ -57,7 +57,7 @@ public class Parser {
         if (userInput.startsWith("#")) {
             return new HashtagCommand(parseTagToFind(userInput.substring(1)));
         }
-        switch (command) {
+        switch (command.trim()) {
         case ("bye") :
             return new ByeCommand();
         case ("list") :
