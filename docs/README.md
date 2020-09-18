@@ -2,13 +2,14 @@
 Duke is a desktop dog to help you manage tasks in the form of todos, deadlines and events. It is optimised for use via Command Line Interface (CLI). If you can type fast, Duke can help you record your tasks faster than with a traditional GUI.
 
 ## Features 
-
+[Add a new Todo](#todo)
 ### Viewing help: `help`
 Displays features and the commands needed to use them.
 #### Usage
 Format: `/help`
 * Instructions will be displayed in the following format - GENERAL DESCRIPTION: input needed.
 
+#Todo
 ### Add a new ToDo: `todo`
 Adds a new ToDo task to the list.
 #### Usage
@@ -123,6 +124,3 @@ Closes the app and saves the list.
 Format: `bye`
 * Closes the app and saves the list in the save directory as the app.
 * If closed without this command, changes to the list will **not** be saved.
-
-Examples:
-* `bye`
