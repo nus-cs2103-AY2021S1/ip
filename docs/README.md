@@ -2,8 +2,8 @@
 ByteMe is a desktop scheduling app to help you manage your daily tasks. It is optimized for use via a Command Line Interface (CLI).
 
 ## Table of Content
-* Quick Start
-* Features
+* [Quick Start](https://xz0127.github.io/ip/#quick-start)
+* [Features](https://xz0127.github.io/ip/#features)
     * Adding a todo task
     * Adding an event
     * Adding a deadline
@@ -13,7 +13,7 @@ ByteMe is a desktop scheduling app to help you manage your daily tasks. It is op
     * Finding a task
     * Finding free slots
     * Exiting programme
-* Usage
+* [Usage](https://xz0127.github.io/ip/#usage)
 
 ## Quick Start
 1. Ensure you have Java `11` or above installed on your computer.
@@ -23,6 +23,7 @@ ByteMe is a desktop scheduling app to help you manage your daily tasks. It is op
     * Note that Duke will automatically create folder `data` 
       in the same directory of `duke.jar` to save the tasks.
     * The following GUI will appear: 
+    
       ![starting Image](./Starting.png)
     * If the GUI cannot be started by double-clicking, open `duke.jar` in `Terminal/Command Prompt` depending on your system by the following command:
         * `cd` home directory of `duke.jar` 
