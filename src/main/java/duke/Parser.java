@@ -195,7 +195,7 @@ public class Parser {
         if (userInputWords.length <= 1) {
             throw new DukeException("The description of a deadline cannot be empty.");
         }
-        int index = input.indexOf("/");
+        int index = input.indexOf("/by");
         if (index == INVALID_INDEX) {
             throw new DukeException("Please include the date of the deadline!");
         }
@@ -229,7 +229,7 @@ public class Parser {
         if (userInputWords.length <= 1) {
             throw new DukeException("The description of an event cannot be empty.");
         }
-        int index = input.indexOf("/");
+        int index = input.indexOf("/at");
         if (index == INVALID_INDEX) {
             throw new DukeException("Please include the date of the event!");
         }
