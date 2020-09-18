@@ -15,11 +15,11 @@ Delete old tasks from the tasklist.
 Mark tasks as done after completing them.
 
 ### Feature 5: Duplicate tasks detection
-If the task being added has the same name and timing (if applicable) as another task in
+If the task being added has the same name and date (if applicable) as another task in
 the tasklist, the new task will not be added to the tasklist.
 
 ### Feature 6: Help command
-A list of available commands will be shown to the user when the user enters `help`.
+A list of available commands will be shown to the user when the user inputs `help`.
 
 ### Feature 7: Case insensitive commands
 The commands entered do not have to be case sensitive. `HELP`, `Help` and `help` are equivalent.
@@ -80,6 +80,7 @@ Example of usage:
 `deadline homework /by 2020-10-04`
 
 Expected outcome:
+
     ____________________________________________________________
       Got it. I've added the following task: 
         [D][N] homework (by: Oct 4 2020)
@@ -96,6 +97,7 @@ Example of usage:
 `find birthday`
 
 Expected outcome:
+
     ____________________________________________________________
       Here are the matching tasks in your list:
       1. [E][N] birthday (at: Jan 16 2021)
@@ -112,6 +114,7 @@ Example of usage:
 `done 2`
 
 Expected outcome:
+
     ____________________________________________________________
       Nice job! I'll mark that as done:
         [T][Y] Visit Brandon's house
@@ -125,6 +128,7 @@ Example of usage:
 `list`
 
 Expected outcome:
+
     ____________________________________________________________
       You have the following tasks in your list:
       1. [E][N] birthday (at: Jan 16 2021)
@@ -143,6 +147,7 @@ Example of usage:
 `delete 2`
 
 Expected outcome:
+
     ____________________________________________________________
       Noted. The following task has been removed:
         [T][Y] Visit Brandon's house
@@ -157,6 +162,7 @@ Example of usage:
 `delete all`
 
 Expected outcome:
+
     ____________________________________________________________
       Noted. All tasks have been removed.
     ____________________________________________________________
@@ -169,6 +175,7 @@ Example of usage:
 `help`
 
 Expected outcome:
+
     ____________________________________________________________
       Here is the list of available commands:
 
@@ -193,6 +200,7 @@ Example of usage:
 
 Expected outcome:
 Window closes after a second after printing the farewell message:
+
     ____________________________________________________________
       Deuk: Goodbye, hope to see you again!
     ____________________________________________________________
