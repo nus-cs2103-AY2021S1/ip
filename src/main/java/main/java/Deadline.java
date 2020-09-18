@@ -20,6 +20,10 @@ public class Deadline extends Task {
         this.isDone = isDone;
     }
 
+    /**
+     * gives the String representing the deadline
+     * @return a String representing the deadline
+     */
     private String getDeadline() {
         return deadline.format(DateTimeFormatter.ofPattern(" MMM dd yyyy"));
     }

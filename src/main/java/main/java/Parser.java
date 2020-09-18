@@ -21,6 +21,11 @@ public class Parser {
         this.flag = flag;
     }
 
+    /**
+     * parses anf handles the command the user passes into duke
+     * @param input
+     * @return the String to print out
+     */
     public String handleCommand(String input) {
         sc = new Scanner(input);
         String command = sc.next();
@@ -300,7 +305,4 @@ public class Parser {
         fwAppend.close();
     }
 
-    public boolean getFlag() {
-        return flag;
-    }
 }
