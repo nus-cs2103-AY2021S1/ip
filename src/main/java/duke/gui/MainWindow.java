@@ -1,19 +1,14 @@
-package duke;
+package duke.gui;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-
-import javafx.application.Platform;
+import duke.Duke;
+import duke.DukeException;
 import javafx.fxml.FXML;
-
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import javafx.util.Duration;
-
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -26,31 +21,17 @@ public class MainWindow extends AnchorPane {
     private TextField userInput;
     @FXML
     private Button sendButton;
-    @FXML
+
     private Duke duke;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/LukeDaKing.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/LukeDaDuke.png"));
 
-    /**
-     * Initializes the main window of the gui.
-     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        dialogContainer.getChildren().add(DialogBox
-                        .getDukeDialog(new Duke()
-                                .getUi()
-                                .welcomeMessage(), dukeImage
-                        ));
     }
 
-    /**
-     * Sets duke object to duke variable.
-     *
-     * @param d Duke object.
-     */
-    @FXML
     public void setDuke(Duke d) {
         duke = d;
     }
@@ -58,18 +39,14 @@ public class MainWindow extends AnchorPane {
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
-     * Solution below adapted from https://github.com/pennhanlee/ip
-     *
-     * @author pennhanlee
      */
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
         String response = "";
-
         try {
             response += duke.getResponse(input);
-        } catch (DukeException ex) {
+        } catch (DukeException ex){
             response += ex;
         }
         dialogContainer.getChildren().addAll(
@@ -77,12 +54,5 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
-
-        if (input.equals("bye")) {
-            Timeline timeline = new Timeline(new KeyFrame(
-                    Duration.millis(1500), x -> Platform.exit()
-            ));
-            timeline.play();
-        }
     }
 }
