@@ -1,0 +1,16 @@
+.body {
+    -fx-background-image: url("/styles/background.png");
+}
+
+.speech-bubble {
+    -fx-background-color: #ADC5E1;
+    -fx-background-radius: 15px;
+}
+
+.user-speech-bubble {
+    -fx-background-color: #CBEEC2;
+}
+
+.error-speech-bubble {
+    -fx-background-color: #FFE4E1;
+}
