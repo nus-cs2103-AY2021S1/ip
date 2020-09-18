@@ -9,7 +9,7 @@ Viscount is a **desktop app for managing tasks, optimised for use via a Command 
 1. Copy the file to the folder you want to use as the home folder for the application.
 1. Double-click the file to start the app. A GUI should appear, with the field bar to input commands.
 
-Check out the [user guide](https://sc-arecrow.github.io/viscount/) to get started!
+Check out the [user guide](https://sc-arecrow.github.io/ip/) to get started!
 
 ## Setting up in Intellij for Developers
 
