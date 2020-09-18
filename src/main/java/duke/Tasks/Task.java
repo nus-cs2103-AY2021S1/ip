@@ -21,9 +21,7 @@ public abstract class Task {
 
     public abstract String saveString();
 
-    public boolean equals(Task task) {
-        return this.description.equals(task.description);
-    }
+    public abstract boolean equals(Task task);
 
     public boolean markDone() {
         if (done) {

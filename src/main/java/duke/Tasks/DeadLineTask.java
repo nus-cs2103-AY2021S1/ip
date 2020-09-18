@@ -1,6 +1,7 @@
 package duke.tasks;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class DeadLineTask extends Task {
 
@@ -12,13 +13,15 @@ public class DeadLineTask extends Task {
         this.date = date;
     }
 
-    public boolean equals(DeadLineTask deadLineTask) {
-        return super.equals(deadLineTask) && this.date.equals(deadLineTask.date);
+    public boolean equals(Task task) {
+        return task instanceof DeadLineTask &&
+                this.description.equals(task.description) &&
+                this.date.equals(((DeadLineTask) task).date);
     }
 
     @Override
     public String toString() {
-        return indicator + super.toString() + " (by: " + date + ")";
+        return indicator + super.toString() + " (By: " + date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")) + ")";
     }
 
     @Override

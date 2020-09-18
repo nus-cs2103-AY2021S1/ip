@@ -8,8 +8,8 @@ public class TodoTask extends Task {
         super(name);
     }
 
-    public boolean equals(TodoTask todoTask) {
-        return super.equals(todoTask);
+    public boolean equals(Task task) {
+        return task instanceof TodoTask && this.description.equals(task.description);
     }
 
     @Override
