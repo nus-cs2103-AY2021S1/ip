@@ -13,7 +13,7 @@ import duke.task.Event;
 
 public class ParserTest {
     @Test
-    public void eventParsing_goodDateFormat_success() throws DukeException {
+    public void parseEvent_goodDateFormat_parsedSuccessfully() throws DukeException {
         String command = "event date with girlfriend!! /at 2020-10-10T13:00";
         Event event = new Event("date with girlfriend!!", LocalDateTime.parse("2020-10-10T13:00"));
         AddCommand addCommand = new AddCommand(event);
@@ -22,7 +22,7 @@ public class ParserTest {
     }
 
     @Test
-    public void eventParsing_badDateFormat_exceptionThrown() {
+    public void parseEvent_badDateFormat_exceptionThrown() {
         String command = "event make some sandwiches /at Sunday";
         try {
             assertEquals(Parser.parse(command), Parser.parse(command));

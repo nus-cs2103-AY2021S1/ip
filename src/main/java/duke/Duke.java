@@ -9,7 +9,7 @@ public class Duke {
     private Ui ui;
     private TaskList tasks;
     private Storage storage;
-    
+
     /**
      * Creates a duke object.
      */
@@ -58,7 +58,7 @@ public class Duke {
             return e.getMessage();
         }
     }
-    
+
     /**
      * Creates a Duke object and runs the program.
      */
