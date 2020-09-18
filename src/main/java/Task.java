@@ -15,7 +15,7 @@ public class Task {
     }
 
     public String returnMissingNameError() {
-        return "The description of a task cannot be empty.";
+        return "The name of a task cannot be empty.";
     }
 
     public String getSaveDataString() {

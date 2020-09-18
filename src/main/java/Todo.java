@@ -9,7 +9,7 @@ public class Todo extends Task{
 
     @Override
     public String returnMissingNameError() {
-        return "The description of a todo task cannot be empty.";
+        return "The name of a todo task cannot be empty.";
     }
 
     @Override

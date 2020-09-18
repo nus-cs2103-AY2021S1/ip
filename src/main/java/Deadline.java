@@ -26,7 +26,7 @@ public class Deadline extends Task {
 
     @Override
     public String returnMissingNameError() {
-        return "The description of a deadline task cannot be empty.";
+        return "The name of a deadline task cannot be empty.";
     }
 
     @Override
