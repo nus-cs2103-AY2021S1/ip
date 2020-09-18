@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="ANALYZE_TEST_SOURCES" value="false" />
+    <option name="SCOPE_TYPE" value="3" />
+  </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="f48f93c2-feee-4960-9630-ec0bc55c7b48" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.2/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.2/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.2/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.2/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.2/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.2/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.2/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.2/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.2/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.2/javaCompile/classAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.2/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.2/javaCompile/javaCompile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.2/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.2/javaCompile/taskHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/checkstyle-idea.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/checkstyle-idea.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Mattbot/Command/CompletedCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Mattbot/Command/CompletedCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Mattbot/Command/DeleteCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Mattbot/Command/DeleteCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Mattbot/Command/ExitCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Mattbot/Command/ExitCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Mattbot/Command/FilterDateCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Mattbot/Command/FilterDateCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Mattbot/Command/FindCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Mattbot/Command/FindCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Mattbot/Command/ViewScheduleCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Mattbot/Command/ViewScheduleCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Mattbot/Command/WrongCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Mattbot/Command/WrongCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Mattbot/DateTime/DateTimeManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Mattbot/DateTime/DateTimeManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Mattbot/Duke.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Mattbot/Duke.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Mattbot/File/FileManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Mattbot/File/FileManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Mattbot/MainWindow.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Mattbot/MainWindow.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Mattbot/Parser/InputManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Mattbot/Parser/InputManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Mattbot/Tasks/Deadline.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Mattbot/Tasks/Deadline.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Mattbot/Tasks/Event.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Mattbot/Tasks/Event.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Mattbot/Tasks/TaskManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Mattbot/Tasks/TaskManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Mattbot/Tasks/Todo.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Mattbot/Tasks/Todo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Mattbot/Tasks/task.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Mattbot/Tasks/task.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Mattbot/UI/InitiateParser.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Mattbot/UI/InitiateParser.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Mattbot/UI/UserInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Mattbot/UI/UserInterface.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/reports/checkstyle/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/checkstyle/main.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/reports/checkstyle/main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/checkstyle/main.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mattbot/DialogBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mattbot/DialogBox.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mattbot/Duke.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mattbot/Duke.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mattbot/Launcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mattbot/Launcher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mattbot/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mattbot/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mattbot/MainWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mattbot/MainWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mattbot/command/CompletedCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mattbot/command/CompletedCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mattbot/command/DeleteCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mattbot/command/DeleteCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mattbot/command/ExitCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mattbot/command/ExitCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mattbot/command/FilterDateCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mattbot/command/FilterDateCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mattbot/command/FindCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mattbot/command/FindCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mattbot/command/ViewScheduleCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mattbot/command/ViewScheduleCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mattbot/command/WrongCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mattbot/command/WrongCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mattbot/dateTime/DateTimeManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mattbot/datetime/DateTimeManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mattbot/file/FileManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mattbot/file/FileManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mattbot/parser/InputManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mattbot/parser/InputManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mattbot/tasks/Deadline.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mattbot/tasks/Deadline.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mattbot/tasks/Event.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mattbot/tasks/Event.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mattbot/tasks/TaskManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mattbot/tasks/TaskManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mattbot/tasks/Todo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mattbot/tasks/Todo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mattbot/tasks/task.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mattbot/tasks/Task.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mattbot/uI/InitiateParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mattbot/ui/InitiateParser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mattbot/uI/UserInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mattbot/ui/UserInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Tasks/DeadlineTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/tasks/DeadlineTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Tasks/EventTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/tasks/EventTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Tasks/TaskManagerTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Tasks/TodoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/tasks/TodoTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Tasks/taskTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/tasks/TaskTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/text-ui-test/EXPECTED.TXT" beforeDir="false" afterPath="$PROJECT_DIR$/text-ui-test/EXPECTED.TXT" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="ip" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="ip" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="ip" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="verification" type="c8890929:TasksNode$1" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="FxmlFile" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1glgT9BiqPN29TPkLgC60emeqj9" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/config/checkstyle/checkstyle.xml" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.13448276" />
+    <property name="settings.editor.selected.configurable" value="org.infernus.idea.checkstyle.CheckStyleConfigurable" />
+    <property name="show.unlinked.gradle.project.popup" value="true" />
+  </component>
+  <component name="RunManager" selected="Gradle.ip [check]">
+    <configuration name="Duke" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Duke" />
+      <module name="ip.main" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Launcher (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="mattbot.Launcher" />
+      <module name="ip.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="mattbot.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Launcher" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Launcher" />
+      <module name="ip.main" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="testing" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="testing" />
+      <module name="ip.main" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ip [check]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="check" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.ip [check]" />
+        <item itemvalue="Application.Launcher (1)" />
+        <item itemvalue="Application.Launcher" />
+        <item itemvalue="Application.Duke" />
+        <item itemvalue="Application.testing" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f48f93c2-feee-4960-9630-ec0bc55c7b48" name="Default Changelist" comment="" />
+      <created>1598694599858</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1598694599858</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="575" y="239" key="#Custom_Plugin_Repositories" timestamp="1598796918132">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="575" y="239" key="#Custom_Plugin_Repositories/0.0.1280.680@0.0.1280.680" timestamp="1598796918132" />
+    <state x="446" y="47" key="#com.intellij.ide.util.MemberChooser" timestamp="1598968675373">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="446" y="47" key="#com.intellij.ide.util.MemberChooser/0.0.1280.680@0.0.1280.680" timestamp="1598968675373" />
+    <state x="424" y="206" width="432" height="307" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1599034158861">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="424" y="206" width="432" height="307" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1280.680@0.0.1280.680" timestamp="1599034158861" />
+    <state x="371" y="88" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1599034744601">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="371" y="88" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1280.680@0.0.1280.680" timestamp="1599034744601" />
+    <state x="389" y="40" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1599032463683">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="389" y="40" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1280.680@0.0.1280.680" timestamp="1599032463683" />
+    <state x="421" y="102" key="FileChooserDialogImpl" timestamp="1599032427849">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="421" y="102" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1599032427849" />
+    <state width="1237" height="230" key="GridCell.Tab.0.bottom" timestamp="1600438029729">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1237" height="230" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1600438029729" />
+    <state width="1237" height="230" key="GridCell.Tab.0.center" timestamp="1600438029729">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1237" height="230" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1600438029729" />
+    <state width="1237" height="230" key="GridCell.Tab.0.left" timestamp="1600438029729">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1237" height="230" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1600438029729" />
+    <state width="1237" height="230" key="GridCell.Tab.0.right" timestamp="1600438029729">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1237" height="230" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1600438029729" />
+    <state x="197" y="0" key="SettingsEditor" timestamp="1600437977353">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="197" y="0" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1600437977353" />
+    <state x="342" y="98" key="refactoring.ChangeSignatureDialog" timestamp="1599034283685">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+  </component>
+</project>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="tasks.TaskTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2020-09-18T14:06:55" hostname="MATTHIASLHK" time="0.005">
+  <properties/>
+  <testcase name="taskDate()" classname="tasks.TaskTest" time="0.001"/>
+  <testcase name="taskName()" classname="tasks.TaskTest" time="0.001"/>
+  <testcase name="taskType()" classname="tasks.TaskTest" time="0.001"/>
+  <testcase name="taskCompleted()" classname="tasks.TaskTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
