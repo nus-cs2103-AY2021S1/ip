@@ -47,7 +47,7 @@ application {
 }
 
 shadowJar {
-    archiveBaseName = "Launcher"
+    archiveBaseName = "IrohBot"
     archiveClassifier = null
 }
 

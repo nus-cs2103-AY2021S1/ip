@@ -30,7 +30,6 @@ public class Event extends Task {
             throw new DukeEmptyDescException(TaskType.EVENT);
         } else {
             String at = eventParts[1];
-            System.out.println(at);
             if (Ui.isBlankString(at)) {
                 throw new DukeEmptyDescException(TaskType.EVENT);
             } else {

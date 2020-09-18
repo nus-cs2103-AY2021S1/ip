@@ -30,7 +30,6 @@ public class Deadline extends Task {
             throw new DukeEmptyDescException(TaskType.EVENT);
         } else {
             String by = deadlineParts[1];
-            System.out.println(by);
             if (Ui.isBlankString(by)) {
                 throw new DukeEmptyDescException(TaskType.EVENT);
             } else {

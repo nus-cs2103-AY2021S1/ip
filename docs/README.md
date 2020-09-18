@@ -5,7 +5,7 @@ IrohBot is an application built using Java used to manage tasks, via a **Command
 ## How to Begin
 
 1. Ensure Java 11 has been downloaded and installed on your computer.
-2. Download the latest version of IrohBot.jar [here]()
+2. Download the latest version of IrohBot.jar [here](https://github.com/EthanTheGoondu/ip/releases/download/A-Release/IrohBot.jar)
 3. Copy the file to the folder you want to use as the home folder for your IrohBot.
 4. Double-click the file to start the app.
 5. Commands that can be executed in the command box. Here are some example commands you can try:

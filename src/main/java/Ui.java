@@ -8,7 +8,7 @@ import javafx.scene.layout.VBox;
 public class Ui {
 
     protected static DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
-    private static final String LINE = "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-";
+    private static final String LINE = "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-";
     private static final String INTRO = "Greetings, I am the Dragon Of The West, otherwise known as Iroh, "
             + "how may I serve you today? The date and time now is: ";
     private static Image userPic;
@@ -52,7 +52,6 @@ public class Ui {
      * @param output The output to be displayed in string form.
      */
     public static void printWithLines(String output) {
-        System.out.println(LINE + "\n" + output + LINE);
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(LINE + "\n" + output + LINE, dukePic));
     }
 
