@@ -8,8 +8,8 @@ import java.util.Scanner;
 public class Storage {
     public TaskList taskList;
     static private final String HOME = System.getProperty("user.home");
-    static private final java.nio.file.Path PATH = java.nio.file.Paths.get(HOME, "IdeaProjects", "ip");
-    static private final java.nio.file.Path FILE = java.nio.file.Paths.get(HOME, "IdeaProjects", "ip", "iPStorage");
+    static private final java.nio.file.Path PATH = java.nio.file.Paths.get(HOME, "data");
+    static private final java.nio.file.Path FILE = java.nio.file.Paths.get(HOME, "data", "iPStorage.txt");
 
     public static Storage initialiseStorage() throws IOException, ToDoException, eventException, deadlineException {
         Storage returnStorage = new Storage();
