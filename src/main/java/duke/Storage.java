@@ -15,10 +15,8 @@ import java.io.PrintWriter;
  * The Storage class deals with loading tasks from the file and saving tasks in the file.
  */
 public class Storage {
-
+    public static final String DEFAULT_FILEPATH = "taskmanager.txt";
     private File file;
-
-    public static final String DEFAULT_STORAGE_FILEPATH = "taskmanager.txt";
     
     /**
      * Constructor for a Storage object.
@@ -79,15 +77,15 @@ public class Storage {
      * @param taskList A TaskList of the tasks.
      * @throws DukeException if IOException occurs.
      */
-    public void write(TaskList taskList) throws DukeException {
+    public void writeFile(TaskList taskList) throws DukeException {
         try {
             new PrintWriter(file).close();
-            FileWriter fw = new FileWriter(file);
+            FileWriter writer = new FileWriter(file);
             for (Task task : taskList.getList()) {
-                fw.write(task.encode());
-                fw.write(System.lineSeparator());
+                writer.write(task.encode());
+                writer.write(System.lineSeparator());
             }
-            fw.close();
+            writer.close();
         } catch (IOException e) {
             throw new DukeException("Failed to save tasks.");
         }

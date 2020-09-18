@@ -1,3 +1,0 @@
-E | ✘ | attend consultation  | Sep 20 2020
-E | ✘ | attend wedding  | Sep 25 2020
-D | ✘ | return book  | Sep 15 2020

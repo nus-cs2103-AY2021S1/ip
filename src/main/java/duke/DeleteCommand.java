@@ -20,7 +20,7 @@ public class DeleteCommand extends Command {
         try {
             Task task = taskList.get(number);
             taskList.deleteTask(number);
-            store.write(taskList);
+            store.writeFile(taskList);
             return ui.showDeletion(task, taskList);
         } catch (NumberFormatException e) {
             return "Please provide a valid index for the task to be deleted";

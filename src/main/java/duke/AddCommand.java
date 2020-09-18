@@ -60,7 +60,7 @@ public class AddCommand extends Command {
         }
         assert newTask != null : "Task cannot be null";
         taskList.addTask(newTask);
-        store.write(taskList);
+        store.writeFile(taskList);
         return ui.showAddition(newTask, taskList);
     }
     

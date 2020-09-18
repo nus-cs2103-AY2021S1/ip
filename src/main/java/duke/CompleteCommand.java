@@ -19,7 +19,7 @@ public class CompleteCommand extends Command {
     public String execute(TaskList taskList, Ui ui, Storage store) throws DukeException {
         Task task = taskList.get(number);
         task.completeTask();
-        store.write(taskList);
+        store.writeFile(taskList);
         return ui.showCompletion(task);
     }
     

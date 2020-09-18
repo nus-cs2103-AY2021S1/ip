@@ -12,7 +12,7 @@ public class Duke {
     private Ui ui;
     
     public Duke() {
-        this(Storage.DEFAULT_STORAGE_FILEPATH);
+        this(Storage.DEFAULT_FILEPATH);
     }
     
     /**
