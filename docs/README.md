@@ -165,7 +165,9 @@ List all completed task in the past week|statistic
 `read book chapter 4`  
 `read book chapter 5`  
 
-
+##Credits
+*Image of the duke is taken from here https://coconuts.co/manila/lifestyle/maria-ozawa-staying-permanently-ph/\
+*Image of the user is taken from here https://www.instagram.com/yua_mikami/?hl=en
 
   
  
