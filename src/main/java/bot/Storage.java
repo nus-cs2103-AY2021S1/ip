@@ -1,11 +1,4 @@
 package bot;
-
-import bot.task.Deadline;
-import bot.task.Event;
-import bot.task.Task;
-import bot.task.Todo;
-import bot.util.InvalidInputException;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -13,6 +6,12 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+
+import bot.task.Deadline;
+import bot.task.Event;
+import bot.task.Task;
+import bot.task.Todo;
+import bot.util.InvalidInputException;
 
 /**
  * Deals with loading tasks from the file and saving tasks in the file.
@@ -26,8 +25,9 @@ public class Storage {
 
     /**
      * Processes the text file and returns it as an ArrayList of Task.
+     *
      * @return ArrayList of Tasks
-     * @throws IOException
+     * @throws IOException Error loading tasks from storage.
      */
     public ArrayList<Task> loadFileContents() throws IOException, InvalidInputException {
         ArrayList<Task> taskList = new ArrayList<>();
@@ -54,8 +54,9 @@ public class Storage {
 
     /**
      * Updates the user's test file with the taskList.
-     * @param taskList
-     * @throws IOException
+     *
+     * @param taskList taskList to be saved.
+     * @throws IOException Error writing to file.
      */
 
     public void saveUserData(TaskList taskList) throws IOException {
@@ -83,8 +84,8 @@ public class Storage {
     }
 
     private String responseWrapper(String str) {
-        final String TEXT_LINE = "_________________________________________________________"
+        final String line = "_________________________________________________________"
                 + "_________________________________________";
-        return TEXT_LINE + "\n    " + str + "\n" + TEXT_LINE;
+        return line + "\n    " + str + "\n" + line;
     }
 }

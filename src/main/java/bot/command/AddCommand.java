@@ -1,4 +1,5 @@
 package bot.command;
+import java.io.IOException;
 
 import bot.Storage;
 import bot.TaskList;
@@ -7,14 +8,20 @@ import bot.task.Event;
 import bot.task.Todo;
 import bot.util.InvalidInputException;
 
-import java.io.IOException;
-
 /**
  * A class that differentiates the different subtypes of Task and increments TaskList.
  */
 public class AddCommand extends Command {
     private String name;
     private String date;
+
+    /**
+     * Constructor for the class that handles the addition of various tasks.
+     *
+     * @param cmd A string that is the keyword for command.
+     * @param args variable number of arguments as different tasks require different number of arguments.
+     * @throws IllegalArgumentException thrown if the number of argument is more than 2.
+     */
 
     public AddCommand(String cmd, String... args) throws IllegalArgumentException {
         super(cmd);
@@ -35,8 +42,8 @@ public class AddCommand extends Command {
      * @param taskList The TaskList to be incremented.
      * @param storage The storage to store the new TaskLIst.
      * @return Response that the user will see.
-     * @throws InvalidInputException
-     * @throws IOException
+     * @throws InvalidInputException Issues with writing to storage due to input command not recognised.
+     * @throws IOException Issues with writing to storage file.
      */
     @Override
     public String run(TaskList taskList, Storage storage) throws InvalidInputException, IOException {

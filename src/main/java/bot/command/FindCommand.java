@@ -1,10 +1,11 @@
 package bot.command;
+import java.util.ArrayList;
 
 import bot.Storage;
 import bot.TaskList;
 import bot.task.Task;
 
-import java.util.ArrayList;
+
 
 /**
  * A type of command that lists out all Task that contains the item.
@@ -12,6 +13,12 @@ import java.util.ArrayList;
 public class FindCommand extends Command {
     private String item;
 
+    /**
+     * Constructor for the class.
+     *
+     * @param cmd A string that is the keyword for command.
+     * @param item The substring of the name of task to be listed out.
+     */
     public FindCommand(String cmd, String item) {
         super(cmd);
         this.item = item;
@@ -24,7 +31,7 @@ public class FindCommand extends Command {
      * @param taskList the TaskList to be filter.
      * @param storage the storage associated with tasklist.
      * @return Response shown to the user.
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException Input is invalid or out of bounds.
      */
     @Override
     public String run(TaskList taskList, Storage storage) throws IllegalArgumentException {

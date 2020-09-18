@@ -1,8 +1,7 @@
 package bot;
+import java.util.ArrayList;
 
 import bot.task.Task;
-
-import java.util.ArrayList;
 
 /**
  * Encapsulates the list of tasks.

@@ -10,6 +10,9 @@ public class Ui {
         this.name = name;
     }
 
+    /**
+     * Print to system predetermined greeting.
+     */
     public void greet() {
         String greeting = String.format("Good day, I'm %s. What can I do for you?", name);
         System.out.println(responseWrapper(greeting));
@@ -24,8 +27,8 @@ public class Ui {
     }
 
     private String responseWrapper(String str) {
-        final String TEXT_LINE = "________________________________________________________________";
-        return TEXT_LINE + "\n    " + str + "\n" + TEXT_LINE;
+        final String line = "________________________________________________________________";
+        return line + "\n    " + str + "\n" + line;
     }
 
 }

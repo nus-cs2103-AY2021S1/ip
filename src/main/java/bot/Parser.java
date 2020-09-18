@@ -1,5 +1,4 @@
 package bot;
-
 import bot.command.AddCommand;
 import bot.command.Command;
 import bot.command.DeleteCommand;
@@ -7,9 +6,10 @@ import bot.command.DoneCommand;
 import bot.command.ExitCommand;
 import bot.command.FindCommand;
 import bot.command.ListCommand;
-
 import bot.util.InvalidCommandException;
 import bot.util.InvalidInputException;
+
+
 /**
  * Deals with making sense of the user command.
  */

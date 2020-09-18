@@ -1,10 +1,9 @@
 package bot.command;
+import java.io.IOException;
 
 import bot.Storage;
 import bot.TaskList;
 import bot.task.Task;
-
-import java.io.IOException;
 
 /**
  * A type of command that mark the given Task at certain index as Done.
@@ -12,6 +11,12 @@ import java.io.IOException;
 public class DoneCommand extends Command {
     private int itemIndex;
 
+    /**
+     * Constructor for the class.
+     *
+     * @param cmd A string that is the keyword for command.
+     * @param ind Index of the task in task list.
+     */
     public DoneCommand(String cmd, int ind) {
         super(cmd);
         itemIndex = ind - 1;
@@ -24,8 +29,8 @@ public class DoneCommand extends Command {
      * @param taskList taskList where the task is amended.
      * @param storage storage associated with the taskList.
      * @return Response shown to the user.
-     * @throws IllegalArgumentException
-     * @throws IOException
+     * @throws IllegalArgumentException Input is not valid.
+     * @throws IOException Error saving to storage file.
      */
     @Override
     public String run(TaskList taskList, Storage storage) throws IllegalArgumentException, IOException {

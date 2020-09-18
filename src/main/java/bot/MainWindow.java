@@ -1,6 +1,10 @@
 package bot;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 import bot.util.DialogBox;
+
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -12,8 +16,7 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.VBox;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
+
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -34,6 +37,9 @@ public class MainWindow extends AnchorPane {
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Keanu.png"));
     private Image bgImage = new Image(this.getClass().getResourceAsStream("/images/bg2.png"));
 
+    /**
+     * Sets the backdrop of window.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());

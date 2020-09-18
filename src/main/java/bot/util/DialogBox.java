@@ -1,5 +1,8 @@
 package bot.util;
 
+import java.io.IOException;
+import java.util.Collections;
+
 import bot.MainWindow;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,8 +16,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 
-import java.io.IOException;
-import java.util.Collections;
+
+
 
 /**
  * An example of a custom control using FXML.
@@ -39,19 +42,6 @@ public class DialogBox extends HBox {
         }
         dialog.setText(text);
         displayPicture.setImage(img);
-    }
-
-    public DialogBox(String text) {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
-            fxmlLoader.setController(this);
-            fxmlLoader.setRoot(this);
-            fxmlLoader.load();
-            dialog.setMinHeight(Region.USE_PREF_SIZE);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        dialog.setText(text);
     }
 
     /**

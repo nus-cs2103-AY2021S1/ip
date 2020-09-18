@@ -1,7 +1,4 @@
-import bot.Bot;
-
-import org.junit.After;
-import org.junit.Before;
+import static org.junit.Assert.assertEquals;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -9,11 +6,12 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
-
 import java.util.Scanner;
 
-import static org.junit.Assert.assertEquals;
+import org.junit.After;
+import org.junit.Before;
 
+import bot.Bot;
 
 /**
  * JUnit test for Main.
@@ -63,6 +61,6 @@ public class MainTest {
         Bot testBot = new Bot("Straw Bot", assetFilePath);
         testBot.init(new Scanner(file));
         assertEquals(expectedOutput,
-                outContent.toString().strip().replace("\r",""));
+                outContent.toString().strip().replace("\r", ""));
     }
 }

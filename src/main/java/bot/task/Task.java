@@ -7,14 +7,25 @@ public class Task {
     protected String name;
     protected boolean isDone;
 
+    /**
+     * Constructor.
+     *
+     * @param name Name of task.
+     */
     public Task(String name) {
         this.name = name;
         this.isDone = false;
     }
 
-    public Task(String name, boolean done) {
+    /**
+     * Constructor with its completion status specified.
+     *
+     * @param name Name of task.
+     * @param isDone Task is completed.
+     */
+    public Task(String name, boolean isDone) {
         this.name = name;
-        this.isDone = done;
+        this.isDone = isDone;
     }
 
     public String getName() {

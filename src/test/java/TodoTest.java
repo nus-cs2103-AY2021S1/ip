@@ -1,6 +1,6 @@
-import bot.task.Todo;
-
 import static org.junit.Assert.assertEquals;
+
+import bot.task.Todo;
 
 public class TodoTest {
 

@@ -1,10 +1,9 @@
 package bot.command;
+import java.io.IOException;
 
 import bot.Storage;
 import bot.TaskList;
 import bot.util.InvalidInputException;
-
-import java.io.IOException;
 
 /**
  * An abstract class that deals with logic associated with commands given by the user.

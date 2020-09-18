@@ -11,6 +11,12 @@ import java.util.stream.Collectors;
 public class DateParser {
     private static final Map<String, String> DATE_FORMAT_REGEXPS = new HashMap<String, String>();
 
+    /**
+     * Pulls the date format from dateFormat text file and load it in the class.
+     *
+     * @param filePath path to the dateFormat text file.
+     * @throws IOException Error reading file.
+     */
     public static void loadDateFormats(String filePath) throws IOException {
         InputStream in = DateParser.class.getResourceAsStream(filePath);
         BufferedReader reader = new BufferedReader(new InputStreamReader(in));
@@ -24,6 +30,13 @@ public class DateParser {
         }
     }
 
+    /**
+     * Decides on the dateFormat expression by matching the regex with user input.
+     *
+     * @param dateString human input dateFormat.
+     * @return dateFormat that is accepted by date formatter.
+     * @throws InvalidInputException user's dateFormat is invalid.
+     */
     public static String determineDateFormat(String dateString) throws InvalidInputException {
         for (String regexp : DATE_FORMAT_REGEXPS.keySet()) {
             if (dateString.strip().toLowerCase().matches(regexp)) {

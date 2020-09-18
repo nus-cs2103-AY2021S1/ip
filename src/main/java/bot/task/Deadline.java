@@ -1,12 +1,9 @@
 package bot.task;
-
-import bot.util.DateParser;
-import bot.util.InvalidInputException;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-
+import bot.util.DateParser;
+import bot.util.InvalidInputException;
 
 /**
  * A special type of task characterised by the input "/by" which implies the importance of the deadline.
@@ -14,6 +11,13 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
     private LocalDateTime deadline;
 
+    /**
+     * Constructor for Deadline with isDone status as false.
+     *
+     * @param name Name of deadline.
+     * @param deadline The date of which the task is to be done by.
+     * @throws InvalidInputException Invalid input.
+     */
     public Deadline(String name, String deadline) throws InvalidInputException {
         super(name);
         String dateFormat = DateParser.determineDateFormat(deadline);
@@ -21,8 +25,16 @@ public class Deadline extends Task {
         this.deadline = LocalDateTime.parse(deadline, formatter);
     }
 
-    public Deadline(String name, String deadline, boolean done) throws InvalidInputException {
-        super(name, done);
+    /**
+     * Constructor for Deadline with its isDone status input.
+     *
+     * @param name Name of deadline.
+     * @param deadline The date of which the task is to be done by.
+     * @param isDone The task is completed.
+     * @throws InvalidInputException Invalid input.
+     */
+    public Deadline(String name, String deadline, boolean isDone) throws InvalidInputException {
+        super(name, isDone);
         String dateFormat = DateParser.determineDateFormat(deadline);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(dateFormat.strip());
         this.deadline = LocalDateTime.parse(deadline.strip(), formatter);

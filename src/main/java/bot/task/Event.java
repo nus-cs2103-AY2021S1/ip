@@ -1,10 +1,9 @@
 package bot.task;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import bot.util.DateParser;
 import bot.util.InvalidInputException;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 /**
  * A special type of Task characterised by the input "/at" which indicates the date and time of which the task
@@ -13,6 +12,13 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
     private LocalDateTime timePeriod;
 
+    /**
+     * Constructor for Event with isDone status as false.
+     *
+     * @param name Name of Event.
+     * @param timePeriod The date of which the task is to be done by.
+     * @throws InvalidInputException Invalid input.
+     */
     public Event(String name, String timePeriod) throws InvalidInputException {
         super(name);
         String dateFormat = DateParser.determineDateFormat(timePeriod);
@@ -20,8 +26,16 @@ public class Event extends Task {
         this.timePeriod = LocalDateTime.parse(timePeriod, formatter);
     }
 
-    public Event(String name, String timePeriod, boolean done) throws InvalidInputException {
-        super(name, done);
+    /**
+     * Constructor for Event with its isDone status input.
+     *
+     * @param name Name of Event.
+     * @param timePeriod The date of which the task is to be done by.
+     * @param isDone The task is completed.
+     * @throws InvalidInputException Invalid input.
+     */
+    public Event(String name, String timePeriod, boolean isDone) throws InvalidInputException {
+        super(name, isDone);
         String dateFormat = DateParser.determineDateFormat(timePeriod);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(dateFormat.strip());
         this.timePeriod = LocalDateTime.parse(timePeriod.strip(), formatter);

@@ -1,11 +1,10 @@
 package bot;
+import java.io.IOException;
+import java.util.Scanner;
 
 import bot.command.Command;
 import bot.util.DateParser;
 import bot.util.InvalidInputException;
-
-import java.io.IOException;
-import java.util.Scanner;
 
 /**
  * Encompasses the UI, logic, model and all other factors that make up the application.

@@ -1,4 +1,6 @@
 package bot;
+import java.io.IOException;
+import java.util.Scanner;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -10,13 +12,16 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-import java.util.Scanner;
-
 /**
  * The type Main.
  */
 public class Main extends Application {
+
+    /**
+     * Initiates CLI of bot.
+     *
+     * @param args System args.
+     */
     public static void main(String[] args) {
         Bot bot = new Bot("Straw Bot", "./assets/userData.txt");
         bot.init(new Scanner(System.in));
@@ -44,5 +49,4 @@ public class Main extends Application {
             e.printStackTrace();
         }
     }
-
 }

@@ -1,10 +1,9 @@
 package bot.command;
+import java.io.IOException;
 
 import bot.Storage;
 import bot.TaskList;
 import bot.task.Task;
-
-import java.io.IOException;
 
 /**
  * A type of command that removes Task from TaskList.
@@ -12,6 +11,12 @@ import java.io.IOException;
 public class DeleteCommand extends Command {
     private int itemIndex;
 
+    /**
+     * Constructor for the class that handles the deletion of task.
+     *
+     * @param cmd A string that is the keyword for command.
+     * @param ind Index of the task in task list.
+     */
     public DeleteCommand(String cmd, int ind) {
         super(cmd);
         itemIndex = ind - 1;
@@ -23,8 +28,8 @@ public class DeleteCommand extends Command {
      * @param taskList taskList where the task is removed from.
      * @param storage storage associated with the taskList.
      * @return Response shown to the user.
-     * @throws IllegalArgumentException
-     * @throws IOException
+     * @throws IllegalArgumentException Argument is not valid.
+     * @throws IOException Error saving the task to storage file.
      */
     @Override
     public String run(TaskList taskList, Storage storage) throws IllegalArgumentException, IOException {
