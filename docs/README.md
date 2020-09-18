@@ -1,20 +1,26 @@
 # User Guide
 
-## Features 
-
-### Feature 1 
-Description of feature.
+## Introduction
+This is a chat bot that helps you to keep track of your todos, deadlines, and events. 
 
 ## Usage
 
-### `Keyword` - Describe action
+### `Delete` - Deletes a task from the to-do list.
 
-Describe action and its outcome.
+### `Done` - Marks a task as done in the to-do list.
 
-Example of usage: 
+### `Snooze` - Snoozes or reschedules a task to a new date.
 
-`keyword (optional arguments)`
+### `list` - Shows the complete to-do list.
 
-Expected outcome:
+### `on` - Shows all the tasks on a specific date.
 
-`outcome`
+### `find` - Finds all tasks that contains specific content.
+
+### `todo` - Creates a new todo task in the to-do list.
+
+### `deadline` - Creates a new deadline task in the to-do list.
+
+### `event` - Creates a new event task in the to-do list.
+
+### `bye` - Exits the chat bot. 
