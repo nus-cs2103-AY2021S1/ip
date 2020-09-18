@@ -7,11 +7,11 @@ Duke is a desktop dog to help you manage tasks in the form of todos, deadlines a
 3. [Add a new Event](#add-a-new-event-at)
 4. [Add a new Deadline](#add-a-new-deadline-by)
 5. [List out current tasks](#list-out-current-tasks-list)
-6. [Search for task](#search-for-task-using-keyword-find)
+6. [Search for task](#search-for-a-task-using-a-keyword-find)
 7. [Delete a task](#delete-a-task-by-index-delete)
 8. [Mark a task as done](#mark-a-task-as-done-by-index-done)
-9. [Save and close the app](#save-and-close-the-app-bye)
-10. [Update a task](#update-a-task-by-index)
+9. [Update a task](#update-a-task-by-index-update)
+10.. [Save and close the app](#save-list-and-close-the-app-bye)
 ### Viewing help: `help`
 Displays features and the commands needed to use them.
 #### Usage
