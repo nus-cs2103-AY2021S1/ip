@@ -4,10 +4,18 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
 
 <fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label fx:id="dialog" text="Label" wrapText="true" />
+        <Label fx:id="dialog" lineSpacing="1.0" minHeight="-Infinity" style="-fx-background-color: #7bc6cc; -fx-border-radius: 10 10 10 10; -fx-background-radius: 10 10 10 10;" text="Label" wrapText="true">
+            <padding>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            </padding>
+            <font>
+                <Font name="AppleGothic Regular" size="14.0" />
+            </font>
+        </Label>
         <ImageView fx:id="displayPicture" fitHeight="58.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true" />
     </children>
     <padding>

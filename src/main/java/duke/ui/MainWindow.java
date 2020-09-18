@@ -45,7 +45,7 @@ public class MainWindow extends AnchorPane {
 
     /**
      * Creates two dialog boxes, one echoing user input and the other containing KK's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * the dialog container.
      */
     @FXML
     private void handleUserInput() {
@@ -53,13 +53,18 @@ public class MainWindow extends AnchorPane {
         String response = null;
         try {
             response = duke.getResponse(input);
+            dialogContainer.getChildren().addAll(
+                    UserDialogBox.getUserDialog(input),
+                    DukeDialogBox.getDukeDialog(response, dukeImage)
+            );
         } catch (DukeException e) {
             e.printStackTrace();
+            dialogContainer.getChildren().addAll(
+                    UserDialogBox.getUserDialog(input),
+                    ErrorMessageBox.getErrorMessageBox(e.getMessage())
+            );
         }
-        dialogContainer.getChildren().addAll(
-                UserDialogBox.getUserDialog(input),
-                DukeDialogBox.getDukeDialog(response, dukeImage)
-        );
+
         userInput.clear();
     }
 }

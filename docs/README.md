@@ -1,12 +1,7 @@
 # Your life Asistant Chat Bot - KK
 
 This is a chatbot that can help you keep track of your to do list. It's named is KK. Given below are instructions on how to use it. 
-      _      _
-| | / /| | / /
-| |/ / | |/ /
-|   <  |   <
-|_|\_\ |_|\_\
-
+      
 
 ## Sample commands include: 
 
