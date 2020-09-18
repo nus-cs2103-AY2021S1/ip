@@ -5,3 +5,97 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+          ____________________________________________________________
+          Hi! I'm Duke 
+          What can I do for you?
+          ____________________________________________________________
+          ____________________________________________________________
+          Noted. I've removed all tasks in the list.
+          Now you have no task in the list.
+          ____________________________________________________________
+          ____________________________________________________________
+          Got it. I've added this task: 
+          [T][?] borrow book
+          Now you have 1 tasks in the list.
+          ____________________________________________________________
+          ____________________________________________________________
+          Invalid use of Duke: Please specify the task description
+          Please input using the format: todo <todo_desc>
+          ____________________________________________________________
+          ____________________________________________________________
+          Here are the tasks in your list:
+          1: [T][?] borrow book
+          ____________________________________________________________
+          ____________________________________________________________
+          Invalid use of Duke: Please specify the time for the task
+          Please input using the format: deadline <deadline_desc> /by <time>
+          ____________________________________________________________
+          ____________________________________________________________
+          Got it. I've added this task: 
+          [D][?] return book (by: Sunday)
+          Now you have 2 tasks in the list.
+          ____________________________________________________________
+          ____________________________________________________________
+          Invalid use of Duke: Please specify the task description
+          Please input using the format: event <event_desc> /at <time>
+          ____________________________________________________________
+          ____________________________________________________________
+          Got it. I've added this task: 
+          [E][?] project meeting (at: Mon 2-4pm)
+          Now you have 3 tasks in the list.
+          ____________________________________________________________
+          ____________________________________________________________
+          Got it. I've added this task: 
+          [D][?] do homework (by: no idea :-p)
+          Now you have 4 tasks in the list.
+          ____________________________________________________________
+          ____________________________________________________________
+          Here are the tasks in your list:
+          1: [T][?] borrow book
+          2: [D][?] return book (by: Sunday)
+          3: [E][?] project meeting (at: Mon 2-4pm)
+          4: [D][?] do homework (by: no idea :-p)
+          ____________________________________________________________
+          ____________________________________________________________
+          Nice! I've marked this task as done:
+          [T][?] borrow book
+          ____________________________________________________________
+          ____________________________________________________________
+          Nice! I've marked this task as done:
+          [E][?] project meeting (at: Mon 2-4pm)
+          ____________________________________________________________
+          ____________________________________________________________
+          Invalid use of Duke: Please input a valid index of task
+          Input a number between 1 - 4
+          ____________________________________________________________
+          ____________________________________________________________
+          Here are the matching tasks in your list:
+          1: [E][?] project meeting (at: Mon 2-4pm)
+          ____________________________________________________________
+          ____________________________________________________________
+          No tasks found
+          ____________________________________________________________
+          ____________________________________________________________
+          Noted. I've removed this task:
+          [D][?] return book (by: Sunday)
+          Now you have 3 tasks in the list.
+          ____________________________________________________________
+          ____________________________________________________________
+          Invalid use of Duke: Please input a valid index of task
+          Input a number between 1 - 3
+          ____________________________________________________________
+          ____________________________________________________________
+          Got it. I've added this task: 
+          [T][?] swimming
+          Now you have 4 tasks in the list.
+          ____________________________________________________________
+          ____________________________________________________________
+          Here are the tasks in your list:
+          1: [T][?] borrow book
+          2: [E][?] project meeting (at: Mon 2-4pm)
+          3: [D][?] do homework (by: no idea :-p)
+          4: [T][?] swimming
+          ____________________________________________________________
+          ____________________________________________________________
+          Bye. See you again next time!
+          ____________________________________________________________
