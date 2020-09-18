@@ -1,6 +1,11 @@
 # User Guide
 
-Duke is a desktop-based Graphical User Inface (GUI) application designed at helping you keep track of your day to day tasks. It has a wide variety of features that can help you manage and organize your tasks. As Duke is optimized for people who can type at high speeds, it has the potential to be quicker than other traditonal applications depending on your typing speed.
+Duke is a desktop-based Graphical User Inface (GUI) application designed at helping you keep track of your day to day tasks. It has a wide variety of features that can help you manage and organize your tasks. 
+As Duke is optimized for people who can type at high speeds, it has the potential to be quicker than other traditional applications depending on your typing speed.
+  
+Download the latest Duke Jar from [here](https://github.com/hoperawr/ip/releases/tag/A-Release).  
+
+![screenshot](/docs/Ui.png)
 
 - [Quick start](#quick-start)
 - [Features](#features)
@@ -36,7 +41,7 @@ Expected outcome:
 `- [delete all] to delete all tasks`  
 `- [done {index}] to mark a task as done`  
 `- [list] to view all tasks in the list`  
-`- [find {word}] to find task that contains a certain work`  
+`- [find {word}] to find task that contains a certain word`  
 `- [snooze {index}] to push back a deadline or event by an hour`  
 `- [reschedule {index} {hours}] to push back a deadline or event by a number of hours`  
 `- [help] to print list of commands`  
@@ -163,7 +168,7 @@ Command | Format | Example
 `todo` | `todo [NAME]` | `todo read book`
 `deadline` | `deadline [NAME] /at [DATE] [TIME]` | `deadline study /by 9/9/2020 2359`
 `event` | `event [NAME] /at [DATE] [TIME]-[TIME]` | `event meeting /at 9/10/2020 2:00 PM, 10 Oct 2020 1530`
-`list` | `list` 
+`list` | `list` |  `list`
 `done` | `done [INDEX]` | `done 2`
 `delete` | `delete [INDEX]` | `delete 1`
 `delete` | `delete all` | `delete all`

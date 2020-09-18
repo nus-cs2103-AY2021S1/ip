@@ -1,9 +1,5 @@
 package duke;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-
 /**
  * The event class to store event information
  *
@@ -28,9 +24,9 @@ public class Events extends Task {
     @Override
     public String toString() {
         if (super.getDone()) {
-            return "[E]" + "[\u2714] " + super.getName() + " (at: " + printDateTime() + ")";
+            return "[E]" + "[\u2714] " + super.getName() + " (at " + printDateTime() + ")";
         } else {
-            return "[E]" + "[\u2718] " + super.getName() + " (at: " + printDateTime() + ")";
+            return "[E]" + "[\u2718] " + super.getName() + " (at " + printDateTime() + ")";
         }
 
     }

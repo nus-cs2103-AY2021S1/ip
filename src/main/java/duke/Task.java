@@ -1,13 +1,10 @@
 package duke;
 
-import java.lang.reflect.InvocationTargetException;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
-import java.util.Date;
 
 /**
  * The Task class to store task information
@@ -80,10 +77,11 @@ public class Task {
      * parseDate method which takes in a date in string form and converts it to a LocalDate object
      * @param dateString date in string format
      * @return returns the LocalDate
+     * @throws DukeException when input cannot be processed
      */
     public LocalDate parseDate(String dateString) throws DukeException {
         dateString = dateString.replaceAll("\\s+", "");
-        String[] dateArray = dateString.split("[/]|[.]|[-]",3);
+        String[] dateArray = dateString.split("[/]|[.]|[-]", 3);
         if (dateArray.length != 3) {
             throw new DukeException("Please key in a valid date!");
         }
@@ -104,17 +102,16 @@ public class Task {
      * parseTime method which takes in a time in string form and converts it to a LocalTime object
      * @param timeString time in string format
      * @return returns the LocalTime
+     * @throws DukeException when input cannot be processed
      */
     public LocalTime parseTime (String timeString) throws DukeException {
         try {
             timeString = timeString.replaceAll("\\s+", "");
             int hour = 0;
             int minute = 0;
-            if (timeString.length() < 4) {
-                throw new DukeException("Please key in a valid time!");
-            } else if (timeString.contains("PM") || timeString.contains("pm")) {
-                String timeNum = timeString.substring(0,timeString.length()-2);
-                String[] timeArray = timeNum.split("[:]|[.]|[-]",2);
+            if (timeString.contains("PM") || timeString.contains("pm")) {
+                String timeNum = timeString.substring(0, timeString.length() - 2);
+                String[] timeArray = timeNum.split("[:]|[.]|[-]", 2);
                 if (timeArray.length == 2) {
                     hour = Integer.parseInt(timeArray[0]) + 12;
                     minute = Integer.parseInt(timeArray[1]);
@@ -122,25 +119,30 @@ public class Task {
                     hour = Integer.parseInt(timeArray[0]) + 12;
                 }
             } else if (timeString.contains("AM") || timeString.contains("am")) {
-                String timeNum = timeString.substring(0,timeString.length()-2);
-                String[] timeArray = timeNum.split("[:]|[.]",2);
+                String timeNum = timeString.substring(0, timeString.length() - 2);
+                String[] timeArray = timeNum.split("[:]|[.]", 2);
                 if (timeArray.length == 2) {
-                    hour = Integer.parseInt(timeArray[0]) + 12;
+                    hour = Integer.parseInt(timeArray[0]);
                     minute = Integer.parseInt(timeArray[1]);
                 } else {
                     hour = Integer.parseInt(timeArray[0]);
                 }
+            } else if (timeString.length() < 4) {
+                throw new DukeException("Please key in a valid time!");
             } else {
-                String[] timeArray = timeString.split("[:]|[.]|[-]",2);
+                String[] timeArray = timeString.split("[:]|[.]|[-]", 2);
                 if (timeArray.length == 1) {
-                    hour = Integer.parseInt(timeString.substring(0,2));
+                    hour = Integer.parseInt(timeString.substring(0, 2));
                     minute = Integer.parseInt(timeString.substring(2));
                 } else {
                     hour = Integer.parseInt(timeArray[0]);
                     minute = Integer.parseInt(timeArray[1]);
                 }
             }
-            return LocalTime.of(hour,minute);
+            if (hour == 24) {
+                hour = 12;
+            }
+            return LocalTime.of(hour, minute);
         } catch (DateTimeException | NumberFormatException e) {
             throw new DukeException("Please key in a valid time!");
         }
@@ -154,10 +156,10 @@ public class Task {
     public String printDateTime() {
         DateTimeFormatter formatDateTime = DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm");
         DateTimeFormatter formatDate = DateTimeFormatter.ofPattern("dd MMM yyyy");
-        if (endDateTime == null){
+        if (endDateTime == null) {
             return formatDateTime.format(startDateTime);
         } else {
-            if (startDateTime.toLocalDate().isEqual(endDateTime.toLocalDate())){
+            if (startDateTime.toLocalDate().isEqual(endDateTime.toLocalDate())) {
                 return formatDate.format(startDateTime) + " " + startDateTime.toLocalTime() + "-"
                         + endDateTime.toLocalTime();
             } else {
@@ -166,24 +168,38 @@ public class Task {
         }
     }
 
-    public String getStartDateTime(){
+    public String getStartDateTime() {
         DateTimeFormatter formatDateTime = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
         return formatDateTime.format(startDateTime);
     }
 
-    public String getEndDateTime(){
+    public String getEndDateTime() {
         DateTimeFormatter formatDateTime = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
         return formatDateTime.format(endDateTime);
     }
 
-    public Task snoozeTask(int num){
-        startDateTime = startDateTime.plusHours(num);
-        if (endDateTime != null){
+    /**
+     * snoozeTask method which takes a number of hours and returns a new task that's snoozed by that number of hours
+     * @return Task with new time
+     * @throws DukeException when user tries to snooze a todo
+     */
+    public Task snoozeTask(int num) throws DukeException {
+        if (startDateTime == null) {
+            throw new DukeException("Todo does not have any date time information!");
+        } else if (endDateTime == null) {
+            startDateTime = startDateTime.plusHours(num);
+        } else {
+            startDateTime = startDateTime.plusHours(num);
             endDateTime = endDateTime.plusHours(num);
         }
         return this;
     }
 
+    /**
+     * rescheduleTask method which takes a new Date and Time
+     * @return Task with new date and time
+     * @throws DukeException when user tries to reschedule a todo or when input is incorrect
+     */
     public Task rescheduleTask(String newDateTime) throws DukeException {
         String name = this.name;
         if (startDateTime == null) {
@@ -195,7 +211,7 @@ public class Task {
             if (dateTimeArray.length < 2) {
                 throw new DukeException("Please specify a date and time range! \nEg. 25/12/2020 10pm - 11pm");
             }
-            String[] timeArray = dateTimeArray[1].split("-",2);
+            String[] timeArray = dateTimeArray[1].split("-", 2);
             if (timeArray.length < 2) {
                 throw new DukeException("Please use - to specify the time range! \nEg. 10pm - 11pm");
             }

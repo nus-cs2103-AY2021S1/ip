@@ -22,20 +22,21 @@ public class Ui {
      * addTask method which returns the task information
      */
     public String helpString() {
-        String help = "Welcome to duke!\n" +
-                "These are the list of commands and [ ] indicates user input while { } indicates variables\n" +
-                "- [todo {name}] to add a new todo\n" +
-                "- [deadline {name} /by {dd/mm/yyyy HHmm}] to add a new deadline\n" +
-                "- [event {name} /at {dd/mm/yyy HHmm-HHmm}] to add a new event\n" +
-                "- [delete {index}] to delete a task at the index specified\n" +
-                "- [delete all] to delete all tasks\n" +
-                "- [done {index}] to mark a task as done\n" +
-                "- [list] to view all tasks in the list\n" +
-                "- [find {word}] to find task that contains a certain work\n" +
-                "- [snooze {index}] to push back a deadline or event by an hour\n" +
-                "- [reschedule {index} {hours}] to push back a deadline or event by a number of hours\n" +
-                "- [help] to print list of commands\n" +
-                "- [bye] to exit the application";
+        String help = "Welcome to duke!\n"
+                + "These are the list of commands and [ ] indicates user input while { } indicates variables\n"
+                + "- [todo {name}] to add a new todo\n"
+                + "- [deadline {name} /by {dd/mm/yyyy HHmm}] to add a new deadline\n"
+                + "- [event {name} /at {dd/mm/yyy HHmm-HHmm}] to add a new event\n"
+                + "- [delete {index}] to delete a task at the index specified\n"
+                + "- [delete all] to delete all tasks\n"
+                + "- [done {index}] to mark a task as done\n"
+                + "- [list] to view all tasks in the list\n"
+                + "- [find {word}] to find task that contains a certain word\n"
+                + "- [snooze {index} {hours}] to push back a deadline or event by a number of hours\n"
+                + "- [reschedule {index} {time}] to reschedule a deadline\n"
+                + "- [reschedule {index} {time}-{time}] to reschedule a event\n"
+                + "- [help] to print list of commands\n"
+                + "- [bye] to exit the application";
         return help;
     }
 
@@ -112,6 +113,9 @@ public class Ui {
             + printList(tasks);
     }
 
+    /**
+     * rescheduledTask method which returns string when a task time has been changed
+     */
     public String rescheduledTask(Task task) {
         return "The following task has been rescheduled to:\n"
                 + task.toString();

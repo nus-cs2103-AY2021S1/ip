@@ -1,8 +1,5 @@
 package duke;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 /**
  * The Deadline class to store deadline information
  *
@@ -28,9 +25,9 @@ public class Deadlines extends Task {
     @Override
     public String toString() {
         if (super.getDone()) {
-            return "[D]" + "[\u2714] " + super.getName() + " (by: " + printDateTime() + ")";
+            return "[D]" + "[\u2714] " + super.getName() + " (by " + printDateTime() + ")";
         } else {
-            return "[D]" + "[\u2718] " + super.getName() + " (by: " + printDateTime() + ")";
+            return "[D]" + "[\u2718] " + super.getName() + " (by " + printDateTime() + ")";
         }
     }
 }

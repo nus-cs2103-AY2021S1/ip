@@ -1,13 +1,12 @@
 package duke;
 
 import java.io.IOException;
-import java.util.concurrent.TimeUnit;
 
-import javafx.application.Platform;
-import javafx.scene.image.Image;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -23,6 +22,10 @@ public class Main extends Application {
     private Image icon = new Image(this.getClass().getResourceAsStream("/images/icon.png"));
     private Stage stage;
 
+    /**
+     * start method which sets up the stage and all its children
+     * @param stage stage
+     */
     public void start(Stage stage) {
         try {
             this.stage = stage;
@@ -41,12 +44,15 @@ public class Main extends Application {
         }
     }
 
+    /**
+     * closeDuke method which closes duke on a seperate thread after 2 seconds
+     */
     public static void closeDuke() {
         new Thread(() -> {
             try {
                 Thread.sleep(2000);
             } catch (InterruptedException e) {
-
+                e.getStackTrace();
             }
             Platform.exit();
         }).start();

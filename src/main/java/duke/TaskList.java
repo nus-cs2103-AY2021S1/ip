@@ -64,7 +64,7 @@ public class TaskList {
         if (dateTimeArray.length < 2) {
             throw new DukeException("Please specify a date and time range! \nEg. 25/12/2020 10pm - 11pm");
         }
-        String[] timeArray = dateTimeArray[1].split("-",2);
+        String[] timeArray = dateTimeArray[1].split("-", 2);
         if (timeArray.length < 2) {
             throw new DukeException("Please use - to specify the time range! \nEg. 10pm - 11pm");
         }
@@ -143,6 +143,7 @@ public class TaskList {
      * word specified by the user
      * @param word word user wants to find
      * @return returns a new list of tasks that contain specifed word
+     * @throws DukeException when input is no tasks are found
      */
     public List<Task> findWord(String word) throws DukeException {
         assert !word.isBlank();
@@ -167,10 +168,14 @@ public class TaskList {
             return findArray;
         }
     }
-
+    /**
+     * snoozeTask method which takes a String containing an index and a number of hours
+     * @return Task with new time
+     * @throws DukeException when user input is unable to be processed
+     */
     public Task snoozeTask(String specifications) throws DukeException {
-        String[] indexAndHour = specifications.split(" ",2);
-        if (indexAndHour.length < 2){
+        String[] indexAndHour = specifications.split(" ", 2);
+        if (indexAndHour.length < 2) {
             throw new DukeException("Please specify the index of task and number of hours to snooze!");
         }
         try {
@@ -178,23 +183,28 @@ public class TaskList {
             int intHours = Integer.parseInt(indexAndHour[1]);
             Task temp = tasks.get(intNum - 1);
             temp.snoozeTask(intHours);
-            tasks.set(intNum-1, temp);
+            tasks.set(intNum - 1, temp);
             return temp;
-        } catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             throw new DukeException("Please specify the index of task and number of hours to snooze!");
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Task does not exist!");
         }
     }
 
+    /**
+     * rescheduleTask method which takes a String containing an index and a date and time
+     * @return Task with new date and time
+     * @throws DukeException when user input is unable to be processed
+     */
     public Task rescheduleTask(String index, String dateTime) throws DukeException {
         try {
             int intNum = Integer.parseInt(index);
             Task temp = tasks.get(intNum - 1);
             temp = temp.rescheduleTask(dateTime);
-            tasks.set(intNum-1, temp);
+            tasks.set(intNum - 1, temp);
             return temp;
-        } catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             throw new DukeException("Please specify the index of task and number of hours to snooze!");
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Task does not exist!");
