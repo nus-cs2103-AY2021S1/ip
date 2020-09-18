@@ -15,5 +15,5 @@
             </font>
          </Label>
       </children></VBox>
-   <Button fx:id="startButton" layoutX="207.0" layoutY="297.0" mnemonicParsing="false" onAction="#switchToMain" prefHeight="27.0" prefWidth="186.0" text="Start DuLah" textFill="#611717" textOverrun="CENTER_ELLIPSIS" />
+   <Button fx:id="startButton" layoutX="208.0" layoutY="297.0" mnemonicParsing="false" onAction="#switchToMain" prefHeight="27.0" prefWidth="186.0" text="Start DoLah" textFill="#611717" textOverrun="CENTER_ELLIPSIS" />
 </AnchorPane>
