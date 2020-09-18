@@ -2,6 +2,7 @@ package duke;
 
 import java.util.ArrayList;
 
+import duke.note.Note;
 import duke.task.Task;
 
 /**
@@ -9,13 +10,16 @@ import duke.task.Task;
  */
 public class TaskList {
     private ArrayList<Task> tasks;
+    private ArrayList<Note> notes;
 
-    public TaskList(ArrayList<Task> tasks) {
+    public TaskList(ArrayList<Task> tasks, ArrayList<Note> notes) {
         this.tasks = tasks;
+        this.notes = notes;
     }
 
     public TaskList() {
         this.tasks = new ArrayList<Task>();
+        this.notes = new ArrayList<Note>();
     }
 
     /**
@@ -25,6 +29,14 @@ public class TaskList {
      */
     public void add(Task task) {
         tasks.add(task);
+    }
+    
+    public void addNote(Note note) {
+        notes.add(note);
+    }
+    
+    public void deleteNote(int idx) {
+        notes.remove(idx);
     }
 
     /**
@@ -45,6 +57,10 @@ public class TaskList {
     public Task get(int idx) {
         return tasks.get(idx);
     }
+    
+    public Note getNote(int idx) {
+        return notes.get(idx);
+    }
 
     /**
      * Gets an array of the tasks in the task list.
@@ -53,6 +69,10 @@ public class TaskList {
      */
     public Task[] getArray() {
         return this.tasks.toArray(new Task[0]);
+    }
+    
+    public Note[] getNotesArray() {
+        return this.notes.toArray(new Note[0]);
     }
 
     /**
@@ -84,6 +104,15 @@ public class TaskList {
         }
         return list;
     }
+    
+    public String getNoteList() {
+        String list = "";
+        for (int i = 0; i < notes.size(); i++) {
+            Note n = notes.get(i);
+            list += n.writeMessage() + "\n";
+        }
+        return list;
+    }
 
     /**
      * Gets the size of the task list.
@@ -92,6 +121,10 @@ public class TaskList {
      */
     public int size() {
         return this.tasks.size();
+    }
+    
+    public int noteSize() {
+        return this.notes.size();
     }
 
     @Override

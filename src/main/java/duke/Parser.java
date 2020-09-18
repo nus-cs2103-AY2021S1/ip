@@ -3,13 +3,8 @@ package duke;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
-import duke.command.AddCommand;
-import duke.command.Command;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.ExitCommand;
-import duke.command.FindCommand;
-import duke.command.ListCommand;
+import duke.command.*;
+import duke.note.Note;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
@@ -36,7 +31,49 @@ public class Parser {
             return new ListCommand();
         }
 
+        // a listnote input
+        if (fullCommand.equals("listnote")) {
+            return new ListNoteCommand();
+        }
+        
         String[] test = fullCommand.split(" ");
+        
+        // a note input
+        if (test[0].equals("note")) {
+            if (test.length == 1) {
+                throw new DukeException("The title of the note cannot be empty! ");
+            }
+            String[] str = fullCommand.split("note ")[1].split("/d");
+            if (str.length == 1) {
+                throw new DukeException("The description of the note cannot be empty! ");
+            }
+            String title = str[0];
+            assert title != null : "Missing title! ";
+            String description = str[1];
+            assert description != null : "Missing description! ";
+            Note note = new Note(title, description);
+            return new AddNoteCommand(note);
+        }
+        
+        // a delete note input
+        if (test[0].equals("delnote")) {
+            if (test.length == 1) {
+                throw new DukeException("Please select the note you want to delete!");
+            }
+            int idx = Integer.parseInt(test[1]);
+            assert idx > 0 : "Index is not valid! ";
+            return new DeleteNoteCommand(idx);
+        }
+        
+        // a description input
+        if (test[0].equals("description")) {
+            if (test.length == 1) {
+                throw new DukeException("Please select the note you want!");
+            }
+            int idx = Integer.parseInt(test[1]);
+            assert idx > 0 : "Index is not valid! ";
+            return new DescriptionCommand(idx);
+        }
 
         // a done input
         if (test[0].equals("done")) {

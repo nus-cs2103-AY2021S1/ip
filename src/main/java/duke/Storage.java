@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import duke.note.Note;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -18,9 +19,11 @@ import duke.task.Todo;
  */
 public class Storage {
     private File file;
+    private File notefile;
 
-    public Storage(String filePath) {
+    public Storage(String filePath, String noteFilePath) {
         this.file = new File(filePath);
+        this.notefile = new File(noteFilePath);
     }
 
     /**
@@ -63,6 +66,33 @@ public class Storage {
                     + "Please make sure you have data/duke.txt in ip directory. ");
         }
         return tasks;
+    }
+    
+    public ArrayList<Note> loadNotes() throws DukeException {
+        ArrayList<Note> notes = new ArrayList<Note>();
+        try{
+            Scanner s = new Scanner(this.notefile);
+            while (s.hasNext()) {
+                String line = s.nextLine();
+                String[] note = line.split(" \\| ");
+                Note n = new Note(note[0], note[1]);
+                notes.add(n);
+            }
+        } catch (FileNotFoundException e) {
+            throw new DukeException("Folder or file does not exist yet! " 
+                    + "Please make sure you have data/notes.txt in ip directory. ");
+        }
+        return notes;
+    }
+    
+    public void writeNoteFile(TaskList tasks) {
+        try {
+            FileWriter fw = new FileWriter(this.notefile);
+            fw.write(tasks.getNoteList());
+            fw.close();
+        } catch (IOException e) {
+            System.out.println("Something went wrong: " + e.getMessage());
+        }
     }
 
     /**
