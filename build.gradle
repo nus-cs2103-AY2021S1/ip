@@ -5,6 +5,7 @@ plugins {
     id 'com.github.johnrengelman.shadow' version '5.1.0'
 }
 
+applicationDefaultJvmArgs = ["-Dfile.encoding=utf-8"]
 compileJava.options.encoding = 'UTF-8'
 
 tasks.withType(JavaCompile) {
@@ -56,7 +57,7 @@ application {
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "N Chat Bot"
     archiveClassifier = null
 }
 
