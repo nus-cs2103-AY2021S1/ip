@@ -8,7 +8,7 @@ import duke.task.Task;
  * Supports interactions with user.
  */
 public class Ui {
-    protected static final String[] CMD_ARR = {"help", "add", "list", "done", "delete", "find", "priority", "bye"};
+    protected static final String[] CMD_ARR = {"Help", "List", "Add", "Done", "Delete", "Find", "Priority", "Bye"};
     protected static final String DIVIDER = "____________________________________________________________";
     protected static final String LOGO = " __________________________________________________________\n"
             + "|                                                          |\n"
@@ -64,8 +64,7 @@ public class Ui {
         this.printDivider();
         System.out.println("Bye! See you around");
         this.printDivider();
-        return "Your work has been saved!\n"
-                + "You can close the application now\n";
+        return "Bye! See you around\n";
     }
 
     /**
@@ -131,7 +130,7 @@ public class Ui {
         String s = "Alright, the following task has been removed:\n"
                 + task.toString()
                 + "\n"
-                + "You now have " + taskList.getTaskListSize() + " tasks on your list\n";
+                + "You now have " + taskList.getTaskListSize() + " tasks on your list.\n";
         System.out.println(s);
         return s;
     }

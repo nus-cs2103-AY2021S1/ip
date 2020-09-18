@@ -2,6 +2,8 @@ package duke.task;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 
 /**
  * Supports the creation of duke.task.Deadline objects.
@@ -59,7 +61,8 @@ public class Deadline extends Task {
     public String toString() {
         return "[Deadline]"
                 + super.toString() + " "
-                + "(by: " + this.date + " " + this.time + ") "
-                + "Priority: " + super.getPriorityLevel();
+                + "(by: " + this.date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM))
+                + " " + this.time + ") "
+                + "- Priority: " + super.getPriorityLevel();
     }
 }

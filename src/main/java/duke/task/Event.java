@@ -2,6 +2,8 @@ package duke.task;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 
 /**
  * Supports the creation of duke.task.Event objects.
@@ -67,7 +69,8 @@ public class Event extends Task {
     @Override
     public String toString() {
         return "[Event]" + super.toString() + " "
-                + "(at: " + this.date + " " + this.timeStart + "-" + this.timeEnd + ") "
-                + "Priority: " + super.getPriorityLevel();
+                + "(at: " + this.date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM))
+                + " " + this.timeStart + "-" + this.timeEnd + ") "
+                + "- Priority: " + super.getPriorityLevel();
     }
 }

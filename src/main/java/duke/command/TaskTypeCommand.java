@@ -28,7 +28,7 @@ public class TaskTypeCommand extends Command {
                     + "e.g., submit report, 11/10/2019 1700\n");
         case EVENT:
             return ui.printPrompt("Please enter the event followed by the date and time of the event\n"
-                    + "e.g., team project meeting ,2/10/2019 1400-1600\n");
+                    + "e.g., team project meeting, 2/10/2019 1400-1600\n");
         default:
             throw new InvalidTaskTypeException();
         }
