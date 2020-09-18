@@ -8,8 +8,7 @@ public class Parser {
     public static Command giveReminders() {
         return new ReminderCommand();
     }
-     
-
+    
     /**
      * Reads the user input and determines which command to execute.
      *
