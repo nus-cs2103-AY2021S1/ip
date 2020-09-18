@@ -23,6 +23,11 @@ public abstract class Task {
 
     public abstract boolean equals(Task task);
 
+    /**
+     * Marks the task as done
+     *
+     * @return boolean indicating if done status is changed, false if already marked as done before
+     */
     public boolean markDone() {
         if (done) {
             return false;
