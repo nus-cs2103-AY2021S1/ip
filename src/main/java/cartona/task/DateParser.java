@@ -5,10 +5,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 import cartona.exception.InvalidTaskTimeException;
-import cartona.task.TaskDate;
 
 
 /**
@@ -32,12 +30,6 @@ public class DateParser {
             throw new InvalidTaskTimeException("Date/time formatting error: " + e.getMessage());
         }
     }
-
-    /**
-     * Parses the LocalDate from a user's input.
-     *
-     * @return the LocalDate
-     */
 
     /**
      * Parses the date of a new Event input string to get the start or end date of the event

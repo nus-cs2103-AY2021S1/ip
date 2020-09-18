@@ -13,6 +13,12 @@ import java.time.format.DateTimeFormatter;
 public class TaskDate {
     private LocalDateTime dateTime;
 
+    /**
+     * Creates a TaskDate from a LocalDate and a string representing the time
+     *
+     * @param date LocalDate representing the date of the TaskDate
+     * @param time the time of the TaskDate (format HHmm)
+     */
     public TaskDate(LocalDate date, String time) {
         this.dateTime = date.atTime(LocalTime
                                     .parse(time, DateTimeFormatter.ofPattern("HHmm")));

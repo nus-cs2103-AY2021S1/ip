@@ -1,10 +1,10 @@
 package cartona.command;
 
-import cartona.task.DateParser;
 import cartona.exception.CartonaException;
 import cartona.exception.InvalidEditFieldException;
 import cartona.exception.InvalidTaskTimeException;
 
+import cartona.task.DateParser;
 import cartona.task.Deadline;
 import cartona.task.Event;
 import cartona.task.Task;
