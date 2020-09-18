@@ -3,6 +3,10 @@ package duke;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
 
 /**
  * Class to store methods for parsing
@@ -97,5 +101,49 @@ public class Parser {
         } catch (DateTimeParseException e) {
             throw new IllegalArgumentException();
         }
+    }
+
+    /**
+     * load the saved list of tasks
+     *
+     * @return the data of the file provided in the constructor
+     */
+    public static List<Task> parseSavedData(List<String> extData) throws IllegalStateException {
+        List<Task> tasks = new ArrayList<>();
+        Queue<String> data = new LinkedList<>(extData);
+        while (!data.isEmpty()) {
+            String type = data.poll();
+            String desc = data.poll();
+            int status = Integer.parseInt(data.poll());
+            switch (type) {
+            case "todo":
+                tasks.add(new Todo(desc));
+                break;
+            case "deadline":
+                String by = data.poll();
+                tasks.add(new Deadline(desc, by));
+                break;
+            case "event":
+                String at = data.poll();
+                if (!data.isEmpty()) {
+                    try {
+                        LocalDate date = Parser.parseDate(data.peek());
+                    } catch (IllegalArgumentException e) {
+                        tasks.add(new Event(desc, at));
+                        break;
+                    }
+                    tasks.add(new Event(desc, at, data.poll()));
+                    break;
+                }
+                tasks.add(new Event(desc, at));
+                break;
+            default:
+                throw new IllegalStateException("The data file is corrupted");
+            }
+            if (status == 1) {
+                tasks.get(tasks.size() - 1).setDone();
+            }
+        }
+        return tasks;
     }
 }
