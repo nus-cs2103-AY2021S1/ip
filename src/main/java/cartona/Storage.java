@@ -1,13 +1,12 @@
 package cartona;
 
-import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.StandardOpenOption;
 
 import java.util.List;
 
@@ -58,16 +57,20 @@ public class Storage {
     public TaskList getListFromStorage() {
         // Create File object
         Path path = Path.of(pathString);
-
         TaskList taskList = new TaskList();
         Parser parser = new Parser();
 
         try {
+            //Scanner sc = new Scanner(new File(pathString));
+
             // Read the contents of the file
             List<String> contents = Files.readAllLines(path, StandardCharsets.UTF_8);
 
-            // Parse each line of text and add it to the TasKList
+            // Parse each line of text and add it to the TaskList
             for (String taskLine : contents) {
+                if (taskLine.equals("")) {
+                    continue;
+                }
                 taskList.addTask(parser.parseFromStorage(taskLine));
             }
         } catch (Exception e) {
@@ -87,7 +90,6 @@ public class Storage {
      * @param taskList The TaskList to be saved.
      */
     public void saveListToFile(TaskList taskList) {
-
         try {
             assert checkAndCreateFile();
         } catch (IOException e) {
@@ -97,13 +99,10 @@ public class Storage {
 
         String stringToWrite = taskList.getListForStorage();
 
-        Path listFilePath = Path.of(pathString);
-        System.out.printf("writing file %s", listFilePath.toAbsolutePath().toString());
-        try (BufferedWriter writer = Files.newBufferedWriter(
-                listFilePath, StandardCharsets.UTF_8, StandardOpenOption.WRITE)) {
+        try {
+            FileWriter writer = new FileWriter(pathString, StandardCharsets.UTF_8);
             writer.write(stringToWrite, 0, stringToWrite.length());
-            writer.flush();
-
+            writer.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
