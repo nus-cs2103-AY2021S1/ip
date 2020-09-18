@@ -78,7 +78,7 @@ public class Parser {
             throw new DukeExceptions.AliasDoesNotExistException(alias);
         } else {
             this.aliasToCommandMap.remove(alias);
-            return alias + " has been removed.";
+            return alias;
         }
     }
 

@@ -1,7 +1,12 @@
 package ui;
 
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
+import command.Command;
+import command.Result;
 import duke.Duke;
-import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -10,7 +15,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -27,8 +31,9 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/BitNormal.png"));
+    private Image dukeErrorImage = new Image(this.getClass().getResourceAsStream("/images/BitError.png"));
 
     @FXML
     public void initialize() {
@@ -38,6 +43,12 @@ public class MainWindow extends AnchorPane {
     public void setDuke(Duke d) {
         duke = d;
         dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(duke.greet(), dukeImage));
+    }
+
+    private void shutDown() {
+        // credits : https://www.baeldung.com/java-delay-code-execution
+        ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
+        executorService.schedule(Platform::exit, 1, TimeUnit.SECONDS);
     }
 
     @FXML
@@ -51,6 +62,22 @@ public class MainWindow extends AnchorPane {
         });
     }
 
+    @FXML
+    private void setSuccessExecutionDialog(String input, Result response) {
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(input, userImage),
+                DialogBox.getDukeDialog(response.toString(), dukeImage)
+        );
+    }
+
+    @FXML
+    private void setErrorDialog(String input, Result response) {
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(input, userImage),
+                DialogBox.getDukeDialog(response.toString(), dukeErrorImage)
+        );
+    }
+
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
@@ -58,11 +85,19 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.run(input).toString();
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
-        );
+        Command command = duke.getCommand(input);
+        Result response = duke.executeCommand(command);
+
+        if (response.isSuccessful()) {
+            setSuccessExecutionDialog(input, response);
+        } else {
+            setErrorDialog(input, response);
+        }
+
+        if (command.isEndCommand()) {
+            this.shutDown();
+        }
+
         userInput.clear();
     }
 }

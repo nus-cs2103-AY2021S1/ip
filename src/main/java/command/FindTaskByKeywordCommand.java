@@ -1,7 +1,9 @@
 package command;
 
 import duke.Parser;
+import duke.Storage;
 import duke.TaskList;
+import ui.Ui;
 
 public class FindTaskByKeywordCommand extends Command {
     public FindTaskByKeywordCommand (String ...parameter) {
@@ -9,9 +11,8 @@ public class FindTaskByKeywordCommand extends Command {
     }
 
     @Override
-    public Result execute(TaskList taskList, Parser parser) {
+    public Result execute(TaskList taskList, Parser parser, Storage aliasStorage, Storage taskStorage, Ui ui) {
         String listOfTasks = taskList.getTaskWithKeyword(parameters[0]);
-        String message = "Master here are the tasks with keyword " + parameters[0].strip() + " :\n" + listOfTasks;
-        return new Result(message, executedSuccessfully);
+        return new Result(ui.findTaskByKeyWordMessage(listOfTasks, parameters[0].strip()), executedSuccessfully);
     }
 }

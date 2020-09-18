@@ -75,8 +75,7 @@ public class TaskList {
             this.taskList.add(newTask);
             return newTask;
         } else {
-            String errorMessage = "Master the description of Todo cannot be empty\n";
-            throw new DukeExceptions.InsufficientParametersException(errorMessage);
+            throw new DukeExceptions.InsufficientParametersException();
         }
     }
 
@@ -94,8 +93,7 @@ public class TaskList {
             this.taskList.add(newTask);
             return newTask;
         } else {
-            String errorMessage = "Master the description of Event cannot be empty\n";
-            throw new DukeExceptions.InsufficientParametersException(errorMessage);
+            throw new DukeExceptions.InsufficientParametersException();
         }
     }
 
@@ -113,8 +111,7 @@ public class TaskList {
             this.taskList.add(newTask);
             return newTask;
         } else {
-            String errorMessage = "Master the description of Event cannot be empty\n";
-            throw new DukeExceptions.InsufficientParametersException(errorMessage);
+            throw new DukeExceptions.InsufficientParametersException();
         }
     }
 
@@ -144,7 +141,7 @@ public class TaskList {
                 output += task.toString() + "\n";
             }
         }
-        return (output == "" ? "None\n" : output);
+        return output;
     }
 
     /**
@@ -161,21 +158,9 @@ public class TaskList {
                 output += task.toString() + "\n";
             }
         }
-        return (output == "" ? "None\n" : output);
+        return output;
     }
 
-    /**
-     * Returns True if all the tasks in the taskList is done.
-     * @return True if all tasks in the taskList are marked done, false otherwise
-     */
-    public boolean allDone() {
-        for (Task task : this.taskList) {
-            if (!task.isDone()) {
-                return false;
-            }
-        }
-        return true;
-    }
 
     /**
      * Mark task at the index of the tasklist as done
@@ -186,7 +171,7 @@ public class TaskList {
     public Task completeTask(int index) throws DukeExceptions.TaskIsDoneException {
         Task task = this.getTask(index);
         if (task.isDone()) {
-            throw new DukeExceptions.TaskIsDoneException(String.valueOf(index));
+            throw new DukeExceptions.TaskIsDoneException();
         } else {
             this.getTask(index).markDone();
             return this.getTask(index);
@@ -211,14 +196,9 @@ public class TaskList {
 
     @Override
     public String toString() {
-        String output;
-        if (this.taskList.size() > 0) {
-            output = "Here are the tasks in your list:\n";
-            for (int i = 1; i < this.taskList.size() + 1; i++) {
-                output += String.valueOf(i) + ". " + this.taskList.get(i - 1).toString() + "\n";
-            }
-        } else {
-            output = "You have no tasks master :)";
+        String output = "";
+        for (int i = 1; i < this.taskList.size() + 1; i++) {
+            output += String.valueOf(i) + ". " + this.taskList.get(i - 1).toString() + "\n";
         }
         return output;
     }

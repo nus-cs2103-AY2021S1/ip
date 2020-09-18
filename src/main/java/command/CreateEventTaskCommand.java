@@ -1,11 +1,14 @@
 package command;
 
+import java.io.IOException;
 import java.time.format.DateTimeParseException;
 
 import duke.DukeExceptions;
 import duke.Parser;
+import duke.Storage;
 import duke.TaskList;
 import task.Task;
+import ui.Ui;
 
 
 public class CreateEventTaskCommand extends Command {
@@ -14,22 +17,20 @@ public class CreateEventTaskCommand extends Command {
     }
 
     @Override
-    public Result execute(TaskList taskList, Parser parser) {
-        String message;
+    public Result execute(TaskList taskList, Parser parser, Storage aliasStorage, Storage taskStorage, Ui ui) {
         try {
             Task newTask = taskList.addEventTask(this.parameters);
             int noTask = taskList.getNoTask();
-            message = "Master I have added the task : \n \t"
-                    + newTask.toString() + "\nyou have " + noTask + " Tasks in the list.\n";
-            return new Result(message, executedSuccessfully);
+            taskStorage.save(taskList);
+            return new Result(ui.addTaskMessage(newTask, noTask), executedSuccessfully);
         } catch (DukeExceptions.InsufficientParametersException e) {
-            return new Result(e.getMessage(), executedUnsuccessfully);
+            return new Result(ui.inSufficientParamsMessage("event"), executedUnsuccessfully);
         } catch (ArrayIndexOutOfBoundsException e) {
-            message = "Master the please input a date!";
-            return new Result(message, executedUnsuccessfully);
+            return new Result(ui.noDateMessage(), executedUnsuccessfully);
         } catch (DateTimeParseException e) {
-            message = "Master the input date should be dd-mm-yyyy hhmm!";
-            return new Result(message, executedUnsuccessfully);
+            return new Result(ui.invalidDateMessage(), executedUnsuccessfully);
+        } catch (IOException e) {
+            return new Result(ui.fileIssueMessage(), executedUnsuccessfully);
         }
     }
 

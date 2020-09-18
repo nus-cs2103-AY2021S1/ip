@@ -2,8 +2,10 @@ package command;
 
 import duke.DukeExceptions;
 import duke.Parser;
+import duke.Storage;
 import duke.TaskList;
 import task.Task;
+import ui.Ui;
 
 public class MarkTaskDoneCommand extends Command {
     public MarkTaskDoneCommand(String ...parameter) {
@@ -11,24 +13,19 @@ public class MarkTaskDoneCommand extends Command {
     }
 
     @Override
-    public Result execute(TaskList taskList, Parser parser) {
+    public Result execute(TaskList taskList, Parser parser, Storage aliasStorage, Storage taskStorage, Ui ui) {
         String message;
         try {
             int index = Integer.parseInt(parameters[0].strip()) - 1;
             Task finishedTask = taskList.completeTask(index);
-            message = "Making great progress master.\n" + finishedTask.toString() + "\n";
-            return new Result(message, executedSuccessfully);
+            return new Result(ui.markDoneMessage(finishedTask), executedSuccessfully);
         } catch (IndexOutOfBoundsException e) {
-            message = taskList.getNoTask() == 0
-                    ? "Master task list is empty!\n"
-                    : "Master please enter a valid index!\n";
+            message = taskList.getNoTask() == 0 ? ui.taskListEmptyMessage() : ui.invalidIndexMessage();
             return new Result(message, executedUnsuccessfully);
         } catch (NumberFormatException e) {
-            message = "Master please enter a task number so that I know which to handle.\n";
-            return new Result(message, executedUnsuccessfully);
+            return new Result(ui.noIndexGivenMessage(), executedUnsuccessfully);
         } catch(DukeExceptions.TaskIsDoneException e) {
-            message = "Master task is already marked done.\n";
-            return new Result(message, executedUnsuccessfully);
+            return new Result(ui.taskAlreadyDoneMessage(), executedUnsuccessfully);
         }
     }
 }

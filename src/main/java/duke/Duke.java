@@ -6,6 +6,7 @@ import java.util.Scanner;
 import command.ByeCommand;
 import command.Command;
 import command.Result;
+import ui.Ui;
 
 
 /**
@@ -17,9 +18,11 @@ public class Duke {
     /** variable to check if duke is still running */
     private boolean isRunning = true;
     /** ArrayList to hold all tasks keyed in by the user for the session */
-    private TaskList taskList;
+    private final TaskList taskList;
     /** Parser which handles user input */
     private final Parser parser;
+    /** Ui to handle the displaying of duke messages to user*/
+    private final Ui ui;
     /** Storage which manages the saving of tasks from the session into the hard disk  */
     private final Storage taskStorage;
     private final Storage aliasStorage;
@@ -32,6 +35,7 @@ public class Duke {
         TaskList taskList;
         this.taskStorage = new Storage("./data/data.txt");
         this.aliasStorage = new Storage("./data/alias.txt");
+        this.ui = new Ui();
         try {
             parser = new Parser(this.aliasStorage.load());
             taskList = new TaskList(this.taskStorage.load());
@@ -48,9 +52,7 @@ public class Duke {
      * @return the greeting message
      */
     public String greet() {
-        String greeting = "Sorry :( duke.Duke is getting some upgrades at the moment.\n"
-                + "This is Tron, temporarily standing in for duke.Duke, how may I assist you ?\n";
-        return greeting;
+        return ui.greet();
     }
 
     /**
@@ -75,25 +77,34 @@ public class Duke {
     }
 
     /**
-     *
+     * Terminate duke
      */
     private void exit() {
-        this.updateFile();
         this.isRunning = false;
     }
 
+    public Command getCommand(String userInput) {
+        return this.parser.parse(userInput);
+    }
+
+    public Result executeCommand(Command command) {
+        return command.execute(this.taskList, this.parser, this.aliasStorage, this.taskStorage, ui);
+    }
+
     /**
-     * Takes in a user input as a string, parses it and gets fed the appropriate commands to be handled.
-     *
-     * @param userInput commands and parameters that the user inputs through the user interface
+     * activate duke
      */
-    public Result run(String userInput) {
-        Command command = this.parser.parse(userInput);
-        if (command.getClass() == ByeCommand.class) {
-            this.exit();
+    public void run() {
+        while (this.isRunning()) {
+            String userInput = this.ui.getUserInput();
+            Command command = this.getCommand(userInput);
+            Result result = executeCommand(command);
+            if (command.isEndCommand()) {
+                this.exit();
+            } else {
+                ui.displayResult(result);
+            }
         }
-        Result result = command.execute(this.taskList, this.parser);
-        return result;
     }
 
     /**
@@ -102,12 +113,6 @@ public class Duke {
      */
     public static void main(String[] args) {
         Duke duke = new Duke();
-        Scanner sc = new Scanner(System.in); //scans for input
-        String command;
-        while (duke.isRunning()) {
-            command = sc.nextLine();
-            Result result = duke.run(command);
-            System.out.println(result.toString());
-        }
+        duke.run();
     }
 }

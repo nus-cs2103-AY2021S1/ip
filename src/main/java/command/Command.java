@@ -1,7 +1,9 @@
 package command;
 
 import duke.Parser;
+import duke.Storage;
 import duke.TaskList;
+import ui.Ui;
 
 /**
  * Represents a single Command with or without parameters
@@ -30,11 +32,19 @@ public abstract class Command {
     }
 
     /**
+     * To check if Command is a terminating command
+     * @return true if command is a terminating command false otherwise
+     */
+    public boolean isEndCommand() {
+        return false;
+    }
+
+    /**
      * Execute the command
      * @param taskList the current list of task
      * @return The result of executing the command
      */
-    public abstract Result execute(TaskList taskList, Parser parser);
+    public abstract Result execute(TaskList taskList, Parser parser, Storage aliasStorage, Storage taskStorage, Ui ui);
 
 
 }

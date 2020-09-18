@@ -3,7 +3,9 @@ package command;
 import java.time.format.DateTimeParseException;
 
 import duke.Parser;
+import duke.Storage;
 import duke.TaskList;
+import ui.Ui;
 
 
 public class FindTaskByDateCommand extends Command {
@@ -12,16 +14,14 @@ public class FindTaskByDateCommand extends Command {
     }
 
     @Override
-    public Result execute(TaskList taskList, Parser parser) {
+    public Result execute(TaskList taskList, Parser parser, Storage aliasStorage, Storage taskStorage, Ui ui) {
         String message;
         try {
             String dueDate = parameters[0];
             String listOfTasks = taskList.getTaskDueOn(dueDate);
-            message = "Master here are the tasks due on " + dueDate.strip() + " :\n" + listOfTasks;
-            return new Result(message, executedSuccessfully);
+            return new Result(ui.findTaskDueMessage(listOfTasks, dueDate), executedSuccessfully);
         } catch (DateTimeParseException e) {
-            message = "Master the input date should be dd-mm-yyyy!";
-            return new Result(message, executedUnsuccessfully);
+            return new Result(ui.invalidDateMessage(), executedUnsuccessfully);
         }
     }
 }

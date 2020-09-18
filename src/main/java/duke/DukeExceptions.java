@@ -7,14 +7,14 @@ public class DukeExceptions {
      * Exception for scenario where an incomplete command is given
      */
     public static class InsufficientParametersException extends Exception {
-        public InsufficientParametersException(String message) {
-            super(message);
+        public InsufficientParametersException() {
+            super();
         }
     }
 
     public static class TaskIsDoneException extends Exception {
-        public TaskIsDoneException(String message) {
-            super(message);
+        public TaskIsDoneException() {
+            super();
         }
     }
 

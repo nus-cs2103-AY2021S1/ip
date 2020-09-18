@@ -1,8 +1,12 @@
 package command;
 
+import java.io.IOException;
+
 import duke.DukeExceptions;
 import duke.Parser;
+import duke.Storage;
 import duke.TaskList;
+import ui.Ui;
 
 public class DelAliasCommand extends Command{
 
@@ -11,18 +15,18 @@ public class DelAliasCommand extends Command{
     }
 
     @Override
-    public Result execute(TaskList taskList, Parser parser) {
+    public Result execute(TaskList taskList, Parser parser, Storage aliasStorage, Storage taskStorage, Ui ui) {
         String message;
         try {
-            String newMapping = parser.deleteAlias(this.parameters);
-            message = "Master new mapping has been created: \n" + newMapping;
-            return new Result(message, executedSuccessfully);
+            String alias = parser.deleteAlias(this.parameters);
+            aliasStorage.save(parser);
+            return new Result(ui.deletedAliasMessage(alias), executedSuccessfully);
         } catch (ArrayIndexOutOfBoundsException e){
-            message = "Master please enter an alias to delete!";
-            return new Result(message, executedUnsuccessfully);
+            return new Result(ui.noAliasMessage(), executedUnsuccessfully);
         } catch (DukeExceptions.AliasDoesNotExistException e){
-            message = "Master the alias " + e.getMessage() + " does not exist!";
-            return  new Result(message, executedUnsuccessfully);
+            return  new Result(ui.aliasDoesNotExistMessage(e.getMessage()), executedUnsuccessfully);
+        } catch (IOException e) {
+            return new Result(ui.fileIssueMessage(), executedUnsuccessfully);
         }
     }
 

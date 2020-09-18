@@ -1,8 +1,12 @@
 package command;
 
+import java.io.IOException;
+
 import duke.Parser;
+import duke.Storage;
 import duke.TaskList;
 import task.Task;
+import ui.Ui;
 
 public class DelTaskCommand extends Command {
     public DelTaskCommand(String ...parameter) {
@@ -10,22 +14,22 @@ public class DelTaskCommand extends Command {
     }
 
     @Override
-    public Result execute(TaskList taskList, Parser parser) {
+    public Result execute(TaskList taskList, Parser parser, Storage aliasStorage, Storage taskStorage, Ui ui) {
         String message;
         try {
             int index = Integer.parseInt(parameters[0].strip()) - 1;
             Task deletedTask = taskList.deleteTask(index);
-            message = "Yes master. I've deleted the task from the list: \n\t" + deletedTask.toString()
-                    + "\nYou now have " + taskList.getNoTask() + " task in the list master.\n";
-            return new Result(message, executedSuccessfully);
+            taskStorage.save(taskList);
+            return new Result(ui.deletedTaskMessage(deletedTask, taskList.getNoTask()), executedUnsuccessfully);
         } catch (IndexOutOfBoundsException e) {
             message = taskList.getNoTask() == 0
-                    ? "Master task list is empty!\n"
-                    : "Master please enter a valid index!\n";
+                    ? ui.taskListEmptyMessage()
+                    : ui.invalidIndexMessage();
             return new Result(message, executedUnsuccessfully);
         } catch (NumberFormatException e) {
-            message = "Master please enter a task number so that I know which to handle.\n";
-            return new Result(message, executedUnsuccessfully);
+            return new Result(ui.noIndexGivenMessage(), executedUnsuccessfully);
+        } catch (IOException e) {
+            return new Result(ui.fileIssueMessage(), executedUnsuccessfully);
         }
     }
 

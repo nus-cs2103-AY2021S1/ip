@@ -1,8 +1,12 @@
 package command;
 
+import java.io.IOException;
+
 import duke.DukeExceptions;
 import duke.Parser;
+import duke.Storage;
 import duke.TaskList;
+import ui.Ui;
 
 public class CreateNewAliasCommand extends Command{
 
@@ -11,18 +15,17 @@ public class CreateNewAliasCommand extends Command{
     }
 
     @Override
-    public Result execute(TaskList taskList, Parser parser) {
-        String message;
+    public Result execute(TaskList taskList, Parser parser, Storage aliasStorage, Storage taskStorage, Ui ui) {
         try {
-            String newMapping = parser.createNewAlias(this.parameters);
-            message = "Master new mapping has been created: \n" + newMapping;
-            return new Result(message, executedSuccessfully);
+            String mapping = parser.createNewAlias(this.parameters);
+            aliasStorage.save(parser);
+            return new Result(ui.newMappingMessage(mapping), executedSuccessfully);
         } catch (ArrayIndexOutOfBoundsException e){
-            message = "Master please fill up the command fully : alias <Alias name> <Command name>";
-            return new Result(message, executedSuccessfully);
+            return new Result(ui.inCompleteAliasCommandMessage(), executedSuccessfully);
         } catch (DukeExceptions.AliasAlreadyExistException e) {
-            message = "Master the alias " + e.getMessage() + " already exist!";
-            return  new Result(message, executedUnsuccessfully);
+            return  new Result(ui.aliasAlreadyExistMessage(e.getMessage()), executedUnsuccessfully);
+        } catch (IOException e) {
+            return new Result(ui.fileIssueMessage(), executedUnsuccessfully);
         }
     }
 }
