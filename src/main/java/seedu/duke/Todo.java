@@ -1,4 +1,4 @@
-package duke;
+package seedu.duke;
 
 /**
  * Todo class extends Task class to represent a task that does not have a specific time.
