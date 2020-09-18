@@ -16,7 +16,7 @@ public class Event extends Task {
         this.end = LocalDateTime.parse(string.substring(string.indexOf("/") + 20, string.indexOf("/") + 35), inFormat);
     }
     public String toString() {
-        return "[D] " + super.toString() + " (at: " + start.format(outFormat) + " to " + end.format(outFormat) + ")";
+        return "[E] " + super.toString() + " (at: " + start.format(outFormat) + " to " + end.format(outFormat) + ")";
     }
 
     @Override

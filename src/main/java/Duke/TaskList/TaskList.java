@@ -6,6 +6,10 @@ import Duke.TaskList.tasks.Task;
 import Duke.TaskList.tasks.ToDos;
 import Duke.TaskList.tasks.Deadline;
 
+import java.awt.Desktop;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
@@ -52,11 +56,12 @@ public class TaskList {
      */
     public static String getHelp() {
         String newLine = System.getProperty("line.separator");
-        return "Commands:" + newLine + "ADD NEW TODO: /todo *Thing to do *," +
-                newLine + "ADD NEW EVENT:*task* /at  *(start in yyyy-MM-dd HHmm) (end in yyyy-MM-dd HHmm)*," + newLine +
-                "ADD NEW DEADLINE: *task* /by *deadline in yyyy-MM-dd HHmm*" + newLine + "SEARCH FOR A KEYWORD: " +
-                "/find *text to search for*" + newLine + "DELETE A TASK: /delete *index of task to delete*" +
-                newLine + "MARK A TASK AS DONE: /done *index of task finished" + newLine + "UPDATE A TASK: " +
+        return "Commands:" + newLine + "ACCESS USER GUIDE: /UG" + newLine + "ADD NEW TODO: /todo *Thing to do*" +
+                newLine + "ADD NEW EVENT: *task* /at  *(start in yyyy-MM-dd HHmm) (end in yyyy-MM-dd HHmm)*"
+                + newLine + "ADD NEW DEADLINE: *task* /by *deadline in yyyy-MM-dd HHmm*" + newLine +
+                "DISPLAY LIST: /list" + newLine + "SEARCH FOR A KEYWORD: " + "/find *text to search for*" +
+                newLine + "DELETE A TASK: /delete *index of task to delete*" + newLine +
+                "MARK A TASK AS DONE: /done *index of task finished" + newLine + "UPDATE A TASK: " +
                 "/update *index of task to update* *updated content of task*" + newLine + "SAVE AND CLOSE: bye";
     }
 
@@ -173,16 +178,43 @@ public class TaskList {
     }
 
     /**
+     * Opens the github readme on the default browser
+     * @return Message depending on success or failure of opening the site.
+     */
+    public static String getUG() {
+        try {
+            String UG = "https://github.com/theyellowfellow/ip/blob/master/docs/README.md";
+            if (Desktop.isDesktopSupported()) {
+                Desktop desktop = java.awt.Desktop.getDesktop();
+                URI userGuideSite = new URI(UG);
+                desktop.browse(userGuideSite);
+            } else {
+                Runtime runtime = Runtime.getRuntime();
+                runtime.exec("xdg-open " + UG);
+            }
+        } catch (IOException | URISyntaxException e) {
+            return "Bark. (Sorry, we couldn't open the website.)";
+        }
+        return "Bark bark!! (User Guide opened!!)";
+    }
+
+    /**
      * Searches the list for the key word, and prints a new list containing tasks with the key word.
-     * @param keyWord Key word for the search
+     * @param input Contains key word for the search
      * @return Tasks which match the keyword
      */
-    public static String find(String keyWord) {
+    public static String find (String input) throws DukeExceptions {
+        String keyWord;
+        try {
+            keyWord = input.substring("/find ".length());
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new DukeExceptions("Error: Input a keyword.");
+        }
         boolean found = false;
         String foundText = "Woof bark: (Here are the tasks that match your key word: )";
         System.out.println("Woof bark: (Here are the tasks that match your key word: )");
         for (int i = 0; i < thingsOnList.size(); i++) {
-            if (thingsOnList.get(i).toString().contains(keyWord)) {
+            if (thingsOnList.get(i).toString().toLowerCase().contains(keyWord.toLowerCase())) {
                 foundText += "\n" + ((i + 1) + ". "  + thingsOnList.get(i));
                 found = true;
             }

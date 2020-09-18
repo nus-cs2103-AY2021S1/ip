@@ -11,5 +11,6 @@ public class ToDos extends Task {
     @Override
     public void update(String newTask) {
         fullText = fullText.substring(0, commandIndex) + newTask;
+        task = newTask;
     }
 }

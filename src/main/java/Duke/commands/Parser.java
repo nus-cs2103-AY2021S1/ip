@@ -70,10 +70,10 @@ public class Parser {
                     return TaskList.update(input);
 
                 case "find":
-                    return TaskList.find(input.substring(cmdIndex + "/find ".length()));
+                    return TaskList.find(input);
 
                 case "todo":
-                    return TaskList.addToDo(input);
+                    return TaskList.addToDo(input.substring(cmdIndex));
 
                 case "at":
                     return TaskList.addEvent(input);
@@ -83,6 +83,9 @@ public class Parser {
 
                 case "by":
                     return TaskList.addDeadline(input);
+
+                case "UG":
+                    return TaskList.getUG();
 
                 default:
                     throw new DukeExceptions("Bark bark bark! (Please use me with proper commands!)");
