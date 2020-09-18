@@ -50,7 +50,7 @@ public class FindCommandTest extends CommandTests {
     @Test
     public void execute_noMatchingTask_success() {
         try {
-            FindCommand fc = new FindCommand("test");
+            FindCommand fc = new FindCommand("TEST");
             ToDo toDo = new ToDo("te");
             Event event = new Event("test", "2pm");
             taskList.add(toDo);
