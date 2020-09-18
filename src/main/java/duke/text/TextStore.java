@@ -6,13 +6,13 @@ public class TextStore {
     // Public messages means that they are referenced outside to craft messages with other strings (ie strings from task)
 
     // Bling msgs
-    protected final static String top = "------------------Bot made by Hendey Fan------------------";
-    protected final static String errorBling = "------------------!*!*!ERROR DETECTED!*!*!------------------";
-    protected final static String bottom = "---------------------------------------------------------------";
-    protected final static String startMessage = "    This is a task management bot made by Hendey Fan.\n" +
-            "           Bot is currently starting up BRRRRRRRRRRR";
-    protected final static String endMessage = "             oi don run away from ur tasks hor    \n" +
-            "            Window will now close in 5 seconds";
+    protected final static String top = "-------------Bot made by Hendey Fan-------------";
+    protected final static String errorBling = "--------------!*!*!ERROR DETECTED!*!*!--------------";
+    protected final static String bottom = "-------------------------------------------------------";
+    protected final static String startMessage = "This is a task management bot made by Hendey Fan.\n" +
+            "       Bot is currently starting up BRRRRRRRRRRR";
+    protected final static String endMessage = "         oi don run away from ur tasks hor    \n" +
+            "        Window will now close in 5 seconds";
 
     // Error msgs
     protected final static String taskNotFound = "Error: task not found :(";

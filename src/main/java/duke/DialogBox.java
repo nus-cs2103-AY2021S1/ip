@@ -8,6 +8,8 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
+//@@author Jeffry Lum-reused
+//Code below reused from sub pages under https://se-education.org/guides/tutorials/javaFx.html with minor modifications
 public class DialogBox extends HBox {
 
     private Label text;
@@ -43,3 +45,4 @@ public class DialogBox extends HBox {
         return db;
     }
 }
+//@@author Jeffry Lum
