@@ -47,6 +47,7 @@ public class Logic {
         switch (instruct) {
         case LIST: //list out the task
             int num = 1;
+            outputLines.add("Here are the tasks in your list");
             for (Task c : ls.getTaskArrayList()) {
                 String item = "    " + num + ". " + c;
                 num++;
