@@ -132,8 +132,8 @@ public class WindowDisplay extends Application {
 
         // sends them out onto the display
         dialogContainer.getChildren().addAll(
-                new DialogBox(userText, new ImageView(user)),
-                new DialogBox(dukeText, new ImageView(duke))
+                DialogBox.getUserDialog(userText, new ImageView(user)),
+                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
         );
         userInput.clear();
 
@@ -164,7 +164,7 @@ public class WindowDisplay extends Application {
 
     private void flushTextCache() {
         dialogContainer.getChildren().add(
-                new DialogBox(new Label(TextCacher.getStore()), new ImageView(duke)));
+                DialogBox.getDukeDialog(new Label(TextCacher.getStore()), new ImageView(duke)));
     }
 }
 
