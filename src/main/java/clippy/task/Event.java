@@ -30,7 +30,10 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[" + taskType + "]" + super.toString() +  " (at: " + at + ")";
+        String taskTypeIndicator = "[" + taskType + "]";
+        String atString = "(at: " + at + ")";
+        
+        return taskTypeIndicator + super.toString() + " " + atString;
     }
 
     /**
@@ -40,6 +43,6 @@ public class Event extends Task {
      */
     @Override
     public String generateSaveFileData() {
-        return "E|" + (isDone ? "1" : "0") + "|" + desc + "|" + at;
+        return "E" + "|" + (isDone ? "1" : "0") + "|" + desc + "|" + at;
     }
 }

@@ -9,6 +9,7 @@ public abstract class Task {
     protected String desc;
     protected boolean isDone;
     protected TaskType taskType;
+    
     private int index;
     
     private final String SYMBOL_TICK = "\u2713";
@@ -43,7 +44,8 @@ public abstract class Task {
     }
     
     private String getStatusIcon() {
-        return (isDone ? SYMBOL_TICK : SYMBOL_CROSS); //return tick or X symbols
+        //return tick or X symbols
+        return (isDone ? SYMBOL_TICK : SYMBOL_CROSS);
     }
 
     /**
@@ -88,6 +90,7 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        return "[" + getStatusIcon() + "] " + desc;
+        String statusIndicator = "[" + getStatusIcon() + "]";
+        return statusIndicator + " " + desc;
     }
 }

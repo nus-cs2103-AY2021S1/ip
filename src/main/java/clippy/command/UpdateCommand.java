@@ -4,7 +4,7 @@ package clippy.command;
  * Represents a command to update a task in the TaskList.
  */
 public abstract class UpdateCommand extends Command {
-    protected final int indexOfTaskToUpdate;
+    protected int indexOfTaskToUpdate;
 
     /**
      * Constructs a command to update a task in the TaskList.

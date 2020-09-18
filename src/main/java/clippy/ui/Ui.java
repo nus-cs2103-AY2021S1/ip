@@ -6,8 +6,7 @@ import clippy.task.Task;
  * Represents a User Interface object that deals with interactions with the user.
  */
 public class Ui {
-    private final static String MSG_GREET = "Hello! I'm Clippy \n" +
-            "What can I do for you today?\n";
+    private final static String MSG_GREET = "Hello! I'm Clippy \n" + "What can I do for you today?\n";
     private final static String MSG_EXIT = "Bye! Hope to see you again soon!";
     private final static String MSG_ADDED_TASK = "Got it. I've added this task:\n";
     private final static String MSG_LIST_TASK_NO_TASK = "You have no tasks in your list.";
@@ -88,27 +87,29 @@ public class Ui {
     }
 
     /**
-     * Returns a String showing the successful deletion of the given task and the number of tasks remaining in the list.
+     * Returns a String showing successful deletion of the given task and the number of tasks remaining in the list.
      * 
      * @param task Task that was deleted.
-     * @param numOfRemainingTasks Number of tasks remaining in the list.
-     * @return A String showing the successful deletion of the given task and the number of tasks remaining in the list.
+     * @param numOfRemainingTasks Number of tasks remaining in the list after deletion.
+     * @return A String showing successful deletion of the given task and the number of tasks remaining in the list.
      */
     public String showDeleted(Task task, int numOfRemainingTasks) {
-        return MSG_DELETED_TASK + task + "\n" + generateNumOfTasksRemainingSentence(numOfRemainingTasks);
+        String numOfRemainingTaskDescription = generateNumOfTasksNowStatement(numOfRemainingTasks);
+        
+        return MSG_DELETED_TASK + task + "\n" + numOfRemainingTaskDescription;
     }
     
-    private String generateNumOfTasksRemainingSentence(int numOfRemainingTasks) {
-        assert numOfRemainingTasks >= 0 : "Negative number of remaining tasks";
-        switch (numOfRemainingTasks) {
+    private String generateNumOfTasksNowStatement(int numOfTasks) {
+        assert numOfTasks >= 0 : "Negative number of remaining tasks";
+        
+        switch (numOfTasks) {
         case 0:
             return MSG_NOW_NO_TASK;
         case 1:
             return MSG_NOW_ONE_TASK;
         default:
-            return "Now you have " + numOfRemainingTasks + " tasks in the list.";
+            return "Now you have " + numOfTasks + " tasks in the list.";
         }
-            
     }
 
     /**
@@ -130,14 +131,9 @@ public class Ui {
      */
     public String showAdded(Task task, int numOfTasks) {
         assert numOfTasks >= 0 : "Negative number of tasks";
-        String numOfTaskDescription;
-        if (numOfTasks == 0) {
-            numOfTaskDescription = "Now you have no tasks in the list.";
-        } else if (numOfTasks == 1) {
-            numOfTaskDescription = "Now you have 1 task in the list.";
-        } else {
-            numOfTaskDescription = "Now you have " + numOfTasks + " tasks in the list.";
-        }
+        
+        String numOfTaskDescription = generateNumOfTasksNowStatement(numOfTasks);
+        
         return MSG_ADDED_TASK + task + "\n" + numOfTaskDescription;
     }
 

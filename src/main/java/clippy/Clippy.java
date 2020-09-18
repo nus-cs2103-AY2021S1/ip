@@ -1,10 +1,15 @@
 package clippy;
 
 import clippy.command.Command;
+
 import clippy.exception.ClippyException;
+
 import clippy.parser.Parser;
+
 import clippy.storage.Storage;
+
 import clippy.task.TaskList;
+
 import clippy.ui.Ui;
 
 /**
@@ -25,6 +30,7 @@ public class Clippy {
     public Clippy(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
+        
         try {
             tasks = new TaskList(storage.load());
             tasks.updateAllTaskIndices();
@@ -40,8 +46,10 @@ public class Clippy {
      */
     public Clippy() {
         String filePath = "./data/savefile.txt";
+        
         ui = new Ui();
         storage = new Storage(filePath);
+        
         try {
             tasks = new TaskList(storage.load());
             tasks.updateAllTaskIndices();

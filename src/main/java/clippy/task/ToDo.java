@@ -18,7 +18,9 @@ public class ToDo extends Task {
 
     @Override
     public String toString() {
-        return "[" + taskType + "]" + super.toString();
+        String taskTypeIndicator = "[" + taskType + "]";
+        
+        return taskTypeIndicator + super.toString();
     }
 
     /**
@@ -28,7 +30,7 @@ public class ToDo extends Task {
      */
     @Override
     public String generateSaveFileData() {
-        return "T|" + (isDone ? "1" : "0") + "|" + desc;
+        return "T" + "|" + (isDone ? "1" : "0") + "|" + desc;
     }
 
     @Override

@@ -1,10 +1,13 @@
 package clippy.command;
 
 import clippy.exception.InvalidDateFormatException;
+
 import clippy.storage.Storage;
+
 import clippy.task.Deadline;
 import clippy.task.Task;
 import clippy.task.TaskList;
+
 import clippy.ui.Ui;
 
 /**
@@ -36,11 +39,11 @@ public class AddDeadlineCommand extends AddCommand {
      * @throws InvalidDateFormatException If command has date in a format that is not YYYY-MM-DD.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws 
-            InvalidDateFormatException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidDateFormatException {
         Task newTask = new Deadline(taskDescription, by);
         tasks.add(newTask);
-        String output = ui.showAdded(newTask, tasks.size());
+        
+        String output = ui.showAdded(newTask, tasks.getSize());
 
         tasks.updateAllTaskIndices();
         storage.save(tasks);

@@ -17,14 +17,17 @@ public class TaskGenerator {
     public static Task generateTask(String taskData) throws CorruptedFileException {
         try {
             String[] taskSubData = taskData.split("\\|");
+            
             String taskTypeLetter = taskSubData[0];
-            Boolean isDone = taskSubData[1].equals("1");
+            String doneStatus = taskSubData[1];
             String taskDesc = taskSubData[2];
-
-            // check for savefile corruption
-            if (!(taskSubData[1].equals("0") || taskSubData[1].equals("1"))) {
+            
+            // check for save file corruption
+            if (!(doneStatus.equals("0") || doneStatus.equals("1"))) {
                 throw new CorruptedFileException();
             }
+            
+            boolean isDone = doneStatus.equals("1");
 
             Task task;
 

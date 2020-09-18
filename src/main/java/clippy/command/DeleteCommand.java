@@ -1,8 +1,10 @@
 package clippy.command;
 
 import clippy.storage.Storage;
+
 import clippy.task.Task;
 import clippy.task.TaskList;
+
 import clippy.ui.Ui;
 
 /**
@@ -34,7 +36,8 @@ public class DeleteCommand extends Command{
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         Task taskToDelete = tasks.getTask(indexOfTaskToDelete);
         tasks.delete(indexOfTaskToDelete);
-        String output = ui.showDeleted(taskToDelete, tasks.size());
+        
+        String output = ui.showDeleted(taskToDelete, tasks.getSize());
 
         tasks.updateAllTaskIndices();
         storage.save(tasks);

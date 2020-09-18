@@ -1,10 +1,11 @@
 package clippy.command;
 
-import clippy.exception.InvalidDateFormatException;
 import clippy.storage.Storage;
+
 import clippy.task.Event;
 import clippy.task.Task;
 import clippy.task.TaskList;
+
 import clippy.ui.Ui;
 
 /**
@@ -38,7 +39,8 @@ public class AddEventCommand extends AddCommand {
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         Task newTask = new Event(taskDescription, at);
         tasks.add(newTask);
-        String output = ui.showAdded(newTask, tasks.size());
+        
+        String output = ui.showAdded(newTask, tasks.getSize());
 
         tasks.updateAllTaskIndices();
         storage.save(tasks);

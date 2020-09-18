@@ -26,11 +26,12 @@ import java.util.Arrays;
  * Represents a parser that parses user-input into commands that can be executed by Clippy.
  */
 public class Parser {
-    private static final int TO_DO_MIN_LENGTH = 6;
-    private static final int DEADLINE_MIN_LENGTH = 10;
-    private static final int EVENT_MIN_LENGTH = 7;
-    private static final int BY_GAP = 4;
-    private static final int AT_GAP = 4;
+    private static final int MIN_LENGTH_TO_DO = 6;
+    private static final int MIN_LENGTH_DEADLINE = 10;
+    private static final int MIN_LENGTH_EVENT = 7;
+    
+    private static final int GAP_BY = 4;
+    private static final int GAP_AT = 4;
     
     /**
      * Returns a command object that can be executed by Clippy.
@@ -61,7 +62,7 @@ public class Parser {
             String[] subInputs = input.split(" ");
             int length = subInputs.length;
             int indexOfTaskToBeUpdated = Integer.parseInt(subInputs[1]);
-            if (containsBackSlash(subInputs)) {
+            if (hasBackSlash(subInputs)) {
                 // update description of Deadline/Event OR update description of Deadline/Event + time
                 int indexOfBackSlash = getIndexOfBackSlash(subInputs);
                 String[] timeInArray = Arrays.copyOfRange(subInputs, indexOfBackSlash + 1, length);
@@ -82,29 +83,29 @@ public class Parser {
                 return new UpdateDescriptionCommand(indexOfTaskToBeUpdated, description);
             }
         } else if (input.startsWith("todo")) {
-            if (input.length() < TO_DO_MIN_LENGTH) {
+            if (input.length() < MIN_LENGTH_TO_DO) {
                 throw new EmptyDescriptionException(TaskType.TODO);
             } else {
-                return new AddToDoCommand(input.substring(TO_DO_MIN_LENGTH - 1));
+                return new AddToDoCommand(input.substring(MIN_LENGTH_TO_DO - 1));
             }
         } else if (input.startsWith("deadline")) {
-            if (input.length() < DEADLINE_MIN_LENGTH) {
+            if (input.length() < MIN_LENGTH_DEADLINE) {
                 throw new EmptyDescriptionException(TaskType.DEADLINE);
             }
             int indexOfSeparator = input.indexOf("/");
-            String taskDescription = input.substring(DEADLINE_MIN_LENGTH - 1, indexOfSeparator - 1);
-            String by = input.substring(indexOfSeparator + BY_GAP);
+            String taskDescription = input.substring(MIN_LENGTH_DEADLINE - 1, indexOfSeparator - 1);
+            String by = input.substring(indexOfSeparator + GAP_BY);
             if (by.isBlank()) {
                 throw new EmptyDateTimeException();
             }
             return new AddDeadlineCommand(taskDescription, by);
         } else if (input.startsWith("event")) {
-            if (input.length() < EVENT_MIN_LENGTH) {
+            if (input.length() < MIN_LENGTH_EVENT) {
                 throw new EmptyDescriptionException(TaskType.EVENT);
             }
             int indexOfSeparator = input.indexOf("/");
-            String taskDescription = input.substring(EVENT_MIN_LENGTH - 1, indexOfSeparator - 1);
-            String at = input.substring(indexOfSeparator + AT_GAP);
+            String taskDescription = input.substring(MIN_LENGTH_EVENT - 1, indexOfSeparator - 1);
+            String at = input.substring(indexOfSeparator + GAP_AT);
             if (at.isBlank()) {
                 throw new EmptyDateTimeException();
             }
@@ -125,14 +126,16 @@ public class Parser {
         return -1;
     }
 
-    private static boolean containsBackSlash(String[] subInputs) {
+    private static boolean hasBackSlash(String[] subInputs) {
         int length = subInputs.length;
+        
         for (int i = 0; i < length; i++) {
             String subInput = subInputs[i];
             if (subInput.charAt(0) == '/') {
                 return true;
             }
         }
+        
         return false;
     }
 }

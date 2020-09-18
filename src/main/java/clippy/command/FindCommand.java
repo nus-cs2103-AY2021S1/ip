@@ -1,8 +1,10 @@
 package clippy.command;
 
 import clippy.storage.Storage;
+
 import clippy.task.Task;
 import clippy.task.TaskList;
+
 import clippy.ui.Ui;
 
 import java.util.ArrayList;
@@ -11,7 +13,7 @@ import java.util.ArrayList;
  * Represents a command to find and display all tasks matching a keyword when executed.
  */
 public class FindCommand extends Command {
-    private final String keyword;
+    private String keyword;
     
     /**
      * Constructs a command object that finds and displays all tasks matching a keyword when executed.
@@ -33,14 +35,16 @@ public class FindCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        int numOfTasks = tasks.size();
+        int numOfTasks = tasks.getSize();
         assert numOfTasks >= 0 : "Negative number of tasks in TaskList";
+        
         ArrayList<Task> matchedTasks = new ArrayList<>();
         String output = "";
         
         for (int i = 1; i <= numOfTasks; i++) {
             Task currTask = tasks.getTask(i);
             String currDesc = currTask.getDesc();
+            
             if (currDesc.contains(keyword)) {
                 matchedTasks.add(currTask);
             }
@@ -51,6 +55,7 @@ public class FindCommand extends Command {
         } else {
             output += ui.showMatchingTaskHeader() + "\n";
             int i = 1;
+            
             for (Task t : matchedTasks) {
                 output += ui.showTaskWithIndex(i, t) 
                         + " at List Index: " + t.getTaskIndexInList() + "\n";

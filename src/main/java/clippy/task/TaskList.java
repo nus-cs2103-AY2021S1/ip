@@ -47,7 +47,7 @@ public class TaskList {
      * 
      * @return Number of tasks stored within the task list.
      */
-    public int size() {
+    public int getSize() {
         return innerList.size();
     }
 
