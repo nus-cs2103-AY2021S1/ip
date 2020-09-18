@@ -1,12 +1,13 @@
+import java.io.FileNotFoundException;
+
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-import java.io.FileNotFoundException;
+
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -18,17 +19,30 @@ public class MainWindow extends AnchorPane {
     private VBox dialogContainer;
     @FXML
     private TextField userInput;
-    @FXML
-    private Button sendButton;
 
     private Duke duke;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/greg.jpg"));
 
+    /**
+     * Initialises the Dialog Container with the opening message
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        String help = "Hello I'm Greg! Here are my list of commands: \n"
+                + "list: shows current list of tasks \n"
+                + "done {number}: marks the number position task as done \n"
+                + "todo {description}: adds a Todo task \n"
+                + "deadline {description} /by {time}: adds a Deadline Task \n"
+                + "event {description} /at {time}: adds an Event Task \n"
+                + "delete {number}: deletes the number position task \n"
+                + "delete {number-number}: deletes the range of Tasks \n"
+                + "find {keyword}: finds all tasks with keyword in it \n"
+                + "undo: undo your most recent action \n"
+                + "bye: exits the Greg Bot \n";
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(help, dukeImage));
     }
 
     public void setDuke(Duke d) {

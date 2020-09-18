@@ -12,8 +12,7 @@ public class Parser {
      * @throws FileNotFoundException
      */
 
-    public String commandParser(String command, TaskList list, Storage store, Command action)
-            throws DukeException, FileNotFoundException {
+    public String commandParser(String command, TaskList list, Storage store, Command action) {
         ArrayList<Task> storage = list.getTasks();
         try {
             assert !command.equals("") : "Please type in your command.";

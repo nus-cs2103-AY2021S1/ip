@@ -2,9 +2,12 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 
+import javafx.application.Platform;
+
 public class Command {
     private String prevCommand = "";
     private int position = -1;
+    private ArrayList<Task> deleted = new ArrayList<>();
     /**
      * Prints out the current tasks in the list
      * @param command
@@ -49,6 +52,8 @@ public class Command {
             throw new DukeException(command);
         } catch (FileNotFoundException e) {
             return "Sorry, the list is currently empty!";
+        } catch (NumberFormatException e) {
+            return "Please enter the position of the item you wish to delete.";
         }
     }
 
@@ -140,8 +145,8 @@ public class Command {
      * @return the good bye message in String format
      */
     public String bye() {
-        String bye = "Bye. Hope to see you again soon!";
-        return bye;
+        Platform.exit();
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
@@ -158,6 +163,8 @@ public class Command {
             if (temp[1].length() == 1) {
                 int number = Integer.parseInt(command.split(" ")[1]);
                 Task task = storage.get(number - 1);
+                deleted.add(task);
+                prevCommand = "delete";
                 storage.remove(number - 1);
                 store.save(storage);
                 int size = storage.size();
@@ -170,12 +177,14 @@ public class Command {
                 String deletedTasks = "";
                 for (int i = first - 1; i < second; i++) {
                     Task task = storage.get(first - 1);
+                    deleted.add(task);
                     deletedTasks += task + "\n";
                     storage.remove(first - 1);
-                    store.save(storage);
                 }
+                store.save(storage);
+                prevCommand = "massDelete";
                 int size = storage.size();
-                return "Noted, I've removed the following tasks: " + deletedTasks
+                return "Noted, I've removed the following tasks: \n" + deletedTasks
                         + "Now you have " + size + " tasks in the list.";
             }
         } catch (IndexOutOfBoundsException e) {
@@ -239,6 +248,23 @@ public class Command {
             prevCommand = "";
             position = -1;
             return "Alright! I've undid your previous addition: " + "\n" + task;
+        } else if (prevCommand.equals("delete")) {
+            Task task = deleted.get(0);
+            storage.add(task);
+            store.save(storage);
+            prevCommand = "";
+            deleted = new ArrayList<>();
+            return "Alright! I've undid your previous deletion \n" + task;
+        } else if (prevCommand.equals("massDelete")) {
+            String tasks = "";
+            for (Task item : deleted) {
+                storage.add(item);
+                tasks += item + "\n";
+            }
+            store.save(storage);
+            prevCommand = "";
+            deleted = new ArrayList<>();
+            return "Alright! I've undid the following deletions: \n" + tasks;
         } else {
             return "Cannot undo any further.";
         }

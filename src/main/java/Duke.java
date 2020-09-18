@@ -5,7 +5,6 @@ import java.io.Serializable;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -107,9 +106,7 @@ public class Duke extends Application implements Serializable {
         sendButton.setOnMouseClicked((event) -> {
             try {
                 handleUserInput();
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (DukeException e) {
+            } catch (FileNotFoundException | DukeException e) {
                 e.printStackTrace();
             }
         });
@@ -117,9 +114,7 @@ public class Duke extends Application implements Serializable {
         userInput.setOnAction((event) -> {
             try {
                 handleUserInput();
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (DukeException e) {
+            } catch (FileNotFoundException | DukeException e) {
                 e.printStackTrace();
             }
         });
@@ -128,30 +123,16 @@ public class Duke extends Application implements Serializable {
     }
 
     /**
-     * Iteration 1:
-     * Creates a label with the specified text and adds it to the dialog container.
-     * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
-     */
-    private Label getDialogLabel(String text) {
-        // You will need to import `javafx.scene.control.Label`.
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
-    }
-
-    /**
      * Iteration 2:
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() throws FileNotFoundException, DukeException {
-        String userText = (userInput.getText());
-        String dukeText = (getResponse(userInput.getText()));
+        String userText = userInput.getText();
+        String dukeText = getResponse(userInput.getText());
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, (user)),
-                DialogBox.getDukeDialog(dukeText, (duke))
+                DialogBox.getUserDialog(userText, user),
+                DialogBox.getDukeDialog(dukeText, duke)
         );
         userInput.clear();
     }
@@ -163,27 +144,5 @@ public class Duke extends Application implements Serializable {
     public String getResponse(String input) throws FileNotFoundException, DukeException {
         Parser parser = new Parser();
         return parser.commandParser(input, tasks, storage, action);
-    }
-
-    /**
-     *  * Starts up the bot by calling the Parser class and its methods
-     * @throws FileNotFoundException
-     * @throws DukeException
-     */
-    public void run() throws FileNotFoundException, DukeException {
-        System.out.println("Hello I'm Greg!");
-        System.out.println("How may I be of service today?");
-        Parser parser = new Parser();
-        //parser.commandParser(tasks, storage);
-    }
-
-    /**
-     * Creates a new Duke Instance and calls upon the run method to start up the bot.
-     * @param args
-     * @throws FileNotFoundException
-     * @throws DukeException
-     */
-    public static void main(String[] args) throws FileNotFoundException, DukeException {
-        new Duke("tasks").run();
     }
 }

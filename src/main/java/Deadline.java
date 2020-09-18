@@ -2,13 +2,17 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.time.temporal.ChronoUnit;
 
 public class Deadline extends Task implements Serializable {
 
     protected String by;
-    LocalDate date;
+    private LocalDate date;
 
+    /**
+     * Constructor for the Deadline Class
+     * @param description
+     * @param by
+     */
     public Deadline(String description, String by) {
         super(description);
         try {
