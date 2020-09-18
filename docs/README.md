@@ -20,7 +20,7 @@ Moves a task to the top of task list and label it as **HIGH priority**.
 ### 6. View all tasks
 Displays all tasks in the task list.
 
-###7. Exit
+### 7. Exit
 Exits the bot.
 
 
