@@ -41,6 +41,7 @@ public class Deadline extends Task {
     @Override public String toStore() {
         return "[D] " + this.getStatus().statusToSymbol() + this.getName()
                 + " by: " + dueDate;
+
     }
 
 }

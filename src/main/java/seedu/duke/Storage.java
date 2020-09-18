@@ -41,6 +41,7 @@ public class Storage {
         appendFile.write("\n");
         appendFile.close();
     }
+
     /**
      * Rewrites the data management file with a new array of tasks.
      * @param list List of tasks to be written.

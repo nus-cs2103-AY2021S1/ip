@@ -14,6 +14,7 @@ public class Ui {
     //create file
     private String path = "/Users/chengjiyuqing/Desktop/Year 2 Sem 1/CS2103T/ip/src/main/java/seedu/duke/todo.txt";
 
+
     /**
      * Constructor of the class.
      * Creates a new Ui object with a Scanner.
@@ -33,16 +34,15 @@ public class Ui {
      * @throws IOException
      * @throws DukeException
      */
-    public void takeUserInput(Storage storage) throws IOException, DukeException {
+    public String takeUserInput(Storage storage) throws IOException, DukeException {
         while (sc.hasNextLine()) {
             String userMessage = sc.nextLine();
             //exit
             if (userMessage.equals("bye")) {
-                System.out.println("Bye! Nice serving you. Hope to see you again soon! :D");
-                break;
+                return "Bye! Nice serving you. Hope to see you again soon! :D";
             }
-            Parser.parseInput(userMessage, storage);
+            return Parser.parseInput(userMessage, storage);
         }
+        return "";
     }
-
 }
