@@ -55,7 +55,7 @@ public class TaskList {
      * @return the reply to DONE task as string.
      */
     public String setDoneAsString(int taskPosition) {
-        if (taskPosition > tasks.size()) {
+        if (taskPosition > tasks.size() || taskPosition <= 0) {
             return "Out of index range! Please try again :D";
         }
         tasks.get(taskPosition - 1).markAsDone();
@@ -156,7 +156,7 @@ public class TaskList {
      * @return the reply to DELETE command as string.
      */
     public String deleteTaskAsString(int taskPosition) {
-        if (taskPosition > tasks.size()) {
+        if (taskPosition > tasks.size() || taskPosition <= 0) {
             return "Out of index range! Please try again :D";
         }
         String result = "___________________________________________\n";
