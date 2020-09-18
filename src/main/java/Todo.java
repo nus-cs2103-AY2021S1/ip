@@ -42,7 +42,8 @@ public class Todo extends Task{
      */
     @Override
     public String toString() {
-        String marked = this.isDone ? "[✓] " : "[✗] ";
+        String marked = this.isDone ? "[Y] " : "[N] ";
+//        String marked = this.isDone ? "[✓] " : "[✗] ";
         return "[T]" + marked + this.name;
     }
 }

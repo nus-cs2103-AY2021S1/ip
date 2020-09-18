@@ -1,8 +1,8 @@
+import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.PrintStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-
 import java.util.Scanner;
 
 public class Duke {
@@ -31,7 +31,7 @@ public class Duke {
     private TaskList tasks;
     private Parser parser;
 
-    public Duke(Path filePath, Path dirPath) {
+    public Duke() {
         parser = new Parser(SC);
         introMessage = "I'm Deuk, nice to meet you" + Ui.NEW_LINE + Ui.PADDING +
                 "How can I be of service today?" + Ui.NEW_LINE + Ui.PADDING +
@@ -44,7 +44,7 @@ public class Duke {
                         + "    | |__| |  __/ |_| |   < \n"
                         + "    |_____/ \\___|\\__,_|_|\\_\\  v" + VERSION_NUMBER;
 
-        this.storage = new Storage(filePath, dirPath);
+        this.storage = new Storage(DUKE_DATA_FILE_PATH, DUKE_DATA_DIR_PATH);
         try {
             this.tasks = new TaskList(storage.loadTasksFromDisk());
         } catch (DukeDataFolderException ex) {
@@ -62,6 +62,7 @@ public class Duke {
         }
     }
 
+
     /**
      * Starts the Deuk programme and takes in commands through standard input.
      */
@@ -76,11 +77,26 @@ public class Duke {
         }
     }
 
+    public String getResponse(String input) {
+        // Redirect System.out to another PrintStream
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        PrintStream printStream = new PrintStream(byteArrayOutputStream);
+        PrintStream oldPrintStream = System.out;
+        System.setOut(printStream);
+
+        this.parser.parseInput(input);
+        this.parser.executeCommand(this.storage, this.tasks);
+
+        System.out.flush();
+        System.setOut(oldPrintStream);
+        return byteArrayOutputStream.toString();
+    }
+
     private void echoBack(String message) {
         Ui.printVerbal(message);
     }
 
     public static void main(String[] args) {
-        new Duke(DUKE_DATA_FILE_PATH, DUKE_DATA_DIR_PATH).init();
+        new Duke().init();
     }
 }

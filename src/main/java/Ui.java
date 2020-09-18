@@ -8,10 +8,11 @@ public class Ui {
 
     private static final String MESSAGE_TEMPLATE = HORIZONTAL_LINE + NEW_LINE + PADDING + "%s"
             + NEW_LINE + HORIZONTAL_LINE + NEW_LINE + NEW_LINE;
-    private static final String MESSAGE_TEMPLATE_VERBAL = HORIZONTAL_LINE + NEW_LINE + PADDING + "Deuk: %s"
+    public static final String MESSAGE_TEMPLATE_VERBAL = HORIZONTAL_LINE + NEW_LINE + PADDING + "Deuk: %s"
             + NEW_LINE + HORIZONTAL_LINE + NEW_LINE + NEW_LINE;
     private static final String MESSAGE_TEMPLATE_ERROR = HORIZONTAL_LINE + NEW_LINE + PADDING
-            + "☹ OOPS!!! %s"
+            + "OOPS!!! %s"
+//            + "☹ OOPS!!! %s"
             + NEW_LINE + HORIZONTAL_LINE + NEW_LINE + NEW_LINE;
 
     /**
