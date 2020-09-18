@@ -1,15 +1,12 @@
-package duke;
+package duke.task;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 
 public class Task {
     protected String description;
+    protected String identity;
     protected boolean isDone;
     protected LocalDate date;
-    protected String duration;
 
     public Task(String description) {
         this.description = description;
@@ -21,10 +18,18 @@ public class Task {
         this.date = date;
     }
 
-    public Task(String description, LocalDate date, String duration) {
+    public Task(String description, LocalDate date, String identity) {
         this.description = description;
         this.date = date;
-        this.duration = duration;
+        this.identity = identity;
+    }
+
+    /**
+     * Function to identify the different tasks in duke.txt
+     * @return String of identity
+     */
+    public String getIdentity() {
+        return identity;
     }
 
     public String getStatusIcon() {
@@ -33,6 +38,19 @@ public class Task {
 
     public void markAsDone() {
         isDone = true;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public boolean getIsDone() {
+        return isDone;
+    }
+
+    public LocalDate getLocalDate() {
+        assert !(this instanceof Todo) : "Todos have no dates!";
+        return date;
     }
 
     public String toString() {
