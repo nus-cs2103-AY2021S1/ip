@@ -1,5 +1,10 @@
 package olivia.logic;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+
 import olivia.command.Command;
 import olivia.command.DeadlineCommand;
 import olivia.command.DeleteCommand;
@@ -11,11 +16,6 @@ import olivia.command.ListCommand;
 import olivia.command.ToDoCommand;
 import olivia.command.UpdateCommand;
 import olivia.resource.Wrapper;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Map;
 
 /**
  * Parser class that parses the user input, finds the corresponding

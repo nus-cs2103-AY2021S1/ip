@@ -1,11 +1,11 @@
 package olivia.command;
 
+import java.util.List;
+
 import olivia.logic.Storage;
 import olivia.resource.TaskList;
 import olivia.resource.Wrapper;
 import olivia.ui.Ui;
-
-import java.util.List;
 
 /**
  * DoneCommand class that represents a task being marked as completed.

@@ -1,13 +1,13 @@
 package olivia.command;
 
+import java.util.List;
+
 import olivia.logic.Storage;
 import olivia.resource.TaskList;
 import olivia.resource.Wrapper;
 import olivia.task.Task;
 import olivia.task.ToDo;
 import olivia.ui.Ui;
-
-import java.util.List;
 
 /**
  * ToDoCommand class that represents a Deadline task being added to the

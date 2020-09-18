@@ -1,8 +1,8 @@
 package olivia.command;
 
-import olivia.resource.Wrapper;
-
 import java.util.List;
+
+import olivia.resource.Wrapper;
 
 /**
  * ExitCommand class that terminates the current instance of Olivia.

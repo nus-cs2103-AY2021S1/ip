@@ -1,12 +1,12 @@
 package olivia.command;
 
+import java.util.List;
+
 import olivia.logic.Storage;
 import olivia.resource.TaskList;
 import olivia.resource.Wrapper;
 import olivia.task.Task;
 import olivia.ui.Ui;
-
-import java.util.List;
 
 public class DeleteCommand implements Command {
 

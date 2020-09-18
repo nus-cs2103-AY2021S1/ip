@@ -1,14 +1,14 @@
 package olivia.command;
 
+import java.time.format.DateTimeParseException;
+import java.util.List;
+
 import olivia.logic.Storage;
 import olivia.resource.TaskList;
 import olivia.resource.Wrapper;
 import olivia.task.Event;
 import olivia.task.Task;
 import olivia.ui.Ui;
-
-import java.time.format.DateTimeParseException;
-import java.util.List;
 
 /**
  * EventCommand class that represents an Event task being added to the

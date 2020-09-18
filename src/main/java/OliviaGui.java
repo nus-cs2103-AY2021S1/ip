@@ -1,6 +1,5 @@
 // Credit: Chan Jun Da
 
-import olivia.ui.DialogBox;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -12,8 +11,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
 import olivia.logic.Parser;
+import olivia.ui.DialogBox;
 import olivia.ui.ViewPane;
 
 /**
@@ -54,7 +53,8 @@ public class OliviaGui extends Application {
                 DialogBox.getOliviaDialog(oliviaText, new ImageView(oliviaImage))
         );
         if (olivia.shouldExit()) {
-            ((Stage) userInput.getScene().getWindow()).close();
+            Stage stage = (Stage) userInput.getScene().getWindow();
+            stage.close();
         }
         userInput.clear();
     }

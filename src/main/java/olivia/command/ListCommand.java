@@ -1,10 +1,10 @@
 package olivia.command;
 
+import java.util.List;
+
 import olivia.resource.TaskList;
 import olivia.resource.Wrapper;
 import olivia.ui.Ui;
-
-import java.util.List;
 
 /**
  * ListCommand class that lists the tasks in Olivia's TaskList.

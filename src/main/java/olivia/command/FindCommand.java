@@ -1,12 +1,11 @@
 package olivia.command;
 
-import olivia.logic.Storage;
+import java.util.List;
+
 import olivia.resource.TaskList;
 import olivia.resource.Wrapper;
 import olivia.task.Task;
 import olivia.ui.Ui;
-
-import java.util.List;
 
 /**
  * FindCommand class that searches for tasks containing the keyword, compiling it

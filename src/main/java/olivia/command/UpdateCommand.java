@@ -1,5 +1,7 @@
 package olivia.command;
 
+import java.util.List;
+
 import olivia.logic.Storage;
 import olivia.resource.TaskList;
 import olivia.resource.Wrapper;
@@ -8,8 +10,6 @@ import olivia.task.Event;
 import olivia.task.Task;
 import olivia.task.ToDo;
 import olivia.ui.Ui;
-
-import java.util.List;
 
 /**
  * UpdateCommand class that represents one of a task's fields being updated.
@@ -62,7 +62,8 @@ public class UpdateCommand implements Command {
                     updatedText.append(s).append(" ");
                 }
                 updatedText.deleteCharAt(updatedText.length() - 1);
-                ((Deadline) task).update(updatedText.toString(), specifier);
+                Deadline deadline = (Deadline) task;
+                deadline.update(updatedText.toString(), specifier);
             }
         } else if (task instanceof Event) {
             String specifier = input.remove(0);
@@ -71,7 +72,8 @@ public class UpdateCommand implements Command {
                     updatedText.append(s).append(" ");
                 }
                 updatedText.deleteCharAt(updatedText.length() - 1);
-                ((Event) task).update(updatedText.toString(), specifier);
+                Event event = (Event) task;
+                event.update(updatedText.toString(), specifier);
             }
         }
         storage.save(tasks);

@@ -1,9 +1,9 @@
 package olivia.command;
 
-import olivia.resource.Wrapper;
-
-import java.util.function.BiFunction;
 import java.util.List;
+import java.util.function.BiFunction;
+
+import olivia.resource.Wrapper;
 
 /**
  * Command interface that is implemented by all other Commands. Handles commands by taking
