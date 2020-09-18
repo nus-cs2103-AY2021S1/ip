@@ -1,26 +1,27 @@
-# Duke project template
+# Duke
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+![GitHub Logo](docs/Ui.png)
 
-## Setting up in Intellij
+**Duke** is an application that can help you to *manage tasks*. It supports *saving*, *editing*, *deleting* and 
+*displaying* **tasks** using simple **commands**.
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+## Quick Start
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project dialog first)
-1. Set up the correct JDK version, as follows:
-   1. Click `Configure` > `Structure for New Projects` and then `Project Settings` > `Project` > `Project SDK`
-   1. If JDK 11 is listed in the drop down, select it. If it is not, click `New...` and select the directory where you installed JDK 11
-   1. Click `OK`
-1. Import the project into Intellij as follows:
-   1. Click `Open or Import`.
-   1. Select the project directory, and click `OK`
-   1. If there are any further prompts, accept the defaults.
-1. After the importing is complete, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()`. If the setup is correct, you should see something like the below:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+**Prerequisites: Java 11 or later installed.**
+
+1. **Download** the latest version of Duke `(a jar file)` from the [website](https://github.com/Ma-Yueran/ip/releases).
+1. **Copy** the jar file to the directory you want to use as the *home directory* for the application.
+1. `Double click` the jar file or enter `java -jar duke.jar` in console to run the program.
+1. The window shown above should appear.
+1. *Well done!* Now you can start using Duke!
+1. Refer to the [User Guide](https://ma-yueran.github.io/ip/) for more information.
+
+## Setting up in Intellij for Developers
+
+**Prerequisites: JDK 11, update Intellij to the most recent version.**
+
+1. **Fork** the project to your GitHub repository.
+1. **Clone** the repository to your pc.
+1. **Delete** `.idea` folder in the project.
+1. Use Intellij to open the `build.gradle` file, **remember** to choose `Open as Project`.
+1. Now, wait for Intellij to set up the project for you.

@@ -1,0 +1,16 @@
+todo borrow book
+list
+event jump
+deadline return book /by Sunday
+done 2
+event project meeting /at Mon 2-4pm
+done 5
+done 1
+list
+Hahaha
+done 100
+todo
+deadline sleep
+todo have dinner
+list
+bye

@@ -1,0 +1,65 @@
+.root {
+    -fx-background-color: #424169;
+    -fx-background-image: url("../images/UiBackground.gif");
+}
+
+.bottom-label {
+    -fx-text-fill: #E9E3E3;
+}
+
+.button {
+    -fx-background-color: rgba(0, 0, 0, 0.6);
+    -fx-text-fill: rgba(255, 255, 255, 0.7);
+}
+
+.scroll-pane > .viewport {
+   -fx-background-color: transparent;
+}
+
+.scroll-pane {
+    -fx-background-color: rgba(0, 0, 0, 0.4);
+    -fx-border-color: rgba(0, 0, 0, 0.6);
+    -fx-border-size: bold;
+}
+
+.scroll-pane .label {
+    -fx-text-fill: white;
+}
+
+.scroll-bar {
+    -fx-background-color: rgba(0, 0, 0, 0.2);
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: rgba(0, 0, 0, 0.3);
+}
+
+.text-field {
+    -fx-background-color: rgba(0, 0, 0, 0.5);
+    -fx-border-color: black;
+    -fx-text-fill: white;
+}
+
+.menu-bar {
+    -fx-background-color: rgba(0, 0, 0, 0.5);
+}
+
+.menu {
+    -fx-label-padding: 3px;
+}
+
+.menu .label, .menu-item .label {
+    -fx-text-fill: white;
+}
+
+.menu:hover, .menu:focused, .menu:pressed {
+    -fx-background-color: rgba(0, 0, 0, 0.2);
+}
+
+.menu-item:hover {
+    -fx-background-color: rgba(0, 0, 0, 0.4);
+}
+
+.context-menu {
+    -fx-background-color: rgba(0, 0, 0, 0.3);
+}

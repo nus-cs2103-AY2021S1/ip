@@ -1,0 +1,8 @@
+.root {
+    -fx-background-color: #424169;
+    -fx-background-image: url("../images/UiBackground.gif");
+}
+
+.label {
+    -fx-text-fill: white;
+}
