@@ -136,7 +136,7 @@ public class Ui {
      * @return The message to be displayed to the user.
      */
     public String invalidDateMessage() {
-        return "The input date should be dd-mm-yyyy User!";
+        return "The input date should be : dd-mm-yyyy HHMM";
     }
 
     /**

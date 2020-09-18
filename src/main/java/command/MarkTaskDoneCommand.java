@@ -1,5 +1,7 @@
 package command;
 
+import java.io.IOException;
+
 import duke.DukeExceptions;
 import duke.Parser;
 import duke.Storage;
@@ -23,6 +25,7 @@ public class MarkTaskDoneCommand extends Command {
         try {
             int index = Integer.parseInt(parameters[0].strip()) - 1;
             Task finishedTask = taskList.completeTask(index);
+            taskStorage.save(taskList);
             return new Result(ui.markDoneMessage(finishedTask), executedSuccessfully);
         } catch (IndexOutOfBoundsException e) {
             message = taskList.getNoTask() == 0 ? ui.taskListEmptyMessage() : ui.invalidIndexMessage();
@@ -31,6 +34,8 @@ public class MarkTaskDoneCommand extends Command {
             return new Result(ui.noIndexGivenMessage(), executedUnsuccessfully);
         } catch (DukeExceptions.TaskIsDoneException e) {
             return new Result(ui.taskAlreadyDoneMessage(), executedUnsuccessfully);
+        } catch (IOException e) {
+            return new Result(ui.fileIssueMessage(), executedUnsuccessfully);
         }
     }
 }

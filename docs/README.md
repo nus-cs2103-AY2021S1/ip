@@ -31,6 +31,16 @@ several features to help you get started with managing your tasks.
 
 ## 2. Quick start guide
 
+* Ensure that you have `java 11` installed on your computer.
+
+* Download the `BitBot.jar` file [here]().
+
+* Double-click on the `BitBot.jar` file.
+
+* The chatbot should appear after a while as shown below.
+
+![Image of starting ui](./Ui.png)
+
 ## 3. Features
 
 ### <ins>3.1 Listing of tasks:`list`</ins>
