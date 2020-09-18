@@ -22,7 +22,7 @@ public class DeleteCommand {
             throw new DukeException("The description of a delete message cannot be empty.");
         }
         Integer indexDelete = Integer.valueOf(instruction.substring(7).strip()) - 1;
-        if (indexDelete + 1 > tasks.getSize()) {
+        if (indexDelete + 1 > tasks.getSize() || indexDelete < 0) {
             throw new DukeException("The index of the task to be deleted is out of range.");
         }
         Task tempDelete = tasks.get(indexDelete);

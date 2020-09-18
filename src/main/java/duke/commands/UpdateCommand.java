@@ -27,26 +27,28 @@ public class UpdateCommand {
         if (instruction.substring(6).strip().equals("")) {
             throw new DukeException("The description of a changing information cannot be empty.");
         }
-        Integer indexDelete = Integer.valueOf(instruction.substring(7, 8).strip()) - 1;
-        if (indexDelete + 1 > tasks.getSize()) {
-            throw new DukeException("The index of the task to be deleted is out of range.");
+        String[] tempUpdateSplit = instruction.substring(6).strip().split("/to");
+        if (tempUpdateSplit.length < 2) {
+            throw new DukeException("The updated date cannot be empty");
         }
-
-        Task tempDelete = tasks.get(indexDelete);
-
-        String newDateTime = instruction.substring(9).strip();
+        Integer indexUpdate = Integer.valueOf(tempUpdateSplit[0].strip()) - 1;
+        if (indexUpdate > tasks.getSize() - 1 || indexUpdate < 0) {
+            throw new DukeException("The index of the task to be updated is out of range.");
+        }
+        Task tempUpdate = tasks.get(indexUpdate);
+        String newDateTime = tempUpdateSplit[1].strip();
         LocalDateTime deadlineDate = parseDateTime(newDateTime);
-        if (tempDelete instanceof Deadline) {
-            Deadline tempTask = (Deadline) tempDelete;
+        if (tempUpdate instanceof Deadline) {
+            Deadline tempTask = (Deadline) tempUpdate;
             tempTask.setBy(deadlineDate);
-            tasks.set(indexDelete, tempTask);
-        } else if (tempDelete instanceof Event) {
-            Event tempTask = (Event) tempDelete;
+            tasks.set(indexUpdate, tempTask);
+        } else if (tempUpdate instanceof Event) {
+            Event tempTask = (Event) tempUpdate;
             tempTask.setStartTime(deadlineDate);
-            tasks.set(indexDelete, tempTask);
+            tasks.set(indexUpdate, tempTask);
         } else {
             throw new DukeException("Not the correct type of task to change new date.");
         }
-        return tempDelete;
+        return tempUpdate;
     }
 }

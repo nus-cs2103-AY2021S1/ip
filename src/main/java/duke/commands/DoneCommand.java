@@ -22,7 +22,7 @@ public class DoneCommand {
             throw new DukeException("The description of a done message cannot be empty.");
         }
         Integer indexDone = Integer.valueOf(instruction.substring(5).strip()) - 1;
-        if (indexDone + 1 > tasks.getSize()) {
+        if (indexDone + 1 > tasks.getSize() || indexDone < 0) {
             throw new DukeException("The index of the task to be done is out of range.");
         }
         Task tempDone = tasks.get(indexDone);
