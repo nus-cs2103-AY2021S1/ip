@@ -35,7 +35,7 @@ Installing Duke is fairly simple and 5 minutes is all you will need. Mark the li
  - **Note that Duke will automatically create an additional `data` folder in this 	directory to save your tasks upon starting the program for the first time.
  - You should observe the following GUI appearing :
  
-![Intro Image of Duke Chatbot](https://github.com/Avalionnet/ip/blob/master/docs/Demo.png)
+![Intro Image of Duke Chatbot](https://avalionnet.github.io/ip/Demo.png)
 
 # Tutorial
 Here are some features you can try upon your first launch of duke. Type the following commands in the input field at the bottom of the GUI and hit enter or click on the send button. Observe what happens.
@@ -76,7 +76,7 @@ Format: `todo DESCRIPTION`
 > -   `todo Celebrate Teacher's Day`
 > -   `todo Complete GEQ1000 Quiz`
 >
-![Image of Todo Command](https://github.com/Avalionnet/ip/blob/master/docs/Todo.png)
+![Image of Todo Command](https://avalionnet.github.io/ip/Todo.png)
 
 ### `Event`
 
@@ -89,7 +89,7 @@ Format: `event DESCRIPTION /at DATE TIME`
 -   `event CS2101 OP1 /at 15.09.20 1000`
 -   `event Hackathon Finale /at 19.09.20 0900` 
 
-![Event Image of Duke Chatbot](https://github.com/Avalionnet/ip/blob/master/docs/Event.png)
+![Event Image of Duke Chatbot](https://avalionnet.github.io/ip/Event.png)
 
  >**Important Note :** 
 > - The delimiter **/at must be added** between the `DESCRIPTION` and `DATE` of the event.
@@ -112,7 +112,7 @@ Format: `deadline DESCRIPTION /by DATE TIME`
 -   `deadline CS2100 lab 2 /by 20.09.20 1000`
 -   `deadline Art competition submission /by 30.10.20 2100` 
 
-![Deadline Image of Duke Chatbot](https://github.com/Avalionnet/ip/blob/master/docs/Deadline.png)
+![Deadline Image of Duke Chatbot](https://avalionnet.github.io/ip/Deadline.png)
 
  >**Important Note :** 
 > - The delimiter **/by must be added** between the `DESCRIPTION` and `DATE` of the event.
@@ -134,7 +134,7 @@ Format:  `list`
 > **Note:**
 > Do not add any other parameters or descriptions behind the list word to trigger this command successfully.
 
-![Image of List Command](https://github.com/Avalionnet/ip/blob/master/docs/List.png)
+![Image of List Command](https://avalionnet.github.io/ip/List.png)
 
 ### b. View all tasks on a particular date : `view`
 
@@ -151,7 +151,7 @@ Format:  `view DATE`
 -   `view 18.09.20`  returns  task **3**
 -    task 1 will never be returned 
 
-![Image of View Command](https://github.com/Avalionnet/ip/blob/master/docs/View.png)
+![Image of View Command](https://avalionnet.github.io/ip/View.png)
 
 
 > **Note:** 
@@ -172,7 +172,7 @@ Format:  `find KEYWORD [MORE_KEYWORDS]`
 -   `find iPhone cable`  returns task 1
 -   `find dinner` returns no task 
 
-![Image of Find Command](https://github.com/Avalionnet/ip/blob/master/docs/List.png)
+![Image of Find Command](https://avalionnet.github.io/ip/List.png)
 
 > **Note:**
 > -   The search only works on task descriptions.
@@ -196,7 +196,7 @@ Format:  **`done`**`TASK_INDEX`
 > **Note:**
 >  The task index must reference an existing task in the task list.
 
-![Image of Done Command](https://github.com/Avalionnet/ip/blob/master/docs/Done.png)
+![Image of Done Command](https://avalionnet.github.io/ip/Done.png)
 
 
 ## 4. Deleting a task : `delete`
@@ -210,7 +210,7 @@ Format:  **`delete`**`TASK_INDEX`
 -   The `TASK_INDEX` here refers to the number shown beside the accompanying task in the task list after displaying it with the`list` command.
 -   Please use a  **positive integer**  (eg. 1, 2, 3 …) for the index value to successfully mark a task as done.
 
-![Image of Done Command](https://github.com/Avalionnet/ip/blob/master/docs/Delete.png)
+![Image of Done Command](https://avalionnet.github.io/ip/Delete.png)
 
 > **Note:**
 >  The task index must reference an existing task in the task list.
