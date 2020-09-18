@@ -59,7 +59,7 @@ Current list size: 2
 #### 3. **`event`**: Adds an Event task ino your task list
 
 - This command adds a task of type Event into your task list
-- A Todo task consists of a description and date
+- An Event task consists of a description and date
 
 Format: `event <description> /at <yyyy-mm-dd>`
 
