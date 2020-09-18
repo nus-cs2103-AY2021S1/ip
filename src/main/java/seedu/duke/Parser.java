@@ -13,7 +13,7 @@ public class Parser {
      * @throws DukeException If the String is of invalid format.
      */
 
-    static Task parseFileItemToTask (String taskString) throws DukeException{
+    static Task parseFileItemToTask (String taskString) throws DukeException {
         if (taskString.startsWith("[T]")) {
             String name = taskString.substring(8);
             if (taskString.charAt(5) == '\u2713') {
@@ -27,19 +27,19 @@ public class Parser {
             String name = taskString.split(" by: ")[0].substring(8);
             String dueDate = taskString.split(" by: ")[1];
             if (taskString.charAt(5) == '\u2713') {
-                return new Deadline(name, Task.Status.DONE,dueDate);
+                return new Deadline(name, Task.Status.DONE, dueDate);
             } else if (taskString.charAt(5) == '\u2718') {
-                return new Deadline(name, Task.Status.PENDING,dueDate);
+                return new Deadline(name, Task.Status.PENDING, dueDate);
             } else {
                 throw new DukeException("Status not recognizable");
             }
-        } else if (taskString.startsWith("[E]")){
+        } else if (taskString.startsWith("[E]")) {
             String name = taskString.split(" at: ")[0].substring(8);
             String dueDate = taskString.split(" at: ")[1];
             if (taskString.charAt(5) == '\u2713') {
-                return new Event(name, Task.Status.DONE,dueDate);
-            } else if (taskString.charAt(5) == '\u2718'){
-                return new Event(name, Task.Status.PENDING,dueDate);
+                return new Event(name, Task.Status.DONE, dueDate);
+            } else if (taskString.charAt(5) == '\u2718') {
+                return new Event(name, Task.Status.PENDING, dueDate);
             } else {
                 throw new DukeException("Status not recognizable");
             }
@@ -59,8 +59,9 @@ public class Parser {
      * @throws DukeException If user input is of invalid format.
      * @throws IOException For error with files.
      */
-    static void parseInput (String userMessage, Storage storage) throws DukeException, IOException {
+    static String parseInput (String userMessage, Storage storage) throws DukeException, IOException {
         ArrayList<Task> itemList = storage.load();
+        String result = "";
 
 
         if (userMessage.startsWith("find")) {
@@ -71,23 +72,23 @@ public class Parser {
                     selectedTasks.add(task);
                 }
             }
-            System.out.println("Here are the matching tasks in your list: ");
+            result = result + ("Here are the matching tasks in your list: \n");
             for (int i = 0; i < selectedTasks.size(); i++) {
                 Task task = selectedTasks.get(i);
-                System.out.println((i+1) + " " + task.toString());
+                result = result + ((i + 1) + " " + task.toString() + "\n");
             }
-            return;
+            return result;
         }
 
         //list down the contents in the list
         if (userMessage.equals("list")) {
             itemList = storage.load();
-            System.out.println("Here is your list: ");
+            result = result + ("Here is your list: \n");
             for (int i = 0; i < itemList.size(); i++) {
                 Task task = itemList.get(i);
-                System.out.println((i+1) + " " + task.toString());
+                result = result + ((i + 1) + " " + task.toString() + "\n");
             }
-            return;
+            return result;
         }
 
         //mark something as done
@@ -96,9 +97,9 @@ public class Parser {
             Task task = itemList.get(index);
             task.markAsDone();
             storage.modifyWithList(itemList);
-            System.out.println("Good job! You have finished this task!");
-            System.out.println(task.toString());
-            return;
+            result = result + ("Good job! You have finished this task! \n");
+            result = result + task.toString();
+            return result;
         }
 
         //delete task
@@ -107,10 +108,10 @@ public class Parser {
             Task task = itemList.get(index);
             itemList.remove(index);
             storage.modifyWithList(itemList);
-            System.out.println("I have deleted this task for you: ");
-            System.out.println(task.toString());
-            System.out.println("You now have " + itemList.size() + " tasks in your list!");
-            return;
+            result = result + ("I have deleted this task for you: \n");
+            result = result + (task.toString() + "\n");
+            result = result + ("You now have " + itemList.size() + " tasks in your list!");
+            return result;
         }
 
         //valid task entries
@@ -120,39 +121,46 @@ public class Parser {
             if (!name.isEmpty() && !name.isBlank()) {
                 newItem = new Todo(name, Task.Status.PENDING);
             } else {
-                throw new DukeException("Oops, tasks cannot be empty");
+                result = result + ("Oops, tasks cannot be empty");
+                return result;
             }
         } else if (userMessage.startsWith("deadline")) {
             String name = userMessage.split("/by")[0].substring(9);
             if (!userMessage.contains("/by")) {
-                throw new DukeException("Sorry, incorrect format for Deadlines. \n Please specify a Due Date " +
-                        "(and task name)");
+                result = result + ("Sorry, incorrect format for Deadlines. \n Please specify a Due Date "
+                        + "(and task name)");
+                return result;
             }
 
             if (name.isEmpty() || name.isBlank()) {
-                throw new DukeException("Oops, tasks cannot be empty");
+                result = result + ("Oops, tasks cannot be empty");
+                return result;
             }
 
             String dueDate = userMessage.split("/by")[1].substring(1);
-            newItem = new Deadline(name, Task.Status.PENDING,dueDate);
+            newItem = new Deadline(name, Task.Status.PENDING, dueDate);
         } else if (userMessage.startsWith("event")) {
             String name = userMessage.split("/at ")[0].substring(5);
             if (!userMessage.contains("/at")) {
-                throw new DukeException("Sorry, incorrect format for Events. \n Please specify a time " +
-                        "(and task name)");
+                result = result + ("Sorry, incorrect format for Events. \n Please specify a time "
+                        + "(and task name)");
+                return result;
             }
             if (name.isEmpty() || name.isBlank()) {
-                throw new DukeException("Oops, tasks cannot be empty");
+                result = result + ("Oops, tasks cannot be empty");
+                return result;
             }
 
             String time = userMessage.split("/at ")[1];
-            newItem = new Event(name, Task.Status.PENDING,time);
+            newItem = new Event(name, Task.Status.PENDING, time);
 
         } else {
-            throw new DukeException("Sorry, I do not understand this command");
+            result = result + ("Sorry, I do not understand this command");
+            return result;
         }
         Storage.todoToFile(newItem);
         System.out.println("new task added: " + newItem.toString());
         System.out.println("You now have " + (itemList.size() + 1) + " tasks in your list!");
+        return result;
     }
 }
