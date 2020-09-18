@@ -18,7 +18,7 @@ public class Ui {
     private static final String MSG_UPDATED_TASK = "Ok! I have updated the task as follows:\n";
     private static final String MSG_NOW_NO_TASK = "Now you have no tasks in the list.";
     private static final String MSG_NOW_ONE_TASK = "Now you have 1 task in the list.";
-    private static final String MSG_HELP = "Refer to the user guide at https://https://wang-jun-hao.github.io/ip/";
+    private static final String MSG_HELP = "Refer to the user guide at https://wang-jun-hao.github.io/ip/";
 
     /**
      * Returns welcome message.

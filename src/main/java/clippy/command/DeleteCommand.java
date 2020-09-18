@@ -36,13 +36,18 @@ public class DeleteCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         Task taskToDelete = tasks.getTask(indexOfTaskToDelete);
         tasks.delete(indexOfTaskToDelete);
-        
-        String output = ui.showDeleted(taskToDelete, tasks.getSize());
+
+        String output = getOutput(tasks, ui, taskToDelete);
 
         tasks.updateAllTaskIndices();
         storage.save(tasks);
         
         return output;
+    }
+    
+    private String getOutput(TaskList tasks, Ui ui, Task taskToDelete) {
+        int numOfTasks = tasks.getSize();
+        return ui.showDeleted(taskToDelete, numOfTasks);
     }
 
 }

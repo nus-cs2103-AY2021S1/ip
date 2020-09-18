@@ -1,5 +1,9 @@
 package clippy.command;
 
+import clippy.task.Task;
+import clippy.task.TaskList;
+import clippy.ui.Ui;
+
 /**
  * Represents a command that adds a task to a task list, based on the parsed input, when executed.
  */
@@ -13,6 +17,11 @@ public abstract class AddCommand extends Command {
      */
     protected AddCommand(String taskDescription) {
         this.taskDescription = taskDescription;
+    }
+
+    protected String getOutput(TaskList tasks, Ui ui, Task newTask) {
+        int numOfTasks = tasks.getSize();
+        return ui.showAdded(newTask, numOfTasks);
     }
 
 }

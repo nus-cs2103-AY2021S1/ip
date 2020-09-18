@@ -35,8 +35,8 @@ public class AddToDoCommand extends AddCommand {
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         Task newTask = new ToDo(taskDescription);
         tasks.add(newTask);
-        
-        String output = ui.showAdded(newTask, tasks.getSize());
+
+        String output = super.getOutput(tasks, ui, newTask);
 
         tasks.updateAllTaskIndices();
         storage.save(tasks);

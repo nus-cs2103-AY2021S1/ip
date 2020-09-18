@@ -43,28 +43,10 @@ public class Storage {
     public ArrayList<Task> load() throws CorruptedFileException, UnableToCreateSaveFileException, 
             NoSavedFileException {
         try {
-            ArrayList<Task> savedTaskList = new ArrayList<>();
+            File saveFile = getSaveFile();
             
-            String folderPath = getFolderPath();
-            assert !folderPath.isBlank() : "Folder path is blank";
+            ArrayList<Task> savedTaskList = getArrayListOfTasksFromSaveFile(saveFile);
             
-            File folder = new File(folderPath);
-            
-            if (!folder.exists()) {
-                folder.mkdir();
-            }
-            assert folder.exists() : "Folder is not created before attempting to save a file in it";
-            
-            File saveFile = new File(filePath);
-            Scanner fileReader = new Scanner(saveFile);
-            
-            while (fileReader.hasNextLine()) {
-                String taskData = fileReader.nextLine();
-                
-                Task currTask = TaskGenerator.generateTask(taskData);
-                
-                savedTaskList.add(currTask);
-            }
             return savedTaskList;
         } catch (FileNotFoundException e) {
             File saveFile = new File(filePath);
@@ -78,6 +60,35 @@ public class Storage {
             throw new NoSavedFileException();
         }
     }
+    
+    private File getSaveFile() {
+        String folderPath = getFolderPath();
+        assert !folderPath.isBlank() : "Folder path is blank";
+
+        File folder = new File(folderPath);
+
+        if (!folder.exists()) {
+            folder.mkdir();
+        }
+        assert folder.exists() : "Folder is not created before attempting to save a file in it";
+
+        return new File(filePath);
+    }
+    
+    private ArrayList<Task> getArrayListOfTasksFromSaveFile(File saveFile) throws CorruptedFileException, 
+            FileNotFoundException {
+        ArrayList<Task> savedTaskList = new ArrayList<>();
+        Scanner fileReader = new Scanner(saveFile);
+
+        while (fileReader.hasNextLine()) {
+            String taskData = fileReader.nextLine();
+
+            Task currTask = TaskGenerator.generateTask(taskData);
+
+            savedTaskList.add(currTask);
+        }
+        return savedTaskList;
+    }
 
     /**
      * Saves the tasks in the TaskList in the current Clippy session onto the save file by overwriting the save file.
@@ -86,30 +97,39 @@ public class Storage {
      */
     public void save(TaskList tasks) {
         try {
-            File saveFile = new File(filePath);
-            File folder = new File(getFolderPath());
-            
-            if (!folder.exists()) {
-                folder.mkdir();
-            }
-            if (!saveFile.exists()) {
-                saveFile.createNewFile();
-            }
-            
-            BufferedWriter bfWriter = new BufferedWriter(new FileWriter(saveFile));
-            
-            int numOfTasks = tasks.getSize();
-            
-            for (int i = 1; i <= numOfTasks; i++) {
-                Task task = tasks.getTask(i);
-                bfWriter.write(task.generateSaveFileData());
-                bfWriter.newLine();
-            }
-            
-            bfWriter.close();
+            File saveFile = getSaveFile(filePath);
+            writeTasksToFile(tasks, saveFile);
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
+    }
+    
+    private File getSaveFile(String filePath) throws IOException {
+        File saveFile = new File(filePath);
+        File folder = new File(getFolderPath());
+
+        if (!folder.exists()) {
+            folder.mkdir();
+        }
+        if (!saveFile.exists()) {
+            saveFile.createNewFile();
+        }
+        
+        return saveFile;
+    }
+    
+    private void writeTasksToFile(TaskList tasks, File saveFile) throws IOException {
+        BufferedWriter bfWriter = new BufferedWriter(new FileWriter(saveFile));
+
+        int numOfTasks = tasks.getSize();
+
+        for (int i = 1; i <= numOfTasks; i++) {
+            Task task = tasks.getTask(i);
+            bfWriter.write(task.generateSaveFileData());
+            bfWriter.newLine();
+        }
+
+        bfWriter.close();
     }
     
     private String getFolderPath() {

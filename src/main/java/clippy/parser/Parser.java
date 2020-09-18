@@ -10,6 +10,7 @@ import clippy.command.ExitCommand;
 import clippy.command.FindCommand;
 import clippy.command.HelpCommand;
 import clippy.command.ListCommand;
+import clippy.command.UpdateCommand;
 import clippy.command.UpdateDescriptionAndTimeCommand;
 import clippy.command.UpdateDescriptionCommand;
 import clippy.command.UpdateTimeCommand;
@@ -45,74 +46,130 @@ public class Parser {
     public static Command parse(String input) throws EmptyDescriptionException,
             InvalidCommandException, EmptyDateTimeException {
         if (input.equals("bye")) {
-            return new ExitCommand();
+            return parseBye();
         } else if (input.equals("list")) {
-            return new ListCommand();
+            return parseList();
         } else if (input.equals("help")) {
-            return new HelpCommand();
+            return parseHelp();
         } else if (input.startsWith("delete")) {
-            int indexOfTaskToDelete = Integer.parseInt(input.substring(7));
-            return new DeleteCommand(indexOfTaskToDelete);
+            return parseDelete(input);
         } else if (input.startsWith("done")) {
-            int indexOfDoneTask = Integer.parseInt(input.substring(5));
-            return new DoneCommand(indexOfDoneTask);
+            return parseDone(input);
         } else if (input.startsWith("find")) {
-            return new FindCommand(input.substring(5));
+            return parseFind(input);
         } else if (input.startsWith("update")) {
-            String[] subInputs = input.split(" ");
-            int length = subInputs.length;
-            int indexOfTaskToBeUpdated = Integer.parseInt(subInputs[1]);
-            if (hasBackSlash(subInputs)) {
-                // update description of Deadline/Event OR update description of Deadline/Event + time
-                int indexOfBackSlash = getIndexOfBackSlash(subInputs);
-                String[] timeInArray = Arrays.copyOfRange(subInputs, indexOfBackSlash + 1, length);
-                String time = String.join(" ", timeInArray);
-                if (indexOfBackSlash == 2) {
-                    // update time only
-                    return new UpdateTimeCommand(indexOfTaskToBeUpdated, time);
-                } else {
-                    // update description and time
-                    String[] descriptionInArray = Arrays.copyOfRange(subInputs, 2, indexOfBackSlash);
-                    String description = String.join(" ", descriptionInArray);
-                    return new UpdateDescriptionAndTimeCommand(indexOfTaskToBeUpdated, description, time);
-                }
-            } else {
-                // update description of To-Do/Deadline/Event only
-                String[] descriptionInArray = Arrays.copyOfRange(subInputs, 2, length);
-                String description = String.join(" ", descriptionInArray);
-                return new UpdateDescriptionCommand(indexOfTaskToBeUpdated, description);
-            }
+            return parseUpdate(input);
         } else if (input.startsWith("todo")) {
-            if (input.length() < MIN_LENGTH_TO_DO) {
-                throw new EmptyDescriptionException(TaskType.TODO);
-            } else {
-                return new AddToDoCommand(input.substring(MIN_LENGTH_TO_DO - 1));
-            }
+            return parseToDo(input);
         } else if (input.startsWith("deadline")) {
-            if (input.length() < MIN_LENGTH_DEADLINE) {
-                throw new EmptyDescriptionException(TaskType.DEADLINE);
-            }
-            int indexOfSeparator = input.indexOf("/");
-            String taskDescription = input.substring(MIN_LENGTH_DEADLINE - 1, indexOfSeparator - 1);
-            String by = input.substring(indexOfSeparator + GAP_BY);
-            if (by.isBlank()) {
-                throw new EmptyDateTimeException();
-            }
-            return new AddDeadlineCommand(taskDescription, by);
+            return parseDeadline(input);
         } else if (input.startsWith("event")) {
-            if (input.length() < MIN_LENGTH_EVENT) {
-                throw new EmptyDescriptionException(TaskType.EVENT);
-            }
-            int indexOfSeparator = input.indexOf("/");
-            String taskDescription = input.substring(MIN_LENGTH_EVENT - 1, indexOfSeparator - 1);
-            String at = input.substring(indexOfSeparator + GAP_AT);
-            if (at.isBlank()) {
-                throw new EmptyDateTimeException();
-            }
-            return new AddEventCommand(taskDescription, at);
+            return parseEvent(input);
         } else {
             throw new InvalidCommandException();
         }
+    }
+    
+    private static ExitCommand parseBye() {
+        return new ExitCommand();
+    }
+
+    private static ListCommand parseList() {
+        return new ListCommand();
+    }
+
+    private static HelpCommand parseHelp() {
+        return new HelpCommand();
+    }
+    
+    private static DeleteCommand parseDelete(String input) {
+        int indexOfTaskToDelete = Integer.parseInt(input.substring(7));
+        return new DeleteCommand(indexOfTaskToDelete);
+    }
+
+    private static DoneCommand parseDone(String input) {
+        int indexOfDoneTask = Integer.parseInt(input.substring(5));
+        return new DoneCommand(indexOfDoneTask);
+    }
+
+    private static FindCommand parseFind(String input) {
+        return new FindCommand(input.substring(5));
+    }
+    
+    private static UpdateCommand parseUpdate(String input) {
+        String[] subInputs = input.split(" ");
+        
+        int length = subInputs.length;
+        int indexOfTaskToBeUpdated = Integer.parseInt(subInputs[1]);
+        
+        if (hasBackSlash(subInputs)) {
+            // update description of Deadline/Event OR update description of Deadline/Event + time
+            int indexOfBackSlash = getIndexOfBackSlash(subInputs);
+            assert indexOfBackSlash >= 0 : "Invalid index of backslash";
+            
+            String[] timeInArray = Arrays.copyOfRange(subInputs, indexOfBackSlash + 1, length);
+            String time = String.join(" ", timeInArray);
+            
+            if (indexOfBackSlash == 2) {
+                // update time only
+                return new UpdateTimeCommand(indexOfTaskToBeUpdated, time);
+            } else {
+                // update description and time
+                String[] descriptionInArray = Arrays.copyOfRange(subInputs, 2, indexOfBackSlash);
+                String description = String.join(" ", descriptionInArray);
+                
+                return new UpdateDescriptionAndTimeCommand(indexOfTaskToBeUpdated, description, time);
+            }
+        } else {
+            // update description of To-Do/Deadline/Event only
+            String[] descriptionInArray = Arrays.copyOfRange(subInputs, 2, length);
+            String description = String.join(" ", descriptionInArray);
+            
+            return new UpdateDescriptionCommand(indexOfTaskToBeUpdated, description);
+        }
+    }
+
+    private static AddToDoCommand parseToDo(String input) throws EmptyDescriptionException {
+        if (input.length() < MIN_LENGTH_TO_DO) {
+            throw new EmptyDescriptionException(TaskType.TODO);
+        }
+        
+        return new AddToDoCommand(input.substring(MIN_LENGTH_TO_DO - 1));
+    }
+
+    private static AddDeadlineCommand parseDeadline(String input) throws EmptyDescriptionException, 
+            EmptyDateTimeException {
+        if (input.length() < MIN_LENGTH_DEADLINE) {
+            throw new EmptyDescriptionException(TaskType.DEADLINE);
+        }
+        
+        int indexOfSeparator = input.indexOf("/");
+        
+        String taskDescription = input.substring(MIN_LENGTH_DEADLINE - 1, indexOfSeparator - 1);
+        String by = input.substring(indexOfSeparator + GAP_BY);
+        
+        if (by.isBlank()) {
+            throw new EmptyDateTimeException();
+        }
+        
+        return new AddDeadlineCommand(taskDescription, by);
+    }
+
+    private static AddEventCommand parseEvent(String input) throws EmptyDescriptionException, EmptyDateTimeException {
+        if (input.length() < MIN_LENGTH_EVENT) {
+            throw new EmptyDescriptionException(TaskType.EVENT);
+        }
+        
+        int indexOfSeparator = input.indexOf("/");
+        
+        String taskDescription = input.substring(MIN_LENGTH_EVENT - 1, indexOfSeparator - 1);
+        String at = input.substring(indexOfSeparator + GAP_AT);
+        
+        if (at.isBlank()) {
+            throw new EmptyDateTimeException();
+        }
+        
+        return new AddEventCommand(taskDescription, at);
     }
     
     private static int getIndexOfBackSlash(String[] subInputs) {

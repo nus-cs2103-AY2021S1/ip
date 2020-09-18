@@ -2,6 +2,7 @@ package clippy.command;
 
 import clippy.storage.Storage;
 
+import clippy.task.Task;
 import clippy.task.TaskList;
 
 import clippy.ui.Ui;
@@ -21,18 +22,18 @@ public class ListCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        String output;
         int numOfTasks = tasks.getSize();
         assert numOfTasks >= 0 : "Negative number of tasks in Clippy.TaskList";
 
         if (tasks.isEmpty()) {
-            output = ui.showListNoTasks();
-        } else {
-            output = ui.showListWithTasksHeader() + "\n";
-            
-            for (int i = 1; i <= numOfTasks; i++) {
-                output += ui.showTaskWithIndex(i, tasks.getTask(i)) + "\n";
-            }
+            return ui.showListNoTasks();
+        }
+        
+        String output = ui.showListWithTasksHeader() + "\n";
+        
+        for (int i = 1; i <= numOfTasks; i++) {
+            Task currTask = tasks.getTask(i);
+            output += ui.showTaskWithIndex(i, currTask) + "\n";
         }
         
         return output;

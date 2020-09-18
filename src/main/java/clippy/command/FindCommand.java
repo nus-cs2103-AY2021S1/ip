@@ -35,35 +35,44 @@ public class FindCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        int numOfTasks = tasks.getSize();
-        assert numOfTasks >= 0 : "Negative number of tasks in TaskList";
+        ArrayList<Task> matchedTasks = getMatchedTasks(tasks);
         
-        ArrayList<Task> matchedTasks = new ArrayList<>();
-        String output = "";
-        
-        for (int i = 1; i <= numOfTasks; i++) {
-            Task currTask = tasks.getTask(i);
-            String currDesc = currTask.getDesc();
-            
-            if (currDesc.contains(keyword)) {
-                matchedTasks.add(currTask);
-            }
-        }
-        
-        if (matchedTasks.isEmpty()) {
-            output = ui.showNoMatch();
-        } else {
-            output += ui.showMatchingTaskHeader() + "\n";
-            int i = 1;
-            
-            for (Task t : matchedTasks) {
-                output += ui.showTaskWithIndex(i, t) 
-                        + " at List Index: " + t.getTaskIndexInList() + "\n";
-                i++;
-            }
-        }
+        String output = getOutput(ui, matchedTasks);
         
         return output;
     }
 
+    private ArrayList<Task> getMatchedTasks(TaskList tasks) {
+        int numOfTasks = tasks.getSize();
+        assert numOfTasks >= 0 : "Negative number of tasks in TaskList";
+
+        ArrayList<Task> matchedTasks = new ArrayList<>();
+
+        for (int i = 1; i <= numOfTasks; i++) {
+            Task currTask = tasks.getTask(i);
+            String currDesc = currTask.getDesc();
+
+            if (currDesc.contains(keyword)) {
+                matchedTasks.add(currTask);
+            }
+        }
+        return matchedTasks;
+    }
+    
+    private String getOutput(Ui ui, ArrayList<Task> matchedTasks) {
+        if (matchedTasks.isEmpty()) {
+            return ui.showNoMatch();
+        }
+        
+        String output = ui.showMatchingTaskHeader() + "\n";
+        int i = 1;
+
+        for (Task t : matchedTasks) {
+            String listIndexOfTaskStatement = "at List Index: " + t.getTaskIndexInList();
+            output += ui.showTaskWithIndex(i, t) + " " + listIndexOfTaskStatement + "\n";
+            i++;
+        }
+        
+        return output;
+    }
 }
