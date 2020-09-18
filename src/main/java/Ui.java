@@ -93,11 +93,24 @@ public class Ui {
      *
      * @param tasks List of Task objects.
      */
-    public static void printList(ArrayList<Task> tasks) {
-        System.out.println("Here are your tasks:");
+    public static void printList(ArrayList<Task> tasks, String printOrFind) {
+        if (printOrFind.equals("print")) {
+            System.out.println("Here are your tasks:");
+        } else {
+            System.out.println("Here are your matching tasks:");
+        }
+
         for (int i = 0; i < tasks.size(); i++) {
             System.out.println(i + 1 + ". " + tasks.get(i).printTask());
         }
+    }
+
+    /**
+     * Prints message if FIND command does not return any matching Task objects.
+     */
+    public static void noMatchMessage() {
+        System.out.println("Sorry! There are not tasks " +
+                "that match that description.");
     }
 
     /**

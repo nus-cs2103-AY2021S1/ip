@@ -33,6 +33,7 @@ public class TaskList {
             Ui.horizontalLine();
             try {
                 String input = sc.nextLine();
+                Ui.horizontalLine();
                 Command cmd = parser.parseCommand(input);
                 this.list = cmd.executeCommand(this.list);
                 if (cmd.getType().equals(CommandType.BYE)) {

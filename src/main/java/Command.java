@@ -55,7 +55,7 @@ public class Command {
                     // do nothing
                     return new ArrayList<Task>();
                 } else {
-                    Ui.printList(tasks);
+                    Ui.printList(tasks, "print");
                     return tasks;
                 }
             case DONE:
@@ -66,9 +66,33 @@ public class Command {
             case DEADLINE:
             case EVENT:
                 return addTask(tasks, this.description);
+            case FIND:
+                return findTask(tasks, this.description);
             case UNKNOWN:
                 System.out.println(this.description);
                 return tasks;
+        }
+        return tasks;
+    }
+
+    /**
+     * Returns a list of Task objects with a description that contains the key.
+     *
+     * @param tasks List of Task objects of which to find matching Tasks.
+     * @param key Key used to find matching Task objects.
+     * @return List of matching Task objects.
+     */
+    public ArrayList<Task> findTask(ArrayList<Task> tasks, String key) {
+        ArrayList<Task> matchedTasks = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.getName().toLowerCase().contains(key.toLowerCase())) {
+                matchedTasks.add(task);
+            }
+        }
+        if (matchedTasks.size() == 0) {
+            Ui.noMatchMessage();
+        } else {
+            Ui.printList(matchedTasks, "find");
         }
         return tasks;
     }

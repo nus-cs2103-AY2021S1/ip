@@ -8,7 +8,7 @@
 public class Parser {
 
     public static final String[] COMMANDS = {"todo", "deadline", "event", "list", "done", "bye", "delete",
-        "clear", "unknown"};
+        "clear", "unknown", "find"};
 
     /**
      * Returns Command object by processing user input.
@@ -46,6 +46,9 @@ public class Parser {
         } else if (strings[0].toLowerCase().equals(Parser.COMMANDS[2])) {
             // returns EVENT Command
             command = new Command(CommandType.EVENT, input);
+        } else if (strings[0].toLowerCase().equals(Parser.COMMANDS[9])) {
+            // returns FIND Command
+            command = new Command(CommandType.FIND, input);
         } else {
             // returns UNKNOWN Command
             command = new Command(CommandType.UNKNOWN, "Sorry, I don't understand!");
@@ -72,8 +75,6 @@ public class Parser {
                 validCommand = cmd;
                 break;
             case DONE:
-                validCommand = checkDoneAndDeleteValidity(cmd);
-                break;
             case DELETE:
                 validCommand = checkDoneAndDeleteValidity(cmd);
                 break;
@@ -84,8 +85,33 @@ public class Parser {
             case EVENT:
                 validCommand = checkDeadlineAndEventValidity(cmd);
                 break;
+            case FIND:
+                validCommand =  checkFindValidity(cmd);
+                break;
         }
         return validCommand;
+    }
+
+    /**
+     * Returns valid Command object after input validity checks of
+     * FIND Command.
+     *
+     * @param cmd Command object with CommandType FIND.
+     * @return Input Command object if description passes input validity checks.
+     * @throws InvalidInputException If description of Command object is of
+     * incorrect format.
+     */
+    public Command checkFindValidity(Command cmd) throws InvalidInputException {
+        String description = cmd.getDescription();
+        String key;
+
+        if (description.trim().equals("find")) {
+            // throws exception for invalid input i.e. "find", "find "
+            throw new InvalidInputException("Incomplete find command");
+        }
+
+        key = description.trim().substring(5).trim();
+        return new Command(CommandType.FIND, key);
     }
 
     /**
