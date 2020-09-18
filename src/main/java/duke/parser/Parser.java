@@ -34,6 +34,10 @@ public class Parser {
         String item;
 
         switch(cmd) {
+
+        case HELP:
+            return new HelpCommand();
+
         case BYE:
             return new ByeCommand();
 

@@ -55,7 +55,7 @@ This section describes a list of commands that you can use when chatting with LU
 ### Viewing help: `help`
 
 <details>
-   <summary>Displays all the possible commands for the app.</summary>
+   <summary>Provides a link to the user guide for additional help.</summary>
 
    Format: `help`
 </details>
