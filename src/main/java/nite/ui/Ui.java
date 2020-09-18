@@ -14,7 +14,8 @@ public class Ui {
     private static final String GREETING =
             "  Hello! I'm Nite, the Dark Knight,\n"
             + "  Here to help you track your tasks and achieve a great night.\n"
-            + "  What can I do for you?\n";
+            + "  What can I do for you?"
+            + "  Type \"help\" for a list of commands to get started!\n";
     private static final String GOODBYE =
             "  Good nite! Hope you have a good night's sleep. See you soon!\n";
 
