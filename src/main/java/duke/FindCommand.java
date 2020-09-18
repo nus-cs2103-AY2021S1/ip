@@ -22,13 +22,13 @@ public class FindCommand extends PrintTaskCommand {
     private TaskList createListOfTasksContainingKeyword() {
         String[] parsedInput = userInput.split(Parser.SPACE);
         String keyword = parsedInput[1];
+        String keywordsLowerCase = keyword.toLowerCase();
         TaskList listOfTasksContainingKeyword = new TaskList();
         for (int i = 0; i < this.taskList.size(); i++) {
             Task tempTask = taskList.get(i);
             String taskDescription = tempTask.getDescription();
-            // contains will return true for "bookstore" when searching for "book"
-            // contains is case - sensitive "Book" and "book" is different
-            if (taskDescription.contains(keyword)) {
+            String taskDescriptionLowerCase = taskDescription.toLowerCase();
+            if (taskDescriptionLowerCase.contains(keywordsLowerCase)) {
                 listOfTasksContainingKeyword.add(tempTask);
             }
         }
