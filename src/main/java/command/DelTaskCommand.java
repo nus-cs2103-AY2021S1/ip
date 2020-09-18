@@ -25,7 +25,7 @@ public class DelTaskCommand extends Command {
             int index = Integer.parseInt(parameters[0].strip()) - 1;
             Task deletedTask = taskList.deleteTask(index);
             taskStorage.save(taskList);
-            return new Result(ui.deletedTaskMessage(deletedTask, taskList.getNoTask()), executedUnsuccessfully);
+            return new Result(ui.deletedTaskMessage(deletedTask, taskList.getNoTask()), executedSuccessfully);
         } catch (IndexOutOfBoundsException e) {
             message = taskList.getNoTask() == 0
                     ? ui.taskListEmptyMessage()

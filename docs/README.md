@@ -31,7 +31,7 @@
 
 ## 3. Features
 
-### 3.1 Listing of tasks `list`
+### <ins>3.1 Listing of tasks:`list`</ins>
 
 ##### Description
 
@@ -39,14 +39,14 @@ List all of your tasks that has been saved.
 
 ##### Usage format
 
-`list`
+>`list`
 
 ##### Example of usage
 * `list`
 
 ![Image of list feature](./UiList.png)
 
-### 3.2 Adding a task
+### <ins>3.2 Adding a task</ins>
 
 ##### Description
 
@@ -60,13 +60,13 @@ There are 3 kinds of tasks:
 
 3. **Deadline task**
 
-#### 3.2.1 Todo task `todo`
+#### <ins>3.2.1 Todo task `todo`</ins>
 
 ##### usage format
 
-`todo <TASK_DESCRIPTION>`
-
-`t <TASK_DESCRIPTION>`
+>`todo <TASK_DESCRIPTION>`
+>
+>`t <TASK_DESCRIPTION>`
 
 ##### example of usage
 
@@ -74,13 +74,13 @@ There are 3 kinds of tasks:
 
 ![Image of todo feature](./UiTodo.png)
 
-#### 3.2.2 Event task `event`
+#### <ins>3.2.2 Event task `event`</ins>
 
 ##### usage format
 
-`event <TASK_DESCRIPTION> /at <DATE> <TIME>` 
-
-`e <TASK_DESCRIPTION> /at <DATE> <TIME>`
+>`event <TASK_DESCRIPTION> /at <DATE> <TIME>` 
+>
+>`e <TASK_DESCRIPTION> /at <DATE> <TIME>`
 
 * format for `<DATE>`: `DD-MM-YYYY`
 
@@ -92,13 +92,13 @@ There are 3 kinds of tasks:
 
 ![Image of todo feature](./UiEvent.png)
 
-#### 3.2.2 Deadline task `deadline`
+#### <ins>3.2.3 Deadline task `deadline`</ins>
 
 ##### usage format
 
-`deadline <TASK_DESCRIPTION> /by <DATE> <TIME>`
-
-`d <TASK_DESCRIPTION> /by <DATE> <TIME>`
+>`deadline <TASK_DESCRIPTION> /by <DATE> <TIME>`
+>
+>`d <TASK_DESCRIPTION> /by <DATE> <TIME>`
 
 * format for `<DATE>`: `DD-MM-YYYY`
 
@@ -110,63 +110,77 @@ There are 3 kinds of tasks:
 
 ![Image of todo feature](./UiDeadline.png)
 
-### 3.3 Marking a task as completed: `done`
+### <ins>3.3 Marking a task as completed: `done`</ins>
 
 ##### Description
 
-List all of your tasks that has been saved.
+Marks a specified task on the list as done.
 
-##### Usage
+##### Usage format
 
-`list`
+>`done <TASK_INDEX>`
+>
+>`md <TASK_INXDEX>`
 
+##### Example of usage
 
-#### Example of usage
-* `list`
+* `done 1`
 
-![Image of list feature](./UiList.png)
+![Image of list feature](./UiDone.png)
 
-### 3.4 Deleting a task: `delete`
+### <ins>3.4 Deleting a task: `delete`</ins>
 
-#### Usage
+##### Description
 
-`list`
+Deletes a specified task on the list as done.
 
-#### Description
-List all of your tasks that has been saved.
+##### Usage format
 
-#### Example of usage
-* `list`
+>`delete <TASK_INDEX>`
+>
+>`del <TASK_INDEX>`
 
-![Image of list feature](./UiList.png)
+##### Example of usage
 
-### 3.5 Finding a task by a keyword: `find`
+* `delete 1`
 
-#### Usage
+![Image of list feature](./UiDelete.png)
 
-`list`
+### <ins>3.5 Finding a task by a keyword: `find`</ins>
 
-#### Description
-List all of your tasks that has been saved.
+##### Description
 
-#### Example of usage
-* `list`
+Finds and displays all tasks containing a specified keyword
 
-![Image of list feature](./UiList.png)
+##### Usage format
 
-### 3.6 Finding a task by date: `date`
+>`find <KEYWORD>`
+>
+>`f <KEYWORD>`
 
-#### Usage
+##### Example of usage
 
-`list`
+* `f task`
 
-#### Description
-List all of your tasks that has been saved.
+![Image of list feature](./UiFindKeyword.png)
 
-#### Example of usage
-* `list`
+### <ins>3.6 Finding a task by date: `date`</ins>
 
-![Image of list feature](./UiList.png)
+##### Description
+
+Finds and displays all tasks that is due / occurring on a specified date
+
+##### Usage format
+
+>`date <DATE>`
+
+* format of `<DATE>`: `DD-MM-YYYY`
+
+##### Example of usage
+
+* `date 18-09-2020`
+
+![Image of list feature](./UiFindDate.png)
 
 ### 3.7 Adding an alias to map to command: `alias`
 
