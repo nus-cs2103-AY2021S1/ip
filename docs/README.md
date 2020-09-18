@@ -112,7 +112,7 @@ Expected outcome:
 `Here are the matching tasks in your list:`
 `1.[F][✘] read book (needs 2.00 hours)`
 
-### `bye` - day goodbye to Duke.
+### `bye` - say goodbye to Duke.
 Duke will update you background memory with your current todo list
 
 Example of usage: 
