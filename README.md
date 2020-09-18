@@ -2,9 +2,14 @@
 
 This project is part of a module for CS2103 Software Engineering in NUS.
 
-It is a todo list that runs on the command line.
+It is a todo list that runs on javafx.
 
 **Changelog:**  https://github.com/therizhao/ip/blob/master/CHANGELOG.md
+
+## How to run the program?
+
+1. Download the latest release
+2. Execute it
 
 ## How are commits done?
 
