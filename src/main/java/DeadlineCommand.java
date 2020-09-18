@@ -36,7 +36,7 @@ public class DeadlineCommand implements Command {
             throw new MissingDateTimeException();
         } else {
             String subCommand = COMMAND;
-            if (COMMAND.substring(0,6).equals("deadline")) {
+            if (COMMAND.split(" ")[0].length() == 8) {
                 subCommand = subCommand.substring(8).trim();
             } else {
                 subCommand = subCommand.substring(1).trim();

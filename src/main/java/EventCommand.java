@@ -36,7 +36,7 @@ public class EventCommand implements Command {
             throw new MissingDateTimeException();
         } else {
             String subCommand = COMMAND;
-            if (COMMAND.substring(0,6).equals("event")) {
+            if (COMMAND.split(" ")[0].length() == 5) {
                 subCommand = subCommand.substring(5).trim();
             } else {
                 subCommand = subCommand.substring(1).trim();

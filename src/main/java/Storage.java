@@ -47,16 +47,17 @@ public class Storage {
 
             for (Task task : tasks) {
                 if (task instanceof Event) {
-
-                    String day = ((Event) task).date.getDayOfMonth() + "/" + ((Event) task).date.getMonthValue() + "/"
-                            + ((Event)task).date.getYear();
+                    String day = String.format("%02d", ((Event) task).date.getDayOfMonth()) + "/"
+                            + String.format("%02d", ((Event) task).date.getMonthValue()) + "/"
+                            + String.format("%02d", ((Event) task).date.getYear());
                     String time = String.format("%02d", ((Event) task).time.getHour())
                             + String.format("%02d", ((Event) task).time.getMinute());
                     writeTaskFile.write("event" + " " + task.description + " " + "/by" + " " + day + " " + time
                             + " " + task.isDone + System.lineSeparator());
                 } else if (task instanceof Deadline) {
-                    String day = ((Deadline) task).date.getDayOfMonth() + "/" + ((Deadline) task).date.getMonthValue()
-                            + "/" + ((Deadline) task).date.getYear();
+                    String day = String.format("%02d", ((Deadline) task).date.getDayOfMonth()) + "/"
+                            + String.format("%02d", ((Deadline) task).date.getMonthValue()) + "/"
+                            + String.format("%02d", ((Deadline) task).date.getYear());
                     String time = String.format("%02d", ((Deadline) task).time.getHour())
                             + String.format("%02d", ((Deadline) task).time.getMinute());
 
