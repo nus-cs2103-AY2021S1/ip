@@ -1,12 +1,12 @@
 package Command;
 
+import java.io.IOException;
+
 import Duke.Storage;
 import Duke.Ui;
 import Friend.FriendList;
 import Friend.Friend;
 import Tasks.TaskList;
-
-import java.io.IOException;
 
 public class DeleteFriendCommand extends Command {
 
@@ -43,7 +43,7 @@ public class DeleteFriendCommand extends Command {
      * @throws IOException
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         return null;
     }
 

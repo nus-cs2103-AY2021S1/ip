@@ -1,14 +1,14 @@
 package Duke;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import Command.*;
+import Exception.*;
+import Friend.Friend;
 import Tasks.Deadline;
 import Tasks.Event;
 import Tasks.ToDo;
-import Exception.*;
-import Friend.Friend;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 public class Parser {
 
@@ -87,7 +87,8 @@ public class Parser {
      * Generate a corresponding command based of the input.
      * @param s
      * @return a corresponding command.
-     * @throws IncorrectInputException, Exception.EmptyInputException
+     * @throws IncorrectInputException
+     * @throws EmptyInputException
      */
     public static Command parse(String s) throws IncorrectInputException, EmptyInputException {
         String[] arr = s.split(" ");

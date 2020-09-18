@@ -1,3 +1,6 @@
+import java.io.IOException;
+
+import Exception.IncorrectInputException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -5,9 +8,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import Exception.IncorrectInputException;
-
-import java.io.IOException;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.

@@ -1,10 +1,13 @@
+import java.io.IOException;
+
 import Command.Command;
+import Duke.Parser;
+import Duke.Storage;
+import Duke.Ui;
+import Exception.IncorrectInputException;
+import Exception.EmptyInputException;
 import Friend.FriendList;
 import Tasks.TaskList;
-import Duke.*;
-import Exception.*;
-
-import java.io.IOException;
 
 public class Duke {
 
@@ -44,7 +47,6 @@ public class Duke {
 
     /**
      * Run the program to interact with users.
-     * @throws IOException
      * @throws IncorrectInputException
      */
     public void run() throws IncorrectInputException {
@@ -83,7 +85,7 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) throws IOException, IncorrectInputException {
+    public static void main(String[] args) throws IncorrectInputException {
         new Duke().run();
     }
 }

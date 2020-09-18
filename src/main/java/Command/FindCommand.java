@@ -1,13 +1,13 @@
 package Command;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
 import Duke.Storage;
 import Duke.Ui;
 import Friend.FriendList;
 import Tasks.Task;
 import Tasks.TaskList;
-
-import java.io.IOException;
-import java.util.ArrayList;
 
 public class FindCommand extends Command {
 
@@ -33,7 +33,7 @@ public class FindCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
         ArrayList<Task> foundTasks = new ArrayList<>();
         for (Task t : tasks.getList()) {
-            if (t.name.contains(description)) {
+            if (t.getName().contains(description)) {
                 foundTasks.add(t);
             }
         }

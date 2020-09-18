@@ -5,7 +5,7 @@ import java.util.List;
 
 public class FriendList {
 
-    public List<Friend> friends;
+    private List<Friend> friends;
 
     /**
      * Constructor for the class.

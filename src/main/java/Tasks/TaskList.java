@@ -1,7 +1,5 @@
 package Tasks;
 
-import Tasks.Task;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +9,7 @@ public class TaskList {
     /**
      * Constructor for Tasks.TaskList.
      */
-    public TaskList(){
+    public TaskList() {
         this.list = new ArrayList<>();
     }
 
@@ -57,7 +55,7 @@ public class TaskList {
      * @return a String indicating the task size.
      */
     public String printSize() {
-        return ("Now you have " + this.list.size() +
-                (this.list.size() > 1 ? " tasks" : " task") + " on the list");
+        return ("Now you have " + this.list.size()
+                + (this.list.size() > 1 ? " tasks" : " task") + " on the list");
     }
 }

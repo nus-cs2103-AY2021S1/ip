@@ -1,11 +1,11 @@
 package Duke;
 
+import java.util.Scanner;
+
 import Friend.Friend;
 import Friend.FriendList;
 import Tasks.Task;
 import Tasks.TaskList;
-
-import java.util.Scanner;
 
 public class Ui {
     private String line = "____________________________________________________________";
@@ -22,8 +22,8 @@ public class Ui {
      * Generate a greeting when user first launch the app.
      */
     public void greeting() {
-        System.out.println("Hello! I'm Duke\n" +
-                "What can I do for you?");
+        System.out.println("Hello! I'm Duke\n"
+                + "What can I do for you?");
     }
 
     /**

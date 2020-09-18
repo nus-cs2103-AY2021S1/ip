@@ -1,17 +1,17 @@
 package Duke;
 
-import Tasks.Deadline;
-import Tasks.Event;
-import Tasks.Task;
-import Tasks.ToDo;
-import Exception.IncorrectInputException;
-
 import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+
+import Exception.IncorrectInputException;
+import Tasks.Deadline;
+import Tasks.Event;
+import Tasks.Task;
+import Tasks.ToDo;
 
 public class Storage {
 
@@ -51,6 +51,7 @@ public class Storage {
      * Load all the tasks from the files.
      * @return an arraylist of all the tasks
      * @throws FileNotFoundException
+     * @throws IncorrectInputException
      */
     public ArrayList<Task> loadData() throws FileNotFoundException, IncorrectInputException {
         try (BufferedReader reader = new BufferedReader(new FileReader(file.getAbsolutePath()))) {
@@ -86,7 +87,7 @@ public class Storage {
                 }
             }
             return list;
-        } catch (IOException e) {
+        } catch (Exception e) {
             return new ArrayList<Task>();
         }
     }

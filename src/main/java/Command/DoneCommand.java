@@ -1,12 +1,12 @@
 package Command;
 
+import java.io.IOException;
+
 import Duke.Storage;
 import Duke.Ui;
 import Friend.FriendList;
 import Tasks.Task;
 import Tasks.TaskList;
-
-import java.io.IOException;
 
 public class DoneCommand extends Command {
 
@@ -32,8 +32,6 @@ public class DoneCommand extends Command {
         Task task = tasks.getList().get(this.i - 1);
         task.markAsDone();
         tasks.set(this.i, task);
-        // update task in storage
-//            storage.saveTask(this.task);
         return  ui.completedTask(task) + "\n" + tasks.printSize();
     }
 

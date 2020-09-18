@@ -1,12 +1,12 @@
 package Command;
 
+import java.io.IOException;
+
 import Duke.Storage;
 import Duke.Ui;
 import Friend.FriendList;
 import Tasks.Task;
 import Tasks.TaskList;
-
-import java.io.IOException;
 
 public class AddCommand extends Command {
 
@@ -45,7 +45,7 @@ public class AddCommand extends Command {
      * @return null
      * @throws IOException
      */
-    public String execute(FriendList friends, Ui ui) throws IOException {
+    public String execute(FriendList friends, Ui ui) {
         return null;
     }
 

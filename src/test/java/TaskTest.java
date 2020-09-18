@@ -1,12 +1,13 @@
-import Tasks.Deadline;
-import Tasks.Event;
-import Tasks.ToDo;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+
+import Tasks.Deadline;
+import Tasks.Event;
+import Tasks.ToDo;
 
 public class TaskTest {
     @Test
@@ -18,8 +19,8 @@ public class TaskTest {
     @Test
     public void validDeadlineCreated() {
         Deadline deadline = new Deadline("junk", LocalDateTime.now());
-        assertEquals(deadline.printTask(), "[D][" + "\u2718" + "] junk (by: " +
-                LocalDateTime.now().format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm")) + ")");
+        assertEquals(deadline.printTask(), "[D][" + "\u2718" + "] junk (by: "
+                + LocalDateTime.now().format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm")) + ")");
     }
 
     @Test

@@ -1,12 +1,12 @@
 package Command;
 
+import java.io.IOException;
+
 import Duke.Storage;
 import Duke.Ui;
 import Friend.FriendList;
 import Tasks.Task;
 import Tasks.TaskList;
-
-import java.io.IOException;
 
 public class DeleteCommand extends Command {
 
@@ -31,8 +31,6 @@ public class DeleteCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         Task deletedTask = tasks.getList().get(this.i - 1);
         tasks.delete(this.i);
-        // delete file in storage
-//            storage.saveTask(this.task);
         return ui.deleteTask(deletedTask) + "\n" + tasks.printSize();
     }
 
@@ -44,7 +42,7 @@ public class DeleteCommand extends Command {
      * @throws IOException
      */
     @Override
-    public String execute(FriendList friends, Ui ui) throws IOException {
+    public String execute(FriendList friends, Ui ui) {
         return null;
     }
 

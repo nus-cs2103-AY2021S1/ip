@@ -1,11 +1,12 @@
 package Command;
 
+import java.io.IOException;
+
 import Duke.Storage;
 import Duke.Ui;
-import Friend.Friend;
 import Friend.FriendList;
+import Friend.Friend;
 import Tasks.TaskList;
-import java.io.IOException;
 
 public class AddFriendCommand extends Command {
 

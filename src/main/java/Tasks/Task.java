@@ -2,8 +2,8 @@ package Tasks;
 
 public class Task {
 
+    private String name;
     private boolean isCompleted;
-    public String name;
 
     /**
      * Constructor for Tasks.Task.
@@ -20,6 +20,10 @@ public class Task {
      */
     public String getStatusIcon() {
         return (isCompleted ? "\u2713" : "\u2718");
+    }
+
+    public String getName() {
+        return this.name;
     }
 
     /**

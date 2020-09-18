@@ -1,11 +1,11 @@
 package Command;
 
+import java.io.IOException;
+
 import Duke.Storage;
 import Duke.Ui;
 import Friend.FriendList;
 import Tasks.TaskList;
-
-import java.io.IOException;
 
 public abstract class Command {
 
