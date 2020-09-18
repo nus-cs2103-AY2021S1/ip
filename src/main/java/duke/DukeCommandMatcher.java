@@ -90,7 +90,7 @@ public class DukeCommandMatcher {
         return taskList.add(task);
     }
 
-    private String handleList() {
+    private String handleList() throws DukeException {
         return taskList.listAll();
     }
 
@@ -128,7 +128,7 @@ public class DukeCommandMatcher {
         return taskList.delete(targetTaskPos);
     }
 
-    private String handleFind(MetaCommand metaCommand) {
+    private String handleFind(MetaCommand metaCommand) throws DukeException {
         String queryKey = ((ContentMetaCommand) metaCommand).getContent();
         return taskList.query(queryKey);
     }

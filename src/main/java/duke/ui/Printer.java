@@ -2,6 +2,7 @@ package duke.ui;
 
 import java.util.List;
 
+import duke.exceptions.DukeException;
 import duke.tasks.Task;
 import duke.utils.Constants;
 import duke.utils.UtilFunction;
@@ -60,12 +61,15 @@ public class Printer {
      * Print all the tasks.
      * @param tasks the tasks to print
      */
-    public static String printAllTask(List<Task> tasks, boolean withLabel) {
+    public static String printAllTask(List<Task> tasks, boolean withLabel) throws DukeException {
         String message = "";
         for (int i = 1; i < tasks.size() + 1; i++) {
             message += (withLabel ? (i + ". ") : ("   ")) + tasks.get(i - 1) + "\n";
         }
         UtilFunction.printLimit(message);
+        if (tasks.isEmpty()) {
+            throw new DukeException("OOPS!! No match result is found.");
+        }
         return message;
     }
 

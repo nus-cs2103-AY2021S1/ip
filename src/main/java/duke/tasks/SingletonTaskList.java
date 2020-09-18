@@ -2,6 +2,7 @@ package duke.tasks;
 
 import java.util.List;
 
+import duke.exceptions.DukeException;
 import duke.exceptions.TaskOutOfBoundException;
 import duke.storage.Storage;
 import duke.ui.Printer;
@@ -62,7 +63,7 @@ public class SingletonTaskList {
     /**
      * List all the tasks in the task list.
      */
-    public String listAll() {
+    public String listAll() throws DukeException {
         if (tasks.size() == 0) {
             return Printer.printNoTaskReminder();
         }
@@ -91,7 +92,7 @@ public class SingletonTaskList {
      * Query tasks in the taskList with the {@code queryKey}.
      * @param queryKey the key used to query the tasks
      */
-    public String query(String queryKey) {
+    public String query(String queryKey) throws DukeException {
         List<Task> matchedTasks = storage.query(queryKey);
         return Printer.printAllTask(matchedTasks, false);
     }
