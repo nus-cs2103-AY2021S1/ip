@@ -50,7 +50,7 @@ public class Parser {
         int commandSpace = str.indexOf(COMMAND_SEPARATOR);
 
         if (trimmedStr.length() < MINIMUM_COMMAND_LENGTH) {
-            ExceptionCommand exceptionCommand  = new ExceptionCommand(ExceptionCommand.INVALID_COMMAND);
+            ExceptionCommand exceptionCommand = new ExceptionCommand(ExceptionCommand.INVALID_COMMAND);
             throw new DukeException(exceptionCommand.getOutput());
         }
 
@@ -65,7 +65,7 @@ public class Parser {
             return listCommand.getOutput();
 
         } else if (commandSpace <= START) { //No space in user input
-            ExceptionCommand exceptionCommand  = new ExceptionCommand(ExceptionCommand.INVALID_COMMAND);
+            ExceptionCommand exceptionCommand = new ExceptionCommand(ExceptionCommand.INVALID_COMMAND);
             throw new DukeException(exceptionCommand.getOutput());
         }
 
@@ -95,13 +95,13 @@ public class Parser {
                 EventCommand eventCommand = new EventCommand(str, taskManager);
                 return eventCommand.getOutput();
 
-            } catch(DukeException de) {
+            } catch (DukeException de) {
                 ExceptionCommand exceptionCommand = new ExceptionCommand(ExceptionCommand.INVALID_DATE_FORMAT);
                 throw new DukeException(exceptionCommand.getOutput());
             }
 
         } else if (commandSpace <= END_FIVE_CHARACTERS) {
-            ExceptionCommand exceptionCommand  = new ExceptionCommand(ExceptionCommand.INVALID_COMMAND);
+            ExceptionCommand exceptionCommand = new ExceptionCommand(ExceptionCommand.INVALID_COMMAND);
             throw new DukeException(exceptionCommand.getOutput());
         }
 
@@ -112,7 +112,7 @@ public class Parser {
             return deleteCommand.getOutput();
 
         } else if (commandSpace <= END_SIX_CHARACTERS) {
-            ExceptionCommand exceptionCommand  = new ExceptionCommand(ExceptionCommand.INVALID_COMMAND);
+            ExceptionCommand exceptionCommand = new ExceptionCommand(ExceptionCommand.INVALID_COMMAND);
             throw new DukeException(exceptionCommand.getOutput());
         }
 
@@ -123,13 +123,13 @@ public class Parser {
                 DeadlineCommand deadlineCommand = new DeadlineCommand(str, taskManager);
                 return deadlineCommand.getOutput();
 
-            } catch(DukeException de) {
+            } catch (DukeException de) {
                 ExceptionCommand exceptionCommand = new ExceptionCommand(ExceptionCommand.INVALID_DATE_FORMAT);
                 throw new DukeException(exceptionCommand.getOutput());
             }
 
         } else {
-            ExceptionCommand exceptionCommand  = new ExceptionCommand(ExceptionCommand.INVALID_COMMAND);
+            ExceptionCommand exceptionCommand = new ExceptionCommand(ExceptionCommand.INVALID_COMMAND);
             throw new DukeException(exceptionCommand.getOutput());
         }
     }
