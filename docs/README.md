@@ -41,7 +41,7 @@ e.g. in `find <keyword>`, `<keyword>` is a parameter which can be used as `find 
 <br/><br/><br/>
 Items separated by `|` are alternatives, and the usage depends on the scenario.
 
-e.g `update <task index> <new task description> [/by|/at <new time/date>]` can be used as 
+e.g `update <task index> <new task description> [/by|/at <new date/time>]` can be used as 
 
 `update 2 java workshop /at Tuesday 6-7pm` if the 2nd task in the list is an event, 
 
@@ -51,7 +51,7 @@ or
 <br/><br/><br/>
 Items in square brackets are optional.
 
-e.g `update <task index> <new task description> [/at <new time/date>]` can be used as 
+e.g `update <task index> <new task description> [/at <new date/time>]` can be used as 
 
 `update 2 java workshop`
 
@@ -75,7 +75,7 @@ or
 ## 3.1 Viewing help: `help`
 Displays a message explaining how to access the user guide.
 ### Format
-`help`
+* `help`
 
 Expected outcome:
 
@@ -88,10 +88,14 @@ Adds a task for Clippy to keep track of.
 ## 3.2.1 Adding a todo task: `todo`
 Adds a todo task for Clippy to keep track of. You should add a task as a todo when the task does not have a date/time attached to it.
 ### Format
-`todo <task description>`
+* `todo <task description>`
+
 ### Usage
 Example of usage:
 * `todo exercise at the gym`
+
+What it does:
+* Add a new todo task 'exercise at the gym'
 
 Expected outcome:
 
@@ -102,12 +106,15 @@ Expected outcome:
 Adds a deadline task for Clippy to keep track of. You should add a task as a deadline when the task needs to be done 
 before a specific date.
 ### Format
-`deadline <task description> /by <YYYY-MM-DD>`
+* `deadline <task description> /by <YYYY-MM-DD>`
 
 ![Note Icon](./UG%20images/info.png): You have to provide the date in the exact `YYYY-MM-DD` format.
 ### Usage
 Example of usage:
 * `deadline sign up for hackathon /by 2020-09-30`
+
+What it does:
+* Add a new deadline task 'sign up for hackathon' that has a deadline on 30th Sep 2020
 
 Expected outcome:
 
@@ -118,12 +125,15 @@ Expected outcome:
 Adds an event task for Clippy to keep track of. You should add a task as an event when the task occurs 
 at a specific date/time period.
 ### Format
-`event <task description> /at <date/time period>`
+* `event <task description> /at <date/time period>`
 
 ![Note Icon](./UG%20images/info.png): You do not have to follow any format for `<date/time period>`.
 ### Usage
 Example of usage:
 * `event java workshop /at Tuesday 6-7pm`
+
+What it does:
+* Add a new event task 'java workshop' that happens at 6-7pm on Tuesday
 
 Expected outcome:
 
@@ -133,7 +143,7 @@ Expected outcome:
 ## 3.3 Listing all tasks: `list`
 Shows a list of all tasks being managed by Clippy.
 ### Format
-`list`
+* `list`
 
 Expected outcome:
 
@@ -141,10 +151,11 @@ Expected outcome:
 
 
 ## 3.4 Updating a task: `update`
-Updates the details of an existing task being managed by Clippy. Suppose you made a mistake when entering the description of an event. You can use `update` to edit the event’s description.
+Updates the details of an existing task managed by Clippy. Suppose you made a mistake when entering the description of an event. You can use `update` to edit the event’s description.
 ### Format
-`update <index> <new task description> [/by|/at <new time/date>] `
+* `update <index> <new task description> [/by|/at <new date/time>]`: Updates a task's description (and optionally date/time if task is a deadline or event)
 
+What it does:
 * Updates the task at the specified `index`. 
 * The `index` refers to the index number shown in the displayed tasks list after using the list command. 
 * The `index` must be a positive integer 1, 2, 3, ...
@@ -154,6 +165,18 @@ Updates the details of an existing task being managed by Clippy. Suppose you mad
   * A todo task does not have a date/time and the `/by` or `/at` command cannot be used when updating a todo
   * Use `/by` command when the task is a deadline
   * Use `/at` command when the task is an event
+
+<br>
+
+* `update <index> /by|/at <new date/time>`: Updates only a deadline or event task's date/time
+
+What it does:
+* Existing date/time will be updated to the input date/time.
+* ![Note Icon](./UG%20images/info.png) Note the following:
+  * This command cannot be used on a todo task as it does not have a date/time
+  * Use `/by` command when the task is a deadline
+  * Use `/at` command when the task is an event
+
 
 ### Usage
 Example of usage:
@@ -173,7 +196,9 @@ Expected outcome:
 ## 3.5 Marking a task as done: `done`
 Marks a task as done when you have completed the task. This helps you to keep track of which tasks are done and not done.
 ### Format
-`done <index>`
+* `done <index>`
+
+What it does:
 * Marks the task at the specified `index` as done. 
 * The `index` refers to the index number shown in the displayed tasks list after using the list command. 
 * The `index` must be a positive integer 1, 2, 3, ...
@@ -247,7 +272,7 @@ Action | Format, Example usage
 ------ | ------
 Add | `todo <task description>` <br> `deadline <task description> /by <YYYY-MM-DD>` <br> `event <task description> /at <date/time period>` <br> e.g. `event java workshop​ /at Tuesday 6-7pm`
 List | `list`
-Update | `update <task index> <new task description> [/by (OR) /at <new time/date>]` <br> e.g. `update 1 19th birthday party /at 25 Nov 5-10pm`
+Update | `update <task index> <new task description> [/by (OR) /at <new date/time>]` <br> e.g. `update 1 19th birthday party /at 25 Nov 5-10pm`
 Mark as done | `done <index>` <br> e.g. `done 2`
 Find | `find <keyword>` <br> e.g. `find workshop`
 Delete | `delete <index>` <br> e.g. `delete 5`
