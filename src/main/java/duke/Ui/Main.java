@@ -26,7 +26,7 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
-            stage.setTitle("Popii | Your Personal Task Manager | V0.1");
+            stage.setTitle("Popii | Your Personal Task Manager | V0.2");
             stage.getIcons().add(applicationIcon);
             stage.show();
             fxmlLoader.<MainWindow>getController().showGreetingMessage();
