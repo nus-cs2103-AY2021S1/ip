@@ -1,14 +1,15 @@
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
 import duke.TaskList;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.TaskType;
 import duke.task.Todo;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import org.junit.jupiter.api.Test;
-
 public class DukeTaskListTest {
-    TaskList taskList = new TaskList();
+    private TaskList taskList = new TaskList();
 
     @Test
     public void generateEmptyTaskListTest() {

@@ -1,16 +1,19 @@
-import duke.Ui;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import duke.Ui;
+
 
 public class DukeUiTest {
     private final PrintStream standardOut = System.out;
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
-    Ui ui = new Ui(new Scanner(System.in));
+    private Ui ui = new Ui(new Scanner(System.in));
 
     @BeforeEach
     public void setUp() {
