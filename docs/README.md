@@ -223,12 +223,6 @@ All done! You have 0 tasks now.
 
 Format: `help`
 
-The expected outcome:
-
-```
-
-```
-
 ### `exit` - Terminate the program
 
 Format: `bye`
