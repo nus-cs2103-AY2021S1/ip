@@ -1,17 +1,96 @@
-# User Guide
+<link rel="stylesheet" type="text/css" media="all" href="assets/css/style.css" />
 
-![Duke](Ui.png)
+# Duke | User Guide
 
-Welcome to Duke, the task manager application for command line interface (CLI) lovers!
+<div class="portrait-image-container">
+    <img class="image" src="Ui.png" alt="User Interface of Duke">
+</div>
+
+Duke is a *Personal Assistant Chatbot* with task management functionality that caters to fast typists.
+Keep track of all your tasks with ease!
 
 ## Features
 
 ### Manage Your Tasks
 
 To best cater to your task management needs, Duke supports the creation of three different types of tasks:
-- Events
-- ToDos
 - Deadlines
+- Events
+- Todos
+
+#### Deadlines
+
+Deadlines are tasks that have to be completed by a specific date and time.
+
+#### Events
+
+Events are tasks that occur at a specific date and time.
+
+#### Todos
+
+Todos are tasks that do not have a specific date and time attached to them.
+
+All of the above tasks track whether they have been completed.
+In addition, for deadline and event tasks, Duke is able to filter by overdue and upcoming tasks.
+
+### Theming
+
+Duke sports a dark theme that is gentle on the eyes.
+This allows for prolonged usage of Duke without having to worry about eye strain.
+
+<div class="landscape-image-container">
+  <img class="image" src="assets/media/fullscreen.png" alt="Resizable window">
+</div>
+
+It is also possible to resize Duke if you wish to make better use of your screen real estate.
+
+### Command History
+
+<div class="portrait-image-container">
+    <img class="image" src="assets/media/command_history.gif" alt="Cycling of command history">
+</div>
+
+The Duke graphical user interface has an in-built command history which remembers the last 50 commands.
+Just like in any other terminal, you can navigate through your previous inputs by pressing the `up` and `down` key.
+
+### Command Line Support
+
+<div class="landscape-image-container">
+  <img class="image" src="assets/media/command_line_interface.png" alt="Command line interface mode">
+</div>
+
+For users who have a strong preference for command line interfaces (CLI) over graphical user interfaces, Duke is able to run in CLI mode.
+Simply launch the `.jar` file with the `-c` or `--console` flag:
+
+```
+java -jar duke.jar --console
+```
+
+### Mandarin Chinese Support
+
+<div class="portrait-image-container">
+    <img class="image" src="assets/media/mandarin_support.png" alt="Mandarin support">
+</div>
+
+Duke has been designed from the ground up for i18n.
+All user-facing strings are set in a resource file, making the task of supporting a new language simply a matter of adding the translated strings.
+In addition, Duke utilises UTF-8 encoding, allowing non-latin characters to be stored without issue.
+
+Currently, Duke supports the following languages:
+- English (en)
+- Chinese (zh)
+
+Switching between languages is as easy as calling the `language` command:
+
+```
+language chinese
+```
+
+Note that the language names can be substituted with the ISO 639-1 language codes as well:
+
+```
+language zh
+```
 
 ## Usage
 
