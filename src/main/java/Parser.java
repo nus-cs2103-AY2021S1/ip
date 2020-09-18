@@ -74,8 +74,7 @@ public class Parser {
             if (!taskcommand.equals("")) {
                 result = tasks.add(new ToDo(taskcommand));
             } else {
-                DukeException e = new DukeException("EmptyToDo");
-                throw e;
+                throw new DukeException("EmptyToDo");
             }
             storage.record(tasks.getTasks());
         } else if (command.split(" ")[0].equals("deadline")) {
@@ -85,8 +84,7 @@ public class Parser {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
                 result = tasks.add(new Deadline(taskcommand, LocalDateTime.parse(time, formatter)));
             } else {
-                DukeException e = new DukeException("EmptyDeadline");
-                throw e;
+                throw new DukeException("EmptyDeadline");
             }
             storage.record(tasks.getTasks());
         } else if (command.split(" ")[0].equals("event")) {
@@ -96,13 +94,11 @@ public class Parser {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
                 result = tasks.add(new Deadline(taskcommand, LocalDateTime.parse(time, formatter)));
             } else {
-                DukeException e = new DukeException("EmptyEvent");
-                throw e;
+                throw new DukeException("EmptyEvent");
             }
             storage.record(tasks.getTasks());
         } else {
-            DukeException e = new DukeException("invalid");
-            throw e;
+            throw new DukeException("invalid");
         }
         return result;
     }
