@@ -11,6 +11,10 @@ public class Duke {
     private TaskList taskList;
     private Ui ui;
     
+    public Duke() {
+        this(Storage.DEFAULT_STORAGE_FILEPATH);
+    }
+    
     /**
      * Creates a new Duke chatbot that saves and loads tasks from the given filePath.
      *
@@ -20,7 +24,7 @@ public class Duke {
         this.ui = new Ui();
         this.store = new Storage(filePath);
         try {
-            this.taskList = new TaskList(store.load());
+            this.taskList = new TaskList(store.loadFile());
         } catch (DukeException e) {
             ui.showLoadingError();
             this.taskList = new TaskList();

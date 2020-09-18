@@ -1,2 +1,0 @@
-T | ✘ | return book
-D | ✘ | attend wedding  | Oct 19 2020

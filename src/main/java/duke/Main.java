@@ -16,7 +16,7 @@ public class Main extends Application {
     /**
      * A duke instance for Duke to run.
      */
-    private Duke duke = new Duke("data/taskmanager.txt");
+    private Duke duke = new Duke();
 
     @Override
     public void start(Stage stage) {
