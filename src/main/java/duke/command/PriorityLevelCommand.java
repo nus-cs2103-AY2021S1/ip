@@ -17,7 +17,7 @@ public class PriorityLevelCommand extends Command {
 
     @Override
     public String execute(Ui ui, TaskList taskList) throws NonExistentTaskException {
-        if (taskNum > taskList.getTaskListSize()) {
+        if (taskNum == 0 || taskNum > taskList.getTaskListSize()) {
             throw new NonExistentTaskException();
         }
         return ui.printPrompt("What Level do you want to set it as?\n"

@@ -1,7 +1,6 @@
 package duke.exception;
 
 import duke.ImageType;
-import duke.exception.DukeException;
 
 public class NonExistentTaskException extends DukeException {
     public NonExistentTaskException() {

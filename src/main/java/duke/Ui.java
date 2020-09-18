@@ -29,14 +29,6 @@ public class Ui {
      * Displays the startup UI and prompts user to enter input.
      * @param taskList List of tasks.
      */
-    public void start(TaskList taskList) {
-        this.printDivider();
-        System.out.println(LOGO);
-        this.printDivider();
-        System.out.println("Hello, I am BaronBot!");
-        System.out.println("What can I do for you?");
-        this.printDivider();
-    }
 
     public String readCommand() {
         return sc.nextLine().toLowerCase();

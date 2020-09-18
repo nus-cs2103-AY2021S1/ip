@@ -5,7 +5,6 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 import duke.task.PriorityLevel;
-import duke.task.Task;
 
 public class PrioritySetCommand extends Command {
     protected int taskNum;

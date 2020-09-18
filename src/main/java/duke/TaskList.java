@@ -1,6 +1,5 @@
 package duke;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,7 +36,7 @@ public class TaskList {
     public static TaskList generateTaskList(Storage storage) {
         try {
             return new TaskList(storage.load());
-        } catch (IOException e) {
+        } catch (Exception e) {
             System.out.println("Could not load file. Generating blank duke.task.Task List.");
             return new TaskList();
         }

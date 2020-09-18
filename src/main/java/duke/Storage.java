@@ -24,7 +24,7 @@ public class Storage {
         this.filepath = filepath;
     }
 
-    public List<Task> load() throws IOException {
+    public List<Task> load() throws Exception {
         File taskLocation = new File(filepath);
         FileReader fileReader = new FileReader(taskLocation);
         BufferedReader bufferedReader = new BufferedReader(fileReader);

@@ -68,16 +68,16 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        ImageType responseImageType = duke.getResponseImageType(input);
+        DukeResponse dukeResponse = duke.getResponse(input);
+        String responseText = dukeResponse.getResponseText();
+        ImageType responseImageType = dukeResponse.getImageType();
         Image responseImage = this.getResponseImage(responseImageType);
-        CommandType commandType = duke.getCommandType(input);
-        String responseText = duke.getResponseText(input);
         DialogBox userDialog = DialogBox.getUserDialog(input, userImage);
         DialogBox dukeDialog = DialogBox.getDukeDialog(responseText, responseImage);
         dialogContainer.getChildren().addAll(
                 userDialog, dukeDialog);
         userInput.clear();
-        if (duke.isExitCommand(commandType)) {
+        if (dukeResponse.isExitCommand()) {
             Platform.exit();
         }
     }

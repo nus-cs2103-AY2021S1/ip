@@ -17,7 +17,7 @@ public class DeleteTaskCommand extends Command {
 
     @Override
     public String execute(Ui ui, TaskList taskList) throws NonExistentTaskException {
-        if (taskNum > taskList.getTaskListSize()) {
+        if (taskNum == 0 || taskNum > taskList.getTaskListSize()) {
             throw new NonExistentTaskException();
         }
         Task task = taskList.getTask(taskNum - 1);

@@ -18,7 +18,7 @@ public class DoneTaskCommand extends Command {
     @Override
     public String execute(Ui ui, TaskList taskList) throws NonExistentTaskException,
             InvalidDoneCommandException {
-        if (taskNum > taskList.getTaskListSize()) {
+        if (taskNum == 0 || taskNum > taskList.getTaskListSize()) {
             throw new NonExistentTaskException();
         } else if (taskList.getTask(taskNum - 1).isDone()) {
             throw new InvalidDoneCommandException();
