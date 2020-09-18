@@ -1,7 +1,7 @@
 # Duke | User Guide
 
 <div class="portrait-image-container">
-    <img class="image" src="Ui.png" alt="User Interface of Duke">
+  <img class="image" src="Ui.png" alt="User Interface of Duke">
 </div>
 
 Duke is a *Personal Assistant Chatbot* with task management functionality that caters to fast typists.
@@ -45,7 +45,7 @@ It is also possible to resize Duke if you wish to make better use of your screen
 ### Command History
 
 <div class="portrait-image-container">
-    <img class="image" src="assets/media/command_history.gif" alt="Cycling of command history">
+  <img class="image" src="assets/media/command_history.gif" alt="Cycling of command history">
 </div>
 
 The Duke graphical user interface has an in-built command history which remembers the last 50 commands.
@@ -67,7 +67,7 @@ java -jar duke.jar --console
 ### Mandarin Chinese Support
 
 <div class="portrait-image-container">
-    <img class="image" src="assets/media/mandarin_support.png" alt="Mandarin support">
+  <img class="image" src="assets/media/mandarin_support.png" alt="Mandarin support">
 </div>
 
 Duke has been designed from the ground up for i18n.
@@ -96,7 +96,7 @@ language zh
 
 Associates an alias with a command.
 
-Example of usage: 
+Example of usage:
 
 `alias bye b`
 
