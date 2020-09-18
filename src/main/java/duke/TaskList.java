@@ -1,6 +1,5 @@
 package duke;
 
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -36,54 +35,6 @@ public class TaskList {
         storage.get().write(tasks);
     }
 
-    private void addTodo(String desc) {
-        desc = desc.trim();
-        if (desc.isEmpty()) {
-            throw new IllegalArgumentException();
-        }
-        tasks.add(new Todo(desc));
-    }
-
-    private void addDeadline(String desc) {
-        desc = desc.trim();
-        if (!desc.contains("/by")) {
-            throw new IllegalArgumentException();
-        }
-        String[] elements = desc.split("/by");
-        if (elements.length != 2) {
-            throw new IllegalArgumentException();
-        }
-        String newDesc = elements[0].trim();
-        String time = elements[1].trim();
-        tasks.add(new Deadline(newDesc, time));
-    }
-
-    private void addEvent(String desc) {
-        desc = desc.trim();
-        if (desc.isEmpty()) {
-            throw new IllegalArgumentException();
-        }
-        if (desc.contains("/between")) {
-            String[] elements = desc.split("/between");
-            String[] times = elements[1].split("and");
-            if (times.length != 2) {
-                throw new IllegalArgumentException();
-            }
-            String newDesc = elements[0].trim();
-            String happenAt = times[0].trim();
-            String endAt = times[1].trim();
-            tasks.add(new Event(newDesc, happenAt, endAt));
-        } else {
-            String[] elements = desc.split("/at");
-            if (elements.length != 2) {
-                throw new IllegalArgumentException();
-            }
-            String newDesc = elements[0].trim();
-            String time = elements[1].trim();
-            tasks.add(new Event(newDesc, time));
-        }
-    }
-
     /**
      * Add an task to the task list
      * The method will classify the type of the task and call the corresponding method
@@ -91,17 +42,7 @@ public class TaskList {
      * @param command raw string contains the detail of the task to be added
      */
     public void addTask(String command) {
-        try {
-            if (command.startsWith("todo")) {
-                addTodo(command.substring(4));
-            } else if (command.startsWith("deadline")) {
-                addDeadline(command.substring(8));
-            } else if (command.startsWith("event")) {
-                addEvent(command.substring(5));
-            }
-        } catch (DateTimeParseException e) {
-            throw new IllegalArgumentException();
-        }
+        tasks.add(Parser.parseTask(command));
         Ui.addTask(tasks);
         saveToDisk();
     }
