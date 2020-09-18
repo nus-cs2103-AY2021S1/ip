@@ -11,9 +11,9 @@ public class DoneCommand extends Command {
 
     /**
      * Executes the done command to mark a task as done.
-     * @param tasks list of tasks
-     * @param ui user interface to display deleted message
-     * @param storage file storage
+     * @param tasks list of tasks.
+     * @param ui user interface to display done message.
+     * @param storage file storage.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.markTaskAsDone(taskNumber);

@@ -12,7 +12,7 @@ public abstract class Task {
 
     /**
      * Returns a tick or cross mark depending on whether the task has been marked as completed.
-     * @return tick or cross symbol
+     * @return tick or cross symbol.
      */
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
@@ -31,7 +31,7 @@ public abstract class Task {
 
     /**
      * Returns the format for permanent storage of a task in file.
-     * @return string format for storing
+     * @return string format for storing.
      */
     public String getStoringFormat() {
         if (this.isDone) {

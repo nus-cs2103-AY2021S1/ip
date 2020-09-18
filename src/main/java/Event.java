@@ -18,7 +18,7 @@ public class Event extends Task{
 
     /**
      * Returns the format for permanent storage of an event task in file.
-     * @return string format for storing
+     * @return string format for storing.
      */
     @Override
     public String getStoringFormat() {

@@ -6,14 +6,9 @@ import java.util.Scanner;
  */
 public class Ui {
 
-    private Scanner scanner;
-
-    public Ui() {
-        this.scanner = new Scanner(System.in);
-    }
-
     /**
-     * Prints a welcome message.
+     * Shows a welcome message.
+     * @return welcome message.
      */
     public static String showWelcome() {
         return "Hello! I'm Duke\n"
@@ -21,17 +16,9 @@ public class Ui {
     }
 
     /**
-     * Returns the user input in a String format upon scanning the system input.
-     * @return user input in String format.
-     */
-    public String readCommand() {
-        // scans for the next command (input from user)
-        return this.scanner.nextLine();
-    }
-
-    /**
-     * Prints a message to indicate that a task has been marked as completed.
+     * Shows a message to indicate that a task has been marked as completed.
      * @param task task which has been marked as completed.
+     * @return completed message with an uplifting quote.
      */
     public String showDoneMessage(Task task) {
         return "Nice! I've marked this task as done:\n"
@@ -39,7 +26,12 @@ public class Ui {
                 + "\nThose who are crazy enough to think that they can "
                 + "change the world are the ones who usually do. Dream big!";
     }
-    
+
+    /**
+     * Shows a message with all the filtered tasks.
+     * @param tasks filtered tasks.
+     * @return filtered tasks message.
+     */
     public String showFindMessage(ArrayList<Task> tasks) {
         String findMessage = "Here are the matching tasks in your list:\n";
         for (int i = 1; i <= tasks.size(); i++) {
@@ -49,9 +41,10 @@ public class Ui {
     }
 
     /**
-     * Prints a message to indicate that a task has been deleted.
+     * Shows a message to indicate that a task has been deleted.
      * @param task task which has been deleted.
      * @param totalTasks total number of tasks left after deletion.
+     * @return deleted message.
      */
     public String showDeletedMessage(Task task, int totalTasks) {
         return "Noted. I've removed this task:\n"
@@ -60,9 +53,10 @@ public class Ui {
     }
 
     /**
-     * Prints a message to indicate that a task has been added.
+     * Shows a message to indicate that a task has been added.
      * @param task task which has been added.
      * @param totalTasks total number of tasks left after addition.
+     * @return
      */
     public String showAddedMessage(Task task, int totalTasks) {
         return "Got it. I've added this task:\n"
@@ -71,7 +65,9 @@ public class Ui {
     }
 
     /**
-     * Prints a message to indicate the list of all tasks.
+     * Shows a message to indicate the list of all tasks.
+     * @param tasks list of all tasks.
+     * @return list message.
      */
     public String showListMessage(ArrayList<Task> tasks) {
         String listMessage = "Here are the tasks in your list:\n";
@@ -81,12 +77,17 @@ public class Ui {
         return listMessage;
     }
 
+    /**
+     * Shows a message to indicate that the task being added is a duplicate.
+     * @return duplicate task message.
+     */
     public String showDuplicateMessage() {
         return "This task has already been added to your list!";
     }
 
     /**
-     * Prints a message to say goodbye to the user with an uplifting quote.
+     * Shows  message to say goodbye to the user with an uplifting quote.
+     * @return goodbye message.
      */
     public String showGoodbyeMessage() {
         return "Bye. Hope to see you again soon!\n"
@@ -95,15 +96,17 @@ public class Ui {
     }
 
     /**
-     * Prints a message to show the error encountered.
+     * Shows a message to show the error encountered.
      * @param errorMessage error message to be printed.
+     * @return error message.
      */
     public String showError(String errorMessage) {
         return errorMessage;
     }
 
     /**
-     * Prints a message to indicate an error in loading the file containing saved tasks.
+     * Shows a message to indicate an error in loading the file containing saved tasks.
+     * @return loading error message.
      */
     public String showLoadingError() {
         return "File loading error!";

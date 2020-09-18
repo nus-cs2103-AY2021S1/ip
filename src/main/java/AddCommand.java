@@ -10,9 +10,9 @@ public class AddCommand extends Command {
 
     /**
      * Executes the add command.
-     * @param tasks list of tasks to which the task is to be added
-     * @param ui user interface to display added message
-     * @param storage file storage
+     * @param tasks list of tasks to which the task is to be added.
+     * @param ui user interface to display added message.
+     * @param storage file storage.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         if (tasks.containsTask(this.task)) {

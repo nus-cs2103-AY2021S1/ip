@@ -1,5 +1,3 @@
-import javafx.application.Platform;
-
 import java.io.IOException;
 
 /**
@@ -12,8 +10,9 @@ public class Duke{
     private Ui ui;
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Gets the response from the Chatbot to the user input.
+     * @param input the user input.
+     * @return the response from the Chatbot.
      */
     public String getResponse(String input) {
         return this.run(input);
@@ -38,8 +37,11 @@ public class Duke{
         ui = new Ui();
     }
 
+
     /**
-     * Activates and deactivates the Chatbot accordingly.
+     * Runs the Chatbot with user inputs.
+     * @param input the user input.
+     * @return the Chatbot's response to the user input.
      */
     public String run(String input) {
         try {

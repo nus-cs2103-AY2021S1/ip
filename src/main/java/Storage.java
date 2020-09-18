@@ -21,10 +21,10 @@ public class Storage {
 
     /**
      * Writes task information to the file for permanent storage.
-     * @param filePath path to file
-     * @param textToAdd text to be added into the file
-     * @param isAppending indicates if text is being appended to the file
-     * @throws IOException for input/output errors
+     * @param filePath path to file.
+     * @param textToAdd text to be added into the file.
+     * @param isAppending indicates if text is being appended to the file.
+     * @throws IOException for input/output errors.
      */
     private void writeToFile(String filePath, String textToAdd, boolean isAppending) throws IOException {
         FileWriter fileWriter = new FileWriter(filePath, isAppending);
@@ -34,9 +34,9 @@ public class Storage {
 
     /**
      * Returns an ArrayList of tasks from the stored tasks information upon reading the file.
-     * @return ArrayList of existing tasks
-     * @throws DukeException if file is not found
-     * @throws IOException for input/output errors
+     * @return ArrayList of existing tasks.
+     * @throws DukeException if file is not found.
+     * @throws IOException for input/output errors.
      */
     public ArrayList<Task> load() throws DukeException, IOException {
         try {
@@ -96,7 +96,7 @@ public class Storage {
 
     /**
      * Saves tasks into a file for permanent storage.
-     * @param tasks ArrayList of tasks to be saved
+     * @param tasks ArrayList of tasks to be saved.
      */
     public void saveTasks(ArrayList<Task> tasks) {
         try {
@@ -113,5 +113,4 @@ public class Storage {
             System.out.println(e);
         }
     }
-
 }

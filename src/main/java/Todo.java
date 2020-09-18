@@ -9,7 +9,7 @@ public class Todo extends Task {
 
     /**
      * Returns the format for permanent storage of a to-do task in file.
-     * @return string format for storing
+     * @return string format for storing.
      */
     @Override
     public String getStoringFormat() {

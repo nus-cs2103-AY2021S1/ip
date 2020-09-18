@@ -95,6 +95,11 @@ public class TaskList {
         return this.tasks;
     }
 
+    /**
+     * Gets the filtered tasks based on the search keyword.
+     * @param filter search keyword to filter the tasks.
+     * @return list of filtered tasks.
+     */
     public ArrayList<Task> listFilteredTasks(String filter) {
         ArrayList<Task> filteredTasks = new ArrayList<Task>();
         for (int i = 0; i < totalTasks; i++) {

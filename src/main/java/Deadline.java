@@ -18,7 +18,7 @@ public class Deadline extends Task {
 
     /**
      * Returns the format for permanent storage of a deadline task in file.
-     * @return string format for storing
+     * @return string format for storing.
      */
     @Override
     public String getStoringFormat() {

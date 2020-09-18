@@ -1,3 +1,6 @@
+//@@author Jeffry Lum
+//Reused from https://se-education.org/guides/tutorials/javaFxPart4.html
+
 import java.io.IOException;
 
 import javafx.application.Application;
@@ -13,6 +16,10 @@ public class Main extends Application {
 
     private Duke duke = new Duke("data/duke.txt");
 
+    /**
+     * Initialises the stage of the GUI.
+     * @param stage stage to be set with a scene.
+     */
     @Override
     public void start(Stage stage) {
         try {
@@ -27,3 +34,4 @@ public class Main extends Application {
         }
     }
 }
+//@@author
