@@ -22,6 +22,8 @@
    3.8. [Deleting an alias: `deletealias`](#38-deleting-an-alias-deletealias)
    
    3.9. [Exiting the program: `bye`](#39-exiting-the-program-bye)
+
+4.[Summary of commands](#4-summary-of-commands)
  
 ## 1. Introduction
 
@@ -33,7 +35,7 @@ several features to help you get started with managing your tasks.
 
 * Ensure that you have `java 11` installed on your computer.
 
-* Download the `BitBot.jar` file [here]().
+* Download the `BitBot.jar` file [here](https://github.com/ryanlimjr/ip/releases/tag/V0.2).
 
 * Double-click on the `BitBot.jar` file.
 
@@ -205,7 +207,7 @@ Alias created will be saved for future use.
 
 >`alias <ALIAS_NAME> <COMMAND>`
 
-:warning: `<COMMAND>` must be the same as the commands in this [list]().
+:warning: `<COMMAND>` must be the same as the commands in this [list](#4-summary-of-commands).
 
 ##### Example of usage
 
@@ -253,3 +255,18 @@ Ends the Chatbot. Window will close automatically in a 1 second.
 
 ![Image of alias feature](./UiBye.png)
 
+##4. Summary of commands
+
+|Command       | Parameters                           |
+|:--------------:|:--------------------------------------|
+|`list`        |                                      |
+|`todo`        | <TASK_DESCRIPTION>                   |
+|`event`       | <TASK_DESCRIPTION> /at <DATE> <TIME> |
+|`deadline`    | <TASK_DESCRIPTION> /by <DATE> <TIME> |
+|`done`        | <TASK_INDEX>                         |
+|`delete`      | <TASK_INDEX>                         |
+|`find`        | <KEYWORD>                            |
+|`date`        | <DATE>                               |
+|`alias`       | <ALIAS> <COMMAND>                    |
+|`deleatealias`| <ALIAS>                              |
+|`bye`         |                                      |
