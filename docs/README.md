@@ -69,6 +69,7 @@ Examples:
 Outcome:
 - A todo-task is added. The task can be seen when the <code>list</code> command is called.
 It will appear with the identifier <code>[T]</code> for todo.
+
 #### Adding Deadline-type task: <code>Deadline</code>
 Adds a task with a description and a deadline.
 
@@ -83,6 +84,7 @@ Examples:
 Outcome:
 - A deadline is added. The task can be seen when the <code>list</code> command is called. 
 It will appear with the identifier <code>[D]</code> for deadline.
+
 #### Adding Event-type task: <code>event</code>
 Adds a task with a description, a start timing and an end timing.
 
@@ -147,6 +149,7 @@ Example:
 Outcome:
 - If the task was previously undone (denoted with the symbol ✘), then that task is now marked as done 
 (with the symbol ✓). 
+
 #### Deleting a task: <code>delete</code>
 Deletes a task from the list.
 
