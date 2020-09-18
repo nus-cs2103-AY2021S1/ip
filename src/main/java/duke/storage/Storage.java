@@ -142,11 +142,11 @@ public class Storage {
                 } else {
                     String[] strArr = nextLine.split(":");
                     assert strArr.length == 3 || strArr.length == 4 : "Error in saving task information";
-                    String taskType = strArr[dataFileColumn.TASKTYPE.returnIndex()];
-                    String doneStatus = strArr[dataFileColumn.DONESTATUS.returnIndex()].trim();
-                    String taskInfo = strArr[dataFileColumn.TASKSTRING.returnIndex()].trim();
-                    String when = strArr.length == dataFileColumn.TOTALCOLUMNS
-                        ? strArr[dataFileColumn.DATE.returnIndex()].trim()
+                    String taskType = strArr[DataFileColumn.TASKTYPE.returnIndex()];
+                    String doneStatus = strArr[DataFileColumn.DONESTATUS.returnIndex()].trim();
+                    String taskInfo = strArr[DataFileColumn.TASKSTRING.returnIndex()].trim();
+                    String when = strArr.length == DataFileColumn.TOTALCOLUMNS
+                        ? strArr[DataFileColumn.DATE.returnIndex()].trim()
                         : "";
                     char taskTypeChar = taskType.charAt(TASKTYPEINDEX);
                     addTaskToList(taskList, taskTypeChar, doneStatus, taskInfo, when);
