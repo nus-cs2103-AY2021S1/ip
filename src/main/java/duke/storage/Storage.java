@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import duke.data.TaskList;
@@ -19,7 +18,6 @@ public class Storage {
 
     private final String filePath;
     private final File file;
-    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE, dd MMM yyyy hh:mm a");
 
     public static class StorageOperationException extends Exception {
         public StorageOperationException(String message) {

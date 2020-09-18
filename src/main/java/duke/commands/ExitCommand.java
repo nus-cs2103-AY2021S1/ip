@@ -11,7 +11,7 @@ public class ExitCommand extends Command {
             + " :\nExits the program.\n"
             + "  Example: " + COMMAND_WORD;
 
-    public static final String MESSAGE_EXIT_ACKNOWLEDGMENT = "Exiting Duke as requested...";
+    public static final String MESSAGE_EXIT_ACKNOWLEDGMENT = "Exiting Stormy as requested...";
 
     @Override
     public CommandResult execute() {
