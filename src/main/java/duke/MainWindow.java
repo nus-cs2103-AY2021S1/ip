@@ -83,6 +83,7 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
         if (dukeResponse.isExitCommand()) {
             Platform.exit();
+            System.exit(0);
         }
     }
 }
