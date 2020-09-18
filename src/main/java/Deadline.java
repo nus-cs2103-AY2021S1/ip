@@ -30,7 +30,7 @@ public class Deadline extends Task {
     }
 
     @Override
-    public String toSaveDataFormat() {
+    public String getSaveDataString() {
         String saveData = "";
         saveData += this.isDone ? 1 : 0;
         saveData += " D " + this.name + "\n" + this.dueDateInSaveFormat;

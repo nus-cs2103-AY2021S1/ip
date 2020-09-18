@@ -30,7 +30,7 @@ public class Event extends Task {
     }
 
     @Override
-    public String toSaveDataFormat() {
+    public String getSaveDataString() {
         String saveData = "";
         saveData += this.isDone ? 1 : 0;
         saveData += " E " + this.name + "\n" + this.timingInSaveFormat;

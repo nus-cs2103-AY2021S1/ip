@@ -4,23 +4,27 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Storage {
-    private static final Path DUKE_DATA_FILE_PATH = Paths.get("data", "duke.txt");
-    private static final Path DUKE_DATA_DIR_PATH = Paths.get("data");
-    private static final String NEW_LINE = "\n";
-    private static final String PADDING = "      ";
+    private Path filePath;
+    private Path dirPath;
 
 
-    public static void loadTasksFromDisk(List<Task> taskList) throws FileNotFoundException, DukeException {
-        File dukeDataFile = new File(DUKE_DATA_FILE_PATH.toUri());
-        if (Files.notExists(DUKE_DATA_DIR_PATH)) {
-            throw new DukeDataFolderException("Missing Deuk Data Folder!" + NEW_LINE + PADDING +
-                    "Creating new Deuk Data Folder..."
-            );
+    public Storage(Path filePath, Path dirPath) {
+        this.filePath = filePath;
+        this.dirPath = dirPath;
+
+    }
+
+    List<Task> loadTasksFromDisk() throws FileNotFoundException, DukeException {
+        List<Task> taskList = new ArrayList<>();
+        File dukeDataFile = new File(this.filePath.toUri());
+        if (Files.notExists(this.dirPath)) {
+            throw new DukeDataFolderException("Missing Deuk Data Folder!" + Ui.NEW_LINE
+                    + Ui.PADDING + "Creating new Deuk Data Folder...");
         }
         Scanner fs = new Scanner(dukeDataFile);
         while (fs.hasNext()) {
@@ -30,33 +34,62 @@ public class Storage {
             String taskType = sc.next();
             String taskName = sc.next();
             Task task;
-            if (taskType.equals("T")) {
-                task = Todo.createTodo(taskName);
-            } else if (taskType.equals("D")) {
-                String dueDate = fs.nextLine();
-                task = Deadline.createDeadline(taskName, dueDate);
-            } else if (taskType.equals("E")) {
-                String timing = fs.nextLine();
-                task = Event.createEvent(taskName, timing);
-            } else {
-                throw new DukeException("Save file corrupted!");
+            switch (taskType) {
+                case "T":
+                    task = Todo.createTodo(taskName);
+                    break;
+                case "D":
+                    String dueDate = fs.nextLine();
+                    task = Deadline.createDeadline(taskName, dueDate);
+                    break;
+                case "E":
+                    String timing = fs.nextLine();
+                    task = Event.createEvent(taskName, timing);
+                    break;
+                default:
+                    throw new DukeException("Save file corrupted!");
             }
             task.setDoneness(isDone);
             taskList.add(task);
         }
-//        System.out.println("full path: " + dukeDataFile.getAbsolutePath());
-//        System.out.println("file exists?: " + dukeDataFile.exists());
-//        System.out.println("is Directory?: " + dukeDataFile.isDirectory());
+        return taskList;
     }
 
-    public static void saveTasksToDisk(List<Task> taskList) throws IOException {
+    void saveTasksToDisk(TaskList tasks) throws IOException {
         // TODO: check dirty flag before saving to disk
-        FileWriter fw = new FileWriter(DUKE_DATA_FILE_PATH.toString());
+        FileWriter fw = new FileWriter(this.filePath.toString());
         String tasksString = "";
-        for (Task task : taskList) {
-            tasksString += task.toSaveDataFormat() + NEW_LINE;
+        for (int i = 0; i < tasks.countTotalTasks(); i++) {
+            Task task = tasks.getTask(i);
+            tasksString += task.getSaveDataString() + Ui.NEW_LINE;
         }
         fw.write(tasksString);
         fw.close();
+    }
+
+
+    void createDukeDataFolder() {
+        File dir = new File(this.dirPath.toUri());
+        boolean isCreated = dir.mkdir();
+        if (isCreated) {
+            Ui.print("Successfully created Deuk Data Folder");
+            try {
+                FileWriter fw = new FileWriter(this.filePath.toString());
+                fw.close();
+            } catch (IOException err) {
+                Ui.printError(err.getMessage());
+            }
+        } else {
+            Ui.printError("Failed to create Deuk Data Folder");
+        }
+    }
+
+    void createDukeDataFile() {
+        try {
+            FileWriter fw = new FileWriter(this.filePath.toString());
+            fw.close();
+        } catch (IOException err) {
+            Ui.printError(err.getMessage());
+        }
     }
 }

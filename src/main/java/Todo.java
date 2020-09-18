@@ -13,7 +13,7 @@ public class Todo extends Task{
     }
 
     @Override
-    public String toSaveDataFormat() {
+    public String getSaveDataString() {
         String saveData = "";
         saveData += this.isDone ? 1 : 0;
         saveData += " T " + this.name;
@@ -25,6 +25,4 @@ public class Todo extends Task{
         String marked = this.isDone ? "[✓] " : "[✗] ";
         return "[T]" + marked + this.name;
     }
-
-
 }

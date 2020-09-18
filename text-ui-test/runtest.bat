@@ -16,6 +16,10 @@ IF ERRORLEVEL 1 (
 )
 REM no error here, errorlevel == 0
 
+REM delete duke.txt from previous run
+if not exist .\data mkdir .\data
+del .\data\duke.txt
+
 REM run the program, feed commands from input.txt file and redirect the output to the ACTUAL.TXT
 java -classpath ..\bin Duke < input.txt > ACTUAL.TXT
 

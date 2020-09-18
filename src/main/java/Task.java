@@ -18,7 +18,7 @@ public class Task {
         return "The description of a task cannot be empty.";
     }
 
-    public String toSaveDataFormat() {
+    public String getSaveDataString() {
         String saveData = "";
         saveData += this.isDone ? 1 : 0;
         saveData += " A " + this.name;

@@ -4,7 +4,8 @@ todo make tea
 event party
 deadline homework
 event birthday party /at 9 April 2020
-deadline homework /by 13 Aug 2020 2359
+event birthday party /at 2020-04-09
+deadline homework /by 2020-08-13
 list
 done 1
 delete 1
