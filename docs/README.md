@@ -42,7 +42,6 @@ List all of your tasks that has been saved.
 >`list`
 
 ##### Example of usage
-* `list`
 
 ![Image of list feature](./UiList.png)
 
@@ -51,6 +50,7 @@ List all of your tasks that has been saved.
 ##### Description
 
 Add a new task to your existing list of task. A new task is marked as incomplete (&#x2718;) upon creation.
+All task created will be saved for future reference.
 
 There are 3 kinds of tasks:
 
@@ -90,7 +90,7 @@ There are 3 kinds of tasks:
 
 * `event task2 /at 18-09-2020 1900`
 
-![Image of todo feature](./UiEvent.png)
+![Image of event feature](./UiEvent.png)
 
 #### <ins>3.2.3 Deadline task `deadline`</ins>
 
@@ -108,7 +108,7 @@ There are 3 kinds of tasks:
 
 * `event task3 /by 18-09-2020 1900`
 
-![Image of todo feature](./UiDeadline.png)
+![Image of deadline feature](./UiDeadline.png)
 
 ### <ins>3.3 Marking a task as completed: `done`</ins>
 
@@ -126,7 +126,7 @@ Marks a specified task on the list as done.
 
 * `done 1`
 
-![Image of list feature](./UiDone.png)
+![Image of done feature](./UiDone.png)
 
 ### <ins>3.4 Deleting a task: `delete`</ins>
 
@@ -144,13 +144,13 @@ Deletes a specified task on the list as done.
 
 * `delete 1`
 
-![Image of list feature](./UiDelete.png)
+![Image of delete feature](./UiDelete.png)
 
 ### <ins>3.5 Finding a task by a keyword: `find`</ins>
 
 ##### Description
 
-Finds and displays all tasks containing a specified keyword
+Finds and displays all tasks containing a specified keyword.
 
 ##### Usage format
 
@@ -162,13 +162,13 @@ Finds and displays all tasks containing a specified keyword
 
 * `f task`
 
-![Image of list feature](./UiFindKeyword.png)
+![Image of find feature](./UiFindKeyword.png)
 
 ### <ins>3.6 Finding a task by date: `date`</ins>
 
 ##### Description
 
-Finds and displays all tasks that is due / occurring on a specified date
+Finds and displays all tasks that is due/occurring on a specified date.
 
 ##### Usage format
 
@@ -180,46 +180,64 @@ Finds and displays all tasks that is due / occurring on a specified date
 
 * `date 18-09-2020`
 
-![Image of list feature](./UiFindDate.png)
+![Image of date feature](./UiFindDate.png)
 
 ### 3.7 Adding an alias to map to command: `alias`
 
-#### Usage
+##### Description
 
-`list`
+Create an alias which maps to a command. This helps user customize their own commands to their liking. 
+Alias created will be saved for future use.
 
-#### Description
-List all of your tasks that has been saved.
+##### Usage format
 
-#### Example of usage
-* `list`
+>`alias <ALIAS_NAME> <COMMAND>`
 
-![Image of list feature](./UiList.png)
+:warning: `<COMMAND>` must be the same as the commands in this [list]().
+
+##### Example of usage
+
+* `alias fd date`
+
+![Image of alias feature](./UiAlias.png)
+
+* use of alias `fd` as though it is a `date` command.
+
+![Image of using new alias as command](./UiAliasUse.png)
 
 ### 3.8 Deleting an alias: `deletealias`
 
-#### Usage
+##### Description
 
-`list`
+Delete an existing alias which maps to a command.
 
-#### Description
-List all of your tasks that has been saved.
+##### Usage format
 
-#### Example of usage
-* `list`
+>`deletealias <ALIAS_NAME>`
+>
+>`da <ALIAS_NAME>`
 
-![Image of list feature](./UiList.png)
+##### Example of usage
+
+* `deletealias fd`
+
+![Image of alias feature](./UiDeleteAlias.png)
+
+* no longer able to use alias `fd`. Bit shows an invalid command error dialog.
+
+![Image of using new alias as command](./UiAliasCannotUse.png)
 
 ### 3.9 Exiting the program: `bye`
 
-#### Usage
+##### Description
 
-`list`
+Ends the Chatbot. Window will close automatically in a 1 second.
 
-#### Description
-List all of your tasks that has been saved.
+##### Usage format
 
-#### Example of usage
-* `list`
+>`bye`
 
-![Image of list feature](./UiList.png)
+##### Example of usage
+
+![Image of alias feature](./UiBye.png)
+

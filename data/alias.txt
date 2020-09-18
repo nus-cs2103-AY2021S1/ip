@@ -6,4 +6,5 @@ f|find
 md|done
 del|delete
 l|list
+da|deletealias
 li|list
