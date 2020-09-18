@@ -24,7 +24,6 @@ public class Storage {
             ) {
             return (ArrayList<Task>) ois.readObject();
         } catch (EOFException | FileNotFoundException | ClassNotFoundException e) {
-            System.out.println("An error has occurred");
             return new ArrayList<>();
         }
     }

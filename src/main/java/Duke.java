@@ -141,7 +141,7 @@ public class Duke extends Application implements Serializable {
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    public String getResponse(String input) throws FileNotFoundException, DukeException {
+    public String getResponse(String input) {
         Parser parser = new Parser();
         return parser.commandParser(input, tasks, storage, action);
     }

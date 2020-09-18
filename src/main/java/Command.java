@@ -76,7 +76,7 @@ public class Command {
             throw new DukeException("todo");
         }
         String desc = string[1];
-        Todo todo = new Todo(desc);
+        Todo todo = new Todo("todo " + desc);
 
         store.save(storage, todo);
         int size = storage.size();
