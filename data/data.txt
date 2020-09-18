@@ -1,4 +1,4 @@
 3
-[T][X] do 5 chess puzzles
+[E][X] IOI day 2 (at: 2020-09-19T17:00)
+[T][O] do 5 chess puzzles
 [D][X] CS2030 iP (by: 2020-09-18T23:59)
-[E][O] Worlds 2020 (at: 2020-10-04T16:00)
