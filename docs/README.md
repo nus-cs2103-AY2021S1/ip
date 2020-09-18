@@ -4,6 +4,7 @@
 ### Feature 1 Add todo tasks
 Add a todo task into the tasklist.
 
+#### Usage
 ### `todo` - Add todo tasks
 
 Add a todo task into the tasklist.
@@ -17,6 +18,7 @@ Expected outcome:
 `added:sleep`
 `Now you have 1 task(s) in the list`
 
+#### Usage
 
 ### Feature 2 Add event tasks
 Add a event task with due date into the tasklist.
@@ -34,6 +36,8 @@ Expected outcome:
 `added:sleep`
 `Now you have 1 task(s) in the list`
 
+#### Usage
+
 ### Feature 3 Add deadline tasks
 Add a deadline task with deadline into the tasklist.
 
@@ -49,6 +53,8 @@ Expected outcome:
 
 `added:sleep`
 `Now you have 1 task(s) in the list`
+
+#### Usage
 
 ### Feature 4 Delete tasks
 Delete a task from the tasklist.
@@ -66,6 +72,8 @@ Expected outcome:
 `I have removed this task: `
 `[T][✘] sleep`
 
+#### Usage
+
 ### Feature 5 Mark a task as 'Done'
 Change the status icon of a task from a cross to a check.
 
@@ -82,6 +90,8 @@ Expected outcome:
 `Great! I have marked this task as done:
 [T][✘] sleep`
 
+#### Usage
+
 ### Feature 6 Search tasks using keywords
 Find tasks matching the keywords.
 
@@ -97,6 +107,8 @@ Find tasks matching the keywords.
  
 `Here are the tasks I find:`
 `1. [T][✘] sleep`
+
+#### Usage
 
 ### Feature 7 Exit the program
 Exit the process and save the changes into the tasklist.
