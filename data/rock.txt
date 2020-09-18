@@ -1,7 +1,8 @@
-6
+7
 T|buy a new laptop|false
 E|x|true|y
-T|cak|false
 T|eat dinner|false
-T|eat breakfast|false
-T|eat eat|false
+T|eat breakfast|true
+T|eat eat|true
+T|add x|false
+T|add y|false
