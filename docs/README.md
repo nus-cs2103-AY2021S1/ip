@@ -36,7 +36,8 @@ Displays features and the commands needed to use them.
   </summary>
   
 Format: `/help`
-* Instructions will be displayed in the following format - GENERAL DESCRIPTION: input needed.
+* Instructions will be displayed in the following format
+  * `GENERAL DESCRIPTION: USER_INPUT`.
 </details>
   
 ### Add a new ToDo: `todo`
