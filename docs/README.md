@@ -12,7 +12,7 @@ Notes about the command format:
 - words in `UPPER_CASE` are the parameters supplied by the user
 - items in square brackets `[]` are optional
 
-##Usage
+## Usage
 
 ### Feature 1 
 Adding tasks to the task list
