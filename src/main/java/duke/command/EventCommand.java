@@ -13,12 +13,17 @@ public class EventCommand extends Command {
   }
 
   @Override
-  public void execute(Duke duke) {
+  public void execute(Duke duke) throws Exception {
     duke.addEventTask(desc, at);
   }
 
   @Override
   public void undo(Duke duke) {
     // stub
+  }
+
+  @Override
+  public boolean isExit() {
+    return false;
   }
 }

@@ -15,4 +15,9 @@ public class ListTasksCommand extends Command {
   public void undo(Duke duke) {
     // stub
   }
+
+  @Override
+  public boolean isExit() {
+    return false;
+  }
 }

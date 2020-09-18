@@ -9,4 +9,8 @@ public class CLI {
   public void update(String s) {
     System.out.println(s);
   }
+
+  public void close() {
+    System.out.println("Bye. Hope to see you again.");
+  }
 }

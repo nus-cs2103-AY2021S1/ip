@@ -16,8 +16,8 @@ import java.util.List;
 public class Duke {
 
   private CLI observer;
-  private final List<Task> tasks;
-  private Storage storage;
+  private List<Task> tasks;
+  private final Storage storage;
 
   public Duke(Storage storage) {
     this.storage = storage;
@@ -37,6 +37,16 @@ public class Duke {
     observer.update(s);
   }
 
+  public void removeObserver(CLI observer) {
+    observer.close();
+    this.observer = null;
+  }
+
+  public void removeAllObservers() {
+    this.observer.close();
+    this.observer = null;
+  }
+
   public void updateStorage() throws Exception {
     storage.store(tasks);
   }
@@ -45,21 +55,21 @@ public class Duke {
     Task task = new TodoTask(description);
     tasks.add(task);
     notifyObservers("Added TODO: " + task.toString());
-    updateStorage();
+    updateStorage(); // TODO: storage as observer
   }
 
   public void addEventTask(String description, String at) throws Exception {
     Task task = new EventTask(description, at);
     tasks.add(task);
     notifyObservers("Added EVENT: " + task.toString());
-    updateStorage();
+    updateStorage(); // TODO: storage as observer
   }
 
   public void addDeadlineTask(String description, String by) throws Exception {
     Task task = new DeadlineTask(description, by);
     tasks.add(task);
     notifyObservers("Added DEADLINE: " + task.toString());
-    updateStorage();
+    updateStorage(); // TODO: storage as observer
   }
 
   public void markTaskDone(int id) throws Exception {
