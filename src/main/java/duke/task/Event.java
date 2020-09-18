@@ -61,7 +61,8 @@ public class Event extends Task {
      * @param timeStart Starting time of task.
      * @param timeEnd Ending time of task.
      */
-    public Event(String description, TaskType taskType, boolean isDone, LocalDate date, LocalTime timeStart, LocalTime timeEnd) {
+    public Event(String description, TaskType taskType, boolean isDone,
+                 LocalDate date, LocalTime timeStart, LocalTime timeEnd) {
         super(description, taskType, isDone);
         this.date = date;
         this.timeStart = timeStart;
