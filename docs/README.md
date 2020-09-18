@@ -16,6 +16,9 @@ can help you keep track of your tasks faster than traditional GUI apps.
         3. Adding an event task: `event`
     3. Listing all tasks : `list`
     4. Updating a task : `update`
+        1. Updating a task's description
+        2. Updating a task's date/time
+        3. Updating a tasks' description and date/time
     5. Marking a task as done: `done`
     6. Searching for a task by keyword: `find`
     7. Deleting a task : `delete`
@@ -31,33 +34,23 @@ This document shows you all the features in Clippy and helps you familiarise wit
 
 Note the following symbols and formatting used in this document:
 
-![Note Icon](./UG%20images/info.png): This symbol indicates important information
-<br/><br/><br/>
-`list`: Words in grey mark-up indicates that this is a command that you can type into the command line and executed.
-<br/><br/><br/>
-`<task description>`: Words in grey mark-up and within angled brackets are the parameters to be supplied by you.
+* ![Note Icon](./UG%20images/info.png): This symbol indicates important information
 
-e.g. in `find <keyword>`, `<keyword>` is a parameter which can be used as `find exercise`.
-<br/><br/><br/>
-Items separated by `|` are alternatives, and the usage depends on the scenario.
+* `list`: Words in grey mark-up indicates that this is a command that you can type into the command line and executed.
 
-e.g `update <task index> <new task description> [/by|/at <new date/time>]` can be used as 
+* `<task description>`: Words in grey mark-up and within angled brackets are the parameters to be supplied by you.
 
-`update 2 java workshop /at Tuesday 6-7pm` if the 2nd task in the list is an event, 
+  e.g. in `find <keyword>`, `<keyword>` is a parameter which can be used as `find exercise`.
 
-or
+* Items separated by `|` are alternatives, and the usage depends on the scenario.
 
-`update 3 sign up for lesson /by 2020-09-30` if the 3rd task in the list is a deadline.
-<br/><br/><br/>
-Items in square brackets are optional.
+  e.g `update <task index> <new task description> /by|/at <new date/time>` can be used as 
 
-e.g `update <task index> <new task description> [/at <new date/time>]` can be used as 
+  `update 2 java workshop /at Tuesday 6-7pm` if the 2nd task in the list is an event, 
 
-`update 2 java workshop`
+  or
 
-or 
-
-`update 2 java workshop /at Tuesday 6-7pm`.
+  `update 3 sign up for lesson /by 2020-09-30` if the 3rd task in the list is a deadline.
 
 
 
@@ -118,7 +111,7 @@ What it does:
 
 Expected outcome:
 
-![todoEO](./UG%20images/deadline%20EO.png)
+![deadlineEO](./UG%20images/deadline%20EO.png)
 
 
 ## 3.2.3 Adding an event task: `event`
@@ -137,7 +130,7 @@ What it does:
 
 Expected outcome:
 
-![todoEO](./UG%20images/event%20EO.png)
+![event EO](./UG%20images/event%20EO.png)
 
 
 ## 3.3 Listing all tasks: `list`
@@ -147,50 +140,86 @@ Shows a list of all tasks being managed by Clippy.
 
 Expected outcome:
 
-![todoEO](./UG%20images/list%20EO.png)
+![listEO](./UG%20images/list%20EO.png)
 
 
 ## 3.4 Updating a task: `update`
-Updates the details of an existing task managed by Clippy. Suppose you made a mistake when entering the description of an event. You can use `update` to edit the event’s description.
+Updates the details of an existing task managed by Clippy. 
+
+## 3.4.1 Updating a task's description
+Updates only the description of an existing task managed by Clippy. Suppose you made a mistake when entering the description of an event. You can use `update` to edit the event’s description.
+
 ### Format
-* `update <index> <new task description> [/by|/at <new date/time>]`: Updates a task's description (and optionally date/time if task is a deadline or event)
+* `update <index> <new task description>`: Updates only the description of any tasks
 
 What it does:
 * Updates the task at the specified `index`. 
 * The `index` refers to the index number shown in the displayed tasks list after using the list command. 
 * The `index` must be a positive integer 1, 2, 3, ...
 * Existing description will be updated to the input description.
-* Optional: `/by` or `/at` command can be added at the end, followed by `<new date/time>`, if you want to update the description and date/time of a deadline or event task.
+* Order of tasks in list stays the same after update.
 * ![Note Icon](./UG%20images/info.png) Note the following:
-  * A todo task does not have a date/time and the `/by` or `/at` command cannot be used when updating a todo
-  * Use `/by` command when the task is a deadline
-  * Use `/at` command when the task is an event
-
-<br>
-
-* `update <index> /by|/at <new date/time>`: Updates only a deadline or event task's date/time
-
-What it does:
-* Existing date/time will be updated to the input date/time.
-* ![Note Icon](./UG%20images/info.png) Note the following:
-  * This command cannot be used on a todo task as it does not have a date/time
-  * Use `/by` command when the task is a deadline
-  * Use `/at` command when the task is an event
-
+  * You can update the description of all types of existing tasks (i.e. todos, deadlines, events).
 
 ### Usage
 Example of usage:
-* `event birthday party /at 25 Nov 1-4pm` <br> `update 1 19th birthday party` <br> updates the description of the 1st task in the list to 19th birthday party.
+* `event birthday party /at 25 Nov 1-4pm` <br> `update 1 19th birthday party` <br> updates only the description of the 1st task in the list to '19th birthday party'.
 
 Expected outcome:
 
-![todoEO](./UG%20images/update%201%20EO.png)
+![update1EO](./UG%20images/update 1 EO.png)
 
-* `update 1 19th birthday party /at 25 Nov 5-10pm` <br> updates the description and date/time of the 1st task in the list to 19th birthday party at 25 Nov 5-10pm.
+
+## 3.4.2 Updating a task's date/time
+Updates only the date/time of an existing deadline or event task managed by Clippy. Suppose you made a mistake when entering the date/time of an event. You can use `update` to edit the event’s date/time.
+
+### Format
+* `update <index> /by|/at <new date/time>`: Updates only the date/time of a deadline or event task
+
+What it does:
+* Updates the task at the specified `index`. 
+* The `index` refers to the index number shown in the displayed tasks list after using the list command. 
+* The `index` must be a positive integer 1, 2, 3, ...
+* Existing date/time will be updated to the input date/time.
+* ![Note Icon](./UG%20images/info.png) Note the following:
+  * This command can only be used on a deadline or event task as only these 2 types have a date/time.
+  * Use `/by` command when the task is a deadline.
+  * Use `/at` command when the task is an event.
+
+### Usage
+Example of usage:
+* `event birthday party /at 25 Nov 1-4pm` <br> `update 1 /at 25 Nov 5-10pm` <br> updates only the date/time of the 1st task in the list to '25 Nov 5-10pm'.
 
 Expected outcome:
 
-![todoEO](./UG%20images/update%202%20EO.png)
+![update2EO](./UG%20images/update 2 EO.png)
+
+
+## 3.4.3 Updating a task's description and date/time
+Updates both the description and date/time of an existing deadline or event task managed by Clippy. Suppose you made a mistake when entering the description and date/time of an event. You can use `update` to edit both the description and date/time in one command.
+
+### Format
+* `update <index> /by|/at <new date/time>`: Updates only the date/time of a deadline or event task
+
+What it does:
+* Updates the task at the specified `index`. 
+* The `index` refers to the index number shown in the displayed tasks list after using the list command. 
+* The `index` must be a positive integer 1, 2, 3, ...
+* Existing description and date/time will be updated to the input description and date/time.
+* ![Note Icon](./UG%20images/info.png) Note the following:
+  * This command can only be used on a deadline or event task as only these 2 types have a date/time.
+  * Use `/by` command when the task is a deadline.
+  * Use `/at` command when the task is an event.
+ 
+ 
+### Usage
+Example of usage:
+* `event birthday party /at 25 Nov 1-4pm` <br> `update 1 19th birthday party /at 25 Nov 5-10pm` <br> updates both the description and date/time of the 1st task in the list to '19th birthday party' at '25 Nov 5-10pm'.
+
+Expected outcome:
+
+![update3EO](./UG%20images/update 3 EO.png)
+
 
 
 ## 3.5 Marking a task as done: `done`
@@ -210,7 +239,7 @@ Example of usage:
 
 Expected outcome:
 
-![todoEO](./UG%20images/mark%20as%20done%20EO.png)
+![markDoneEO](./UG%20images/mark%20as%20done%20EO.png)
 
 
 ## 3.6 Searching for a task by keyword: `find`
@@ -225,11 +254,12 @@ Finds tasks whose description contains the given keyword.
 
 ### Usage
 Example of usage:
-* `todo buy xbox` <br> `todo buy ps5` <br> `find buy` <br> returns 2 tasks with description ‘buy xbox’ and ‘buy ps5’
+* `todo buy xbox` <br> `todo buy ps5` <br> `find buy` 
+  <br> returns 2 tasks with description ‘buy xbox’ and ‘buy ps5’
 
 Expected outcome:
 
-![todoEO](./UG%20images/find%20EO.png)
+![findEO](./UG%20images/find%20EO.png)
 
 ## 3.7 Deleting a task: `delete`
 Deletes the specified task from Clippy.
@@ -246,7 +276,7 @@ Example of usage:
 
 Expected outcome:
 
-![todoEO](./UG%20images/delete%20EO.png)
+![deleteEO](./UG%20images/delete%20EO.png)
 
 ## 3.8 Exiting the program: `bye`
 Exits the program.
