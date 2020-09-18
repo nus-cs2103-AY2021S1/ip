@@ -1,14 +1,17 @@
-package duke;
+package duke.gui;
 
 import java.io.IOException;
+
 import java.util.Collections;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+
 import javafx.geometry.Pos;
-import javafx.geometry.Insets;
+
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -53,8 +56,6 @@ public class DialogBox extends HBox {
                 + "-fx-border-color: rgb(255, 204, 229);"
                 + "-fx-border-radius: 15;");
 
-        this.setPadding(new Insets(10, 0, 10, 0));
-        this.setSpacing(10);
         displayPicture.setImage(img);
         final Circle clip = new Circle(49, 48, 48);
         displayPicture.setClip(clip);
