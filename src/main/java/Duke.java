@@ -24,7 +24,7 @@ public class Duke {
         }
     }
 
-    private final String VERSION_NUMBER = "1.1.0";
+    private final String VERSION_NUMBER = "1.2.0";
     private String logo;
     private String introMessage;
     private Storage storage;
