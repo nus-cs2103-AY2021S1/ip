@@ -10,6 +10,7 @@ import duke.data.task.TaskList;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.ui.Ui;
+import javafx.application.Platform;
 
 /**
  * Entry point of the To Do List application.
@@ -34,7 +35,6 @@ public class Duke {
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
-            // ui.showLoadingError();
             tasks = new TaskList();
         }
     }
@@ -70,6 +70,9 @@ public class Duke {
     public String getResponse(String input) {
         Command command = parser.parseUserInput(input);
         CommandResult commandResult = command.execute(tasks, storage);
+        if (command instanceof ExitCommand) {
+            Platform.exit();
+        }
         return "Duke heard: \n" + commandResult.getMessageToUser();
     }
 

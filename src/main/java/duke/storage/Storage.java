@@ -21,6 +21,7 @@ import duke.data.task.ToDo;
  * file path specified.
  */
 public class Storage {
+    private final String dataDirectory = "data";
     private final String filePath;
 
     public Storage(String filePath) {
@@ -148,6 +149,13 @@ public class Storage {
             Files.write(Path.of(filePath), fileData, StandardCharsets.UTF_8);
         } catch (IOException ioException) {
             System.out.println(ioException.getMessage());
+        }
+    }
+
+    private void initialiseDataDirectory() {
+        File directory = new File(dataDirectory);
+        if (!directory.exists()) {
+            directory.mkdir();
         }
     }
 
