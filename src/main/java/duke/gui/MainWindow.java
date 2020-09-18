@@ -70,7 +70,7 @@ public class MainWindow extends AnchorPane {
      */
     private void exitApplication(String input, String response) {
         KeyFrame keyFrame = new KeyFrame(Duration.seconds(0), e -> addDialogBox(input, response));
-        KeyFrame exit = new KeyFrame(Duration.seconds(1.5), e -> Platform.exit());
+        KeyFrame exit = new KeyFrame(Duration.seconds(1.5), e -> System.exit(0));
         Timeline timeline = new Timeline(keyFrame, exit);
         Platform.runLater(timeline::play);
     }
