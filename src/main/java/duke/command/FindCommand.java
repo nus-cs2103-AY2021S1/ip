@@ -30,7 +30,7 @@ public class FindCommand extends Command {
      * @param ui User Interface object.
      * @param storage Storage object.
      * @return Response message to user.
-     * @throws EmptyFindException If no task matches the user input.
+     * @throws EmptyFindException If input string succeeding find is empty.
      */
     public String execute(TaskList taskList, Ui ui, Storage storage) throws EmptyFindException {
         if (input.isEmpty()) {

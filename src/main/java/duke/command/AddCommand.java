@@ -25,6 +25,7 @@ public abstract class AddCommand extends Command {
      */
     protected String addTask(Task newTask, TaskList taskList, Ui ui, Storage storage) throws DuplicateTaskException,
             FileUpdateFailException {
+
         if (taskList.contains(newTask)) {
             throw new DuplicateTaskException();
         }
@@ -32,4 +33,5 @@ public abstract class AddCommand extends Command {
         storage.updateFile(taskList);
         return ui.addTask(newTask, taskList.size());
     }
+
 }
