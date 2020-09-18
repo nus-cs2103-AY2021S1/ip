@@ -3,14 +3,25 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * Represents a event command from a user.
+ * Represents a event command.
  */
 public class EventCommand extends Command {
 
+    /**
+     * Constructs a event command object.
+     *
+     * @param str event command
+     */
     EventCommand(String str) {
         super(str);
     }
 
+    /**
+     * Converts the date from user input to local date.
+     *
+     * @param time user input time
+     * @return local date
+     */
     public static String getLocalDate(String time) {
         LocalDate d = LocalDate.parse(time);
         return d.format(DateTimeFormatter.ofPattern("MMM d yyyy"));

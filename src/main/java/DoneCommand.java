@@ -3,6 +3,11 @@
  */
 public class DoneCommand extends Command {
 
+    /**
+     * Creates done command.
+     *
+     * @param str done command
+     */
     DoneCommand(String str) {
         super(str);
     }

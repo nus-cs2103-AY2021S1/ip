@@ -8,18 +8,27 @@ public class Ui {
     private Scanner sc;
     private String line = "";
 
+    /**
+     * Initialises ui.
+     */
     public Ui() {
         sc = new Scanner(System.in);
     }
 
-    public String readCommand() {
-        return sc.nextLine().toLowerCase();
-    }
-
+    /**
+     * Shows error.
+     *
+     * @param e error string
+     * @return error message
+     */
     public String showError(String e) {
         return (e);
     }
 
+    /**
+     * Says hi to user.
+     * @return hi message
+     */
     public String sayHi() {
         String str = ("\t" + line + "\n"
                 + "\tHi I am RollRoll :D\n"
@@ -38,6 +47,10 @@ public class Ui {
         return (str);
     }
 
+    /**
+     * Says bye to user.
+     * @return bye message
+     */
     public String sayBye() {
         sc.close();
         return ("\t" + line + "\n"
@@ -45,6 +58,13 @@ public class Ui {
                 + "\t" + line);
     }
 
+    /**
+     * Shows added task.
+     *
+     * @param task task to be added
+     * @param numOfTask task number
+     * @return response message
+     */
     public String printAddTask(Task task, int numOfTask) {
         String tasks = numOfTask == 1 ? "task" : "tasks";
         return ("\t" + line + "\n\tGot it. I've added this task:\n"
@@ -53,6 +73,12 @@ public class Ui {
                 + "\t" + line);
     }
 
+    /**
+     * Shows the list.
+     *
+     * @param task task list
+     * @return response message
+     */
     public String showList(TaskList task) {
         String str;
         if (task.getList().size() > 0) {
@@ -72,20 +98,42 @@ public class Ui {
         return str;
     }
 
+    /**
+     * Shows a task is marked as done.
+     *
+     * @param list task list
+     * @param num task number
+     * @return response message
+     */
     public String printDone(TaskList list, int num) {
         return ("\t" + line + "\n\tNice! I've marked this task as done:\n\t  "
                 + list.getList().get(num - 1)
                 + "\n\t" + line);
     }
 
+    /**
+     * Shows task number is invalid
+     * @return response message
+     */
     public String printInvalidNumber() {
         return ("☹ OOPS!!! The task number is invalid.");
     }
 
+    /**
+     * Shows cannot store tasks
+     * @return response message
+     */
     public String errorWithFile() {
         return ("☹ OOPS!!! Cannot store tasks.");
     }
 
+    /**
+     * Shows a task is deleted.
+     *
+     * @param list task list
+     * @param num task number
+     * @return response message
+     */
     public String printDelete(TaskList list, int num) {
         return ("\t" + line + "\n\tNoted. I've removed this task:\n\t  "
                 + list.getList().get(num - 1)
@@ -93,26 +141,52 @@ public class Ui {
                 + "\n\t" + line);
     }
 
+    /**
+     * Shows description of a to-do cannot be empty
+     * @return response message
+     */
     public String printNoDescription() {
         return ("☹ OOPS!!! The description of a todo cannot be empty.");
     }
 
+    /**
+     * Shows user invalid input
+     * @return response message
+     */
     public String printNoDate() {
         return ("☹ OOPS!!! The description or date of a deadline cannot be empty.");
     }
 
+    /**
+     * Shows user invalid input
+     * @return response message
+     */
     public String printNoDateEvent() {
         return ("☹ OOPS!!! The description or date of an event cannot be empty.");
     }
 
+    /**
+     * Shows user invalid input
+     * @return response message
+     */
     public String printInvalidDate() {
         return ("☹ OOPS!!! The date must be valid and in the format of YYYY-MM-DD.");
     }
 
+    /**
+     * Shows user invalid input
+     * @return response message
+     */
     public String errorWithLoading() {
         return ("☹ OOPS!!! Your file cannot be loaded :-(");
     }
 
+    /**
+     * Shows the tasks found.
+     *
+     * @param task task list
+     * @return response message
+     */
     public String printFindTask(TaskList task) {
         String str;
         if (task.getList().size() > 0) {
@@ -132,10 +206,21 @@ public class Ui {
         return str;
     }
 
+    /**
+     * Shows user invalid input
+     * @return response message
+     */
     public String printInvalidKeyword() {
         return ("☹ OOPS!!! Please tell me a keyword!");
     }
 
+    /**
+     * Shows a task is being marked as high priority.
+     *
+     * @param list task list
+     * @param num task number
+     * @return response message
+     */
     public String printPrioritizeTask(TaskList list, int num) {
         return ("\t" + line + "\n\tNoted. I've prioritized this task:\n\t  "
                 + list.getList().get(num - 1)

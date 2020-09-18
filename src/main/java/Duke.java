@@ -1,12 +1,17 @@
 import java.io.IOException;
 
-public class Duke{
+/**
+ * Main class for running bot.
+ */
+public class Duke {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
-    // Application.launch will automatically call constructor with no para
+    /**
+     * Initialises a duke bot.
+     */
     public Duke() {
         ui = new Ui();
         storage = new Storage("data/tasks.txt");
@@ -18,17 +23,19 @@ public class Duke{
         }
     }
 
+    /**
+     * Getter for ui.
+     *
+     * @return ui
+     */
     public Ui getUi() {
         return ui;
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Takes in user response.
      */
     protected String getResponse(String input) {
-        // take in a user input string
-        // return a string
         String s;
         try {
             Command c = Parser.parse(input);

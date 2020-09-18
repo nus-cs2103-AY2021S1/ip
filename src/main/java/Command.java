@@ -8,6 +8,7 @@ public abstract class Command {
 
     /**
      * Creates a command.
+     *
      * @param str user input
      */
     public Command(String str) {

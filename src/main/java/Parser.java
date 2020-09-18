@@ -1,5 +1,15 @@
+/**
+ * Processes all user commands.
+ */
 public class Parser {
 
+    /**
+     * Returns corresponding commands given user input.
+     *
+     * @param str user input
+     * @return command object
+     * @throws DukeException exception for invalid user input
+     */
     public static Command parse(String str) throws DukeException {
         assert str != null : "command should not be null";
         String s = str.split(" ")[0];
@@ -19,7 +29,7 @@ public class Parser {
             return new EventCommand(str);
         } else if (s.equals("find")) {
             return new FindKeywordCommand(str);
-        }else if (s.equals("prioritize")) {
+        } else if (s.equals("prioritize")) {
             return new PrioritizeCommand(str);
         } else {
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");

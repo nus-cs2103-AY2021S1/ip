@@ -1,7 +1,10 @@
-import javafx.application.Platform;
-
 import java.io.IOException;
 
+import javafx.application.Platform;
+
+/**
+ * Represents a bye command to be executed.
+ */
 public class ByeCommand extends Command {
 
     ByeCommand(String str) {

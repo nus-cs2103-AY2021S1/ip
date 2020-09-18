@@ -1,8 +1,19 @@
+/**
+ * Represents a prioritise command.
+ */
 public class PrioritizeCommand extends Command {
     PrioritizeCommand(String str) {
         super(str);
     }
 
+    /**
+     * Executes the command.
+     *
+     * @param list task list
+     * @param ui ui object
+     * @param storage storage object
+     * @return
+     */
     public String execute(TaskList list, Ui ui, Storage storage) {
         String s;
         try {

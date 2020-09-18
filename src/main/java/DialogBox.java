@@ -1,8 +1,8 @@
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import java.io.IOException;
 import java.util.Collections;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
@@ -13,8 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
 /**
- * An example of a custom control using FXML.
- * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
+ * Represents a dialog box consisting of an ImageView to represent the speaker's face and a label
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
@@ -47,12 +46,26 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Creates dialog box for user.
+     *
+     * @param text user input
+     * @param img user profile picture
+     * @return
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         assert text != null : "text should not be null";
         assert img != null : "image should not be null";
         return new DialogBox(text, img);
     }
 
+    /**
+     * Creates dialog box for duke.
+     *
+     * @param text duke message
+     * @param img duke profile picture
+     * @return
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         assert text != null : "text should not be null";
         assert img != null : "image should not be null";

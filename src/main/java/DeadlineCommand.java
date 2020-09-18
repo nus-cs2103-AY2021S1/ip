@@ -8,10 +8,21 @@ import java.time.format.DateTimeParseException;
  */
 public class DeadlineCommand extends Command {
 
+    /**
+     * Creates a deadline command.
+     *
+     * @param str deadline command
+     */
     DeadlineCommand(String str) {
         super(str);
     }
 
+    /**
+     * Converts the date from user input to local date.
+     *
+     * @param time user input time
+     * @return local date
+     */
     public static String getLocalDate(String time) {
         LocalDate d = LocalDate.parse(time);
         return d.format(DateTimeFormatter.ofPattern("MMM d yyyy"));

@@ -1,6 +1,9 @@
 import java.io.IOException;
 
-public class FindKeywordCommand extends Command{
+/**
+ * Represents a find command.
+ */
+public class FindKeywordCommand extends Command {
     FindKeywordCommand(String str) {
         super(str);
     }
@@ -19,7 +22,7 @@ public class FindKeywordCommand extends Command{
         try {
             String keyword = str.split(" ")[1];
             for (Task task : list.getList()) {
-                if (task.getDes().contains(keyword)){
+                if (task.getDes().contains(keyword)) {
                     ls.addTask(task);
                 }
             }

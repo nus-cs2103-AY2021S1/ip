@@ -4,6 +4,11 @@
  */
 public class DeleteCommand extends Command {
 
+    /**
+     * Creates a delete command.
+     *
+     * @param str user input command
+     */
     DeleteCommand(String str) {
         super(str);
     }
