@@ -2,6 +2,7 @@ package duke.command;
 
 import java.util.List;
 import java.util.stream.IntStream;
+
 import duke.storage.DukeIOException;
 import duke.storage.Storage;
 import duke.task.Deadlines;
@@ -47,29 +48,29 @@ public class Command {
                 dukeResponse = bidFarewell();
                 break;
             case PRINT:
-                dukeResponse =  printList(tasks);
+                dukeResponse = printList(tasks);
                 break;
             case MARKTASKDONE:
-                dukeResponse =  markTaskDone(tasks, taskInfo);
+                dukeResponse = markTaskDone(tasks, taskInfo);
                 break;
             case HANDLETODO:
-                dukeResponse =  handleToDo(tasks, taskInfo);
+                dukeResponse = handleToDo(tasks, taskInfo);
                 break;
             case HANDLEDEADLINE:
-                dukeResponse =  handleDeadLine(tasks, taskInfo);
+                dukeResponse = handleDeadLine(tasks, taskInfo);
                 break;
             case HANDLEVENT:
-                dukeResponse =  handleEvent(tasks, taskInfo);
+                dukeResponse = handleEvent(tasks, taskInfo);
                 break;
             case FINDMATCHINGTASK:
                 dukeResponse = findMatchingTasks(tasks, taskInfo);
                 break;
             case DELETETASK:
-                dukeResponse =  tasks.deleteTask(taskInfo);
+                dukeResponse = tasks.deleteTask(taskInfo);
                 break;
             case DUPLICATES:
                 List<String> duplicateList = tasks.detectDuplicates();
-                dukeResponse =  findDuplicateTasks(duplicateList);
+                dukeResponse = findDuplicateTasks(duplicateList);
                 break;
             case REMOVEDUPLICATES:
                 dukeResponse = removeDuplicates(tasks);
@@ -305,15 +306,16 @@ public class Command {
         dukeResponse += "\n\n\t'help' : I will tell you the only human commands I know.";
         dukeResponse += "\n\n\t'list' : I will list you all the tasks you told me.";
         dukeResponse += "\n\n\t'todo (homework)' : I will add (homework) to the list.";
-        dukeResponse += "\n\n\t'deadline (homework) /by (2020-12-25 1600)' : I will " +
-            "add (homework) to the list with the (specified deadline)";
-        dukeResponse += "\n\n\t'event (Christmas) /at (2020-12-25 1600)' : I will " +
-            "add (Christmas) event to the list at the (specified time)";
+        dukeResponse += "\n\n\t'deadline (homework) /by (2020-12-25 1600)' : I will "
+            + "add (homework) to the list with the (specified deadline)";
+        dukeResponse += "\n\n\t'event (Christmas) /at (2020-12-25 1600)' : I will "
+            + "add (Christmas) event to the list at the (specified time)";
         dukeResponse += "\n\n\t'find book' : I will find any task that contains the word 'book'.";
         dukeResponse += "\n\n\t'delete 2' : I will delete task 2 from the list.";
         dukeResponse += "\n\n\t'done 3' : I will mark task 3 in the list as complete.";
         dukeResponse += "\n\n\t'duplicates' : I will list you all the duplicate tasks.";
-        dukeResponse += "\n\n\t'remove duplicates' : I will remove all duplicate tasks except the first copy of each task.";
+        dukeResponse += "\n\n\t'remove duplicates' : I will remove all duplicate "
+            + "tasks except the first copy of each task.";
         dukeResponse += "\n\n\t'clear please' : I will clear the tasks list for you.";
         dukeResponse += "\n\n\t'bye' : I will go away ... quietly :(";
         return dukeResponse;

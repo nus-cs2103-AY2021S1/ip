@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
+
 import duke.command.DukeIndexOutOfBoundsException;
 import duke.command.DukeInvalidCommandException;
 
@@ -123,14 +124,15 @@ public class TaskList {
                 String pattern = "\\b" + matchWords[j] + "\\b";
                 try {
                     Pattern p = Pattern.compile(pattern);
-                    assert p != null : "PatternSyntaxException not thrown," +
-                            " unknown exception occured without being caught.";
+                    assert p != null : "PatternSyntaxException not thrown,"
+                        + " unknown exception occured without being caught.";
                     Matcher m = p.matcher(matchTask.toString());
                     if (m.find()) {
                         matchList.add(matchTask);
                     }
                 } catch (PatternSyntaxException e) {
-                    throw new DukeInvalidCommandException("Sorry Poppins but I don't understand what I need to find :(");
+                    throw new DukeInvalidCommandException("Sorry Poppins "
+                        + "but I don't understand what I need to find :(");
                 }
             }
         });
@@ -152,7 +154,7 @@ public class TaskList {
         }
         duplicateList.sort(null);
         String taskAdded = "";
-        for(int i = 0; i < duplicateList.size(); i++) {
+        for (int i = 0; i < duplicateList.size(); i++) {
             String currentTask = duplicateList.get(i);
             if (!taskAdded.equalsIgnoreCase(currentTask)) {
                 taskAdded = currentTask;

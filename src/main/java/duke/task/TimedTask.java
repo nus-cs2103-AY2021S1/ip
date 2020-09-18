@@ -5,7 +5,7 @@ package duke.task;
  *
  * @author Alvin Chee
  */
-public abstract class TimedTask extends Task{
+public abstract class TimedTask extends Task {
 
     /**
      * Constructs a timed task

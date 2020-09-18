@@ -11,6 +11,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
 import duke.task.Deadlines;
 import duke.task.Events;
 import duke.task.Task;
@@ -26,7 +27,7 @@ import duke.task.ToDos;
  */
 public class Storage {
 
-    private enum dataFileColumn {
+    private enum DataFileColumn {
 
         TASKTYPE(0),
         DONESTATUS(1),
@@ -36,7 +37,7 @@ public class Storage {
         private static final int TOTALCOLUMNS = 4;
         private int index;
 
-        dataFileColumn(int index) {
+        DataFileColumn(int index) {
             this.index = index;
         }
 
@@ -97,7 +98,7 @@ public class Storage {
      * @throws DukeLoadFileException
      */
     private List<Task> addTaskToList(List<Task> taskList, char taskTypeChar, String doneStatus,
-                                        String taskInfo, String when) throws DukeLoadFileException{
+                                        String taskInfo, String when) throws DukeLoadFileException {
         assert taskTypeChar != '\0' : "taskTypeChar should not be null";
         switch (taskTypeChar) {
         case 'T' :
@@ -140,7 +141,7 @@ public class Storage {
                     return taskList;
                 } else {
                     String[] strArr = nextLine.split(":");
-                    assert strArr.length == 3 || strArr.length == 4: "Error in saving task information";
+                    assert strArr.length == 3 || strArr.length == 4 : "Error in saving task information";
                     String taskType = strArr[dataFileColumn.TASKTYPE.returnIndex()];
                     String doneStatus = strArr[dataFileColumn.DONESTATUS.returnIndex()].trim();
                     String taskInfo = strArr[dataFileColumn.TASKSTRING.returnIndex()].trim();
@@ -180,7 +181,8 @@ public class Storage {
             default :
                 break;
             }
-            String toWrite = taskType.returnTaskSymbol() + " : " + task.returnDoneStatus() + " : " + taskInfo.trim() + when;
+            String toWrite = taskType.returnTaskSymbol() + " : " + task.returnDoneStatus()
+                + " : " + taskInfo.trim() + when;
             bw.write(toWrite);
             bw.newLine();
         }

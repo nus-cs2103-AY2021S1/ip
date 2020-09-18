@@ -3,6 +3,7 @@ package duke;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
 import duke.ui.MainWindow;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

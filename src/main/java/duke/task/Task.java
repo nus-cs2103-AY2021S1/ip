@@ -61,7 +61,7 @@ public class Task {
 
     @Override
     public String toString() {
-        String status = done ? 	"[\u2713]" : "[\u274C]";
+        String status = done ? "[\u2713]" : "[\u274C]";
         return taskType + status + " " + taskInfo;
     }
 }
