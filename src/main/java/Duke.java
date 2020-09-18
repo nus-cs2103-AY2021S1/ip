@@ -1,6 +1,5 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.text.ParseException;
 
 /**
  * Duke, a Personal Assistant Chatbot that helps a person to keep track of various things.
