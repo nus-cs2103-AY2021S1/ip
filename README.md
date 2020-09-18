@@ -12,20 +12,35 @@ and it is a very useful educational project designed to help fresh software
 developer to horn their skills by slowing building the project and explore
 the different software engineering principle along the way.
 
-## Download and try the Project (Mainly for those new to git)
+* [1. Quick Start](#1-quick-start)
+   * [1.1 Run the project in intelliJ](#11-run-the-project-in-intellij)
+   * [1.2 Run the project in terminal](#12-run-the-project-in-terminal)
+* [2. Features and Usage](#2-features-and-usage)
+   * [2.1 Find the list of command: help](#21-find-the-list-of-command-help)
+   * [2.2 Save the task : save](#22-save-the-task--save)
+   * [2.3 Add a general ToDo task : todo](#23-add-a-general-todo-task--todo)
+   * [2.4 Add a Deadline task : deadline](#24-add-a-deadline-task--deadline)
+   * [2.5 Adding an Event : event](#25-adding-an-event--event)
+   * [2.6 Listing out all Tasks : list](#26-listing-out-all-tasks--list)
+   * [2.7 Marking a Task as done : done](#27-marking-a-task-as-done--done)
+   * [2.8 Delete the task : delete](#28-delete-the-task--delete)
+   * [2.9 Find a certain task: find](#29-find-a-certain-task-find)
+   * [2.10 Ending a session : bye](#210-ending-a-session--bye)
+* [3. Code Summary](#3-code-summary)
+* [4. Useful Resources](#4-useful-resources)
 
-1. Navigate to the [main page](https://github.com/BILLXYR/ip)
-2. Find the code download button.
-3. You can choose to use any of the three options
-4. Here i will explain more on the first option
-   1. open your terminal and set up your git account
-   2. use this command to clone the project down to your computer: git clone https://github.com/BILLXYR/ip.git
-   3. Then you can refer to the part below on how to open it with IntelliJ
+## 1. Quick Start
 
-## Setting up IntelliJ
+  * [1.1 Run the project in intelliJ](#11-run-the-project-in-intellij)
+  * [1.2 Run the project in terminal](#12-run-the-project-in-terminal)
+   
+   
+### 1.1 Run the project in intelliJ
 
 Prerequisites: JDK 11, update Intellij to the most recent version.
-
+  
+  * For those new to git, please check this out on how to download the project: [Download and try the Project](#download-and-try-the-project)
+  
 1. Open Intellij (if you are not in the welcome screen, click File > Close Project to close the existing project dialog first)
 
 2. Set up the correct JDK version, as follows:
@@ -46,51 +61,125 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
 6.Now you can type the command and press Enter to excute it.
 
 
-## Features and how to use them
 
-### **Find the list of command: help**
+*Tutorial on how to download the project for those new to git:*
+
+#### Download and try the Project
+
+1. Navigate to the [main page](https://github.com/BILLXYR/ip)
+2. Find the code download button. An example is shown here: 
+![CodeDownload](./docs/images/code.png)
+3. You can choose to use any of the three options
+4. Here i will explain more on the first option
+   1. open your terminal and set up your git account
+   2. use this command to clone the project down to your computer: git clone https://github.com/BILLXYR/ip.git
+
+
+### 1.2 Run the project in terminal
+
+1. Ensure that you have downloaded Java 11 in your computer. 
+
+2. Download the latest **Bill.jar** file from [here](https://github.com/BILLXYR/ip/releases/tag/v0.2)
+
+3. Navigate to any empty folder and place the downloaded file into that folder.
+
+4. Navigate your terminal directory to the folder that contains your **Bill.jar** file
+
+5. Type the following command to start the application: `java -jar Bill.jar`
+
+6. You should expect to see a Graphical User Interface(GUI) appear in a few second
+
+7. You should expect to see a window as shown below: 
+
+![GUI of BILL](./docs/Ui.png)
+
+8. You can enter the `help` command to find the list of commands you can use.
+
+
+
+## 2. Features and Usage
+
+   * [2.1 Find the list of command: help](#21-find-the-list-of-command-help)
+   * [2.2 Save the task : save](#22-save-the-task--save)
+   * [2.3 Add a general ToDo task : todo](#23-add-a-general-todo-task--todo)
+   * [2.4 Add a Deadline task : deadline](#24-add-a-deadline-task--deadline)
+   * [2.5 Adding an Event : event](#25-adding-an-event--event)
+   * [2.6 Listing out all Tasks : list](#26-listing-out-all-tasks--list)
+   * [2.7 Marking a Task as done : done](#27-marking-a-task-as-done--done)
+   * [2.8 Delete the task : delete](#28-delete-the-task--delete)
+   * [2.9 Find a certain task: find](#29-find-a-certain-task-find)
+   * [2.10 Ending a session : bye](#210-ending-a-session--bye)
+   
+### **2.1 Find the list of command: help**
 
 This feature allows users to find the list of command to use
 
 *Usage*: i want to add a task but i forgot how to use that, you can use help to help you
 
-*Format*: help
+*Format*: `help`
 
-*E.g*: help
+*Examples*: `help`
+
+*Expected Outcome*:
+
+![helpCommand](./docs/images/help.png)
 
 
-###  **Save the task : save**
+Navigate back to the feature list: [2. Features and Usage](#2-features-and-usage)
+
+
+###  **2.2 Save the task : save**
 
 This feature allows users to save the task after they have added them.
 
 *Usage*: i have add some tasks and i want to add them now.
 
-*Format*: save
+*Format*: `save`
 
-*E.g*: save
+*Examples*: `save`
+
+*Expected Outcome*:
+
+![saveCommand](./docs/images/save.png)
 
 
-### **Add a general ToDo task : todo**
+Navigate back to the feature list: [2. Features and Usage](#2-features-and-usage)
+
+
+### **2.3 Add a general ToDo task : todo**
 
 This feature allows users to add a ToDo task to our current list
 
 *Usage*: we want to add an ip ToDo task into our list
 
-*Format*: todo [newTask]
+*Format*: `todo [newTask]`
 
-*E.g*: todo ip
+*Examples*: `todo ip`
+
+*Expected Outcome*:
+
+![todoCommand](./docs/images/todo.png)
+
+Navigate back to the feature list: [2. Features and Usage](#2-features-and-usage)
 
 
-### **Add a Deadline task : deadline**
+
+### **2.4 Add a Deadline task : deadline**
 
 This feature allows users to add a task with deadline to our current list
 
 *Usage*: we want to add an ip task to our list and there is a deadline 
 for this task,eg: due on 2020 August 2, 7pm
 
-*Format*: deadline [newTask] /by [date] [time]
+*Format*: `deadline [newTask] /by DD/MM/YYYY HHmm`
 
-*E.g*: deadline ip /by 02/08/2020 1900
+*Examples*: `deadline ip /by 02/08/2020 1900`
+
+
+*Expected Outcome*:
+
+![deadlineCommand](./docs/images/deadline.png)
+
 
 **Note:**
 1. the date must be dd/mm/yyyy
@@ -98,17 +187,24 @@ for this task,eg: due on 2020 August 2, 7pm
 two digit, for example, 2 must be written as 02 instead of just 2.
 3. the time must be 4 digit, for example, 8:12am must be written as 0812 instead of 812
 
+Navigate back to the feature list: [2. Features and Usage](#2-features-and-usage)
 
-### **Adding an Event : event**
+
+### **2.5 Adding an Event : event**
 
 This feature allows users to add an event to our current list.
 
 *Usage*: we want to add an event to our list and there is a specific time for it.
 For example, it happens on 2020 August 2, 7pm
 
-*Format*: event [newTask] /at [date] [time]
+*Format*: `event [newTask] /at DD/MM/YYYY HHmm`
 
-*E.g*: event ip /at 02/08/2020 1900
+*Examples*: `event assignment /at 02/08/2020 1900`
+
+*Expected Outcome*:
+
+![eventCommand](./docs/images/event.png)
+
 
 **Note:**
 1. the date must be dd/mm/yyyy
@@ -117,20 +213,29 @@ two digits, for example, 2 must be written as 02 instead of just 2.
 3. the time must be 4 digits, for example, 8:12am must be written as 0812 instead of 812
 
 
+Navigate back to the feature list: [2. Features and Usage](#2-features-and-usage)
 
-### **Listing out all Tasks : list**
+
+
+### **2.6 Listing out all Tasks : list**
 
 This feature allows users to list out all the tasks added to the list in the order of the entry.
 
 *Usage*: we want to check all the tasks that we have added
 
-*Format*: list
+*Format*: `list`
 
-*E.g*: list
+*Examples*: `list`
+
+*Expected Outcome*:
+
+![listCommand](./docs/images/list.png)
+
+Navigate back to the feature list: [2. Features and Usage](#2-features-and-usage)
 
 
 
-### **Marking a Task as done : done**
+### **2.7 Marking a Task as done : done**
 
 This feature allows users to mark certain tasks they have done.
 
@@ -138,16 +243,24 @@ This feature allows users to mark certain tasks they have done.
 to make the task as done.
 
 
-*Format*: done [task index]
+*Format*: `done [task index]`
 
 we first use list to find the index of the task. For example, in this case, the index 
-for the ip task is taken as 5.
+for the ip task is taken as 2.
 
-*E.g*: done 5
+*Examples*: `done 2`
+
+
+*Expected Outcome*:
+
+![doneCommand](./docs/images/done.png)
+
+
+Navigate back to the feature list: [2. Features and Usage](#2-features-and-usage)
 
 
 
-### **Delete the task : delete**
+### **2.8 Delete the task : delete**
 
 This feature allows users to delete certain tasks.
 
@@ -155,34 +268,79 @@ This feature allows users to delete certain tasks.
 to delete the task.
 
 
-*Format*: delete [task index]
+*Format*: `delete [task index]`
 
 we first use list to find the index of the task. For example, in this case, the index 
-for the ip task is taken as 5.
+for the ip task is taken as 3.
 
-*E.g*: delete 5
+*Examples*: `delete 3`
 
 
+*Expected Outcome*:
 
-### **Find a certain task: find**
+![deleteCommand](./docs/images/delete.png)
+
+
+Navigate back to the feature list: [2. Features and Usage](#2-features-and-usage)
+
+
+### **2.9 Find a certain task: find**
 
 This feature allows users to find a certain task from the list and look at the detail.
 
 *Usage*: i want to find when is my ip due.
 
-*Format*: find [taskName]
+*Format*: `find [taskName]`
 
-*E.g*: find ip
+*Examples*: `find ip`
+
+*Expected Outcome*:
+
+![findCommand](./docs/images/find.png)
+
+
+Navigate back to the feature list: [2. Features and Usage](#2-features-and-usage)
 
 
 
-###  **Ending a session : bye**
+###  **2.10 Ending a session : bye**
 
 This feature allows users to quit the application after they have done what they want
 
 *Usage*: i have done adding my task and now i want to quit the application.
 
-*Format*: bye
+*Format*: `bye`
 
-*E.g*: bye
+*Examples*: `bye`
  
+*Expected Outcome*: Your application should be closed in 1 second. 
+
+
+Navigate back to the feature list: [2. Features and Usage](#2-features-and-usage)
+
+
+## 3. Code Summary
+
+
+Index | Command to Use | Format, examples |
+| ------------ | ------------ | ------------- |
+1 | Find the list of command | `help`, e.g.,`help` |
+2 | Save the task | `save`, e.g.,  `save` |
+3 | Add a general ToDo task | `todo [newTask]`, e.g., `todo ip` |                 
+4 | Add a Deadline task | `deadline [newTask] /by DD/MM/YYYY HHmm`, e.g, `deadline ip /by 02/08/2020 1900` |
+5 | Adding an Event | `event [newTask] /at DD/MM/YYYY HHmm`, e.g., `event assignment /at 02/08/2020 1900` |
+6 | Listing out all Tasks | `list`, e.g., `list` |
+7 | Marking a Task as done | `done [task index]`, e.g., `done 2` |
+8 | Delete the task | `delete [task index]`, e.g, `delete 3` |
+9 | Find a certain task | `find [taskName]`, e.g., `find ip` |
+10 | Ending a session | `bye`, e.g., `bye` |
+
+
+## 4. Useful Resources
+
+1. [CheckStyle Tutorial](https://se-education.org/guides/tutorials/checkstyle.html)
+2. [Text UI Testing Tutorial](https://se-education.org/guides/tutorials/textUiTesting.html)
+3. [Working with Jar files Tutorial](https://se-education.org/guides/tutorials/jar.html)
+4. [Gradle Tutorial](https://se-education.org/guides/tutorials/gradle.html)
+5. [JavaFX Tutorial](https://se-education.org/guides/tutorials/javaFx.html)
+
