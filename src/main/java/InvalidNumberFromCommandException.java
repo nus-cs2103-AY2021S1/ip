@@ -9,6 +9,7 @@ public class InvalidNumberFromCommandException extends DukeException {
      */
     @Override
     public String getMessage() {
-        return "     OOPS!!! The done command must be followed by a valid task number. :-(";
+        return Ui.LINE + "     OOPS!!! The done command must be followed by a valid task number. :-("
+                + Ui.LINE;
     }
 }

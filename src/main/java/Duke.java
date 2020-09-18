@@ -12,6 +12,8 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.time.DateTimeException;
+
 
 public class Duke extends Application{
 
@@ -33,6 +35,7 @@ public class Duke extends Application{
         ui = new Ui();
         storage = new Storage(filePath);
         tasks = new TaskList(storage.loadTasks());
+        System.out.println(ui.printGreetingMessage(storage.createResult));
     }
 
     // empty constructor
@@ -40,6 +43,7 @@ public class Duke extends Application{
         ui = new Ui();
         storage = new Storage("src/main/java/tasks.txt");
         tasks = new TaskList(storage.loadTasks());
+        System.out.println(ui.printGreetingMessage(storage.createResult));
     }
 
     @Override
@@ -124,7 +128,6 @@ public class Duke extends Application{
                 System.out.println(errorMessage);
             }
         }
-        Platform.exit();
     }
 
     /**
@@ -170,11 +173,20 @@ public class Duke extends Application{
         // return "Duke heard: " + input;
         try {
             Command c = Parser.interpret(input);
-            String output = c.execute(tasks, ui, storage);
-            return output;
+            return c.execute(tasks, ui, storage);
         } catch (DukeException e) {
             return e.getMessage();
+        } catch (DateTimeException e) {
+            return Ui.LINE + "OOPS!!! You have entered an invalid Date!\n" + e.getMessage() + Ui.LINE;
         }
+    }
+
+    public Storage getStorage() {
+        return this.storage;
+    }
+
+    public Ui getUi() {
+        return this.ui;
     }
 
     //public static void main(String[] args) {

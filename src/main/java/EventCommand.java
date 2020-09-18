@@ -35,7 +35,12 @@ public class EventCommand implements Command {
         } else if (commandArgs.length != 5) {
             throw new MissingDateTimeException();
         } else {
-            String subCommand = COMMAND.substring(5);
+            String subCommand = COMMAND;
+            if (COMMAND.substring(0,6).equals("event")) {
+                subCommand = subCommand.substring(5).trim();
+            } else {
+                subCommand = subCommand.substring(1).trim();
+            }
             String[] subCommandArgs = subCommand.trim().split("/at");
             Event e = new Event(subCommandArgs[0], subCommandArgs[1], false);
             taskList.addTask(e);

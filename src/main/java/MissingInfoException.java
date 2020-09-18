@@ -9,6 +9,6 @@ public class MissingInfoException extends DukeException {
      */
     @Override
     public String getMessage() {
-        return "     OOPS!!! Your command needs to be followed by a description. :-(";
+        return Ui.LINE + "     OOPS!!! Your command needs to be followed by a description. :-(" + Ui.LINE;
     }
 }

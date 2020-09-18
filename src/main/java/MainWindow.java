@@ -25,7 +25,7 @@ public class MainWindow extends AnchorPane {
 
     @FXML
     public void initialize() {
-        String intro = "hello!";
+        String intro = Ui.LINE + "     Hello! I'm Duke and I was designed by \n     Xuan Ming!" + Ui.LINE;
         DialogBox box = DialogBox.getDukeDialog(intro, dukeImage);
         dialogContainer.getChildren().add(box);
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -41,8 +41,8 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
-        String input = userInput.getText();
-        String response = duke.getResponse(input);
+        String input = Ui.LINE + userInput.getText() + Ui.LINE;
+        String response = duke.getResponse(userInput.getText());
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)

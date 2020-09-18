@@ -35,7 +35,12 @@ public class DeadlineCommand implements Command {
         } else if (commandArgs.length != 5) {
             throw new MissingDateTimeException();
         } else {
-            String subCommand = COMMAND.substring(9);
+            String subCommand = COMMAND;
+            if (COMMAND.substring(0,6).equals("deadline")) {
+                subCommand = subCommand.substring(8).trim();
+            } else {
+                subCommand = subCommand.substring(1).trim();
+            }
             String[] subCommandArgs = subCommand.split("/by");
             Deadline d = new Deadline(subCommandArgs[0], subCommandArgs[1], false);
             taskList.addTask(d);
