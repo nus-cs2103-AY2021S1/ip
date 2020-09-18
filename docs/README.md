@@ -13,7 +13,7 @@ Created by: Wen Jin
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `duke.jar` from [here](https://github.com/).
+1. Download the latest `stormy.jar` from [here](https://github.com/Nijnxw/ip/releases/tag/A-Release).
 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](Ui.png)
