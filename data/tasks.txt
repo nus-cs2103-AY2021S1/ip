@@ -1,0 +1,7 @@
+duke.task.Task list (Last updated Sep 18 2020, 22:56:14 PM):
+1. [T][✗] homewok
+2. [T][✗] test1
+3. [T][✗] test2
+4. [T][✗] test3
+5. [T][✗] test4
+6. [T][✗] test6
