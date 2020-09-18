@@ -3,6 +3,10 @@ package duke.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Encapsulates information for the Deadline type of <code>Task</code>,
+ * which has a task description, date, and status of done or undone.
+ */
 public class Deadline extends Task {
     protected LocalDate by;
 

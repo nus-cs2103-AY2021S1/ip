@@ -1,10 +1,12 @@
 package duke.task;
 
-import duke.task.Task;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Encapsulates information for the Event type of <code>Task</code>,
+ * which has a task description, date, and status of done or undone.
+ */
 public class Event extends Task {
     protected LocalDate at;
 

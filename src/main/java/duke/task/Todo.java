@@ -1,5 +1,9 @@
 package duke.task;
 
+/**
+ * Encapsulates information for the Todo type of <code>Task</code>,
+ * which only has a task description and status of done or undone.
+ */
 public class Todo extends Task {
     public Todo(String description) {
         super(description);
