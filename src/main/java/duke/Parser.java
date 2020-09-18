@@ -31,7 +31,8 @@ public class Parser {
         DELETE,
         BYE,
         LIST,
-        FIND
+        FIND,
+        HELP
     }
 
     /**
@@ -60,6 +61,8 @@ public class Parser {
             this.currentType = UserInput.LIST;
         } else if (words[0].equals("find")) {
             this.currentType = UserInput.FIND;
+        } else if (words[0].equals("help")) {
+            this.currentType = UserInput.HELP;
         }
         return words;
     }
@@ -187,6 +190,11 @@ public class Parser {
             this.isEnd = true;
             dukeOutput = this.userInteract.showBye();
             break;
+
+        case HELP:
+            dukeOutput = this.userInteract.showHelp();
+            break;
+
         default:
             throw new NoResponseException();
         }

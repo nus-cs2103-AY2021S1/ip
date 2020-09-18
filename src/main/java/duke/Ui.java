@@ -27,6 +27,7 @@ public class Ui {
         return "_____________________________________________\n"
                 + "     Hello! I'm Duke\n"
                 + "     What can I do for you?\n"
+                + "     Type help to get command menu\n"
                 + "_____________________________________________\n";
     }
 
@@ -127,6 +128,20 @@ public class Ui {
                 + "_____________________________________________";
         System.out.println(dukeOutput);
         return dukeOutput;
+    }
+
+    public String showHelp() {
+        String dukeOutput = "_____________________________________________\n"
+                + "1. todo + task name (eg: todo run)\n"
+                + "2. deadline + task name + \by + YYYY-MM-DD  (eg: deadline ip \by 202-09-18)\n"
+                + "3. event + task name + \\at + YYYY-MM-DD  (eg: deadline ip \\at 202-09-18)\n"
+                + "4. done + task index (eg: done 1)\n"
+                + "5. delete + task index (eg: delete 1)\n"
+                + "6. find + key word (eg: find ip)\n"
+                + "7. bye \n"
+                + "_____________________________________________";
+        return dukeOutput;
+
     }
 
 

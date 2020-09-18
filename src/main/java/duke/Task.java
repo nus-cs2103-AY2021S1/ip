@@ -49,7 +49,11 @@ public class Task {
                 + "____________________________________________________________";
         return doneString;
     }
-
+    /**
+     * Produces a string to represent the task in duke.txt
+     *
+     * @return String of task
+     */
     public String writeToFile() {
         String isDoneString = this.isDone ? " 1 @ " : " 0 @ ";
         return isDoneString + this.description;

@@ -36,7 +36,6 @@ public class MainWindow extends AnchorPane {
 
     public void setDuke(Duke d) throws IOException {
         duke = d;
-        d.storage.createFile();
         String welcome = d.ui.showWelcome();
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(welcome, dukeImage)

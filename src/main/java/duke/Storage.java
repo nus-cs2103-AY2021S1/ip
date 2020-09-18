@@ -36,51 +36,51 @@ public class Storage {
     public TaskList load() {
         TaskList tasks = new TaskList(new ArrayList<Task>());
         try {
-            File file = new File("data/duke.txt");
-            Scanner sc = new Scanner(file);
-            while (sc.hasNext()) {
-                String previouTaskString = sc.nextLine();
-                String[] words = previouTaskString.split(" @ ", 0);
-                Task previouTask = null;
-                if (words[0].equals("D")) {
-                    previouTask = new Deadline(words[2], words[3]);
-                    tasks.add(previouTask);
-                } else if (words[0].equals("T")) {
-                    previouTask = new ToDo(words[2]);
-                    tasks.add(previouTask);
-                } else if (words[0].equals("E")) {
-                    previouTask = new Event(words[2], words[3]);
-                    tasks.add(previouTask);
-                }
-                if (words[1].equals("1")) {
-                    previouTask.setIsDone();
-                }
+            File file = new File(this.pathName);
+            File dukeSave = new File(this.pathName + this.fileName);
+            if (!file.exists()) {
+                file.mkdirs();
+                dukeSave.createNewFile();
+            } else if (dukeSave.exists()) {
+                this.addPreviousTask(file, tasks);
+            } else {
+                dukeSave.createNewFile();
             }
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            e.toString();
+        } catch (IOException e) {
+            e.toString();
         }
         return tasks;
     }
 
     /**
-     * Creates a duke.txt under data directory if the file does not exist at the first place, else load the content.
+     * Decodes the tasks saved in the file and store them into a TaskList
+     * @param file The file to read
+     * @param tasks The TaskList which store the tasks
      *
-     * @throws IOException Exception occurs when the file is not found
+     * @throws FileNotFoundException Exception occurs when the file is not found
      */
-    public void createFile() throws IOException {
-        File file = new File(this.pathName);
-        File dukeSave = new File(this.pathName + this.fileName);
-        if (!file.exists()) {
-            file.mkdirs();
-            dukeSave.createNewFile();
+    public void addPreviousTask(File file, TaskList tasks) throws FileNotFoundException {
+        Scanner sc = new Scanner(file);
+        while (sc.hasNext()) {
+            String previouTaskString = sc.nextLine();
+            String[] words = previouTaskString.split(" @ ", 0);
+            Task previouTask = null;
+            if (words[0].equals("D")) {
+                previouTask = new Deadline(words[2], words[3]);
+                tasks.add(previouTask);
+            } else if (words[0].equals("T")) {
+                previouTask = new ToDo(words[2]);
+                tasks.add(previouTask);
+            } else if (words[0].equals("E")) {
+                previouTask = new Event(words[2], words[3]);
+                tasks.add(previouTask);
+            }
+            if (words[1].equals("1")) {
+                previouTask.setIsDone();
+            }
         }
-
-        if (dukeSave.exists()) {
-            this.load();
-        } else {
-            dukeSave.createNewFile();
-        }
-
     }
 
     /**
