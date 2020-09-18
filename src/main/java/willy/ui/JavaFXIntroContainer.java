@@ -13,7 +13,7 @@ import javafx.scene.shape.Circle;
 /**
  * Responsible for Willy Greetings Section
  */
-public class JAVAFXIntroContainer {
+public class JavaFXIntroContainer {
 
     private static String introGUI = " __       ___        __\n"
             + " \\  \\    /    \\     /  /\n"

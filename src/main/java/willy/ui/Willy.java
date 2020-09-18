@@ -70,13 +70,13 @@ public class Willy extends Application {
         Button enterButton = new Button("Enter");
         Button clearButton = new Button("Clear");
         TextField inputField = new TextField();
-        JAVAFXInteractionBox interactionBox = new JAVAFXInteractionBox();
+        JavaFXInteractionBox interactionBox = new JavaFXInteractionBox();
 
         enterButton.setOnAction(action -> {
             String message = inputField.getText();
-            JAVAFXInteractionBox.userInput.setText(message + "\t   ");
+            JavaFXInteractionBox.userInput.setText(message + "\t   ");
             inputField.clear();
-            JAVAFXInteractionBox.botResponse.setText(parser.parseCommand(message, true)); // Returns Response
+            JavaFXInteractionBox.botResponse.setText(parser.parseCommand(message, true)); // Returns Response
             if (message.equals(Willy.getLastGreeting())) {
                 exit();
             }
@@ -87,9 +87,9 @@ public class Willy extends Application {
         inputField.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
                 String message = inputField.getText();
-                JAVAFXInteractionBox.userInput.setText(message + "\t   ");
+                JavaFXInteractionBox.userInput.setText(message + "\t   ");
                 inputField.clear();
-                JAVAFXInteractionBox.botResponse.setText(parser.parseCommand(message, true)); // Returns Response
+                JavaFXInteractionBox.botResponse.setText(parser.parseCommand(message, true)); // Returns Response
                 if (message.equals(Willy.getLastGreeting())) {
                     exit();
                 }
@@ -102,9 +102,9 @@ public class Willy extends Application {
 
         // Combine everything together
         VBox ui = new VBox(); // Positions components in a vertical column
-        ui.getChildren().addAll(JAVAFXIntroContainer.createIntroContainer(),
+        ui.getChildren().addAll(JavaFXIntroContainer.createIntroContainer(),
                 interactionBox.interactionBoxCreator(),
-                JAVAFXInputContainer.inputContainerCreator(inputField, enterButton, clearButton));
+                JavaFXInputContainer.inputContainerCreator(inputField, enterButton, clearButton));
 
         StackPane layout = new StackPane();
         layout.getChildren().addAll(ui);

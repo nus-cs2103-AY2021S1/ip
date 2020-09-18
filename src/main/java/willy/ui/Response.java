@@ -1,5 +1,8 @@
 package willy.ui;
 
+/**
+ * Responses that the bot is capable of.
+ */
 public enum Response {
     INCOMPLETE_INFO {
         @Override

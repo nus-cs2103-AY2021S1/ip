@@ -4,27 +4,29 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
-import willy.command.Parser;
 
 /**
- *     // Put together the interactionBox which consist of the displaying of user inputs and bot's response
+ * In charge of creating the interactionBox which consist of the displaying of user inputs and bot's response.
  */
-public class JAVAFXInteractionBox {
+public class JavaFXInteractionBox {
     public static Label userInput;
     public static Text botResponse;
 
-    JAVAFXInteractionBox() {
+    public JavaFXInteractionBox() {
         this.userInput = new Label();
         this.botResponse = new Text(provideHelp());
     }
 
+    /**
+     * Produce the formats of the various commands available.
+     * @return Summary of the command formats in String form.
+     */
     public static String provideHelp() {
         String commands = "Commands:" + "\n" + "1. todo [TASK]"
                 + "\n" + "2. deadline [TASK] /by [DATE] [TIME]"
@@ -36,6 +38,10 @@ public class JAVAFXInteractionBox {
         return commands;
     }
 
+    /**
+     * Creates the interaction box which consist of user inputs and bot's response.
+     * @return A VBox representing an interaction box.
+     */
     public VBox interactionBoxCreator() {
 
         Rectangle userInputContainer = new Rectangle(330, 40);

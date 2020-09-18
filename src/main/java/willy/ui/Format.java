@@ -1,5 +1,8 @@
 package willy.ui;
 
+/**
+ * States the format of how each command should be written
+ */
 public enum Format {
     TODO {
         @Override

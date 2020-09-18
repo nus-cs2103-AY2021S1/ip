@@ -161,8 +161,8 @@ public class Parser {
     /**
      * Interpret the message and carry out an action.
      *
-     * @param message Instructions that the user wants the bot process and record.
-     * @return
+     * @param message Instructions that the user wants the bot to process and record.
+     * @return Bot's response in String form.
      */
     public String parseCommand(String message, boolean isOnJavaFX) {
         String response = "";
