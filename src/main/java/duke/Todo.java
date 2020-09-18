@@ -9,10 +9,6 @@ public class Todo extends Task {
         super(desc);
     }
 
-    public Todo(String desc, String rawStartAt, String rawEndAt) {
-        super(desc);
-    }
-
     @Override
     public String toString() {
         return "[T]" + super.toString();

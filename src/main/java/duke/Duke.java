@@ -8,7 +8,6 @@ package duke;
  * The main driver of the program
  */
 public class Duke {
-    private final TaskList taskList;
     private final LogicController logicController;
 
     /**
@@ -18,6 +17,7 @@ public class Duke {
      * @param filename the name of the data file
      */
     public Duke(String filename) {
+        TaskList taskList;
         if (filename.isEmpty()) {
             taskList = new TaskList();
         } else {

@@ -71,6 +71,7 @@ class LogicControllerTest {
         Assertions.assertTrue(response.contains("☹ OOPS!!! I'm sorry, but I don't know what that means :-("));
     }
 
+    @Test
     public void testRunAll1() throws IOException {
         ClassLoader classLoader = getClass().getClassLoader();
         String input = Files.readString(Path.of(classLoader.getResource("file/" + "input1.txt").getFile()));

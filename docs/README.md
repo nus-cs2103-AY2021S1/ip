@@ -3,7 +3,7 @@
 ## Features 
 The DukeBot can help you manage your tasks conveniently. There are 3 tasks for you to choose from:
 * Deadline (by a time)
-* Event (at a time or can happen in a period of time)
+* Event (at a time or can happen in a period)
 * Todo
 
 You can also list all the task you are having, mark them as done or delete them. 
@@ -35,7 +35,7 @@ Now you have 2 tasks in the list.
 ```
 
 ### `event <description> /between <time> and <time>` 
-Add an event that will happen at in a period of time
+Add an event that will happen at in a period
 
 Example of usage: 
 `event Roland Garros /between 09/06/2019 and 09/08/2019`

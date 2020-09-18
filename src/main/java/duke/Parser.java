@@ -6,6 +6,7 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Queue;
 
 /**
@@ -25,7 +26,7 @@ public class Parser {
             try {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern(it);
                 return LocalDate.parse(input, formatter);
-            } catch (DateTimeParseException e) {
+            } catch (DateTimeParseException ignored) {
 
             }
         }
@@ -87,7 +88,7 @@ public class Parser {
      * @return a parsed task of 3 types Event, Todo or Deadline
      */
     public static Task parseTask(String input) {
-        input.trim();
+        input = input.trim();
         try {
             if (input.startsWith("todo")) {
                 return parseTodo(input.substring(4));
@@ -112,36 +113,40 @@ public class Parser {
         List<Task> tasks = new ArrayList<>();
         Queue<String> data = new LinkedList<>(extData);
         while (!data.isEmpty()) {
-            String type = data.poll();
-            String desc = data.poll();
-            int status = Integer.parseInt(data.poll());
-            switch (type) {
-            case "todo":
-                tasks.add(new Todo(desc));
-                break;
-            case "deadline":
-                String by = data.poll();
-                tasks.add(new Deadline(desc, by));
-                break;
-            case "event":
-                String at = data.poll();
-                if (!data.isEmpty()) {
-                    try {
-                        LocalDate date = Parser.parseDate(data.peek());
-                    } catch (IllegalArgumentException e) {
-                        tasks.add(new Event(desc, at));
+            try {
+                String type = data.poll();
+                String desc = data.poll();
+                int status = Integer.parseInt(Objects.requireNonNull(data.poll()));
+                switch (type) {
+                case "todo":
+                    tasks.add(new Todo(desc));
+                    break;
+                case "deadline":
+                    String by = data.poll();
+                    tasks.add(new Deadline(desc, by));
+                    break;
+                case "event":
+                    String at = data.poll();
+                    if (!data.isEmpty()) {
+                        try {
+                            Parser.parseDate(data.peek());
+                        } catch (IllegalArgumentException e) {
+                            tasks.add(new Event(desc, at));
+                            break;
+                        }
+                        tasks.add(new Event(desc, at, data.poll()));
                         break;
                     }
-                    tasks.add(new Event(desc, at, data.poll()));
+                    tasks.add(new Event(desc, at));
                     break;
+                default:
+                    throw new IllegalStateException();
                 }
-                tasks.add(new Event(desc, at));
-                break;
-            default:
+                if (status == 1) {
+                    tasks.get(tasks.size() - 1).setDone();
+                }
+            } catch (IllegalStateException | IllegalArgumentException | NullPointerException e) {
                 throw new IllegalStateException("The data file is corrupted");
-            }
-            if (status == 1) {
-                tasks.get(tasks.size() - 1).setDone();
             }
         }
         return tasks;

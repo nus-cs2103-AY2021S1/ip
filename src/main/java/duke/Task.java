@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
  * An abstract class to be inherited by more specific type of event
  */
 public abstract class Task {
-    protected String desc;
+    protected final String desc;
     protected boolean isDone;
 
     /**

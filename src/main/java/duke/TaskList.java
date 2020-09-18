@@ -2,21 +2,20 @@ package duke;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Manage list of all tasks
  */
 public class TaskList {
     private final List<Task> tasks;
-    private final Optional<Storage> storage;
+    private final Storage storage;
 
     /**
      * Constructor for TaskList, do storage initialization
      */
     public TaskList(String filename) {
-        storage = Optional.of(new Storage(filename));
-        tasks = storage.get().load();
+        storage = new Storage(filename);
+        tasks = storage.load();
     }
 
     /**
@@ -24,15 +23,15 @@ public class TaskList {
      * Used for testing only
      */
     public TaskList() {
-        storage = Optional.empty();
+        storage = null;
         tasks = new ArrayList<>();
     }
 
     private void saveToDisk() {
-        if (storage.isEmpty()) {
+        if (storage == null) {
             return;
         }
-        storage.get().write(tasks);
+        storage.write(tasks);
     }
 
     /**

@@ -27,8 +27,7 @@ class DeadlineTest {
 
     @Test
     void testToString4() {
-        Exception exception = Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            new Deadline("sample", "20/20/2020");
-        });
+        Assertions.assertThrows(IllegalArgumentException.class, () -> new Deadline("sample",
+            "20/20/2020"));
     }
 }
