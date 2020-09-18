@@ -42,7 +42,10 @@ Some example commands you can try:
 >   e.g. in `todo DESCRIPTION`, `DESCRIPTION` is a parameter which can be used as `todo eat fried chicken`.
 >
 > * `DATE` parameter must be provided in the following format : `YYYY-MM-DD` 
->   eg. 2020-02-02
+>   e.g. 2020-02-02
+> * Items with `...` after them can be used multiple times including one time.
+    e.g. `delete NUMBER...` can be used as   (i.e. 3 times), `delete 3, 5, 1`
+>
 
 ### Adding new tasks : `todo`
 Adds a new task to the current list.
@@ -96,9 +99,9 @@ Now you have 3 tasks in your list.
 ```
 
 ### Deleting tasks : `delete`
-Deletes a task from the current list.
+Deletes a task(or tasks) from the current list.
 
-Format : `delete NUMBER`
+Format : `delete NUMBER...`
 
 Example of usage :
 ```
@@ -113,16 +116,16 @@ Now you have 2 tasks in your list.
 ```
 
 ### Marking tasks as done : `done`
-Marks a task from the current list as done.
+Marks a task(or tasks) from the current list as done.
 
-Format : `done NUMBER`
+Format : `done NUMBER...`
 
 Example of usage :
 ```
 done 1
 ```
 
-Expected outcome : 
+Expected outcome :
 ```
 The following task has been successfully marked as done.
 -> [T][V] eat fried chicken
