@@ -17,27 +17,39 @@ public class Parser {
     }
 
     /**
+     * Parses the input string into an array of strings split by a whitespace.
+     *
+     * @param input User input.
+     * @return String array.
+     */
+    public String[] parseInput(String input) {
+        return input.split(" ");
+    }
+
+    /**
      * Takes in input by user from GUI and return Duke output.
      *
      * @param input String input by user.
      * @return String output processed by Duke.
      */
     public String readGuiInput(String input) {
-        if (input.strip().equals(Keyword.LIST.label)) {
+        String[] parsed = parseInput(input);
+        String command = parsed[0];
+        if (command.equals(Keyword.LIST.label)) {
             return taskLists.showTaskListForGui();
-        } else if (input.contains(Keyword.DONE.label)) {
+        } else if (command.equals(Keyword.DONE.label)) {
             return taskLists.completeTaskForGui(input);
-        } else if (input.contains(Keyword.DELETE.label)) {
+        } else if (command.equals(Keyword.DELETE.label)) {
             return taskLists.deleteTaskForGui(input);
-        } else if (input.contains(Keyword.TODO.label)) {
+        } else if (command.equals(Keyword.TODO.label)) {
             return taskLists.addToDoForGui(input);
-        } else if (input.contains(Keyword.DEADLINE.label)) {
+        } else if (command.equals(Keyword.DEADLINE.label)) {
             return taskLists.addDeadlineForGui(input);
-        } else if (input.contains(Keyword.EVENT.label)) {
+        } else if (command.equals(Keyword.EVENT.label)) {
             return taskLists.addEventForGui(input);
-        } else if (input.contains(Keyword.FIND.label)) {
+        } else if (command.equals(Keyword.FIND.label)) {
             return taskLists.findForGui(input);
-        } else if (input.strip().equals(Keyword.SORT.label)) {
+        } else if (command.equals(Keyword.SORT.label)) {
             return taskLists.sortByTasksForGui();
         } else {
             return INVALID_INPUT;

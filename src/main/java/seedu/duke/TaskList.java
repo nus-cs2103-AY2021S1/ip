@@ -173,8 +173,8 @@ public class TaskList {
     public String addToDoForGui(String userInput) {
         try {
             checkForItem(userInput.substring(4), Keyword.TODO.label); //Length of "todo"
-            String[] splitUserInput = userInput.split(" ");
-            String task = splitUserInput[1];
+            int startIndex = userInput.indexOf(" ");
+            String task = userInput.substring(startIndex);
             String info = ADD_TASK;
             Todo newToDo = new Todo(task);
             Storage.addTask(newToDo.getStorageString(TODO_SYMBOL));
@@ -198,20 +198,20 @@ public class TaskList {
      */
     public String addDeadlineForGui(String userInput) {
         try {
-            checkForItem(userInput.substring(8), Keyword.DEADLINE.label); //Length of Event
+            checkForItem(userInput.substring(8), Keyword.DEADLINE.label); //Length of "deadline"
             boolean isDividerFound = checkForDivider(userInput.substring(8));
             if (!isDividerFound) {
                 return MISSING_DIVIDER;
             }
-            String[] splitUserInput = userInput.split(" ");
-            String task = splitUserInput[1];
+            int dateIndex = userInput.indexOf("/");
+            String task = userInput.substring(8, dateIndex).strip();
             if (task.contains("/")) {
                 return INVALID_FORMAT;
             }
             if (task.strip().equals("")) {
                 return MISSING_INFO;
             }
-            String time = splitUserInput[2].substring(1);
+            String time = userInput.substring(dateIndex + 1);
             String info = ADD_TASK;
             Deadline newDeadline = new Deadline(task, time);
             String formatDate = newDeadline.getFormattedDate();
@@ -240,20 +240,20 @@ public class TaskList {
      */
     public String addEventForGui(String userInput) {
         try {
-            checkForItem(userInput.substring(5), Keyword.EVENT.label); //Length of Event
+            checkForItem(userInput.substring(5), Keyword.DEADLINE.label); //Length of "event"
             boolean isDividerFound = checkForDivider(userInput.substring(5));
             if (!isDividerFound) {
                 return MISSING_DIVIDER;
             }
-            String[] splitUserInput = userInput.split(" ");
-            String task = splitUserInput[1];
+            int dateIndex = userInput.indexOf("/");
+            String task = userInput.substring(5, dateIndex).strip();
             if (task.contains("/")) {
                 return INVALID_FORMAT;
             }
             if (task.strip().equals("")) {
                 return MISSING_INFO;
             }
-            String time = splitUserInput[2].substring(1);
+            String time = userInput.substring(dateIndex + 1);
             String info = ADD_TASK;
             Event newEvent = new Event(task, time);
             String formatDate = newEvent.getFormattedDate();
@@ -287,7 +287,7 @@ public class TaskList {
             ArrayList<Task> keywordInTasks = new ArrayList<>();
             for (int i = 0; i < taskLists.size(); i++) {
                 Task current = taskLists.get(i);
-                if (current.toString().contains(keyword)) {
+                if (current.getTask().contains(keyword)) {
                     keywordInTasks.add(current);
                 }
             }
