@@ -35,8 +35,10 @@ public class Ui {
         toReturn += "To delete your tasks - delete {task number} \n";
         toReturn += "To find certain tasks - find {keyword} \n";
         toReturn += "To add a todo item to your list of tasks - todo {task} \n";
-        toReturn += "To add an event item to your list of tasks - event {event details} /at {date/event} \n";
-        toReturn += "To add a todo item to your list of tasks - deadline {deadline details} /by {date} \n";
+        toReturn += "To add an event item to your list of tasks - event {event details}" +
+                " /at {date/event} /repeat {frequency}\n";
+        toReturn += "To add a todo item to your list of tasks - deadline {deadline details}" +
+                " /by {date} /repeat {frequency}\n";
         toReturn = toReturn + showLine();
         return toReturn;
     }

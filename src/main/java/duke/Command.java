@@ -32,11 +32,18 @@ public class Command {
      * @param ui the user interface object.
      */
     public String execute(TaskList taskList, Ui ui) throws DukeException {
-        assert taskList != null & ui != null : "taskList and ui should not be null!";
+        assert taskList != null : "taskList cannot be null";
+        assert ui != null : "ui should not be null";
+        System.out.println(taskList);
+        System.out.println("task refer to: " + task);
         switch (action) {
+        case "help":
+            return ui.showWelcomeMessage();
         case "bye":
             return ui.showEnd();
         case "list":
+            System.out.println("in list debug");
+            System.out.println(taskList.toString());
             return ui.showList(taskList.getList());
         case "done":
             String[] split = task.split("done ");
@@ -55,6 +62,10 @@ public class Command {
         case "event":
             return taskList.addEvent(task) + ui.showAdded();
         case "find":
+            String[] splits = task.split("find ");
+            if (splits.length < 2) {
+                return ui.showInvalidCommand();
+            }
             String toFind = task.split("find ")[1];
             ArrayList<Task> list = taskList.getList();
             ArrayList<Task> filtered = new ArrayList<>();

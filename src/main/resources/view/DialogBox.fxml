@@ -13,7 +13,7 @@
         <Label fx:id="dialog" text="Label" wrapText="true" minHeight="-Infinity" stylesheets="@../css/stylesheet.css"/>
         <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true">
         <effect>
-            <DropShadow />
+            <DropShadow/>
         </effect>
         </ImageView>
     </children>

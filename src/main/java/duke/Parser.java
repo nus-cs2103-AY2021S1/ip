@@ -31,6 +31,8 @@ public class Parser {
             return new Command(line, "list");
         } else if (line.indexOf("find") == 0) {
             return new Command(line, "find");
+        } else if (line.indexOf("help") == 0) {
+            return new Command(line, "help");
         } else {
             return new Command(line, "invalid");
         }

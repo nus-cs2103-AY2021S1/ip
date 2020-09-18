@@ -49,7 +49,6 @@ public class TaskList {
                 if (taskNumber - 1 >= todo.size() || taskNumber - 1 < 0 || todo.size() == 0) {
                     throw new DukeException("Invalid task number");
                 } else {
-                    System.out.println("actually deleting");
                     int size = todo.size() - 1;
                     toReturn += "Noted. I've removed this task: \n"
                             + todo.get(taskNumber - 1) + "\n" + "Now you have " + size + " task in the list \n";
@@ -80,7 +79,6 @@ public class TaskList {
         boolean isRepetitive = splits.length == 4;
         String toReturn = Ui.showLine();
         if (splits.length > 2) {
-            System.out.println(splits[3]);
             Event task = isRepetitive
                             ? new Event(splits[1], splits[2], splits[3])
                             : new Event(splits[1], splits[2]);
@@ -136,6 +134,7 @@ public class TaskList {
      * @throws DukeInvalidTaskException task given is invalid
      */
     public String addToDo (String line) throws DukeInvalidTaskException {
+        System.out.println("tasklist todo line refers to " + line);
         String[] splits = line.split("todo ");
         String toReturn = Ui.showLine();
         if (splits.length > 1) {
@@ -181,5 +180,24 @@ public class TaskList {
 
     public ArrayList<Task> getList() {
         return this.todo;
+    }
+
+    /**
+     * String representation of the list
+     * @return task list
+     */
+    @Override
+    public String toString () {
+        assert todo.size() >= 0 : "list size should not be negative";
+        String toReturn = "";
+        if (todo.size() == 0) {
+            toReturn += "you do not have any tasks yet";
+        } else {
+            for (int i = 0; i < todo.size(); i++) {
+                int number = i + 1;
+                toReturn += " " + number + "." + todo.get(i) + "\n";
+            }
+        }
+        return toReturn;
     }
 }

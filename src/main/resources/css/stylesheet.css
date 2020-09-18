@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'myDefaultFont', serif;
-    src: url("../fonts/static/EBGaramond-SemiBoldItalic.ttf");
+    src: url("fonts/static/EBGaramond-SemiBoldItalic.ttf");
 }
 
 .scroll-pane > .viewport {

@@ -1,6 +1,7 @@
 package duke;
 
 import java.io.FileNotFoundException;
+import java.nio.channels.FileLockInterruptionException;
 
 import duke.exception.DukeException;
 
@@ -9,7 +10,10 @@ import duke.exception.DukeException;
  *
  */
 public class Duke {
-    private Storage storage = new Storage("./src/main/java/data/duke.txt");
+    private final static String FILE_PATH = System.getProperty("user.dir") + "\\data\\duke.txt";
+    private final static String DATA_PATH = System.getProperty("user.dir") + "\\data";
+
+    private Storage storage = new Storage(FILE_PATH, DATA_PATH);
     private Ui ui = new Ui();
     private TaskList taskList;
     private Parser parser = new Parser();
@@ -18,6 +22,7 @@ public class Duke {
      * Initializes a Duke object
      */
     public Duke() {
+        System.out.println(FILE_PATH);
         try {
             taskList = new TaskList(storage);
         } catch (DukeException err) {

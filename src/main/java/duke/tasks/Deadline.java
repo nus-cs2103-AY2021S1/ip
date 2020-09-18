@@ -62,7 +62,6 @@ public class Deadline extends Task {
         setIsRepetitive();
         if (!date.equals(null) && !date.equals(" ")) {
             this.date = date;
-            System.out.println(date);
             try {
                 super.dateTime = LocalDate.parse(date);
             } catch (DateTimeParseException err) {

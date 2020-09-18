@@ -18,7 +18,7 @@ import duke.tasks.Todo;
  */
 
 public class Storage {
-    private final File dataFile;
+    protected File dataFile;
     @SuppressWarnings({"checkstyle:AbbreviationAsWordInName", "CheckStyle"})
     private final String filePath;
 
@@ -27,11 +27,15 @@ public class Storage {
      *
      * @param filePath String representing the filepath to load the file
      */
-    public Storage(String filePath) {
+    public Storage(String filePath, String dataPath) {
         this.filePath = filePath;
         dataFile = new File(filePath);
+        System.out.println(dataFile.exists());
         try {
-            if (dataFile.createNewFile()) {
+            if (dataFile.exists() == false) {
+                File createPath = new File(dataPath);
+                createPath.mkdir();
+                dataFile.createNewFile();
                 System.out.println("data file has been created");
             }
         } catch (IOException err) {
@@ -140,9 +144,7 @@ public class Storage {
     private String identifyTask(Task currentTask) throws DukeException {
         String done = currentTask.isDone() ? "1" : "0";
         Boolean isRepetitive = currentTask.getIsRepetitive();
-        System.out.println("is repetitive? " + isRepetitive);
         String frequency = isRepetitive ? currentTask.getFrequency() : "";
-        System.out.println("frequency is: " + frequency);
         if (currentTask instanceof Event) {
             return "E | " + done + " | " + currentTask.getTaskName() + " | "
                     + ((Event) currentTask).getDate() + " | " + frequency + "\n";

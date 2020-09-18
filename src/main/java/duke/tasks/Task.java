@@ -86,15 +86,11 @@ public class Task {
      */
     public void updateDate() {
         assert dateTime != null : "dateTime should not be null!";
-        System.out.println("update date");
-        System.out.println(dateTime == null);
         switch (repeatedFrequency) {
         case DAILY:
-            System.out.println(dateTime.toString());
             dateTime = dateTime.plusDays(1);
             break;
         case WEEKLY:
-            System.out.println(dateTime.toString());
             dateTime = dateTime.plusWeeks(1);
             break;
         case MONTHLY:
@@ -121,11 +117,6 @@ public class Task {
         String finished = this.isDone ? "✓" : "✗";
         String toReturn = "[" + finished + "]" + taskName;
         return toReturn;
-    }
-
-    private Frequency evaluateFrequency(String frequency) {
-        return translateToFrequency(frequency);
-
     }
 
     /**
