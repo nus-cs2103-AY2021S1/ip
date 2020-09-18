@@ -1,8 +1,19 @@
-# IncrediBot
+<h1 align="center">IncrediBot</h1>
+
+<p align="center">
+    <a href="https://github.com/keanecjy/ip/actions">
+        <img src="https://github.com/keanecjy/ip/workflows/Java%20CI/badge.svg" alt="CI status"/>
+    </a>
+</p>
 
 <p align="center"><img src="docs/Ui.png" width="100%"/></p>
 
 Welcome to IncrediBot, a task manager app which manages your todos, events and deadlines!
+
+## About IncrediBot
+
+This application was written for CS2103T Software Engineering as part of its Individual Project. In this project, we
+are expected to learn more about SE principles and practices and apply them on a medium-sized Team Project.
 
 ## Features
 
@@ -34,7 +45,7 @@ work deadlines!
 ### Side features
  - Fully responsive UI which supports full-screen usage
  - Prompts displayed whenever you input a wrong command
- - Prevents addition of duplicate tasks - Duplicate tasks are tasks created on the same day with the same description
+ - Prevents addition of duplicate tasks
  - Accepts case-insensitive commands *e.g.* DeadLine
  - Compatible with Windows, MacOS and Linux
  
