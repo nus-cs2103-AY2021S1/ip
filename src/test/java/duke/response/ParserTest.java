@@ -24,6 +24,9 @@ import duke.task.Event;
 import duke.task.TaskList;
 import duke.task.Todo;
 
+/**
+ * Represents a test class for Parser.
+ */
 public class ParserTest {
     public static final String VALID_TODO = "todo task1";
     public static final String INVALID_TODO = "todo";

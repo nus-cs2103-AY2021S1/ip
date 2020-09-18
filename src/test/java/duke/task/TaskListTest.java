@@ -12,6 +12,9 @@ import org.junit.jupiter.api.Test;
 import duke.command.exception.DukeInvalidIndexException;
 import duke.response.Response;
 
+/**
+ * Represents a test class for TaskList.
+ */
 public class TaskListTest {
     private TaskList taskList = new TaskList();
 
