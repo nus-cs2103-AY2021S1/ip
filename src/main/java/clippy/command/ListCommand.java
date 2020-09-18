@@ -4,7 +4,19 @@ import clippy.storage.Storage;
 import clippy.task.TaskList;
 import clippy.ui.Ui;
 
+/**
+ * Represents a command to list all tasks in the TaskList when executed.
+ */
 public class ListCommand extends Command {
+    /**
+     * Returns a numbered list of tasks to be displayed by GUI.
+     * Executes the command.
+     *
+     * @param tasks TaskList object used in the current Clippy session.
+     * @param ui Ui object used in the current Clippy session.
+     * @param storage Storage object used in the current Clippy session.
+     * @return A numbered list of tasks to be displayed by GUI.
+     */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         String output;

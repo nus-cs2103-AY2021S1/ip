@@ -7,18 +7,17 @@ import clippy.task.Task;
 import clippy.task.TaskList;
 import clippy.ui.Ui;
 
-import java.time.format.DateTimeParseException;
-
 /**
- * Represents a command that adds a deadline task.
+ * Represents a command that adds a deadline task when executed.
  */
 public class AddDeadlineCommand extends AddCommand {
     private String by;
 
     /**
-     * Constructs a command object that adds a deadline task.
-     * @param taskDescription Literal description of the deadline task
-     * @param by Date in YYYY-MM-DD format as a String
+     * Constructs a command object that adds a deadline task when executed.
+     * 
+     * @param taskDescription Literal description of the deadline task.
+     * @param by Date in YYYY-MM-DD format as a String.
      */
     public AddDeadlineCommand(String taskDescription, String by) {
         super(taskDescription);
@@ -28,6 +27,7 @@ public class AddDeadlineCommand extends AddCommand {
     /**
      * Returns resulting message to be displayed by GUI after adding a deadline task.
      * Executes the command.
+     * Saves changes onto save file.
      * 
      * @param tasks TaskList object used in the current Clippy session.
      * @param ui Ui object used in the current Clippy session.

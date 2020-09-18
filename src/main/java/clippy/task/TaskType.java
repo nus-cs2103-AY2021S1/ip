@@ -1,5 +1,8 @@
 package clippy.task;
 
+/**
+ * Represents the type of task.
+ */
 public enum TaskType {
     TODO("T"),
     DEADLINE("D"),

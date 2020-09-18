@@ -8,7 +8,7 @@ import clippy.task.TaskList;
 import clippy.ui.Ui;
 
 /**
- * Represents a task-tracking chat bot with Clippy.Command Line Interface.
+ * Represents a task-tracking chat bot called Clippy with a Command Line Interface.
  */
 public class Clippy {
     
@@ -17,8 +17,10 @@ public class Clippy {
     private Ui ui;
 
     /**
-     * Constructs Clippy.Clippy object which represents a chat bot and loads saved tasks if save file exists.
-     * @param filePath relative path of save file for saved tasks as specified by user
+     * Constructs a Clippy object with a given file path to where the save file is expected to be.
+     * Attempts to load saved tasks from the save file.
+     * 
+     * @param filePath expected relative path of save file for saved tasks
      */
     public Clippy(String filePath) {
         ui = new Ui();
@@ -33,7 +35,8 @@ public class Clippy {
     }
 
     /**
-     * Constructs Clippy.Clippy object and loads saved tasks (from a pre-defined default path) if save file exists.
+     * Constructs Clippy object with a pre-defined save file path (./data/savefile.txt).
+     * Attempts to load saved tasks from the pre-defined save file.
      */
     public Clippy() {
         String filePath = "./data/savefile.txt";
@@ -47,7 +50,13 @@ public class Clippy {
             tasks = new TaskList();
         }
     }
-    
+
+    /**
+     * Returns the response of Clippy to a user input.
+     * 
+     * @param input User input.
+     * @return Response of Clippy.
+     */
     public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);

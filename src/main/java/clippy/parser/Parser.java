@@ -22,14 +22,25 @@ import clippy.task.TaskType;
 
 import java.util.Arrays;
 
+/**
+ * Represents a parser that parses user-input into commands that can be executed by Clippy.
+ */
 public class Parser {
     private static final int TO_DO_MIN_LENGTH = 6;
     private static final int DEADLINE_MIN_LENGTH = 10;
     private static final int EVENT_MIN_LENGTH = 7;
     private static final int BY_GAP = 4;
     private static final int AT_GAP = 4;
-
-
+    
+    /**
+     * Returns a command object that can be executed by Clippy.
+     * 
+     * @param input User-input.
+     * @return A command object representing user-input.
+     * @throws EmptyDescriptionException If user did not specify the description of a task.
+     * @throws InvalidCommandException If user entered a invalid command.
+     * @throws EmptyDateTimeException If user did not specify the date/time of a task.
+     */
     public static Command parse(String input) throws EmptyDescriptionException,
             InvalidCommandException, EmptyDateTimeException {
         if (input.equals("bye")) {

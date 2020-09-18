@@ -18,15 +18,31 @@ import java.io.BufferedWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents an object that deals with loading tasks from the file and saving tasks in the file.
+ */
 public class Storage {
     private String filePath;
-    
+
+    /**
+     * Constructs a storage object with a specified file path to the save file of the program.
+     * 
+     * @param filePath file path to the save file of the program.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
-    
+
+    /**
+     * Loads the tasks stored in the save file at the specified file path if file exists and is not corrupted.
+     * 
+     * @return ArrayList of Tasks retrieved from the save file.
+     * @throws CorruptedFileException If format of data in save file is corrupted.
+     * @throws UnableToCreateSaveFileException If program is unable to create save file due to IO errors.
+     * @throws NoSavedFileException If the save file does not exist.
+     */
     public ArrayList<Task> load() throws CorruptedFileException, UnableToCreateSaveFileException, 
-            NoSavedFileException, InvalidDateFormatException {
+            NoSavedFileException {
         try {
             ArrayList<Task> savedTaskList = new ArrayList<>();
             String folderPath = getFolderPath();
@@ -54,7 +70,12 @@ public class Storage {
             throw new NoSavedFileException();
         }
     }
-    
+
+    /**
+     * Saves the tasks in the TaskList in the current Clippy session onto the save file by overwriting the save file.
+     * 
+     * @param tasks TaskList in the current Clippy session.
+     */
     public void save(TaskList tasks) {
         try {
             File saveFile = new File(filePath);

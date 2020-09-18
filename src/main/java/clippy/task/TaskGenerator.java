@@ -3,8 +3,18 @@ package clippy.task;
 import clippy.exception.CorruptedFileException;
 import clippy.exception.InvalidDateFormatException;
 
+/**
+ * Represents a save file parser that parses Strings from save file to re-create the task stored within.
+ */
 public class TaskGenerator {
-    public static Task generateTask(String taskData) throws CorruptedFileException, InvalidDateFormatException {
+    /**
+     * Generates a task from a line of string stored within the save file.
+     * 
+     * @param taskData Line of string encapsulating details of a task.
+     * @return A task re-created from the string.
+     * @throws CorruptedFileException If data within the string is corrupted.
+     */
+    public static Task generateTask(String taskData) throws CorruptedFileException {
         try {
             String[] taskSubData = taskData.split("\\|");
             String taskTypeLetter = taskSubData[0];
@@ -35,7 +45,7 @@ public class TaskGenerator {
             }
 
             return task;
-        } catch (ArrayIndexOutOfBoundsException e) {
+        } catch (ArrayIndexOutOfBoundsException | InvalidDateFormatException e) {
             throw new CorruptedFileException();
         }
     }
