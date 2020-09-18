@@ -23,6 +23,18 @@ public class TaskList {
     }
 
     /**
+     * Insert a Task to a position of the list
+     * @param newTask - Task to add
+     * @param index - position of newTask after inserting
+     */
+    public void addTask(Task newTask, int index) {
+        if (index == -1) {
+            index = size();
+        }
+        tasks.add(index, newTask);
+    }
+
+    /**
      * Remove a Task from the list
      * @param pos - position to remove (0-based)
      */

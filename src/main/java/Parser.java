@@ -38,12 +38,16 @@ public class Parser {
                 this.description = command.substring(5);
             } else {
                 Task newTask = null;
+                String type;
+                String description;
+                String date;
                 if (command.startsWith("todo")) {
                     if (command.length() < 5) {
                         throw new DukeException(":( OOPS!!! The description of a todo cannot be empty.");
                     }
-                    String description = command.substring(5);
-                    newTask = new Todo(description);
+                    type = "todo";
+                    description = command.substring(5);
+                    date = "";
                 } else if (command.startsWith("deadline")) {
                     if (command.length() < 9) {
                         throw new DukeException(":( OOPS!!! The description of a deadline cannot be empty.");
@@ -53,9 +57,9 @@ public class Parser {
                     if (byPosition == -1) {
                         throw new DukeException(":( OOPS!!! Deadline time specification not found.");
                     }
-                    String description = rest.substring(0, byPosition - 1);
-                    String by = rest.substring(byPosition + 4);
-                    newTask = new Deadline(description, by);
+                    type = "deadline";
+                    description = rest.substring(0, byPosition - 1);
+                    date = rest.substring(byPosition + 4);
                 } else if (command.startsWith("event")) {
                     if (command.length() < 6) {
                         throw new DukeException(":( OOPS!!! The description of an event cannot be empty.");
@@ -65,13 +69,36 @@ public class Parser {
                     if (atPosition == -1) {
                         throw new DukeException(":( OOPS!!! Event time specification not found.");
                     }
-                    String description = rest.substring(0, atPosition - 1);
-                    String at = rest.substring(atPosition + 4);
-                    newTask = new Event(description, at);
+                    type = "event";
+                    description = rest.substring(0, atPosition - 1);
+                    date = rest.substring(atPosition + 4);
+                } else {
+                    throw new DukeException(":( OOPS!!! I'm sorry, but I don't know what that means :-(");
+                }
+                int prioPosition = description.indexOf("/p ");
+                if (prioPosition != -1) {
+                    this.index = Integer.parseInt(description.substring(prioPosition + 3)) - 1;
+                    description = description.substring(0, prioPosition - 1);
+                } else {
+                    this.index = -1;
                 }
 
-                if (newTask == null) {
+                switch (type) {
+                case "todo": {
+                    newTask = new Todo(description);
+                    break;
+                }
+                case "deadline": {
+                    newTask = new Deadline(description, date);
+                    break;
+                }
+                case "event": {
+                    newTask = new Event(description, date);
+                    break;
+                }
+                default: {
                     throw new DukeException(":( OOPS!!! I'm sorry, but I don't know what that means :-(");
+                }
                 }
                 this.commandType = "add";
                 this.task = newTask;
@@ -120,7 +147,7 @@ public class Parser {
         }
         case "add": {
             Task newTask = getTask();
-            tasks.addTask(newTask);
+            tasks.addTask(newTask, getIndex());
             response.append("Got it. I've added this task:\n");
             response.append(newTask.toString()).append("\n");
             response.append(String.format("Now you have %d tasks in the list\n", tasks.size()));
