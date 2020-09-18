@@ -9,12 +9,6 @@
    
    3.2. [Adding a task](#32-adding-a-task)
    
-      3.2.1. [Todo task](#321-todo-task)
-        
-      3.2.2. [Event task](#322-event-task)  
-        
-      3.2.3. [Deadline task](#323-deadline-task)
-   
    3.3. [Marking a task as completed: `done`](#33-marking-a-task-as-completed-done)
    
    3.4. [Deleting a task: `delete`](#34-deleting-a-task-delete)
@@ -43,7 +37,7 @@
 
 List all of your tasks that has been saved.
 
-##### Usage
+##### Usage format
 
 `list`
 
@@ -66,18 +60,66 @@ There are 3 kinds of tasks:
 
 3. **Deadline task**
 
-#### 3.2.1 Todo task
+#### 3.2.1 Todo task `todo`
 
-![Image of list feature](./UiList.png)
+##### usage format
+
+`todo <TASK_DESCRIPTION>`
+
+`t <TASK_DESCRIPTION>`
+
+##### example of usage
+
+* `todo task1`
+
+![Image of todo feature](./UiTodo.png)
+
+#### 3.2.2 Event task `event`
+
+##### usage format
+
+`event <TASK_DESCRIPTION> /at <DATE> <TIME>` 
+
+`e <TASK_DESCRIPTION> /at <DATE> <TIME>`
+
+* format for `<DATE>`: `DD-MM-YYYY`
+
+* format for `<TIME>`: `HHMM` (24 hour format)
+
+##### example of usage
+
+* `event task2 /at 18-09-2020 1900`
+
+![Image of todo feature](./UiEvent.png)
+
+#### 3.2.2 Deadline task `deadline`
+
+##### usage format
+
+`deadline <TASK_DESCRIPTION> /by <DATE> <TIME>`
+
+`d <TASK_DESCRIPTION> /by <DATE> <TIME>`
+
+* format for `<DATE>`: `DD-MM-YYYY`
+
+* format for `<TIME>`: `HHMM` (24 hour format)
+
+##### example of usage
+
+* `event task3 /by 18-09-2020 1900`
+
+![Image of todo feature](./UiDeadline.png)
 
 ### 3.3 Marking a task as completed: `done`
+
+##### Description
+
+List all of your tasks that has been saved.
 
 ##### Usage
 
 `list`
 
-##### Description
-List all of your tasks that has been saved.
 
 #### Example of usage
 * `list`
