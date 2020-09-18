@@ -1,7 +1,9 @@
 package duke.tool;
 
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
+import duke.exception.DukeException;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
@@ -56,6 +58,8 @@ public class Parser {
             output = ex.getMessage();
         } catch (DukeException ex) {
             output = ex.toString();
+        } catch (DateTimeParseException ex) {
+            output = Ui.SEPARATION_LINE + "\n   Please enter time in the correct format \n" + Ui.SEPARATION_LINE;
         }
         return output;
     }

@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+import duke.exception.DukeException;
 import org.junit.jupiter.api.Test;
 
 import duke.task.Event;

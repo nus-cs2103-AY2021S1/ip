@@ -1,5 +1,6 @@
-package duke.tool;
+package duke.exception;
 
+import duke.tool.Emoji;
 import duke.ui.Ui;
 
 /**
