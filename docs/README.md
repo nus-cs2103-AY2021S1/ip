@@ -145,8 +145,15 @@ Expected outcome:
        _____________________________________________  
        
   
-   
-   
+   ### Feature 9 - Help
+   Users can see the user menu.
+
+       
+   ### `help` - get menu
+       
+   Example of usage: 
+   `help`
+  
    
    
    
