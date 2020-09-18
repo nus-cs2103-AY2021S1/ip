@@ -19,7 +19,7 @@ This is a project template for a greenfield Java project. It's named after the J
    1. Select the project directory, and click `OK`
    1. If there are any further prompts, accept the defaults.
 1. After the importing is complete, locate the `src/main/java/Main.java` file, right-click it, and choose `Run Main.main()`. If the setup is correct, you should see something like the below:
-![Sample Screenshot](Sample/Sample ScreenShot.PNG)
+![Sample Screenshot](docs/Ui.PNG)
 1. Type a command in the command box at the bottom and press `Enter` to execute it. 
 1. Type `Bye` or click the  `'x'` button to close the window.
 

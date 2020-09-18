@@ -20,7 +20,7 @@ This is a project template for a greenfield Java project. It's named after the J
 1. Type `Bye` or click the  `'x'` button to close the window.
 
 
-![Sample Screenshot](Sample/Sample ScreenShot.PNG)
+![Sample Screenshot](Ui.PNG)
 
 
 ## Features
