@@ -45,7 +45,7 @@ public class UndoneCommand implements Command {
         storage.saveListToFile(taskList);
 
         // Return UI message
-        return ui.printTaskDoneMessage(uncompletedTask);
+        return ui.printTaskUndoneMessage(uncompletedTask);
     }
 
     @Override

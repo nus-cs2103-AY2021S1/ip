@@ -54,16 +54,26 @@ public class Ui {
      * @param task The task that was marked as completed.
      */
     public String printTaskDoneMessage(Task task) {
-        return String.format(" Nice! I've marked this task as not done:%n"
+        return String.format(" Nice! I've marked this task as done:%n"
                 + "   %s%n",
                     task);
+    }
+
+    /**
+     * Returns a message reflecting the marking of a Task as not done.
+     * @param task The task that was marked as completed.
+     */
+    public String printTaskUndoneMessage(Task task) {
+        return String.format(" Nice! I've marked this task as not done:%n"
+                        + "   %s%n",
+                task);
     }
 
     /**
      * Returns a message reflecting the successful edit of a Task.
      */
     public String printTaskEditMessage(int taskIdToEdit, Task task) {
-        return String.format(" Nice! I've edited task %d:"
+        return String.format(" Nice! I've edited task %d:%n"
                 + "   %s%n",
                     taskIdToEdit, task);
     }
