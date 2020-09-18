@@ -1,15 +1,22 @@
+package Command;
+
+import Duke.Storage;
+import Duke.Ui;
+import Friend.Friend;
+import Friend.FriendList;
+import Tasks.TaskList;
 import java.io.IOException;
 
-public class DeleteFriendCommand extends Command {
+public class AddFriendCommand extends Command {
 
-    private int i;
+    private Friend friend;
 
     /**
      * Constructor for the class.
-     * @param i
+     * @param friend
      */
-    public DeleteFriendCommand(int i) {
-        this.i = i;
+    public AddFriendCommand(Friend friend) {
+        this.friend = friend;
     }
 
     /**
@@ -21,9 +28,8 @@ public class DeleteFriendCommand extends Command {
      */
     @Override
     public String execute(FriendList friends, Ui ui) throws IOException {
-        Friend deletedFriend = friends.getList().get(this.i - 1);
-        friends.delete(this.i - 1);
-        return ui.deleteFriend(deletedFriend);
+        friends.add(friend);
+        return ui.addFriend(this.friend);
     }
 
     /**

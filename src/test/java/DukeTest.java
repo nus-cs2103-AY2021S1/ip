@@ -1,5 +1,4 @@
-import org.testng.annotations.Test;
-//import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Test;
 import java.io.File;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -7,9 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class DukeTest {
 
     @Test
-    void validFilePath(String filepath) {
-        File file = new File(filepath);
-        boolean isCreated = file.exists();
-        assertEquals(true, isCreated);
+    void runDuke() {
+        Duke duke = new Duke();
+        assertEquals(duke.getResponse("bye"), "Bye. Hope to see you again soon!");
     }
 }

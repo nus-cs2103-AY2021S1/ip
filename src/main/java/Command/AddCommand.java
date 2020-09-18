@@ -1,3 +1,11 @@
+package Command;
+
+import Duke.Storage;
+import Duke.Ui;
+import Friend.FriendList;
+import Tasks.Task;
+import Tasks.TaskList;
+
 import java.io.IOException;
 
 public class AddCommand extends Command {
@@ -5,7 +13,7 @@ public class AddCommand extends Command {
     private Task task;
 
     /**
-     * Constructor for AddCommand.
+     * Constructor for Command.AddCommand.
      * @param task
      */
     public AddCommand(Task task) {
@@ -37,7 +45,6 @@ public class AddCommand extends Command {
      * @return null
      * @throws IOException
      */
-    @Override
     public String execute(FriendList friends, Ui ui) throws IOException {
         return null;
     }

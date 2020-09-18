@@ -1,3 +1,7 @@
+package Tasks;
+
+import Tasks.Task;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -5,14 +9,14 @@ public class TaskList {
     private List<Task> list;
 
     /**
-     * Constructor for TaskList.
+     * Constructor for Tasks.TaskList.
      */
     public TaskList(){
         this.list = new ArrayList<>();
     }
 
     /**
-     * Constructor for TaskList.
+     * Constructor for Tasks.TaskList.
      * @param tasks
      */
     public TaskList(ArrayList<Task> tasks) {

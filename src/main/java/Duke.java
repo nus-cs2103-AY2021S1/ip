@@ -1,3 +1,9 @@
+import Command.Command;
+import Friend.FriendList;
+import Tasks.TaskList;
+import Duke.*;
+import Exception.*;
+
 import java.io.IOException;
 
 public class Duke {

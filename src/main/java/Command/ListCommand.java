@@ -1,18 +1,25 @@
+package Command;
+
+import Duke.Storage;
+import Duke.Ui;
+import Friend.FriendList;
+import Tasks.TaskList;
+
 import java.io.IOException;
 
-public class ExitCommand extends Command{
+public class ListCommand extends Command {
 
     /**
-     * Execute the task.
+     * Generate a list of tasks to user.
      * @param tasks
      * @param ui
      * @param storage
-     * @return a string of response message.
+     * @return a String to reply user.
      * @throws IOException
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
-        return ui.exit();
+        return ui.generateList(tasks);
     }
 
     /**
@@ -28,12 +35,12 @@ public class ExitCommand extends Command{
     }
 
     /**
-     * Check if the command is an exit command.
-     * @return true.
+     * To show if the programme can end.
+     * @return a boolean
      */
     @Override
     public boolean isExit() {
-        return true;
+        return false;
     }
 
     /**

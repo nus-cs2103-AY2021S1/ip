@@ -14,7 +14,7 @@ command line instructions to interact with the users.
 9. Display the existing list of friends
 
 ### Feature 1
-Add a new task to the current task list. A new task can be a ToDo, Deadline 
+Add a new task to the current task list. A new task can be a Tasks.ToDo, Tasks.Deadline 
 (with a fixed deadline) or an event. 
 
 ### Feature 2

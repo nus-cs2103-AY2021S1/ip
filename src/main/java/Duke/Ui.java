@@ -1,5 +1,10 @@
-import java.awt.desktop.SystemEventListener;
-import java.io.IOException;
+package Duke;
+
+import Friend.Friend;
+import Friend.FriendList;
+import Tasks.Task;
+import Tasks.TaskList;
+
 import java.util.Scanner;
 
 public class Ui {

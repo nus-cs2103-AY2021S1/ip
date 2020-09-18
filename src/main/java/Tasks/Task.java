@@ -1,10 +1,12 @@
+package Tasks;
+
 public class Task {
 
     private boolean isCompleted;
     public String name;
 
     /**
-     * Constructor for Task.
+     * Constructor for Tasks.Task.
      * @param name
      */
     public Task(String name) {
@@ -17,7 +19,7 @@ public class Task {
      * @return boolean
      */
     public String getStatusIcon() {
-        return (isCompleted ? "\u2713" : "\u2718"); //return tick or X symbols
+        return (isCompleted ? "\u2713" : "\u2718");
     }
 
     /**

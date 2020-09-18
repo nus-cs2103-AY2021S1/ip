@@ -1,3 +1,11 @@
+package Duke;
+
+import Tasks.Deadline;
+import Tasks.Event;
+import Tasks.Task;
+import Tasks.ToDo;
+import Exception.IncorrectInputException;
+
 import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -11,7 +19,7 @@ public class Storage {
     private Path filepath;
 
     /**
-     * Constructor for Storage.
+     * Constructor for Duke.Storage.
      * @param filepath
      */
     public Storage(String filepath) {
@@ -23,7 +31,7 @@ public class Storage {
     }
 
     /**
-     * Constructor for Storage
+     * Constructor for Duke.Storage
      */
     public Storage() {
         try {
