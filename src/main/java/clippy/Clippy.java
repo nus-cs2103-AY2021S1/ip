@@ -16,7 +16,6 @@ import clippy.ui.Ui;
  * Represents a task-tracking chat bot called Clippy with a Command Line Interface.
  */
 public class Clippy {
-    
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
@@ -73,5 +72,4 @@ public class Clippy {
             return e.getMessage();
         }
     }
-    
 }

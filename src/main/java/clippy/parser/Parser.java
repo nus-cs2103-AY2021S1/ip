@@ -1,22 +1,22 @@
 package clippy.parser;
 
-import clippy.command.Command;
-import clippy.command.ExitCommand;
-import clippy.command.ListCommand;
-import clippy.command.HelpCommand;
-import clippy.command.DeleteCommand;
-import clippy.command.DoneCommand;
-import clippy.command.FindCommand;
-import clippy.command.UpdateTimeCommand;
-import clippy.command.UpdateDescriptionAndTimeCommand;
-import clippy.command.UpdateDescriptionCommand;
-import clippy.command.AddToDoCommand;
 import clippy.command.AddDeadlineCommand;
 import clippy.command.AddEventCommand;
+import clippy.command.AddToDoCommand;
+import clippy.command.Command;
+import clippy.command.DeleteCommand;
+import clippy.command.DoneCommand;
+import clippy.command.ExitCommand;
+import clippy.command.FindCommand;
+import clippy.command.HelpCommand;
+import clippy.command.ListCommand;
+import clippy.command.UpdateDescriptionAndTimeCommand;
+import clippy.command.UpdateDescriptionCommand;
+import clippy.command.UpdateTimeCommand;
 
+import clippy.exception.EmptyDateTimeException;
 import clippy.exception.EmptyDescriptionException;
 import clippy.exception.InvalidCommandException;
-import clippy.exception.EmptyDateTimeException;
 
 import clippy.task.TaskType;
 
@@ -78,7 +78,7 @@ public class Parser {
                 }
             } else {
                 // update description of To-Do/Deadline/Event only
-                String[] descriptionInArray = Arrays.copyOfRange(subInputs, 2,  length);
+                String[] descriptionInArray = Arrays.copyOfRange(subInputs, 2, length);
                 String description = String.join(" ", descriptionInArray);
                 return new UpdateDescriptionCommand(indexOfTaskToBeUpdated, description);
             }

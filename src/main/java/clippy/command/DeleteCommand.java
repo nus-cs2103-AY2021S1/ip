@@ -10,7 +10,7 @@ import clippy.ui.Ui;
 /**
  * Represents a command that deletes a task when executed.
  */
-public class DeleteCommand extends Command{
+public class DeleteCommand extends Command {
     private int indexOfTaskToDelete;
 
     /**

@@ -11,8 +11,8 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-import java.util.Timer;
 import java.util.TimerTask;
+import java.util.Timer;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -26,13 +26,14 @@ public class MainWindow extends AnchorPane {
     private TextField userInput;
     @FXML
     private Button sendButton;
+    
+    private static final int EXIT_DELAY_IN_MILLI_SECONDS = 2000;
 
     private Clippy clippy;
 
     private final Image IMAGE_USER = new Image(this.getClass().getResourceAsStream("/images/user.png"));
     private final Image IMAGE_CLIPPY = new Image(this.getClass().getResourceAsStream("/images/clippy.jpg"));
     
-    private static final int EXIT_DELAY_IN_MILLI_SECONDS = 2000;
 
     @FXML
     public void initialize() {

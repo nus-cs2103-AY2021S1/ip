@@ -6,19 +6,19 @@ import clippy.task.Task;
  * Represents a User Interface object that deals with interactions with the user.
  */
 public class Ui {
-    private final static String MSG_GREET = "Hello! I'm Clippy \n" + "What can I do for you today?\n";
-    private final static String MSG_EXIT = "Bye! Hope to see you again soon!";
-    private final static String MSG_ADDED_TASK = "Got it. I've added this task:\n";
-    private final static String MSG_LIST_TASK_NO_TASK = "You have no tasks in your list.";
-    private final static String MSG_LIST_TASK_HAVE_TASK = "Here are the tasks in your list:";
-    private final static String MSG_MARK_DONE = "Nice! I've marked this task as done:\n";
-    private final static String MSG_DELETED_TASK = "Noted. I've removed this task:\n";
-    private final static String MSG_FOUND_MATCHING_TASK = "Here are the matching tasks in your list:";
-    private final static String MSG_NO_MATCHING_TASK = "No matching tasks are found in your list.";
-    private final static String MSG_UPDATED_TASK = "Ok! I have updated the task as follows:\n";
-    private final static String MSG_NOW_NO_TASK = "Now you have no tasks in the list.";
-    private final static String MSG_NOW_ONE_TASK = "Now you have 1 task in the list.";
-    private final static String MSG_HELP = "Refer to the user guide at https://https://wang-jun-hao.github.io/ip/";
+    private static final String MSG_GREET = "Hello! I'm Clippy \n" + "What can I do for you today?\n";
+    private static final String MSG_EXIT = "Bye! Hope to see you again soon!";
+    private static final String MSG_ADDED_TASK = "Got it. I've added this task:\n";
+    private static final String MSG_LIST_TASK_NO_TASK = "You have no tasks in your list.";
+    private static final String MSG_LIST_TASK_HAVE_TASK = "Here are the tasks in your list:";
+    private static final String MSG_MARK_DONE = "Nice! I've marked this task as done:\n";
+    private static final String MSG_DELETED_TASK = "Noted. I've removed this task:\n";
+    private static final String MSG_FOUND_MATCHING_TASK = "Here are the matching tasks in your list:";
+    private static final String MSG_NO_MATCHING_TASK = "No matching tasks are found in your list.";
+    private static final String MSG_UPDATED_TASK = "Ok! I have updated the task as follows:\n";
+    private static final String MSG_NOW_NO_TASK = "Now you have no tasks in the list.";
+    private static final String MSG_NOW_ONE_TASK = "Now you have 1 task in the list.";
+    private static final String MSG_HELP = "Refer to the user guide at https://https://wang-jun-hao.github.io/ip/";
 
     /**
      * Returns welcome message.
