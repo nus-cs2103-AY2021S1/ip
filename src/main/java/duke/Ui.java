@@ -7,11 +7,11 @@ import java.util.List;
  * the class has methods to greet users & print feedback for users' input
  */
 public class Ui {
-    //    private static final String logo = " ____        _        \n"
-//        + "|  _ \\ _   _| | _____ \n"
-//        + "| | | | | | | |/ / _ \\\n"
-//        + "| |_| | |_| |   <  __/\n"
-//        + "|____/ \\__,_|_|\\_\\___|\n";
+    private static final String logo = " ____        _        \n"
+        + "|  _ \\ _   _| | _____ \n"
+        + "| | | | | | | |/ / _ \\\n"
+        + "| |_| | |_| |   <  __/\n"
+        + "|____/ \\__,_|_|\\_\\___|\n";
     private static StringBuilder response;
 
     /**
@@ -27,8 +27,7 @@ public class Ui {
      * print the message to greet the user
      */
     public static void greet() {
-//        println("Hello from\n" + logo);
-        println("Hello! I'm UncleGrandpa");
+        println("Hello from\n" + logo);
         println("What can I do for you?");
     }
 
