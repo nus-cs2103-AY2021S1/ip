@@ -21,7 +21,7 @@ public class AddEventCommandTest extends CommandTests {
      * Tests for adding of simple event tasks.
      */
     @Test
-    public void testAddingStandard() {
+    public void execute_AddingStandard() {
         try {
             Event event1 = new Event("test", "2-4pm");
             Event event2 = new Event("shop", "2-3pm");
@@ -41,7 +41,7 @@ public class AddEventCommandTest extends CommandTests {
      * Tests for invalid complex task formats.
      */
     @Test
-    public void testInvalidFormat() {
+    public void execute_InvalidFormat() {
         AddEventCommand cmd1 = new AddEventCommand("read /by 2-4pm");
         AddEventCommand cmd2 = new AddEventCommand("read/at 2-4pm");
         AddEventCommand cmd3 = new AddEventCommand("read -/at 2-4pm");
@@ -58,7 +58,7 @@ public class AddEventCommandTest extends CommandTests {
      * Tests for blank descriptions.
      */
     @Test
-    public void testBlankDescription() {
+    public void execute_BlankDescription() {
         AddEventCommand cmd1 = new AddEventCommand("");
         AddEventCommand cmd2 = new AddEventCommand("/at 2-4pm");
         // Tests
@@ -71,7 +71,7 @@ public class AddEventCommandTest extends CommandTests {
      * Tests for empty time frame in description.
      */
     @Test
-    public void testEmptyTimeFrame() {
+    public void execute_EmptyTimeFrame() {
         AddEventCommand cmd1 = new AddEventCommand("meeting /at");
         String eventMessage = "OOPS!!! Time of event task is not specified!\n";
         // Tests

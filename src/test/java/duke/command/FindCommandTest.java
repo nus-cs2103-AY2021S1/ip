@@ -22,7 +22,7 @@ public class FindCommandTest extends CommandTests {
      * Tests the find command with 2 different query words.
      */
     @Test
-    public void testFindMethod() {
+    public void execute_FindMethod() {
         try {
             FindCommand fc = new FindCommand("test");
             ToDo toDo = new ToDo("te");
@@ -47,7 +47,7 @@ public class FindCommandTest extends CommandTests {
      * Tests find command with empty query word.
      */
     @Test
-    public void testEmptyFind() {
+    public void execute_EmptyFind() {
         FindCommand fc = new FindCommand("");
         assertThrows(EmptyFindException.class, () -> fc.execute(taskList, ui, storage));
     }

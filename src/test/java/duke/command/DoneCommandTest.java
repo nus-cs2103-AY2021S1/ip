@@ -20,7 +20,7 @@ public class DoneCommandTest extends CommandTests {
      * Tests the marking of task done command.
      */
     @Test
-    public void testDoneCommand() {
+    public void execute_DoneCommand() {
         try {
             ToDo toDo1 = new ToDo("test1");
             ToDo toDo2 = new ToDo("test2");

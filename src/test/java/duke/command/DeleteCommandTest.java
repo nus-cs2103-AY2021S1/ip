@@ -17,7 +17,7 @@ public class DeleteCommandTest extends CommandTests {
      * Tests deletion of tasks command.
      */
     @Test
-    public void testDeleteCommand() {
+    public void execute_DeleteCommand() {
         try {
             ToDo toDo1 = new ToDo("test1");
             ToDo toDo2 = new ToDo("test2");

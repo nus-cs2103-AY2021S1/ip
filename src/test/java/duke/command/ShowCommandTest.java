@@ -17,7 +17,7 @@ public class ShowCommandTest extends CommandTests {
      * Tests of empty list display.
      */
     @Test
-    public void testEmptyList() {
+    public void execute_EmptyList() {
         assertEquals(ui.emptyTaskList(), sc.execute(taskList, ui, storage));
     }
 
@@ -25,7 +25,7 @@ public class ShowCommandTest extends CommandTests {
      * Tests of tasklist displays.
      */
     @Test
-    public void testActualDisplay() {
+    public void execute_ActualDisplay() {
         ToDo toDo = new ToDo("te");
         taskList.add(toDo);
         assertEquals(ui.showTaskList(taskList, ""), sc.execute(taskList, ui, storage));

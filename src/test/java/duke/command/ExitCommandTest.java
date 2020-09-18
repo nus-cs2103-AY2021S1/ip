@@ -14,7 +14,7 @@ public class ExitCommandTest extends CommandTests {
      * Basic tests.
      */
     @Test
-    public void test() {
+    public void execute_() {
         ExitCommand cmd = new ExitCommand();
         // Tests
         assertTrue(cmd.isExit());

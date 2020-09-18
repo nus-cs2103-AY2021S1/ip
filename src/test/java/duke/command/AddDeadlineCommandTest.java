@@ -25,7 +25,7 @@ public class AddDeadlineCommandTest extends CommandTests {
      * Tests for various time / date formats. Correct formats are yyyy-MM-dd, yyyy-MM-dd hh:mm, and hh:mm.
      */
     @Test
-    public void testCorrectFormats() {
+    public void execute_CorrectFormats() {
         try {
             Deadline ct1 = new Deadline("Test", DateTimeParser.getDateTime("23-8-20"));
             Deadline ct2 = new Deadline("test2", DateTimeParser.getDateTime("25-8-20 1015"));
@@ -49,7 +49,7 @@ public class AddDeadlineCommandTest extends CommandTests {
      * Tests for invalid deadline commands.
      */
     @Test
-    public void testInvalidDeadlineFormats() {
+    public void execute_InvalidDeadlineFormats() {
         AddDeadlineCommand cmd1 = new AddDeadlineCommand("read /by 2-4pm");
         AddDeadlineCommand cmd2 = new AddDeadlineCommand("read /at 2020-08-23");
         AddDeadlineCommand cmd3 = new AddDeadlineCommand("read -/by 2020-08-23");
@@ -66,7 +66,7 @@ public class AddDeadlineCommandTest extends CommandTests {
      * Tests for blank descriptions.
      */
     @Test
-    public void testBlankDescription() {
+    public void execute_BlankDescription() {
         AddDeadlineCommand cmd1 = new AddDeadlineCommand("");
         AddDeadlineCommand cmd2 = new AddDeadlineCommand("/by 2020-08-23");
         // Tests
@@ -79,7 +79,7 @@ public class AddDeadlineCommandTest extends CommandTests {
      * Tests for empty time description.
      */
     @Test
-    public void testEmptyTimeFrame() {
+    public void execute_EmptyTimeFrame_throwsEmptyTimeException() {
         AddDeadlineCommand cmd1 = new AddDeadlineCommand("meeting /by");
         String deadlineMessage = "OOPS!!! Time of deadline task is not specified!\n";
         // Tests

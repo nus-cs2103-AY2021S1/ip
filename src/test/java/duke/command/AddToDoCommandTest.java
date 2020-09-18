@@ -20,7 +20,7 @@ public class AddToDoCommandTest extends CommandTests {
      * Tests adding of tasks.
      */
     @Test
-    public void testAddingOfTasks() {
+    public void execute_AddingOfTasks() {
         try {
             String taskDetails1 = "test";
             String taskDetails2 = "test2";
@@ -42,7 +42,7 @@ public class AddToDoCommandTest extends CommandTests {
      * Tests empty task details.
      */
     @Test
-    public void testEmptyTaskDetails() {
+    public void execute_EmptyTaskDetails() {
         String emptyTaskDetails = "";
         String expectedMessage = "OOPS!!! The description of a todo cannot be empty.\n";
         AddToDoCommand cmd = new AddToDoCommand(emptyTaskDetails);

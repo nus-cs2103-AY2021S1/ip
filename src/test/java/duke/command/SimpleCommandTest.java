@@ -17,7 +17,7 @@ public class SimpleCommandTest extends CommandTests {
      * Tests simple command when the succeeding word is not a number.
      */
     @Test
-    public void testNotNumber() {
+    public void execute_NotNumber() {
         SimpleCommand sc1 = new DoneCommand("");
         SimpleCommand sc2 = new DeleteCommand("awsdsa");
         // Tests
@@ -29,7 +29,7 @@ public class SimpleCommandTest extends CommandTests {
      * Tests simple command when the succeeding word is not valid.
      */
     @Test
-    public void testInvalidTaskNumber() {
+    public void execute_InvalidTaskNumber() {
         String expectedMessage = String.format("OOPS!!! Task number does not exist in the list.\n"
             + "Your current list only has %d tasks!\n", 0);
         SimpleCommand sc1 = new DoneCommand("5");
