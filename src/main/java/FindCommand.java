@@ -1,16 +1,31 @@
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents a FindCommand command which is a subclass of Command.
+ */
 public class FindCommand extends Command {
     private String userInput;
     private TaskList taskManager;
 
+    /**
+     * Creates a FindCommand object.
+     * Finds a task based on keyword/String input from user.
+     *
+     * @param userInput represents the user String input.
+     * @param taskManager reference to the same TaskList that manages list of Tasks.
+     */
     public FindCommand(String userInput, TaskList taskManager) {
         super("");
         this.userInput = userInput;
         this.taskManager = taskManager;
     }
 
+    /**
+     * Returns the list of matching tasks message.
+     *
+     * @return a String of matching tasks message as Duke response.
+     */
     public String getOutput() {
         int length = userInput.length();
         if (length == 5) {

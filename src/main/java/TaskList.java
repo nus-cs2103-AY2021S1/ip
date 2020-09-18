@@ -72,6 +72,14 @@ public class TaskList {
         return doneTask;
     }
 
+    /**
+     * A sub parser that formats the Task from data file Date to LocalDate
+     *
+     * @param currentTask identifies the Task object.
+     * @param taskType identifies which sub task is the Task object.
+     *
+     * @return a LocalDate object from the Task.
+     */
     public LocalDate taskDateFormatter(Task currentTask, String taskType) {
         if (taskType.equals(Task.EVENT_TASK)) {
             Event currentEventTask = (Event)currentTask;
@@ -90,6 +98,13 @@ public class TaskList {
         }
     }
 
+    /**
+     * Returns a reminder message depending on whether there are urgent tasks or not.
+     *
+     * @param reminderTasks a list of tasks to be printed as reminders.
+     *
+     * @return a String output of reminder tasks.
+     */
     public String getReminderString(List<Task> reminderTasks) {
         if (reminderTasks.size() < 1) {
             return "***Reminder:\n"
@@ -110,6 +125,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Returns a reminder message depending on whether there are urgent tasks or not.
+     *
+     * @return a String representation of reminder message.
+     */
     public String getUrgentTasks() {
         List<Task> tasks = this.getTasks();
         List<Task> filteredTasks = new ArrayList<>();

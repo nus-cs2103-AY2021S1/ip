@@ -25,8 +25,13 @@ public class Duke {
      * Sets isLoadingSuccess to true, assuming no errors.
      * <p>
      * Loads the file contents.
+     * <p>
+     * Parse the file contents into system.
      */
     public Duke() {
+        /**@@author Steve Hill How Do I Make Cross-Platform File Paths in Java?
+         * https://www.sghill.net/how-do-i-make-cross-platform-file-paths-in-java.html
+         */
         String home = System.getProperty("user.home");
         Path path = Paths.get(home, "Desktop", "CS2103T", "ip", "data", "duke.txt");
 
@@ -42,15 +47,6 @@ public class Duke {
         isFileLoaded = true;
 
         parser = new Parser(tasks);
-    }
-
-    /**
-     * Retrieves the file loading status
-     *
-     * @return boolean that states whether file is successfully loaded into Duke program or not.
-     */
-    public boolean getFileLoadedStatus() {
-        return isFileLoaded;
     }
 
     /**

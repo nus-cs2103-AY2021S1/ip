@@ -21,16 +21,17 @@
                </children></VBox>
             </content>
         </ScrollPane>
-      <TextFlow prefHeight="28.0" prefWidth="400.0" AnchorPane.bottomAnchor="572.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <TextFlow prefHeight="33.0" prefWidth="400.0" AnchorPane.bottomAnchor="567.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Button fx:id="reminderButton" mnemonicParsing="false" onAction="#handleReminderAction" prefHeight="25.0" prefWidth="400.0" text="My Reminder" textFill="#2d6dbf">
+            <Button fx:id="reminderButton" mnemonicParsing="false" onAction="#handleReminderAction" prefHeight="29.0" prefWidth="316.0" text="My Reminder" textFill="#2d6dbf">
                <graphic>
-                  <ImageView fitHeight="21.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="17.0" fitWidth="19.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/Bell.PNG" />
                      </image>
                   </ImageView>
                </graphic></Button>
+            <Button fx:id="commandButton1" mnemonicParsing="false" onAction="#handleCommandAction" prefHeight="29.0" prefWidth="83.0" text="Commands" textFill="#8f2dbd" />
          </children>
       </TextFlow>
     </children>

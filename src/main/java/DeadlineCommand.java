@@ -1,16 +1,31 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents a DeadlineCommand command which is a subclass of Command.
+ */
 public class DeadlineCommand extends Command {
     private String userInput;
     private TaskList taskManager;
 
+    /**
+     * Creates a DeadlineCommand object.
+     * It generates a message output showing user that a deadline task is created.
+     *
+     * @param userInput represents the user String input.
+     * @param taskManager reference to the same TaskList that manages list of Tasks.
+     */
     public DeadlineCommand(String userInput, TaskList taskManager) {
         super("");
         this.userInput = userInput;
         this.taskManager = taskManager;
     }
 
+    /**
+     * Returns the deadline creation message.
+     *
+     * @return a String of deadline creation message as Duke response.
+     */
     public String getOutput() throws DukeException {
         int length = userInput.trim().length();
         int timePrefix = userInput.indexOf("/by");

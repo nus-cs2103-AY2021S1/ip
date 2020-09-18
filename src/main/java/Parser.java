@@ -39,13 +39,11 @@ public class Parser {
      * @param str is the line of String obtained from user input when user is using the JavaFX GUI.
      *
      * Reads and makes sense of user input commands which includes:
-     * (bye, list, todo, deadline, event, delete)
+     * (bye, list, todo, deadline, event, delete, find, done)
      *
      * It changes the output to a String as Duke Response.
      *
      * @return a String representation of Duke output based on user commands.
-     *
-     * @throws DukeException when command is wrong, unidentifiable or missing.
      */
     public String parseUserInput(String str) throws DukeException {
         String trimmedStr = str.trim();

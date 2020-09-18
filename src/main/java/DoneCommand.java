@@ -1,13 +1,28 @@
+/**
+ * Represents a DoneCommand command which is a subclass of Command.
+ */
 public class DoneCommand extends Command {
     private String userInput;
     private TaskList taskManager;
 
-    public DoneCommand(String string, TaskList taskManager) {
+    /**
+     * Creates a DoneCommand object.
+     * Marks a task as done, task is specified by user via task id.
+     *
+     * @param userInput represents the user String input.
+     * @param taskManager reference to the same TaskList that manages list of Tasks.
+     */
+    public DoneCommand(String userInput, TaskList taskManager) {
         super("");
-        userInput = string;
+        this.userInput = userInput;
         this.taskManager = taskManager;
     }
 
+    /**
+     * Returns the done message.
+     *
+     * @return a String of done message as Duke response.
+     */
     public String getOutput() {
         int length = userInput.length();
         String index = userInput.substring(5, length);

@@ -1,3 +1,6 @@
+/**
+ * Represents a ExceptionCommand command which is a subclass of Command.
+ */
 public class ExceptionCommand extends Command {
     public final static String INVALID_COMMAND = "IC";
     public final static String INVALID_INDEX = "II";
@@ -9,16 +12,28 @@ public class ExceptionCommand extends Command {
 
     private String exceptionType;
 
+    /**
+     * Creates a ExceptionCommand object.
+     * Outputs various exception messages based on the exception type.
+     *
+     * @param exceptionType is the String identifier for the type of exception.
+     */
     public ExceptionCommand(String exceptionType) {
         super("");
         this.exceptionType = exceptionType;
     }
 
+    /**
+     * Returns the exception message.
+     *
+     * @return a String of exception message as Duke response.
+     */
     public String getOutput() {
         if (this.exceptionType.equals(INVALID_COMMAND)) {
             this.appendDukeMessage("*Invalid command.*"
                     + "\n  Duke Commands: bye, list, find, done, delete,"
-                    + "\n                               todo, event, deadline");
+                    + "\n                               todo, event, deadline"
+                    + "\nPlease add a space character after find, done, delete, todo, event, deadline");
 
         } else if (this.exceptionType.equals(INVALID_INDEX)) {
             this.appendDukeMessage("*Invalid task index, please try again.*");

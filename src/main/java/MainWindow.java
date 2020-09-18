@@ -9,7 +9,9 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.TextFlow;
 import javafx.scene.text.Text;
 
-/**
+/**@@author SE-EDU student project guide, a sub-project of the se-education.org.
+ * Point of contact: Damith C. Rajapakse https://www.comp.nus.edu.sg/~damithch/
+ *
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
@@ -30,6 +32,11 @@ public class MainWindow extends AnchorPane {
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
     private Image mascotImage = new Image(this.getClass().getResourceAsStream("/images/DaMascot.png"));
 
+    /**@@author SE-EDU student project guide, a sub-project of the se-education.org.
+     * Point of contact: Damith C. Rajapakse https://www.comp.nus.edu.sg/~damithch/
+     *
+     * Initialises the window design when program is first started.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -38,7 +45,9 @@ public class MainWindow extends AnchorPane {
         txtF.getChildren().add(text);
     }
 
-    /**
+    /**@@author SE-EDU student project guide, a sub-project of the se-education.org.
+     * Point of contact: Damith C. Rajapakse https://www.comp.nus.edu.sg/~damithch/
+     *
      * References the same Duke object initialised in Main.
      * @param d is the Duke object initialised by Main.
      */
@@ -63,7 +72,18 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Creates dialog box for reminders of tasks on pressing the Reminder button.
+     * Prints GUI reminder message whenever the "Commands" button is pressed.
+     */
+    @FXML
+    private void handleCommandAction() {
+        String commandList = Ui.getCommandList();
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(commandList, mascotImage)
+        );
+    }
+
+    /**
+     * Creates dialog box for reminders of tasks on pressing the "My Reminder" button.
      */
     @FXML
     private void handleReminderAction() {
@@ -73,7 +93,9 @@ public class MainWindow extends AnchorPane {
         );
     }
 
-    /**
+    /**@@author SE-EDU student project guide, a sub-project of the se-education.org.
+     * Point of contact: Damith C. Rajapakse https://www.comp.nus.edu.sg/~damithch/
+     *
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */

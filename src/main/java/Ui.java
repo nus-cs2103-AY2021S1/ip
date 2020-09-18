@@ -17,31 +17,26 @@ public class Ui {
     }
 
     /**
-     * Displays the error message when there is error loading the file.
-     */
-    public static String loadFileErrorMessage() {
-        return "*Error: Text File not found*"
-                + "\nPlease specify the correct file location"
-                + "\nto read and write on the text file.";
-    }
-
-    /**
-     * Displays the message when file is loaded successfully.
-     */
-    public static String loadFileSuccessMessage() {
-        return "*File has successfully loaded!*\n"
-                + "\nDuke Commands: "
-                + "\nbye, list, find, done, delete, todo, event, deadline";
-    }
-
-    /**
      * Displays the error message when there is error updating the file.
      *
      * @param message is the essence of error.
+     *
+     * @return a file update error message.
      */
     public String displayUpdateFileError(String message) {
         return "*Error: Unable to save changes to file*"
                 + "\n  Please check if your file still exists in your directory"
                 + "\n" + message;
+    }
+
+    /**
+     * Displays the Commands in GUI when "Commands" button is pressed.
+     *
+     * @return a Command list message.
+     */
+    public static String getCommandList() {
+        return "***Duke Commands: "
+                + "\n    bye, list, find, done, delete, todo, event, deadline\n"
+                + "\nDon't be afraid to key in wrong commands! I will prompt you :)";
     }
 }

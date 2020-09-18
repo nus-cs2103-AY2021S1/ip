@@ -99,6 +99,13 @@ public class Storage {
         }
     }
 
+    /**
+     * File line parser for todo task.
+     * Reads and identifies the tasks specified in the file.
+     *
+     * @param parsedTask is the line String representation of task read from the file.
+     * @param isDone is the boolean value of whether the Task object is completed of not.
+     */
     public void todoReader(String parsedTask, Boolean isDone) {
         int end = parsedTask.length();
         String description = parsedTask.substring(DESCRIPTION_START_INDEX, end);
@@ -107,6 +114,13 @@ public class Storage {
         savedTasks.add(newTodo);
     }
 
+    /**
+     * File line parser for event task.
+     * Reads and identifies the tasks specified in the file.
+     *
+     * @param parsedTask is the line String representation of task read from the file.
+     * @param isDone is the boolean value of whether the Task object is completed of not.
+     */
     public void eventReader(String parsedTask, Boolean isDone) {
         int dateStart = parsedTask.indexOf(DATE_OPEN_BRACKET);
         int dateEnd = parsedTask.lastIndexOf(DATE_CLOSE_BRACKET);
@@ -118,6 +132,13 @@ public class Storage {
         savedTasks.add(newEvent);
     }
 
+    /**
+     * File line parser for deadline task.
+     * Reads and identifies the tasks specified in the file.
+     *
+     * @param parsedTask is the line String representation of task read from the file.
+     * @param isDone is the boolean value of whether the Task object is completed of not.
+     */
     public void deadlineReader(String parsedTask, Boolean isDone) {
         int dateStart = parsedTask.indexOf(DATE_OPEN_BRACKET);
         int dateEnd = parsedTask.lastIndexOf(DATE_CLOSE_BRACKET);

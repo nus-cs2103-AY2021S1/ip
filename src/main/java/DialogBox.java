@@ -12,7 +12,9 @@ import javafx.scene.layout.HBox;
 import java.io.IOException;
 import java.util.Collections;
 
-/**
+/**@@author SE-EDU student project guide, a sub-project of the se-education.org.
+ * Point of contact: Damith C. Rajapakse https://www.comp.nus.edu.sg/~damithch/
+ *
  * An example of a custom control using FXML.
  * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
  * containing text from the speaker.
@@ -23,7 +25,9 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
-    /**
+    /**@@author SE-EDU student project guide, a sub-project of the se-education.org.
+     * Point of contact: Damith C. Rajapakse https://www.comp.nus.edu.sg/~damithch/
+     *
      * Creates a DialogBox for GUI conversation between user and Duke.
      *
      * @param img Image to add in DialogBox.
@@ -45,7 +49,9 @@ public class DialogBox extends HBox {
         displayPicture.setImage(img);
     }
 
-    /**
+    /**@@author SE-EDU student project guide, a sub-project of the se-education.org.
+     * Point of contact: Damith C. Rajapakse https://www.comp.nus.edu.sg/~damithch/
+     *
      * Flips the dialog box such that the ImageView is on the left and text on the right.
      */
     private void flip() {
@@ -55,14 +61,18 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
-    /**
+    /**@@author SE-EDU student project guide, a sub-project of the se-education.org.
+     * Point of contact: Damith C. Rajapakse https://www.comp.nus.edu.sg/~damithch/
+     *
      * Uses a factory method to create DialogBox objects
      */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
-    /**
+    /**@@author SE-EDU student project guide, a sub-project of the se-education.org.
+     * Point of contact: Damith C. Rajapakse https://www.comp.nus.edu.sg/~damithch/
+     *
      * Uses a factory method to create flipped DialogBox objects
      */
     public static DialogBox getDukeDialog(String text, Image img) {
