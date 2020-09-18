@@ -1,4 +1,4 @@
-# User Guide for **Deuk task tracker v1.2.1**
+# User Guide for Deuk Task Tracker v1.2.1
 
 ## Features 
 
