@@ -8,7 +8,7 @@ import sparrow.data.exceptions.IncorrectCommandException;
 
 public class ParserTest {
 
-    Parser parser = new Parser();
+    private Parser parser = new Parser();
 
     @Test
     public void parseCommand_noInput_throwsAssertionError() {

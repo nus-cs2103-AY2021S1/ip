@@ -1,15 +1,14 @@
 package sparrow.data.task;
 
-import org.junit.jupiter.api.Test;
-
-import java.time.LocalDate;
-
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class DeadlineTest {
+import java.time.LocalDate;
 
-    Deadline deadline = new Deadline("I am a deadline.", LocalDate.now());
+import org.junit.jupiter.api.Test;
+
+public class DeadlineTest {
+    private Deadline deadline = new Deadline("I am a deadline.", LocalDate.now());
 
     @Test
     public void equals() {

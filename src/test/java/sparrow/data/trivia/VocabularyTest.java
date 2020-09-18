@@ -1,15 +1,15 @@
 package sparrow.data.trivia;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-
 public class VocabularyTest {
-    Vocabulary vocabWithDefinition = new Vocabulary("pirate", "a person who attacks and robs ships at sea");
 
     @Test
     public void equals() {
+        Vocabulary vocabWithDefinition = new Vocabulary("pirate", "a person who attacks and robs ships at sea");
         Vocabulary sameDefinition = new Vocabulary("pirate", "a person who attacks and robs ships at sea");
         Vocabulary differentDefinition = new Vocabulary("pirate", "a person who robs and attacks ships at sea");
         Vocabulary differentWord = new Vocabulary("marauder", "a person who attacks and robs ships at sea");

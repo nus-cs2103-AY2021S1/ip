@@ -3,14 +3,15 @@ package sparrow.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import org.junit.jupiter.api.Test;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+import org.junit.jupiter.api.Test;
+
+
 public class StorageTest {
 
-    Storage storage = new Storage();
+    private Storage storage = new Storage();
 
     @Test
     public void stringToDate() {
@@ -21,7 +22,8 @@ public class StorageTest {
 
         // wrong order -> throws exception
         String wrongFormat = "31-10-2020";
-        assertThrows(DateTimeParseException.class, () -> { storage.stringToDate(wrongFormat);
+        assertThrows(DateTimeParseException.class, () -> {
+            storage.stringToDate(wrongFormat);
         });
 
         // wrong format -> throws exception

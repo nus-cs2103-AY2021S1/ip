@@ -1,13 +1,13 @@
 package sparrow.data.task;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.junit.jupiter.api.Test;
+
 public class TodoTest {
 
-    Todo todo = new Todo("I am a todo.");
+    private Todo todo = new Todo("I am a todo.");
 
     @Test
     public void equals() {

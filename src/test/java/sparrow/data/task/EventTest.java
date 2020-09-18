@@ -1,14 +1,14 @@
 package sparrow.data.task;
 
-import org.junit.jupiter.api.Test;
-
-import java.time.LocalDate;
-
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.time.LocalDate;
+
+import org.junit.jupiter.api.Test;
+
 public class EventTest {
-    Event event = new Event("I am an event.", LocalDate.now());
+    private Event event = new Event("I am an event.", LocalDate.now());
 
     @Test
     public void equals() {

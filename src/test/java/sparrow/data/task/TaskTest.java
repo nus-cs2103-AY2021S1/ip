@@ -1,13 +1,13 @@
 package sparrow.data.task;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
 public class TaskTest {
 
-    Task task = new Task("I am a task.");
+    private Task task = new Task("I am a task.");
 
     @Test
     public void equals() {
