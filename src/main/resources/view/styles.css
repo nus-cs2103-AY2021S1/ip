@@ -1,3 +1,9 @@
+/*
+    @@author bowei-yu-reused
+    Reused from https://github.com/tankangliang/ip/blob/master/src/main/resources/view/styles.css
+    with minor modifications
+ */
+
 .label-text {
     -fx-text-fill: MidnightBlue;
     -fx-font-size: 14px;
@@ -73,3 +79,5 @@
     -fx-background-insets: 2.0, 0.0, 0.0;
     -fx-background-radius: 2.0em;
 }
+
+/* @@author */

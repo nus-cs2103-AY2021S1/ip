@@ -71,16 +71,28 @@ public class TaskList {
     }
 
     /**
-     * Finds tasks with the given keyword.
-     * @param toFind keyword
+     * Finds tasks with the given keywords.
+     * @param toFind keywords
      */
     public void findTasks(String toFind) {
         int currentIndex = 1;
         System.out.println("Oohhh look at me! Here are the matching tasks in your list:");
-        for (Task task : this.taskList) {
-            if (task.getDescription().contains(toFind) || task.searchTag(toFind)) {
-                System.out.println(currentIndex + "." + task.toString());
-                currentIndex++;
+
+        // takes note of which tasks were printed
+        boolean[] hasBeenPrinted = new boolean[this.taskList.size()];
+        String[] keywords = toFind.split(" ");
+
+        for (String word : keywords) {
+            for (int i = 0; i < this.taskList.size(); i++) {
+                if (hasBeenPrinted[i]) {
+                    continue;
+                }
+                Task task = this.taskList.get(i);
+                if (task.getDescription().contains(word) || task.searchTag(word)) {
+                    System.out.println(currentIndex + "." + task.toString());
+                    hasBeenPrinted[i] = true;
+                    currentIndex++;
+                }
             }
         }
         if (currentIndex == 1) {
