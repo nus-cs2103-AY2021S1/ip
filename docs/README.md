@@ -106,6 +106,11 @@ This feature allows users to find the list of command to use
 
 *Examples*: `help`
 
+*Expected Outcome*:
+
+![helpCommand](./images/help.png)
+
+
 ###  **2.2 Save the task : save**
 
 This feature allows users to save the task after they have added them.
@@ -115,6 +120,11 @@ This feature allows users to save the task after they have added them.
 *Format*: `save`
 
 *Examples*: `save`
+
+*Expected Outcome*:
+
+![saveCommand](./images/save.png)
+
 
 ### **2.3 Add a general ToDo task : todo**
 
@@ -126,6 +136,9 @@ This feature allows users to add a ToDo task to our current list
 
 *Examples*: `todo ip`
 
+*Expected Outcome*:
+
+![todoCommand](./images/todo.png)
 
 ### **2.4 Add a Deadline task : deadline**
 
@@ -137,6 +150,12 @@ for this task,eg: due on 2020 August 2, 7pm
 *Format*: `deadline [newTask] /by [date] [time]`
 
 *Examples*: `deadline ip /by 02/08/2020 1900`
+
+
+*Expected Outcome*:
+
+![deadlineCommand](./images/deadline.png)
+
 
 **Note:**
 1. the date must be dd/mm/yyyy
@@ -154,7 +173,12 @@ For example, it happens on 2020 August 2, 7pm
 
 *Format*: `event [newTask] /at [date] [time]`
 
-*Examples*: `event ip /at 02/08/2020 1900`
+*Examples*: `event assignment /at 02/08/2020 1900`
+
+*Expected Outcome*:
+
+![eventCommand](./images/event.png)
+
 
 **Note:**
 1. the date must be dd/mm/yyyy
@@ -174,7 +198,9 @@ This feature allows users to list out all the tasks added to the list in the ord
 
 *Examples*: `list`
 
+*Expected Outcome*:
 
+![listCommand](./images/list.png)
 
 ### **2.7 Marking a Task as done : done**
 
@@ -187,10 +213,14 @@ to make the task as done.
 *Format*: `done [task index]`
 
 we first use list to find the index of the task. For example, in this case, the index 
-for the ip task is taken as 5.
+for the ip task is taken as 2.
 
-*Examples*: `done 5`
+*Examples*: `done 2`
 
+
+*Expected Outcome*:
+
+![doneCommand](./images/done.png)
 
 
 ### **2.8 Delete the task : delete**
@@ -204,10 +234,14 @@ to delete the task.
 *Format*: `delete [task index]`
 
 we first use list to find the index of the task. For example, in this case, the index 
-for the ip task is taken as 5.
+for the ip task is taken as 3.
 
-*Examples*: `delete 5`
+*Examples*: `delete 3`
 
+
+*Expected Outcome*:
+
+![deleteCommand](./images/delete.png)
 
 
 ### **2.9 Find a certain task: find**
@@ -220,7 +254,9 @@ This feature allows users to find a certain task from the list and look at the d
 
 *Examples*: `find ip`
 
+*Expected Outcome*:
 
+![findCommand](./images/find.png)
 
 ###  **2.10 Ending a session : bye**
 
@@ -232,3 +268,4 @@ This feature allows users to quit the application after they have done what they
 
 *Examples*: `bye`
  
+*Expected Outcome*: Your application should be closed in 1 second. 
