@@ -53,9 +53,4 @@ public class MainWindow extends AnchorPane {
         String greetings = "Hi there! I'm Duke, your personal assistant.\nHow may I help you?";
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(greetings, dukeImage));
     }
-
-//    public void printException(Exception e) {
-//        String errorMessage = "Whoops! Something went wrong...\nDukeException: " + e.getMessage();
-//        dialogContainer.getChildren().add(DialogBox.getDukeDialog(errorMessage, dukeImage));
-//    }
 }

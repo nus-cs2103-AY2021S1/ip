@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * ToDo is a form of task and it contains description and status.
+ */
 public class ToDo extends Task {
     public ToDo(String description) {
         super(description);

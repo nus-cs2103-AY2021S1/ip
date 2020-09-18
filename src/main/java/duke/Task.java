@@ -6,6 +6,9 @@ public class Task {
     public static final int DONE = 1;
     public static final int NOT_DONE = 0;
 
+    /**
+     * Different types of Task.
+     */
     public enum Type {
         TODO, DEADLINE, EVENT
     }
@@ -22,6 +25,7 @@ public class Task {
 
     /**
      * Returns a symbol depending on status of task.
+     *
      * @return Tick or cross symbol.
      */
     public String getStatusIcon() {
@@ -30,6 +34,7 @@ public class Task {
 
     /**
      * Getter method for description.
+     *
      * @return Description of task.
      */
     public String getDescription() {
@@ -49,6 +54,12 @@ public class Task {
         return toText("T");
     }
 
+    /**
+     * Converts the Task into standard form for ease of saving to data file.
+     *
+     * @param type Indicates the type of task.
+     * @return Description of Task in standard form.
+     */
     public String toText(String type) {
         int doneInt = this.isDone ? DONE : NOT_DONE;
         return String.format("%s | %d | %s", type, doneInt, this.description);

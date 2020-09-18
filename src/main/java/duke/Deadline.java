@@ -1,8 +1,10 @@
 package duke;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
+/**
+ * Deadline is a form of TimedTask and it contains a description, status and date (deadline).
+ */
 public class Deadline extends TimedTask {
 
     public Deadline(String description, LocalDate date) {

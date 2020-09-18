@@ -2,6 +2,9 @@ package duke;
 
 import java.time.LocalDate;
 
+/**
+ * Event is a form of TimedTask and it contains a description, status and date.
+ */
 public class Event extends TimedTask {
 
     public Event(String description, LocalDate date) {

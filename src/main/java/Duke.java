@@ -8,16 +8,19 @@ import duke.Ui;
 import java.io.File;
 import java.io.IOException;
 
-
+/**
+ * Duke is a application that helps you keep track of your ToDos, Deadlines and Events all in one list.
+ */
 public class Duke {
     private Storage storage;
     private TaskList taskList;
-    private Ui ui;
 
+    /**
+     * Initialises taskList and storage of Duke
+     */
     public Duke() {
         String filePath = "./data";
         String fileName = "data.txt";
-        this.ui = new Ui();
         this.storage = new Storage(filePath + "/" + fileName);
         try {
             File dir = new File(filePath);
@@ -25,10 +28,8 @@ public class Duke {
             if (dir.exists() && file.exists()) {
                 this.taskList = new TaskList(storage.load());
             } else if (dir.exists()) {
-                // case where only folder exist
                 createFile();
             } else {
-                // case where folder does not exist
                 createDirectory(dir);
                 createFile();
             }
@@ -51,8 +52,12 @@ public class Duke {
         }
     }
 
-
-    // TODO: Print exception should somewhere be in getResponse
+    /**
+     * Complements the implementation of JavaFX.
+     *
+     * @param input User input.
+     * @return A string.
+     */
     String getResponse(String input) {
         Command command;
         try {
@@ -65,27 +70,7 @@ public class Duke {
         } catch (DukeException e) {
             return Ui.printException(e);
         }
-//        return this.execute(command);
     }
-
-//    private void run() {
-//        runLoopUntilExit();
-//        exit();
-//    }
-
-//    private void runLoopUntilExit() {
-//        Command command;
-//        do {
-//            String input = ui.getUserInput();
-//            command = Parser.parse(input);
-//            this.execute(command);
-//        } while (command.getCommandType() != Command.EXIT);
-//    }
-
-//    private void exit() {
-//        ui.showGoodbyeMessage();
-//        System.exit(0);
-//    }
 
     public static void main(String[] args) {
         new Duke();

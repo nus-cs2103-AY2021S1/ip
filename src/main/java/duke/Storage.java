@@ -9,13 +9,19 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
-    String filePath;
+    private String filePath;
 
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
-    // read file contents and return a String
+    /**
+     * Reads all the content in the specified File.
+     *
+     * @param filePath File Path of the specified File that we are reading from.
+     * @return All the file contents in String.
+     * @throws FileNotFoundException If no file is found using the filePath given.
+     */
     private static String readFileContents(String filePath) throws FileNotFoundException {
         File f = new File(filePath);
         String fileContentsInString = "";
@@ -87,7 +93,7 @@ public class Storage {
     }
 
     /**
-     * Creates a file to so that we are able to save all the tasks in the TaskList.
+     * Creates a file to save all the tasks in the TaskList before terminating the program.
      *
      * @throws IOException If the directory of the file being created doesn't exist.
      */
@@ -96,6 +102,13 @@ public class Storage {
         file.createNewFile();
     }
 
+    /**
+     * Writes data to a File.
+     *
+     * @param filePath  Path of the file that we are writing in.
+     * @param textToAdd Content to write into the file.
+     * @throws DukeException If an error occurs during file writing.
+     */
     private static void writeToFile(String filePath, String textToAdd) throws DukeException {
         try {
             FileWriter fw = new FileWriter(filePath);
@@ -120,6 +133,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Reads the tasks in TaskList and converts all the Task description into a String.
+     *
+     * @param taskList TaskList containing tasks to read.
+     * @return All the description of the tasks in TaskList in standard form.
+     */
     private String readDataFromTaskList(TaskList taskList) {
         String dataToSave = "";
         for (int i = 0; i < taskList.size(); i++) {

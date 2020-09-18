@@ -1,6 +1,12 @@
 package duke;
 
+/**
+ * Command encapsulates what the user intends to do based on the user's input.
+ */
 public abstract class Command {
+    /**
+     * Types of Commands supported by Duke.
+     */
     public static final int LIST = 1;
     public static final int DONE = 2;
     public static final int DELETE = 3;
@@ -38,11 +44,18 @@ public abstract class Command {
 
     /**
      * Getter method for commandType.
+     *
      * @return Type of command in integer form.
      */
     public int getCommandType() {
         return this.commandType;
     }
 
+    /**
+     * An abstract method implemented by the subclasses.
+     *
+     * @return String describing the outcome after executing the specific command.
+     * @throws DukeException If an error occurs during the execution of command.
+     */
     public abstract String execute() throws DukeException;
 }

@@ -2,8 +2,11 @@ package duke;
 
 import java.util.ArrayList;
 
+/**
+ * TaskList stores all the tasks entered by the user.
+ */
 public class TaskList {
-    ArrayList<Task> mainList;
+    private ArrayList<Task> mainList;
 
     public TaskList(ArrayList<Task> mainList) {
         this.mainList = mainList;
@@ -15,6 +18,7 @@ public class TaskList {
 
     /**
      * Adds task to TaskList.
+     *
      * @param task Task to add.
      */
     public void add(Task task) {
@@ -23,6 +27,7 @@ public class TaskList {
 
     /**
      * Removes task from TaskList.
+     *
      * @param index Index of task in TaskList to remove.
      */
     public void remove(int index) {
@@ -31,6 +36,7 @@ public class TaskList {
 
     /**
      * Removes task from TaskList
+     *
      * @param task The specific task in TaskList to remove.
      */
     public void remove(Task task) {
@@ -39,6 +45,7 @@ public class TaskList {
 
     /**
      * Gets the task in the TaskList.
+     *
      * @param index Index of task in TaskList to get.
      * @return Task.
      */
@@ -48,6 +55,7 @@ public class TaskList {
 
     /**
      * Gets the size of TaskList.
+     *
      * @return Size of TaskList.
      */
     public int size() {
