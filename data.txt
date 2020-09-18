@@ -1,3 +1,3 @@
-[D][✘] return book        /by 08/10/2020 1800
-[D][✘] return book        /by 08/10/2020 1800
+[D][✘] return book         /by 08/10/2020 1800
+[D][✘] return book         /by 08/10/2020 1800
 [T][✘] hi
