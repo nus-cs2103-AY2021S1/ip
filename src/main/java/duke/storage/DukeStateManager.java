@@ -3,6 +3,7 @@ package duke.storage;
 import java.io.IOException;
 import java.util.List;
 
+import duke.exceptions.LatestChangeException;
 import duke.task.Task;
 
 /**
@@ -52,7 +53,10 @@ public class DukeStateManager {
      *
      * @return the new current DukeState after the undo is complete
      */
-    public DukeState undo() throws IOException {
+    public DukeState undo() throws IOException, LatestChangeException {
+        if (isLatest()) {
+            throw new LatestChangeException();
+        }
         Node original = currentNode;
         try {
             currentNode = currentNode.previous;
@@ -63,6 +67,10 @@ public class DukeStateManager {
             throw new IOException(e);
         }
         return currentNode.state;
+    }
+
+    private boolean isLatest() {
+        return currentNode.previous == null;
     }
 
 }

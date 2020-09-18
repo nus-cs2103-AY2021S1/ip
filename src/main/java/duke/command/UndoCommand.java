@@ -2,9 +2,11 @@ package duke.command;
 
 import java.io.IOException;
 
+import duke.exceptions.LatestChangeException;
 import duke.storage.DukeStateManager;
 import duke.storage.Storage;
 import duke.task.TaskList;
+import duke.ui.ErrorResponse;
 import duke.ui.Response;
 import duke.ui.Ui;
 
@@ -27,7 +29,9 @@ public class UndoCommand extends Command {
             dukeStateManager.undo();
             return new Response(false, "Undo previous command!");
         } catch (IOException e) {
-            return new Response(false, "Undo failed, changes not saved");
+            return new ErrorResponse(false, "undo failed, changes not saved");
+        } catch (LatestChangeException e) {
+            return new ErrorResponse(false, e.getFriendlyMessage());
         }
     }
 }
