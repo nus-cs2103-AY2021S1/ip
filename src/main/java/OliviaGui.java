@@ -1,6 +1,5 @@
 import olivia.ui.DialogBox;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -14,6 +13,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import olivia.logic.Parser;
+import olivia.ui.ViewPane;
 
 public class OliviaGui extends Application {
 
@@ -49,7 +49,7 @@ public class OliviaGui extends Application {
     @Override
     public void start(Stage stage) {
 
-        scrollPane = new ScrollPane();
+        scrollPane = new ViewPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
 
@@ -70,13 +70,6 @@ public class OliviaGui extends Application {
         stage.setMinWidth(400.0);
 
         mainLayout.setPrefSize(400.0, 600.0);
-
-        scrollPane.setPrefSize(400, 535);
-        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-
-        scrollPane.setVvalue(1.0);
-        scrollPane.setFitToWidth(true);
 
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
