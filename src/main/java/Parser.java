@@ -5,6 +5,7 @@ public class Parser {
                 + Ui.PADDING + "todo <name>: Add todo task" + Ui.NEW_LINE
                 + Ui.PADDING + "event <name> /at <date>: Add event task. Date format: YYYY-MM-DD" + Ui.NEW_LINE
                 + Ui.PADDING + "deadline <name> /by <date>: Add deadline task. Date format: YYYY-MM-DD" + Ui.NEW_LINE
+                + Ui.PADDING + "find <search term>: Search the task list for matching tasks" + Ui.NEW_LINE
                 + Ui.PADDING + "done <index>: Mark task at specified index as done" + Ui.NEW_LINE
                 + Ui.PADDING + "list: View list of all tasks added" + Ui.NEW_LINE
                 + Ui.PADDING + "delete <index>: Delete the task at specified index" + Ui.NEW_LINE
@@ -75,6 +76,15 @@ public class Parser {
             } catch (DukeException ex) {
                 Ui.printError(ex.getMessage());
             }
+            return false;
+        }
+        if (input.length() >= 5 && input.substring(0,5).toUpperCase().equals(Duke.Commands.FIND.getString())) {
+            String searchTerm = input.substring(5).trim();
+            if (searchTerm.length() == 0) {
+                Ui.printError("The search term entered is empty.");
+                return false;
+            }
+            tasks.displayTasksFound(searchTerm);
             return false;
         }
         if (input.length() >= 7 && input.substring(0,7).toUpperCase().equals(Duke.Commands.DELETE.getString())) {

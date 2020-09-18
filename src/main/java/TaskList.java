@@ -59,9 +59,30 @@ public class TaskList {
         }
         StringBuilder output = new StringBuilder("You have the following tasks in your list:" + Ui.NEW_LINE);
         int counter = 1;
-        for (Task ele: this.taskList) {
-            output.append(Ui.PADDING).append(counter).append(". ").append(ele.toString()).append(Ui.NEW_LINE);
+        for (Task task: this.taskList) {
+            output.append(Ui.PADDING).append(counter).append(". ").append(task.toString()).append(Ui.NEW_LINE);
             counter++;
+        }
+        output = new StringBuilder(output.substring(0, output.length() - 1));
+        Ui.print(output.toString());
+    }
+
+    /**
+     * Display the list of tasks matching the search term specified by the user.
+     * @param searchTerm The search term used to find tasks in the task list.
+     */
+    void displayTasksFound(String searchTerm) {
+        int counter = 0;
+        StringBuilder output = new StringBuilder("Here are the matching tasks in your list:" + Ui.NEW_LINE);
+        for (Task task: this.taskList) {
+            if (task.getName().contains(searchTerm)) {
+                counter++;
+                output.append(Ui.PADDING).append(counter).append(". ").append(task.toString()).append(Ui.NEW_LINE);
+            }
+        }
+        if (counter == 0) {
+            Ui.print("No matching tasks found. Try another search term");
+            return;
         }
         output = new StringBuilder(output.substring(0, output.length() - 1));
         Ui.print(output.toString());
