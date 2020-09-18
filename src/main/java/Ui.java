@@ -35,13 +35,15 @@ public class Ui {
      */
     public String showDoneMessage(Task task) {
         return "Nice! I've marked this task as done:\n"
-                + task;
+                + task
+                + "\nThose who are crazy enough to think that they can "
+                + "change the world are the ones who usually do. Dream big!";
     }
     
     public String showFindMessage(ArrayList<Task> tasks) {
         String findMessage = "Here are the matching tasks in your list:\n";
         for (int i = 1; i <= tasks.size(); i++) {
-            findMessage = findMessage + i + "." + tasks.get(i - 1) + "\n";
+            findMessage = findMessage + i + ". " + tasks.get(i - 1) + "\n";
         }
         return findMessage;
     }
@@ -74,7 +76,7 @@ public class Ui {
     public String showListMessage(ArrayList<Task> tasks) {
         String listMessage = "Here are the tasks in your list:\n";
         for (int i = 1; i <= tasks.size(); i++) {
-            listMessage = listMessage + i + "." + tasks.get(i - 1) + "\n";
+            listMessage = listMessage + i + ". " + tasks.get(i - 1) + "\n";
         }
         return listMessage;
     }

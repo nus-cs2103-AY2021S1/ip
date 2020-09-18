@@ -5,5 +5,3 @@ T ~ 0 ~ buy bread
 T ~ 0 ~ shopping
 D ~ 0 ~ read book ~ 2020-08-27
 E ~ 0 ~ movie ~ 2020-09-09
-T ~ 0 ~ buy malt
-T ~ 0 ~ study for  Hindi

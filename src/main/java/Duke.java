@@ -1,3 +1,5 @@
+import javafx.application.Platform;
+
 import java.io.IOException;
 
 /**
@@ -42,6 +44,10 @@ public class Duke{
     public String run(String input) {
         try {
             Command command = Parser.parse(input);
+            if (command.isExit()) {
+                storage.saveTasks(tasks.getTasksList());
+                System.exit(0);
+            }
             return command.execute(tasks, ui, storage);
         } catch (DukeException e) {
             return ui.showError(e.toString());
