@@ -11,7 +11,8 @@ https://bchenghi.github.io/ip/
 Hello! I'm Duke, your friendly task manager.
 How can I help you today?
 ```
-
+## Screenshot
+![alt text](https://github.com/bchenghi/ip/blob/master/docs/Ui.png?raw=true)
 ## Download
 Download the jar file from releases.
 
