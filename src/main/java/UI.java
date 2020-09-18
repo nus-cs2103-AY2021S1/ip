@@ -36,7 +36,10 @@ public class UI {
         displayMessage("What can I do for you?\n");
     }
 
+    public String byeMessage() {
+        return "Bye. Hope to see you again soon!";
+    }
     public void bye() {
-        displayMessage("Bye. Hope to see you again soon!");
+        displayMessage(byeMessage());
     }
 }

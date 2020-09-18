@@ -81,6 +81,75 @@ public class Parser {
         }
     }
 
+    public String run(TaskList tasks, Storage storage, UI ui) throws Exception {
+        String commandType = getCommandType();
+        StringBuilder response = new StringBuilder();
+        switch (commandType) {
+        case "bye": {
+            storage.saveData(tasks.getTasks());
+            response.append(ui.byeMessage());
+            break;
+        }
+        case "list": {
+            response.append("Here are the tasks in your list:\n");
+            for (int i = 0; i < tasks.size(); ++i) {
+                response.append(String.format("%d. %s\n", i + 1, tasks.get(i)));
+            }
+            break;
+        }
+        case "done": {
+            int index = getIndex();
+            if (index >= tasks.size()) {
+                throw new DukeException(":( OOPS!!! Task index not found.");
+            }
+            tasks.get(index).markAsDone();
+            response.append("Nice! I've marked this task as done:\n");
+            response.append(tasks.get(index).toString()).append("\n");
+            break;
+        }
+        case "delete": {
+            int index = getIndex();
+            if (index >= tasks.size()) {
+                throw new DukeException(":( OOPS!!! Task index not found.");
+            }
+            response.append("Noted. I've removed this task:\n");
+            response.append(tasks.get(index).toString()).append("\n");
+            tasks.removeTask(index);
+            response.append(String.format("Now you have %d tasks in the list.\n", tasks.size()));
+            break;
+        }
+        case "add": {
+            Task newTask = getTask();
+            tasks.addTask(newTask);
+            response.append("Got it. I've added this task:\n");
+            response.append(newTask.toString()).append("\n");
+            response.append(String.format("Now you have %d tasks in the list\n", tasks.size()));
+            break;
+        }
+        case "find": {
+            String keyword = getDescription();
+            int counter = 0;
+            for (Task task : tasks.getTasks()) {
+                if (task.description.contains(keyword)) {
+                    if (counter == 0) {
+                        response.append("Here are the matching tasks in your list:\n");
+                    }
+                    ++counter;
+                    response.append(String.format("%d.%s\n", counter, task.toString()));
+                }
+            }
+            if (counter == 0) {
+                response.append("No task was found.\n");
+            }
+            break;
+        }
+        default: {
+            response.append("Unknown command.\n");
+        }
+        }
+        return response.toString();
+    }
+
     public int getIndex() {
         return this.index;
     }

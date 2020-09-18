@@ -108,4 +108,13 @@ public class Duke {
     public static void main(String[] args) throws Exception {
         new Duke().execute();
     }
+
+    public String getResponse(String input) {
+        try {
+            Parser parser = new Parser(input);
+            return parser.run(tasks, storage, ui);
+        } catch (Exception e) {
+            return "Unknown command";
+        }
+    }
 }
