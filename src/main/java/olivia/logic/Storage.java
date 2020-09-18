@@ -82,7 +82,7 @@ public class Storage {
                 .reduce((x, y) -> x + "\n" + y)
                 .orElse("");
         try {
-            FileWriter fw = new FileWriter("./src/main/data/duke.txt");
+            FileWriter fw = new FileWriter("./data/olivia.txt");
             fw.write(toWrite);
             fw.close();
         } catch (IOException ignored) {
