@@ -9,7 +9,7 @@ public class Ui {
      * @return Message of exception in String
      */
     public static String printException(DukeException e) {
-        String errorMessage = "Whoops! Something went wrong...\nError Message: " + e.getMessage();
+        String errorMessage = "Whoops! Something went wrong...\n" + e.getMessage();
         return errorMessage;
     }
 
@@ -75,5 +75,12 @@ public class Ui {
      */
     public static String informNoTaskFound() {
         return "Sorry, no matching task was found!";
+    }
+
+    /**
+     * Informs user no task in TaskList.
+     */
+    public static String informNoTaskInList() {
+        return "Your list is empty at the moment!";
     }
 }
