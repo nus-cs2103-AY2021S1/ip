@@ -33,14 +33,17 @@ public class Parser {
      */
     public static void run() {
         Scanner scanner = new Scanner(System.in);
-        ui.printLogo();
-        ui.greet();
+        String greetingwords;
+        greetingwords = ui.printLogo();
+        greetingwords += ui.greet();
+        System.out.println(greetingwords);
+
         while (scanner.hasNextLine()) {
             String command = scanner.nextLine();
             try {
-                handleCommand(command);
+                System.out.println(handleCommand(command));
             } catch (DukeException e) {
-                ui.showCommandError(e);
+                System.out.println(ui.showCommandError(e));
             }
         }
     }
@@ -50,27 +53,30 @@ public class Parser {
      * @param command the command given by user.
      * @throws DukeException when the instruction has an invalid task type, or the task type is specified but content is empty.
      */
-    public static void handleCommand(String command) throws DukeException {
+    public static String handleCommand(String command) throws DukeException {
+        String result;
         if (command.equals("bye")) {
-            ui.exit();
+            result = ui.exit();
         } else if (command.equals("list")) {
-            ui.printList(tasks.getTasks());
+            result = ui.printList(tasks.getTasks());
         } else if (command.split(" ")[0].equals("done")) {
             int index = Integer.parseInt(command.split(" ")[1]);
-            tasks.done(index - 1);
+            result = tasks.done(index - 1);
             storage.record(tasks.getTasks());
         } else if (command.split(" ")[0].equals("delete")) {
-            tasks.delete(Integer.parseInt(command.split(" ")[1]));
+            result = tasks.delete(Integer.parseInt(command.split(" ")[1]));
             storage.record(tasks.getTasks());
         } else if (command.split(" ")[0].equals("find")) {
             String keyword = command.replace("find ", "");
-            tasks.find(keyword);
+            result = tasks.find(keyword);
         } else if (command.split(" ")[0].equals("todo")) {
             String taskcommand = command.replace("todo", "");
             if (!taskcommand.equals("")) {
-                tasks.add(new ToDo(taskcommand));
+                result = tasks.add(new ToDo(taskcommand));
             } else {
-                throw new DukeException("EmptyToDo");
+                DukeException e = new DukeException("EmptyToDo");
+                result = ui.showCommandError(e);
+                throw e;
             }
             storage.record(tasks.getTasks());
         } else if (command.split(" ")[0].equals("deadline")) {
@@ -78,9 +84,11 @@ public class Parser {
             if (!taskcommand.equals("")) {
                 String time = command.split("/")[1].replace("by ", "");
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-                tasks.add(new Deadline(taskcommand, LocalDateTime.parse(time, formatter)));
+                result = tasks.add(new Deadline(taskcommand, LocalDateTime.parse(time, formatter)));
             } else {
-                throw new DukeException("EmptyDeadline");
+                DukeException e = new DukeException("EmptyDeadline");
+                result = ui.showCommandError(e);
+                throw e;
             }
             storage.record(tasks.getTasks());
         } else if (command.split(" ")[0].equals("event")) {
@@ -88,13 +96,18 @@ public class Parser {
             if (!taskcommand.equals("")) {
                 String time = command.split("/")[1].replace("at ", "");
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-                tasks.add(new Deadline(taskcommand, LocalDateTime.parse(time, formatter)));
+                result = tasks.add(new Deadline(taskcommand, LocalDateTime.parse(time, formatter)));
             } else {
-                throw new DukeException("EmptyEvent");
+                DukeException e = new DukeException("EmptyEvent");
+                result = ui.showCommandError(e);
+                throw e;
             }
             storage.record(tasks.getTasks());
         } else {
-            throw new DukeException("invalid");
+            DukeException e = new DukeException("invalid");
+            result = ui.showCommandError(e);
+            throw e;
         }
+        return result;
     }
 }
