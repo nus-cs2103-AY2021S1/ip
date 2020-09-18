@@ -1,10 +1,34 @@
 # User Guide
 ByteMe is a desktop scheduling app to help you manage your daily tasks. It is optimized for use via a Command Line Interface (CLI).
 
+## Table of Content
+* Quick Start
+* Features
+    * Adding a todo task
+    * Adding an event
+    * Adding a deadline
+    * Listing all tasks
+    * Marking a task as done 
+    * Deleting a task
+    * Finding a task
+    * Finding free slots
+    * Exiting programme
+* Usage
+
 ## Quick Start
-1. Ensure you have Java 11 or higher version installed on your computer.
-2. Download release `V0.2` of `duke.jar`.
-3. Start `duke.jar`.
+1. Ensure you have Java `11` or above installed on your computer.
+2. Download release `V0.3` of `duke.jar`.
+3. Copy the file to the folder of your choice
+3. Double click on `duke.jar` to start the GUI.
+    * Note that Duke will automatically create folder `data` 
+      in the same directory of `duke.jar` to save the tasks.
+    * The following GUI will appear: 
+        * ! [starting Image](./Starting.png)
+    * If the GUI cannot be started by double-clicking, open `duke.jar` in `Terminal/Command Prompt` depending on your system by the following command:
+        * `cd` home directory of `duke.jar` 
+        * `java -jar duke.jar`
+4. Type the command in the text input field and press the `send` button to start your journey with ByteMe!
+5. For all commands, please follow the correct `Format` specified.
 
 ## Features 
 1. Adding a todo task `todo`
@@ -19,74 +43,114 @@ ByteMe is a desktop scheduling app to help you manage your daily tasks. It is op
 
 ## Usage
 
-### `todo` - Adding a new todo task
+1. ### `todo` - Adding a new todo task
 
-Add a new todo task into your task list.
+    * Add a new todo task into your task list. A todo task requires a description only. 
+    
+    * Format
+        * `todo DESCRIPTION`
+        
+    * Example of usage: 
+        * `todo finish lab` creates new task named `finish lab` in list
+        * `todo do assignment` creates new task named `do assignment` in list
+    * ! [Todo Image](./Todo.png)
+    
+2. ### `event` - Adding a new event with a specific time
 
-Example of usage: 
+    * Add a new event with a specific time into your task list. A event requires a `description` and a `date time`.
+    
+    * Format
+        * `event DESCRIPTION /at YYYY-MM-DD HH:MM`
+        
+    * Example of usage: 
+        * `event project meeting /at 2020-09-13 19:00` creates new event named `project meeting` happening on `2020-09-13 19:00`
+    
+    * ! [Event Image](./Event.png)
+    
+3. ### `deadline` - Adding a new deadline with a specific time
 
-`todo finish lab`
+    * Add a new new deadline with a specific time into your task list. A deadline requires a `description` and a `date time`.
+    
+    * Format
+        * `deadline DESCRIPTION /by YYYY-MM-DD HH:MM`
 
-### `event` - Adding a new event with a specific time
+    * Example of usage: 
+        * `deadline assignment /by 2020-09-13 19:00` creates new deadline named `assignment` to be done by `2020-09-13 19:00`
 
-Add a new event with a specific time into your task list.
+    * ! [Deadline Image](./Deadline.png)
+    
+4. ### `list` - Listing all the tasks.
 
-Example of usage: 
+    * Listing all the tasks.
 
-`event project meeting /at 2020-09-13 19:00`
+    * Format
+        * `list`
+        
+    * Example of usage: 
+        * `list` lists all the tasks in your list
+        
+    * ! [List Image](./List.png)
 
-### `deadline` - Adding a new deadline with a specific time
+5. ### `done` - Marking a task at a specific index as done
 
-Add a new new deadline with a specific time into your task list.
+    * Mark a task at a specific index in your task list as done. An index is required to specify the task. Index should be within the range of number of tasks.
 
-Example of usage: 
+    * Format
+        * `done INDEX`
+    * Example of usage: 
 
-`deadline assignment /by 2020-09-13 19:00`
+        * `done 4` marks the 4th task in your list as done
+        
+    * ! [Done Image](./Done.png)
 
-### `list` - Listing all the tasks.
+6. ### `delete` - Deleting a task at a specific index as done
 
-Listing all the tasks..
+    * Delete a task at a specific index in task list. An index is required to specify the task. Index should be within the range of the number of tasks.
 
-Example of usage: 
+    * Format
+        * `delete INDEX`
+        
+    * Example of usage: 
 
-`list`
+        * `delete 4` deletes the 4th task in your list as done
 
-### `done` - Marking a task at a specific index as done
+    * ! [Delete Image](./Delete.png)
+    
+7. ### `find` - Finding tasks by keywords
 
-Mark a task at a specific index in your task list as done.
+    * Find tasks by keywords in the list. A keyword is required to specify the tasks you are looking for.
 
-Example of usage: 
+    * Format
+        * `find KEYWORD`
+        
+    * Example of usage: 
 
-`done 4`
+        * `find meeting` finds and lists all the tasks which names contains `meeting`
+    
+    * ! [Find Image](./Find.png)
+    
+8. ### `free time` - Finding free time slots on a specific date
 
-### `delete` - Deleting a task at a specific index as done
+    * Find free time slots on a specific date. A `date time` is required.
+    
+    * Format
+        * `free time YYYY-MM-DD`
+        
+    * Example of usage: 
 
-Delete a task at a specific index in your task list.
+        * `free time 2020-09-13` returns the free time slot on `2020-09-13`
+    
+    * ! [Free Image](./Free.png)
+    
+9. ### `bye` - Exiting the programme.
 
-Example of usage: 
+    * Exit ByteMe. Your input task will be automatically saved and stored in the `data` folder.
+    
+    * Format
+        * `bye`
+        
+    * Example of usage: 
 
-`delete 4`
-
-### `find` - Finding tasks by keywords
-
-Find tasks by keywords in the list.
-
-Example of usage: 
-
-`find meeting`
-
-### `free time` - Finding free time slots on a specific date
-
-Find free time slots on a specific date.
-
-Example of usage: 
-
-`free time 2020-09-13`
-
-### `bye` - Exiting the programme.
-
-Exit ByteMe.
-
-Example of usage: 
-
-`bye`
+        * `bye` exits the programme.
+        
+    * ! [Bye Image](./Bye.png)

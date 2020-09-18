@@ -217,11 +217,11 @@ public class Command {
             String query = input.substring(5);
             int count = 0;
             StringBuilder output = new StringBuilder();
-            output.append(Ui.SEPARATION_LINE + "    Here are the matching tasks in your list:");
+            output.append(Ui.SEPARATION_LINE + "    Here are the matching tasks in your list: \n");
             for (int i = 0; i < taskList.getSize(); i++) {
                 if (taskList.get(i).getTaskDescription().contains(query)) {
                     count += 1;
-                    output.append("    ").append(count).append(".").append(taskList.get(i).toString());
+                    output.append("   ").append(count).append(".").append(taskList.get(i).toString()).append("\n");
                 }
             }
             output.append(Ui.SEPARATION_LINE);
