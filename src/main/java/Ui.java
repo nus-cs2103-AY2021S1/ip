@@ -30,7 +30,7 @@ public class Ui {
     }
 
     String showError(DukeException e) {
-        return "     " + e.getMessage();
+        return "   " + e.getMessage();
     }
 
     String showWelcome() {
@@ -58,17 +58,17 @@ public class Ui {
     
     String showDoneTasks(ArrayList<Task> tasks) {
         String doneTasks = buildTaskString(tasks);
-        return "Nice! I've marked these tasks as done:\n       " + doneTasks;
+        return "Nice! I've marked these tasks as done:\n   " + doneTasks;
     }
 
     String showDeleteTasks(ArrayList<Task> tasks, int listLength) {
         String deleteTasks = buildTaskString(tasks);
-        return "Noted. I've removed these tasks:\n       " + deleteTasks 
+        return "Noted. I've removed these tasks:\n   " + deleteTasks 
                 + "\nNow you have " + listLength + " tasks in the list.";
     }
 
     String showAddedTask(Task task, int listLength) {
-        return "Got it. I've added this task:\n       " + task
+        return "Got it. I've added this task:\n   " + task
                 + "\nNow you have " + listLength + " tasks in the list.";
     }
     
