@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
 # create bin directory if it doesn't exist
-if [ ! -d "../bin" ]
+if [ ! -d " C:\Users\alvin\Desktop\NUS NOTES\NUS NOTES\Y2S1\CS2103\w2\bin" ]
 then
-    mkdir ../bin
+    mkdir C:\Users\alvin\Desktop\NUS NOTES\NUS NOTES\Y2S1\CS2103\w2\bin
 fi
 
 # delete output from previous run

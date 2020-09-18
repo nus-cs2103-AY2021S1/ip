@@ -1,0 +1,50 @@
+.anchorPane {
+    -fx-background-color: black;
+}
+
+.label {
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #f8f8ff;
+    -fx-font-family: "Arial Narrow";
+    -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 );
+}
+
+#scrollPane {
+    -fx-background-image:url("./Images/BGgif.gif");
+    -fx-background-size: cover;
+    -fx-background: transparent;
+}
+
+
+.button {
+    -fx-background-color:
+        linear-gradient(#686868 0%, #232723 25%, #373837 75%, #757575 100%),
+        linear-gradient(#020b02, #3a3a3a),
+        linear-gradient(#9d9e9d 0%, #6b6a6b 20%, #343534 80%, #242424 100%),
+        linear-gradient(#8a8a8a 0%, #6b6a6b 20%, #343534 80%, #262626 100%),
+        linear-gradient(#777777 0%, #606060 50%, #505250 51%, #2a2b2a 100%);
+    -fx-font-family: "Helvetica";
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow( three-pass-box , rgba(255,255,255,0.2) , 1, 0.0 , 0 , 1);
+}
+#button Text {
+    -fx-effect: dropshadow( one-pass-box , black , 0, 0.0 , 0 , -1 );
+}
+
+#userInput {
+    -fx-background-color:  #f8f8ff;
+    -fx-text-fill: #151B54;
+    -fx-font-size: 16px;
+    -fx-font-family: "Courier New";
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0.5, 0.0, 0.0);
+}
+
+.scroll-bar:vertical .track {
+    -fx-background-color: black;
+    -fx-border-color: white;
+    -fx-border-radius: 3.0em;
+}
+
