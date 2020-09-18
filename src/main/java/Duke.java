@@ -60,7 +60,7 @@ public class Duke {
                 this.storage.save(this.taskList);
                 System.exit(0);
             }
-            command = Parser.parseInput(input, storage, taskList);
+            command = Parser.parseInput(input, taskList);
             return command.execute();
         } catch (DukeException e) {
             return Ui.printException(e);

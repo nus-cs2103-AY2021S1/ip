@@ -40,4 +40,8 @@ public class Ui {
     public static String informInvalidCommand() {
         return "I'm sorry, but I don't know what that means :(";
     }
+
+    public static String informNoTaskFound() {
+        return "Sorry, no matching task was found!";
+    }
 }

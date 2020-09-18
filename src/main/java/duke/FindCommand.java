@@ -8,6 +8,9 @@ public class FindCommand extends PrintTaskCommand {
     public String execute() throws DukeException{
         if (isValidFormat(userInput)) {
             TaskList newTaskList = createListOfTasksContainingKeyword();
+            if (newTaskList.size() == 0) {
+                return Ui.informNoTaskFound();
+            }
             return outputTasksInTaskList(newTaskList, true);
         } else {
             throw new DukeException("What are you trying to find??");
