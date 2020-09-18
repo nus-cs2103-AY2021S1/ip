@@ -1,0 +1,18 @@
+todo read book
+event project meeting /at Friday 2 to 4pm
+deadline individual project /by August 20
+listtt
+list all
+list
+done 7
+done -5
+done ewofije
+done 2
+event birthday celebration /by September 5
+deadline movie night /at December 28
+list
+delete 13
+delete -324
+delete 2
+bye bye
+bye
