@@ -1,5 +1,5 @@
 # User Guide
-ByteMe is a desktop scheduling app to help you manage your daily tasks. It is optimized for use via a Command Line Interface (CLI).
+ByteMe is a **desktop scheduling app to help you manage your daily tasks**. It is **optimized for use via a Command Line Interface (CLI)**. Start your exciting journey with **ByteMe** from here!
 
 ## Table of Content
 * [Quick Start](https://xz0127.github.io/ip/#quick-start)
