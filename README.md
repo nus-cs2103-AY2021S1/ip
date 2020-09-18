@@ -1,4 +1,6 @@
 <h1 align="center">IncrediBot</h1>
+<h3 align="center">Task manager app powered by JavaFX</h3>
+<p align="center"><em>Keane Chan</em> | <em>A0205678W</em></p>
 
 <p align="center">
     <a href="https://github.com/keanecjy/ip/actions">
