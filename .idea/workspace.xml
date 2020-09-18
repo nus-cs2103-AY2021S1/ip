@@ -24,9 +24,29 @@
       <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/Mattbot/Command/CompletedCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Mattbot/Command/CompletedCommand.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/Mattbot/Command/DeleteCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Mattbot/Command/DeleteCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Mattbot/Command/ExitCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Mattbot/Command/ExitCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Mattbot/Command/FilterDateCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Mattbot/Command/FilterDateCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Mattbot/Command/FindCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Mattbot/Command/FindCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Mattbot/Command/ViewScheduleCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Mattbot/Command/ViewScheduleCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Mattbot/Command/WrongCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Mattbot/Command/WrongCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Mattbot/DateTime/DateTimeManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Mattbot/DateTime/DateTimeManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Mattbot/Duke.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Mattbot/Duke.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Mattbot/File/FileManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Mattbot/File/FileManager.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/Mattbot/MainWindow.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Mattbot/MainWindow.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Mattbot/Parser/InputManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Mattbot/Parser/InputManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Mattbot/Tasks/Deadline.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Mattbot/Tasks/Deadline.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Mattbot/Tasks/Event.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Mattbot/Tasks/Event.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Mattbot/Tasks/TaskManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Mattbot/Tasks/TaskManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Mattbot/Tasks/Todo.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Mattbot/Tasks/Todo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Mattbot/Tasks/task.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Mattbot/Tasks/task.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Mattbot/UI/InitiateParser.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Mattbot/UI/InitiateParser.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/Mattbot/UI/UserInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Mattbot/UI/UserInterface.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/reports/checkstyle/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/checkstyle/main.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/reports/checkstyle/main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/checkstyle/main.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mattbot/DialogBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mattbot/DialogBox.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/mattbot/Duke.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mattbot/Duke.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mattbot/Launcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mattbot/Launcher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mattbot/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mattbot/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/mattbot/MainWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mattbot/MainWindow.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/mattbot/command/CompletedCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mattbot/command/CompletedCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/mattbot/command/DeleteCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mattbot/command/DeleteCommand.java" afterDir="false" />
@@ -79,6 +99,12 @@
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="ip" type="f1a62948:ProjectNode" />
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="ip" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="verification" type="c8890929:TasksNode$1" />
               </path>
             </expand>
             <select />
@@ -216,22 +242,22 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="421" y="102" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1599032427849" />
-    <state width="1237" height="230" key="GridCell.Tab.0.bottom" timestamp="1600437561970">
+    <state width="1237" height="230" key="GridCell.Tab.0.bottom" timestamp="1600438029729">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="230" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1600437561970" />
-    <state width="1237" height="230" key="GridCell.Tab.0.center" timestamp="1600437561970">
+    <state width="1237" height="230" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1600438029729" />
+    <state width="1237" height="230" key="GridCell.Tab.0.center" timestamp="1600438029729">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="230" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1600437561970" />
-    <state width="1237" height="230" key="GridCell.Tab.0.left" timestamp="1600437561970">
+    <state width="1237" height="230" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1600438029729" />
+    <state width="1237" height="230" key="GridCell.Tab.0.left" timestamp="1600438029729">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="230" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1600437561970" />
-    <state width="1237" height="230" key="GridCell.Tab.0.right" timestamp="1600437561970">
+    <state width="1237" height="230" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1600438029729" />
+    <state width="1237" height="230" key="GridCell.Tab.0.right" timestamp="1600438029729">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="230" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1600437561970" />
+    <state width="1237" height="230" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1600438029729" />
     <state x="197" y="0" key="SettingsEditor" timestamp="1600437977353">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
