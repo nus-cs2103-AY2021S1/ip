@@ -26,6 +26,8 @@ public class Ui {
 
     /**
      * Prints the message without borders.
+     *
+     * @return Message.
      */
     public String printMessage() {
         return message;
@@ -33,6 +35,9 @@ public class Ui {
 
     /**
      * Prints the welcome message.
+     *
+     * @param taskList Existing task list.
+     * @return Welcome Message.
      */
     public String printWelcome(TaskList taskList) {
         message = "Hello, I'm Duke!\n";
@@ -53,6 +58,8 @@ public class Ui {
 
     /**
      * Prints the loading error.
+     *
+     * @return Loading error message.
      */
     public String printLoadingError() {
         message = "An error occurred while loading the data...";
@@ -63,6 +70,7 @@ public class Ui {
      * Prints the tasks of a given array list of tasks.
      *
      * @param taskList Array list of tasks to be printed.
+     * @return Existing tasks in string format.
      */
     public String printTasks(ArrayList<Task> taskList) {
         if (taskList.size() < 1) {
@@ -78,6 +86,13 @@ public class Ui {
         return printMessage();
     }
 
+    /**
+     * Prints the tasks of a given array list of tasks that contains the keyword.
+     *
+     * @param taskList Array list of tasks to be printed.
+     * @param keyword Keyword to search for.
+     * @return Existing tasks containing the keyword in string format.
+     */
     public String printFind(ArrayList<Task> taskList, String keyword) {
         if (taskList.size() < 1) {
             message = "You currently have no tasks.\n";
@@ -96,6 +111,11 @@ public class Ui {
         return printMessage();
     }
 
+    /**
+     * Prints the help message.
+     *
+     * @return Help message.
+     */
     public String printHelp() {
         message = "I see that you need some help!\n\n"
                 + "Here are a list of Duke commands ([] indicates user input):\n\n"
@@ -113,6 +133,8 @@ public class Ui {
 
     /**
      * Prints the goodbye message.
+     *
+     * @return Goodbye message.
      */
     public String printGoodbye() {
         message = "Bye. Hope to see you again soon!\n";

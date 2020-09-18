@@ -12,12 +12,13 @@ import java.io.IOException;
  */
 public class Parser {
     /**
-     * Parses the user input and gives the corresponding instructions.
+     * Parses the user input and gives the response.
      *
      * @param input User input.
      * @param taskList Duke's existing task list.
      * @param storage Duke's storage.
      * @param ui Duke's ui.
+     * @return Response.
      */
     public String parse(String input, TaskList taskList, Storage storage, Ui ui) {
         storage.updateHardDisk(taskList.getTasks());

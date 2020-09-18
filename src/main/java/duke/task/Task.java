@@ -28,6 +28,11 @@ public class Task {
         return description.contains(keyword);
     }
 
+    /**
+     * Converts the task into a format that can be easily stored in the data file.
+     *
+     * @return Formatted task information.
+     */
     public String toData() {
         String done = isDone ? "1" : "0";
         return done + " | " + description;

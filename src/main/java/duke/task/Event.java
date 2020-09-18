@@ -21,6 +21,11 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Converts the event into a format that can be easily stored in the data file.
+     *
+     * @return Formatted event information.
+     */
     @Override
     public String toData() {
         return "E | " + super.toData() + " | " + at;

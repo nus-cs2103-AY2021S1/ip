@@ -8,6 +8,11 @@ public class ToDo extends Task {
         super(description);
     }
 
+    /**
+     * Converts the todo into a format that can be easily stored in the data file.
+     *
+     * @return Formatted todo information.
+     */
     @Override
     public String toData() {
         return "T | " + super.toData();

@@ -21,6 +21,11 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Converts the deadline into a format that can be easily stored in the data file.
+     *
+     * @return Formatted deadline information.
+     */
     @Override
     public String toData() {
         return "D | " + super.toData() + " | " + by;
