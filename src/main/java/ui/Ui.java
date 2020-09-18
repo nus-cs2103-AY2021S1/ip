@@ -197,7 +197,7 @@ public class Ui {
      * @return The message to be displayed to the user.
      */
     public String addTaskMessage(Task newTask, int noTask) {
-        return "I have added the task User : \n \t"
+        return "I have added the task User : \n "
                 + newTask.toString() + "\nyou have " + String.valueOf(noTask) + " Tasks in the list.\n";
     }
 

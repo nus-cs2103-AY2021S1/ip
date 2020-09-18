@@ -6,3 +6,4 @@ f|find
 md|done
 del|delete
 l|list
+li|list

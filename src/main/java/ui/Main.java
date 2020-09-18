@@ -24,6 +24,7 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
+            stage.setTitle("BitBot");
             stage.show();
             stage.setOnCloseRequest(event -> duke.executeCommand(duke.getCommand("bye")));
         } catch (IOException e) {
