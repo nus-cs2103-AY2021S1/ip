@@ -191,6 +191,8 @@ public class TaskList {
      * @throws DukeException Duke-related exception due to erroneous inputs
      */
     private LocalDate validateDateTime(String time) throws DukeException {
+        assert time != null : "Null time string to parse";
+
         if (time.equals("")) {
             throw new DukeException("Task date cannot be empty.");
         }
@@ -210,6 +212,8 @@ public class TaskList {
      * @return Tasks found
      */
     public List<Task> findTasks(String key) {
+        assert key != null : "Null search key";
+
         List<Task> found = new ArrayList<>();
         for (Task task : taskList) {
             if (task.search(key)) {

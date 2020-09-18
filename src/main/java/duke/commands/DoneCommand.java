@@ -47,6 +47,8 @@ public class DoneCommand extends Command {
     @Override
     public String runGUI(TaskList taskList, Storage storage, Ui ui) throws DukeException {
         Task markedTask = taskList.markDone(Integer.parseInt(attributes));
+
+        assert markedTask != null : "Null return from marking the task";
         storage.storeList(taskList.getList());
         return ui.writeDone(markedTask);
     }

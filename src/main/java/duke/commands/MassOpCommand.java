@@ -52,7 +52,7 @@ public class MassOpCommand extends Command {
      */
     @Override
     public String runGUI(TaskList taskList, Storage storage, Ui ui) throws DukeException{
-        String[] attrSplit = attributes.split("/find");
+        String[] attrSplit = attributes.strip().split("/find");
         if (attrSplit.length != 2) {
             throw new DukeException("Invalid mass operation format");
         }

@@ -64,6 +64,8 @@ public class Duke {
      * @return output message
      */
     public String getResponse(String input) {
+        assert input != null : "Null input to process";
+
         try {
             Command command = parser.processInput(input);
             assert command != null : "Parser returned null";

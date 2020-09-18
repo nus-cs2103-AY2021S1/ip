@@ -75,6 +75,8 @@ public class Storage {
      * @param taskList List of Task objects to write to file
      */
     public void storeList(List<Task> taskList) {
+        assert taskList != null : "Null tasklist to store to file";
+
         try {
             FileWriter writer = new FileWriter(FILE_PATH.toString());
 

@@ -40,6 +40,8 @@ public class Parser {
      * @throws DukeException Duke-related exception due to erroneous inputs
      */
     public Command processInput(String input) throws DukeException {
+        assert input != null : "Null input to prcoess";
+
         if (input.equals(BYE)) {
             return new ExitCommand();
         } else if (input.equals(LIST)) {

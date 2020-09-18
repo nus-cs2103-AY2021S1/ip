@@ -59,6 +59,8 @@ public class AddCommand extends Command {
         } else {
             newTask = taskList.addTimedTask(attributes, true);
         }
+
+        assert newTask != null : "Null return from adding the task";
         storage.storeList(taskList.getList());
         return ui.writeAdd(newTask, taskList.getSize());
     }
