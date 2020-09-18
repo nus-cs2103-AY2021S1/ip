@@ -8,7 +8,7 @@ class TaskTest {
 
     @Test
     void doneTask() {
-        assertEquals("[T][✓] sleep", new Task("sleep", TaskType.TODO).doneTask().toString());
+        assertEquals("[T][\u2713] sleep", new Task("sleep", TaskType.TODO).doneTask().toString());
     }
 
     @Test
@@ -28,6 +28,6 @@ class TaskTest {
 
     @Test
     void testToString() {
-        assertEquals("[T][✗] sleep", new Task("sleep", TaskType.TODO).toString());
+        assertEquals("[T][\u274C] sleep", new Task("sleep", TaskType.TODO).toString());
     }
 }

@@ -14,13 +14,13 @@ class EventsTest {
 
     @Test
     void doneTask() {
-        assertEquals("[E][✓] party (at: 12 Feb 2020 1:30 PM)",
+        assertEquals("[E][\u2713] party (at: 12 Feb 2020 1:30 PM)",
                 new Events("party", "2020-02-12 1330").doneTask().toString());
     }
 
     @Test
     void testToString() {
-        assertEquals("[E][✗] party (at: 12 Feb 2020 1:30 PM)",
+        assertEquals("[E][\u274C] party (at: 12 Feb 2020 1:30 PM)",
                 new Events("party", "2020-02-12 1330").toString());
     }
 }

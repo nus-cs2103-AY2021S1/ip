@@ -14,13 +14,13 @@ class DeadlinesTest {
 
     @Test
     void doneTask() {
-        assertEquals("[D][✓] party (by: 12 Feb 2020 1:30 PM)",
+        assertEquals("[D][\u2713] party (by: 12 Feb 2020 1:30 PM)",
                 new Deadlines("party", "2020-02-12 1330").doneTask().toString());
     }
 
     @Test
     void testToString() {
-        assertEquals("[D][✗] party (by: 12 Feb 2020 1:30 PM)",
+        assertEquals("[D][\u274C] party (by: 12 Feb 2020 1:30 PM)",
                 new Deadlines("party", "2020-02-12 1330").toString());
     }
 }

@@ -8,13 +8,13 @@ class ToDosTest {
 
     @Test
     void doneTask() {
-        assertEquals("[T][✓] party",
+        assertEquals("[T][\u2713] party",
                 new ToDos("party").doneTask().toString());
     }
 
     @Test
     void testToString() {
-        assertEquals("[T][✗] party",
+        assertEquals("[T][\u274C] party",
                 new ToDos("party").toString());
     }
 }

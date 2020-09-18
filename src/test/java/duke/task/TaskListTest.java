@@ -22,7 +22,7 @@ class TaskListTest {
         List<Task> taskArrayList = new ArrayList<>();
         taskArrayList.add(new Task("sleep", TaskType.TODO));
         TaskList taskList = new TaskList(taskArrayList);
-        assertEquals("[T][✗] sleep", taskList.get(0).toString());
+        assertEquals("[T][\u274C] sleep", taskList.get(0).toString());
     }
 
     @Test
@@ -31,7 +31,7 @@ class TaskListTest {
         taskArrayList.add(new Task("sleep", TaskType.TODO));
         taskArrayList.add(new Task("study", TaskType.TODO));
         TaskList taskList = new TaskList(taskArrayList);
-        assertEquals("[T][✗] study", taskList.remove(1).toString());
+        assertEquals("[T][\u274C] study", taskList.remove(1).toString());
     }
 
     @Test
@@ -41,7 +41,7 @@ class TaskListTest {
         taskArrayList.add(new Task("study", TaskType.TODO));
         TaskList taskList = new TaskList(taskArrayList);
         taskList.add(1, sleep);
-        assertEquals("[T][✗] sleep", taskList.remove(1).toString());
+        assertEquals("[T][\u274C] sleep", taskList.remove(1).toString());
     }
 
     @Test
