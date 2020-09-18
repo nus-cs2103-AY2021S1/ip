@@ -14,7 +14,7 @@ Double click on duke.jar to start program.
 ### Commands and instructions
 
 Note: 
-* <INFO|> denotes information to be filled in by the user
+* <INFO\> denotes information to be filled in by the user
 * Date formats used are of the form date/month/year
 * Time formats used below are of a 24hr format (e.g. 2359)
 
