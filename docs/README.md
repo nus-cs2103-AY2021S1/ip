@@ -182,7 +182,7 @@ Finds and displays all tasks that is due/occurring on a specified date.
 
 ![Image of date feature](./UiFindDate.png)
 
-### 3.7 Adding an alias to map to command: `alias`
+### <ins>3.7 Adding an alias to map to command: `alias`</ins>
 
 ##### Description
 
@@ -205,7 +205,7 @@ Alias created will be saved for future use.
 
 ![Image of using new alias as command](./UiAliasUse.png)
 
-### 3.8 Deleting an alias: `deletealias`
+### <ins>3.8 Deleting an alias: `deletealias`</ins>
 
 ##### Description
 
@@ -227,7 +227,7 @@ Delete an existing alias which maps to a command.
 
 ![Image of using new alias as command](./UiAliasCannotUse.png)
 
-### 3.9 Exiting the program: `bye`
+### <ins>3.9 Exiting the program: `bye`</ins>
 
 ##### Description
 
