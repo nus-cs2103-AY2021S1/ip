@@ -1,5 +1,2 @@
 TODO#read book#false#
-EVENT#write essay#false#tonight#
-EVENT#meeting#true#2pm#
-TODO#eat#true#fun, nice
-EVENT#meeting#false#2020-09-18#
+EVENT#meeting#false#xx#important
