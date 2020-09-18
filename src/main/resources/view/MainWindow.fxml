@@ -10,7 +10,7 @@
     <children>
         <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="510.0" prefWidth="980.0" vvalue="1.0">
             <content>
-                <VBox fx:id="dialogContainer" focusTraversable="true" prefHeight="510.0" prefWidth="980.0" style="-fx-background-color: black;">
+                <VBox fx:id="dialogContainer" focusTraversable="true" prefHeight="508.0" prefWidth="979.0" style="-fx-background-color: black;">
                <children>
                   <HBox fx:id="userInput" prefHeight="100.0" prefWidth="780.0">
                      <children>

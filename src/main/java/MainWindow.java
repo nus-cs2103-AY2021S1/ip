@@ -28,10 +28,11 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         //hide scrollbar
-        scrollPane.hbarPolicyProperty().setValue(ScrollPane.ScrollBarPolicy.NEVER);
+        //scrollPane.hbarPolicyProperty().setValue(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.vbarPolicyProperty().setValue(ScrollPane.ScrollBarPolicy.NEVER);
 
-        String openingMsg = "hey hey im Poco";
+        String openingMsg = "hey hey im Poco \ntype 'help' to view a list of commands"
+                                + "\ntype 'format (cmd name)' to view the correct format \ntype 'bye' to exit";
         Label text = new Label(openingMsg);
         text.setStyle("-fx-text-fill: #D0D0D0; -fx-font-family:\"consolas\"; -fx-font-size:14px; -fx-font-weight:bold;");
         text.setPadding(new Insets(10, 0,10, 10));

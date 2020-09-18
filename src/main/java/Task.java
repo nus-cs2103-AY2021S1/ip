@@ -21,7 +21,7 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        String check = isDone ? "\u2713" : "\u2718";
+        String check = isDone ? "v" : "x";
         String timeText = time == null
                         ? ""
                         : "/" + time.format(formatter);
@@ -40,32 +40,46 @@ public abstract class Task {
         String c = line.substring(2, 5);
         String desc = line.substring(6);
         String[] arr;
-
+        Task task = null;
         switch(c) {
         case TODO_SYMBOL:
-            return new ToDo(desc);
+            task = new ToDo(desc);
+            break;
         case DEADLINE_SYMBOL:
-            arr = desc.split("/", 2);
-            try {
-                LocalDateTime ldt = LocalDateTime.parse(arr[1].trim(), formatter);
-                return new Deadline(arr[0], ldt);
-            } catch (Exception e) {
-                System.out.println(e);
-                break;
-            }
+            task = parseToTask(desc, TaskType.DEADLINE);
+            break;
         case EVENT_SYMBOL:
-            arr = desc.split("/", 2);
-            try {
-                LocalDateTime ldt1 = LocalDateTime.parse(arr[1].trim(), formatter);
-                return new Event(arr[0], ldt1);
-            } catch (Exception e) {
-                System.out.println(e);
-                break;
-            }
+            task = parseToTask(desc, TaskType.EVENT);
+            break;
         default:
             System.out.println("Error: could not recognize task symbol");
         }
-        return null;
+        if (task == null) {
+            return null;
+        }
+
+        String check = line.substring(0, 1);
+        if (check.equals("v")) {
+            task.done();
+        }
+        return task;
+
+    }
+
+    public static Task parseToTask(String line, TaskType type) {
+        if (!line.contains("/")) {
+            System.out.println("Error: invalid task format for deadline/event");
+            return null;
+        }
+        String[] arr = line.split("/", 2);
+        try {
+            LocalDateTime ldt = LocalDateTime.parse(arr[1].trim(), formatter);
+            return type == TaskType.DEADLINE ? new Deadline(arr[0], ldt)
+                                            : new Event(arr[0], ldt);
+        } catch (Exception e) {
+            System.out.println(e);
+            return null;
+        }
     }
 
 }

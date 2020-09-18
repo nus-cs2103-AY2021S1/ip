@@ -11,31 +11,50 @@ public class TaskList {
         list.addAll(ls);
     }
 
-    String add(String input, boolean isEvent) {
+    String add(String input, TaskType type) {
         Task task;
-        if (input.contains("/")) {
-            task = parseTime(input, isEvent);
+        switch(type) {
+        case TODO:
+            task = new ToDo(input);
             list.add(task);
-        } else {
-            task = new ToDo((input));
-            list.add(task);
+            break;
+        case DEADLINE:
+        case EVENT:
+            return parseTime(input, type);
+        default:
+            return "Error adding task";
         }
-        return task != null ? "Poco has added " + task.toString() + " to your list"
-                                + "\n" + "Pending Tasks: " + list.size()
-                            : "Error adding task";
+        return "Poco has added " + task.toString() + " to your list"
+                                + "\n" + "Pending Tasks: " + list.size();
+
     }
 
-    private Task parseTime(String input, boolean isEvent) {
-        String[] arr = input.split("/", 2);
+    private String parseTime(String input, TaskType type) {
+        if (!input.contains("/")) {
+            return "Error: Specify a time using /";
+        }
+
         try {
-            System.out.println(arr[1]);
+            Task task = null;
+            String[] arr = input.split("/", 2);
             LocalDateTime ldt = LocalDateTime.parse(arr[1].trim(), formatter);
-            return isEvent ? new Event(arr[0], ldt)
-                            : new Deadline(arr[0], ldt);
+            switch(type) {
+            case DEADLINE:
+                task = new Deadline(arr[0], ldt);
+                list.add(task);
+                break;
+            case EVENT:
+                task = new Event(arr[0], ldt);
+                list.add(task);
+                break;
+            }
+            return task != null ? "Poco has added " + task.toString() + " to your list"
+                    + "\n" + "Pending Tasks: " + list.size()
+                    : "Error: adding task";
         } catch (Exception e) {
             System.out.println(e);
+            return "Error: Invalid time format";
         }
-        return null;
     }
 
 
@@ -103,5 +122,4 @@ public class TaskList {
         }
         return s;
     }
-
 }

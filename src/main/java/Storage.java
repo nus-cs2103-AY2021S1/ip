@@ -14,13 +14,6 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    /**
-     * Calls initFile first as a check
-     * Reads the file at the filepath and
-     * parses each line as a task to add to list
-     *
-     * @return array list of tasks in the file
-     */
     ArrayList<Task> loadFile() {
         initFile();
 
@@ -46,12 +39,6 @@ public class Storage {
         return ls;
     }
 
-    /**
-     * Saves the param TaskList into
-     * the file at the specified filepath
-     *
-     * @param ls task list
-     */
     void saveFile(TaskList ls) {
         System.out.println("Saving...");
         File f = new File(this.filePath);
