@@ -7,9 +7,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<fx:root alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="300.0" opacity="0.89" prefWidth="300.0" style="-fx-background-color: white; -fx-background-radius: 30;" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="CENTER_RIGHT" minHeight="-Infinity" maxHeight="-Infinity" maxWidth="300.0" opacity="0.89" prefWidth="300.0" style="-fx-background-color: white; -fx-background-radius: 30;" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label fx:id="dialog" text="Label" wrapText="true">
+        <Label fx:id="dialog" minHeight="0.0" text="Label" wrapText="true">
          <font>
             <Font name="Georgia" size="11.0" />
          </font></Label>

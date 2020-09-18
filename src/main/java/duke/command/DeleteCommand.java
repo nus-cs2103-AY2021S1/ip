@@ -34,7 +34,7 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeTaskNotFoundException {
-        int taskNumber = Character.getNumericValue(commandDetails[1].charAt(0)) - 1;
+        int taskNumber = Integer.parseInt(commandDetails[1]) - 1;
         if (tasks.getTasks().isEmpty() || taskNumber > tasks.getTasks().size()) {
             throw new DukeTaskNotFoundException(" ERROR... TASK NOT FOUND. \n PLEASE TRY AGAIN ");
         }
