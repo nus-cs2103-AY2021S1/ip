@@ -70,12 +70,6 @@ public class Storage {
                 break;
             case 'D':
                 int posD = getPosition(line, '/');
-                /*
-                System.out.println("posD " +  posD);
-                System.out.println(line);
-                System.out.println(line.substring(7, posD));
-                System.out.println(line.substring(posD + 4));
-                */
                 newList.add(new Deadline(line.substring(7, posD), line.substring(posD + 4)));
                 break;
             default:

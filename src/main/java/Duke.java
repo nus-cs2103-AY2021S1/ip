@@ -35,7 +35,6 @@ public class Duke {
         ui = new Ui();
         parser = new Parser();
         storage = new Storage("data.txt");
-        ui.showWelcome();
         try {
             tasks = new TaskList(storage.load());
         } catch (FileNotFoundException e) {
@@ -45,8 +44,7 @@ public class Duke {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Returns output message to the user.
      */
     public String getResponse(String input) {
         ui.showLine();
@@ -74,6 +72,8 @@ public class Duke {
                 return tasks.addDeadline(input);
             case FIND:
                 return tasks.findTasks(input);
+            case HELP:
+                return ui.showHelp();
             default:
                 System.out.println("Error in switch - Default case");
                 break;
@@ -81,6 +81,6 @@ public class Duke {
         } catch (Exception e) {
             System.out.println(e);
         }
-        return "Error - Failed to parse input: " + input;
+        return "Oops, I didn't catch what you said: " + input;
     }
 }
