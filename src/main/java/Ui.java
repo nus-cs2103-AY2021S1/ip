@@ -13,10 +13,20 @@ public class Ui {
                     + "|____/ \\__,_|_|\\_\\___|\n";
 
     private static final String DIVIDER =
-            "    ____________________________________________________________\n";
+            "______________________________\n";
 
     String showDivider() {
         return DIVIDER;
+    }
+
+    /**
+     * Wraps the text provided with the divider.
+     * 
+     * @param response duke's response.
+     * @return duke's response with dividers.
+     */
+    String formatResponse(String response) {
+        return showDivider() + response + "\n" + showDivider();
     }
 
     String showError(DukeException e) {
@@ -26,16 +36,16 @@ public class Ui {
     String showWelcome() {
         return "Hello from\n" + LOGO
                 + showDivider()
-                + "     Hello! I'm Duke!\n" + "     What can I do for you?\n"
+                + "Hello! I'm Duke!\n" + "What can I do for you?\n"
                 + showDivider();
     }
 
     String showGoodbye() {
-        return "     Bye. Hope to see you again soon!\n";
+        return "Bye. Hope to see you again soon!\n";
     }
 
     String showTaskList(String taskListString) {
-        return "     Here are the tasks in your list:\n" +  taskListString;
+        return "Here are the tasks in your list:\n" +  taskListString;
     }
 
     private String buildTaskString(ArrayList<Task> tasks) {
@@ -48,21 +58,21 @@ public class Ui {
     
     String showDoneTasks(ArrayList<Task> tasks) {
         String doneTasks = buildTaskString(tasks);
-        return "     Nice! I've marked these tasks as done:\n       " + doneTasks;
+        return "Nice! I've marked these tasks as done:\n       " + doneTasks;
     }
 
     String showDeleteTasks(ArrayList<Task> tasks, int listLength) {
         String deleteTasks = buildTaskString(tasks);
-        return "     Noted. I've removed these tasks:\n       " + deleteTasks 
-                + "\n     Now you have " + listLength + " tasks in the list.";
+        return "Noted. I've removed these tasks:\n       " + deleteTasks 
+                + "\nNow you have " + listLength + " tasks in the list.";
     }
 
     String showAddedTask(Task task, int listLength) {
-        return "     Got it. I've added this task:\n       " + task
-                + "\n     Now you have " + listLength + " tasks in the list.";
+        return "Got it. I've added this task:\n       " + task
+                + "\nNow you have " + listLength + " tasks in the list.";
     }
     
     String showMatchingTask(String taskList) {
-        return "     Here are the matching tasks in your list:\n" + taskList;
+        return "Here are the matching tasks in your list:\n" + taskList;
     }
 }

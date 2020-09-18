@@ -1,5 +1,5 @@
 /**
- * Encapsulates an ExitCommand object.
+ * Encapsulates an ExitCommand object, used to exit the application.
  */
 public class ExitCommand extends Command {
 
@@ -16,5 +16,10 @@ public class ExitCommand extends Command {
     String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         storage.updateTasks(taskList);
         return ui.showGoodbye();
+    }
+
+    @Override
+    boolean isExit() {
+        return true;
     }
 }

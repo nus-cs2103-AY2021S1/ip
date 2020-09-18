@@ -1,3 +1,5 @@
+import javafx.application.Application;
+
 /**
  * Encapsulates the Duke object, supports the function getResponse which returns a response when 
  * provided with a user input.
@@ -24,6 +26,11 @@ public class Duke {
      */
     private final Ui ui;
 
+    /**
+     * Represents whether the user wants to exit the application.
+     */
+    boolean isExit = false;
+
     public Duke() {
         ui = new Ui();
         storage = new Storage(FILE_PATH);
@@ -45,10 +52,23 @@ public class Duke {
     String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
-            return c.execute(tasks, ui, storage);
+            isExit = c.isExit();
+            return ui.formatResponse(c.execute(tasks, ui, storage));
         } catch (DukeException e) {
             return ui.showError(e);
         }
     }
-    
+
+    /**
+     * Returns the duke logo and welcome message.
+     * 
+     * @return a string representation of the duke logo and welcome message. 
+     */
+    String showWelcome() {
+        return ui.showWelcome();
+    }
+
+    public static void main(String[] args) {
+        Application.launch(Main.class, args);
+    }
 }
