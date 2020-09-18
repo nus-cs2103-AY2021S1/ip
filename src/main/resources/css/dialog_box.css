@@ -6,7 +6,7 @@
 }
 
 #name, #timeStamp {
-    -fx-background-color: rgb();
+    -fx-background-color: transparent;
     -fx-text-fill: #FFFFFF;
     -fx-font-size: 10px;
     -fx-font-weight: bold;
