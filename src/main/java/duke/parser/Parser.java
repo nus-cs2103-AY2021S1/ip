@@ -44,9 +44,9 @@ public class Parser {
         return true;
     }
 
-    private static Command DeadlineAndEventHandler(String[] userInput, String eventType
-            , String keyword, DateTimeFormatter dateFormatter
-            , DateTimeFormatter timeFormatter) throws DukeException {
+    private static Command deadlineAndEventHandler(String[] userInput, String eventType,
+                                                   String keyword, DateTimeFormatter dateFormatter,
+                                                   DateTimeFormatter timeFormatter) throws DukeException {
 
         String[] content = userInput[1].split(keyword, 2);
         if (content.length == 1 || content[0].equals("")) {
@@ -77,12 +77,12 @@ public class Parser {
             if (localDate.isBefore(currentDate)) {
                 throw new DukeException("Strange... It seems that your task occurred "
                         + "in the past...\nUnfortunately, I'm not yet equipped with the "
-                        +"ability to time travel...");
+                        + "ability to time travel...");
             }
             if (localDate.isEqual(currentDate) && localTime.isBefore(currentTime)) {
                 throw new DukeException("Strange... It seems that your task occurred "
                         + "in the past...\nUnfortunately, I'm not yet equipped with the "
-                        +"ability to time travel...");
+                        + "ability to time travel...");
             }
 
             return new AddCommand(eventType, content[0], localDate, localTime);
@@ -95,7 +95,7 @@ public class Parser {
         }
     }
 
-    private static Command DeleteAndDoneHandler(String[] userInput, String taskType) throws DukeException {
+    private static Command deleteAndDoneHandler(String[] userInput, String taskType) throws DukeException {
         try {
             int index = Integer.parseInt(userInput[1]) - 1;
             switch (taskType) {
@@ -151,19 +151,19 @@ public class Parser {
             //Fallthrough
 
         case "deadline":
-            return DeadlineAndEventHandler(userWord, "deadline", "/by", dateFormatter, timeFormatter);
+            return deadlineAndEventHandler(userWord, "deadline", "/by", dateFormatter, timeFormatter);
             //Fallthrough
 
         case "event":
-            return DeadlineAndEventHandler(userWord, "event", "/at", dateFormatter, timeFormatter);
+            return deadlineAndEventHandler(userWord, "event", "/at", dateFormatter, timeFormatter);
             //Fallthrough
 
         case "done":
-            return DeleteAndDoneHandler(userWord, "done");
+            return deleteAndDoneHandler(userWord, "done");
             //Fallthrough
 
         case "delete":
-            return DeleteAndDoneHandler(userWord, "delete");
+            return deleteAndDoneHandler(userWord, "delete");
             //Fallthrough
 
         default:

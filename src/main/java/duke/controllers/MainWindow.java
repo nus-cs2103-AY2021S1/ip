@@ -33,13 +33,14 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser3.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    /**
+     * Initialises the main window of Duke's GUI.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         userInput.setStyle("-fx-control-inner-background: #000000;");
         userInput.setStyle("-fx-text-inner-color: #BA55D3;");
-//        userInput.setStyle("-fx-control-inner-background: #000000;");
-//        userInput.setStyle("-fx-prompt-text-color: white;");
     }
 
     public void setDuke(Duke d) {

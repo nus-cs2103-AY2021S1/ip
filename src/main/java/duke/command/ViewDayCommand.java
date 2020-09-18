@@ -1,18 +1,23 @@
 package duke.command;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-
 public class ViewDayCommand extends Command {
     private String dateTimeData;
     private DateTimeFormatter dateFormatter;
 
+    /**
+     * Constructor to create a view day command.
+     * @param dateTimeData
+     * @param dateFormatter
+     */
     public ViewDayCommand(String dateTimeData, DateTimeFormatter dateFormatter) {
         this.dateTimeData = dateTimeData;
         this.dateFormatter = dateFormatter;
@@ -21,7 +26,7 @@ public class ViewDayCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         LocalDate date = parseDate();
-        return tasks.ViewScheduleOfDay(ui, date);
+        return tasks.viewScheduleOfDay(ui, date);
     }
 
     private LocalDate parseDate() throws DukeException {

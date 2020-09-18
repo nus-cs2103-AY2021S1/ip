@@ -1,8 +1,8 @@
 package duke.task;
 
-import duke.exception.DukeException;
-
 import java.time.LocalDate;
+
+import duke.exception.DukeException;
 
 /**
  * An abstract class providing the blueprint for a task.

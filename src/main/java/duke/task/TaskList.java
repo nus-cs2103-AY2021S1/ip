@@ -194,11 +194,11 @@ public class TaskList {
                 break;
 
             case "E" :
-                DateTimeParser(task, "E");
+                dateTimeParser(task, "E");
                 break;
 
             case "D" :
-                DateTimeParser(task, "D");
+                dateTimeParser(task, "D");
                 break;
 
             default:
@@ -207,7 +207,7 @@ public class TaskList {
         }
     }
 
-    private void DateTimeParser(String[] parseString, String EventType) throws DukeException {
+    private void dateTimeParser(String[] parseString, String eventType) throws DukeException {
         String[] dateTime = parseString[3].split(" ", 2);
         if (dateTime.length != 2) {
             throw new DukeException("Error in date time formatting encountered in data file");
@@ -216,10 +216,10 @@ public class TaskList {
             LocalDate localDate = LocalDate.parse(dateTime[0]);
             LocalTime localTime = LocalTime.parse(dateTime[1]);
             Task task = null;
-            if (EventType.equals("E")) {
+            if (eventType.equals("E")) {
                 task = new Event(parseString[2], localDate, localTime);
             }
-            if (EventType.equals("D")) {
+            if (eventType.equals("D")) {
                 task = new Deadline(parseString[2], localDate, localTime);
             }
             if (parseString[1].equals("1")) {
@@ -231,7 +231,14 @@ public class TaskList {
         }
     }
 
-    public String ViewScheduleOfDay(Ui ui, LocalDate date) throws DukeException {
+    /**
+     * Returns the list of tasks in the task list that fall on the input date.
+     * @param ui Ui object to print messages to users.
+     * @param date
+     * @return Returns a string of task descriptions that fall on the input date.
+     * @throws DukeException Throws a DukeException if an error is encountered.
+     */
+    public String viewScheduleOfDay(Ui ui, LocalDate date) throws DukeException {
         ArrayList<Task> result = new ArrayList<>();
         for (Task t : this.listOfTasks) {
             if (t.hasDate() && t.isOnDate(date)) {

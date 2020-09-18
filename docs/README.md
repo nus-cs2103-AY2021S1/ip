@@ -144,8 +144,8 @@ Format:  `view DATE`
  2. event attend housewarming party /at 29.10.20  1000
  3. deadline submit CS2103T user guide /by 18.09.20 2359
  4. event halo meetup /at 29.10.20 0900
--   `find 29.10.20`  returns  tasks **2 and 4**
--   `find 18.09.20`  returns  task **3**
+-   `view 29.10.20`  returns  tasks **2 and 4**
+-   `view 18.09.20`  returns  task **3**
 -    task 1 will never be returned 
 
 ![Image of View Command](https://github.com/Avalionnet/ip/blob/master/docs/View.png)
