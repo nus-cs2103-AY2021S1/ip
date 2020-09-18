@@ -26,7 +26,7 @@ dependencies {
 }
 
 
-mainClassName = "Launcher"
+mainClassName = "main.java.Launcher"
 
 shadowJar {
     archiveBaseName = "duke"
@@ -38,18 +38,4 @@ run{
 }
 
 
-version = "0.3"
-jar {
-    manifest {
-        attributes 'Main-Class': "$mainClassName"
-    }
-}
-
-task makeReleaseJar(type: Jar){
-    archiveName = 'TestSdk.jar'
-    from ('src/main/java')
-    destinationDir = file('build/libs')
-    manifest {
-        attributes 'Main-Class': "$mainClassName"
-    }
-}
+version = "0.1.1"
