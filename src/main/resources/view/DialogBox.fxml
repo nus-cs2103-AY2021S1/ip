@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<!--Adapt from https://github.com/jiayushe/duke-->
+<!--All credits go to https://github.com/jiayushe/duke-->
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
@@ -13,7 +12,7 @@
     <children>
         <Label fx:id="dialog" text="Label">
             <font>
-                <Font name="Avenir Next" size="14.0"/>
+                <Font name="Courier New" size="14.0"/>
             </font>
         </Label>
         <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true">
