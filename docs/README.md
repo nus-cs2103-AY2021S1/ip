@@ -2,16 +2,16 @@
 Duke is a desktop dog to help you manage tasks in the form of todos, deadlines and events. It is optimised for use via Command Line Interface (CLI). If you can type fast, Duke can help you record your tasks faster than with a traditional GUI.
 
 ## Features
-[Viewing help](#viewing-help-help)
-[Add a new Todo](#add-a-new-todo-todo)
-[Add a new Event](#add-a-new-event-at)
-[Add a new Deadline](#add-a-new-deadline-by)
-[List out current tasks](#list-out-current-tasks-list)
-[Search for task](#search-for-task-using-keyword-find)
-[Delete a task](#delete-a-task-by-index-delete)
-[Mark a task as done](#mark-a-task-as-done-by-index-done)
-[Save and close the app](#save-and-close-the-app-bye)
-[Update a task](#update-a-task-by-index)
+1. [Viewing help](#viewing-help-help)
+2. [Add a new Todo](#add-a-new-todo-todo)
+3. [Add a new Event](#add-a-new-event-at)
+4. [Add a new Deadline](#add-a-new-deadline-by)
+5. [List out current tasks](#list-out-current-tasks-list)
+6. [Search for task](#search-for-task-using-keyword-find)
+7. [Delete a task](#delete-a-task-by-index-delete)
+8. [Mark a task as done](#mark-a-task-as-done-by-index-done)
+9. [Save and close the app](#save-and-close-the-app-bye)
+10. [Update a task](#update-a-task-by-index)
 ### Viewing help: `help`
 Displays features and the commands needed to use them.
 #### Usage
