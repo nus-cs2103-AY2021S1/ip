@@ -4,6 +4,7 @@ import duke.task.DeadlineTask;
 import duke.task.EventTask;
 import duke.task.Task;
 import duke.task.TodoTask;
+import duke.utils.Storage;
 import duke.view.cli.CLI;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,19 +16,16 @@ import java.util.List;
 public class Duke {
 
   private CLI observer;
-  private static Duke duke = null;
   private final List<Task> tasks;
+  private Storage storage;
 
-  private Duke() {
-    tasks = new ArrayList<>();
-  }
-
-  public static Duke getInstance() {
-    if (duke == null) {
-      duke = new Duke();
+  public Duke(Storage storage) {
+    this.storage = storage;
+    try {
+      tasks = new ArrayList<>(this.storage.load());
+    } catch (Exception e) {
+      tasks = new ArrayList<>();
     }
-
-    return duke;
   }
 
   // TODO: observer list
@@ -39,34 +37,43 @@ public class Duke {
     observer.update(s);
   }
 
-  public void addTodoTask(String description) {
+  public void updateStorage() throws Exception {
+    storage.store(tasks);
+  }
+
+  public void addTodoTask(String description) throws Exception {
     Task task = new TodoTask(description);
     tasks.add(task);
     notifyObservers("Added TODO: " + task.toString());
+    updateStorage();
   }
 
-  public void addEventTask(String description, String at) {
+  public void addEventTask(String description, String at) throws Exception {
     Task task = new EventTask(description, at);
     tasks.add(task);
     notifyObservers("Added EVENT: " + task.toString());
+    updateStorage();
   }
 
-  public void addDeadlineTask(String description, String by) {
+  public void addDeadlineTask(String description, String by) throws Exception {
     Task task = new DeadlineTask(description, by);
     tasks.add(task);
     notifyObservers("Added DEADLINE: " + task.toString());
+    updateStorage();
   }
 
-  public void markTaskDone(int id) {
+  public void markTaskDone(int id) throws Exception {
     Task task = tasks.get(id);
     task.markDone();
     notifyObservers("Marked DONE:" + task.toString());
+    updateStorage();
   }
 
-  public void deleteTask(int id) {
+  public void deleteTask(int id) throws Exception {
     Task task = tasks.remove(id);
     notifyObservers("DELETED:" + task.toString());
     notifyObservers(String.format("You now have %d tasks.", tasks.size()));
+    updateStorage();
   }
 
   public List<Task> getTasks() {

@@ -1,4 +1,4 @@
-package duke.input;
+package duke.utils;
 
 import duke.command.Command;
 import duke.command.CommandEnum;
@@ -11,7 +11,7 @@ import duke.command.TodoCommand;
 import duke.exception.ParserException;
 
 /**
- * duke.input.Parser is the class that handles input parsing. Given a string, it should determine
+ * duke.utils.Parser is the class that handles input parsing. Given a string, it should determine
  * what command to execute and execute it.
  */
 public class Parser {

@@ -2,11 +2,10 @@ package duke.input;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import duke.duke.Duke;
+import duke.utils.Parser;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ParserTest {

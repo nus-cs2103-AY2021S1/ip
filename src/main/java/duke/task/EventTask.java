@@ -17,7 +17,6 @@ public class EventTask extends Task {
 
   @Override
   public String toString() {
-    return String
-        .format("<%d, %s, %s, %s>", getId(), getIsDone() ? "DONE" : "NOT DONE", getDesc(), at);
+    return String.format("%d | %s | %s | %s | %s", getId(), getIsDone() ? "DONE" : "NOT DONE", "EVENT", getDesc(), at);
   }
 }

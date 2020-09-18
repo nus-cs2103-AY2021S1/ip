@@ -3,13 +3,14 @@ package duke.runner;
 import duke.command.Command;
 import duke.duke.Duke;
 import duke.exception.ParserException;
-import duke.input.Parser;
+import duke.utils.Parser;
+import duke.utils.Storage;
 import duke.view.cli.CLI;
 import java.util.Scanner;
 
 /**
- * Class that handles the "event loop" of the CLI program, terminating
- * when a termination command is detected.
+ * Class that handles the "event loop" of the CLI program, terminating when a termination command is
+ * detected.
  */
 public class Runner {
 
@@ -18,18 +19,18 @@ public class Runner {
   }
 
   /**
-   * Prints hello, goodbye, nd output of command executions.
-   * Also runs the event loop.
+   * Prints hello, goodbye, nd output of command executions. Also runs the event loop.
    */
   public static void run() {
     Scanner sc = new Scanner(System.in);
-    Duke.getInstance().addObserver(new CLI());
+    Duke duke = new Duke(new Storage("data/data.txt"));
+    duke.addObserver(new CLI());
 
     String input;
     while (!Parser.isTerminate(input = sc.nextLine().trim())) {
       try {
         Command command = Parser.parseCommand(input);
-        command.execute(Duke.getInstance());
+        command.execute(duke);
       } catch (ParserException e) {
         System.out.println(e.getMessage());
       }

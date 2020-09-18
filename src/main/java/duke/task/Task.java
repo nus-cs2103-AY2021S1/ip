@@ -35,6 +35,6 @@ public class Task {
 
   @Override
   public String toString() {
-    return String.format("<%d, %s, %s>", id, isDone ? "DONE" : "NOT DONE", desc);
+    return String.format("%d | %s | %s | %s", id, isDone ? "DONE" : "NOT DONE", "TODO", desc);
   }
 }
