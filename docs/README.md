@@ -35,7 +35,7 @@ several features to help you get started with managing your tasks.
 
 * Ensure that you have `java 11` installed on your computer.
 
-* Download the `BitBot.jar` file [here](https://github.com/ryanlimjr/ip/releases/tag/V0.2).
+* Download the `BitBot.jar` file [here](https://github.com/ryanlimjr/ip/releases/download/V0.2/BitBot.jar).
 
 * Double-click on the `BitBot.jar` file.
 
