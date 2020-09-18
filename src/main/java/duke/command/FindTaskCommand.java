@@ -29,6 +29,6 @@ public class FindTaskCommand extends Command {
         if (!hasMatch) {
             throw new NoMatchFoundException();
         }
-        return s;
+        return s + ui.printAdditionActionMessage();
     }
 }

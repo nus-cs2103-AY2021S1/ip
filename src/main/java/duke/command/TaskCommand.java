@@ -44,7 +44,7 @@ public class TaskCommand extends Command {
             default:
             }
             Storage.saveTaskChanges(taskList);
-            return ui.printAddAcknowledgement(taskList);
+            return ui.printAddAcknowledgement(taskList) + ui.printAdditionActionMessage();
         } catch (IndexOutOfBoundsException e) {
             throw new WrongFormatException();
         }

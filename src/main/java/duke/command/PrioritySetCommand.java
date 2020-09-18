@@ -20,6 +20,6 @@ public class PrioritySetCommand extends Command {
     public String execute(Ui ui, TaskList taskList) {
         taskList.setTaskPriorityLevel(this.taskNum - 1, this.priorityLevel);
         Storage.saveTaskChanges(taskList);
-        return ui.printPrioritySetAcknowledgement(taskList, this.taskNum);
+        return ui.printPrioritySetAcknowledgement(taskList, this.taskNum) + ui.printAdditionActionMessage();
     }
 }

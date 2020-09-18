@@ -25,14 +25,6 @@ public class Ui {
     public Ui (Scanner sc) {
         this.sc = sc;
     }
-    /**
-     * Displays the startup UI and prompts user to enter input.
-     * @param taskList List of tasks.
-     */
-
-    public String readCommand() {
-        return sc.nextLine().toLowerCase();
-    }
 
     public String displayError(String errorMsg) {
         System.out.println(errorMsg);
@@ -40,30 +32,18 @@ public class Ui {
     }
 
     /**
-     * Displays the divider that separates different actions.
-     */
-    public String printDivider() {
-        System.out.println(DIVIDER);
-        return DIVIDER;
-    }
-
-    /**
      * Displays a prompt for the user to enter additional input.
      */
     public String printAdditionActionMessage() {
-        this.printDivider();
         System.out.println("What else would you like to do?");
-        this.printDivider();
-        return "What else would you like to do?";
+        return "\nWhat else would you like to do?\n";
     }
 
     /**
      * Displays the goodbye message.
      */
     public String printGoodbyeMessage() {
-        this.printDivider();
         System.out.println("Bye! See you around");
-        this.printDivider();
         return "Bye! See you around\n";
     }
 

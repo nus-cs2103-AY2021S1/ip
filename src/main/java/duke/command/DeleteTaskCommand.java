@@ -23,6 +23,6 @@ public class DeleteTaskCommand extends Command {
         Task task = taskList.getTask(taskNum - 1);
         taskList.removeTask(taskNum - 1);
         Storage.saveTaskChanges(taskList);
-        return ui.printDeleteAcknowledgement(taskList, task);
+        return ui.printDeleteAcknowledgement(taskList, task) + ui.printAdditionActionMessage();
     }
 }

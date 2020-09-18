@@ -25,7 +25,7 @@ public class DoneTaskCommand extends Command {
         } else {
             taskList.getTask(taskNum - 1).markAsDone();
             Storage.saveTaskChanges(taskList);
-            return ui.printDoneAcknowledgement(taskList, taskNum);
+            return ui.printDoneAcknowledgement(taskList, taskNum) + ui.printAdditionActionMessage();
         }
     }
 }

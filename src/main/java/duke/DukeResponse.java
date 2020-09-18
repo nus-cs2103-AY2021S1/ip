@@ -29,7 +29,7 @@ public class DukeResponse {
             return new DukeResponse(response, responseImageType, responseCommandType);
         } catch (DukeException e) {
             Parser.setPrevCommand(new ResetCommand());
-            response = ui.displayError(e.getMessage());
+            response = ui.displayError(e.getMessage()) + ui.printAdditionActionMessage();
             responseImageType = e.getImageType();
             responseCommandType = CommandType.RESET;
             return new DukeResponse(response, responseImageType, responseCommandType);

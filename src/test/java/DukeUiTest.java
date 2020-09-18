@@ -21,13 +21,14 @@ public class DukeUiTest {
     @Test
     public void userCommandTest() {
         String help = "Here are the commands you can use:\n"
-                + "1. help\n"
-                + "2. add\n"
-                + "3. list\n"
-                + "4. done\n"
-                + "5. delete\n"
-                + "6. date\n"
-                + "7. bye\n";
+                + "1. Help\n"
+                + "2. List\n"
+                + "3. Add\n"
+                + "4. Done\n"
+                + "5. Delete\n"
+                + "6. Find\n"
+                + "7. Priority\n"
+                + "8. Bye\n";
         ui.printHelp();
         assertEquals(help.trim(), outputStreamCaptor.toString().trim().replace("\r", ""));
     }
