@@ -35,11 +35,13 @@ Example of usage:
 
 Expected outcome:
 
-`Got it. I've added this task:`  
- `[T][✘] wash clothes`  
- `Now you have 1 task in the list.`
+```
+ Got it. I've added this task:
+ [T][✘] wash clothes
+ Now you have 1 task in the list.
+```
 
-### `event <task> /by <YYYY-MM-DD>` - Add a event task to task list.
+### `event <task> /at <YYYY-MM-DD>` - Add a event task to task list.
 
 Example of usage: 
 
@@ -47,11 +49,13 @@ Example of usage:
 
 Expected outcome:
 
-`Got it. I've added this task:`  
- `[E][✘] meeting (by: Sep 20 2020)`  
- `Now you have 2 tasks in the list.`
+```
+ Got it. I've added this task:
+ [E][✘] meeting (at: Sep 20 2020) 
+ Now you have 2 tasks in the list.
+```
 
-### `deadline <task> /at <YYYY-MM-DD>` - Add a deadline task to task list.
+### `deadline <task> /by <YYYY-MM-DD>` - Add a deadline task to task list.
 
 Example of usage: 
 
@@ -59,9 +63,11 @@ Example of usage:
 
 Expected outcome:
 
-`Got it. I've added this task:`  
- `[D][✘] deadline quiz (by: Sep 20 2020)`  
- `Now you have 3 task in the list.`
+```
+ Got it. I've added this task:
+ [D][✘] deadline quiz (by: Sep 20 2020)
+ Now you have 3 task in the list.
+```
 
 ### `delete <task number>` - Delete a task
 
@@ -71,9 +77,11 @@ Example of usage:
 
 Expected outcome:
 
-`Noted. I've removed this task:`  
- `[T][✘] wash clothes`  
- `Now you have 2 tasks in the list.`
+```
+ Noted. I've removed this task: 
+ [T][✘] wash clothes 
+ Now you have 2 tasks in the list.
+```
 
 ### `done <task number>` - Mark a task as done.
 
@@ -83,8 +91,10 @@ Example of usage:
 
 Expected outcome:
 
-`Nice! I've marked this task as done:`  
- `[E][✓] meeting (by: Sep 20 2020)`
+```
+ Nice! I've marked this task as done:
+ [E][✓] meeting (at: Sep 20 2020)
+ ```
 
 ### `find <keyword>` - Finds all tasks containing given keyword.
 
@@ -94,8 +104,10 @@ Example of usage:
 
 Expected outcome:
 
-`Here are the matching task(s) in your list:`  
- `1.[D][✘] deadline quiz (by: Sep 20 2020)`
+```
+ Here are the matching task(s) in your list: 
+ 1.[D][✘] deadline quiz (by: Sep 20 2020)
+```
 
 ### `prioritize <task number>` - Move a task to the top of task list and label it as **HIGH priority**.
 
@@ -105,8 +117,10 @@ Example of usage:
 
 Expected outcome:
 
-`Noted. I've prioritized this task:`  
- `[D][✘] deadline quiz (by: Sep 20 2020)`
+```
+ Noted. I've prioritized this task: 
+ [D][✘] deadline quiz (by: Sep 20 2020)
+```
 
 ### `list` - Display all tasks in the task list.
 
@@ -116,9 +130,11 @@ Example of usage:
 
 Expected outcome:
 
-`Here are the tasks in your list:`    
- `1.[D][✘] deadline quiz (by: Sep 20 2020) !!!HIGH priority!!!`  
- `2.[E][✓] meeting (by: Sep 20 2020)`
+```
+ Here are the tasks in your list:
+ 1.[D][✘] deadline quiz (by: Sep 20 2020) !!!HIGH priority!!!
+ 2.[E][✓] meeting (at: Sep 20 2020)
+```
 
 ### `bye` - Exit the bot.
 
@@ -128,4 +144,7 @@ Example of usage:
 
 Expected outcome:
 
-`Bye. Hope to see you again soon!`
+```
+ Bye. Hope to see you again soon!
+```
+
