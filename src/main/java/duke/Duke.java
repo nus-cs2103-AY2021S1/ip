@@ -31,7 +31,7 @@ public class Duke {
     }
 
     /**
-     * Get response from Duke.
+     * Gets response from Duke after executing a Command.
      *
      * @param input Input from user.
      * @return Response based on the Command executed.

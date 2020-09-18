@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 /**
  * Represents an interface to interact with the user at the command line.
- * A <code>Ui</code> object is responsible for taking in user's inputs and displaying outputs.
+ * An <code>Ui</code> object is responsible for taking in user's inputs and displaying outputs.
  */
 public class Ui {
 
@@ -45,7 +45,7 @@ public class Ui {
     }
 
     /**
-     * Displays error message of an Exception.
+     * Displays an error message when an Exception occurs.
      *
      * @param e Exception that occurred.
      */

@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.exception.InvalidTaskNumberException;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
@@ -30,9 +31,10 @@ public class DoneCommand extends Command {
      * @param ui Ui to interact with users.
      * @param storage Storage use by Duke to save and load files.
      * @return CommandResponse A response to the user.
+     * @throws InvalidTaskNumberException If taskNumber is not in the range of the 0 to size of tasks.
      */
     @Override
-    public CommandResponse execute(TaskList tasks, Ui ui, Storage storage) {
+    public CommandResponse execute(TaskList tasks, Ui ui, Storage storage) throws InvalidTaskNumberException {
         tasks.doTask(taskNumber);
         storage.save(tasks);
         String responseMessage = "Nice! I've marked this task as done:\n\t   "

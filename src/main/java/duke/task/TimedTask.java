@@ -18,10 +18,9 @@ public abstract class TimedTask extends Task {
      * Constructs a <code>TimedTask</code> object with a description and LocalDateTime.
      * This TimedTask is marked as undone.
      *
-     * @param description A string representing the task description.
-     * @param dateTime A string representing the task date/time.
+     * @param description A string representing the Task description.
+     * @param dateTime A string representing the Task date/time.
      */
-
     public TimedTask(String description, String dateTime) {
         super(description);
         this.dateTime = LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
@@ -31,7 +30,7 @@ public abstract class TimedTask extends Task {
      * Constructs a <code>TimedTask</code> object with a description,
      * a boolean to indicate if the Task is done and a LocalDateTime.
      *
-     * @param description A string representing the task description.
+     * @param description A string representing the Task description.
      * @param isDone Indicates if the Deadline is done.
      * @param dateTime A string representing the Task date/time.
      */

@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.exception.InvalidTaskNumberException;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.tasklist.TaskList;
@@ -31,9 +32,10 @@ public class DeleteCommand extends Command {
      * @param ui Ui to interact with users.
      * @param storage Storage use by Duke to save and load files.
      * @return CommandResponse A response to the user.
+     * @throws InvalidTaskNumberException If taskNumber is not in the range of the 0 to size of tasks - 1;
      */
     @Override
-    public CommandResponse execute(TaskList tasks, Ui ui, Storage storage) {
+    public CommandResponse execute(TaskList tasks, Ui ui, Storage storage) throws InvalidTaskNumberException {
         Task deletedTask = tasks.getTask(taskNumber);
         tasks.removeTask(taskNumber);
         String responseMessage = "Noted. I've removed this task:\n\t   "

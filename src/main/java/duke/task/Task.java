@@ -40,7 +40,7 @@ public class Task {
     }
 
     /**
-     * Marks the Task as done by changing the value of isDOne to true.
+     * Marks the Task as done by changing the value of isDone to true.
      */
     public void completeTask() {
         isDone = true;

@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
+import duke.exception.InvalidTaskNumberException;
 import duke.storage.Storage;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -14,7 +15,7 @@ import duke.ui.Ui;
 public class AddTaskCommandTest {
 
     @Test
-    public void testExecute_todo() {
+    public void testExecute_todo() throws InvalidTaskNumberException {
         TaskList tasks = new TaskList();
         Ui ui = new Ui();
         Storage storage = new Storage();
@@ -29,7 +30,7 @@ public class AddTaskCommandTest {
     }
 
     @Test
-    public void testExecute_addDeadline() {
+    public void testExecute_addDeadline() throws InvalidTaskNumberException {
         TaskList tasks = new TaskList();
         Ui ui = new Ui();
         Storage storage = new Storage();
@@ -44,7 +45,7 @@ public class AddTaskCommandTest {
     }
 
     @Test
-    public void testExecute_addEvent() {
+    public void testExecute_addEvent() throws InvalidTaskNumberException {
         TaskList tasks = new TaskList();
         Ui ui = new Ui();
         Storage storage = new Storage();
