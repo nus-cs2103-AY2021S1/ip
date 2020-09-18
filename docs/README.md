@@ -28,7 +28,7 @@ chat interface also gives users a more personal feeling.
     
 ## Quick start
 1. Ensure that you have Java `11` or above installed on your computer.
-2. Download the latest Duke Jar from here.
+2. Download the latest Duke Jar from [here](https://github.com/siddarth2824/ip/releases/tag/v0.2).
 3. Copy the file to the folder you want to use as the *home folder* for your Duke program.
 4. Double click the file to start the app for Windows, or run `java -jar duke.jar` for Mac.
 You should be seeing the below GUI after a few seconds:
@@ -85,13 +85,8 @@ d/M/yyyy | 2020-10-9
 
 Format | Example
 ------ | -------
-H:mm | 3:30 
-h:mm a | 3:15 PM
-h:mma | 3:15PM
 Hmm | 2359
 HH:mm | 15:30
-Hmm | 1530
-ha | 9PM
 
 Example of usage:  
 `deadline return book /by 15/09/2020 2359`  
