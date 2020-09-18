@@ -43,7 +43,7 @@ public class Duke {
                 Command c = Parser.parse(fullCommand);
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit();
-            } catch (DukeException | ParseException e) {
+            } catch (DukeException e) {
                 ui.showError(e.getMessage());
             } catch (IOException e) {
                 ui.showError(e.getMessage());
@@ -64,8 +64,6 @@ public class Duke {
         } catch (DukeException e) {
             return ui.showError(e.getMessage());
         } catch (IOException e) {
-            return ui.showError(e.getMessage());
-        } catch (ParseException e) {
             return ui.showError(e.getMessage());
         } catch (Exception e) {
             return ui.showError(e.getMessage());

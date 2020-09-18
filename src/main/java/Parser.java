@@ -54,12 +54,17 @@ public class Parser {
      * @param dateAndTime String array consist of date as first element and time as second element
      * @return LocalDateTime
      * @throws NumberFormatException
+     * @throws DateFormatException
      */
-    public static LocalDateTime changeDateAndTime(String[] dateAndTime) throws NumberFormatException {
-        assert (dateAndTime.length == 2);
+    public static LocalDateTime changeDateAndTime(String[] dateAndTime)
+            throws NumberFormatException, DateFormatException {
         String date = dateAndTime[0];
         String time = dateAndTime[1];
-        return tryParseLocalDateTime(date + " " + time);
+        LocalDateTime dateTime = tryParseLocalDateTime(date + " " + time);
+        if (dateTime == null) {
+            throw new DateFormatException();
+        }
+        return dateTime;
     }
 
     /**
@@ -68,11 +73,15 @@ public class Parser {
      * @param dateAndTime String array consist of date as element
      * @return LocalDate
      * @throws NumberFormatException
+     * @throws DateFormatException
      */
-    public static LocalDate changeDate(String[] dateAndTime) throws NumberFormatException {
-        assert (dateAndTime.length == 1);
+    public static LocalDate changeDate(String[] dateAndTime) throws NumberFormatException, DateFormatException {
         String date = dateAndTime[0];
-        return tryParseLocalDate(date);
+        LocalDate localDate = tryParseLocalDate(date);
+        if (localDate == null) {
+            throw new DateFormatException();
+        }
+        return localDate;
     }
 
     /**

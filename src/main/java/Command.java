@@ -26,7 +26,6 @@ public class Command {
      * @return string array
      */
     private String[] removeFirst(String[] arr) {
-        assert(arr.length > 0);
         String[] tempArr = new String[arr.length];
         for (int i = 0; i < arr.length - 1; i++) {
             tempArr[i] = arr[i + 1];
@@ -42,7 +41,6 @@ public class Command {
      * @return string array before the word
      */
     private String[] removeAfterWord(String[] arr, String word) {
-        assert(arr.length > 0);
         String[] temp = new String[arr.length];
         for (int i = 0; i < arr.length; i++) {
             if (arr[i].equals(word)) {
@@ -62,7 +60,6 @@ public class Command {
      * @return string array
      */
     private String[] keepAfterWord(String[] arr, String word) {
-        assert(arr.length > 0);
         String[] temp = new String[arr.length];
         int counter = 0;
         // find position of the word
@@ -86,7 +83,6 @@ public class Command {
      * @return string
      */
     private String joinString(String[] arr) {
-        assert(arr.length > 0);
         String text = arr[0];
         if (arr.length == 1) {
             return text;
@@ -96,6 +92,36 @@ public class Command {
             }
         }
         return text;
+    }
+
+    /**
+     * Find keyword in commandArray.
+     * @param string
+     * @return boolean
+     */
+    private boolean findKeyword(String string) {
+        boolean isContain = false;
+        for (String tempString: commandArr) {
+            if (tempString.equals(string)) {
+                isContain = true;
+            }
+        }
+        return isContain;
+    }
+
+    /**
+     * Count number of non-null element in an array.
+     * @param arr
+     * @return int
+     */
+    private int countElement(String[] arr) {
+        int numElement = 0;
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] != null) {
+                numElement++;
+            }
+        }
+        return numElement;
     }
 
     /**
@@ -118,14 +144,25 @@ public class Command {
      *
      * @return Task
      * @throws InvalidDeadlineDescripDukeException
+     * @throws InvalidDeadlineFormatException
+     * @throws DateFormatException
      */
-    private Task createDeadline() throws InvalidDeadlineDescripDukeException {
+    private Task createDeadline() throws InvalidDeadlineDescripDukeException,
+            InvalidDeadlineFormatException, DateFormatException {
         if (commandArr.length == 1) {
             throw new InvalidDeadlineDescripDukeException();
         }
+        if (!findKeyword("/by")) {
+            throw new InvalidDeadlineFormatException();
+        }
+
         String[] modifiedCommand = removeFirst(commandArr);
         String[] upper = removeAfterWord(modifiedCommand, "/by");
         String[] lower = keepAfterWord(modifiedCommand, "/by");
+
+        if (countElement(upper) == 0 || countElement(lower) == 0) {
+            throw new InvalidDeadlineFormatException();
+        }
         LocalDate date = Parser.changeDate(lower);
         Task newTask = new Deadline(joinString(upper), date);
         return newTask;
@@ -136,15 +173,26 @@ public class Command {
      *
      * @return Task
      * @throws InvalidEventDescripDukeException
+     * @throws InvalidEventFormatException
+     * @throws DateFormatException
      */
-    private Task createEvent() throws InvalidEventDescripDukeException {
+    private Task createEvent() throws InvalidEventDescripDukeException,
+            InvalidEventFormatException, DateFormatException {
         if (commandArr.length == 1) {
             throw new InvalidEventDescripDukeException();
+        }
+        if (!findKeyword("/at")) {
+            throw new InvalidEventFormatException();
         }
         String[] modifiedCommand = removeFirst(commandArr);
         String[] upper = removeAfterWord(modifiedCommand, "/at");
         String[] lower = keepAfterWord(modifiedCommand, "/at");
+
+        if (countElement(upper) == 0 || countElement(lower) == 0) {
+            throw new InvalidEventFormatException();
+        }
         LocalDateTime dateAndTime = Parser.changeDateAndTime(lower);
+
         Task newTask = new Event(joinString(upper), dateAndTime);
         return newTask;
     }
@@ -181,9 +229,7 @@ public class Command {
      * @throws IOException
      * @throws IndexExceedException
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidTodoDescripDukeException,
-            InvalidDeadlineDescripDukeException, InvalidEventDescripDukeException, IndexExceedException,
-            ParseException, IOException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
 
         switch (commandType) {
         case PRINT_ALL_TASKS:
