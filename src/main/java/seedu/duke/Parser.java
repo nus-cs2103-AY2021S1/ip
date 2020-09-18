@@ -35,7 +35,7 @@ public class Parser {
     public String readGuiInput(String input) {
         String[] parsed = parseInput(input);
         String command = parsed[0];
-        if (input.equals(Keyword.LIST.label)) {
+        if (input.strip().equals(Keyword.LIST.label)) {
             return taskLists.showTaskListForGui();
         } else if (command.equals(Keyword.DONE.label)) {
             return taskLists.completeTaskForGui(input);
@@ -49,7 +49,7 @@ public class Parser {
             return taskLists.addEventForGui(input);
         } else if (command.equals(Keyword.FIND.label)) {
             return taskLists.findForGui(input);
-        } else if (input.equals(Keyword.SORT.label)) {
+        } else if (input.strip().equals(Keyword.SORT.label)) {
             return taskLists.sortByTasksForGui();
         } else {
             return INVALID_INPUT;
