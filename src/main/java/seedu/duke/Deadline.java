@@ -29,8 +29,8 @@ public class Deadline extends Task {
      * @return String value that represents the Deadline object.
      */
     @Override public String toString() {
-        return "[D] " + this.status.statusToSymbol()
-                + this.name + " by: "
+        return "[D] " + this.getStatus().statusToSymbol() + this.getName()
+                + " by: "
                 + localDate.format(DateTimeFormatter.ofPattern("dd-MMM-yyyy"));
     }
 
@@ -39,8 +39,9 @@ public class Deadline extends Task {
      * @return A String to be written into the text file.
      */
     @Override public String toStore() {
-        return "[D] " + this.status.statusToSymbol()
-                + this.name + " by: " + dueDate;
+        return "[D] " + this.getStatus().statusToSymbol() + this.getName()
+                + " by: " + dueDate;
+
     }
 
 }

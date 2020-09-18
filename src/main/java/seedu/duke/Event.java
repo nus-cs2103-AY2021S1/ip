@@ -7,8 +7,8 @@ import java.time.format.DateTimeFormatter;
  * Event class extends Task class to represent a task that happens at certain time.
  */
 public class Event extends Task {
-    String time;
-    LocalDate localDate;
+    private String time;
+    private LocalDate localDate;
 
     /**
      * Constructor
@@ -28,8 +28,8 @@ public class Event extends Task {
      * @return String value that represents the Event object.
      */
     @Override public String toString() {
-        return "[E] " + this.status.statusToSymbol() + this.name + " at: " +
-                localDate.format(DateTimeFormatter.ofPattern("dd-MMM-yyyy"));
+        return "[E] " + this.getStatus().statusToSymbol() + this.getName() + " at: "
+                + localDate.format(DateTimeFormatter.ofPattern("dd-MMM-yyyy"));
 
     }
 
@@ -38,7 +38,7 @@ public class Event extends Task {
      * @return A String to be written into the text file.
      */
     @Override public String toStore() {
-        return "[E] " + this.status.statusToSymbol() + this.name + " at: " + time;
+        return "[E] " + this.getStatus().statusToSymbol() + this.getName() + " at: " + time;
     }
 
 }

@@ -75,7 +75,7 @@ public class Parser {
             ArrayList<Task> selectedTasks = new ArrayList<>();
             String searchedItem = userMessage.substring(5);
             for (Task task: itemList) {
-                if (task.name.contains(searchedItem)) {
+                if (task.getName().contains(searchedItem)) {
                     selectedTasks.add(task);
                 }
             }

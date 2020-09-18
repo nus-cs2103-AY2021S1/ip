@@ -12,7 +12,8 @@ public class Ui {
     //Object to store the list
     private ArrayList<Task> itemList = new ArrayList<>();
     //create file
-    private String path = "out/todo.txt";
+    private String path = "/Users/chengjiyuqing/Desktop/Year 2 Sem 1/CS2103T/ip/src/main/java/seedu/duke/todo.txt";
+
 
     /**
      * Constructor of the class.
