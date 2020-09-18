@@ -119,7 +119,7 @@ public class GuiParser {
      * @param indexOfSpace Index of space.
      * @param list List of tasks.
      * @param storage Storage object.
-     * @throws DukeInvalidTaskQueryException
+     * @throws DukeInvalidTaskQueryException If an invalid task query is used.
      * @throws FileNotFoundException
      */
     private String setDoneGui(String input, int indexOfSpace, ArrayList<Task> list, Storage storage)
@@ -144,7 +144,7 @@ public class GuiParser {
      * @param taskList TaskList object.
      * @param list list of tasks
      * @param storage
-     * @throws DukeInvalidTaskQueryException
+     * @throws DukeInvalidTaskQueryException If an invalid task query is used.
      * @throws FileNotFoundException
      */
     private String dealWithDeleteGui(String input, int indexOfSpace, TaskList taskList, ArrayList<Task> list, Storage storage)
@@ -192,12 +192,12 @@ public class GuiParser {
      * @param taskList TaskList object
      * @param list List of tasks.
      * @param storage Storage object.
+     * @throws DukeInvalidDateException If an invalid date format is used.
+     * @throws DukeInvalidArgumentException If an invalid argument is used.
      * @throws FileNotFoundException
-     * @throws DukeInvalidDateException
-     * @throws DukeInvalidArgumentException
      */
     private String dealWithDeadlineGui(String input, int indexOfSpace, TaskList taskList, ArrayList<Task> list, Storage storage)
-            throws FileNotFoundException, DukeInvalidDateException, DukeInvalidArgumentException {
+            throws  DukeInvalidDateException, DukeInvalidArgumentException, FileNotFoundException {
         assert indexOfSpace > -1 : "Index of space should not be negative";
 
         int index = input.indexOf("/");
@@ -226,9 +226,9 @@ public class GuiParser {
      * @param taskList TaskList object.
      * @param list List of tasks.
      * @param storage Storage object.
+     * @throws DukeInvalidDateException If an invalid date format is used.
+     * @throws DukeInvalidArgumentException If an invalid argument is used.
      * @throws FileNotFoundException
-     * @throws DukeInvalidDateException
-     * @throws DukeInvalidArgumentException
      */
     private String dealWithEventGui(String input, int indexOfSpace, TaskList taskList, ArrayList<Task> list, Storage storage)
             throws FileNotFoundException, DukeInvalidDateException, DukeInvalidArgumentException {

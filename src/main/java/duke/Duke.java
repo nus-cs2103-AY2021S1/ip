@@ -28,27 +28,27 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke().runBot();
+//        new Duke().runBot();
     }
 
-    public void runBot() {
-        boolean isExit = false;
-
-        while (!isExit) {
-            try {
-                String input = sc.nextLine();
-                if (input.equals("bye")) {
-                    isExit = true;
-                    break;
-                }
-                GuiParser guiParser = new GuiParser();
-                guiParser.interpretGui(input, tasks, storage, gui);
-            } catch (DukeException | FileNotFoundException e) {
-                System.out.println(e.getMessage());
-            }
-
-        }
-    }
+//    public void runBot() {
+//        boolean isExit = false;
+//
+//        while (!isExit) {
+//            String input = sc.nextLine();
+//            if (input.equals("bye")) {
+//                isExit = true;
+//                break;
+//            }
+//            try {
+//                GuiParser guiParser = new GuiParser();
+//                guiParser.interpretGui(input, tasks, storage, gui);
+//            } catch (DukeException | FileNotFoundException e) {
+//                System.out.println(e.getMessage());
+//            }
+//
+//        }
+//    }
 
     public String getResponseGui(String input) {
         try {

@@ -1,6 +1,11 @@
 package duke;
 
-import java.io.*;
+import java.io.PrintWriter;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -10,7 +15,7 @@ public class Storage {
 
     private BufferedReader br;
     private PrintWriter printWriter;
-    private ArrayList<duke.Task> list;
+    private ArrayList<Task> list;
     private String filePath;
     private static final String STANDARDFILEPATH = "data/tasks.txt";
     private static final String COLON = ":";
@@ -22,7 +27,7 @@ public class Storage {
      * Class constructor.
      *
      * @param filePath
-     * @throws IOException
+     * @throws IOException If the loading of tasks fails.
      */
     public Storage(String filePath) throws IOException {
         assert filePath != null : "FilePath should not be null";
@@ -75,8 +80,8 @@ public class Storage {
      * Loads the tasks.txt file when the bot is run.
      *
      * @return List of tasks.
-     * @throws IOException
-     * @throws DukeLoadTaskException
+     * @throws IOException If the loading of file fails.
+     * @throws DukeLoadTaskException If there is an unknown line in the text file.
      */
     public ArrayList<Task> loadTask() throws IOException, DukeLoadTaskException {
         ArrayList<Task> list = new ArrayList<>();
