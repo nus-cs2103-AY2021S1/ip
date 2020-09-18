@@ -4,8 +4,6 @@ This project is part of a module for CS2103 Software Engineering in NUS.
 
 It is a todo list that runs on the command line.
 
-I hope my code isn't too bad :-).
-
 **Changelog:**  https://github.com/therizhao/ip/blob/master/CHANGELOG.md
 
 ## How are commits done?
