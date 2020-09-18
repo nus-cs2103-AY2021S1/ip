@@ -1,4 +1,4 @@
-package duke;
+package seedu.duke;
 
 /**
  * Represents a task item that user creates.

@@ -1,4 +1,4 @@
-package duke;
+package seedu.duke;
 
 /**
  * Sends error message.
