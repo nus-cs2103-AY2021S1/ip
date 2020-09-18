@@ -56,6 +56,9 @@ public class Duke extends Application{
         }
     }
 
+    /**
+     * Creates a new <code>Duke</code>.
+     */
     public Duke() {
         this.ui = new Ui();
         this.storage = new Storage("C:\\Users\\e0316059\\Desktop\\Duke\\src\\main\\java\\data\\Duke.txt");
@@ -82,7 +85,9 @@ public class Duke extends Application{
         new Duke("C:\\Users\\e0316059\\Desktop\\Duke\\src\\main\\java\\data\\Duke.txt").run();
     }
 
-
+    /**
+     * Creates and specifies the graphical user interface.
+     */
     @Override
     public void start(Stage stage) {
         //Step 1. Setting up required components
@@ -118,7 +123,6 @@ public class Duke extends Application{
         scrollPane.setVvalue(1.0);
         scrollPane.setFitToWidth(true);
 
-        // You will need to import `javafx.scene.layout.Region` for this.
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
         userInput.setPrefWidth(325.0);
@@ -151,7 +155,6 @@ public class Duke extends Application{
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
-
     private void handleUserInput() {
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
@@ -163,8 +166,9 @@ public class Duke extends Application{
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Generates a response to user input.
+     * @param input the user command.
+     * @return a response message to user.
      */
     private String getResponse(String input) {
         this.parser = new Parser(ui, tasks, storage);
