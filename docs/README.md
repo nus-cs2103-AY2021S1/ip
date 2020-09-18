@@ -1,7 +1,4 @@
-
 # User Guide for Project Bill
-
-* [1. Setting up IntelliJ](#1-setting-up-intellij)
 
 This is a desktop application that is designed for users to keep track
 of the various tasks they want to do. It is under the assumption that 
@@ -15,20 +12,20 @@ and it is a very useful educational project designed to help fresh software
 developer to horn their skills by slowing building the project and explore
 the different software engineering principle along the way.
 
-## Download and try the Project (Mainly for those new to git)
+* [1. Quick Start](#1-quick-start)
+   * [1.1 Run the project in intelliJ](#11-run-the-project-in-intellij)
+   * [1.2 Run the project in terminal](#12-run-the-project-in-terminal)
+   
 
-1. Navigate to the [main page](https://github.com/BILLXYR/ip)
-2. Find the code download button.
-3. You can choose to use any of the three options
-4. Here i will explain more on the first option
-   1. open your terminal and set up your git account
-   2. use this command to clone the project down to your computer: git clone https://github.com/BILLXYR/ip.git
-   3. Then you can refer to the part below on how to open it with IntelliJ
 
-## 1. Setting up IntelliJ
+## 1. Quick Start
+
+### 1.1 Run the project in intelliJ
 
 Prerequisites: JDK 11, update Intellij to the most recent version.
-
+  
+  * For those new to git, please check this out on how to download the project: [Download and try the Project](#download-and-try-the-project)
+  
 1. Open Intellij (if you are not in the welcome screen, click File > Close Project to close the existing project dialog first)
 
 2. Set up the correct JDK version, as follows:
@@ -47,6 +44,38 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
 5.if everything is set up properly, you should be able to see the GUI in a few seconds
 
 6.Now you can type the command and press Enter to excute it.
+
+
+
+Tutorial on how to download the project for those new to git:
+
+#### Download and try the Project
+
+1. Navigate to the [main page](https://github.com/BILLXYR/ip)
+2. Find the code download button.
+3. You can choose to use any of the three options
+4. Here i will explain more on the first option
+   1. open your terminal and set up your git account
+   2. use this command to clone the project down to your computer: git clone https://github.com/BILLXYR/ip.git
+
+
+### 1.2 Run the project in terminal
+
+1. Ensure that you have downloaded Java 11 in your computer. 
+
+2. Download the latest **Bill.jar** file from [here](https://github.com/BILLXYR/ip/releases/tag/v0.2)
+
+3. Navigate to any empty folder and place the downloaded file into that folder.
+
+4. Navigate your terminal directory to the folder that contains your **Bill.jar** file
+
+5. Type the following command to start the application: `java -jar Bill.jar`
+
+6. You should expect to see a Graphical User Interface(GUI) appear in a few second
+
+7. You should expect to see a window as shown below: 
+
+![GUI of BILL](Ui.png)
 
 
 ## Features and how to use them
