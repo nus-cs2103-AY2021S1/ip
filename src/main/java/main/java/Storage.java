@@ -59,6 +59,13 @@ public class Storage {
                     taskArrayList.add(new Event(description, time, isDone));
                     break;
                 }
+                case "F": {
+                    String description = token[2];
+                    String period = token[3];
+                    double hours = Double.valueOf(period);
+                    taskArrayList.add(new FixedDurationTasks(description, hours, isDone));
+                    break;
+                }
             }
         }
     }
