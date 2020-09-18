@@ -69,8 +69,8 @@ public class Parser {
     }
 
     private boolean parseShortCommands(String input, TaskList tasks) {
-        // we convert input to uppercase before checking to make commands case-insensitive
 
+        // we convert input to uppercase before checking to make commands case-insensitive
         if (input.toUpperCase().equals(Duke.Commands.LIST.getString())) {
             tasks.displayTasks();
             return true;
@@ -91,6 +91,8 @@ public class Parser {
     }
 
     private boolean parseLongCommands(String input, TaskList tasks) {
+
+        // we convert input to uppercase before checking to make commands case-insensitive
         if (input.length() >= 5 && input.substring(0,5).toUpperCase().equals(Duke.Commands.DONE.getString())) {
             try {
                 int index = Integer.parseInt(input.substring(5).trim());
