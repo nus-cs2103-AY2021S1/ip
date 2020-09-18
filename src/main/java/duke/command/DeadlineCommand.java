@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.Deadline;
-import duke.Event;
 import duke.Storage;
 import duke.TaskList;
 
