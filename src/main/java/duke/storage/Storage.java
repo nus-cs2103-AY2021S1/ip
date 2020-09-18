@@ -16,15 +16,26 @@ import java.util.ArrayList;
 
 public class Storage {
 
+    private Path dirPath;
     private Path filePath;
 
-    public Storage(String filePath) {
-        this.filePath = Paths.get(filePath);
+    public Storage(String dirPath, String fileName) {
+        this.dirPath = Paths.get(dirPath);
+        this.filePath = Paths.get(dirPath, fileName);
+        File dataDir = this.dirPath.toAbsolutePath().toFile();
         File dataFile = this.filePath.toAbsolutePath().toFile();
 
-        if (!dataFile.exists()) {
-            dataFile.mkdirs();
+        try {
+            if (!dataDir.exists()) {
+                dataDir.mkdirs();
+            }
+            if (!dataFile.exists()) {
+                dataFile.createNewFile();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();;
         }
+
     }
 
     /**
