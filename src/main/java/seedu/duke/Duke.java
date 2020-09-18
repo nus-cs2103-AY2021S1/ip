@@ -1,7 +1,10 @@
 package seedu.duke;
-
 import java.io.IOException;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
 /**
  * The Duke program implements an application that simulates a smart task manager with the name Duke.
@@ -9,7 +12,7 @@ import java.io.IOException;
  *
  */
 
-public class Duke {
+public class Duke extends Application {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
@@ -26,6 +29,18 @@ public class Duke {
         storage = new Storage(filePath);
         tasks = new TaskList(storage.load());
     }
+
+    /**
+     * Constructor with no arguments.
+     * @throws IOException
+     * @throws DukeException
+     */
+    public Duke() throws IOException, DukeException {
+        ui = new Ui();
+        storage = new Storage("/Users/chengjiyuqing/Desktop/Year 2 Sem 1/CS2103T/ip/src/main/java/seedu/duke/todo.txt");
+        tasks = new TaskList(storage.load());
+    }
+
 
 
 
@@ -63,5 +78,14 @@ public class Duke {
     public static void main(String[] args) throws DukeException, IOException {
         new Duke("/Users/chengjiyuqing/Desktop/Year 2 Sem 1/CS2103T/ip/src/main/java/seedu/duke/todo.txt").run();
 
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+
+        primaryStage.setScene(scene); // Setting the stage to show our screen
+        primaryStage.show(); // Render the stage.
     }
 }
