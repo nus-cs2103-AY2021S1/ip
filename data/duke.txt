@@ -1,0 +1,6 @@
+E | 1 | TDC Meeting | Sep 02 2020 10:00
+D | 0 | TDC Tshirt Design | Sep 12 2020 23:59
+T | 0 | CS2103T
+E | 1 | choir meeting | Sep 2 2020 07:00
+D | 0 | CS2106 Lab Assignment | Sep 05 2020 23:59
+T | 0 | KE Web CCA slide
