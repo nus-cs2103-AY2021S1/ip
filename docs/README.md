@@ -7,9 +7,9 @@ Patrick Star Bot is a chat bot for keeping track of simple tasks. It is based on
 ## Features 
 
 ### Types of tasks:
-* `Todo` - Todo tasks are tasks that are to be completed at some point in time but do not have a specific date or time associated to them.
-* `Deadline` - Deadline tasks are tasks that have to be completed by some specific date and optionally time.
-* `Event` - Event tasks are tasks that occur at a specific date and optionally time.
+* `Todo` - Todo [T] tasks are tasks that are to be completed at some point in time but do not have a specific date or time associated to them.
+* `Deadline` - Deadline [D] tasks are tasks that have to be completed by some specific date and optionally time.
+* `Event` - Event [E] tasks are tasks that occur at a specific date and optionally time.
 
 ### Date and times:
 * Deadlines and events require a date to be associated to them. Additionally, they can have a time associated to them.
