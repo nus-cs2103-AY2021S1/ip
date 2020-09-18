@@ -14,6 +14,8 @@ Duke Tracker is a **desktop app for managing tasks, optimized for use via a Comm
     * [Saving data](#saving-data)
 
 ## Features 
+- Words in `<....>` are the user input.
+- Items that have `/` before them are keywords for that command
 
 ### Listing all tasks : **`list`**
 Shows a list of tasks in the current task list.  
