@@ -56,16 +56,14 @@ public class TaskList {
     public String filterTasksByDate(String by) throws DukeException {
         assert !by.isEmpty() : "by cannot be empty";
 
-        if (DateTimeUtility.checkDateTimeType(by) == DateTimeFormat.String) {
-            throw new DukeException("U NID 2 GIV CORRECT DATE FOMAT!");
-        } else {
+        if (DateTimeUtility.checkDateTimeType(by) != DateTimeFormat.String) {
             ArrayList<Task> filtered = new ArrayList<>();
 
             for (int i = 0; i < tasks.size(); i++) {
                 if (tasks.get(i) instanceof TimedTask) {
+                    String taskBy = ((TimedTask)tasks.get(i)).getByString();
                     try {
-                        if (DateTimeUtility.compare(by,
-                                ((TimedTask) tasks.get(i)).getByString()) >= 0) {
+                        if (DateTimeUtility.compare(by, taskBy) >= 0) {
                             filtered.add(tasks.get(i));
                         }
                     } catch (DateTimeException e) {}
@@ -73,6 +71,9 @@ public class TaskList {
             }
 
             return tasks2String(filtered);
+
+        } else {
+            throw new DukeException("U NID 2 GIV CORRECT DATE FOMAT!");
         }
     }
 
