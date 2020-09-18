@@ -6,13 +6,19 @@ import java.io.FileReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-public class SaveDataManager {
+public class Storage {
+
+    private String filePath;
+
+    public Storage(String filePath) {
+        this.filePath = filePath;
+    }
 
     // Saves current Task list onto a text file
     public void saveData(ArrayList<Task> taskList) {
 
         try {
-            File file = new File("../savedata/data.txt");
+            File file = new File(this.filePath);
 
             // if file doesn't exists, then create it
             if (!file.exists()) {
@@ -53,7 +59,7 @@ public class SaveDataManager {
     public ArrayList<Task> loadData() {
         ArrayList<Task> list = new ArrayList<>();
         try {
-            BufferedReader br = new BufferedReader(new FileReader("../savedata/data.txt"));
+            BufferedReader br = new BufferedReader(new FileReader(filePath));
             String currentLine;
 
             while ((currentLine = br.readLine()) != null) {
