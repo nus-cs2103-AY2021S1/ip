@@ -150,7 +150,7 @@ Updates the details of an existing task managed by Clippy.
 Updates only the description of an existing task managed by Clippy. Suppose you made a mistake when entering the description of an event. You can use `update` to edit the event’s description.
 
 ### Format
-* `update <index> <new task description>`: Updates only the description of any tasks
+* `update <index> <new task description>`: Updates only the description of a task
 
 What it does:
 * Updates the task at the specified `index`. 
