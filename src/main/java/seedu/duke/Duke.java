@@ -41,24 +41,4 @@ public class Duke {
         return ui.getUserInput(input);
     }
 
-    /**
-     * Runs the Duke program.
-     */
-    public void run() {
-        ui.intro();
-        while (ui.checkDukeStatus()) {
-            ui.getNewInput();
-        }
-        ui.endDukeCli();
-    }
-
-    /**
-     * Standard main method for Java to execute program.
-     *
-     * @param args Standard Java convection.
-     */
-    public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.run();
-    }
 }

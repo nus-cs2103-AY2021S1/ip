@@ -17,42 +17,6 @@ public class Parser {
     }
 
     /**
-     * Processes input by user from CLI and execute accordingly.
-     *
-     * @param input String input by user.
-     */
-    public void readCliInput(String input) {
-        if (input.equals(Keyword.LIST.label)) {
-            taskLists.showTaskListForCli();
-        } else if (input.contains(Keyword.DONE.label + " ")) {
-            taskLists.completeTaskForCli(input);
-        } else if (input.contains(Keyword.DELETE.label)) {
-            taskLists.deleteTaskForCli(input);
-        } else if (input.contains(Keyword.TODO.label)) {
-            taskLists.addToDoForCli(input);
-        } else if (input.contains(Keyword.DEADLINE.label)) {
-            taskLists.addDeadlineForCli(input);
-        } else if (input.contains(Keyword.EVENT.label)) {
-            taskLists.addEventForCli(input);
-        } else if (input.contains(Keyword.FIND.label)) {
-            taskLists.findForCli(input);
-        } else if (input.equals(Keyword.SORT.label)) {
-            taskLists.sortByTasksForCli();
-        } else {
-            invalidInput(INVALID_INPUT);
-        }
-    }
-
-    /**
-     * Informs user of invalid input.
-     *
-     * @param textToPrint String input by user.
-     */
-    private void invalidInput(String textToPrint) {
-        Ui.printForCli(INVALID_INPUT);
-    }
-
-    /**
      * Takes in input by user from GUI and return Duke output.
      *
      * @param input String input by user.

@@ -63,13 +63,6 @@ public class TaskList {
     }
 
     /**
-     * Prints out list of Tasks on CLI.
-     */
-    public void showTaskListForCli() {
-        Ui.printForCli(toString());
-    }
-
-    /**
      * Returns list of Tasks on GUI.
      *
      * @return String of Tasklist.
@@ -109,36 +102,6 @@ public class TaskList {
      * Marks the task as done in a list.
      *
      * @param userInput Task to be completed.
-     */
-    public void completeTaskForCli(String userInput) {
-        try {
-            checkForItem(userInput.substring(4), Keyword.DONE.label); //Length of "done"
-            String[] splitUserInput = userInput.split(" ");
-            int index = Integer.parseInt(splitUserInput[1]);
-            int size = taskLists.size();
-            boolean isValidIndex = checkValidIndex(index, size);
-            if (!isValidIndex) {
-                Ui.printForCli(INVALID_RANGE);
-            }
-            if (taskLists.get(index - 1).getIsDone()) {
-                Ui.printForCli(COMPLETED_TASK);
-            }
-            taskLists.get(index - 1).markAsDone();
-            Storage.completeTaskOnFile(index - 1, taskLists.size());
-            String info = MARK_DONE_TASK;
-            info += taskLists.get(index - 1).toString();
-            Ui.printForCli(info);
-        } catch (NumberFormatException err) {
-            Ui.printForCli(MUST_BE_NUMBER);
-        } catch (DukeException err) {
-            Ui.printForCli(err.getMessage());
-        }
-    }
-
-    /**
-     * Marks the task as done in a list.
-     *
-     * @param userInput Task to be completed.
      * @return String output after completing Task.
      */
     public String completeTaskForGui(String userInput) {
@@ -163,35 +126,6 @@ public class TaskList {
             return MUST_BE_NUMBER;
         } catch (DukeException err) {
             return err.getMessage();
-        }
-    }
-
-    /**
-     * Task to be deleted from tasklist.
-     *
-     * @param userInput String of the task to be deleted.
-     */
-    public void deleteTaskForCli(String userInput) {
-        try {
-            checkForItem(userInput.substring(6), Keyword.DELETE.label); //Length of "done"
-            String[] splitUserInput = userInput.split(" ");
-            int index = Integer.parseInt(splitUserInput[1]);
-            int size = taskLists.size();
-            boolean isValidIndex = checkValidIndex(index, size);
-            if (!isValidIndex) {
-                Ui.printForCli(INVALID_RANGE);
-            }
-            String info = DELETE_TASK;
-            info += taskLists.get(index - 1).toString();
-            info += LINE_BREAK;
-            taskLists.remove(index - 1);
-            Storage.deleteTaskOnFile(index - 1, size);
-            info += sizeOfTaskList();
-            Ui.printForCli(info);
-        } catch (NumberFormatException err) {
-            Ui.printForCli(MUST_BE_NUMBER);
-        } catch (DukeException err) {
-            Ui.printForCli(err.getMessage());
         }
     }
 
@@ -229,28 +163,6 @@ public class TaskList {
      * Todo to be added to tasklist.
      *
      * @param userInput String of the todo.
-     */
-    public void addToDoForCli(String userInput) {
-        try {
-            checkForItem(userInput.substring(4), Keyword.TODO.label.strip()); //Length of "todo"
-            String task = userInput.substring(5);
-            String info = ADD_TASK;
-            Todo newToDo = new Todo(task);
-            Storage.addTask(newToDo.getStorageString(TODO_SYMBOL));
-            info += newToDo.toString();
-            info += LINE_BREAK;
-            taskLists.add(newToDo);
-            info += sizeOfTaskList();
-            Ui.printForCli(info);
-        } catch (DukeException | IOException err) {
-            System.out.println(err.getMessage());
-        }
-    }
-
-    /**
-     * Todo to be added to tasklist.
-     *
-     * @param userInput String of the todo.
      * @return String output after creating Todo object.
      */
     public String addToDoForGui(String userInput) {
@@ -267,40 +179,6 @@ public class TaskList {
             return info;
         } catch (DukeException | IOException err) {
             return err.getMessage();
-        }
-    }
-
-    /**
-     * Deadline to be added to tasklist.
-     *
-     * @param userInput String of the deadline.
-     */
-    public void addDeadlineForCli(String userInput) {
-        try {
-            checkForItem(userInput.substring(8), Keyword.DEADLINE.label.strip()); //Length of "Deadline
-            boolean isDividerFound = checkForDivider(userInput.substring(8));
-            if (!isDividerFound) {
-                Ui.printForCli(MISSING_DIVIDER);
-            }
-            int dateIndex = userInput.indexOf("/");
-            String task = userInput.substring(9, dateIndex);
-            if (task.strip().equals("")) {
-                Ui.printForCli(MISSING_INFO);
-            }
-            String time = userInput.substring(dateIndex + 1);
-            String info = ADD_TASK;
-            Deadline newDeadline = new Deadline(task, time);
-            String formatDate = newDeadline.getFormattedDate();
-            info += newDeadline.toString();
-            info += LINE_BREAK;
-            taskLists.add(newDeadline);
-            Storage.addTask(newDeadline.getStorageString(DEADLINE_SYMBOL, formatDate));
-            info += sizeOfTaskList();
-            Ui.printForCli(info);
-        } catch (DukeException | IOException err) {
-            System.out.println(err.getMessage());
-        } catch (DateTimeParseException err) {
-            System.out.println(INVALID_DATE);
         }
     }
 
@@ -343,40 +221,6 @@ public class TaskList {
      * Event to be added to the tasklist.
      *
      * @param userInput String of the event.
-     */
-    public void addEventForCli(String userInput) {
-        try {
-            checkForItem(userInput.substring(5), Keyword.EVENT.label.strip()); //Length of Event
-            boolean isDividerFound = checkForDivider(userInput.substring(5));
-            if (!isDividerFound) {
-                Ui.printForCli(MISSING_DIVIDER);
-            }
-            int dateIndex = userInput.indexOf("/");
-            String task = userInput.substring(6, dateIndex);
-            if (task.strip().equals("")) {
-                Ui.printForCli(MISSING_INFO);
-            }
-            String time = userInput.substring(dateIndex + 1);
-            String info = ADD_TASK;
-            Event newEvent = new Event(task, time);
-            String formatDate = newEvent.getFormattedDate();
-            info += newEvent.toString();
-            info += LINE_BREAK;
-            Storage.addTask(newEvent.getStorageString(EVENT_SYMBOL, formatDate));
-            taskLists.add(newEvent);
-            info += sizeOfTaskList();
-            Ui.printForCli(info);
-        } catch (DukeException | IOException err) {
-            System.out.println(err.getMessage());
-        } catch (DateTimeParseException err) {
-            System.out.println(INVALID_DATE);
-        }
-    }
-
-    /**
-     * Event to be added to the tasklist.
-     *
-     * @param userInput String of the event.
      * @return String output after creating Event object.
      */
     public String addEventForGui(String userInput) {
@@ -412,40 +256,6 @@ public class TaskList {
      * Finds tasks that contain the keyword in the string input.
      *
      * @param input Keyword that is used to find related tasks.
-     */
-    public void findForCli(String input) {
-        try {
-            checkForItem(input.substring(4), Keyword.FIND.label.strip()); //Length of "find"
-            String keyword = input.substring(5);
-            ArrayList<Task> keywordInTasks = new ArrayList<>();
-            for (int i = 0; i < taskLists.size(); i++) {
-                Task current = taskLists.get(i);
-                if (current.toString().contains(keyword)) {
-                    keywordInTasks.add(current);
-                }
-            }
-            if (keywordInTasks.size() == 0) {
-                Ui.printForCli(NOT_FOUND);
-            }
-
-            String info = FOUND_KEYWORD;
-            for (int i = 0; i < keywordInTasks.size(); i++) {
-                info += keywordInTasks.get(i).toString();
-                info += LINE_BREAK;
-            }
-
-            if (keywordInTasks.size() != 0) {
-                Ui.printForCli(info);
-            }
-        } catch (DukeException err) {
-            Ui.printForCli(err.getMessage());
-        }
-    }
-
-    /**
-     * Finds tasks that contain the keyword in the string input.
-     *
-     * @param input Keyword that is used to find related tasks.
      * @return String output after finding keyword in TaskList.
      */
     public String findForGui(String input) {
@@ -470,21 +280,6 @@ public class TaskList {
             return info;
         } catch (DukeException err) {
             return err.getMessage();
-        }
-    }
-
-    /**
-     * Prints a sorted list of tasks by alphabetical order.
-     */
-    public void sortByTasksForCli() {
-        ArrayList<String> taskListInString = new ArrayList<>();
-        for (Task task : taskLists) {
-            taskListInString.add(task.toString());
-        }
-        Collections.sort(taskListInString);
-        System.out.println(SORT_TASK_TYPE);
-        for (String sortedTask : taskListInString) {
-            System.out.println(sortedTask + "\n");
         }
     }
 

@@ -1,6 +1,5 @@
 package seedu.duke;
 
-import java.util.Scanner;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -10,10 +9,7 @@ import javafx.application.Platform;
  * Main class that interacts with user inputs.
  */
 public class Ui {
-    private static final String LINES = "------------------------------------------------\n";
-    private static final String INTRO = "Hello! I'm Duke!\n" + "What can I do for you?\n";
-    private static final String BYE = "    Bye! Hope to see you again soon.\n";
-    private Scanner sc;
+    private static final String BYE = "Bye! Hope to see you again soon.\n";
     private Parser parse;
     private boolean isAlive = true;
 
@@ -23,33 +19,7 @@ public class Ui {
      * @param parser Parser to be part of Ui.
      */
     public Ui(Parser parser) {
-        sc = new Scanner(System.in);
         parse = parser;
-    }
-
-    /**
-     * Prints out introduction when Duke start up.
-     */
-    public void intro() {
-        System.out.println(LINES + INTRO + LINES);
-    }
-
-    /**
-     * Static method to print out divider lines.
-     */
-    public static void printLines() {
-        System.out.println(LINES);
-    }
-
-    /**
-     * Gets userInput from user on CLI.
-     */
-    public void getNewInput() {
-        String userInput = sc.nextLine();
-        parse.readCliInput(userInput);
-        if (userInput.equals(Keyword.BYE.label)) {
-            discontinue();
-        }
     }
 
     /**
@@ -79,26 +49,6 @@ public class Ui {
      */
     public void discontinue() {
         isAlive = false;
-    }
-
-    /**
-     * Prints out output from Parser.
-     *
-     * @param input String that is processed by Parser.
-     */
-    public static void printForCli(String input) {
-        Ui.printLines();
-        System.out.println(input);
-        Ui.printLines();
-    }
-
-    /**
-     * Method to end Duke CLI Program when user input "Bye".
-     */
-    public static void endDukeCli() {
-        Ui.printLines();
-        System.out.println(BYE);
-        Ui.printLines();
     }
 
     /**
