@@ -1,5 +1,8 @@
 package duke;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 import duke.commands.Command;
 import duke.exceptions.DukeException;
 import duke.parser.Parser;
@@ -18,7 +21,7 @@ public class Duke {
     private Ui ui;
 
     /**
-     * Creates a new Duke chqt bot with the specified file path for storage.
+     * Creates a new Duke chat bot with the specified file path for storage.
      *
      * @param filePath A String representation of the target file path.
      */
@@ -56,5 +59,22 @@ public class Duke {
 
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
+    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) throws DukeException {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        PrintStream dukeDialog = new PrintStream(baos);
+        PrintStream old = System.out;
+        System.setOut(dukeDialog);
+        String fullCommand = input;
+        Command c = Parser.translate(fullCommand);
+        c.execute(tasks, ui, storage);
+        System.out.flush();
+        System.setOut(old);
+        return baos.toString();
     }
 }
