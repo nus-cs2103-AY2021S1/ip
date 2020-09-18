@@ -30,11 +30,11 @@ public class Parser {
     public static Command parse(String fullCommand) throws NiteException {
         Command command;
 
-        if (fullCommand.equals("bye")) {
+        if (fullCommand.startsWith("bye")) {
             return new ExitCommand();
-        } else if (fullCommand.equals("list")) {
+        } else if (fullCommand.startsWith("list")) {
             command = new ListCommand();
-        } else if (fullCommand.equals("help")) {
+        } else if (fullCommand.startsWith("help")) {
             command = new HelpCommand();
         } else if (fullCommand.startsWith("done")) {
             try {
