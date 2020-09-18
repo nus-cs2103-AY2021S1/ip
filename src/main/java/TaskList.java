@@ -72,6 +72,44 @@ public class TaskList {
         return doneTask;
     }
 
+    public LocalDate taskDateFormatter(Task currentTask, String taskType) {
+        if (taskType.equals(Task.EVENT_TASK)) {
+            Event currentEventTask = (Event)currentTask;
+            String formattedTime = currentEventTask.getFormattedTime();
+            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(DATE_FORMAT);
+            return LocalDate.parse(formattedTime, dateFormatter);
+
+        } else if (taskType.equals(Task.DEADLINE_TASK)) {
+            Deadline currentDeadlineTask = (Deadline)currentTask;
+            String formattedTime = currentDeadlineTask.getFormattedTime();
+            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(DATE_FORMAT);
+            return LocalDate.parse(formattedTime, dateFormatter);
+
+        } else {
+            return LocalDate.parse(IMPOSSIBLE_DATE);
+        }
+    }
+
+    public String getReminderString(List<Task> reminderTasks) {
+        if (reminderTasks.size() < 1) {
+            return "***Reminder:\n"
+                    + "There are no urgent tasks to be completed.\n"
+                    + "You can take a break! :)";
+
+        } else {
+            String output = "***Reminder:\n"
+                    + "Here are your tasks to be completed within 3 days:\n";
+            int partialSize = reminderTasks.size();
+            int index = 1;
+            for (int i = 0; i < partialSize; i++) {
+                output = output + "  " + index + "." + reminderTasks.get(i) + "\n";
+                index++;
+            }
+
+            return output;
+        }
+    }
+
     public String getUrgentTasks() {
         List<Task> tasks = this.getTasks();
         List<Task> filteredTasks = new ArrayList<>();
@@ -82,54 +120,21 @@ public class TaskList {
             Task currentTask = tasks.get(i);
             String taskType = currentTask.getType();
             LocalDate taskTime;
-
-            if (taskType.equals(Task.EVENT_TASK)) {
-                Event currentEventTask = (Event)currentTask;
-                String formattedTime = currentEventTask.getFormattedTime();
-                DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(DATE_FORMAT);
-                taskTime = LocalDate.parse(formattedTime, dateFormatter);
-
-            } else if (taskType.equals(Task.DEADLINE_TASK)) {
-                Deadline currentDeadlineTask = (Deadline)currentTask;
-                String formattedTime = currentDeadlineTask.getFormattedTime();
-                DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(DATE_FORMAT);
-                taskTime = LocalDate.parse(formattedTime, dateFormatter);
-
-            } else {
-                taskTime = LocalDate.parse(IMPOSSIBLE_DATE);
-            }
+            taskTime = taskDateFormatter(currentTask, taskType);
 
             if (!(currentTask.getType().equals(Task.TODO_TASK))
-                    && currentTask.getCompletionStatus() == false
-                    && now.isAfter(taskTime)) {
+                    && currentTask.getCompletionStatus() == false && now.isAfter(taskTime)) {
                 filteredTasks.add(currentTask);
             }
         }
 
         for (int i = 0; i < size; i++) {
             Task currentTask = tasks.get(i);
-            if (currentTask.getCompletionStatus() == false
-                    && currentTask.getType().equals(Task.TODO_TASK)) {
+            if (currentTask.getCompletionStatus() == false && currentTask.getType().equals(Task.TODO_TASK)) {
                 filteredTasks.add(currentTask);
             }
         }
 
-        if (filteredTasks.size() < 1) {
-            return "***Reminder:\n"
-                    + "There are no urgent tasks to be completed.\n"
-                    + "You can take a break! :)";
-
-        } else {
-            String output = "***Reminder:\n"
-                    + "Here are your tasks to be completed within 3 days:\n";
-            int partialSize = filteredTasks.size();
-            int index = 1;
-            for (int i = 0; i < partialSize; i++) {
-                output = output + "  " + index + "." + filteredTasks.get(i) + "\n";
-                index++;
-            }
-
-            return output;
-        }
+        return getReminderString(filteredTasks);
     }
 }
