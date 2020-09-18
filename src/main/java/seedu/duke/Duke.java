@@ -61,7 +61,7 @@ public class Duke {
      */
 
     public static void main(String[] args) throws DukeException, IOException {
-        new Duke("src/main/java/duke/todo.txt").run();
+        new Duke("/Users/chengjiyuqing/Desktop/Year 2 Sem 1/CS2103T/ip/src/main/java/seedu/duke/todo.txt").run();
 
     }
 }
