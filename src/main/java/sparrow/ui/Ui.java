@@ -65,8 +65,8 @@ public class Ui {
      */
     public String vocabListToString(List<Vocabulary> vocabList) {
         StringBuilder sb = new StringBuilder();
-        for (Vocabulary vocabulary : vocabList) {
-            String temp = String.format("%s\n", vocabulary.getWord());
+        for (int i = 0; i < vocabList.size(); i++) {
+            String temp = String.format("%d. %s\n", i + 1, vocabList.get(i));
             sb.append(temp);
         }
         return sb.toString();

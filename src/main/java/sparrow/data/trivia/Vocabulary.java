@@ -44,7 +44,7 @@ public class Vocabulary {
 
     @Override
     public String toString() {
-        return String.format("%s: %s", word, define());
+        return word;
     }
 
     @Override

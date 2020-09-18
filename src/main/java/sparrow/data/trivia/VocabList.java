@@ -21,4 +21,13 @@ public class VocabList {
     public void addVocab(Vocabulary toAdd) {
         this.vocabList.add(toAdd);
     }
+
+    /**
+     * Deletes a word from the vocab list.
+     * @param vocabNum Vocab number corresponding to the word to be deleted.
+     * @return Vocab deleted.
+     */
+    public Vocabulary deleteVocab(int vocabNum) {
+        return vocabList.remove(vocabNum - 1);
+    }
 }

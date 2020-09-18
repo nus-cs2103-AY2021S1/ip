@@ -20,6 +20,7 @@ import sparrow.commands.IncorrectCommand;
 import sparrow.commands.ListCommand;
 import sparrow.commands.VocabCommand;
 import sparrow.data.exceptions.IncorrectCommandException;
+import sparrow.data.exceptions.SparrowException;
 import sparrow.data.task.Deadline;
 import sparrow.data.task.Event;
 import sparrow.data.task.Todo;
@@ -50,6 +51,8 @@ public class Parser {
             Pattern.compile("(?<keywords>\\S+) (?<dateFilter>[0-9-]+)");
 
     public static final Pattern VOCAB_FORMAT = Pattern.compile("(?<word>\\S+)( (?<definition>.*))?");
+
+    public static final Pattern DELETE_FORMAT = Pattern.compile("(?<data>\\S+) (?<targetIndex>[0-9]+)");
 
     /**
      * Parses user input to generate a command based on the first word + arguments.
@@ -112,46 +115,55 @@ public class Parser {
     private Command prepareAddTodo(String args) {
         final Matcher matcher = TODO_FORMAT.matcher(args.trim());
         if (!matcher.matches()) {
-            return new IncorrectCommand("Description of a Todo can't be empty.");
+            return new IncorrectCommand(String.format(SparrowException.STANDARD_EXCEPTION_MESSAGE,
+                    AddTodoCommand.REQUIREMENT_MESSAGE));
         }
         Todo todo = new Todo(matcher.group("description"));
         return new AddTodoCommand(todo);
     }
 
-    // TODO: trim whitespace from end of deadline description
     private Command prepareAddDeadline(String args) {
         final Matcher matcher = DEADLINE_FORMAT.matcher((args.trim()));
         if (!matcher.matches()) {
-            return new IncorrectCommand("Wrong deadline format.");
+            return new IncorrectCommand(String.format(SparrowException.STANDARD_EXCEPTION_MESSAGE,
+                    AddDeadlineCommand.REQUIREMENT_MESSAGE));
         }
         try {
             LocalDate dueDate = LocalDate.parse(matcher.group("deadlineDate"));
-            Deadline deadline = new Deadline(matcher.group("description"), dueDate);
+            Deadline deadline = new Deadline(matcher.group("description").trim(), dueDate);
             return new AddDeadlineCommand(deadline);
         } catch (DateTimeParseException e) {
-            return new IncorrectCommand(e.getParsedString());
+            return new IncorrectCommand(String.format(SparrowException.STANDARD_EXCEPTION_MESSAGE,
+                    "Please enter a date in the format YYYY-MM-DD"));
         }
     }
 
-    // TODO: trim whitespace from end of event description
     private Command prepareAddEvent(String args) {
         final Matcher matcher = EVENT_FORMAT.matcher((args.trim()));
         if (!matcher.matches()) {
-            return new IncorrectCommand("Wrong event format.");
+            return new IncorrectCommand(String.format(SparrowException.STANDARD_EXCEPTION_MESSAGE,
+                    AddEventCommand.REQUIREMENT_MESSAGE));
         }
         try {
             LocalDate eventDate = LocalDate.parse(matcher.group("eventDate"));
-            Event event = new Event(matcher.group("description"), eventDate);
+            Event event = new Event(matcher.group("description").trim(), eventDate);
             return new AddEventCommand(event);
         } catch (DateTimeParseException e) {
-            return new IncorrectCommand(e.getParsedString());
+            return new IncorrectCommand(String.format(SparrowException.STANDARD_EXCEPTION_MESSAGE,
+                    "Please enter a date in the format YYYY-MM-DD"));
         }
     }
 
     private Command prepareDelete(String args) {
+        final Matcher matcher = DELETE_FORMAT.matcher((args.trim()));
+        if (!matcher.matches()) {
+            return new IncorrectCommand(String.format(SparrowException.STANDARD_EXCEPTION_MESSAGE,
+                    DeleteCommand.REQUIREMENT_MESSAGE));
+        }
         try {
-            int targetIndex = Integer.parseInt(args.trim());
-            return new DeleteCommand(targetIndex);
+            int targetIndex = Integer.parseInt(matcher.group("targetIndex"));
+            String data = matcher.group("data");
+            return new DeleteCommand(data, targetIndex);
         } catch (NumberFormatException e) {
             return new IncorrectCommand(e.getMessage());
         }

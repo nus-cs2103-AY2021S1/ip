@@ -74,6 +74,7 @@ public class TaskList {
     /**
      * Deletes a task from the task list.
      * @param taskNum Task number corresponding to the task to be deleted.
+     * @return Task deleted.
      */
     public Task deleteTask(int taskNum) {
         return tasks.remove(taskNum - 1);
