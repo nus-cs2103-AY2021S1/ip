@@ -9,7 +9,7 @@ import duke.tasks.Task;
  */
 public class Ui {
     private static final Scanner sc = new Scanner(System.in);
-    private static final String LINES = "______________________________________________________";
+    private static final String LINES = "___________________________________";
     private String logo;
     private String defaultGreeting;
 
