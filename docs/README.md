@@ -1,4 +1,4 @@
-# User Guide
+# User Guide - RollRoll
 
 ## Features 
 
@@ -27,7 +27,11 @@ Exits the bot.
 
 ## Usage
 
-### `todo <task>` - Add a todo task to task list.
+### `todo` - Add a todo task to task list.
+
+Format:
+
+`todo <task>`
 
 Example of usage: 
 
@@ -41,7 +45,11 @@ Expected outcome:
  Now you have 1 task in the list.
 ```
 
-### `event <task> /at <YYYY-MM-DD>` - Add a event task to task list.
+### `event` - Add a event task to task list.
+
+Format:
+
+`event <task> /at <YYYY-MM-DD>`
 
 Example of usage: 
 
@@ -55,7 +63,11 @@ Expected outcome:
  Now you have 2 tasks in the list.
 ```
 
-### `deadline <task> /by <YYYY-MM-DD>` - Add a deadline task to task list.
+### `deadline` - Add a deadline task to task list.
+
+Format:
+
+`deadline <task> /by <YYYY-MM-DD>`
 
 Example of usage: 
 
@@ -69,7 +81,11 @@ Expected outcome:
  Now you have 3 task in the list.
 ```
 
-### `delete <task number>` - Delete a task
+### `delete` - Delete a task
+
+Format:
+
+`delete <task number>`
 
 Example of usage: 
 
@@ -83,7 +99,11 @@ Expected outcome:
  Now you have 2 tasks in the list.
 ```
 
-### `done <task number>` - Mark a task as done.
+### `done` - Mark a task as done.
+
+Format:
+
+`done <task number>`
 
 Example of usage: 
 
@@ -96,7 +116,11 @@ Expected outcome:
  [E][✓] meeting (at: Sep 20 2020)
  ```
 
-### `find <keyword>` - Finds all tasks containing given keyword.
+### `find` - Finds all tasks containing given keyword.
+
+Format:
+
+`find <keyword>`
 
 Example of usage: 
 
@@ -109,7 +133,11 @@ Expected outcome:
  1.[D][✘] deadline quiz (by: Sep 20 2020)
 ```
 
-### `prioritize <task number>` - Move a task to the top of task list and label it as **HIGH priority**.
+### `prioritize` - Move a task to the top of task list and label it as **HIGH priority**.
+
+Format:
+
+`prioritize <task number>`
 
 Example of usage: 
 
