@@ -20,7 +20,7 @@ This is a project template for a greenfield Java project. It's named after the J
 1. Type `Bye` or click the  `'x'` button to close the window.
 
 
-![Sample Screenshot](Ui.PNG)
+![Sample Screenshot](Ui.png)
 
 
 ## Features
@@ -147,14 +147,14 @@ Tasks locally saved in _Data_atb folder as a txt called _Duke.txt_
 
 
 ## Command Summary
-Action | Format 
--------- | --------
+Action | Format
+------------ | -------------
 todo | `NAME`
 deadline | `NAME` `/by` `DATE`
 event | `NAME` `/at` `TIMEFRAME`
-list | -
+list | 
 done | `INDEX`
 delete | `INDEX`
 find | `SUBNAME`
 tag | `INDEX` `TAGNAME`
-bye | -
+bye | 
