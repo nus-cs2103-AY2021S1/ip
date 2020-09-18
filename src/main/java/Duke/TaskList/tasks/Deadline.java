@@ -5,12 +5,11 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 
-public class Deadlines extends Task {
+public class Deadline extends Task {
     private LocalDateTime due;
     private DateTimeFormatter inFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
     private DateTimeFormatter outFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
-    private String type = "Deadlines";
-    public Deadlines(String string) throws DateTimeParseException {
+    public Deadline(String string) throws DateTimeParseException {
         super(string.substring(0, string.indexOf("/") - 1), string, string.indexOf("/"));
         this.due = LocalDateTime.parse(string.substring(string.indexOf("/") + 4), inFormat);
     }

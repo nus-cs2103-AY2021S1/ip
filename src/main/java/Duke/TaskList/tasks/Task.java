@@ -1,8 +1,7 @@
 package Duke.TaskList.tasks;
 
-public class Task {
+public abstract class Task {
     protected String task;
-    private String type = "Task";
     private boolean done = false;
     protected String fullText;
     protected int commandIndex;
@@ -11,10 +10,6 @@ public class Task {
         this.task = task;
         this.commandIndex = commandIndex;
         this.fullText = fullText + "cone"; // the last 4 letters say done if a task is done, and cone if its not
-    }
-
-    protected String getType() {
-        return type;
     }
 
     /**
@@ -41,6 +36,5 @@ public class Task {
         return done ? "[Barked] " + task : "[Not barked yet] " + task;
     }
 
-    public void update(String newTask) {
-    }
+    public abstract void update(String newTask);
 }

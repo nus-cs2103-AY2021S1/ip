@@ -11,6 +11,10 @@ public class Storage {
     private static File tmpFile = new File(System.getProperty("user.dir") + File.separator + "List.txt");
     private static FileWriter writer;
     private static ArrayList<Task> taskList;
+
+    /**
+     * Creates a new File called List.txt in the same directory as the jar file
+     */
     public static void createNewFile() {
         try {
             if (!tmpFile.exists()) {
@@ -21,10 +25,17 @@ public class Storage {
         }
     }
 
+    /**
+     * Returns the tmpFile
+     * @return
+     */
     public static File getTmpFile() {
         return tmpFile;
     }
 
+    /**
+     * Saves the list of thingsOnList to the file
+     */
     public static void writeToFile() {
         try {
             taskList = TaskList.getThingsOnList();

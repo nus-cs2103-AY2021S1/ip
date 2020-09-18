@@ -1,7 +1,12 @@
 package Duke.TaskList;
 
+import Duke.DukeExceptions;
+import Duke.TaskList.tasks.Event;
 import Duke.TaskList.tasks.Task;
+import Duke.TaskList.tasks.ToDos;
+import Duke.TaskList.tasks.Deadline;
 
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 public class TaskList {
@@ -19,16 +24,85 @@ public class TaskList {
      * Adds a task to list.
      * @param task
      */
-    public static void addToList(Task task) {
+    private static String addToList(Task task) {
         thingsOnList.add(task);
+        return "Bark. Bork: bark bark woof. (Roger. I've added this task:\n" +
+                getLastTask() + "\n" +
+                "Now you have " + getThingsOnListSize() + " tasks in the list.)";
     }
 
     /**
      * Deletes the xth task from the list.
-     * @param x Number of the task to be deleted.
+     * @param cmd String that determines which task to delete
      */
-    public static void deleteFromList(int x) {
-        thingsOnList.remove(x);
+    public static String deleteFromList(String cmd) throws DukeExceptions {
+        try {
+            int x = Integer.parseInt(cmd.substring("/delete".length() + 1));
+            String delString = "Bark bark: bork bark. (Removing task: " + thingsOnList.get(x - 1) + ".";
+            thingsOnList.remove(x - 1);
+            return delString;
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
+            throw new DukeExceptions("Woof? (This task doesn't exist?)");
+        }
+    }
+
+    /**
+     * Retrieves a help statement to guide users on the types of commands
+     * @return String containing all the commands
+     */
+    public static String getHelp() {
+        String newLine = System.getProperty("line.separator");
+        return "Commands:" + newLine + "ADD NEW TODO: /todo *Thing to do *," +
+                newLine + "ADD NEW EVENT:*task* /at  *(start in yyyy-MM-dd HHmm) (end in yyyy-MM-dd HHmm)*," + newLine +
+                "ADD NEW DEADLINE: *task* /by *deadline in yyyy-MM-dd HHmm*" + newLine + "SEARCH FOR A KEYWORD: " +
+                "/find *text to search for*" + newLine + "DELETE A TASK: /delete *index of task to delete*" +
+                newLine + "MARK A TASK AS DONE: /done *index of task finished" + newLine + "UPDATE A TASK: " +
+                "/update *index of task to update* *updated content of task*" + newLine + "SAVE AND CLOSE: bye";
+    }
+
+    /**
+     * Adds a task of type ToDo given the input
+     * @param input content of todo
+     * @return acknowledgement that todo has been added
+     * @throws DukeExceptions
+     */
+    public static String addToDo(String input) throws DukeExceptions {
+        try {
+            return addToList(new ToDos(input));
+        } catch (DateTimeParseException | StringIndexOutOfBoundsException e) {
+            throw new DukeExceptions(
+                    "Bark (Please make sure format of Date/Time is yyyy-MM-dd HHmm)");
+        }
+    }
+
+    /**
+     * Adds a task of type Event
+     * @param input content of event
+     * @return acknowledgement that event has been added
+     * @throws DukeExceptions
+     */
+    public static String addEvent(String input) throws DukeExceptions {
+        try {
+            return addToList(new Event(input));
+        } catch (DateTimeParseException | StringIndexOutOfBoundsException e) {
+            throw new DukeExceptions(
+                    "Bark (Please make sure format of Date/Time is yyyy-MM-dd HHmm)");
+        }
+    }
+
+    /**
+     * Adds a task of type Deadline
+     * @param input content of deadline
+     * @return acknowledgement that deadline has been added
+     * @throws DukeExceptions
+     */
+    public static String addDeadline(String input) throws DukeExceptions {
+        try {
+            return addToList(new Deadline(input));
+        } catch (DateTimeParseException | StringIndexOutOfBoundsException e) {
+            throw new DukeExceptions(
+                    "Bark (Please make sure format of Date/Time is yyyy-MM-dd HHmm)");
+        }
     }
 
     /**
@@ -49,29 +123,42 @@ public class TaskList {
 
     /**
      * Marks task x as done.
-     * @param x the task to be marked as done.
+     * @param cmd the task to be marked as done.
+     * @return acknowledgement that the task has been completed
      */
-    public static void markDone(int x) {
-        thingsOnList.get(x).markAsDone();
-    }
-
-    /**
-     * Prints the list.
-     */
-    public static void viewList() {
-        if (thingsOnList.size() == 0) {
-            System.out.println("Bark bark. (No tasks right now.)");
-        } else {
-            for (int i = 0; i < thingsOnList.size(); i++) {
-                System.out.println((i + 1) + ". " + thingsOnList.get(i));
-            }
+    public static String markDone(String cmd) throws DukeExceptions {
+        try {
+            int x = Integer.parseInt(cmd.substring(6));
+            thingsOnList.get(x - 1).markAsDone();
+            return getListView() + "BARK BARK!!! (Task " + x + " marked as done!!!)";
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
+            throw new DukeExceptions("Woof? (This task doesn't exist?)");
         }
     }
 
-    public static void update(int x, String newTask) {
-        thingsOnList.get(x).update(newTask);
+    /**
+     * updates the text of a given task
+     * @param cmd contains both the index of the task to update, as well as the update text
+     * @return acknowledgement that
+     * @throws DukeExceptions
+     */
+    public static String update(String cmd) throws DukeExceptions {
+        try {
+            String withoutCommand = cmd.substring("update".length() + 2);
+            int spaceIndex = withoutCommand.indexOf(" ");
+            int x = Integer.parseInt(withoutCommand.substring(0, spaceIndex));
+            String newTask = withoutCommand.substring(spaceIndex + 1);
+            thingsOnList.get(x - 1).update(newTask);
+            return "Bark bark: (bark) (Message " + x + " updated to: " + newTask + ")";
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
+            throw new DukeExceptions("Woof? (This task doesn't exist?)");
+        }
     }
 
+    /**
+     * Converts list into a string representation
+     * @return String form of the list of thingsOnList.
+     */
     public static String getListView() {
         String list = "";
         if (thingsOnList.size() == 0) {
@@ -88,34 +175,21 @@ public class TaskList {
     /**
      * Searches the list for the key word, and prints a new list containing tasks with the key word.
      * @param keyWord Key word for the search
+     * @return Tasks which match the keyword
      */
-    public static void find(String keyWord) {
-        boolean printed = false;
+    public static String find(String keyWord) {
+        boolean found = false;
+        String foundText = "Woof bark: (Here are the tasks that match your key word: )";
         System.out.println("Woof bark: (Here are the tasks that match your key word: )");
         for (int i = 0; i < thingsOnList.size(); i++) {
             if (thingsOnList.get(i).toString().contains(keyWord)) {
-                System.out.println((i + 1) + ". "  + thingsOnList.get(i));
-                printed = true;
+                foundText += "\n" + ((i + 1) + ". "  + thingsOnList.get(i));
+                found = true;
             }
         }
-        if (!printed) {
-            System.out.println("Bark bar :< (There were no tasks that matched :<)");
+        if (!found) {
+            return "Bark bark :< (There were no tasks that matched :<)";
         }
-    }
-
-    public static String getFind(String keyWord) {
-        String listView = "";
-        boolean printed = false;
-        listView += ("Woof bark: (Here are the tasks that match your key word: )\n");
-        for (int i = 0; i < thingsOnList.size(); i++) {
-            if (thingsOnList.get(i).toString().contains(keyWord)) {
-                listView += (    (i + 1) + ". "  + thingsOnList.get(i)) + "\n";
-                printed = true;
-            }
-        }
-        if (!printed) {
-            return ("Bark bark :< (There were no tasks that matched :<)");
-        }
-        return listView;
+        return foundText;
     }
 }

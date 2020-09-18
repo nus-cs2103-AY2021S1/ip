@@ -6,10 +6,14 @@ import Duke.commands.Parser;
 public class Duke {
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Gets a response from Duke given the
+     * @param input
+     * @return
      */
     public String getResponse(String input) {
+        if (input.equals("bye")) {
+            return "Bark bark! (Goodbye!)";
+        }
         try {
             return Parser.parseAndAddToList(input);
         } catch (DukeExceptions e) {
