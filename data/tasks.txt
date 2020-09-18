@@ -1,4 +1,0 @@
-D | 0 | assignment 1 | 2021-02-26
-T | 0 | return books
-E | 0 | birthday party | 2021-05-29
-T | 1 | return books
