@@ -2,6 +2,8 @@ package duke;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.time.LocalDate;
+
 import org.junit.jupiter.api.Test;
 
 import duke.task.Deadline;
@@ -10,8 +12,8 @@ import duke.task.ToDo;
 
 public class TaskListTest {
     private final ToDo todo = new ToDo("wakeup");
-    private final Deadline deadline = new Deadline("project", "2020-09-01");
-    private final Event event = new Event("holiday", "2020-12-12");
+    private final Deadline deadline = new Deadline("project", LocalDate.parse("2020-09-01"));
+    private final Event event = new Event("holiday", LocalDate.parse("2020-12-12"));
 
     @Test
     public void markAsDone_doneSecondTask_correctTaskDone() {

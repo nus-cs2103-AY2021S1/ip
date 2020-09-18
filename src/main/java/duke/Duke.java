@@ -7,8 +7,9 @@ import duke.command.CommandResponse;
  * Represents a personalized chat bot where a user can keep track of different tasks.
  */
 public class Duke {
-
+    /** The storage to store and load all the tasks. */
     private final Storage storage;
+    /** Represents the list of different tasks. */
     private TaskList tasks;
 
     /**

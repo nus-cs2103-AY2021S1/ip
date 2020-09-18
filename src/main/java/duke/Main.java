@@ -12,7 +12,7 @@ import javafx.stage.Stage;
  * A GUI for Duke using FXML.
  */
 public class Main extends Application {
-
+    /** Creates new Duke. */
     private final Duke duke = new Duke("data/tasks.txt");
 
     @Override

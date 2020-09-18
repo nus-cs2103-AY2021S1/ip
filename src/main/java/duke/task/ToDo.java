@@ -4,7 +4,6 @@ package duke.task;
  * Represents a task to be done without a specified date.
  */
 public class ToDo extends Task {
-
     /**
      * Creates a new ToDo with the given description.
      *

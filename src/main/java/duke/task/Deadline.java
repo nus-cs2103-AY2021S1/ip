@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
  * Represents a deadline to be done by a specified date.
  */
 public class Deadline extends Task {
-
+    /** The due date of the task. */
     protected LocalDate by;
 
     /**
@@ -16,9 +16,9 @@ public class Deadline extends Task {
      * @param description is the description of the deadline.
      * @param by is the deadline date.
      */
-    public Deadline(String description, String by) {
+    public Deadline(String description, LocalDate by) {
         super(description);
-        this.by = LocalDate.parse(by);
+        this.by = by;
     }
 
     /**
@@ -29,7 +29,7 @@ public class Deadline extends Task {
      */
     public static Deadline load(String loadTask) {
         String[] splitTask = loadTask.split(" \\| ", 4);
-        Deadline deadline = new Deadline(splitTask[2], splitTask[3]);
+        Deadline deadline = new Deadline(splitTask[2], LocalDate.parse(splitTask[3]));
         if (splitTask[1].equals("1")) {
             deadline.markAsDone();
         }

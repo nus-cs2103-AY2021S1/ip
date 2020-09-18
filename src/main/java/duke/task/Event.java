@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
  * Represents an event to be done at a specified date.
  */
 public class Event extends Task {
-
+    /** The event date of the task. */
     protected LocalDate at;
 
     /**
@@ -16,9 +16,9 @@ public class Event extends Task {
      * @param description is the description of the event.
      * @param at is the event date.
      */
-    public Event(String description, String at) {
+    public Event(String description, LocalDate at) {
         super(description);
-        this.at = LocalDate.parse(at);
+        this.at = at;
     }
 
     /**
@@ -29,7 +29,7 @@ public class Event extends Task {
      */
     public static Event load(String loadTask) {
         String[] splitTask = loadTask.split(" \\| ", 4);
-        Event event = new Event(splitTask[2], splitTask[3]);
+        Event event = new Event(splitTask[2], LocalDate.parse(splitTask[3]));
         if (splitTask[1].equals("1")) {
             event.markAsDone();
         }

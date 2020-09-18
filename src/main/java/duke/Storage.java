@@ -17,7 +17,7 @@ import duke.task.ToDo;
  * Deals with loading tasks from the file and saving tasks in the file.
  */
 public class Storage {
-
+    /** File where tasks are saved and loaded from. */
     private final File file;
 
     /**

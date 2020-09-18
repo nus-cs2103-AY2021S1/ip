@@ -1,5 +1,7 @@
 package duke;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 import duke.command.AddCommand;
@@ -27,7 +29,7 @@ public class Parser {
      */
     public static Command parse(String fullCommand) throws DukeException {
         try {
-            String[] splitCommand = fullCommand.split(" ", 2);
+            String[] splitCommand = fullCommand.trim().split(" ", 2);
             CommandTypes command = CommandTypes.valueOf(splitCommand[0].toUpperCase());
             switch (command) {
             case BYE:
@@ -43,11 +45,15 @@ public class Parser {
                 return new AddCommand(todo);
             case DEADLINE:
                 String[] splitDeadline = splitCommand[1].split(" /by ", 2);
-                Deadline deadline = new Deadline(splitDeadline[0], splitDeadline[1]);
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+                LocalDate date = LocalDate.parse(splitDeadline[1], formatter);
+                Deadline deadline = new Deadline(splitDeadline[0], date);
                 return new AddCommand(deadline);
             case EVENT:
                 String[] splitEvent = splitCommand[1].split(" /at ", 2);
-                Event event = new Event(splitEvent[0], splitEvent[1]);
+                formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+                date = LocalDate.parse(splitEvent[1], formatter);
+                Event event = new Event(splitEvent[0], date);
                 return new AddCommand(event);
             case FIND:
                 return new FindCommand(splitCommand[1]);
