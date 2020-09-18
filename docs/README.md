@@ -15,6 +15,9 @@ the different software engineering principle along the way.
 * [1. Quick Start](#1-quick-start)
    * [1.1 Run the project in intelliJ](#11-run-the-project-in-intellij)
    * [1.2 Run the project in terminal](#12-run-the-project-in-terminal)
+* [2. Features and Usage](#2-features-and-usage)
+   * [2.1 Find the list of command: help](#21-find-the-list-of-command-help)
+ 
    
 
 
@@ -78,10 +81,13 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
 
 ![GUI of BILL](Ui.png)
 
+8. You can enter the `help` command to find the list of commands you can use.
 
-## Features and how to use them
 
-### **Find the list of command: help**
+
+## 2. Features and Usage
+
+### **2.1 Find the list of command: help**
 
 This feature allows users to find the list of command to use
 
@@ -89,9 +95,9 @@ This feature allows users to find the list of command to use
 
 *Format*: help
 
-*E.g*: help
+*Examples*: help
 
-###  **Save the task : save**
+###  **2.2 Save the task : save**
 
 This feature allows users to save the task after they have added them.
 
@@ -99,9 +105,9 @@ This feature allows users to save the task after they have added them.
 
 *Format*: save
 
-*E.g*: save
+*Examples*: save
 
-### **Add a general ToDo task : todo**
+### **2.3 Add a general ToDo task : todo**
 
 This feature allows users to add a ToDo task to our current list
 
@@ -109,10 +115,10 @@ This feature allows users to add a ToDo task to our current list
 
 *Format*: todo [newTask]
 
-*E.g*: todo ip
+*Examples*: todo ip
 
 
-### **Add a Deadline task : deadline**
+### **2.4 Add a Deadline task : deadline**
 
 This feature allows users to add a task with deadline to our current list
 
@@ -121,7 +127,7 @@ for this task,eg: due on 2020 August 2, 7pm
 
 *Format*: deadline [newTask] /by [date] [time]
 
-*E.g*: deadline ip /by 02/08/2020 1900
+*Examples*: deadline ip /by 02/08/2020 1900
 
 **Note:**
 1. the date must be dd/mm/yyyy
@@ -130,7 +136,7 @@ two digit, for example, 2 must be written as 02 instead of just 2.
 3. the time must be 4 digit, for example, 8:12am must be written as 0812 instead of 812
 
 
-### **Adding an Event : event**
+### **2.5 Adding an Event : event**
 
 This feature allows users to add an event to our current list.
 
@@ -139,7 +145,7 @@ For example, it happens on 2020 August 2, 7pm
 
 *Format*: event [newTask] /at [date] [time]
 
-*E.g*: event ip /at 02/08/2020 1900
+*Examples*: event ip /at 02/08/2020 1900
 
 **Note:**
 1. the date must be dd/mm/yyyy
@@ -149,7 +155,7 @@ two digits, for example, 2 must be written as 02 instead of just 2.
 
 
 
-### **Listing out all Tasks : list**
+### **2.6 Listing out all Tasks : list**
 
 This feature allows users to list out all the tasks added to the list in the order of the entry.
 
@@ -157,11 +163,11 @@ This feature allows users to list out all the tasks added to the list in the ord
 
 *Format*: list
 
-*E.g*: list
+*Examples*: list
 
 
 
-### **Marking a Task as done : done**
+### **2.7 Marking a Task as done : done**
 
 This feature allows users to mark certain tasks they have done.
 
@@ -174,11 +180,11 @@ to make the task as done.
 we first use list to find the index of the task. For example, in this case, the index 
 for the ip task is taken as 5.
 
-*E.g*: done 5
+*Examples*: done 5
 
 
 
-### **Delete the task : delete**
+### **2.8 Delete the task : delete**
 
 This feature allows users to delete certain tasks.
 
@@ -191,11 +197,11 @@ to delete the task.
 we first use list to find the index of the task. For example, in this case, the index 
 for the ip task is taken as 5.
 
-*E.g*: delete 5
+*Examples*: delete 5
 
 
 
-### **Find a certain task: find**
+### **2.9 Find a certain task: find**
 
 This feature allows users to find a certain task from the list and look at the detail.
 
@@ -203,11 +209,11 @@ This feature allows users to find a certain task from the list and look at the d
 
 *Format*: find [taskName]
 
-*E.g*: find ip
+*Examples*: find ip
 
 
 
-###  **Ending a session : bye**
+###  **2.10 Ending a session : bye**
 
 This feature allows users to quit the application after they have done what they want
 
@@ -215,5 +221,5 @@ This feature allows users to quit the application after they have done what they
 
 *Format*: bye
 
-*E.g*: bye
+*Examples*: bye
  
