@@ -15,7 +15,11 @@ Duke is a desktop dog to help you manage tasks in the form of todos, deadlines a
 ### Viewing help: `help`
 Displays features and the commands needed to use them.
 <details>
-  <summary>**Usage**</summary>
+  <summary>
+    
+    Usage
+    
+  </summary>
   
 Format: `/help`
 * Instructions will be displayed in the following format - GENERAL DESCRIPTION: input needed.
@@ -26,7 +30,7 @@ Adds a new ToDo task to the list.
 <details>
   <summary>
     
-    **Usage**
+    Usage
     
   </summary>
   
@@ -45,7 +49,11 @@ Examples:
 ### Add a new Event: `at`
 Adds a new Event task to the list.
 <details>
-  <summary>**Usage**</summary>
+  <summary>
+    
+    Usage
+    
+  </summary>
   
 Format:`TASK /at START_DATETIME END_DATETIME`
 * Adds a Event with TASK as text, and START_DATETIME and END_DATETIME as the start and end of said event.
@@ -62,7 +70,11 @@ Examples:
 ### Add a new Deadline: `by`
 Adds a new Deadline task to the list.
 <details>
-  <summary>**Usage**</summary>
+  <summary>
+    
+    Usage
+    
+  </summary>
 
 Format: `TASK /by DUE_DATETIME`
 * Adds a Deadline with TASK as the text, and DUE_DATETIME as the due date of the task.
@@ -79,7 +91,11 @@ Examples:
 ### List out current tasks: `list`
 Lists out tasks currently in the app.
 <details>
-  <summary>**Usage**</summary>
+  <summary>
+    
+    Usage
+    
+  </summary>
 
 Format: `/list`
 * DONE_STATUS refers to whether a task is done (`Barked`) or undone (`Not barked yet`).
@@ -91,7 +107,11 @@ Format: `/list`
 ### Search for a Task using a keyword: `find`
 Displayes all tasks containing a specific keyword.
 <details>
-  <summary>**Usage**</summary>
+  <summary>
+    
+    Usage
+    
+  </summary>
 
 Format: `/find KEYWORD`
 * Searches lists of tasks and displays any task that contains KEYWORD.
@@ -107,7 +127,11 @@ Examples:
 ### Delete a Task by index: `delete`
 Deletes a task by its number within the list.
 <details>
-  <summary>**Usage**</summary>
+  <summary>
+    
+    Usage
+    
+  </summary>
 
 Format: `/delete INDEX`
 * Deletes a task by its number within the list.
@@ -120,7 +144,11 @@ Examples:
 ### Mark a task as done by index: `done`
 Marks a task as done by its number within the list.
 <details>
-  <summary>**Usage**</summary>
+  <summary>
+    
+    Usage
+    
+  </summary>
   
 Format: `/done INDEX`
 * Marks a task as done (`[Barked]`) by its number within the list.
