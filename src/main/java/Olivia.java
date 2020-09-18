@@ -35,6 +35,12 @@ public class Olivia {
         }
     }
 
+    /**
+     * Generates a welcome message for the user, where its content depends on
+     * whether a text file can be found.
+     * @return output String containing the welcome message.
+     */
+
     public String welcome() {
         String ret = wrapper.getUi().welcome();
         try {
@@ -45,6 +51,11 @@ public class Olivia {
         }
         return ret;
     }
+
+    /**
+     * Checks if Olivia should terminate.
+     * @return a boolean determining if Olivia should terminate.
+     */
 
     public boolean shouldExit() {
         return wrapper.isShouldExit();

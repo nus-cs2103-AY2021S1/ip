@@ -76,6 +76,11 @@ public abstract class Task {
         }
     }
 
+    /**
+     * Updates the description of the task to the given String.
+     * @param str a String representing the description of the task to update to.
+     */
+
     public void update(String str) {
         this.description = str;
     }
