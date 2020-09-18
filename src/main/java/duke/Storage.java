@@ -6,23 +6,20 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.Stack;
 
 public class Storage {
-    private String filepath;
-    private File file;
-    private Stack<String> actions;
+    private final String filepath;
+    private final File file;
 
     Storage(String path) {
         this.filepath = path;
         this.file = new File(filepath);
-        this.actions = new Stack<>();
     }
 
     /**
      * Creates a new file if it does not exist.
      * @return boolean
-     * @throws IOException
+     * @throws IOException if file not found
      */
     boolean create() throws IOException {
         return !file.exists() && file.createNewFile();
@@ -31,7 +28,7 @@ public class Storage {
     /**
      * Counts the number of lines in the hard disk.
      * @return int
-     * @throws FileNotFoundException
+     * @throws FileNotFoundException if file is not found
      */
     int lineCounter() throws FileNotFoundException {
         int counter = 0;
@@ -48,20 +45,20 @@ public class Storage {
      * @param startIndex starting index.
      * @param splits array of strings.
      * @param str accumulation of the string.
-     * @return
+     * @return time of deadline string
      */
     String stringMaker(int startIndex, String[] splits, String str) {
+        String word = splits[startIndex];
         return startIndex > splits.length - 1
                  ? str
-                 : stringMaker(startIndex + 1, splits, (str.length() > 0 ? str + " " + splits[startIndex] : str + splits[startIndex]));
+                 : stringMaker(startIndex + 1, splits, (str.length() > 0 ? str + " " + word : str + word));
     }
 
     /**
      * Reads the hard disk and converts it into an arraylist.
      * @return ArrayList(Task) the arraylist representation of the hard disk
-     * @throws Exception
      */
-    ArrayList<Task> toArrayList() throws Exception {
+    ArrayList<Task> toArrayList() {
         try {
             ArrayList<Task> arr = new ArrayList<>();
             if (lineCounter() == 0) {
@@ -72,7 +69,7 @@ public class Storage {
                     String task = s.nextLine();
                     String[] splits = task.split(" ");
                     String name = splits[1];
-                    Character icon = splits[0].charAt(4);
+                    char icon = splits[0].charAt(4);
                     if (task.charAt(1) == 'T') {
                         Todo t = new Todo(name);
                         if (icon == '1') {
@@ -112,12 +109,12 @@ public class Storage {
     /**
      * Updates the hard disk based on the provided arraylist.
      * @param arr the arraylist that is being copied to the hard disk.
-     * @throws IOException
+     * @throws IOException if FileWriter fails
      */
     void listWriter(ArrayList<Task> arr) throws IOException {
         FileWriter fw = new FileWriter(filepath);
         for (Task t : arr) {
-            String keyword = "";
+            String keyword;
             String toPrint = "";
             if (t instanceof Deadline) {
                 keyword = "by";
