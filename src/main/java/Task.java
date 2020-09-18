@@ -50,7 +50,8 @@ public class Task {
      */
     @Override
     public String toString() {
-        String marked = this.isDone ? "[✓] " : "[✗] ";
+        String marked = this.isDone ? "[Y] " : "[N] ";
+//        String marked = this.isDone ? "[✓] " : "[✗] ";
         return marked + this.name;
     }
 }

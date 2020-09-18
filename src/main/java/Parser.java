@@ -11,7 +11,7 @@ public class Parser {
                 + Ui.PADDING + "delete <index>: Delete the task at specified index" + Ui.NEW_LINE
                 + Ui.PADDING + "delete all: Delete all tasks from task list" + Ui.NEW_LINE
                 + Ui.PADDING + "bye: Exit programme" + Ui.NEW_LINE
-                + Ui.PADDING + "help: You do realise you're already on the help page, right?" + Ui.NEW_LINE;
+                + Ui.PADDING + "help: You do realise you're already on the help page, right?";
     Scanner sc;
     String parsedLine;
 
@@ -31,7 +31,15 @@ public class Parser {
      * Parses the user input by one line.
      */
     void parseLine() {
-        parsedLine = this.sc.nextLine().trim();
+        this.parsedLine = this.sc.nextLine().trim();
+    }
+
+    /**
+     * Parses a user input string.
+     * @param input User input string.
+     */
+    void parseInput(String input) {
+        this.parsedLine = input;
     }
 
     /**
@@ -44,7 +52,7 @@ public class Parser {
      * @return Boolean value describing if the exit command has been called by the user.
      */
     boolean executeCommand(Storage storage, TaskList tasks) {
-        String input = this.parsedLine;
+        String input = this.parsedLine.trim();
 
         // we convert input to uppercase before checking to make commands case-insensitive
         if (input.toUpperCase().equals(Duke.Commands.EXIT.getString())) {

@@ -61,7 +61,8 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        String marked = this.isDone ? "[✓] " : "[✗] ";
+        String marked = this.isDone ? "[Y] " : "[N] ";
+//        String marked = this.isDone ? "[✓] " : "[✗] ";
         String eventTime = this.dueDate.length() > 0 ? " (by: " + this.dueDate + ")" : "";
         return "[D]" + marked + this.name + eventTime;
     }

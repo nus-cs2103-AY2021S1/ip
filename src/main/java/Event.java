@@ -61,7 +61,8 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        String marked = this.isDone ? "[✓] " : "[✗] ";
+        String marked = this.isDone ? "[Y] " : "[N] ";
+//        String marked = this.isDone ? "[✓] " : "[✗] ";
         String eventTime = this.timing.length() > 0 ? " (at: " + this.timing + ")" : "";
         return "[E]" + marked + this.name + eventTime;
     }
