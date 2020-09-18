@@ -96,6 +96,17 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
 
 ## 2. Features and Usage
 
+   * [2.1 Find the list of command: help](#21-find-the-list-of-command-help)
+   * [2.2 Save the task : save](#22-save-the-task--save)
+   * [2.3 Add a general ToDo task : todo](#23-add-a-general-todo-task--todo)
+   * [2.4 Add a Deadline task : deadline](#24-add-a-deadline-task--deadline)
+   * [2.5 Adding an Event : event](#25-adding-an-event--event)
+   * [2.6 Listing out all Tasks : list](#26-listing-out-all-tasks--list)
+   * [2.7 Marking a Task as done : done](#27-marking-a-task-as-done--done)
+   * [2.8 Delete the task : delete](#28-delete-the-task--delete)
+   * [2.9 Find a certain task: find](#29-find-a-certain-task-find)
+   * [2.10 Ending a session : bye](#210-ending-a-session--bye)
+   
 ### **2.1 Find the list of command: help**
 
 This feature allows users to find the list of command to use
