@@ -199,7 +199,7 @@ Expected outcome:
 Updates both the description and date/time of an existing deadline or event task managed by Clippy. Suppose you made a mistake when entering the description and date/time of an event. You can use `update` to edit both the description and date/time in one command.
 
 ### Format
-* `update <index> /by|/at <new date/time>`: Updates only the date/time of a deadline or event task
+* `update <index> <new task description> /by|/at <new date/time>`: Updates only the date/time of a deadline or event task
 
 What it does:
 * Updates the task at the specified `index`. 
