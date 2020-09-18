@@ -3,8 +3,6 @@ package duke;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import duke.Response;
-import duke.TaskList;
 import duke.task.Task;
 
 /**
@@ -24,13 +22,18 @@ public class Ui {
         String[] greetingTexts = {"Hello! I'm Pat", "What can I do for you?"};
         Response greeting = new Response(greetingTexts);
         showLine();
-        return "     Hello from\n" 
+        return "     Hello from\n"
                 + logo
                 + greeting.getResponse();
     }
-    
+
+    /**
+     * Returns the welcome message.
+     *
+     * @return The welcome message.
+     */
     public String showWelcomeMessage() {
-        return "Hello! I'm Pat\n" 
+        return "Hello! I'm Pat\n"
                 + "What can I do for you?";
     }
 
