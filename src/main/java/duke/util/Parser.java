@@ -15,6 +15,7 @@ import duke.command.ListCommand;
 import duke.command.SortCommand;
 import duke.command.ToDoCommand;
 import duke.exception.DukeException;
+import duke.exception.ForbiddenCharacterException;
 import duke.exception.InvalidDeadlineException;
 import duke.exception.InvalidEventException;
 import duke.exception.InvalidFindException;
@@ -32,7 +33,9 @@ public class Parser {
      * @throws DukeException If the input does not match any command.
      */
     public static Command parse(String input) throws DukeException {
-        if (input.equals("bye")) {
+        if (input.contains("|")) {
+            throw new ForbiddenCharacterException();
+        } else if (input.equals("bye")) {
             return new ByeCommand();
         } else if (input.equals("help")) {
             return new HelpCommand();
