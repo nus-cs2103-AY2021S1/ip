@@ -1,15 +1,24 @@
-package commands;
+package duke.commands;
 
 import duke.data.task.TaskList;
 import duke.storage.Storage;
 import duke.ui.Ui;
 
+/**
+ * Responsible for the logic of printing a help message.
+ */
 public class HelpCommand extends Command {
     public static final String COMMAND_WORD = "help";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Shows program usage instructions.\n"
             + "Example: " + COMMAND_WORD + "\n";
 
+    /**
+     * Collates the usage of all commands.
+     * @param tasks List of tasks.
+     * @param storage Saves tasks in text file.
+     * @return CommandResult containing the help message.
+     */
     @Override
     public CommandResult execute(TaskList tasks, Storage storage) {
         return new CommandResult(DoneCommand.MESSAGE_USAGE

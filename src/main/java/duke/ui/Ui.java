@@ -4,8 +4,8 @@ package duke.ui;
  * Text UI of the application
  */
 public class Ui {
-    private static final String SPACING = "         ";
     public static final String DIVIDER = "_______________________________________________________";
+    private static final String SPACING = "         ";
 
     /**
      * Displays a welcome message to the user.

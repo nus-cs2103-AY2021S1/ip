@@ -1,8 +1,4 @@
+[T] | 1 | hi
+
 [T] | 0 | hello
-[E] | 0 | tchouk (at: 17 Sep 2020)| 2020-09-17
-[D] | 0 | CS2100 assignment (by: 18 Sep 2020)| 2020-09-18
-[E] | 0 | a long time later (at: 1 Nov 2020)| 2020-11-01
-[E] | 0 | test| 2020-09-24
-[E] | 0 | 23rd| 2020-09-23
-[T] | 0 | hello
-[T] | 0 | help
+

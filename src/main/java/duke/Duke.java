@@ -2,9 +2,9 @@ package duke;
 
 import java.util.Scanner;
 
-import commands.Command;
-import commands.CommandResult;
-import commands.ExitCommand;
+import duke.commands.Command;
+import duke.commands.CommandResult;
+import duke.commands.ExitCommand;
 import duke.data.exception.DukeException;
 import duke.data.task.TaskList;
 import duke.parser.Parser;

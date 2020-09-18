@@ -4,7 +4,18 @@ import java.time.LocalDate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import commands.*;
+import duke.commands.Command;
+import duke.commands.DeadlineCommand;
+import duke.commands.DeleteCommand;
+import duke.commands.DoneCommand;
+import duke.commands.EventCommand;
+import duke.commands.ExitCommand;
+import duke.commands.FindCommand;
+import duke.commands.HelpCommand;
+import duke.commands.IncorrectCommand;
+import duke.commands.ListCommand;
+import duke.commands.ReminderCommand;
+import duke.commands.ToDoCommand;
 
 /**
  * Parses user input.
@@ -23,7 +34,7 @@ public class Parser {
     public Command parseUserInput(String userInput) {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
-            // return incorrect command
+            return new IncorrectCommand("Sorry I dont recognize that command, type help for more info!");
         }
 
         final String commandWord = matcher.group("commandWord");
@@ -38,6 +49,8 @@ public class Parser {
             return prepareEvent(arguments);
         case DeadlineCommand.COMMAND_WORD:
             return prepareDeadline(arguments);
+        case DeleteCommand.COMMAND_WORD:
+            return prepareDelete(arguments);
         case FindCommand.COMMAND_WORD:
             return prepareFind(arguments);
         case DoneCommand.COMMAND_WORD:
@@ -49,6 +62,15 @@ public class Parser {
         case HelpCommand.COMMAND_WORD: // Fallthrough
         default:
             return new HelpCommand();
+        }
+    }
+
+    private Command prepareDelete(String arguments) {
+        try {
+            int index = Integer.parseInt(arguments.trim());
+            return new DeleteCommand(index - 1);
+        } catch (Exception e) {
+            return new IncorrectCommand(e.getMessage());
         }
     }
 
@@ -73,7 +95,7 @@ public class Parser {
     private Command prepareDone(String arguments) { // check for number
         try {
             String index = arguments.trim();
-            return new DoneCommand(Integer.parseInt(index));
+            return new DoneCommand(Integer.parseInt(index) - 1);
         } catch (IllegalArgumentException exception) {
             return new IncorrectCommand(exception.getMessage());
         }

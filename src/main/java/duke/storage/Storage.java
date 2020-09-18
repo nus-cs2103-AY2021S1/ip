@@ -1,8 +1,10 @@
 package duke.storage;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +13,7 @@ import java.util.Scanner;
 import duke.data.task.Deadline;
 import duke.data.task.Event;
 import duke.data.task.Task;
+import duke.data.task.TaskList;
 import duke.data.task.ToDo;
 
 /**
@@ -102,21 +105,16 @@ public class Storage {
      * Formats a task and appends a given task to the end of the data file.
      * @param task The task that will be appended to the data file.
      */
-    public void save(Task task) {
-        try {
-            if (task instanceof ToDo) {
-                writeToDo(task);
-            } else if (task instanceof Event || task instanceof Deadline) {
-                writeEventOrDeadline(task);
-            }
-        } catch (IOException ioException) {
-            System.out.println("An error has occurred");
-            ioException.printStackTrace();
+    public String save(Task task) {
+        if (task instanceof ToDo) {
+            return writeToDo(task);
+        } else if (task instanceof Event || task instanceof Deadline) {
+            return writeEventOrDeadline(task);
         }
+        return "";
     }
 
-    private void writeEventOrDeadline(Task task) throws IOException {
-        FileWriter fileWriter = new FileWriter(filePath, true);
+    private String writeEventOrDeadline(Task task) {
         String[] strings = task.toString().split("\\|");
         String isDone = task.getIsDone() ? "1" : "0";
         String description = task.getDescription();
@@ -126,17 +124,31 @@ public class Storage {
         } else if (task instanceof Deadline) {
             date += ((Deadline) task).getDueDate().toString();
         }
-        fileWriter.write(strings[0] + " | " + isDone + " | " + description + "| " + date + "\n");
-        fileWriter.close();
+        return strings[0] + " | " + isDone + " | " + description + "| " + date + "\n";
     }
 
-    private void writeToDo(Task task) throws IOException {
-        FileWriter fileWriter = new FileWriter(filePath, true);
+    private String writeToDo(Task task) {
         String[] strings = task.toString().split("\\|");
         String isDone = task.getIsDone() ? "1" : "0";
         String description = task.getDescription();
-        fileWriter.write(strings[0] + " | " + isDone + " | " + description + "\n");
-        fileWriter.close();
+        return strings[0] + " | " + isDone + " | " + description + "\n";
+    }
+
+    /**
+     * Stores all tasks in data file.
+     * @param taskList List of tasks.
+     */
+    public void writeAllTasks(TaskList taskList) {
+        List<String> fileData = new ArrayList<>();
+        for (Task task : taskList.getTaskList()) {
+            String taskDetails = save(task);
+            fileData.add(taskDetails);
+        }
+        try {
+            Files.write(Path.of(filePath), fileData, StandardCharsets.UTF_8);
+        } catch (IOException ioException) {
+            System.out.println(ioException.getMessage());
+        }
     }
 
 }

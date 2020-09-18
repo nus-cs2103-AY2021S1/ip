@@ -1,4 +1,4 @@
-package commands;
+package duke.commands;
 
 public class CommandResult {
     private final String messageToUser;
@@ -7,6 +7,10 @@ public class CommandResult {
         this.messageToUser = messageToUser;
     }
 
+    /**
+     * Getter for messageToUser.
+     * @return message to be printed for the user.
+     */
     public String getMessageToUser() {
         assert !messageToUser.trim().equals("");
         return messageToUser;
