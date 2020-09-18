@@ -64,7 +64,7 @@ public class Ui {
      * @param task The task that was marked as completed.
      */
     public String printTaskUndoneMessage(Task task) {
-        return String.format(" Nice! I've marked this task as not done:%n"
+        return String.format(" Okay, I've marked this task as not done:%n"
                         + "   %s%n",
                 task);
     }
