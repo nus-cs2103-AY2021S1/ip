@@ -9,6 +9,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import duke.exception.CorruptDataException;
 import duke.exception.InvalidDoneIndicatorException;
 import duke.exception.InvalidTaskTypeException;
 import duke.task.Deadline;
@@ -88,8 +89,8 @@ public class Storage {
                 try {
                     Task t = createTaskFromFile(sc.nextLine());
                     tasks.add(t);
-                } catch (InvalidDoneIndicatorException | InvalidTaskTypeException e) {
-                    // Skip task creation
+                } catch (InvalidDoneIndicatorException | InvalidTaskTypeException | CorruptDataException e) {
+                    System.out.println("Something went wrong: " + e.getMessage());
                 }
             }
             return tasks;
@@ -105,28 +106,34 @@ public class Storage {
      * @return A Task.
      * @throws InvalidDoneIndicatorException  If isDoneString is not "0" or "1".
      * @throws InvalidTaskTypeException  If type is not 'T', 'D' or 'E'.
+     * @throws CorruptDataException  If data file contains unrecognised text.
      */
     private Task createTaskFromFile(String taskDetails) throws InvalidDoneIndicatorException,
-            InvalidTaskTypeException {
-        String[] taskStringSplit = taskDetails.split(" \\| ", 3);
-        String type = taskStringSplit[0];
-        String isDoneString = taskStringSplit[1];
-        String content = taskStringSplit[2];
-        boolean isDone = checkIfDone(isDoneString);
+            InvalidTaskTypeException, CorruptDataException {
+        try {
+            String[] taskStringSplit = taskDetails.split(" \\| ", 3);
+            String type = taskStringSplit[0];
+            String isDoneString = taskStringSplit[1];
+            String content = taskStringSplit[2];
+            boolean isDone = checkIfDone(isDoneString);
 
-        if (type.equals("T")) {
-            return new Todo(content, isDone);
-        }
-        String[] contentSplit = content.split(" \\| ", 2);
-        String description = contentSplit[0];;
-        String time = contentSplit[1];
+            if (type.equals("T")) {
+                return new Todo(content, isDone);
+            }
+            String[] contentSplit = content.split(" \\| ", 2);
+            String description = contentSplit[0];
+            ;
+            String time = contentSplit[1];
 
-        if (type.equals("D")) {
-            return new Deadline(description, isDone, time);
-        } else if (type.equals("E")) {
-            return new Event(description, isDone, time);
-        } else {
-            throw new InvalidTaskTypeException();
+            if (type.equals("D")) {
+                return new Deadline(description, isDone, time);
+            } else if (type.equals("E")) {
+                return new Event(description, isDone, time);
+            } else {
+                throw new InvalidTaskTypeException();
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new CorruptDataException();
         }
     }
 
