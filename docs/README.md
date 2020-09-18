@@ -5,7 +5,7 @@
 ## **Introduction**
 
 Welcome to Panda ChatBot <br>
-<img src="./UI.png">
+<img src="./Ui.png">
 
 ## **Overview**
 Panda chatbot is a task chatbot that allows you to
