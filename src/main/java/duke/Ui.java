@@ -3,10 +3,7 @@ package duke;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-<<<<<<< HEAD
-=======
 import duke.note.Note;
->>>>>>> 30be54f066a39e7b0c786f432174ec425f103cb5
 import duke.task.Task;
 
 /**
@@ -32,15 +29,9 @@ public class Ui {
     }
 
     /**
-<<<<<<< HEAD
-     * Returns the welcome message.
-     *
-     * @return The welcome message.
-=======
      * A string of welcome message on GUI.
      *
      * @return String representation of welcome message on GUI.
->>>>>>> 30be54f066a39e7b0c786f432174ec425f103cb5
      */
     public String showWelcomeMessage() {
         return "Hello! I'm Pat\n"
