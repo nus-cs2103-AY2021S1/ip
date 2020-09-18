@@ -1,5 +1,6 @@
 package duke;
 
+import duke.note.Note;
 import duke.task.Task;
 
 /**
@@ -8,12 +9,14 @@ import duke.task.Task;
 public class Response {
     enum Tag {
         LIST,
+        LISTNOTES,
         ADD,
         REMOVE,
         NORMAL,
         FIND
     }
 
+    private Note[] notes;
     private Task[] tasks;
     private String[] texts;
     private Tag tag;
@@ -53,6 +56,11 @@ public class Response {
         this.tasks = tasks;
         this.tag = tag;
     }
+    
+    public Response(Note[] notes, Tag tag) {
+        this.notes = notes;
+        this.tag = tag;
+    }
 
     /**
      * Gets the string representation of the response.
@@ -64,6 +72,10 @@ public class Response {
         if (this.tag == Tag.LIST) {
             for (int i = 0; i < this.tasks.length; i++) {
                 linesOfText += "     " + String.format("%d. ", i + 1) + this.tasks[i] + "\n";
+            }
+        } else if (this.tag == Tag.LISTNOTES) {
+            for (int i = 0; i < this.notes.length; i++) {
+                linesOfText += "     " + String.format("%d. ", i + 1) + this.notes[i] + "\n";
             }
         } else if (this.tag == Tag.ADD) {
             for (int i = 0; i < this.tasks.length; i++) {

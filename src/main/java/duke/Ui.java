@@ -3,6 +3,7 @@ package duke;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import duke.note.Note;
 import duke.task.Task;
 
 /**
@@ -64,6 +65,16 @@ public class Ui {
         Response msg = new Response(new Task[]{task}, Response.Tag.ADD, tasks.size());
         return msg.getResponse();
     }
+    
+    public String showAddNoteMessage(Note note, TaskList tasks) {
+        return "     "
+                + "Got it. I've added this note: \n"
+                + "       "
+                + note
+                + "\n"
+                + "     "
+                + String.format("Now you have %d notes in the list. \n", tasks.noteSize());
+    }
 
     /**
      * Returns a string of the message of deleting a task.
@@ -76,6 +87,16 @@ public class Ui {
         return msg.getResponse();
     }
 
+    public String showDeleteNoteMessage(Note note, TaskList tasks) {
+        return "     "
+                + "Got it. I've removed this note: \n"
+                + "       "
+                + note
+                + "\n"
+                + "     "
+                + String.format("Now you have %d notes in the list. \n", tasks.noteSize());
+    }
+    
     /**
      * Returns a list of the tasks.
      *
@@ -83,6 +104,11 @@ public class Ui {
      */
     public String listTasks(TaskList tasks) {
         Response list = new Response(tasks.getArray(), Response.Tag.LIST);
+        return list.getResponse();
+    }
+    
+    public String listNotes(TaskList tasks) {
+        Response list = new Response(tasks.getNotesArray(), Response.Tag.LISTNOTES);
         return list.getResponse();
     }
 
