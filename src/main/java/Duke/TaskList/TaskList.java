@@ -183,8 +183,8 @@ public class TaskList {
      */
     public static String getUG() {
         try {
-            String UG = "https://github.com/theyellowfellow/ip/blob/master/docs/README.md";
-            if (Desktop.isDesktopSupported()) {
+            String UG = "https://theyellowfellow.github.io/ip/";
+            if (System.getProperty("os.name").contains("Windows")) {
                 Desktop desktop = java.awt.Desktop.getDesktop();
                 URI userGuideSite = new URI(UG);
                 desktop.browse(userGuideSite);
