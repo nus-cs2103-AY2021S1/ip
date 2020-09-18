@@ -38,6 +38,10 @@ public abstract class Task {
         this.isDone = true;
     }
 
+    public boolean isComplete() {
+        return this.isDone;
+    }
+
     public String getDescription() {
         return this.description;
     }

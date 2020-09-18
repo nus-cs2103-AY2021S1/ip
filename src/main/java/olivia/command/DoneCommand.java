@@ -39,6 +39,9 @@ public class DoneCommand implements Command {
         } else if (index > tasks.size()) {
             return "Your task list is not that long yet!";
         }
+        if (tasks.getTask(index).isComplete()) {
+            return "That task has already been completed!";
+        }
         tasks.completeTask(index);
         storage.save(tasks);
         return ui.showDone(tasks.getTask(index));
