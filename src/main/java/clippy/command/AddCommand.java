@@ -8,7 +8,7 @@ public abstract class AddCommand extends Command {
 
     /**
      * Base constructor for a command object that adds tasks.
-     * @param taskDescription literal description of the task
+     * @param taskDescription Literal description of the task
      */
     protected AddCommand(String taskDescription) {
         this.taskDescription = taskDescription;

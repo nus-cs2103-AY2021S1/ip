@@ -10,28 +10,30 @@ import clippy.ui.Ui;
 import java.time.format.DateTimeParseException;
 
 /**
- * Represents command that adds deadline-typed tasks.
+ * Represents a command that adds a deadline task.
  */
 public class AddDeadlineCommand extends AddCommand {
-    protected String by;
+    private String by;
 
     /**
-     * Constructs command object that adds deadline-typed tasks
-     * @param taskDescription literal description of the task
-     * @param by date in YYYY-MM-DD format as a String
+     * Constructs a command object that adds a deadline task.
+     * @param taskDescription Literal description of the deadline task
+     * @param by Date in YYYY-MM-DD format as a String
      */
-
     public AddDeadlineCommand(String taskDescription, String by) {
         super(taskDescription);
         this.by = by;
     }
 
     /**
+     * Returns resulting message to be displayed by GUI after adding a deadline task.
      * Executes the command.
-     * @param tasks TaskList instance used by Clippy in this session
-     * @param ui Ui instance used by Clippy in this session
-     * @param storage Storage instance used by Clippy in this session
-     * @throws DateTimeParseException
+     * 
+     * @param tasks TaskList object used in the current Clippy session.
+     * @param ui Ui object used in the current Clippy session.
+     * @param storage Storage object used in the current Clippy session.
+     * @return Resulting message to be displayed by GUI after adding a deadline task.
+     * @throws InvalidDateFormatException If command has date in a format that is not YYYY-MM-DD.
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws 
