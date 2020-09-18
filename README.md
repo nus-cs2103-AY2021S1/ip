@@ -22,6 +22,7 @@ Below are instructions on how to use _KING BOB_.
   
 ### `todo` - Add a new Todo task
 This command adds a new Todo task to the user's list of tasks.
+Duplicate tasks will not be added to the list. 
 
 Format: 
 `todo TODO_DESCRIPTION`
@@ -32,12 +33,21 @@ Example of command:
 Expected result:
 ```
 Banana! Banana has been added to your list!
-      [T][✘] read book
-   Now you have 1 banana(s) in your list! Nom nom..
+     [T][✘] read book
+Now you have 1 banana(s) in your list! Nom nom..
+```
+
+Example of command:
+- `todo read book` 
+
+Expected result:
+```
+Banana! There is a duplicate in the list!
 ```
 
 ### `event` - Add a new Event task
 This command adds a new Event task to the user's list of tasks.
+Duplicate tasks will not be added to the list. 
 
 Format: 
 `event EVENT_DESCRIPTION /at EVENT_DATE`
@@ -48,13 +58,21 @@ Example of command:
 Expected result:
 ```
 Banana! Banana has been added to your list!
-      [E][✘] graduation night (at: Feb 19 2020)
-   Now you have 2 banana(s) in your list! Nom nom..
+     [E][✘] graduation night (at: Feb 19 2020)
+Now you have 2 banana(s) in your list! Nom nom..
+```
+
+Example of command:
+- `event graduation night /at 2020-02-19`
+
+Expected result:
+```
+Banana! There is a duplicate in the list!
 ```
 
 ### `deadline` - Add a new Deadline task
 This command adds a new Deadline task to the user's list of tasks.
-
+Duplicate tasks will not be added to the list. 
 
 Format:
 `deadline PROJECT_DESCRIPTION /by DEADLINE_DATE`
@@ -65,8 +83,16 @@ Example of command:
 Expected result:
 ```
 Banana! Banana has been added to your list!
-      [D][✘] project (by: Sep 30 2020)
-   Now you have 3 banana(s) in your list! Nom nom..
+     [D][✘] project (by: Sep 30 2020)
+Now you have 3 banana(s) in your list! Nom nom..
+```
+
+Example of command:
+- `deadline project /by 2020-09-30`
+
+Expected result:
+```
+Banana! There is a duplicate in the list!
 ```
 
 ### `list` - Display list of tasks 
@@ -78,6 +104,7 @@ Format:
 Expected result:
 ```
 Banana! So many tasks?
+
 1. [T][✘] read book
 2. [E][✘] graduation night (at: Feb 19 2020)
 3. [D][✘] project (by: Sep 30 2020)
@@ -95,7 +122,7 @@ Example of command:
 Expected result:
 ```
 Banana! I’ve marked this task as done:
-      [T][✓] read book
+     [T][✓] read book
 ```
 
 ### `delete` - Delete a task 
@@ -110,8 +137,8 @@ Example of command:
 Expected result:
 ```
 Banana! banana has been eaten. Burp!
-      [T][✓] read book
-   Now you have 2 banana(s) in your list! Nom nom..
+     [T][✓] read book
+Now you have 2 banana(s) in your list! Nom nom..
 ```
 
 ### `date` - Find a task by its date
@@ -126,7 +153,7 @@ Example of command:
 Expected result: 
 ```
 Banana! Here are your bananas..
-[D][✘] project (by: Sep 30 2020)
+     [D][✘] project (by: Sep 30 2020)
 ```
 
 ### `find` - Find a task by its keyword
@@ -141,7 +168,7 @@ Example of command:
 Expected result: 
 ```
 Banana! Here are your bananas..
-[D][✘] project (by: Sep 30 2020)
+     [D][✘] project (by: Sep 30 2020)
 ```
 
 Example of command: 
@@ -150,7 +177,7 @@ Example of command:
 Expected result: 
 ```
 Banana! Here are your bananas..
-[E][✘] graduation night (at: Feb 19 2020)
+     [E][✘] graduation night (at: Feb 19 2020)
 ```
 
 ### `bye` - Exits application

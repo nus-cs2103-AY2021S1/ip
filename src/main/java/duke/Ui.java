@@ -25,7 +25,7 @@ public class Ui {
      */
     public void setShowListMessage(List<Task> tasks) {
         resetMessage();
-        responseMessage.append("Banana! So many tasks?\n");
+        responseMessage.append("Banana! So many tasks?\n\n");
         Task task;
         for (int i = 0; i < tasks.size(); i++) {
             task = tasks.get(i);
@@ -49,8 +49,8 @@ public class Ui {
     public void setAddedMessage(Task task, int tasksNumber) {
         resetMessage();
         responseMessage.append("Banana! Banana has been added to your list!\n"
-                + "      " + task.toString() + "\n"
-                + "   Now you have " + tasksNumber + " banana(s) in your list! Nom nom..");
+                + "     " + task.toString() + "\n"
+                + "Now you have " + tasksNumber + " banana(s) in your list! Nom nom..");
     }
 
     /**
@@ -69,8 +69,8 @@ public class Ui {
     public void setDeletedMessage(Task task, int tasksNumber) {
         resetMessage();
         responseMessage.append("Banana! Banana has been eaten. Burp!\n"
-                + "      " + task.toString() + "\n"
-                + "   Now you have " + (tasksNumber - 1) + " banana(s) in your list! Nom nom..");
+                + "     " + task.toString() + "\n"
+                + "Now you have " + (tasksNumber - 1) + " banana(s) in your list! Nom nom..");
     }
 
     /**
@@ -80,7 +80,7 @@ public class Ui {
     public void setDoneMessage(Task task) {
         resetMessage();
         responseMessage.append("Banana! I've marked this task as done:\n"
-                + "      " + task.toString());
+                + "     " + task.toString());
     }
 
     /**
@@ -101,7 +101,7 @@ public class Ui {
         responseMessage.append("Banana! Here are your bananas..\n");
         for (Task t : tasks) {
             if (t.getDate().equals(date)) {
-                responseMessage.append(t.toString() + "\n");
+                responseMessage.append("     " + t.toString() + "\n");
             }
         }
     }
@@ -116,7 +116,7 @@ public class Ui {
         responseMessage.append("Banana! Here are your bananas..\n");
         for (Task t : tasks) {
             if (t.toString().contains(keyword)) {
-                responseMessage.append(t.toString() + "\n");
+                responseMessage.append("     " + t.toString() + "\n");
             }
         }
     }

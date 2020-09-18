@@ -46,14 +46,14 @@ public class Storage {
             directory.mkdir();
             try {
                 dataFile.createNewFile();
-                return null;
+                return tasks;
             } catch (IOException e) {
                 throw new DukeException("File cannot be created");
             }
         } else if (!fileExists) {
             try {
                 dataFile.createNewFile();
-                return null;
+                return tasks;
             } catch (IOException e) {
                 throw new DukeException("File cannot be created");
             }
