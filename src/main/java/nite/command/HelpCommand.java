@@ -28,8 +28,8 @@ public class HelpCommand extends Command {
         String commandsList =
                 "  These are the Nite commands!!\n"
                 + "  add a task\n    todo <description>\n"
-                + "    deadline <description> /by <YYYY-MM-DD HH:mm>\n"
-                + "    event <description> /at <YYYY-MM-DD HH:mm> to <YYYY-MM-DD HH:mm>\n"
+                + "    deadline <description> /by <YYYY-MM-DD HHmm>\n"
+                + "    event <description> /at <YYYY-MM-DD HHmm> to <YYYY-MM-DD HHmm>\n"
                 + "  delete a task\n    delete <task number>\n"
                 + "  mark task as done\n    done <task number>\n"
                 + "  list all tasks\n    list\n"

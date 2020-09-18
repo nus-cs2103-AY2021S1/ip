@@ -12,7 +12,7 @@ public abstract class Task {
     protected final DateTimeFormatter inputDateTimePattern =
             DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
     protected final DateTimeFormatter displayDateTimePattern =
-            DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+            DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm");
 
     /**
      * Default constructor for a Task.
