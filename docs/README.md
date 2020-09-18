@@ -4,7 +4,7 @@ Duke Tracker is a **desktop app for managing tasks, optimized for use via a Comm
 
 * [Features](#features)
     * [Listing all tasks : **`list`**](#listing-all-tasks--list)
-    * [Adding a task : **`todo`**](#adding-a-basic-task--todo)
+    * [Adding a task : **`todo`**](#adding-a-task--todo)
     * [Adding a task (with a deadline) : **`deadline`**](#adding-a-task-with-a-deadline--deadline)
     * [Adding a task (with a specified date) : **`event`**](#adding-a-task-with-a-specified-date--event)
     * [Deleting a task : **`delete`**](#deleting-a-task--delete) 
@@ -58,7 +58,7 @@ Examples:
 - `delete 3` Deletes task at index 3
 - `delete 6` Deletes task at index 6
 
-### Marking a task as done: **`done`**
+### Marking a task as done : **`done`**
 Marks a task at the specific index from the task list as finished/done.  
 Format: `done <TASK_INDEX>`
 - \<TASK_INDEX> is the index that appears on the left of a task when the task list is shown.  
