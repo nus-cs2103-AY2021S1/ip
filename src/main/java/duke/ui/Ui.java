@@ -1,5 +1,6 @@
 package duke.ui;
 
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 import duke.tasks.Task;
@@ -44,7 +45,16 @@ public class Ui {
      * @param task The task specified to be done
      */
     public void showDone(Task task) {
-        System.out.println("You have finished " + task + "!\nMove on to the next one:");
+        System.out.println("You have finished " + task.getDescription() + "!\nMove on to the next one:");
+    }
+
+    /**
+     * Shows the snooze interface with the specified task.
+     *
+     * @param task The task specified to be snoozed
+     */
+    public void showSnooze(Task task) {
+        System.out.println(task.getDescription() + " is snoozed to new date: " + task.getDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
     }
 
     /**
@@ -62,7 +72,7 @@ public class Ui {
      * @param task The task specified to delete.
      */
     public void showDelete(Task task) {
-        System.out.println(task + " deleted. \nCheck out other tasks:");
+        System.out.println(task.getDescription() + " deleted. \nCheck out other tasks:");
     }
 
     /**

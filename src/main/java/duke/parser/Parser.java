@@ -2,14 +2,7 @@ package duke.parser;
 
 import java.time.LocalDate;
 
-import duke.commands.Command;
-import duke.commands.CreateTaskCommand;
-import duke.commands.DateFilterCommand;
-import duke.commands.DeleteCommand;
-import duke.commands.DoCommand;
-import duke.commands.ExitCommand;
-import duke.commands.FindCommand;
-import duke.commands.ListCommand;
+import duke.commands.*;
 import duke.exceptions.DukeException;
 import duke.tasks.TaskType;
 
@@ -43,6 +36,9 @@ public class Parser {
             break;
         case "done":
             command = createDoCommand(commandParaPair);
+            break;
+        case "snooze":
+            command = createSnoozeCommand(commandParaPair);
             break;
         case "delete":
             command = createDeleteCommand(commandParaPair);
@@ -84,6 +80,17 @@ public class Parser {
             throw new DukeException("\tCannot recognise task number.");
         } else {
             return new DoCommand(Integer.parseInt(commandParaPair[1]));
+        }
+    }
+
+    private static Command createSnoozeCommand(String[] commandParaPair) throws DukeException {
+        if (commandParaPair.length < 2) {
+            throw new DukeException("\tCannot recognise task number.");
+        } else {
+            String[] indexDatePair = commandParaPair[1].split(" ");
+            int taskIndex = Integer.parseInt(indexDatePair[0]);
+            LocalDate newDate = LocalDate.parse(indexDatePair[1]);
+            return new SnoozeCommand(taskIndex, newDate);
         }
     }
 
