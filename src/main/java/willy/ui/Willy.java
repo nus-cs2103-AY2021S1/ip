@@ -147,11 +147,8 @@ public class Willy extends Application {
         willy.setAlignment(Pos.CENTER);
 
         // Putting together Intro Components of the Bot which consist of the profile of the bot and it's greetings
-        // Creating of profile picture code is adapted from https://stackoverflow.com/questions/22848829/how-do-i-add-an-image-inside-a-rectangle-or-a-circle-in-javafx
             // Responsible for Willy image
-            FileInputStream inputStream = new FileInputStream("D:\\NUS\\Y2Sem1\\CS2103T\\Indiv_Proj\\ip\\asset\\willy" +
-                    ".png");
-            Image image = new Image(inputStream);
+            Image image = new Image("images/willy.png");
             ImageView imageView = new ImageView(image);
             imageView.setFitHeight(70);
             imageView.setFitWidth(60);
