@@ -48,6 +48,12 @@ class LogicControllerTest {
     }
 
     @Test
+    void testRunEvent4() {
+        String response = logicController.run("event Roland Garros /between 09/06/2019 and 09/08/2019");
+        System.out.println(response);
+    }
+
+    @Test
     void testRunTodo1() {
         String response = logicController.run("todo return book");
         Assertions.assertTrue(response.contains("[T][✗] return book"));
@@ -82,6 +88,19 @@ class LogicControllerTest {
         ClassLoader classLoader = getClass().getClassLoader();
         String input = Files.readString(Path.of(classLoader.getResource("file/" + "input2.txt").getFile()));
         String expectedOutput = Files.readString(Path.of(classLoader.getResource("file/" + "output2.txt").getFile()));
+        String[] lineInput = input.split("\n");
+        StringBuilder output = new StringBuilder();
+        for (String s : lineInput) {
+            output.append(logicController.run(s));
+        }
+        Assertions.assertEquals(expectedOutput, output.toString());
+    }
+
+    @Test
+    public void testRunAll3() throws IOException {
+        ClassLoader classLoader = getClass().getClassLoader();
+        String input = Files.readString(Path.of(classLoader.getResource("file/" + "input3.txt").getFile()));
+        String expectedOutput = Files.readString(Path.of(classLoader.getResource("file/" + "output3.txt").getFile()));
         String[] lineInput = input.split("\n");
         StringBuilder output = new StringBuilder();
         for (String s : lineInput) {

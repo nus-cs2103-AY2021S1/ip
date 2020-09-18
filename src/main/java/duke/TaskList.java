@@ -55,7 +55,11 @@ public class TaskList {
     public void markDone(String command) {
         command = command.trim();
         int num = Integer.parseInt(command) - 1;
-        tasks.get(num).setDone();
+        try {
+            tasks.get(num).setDone();
+        } catch (IndexOutOfBoundsException e) {
+            throw new IllegalArgumentException();
+        }
         Ui.markDone(tasks.get(num));
         saveToDisk();
     }
@@ -72,7 +76,7 @@ public class TaskList {
             Task cur = tasks.remove(num);
             Ui.delete(cur, tasks);
             saveToDisk();
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
             throw new IllegalArgumentException();
         }
     }

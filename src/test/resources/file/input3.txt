@@ -1,0 +1,16 @@
+list
+deadline sample /by 2019-10-100
+done 1
+delete 1
+deadline sample /by 2019-10-15
+done 1
+event sample /between 2019-10-15 and 2019-10-16
+done 2
+deadline sample /by 15/10/2019
+deadline sample /by Oct 19 2020
+deadline sample /by 2019-20-20
+todo sample
+list
+delete 3
+done 3
+list
