@@ -21,11 +21,11 @@ public class TaskList {
         if (duplicateTaskNum == -1) {
             taskList.add(task);
             return ("Got it. I've added this task:\n  " +
-                    task.toString() + "\n" +
+                    taskList.size() + task.toString() + "\n" +
                     "Now you have " + size() + " tasks in the list.");
         } else {
-            return ("Task already exists:\n" +
-                    taskList.get(duplicateTaskNum).toString() + "\n" +
+            return ("Task already exists:\n  " +
+                    (duplicateTaskNum + 1) + taskList.get(duplicateTaskNum).toString() + "\n" +
                     "No new task is added");
         }
     }
