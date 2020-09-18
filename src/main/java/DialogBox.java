@@ -47,7 +47,8 @@ public class DialogBox extends HBox {
             dialog.setBackground(new Background(new BackgroundFill(Color.LIGHTSKYBLUE, new CornerRadii(20.0),
                     new Insets(0))));
         } else if (role.equals("Sparrow")) {
-            dialog.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, new CornerRadii(20.0), new Insets(0))));
+            dialog.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, new CornerRadii(20.0),
+                    new Insets(0))));
         }
         //@@author
     }
