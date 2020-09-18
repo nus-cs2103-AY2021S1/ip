@@ -1,6 +1,6 @@
 # User Guide
 Duke is a desktop dog to help you manage tasks in the form of todos, deadlines and events. It is optimised for use via Command Line Interface (CLI). If you can type fast, Duke can help you record your tasks faster than with a traditional GUI.
-![Image of Duke](UI.png)
+![Image of Duke](Ui.png)
 ## Features
 1. [Accessing the User Guide from the App](#opening-the-user-guide-ug)
 2. [Viewing help](#viewing-help-help)
