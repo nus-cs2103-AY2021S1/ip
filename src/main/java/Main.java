@@ -20,6 +20,21 @@ public class Main extends Application {
     private Scene scene;
     private Image user = new Image(this.getClass().getResourceAsStream("images/DaUser.jpg"));
     private Image duke = new Image(this.getClass().getResourceAsStream("images/DaDuke.jpg"));
+    /*
+    private Ui ui = new Ui();
+    private Storage storage = new Storage("C:\\Users\\e0316059\\Desktop\\Duke\\src\\main\\java\\data\\Duke.txt");
+    private TaskList tasks = new TaskList();
+    private Parser parser;
+
+    public static void main(String[] args) {
+        try {
+            this.tasks = new TaskList(this.storage.load());
+        } catch (FileNotFoundException e) {
+            //ui.showLoadingError();
+        }
+        this.parser = new Parser(this.ui, this.tasks, this.storage);
+    }
+    */
 
     @Override
     public void start(Stage stage) {
@@ -139,7 +154,7 @@ public class Main extends Application {
      */
 
     private String getResponse(String input) {
-        return "Duke heard: " + input;
+        return "ok";
     }
 
 }

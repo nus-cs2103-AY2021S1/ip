@@ -41,41 +41,43 @@ public class TaskList {
      * Adds a <code>task</code> to this <code>TaskList</code>.
      * @param task The task to be added.
      */
-    public static void add(Task task) {
+    public static String add(Task task) {
         tasks.add(task);
-        ui.add(task, tasks);
+        return ui.add(task, tasks);
     }
 
     /**
      * Marks a task in this list as done.
      * @param n Index of the task that is done.
      */
-    public static void done(int n) {
+    public static String done(int n) {
         tasks.get(n-1).setDone();
-        ui.done(n, tasks);
+        return ui.done(n, tasks);
     }
 
     /**
      * Deletes a task in this list.
      * @param n Index of the task to be deleted.
      */
-    public static void delete(int n) {
-        ui.delete(n, tasks);
+    public static String delete(int n) {
+        String result;
+        result = ui.delete(n, tasks);
         tasks.remove(n-1);
-        ui.count(tasks);
+        result += ui.count(tasks);
+        return result;
     }
 
     /**
      * Finds tasks that matches the given keyword.
      * @param keyword The given keyword.
      */
-    public void find(String keyword) {
+    public String find(String keyword) {
         ArrayList<Task> results = new ArrayList<Task>();
         for (Task task: tasks) {
             if (task.getCommand().contains(keyword)) {
                 results.add(task);
             }
         }
-        ui.findKeyword(results);
+        return ui.findKeyword(results);
     }
 }
