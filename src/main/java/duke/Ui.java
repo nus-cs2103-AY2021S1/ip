@@ -1,9 +1,10 @@
 package duke;
 
-import duke.command.*;
-import duke.task.Task;
-
 import java.util.Scanner;
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.task.Task;
 
 /**
  * Represents the user interface that deals with interactions with the user.
