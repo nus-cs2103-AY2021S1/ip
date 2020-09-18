@@ -9,6 +9,12 @@
    
    3.2. [Adding a task](#32-adding-a-task)
    
+      3.2.1. [Todo task](#321-todo-task)
+        
+      3.2.2. [Event task](#322-event-task)  
+        
+      3.2.3. [Deadline task](#323-deadline-task)
+   
    3.3. [Marking a task as completed: `done`](#33-marking-a-task-as-completed-done)
    
    3.4. [Deleting a task: `delete`](#34-deleting-a-task-delete)
@@ -33,41 +39,44 @@
 
 ### 3.1 Listing of tasks `list`
 
-#### Description
+##### Description
 
 List all of your tasks that has been saved.
 
-#### Usage
+##### Usage
 
 `list`
 
-#### Example of usage
+##### Example of usage
 * `list`
 
 ![Image of list feature](./UiList.png)
 
 ### 3.2 Adding a task
 
-#### Description
+##### Description
 
-Add a new task to your existing list of task. A new task is marked as incomplete (&#2718;) upon creation
+Add a new task to your existing list of task. A new task is marked as incomplete (&#x2718;) upon creation.
 
-#### Usage
+There are 3 kinds of tasks:
 
-`list`
+1. **Todo task**
 
-#### Example of usage
-* `list`
+2. **Event task**
+
+3. **Deadline task**
+
+#### 3.2.1 Todo task
 
 ![Image of list feature](./UiList.png)
 
 ### 3.3 Marking a task as completed: `done`
 
-#### Usage
+##### Usage
 
 `list`
 
-#### Description
+##### Description
 List all of your tasks that has been saved.
 
 #### Example of usage
