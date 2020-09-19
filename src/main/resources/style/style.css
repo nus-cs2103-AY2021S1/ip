@@ -1,8 +1,13 @@
 
 
-#dialogContainer {
+#scrollPane {
     -fx-background-image: url("../images/wallpaper.jpg");
-    -fx-background-size: cover;
+    -fx-background-size: 75%, 75%;
+    -fx-background-position: bottom center;
+    -fx-background: transparent;
+}
+
+#dialogContainer {
     -fx-padding: 5;
 }
 
@@ -12,6 +17,7 @@
     -fx-border-radius: 5;
     -fx-background-radius: 5;
     -fx-effect: dropshadow(gaussian, grey, 5,0,0,1);
+    -fx-text-fill: black
 }
 
 .persistent-prompt:focused {

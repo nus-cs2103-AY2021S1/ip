@@ -79,6 +79,7 @@ public class MainWindow extends AnchorPane {
             CommandResult result = duke.getResult(input);
             if (result.isExit()) {
                 Platform.exit();
+                System.exit(0);
                 return;
             }
             response = result.getFeedbackToUser();
