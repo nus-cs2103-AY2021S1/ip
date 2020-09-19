@@ -37,7 +37,7 @@ public class DukeExceptionHandler {
         boolean CONTAINS_DEADLINE = input.contains("deadline");
         boolean CONTAINS_EVENT = input.contains("event");
         boolean CONTAINS_DONE = input.contains("done");
-        boolean CONTAINS_LIST = input.equals("list");
+        boolean CONTAINS_LIST = input.contains("list");
         boolean CONTAINS_FIND = input.contains("find");
         boolean CONTAINS_BYE = input.contains("bye");
         boolean CONTAINS_DELETE = input.contains("delete");

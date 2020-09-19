@@ -15,6 +15,11 @@ public class Ui {
         return start;
     }
 
+    /**
+     * Static method to print a string
+     * @param string
+     * @return String
+     */
     public static String print(String string) {
         return string;
     }
@@ -45,7 +50,4 @@ public class Ui {
     public static String exit() {
         return "Goodbye! Hope to see you soon!";
     }
-
-
-
 }

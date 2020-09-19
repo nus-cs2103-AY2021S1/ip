@@ -12,8 +12,13 @@ import java.io.FileOutputStream;
  * Utility class to help write to and modify .txt files
  */
 public class Storage {
-    String filePath;
+    private String filePath;
 
+    /**
+     * Constructor for storage class with details of directory
+     * to store the .txt files
+     * @param filePath
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
@@ -37,6 +42,11 @@ public class Storage {
         fw.close();
     }
 
+    /**
+     * Static method to format task to be stored in the txt file.
+     * @param task
+     * @return String of task formatted
+     */
     public static String describeTask(Task task) {
         return " | " + (task.getIsDone() ? 1 : 0) + " | " + task.getDescription();
     }
@@ -70,5 +80,9 @@ public class Storage {
         } catch (Exception e) {
             System.out.println("Problem reading file.");
         }
+    }
+
+    public String getFilePath() {
+        return filePath;
     }
 }
