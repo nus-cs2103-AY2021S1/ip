@@ -17,7 +17,6 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.command.Command;
 import duke.task.ToDo;
-//import duke.util.Helper;
 
 public class Parser {
     public Parser() {
@@ -86,57 +85,6 @@ public class Parser {
         String eventDate = formatDate(split[1]);
         return new Deadline(split[0], eventDate);
     }
-
-//        switch (operation) {
-//        case "bye":
-//            return new ByeCommand();
-//        case "list":
-//            return new ListCommand();
-//        case "done":
-//            int index = parseTaskNumber(line[1], "done 1") - 1;
-//            return new DoneCommand(index);
-//        case "todo":
-//        case "deadline":
-//        case "event":
-//
-//            return new AddCommand(index, line[1]);
-////            if (line.length == 1) {
-////                System.out.println("☹ OOPS! Description for command '"
-////                        + operation + "' not found, try again!");
-////                break;
-////            } else if (operation.equals("todo")) {
-////                try {
-////                    Helper.addToDo(line, taskList);
-////                } catch (DukeException e) {
-////                    System.out.println(e.getMessage());
-////                }
-////            } else if (operation.equals("deadline")) {
-////                try {
-////                    Helper.addDeadline(line, taskList);
-////                } catch (DukeException e) {
-////                    System.out.println(e.getMessage());
-////                }
-////            } else {
-////                try {
-////                    Helper.addEvent(line, taskList);
-////                } catch (DukeException e) {
-////                    System.out.println(e.getMessage());
-////                }
-////            }
-//            break;
-//        case "delete":
-//            return new DeleteCommand();
-////            try {
-////                Helper.deleteTask(line, taskList);
-////            } catch (DukeException e) {
-////                System.out.println(e.getMessage());
-////            }
-//            break;
-//        default:
-//            return new InvalidCommand();
-//            // Handles all other inputs
-//            System.out.println("☹ Sorry, I don't recognise that command! "
-//                    + "Try one of the following instead: todo, event, deadline, done or delete");
 
     private static int parseTaskIndex(String args, String example)
             throws DukeException {
