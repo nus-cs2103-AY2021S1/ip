@@ -1,7 +1,7 @@
 # User Guide
 #CS2103
 
-![](User%20Guide/UI.png)
+![](Ui.png)
 
 ## Features 
 The DukeBot can help you manage your tasks conveniently. There are 3 tasks for you to choose from:
