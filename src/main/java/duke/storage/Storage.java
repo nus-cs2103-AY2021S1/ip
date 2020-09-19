@@ -17,11 +17,20 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 
+/**
+ * Class to load existing TaskList from existing file, creates a new TaskList if file is not found.
+ * Creates TaskLists to be saved to the file.
+ */
 public class Storage {
     private final File dataDirectory;
     private final File dataFile;
     private final String dataFilePath;
 
+    /**
+     * Creates a new Storage for reading and writing in a file.
+     *
+     * @param fileName The path to the file where the TaskList should be loaded from and saved to.
+     */
     public Storage(String fileName) {
         String dataDirectoryPath = Paths.get("data").toString();
         dataDirectory = new File(dataDirectoryPath);
@@ -29,6 +38,13 @@ public class Storage {
         dataFile = new File(dataFilePath);
     }
 
+    /**
+     * Try to load existing TaskList from a specified file.
+     * A new TaskList is created if no existing file is found.
+     * The TaskList returned will attempt to save to the file every time it gets modified.
+     *
+     * @param taskList New TaskList
+     */
     public void loadData(TaskList taskList) throws DukeException {
         this.checkDataDirectoryExist();
         boolean toLoadDataFile = this.checkDataFileExist();
