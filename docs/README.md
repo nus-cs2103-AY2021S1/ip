@@ -1,5 +1,6 @@
 # User Guide
 Pingu helper is a desktop app for managing tasks in a todo list format, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).
+![Ui](https://user-images.githubusercontent.com/65865022/93659977-18abf500-fa7d-11ea-99e4-56b231b8e5ad.png)
 
 ## Usage
  
