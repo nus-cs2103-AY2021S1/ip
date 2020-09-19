@@ -5,7 +5,7 @@ tasks (bananas)!
  
 ![Image of KING BOB](https://raw.githubusercontent.com/kkangs0226/ip/master/docs/Ui.png)
  
-Below are instructions on how to use _KING BOB_.
+##### Below are instructions on how to use _KING BOB_.
 
 - Features
   - todo 
