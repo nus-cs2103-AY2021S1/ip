@@ -1,7 +1,7 @@
 # User Guide
 
 ## Introduction
-Duke is a Task Manager application which helps you to organize and set up your to-do tasks, events and deadlines.
+Duke is a **Command Line Interface (CLI) optimized** Task Manager application which helps you to organize and set up your to-do tasks, events and deadlines.
 
 ## Quick Start  
   1. Ensure you have Java `11` or above installed in your Computer.
@@ -47,7 +47,7 @@ Remarks:
   * `[description]` can have spaces.  
   * `[description]` is case-sensitive.  
   * `[priority]` can take one of `high`, `medium` or `low`.  
-  * `[priority]` is optional. If it is not indicated, priority is set to `low`.  
+  * `[priority]` field is optional. If it is not indicated, priority is set to `low`.  
 
 Example: `todo do CS2103T iP increment`  
 
@@ -69,7 +69,7 @@ Remarks:
   * `[time]` field is optional.  
   * `[date]` `[time]` must follow this format YYYY-MM-DD HH:mm.  
   * `[priority]` can take one of `high`, `medium` or `low`.  
-  * `[priority]` is optional. If it is not indicated, priority is set to `low`.  
+  * `[priority]` field is optional. If it is not indicated, priority is set to `low`.  
 
 Example: `deadline CS2100 assignment /by 2020-09-18 23:59`  
 
@@ -91,7 +91,7 @@ Remarks:
   * `[time]` field is optional.  
   * `[date]` `[time]` must follow this format YYYY-MM-DD HH:mm.  
   * `[priority]` can take one of `high`, `medium` or `low`.  
-  * `[priority]` is optional. If it is not indicated, priority is set to `low`.  
+  * `[priority]` field is optional. If it is not indicated, priority is set to `low`.  
 
 Example: `event The International 10 /at 2021-08-15 /priority medium`  
 
