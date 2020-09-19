@@ -3,7 +3,7 @@ deadline return book /by 2019/12/12 1800
 list
 done 2
 list
-event project meeting /at Mon 2-4pm
+event project meeting /at 2019/07/02 2200
 list
 todo
 deadline buy snacks

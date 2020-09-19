@@ -1,6 +1,10 @@
+package duke.ui;
+
 import java.util.Scanner;
 
-import duke.tasks.Task;
+import duke.exception.DukeException;
+import duke.task.TaskList;
+import duke.task.Task;
 
 public class Ui {
     Scanner sc;
@@ -18,12 +22,15 @@ public class Ui {
     }
 
     public String getNextCommand() {
-        String nextCommand = sc.nextLine();
-        return nextCommand;
+        return sc.nextLine();
     }
 
     public void showErrorMsg(DukeException e) {
         System.out.println(e.getMessage());
+    }
+
+    public void showErrorMsg(String errMessage) {
+        System.out.println(errMessage);
     }
 
     public void fileLoaded() {

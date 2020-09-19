@@ -3,3 +3,4 @@ D | 1 | return book | 2020-06-06
 E | 1 | project meeting Aug | 2019-12-12 1800
 T | 0 | join sports club
 T | 1 | borrow book
+T | 0 | sads

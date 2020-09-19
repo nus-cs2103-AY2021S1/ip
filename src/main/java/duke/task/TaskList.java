@@ -1,6 +1,8 @@
+package duke.task;
+
 import java.util.ArrayList;
 
-import duke.tasks.Task;
+import duke.task.Task;
 
 public class TaskList {
     private ArrayList<Task> taskList;
@@ -25,9 +27,10 @@ public class TaskList {
     }
 
     public void list() {
-        for(int i = 0; i < this.taskList.size(); i++) {
-            String currentLine = "      "+ (i + 1) + ". " + this.taskList.get(i);
-            System.out.println(currentLine);
+        int counter = 1;
+        for (Task item : taskList) {
+            System.out.println(counter + ". " + item);
+            counter++;
         }
     }
 

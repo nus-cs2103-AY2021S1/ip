@@ -1,3 +1,5 @@
+package duke.storage;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -7,10 +9,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.nio.file.Paths;
 
-import duke.tasks.Deadline;
-import duke.tasks.Event;
-import duke.tasks.Task;
-import duke.tasks.ToDo;
+import duke.exception.DukeException;
+import duke.task.TaskList;
+import duke.ui.Ui;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
 
 public class Storage {
     private final File dataDirectory;
@@ -86,11 +91,11 @@ public class Storage {
         return toLoadDataFile;
     }
 
-    public static void saveData(ArrayList<Task> taskList) {
-        java.nio.file.Path path = java.nio.file.Paths.get("data").resolve("duke.txt");
+    public void saveData(ArrayList<Task> taskList) {
+        String dataFilePath = Paths.get("data", "duke.txt").toString();
         try {
             StringBuilder content = new StringBuilder();
-            FileWriter fw = new FileWriter(path.toString());
+            FileWriter fw = new FileWriter(dataFilePath);
             for (Task task : taskList) {
                 if (task instanceof ToDo) {
                     String taskDetails = ((ToDo) task).saveToDo();
@@ -109,4 +114,27 @@ public class Storage {
             e.printStackTrace();
         }
     }
+
+    public void addTask(Task newTask) {
+        String dataFilePath = Paths.get("data", "duke.txt").toString();
+        try {
+            StringBuilder content = new StringBuilder();
+            FileWriter fw = new FileWriter(this.dataFilePath, true);
+            if (newTask instanceof ToDo) {
+                String taskDetails = ((ToDo) newTask).saveToDo();
+                content.append(taskDetails).append("\n");
+            } else if (newTask instanceof Deadline) {
+                String taskDetails = ((Deadline) newTask).saveDeadline();
+                content.append(taskDetails).append("\n");
+            } else if (newTask instanceof Event){
+                String taskDetails = ((Event) newTask).saveEvent();
+                content.append(taskDetails).append("\n");
+            }
+            fw.write(content.toString());
+            fw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
