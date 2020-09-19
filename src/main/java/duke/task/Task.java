@@ -1,9 +1,17 @@
 package duke.task;
 
+/**
+ * Wrapper Class to handle logic for all other Command types.
+ */
 public class Task {
     protected String description;
     protected boolean isDone;
 
+    /**
+     * Creates a new Task object.
+     *
+     * @param description Description of the Task.
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;

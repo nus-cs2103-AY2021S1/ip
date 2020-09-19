@@ -98,13 +98,13 @@ public class Storage {
             FileWriter fw = new FileWriter(dataFilePath);
             for (Task task : taskList) {
                 if (task instanceof ToDo) {
-                    String taskDetails = ((ToDo) task).saveToDo();
+                    String taskDetails = ((ToDo) task).formatToDo();
                     content.append(taskDetails).append("\n");
                 } else if (task instanceof Deadline) {
-                    String taskDetails = ((Deadline) task).saveDeadline();
+                    String taskDetails = ((Deadline) task).formatDeadline();
                     content.append(taskDetails).append("\n");
                 } else if (task instanceof Event){
-                    String taskDetails = ((Event) task).saveEvent();
+                    String taskDetails = ((Event) task).formatEvent();
                     content.append(taskDetails).append("\n");
                 }
             }
@@ -121,13 +121,13 @@ public class Storage {
             StringBuilder content = new StringBuilder();
             FileWriter fw = new FileWriter(this.dataFilePath, true);
             if (newTask instanceof ToDo) {
-                String taskDetails = ((ToDo) newTask).saveToDo();
+                String taskDetails = ((ToDo) newTask).formatToDo();
                 content.append(taskDetails).append("\n");
             } else if (newTask instanceof Deadline) {
-                String taskDetails = ((Deadline) newTask).saveDeadline();
+                String taskDetails = ((Deadline) newTask).formatDeadline();
                 content.append(taskDetails).append("\n");
             } else if (newTask instanceof Event){
-                String taskDetails = ((Event) newTask).saveEvent();
+                String taskDetails = ((Event) newTask).formatEvent();
                 content.append(taskDetails).append("\n");
             }
             fw.write(content.toString());
