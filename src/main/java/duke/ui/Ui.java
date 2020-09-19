@@ -21,7 +21,7 @@ public class Ui {
         System.out.println("Bye bye. See you again soon!");
     }
 
-    public String getNextCommand() {
+    public String getNextLine() {
         return sc.nextLine();
     }
 
@@ -61,4 +61,5 @@ public class Ui {
         System.out.println("Let's see what we have here:\n");
         taskList.list();
     }
+
 }

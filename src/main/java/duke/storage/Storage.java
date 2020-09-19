@@ -31,8 +31,8 @@ public class Storage {
 
     public void loadData(TaskList taskList) throws DukeException {
         this.checkDataDirectoryExist();
-        boolean toLoadDataFile = this.checkDataFileExist();
-        if (toLoadDataFile) {
+        boolean hasDataFile = this.checkDataFileExist();
+        if (hasDataFile) {
             try {
                 BufferedReader br = new BufferedReader(new FileReader(dataFilePath));
                 String line;
@@ -79,32 +79,31 @@ public class Storage {
     }
 
     public boolean checkDataFileExist() {
-        boolean toLoadDataFile = true;
+        boolean hasDataFile = true;
         try {
             if(this.dataFile.createNewFile()) {
-                toLoadDataFile = false;
+                hasDataFile = false;
                 Ui.newFileCreated();
             }
         } catch (IOException e) {
-            toLoadDataFile = false;
+            hasDataFile = false;
         }
-        return toLoadDataFile;
+        return hasDataFile;
     }
 
     public void saveData(ArrayList<Task> taskList) {
-        String dataFilePath = Paths.get("data", "duke.txt").toString();
         try {
             StringBuilder content = new StringBuilder();
-            FileWriter fw = new FileWriter(dataFilePath);
+            FileWriter fw = new FileWriter(this.dataFilePath);
             for (Task task : taskList) {
                 if (task instanceof ToDo) {
-                    String taskDetails = ((ToDo) task).saveToDo();
+                    String taskDetails = ((ToDo) task).formatToDo();
                     content.append(taskDetails).append("\n");
                 } else if (task instanceof Deadline) {
-                    String taskDetails = ((Deadline) task).saveDeadline();
+                    String taskDetails = ((Deadline) task).formatDeadline();
                     content.append(taskDetails).append("\n");
                 } else if (task instanceof Event){
-                    String taskDetails = ((Event) task).saveEvent();
+                    String taskDetails = ((Event) task).formatEvent();
                     content.append(taskDetails).append("\n");
                 }
             }
@@ -116,18 +115,17 @@ public class Storage {
     }
 
     public void addTask(Task newTask) {
-        String dataFilePath = Paths.get("data", "duke.txt").toString();
         try {
             StringBuilder content = new StringBuilder();
             FileWriter fw = new FileWriter(this.dataFilePath, true);
             if (newTask instanceof ToDo) {
-                String taskDetails = ((ToDo) newTask).saveToDo();
+                String taskDetails = ((ToDo) newTask).formatToDo();
                 content.append(taskDetails).append("\n");
             } else if (newTask instanceof Deadline) {
-                String taskDetails = ((Deadline) newTask).saveDeadline();
+                String taskDetails = ((Deadline) newTask).formatDeadline();
                 content.append(taskDetails).append("\n");
             } else if (newTask instanceof Event){
-                String taskDetails = ((Event) newTask).saveEvent();
+                String taskDetails = ((Event) newTask).formatEvent();
                 content.append(taskDetails).append("\n");
             }
             fw.write(content.toString());

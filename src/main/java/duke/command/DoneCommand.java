@@ -19,4 +19,5 @@ public class DoneCommand extends Command {
         storage.saveData(tasks.getTasks());
         ui.markAsDone(this.taskIndex - 1, tasks);
     }
+
 }

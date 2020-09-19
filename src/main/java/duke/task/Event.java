@@ -7,7 +7,7 @@ public class Event extends Task {
         this.eventDate = eventDate;
     }
 
-    public String saveEvent() {
+    public String formatEvent() {
         return String.format("E | %d | %s | %s",
                 this.getIsDone() ? 1 : 0, this.getDescription(), this.eventDate);
     }
@@ -16,4 +16,5 @@ public class Event extends Task {
     public String toString() {
         return "[E]" + super.toString() + " (at: " + this.eventDate + ")";
     }
+
 }

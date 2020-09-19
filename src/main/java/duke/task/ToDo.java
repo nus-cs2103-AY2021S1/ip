@@ -5,7 +5,7 @@ public class ToDo extends Task {
         super(description);
     }
 
-    public String saveToDo() {
+    public String formatToDo() {
         return String.format("T | %d | %s", this.getIsDone() ? 1 : 0,
                 this.getDescription());
     }
@@ -14,4 +14,5 @@ public class ToDo extends Task {
     public String toString() {
         return "[T]" + super.toString();
     }
+
 }

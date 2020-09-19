@@ -15,4 +15,5 @@ public class ByeCommand extends Command {
         storage.saveData(tasks.getTasks());
         ui.sayFarewell();
     }
+
 }

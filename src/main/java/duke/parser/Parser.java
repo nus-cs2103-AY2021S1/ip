@@ -22,8 +22,8 @@ public class Parser {
     public Parser() {
     }
 
-    public static Command parse(String nextCommand) {
-        String[] split = nextCommand.split(" ", 2);
+    public static Command parse(String input) {
+        String[] split = input.split(" ", 2);
         String command = split[0];
         String description = split.length == 2 ? split[1] : "";
 

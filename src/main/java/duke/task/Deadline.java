@@ -7,7 +7,7 @@ public class Deadline extends Task {
         this.deadlineDate = deadlineDate;
     }
 
-    public String saveDeadline() {
+    public String formatDeadline() {
         return String.format("D | %d | %s | %s",
                 this.getIsDone() ? 1 : 0, this.getDescription(), this.deadlineDate);
     }
@@ -16,4 +16,5 @@ public class Deadline extends Task {
     public String toString() {
         return "[D]" + super.toString() + " (by: " + this.deadlineDate + ")";
     }
+
 }
