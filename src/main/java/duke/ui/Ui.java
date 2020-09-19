@@ -1,10 +1,13 @@
 package duke.ui;
 
 import java.util.Scanner;
+import java.util.Iterator;
+import java.util.List;
 
 import duke.exception.DukeException;
 import duke.task.TaskList;
 import duke.task.Task;
+
 
 public class Ui {
     Scanner sc;
@@ -60,5 +63,10 @@ public class Ui {
     public void listTasks(TaskList taskList) {
         System.out.println("Let's see what we have here:\n");
         taskList.list();
+    }
+
+    public void FoundItems(TaskList foundTasks, String keyword) {
+        System.out.println("Here are the tasks that matched with \"" + keyword + "\" in your list:");
+        foundTasks.list();
     }
 }

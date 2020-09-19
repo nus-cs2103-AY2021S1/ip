@@ -10,6 +10,7 @@ import duke.command.AddCommand;
 import duke.command.ByeCommand;
 import duke.command.CommandException;
 import duke.command.DoneCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.DeleteCommand;
 import duke.exception.DukeException;
@@ -17,6 +18,7 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.command.Command;
 import duke.task.ToDo;
+import duke.ui.Ui;
 
 public class Parser {
     public Parser() {
@@ -42,6 +44,8 @@ public class Parser {
                 return new AddCommand(parseDeadline(description));
             } else if (command.equals("event")) {
                 return new AddCommand(parseEvent(description));
+            } else if (command.equals("find")) {
+                return new FindCommand(description);
             } else if (command.isBlank()) {
                 return new CommandException("Try one of the following instead: todo, event, deadline, done or delete");
             } else {
@@ -94,6 +98,21 @@ public class Parser {
             throw new DukeException(
                     String.format("I need the task index too! Eg. %s", example));
         }
+    }
+
+    static FindCommand parseFind(String description) throws DukeException {
+        try {
+            String keywords = description.substring(5);
+            if (keywords.length() == 0) {
+                throw new DukeException("OOPS!!! Please specify your task.");
+            }
+            return new FindCommand(keywords);
+        } catch(StringIndexOutOfBoundsException ex) {
+            throw new DukeException("OOPS!!! Please specify your task.");
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
     }
 
     private static String formatDate(String date) throws DukeException {
