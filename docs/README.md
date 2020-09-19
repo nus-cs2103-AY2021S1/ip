@@ -3,7 +3,7 @@ Mr. Meeseeks (yes, from Rick and Morty) is a Meeseeks-themed desktop task-manage
 Its Command Line Input (CLI)-oriented features provide a fast and efficient experience for the productive keyboard-warrior.
 ## Quick start
 1. Ensure you have Java 11 or above installed in your computer.
-2. Download the latest duke.jar from here.
+2. Download the latest duke.jar from [here](https://github.com/bowei-yu/ip/releases/tag/A-Release).
 3. Create a new folder in your preferred directory.
 4. Copy the file to that folder, which now acts as the cozy home folder for Mr. Meeseeks.
 5. Double-click the file to start the app.
