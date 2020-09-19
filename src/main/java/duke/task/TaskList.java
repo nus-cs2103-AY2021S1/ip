@@ -2,8 +2,15 @@ package duke.task;
 
 import java.util.ArrayList;
 
+/**
+ * Class to hold Tasks added by user.
+ */
 public class TaskList {
     private ArrayList<Task> taskList;
+
+    /**
+     * Creates a new TaskList.
+     */
     public TaskList() {
         this.taskList = new ArrayList<>();
     }

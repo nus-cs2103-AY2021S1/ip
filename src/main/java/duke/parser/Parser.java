@@ -18,10 +18,19 @@ import duke.task.Event;
 import duke.command.Command;
 import duke.task.ToDo;
 
+/**
+ * Utility Class to parse user input
+ */
 public class Parser {
     public Parser() {
     }
 
+    /**
+     * Returns the correct Command object to be executed based on user input.
+     *
+     * @param nextCommand User input.
+     * @return Corresponding command to execute.
+     */
     public static Command parse(String nextCommand) {
         String[] split = nextCommand.split(" ", 2);
         String command = split[0];
