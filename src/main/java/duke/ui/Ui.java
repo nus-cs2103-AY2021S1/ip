@@ -33,7 +33,6 @@ public class Ui {
         System.out.println("Bye bye. See you again soon!");
     }
 
-
     /**
      * Reads a command from user.
      *
@@ -117,6 +116,11 @@ public class Ui {
     public void listTasks(TaskList taskList) {
         System.out.println("Let's see what we have here:\n");
         taskList.list();
+    }
+
+    public void FoundItems(TaskList foundTasks, String keyword) {
+        System.out.println("Here are the tasks that matched with \"" + keyword + "\" in your list:");
+        foundTasks.list();
     }
 
 }
