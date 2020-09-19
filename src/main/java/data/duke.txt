@@ -1,0 +1,5 @@
+T | 1 | work
+T | 1 | homework
+T | 0 | work
+T | 0 | work
+E | 0 | tomorrow  | home
