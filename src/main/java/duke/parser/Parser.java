@@ -8,17 +8,16 @@ import java.time.format.FormatStyle;
 
 import duke.command.AddCommand;
 import duke.command.ByeCommand;
+import duke.command.Command;
 import duke.command.CommandException;
+import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
-import duke.command.DeleteCommand;
 import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
-import duke.command.Command;
 import duke.task.ToDo;
-import duke.ui.Ui;
 
 /**
  * Utility Class to parse user input
@@ -58,7 +57,7 @@ public class Parser {
             } else if (command.isBlank()) {
                 return new CommandException("Try one of the following instead: todo, event, deadline, done or delete");
             } else {
-                return new CommandException("☹ Sorry, I don't recognise that command!");
+                return new CommandException("Sorry, I don't recognise that command!");
             }
         } catch (DukeException e) {
             return new CommandException(e.getMessage());
@@ -116,7 +115,7 @@ public class Parser {
                 throw new DukeException("OOPS!!! Please specify your task.");
             }
             return new FindCommand(keywords);
-        } catch(StringIndexOutOfBoundsException ex) {
+        } catch (StringIndexOutOfBoundsException ex) {
             throw new DukeException("OOPS!!! Please specify your task.");
         } catch (DukeException e) {
             System.out.println(e.getMessage());
@@ -143,8 +142,8 @@ public class Parser {
             return output;
         } catch (DateTimeParseException e) {
             throw new DukeException(
-                    String.format("Invalid date/time! Here's an example format Eg" +
-                            ". %s", "2019-12-12 1800"));
+                    String.format("Invalid date/time! Here's an example format Eg"
+                            + ". %s", "2019-12-12 1800"));
         }
     }
 

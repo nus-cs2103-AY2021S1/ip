@@ -6,16 +6,16 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 
 import duke.exception.DukeException;
-import duke.task.TaskList;
-import duke.ui.Ui;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
+import duke.task.TaskList;
 import duke.task.ToDo;
+import duke.ui.Ui;
 
 /**
  * Class to load existing TaskList from existing file, creates a new TaskList if file is not found.
@@ -68,7 +68,7 @@ public class Storage {
                         t = new Event(taskInputs[2].trim(), taskInputs[3].trim());
                         break;
                     default:
-                        throw new DukeException("☹ Sorry, I don't recognise that command from the data "
+                        throw new DukeException("Sorry, I don't recognise that command from the data "
                                 + "file!");
                     }
                     if (taskInputs[1].trim().equals("1")) {
@@ -78,7 +78,7 @@ public class Storage {
                 }
                 br.close();
             } catch (IOException | ArrayIndexOutOfBoundsException e) {
-                    e.printStackTrace();
+                e.printStackTrace();
             }
         }
     }
@@ -88,7 +88,7 @@ public class Storage {
             FileReader readFile = new FileReader(dataDirectory);
         } catch (FileNotFoundException e) {
             File newDataDirectory = new File(String.valueOf(dataDirectory));
-            if(!newDataDirectory.exists()) {
+            if (!newDataDirectory.exists()) {
                 newDataDirectory.mkdir();
             }
         }
@@ -97,7 +97,7 @@ public class Storage {
     public boolean checkDataFileExist() {
         boolean hasDataFile = true;
         try {
-            if(this.dataFile.createNewFile()) {
+            if (this.dataFile.createNewFile()) {
                 hasDataFile = false;
                 Ui.newFileCreated();
             }
@@ -118,7 +118,7 @@ public class Storage {
                 } else if (task instanceof Deadline) {
                     String taskDetails = ((Deadline) task).formatDeadline();
                     content.append(taskDetails).append("\n");
-                } else if (task instanceof Event){
+                } else if (task instanceof Event) {
                     String taskDetails = ((Event) task).formatEvent();
                     content.append(taskDetails).append("\n");
                 }
@@ -140,7 +140,7 @@ public class Storage {
             } else if (newTask instanceof Deadline) {
                 String taskDetails = ((Deadline) newTask).formatDeadline();
                 content.append(taskDetails).append("\n");
-            } else if (newTask instanceof Event){
+            } else if (newTask instanceof Event) {
                 String taskDetails = ((Event) newTask).formatEvent();
                 content.append(taskDetails).append("\n");
             }

@@ -1,29 +1,13 @@
+I found your saved tasks. You can view them using list.
 Hi there, I'm TARS!
-What can I do for you?
+What can I do for you today?
 Got it. I've added this task:
-[T][✘] borrow book
-Now you have 1 task(s) in the list.
+[T][✘]borrow book
+Now you have 8 task(s) in the list.
 Got it. I've added this task:
-[D][✘] return book (by: Sunday)
-Now you have 2 task(s) in the list.
-1. [T][✘] borrow book
-2. [D][✘] return book (by: Sunday)
-Nice! I've marked this task as done:
-[D][✓] return book (by: Sunday)
-1. [T][✘] borrow book
-2. [D][✓] return book (by: Sunday)
-Got it. I've added this task:
-[E][✘] project meeting (at: Mon 2-4pm)
-Now you have 3 task(s) in the list.
-1. [T][✘] borrow book
-2. [D][✓] return book (by: Sunday)
-3. [E][✘] project meeting (at: Mon 2-4pm)
-☹ OOPS! Description for command 'todo' not found, try again!
-☹ OOPS!!! Description of deadline unclear. Here's an example: 'deadline return book /by Sunday'
-Only existing tasks of index <= 3 can be marked as done!
-Noted. I've removed this task:
-[T][✘] borrow book
-Now you have 2 task(s) in the list.
-1. [D][✓] return book (by: Sunday)
-2. [E][✘] project meeting (at: Mon 2-4pm)
-Bye bye. See you again soon!
+[D][✘]return book (by: 12 Dec 2019, 6:00 PM)
+Now you have 9 task(s) in the list.
+
+
+
+

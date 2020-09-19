@@ -3,14 +3,14 @@ package duke.ui;
 import java.util.Scanner;
 
 import duke.exception.DukeException;
-import duke.task.TaskList;
 import duke.task.Task;
+import duke.task.TaskList;
 
 /**
  * Class to display messages and interact with user.
  */
 public class Ui {
-    Scanner sc;
+    private final Scanner sc;
 
     /**
      * Initialises a new Ui object.
@@ -118,6 +118,12 @@ public class Ui {
         taskList.list();
     }
 
+    /**
+     * Displays a list of Tasks from the TaskList that matched the keywords.
+     *
+     * @param foundTasks List of Tasks that match the keywords given by user.
+     * @param keyword Keyword to be used in finding.
+     */
     public void FoundItems(TaskList foundTasks, String keyword) {
         System.out.println("Here are the tasks that matched with \"" + keyword + "\" in your list:");
         foundTasks.list();

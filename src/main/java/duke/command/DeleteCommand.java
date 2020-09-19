@@ -17,9 +17,9 @@ public class DeleteCommand extends Command {
      * @param taskIndex Index of Task in the TaskList to be deleted.
      */
     public DeleteCommand(int taskIndex) {
-            super();
-            this.taskIndex = taskIndex;
-        }
+        super();
+        this.taskIndex = taskIndex;
+    }
 
     /**
      * Deletes the Task with corresponding TaskIndex.
@@ -31,10 +31,10 @@ public class DeleteCommand extends Command {
      */
     @Override
     public void execute(Ui ui, Storage storage, TaskList tasks) {
-            Task taskToRemove = tasks.get(this.taskIndex - 1);
-            tasks.removeTask(this.taskIndex - 1);
-            storage.saveData(tasks.getTasks());
-            ui.taskDeleted(taskToRemove, tasks);
+        Task taskToRemove = tasks.get(this.taskIndex - 1);
+        tasks.removeTask(this.taskIndex - 1);
+        storage.saveData(tasks.getTasks());
+        ui.taskDeleted(taskToRemove, tasks);
     }
 
 }

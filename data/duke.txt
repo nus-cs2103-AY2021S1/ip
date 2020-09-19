@@ -4,3 +4,6 @@ E | 1 | project meeting Aug | 2019-12-12 1800
 T | 0 | join sports club
 T | 1 | borrow book
 T | 0 | sads
+T | 0 | 1323
+T | 0 | borrow book
+E | 1 | project meeting | 2 Jul 2019, 10:00 PM
