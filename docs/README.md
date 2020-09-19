@@ -6,7 +6,7 @@ Duke is a schedule managing application that helps you track all your tasks. Duk
  * Deadlines
  * DoWithins
  
-![GitHub Logo](Ui.png.png)
+![GitHub Logo](Ui.png)
 
 The specifications of each task and some additional functionality are discussed in the Features section.
 ## Feature List
