@@ -12,7 +12,7 @@ Duke is a desktop app for managing tasks. Duke keeps track of ongoing and finish
 4. Double-click the file to start the app.
 
 5. A GUI should start.<br>
-   ![Ui](Ui.PNG) 
+   ![Ui](Ui.png) 
 
 6. Refer to the [Usage](#usage) below for the details of each command.
 
