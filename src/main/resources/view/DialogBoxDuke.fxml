@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<fx:root alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" nodeOrientation="LEFT_TO_RIGHT" prefWidth="400.0" style="-fx-background-color: #00f7a8; -fx-border-color: navy; -fx-background-radius: 20; -fx-border-width: 1.5; -fx-border-radius: 20;" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <ImageView fx:id="displayPicture" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" style="-fx-opacity: 0.95;">
+            <HBox.margin>
+                <Insets bottom="10.0" top="10.0" />
+            </HBox.margin>
+        </ImageView>
+        <Label fx:id="dialog" alignment="TOP_LEFT" minHeight="-Infinity" nodeOrientation="LEFT_TO_RIGHT" style="-fx-background-color: #a1ffe1; -fx-background-radius: 25; -fx-border-color: blue; -fx-border-radius: 25;" text="Label" wrapText="true">
+            <HBox.margin>
+                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+            </HBox.margin>
+            <padding>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            </padding>
+         <effect>
+            <InnerShadow choke="0.18" color="#007f55" height="42.45" radius="20.7225" width="42.44" />
+         </effect>
+         <font>
+            <Font name="Georgia Italic" size="12.0" />
+         </font></Label>
+    </children>
+    <padding>
+        <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
+    </padding>
+   <effect>
+      <InnerShadow choke="0.43" color="#05573a" height="51.38" radius="25.935000000000002" width="54.36" />
+   </effect>
+</fx:root>
