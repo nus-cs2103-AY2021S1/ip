@@ -1,6 +1,6 @@
 # User Guide
 
-<img src="https://github.com/marcus2k/ip/blob/master/other/app-preview.gif" width="400" />
+<img src="Ui.png" width="400" />
 
 ## Features 
 
