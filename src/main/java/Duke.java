@@ -60,7 +60,7 @@ public class Duke extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         //Step 1. Setting up required components
-
+        // Add comment
         //The container for the content of the chat to scroll.
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
