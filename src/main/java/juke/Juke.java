@@ -1,6 +1,7 @@
 package juke;
 
 import juke.command.Command;
+import juke.ui.Ui;
 
 /**
  * Represents the Juke Chatbot.
@@ -33,10 +34,9 @@ public class Juke {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Returns response text based on user input.
      */
-    protected String getResponse(String input) {
+    public String getResponse(String input) {
         return this.run(input);
     }
 

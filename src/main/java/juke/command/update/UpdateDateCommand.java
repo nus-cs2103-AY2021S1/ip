@@ -1,25 +1,23 @@
 package juke.command.update;
 
-import java.time.LocalDate;
-
 import juke.Storage;
 import juke.TaskList;
-
+import juke.task.TaskDate;
 /**
  * Represents the command to update a task's date.
  */
 public class UpdateDateCommand extends UpdateCommand {
 
-    private LocalDate newDate;
+    private TaskDate newDate;
 
     /**
      * Constructs a UpdateDateCommand.
      * @param index Index position of task to be modified.
      * @param newDate New Date to be used.
      */
-    public UpdateDateCommand(int index, String newDate) {
+    public UpdateDateCommand(int index, TaskDate newDate) {
         super(index);
-        this.newDate = LocalDate.parse(newDate);
+        this.newDate = newDate;
     }
 
     /**

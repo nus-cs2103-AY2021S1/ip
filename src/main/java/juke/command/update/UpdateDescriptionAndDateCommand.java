@@ -1,9 +1,8 @@
 package juke.command.update;
 
-import java.time.LocalDate;
-
 import juke.Storage;
 import juke.TaskList;
+import juke.task.TaskDate;
 
 /**
  * Represents the command to update both the task description and date.
@@ -11,7 +10,7 @@ import juke.TaskList;
 public class UpdateDescriptionAndDateCommand extends UpdateCommand {
 
     private String newDescription;
-    private LocalDate newDate;
+    private TaskDate newDate;
 
     /**
      * Constructs a UpdateDescriptionAndDateCommand.
@@ -19,10 +18,10 @@ public class UpdateDescriptionAndDateCommand extends UpdateCommand {
      * @param newDescription New Description to be used.
      * @param newDate New Date to be used.
      */
-    public UpdateDescriptionAndDateCommand(int index, String newDescription, String newDate) {
+    public UpdateDescriptionAndDateCommand(int index, String newDescription, TaskDate newDate) {
         super(index);
         this.newDescription = newDescription;
-        this.newDate = LocalDate.parse(newDate);
+        this.newDate = newDate;
     }
 
     /**

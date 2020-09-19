@@ -1,23 +1,21 @@
 package juke.task;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 /**
  * Represents a Task to be done by a given deadline date.
  */
 public class Deadline extends Task {
 
-    private LocalDate by;
+    private TaskDate by;
 
     /**
      * Constructs a Deadline with an input description and by date.
      * @param description Description of Deadline task.
      * @param by Date by which task is to be completed.
      */
-    public Deadline(String description, String by) {
+    public Deadline(String description, TaskDate by) {
         super(description);
-        this.by = LocalDate.parse(by);
+        this.by = by;
     }
 
     /**
@@ -30,14 +28,14 @@ public class Deadline extends Task {
         return String.format("%s/%s/%s",
                 type,
                 super.taskSaver(),
-                by.format(DateTimeFormatter.ISO_LOCAL_DATE));
+                by.saveDateToDisk());
     }
 
     /**
      * Sets the by date for Deadline.
      * @param by New date to change to.
      */
-    public void setByDate(LocalDate by) {
+    public void setByDate(TaskDate by) {
         this.by = by;
     }
 
@@ -48,6 +46,6 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: "
-                + this.by.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
+                + this.by + ")";
     }
 }

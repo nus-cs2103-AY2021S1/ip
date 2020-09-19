@@ -1,11 +1,11 @@
 package juke;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 import juke.task.Deadline;
 import juke.task.Event;
 import juke.task.Task;
+import juke.task.TaskDate;
 
 /**
  * The TaskList class holds and manages the current list of Tasks stored
@@ -26,6 +26,7 @@ public class TaskList {
 
     /**
      * Returns the current total taskList size.
+     *
      * @return Total taskList size.
      */
     public static int getListSize() {
@@ -34,6 +35,7 @@ public class TaskList {
 
     /**
      * Returns the task located at the given index of the taskList.
+     *
      * @param index Index position of task.
      * @return The task to be returned.
      */
@@ -168,7 +170,7 @@ public class TaskList {
      * @param newDate The new date to be used.
      * @return Successful message upon change.
      */
-    public String updateDate(int taskNo, LocalDate newDate) {
+    public String updateDate(int taskNo, TaskDate newDate) {
         assert taskNo < list.size() : "Invalid Task index";
 
         Task task = list.get(taskNo);
@@ -197,7 +199,7 @@ public class TaskList {
      * @param newDate        The new Date to be used.
      * @return Successful message upon change.
      */
-    public String updateDescriptionAndDate(int taskNo, String newDescription, LocalDate newDate) {
+    public String updateDescriptionAndDate(int taskNo, String newDescription, TaskDate newDate) {
         assert taskNo < list.size() : "Invalid Task index";
 
         Task task = list.get(taskNo);

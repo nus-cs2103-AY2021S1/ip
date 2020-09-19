@@ -13,6 +13,7 @@ import juke.exception.UnknownTaskException;
 import juke.task.Deadline;
 import juke.task.Event;
 import juke.task.Task;
+import juke.task.TaskDate;
 import juke.task.Todo;
 
 /**
@@ -105,10 +106,10 @@ public class Storage {
             task = new Todo(next[2]);
             break;
         case "D":
-            task = new Deadline(next[2], next[3]);
+            task = new Deadline(next[2], TaskDate.parse(next[3]));
             break;
         case "E":
-            task = new Event(next[2], next[3]);
+            task = new Event(next[2], TaskDate.parse(next[3]));
             break;
         default:
             throw new UnknownTaskException("A task seems to be corrupted");

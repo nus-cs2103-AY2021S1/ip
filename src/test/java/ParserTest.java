@@ -6,11 +6,12 @@ import org.junit.jupiter.api.Test;
 
 import juke.Storage;
 import juke.TaskList;
-import juke.Ui;
 import juke.command.Command;
 import juke.task.Deadline;
 import juke.task.Event;
+import juke.task.TaskDate;
 import juke.task.Todo;
+import juke.ui.Ui;
 
 public class ParserTest {
 
@@ -44,11 +45,26 @@ public class ParserTest {
     }
 
     @Test
+    public void testDeadlineParsing() {
+        Ui ui = new Ui();
+        Storage storage = new Storage();
+        TaskList taskList = new TaskList(new ArrayList<>());
+
+        String stringToParse = "deadline eat eggs /by 2020-09-17";
+        String expectedText = "Alright matey, I've added this task:\n[D][\u2718] eat eggs (by: Sep 17 2020)\n"
+                + "You have 1 tasks in total.";
+        Command parsedCommand = ui.parseCommand(stringToParse);
+        String actualText = parsedCommand.executeCommand(taskList, storage);
+
+        assertEquals(expectedText, actualText);
+    }
+
+    @Test
     public void testDeleteParsing() {
         Ui ui = new Ui();
         Storage storage = new Storage();
         TaskList taskList = new TaskList(new ArrayList<>());
-        taskList.addToList(new Event("eat eggs", "2020-09-17"));
+        taskList.addToList(new Event("eat eggs", TaskDate.parse("2020-09-17")));
 
         String stringToParse = "delete 1";
         String expectedText = "Well, if you insist. I've removed:\n[E][\u2718] eat eggs (at: Sep 17 2020)";
@@ -63,7 +79,7 @@ public class ParserTest {
         Ui ui = new Ui();
         Storage storage = new Storage();
         TaskList taskList = new TaskList(new ArrayList<>());
-        taskList.addToList(new Event("eat eggs", "2020-09-17"));
+        taskList.addToList(new Event("eat eggs", TaskDate.parse("2020-09-17")));
 
         String stringToParse = "done 1";
         String expectedText = "Good Job, this task is now done:\n[E][\u2713] eat eggs (at: Sep 17 2020)";
@@ -78,8 +94,8 @@ public class ParserTest {
         Ui ui = new Ui();
         Storage storage = new Storage();
         TaskList taskList = new TaskList(new ArrayList<>());
-        taskList.addToList(new Event("eat eggs", "2020-09-17"));
-        taskList.addToList(new Deadline("cook eggs", "2020-09-17"));
+        taskList.addToList(new Event("eat eggs", TaskDate.parse("2020-09-17")));
+        taskList.addToList(new Deadline("cook eggs", TaskDate.parse("2020-09-17")));
         taskList.addToList(new Todo("wash dishes"));
 
         String stringToParse = "find dishes";
@@ -95,8 +111,8 @@ public class ParserTest {
         Ui ui = new Ui();
         Storage storage = new Storage();
         TaskList taskList = new TaskList(new ArrayList<>());
-        taskList.addToList(new Event("eat eggs", "2020-09-17"));
-        taskList.addToList(new Deadline("cook eggs", "2020-09-17"));
+        taskList.addToList(new Event("eat eggs", TaskDate.parse("2020-09-17")));
+        taskList.addToList(new Deadline("cook eggs", TaskDate.parse("2020-09-17")));
         taskList.addToList(new Todo("wash dishes"));
 
         String stringToParse = "list";
@@ -114,7 +130,7 @@ public class ParserTest {
         Ui ui = new Ui();
         Storage storage = new Storage();
         TaskList taskList = new TaskList(new ArrayList<>());
-        taskList.addToList(new Event("eat eggs", "2020-09-17"));
+        taskList.addToList(new Event("eat eggs", TaskDate.parse("2020-09-17")));
 
         String stringToParse = "update /number 1 /date 2020-09-30";
         String expectedText = "I've changed the task date! The task now looks like this:\n"
@@ -130,7 +146,7 @@ public class ParserTest {
         Ui ui = new Ui();
         Storage storage = new Storage();
         TaskList taskList = new TaskList(new ArrayList<>());
-        taskList.addToList(new Event("eat eggs", "2020-09-17"));
+        taskList.addToList(new Event("eat eggs", TaskDate.parse("2020-09-17")));
 
         String stringToParse = "update /number 1 /description fry eggs";
         String expectedText = "I've changed the task description! The task now looks like this:\n"
@@ -146,7 +162,7 @@ public class ParserTest {
         Ui ui = new Ui();
         Storage storage = new Storage();
         TaskList taskList = new TaskList(new ArrayList<>());
-        taskList.addToList(new Event("eat eggs", "2020-09-17"));
+        taskList.addToList(new Event("eat eggs", TaskDate.parse("2020-09-17")));
 
         String stringToParse = "update /number 1 /description fry eggs /date 2020-09-30";
         String expectedText = "I've changed the task description and date! The task now looks like this:\n"
@@ -156,4 +172,48 @@ public class ParserTest {
 
         assertEquals(expectedText, actualText);
     }
+
+    @Test
+    public void testOtherValidDateParsing() {
+        Ui ui = new Ui();
+        Storage storage = new Storage();
+        TaskList taskList = new TaskList(new ArrayList<>());
+
+        String stringToParse = "event eat eggs /at 17-09-2020";
+        String expectedText = "Alright matey, I've added this task:\n[E][\u2718] eat eggs (at: Sep 17 2020)\n"
+                + "You have 1 tasks in total.";
+        Command parsedCommand = ui.parseCommand(stringToParse);
+        String actualText = parsedCommand.executeCommand(taskList, storage);
+
+        assertEquals(expectedText, actualText);
+    }
+
+    @Test
+    public void testInvalidDateParsing() {
+        Ui ui = new Ui();
+        Storage storage = new Storage();
+        TaskList taskList = new TaskList(new ArrayList<>());
+
+        String stringToParse = "event eat eggs /at 09 17 2020";
+        String expectedText = "You need to provide a valid date! Check your formatting to see if it's valid.";
+        Command parsedCommand = ui.parseCommand(stringToParse);
+        String actualText = parsedCommand.executeCommand(taskList, storage);
+
+        assertEquals(expectedText, actualText);
+    }
+
+    @Test
+    public void testInvalidCommandParsing() {
+        Ui ui = new Ui();
+        Storage storage = new Storage();
+        TaskList taskList = new TaskList(new ArrayList<>());
+
+        String stringToParse = "you wot";
+        String expectedText = "Um, are you sure that's not gibberish?";
+        Command parsedCommand = ui.parseCommand(stringToParse);
+        String actualText = parsedCommand.executeCommand(taskList, storage);
+
+        assertEquals(expectedText, actualText);
+    }
+
 }

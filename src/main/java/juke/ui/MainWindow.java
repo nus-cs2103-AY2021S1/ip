@@ -1,4 +1,4 @@
-package juke;
+package juke.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -7,6 +7,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import juke.Juke;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -26,9 +27,15 @@ public class MainWindow extends AnchorPane {
     private Image man = new Image(this.getClass().getResourceAsStream("/images/Man.jpg"));
     private Image woman = new Image(this.getClass().getResourceAsStream("/images/Woman.jpg"));
 
+    /**
+     * Sets up MainWindow with appropriate intro text.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.getChildren().add(
+                DialogBox.getIntroMessage(woman)
+        );
     }
 
     public void setDuke(Juke d) {

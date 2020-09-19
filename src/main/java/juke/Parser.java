@@ -1,5 +1,7 @@
 package juke;
 
+import java.time.format.DateTimeParseException;
+
 import juke.command.Command;
 import juke.command.DeleteCommand;
 import juke.command.DoneCommand;
@@ -20,6 +22,7 @@ import juke.exception.UnknownTaskException;
 import juke.exception.UnknownTimeException;
 import juke.task.Deadline;
 import juke.task.Event;
+import juke.task.TaskDate;
 import juke.task.Todo;
 
 /**
@@ -33,7 +36,7 @@ public class Parser {
      * @param inputText Commands input by user.
      * @return Command understood by Chatbot.
      */
-    protected Command commandHandler(String inputText) {
+    public Command commandHandler(String inputText) {
         try {
             String[] splitArr = inputText.split(" ");
             String command = splitArr[0];
@@ -73,6 +76,8 @@ public class Parser {
             return new ErrorCommand("C'mon, I don't live in your head, you gotta tell me the task number!");
         } catch (InvalidArgumentsException ex) {
             return new ErrorCommand("You haven't provided the needed arguments, dumbo!");
+        } catch (DateTimeParseException ex) {
+            return new ErrorCommand("You need to provide a valid date! Check your formatting to see if it's valid.");
         }
     }
 
@@ -117,7 +122,7 @@ public class Parser {
     }
 
     private TaskCommand handleEventCommand(String inputText, String[] splitArr) throws EmptyDescriptionException,
-            UnknownTimeException, EmptyTimeException {
+            UnknownTimeException, EmptyTimeException, DateTimeParseException {
         if (inputText.length() <= 6) {
             throw new EmptyDescriptionException("No Description entered");
         } else if (splitArr.length == 1) {
@@ -132,11 +137,12 @@ public class Parser {
 
         String description = newSplitArr[0];
         String at = newSplitArr[1];
-        return new TaskCommand(new Event(description, at));
+        TaskDate date = TaskDate.parse(at);
+        return new TaskCommand(new Event(description, date));
     }
 
     private TaskCommand handleDeadlineCommand(String inputText, String[] splitArr) throws EmptyDescriptionException,
-            UnknownTimeException, EmptyTimeException {
+            UnknownTimeException, EmptyTimeException, DateTimeParseException {
         if (inputText.length() <= 9) {
             throw new EmptyDescriptionException("No Description entered");
         } else if (splitArr.length == 1) {
@@ -151,10 +157,12 @@ public class Parser {
 
         String description = newSplitArr[0];
         String by = newSplitArr[1];
-        return new TaskCommand(new Deadline(description, by));
+        TaskDate date = TaskDate.parse(by);
+        return new TaskCommand(new Deadline(description, date));
     }
 
-    private UpdateCommand handleUpdateCommand(String inputText) throws InvalidArgumentsException {
+    private UpdateCommand handleUpdateCommand(String inputText) throws InvalidArgumentsException,
+            DateTimeParseException {
 
         String[] splitByIndex = inputText.split("/number ");
 
@@ -172,11 +180,13 @@ public class Parser {
         int index = Integer.parseInt(splitByIndex[1].split(" /")[0]) - 1;
 
         if (isUpdateBothDateAndDescription) {
-            String date = splitByDate[1].split("/")[0];
+            String dateText = splitByDate[1].split("/")[0];
+            TaskDate date = TaskDate.parse(dateText);
             String description = splitByDescription[1].split("/")[0];
             return new UpdateDescriptionAndDateCommand(index, description, date);
         } else if (isUpdateDate) {
-            String date = splitByDate[1].split("/")[0];
+            String dateText = splitByDate[1].split("/")[0];
+            TaskDate date = TaskDate.parse(dateText);
             return new UpdateDateCommand(index, date);
         } else if (isUpdateDescription) {
             String description = splitByDescription[1].split("/")[0];
@@ -185,4 +195,5 @@ public class Parser {
             throw new InvalidArgumentsException("Arguments not provided");
         }
     }
+
 }

@@ -1,27 +1,24 @@
 package juke.task;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
 /**
  * Represents a Task that occurs at a given event date.
  */
 public class Event extends Task {
 
-    private LocalDate at;
+    private TaskDate at;
 
     /**
      * Constructs an Event Task with an input description and at Date.
      * @param description
      * @param at
      */
-    public Event(String description, String at) {
+    public Event(String description, TaskDate at) {
         super(description);
-        this.at = LocalDate.parse(at);
+        this.at = at;
     }
 
     /**
-     * Returns the representative text of the juke.task.Event.
+     * Returns the representative text of the Event.
      * @return Representative text.
      */
     @Override
@@ -30,14 +27,14 @@ public class Event extends Task {
         return String.format("%s/%s/%s",
                 type,
                 super.taskSaver(),
-                at.format(DateTimeFormatter.ISO_LOCAL_DATE));
+                at.saveDateToDisk());
     }
 
     /**
      * Sets the At date to given date
      * @param at New Date to be changed to.
      */
-    public void setAtDate(LocalDate at) {
+    public void setAtDate(TaskDate at) {
         this.at = at;
     }
 
@@ -48,6 +45,6 @@ public class Event extends Task {
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: "
-                + this.at.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
+                + this.at + ")";
     }
 }
