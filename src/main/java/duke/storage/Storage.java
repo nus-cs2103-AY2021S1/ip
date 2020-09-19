@@ -47,8 +47,8 @@ public class Storage {
      */
     public void loadData(TaskList taskList) throws DukeException {
         this.checkDataDirectoryExist();
-        boolean toLoadDataFile = this.checkDataFileExist();
-        if (toLoadDataFile) {
+        boolean hasDataFile = this.checkDataFileExist();
+        if (hasDataFile) {
             try {
                 BufferedReader br = new BufferedReader(new FileReader(dataFilePath));
                 String line;
@@ -95,23 +95,22 @@ public class Storage {
     }
 
     public boolean checkDataFileExist() {
-        boolean toLoadDataFile = true;
+        boolean hasDataFile = true;
         try {
             if(this.dataFile.createNewFile()) {
-                toLoadDataFile = false;
+                hasDataFile = false;
                 Ui.newFileCreated();
             }
         } catch (IOException e) {
-            toLoadDataFile = false;
+            hasDataFile = false;
         }
-        return toLoadDataFile;
+        return hasDataFile;
     }
 
     public void saveData(ArrayList<Task> taskList) {
-        String dataFilePath = Paths.get("data", "duke.txt").toString();
         try {
             StringBuilder content = new StringBuilder();
-            FileWriter fw = new FileWriter(dataFilePath);
+            FileWriter fw = new FileWriter(this.dataFilePath);
             for (Task task : taskList) {
                 if (task instanceof ToDo) {
                     String taskDetails = ((ToDo) task).formatToDo();
@@ -132,7 +131,6 @@ public class Storage {
     }
 
     public void addTask(Task newTask) {
-        String dataFilePath = Paths.get("data", "duke.txt").toString();
         try {
             StringBuilder content = new StringBuilder();
             FileWriter fw = new FileWriter(this.dataFilePath, true);

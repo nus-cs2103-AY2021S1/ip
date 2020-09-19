@@ -8,13 +8,13 @@ import duke.ui.Ui;
  * Class to display error messages.
  */
 public class CommandException extends Command {
-    private String message;
+    private String errMessage;
 
     /**
      * Creates an CommandException to display error messages.
      */
-    public CommandException(String message) {
-        this.message = message;
+    public CommandException(String errMessage) {
+        this.errMessage = errMessage;
     }
 
     /**
@@ -26,6 +26,7 @@ public class CommandException extends Command {
      */
     @Override
     public void execute(Ui ui, Storage storage, TaskList tasks) {
-        ui.showErrorMsg(message);
+        ui.showErrorMsg(errMessage);
     }
+
 }

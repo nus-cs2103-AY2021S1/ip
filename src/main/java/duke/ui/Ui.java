@@ -33,12 +33,13 @@ public class Ui {
         System.out.println("Bye bye. See you again soon!");
     }
 
+
     /**
      * Reads a command from user.
      *
      * @return Command read from user.
      */
-    public String getNextCommand() {
+    public String getNextLine() {
         return sc.nextLine();
     }
 
@@ -117,4 +118,5 @@ public class Ui {
         System.out.println("Let's see what we have here:\n");
         taskList.list();
     }
+
 }

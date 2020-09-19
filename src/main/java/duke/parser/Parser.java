@@ -28,11 +28,11 @@ public class Parser {
     /**
      * Returns the correct Command object to be executed based on user input.
      *
-     * @param nextCommand User input.
+     * @param input User input.
      * @return Corresponding command to execute.
      */
-    public static Command parse(String nextCommand) {
-        String[] split = nextCommand.split(" ", 2);
+    public static Command parse(String input) {
+        String[] split = input.split(" ", 2);
         String command = split[0];
         String description = split.length == 2 ? split[1] : "";
 
