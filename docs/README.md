@@ -1,6 +1,6 @@
 # User Guide
 
-![app-preview](https://github.com/marcus2k/ip/blob/edit-docs/other/app-preview.gif)
+![app-preview](https://github.com/marcus2k/ip/blob/master/other/app-preview.gif)
 
 ## Features 
 
