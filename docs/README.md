@@ -1,3 +1,29 @@
+# Bob
+
+Bob is a personal task handling chatbot! Tell him all your deadlines, events and tasks to do and he will keep track of them for you.
+
+## Quick Start
+
+Prerequisites: JDK 11
+
+1. Download the latest Bob.jar.
+2. Copy the file to the home directory for Bob.
+3. Open the Bob.jar file and a window should open.
+4. Try typing in the textbox and hit 'Send'.
+
+![Bob UI](/docs/Ui.png)
+
+5. If you see something like this, everything is working!
+6. Type a command in the command box and press 'Send' to execute it.
+      Some example commands you can try:
+      help: Displays all the available commands.
+      list : Lists all tasks Bob knows about.
+      todo DESCRIPTION: Creates a To-Do task.
+      deadline DESCRIPTION /by DATE: Creates a Deadline task.
+      event DESCRIPTION /at DATE : Creates an Event task.
+      bye: Saves the task list.
+7. Refer to the Features below for details of each command.
+
 # User Guide
 
 ## Features 
