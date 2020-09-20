@@ -19,7 +19,7 @@ Nite is a task tracking cat-bot, dark as the night, and convenient to use.
 2. Download the latest nite.jar from [here](https://github.com/cwenling/ip/releases/tag/A-Release).
 3. Copy the file to the folder you want to use as the home folder for Nite.
 4. Double-click the file, and Nite will wake up. Your chat with Nite will appear:
-![Welcome Screen](./ui/welcome.png)
+![Welcome Screen](images/welcome.png)
 5. Type your command in the text box and press `Enter` to execute the command.
 You can start chatting with Nite now!
 
@@ -37,7 +37,7 @@ Example of usage: `help`
 
 Expected outcome:
 
-![Viewing help](./ui/help.png)
+![Viewing help](images/help.png)
 
 ### Add tasks
 Add 3 different types of tasks, such as Todo, Deadline, and Event.
@@ -52,7 +52,7 @@ Example of usage: `todo feed my cat`
 
 Expected outcome:
 
-![After adding a Todo](./ui/todo.png)
+![After adding a Todo](images/todo.png)
 
 ##### 2. `deadline DESCRIPTION /by YYYY-MM-DD HHmm` - Add a Deadline task
 
@@ -62,7 +62,7 @@ Example of usage: `deadline book a vet visit /by 2020-10-03 2359`
 
 Expected outcome:
 
-![After adding a Deadline](./ui/deadline.png)
+![After adding a Deadline](images/deadline.png)
 
 ##### 3. `event DESCRIPTION /at YYYY-MM-DD HHmm to YYYY-MM-DD HHmm` - Add an Event task
 
@@ -72,7 +72,7 @@ Example of usage: `event catwalk parade /at 2020-12-25 1400 to 2020-12-25 1600`
 
 Expected outcome:
 
-![After adding an Event](./ui/event.png)
+![After adding an Event](images/event.png)
 
 ## List tasks
 You can list all your tasks stored in Nite.
@@ -86,7 +86,7 @@ Example of usage: `list`
 
 Expected outcome:
 
-![List command](./ui/list.png)
+![List command](images/list.png)
 
 ## Mark tasks as done
 Nite can mark and keep track of which tasks you have already completed.
@@ -100,7 +100,7 @@ Example of usage: `done 2`
 
 Expected outcome:
 
-![Done command](./ui/done.png)
+![Done command](images/done.png)
 
 ## Find tasks with keyword
 Nite can find your tasks that match your specified keyword.
@@ -114,7 +114,7 @@ Example of usage: `find cat`
 
 Expected outcome:
 
-![Find Command](./ui/find.png)
+![Find Command](images/find.png)
 
 ## Sort list of tasks
 Nite can help you to sort selected types of tasks according to time and description
@@ -129,14 +129,14 @@ Sorts all deadline type tasks according to urgency.
 
 Expected outcome:
 
-![Sort Deadline](./ui/sort-deadline.png)
+![Sort Deadline](images/sort-deadline.png)
 
 Example of usage: `sort deadline todo`
 Sorts all deadline type tasks according to urgency, followed by all todo type tasks according to description.
 
 Expected outcome:
 
-![Sort Deadline Todo](./ui/sort-deadline-todo.png)
+![Sort Deadline Todo](images/sort-deadline-todo.png)
 
 ## Delete tasks
 Nite can delete a task that you no longer want to track.
@@ -150,7 +150,7 @@ Example of usage: `delete 2`
 
 Expected outcome:
 
-![Delete command](./ui/delete.png)
+![Delete command](images/delete.png)
 
 ## Exit Nite
 Nite closes the application.
@@ -163,7 +163,7 @@ Example of usage: `bye`
 
 Expected outcome:
 
-![Exit Command](./ui/exit.png)
+![Exit Command](images/exit.png)
 
 ## Acknowledgements
 Resources:

@@ -16,14 +16,8 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
    1. Select the project directory, and click `OK`
    1. If there are any further prompts, accept the defaults.
 1. After the importing is complete, locate the `src/main/java/nite.Nite.java` file, right-click it, and choose `Run nite.Nite.main()`. If the setup is correct, you should see something like the below:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+   
+![Welcome Screen](docs/images/welcome.png)
 
 ## Acknowledgements
 src/main/resources/audio/meow2.wav uses this sound from freesound:
