@@ -42,6 +42,7 @@ public class Duke {
         try {
             String uiMessage = "";
             Command c = Parser.parse(input);
+            assert c != null : "Unable to parse input!";
             uiMessage = c.execute(ui, storage, tasks);
             return uiMessage;
         } catch (DukeException e) {

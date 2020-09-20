@@ -116,6 +116,11 @@ public class Ui {
      * @param taskList Current list of Tasks from user.
      */
     public String markAsDone(int index, TaskList taskList) {
+        boolean taskExist = false;
+        if (taskList.get(index) != null) {
+            taskExist = true;
+        }
+        assert taskExist : "Current task could not be marked as done!";
         String markedDoneMessage = "Nice! I've marked this task as done:\n" + taskList.get(index);
         return markedDoneMessage;
     }

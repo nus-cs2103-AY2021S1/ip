@@ -52,9 +52,11 @@ public class Storage {
             try {
                 BufferedReader br = new BufferedReader(new FileReader(dataFilePath));
                 String line;
+                assert this.dataFile.exists() : "DataFile is missing!";
                 while ((line = br.readLine()) != null) {
                     String[] taskInputs = line.split("\\|");
                     String taskType = taskInputs[0].trim();
+                    assert taskType == "T" || taskType == "D" || taskType == "E" : "taskType is invalid!";
                     Task t;
 
                     switch (taskType) {
@@ -109,6 +111,7 @@ public class Storage {
 
     public void saveData(ArrayList<Task> taskList) {
         try {
+            assert this.dataFile.exists() : "DataFile is missing!";
             StringBuilder content = new StringBuilder();
             FileWriter fw = new FileWriter(this.dataFilePath);
             for (Task task : taskList) {
@@ -132,6 +135,7 @@ public class Storage {
 
     public void addTask(Task newTask) {
         try {
+            assert this.dataFile.exists() : "DataFile is missing!";
             StringBuilder content = new StringBuilder();
             FileWriter fw = new FileWriter(this.dataFilePath, true);
             if (newTask instanceof ToDo) {
