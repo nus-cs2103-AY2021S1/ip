@@ -1,0 +1,12 @@
+todo taskAbc 1231
+list
+deadline Say Hi \by tofu
+deadline Say Hi /by tofu
+abc 123
+done 1
+done 2
+done 3
+done 3
+list
+event hello friends /by /by TIME
+bye
