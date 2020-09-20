@@ -75,7 +75,7 @@ public class Parser {
         } catch (UnknownTaskException ex) {
             return new ErrorCommand("C'mon, I don't live in your head, you gotta tell me the task number!");
         } catch (InvalidArgumentsException ex) {
-            return new ErrorCommand("You haven't provided the needed arguments, dumbo!");
+            return new ErrorCommand("You haven't provided the appropriate arguments, dumbo!");
         } catch (DateTimeParseException ex) {
             return new ErrorCommand("You need to provide a valid date! Check your formatting to see if it's valid.");
         }
@@ -94,21 +94,32 @@ public class Parser {
         return new ListCommand();
     }
 
-    private DoneCommand handleDoneCommand(String[] splitArr) throws UnknownTaskException {
+    private DoneCommand handleDoneCommand(String[] splitArr) throws UnknownTaskException, InvalidArgumentsException {
         if (splitArr.length == 1) {
             throw new UnknownTaskException("No task number entered");
         }
 
         int taskNo = Integer.parseInt(splitArr[1]) - 1;
+
+        if (taskNo < 0) {
+            throw new InvalidArgumentsException("Task Number is invalid");
+        }
+
         return new DoneCommand(taskNo);
     }
 
-    private DeleteCommand handleDeleteCommand(String[] splitArr) throws UnknownTaskException {
+    private DeleteCommand handleDeleteCommand(String[] splitArr) throws UnknownTaskException,
+            InvalidArgumentsException {
         if (splitArr.length == 1) {
             throw new UnknownTaskException("No task number entered");
         }
 
         int taskNo = Integer.parseInt(splitArr[1]) - 1;
+
+        if (taskNo < 0) {
+            throw new InvalidArgumentsException("Task Number is invalid");
+        }
+
         return new DeleteCommand(taskNo);
     }
 
@@ -178,6 +189,10 @@ public class Parser {
         boolean isUpdateBothDateAndDescription = isUpdateDescription && isUpdateDate;
 
         int index = Integer.parseInt(splitByIndex[1].split(" /")[0]) - 1;
+
+        if (index < 0) {
+            throw new InvalidArgumentsException("Task Number is invalid");
+        }
 
         if (isUpdateBothDateAndDescription) {
             String dateText = splitByDate[1].split("/")[0];

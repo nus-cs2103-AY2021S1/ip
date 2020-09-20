@@ -15,7 +15,6 @@ public class TaskCommandTest {
     public void testCommandExecution() {
         Storage storage = new Storage();
         TaskList taskList = new TaskList(new ArrayList<>());
-
         Todo todo = new Todo("Eat apples");
         TaskCommand taskCommand = new TaskCommand(todo);
 
