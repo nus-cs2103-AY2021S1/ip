@@ -6,7 +6,7 @@ Straw bot is a desktop app for managing tasks, optimized for use via a Command L
 Graphical User Interface (GUI) is added for better user accessibility.
 
 The 3 types of tasks supported are Todo, Event, and Deadline task. 
-1. Todo tasks has no date and time included.
+1. Todo task has no date and time included.
 2. Event task has a date and time which roughly indicate when the task should be done.
 3. Deadline task has a date and time which state when the task should be done by.
 
@@ -37,7 +37,7 @@ Shows a list of all the user's tasks.
 Terminates the programme.
 
 
-### Add a todo task: `todo TASK_NAME`
+### Add a Todo task: `todo TASK_NAME`
 
 Add a task with the name TASK_NAME.
 
@@ -48,14 +48,14 @@ For example,
 
 ### Mark a task as Done: `done INDEX`
 
-Item at INDEX is marked as done (Index starts at 1).
+Mark a task at index INDEX as Done (INDEX starts at 1).
 
 For example,
 
 `done 1`
 
 
-### Add an Event: `event EVENT_NAME /at {yyyyMMddHHmm}`
+### Add an Event task: `event EVENT_NAME /at {yyyyMMddHHmm}`
 or `event EVENT_NAME /at {yyyyMMdd HHmm}`
 or `event EVENT_NAME /at {HH:mm ddMMyy}`
 or `event EVENT_NAME /at {yyyy-MM-dd HH:mm}`
@@ -67,7 +67,7 @@ For example,
 `event run up /at 2020-12-01 14:30`
 
 
-### Add a Deadline: `deadline DEADLINE_NAME /by {yyyyMMddHHmm}`
+### Add a Deadline task: `deadline DEADLINE_NAME /by {yyyyMMddHHmm}`
 or `deadline DEADLINE_NAME /by {yyyyMMdd HHmm}`
 or `deadline DEADLINE_NAME /by {HH:mm ddMMyy}`
 or `deadline DEADLINE_NAME /by {yyyy-MM-dd HH:mm}`
@@ -90,7 +90,7 @@ For example, in a list of 2 items todo AB and todo CD,
 
 ### Delete: `delete INDEX`
 
-Delete task at index INDEX (Index starts at 1).
+Delete a task at index INDEX (INDEX starts at 1).
 
 For example, 
 `delete 1`
