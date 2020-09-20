@@ -43,7 +43,7 @@ public class Duke {
             String uiMessage = "";
             Command c = Parser.parse(input);
             uiMessage = c.execute(ui, storage, tasks);
-            return ui.getNextLine();
+            return uiMessage;
         } catch (DukeException e) {
             return e.getMessage();
         }
