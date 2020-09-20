@@ -14,17 +14,17 @@ that encourages you to be your worst self! Enjoy :)
 
 ## Features & Usage
 ### Summary of Commands
-Feature | Command | Example Usage 
---------|---------|--------------
-Adding Todo task|`todo <description>`|`todo submit 2103t ip`
-Adding Deadline task|`deadline <description> /by <date>`|`deadline return book /by 2020-09-23`
-Adding Event task|`event <description> /at <date>`|`event party /at 2020-09-30`
-Listing all tasks|`list`|`list`
-Marking task as done|`done <task number>`|`done 1`
-Deleting a task|`delete <task number>`|`delete 1`
-Finding all tasks with `keyword`|`find <keyword>`|`find party`
-Updating a task's description|`update <task number> <new description>`|`update 3 New Years' Party`
-Exiting app|`bye / toodles / sayonara / farewell`|`toodles`
+|Feature | Command | Example Usage |
+|--------|---------|---------------|
+|Adding Todo task|`todo <description>`|`todo submit 2103t ip`|
+|Adding Deadline task|`deadline <description> /by <date>`|`deadline return book /by 2020-09-23`|
+|Adding Event task|`event <description> /at <date>`|`event party /at 2020-09-30`|
+|Listing all tasks|`list`|`list`|
+|Marking task as done|`done <task number>`|`done 1`|
+|Deleting a task|`delete <task number>`|`delete 1`|
+|Finding all tasks with `keyword`|`find <keyword>`|`find party`|
+|Updating a task's description|`update <task number> <new description>`|`update 3 New Years' Party`|
+|Exiting app|`bye / toodles / sayonara / farewell`|`toodles`|
 
 ### `todo <description>` - Add Todo task
 
