@@ -2,8 +2,13 @@
 
 ![](Ui.png)
 
-Straw bot is a desktop app for managing todo tasks, optimized for use via a Command Line Interface.
+Straw bot is a desktop app for managing tasks, optimized for use via a Command Line Interface.
 Graphical User Interface (GUI) is added for better user accessibility.
+
+The 3 types of tasks supported are Todo, Event, and Deadline task. 
+1. Todo tasks has no date and time included.
+2. Event task has a date and time which roughly indicate when the task should be done.
+3. Deadline task has a date and time which state when the task should be done by.
 
 ## Quick Start
 
