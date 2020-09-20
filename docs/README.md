@@ -3,6 +3,21 @@
 Welcome to Duke Task Manager 2.0, the tired, sarcastic, done-with-life version 
 that encourages you to be your worst self! Enjoy :)
 
+### Table of Contents
+1. Quick Start
+2. Features & Usage
+    1. Summary of Commands
+    2. Add Todo task
+    3. Add Deadline task
+    4. Add Event task
+    5. List all tasks
+    6. Mark a task as done
+    7. Delete a task
+    8. Find tasks related to a `keyword`
+    9. Update description of a task
+    10. Exit app
+{:toc}
+
 ## Quick Start
 1. Ensure you have Java `11` or above installed in your Computer.
 2. Download the latest `duke.jar` from [here](https://github.com/porkeypine/ip/releases/tag/A-Release).
@@ -14,6 +29,7 @@ that encourages you to be your worst self! Enjoy :)
 
 ## Features & Usage
 ### Summary of Commands
+
 |Feature | Command | Example Usage |
 |--------|---------|---------------|
 |Adding Todo task|`todo <description>`|`todo submit 2103t ip`|
@@ -152,7 +168,7 @@ Expected outcome:
 
 I wouldn't bother about them if I were you.
 ```
-### `update <task number> <new description>` - Updates description of a task
+### `update <task number> <new description>` - Update description of a task
 
 Updates the description of a task (as specified by `task number`) to `new description`.
 
@@ -168,7 +184,7 @@ Expected outcome:
 Donezorimasu. Your task is now:
  [E][:(] New Years' Party (at: WEDNESDAY, Sep 23 2020)
 ```
-### `bye / toodles / sayonara / farewell` - Exits app
+### `bye / toodles / sayonara / farewell` - Exit app
 
 Exits the app and saves current list of tasks.
 
