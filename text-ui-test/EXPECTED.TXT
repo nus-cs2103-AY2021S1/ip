@@ -6,8 +6,8 @@ Now you have 1 tasks in the list.
 Got it. I've added this task: 
   [T][✘] write review
 Now you have 2 tasks in the list.
-OOPS!!! Wrong format when describing a date.
-OOPS!!! Wrong format when describing a date.
+OOPS!!! Time cannot been processed. Give the time strictly in yyyy-mm-dd format.
+OOPS!!! Time cannot been processed. Give the time strictly in yyyy-mm-dd format.
 Here are the tasks in your list:
   1. [T][✘] read book
   2. [T][✘] write review
