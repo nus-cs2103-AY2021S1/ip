@@ -52,6 +52,11 @@ public class Storage {
      * @throws IOException if file/path does not exist
      */
      public void save(TaskList tasks) throws IOException {
+         String folderPath = this.getFolderPath();
+         File folder = new File(folderPath);
+         if (!folder.exists()) {
+             folder.mkdir();
+         }
          String line = "";
          File file = new File(filePath);
          if(!file.exists()){
@@ -75,4 +80,9 @@ public class Storage {
          }
          writer.close();
      }
+
+    private String getFolderPath() {
+        int requiredIndex = 6;
+        return filePath.substring(0, requiredIndex);
+    }
 }

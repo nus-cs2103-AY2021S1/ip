@@ -40,7 +40,7 @@ public class DukeException extends Exception {
                 }
                 break;
             case INVALID_TASK:
-                error+= "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+                error+= "OOPS!!! I'm sorry, but I don't know what that means :-(";
                 break;
             case NO_DESCRIPTION:
                 switch (command) {
@@ -56,6 +56,9 @@ public class DukeException extends Exception {
                     case DONE:
                         error+= "Done task description cannot be empty";
                         break;
+                    case FIND:
+                        error+= "Find needs a keyword";
+                        break;
                 }
                 break;
             case WRONG_DESCRIPTION:
@@ -70,7 +73,7 @@ public class DukeException extends Exception {
                         error+= "Such a task does not exist, please only follow done by the serial number of the task to be marked done";
                         break;
                     case DELETE:
-                        error+= "Such a task does not exist, please only follow delete by the serial number of the task to be marked deleted";
+                        error+= "Such a task does not exist, please only follow delete by the serial number of the task to be deleted";
                         break;
                 }
                 break;

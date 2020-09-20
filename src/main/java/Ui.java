@@ -12,7 +12,6 @@ public class Ui {
         String output = "Got it. I've added this task:"
                 + "\n       " + task
                 + String.format("\n   Now you have %d task(s) in the list.", tasks.getSize());
-        System.out.println(output);
         return output;
     }
 
@@ -33,15 +32,12 @@ public class Ui {
     public String bye(){
         String output = "\n   " + "Bye. Hope to see you again soon!"
                 + "\n   ";
-        System.out.println(output);
-
         return output;
     }
 
     public String uiForDone(Task task){
         String output = "\n   " + "Nice! I've marked this task as done:"
                 + "\n   " + task;
-        System.out.println(output);
         return output;
     }
 
@@ -49,20 +45,17 @@ public class Ui {
         String output ="\n   " + "Noted. I've removed this task: "
                 + "\n   " + task
                 + String.format("\n   Now you have %d task(s) in the list.", tasks.getSize());
-        System.out.println(output);
         return output;
     }
 
     public String uiForList(TaskList tasks){
         if(tasks.getSize() == 0){
-            System.out.println("\n   " + "You have no tasks");
-            return "no tasks";
+            return "you have no tasks";
         } else {
             StringBuilder output = new StringBuilder("   ");
             for (int i = 0; i < tasks.getSize(); i++) {
                 output.append("\n    ").append(i + 1).append(". ").append(tasks.getTask(i + 1));
             }
-            System.out.println(output);
             return output.toString();
         }
     }
@@ -76,7 +69,6 @@ public class Ui {
                 output.append("\n    ").append(i + 1).append(". ").append(tasks.getTask(i + 1));
             }
             output.append("\n   ");
-            System.out.println(output);
             return output.toString();
         }
     }

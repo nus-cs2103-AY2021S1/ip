@@ -1,4 +1,3 @@
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -8,6 +7,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -24,8 +25,9 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/ironMan.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/jarvis.jpg"));
 
     @FXML
     public void initialize() {
@@ -41,17 +43,21 @@ public class MainWindow extends AnchorPane {
      * the dialog container. Clears the user input after processing.
      */
     @FXML
-    private void handleUserInput() throws IOException, DukeException {
+    private void handleUserInput() throws IOException, DukeException, InterruptedException {
         this.setDuke(new Duke("./data\\duke.txt"));
         String input = userInput.getText();
         String response = duke.getResponse(input);
-        if(input.equals("bye")){
-            Platform.exit();
-        }
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+        if(input.equals("bye")){
+            new Timer().schedule(new TimerTask() {
+                public void run () {
+                    System.exit(0);
+                }
+            }, 3000);
+        }
     }
 }

@@ -39,15 +39,15 @@ public class Command {
             case "done" : {
                 int index;
                 if (inputLine.length < 2) {
-                    return new DukeException("", DukeExceptionType.NO_DESCRIPTION, Commands.DONE).getMessage();
+                    return new DukeException("", DukeExceptionType.NO_DESCRIPTION, Commands.DONE).toString();
                 }
                 try {
                     index = Integer.parseInt(inputLine[1]);
                 } catch (NumberFormatException e) {
-                    return new DukeException("", DukeExceptionType.WRONG_DESCRIPTION, Commands.DONE).getMessage();
+                    return new DukeException("", DukeExceptionType.WRONG_DESCRIPTION, Commands.DONE).toString();
                 }
                 if (index < 1 || index > tasks.getSize()) {
-                    return new DukeException("", DukeExceptionType.WRONG_DESCRIPTION, Commands.DONE).getMessage();
+                    return new DukeException("", DukeExceptionType.WRONG_DESCRIPTION, Commands.DONE).toString();
                 }
                 tasks.markDone(index);
                 storage.save(tasks);
@@ -56,15 +56,15 @@ public class Command {
             case "delete" : {
                 int index;
                 if (inputLine.length < 2) {
-                    return new DukeException("", DukeExceptionType.NO_DESCRIPTION, Commands.DELETE).getMessage();
+                    return new DukeException("", DukeExceptionType.NO_DESCRIPTION, Commands.DELETE).toString();
                 }
                 try {
                     index = Integer.parseInt(inputLine[1]);
                 } catch (NumberFormatException e) {
-                    return new DukeException("", DukeExceptionType.WRONG_DESCRIPTION, Commands.DELETE).getMessage();
+                    return new DukeException("", DukeExceptionType.WRONG_DESCRIPTION, Commands.DELETE).toString();
                 }
                 if (index < 1 || index > tasks.getSize()) {
-                    return new DukeException("", DukeExceptionType.WRONG_DESCRIPTION, Commands.DELETE).getMessage();
+                    return new DukeException("", DukeExceptionType.WRONG_DESCRIPTION, Commands.DELETE).toString();
                 }
                 Task task = tasks.getTask(index);
                 tasks.deleteTask(index);
@@ -73,7 +73,7 @@ public class Command {
             }
             case "todo" : {
                 if (inputLine.length < 2) {
-                    return new DukeException("todo needs description", DukeExceptionType.NO_DESCRIPTION, Commands.TODO).getMessage();
+                    return new DukeException("todo needs description", DukeExceptionType.NO_DESCRIPTION, Commands.TODO).toString();
                 } else {
                     StringBuilder description = new StringBuilder();
                     for(int i = 1; i < inputLine.length; i++){
@@ -90,17 +90,17 @@ public class Command {
                 StringBuilder description = new StringBuilder();
                 StringBuilder deadline = new StringBuilder();
                 if (inputLine.length < 2) {
-                    throw new DukeException("", DukeExceptionType.NO_DESCRIPTION, Commands.DEADLINE);
+                    return new DukeException("deadline task needs description", DukeExceptionType.NO_DESCRIPTION, Commands.DEADLINE).toString();
                 }
                 int index = 1;
                 while(!inputLine[index].equals("/by")){
                     description.append(inputLine[index]).append(" ");
                     index++;
                     if(index == inputLine.length){
-                        return new DukeException("", DukeExceptionType.EMPTY_TIME, Commands.DEADLINE).getMessage();
+                        return new DukeException("", DukeExceptionType.EMPTY_TIME, Commands.DEADLINE).toString();
                     }
                     if(description.length() < 1){
-                        return new DukeException("", DukeExceptionType.NO_DESCRIPTION, Commands.DEADLINE).getMessage();
+                        return new DukeException("", DukeExceptionType.NO_DESCRIPTION, Commands.DEADLINE).toString();
                     }
                 }
                 index++;
@@ -109,7 +109,7 @@ public class Command {
                     index++;
                 }
                 if(deadline.length() < 1){
-                    return new DukeException("", DukeExceptionType.EMPTY_TIME, Commands.DEADLINE).getMessage();
+                    return new DukeException("",DukeExceptionType.EMPTY_TIME, Commands.DEADLINE).toString();
                 }
                 deadline.deleteCharAt(deadline.length() - 1);
                 try{
@@ -119,7 +119,7 @@ public class Command {
                     return ui.uiForAdd(tasks, task);
                 } catch (DateTimeParseException e){
                     System.err.println("Please use yyyy-mm-dd");
-                    return new DukeException("Please use dd-MM-yyyy", DukeExceptionType.WRONG_TIME, Commands.DEADLINE).getMessage();
+                    return new DukeException("Please use dd-MM-yyyy", DukeExceptionType.WRONG_TIME, Commands.DEADLINE).toString();
                 }
             }
             case "event" :{
@@ -127,18 +127,18 @@ public class Command {
                 StringBuilder description = new StringBuilder();
                 StringBuilder time = new StringBuilder();
                 if (inputLine.length < 2) {
-                    return new DukeException("", DukeExceptionType.NO_DESCRIPTION, Commands.EVENT).getMessage();
+                    return new DukeException("", DukeExceptionType.NO_DESCRIPTION, Commands.EVENT).toString();
                 }
                 int index = 1;
                 while(!inputLine[index].equals("/at")){
                     description.append(inputLine[index]).append(" ");
                     index++;
                     if(index == inputLine.length){
-                        return new DukeException("", DukeExceptionType.EMPTY_TIME, Commands.EVENT).getMessage();
+                        return new DukeException("", DukeExceptionType.EMPTY_TIME, Commands.EVENT).toString();
                     }
                 }
                 if(description.length() < 1){
-                    return new DukeException("", DukeExceptionType.NO_DESCRIPTION, Commands.EVENT).getMessage();
+                    return new DukeException("", DukeExceptionType.NO_DESCRIPTION, Commands.EVENT).toString();
                 }
                 index++;
                 while(index < inputLine.length){
@@ -146,7 +146,7 @@ public class Command {
                     index++;
                 }
                 if(time.length() < 1){
-                    return new DukeException("", DukeExceptionType.EMPTY_TIME, Commands.EVENT).getMessage();
+                    return new DukeException("", DukeExceptionType.EMPTY_TIME, Commands.EVENT).toString();
                 }
                 time.deleteCharAt(time.length() - 1);
                 try{
@@ -155,13 +155,12 @@ public class Command {
                     storage.save(tasks);
                     return ui.uiForAdd(tasks, task);
                 } catch (DateTimeParseException e){
-                    System.err.println("Please use yyyy-mm-dd format for time");
-                    return new DukeException("Please use dd-MM-yyyy HHmm format", DukeExceptionType.WRONG_TIME, Commands.EVENT).getMessage();
+                    return new DukeException("Please use dd-MM-yyyy HHmm format", DukeExceptionType.WRONG_TIME, Commands.EVENT).toString();
                 }
             }
             case "find" : {
                 if (inputLine.length < 2) {
-                    return new DukeException("find needs keyword", DukeExceptionType.NO_DESCRIPTION, Commands.FIND).getMessage();
+                    return new DukeException("", DukeExceptionType.NO_DESCRIPTION, Commands.FIND).toString();
                 } else {
                     StringBuilder description = new StringBuilder();
                     for (int i = 1; i < inputLine.length; i++) {
@@ -172,7 +171,7 @@ public class Command {
                 }
             }
             default:
-                return new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(", DukeExceptionType.INVALID_TASK).getMessage();
+                return new DukeException("", DukeExceptionType.INVALID_TASK).toString();
         }
     }
 
