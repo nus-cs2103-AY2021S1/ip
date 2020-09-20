@@ -1,5 +1,7 @@
 # User Guide
 
+![](Ui.png)
+
 ## Features 
 
 ### Add, Delete and Update Tasks
