@@ -1,0 +1,5 @@
+[D][✓] homework (by: Aug 24 2020)
+[D][✓] homework 2 (by: Aug 12 2020)
+[E][✓] vacation (at: Switzerland)
+[D][✓] homework 3 (by: Sep 01 2020)
+[T][✓] group project
