@@ -42,12 +42,11 @@ test {
 }
 
 application {
-    mainClassName = "duke.components.Duke"
+    mainClassName = "duke.GUI.Launcher"
 }
 
 shadowJar {
     archiveBaseName = "duke"
-    archiveClassifier = null
 }
 
 checkstyle {
@@ -80,4 +79,3 @@ dependencies {
 
 apply plugin: 'com.github.johnrengelman.shadow'
 apply plugin: 'java'
-mainClassName = "duke.components.Duke"
