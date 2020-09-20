@@ -19,10 +19,10 @@ public class EventCommand extends Command {
         this.at = at;
     }
 
-    public String execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Storage storage) {
         Event event = new Event(desc, at);
         taskList.addTask(event);
-        return (ui.showAddTask(event) + ui.showNumberOfTasksLeft(taskList));
+        return (Ui.showAddTask(event) + Ui.showNumberOfTasksLeft(taskList));
     }
 
     public boolean isExit() {

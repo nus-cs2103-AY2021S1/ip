@@ -2,7 +2,6 @@ package duke.command;
 
 import duke.task.TaskList;
 import duke.dukeexception.DukeException;
-import duke.Ui;
 import duke.Storage;
 
 /**
@@ -24,14 +23,13 @@ public abstract class Command {
     /**
      * Deals with the logic behind any user command,
      * calling the relevant method(s) from <code>TaskList</code>
-     * and returning the relevant message from <code>Ui</code>.
+     * and returning the relevant message from <code>Ui</code> class.
      *
      * @param taskList  Duke's current list of tasks
-     * @param ui        Duke's initialised <code>Ui</code> object
      * @param storage   Duke's initialised <code>Storage</code> object
-     * @return  a <code>String</code> of character lines and tasks depending on type of <code>Command</code>
+     * @return a <code>String</code> of character lines and tasks depending on type of <code>Command</code>
      * @throws DukeException  if user input is wrong, like task number is not within range of taskList
      */
-    public abstract String execute(TaskList taskList, Ui ui, Storage storage)
+    public abstract String execute(TaskList taskList, Storage storage)
             throws DukeException;
 }

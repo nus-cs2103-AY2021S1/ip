@@ -1,6 +1,5 @@
 package duke.command;
 
-import duke.command.Command;
 import duke.task.TaskList;
 import duke.dukeexception.DukeException;
 import duke.Ui;
@@ -15,10 +14,10 @@ import java.io.IOException;
 public class TerminationCommand extends Command {
     public TerminationCommand() {}
 
-    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Storage storage) throws DukeException {
         try {
             storage.save(taskList);
-            return ui.showGoodbye();
+            return Ui.showGoodbye();
         } catch (IOException e) {
             throw new DukeException("Something went wrong saving the tasks to data file");
         }

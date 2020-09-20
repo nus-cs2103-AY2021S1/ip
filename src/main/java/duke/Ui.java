@@ -11,11 +11,6 @@ import duke.task.Task;
  */
 public class Ui {
     /**
-     * Sole constructor.
-     */
-    protected Ui() {}
-
-    /**
      * All character lines except the ones for specific tasks and exceptions.
      */
     private enum Speech {
@@ -31,7 +26,7 @@ public class Ui {
 
         private final String line;
 
-        private Speech(String line) {
+        Speech(String line) {
             this.line = line;
         }
     }
@@ -52,7 +47,7 @@ public class Ui {
      *
      * @return a String of the goodbye message when user terminates Duke app
      */
-    public String showGoodbye() {
+    public static String showGoodbye() {
         return Speech.BYE.line;
     }
 
@@ -64,7 +59,7 @@ public class Ui {
      * @param t new task added
      * @return  a <code>String</code> combining the "adding tasks" character line and the new task
      */
-    public String showAddTask(Task t) {
+    public static String showAddTask(Task t) {
         return (Speech.ADD.line + "\n" + t);
     }
 
@@ -75,7 +70,7 @@ public class Ui {
      * @param t task to be marked as done
      * @return  a String combining the "completed a task" character line and the done task
      */
-    public String showDoneTask(Task t) {
+    public static String showDoneTask(Task t) {
         return (Speech.DONE.line + t);
     }
 
@@ -86,7 +81,7 @@ public class Ui {
      * @param t task to be deleted
      * @return  a String combining the "deleting a task" character line and the to-be-deleted task
      */
-    public String showDeleteTask(Task t) {
+    public static String showDeleteTask(Task t) {
         return (Speech.DELETE.line + t);
     }
 
@@ -97,7 +92,7 @@ public class Ui {
      * @param t updated task
      * @return  a String combining the "updating a task" character line and the newly updated task
      */
-    public String showUpdateTask(Task t) {
+    public static String showUpdateTask(Task t) {
         return (Speech.UPDATEDTASK.line + t);
     }
 
@@ -107,7 +102,7 @@ public class Ui {
      * @param taskList  Duke's current list of tasks
      * @return          a String describing the number of tasks left in <code>taskList</code>
      */
-    public String showNumberOfTasksLeft(TaskList taskList) {
+    public static String showNumberOfTasksLeft(TaskList taskList) {
         int length = taskList.getSize();
         return ("\n\nYou now have " + length
                 + (length == 1 ? " thing" : " things") + " in your list");
@@ -120,7 +115,7 @@ public class Ui {
      *
      * @return a String of the character line in response to failure initialising Duke
      */
-    public String showLoadingError() {
+    public static String showLoadingError() {
         return Speech.LOADINGERROR.line;
     }
 
@@ -132,7 +127,7 @@ public class Ui {
      * @param taskList  Duke's current list of tasks
      * @return          a String showing all tasks in the <code>taskList</code> and a character line
      */
-    public String showAllTasks(TaskList taskList) {
+    public static String showAllTasks(TaskList taskList) {
         String s = "";
         for (int i = 0; i < taskList.getSize(); i++) {
             s += (i + 1 + ". " + taskList.getTask(i) + "\n");

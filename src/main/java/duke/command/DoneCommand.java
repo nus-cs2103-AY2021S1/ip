@@ -1,6 +1,5 @@
 package duke.command;
 
-import duke.command.Command;
 import duke.task.TaskList;
 import duke.dukeexception.InvalidInputException;
 import duke.Ui;
@@ -16,10 +15,10 @@ public class DoneCommand extends Command {
         this.taskNumber = taskNumber;
     }
 
-    public String execute(TaskList taskList, Ui ui, Storage storage) throws InvalidInputException {
+    public String execute(TaskList taskList, Storage storage) throws InvalidInputException {
         try {
             taskList.markAsDone(taskNumber);
-            return ui.showDoneTask(taskList.getTask(taskNumber));
+            return Ui.showDoneTask(taskList.getTask(taskNumber));
         } catch (Exception e) {
             // index out of range of taskList
             throw new InvalidInputException("Task does not exist");

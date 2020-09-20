@@ -15,11 +15,11 @@ public class DeleteCommand extends Command {
         this.taskNumber = taskNumber;
     }
 
-    public String execute(TaskList taskList, Ui ui, Storage storage) throws InvalidInputException {
+    public String execute(TaskList taskList, Storage storage) throws InvalidInputException {
         try {
-            String s = ui.showDeleteTask(taskList.getTask(taskNumber));
+            String s = Ui.showDeleteTask(taskList.getTask(taskNumber));
             taskList.deleteTask(taskNumber);
-            s += ui.showNumberOfTasksLeft(taskList);
+            s += Ui.showNumberOfTasksLeft(taskList);
             return s;
         } catch (Exception e) {
             // index out of range of taskList

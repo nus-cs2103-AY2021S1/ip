@@ -19,10 +19,10 @@ public class DeadlineCommand extends Command {
         this.by = by;
     }
 
-    public String execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Storage storage) {
         Deadline deadline = new Deadline(desc, by);
         taskList.addTask(deadline);
-        return (ui.showAddTask(deadline) + ui.showNumberOfTasksLeft(taskList));
+        return (Ui.showAddTask(deadline) + Ui.showNumberOfTasksLeft(taskList));
     }
 
     public boolean isExit() {

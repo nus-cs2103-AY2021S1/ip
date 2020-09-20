@@ -10,8 +10,8 @@ import duke.Storage;
 public class ListCommand extends Command {
     public ListCommand() {}
 
-    public String execute(TaskList taskList, Ui ui, Storage storage) {
-        return (ui.showAllTasks(taskList) + ui.showNumberOfTasksLeft(taskList));
+    public String execute(TaskList taskList, Storage storage) {
+        return (Ui.showAllTasks(taskList) + Ui.showNumberOfTasksLeft(taskList));
     }
 
     public boolean isExit() {
