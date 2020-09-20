@@ -30,10 +30,10 @@ public class AddCommand extends Command {
      * @param tasks Current list of tasks.
      */
     @Override
-    public void execute(Ui ui, Storage storage, TaskList tasks) {
+    public String execute(Ui ui, Storage storage, TaskList tasks) {
         tasks.add(this.newTask);
         storage.addTask(this.newTask);
-        ui.taskAdded(newTask, tasks);
+        return ui.taskAdded(newTask, tasks);
     }
 
 }

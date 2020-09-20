@@ -23,8 +23,8 @@ public class ListCommand extends Command {
      * @param tasks Current list of tasks.
      */
     @Override
-    public void execute(Ui ui, Storage storage, TaskList tasks) {
-        ui.listTasks(tasks);
+    public String execute(Ui ui, Storage storage, TaskList tasks) {
+        return ui.listTasks(tasks);
     }
 
 }

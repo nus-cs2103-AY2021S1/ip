@@ -21,16 +21,20 @@ public class Ui {
 
     /**
      * Displays greeting message to user.
+     *
+     * @return Greeting message to user.
      */
-    public void sayGreeting() {
-        System.out.println("Hi there, I'm TARS!\nWhat can I do for you today?");
+    public static String sayGreeting() {
+        String greetingMessage = "Hi there, I'm TARS!\nWhat can I do for you today?";
+        return greetingMessage;
     }
 
     /**
      * Displays farewell message to user.
      */
-    public void sayFarewell() {
-        System.out.println("Bye bye. See you again soon!");
+    public String sayFarewell() {
+        String farewellMessage = "Bye bye. See you again soon!";
+        return farewellMessage;
     }
 
     /**
@@ -46,44 +50,50 @@ public class Ui {
      * Display an error message from a DukeException to user.
      *
      * @param e Exception containing the error message.
+     * @return
      */
-    public void showErrorMsg(DukeException e) {
-        System.out.println(e.getMessage());
+    public String showErrorMsg(DukeException e) {
+        return e.getMessage();
     }
 
     /**
      * Display an error message from a String to user.
      *
      * @param errMessage Exception containing the error message.
+     * @return
      */
-    public void showErrorMsg(String errMessage) {
-        System.out.println(errMessage);
+    public String showErrorMsg(String errMessage) {
+        return errMessage;
     }
 
     /**
      * Display a message to notify user of existing file loaded.
+     * @return
      */
-    public void fileLoaded() {
-        System.out.println("I found your saved tasks. You can view them using list.");
+    public static String fileLoaded() {
+        String fileLoadedMessage = "I found your saved tasks. You can view them using list.";
+        return fileLoadedMessage;
     }
 
     /**
      * Display a message to notify user a new file has been created.
      */
-    public static void newFileCreated() {
-        System.out.println("I have created a new log file to help me remember what you tell me!");
+    public static String newFileCreated() {
+        String fileCreatedMessage = "I have created a new log file to help me remember what you tell me!";
+        return fileCreatedMessage;
     }
 
     /**
      * Displays taskAdded message to user.
-     *
-     * @param newTask New Task to be added to TaskList.
+     *  @param newTask New Task to be added to TaskList.
      * @param taskList Current list of Tasks from user.
+     * @return
      */
-    public void taskAdded(Task newTask, TaskList taskList) {
-        System.out.println("Got it. I've added this task:\n"
+    public String taskAdded(Task newTask, TaskList taskList) {
+        String taskAddedMessage = "Got it. I've added this task:\n"
                 + newTask + "\nNow you have "
-                + taskList.numTask() + " task(s) in the list.");
+                + taskList.numTask() + " task(s) in the list.";
+        return taskAddedMessage;
     }
 
     /**
@@ -92,10 +102,11 @@ public class Ui {
      * @param removeTask Task to be removed from TaskList.
      * @param taskList Current list of Tasks from user.
      */
-    public void taskDeleted(Task removeTask, TaskList taskList) {
-        System.out.println("Poof! I've removed this task:\n"
+    public String taskDeleted(Task removeTask, TaskList taskList) {
+        String taskDeletedMessage = "Poof! I've removed this task:\n"
                 + removeTask + "\nNow you have "
-                + taskList.numTask() + " task(s) in the list.");
+                + taskList.numTask() + " task(s) in the list.";
+        return taskDeletedMessage;
     }
 
     /**
@@ -104,8 +115,9 @@ public class Ui {
      * @param index Index of the Task from TaskList to be marked as done.
      * @param taskList Current list of Tasks from user.
      */
-    public void markAsDone(int index, TaskList taskList) {
-        System.out.println("Nice! I've marked this task as done:\n" + taskList.get(index));
+    public String markAsDone(int index, TaskList taskList) {
+        String markedDoneMessage = "Nice! I've marked this task as done:\n" + taskList.get(index);
+        return markedDoneMessage;
     }
 
     /**
@@ -113,20 +125,22 @@ public class Ui {
      *
      * @param taskList Current list of Tasks from user.
      */
-    public void listTasks(TaskList taskList) {
-        System.out.println("Let's see what we have here:\n");
-        taskList.list();
+    public String listTasks(TaskList taskList) {
+        String listOfTasks = "Let's see what we have here:\n"
+                + taskList.list();
+        return listOfTasks;
     }
 
     /**
-     * Displays a list of Tasks from the TaskList that matched the keywords.
+     * Displays a list of Tasks from the TaskList that matches the keywords.
      *
      * @param foundTasks List of Tasks that match the keywords given by user.
      * @param keyword Keyword to be used in finding.
      */
-    public void FoundItems(TaskList foundTasks, String keyword) {
-        System.out.println("Here are the tasks that matched with \"" + keyword + "\" in your list:");
-        foundTasks.list();
+    public String FoundItems(TaskList foundTasks, String keyword) {
+        String listOfFoundTasks = "Here are the tasks that matched with \""
+                + keyword + "\" in your " + "list:\n" + foundTasks.list();
+        return listOfFoundTasks;
     }
 
 }

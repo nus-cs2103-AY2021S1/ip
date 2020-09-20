@@ -22,14 +22,14 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(Ui ui, Storage storage, TaskList tasks) {
+    public String execute(Ui ui, Storage storage, TaskList tasks) {
         TaskList keywordTasks = new TaskList();
         for (Task task : tasks.getTasks()) {
             if (task.toString().contains(keyword)) {
                 keywordTasks.add(task);
             }
         }
-        ui.FoundItems(keywordTasks, this.keyword);
+        return ui.FoundItems(keywordTasks, this.keyword);
     }
 
 }

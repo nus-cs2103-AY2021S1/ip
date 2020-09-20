@@ -30,11 +30,11 @@ public class DoneCommand extends Command {
      * @param tasks Current list of tasks.
      */
     @Override
-    public void execute(Ui ui, Storage storage, TaskList tasks) {
+    public String execute(Ui ui, Storage storage, TaskList tasks) {
         Task currTask = tasks.get(this.taskIndex - 1);
         currTask.markAsDone();
         storage.saveData(tasks.getTasks());
-        ui.markAsDone(this.taskIndex - 1, tasks);
+        return ui.markAsDone(this.taskIndex - 1, tasks);
     }
 
 }

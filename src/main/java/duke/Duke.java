@@ -33,27 +33,19 @@ public class Duke {
     }
 
     /**
-     * Runs the bot until an command to terminate is issued.
+     * Returns corresponding response according to user input.
+     *
+     * @param input User input.
+     * @return Message response to user input.
      */
-    public void run() {
-        this.ui.sayGreeting();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String nextLine = this.ui.getNextLine();
-                Command c = Parser.parse(nextLine);
-                if (c != null) {
-                    c.execute(this.ui, this.storage, this.tasks);
-                    isExit = c.isExit();
-                }
-            } catch (DukeException e) {
-                ui.showErrorMsg(e);
-            }
+    public String getResponse(String input) {
+        try {
+            String uiMessage = "";
+            Command c = Parser.parse(input);
+            uiMessage = c.execute(ui, storage, tasks);
+            return ui.getNextLine();
+        } catch (DukeException e) {
+            return e.getMessage();
         }
     }
-
-    public static void main(String[] args) {
-        new Duke("duke.txt").run();
-    }
-
 }

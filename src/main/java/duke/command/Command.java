@@ -37,6 +37,6 @@ public abstract class Command {
      * @param tasks Current list of tasks.
      * @throws DukeException when there is a problem with the command execution.
      */
-    public abstract void execute(Ui ui, Storage storage, TaskList tasks) throws DukeException;
+    public abstract String execute(Ui ui, Storage storage, TaskList tasks) throws DukeException;
 
 }

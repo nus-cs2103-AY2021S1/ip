@@ -24,9 +24,9 @@ public class ByeCommand extends Command {
      * @param tasks Current list of tasks.
      */
     @Override
-    public void execute(Ui ui, Storage storage, TaskList tasks) {
+    public String execute(Ui ui, Storage storage, TaskList tasks) {
         storage.saveData(tasks.getTasks());
-        ui.sayFarewell();
+        return ui.sayFarewell();
     }
 
 }
