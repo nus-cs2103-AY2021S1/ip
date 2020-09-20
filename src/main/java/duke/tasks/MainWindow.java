@@ -34,8 +34,9 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    public void setDuke(Duke d) {
+    public void setDuke(Duke d) throws IOException, DukeException {
         duke = d;
+        printHelp();
     }
 
     /**
@@ -57,5 +58,12 @@ public class MainWindow extends AnchorPane {
             );
             userInput.clear();
         }
+    }
+
+    private void printHelp() throws IOException, DukeException {
+        String response = duke.getResponse("help");
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(response, dukeImage)
+        );
     }
 }
