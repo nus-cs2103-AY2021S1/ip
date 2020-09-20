@@ -31,12 +31,15 @@ public class TaskList {
         return this.taskList.size();
     }
 
-    public void list() {
+    public String list() {
+        String listOfItemsInString = "";
         int counter = 1;
         for (Task item : taskList) {
-            System.out.println(counter + ". " + item);
+            String currLine = counter + ". " + item;
+            listOfItemsInString += currLine + "\n";
             counter++;
         }
+        return listOfItemsInString;
     }
 
     public Task removeTask(int index) {

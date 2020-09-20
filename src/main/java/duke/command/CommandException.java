@@ -25,8 +25,8 @@ public class CommandException extends Command {
      * @param tasks Current list of tasks.
      */
     @Override
-    public void execute(Ui ui, Storage storage, TaskList tasks) {
-        ui.showErrorMsg(errMessage);
+    public String execute(Ui ui, Storage storage, TaskList tasks) {
+        return ui.showErrorMsg(errMessage);
     }
 
 }
