@@ -6,6 +6,9 @@
     <a href="https://github.com/keanecjy/ip/actions">
         <img src="https://github.com/keanecjy/ip/workflows/Java%20CI/badge.svg" alt="CI status"/>
     </a>
+    <a href="https://codecov.io/gh/keanecjy/ip">
+        <img src="https://codecov.io/gh/keanecjy/ip/branch/master/graph/badge.svg" />
+    </a>
 </p>
 
 <p align="center"><img src="docs/Ui.png" width="100%"/></p>
