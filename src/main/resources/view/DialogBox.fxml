@@ -5,7 +5,6 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-
 <fx:root alignment="TOP_RIGHT"
          fillHeight="false"
          minHeight="-Infinity"
@@ -13,34 +12,36 @@
          spacing="8.0"
          type="javafx.scene.layout.HBox"
          xmlns="http://javafx.com/javafx/11"
-         xmlns:fx="http://javafx.com/fxml/1">
-    <VBox
-            styleClass="speechBubble"
-            fx:id="container"
-            alignment="TOP_RIGHT"
-            maxHeight="-Infinity"
-    >
-        <Label
-                styleClass="textStyle"
-                fx:id="dialog"
-                minWidth="20"
-                maxWidth="400"
-                maxHeight="Infinity"
-                textFill="#333333"
-                lineSpacing="2"
-                wrapText="true">
-        </Label>
-    </VBox>
-    <ImageView fx:id="displayPicture"
-               fitHeight="200.0"
-               fitWidth="200.0"
-               pickOnBounds="true"
-               preserveRatio="true">
-    </ImageView>
-    <padding>
-        <Insets top="7.5"
-                bottom="7.5"
-                left="10.0"
-                right="10.0"/>
-    </padding>
+         xmlns:fx="http://javafx.com/fxml/1"
+>
+  <VBox
+      styleClass="speechBubble"
+      fx:id="container"
+      alignment="TOP_RIGHT"
+      maxHeight="-Infinity"
+  >
+    <Label
+        styleClass="textStyle"
+        fx:id="dialog"
+        minWidth="20"
+        maxWidth="400"
+        maxHeight="Infinity"
+        textFill="#333333"
+        lineSpacing="2"
+        wrapText="true"
+    />
+  </VBox>
+  <ImageView fx:id="displayPicture"
+             fitHeight="200.0"
+             fitWidth="200.0"
+             pickOnBounds="true"
+             preserveRatio="true">
+  </ImageView>
+  <padding>
+    <Insets top="7.5"
+            bottom="7.5"
+            left="10.0"
+            right="10.0"
+    />
+  </padding>
 </fx:root>

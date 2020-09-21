@@ -11,76 +11,75 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
-
 <AnchorPane
-        maxHeight="Infinity"
-        maxWidth="Infinity"
-        minHeight="680.0"
-        minWidth="830.0"
-        xmlns="http://javafx.com/javafx/11"
-        xmlns:fx="http://javafx.com/fxml/1"
-        fx:controller="duke.ui.MainWindow">
-    <GridPane AnchorPane.bottomAnchor="0"
-              AnchorPane.leftAnchor="0"
-              AnchorPane.rightAnchor="0"
-              AnchorPane.topAnchor="0">
-        <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES"/>
-        </columnConstraints>
-        <rowConstraints>
-            <RowConstraints vgrow="SOMETIMES"/>
-        </rowConstraints>
-        <TextField styleClass="textFieldStyle"
-                   fx:id="userInput"
-                   minHeight="58.0"
-                   promptText="Enter a command..."
-                   onAction="#handleUserInput"
-                   AnchorPane.bottomAnchor="1.0"
-                   GridPane.columnIndex="0"
-                   GridPane.rowIndex="1"/>
-        <Button styleClass="buttonStyle"
-                fx:id="sendButton"
-                mnemonicParsing="false"
-                onAction="#handleUserInput"
-                minHeight="58.0"
-                text=">"
-                textAlignment="CENTER"
-                textFill="#707070"
-                GridPane.columnIndex="1"
-                GridPane.rowIndex="1">
-            <effect>
-                <DropShadow color="#969696"/>
-            </effect>
-        </Button>
-        <ScrollPane fx:id="scrollPane"
-                    fitToWidth="true"
-                    fitToHeight="true"
-                    hbarPolicy="NEVER"
-                    hvalue="1.0"
-                    maxHeight="Infinity"
-                    pannable="true"
-                    vvalue="1.0"
-                    GridPane.columnIndex="0"
-                    GridPane.columnSpan="2"
-                    GridPane.rowIndex="0">
-            <VBox styleClass="screenStyle"
-                  fx:id="dialogContainer"
-                  maxHeight="Infinity"
-                  alignment="TOP_CENTER"
-            >
-                <ImageView fx:id="centrePic"
-                           fitHeight="130.0"
-                           fitWidth="130.0"
-                           pickOnBounds="true"
-                           preserveRatio="true">
-                </ImageView>
-                <Label styleClass="openingMessageStyle"
-                       alignment="CENTER"
-                       fx:id="openingMessage"
-                       wrapText="true"
-                       textFill="#F1F1F1"
-                />
-            </VBox>
-        </ScrollPane>
-    </GridPane>
+    maxHeight="Infinity"
+    maxWidth="Infinity"
+    minHeight="680.0"
+    minWidth="830.0"
+    xmlns="http://javafx.com/javafx/11"
+    xmlns:fx="http://javafx.com/fxml/1"
+    fx:controller="duke.ui.MainWindow">
+  <GridPane AnchorPane.bottomAnchor="0"
+            AnchorPane.leftAnchor="0"
+            AnchorPane.rightAnchor="0"
+            AnchorPane.topAnchor="0">
+    <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES"/>
+    </columnConstraints>
+    <rowConstraints>
+      <RowConstraints vgrow="SOMETIMES"/>
+    </rowConstraints>
+    <TextField styleClass="textFieldStyle"
+               fx:id="userInput"
+               minHeight="58.0"
+               promptText="Enter a command..."
+               onAction="#handleUserInput"
+               AnchorPane.bottomAnchor="1.0"
+               GridPane.columnIndex="0"
+               GridPane.rowIndex="1"/>
+    <Button styleClass="buttonStyle"
+            fx:id="sendButton"
+            mnemonicParsing="false"
+            onAction="#handleUserInput"
+            minHeight="58.0"
+            text=">"
+            textAlignment="CENTER"
+            textFill="#707070"
+            GridPane.columnIndex="1"
+            GridPane.rowIndex="1">
+      <effect>
+        <DropShadow color="#969696"/>
+      </effect>
+    </Button>
+    <ScrollPane fx:id="scrollPane"
+                fitToWidth="true"
+                fitToHeight="true"
+                hbarPolicy="NEVER"
+                hvalue="1.0"
+                maxHeight="Infinity"
+                pannable="true"
+                vvalue="1.0"
+                GridPane.columnIndex="0"
+                GridPane.columnSpan="2"
+                GridPane.rowIndex="0">
+      <VBox styleClass="screenStyle"
+            fx:id="dialogContainer"
+            maxHeight="Infinity"
+            alignment="TOP_CENTER"
+      >
+        <ImageView fx:id="centrePic"
+                   fitHeight="130.0"
+                   fitWidth="130.0"
+                   pickOnBounds="true"
+                   preserveRatio="true">
+        </ImageView>
+        <Label styleClass="openingMessageStyle"
+               alignment="CENTER"
+               fx:id="openingMessage"
+               wrapText="true"
+               textFill="#F1F1F1"
+        />
+      </VBox>
+    </ScrollPane>
+  </GridPane>
 </AnchorPane>
