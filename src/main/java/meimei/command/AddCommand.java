@@ -14,8 +14,6 @@ import meimei.task.Event;
 import meimei.task.Task;
 import meimei.task.Todo;
 
-
-
 /**
  * Command that adds a task to the user's list when executed.
  */
