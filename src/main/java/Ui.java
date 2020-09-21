@@ -103,7 +103,7 @@ public class Ui {
      * @return the result of searching keyword.
      */
     public String findKeyword(ArrayList<Task> results) {
-        String result = "Here are the matching tasks in your list:";
+        String result = "Here are the matching tasks in your list:\n";
         for (int i = 0; i < results.size(); i++) {
             if (results.get(i) != null) {
                 result += (i + 1) + ". " + results.get(i).toString();
