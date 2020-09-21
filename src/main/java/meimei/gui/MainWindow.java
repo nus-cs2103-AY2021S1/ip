@@ -58,8 +58,8 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing the bot's reply and then appends them to
-     * the dialog container. Clears the user input after processing. Exits if bot stops running.
+     * Creates two dialog boxes, one echoing user input and the other containing the bot's reply and then appends them
+     * to the dialog container. Clears the user input after processing. Exits if bot stops running.
      */
     @FXML
     private void handleUserInput() {
