@@ -108,12 +108,21 @@ public class ReminderDisplay extends VBox {
      */
     private Text[] createText(String title, String description) {
         Text text1 = new Text(title);
-        text1.setFill(Color.web(TITLE_COLOR));
-        text1.setFont(Font.font(DISPLAY_FONT, FontWeight.BOLD, DISPLAY_SIZE));
         Text text2 = new Text(description);
-        text2.setFill(Color.web(DESCRIPTION_COLOR));
-        text2.setFont(Font.font(DISPLAY_FONT, FontWeight.BOLD, DISPLAY_SIZE));
+        setTextStyle(text1, TITLE_COLOR);
+        setTextStyle(text2, DESCRIPTION_COLOR);
         return new Text[]{text1, text2};
+    }
+
+    /**
+     * Set the color and style of the text.
+     *
+     * @param text The text to be editted.
+     * @param color Color of the text.
+     */
+    private void setTextStyle(Text text, String color) {
+        text.setFill(Color.web(color));
+        text.setFont(Font.font(DISPLAY_FONT, FontWeight.BOLD, DISPLAY_SIZE));
     }
 
     /**
@@ -134,6 +143,12 @@ public class ReminderDisplay extends VBox {
         isDone.setPrefHeight(TEXT_SPACE__HEIGHT);
         date.setPrefHeight(TEXT_SPACE__HEIGHT);
         time.setPrefHeight(TEXT_SPACE__HEIGHT);
+    }
+
+    /**
+     * Set the translation in the Y-Axis for the display of the reminder.
+     */
+    private void setTranslateY() {
         description.translateYProperty().setValue(TEXT_CENTERING);
         isDone.translateYProperty().setValue(TEXT_CENTERING);
         date.translateYProperty().setValue(TEXT_CENTERING);
@@ -173,6 +188,7 @@ public class ReminderDisplay extends VBox {
         Text[] isDoneText = createText(TEXT_COMPLETED, taskDetails[1].equals("1") ? KEYWORD_TICK : KEYWORD_CROSS);
         setHeight();
         setPadding();
+        setTranslateY();
         date.getChildren().addAll(dateText[0], dateText[1]);
         time.getChildren().addAll(timeText[0], timeText[1]);
         description.getChildren().addAll(descriptionText[0], descriptionText[1]);
