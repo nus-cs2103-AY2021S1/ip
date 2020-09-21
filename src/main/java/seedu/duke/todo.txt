@@ -1,3 +1,7 @@
-[T] [✓] homework
-[D] [✘] assignment  by: 2020-09-28
+[D] [✓] assignment  by: 2020-09-28
+[E] [✓] meeting  at: 2020-09-22
+[T] [✘] read book
+[T] [✘] assignment from: 2020-09-12 by: 2020-09-30
 [E] [✘] meeting  at: 2020-09-22
+[T] [✘] return bood
+[T] [✘] return book
