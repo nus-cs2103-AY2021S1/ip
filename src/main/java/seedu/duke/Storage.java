@@ -23,6 +23,7 @@ public class Storage {
      * @throws IOException If file fails to be created or accessed.
      */
     public Storage (String path) throws IOException {
+        System.out.println(path);
         this.path = path;
         file = new File(path);
         if (!file.exists()) {

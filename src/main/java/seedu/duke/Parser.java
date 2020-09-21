@@ -83,6 +83,9 @@ public class Parser {
         ArrayList<Task> itemList = storage.load();
         String result = "";
 
+        if (userMessage.equals("bye")) {
+            return "Bye! Nice serving you. Hope to see you again soon! :D";
+        }
 
         if (userMessage.startsWith("find")) {
             ArrayList<Task> selectedTasks = new ArrayList<>();
@@ -118,6 +121,16 @@ public class Parser {
             task.markAsDone();
             storage.modifyWithList(itemList);
             result = result + ("Good job! You have finished this task! \n");
+            result = result + task.toString();
+            return result;
+        }
+
+        if (userMessage.contains("undo")) {
+            int index = Character.getNumericValue(userMessage.charAt(5)) - 1;
+            Task task = itemList.get(index);
+            task.undo();
+            storage.modifyWithList(itemList);
+            result = result + ("The following task has been marked as pending! \n");
             result = result + task.toString();
             return result;
         }

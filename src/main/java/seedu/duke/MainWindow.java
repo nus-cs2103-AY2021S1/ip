@@ -33,7 +33,7 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     public void initialize() {
-        BackgroundImage bgImage = new BackgroundImage(this.bgImage, BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT,
+        BackgroundImage bgImage = new BackgroundImage(this.bgImage, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT,
                 BackgroundPosition.DEFAULT,
                 BackgroundSize.DEFAULT);
         dialogContainer.setMaxHeight(Double.POSITIVE_INFINITY);

@@ -44,7 +44,7 @@ public class Duke {
      */
     public Duke() throws IOException, DukeException {
         ui = new Ui();
-        storage = new Storage("/Users/chengjiyuqing/Desktop/Year 2 Sem 1/CS2103T/ip/src/main/java/seedu/duke/todo.txt");
+        storage = new Storage("todo.txt");
         tasks = new TaskList(storage.load());
     }
 
@@ -91,6 +91,7 @@ public class Duke {
      */
     protected String getResponse(String input) throws IOException, DukeException {
         return Parser.parseInput(input,
-                new Storage("/Users/chengjiyuqing/Desktop/Year 2 Sem 1/CS2103T/ip/src/main/java/seedu/duke/todo.txt"));
+                //new Storage("/Users/chengjiyuqing/Desktop/Year 2 Sem 1/CS2103T/ip/src/main/java/seedu/duke/todo.txt"));
+                new Storage("todo.txt"));
     }
 }
