@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+Main-Class: Launcher
+Class-Path: opentest4j-1.2.0.jar apiguardian-api-1.1.0.jar junit-platfor
+ m-commons-1.5.0.jar junit-jupiter-engine-5.5.0.jar junit-platform-engin
+ e-1.5.0.jar junit-jupiter-api-5.5.0.jar
+

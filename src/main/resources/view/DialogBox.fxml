@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Point3D?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.shape.Circle?>
+
+<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0"
+         type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <padding>
+        <Insets bottom="15.0" left="5.0" right="5.0" top="15.0"/>
+    </padding>
+    <Label fx:id="dialog" alignment="CENTER_RIGHT" graphicTextGap="0.0" text="Label" wrapText="true">
+        <font>
+        <Font name="Comic Sans MS" size="13.0"/>
+        </font>
+        <rotationAxis>
+        <Point3D/>
+        </rotationAxis>
+    </Label>
+    <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true">
+    <clip>
+        <Circle centerX="48.0" centerY="48.0" radius="48.0"/>
+    </clip>
+    </ImageView>
+</fx:root>
