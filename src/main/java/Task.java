@@ -15,7 +15,7 @@ public class Task {
      * Creates a new <code>Task</code> with the given <code>command</code>.
      * Initially the task is not done.
      */
-    public Task(String command){
+    public Task(String command) {
         this.command = command;
         this.isDone = false;
     }

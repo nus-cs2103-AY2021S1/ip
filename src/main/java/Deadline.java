@@ -4,7 +4,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * Represents a <code>Deadline</code> object characterized by a <code>command</code> and a <code>time</code>.
  */
-public class Deadline extends Task{
+public class Deadline extends Task {
     /**
      * The time of a deadline.
      */
@@ -32,7 +32,7 @@ public class Deadline extends Task{
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + "(by: " +
-                time.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm")) + ")";
+        return "[D]" + super.toString() + "(by: "
+                + time.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm")) + ")";
     }
 }

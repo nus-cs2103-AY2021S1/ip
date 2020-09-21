@@ -1,13 +1,13 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Scanner;
-import java.util.ArrayList;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * Represents a Storage. The Storage class deals with loading tasks from the file and saving tasks in the file.
@@ -91,7 +91,7 @@ public class Storage {
      */
     public static void writeToFile(ArrayList<Task> tasks) throws IOException {
         FileWriter fileWriter = new FileWriter(filePath + "/Duke.txt");
-        for (int i = 0; i < tasks.size(); i++)  {
+        for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
             if (task instanceof ToDo) {
                 String text = "T | " + (task.getStatus() ? "1" : "0") + " | " + task.getCommand();
@@ -117,8 +117,7 @@ public class Storage {
         try {
             writeToFile(tasks);
         } catch (IOException e) {
-            System.out.println(ui.showIOException(e));
+            System.out.println(ui.showIoException(e));
         }
     }
-
 }

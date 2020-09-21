@@ -52,7 +52,7 @@ public class TaskList {
      */
     public static String done(int n) {
         assert tasks.size() > 0;
-        tasks.get(n-1).setDone();
+        tasks.get(n - 1).setDone();
         return ui.done(n, tasks);
     }
 
@@ -64,7 +64,7 @@ public class TaskList {
         assert tasks.size() > 0;
         String result;
         result = ui.delete(n, tasks);
-        tasks.remove(n-1);
+        tasks.remove(n - 1);
         result += "\n" + ui.count(tasks);
         return result;
     }

@@ -1,5 +1,5 @@
-import java.util.ArrayList;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Represents the user interface. This Ui class outputs messages and interacts with the user.
@@ -59,7 +59,7 @@ public class Ui {
      */
     public static String done(int n, ArrayList<Task> tasks) {
         return "Nice! I've marked this task as done: \n"
-                + tasks.get(n-1).toString();
+                + tasks.get(n - 1).toString();
     }
 
     /**
@@ -70,7 +70,7 @@ public class Ui {
      */
     public static String delete(int n, ArrayList<Task> tasks) {
         return "Noted. I've removed this task:\n"
-                + tasks.get(n-1).toString();
+                + tasks.get(n - 1).toString();
     }
 
     /**
@@ -146,7 +146,7 @@ public class Ui {
      * @param e the io exception caught.
      * @return ioexception error message.
      */
-    public static String showIOException(IOException e) {
+    public static String showIoException(IOException e) {
         return "Oops! " + e.getMessage();
     }
 
@@ -161,12 +161,13 @@ public class Ui {
         int numberOfDeadlines = tasks.getNumDeadline();
         int numberOfTodos = tasks.getNumTodo();
         int numberOfCompletedTasks = tasks.getNumCompleted();
-        String result =  new StringBuilder().
-                append("You have ").append(numberOfTasks).append(" tasks in total, including ").
-                append(numberOfEvents).append(" events, ").
-                append(numberOfDeadlines).append(" deadlines, and ").
-                append(numberOfTodos).append(" todos.\n").
-                append("You have completed ").append(numberOfCompletedTasks).append(" tasks.\n").toString();
+        String result = new StringBuilder()
+                .append("You have ").append(numberOfTasks).append(" tasks in total, including ")
+                .append(numberOfEvents).append(" events, ")
+                .append(numberOfDeadlines).append(" deadlines, and ")
+                .append(numberOfTodos).append(" todos.\n")
+                .append("You have completed ").append(numberOfCompletedTasks).append(" tasks.\n")
+                .toString();
         return result;
     }
 }

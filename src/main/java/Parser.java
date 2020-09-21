@@ -1,6 +1,6 @@
-import java.util.Scanner;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Scanner;
 
 /**
  * Represents a Parser. The Parser class deals with making sense of the user command and running the command.
@@ -51,7 +51,8 @@ public class Parser {
     /**
      * Deals with the user command.
      * @param command the command given by user.
-     * @throws DukeException when the instruction has an invalid task type, or the task type is specified but content is empty.
+     * @throws DukeException when the instruction has an invalid task type,
+     * or the task type is specified but content is empty.
      */
     public static String handleCommand(String command) throws DukeException {
         String result;
