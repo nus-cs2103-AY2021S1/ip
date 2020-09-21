@@ -87,3 +87,22 @@ Here are the matching tasks in your list:
 1. [T] [✘] read book
 2. [D] [✘] return book by: 2020-09-30
 ```
+#### 7. `delete (task number)` - delete a task entry
+Duke will delete the specified task entry
+Example of usage:
+`delete 1`
+Expected outcome:
+```
+I have deleted the following task for you:
+[T] [✘] read book
+You now have 3 tasks in your list!
+```
+#### 8. `done (task number)` - mark a task entry as done
+Duke will mark the task entry as done
+Example of usage:
+`done 1`
+Expected outcome:
+```
+Good job! You have finished this job!
+[T] [✓] assignment from: 2020-09-12 by: 2020-09-30
+```
