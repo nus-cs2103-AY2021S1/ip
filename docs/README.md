@@ -40,16 +40,20 @@ Creates a new task of type "deadline" or "event" in the task list with an attach
 Syntax (Event):
 
         Event <Description of Event> /by <DD/MM/YYYY> <HHMM>
+        
+        Note: If the <HHMM> portion of the command is ommitted, Duke will automatically set the HHMM to 2359
 
 Syntax (Deadline):
 
         Deadline <Description of deadline> /by <DD/MM/YYYY> <HHMM>
+        
+        Note: If the <HHMM> portion of the command is ommitted, Duke will automatically set the HHMM to 2359
 
 Example of usage: 
 
         event abc /at 12/12/2020 2100
 
-        deadline homework /by 1/12/2020 2359
+        deadline homework /by 1/12/2020
 
 Expected outcome:
 
