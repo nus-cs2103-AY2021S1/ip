@@ -2,6 +2,7 @@ package duke.ui;
 
 import java.util.Scanner;
 
+import duke.command.HelpCommand;
 import duke.exception.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
@@ -25,7 +26,8 @@ public class Ui {
      * @return Greeting message to user.
      */
     public static String sayGreeting() {
-        String greetingMessage = "Hi there, I'm TARS!\nWhat can I do for you today?";
+        String greetingMessage = "Hi there, I'm TARS!\nWhat can I do for you today?\nType 'help' or '?' to " +
+                "look at the guides!";
         return greetingMessage;
     }
 
@@ -141,6 +143,48 @@ public class Ui {
         String listOfFoundTasks = "Here are the tasks that matched with \""
                 + keyword + "\" in your " + "list:\n" + foundTasks.list();
         return listOfFoundTasks;
+    }
+
+    /**
+     * Displays help message to guide user.
+     *
+     * @return UI Message for help/
+     */
+    public String helpMessage() {
+        String helpMessage = "Oh look who's here! Read all about the commands you can give here!\n";
+        String userGuideLink = "A detailed overview can be found here: https://github" +
+                ".com/jeffreytjs/ip/tree/master/docs#features\n";
+        String addTaskGuide = "There are 3 types of tasks you can add: ToDos, Deadlines and Events. Let" +
+                " me show you an example for each of them:\n";
+        String addToDoGuide = "To add a ToDo, type in:\n"
+                + " todo <task description>\n"
+                + "Eg. 'todo throw rubbish' : This adds a task to throw rubbish.\n";
+        String addDeadlineGuide = "To add a Deadline, type in your command:\n"
+                + "deadline <task description> /by <date in YYYY-MM-DD format>\n"
+                + "Eg. 'deadline math quiz /by 2020-10-10' : This adds a math quiz that is due on 10th " +
+                "October 2020.\n";
+        String addEventGuide = "To add an Event, type in:\n"
+                + "event <task description> /at <date in YYYY-MM-DD format>\n"
+                + "Eg. 'event meeting /at 2020-11-11' : This adds an event meeting that is on 11th November" +
+                " 2020.\n";
+        String markDoneGuide = "To mark a task as completed, type in:\n"
+                + "done <task number>\n"
+                + "'done 1' : This marks task 1 from current list of tasks as done.\n";
+        String deleteTaskGuide = "To remove any task, type in:\n"
+                + "delete <task number>\n"
+                + "Eg. 'delete 2' : This deletes task 2 from the current list of tasks.\n";
+        String listTaskGuide = "To view the current list of tasks, type in:\n"
+                + "'list' command\n";
+        String findTaskGuide = "To find a task containing a certain keyword, type in:\n"
+                + "'find <keyword>'\n"
+                + "Eg. 'find meeting' : This displays all tasks that have 'meeting' in their description.\n";
+        String exitGuide = "To shut down the bot, type in:\n"
+                + "'bye' command\n";
+
+        String helpMessageToDisplay = helpMessage + userGuideLink + addTaskGuide + addToDoGuide
+                + addDeadlineGuide + addEventGuide + markDoneGuide + deleteTaskGuide + listTaskGuide
+                + findTaskGuide + exitGuide;
+            return helpMessageToDisplay;
     }
 
 }
