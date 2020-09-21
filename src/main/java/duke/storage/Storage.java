@@ -56,7 +56,8 @@ public class Storage {
                 while ((line = br.readLine()) != null) {
                     String[] taskInputs = line.split("\\|");
                     String taskType = taskInputs[0].trim();
-                    assert taskType == "T" || taskType == "D" || taskType == "E" : "taskType is invalid!";
+                    assert taskType.equals("T") || taskType.equals("D") || taskType.equals("E") : "taskType"
+                            + " is invalid!";
                     Task t;
 
                     switch (taskType) {
@@ -85,6 +86,9 @@ public class Storage {
         }
     }
 
+    /**
+     * Check if data directory exists. A new directory is created if no existing directory is found.
+     */
     public void checkDataDirectoryExist() {
         try {
             FileReader readFile = new FileReader(dataDirectory);
@@ -96,6 +100,9 @@ public class Storage {
         }
     }
 
+    /**
+     * Check if data file exists. A new file is created if no existing directory is found.
+     */
     public boolean checkDataFileExist() {
         boolean hasDataFile = true;
         try {
@@ -109,6 +116,11 @@ public class Storage {
         return hasDataFile;
     }
 
+    /**
+     * Save all tasks into data file.
+     *
+     * @param taskList TaskList containing all the Tasks to be saved.
+     */
     public void saveData(ArrayList<Task> taskList) {
         try {
             assert this.dataFile.exists() : "DataFile is missing!";
@@ -133,6 +145,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Save the given tasks into data file.
+     *
+     * @param newTask New Task to be saved.
+     */
     public void addTask(Task newTask) {
         try {
             assert this.dataFile.exists() : "DataFile is missing!";

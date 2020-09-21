@@ -99,9 +99,8 @@ public class Parser {
             String eventDate = formatDate(split[1]);
             return new Event(split[0], eventDate);
         } catch (StringIndexOutOfBoundsException ex) {
-            throw new DukeException(
-                    String.format("Invalid event format! Here's an example: Eg. event meeting /at " +
-                            "2020-12-31 1800"));
+            throw new DukeException("Invalid event format! Here's an example: Eg. event meeting /at "
+                            + "2020-12-31 1800");
         }
     }
 
@@ -115,9 +114,8 @@ public class Parser {
             String deadlineDate = formatDate(split[1]);
             return new Deadline(split[0], deadlineDate);
         } catch (StringIndexOutOfBoundsException ex) {
-            throw new DukeException(
-                    String.format("Invalid deadline format! Here's an example: "
-                            + "Eg. deadline math quiz /by 2020-12-31 1800"));
+            throw new DukeException("Invalid deadline format! Here's an example: "
+                            + "Eg. deadline math quiz /by 2020-12-31 1800");
         }
     }
 

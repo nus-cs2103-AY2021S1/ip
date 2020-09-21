@@ -25,9 +25,10 @@ public class DoneCommand extends Command {
      * Marks the Task with corresponding TaskIndex as done.
      * Displays Task marked as done message to user.
      *
-     * @param ui Ui object to print messages to user.
+     * @param ui Ui object to display messages to user.
      * @param storage Storage object to store items in the TaskList.
-     * @param tasks Current list of tasks.
+     * @param tasks Current list of Tasks.
+     * @return Ui message to Task has been marked as done.
      */
     @Override
     public String execute(Ui ui, Storage storage, TaskList tasks) {

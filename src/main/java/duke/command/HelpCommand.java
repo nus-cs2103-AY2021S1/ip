@@ -18,13 +18,14 @@ public class HelpCommand extends Command {
     /**
      * Displays help messages within the bot and link to User Guide.
      *
-     * @param ui Ui object to print messages to user.
+     * @param ui Ui object to display messages to user.
      * @param storage Storage object to store items in the TaskList.
      * @param tasks Current list of tasks.
-     * @return UI message after executing help command.
+     * @return UI message to display help guide.
      */
     @Override
     public String execute(Ui ui, Storage storage, TaskList tasks) {
         return ui.helpMessage();
     }
+
 }

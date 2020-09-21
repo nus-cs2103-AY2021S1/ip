@@ -20,7 +20,7 @@ public class CommandException extends Command {
     /**
      * Displays error messages (if any) to user.
      *
-     * @param ui Ui object to print messages to user.
+     * @param ui Ui object to display messages to user.
      * @param storage Storage object to store items in the TaskList.
      * @param tasks Current list of tasks.
      */

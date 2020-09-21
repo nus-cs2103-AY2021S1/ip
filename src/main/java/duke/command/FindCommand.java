@@ -21,6 +21,15 @@ public class FindCommand extends Command {
         this.keyword = keyword;
     }
 
+    /**
+     * Find Tasks containing the given keyword.
+     * Displays list of Tasks found to user.
+     *
+     * @param ui Ui object to display messages to user.
+     * @param storage Storage object to store items in the TaskList.
+     * @param tasks Current list of Tasks.
+     * @return Ui message to display the list of Tasks found.
+     */
     @Override
     public String execute(Ui ui, Storage storage, TaskList tasks) {
         TaskList keywordTasks = new TaskList();
@@ -29,7 +38,7 @@ public class FindCommand extends Command {
                 keywordTasks.add(task);
             }
         }
-        return ui.FoundItems(keywordTasks, this.keyword);
+        return ui.foundItems(keywordTasks, this.keyword);
     }
 
 }

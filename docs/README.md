@@ -64,7 +64,7 @@ Example of usage:
 Expected outcome:
 
 `Got it. I've added this task:`  
-`[D][✘] math quiz (by: 2020-10-12 1800)`  
+`[D][✘] math quiz (by: 12 Oct 2020, 6:00 PM)`  
 `Now you have 2 task(s) in your list.`
 
 ### Adding an event - `event`
@@ -78,12 +78,12 @@ Acceptable date and time formats can be found in the appendix.
 
 Example of usage:
 
-`event countdown party /at 2020/12/31`
+`event countdown party /at 2020/12/31 2020`
 
 Expected outcome:
 
 `Got it. I've added this task:`  
-`[E][✘] countdown party (at: 2020/12/31)`  
+`[E][✘] countdown party (at: 31 Dec 2020, 8:20 PM)`  
 `Now you have 3 task(s) in your list.`
 
 ### Deleting an item - `delete`

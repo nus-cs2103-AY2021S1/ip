@@ -31,6 +31,11 @@ public class TaskList {
         return this.taskList.size();
     }
 
+    /**
+     * Concatenate all the Tasks in the current TaskList.
+     *
+     * @return List of all items as a String.
+     */
     public String list() {
         String listOfItemsInString = "";
         int counter = 1;

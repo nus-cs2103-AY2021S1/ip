@@ -9,7 +9,7 @@ import duke.ui.Ui;
  */
 public class ListCommand extends Command {
     /**
-     * Creates ListCommand.
+     * Creates a ListCommand.
      */
     public ListCommand() {
         super();
@@ -18,9 +18,10 @@ public class ListCommand extends Command {
     /**
      * Displays current tasks and their corresponding statuses to user.
      *
-     * @param ui Ui object to print messages to user.
+     * @param ui Ui object to display messages to user.
      * @param storage Storage object to store items in the TaskList.
-     * @param tasks Current list of tasks.
+     * @param tasks Current list of Tasks.
+     * @return Ui message to display the list of Tasks found.
      */
     @Override
     public String execute(Ui ui, Storage storage, TaskList tasks) {

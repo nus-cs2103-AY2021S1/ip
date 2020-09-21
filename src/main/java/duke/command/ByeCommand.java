@@ -9,7 +9,7 @@ import duke.ui.Ui;
  */
 public class ByeCommand extends Command {
     /**
-     * Creates n ByeCommand to initiate termination of bot.
+     * Creates a ByeCommand to initiate termination of bot.
      */
     public ByeCommand() {
         super();
@@ -19,9 +19,10 @@ public class ByeCommand extends Command {
     /**
      * Save Tasks and displays farewell message to user.
      *
-     * @param ui Ui object to print messages to user.
+     * @param ui Ui object to display messages to user.
      * @param storage Storage object to store items in the TaskList.
-     * @param tasks Current list of tasks.
+     * @param tasks Current list of Tasks.
+     * @return Ui message to indicate termination of bot.
      */
     @Override
     public String execute(Ui ui, Storage storage, TaskList tasks) {

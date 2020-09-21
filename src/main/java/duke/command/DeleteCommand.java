@@ -23,11 +23,12 @@ public class DeleteCommand extends Command {
 
     /**
      * Deletes the Task with corresponding TaskIndex.
-     * Displays task deleted message to user.
+     * Displays Task deleted message to user.
      *
-     * @param ui Ui object to print messages to user.
+     * @param ui Ui object to display messages to user.
      * @param storage Storage object to store items in the TaskList.
-     * @param tasks Current list of tasks.
+     * @param tasks Current list of Tasks.
+     * @return Ui message to indicate Task has been deleted.
      */
     @Override
     public String execute(Ui ui, Storage storage, TaskList tasks) {
