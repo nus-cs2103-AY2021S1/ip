@@ -52,7 +52,7 @@ public class Storage {
                             + String.format("%02d", ((Event) task).date.getYear());
                     String time = String.format("%02d", ((Event) task).time.getHour())
                             + String.format("%02d", ((Event) task).time.getMinute());
-                    writeTaskFile.write("event" + " " + task.description + " " + "/by" + " " + day + " " + time
+                    writeTaskFile.write("event" + " " + task.description + " " + "/at" + " " + day + " " + time
                             + " " + task.isDone + System.lineSeparator());
                 } else if (task instanceof Deadline) {
                     String day = String.format("%02d", ((Deadline) task).date.getDayOfMonth()) + "/"
@@ -89,15 +89,22 @@ public class Storage {
 
                     switch (params[0]) {
                     case ("event"):
-                        tasks.add(new Event(params[1], params[3] + " " + params[4],
-                                Boolean.parseBoolean(params[5])));
+                        String[] subTask = task.substring(5).trim().split("/at");
+                        assert subTask.length == 2;
+                        String[] dateTime = subTask[1].split(" ");
+                        tasks.add(new Event(subTask[0].trim(), dateTime[0] + " " + dateTime[1] + " " + dateTime[2],
+                                Boolean.parseBoolean(dateTime[2])));
                         break;
                     case ("deadline"):
-                        tasks.add(new Deadline(params[1], params[3] + " " + params[4],
-                                Boolean.parseBoolean(params[5])));
+                        subTask = task.substring(5).trim().split("/by");
+                        assert subTask.length == 2;
+                        dateTime = subTask[1].split(" ");
+                        tasks.add(new Event(subTask[0].trim(), dateTime[0] + " " + dateTime[1] + " " + dateTime[2],
+                                Boolean.parseBoolean(dateTime[2])));
                         break;
                     case ("todo"):
-                        tasks.add(new ToDo(params[1], Boolean.parseBoolean(params[2])));
+                        tasks.add(new ToDo(task.substring(4, task.length() - 5).trim(),
+                                Boolean.parseBoolean(params[params.length - 1])));
                         break;
                     }
                 }

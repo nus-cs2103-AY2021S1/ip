@@ -14,7 +14,14 @@ public class Event extends Task {
         String[] dateAndTime = at.trim().split(" ");
         String[] date = dateAndTime[0].split("/");
 
-        String time = String.format("%04d", Integer.parseInt(dateAndTime[1]));
+        String time;
+
+        if (dateAndTime.length == 1) {
+            time = "2359";
+        } else {
+            time = String.format("%04d", Integer.parseInt(dateAndTime[1]));
+        }
+
         String day = date[0];
         String month = date[1];
         String year = date[2];

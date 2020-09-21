@@ -30,9 +30,9 @@ public class EventCommand implements Command {
 
         if (commandArgs.length == 1 || commandArgs[1].equals("/at")) {
             throw new MissingDescriptionException();
-        } else if (commandArgs.length == 2 || !commandArgs[2].equals("/at")) {
+        } else if (!COMMAND.contains("/at")) {
             throw new MissingTagException();
-        } else if (commandArgs.length != 5) {
+        } else if (COMMAND.split("/at").length == 1) {
             throw new MissingDateTimeException();
         } else {
             String subCommand = COMMAND;

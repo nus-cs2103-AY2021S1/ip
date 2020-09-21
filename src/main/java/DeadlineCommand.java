@@ -30,9 +30,9 @@ public class DeadlineCommand implements Command {
 
         if (commandArgs.length == 1 || commandArgs[1].equals("/by")) {
             throw new MissingDescriptionException();
-        } else if (commandArgs.length == 2 || !commandArgs[2].equals("/by")) {
+        } else if (!COMMAND.contains("/by")) {
             throw new MissingTagException();
-        } else if (commandArgs.length != 5) {
+        } else if (COMMAND.split("/by").length == 1) {
             throw new MissingDateTimeException();
         } else {
             String subCommand = COMMAND;
@@ -42,6 +42,8 @@ public class DeadlineCommand implements Command {
                 subCommand = subCommand.substring(1).trim();
             }
             String[] subCommandArgs = subCommand.split("/by");
+            System.out.println(subCommandArgs[0]);
+            System.out.println(subCommandArgs[1]);
             Deadline d = new Deadline(subCommandArgs[0], subCommandArgs[1], false);
             taskList.addTask(d);
             storage.write(taskList.TASKS);
