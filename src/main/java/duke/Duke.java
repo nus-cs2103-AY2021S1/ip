@@ -6,6 +6,7 @@ import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
+import javafx.application.Platform;
 
 /**
  * Main class of bot.
@@ -44,9 +45,16 @@ public class Duke {
             Command c = Parser.parse(input);
             assert c != null : "Unable to parse input!";
             uiMessage = c.execute(ui, storage, tasks);
+            exitIfIsExit(c);
             return uiMessage;
         } catch (DukeException e) {
             return e.getMessage();
+        }
+    }
+
+    private void exitIfIsExit(Command c) {
+        if (c.isExit()) {
+            Platform.exit();
         }
     }
 
