@@ -61,7 +61,7 @@ public class Parser {
             result = ui.printList(tasks.getTasks());
         } else if (command.split(" ")[0].equals("done")) {
             int index = Integer.parseInt(command.split(" ")[1]);
-            result = tasks.done(index - 1);
+            result = tasks.done(index);
             storage.record(tasks.getTasks());
         } else if (command.split(" ")[0].equals("delete")) {
             result = tasks.delete(Integer.parseInt(command.split(" ")[1]));

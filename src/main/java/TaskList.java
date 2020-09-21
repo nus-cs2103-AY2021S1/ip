@@ -65,7 +65,7 @@ public class TaskList {
         String result;
         result = ui.delete(n, tasks);
         tasks.remove(n-1);
-        result += ui.count(tasks);
+        result += "\n" + ui.count(tasks);
         return result;
     }
 
