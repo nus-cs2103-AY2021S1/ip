@@ -13,6 +13,7 @@ import duke.command.CommandException;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.FindCommand;
+import duke.command.HelpCommand;
 import duke.command.ListCommand;
 import duke.exception.DukeException;
 import duke.task.Deadline;
@@ -54,6 +55,8 @@ public class Parser {
                 return new AddCommand(parseEvent(description));
             } else if (command.equals("find")) {
                 return new FindCommand(description);
+            } else if (command.equals("help") || command.equals("?")) {
+                return parseHelpCommand();
             } else if (command.isBlank()) {
                 return new CommandException("Try one of the following instead: todo, event, deadline, done or delete");
             } else {
@@ -121,6 +124,10 @@ public class Parser {
             System.out.println(e.getMessage());
         }
         return null;
+    }
+
+    static HelpCommand parseHelpCommand() {
+        return new HelpCommand();
     }
 
     private static String formatDate(String date) throws DukeException {
