@@ -1,10 +1,9 @@
 # User Guide
 
 ## Introduction
-Duke is a chatbot to keep all your ToDos, Events and Deadlines at your fingertips. It comes with a
- Graphical user interface (GUI) and is optimized for Command-line interface (CLI) users.
+Duke is a chatbot to keep all your ToDos, Events and Deadlines at your fingertips. It comes with a Graphical user interface (GUI) and is optimized for Command-line interface (CLI) users.
 
-![Duke screenshot](./Ui.png)
+![Duke screenshot](./Ui.PNG)
 
 ## Quick start
 1. Install Java 11 or later on your computer.
@@ -14,7 +13,7 @@ To start Duke as a command line program instead, run `java -jar duke.jar cli` in
 1. Type a command into the input box and press <kbd>Enter</kbd> to start using Duke!
 
 ## Features 
-* [View guide](#viewing-the-guide---help-or-?)
+* [View guide](#viewing-the-guide---help-or-)
 * [Add ToDo](#adding-a-todo---todo)
 * [Add Deadline](#adding-a-deadline---deadline)
 * [Add Event](#adding-an-event---event)
