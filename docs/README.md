@@ -4,18 +4,7 @@ Welcome to Duke Task Manager 2.0, the tired, sarcastic, done-with-life version
 that encourages you to be your worst self! Enjoy :)
 
 ### Table of Contents
-1. Quick Start
-2. Features & Usage
-    1. Summary of Commands
-    2. Add Todo task
-    3. Add Deadline task
-    4. Add Event task
-    5. List all tasks
-    6. Mark a task as done
-    7. Delete a task
-    8. Find tasks related to a `keyword`
-    9. Update description of a task
-    10. Exit app
+* TOC 
 {:toc}
 
 ## Quick Start
@@ -197,6 +186,7 @@ Expected outcome:
 ```
 Finally... don't come back if you can possibly help it, please.
 ```
+
 ##FAQ
 **Q:** How do I transfer my data to another Computer?
 
