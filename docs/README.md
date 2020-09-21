@@ -1,5 +1,5 @@
 # User Guide
-This is a simple user guide to Duke, a personal chat-bot to manage your todo-list.
+This is a simple user guide to Duke, a personal chat-bot to manage your task-list.
 ## Features 
  There are three types of tasks in Duke: `Todo` `Deadline` and `Event` 
 All tasks have features **command** and **isDone** (indicating whether this task is completed or not).
