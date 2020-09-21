@@ -71,8 +71,8 @@ Example of usage:
 `list`
 
 Expected outcome:
-`1. [T] [✘] read book
-2. todo assignment /from 2020-09-12 /by 2020-09-30
-3. deadline return book /by 2020-09-30
+`1. [T] [✘] read book \n
+2. todo assignment /from 2020-09-12 /by 2020-09-30 \n 
+3. deadline return book /by 2020-09-30 \n 
 4. event meeting /at 2020-09-22`
 
