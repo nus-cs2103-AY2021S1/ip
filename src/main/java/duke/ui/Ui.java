@@ -189,7 +189,7 @@ public class Ui {
         String helpMessageToDisplay = helpMessage + userGuideLink + addTaskGuide + addToDoGuide
                 + addDeadlineGuide + addEventGuide + markDoneGuide + deleteTaskGuide + listTaskGuide
                 + findTaskGuide + exitGuide;
-            return helpMessageToDisplay;
+        return helpMessageToDisplay;
     }
 
 }

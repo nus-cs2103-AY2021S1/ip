@@ -12,7 +12,7 @@ public class DeleteCommand extends Command {
     private int taskIndex;
 
     /**
-     * Creates DeleteCommand with a given TaskIndex.
+     * Creates a DeleteCommand with a given TaskIndex.
      *
      * @param taskIndex Index of Task in the TaskList to be deleted.
      */

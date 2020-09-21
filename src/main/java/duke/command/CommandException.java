@@ -11,7 +11,7 @@ public class CommandException extends Command {
     private String errMessage;
 
     /**
-     * Creates an CommandException to display error messages.
+     * Creates a CommandException to display error messages.
      */
     public CommandException(String errMessage) {
         this.errMessage = errMessage;

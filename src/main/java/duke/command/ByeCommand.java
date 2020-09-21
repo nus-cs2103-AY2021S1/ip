@@ -9,7 +9,7 @@ import duke.ui.Ui;
  */
 public class ByeCommand extends Command {
     /**
-     * Creates an ByeCommand to initiate termination of bot.
+     * Creates n ByeCommand to initiate termination of bot.
      */
     public ByeCommand() {
         super();

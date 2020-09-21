@@ -12,7 +12,7 @@ public class DoneCommand extends Command {
     private int taskIndex;
 
     /**
-     * Creates DoneCommand with a given TaskIndex.
+     * Creates a DoneCommand with a given TaskIndex.
      *
      * @param taskIndex Index of Task in the TaskList to be marked as done.
      */
