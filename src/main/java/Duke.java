@@ -40,7 +40,7 @@ public class Duke {
      */
     public Duke() {
         this.ui = new Ui();
-        this.storage = new Storage("data/Duke.txt");
+        this.storage = new Storage("data");
         try {
             this.tasks = new TaskList(storage.load());
         } catch (FileNotFoundException e) {

@@ -1,3 +1,6 @@
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.File;
@@ -12,7 +15,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class Storage {
     /**
-     * The filePath where tasks are loaded and saved.
+     * The filePath of package.
      */
     private static String filePath;
     /**
@@ -26,6 +29,23 @@ public class Storage {
     public Storage(String filePath) {
         this.filePath = filePath;
         this.ui = new Ui();
+        initiateFile();
+    }
+
+    /**
+     * Initiates the file.
+     **/
+    private void initiateFile() {
+        try {
+            if (Files.notExists(Paths.get(filePath))) {
+                Files.createDirectory(Paths.get(filePath));
+            }
+            if (Files.notExists(Paths.get(filePath + "/Duke.txt"))) {
+                Files.createFile(Paths.get(filePath + "/Duke.txt"));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -34,7 +54,7 @@ public class Storage {
      * @throws FileNotFoundException when the filePath is invalid.
      */
     public static ArrayList<Task> load() throws FileNotFoundException {
-        File file = new File(filePath);
+        File file = new File(filePath + "/Duke.txt");
         Scanner sc = new Scanner(file);
         ArrayList<Task> tasks = new ArrayList<Task>();
         while (sc.hasNextLine()) {
@@ -71,7 +91,7 @@ public class Storage {
      * @throws IOException ioexception.
      */
     public static void writeToFile(ArrayList<Task> tasks) throws IOException {
-        FileWriter fileWriter = new FileWriter(filePath);
+        FileWriter fileWriter = new FileWriter(filePath + "/Duke.txt");
         for (int i = 0; i < tasks.size(); i++)  {
             Task task = tasks.get(i);
             if (task instanceof ToDo) {
