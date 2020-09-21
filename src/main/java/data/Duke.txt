@@ -3,5 +3,4 @@ D | 1 |  meeting  | 2020-08-31 1200
 D | 1 |  hw  | 2000-01-01 0000
 T | 0 |  return book
 D | 0 |  abc  | 2020-02-02 1200
-T | 0 |  return book
 D | 0 |  exam  | 2020-11-30 1200
