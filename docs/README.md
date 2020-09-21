@@ -52,7 +52,7 @@ Example of usage:
 
 Expected outcome:
 
-`[T] [✘] return book by: 2020-09-30`
+`[D] [✘] return book by: 2020-09-30`
 
 #### 4. `event /at...` - enter a task that occurs on a specific date
 Duke will record a todo task that occurs on a specific date. Text after 'event' is the name of the task. Text after '/at' is the date of the event.
@@ -71,8 +71,19 @@ Example of usage:
 `list`
 
 Expected outcome:
-`1. [T] [✘] read book \n
-2. todo assignment /from 2020-09-12 /by 2020-09-30 \n 
-3. deadline return book /by 2020-09-30 \n 
-4. event meeting /at 2020-09-22`
-
+```
+1. [T] [✘] read book
+2. [T] [✘] assignment from: 2020-09-12 by: 2020-09-30
+3. [D] [✘] return book by: 2020-09-30
+4. [E] [✘] meeting  at: 2020-09-22
+```
+#### 6. `find` - search for related entries
+Duke will show related task entries.
+Example of usage:
+`find book`
+Expected outcome:
+```
+Here are the matching tasks in your list:
+1. [T] [✘] read book
+2. [D] [✘] return book by: 2020-09-30
+```
