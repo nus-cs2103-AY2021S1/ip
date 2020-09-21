@@ -1,5 +1,11 @@
+package data;
+
+import command.Command;
+import command.CommandType;
+import exception.InvalidInputException;
+
 /**
- * Parser object processes and makes sense ofuser input to be executed.
+ * data.Parser object processes and makes sense of user input to be executed.
  * Input validation is also done as inputs are parsed to ensure command
  * Strings follow a specific format before they can be executed.
  *
@@ -14,9 +20,9 @@ public class Parser {
      * Returns Command object by processing user input.
      *
      * @param input User inputs as String.
-     * @return Command object
+     * @return Command object.
      * @throws InvalidInputException If inputs are of incorrect format
-     * and cannot be parsed
+     * and cannot be parsed.
      */
     public Command parseCommand(String input) throws InvalidInputException {
         String[] strings = input.split(" ");

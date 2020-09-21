@@ -1,3 +1,5 @@
+package task;
+
 /**
  * Task object contains a name or description of the task to be done and
  * an indicator if it has been completed.

@@ -1,8 +1,12 @@
+package dukemain;
+
+import task.Task;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 
 /**
- * Ui class handles any text or String representations to be viewed by the user.
+ * main.Ui class handles any text or String representations to be viewed by the user.
  *
  * @author Hakiem Rasid
  */
@@ -57,7 +61,7 @@ public class Ui {
 
     /**
      * Prints message upon successful marking of Task as done.
-     * @param task String represetation of Task marked as done.
+     * @param task String representation of Task marked as done.
      */
     public static void markDoneMessage(String task) {
         System.out.println("Nice! I have marked this task as done:\n\t" + task);

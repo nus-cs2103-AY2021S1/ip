@@ -1,8 +1,11 @@
-import org.junit.jupiter.api.Test;
-import src.main.java.*;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
+
+import command.Command;
+import command.CommandType;
+import data.Parser;
+import exception.InvalidInputException;
+import org.junit.jupiter.api.Test;
 
 public class ParserTest {
 
@@ -12,8 +15,13 @@ public class ParserTest {
                 "deadline hw /by 12/10/2020 1330");
         Command eventCommand = new Command(CommandType.EVENT,
                 "event concert /at 12/12/2020 1445");
-        assertEquals(deadlineCommand, new Parser().checkDeadlineAndEventValidity(deadlineCommand));
-        assertEquals(deadlineCommand, new Parser().checkDeadlineAndEventValidity(deadlineCommand));
+        try {
+            assertEquals(deadlineCommand, new Parser().checkDeadlineAndEventValidity(deadlineCommand));
+            assertEquals(deadlineCommand, new Parser().checkDeadlineAndEventValidity(deadlineCommand));
+        } catch (InvalidInputException e) {
+            fail();
+        }
+
     }
 
     @Test
@@ -24,7 +32,7 @@ public class ParserTest {
             assertEquals(deadlineCommand, new Parser().checkDeadlineAndEventValidity(deadlineCommand));
             fail();
         } catch (InvalidInputException e) {
-            assertEquals("Command is missing \"by\" keyword", e.getMessage());
+            assertEquals("Command is missing \"/by\" keyword", e.getMessage());
         }
     }
 
@@ -36,7 +44,7 @@ public class ParserTest {
             assertEquals(eventCommand, new Parser().checkDeadlineAndEventValidity(eventCommand));
             fail();
         } catch (InvalidInputException e) {
-            assertEquals("Command is missing \"at\" keyword", e.getMessage());
+            assertEquals("Command is missing \"/at\" keyword", e.getMessage());
         }
     }
 

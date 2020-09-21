@@ -1,9 +1,13 @@
+package task;
+
+import data.DateManager;
+
 import java.util.Date;
 import java.util.Optional;
 
 /**
  * Deadline object is a subclass of Task object. It contains a deadline String,
- * DateManager to process the deadline and an Optional to store a Date object
+ * data.DateManager to process the deadline and an Optional to store a Date object
  * if deadline is of a valid format.
  *
  * @author Hakiem Rasid

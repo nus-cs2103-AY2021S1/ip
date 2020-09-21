@@ -1,10 +1,18 @@
+package command;
+
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.ToDo;
+import dukemain.Ui;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 
 /**
  * Command object has a CommandType to determine which specific command to execute
  * and a description which contains the user input String. Command objects to be executed
- * are always valid as input validation is done by the Parser object.
+ * are always valid as input validation is done by the data.Parser object.
  * Command object also handles manipulation of list of Task objects.
  *
  * @author Hakiem Rasid
@@ -44,7 +52,7 @@ public class Command {
                 if (Ui.promptConfirm(new Scanner(System.in))) {
                     // Reference to empty ArrayList
                     Ui.clearedListMessage();
-                    return new ArrayList<Task>();
+                    return new ArrayList<>();
                 } else {
                     // do nothing
                     Ui.didNotClearListMessage();
@@ -53,7 +61,7 @@ public class Command {
             case LIST:
                 if (tasks.size() == 0) {
                     // do nothing
-                    return new ArrayList<Task>();
+                    return new ArrayList<>();
                 } else {
                     Ui.printList(tasks, "print");
                     return tasks;
@@ -143,7 +151,7 @@ public class Command {
     /**
      * Returns updated list of Task objects after adding the specified Task.
      *
-     * @param tasks List of Task obects to be manipulated.
+     * @param tasks List of Task objects to be manipulated.
      * @param input Keyword of specified Task type followed by details of the Task.
      * @return Updated List of Task objects.
      */

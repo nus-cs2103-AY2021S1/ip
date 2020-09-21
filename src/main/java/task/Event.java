@@ -1,9 +1,13 @@
+package task;
+
+import data.DateManager;
+
 import java.util.Date;
 import java.util.Optional;
 
 /**
  * Event object is a subclass of Task object. It contains a time as String,
- * DateManager to process the time and an Optional to store a Date object
+ * data.DateManager to process the time and an Optional to store a Date object
  * if time is of a valid format.
  *
  * @author Hakiem Rasid

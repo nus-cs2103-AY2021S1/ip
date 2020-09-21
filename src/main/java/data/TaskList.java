@@ -1,9 +1,17 @@
+package data;
+
+import command.Command;
+import command.CommandType;
+import exception.InvalidInputException;
+import dukemain.Ui;
+import task.Task;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * TaskList object contains a list of Task objects that are added and edited
- * by the user. This object has a Storage object to manage saving and
+ * data.TaskList object contains a list of Task objects that are added and edited
+ * by the user. This object has a data.Storage object to manage saving and
  * loading of data.
  *
  * @author Hakiem Rasid
@@ -14,7 +22,7 @@ public class TaskList {
     private ArrayList<Task> list;
 
     /**
-     * Constructor for TaskList object.
+     * Constructor for data.TaskList object.
      * @param filePath Destination file for saving and loading of data.
      */
     public TaskList(String filePath) {

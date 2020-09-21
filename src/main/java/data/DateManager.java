@@ -1,10 +1,12 @@
+package data;
+
 import java.util.Date;
 import java.util.Optional;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
 
 /**
- * DateManager object parses valid String inputs from Deadline and Event
+ * data.DateManager object parses valid String inputs from Deadline and Event
  * objects to be stored as Date objects.
  *
  * @author Hakiem Rasid

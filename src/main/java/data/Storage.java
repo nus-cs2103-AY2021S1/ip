@@ -1,3 +1,10 @@
+package data;
+
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.ToDo;
+
 import java.util.ArrayList;
 import java.io.File;
 import java.io.FileWriter;
@@ -7,7 +14,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 /**
- * Storage object handles saving and loading of data for list of Task objects.
+ * data.Storage object handles saving and loading of data for list of Task objects.
  * Task objects are stored as String representations in specified .txt file.
  *
  * @author Hakiem Rasid
@@ -17,7 +24,7 @@ public class Storage {
     private String filePath;
 
     /**
-     * Constructor of Storage object.
+     * Constructor of data.Storage object.
      *
      * @param filePath Target .txt file for saving and loading of data.
      */
@@ -37,6 +44,7 @@ public class Storage {
             File file = new File(this.filePath);
 
             // if file doesn't exists, then create it
+            file.exists();
             if (!file.exists()) {
                 file.createNewFile();
             }
