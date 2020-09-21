@@ -40,7 +40,7 @@ public class Duke {
      */
     public Duke() {
         this.ui = new Ui();
-        this.storage = new Storage("C:\\Users\\e0316059\\Desktop\\Duke\\src\\main\\java\\data\\Duke.txt");
+        this.storage = new Storage("data/Duke.txt");
         try {
             this.tasks = new TaskList(storage.load());
         } catch (FileNotFoundException e) {

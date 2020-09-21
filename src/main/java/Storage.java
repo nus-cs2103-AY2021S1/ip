@@ -68,7 +68,7 @@ public class Storage {
 
     /**
      * Saves tasks to the file.
-     * @throws IOException.
+     * @throws IOException ioexception.
      */
     public static void writeToFile(ArrayList<Task> tasks) throws IOException {
         FileWriter fileWriter = new FileWriter(filePath);
@@ -98,7 +98,7 @@ public class Storage {
         try {
             writeToFile(tasks);
         } catch (IOException e) {
-            ui.showIOException(e);
+            System.out.println(ui.showIOException(e));
         }
     }
 
