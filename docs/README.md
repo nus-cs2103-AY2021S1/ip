@@ -259,15 +259,11 @@ Duke Task Tracker automatically saves data in the local storage every time a cha
 
 |          Action          |                          Format                          |
 | :----------------------: | :------------------------------------------------------: |
-|           Help           |                         `--help`                         |
-|      Add Basic Task      |                `todo <task description>`                 |
-|  Add Task with Deadline  | `deadline <task description> /by <deadline description>` |
-| Add Task with Event Date | `event <task description> /at <event date description>`  |
+|      Add Basic Task      |                `todo \<priority> <task description>`                 |
+|  Add Task with Deadline  | `deadline \<priority> <task description> /by <deadline description>` |
+| Add Task with Event Date | `event \<priority> \<task description> /at \<event date description>`  |
 |           List           |                          `list`                          |
-|           Done           |                   `done <task number>`                   |
-|          Delete          |                  `delete <task number>`                  |
-|          Remind          |                  `remind <task number>`                  |
-|          Search          |           `search <keyword1 keyword2 etc...>`            |
-|        getEvents         |                    `getEvents <date>`                    |
-|       getReminders       |                      `getReminders`                      |
+|           Done           |                   `done \<task number>`                   |
+|          Delete          |                  `delete \<task number>`                  |
+|          Find          |           `find \<keyword>`            |
 |           Exit           |                          `bye`                           |
