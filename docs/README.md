@@ -24,7 +24,7 @@ User can look for a specific task by entering keywords. All related tasks will b
 
 ### All dates must be given in the form of 'YYYY-MM-DD'
 
-### `todo` - enter a todo without date
+#### 1. `todo` - enter a todo without date
 Duke will record a todo task without any dates. Text after 'todo' is the name of the task.
 Example of usage: 
 
@@ -34,7 +34,7 @@ Expected outcome:
 
 `[T] [✘] read book`
 
-### `todo /from ... /by ...` - enter a task that must be completed within certain period
+#### 2. `todo /from ... /by ...` - enter a task that must be completed within certain period
 Duke will record a todo task that must be completed within certain period. Text after 'todo' is the name of the task. Text after '/from' is the starting date and text after '/by' is the finishing date.
 Example of usage: 
 
@@ -44,7 +44,7 @@ Expected outcome:
 
 `[T] [✘] assignment from: 2020-09-12 by: 2020-09-30`
 
-### `deadline by ...` - enter a task that must be completed before a given date
+#### 3. `deadline by ...` - enter a task that must be completed before a given date
 Duke will record a todo task that must be completed before a given date. Text after 'deadline' is the name of the task. Text after '/by' is the deadline.
 Example of usage: 
 
@@ -54,7 +54,7 @@ Expected outcome:
 
 `[T] [✘] return book by: 2020-09-30`
 
-### `event /at...` - enter a task that occurs on a specific date
+#### 4. `event /at...` - enter a task that occurs on a specific date
 Duke will record a todo task that occurs on a specific date. Text after 'event' is the name of the task. Text after '/at' is the date of the event.
 Example of usage: 
 
@@ -64,12 +64,15 @@ Expected outcome:
 
 `[E] [✘] meeting  at: 2020-09-22`
 
-### `list` - shows all past task entries
+#### 5. `list` - shows all past task entries
 Duke will list out all the tasks that it recorded. Both finished and unfinished tasks will be shown. Tasks will be ordered by its creation time (i.e. tasks created earlier will be shown at the front). And all tasks will be given a number for users to refer to.
 Example of usage: 
 
 `list`
 
 Expected outcome:
-Screenshot 2020-09-21 at 18.00.52
+`1. [T] [✘] read book
+2. todo assignment /from 2020-09-12 /by 2020-09-30
+3. deadline return book /by 2020-09-30
+4. event meeting /at 2020-09-22`
 
