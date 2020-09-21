@@ -38,13 +38,3 @@ Task list is automatially saved on any change.
 ### `find <keyword>` - Shows tasks with the given keyword
 
 ### `bye` - Exits and saves the tasks
-
-Describe action and its outcome.
-
-Example of usage: 
-
-`keyword (optional arguments)`
-
-Expected outcome:
-
-`outcome`
