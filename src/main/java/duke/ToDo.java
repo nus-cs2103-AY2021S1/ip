@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * Represents a <code>ToDo</code> object characterized by a <code>command</code>.
  */

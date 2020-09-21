@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * Represents the task statistics.
  */
