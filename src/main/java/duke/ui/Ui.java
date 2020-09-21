@@ -14,7 +14,8 @@ public class Ui {
     private static final String GREETING_PART_TWO = "Is there anything I could help with?\n";
     private static final String EMPTY_SPACE_BEFORE_TASK = "     ";
     private static final String EXIT_MESSAGE = "Bye! I look forward to meeting you next time!\n";
-
+    private static final String EMPTY_LIST_MESSAGE = "There is no task in the list yet!\n";
+    private static final String SIZE_ONE_LIST_MESSAGE = "Now there is 1 task in total in your list.\n";
     private TaskList taskList;
 
     /**
@@ -66,7 +67,7 @@ public class Ui {
         ArrayList<Task> listOfTasks = taskList.getListOfTasks();
         int noOfTasks = listOfTasks.size();
         if (noOfTasks == 0) {
-            stringBuilder.append("There is no task in the list yet!\n");
+            stringBuilder.append(EMPTY_LIST_MESSAGE);
         } else {
             stringBuilder.append("Here are the tasks in the list:\n");
             for (int i = 0; i < noOfTasks; i++) {
@@ -113,7 +114,7 @@ public class Ui {
         stringBuilder.append("Okay. The task below is deleted from your list:\n"
                 + EMPTY_SPACE_BEFORE_TASK + task.toString() + "\n");
         if (noOfTasks == 1) {
-            stringBuilder.append("Now there is 1 task in total in your list.\n");
+            stringBuilder.append(SIZE_ONE_LIST_MESSAGE);
         } else {
             stringBuilder.append("Now there are " + listOfTasks.size() + " tasks "
                     + "in total in your list.\n");

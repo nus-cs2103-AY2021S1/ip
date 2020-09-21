@@ -1,5 +1,4 @@
 deadline|✘|1|Oct 10 2020
-todo|✘|play the violin
 event|✘|research workshop|2020-10-12
 event|✘|research workshop2|2020-09-10
 todo|✘|5
@@ -7,3 +6,5 @@ todo|✘|12
 todo|✘|12 12 12 12
 deadline|✘|22|Dec 12 2020
 event|✓|1|2020-10-10
+todo|✘|1
+todo|✘|2
