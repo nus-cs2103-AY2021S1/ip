@@ -90,15 +90,35 @@ public class Parser {
     }
 
     static Event parseEvent(String description) throws DukeException {
-        String[] split = description.split(" /at ");
-        String eventDate = formatDate(split[1]);
-        return new Event(split[0], eventDate);
+        try {
+            String[] split = description.split(" /at ");
+            if (split.length == 1) {
+                throw new DukeException("Invalid event format! Here's an example: "
+                        + "Eg. event meeting /at 2020-12-31 1800");
+            }
+            String eventDate = formatDate(split[1]);
+            return new Event(split[0], eventDate);
+        } catch (StringIndexOutOfBoundsException ex) {
+            throw new DukeException(
+                    String.format("Invalid event format! Here's an example: Eg. event meeting /at " +
+                            "2020-12-31 1800"));
+        }
     }
 
     static Deadline parseDeadline(String description) throws DukeException {
-        String[] split = description.split(" /by ");
-        String eventDate = formatDate(split[1]);
-        return new Deadline(split[0], eventDate);
+        try {
+            String[] split = description.split(" /by ");
+            if (split.length == 1) {
+                throw new DukeException("Invalid deadline format! Here's an example: "
+                        + "Eg. deadline math quiz /by 2020-12-31 1800");
+            }
+            String deadlineDate = formatDate(split[1]);
+            return new Deadline(split[0], deadlineDate);
+        } catch (StringIndexOutOfBoundsException ex) {
+            throw new DukeException(
+                    String.format("Invalid deadline format! Here's an example: "
+                            + "Eg. deadline math quiz /by 2020-12-31 1800"));
+        }
     }
 
     private static int parseTaskIndex(String args, String example)
