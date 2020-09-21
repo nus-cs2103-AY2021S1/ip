@@ -58,41 +58,39 @@ public class Duke {
      * @throws IOException If fails to take user input or create/access data management file
      */
 
-    public void run() throws DukeException, IOException {
+    public String welcomeMessage() {
         //welcoming message
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("Hello! Duke at your service. Please name your request."
+        String logo = " ____           _        \n"
+                + "|   __  \\_    _|  |  ___ \n"
+                + "|  |   |   |  |  |  |  |/ / _ \\\n"
+                + "|  |__|   |  |_|  |    <  __/\n"
+                + "|_____/\\___/|_|\\_\\__|\n";
+        logo = logo + ("Hello! Duke at your service. Please name your request."
                 + "\nAll dates should be in the form of YYYY-MM-DD: ");
-
+        return logo;
         // Take user Input
-        ui.takeUserInput(storage);
+        //ui.takeUserInput(storage);
 
     }
 
 
-    /**
+    /*
      * Creates a new Duke object and runs the program
      * @param args
      * @throws DukeException
      * @throws IOException
      */
 
-    public static void main(String[] args) throws DukeException, IOException {
-        new Duke("/Users/chengjiyuqing/Desktop/Year 2 Sem 1/CS2103T/ip/src/main/java/seedu/duke/todo.txt").run();
+    //public static void main(String[] args) throws DukeException, IOException {
+    //    new Duke("/Users/chengjiyuqing/Desktop/Year 2 Sem 1/CS2103T/ip/src/main/java/seedu/duke/todo.txt").run();
 
-    }
+    //}
     /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
     protected String getResponse(String input) throws IOException, DukeException {
-        return "Duke heard: "
-                + Parser.parseInput(input,
+        return Parser.parseInput(input,
                 new Storage("/Users/chengjiyuqing/Desktop/Year 2 Sem 1/CS2103T/ip/src/main/java/seedu/duke/todo.txt"));
     }
 }
