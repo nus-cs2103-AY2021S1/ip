@@ -1,5 +1,3 @@
-package duke;
-
 import java.util.ArrayList;
 import java.io.IOException;
 
@@ -108,7 +106,7 @@ public class Ui {
         String result = "Here are the matching tasks in your list:\n";
         for (int i = 0; i < results.size(); i++) {
             if (results.get(i) != null) {
-                result += (i + 1) + ". " + results.get(i).toString();
+                result += (i + 1) + ". " + results.get(i).toString() + "\n";
             }
         }
         return result;

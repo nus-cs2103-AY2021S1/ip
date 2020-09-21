@@ -1,5 +1,3 @@
-package duke;
-
 /**
  * Represents a <code>Task</code> object.
  */
