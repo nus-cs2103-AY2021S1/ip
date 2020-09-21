@@ -31,7 +31,7 @@ public class Main extends Application {
     }
 
     @Override
-    public void stop(){
+    public void stop() {
         duke.getTaskList().saveIntoHardDisk();
     }
 

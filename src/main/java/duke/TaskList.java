@@ -1,6 +1,7 @@
 package duke;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
 
 import duke.task.Task;
 import duke.ui.Ui;
@@ -9,9 +10,9 @@ import duke.ui.Ui;
  * Handles actions by user with regards to all their tasks.
  */
 public class TaskList {
+    private static HashMap<Integer, Task> matchingTasks;
     private Storage savedStorage;
     private List<Task> allTasks;
-    private static HashMap<Integer, Task> matchingTasks;
 
     /**
      * Creates an empty TaskList.
@@ -116,12 +117,12 @@ public class TaskList {
         for (int i = 0; i < this.allTasks.size(); i++) {
             Task task = this.allTasks.get(i);
             if (task.canMatch(toMatch)) {
-                TaskList.matchingTasks.put(i , task);
+                TaskList.matchingTasks.put(i, task);
             }
         }
     }
 
-    private String printMatchingTasks( String toMatch) {
+    private String printMatchingTasks(String toMatch) {
         String printMatchingTasks;
         if (TaskList.matchingTasks.size() == 0) {
             printMatchingTasks = "There are no tasks that match " + toMatch + "\n";
@@ -134,19 +135,19 @@ public class TaskList {
         return Ui.printMessage(printMatchingTasks);
     }
 
-    private String matchTasksWithOffset( String toMatch, int offset) {
-       try {
-           int offsetLimit = 5;
-           int substringEndIndex = toMatch.length() - offset;
-           String toMatchOffset = toMatch.substring(0, substringEndIndex);
-           if (offset == offsetLimit) {
-               return this.printMatchingTasks( toMatch);
-           } else {
-               checkAllTasksForMatch(toMatchOffset);
-               return matchTasksWithOffset( toMatch, offset+1);
-           }
-       } catch (StringIndexOutOfBoundsException e) {
-           return this.printMatchingTasks(toMatch);
-       }
+    private String matchTasksWithOffset(String toMatch, int offset) {
+        try {
+            int offsetLimit = 5;
+            int substringEndIndex = toMatch.length() - offset;
+            String toMatchOffset = toMatch.substring(0, substringEndIndex);
+            if (offset == offsetLimit) {
+                return this.printMatchingTasks(toMatch);
+            } else {
+                checkAllTasksForMatch(toMatchOffset);
+                return matchTasksWithOffset(toMatch, offset + 1);
+            }
+        } catch (StringIndexOutOfBoundsException e) {
+            return this.printMatchingTasks(toMatch);
+        }
     }
 }
