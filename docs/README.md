@@ -114,6 +114,3 @@ By typing the `bye` command, a user can exit from the duke program.
 
 Example of usage: 
 `bye`
-
-## Acknowledgements
-Credit to Jeffry Lum for the fxml and java files for [JAVAFX GUI](https://github.com/nus-cs2103-AY1920S2/duke/blob/master/tutorials/javaFxTutorialPart4.md).
