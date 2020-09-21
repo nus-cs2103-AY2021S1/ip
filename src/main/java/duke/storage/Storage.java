@@ -15,7 +15,6 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.ToDo;
-import duke.ui.Ui;
 
 /**
  * Class to load existing TaskList from existing file, creates a new TaskList if file is not found.
@@ -45,6 +44,8 @@ public class Storage {
      *
      * @param taskList New TaskList
      */
+    //Solution below is adapted from https://github.com/LeeMingDe/ip/blob/master/src/main/java/duke/Storage
+    // .java
     public void loadData(TaskList taskList) throws DukeException {
         this.checkDataDirectoryExist();
         boolean hasDataFile = this.checkDataFileExist();
@@ -108,7 +109,6 @@ public class Storage {
         try {
             if (this.dataFile.createNewFile()) {
                 hasDataFile = false;
-                Ui.newFileCreated();
             }
         } catch (IOException e) {
             hasDataFile = false;

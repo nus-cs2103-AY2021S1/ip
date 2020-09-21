@@ -5,6 +5,7 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+//Solutions for Javadocs adapted from https://github.com/tohyuting/ip
 /**
  * Wrapper Class to handle logic for all other Command types.
  */
