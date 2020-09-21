@@ -15,7 +15,7 @@ class StorageTest {
     @Test
     public void testReadFileContents() throws FileNotFoundException {
         TaskList actualList = new TaskList();
-        File f = new File("test/testData/test.txt");
+        File f = new File("src/test/resources/test.txt");
         Storage.readFromFile(f, actualList);
 
         ArrayList<Task> expectedList = new ArrayList<>();
