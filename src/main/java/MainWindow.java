@@ -1,13 +1,14 @@
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.TextFlow;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 
 /**@@author SE-EDU student project guide, a sub-project of the se-education.org.
  * Point of contact: Damith C. Rajapakse https://www.comp.nus.edu.sg/~damithch/
@@ -28,9 +29,9 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
-    private Image mascotImage = new Image(this.getClass().getResourceAsStream("/images/DaMascot.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/LiYu.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/PowerConvert.png"));
+    private Image mascotImage = new Image(this.getClass().getResourceAsStream("/images/LangYa.png"));
 
     /**@@author SE-EDU student project guide, a sub-project of the se-education.org.
      * Point of contact: Damith C. Rajapakse https://www.comp.nus.edu.sg/~damithch/
@@ -39,9 +40,16 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     public void initialize() {
+        //Scroll pane
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+
+        //Welcome text
         String welcomeMessage = Ui.welcomeGreetings();
         Text text = new Text(welcomeMessage);
+        Background dialogBackground = new Background(
+                new BackgroundFill(Color.rgb(3, 252, 248, 0.2),
+                        new CornerRadii(5.0), new Insets(-3.0)));
+        txtF.setBackground(dialogBackground);
         txtF.getChildren().add(text);
     }
 

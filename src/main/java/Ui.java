@@ -8,12 +8,10 @@ public class Ui {
      * Displays the welcome greetings when user runs Duke program.
      */
     public static String welcomeGreetings() {
-        return "    _______________________________________________________________________\n"
-                + "     ***Welcome to Project DUKE***\n"
-                + "     CS2103T Individual Project\n"
-                + "\n     Hello! I'm Duke"
-                + "\n     What can I do for you?"
-                + "\n    _______________________________________________________________________\n";
+        return "***Welcome to Project DUKE***  \n"
+                + "CS2103T Individual Project  \n"
+                + "\nHello! I'm Duke  "
+                + "\nWhat can I do for you?  ";
     }
 
     /**
@@ -36,7 +34,7 @@ public class Ui {
      */
     public static String getCommandList() {
         return "***Duke Commands: "
-                + "\n    bye, list, find, done, delete, todo, event, deadline\n"
-                + "\nDon't be afraid to key in wrong commands! I will prompt you :)";
+                + "\nbye, list, find, done, delete, todo, event, deadline"
+                + "\n***Don't be afraid to key in wrong commands! I will prompt you :)";
     }
 }

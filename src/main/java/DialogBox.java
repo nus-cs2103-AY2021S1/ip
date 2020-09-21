@@ -2,12 +2,18 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -45,8 +51,17 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
+        //Set text
         dialog.setText(text);
+        Background dialogBackground = new Background(
+                new BackgroundFill(Color.rgb(184, 224, 255, 1),
+                        new CornerRadii(5.0), new Insets(-3.0)));
+        dialog.setBackground(dialogBackground);
+
+        //Set image
         displayPicture.setImage(img);
+        Circle circleClip = new Circle(50.0, 50.0, 50.0);
+        displayPicture.setClip(circleClip);
     }
 
     /**@@author SE-EDU student project guide, a sub-project of the se-education.org.

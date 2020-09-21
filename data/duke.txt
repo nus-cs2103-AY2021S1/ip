@@ -1,4 +1,3 @@
-[T][1] Watch anime
-[E][0] CS2100 Assignment 1 (at: Sep 16 2020)
-[D][0] CS2103T Week 6 ip (by: Sep 17 2020)
-[T][1] Get parcel from ninjavan
+[T][0] watch anime
+[E][1] birthday party (at: Jun 17 2020)
+[D][0] assignment 1 (by: Sep 20 2020)
