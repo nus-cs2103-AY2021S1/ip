@@ -67,20 +67,10 @@ public class Duke extends Application {
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
 
-        userInput = new TextField();
-        userInput.setId("UserInput");
-        userInput.getStylesheets().add("/css/styles.css");
-        userInput.setPromptText("Enter your command here");
+        TextField userInput = createTextField();
 
+        Button sendButton = createButton();
 
-        sendButton = new Button();
-        ImageView icon = new ImageView(this.icon);
-        icon.setFitHeight(24);
-        icon.setFitWidth(30);
-        sendButton.setGraphic(icon);
-        sendButton.setId("Button");
-        sendButton.getStylesheets().add("/css/styles.css");
-        
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
@@ -88,52 +78,96 @@ public class Duke extends Application {
         stage.setScene(scene);
         stage.show();
 
+        setStage(stage);
+
+        setMainLayout(mainLayout);
+
+        setScrollPane();
+
+        // You will need to import `javafx.scene.layout.Region` for this.
+        setDialogContainer();
+
+        setTextField(userInput, stage);
+
+        setButton(sendButton, stage);
+
+        setAnchorPane(userInput, sendButton);
+
+    }
+
+    private void setAnchorPane(TextField userInput, Button sendButton) {
+        AnchorPane.setTopAnchor(scrollPane, 1.0);
+        AnchorPane.setBottomAnchor(sendButton, 1.0);
+        AnchorPane.setRightAnchor(sendButton, 1.0);
+        AnchorPane.setLeftAnchor(userInput, 1.0);
+        AnchorPane.setBottomAnchor(userInput, 1.0);
+    }
+
+    private void setButton(Button sendButton, Stage stage) {
+        sendButton.setPrefWidth(82.0);
+        sendButton.setPrefHeight(36);
+
+        sendButton.setOnMouseClicked((event) -> {
+            handleUserInput(stage);
+        });
+    }
+
+    private void setTextField(TextField userInput, Stage stage) {
+        userInput.setPrefWidth(600.0);
+        userInput.setPrefHeight(37);
+
+        userInput.setOnAction((event) -> {
+            handleUserInput(stage);
+        });
+    }
+
+    private void setDialogContainer() {
+        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(new Label(initialize()),
+                        new ImageView(duke))
+        );
+        //Scroll down to the end every time dialogContainer's height changes.
+        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+    }
+
+    private void setScrollPane() {
+        scrollPane.setPrefSize(685, 620);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+        scrollPane.setVvalue(1.0);
+        scrollPane.setFitToWidth(true);
+    }
+
+    private void setMainLayout(AnchorPane mainLayout) {
+        mainLayout.setPrefSize(800.0, 700.0);
+    }
+
+    private void setStage(Stage stage) {
         stage.setTitle("Duke");
         stage.getIcons().add(this.duke);
         stage.setResizable(false);
         stage.setMinHeight(700.0);
         stage.setMinWidth(700.0);
+    }
 
-        mainLayout.setPrefSize(800.0, 700.0);
+    private TextField createTextField() {
+        userInput = new TextField();
+        userInput.setId("UserInput");
+        userInput.getStylesheets().add("/css/styles.css");
+        userInput.setPromptText("Enter your command here");
+        return userInput;
+    }
 
-        scrollPane.setPrefSize(685, 620);
-        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-
-        scrollPane.setVvalue(1.0);
-        scrollPane.setFitToWidth(true);
-
-        // You will need to import `javafx.scene.layout.Region` for this.
-        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
-
-        userInput.setPrefWidth(600.0);
-        userInput.setPrefHeight(37);
-        sendButton.setPrefWidth(82.0);
-        sendButton.setPrefHeight(36);
-
-        AnchorPane.setTopAnchor(scrollPane, 1.0);
-
-        AnchorPane.setBottomAnchor(sendButton, 1.0);
-        AnchorPane.setRightAnchor(sendButton, 1.0);
-
-        AnchorPane.setLeftAnchor(userInput , 1.0);
-        AnchorPane.setBottomAnchor(userInput, 1.0);
-
-        dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(new Label(initialize()),
-                        new ImageView(duke))
-        );
-
-        sendButton.setOnMouseClicked((event) -> {
-            handleUserInput(stage);
-        });
-
-        userInput.setOnAction((event) -> {
-            handleUserInput(stage);
-        });
-
-        //Scroll down to the end every time dialogContainer's height changes.
-        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+    private Button createButton() {
+        sendButton = new Button();
+        ImageView icon = new ImageView(this.icon);
+        icon.setFitHeight(24);
+        icon.setFitWidth(30);
+        sendButton.setGraphic(icon);
+        sendButton.setId("Button");
+        sendButton.getStylesheets().add("/css/styles.css");
+        return sendButton;
     }
 
     private String initialize() {

@@ -26,10 +26,10 @@ public class FindCommand extends Command {
         BinaryOperator<String> accumulator = (x, y) -> (x + "\n" + y);
 
         String output = list.getList().stream()
-                .filter(checkDate)
-                .map(taskString)
-                .reduce(accumulator)
-                .orElse("empty");
+                                      .filter(checkDate)
+                                      .map(taskString)
+                                      .reduce(accumulator)
+                                      .orElse("empty");
 
         return output.equals("empty") ? ui.showNothingFound() : ui.showFind() + "\n" + output;
     }
