@@ -20,7 +20,7 @@ class TimeFormatterTest {
     public void convertToPrettyDate() {
         LocalDate localDate = LocalDate.parse("2019-10-10");
         String testString = TimeFormatter.prettyDate(localDate);
-        String expectedOutput = "THURSDAY,OCT 10 2019";
+        String expectedOutput = "OCT 10 2019";
         assertTrue(testString.equals(expectedOutput));
     }
 }

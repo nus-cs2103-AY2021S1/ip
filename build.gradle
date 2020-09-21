@@ -9,6 +9,10 @@ repositories {
     mavenCentral()
 }
 
+checkstyle {
+    toolVersion = '8.29'
+}
+
 dependencies {
 
     implementation 'junit:junit:4.12'
@@ -52,9 +56,6 @@ shadowJar {
     archiveClassifier = null
 }
 
-checkstyle {
-    toolVersion = '8.23'
-}
 
 run{
     standardInput = System.in

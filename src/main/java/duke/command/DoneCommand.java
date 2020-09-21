@@ -19,12 +19,11 @@ public class DoneCommand extends UserCommand {
         super(userInput);
     }
 
-
     /**
      * @param index String representation of the index of the Task to be marked as done.
-     * @param taskSize Size of the TaskList.
-     * @return
-     * @throws InvalidDoneCommandException Exception thrown when an invalid done command is inputted.5
+     * @param taskSize taskSize Size of the TaskList.
+     * @return boolean.
+     * @throws InvalidDoneCommandException Exception thrown when an invalid done command is inputted.
      */
     public boolean checkInputRange(String index, int taskSize) throws InvalidDoneCommandException {
         try {
