@@ -97,6 +97,8 @@ public class Parser {
                 throw new DukeException("EmptyEvent");
             }
             storage.record(tasks.getTasks());
+        } else if (command.equals("stats")) {
+            result = ui.printStats(tasks);
         } else {
             throw new DukeException("invalid");
         }

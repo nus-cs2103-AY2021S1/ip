@@ -149,4 +149,24 @@ public class Ui {
     public static String showIOException(IOException e) {
         return "Oops! " + e.getMessage();
     }
+
+    /**
+     * Prints statistics for the user.
+     * @param tasks The task list.
+     * @return task statistics.
+     */
+    public static String printStats(TaskList tasks) {
+        int numberOfTasks = tasks.getNumTask();
+        int numberOfEvents = tasks.getNumEvent();
+        int numberOfDeadlines = tasks.getNumDeadline();
+        int numberOfTodos = tasks.getNumTodo();
+        int numberOfCompletedTasks = tasks.getNumCompleted();
+        String result =  new StringBuilder().
+                append("You have ").append(numberOfTasks).append(" tasks in total, including ").
+                append(numberOfEvents).append(" events, ").
+                append(numberOfDeadlines).append(" deadlines, and ").
+                append(numberOfTodos).append(" todos.\n").
+                append("You have completed ").append(numberOfCompletedTasks).append(" tasks.\n").toString();
+        return result;
+    }
 }

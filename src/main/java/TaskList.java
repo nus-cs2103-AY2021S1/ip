@@ -82,4 +82,48 @@ public class TaskList {
         }
         return ui.findKeyword(results);
     }
+
+    public int getNumTask() {
+        return tasks.size();
+    }
+
+    public int getNumTodo() {
+        int result = 0;
+        for (Task task: tasks) {
+            if (task instanceof ToDo) {
+                result++;
+            }
+        }
+        return result;
+    }
+
+    public int getNumEvent() {
+        int result = 0;
+        for (Task task: tasks) {
+            if (task instanceof Event) {
+                result++;
+            }
+        }
+        return result;
+    }
+
+    public int getNumDeadline() {
+        int result = 0;
+        for (Task task: tasks) {
+            if (task instanceof Deadline) {
+                result++;
+            }
+        }
+        return result;
+    }
+
+    public int getNumCompleted() {
+        int result = 0;
+        for (Task task: tasks) {
+            if (task.getStatus()) {
+                result++;
+            }
+        }
+        return result;
+    }
 }
