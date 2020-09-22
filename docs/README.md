@@ -1,5 +1,10 @@
-# User Guide
-duke.Duke is a **desktop app for managing tasks, optimised for use via a Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). If you are someone who can type fast, duke.Duke can help you track your tasks faster than traditional GUI apps.
+# Duke project - Individual project for CS2103 
+
+
+
+Duke is a **desktop app for managing tasks, optimised for use via a Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). If you are someone who can type fast, Duke can help you track your tasks faster than traditional GUI apps.
+
+![Duke UI](https://github.com/theodoreleebrant/ip/blob/master/docs/Ui.png)
 
 ## Quick Start
 1. Ensure you have Java 11 or later installed.
