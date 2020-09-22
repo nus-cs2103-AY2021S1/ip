@@ -13,8 +13,13 @@ import java.text.ParseException;
  */
 public class DateManager {
 
+<<<<<<< HEAD
     private static final String[] DATE_INPUT_FORMATS = {"invalid", "dd-MM-yyyy", "dd/MM/yyyy", "dd-MM-yyyy kkmm",
         "dd/MM/yyyy kkmm"};
+=======
+    private static final String[] DATE_INPUT_FORMATS =
+            {"invalid", "dd-MM-yyyy", "dd/MM/yyyy", "dd-MM-yyyy kkmm", "dd/MM/yyyy kkmm"};
+>>>>>>> branch-A-CodeQuality
     private static final String[] DATE_OUTPUT_FORMATS = {"MMM dd yyyy", "MMM dd yyyy',' hh:mma"};
 
     /**
@@ -27,8 +32,7 @@ public class DateManager {
         try {
             if (getDateFormat(str).equals(DATE_INPUT_FORMATS[0])) {
                 // returns empty Optional if str is not of valid format
-                Optional<Date> empty = Optional.empty();
-                return empty;
+                return Optional.empty();
             } else {
                 SimpleDateFormat formatter = new SimpleDateFormat(getDateFormat(str));
                 return Optional.of(formatter.parse(str));
@@ -79,11 +83,15 @@ public class DateManager {
             if (str.substring(2, 3).equals("-")) {
                 // case: dd-mm-yyyy
                 String[] date = str.split("-");
-                return (isValidDateNumerals(date)) ? DATE_INPUT_FORMATS[1] : DATE_INPUT_FORMATS[0];
+                return (isValidDateNumerals(date))
+                        ? DATE_INPUT_FORMATS[1]
+                        : DATE_INPUT_FORMATS[0];
             } else if (str.substring(2, 3).equals("/")) {
                 // case: dd/mm/yyyy
                 String[] date = str.split("/");
-                return (isValidDateNumerals(date)) ? DATE_INPUT_FORMATS[2] : DATE_INPUT_FORMATS[0];
+                return (isValidDateNumerals(date))
+                        ? DATE_INPUT_FORMATS[2]
+                        : DATE_INPUT_FORMATS[0];
             } else {
                 // invalid format
                 return DATE_INPUT_FORMATS[0];
@@ -101,7 +109,9 @@ public class DateManager {
                     dateTime[i] = date[i];
                 }
                 dateTime[3] = hrs;
-                return (isValidDateNumerals(dateTime)) ? DATE_INPUT_FORMATS[3] : DATE_INPUT_FORMATS[0];
+                return (isValidDateNumerals(dateTime))
+                        ? DATE_INPUT_FORMATS[3]
+                        : DATE_INPUT_FORMATS[0];
             } else if (str.substring(2, 3).equals("/")) {
                 // case: dd/mm/yyyy hhhh
                 String hrs = str.split(" ")[1];
@@ -113,7 +123,9 @@ public class DateManager {
                     dateTime[i] = date[i];
                 }
                 dateTime[3] = hrs;
-                return (isValidDateNumerals(dateTime)) ? DATE_INPUT_FORMATS[4] : DATE_INPUT_FORMATS[0];
+                return (isValidDateNumerals(dateTime))
+                        ? DATE_INPUT_FORMATS[4]
+                        : DATE_INPUT_FORMATS[0];
             } else {
                 // invalid format
                 return DATE_INPUT_FORMATS[0];

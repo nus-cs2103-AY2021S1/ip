@@ -15,9 +15,9 @@ import java.util.Optional;
  */
 public class Deadline extends Task {
 
-    private String deadline;
-    private Optional<Date> optDate;
-    private DateManager dateManager;
+    private final String deadline;
+    private final Optional<Date> optDate;
+    private final DateManager dateManager;
 
     /**
      * Constructor for Deadline object.

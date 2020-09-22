@@ -12,10 +12,11 @@ import javafx.stage.Stage;
 
 /**
  * A GUI for Duke using FXML.
+ * Credits: CS2103 JavaFX Tutorial.
  */
 public class Main extends Application {
 
-    private DukeMain duke = new DukeMain();
+    private final DukeMain duke = new DukeMain();
 
     @Override
     public void start(Stage stage) {

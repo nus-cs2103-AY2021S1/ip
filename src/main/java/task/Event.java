@@ -15,15 +15,15 @@ import java.util.Optional;
  */
 public class Event extends Task {
 
-    private String time;
-    private Optional<Date> optTime;
-    private DateManager dateManager;
+    private final String time;
+    private final Optional<Date> optTime;
+    private final DateManager dateManager;
 
     /**
      * Constructor for Event object.
      *
      * @param name Description of event.
-     * @param deadline Description of time of this event.
+     * @param time Description of time of this event.
      */
     public Event(String name, String time) {
         super(name);

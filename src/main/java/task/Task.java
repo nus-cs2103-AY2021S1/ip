@@ -8,7 +8,7 @@ package task;
  */
 
 public class Task {
-    private String name;
+    private final String name;
     private boolean done;
 
     /**

@@ -37,8 +37,9 @@ public class TaskList {
     public void runCommands() {
         Parser parser = new Parser();
         Scanner sc = new Scanner(System.in);
-        StringBuilder sb = new StringBuilder();
+
         while (true) {
+            StringBuilder sb = new StringBuilder();
             System.out.println(Ui.horizontalLine());
             try {
                 String input = sc.nextLine();
@@ -56,9 +57,8 @@ public class TaskList {
                 sb.append(Ui.invalidIndexMessage());
             } finally {
                 System.out.println(sb.toString());
-                sb = new StringBuilder();   // Clears String
             }
-        }
+        } // end while loop
     }
 
     /**
@@ -73,18 +73,20 @@ public class TaskList {
         try {
             Command cmd = parser.parseCommand(input);
             this.list = cmd.executeCommand(this.list, sb);
-            if (cmd.getType().equals(CommandType.BYE)) {
-                // exit program if user inputs "bye"
-            }
         } catch (InvalidInputException e) {
-            sb.append(e.getMessage() + "\n");
+            sb.append(e.getMessage());
+            sb.append("\n");
             sb.append(Ui.invalidInputMessage());
         } catch (IndexOutOfBoundsException obe) {
             sb.append(Ui.invalidIndexMessage());
+<<<<<<< HEAD
         } finally {
             String output = sb.toString();
             return output;
+=======
+>>>>>>> branch-A-CodeQuality
         }
+        return sb.toString();
     }
 
     /**

@@ -64,10 +64,12 @@ public class Storage {
                     sb.append("t " + currentTask.getName());
                 } else if (task instanceof Deadline) {
                     Deadline currentTask = (Deadline) task;
-                    sb.append("d " + currentTask.getName() + " timeOfTask: " + currentTask.getDeadline());
+                    sb.append("d " + currentTask.getName() + " timeOfTask: " +
+                            currentTask.getDeadline());
                 } else if (task instanceof Event) {
                     Event currentTask = (Event) task;
-                    sb.append("e " + currentTask.getName() + " timeOfTask: " + currentTask.getTime());
+                    sb.append("e " + currentTask.getName() + " timeOfTask: " +
+                            currentTask.getTime());
                 } else {
                     // do nothing
                 }

@@ -13,8 +13,8 @@ import exception.InvalidInputException;
  */
 public class Parser {
 
-    public static final String[] COMMANDS = {"todo", "deadline", "event", "list", "done", "bye", "delete",
-        "clear", "unknown", "find"};
+    public static final String[] COMMANDS = {"todo", "deadline", "event",
+            "list", "done", "bye", "delete", "clear", "unknown", "find"};
 
     /**
      * Returns Command object by processing user input.
@@ -57,7 +57,8 @@ public class Parser {
             command = new Command(CommandType.FIND, input);
         } else {
             // returns UNKNOWN Command
-            command = new Command(CommandType.UNKNOWN, "Sorry, I don't understand!");
+            command = new Command(CommandType.UNKNOWN,
+                    "Sorry, I don't understand!");
         }
         return validateCommand(command);
     }
@@ -71,7 +72,8 @@ public class Parser {
      * is of incorrect format and cannot be parsed.
      */
     public Command validateCommand(Command cmd) throws InvalidInputException {
-        Command validCommand = new Command(CommandType.UNKNOWN, "Sorry, I don't understand!");
+        Command validCommand = new Command(CommandType.UNKNOWN,
+                "Sorry, I don't understand!");
         switch(cmd.getType()) {
             case BYE:
             case CLEAR:
@@ -156,7 +158,8 @@ public class Parser {
             throw new InvalidInputException("Missing task description");
         }
 
-        if (description.split(" ")[(description.split(" ").length - 1)].equals("/" + cmdIdentifier)) {
+        if (description.split(" ")[(description.split(" ").length - 1)]
+                .equals("/" + cmdIdentifier)) {
             // throws exception if invalid input format: "deadline taskName /by"
             throw new InvalidInputException("Missing task deadline/time");
         }
@@ -197,7 +200,8 @@ public class Parser {
         if (description.split(" ").length > 2) {
             // throws exception if invalid input format: > 2 strings separated by " "
             // e.g "done/delete 1 2 3", "done/delete 12 text"
-            throw new InvalidInputException("Sorry, command unclear! Please specify only one index");
+            throw new InvalidInputException("Sorry, command unclear!" +
+                    " Please specify only one index");
         }
 
         int index;

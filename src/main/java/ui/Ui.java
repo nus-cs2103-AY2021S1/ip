@@ -13,7 +13,12 @@ import java.util.ArrayList;
 public class Ui {
 
     private static final String HORIZONTAL_LINE =
+<<<<<<< HEAD
             "______________________________________________________";
+=======
+            "_____________________________________________" +
+                    "____________________________________________";
+>>>>>>> branch-A-CodeQuality
 
     /**
      * Returns and prints start-up message upon program execution.
@@ -172,9 +177,9 @@ public class Ui {
      */
     public static boolean promptConfirm(Scanner sc) {
         System.out.println("Are you sure? (Y/N)");
-        horizontalLine();
+        System.out.println(horizontalLine());
         String input = sc.nextLine();
-        horizontalLine();
-        return input.toLowerCase().equals("y") ? true : false;
+        System.out.println(horizontalLine());
+        return input.toLowerCase().equals("y");
     }
 }
