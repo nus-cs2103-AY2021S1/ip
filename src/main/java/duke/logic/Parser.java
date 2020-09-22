@@ -31,7 +31,7 @@ public class Parser {
      * @throws DukeException If the command is invalid or of the wrong form.
      * @throws ParseException If the date cannot be parsed correctly.
      */
-    public static Command parseCommand(String echo, TaskList tasks) throws DukeException, ParseException {
+    public static Command parseCommand(String echo, TaskList tasks) throws DukeException {
         if (echo.equals("bye")) {
             assert echo != null : "Input should not be null";
             return new ExitCommand();
@@ -91,7 +91,7 @@ public class Parser {
         }
     }
 
-    private static Task parseEvent(String echo) throws DukeException, ParseException {
+    private static Task parseEvent(String echo) throws DukeException {
         if (echo.matches("(?i)^event\\s+\\S+.*\\s+\\/at\\s+\\S+.*")) {
             String[] res = echo.replaceFirst("(?i)event\\s+", "").strip().split("(?i)/at\\s*", 2);
             return new Event(res[0], res[1]);

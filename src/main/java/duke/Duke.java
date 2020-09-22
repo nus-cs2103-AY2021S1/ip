@@ -1,8 +1,5 @@
 package duke;
 
-import java.text.ParseException;
-import java.time.format.DateTimeParseException;
-
 import duke.command.Command;
 import duke.exception.DukeException;
 import duke.logic.Parser;
@@ -14,8 +11,6 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
-
-
 
 public class Duke {
     private ScrollPane scrollPane;
@@ -29,12 +24,11 @@ public class Duke {
     private Storage storage = new Storage();
     private boolean isFinished = false;
 
-
     public String getResponse(String echo) {
         Command command = null;
         try {
             command = Parser.parseCommand(echo, tasks);
-        } catch (DukeException | ParseException | DateTimeParseException e) {
+        } catch (DukeException e) {
             return e.getMessage();
         }
         String output = command.execute(tasks);

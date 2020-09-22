@@ -22,7 +22,8 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
         try {
-            javafx.scene.image.Image dukeImage = new javafx.scene.image.Image(this.getClass().getResourceAsStream("/images/duke.jpg"));
+            javafx.scene.image.Image dukeImage =
+                    new javafx.scene.image.Image(this.getClass().getResourceAsStream("/images/duke.jpg"));
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);

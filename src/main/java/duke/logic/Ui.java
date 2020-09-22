@@ -15,7 +15,7 @@ public class Ui {
      * @return the message that is shown at the start of the program.
      */
     public static String initialMessage() {
-        String toPrint = "Hello! I'm duke.Duke the Bad Dragon.\n" + "What can I do for you?\n";
+        String toPrint = "Hello! I'm Duke the Bad Dragon.\n" + "What can I do for you?\n";
         return printMessage(toPrint);
     }
 
@@ -56,7 +56,12 @@ public class Ui {
     public static String printAdd(String description, int numberOfTasks) {
         String toPrint = "Got it. I've added this task:\n"
                 + description
-                + "Now you have " + numberOfTasks + " tasks in the list.\n";
+                + "Now you have " + numberOfTasks;
+        if (numberOfTasks == 1) {
+            toPrint = toPrint + " task in the list.\n";
+        } else {
+            toPrint = toPrint + " tasks in the list.\n";
+        }
         return printMessage(toPrint);
     }
 
@@ -69,7 +74,12 @@ public class Ui {
     public static String printDelete(String description, int numberOfTasks) {
         String toPrint = "Noted. I've removed this task: \n"
                 + description
-                + "Now you have " + numberOfTasks + " tasks in the list.\n";
+                + "Now you have " + numberOfTasks;
+        if (numberOfTasks == 1) {
+            toPrint = toPrint + " task in the list.\n";
+        } else {
+            toPrint = toPrint + " tasks in the list.\n";
+        }
         return printMessage(toPrint);
     }
 

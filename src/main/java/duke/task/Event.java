@@ -1,8 +1,14 @@
 package duke.task;
 
 import java.text.ParseException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
+import java.time.temporal.TemporalAccessor;
+
+import duke.exception.DukeException;
 
 public class Event extends Task {
     private LocalDateTime timeAt;
@@ -14,10 +20,27 @@ public class Event extends Task {
      * @throws ParseException when the date time formatting is wrong.
      */
     // TODO: 17/8/20 make a toString
-    public Event(String desc, String timeAt) throws ParseException {
+    public Event(String desc, String timeAt) throws DukeException {
         super(desc);
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
-        this.timeAt = LocalDateTime.parse(timeAt, format);
+        try {
+            LocalDateTime dateTime;
+            DateTimeFormatter formatter =
+                    DateTimeFormatter
+                            .ofPattern("dd/MM/yyyy[ HHmm]")
+                            .withResolverStyle(ResolverStyle.STRICT);
+            TemporalAccessor temporalAccessor =
+                    formatter.parseBest(
+                            timeAt,
+                            LocalDateTime::from, LocalDate::from
+                    );
+            if (temporalAccessor instanceof LocalDateTime) {
+                this.timeAt = (LocalDateTime) temporalAccessor;
+            } else {
+                this.timeAt = ((LocalDate) temporalAccessor).atStartOfDay();
+            }
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Cannot parse date. Make sure the format is dd/MM/yyyy[ HHmm] (optional time)");
+        }
     }
 
     /**
@@ -29,7 +52,7 @@ public class Event extends Task {
     @Override
     public String toString() {
         String sign = isDone ? "✓" : "✗";
-        return "[E][" + sign + "] " + description + " (at:" + timeAt + ")";
+        return "[E][" + sign + "] " + description + " (at: " + getDate() + ")";
     }
 
     @Override
@@ -39,7 +62,7 @@ public class Event extends Task {
 
     @Override
     public String getDate() {
-        return timeAt.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));
+        return timeAt.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
     }
 
     @Override

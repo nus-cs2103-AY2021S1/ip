@@ -23,9 +23,7 @@ public class MainWindow extends AnchorPane {
     private TextField userInput;
     @FXML
     private Button sendButton;
-
     private Duke duke;
-
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/duke.jpg"));
 
@@ -56,7 +54,7 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
         if (input.equals("bye")) {
             PauseTransition delay = new PauseTransition(Duration.seconds(1));
-            delay.setOnFinished( event -> Platform.exit() );
+            delay.setOnFinished(event -> Platform.exit());
             delay.play();
         }
     }

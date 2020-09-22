@@ -16,7 +16,7 @@ public class DeadlineCommand implements Command {
         // Do TaskList stuff
         tasks.add(toBeAdded);
         // Do UI stuff
-        return Ui.printAdd(toBeAdded.getDescription() + "\n", tasks.length());
+        return Ui.printAdd(toBeAdded.toString() + "\n", tasks.length());
         // Do storage stuff
         // tbc
     }
