@@ -26,7 +26,7 @@ Duke is optimized for users who are fast typists and prefer typing over other me
 ## 2.1. Basic Information
 This User Guide explains how you can use Duke to help you manage your tasks.
 
-You may want to refer to [Section 3 (Quick start)](#quick-start) for a short tutorial on how to run Duke on your device and use Duke's main features. For a full walkthrough of Duke, please refer to [Section 4 (Features)](#features). If you are an experienced CLI user, you can find all the commands available under [Section 5 (Command Summary)](#command-summary)
+You may want to refer to [Section 3 (Quick start)](#3-quick-start) for a short tutorial on how to run Duke on your device and use Duke's main features. For a full walkthrough of Duke, please refer to [Section 4 (Features)](#4-features). If you are an experienced CLI user, you can find all the commands available under [Section 5 (Command Summary)](#5-command-summary)
 
 ## 2.2 Command Format
 This section explains the forma of commands in the User Guide:
