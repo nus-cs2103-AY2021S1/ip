@@ -98,5 +98,5 @@ Action | Format, Examples
 **List** | `list`
  ***View List of Commands** | `help`
  
- ## Acknowledgement
+## Acknowledgement
  - Willy profile picture:  Taken with permission from cute ghost sticker pack designed by vibs. 
