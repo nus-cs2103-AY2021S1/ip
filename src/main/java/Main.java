@@ -1,6 +1,5 @@
 import java.io.IOException;
 
-import com.sun.prism.Image;
 import duke.Duke;
 import duke.logic.Storage;
 import duke.task.TaskList;
