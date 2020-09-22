@@ -18,10 +18,12 @@ public class TaskList {
         return this.list;
     }
     
+    @SuppressWarnings("unchecked")
     protected void updateLastList() {
         this.lastList = (ArrayList<Task>) this.list.clone();
     }
     
+    @SuppressWarnings("unchecked")
     protected void updateList() {
         this.list = (ArrayList<Task>) this.lastList.clone();
     }
