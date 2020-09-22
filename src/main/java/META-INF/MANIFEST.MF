@@ -1,3 +1,2 @@
 Manifest-Version: 1.0
-Main-Class: seedu.duke.Main
-Class-Path: seedu.duke
+Main-Class: seedu.duke.Launcher

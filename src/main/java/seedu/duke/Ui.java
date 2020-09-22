@@ -31,8 +31,8 @@ public class Ui {
      * Handles user input.
      * Passes valid user input to Parser class for further process.
      * @param storage A Storage object that handles data storage.
-     * @throws IOException
-     * @throws DukeException
+     * @throws IOException If problem occurs.
+     * @throws DukeException If problem occurs.
      */
     public String takeUserInput(Storage storage) throws IOException, DukeException {
         while (sc.hasNextLine()) {

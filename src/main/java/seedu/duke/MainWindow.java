@@ -1,12 +1,19 @@
 package seedu.duke;
+import java.io.IOException;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.layout.*;
-import java.io.IOException;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
+import javafx.scene.layout.VBox;
+
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -53,6 +60,8 @@ public class MainWindow extends AnchorPane {
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
+     * @throws IOException If file fails to be created or accessed
+     * @throws DukeException if problem occurs
      */
     @FXML
     public void handleUserInput() throws IOException, DukeException {

@@ -54,7 +54,8 @@ shadowJar {
 
 checkstyle {
     toolVersion = '8.23'
-    //configFile = file('config/checkstyle/checkstyle.xml')
+    configFile = file('config/checkstyle/checkstyle.xml')
+    //configFile = file('config/checkstyle/suppressions.xml')
 }
 
 run{
