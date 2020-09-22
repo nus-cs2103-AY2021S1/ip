@@ -19,6 +19,11 @@
         <property name="lineSeparator" value="lf_cr_crlf"/>
     </module>
 
+    <module name="LineLength">
+        <!-- Checks if a line is too long. -->
+        <property name="max" value="120"/>
+    </module>
+
     <module name="RegexpSingleline">
         <!-- Checks that FIXME is not used in comments.  TODO is preferred. -->
         <property name="format" value="((//.*)|(\*.*))FIXME" />
@@ -27,11 +32,6 @@
 
     <module name="SuppressionFilter">
         <property name="file" value="${config_loc}/suppressions.xml"/>
-    </module>
-
-    <module name="LineLength">
-        <!-- Checks if a line is too long. -->
-        <property name="max" value="120"/>
     </module>
 
     <!-- All Java AST specific tests live under TreeWalker module. -->
@@ -330,8 +330,8 @@
             <property name="option" value="nl"/>
         </module>
         <module name="SeparatorWrap">
-            <!-- Checks that the ",", "]", "[", "...", ";", "(" is at the previous end of line in a line wrap. -->
-            <property name="tokens" value="COMMA, RBRACK, ARRAY_DECLARATOR, ELLIPSIS, SEMI, LPAREN"/>
+            <!-- Checks that the ",", "]", "[", "...", ";" is at the previous end of line in a line wrap. -->
+            <property name="tokens" value="COMMA, RBRACK, ARRAY_DECLARATOR, ELLIPSIS, SEMI"/>
             <property name="option" value="eol"/>
         </module>
 
