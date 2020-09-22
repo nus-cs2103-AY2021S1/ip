@@ -48,6 +48,17 @@ public class Ui {
     }
 
     /**
+     * Returns the message when the list needs to be printed.
+     * @param srch The String passed as the search key.
+     * @param tasks the String representation of the list, to be printed.
+     * @return the message that is shown when the list needs to be printed.
+     */
+    public static String printFind(String srch, String tasks) {
+        String toPrint = "You searched for: " + srch + "\nHere are the tasks in your list:\n" + tasks;
+        return printMessage(toPrint);
+    }
+
+    /**
      * Returns the message when a task is added.
      * @param description the String description of the task added.
      * @param numberOfTasks the number of tasks in the list.

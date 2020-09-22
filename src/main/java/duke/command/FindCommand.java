@@ -21,7 +21,7 @@ public class FindCommand implements Command {
             }
         }
         // do ui stuff
-        return Ui.printList(res.printTaskList());
+        return Ui.printFind(toSearch, res.printTaskList());
         // do storage stuff
         // do tasklist stuff
     }
