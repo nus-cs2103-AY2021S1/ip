@@ -48,16 +48,14 @@ public class Storage {
                 this.pointer = i;
                 FileReader fileReader = new FileReader(inputFile);
                 BufferedReader bufferedReader = new BufferedReader(new FileReader(inputFile));
-                Stream<String> saveContent = bufferedReader.lines().onClose(
-                        () -> {
-                            try {
-                                bufferedReader.close();
-                            } catch (IOException e) {
-                                System.out.println("failed to close bufferedReader");
-                                e.printStackTrace();
-                            }
-                        }
-                );
+                Stream<String> saveContent = bufferedReader.lines().onClose(() -> {
+                    try {
+                        bufferedReader.close();
+                    } catch (IOException e) {
+                        System.out.println("failed to close bufferedReader");
+                        e.printStackTrace();
+                    }
+                });
                 fileReader.close();
                 return Optional.of(saveContent);
             }
@@ -118,7 +116,11 @@ public class Storage {
         }
     }
 
-    //need to follow this up by load as this only changes the pointer and deletes the file
+    /**
+     * Undoes the last change to storage.
+     *
+     * @return boolean value if it was successful.
+     */
     public boolean undo() {
         if (this.pointer <= 0) {
             //cannot undo

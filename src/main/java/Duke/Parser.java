@@ -253,7 +253,7 @@ public class Parser {
         } else if (input.equals("undo")) {
             return CommandType.UNDO;
         } else {
-                return CommandType.UNKNOWN;
+            return CommandType.UNKNOWN;
         }
     }
 
@@ -266,7 +266,8 @@ public class Parser {
      * @throws MissingDoneArgumentException   If done was input without an argument.
      * @throws DoneOutOfRangeException        If done was input with an argument out of range.
      */
-    public static int parseDone(String input, int taskCount) throws MissingDoneArgumentException, DoneOutOfRangeException {
+    public static int parseDone(String input, int taskCount) throws MissingDoneArgumentException,
+            DoneOutOfRangeException {
         if (input.length() <= 5) {
             throw new MissingDoneArgumentException();
         }
@@ -286,7 +287,8 @@ public class Parser {
      * @throws MissingDeleteArgumentException If delete was input without an argument.
      * @throws DeleteOutOfRangeException      If delete was input with an argument out of range.
      */
-    public static int parseDelete(String input, int taskCount) throws MissingDeleteArgumentException, DeleteOutOfRangeException {
+    public static int parseDelete(String input, int taskCount) throws MissingDeleteArgumentException,
+            DeleteOutOfRangeException {
         if (input.length() <= 7) {
             throw new MissingDeleteArgumentException();
         }
@@ -387,6 +389,12 @@ public class Parser {
         return keyword;
     }
 
+    /**
+     * Parses ToDo from save file and returns the task.
+     *
+     * @param line ToDo in plaintext.
+     * @return ToDo object
+     */
     public static ToDo parseToDoFromSave(String line) {
         String description = line.substring(8);
         boolean isDone = line.charAt(4) == '1';
@@ -394,6 +402,12 @@ public class Parser {
         return taskToAdd;
     }
 
+    /**
+     * Parses Deadline from save file and returns the task.
+     *
+     * @param line Deadline in plaintext.
+     * @return Deadline object
+     */
     public static Deadline parseDeadlineFromSave(String line) {
         String descriptionAndDeadline = line.substring(8);
         boolean isDone = line.charAt(4) == '1';
@@ -404,6 +418,12 @@ public class Parser {
         return taskToAdd;
     }
 
+    /**
+     * Parses Event from save file and returns the task.
+     *
+     * @param line Event in plaintext.
+     * @return Event object
+     */
     public static Event parseEventFromSave(String line) {
         String descriptionAndDate = line.substring(8);
         boolean isDone = line.charAt(4) == '1';

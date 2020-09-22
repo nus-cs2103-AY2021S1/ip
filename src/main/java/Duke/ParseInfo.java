@@ -24,6 +24,10 @@ public class ParseInfo {
         this.wasTaskListUndone = true;
     }
 
+    /**
+     * Adds a response to ParseInfo.
+     * @param response The response to be added to ParseInfo.
+     */
     public void addResponse(String response) {
         assert response.length() != 0 : "empty response added";
         this.responses.add(response);

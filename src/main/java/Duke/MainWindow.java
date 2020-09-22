@@ -56,8 +56,8 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         ArrayList<String> responses = duke.getResponses(input);
 
-        if (input.equals("bye")) {
-            ((Stage) scrollPane.getScene().getWindow()).close();
+        if (input.equals("bye")) { (
+                (Stage) scrollPane.getScene().getWindow()).close();
         }
         dialogContainer.getChildren().add(
                 DialogBox.getUserDialog(input, userImage)
