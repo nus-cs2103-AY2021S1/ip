@@ -1,7 +1,7 @@
 Duke project - User Guide
 =========
 
-By theodoreleebrant
+By theodoreleebrant  
 Last Updated 22 September 2020
 
 # 1. Introduction
