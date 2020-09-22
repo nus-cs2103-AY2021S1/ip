@@ -10,27 +10,21 @@ public class Parser {
     public static Command parse(String commandMessage) throws DukeException {
         Command command;
         if (commandMessage.equals("list")) {
-//            command = new Command("list");
             command = new ListCommand("list");
         } else if (commandMessage.contains("done")) {
             int order = parseInt(commandMessage.substring(commandMessage.length() - 1));
-//            command = new Command("done", order);
             command = new DoneCommand("done", order);
         } else if (commandMessage.contains("delete")) {
             int order = parseInt(commandMessage.substring(commandMessage.indexOf(' ') + 1));
-//            command = new Command("delete", order);
             command = new DeleteCommand("delete", order);
         } else if (commandMessage.contains("find")) {
-//            command = new Command("find", commandMessage.substring(commandMessage.indexOf(' ') + 1));
             command = new FindCommand("find", commandMessage.substring(commandMessage.indexOf(' ') + 1));
         } else if (commandMessage.equals("bye")) {
-//            command = new Command("bye");
             command = new ByeCommand("bye");
         } else if (commandMessage.contains("priority")) {
             String message = commandMessage.substring(commandMessage.indexOf(' ') + 1);
             int order = parseInt(message.substring(0, message.indexOf(' ')));
             int priority = parseInt(message.substring(message.indexOf(' ') + 1));
-//            command = new Command("priority", order, priority);
             command = new PriorityCommand("priority", order, priority);
         } else {
             String type;
@@ -76,10 +70,8 @@ public class Parser {
                         s = s + '0' + by.substring(0, 2);
                     }
                     LocalDate date = LocalDate.parse(s);
-//                    command = new Command("deadline", description, by, date, true);
                     command = new DeadlineCommand("deadline", description, by, date, true);
                 } else {
-//                    command = new Command("deadline", description, by, null, false);
                     command = new DeadlineCommand("deadline", description, by, null, false);
                 }
 
@@ -105,10 +97,8 @@ public class Parser {
                         s = s + '0' + time.substring(0, 2);
                     }
                     LocalDate date = LocalDate.parse(s);
-//                    command = new Command("event", description, time, date, true);
                     command = new EventCommand("event", description, time, date, true);
                 } else {
-//                    command = new Command("event", description, time, null, false);
                     command = new EventCommand("event", description, time, null, false);
                 }
             } else if (type.equals("todo")) {
