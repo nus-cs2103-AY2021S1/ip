@@ -20,12 +20,13 @@ public class Duke {
 
     /**
      * Loads input from duke.txt
+     * Creates a 'data' folder if it does not exist in current directory.
      */
     public Duke() {
         this.ui = new Ui();
         this.storage = new Storage("data/duke.txt");
-        File file = new File("data");
-        file.mkdir();
+        File newDataFolder = new File("data");
+        newDataFolder.mkdir();
         try {
             this.arrayOfTasks = new TaskList(storage.load());
         } catch (DukeException error) {
