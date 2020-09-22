@@ -1,5 +1,7 @@
 package duke.command;
 
+import duke.exception.DukeException;
+import duke.logic.Storage;
 import duke.logic.Ui;
 import duke.task.TaskList;
 
@@ -12,9 +14,10 @@ public class ExitCommand implements Command {
     }
 
     @Override
-    public String execute(TaskList tasks) {
-        return Ui.exitMessage();
+    public String execute(TaskList tasks) throws DukeException {
+        Storage.save(tasks);
         // do storage stuff
+        return Ui.exitMessage();
     }
 
     @Override

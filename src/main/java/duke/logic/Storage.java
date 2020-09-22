@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import duke.Duke;
+import duke.exception.DukeException;
 import duke.task.TaskList;
 
 public class Storage {
@@ -18,7 +20,7 @@ public class Storage {
      * @param tasks the tasklist to be saved
      * @throws IOException if file not successfully made (e.g. permission error)
      */
-    public static void save(TaskList tasks) throws IOException {
+    public static void save(TaskList tasks) throws DukeException {
         // Save file
         Path dirPath = Paths.get("data");
         Path filePath = Paths.get("data", "duke.txt");
@@ -29,11 +31,15 @@ public class Storage {
             data.mkdir();
         }
 
-        // Write to file
-        String toWrite = tasks.toSave();
-        BufferedWriter wr = new BufferedWriter(new FileWriter(filePath.toString()));
-        wr.write(toWrite);
-        wr.close();
+        try {
+            // Write to file
+            String toWrite = tasks.toSave();
+            BufferedWriter wr = new BufferedWriter(new FileWriter(filePath.toString()));
+            wr.write(toWrite);
+            wr.close();
+        } catch (IOException e) {
+            throw new DukeException("An IO error occurred.");
+        }
     }
 
     /**
@@ -42,17 +48,21 @@ public class Storage {
      * @throws FileNotFoundException if the file is not found.
      * @throws IOException if an I/O error occurs.
      */
-    public static TaskList load() throws FileNotFoundException, IOException {
+    public static TaskList load() throws DukeException {
         TaskList tasks = new TaskList();
         Parser parser = new Parser();
         Path filePath = Paths.get("data", "duke.txt");
-        BufferedReader reader = new BufferedReader(new FileReader(filePath.toString()));
-        String nextLine = reader.readLine();
-        while (nextLine != null) {
-            // Task res = parser.parseAdd(nextLine);
-            // TODO: 26/8/20 Not working yet; add tasks to the list
+        BufferedReader reader = null;
+        try {
+            reader = new BufferedReader(new FileReader(filePath.toString()));
+            String nextLine = reader.readLine();
+            while (nextLine != null) {
+                parser.parseCommand(nextLine, tasks).execute(tasks);
+                nextLine = reader.readLine();
+            }
+        } catch (IOException e) {
+            throw new DukeException("An IO error occurred.");
         }
-
         return tasks;
     }
 

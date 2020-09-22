@@ -5,36 +5,35 @@ import duke.exception.DukeException;
 import duke.logic.Parser;
 import duke.logic.Storage;
 import duke.task.TaskList;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.layout.VBox;
 
 public class Duke {
-    private ScrollPane scrollPane;
-    private VBox dialogContainer;
-    private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/user.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/duke.jpg"));
-    private TaskList tasks = new TaskList();
-    private Storage storage = new Storage();
-    private boolean isFinished = false;
+    private Storage storage;
+    private TaskList tasks;
+    private boolean isFinished;
+
+    /**
+     * Default constructor for Duke.
+     * Attempts to load from existing storage, if any.
+     */
+    public Duke() {
+        this.storage = new Storage();
+        try {
+            this.tasks = storage.load();
+        } catch (DukeException e) {
+            this.tasks = new TaskList();
+        }
+        this.isFinished = false;
+    }
 
     public String getResponse(String echo) {
         Command command = null;
         try {
             command = Parser.parseCommand(echo, tasks);
+            String output = command.execute(tasks);
+            return output;
         } catch (DukeException e) {
             return e.getMessage();
         }
-        String output = command.execute(tasks);
-        // System.out.println(tasks);
-        // storage.save(tasks);
-        return output;
     }
 
 
