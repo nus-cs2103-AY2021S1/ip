@@ -1,6 +1,6 @@
 # Duke - User Guide
 
-Duke is a slick chatbot that helps you **manage your tasks and events efficiently**.
+Duke is a slick chatbot that helps you **manage your tasks and events efficiently**. It is designed for people who like memes a lot.
 
 ## Commands
 
