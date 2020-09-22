@@ -77,6 +77,6 @@ public class TaskList {
                     + task.getDelimiter() + " "
                     + task.getDate() + "\n";
         }
-        return res;
+        return res.trim();
     }
 }

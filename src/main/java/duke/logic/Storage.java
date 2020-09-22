@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import duke.Duke;
 import duke.exception.DukeException;
 import duke.task.TaskList;
 
@@ -55,10 +54,13 @@ public class Storage {
         BufferedReader reader = null;
         try {
             reader = new BufferedReader(new FileReader(filePath.toString()));
-            String nextLine = reader.readLine();
-            while (nextLine != null) {
-                parser.parseCommand(nextLine, tasks).execute(tasks);
-                nextLine = reader.readLine();
+            String nextLine;
+            while ((nextLine = reader.readLine()) != null) {
+                try {
+                    parser.parseCommand(nextLine, tasks).execute(tasks);
+                } catch (DukeException e) {
+                    System.out.println(e.getMessage());
+                }
             }
         } catch (IOException e) {
             throw new DukeException("An IO error occurred.");
