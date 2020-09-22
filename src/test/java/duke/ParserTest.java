@@ -25,7 +25,7 @@ public class ParserTest {
             MissingDoneArgumentException, EmptyEventException, MissingEventDateException, EmptyDeadlineException,
             MissingDeadlineDateException, DoneOutOfRangeException, MissingDeleteArgumentException, EmptyTodoException,
             MissingFindArgumentException {
-        assertEquals(true, Parser.parseAndExecute("todo todotest", new TaskList(), new Ui()));
+        assertEquals(true, Parser.parseAndExecute("todo todotest", new TaskList(), new Ui()).isListUpdated());
     }
 
     @Test
