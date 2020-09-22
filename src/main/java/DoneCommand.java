@@ -12,7 +12,7 @@ public class DoneCommand extends Command {
         assert order >= 1 : "order should be at least one";
         Task task = taskList.get(order - 1);
         task.markAsDone();
-        message = message + "  Nice! I've marked this task as done:" + "    ["
+        message = message + "  Nice! I've marked this task as done:\n" + "    ["
                 + task.getStatusIcon() + "] "
                 + task.getDescription();
 
