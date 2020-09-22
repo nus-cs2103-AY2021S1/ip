@@ -1,9 +1,17 @@
+package command;
+
+import storage.Storage;
+import task.EventTask;
+import task.Task;
+import task.TaskList;
+import ui.Ui;
+
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
-public class DeadlineCommand extends Command {
-    public DeadlineCommand(String type, String command, String time, LocalDate date, boolean hasDate) {
+public class EventCommand extends Command {
+    public EventCommand(String type, String command, String time, LocalDate date, boolean hasDate) {
         super(type, command, time, date, hasDate);
     }
 
@@ -13,9 +21,9 @@ public class DeadlineCommand extends Command {
         String message = "";
 
         if (hasDate) {
-            taskList.add(new DeadlineTask(command, time, date));
+            taskList.add(new EventTask(command, time, date));
         } else {
-            taskList.add(new DeadlineTask(command, time));
+            taskList.add(new EventTask(command, time));
         }
 
         message = message + "Got it. I've added this task:\n  "

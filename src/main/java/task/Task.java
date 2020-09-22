@@ -1,5 +1,7 @@
+package task;
+
 /**
- * Encapsulates the task into a class. The 'Task' class
+ * Encapsulates the task into a class. The 'task.Task' class
  * supports getting status icon, getting description,
  * marking the task as done and converting the task
  * to a string.

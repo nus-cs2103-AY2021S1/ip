@@ -1,3 +1,5 @@
+import command.Command;
+import exception.DukeException;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -9,6 +11,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import storage.Storage;
+import task.TaskList;
+import ui.Ui;
 
 import static java.lang.Integer.parseInt;
 
@@ -125,25 +130,24 @@ public class Duke extends Application {
     }
 
     public void run() {
-//        ui.showWelcomeMessage();
-//
-//        boolean isExit = false;
-//
-//        while (!isExit) {
-//            assert isExit == false : "isExit should be false";
-//            try {
-//                String fullCommand = ui.readCommand();
-//                ui.showLine();
-//                Command c = Parser.parse(fullCommand);
-//                c.execute(tasks, ui, storage);
-//                isExit = c.isExit();
-//            } catch (DukeException e) {
-//                ui.showError(e.getMessage());
-//            } finally {
-//                ui.showLine();
-//            }
-//        }
+        ui.showWelcomeMessage();
 
+        boolean isExit = false;
+
+        while (!isExit) {
+            assert isExit == false : "isExit should be false";
+            try {
+                String fullCommand = ui.readCommand();
+                ui.showLine();
+                Command c = Parser.parse(fullCommand);
+                c.execute(tasks, ui, storage);
+                isExit = c.isExit();
+            } catch (exception.DukeException e) {
+                ui.showError(e.getMessage());
+            } finally {
+                ui.showLine();
+            }
+        }
     }
 
     /**
