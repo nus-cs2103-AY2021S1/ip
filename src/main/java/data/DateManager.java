@@ -13,13 +13,8 @@ import java.text.ParseException;
  */
 public class DateManager {
 
-<<<<<<< HEAD
-    private static final String[] DATE_INPUT_FORMATS = {"invalid", "dd-MM-yyyy", "dd/MM/yyyy", "dd-MM-yyyy kkmm",
-        "dd/MM/yyyy kkmm"};
-=======
     private static final String[] DATE_INPUT_FORMATS =
             {"invalid", "dd-MM-yyyy", "dd/MM/yyyy", "dd-MM-yyyy kkmm", "dd/MM/yyyy kkmm"};
->>>>>>> branch-A-CodeQuality
     private static final String[] DATE_OUTPUT_FORMATS = {"MMM dd yyyy", "MMM dd yyyy',' hh:mma"};
 
     /**

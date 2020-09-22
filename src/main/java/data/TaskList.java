@@ -79,12 +79,6 @@ public class TaskList {
             sb.append(Ui.invalidInputMessage());
         } catch (IndexOutOfBoundsException obe) {
             sb.append(Ui.invalidIndexMessage());
-<<<<<<< HEAD
-        } finally {
-            String output = sb.toString();
-            return output;
-=======
->>>>>>> branch-A-CodeQuality
         }
         return sb.toString();
     }

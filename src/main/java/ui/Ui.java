@@ -13,12 +13,8 @@ import java.util.ArrayList;
 public class Ui {
 
     private static final String HORIZONTAL_LINE =
-<<<<<<< HEAD
             "______________________________________________________";
-=======
-            "_____________________________________________" +
-                    "____________________________________________";
->>>>>>> branch-A-CodeQuality
+
 
     /**
      * Returns and prints start-up message upon program execution.
