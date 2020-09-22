@@ -8,9 +8,12 @@ public class DukeMain {
     private TaskList list;
 
     public DukeMain() {
-        this.list = new TaskList("src/savedata/data.txt");
+        // data.txt will be created in same directory as duke.jar
+        // if it does not already exist
+        this.list = new TaskList("data.txt");
     }
 
+    // For CLI Duke. But does not run anymore not sure why??
     public static void main(String[] args) {
         TaskList taskList = new TaskList("src/savedata/data.txt");
         Ui.startUpMessage();
@@ -20,7 +23,7 @@ public class DukeMain {
 
     public String getResponse(String input) {
         String out = this.list.runSingleCommand(input);
-        list.save();
+        this.list.save();
         return out;
     }
 
