@@ -24,6 +24,10 @@ public class DeadlineTask extends Task {
 
     @Override
     public String toString() {
+        if (by.contains(")")) {
+            by = by.substring(0, by.indexOf(')'));
+        }
+
         if (date == null) {
             return "[D]" + super.toString() + " (by: " + by + ")";
         } else {

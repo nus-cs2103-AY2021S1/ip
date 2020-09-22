@@ -63,7 +63,7 @@ public class Storage {
                         lists.add(new ToDoTask(description));
                     }
                 } else if (string.charAt(1) == 'D') {
-                    String description = string.substring(string.indexOf(' ') + 1, string.indexOf('('));
+                    String description = string.substring(string.indexOf(' ') + 1, string.indexOf('(') - 1);
                     String by = string.substring(string.indexOf("(by") + 5);
                     if (string.charAt(4) == '✓') {
                         lists.add(new DeadlineTask(description, by, true));
@@ -72,7 +72,7 @@ public class Storage {
                     }
                 } else {
                     String time = string.substring(string.indexOf("(at") + 5);
-                    String description = string.substring(string.indexOf(' ') + 1, string.indexOf('('));
+                    String description = string.substring(string.indexOf(' ') + 1, string.indexOf('(') - 1);
                     if (string.charAt(4) == '✓') {
                         lists.add(new EventTask(description, time, true));
                     } else {

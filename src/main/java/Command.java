@@ -111,11 +111,11 @@ public class Command {
                     "Now you have " + taskList.size() + " tasks in the list.";
         }
 
-        try {
-            storage.writeToFile(taskList);
-        } catch (IOException e) {
-            System.out.println("Something went wrong: " + e.getMessage());
-        }
+//        try {
+//            storage.writeToFile(taskList);
+//        } catch (IOException e) {
+//            System.out.println("Something went wrong: " + e.getMessage());
+//        }
 
         return message;
     }

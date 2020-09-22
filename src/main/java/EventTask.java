@@ -25,6 +25,10 @@ public class EventTask extends Task {
 
     @Override
     public String toString() {
+        if (time.contains(")")) {
+            time = time.substring(0, time.indexOf(')'));
+        }
+
         if (date == null) {
             assert date == null : "date should be null";
             return "[E]" + super.toString() + " (at: " + time + ")";
