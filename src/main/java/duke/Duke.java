@@ -1,6 +1,7 @@
 package duke;
 
 import java.text.ParseException;
+import java.time.format.DateTimeParseException;
 
 import duke.command.Command;
 import duke.exception.DukeException;
@@ -33,7 +34,7 @@ public class Duke {
         Command command = null;
         try {
             command = Parser.parseCommand(echo, tasks);
-        } catch (DukeException | ParseException e) {
+        } catch (DukeException | ParseException | DateTimeParseException e) {
             return e.getMessage();
         }
         String output = command.execute(tasks);

@@ -1,5 +1,6 @@
 import java.io.IOException;
 
+import com.sun.prism.Image;
 import duke.Duke;
 import duke.logic.Storage;
 import duke.task.TaskList;
@@ -22,10 +23,12 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
         try {
+            javafx.scene.image.Image dukeImage = new javafx.scene.image.Image(this.getClass().getResourceAsStream("/images/duke.jpg"));
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setTitle("Duke");
+            stage.getIcons().add(dukeImage);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
