@@ -99,6 +99,7 @@ public class Command {
      * @return List of matching Task objects.
      */
     public ArrayList<Task> findTask(ArrayList<Task> tasks, String key, StringBuilder sb) {
+        assert !key.equals(" ");
         ArrayList<Task> matchedTasks = new ArrayList<>();
         for (Task task : tasks) {
             if (task.getName().toLowerCase().contains(key.toLowerCase())) {

@@ -13,9 +13,9 @@ import java.text.ParseException;
  */
 public class DateManager {
 
-    private static String[] DATE_INPUT_FORMATS = {"invalid", "dd-MM-yyyy", "dd/MM/yyyy", "dd-MM-yyyy kkmm",
+    private static final String[] DATE_INPUT_FORMATS = {"invalid", "dd-MM-yyyy", "dd/MM/yyyy", "dd-MM-yyyy kkmm",
         "dd/MM/yyyy kkmm"};
-    private static String[] DATE_OUTPUT_FORMATS = {"MMM dd yyyy", "MMM dd yyyy',' hh:mma"};
+    private static final String[] DATE_OUTPUT_FORMATS = {"MMM dd yyyy", "MMM dd yyyy',' hh:mma"};
 
     /**
      * Returns Optional containing Date if String is valid.
@@ -60,8 +60,6 @@ public class DateManager {
         }
         return sdf.format(getDate(str).get());
     }
-
-    // return format of date String or invalid
 
     /**
      * Returns format of String input of a date.
@@ -124,8 +122,6 @@ public class DateManager {
 
     }
 
-    // checks validity integers in String representation of date
-
     /**
      * Checks validity of integers in String representation of a date.
      *
@@ -133,6 +129,11 @@ public class DateManager {
      * @return True if integers form a valid date. False otherwise.
      */
     private boolean isValidDateNumerals(String[] arr) {
+        assert arr.length <= 4;
+        assert canParseToInt(arr[0]);
+        assert canParseToInt(arr[1]);
+        assert canParseToInt(arr[2]);
+
         boolean isValid = true;
         if (Integer.parseInt(arr[0]) > 31) {
             // invalid if day > 31
@@ -155,5 +156,19 @@ public class DateManager {
         }
 
         return isValid;
+    }
+
+    /**
+     * Checks if String can be parsed to Integer.
+     * @param str Input String.
+     * @return True if String can be parsed as Integer, false otherwise.
+     */
+    private boolean canParseToInt(String str) {
+        try {
+            Integer.parseInt(str);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 }

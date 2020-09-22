@@ -61,6 +61,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Returns a message after executing a Command.
+     *
+     * @param input User input as String.
+     * @return Message as String.
+     */
     public String runSingleCommand(String input) {
         Parser parser = new Parser();
         StringBuilder sb = new StringBuilder();
@@ -77,7 +83,6 @@ public class TaskList {
             sb.append(Ui.invalidIndexMessage());
         } finally {
             String output = sb.toString();
-            sb = new StringBuilder();   // clears String
             return output;
         }
     }

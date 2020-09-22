@@ -14,7 +14,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 /**
- * data.Storage object handles saving and loading of data for list of Task objects.
+ * Storage object handles saving and loading of data for list of Task objects.
  * Task objects are stored as String representations in specified .txt file.
  *
  * @author Hakiem Rasid
@@ -24,7 +24,7 @@ public class Storage {
     private String filePath;
 
     /**
-     * Constructor of data.Storage object.
+     * Constructor of Storage object.
      *
      * @param filePath Target .txt file for saving and loading of data.
      */

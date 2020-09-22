@@ -22,9 +22,14 @@ public class DukeMain {
     }
 
     public String getResponse(String input) {
-        String out = this.list.runSingleCommand(input);
+        StringBuilder sb = new StringBuilder();
+        sb.append(Ui.horizontalLine());
+        sb.append("\n");
+        sb.append(this.list.runSingleCommand(input));
+        sb.append("\n");
+        sb.append(Ui.horizontalLine());
         this.list.save();
-        return out;
+        return sb.toString();
     }
 
 }

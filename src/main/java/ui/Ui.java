@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class Ui {
 
     private static final String HORIZONTAL_LINE =
-            "_________________________________________________________________________________________";
+            "______________________________________________________";
 
     /**
      * Returns and prints start-up message upon program execution.
@@ -34,7 +34,8 @@ public class Ui {
     }
 
     public static String chatStartMessage() {
-        return "Hello I'm Duke\nWhat can I do for you?\n";
+        return Ui.horizontalLine() + "\n" +
+                "Hello I'm Duke\nWhat can I do for you?\n" + Ui.horizontalLine();
     }
 
     /**

@@ -50,7 +50,13 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        StringBuilder sb = new StringBuilder();
+        sb.append(Ui.horizontalLine());
+        sb.append("\n");
+        sb.append(text);
+        sb.append("\n");
+        sb.append(Ui.horizontalLine());
+        return new DialogBox(sb.toString(), img);
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
