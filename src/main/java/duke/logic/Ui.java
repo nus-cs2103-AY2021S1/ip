@@ -55,7 +55,7 @@ public class Ui {
      */
     public static String printAdd(String description, int numberOfTasks) {
         String toPrint = "Got it. I've added this task:\n"
-                + description
+                + description + "\n"
                 + "Now you have " + numberOfTasks;
         if (numberOfTasks == 1) {
             toPrint = toPrint + " task in the list.\n";
@@ -73,7 +73,7 @@ public class Ui {
      */
     public static String printDelete(String description, int numberOfTasks) {
         String toPrint = "Noted. I've removed this task: \n"
-                + description
+                + description + "\n"
                 + "Now you have " + numberOfTasks;
         if (numberOfTasks == 1) {
             toPrint = toPrint + " task in the list.\n";
