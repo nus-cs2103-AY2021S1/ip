@@ -17,8 +17,8 @@ public class ToDo extends Task {
     }
 
     /**
-     * Returns a String representation of ToDo object. Clearly labels the ToDo object to be
-     * distinguishable from other Task objects.
+     * Returns a String representation of ToDo object. Clearly labels
+     * the ToDo object to be distinguishable from other Task objects.
      *
      * @return String representation of ToDo object.
      */

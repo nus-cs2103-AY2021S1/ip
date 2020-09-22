@@ -11,6 +11,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
+ * Credits: CS2103 JavaFX Tutorial.
  */
 public class MainWindow extends AnchorPane {
     @FXML
@@ -24,8 +25,10 @@ public class MainWindow extends AnchorPane {
 
     private DukeMain duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private final Image userImage = new Image(this.getClass()
+            .getResourceAsStream("/images/DaUser.png"));
+    private final Image dukeImage = new Image(this.getClass()
+            .getResourceAsStream("/images/DaDuke.png"));
 
     @FXML
     public void initialize() {
@@ -39,8 +42,9 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Creates two dialog boxes, one echoing user input and the other containing
+     * Duke's reply and then appends them to the dialog container. Clears the
+     * user input after processing.
      */
     @FXML
     private void handleUserInput() {
