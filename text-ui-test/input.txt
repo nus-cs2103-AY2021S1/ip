@@ -1,0 +1,19 @@
+blah
+todoffjslfsdj
+todo make tea
+event party
+deadline homework
+event birthday party /at 9 April 2020
+event birthday party /at 2020-04-09
+deadline homework /by 2020-08-13
+list
+done 1
+delete 1
+list
+done 5
+done fdjsfklsd
+delete 9
+delete fdjsfds
+delete all
+list
+bye
