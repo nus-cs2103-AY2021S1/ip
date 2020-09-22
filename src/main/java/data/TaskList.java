@@ -3,7 +3,7 @@ package data;
 import command.Command;
 import command.CommandType;
 import exception.InvalidInputException;
-import dukemain.Ui;
+import ui.Ui;
 import task.Task;
 
 import java.util.ArrayList;

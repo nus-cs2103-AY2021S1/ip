@@ -54,7 +54,7 @@ shadowJar {
 }
 
 checkstyle {
-    toolVersion = '8.29'
+    toolVersion = '8.36.1'
 }
 
 run{

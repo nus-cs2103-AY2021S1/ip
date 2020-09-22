@@ -1,4 +1,4 @@
-package dukemain;
+package ui;
 
 import task.Task;
 

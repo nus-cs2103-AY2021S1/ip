@@ -4,9 +4,8 @@ import task.Deadline;
 import task.Event;
 import task.Task;
 import task.ToDo;
-import dukemain.Ui;
+import ui.Ui;
 
-import java.util.Scanner;
 import java.util.ArrayList;
 
 /**
