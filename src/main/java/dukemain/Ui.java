@@ -6,7 +6,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 /**
- * main.Ui class handles any text or String representations to be viewed by the user.
+ * Ui class handles any text or String representations to be viewed by the user.
  *
  * @author Hakiem Rasid
  */
@@ -16,39 +16,53 @@ public class Ui {
             "_________________________________________________________________________________________";
 
     /**
-     * Prints start-up message upon program execution.
+     * Returns and prints start-up message upon program execution.
+     * @return Start-up message.
      */
-    public static void startUpMessage() {
+    public static String startUpMessage() {
+        StringBuilder sb = new StringBuilder();
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        horizontalLine();
-        System.out.println("Hello I'm Duke\nWhat can I do for you?");
-        //horizontalLine();
+        sb.append("Hello from\n" + logo);
+        sb.append(Ui.HORIZONTAL_LINE + "\n");
+        sb.append("Hello I'm Duke\nWhat can I do for you?");
+        System.out.println(sb.toString());
+        return sb.toString();
+    }
+
+    public static String chatStartMessage() {
+        return "Hello I'm Duke\nWhat can I do for you?\n";
     }
 
     /**
-     * Prints a horizontal line.
+     * Returns horizontal line
+     *
+     * @return Horizontal line.
      */
-    public static void horizontalLine() {
-        System.out.println(Ui.HORIZONTAL_LINE);
+    public static String horizontalLine() {
+        return Ui.HORIZONTAL_LINE;
     }
 
     /**
-     * Prints goodbye message upon exiting program.
+     *
      */
-    public static void byeMessage() {
-        System.out.println("Bye. Hope to see you again soon!");
+    /**
+     * Returns goodbye message upon exiting program.
+     *
+     * @return Goodbye message as String;
+     */
+    public static String byeMessage() {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
      * Prints message upon clearing list of Task objects.
      */
-    public static void clearedListMessage() {
-        System.out.println("Task list cleared!");
+    public static String clearedListMessage() {
+        return "Task list cleared!";
     }
 
     /**
@@ -60,76 +74,92 @@ public class Ui {
     }
 
     /**
-     * Prints message upon successful marking of Task as done.
+     * Returns message upon successful marking of Task as done.
+     *
      * @param task String representation of Task marked as done.
+     * @return Message as String.
      */
-    public static void markDoneMessage(String task) {
-        System.out.println("Nice! I have marked this task as done:\n\t" + task);
+    public static String markDoneMessage(String task) {
+        return ("Nice! I have marked this task as done:\n\t" + task);
     }
 
     /**
-     * Prints message upon successful deletion of specified task and current size
+     * Returns message upon successful deletion of specified task and current size
      * of list of Task objects.
      *
      * @param task String representation of Task deleted.
      * @param size Size of list of Task objects after deletion.
+     * @return Message as String.
      */
-    public static void deleteTaskMessage(String task, int size) {
-        System.out.println("Okay! I have removed this task:\n\t" + task);
-        System.out.println("Now you have " + size + " tasks in your list");
+    public static String deleteTaskMessage(String task, int size) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Okay! I have removed this task:\n\t" + task + "\n");
+        sb.append("Now you have " + size + " tasks in your list");
+        return sb.toString();
     }
 
     /**
-     * Prints message upon successful adding of new Task object to list and current
+     * Returns message upon successful adding of new Task object to list and current
      * size of list of Task objects.
      *
      * @param task String representation of Task added to list.
      * @param size Size of list of Task objects after adding new Task.
+     * @return Message as String.
      */
-    public static void addTaskMessage(String task, int size) {
-        System.out.println("Got it! Task added to list.");
-        System.out.println("\t" + task);
-        System.out.println("Now you have " + size + " tasks in your list.");
+    public static String addTaskMessage(String task, int size) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Got it! Task added to list.\n");
+        sb.append("\t" + task + "\n");
+        sb.append("Now you have " + size + " tasks in your list.");
+        return sb.toString();
     }
 
     /**
-     * Prints String representation of all Task objects in the input list.
-     *
+     * Returns String representation of all Task objects in the input list.
      * @param tasks List of Task objects.
+     * @param printOrFind Indicator if caller is a print or find method.
+     * @return List of all Task objects as String.
      */
-    public static void printList(ArrayList<Task> tasks, String printOrFind) {
+    public static String printList(ArrayList<Task> tasks, String printOrFind) {
+        StringBuilder sb = new StringBuilder();
         if (printOrFind.equals("print")) {
-            System.out.println("Here are your tasks:");
+            sb.append("Here are your tasks:\n");
         } else {
-            System.out.println("Here are your matching tasks:");
+            sb.append("Here are your matching tasks:\n");
         }
 
         for (int i = 0; i < tasks.size(); i++) {
-            System.out.println(i + 1 + ". " + tasks.get(i).printTask());
+            sb.append(i + 1 + ". " + tasks.get(i).printTask());
+            if (i != tasks.size() - 1) {
+                sb.append("\n");
+            }
         }
+        return sb.toString();
     }
 
     /**
-     * Prints message if FIND command does not return any matching Task objects.
+     * Returns message if FIND command does not return any matching Task objects.
+     *
+     * @return Message as String.
      */
-    public static void noMatchMessage() {
-        System.out.println("Sorry! There are not tasks " +
-                "that match that description.");
+    public static String noMatchMessage() {
+        return ("Sorry! There are not tasks " +
+                "that match that description.\n");
     }
 
     /**
      * Prints message upon reading input of invalid format.
      */
-    public static void invalidInputMessage() {
-        System.out.println("Please enter valid input");
+    public static String invalidInputMessage() {
+        return "Please enter valid input";
     }
 
     /**
      * Prints message upon reading DONE, DELETE input command
      * of invalid format.
      */
-    public static void invalidIndexMessage() {
-        System.out.println("Please enter valid index");
+    public static String invalidIndexMessage() {
+        return "Please enter valid index";
     }
 
     /**

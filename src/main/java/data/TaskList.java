@@ -10,19 +10,19 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * data.TaskList object contains a list of Task objects that are added and edited
- * by the user. This object has a data.Storage object to manage saving and
+ * TaskList object contains a list of Task objects that are added and edited
+ * by the user. This object has a Storage object to manage saving and
  * loading of data.
  *
  * @author Hakiem Rasid
  */
 public class TaskList {
 
-    private Storage storage;
+    private final Storage storage;
     private ArrayList<Task> list;
 
     /**
-     * Constructor for data.TaskList object.
+     * Constructor for TaskList object.
      * @param filePath Destination file for saving and loading of data.
      */
     public TaskList(String filePath) {
@@ -37,27 +37,50 @@ public class TaskList {
     public void runCommands() {
         Parser parser = new Parser();
         Scanner sc = new Scanner(System.in);
+        StringBuilder sb = new StringBuilder();
         while (true) {
-            Ui.horizontalLine();
+            System.out.println(Ui.horizontalLine());
             try {
                 String input = sc.nextLine();
-                Ui.horizontalLine();
+                System.out.println(Ui.horizontalLine());
                 Command cmd = parser.parseCommand(input);
-                this.list = cmd.executeCommand(this.list);
+                this.list = cmd.executeCommand(this.list, sb);
                 if (cmd.getType().equals(CommandType.BYE)) {
                     // exit program if user inputs "bye"
                     break;
                 }
             } catch (InvalidInputException e) {
-                System.out.println(e.getMessage());
-                Ui.invalidInputMessage();
+                sb.append(e.getMessage() + "\n");
+                sb.append(Ui.invalidInputMessage());
             } catch (IndexOutOfBoundsException obe) {
-                Ui.invalidIndexMessage();
+                sb.append(Ui.invalidIndexMessage());
+            } finally {
+                System.out.println(sb.toString());
+                sb = new StringBuilder();   // Clears String
             }
         }
     }
 
-    // Returns list of Tasks
+    public String runSingleCommand(String input) {
+        Parser parser = new Parser();
+        StringBuilder sb = new StringBuilder();
+        try {
+            Command cmd = parser.parseCommand(input);
+            this.list = cmd.executeCommand(this.list, sb);
+            if (cmd.getType().equals(CommandType.BYE)) {
+                // exit program if user inputs "bye"
+            }
+        } catch (InvalidInputException e) {
+            sb.append(e.getMessage() + "\n");
+            sb.append(Ui.invalidInputMessage());
+        } catch (IndexOutOfBoundsException obe) {
+            sb.append(Ui.invalidIndexMessage());
+        } finally {
+            String output = sb.toString();
+            sb = new StringBuilder();   // clears String
+            return output;
+        }
+    }
 
     /**
      * Returns List of Task objects.
@@ -68,7 +91,7 @@ public class TaskList {
     }
 
     /**
-     * Saves list of Task obejcts onto specified txt file.
+     * Saves list of Task objects onto specified txt file.
      */
     public void save() {
         storage.saveData(this.list);
