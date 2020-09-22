@@ -31,7 +31,6 @@ public class Storage {
         try {
             file.createNewFile();
             this.lineReader = new Scanner(file);
-
         } catch (FileNotFoundException e) {
             System.out.println("File is not found");
             e.printStackTrace();
