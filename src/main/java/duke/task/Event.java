@@ -26,8 +26,7 @@ public class Event extends Task {
             LocalDateTime dateTime;
             DateTimeFormatter formatter =
                     DateTimeFormatter
-                            .ofPattern("dd/MM/yyyy[ HHmm]")
-                            .withResolverStyle(ResolverStyle.STRICT);
+                            .ofPattern("dd/MM/yyyy[ HHmm]");
             TemporalAccessor temporalAccessor =
                     formatter.parseBest(
                             timeAt,

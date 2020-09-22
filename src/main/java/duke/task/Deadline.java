@@ -22,7 +22,7 @@ public class Deadline extends Task {
         try {
             LocalDateTime dateTime;
             DateTimeFormatter formatter =
-                    DateTimeFormatter.ofPattern("dd/MM/yyyy[ HHmm]").withResolverStyle(ResolverStyle.STRICT);;
+                    DateTimeFormatter.ofPattern("dd/MM/yyyy[ HHmm]");
             TemporalAccessor temporalAccessor = formatter.parseBest(timeBy, LocalDateTime::from, LocalDate::from);
             if (temporalAccessor instanceof LocalDateTime) {
                 this.timeBy = (LocalDateTime) temporalAccessor;
