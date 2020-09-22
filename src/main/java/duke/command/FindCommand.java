@@ -1,11 +1,11 @@
 package duke.command;
 
-import duke.Task;
-import duke.TaskList;
-import duke.Ui;
+import duke.logic.Ui;
+import duke.task.Task;
+import duke.task.TaskList;
 
 public class FindCommand implements Command {
-    String cmd;
+    private String cmd;
 
     public FindCommand(String cmd) {
         this.cmd = cmd;
@@ -15,13 +15,13 @@ public class FindCommand implements Command {
     public String execute(TaskList tasks) {
         TaskList res = new TaskList();
         String toSearch = cmd.replaceFirst("find\\s+", "");
-        for (Task task : tasks.thingsToDo) {
+        for (Task task : tasks.getThingsToDo()) {
             if (task.getDescription().matches(".*?" + toSearch + ".*")) {
                 res.add(task);
             }
         }
         // do ui stuff
-        return Ui.printList(res.printTodoList());
+        return Ui.printList(res.printTaskList());
         // do storage stuff
         // do tasklist stuff
     }

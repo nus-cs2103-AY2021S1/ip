@@ -1,11 +1,12 @@
 package duke.command;
 
-import duke.Task;
-import duke.TaskList;
-import duke.Ui;
+import duke.logic.Ui;
+import duke.task.Task;
+import duke.task.TaskList;
+
 
 public class EventCommand implements Command {
-    Task toBeAdded;
+    private Task toBeAdded;
 
     public EventCommand(Task toBeAdded) {
         this.toBeAdded = toBeAdded;

@@ -1,10 +1,11 @@
 package duke.command;
 
-import duke.TaskList;
-import duke.Ui;
+import duke.logic.Ui;
+import duke.task.TaskList;
+
 
 public class DoneCommand implements Command {
-    int index;
+    private int index;
 
     public DoneCommand(int index) {
         this.index = index;

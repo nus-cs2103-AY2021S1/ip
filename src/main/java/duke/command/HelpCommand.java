@@ -1,7 +1,7 @@
 package duke.command;
 
-import duke.TaskList;
-import duke.Ui;
+import duke.logic.Ui;
+import duke.task.TaskList;
 
 public class HelpCommand implements Command {
     public HelpCommand() {

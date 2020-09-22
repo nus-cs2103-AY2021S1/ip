@@ -1,9 +1,9 @@
-# Duke project - Individual project for CS2103 
+# duke.Duke project - Individual project for CS2103 
 
-This is a project for a todo-list named Duke.
+This is a project for a todo-list named duke.Duke.
 
 ## How to use
-Duke supports several commands:
+duke.Duke supports several commands:
 1. `list`
 This will list all the things to be done.
 2. `done <number>` 
@@ -21,4 +21,4 @@ Finds a task that matches (part of, or the entire) description
 8. `delete <number>`
 Deletes the entry with the corresponding index number
 9. `bye`
-Exits Duke.
+Exits duke.Duke.

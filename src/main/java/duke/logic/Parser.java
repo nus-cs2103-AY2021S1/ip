@@ -1,31 +1,47 @@
-package duke;
+package duke.logic;
 
 import java.text.ParseException;
 
 import duke.command.Command;
 import duke.command.DeadlineCommand;
 import duke.command.DeleteCommand;
-import duke.command.HelpCommand;
 import duke.command.DoneCommand;
 import duke.command.EventCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
+import duke.command.HelpCommand;
 import duke.command.ListCommand;
 import duke.command.ToDoCommand;
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.ToDo;
 
 public class Parser {
-    // TODO: 20/8/20 CHANGE ALL MATCHES TO matcher.find
+    /**
+     * Parses a command as per the Duke specification.
+     * Available command includes:
+     *     <pre><code>bye, help, find, done, delete, todo, deadline, event</code></pre>
+     * More information in the User Guide of Duke.
+     * @param echo The command to be parsed, in String format.
+     * @param tasks The TaskList list in which the task generated (if any) will be added to.
+     * @return a command corresponding to the parsed String
+     * @throws DukeException If the command is invalid or of the wrong form.
+     * @throws ParseException If the date cannot be parsed correctly.
+     */
     public static Command parseCommand(String echo, TaskList tasks) throws DukeException, ParseException {
         if (echo.equals("bye")) {
             assert echo != null : "Input should not be null";
             return new ExitCommand();
-        } if (echo.equals("help")) {
+        } else if (echo.equals("help")) {
             return new HelpCommand();
         } else if (echo.matches("(?i)list\\s*")) { // Querying items
             return new ListCommand();
         } else if (echo.matches("(?i)find\\s+\\S+")) {
             return new FindCommand(echo);
-        } else if (echo.matches("(?i)^done.*")) {  // Checks if it matches done and an integer
+        } else if (echo.matches("(?i)^done.*")) { // Checks if it matches done and an integer
             int index = Parser.parseDone(echo, tasks);
             return new DoneCommand(index);
         } else if (echo.matches("(?i)^delete.*")) { // Checks if it matches delete and an integer
@@ -45,7 +61,8 @@ public class Parser {
         }
     }
 
-    public static Task parseToDo(String echo) throws DukeException {
+
+    private static Task parseToDo(String echo) throws DukeException {
         if (echo.matches("(?i)^todo\\s+\\S+.*")) {
             String text = echo.replaceFirst("(?i)^todo\\s*", "");
             return new ToDo(text);
@@ -56,7 +73,7 @@ public class Parser {
         }
     }
 
-    public static Task parseDeadline(String echo) throws DukeException {
+    private static Task parseDeadline(String echo) throws DukeException {
         if (echo.matches("(?i)^deadline\\s+\\S+.*\\s+\\/by\\s+\\S+.*")) {
             String[] res = echo.replaceFirst("(?i)deadline\\s+", "").strip().split("(?i)/by\\s*", 2);
             return new Deadline(res[0], res[1]);
@@ -74,7 +91,7 @@ public class Parser {
         }
     }
 
-    public static Task parseEvent(String echo) throws DukeException, ParseException {
+    private static Task parseEvent(String echo) throws DukeException, ParseException {
         if (echo.matches("(?i)^event\\s+\\S+.*\\s+\\/at\\s+\\S+.*")) {
             String[] res = echo.replaceFirst("(?i)event\\s+", "").strip().split("(?i)/at\\s*", 2);
             return new Event(res[0], res[1]);
@@ -92,7 +109,7 @@ public class Parser {
         }
     }
 
-    public static int parseDone(String echo, TaskList tasks) throws DukeException {
+    private static int parseDone(String echo, TaskList tasks) throws DukeException {
         int listLength = tasks.length();
         String res = "";
         int toBeMarked;
@@ -111,7 +128,7 @@ public class Parser {
         return toBeMarked - 1;
     }
 
-    public static int parseDelete(String echo, int listLength) throws DukeException {
+    private static int parseDelete(String echo, int listLength) throws DukeException {
         String res = "";
         if (echo.matches("(?i)delete\\s+[0-9]+")) {
             res = echo.replaceFirst("(?i)delete\\s+", "");

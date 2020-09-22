@@ -1,4 +1,4 @@
-package duke;
+package duke.logic;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -9,7 +9,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.text.ParseException;
+
+import duke.task.TaskList;
 
 public class Storage {
     /**
@@ -35,7 +36,13 @@ public class Storage {
         wr.close();
     }
 
-    public static TaskList load() throws FileNotFoundException, IOException, DukeException, ParseException {
+    /**
+     * Loads a TaskList from a file.
+     * @return a TaskList corresponding to the file input.
+     * @throws FileNotFoundException if the file is not found.
+     * @throws IOException if an I/O error occurs.
+     */
+    public static TaskList load() throws FileNotFoundException, IOException {
         TaskList tasks = new TaskList();
         Parser parser = new Parser();
         Path filePath = Paths.get("data", "duke.txt");

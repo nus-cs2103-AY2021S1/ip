@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.TaskList;
+import duke.task.TaskList;
 
 public interface Command {
     String execute(TaskList tasks);

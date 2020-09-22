@@ -1,11 +1,11 @@
 package duke.command;
 
-import duke.Task;
-import duke.TaskList;
-import duke.Ui;
+import duke.logic.Ui;
+import duke.task.Task;
+import duke.task.TaskList;
 
 public class DeleteCommand implements Command {
-    int indexToBeDeleted;
+    private int indexToBeDeleted;
 
     public DeleteCommand(int indexToBeDeleted) {
         this.indexToBeDeleted = indexToBeDeleted;

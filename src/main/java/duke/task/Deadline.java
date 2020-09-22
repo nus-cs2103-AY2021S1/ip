@@ -1,12 +1,17 @@
-package duke;
+package duke.task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Deadline extends Task {
-    LocalDateTime timeBy;
+    private LocalDateTime timeBy;
 
+    /**
+     * @param desc A Constructor for the Deadline object representing a task with a deadline.
+     * @param timeBy The time at which the event is due.
+     * @throws DateTimeParseException
+     */
     public Deadline(String desc, String timeBy) throws DateTimeParseException {
         super(desc);
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");

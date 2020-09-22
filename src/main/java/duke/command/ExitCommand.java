@@ -1,10 +1,11 @@
 package duke.command;
 
-import duke.TaskList;
-import duke.Ui;
+import duke.logic.Ui;
+import duke.task.TaskList;
+
 
 public class ExitCommand implements Command {
-    TaskList tasks;
+    private TaskList tasks;
 
     public ExitCommand() {
         this.tasks = tasks;

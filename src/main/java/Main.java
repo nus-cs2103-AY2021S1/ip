@@ -1,23 +1,23 @@
-
-
 import java.io.IOException;
 
+import duke.Duke;
+import duke.logic.Storage;
+import duke.task.TaskList;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-import duke.Storage;
-import duke.TaskList;
+
 /**
- * A GUI for Duke using FXML.
+ * A GUI for duke.Duke using FXML.
  */
 public class Main extends Application {
     private Duke duke = new Duke();
-    TaskList tasks = new TaskList();
-    Storage storage = new Storage();
-    boolean isFinished = false;
+    private TaskList tasks = new TaskList();
+    private Storage storage = new Storage();
+    private boolean isFinished = false;
 
     @Override
     public void start(Stage stage) {
@@ -25,6 +25,7 @@ public class Main extends Application {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
+            stage.setTitle("Duke");
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
