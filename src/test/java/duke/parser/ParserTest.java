@@ -15,7 +15,9 @@ import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
+import duke.command.HelpCommand;
 import duke.command.ShowCommand;
+import duke.command.SortCommand;
 import duke.exception.DukeException;
 import duke.exception.UnknownCommandException;
 
@@ -38,6 +40,9 @@ public class ParserTest {
             String s6 = "delete 2";
             String s7 = "find book";
             String s8 = "bye";
+            String s9 = "sort";
+            String s10 = "help";
+
             // Tests
             assertTrue(Parser.parse(s1) instanceof AddToDoCommand);
             assertTrue(Parser.parse(s2) instanceof AddDeadlineCommand);
@@ -47,6 +52,8 @@ public class ParserTest {
             assertTrue(Parser.parse(s6) instanceof DeleteCommand);
             assertTrue(Parser.parse(s7) instanceof FindCommand);
             assertTrue(Parser.parse(s8) instanceof ExitCommand);
+            assertTrue(Parser.parse(s9) instanceof SortCommand);
+            assertTrue(Parser.parse(s10) instanceof HelpCommand);
         } catch (DukeException e) {
             System.out.println(Arrays.toString(e.getStackTrace()));
             fail();
@@ -67,6 +74,7 @@ public class ParserTest {
             String s6 = "delete random";
             String s7 = "   find   ";
             String s8 = "bye 444";
+
             // Tests
             assertTrue(Parser.parse(s1) instanceof AddToDoCommand);
             assertTrue(Parser.parse(s2) instanceof AddDeadlineCommand);
@@ -92,6 +100,7 @@ public class ParserTest {
         String s3 = "findd";
         String s4 = "    ";
         String s5 = " do find";
+
         // Tests
         assertThrows(UnknownCommandException.class, () -> Parser.parse(s1));
         assertThrows(UnknownCommandException.class, () -> Parser.parse(s2));
@@ -99,4 +108,5 @@ public class ParserTest {
         assertThrows(UnknownCommandException.class, () -> Parser.parse(s4));
         assertThrows(UnknownCommandException.class, () -> Parser.parse(s5));
     }
+
 }
