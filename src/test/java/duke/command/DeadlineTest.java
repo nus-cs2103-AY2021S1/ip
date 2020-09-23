@@ -67,22 +67,4 @@ public class DeadlineTest {
 
         assertEquals("\u2639 OOPS!!! Wrong 'deadline' command format!", message);
     }
-
-    @Test
-    public void test4() {
-        TaskList taskList = new TaskList();
-        Storage storage = new Storage(path);
-        Ui ui = new Ui();
-
-        Command command = new DeadlineCommand("deadline homework /by 12/12/2020 1234");
-
-        String message = null;
-        try {
-            command.execute(taskList, storage, ui);
-        } catch (DukeStorageException | DukeCommandException e) {
-            message = e.getMessage();
-        }
-
-        assertEquals(null, message);
-    }
 }

@@ -31,22 +31,4 @@ public class TodoTest {
 
         assertEquals("\u2639 OOPS!!! Wrong 'todo' command format!", message);
     }
-
-    @Test
-    public void test2() {
-        TaskList taskList = new TaskList();
-        Storage storage = new Storage(path);
-        Ui ui = new Ui();
-
-        Command command = new TodoCommand("todo homework");
-
-        String message = null;
-        try {
-            command.execute(taskList, storage, ui);
-        } catch (DukeStorageException | DukeCommandException e) {
-            message = e.getMessage();
-        }
-
-        assertEquals(null, message);
-    }
 }

@@ -1,7 +1,6 @@
 package duke.task;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 
 /**
  * A class for different types of class.

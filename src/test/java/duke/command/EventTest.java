@@ -67,22 +67,4 @@ public class EventTest {
 
         assertEquals("\u2639 OOPS!!! Wrong 'event' command format!", message);
     }
-
-    @Test
-    public void test4() {
-        TaskList taskList = new TaskList();
-        Storage storage = new Storage(path);
-        Ui ui = new Ui();
-
-        Command command = new EventCommand("event party /at 12/12/2020 1234");
-
-        String message = null;
-        try {
-            command.execute(taskList, storage, ui);
-        } catch (DukeStorageException | DukeCommandException e) {
-            message = e.getMessage();
-        }
-
-        assertEquals(null, message);
-    }
 }
