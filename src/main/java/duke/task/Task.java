@@ -147,6 +147,7 @@ public abstract class Task implements Comparable<Task> {
         } else if (!isDone && otherTask.isDone) {
             return -1;
         }
+
         // Proceeds to compare tasks by task type, then time.
         if (taskType == otherTask.taskType) {
             return dateTime.compareTo(otherTask.dateTime);
