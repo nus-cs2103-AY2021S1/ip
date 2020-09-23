@@ -1,9 +1,5 @@
-E
-0
-CS2103 lecture 
-2020-08-01
 D
-0
+1
 CS2103 project submission 
 2020-08-01
 D
@@ -16,3 +12,14 @@ goto Forum
 T
 0
 a
+T
+0
+have lunch
+D
+0
+submit iP 
+2020-09-25
+E
+0
+have dinner 
+2020-09-20

@@ -206,9 +206,9 @@ public class Ui {
                         + "\n-> event {task content} /{time} || add an event task"
                         + "\n-> list   || list all tasks"
                         + "\n-> done {order of task in task list}   || mark a task as done"
-                        + "\n-> switch {list name} || switch to/create a task list"
+                        + "\n-> switch {list name without '.txt'} || switch to/create a task list"
                         + "\n-> current list || view current task list you are using"
-                        + "\n-> all list || view all task lists you created\n");
+                        + "\n-> all lists || view all task lists you created\n");
     }
 
     /**
