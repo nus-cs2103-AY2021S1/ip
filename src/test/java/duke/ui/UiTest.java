@@ -1,5 +1,6 @@
 package duke.ui;
 
+import static duke.util.Keyword.FILE_CREATION_ERR;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
@@ -41,7 +42,7 @@ public class UiTest {
     @Test
     public void testDeleteTask() {
         assertEquals("Noted. I've removed this task:\n    [T][\u2718] test\n"
-            + "Now you have 5 tasks in the list.\n", ui.deleteTask(toDo, 5));
+                + "Now you have 5 tasks in the list.\n", ui.deleteTask(toDo, 5));
     }
 
     /**
@@ -50,7 +51,7 @@ public class UiTest {
     @Test
     public void testAddTask() {
         assertEquals("Got it. I've added this task:\n    [T][\u2718] test\n"
-            + "Now you have 4 tasks in the list.\n", ui.addTask(toDo, 4));
+                + "Now you have 4 tasks in the list.\n", ui.addTask(toDo, 4));
     }
 
     /**
@@ -76,15 +77,15 @@ public class UiTest {
         TaskList taskList = new TaskList(tasks);
         // Test 1
         String expectedString = "Here are the matching tasks in your list:\n"
-            + "1. [T][\u2718] todo1\n"
-            + "2. [T][\u2718] todo2\n"
-            + "3. [T][\u2718] todo3\n";
+                + "1. [T][\u2718] todo1\n"
+                + "2. [T][\u2718] todo2\n"
+                + "3. [T][\u2718] todo3\n";
         assertEquals(expectedString, ui.showTaskList(taskList, "matching "));
         // Test 2
         expectedString = "Here are the tasks in your list:\n"
-            + "1. [T][\u2718] todo1\n"
-            + "2. [T][\u2718] todo2\n"
-            + "3. [T][\u2718] todo3\n";
+                + "1. [T][\u2718] todo1\n"
+                + "2. [T][\u2718] todo2\n"
+                + "3. [T][\u2718] todo3\n";
         assertEquals(expectedString, ui.showTaskList(taskList, ""));
     }
 
@@ -96,4 +97,10 @@ public class UiTest {
         assertEquals("There are no matching tasks with the keyword size.\n", ui.emptyFind("size"));
         assertEquals("There are no matching tasks with the keyword .\n", ui.emptyFind(""));
     }
+
+    @Test
+    public void fileCreationError_message_success() {
+        assertEquals("Error in creating file!", FILE_CREATION_ERR);
+    }
+
 }
