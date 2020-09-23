@@ -31,15 +31,15 @@ public class SimpleCommandTest extends CommandTests {
     @Test
     public void checkValidity_invalidTaskNumber_throwsInvalidTaskNumberException() {
         String expectedMessage = String.format("OOPS!!! Task number does not exist in the list.\n"
-            + "Your current list only has %d tasks!\n", 0);
+                + "Your current list only has %d tasks!\n", 0);
         SimpleCommand sc1 = new DoneCommand("5");
         SimpleCommand sc2 = new DeleteCommand("-2");
         // Tests
         InvalidTaskNumberException e = assertThrows(
-            InvalidTaskNumberException.class, () -> executeTask(sc1));
+                InvalidTaskNumberException.class, () -> executeTask(sc1));
         assertEquals(expectedMessage, e.getMessage());
         InvalidTaskNumberException e2 = assertThrows(
-            InvalidTaskNumberException.class, () -> executeTask(sc2));
+                InvalidTaskNumberException.class, () -> executeTask(sc2));
         assertEquals(expectedMessage, e2.getMessage());
     }
 
