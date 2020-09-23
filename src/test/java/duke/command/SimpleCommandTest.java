@@ -42,4 +42,5 @@ public class SimpleCommandTest extends CommandTests {
             InvalidTaskNumberException.class, () -> executeTask(sc2));
         assertEquals(expectedMessage, e2.getMessage());
     }
+
 }

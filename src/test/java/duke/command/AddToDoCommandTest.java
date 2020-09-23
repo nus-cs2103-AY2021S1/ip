@@ -1,6 +1,7 @@
 package duke.command;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -75,5 +76,11 @@ public class AddToDoCommandTest extends CommandTests {
             System.out.println(e.getMessage());
             fail();
         }
+    }
+
+    @Test
+    public void isExit_false_success() {
+        AddToDoCommand cmd = new AddToDoCommand("test");
+        assertFalse(cmd.isExit());
     }
 }

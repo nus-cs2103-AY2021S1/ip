@@ -1,6 +1,7 @@
 package duke.command;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -63,6 +64,12 @@ public class DeleteCommandTest extends CommandTests {
         // Tests
         assertThrows(InvalidTaskNumberException.class, () -> executeTask(sc1));
         assertThrows(InvalidTaskNumberException.class, () -> executeTask(sc2));
+    }
+
+    @Test
+    public void isExit_false_success() {
+        DeleteCommand cmd = new DeleteCommand("1");
+        assertFalse(cmd.isExit());
     }
 
 }

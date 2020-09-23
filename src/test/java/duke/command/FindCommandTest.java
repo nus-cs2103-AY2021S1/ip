@@ -1,6 +1,7 @@
 package duke.command;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -73,4 +74,11 @@ public class FindCommandTest extends CommandTests {
         FindCommand fc = new FindCommand("");
         assertThrows(EmptyFindException.class, () -> executeTask(fc));
     }
+
+    @Test
+    public void isExit_false_success() {
+        FindCommand cmd = new FindCommand("test");
+        assertFalse(cmd.isExit());
+    }
+
 }

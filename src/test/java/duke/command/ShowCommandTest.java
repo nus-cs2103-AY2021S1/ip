@@ -1,6 +1,7 @@
 package duke.command;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
@@ -41,6 +42,11 @@ public class ShowCommandTest extends CommandTests {
             System.out.println(e.getMessage());
             fail();
         }
+    }
+
+    @Test
+    public void isExit_false_success() {
+        assertFalse(sc.isExit());
     }
 
 }

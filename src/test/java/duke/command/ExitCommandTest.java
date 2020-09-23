@@ -17,7 +17,7 @@ public class ExitCommandTest extends CommandTests {
      * Basic tests.
      */
     @Test
-    public void execute_isExit_success() {
+    public void isExit_false_success() {
         try {
             ExitCommand cmd = new ExitCommand();
             // Tests

@@ -18,5 +18,4 @@ public class CommandTests {
     public String executeTask(Command command) throws DukeException {
         return command.execute(taskList, ui, storage);
     }
-
 }
