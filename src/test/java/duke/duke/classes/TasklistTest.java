@@ -5,11 +5,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 import duke.classes.TaskList;
+
+import duke.exceptions.DukeExcessException;
 import duke.exceptions.DukeInvalidTimeException;
 import duke.exceptions.EmptyDukeException;
+
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Todo;
+
 
 
 public class TasklistTest {
@@ -18,7 +22,7 @@ public class TasklistTest {
     protected Todo todo = new Todo("buy books", 1, false, "N");
 
     @Test
-    public void todo_addition_success() throws EmptyDukeException {
+    public void todo_addition_success() throws EmptyDukeException, DukeExcessException {
         assertEquals(todo.toString(), tasklist.storeTodo("todo buy books").toString());
     }
 
@@ -26,13 +30,13 @@ public class TasklistTest {
     public void todo_addition_failure() throws EmptyDukeException {
         try {
             assertEquals(todo.toString(), tasklist.storeTodo("todo").toString());
-        } catch (EmptyDukeException e) {
+        } catch (EmptyDukeException | DukeExcessException e) {
             assertEquals("The description of your todo is empty.", e.getMessage());
         }
     }
 
     @Test
-    public void deadline_addition_success() throws EmptyDukeException, DukeInvalidTimeException {
+    public void deadline_addition_success() throws EmptyDukeException, DukeInvalidTimeException, DukeExcessException {
         Deadline deadline = new Deadline("return book /by 2017-10-10 05:00", 2,
                 false, "N");
         assertEquals(deadline.toString(),
@@ -64,7 +68,7 @@ public class TasklistTest {
     }
 
     @Test
-    public void event_addition_success() throws EmptyDukeException, DukeInvalidTimeException {
+    public void event_addition_success() throws EmptyDukeException, DukeInvalidTimeException, DukeExcessException {
         Event event = new Event("attend interview /by 2020-11-06 18:00", 3,
                 false, "N");
         assertEquals(event.toString(), tasklist.storeEvent("event attend interview /by 2020-11-06 18:00").toString());

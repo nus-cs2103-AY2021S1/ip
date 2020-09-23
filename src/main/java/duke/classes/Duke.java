@@ -3,6 +3,7 @@ package duke.classes;
 import java.io.IOException;
 
 import duke.exceptions.BlahException;
+import duke.exceptions.DukeExcessException;
 import duke.exceptions.DukeInvalidTimeException;
 import duke.exceptions.EmptyDukeException;
 import duke.tasks.Task;
@@ -194,7 +195,7 @@ public class Duke {
                 break;
             }
             return ui.addTask(todo, taskList.todoList);
-        } catch (EmptyDukeException | DukeInvalidTimeException e) {
+        } catch (EmptyDukeException | DukeInvalidTimeException | DukeExcessException e) {
             return ui.printError(e.toString());
         }
     }

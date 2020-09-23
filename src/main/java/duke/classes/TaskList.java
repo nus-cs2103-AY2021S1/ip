@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.function.Function;
 
 import duke.exceptions.BlahException;
+import duke.exceptions.DukeExcessException;
 import duke.exceptions.DukeInvalidTimeException;
 import duke.exceptions.EmptyDukeException;
 import duke.tasks.Deadline;
@@ -63,14 +64,15 @@ public class TaskList {
      * @param                     todo Task
      * @return                    Todo Task object
      * @throws EmptyDukeException For incomplete command
+     * @throws DukeExcessException For excess tasks
      */
-
-    public Todo storeTodo(String todo) throws EmptyDukeException {
+    public Todo storeTodo(String todo) throws EmptyDukeException, DukeExcessException {
         int count = todoList.size() + 1;
-        if (count > 100) {
+        countCheck(count);
+        /*if (count > 100) {
             System.out.println("You have far too many pending tasks!");
             return null;
-        } else if (todo.length() <= 4) {
+        } else*/ if (todo.length() <= 4) {
             throw new EmptyDukeException("The description of your todo is empty.");
         } else {
             Todo curr = new Todo(todo.substring(5), count, false, "N");
@@ -86,14 +88,16 @@ public class TaskList {
      * @return                          Deadline task
      * @throws EmptyDukeException       For incomplete command
      * @throws DukeInvalidTimeException For incorrect dates
+     * @throws DukeExcessException For excess tasks
      */
 
-    public Deadline storeDeadline(String deadline) throws EmptyDukeException, DukeInvalidTimeException {
+    public Deadline storeDeadline(String deadline) throws EmptyDukeException, DukeInvalidTimeException, DukeExcessException {
         int count = todoList.size() + 1;
-        if (count > 100) {
+        countCheck(count);
+        /*if (count > 100) {
             System.out.println("You have far too many pending tasks!");
             return null;
-        } else if (deadline.length() <= 8) {
+        } else*/ if (deadline.length() <= 8) {
             throw new EmptyDukeException("The description of your deadline is empty.");
         } else {
             Deadline curr = new Deadline(deadline.substring(9), count, false, "N");
@@ -109,14 +113,16 @@ public class TaskList {
      * @return                          Event task
      * @throws EmptyDukeException       For incomplete command
      * @throws DukeInvalidTimeException For incorrect dates
+     * @throws DukeExcessException For excess tasks
      */
 
-    public Event storeEvent(String event) throws EmptyDukeException, DukeInvalidTimeException {
+    public Event storeEvent(String event) throws EmptyDukeException, DukeInvalidTimeException, DukeExcessException {
         int count = todoList.size() + 1;
-        if (count > 100) {
+        countCheck(count);
+        /*if (count > 100) {
             System.out.println("You have far too many pending tasks!");
             return null;
-        } else if (event.length() <= 5) {
+        } else*/ if (event.length() <= 5) {
             throw new EmptyDukeException("The description of your event is empty.");
         } else {
             Event curr = new Event(event.substring(6), count, false, "N");
@@ -214,6 +220,17 @@ public class TaskList {
         return task.getType() == TaskType.DEADLINE
                 ? new Deadline(description, len, task.hasDone(), task.getTag())
                 : new Event(description, len, task.hasDone(), task.getTag());
+    }
+
+    /**
+     * Checks the size of the current task list.
+     * @param size Number of tasks in list
+     * @throws DukeExcessException IF there is more than 100 tasks inclusive of the current one
+     */
+    private void countCheck(int size) throws DukeExcessException {
+        if (size > 100) {
+            throw new DukeExcessException();
+        }
     }
 
     /**
