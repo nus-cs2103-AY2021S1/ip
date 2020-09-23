@@ -7,6 +7,12 @@ the ability to undo changes.
 
 ![Ui](./Ui.png)
 
+## Getting Started
+1. Ensure that you have java 11 installed on your machine.
+2. Download the duke.jar file from [here](github.com/TanLeYang/ip/releases/tag/A-Release).
+3. Move the duke.jar file into an empty folder. 
+4. Execute it by running `java -jar duke.jar` on your terminal or command prompt.
+
 ## Todo
 Add a Todo task.
 
