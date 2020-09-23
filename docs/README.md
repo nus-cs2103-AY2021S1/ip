@@ -26,7 +26,7 @@ If you can type fast, Duke can manage and organise your tasks faster than tradit
 3. Copy the file to the folder you want to use as the *home folder* for your Duke program.
 4. Double click the file to start the app for Windows, or run `java -jar duke.jar` for Mac.
 You should see the below GUI after a few seconds:
-![landing page](/docs/Ui.png.PNG)
+![landing page](/docs/Ui.png)
 5. Type the command in the command box and press Enter to execute it.
 
 Some example commands you can try:
