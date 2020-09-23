@@ -67,7 +67,7 @@ To view current task list you are using now, use this order:
 
 To view all task list you have created, use this order:
  
-* all list
+* all lists
 
 ### Exit Duke: bye
 Say bye to Duke and you will exit the app. Don't worry, all your data is stored in disk.
