@@ -20,34 +20,42 @@ Welcome to IncrediBot, a task manager app which manages your todos, events and d
 This application was written for CS2103T Software Engineering as part of its Individual Project. In this project, we
 are expected to learn more about SE principles and practices and apply them on a medium-sized Team Project.
 
-## Features
+## Highlights
+
+### Extensive testing using JUnit
+
+<p align="center"><img src="docs/tests.png" width="100%"/></p>
+
+ Close to 100 JUnit tests were written to ensure that there were no errors in any methods / components in IncrediBot.
+
+### Features
 
 In IncrediBot, three kinds of tasks can be created:
 
-### 1. Todo
+#### 1. Todo
 
 The simplest task in the whole app! Simply input a description and this task will be added to the bot.
 
-### 2. Event
+#### 2. Event
 
 Events are used for scheduling purposes, allowing you to tag a specific time frame to a task. 
 Time frames used can be flexible as you want it too! e.g. event eat /at Tampines
 
-### 3. Deadline
+#### 3. Deadline
 
 Last but not least, we have deadlines, tasks with fixed due dates. Use it to track your all your assignment and
 work deadlines!
  
-## To assist you with managing your tasks are:
+### To assist you with managing your tasks are:
 
-### Other Commands
+#### Other Commands
  - `list` - Displays the list of tasks
  - `sort` - Sorts the tasks according to completion status and type
  - `done` - Completes a task
  - `delete` - Deletes a task
  - `find` - Finds all tasks which matches the query word
 
-### Side features
+#### Side features
  - Fully responsive UI which supports full-screen usage
  - Prompts displayed whenever you input a wrong command
  - Prevents addition of duplicate tasks
