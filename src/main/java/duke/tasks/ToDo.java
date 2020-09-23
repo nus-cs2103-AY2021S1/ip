@@ -16,7 +16,9 @@ public class ToDo extends Task {
      * @param isDone The indicator of whether the task is done.
      * @param name The description of the task.
      */
-    public ToDo(boolean isDone, String name) { super(isDone, name); }
+    public ToDo(boolean isDone, String name) {
+        super(isDone, name);
+    }
 
     /** Returns the string representation of the task. */
     @Override

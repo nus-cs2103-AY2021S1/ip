@@ -1,13 +1,13 @@
 package duke.tasklist;
 
-import duke.tasks.Task;
-import duke.tasks.ToDo;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import duke.tasks.Task;
+import duke.tasks.ToDo;
 
 public class TaskListTest {
 
@@ -18,7 +18,7 @@ public class TaskListTest {
         ToDo toDo = new ToDo("read book");
         taskList.addTask(toDo);
         taskList.markTaskAsDone(0);
-        assertEquals(true, toDo.getIsDone());
+        assertEquals(true, toDo.isDone());
     }
 
     @Test
