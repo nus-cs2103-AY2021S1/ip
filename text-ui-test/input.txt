@@ -1,0 +1,12 @@
+todo borrow book
+event read book /at Mon 2-4pm
+deadline return book /by 2020-02-10
+wrongword
+list
+done 1
+list
+delete 1
+list
+deadline return book /by wrongdate
+list
+bye

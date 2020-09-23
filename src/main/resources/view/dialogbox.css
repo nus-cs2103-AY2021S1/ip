@@ -1,0 +1,12 @@
+.dialogbox{
+ -fx-background-color: #779ecb;
+ -fx-border-color: #ffffff ;
+ -fx-border-width: 3 ;
+ -fx-border-style: segments(10, 15, 15, 15)  line-cap round ;
+}
+
+.displaypic{
+ -fx-border-color: #ffffff ;
+ -fx-border-width: 3 ;
+ -fx-border-style: segments(10, 15, 15, 15)  line-cap round ;
+}

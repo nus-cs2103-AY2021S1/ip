@@ -1,0 +1,4 @@
+.bodybg{
+ -fx-background-image: url('nightsky.jpeg');
+ -fx-background-size: 150% 110%;
+}

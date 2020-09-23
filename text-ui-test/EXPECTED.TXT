@@ -1,7 +1,56 @@
-Hello from
+Initializing
  ____        _        
 |  _ \ _   _| | _____ 
 | | | | | | | |/ / _ \
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+Yo what's up man, it's ya boi DUKE 
+What can I do for you today, Sir?
+_________________________________________
+Got it. I've added this task:
+[T][✘] borrow book
+Now you have 1 tasks in the list.
+_________________________________________
+_________________________________________
+Got it. I've added this task:
+[E][✘] read book (at: Mon 2-4pm)
+Now you have 2 tasks in the list.
+_________________________________________
+_________________________________________
+Got it. I've added this task:
+[D][✘] return book (by: Sunday)
+Now you have 3 tasks in the list.
+_________________________________________
+_________________________________________
+OOPS!!! I'm sorry, but I don't know what that means :-(
+_________________________________________
+_________________________________________
+Here are the tasks in your list:
+1.[T][✘] borrow book
+2.[E][✘] read book (at: Mon 2-4pm)
+3.[D][✘] return book (by: Sunday)
+_________________________________________
+_________________________________________
+Nice! I've marked this task as done:
+1.[T][✓] borrow book
+_________________________________________
+_________________________________________
+Here are the tasks in your list:
+1.[T][✓] borrow book
+2.[E][✘] read book (at: Mon 2-4pm)
+3.[D][✘] return book (by: Sunday)
+_________________________________________
+_________________________________________
+Noted, I've removed this task:
+[T][✓] borrow book
+Now you have 2 tasks in the list.
+_________________________________________
+_________________________________________
+Here are the tasks in your list:
+1.[E][✘] read book (at: Mon 2-4pm)
+2.[D][✘] return book (by: Sunday)
+_________________________________________
+_________________________________________
+Bye. Hope to see you again soon!
+_________________________________________
