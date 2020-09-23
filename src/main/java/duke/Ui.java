@@ -35,7 +35,8 @@ public class Ui {
      * Prints welcome message for user.
      */
     public void showGreeting() {
-        this.message = "Hello! I'm Duke" + "\n" + "What can I do for you?";
+        this.message = "Greetings! I'm Duke" + "\n" + "What can I do for you?"
+                + "\n\n" + "Type 'help' to find out more about the commands!";
     }
 
     /**
