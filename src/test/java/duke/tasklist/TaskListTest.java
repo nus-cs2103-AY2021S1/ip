@@ -20,25 +20,25 @@ public class TaskListTest {
     }
 
     @Test
-    public void testSize() {
+    public void size_checkSizeOfTheTaskList_success() {
         assertEquals(3, task.size());
     }
 
     @Test
-    public void testGet() {
+    public void get_retrieveTaskFromTaskList_success() {
         assertEquals("[" + "\u2718" + "] hello world 2", task.get(2).toString());
     }
 
     @Test
-    public void testAdd() {
+    public void add_addTaskIntoTaskList_success() {
         // add again to test
         task.add(new Task("hello world 3"));
-        assertEquals(4, 4);
+        assertEquals(4, task.size());
     }
 
     @Test
-    public void testRemove() {
+    public void remove_removeTaskFromTaskList_success() {
         task.remove(2);
-        assertEquals(2, 2);
+        assertEquals(2, task.size());
     }
 }

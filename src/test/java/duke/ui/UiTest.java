@@ -21,7 +21,7 @@ public class UiTest {
 
     @Test
     @DisplayName("formatter for input message")
-    public void testMessageFormatter() {
+    public void messageFormatter_formatTheInputMessage_success() {
         String messageFormatterMessage = ui.messageFormatter("hello world");
         String str = "hello world\n";
         assertEquals(str, messageFormatterMessage);
@@ -29,7 +29,7 @@ public class UiTest {
 
     @Test
     @DisplayName("user's login greetings")
-    public void testGreetings() {
+    public void greetings_checkGreetingFromDuke_success() {
         String greetingMessage = ui.greetings();
         String str = HELLO_DUKE + "\n";
         assertEquals(str, greetingMessage);
@@ -37,7 +37,7 @@ public class UiTest {
 
     @Test
     @DisplayName("user's logout message")
-    public void testGoodBye() {
+    public void goodBye_checkGoodByeMessageFromDuke_success() {
         String goodbyeMessage = ui.goodBye();
         String str = GOODBYE_MSG + "\n";
         assertEquals(str, goodbyeMessage);
@@ -45,7 +45,7 @@ public class UiTest {
 
     @Test
     @DisplayName("error message")
-    public void testPrintException() {
+    public void printException_checkExceptionMessagePrinting_success() {
         String errorMessage = ui.printException("ERROR");
         String str = "ERROR\n";
         assertEquals(str, errorMessage);

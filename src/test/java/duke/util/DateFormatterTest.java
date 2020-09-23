@@ -23,28 +23,28 @@ public class DateFormatterTest {
 
     @Test
     @DisplayName("Check invalid date format (2020/10/13 2700)")
-    public void writeInvalidTimeExceptionTest() {
+    public void formatDateTime_invalidTime_invalidFormatDateExceptionThrown() {
         assertThrows(InvalidFormatDateException.class, () ->
                 dateFormatter.formatDateTime("2020/10/13 2700"));
     }
 
     @Test
     @DisplayName("Check impossible dates (2020-30-30 1600)")
-    public void writeInvalidDateExceptionTest() {
+    public void formatDateTime_invalidDate_invalidFormatDateExceptionThrown() {
         assertThrows(InvalidFormatDateException.class, () ->
                 dateFormatter.formatDateTime("2020-30-30 1600"));
     }
 
     @Test
     @DisplayName("Check valid date without time(2020-12-12)")
-    public void writeValidDateTest() throws InvalidFormatDateException {
+    public void formatDateTime_validDate_success() throws InvalidFormatDateException {
         LocalDateTime localDateTime = LocalDateTime.of(2020, 12, 12, 23, 59);
         assertEquals(localDateTime, dateFormatter.formatDateTime("2020-12-12"));
     }
 
     @Test
     @DisplayName("Check valid date with time(2020-12-12 1600)")
-    public void writeValidDateAndTimeTest() throws InvalidFormatDateException {
+    public void formatDateTime_validDateAndTime_success() throws InvalidFormatDateException {
         LocalDateTime localDateTime = LocalDateTime.of(2020, 12, 12, 16, 0);
         assertEquals(localDateTime, dateFormatter.formatDateTime("2020-12-12 1600"));
     }

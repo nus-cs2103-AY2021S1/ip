@@ -55,7 +55,7 @@ public class FormatCheckerTest {
 
         @Test
         @DisplayName("Missing /at for event")
-        public void checkMissingAtForEventTest() {
+        public void checkEventFormat_missingAtInInput_invalidFormatEventExceptionThrown() {
             String[] inputArr = getInputArray("event project 2020-12-12");
             String[] messageArr = inputArr[1].split(KEYWORD_EVENT_FORMAT, 2);
             assertThrows(InvalidFormatEventException.class, () -> checkEventFormat(messageArr));
@@ -63,7 +63,7 @@ public class FormatCheckerTest {
 
         @Test
         @DisplayName("Missing date for event")
-        public void checkMissingDateForEventTest() {
+        public void checkEventFormat_missingDate_invalidFormatEventExceptionThrown() {
             String[] inputArr = getInputArray("event project /at");
             inputArr[0] = inputArr[0].toLowerCase();
             String[] messageArr = inputArr[1].split(KEYWORD_EVENT_FORMAT, 2);
@@ -72,7 +72,7 @@ public class FormatCheckerTest {
 
         @Test
         @DisplayName("Missing description for event")
-        public void checkMissingDescriptionForEventTest() {
+        public void checkEventFormat_missingDescription_invalidFormatEventExceptionThrown() {
             String[] inputArr = getInputArray("event /at 2020-12-12");
             inputArr[0] = inputArr[0].toLowerCase();
             String[] messageArr = inputArr[1].split(KEYWORD_EVENT_FORMAT, 2);
@@ -81,7 +81,7 @@ public class FormatCheckerTest {
 
         @Test
         @DisplayName("Valid format for event")
-        public void checkValidFormatForEventTest() {
+        public void checkEventFormat_validFormat_success() {
             String[] inputArr = getInputArray("event project /at 2020-12-12");
             inputArr[0] = inputArr[0].toLowerCase();
             String[] messageArr = inputArr[1].split(KEYWORD_EVENT_FORMAT, 2);
@@ -94,7 +94,7 @@ public class FormatCheckerTest {
 
         @Test
         @DisplayName("Missing /by for deadline")
-        public void checkMissingByForDeadlineTest() {
+        public void checkDeadlineFormat_missingByInInput_invalidFormatDeadlineExceptionThrown() {
             String[] inputArr = getInputArray("deadline project 2020-12-11");
             String[] messageArr = inputArr[1].split(KEYWORD_DEADLINE_FORMAT, 2);
             assertThrows(InvalidFormatDeadlineException.class, () -> checkDeadlineFormat(messageArr));
@@ -102,7 +102,7 @@ public class FormatCheckerTest {
 
         @Test
         @DisplayName("Missing date for deadline")
-        public void checkMissingDateForDeadlineTest() {
+        public void checkDeadlineFormat_missingDate_invalidFormatDeadlineExceptionThrown() {
             String[] inputArr = getInputArray("deadline project /by");
             String[] messageArr = inputArr[1].split(KEYWORD_DEADLINE_FORMAT, 2);
             assertThrows(InvalidFormatDeadlineException.class, () -> checkDeadlineFormat(messageArr));
@@ -110,7 +110,7 @@ public class FormatCheckerTest {
 
         @Test
         @DisplayName("Missing description for deadline")
-        public void checkMissingDescriptionForDeadlineTest() {
+        public void checkDeadlineFormat_missingDescription_invalidFormatDeadlineExceptionThrown() {
             String[] inputArr = getInputArray("deadline /by 2020-11-11");
             String[] messageArr = inputArr[1].split(KEYWORD_DEADLINE_FORMAT, 2);
             assertThrows(InvalidFormatDeadlineException.class, () -> checkDeadlineFormat(messageArr));
@@ -118,7 +118,7 @@ public class FormatCheckerTest {
 
         @Test
         @DisplayName("Valid format for deadline")
-        public void checkValidFormatForDeadlineTest() {
+        public void checkDeadlineFormat_validFormat_success() {
             String[] inputArr = getInputArray("deadline project /by 2020-11-11");
             String[] messageArr = inputArr[1].split(KEYWORD_DEADLINE_FORMAT, 2);
             assertDoesNotThrow(() -> checkDeadlineFormat(messageArr));
@@ -130,21 +130,21 @@ public class FormatCheckerTest {
 
         @Test
         @DisplayName("Missing commands after event")
-        public void checkSingleWordCommandForEventTest() {
+        public void checkEmptyText_missingCommandsAfterEvent_emptyTextExceptionThrown() {
             String[] inputArr = getInputArray("event");
             assertThrows(EmptyTextException.class, () -> checkEmptyText(inputArr));
         }
 
         @Test
         @DisplayName("Missing commands after deadline")
-        public void checkSingleWordCommandForDeadlineTest() {
+        public void checkEmptyText_missingCommandsAfterDeadline_emptyTextExceptionThrown() {
             String[] inputArr = getInputArray("deadline");
             assertThrows(EmptyTextException.class, () -> checkEmptyText(inputArr));
         }
 
         @Test
         @DisplayName("Missing commands after todo")
-        public void checkSingleWordCommandForToDo() {
+        public void checkEmptyText_missingCommandsAfterToDo_emptyTextExceptionThrown() {
             String[] inputArr = getInputArray("todo");
             assertThrows(EmptyTextException.class, () -> checkEmptyText(inputArr));
         }
@@ -155,21 +155,21 @@ public class FormatCheckerTest {
 
         @Test
         @DisplayName("Extra commands after bye (check for extra words)")
-        public void checkExtraWordsAfterByeTest() {
+        public void checkByeFormat_extraWordAfterBye_invalidFormatByeExceptionThrown() {
             String[] inputArr = getInputArray("bye me");
             assertThrows(InvalidFormatByeException.class, () -> checkByeFormat(inputArr));
         }
 
         @Test
         @DisplayName("Extra commands after bye (check for extra numbers)")
-        public void checkExtraNumbersAfterByeTest() {
+        public void checkByeFormat_extraNumberAfterBye_invalidFormatByeExceptionThrown() {
             String[] inputArr = getInputArray("bye 2");
             assertThrows(InvalidFormatByeException.class, () -> checkByeFormat(inputArr));
         }
 
         @Test
         @DisplayName("Valid format for bye")
-        public void checkByeFormatTest() {
+        public void checkByeFormat_validFormat_success() {
             String[] inputArr = getInputArray("bye");
             assertDoesNotThrow(() -> checkByeFormat(inputArr));
         }
@@ -180,7 +180,7 @@ public class FormatCheckerTest {
 
         @Test
         @DisplayName("Missing index for delete")
-        public void checkMissingIndexAfterDeleteTest() {
+        public void checkDeleteFormat_missingIndex_invalidFormatDeleteExceptionThrown() {
             String[] inputArr = getInputArray("delete");
             TaskList tasks = new TaskList();
             assertThrows(InvalidFormatDeleteException.class, () -> checkDeleteFormat(tasks, inputArr));
@@ -188,7 +188,7 @@ public class FormatCheckerTest {
 
         @Test
         @DisplayName("0 index being used for delete")
-        public void checkZeroIndexAfterDeleteTest() {
+        public void checkDeleteFormat_zeroIndex_invalidFormatDeleteExceptionThrown() {
             String[] inputArr = getInputArray("delete 0");
             TaskList tasks = new TaskList();
             assertThrows(InvalidFormatDeleteException.class, () -> checkDeleteFormat(tasks, inputArr));
@@ -196,7 +196,7 @@ public class FormatCheckerTest {
 
         @Test
         @DisplayName("Negative index being used for delete")
-        public void checkNegativeIndexAfterDeleteTest() {
+        public void checkDeleteFormat_outOfBoundIndex_invalidFormatDeleteExceptionThrown() {
             String[] inputArr = getInputArray("delete -1");
             TaskList tasks = new TaskList();
             assertThrows(InvalidFormatDeleteException.class, () -> checkDeleteFormat(tasks, inputArr));
@@ -204,7 +204,7 @@ public class FormatCheckerTest {
 
         @Test
         @DisplayName("Valid format for delete")
-        public void checkValidDeleteFormat() {
+        public void checkDeleteFormat_validInput_success() {
             try {
                 String[] inputArr = getInputArray("delete 1");
                 TaskList tasks = new TaskList();
@@ -222,7 +222,7 @@ public class FormatCheckerTest {
 
         @Test
         @DisplayName("Missing index for done")
-        public void checkMissingIndexAfterDoneTest() {
+        public void checkDoneFormat_missingIndex_invalidFormatDoneExceptionThrown() {
             String[] inputArr = getInputArray("done");
             TaskList tasks = new TaskList();
             assertThrows(InvalidFormatDoneException.class, () -> checkDoneFormat(tasks, inputArr));
@@ -230,7 +230,7 @@ public class FormatCheckerTest {
 
         @Test
         @DisplayName("0 index being used for done")
-        public void checkZeroIndexAfterDoneTest() {
+        public void checkDoneFormat_zeroIndex_invalidFormatDoneExceptionThrown() {
             String[] inputArr = getInputArray("done 0");
             TaskList tasks = new TaskList();
             assertThrows(InvalidFormatDoneException.class, () -> checkDoneFormat(tasks, inputArr));
@@ -238,7 +238,7 @@ public class FormatCheckerTest {
 
         @Test
         @DisplayName("Negative index being used for done")
-        public void checkNegativeIndexAfterDoneTest() {
+        public void checkDoneFormat_outOfBoundIndex_invalidFormatDoneExceptionThrown() {
             String[] inputArr = getInputArray("done -1");
             TaskList tasks = new TaskList();
             assertThrows(InvalidFormatDoneException.class, () -> checkDoneFormat(tasks, inputArr));
@@ -246,7 +246,7 @@ public class FormatCheckerTest {
 
         @Test
         @DisplayName("Valid format for done")
-        public void checkValidDoneFormat() {
+        public void checkDoneFormat_validInput_success() {
             try {
                 String[] inputArr = getInputArray("done 1");
                 TaskList tasks = new TaskList();
@@ -264,21 +264,21 @@ public class FormatCheckerTest {
 
         @Test
         @DisplayName("Missing Keyword for find")
-        public void checkMissingKeywordForFind() {
+        public void checkFindFormat_missingKeyword_invalidFormatFindExceptionThrown() {
             String[] inputArr = getInputArray("find");
             assertThrows(InvalidFormatFindException.class, () -> checkFindFormat(inputArr));
         }
 
         @Test
         @DisplayName("Too many keywords for find")
-        public void checkMultipleKeywordsForFind() {
+        public void checkFindFormat_multipleKeywords_invalidFormatFindExceptionThrown() {
             String[] inputArr = getInputArray("find me too");
             assertThrows(InvalidFormatFindException.class, () -> checkFindFormat(inputArr));
         }
 
         @Test
         @DisplayName("Valid format for find")
-        public void checkValidFindFormatTest() {
+        public void checkFindFormat_validInput_success() {
             String[] inputArr = getInputArray("find duke");
             assertDoesNotThrow(() -> checkFindFormat(inputArr));
         }
@@ -290,14 +290,14 @@ public class FormatCheckerTest {
 
         @Test
         @DisplayName("Extra numbers after help")
-        public void checkExtraNumberAfterHelpTest() {
+        public void checkHelpFormat_extraNumberAfterHelp_invalidFormatHelpExceptionThrown() {
             String[] inputArr = getInputArray("help 2");
             assertThrows(InvalidFormatHelpException.class, () -> checkHelpFormat(inputArr));
         }
 
         @Test
         @DisplayName("Extra words after help")
-        public void checkExtraWordsAfterHelpTest() {
+        public void checkHelpFormat_extraWordAfterHelp_invalidFormatHelpExceptionThrown() {
             String[] inputArr = getInputArray("help me");
             assertThrows(InvalidFormatHelpException.class, () -> checkHelpFormat(inputArr));
         }
@@ -305,7 +305,7 @@ public class FormatCheckerTest {
 
         @Test
         @DisplayName("Valid format for help")
-        public void checkValidHelpFormatTest() {
+        public void checkHelpFormat_validInput_success() {
             String[] inputArr = getInputArray("help");
             assertDoesNotThrow(() -> checkHelpFormat(inputArr));
         }
@@ -317,21 +317,21 @@ public class FormatCheckerTest {
 
         @Test
         @DisplayName("Extra words after list")
-        public void checkExtraWordsAfterListTest() {
+        public void checkListFormat_extraWordAfterList_invalidFormatListExceptionThrown() {
             String[] inputArr = getInputArray("list me");
             assertThrows(InvalidFormatListException.class, () -> checkListFormat(inputArr));
         }
 
         @Test
         @DisplayName("Extra numbers after list")
-        public void checkExtraNumberAfterListTest() {
+        public void checkListFormat_extraNumberAfterList_invalidFormatListExceptionThrown() {
             String[] inputArr = getInputArray("list 2");
             assertThrows(InvalidFormatListException.class, () -> checkListFormat(inputArr));
         }
 
         @Test
         @DisplayName("Valid format for list")
-        public void checkValidListFormatTest() {
+        public void checkListFormat_validInput_success() {
             String[] inputArr = getInputArray("list");
             assertDoesNotThrow(() -> checkListFormat(inputArr));
         }
@@ -342,7 +342,7 @@ public class FormatCheckerTest {
 
         @Test
         @DisplayName("Missing index and command for remind")
-        public void checkMissingIndexAndCommandForRemindTest() {
+        public void checkReminderFormat_missingIndexAndCommand_invalidFormatReminderExceptionThrown() {
             try {
                 String[] inputArr = getInputArray("remind");
                 TaskList tasks = new TaskList();
@@ -356,7 +356,7 @@ public class FormatCheckerTest {
 
         @Test
         @DisplayName("Negative index being used for remind")
-        public void checkNegativeIndexForRemindTest() {
+        public void checkReminderFormat_negativeIndex_invalidFormatReminderExceptionThrown() {
             try {
                 String[] inputArr = getInputArray("remind -1 y");
                 TaskList tasks = new TaskList();
@@ -370,7 +370,7 @@ public class FormatCheckerTest {
 
         @Test
         @DisplayName("0 index being used for remind")
-        public void checkZeroIndexForRemindTest() {
+        public void checkReminderFormat_zeroIndex_invalidFormatReminderExceptionThrown() {
             try {
                 String[] inputArr = getInputArray("remind 0 y");
                 TaskList tasks = new TaskList();
@@ -384,7 +384,7 @@ public class FormatCheckerTest {
 
         @Test
         @DisplayName("Missing Index for remind")
-        public void checkMissingIndexForRemindTest() {
+        public void checkReminderFormat_missingIndex_invalidFormatReminderExceptionThrown() {
             try {
                 String[] inputArr = getInputArray("remind y");
                 TaskList tasks = new TaskList();
@@ -398,7 +398,7 @@ public class FormatCheckerTest {
 
         @Test
         @DisplayName("Missing command for remind")
-        public void checkMissingCommandForRemindTest() {
+        public void checkReminderFormat_missingCommand_invalidFormatReminderExceptionThrown() {
             try {
                 String[] inputArr = getInputArray("remind 1");
                 TaskList tasks = new TaskList();
@@ -412,7 +412,7 @@ public class FormatCheckerTest {
 
         @Test
         @DisplayName("Invalid command for remind")
-        public void checkInvalidCommandForRemindTest() {
+        public void checkReminderFormat_invalidCommandForYesOrNo_invalidFormatReminderExceptionThrown() {
             try {
                 String[] inputArr = getInputArray("remind 1 b");
                 TaskList tasks = new TaskList();
@@ -426,7 +426,7 @@ public class FormatCheckerTest {
 
         @Test
         @DisplayName("Invalid input at index for remind")
-        public void checkInvalidInputAtIndexForRemindTest() {
+        public void checkReminderFormat_invalidInputForIndex_invalidFormatReminderExceptionThrown() {
             try {
                 String[] inputArr = getInputArray("remind b y");
                 TaskList tasks = new TaskList();
@@ -440,7 +440,7 @@ public class FormatCheckerTest {
 
         @Test
         @DisplayName("Invalid input at command for remind")
-        public void checkInvalidInputAtCommandForRemindTest() {
+        public void checkReminderFormat_invalidInputForYesOrNo_invalidFormatReminderExceptionThrown() {
             try {
                 String[] inputArr = getInputArray("remind 1 2");
                 TaskList tasks = new TaskList();
@@ -454,7 +454,7 @@ public class FormatCheckerTest {
 
         @Test
         @DisplayName("Valid format for remind")
-        public void checkValidRemindFormatTest() {
+        public void checkReminderFormat_validInput_success() {
             try {
                 String[] inputArr = getInputArray("remind 1 y");
                 TaskList tasks = new TaskList();

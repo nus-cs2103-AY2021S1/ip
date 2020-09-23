@@ -34,7 +34,7 @@ public class FindCommandTest {
 
     @Test
     @DisplayName("Valid format for find (find duke)")
-    public void checkValidFindCommandVersionOneTest() {
+    public void findTasks_findTasksThatContainsDuke_success() {
         try {
             tasks.add(new ToDo("hello world"));
             String type = "done";
@@ -50,7 +50,7 @@ public class FindCommandTest {
 
     @Test
     @DisplayName("Valid format for find (find 4)")
-    public void checkValidFindCommandVersionTwoTest() {
+    public void findTasks_findTasksThatContainsNumberFour_success() {
         try {
             for (int i = 0; i < 5; i++) {
                 tasks.add(new ToDo("hello world " + i));

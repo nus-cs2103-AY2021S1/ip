@@ -27,7 +27,7 @@ public class UnknownCommandTest {
 
     @Test
     @DisplayName("Invalid command (hello world)")
-    public void checkInvalidCommandVersionOneTest() {
+    public void invalidInput_helloWorld_unknownCommandExceptionThrown() {
         String type = "hello world";
         UnknownCommand command = new UnknownCommand(new String[]{type});
         assertThrows(UnknownCommandException.class, () -> command.execute(tasks, ui, storage));
@@ -35,7 +35,7 @@ public class UnknownCommandTest {
 
     @Test
     @DisplayName("Invalid command (blah)")
-    public void checkInvalidCommandVersionTwoTest() {
+    public void invalidInput_blah_unknownCommandExceptionThrown() {
         String type = "blah";
         UnknownCommand command = new UnknownCommand(new String[]{type});
         assertThrows(UnknownCommandException.class, () -> command.execute(tasks, ui, storage));

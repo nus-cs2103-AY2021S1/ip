@@ -35,7 +35,7 @@ public class DeleteCommandTest {
 
     @Test
     @DisplayName("Valid format for delete (delete 1)")
-    public void checkValidDeleteCommandVersionOneTest() {
+    public void deleteTask_deletionOfTaskAtIndexOne_success() {
         try {
             tasks.add(new ToDo("hello world"));
             String type = "delete";
@@ -53,7 +53,7 @@ public class DeleteCommandTest {
 
     @Test
     @DisplayName("Valid format for delete (delete 5)")
-    public void checkValidDeleteCommandVersionTwoTest() {
+    public void deleteTask_deletionOfTaskAtIndexFive_success() {
         try {
             for (int i = 0; i < 5; i++) {
                 tasks.add(new ToDo("hello world"));

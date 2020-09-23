@@ -34,7 +34,7 @@ public class ReminderCommandTest {
 
     @Test
     @DisplayName("Valid format for remind (remind 1 y)")
-    public void checkValidRemindCommandVersionOneTest() {
+    public void setReminder_activateReminderForTaskAtIndexOne_success() {
         try {
             tasks.add(new ToDo("hello world"));
             String type = "remind";
@@ -52,7 +52,7 @@ public class ReminderCommandTest {
 
     @Test
     @DisplayName("Valid format for remind (remind 4 n)")
-    public void checkValidRemindCommandVersionTwoTest() {
+    public void setReminder_deactivateReminderForTaskAtIndexFour_success() {
         try {
             for (int i = 0; i < 5; i++) {
                 tasks.add(new ToDo("hello world " + i));

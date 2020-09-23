@@ -35,7 +35,7 @@ public class ListCommandTest {
 
     @Test
     @DisplayName("Calling list on empty list")
-    public void checkValidListCommandVersionOneTest() {
+    public void showListTasks_emptyList_success() {
         try {
             ListCommand command = new ListCommand(new String[]{"list"});
             String dukeReply = (String) method.invoke(command, tasks, ui);
@@ -48,7 +48,7 @@ public class ListCommandTest {
 
     @Test
     @DisplayName("Calling list on non-empty list")
-    public void checkValidListCommandVersionTwoTest() {
+    public void showListTasks_nonEmptyList_success() {
         try {
             // generate 5 task into the tasklist
             for (int i = 0; i < 5; i++) {

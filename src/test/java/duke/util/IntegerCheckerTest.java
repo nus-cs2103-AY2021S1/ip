@@ -9,14 +9,14 @@ public class IntegerCheckerTest {
 
     @Test
     @DisplayName("Check if value is not a number")
-    public void checkIfNotANumberTest() {
+    public void isNumber_checkInputOfNonIntegerString_success() {
         IntegerChecker integerChecker = new IntegerChecker();
         assertEquals(false, integerChecker.isNumber("b"));
     }
 
     @Test
     @DisplayName("Check if value is a number")
-    public void checkIfNumberTest() {
+    public void isNumber_checkInputOfIntegerString_success() {
         IntegerChecker integerChecker = new IntegerChecker();
         assertEquals(true, integerChecker.isNumber("2"));
     }

@@ -20,7 +20,7 @@ import org.junit.jupiter.api.Test;
 public class HelpCommandTest {
 
     @Test
-    public void checkValidHelpCommandTest() {
+    public void getListOfCommands_userRequestingCommandsAvailable_success() {
         try {
             Method method = HelpCommand.class.getDeclaredMethod("getListOfCommands");
             method.setAccessible(true);

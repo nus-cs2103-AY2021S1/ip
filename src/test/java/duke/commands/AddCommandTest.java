@@ -42,7 +42,7 @@ public class AddCommandTest {
 
     @Test
     @DisplayName("Valid format for add task (event)")
-    public void checkValidAddTaskForEvent() {
+    public void addTask_addingEvent_success() {
         try {
             String type = "event";
             String descriptionAndDateTime = "project /at 2020-12-11";
@@ -60,7 +60,7 @@ public class AddCommandTest {
 
     @Test
     @DisplayName("Valid format for add task (deadline)")
-    public void checkValidAddTaskForDeadline() {
+    public void addTask_addingDeadline_success() {
         try {
             String type = "deadline";
             String descriptionAndDateTime = "project /by 2020-12-11";
@@ -78,7 +78,7 @@ public class AddCommandTest {
 
     @Test
     @DisplayName("Valid format for add task (todo)")
-    public void checkValidAddTaskForToDo() {
+    public void addTask_addingToDo_success() {
         try {
             String type = "todo";
             String description = "task 1";

@@ -22,7 +22,7 @@ public class ParserTest {
 
     @Test
     @DisplayName("Testing unknown command")
-    public void writeUnknownCommandTest() {
+    public void parse_invalidInput_unknownCommandExceptionThrown() {
         TaskList tasks = new TaskList();
         Ui ui = new Ui();
         Storage storage = new Storage();

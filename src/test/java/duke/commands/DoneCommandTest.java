@@ -35,7 +35,7 @@ public class DoneCommandTest {
 
     @Test
     @DisplayName("Valid format for done (done 1)")
-    public void checkValidDoneCommandVersionOneTest() {
+    public void mark_markTaskAtIndexOne_success() {
         try {
             tasks.add(new ToDo("hello world"));
             String type = "done";
@@ -52,7 +52,7 @@ public class DoneCommandTest {
 
     @Test
     @DisplayName("Valid format for done (done 5)")
-    public void checkValidDoneCommandVersionTwoTest() {
+    public void mark_markTaskAtIndexFive_success() {
         try {
             for (int i = 0; i < 5; i++) {
                 tasks.add(new ToDo("hello world"));
