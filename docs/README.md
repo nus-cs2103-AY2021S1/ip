@@ -6,7 +6,7 @@ Duke is an app for that helps manage a checklist of items via command line Inter
 ## Features 
 
 ### List Tasks
-To list all your events in the checklist
+List all your events in the checklist
 
 command: list
 
