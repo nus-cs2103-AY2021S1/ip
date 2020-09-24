@@ -17,7 +17,7 @@ public class TaskList {
     private static final String INFO_TASKS_ARCHIVED = "I have archived all your tasks into the archive file %s,"
             + " you can find it in the data folder";
     private static final String INFO_MATCHING_TASKS = "I've found these matching tasks in your list!";
-    private static final String INFO_LIST_EMPTY = "Your list is currently empty.";
+    private static final String INFO_LIST_EMPTY = "Your list is currently empty, no archive file has been created.";
 
     private static List<Task> tasks = new ArrayList<>();
     private final Storage storage;
