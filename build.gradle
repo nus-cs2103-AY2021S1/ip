@@ -1,0 +1,70 @@
+plugins {
+    id "application"
+    id 'checkstyle'
+}
+
+apply plugin: 'java-library'
+
+sourceCompatibility = 11
+targetCompatibility = 11
+
+application {
+    mainClassName = "tickbot.Tickbot"
+}
+
+repositories {
+    mavenCentral()
+}
+
+test {
+    useJUnitPlatform()
+}
+
+checkstyle {
+    toolVersion = '8.29'
+}
+
+dependencies {
+    // dependecies
+    implementation group: 'net.harawata', name: 'appdirs', version: '1.2.0'
+    implementation group: 'com.opencsv' , name: 'opencsv', version: '5.2'
+    implementation group: 'org.slf4j', name: 'slf4j-jdk14', version: '1.7.25'
+    // JUnit supports
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.4.0'
+    testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.4.0'
+    // Java FX supports
+    String javaFxVersion = '11'
+    implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'win'
+    implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'mac'
+    implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'linux'
+    implementation group: 'org.openjfx', name: 'javafx-controls', version: javaFxVersion, classifier: 'win'
+    implementation group: 'org.openjfx', name: 'javafx-controls', version: javaFxVersion, classifier: 'mac'
+    implementation group: 'org.openjfx', name: 'javafx-controls', version: javaFxVersion, classifier: 'linux'
+    implementation group: 'org.openjfx', name: 'javafx-fxml', version: javaFxVersion, classifier: 'win'
+    implementation group: 'org.openjfx', name: 'javafx-fxml', version: javaFxVersion, classifier: 'mac'
+    implementation group: 'org.openjfx', name: 'javafx-fxml', version: javaFxVersion, classifier: 'linux'
+    implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'win'
+    implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'mac'
+    implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'linux'
+}
+
+run {
+    standardInput = System.in
+}
+
+task fatJar(type: Jar) {
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE // allow duplicates
+    manifest {
+        attributes \
+            'Implementation-Title': 'Tickbot',
+            'Implementation-Version': '1.0',
+            'Main-Class': 'tickbot.Tickbot'
+    }
+    archiveBaseName = project.name
+    from {
+        configurations.compileClasspath.collect {
+            it.isDirectory() ? it : zipTree(it)
+        }
+    }
+    with jar
+}
