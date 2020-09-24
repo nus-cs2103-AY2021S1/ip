@@ -1,3 +1,5 @@
+# Duke Chatbot
+
 ## <ins>Overview</ins>
 Duke is an interactive chat-bot that helps to organize your tasks through a to-do list.
 
