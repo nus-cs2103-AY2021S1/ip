@@ -1,3 +1,50 @@
+## <ins>Overview</ins>
+Duke is an interactive chat-bot that helps to organize your tasks through a to-do list.
+
+<img src="https://raw.githubusercontent.com/eugene3231/ip/master/docs/Ui.png" width="400">
+
+## <ins>Quick Start Guide</ins>
+Prerequisites:
+
+* Java JDK 11
+* Ensure that your `JAVA_HOME` is set to the correct JDK 11 location
+
+Running Duke:
+  1. [Download](https://github.com/eugene3231/ip/releases) *`Duke.jar`*
+  2. Run *`Duke.jar`*
+  3. The GUI should appear and you can start talking to Duke!
+
+
+## <ins>Features</ins>
+
+### Add tasks
+* Creates a task of type listed below and add it to the task list.
+  - Deadline
+  - Event
+  - Todo
+
+### Delete tasks
+* Removes a task.
+
+### Show all tasks
+* Displays all tasks.
+
+### Clear all tasks
+* Removes all tasks.
+
+### Find a task
+* Finds a task based on a given keyword.
+
+### Mark task as completed
+* Completes a task.
+
+### Undo 
+* Undos the previous user command.
+
+</br>
+______________________________________________________________________________________________________
+</br>
+
 # Duke project template
 
 This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
