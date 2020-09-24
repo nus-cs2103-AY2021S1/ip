@@ -13,7 +13,7 @@
 
 <p align="center"><img src="docs/Ui.png" width="100%"/></p>
 
-Welcome to IncrediBot, a task manager app which manages your todos, events and deadlines!
+Welcome to IncrediBot, a task manager app which manages your todos, events and deadlines! 
 
 ## About IncrediBot
 
