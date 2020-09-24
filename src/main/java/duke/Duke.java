@@ -9,7 +9,7 @@ import java.util.Scanner;
 @SuppressWarnings("checkstyle:Regexp")
 public class Duke {
     private static Scanner scan = new Scanner(System.in);
-    private static final String SAVE_PATH = "./src/data/SaveData.txt";
+    private static final String SAVE_PATH = "./SaveData.txt";
     private static enum AcceptedCommands {
         TODO,
         EVENT,

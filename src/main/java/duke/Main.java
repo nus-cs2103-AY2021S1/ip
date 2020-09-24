@@ -12,7 +12,7 @@ import javafx.stage.Stage;
  * A GUI for Duke using FXML.
  */
 public class Main extends Application {
-    private static final String SAVE_PATH = "./src/data/SaveData.txt";
+    private static final String SAVE_PATH = "./SaveData.txt";
     private Duke duke = new Duke(SAVE_PATH);
 
     @Override
