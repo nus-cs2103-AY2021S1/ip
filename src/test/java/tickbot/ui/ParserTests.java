@@ -41,7 +41,7 @@ public class ParserTests {
     public void testParser() {
         Parser parser = new Parser();
         parser.executeCommand("done -1");
-        String expected = "  Sorry, no such task found.\n";
+        String expected = "Sorry, no such task found.\n";
         assertEquals(expected, outContent.toString());
     }
 }

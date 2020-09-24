@@ -5,6 +5,9 @@ plugins {
 
 apply plugin: 'java-library'
 
+sourceCompatibility = 11
+targetCompatibility = 11
+
 application {
     mainClassName = "tickbot.Tickbot"
 }

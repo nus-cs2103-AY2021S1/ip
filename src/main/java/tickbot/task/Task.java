@@ -93,6 +93,6 @@ public abstract class Task {
         String tagString = tags.stream()
                 .map(tag -> "#" + tag)
                 .collect(Collectors.joining(" "));
-        return result + " " + tagString;
+        return tagString.isEmpty() ? result : result + " " + tagString;
     }
 }
