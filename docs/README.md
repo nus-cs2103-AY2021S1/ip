@@ -1,6 +1,6 @@
 # User Guide
 
-<img src="./Ui.png" width="350"></img>
+<img src="./Ui.png" width="350" />
 
 * [Features](#features)
   * [Task](#task)
