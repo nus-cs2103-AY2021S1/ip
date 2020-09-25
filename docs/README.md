@@ -65,6 +65,8 @@ storage and loads previous data from it.
 list
 ```
 
+Alias for `list`: `ls`.
+
 ### `todo` - add a todo task
 
 `todo` command can add a new todo task to the task list.
@@ -73,6 +75,8 @@ list
 todo DESCRIPTION
 ```
 
+Alias for `todo`: `td`, `t`.
+
 ### `deadline` - add a deadline task
 
 `deadline` command add a new deadline task to the task list.
@@ -80,6 +84,8 @@ todo DESCRIPTION
 ```
 deadline DESCRIPTION /by DATE
 ```
+
+Alias for `deadline`: `ddl`, `d`.
 
 `DATE` can be a string or in the format of `YYYY-MM-DD`. For the latter format, C-3PO will be able to understand the due date, while for the former format, C-3PO will directly save the date as a raw string.
 
@@ -91,6 +97,8 @@ deadline DESCRIPTION /by DATE
 event DESCRIPTION /at DATE
 ```
 
+Alias for `event`: `e`.
+
 `DATE` can be a string or in the format of `YYYY-MM-DD`. For the latter format, C-3PO will be able to understand the date, while for the former format, C-3PO will directly save the date as a raw string.
 
 ### `done` - mark a task as done
@@ -100,6 +108,8 @@ event DESCRIPTION /at DATE
 ```
 done INDEX
 ```
+
+Alias for `done`: `finish`.
 
 For a non-empty task list with `n` tasks, ` INDEX` must be in the range of 1 to `n` (inclusive).
 
@@ -111,6 +121,8 @@ For a non-empty task list with `n` tasks, ` INDEX` must be in the range of 1 to 
 delete INDEX
 ```
 
+Alias for `delete`: `dl`, `rm`.
+
 For a non-empty task list with `n` tasks, ` INDEX` must be in the range of 1 to `n` (inclusive).
 
 ### `find` - find tasks by keywords
@@ -121,9 +133,13 @@ For a non-empty task list with `n` tasks, ` INDEX` must be in the range of 1 to 
 find KEYWORDS
 ```
 
+Alias for `find`: `f`, `search`, `s`.
+
 ### `sort` - sort tasks by kind, name or date
 
 `sort` command sorts the task list by their kinds, names or dates.
+
+Alias for `sort`: `s`.
 
 ```
 sort /by COMPARATOR
@@ -138,5 +154,7 @@ sort /by COMPARATOR
 ```
 bye
 ```
+
+Alias for `bye`: `exit`.
 
 
