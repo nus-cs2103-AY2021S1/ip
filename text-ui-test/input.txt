@@ -19,4 +19,6 @@ deadline assignment /by
 deadline assignment /by Monday
 list
 done 5
+clear
+Y
 bye
