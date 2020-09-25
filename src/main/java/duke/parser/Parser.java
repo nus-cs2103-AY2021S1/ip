@@ -37,6 +37,7 @@ public class Parser {
         String[] split = input.split(" ", 2);
         String command = split[0];
         String description = split.length == 2 ? split[1] : "";
+
         //Format for solution below adapted from https://github
         // .com/chloelee767/ip/blob/master/src/main/java/duke/parser/Parser.java
         try {

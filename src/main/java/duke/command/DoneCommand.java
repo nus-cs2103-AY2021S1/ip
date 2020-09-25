@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
@@ -31,7 +32,15 @@ public class DoneCommand extends Command {
      * @return Ui message to Task has been marked as done.
      */
     @Override
-    public String execute(Ui ui, Storage storage, TaskList tasks) {
+    public String execute(Ui ui, Storage storage, TaskList tasks) throws DukeException {
+        if (tasks.numTask() == 0) {
+            throw new DukeException("Hey! Your list is empty!");
+        }
+
+        if (this.taskIndex > tasks.numTask() || this.taskIndex <= 0) {
+            throw new DukeException("Hey, no task with this index!");
+        }
+
         Task currTask = tasks.get(this.taskIndex - 1);
         currTask.markAsDone();
         storage.saveData(tasks.getTasks());
