@@ -3,12 +3,14 @@ package ui;
 import dukemain.DukeMain;
 
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  * Credits: CS2103 JavaFX Tutorial.
@@ -25,15 +27,20 @@ public class MainWindow extends AnchorPane {
 
     private DukeMain duke;
 
+    // Credit: https://www.pexels.com/photo/person-wearing-vr-goggles-2007647/
     private final Image userImage = new Image(this.getClass()
-            .getResourceAsStream("/images/DaUser.png"));
+            .getResourceAsStream("/images/DaVrGuy.jpeg"));
+    // Credit: https://www.pexels.com/photo/selective-focus-photography-of-black-cat-2071881/
     private final Image dukeImage = new Image(this.getClass()
-            .getResourceAsStream("/images/DaDuke.png"));
+            .getResourceAsStream("/images/DaCat.jpeg"));
 
     @FXML
     public void initialize() {
         dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(Ui.chatStartMessage(),
                 dukeImage));
+        dialogContainer.setSpacing(15);
+        dialogContainer.setBackground(new Background(new BackgroundFill(Color.BEIGE,
+                CornerRadii.EMPTY, Insets.EMPTY)));
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 

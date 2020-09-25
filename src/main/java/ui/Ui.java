@@ -35,8 +35,7 @@ public class Ui {
     }
 
     public static String chatStartMessage() {
-        return Ui.horizontalLine() + "\n" +
-                "Hello I'm Duke\nWhat can I do for you?\n" + Ui.horizontalLine();
+        return "Hello I'm Duke\nWhat can I do for you?\n";
     }
 
     /**
