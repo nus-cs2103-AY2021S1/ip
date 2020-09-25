@@ -38,7 +38,7 @@ public class DeleteCommand extends Command {
         }
 
         if (this.taskIndex > tasks.numTask() || this.taskIndex <= 0) {
-            throw new DukeException("Hey, no task with this index!");
+            throw new DukeException("Hey, no task with this number!");
         }
 
         Task taskToRemove = tasks.get(this.taskIndex - 1);

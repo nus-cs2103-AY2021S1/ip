@@ -19,9 +19,10 @@ public class Ui {
      * @return Greeting message to user.
      */
     public static String sayGreeting() {
-        String greetingMessage = "Hi there, I'm DUKE-T! What can I do for you today?\n"
-                + "I can do manage todo, events and deadlines!\nType 'help' or '?' "
-                + "to find out more!";
+        String greetingMessage = "Hi there, I'm DUKE-T!\n"
+                + "What can I do for you today?\n"
+                + "I can do manage todo, events and deadlines!\n"
+                + "Type 'help' or '?' to find out more!";
         return greetingMessage;
     }
 
@@ -31,7 +32,7 @@ public class Ui {
      * @return Farewell message to user.
      */
     public String sayFarewell() {
-        String farewellMessage = "Bye bye. See you again soon!";
+        String farewellMessage = "Bye bye. Will miss you!";
         return farewellMessage;
     }
 
@@ -152,32 +153,30 @@ public class Ui {
      */
     public String helpMessage() {
         String helpMessage = "Oh look who's here! Read all about the commands you can give here!\n\n";
-        String addTaskGuide = "There are 3 types of tasks you can add: ToDos, Deadlines and Events"
+        String addTaskGuide = "There are 3 types of tasks you can add: ToDos, Deadlines and Events\n\n"
                 + "Let me show you an example for each of them:\n";
-        String addToDoGuide = "To add a ToDo, type in:\n"
+        String addToDoGuide = "To add a ToDo, type in your command as:\n"
                 + " todo <task description>\n"
-                + "Eg. 'todo throw rubbish' : This adds a task to throw rubbish.\n";
-        String addDeadlineGuide = "To add a Deadline, type in your command:\n"
+                + "Eg. 'todo throw rubbish'\n\n";
+        String addDeadlineGuide = "To add a Deadline, type in your command as:\n"
                 + "deadline <task description> /by <date in YYYY-MM-DD format>\n"
-                + "Eg. 'deadline math quiz /by 2020-10-10' : This adds a math quiz that is due on 10th "
-                + "October 2020.\n";
-        String addEventGuide = "To add an Event, type in:\n"
+                + "Eg. 'deadline math quiz /by 10-10-2020'\n\n";
+        String addEventGuide = "To add an Event, type in your command as:\n"
                 + "event <task description> /at <date in YYYY-MM-DD format>\n"
-                + "Eg. 'event meeting /at 2020-11-11' : This adds an event meeting that is on 11th November"
-                + " 2020.\n";
+                + "Eg. 'event meeting /at 2020-11-11'\n\n";
         String markDoneGuide = "To mark a task as completed, type in:\n"
                 + "done <task number>\n"
-                + "'done 1' : This marks task 1 from current list of tasks as done.\n";
+                + "Eg. 'done 1'\n\n";
         String deleteTaskGuide = "To remove any task, type in:\n"
                 + "delete <task number>\n"
-                + "Eg. 'delete 2' : This deletes task 2 from the current list of tasks.\n";
+                + "Eg. 'delete 2'\n\n";
         String listTaskGuide = "To view the current list of tasks, type in:\n"
-                + "'list' command\n";
+                + "'list'\n\n";
         String findTaskGuide = "To find a task containing a certain keyword, type in:\n"
                 + "'find <keyword>'\n"
-                + "Eg. 'find meeting' : This displays all tasks that have 'meeting' in their description.\n";
-        String exitGuide = "To shut down the bot, type in:\n"
-                + "'bye' command\n";
+                + "Eg. 'find meeting'\n\n";
+        String exitGuide = "To say byebye, type in:\n"
+                + "'bye'\n";
 
         String helpMessageToDisplay = helpMessage + addTaskGuide + addToDoGuide
                 + addDeadlineGuide + addEventGuide + markDoneGuide + deleteTaskGuide + listTaskGuide
