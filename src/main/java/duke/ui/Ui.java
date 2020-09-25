@@ -19,8 +19,9 @@ public class Ui {
      * @return Greeting message to user.
      */
     public static String sayGreeting() {
-        String greetingMessage = "Hi there, I'm TARS!\nWhat can I do for you today?\nType 'help' or '?' to "
-                + "look at the guides!";
+        String greetingMessage = "Hi there, I'm DUKE-T! What can I do for you today?\n"
+                + "I can do manage todo, events and deadlines!\nType 'help' or '?' "
+                + "to find out more!";
         return greetingMessage;
     }
 

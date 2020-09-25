@@ -156,7 +156,7 @@ public class Parser {
             date = date.replace('/', '-');
             String[] dateArguments = date.split(" ");
 
-            taskDate = LocalDate.parse(dateArguments[0]);
+            taskDate = parseDate(dateArguments[0]);
             if (dateArguments.length == 2) {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH[:]mm");
                 taskTime = LocalTime.parse(dateArguments[1], formatter);
@@ -171,6 +171,19 @@ public class Parser {
                     String.format("Invalid date/time! Here's an example format Eg"
                             + ". %s", "2019-12-12 1800"));
         }
+    }
+
+    private static LocalDate parseDate(String dateInput) throws DukeException {
+        String[] validFormats = {"yyyy-M-d", "d-M-yyyy", "yyyy-MMM-d", "d-MMM-yyyy"};
+        for (String format : validFormats) {
+            try {
+                DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(format);
+                return LocalDate.parse(dateInput, dateFormatter);
+            } catch (DateTimeParseException e) {
+                //Try other formats
+            }
+        }
+        throw new DukeException("Invalid date format provided! Eg. Try 10-10-2020 or 10-Oct-2020 instead!");
     }
 
 }

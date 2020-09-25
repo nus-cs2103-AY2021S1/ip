@@ -161,7 +161,10 @@ Note: The dashes ( - ) can be replaced with slashes ( / ).
 #### Date:
 | Format | Example |
 | ------- | -------- |
-| YYYY-MM-DD | 2020-10-21 |
+| YYYY-M-DD | 2020-10-10 |
+| YYYY-MMM-DD | 2020-Oct-10 |
+| DD-M-YYYY | 10-10-2020 |
+| DD-MMM-YYYY | 10-Oct-2020 |
 
 #### Date:
 | Format | Example |
