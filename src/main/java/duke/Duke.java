@@ -67,8 +67,14 @@ public class Duke {
      * and load them into Hal9000.
      */
     public void loadPrevTasks() {
-        File prevTasks = FileOpener.openFile(FILE_PATH);
-        TaskLoader.loadTasks(prevTasks, this.getTasks());
+        if (!FileOpener.fileExists(FILE_PATH)) {
+            TaskLoader.loadSampleTasks(this.getTasks());
+            File prevTasks = FileOpener.openFile(FILE_PATH);
+        } else {
+            File prevTasks = FileOpener.openFile(FILE_PATH);
+            TaskLoader.loadTasks(prevTasks, this.getTasks());
+        }
+
     }
 
     /**
@@ -78,5 +84,4 @@ public class Duke {
         File prevTasks = FileOpener.openFile(FILE_PATH);
         TaskStorage.saveTask(prevTasks, this.getTasks());
     }
-
 }
