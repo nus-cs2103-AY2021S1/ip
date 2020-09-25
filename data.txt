@@ -1,4 +1,5 @@
 done t buy groceries
-incomplete d 23/09/2020 2359 timeOfTask: 22/09/2020 2359
-incomplete e David's birthday timeOfTask: 26/09/2020
+incomplete d math homework timeOfTask: 22/09/2020 2359
+done e David's birthday timeOfTask: 26/09/2020
 incomplete t journal entry
+incomplete d science hw assignment 3 timeOfTask: 23/09/2020 2359

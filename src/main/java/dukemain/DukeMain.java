@@ -23,9 +23,7 @@ public class DukeMain {
 
     public String getResponse(String input) {
         StringBuilder sb = new StringBuilder();
-        sb.append("\n");
         sb.append(this.list.runSingleCommand(input));
-        sb.append("\n");
         this.list.save();
         return sb.toString();
     }
