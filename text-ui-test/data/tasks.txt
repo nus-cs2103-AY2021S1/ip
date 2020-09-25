@@ -1,0 +1,7 @@
+E | 0 | Sample Event | Jan 01 2020 12:00 am
+T | 0 | Sample Todo Task
+D | 0 | Sample Deadline Task | Jan 01 2020 12:00 am
+E | 0 | Sample Event | Jan 01 2020 12:00 am
+T | 0 | Sample Todo Task
+D | 0 | Sample Deadline Task | Jan 01 2020 12:00 am
+E | 0 | Sample Event | Jan 01 2020 12:00 am

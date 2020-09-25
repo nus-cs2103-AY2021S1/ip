@@ -1,0 +1,18 @@
+list
+done 1
+delete 1
+todo
+todo Sample Todo Task
+deadline Sample Deadline Task
+deadline Sample Deadline Task /by
+deadline Sample Deadline Task /by 010120200000
+deadline Sample Deadline Task /by 01-01-2020 0000
+event Sample Event
+event Sample Event /at
+event Sample Event /at 010120200000
+event Sample Event /at 01-01-2020 0000
+delete 1
+delete 1
+delete 1
+blah
+bye
