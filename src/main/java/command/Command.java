@@ -1,5 +1,6 @@
 package command;
 
+import exception.InvalidInputException;
 import task.Deadline;
 import task.Event;
 import task.Task;
@@ -40,9 +41,10 @@ public class Command {
      * @return List of Task objects after changes made from executing command.
      * @throws IndexOutOfBoundsException If index specified in DONE or DELETE command
      * does not lie within range of list of Task objects.
+     * @throws InvalidInputException If use requests to edit time field of ToDo.
      */
     public ArrayList<Task> executeCommand(ArrayList<Task> tasks, StringBuilder sb) throws
-            IndexOutOfBoundsException {
+            IndexOutOfBoundsException, InvalidInputException {
 
         switch (this.type) {
             case BYE:
@@ -83,11 +85,112 @@ public class Command {
                 return addTask(tasks, this.description, sb);
             case FIND:
                 return findTask(tasks, this.description, sb);
+            case EDIT:
+                return editTask(tasks, this.description, sb);
             case UNKNOWN:
                 sb.append(this.description);
                 return tasks;
         }
         return tasks;
+    }
+
+    /**
+     * Returns a list of task objects with specified task edited.
+     * @param tasks List of tasks.
+     * @param description User input for edit command.
+     * @param sb StringBuilder to append messages.
+     * @return Lists of task objects after editing.
+     * @throws IndexOutOfBoundsException If index specified does not lie within
+     * range of list of Task objects.
+     * @throws InvalidInputException If user requests to edit time field of ToDo object.
+     */
+    public ArrayList<Task> editTask(ArrayList<Task> tasks, String description, StringBuilder sb)
+            throws IndexOutOfBoundsException, InvalidInputException {
+
+        // Format eg: 1 /d newName
+        String[] descriptionArr = description.split(" ");
+        int index = Integer.parseInt(descriptionArr[0]);
+        String editType = descriptionArr[1].trim();
+        String newField;
+
+        // initialize newField
+        StringBuilder newFieldBuilder = new StringBuilder();
+        for (int i = 2; i < descriptionArr.length; i++) {
+            newFieldBuilder.append(descriptionArr[i]);
+            newFieldBuilder.append(" ");
+        }
+        newField = newFieldBuilder.toString().trim();
+
+        // initialize oldTask with correct type and handle editing
+        Task current = tasks.get(index - 1);
+        if (current.printTask().startsWith("[T]")) {
+            // case: edit ToDo
+            if (editType.equals("/d")) {
+                // case: edit ToDo description
+                ToDo newTask = new ToDo(newField);
+
+                // mark done
+                if (current.isDone()) {
+                    newTask.completeTask();
+                }
+
+                // replace element in list
+                tasks.set(index - 1, newTask);
+            } else {
+                // throw exception: ToDo task does not have field for time
+                throw new InvalidInputException("Cannot edit time for todo task!");
+            }
+        } else if (current.printTask().startsWith("[D]")) {
+            // case: edit Deadline
+            Deadline oldTask = (Deadline) current;
+            Deadline newTask;
+            if (editType.equals("/d")) {
+                // case: edit Deadline description
+                newTask = new Deadline(newField, oldTask.getDeadline());
+
+                // mark done
+
+                // replace element in list
+            } else {
+                // case: edit Deadline time (deadline)
+                newTask = new Deadline(oldTask.getName(), newField);
+
+                // mark done
+
+                // replace element in list
+            }
+            if (current.isDone()) {
+                newTask.completeTask();
+            }
+            tasks.set(index - 1, newTask);
+        } else {
+            // case; edit Event
+            Event oldTask = (Event) current;
+            Event newTask;
+            if (editType.equals("/d")) {
+                // case: edit Event description
+                newTask = new Event(newField, oldTask.getName());
+
+                // mark done
+
+                // replace element in list
+            } else {
+                // case: edit Event time
+                newTask = new Event(oldTask.getName(), newField);
+
+                // mark done
+
+                // replace element in list
+            }
+            if (current.isDone()) {
+                newTask.completeTask();
+            }
+            tasks.set(index - 1, newTask);
+        }
+
+        sb.append(Ui.editMessage(current, tasks.get(index - 1)));
+        return tasks;
+
     }
 
     /**

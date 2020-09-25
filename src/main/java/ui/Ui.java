@@ -101,6 +101,21 @@ public class Ui {
     }
 
     /**
+     * Returns message upon sucecssful editing of task.
+     * @param oldTask Old Task before editing.
+     * @param newTask New Task after editing.
+     * @return Message as String.
+     */
+    public static String editMessage(Task oldTask, Task newTask) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Okay! I have edited this task:\n\t===>");
+        sb.append(oldTask.printTask());
+        sb.append("\n\t<===");
+        sb.append(newTask.printTask());
+        return sb.toString();
+    }
+
+    /**
      * Returns message upon successful adding of new Task object to list and current
      * size of list of Task objects.
      *

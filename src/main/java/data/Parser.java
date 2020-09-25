@@ -14,7 +14,7 @@ import exception.InvalidInputException;
 public class Parser {
 
     public static final String[] COMMANDS = {"todo", "deadline", "event",
-            "list", "done", "bye", "delete", "clear", "unknown", "find"};
+            "list", "done", "bye", "delete", "clear", "unknown", "find", "edit"};
 
     /**
      * Returns Command object by processing user input.
@@ -55,6 +55,9 @@ public class Parser {
         } else if (strings[0].toLowerCase().equals(Parser.COMMANDS[9])) {
             // returns FIND Command
             command = new Command(CommandType.FIND, input);
+        } else if (strings[0].toLowerCase().equals(Parser.COMMANDS[10])) {
+            // returns EDIT Command
+            command = new Command(CommandType.EDIT, input);
         } else {
             // returns UNKNOWN Command
             command = new Command(CommandType.UNKNOWN,
@@ -96,8 +99,52 @@ public class Parser {
             case FIND:
                 validCommand =  checkFindValidity(cmd);
                 break;
+            case EDIT:
+                validCommand = checkEditValidity(cmd);
         }
         return validCommand;
+    }
+
+    /**
+     * Returns valid Command object after input validity checks of
+     * EDIT Command.
+     *
+     * @param cmd Command object with CommandType EDIT.
+     * @return Input Command object if description passes input validity checks.
+     * @throws InvalidInputException If description of Command object is of
+     * incorrect format.
+     */
+    public Command checkEditValidity(Command cmd) throws InvalidInputException {
+        // Correct format eg:
+        // - edit 1 /d newName (edits name)
+        // - edit 1 /t 12/12/2020 1230 (edits time for Deadline/Event)
+        String commandString = cmd.getDescription().trim();
+        String[] commandStringArr = commandString.split("\\s+");
+
+        if (!commandString.contains("/d") && !commandString.contains("/t")) {
+            // throws Exception for missing identifier
+            throw new InvalidInputException("Command is missing \"/d\" or \"/t\" keyword.");
+        }
+
+        if (commandStringArr[commandStringArr.length - 1].equals("/t") ||
+                commandStringArr[commandStringArr.length - 1].equals("/d")) {
+            // throws Exception if missing fields after /d or /t identifier
+            throw new InvalidInputException("Incomplete edit command.");
+        }
+
+        try {
+            // throws Exception if an integer does not follow "edit"
+            Integer.parseInt(commandStringArr[1]);
+        } catch (NumberFormatException e) {
+            throw new InvalidInputException("Please enter a valid integer index.");
+        }
+
+        StringBuilder editCommand = new StringBuilder();
+        for (int i = 1; i < commandStringArr.length; i++) {
+            editCommand.append(commandStringArr[i]);
+            editCommand.append(" ");
+        }
+        return new Command(CommandType.EDIT, editCommand.toString().trim());
     }
 
     /**
