@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.TextFlow?>
+<fx:root maxHeight="Infinity"
+         maxWidth="Infinity"
+         type="javafx.scene.layout.VBox"
+         xmlns="http://javafx.com/javafx/8.0.171"
+         xmlns:fx="http://javafx.com/fxml/1"
+>
+    <children>
+        <HBox maxHeight="120" prefWidth="190">
+            <VBox prefWidth="10" 
+                  maxHeight="120"
+                  prefHeight="120"
+                  fx:id="bar"
+                  translateX="-1"
+                  translateY="-1"
+            />
+            <VBox prefWidth="180"
+                  prefHeight="100"
+                  maxHeight="100"
+            >
+                <TextFlow fx:id="description"
+                          prefWidth="180"
+                          styleClass="descriptionStyling"
+                />
+                <TextFlow fx:id="isDone"
+                          prefWidth="180"
+                          styleClass="isDoneStyling"
+                />
+                <TextFlow fx:id="date"
+                          prefWidth="180"
+                          styleClass="dateStyling"
+                />
+                <TextFlow fx:id="time"
+                          prefWidth="180"
+                          styleClass="timeStyling"
+                />
+            </VBox>
+        </HBox>
+    </children>
+</fx:root>

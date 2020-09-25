@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<fx:root fx:id="interaction" 
+         alignment="TOP_RIGHT" 
+         maxHeight="Infinity" 
+         type="javafx.scene.layout.HBox" 
+         xmlns="http://javafx.com/javafx/8.0.171" 
+         xmlns:fx="http://javafx.com/fxml/1"
+>
+    <children>
+        <VBox translateY="10" 
+              fx:id="speechBubble" 
+              styleClass="speechBubble" 
+              alignment="TOP_RIGHT" 
+              maxHeight="-Infinity" 
+              spacing="5.0"
+        >
+            <children>
+                <Label fx:id="dialog" 
+                       styleClass="textStyling" 
+                       text="Label" 
+                       wrapText="true" 
+                       minWidth="20"
+                       maxWidth="600"
+                       lineSpacing="2"
+                />
+            </children>
+        </VBox>
+        <VBox translateY="40"
+              alignment="BOTTOM_CENTER"
+        >
+            <ImageView fx:id="displayPicture" 
+                       fitHeight="80.0" 
+                       fitWidth="80.0" 
+                       pickOnBounds="true"
+            />
+        </VBox>
+    </children>
+</fx:root>

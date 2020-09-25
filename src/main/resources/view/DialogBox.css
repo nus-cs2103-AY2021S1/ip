@@ -1,0 +1,12 @@
+.textStyling {
+    -fx-text-fill: #f0f0f0;
+    -fx-font-family:"Helvetica Neue";
+    -fx-font-size: 12;
+    -fx-font-weight: 200;
+}
+
+.speechBubble {
+    -fx-background-color: #7495F2;
+    -fx-effect: dropshadow( gaussian, rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+    -fx-padding: 20;
+}

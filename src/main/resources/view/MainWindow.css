@@ -1,0 +1,52 @@
+.textFieldStyling {
+    -fx-background-color: white; 
+    -fx-text-fill: #638bfb;
+}
+.buttonStyling {
+    -fx-background-color: white;
+}
+.mainBodyStyling {
+    -fx-background-color: #f4f4f4;
+    -fx-border-color: transparent;
+}
+.reminderSectionStyling {
+    -fx-background-color: #e9eff9;
+    -fx-border-color: transparent;
+}
+.userScreenStyling {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar:vertical .track{
+    -fx-background-color: #f4f4f4;
+    -fx-border-color :transparent;
+    -fx-background-radius : 0.0em;
+    -fx-border-radius :2.0em;
+}
+/* Reused from https://stackoverflow.com/questions/48048943/javafx-8-scroll-bar-css */
+.scroll-bar:vertical .increment-button ,
+.scroll-bar:vertical .decrement-button {
+    -fx-background-color :transparent;
+    -fx-background-radius : 0.0em;
+    -fx-padding :0.0 10.0 0.0 0.0;
+
+}
+
+.scroll-bar .increment-arrow,
+.scroll-bar .decrement-arrow{
+    -fx-shape : " ";
+    -fx-padding :0.15em 0.0;
+}
+
+.scroll-bar:vertical .increment-arrow,
+.scroll-bar:vertical .decrement-arrow {
+    -fx-shape : " ";
+    -fx-padding :0.0 0.15em;
+    -fx-pref-width: 3;
+}
+
+.scroll-bar:vertical .thumb {
+    -fx-background-color : #CDCFD3;
+    -fx-background-insets : 2.0, 0.0, 0.0;
+    -fx-background-radius : 2.0em;
+}

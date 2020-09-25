@@ -1,0 +1,6 @@
+.textStyling {
+    -fx-text-fill: #363f80;
+    -fx-font-size: 20;
+    -fx-font-family: Nunito;
+    -fx-font-weight: bold;
+}
