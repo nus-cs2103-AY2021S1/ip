@@ -108,9 +108,9 @@ public class Ui {
      */
     public static String editMessage(Task oldTask, Task newTask) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Okay! I have edited this task:\n\t===>");
+        sb.append("Okay! I have edited this task:\n\t ===>");
         sb.append(oldTask.printTask());
-        sb.append("\n\t<===");
+        sb.append("\n\t<=== ");
         sb.append(newTask.printTask());
         return sb.toString();
     }
@@ -160,7 +160,7 @@ public class Ui {
      * @return Message as String.
      */
     public static String noMatchMessage() {
-        return ("Sorry! There are not tasks " +
+        return ("Sorry! There are no tasks " +
                 "that match that description.\n");
     }
 

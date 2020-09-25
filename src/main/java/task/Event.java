@@ -57,7 +57,7 @@ public class Event extends Task {
         if (!optTime.isPresent()) {
             sb.append(" (at: " + this.time + ")");
         } else {
-            sb.append(" (by: " + dateManager.getDateAsString(time) + ")");
+            sb.append(" (at: " + dateManager.getDateAsString(time) + ")");
         }
         return sb.toString();
     }
