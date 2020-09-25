@@ -30,8 +30,10 @@ public class Parser {
      */
     public Command parse(String response) throws Exception {
         switch (response) {
+        case "exit":
         case "bye":
             return new CommandBye();
+        case "ls":
         case "list":
             return new CommandList();
         }
@@ -39,12 +41,16 @@ public class Parser {
         String keyWord = response.split(" ")[0];
 
         switch (keyWord) {
+            case "f":
+            case "search":
+            case "s":
             case "find":
                 if (response.split(" ").length == 1) {
                     throw new NoDescriptionException("find");
                 } else {
                     return new CommandFind(response.substring(5));
                 }
+            case "finish":
             case "done": {
                 if (response.split(" ").length == 1) {
                     throw new NoDescriptionException("done");
@@ -58,6 +64,9 @@ public class Parser {
                 int index = Integer.parseInt(response.split(" ")[1]) - 1;
                 return new CommandDone(index);
             }
+            case "rm":
+            case "remove":
+            case "dl":
             case "delete": {
                 if (response.split(" ").length == 1) {
                     throw new NoDescriptionException("delete");
@@ -71,6 +80,7 @@ public class Parser {
                 int index = Integer.parseInt(response.split(" ")[1]) - 1;
                 return new CommandDelete(index);
             }
+            case "st":
             case "sort": {
                 if (!response.startsWith("sort /by")) {
                     throw new NoDescriptionException("sort");
@@ -82,12 +92,16 @@ public class Parser {
                 String firstCmd = response.split(" ")[0];
                 Task newTask;
                 switch (firstCmd) {
+                    case "t":
+                    case "td":
                     case "todo":
                         if (response.split(" ").length == 1) {
                             throw new NoDescriptionException("todo");
                         }
                         newTask = new Todo(response.substring(5));
                         break;
+                    case "d":
+                    case "ddl":
                     case "deadline": {
                         if (response.split(" ").length == 1) {
                             throw new NoDescriptionException("deadline");
@@ -100,6 +114,7 @@ public class Parser {
                                 response.substring(9).split(" /by ")[1]);
                         break;
                     }
+                    case "e":
                     case "event": {
                         if (response.split(" ").length == 1) {
                             throw new NoDescriptionException("event");
