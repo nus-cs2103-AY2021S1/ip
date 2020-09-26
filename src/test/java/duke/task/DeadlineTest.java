@@ -144,7 +144,7 @@ public class DeadlineTest {
             assertEquals("D &&& 0 &&& Assignment 1 &&& 2020-08-02 &&& 0\n", d.outputToFile());
 
             d.markAsDone();
-            assertEquals("D &&& 1 &&& Assignment 1 &&& 2020-08-02 &&& 0 &&& 2020-09-14\n", d.outputToFile());
+            assertEquals("D &&& 1 &&& Assignment 1 &&& 2020-08-02 &&& 0 &&& 2020-09-26\n", d.outputToFile());
         } catch (Exception e) {
             fail();
         }

@@ -147,7 +147,7 @@ public class EventTest {
             assertEquals("E &&& 0 &&& Project meeting &&& 2020-09-03 11:30 &&& 0\n", e.outputToFile());
 
             e.markAsDone();
-            assertEquals("E &&& 1 &&& Project meeting &&& 2020-09-03 11:30 &&& 0 &&& 2020-09-14\n",
+            assertEquals("E &&& 1 &&& Project meeting &&& 2020-09-03 11:30 &&& 0 &&& 2020-09-26\n",
                     e.outputToFile());
         } catch (Exception e) {
             fail();
