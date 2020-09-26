@@ -45,7 +45,9 @@ public class DoneCommand extends Command {
                 storage.writeData(tasks.getTasks());
                 return msg;
             } else {
-                return ALREADY_DONE_MESSAGE;
+                String msg = ALREADY_DONE_MESSAGE;
+                msg += (tasks.getTask(index));
+                return msg;
             }
         } catch (DukeException | IOException e) {
             return e.getMessage();

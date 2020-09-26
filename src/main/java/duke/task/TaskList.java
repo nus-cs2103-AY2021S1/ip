@@ -56,7 +56,7 @@ public class TaskList {
     public boolean markDone(int index) {
         // Asserts that the index should not be out of bound.
         assert index <= tasks.size();
-        if (tasks.get(index).isTaskDone()) {
+        if (tasks.get(index - 1).isTaskDone()) {
             return false;
         }
         tasks.get(index - 1).markAsDone();
