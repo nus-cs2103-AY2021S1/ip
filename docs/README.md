@@ -8,6 +8,8 @@ This Project is a Mario Themed Task Manager that allows you to schedules tasks t
 ___
 ### Features of Luigi Task Manager
 
+![](https://media.giphy.com/media/tmMhRhvcytb53xPYXt/giphy.gif)
+
 Here are the following features of the manager:
 
 **1. Adding Tasks to a list**
