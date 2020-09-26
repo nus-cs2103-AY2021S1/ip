@@ -9,6 +9,7 @@ import duke.task.TaskList;
  */
 public class ListCommand extends Command {
     private static final String NO_TASKS_MESSAGE = "No tasks on your agenda.";
+    private static final String LIST_TASKS_MESSAGE = "Here are the tasks in your agenda:";
 
     /**
      * Overrides execute in {@link Command}.
@@ -22,7 +23,7 @@ public class ListCommand extends Command {
         if (tasks.getSize() == 0) {
             return NO_TASKS_MESSAGE;
         } else {
-            return String.format("Here are the tasks in your agenda:\n%s", tasks.listTasks());
+            return String.format(LIST_TASKS_MESSAGE + "\n%s", tasks.listTasks());
         }
     }
 }

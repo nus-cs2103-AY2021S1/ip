@@ -10,6 +10,7 @@ import duke.task.TaskList;
 
 public class DoneCommand extends Command {
     private static final String DONE_MESSAGE = "Nice! I've marked this task as done:\n";
+    private static final String ALREADY_DONE_MESSAGE = "This task is already done!\n";
 
     /**
      * Index of {@link Task} to be marked as completed.
@@ -38,11 +39,14 @@ public class DoneCommand extends Command {
             if (index > tasks.getSize()) {
                 throw new InvalidArgumentException("☹ OOPS!!! The task index you give is not found.");
             }
-            tasks.markDone(index);
-            String msg = DONE_MESSAGE;
-            msg += (tasks.getTask(index));
-            storage.writeData(tasks.getTasks());
-            return msg;
+            if (tasks.markDone(index)) {
+                String msg = DONE_MESSAGE;
+                msg += (tasks.getTask(index));
+                storage.writeData(tasks.getTasks());
+                return msg;
+            } else {
+                return ALREADY_DONE_MESSAGE;
+            }
         } catch (DukeException | IOException e) {
             return e.getMessage();
         }

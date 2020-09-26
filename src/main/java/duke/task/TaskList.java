@@ -53,10 +53,14 @@ public class TaskList {
      *
      * @param index The index of the task to be marked as completed.
      */
-    public void markDone(int index) {
+    public boolean markDone(int index) {
         // Asserts that the index should not be out of bound.
         assert index <= tasks.size();
+        if (tasks.get(index).isTaskDone()) {
+            return false;
+        }
         tasks.get(index - 1).markAsDone();
+        return true;
     }
 
     /**
