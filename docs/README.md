@@ -4,6 +4,8 @@
 Timmi the Task Manager is a chat bot personality that is created for the CS2103T 
 individual project. It is a simple application to help users manage their tasks.
 
+![Timmi Ui image](./Ui.png)
+
 ## :peach: Features :peach:
 Overview of Features:
 1. Add tasks
