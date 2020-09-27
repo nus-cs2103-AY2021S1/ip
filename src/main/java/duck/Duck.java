@@ -97,6 +97,7 @@ public class Duck {
             responses.add("Here are the tasks up to the date: "
                     + optionalDate.get().format(DateTimeFormatter.ofPattern("MMM d yyyy")));
         } catch (DuckException e) {
+            // This block is run if no date is provided or an invalid date is detected.
             optionalDate = Optional.empty();
             responses.add("Here are the tasks sorted by date");
             responses.add("You can filter up to a date by using \"due [/at | /by] yyyy-mm-dd\"");
