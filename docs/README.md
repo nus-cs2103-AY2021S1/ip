@@ -31,8 +31,9 @@ KTM helps you to be more aware of your schedule and become a better task manager
  7. Marking a task as done: `done + " " + Number`
  8. Finding relevant tasks: `find + " " + info`
  9. Viewing the task list: `tasks`
- 10.Saying bye to KaTo: `bye`
- 11.Exiting KTM : `exit`
+ 10. Clearing the task list: `clear`
+ 11. Saying bye to KaTo: `bye`
+ 12. Exiting KTM : `exit`
  
  
 ### Feature 1 
@@ -137,6 +138,16 @@ Viewing the task list: `tasks`
 KaTo will list out the current tasks in the task list and inform the user if it is empty.
 
 ### Feature 10
+Viewing the task list: `clear`
+
+- Example of usage: 
+`clear`
+
+- Expected outcome:
+
+KaTo will clear all the current tasks in the task list and inform the user if it is empty.
+
+### Feature 11
 
 Saying bye to KaTo: `bye`
 
@@ -147,7 +158,7 @@ Saying bye to KaTo: `bye`
 
 KaTo will print out the bye message to the user.
 
- ### Feature 11
+ ### Feature 12
 Exiting KTM : `exit`
 
 - Example of usage: 
