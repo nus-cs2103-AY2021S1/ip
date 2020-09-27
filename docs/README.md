@@ -1,10 +1,10 @@
-# Timmi User Guide 
+# Timmi User Guide :clipboard:
 ![Timmi BigHead io avatar icon](../src/main/resources/images/BigheadDD.png)
 
 Timmi the Task Manager is a chat bot personality that is created for the CS2103T 
 individual project. It is a simple application to help users manage their tasks.
 
-## :peach: Features
+## :peach: Features :peach:
 Overview of Features:
 1. Add tasks
 1. Sort tasks chronologically
@@ -23,7 +23,7 @@ Timmi supports the addition of tasks under **3 task types**, namely:
 See the respective usages for more information.
 
 ### Sort Tasks Chronologically
-Timmi automatically sorts all tasks input for the user, in the following sequence:
+Timmi automatically sorts all tasks input for the user in the following sequence:
 1. All Todo tasks, according to the sequence they are added.
 1. All Event and Deadline tasks, in chronological order.
 
@@ -38,13 +38,13 @@ See usage of `done`.
 Timmi allows users to remove tasks from their list. See usage of `delete`.
 
 ### Search Tasks by Date or Keyword
-Timmi allows users to search for tasks related to a date, or a keyword/ phrase.
+Timmi allows users to search for tasks related to a date, a query word or phrase.
 See usage of `check` and `find`.
 
 ### Exit the Application
 See usage of `bye`.
 
-## :peach: Usage
+## :peach: Usage :peach:
 
 ### `todo` - Adds a todo task
 
@@ -186,7 +186,7 @@ Example of usage and outcome:
 
 ### `bye` - Exits the application
 
-An exit greeting will be shown and the application will close.
+An exit greeting will be shown, and the application will close.
 
 Example of usage and outcome: 
 
