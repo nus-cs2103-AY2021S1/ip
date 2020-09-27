@@ -67,11 +67,16 @@ public class ParserGUI {
         return output;
     }
 
+    /**
+     * Processes the command "clear" and clears the task list
+     * Updates the storage with the cleared task list
+     */
+
     private static String processClearCommand(TaskList taskList, GUI ui,  String filePath ) {
         if (taskList.tasks.isEmpty()) {
             return ui.printEmptyList();
         } else {
-           taskList.tasks.clear();
+            taskList.tasks.clear();
             Storage.updateTasks(taskList.getTaskCounts(), taskList.tasks, filePath);
             return ui.printClassCleared();
         }

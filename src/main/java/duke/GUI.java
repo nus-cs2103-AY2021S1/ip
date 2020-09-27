@@ -138,6 +138,10 @@ public class GUI {
         return output.toString();
     }
 
+    /**
+     * Informs the user that the task list in the storage is now cleared
+     */
+
     public String printClassCleared() {
         return "Clear Successful! Now you have no tasks in the list";
     }
