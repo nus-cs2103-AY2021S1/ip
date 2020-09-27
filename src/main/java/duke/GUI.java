@@ -137,4 +137,8 @@ public class GUI {
         }
         return output.toString();
     }
+
+    public String printClassCleared() {
+        return "Clear Successful! Now you have no tasks in the list";
+    }
 }

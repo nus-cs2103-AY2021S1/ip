@@ -33,6 +33,9 @@ public class ParserGUI {
             case "tasks":
                 output = processTasksCommand(taskList, ui);
                 break;
+            case "clear":
+                output = processClearCommand(taskList, ui, filePath);
+                break;
             case "done":
                 output = processDoneCommand(taskList, ui, filePath, portions);
                 break;
@@ -62,6 +65,16 @@ public class ParserGUI {
                 break;
         }
         return output;
+    }
+
+    private static String processClearCommand(TaskList taskList, GUI ui,  String filePath ) {
+        if (taskList.tasks.isEmpty()) {
+            return ui.printEmptyList();
+        } else {
+           taskList.tasks.clear();
+            Storage.updateTasks(taskList.getTaskCounts(), taskList.tasks, filePath);
+            return ui.printClassCleared();
+        }
     }
 
     /**
