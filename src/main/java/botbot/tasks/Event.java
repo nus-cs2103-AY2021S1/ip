@@ -32,7 +32,7 @@ public class Event extends Task {
     public Event(String description, TaskStatus status, String at) {
         super(TYPE_CODE, description, LocalDateTime.parse(at), null, status);
     }
-    
+
     @Override
     public String toString() {
         return String.format("[%c] [%s] %s (at: %s)", getType(), getStatusIcon(), getDescription(),

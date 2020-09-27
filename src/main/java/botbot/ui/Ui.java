@@ -10,7 +10,7 @@ public class Ui {
     public static final String INDENT = "  ";
     private static final String PLURALITY_PLURAL = "s";
     private static final String PLURALITY_SINGULAR = "";
-    
+
     private static final String LOGO = "\n.-. .-')                .-') _  .-. .-')                .-') _\n"
             + "\\  ( OO )              (  OO) ) \\  ( OO )              (  OO) )\n"
             + " ;-----.\\  .-'),-----. /     '._ ;-----.\\  .-'),-----. /     '._\n"
@@ -20,7 +20,7 @@ public class Ui {
             + " | |  \\  |  \\ |  | |  |   |  |   | |  \\  |  \\ |  | |  |   |  |\n"
             + " | '--'  /   `'  '-'  '   |  |   | '--'  /   `'  '-'  '   |  |\n"
             + " `------'      `-----'    `--'   `------'      `-----'    `--'\n";
-    
+
     private static final String RESPONSE_ADD = "ok! I've added this task:\n" + INDENT
             + "%s\nyou now have %d task%s in your list\n";
     private static final String RESPONSE_DELETE = "ok! I've removed this task:\n" + INDENT
@@ -45,7 +45,7 @@ public class Ui {
     public static String greet() {
         return RESPONSE_GREET;
     }
-    
+
     static String makePlural(int count) {
         return (count > 1) ? PLURALITY_PLURAL : PLURALITY_SINGULAR;
     }

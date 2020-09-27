@@ -3,10 +3,10 @@ package botbot.utils;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import org.junit.jupiter.api.Test;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
+
+import org.junit.jupiter.api.Test;
 
 public class ParserTest {
     @Test
@@ -35,7 +35,7 @@ public class ParserTest {
         assertEquals(LocalDateTime.of(2022, 2, 15, 23, 59),
                 Parser.parseDateTime("15-2-2022 2359"));
     }
-    
+
     @Test
     public void parseDateTime_exceptionThrown() {
         try {

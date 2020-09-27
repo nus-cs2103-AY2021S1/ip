@@ -20,7 +20,7 @@ public class TaskList extends LinkedList<Task> {
             "time", " todo");
     private static final String ERROR_MESSAGE_ILLEGAL_ARG_TODO_BY = String.format(ERROR_MESSAGE_ILLEGAL_ARG,
             "deadline", " todo");
-    
+
     /**
      * Creates a task list.
      */
@@ -44,7 +44,7 @@ public class TaskList extends LinkedList<Task> {
      * @param description Description to be edited to.
      * @param at Time to be edited to.
      * @param by Deadline to be edited to.
-     * @throws IllegalArgumentException If 'at' is provided for a deadline or to-do, or if 'by' is 
+     * @throws IllegalArgumentException If 'at' is provided for a deadline or to-do, or if 'by' is
      *         provided for an event or to-do.
      */
     public void edit(int id, Optional<String> description, Optional<LocalDateTime> at,
@@ -71,7 +71,7 @@ public class TaskList extends LinkedList<Task> {
         }
         description.ifPresent(task::setDescription);
     }
-    
+
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder();

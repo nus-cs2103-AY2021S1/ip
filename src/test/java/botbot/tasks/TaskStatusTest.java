@@ -21,7 +21,7 @@ public class TaskStatusTest {
             assertEquals("Invalid task status", e.getMessage());
         }
     }
-    
+
     @Test
     public void getStrValue() {
         assertEquals("1", TaskStatus.DONE.getStrValue());

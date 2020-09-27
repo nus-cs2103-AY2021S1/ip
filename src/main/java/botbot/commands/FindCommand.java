@@ -11,7 +11,7 @@ import botbot.utils.Storage;
 public class FindCommand extends Command {
     public static final String COMMAND_KEYWORD = "find";
     private final String keyphrase;
-    
+
     /**
      * Creates a find command to search for the specified keyphrase in the task list.
      *

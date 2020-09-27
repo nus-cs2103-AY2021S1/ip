@@ -16,7 +16,7 @@ import botbot.utils.Parser;
 public class CommandValidator {
     public static final String ERROR_MESSAGE_INVALID_TASK_ID = "invalid task number!";
     public static final String ERROR_MESSAGE_NO_SUCH_COMMAND = "sorry, I don't know what that means!";
-    
+
     private static final String ERROR_MESSAGE_EMPTY = "%s cannot be empty!";
     private static final String ERROR_MESSAGE_EMPTY_DESCRIPTION = String.format(ERROR_MESSAGE_EMPTY,
             "the description of a task");
@@ -66,7 +66,7 @@ public class CommandValidator {
 
         String description = matcher.group("description").trim();
         String byStr = matcher.group("by").trim();
-        
+
         try {
             LocalDateTime by = Parser.parseDateTime(byStr);
             assert !description.isBlank() : "Blank description";
@@ -94,7 +94,7 @@ public class CommandValidator {
 
         String description = matcher.group("description").trim();
         String atStr = matcher.group("at").trim();
-        
+
         try {
             LocalDateTime at = Parser.parseDateTime(atStr);
             assert !description.isBlank() : "Blank description";
@@ -116,7 +116,7 @@ public class CommandValidator {
         }
         return new TodoCommand(args);
     }
-    
+
     /**
      * Attempts to create a DeleteCommand.
      *
@@ -146,13 +146,13 @@ public class CommandValidator {
         if (args.isBlank()) {
             return new InvalidCommand(ERROR_MESSAGE_EMPTY_TASK_ID_EDIT);
         }
-        
+
         Matcher matcher = FORMAT_ARGS_EDIT.matcher(args.trim());
         if (!matcher.matches()) {
             return new InvalidCommand(ERROR_MESSAGE_INVALID_FORMAT_EDIT);
         }
         String idStr = matcher.group("id").trim();
-        
+
         Optional<String> description = Optional.ofNullable(matcher.group("description"))
                 .map(String::trim);
         Optional<String> atStr = Optional.ofNullable(matcher.group("at"))

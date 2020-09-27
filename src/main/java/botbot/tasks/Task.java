@@ -59,7 +59,7 @@ public abstract class Task {
         this.status = status;
     }
 
-     /**
+    /**
      * Creates a task.
      *
      * @param type Type of task.
@@ -140,7 +140,7 @@ public abstract class Task {
     public LocalDateTime getBy() {
         return by.orElse(null);
     }
-    
+
     public void setDescription(String description) {
         this.description = description;
     }

@@ -3,10 +3,10 @@ package botbot.tasks;
 public enum TaskStatus {
     DONE ("1", "\u2713"),
     NOT_DONE ("0", "\u2717");
-    
+
     private final String strValue;
     private final String statusIcon;
-    
+
     TaskStatus(String strValue, String statusIcon) {
         this.strValue = strValue;
         this.statusIcon = statusIcon;
@@ -28,7 +28,7 @@ public enum TaskStatus {
             return null;
         }
     }
-    
+
     public String getStrValue() {
         return strValue;
     }

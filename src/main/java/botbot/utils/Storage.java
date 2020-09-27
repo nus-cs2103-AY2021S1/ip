@@ -48,13 +48,13 @@ public class Storage {
             return createDataFile(file);
         }
     }
-    
+
     private List<Task> readDataFile() {
         Scanner sc = createFileScanner();
         assert sc != null : "Scanner not created";
         return extractTasks(sc);
     }
-    
+
     private Scanner createFileScanner() {
         FileInputStream file;
         try {
@@ -65,42 +65,42 @@ public class Storage {
         }
         return new Scanner(file);
     }
-    
+
     private List<Task> extractTasks(Scanner sc) {
         List<Task> list = new LinkedList<>();
-        
+
         while (sc.hasNextLine()) {
             String data = sc.nextLine();
-            
+
             String[] dataArr = data.split("\\|");
             char taskType = dataArr[0].charAt(0);
             TaskStatus taskStatus = TaskStatus.convertToStatus(dataArr[1]);
             String description = dataArr[2];
-            
+
             switch (taskType) {
             case Deadline.TYPE_CODE:
                 String by = dataArr[3];
                 list.add(new Deadline(description, taskStatus, by));
                 break;
-                
+
             case Event.TYPE_CODE:
                 String at = dataArr[3];
                 list.add(new Event(description, taskStatus, at));
                 break;
-                
+
             case Todo.TYPE_CODE:
                 list.add(new Todo(description, taskStatus));
                 break;
-                
+
             default:
                 assert false : "Invalid task type";
             }
         }
-        
+
         sc.close();
         return list;
     }
-    
+
     private List<Task> createDataFile(File file) {
         try {
             file.createNewFile();
@@ -126,7 +126,7 @@ public class Storage {
             retrySave(tasks, numOfAttempts);
         }
     }
-    
+
     private void writeToDataFile(TaskList tasks) throws IOException {
         FileWriter fw = new FileWriter(filePath);
 
@@ -148,15 +148,15 @@ public class Storage {
 
         fw.close();
     }
-    
+
     private void retrySave(TaskList tasks, int numOfAttempts) {
         File file = new File(filePath);
         file.getParentFile().mkdirs();
-        
+
         if (!file.isFile()) {
             createDataFile(file);
         }
-        
+
         if (numOfAttempts <= 2) {
             save(tasks, ++numOfAttempts);
         }

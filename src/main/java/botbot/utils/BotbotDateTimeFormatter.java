@@ -10,7 +10,7 @@ public class BotbotDateTimeFormatter {
     private static final String FORMAT_DATE = "d MMM yyyy";
     private static final String FORMAT_DATE_HOUR = FORMAT_DATE + " ha";
     private static final String FORMAT_DATE_HOUR_MINUTES = FORMAT_DATE + " h.mma";
-            
+
     private static final double NO_TIME_FLAG = Math.PI * Math.pow(10, 13);
     private static final int NO_TIME_FLAG_HOUR = 3;
     private static final int NO_TIME_FLAG_MINUTE = 14;

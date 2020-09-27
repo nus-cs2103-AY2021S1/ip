@@ -48,7 +48,7 @@ public class Parser {
 
         case DeleteCommand.COMMAND_KEYWORD:
             return CommandValidator.tryDelete(args);
-            
+
         case EditCommand.COMMAND_KEYWORD:
             return CommandValidator.tryEdit(args);
 

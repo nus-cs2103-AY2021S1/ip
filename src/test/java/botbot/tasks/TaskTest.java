@@ -51,7 +51,7 @@ public class TaskTest {
         assertEquals("0", deadline.getStatus());
         deadline.markAsDone();
         assertEquals("1", deadline.getStatus());
-        
+
         Task todo = new Todo("test2");
         assertEquals("0", todo.getStatus());
         todo.markAsDone();
@@ -65,7 +65,7 @@ public class TaskTest {
         assertEquals(LocalDateTime.of(2021, 3, 17, 3, 45),
                 new Event("sample2", TaskStatus.NOT_DONE, DATE_WITH_TIME.toString()).getAt());
     }
-     
+
     @Test
     public void getAt_null() {
         assertNull(new Deadline("test1", DATE_WITH_TIME).getAt());
@@ -81,7 +81,7 @@ public class TaskTest {
         assertEquals(LocalDateTime.of(2020, 5, 5, 3, 14, 15, 926535898),
                 new Deadline("test2", TaskStatus.DONE, DATE_WITHOUT_TIME.toString()).getBy());
     }
-    
+
     @Test
     public void getBy_null() {
         assertNull(new Event("sample1", DATE_WITHOUT_TIME).getBy());

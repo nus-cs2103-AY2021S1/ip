@@ -9,7 +9,7 @@ import botbot.utils.Storage;
  */
 public class InvalidCommand extends Command {
     private final String errorMessage;
-    
+
     /**
      * Creates an invalid command to alert the user of an error.
      *
