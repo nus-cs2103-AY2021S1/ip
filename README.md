@@ -5,7 +5,7 @@ still having the benefits of a Graphical User Interface (GUI).
 If you can type fast, this app can allow you to manage your tasks
 faster than traditional GUI apps.
 
-<br><img src="Ui.png" width="603"/>
+<br><img src="./docs/Ui.png" width="603"/>
 
 ## Features 
 
