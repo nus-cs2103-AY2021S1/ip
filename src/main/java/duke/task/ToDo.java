@@ -68,4 +68,16 @@ public class ToDo extends Task {
             return false;
         }
     }
+
+    @Override
+    public boolean isDuplicate(Task task) {
+        if (task == this) {
+            return true;
+        } else if (task instanceof ToDo) {
+            ToDo otherTask = (ToDo) task;
+            return super.isDuplicate(otherTask);
+        } else {
+            return false;
+        }
+    }
 }

@@ -29,7 +29,7 @@ public class MainWindow extends BorderPane {
     @FXML
     public void initialize() {
         // welcome message
-        String welcome = Message.getWelcome().getText();
+        String welcome = Message.getWelcome().toString();
         dialogContainer.getChildren().add(new DialogBox(welcome, true));
 
         // padding between buttons

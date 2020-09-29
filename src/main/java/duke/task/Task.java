@@ -65,12 +65,17 @@ public abstract class Task {
     public abstract boolean hasSameDate(LocalDate date);
 
     public boolean containsKeyword(String keyword) {
-        return this.title.contains(keyword);
+        return this.title.contains(keyword.trim());
     }
 
     @Override
     public boolean equals(Object obj) {
         assert obj instanceof Task;
-        return this.title.equals(((Task) obj).title);
+        Task taskObj = (Task) obj;
+        return this.title.equals(taskObj.title) && this.isDone == taskObj.isDone;
+    }
+
+    public boolean isDuplicate(Task task) {
+        return this.title.equals(task.title);
     }
 }

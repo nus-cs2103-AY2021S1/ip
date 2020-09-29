@@ -35,4 +35,15 @@ public class ToDoCommand implements Command {
     public boolean isDone() {
         return false;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        } else if (obj instanceof ToDoCommand) {
+            return this.command.equals(((ToDoCommand) obj).command);
+        } else {
+            return false;
+        }
+    }
 }

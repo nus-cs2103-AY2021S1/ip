@@ -1,6 +1,7 @@
 package duke.command;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 import duke.Message;
 import duke.Storage;
@@ -37,5 +38,16 @@ public class DeleteCommand implements Command {
     @Override
     public boolean isDone() {
         return false;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        } else if (obj instanceof DeleteCommand) {
+            return Arrays.equals(this.command, ((DeleteCommand) obj).command);
+        } else {
+            return false;
+        }
     }
 }

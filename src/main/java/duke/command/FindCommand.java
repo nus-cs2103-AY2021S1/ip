@@ -25,4 +25,15 @@ public class FindCommand implements Command {
     public boolean isDone() {
         return false;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        } else if (obj instanceof FindCommand) {
+            return this.command.equals(((FindCommand) obj).command);
+        } else {
+            return false;
+        }
+    }
 }

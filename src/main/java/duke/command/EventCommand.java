@@ -35,4 +35,15 @@ public class EventCommand implements Command {
     public boolean isDone() {
         return false;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        } else if (obj instanceof EventCommand) {
+            return this.command.equals(((EventCommand) obj).command);
+        } else {
+            return false;
+        }
+    }
 }

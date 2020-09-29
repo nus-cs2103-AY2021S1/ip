@@ -63,7 +63,8 @@ public class Message {
         return new Message("Task deleted: " + task);
     }
 
-    public String getText() {
+    @Override
+    public String toString() {
         StringBuilder result = new StringBuilder();
         for (String line : message) {
             result.append(line).append("\n");

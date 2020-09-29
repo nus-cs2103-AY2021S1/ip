@@ -6,8 +6,8 @@ import java.util.Scanner;
  * Represents a group of methods that deal with interactions with the user.
  */
 public class Ui {
-    private static final String HORIZONTAL_LINE = "      ===================================";
-    private static final String INDENTATION = "      ";
+    protected static final String HORIZONTAL_LINE = "      ===================================";
+    protected static final String INDENTATION = "      ";
     private Scanner scanner;
 
     /**

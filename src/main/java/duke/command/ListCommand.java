@@ -2,6 +2,7 @@ package duke.command;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.Arrays;
 
 import duke.Message;
 import duke.Storage;
@@ -37,5 +38,16 @@ public class ListCommand implements Command {
     @Override
     public boolean isDone() {
         return false;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        } else if (obj instanceof ListCommand) {
+            return Arrays.equals(this.command, ((ListCommand) obj).command);
+        } else {
+            return false;
+        }
     }
 }

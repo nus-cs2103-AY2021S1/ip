@@ -69,7 +69,7 @@ public class Duke {
             if (command.isDone()) {
                 Platform.exit();
             }
-            response = message.getText();
+            response = message.toString();
         } catch (IOException | DukeException e) {
             response = e.getMessage();
         }

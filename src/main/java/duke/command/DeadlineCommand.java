@@ -29,11 +29,21 @@ public class DeadlineCommand implements Command {
         } catch (DuplicateTaskException e) {
             return new Message(e.getMessage());
         }
-
     }
 
     @Override
     public boolean isDone() {
         return false;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        } else if (obj instanceof DeadlineCommand) {
+            return this.command.equals(((DeadlineCommand) obj).command);
+        } else {
+            return false;
+        }
     }
 }

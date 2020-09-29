@@ -80,7 +80,19 @@ public class Event extends Task {
             return true;
         } else if (obj instanceof Event) {
             Event otherTask = (Event) obj;
-            return super.equals(otherTask);
+            return super.equals(otherTask) && this.duration.equals(otherTask.duration);
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean isDuplicate(Task task) {
+        if (task == this) {
+            return true;
+        } else if (task instanceof Event) {
+            Event otherTask = (Event) task;
+            return super.isDuplicate(otherTask);
         } else {
             return false;
         }

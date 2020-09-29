@@ -33,7 +33,7 @@ public class TaskList {
      */
     public void add(Task task) throws DuplicateTaskException {
         for (Task t : this.tasks) {
-            if (task.equals(t)) {
+            if (task.isDuplicate(t)) {
                 throw new DuplicateTaskException("Task not added because duplicate found: " + t);
             }
         }

@@ -56,7 +56,6 @@ public class Deadline extends Task {
         } catch (DateTimeParseException e) {
             throw new InvalidCommandFormatException("Please enter a valid date in the yyyy-mm-dd format.");
         }
-
     }
 
     @Override
@@ -81,7 +80,19 @@ public class Deadline extends Task {
             return true;
         } else if (obj instanceof Deadline) {
             Deadline otherTask = (Deadline) obj;
-            return super.equals(otherTask);
+            return super.equals(otherTask) && this.deadline.equals(otherTask.deadline);
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean isDuplicate(Task task) {
+        if (task == this) {
+            return true;
+        } else if (task instanceof Deadline) {
+            Deadline otherTask = (Deadline) task;
+            return super.isDuplicate(otherTask);
         } else {
             return false;
         }
