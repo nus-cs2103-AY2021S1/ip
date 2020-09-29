@@ -5,7 +5,7 @@ still having the benefits of a Graphical User Interface (GUI).
 If you can type fast, this app can allow you to manage your tasks
 faster than traditional GUI apps.
 
-![ui sample](/docs/Ui.png)
+<img src="Ui.png"/>
 
 ## Features 
 
@@ -127,13 +127,13 @@ Expected outcome:
 `There appears to be a duplicate task`
 
 ## Command summary
-Action | Format | Examples
------- | ------ | --------
-`todo` | `todo [task description]` | `todo read book`
-`event` | `event [task description] /at [date]` | `event examinations /at 2020-09-19`
-`deadline` | `deadline [task description] /by [date]` | `deadline assignment /by 2020-09-19`
-`list` | `list`
-`done` | `done [INDEX]` | `done 2`
-`delete` | `delete [INDEX]` | `delete 1` 
-`find` | `find KEYWORDS...` | `find assignment`, `find math assignment`
-`bye` | `bye`
+|Action|Format|Examples|
+|--------------|----------------|----------------|
+|`todo` | `todo [task description]` | `todo read book`|
+|`event` | `event [task description] /at [date]` | `event examinations /at 2020-09-19`|
+|`deadline` | `deadline [task description] /by [date]` | `deadline assignment /by 2020-09-19`|
+|`list` | `list`|
+|`done` | `done [INDEX]` | `done 2`|
+|`delete` | `delete [INDEX]` | `delete 1`| 
+|`find` | `find [search terms]...` | `find assignment`, `find math assignment`|
+|`bye` | `bye`|
