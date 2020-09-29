@@ -127,6 +127,7 @@ Expected outcome:
 `There appears to be a duplicate task`
 
 ## Command summary
+
 |Action|Format|Examples|
 |--------------|----------------|----------------|
 |`todo` | `todo [task description]` | `todo read book`|
