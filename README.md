@@ -5,13 +5,15 @@ still having the benefits of a Graphical User Interface (GUI).
 If you can type fast, this app can allow you to manage your tasks
 faster than traditional GUI apps.
 
+![ui sample](/docs/Ui.png)
+
 ## Features 
 
 ### Feature 1 - Add Task
-### Feature 2 - Mark Task as Done
-### Feature 3 - Delete Task
-### Feature 4 - Find task 
-### Feature 5 - List tasks
+### Feature 2 - List tasks
+### Feature 3 - Mark Task as Done
+### Feature 4 - Delete Task
+### Feature 5 - Find task 
 ### Feature 6 - Detect duplicate tasks
 ## Usage
 
@@ -123,3 +125,15 @@ Example of usage:
 Expected outcome:
 
 `There appears to be a duplicate task`
+
+## Command summary
+Action | Format | Examples
+------ | ------ | --------
+`todo` | `todo [task description]` | `todo read book`
+`event` | `event [task description] /at [date]` | `event examinations /at 2020-09-19`
+`deadline` | `deadline [task description] /by [date]` | `deadline assignment /by 2020-09-19`
+`list` | `list`
+`done` | `done [INDEX]` | `done 2`
+`delete` | `delete [INDEX]` | `delete 1` 
+`find` | `find KEYWORDS...` | `find assignment`, `find math assignment`
+`bye` | `bye`
