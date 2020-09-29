@@ -20,7 +20,7 @@ Duke is a desktop app for managing tasks. It is catered towards individuals who 
 ## 2. Quick Start
 
 1. Ensure you have Java `11` or above installed.
-2. Download the latest duke.jar here (insert link later).
+2. Download the latest duke.jar [here](https://github.com/fanminj/ip/releases/tag/v0.2).
 3. Copy the file to a folder you wish to use as your home folder.
 4. Double-click the file to start the app. The GUI should appear in a few seconds. Shown below is an example with some user commands and the app's responses.
 
