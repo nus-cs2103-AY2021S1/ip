@@ -35,7 +35,25 @@ public class Ui {
     }
 
     public static String chatStartMessage() {
-        return "Hello I'm Duke\nWhat can I do for you?\n";
+        StringBuilder sb = new StringBuilder();
+        sb.append("Hello I'm Duke! How may I assist you?\n");
+        sb.append("Here are a list of commands you can try:\n\n");
+        sb.append("1. [todo] (description)  -  ");
+        sb.append("creates new todo task\n");
+        sb.append("2. [deadline] (description) [/by] (date)  -  ");
+        sb.append("creates new deadline task\n");
+        sb.append("3. [event] (description) [/at] (date)  -  ");
+        sb.append("creates new event task\n");
+        sb.append("4. [list]  -  shows list of tasks\n");
+        sb.append("5. [done] (index)  -  marks specified task as done\n");
+        sb.append("6. [delete] (index)  -  deletes specified task\n");
+        sb.append("7. [clear]  -  deletes all tasks\n");
+        sb.append("8. [find] [key]  -  prints sublist of tasks that match specified key\n");
+        sb.append("9. [edit] (index) [/d or /t] (new field)  -  ");
+        sb.append("edits task at specified index with the new field\n\n");
+        sb.append("Format: [command] (user input)");
+
+        return sb.toString();
     }
 
     /**
