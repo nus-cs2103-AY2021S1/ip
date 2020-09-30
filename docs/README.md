@@ -242,7 +242,7 @@ Expected outcome:
 | 9. Display the list of expenses                                    | listExpense                                   |
 | 10. Delete an expense                                              | deleteExpense [expense number]                |
 | 11. Display list of commands                                       | [any random input that is not listed]         |
-| 12. `exit` the program                                             | exit                                          |
+| 12. Exit the program                                               | bye                                           |
  
  </center>
 
