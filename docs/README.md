@@ -87,7 +87,7 @@ Format: `event <event description> /at <time in YYYY-MM-DD>`
 
 Example of usage: 
 
-`deadline Hackathon /by 2020-10-01`
+`event Hackathon /at 2020-10-01`
 
 Expected outcome:
 
