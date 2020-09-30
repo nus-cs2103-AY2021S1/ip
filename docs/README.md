@@ -90,3 +90,15 @@ Expected outcome:
 >
 >1. [T][x] cs2103 quiz
 
+## Command summary
+
+Action | Format, Examples
+--------|------------------
+**ToDo** | `todo [TASK_NAME]` e.g.`todo cs2103 quiz`
+**Deadline** | `deadline [TASK_NAME] [/by DATE]` e.g.`deadline cs2103 quiz /by 2020-08-23`
+**ToDo** | `event [TASK_NAME] [/at DATE] [TIME]` e.g.`event cs2103 lecture /at 2020-08-23 16:00-18:00`
+**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Done** | `done INDEX`<br> e.g., `done 3`
+**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find cs2103`
+**List** | `list`
+**Help** | `help`
