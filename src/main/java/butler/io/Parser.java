@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 import butler.command.AddCommand;
 import butler.command.Command;
@@ -180,17 +181,29 @@ public class Parser {
      * @throws ButlerException if the user input does not contain a valid task index.
      */
     private static Command parseDeleteCommand(String input) throws ButlerException {
-        String stringIndex = "";
-        try {
-            stringIndex = input.split(" ")[1];
-            int index = Integer.parseInt(stringIndex);
-            return new DeleteCommand(index);
-        } catch (NumberFormatException e) {
-            throw new ButlerException("An invalid index was given.\n\""
-                    + stringIndex + "\" is not an integer.");
-        } catch (IndexOutOfBoundsException e) {
-            throw new ButlerException("Please add the index of the task to be deleted.");
+        String[] commandDetails = input.split(" ");
+        int indexCount = commandDetails.length;
+        String[] indexStringArray = Arrays.copyOfRange(commandDetails, 1, indexCount);
+        ArrayList<Integer> indexList = new ArrayList<>();
+
+        // Convert index from string to integer
+        for (String stringIndex : indexStringArray) {
+            try {
+                Integer index = Integer.parseInt(stringIndex);
+                if (!indexList.contains(index)) {
+                    indexList.add(index);
+                }
+            } catch (NumberFormatException e) {
+                throw new ButlerException("An invalid index was given.\n\""
+                        + stringIndex + "\" is not an integer.");
+            }
         }
+
+        if (indexList.size() == 0) {
+            throw new ButlerException("No index was given. Please provide a valid index.");
+        }
+        Collections.sort(indexList, Collections.reverseOrder());
+        return new DeleteCommand(indexList);
     }
 
     /**
