@@ -12,31 +12,31 @@ This is the user guide for JM's take on the CS2103T greenfield project _Duke_, a
 1. Double click on the jar file to run Duke. If the program does not open run it from the terminal with the command `java -jar duke.jar`.
 
 ## Features
-Duke handles your tasks and reminds you of upcoming events/deadlines.
+Duke handles your tasks and reminds you of upcoming events/deadlines. **Capitalised words denote required parameters.**
 1. **Adding tasks**
    1. `todo`  
-      _Usage_: `todo [task description]`  
+      _Usage_: `todo TASK_DESCRIPTION`  
       Adds a simple todo task to Duke's list. 
    1. `deadline`  
-      _Usage_: `deadline [task description] /by YYYY-MM-DD HH:MM`  
-      Adds a task to Duke's list with a deadline. Both date and time are required.
+      _Usage_: `deadline TASK_DESCRIPTION /by YYYY-MM-DD HH:MM`  
+      Adds a task to Duke's list with a deadline.
    1. `event`  
-      _Usage_: `event [task description] /at YYYY-MM-DD HH:MM`  
-      Adds an event with the time and date of the event to Duke's list. Both date and time are required.  
+      _Usage_: `event TASK_DESCRIPTION /at YYYY-MM-DD HH:MM`  
+      Adds an event with the time and date of the event to Duke's list.
 1. **List your tasks:** `list`  
    _Usage_: `list`  
    Displays the list of all your tasks.  
 1. **Setting tasks as done:** `done`  
-   _Usage_: `done [position of task in the list as shown with the list command]`  
+   _Usage_: `done POSITION_OF_TASK_IN_LIST_FROM_LIST_COMMAND`  
    Sets a task of your choice to be done. The status of a done task is denoted by the ✔ symbol.
 1. **Delete a task:** `delete`  
-   _Usage_: `delete [position of task in the list as shown with the list command]`  
+   _Usage_: `delete POSITION_OF_TASK_IN_LIST_FROM_LIST_COMMAND`  
    Deletes a task of your choice. **Be careful as this action is irreversible.**
 1. **Reminder:** `reminder`  
    _Usage_: `reminder`  
    Lists upcoming tasks within the week.  
 1. **Find task by keyword:** `find`  
-   _Usage_: `find [keyword]`  
+   _Usage_: `find KEYWORD`  
    Finds and lists tasks containing the keyword.
 1. **Exit:** `bye`  
    _Usage_: `bye`  
