@@ -9,6 +9,11 @@ public class Task {
     private String task;
     private TaskSymbol taskType;
 
+    /**
+     * Constructs a Task
+     * @param task An activity
+     * @param taskType Type of task
+     */
     public Task(String task, TaskSymbol taskType) {
         this.task = task;
         this.taskType = taskType;

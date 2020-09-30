@@ -13,11 +13,10 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
-import willy.store.TaskStore;
-import willy.task.TaskList;
-import willy.task.Task;
 import willy.command.Parser;
+import willy.store.TaskStore;
+import willy.task.Task;
+import willy.task.TaskList;
 
 /**
  * A bot that records tasks for people and keeps track of it for them.
@@ -34,6 +33,9 @@ public class Willy extends Application {
             + "\tYour personal life secretary\n";
     private static boolean isOnJavaFX;
 
+    /**
+     * Constructs Willy on CLI
+     */
     public Willy() {
         this.isOnJavaFX = false;
         System.out.println(logo);
@@ -43,6 +45,10 @@ public class Willy extends Application {
         storage.createFile();
     }
 
+    /**
+     * Constructs Willy with GUI
+     * @param boo
+     */
     public Willy(boolean boo) {
         this.isOnJavaFX = boo;
         storage = new TaskStore();
@@ -70,13 +76,13 @@ public class Willy extends Application {
         Button enterButton = new Button("Enter");
         Button clearButton = new Button("Clear");
         TextField inputField = new TextField();
-        JavaFXInteractionBox interactionBox = new JavaFXInteractionBox();
+        JavaFxInteractionBox interactionBox = new JavaFxInteractionBox();
 
         enterButton.setOnAction(action -> {
             String message = inputField.getText();
-            JavaFXInteractionBox.userInput.setText(message + "\t   ");
+            JavaFxInteractionBox.getUserInput().setText(message + "\t   ");
             inputField.clear();
-            JavaFXInteractionBox.botResponse.setText(parser.parseCommand(message, true)); // Returns Response
+            JavaFxInteractionBox.getBotResponse().setText(parser.parseCommand(message, true)); // Returns Response
             if (message.equals(Willy.getLastGreeting())) {
                 exit();
             }
@@ -87,9 +93,9 @@ public class Willy extends Application {
         inputField.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
                 String message = inputField.getText();
-                JavaFXInteractionBox.userInput.setText(message + "\t   " );
+                JavaFxInteractionBox.getUserInput().setText(message + "\t   ");
                 inputField.clear();
-                JavaFXInteractionBox.botResponse.setText(parser.parseCommand(message, true)); // Returns Response
+                JavaFxInteractionBox.getBotResponse().setText(parser.parseCommand(message, true)); // Returns Response
                 if (message.equals(Willy.getLastGreeting())) {
                     exit();
                 }
@@ -102,9 +108,9 @@ public class Willy extends Application {
 
         // Combine everything together
         VBox ui = new VBox(); // Positions components in a vertical column
-        ui.getChildren().addAll(JavaFXIntroContainer.createIntroContainer(),
+        ui.getChildren().addAll(JavaFxIntroContainer.createIntroContainer(),
                 interactionBox.interactionBoxCreator(),
-                JavaFXInputContainer.inputContainerCreator(inputField, enterButton, clearButton));
+                JavaFxInputContainer.inputContainerCreator(inputField, enterButton, clearButton));
 
         StackPane layout = new StackPane();
         layout.getChildren().addAll(ui);
@@ -116,6 +122,10 @@ public class Willy extends Application {
 
     }
 
+    /**
+     * Controls the running of Willy on CLI
+     * @param args
+     */
     public static void main(String[] args) {
 
         new Willy();

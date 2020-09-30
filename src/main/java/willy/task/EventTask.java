@@ -10,12 +10,18 @@ public class EventTask extends Task {
     private String stringPeriod;
     private LocalDateTime period;
 
+    /**
+     * Constructs an Event Task
+     * @param period Date and time of activity
+     * @param task Activity with a start time
+     * @param taskType Type of task
+     */
     public EventTask(String period, String task, TaskSymbol taskType) {
         super(task, taskType);
         this.stringPeriod = period;
         this.period = LocalDateTime.parse(period,
-                DateTimeFormatter.
-                        ofPattern("dd/MM/yyyy HH:mm"));
+                DateTimeFormatter
+                        .ofPattern("dd/MM/yyyy HH:mm"));
     }
 
     public String getStringPeriod() {
@@ -24,9 +30,9 @@ public class EventTask extends Task {
 
     @Override
     public String toString() {
-        return super.toString() + " (at: " +
-                period.format(DateTimeFormatter.
-                        ofPattern("dd MMM yyyy hh:mm a")) + ")";
+        return super.toString() + " (at: "
+                + period.format(DateTimeFormatter
+                .ofPattern("dd MMM yyyy hh:mm a")) + ")";
     }
 
 }

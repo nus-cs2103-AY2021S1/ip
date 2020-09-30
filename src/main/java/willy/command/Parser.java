@@ -1,11 +1,11 @@
 package willy.command;
 
 import willy.exceptions.WillyException;
+import willy.task.DeadlineTask;
+import willy.task.EventTask;
 import willy.task.TaskList;
 import willy.task.TaskSymbol;
 import willy.task.TodoTask;
-import willy.task.EventTask;
-import willy.task.DeadlineTask;
 import willy.ui.Format;
 import willy.ui.Greet;
 import willy.ui.Response;
@@ -219,7 +219,7 @@ public class Parser {
             response = error.toString();
         }
 
-        if (! isOnJavaFX) {
+        if (!isOnJavaFX) {
             System.out.println(response);
             return "";
         }

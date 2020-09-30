@@ -1,17 +1,18 @@
 package willy.store;
 
+
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import willy.task.DeadlineTask;
+import willy.task.EventTask;
 import willy.task.Task;
 import willy.task.TaskSymbol;
 import willy.task.TodoTask;
-import willy.task.DeadlineTask;
-import willy.task.EventTask;
 
 /**
  * Stores the tasks recorded by the bot in a hard drive.
@@ -62,16 +63,16 @@ public class TaskStore {
                     String taskDeadline = deadlineTask.getStringDeadline();
                     String taskStatus = deadlineTask.getStatusInStore();
                     String taskContent = deadlineTask.getTask();
-                    combinedTask = taskType + "|" + taskStatus + "|" +
-                            taskContent + "|" + taskDeadline;
+                    combinedTask = taskType + "|" + taskStatus + "|"
+                            + taskContent + "|" + taskDeadline;
 
                 } else if (taskType.equals("[E]")) {
                     EventTask eventTask = (EventTask) listOfTasks.get(i);
                     String taskPeriod = eventTask.getStringPeriod();
                     String taskStatus = eventTask.getStatusInStore();
                     String taskContent = eventTask.getTask();
-                    combinedTask = taskType + "|" + taskStatus + "|" +
-                            taskContent + "|" + taskPeriod;
+                    combinedTask = taskType + "|" + taskStatus + "|"
+                            + taskContent + "|" + taskPeriod;
 
                 }
 

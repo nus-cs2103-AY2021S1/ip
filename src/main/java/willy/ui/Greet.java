@@ -12,11 +12,18 @@ public class Greet {
             + STYLE;
     private final String EXIT_GREETING = "\t  Byee See you again soon!:)\n";
 
+    /**
+     * Constructs empty Greetings
+     */
     public Greet() {
         this.originalGreeting = null;
         this.greeting = null;
     }
 
+    /**
+     * Constructs bot Greetings according to input given
+     * @param greeting Greetings bot gives to user
+     */
     public Greet(String greeting) {
         this.originalGreeting = greeting;
         this.greeting = "\t" + greeting;

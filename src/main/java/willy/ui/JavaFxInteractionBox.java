@@ -1,12 +1,7 @@
 package willy.ui;
 
-import java.awt.*;
-
-import javax.swing.*;
-
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Background;
@@ -15,23 +10,38 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextFlow;
-import javafx.scene.transform.Scale;
-import javafx.stage.Stage;
 
 /**
  * In charge of creating the interactionBox which consist of the displaying of user inputs and bot's response.
  */
-public class JavaFXInteractionBox {
-    public static Label userInput;
-    public static Text botResponse;
+public class JavaFxInteractionBox {
+    private static Label userInput;
+    private static Text botResponse;
 
-    public JavaFXInteractionBox() {
+    /**
+     * Constructs a JavaFxInteractionBox
+     */
+    public JavaFxInteractionBox() {
         this.userInput = new Label();
         this.botResponse = new Text(provideHelp());
+    }
+
+    public static Label getUserInput() {
+        return userInput;
+    }
+
+    public static void setUserInput(Label userInput) {
+        JavaFxInteractionBox.userInput = userInput;
+    }
+    public static Text getBotResponse() {
+        return botResponse;
+    }
+
+    public static void setBotResponse(Text botResponse) {
+        JavaFxInteractionBox.botResponse = botResponse;
     }
 
     /**
@@ -58,12 +68,14 @@ public class JavaFXInteractionBox {
         StackPane userInputStack = new StackPane();
         // Code below adapted from https://www.youtube.com/watch?v=UzlXUlTD1Lo
         userInput.prefWidthProperty().bind(userInputStack.widthProperty());
-        // Code below adapted from https://www.programcreek.com/java-api-examples/?class=javafx.scene.control.Label&method=setBackground
-        userInput.setBackground(new Background(new BackgroundFill(Color.rgb(180, 157, 253), new CornerRadii(2), new Insets(-3.5,0,-5,0) )));
+        // Code below adapted from
+        // https://www.programcreek.com/java-api-examples/?class=javafx.scene.control.Label&method=setBackground
+        userInput.setBackground(new Background(new BackgroundFill(Color.rgb(180, 157, 253),
+                new CornerRadii(2), new Insets(-3.5, 0, -5, 0))));
         userInput.setAlignment(Pos.CENTER_RIGHT);
         userInput.setTextFill(Color.WHITE);
-        // Code below from https://stackoverflow.com/questions/12341672/make-portion-of-a-text-bold-in-a-javafx-label
-        // -or-text
+        // Code below from
+        // https://stackoverflow.com/questions/12341672/make-portion-of-a-text-bold-in-a-javafx-label-or-text
         userInput.setStyle("-fx-font-weight: bold");
         userInput.setTextAlignment(TextAlignment.RIGHT);
         userInput.setWrapText(true);

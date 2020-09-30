@@ -13,7 +13,7 @@ import javafx.scene.shape.Circle;
 /**
  * Responsible for Willy Greetings Section
  */
-public class JavaFXIntroContainer {
+public class JavaFxIntroContainer {
 
     private static String introGUI = " __       ___        __\n"
             + " \\  \\    /    \\     /  /\n"
@@ -22,6 +22,10 @@ public class JavaFXIntroContainer {
             + "    \\___/     \\__/ ILLY ~(^-^)~\n"
             + "    Your personal life secretary\n";
 
+    /**
+     * Creates an IntroContainer in the form of a VBox
+     * @return
+     */
     public static VBox createIntroContainer() {
 
         Label willy = new Label(introGUI);

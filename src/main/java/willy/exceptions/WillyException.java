@@ -8,6 +8,10 @@ import willy.ui.Willy;
 public class WillyException extends Exception {
     private String error;
 
+    /**
+     * Construct a WillyException with the input of the type of error in String form
+     * @param errorMessage Type of Error that occurred
+     */
     public WillyException(String errorMessage) {
         super(errorMessage);
         this.error = errorMessage;

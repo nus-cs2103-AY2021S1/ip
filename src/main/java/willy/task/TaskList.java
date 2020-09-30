@@ -1,11 +1,11 @@
 package willy.task;
 
+import java.util.ArrayList;
+
 import willy.exceptions.WillyException;
 import willy.store.TaskStore;
 import willy.ui.Response;
 import willy.ui.Willy;
-
-import java.util.ArrayList;
 
 /**
  * Handles the different actions that can be done by the bot.
@@ -17,6 +17,11 @@ public class TaskList {
     private ArrayList<Task> keyList;
     private TaskStore storage;
 
+    /**
+     * Constructs a TaskList that can be manipulated given a list of tasks and a storage to store the list
+     * @param listOfTasks List of activities to do
+     * @param storage Place to store the list of tasks
+     */
     public TaskList(ArrayList<Task> listOfTasks, TaskStore storage) {
         this.listOfTasks = listOfTasks;
         this.storage = storage;
@@ -73,6 +78,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Updates a task in the list
+     * @param taskNum Task number stated in the list
+     * @param editedTask New task to replace the current task in the list
+     * @return New successful task update message in String
+     */
     public String updateTask(int taskNum, Task editedTask) {
         assert taskNum > 0 : "Please insert a task number greater than 0";
         try {

@@ -8,7 +8,7 @@ import javafx.scene.layout.HBox;
 /**
  * In charge of creating input Container for JavaFX.
  */
-public class JavaFXInputContainer {
+public class JavaFxInputContainer {
 
     /**
      * Put together the input Container which consist of the text field and the enter & clear buttons.
