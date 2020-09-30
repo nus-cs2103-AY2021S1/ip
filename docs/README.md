@@ -15,6 +15,8 @@ I've decided to customize it with the theme of one of my favourite shows: South 
 
 ## Features (types of commands currently supported)
 
+Hint: each feature has its own hyperlink to the relevant section within this page.
+
 1. [**`help`**](#help): provides a list of possible commands
 1. [**`list`**](#list): shows the list of tasks
 1. [**`done`**](#done): marks a task as complete
