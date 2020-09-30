@@ -1,10 +1,13 @@
-# User Guide
+# Fantasia User Guide
 
 ## Features 
 
 Fantasia is a task and expense management application which the user can use to set reminders and deadlines for upcoming events and also track their own expenses. It uses a CLI to process instructions from the user, which can provide a faster and more efficient experience than a usual to-do list application.
 
-![Fantasia](Ui.png)
+<p align="center">
+<img src="https://raw.githubusercontent.com/soaza/ip/master/docs/Ui.png">
+</p>
+
 
 ### Create Task
 There are 3 different categories of tasks which can be created in Fantasia- `todo`,`deadline` and `event`. `todo` contains a description of the task while `deadline` and `event` contains a description of the task as well as its time(in YYYY-MM-DD format).
@@ -221,5 +224,24 @@ Expected outcome:
  Expected outcome:
  Terminates the program
  
+ ## Summary of features and commands
+ 
+<center>
 
+| Features                                                           | Commands                                      |
+|--------------------------------------------------------------------|:---------------------------------------------:|
+| 1. Create a `todo` task                                            | todo [description]                            | 
+| 2. Create a `deadline` task                                        | deadline [description] /by [YYYY-MM-DD]       |
+| 3. Create an `event` task                                          | event [description] /at [YYYY-MM-DD]          |
+| 4. Marks a task as `done`                                          | done [task number]                            |
+| 5. `list` all the tasks                                            | list                                          |
+| 6. `find` related tasks                                            | find [description]                            |
+| 7. `delete` a task                                                 | delete [task number]                          |
+| 8. Add an `expense`                                                | expense [description] /amount [expense amount]|
+| 9. Display the list of expenses                                    | listExpense                                   |
+| 10. Delete an expense                                              | deleteExpense [expense number]                |
+| 11. Display list of commands                                       | [any random input that is not listed]         |
+| 12. `exit` the program                                             | exit                                          |
+ 
+ </center>
 
