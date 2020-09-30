@@ -8,6 +8,7 @@ public class TaskTest {
     @Test
     public void testGetDescription() {
         assertEquals ("Sleep", new Task("Sleep", "Todo", false).getDescription());
+        assertEquals ("Eat", new Task ("Eat", "Todo", false).getDescription());
     }
 
     /**
