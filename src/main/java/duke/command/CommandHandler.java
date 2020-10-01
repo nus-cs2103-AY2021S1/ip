@@ -52,7 +52,7 @@ public class CommandHandler {
                 log.append(tasks.deleteTask(command, ui));
                 break;
             case "find":
-                 log.append(ui.printTasks(tasks.findTask(command), true));
+                log.append(ui.printTasks(tasks.findTask(command), true));
                 break;
             case "bye":
                 log.append(ui.printBye());

@@ -3,7 +3,6 @@ package duke.task;
 import java.util.ArrayList;
 import java.util.List;
 
-import duke.Duke;
 import duke.DukeException;
 import duke.ui.Ui;
 import duke.util.MagicStrings;
