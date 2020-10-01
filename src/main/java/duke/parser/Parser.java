@@ -87,7 +87,7 @@ public class Parser {
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
         default:
-            return new IncorrectCommand("☹ OOPS!!! Incorrect command!!! "
+            return new IncorrectCommand(":( OOPS!!! Incorrect command!!! "
                    + "Type 'help' to find out more");
         }
     }
