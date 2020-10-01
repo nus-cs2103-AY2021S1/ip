@@ -15,7 +15,7 @@ public class Deadline extends Task {
     /**
      * Class constructor.
      *
-     * @param title the content of the <code>Deadline</code>
+     * @param title    the content of the <code>Deadline</code>
      * @param deadline the date on which the <code>Deadline</code> is due
      */
     public Deadline(String title, LocalDate deadline) {
@@ -26,8 +26,8 @@ public class Deadline extends Task {
     /**
      * Class constructor.
      *
-     * @param title the content of the <code>Deadline</code>
-     * @param isDone whether or not the <code>Deadline</code> is marked as completed
+     * @param title    the content of the <code>Deadline</code>
+     * @param isDone   whether or not the <code>Deadline</code> is marked as completed
      * @param deadline the date on which the <code>Deadline</code> is due
      */
     public Deadline(String title, boolean isDone, LocalDate deadline) {

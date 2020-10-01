@@ -15,7 +15,7 @@ public class Event extends Task {
     /**
      * Class constructor.
      *
-     * @param title the content of the <code>Event</code>
+     * @param title    the content of the <code>Event</code>
      * @param duration the date on which the <code>Event</code> takes place
      */
     public Event(String title, LocalDate duration) {
@@ -26,8 +26,8 @@ public class Event extends Task {
     /**
      * Class constructor.
      *
-     * @param title the content of the <code>Event</code>
-     * @param isDone whether or not the <code>Event</code> is marked as completed
+     * @param title    the content of the <code>Event</code>
+     * @param isDone   whether or not the <code>Event</code> is marked as completed
      * @param duration the date on which the <code>Event</code> takes place
      */
     public Event(String title, boolean isDone, LocalDate duration) {

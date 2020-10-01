@@ -19,9 +19,17 @@ public class Storage {
      * Class constructor.
      *
      * @param filePath directory and name of the file to save the user's tasks to
+     */
+    public Storage(String filePath) {
+        this.filePath = filePath;
+    }
+
+    /**
+     * Initializes storage file on the user's system.
+     *
      * @throws IOException if there is a problem when creating a new file on the user's system
      */
-    Storage(String filePath) throws IOException {
+    public void initialize() throws IOException {
         String currentDirectory = new File("").getAbsolutePath();
         int i = filePath.lastIndexOf("/");
         if (i != -1) {

@@ -22,6 +22,7 @@ public class Duke {
     Duke(String filepath) {
         try {
             this.storage = new Storage(filepath);
+            this.storage.initialize();
             this.taskList = this.storage.readTasks();
             this.ui = new Ui();
         } catch (IOException e) {

@@ -1,27 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
-
-<?import javafx.scene.control.Button?>
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="duke.MainWindow"
             prefHeight="600.0" prefWidth="400.0">
     <center>
         <ScrollPane fx:id="scrollPane" vbarPolicy="ALWAYS" hbarPolicy="NEVER">
-            <VBox fx:id="dialogContainer" />
+            <VBox fx:id="dialogContainer"/>
         </ScrollPane>
     </center>
     <bottom>
         <BorderPane>
             <center>
-                <TextField fx:id="userInput" onAction="#handleUserInput" />
+                <TextField fx:id="userInput" onAction="#handleUserInput"/>
             </center>
             <right>
-                <Button fx:id="sendButton" text="SEND" onMouseClicked="#handleUserInput" />
+                <Button fx:id="sendButton" text="SEND" onMouseClicked="#handleUserInput"/>
             </right>
         </BorderPane>
     </bottom>

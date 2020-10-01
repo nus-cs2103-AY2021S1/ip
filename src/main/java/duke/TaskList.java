@@ -22,7 +22,7 @@ public class TaskList {
     /**
      * Class constructor.
      */
-    TaskList() {
+    public TaskList() {
         this.tasks = new ArrayList<>();
     }
 

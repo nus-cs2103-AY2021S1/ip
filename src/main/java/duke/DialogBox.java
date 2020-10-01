@@ -25,7 +25,7 @@ public class DialogBox extends HBox {
     /**
      * Creates a box displaying a message from either Duke or the user.
      *
-     * @param text message to be displayed
+     * @param text  message to be displayed
      * @param isBot true if the message is from Duke
      */
     public DialogBox(String text, boolean isBot) {
