@@ -201,5 +201,19 @@ Expected Outcome:
 
 <br>
 
+# Summary of Instructions
+| Command           | Format                              |
+| ----------------- | ----------------------------------- |
+|**help**           | `help`                              |
+|**todo**           | `todo [description]`                |
+|**deadline**       | `deadline [description] /by [date]` |
+|**event**          | `event [description] /at [date]`    |
+|**done**           | `done [number]`                     |
+|**delete**         | `delete [number]`                   |
+|**list**           | `list`                              |
+|**find**           | `find [keyword]`                    |
+|**sort**           | `sort [tag]`                        |
+|**exit**           | `bye`                               |
+
 ## Project Github:
 https://github.com/Vielheim/ip
