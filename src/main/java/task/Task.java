@@ -29,7 +29,7 @@ public abstract class Task {
     }
 
     public boolean contains(String query) {
-        return msg.contains(query);
+        return toString().contains(query);
     }
 
     /**

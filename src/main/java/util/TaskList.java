@@ -42,17 +42,7 @@ public class TaskList {
      * Prints all tasks sequentially.
      */
     public String printList() {
-
-        String output = "";
-
-        for (int i = 0; i < tasks.size(); i++) {
-            output += (i + 1) + ". " + tasks.get(i) + "\n";
-        }
-        if (output.length() == 0) {
-            output += "\n";
-        }
-
-        return output;
+        return printList(task -> true);
     }
 
     /**
