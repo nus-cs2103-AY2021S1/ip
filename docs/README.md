@@ -202,6 +202,7 @@ Expected Outcome:
 <br>
 
 # Summary of Instructions
+
 | Command           | Format                              |
 | ----------------- | ----------------------------------- |
 |**help**           | `help`                              |
