@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"src.main.java.duke"},{"l":"src.main.java.duke.commands"},{"l":"src.main.java.duke.commons"},{"l":"src.main.java.duke.data"},{"l":"src.main.java.duke.data.exception"},{"l":"src.main.java.duke.data.task"},{"l":"src.main.java.duke.parser"},{"l":"src.main.java.duke.storage"},{"l":"src.main.java.duke.ui"}]
