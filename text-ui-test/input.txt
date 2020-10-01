@@ -1,0 +1,16 @@
+todo read book
+event graduation /at 2018-11-27
+deadline 2103 project /by 2020-08-26
+list
+done 2
+delete 3
+list
+get_task 2018-11-27
+event more graduation /at 2018-11-27
+list
+get_task 2018-11-27
+find graduation
+delete 3
+delete 2
+delete 1
+bye

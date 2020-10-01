@@ -1,26 +1,199 @@
-# Duke project template
+# KING BOB User Guide
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+_KING BOB_ is a chat bot that helps you organise your daily tasks (bananas). Make his Highness happy by giving him more 
+tasks (bananas)!
+ 
+![Image of KING BOB](https://raw.githubusercontent.com/kkangs0226/ip/master/docs/Ui.png)
+ 
+##### Below are instructions on how to use _KING BOB_.
 
-## Setting up in Intellij
+- Features
+  - todo 
+  - event
+  - deadline 
+  - list
+  - done
+  - delete
+  - date
+  - find
+  - bye  
+  
+## Features
+  
+### `todo` - Add a new Todo task
+This command adds a new Todo task to the user's list of tasks.
+Duplicate tasks will not be added to the list. 
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+Format: 
+`todo TODO_DESCRIPTION`
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project dialog first)
-1. Set up the correct JDK version, as follows:
-   1. Click `Configure` > `Structure for New Projects` and then `Project Settings` > `Project` > `Project SDK`
-   1. If JDK 11 is listed in the drop down, select it. If it is not, click `New...` and select the directory where you installed JDK 11
-   1. Click `OK`
-1. Import the project into Intellij as follows:
-   1. Click `Open or Import`.
-   1. Select the project directory, and click `OK`
-   1. If there are any further prompts, accept the defaults.
-1. After the importing is complete, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()`. If the setup is correct, you should see something like the below:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+Example of command:
+- `todo read book` 
+
+Expected result:
+```
+Banana! Banana has been added to your list!
+     [T][✘] read book
+Now you have 1 banana(s) in your list! Nom nom..
+```
+
+Example of command:
+- `todo read book` 
+
+Expected result:
+```
+Banana! There is a duplicate in the list!
+```
+
+### `event` - Add a new Event task
+This command adds a new Event task to the user's list of tasks.
+Duplicate tasks will not be added to the list. 
+
+Format: 
+`event EVENT_DESCRIPTION /at EVENT_DATE`
+
+Example of command:
+- `event graduation night /at 2020-02-19`
+
+Expected result:
+```
+Banana! Banana has been added to your list!
+     [E][✘] graduation night (at: Feb 19 2020)
+Now you have 2 banana(s) in your list! Nom nom..
+```
+
+Example of command:
+- `event graduation night /at 2020-02-19`
+
+Expected result:
+```
+Banana! There is a duplicate in the list!
+```
+
+### `deadline` - Add a new Deadline task
+This command adds a new Deadline task to the user's list of tasks.
+Duplicate tasks will not be added to the list. 
+
+Format:
+`deadline PROJECT_DESCRIPTION /by DEADLINE_DATE`
+
+Example of command:
+- `deadline project /by 2020-09-30`
+
+Expected result:
+```
+Banana! Banana has been added to your list!
+     [D][✘] project (by: Sep 30 2020)
+Now you have 3 banana(s) in your list! Nom nom..
+```
+
+Example of command:
+- `deadline project /by 2020-09-30`
+
+Expected result:
+```
+Banana! There is a duplicate in the list!
+```
+
+### `list` - Display list of tasks 
+This command displays the list of existing tasks to the user. 
+
+Format:
+`list`
+
+Expected result:
+```
+Banana! So many tasks?
+
+1. [T][✘] read book
+2. [E][✘] graduation night (at: Feb 19 2020)
+3. [D][✘] project (by: Sep 30 2020)
+```
+
+### `done` - Mark a task as done
+This command marks the task at the specified index as done. 
+
+Format:
+`done TASK_INDEX`
+
+Example of command:
+- `done 1`
+
+Expected result:
+```
+Banana! I’ve marked this task as done:
+     [T][✓] read book
+```
+
+### `delete` - Delete a task 
+This command deletes a task at the specified index. 
+
+Format:
+`delete TASK_INDEX`
+
+Example of command:
+- `delete 1`
+
+Expected result:
+```
+Banana! banana has been eaten. Burp!
+     [T][✓] read book
+Now you have 2 banana(s) in your list! Nom nom..
+```
+
+### `date` - Find a task by its date
+This command finds tasks based on its event or deadline date. 
+
+Format:
+`date TASK_DATE`
+
+Example of command:
+- `date 2020-09-30`
+
+Expected result: 
+```
+Banana! Here are your bananas..
+     [D][✘] project (by: Sep 30 2020)
+```
+
+### `find` - Find a task by its keyword
+This command finds tasks by keywords in the task description. 
+
+Format: 
+`find TASK_KEYWORD`
+
+Example of command:
+- `find project`
+
+Expected result: 
+```
+Banana! Here are your bananas..
+     [D][✘] project (by: Sep 30 2020)
+```
+
+Example of command: 
+- `find graduation`  
+
+Expected result: 
+```
+Banana! Here are your bananas..
+     [E][✘] graduation night (at: Feb 19 2020)
+```
+
+### `bye` - Exits application
+This command exits the application. 
+
+Format:
+`bye`
+
+Expected result:
+The app quits. 
+  
+  
+## Credits
+
+* Images retrieved from:
+  * [Background](https://www.pinterest.co.kr/pin/661114420275950559/)
+  * [User icon](https://www.pinterest.com/pin/484559241150248458/)
+  * [KING BOB icon](https://despicableme.fandom.com/wiki/Bob)
+  
