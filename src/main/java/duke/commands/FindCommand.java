@@ -16,7 +16,7 @@ public class FindCommand extends Command {
 
     // Message to add
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Find the tasks that contains the words. \n"
-            + "Parameters: find WORD\n" + "Example: " + COMMAND_WORD + " 1";
+            + "Parameters: find WORD\n" + "Example: " + COMMAND_WORD + " workout";
 
     public FindCommand(String targetVisibleString) {
         super(targetVisibleString);
