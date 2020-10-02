@@ -34,7 +34,7 @@ public class Duke {
     }
 
     /**
-     * Executes the {@code Duke} programe using the input provided
+     * Executes the {@code Duke} program using the input provided
      *
      * @param input Command to run.
      */
