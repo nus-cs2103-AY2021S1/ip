@@ -1,5 +1,6 @@
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.nio.charset.StandardCharsets;
 
 import manager.Parser;
 
@@ -52,11 +53,11 @@ public class Duke {
         this.parser.parseSavedTasks();
 
         setOutput(stream);
-        return output.toString();
+        return output.toString(StandardCharsets.UTF_8);
     }
 
     private PrintStream initializePrintStream(ByteArrayOutputStream outputStream) {
-        PrintStream printStream = new PrintStream(outputStream);
+        PrintStream printStream = new PrintStream(outputStream, true, StandardCharsets.UTF_8);
         PrintStream output = System.out;
         System.setOut(printStream);
         return output;

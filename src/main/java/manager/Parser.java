@@ -2,6 +2,7 @@ package manager;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
 import exceptions.InvalidCommandException;
@@ -25,7 +26,7 @@ public class Parser {
     public String handleUserInput(String input) {
 
         ByteArrayOutputStream output = new ByteArrayOutputStream();
-        PrintStream printStream = new PrintStream(output);
+        PrintStream printStream = new PrintStream(output, true, StandardCharsets.UTF_8);
         PrintStream old = System.out;
         System.setOut(printStream);
 
@@ -57,7 +58,7 @@ public class Parser {
 
         System.out.flush();
         System.setOut(old);
-        return output.toString();
+        return output.toString(StandardCharsets.UTF_8);
     }
 
     /**
