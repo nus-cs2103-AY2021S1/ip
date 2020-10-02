@@ -1,48 +1,87 @@
 package duke.core;
 
+import duke.Launcher;
+import duke.task.Event;
+import duke.task.ToDo;
 import org.junit.jupiter.api.Test;
+
+import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class TaskListTest {
 
     @Test
-    void add() {
+    void testAdd_taskToAdd_updatedTaskList() {
+        TaskList taskList = new TaskList();
+        taskList.add(new ToDo("a b c"));
+        assertEquals(1, taskList.getSize());
     }
 
     @Test
-    void remove() {
+    void testRemove_taskToRemove_updatedTaskList() {
+        TaskList taskList = new TaskList();
+        taskList.add(new ToDo("a b c"));
+        taskList.remove(0);
+        assertEquals(0, taskList.getSize());
     }
 
     @Test
-    void markAsCompleted() {
+    void testMarkAsCompleted_taskToChange_updatedTaskList() {
+        TaskList taskList = new TaskList();
+        taskList.add(new ToDo("a b c"));
+        taskList.markAsCompleted(0);
+        assertEquals("\u2713", taskList.getTask(0).getState());
     }
 
     @Test
-    void has() {
+    void testHas_taskNumber_correspondingMessage() {
+        TaskList taskList = new TaskList();
+        taskList.add(new ToDo("a b c"));
+        assertEquals(true, taskList.has(0));
     }
 
     @Test
-    void findTaskAt() {
+    void testFindTaskAt_localTime_correspondingTaskList() {
+        TaskList taskList = new TaskList();
+        Event event = new Event("a b c", LocalDate.parse("2014-12-07"));
+        taskList.add(event);
+        assertEquals(1, taskList.findTaskAt(LocalDate.parse("2014-12-07")).getSize());
     }
 
     @Test
-    void findTaskWithDescription() {
+    void testFindTaskWithDescription_taskDescription_correspondingTaskList() {
+        TaskList taskList = new TaskList();
+        taskList.add(new ToDo("a b c"));
+        assertEquals(1, taskList.findTaskWithDescription("a b c").getSize());
     }
 
     @Test
-    void testToString() {
+    void testToString_currentTaskList_correspondingMessage() {
+        TaskList taskList = new TaskList();
+        taskList.add(new ToDo("a b c"));
+        assertEquals("1.[T][\u2718] a b c\n", taskList.toString());
     }
 
     @Test
-    void getTasks() {
+    void testGetTasks_taskCommand_correspondingListOfTask() {
+        TaskList taskList = new TaskList();
+        taskList.add(new ToDo("a b c"));
+        assertEquals(1, taskList.getTasks().size());
     }
 
     @Test
-    void getSize() {
+    void testGetSize_currentTaskList_correspondingTaskListSize() {
+        TaskList taskList = new TaskList();
+        taskList.add(new ToDo("a b c"));
+        assertEquals(1, taskList.getSize());
     }
 
     @Test
-    void getTask() {
+    void testGetTask_taskNumber_correspondingTask() {
+        TaskList taskList = new TaskList();
+        ToDo toDo = new ToDo("a b c");
+        taskList.add(toDo);
+        assertEquals(toDo, taskList.getTask(0));
     }
 }

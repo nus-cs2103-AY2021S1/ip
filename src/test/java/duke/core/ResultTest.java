@@ -16,7 +16,7 @@ class ResultTest {
     }
 
     @org.junit.jupiter.api.Test
-    void isContinuing() {
+    void testIsContinuing_resultWithSpecificType_correspondingContinuingState() {
         Result result = new Result("Noted. I have removed this task:\n"
                 + "1.[T][\u2718] a b c\nNow you have 5 tasks in the list.",
                 true,
