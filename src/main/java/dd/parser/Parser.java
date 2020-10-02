@@ -83,7 +83,10 @@ public class Parser {
     private static Command parseAddInput(String input) throws DukeException {
         Command c = null;
 
-        if (input.startsWith("todo")) {
+        // Check for commas to prevent load file bug
+        if (input.contains(",")) {
+            throw new DukeException("Item name cannot contain commas( , )!");
+        } else if (input.startsWith("todo")) {
             if (input.length() < 5) {
                 throw new DukeException("To-do item cannot be empty! e.g. todo borrow book");
             } else {
