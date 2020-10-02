@@ -246,3 +246,5 @@ Expected outcome:
  
  </center>
 
+ ## Acknowledgements
+ GUI wallpaper and user icons taken from http://www.wenyigeng.com/.
