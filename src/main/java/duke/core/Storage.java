@@ -48,7 +48,7 @@ public class Storage {
             ArrayList<Task> tasks = new ArrayList<>();
             String next;
 
-            if(!record.exists() || record.isDirectory()) {
+            if (!record.exists() || record.isDirectory()) {
                 File directory = new File("data");
                 directory.mkdirs();
                 record = new File(directory, "duke.txt");
@@ -98,7 +98,7 @@ public class Storage {
             //System.out.println("Throw caused by loading the file");
             throw new LoadingException("Problems with creating the file");
 
-        }  catch (LoadingException loadingException) {
+        } catch (LoadingException loadingException) {
             //System.out.println("Throw caused by loading the file");
             throw new LoadingException("Problems with creating the file");
 

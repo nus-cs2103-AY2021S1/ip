@@ -26,12 +26,10 @@ import duke.handle.TaskNotFoundException;
  */
 public class Duke {
     private static final String FILE_PATH = "data/duke.txt";
+    public ArrayList<Exception> startingExceptions;
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
-    public ArrayList<Exception> startingExceptions;
-
-
     /**
      * Takes in the path of the local record, and creates a duke bot to interact with
      * the user.
