@@ -1,2 +1,3 @@
 E | 0 | Swimming practice | 23/9/2019
 T | 0 | Catch fishes!
+T | 0 | bye

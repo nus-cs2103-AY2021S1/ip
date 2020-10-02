@@ -179,6 +179,11 @@ public class Duke {
             return Ui.messagePrint(e.toString());
         }
     }
+
+    public static void main(String[] args) {
+        Duke duke = new Duke();
+        System.out.println(duke.getResponse("todo sell fishes"));
+    }
 }
 
 
