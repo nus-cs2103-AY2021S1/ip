@@ -228,8 +228,8 @@ Format: `help`
 Format: `bye`
 
 ## Acknowledgements
-- Picture of Meeseeks face is obtained from https://dlpng.com/png/6359939. 
-- Picture of Morty is obtained from https://pngimage.net/morty-head-png-4/.
-- Picture of Meeseeks bo obtained from https://www.clipartmax.com/middle/m2H7d3N4Z5H7A0b1_rick-and-morty-clipart-mr-meeseeks-rick-and-morty-mr-meeseeks-box/
+- Picture of Meeseeks face is obtained from [https://dlpng.com/png/6359939](https://dlpng.com/png/6359939). 
+- Picture of Morty is obtained from [https://pngimage.net/morty-head-png-4/](https://pngimage.net/morty-head-png-4/).
+- Picture of Meeseeks bo obtained from [https://www.clipartmax.com/middle/m2H7d3N4Z5H7A0b1_rick-and-morty-clipart-mr-meeseeks-rick-and-morty-mr-meeseeks-box/](https://www.clipartmax.com/middle/m2H7d3N4Z5H7A0b1_rick-and-morty-clipart-mr-meeseeks-rick-and-morty-mr-meeseeks-box/)
 
 All rights belong to the original creators. No copyright infringement intended.
