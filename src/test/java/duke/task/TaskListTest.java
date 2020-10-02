@@ -1,9 +1,10 @@
 package duke.task;
 
-import duke.exceptions.NoSuchTaskException;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import duke.exceptions.NoSuchTaskException;
 
 public class TaskListTest {
 

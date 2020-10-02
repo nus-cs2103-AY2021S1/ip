@@ -41,13 +41,13 @@ public class DeleteCommand extends Command {
     @Override
     public Response execute(TaskList tasks, Ui ui, Storage storage, DukeStateManager dukeStateManager)
             throws NoSuchTaskException, IOException {
-        this.storeState(dukeStateManager, tasks, storage);
 
         Task deletedTask = tasks.deleteTask(taskNumber);
         String message = ui.formatMessage(String.format("Okay, I've deleted the following task: \n %s",
                 deletedTask.toString()));
         storage.updateTasks(tasks.getListOfTasks());
 
+        this.storeState(dukeStateManager, tasks, storage);
         return new Response(false, message);
     }
 

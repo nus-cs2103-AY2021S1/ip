@@ -41,12 +41,12 @@ public class DoneCommand extends Command {
     @Override
     public Response execute(TaskList tasks, Ui ui, Storage storage, DukeStateManager dukeStateManager)
             throws NoSuchTaskException, IOException {
-        this.storeState(dukeStateManager, tasks, storage);
-
         Task completedTask = tasks.completeTask(taskNumber);
         String message = ui.formatMessage(String.format("Great! I've marked the following task as done: \n %s",
                 completedTask));
         storage.updateTasks(tasks.getListOfTasks());
+
+        this.storeState(dukeStateManager, tasks, storage);
 
         return new Response(false, message);
     }

@@ -46,8 +46,6 @@ public class DeadlineCommand extends Command {
     @Override
     public Response execute(TaskList tasks, Ui ui, Storage storage,
                             DukeStateManager dukeStateManager) throws WrongDateFormatException, IOException {
-        this.storeState(dukeStateManager, tasks, storage);
-
         LocalDateTime deadlineDateTime = DateParser.parseString(dateStr);
         Deadline deadline = new Deadline(description, deadlineDateTime);
 
@@ -55,6 +53,8 @@ public class DeadlineCommand extends Command {
         String message = ui.formatMessage(String.format("Okay, I've added the following deadline: \n %s",
                 deadline.toString()));
         storage.updateTasks(tasks.getListOfTasks());
+
+        this.storeState(dukeStateManager, tasks, storage);
 
         return new Response(false, message);
     }

@@ -40,13 +40,13 @@ public class TodoCommand extends Command {
     @Override
     public Response execute(TaskList tasks, Ui ui, Storage storage, DukeStateManager dukeStateManager)
             throws IOException {
-        this.storeState(dukeStateManager, tasks, storage);
         Todo todo = new Todo(description);
-
         tasks.addTask(todo);
         String message = ui.formatMessage(String.format("Okay! I've added the following task: \n %s",
                 todo.toString()));
         storage.updateTasks(tasks.getListOfTasks());
+
+        this.storeState(dukeStateManager, tasks, storage);
 
         return new Response(false, message);
     }

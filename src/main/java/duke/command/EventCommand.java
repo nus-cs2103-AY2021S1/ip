@@ -46,8 +46,6 @@ public class EventCommand extends Command {
     @Override
     public Response execute(TaskList tasks, Ui ui, Storage storage, DukeStateManager dukeStateManager)
             throws WrongDateFormatException, IOException {
-        this.storeState(dukeStateManager, tasks, storage);
-
         LocalDateTime eventDateTime = DateParser.parseString(dateStr);
         Event event = new Event(description, eventDateTime);
 
@@ -55,6 +53,8 @@ public class EventCommand extends Command {
         String message = ui.formatMessage(String.format("Okay, I've added the following event: \n %s",
                 event.toString()));
         storage.updateTasks(tasks.getListOfTasks());
+
+        this.storeState(dukeStateManager, tasks, storage);
 
         return new Response(false, message);
     }
