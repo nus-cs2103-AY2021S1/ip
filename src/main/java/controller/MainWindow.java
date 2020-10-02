@@ -45,6 +45,7 @@ public class MainWindow extends AnchorPane {
     public void dukeWelcome() {
         String welcomeMessage = "Hello!!! I'm Duke, your handy tasks manager."
                 + "\nHere are some commands you can use!"
+                + " Note that Duke does not support the use of round brackets: ( or )."
                 + "\n- To add a todo, type: 'todo <task description>'."
                 + "\n- To add a deadline, type: 'deadline <deadline description> /by <dd-mm-yyyy> HHMM'."
                 + "\n- To add an event, type: 'event <event description> /at <dd-mm-yyyy> HHMM'."

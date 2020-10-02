@@ -35,7 +35,8 @@ public class Parser {
         String actionType = inputMsg.split(" ")[0];
 
         if (inputMsg.contains("(") || inputMsg.contains(")")) {
-            throw new DukeException("Symbol used is not supported by Duke!");
+            throw new DukeException("Duke does not support usage of round brackets!"
+                    + "\nTry curly or square brackets instead?");
         }
 
         if (inputMsg.equals("list")) {
