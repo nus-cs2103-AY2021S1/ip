@@ -1,0 +1,18 @@
+aaaaaa
+list
+add
+todo
+read book
+list
+add
+deadline
+assigment ,2pm
+add
+event
+lunch with the boys , 12-1pm
+done
+2
+done
+1
+list
+bye
