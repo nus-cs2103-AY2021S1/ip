@@ -25,6 +25,9 @@ public class TodoCommand extends Command{
     @Override
     protected String execute(TaskList tasks, UI dukeUI) throws InvalidTaskDescriptionException {
         try {
+            if (this.command.contains("//")) {
+                throw new InvalidTaskDescriptionException();
+            }
             String[] todoDetails = this.command.split(" ", 2);
             Todo newTodo = new Todo(todoDetails[1]);
             tasks.addTask(newTodo);

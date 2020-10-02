@@ -38,7 +38,7 @@ public class UpdateCommand extends Command {
             }
             return dukeResponse;
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
-            throw new InvalidTaskNumberException();
+                throw new InvalidTaskNumberException();
+            }
         }
     }
-}

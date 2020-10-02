@@ -29,6 +29,9 @@ public class EventCommand extends Command{
     @Override
     protected String execute(TaskList tasks, UI dukeUI) throws InvalidTaskDescriptionException, WrongDateFormatException {
         try {
+            if (this.command.contains("//")) {
+                throw new InvalidTaskDescriptionException();
+            }
             String[] taskDetails = this.command.split("/");
             LocalDate taskDate = LocalDate.parse(taskDetails[1]);
             String[] taskDetailsWithoutDate = taskDetails[0].split(" ", 2);
