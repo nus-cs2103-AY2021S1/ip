@@ -13,6 +13,7 @@ import raythx.grandma.command.ListCommand;
 import raythx.grandma.exception.AdditionalArgumentException;
 import raythx.grandma.exception.DukeException;
 import raythx.grandma.exception.EmptyDescriptionException;
+import raythx.grandma.exception.IllegalInputException;
 import raythx.grandma.exception.InsufficientArgumentException;
 import raythx.grandma.exception.InvalidIndexException;
 import raythx.grandma.exception.UnknownCommandException;
@@ -35,6 +36,9 @@ public class Parser {
         String[] splitBySpace = input.split(" ", 2);
         if (input.isEmpty()) {
             throw new EmptyDescriptionException();
+        }
+        if (input.contains("|")) {
+            throw new IllegalInputException();
         }
         switch (splitBySpace[0]) {
         case "bye":
