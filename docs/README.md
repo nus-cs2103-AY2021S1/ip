@@ -18,19 +18,25 @@ The grandma task mananger application caters to the younger generation using cru
 
     todo {description} #{tag} /by DDMMYY HHMM
 
->**entries are case sensitive**
+>*entries are case sensitive*
+>
+>*date and time are optional*
 
 ### Adding "deadline" task - adds a task with deadline into grandma.
 
     deadline {description} #{tag} /by DDMMYY HHMM
 
->**entries are case sensitive**
+>*entries are case sensitive*
+>
+>*date and time are optional*
 
 ### Adding "event" task - adds an event task into grandma.
 
     event {description} #{tag} /at DDMMYY HHMM
 
->**entries are case sensitive**
+>*entries are case sensitive*
+>
+>*date and time are optional*
 
 ### Delete task - delete a task from grandma.
 
