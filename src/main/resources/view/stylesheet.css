@@ -1,0 +1,45 @@
+@font-face {
+    src: url('../fonts/PrettyNeat.ttf');
+}
+
+.label ,
+.userInput,
+.sendButton {
+	-fx-font-family: 'Pretty Neat';
+	-fx-font-size: 15;
+}
+
+.background {
+    -fx-background-image: url('../images/background.png');
+    -fx-background-size: 100% 100%;
+    -fx-background-position: bottom left;
+}
+
+.scroll-bar:vertical .track {
+	-fx-background-color: rgb(214, 239, 243);
+	-fx-background-image: url('../images/scrollz.png');
+	-fx-background-size: 100% 99.9%;
+	-fx-background-position: bottom right;
+    -fx-background-radius: 0em;
+    -fx-border-radius: 2.0em;
+}
+
+.scroll-bar:vertical .increment-button,
+.scroll-bar:vertical .decrement-button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 0.0em;
+    -fx-padding: 0 19 0 0;
+}
+
+
+ .scroll-bar:vertical .increment-arrow,
+ .scroll-bar:vertical .decrement-arrow{
+    -fx-shape: "";
+    -fx-padding: 0em;
+}
+
+.scroll-bar:vertical .thumb {
+    -fx-background-color: rgb(153, 0, 51, 0.2);
+    -fx-background-insets: 3, 0.0, 0.0;
+    -fx-background-radius: 2.0em;
+}
