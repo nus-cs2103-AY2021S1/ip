@@ -34,6 +34,10 @@ public class Parser {
         // user specified action, to identify type of action
         String actionType = inputMsg.split(" ")[0];
 
+        if (inputMsg.contains("(") || inputMsg.contains(")")) {
+            throw new DukeException("Symbol used is not supported by Duke!");
+        }
+
         if (inputMsg.equals("list")) {
             return new ListCommand();
         } else if (actionType.equals("done")) {

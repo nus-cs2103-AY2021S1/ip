@@ -89,13 +89,19 @@ public class AddToListCommand extends Command {
             if (numOfWords <= 1) {
                 throw new DukeException("Description of task cannot be empty!");
             }
-            String task = inputMsg.split("/")[0];
+
+            String[] splitInput = inputMsg.split("/by");
+            if (splitInput.length <= 1) {
+                throw new DukeException("Please use /by to specify deadline!");
+            }
+            String task = splitInput[0];
             if (task.length() <= 9) {
                 throw new DukeException("Task name cannot be empty!");
             }
-            String taskName = task.substring(9, task.length() - 1);
+
             try {
-                String inputDeadline = inputMsg.split("/", 2)[1].substring(3);
+                String taskName = task.substring(9, task.length() - 1);
+                String inputDeadline = splitInput[1].substring(1);
                 LocalDateTime deadline = processDate(inputDeadline);
                 newTask = new Deadline(taskName, false, deadline);
                 break;
@@ -107,14 +113,19 @@ public class AddToListCommand extends Command {
             if (numOfWords <= 1) {
                 throw new DukeException("Description of task cannot be empty!");
             }
-            String task = inputMsg.split("/")[0];
+
+            String[] splitInput = inputMsg.split("/at");
+            if (splitInput.length <= 1) {
+                throw new DukeException("Please use /at to specify deadline!");
+            }
+            String task = splitInput[0];
             if (task.length() <= 6) {
                 throw new DukeException("Task name cannot be empty!");
             }
-            String taskName = task.substring(6, task.length() - 1);
 
             try {
-                String inputDeadline = inputMsg.split("/", 2)[1].substring(3);
+                String taskName = task.substring(6, task.length() - 1);
+                String inputDeadline = splitInput[1].substring(1);
                 LocalDateTime deadline = processDate(inputDeadline);
                 newTask = new Event(taskName, false, deadline);
                 break;
