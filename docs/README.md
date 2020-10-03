@@ -11,7 +11,7 @@ Example of usage:
 
 Expected outcome:
 
-![list](./list.png)
+![list](./listphoto.png)
 
 ### Feature 2: Create Deadlines
 
