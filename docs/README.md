@@ -31,9 +31,8 @@ KTM helps you to be more aware of your schedule and become a better task manager
  7. Marking a task as done: `done + " " + Number`
  8. Finding relevant tasks: `find + " " + info`
  9. Viewing the task list: `tasks`
- 10. Clearing the task list: `clear`
- 11. Saying bye to KaTo: `bye`
- 12. Exiting KTM : `exit`
+ 10. Saying bye to KaTo: `bye`
+ 11. Exiting KTM : `exit`
  
  
 ### Feature 1 
