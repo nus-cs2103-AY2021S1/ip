@@ -145,7 +145,12 @@ public class TaskList {
      */
     public String find(String input) {
         String[] arr = input.split(" ");
-        String keyWord = arr[1];
+        String keyWord;
+        try {
+            keyWord = arr[1];
+        } catch (IndexOutOfBoundsException e) {
+            return "Find missing keyword";
+        }
 
         ArrayList<Task> hits = new ArrayList<>();
 
