@@ -29,16 +29,16 @@ public class Event extends Task {
         // date format must be in YYYY-MM-DD e.g. 2020-08-22
         // time format must by in XX:XX-YY:YY e.g. 14:00-16:00
         super(taskName.stripTrailing());
-        String[] arr = date.split(" ");
-        String eventDate = arr[0];
-        String[] eventTime = arr[1].split("-");
-        String eventStartTime = eventTime[0];
-        String eventEndTime = eventTime[1];
         try {
+            String[] arr = date.split(" ");
+            String eventDate = arr[0];
+            String[] eventTime = arr[1].split("-");
+            String eventStartTime = eventTime[0];
+            String eventEndTime = eventTime[1];
             this.date = LocalDate.parse(eventDate);
             this.startTime = LocalTime.parse(eventStartTime);
             this.endTime = LocalTime.parse(eventEndTime);
-        } catch (DateTimeParseException e) {
+        } catch (DateTimeParseException | IndexOutOfBoundsException e) {
             throw new DukeException("Date and time is in the wrong format");
         }
     }
