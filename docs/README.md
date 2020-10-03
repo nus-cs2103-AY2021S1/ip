@@ -3,6 +3,7 @@
 1. Install Java 11 on your computer.
 2. Download Duke.jar file.
 3. Run the file with java -jar Duke.jar.
+
 ## Features 
 #### `help`
 Displays all the available instructions in Duke.
