@@ -4,6 +4,7 @@
 
 # User Guide
 The duke bot is a desktop app for managing task, optimized for use via a Command Line Interface (CLI). If you can type fast, duke bot can track your tasks faster than traditional GUI apps. 
+
 ## Table of contents
 * [Quick Start](#quick-start)
 * [Features](#features)
@@ -30,6 +31,7 @@ The duke bot is a desktop app for managing task, optimized for use via a Command
 4. Double-click the file to start the app.
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing help and pressing Enter will show the list of available commands.
+
 ## Features
 
 The following section will showcase the list of available commands and its usage.
