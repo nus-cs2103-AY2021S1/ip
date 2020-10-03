@@ -91,13 +91,11 @@ public class TaskList {
      * @throws DukeExcessException For excess tasks
      */
 
-    public Deadline storeDeadline(String deadline) throws EmptyDukeException, DukeInvalidTimeException, DukeExcessException {
+    public Deadline storeDeadline(String deadline) throws EmptyDukeException, DukeInvalidTimeException,
+            DukeExcessException {
         int count = todoList.size() + 1;
         countCheck(count);
-        /*if (count > 100) {
-            System.out.println("You have far too many pending tasks!");
-            return null;
-        } else*/ if (deadline.length() <= 8) {
+        if (deadline.length() <= 8) {
             throw new EmptyDukeException("The description of your deadline is empty.");
         } else {
             Deadline curr = new Deadline(deadline.substring(9), count, false, "N");
@@ -119,10 +117,7 @@ public class TaskList {
     public Event storeEvent(String event) throws EmptyDukeException, DukeInvalidTimeException, DukeExcessException {
         int count = todoList.size() + 1;
         countCheck(count);
-        /*if (count > 100) {
-            System.out.println("You have far too many pending tasks!");
-            return null;
-        } else*/ if (event.length() <= 5) {
+        if (event.length() <= 5) {
             throw new EmptyDukeException("The description of your event is empty.");
         } else {
             Event curr = new Event(event.substring(6), count, false, "N");

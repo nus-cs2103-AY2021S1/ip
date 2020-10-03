@@ -1,5 +1,9 @@
 package duke.gui;
 
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import duke.classes.Duke;
 import duke.classes.Ui;
 import javafx.application.Platform;
@@ -10,11 +14,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 
-import java.lang.reflect.InvocationTargetException;
-import java.util.concurrent.Future;
-import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Class that defines the frontend page for the main window.
