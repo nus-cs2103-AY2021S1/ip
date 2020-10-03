@@ -79,7 +79,18 @@ public class TaskList {
         int index = Integer.parseInt(split[1]) - 1;
 
         Task task = this.tasks.get(index);
-        Task updatedTask = new Task(task.description, true);
+
+        Task updatedTask;
+        if (task instanceof ToDo) {
+            updatedTask = new ToDo(task.description, true);
+        } else if (task instanceof Deadline) {
+            updatedTask = new Deadline(task.description, true, ((Deadline) task).getDoBy());
+        } else if (task instanceof Event) {
+            updatedTask = new Event(task.description, true, ((Event)task).getTime());
+        } else {
+            throw new DukeException(MagicStrings.ERROR_DONE_FORMAT_INCORRECT);
+        }
+
 
         try {
             this.tasks.set(index, updatedTask);
