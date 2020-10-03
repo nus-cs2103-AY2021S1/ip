@@ -212,9 +212,9 @@ Expected outcome:
 
                 `bye` - to exit the program
  ```
- ## Exiting the program
+ ##  Exiting the program
 
- ### `bye` - Exits the program
+ ###  `bye` - Exits the program
  
  Format: `bye`
  
@@ -225,7 +225,7 @@ Expected outcome:
  Expected outcome:
  Terminates the program
  
- ## Summary of features and commands
+ ##  Summary of features and commands
  
 
 | Features                                                           | Commands                                      |
@@ -243,6 +243,6 @@ Expected outcome:
 | 11. Display list of commands                                       | [any random input that is not listed]         |
 | 12. Exit the program                                               | bye                                           |
  
- ## Acknowledgements
+ ##   Acknowledgements
  GUI wallpaper and user icons taken from http://www.wenyigeng.com/.
 
