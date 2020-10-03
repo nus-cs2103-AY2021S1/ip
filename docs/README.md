@@ -91,6 +91,44 @@ Expected outcome:
 >
 >1. [T][x] cs2103 quiz
 
+### Feature 4
+Marking task as done
+
+#### Usage
+
+### `done` - marks a task as done
+
+Marks the task specified by the number after the `done` command as done
+
+Example of usage: 
+
+`done 1`
+
+Expected outcome:
+
+>Nice! I've marked this task as done:
+>
+>[T][✓] cs2103 quiz
+
+### Feature 5
+Finding of task
+
+#### Usage
+
+### `find` - finds a task
+
+Finds the task specified by the keyword after the `find` command
+
+Example of usage: 
+
+`find cs2103`
+
+Expected outcome:
+
+>Here are the matching tasks in your list:
+>
+>1. [T][x] cs2103 quiz
+
 ## Command summary
 
 Action | Format, Examples
