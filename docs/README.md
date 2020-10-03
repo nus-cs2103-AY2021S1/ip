@@ -107,6 +107,24 @@ Expected outcome:
 The event with the description and time will be added to the task list.
 
 ### Feature 6
+Add an event at a certain time point.
+
+## Usage
+
+### `periodTask description /start yyyy-MM-dd /end yyyy-MM-dd` - Add a period task in the task list
+
+Type periodTask, description, the start time of the period task, and the end time of the period task in 
+the chat, and the period task with the description, start time, and end time will be added to the task list.
+
+Example of usage: 
+
+`period description /start 2014-12-07 /end 2014-12-08`
+
+Expected outcome:
+
+The period task with the description, start time, and end time will be added to the task list.
+
+### Feature 7
 Search for a task with the description that contains a key in 
 the task list.
 
@@ -127,7 +145,7 @@ Expected outcome:
 2. [T] <input type="checkbox" checked> read book
 3. [D] <input type="checkbox" checked> return book (by: 12 8 2014)
 
-### Feature 7
+### Feature 8
 Remove a task from the task list.
 
 ## Usage
@@ -146,7 +164,7 @@ Expected outcome:
 1. [E] <input type="checkbox" checked> borrow book (at: 12 7 2014)
 2. [T] <input type="checkbox" checked> read book
 
-### Feature 8
+### Feature 9
 Make a task in the task list marked as completed.
 
 ## Usage
@@ -166,7 +184,7 @@ Expected outcome:
 2. [T] <input type="checkbox" checked> read book
 3. [D] <input type="checkbox" checked> return book (by: 12 8 2014)
 
-### Feature 9
+### Feature 10
 Exit the process
 
 ## Usage
