@@ -1,13 +1,13 @@
 package duke.core;
 
-import duke.Launcher;
-import duke.task.Event;
-import duke.task.ToDo;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDate;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+import duke.task.Event;
+import duke.task.ToDo;
 
 class TaskListTest {
 
