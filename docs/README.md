@@ -83,17 +83,4 @@ Exits and closes the application.
 ###  Saving data
 Duke Tracker automatically saves data into hard disk (.txt file) everytime any changes are made.
 
-## Command Summary
-|          Action          |                          Format                          |
-| :----------------------: | :------------------------------------------------------: |
-|List|`list`|
-|Add|`todo <TASK_DESCRIPTION>` <br />(e.g., todo CS2103T Quiz 5)|
-|Add (with deadline)|`deadline <TASK_DESCRIPTION> /by <DEADLINE_DESCRIPTION>` <br />(e.g., deadline return book /by this Sunday)|
-|Add (with date)|`event <TASK_DESCRIPTION> /at <DATE_DESCRIPTION>` <br />(e.g., event CS2100 Assignment 1 /at 2020-09-18)|
-|Delete|`delete <TASK_INDEX>` <br />(e.g., delete 3)|
-|Done|`done <TASK_INDEX>` <br />(e.g., done 2)|
-|Find|`find <QUERY_STRING>` <br />(e.g., find CS2100 Assignment)|
-|Exit|`bye`|
-|Save|
-
 
