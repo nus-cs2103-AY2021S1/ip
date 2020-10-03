@@ -95,8 +95,7 @@ public class Storage {
             FileWriter writer = new FileWriter(FILE_PATH);
 
             for (Task task : taskList.getTasks()) {
-                writer.write(task.getType() + "|" + task.getContent()
-                        + (TaskType.hasTime(task.getType()) ? "|" + task.getDate() : "") + System.lineSeparator());
+                writer.write(parseSavedFileFormat(task));
             }
             writer.close();
             taskList.clearTasks();
@@ -107,5 +106,12 @@ public class Storage {
             AlertBox.display(errorTitle, e.getMessage());
             return errorTitle;
         }
+    }
+
+    private String parseSavedFileFormat(Task task) {
+        return task.getType() + "|" + task.getContent()
+                + (TaskType.hasTime(task.getType())
+                    ? "|" + task.getDate()
+                    : "") + System.lineSeparator();
     }
 }
