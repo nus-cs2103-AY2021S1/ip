@@ -5,6 +5,7 @@ Duke is a chat bot to help you manage your deadlines and task. It serves as an a
 	1. Download the latest Duke.jar
 	2. Double click the file to start the app
     3. Use the text field to type in command
+   
 ## Features 
 Some commands available:
 -   `todo`, `deadline`, `event` adds the task type to the todo list
