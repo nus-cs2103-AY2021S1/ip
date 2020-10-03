@@ -23,7 +23,7 @@ public class Duke {
     private Storage storage;
     private Ui ui;
     private LinkedList<ReversibleCommand> reversibleCommands;
-
+    private boolean isActive;
     /**
      * Initializes Duke with the given file path.
      */
@@ -72,9 +72,14 @@ public class Duke {
     public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
+            isActive = !c.isExit();
             return c.execute(taskList, ui, storage, reversibleCommands);
         } catch (DukeException e) {
             return ui.giveResponse(e.getMessage());
         }
+    }
+
+    public boolean isActive() {
+        return isActive;
     }
 }
