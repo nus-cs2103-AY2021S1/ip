@@ -22,6 +22,19 @@ Adds a Deadline task into Duke.
 
 Example of usage: 
 
+### Feature 3
+
+<h4>Create an Event task</h4>
+
+Adds a Event task into Duke.
+
+Example of usage: 
+
+If you want to add an event task:
+
+    event party at my House /at 20200920 2200
+
+Expected outcome:
 ## Usage
 
 ### `Keyword` - Describe action
