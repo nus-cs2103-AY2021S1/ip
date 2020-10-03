@@ -227,7 +227,6 @@ Expected outcome:
  
  ## Summary of features and commands
  
-<center>
 
 | Features                                                           | Commands                                      |
 |--------------------------------------------------------------------|:---------------------------------------------:|
@@ -244,7 +243,6 @@ Expected outcome:
 | 11. Display list of commands                                       | [any random input that is not listed]         |
 | 12. Exit the program                                               | bye                                           |
  
- </center>
-
  ## Acknowledgements
  GUI wallpaper and user icons taken from http://www.wenyigeng.com/.
+
