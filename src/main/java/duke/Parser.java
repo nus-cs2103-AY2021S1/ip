@@ -34,8 +34,9 @@ public class Parser {
      * @throws DukeEmptyInputException If input is empty.
      * @throws DukeInvalidDateTimeException If date and time input is invalid.
      * @throws DukeInvalidCommandException If command is invalid.
+     * @throws DukeInvalidKeywordException If keyword is invalid.
      */
-    static Command parse(String fullCommand) throws DukeEmptyInputException, DukeInvalidDateTimeException,
+    public static Command parse(String fullCommand) throws DukeEmptyInputException, DukeInvalidDateTimeException,
             DukeInvalidCommandException, DukeInvalidKeywordException {
         String[] commands = fullCommand.trim().split(" ", 2);
         switch(commands[0]) {
