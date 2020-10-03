@@ -211,7 +211,8 @@ Expected outcome:
                 3)deleteExpense - to delete expense from the list
 
                 `bye` - to exit the program
- ```
+```
+
 ## Exiting the program
 
 ###  `bye` - Exits the program
