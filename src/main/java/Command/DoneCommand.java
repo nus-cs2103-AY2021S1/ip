@@ -32,7 +32,7 @@ public class DoneCommand extends Command {
         Task task = tasks.getList().get(this.i - 1);
         task.markAsDone();
         tasks.set(this.i, task);
-        return  ui.completedTask(task) + "\n" + tasks.printSize();
+        return ui.completedTask(task) + "\n" + tasks.printSize();
     }
 
     /**

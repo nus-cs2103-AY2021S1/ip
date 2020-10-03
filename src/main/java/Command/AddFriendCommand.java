@@ -4,8 +4,8 @@ import java.io.IOException;
 
 import Duke.Storage;
 import Duke.Ui;
-import Friend.FriendList;
 import Friend.Friend;
+import Friend.FriendList;
 import Tasks.TaskList;
 
 public class AddFriendCommand extends Command {
