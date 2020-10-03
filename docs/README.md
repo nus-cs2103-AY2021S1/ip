@@ -3,7 +3,16 @@
 ## Features 
 
 ### Feature 1 
-Description of feature.
+
+<h4>View existing items</h4>
+
+To view all the items that you currently have in Duke.
+
+Example of usage: 
+
+    list
+
+Expected outcome:
 
 ## Usage
 
