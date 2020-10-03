@@ -86,7 +86,7 @@ public class TaskList {
         } else if (task instanceof Deadline) {
             updatedTask = new Deadline(task.description, true, ((Deadline) task).getDoBy());
         } else if (task instanceof Event) {
-            updatedTask = new Event(task.description, true, ((Event)task).getTime());
+            updatedTask = new Event(task.description, true, ((Event) task).getTime());
         } else {
             throw new DukeException(MagicStrings.ERROR_DONE_FORMAT_INCORRECT);
         }
