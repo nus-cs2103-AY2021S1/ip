@@ -212,7 +212,6 @@ Expected outcome:
 
                 `bye` - to exit the program
  ```
- 
 ## Exiting the program
 
 ###  `bye` - Exits the program
@@ -246,4 +245,3 @@ Terminates the program
  
 ##   Acknowledgements
 GUI wallpaper and user icons taken from http://www.wenyigeng.com/.
-
