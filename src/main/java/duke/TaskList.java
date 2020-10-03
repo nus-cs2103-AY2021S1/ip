@@ -82,7 +82,7 @@ public class TaskList {
 
             try {
                 index = Integer.parseInt(arr[1]);
-            } catch (NumberFormatException e) {
+            } catch (NumberFormatException | IndexOutOfBoundsException e) {
                 throw new DukeException(INVALID_NUMBER);
             }
 
@@ -119,7 +119,7 @@ public class TaskList {
             try {
                 // if string after done cannot be parsed to integer
                 index = Integer.parseInt(arr[1]);
-            } catch (NumberFormatException e) {
+            } catch (NumberFormatException | IndexOutOfBoundsException e) {
                 throw new DukeException(INVALID_NUMBER);
             }
 
