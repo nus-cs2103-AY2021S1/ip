@@ -1,50 +1,100 @@
 # User Guide
-## Hi if you're reading this, please give me a few more hours to sort out my UG.
 ## Features 
-test123
-### Feature 1 
 
-<h4>View existing items</h4>
+### Feature 1: List
 
-To view all the items that you currently have in Duke.
+To list out all current items in Duke.
 
-Example of usage: 
+Example of usage:
 
     list
 
 Expected outcome:
 
-### Feature 2
+![list](./list.png)
 
-<h4>Create a Deadline task</h4>
+### Feature 2: Create Deadlines
 
-Adds a Deadline task into Duke.
+Adds a Deadline task into Duke using keywords: deadline...by
 
-Example of usage: 
+Example of usage:
 
-### Feature 3
-
-<h4>Create an Event task</h4>
-
-Adds a Event task into Duke.
-
-Example of usage: 
-
-If you want to add an event task:
-
-    event party at my House /at 20200920 2200
+    deadline return book /by 08/10/2020 1800
 
 Expected outcome:
-## Usage
+   
+![list](./deadline.png)
 
-### `Keyword` - Describe action
 
-Describe action and its outcome.
+### Feature 3: Create Events
+
+Adds an Event task into Duke using keywords: event...at
 
 Example of usage: 
 
-`keyword (optional arguments)`
+    event birthday /at 08/10/2020 1800
 
 Expected outcome:
 
-`outcome`
+![list](./event.png)
+
+
+Expected outcome:
+    
+### Feature 4: Create Todos
+
+Adds a Todo task into Duke using keyword: todo
+
+Example of usage: 
+
+    todo read some books
+
+Expected outcome: 
+
+![list](./todo.png)
+
+### Feature 5: Completing a Task
+
+Marks a selected task as done
+
+Example of usage: (where 2 is the position)
+
+    done 2
+
+Expected outcome: 
+
+![list](./done.png)
+
+### Feature 6: Removing a Task
+
+Removes a selected task from Duke
+
+Example of usage: (where 1 is the position)
+
+    delete 1
+
+Expected outcome: 
+
+![list](./delete.png)
+
+### Feature 7: Finding a Task
+
+Searches for a Task by name
+
+Example of usage: 
+
+    find book
+
+Expected outcome: 
+
+![list](./find.png)
+
+### Feature 8: Ending the programme
+
+Saves and exits Duke
+
+Example of usage: 
+
+    bye
+
+
