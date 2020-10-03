@@ -138,16 +138,6 @@ Viewing the task list: `tasks`
 KaTo will list out the current tasks in the task list and inform the user if it is empty.
 
 ### Feature 10
-Viewing the task list: `clear`
-
-- Example of usage: 
-`clear`
-
-- Expected outcome:
-
-KaTo will clear all the current tasks in the task list and inform the user if it is empty.
-
-### Feature 11
 
 Saying bye to KaTo: `bye`
 
@@ -158,7 +148,7 @@ Saying bye to KaTo: `bye`
 
 KaTo will print out the bye message to the user.
 
- ### Feature 12
+ ### Feature 11
 Exiting KTM : `exit`
 
 - Example of usage: 
