@@ -25,6 +25,9 @@ public class Parser {
      * @throws DukeException If the command fails the integrity checks.
      */
     public static Command parse(String input) throws DukeException {
+        if (input.contains("\\|")) {
+            throw new DukeException("Please do not include '|' in your task descriptions!");
+        }
         String[] commandDetail = input.split(" ", 2);
 
         if (commandDetail.length == 0) {
