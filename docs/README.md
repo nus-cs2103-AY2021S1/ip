@@ -17,7 +17,7 @@ To use the the Do Lah, simply compile and run the Duke.java file at `src/main/ja
 
 You can also build the application and run it using gradle.
 
-A packaged jar file has been attached in the latest stable release. Feel free to download it 
+A packaged jar file has been attached in the latest stable release. Feel free to download it
 and enjoy DoLah by type the command `java -jar dolah.jar`
 
 ### 1. `list` - List out all current tasks
