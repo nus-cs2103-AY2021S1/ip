@@ -23,7 +23,7 @@ Example of usage:
 
 Expected outcome:
    
-![list](./deadline.png)
+![deadline](./deadline.png)
 
 
 ### Feature 3: Create Events
@@ -36,7 +36,7 @@ Example of usage:
 
 Expected outcome:
 
-![list](./event.png)
+![event](./event.png)
 
 
 Expected outcome:
@@ -51,7 +51,7 @@ Example of usage:
 
 Expected outcome: 
 
-![list](./todo.png)
+![todo](./todo.png)
 
 ### Feature 5: Completing a Task
 
@@ -63,7 +63,7 @@ Example of usage: (where 2 is the position)
 
 Expected outcome: 
 
-![list](./done.png)
+![done](./done.png)
 
 ### Feature 6: Removing a Task
 
@@ -75,7 +75,7 @@ Example of usage: (where 1 is the position)
 
 Expected outcome: 
 
-![list](./delete.png)
+![delete](./delete.png)
 
 ### Feature 7: Finding a Task
 
@@ -87,7 +87,7 @@ Example of usage:
 
 Expected outcome: 
 
-![list](./find.png)
+![find](./find.png)
 
 ### Feature 8: Ending the programme
 
