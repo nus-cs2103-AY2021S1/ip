@@ -86,7 +86,7 @@ public class TaskList {
                 throw new DukeException(INVALID_NUMBER);
             }
 
-            if (index > list.size() || index < 0) {
+            if (index > list.size() || index <= 0) {
                 throw new DukeException(INVALID_NUMBER);
             }
 
@@ -123,7 +123,7 @@ public class TaskList {
                 throw new DukeException(INVALID_NUMBER);
             }
 
-            if (index > list.size() || index < 0) {
+            if (index > list.size() || index <= 0) {
                 throw new DukeException(INVALID_NUMBER);
             }
 
