@@ -16,7 +16,7 @@ Displays all the tasks added in Duke.
 
 <br/>
 
-####`todo DESCRIPTION`
+#### `todo DESCRIPTION`
 Adds a simple task.
 
 Eg. `todo read book`
