@@ -117,11 +117,11 @@ public class Ui {
      */
     public String readCommand(String input) {
 
-        if (input.equals("bye")) {
+        if (input.stripTrailing().equals("bye")) {
             return "Have a nice day! :-)";
-        } else if (input.equals("list")) {
+        } else if (input.stripTrailing().equals("list")) {
             return taskList.listOut();
-        } else if (input.equals("help")) {
+        } else if (input.stripTrailing().equals("help")) {
             PopUpBox.display("Help menu", HELP_TEXT);
             return "Here is the list of commands:";
         } else if (input.contains("find")) {
