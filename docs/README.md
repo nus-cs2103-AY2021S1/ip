@@ -14,6 +14,14 @@ Example of usage:
 
 Expected outcome:
 
+### Feature 2
+
+<h4>Create a Deadline task</h4>
+
+Adds a Deadline task into Duke.
+
+Example of usage: 
+
 ## Usage
 
 ### `Keyword` - Describe action
