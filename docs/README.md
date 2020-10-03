@@ -22,6 +22,7 @@ Timmi supports the addition of tasks under **3 task types**, namely:
 * `deadline`
 * `event` 
 
+Commas are not allowed in the item names for these commands.
 See the respective usages for more information.
 
 ### Sort Tasks Chronologically

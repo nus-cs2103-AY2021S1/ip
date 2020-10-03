@@ -60,12 +60,15 @@ public class Ui {
                 + smileyLine + "\n"
                 + "   To add a todo, enter: \"todo <item name>\". \n"
                 + "     For example: \"todo borrow book\". \n"
+                + "     Commas( , ) are not allowed in item name.\n"
                 + lineBreak
                 + "   To add a deadline, enter: \"deadline <item name> /by <date> <(OPTIONAL) time>\". \n"
                 + "     For example: \"deadline return book /by 31-12-2020\". \n"
+                + "     Commas( , ) are not allowed in item name.\n"
                 + lineBreak
                 + "   To add an event, enter: \"event <item name> /at <date> <(OPTIONAL) time>\". \n"
                 + "     For example: \"event team meeting /at 31-12-2020 1800\". \n"
+                + "     Commas( , ) are not allowed in item name.\n"
                 + lineBreak
                 + "   To check your list of tasks, enter: \"list\". \n"
                 + lineBreak
