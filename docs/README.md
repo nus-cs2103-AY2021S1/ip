@@ -212,10 +212,9 @@ Expected outcome:
 
                 `bye` - to exit the program
  ```
- 
- ##  Exiting the program
+## Exiting the program
 
- ###  `bye` - Exits the program
+###  `bye` - Exits the program
  
  Format: `bye`
  
@@ -226,7 +225,7 @@ Expected outcome:
  Expected outcome:
  Terminates the program
  
- ##  Summary of features and commands
+##  Summary of features and commands
  
 
 | Features                                                           | Commands                                      |
