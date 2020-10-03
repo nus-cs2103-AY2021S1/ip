@@ -32,7 +32,7 @@ Adds a deadline to **Clara**'s list.
 
 Command: `deadline <title> /by <y-M-d or y-M-d HH:mm>`
 
-Example: `deadline peer review /at 2020-12-31`
+Example: `deadline peer review /by 2020-12-31`
 
 ### Mark a task as done
 Mark a task in **Clara**'s list as done. 
