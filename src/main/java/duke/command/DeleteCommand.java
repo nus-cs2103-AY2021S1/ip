@@ -41,7 +41,7 @@ public class DeleteCommand extends Command {
     @Override
     public String execute(TaskList tasks, Storage storage) throws DukeException {
         try {
-            if (index > tasks.getSize()) {
+            if (index > tasks.getSize() || index < 0) {
                 throw new InvalidArgumentException(ARGUMENT_EXCEPTION);
             }
             String output = DELETE_MESSAGE;

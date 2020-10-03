@@ -36,7 +36,7 @@ public class DoneCommand extends Command {
     @Override
     public String execute(TaskList tasks, Storage storage) {
         try {
-            if (index > tasks.getSize()) {
+            if (index > tasks.getSize() || index < 0) {
                 throw new InvalidArgumentException("☹ OOPS!!! The task index you give is not found.");
             }
             if (tasks.markDone(index)) {
