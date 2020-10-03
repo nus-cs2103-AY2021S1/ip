@@ -212,6 +212,7 @@ Expected outcome:
 
                 `bye` - to exit the program
  ```
+ 
  ##  Exiting the program
 
  ###  `bye` - Exits the program
