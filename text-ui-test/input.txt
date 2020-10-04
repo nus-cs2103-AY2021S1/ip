@@ -1,0 +1,7 @@
+todo borrow book
+list
+done 1
+list
+deadline return book /by Sunday
+list
+bye

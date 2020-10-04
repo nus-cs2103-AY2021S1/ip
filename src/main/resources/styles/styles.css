@@ -1,0 +1,34 @@
+.background {
+    -fx-background-image : url("/images/background.png")
+}
+
+.dialog-label {
+    -fx-background-color: #FEF9E7;
+    -fx-padding: 8px;
+    -fx-background-radius: 10px;
+    -fx-font-size: 14px;
+    -fx-font-family: "Comic Sans MS";
+}
+
+.dialog-image {
+    -fx-background-radius: 10px;
+    -fx-padding: 8px;
+}
+
+.button {
+    -fx-background-color: #B89384;
+    -fx-font-family: "Comic Sans MS";
+    -fx-font-size: 14px;
+    -fx-text-fill: #1A1A1A;
+    -fx-background-radius: 10px;
+    -fx-background-insets: 2px;
+}
+
+.text-field {
+    -fx-font-family: "Comic Sans MS";
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 14px;
+    -fx-background-radius: 10px;
+    -fx-background-insets: 2px;
+    -fx-background-color: #1A1A1A;
+}
