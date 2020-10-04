@@ -1,0 +1,26 @@
+list
+todo My Task
+event Big Event /at Tuesday 3pm-9pm
+deadline Homework /by Wednesday
+todo More Tasks
+list
+done 1
+delete
+todo
+event
+rubbish
+done 3
+deadline Essay /by Friday
+list
+deadline
+done 2
+list
+event Small Event /at Thursday 12pm-12am
+done 4
+delete 4
+delete 3
+list
+delete 2
+delete 5
+list
+bye

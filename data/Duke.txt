@@ -1,0 +1,9 @@
+1.[T][✗] Buy potato chips
+2.[T][✓] Clean room
+3.[E][✗] Attend band concert (at: Friday 5-7pm )
+4.[D][✓] Linear algebra assignment (by: 20 Sep 2020)
+5.[D][✗] GES project report (by: 22 Sep 2020)
+6.[E][✗] Football game (at: Sat 2pm)
+7.[T][✓] Repair car headlights
+8.[T][✗] Get a haircut
+9.[E][✗] One Direction concert  (at: Friday 6pm)

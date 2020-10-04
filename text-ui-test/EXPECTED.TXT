@@ -1,7 +1,111 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+Hi there! I'm Peanut.
+How can I be of assistance?
 
+
+Here are your tasks:
+
+
+added: [T][✗] My Task
+
+
+added: [E][✗] Big Event (at: Tuesday 3pm-9pm)
+
+
+added: [D][✗] Homework (by: Wednesday)
+
+
+added: [T][✗] More Tasks
+
+
+Here are your tasks:
+1.[T][✗] My Task
+2.[E][✗] Big Event (at: Tuesday 3pm-9pm)
+3.[D][✗] Homework (by: Wednesday)
+4.[T][✗] More Tasks
+
+
+Hurray! My Task is now done.
+[T][✓] My Task
+
+
+OOPS!!! Please choose a valid task index to delete.
+
+
+OOPS!!! The description of a todo cannot be empty.
+
+
+OOPS!!! The description of a event cannot be empty.
+
+
+OOPS!!! I'm sorry, but I don't know what that means.
+
+
+Hurray! Homework is now done.
+[D][✓] Homework (by: Wednesday)
+
+
+added: [D][✗] Essay (by: Friday)
+
+
+Here are your tasks:
+1.[T][✓] My Task
+2.[E][✗] Big Event (at: Tuesday 3pm-9pm)
+3.[D][✓] Homework (by: Wednesday)
+4.[T][✗] More Tasks
+5.[D][✗] Essay (by: Friday)
+
+
+OOPS!!! The description of a deadline cannot be empty.
+
+
+Hurray! Big Event is now done.
+[E][✓] Big Event (at: Tuesday 3pm-9pm)
+
+
+Here are your tasks:
+1.[T][✓] My Task
+2.[E][✓] Big Event (at: Tuesday 3pm-9pm)
+3.[D][✓] Homework (by: Wednesday)
+4.[T][✗] More Tasks
+5.[D][✗] Essay (by: Friday)
+
+
+added: [E][✗] Small Event (at: Thursday 12pm-12am)
+
+
+Hurray! More Tasks is now done.
+[T][✓] More Tasks
+
+
+Okay More Tasks has been deleted.
+[T][✓] More Tasks
+You now have 5 tasks.
+
+
+Okay Homework has been deleted.
+[D][✓] Homework (by: Wednesday)
+You now have 4 tasks.
+
+
+Here are your tasks:
+1.[T][✓] My Task
+2.[E][✓] Big Event (at: Tuesday 3pm-9pm)
+3.[D][✗] Essay (by: Friday)
+4.[E][✗] Small Event (at: Thursday 12pm-12am)
+
+
+Okay Big Event has been deleted.
+[E][✓] Big Event (at: Tuesday 3pm-9pm)
+You now have 3 tasks.
+
+
+OOPS!!! Please choose a valid task index to delete.
+
+
+Here are your tasks:
+1.[T][✓] My Task
+2.[D][✗] Essay (by: Friday)
+3.[E][✗] Small Event (at: Thursday 12pm-12am)
+
+
+Bye! Sad to see you go :(
