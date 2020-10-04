@@ -45,7 +45,7 @@ public class Parser {
         } else if (command.startsWith("tag")) {
             return Command.TAG;
         } else {
-            return Command.TASK;
+            return Command.INVALID;
         }
     }
 }

@@ -69,6 +69,11 @@ public enum Command {
         public String toString() {
             return "tag";
         }
+    }, INVALID {
+        @Override
+        public String toString() {
+            return "invalid command";
+        }
     }
 
 }

@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import duke.exceptions.BlahException;
 import duke.exceptions.DukeExcessException;
+import duke.exceptions.DukeInvalidCommandException;
 import duke.exceptions.DukeInvalidTimeException;
 import duke.exceptions.EmptyDukeException;
 import duke.tasks.Task;
@@ -131,7 +132,7 @@ public class Duke {
             completedString = ui.deleteTask(deletedTask, taskList.todoList);
             break;
         case BLAH:
-        case TASK:
+        case INVALID:
             completedString = assignOtherTasks(task);
             break;
         default:
@@ -165,9 +166,9 @@ public class Duke {
 
     public String assignOtherTasks(String task) {
         try {
-            taskList.storeTask(task);
+            taskList.storeInvalidTask(task);
             return ui.addOtherTask(task);
-        } catch (BlahException e) {
+        } catch (BlahException | DukeInvalidCommandException e) {
             return ui.printError(e.toString());
         }
     }

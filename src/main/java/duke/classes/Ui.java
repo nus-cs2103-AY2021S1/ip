@@ -42,10 +42,8 @@ public class Ui {
      */
 
     public String displayList(List<Task> list) {
-        //System.out.println(line);
         if (list.size() == 0) {
-            return "Sorry. No matches found!";
-            //System.out.println("Sorry. No matches found!");
+            return "Sorry. The list is empty!";
         } else {
             StringBuilder tasklist = new StringBuilder();
             list.forEach((task) -> {

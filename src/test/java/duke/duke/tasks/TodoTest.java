@@ -1,5 +1,7 @@
 package duke.duke.tasks;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
 import duke.tasks.Todo;
@@ -11,18 +13,15 @@ public class TodoTest {
         assertEquals(2, 2);
     }
 
-    private void assertEquals(int i, int i1) {
-    }
-
     @Test
     public void todoToStringTest() {
         Todo task = new Todo("borrow book", 1, false, "N");
-        assert task.toString().equals("[T][✘] borrow book ");
+        assertEquals("[T][✘] borrow book ", task.toString());
     }
 
     @Test
     public void todoStatusTest() {
         Todo task = new Todo("borrow book", 1, false, "N");
-        assert task.getStatusWithIndex().equals("1. [T][✘] borrow book ");
+        assertEquals("1. [T][✘] borrow book ", task.getStatusWithIndex());
     }
 }

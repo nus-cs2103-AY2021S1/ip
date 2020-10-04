@@ -7,6 +7,7 @@ import java.util.function.Function;
 
 import duke.exceptions.BlahException;
 import duke.exceptions.DukeExcessException;
+import duke.exceptions.DukeInvalidCommandException;
 import duke.exceptions.DukeInvalidTimeException;
 import duke.exceptions.EmptyDukeException;
 import duke.tasks.Deadline;
@@ -237,5 +238,19 @@ public class TaskList {
         Task task = todoList.get(Character.getNumericValue(command.charAt(4)) - 1);
         task.setTag(command.substring(6));
         return task;
+    }
+
+    /**
+     * Points out invalid tasks
+     * @param task Invalid task
+     * @throws BlahException Since the task/command is invalid
+     * @throws DukeInvalidCommandException For other unrecognised commands
+     */
+    public void storeInvalidTask(String task) throws BlahException, DukeInvalidCommandException {
+        if (task.startsWith("blah")) {
+            throw new BlahException();
+        } else {
+            throw new DukeInvalidCommandException();
+        }
     }
 }
