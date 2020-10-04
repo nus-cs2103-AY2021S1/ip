@@ -7,7 +7,7 @@ Duke the All-Knowing is a simple offline application which specialises in task m
 - Duke displays the logo after user clear the default sending line "Enter your problems here..." by click send
 - Users can add a specific type of task : todo/event/deadline
 - Users can find a task using part of its description entered
-- Users can make a task as done
+- Users can mark a task as done
 - Users can delete a task
 - Users can list all tasks 
 - Users can store all tasks in a local file in the hard disk "duke.txt"
@@ -29,7 +29,10 @@ Got it. I have added this task:
 2020 FEBRUARY 2 SUNDAY 18:00hr)
 ```
 
-Note that user input commands for event and deadline tasks are similar
+Note that user input commands and response for todo and deadline tasks are very similar to event except that todo command does not require a timing after by or at.
+
+##### 1a. `deadline <description> /at <yyyy-mm-dd> <hr:min>` - Add a deadline
+##### 1b. `todo ask qn` - Add a todo
 
 #### 2. `done <seq number>` - Mark an existing task as done
 
@@ -50,7 +53,9 @@ Nice! I have marked this task as done:
 Error Response :
 ```I am afraid that it is not possible to delete an unknown task.```
 
-Note that the format of delete <seq number> operation is the same as done <seq number>.
+Note that the user input commands and response for delete <seq number> operation is the same as done <seq number>.
+
+##### 2a. `delete <seq number>` - Delete an existing task from the task list
 
 #### 3. `list` - Display all tasks in sequence
 
@@ -138,6 +143,6 @@ They include:
 - Add check duplicate function
 - Add archive function
 
-among other.
+among others.
 
 Hope you will have a good time using duke. 
