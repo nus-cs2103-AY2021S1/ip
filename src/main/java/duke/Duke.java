@@ -23,7 +23,7 @@ public class Duke {
     private Storage storage;
     private Ui ui;
     private LinkedList<ReversibleCommand> reversibleCommands;
-    private boolean isActive;
+    private boolean isActive = true;
     /**
      * Initializes Duke with the given file path.
      */
