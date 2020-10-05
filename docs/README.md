@@ -1,7 +1,7 @@
 # User Guide of C-3PO
 C-3PO is a droid for human cyborg relations.
 
-<img src="./docs/Ui.png" alt="Screenshot" width="250">
+<img src="Ui.png" alt="Screenshot" width="250">
 
 - [User Guide of C-3PO](#user-guide-of-c-3po)
   * [Features](#features)
