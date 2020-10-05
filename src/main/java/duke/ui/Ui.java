@@ -161,6 +161,7 @@ public class Ui {
         return resultString;
     }
 
+
     /**
      * Returns the error message when encountering exceptions.
      *

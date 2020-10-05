@@ -94,9 +94,13 @@ public class Parser {
         if (!isYearValid || !isMonthValid || !isDayValid) {
             throw new DukeException("The input date format is incorrect");
         }
-        LocalDate localDate = LocalDate.parse(date);
 
-        return localDate;
+        try {
+            LocalDate localDate = LocalDate.parse(date);
+            return localDate;
+        } catch (DateTimeException e) {
+            throw new DukeException("Sorry, the date time is invalid.");
+        }
     }
 
     /**
@@ -107,24 +111,30 @@ public class Parser {
      * @throws DukeException if the user input format is illegal.
      * @throws DateTimeException if the date is an illegal date.
      */
-    public static LocalDateTime parseDateTime(String dateTime) throws DukeException, DateTimeException {
+    public static LocalDateTime parseDateTime(String dateTime) throws DukeException {
         String[] dateTimeSplit = dateTime.strip().split(" ");
 
         if (dateTimeSplit.length != 2) {
             throw new DukeException("The format of the input date and time is incorrect");
         }
 
-        String date = dateTimeSplit[0].strip();
-        LocalDate localDate = parseDate(date);
-        String time = dateTimeSplit[1].strip();
-        if (time.length() != 4) {
-            throw new DukeException("The input time format is incorrect");
+        try {
+            String date = dateTimeSplit[0].strip();
+            LocalDate localDate = parseDate(date);
+            String time = dateTimeSplit[1].strip();
+            if (time.length() != 4) {
+                throw new DukeException("The input time format is incorrect");
+            }
+
+            LocalTime localTime = LocalTime.of(Integer.parseInt(time.substring(0, 2)),
+                    Integer.parseInt(time.substring(2, 4)));
+            LocalDateTime localDateTime = LocalDateTime.of(localDate, localTime);
+            return localDateTime;
+
+        } catch (DateTimeException e) {
+            throw new DukeException("Sorry, the date time is invalid.");
         }
 
-        LocalTime localTime = LocalTime.of(Integer.parseInt(time.substring(0, 2)),
-                Integer.parseInt(time.substring(2, 4)));
-        LocalDateTime localDateTime = LocalDateTime.of(localDate, localTime);
 
-        return localDateTime;
     }
 }
