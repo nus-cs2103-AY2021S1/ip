@@ -1,0 +1,31 @@
+blah
+
+todo
+todo borrow book
+list
+deadline
+deadline return book
+deadline return book /by
+deadline return book /by 2020-08-30
+event
+event project meeting
+event project meeting /at
+event project meeting /at 2020-08-23
+list
+done
+done three
+done 0
+done 1
+done 3
+list
+find
+find boook
+find book
+delete
+delete two
+delete 0
+delete 1
+list
+delete 1
+delete 1
+bye
