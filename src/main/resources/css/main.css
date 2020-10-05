@@ -1,0 +1,40 @@
+.border-md-black{
+    -fx-border-color: black;
+    -fx-border-width: 3;
+}
+
+.border-lg-black{
+    -fx-border-color: black;
+    -fx-border-width: 8;
+}
+
+.rounded-border{
+    -fx-border-radius: 10 10 10 10;
+    -fx-background-radius: 10 10 10 10;
+}
+
+.chat-box{
+    -fx-border-radius: 10 10 10 10;
+    -fx-background-radius: 10 10 10 10;
+    -fx-padding: 10 10 10 10;
+    -fx-border-color: black;
+    -fx-border-width: 1;
+    -fx-background-color: #ffeebd;
+    -fx-start-margin: 10;
+    -fx-start-margin: 10;
+}
+
+.bg-cool-blue{
+    -fx-background-color: #b6d0fa;
+ }
+
+.bg-green{
+    -fx-background-color: #9aedd1;
+}
+
+.btn-submit{
+    -fx-background-color: #6596e6;
+    -fx-border-width:1;
+    -fx-border-color: black;
+    -fx-font-weight: 600;
+}

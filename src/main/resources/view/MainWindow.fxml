@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="500.0" stylesheets="@../css/main.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.controllers.MainWindow">
+    <children>
+      <AnchorPane layoutY="557.4000244140625" maxWidth="40.0" prefHeight="40.0" styleClass="bg-cool-blue" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+              <TextField fx:id="userInput" onAction="#handleUserInput" prefHeight="42.0" prefWidth="424.0" promptText="Type a command" styleClass="border-md-black" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="76.0" AnchorPane.topAnchor="0.0" />
+              <Button fx:id="sendButton" layoutX="324.0" layoutY="0.5999755859375" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="41.0" prefWidth="76.0" styleClass="btn-submit" text="Send!" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font></Button>
+         </children>
+      </AnchorPane>
+        <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" hvalue="1.0" prefHeight="560.0" prefWidth="500.0" vvalue="1.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <content>
+                <VBox fx:id="dialogContainer" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="560.0" prefWidth="500.0" styleClass="bg-cool-blue" />
+            </content>
+        </ScrollPane>
+    </children>
+</AnchorPane>

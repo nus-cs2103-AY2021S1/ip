@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+
+<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" minWidth="450.0" stylesheets="@../css/main.css" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <Label fx:id="dialog" styleClass="chat-box" text="Label" wrapText="true">
+         <HBox.margin>
+            <Insets left="10.0" right="10.0" />
+         </HBox.margin></Label>
+      <Circle fx:id="imageCircle" fill="WHITE" radius="80.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="4.0" styleClass="border-lg-black" />
+    </children>
+    <padding>
+        <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
+    </padding>
+</fx:root>
