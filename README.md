@@ -10,9 +10,9 @@ can help you keep track of your tasks faster than traditional GUI apps.
 1. Ensure you have Java 11 or above installed in your Computer.
 2. Download the latest `duke.jar` release from https://github.com/wang-jun-hao/ip.
 3. Copy the file to the folder you want to use as the home folder for your Clippy.
-4. To launch the application, ype `java -jar duke.jar` in Command Prompt (Windows) or 
+4. To launch the application, type `java -jar duke.jar` in Command Prompt (Windows) or 
 Terminal (macOS). The GUI similar to the below should appear in a few seconds. 
-<br> ![start up](./UG images/quick-start-illustration.png)
+<br> ![start up](UG_images/quick-start-illustration.png)
 5. Type the command in the command box and press Enter to execute it. 
 <br>e.g. typing `help` and pressing Enter will open the help window.
 
