@@ -79,7 +79,7 @@ Update the description of a task in Duke's task list.
 
 Example:
 
-`update 1`
+`update 4`
 
 <img src="./images/example8.png" height="500" width="500">
 
