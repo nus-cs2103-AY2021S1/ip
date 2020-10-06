@@ -3,7 +3,7 @@
 Duke is a butler bot that aims to help you manage your tasks. 
 For now, you can add, edit, delete and search for specific tasks.
 
-<img src="/docs/Ui.png" height="700" width="500">
+<img src="./Ui.png" height="700" width="500">
 
 ## Features of the application
 ### 1. Add Tasks
