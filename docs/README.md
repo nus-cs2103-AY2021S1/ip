@@ -1,6 +1,5 @@
 # User Guide
 
-<img src="Ui.png" alt="Duke Showcase" width="450" height="600"/>
 
 Poring the Chatbot is a Maplestory and Ragnarok inspired Personal Assistant Chatbot. Poring assists you by storing and 
 tracking your to-dos, deadlines and events.
