@@ -1,7 +1,111 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
 
+Hello, I'm Duke!
+What can I help you with today?
+
+--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--
+
+>>> Sorry, I don't recognize what you just entered...
+
+--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--
+
+>>> Whoops! I think you forgot to finish your todo command. Sorry but I need it. D:
+
+--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--
+
+>>> Whoops! I think you forgot to finish your deadline command. Sorry but I need it. D:
+
+--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--
+
+>>> Whoops! I think you forgot to finish your event command. Sorry but I need it. D:
+
+--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--
+
+Here is what I have! ^^
+Whoops! I don't have anything of note yet...
+
+--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--
+
+>>> added: [T][✗] read book
+There is now 1 tasks in the list!
+
+--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--
+
+>>> added: [D][✗] return book (by: June 6th)
+There is now 2 tasks in the list!
+
+--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--
+
+>>> added: [E][✗] project meeting (at: Aug 6th 2-4pm)
+There is now 3 tasks in the list!
+
+--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--
+
+>>> added: [T][✗] join sports club
+There is now 4 tasks in the list!
+
+--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--
+
+>>> added: [T][✗] borrow book
+There is now 5 tasks in the list!
+
+--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--
+
+>>> Congratulations! I've helped you mark the task as done:
+	[T][✓] read book
+
+--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--
+
+>>> Congratulations! I've helped you mark the task as done:
+	[T][✓] join sports club
+
+--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--
+
+Here is what I have! ^^
+1.[T][✓] read book
+2.[D][✗] return book (by: June 6th)
+3.[E][✗] project meeting (at: Aug 6th 2-4pm)
+4.[T][✓] join sports club
+5.[T][✗] borrow book
+
+--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--
+
+>>> added: [D][✗] return book (by: Sunday)
+There is now 6 tasks in the list!
+
+--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--
+
+>>> added: [E][✗] project meeting (at: Mon 2-4pm)
+There is now 7 tasks in the list!
+
+--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--
+
+Here is what I have! ^^
+1.[T][✓] read book
+2.[D][✗] return book (by: June 6th)
+3.[E][✗] project meeting (at: Aug 6th 2-4pm)
+4.[T][✓] join sports club
+5.[T][✗] borrow book
+6.[D][✗] return book (by: Sunday)
+7.[E][✗] project meeting (at: Mon 2-4pm)
+
+--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--
+
+>>> Noted! I've helped you remove the following task:
+	[E][✗] project meeting (at: Aug 6th 2-4pm)
+	Now, there is 6 tasks in the list!
+
+--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--
+
+Here is what I have! ^^
+1.[T][✓] read book
+2.[D][✗] return book (by: June 6th)
+3.[T][✓] join sports club
+4.[T][✗] borrow book
+5.[D][✗] return book (by: Sunday)
+6.[E][✗] project meeting (at: Mon 2-4pm)
+
+--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--
+
+>>> Bye! Hoped I helped!
+
+--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--.--
