@@ -3,7 +3,7 @@
 Duke is a butler bot that aims to help you manage your tasks. 
 For now, you can add, edit, delete and search for specific tasks.
 
-<img src="/Ui.png" height="700" width="500">
+<img src="/docs/Ui.png" height="700" width="500">
 
 ## Features of the application
 ### 1. Add Tasks
@@ -14,14 +14,14 @@ Command: `todo {DESCRIPTION}`
 
 Example: `todo revise homework`
 
-<img src="/example1.png" height="300" width="500">
+<img src="/images/example1.png" height="300" width="500">
 
 Add an <b>event</b> task to Duke's task list.  
 Command: `event {DESCRIPTION} /at {DETAILS}`
 
 Example: `event project meeting /at zoom`
 
-<img src="/example2.png" height="300" width="500">
+<img src="/images/example2.png" height="300" width="500">
 
 Add a <b>deadline</b> task to Duke's task list.  
 Note: {DUEDATE} needs to be a date in 'YYYY-MM-DD' format.
@@ -30,7 +30,7 @@ Command: `deadline {DESCRIPTION} /by {DUEDATE}`
 
 Example: `deadline do homework /by 2020-12-18`
 
-<img src="/example3.png" height="300" width="500">
+<img src="/images/example3.png" height="300" width="500">
 
 ### 2. Delete Tasks
 Delete the tasks identified by the index number shown in Duke's task list.  
@@ -38,7 +38,7 @@ Command: `delete {INDEX}`
 
 Example: `delete 4`
 
-<img src="/example4.png" height="500" width="500">
+<img src="/images/example4.png" height="500" width="500">
 
 ### 3. List all Tasks
 List all the tasks in Duke's task list.  
@@ -46,7 +46,7 @@ Command: `list`
 
 Example: `list`
 
-<img src="/example5.png" height="300" width="500">
+<img src="/images/example5.png" height="300" width="500">
 
 ### 4. Complete Tasks
 Mark a task done in Duke's task list.  
@@ -54,7 +54,7 @@ Command: `done {INDEX}`
 
 Example: `done 2`
 
-<img src="/example6.png" height="300" width="500">
+<img src="/images/example6.png" height="300" width="500">
 
 ### 5. Search for specific tasks with a keyword
 Duke will list out tasks in his task list containing the given keyword, if there are any.
@@ -65,7 +65,7 @@ Command: `find {KEYWORD}`
 
 Example: `find homework`
 
-<img src="/example7.png" height="300" width="500">
+<img src="/images/example7.png" height="300" width="500">
 
 ### 6. Update description of Tasks
 Update the description of a task in Duke's task list.
@@ -81,11 +81,11 @@ Example:
 
 `update 1`
 
-<img src="/example8.png" height="500" width="500">
+<img src="/images/example8.png" height="500" width="500">
 
 `study for exams`
 
-<img src="/example9.png" height="700" width="500">
+<img src="/images/example9.png" height="700" width="500">
 
 ### 7. Storage feature
 Duke will automatically save his task list when you close out of the application.
