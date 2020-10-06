@@ -1,6 +1,6 @@
 # User Guide
 
-Duke (Also known as Dwayne The Rock Johnson) is your friendly **productivity assistant chatbot**. Simply **type into the message box** and send your inputs and Duke's got your back!
+This your friendly **productivity assistant chatbot**. Simply **type into the message box** and send your inputs and Duke's got your back!
 
 * Quick Start
 * Features
