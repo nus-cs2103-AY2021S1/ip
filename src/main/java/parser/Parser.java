@@ -142,7 +142,8 @@ public class Parser {
             isValidDate(atString);
             return true;
 
-        } else if (fullInput.equals("list") || fullInput.startsWith("delete ") || fullInput.startsWith("done ")) {
+        } else if (fullInput.equals("list") || fullInput.startsWith("delete ") || fullInput.startsWith("done ")
+            || fullInput.equals("bye")) {
             return true;
 
         } else {
