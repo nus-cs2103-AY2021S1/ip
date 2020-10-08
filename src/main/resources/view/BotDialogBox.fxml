@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.image.Image?>
+<?import javafx.geometry.Insets?>
+
+<fx:root type="HBox"
+         spacing="10"
+         style="-fx-padding: 10;"
+         xmlns="http://javafx.com/javafx"
+         xmlns:fx="http://javafx.com/fxml">
+    <ImageView fitHeight="60" fitWidth="60">
+        <Image url="@../images/bot.PNG"/>
+    </ImageView>
+    <Label fx:id="label" wrapText="true" styleClass="dialog-label, bot-label">
+        <HBox.margin>
+            <Insets right="70"/>
+        </HBox.margin>
+    </Label>
+</fx:root>

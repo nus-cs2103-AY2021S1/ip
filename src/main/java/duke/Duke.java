@@ -6,7 +6,6 @@ import duke.command.Command;
 import duke.exception.DukeException;
 import duke.ui.Message;
 import duke.ui.Ui;
-import javafx.application.Platform;
 
 /**
  * Represents a chatbot that takes in and executes commands from the user.
@@ -43,16 +42,11 @@ public class Duke {
         this.ui.showMessage(Message.getWelcome());
         boolean isExit = false;
         while (!isExit) {
-            try {
-                Command command = Parser.parse(this.ui.readCommand());
-                if (command != null) {
-                    Message message = command.execute(this.taskList, this.storage);
-                    assert message != null;
-                    this.ui.showMessage(message);
-                    isExit = command.isDone();
-                }
-            } catch (IOException | DukeException e) {
-                this.ui.showMessage(new Message(e.getMessage()));
+            Message message = runCommand(this.ui.readCommand());
+            if (message == null) {
+                isExit = true;
+            } else {
+                this.ui.showMessage(message);
             }
         }
     }
@@ -61,20 +55,34 @@ public class Duke {
      * Carries out what the user tells it to do
      *
      * @param input the user's input
-     * @return the chatbot's response to the input
+     * @return the chatbot's response to the input as a <code>String</code>
      */
     public String getResponse(String input) {
-        String response;
+        Message message = runCommand(input);
+        if (message == null) {
+            return null;
+        }
+        return message.toString();
+    }
+
+    /**
+     * Carries out what the user tells it to do
+     *
+     * @param input the user's input
+     * @return the chatbot's response to the input as a <code>Message</code>
+     */
+    public Message runCommand(String input) {
+        Message response;
         try {
             Command command = Parser.parse(input);
             assert command != null;
             Message message = command.execute(this.taskList, this.storage);
             if (command.isDone()) {
-                Platform.exit();
+                return null;
             }
-            response = message.toString();
+            response = message;
         } catch (IOException | DukeException e) {
-            response = e.getMessage();
+            response = new Message(e.getMessage());
         }
         return response;
     }

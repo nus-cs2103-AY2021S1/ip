@@ -5,22 +5,32 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.Insets?>
+
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="duke.ui.MainWindow"
             prefHeight="600.0" prefWidth="400.0">
     <center>
-        <ScrollPane fx:id="scrollPane" vbarPolicy="ALWAYS" hbarPolicy="NEVER">
+        <ScrollPane fx:id="scrollPane" vbarPolicy="ALWAYS" hbarPolicy="NEVER" fitToWidth="true">
             <VBox fx:id="dialogContainer"/>
         </ScrollPane>
     </center>
     <bottom>
         <BorderPane>
             <center>
-                <TextField fx:id="userInput" onAction="#handleUserInput"/>
+                <TextField fx:id="userInput" onAction="#handleUserInput">
+                    <BorderPane.margin>
+                        <Insets top="10" bottom="10" left="10" right="5"/>
+                    </BorderPane.margin>
+                </TextField>
             </center>
             <right>
-                <Button fx:id="sendButton" text="SEND" onMouseClicked="#handleUserInput"/>
+                <Button fx:id="sendButton" text="SEND" onMouseClicked="#handleUserInput">
+                    <BorderPane.margin>
+                        <Insets top="10" bottom="10" left="5" right="10"/>
+                    </BorderPane.margin>
+                </Button>
             </right>
         </BorderPane>
     </bottom>

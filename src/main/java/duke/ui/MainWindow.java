@@ -1,8 +1,8 @@
 package duke.ui;
 
 import duke.Duke;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -29,16 +29,8 @@ public class MainWindow extends BorderPane {
      */
     @FXML
     public void initialize() {
-        // welcome message
         String welcome = Message.getWelcome().toString();
-        dialogContainer.getChildren().add(new DialogBox(welcome, true));
-
-        // padding between buttons
-        Insets insets = new Insets(10, 5, 10, 5);
-        BorderPane.setMargin(userInput, insets);
-        BorderPane.setMargin(sendButton, insets);
-
-        scrollPane.setFitToWidth(true);
+        dialogContainer.getChildren().add(new BotDialogBox(welcome));
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
     }
 
@@ -54,12 +46,15 @@ public class MainWindow extends BorderPane {
         userInput.clear();
     }
 
-    private DialogBox getInputBox(String text) {
-        return new DialogBox(text, false);
+    private UserDialogBox getInputBox(String text) {
+        return new UserDialogBox(text);
     }
 
-    private DialogBox getResponseBox(String text) {
+    private BotDialogBox getResponseBox(String text) {
         String response = duke.getResponse(text);
-        return new DialogBox(response, true);
+        if (response == null) {
+            Platform.exit();
+        }
+        return new BotDialogBox(response);
     }
 }
