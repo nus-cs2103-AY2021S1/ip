@@ -1,0 +1,6 @@
+T | 0 | do something
+D | 1 | buy groceries | 24 Aug 2020
+E | 0 | meeting | 24 Aug 2020 3:00 pm
+T | 1 | read book
+D | 0 | return book | 06 Sep 2020
+D | 0 | finish CS2103 | 25 Aug 2020 11:59 pm
