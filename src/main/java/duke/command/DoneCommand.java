@@ -3,12 +3,12 @@ package duke.command;
 import java.io.IOException;
 import java.util.Arrays;
 
-import duke.Message;
 import duke.Storage;
 import duke.TaskList;
 import duke.exception.InvalidCommandFormatException;
 import duke.exception.InvalidTaskException;
 import duke.task.Task;
+import duke.ui.Message;
 
 /**
  * Represents a <code>Command</code> telling Duke to mark a certain <code>Task</code> as done.

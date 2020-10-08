@@ -1,5 +1,6 @@
-package duke;
+package duke.ui;
 
+import duke.Duke;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
@@ -19,7 +20,7 @@ public class MainWindow extends BorderPane {
     @FXML
     private Button sendButton;
 
-    void setDuke(Duke duke) {
+    public void setDuke(Duke duke) {
         this.duke = duke;
     }
 

@@ -2,11 +2,11 @@ package duke.command;
 
 import java.io.IOException;
 
-import duke.Message;
 import duke.Storage;
 import duke.TaskList;
 import duke.exception.InvalidCommandFormatException;
 import duke.exception.InvalidTaskException;
+import duke.ui.Message;
 
 /**
  * Represents a command entered by the user for Duke to execute.

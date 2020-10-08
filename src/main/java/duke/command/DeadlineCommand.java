@@ -2,12 +2,12 @@ package duke.command;
 
 import java.io.IOException;
 
-import duke.Message;
 import duke.Storage;
 import duke.TaskList;
 import duke.exception.DuplicateTaskException;
 import duke.exception.InvalidCommandFormatException;
 import duke.task.Deadline;
+import duke.ui.Message;
 
 /**
  * Represents a <code>Command</code> telling Duke to create a new <code>Deadline</code>.

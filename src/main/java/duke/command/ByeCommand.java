@@ -1,8 +1,8 @@
 package duke.command;
 
-import duke.Message;
 import duke.Storage;
 import duke.TaskList;
+import duke.ui.Message;
 
 /**
  * Represents a <code>Command</code> telling Duke to stop running.

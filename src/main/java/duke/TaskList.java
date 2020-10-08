@@ -12,6 +12,7 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
+import duke.ui.Message;
 
 /**
  * Represents a list of <code>Task</code>s in a fixed order.

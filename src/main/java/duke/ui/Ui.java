@@ -1,4 +1,4 @@
-package duke;
+package duke.ui;
 
 import java.util.Scanner;
 
@@ -22,7 +22,7 @@ public class Ui {
      *
      * @return the user's input
      */
-    String readCommand() {
+    public String readCommand() {
         assert this.scanner.hasNext();
         return scanner.nextLine().trim();
     }

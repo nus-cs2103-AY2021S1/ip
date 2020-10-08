@@ -8,8 +8,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import duke.Message;
 import duke.exception.InvalidCommandFormatException;
+import duke.ui.Message;
 
 public class DeleteCommandTest {
     @Test

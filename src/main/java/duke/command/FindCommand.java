@@ -1,9 +1,9 @@
 package duke.command;
 
-import duke.Message;
 import duke.Storage;
 import duke.TaskList;
 import duke.exception.InvalidCommandFormatException;
+import duke.ui.Message;
 
 public class FindCommand implements Command {
     private String command;

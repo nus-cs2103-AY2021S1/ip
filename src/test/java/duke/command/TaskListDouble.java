@@ -4,9 +4,9 @@ import static duke.TestUtils.createDoneToDo;
 
 import java.time.LocalDate;
 
-import duke.Message;
 import duke.TaskList;
 import duke.task.Task;
+import duke.ui.Message;
 
 public class TaskListDouble extends TaskList {
     @Override

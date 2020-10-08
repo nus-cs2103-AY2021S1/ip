@@ -4,10 +4,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 
-import duke.Message;
 import duke.Storage;
 import duke.TaskList;
 import duke.exception.InvalidCommandFormatException;
+import duke.ui.Message;
 
 /**
  * Represents a <code>Command</code> telling Duke to list <code>Task</code>s.

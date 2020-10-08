@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import org.junit.jupiter.api.Test;
 
-import duke.Message;
+import duke.ui.Message;
 
 public class EventCommandTest {
     @Test

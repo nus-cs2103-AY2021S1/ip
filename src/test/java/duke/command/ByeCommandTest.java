@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import duke.Message;
+import duke.ui.Message;
 
 public class ByeCommandTest {
     @Test

@@ -4,6 +4,8 @@ import java.io.IOException;
 
 import duke.command.Command;
 import duke.exception.DukeException;
+import duke.ui.Message;
+import duke.ui.Ui;
 import javafx.application.Platform;
 
 /**
@@ -61,7 +63,7 @@ public class Duke {
      * @param input the user's input
      * @return the chatbot's response to the input
      */
-    String getResponse(String input) {
+    public String getResponse(String input) {
         String response;
         try {
             Command command = Parser.parse(input);
