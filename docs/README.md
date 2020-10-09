@@ -55,6 +55,8 @@ Example: `event modrekt /by 2020-01-02`
 
 Outcome: `new event added`
 
+Note: date must be in `YYYY-MM-DD` format.
+
 ### `list` - Lists all current tasks
 
 Displays all current tasks in the list.
