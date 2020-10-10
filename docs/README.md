@@ -108,7 +108,7 @@ To set the priority of a task, enter a command in the following format:
 
 Example:
 ```
-done 2
+set 1 priority low
 ```
 #### Exiting from the Application
 
