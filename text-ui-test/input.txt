@@ -1,0 +1,47 @@
+todo read book
+
+deadline return book /by 2020-10-10
+
+event project meeting /at Aug 6th 2-4pm
+
+done 1
+
+list
+
+done 3
+
+list
+
+todo buy bread
+
+list
+
+todo
+
+blah
+
+deadline
+
+deadline take a nap
+
+event
+
+event have dinner
+
+delete 3
+
+list
+
+done
+
+done 5
+
+done this
+
+delete
+
+delete 6
+
+delete this
+
+bye
