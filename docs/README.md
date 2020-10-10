@@ -40,10 +40,10 @@ Example of usage:
 
 Expected outcome:
 
-`
-Here are the tasks in your list:
- <tasks>
-`
+
+    Here are the tasks in your list:
+    <tasks>
+
 
 ### `done` - Marks task as complete
 
