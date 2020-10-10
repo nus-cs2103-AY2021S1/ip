@@ -29,115 +29,115 @@ Creates a todo task.
 
 ## Usage
 
-### `list` - List all tasks
+### ```list``` - List all tasks
 
 Displays all tasks on the screen.
 
 Example of usage: 
 
-`list`
+```list```
 
 Expected outcome:
 
-`Here are the tasks in your list:
+```Here are the tasks in your list:
  <tasks>
- `
+ ```
 
-### `done` - Marks task as complete
+### ```done``` - Marks task as complete
 
 Marks a task as complete, and displays a confirmation.
 
 Example of usage: 
 
-`done 5`
+```done 5```
 
 Expected outcome:
 
-`Nice! I've marked this task as done:
+```Nice! I've marked this task as done:
  <task>
- `
+ ```
 
-### `delete` - Delete the specified task
+### ```delete``` - Delete the specified task
 
 Deletes the task from the tasklist and displays a confirmation
 
 Example of usage: 
 
-`delete 5`
+```delete 5```
 
 Expected outcome:
 
-`Noted. I've removed this task:
+```Noted. I've removed this task:
  <task>
- `
+ ```
 
-### `find` - Search for tasks by keyword
+### ```find``` - Search for tasks by keyword
 
 Displays all tasks on the screen that contain the specified keyword
 
 Example of usage: 
 
-`find kappa`
+```find kappa```
 
 Expected outcome:
 
-`Here are the matching tasks in your list:
+```Here are the matching tasks in your list:
  <tasks>
- `
+ ```
 
-### `undo` - Undoes the latest action
+### ```undo``` - Undoes the latest action
 
 Undoes the latest action.
 
 Example of usage: 
 
-`undo`
+```undo```
 
 Expected outcome:
 
-`Nice! I've undid your previous action!
+```Nice! I've undid your previous action!
  Here are the tasks in your list:
  <tasks>
- `
+ ```
 
-### `event` - Creates an event
+### ```event``` - Creates an event
 
 Creates an event at the specified time.
 
 Example of usage: 
 
-`event kappa /at 2020-02-20 1900`
+```event kappa /at 2020-02-20 1900```
 
 Expected outcome:
 
-`Got it. I've added this task:
+```Got it. I've added this task:
  [E][x] kappa (at: 20 Feb 2020 19:00)
- `
+ ```
 
-### `deadline` - Creates a deadline
+### ```deadline``` - Creates a deadline
 
 Creates a deadline to be completed by the specified time.
 
 Example of usage: 
 
-`deadline kek /by 2020-03-30 1800`
+```deadline kek /by 2020-03-30 1800```
 
 Expected outcome:
 
-`Got it. I've added this task:
+```Got it. I've added this task:
  [D][x] kek (by: 30 Mar 2020 18:00)
- `
+ ```
 
-### `todo` - Creates a todo
+### ```todo``` - Creates a todo
 
 Creates a todo.
 
 Example of usage: 
 
-`todo lel`
+```todo lel```
 
 Expected outcome:
 
-`Got it. I've added this task:
+```Got it. I've added this task:
  [T][x] lel
- `
+ ```
