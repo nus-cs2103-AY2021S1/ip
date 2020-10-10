@@ -40,9 +40,10 @@ Example of usage:
 
 Expected outcome:
 
-`Here are the tasks in your list:
+`
+Here are the tasks in your list:
  <tasks>
- `
+`
 
 ### `done` - Marks task as complete
 
@@ -54,9 +55,10 @@ Example of usage:
 
 Expected outcome:
 
-`Nice! I've marked this task as done:
+`
+Nice! I've marked this task as done:
  <task>
- `
+`
 
 ### `delete` - Delete the specified task
 
@@ -68,9 +70,10 @@ Example of usage:
 
 Expected outcome:
 
-`Noted. I've removed this task:
+`
+Noted. I've removed this task:
  <task>
- `
+`
 
 ### `find` - Search for tasks by keyword
 
@@ -82,9 +85,10 @@ Example of usage:
 
 Expected outcome:
 
-`Here are the matching tasks in your list:
+`
+Here are the matching tasks in your list:
  <tasks>
- `
+`
 
 ### `undo` - Undoes the latest action
 
@@ -96,10 +100,11 @@ Example of usage:
 
 Expected outcome:
 
-`Nice! I've undid your previous action!
+`
+Nice! I've undid your previous action!
  Here are the tasks in your list:
  <tasks>
- `
+`
 
 ### `event` - Creates an event
 
@@ -111,9 +116,10 @@ Example of usage:
 
 Expected outcome:
 
-`Got it. I've added this task:
+`
+Got it. I've added this task:
  [E][x] kappa (at: 20 Feb 2020 19:00)
- `
+`
 
 ### `deadline` - Creates a deadline
 
@@ -125,9 +131,10 @@ Example of usage:
 
 Expected outcome:
 
-`Got it. I've added this task:
+`
+Got it. I've added this task:
  [D][x] kek (by: 30 Mar 2020 18:00)
- `
+`
 
 ### `todo` - Creates a todo
 
@@ -139,6 +146,7 @@ Example of usage:
 
 Expected outcome:
 
-`Got it. I've added this task:
+`
+Got it. I've added this task:
  [T][x] lel
- `
+`
