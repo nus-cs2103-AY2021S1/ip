@@ -34,9 +34,9 @@ Format: `list`
 
 Expected outcome:
 
->Here are the tasks in your list:
->1.[T][✓] ACC assignment
->2.[E][✘] Formal Dinner (at: Sep 17 2020)
+>Here are the tasks in your list:\
+>1.[T][✓] ACC assignment\
+>2.[E][✘] Formal Dinner (at: Sep 17 2020)\
 >3.[T][✓] CS assignment 
 
 
@@ -50,8 +50,8 @@ Example of usage: `find assignment`
 
 Expected outcome:
 
->Here are the matching tasks in your list:
->1.[T][✘] ACC assignment
+>Here are the matching tasks in your list:\
+>1.[T][✘] ACC assignment\
 >2.[T][✘] CS assignment
 
 
@@ -65,8 +65,8 @@ Example of usage: `todo Essay`
 
 Expected outcome:
 
->Got it. I've added this task:
->[T][✘] Essay
+>Got it. I've added this task:\
+>[T][✘] Essay\
 >Now you have 4 tasks in the list.
 
 
@@ -83,8 +83,8 @@ Example of usage: `deadline School Fees /by 2020-11-01`
 
 Expected outcome:
 
->Got it. I've added this task:
->[D][✘] School Fees (by: Nov 1 2020)
+>Got it. I've added this task:\
+>[D][✘] School Fees (by: Nov 1 2020)\
 >Now you have 5 tasks in the list.
 
 ### <a name="event">Adding an event</a>: `event`
@@ -100,8 +100,8 @@ Example of usage: `event Birthday Celebration /at 2020-12-22`
 
 Expected outcome:
 
->Got it. I've added this task:
->[E][✘] Birthday Celebration (at: Dec 22 2020)
+>Got it. I've added this task:\
+>[E][✘] Birthday Celebration (at: Dec 22 2020)\
 >Now you have 6 tasks in the list.
 
 ### <a name="done">Marking a task as done</a>: `done` 
@@ -116,7 +116,7 @@ Example of usage: `done 5`
 
 Expected outcome:
 
->Nice! I've marked this task as done:
+>Nice! I've marked this task as done:\
 >[✓] School Fees
 
 
@@ -132,7 +132,7 @@ Example of usage: `delete 2`
 
 Expected outcome:
 
->Noted. I've removed this task:
+>Noted. I've removed this task:\
 >[E][✘] Formal Dinner (at: Sep 17 2020)
 
 ### <a name="help">Asking for help</a>: `help` 
