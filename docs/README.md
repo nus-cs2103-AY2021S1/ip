@@ -60,7 +60,7 @@ Eg. `find book` displays all the tasks that contains `book`.
 <br/>
 
 #### `bye`
-Says bye to Duke and exits the app.
+Says bye to Duke and exits the app. (and date will be saved)
 ## Acknowledgement
 JavaFX tutorial @SE-EDU/guides
 
