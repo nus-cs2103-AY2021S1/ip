@@ -1,0 +1,9 @@
+todo eat
+event drink /at 5pm
+deadline sleep /by 9pm
+list
+done 3
+done 2
+done 1
+list
+bye
