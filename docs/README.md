@@ -24,17 +24,17 @@ Eg. `todo read book`
 
 <br/>
 
-#### `deadline DESCRIPTION /by DATE(mm-dd-yyyy)`
+#### `deadline DESCRIPTION /by DATE(yyyy-mm-dd)`
 Adds a task to be done by a date.
 
-Eg. `deadline return book /by 09-30-2020`
+Eg. `deadline return book /by 2020-09-30`
 
 <br/>
 
-#### `event DESCRIPTION /at DATE(mm-dd-yyyy)`
+#### `event DESCRIPTION /at DATE(yyyy-mm-dd)`
 Adds a task to be done at a date.
 
-Eg. `event borrow book /at 09-30-2020`
+Eg. `event borrow book /at 2020-09-30`
 
 <br/>
 
