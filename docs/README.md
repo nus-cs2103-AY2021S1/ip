@@ -6,11 +6,14 @@ Duke is a chatbot to keep all your ToDos, Events and Deadlines at your fingertip
 ![Duke screenshot](./Ui.png)
 
 ## Quick start
-1. Install Java 11 or later on your computer.
-1. Download the latest JAR file for Duke (`duke.jar`) from the [releases page](https://github.com/jeffreytjs/ip/releases).
-1. To start Duke as a graphical program, either double-click on the JAR file, or by run `java -jar duke.jar` in the terminal. 
+1. Download and install Java 11 or later from [Oracle](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html).
+- Windows x64 (151.73 MB) - https://www.oracle.com/java/technologies/javase-jdk11-downloads.html#license-lightbox
+- macOS Installer (166.84 MB) - https://www.oracle.com/java/technologies/javase-jdk11-downloads.html#license-lightbox
+- Linux Debian Package (148.77 MB) - https://www.oracle.com/java/technologies/javase-jdk11-downloads.html#license-lightbox
+2. Download the latest JAR file for Duke (`duke.jar`) from the [releases page](https://github.com/jeffreytjs/ip/releases).
+3. To start Duke as a graphical program, either double-click on the JAR file, or by run `java -jar duke.jar` in the terminal. 
 To start Duke as a command line program instead, run `java -jar duke.jar cli` in the terminal.
-1. Type a command into the input box and press <kbd>Enter</kbd> to start using Duke!
+4. Type a command into the input box and press <kbd>Enter</kbd> to start using Duke!
 
 ## Features 
 * [View guide](#viewing-the-guide---help-or-)
