@@ -3,7 +3,10 @@
 ## Introduction
 Duke is a chatbot to keep all your ToDos, Events and Deadlines at your fingertips. It comes with a Graphical user interface (GUI) and is optimized for Command-line interface (CLI) users.
 
-![Duke screenshot](./Ui.png)
+<p align="center">
+  <img width="650" height="1000" src="./Ui.png">
+</p>
+
 
 ## Quick start
 1. Download and install Java 11 or later from [Oracle](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html).
