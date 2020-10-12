@@ -22,13 +22,21 @@ public class ToDoCommand implements Command {
     @Override
     public Message execute(TaskList taskList, Storage storage) throws InvalidCommandFormatException, IOException {
         try {
-            ToDo toDo = ToDo.of(this.command);
+            ToDo toDo = createToDo();
             taskList.add(toDo);
             storage.appendToFile(toDo);
             return Message.getTaskAdded(toDo);
         } catch (DuplicateTaskException e) {
             return new Message(e.getMessage());
         }
+    }
+
+    ToDo createToDo() throws InvalidCommandFormatException {
+        if (command.length() <= 5) {
+            throw new InvalidCommandFormatException("ToDo cannot be empty.");
+        }
+        String content = command.substring(5).trim();
+        return new ToDo(content);
     }
 
     @Override

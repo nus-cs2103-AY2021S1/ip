@@ -2,9 +2,6 @@ package duke.task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-
-import duke.exception.InvalidCommandFormatException;
 
 /**
  * Represents a <code>Task</code> that takes place on a certain date.
@@ -33,29 +30,6 @@ public class Event extends Task {
     public Event(String title, boolean isDone, LocalDate duration) {
         super(title, isDone);
         this.duration = duration;
-    }
-
-    /**
-     * Creates a new Event from the user's input.
-     *
-     * @param command the user's input
-     * @return the <code>Event</code> created
-     * @throws InvalidCommandFormatException if the format of the user's input does not follow
-     *                                       "event [content] /at yyyy-mm-dd"
-     */
-    public static Event of(String command) throws InvalidCommandFormatException {
-        if (command.length() <= 6) {
-            throw new InvalidCommandFormatException("Event cannot be empty.");
-        }
-        String[] split = command.substring(6).trim().split("\\s+/at\\s+");
-        if (split.length != 2) {
-            throw new InvalidCommandFormatException("Wrong format for event command.");
-        }
-        try {
-            return new Event(split[0], LocalDate.parse(split[1]));
-        } catch (DateTimeParseException e) {
-            throw new InvalidCommandFormatException("Please enter a valid date in the yyyy-mm-dd format.");
-        }
     }
 
     @Override

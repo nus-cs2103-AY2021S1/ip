@@ -1,6 +1,8 @@
 package duke.command;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 import duke.exception.DuplicateTaskException;
 import duke.exception.InvalidCommandFormatException;
@@ -22,12 +24,27 @@ public class DeadlineCommand implements Command {
     @Override
     public Message execute(TaskList taskList, Storage storage) throws InvalidCommandFormatException, IOException {
         try {
-            Deadline deadline = Deadline.of(this.command);
+            Deadline deadline = createDeadline();
             taskList.add(deadline);
             storage.appendToFile(deadline);
             return Message.getTaskAdded(deadline);
         } catch (DuplicateTaskException e) {
             return new Message(e.getMessage());
+        }
+    }
+
+    Deadline createDeadline() throws InvalidCommandFormatException {
+        if (command.length() <= 9) {
+            throw new InvalidCommandFormatException("Deadline cannot be empty.");
+        }
+        String[] split = command.substring(9).trim().split("\\s+/by\\s+");
+        if (split.length != 2) {
+            throw new InvalidCommandFormatException("Wrong format for deadline command.");
+        }
+        try {
+            return new Deadline(split[0], LocalDate.parse(split[1]));
+        } catch (DateTimeParseException e) {
+            throw new InvalidCommandFormatException("Please enter a valid date in the yyyy-mm-dd format.");
         }
     }
 

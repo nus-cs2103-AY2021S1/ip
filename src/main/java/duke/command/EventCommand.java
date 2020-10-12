@@ -1,6 +1,8 @@
 package duke.command;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 import duke.exception.DuplicateTaskException;
 import duke.exception.InvalidCommandFormatException;
@@ -22,12 +24,27 @@ public class EventCommand implements Command {
     @Override
     public Message execute(TaskList taskList, Storage storage) throws InvalidCommandFormatException, IOException {
         try {
-            Event event = Event.of(this.command);
+            Event event = createEvent();
             taskList.add(event);
             storage.appendToFile(event);
             return Message.getTaskAdded(event);
         } catch (DuplicateTaskException e) {
             return new Message(e.getMessage());
+        }
+    }
+
+    Event createEvent() throws InvalidCommandFormatException {
+        if (command.length() <= 6) {
+            throw new InvalidCommandFormatException("Event cannot be empty.");
+        }
+        String[] split = command.substring(6).trim().split("\\s+/at\\s+");
+        if (split.length != 2) {
+            throw new InvalidCommandFormatException("Wrong format for event command.");
+        }
+        try {
+            return new Event(split[0], LocalDate.parse(split[1]));
+        } catch (DateTimeParseException e) {
+            throw new InvalidCommandFormatException("Please enter a valid date in the yyyy-mm-dd format.");
         }
     }
 

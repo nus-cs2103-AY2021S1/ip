@@ -2,9 +2,6 @@ package duke.task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-
-import duke.exception.InvalidCommandFormatException;
 
 /**
  * Represents a <code>Task</code> that has to be done by certain date.
@@ -33,29 +30,6 @@ public class Deadline extends Task {
     public Deadline(String title, boolean isDone, LocalDate deadline) {
         super(title, isDone);
         this.deadline = deadline;
-    }
-
-    /**
-     * Creates a new Deadline from the user's input.
-     *
-     * @param command the user's input
-     * @return the <code>Deadline</code> created
-     * @throws InvalidCommandFormatException if the format of the user's input does not follow
-     *                                       "deadline [content] /by yyyy-mm-dd"
-     */
-    public static Deadline of(String command) throws InvalidCommandFormatException {
-        if (command.length() <= 9) {
-            throw new InvalidCommandFormatException("Deadline cannot be empty.");
-        }
-        String[] split = command.substring(9).trim().split("\\s+/by\\s+");
-        if (split.length != 2) {
-            throw new InvalidCommandFormatException("Wrong format for deadline command.");
-        }
-        try {
-            return new Deadline(split[0], LocalDate.parse(split[1]));
-        } catch (DateTimeParseException e) {
-            throw new InvalidCommandFormatException("Please enter a valid date in the yyyy-mm-dd format.");
-        }
     }
 
     @Override
