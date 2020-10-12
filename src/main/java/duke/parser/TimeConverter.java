@@ -9,6 +9,9 @@ import java.time.format.DateTimeFormatter;
  * TimeConverter can convert the time in input into the MMM dd yyyy LocalTime format.
  */
 public class TimeConverter {
+    private static final String INVALID_TIME_MESSAGE = "Sorry, I cannot process the command"
+            + " since the time due of the deadline task is not in the correct yyyy-mm-dd form! ";
+
     /**
      * Constructs a time converter.
      *
@@ -28,8 +31,7 @@ public class TimeConverter {
             return formattedTime;
         } else {
 
-            throw new InvalidTimeException("I don't understand the due date mentioned in the message. " + "/n" +
-                    "Please tell me the time strictly in YYYY-MM-DD format");
+            throw new InvalidTimeException(INVALID_TIME_MESSAGE);
 
         }
 

@@ -24,8 +24,6 @@ public class Task {
         this.isDone = true;
         assert this.isDone: "OOPS! Failed to mark this task as done.";
         String result = "Nice! I've marked this task as done:"+"\n";
-//        System.out.println("Nice! I've marked this task as done:");
-//        System.out.println(this.toString());
         result = result + this.toString() + "\n";
         return result;
     }
@@ -57,7 +55,6 @@ public class Task {
     public String showTask(int index) {
         String result = "";
         result = result + index + ". " + this.toString() + "\n";
-//        System.out.println(index + ". " +this.toString());
         return result;
     }
 

@@ -1,10 +1,7 @@
 package duke.ui;
 
-import com.sun.security.jgss.GSSUtil;
 import duke.parser.Parser;
 import duke.storage.Storage;
-import duke.tasks.TaskList;
-
 
 import java.util.Scanner;
 
@@ -19,6 +16,11 @@ public class Ui {
             + "     |____/ \\__,_|_|\\_\\___|\n";
 
     private final Scanner input;
+    private static final String GREETING = "Hello!\n" +
+            "I'm Aqua, the (useless baka) Goddess of water!\n" +
+            "Welcome to this parallel world where you (have to do debugging 7/24)" +
+            "can go on an adventure and battle monsters!\n" +
+            "I'll help you track your missions until you defeat Devil King(CS2103T)!";
 
     /**
      * Constructs an User interface.
@@ -31,26 +33,12 @@ public class Ui {
      * Prints out the greetings.
      */
     public static void greet() {
-
-//        System.out.println("Hello from\n" + logo);
-//
-//        System.out.println("What can I do for you?");
-
-        System.out.println("Hello!\n" +
-                "I'm Aqua, the (useless baka) Goddess of water!\n" +
-                "Welcome to this parallel world where you (have to do debugging 7/24)" +
-                "can go on an adventure and battle monsters!\n" +
-                "I'll help you track your missions until you defeat Devil King(CS2103T)!");
+        System.out.println(GREETING);
     }
+
     public static String getGreeting() {
 
-        String greeting = "Hello!\n" +
-                "I'm Aqua, the (useless baka) Goddess of water!\n" +
-                "Welcome to this parallel world where you (have to do debugging 7/24)" +
-                "can go on an adventure and battle monsters!\n" +
-                "I'll help you track your missions until you defeat Devil King(CS2103T)!";
-
-         return greeting;
+        return GREETING;
     }
 
     /**
@@ -86,7 +74,7 @@ public class Ui {
             try {
                 command = input.nextLine();
 
-                if (command.contains("bye")) {
+                if (command.equals("bye")) {
 
                     exit();
 
@@ -96,9 +84,7 @@ public class Ui {
 
                 } else {
 
-                    System.out.println(Parser.processCommand(command));
-
-//                    Storage storage = new Storage(Parser.taskList);
+                    System.out.println(Parser.parseCommand(command));
 
                     Storage.saveDataToFile(Parser.taskList);
 
