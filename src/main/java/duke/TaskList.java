@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.function.Predicate;
 
 import duke.exception.DuplicateTaskException;
 import duke.exception.InvalidTaskException;
@@ -100,23 +101,34 @@ public class TaskList {
         return this.tasks.remove(position - 1);
     }
 
+    private Message findTasks(Predicate<? super Task> predicate) {
+        if (this.tasks.size() <= 0) {
+            return new Message("No tasks added.");
+        } else {
+            ArrayList<String> response = new ArrayList<>();
+            int position = 1;
+            boolean hasTask = false;
+            for (Task task : this.tasks) {
+                if (task.filter(predicate)) {
+                    response.add(position + ". " + task);
+                    hasTask = true;
+                }
+                position++;
+            }
+            if (!hasTask) {
+                return new Message("No tasks found.");
+            }
+            return new Message(response.toArray(new String[0]));
+        }
+    }
+
     /**
      * Prints out all the tasks in this list.
      *
      * @return a message with all tasks
      */
     public Message showList() {
-        if (this.tasks.size() <= 0) {
-            return new Message("No tasks added.");
-        } else {
-            String[] response = new String[this.tasks.size()];
-            int position = 1;
-            for (Task task : this.tasks) {
-                response[position - 1] = position + ". " + task;
-                position++;
-            }
-            return new Message(response);
-        }
+        return findTasks(task -> true);
     }
 
     /**
@@ -126,24 +138,7 @@ public class TaskList {
      * @return a message with the appropriate tasks
      */
     public Message showList(LocalDate date) {
-        if (this.tasks.size() <= 0) {
-            return new Message("No tasks added.");
-        } else {
-            ArrayList<String> response = new ArrayList<>();
-            int totalPosition = 1;
-            boolean hasTask = false;
-            for (Task task : this.tasks) {
-                if (task.hasSameDate(date)) {
-                    response.add(totalPosition + ". " + task);
-                    hasTask = true;
-                }
-                totalPosition++;
-            }
-            if (!hasTask) {
-                return new Message("No tasks found.");
-            }
-            return new Message(response.toArray(new String[0]));
-        }
+        return findTasks(task -> task.hasSameDate(date));
     }
 
     /**
@@ -153,24 +148,7 @@ public class TaskList {
      * @return a message with the appropriate tasks
      */
     public Message find(String keyword) {
-        if (this.tasks.size() <= 0) {
-            return new Message("No tasks added.");
-        } else {
-            ArrayList<String> response = new ArrayList<>();
-            int totalPosition = 1;
-            boolean hasTask = false;
-            for (Task task : this.tasks) {
-                if (task.containsKeyword(keyword)) {
-                    response.add(totalPosition + ". " + task);
-                    hasTask = true;
-                }
-                totalPosition++;
-            }
-            if (!hasTask) {
-                return new Message("No tasks found.");
-            }
-            return new Message(response.toArray(new String[0]));
-        }
+        return findTasks(task -> task.containsKeyword(keyword));
     }
 
     /**

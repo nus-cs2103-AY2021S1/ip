@@ -1,6 +1,7 @@
 package duke.task;
 
 import java.time.LocalDate;
+import java.util.function.Predicate;
 
 /**
  * Represents a task added by the user, which may be done or not done.
@@ -66,6 +67,10 @@ public abstract class Task {
 
     public boolean containsKeyword(String keyword) {
         return this.title.contains(keyword.trim());
+    }
+
+    public boolean filter(Predicate<? super Task> predicate) {
+        return predicate.test(this);
     }
 
     @Override
