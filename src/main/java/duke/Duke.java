@@ -44,7 +44,7 @@ public class Duke {
      */
     public String getResponse(String input) {
         try {
-            String response = Parser.processCommand(input);
+            String response = Parser.parseCommand(input);
             Storage.saveDataToFile(Parser.taskList);
             if (Parser.canClose()) {
                 this.canClose = true;

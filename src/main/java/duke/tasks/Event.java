@@ -37,6 +37,22 @@ public class Event extends Task {
     }
 
     /**
+     * Convert the information of an event into array.
+     *
+     * @return A array of String.
+     */
+    public String[] toArray(){
+        String status;
+        if(this.isDone){
+            status = "1";
+        }else{
+            status = "0";
+        }
+        String[] result = new String[]{"E", status, this.name, timePeriod};
+        return result;
+    }
+
+    /**
      * The toString method of Event.
      *
      * @return The required String format of an event

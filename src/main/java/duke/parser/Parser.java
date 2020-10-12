@@ -1,27 +1,43 @@
 package duke.parser;
 
+import duke.exceptions.InvalidRequestException;
+import duke.exceptions.InvalidTodoException;
 import duke.exceptions.InvalidDeadlineException;
 import duke.exceptions.InvalidEventException;
 import duke.exceptions.InvalidKeyException;
-import duke.exceptions.InvalidRequestException;
-import duke.tasks.Event;
 import duke.tasks.Deadline;
-import duke.tasks.Task;
+import duke.tasks.Event;
 import duke.tasks.TaskList;
 import duke.tasks.Todo;
-import duke.storage.Storage;
-
-import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * Interpret the command and do the instruction.
  */
 public class Parser {
 
+    private static final String EMPTY_DELETE_MESSAGE = "Please tell me which task you want "
+            + "to delete!";
+    private static final String EMPTY_DONE_MESSAGE = "Please tell me which task you want "
+            + "to be marked as done.";
+    private static final String EMPTY_FIND_MESSAGE = "Please tell me the word you want "
+            + "to find!";
+    private static final String EMPTY_INPUT_MESSAGE = "OOPS!!! I could not help you since " +
+            "+ the command is empty!";
+    private static final String EMPTY_TODO_NAME_MESSAGE = "Please tell me the name "
+            + "of the todo task!";
+    private static final String EXCESSIVE_COMMAND_MESSAGE = "Sorry! I can only handle one request at "
+            + "a time!";
+    private static final String INVALID_EVENT_INFO_MESSAGE = "Please tell me the name and time period"
+            + " of the event task!";
+    private static final String INVALID_DEADLINE_FORMAT_MESSAGE = "Please tell me both the name and"
+            + " the time due of the deadline task in the correct yyyy-mm-dd form! "
+            + "Don't forget to include the time by using /by.";
+    private static final String INVALID_INDEX_MESSAGE = "OOPS!!! The task you are looking at "
+            + "does not exist! Please try another one.";
+    private static final String INVALID_COMMAND_MESSAGE = "I cannot understand your command! "
+            + "Please ensure your command follows the rules.";
     public static TaskList taskList;
     private static boolean canClose = false;
-
 
     /**
      * Sets taskList for Parser.
@@ -32,160 +48,245 @@ public class Parser {
         taskList = list;
     }
 
-
     /**
      * Processes a command sentence.
      *
-     * @param command Take in the command to be processed.
-     * @throws Exception Throws an exception if the command can not be interpreted.
+     * @param command The command sentence to be interpreted.
+     * @return The response message.
+     * @throws Exception Throws Exception if the command is not following the correct format.
      */
-    public static String processCommand(String command) throws Exception {
-
-        if (command.contains("list")) {
-
-            return taskList.printTaskList();
-
-        } else if (command.contains("hi") || command.contains("hello")) {
-
-            return "Hi!" + "\n"
-                    + "What do you want to know about your tasks?";
-
-        } else if (command.contains("bye")) {
-
-            canClose = true;
-
-            return "Bye!";
-
-        } else {
-
-            String[] words = command.split(" ");
-
-            int numberOfWords = words.length;
-
-            assert numberOfWords >= 1 : "Command is incomplete!";
-
+    public static String parseCommand(String command) throws Exception {
+        try {
+            String[] wordArray = command.split(" ");
+            int numberOfWords = wordArray.length;
             if (numberOfWords == 0) {
-                throw new InvalidRequestException("Command is empty. Please tell me a valid command.");
+                throw new InvalidRequestException(EMPTY_INPUT_MESSAGE);
             }
-
-            if (words[0].equals("done")) {
-
-                if (numberOfWords == 1) {
-                    throw new InvalidRequestException("Which task would you like to mark as done?");
-                }
-                if (numberOfWords > 2) {
-                    throw new InvalidRequestException("Sorry. I can only handle one task at a time!!");
-                }
-
-                Integer index = Integer.parseInt(words[1]);
-
-                if (taskList.findListSize() < index) {
-                    throw new InvalidRequestException("I could not find this task, please tell me a valid task index.");
-                }
-                if (index <= 0) {
-                    throw new InvalidRequestException("Task index is invalid, please tell me a valid one.");
-                }
-
-                return taskList.markAsDone(index);
-
-            } else if (words[0].equals("delete")) {
-
-                if (numberOfWords == 1) {
-                    throw new InvalidRequestException("What task would you like to delete from the list?");
-                }
-
-                if (numberOfWords > 2) {
-                    throw new InvalidRequestException("Sorry, I can only handle one task at a time.");
-                }
-
-                Integer index = Integer.parseInt(words[1]);
-
-                if (taskList.findListSize() < index) {
-                    throw new InvalidRequestException("I could not find this task, please enter a valid task index.");
-                }
-                if (index <= 0) {
-                    throw new InvalidRequestException("Task index is invalid, please tell me a valid one.");
-                }
-
-                return taskList.deleteTask(index);
-
-            } else if (words[0].equals("find")) {
-
-                if (words.length > 2) {
-
-                    throw new InvalidKeyException("Sorry, I can only handle one keyword.");
-                }
-
-                return taskList.findTask(words[1]);
-
-            } else {
-
-                Task newTask;
-
-                if (words[0].equals("todo")) {
-
-                    if (numberOfWords == 1) {
-                        throw new InvalidRequestException("What is the Todo that you would like to be added to list?");
-                    }
-
-                    String name = command.split(" ", 2)[1];
-
-                    newTask = new Todo(name);
-
-                } else if (words[0].equals("event")) {
-
-                    if (numberOfWords == 1) {
-                        throw new InvalidEventException("What is the event that you would like to be added to list?");
-                    }
-
-                    String content = command.split(" ", 2)[1];
-
-                    if (content.split(" /at ").length < 2) {
-                        throw new InvalidEventException("Please tell me both the name as well as the period of time of the event!");
-                    }
-
-                    String name = content.split(" /at ")[0];
-
-                    String timePeriod = content.split(" /at ")[1];
-
-                    newTask = new Event(name, timePeriod);
-
-                } else if (words[0].equals("deadline")) {
-
-                    if (numberOfWords == 1) {
-                        throw new InvalidDeadlineException("What is the Deadline that you would like to be added to list?");
-                    }
-
-                    String content = command.split(" ", 2)[1];
-
-                    if (content.split(" /by ").length < 2) {
-                        throw new InvalidDeadlineException("Please tell me both the name as well as the due date of the event!");
-                    }
-
-                    String name = content.split(" /by ")[0];
-
-                    String dueDate = content.split(" /by ")[1];
-
-                    TimeConverter timeConverter = new TimeConverter();
-
-//                    String formattedDueDate = timeConverter.convertTime(dueDate);
-
-//                    newTask = new Deadline(name, formattedDueDate);
-
-                    newTask = new Deadline(name, dueDate);
-
-                } else {
-
-                    throw new InvalidRequestException("Sorry, I could not understand what you said. Please say another one!");
-
-                }
-
-                return taskList.addTask(newTask);
-
+            if (command.equals("bye")) {
+                return parseExit();
             }
+            if (command.equals("list")) {
+                return parseList();
+            }
+            if(command.equals("hi")) {
+                return parseGreeting();
+            }
+            switch (wordArray[0]) {
+                case "done":
+                    return parseMarkAsDone(wordArray);
+                case "delete":
+                    return parseDelete(wordArray);
+                case "find":
+                    return parseFind(wordArray);
+                case "todo":
+                    return parseTodo(command);
+                case "deadline":
+                    return parseDeadline(command);
+                case "event":
+                    return parseEvent(command);
+                default:
+                    throw new InvalidRequestException(INVALID_COMMAND_MESSAGE);
+            }
+        } catch (Exception e) {
+            return e.getMessage();
         }
     }
 
+    /**
+     * Processes the list command.
+     *
+     * @return The response message.
+     */
+    public static String parseList() {
+        return taskList.printTaskList();
+    }
+
+    /**
+     * Processes the bye command.
+     *
+     * @return The response message.
+     */
+    public static String parseExit() {
+        canClose = true;
+        return "Bye!";
+    }
+
+    /**
+     * Processes the hi command.
+     *
+     * @return The response message.
+     */
+    public static String parseGreeting() {
+        return "Hi!";
+    }
+
+    /**
+     * Processes the done command.
+     *
+     * @param wordArray The word array of the command.
+     * @return The response message.
+     */
+    public static String parseMarkAsDone(String[] wordArray) throws Exception {
+        int numberOfWords = wordArray.length;
+
+        if (numberOfWords == 1) {
+            throw new InvalidRequestException(EMPTY_DONE_MESSAGE);
+        }
+        if (numberOfWords > 2) {
+            throw new InvalidRequestException(EXCESSIVE_COMMAND_MESSAGE);
+        }
+
+        Integer index = Integer.parseInt(wordArray[1]);
+
+        if (taskList.findListSize() < index) {
+            throw new InvalidKeyException(INVALID_INDEX_MESSAGE);
+        }
+        if (index <= 0) {
+            throw new InvalidKeyException(INVALID_INDEX_MESSAGE);
+        }
+
+        return taskList.markAsDone(index);
+    }
+
+    /**
+     * Processes the delete command.
+     *
+     * @param wordArray The word array of command.
+     * @return The response message.
+     */
+    public static String parseDelete(String[] wordArray) throws Exception {
+        int numberOfWords = wordArray.length;
+
+        if (numberOfWords == 1) {
+            throw new InvalidRequestException(EMPTY_DELETE_MESSAGE);
+        }
+
+        if (numberOfWords > 2) {
+            throw new InvalidRequestException(EXCESSIVE_COMMAND_MESSAGE);
+        }
+
+        Integer index = Integer.parseInt(wordArray[1]);
+
+        if (taskList.findListSize() < index) {
+            throw new InvalidKeyException(INVALID_INDEX_MESSAGE);
+        }
+        if (index <= 0) {
+            throw new InvalidKeyException(INVALID_INDEX_MESSAGE);
+        }
+
+        return taskList.deleteTask(index);
+    }
+
+    /**
+     * Processes the find command.
+     *
+     * @param wordArray The word array of the input command.
+     * @return The response message.
+     */
+    public static String parseFind(String[] wordArray) throws Exception {
+        int numberOfWords = wordArray.length;
+
+        if (numberOfWords == 1) {
+            throw new InvalidRequestException(EMPTY_FIND_MESSAGE);
+        }
+        if (wordArray.length > 2) {
+            throw new InvalidRequestException(EXCESSIVE_COMMAND_MESSAGE);
+        }
+
+        return taskList.findTask(wordArray[1]);
+    }
+
+    /**
+     * Processes the todo command.
+     *
+     * @param command The command string.
+     * @return The response message.
+     */
+    public static String parseTodo(String command) throws Exception {
+        Todo todo;
+        String[] wordArray = command.split(" ");
+        int numberOfWords = wordArray.length;
+        if (numberOfWords == 1) {
+            throw new InvalidTodoException(EMPTY_TODO_NAME_MESSAGE);
+        }
+        String name = command.split(" ", 2)[1];
+        todo = new Todo(name);
+        return taskList.addTask(todo);
+    }
+
+    /**
+     * Processes the deadline command.
+     *
+     * @param command The command string.
+     * @return The response message.
+     */
+    public static String parseDeadline(String command) throws Exception {
+        String[] wordArray = command.split(" ");
+
+        int numberOfWords = wordArray.length;
+
+        if (numberOfWords == 1) {
+            throw new InvalidDeadlineException(INVALID_DEADLINE_FORMAT_MESSAGE);
+        }
+
+        String content = command.split(" ", 2)[1];
+
+        if (content.split(" /by ").length < 2) {
+            throw new InvalidDeadlineException(INVALID_DEADLINE_FORMAT_MESSAGE);
+        }
+        Deadline deadline;
+
+        String name = content.split(" /by ")[0];
+
+        String dueDate = content.split(" /by ")[1];
+
+        TimeConverter timeConverter = new TimeConverter();
+
+        String formattedDueDate = timeConverter.convertTime(dueDate);
+
+        deadline = new Deadline(name, formattedDueDate);
+
+        return taskList.addTask(deadline);
+    }
+
+    /**
+     * Processes the event command.
+     *
+     * @param command The command string.
+     * @return The cresponse message.
+     */
+    public static String parseEvent(String command) throws Exception {
+        String[] wordArray = command.split(" ");
+
+        Event event;
+
+        int numberOfWords = wordArray.length;
+
+        if (numberOfWords == 1) {
+            throw new InvalidEventException(INVALID_EVENT_INFO_MESSAGE);
+        }
+
+        String content = command.split(" ", 2)[1];
+
+        if (content.split(" /at ").length < 2) {
+            throw new InvalidEventException(INVALID_EVENT_INFO_MESSAGE);
+        }
+
+        String name = content.split(" /at ")[0];
+
+        String timePeriod = content.split(" /at ")[1];
+
+        event = new Event(name, timePeriod);
+
+        return taskList.addTask(event);
+
+    }
+
+    /**
+     * Checks whether the program can be closed or not.
+     *
+     * @return Whether the program can close or not.
+     */
     public static boolean canClose() {
         return canClose;
     }
