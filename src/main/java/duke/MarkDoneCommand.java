@@ -25,7 +25,7 @@ public class MarkDoneCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        if (taskIndex >= tasks.size()) {
+        if (taskIndex >= tasks.size() || taskIndex < 0) {
             throw new DukeException("Sorry, the task does not exist :(");
         } else {
             Task completedTask = tasks.markDone(taskIndex);

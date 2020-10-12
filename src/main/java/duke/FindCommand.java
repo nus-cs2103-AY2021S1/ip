@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Command to find tasks by keywords
+ */
 public class FindCommand extends Command {
     private final String input;
 

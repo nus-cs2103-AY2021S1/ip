@@ -1,1 +1,1 @@
-[D][✘] return book (by: Oct 15 2019)
+[T][✘] read book

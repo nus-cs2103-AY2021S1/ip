@@ -3,6 +3,9 @@ package duke;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Command for add deadline tasks
+ */
 public class Deadline extends Task {
     private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
     private final LocalDate deadline;

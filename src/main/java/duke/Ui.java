@@ -24,7 +24,7 @@ public class Ui {
         System.out.println("todo then your instructions e.g. todo read book");
         System.out.println("deadline then your instructions e.g. deadline by 2020-09-01");
         System.out.println("type 'event' followed by the description,");
-        System.out.println("if '/at', then timing in yyyy-MM-dd format");
+        System.out.println("then '/at', then timing in yyyy-MM-dd format");
         System.out.println("done followed by the task number " + "marked it as done");
         System.out.println("type list to see the task list");
         System.out.println("type find to search by keywords for tasks");
