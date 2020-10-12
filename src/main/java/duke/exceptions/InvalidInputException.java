@@ -8,4 +8,5 @@ public class InvalidInputException extends DukeException {
     public InvalidInputException(String errMsg) {
         super(errMsg);
     }
+
 }

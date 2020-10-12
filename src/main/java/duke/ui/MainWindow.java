@@ -34,7 +34,7 @@ public class MainWindow extends AnchorPane {
 
     public void setDuke(Duke d) {
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog("Hi! If you have already had the account, you can user 'login {username} {password} to log in.'", dukeImage)
+                DialogBox.getDukeDialog("Hi!\nIf you have already had the account, you can user 'login {username} {password} to log in.' \nIf you are a new user, you can use 'login admin password' to log in. You can add more valid users.'", dukeImage)
         );
         duke = d;
     }
