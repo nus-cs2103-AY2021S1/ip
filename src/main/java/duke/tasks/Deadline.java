@@ -2,6 +2,7 @@ package duke.tasks;
 
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 
 /**
@@ -21,9 +22,9 @@ public class Deadline extends Task implements Comparable<Task> {
      *
      * @param itemString Description string.
      */
-    public Deadline(String itemString) {
-        super(Task.getTaskString(itemString, Deadline.DELIMITER));
-        this.setDateString(Task.getDateString(itemString, Deadline.DELIMITER));
+    public Deadline(String itemString) throws DateTimeParseException {
+        super(Task.parseTaskString(itemString, Deadline.DELIMITER));
+        this.setDateString(Task.parseDateString(itemString, Deadline.DELIMITER));
         this.date = LocalDate.parse(this.getDateString());
     }
 
@@ -35,8 +36,8 @@ public class Deadline extends Task implements Comparable<Task> {
      * @param isDone     True is task is done, false otherwise.
      */
     public Deadline(String itemString, boolean isDone) {
-        super(Task.getTaskString(itemString, Deadline.DELIMITER), isDone);
-        this.setDateString(Task.getDateString(itemString, Deadline.DELIMITER));
+        super(Task.parseTaskString(itemString, Deadline.DELIMITER), isDone);
+        this.setDateString(Task.parseDateString(itemString, Deadline.DELIMITER));
         this.date = LocalDate.parse(this.getDateString());
     }
 

@@ -22,8 +22,8 @@ public class Event extends Task implements Comparable<Task> {
      * @param itemString Description string.
      */
     public Event(String itemString) {
-        super(Task.getTaskString(itemString, Event.DELIMITER));
-        this.setDateString(Task.getDateString(itemString, Event.DELIMITER));
+        super(Task.parseTaskString(itemString, Event.DELIMITER));
+        this.setDateString(Task.parseDateString(itemString, Event.DELIMITER));
         this.date = LocalDate.parse(this.getDateString());
     }
 
@@ -35,8 +35,8 @@ public class Event extends Task implements Comparable<Task> {
      * @param isDone     True if task is done, false otherwise.
      */
     public Event(String itemString, boolean isDone) {
-        super(Task.getTaskString(itemString, Event.DELIMITER), isDone);
-        this.setDateString(Task.getDateString(itemString, Event.DELIMITER));
+        super(Task.parseTaskString(itemString, Event.DELIMITER), isDone);
+        this.setDateString(Task.parseDateString(itemString, Event.DELIMITER));
         this.date = LocalDate.parse(this.getDateString());
     }
 
@@ -76,7 +76,7 @@ public class Event extends Task implements Comparable<Task> {
         } else {
             LocalDate thisDate = this.getDate();
             LocalDate otherDate = t.getDate();
-            
+
             if (thisDate.isBefore(otherDate)) {
                 return -1;
             } else if (thisDate.isAfter(otherDate)) {

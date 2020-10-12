@@ -54,7 +54,7 @@ public abstract class Task implements Comparable<Task> {
      * @param delimiter  Delimiter used.
      * @return Task portion of the string.
      */
-    public static String getTaskString(String taskString, String delimiter) throws DukeInvalidDescriptionException {
+    public static String parseTaskString(String taskString, String delimiter) throws DukeInvalidDescriptionException {
         try {
             return taskString.split(delimiter)[0];
         } catch (ArrayIndexOutOfBoundsException e) {
@@ -70,7 +70,7 @@ public abstract class Task implements Comparable<Task> {
      * @param delimiter  Delimiter used.
      * @return Date portion of the string.
      */
-    public static String getDateString(String taskString, String delimiter) throws DukeInvalidDescriptionException {
+    public static String parseDateString(String taskString, String delimiter) throws DukeInvalidDescriptionException {
         try {
             return taskString.split(delimiter)[1];
         } catch (ArrayIndexOutOfBoundsException e) {

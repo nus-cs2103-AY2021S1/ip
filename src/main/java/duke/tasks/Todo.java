@@ -10,8 +10,8 @@ import java.time.LocalDate;
  * Task without any dates attached to it.
  */
 public class Todo extends Task implements Comparable<Task> {
-    
-    private static LocalDate DUMMY_DATE = LocalDate.EPOCH;
+
+    private static final LocalDate DUMMY_DATE = LocalDate.EPOCH;
 
     /**
      * Creates a new Todo task.
