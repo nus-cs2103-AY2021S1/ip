@@ -5,7 +5,7 @@ import java.io.InputStream;
 
 import duke.commands.Command;
 import duke.exceptions.DukeException;
-
+import duke.exceptions.DukeInvalidDescriptionException;
 import javafx.application.Platform;
 
 
@@ -85,7 +85,7 @@ public class Duke {
      * @return Status message to be printed.
      * @throws IndexOutOfBoundsException Invalid index given or input text array is invalid.
      */
-    private String delete(String[] inputTextArr) throws IndexOutOfBoundsException {
+    private String delete(String[] inputTextArr) throws IndexOutOfBoundsException, IllegalArgumentException {
         try {
             int index = Integer.parseInt(inputTextArr[1]);
             String statusMsg = this.taskList.delete(index);
@@ -100,6 +100,8 @@ public class Duke {
             // exception thrown from DukeList.delete()
             // index given in input text is invalid.
             throw new IndexOutOfBoundsException("Invalid index given.");
+        } catch (IllegalArgumentException e) {
+            throw new DukeInvalidDescriptionException("Invalid index string!");
         }
     }
 
@@ -141,7 +143,7 @@ public class Duke {
      * @param keywordCommand Parsed command of user input.
      * @return Status message to be printed after command is executed .
      */
-    private String handleCommands(String userInputStr, Command keywordCommand) {
+    private String handleCommands(String userInputStr, Command keywordCommand) throws DukeException {
         String[] msgArr = Parser.parseLineToArray(userInputStr);
         String statusMessage;
 

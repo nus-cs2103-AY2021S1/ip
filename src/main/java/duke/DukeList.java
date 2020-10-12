@@ -1,6 +1,7 @@
 package duke;
 
 
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -135,11 +136,12 @@ public class DukeList {
 
             assert newTask != null;
             return newTask;
-
+        } catch (DateTimeParseException e) {
+            throw new DukeInvalidDescriptionException("That's an invalid date!");
         } catch (DukeNoDescriptionException e) {
             throw new DukeInvalidDescriptionException(String.format("Hey hey where's my description for `%s`?", taskType));
         } catch (DukeNoDateException e) {
-            throw new DukeInvalidDescriptionException(String.format("Mate  you gave me an invalid description for `%s`!", taskType));
+            throw new DukeInvalidDescriptionException(String.format("Mate you gave me an invalid description for `%s`!", taskType));
         }
     }
 
