@@ -37,6 +37,22 @@ public class Deadline extends Task {
     }
 
     /**
+     * Convert the information of an event into array.
+     *
+     * @return A array of String.
+     */
+    public String[] toArray(){
+        String status;
+        if(this.isDone){
+            status = "1";
+        }else{
+            status = "0";
+        }
+        String[] result = new String[]{"D", status, this.name, dueDate};
+        return result;
+    }
+
+    /**
      * Override the toString method.
      *
      * @return the description and due date of the deadline.

@@ -27,7 +27,7 @@ public class Parser {
             + "of the todo task!";
     private static final String EXCESSIVE_COMMAND_MESSAGE = "Sorry! I can only handle one request at "
             + "a time!";
-    private static final String INVALID_EVENT_INFO_MESSAGE = "Please tell me the name and time period"
+    private static final String INVALID_EVENT_FORMAT_MESSAGE = "Please tell me the name and time period"
             + " of the event task!";
     private static final String INVALID_DEADLINE_FORMAT_MESSAGE = "Please tell me both the name and"
             + " the time due of the deadline task in the correct yyyy-mm-dd form! "
@@ -263,20 +263,24 @@ public class Parser {
         int numberOfWords = wordArray.length;
 
         if (numberOfWords == 1) {
-            throw new InvalidEventException(INVALID_EVENT_INFO_MESSAGE);
+            throw new InvalidEventException(INVALID_EVENT_FORMAT_MESSAGE);
         }
 
         String content = command.split(" ", 2)[1];
 
         if (content.split(" /at ").length < 2) {
-            throw new InvalidEventException(INVALID_EVENT_INFO_MESSAGE);
+            throw new InvalidEventException(INVALID_EVENT_FORMAT_MESSAGE);
         }
 
         String name = content.split(" /at ")[0];
 
         String timePeriod = content.split(" /at ")[1];
 
-        event = new Event(name, timePeriod);
+        TimeConverter timeConverter = new TimeConverter();
+
+        String formattedTime = timeConverter.convertTime(timePeriod);
+
+        event = new Event(name, formattedTime);
 
         return taskList.addTask(event);
 
