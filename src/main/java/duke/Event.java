@@ -19,6 +19,11 @@ public class Event extends Task {
         this.eventTime = eventTime;
     }
 
+    /**
+     * Gets the string format of the event
+     *
+     * @param
+     */
     @Override
     public String toString() {
         return "[E][" + super.getStatusIcon() + "] " + super.description

@@ -14,6 +14,13 @@ public class HelpCommand extends Command {
         super(false);
     }
 
+    /**
+     * Generates help message
+     *
+     * @param tasks List of tasks
+     * @param ui User interface to print task
+     * @param storage File storage object
+     */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         return "Hello, I'm DukeQ:) \n" + "this is a help for you~ \n"
