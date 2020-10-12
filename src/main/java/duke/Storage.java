@@ -11,7 +11,7 @@ import java.util.ArrayList;
  */
 public class Storage {
     protected String filepath;
-    
+
     Storage(String filepath) {
         this.filepath = filepath;
     }
@@ -23,17 +23,16 @@ public class Storage {
      * @throws DukeException If the file cannot be written.
      */
     protected void updateList(ArrayList<Task> list) throws DukeException {
+        Task thisTask;
         assert !list.isEmpty() : "list is empty";
         try {
             FileWriter initialFileWriter = new FileWriter(filepath);
             FileWriter subsequentFileWriter = new FileWriter(filepath, true);
-            for (int i = 1; i <= list.size(); i++) {
-                Task thisTask = list.get(i - 1);
-                if (i == 1) {
-                   initialFileWriter.write("     " + i + "." + thisTask.toString() + System.lineSeparator());
-                } else {
-                    subsequentFileWriter.write("     " + i + "." + thisTask.toString() + System.lineSeparator());
-                }
+            thisTask = list.get(0);
+            initialFileWriter.write("     " + 1 + "." + thisTask.toString() + System.lineSeparator());
+            for (int i = 2; i <= list.size(); i++) {
+                thisTask = list.get(i - 1);
+                subsequentFileWriter.write("     " + i + "." + thisTask.toString() + System.lineSeparator());
             }
             initialFileWriter.close();
             subsequentFileWriter.close();
@@ -52,7 +51,7 @@ public class Storage {
         String thisLine;
         char identifier;
         boolean status;
-        
+
         try {
             if (!(new File(filepath).exists())) {
                 throw new DukeException("There is not such file.");
