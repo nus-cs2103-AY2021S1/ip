@@ -2,9 +2,9 @@ package duke.command;
 
 import java.io.IOException;
 
-import duke.Storage;
 import duke.exception.InvalidCommandFormatException;
 import duke.exception.InvalidTaskException;
+import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Message;
 

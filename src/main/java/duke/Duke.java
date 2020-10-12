@@ -5,6 +5,8 @@ import java.io.IOException;
 import duke.command.Command;
 import duke.command.CommandParser;
 import duke.exception.DukeException;
+import duke.exception.DuplicateTaskException;
+import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Message;
 
@@ -25,7 +27,7 @@ public class Duke {
             this.storage = new Storage(filepath);
             this.storage.initialize();
             this.taskList = this.storage.readTasks();
-        } catch (IOException e) {
+        } catch (IOException | DuplicateTaskException e) {
             System.out.println("Problem reading file.");
         }
     }

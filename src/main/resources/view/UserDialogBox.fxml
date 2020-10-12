@@ -5,11 +5,11 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
-<fx:root type="HBox"
+<fx:root xmlns:fx="http://javafx.com/fxml"
+         type="HBox"
          spacing="10"
          style="-fx-padding: 10;"
-         xmlns="http://javafx.com/javafx"
-         xmlns:fx="http://javafx.com/fxml">
+         xmlns="http://javafx.com/javafx">
     <Label fx:id="label" wrapText="true" styleClass="dialog-label, user-label">
         <HBox.margin>
             <Insets left="70"/>

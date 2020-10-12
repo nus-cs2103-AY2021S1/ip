@@ -1,11 +1,8 @@
 package duke.task;
 
-import static duke.TestUtils.DEADLINE_UNDONE_PRINT;
 import static duke.TestUtils.DEADLINE_UNDONE_STRING;
-import static duke.TestUtils.EVENT_UNDONE_PRINT;
 import static duke.TestUtils.EVENT_UNDONE_STRING;
 import static duke.TestUtils.TODO_DONE_STRING;
-import static duke.TestUtils.TODO_UNDONE_PRINT;
 import static duke.TestUtils.TODO_UNDONE_STRING;
 import static duke.TestUtils.createDoneToDo;
 import static duke.TestUtils.createUndoneDeadline;
@@ -36,24 +33,6 @@ public class TaskListTest {
         TaskList taskList = new TaskList();
         assertDoesNotThrow(() -> taskList.add(createUndoneToDo()));
         assertThrows(DuplicateTaskException.class, () -> taskList.add(createUndoneToDo()));
-    }
-
-    @Test
-    public void readTask_addToDo_doesNotThrowException() {
-        TaskList taskList = new TaskList();
-        assertDoesNotThrow(() -> taskList.add(TODO_UNDONE_PRINT));
-    }
-
-    @Test
-    public void readTask_addDeadline_doesNotThrowException() {
-        TaskList taskList = new TaskList();
-        assertDoesNotThrow(() -> taskList.add(DEADLINE_UNDONE_PRINT));
-    }
-
-    @Test
-    public void readTask_addEvent_doesNotThrowException() {
-        TaskList taskList = new TaskList();
-        assertDoesNotThrow(() -> taskList.add(EVENT_UNDONE_PRINT));
     }
 
     @Test

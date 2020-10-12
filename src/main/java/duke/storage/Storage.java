@@ -1,4 +1,4 @@
-package duke;
+package duke.storage;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.time.DateTimeException;
 import java.util.Scanner;
 
+import duke.exception.DuplicateTaskException;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -48,13 +49,14 @@ public class Storage {
      * @return a list of tasks previously saved by the user
      * @throws IOException if tasks cannot be read from the file correctly
      */
-    public TaskList readTasks() throws IOException {
+    public TaskList readTasks() throws IOException, DuplicateTaskException {
         TaskList taskList = new TaskList();
         try {
             Scanner scanner = new Scanner(this.file);
             while (scanner.hasNextLine()) {
                 String input = scanner.nextLine();
-                taskList.add(input);
+                Task task = StorageParser.parseTask(input);
+                taskList.add(task);
             }
         } catch (DateTimeException e) {
             throw new IOException("Dates in file could not be read properly.");
