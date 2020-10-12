@@ -47,6 +47,8 @@ Example: `dealine oral presentation /by 2020-01-02`
 
 Outcome: `new deadline added`
 
+Note: date must be in `YYYY-MM-DD` format.
+
 ### `event` - Add a new event task
 
 Adds a new event task to the list
@@ -54,6 +56,8 @@ Adds a new event task to the list
 Example: `event modrekt /by 2020-01-02`
 
 Outcome: `new event added`
+
+Note: date must be in `YYYY-MM-DD` format.
 
 ### `list` - Lists all current tasks
 
