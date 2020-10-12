@@ -1,8 +1,19 @@
 # User Guide for duke bot
+1. [Features](#1-features)<br>
+    1.1 [Say bye to duke: `bye`](#11-say-bye-to-duke-bye)<br>
+    1.2 [Find a task: `find`](#12-find-a-task-find)<br>
+    1.3 [Delete a task: `delete` ](#13-delete-a-task-delete)<br>
+    1.4 [Create a todo task: `todo`](#14-create-a-todo-task-todo)<br>
+    1.5 [Create a deadline task: `deadline`](#15-create-a-deadline-task-deadline)<br>
+    1.6 [Create a event task: `event`](#16-create-a-event-task-event)<br>
+    1.7 [List your tasks: `list`](#17-list-your-tasks-list)<br>
+    1.8 [Find out statistics: `stats`](#18-find-out-statistics-stats)<br>
+    1.9 [Says hi to duke: `hi`](#19-says-hi-to-duke-hi)<br>
+    2.0 [Mark your task done: `done`](#20-mark-your-task-done-done)<br>
+2. [Command Summary](#2-command-summary)
+## 1. Features 
 
-## Features 
-
-### Say bye to duke `bye` 
+### 1.1 Say bye to duke `bye` 
 
 Exit the program.
 
@@ -10,17 +21,17 @@ Input instruction:
 
 `bye`
 
-### Find a task `find` 
+### 1.2 Find a task `find` 
 
-Find the expected task with given index in the task list.
+Find the expected task with given keyword.
 
 Input instruction: 
 
-`find` + `index`
+`find` + `keyword`
 
 Example of usage: find 1 
 
-### Delete a task `delete` 
+### 1.3 Delete a task `delete` 
 
 Delete the expected task with given index in the task list.
 
@@ -30,7 +41,7 @@ Input instruction:
 
 Example of usage: delete 1 
 
-### Create a todo task `todo` 
+### 1.4 Create a todo task `todo` 
 
 Create a task that you are going to do and store in the tasklist.
 
@@ -40,7 +51,7 @@ Input instruction:
 
 Example of usage: todo play games
 
-### Create a deadline task `deadline` 
+### 1.5 Create a deadline task `deadline` 
 
 Create a task with a deadline
 
@@ -50,7 +61,7 @@ Input instruction:
 
 Example of usage: deadline finish homework /by 2020-05-12
 
-### Create a event task `event` 
+### 1.6 Create a event task `event` 
 
 Create an event
 
@@ -60,7 +71,7 @@ Input instruction:
 
 Example of usage: event celebrate holiday /at 2020-05-12
 
-### List your tasks `list` 
+### 1.7 List your tasks `list` 
 
 Show the list of tasks
 
@@ -70,7 +81,7 @@ Input instruction:
 
 Example of usage: list
 
-### Find out statistics `stats` 
+### 1.8 Find out statistics `stats` 
 
 Show the number of task completed
 
@@ -80,7 +91,7 @@ Input instruction:
 
 Example of usage: stats
 
-### Says hi to duke `hi` 
+### 1.9 Says hi to duke `hi` 
 
 Greet the bot and it will greet you back
 
@@ -90,7 +101,7 @@ Input instruction:
 
 Example of usage: hi
 
-### Mark your task done `done` 
+### 2.0 Mark your task done `done` 
 
 Mark your task done 
 
@@ -99,6 +110,20 @@ Input instruction:
 `done` + `index`
 
 Example of usage: done 1
+
+## 2. Command summary
+
+Action | Format, Examples
+--------|------------------
+**Find Task** | `find keyword` <br> e.g.,`find homework`
+**Delete Task** | `delete index`<br> e.g.,`delete 1`
+**Todo Task** | `todo description` <br> e.g., `doto play games`
+**Deadline Task** | `deadline description /by YYYY-MM-DD` <br> e.g., `deadline finish homework /by 2020-05-12`
+**Event Task** | `event description /at YYYY-MM-DD` <br> e.g., `event celebrate holiday /at 2020-05-12`
+**List Task** | `list` <br>
+**Stats** | `stats` <br>
+**Done** | `done index ` <br> e.g., `done 1`
+**Bye** | `bye`<br>
 
 //@@author dcchan98-reused
 //Reused from https://github.com/dcchan98/ip/blob/master/src/main/java/Storage.java with minor modification

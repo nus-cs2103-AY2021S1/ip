@@ -71,7 +71,7 @@ public class Parser {
                         throw new InvalidEventException();
                     }
                     try {
-                        String[] tempString = textMessage.substring(7).split(" /at ");
+                        String[] tempString = textMessage.substring(6).split(" /at ");
                         Event newEvent = new Event(tempString[0], false, LocalDate.parse(tempString[1]));
                         response += tasks.addTask(newEvent);
                     } catch (Exception e) {
