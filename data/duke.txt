@@ -1,0 +1,4 @@
+T | 1 | 1 | CS2103T Week 6 quiz
+E | 0 | 0 | CS2103T meeting | Tonight 8pm
+T | 0 | 1 | LSM1301 Week 6 content
+D | 1 | 0 | CS2100 Assignment | 2020-09-18

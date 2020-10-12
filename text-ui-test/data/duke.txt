@@ -1,0 +1,7 @@
+T | 0 | borrow book
+T | 0 | newItem
+E | 0 | CS2103T Tutorial | Wed 4-5pm
+D | 0 | test1 | 2020-05-21
+D | 0 | test2 | 2020-06-20
+E | 0 | test3 | 2020-05-21
+E | 0 | test4 | 2020-06-19
