@@ -13,6 +13,7 @@ public class Ui {
     final private String DELETEMSG = "Too bad. I'll remove the following order: ";
     final private String SAVEMSG = "Aright, I have remembered your sins :)";
     final private String RETLISTMSG = "Here's what you have ordered...";
+    final private String CLEARMSG = "I have cleared your memory >:)";
     final private String DEFAULTERROR = DukeException.INVALID_COMMAND_EXCEPTION.toString();
     public final static String BYEMSG = "Bye! Please come again!";
     final private String NEWLINE = "\n";
@@ -66,6 +67,10 @@ public class Ui {
 
     public String save() {
         return SAVEMSG + NEWLINE;
+    }
+
+    public String clear() {
+        return CLEARMSG + NEWLINE;
     }
 
     public String DEFAULTERROR() {

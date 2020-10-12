@@ -38,6 +38,7 @@ public class TaskList {
      * @throws DukeException Throws exception if command is invalid due to missing information.
      */
     public Task addItem(String input) throws DukeException {
+
         assert input.length() >= 4;
         String[] arr = input.split(" ", 2);
         Task curr = new Task("");

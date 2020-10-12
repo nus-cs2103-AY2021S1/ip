@@ -62,6 +62,9 @@ public class Parser {
     }
 
     public static Duke.Command determineSortType(String input) {
+        if (input.equals("sort")) {
+            return Duke.Command.ERROR;
+        }
         String[] filter = input.split("/", 2);
         Duke.Command ret = Duke.Command.ERROR;
         if (filter[1].equals("type")) {
@@ -80,6 +83,7 @@ public class Parser {
      */
     public static Duke.Command parse(String input) {
         assert !input.isEmpty();
+
         if (getFirstWord(input).equals("todo") || getFirstWord(input).equals("deadline") ||
                 getFirstWord(input).equals("event")) {
             return Duke.Command.ADD;

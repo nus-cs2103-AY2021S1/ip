@@ -36,27 +36,27 @@ public class Duke {
 
     public String run(String input) {
         assert !input.isEmpty();
-
-        Command c = Parser.parse(input);
+        String nInput = input.trim();
+        Command c = Parser.parse(nInput);
 
         switch (c) {
             case ADD:
                 try {
-                    Task curr = tasks.addItem(input);
+                    Task curr = tasks.addItem(nInput);
                     return ui.addedItem(curr, tasks.getListSize());
                 } catch (DukeException ex1) {
                     return ui.showError(ex1.toString());
                 }
             case DONE:
                 try {
-                    Task curr = tasks.doneItem(input);
+                    Task curr = tasks.doneItem(nInput);
                     return ui.doneItem(curr);
                 } catch (DukeException ex1) {
                     return ui.showError(ex1.toString());
                 }
             case DELETE:
                 try {
-                    Task curr = tasks.deleteItem(input);
+                    Task curr = tasks.deleteItem(nInput);
                     return ui.deleteItem(curr);
                 } catch (DukeException ex1) {
                     return ui.showError(ex1.toString());
@@ -72,7 +72,7 @@ public class Duke {
                 }
             case FIND:
                 try {
-                    return ui.returnList(tasks.find(input));
+                    return ui.returnList(tasks.find(nInput));
                 } catch (DukeException ex1) {
                     return ui.showError(ex1.toString());
                 }
@@ -83,7 +83,7 @@ public class Duke {
             case CLEAR:
                 try {
                     storage.overwriteData(tasks.clear());
-                    return ui.save();
+                    return ui.clear();
                 } catch (IOException ex1) {
                     return ui.showError(ex1.getLocalizedMessage());
                 }
