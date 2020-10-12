@@ -38,7 +38,7 @@ public class ToDo extends Task {
         if (command.length() <= 5) {
             throw new InvalidCommandFormatException("ToDo cannot be empty.");
         }
-        String content = command.substring(5);
+        String content = command.substring(5).trim();
         return new ToDo(content);
     }
 

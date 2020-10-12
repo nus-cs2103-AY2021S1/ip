@@ -47,7 +47,7 @@ public class Deadline extends Task {
         if (command.length() <= 9) {
             throw new InvalidCommandFormatException("Deadline cannot be empty.");
         }
-        String[] split = command.substring(9).split("\\s+/by\\s+");
+        String[] split = command.substring(9).trim().split("\\s+/by\\s+");
         if (split.length != 2) {
             throw new InvalidCommandFormatException("Wrong format for deadline command.");
         }

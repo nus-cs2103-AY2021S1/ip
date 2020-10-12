@@ -17,7 +17,7 @@ public class FindCommand implements Command {
         if (command.length() <= 5) {
             throw new InvalidCommandFormatException("Please enter the keywords you are searching for.");
         }
-        String keyword = command.substring(5);
+        String keyword = command.substring(5).trim();
         return taskList.find(keyword);
     }
 

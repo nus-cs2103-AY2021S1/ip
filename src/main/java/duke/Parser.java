@@ -23,6 +23,7 @@ public class Parser {
      * @throws InvalidCommandException if the given input is not supported by Duke
      */
     public static Command parse(String command) throws InvalidCommandException {
+        command = command.trim();
         String[] inputArray = command.split("\\s+");
         switch (inputArray[0]) {
         case "bye":

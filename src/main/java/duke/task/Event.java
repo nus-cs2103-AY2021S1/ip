@@ -47,7 +47,7 @@ public class Event extends Task {
         if (command.length() <= 6) {
             throw new InvalidCommandFormatException("Event cannot be empty.");
         }
-        String[] split = command.substring(6).split("\\s+/at\\s+");
+        String[] split = command.substring(6).trim().split("\\s+/at\\s+");
         if (split.length != 2) {
             throw new InvalidCommandFormatException("Wrong format for event command.");
         }
