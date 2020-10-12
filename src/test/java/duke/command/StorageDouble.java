@@ -1,8 +1,8 @@
 package duke.command;
 
 import duke.Storage;
-import duke.TaskList;
 import duke.task.Task;
+import duke.task.TaskList;
 
 public class StorageDouble extends Storage {
     StorageDouble(String filePath) {

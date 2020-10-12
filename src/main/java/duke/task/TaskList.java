@@ -1,4 +1,4 @@
-package duke;
+package duke.task;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -9,10 +9,6 @@ import java.util.function.Predicate;
 
 import duke.exception.DuplicateTaskException;
 import duke.exception.InvalidTaskException;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
 import duke.ui.Message;
 
 /**

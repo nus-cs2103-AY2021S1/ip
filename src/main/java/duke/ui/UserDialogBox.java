@@ -15,7 +15,7 @@ public class UserDialogBox extends HBox {
     /**
      * Creates a box displaying a message from Duke.
      *
-     * @param text  message to be displayed
+     * @param text message to be displayed
      */
     public UserDialogBox(String text) {
         try {

@@ -4,8 +4,8 @@ import static duke.TestUtils.createDoneToDo;
 
 import java.time.LocalDate;
 
-import duke.TaskList;
 import duke.task.Task;
+import duke.task.TaskList;
 import duke.ui.Message;
 
 public class TaskListDouble extends TaskList {

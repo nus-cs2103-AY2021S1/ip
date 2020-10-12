@@ -3,7 +3,9 @@ package duke;
 import java.io.IOException;
 
 import duke.command.Command;
+import duke.command.CommandParser;
 import duke.exception.DukeException;
+import duke.task.TaskList;
 import duke.ui.Message;
 import duke.ui.Ui;
 
@@ -56,6 +58,7 @@ public class Duke {
      *
      * @param input the user's input
      * @return the chatbot's response to the input as a <code>String</code>
+     * or null if the program is exited
      */
     public String getResponse(String input) {
         Message message = runCommand(input);
@@ -70,11 +73,12 @@ public class Duke {
      *
      * @param input the user's input
      * @return the chatbot's response to the input as a <code>Message</code>
+     * or null if the program is exited
      */
     public Message runCommand(String input) {
         Message response;
         try {
-            Command command = Parser.parse(input);
+            Command command = CommandParser.parse(input);
             assert command != null;
             Message message = command.execute(this.taskList, this.storage);
             if (command.isDone()) {

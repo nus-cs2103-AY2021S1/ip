@@ -5,8 +5,8 @@ import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 
 import duke.Storage;
-import duke.TaskList;
 import duke.exception.InvalidCommandFormatException;
+import duke.task.TaskList;
 import duke.ui.Message;
 
 /**

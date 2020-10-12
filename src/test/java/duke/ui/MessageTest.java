@@ -1,12 +1,10 @@
-package duke;
+package duke.ui;
 
 import static duke.TestUtils.TODO_UNDONE_STRING;
 import static duke.TestUtils.createUndoneToDo;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
-
-import duke.ui.Message;
 
 public class MessageTest {
     @Test

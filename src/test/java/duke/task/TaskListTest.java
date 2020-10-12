@@ -1,4 +1,4 @@
-package duke;
+package duke.task;
 
 import static duke.TestUtils.DEADLINE_UNDONE_PRINT;
 import static duke.TestUtils.DEADLINE_UNDONE_STRING;
@@ -23,7 +23,6 @@ import org.junit.jupiter.api.Test;
 
 import duke.exception.DuplicateTaskException;
 import duke.exception.InvalidTaskException;
-import duke.task.Task;
 
 public class TaskListTest {
     @Test

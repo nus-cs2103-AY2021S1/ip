@@ -15,7 +15,7 @@ public class BotDialogBox extends HBox {
     /**
      * Creates a box displaying a message from Duke.
      *
-     * @param text  message to be displayed
+     * @param text message to be displayed
      */
     public BotDialogBox(String text) {
         try {

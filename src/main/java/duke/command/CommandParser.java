@@ -1,20 +1,11 @@
-package duke;
+package duke.command;
 
-import duke.command.ByeCommand;
-import duke.command.Command;
-import duke.command.DeadlineCommand;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.EventCommand;
-import duke.command.FindCommand;
-import duke.command.ListCommand;
-import duke.command.ToDoCommand;
 import duke.exception.InvalidCommandException;
 
 /**
  * Responsible for the parsing of the user's inputs.
  */
-public class Parser {
+public class CommandParser {
     /**
      * Parses an input from the user.
      *

@@ -3,9 +3,9 @@ package duke.command;
 import java.io.IOException;
 
 import duke.Storage;
-import duke.TaskList;
 import duke.exception.DuplicateTaskException;
 import duke.exception.InvalidCommandFormatException;
+import duke.task.TaskList;
 import duke.task.ToDo;
 import duke.ui.Message;
 
