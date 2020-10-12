@@ -43,22 +43,25 @@ public class Duke {
             case ADD:
                 try {
                     Task curr = tasks.addItem(nInput);
+                    storage.overwriteData(tasks.getList());
                     return ui.addedItem(curr, tasks.getListSize());
-                } catch (DukeException ex1) {
+                } catch (DukeException | IOException ex1) {
                     return ui.showError(ex1.toString());
                 }
             case DONE:
                 try {
                     Task curr = tasks.doneItem(nInput);
+                    storage.overwriteData(tasks.getList());
                     return ui.doneItem(curr);
-                } catch (DukeException ex1) {
+                } catch (DukeException | IOException ex1) {
                     return ui.showError(ex1.toString());
                 }
             case DELETE:
                 try {
                     Task curr = tasks.deleteItem(nInput);
+                    storage.overwriteData(tasks.getList());
                     return ui.deleteItem(curr);
-                } catch (DukeException ex1) {
+                } catch (DukeException | IOException ex1) {
                     return ui.showError(ex1.toString());
                 }
             case LIST:
@@ -90,7 +93,12 @@ public class Duke {
             case ERROR:
                 return ui.DEFAULTERROR();
             case BYE:
-                return ui.bye();
+                try {
+                    storage.overwriteData(tasks.getList());
+                    return ui.bye();
+                } catch (IOException ex1) {
+                    return ui.showError(ex1.getLocalizedMessage());
+                }
         }
         return DukeException.INVALID_COMMAND_EXCEPTION.toString();
     }

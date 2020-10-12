@@ -45,14 +45,14 @@ public class TaskList {
         if (arr.length == 1) {
             throw DukeException.INVALID_TASK_EXCEPTION;
         } else if (arr[0].equals("todo")) {
-            curr = new ToDo(arr[1]);
+            curr = new ToDo(arr[1].trim());
             list.add(curr);
         } else if (arr[0].equals("deadline")) {
             String[] info = arr[1].split("/by ", 2);
             if (info.length == 1) {
                 throw DukeException.INVALID_DEADLINE_EXCEPTION;
             } else {
-                curr = new Deadline(info[0], Parser.dateParser(info[1]));
+                curr = new Deadline(info[0].trim(), Parser.dateParser(info[1]));
                 list.add(curr);
             }
         } else if (arr[0].equals("event")) {
@@ -62,9 +62,12 @@ public class TaskList {
             } else {
                 String[] t = info[1].split(" ", 2);
                 try {
+                    if (t.length < 2) {
+                        throw DukeException.INVALID_TIME_EXCEPTION;
+                    }
                     LocalDate date = Parser.dateParser(t[0]);
 //                    String time = Parser.timeParser(t[1]);
-                    curr = new Event(info[0], date, t[1]);
+                    curr = new Event(info[0].trim(), date, t[1]);
                     list.add(curr);
                 } catch (DukeException | NumberFormatException ex1) {
                     throw DukeException.INVALID_TIME_EXCEPTION;
@@ -115,12 +118,16 @@ public class TaskList {
         if (info.length == 1) {
             throw DukeException.INVALID_INDEX_EXCEPTION;
         } else {
-            int index = Integer.parseInt(info[1]);
-            if (index > list.size() || index <= 0) {
+            try {
+                int index = Integer.parseInt(info[1]);
+                if (index > list.size() || index <= 0) {
+                    throw DukeException.INVALID_INDEX_EXCEPTION;
+                } else {
+                    list.get(index - 1).markAsDone();
+                    toBeRet = list.get(index - 1);
+                }
+            } catch (NumberFormatException ex1) {
                 throw DukeException.INVALID_INDEX_EXCEPTION;
-            } else {
-                list.get(index-1).markAsDone();
-                toBeRet = list.get(index-1);
             }
         }
         return toBeRet;

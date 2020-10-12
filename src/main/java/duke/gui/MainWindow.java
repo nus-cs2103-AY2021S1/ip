@@ -57,8 +57,9 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
 
-        if (response.equals(Ui.BYEMSG)) {
+        if (response.equals(Ui.BYEMSG + "\n")) {
             Platform.exit();
+            System.exit(0);
         }
     }
 }
