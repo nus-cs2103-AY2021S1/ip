@@ -29,7 +29,7 @@ Input instruction:
 
 `find` + `keyword`
 
-Example of usage: find 1 
+Example of usage: find homework 
 
 ### 1.3 Delete a task `delete` 
 
