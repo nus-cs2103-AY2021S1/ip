@@ -44,9 +44,9 @@ A todo is a task with a `description`
 Add a deadline to the list.
 
 A deadline is a task with a `description`,<br>
-and an end time specified by `by/<time>`.
+and an end time specified by `/by <time>`.
 
-    Format: deadline <description> by/<time>
+    Format: deadline <description> /by <time>
     
         <description>: A string consisting of characters [a-zA-z0-9_ ]
         <time>: A date time in the format "ddMMyyyy HHmm"
@@ -59,7 +59,7 @@ and an end time specified by `by/<time>`.
             
         Example: '20012020 1800' means 20 Jan 2020 06:00pm
 
-    Example: 'deadline feed the little penguins by/20012020 1800'
+    Example: 'deadline feed the little penguins /by 20012020 1800'
  
 <br>
  
@@ -67,10 +67,10 @@ and an end time specified by `by/<time>`.
 Add an event to the list.
 
 An event is a task with a `description`,<br>
-a start time specified by `from/<time>`,<br>
-and an end time specified by `till/<time>`
+a start time specified by `/from <time>`,<br>
+and an end time specified by `/till <time>`
 
-    Format: event <description> from/<time> till/<time>
+    Format: event <description> /from <time> /till <time>
     
         <description>: A string consisting of characters [a-zA-z0-9_ ]
         <time>: A date time in the format "ddMMyyyy HHmm"
@@ -83,7 +83,7 @@ and an end time specified by `till/<time>`
             
         Example: '20012020 1800' means 20 Jan 2020 06:00pm
 
-    Example: 'event penguin new year from/07072020 0700 till/07072020 1900'
+    Example: 'event penguin new year /from 07072020 0700 /till 07072020 1900'
 
 <br>
 
