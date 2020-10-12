@@ -1,4 +1,4 @@
-package duke;
+package duke.model;
 
 /**
  * Represents a todo event.

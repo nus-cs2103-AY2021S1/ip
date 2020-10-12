@@ -1,4 +1,4 @@
-import duke.Todo;
+import duke.model.Todo;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.Assert.assertEquals;

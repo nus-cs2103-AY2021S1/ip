@@ -1,4 +1,4 @@
-package duke;
+package duke.model;
 
 import java.time.LocalDateTime;
 
@@ -39,7 +39,7 @@ public class Event extends Task {
         String part = "[E]" + super.toString() + "(at: " + at.getMonth().toString().substring(0, 3) + " "
                 + at.getDayOfMonth() + " " + at.getYear() + " ";
         if (at.getMinute() >= 10) {
-            return part + String.format("%d:%d)", at.getHour(), at.getMinute()) + ")";
+            return part + String.format("%d:%d", at.getHour(), at.getMinute()) + ")";
         } else {
             return part + at.getHour() + ":0" + at.getMinute() + ")";
         }

@@ -113,7 +113,7 @@ Now you have 2 tasks in the list.
 
 ### `durationtask NUMBER` - add a duration task
 
-this comamnd is for adding a duration task. A success message with the number of remaining tasks will be sent after execution.
+this comamnd is for adding a duration task, and the number must be a two digit number (i.e. 00 ~ 99). A success message with the number of remaining tasks will be sent after execution.
 
 **xample of usage:** 
 

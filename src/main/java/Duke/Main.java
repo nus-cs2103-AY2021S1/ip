@@ -2,6 +2,7 @@ package duke;
 
 import java.io.IOException;
 
+import duke.ui.MainWindow;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -26,6 +27,7 @@ public class Main extends Application {
             stage.setTitle("Duke");
             stage.getIcons().add(new Image(this.getClass().getResourceAsStream("/images/icon.png")));
             Scene scene = new Scene(ap);
+            scene.getStylesheets().add("/view/MainWindow.css");
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();

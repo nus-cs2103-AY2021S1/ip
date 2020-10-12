@@ -1,4 +1,4 @@
-package duke;
+package duke.model;
 
 import java.time.LocalDateTime;
 
@@ -39,7 +39,7 @@ public class Deadline extends Task {
         String part = "[D]" + super.toString() + "(by: " + by.getMonth().toString().substring(0, 3) + " "
                 + by.getDayOfMonth() + " " + by.getYear() + " ";
         if (by.getMinute() >= 10) {
-            return part + String.format("%d:%d)", by.getHour(), by.getMinute()) + ")";
+            return part + String.format("%d:%d", by.getHour(), by.getMinute()) + ")";
         } else {
             return part + by.getHour() + ":0" + by.getMinute() + ")";
         }

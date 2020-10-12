@@ -1,19 +1,21 @@
-package duke;
+package duke.ui;
 
 import java.util.List;
+
+import duke.exception.DukeException;
+import duke.model.Task;
 
 /**
  * Encapsulates the user interaction.
  */
 public class Ui {
-    private String line = "    ____________________________________________________________";
 
     /**
      * Displays the loading error.
      * @return String result for GUI
      */
     public String showLoadingError() {
-        return "Failed to load the file.\n";
+        return "Failed to load the file.";
     }
 
     /**
@@ -21,7 +23,7 @@ public class Ui {
      * @return String result for GUI
      */
     public String showNumberFormatError() {
-        return line + "\n      OOPS!!! Please enter a number\n" + line + "\n";
+        return "      OOPS!!! Please enter a valid number";
     }
 
     /**
@@ -30,7 +32,7 @@ public class Ui {
      * @return String result for GUI
      */
     public String showDukeError(DukeException e) {
-        return line + "\n" + e.toString().substring(19) + "\n" + line + "\n";
+        return e.toString().substring(30);
     }
 
     /**
@@ -38,9 +40,16 @@ public class Ui {
      * @return String result for GUI
      */
     public String showFileNotFoundError() {
-        return line + "\n      OOPS!!! File is not found.\n" + line + "\n";
+        return "      OOPS!!! File is not found.";
     }
 
+    /**
+     * Display the date time error.
+     * @return String result for GUI
+     */
+    public String showDateTimeError() {
+        return "      OOPS!!! Please enter a valid date and time.";
+    }
     /**
      * Displays the list of the todo events.
      * @param data the list of the todo events.
@@ -48,12 +57,10 @@ public class Ui {
      */
     public String printList(List<Task> data) {
         String res = "";
-        res += line + "\n";
         res += "     Here are the tasks in your list:\n";
         for (int i = 0; i < data.size(); i++) {
             res += "     " + (i + 1) + "." + data.get(i).toString() + "\n";
         }
-        res += line + "\n";
         return res;
     }
 
@@ -64,8 +71,8 @@ public class Ui {
      * @return String result for GUI
      */
     public String printDone(List<Task> data, int n) {
-        return line + "\n" + "    Nice! I've marked this task as done: \n     "
-                + data.get(n).toString() + "\n" + line + "\n";
+        return "    Nice! I've marked this task as done: \n     "
+                + data.get(n).toString();
     }
 
     /**
@@ -75,8 +82,8 @@ public class Ui {
      * @return String result for GUI
      */
     public String printDeletePre(List<Task> data, int n) {
-        return line + "\n" + "     Noted. I've removed this task: \n     "
-                + data.get(n).toString() + "\n";
+        return "     Noted. I've removed this task: \n     "
+                + data.get(n).toString();
     }
 
     /**
@@ -86,8 +93,7 @@ public class Ui {
      * @return String result for GUI
      */
     public String printDeletePost(List<Task> data, int n) {
-        return "     Now you have " + data.size() + " tasks in the list.\n"
-            + line + "\n";
+        return "\n     Now you have " + data.size() + " tasks in the list.";
     }
 
     /**
@@ -97,8 +103,8 @@ public class Ui {
      * @return String result for GUI.
      */
     public String printTask(List<Task> data, Task t) {
-        return line + "\n" + "     Got it. I've added this task: \n       " + t.toString() + "\n"
-                + "     Now you have " + data.size() + " tasks in the list.\n" + line + "\n";
+        return "     Got it. I've added this task: \n       " + t.toString() + "\n"
+                + "     Now you have " + data.size() + " tasks in the list.";
     }
 
     /**
@@ -108,12 +114,10 @@ public class Ui {
      */
     public String printFind(List<Task> data) {
         String res = "";
-        res += line + "\n";
         res += "     Here are the matching tasks in your list:\n";
         for (int i = 0; i < data.size(); i++) {
             res += "     " + (i + 1) + "." + data.get(i).toString() + "\n";
         }
-        res += line + "\n";
         return res;
     }
 }

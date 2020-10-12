@@ -5,9 +5,12 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 
-<fx:root alignment="TOP_RIGHT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefWidth="500.0" style="-fx-background-radius: 15px;" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
+<fx:root alignment="TOP_RIGHT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308"
+         minHeight="-Infinity" prefWidth="500.0" style="-fx-background-radius: 15px;"
+         type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/">
   <children>
-    <Label fx:id="dialog" style="-fx-background-color: #f4985d#f5bd99; -fx-background-radius: 5px;" text="Label" textFill="#4d4c4c" wrapText="true" />
+    <Label fx:id="dialog" styleClass="dialogText"
+           stylesheets="@DukeDialogBox.css" text="Label" textFill="#4d4c4c" wrapText="true" />
     <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" />
   </children>
   <padding>

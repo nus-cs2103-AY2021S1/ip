@@ -1,4 +1,4 @@
-package duke;
+package duke.storage;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -10,6 +10,12 @@ import java.io.PrintStream;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
+import duke.model.Deadline;
+import duke.model.DurationTask;
+import duke.model.Event;
+import duke.model.Task;
+import duke.model.Todo;
 
 /**
  * Encapsulates the operations related to the I/O of the log file.

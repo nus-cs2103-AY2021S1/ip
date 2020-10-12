@@ -1,4 +1,4 @@
-package duke;
+package duke.model;
 
 /**
  * Represents a Duration Task.
