@@ -1,6 +1,6 @@
 # User Guide
 
-<img src="./Ui.png" width="350" />
+<img src="./docs/Ui.png" width="350" />
 
 * [Features](#features)
   * [Task](#task)
@@ -221,9 +221,7 @@ Here are the tasks that I've found on 23 Oct 2020:
 
 Find tasks from the list with date that matches the today's date.
 
-Format: `date DATE`
-
-* The format of date is YYYY-MM-DD. (YYYY: year, MM: month, DD: day)
+Format: `today`
 
 Example of usage:
 
