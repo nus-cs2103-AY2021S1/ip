@@ -28,6 +28,15 @@ public class Duke extends Application {
     private final Image user = new Image(this.getClass().getResourceAsStream("/images/doge.jpg"));
     private final Image duke = new Image(this.getClass().getResourceAsStream("/images/catie.jpg"));
 
+    Instruction thisInstruction;
+    Deadline thisDeadline;
+    String thisTaskname;
+    String thisTime;
+    String keyword;
+    String output;
+    Task thisTask;
+    int number;
+
     public Duke() {
         ui = new Ui();
         parser = new Parser();
@@ -52,7 +61,7 @@ public class Duke extends Application {
 
         stage.setScene(scene);
         stage.show();
-        
+
         stage.setTitle("Duke");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
@@ -66,7 +75,7 @@ public class Duke extends Application {
 
         scrollPane.setVvalue(1.0);
         scrollPane.setFitToWidth(true);
-        
+
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
         userInput.setPrefWidth(325.0);
@@ -80,7 +89,7 @@ public class Duke extends Application {
 
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
-        
+
         sendButton.setOnMouseClicked((event) -> handleUserInput());
 
         userInput.setOnAction((event) -> handleUserInput());
@@ -106,83 +115,122 @@ public class Duke extends Application {
     protected String getResponse(String input) {
         return getOutput(input);
     }
-    
+
+    protected String getUndoResponse() {
+        list.updateList();
+        output = ui.printListMessage(list.getList());
+        return output;
+    }
+
+    protected String getListResponse() {
+        output = ui.printListMessage(list.getList());
+        return output;
+    }
+
+    protected String getDoneResponse(String input) throws DukeException {
+        // Duke does not support undone a task
+        list.updateLastList();
+        number = Character.getNumericValue(input.charAt(input.length() - 1));
+        thisTask = list.get(number - 1);
+        thisTask.markAsDone();
+        list.set(number - 1, thisTask);
+        output = ui.markAsDoneMessage(thisTask);
+        storage.updateList(list.getList());
+        return output;
+    }
+
+    protected String getDeleteResponse(String input) throws DukeException {
+        list.updateLastList();
+        number = Character.getNumericValue(input.charAt(input.length() - 1));
+        thisTask = list.get(number - 1);
+        list.remove(number - 1);
+        output = ui.deletedTaskMessage(thisTask, list.getList());
+        storage.updateList(list.getList());
+        return output;
+    }
+
+    protected String getFindResponse(String input) {
+        keyword = input.substring(5);
+        output = ui.printFoundTaskMessage(keyword, list.getList());
+        return output;
+    }
+
+    protected String getByeResponse() {
+        output = ui.byeMessage();
+        return output;
+    }
+
+    protected String getDeadlineResponse(String input) throws DukeException {
+        list.updateLastList();
+        if (input.length() < 10) {
+            throw new DukeException("     The taskname of a deadline cannot be empty.");
+        }
+        output = ui.printSuccessMessage();
+        thisTaskname = input.substring(9, input.indexOf('/') - 1);
+        thisTime = input.substring(input.indexOf('/') + 4);
+        thisDeadline = new Deadline(thisTaskname, false, thisTime);
+        thisDeadline.updateDateTime();
+        list.add(thisDeadline);
+        storage.updateList(list.getList());
+        output = output + ui.updatedTaskMessage(list.getList());
+        return output;
+    }
+
+    protected String getEventResponse(String input) throws DukeException {
+        list.updateLastList();
+        if (input.length() < 7) {
+            throw new DukeException("     The taskname of a event cannot be empty.");
+        }
+        output = ui.printSuccessMessage();
+        thisTaskname = input.substring(6, input.indexOf('/') - 1);
+        thisTime = input.substring(input.indexOf('/') + 4);
+        list.add(new Event(thisTaskname, false, thisTime));
+        storage.updateList(list.getList());
+        output = output + ui.updatedTaskMessage(list.getList());
+        return output;
+    }
+
+    protected String getTodoResponse(String input) throws DukeException {
+        list.updateLastList();
+        if (input.length() < 6) {
+            throw new DukeException("     The taskname of a todo cannot be empty.");
+        }
+        output = ui.printSuccessMessage();
+        thisTaskname = input.substring(5);
+        list.add(new Todo(thisTaskname, false));
+        storage.updateList(list.getList());
+        output = output + ui.updatedTaskMessage(list.getList());
+        return output;
+    }
+
     protected String getOutput(String input) {
-        Instruction thisInstruction;
-        Deadline thisDeadline;
-        String thisTaskname;
-        String thisTime;
-        String keyword;
-        String output;
-        Task thisTask;
-        int number;
-        
+
         thisInstruction = parser.load(input);
         try {
             if (thisInstruction == Instruction.UNDO) {
-                list.updateList();
-                output = ui.printListMessage(list.getList());
+                output = getUndoResponse();
             } else if (thisInstruction == Instruction.LIST) {
-                output = ui.printListMessage(list.getList());
+                output = getListResponse();
             } else if (thisInstruction == Instruction.DONE) {
-                // Duke does not support undone a task
-                list.updateLastList();
-                number = Character.getNumericValue(input.charAt(input.length() - 1));
-                thisTask = list.get(number - 1);
-                thisTask.markAsDone();
-                list.set(number - 1, thisTask);
-                output = ui.markAsDoneMessage(thisTask);
-                storage.updateList(list.getList());
+                output = getDoneResponse(input);
             } else if (thisInstruction == Instruction.DELETE) {
-                list.updateLastList();
-                number = Character.getNumericValue(input.charAt(input.length() - 1));
-                thisTask = list.get(number - 1);
-                list.remove(number - 1);
-                output = ui.deletedTaskMessage(thisTask, list.getList());
-                storage.updateList(list.getList());
+                output = getDeleteResponse(input);
             } else if (thisInstruction == Instruction.FIND) {
-                keyword = input.substring(5);
-                output = ui.printFoundTaskMessage(keyword, list.getList());
+                output = getFindResponse(input);
             } else if (thisInstruction == Instruction.BYE) {
-                output = ui.byeMessage();
+                output = getByeResponse();
+            } else if (thisInstruction == Instruction.DEADLINE) {
+                output = getDeadlineResponse(input);
+            } else if (thisInstruction == Instruction.EVENT) {
+                output = getEventResponse(input);
+            } else if (thisInstruction == Instruction.TODO) {
+                output = getTodoResponse(input);
             } else {
-                if (thisInstruction == Instruction.DEADLINE) {
-                    list.updateLastList();
-                    if (input.length() < 10) {
-                        throw new DukeException("     The taskname of a deadline cannot be empty.");
-                    }
-                    output = ui.printSuccessMessage();
-                    thisTaskname = input.substring(9, input.indexOf('/') - 1);
-                    thisTime = input.substring(input.indexOf('/') + 4);
-                    thisDeadline = new Deadline(thisTaskname, false, thisTime);
-                    thisDeadline.updateDateTime();
-                    list.add(thisDeadline);
-                } else if (thisInstruction == Instruction.EVENT) {
-                    list.updateLastList();
-                    if (input.length() < 7) {
-                        throw new DukeException("     The taskname of a event cannot be empty.");
-                    }
-                    output = ui.printSuccessMessage();
-                    thisTaskname = input.substring(6, input.indexOf('/') - 1);
-                    thisTime = input.substring(input.indexOf('/') + 4);
-                    list.add(new Event(thisTaskname, false, thisTime));
-                } else if (thisInstruction == Instruction.TODO) {
-                    list.updateLastList();
-                    if (input.length() < 6) {
-                        throw new DukeException("     The taskname of a todo cannot be empty.");
-                    }
-                    output = ui.printSuccessMessage();
-                    thisTaskname = input.substring(5);
-                    list.add(new Todo(thisTaskname, false));
-                } else {
-                    throw new DukeException("     I'm sorry, but I don't know what that means :-(");
-                }
-                storage.updateList(list.getList());
-                output = output + ui.updatedTaskMessage(list.getList());
+                throw new DukeException("     I'm sorry, but I don't know what that means :-(");
             }
         } catch (DukeException ex) {
             output = ui.printErrorMessage(ex);
-        } 
+        }
         return output;
     }
 }
