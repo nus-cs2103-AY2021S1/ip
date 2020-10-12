@@ -25,6 +25,10 @@ public class TaskList {
 
         }
 
+        if (listOfFoundItems.size() == 0) {
+            return "No matching task is found!";
+        }
+
         int iterator = 1;
         output += "Here are the matching tasks in your list:\n";
 
@@ -53,6 +57,9 @@ public class TaskList {
      * @return the String for task deleted.
      */
     public String deleteTask(int index) {
+        if (this.tasks.size() <= index) {
+            return "The index you entered is too large!";
+        }
         assert this.tasks.size() > index;
         Task myTask = this.tasks.get(index);
         this.tasks.remove(index);
