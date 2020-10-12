@@ -6,7 +6,7 @@
 This Project is a Mario Themed Task Manager that allows you to schedules tasks to do!
 
 ___
-### Features of Luigi commands.Task Manager
+### Features of Luigi Task Manager
 
 ![](https://media.giphy.com/media/tmMhRhvcytb53xPYXt/giphy.gif)
 
@@ -255,7 +255,7 @@ Users can add 3 Types of Tasks to the List.
   *OR* R \<number of the task in the list to change\> /to \<date to change to\>
   
   Will change the date and time of Event and Deadline tasks to the date specified vased on the number order in the list.
-  An error will show if user tries to reschedule a Todo commands.Task.
+  An error will show if user tries to reschedule a Todo Task.
   
   *Example of your list:*
   
