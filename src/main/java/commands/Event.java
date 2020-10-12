@@ -1,7 +1,12 @@
+package commands;
+
 import java.time.LocalDateTime;
 
+import exceptions.DukeException;
+import ui.DateConverter;
+
 /**
- * Event class creates a type of Task called event which contains a date and description of the task
+ * Commands.Event class creates a type of Commands.Task called event which contains a date and description of the task
  */
 public class Event extends Task {
 
@@ -9,7 +14,7 @@ public class Event extends Task {
     private LocalDateTime date;
 
     /**
-     * constructor to mkae Event
+     * constructor to make Commands.Event
      *
      * @param description
      * @param date
@@ -20,10 +25,10 @@ public class Event extends Task {
     }
 
     /**
-     * creates a Event from string
+     * creates a Commands.Event from string
      *
      * @param details input from user
-     * @return Event object
+     * @return Commands.Event object
      */
     public static Event createEvent(String details) {
         if (details == null) {
@@ -53,7 +58,7 @@ public class Event extends Task {
      * unravels encoded Strings
      *
      * @param code String that has been previously encoded()
-     * @return Event object
+     * @return Commands.Event object
      * @throws DukeException in the event it is unable to decode the string
      */
     public static Event decode(String code) throws DukeException {
@@ -73,9 +78,9 @@ public class Event extends Task {
     }
 
     /**
-     * overrides Event String output to be formatted
+     * overrides Commands.Event String output to be formatted
      *
-     * @return String of formatted Event
+     * @return String of formatted Commands.Event
      */
     @Override
     public String toString() {

@@ -1,10 +1,17 @@
+package storage;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import commands.Deadline;
+import commands.Event;
+import commands.Task;
+import exceptions.DukeException;
+import ui.DateConverter;
 
 /**
- * TaskList manages the list of tasks and implements the iterable interface
+ * Storage.Storage.TaskList manages the list of tasks and implements the iterable interface
  */
 public class TaskList implements Iterable<Task> {
 
@@ -13,7 +20,7 @@ public class TaskList implements Iterable<Task> {
     private ArrayList<Task> listOfKeyWordItems = new ArrayList<>();
 
 
-    TaskList() {
+    public TaskList() {
         this.listOfItems = new ArrayList<>();
     }
 
@@ -44,7 +51,6 @@ public class TaskList implements Iterable<Task> {
      */
     public String markCompleted(int index) throws DukeException {
         try {
-            //assert index > 0 && index < this.listOfItems.size();
             Task item = this.getListOfItems().get(index);
             item.markAsDone();
 
@@ -95,8 +101,8 @@ public class TaskList implements Iterable<Task> {
             LocalDateTime dateTime = DateConverter.parseString(dateTimeString);
 
             if (temp instanceof Deadline) {
-                Task item = new Deadline(temp.description, dateTime);
-                if (temp.isDone) {
+                Task item = new Deadline(temp.getDescription(), dateTime);
+                if (temp.getIsDone()) {
                     item.markAsDone();
                 }
 
@@ -105,8 +111,8 @@ public class TaskList implements Iterable<Task> {
                                 + " %s\nYou still have %d tasks in your list.\n", temp.toString(), item.toString(),
                         this.getListOfItems().size());
             } else if (temp instanceof Event) {
-                Task item = new Event(temp.description, dateTime);
-                if (temp.isDone) {
+                Task item = new Event(temp.getDescription(), dateTime);
+                if (temp.getIsDone()) {
                     item.markAsDone();
                 }
                 this.getListOfItems().set(index, item);
@@ -114,10 +120,10 @@ public class TaskList implements Iterable<Task> {
                                 + "  %s\nYou still have %d tasks in your list.\n", temp.toString(), item.toString(),
                         this.getListOfItems().size());
             } else {
-                return (new DukeException("ToDo Task detected. Unable to reschedule")).toString();
+                return (new DukeException("Commands.ToDo Commands.Task detected. Unable to reschedule")).toString();
             }
         } catch (Exception e) {
-            return (new DukeException("Unable reschedule the specified Task")).toString();
+            return (new DukeException("Unable reschedule the specified Commands.Task")).toString();
         }
     }
 
@@ -134,7 +140,6 @@ public class TaskList implements Iterable<Task> {
                 listOfKeyWordItems.add(item);
             }
         }
-
     }
 
     /**
@@ -164,7 +169,7 @@ public class TaskList implements Iterable<Task> {
     /**
      * iterates over the list of items
      *
-     * @return iterator with generic T as Task
+     * @return iterator with generic T as Commands.Task
      */
     @Override
     public Iterator<Task> iterator() {

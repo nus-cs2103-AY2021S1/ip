@@ -1,5 +1,9 @@
+package commands;
+
+import exceptions.DukeException;
+
 /**
- * ToDo class creates a type of Task called ToDo which contains a description of the task
+ * Commands.ToDo class creates a type of Commands.Task called Commands.ToDo which contains a description of the task
  */
 public class ToDo extends Task {
 
@@ -8,7 +12,7 @@ public class ToDo extends Task {
     }
 
     /**
-     * convertes a String into a condensed form
+     * converts a String into a condensed form
      *
      * @return condesnsed form of inputted string
      */
@@ -20,7 +24,7 @@ public class ToDo extends Task {
      * unravels encoded Strings
      *
      * @param code String that has been previously encoded()
-     * @return ToDo object
+     * @return Commands.ToDo object
      * @throws DukeException in the event it is unable to decode the string
      */
     public static ToDo decode(String code) throws DukeException {
@@ -36,14 +40,14 @@ public class ToDo extends Task {
             }
             return newToDo;
         } else {
-            throw new DukeException("Unable to decode ToDo");
+            throw new DukeException("Unable to decode Commands.ToDo");
         }
     }
 
     /**
-     * overrides ToDo String output to be formatted
+     * overrides Commands.ToDo String output to be formatted
      *
-     * @return String of formatted ToDo
+     * @return String of formatted Commands.ToDo
      */
     @Override
     public String toString() {

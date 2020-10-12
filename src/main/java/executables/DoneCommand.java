@@ -1,14 +1,22 @@
-package ExecutableCommands;
+package executables;
+
+import exceptions.DukeException;
+import storage.Storage;
+import storage.TaskList;
+import ui.UI;
 
 public class DoneCommand extends Execute {
 
     private String[] userInput;
-    private Storage Storage;
 
-    DoneCommand(String[] userInput) {
+    public DoneCommand(String[] userInput) {
         this.userInput = userInput;
     }
 
+    /**
+     * obtains a users Input from the object
+     * @return the user input
+     */
     public String[] getUserInput() {
         return userInput;
     }

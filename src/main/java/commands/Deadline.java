@@ -1,7 +1,15 @@
+package commands;
+
 import java.time.LocalDateTime;
 
+import exceptions.DukeException;
+import ui.DateConverter;
+
+
+
 /**
- * Deadline class creates a type of Task called deadline which contains a date and description of the task
+ * Commands.Deadline class creates a type of Commands.
+ * Task called deadline which contains a date and description of the task.
  */
 
 
@@ -11,7 +19,7 @@ public class Deadline extends Task {
     private LocalDateTime date;
 
     /**
-     * Constructor to create a Deadline Object
+     * Constructor to create a Commands.Deadline Object
      * @param description description of deadline
      * @param date the date of the deadline
      */
@@ -24,7 +32,7 @@ public class Deadline extends Task {
      * creates a deadline a string
      *
      * @param str input form user
-     * @return Deadline object
+     * @return Commands.Deadline object
      */
     public static Deadline createDeadline(String str) {
         if (str == null) {
@@ -54,7 +62,7 @@ public class Deadline extends Task {
      * unravels encoded Strings
      *
      * @param code String that has been previously encoded()
-     * @return Deadline object
+     * @return Commands.Deadline object
      * @throws DukeException in the event it is unable to decode the string
      */
     public static Deadline decode(String code) throws DukeException {
@@ -71,17 +79,15 @@ public class Deadline extends Task {
             }
             return newDeadline;
         } else {
-            throw new DukeException("Unable to decode Deadline");
+            throw new DukeException("Unable to decode Commands.Deadline");
         }
     }
 
 
     /**
-     * overrides Deadline String output to be formatted
-     *
-     * @return String of formatted Deadline
+     * overrides Commands.Deadline String output to be formatted
+     * @return String of formatted Commands.Deadline
      */
-
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + DateConverter.parseLocalDateTime(this.date) + ")";

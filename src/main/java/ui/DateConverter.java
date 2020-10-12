@@ -1,3 +1,5 @@
+package ui;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -5,9 +7,10 @@ import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.List;
 
+import exceptions.DukeException;
 
 /**
- * class handles all formatting for dates in Deadline and Event objects
+ * class handles all formatting for dates in Commands.Deadline and Commands.Event objects
  */
 public class DateConverter {
 

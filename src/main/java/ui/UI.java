@@ -1,8 +1,8 @@
-
+package ui;
 
 
 /**
- * UI class handles the scanner object and UI elements seen by user
+ * Ui.UI class handles the scanner object and Ui.UI elements seen by user
  */
 
 public class UI {
@@ -20,6 +20,4 @@ public class UI {
         assert content.length() > 0;
         return LINE + "\n" + content + "\n" + LINE;
     }
-
-
 }

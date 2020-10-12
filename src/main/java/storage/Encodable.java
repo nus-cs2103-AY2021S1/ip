@@ -1,3 +1,5 @@
+package storage;
+
 /**
  * public interface to use encode()
  *

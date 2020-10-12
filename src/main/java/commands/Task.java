@@ -1,6 +1,10 @@
+package commands;
+
+import storage.Encodable;
 
 /**
- * Represents a task to do and creates a parent class with child classes Event, ToDo, Deadline
+ * Represents a task to do and creates a parent class with child classes
+ * Commands.Event, Commands.ToDo, Commands.Deadline
  */
 public abstract class Task implements Encodable<Task> {
 
@@ -9,7 +13,7 @@ public abstract class Task implements Encodable<Task> {
     protected boolean isDone;
 
     /**
-     * Constructor for making a Task Object
+     * Constructor for making a Commands.Task Object
      * @param description
      */
     public Task(String description) {
@@ -18,7 +22,19 @@ public abstract class Task implements Encodable<Task> {
     }
 
     /**
-     * obtains a tick or cross from a Task
+     * obtains the description from a task
+     * @return description of the task
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    public boolean getIsDone() {
+        return isDone;
+    }
+
+    /**
+     * obtains a tick or cross from a Commands.Task
      *
      * @return String [✓] or [✗]
      */
@@ -35,9 +51,9 @@ public abstract class Task implements Encodable<Task> {
     }
 
     /**
-     * overrides Task String output to be formatted
+     * overrides Commands.Task String output to be formatted
      *
-     * @return String of formatted Task
+     * @return String of formatted Commands.Task
      */
     @Override
     public String toString() {

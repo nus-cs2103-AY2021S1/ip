@@ -1,5 +1,9 @@
+package commands;
+
+import exceptions.DukeException;
+
 /**
- * enum Commands states constant keywords that are used to determine the command inputted by user
+ * enum Commands.Commands states constant keywords that are used to determine the command inputted by user
  */
 public enum Commands {
     EXIT("bye", "B"),
@@ -14,6 +18,12 @@ public enum Commands {
 
     private final String keyword;
     private final String abbr;
+
+    /**
+     * constructor for a Commands Object
+     * @param keyword string related to the command
+     * @param abbr abbreviation of the command string
+     */
     Commands(String keyword, String abbr) {
         this.keyword = keyword;
         this.abbr = abbr;
@@ -23,7 +33,7 @@ public enum Commands {
      * compares keyword with the enum commands
      *
      * @param keyword
-     * @return Commands that corresponds to the keyword
+     * @return Commands.Commands that corresponds to the keyword
      * @throws DukeException if it is unable to match any of the enum commands
      */
     public static Commands findCommand(String keyword) throws DukeException {
