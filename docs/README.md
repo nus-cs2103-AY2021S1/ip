@@ -1,12 +1,12 @@
-# Luigi commands.Task Manager User Guide
+# Luigi Task Manager User Guide
 
 
 ![](https://media.giphy.com/media/Dfk5q64stLdRu/giphy.gif)
 
-This Project is a Mario Themed commands.Task Manager that allows you to schedules tasks to do!
+This Project is a Mario Themed Task Manager that allows you to schedules tasks to do!
 
 ___
-### Features of Luigi commands.Task Manager
+### Features of Luigi Task Manager
 
 ![](https://media.giphy.com/media/tmMhRhvcytb53xPYXt/giphy.gif)
 
@@ -41,11 +41,11 @@ command does as well as examples of how to use it:
 
 Users can add 3 Types of Tasks to the List.
 
-- commands.ToDo
+- ToDo
 
-- commands.Deadline
+- Deadline
 
-- commands.Event
+- Event
 
  # **Command Input**
 
@@ -69,9 +69,9 @@ Users can add 3 Types of Tasks to the List.
   Now you have 1 task in your list
   ```
   
-  - **commands.Deadline:** deadline \<detail of task\> /by \<date & time\> *OR* DL \<detail of task\> /by \<date & time\>
+  - **Deadline:** deadline \<detail of task\> /by \<date & time\> *OR* DL \<detail of task\> /by \<date & time\>
   
-  Adds a commands.Deadline task that requires the details of the task and the date by which it needs to be completedby.
+  Adds a Deadline task that requires the details of the task and the date by which it needs to be completedby.
   
   *Examples of input:*
   
@@ -89,9 +89,9 @@ Users can add 3 Types of Tasks to the List.
   Now you have 2 tasks in your list
   ```
   
-  - **commands.Event:** event \<detail of task\> /at \<date & time\> *OR* E \<detail of task\> /at \<date & time\>
+  - **cEvent:** event \<detail of task\> /at \<date & time\> *OR* E \<detail of task\> /at \<date & time\>
   
-  Adds a commands.Event task that requires the details of the task and the date of when the event starts.
+  Adds a Event task that requires the details of the task and the date of when the event starts.
   
   *Examples of input:*
   
@@ -254,8 +254,8 @@ Users can add 3 Types of Tasks to the List.
   
   *OR* R \<number of the task in the list to change\> /to \<date to change to\>
   
-  Will change the date and time of commands.Event and commands.Deadline tasks to the date specified vased on the number order in the list.
-  An error will show if user tries to reschedule a Todo commands.Task.
+  Will change the date and time of Event and Deadline tasks to the date specified vased on the number order in the list.
+  An error will show if user tries to reschedule a Todo Task.
   
   *Example of your list:*
   
