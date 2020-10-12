@@ -195,7 +195,7 @@ delete INDEX
 delete all
 
 // delete all tasks that are marked as done
-delete all done
+delete done
 ```
 
 Example usage:
