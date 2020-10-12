@@ -12,31 +12,34 @@ import java.util.Scanner;
  */
 public class Storage {
     private String filePath;
+    private String DEFAULT_FILE_PATH = "data/tasks.txt";
+    private String directoryPath;
     private File data;
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
-
+    
     /**
-     * Storage constructor
+     * Constructs a storage object.
      *
-     * @param filePath Filepath of .txt file to save tasks in
+     * @param filePath The file path.
+     * @param directoryPath The directory path.
      */
-    public Storage(String filePath) {
+    public Storage(String filePath, String directoryPath) {
         try {
-            File data = new File(filePath);
-            if (!data.exists()) {
-                File folder = new File("src");
-                //data.mkdir(); // create a folder in your current work space
-                File file = new File(folder, "data.txt"); // put the file inside the folder
-                file.createNewFile(); // create the file
-                this.filePath = file.getPath();
-            } else {
-                this.filePath = filePath;
+            File directory = new File(directoryPath);
+            if (!directory.exists()) {
+                directory.mkdir();
             }
+            File data = new File(DEFAULT_FILE_PATH);
+            data.createNewFile();
+            this.data = data;
+            this.filePath = DEFAULT_FILE_PATH;
+            this.directoryPath = directoryPath;
+            assert directory.exists() : "Failed to create the directory";
+            
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
-
 
     /**
      * Loads saved tasks into list for use

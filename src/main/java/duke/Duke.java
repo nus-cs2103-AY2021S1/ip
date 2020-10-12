@@ -14,7 +14,7 @@ public class Duke {
      * @param
      */
     public Duke() {
-        storage = new Storage("src/main/data.txt");
+        storage = new Storage("src/main/data.txt", "data");
         tasks = new TaskList(storage.getTasks());
         ui = new Ui();
     }

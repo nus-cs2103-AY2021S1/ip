@@ -1,1 +1,3 @@
 [T][✘] read book
+[T][✘] read goou
+[T][✘] laundry
