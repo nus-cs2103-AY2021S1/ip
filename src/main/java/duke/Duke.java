@@ -56,10 +56,10 @@ public class Duke {
      */
     public String welcomeMessage() {
         return "Hello, I'm DukeQ:) \n" + "I am very happy to serve you! \n"
-                + "The valid command formats are as follows and the case is sensitive. \n"
+                + "The valid command formats are as follows and the case is non-sensitive. \n"
                 + "\n"
                 + "todo then your instructions e.g. todo read book\n"
-                + "deadline then your instructions e.g. deadline by 2020-09-01\n"
+                + "deadline then your instructions e.g. deadline return book /by 2019-10-15\n"
                 + "type 'event' followed by the description,\n"
                 + "if '/at', the time should be like 2020-09-01\n"
                 + "if '/by', the due date should be like 2020-09-01 \n"

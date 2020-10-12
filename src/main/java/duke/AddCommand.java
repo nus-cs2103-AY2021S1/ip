@@ -44,6 +44,8 @@ public class AddCommand extends Command {
         case ADD_EVENT:
             if (input.length() < 7) {
                 throw new DukeException("Event can't be empty :(");
+            } else if (!input.contains(" /at ")) {
+                throw new DukeException(("The format of event command is: event project meeting /at 2019-10-15"));
             } else {
                 String[] split = input.substring(6).split(" /at ");
                 String eventDesc = split[0];
@@ -54,6 +56,8 @@ public class AddCommand extends Command {
         case ADD_DEADLINE:
             if (input.length() < 10) {
                 throw new DukeException("Deadline can't be empty :(");
+            } else if (!input.contains(" /by ")) {
+                throw new DukeException("The format of deadline command is: deadline return book /by 2019-10-15");
             } else {
                 String[] split = input.substring(9).split(" /by ");
                 String deadlineDesc = split[0];

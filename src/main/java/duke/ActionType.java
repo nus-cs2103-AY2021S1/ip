@@ -5,6 +5,5 @@ public enum ActionType {
     DELETE,
     ADD_TODO,
     ADD_DEADLINE,
-    ADD_EVENT,
-    FIND
+    ADD_EVENT
 }
