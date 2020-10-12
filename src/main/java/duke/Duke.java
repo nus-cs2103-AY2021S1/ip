@@ -3,6 +3,7 @@ package duke;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import duke.parser.DukeParser;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
@@ -28,7 +29,7 @@ public class Duke extends Application {
     private Image user = new Image(this.getClass().getResourceAsStream("/images/stark.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/jarvis.png"));
     private Storage storage;
-    private Parser parser;
+    private DukeParser parser;
 
 
     /**
@@ -37,7 +38,7 @@ public class Duke extends Application {
      */
     public Duke() {
         storage = new Storage("src/main/data/", "src/main/data/data.txt");
-        parser = new Parser(storage.getData());
+        parser = new DukeParser(storage.getData());
     }
 
     /**
@@ -74,9 +75,9 @@ public class Duke extends Application {
         String outputMessage;
         try {
             outputMessage = parser.parse(input);
+            ArrayList<String> finalLines = parser.finalizedLines();
+            storage.saveData(finalLines);
             if (!parser.shouldContinueDuke()) { //Checks if a bye input has been parsed
-                ArrayList<String> finalLines = parser.finalizedLines();
-                storage.saveData(finalLines);
                 setTimeout(() -> Platform.exit(), 1500);
             }
         } catch (DukeException e) {

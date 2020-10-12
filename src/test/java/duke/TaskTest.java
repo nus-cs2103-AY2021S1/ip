@@ -1,5 +1,7 @@
 package duke;
 
+import duke.task.Deadline;
+import duke.task.Todo;
 import org.junit.jupiter.api.Test;
 
 public class TaskTest {

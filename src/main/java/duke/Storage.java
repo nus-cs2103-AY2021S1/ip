@@ -1,5 +1,7 @@
 package duke;
 
+import duke.parser.DukeParser;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -42,7 +44,7 @@ public class Storage {
      * <p>
      * It is important to know that the arrayList is not updated throughout the use of duke.Duke. The goal of this class is
      * to only process the initial data.txt file upon loading and saving a final updated copy of the txt file which has
-     * to be provided. Updates occur in the Parser{@link Parser} class.
+     * to be provided. Updates occur in the Parser{@link DukeParser} class.
      *
      * @throws IOException An exception is thrown as the file and directory paths specified might be invalid or cannot
      * be found. In this case, the exception can be ignored as the method creates the directories as needed.

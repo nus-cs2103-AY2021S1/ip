@@ -1,5 +1,7 @@
 package duke;
 
+import duke.task.Task;
+
 import java.util.ArrayList;
 
 /**
@@ -154,7 +156,7 @@ public class Ui {
      * @param numberOfItems the current number of tasks.
      * @return the message representing the added task
      */
-    public static String addedTask(Task task, int numberOfItems) {
+    public static String addedTask(String task, int numberOfItems) {
         String message = "";
         if (numberOfItems < 100) {
             message = message + divider + "Got it, I've added this task:\n";
