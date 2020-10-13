@@ -48,7 +48,7 @@ The ***Component Overview Diagram*** above shows the high-level design of the Ap
 * At app launch: Initialize the components in the correct sequence and connect them up with each other.
 * At shut down: Shut down the components and invoke cleanup methods where necessary.
 
-[**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
+[**`Commons`**](#3.2.-common-classes) represents a collection of classes used by multiple other components.
 
 
 The rest of the App consists of four components:
@@ -77,7 +77,7 @@ The *Sequence Diagram* below shows how the components interact with each other f
 
 The sections below give more details of each component.
 
-### 3.2 Common classes
+### 3.2. Common classes
 
 Common classes are classes used by multiple components. Common classes include:
 
@@ -94,43 +94,46 @@ components are using for their index. Can be converted to an integer (int).
 
 **API** : [`Ui.java`](https://github.com/AY2021S1-CS2103T-T09-4/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
-The UI consists of a `MainWindow` that is made up of parts (`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter`).
-All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
-
-The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder.
-For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
-
 The `UI` component:
 
 * Executes user commands using the `Logic` component.
 * Listens for changes to `Model` data so that the UI can be updated with the modified data.
 
 
-MainWindow.fxml - Houses the rest of the fxml (commandBox,HelpWindow, etc) in the VBox
-                - also contains the code for the actual menu bar
+The UI consists of a `MainWindow` that is made up of parts (`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter`).
+All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
-CommandBox.fxml - Stackpane where the user writes input
+The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder.
+For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
-EntryListPanel.fxml -  Houses a ListView<Entry>
 
-EntryListCard.fxml- (not housed by Mainwindow.fxml) contains the data from each entry
+`MainWindow.fxml` - Houses the rest of the fxml (commandBox,HelpWindow, etc) in the VBox.
+Contains the code for the actual menu bar
 
-HelpWindow.fxml - Only displays label and copy url button
+`CommandBox.fxml` - Stackpane where the user writes input
 
-ResultDisplay.fxml - Prints results to user 
+`EntryListPanel.fxml` -  Houses a ListView<Entry>
 
-StatusBarFooter - returns the path of the file retrieved
+`EntryListCard.fxml`- (not housed by Mainwindow.fxml) contains the data from each entry
+
+`HelpWindow.fxml` - Only displays label and copy url button
+
+`ResultDisplay.fxml` - Prints results to user 
+
+`StatusBarFooter` - returns the path of the file retrieved
+
 
 ### 3.4 Logic component
 
 ![Structure of the Logic Component](images/LogicClassDiagram.png)
+<p align="center"> Figure 5. Logic component class relationship diagram
 
 **API** :
 [`Logic.java`](https://github.com/AY2021S1-CS2103T-T09-4/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 1. `Logic` uses the `AddressBookParser` class to parse the user command.
 1. This results in a `Command` object which is executed by the `LogicManager`.
-1. The command execution can affect the `Model` (e.g. adding a person).
+1. The command execution can affect the `Model` (e.g. adding an entry).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 1. In addition, the `CommandResult` object can also instruct the `Ui` to perform certain actions, such as displaying help to the user.
 
