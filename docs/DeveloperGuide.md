@@ -1,43 +1,47 @@
-<centre> Green Tea Developer Guide (v1.2) </center>
+Green Tea Developer Guide (v1.2)
 ---------------------------------------------------------
 
 ### Table of Contents
 
 
 ------------------------------------------------------------------------------
-## Introduction
+## 1. Introduction
 
-This document details the architecture and design for the flashcard application, Green Tea.
+### 1.1 Purpose
+This document details the architecture, design decisions and implementations for the flashcard application, Green Tea.
 
+### 1.2 Audience
 The intended audience of this document is the developers and testers of Green Tea.
 
 -------------------------------------------------------------------
-### Definitions
+### 1.3 Glossary
 
-|Word    | Meaning   |
+|        |      |
 |--------|------|
 |Deck    | A collection of entries   |
 |Entry   | A word and its translation|
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Setting up, getting started**
+## 2. **Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
-
-## **Design**
-
-### Architecture
+## 3. **Design**
 
 This section details the various components of the application. It will cover the internal structure of each component 
 and how the components will work together with one another.
 
-<p align="center"><img src="images/ArchitectureDiagram.png" width="450" />
-<p align="center">Figure 1. Architecture of Green Tea application</p>
+### 3.1 Component Overview
 
-The ***Architecture Diagram*** above shows the high-level design of the App. Given below is a quick overview of each component.
+The components of the app are Main, Commons, UI, Logic, Model and Storage.
+
+<p align="center"><img src="images/ArchitectureDiagram.png" width="450" />
+<p align="center">Figure 1.Overview of components and their relationships </p>
+
+
+The ***Component Overview Diagram*** above shows the high-level design of the App. Given below is a quick overview of each component.
 
 **`Main`** has two classes called [`Main`](https://github.com/AY2021S1-CS2103T-T09-4/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2021S1-CS2103T-T09-4/tp/blob/master/src/main/java/seedu/address/MainApp.java). They are responsible for:
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
@@ -69,10 +73,12 @@ The *Sequence Diagram* below shows how the components interact with each other f
 
 The sections below give more details of each component.
 
-### UI component
+### 3.2 UI component
 
-![Structure of the UI Component](images/UiClassDiagram.png)
+The UI Component is comprised of
 
+<p align="center">![Structure of the UI Component](images/UiClassDiagram.png)
+<p align="center"> Figure 4. UI component class relationship diagram </p>
 **API** :
 [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
@@ -101,7 +107,7 @@ ResultDisplay.fxml - Prints results to user
 
 StatusBarFooter - returns the path of the file retrieved
 
-### Logic component
+### 3.3 Logic component
 
 ![Structure of the Logic Component](images/LogicClassDiagram.png)
 
@@ -121,7 +127,7 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
-### Model component
+### 3.4 Model component
 
 ![Structure of the Model Component](images/ModelClassDiagram.png)
 
@@ -141,7 +147,7 @@ The `Model`,
 </div>
 
 
-### Storage component
+### 3.5 Storage component
 
 ![Structure of the Storage Component](images/StorageClassDiagram.png)
 
@@ -151,108 +157,33 @@ The `Storage` component,
 * can save `UserPref` objects in json format and read it back.
 * can save the address book data in json format and read it back.
 
-### Common classes
+### 3.6 Common classes
 
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Implementation**
+## 4. **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### 4.1 Deck System
 
-#### Proposed Implementation
-
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
-
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-![UndoRedoState0](images/UndoRedoState0.png)
-
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-![UndoRedoState1](images/UndoRedoState1.png)
-
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-![UndoRedoState2](images/UndoRedoState2.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</div>
-
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-![UndoRedoState3](images/UndoRedoState3.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</div>
-
-The following sequence diagram shows how the undo operation works:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-![CommitActivityDiagram](images/CommitActivityDiagram.png)
-
-#### Design consideration:
-
-##### Aspect: How undo & redo executes
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-
-### \[Proposed\] Deck System
 This feature would allow the user to create multiple lists of entries rather than having 
-all translations together in the same list. This means that the user could have different decks
+all entries together in the same list. The user could have different decks
 for different languages or even multiple decks for the same languages. 
 
-e.g. 
-1. Deck 1: Japanese
-2. Deck 2: Spanish Food
-3. Deck 3: Spanish Animals
+E.g. 
+* Deck 1: Japanese
+* Deck 2: Spanish_Food
+* Deck 3: Spanish_Animals
 
-_{Feature will be added in v1.3}_
+#### Design consideration:
+##### Aspect: Reason behind a deck system?
+
+* Alternative 1 (current choice):
+
+### Select Deck
 
 ### \[Proposed\] Flashcard System
 
@@ -270,18 +201,18 @@ _{Feature will be added in v1.3}_
 
 ### \[Proposed\] Data Analysis
 Some of the proposed parameters tracked by GreenTea include:
-1. Number of correctly answered flashcards
-2. Previous scores
-3. Average time taken in total
-4. Time of quiz
+* Number of correctly answered flashcards
+* Previous scores
+* Average time taken in total
+* Time of quiz
 
 From these data, GreenTea would be able to derive some meaningful analytics to 
 display to the user. These include:
-1. Progression since last attempt
-2. Length of time between quizzes
-3. Most forgotten phrase/translation
-4. Language mastery
-5. Progress in each deck
+* Progression since last attempt
+* Length of time between quizzes
+* Most forgotten phrase/translation
+* Language mastery
+* Progress in each deck
 
 _{Feature will be added in v1.3}_
 
