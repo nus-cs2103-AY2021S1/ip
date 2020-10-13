@@ -6,11 +6,11 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root fx:id="hBox" alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="380.0" opacity="0.95" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root fx:id="hBox" alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="380.0" opacity="0.95" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
       <HBox fx:id="dialogContainer" alignment="CENTER_LEFT" prefHeight="95.0" prefWidth="273.0">
          <children>
-              <Label fx:id="dialog" lineSpacing="1.0" minHeight="-Infinity" style="-fx-background-color: #7bc6cc; -fx-border-radius: 10 10 10 10; -fx-background-radius: 10 10 10 10;" text="Label" textFill="#5490b9" wrapText="true">
+              <Label fx:id="dialog" lineSpacing="1.0" minHeight="-Infinity" style="-fx-background-color: #7bc6cc; -fx-border-radius: 10 10 10 10; -fx-background-radius: 10 10 10 10;" text="Label" textFill="#395d75" wrapText="true">
                   <padding>
                       <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                   </padding>

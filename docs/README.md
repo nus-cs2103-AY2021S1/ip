@@ -131,7 +131,7 @@ Now you have 4 tasks in the list.
 ### 7. `find` - Find a task
 
 Find a task according to a search keyword. The find function supports fuzzy search (i.e. you can make
-some typos in your search phrase and the app will make a best effort to find a match)
+some typos in your search phrase and the app will make a best effort to find a match).
 
 Format: `find SEARCH_KEYWORD`
 

@@ -28,6 +28,7 @@ public class AlertBox implements PopUpBox {
 
         Label alertContent = new Label();
         alertContent.setText(message);
+        alertContent.setWrapText(true);
         Button closeButton = new Button("Close");
         closeButton.setOnAction(e -> window.close());
         closeButton.setDefaultButton(true);
