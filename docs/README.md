@@ -153,6 +153,18 @@ Expected outcome:
        
    Example of usage: 
    `help`
+   
+   Expected outcome:
+          
+          _____________________________________________
+          1. todo + task name (eg: todo run)
+          2. deadline + task name + \by + YYYY-MM-DD  (eg: deadline ip \by 2002-09-18)
+          3. event + task name + \at + YYYY-MM-DD  (eg: event ip \at 2002-09-18)
+          4. done + task index (eg: done 1)
+          5. delete + task index (eg: delete 1)
+          6. find + key word (eg: find ip)
+          7. bye 
+           _____________________________________________ 
   
    
    
