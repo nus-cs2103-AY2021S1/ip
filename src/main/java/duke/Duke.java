@@ -13,6 +13,9 @@ public class Duke {
     private TaskList tasks;
 
 
+    /**
+     * Constructs a new Duke object.
+     */
     public Duke() {
 
         storage = new Storage("duke.txt");
@@ -33,12 +36,12 @@ public class Duke {
      */
     public String getResponse(String input) {
         String output;
-        try{
+        try {
             Command c = Parser.parse(input);
-            assert(c!=null);
+            assert(c != null);
             assert(tasks != null);
             assert(storage != null);
-            output = c.execute(tasks,storage);
+            output = c.execute(tasks, storage);
         } catch (DukeException e) {
             output = e.toString();
         }

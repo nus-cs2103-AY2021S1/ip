@@ -1,12 +1,11 @@
 package duke.task;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-import static org.junit.jupiter.api.Assertions.*;
-
+import org.junit.jupiter.api.Test;
 
 class DeadlineTest {
 
@@ -25,13 +24,13 @@ class DeadlineTest {
     @Test
     void toFileString() {
         try {
-            assertEquals("D\n" +
-                            "F\n" +
-                            "do\n" +
-                            "Sep 10 2012 07:00 PM\n",
+            assertEquals("D\n"
+                            + "F\n"
+                            + "do\n"
+                            + "Sep 10 2012 07:00 PM\n",
                     new Deadline("do",
-                            new SimpleDateFormat("dd/MM/yyyy HHmm").parse("10/09/2012 1900")).
-                            toFileString());
+                            new SimpleDateFormat("dd/MM/yyyy HHmm").parse("10/09/2012 1900"))
+                            .toFileString());
         } catch (ParseException e) {
             e.printStackTrace();
         }
