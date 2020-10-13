@@ -1,15 +1,18 @@
 package willy.task;
 
-import org.junit.jupiter.api.Test;
-import willy.store.TaskStore;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 
+import org.junit.jupiter.api.Test;
+
+import willy.store.TaskStore;
+
 class TaskListTest {
-    TaskStore store = new TaskStore();
-    ArrayList<Task> listOfTask;
-    TaskList list;
+    private TaskStore store = new TaskStore();
+    private ArrayList<Task> listOfTask;
+    private TaskList list;
 
     @Test
     // Check: After adding one task, the number of tasks increase by one.
@@ -20,7 +23,7 @@ class TaskListTest {
         String activity = "read book";
         TodoTask newTask = new TodoTask(activity, TaskSymbol.TODO);
         list.addToList(newTask);
-        assertEquals(1,list.getList().size(), "Number of Lists after adding a task");
+        assertEquals(1, list.getList().size(), "Number of Lists after adding a task");
     }
 
     @Test
