@@ -142,7 +142,7 @@ public class TaskList {
     private boolean isFuzzyMatched(String keyword, String taskName) {
         int lKeyword = keyword.length();
         int lTask = taskName.length();
-        final int fuzzyLimit = Math.max(1, lKeyword / 5);
+        final int fuzzyLimit = lKeyword / 5;
 
         // if keyword is longer or is empty, no match can be found
         if (lKeyword > lTask || lKeyword == 0) {
