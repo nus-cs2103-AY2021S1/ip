@@ -1,23 +1,12 @@
 package duke;
 
 import java.util.List;
-import java.util.Scanner;
 
 
 public class Ui {
 
     public Ui() {}
 
-    /**
-     * Reads the user's command and returns the command as a String
-     *
-     * @return String of one line command
-     */
-    public String readCommand() {
-        Scanner sc = new Scanner(System.in);
-        String input = sc.nextLine();
-        return input;
-    }
     /**
      * Returns a String which indicates welcome from duke when the app is launched
      *
@@ -37,7 +26,7 @@ public class Ui {
      * @param task The newly added task
      * @return String of information about the newly added task
      */
-    public String showAdd(Task task, TaskList tasks) {
+    public String showAdd(Task task, TaskList tasks) throws DukeException {
 
         String dukeOutput = "_____________________________________________\n"
                 + "     Got it. I've added this task:\n"
@@ -67,7 +56,7 @@ public class Ui {
      * @param index The position of the task which is going to be deleted in the TaskList
      * @return String of information about the deleted task
      */
-    public String showDelete(int index, TaskList tasks) {
+    public String showDelete(int index, TaskList tasks) throws DukeException {
         Task removed = tasks.get(index);
         tasks.delete(index);
         String dukeOutput = "_____________________________________________\n"
@@ -84,7 +73,7 @@ public class Ui {
      *
      * @return String of current tasks
      */
-    public String showList(TaskList tasks) {
+    public String showList(TaskList tasks) throws DukeException {
         String dukeOutput = "_____________________________________________\n"
                 + "Here are the tasks in your list:\n";
 
@@ -102,7 +91,7 @@ public class Ui {
      *
      * @return String;
      */
-    public String showFind(List<Task> matchedTasks) {
+    public String showFind(List<Task> matchedTasks) throws DukeException {
         String dukeOutput = "_____________________________________________\n";
         if (matchedTasks.size() == 0) {
             dukeOutput = dukeOutput + "Sorry, Duke can not find a matching task.\n";
@@ -129,12 +118,16 @@ public class Ui {
         System.out.println(dukeOutput);
         return dukeOutput;
     }
-
+    /**
+     * Returns a String of reminder of task commands
+     *
+     * @return String;
+     */
     public String showHelp() {
         String dukeOutput = "_____________________________________________\n"
                 + "1. todo + task name (eg: todo run)\n"
-                + "2. deadline + task name + \by + YYYY-MM-DD  (eg: deadline ip \by 202-09-18)\n"
-                + "3. event + task name + \\at + YYYY-MM-DD  (eg: deadline ip \\at 202-09-18)\n"
+                + "2. deadline + task name + \by + YYYY-MM-DD  (eg: deadline ip \\by 2002-09-18)\n"
+                + "3. event + task name + \\at + YYYY-MM-DD  (eg: event ip \\at 2002-09-18)\n"
                 + "4. done + task index (eg: done 1)\n"
                 + "5. delete + task index (eg: delete 1)\n"
                 + "6. find + key word (eg: find ip)\n"

@@ -1,7 +1,7 @@
 package duke;
 
 /**
- * This class stores most of the possible errors in Alison.
+ * This class stores most of the possible errors.
  */
 public class DukeException extends Exception {
 
@@ -30,15 +30,15 @@ public class DukeException extends Exception {
         return new DukeException("OOPS!!! You entered an invalid index for this operation.");
     }
 
-    public static DukeException dateException() {
-        return new DukeException("OOPS! You must provide a date "
+    public static DukeException invalidDateException() {
+        return new DukeException("OOPS! You must provide a valid date "
                 + "after '/by' or '/at' for a deadline or event task. \n"
                 + "(i.e. deadline ip/by 2020-08-19)");
     }
 
 
-    public static DukeException deadlineParseException() {
-        return new DukeException("Sorry, try using 'yyyy-mm-dd' after '/by or /at' (e.g. 2020-01-01).\n");
+    public static DukeException noReservedWordException() {
+        return new DukeException("Sorry, please do not use '@' because it is reserved for other usage.\n");
     }
 
 }

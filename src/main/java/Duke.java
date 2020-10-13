@@ -1,14 +1,10 @@
 import duke.DukeException;
-import duke.Storage;
 import duke.Parser;
+import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
-
 import java.io.IOException;
-
-
-
 
 public class Duke {
     protected Storage storage;

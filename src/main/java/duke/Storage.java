@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -49,13 +50,13 @@ public class Storage {
                         String[] words = previouTaskString.split(" @ ", 0);
                         Task previouTask = null;
                         if (words[0].equals("D")) {
-                            previouTask = new Deadline(words[2], words[3]);
+                            previouTask = new Deadline(words[2], LocalDate.parse(words[3]));
                             tasks.add(previouTask);
                         } else if (words[0].equals("T")) {
                             previouTask = new ToDo(words[2]);
                             tasks.add(previouTask);
                         } else if (words[0].equals("E")) {
-                            previouTask = new Event(words[2], words[3]);
+                            previouTask = new Event(words[2], LocalDate.parse(words[3]));
                             tasks.add(previouTask);
                         }
                         if (words[1].equals("1")) {

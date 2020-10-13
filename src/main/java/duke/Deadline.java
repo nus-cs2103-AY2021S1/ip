@@ -5,16 +5,16 @@ import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
 
-    private String date;
+    private LocalDate date;
 
     /**
      * Returns a deadline. This is a constructor of deadline.
      *
      * @param description describes the deadline task
-     * @param date is the deadline of the task
+     * @param date        is the deadline of the task
      * @return a deadline task
      */
-    public Deadline(String description, String date) {
+    public Deadline(String description, LocalDate date) {
         super(description);
         this.date = date;
     }
@@ -38,7 +38,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        String result = "[D]" + super.toString() + " (by: " + this.date + ")";
-        return result;
+        return "[D]" + super.toString() + " (by: "
+                + date.format(DateTimeFormatter.ofPattern("dd MMM yyyy")) + ")";
     }
 }

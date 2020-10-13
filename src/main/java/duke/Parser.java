@@ -1,14 +1,11 @@
 package duke;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
 
 public class Parser {
     protected boolean isEnd;
     protected TaskList tasks;
     private UserInput currentType = null;
-    private Ui userInteract;
+    private Ui userInteract = new Ui();
 
     /**
      * Returns a parser which interprets the user's command
@@ -37,208 +34,61 @@ public class Parser {
         HELP
     }
 
-    /**
-     * Returns a string array that splits the user's command by ' '.
-     * Assigns the user's type of command corresponding to the enum type.
-     *
-     * @param userCommand User's command in a line scanned by Ui.
-     * @return A string array that splits the user's command by ' '.
-     */
-
-    public String[] getDukeType(String userCommand) {
-        String[] words = userCommand.split(" ");
-        if (words[0].equals("deadline")) {
-            this.currentType = UserInput.DEADLINE;
-        } else if (words[0].equals("todo")) {
-            this.currentType = UserInput.TODO;
-        } else if (words[0].equals("event")) {
-            this.currentType = UserInput.EVENT;
-        } else if (words[0].equals("done")) {
-            this.currentType = UserInput.DONE;
-        } else if (words[0].equals("delete")) {
-            this.currentType = UserInput.DELETE;
-        } else if (words[0].equals("bye")) {
-            this.currentType = UserInput.BYE;
-        } else if (words[0].equals("list")) {
-            this.currentType = UserInput.LIST;
-        } else if (words[0].equals("find")) {
-            this.currentType = UserInput.FIND;
-        } else if (words[0].equals("help")) {
-            this.currentType = UserInput.HELP;
-        }
-        return words;
-    }
-
-    public boolean getIsEnd() {
-        return this.isEnd;
-    }
 
     /**
-     * Returns a string of response from duke
-     * The type of response are fixed in Ui
+     * Returns a string of response from duke based on user's input
      *
      * @param userCommand User's command scanned by Ui.
      * @return A string of response from duke.
      * @throws DukeException Exceptions occur when the response is not ideal.
      */
 
-    public String parse(String userCommand) throws DukeException {
+    public String parse (String userCommand) throws DukeException {
+        String[] words = userCommand.split(" ");
         String dukeOutput = "";
-        String[] words = this.getDukeType(userCommand);
-        assert this.currentType != null : "This command is not supported by Duke";
-
-        switch (this.currentType) {
-        case DEADLINE:
-            dukeOutput = this.handleDeadlineAndEvent(UserInput.DEADLINE, words);
-            break;
-
-        case TODO:
-            if (words.length == 1) {
-                throw DukeException.emptyDescriptionException();
-            }
-            String todoTask = "";
-            for (int i = 1; i < words.length; i++) {
-                if (i != words.length - 1) {
-                    todoTask = todoTask + words[i] + " ";
-                } else {
-                    todoTask = todoTask + words[i];
-                }
-            }
-            ToDo newToDo = new ToDo(todoTask);
-            this.tasks.add(newToDo);
-            dukeOutput = this.userInteract.showAdd(newToDo, this.tasks);
-
-            break;
-
-        case EVENT:
-            dukeOutput = this.handleDeadlineAndEvent(UserInput.EVENT, words);
-            break;
-
-        case FIND:
-            String keyWord = words[1];
-            List<Task> matchedTasks = this.tasks.findMatchingTask(keyWord);
-            dukeOutput = this.userInteract.showFind(matchedTasks);
-            break;
-
-        case DONE:
-            if (words.length == 1) {
-                throw DukeException.operationException();
-            }
-            int number = Integer.parseInt(words[1]) - 1;
-            if (number + 1 >= tasks.size()) {
-                throw DukeException.invalidIndexException();
-            } else {
-                dukeOutput = this.userInteract.showDone(number, this.tasks);
-            }
-            break;
-
-        case DELETE:
-            if (words.length == 1) {
-                throw DukeException.operationException();
-            }
-            int index = Integer.parseInt(words[1]) - 1;
-            if (index + 1 >= tasks.size()) {
-                throw DukeException.invalidIndexException();
-            } else {
-                dukeOutput = this.userInteract.showDelete(index, this.tasks);
-            }
-            break;
-
-        case LIST:
-            dukeOutput = this.userInteract.showList(this.tasks);
-            break;
-
-        case BYE:
-            this.isEnd = true;
-            dukeOutput = this.userInteract.showBye();
-            break;
-
-        case HELP:
-            dukeOutput = this.userInteract.showHelp();
-            break;
-
-        default:
-            throw DukeException.noResponseException();
-        }
-        return dukeOutput;
-    }
-    /**
-     * Handles event and deadline tasks which are fairly similar and return duke responses
-     *
-     * @param task is either deadline or event UserInput
-     * @param words is a string of user's command
-     *
-     * @return String which is duke response for deadline or event command
-     */
-    public String handleDeadlineAndEvent (UserInput task, String[] words) throws DukeException {
-        String dukeOutput = "";
-        if (words.length == 1) {
-            throw DukeException.emptyDescriptionException();
-        }
-        String taskName = "";
-        String taskDate = "";
-        int connectPosition = 0;
-        if (task == UserInput.DEADLINE ) {
-            for (int i = 1; i < words.length; i++) {
-                if (!words[i].equals("/by")) {
-                    taskName = taskName + words[i] + " ";
-                } else {
-                    connectPosition = i;
-                    break;
-                }
-            }
+        if (userCommand.contains("@")) {
+            throw DukeException.noReservedWordException();
         } else {
-            for (int i = 1; i < words.length; i++) {
-                if (!words[i].equals("/at")) {
-                    taskName = taskName + words[i] + " ";
-                } else {
-                    connectPosition = i;
-                    break;
-                }
-            }
-        }
-
-        if (connectPosition != 0) {
-            for (int k = connectPosition + 1; k < words.length; k++) {
-                if (k != words.length - 1) {
-                    taskDate = taskDate + words[k] + " ";
-                } else {
-                    taskDate = taskDate + words[k];
-                }
-            }
-        } else {
-            throw DukeException.missingConnectorException();
-        }
-
-        taskName = taskName.trim();
-
-        if (taskDate != "") {
-            taskDate = this.parseDate(taskDate);
-            if (task == UserInput.DEADLINE) {
-                Deadline newDeadline = new Deadline(taskName, taskDate);
-                this.tasks.add(newDeadline);
-                dukeOutput = this.userInteract.showAdd(newDeadline, this.tasks);
+            String key = words[0].toLowerCase();
+            if (key.equals("deadline")) {
+                this.currentType = UserInput.DEADLINE;
+                dukeOutput = new DeadlineCommand(words, tasks).handleDeadline();
+            } else if (key.equals("todo")) {
+                this.currentType = UserInput.TODO;
+                dukeOutput = new TodoCommand(words, tasks).handleToDO();
+            } else if (key.equals("event")) {
+                this.currentType = UserInput.EVENT;
+                dukeOutput = new EventCommand(words, tasks).handleEvent();
+            } else if (key.equals("done")) {
+                this.currentType = UserInput.DONE;
+                dukeOutput = new DoneCommand(words, tasks).handleDone();
+            } else if (key.equals("delete")) {
+                this.currentType = UserInput.DELETE;
+                dukeOutput = new DeleteCommand(words, tasks).handleDelete();
+            } else if (key.equals("bye")) {
+                this.currentType = UserInput.BYE;
+                this.isEnd = true;
+                dukeOutput = this.userInteract.showBye();
+            } else if (key.equals("list")) {
+                this.currentType = UserInput.LIST;
+                dukeOutput = this.userInteract.showList(tasks);
+            } else if (key.equals("find")) {
+                this.currentType = UserInput.FIND;
+                dukeOutput = new FindCommand(words[1], tasks).handleFind();
+            } else if (key.equals("help")) {
+                this.currentType = UserInput.HELP;
+                dukeOutput = this.userInteract.showHelp();
             } else {
-                Event newEvent = new Event(taskName, taskDate);
-                this.tasks.add(newEvent);
-                dukeOutput = this.userInteract.showAdd(newEvent, this.tasks);
+                throw DukeException.noResponseException();
             }
-        } else {
-            throw DukeException.dateException();
         }
         return dukeOutput;
     }
 
-    /**
-     * Changes date into a string in the format of MMM dd yyyy.
-     *
-     */
-    public String parseDate(String date) throws DukeException {
-        try {
-            LocalDate ddl = LocalDate.parse(date);
-            return ddl.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-        } catch (Exception exception) {
-            throw DukeException.deadlineParseException();
-        }
+    public boolean getIsEnd() {
+        return this.isEnd;
     }
+
+
+
 }
