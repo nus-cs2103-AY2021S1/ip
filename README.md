@@ -129,7 +129,11 @@ Now you have 4 tasks in the list.
 
 ### 7. `find` - Find a task
 
-Find a task according to a search keyword. The find function supports fuzzy search.
+Find a task according to a search keyword. The find function supports fuzzy search (i.e. you can make
+some typos in your search phrase and the app will make a best effort to find a match).
+
+Fuzzy match rule: there is a tolerance of one of five characters to be a typo. So all tasks that are matched
+within this tolerance level will be displayed.
 
 Format: `find SEARCH_KEYWORD`
 
@@ -137,12 +141,14 @@ Example:
 ```$xslt
 find lexture
 ```
+(Note: here `lexture` is a typo)
 
 Expected Outcome:
 ```$xslt
 Here are the matching tasks in your list:
 1. [E][✗] go for CS2103 lecture (on: Sep 15 2020)
 ```
+(Note: the app matches the word `lecture` despite of the typo made in the search phrase)
 
 ### 8. `bye` - Exit the application
 
