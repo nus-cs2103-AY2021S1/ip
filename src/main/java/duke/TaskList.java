@@ -90,6 +90,9 @@ public class TaskList implements java.io.Serializable {
             task -> task.getName().contains(text)
         ).collect(Collectors.toList());
 
-        return new ArrayList<>(matchedTasks);
+        ArrayList<Task> result = new ArrayList<>();
+        result.addAll(matchedTasks);
+
+        return result;
     }
 }

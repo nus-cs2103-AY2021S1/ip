@@ -6,8 +6,14 @@ public class FindCommand implements Command {
     private TaskList taskList;
     private String text;
 
+    /**
+     * Creates a find command for execution
+     * @param taskList
+     * @param text
+     */
     public FindCommand(TaskList taskList, String text) {
         this.taskList = taskList;
+        this.text = text;
     }
 
     /**
@@ -18,7 +24,7 @@ public class FindCommand implements Command {
         ArrayList<Task> tasks = taskList.find(text);
         String taskStrings = "";
         for (Task task : tasks) {
-            taskStrings += "\n" + task.toString();
+            taskStrings += ("\n" + task.toString());
         }
         return taskStrings;
     }
