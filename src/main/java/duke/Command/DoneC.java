@@ -32,6 +32,9 @@ public class DoneC extends Command {
             result += task.toString();
         } catch (StringIndexOutOfBoundsException e) {
             throw new DukeException("You didn't enter a task you want to mark as done!");
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("There is no task with that ID, use list to find the " +
+                    "ID of the task you want to mark as done");
         }
 
         return result;

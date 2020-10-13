@@ -28,7 +28,7 @@ public class FindC extends Command {
         try {
             String keyword = input.substring(5);
             int findCount = 0;
-            System.out.println("Here are the matching tasks in your list:");
+            result += "Here are your search results for: " + keyword + "\n";
             for (Task found: todoList.todoList) {
                 if (found.description.contains(keyword)) {
                     result += findCount + 1 + "." + found.toString() + "\n";

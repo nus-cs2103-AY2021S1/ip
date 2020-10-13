@@ -38,6 +38,7 @@ public class Storage {
         File saveFile = filepath.toFile();
         try {
             if (!saveFile.exists()) {
+                System.out.println("Save file does not exist, creating one at " + this.filepath);
                 saveFile.getParentFile().mkdirs();
             }
             FileWriter todoWriter = new FileWriter(saveFile, true);

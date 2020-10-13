@@ -6,6 +6,7 @@ import duke.task.Event;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 public class EventC extends Command {
@@ -32,6 +33,10 @@ public class EventC extends Command {
             store.write(e);
         } catch (StringIndexOutOfBoundsException | IOException e) {
             throw new DukeException("You didn't enter a date!");
+        } catch ( DateTimeParseException e) {
+            throw new DukeException("Something's wrong with the date, make sure the format's yyyy/mm/dd!");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("Make sure to enter the command as such: event {task} /at {yyyy/mm/dd}");
         }
         return result;
     }

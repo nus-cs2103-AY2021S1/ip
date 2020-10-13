@@ -1,4 +1,12 @@
 # User Guide
+Duke is a chatbot designed for your daily planning user. Given below are the instructions on how to use it!
+
+##Setting up
+After downloading the jar file, just double click on the file to open it. 
+If you see an error from opening it directly, 
+go to your terminal and open it with the following command line
+
+        java -jar {file path of the jar file}
 
 ## Features 
 
@@ -12,13 +20,16 @@ View your schedule, check what is due by a certain date, what is happening on a 
 Define a custom range of dates and view all events/deadlines within that range
 
 ## Usage
-## *Adding tasks*
+
+---
+
+## ***Adding tasks***
 ### `deadline` - Create a new deadline task
 
 
 Example of usage: 
 
-`deadline (task description) /by (date)`
+    deadline (task description) /by (date)
 
 e.g. `deadline sleep /by 2020-12-09`
 
@@ -27,6 +38,8 @@ Expected outcome:
 `Aight new task for you:
 [D][X] sleep (by: Dec 9 2020)
 Now you got 1 task(s) waiting man`
+
+---
 
 ### `event` - Schedule an event
 
@@ -43,6 +56,8 @@ Expected outcome:
 [E][X] sleep (at: Dec 9 2020)
 Now you got 1 task(s) waiting man`
 
+---
+
 ### `todo` - List all events happening on a certain date
 
 
@@ -58,9 +73,11 @@ Expected outcome:
  [T][X] sleep 
  Now you got 1 task(s) waiting man`
  
+---
+ 
  
 
-## *Manage your tasks*
+## ***Manage your tasks***
 
 
 ### `delete` - Delete a task
@@ -78,6 +95,8 @@ Expected outcome:
 [T][X] sleep
 Now you got 1 task(s) waiting man`
 
+---
+
 ### `done` - Mark a task as done
 
 
@@ -92,7 +111,9 @@ Expected outcome:
 `Gratz, you finished this dawg:
 [T][✓] sleep`
 
-## *View your tasks*
+---
+
+## ***View your tasks***
 
 ### `by` - Check what deadlines you have *by* a certain date
 
@@ -109,6 +130,8 @@ Expected outcome:
 *deadlines due before the date*
 [A total of 1 deadline(s)]`
 
+---
+
 ### `find` - Search your tasks containing a certain keyword
 
 
@@ -122,6 +145,8 @@ Expected outcome:
 
 `1. [T][X] sleep`
 
+---
+
 ### `list` - List all tasks
 
 
@@ -132,6 +157,8 @@ Example of usage:
 Expected outcome:
 
 `Here's your schedule lil dude 1. [T][X] sleep`
+
+---
 
 ### `on` - List all events happening on a certain date
 
@@ -146,6 +173,8 @@ Expected outcome:
 
 `On this day, you have: [E][X] sleep (at: Dec 9 2020)`
 
+---
+
 ### `reminder` - List all events happening on a certain date
 
 
@@ -159,7 +188,9 @@ Expected outcome:
 
 `In 100 days, you have: 1.[E][X] sleep (at: Dec 9 2020) [A total of 1 reminder(s)]`
 
-## *Other user commands*
+---
+
+## ***Other user commands***
 
 ### `bye` - Exits the program
 
