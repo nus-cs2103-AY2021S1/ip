@@ -76,6 +76,7 @@ you now have 1 task on the list
 Users will be able to delete tasks based on the index in the list.
 
 ####delete
+
 Usage
 
  `delete <task index>`
@@ -97,6 +98,7 @@ You now have 2 tasks on the list
 Users will be able to view the full list of tasks that they have added.
 
 ####list
+
 Usage and example
 
 `list`
