@@ -2,7 +2,7 @@
 
 ## Features
 
-### Feature 1 - deadline record
+## Feature 1 - deadline record
 Users can enter deadline tasks. Users need to enter task name, /by and date in the format of YYYY-MM-DD.
 
 
@@ -20,7 +20,7 @@ Expected outcome:
     Now you have 1 tasks in the list.
     _____________________________________________
 
-### Feature 2 - event record
+## Feature 2 - event record
 Users can enter event name. Users need to enter event name, /at and date in the format of YYYY-MM-DD.
 
 ### `event` - Command to record event.
@@ -38,7 +38,7 @@ Expected outcome:
     _____________________________________________
 
  
- ### Feature 3 - todo record
+ ## Feature 3 - todo record
  Users can enter todo tasks. Users only need to enter task name.
 
  
@@ -56,7 +56,7 @@ Expected outcome:
      Now you have 3 tasks in the list.
      _____________________________________________
   
-  ### Feature 4 - list
+  ## Feature 4 - list
   Users can see all tasks in his/her list.
   
   
@@ -76,7 +76,7 @@ Expected outcome:
        Now you have 3 tasks in the list.
        _____________________________________________
   
-  ### Feature 5 - delete
+  ## Feature 5 - delete
    Users can delete a task in list with the index of the task.
     
     
@@ -94,7 +94,7 @@ Expected outcome:
        Now you have 2 tasks in the list.
        _____________________________________________
    
-   ### Feature 6 - find
+   ## Feature 6 - find
    Users can use keyword to search for matching tasks in the list. The keyword can be incomplete.
 
     
@@ -112,7 +112,7 @@ Expected outcome:
        _____________________________________________    
   
    
-   ### Feature 7 - done
+   ## Feature 7 - done
    Users can mark a task as done.
       
        
@@ -129,7 +129,7 @@ Expected outcome:
        _____________________________________________  
  
 
-   ### Feature 8 - Exit the program
+   ## Feature 8 - Exit the program
    Users can exit the program and the task list will be recorded in duke.txt for future usages.
 
        
@@ -145,7 +145,7 @@ Expected outcome:
        _____________________________________________  
        
   
-   ### Feature 9 - Help
+   ## Feature 9 - Help
    Users can see the user menu.
 
        
