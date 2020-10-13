@@ -1,7 +1,7 @@
 # User Guide
 Duke is a chatbot designed for your daily planning user. Given below are the instructions on how to use it!
 
-##Setting up
+## Setting up
 After downloading the jar file, just double click on the file to open it. 
 If you see an error from opening it directly, 
 go to your terminal and open it with the following command line
@@ -9,6 +9,8 @@ go to your terminal and open it with the following command line
         java -jar {file path of the jar file}
 
 ## Features 
+
+---
 
 ### **Feature 1:** Adding Tasks
 Schedule deadlines, events and todos for you day to day activities
