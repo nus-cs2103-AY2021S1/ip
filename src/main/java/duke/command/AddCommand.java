@@ -2,7 +2,7 @@ package duke.command;
 
 import java.io.IOException;
 
-import duke.DukeException;
+import duke.exception.DukeException;
 import duke.Storage;
 import duke.Ui;
 import duke.task.Deadline;
@@ -14,10 +14,12 @@ import duke.task.Todo;
 /**
  * Represents an AddCommand that is part of the Command class, regarding adding a task.
  */
-
 public class AddCommand extends Command {
 
-
+    /**
+     * Constructor for the add command.
+     * @param command
+     */
     public AddCommand(String command) {
         super(command, false);
     }
@@ -33,24 +35,18 @@ public class AddCommand extends Command {
         try {
             String[] type = this.command.split(" ", 2);
             Task task;
+            if (type.length <= 1) {
+                throw new DukeException("☹ OOPS!!! The description of a " + type[0] + " cannot be empty.");
+            }
             if (type[0].equals("todo")) {
-                if (type.length == 1) {
-                    throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
-                }
                 task = new Todo(type[1]);
                 storage.addToFile("T | 0 | " + task.getDescription());
             } else if (type[0].equals("deadline")) {
-                if (type.length == 1) {
-                    throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
-                }
                 String second = type[1];
                 String[] secondSplit = second.split(" /by ", 2);
                 task = new Deadline(secondSplit[0], secondSplit[1]);
                 storage.addToFile("D | 0 | " + task.getDescription() + " | " + secondSplit[1]);
             } else if (type[0].equals("event")) {
-                if (type.length == 1) {
-                    throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
-                }
                 String second = type[1];
                 String[] secondSplit = second.split(" /at ", 2);
                 task = new Event(secondSplit[0], secondSplit[1]);
@@ -60,9 +56,7 @@ public class AddCommand extends Command {
             }
             list.add(task);
             ui.addedTaskMessage(task, list.size());
-        } catch (DukeException e) {
-            ui.errorEncounter(e);
-        } catch (IOException e) {
+        } catch (DukeException | IOException e) {
             ui.errorEncounter(e);
         }
     }
@@ -72,23 +66,16 @@ public class AddCommand extends Command {
         try {
             String[] type = this.command.split(" ", 2);
             Task task;
+            if (type.length <= 1) {
+                throw new DukeException("☹ OOPS!!! The description of a " + type[0] + " cannot be empty.");
+            }
             if (type[0].equals("todo")) {
-                if (type.length == 1) {
-                    throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
-                }
                 task = new Todo(type[1]);
-
             } else if (type[0].equals("deadline")) {
-                if (type.length == 1) {
-                    throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
-                }
                 String second = type[1];
                 String[] secondSplit = second.split(" /by ", 2);
                 task = new Deadline(secondSplit[0], secondSplit[1]);
             } else if (type[0].equals("event")) {
-                if (type.length == 1) {
-                    throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
-                }
                 String second = type[1];
                 String[] secondSplit = second.split(" /at ", 2);
                 task = new Event(secondSplit[0], secondSplit[1]);

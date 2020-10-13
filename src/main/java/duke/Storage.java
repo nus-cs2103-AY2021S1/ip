@@ -9,19 +9,31 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+import duke.exception.DukeDateException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
-
+/**
+ * Storage class handles data, specifically tasks that needs to be saved after the applications is finished and
+ * when the application is first launched to load the saved data.
+ */
 public class Storage {
 
     public static final String SAVED_FILE = "data/storage.txt";
     public static final String SAVED_FOLDER = "data";
     private Task task;
 
+    /**
+     * Constructor for storage class.
+     */
     public Storage() {}
+
+    /**
+     * Constructor for storage class that takes in a task
+     * @param task
+     */
     public Storage(Task task) {
         this.task = task;
     }
@@ -31,7 +43,7 @@ public class Storage {
      * @return a list of tasks having read the file from the save storage
      * @throws IOException
      */
-    public static List<Task> readFile() throws IOException {
+    public static List<Task> readFile() throws IOException, DukeDateException {
         List<Task> todoList = new ArrayList<>();
         Path path = Paths.get(SAVED_FILE);
         List<String> list = new ArrayList<>(Files.readAllLines(path));

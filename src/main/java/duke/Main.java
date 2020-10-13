@@ -14,6 +14,10 @@ public class Main extends Application {
 
     private Duke duke = new Duke();
 
+    /**
+     * Begins the launch of the BrawlyDuke application on FXML by loading all the FXML data.
+     * @param stage
+     */
     @Override
     public void start(Stage stage) {
         try {

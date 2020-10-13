@@ -14,6 +14,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
+/**
+ * Class to control the FXML.
+ * controls the text, and images that the user sees.
+ */
 public class DialogBox extends HBox {
     @FXML
     private Label dialog;

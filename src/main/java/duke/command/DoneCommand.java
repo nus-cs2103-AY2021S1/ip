@@ -2,9 +2,10 @@ package duke.command;
 
 import java.io.IOException;
 
-import duke.DukeException;
+import duke.exception.DukeException;
 import duke.Storage;
 import duke.Ui;
+import duke.exception.DukeIndexException;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -40,13 +41,20 @@ public class DoneCommand extends Command {
                 ui.doneMessage(current.getDone(), current.getDescription());
                 storage.editFile(num - 1);
             } else {
-                throw new DukeException("☹ OOPS!!! there is no such task");
+                throw new DukeException(ui.invalidIndexMessage());
             }
         } catch (DukeException | IOException e) {
             ui.errorEncounter(e);
         }
     }
 
+    /**
+     * Executes the command to complete a task from the list of tasks on FXML.
+     *
+     * @param list Tasklist containing tasks.
+     * @param ui Ui for displaying output.
+     * @param storage Storage of tasks in a txt file.
+     */
     @Override
     public String executeChat(TaskList list, Ui ui, Storage storage) {
         try {
@@ -55,7 +63,7 @@ public class DoneCommand extends Command {
                 storage.editFile(num - 1);
                 return ui.doneMessage(current.getDone(), current.getDescription(), true);
             } else {
-                throw new DukeException("☹ OOPS!!! there is no such task");
+                throw new DukeIndexException(ui.invalidIndexMessage());
             }
         } catch (DukeException | IOException e) {
             return e.getMessage();

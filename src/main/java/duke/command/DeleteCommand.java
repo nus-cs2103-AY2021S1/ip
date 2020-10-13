@@ -2,9 +2,10 @@ package duke.command;
 
 import java.io.IOException;
 
-import duke.DukeException;
+import duke.exception.DukeException;
 import duke.Storage;
 import duke.Ui;
+import duke.exception.DukeIndexException;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -16,6 +17,7 @@ import duke.task.TaskList;
 public class DeleteCommand extends Command {
     private final int num;
     private String deletedMessage = "";
+
     /**
      * The constructor for the Delete Command.
      * @param command the specific command instructions
@@ -36,7 +38,7 @@ public class DeleteCommand extends Command {
     public void execute(TaskList list, Ui ui, Storage storage) {
         try {
             if (num < 0 || num > list.size()) {
-                throw new DukeException("☹ OOPS!!! there is no such task");
+                throw new DukeIndexException(ui.invalidIndexMessage());
             } else {
                 Task deleted = list.delete(num - 1);
                 deletedMessage = deleted.toString();
@@ -50,10 +52,15 @@ public class DeleteCommand extends Command {
 
     @Override
     public String executeChat(TaskList list, Ui ui, Storage storage) {
-        if (num < 0 || num > list.size() + 1) {
-            return "☹ OOPS!!! there is no such task";
-        } else {
-            return ui.deleteMessage(deletedMessage, list.size(), true);
+        System.out.println("list size: " + list.size());
+        try {
+            if (num < 0 || num > list.size()) {
+                throw new DukeIndexException(ui.invalidIndexMessage());
+            } else {
+                return ui.deleteMessage(deletedMessage, list.size(), true);
+            }
+        } catch (DukeIndexException e) {
+            return e.getMessage();
         }
     }
 }

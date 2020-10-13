@@ -2,9 +2,13 @@ package duke;
 
 import java.io.IOException;
 import java.util.Scanner;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import duke.command.Command;
+import duke.exception.DukeDateException;
 import duke.task.TaskList;
+import javafx.application.Platform;
 
 
 /**
@@ -29,20 +33,31 @@ public class Duke {
         storage = new Storage();
         try {
             list = new TaskList(Storage.readFile());
-        } catch (IOException e) {
+        } catch (IOException | DukeDateException e) {
             System.out.println("You have no save tasks");
         }
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Function to generate a response to user input.
      */
     public String getResponse(String input) {
         Command c = Parser.parse(input);
         c.execute(list, ui, storage);
         String response = c.executeChat(list, ui, storage);
+        if(input.equals("bye")) {
+            exit();
+        }
         return response;
+    }
+
+    public static void exit() {
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                Platform.exit();
+            }
+        }, 2000);
     }
 
 
@@ -53,7 +68,6 @@ public class Duke {
     public static void main(String[] args) {
         Duke duke = new Duke();
         duke.run();
-
     }
 
     /**

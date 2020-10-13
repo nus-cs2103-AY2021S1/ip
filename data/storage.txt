@@ -1,4 +1,5 @@
-E | 0 | go run | stadium
-T | 0 | jump
+T | 1 | go run
+T | 0 | swim
 T | 0 | go swim
-T | 0 | go run
+D | 0 | finish math homework | 2020-10-10
+E | 0 | go run | East Coast Park

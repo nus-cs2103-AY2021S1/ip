@@ -1,8 +1,14 @@
 package duke.task;
 
+/**
+ * Represents a task with no specific due date or location
+ */
 public class Todo extends Task {
 
-
+    /**
+     * The constructor of the Todo class.
+     * @param description
+     */
     public Todo(String description) {
         super(description);
     }

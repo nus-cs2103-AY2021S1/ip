@@ -8,6 +8,11 @@ import duke.task.TaskList;
  */
 
 public class ExitCommand extends Command {
+
+    /**
+     * Constructor for the exit command.
+     * @param command
+     */
     public ExitCommand(String command) {
         super(command, true);
     }
