@@ -134,7 +134,7 @@ Find a task according to a search keyword. The find function supports fuzzy sear
 some typos in your search phrase and the app will make a best effort to find a match).
 
 Fuzzy match rule: there is a tolerance level of the number of typos that can be made. All tasks that match
-at least 80% of the search phrase (i.e. only less than 80% are typos) will be displayed in the find result.
+at least 80% of the search phrase (i.e. less than 20% are typos) will be displayed in the find result.
 
 Format: `find SEARCH_KEYWORD`
 
