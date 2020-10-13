@@ -54,7 +54,8 @@ public class TaskList {
     public void add(Task task) throws IOException {
         printBorder();
         tasks.add(task);
-        String textToAppend = task.getSymbol() + " @ " + task.getStatusIcon() + " @ "
+        String textToAppend = task.getSymbol() + " @ "
+                + (task.getStatusIcon().equals("[\u2713]") ? "Y" : "N") + " @ "
                 + task.getDescription() + " @ " + task.getDate() + "\n";
         Storage.appendToFile(Storage.getFilePath(), textToAppend);
 

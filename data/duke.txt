@@ -1,8 +1,8 @@
-[T] @ [✓] @ borrow book @ 
-[T] @ [✓] @ read book @ 
-[D] @ [✘] @ return book @ Jun 6 2020
-[E] @ [✘] @ project meeting @ Aug 6th 2-4pm
-[T] @ [✓] @ join sports club @ 
-[D] @ [✘] @ CS2103T tutorial @ Sep 13 2020 1159 PM
-[E] @ [✘] @ lunch with friends @ Sunday 12pm
-[D] @ [✘] @ submit report @ Sep 23 2020 1100 PM
+[T] @ Y @ borrow book @ 
+[T] @ Y @ read book @ 
+[D] @ N @ return book @ Jun 6 2020
+[E] @ N @ project meeting @ Aug 6th 2-4pm
+[T] @ Y @ join sports club @ 
+[D] @ N @ CS2103T tutorial @ Sep 13 2020 1159 PM
+[E] @ N @ lunch with friends @ Sunday 12pm
+[D] @ N @ submit report @ Sep 23 2020 1100 PM

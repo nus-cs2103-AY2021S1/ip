@@ -26,7 +26,7 @@ tasks management done faster than traditional GUI apps.
 ## Quick start
 1. Ensure you have Java `11` or above installed in your Computer.  
 
-2. Download the latest `Mushy.jar` from [here](https://github.com/GabrielTeo/ip/releases/tag/v0.3)  
+2. Download the latest `Mushy.jar` from [here](https://github.com/GabrielTeo/ip/releases/tag/v0.4)  
 
 3. Copy the file to the folder you want to use as the *home folder* for your Mushy program.  
 
@@ -40,8 +40,8 @@ Some example commands you can try:
    * **`todo`**`meet friend` : 
    Adds a todo task named `meet friend` to the task list.
    * **`delete`**`3` : Deletes the 3rd task shown in the current list.
-   * **`bye`** : Exits the app.<br>  
-
+   * **`bye`** : Exits the app.
+  
 6. Refer to the [Features](#features) below for details of each command.
 
 ---

@@ -77,7 +77,7 @@ public class Storage {
                     throw new DukeException("Invalid task type detected - unable to load");
             }
 
-            if (status.equals("[✓]")) {
+            if (status.equals("Y")) {
                 newTask.markAsDone();
             }
             tasks.add(newTask);
@@ -144,7 +144,8 @@ public class Storage {
     public static void updateFile(String filePath, TaskList taskList) throws IOException {
         writeToFile(filePath, "");
         for (Task tsk : taskList.getTasks()) {
-            String textToAppend = tsk.getSymbol() + " @ " + tsk.getStatusIcon() + " @ "
+            String textToAppend = tsk.getSymbol() + " @ "
+                    + (tsk.getStatusIcon().equals("[\u2713]") ? "Y" : "N") + " @ "
                     + tsk.getDescription() + " @ " + tsk.getDate() + "\n";
             appendToFile(filePath, textToAppend);
         }
