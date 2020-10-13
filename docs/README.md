@@ -26,8 +26,8 @@
 
 Examples
 ```
-done 1
-do  1
+done,1
+do,1
 ```
 
 ##### Delete a task
@@ -37,7 +37,7 @@ do  1
 Examples
 ```
 delete,1
-del 1
+del,1
 ```
 
 ### Creating tasks

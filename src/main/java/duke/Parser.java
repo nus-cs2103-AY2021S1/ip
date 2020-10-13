@@ -28,7 +28,7 @@ public class Parser {
      */
     public static Date parseDate(String dateStr)
             throws ParseException {
-        SimpleDateFormat format = new SimpleDateFormat("dd-MM-YYYY");
+        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
         Date date = format.parse(dateStr);
         return date;
     }

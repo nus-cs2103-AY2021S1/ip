@@ -17,7 +17,7 @@ public class ParserTest {
             long actual = Parser
                     .parseDate("12-04-1998")
                     .getTime();
-            long expected = 883238400000L;
+            long expected = 892310400000L;
             assertEquals(actual, expected);
         } catch (Exception e) {
             fail();
