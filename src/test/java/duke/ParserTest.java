@@ -8,7 +8,7 @@ import duke.todo.Task;
 
 public class ParserTest {
     @Test
-    public void parseTest1() {
+    public void parseTest_validTodo_success() {
         String input = "todo borrow book";
         try {
             Task newTask = Parser.parseTask(input);
@@ -21,7 +21,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parseTest2() {
+    public void parseTest_invalidDeadline_wrongPrefix_throwDukeException() {
         String input = "deadline borrow book /at 2020-20-20";
         try {
             Task newTask = Parser.parseTask(input);
@@ -33,7 +33,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parseTest3() {
+    public void parseTest_invalidDeadline_noPrefix_throwDukeException() {
         String input = "deadline borrow book";
         try {
             Task newTask = Parser.parseTask(input);
