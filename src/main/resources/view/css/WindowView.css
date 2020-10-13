@@ -1,0 +1,24 @@
+.root {
+    -fx-background: #FCE4EC;
+    -fx-font-family: "Arial";
+    -fx-text-fill: white;
+}
+
+.main-view {
+    -fx-border-insets: 5px;
+}
+
+.text-enter {
+    -fx-background-color: #344955;
+    -fx-text-fill: white;
+}
+
+.card {
+    -fx-background-color: #880E4F;
+    -fx-text-fill: white;
+    -fx-border-radius: 10;
+}
+
+.image {
+    -fx-border-radius: 10;
+}
