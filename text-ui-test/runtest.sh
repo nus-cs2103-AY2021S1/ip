@@ -3,7 +3,7 @@
 # create bin directory if it doesn't exist
 if [ ! -d "../bin" ]
 then
-    mkdir ../bin
+    mkdir "C:\Users\User\Desktop\Y2S1\CS2103T\Individual Project\bin"
 fi
 
 # delete output from previous run
@@ -12,15 +12,17 @@ then
     rm ACTUAL.TXT
 fi
 
+set JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF-8
+
 # compile the code into the bin folder, terminates if error occurred
-if ! javac -cp ../src -Xlint:none -d ../bin ../src/main/java/Duke.java
+if ! javac -cp ../src -Xlint:none -d ../bin ../src/main/java/*.java
 then
     echo "********** BUILD FAILURE **********"
     exit 1
 fi
 
 # run the program, feed commands from input.txt file and redirect the output to the ACTUAL.TXT
-java -classpath ../bin Duke < input.txt > ACTUAL.TXT
+java -classpath ../bin duke.Duke < input.txt > ACTUAL.TXT
 
 # convert to UNIX format
 cp EXPECTED.TXT EXPECTED-UNIX.TXT
