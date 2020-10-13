@@ -53,8 +53,8 @@ t,CS2100 Lab
 ```
 
 ##### Add a task with a deadline
-1. `deadline,<task name> <time>`
-2. `de,<task name>,<time>`
+1. `deadline,<task name> <dd-MM-yyyy>`
+2. `de,<task name>,<dd-MM-yyyy>`
 
 Examples
 ```
@@ -63,8 +63,8 @@ de,CS2100 Lab,12-04-2020
 ```
  
 ##### Add an event
-1. `event,<task name>,<time>`
-2. `e,<task name>,<time>`
+1. `event,<task name>,<dd-MM-yyyy>`
+2. `e,<task name>,<dd-MM-yyyy>`
 
 Examples
 ```
