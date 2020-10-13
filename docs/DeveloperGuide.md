@@ -1,13 +1,12 @@
-Green Tea Developer Guide (v1.2)
+<centre> Green Tea Developer Guide (v1.2) </center>
 ---------------------------------------------------------
 
-* Table of Contents
-{:toc}
+### Table of Contents
+
 
 ------------------------------------------------------------------------------
 ## Introduction
 
-### Purpose
 This document details the architecture and design for the flashcard application, Green Tea.
 
 The intended audience of this document is the developers and testers of Green Tea.
@@ -17,7 +16,7 @@ The intended audience of this document is the developers and testers of Green Te
 
 |Word    | Meaning   |
 |--------|------|
-|Deck    | A group |
+|Deck    | A collection of entries   |
 |Entry   | A word and its translation|
 
 --------------------------------------------------------------------------------------------------------------------
@@ -31,6 +30,9 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 ## **Design**
 
 ### Architecture
+
+This section details the various components of the application. It will cover the internal structure of each component 
+and how the components will work together with one another.
 
 <p align="center"><img src="images/ArchitectureDiagram.png" width="450" />
 <p align="center">Figure 1. Architecture of Green Tea application</p>
