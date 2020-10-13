@@ -41,7 +41,7 @@ Some example commands you can try:
    Adds a todo task named `meet friend` to the task list.
    * **`delete`**`3` : Deletes the 3rd task shown in the current list.
    * **`bye`** : Exits the app.  
-   
+
 6. Refer to the [Features](#features) below for details of each command.
 
 ---

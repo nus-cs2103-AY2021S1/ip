@@ -33,13 +33,16 @@ public class Duke {
      * @throws IOException produced by failed or interrupted I/O operations
      * @throws DukeException thrown if the Duke program does not recognise user input
      */
-    public void run() throws IOException, DukeException {
+    public void run() {
         Parser parser = new Parser(ui);
-        parser.parse(tasks, Storage.getFilePath());
+        Parser.setTasks(tasks);
+        Parser.setFilePath(Storage.getFilePath());
     }
 
     public String getResponse(String input) throws IOException {
-        return Parser.parse(input, tasks, Storage.getFilePath());
+        Parser.setTasks(tasks);
+        Parser.setFilePath(Storage.getFilePath());
+        return Parser.parse(input);
     }
 
     /**

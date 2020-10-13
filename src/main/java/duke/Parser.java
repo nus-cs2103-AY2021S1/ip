@@ -26,97 +26,21 @@ public class Parser {
     }
 
     /**
-     * Decides on the relevant actions to execute based on the input of the user.
+     * Set the Parser's tasks.
      *
      * @param taskList TaskList object that contains a list of tasks
-     * @param filePath the path location of the load or save file
-     * @throws DukeException thrown if the Duke program does not recognise user input
-     * @throws IOException   produced by failed or interrupted I/O operations
      */
-    public static void parse(TaskList taskList, String filePath) throws DukeException, IOException {
-        ui.greet();
-        Scanner sc = new Scanner(System.in);
-        label:
-        while (sc.hasNextLine()) {
-            String line = sc.nextLine();
-            String[] arrOfStr = line.split(" ", 0);
-            String identifier = arrOfStr[0];
-            switch (identifier) {
-                case "bye":
-                    ui.exit();
-                    break label;
-                case "list":
-                    ui.list(taskList);
-                    break;
-                case "done": {
-                    // mark as done
-                    int index = Integer.parseInt(arrOfStr[1]) - 1;
-                    ui.markDone(taskList, index);
-                    Storage.updateFile(filePath, taskList);
-                    break;
-                }
-                case "delete": {
-                    // delete
-                    int index = Integer.parseInt(arrOfStr[1]) - 1;
-                    taskList.delete(index);
-                    break;
-                }
-                case "find":
-                    // find
-                    String textToMatch = arrOfStr[1];
-                    ui.findMatching(taskList, textToMatch);
-                    break;
-                case "help":
-                    // help
-                    ui.help();
-                    break;
-                default:
-                    // add to list
-                    if ((identifier.equals("todo") || identifier.equals("deadline") || identifier.equals("event"))
-                            && arrOfStr.length < 2) {
-                        throw new DukeException("☹ OOPS!!! The description of a " + identifier + " cannot be empty.");
-                    } else {
-                        Task task;
-                        switch (identifier) {
-                            case "todo":
-                                String[] newArrOfStr = line.split(" ", 2);
-                                task = new Todo(newArrOfStr[1]);
-                                break;
-                            case "deadline": {
-                                String[] firstSplit = line.split(" /by ", 2);
-                                String[] secondSplit = firstSplit[0].split(" ", 2);
-                                String description = secondSplit[1];
-                                String date = firstSplit[1];
-                                String[] dateSplit = date.split(" ", 0);
+    public static void setTasks(TaskList taskList) {
+        Parser.taskList = taskList;
+    }
 
-                                if (dateSplit.length > 1) {
-                                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
-                                    LocalDateTime localDateTime = LocalDateTime.parse(date, formatter);
-                                    task = new Deadline(description, localDateTime);
-                                } else {
-                                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy");
-                                    LocalDate localDate = LocalDate.parse(date, formatter);
-                                    task = new Deadline(description, localDate);
-                                }
-                                break;
-                            }
-                            case "event": {
-                                String[] firstSplit = line.split(" /at ", 2);
-                                String by = firstSplit[1];
-                                String[] secondSplit = firstSplit[0].split(" ", 2);
-                                String description = secondSplit[1];
-                                task = new Event(description, by);
-                                break;
-                            }
-                            default:
-                                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n"
-                                + "Type \"help\" for a list of commands");
-                        }
-                        taskList.add(task);
-                    }
-                    break;
-            }
-        }
+    /**
+     * Set the Parser's filepath for storage.
+     *
+     * @param filePath the path location of the load or save file
+     */
+    public static void setFilePath(String filePath) {
+        Parser.filePath = filePath;
     }
 
     private static String executeByeCommand() {
@@ -133,6 +57,7 @@ public class Parser {
                 int index = taskList.getTasks().indexOf(task) + 1;
                 output += (index + "." + task + "\n");
             }
+            output += "\n";
         }
         assert taskList.getTasks().size() >= 0;
         return output;
@@ -168,14 +93,17 @@ public class Parser {
         String textToMatch = arrOfStr[1];
         String output = ("Here are the matching tasks in your list:\n");
         int index = 1;
-        for (Task task : taskList.getTasks()) {
-            String description = task.getDescription();
-            if (description.contains(textToMatch)) {
-                output += (index + "." + task + "\n");
-                index++;
-                canFind = true;
+        if (taskList != null) {
+            for (Task task : taskList.getTasks()) {
+                String description = task.getDescription();
+                if (description.contains(textToMatch)) {
+                    output += (index + "." + task + "\n");
+                    index++;
+                    canFind = true;
+                }
             }
         }
+        output += "\n";
         if (!canFind) {
             output = ("There are no matching tasks in your list!");
         }
@@ -276,13 +204,9 @@ public class Parser {
      * Decides on the relevant actions to execute based on the input of the user.
      *
      * @param input    user input to be parsed
-     * @param newTaskList TaskList object that contains a list of tasks
-     * @param newFilePath the path location of the load or save file
      * @throws IOException produced by failed or interrupted I/O operations
      */
-    public static String parse(String input, TaskList newTaskList, String newFilePath) throws IOException {
-        taskList = newTaskList;
-        filePath = newFilePath;
+    public static String parse(String input) throws IOException {
 
         String[] arrOfStr = input.split(" ", 0);
         String identifier = arrOfStr[0];
