@@ -43,11 +43,13 @@ The components of the app are Main, Commons, UI, Logic, Model and Storage.
 
 The ***Component Overview Diagram*** above shows the high-level design of the App. Given below is a quick overview of each component.
 
+
 **`Main`** has two classes called [`Main`](https://github.com/AY2021S1-CS2103T-T09-4/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2021S1-CS2103T-T09-4/tp/blob/master/src/main/java/seedu/address/MainApp.java). They are responsible for:
-* At app launch: Initializes the components in the correct sequence, and connects them up with each other.
-* At shut down: Shuts down the components and invokes cleanup methods where necessary.
+* At app launch: Initialize the components in the correct sequence and connect them up with each other.
+* At shut down: Shut down the components and invoke cleanup methods where necessary.
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
+
 
 The rest of the App consists of four components:
 
@@ -56,7 +58,7 @@ The rest of the App consists of four components:
 * [**`Model`**](#model-component): Holds the data of the App in memory.
 * [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
 
-Each of the four components:
+For each of the four components above:
 
 * Defines its *API* in an `interface` with the same name as the Component.
 * Exposes its functionality using a concrete `{Component Name}Manager` class (which implements the corresponding API `interface` mentioned in the previous point).
@@ -65,28 +67,40 @@ For example, the `Logic` component (see the class diagram given below) defines i
 
 ![Class Diagram of the Logic Component](images/LogicClassDiagram.png)
 
-**How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+#### **How the components interact with one another**
+
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `remove 1`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
+<p align="center"> Figure 3. Components interacting with one another
 
 The sections below give more details of each component.
 
-### 3.2 UI component
+### 3.2 Common classes
 
-The UI Component is comprised of
+Common classes are classes used by multiple components. Common classes include:
 
-<p align="center">![Structure of the UI Component](images/UiClassDiagram.png)
+* `Index`: Represents a zero or one based index. Using `Index` removes the need for a component to know what base other 
+components are using for their index. Can be converted to an integer (int).
+* `Messages`: Stores messages to be displayed to the user.
+* `GuiSettings`: Contains the GUI settings.
+* `LogsCenter`: Writes messages to the console and a log file. Records the state of the program as the app is running 
+
+### 3.3 UI component
+
+![Structure of the UI Component](images/UiClassDiagram.png)
 <p align="center"> Figure 4. UI component class relationship diagram </p>
-**API** :
-[`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+**API** : [`Ui.java`](https://github.com/AY2021S1-CS2103T-T09-4/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
-The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The UI consists of a `MainWindow` that is made up of parts (`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter`).
+All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
-The `UI` component,
+The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder.
+For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+
+The `UI` component:
 
 * Executes user commands using the `Logic` component.
 * Listens for changes to `Model` data so that the UI can be updated with the modified data.
@@ -107,12 +121,12 @@ ResultDisplay.fxml - Prints results to user
 
 StatusBarFooter - returns the path of the file retrieved
 
-### 3.3 Logic component
+### 3.4 Logic component
 
 ![Structure of the Logic Component](images/LogicClassDiagram.png)
 
 **API** :
-[`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+[`Logic.java`](https://github.com/AY2021S1-CS2103T-T09-4/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 1. `Logic` uses the `AddressBookParser` class to parse the user command.
 1. This results in a `Command` object which is executed by the `LogicManager`.
@@ -127,7 +141,7 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
-### 3.4 Model component
+### 3.5 Model component
 
 ![Structure of the Model Component](images/ModelClassDiagram.png)
 
@@ -147,7 +161,7 @@ The `Model`,
 </div>
 
 
-### 3.5 Storage component
+### 3.6 Storage component
 
 ![Structure of the Storage Component](images/StorageClassDiagram.png)
 
@@ -156,10 +170,6 @@ The `Model`,
 The `Storage` component,
 * can save `UserPref` objects in json format and read it back.
 * can save the address book data in json format and read it back.
-
-### 3.6 Common classes
-
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
