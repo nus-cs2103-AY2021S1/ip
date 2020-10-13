@@ -48,7 +48,7 @@ The ***Component Overview Diagram*** above shows the high-level design of the Ap
 * At app launch: Initialize the components in the correct sequence and connect them up with each other.
 * At shut down: Shut down the components and invoke cleanup methods where necessary.
 
-[**`Commons`**](#3.2.-common-classes) represents a collection of classes used by multiple other components.
+[**`Commons`**](#3.2.common-classes) represents a collection of classes used by multiple other components.
 
 
 The rest of the App consists of four components:
