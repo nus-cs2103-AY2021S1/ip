@@ -48,7 +48,7 @@ The ***Component Overview Diagram*** above shows the high-level design of the Ap
 * At app launch: Initialize the components in the correct sequence and connect them up with each other.
 * At shut down: Shut down the components and invoke cleanup methods where necessary.
 
-[**`Commons`**](#3.2.-common-classes) represents a collection of classes used by multiple other components.
+[**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 
 
 The rest of the App consists of four components:
@@ -77,7 +77,7 @@ The *Sequence Diagram* below shows how the components interact with each other f
 
 The sections below give more details of each component.
 
-### 3.2. Common classes
+### <a name="common-classes"></a> 3.2. Common classes
 
 Common classes are classes used by multiple components. Common classes include:
 
