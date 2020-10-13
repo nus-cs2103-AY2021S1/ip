@@ -9,6 +9,8 @@ import duke.exception.DukeIndexException;
 import duke.task.Task;
 import duke.task.TaskList;
 
+import javax.sound.midi.Track;
+
 
 /**
  * Represents an DeleteCommand that is part of the Command class, regarding deleting a task.
@@ -17,6 +19,7 @@ import duke.task.TaskList;
 public class DeleteCommand extends Command {
     private final int num;
     private String deletedMessage = "";
+    boolean error = true;
 
     /**
      * The constructor for the Delete Command.
@@ -40,6 +43,7 @@ public class DeleteCommand extends Command {
             if (num < 0 || num > list.size()) {
                 throw new DukeIndexException(ui.invalidIndexMessage());
             } else {
+                error = false;
                 Task deleted = list.delete(num - 1);
                 deletedMessage = deleted.toString();
                 ui.deleteMessage(deleted.toString(), list.size());
@@ -54,7 +58,7 @@ public class DeleteCommand extends Command {
     public String executeChat(TaskList list, Ui ui, Storage storage) {
         System.out.println("list size: " + list.size());
         try {
-            if (num < 0 || num > list.size()) {
+            if (error) {
                 throw new DukeIndexException(ui.invalidIndexMessage());
             } else {
                 return ui.deleteMessage(deletedMessage, list.size(), true);
