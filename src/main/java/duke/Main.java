@@ -14,6 +14,9 @@ public class Main extends Application {
 
     private Duke duke = new Duke();
 
+    public Main() throws IOException {
+    }
+
     /**
      * Begins the launch of the BrawlyDuke application on FXML by loading all the FXML data.
      * @param stage

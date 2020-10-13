@@ -28,7 +28,16 @@ public class Storage {
     /**
      * Constructor for storage class.
      */
-    public Storage() {}
+    public Storage() throws IOException {
+        File directoryFolder = new File(SAVED_FOLDER);
+        File textFolder = new File(SAVED_FILE);
+        if(!directoryFolder.exists()) {
+            directoryFolder.mkdir();
+        }
+        if(!textFolder.exists()) {
+            textFolder.createNewFile();
+        }
+    }
 
     /**
      * Constructor for storage class that takes in a task

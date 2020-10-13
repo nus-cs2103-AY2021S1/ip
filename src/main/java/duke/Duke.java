@@ -27,14 +27,14 @@ public class Duke {
     /**
      * The constructor for the class Duke.
      */
-    public Duke() {
+    public Duke() throws IOException {
         ui = new Ui();
         Ui.intro();
         storage = new Storage();
         try {
             list = new TaskList(Storage.readFile());
         } catch (IOException | DukeDateException e) {
-            System.out.println("You have no save tasks");
+            System.out.println("You have no saved tasks");
         }
     }
 
@@ -65,7 +65,7 @@ public class Duke {
      * The main method that will instantiate a Duke object.
      * @param args the arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Duke duke = new Duke();
         duke.run();
     }

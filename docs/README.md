@@ -133,9 +133,11 @@ I have marked this as done:
 ##
 
 ### Search Tasks
+
 Users will be able to search for tasks based on the keyword, and tasks in the list.
 
 ####find
+
 Usage
 
 `find <keyword>`
@@ -155,6 +157,7 @@ Expected Outcome
 Users will be able to ask for help for specific tasks.
 
 ####help
+
 Example and Usage
 
 `help`
