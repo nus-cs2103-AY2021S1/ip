@@ -15,14 +15,14 @@ public enum Format {
         @Override
         public String toString() {
             return "\nFormat: deadline [TASK] /by [DATE] [TIME] "
-                    + "\n\te.g. 'deadline project /by 20/20/2020 18:00'";
+                    + "\n\te.g. 'deadline project /by 20/10/2020 18:00'";
         }
     },
     EVENT {
         @Override
         public String toString() {
             return "\nFormat: event [TASK] /at [DATE] [TIME] "
-                    + "\n\te.g. 'event project meeting /at 20/20/2020 18:00'";
+                    + "\n\te.g. 'event project meeting /at 20/10/2020 18:00'";
         }
     },
     EDIT {
