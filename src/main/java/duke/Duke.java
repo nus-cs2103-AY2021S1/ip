@@ -23,6 +23,11 @@ public class Duke {
     public static Ui ui;
     public static TaskList tasks;
 
+    /**
+     * Creates a Duke.
+     *
+     * @param filePath which saved data is retrieved. If saved data is not found, a directory will be created.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);

@@ -2,6 +2,9 @@ package duke.task;
 
 import java.time.LocalDate;
 
+/**
+ * Represents a Task Item in the TaskList.
+ */
 public class Task implements Comparable<Task> {
     protected String description;
     protected boolean isDone;
@@ -20,15 +23,14 @@ public class Task implements Comparable<Task> {
     }
 
     /**
-     * Marks the duke.task.Task as done.
+     * Marks the Task as done.
      */
     public void markAsDone() {
         this.isDone = true;
     }
 
     /**
-     * Returns a String to be written into saved data.
-     * @return a String that contains the necessary information in the correct format.
+     * Returns a {@code String} to be written into saved data.
      */
     public String storageForm() {
         return "";

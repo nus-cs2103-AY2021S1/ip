@@ -10,7 +10,7 @@ import java.util.Collections;
 import java.time.LocalDate;
 
 /**
- * duke.TaskList Class stores the list of tasks and modifies the list according to commands.
+ * TaskList stores the list of tasks and modifies the list according to commands.
  */
 public class TaskList {
 
@@ -35,46 +35,76 @@ public class TaskList {
      * Adds a new subclass of duke.task.Task based on a String input.
      * @param input Command from user
      * @return a duke.task.Task that is either a duke.task.To-Do, a duke.task.Deadline or an duke.task.Event.
-     * @throws DukeException Throws exception if command is invalid due to missing information.
+     * @throws DukeException if command is invalid due to missing information.
      */
     public Task addItem(String input) throws DukeException {
-
         assert input.length() >= 4;
         String[] arr = input.split(" ", 2);
         Task curr = new Task("");
         if (arr.length == 1) {
             throw DukeException.INVALID_TASK_EXCEPTION;
         } else if (arr[0].equals("todo")) {
-            curr = new ToDo(arr[1].trim());
-            list.add(curr);
+            curr = addToDo(arr[1].trim());
         } else if (arr[0].equals("deadline")) {
-            String[] info = arr[1].split("/by ", 2);
-            if (info.length == 1) {
-                throw DukeException.INVALID_DEADLINE_EXCEPTION;
-            } else {
-                curr = new Deadline(info[0].trim(), Parser.dateParser(info[1]));
-                list.add(curr);
-            }
+            curr = addDeadline(arr[1].trim());
         } else if (arr[0].equals("event")) {
-            String[] info = arr[1].split("/at ", 2);
-            if (info.length == 1) {
-                throw DukeException.INVALID_TIME_EXCEPTION;
-            } else {
-                String[] t = info[1].split(" ", 2);
-                try {
-                    if (t.length < 2) {
-                        throw DukeException.INVALID_TIME_EXCEPTION;
-                    }
-                    LocalDate date = Parser.dateParser(t[0]);
-//                    String time = Parser.timeParser(t[1]);
-                    curr = new Event(info[0].trim(), date, t[1]);
-                    list.add(curr);
-                } catch (DukeException | NumberFormatException ex1) {
-                    throw DukeException.INVALID_TIME_EXCEPTION;
-                }
-            }
+            curr = addEvent(arr[1].trim());
         }
         return curr;
+    }
+
+    /**
+     * Adds a {@code To-do} to the TaskList.
+     * @param description Description of the task.
+     * @return {@code Task} object.
+     */
+    public Task addToDo(String description) {
+        Task toAdd = new ToDo(description);
+        list.add(toAdd);
+        return toAdd;
+    }
+
+    /**
+     * Adds a {@code Deadline} to the TaskList.
+     * @param info Description and Date of the Deadline.
+     * @return {@code Deadline} object.
+     * @throws DukeException if deadline is not provided.
+     */
+    public Task addDeadline(String info) throws DukeException {
+        String[] curr = info.split("/by ", 2);
+        if (curr.length == 1) {
+            throw DukeException.INVALID_DEADLINE_EXCEPTION;
+        } else {
+            Task toAdd = new Deadline(curr[0].trim(), Parser.dateParser(curr[1]));
+            list.add(toAdd);
+            return toAdd;
+        }
+    }
+
+    /**
+     * Adds a {@code Event} to the TaskList.
+     * @param info Description, Date and Time of the Event.
+     * @return {@code Event} object.
+     * @throws DukeException if Date and/or Time is not provided.
+     */
+    public Task addEvent(String info) throws DukeException {
+        String[] curr = info.split("/at ", 2);
+        if (curr.length == 1) {
+            throw DukeException.INVALID_TIME_EXCEPTION;
+        } else {
+            String[] t = curr[1].split(" ", 2);
+            try {
+                if (t.length < 2) {
+                    throw DukeException.INVALID_TIME_EXCEPTION;
+                }
+                LocalDate date = Parser.dateParser(t[0]);
+                Task toAdd = new Event(curr[0].trim(), date, t[1]);
+                list.add(toAdd);
+                return toAdd;
+            } catch (DukeException | NumberFormatException ex1) {
+                throw DukeException.INVALID_TIME_EXCEPTION;
+            }
+        }
     }
 
     /**

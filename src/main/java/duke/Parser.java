@@ -1,11 +1,11 @@
 package duke;
 
-import duke.task.Task;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 
+/**
+ * Represents a Parser that is able to parse user input into a {@code Duke.Command} of type {@code T}.
+ */
 public class Parser {
 
     /**
@@ -61,6 +61,9 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns correct {@code Duke.Command} based on the sort type.
+     */
     public static Duke.Command determineSortType(String input) {
         if (input.equals("sort")) {
             return Duke.Command.ERROR;

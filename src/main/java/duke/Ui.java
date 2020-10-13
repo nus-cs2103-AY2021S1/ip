@@ -20,43 +20,58 @@ public class Ui {
 
     private Scanner s;
 
+    /**
+     * Creates a Ui object.
+     */
     public Ui() {
         this.s = new Scanner(System.in);
     }
 
     /**
-     * Reads the next line of input by user.
-     *
-     * @return the next command
+     * Reads and returns the next line of input by user.
      */
     public String readCommand() {
         return s.nextLine();
     }
 
+    /**
+     * Returns welcome message.
+     */
     public static String welcome() {
         return "Welcome to Hyu's drive-in!" + "\n" + "What would you like to have?" + "\n";
     }
 
-    public void showLine() {
-        System.out.println(LINE);
-    }
-
+    /**
+     * Returns message after adding an item to TaskList.
+     */
     public String addedItem(Task curr, int size) {
          return ADDEDMSG + NEWLINE + curr + NEWLINE + "You have ordered " + size + " items." + NEWLINE;
     }
 
+    /**
+     * Returns an error message.
+     */
     public String showError(String ex) {
         return ex + NEWLINE;
     }
 
+    /**
+     * Returns message after marking an item in TaskList as done.
+     */
     public String doneItem(Task curr) {
         return DONEMSG + NEWLINE + curr;
     }
 
+    /**
+     * Returns message after deleting an item in TaskList.
+     */
     public String deleteItem(Task curr) {
         return DELETEMSG + NEWLINE + curr;
     }
 
+    /**
+     * Returns all items in TaskList.
+     */
     public String returnList(ArrayList<Task> curr) {
         String temp = "";
         for (int k = 0; k < curr.size(); k++) {
@@ -65,22 +80,37 @@ public class Ui {
         return RETLISTMSG + NEWLINE + temp;
     }
 
+    /**
+     * Returns message after manual saving.
+     */
     public String save() {
         return SAVEMSG + NEWLINE;
     }
 
+    /**
+     * Returns message after clearing memory.
+     */
     public String clear() {
         return CLEARMSG + NEWLINE;
     }
 
+    /**
+     * Returns message for default error.
+     */
     public String DEFAULTERROR() {
         return DEFAULTERROR + NEWLINE;
     }
 
+    /**
+     * Returns bye message.
+     */
     public String bye() {
         return BYEMSG + NEWLINE;
     }
 
+    /**
+     * Returns message when initialising save data fails.
+     */
     public String showLoadingError() {
         return LOADFAILMSG + NEWLINE;
     }

@@ -14,15 +14,25 @@ import java.util.Scanner;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ * Manages storage of TaskList data in local storage.
+ */
 public class Storage {
     private ArrayList<Task> txtData;
     private String filePath;
 
+    /**
+     * Creates a storage with the given {@code filePath}
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
         this.txtData = new ArrayList<>();
     }
 
+    /**
+     * Initialises an {@code ArrayList} of Tasks from saved data.
+     * @throws DukeException if file not found.
+     */
     public ArrayList<Task> loadData() throws DukeException {
         try {
             File dir = new File("data");
@@ -48,6 +58,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Creates a new Task from the given storage {@code String} description
+     * @throws DukeException if date format is incorrect.
+     */
     public Task generateNewTask(String[] info) throws DukeException {
         Task tobeAdded = new Task("");
         if (info[0].equals("T")) {
@@ -70,6 +84,10 @@ public class Storage {
         return tobeAdded;
     }
 
+    /**
+     * Overwrites file with current {@code ArrayList} of {@code Tasks} from TaskList.
+     * @throws IOException if file not found.
+     */
     public void overwriteData(ArrayList<Task> data) throws IOException {
         try {
             FileWriter fw = new FileWriter("data/data");
