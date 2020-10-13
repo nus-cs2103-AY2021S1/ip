@@ -147,14 +147,14 @@ Tasks locally saved in _Data_atb folder as a txt called _Duke.txt_
 
 
 ## Command Summary
-Action | Format
------------- | -------------
-todo | `NAME`
-deadline | `NAME` `/by` `DATE`
-event | `NAME` `/at` `TIMEFRAME`
-list | 
-done | `INDEX`
-delete | `INDEX`
-find | `SUBNAME`
-tag | `INDEX` `TAGNAME`
-bye | 
+| Action | Format |
+| ------------ | ------------- |
+| todo | `NAME`|
+| deadline | `NAME` `/by` `DATE`|
+| event | `NAME` `/at` `TIMEFRAME`|
+| list | |
+| done | `INDEX`|
+| delete | `INDEX`|
+| find | `SUBNAME`|
+| tag | `INDEX` `TAGNAME` |
+| bye | |
