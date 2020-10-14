@@ -9,7 +9,6 @@ import java.util.List;
  * deals with loading tasks from the file and saving tasks in the file
  */
 public final class Storage {
-    private static final String DB_DIR_NAME = "data";
     private static final String DB_FILE_NAME = "duke.txt";
     private static Path dbPath = null;
 
@@ -49,16 +48,18 @@ public final class Storage {
      */
     public static void checkDbExists() throws FileNotFoundException {
         Path curDirPath = Paths.get("");
-        Path dbDirPath = curDirPath.resolve(DB_DIR_NAME);
 
-        if (!Files.exists(dbDirPath)) {
-            throw new FileNotFoundException(String.format("Data folder does not exist! Please create a directory named %s", DB_DIR_NAME));
-        }
-
-        dbPath = dbDirPath.resolve(DB_FILE_NAME);
+        dbPath = curDirPath.resolve(DB_FILE_NAME);
 
         if (!Files.exists(dbPath)) {
-            throw new FileNotFoundException(String.format("Db does not exist! Please create a text file named %s", DB_FILE_NAME));
+            File file = new File(DB_FILE_NAME);
+            try {
+                FileWriter fw = new FileWriter(file.getAbsoluteFile());
+            }
+            catch (IOException ex){
+                System.out.println(ex);
+            }
+            dbPath = curDirPath.resolve(DB_FILE_NAME);
         }
     }
 
