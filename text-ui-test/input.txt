@@ -1,0 +1,7 @@
+todo Shopping
+list
+deadline CS2103T Project /by Thursday Night
+event National Day Holiday /at August 9
+done 3
+list
+bye
