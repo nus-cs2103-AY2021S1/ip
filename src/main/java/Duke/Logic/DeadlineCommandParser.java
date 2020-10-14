@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 import duke.exception.DukeException;
 import duke.model.Deadline;
 
-public class DeadlineParser {
+public class DeadlineCommandParser {
     /**
      * Parse Deadline command.
      * @param input the input from the user.
@@ -23,12 +23,16 @@ public class DeadlineParser {
             throw new DukeException("      OOPS!!! Please following the format: \n"
                     + "      deadline XXX /by DD/MM/YYYY HHMM");
         }
+        if (ss[0].substring(9).trim().equals("")) {
+            throw new DukeException("      OOPS!!! Description cannot be empty.");
+        }
         int year = Integer.parseInt(ss[3].split(" ")[0]);
         int month = Integer.parseInt(ss[2]);
         int day = Integer.parseInt(ss[1].substring(3));
         String[] time = ss[3].split(" ");
         if (time.length == 1 || time[1].length() != 4) {
-            throw new DukeException("      OOPS!!! Please enter the time in correct format: HHMM");
+            throw new DukeException("      OOPS!!! Please following the format: \n"
+                    + "      deadline XXX /by DD/MM/YYYY HHMM");
         }
         int hour = Integer.parseInt(ss[3].split(" ")[1].substring(0, 2));
         int minute = Integer.parseInt(ss[3].split(" ")[1].substring(2));

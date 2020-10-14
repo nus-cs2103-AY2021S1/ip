@@ -51,9 +51,6 @@ public class TaskList {
         if (n < 0 || n >= data.size()) {
             throw new DukeException("      OOPS!!! The index is out of bounds.");
         }
-        for(int i = 0; i < data.size(); i++) {
-            System.out.println(data.get(i));
-        }
         data.get(n).done();
         res = ui.printDone(data, n);
         storage.writeFile(data);

@@ -15,6 +15,9 @@ public class TodoCommandParser {
             // Exception: eg. todo
             throw new DukeException("      OOPS!!! The description of a todo cannot be empty.");
         }
+        if (input.substring(5).trim().equals("")) {
+            throw new DukeException("      OOPS!!! Description cannot be empty.");
+        }
         Todo task = new Todo(input.substring(5));
         return task;
     }

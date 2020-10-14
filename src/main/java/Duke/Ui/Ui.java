@@ -23,7 +23,7 @@ public class Ui {
      * @return String result for GUI
      */
     public String showNumberFormatError() {
-        return "      OOPS!!! Please enter a valid number";
+        return "      OOPS!!! Please follow the correct format.";
     }
 
     /**

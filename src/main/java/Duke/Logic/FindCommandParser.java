@@ -2,7 +2,7 @@ package duke.logic;
 
 import duke.exception.DukeException;
 
-public class FindParser {
+public class FindCommandParser {
     /**
      * Finds all the tasks that contains the keyword.
      * @param input the input from the user.
