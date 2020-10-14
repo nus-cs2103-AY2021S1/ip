@@ -175,13 +175,19 @@ For more specific instructions for tasks you can use:
 * `help task`
 ##
 
-###Exit
+###Bye
 Users will be able to exit the application and have their tasks saved.
 
-####exit
+####bye
 Example and Usage
 
-`exit`
+`bye`
+
+Expected Outcome
+```
+Bye have a good day!
+application will be closing shortly
+```
 ## Thank you and enjoy BrawlyDuke!
 
 
