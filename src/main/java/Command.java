@@ -11,5 +11,7 @@ public enum Command {
     VIEW,
     COMPLETE,
     FIND,
-    ERROR
+    ERROR,
+    LOL,
+    JUSTIN
 }

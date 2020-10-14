@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,32 +14,70 @@ public class NoteList {
         this.notesList = read;
     }
 
+    /**
+     * Checks if the note list is empty.
+     *
+     * @return Whether the list is empty.
+     */
     public boolean isEmpty() {
         return notesList.isEmpty();
     }
 
+    /**
+     * Adds a note to the note list.
+     *
+     * @param toAdd The Note to be added.
+     */
     public void add(Note toAdd) {
         notesList.add(toAdd);
     }
 
+    /**
+     * Deletes a note from the note list.
+     *
+     * @param toDelete The Note to be deleted.
+     */
     public void delete(int toDelete) {
         notesList.remove(toDelete);
     }
 
-    public Note get(int index) {
-        return notesList.get(index);
-    }
-
+    /**
+     * Gets the list of notes.
+     *
+     * @return The list of notes.
+     */
     public List<Note> getNotesList() {
         return notesList;
     }
 
+    /**
+     * Gets the size of the note list.
+     *
+     * @return The size of the note list.
+     */
     public int size() {
         return notesList.size();
     }
 
     /**
-     * Returns the list of notes by name.
+     * View a specific note in the list.
+     *
+     * @param index
+     * @return The content of the note or an error message.
+     */
+    public String viewNote(int index) {
+        String result;
+
+        if (index < 0 || index >= notesList.size()) {
+            result = Responses.BAD_INDEX;
+        } else {
+            result = Ui.print(notesList.get(index).getContent());
+        }
+        return result;
+    }
+
+    /**
+     * Returns the list of notes, showing the name and index.
      *
      * @return String representation of the names of the notes in list, or a message if it is empty.
      */

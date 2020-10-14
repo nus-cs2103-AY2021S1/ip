@@ -2,25 +2,36 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Task {
+    private static DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd MMM yyyy HHmm");
+
     protected boolean isDone;
     protected String task;
 
+    /**
+     * Creates a new instance of a Task with the given name.
+     *
+     * @param in The name of the Task to be created
+     */
     public Task (String in) {
         task = in;
         isDone = false;
     }
 
+    /**
+     * Completes the task.
+     */
     public void complete() {
         isDone = true;
     }
 
+    /**
+     * Generates the string version of the task for the save file.
+     * @return The string version of the task.
+     */
     public String saveText() {
         return isDone + " | " + task;
     }
 
-    //constants used to parse save text
-    public static String separator = " \\| ";
-    public static DateTimeFormatter dateFormat= DateTimeFormatter.ofPattern("dd MMM yyyy HHmm");
     /**
      * Converts a line of text in save file to a Task object.
      *
@@ -28,6 +39,8 @@ public class Task {
      * @return Task represented by the input string.
      */
     public static Task readText(String in) {
+        //constants used to parse save text
+        String separator = " \\| ";
         String[] result = in.split(separator);
         String taskType = result[0];
         boolean isComplete = Boolean.parseBoolean(result[1]);
@@ -39,9 +52,9 @@ public class Task {
         } else {
             taskTime = result[3];
             if (taskType.equals("D")) {
-                tempTask = new Deadline(taskName,LocalDateTime.parse(taskTime,dateFormat));
+                tempTask = new Deadline(taskName, LocalDateTime.parse(taskTime, dateFormat));
             } else if (taskType.equals("E")) {
-                tempTask = new Event(taskName,LocalDateTime.parse(taskTime,dateFormat));
+                tempTask = new Event(taskName, LocalDateTime.parse(taskTime, dateFormat));
             } else {
                 System.out.println("error reading save file");
                 return null;

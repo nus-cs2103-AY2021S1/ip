@@ -12,6 +12,11 @@ import java.util.Scanner;
 public class Storage {
     private String filePath;
 
+    /**
+     * Creates a new Storage with the given filepath.
+     *
+     * @param filePath The filepath of the storage to be created.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
@@ -104,6 +109,9 @@ public class Storage {
         return result;
     }
 
+    /**
+     * Reads the text in the save file and converts it back to a list of Tasks.
+     */
     private void readFileTasks(List<Task> result, File myObj) throws FileNotFoundException {
         Scanner myReader;
         myReader = new Scanner(myObj);
@@ -114,6 +122,9 @@ public class Storage {
         myReader.close();
     }
 
+    /**
+     * Reads the text in the save file and converts it back to a list of Notes.
+     */
     private void readFileNotes(List<Note> result, File myObj) throws FileNotFoundException {
         Scanner myReader;
         myReader = new Scanner(myObj);
@@ -122,10 +133,15 @@ public class Storage {
             String data = myReader.nextLine();
             text.append(data);
         }
-        Note.readAllText(result,text.toString());
+        Note.readAllText(result, text.toString());
         myReader.close();
     }
 
+    /**
+     * Creates a new save file.
+     *
+     * @param myObj The file to be created.
+     */
     private void createFile(File myObj) {
         try {
             myObj.createNewFile();
