@@ -81,6 +81,14 @@ public class TaskList implements java.io.Serializable {
     }
 
     /**
+     * Update a task at the given index
+     */
+    public String updateTask(Integer taskIndex, Task updatedTask) {
+        store.set(taskIndex, updatedTask);
+        return "Updated task!";
+    }
+
+    /**
      * Find a task
      * @param text
      * @return

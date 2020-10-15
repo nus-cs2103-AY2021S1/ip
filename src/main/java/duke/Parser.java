@@ -94,6 +94,70 @@ public class Parser {
             return new CreateTaskCommand(tasks, task);
         }
 
+        case "ed":
+        case "edit": {
+            if (tokens.length <= 2
+                    || tokens[1].equals("")
+                    || tokens[2].equals("")) {
+                throw new CommandMissingArgumentException();
+            }
+            Integer taskIndex = parseInt(tokens[1]);
+            String newTaskType = tokens[2];
+
+            switch (newTaskType) {
+
+            case "t":
+            case "todo": {
+                if (tokens.length <= 3
+                        || tokens[3].equals("")) {
+                    throw new CommandMissingArgumentException();
+                }
+                String taskName = tokens[3];
+
+                // Create the task
+                Task task = new TodoTask(false, taskName);
+                return new EditTaskCommand(tasks, taskIndex, task);
+            }
+            case "e":
+            case "event": {
+                // Event task
+                if (tokens.length <= 4
+                        || tokens[3].equals("")
+                        || tokens[4].equals("")) {
+                    throw new CommandMissingArgumentException();
+                }
+
+                // Otherwise create the task
+                Task task = new EventTask(
+                        false,
+                        tokens[3],
+                        parseDate(tokens[4])
+                );
+                return new EditTaskCommand(tasks, taskIndex, task);
+            }
+
+            case "de":
+            case "deadline": {
+                if (tokens.length <= 4
+                        || tokens[3].equals("")
+                        || tokens[4].equals("")) {
+                    throw new CommandMissingArgumentException();
+                }
+
+                // Otherwise create the task
+                Task task = new DeadlineTask(
+                        false,
+                        tokens[1],
+                        parseDate(tokens[2])
+                );
+                return new EditTaskCommand(tasks, taskIndex, task);
+            }
+            default: {
+                return new InvalidCommand();
+            }
+            }
+        }
+
         case "b":
         case "bye": {
             return new ExitCommand();
