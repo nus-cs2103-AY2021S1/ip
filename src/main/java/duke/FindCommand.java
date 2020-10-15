@@ -22,7 +22,7 @@ public class FindCommand extends Command {
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException, IOException {
         ArrayList<Task> list = new ArrayList<>();
         for (Task task : taskList.getList()) {
-            if (task.getName().contains(this.keyword)) {
+            if (task.getDescription().contains(this.keyword)) {
                 list.add(task);
             }
         }

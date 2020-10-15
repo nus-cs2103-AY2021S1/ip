@@ -17,6 +17,8 @@ public class Ui {
 
     /**
      * Greets the user.
+     * 
+     * @return A string object of the welcome message.
      */
     public String greetUser() {
         return ("Hello, I'm Bo-Chan!\n" + "How may I help you?");
@@ -24,6 +26,8 @@ public class Ui {
 
     /**
      * Says bye to the user.
+     * 
+     * @return A string object of the exit message.
      */
     public String exit() {
         return "Bye, see you soon!";
@@ -32,7 +36,7 @@ public class Ui {
     /**
      * Scans the input of the user.
      * 
-     * @return a String object of the user input.
+     * @return A string object of the user input.
      */
     public String readCommand() {
         return sc.nextLine();
@@ -43,6 +47,7 @@ public class Ui {
      * 
      * @param task Task added into the tasklist.
      * @param taskList tasklist of the user.
+     * @return A string object showing successful addition of the task.
      */
     public String showAddition(Task task, TaskList taskList) {
         return ("Added this task to your list:\n" + task + "\n" + showTaskTotal(taskList));
@@ -52,6 +57,7 @@ public class Ui {
      * Prints the message when a task is successfully completed.
      * 
      * @param task Task completed.
+     * @return A string object showing successful completion of the task.
      */
     public String showCompletion(Task task) {
         return ("Nice! I've marked this task as done: \n" + task);
@@ -62,6 +68,7 @@ public class Ui {
      * 
      * @param task Task deleted.
      * @param taskList tasklist of the user.
+     * @return A string object showing successful deletion of the task.
      */
     public String showDeletion(Task task, TaskList taskList) {
         return ("Noted. Removed task: \n" + task + "\n" + showTaskTotal(taskList));

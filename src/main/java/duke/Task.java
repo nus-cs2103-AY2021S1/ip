@@ -32,8 +32,13 @@ public abstract class Task {
     public void completeTask() {
         this.isDone = true;
     }
-    
-    public String getName() {
+
+    /**
+     * Gets the string of the name of the task
+     * 
+     * @return A string of the name of the task
+     */
+    public String getDescription() {
         return this.description;
     }
 
