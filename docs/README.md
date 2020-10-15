@@ -12,7 +12,7 @@ The grandma task manager application caters to the younger generation using crud
 
 The curly braces, such as {USER_INPUT}, means that user input is required.
 
-Square brackets, such as [OPTIONAL_FIELD], means that the specified input is not required
+Square brackets, such as [OPTIONAL_FIELD], means that the specified input is optional.
 
 ### Help - view the list of available commands.
 
@@ -20,7 +20,7 @@ Square brackets, such as [OPTIONAL_FIELD], means that the specified input is not
 
 ### Adding "to do" task - adds a to do task into grandma.
 
-    todo {DESCRIPTION} #{TAG} [/by {Date in DDMMYY format} {time in HHmm format}]
+    todo {DESCRIPTION} #{TAG} [/by {date in DDMMYY format} {time in HHmm format}]
 
 >*entries are case sensitive*
 >
@@ -28,7 +28,7 @@ Square brackets, such as [OPTIONAL_FIELD], means that the specified input is not
 
 ### Adding "deadline" task - adds a task with deadline into grandma.
 
-    deadline {DESCRIPTION} #{TAG} [/by {Date in DDMMYY format} {time in HHmm format}]
+    deadline {DESCRIPTION} #{TAG} [/by {date in DDMMYY format} {time in HHmm format}]
 
 >*entries are case sensitive*
 >
@@ -36,7 +36,7 @@ Square brackets, such as [OPTIONAL_FIELD], means that the specified input is not
 
 ### Adding "event" task - adds an event task into grandma.
 
-    event {description} #{tag} [/at {Date in DDMMYY format} {time in HHmm format}]
+    event {description} #{tag} [/at {date in DDMMYY format} {time in HHmm format}]
 
 >*entries are case sensitive*
 >
@@ -63,6 +63,8 @@ Square brackets, such as [OPTIONAL_FIELD], means that the specified input is not
     find {KEYWORD}
 
 >*the find function is case insensitive*
+>
+>*returns a list with task description or tag containing the keyword*
 
 ### Exit grandma - Save information and leave the application.
 

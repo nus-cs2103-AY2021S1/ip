@@ -13,7 +13,7 @@ public class Ui {
      * @return greeting message.
      */
     public String greetingMessage() {
-        return "Hello mah dud, itza ol' grandma robo speakin :D "
+        return "Hello itza ol' grandma speakin :D "
                 + appendHelpMessage()
                 + "\nwhat duh hell du yu wan?";
     }
@@ -33,11 +33,12 @@ public class Ui {
      * @return help message.
      */
     public String appendHelpMessage() {
-        textOnScreen += "These r wud u tell your ol' grandma here...\nYu wan add more tasks\n"
-                + "        todo {description} #{tag} \n                /by {DDMMYY HHmm}\n"
-                + "        deadline {description} #{tag} \n                /by {DDMMYY HHmm}\n"
-                + "        event {description} #{tag} \n                /at {DDMMYY HHmm}\n"
-                + "Yu wan remove tasks coz incompetent\n        delete {task number}\n"
+        textOnScreen += "These r wud u tell your ol' grandma here so take note... "
+                + "{INPUT} and [OPTIONAL] don't gong gong okay...\nYu wan add more tasks\n"
+                + "        todo {description} #{tag} \n                [/by {DDMMYY} {HHmm}]\n"
+                + "        deadline {description} #{tag} \n                [/by {DDMMYY} {HHmm}]\n"
+                + "        event {description} #{tag} \n                [/at {DDMMYY} {HHmm}]\n"
+                + "Yu wan remove tasks coz nub\n        delete {task number}\n"
                 + "Yu wan mark task as completed\n        done {task number}\n"
                 + "Yu wan see ur tasks coz u forget\n        list\n"
                 + "Yu wan find ur tasks coz u noob\n        find {keyword}\n"
