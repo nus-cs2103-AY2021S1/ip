@@ -147,8 +147,8 @@ public class Parser {
                 // Otherwise create the task
                 Task task = new DeadlineTask(
                         false,
-                        tokens[1],
-                        parseDate(tokens[2])
+                        tokens[3],
+                        parseDate(tokens[4])
                 );
                 return new EditTaskCommand(tasks, taskIndex, task);
             }

@@ -20,7 +20,7 @@ public class EditTaskCommand implements Command {
     public String execute() {
         // Update the task
         tasks.updateTask(taskIndex, task);
-        String message = String.format("Updated: %d %s", taskIndex, task.toString());
+        String message = String.format("Updated: %d %s", taskIndex + 1, task.toString());
         return message;
     }
 }

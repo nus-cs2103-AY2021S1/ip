@@ -71,3 +71,13 @@ Examples
 event,CS2100 Lab,12-04-2020
 e,CS2100 Lab,12-04-2020
 ```
+
+##### Edit an event
+1. `edit/ed,<task index>,<task type: [todo/t | event/e | deadline/de]>,<task parameters ...>`
+
+Examples
+```
+edit,1,todo,abc
+ed,1,event,homework,12-04-2020
+edit,2,de,workout,12-04-2020
+```
