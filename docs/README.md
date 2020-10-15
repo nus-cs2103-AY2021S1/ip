@@ -24,11 +24,11 @@ User can search a task by typing in a keyword.
 
 this comamnd is for viewing the task list.
 
-Example of usage: 
+**Example of usage:** 
 
 `list`
 
-Expected outcome:
+**Expected outcome:**
 
 ```1.[T][Y] task1```
 
@@ -86,7 +86,7 @@ this comamnd is for adding a dealine task. A success message with the number of 
 
 `deadline task /by 1/1/2020 1200`
 
-**xpected outcome:**
+**Expected outcome:**
 
 ```
 Got it. I've added this task:`
@@ -115,7 +115,7 @@ Now you have 2 tasks in the list.
 
 this comamnd is for adding a duration task with a number indicating the duration time. A success message with the number of remaining tasks will be sent after execution.
 
-**xample of usage:** 
+**Example of usage:** 
 
 `durationtask task 10`
 
