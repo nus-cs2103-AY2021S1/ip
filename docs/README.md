@@ -6,9 +6,13 @@
 
 ### Customised for young punks.
 
-The grandma task mananger application caters to the younger generation using crude language and gen Y humour.
+The grandma task manager application caters to the younger generation using crude language and gen Y humour.
 
 ## Usage
+
+The curly braces, such as {USER_INPUT}, means that user input is required.
+
+Square brackets, such as [OPTIONAL_FIELD], means that the specified input is not required
 
 ### Help - view the list of available commands.
 
@@ -16,37 +20,37 @@ The grandma task mananger application caters to the younger generation using cru
 
 ### Adding "to do" task - adds a to do task into grandma.
 
-    todo {description} #{tag} /by DDMMYY HHMM
+    todo {DESCRIPTION} #{TAG} [/by {Date in DDMMYY format} {time in HHmm format}]
 
 >*entries are case sensitive*
 >
->*date and time are optional*
+>*note that date and time comes together, either there exist both or none at all*
 
 ### Adding "deadline" task - adds a task with deadline into grandma.
 
-    deadline {description} #{tag} /by DDMMYY HHMM
+    deadline {DESCRIPTION} #{TAG} [/by {Date in DDMMYY format} {time in HHmm format}]
 
 >*entries are case sensitive*
 >
->*date and time are optional*
+>*note that date and time comes together, either there exist both or none at all*
 
 ### Adding "event" task - adds an event task into grandma.
 
-    event {description} #{tag} /at DDMMYY HHMM
+    event {description} #{tag} [/at {Date in DDMMYY format} {time in HHmm format}]
 
 >*entries are case sensitive*
 >
->*date and time are optional*
+>*note that date and time comes together, either there exist both or none at all*
 
 ### Delete task - delete a task from grandma.
 
-    delete {task number}
+    delete {TASK_NUMBER}
 
 >*task number can be viewed using list*
 
 ### Complete task - mark a task as complete in grandma.
 
-    done {task number}
+    done {TASK_NUMBER}
 
 >*task number can be viewed using list*
 
@@ -56,7 +60,7 @@ The grandma task mananger application caters to the younger generation using cru
 
 ### Find tasks - view the list of tasks in grandma that contains the keyword.
 
-    find {keyword}
+    find {KEYWORD}
 
 >*the find function is case insensitive*
 
