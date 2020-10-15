@@ -28,7 +28,7 @@ public class Deadline extends Task {
     @Override
     public String encode() {
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
-        return String.format("D | %s | %s | %s", getStatusIcon(), description, dateFormatter.format(by));
+        return String.format("D | %s | %s | %s", isDone ? 1 : 0, description, dateFormatter.format(by));
     }
 
     /**

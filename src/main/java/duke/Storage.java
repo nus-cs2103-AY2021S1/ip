@@ -59,7 +59,7 @@ public class Storage {
                 default:
                     throw new DukeException("Failed to load tasks");
                 }
-                if (command[1].equals("✓")) {
+                if (command[1].equals("1")) {
                     task.completeTask();
                 }
                 taskList.add(task);

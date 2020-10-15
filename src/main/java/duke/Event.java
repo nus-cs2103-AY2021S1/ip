@@ -28,7 +28,7 @@ public class Event extends Task {
     @Override
     public String encode() {
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
-        return String.format("E | %s | %s | %s", getStatusIcon(), description , dateFormatter.format(at));
+        return String.format("E | %s | %s | %s", isDone ? 1 : 0, description , dateFormatter.format(at));
     }
 
     /**
