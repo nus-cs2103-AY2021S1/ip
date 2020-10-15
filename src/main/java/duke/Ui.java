@@ -110,7 +110,7 @@ public class Ui {
      */
     public String showTaskTotal(TaskList taskList) {
         int total = taskList.getSize();
-        return ("You now have " + Integer.toString(total) + " task(s) in the list.");
+        return ("You now have " + total + " task(s) in the list.");
     }
 
     /**

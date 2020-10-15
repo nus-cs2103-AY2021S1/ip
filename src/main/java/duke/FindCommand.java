@@ -7,22 +7,24 @@ import java.io.IOException;
  * Represents a command to find tasks with matching keyword.
  */
 public class FindCommand extends Command {
-    private String keyword;
+    private String input;
 
     /**
      * Constructs a find command to find tasks.
      * 
-     * @param keyword The matching keyword of the task.
+     * @param input String input of the task to be found
      */
-    public FindCommand(String keyword) {
-        this.keyword = keyword;
+    public FindCommand(String input) {
+        this.input = input;
     }
 
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException, IOException {
+        assert input.length() > 4 : "Please provide keyword";
+        String keyword = input.substring(5);
         ArrayList<Task> list = new ArrayList<>();
         for (Task task : taskList.getList()) {
-            if (task.getDescription().contains(this.keyword)) {
+            if (task.getDescription().contains(keyword)) {
                 list.add(task);
             }
         }
