@@ -75,7 +75,9 @@ public class Ui {
     public static String wrongDoneOrDeleteMessage(int size) {
         return size == 0
                 ? print("\tList is empty. Add a task!\n")
-                : print("\tCommand should be followed by a number between 1 to " + size + "\n");
+                : print("\tTask does not exist.\n" +
+                "\tCommand should be followed by a number\n" +
+                "\tbetween 1 to " + size + ".\n");
     }
 
     public static String wrongFindMessage() {
