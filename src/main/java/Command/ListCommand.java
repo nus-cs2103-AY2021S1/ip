@@ -16,6 +16,6 @@ public class ListCommand extends Command {
 
     @Override
     public String undo(TaskList list) {
-        return Ui.cannotUndoMessage();
+        return Ui.getCannotUndoMessage();
     }
 }

@@ -18,29 +18,29 @@ public class ErrorCommand extends Command {
         if (e instanceof DukeException) {
             switch (e.getMessage()) {
             case DukeException.EMPTY_TODO:
-                return Ui.emptyTodoMessage();
+                return Ui.getEmptyTodoMessage();
             case DukeException.WRONG_DEADLINE:
-                return Ui.wrongDeadlineMessage();
+                return Ui.getWrongDeadlineMessage();
             case DukeException.WRONG_EVENT:
-                return Ui.wrongEventMessage();
+                return Ui.getWrongEventMessage();
             case DukeException.EMPTY:
-                return Ui.emptyInputMessage();
+                return Ui.getEmptyInputMessage();
             case DukeException.WRONG_DONE_OR_DELETE:
-                return Ui.wrongDoneOrDeleteMessage(list.size());
+                return Ui.getWrongDoneOrDeleteMessage(list.size());
             case DukeException.WRONG_FIND:
-                return Ui.wrongFindMessage();
+                return Ui.getWrongFindMessage();
             default:
-                return Ui.ignoreMessage();
+                return Ui.getIgnoreMessage();
             }
         } else if (e instanceof DateTimeParseException) {
-            return Ui.dateFormatReminder();
+            return Ui.getDateFormatReminder();
         } else {
-            return Ui.ignoreMessage();
+            return Ui.getIgnoreMessage();
         }
     }
 
     @Override
     public String undo(TaskList list) {
-        return Ui.cannotUndoMessage();
+        return Ui.getCannotUndoMessage();
     }
 }

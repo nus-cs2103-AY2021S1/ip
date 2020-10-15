@@ -13,11 +13,11 @@ public class FindCommand extends Command {
 
     @Override
     public String act(TaskList list) {
-        return Ui.searchResult(list.find(searchText));
+        return Ui.getSearchResult(list.find(searchText));
     }
 
     @Override
     public String undo(TaskList list) {
-        return Ui.cannotUndoMessage();
+        return Ui.getCannotUndoMessage();
     }
 }

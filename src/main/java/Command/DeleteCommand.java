@@ -19,7 +19,7 @@ public class DeleteCommand extends Command {
     public String act(TaskList list) {
         assert (whichTask != null);
         lastTaskNumber = whichTask;
-        return Ui.deleteMessage(lastTask = list.remove(whichTask), list.size());
+        return Ui.getDeleteMessage(lastTask = list.remove(whichTask), list.size());
     }
 
     @Override
@@ -29,9 +29,9 @@ public class DeleteCommand extends Command {
             Task temp = lastTask;
             lastTask = null;
             lastTaskNumber = null;
-            return Ui.undoDeleteMessage(temp, list.size());
+            return Ui.getUndoDeleteMessage(temp, list.size());
         } else {
-            return Ui.cannotUndoMessage();
+            return Ui.getCannotUndoMessage();
         }
     }
 }

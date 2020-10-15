@@ -19,7 +19,7 @@ public class AddCommand extends Command {
         assert (task != null);
         list.addTask(task);
         lastIndex = list.size() - 1;
-        return Ui.addTaskMessage(task, list.size());
+        return Ui.getAddTaskMessage(task, list.size());
     }
 
     @Override
@@ -27,9 +27,9 @@ public class AddCommand extends Command {
         if (lastIndex != null) {
             Integer temp = lastIndex;
             lastIndex = null;
-            return Ui.undoAddMessage(list.remove(temp), list.size());
+            return Ui.getUndoAddMessage(list.remove(temp), list.size());
         } else {
-            return Ui.cannotUndoMessage();
+            return Ui.getCannotUndoMessage();
         }
     }
 }

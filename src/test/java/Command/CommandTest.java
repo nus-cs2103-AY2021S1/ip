@@ -15,7 +15,7 @@ public class CommandTest {
         TaskList list = new TaskList(s);
         assertEquals(new ListCommand().act(list), Ui.list(list));
         assertEquals(new AddCommand(new Todo("test")).act(list),
-                Ui.addTaskMessage(new Todo("test"), list.size()));
+                Ui.getAddTaskMessage(new Todo("test"), list.size()));
         assertEquals(new DeleteCommand(list.size() - 1).act(list),
                 Ui.deleteMessage(new Todo("test"), list.size()));
 

@@ -17,7 +17,7 @@ public class DoneCommand extends Command {
         assert (whichTask != null);
         list.setCompleted(whichTask);
         lastIndex = whichTask;
-        return Ui.doneMessage(list.get(whichTask));
+        return Ui.getDoneMessage(list.get(whichTask));
     }
 
     @Override
@@ -26,9 +26,9 @@ public class DoneCommand extends Command {
             list.setNotCompleted(lastIndex);
             int temp = lastIndex;
             lastIndex = null;
-            return Ui.undoDoneMessage(list.get(temp));
+            return Ui.getUndoDoneMessage(list.get(temp));
         } else {
-            return Ui.cannotUndoMessage();
+            return Ui.getCannotUndoMessage();
         }
     }
 }

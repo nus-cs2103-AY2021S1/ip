@@ -10,11 +10,11 @@ public class ExitCommand extends Command {
 
     @Override
     public String act(TaskList list) {
-        return Ui.exitMessage();
+        return Ui.getExitMessage();
     }
 
     @Override
     public String undo(TaskList list) {
-        return Ui.cannotUndoMessage();
+        return Ui.getCannotUndoMessage();
     }
 }

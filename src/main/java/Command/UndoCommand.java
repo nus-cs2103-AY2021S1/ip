@@ -16,12 +16,12 @@ public class UndoCommand extends Command {
         if (lastCommand != null) {
             return lastCommand.undo(list);
         } else {
-            return Ui.cannotUndoMessage();
+            return Ui.getCannotUndoMessage();
         }
     }
 
     @Override
     public String undo(TaskList list) {
-        return Ui.cannotUndoMessage();
+        return Ui.getCannotUndoMessage();
     }
 }
