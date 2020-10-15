@@ -20,7 +20,6 @@ import Tasks.Event;
  */
 public class Storage {
     private File file;
-    private boolean added = false;
 
     public Storage(File file) {
         try {
@@ -56,7 +55,6 @@ public class Storage {
         try (BufferedWriter bufferedWriter =
                      new BufferedWriter(new FileWriter(file.getAbsolutePath()))) {
             bufferedWriter.write("");
-            added = false;
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
@@ -73,34 +71,22 @@ public class Storage {
             String line = bufferedReader.readLine();
             while (line != null) {
                 String[] parts = line.split("</>");
-                Task task;
+                Task task = null;
                 if (parts[0].equals("TODO") && parts.length == 3) {
                     task = new Todo(parts[2]);
-                    if (parts[1].equals("true")) {
-                        task.setCompleted();
-                    }
-                    list.add(task);
                 } else if (parts[0].equals("DEADLINE") && parts.length == 4) {
                     task = new Deadline(parts[2], parts[3]);
-                    if (parts[1].equals("true")) {
-                        task.setCompleted();
-                    }
-                    list.add(task);
                 } else if (parts[0].equals("EVENT") && parts.length == 4) {
                     task = new Event(parts[2], parts[3]);
-                    if (parts[1].equals("true")) {
-                        task.setCompleted();
-                    }
-                    list.add(task);
                 }
+                assert (task != null);
+                if (parts[1].equals("true")) {
+                    task.setCompleted();
+                }
+                list.add(task);
                 line = bufferedReader.readLine();
             }
-            added = true;
-        } catch (FileNotFoundException e) {
-            // Exception handling
-            System.out.println(e.getMessage());
         } catch (IOException e) {
-            // Exception handling
             System.out.println(e.getMessage());
         }
         return list;
@@ -118,10 +104,10 @@ public class Storage {
             String fileContent = type.toString() + separator
                     + task.getCompleted() + separator + task.getName();
             if (type == Task.Type.DEADLINE) {
-                assert (task instanceof Deadline == true);
+                assert (task instanceof Deadline);
                 fileContent += separator + ((Deadline) task).getDeadline();
             } else if (type == Task.Type.EVENT) {
-                assert (task instanceof Event == true);
+                assert (task instanceof Event);
                 fileContent += separator + ((Event) task).getTime();
             }
             bufferedWriter.write(fileContent);
