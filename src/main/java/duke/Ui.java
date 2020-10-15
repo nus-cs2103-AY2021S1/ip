@@ -74,13 +74,13 @@ public class Ui {
             store.syncTasks();
             System.out.println("successful");
         } catch (CommandMissingArgumentException e) {
-            System.out.println("Missing arguments!");
+            result = "Missing arguments!";
         } catch (CommandInvalidArgumentFormatException e) {
-            System.out.println("Invalid arguments!");
+            result = "Invalid arguments!";
         } catch (MissingTaskException e) {
-            System.out.println("Missing task!");
+            result = "Missing task!";
         } catch (Exception e) {
-            System.out.println(e.toString());
+            result = "Invalid command!";
         } finally {
             return result;
         }
