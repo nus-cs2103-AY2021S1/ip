@@ -28,9 +28,4 @@ public class DeleteCommand extends Command {
             return "Task not found in list";
         }
     }
-    
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }

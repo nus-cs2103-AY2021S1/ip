@@ -22,9 +22,4 @@ public class CompleteCommand extends Command {
         store.writeFile(taskList);
         return ui.showCompletion(task);
     }
-    
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }

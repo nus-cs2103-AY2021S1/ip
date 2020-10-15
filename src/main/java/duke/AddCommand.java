@@ -63,9 +63,4 @@ public class AddCommand extends Command {
         store.writeFile(taskList);
         return ui.showAddition(newTask, taskList);
     }
-    
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }

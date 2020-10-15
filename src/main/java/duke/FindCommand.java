@@ -36,9 +36,4 @@ public class FindCommand extends Command {
             return matchingResults;
         }
     }
-    
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }
