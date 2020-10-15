@@ -56,8 +56,31 @@ public class Ui {
         return print("\t☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n");
     }
 
+    public static String emptyInputMessage() {
+        return print("\t☹ OOPS!!! The input cannot be empty.\n");
+    }
+
     public static String emptyTodoMessage() {
         return print("\t☹ OOPS!!! The description of a todo cannot be empty.\n");
+    }
+
+    public static String wrongDeadlineMessage() {
+        return print("\t☹ OOPS!!! To add a deadline, enter 'deadline <TASK NAME> /by yyyy-mm-dd'\n");
+    }
+
+    public static String wrongEventMessage() {
+        return print("\t☹ OOPS!!! To add an event, enter 'event <TASK NAME> /at yyyy-mm-dd'\n");
+    }
+
+    public static String wrongDoneOrDeleteMessage(int size) {
+        return size == 0
+                ? print("\tList is empty. Add a task!\n")
+                : print("\tCommand should be followed by a number between 1 to " + size + "\n");
+    }
+
+    public static String wrongFindMessage() {
+        return print("\t☹ OOPS!!! To find tasks containing a phrase" +
+                ", enter 'find <PHRASE>'. Search phrase can contain spaces.\n");
     }
 
     public static String dateFormatReminder() {
