@@ -1,0 +1,22 @@
+event project meeting /at 1300
+todo borrow book
+deadline return book /by 12-12-2012 1200
+list
+done 1
+done 2
+list
+find book
+find does not exist
+delete 2
+list
+delete 1
+list
+not a command
+todo
+event no datetime
+deadline no date
+event project meeting /at 12.00 am
+deadline return book /by 12 Dec 2012 1200
+done 5
+delete 5
+bye
