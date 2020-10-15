@@ -21,7 +21,7 @@ public class ToDo extends Task {
      */
     @Override
     public String encode() {
-        return String.format("T | %s | %s", getStatusIcon(), description);
+        return String.format("T | %s | %s", isDone ? 1 : 0, description);
     }
 
     /**
