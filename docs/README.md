@@ -1,20 +1,67 @@
 # User Guide
+## quick start
+1. Install Java 11 on your computer.
+2. Download Duke.jar file.
+3. Run the file with java -jar Duke.jar.
+
 
 ## Features 
+#### `help`
+Displays all the available instructions in Duke.
 
-### Feature 1 
-Description of feature.
+<br/>
 
-## Usage
+#### `list`
+Displays all the tasks added in Duke.
 
-### `Keyword` - Describe action
+<br/>
 
-Describe action and its outcome.
+#### `todo DESCRIPTION`
 
-Example of usage: 
+Adds a simple task.
 
-`keyword (optional arguments)`
+Eg. `todo read book`
 
-Expected outcome:
+<br/>
 
-`outcome`
+#### `deadline DESCRIPTION /by DATE(yyyy-mm-dd)`
+Adds a task to be done by a date.
+
+Eg. `deadline return book /by 2020-09-30`
+
+<br/>
+
+#### `event DESCRIPTION /at DATE(yyyy-mm-dd)`
+Adds a task to be done at a date.
+
+Eg. `event borrow book /at 2020-09-30`
+
+<br/>
+
+#### `done INDEX`
+Marks the task at a specific index as done.
+
+Eg. `done 2` marks the second task in the list as done.
+
+<br/>
+
+#### `delete INDEX`
+Delete the task at a specific index.
+
+Eg. `delete 2` deletes the second task in the list.
+
+<br/>
+
+#### `find KEYWORD`
+Displays all the tasks that contains the key word.
+
+Eg. `find book` displays all the tasks that contains `book`.
+
+<br/>
+
+#### `bye`
+Says bye to Duke and exits the app. (and date will be saved)
+## Acknowledgement
+JavaFX tutorial @SE-EDU/guides
+
+URL: https://se-education.org/guides/tutorials/javaFx.html
