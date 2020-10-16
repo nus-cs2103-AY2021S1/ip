@@ -1,5 +1,3 @@
-
-
 public class HelpCommand extends Command {
     public String commandWord = "help";
 
@@ -9,6 +7,6 @@ public class HelpCommand extends Command {
 
     @Override
     public String execute() {
-      return "";
+      return Ui.getHelp();
     }
 }

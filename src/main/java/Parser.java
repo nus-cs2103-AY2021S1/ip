@@ -2,171 +2,103 @@ import java.io.FileNotFoundException;
 import java.util.Arrays;
 
 /**
- * Represents a parser that deals with making sense of the user command.
+ * Represents a parser that deals with making sense of the user input.
  */
 public class Parser {
 
     /**
-     * How the parser will respond to users' command.
+     * How the parser will respond to users' input.
      *
-     * @param command  Full command by the user.
+     * @param input  Full input by the user.
     // * @param ui       Ui used in responding.
      * @param taskList Task list referred to in the interaction.
      * @param filePath The relative path to assigned file for reading
      *                 and writing of data.
      * @return String Response to be returned
      */
-    public static String respond(String command, TaskList taskList, String filePath) {
-        String[] pieces = command.split(" ", 2);
-        assert (pieces[0] != null) : "Incorrect splitting.";
-        if (command.equals("bye")) { // terminating command
-            return Ui.bye();
-        } else if (command.equals("help")) {
-            return Ui.getHelp();
-        } else if (command.equals("list")) { // listing command
-            if (taskList.list.isEmpty()) {
-                return Ui.emptyList();
-            } else {
-                Storage storage = new Storage(filePath);
-                TaskList tasks;
-                String s = "";
-                try {
-                    tasks = new TaskList(storage.load());
-                    s = Ui.returnAllTasks(tasks);
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
-                return s;
-
-            }
-        } else if (pieces[0].equals("find")) { // listing command
-            if (taskList.list.isEmpty()) {
-                return Ui.emptyList();
-            } else {
-                return Ui.returnRelevantTasks(taskList, pieces[1]);
-            }
-        } else if (pieces[0].equals("done")) { // Mark Done task command
-            if (pieces.length == 1) { // task number is missing
-                return Ui.markDoneFailure();
-            } else {
-                try {
-                    int task = Integer.parseInt(pieces[1]); // get the task number
-                    if (task > taskList.noOfTasks) {
-                        return Ui.uncreatedTask(); // task has not been created
-                    } else {
-                        assert (taskList.list.get(task - 1) != null) : "Incorrect index.";
-                        Task cur = taskList.list.get(task - 1);
-                        if (cur.getStatus()) {
-                            return Ui.duplicatedMarkDone();
-                        }
-                        cur.markAsDone();
-                        Storage.updateTasks(taskList.getNoOfTasks(), taskList.list, filePath);
-                        return Ui.markDoneSuccessful(cur);
-                    }
-                } catch (NumberFormatException e) {
-                    return Ui.incorrectDoneFormat();
-                }
-            }
-        } else if (pieces[0].equals("delete")) { // delete command
-            if (pieces.length == 1) {
-                return Ui.incompleteDeleteCommand();
-            } else {
-                int num = Integer.valueOf(pieces[1]);
-                if (num > taskList.noOfTasks) {
-                    return Ui.uncreatedTask();
-                } else {
-                    assert (taskList.list.get(num - 1) != null) : "Incorrect index.";
-                    Task removed = taskList.list.get(num - 1);
-                    taskList.deleteTask(removed);
-                    Storage.updateTasks(taskList.getNoOfTasks(), taskList.list, filePath); // update storage
-                    return Ui.deleteSuccessful(removed, taskList);
-                }
-            }
-        } else if (pieces[0].equals("tag")) {
-            String[] p = pieces[1].split(" ");
-            int task = Integer.parseInt(p[0]); // get the task number
-            if (task > taskList.noOfTasks) {
-                return Ui.uncreatedTask(); // task has not been created
-            } else {
-                assert (taskList.list.get(task - 1) != null) : "Incorrect index.";
-                Task cur = taskList.list.get(task - 1);
-                String tag = p[1];
-                cur.setTag(tag);
-                Storage.updateTasks(taskList.getNoOfTasks(), taskList.list, filePath);
-                return Ui.setTagSuccessful(tag,cur);
-            }
-        } else {
-                if (pieces.length == 1) {
-                    String s = Parser.incompleteCommand(pieces[0]);
-                    return s;
-                } else {
-                    return successfulCommand(taskList, pieces[0], pieces[1], filePath);
-                }
-            }
-        }
-
-
-    private static String successfulCommand ( TaskList taskList, String firstCommandWord,
-                                            String secondCommandWord, String filePath){
-        Task t = new Task("");
-        String[] array;
-        String s = "";
-        switch (firstCommandWord) {
-            case "todo":
-                t = new ToDo(secondCommandWord);
-                break;
-
-            case "deadline":
-                array = secondCommandWord.split("/by ");
-                if (array.length == 1) {
-                    Ui.missingDeadline();
-                } else {
-                    t = new Deadline(array[0], array[1]);
-                }
-                break;
-
-            case "event":
-                array = secondCommandWord.split("/at ");
-                if (array.length == 1) {
-                    Ui.missingEventTime();
-                } else {
-                    t = new Event(array[0], array[1]);
-                }
-                break;
-
-            default:
-                break;
-        }
-        if (t.description != "") {
-            taskList.addTask(t);
-            Storage.updateTasks(taskList.getNoOfTasks() , taskList.list, filePath);
-            return Ui.addSuccessful(t, taskList.getNoOfTasks());
-        } else {
-            return s;
-        }
+    public static String respond(String input, TaskList taskList, String filePath) {
+        Command command = Parser.parseIntoCommand(input, taskList, filePath);
+        String response = command.execute();
+        return response;
     }
 
-    private static String incompleteCommand(String command) {
-        String stringToReturn;
-        switch (command) {
+
+    public static Command parseIntoCommand(String input,TaskList taskList, String filePath) {
+        String[] pieces = input.split(" ", 2);
+        assert (pieces[0] != null) : "Incorrect splitting.";
+
+        // 2 or more word input
+        if (pieces.length == 2) {
+            String firstWord = pieces[0];
+            switch (firstWord) {
+                case "find":
+                    return new FindCommand(taskList, pieces[1]);
+
+                case "done":
+                    return new DoneCommand(taskList, filePath, pieces[1]);
+
+
+                case "delete":
+                    return new DeleteCommand(taskList, filePath, pieces[1]);
+
+
+                case "tag":
+                    return new TagCommand(taskList, filePath, pieces[1]);
+
+
+                case "todo":
+                    return new AddCommand(taskList, filePath, "todo", pieces[1]);
+
+
+                case "deadline":
+                    return new AddCommand(taskList, filePath, "deadline", pieces[1]);
+
+
+                case "event":
+                    return new AddCommand(taskList, filePath, "event", pieces[1]);
+
+
+                default:
+                    return new InvalidCommand(Ui.unknownCommand());
+
+            }
+        }
+
+        // single word input
+        switch (input) {
+            case "bye" :
+                return new ByeCommand();
+
+            case "help" :
+                return new HelpCommand();
+
+            case "list" :
+                return new ListCommand(taskList, filePath);
+
+            case "find" :
+                return new InvalidCommand(Ui.missingFindKeyword());
+
+            case "done" :
+                return new InvalidCommand(Ui.missingDoneIndex());
+
+            case "delete" :
+                return new InvalidCommand(Ui.incompleteDeleteCommand());
+
+            case "tag" :
+                return new InvalidCommand(Ui.incompleteTagCommand());
+
             case "todo":
-                stringToReturn = Ui.missingDescription("todo");
-                break;
+                return new InvalidCommand(Ui.missingDescription("todo"));
 
             case "deadline":
-                stringToReturn = Ui.missingDescription("deadline");
-                break;
+                return new InvalidCommand(Ui.missingDescription("deadline"));
 
             case "event":
-                stringToReturn = Ui.missingDescription("event");
-                break;
+                return new InvalidCommand(Ui.missingDescription("event"));
 
             default:
-                stringToReturn = Ui.unknownCommand();
-                break;
+                return new InvalidCommand(Ui.unknownCommand());
         }
-        assert (stringToReturn != "") : "Switch statement error.";
-        return stringToReturn;
     }
 }
 

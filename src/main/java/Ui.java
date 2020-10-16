@@ -23,6 +23,8 @@ public class Ui {
             "[search for tasks contains KEY_WORD in description]\n" +
             "- delete TASK_NUMBER\n" +
             "[delete the task indexed at TASK_NUMBER]\n" +
+            "- tag TASK_NUMBER TAG\n" +
+            "[attach a tag to a task indexed at TASK_NUMBER]\n" +
             "- todo DESCRIPTION\n" +
             "[add a todo task with DESCRIPTION]\n" +
             "- event DESCRIPTION /at YYYY-MM-DD\n" +
@@ -141,7 +143,7 @@ public class Ui {
      * This method is used to warn the user that the command is undefined.
      */
     public static String unknownCommand() {
-        Exception ex = new InvalidInputException("Ah oh! I didn't know what that means >n<, sorry! ");
+        Exception ex = new InvalidInputException("Ah oh! You command format is wrong. Type 'help' to know more.");
         String stringToReturn = LINE_TOP + ex.getMessage() + "\n" + LINE_BOTTOM;
         return stringToReturn;
     }
@@ -164,6 +166,24 @@ public class Ui {
         return stringToReturn;
     }
 
+    /**
+     * This method is used to warn the user that task to be deleted is not specified.
+     */
+    public static String incompleteTagCommand() {
+        Exception ex = new InvalidInputException("Hey, your tag command is incomplete! Refer to help for more info.");
+        String stringToReturn = LINE_TOP + ex.getMessage() + "\n" + LINE_BOTTOM;
+        return stringToReturn;
+    }
+
+    /**
+     * This method is used to warn the user that find keyword is missing
+     */
+    public static String missingFindKeyword() {
+        Exception ex = new InvalidInputException("Hey, you forgot to tell me keyword to find!");
+        String stringToReturn = LINE_TOP + ex.getMessage() + "\n" + LINE_BOTTOM;
+        return stringToReturn;
+    }
+
     public static String setTagSuccessful(String tag, Task task) {
         String stringToReturn = LINE_TOP + "Nice! I've added the tag <" + tag + "> for the following task: \n" +
                                 task + "\n" + LINE_BOTTOM;
@@ -179,7 +199,7 @@ public class Ui {
     }
 
     // PRINT RELATED
-    public static String markDoneFailure() {
+    public static String missingDoneIndex() {
         Exception ex = new InvalidInputException("Hey, you forgot to tell me which task is done!");
         String stringToReturn = LINE_TOP + ex.getMessage() + "\n" + LINE_BOTTOM;
         return stringToReturn;
