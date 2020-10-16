@@ -4,6 +4,8 @@
 ### Manage Your Tasks
 Add, delete, show, and mark your tasks as done.
 
+![ui](Ui.png)
+
 ## Usage
 
 Note: 
@@ -102,6 +104,3 @@ Format: `bye`
 Expected outcome:
 
 Window closes.
-
-## Credits
-Followed the guides from [SE-EDU](https://se-education.org/guides/index.html).
