@@ -16,8 +16,7 @@ public class TaskListTest {
             new TaskList(new Ui()).markTaskAsDone(new String[] {"1"});
             fail();
         } catch (GelException e) {
-            assertEquals("\n"
-                    + "    Please input a valid number from 1 - 0", e.getMessage());
+            assertEquals("    Please input a valid number from 1 - 0", e.getMessage());
         } catch (Exception e) {
             fail();
         }
@@ -39,7 +38,7 @@ public class TaskListTest {
             new TaskList(new Ui()).addDeadline("deadline test /by 2020-30-58 2500", 18);
             fail();
         } catch (GelException e) {
-            assertEquals("\n    Please make sure that your date and time "
+            assertEquals("    Please make sure that your date and time "
                     + "are numbers within the calendar and 24 hour clock", e.getMessage());
         } catch (Exception e) {
             fail();

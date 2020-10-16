@@ -1,9 +1,11 @@
 package gel;
 
-import gel.exception.GelException;
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
+
+import org.junit.jupiter.api.Test;
+
+import gel.exception.GelException;
 
 public class ParserTest {
     @Test
@@ -12,8 +14,7 @@ public class ParserTest {
             Parser.toDateTime("20200307234");
             fail();
         } catch (GelException e) {
-            assertEquals("\n"
-                    + "    Your datetime has an invalid format... please use"
+            assertEquals("    Your datetime has an invalid format... please use"
                     + " the format:YYYY-MM-DD HHMM", e.getMessage());
         } catch (Exception e) {
             fail();
@@ -26,8 +27,7 @@ public class ParserTest {
             Parser.toDateTime("2020-0307 2359");
             fail();
         } catch (GelException e) {
-            assertEquals("\n"
-                    + "    Your date has an invalid format... please use"
+            assertEquals("    Your date has an invalid format... please use"
                     + " the format:YYYY-MM-DD", e.getMessage());
         } catch (Exception e) {
             fail();
@@ -40,8 +40,7 @@ public class ParserTest {
             Parser.toDateTime("2020-03-07 235959");
             fail();
         } catch (GelException e) {
-            assertEquals("\n" 
-                    + "    Your time has an invalid format... please use"
+            assertEquals("    Your time has an invalid format... please use"
                     + " the format:HHMM", e.getMessage());
         } catch (Exception e) {
             fail();
