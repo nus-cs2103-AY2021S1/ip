@@ -31,7 +31,7 @@ public class TagParser implements IndexCommandParser {
             try {
                 return checkAndGetIndex();
             } catch (DukeException e) {
-                throw new DukeException(e.toString());
+                throw new DukeException(e.getMessage());
             }
         }
     }

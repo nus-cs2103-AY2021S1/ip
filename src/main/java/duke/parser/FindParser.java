@@ -35,7 +35,7 @@ public class FindParser implements IndexCommandParser {
             checkIfValid(); // The integer is not important, we just want to run checkIfValid()
             return input.substring(5);
         } catch (DukeException e) {
-            throw new DukeException(e.toString());
+            throw new DukeException(e.getMessage());
         }
     }
 

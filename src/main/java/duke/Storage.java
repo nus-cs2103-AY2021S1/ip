@@ -1,7 +1,5 @@
 package duke;
 
-import duke.parser.DukeParser;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -9,6 +7,8 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
+
+import duke.parser.DukeParser;
 
 public class Storage {
     /** The task list */

@@ -24,18 +24,23 @@ public class DeadlineParser implements TaskCommandParser {
     public String checkIfValid() throws DukeException {
         int byIndex = input.indexOf(" /by ");
         boolean containsBy = input.contains(" /by ");
-        boolean missingDate = input.substring(input.indexOf(" /by ")).length() == 5;
+        boolean missingDate = true;
+        if (byIndex >= 0) {
+            missingDate = input.substring(input.indexOf(" /by ")).length() == 5;
+        }
         boolean missingTaskDescription = input.contains("deadline /by ");
-        boolean validDateFormat = Deadline.checkDateFormat(input.substring(byIndex + 5));
         if (missingTaskDescription) {
-            throw new DukeException("You aren't setting anything for your deadline?!");
+            throw new DukeException("Where is the description of your deadline?!");
         } else if (!containsBy || missingDate) {
             throw new DukeException("Oi, when is this deadline due??");
-        } else if (!validDateFormat) {
-            throw new DukeException("Hey, that date is not in the YYYY-mm-dd format!");
         } else {
-            Task task = new Deadline(input.substring(9, byIndex), input.substring(byIndex + 5));
-            return task.toString();
+            try {
+                boolean validDateFormat = Deadline.checkDateFormat(input.substring(byIndex + 5));
+                Task task = new Deadline(input.substring(9, byIndex), input.substring(byIndex + 5));
+                return task.toString();
+            } catch (DukeException e) {
+                throw new DukeException(e.getMessage());
+            }
         }
     }
 }

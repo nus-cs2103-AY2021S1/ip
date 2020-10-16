@@ -74,7 +74,7 @@ public class Duke extends Application {
     public String getResponse(String input) {
         String outputMessage;
         try {
-            outputMessage = parser.parse(input);
+            outputMessage = parser.parse(input).execute();
             ArrayList<String> finalLines = parser.finalizedLines();
             storage.saveData(finalLines);
             if (!parser.shouldContinueDuke()) { //Checks if a bye input has been parsed

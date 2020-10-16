@@ -29,7 +29,7 @@ public class UntagParser implements IndexCommandParser {
         } else {
             try {
                 int index = Integer.parseInt(input.substring(6));
-                if (index < 0 || index > lines.getList().size()) { // Checks if the index exists in the TaskList.
+                if (index <= 0 || index > lines.getList().size()) { // Checks if the index exists in the TaskList.
                     throw new DukeException("No such task exists!");
                 }
                 return index;

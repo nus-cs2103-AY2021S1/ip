@@ -4,12 +4,19 @@ import java.util.ArrayList;
 
 import duke.DukeException;
 import duke.TaskList;
-import duke.Ui;
-import duke.command.*;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.EventCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.TagCommand;
+import duke.command.TodoCommand;
+import duke.command.UntagCommand;
+
+
 
 public class DukeParser {
     private TaskList lines;
@@ -59,24 +66,21 @@ public class DukeParser {
     }
 
     /**
-     * Parses the input given by the users. The method checks if the user's input is a done, list, delete, bye or add
-     * command and executes the appropriate response. If the input is invalid, a DukeException is thrown.
      *
-     * @param inputString The user input to be parsed
-     * @return The string representing the appropriate response.
-     * @throws DukeException The exception explaining why the input was invalid
+     * @param inputString
+     * @return
+     * @throws DukeException
      */
     public Command parse(String inputString) throws DukeException {
         if (!noHashTag(inputString)) { // Checks if the input contains "#" as it will cause problems.
             throw new DukeException("Your input contains the # character, don't do that :(");
         }
-        // Checks if the input string is a done command
-        if (inputString.indexOf("done ") == 0) {
+        if (inputString.indexOf("done ") == 0) { // Checks if the input string is a done command
             DoneParser doneParser = new DoneParser(inputString, lines);
             return new DoneCommand(lines, doneParser);
-        } else if (inputString.equals("list")) {
+        } else if (inputString.equals("list")) { // Checks if the input string is a list command
             return new ListCommand(lines);
-        } else if (inputString.equals("bye")) {
+        } else if (inputString.equals("bye")) { // Checks if the input string is a bye command
             carryOn = false;
             return new ByeCommand();
         } else if (inputString.indexOf("delete ") == 0) { // If the input string is a delete command
@@ -98,55 +102,10 @@ public class DukeParser {
             DeadlineParser deadlineParser = new DeadlineParser(inputString);
             return new DeadlineCommand(lines, deadlineParser);
         } else if (inputString.indexOf("event ") == 0) { // If the input is a event command
-
-        }
-            Task task = null;
-            if (inputString.indexOf("todo ") == 0) {
-                boolean emptyDescription = inputString.length() == 5;
-                if (emptyDescription) { //Checks if there is an input for the task command.
-                    throw new DukeException("Hey! Your Todo is empty >:(");
-                } else if (inputString.indexOf(" ") != 4) {
-                    throw new DukeException("What are you even saying?!");
-                } else {
-                    task = new Todo(inputString.substring(5));
-                }
-            } else if (inputString.indexOf("deadline ") == 0) {
-                boolean containsBy = inputString.contains(" /by ");
-                boolean missingDate = inputString.substring(inputString.indexOf(" /by ")).length() == 5;
-                boolean missingTaskDescription = inputString.contains("deadline /by ");
-                int byIndex = inputString.indexOf(" /by ");
-                if (missingTaskDescription) {
-                    throw new DukeException("You aren't setting anything for your deadline?!");
-                } else if (!containsBy || missingDate) {
-                    throw new DukeException("Oi, when is this deadline due??");
-                } else {
-                    if (Deadline.checkDateFormat(inputString.substring(byIndex + 5))) {
-                        task = new Deadline(inputString.substring(9, byIndex),
-                                inputString.substring(byIndex + 5));
-                    }
-                }
-            } else if (inputString.indexOf("event ") == 0) {
-                boolean containsAt = inputString.contains(" /at ");
-                boolean missingLocation = inputString.substring(inputString.indexOf(" /at ")).length() == 5;
-                boolean missingDescription = inputString.contains("event /at ");
-                int atIndex = inputString.indexOf(" /at ");
-                if (!containsAt || missingLocation) {
-                    throw new DukeException("Oi, when is this event on??");
-                } else if (missingDescription) {
-                    throw new DukeException("You aren't setting anything as your event?!");
-                } else {
-                    task = new Event(inputString.substring(6, atIndex), inputString.substring(atIndex + 4));
-                }
-            } else {
-                throw new DukeException("What are you even saying?!");
-            }
-            if (task != null) { //There shouldn't be a case where task would be null. This is just in case.
-                String newTask = task.toString();
-                lines.addTask(newTask);
-                return Ui.addedTask(task, lines.getNumberOfItems());
-            } else {
-                return "";
-            }
+            EventParser eventParser = new EventParser(inputString);
+            return new EventCommand(lines, eventParser);
+        } else {
+            throw new DukeException("I have no idea what you are saying!");
         }
     }
 }
