@@ -1,3 +1,4 @@
+import java.time.DateTimeException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -245,6 +246,7 @@ public class Duke extends Application {
 
                 try {
                     save();
+                    System.exit(0);
                 } catch (IOException e) {
                     showExceptionMessage(e);
                 }
@@ -297,14 +299,19 @@ public class Duke extends Application {
                     }
 
                     String dateStr = lineData[byIndex + 1];
-                    LocalDate date = LocalDate.parse(dateStr);
 
-                    line = String.join(" ", Arrays.copyOfRange(lineData, 1, byIndex));
+                    try {
+                        LocalDate date = LocalDate.parse(dateStr);
 
-                    Task newTask = addToDoItem(type, line, date);
+                        line = String.join(" ", Arrays.copyOfRange(lineData, 1, byIndex));
 
-                    showAddMessage(newTask);
-                    showtotalItemsDescription();
+                        Task newTask = addToDoItem(type, line, date);
+
+                        showAddMessage(newTask);
+                        showtotalItemsDescription();
+                    } catch (DateTimeException e){
+                        showWrongInputMessage();
+                    }
                 } else {
                     showWrongInputMessage();
                 }
