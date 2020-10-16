@@ -30,8 +30,6 @@ public class Ui {
             "- deadline DESCRIPTION /by YYYY-MM-DD\n" +
             "[add a deadline with DESCRIPTION at YYYY-MM-DD]\n";
 
-
-
     private static final String GREETING= "Yo ~ This is M-A-R-C-O Marco!ヾ(≧∇≦*)ゝ \n" +
             "The best task manager from the Puppy Universe U｡･ｪ･｡U \n" +
             "Is there anything that I can do for you?\n" +
@@ -53,33 +51,31 @@ public class Ui {
         this.out = out;
     }
 
-    public Scanner getIn() {
-        return in;
-    }
+    public static Scanner getIn() {return new Scanner(System.in);}
 
     /**
      * This method is used to greet the user.
      */
-    public String greet() {
+    public static String greet() {
         return LINE_TOP + GREETING + LINE_BOTTOM;
     }
 
     /**
      * This method is used to say good bye to the user.
      */
-    public String bye() {
+    public static String bye() {
         return LINE_TOP + BYE + LINE_BOTTOM;
     }
 
-    public String getHelp() {
-        return this.HELP;
+    public static String getHelp() {
+        return HELP;
     }
 
     /**
      * This method is used to get command from the user.
      */
-    public String getUserCommand() {
-        String fullInputLine = in.nextLine();
+    public static String getUserCommand() {
+        String fullInputLine = new Scanner(System.in).nextLine();
         return fullInputLine;
     }
 
@@ -87,11 +83,11 @@ public class Ui {
      * This method is used to print all the tasks in the task list.
      * @param taskList The task list used for printing.
      */
-    public void printAllTasks(TaskList taskList) {
+    public static void printAllTasks(TaskList taskList) {
         System.out.println(returnAllTasks(taskList));
     }
 
-    public String returnAllTasks(TaskList taskList) {
+    public static String returnAllTasks(TaskList taskList) {
         String stringToReturn = LINE_TOP + "Here are the tasks in your list: \n";
         int num = taskList.getNoOfTasks();
         assert (num != 0) : "There is no existing task in your list! ";
@@ -104,11 +100,11 @@ public class Ui {
     }
 
 
-    public void printRelevantTasks(TaskList taskList, String keyWord) {
+    public static void printRelevantTasks(TaskList taskList, String keyWord) {
         System.out.println(returnRelevantTasks(taskList,keyWord));
     }
 
-    public String returnRelevantTasks(TaskList taskList, String keyWord) {
+    public static String returnRelevantTasks(TaskList taskList, String keyWord) {
         String stringToReturn = LINE_TOP + "Here are the matching tasks in your list: \n";
         int n = taskList.getNoOfTasks();
         assert (n != 0) : "There is no matching task in your list! ";
@@ -127,14 +123,14 @@ public class Ui {
     /**
      * This method is used to warn the user that the list is empty.
      */
-    public String emptyList() {
+    public static String emptyList() {
         Exception ex = new InvalidInputException("Oops, your list is currently empty. Add some tasks first!");
         String stringToReturn = LINE_TOP + ex.getMessage() + "\n" + LINE_BOTTOM;
         return stringToReturn;
     }
 
     // ADD RELATED
-    public String addSuccessful(Task added, int noOfTasks) {
+    public static String addSuccessful(Task added, int noOfTasks) {
         String stringToReturn = LINE_TOP + "Got it. I've added this task: \n"
                                 + added + "\n" + "Now you have " + noOfTasks +
                                  " tasks in the list.\n " + LINE_BOTTOM ;
@@ -144,14 +140,14 @@ public class Ui {
     /**
      * This method is used to warn the user that the command is undefined.
      */
-    public String unknownCommand() {
+    public static String unknownCommand() {
         Exception ex = new InvalidInputException("Ah oh! I didn't know what that means >n<, sorry! ");
         String stringToReturn = LINE_TOP + ex.getMessage() + "\n" + LINE_BOTTOM;
         return stringToReturn;
     }
 
     // DELETE RELATED
-    public String deleteSuccessful(Task deleted, TaskList list) {
+    public static String deleteSuccessful(Task deleted, TaskList list) {
         assert (list.getNoOfTasks() >= 0) : "There must be zero or more tasks in a task list.";
         String stringToReturn = LINE_TOP + "Got it. I've removed this task: \n" + deleted +
                                 "\n" + "Now you have " + list.getNoOfTasks() +
@@ -162,20 +158,20 @@ public class Ui {
     /**
      * This method is used to warn the user that task to be deleted is not specified.
      */
-    public String incompleteDeleteCommand() {
+    public static String incompleteDeleteCommand() {
         Exception ex = new InvalidInputException("Hey, you forgot to tell me which task to delete");
         String stringToReturn = LINE_TOP + ex.getMessage() + "\n" + LINE_BOTTOM;
         return stringToReturn;
     }
 
-    public String setTagSuccessful(String tag, Task task) {
+    public static String setTagSuccessful(String tag, Task task) {
         String stringToReturn = LINE_TOP + "Nice! I've added the tag <" + tag + "> for the following task: \n" +
                                 task + "\n" + LINE_BOTTOM;
         return stringToReturn;
     }
 
     // MODIFY
-    public String markDoneSuccessful(Task done) {
+    public static String markDoneSuccessful(Task done) {
         assert (done.isDone == true) : "Task is not marked as done as intended.";
         String stringToReturn = LINE_TOP + "Nice! I've marked this task as done: \n" +
                                 done + "\n" + LINE_BOTTOM;
@@ -183,13 +179,13 @@ public class Ui {
     }
 
     // PRINT RELATED
-    public String markDoneFailure() {
+    public static String markDoneFailure() {
         Exception ex = new InvalidInputException("Hey, you forgot to tell me which task is done!");
         String stringToReturn = LINE_TOP + ex.getMessage() + "\n" + LINE_BOTTOM;
         return stringToReturn;
     }
 
-    public String duplicatedMarkDone() {
+    public static String duplicatedMarkDone() {
         Exception ex = new InvalidInputException("Hey, this task is already done!");
         String stringToReturn = LINE_TOP + ex.getMessage() + "\n" + LINE_BOTTOM;
         return stringToReturn;
@@ -198,7 +194,7 @@ public class Ui {
     /**
      * This method is used to warn the user that the task referred to has not been created.
      */
-    public String uncreatedTask() {
+    public static String uncreatedTask() {
         Exception ex = new InvalidInputException("Oops, this task has not been created yet!");
         String stringToReturn = LINE_TOP + ex.getMessage() + "\n" + LINE_BOTTOM;
         return stringToReturn;
@@ -207,12 +203,12 @@ public class Ui {
     /**
      * This method is used to warn the user that there is not prior data from Duke.
      */
-    public String showLoadingError() {
+    public static String showLoadingError() {
         return "Creating the storage file...";
     }
 
 
-    public String  missingDescription(String type) {
+    public static String  missingDescription(String type) {
         assert (type == "T" | type == "D" | type =="E") : "Incorrect type.";
         Exception ex = new InvalidInputException("Hey, you forget the description for your " + type +"!");
         String stringToReturn = LINE_TOP + ex.getMessage() + "\n" + LINE_BOTTOM;
@@ -222,7 +218,7 @@ public class Ui {
     /**
      * This method is used to warn the user that the deadline information is missing.
      */
-    public String missingDeadline() {
+    public static String missingDeadline() {
         Exception ex = new InvalidInputException("Sorry, but I can't help if you don't tell me the exact deadline!");
         String stringToReturn = LINE_TOP + ex.getMessage() + "\n" + LINE_BOTTOM;
         return stringToReturn;
@@ -231,13 +227,13 @@ public class Ui {
     /**
      * This method is used to warn the user that the event time is missing.
      */
-    public String missingEventTime() {
+    public static String missingEventTime() {
         Exception ex = new InvalidInputException("I see...But what time is this event at?");
         String stringToReturn = LINE_TOP + ex.getMessage() + "\n" + LINE_BOTTOM;
         return stringToReturn;
     }
 
-    public String incorrectDoneFormat() {
+    public static String incorrectDoneFormat() {
         Exception ex = new InvalidInputException("Your input format for 'done' command is wrong!" +
                                                  " It should be 'done TASK_NUMBER.");
         String stringToReturn = LINE_TOP + ex.getMessage() + "\n" + LINE_BOTTOM;

@@ -52,14 +52,13 @@ public class Duke extends Application {
      *                 file for reading and writing of data.
      */
     public Duke(String filePath) {
-        ui = new Ui();
         storage = new Storage(filePath);
         File file = new File(filePath);
         try {
             tasks = new TaskList(storage.load());
         } catch (FileNotFoundException e) {
             tasks = new TaskList();
-            System.out.println(ui.showLoadingError());
+            System.out.println(Ui.showLoadingError());
         }
     }
 
@@ -70,10 +69,10 @@ public class Duke extends Application {
      * @return Nothing.
      */
     public void run() {
-        ui.greet();
-        while (ui.getIn().hasNextLine()) {
+        Ui.greet();
+        while (Ui.getIn().hasNextLine()) {
             String command = ui.getUserCommand();
-            Parser.respond(command, ui, tasks, storage.filePath);
+            Parser.respond(command, tasks, storage.filePath);
         }
     }
 
@@ -179,7 +178,7 @@ public class Duke extends Application {
     }
 
     private String getResponse(String input, Duke testBot) {
-        return Parser.respond(input, testBot.ui, testBot.tasks, testBot.storage.filePath);
+        return Parser.respond(input,testBot.tasks, testBot.storage.filePath);
     }
 }
 

@@ -57,6 +57,6 @@ public class MainWindow extends AnchorPane {
     }
 
     private String getResponse(String input, Duke testBot) {
-        return Parser.respond(input, testBot.ui, testBot.tasks, testBot.storage.filePath);
+        return Parser.respond(input, testBot.tasks, testBot.storage.filePath);
     }
 }
