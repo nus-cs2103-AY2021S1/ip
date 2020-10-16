@@ -21,9 +21,6 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-
-
-
 /**
  * Represents an interactive chat bot named "Duke"
  * who can manage simple tasks for users.

@@ -17,6 +17,11 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Load data from a filePath.
+     *
+     * @return String data loaded from the file path.
+     */
     public String load() throws FileNotFoundException {
         try {
             return FileReading.printFileContents(filePath);
@@ -24,16 +29,15 @@ public class Storage {
             System.out.println("Creating the storage file...");
 
             File f = new File(filePath);
+
+            // create directory if not created
             if (!f.getParentFile().exists()) {
-                f.getParentFile().mkdirs(); //create directory if not created
+                Storage.createDirectory(f);
             }
 
+            // create file if not created
             if (!f.exists()) {
-                try {
-                    f.createNewFile(); // create file if not created
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
+                Storage.createFile(f);
             }
 
             // read the file again
@@ -44,6 +48,29 @@ public class Storage {
             }
         }
         return FileReading.printFileContents(filePath);
+    }
+    /**
+     * Create a directory for the required file path if it's not yet created.
+     *
+     * @param file File to load the data from.
+     * @return nothing.
+     */
+    public static void createDirectory(File file) {
+        file.getParentFile().mkdirs();
+    }
+
+    /**
+     * Create a file for the required file path if it's not yet created.
+     *
+     * @param file File to load the data from.
+     * @return nothing.
+     */
+    public static void createFile(File file) {
+        try {
+            file.createNewFile();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
     public static void updateTasks(int count, List<Task> list, String filePath) {
@@ -59,5 +86,4 @@ public class Storage {
             e.printStackTrace();
         }
     }
-
 }
