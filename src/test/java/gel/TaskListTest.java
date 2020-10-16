@@ -16,7 +16,7 @@ public class TaskListTest {
             new TaskList(new Ui()).markTaskAsDone(new String[] {"1"});
             fail();
         } catch (GelException e) {
-            assertEquals("    Please input a valid number from 1 - 0", e.getMessage());
+            assertEquals("    Oi tell me what you want to mark as done la", e.getMessage());
         } catch (Exception e) {
             fail();
         }
@@ -28,7 +28,7 @@ public class TaskListTest {
             new TaskList(new Ui()).deleteTask(new String[] {"a"});
             fail();
         } catch (Exception e) {
-            assertEquals("For input string: \"a\"", e.getLocalizedMessage());
+            assertEquals("    Yo tell me what you want to delete la", e.getLocalizedMessage());
         }
     }
 
