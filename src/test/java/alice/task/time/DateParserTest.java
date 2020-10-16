@@ -13,7 +13,7 @@ import alice.command.InvalidCommandException;
 
 public class DateParserTest {
     private final int currYear = LocalDate.now().getYear();
-    private final int currMonth = LocalDate.now().getMonthValue();
+    private final int currMonth = 9;
     // Default/now --> Monday
     private final LocalDate mockDate = LocalDate.of(currYear, currMonth, 7);
 
