@@ -39,7 +39,8 @@ Example: `todo borrow book`
 ### Feature 2: Deadline
 Add tasks that need to be done before a specific date/time e.g., submit report by 11/10/2019 5pm.  
 Format: `deadline DESCRIPTION /by DATE TIME(optional)`  
-Example: `deadline return book /by Sunday`
+Example:  
+`deadline return book /by Sunday`
 
 `deadline return book /by 2/12/2019 1800`
 
@@ -51,7 +52,8 @@ Example: `deadline return book /by Sunday`
 ### Feature 3: Event
 Add tasks that start at a specific time and ends at a specific time e.g., team project meeting on 2/10/2019 2-4pm.  
 Format: `event DESCRIPTION /at DATE TIME(optional)`  
-Example: `event project meeting /at Mon 2-4pm`
+Example:  
+`event project meeting /at Mon 2-4pm`
 
 `event return book /at 2/12/2019 1800`
 
@@ -77,5 +79,5 @@ Format: `delete INDEX`
 Example: `delete 3`
 
 ### Feature 8: Exit
-Exit the program via chat.
+Exit the program via chat.  
 Format: `bye`  
