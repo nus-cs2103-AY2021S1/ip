@@ -1,5 +1,7 @@
 package duke.commands;
 
+import duke.exceptions.DeleteException;
+import duke.exceptions.DukeException;
 import duke.support.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
@@ -20,9 +22,13 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public String run(TaskList taskList, Storage storage) {
-        Task currentTask = taskList.get(taskIndex - 1);
-        taskList.remove(taskIndex - 1);
-        return Ui.deleteTask(currentTask, taskList);
+    public String run(TaskList taskList, Storage storage) throws DukeException  {
+        try {
+            Task currentTask = taskList.get(taskIndex - 1);
+            taskList.remove(taskIndex - 1);
+            return Ui.deleteTask(currentTask, taskList);
+        } catch (Exception e) {
+            throw new DeleteException();
+        }
     }
 }

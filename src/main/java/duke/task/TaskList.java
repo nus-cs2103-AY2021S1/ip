@@ -69,6 +69,9 @@ public class TaskList {
      */
     public TaskList find(String condition) {
         ArrayList<Task> newTaskList = new ArrayList<Task>();
+        if (taskList.isEmpty()) {
+            return new TaskList();
+        }
         taskList.stream()
                 .filter(x->x.getContent().contains(condition) || x.getTag().contains(condition))
                 .forEach(x->newTaskList.add(x));

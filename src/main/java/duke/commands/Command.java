@@ -1,5 +1,7 @@
 package duke.commands;
 
+import duke.Duke;
+import duke.exceptions.DukeException;
 import duke.support.Storage;
 import duke.task.TaskList;
 
@@ -15,7 +17,7 @@ public abstract class Command {
      * @param storage A {@code Storage} where reads and writes data file.
      * @return A String as a repsonse to the user's command.
      */
-    public abstract String run(TaskList taskList, Storage storage);
+    public abstract String run(TaskList taskList, Storage storage) throws DukeException;
     public boolean isBye() {
         return false;
     }
