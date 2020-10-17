@@ -1,5 +1,7 @@
-import java.io.*;
-
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -69,7 +71,7 @@ public class TaskList {
             for (int i = 0; i < rtnSplit.length; i++) {
                 rtnSplit[i] = (i + 1) + ". " + rtnSplit[i];
             }
-            return Arrays.asList(rtnSplit).stream().collect(Collectors.joining("\n"));
+            return String.join("\n", Arrays.asList(rtnSplit));
         } else {
             return "";
         }
@@ -84,7 +86,7 @@ public class TaskList {
         for (int i = 0; i < rtnSplit.length; i++) {
             rtnSplit[i] = (i + 1) + ". " + rtnSplit[i];
         }
-        return Arrays.asList(rtnSplit).stream().collect(Collectors.joining("\n"));
+        return String.join("\n", Arrays.asList(rtnSplit));
     }
 
     public ArrayList<Task> getTasks() {

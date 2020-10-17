@@ -1,27 +1,33 @@
-import javax.swing.*;
-import javax.swing.filechooser.FileNameExtensionFilter;
-import java.io.*;
-
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class Storage {
     //abstracts the file loading/checking process
+    static final String NOPATH = "nopath";
     private File storeFile;
     private File pointerFile;
-    static final String noPath = "nopath";
 
     Storage(String filePath) throws IOException {
         //read data file path from filePath file
         Path testPath = Paths.get(filePath);
         File testFile = new File(filePath);
         if (testFile.exists()) {
-            this.pointerFile  = testFile;
+            this.pointerFile = testFile;
         } else {
             Files.createDirectories(testPath.getParent());
             Files.createFile(testPath);
-            this.pointerFile  = new File(filePath);
+            this.pointerFile = new File(filePath);
         }
         BufferedReader br = new BufferedReader(new FileReader(this.pointerFile));
         String dataFilePath = br.readLine();
@@ -29,8 +35,8 @@ public class Storage {
     }
 
     /**
-     * Returns the loaded storage file
-     * @return File object
+     * Returns the loaded storage File
+     * @return File of storage
      */
     File load() {
         return this.storeFile;
@@ -66,13 +72,13 @@ public class Storage {
 
     public static String promptForFile() {
         JFileChooser fc = new JFileChooser("./data");
-        fc.addChoosableFileFilter(new FileNameExtensionFilter("*.txt", "txt"));
+        fc.setFileFilter(new FileNameExtensionFilter("*.txt", "txt"));
         int rtnValue = fc.showOpenDialog(null);
         if (rtnValue == JFileChooser.APPROVE_OPTION) {
             String filePath = fc.getSelectedFile().getAbsolutePath();
             return filePath;
         } else {
-            return noPath;
+            return NOPATH;
         }
     }
 

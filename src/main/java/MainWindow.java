@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -7,8 +9,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-
-import java.io.IOException;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -29,9 +29,12 @@ public class MainWindow extends AnchorPane {
 
     private Jarvis jarvis;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/ironman.png"));
-    private Image jarvisImage = new Image(this.getClass().getResourceAsStream("/images/jarvis.png"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/ironman.png"));
+    private final Image jarvisImage = new Image(this.getClass().getResourceAsStream("/images/jarvis.png"));
 
+    /**
+     * Initializes the scroll pane and sets the user image
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());

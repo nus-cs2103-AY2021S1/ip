@@ -1,13 +1,5 @@
 import java.io.IOException;
 
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.VBox;
-import javafx.scene.image.Image;
-
-
 public class Jarvis {
 
     private Storage storage;
@@ -16,8 +8,8 @@ public class Jarvis {
 
     /**
      * Jarvis constructor takes in file path to setup duke
-     * @param filePath
-     * @throws IOException
+     * @param filePath path of storage file
+     * @throws IOException exception throw when invalid file provided
      */
     public Jarvis(String filePath) throws IOException {
         assert filePath.contains(".txt"); //enure that correct file type is passed

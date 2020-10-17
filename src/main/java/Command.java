@@ -1,5 +1,4 @@
 import java.io.IOException;
-import java.time.LocalDate;
 
 /**
  * Parses commands as well as provide differnet type of subclasses
@@ -8,9 +7,9 @@ import java.time.LocalDate;
 abstract class Command {
     protected boolean exit;
 
-    protected TaskList tasks;
-    protected Ui ui;
-    protected Storage storage;
+    protected final TaskList tasks;
+    protected final Ui ui;
+    protected final Storage storage;
 
     Command(TaskList tasks, Ui ui, Storage storage) {
         this.tasks = tasks;
@@ -25,7 +24,8 @@ abstract class Command {
      * @return appropriate Command object
      * @throws InvalidInputException if String command not available
      */
-    static Command parse(String command, TaskList tasks, Ui ui, Storage storage) throws InvalidInputException, EmptyTodoException {
+    static Command parse(String command, TaskList tasks, Ui ui, Storage storage)
+            throws InvalidInputException, EmptyTodoException, InvalidDeadlineException {
         if (command.equals("bye")) {
             return new ExitCommand(tasks, ui, storage);
         } else if (command.equals("list")) {
@@ -43,15 +43,20 @@ abstract class Command {
             return new LoadFileCommand(tasks, ui, storage);
         } else {
             //actual entry
-            String postFix = command.split(" ", 2)[1];
-            String preFix = command.split(" ", 2)[0];
-            if (preFix.equals("todo")) {
-                return new TodoCommand(postFix, tasks, ui, storage);
-            } else if (preFix.equals("deadline")) {
-                return new DeadlineCommand(postFix, tasks, ui, storage);
-            } else if (preFix.equals("event")) {
-                return new EventCommand(postFix, tasks, ui, storage);
-            } else {
+            try {
+                String postFix = command.split(" ", 2)[1];
+                String preFix = command.split(" ", 2)[0];
+                switch (preFix) {
+                case "todo":
+                    return new TodoCommand(postFix, tasks, ui, storage);
+                case "deadline":
+                    return new DeadlineCommand(postFix, tasks, ui, storage);
+                case "event":
+                    return new EventCommand(postFix, tasks, ui, storage);
+                default:
+                    throw new InvalidInputException();
+                }
+            } catch (ArrayIndexOutOfBoundsException e) {
                 throw new InvalidInputException();
             }
         }

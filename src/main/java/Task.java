@@ -1,5 +1,5 @@
 class Task {
-    protected String task;
+    protected final String task;
     protected String saveRep;
     protected boolean done;
 

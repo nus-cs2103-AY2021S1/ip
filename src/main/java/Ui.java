@@ -1,13 +1,13 @@
 import java.util.Arrays;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 /**
  * Handles all elements displayed to the user
  */
 public class Ui {
-    private Scanner scan;
-    static private String format = "\t";
+    static final String FORMAT = "\t";
+    private final Scanner scan;
+
 
     Ui() {
         this.scan = new Scanner(System.in);
@@ -23,8 +23,8 @@ public class Ui {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-        System.out.println(format + "Hello! I'm Jarvis");
-        System.out.println(format + "What can I do for you?");
+        System.out.println(FORMAT + "Hello! I'm Jarvis");
+        System.out.println(FORMAT + "What can I do for you?");
     }
 
     /**
@@ -46,7 +46,7 @@ public class Ui {
      * Prints goodbye message
      */
     public void goodbye() {
-        System.out.println(format + "Bye. Hope to see you again soon!");
+        System.out.println(FORMAT + "Bye. Hope to see you again soon!");
     }
 
     /**
@@ -54,7 +54,7 @@ public class Ui {
      * @param message Error message from exception
      */
     public void showError(String message) {
-        System.out.println(format + "An error was thrown: " + message);
+        System.out.println(FORMAT + "An error was thrown: " + message);
     }
 
     /**
@@ -62,11 +62,11 @@ public class Ui {
      * @param printStr String to be formatted and printed
      */
     public String printf(String printStr) {
-        String print = format + printStr;
+        String print = FORMAT + printStr;
         String[] printSplit = print.split("\n");
         for (int i = 1; i < printSplit.length; i++) {
             printSplit[i] = "\t" + printSplit[i];
         }
-        return Arrays.asList(printSplit).stream().collect(Collectors.joining("\n"));
+        return String.join("\n", Arrays.asList(printSplit));
     }
 }

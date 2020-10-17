@@ -6,19 +6,32 @@ import java.time.format.DateTimeFormatter;
  * It is initialized via 'deadline (taskname) /by (yyyy-dd-mm)'
  */
 class Deadline extends Task {
-    private LocalDate date;
+    private final LocalDate date;
 
+    /**
+     * Deadline constructor
+     * @param task String representation of task name
+     * @param deadline String representation of deadline
+     */
     Deadline(String task, String deadline) {
         super(task);
+        System.out.println("here");
         this.date = LocalDate.parse(deadline);
         updateRep();
     }
 
+    /**
+     * Returns string representation of deadline
+     * @return formatted string representation of deadline
+     */
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 
+    /**
+     * Updates the representation of the deadline object to be saved to the storage file
+     */
     @Override
     public void updateRep() {
         super.updateRep();
