@@ -1,7 +1,6 @@
 package duke.ui;
 
 import duke.Duke;
-import duke.ui.DialogBox;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -34,8 +33,10 @@ public class MainWindow extends AnchorPane {
 
     public void setDuke(Duke d) {
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog("Hi!\nIf you have already had the account, you can use 'login {username} {password} to log in.' \n" +
-                        "If you are a new user, you can use 'login admin password' to log in. You can add more valid users.'", dukeImage)
+                DialogBox.getDukeDialog("Hi!\nIf you have already had the account, "
+                        + "you can use 'login {username} {password} to log in.' \n"
+                        + "If you are a new user, you can use 'login admin password' "
+                        + "to log in. You can add more valid users.'", dukeImage)
         );
         duke = d;
     }

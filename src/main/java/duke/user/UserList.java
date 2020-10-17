@@ -8,12 +8,17 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-
+/**
+ * Represents a user list consisting of all of users.
+ */
 public class UserList {
     private static File file;
     private static Path filepath;
     private static ArrayList<User> userList;
 
+    /**
+     * Initializes the user list by reading users from data file.
+     */
     public static void initialize() {
         String dir = System.getProperty("user.dir");
         Path path = Paths.get(dir, "duke", "userInfo.txt");
@@ -36,6 +41,11 @@ public class UserList {
         }
     }
 
+    /**
+     * Checks whether the user is inside the list by comparing it with all of users in the list.
+     *
+     * @param currentUser The user checked.
+     */
     public static User check(User currentUser) {
         ArrayList<User> users = readUsersInfo();
         for (User user: users) {
@@ -46,6 +56,11 @@ public class UserList {
         return null;
     }
 
+    /**
+     * Reads user information from data file.
+     *
+     * @return
+     */
     public static ArrayList<User> readUsersInfo() {
         ArrayList<User> users = new ArrayList<User>();
         try {
@@ -63,11 +78,19 @@ public class UserList {
         return userList;
     }
 
+    /**
+     * Adds a user to user list and write back to data file.
+     *
+     * @param user The user added.
+     */
     public static void addUser(User user) {
         userList.add(user);
         write();
     }
 
+    /**
+     * Writes user list on the disk.
+     */
     public static void write() {
         try {
             FileWriter writer = new FileWriter(file);

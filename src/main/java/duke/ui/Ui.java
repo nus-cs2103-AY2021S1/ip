@@ -1,29 +1,35 @@
 package duke.ui;
 
+import java.util.Random;
+
 import duke.support.Login;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.user.User;
 
-import java.util.Random;
 
 /**
  * Ui deals with interactions with the user.
  */
 public class Ui {
-    public static void showLine(String msg) {
-        System.out.println(msg);
-    }
-
+    /**
+     * Shows when existing the app.
+     */
     public static String bye() {
         return "See you again!";
     }
 
+    /**
+     * Shows when adding the task successfully.
+     */
     public static String addTask(Task task, TaskList taskList) {
         return "Got it. I've added this task:\n" + task.toString() + "\nNow you have "
                 + taskList.size() + " tasks in the list.";
     }
 
+    /**
+     * Shows when listing tasks.
+     */
     public static String getTasks(TaskList taskList) {
         int num = 1;
         String res = "Here are the tasks in your list:\n";
@@ -34,15 +40,24 @@ public class Ui {
         return res;
     }
 
+    /**
+     * Shows when marking task as done.
+     */
     public static String doneTask(Task task) {
         return "Nice! I've marked this task as done:\n" + task.toString();
     }
 
+    /**
+     * Shows when deleting a task.
+     */
     public static String deleteTask(Task task, TaskList taskList) {
         return "Noted. I've removed this task:\n" + task.toString()
                 + "\nNow you have " + taskList.size() + " tasks in the list.";
     }
 
+    /**
+     * Shows when setting a tag.
+     */
     public static String setTaskTag(int taskIndex, String oldTag, String newTag) {
         if (oldTag == null) {
             return "Noted. I've tagged Task " + taskIndex + " as " + newTag + ".";
@@ -51,6 +66,9 @@ public class Ui {
         }
     }
 
+    /**
+     * Shows when logging in the app.
+     */
     public static String login() {
         if (Login.isLogined()) {
             User user = Login.getUser();
@@ -60,22 +78,31 @@ public class Ui {
         }
     }
 
+    /**
+     * Shows when there is no access.
+     */
     public static String accessMissing() {
         return "No Access for Command. Please login in first.";
     }
 
+    /**
+     * Shows when adding a user.
+     */
     public static String addUser() {
         return "A new user has been added successfully.";
     }
 
+    /**
+     * Shows when calling love command.
+     */
     public static String love() {
         String[] reply;
         reply = new String[]{
-                "°®ÄãÅ¶£¡", "ÏëÄã£¡", "Ã¿Ìì¶¼ÓĞºÃĞÄÇéÅ¶£¡", "¿ìÎÊÎÊÎÒÔÚ¸ÉÂï£¡", "½ñÌìÌìÆø²»´í£¬³öÈ¥×ß×ß°É£¡", "¸øÄã±ÈĞÄ?", "²Â²ÂÎÒÓĞ¶à°®Äã£¡",
-                "Éµ×Ó£¬Õâ¸öÊ²Ã´¶¼Ã»ÓĞ!", "½ñÌìĞÄÇéÔõÃ´ÑùÑ½£¡", "³Ô·¹Ã»£¡ÎÒÒ²Ïë³Ô£¡", "Love you!", "Good Good Study, Day Day Up",
-                "It is lucky to have you!", "Pig!", "Beauty", "Are you with me ?", "Take a photo to record the life~",
-                "When I first saw you, I thought you were a pig!", "LMAO, nothing here!", "Äã»¹ÔÚµÈÎÒÂï£¿", "µ±Äã¹Â¶ÀµÄÊ±ºò£¬ÇëÄã¼Ç×¡»¹ÓĞÎÒ",
-                "Nothing deserves my love except you.", "ËêÔÂ¾²ºÃ£¬ÏÖÊÀ°²ÎÈ£¡", "·çÀïÓêÀïÎÒÔÚÕâÀï£¡"
+            "çˆ±ä½ å“¦ï¼", "æƒ³ä½ ï¼", "æ¯å¤©éƒ½æœ‰å¥½å¿ƒæƒ…å“¦ï¼", "å¿«é—®é—®æˆ‘åœ¨å¹²å˜›ï¼", "ä»Šå¤©å¤©æ°”ä¸é”™ï¼Œå‡ºå»èµ°èµ°å§ï¼", "ç»™ä½ æ¯”å¿ƒ?", "çŒœçŒœæˆ‘æœ‰å¤šçˆ±ä½ ï¼",
+            "å‚»å­ï¼Œè¿™ä¸ªä»€ä¹ˆéƒ½æ²¡æœ‰!", "ä»Šå¤©å¿ƒæƒ…æ€ä¹ˆæ ·å‘€ï¼", "åƒé¥­æ²¡ï¼æˆ‘ä¹Ÿæƒ³åƒï¼", "Love you!", "Good Good Study, Day Day Up",
+            "It is lucky to have you!", "Pig!", "Beauty", "Are you with me ?", "Take a photo to record the life~",
+            "When I first saw you, I thought you were a pig!", "LMAO, nothing here!", "ä½ è¿˜åœ¨ç­‰æˆ‘å˜›ï¼Ÿ", "å½“ä½ å­¤ç‹¬çš„æ—¶å€™ï¼Œè¯·ä½ è®°ä½è¿˜æœ‰æˆ‘",
+            "Nothing deserves my love except you.", "å²æœˆé™å¥½ï¼Œç°ä¸–å®‰ç¨³ï¼", "é£é‡Œé›¨é‡Œæˆ‘åœ¨è¿™é‡Œï¼"
         };
         Random random = new Random();
 

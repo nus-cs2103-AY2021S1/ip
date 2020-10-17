@@ -4,7 +4,10 @@ import duke.support.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
-public class EmptyCommand extends Command{
+/**
+ * Represents an empty command when there is no access.
+ */
+public class EmptyCommand extends Command {
     public EmptyCommand() {
     }
 

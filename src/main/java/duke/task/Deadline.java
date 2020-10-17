@@ -3,14 +3,30 @@ package duke.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a Deadline task.
+ */
 public class Deadline extends Task {
     private String byDateString;
     private LocalDate byDate;
 
+    /**
+     * Creates a {@code Deadline} with given task content and date.
+     *
+     * @param taskContent A String of content.
+     * @param byDateString A String of date.
+     */
     public Deadline(String taskContent, String byDateString) {
         super(taskContent);
         this.byDateString = byDateString;
     }
+
+    /**
+     * Creates a {@code Deadline} with given task content and date.
+     *
+     * @param taskContent A String of content.
+     * @param byDate A LocalDate of date.
+     */
     public Deadline(String taskContent, LocalDate byDate) {
         super(taskContent);
         this.byDate = byDate;

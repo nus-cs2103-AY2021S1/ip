@@ -1,8 +1,14 @@
 package duke.task;
 
-import duke.task.Task;
-
+/**
+ * Represents a ToDo task.
+ */
 public class ToDo extends Task {
+
+    /**
+     * Creates a {@code ToDo} with given content.
+     * @param taskContent A String of task content.
+     */
     public ToDo(String taskContent) {
         super(taskContent);
     }

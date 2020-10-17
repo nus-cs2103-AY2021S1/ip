@@ -1,33 +1,57 @@
 package duke.task;
-import duke.exceptions.DukeException;
 
+
+/**
+ * Represents a task.
+ */
 public class Task {
     private boolean isDone;
     private String taskContent;
     private String taskTag;
 
+    /**
+     * Creates a {@code Task} with given content.
+     *
+     * @param taskContent A String of content.
+     */
     public Task(String taskContent) {
         this.taskContent = taskContent;
         this.isDone = false;
         this.taskTag = null;
     }
+
+    /**
+     * Marks the task as done.
+     */
     public void markAsDone() {
         this.isDone = true;
     }
-    public void test() throws DukeException {
-        if (taskContent.length() == 0) {
-            throw new DukeException("OOPS!!! The description of a task cannot be empty.");
-        }
-    }
-    public String getType() {
-        return "";
-    }
+
+    /**
+     * Checks whether the task has been marked as done.
+     * @return
+     */
     public boolean isDone() {
         return this.isDone;
     }
+
+    /**
+     * Gets the task type.
+     */
+    public String getType() {
+        return "";
+    }
+
+    /**
+     * Gets the task content.
+     */
     public String getContent() {
         return this.taskContent;
     }
+
+    /**
+     * Gets the task date.
+     */
     public String getDate() {
         return "";
     }
@@ -47,9 +71,13 @@ public class Task {
         return oldTag;
     }
 
+    /**
+     * Gets the task tag.
+     */
     public String getTag() {
         return this.taskTag;
     }
+
     @Override
     public String toString() {
         String res = "";

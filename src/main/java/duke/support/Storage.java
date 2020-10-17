@@ -1,19 +1,19 @@
 package duke.support;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
 
 
 /**
@@ -24,6 +24,11 @@ public class Storage {
     private File file;
     private Path path;
 
+    /**
+     * Creates a {@code Storage} with given file name.
+     *
+     * @param fileName A String of file name.
+     */
     public Storage(String fileName) {
         String dir = System.getProperty("user.dir");
         Path path = Paths.get(dir, "duke", fileName);
@@ -43,8 +48,7 @@ public class Storage {
     }
 
     /**
-     * This method wites all of tasks onto the disk.
-     *
+     * This method writes all of tasks onto the disk.
      */
     public void write(ArrayList<? extends Task> tasks) {
         try {

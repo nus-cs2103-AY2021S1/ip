@@ -16,6 +16,9 @@ public class Duke {
     private Storage storage;
     private TaskList taskList;
 
+    /**
+     * Creates a {@code Duke} with a storage and a filled task list.
+     */
     public Duke() {
         storage = new Storage("duke.txt");
         taskList = new TaskList(storage.getTaskList());

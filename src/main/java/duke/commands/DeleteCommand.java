@@ -5,8 +5,16 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Delete certain task from task list.
+ */
 public class DeleteCommand extends Command {
     private int taskIndex;
+
+    /**
+     * Creates a {@code DeleteCommand} with given task index.
+     * @param taskIndex The index of the task deleted.
+     */
     public DeleteCommand(String taskIndex) {
         this.taskIndex = Integer.parseInt(taskIndex);
     }

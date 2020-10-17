@@ -4,7 +4,10 @@ import duke.support.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
-public class LoginCommand extends Command{
+/**
+ * Logs in to the system.
+ */
+public class LoginCommand extends Command {
     public LoginCommand() {
     }
 

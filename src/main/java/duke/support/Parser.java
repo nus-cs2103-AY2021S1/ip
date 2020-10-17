@@ -1,8 +1,20 @@
 package duke.support;
 
-import duke.commands.*;
-import duke.exceptions.DukeException;
-import duke.exceptions.InvalidInputException;
+import duke.commands.AddDeadlineCommand;
+import duke.commands.AddEventCommand;
+import duke.commands.AddToDoCommand;
+import duke.commands.AddUserCommand;
+import duke.commands.ByeCommand;
+import duke.commands.Command;
+import duke.commands.DeleteCommand;
+import duke.commands.DoneCommand;
+import duke.commands.EmptyCommand;
+import duke.commands.FindCommand;
+import duke.commands.ListCommand;
+import duke.commands.LoginCommand;
+import duke.commands.LoveCommand;
+import duke.commands.TagCommand;
+import duke.exceptions.*;
 import duke.user.User;
 
 
@@ -12,7 +24,6 @@ import duke.user.User;
 public class Parser {
     private static final String COMMAND_BYE = "bye";
     private static final String COMMAND_LIST = "list";
-    private static final String COMMAND_ADD = "add";
     private static final String COMMAND_DONE = "done";
     private static final String COMMAND_DELETE = "delete";
     private static final String COMMAND_FIND = "find";
@@ -24,14 +35,26 @@ public class Parser {
     private static final String COMMAND_ADDUSER = "adduser";
     private static final String COMMAND_LOVE = "love";
 
+    /**
+     * Parses user input into certain commands.
+     *
+     * @param input A String of user's input.
+     * @return {@code Command} parsed.
+     * @throws DukeException
+     */
     public static Command parse(String input) throws DukeException {
         try {
             String[] inputArr = input.split(" ", 2);
             String commandType = inputArr[0];
             String commandContent;
             if ((!Login.isLogined()) && (!commandType.equals(COMMAND_LOGIN))) {
-                return new EmptyCommand();
+                throw new NoAccessException();
             }
+
+            if (isInvalidCommand(commandType)) {
+                throw new InvalidCommandException();
+            }
+
             if (commandType.equals(COMMAND_BYE)) {
                 return new ByeCommand();
             } else if (commandType.equals(COMMAND_LIST)) {
@@ -39,7 +62,10 @@ public class Parser {
             } else if (commandType.equals(COMMAND_LOVE)) {
                 return new LoveCommand();
             }
-            //assert inputArr.length == 2 : "No Available Condition for Operation!";
+
+            if (inputArr.length < 2) {
+                throw new EmptyConditionException();
+            }
 
             commandContent = inputArr[1];
             if (commandType.equals(COMMAND_DONE)) {
@@ -72,11 +98,36 @@ public class Parser {
                 String userNickname = newUserInfo[2];
                 return new AddUserCommand(new User(username, userPassword, userNickname));
             }
-            throw new InvalidInputException("Sorry! The command is not valid");
-        } catch (InvalidInputException e) {
-            throw new InvalidInputException(e.getMessage());
+            throw new InvalidInputException();
+        } catch (InvalidCommandException e) {
+            throw new InvalidCommandException();
+        } catch (EmptyConditionException e) {
+            throw new EmptyConditionException();
+        } catch (NoAccessException e) {
+            throw new NoAccessException();
         } catch (Exception e) {
             throw new InvalidInputException();
         }
+    }
+
+    /**
+     * Checks whether input value is a valid command.
+     */
+    public static boolean isInvalidCommand(String commandType) {
+        if (commandType.equals(COMMAND_ADDUSER) ||
+            commandType.equals(COMMAND_BYE) ||
+            commandType.equals(COMMAND_DEADLINE) ||
+            commandType.equals(COMMAND_DELETE) ||
+            commandType.equals(COMMAND_DONE) ||
+            commandType.equals(COMMAND_EVENT) ||
+            commandType.equals(COMMAND_FIND) ||
+            commandType.equals(COMMAND_LIST) ||
+            commandType.equals(COMMAND_LOGIN) ||
+            commandType.equals(COMMAND_LOVE) ||
+            commandType.equals(COMMAND_TAG) ||
+            commandType.equals(COMMAND_TODO)) {
+            return false;
+        }
+        return true;
     }
 }

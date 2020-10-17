@@ -4,6 +4,9 @@ import duke.support.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Exits the programme.
+ */
 public class ByeCommand extends Command {
 
     public ByeCommand() {

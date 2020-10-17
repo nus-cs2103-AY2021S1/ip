@@ -1,20 +1,29 @@
 package duke.commands;
 
-import duke.task.Event;
 import duke.support.Storage;
+import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
-
+/**
+ * Adds a Event task to the task list.
+ */
 public class AddEventCommand extends Command {
     private String commandContent;
 
+    /**
+     * Creates a {@code AddDeadlineCommand} with given command content.
+     *
+     * @param commandContent A String of user input for command.
+     */
     public AddEventCommand(String commandContent) {
         this.commandContent = commandContent;
     }
 
-
+    /**
+     * Parses user's input into task index, time and content and creates a {@code Event} task for the task list.
+     */
     public String run(TaskList taskList, Storage storage) {
         Task newTask;
         int index = commandContent.indexOf('/');
