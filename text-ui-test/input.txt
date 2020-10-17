@@ -1,0 +1,8 @@
+todo revise lectures
+list
+deadline return clothes /by the day before tomorrow
+event project meeting /at jurong bird park
+deadline /by
+todo
+done -1
+bye
