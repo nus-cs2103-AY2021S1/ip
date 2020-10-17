@@ -46,8 +46,9 @@ Example:
 
 `deadline return book /by 2019-12-2`
 
-* note: DATE has the following formats:
-`YYYY-M(M)-D(D)`,  `(D)D/(M)M/YYYY`
+* note: 
+    * DATE has the following formats:`YYYY-M(M)-D(D)`,  `(D)D/(M)M/YYYY`
+    * TIME can be any string.
 
 ### Feature 3: Event
 Add tasks that start at a specific time and ends at a specific time e.g., team project meeting on 2/10/2019 2-4pm.  
