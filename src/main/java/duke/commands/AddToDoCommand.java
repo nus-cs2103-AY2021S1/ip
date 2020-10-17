@@ -1,5 +1,8 @@
 package duke.commands;
 
+import duke.Duke;
+import duke.exceptions.CommandException;
+import duke.exceptions.DukeException;
 import duke.support.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
@@ -22,11 +25,17 @@ public class AddToDoCommand extends Command {
     }
 
     @Override
-    public String run(TaskList taskList, Storage storage) {
-        Task newTask;
-        newTask = new ToDo(commandContent);
-        taskList.add(newTask);
-        return Ui.addTask(newTask, taskList);
+    public String run(TaskList taskList, Storage storage) throws DukeException {
+        try {
+            Task newTask;
+            newTask = new ToDo(commandContent);
+            taskList.add(newTask);
+            return Ui.addTask(newTask, taskList);
+        } catch (Exception e) {
+            throw new CommandException("Sorry! Failed to add a todo. Please check the input format.");
+
+        }
+
     }
 
 

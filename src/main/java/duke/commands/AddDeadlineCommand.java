@@ -2,6 +2,8 @@ package duke.commands;
 
 import java.time.LocalDate;
 
+import duke.exceptions.CommandException;
+import duke.exceptions.DukeException;
 import duke.support.Storage;
 import duke.task.Deadline;
 import duke.task.Task;
@@ -26,19 +28,25 @@ public class AddDeadlineCommand extends Command {
     /**
      * Parses user's input into task index, deadline and content and creates a {@code Deadline} task for the task list.
      */
-    public String run(TaskList taskList, Storage storage) {
-        Task newTask;
-        int index = commandContent.indexOf('/');
-        String taskContent = commandContent.substring(0, index - 1);
-        String dateString = commandContent.substring(index + 4);
+    public String run(TaskList taskList, Storage storage) throws DukeException {
         try {
-            LocalDate taskDeadline = LocalDate.parse(dateString);
-            newTask = new Deadline(taskContent, taskDeadline);
+            Task newTask;
+            int index = commandContent.indexOf('/');
+            String taskContent = commandContent.substring(0, index - 1);
+            String dateString = commandContent.substring(index + 4);
+            try {
+                LocalDate taskDeadline = LocalDate.parse(dateString);
+                newTask = new Deadline(taskContent, taskDeadline);
+            } catch (Exception e) {
+                newTask = new Deadline(taskContent, dateString);
+            }
+            taskList.add(newTask);
+            return Ui.addTask(newTask, taskList);
         } catch (Exception e) {
-            newTask = new Deadline(taskContent, dateString);
+            throw new CommandException("Sorry! Failed to add a deadline. Please check the input format.");
         }
-        taskList.add(newTask);
-        return Ui.addTask(newTask, taskList);
+
+
     }
 
 }

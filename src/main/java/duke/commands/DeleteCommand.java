@@ -1,6 +1,6 @@
 package duke.commands;
 
-import duke.exceptions.DeleteException;
+import duke.exceptions.CommandException;
 import duke.exceptions.DukeException;
 import duke.support.Storage;
 import duke.task.Task;
@@ -28,7 +28,7 @@ public class DeleteCommand extends Command {
             taskList.remove(taskIndex - 1);
             return Ui.deleteTask(currentTask, taskList);
         } catch (Exception e) {
-            throw new DeleteException();
+            throw new CommandException();
         }
     }
 }
