@@ -1,0 +1,10 @@
+.textFieldStyle {
+   -fx-border-color: rgb(230, 230, 230);
+   -fx-text-fill: rgb(110, 110, 110);
+   -fx-border-radius: 10px;
+   -fx-background-radius: 10px;
+ }
+
+ .buttonStyle :hover{
+     -fx-opacity: 0.5;
+ }

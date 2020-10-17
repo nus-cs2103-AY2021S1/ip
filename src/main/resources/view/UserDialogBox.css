@@ -1,0 +1,12 @@
+.dialogText {
+    -fx-text-fill:black;
+    -fx-font-size: 13px;
+    -fx-padding: 10px 8px 10px 8px;
+    -fx-font-family: "Comic Sans";
+    -fx-border-color: rgb(145, 237, 97);
+    -fx-background-color: rgb(145, 237, 97);
+    -fx-border-style: solid;
+
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}
