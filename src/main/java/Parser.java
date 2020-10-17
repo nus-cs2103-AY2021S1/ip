@@ -81,18 +81,17 @@ public class Parser {
         String s = "";
 
         if (by.charAt(0) >= '0' && by.charAt(0) <= '9') {
-            if (by.charAt(1) == '/') {
-                s = s + by.substring(5, 9);
-                s = s + '-';
-                s = s + by.substring(2, 4);
-                s = s + '-';
-                s = s + '0' + by.substring(0, 1);
-            } else {
-                s = s + by.substring(6, 10);
-                s = s + '-';
-                s = s + by.substring(3, 5);
-                s = s + '-';
-                s = s + '0' + by.substring(0, 2);
+            if (by.charAt(1) == '/' || by.charAt(2) == '/') {
+                int firstSlashIndex = by.indexOf('/');
+                int secondSlashIndex = by.indexOf('/', firstSlashIndex + 1);
+                String day = by.substring(0, firstSlashIndex);
+                String month = by.substring(firstSlashIndex + 1, secondSlashIndex);
+                String year = by.substring(secondSlashIndex + 1, secondSlashIndex + 5);
+                day = day.length() == 2 ? day : '0' + day;
+                month = month.length() == 2 ? month : '0' + month;
+                s = year + '-' + month + '-' + day;
+            } else if (by.charAt(4) == '-') {
+                s = by.length() == 10 ? by : by.substring(0, 10);
             }
             LocalDate date = LocalDate.parse(s);
             command = new DeadlineCommand("deadline", description, by, date, true);
@@ -112,18 +111,17 @@ public class Parser {
         String s = "";
 
         if (time.charAt(0) >= '0' && time.charAt(0) <= '9') {
-            if (time.charAt(1) == '/') {
-                s = s + time.substring(5, 9);
-                s = s + '-';
-                s = s + time.substring(2, 4);
-                s = s + '-';
-                s = s + '0' + time.substring(0, 1);
-            } else {
-                s = s + time.substring(6, 10);
-                s = s + '-';
-                s = s + time.substring(3, 5);
-                s = s + '-';
-                s = s + '0' + time.substring(0, 2);
+            if (time.charAt(1) == '/' || time.charAt(2) == '/') {
+                int firstSlashIndex = time.indexOf('/');
+                int secondSlashIndex = time.indexOf('/', firstSlashIndex + 1);
+                String day = time.substring(0, firstSlashIndex);
+                String month = time.substring(firstSlashIndex + 1, secondSlashIndex);
+                String year = time.substring(secondSlashIndex + 1, secondSlashIndex + 5);
+                day = day.length() == 2 ? day : '0' + day;
+                month = month.length() == 2 ? month : '0' + month;
+                s = year + '-' + month + '-' + day;
+            } else if (time.charAt(4) == '-') {
+                s = time.length() == 10 ? time : time.substring(0, 10);
             }
             LocalDate date = LocalDate.parse(s);
             command = new EventCommand("event", description, time, date, true);
