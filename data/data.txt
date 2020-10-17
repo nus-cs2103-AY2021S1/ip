@@ -1,3 +1,4 @@
 D%d%false%d%flying%d%1829-12-23
-T%d%false%d%test
+T%d%true%d%test
 E%d%false%d%test%d%2020-12-12
+D%d%false%d%test%d%2020-12-12

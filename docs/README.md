@@ -63,6 +63,18 @@ A deadline task of name `name` due by `<yyyy-mm-dd>` will be added
 
 Example of usage: `deadline CS2103 IP Submission /at <2025-10-29>` - adds a deadline task named "CS2103 IP Submission" due on 29th October 2025 to the list of tasks
 
+### `done <task index>` - **Mark a task as done**
+
+The task at the index indicated by the user will be marked as done.
+
+Example of usage: `done 2`
+
+### `delete <task index>` - **Delete a task**
+
+The task at the index indicated by the user will be deleted.
+
+Example of usage: `delete 7`
+
 ### `load` - **Choose a file to load/save to**
 
 Jarvis prompts the user for a .txt file to load from and save tasks to
