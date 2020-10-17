@@ -3,7 +3,7 @@ package duke.exceptions;
 /**
  * Represents an exception for failing to delete task.
  */
-public class DeleteException extends DukeException{
+public class DeleteException extends DukeException {
     private static final String ERROR_MSG = "Sorry! We cannot delete like this.";
 
     /**

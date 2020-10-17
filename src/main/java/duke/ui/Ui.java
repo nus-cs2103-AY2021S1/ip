@@ -100,7 +100,8 @@ public class Ui {
         reply = new String[]{
             "Love you!", "Good Good Study, Day Day Up",
             "It is lucky to have you!", "Pig!", "Beauty", "Are you with me ?", "Take a photo to record the life~",
-            "When I first saw you, I thought you were a pig!", "LMAO, nothing here!", "Nothing deserves my love except you."
+            "When I first saw you, I thought you were a pig!", "LMAO, nothing here!",
+            "Nothing deserves my love except you."
         };
         Random random = new Random();
 
