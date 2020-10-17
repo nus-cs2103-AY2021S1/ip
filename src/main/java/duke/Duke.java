@@ -1,9 +1,11 @@
 package duke;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 import duke.parser.DukeParser;
+import duke.storage.Storage;
+import duke.ui.DialogBox;
+import duke.ui.Ui;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
@@ -82,9 +84,6 @@ public class Duke extends Application {
             }
         } catch (DukeException e) {
             outputMessage = Ui.handleDukeException(e);
-        } catch (IOException ignored) {
-            /* Exceptions are ignored as they will never be thrown */
-            outputMessage = "";
         }
         return outputMessage;
     }

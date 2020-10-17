@@ -1,22 +1,26 @@
 package duke.command;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import org.junit.jupiter.api.Test;
 
-import duke.Ui;
+import duke.ui.Ui;
 
 public class ListCommandTest extends CommandTest {
     /**
-     * Tests if the list command works as expected.
-     * @throws Exception if the output of the list command is not correct.
+     * Tests if the ListCommand provides the correct output given a TaskList lines.
      */
     @Test
-    public void testCommandExecution() throws Exception {
+    public void execute_validListCommand_correctOutput() {
         setLines();
-        ListCommand listCommand = new ListCommand(lines);
-        String output = listCommand.execute();
-        if (!output.equals(Ui.listTasks(lines.getList()))) {
-            throw new Exception("List command not working properly");
+        try {
+            ListCommand listCommand = new ListCommand(lines);
+            String output = listCommand.execute();
+            assertEquals(Ui.listTasks(lines.getList()), output);
+        } catch (Exception e) {
+            fail();
         }
-        System.out.println("All tests passed");
+        resetLines();
     }
 }

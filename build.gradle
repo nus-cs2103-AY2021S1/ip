@@ -6,6 +6,12 @@ plugins {
     id 'org.openjfx.javafxplugin' version '0.0.8'
 }
 
+compileJava.options.encoding = 'UTF-8'
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
 repositories {
     mavenCentral()
 }
@@ -31,6 +37,7 @@ dependencies {
 }
 
 test {
+    systemProperty "file.encoding", "utf-8"
     useJUnitPlatform()
 
     testLogging {
@@ -45,6 +52,7 @@ test {
 }
 
 application {
+    applicationDefaultJvmArgs = ["-Dfile.encoding=utf-8"]
     mainClassName = "duke.Launcher"
 }
 
@@ -57,6 +65,7 @@ checkstyle {
     toolVersion = '8.32'
 }
 
-run{
+run {
+    systemProperty "file.encoding", "utf-8"
     standardInput = System.in
 }

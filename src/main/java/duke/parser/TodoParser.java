@@ -1,7 +1,6 @@
 package duke.parser;
 
 import duke.DukeException;
-import duke.task.Task;
 import duke.task.Todo;
 
 public class TodoParser implements TaskCommandParser {
@@ -22,13 +21,13 @@ public class TodoParser implements TaskCommandParser {
      * @throws DukeException if there are errors in the input command.
      */
     public String checkIfValid() throws DukeException {
-        boolean emptyDescription = input.length() == 5;
+        boolean emptyDescription = input.length() <= 5;
         if (emptyDescription) { // Checks if there is an input for the task command.
             throw new DukeException("Hey! Your Todo is empty >:(");
         } else if (input.indexOf(" ") != 4) { // Checks if the input is invalid.
             throw new DukeException("What are you even saying?!");
         } else {
-            Task task = new Todo(input.substring(5));
+            Todo task = new Todo(input.substring(5));
             return task.toString();
         }
     }

@@ -1,94 +1,125 @@
 package duke.command;
 
-import duke.parser.EventParser;
-import duke.task.Event;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import org.junit.jupiter.api.Test;
 
 import duke.DukeException;
-import duke.Ui;
+import duke.ui.Ui;
 import duke.parser.DeadlineParser;
+import duke.parser.EventParser;
 import duke.parser.TodoParser;
 import duke.task.Deadline;
+import duke.task.Event;
 import duke.task.Todo;
 
 public class TasksCommandTest extends CommandTest {
     /**
-     * Tests if the TodoCommand works as expected.
-     * @throws Exception if the TodoCommand does not produce the expected output.
+     * Tests if TodoCommand provides the correct output given a TodoParser that parsed an invalid todotask command.
      */
     @Test
-    public void testTodoCommandExecution() throws Exception {
+    public void execute_invalidTodoCommand_correctOutput() {
         setLines();
-        TodoParser invalidTodoParser = new TodoParser("todo ");
-        TodoCommand invalidTodoCommand = new TodoCommand(lines, invalidTodoParser);
-        String invalidOutcome = invalidTodoCommand.execute();
-        if (!invalidOutcome.equals(Ui.handleDukeException(new DukeException("Hey! Your Todo is empty >:(")))) {
-            throw new Exception("Todo command did not output the expected error message");
+        try {
+            TodoParser invalidTodoParser = new TodoParser("todo ");
+            TodoCommand invalidTodoCommand = new TodoCommand(lines, invalidTodoParser);
+            String invalidOutcome = invalidTodoCommand.execute();
+            assertEquals(Ui.handleDukeException(new DukeException("Hey! Your Todo is empty >:(")), invalidOutcome);
+        } catch (Exception e) {
+            fail();
         }
-        resetLines();
-        setLines();
-        TodoParser validTodoParser = new TodoParser("todo sleep");
-        TodoCommand validTodoCommand = new TodoCommand(lines, validTodoParser);
-        String validOutcome = validTodoCommand.execute();
-        Todo expectedTodo = new Todo("sleep");
-        if (!validOutcome.equals(Ui.addedTask(expectedTodo.toString(), 4))) {
-            System.out.println("Todo command failed to create the expected output message");
-        }
-        System.out.println("All tests passed");
         resetLines();
     }
 
     /**
-     * Tests if the Deadline command works as expected.
-     * @throws Exception If the Deadline command does not work as expected.
+     * Tests if TodoCommand provides the correct output given a TodoParser that parsed an valid todotask command.
      */
     @Test
-    public void testDeadlineCommandExecution() throws Exception {
+    public void execute_validTodoCommand_correctOutput() {
         setLines();
-        DeadlineParser invalidDeadlineParser = new DeadlineParser("deadline homework /by 2020-31-31");
-        DeadlineCommand invalidDeadlineCommand = new DeadlineCommand(lines, invalidDeadlineParser);
-        String invalidOutcome = invalidDeadlineCommand.execute();
-        if (!invalidOutcome.equals(Ui.handleDukeException(
-                new DukeException("Please check your date! It is clearly not realistic >:(")))) {
-            throw new Exception("invalid deadline command failed to output the correct error message");
+        try {
+            TodoParser validTodoParser = new TodoParser("todo sleep");
+            TodoCommand validTodoCommand = new TodoCommand(lines, validTodoParser);
+            String validOutcome = validTodoCommand.execute();
+            Todo expectedTodo = new Todo("sleep");
+            assertEquals(Ui.addedTask(expectedTodo.toString(), 4), validOutcome);
+        } catch (Exception e) {
+            fail();
         }
-        resetLines();
-        setLines();
-        DeadlineParser validDeadlineParser = new DeadlineParser("deadline homework /by 2020-09-09");
-        DeadlineCommand validDeadlineCommand = new DeadlineCommand(lines, validDeadlineParser);
-        String validOutcome = validDeadlineCommand.execute();
-        Deadline expectedDeadline = new Deadline("homework", "2020-09-09");
-        if (!validOutcome.equals(Ui.addedTask(expectedDeadline.toString(), 4))) {
-            throw new Exception("Valid Deadline command failed to achieve the desired output / outcome");
-        }
-        System.out.println("All tests passed");
         resetLines();
     }
 
     /**
-     * Tests if the event command works as expected
-     * @throws Exception
+     * Tests if DeadlineCommand provides the correct output given a DeleteParser that parsed an invalid
+     * deadline task command.
      */
     @Test
-    public void testEventCommandExecution() throws Exception {
+    public void execute_invalidDeadlineCommand_correctOutput() {
         setLines();
-        EventParser invalidEventParser = new EventParser("event Career-Fair /at");
-        EventCommand invalidEventCommand = new EventCommand(lines, invalidEventParser);
-        String invalidOutcome = invalidEventCommand.execute();
-        System.out.println(invalidOutcome);
-        if (!invalidOutcome.equals(Ui.handleDukeException(new DukeException("Oi, when is this event at??")))) {
-            throw new Exception("invalid event command failed to output the correct error message");
+        try {
+            DeadlineParser invalidDeadlineParser = new DeadlineParser("deadline homework /by 2020-31-31");
+            DeadlineCommand invalidDeadlineCommand = new DeadlineCommand(lines, invalidDeadlineParser);
+            String invalidOutcome = invalidDeadlineCommand.execute();
+            assertEquals(Ui.handleDukeException(
+                    new DukeException("Please check your date! It is clearly not realistic >:(")), invalidOutcome);
+        } catch (Exception e) {
+            fail();
         }
         resetLines();
+    }
+
+    /**
+     * Tests if DeadlineCommand provides the correct output given a DeleteParser that parsed a valid
+     * deadline task command.
+     */
+    @Test
+    public void execute_validDeadlineCommand_correctOutput() {
         setLines();
-        EventParser validEventParser = new EventParser("event Career-Fair /at 2020-10-10");
-        EventCommand validEventCommand = new EventCommand(lines, validEventParser);
-        String validOutcome = validEventCommand.execute();
-        Event expectedEvent = new Event("Career-Fair", "2020-10-10");
-        if (!validOutcome.equals(Ui.addedTask(expectedEvent.toString(), 4))) {
-            throw new Exception("valid event command failed to output the expected output");
+        try {
+            DeadlineParser validDeadlineParser = new DeadlineParser("deadline homework /by 2020-09-09");
+            DeadlineCommand validDeadlineCommand = new DeadlineCommand(lines, validDeadlineParser);
+            String validOutcome = validDeadlineCommand.execute();
+            Deadline expectedDeadline = new Deadline("homework", "2020-09-09");
+            assertEquals(Ui.addedTask(expectedDeadline.toString(), 4), validOutcome);
+        } catch (Exception e) {
+            fail();
         }
-        System.out.println("All tests passed");
+        resetLines();
+    }
+
+    /**
+     * Tests if EventCommand provides the correct output given an EventParser that parsed an invalid event task command.
+     */
+    @Test
+    public void execute_invalidEventCommand_correctOutput() {
+        setLines();
+        try {
+            EventParser invalidEventParser = new EventParser("event Career-Fair /at");
+            EventCommand invalidEventCommand = new EventCommand(lines, invalidEventParser);
+            String invalidOutcome = invalidEventCommand.execute();
+            assertEquals(Ui.handleDukeException(new DukeException("Oi, when is this event at??")), invalidOutcome);
+        } catch (Exception e) {
+            fail();
+        }
+        resetLines();
+    }
+
+    /**
+     * Tests if EventCommand provides the correct output given an EventParser that parsed a valid event task command.
+     */
+    @Test
+    public void execute_validEventCommand_correctOutput() {
+        setLines();
+        try {
+            EventParser validEventParser = new EventParser("event Career-Fair /at 2020-10-10");
+            EventCommand validEventCommand = new EventCommand(lines, validEventParser);
+            String validOutcome = validEventCommand.execute();
+            Event expectedEvent = new Event("Career-Fair", "2020-10-10");
+            assertEquals(Ui.addedTask(expectedEvent.toString(), 4), validOutcome);
+        } catch (Exception e) {
+            fail();
+        }
         resetLines();
     }
 

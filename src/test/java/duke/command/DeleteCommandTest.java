@@ -1,38 +1,49 @@
 package duke.command;
 
-import java.util.ArrayList;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
 
 import duke.DukeException;
-import duke.Ui;
+import duke.ui.Ui;
 import duke.parser.DeleteParser;
 
 
 public class DeleteCommandTest extends CommandTest {
 
     /**
-     *  Tests if DeleteCommand executes the right commands given DeleteParser's parsing.
-     * @throws Exception if the output is not as expected.
+     * Tests if DeleteCommand provides the correct output given a DeleteParser that parsed an invalid delete command.
      */
     @Test
-    public void testCommandExecution() throws Exception {
+    public void execute_invalidDeleteCommand_correctOutput() {
         setLines();
-        DeleteParser invalidDeleteCommandParser = new DeleteParser("delete 4", lines);
-        DeleteCommand invalidDeleteCommand = new DeleteCommand(lines, invalidDeleteCommandParser);
-        String invalidOutput = invalidDeleteCommand.execute();
-        if (!invalidOutput.equals(Ui.handleDukeException(new DukeException("Hey, no such task exists!")))) {
-            throw new Exception("Invalid index not caught");
+        try {
+            DeleteParser invalidDeleteCommandParser = new DeleteParser("delete 4", lines);
+            DeleteCommand invalidDeleteCommand = new DeleteCommand(lines, invalidDeleteCommandParser);
+            String invalidOutput = invalidDeleteCommand.execute();
+            assertEquals(Ui.handleDukeException(new DukeException("Hey, no such task exists!")), invalidOutput);
+        } catch (Exception e) {
+            fail();
         }
         resetLines();
+    }
+
+    /**
+     * Tests if DeleteCommand provides the correct output given a DeleteParser that parsed a valid delete command.
+     */
+    @Test
+    public void execute_validDeleteCommand_correctOutput() {
         setLines();
-        DeleteParser validDeleteCommandParser = new DeleteParser("delete 1", lines);
-        DeleteCommand validDeleteCommand = new DeleteCommand(lines, validDeleteCommandParser);
-        String deletedTask = lines.getTask(0);
-        String validOutput = validDeleteCommand.execute();
-        if (!validOutput.equals(Ui.deletedTask(deletedTask, 2))) {
-            throw new Exception("Valid delete command not executed properly");
+        try {
+            DeleteParser validDeleteCommandParser = new DeleteParser("delete 1", lines);
+            DeleteCommand validDeleteCommand = new DeleteCommand(lines, validDeleteCommandParser);
+            String deletedTask = lines.getTask(0);
+            String validOutput = validDeleteCommand.execute();
+            assertEquals(Ui.deletedTask(deletedTask, 2), validOutput);
+        } catch (Exception e) {
+            fail();
         }
-        System.out.println("All Tests Passed");
+        resetLines();
     }
 }

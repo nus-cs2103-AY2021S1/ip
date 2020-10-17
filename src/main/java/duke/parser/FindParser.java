@@ -19,7 +19,7 @@ public class FindParser implements IndexCommandParser {
      * @throws DukeException thrown if the find command is invalid.
      */
     public int checkIfValid() throws DukeException {
-        if (input.length() == 5) { // Checks if the input string does not contain a keyword
+        if (input.length() <= 5) { // Checks if the input string does not contain a keyword
             throw new DukeException("What are you trying to find?");
         } else {
             return -1;

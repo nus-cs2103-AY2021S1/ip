@@ -5,14 +5,17 @@ Duke is capable of keeping track of simple todos, deadlines as well as events.
 
 Of course, adding tasks is not the only thing Duke can do! Below are all the features
 implemented into this version of Duke. Enjoy!
+
 ## Features 
 * Add a todo/deadline/event
 * Delete a todo/deadline/event
 * Set a task to have the "done" status
 * View all the tasks that you have currently
-* Save the tasks into your hard-disk upon exit using the "bye" command
+* Exit using the "bye" command
 * Tag a task with your own custom tag name
 * Untag a tagged task
+* Find tasks that contain a specified keyword
+* Saves your tasks upon parsing every command
 
 ### Add a task
 In Duke, there are 3 types of tasks you can enter into the program:
@@ -141,9 +144,6 @@ To save all the tasks you have and exit the program, enter the command below:
 
 `bye`
 
-**NOTE**: Please note that if the `bye` command is not used before shutting down the program, **ALL PROGRESS MADE WILL 
-NOT BE SAVED!**.
-
 ### `bye`
 Upon successfully saving all the tasks you have, you will see Duke with the output as shown before shutting down.
 
@@ -187,6 +187,26 @@ Example of usage: `untag 2`
 Expected outcome:
 
 ![Image of outcome](images/untagExample.png)
+
+### Finding tasks using keywords
+In Duke, you are able to find specific tasks that contains a keyword of your choosing.
+
+## Usage
+To find tasks that contain a certain keyword, enter the command below:
+
+`find <insert keyword here>`
+Upon successfully finding tasks that contains the specified keyword, you will see Duke acknowledging the command with 
+the following output:
+
+Example of usage: `find home`
+
+Expected outcome:
+
+![Image of outcome](images/findExample.png)
+
+
+
+
 
 
 

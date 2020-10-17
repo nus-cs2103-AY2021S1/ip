@@ -1,8 +1,8 @@
 package duke.command;
 
 import duke.DukeException;
-import duke.TaskList;
-import duke.Ui;
+import duke.storage.TaskList;
+import duke.ui.Ui;
 import duke.parser.TagParser;
 
 public class TagCommand implements Command {

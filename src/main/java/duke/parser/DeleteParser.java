@@ -1,7 +1,7 @@
 package duke.parser;
 
 import duke.DukeException;
-import duke.TaskList;
+import duke.storage.TaskList;
 
 public class DeleteParser implements IndexCommandParser {
     private final String input;

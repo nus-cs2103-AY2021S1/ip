@@ -1,34 +1,47 @@
 package duke.command;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import org.junit.jupiter.api.Test;
 
 import duke.DukeException;
-import duke.Ui;
+import duke.ui.Ui;
 import duke.parser.TagParser;
 
 
 public class TagCommandTest extends CommandTest {
     /**
-     * Tests if the TagCommand works as expected.
-     * @throws Exception if the TagCommand's output is not as expected.
+     * Tests if the TagCommand provides the correct output given a TagParser that parsed an invalid tag command.
      */
     @Test
-    public void testCommandExecution() throws Exception {
+    public void execute_invalidTagCommand_correctOutput() {
         setLines();
-        TagParser invalidTagParser = new TagParser("tag 4 urgent", lines);
-        TagCommand invalidTagCommand = new TagCommand(lines, invalidTagParser);
-        String invalidOutput = invalidTagCommand.execute();
-        if (!invalidOutput.equals(Ui.handleDukeException(new DukeException("No such task exists!")))) {
-            throw new Exception("Tag command failed to detect invalid index");
+        try {
+            TagParser invalidTagParser = new TagParser("tag 4 urgent", lines);
+            TagCommand invalidTagCommand = new TagCommand(lines, invalidTagParser);
+            String invalidOutput = invalidTagCommand.execute();
+            assertEquals(Ui.handleDukeException(new DukeException("No such task exists!")), invalidOutput);
+        } catch (Exception e) {
+            fail();
         }
         resetLines();
+    }
+
+    /**
+     * Tests if the TagCommand provides the correct output given a TagParser that parsed a valid tag command.
+     */
+    @Test
+    public void execute_validTagCommand_correctOutput() {
         setLines();
-        TagParser validTagParser = new TagParser("tag 2 urgent", lines);
-        TagCommand validTagCommand = new TagCommand(lines, validTagParser);
-        String validOutput = validTagCommand.execute();
-        if (!validOutput.equals(Ui.taggedTask(lines.getTask(1), true))) {
-            throw new Exception("Tag command failed to tag the task at the specified valid index");
+        try {
+            TagParser validTagParser = new TagParser("tag 2 urgent", lines);
+            TagCommand validTagCommand = new TagCommand(lines, validTagParser);
+            String validOutput = validTagCommand.execute();
+            assertEquals(Ui.taggedTask(lines.getTask(1), true), validOutput);
+        } catch (Exception e) {
+            fail();
         }
-        System.out.println("All tests passed");
+        resetLines();
     }
 }

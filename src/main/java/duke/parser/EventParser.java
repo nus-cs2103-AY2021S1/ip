@@ -2,7 +2,6 @@ package duke.parser;
 
 import duke.DukeException;
 import duke.task.Event;
-import duke.task.Task;
 
 public class EventParser implements TaskCommandParser {
     private String input;
@@ -35,7 +34,7 @@ public class EventParser implements TaskCommandParser {
         } else {
             try {
                 boolean validDateFormat = Event.checkDateFormat(input.substring(atIndex + 5));
-                Task task = new Event(input.substring(6, atIndex), input.substring(atIndex + 5));
+                Event task = new Event(input.substring(6, atIndex), input.substring(atIndex + 5));
                 return task.toString();
             } catch (DukeException e) {
                 throw new DukeException(e.getMessage());

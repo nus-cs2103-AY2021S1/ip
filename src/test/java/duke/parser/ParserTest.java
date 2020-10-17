@@ -1,4 +1,4 @@
-package duke.command;
+package duke.parser;
 
 import java.util.ArrayList;
 
@@ -7,7 +7,7 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
 
-public class CommandTest {
+public class ParserTest {
     protected TaskList lines = new TaskList(new ArrayList<>());
 
     protected void setLines() {

@@ -3,8 +3,8 @@ package duke.command;
 import java.util.ArrayList;
 
 import duke.DukeException;
-import duke.TaskList;
-import duke.Ui;
+import duke.storage.TaskList;
+import duke.ui.Ui;
 import duke.parser.FindParser;
 
 public class FindCommand implements Command {

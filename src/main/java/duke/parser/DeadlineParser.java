@@ -2,7 +2,6 @@ package duke.parser;
 
 import duke.DukeException;
 import duke.task.Deadline;
-import duke.task.Task;
 
 public class DeadlineParser implements TaskCommandParser {
     private final String input;
@@ -36,7 +35,7 @@ public class DeadlineParser implements TaskCommandParser {
         } else {
             try {
                 boolean validDateFormat = Deadline.checkDateFormat(input.substring(byIndex + 5));
-                Task task = new Deadline(input.substring(9, byIndex), input.substring(byIndex + 5));
+                Deadline task = new Deadline(input.substring(9, byIndex), input.substring(byIndex + 5));
                 return task.toString();
             } catch (DukeException e) {
                 throw new DukeException(e.getMessage());

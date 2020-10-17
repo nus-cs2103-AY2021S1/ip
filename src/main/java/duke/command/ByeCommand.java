@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.Ui;
+import duke.ui.Ui;
 
 public class ByeCommand implements Command {
     /**

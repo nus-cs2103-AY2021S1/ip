@@ -1,8 +1,8 @@
 package duke.command;
 
 import duke.DukeException;
-import duke.TaskList;
-import duke.Ui;
+import duke.storage.TaskList;
+import duke.ui.Ui;
 import duke.parser.DoneParser;
 
 public class DoneCommand implements Command {

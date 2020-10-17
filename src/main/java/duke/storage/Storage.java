@@ -1,9 +1,10 @@
-package duke;
+package duke.storage;
 
 import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
@@ -41,10 +42,9 @@ public class Storage {
      * Obtains the file required to begin duke.Duke. If the files/folders are missing, they would be created in the
      * specified directories. It then converts the txt file into an ArrayList{@link ArrayList} containing strings that
      * represent the tasks specified in the txt file.
-     * <p>
-     * It is important to know that the arrayList is not updated throughout the use of duke.Duke. The goal of this class is
-     * to only process the initial data.txt file upon loading and saving a final updated copy of the txt file which has
-     * to be provided. Updates occur in the Parser{@link DukeParser} class.
+     * It is important to know that the arrayList is not updated throughout the use of duke.Duke. The goal of this class
+     * is to only process the initial data.txt file upon loading and saving a final updated copy of the txt file which
+     * has to be provided. Updates occur in the Parser{@link DukeParser} class.
      *
      * @throws IOException An exception is thrown as the file and directory paths specified might be invalid or cannot
      * be found. In this case, the exception can be ignored as the method creates the directories as needed.
@@ -62,7 +62,8 @@ public class Storage {
         Scanner fileReader = new Scanner(data);
         StringBuffer buffer = new StringBuffer();
         while (fileReader.hasNextLine()) {
-            buffer.append(fileReader.nextLine()).append("\n");
+            String nextLine = new String(fileReader.nextLine().getBytes(), StandardCharsets.UTF_8);
+            buffer.append(nextLine).append("\n");
         }
         fileReader.close();
         String fileContents = buffer.toString();
@@ -87,18 +88,19 @@ public class Storage {
      * method only after calling processData.
      *
      * @param finalLines the list of tasks to be saved
-     * @throws FileNotFoundException Thrown by the PrintWriter class as there is the possibility that the file path is
-     * invalid. Fortunately, by calling processData first, this exception can be ignored as it is addressed in that
-     * method.
      */
-    public void saveData(ArrayList<String> finalLines) throws FileNotFoundException {
+    public void saveData(ArrayList<String> finalLines) {
         StringBuffer finalLineList = new StringBuffer();
         for (int i = 0; i < finalLines.size(); i++) {
             String currentLine = finalLines.get(i);
             finalLineList.append(currentLine).append("\n");
         }
-        PrintWriter prw = new PrintWriter(data);
-        prw.println(finalLineList.toString());
-        prw.close();
+        try {
+            OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(data), StandardCharsets.UTF_8);
+            writer.write(finalLineList.toString());
+            writer.close();
+        } catch (IOException e) {
+            //ignored
+        }
     }
 }
