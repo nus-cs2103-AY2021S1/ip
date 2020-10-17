@@ -1,20 +1,45 @@
 # User Guide
 
-## Features 
+Keep track of tasks!
 
-### Feature 1 
-Description of feature.
+## Features
 
-## Usage
+Task types:
 
-### `Keyword` - Describe action
+- ToDos
+- Deadlines
+- Events
 
-Describe action and its outcome.
+CRUD Operations
 
-Example of usage: 
+### Adding a Task: `add`
 
-`keyword (optional arguments)`
+Adds a task to the to-do list.
 
-Expected outcome:
+Format: `TASKTYPE TASK [SEP] [DEADLINE]`
 
-`outcome`
+Examples:
+
+- todo borrow book
+- deadline return book /by 2019-10-15
+- event project meeting /at 2019-10-15
+
+### Deleting a Task: `delete`
+
+Deletes a task at specified INDEX from the to-do list.
+
+Format: `delete INDEX​`
+
+Eg. delete 2
+
+### List All Tasks: `list`
+
+List all tasks.
+
+Format: `list`
+
+### Complete a Task: `done`
+
+Mark a task as done at the specified INDEX.
+
+Format: `done INDEX`
