@@ -98,11 +98,9 @@ public class Ui {
     public static String love() {
         String[] reply;
         reply = new String[]{
-            "爱你哦！", "想你！", "每天都有好心情哦！", "快问问我在干嘛！", "今天天气不错，出去走走吧！", "给你比心?", "猜猜我有多爱你！",
-            "傻子，这个什么都没有!", "今天心情怎么样呀！", "吃饭没！我也想吃！", "Love you!", "Good Good Study, Day Day Up",
+            "Love you!", "Good Good Study, Day Day Up",
             "It is lucky to have you!", "Pig!", "Beauty", "Are you with me ?", "Take a photo to record the life~",
-            "When I first saw you, I thought you were a pig!", "LMAO, nothing here!", "你还在等我嘛？", "当你孤独的时候，请你记住还有我",
-            "Nothing deserves my love except you.", "岁月静好，现世安稳！", "风里雨里我在这里！"
+            "When I first saw you, I thought you were a pig!", "LMAO, nothing here!", "Nothing deserves my love except you."
         };
         Random random = new Random();
 
