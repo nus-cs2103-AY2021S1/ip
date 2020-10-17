@@ -74,6 +74,10 @@ public class Parser {
 
     public static Command parseDeadline(String commandMessage) throws DukeException {
         Command command;
+        if (!commandMessage.contains("/by")) {
+            throw new DukeException("Deadline command should contain \"/by\".");
+        }
+
         String description = commandMessage.substring(commandMessage.indexOf(' ') + 1,
                 commandMessage.indexOf('/') - 1);
         String by = commandMessage.substring(commandMessage.indexOf("/by") + 4);
@@ -104,10 +108,13 @@ public class Parser {
 
     public static Command parseEvent(String commandMessage) throws DukeException {
         Command command;
-        String time = commandMessage.substring(commandMessage.indexOf("/at") + 4);
+        if (!commandMessage.contains("/at")) {
+            throw new DukeException("Event command should contain \"/at\".");
+        }
+
         String description = commandMessage.substring(commandMessage.indexOf(' ') + 1,
                 commandMessage.indexOf('/') - 1);
-
+        String time = commandMessage.substring(commandMessage.indexOf("/at") + 4);
         String s = "";
 
         if (time.charAt(0) >= '0' && time.charAt(0) <= '9') {
