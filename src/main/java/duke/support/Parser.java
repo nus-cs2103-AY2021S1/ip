@@ -8,13 +8,16 @@ import duke.commands.ByeCommand;
 import duke.commands.Command;
 import duke.commands.DeleteCommand;
 import duke.commands.DoneCommand;
-import duke.commands.EmptyCommand;
 import duke.commands.FindCommand;
 import duke.commands.ListCommand;
 import duke.commands.LoginCommand;
 import duke.commands.LoveCommand;
 import duke.commands.TagCommand;
-import duke.exceptions.*;
+import duke.exceptions.DukeException;
+import duke.exceptions.EmptyConditionException;
+import duke.exceptions.InvalidCommandException;
+import duke.exceptions.InvalidInputException;
+import duke.exceptions.NoAccessException;
 import duke.user.User;
 
 
@@ -114,18 +117,18 @@ public class Parser {
      * Checks whether input value is a valid command.
      */
     public static boolean isInvalidCommand(String commandType) {
-        if (commandType.equals(COMMAND_ADDUSER) ||
-            commandType.equals(COMMAND_BYE) ||
-            commandType.equals(COMMAND_DEADLINE) ||
-            commandType.equals(COMMAND_DELETE) ||
-            commandType.equals(COMMAND_DONE) ||
-            commandType.equals(COMMAND_EVENT) ||
-            commandType.equals(COMMAND_FIND) ||
-            commandType.equals(COMMAND_LIST) ||
-            commandType.equals(COMMAND_LOGIN) ||
-            commandType.equals(COMMAND_LOVE) ||
-            commandType.equals(COMMAND_TAG) ||
-            commandType.equals(COMMAND_TODO)) {
+        if (commandType.equals(COMMAND_ADDUSER)
+                || commandType.equals(COMMAND_BYE)
+                || commandType.equals(COMMAND_DEADLINE)
+                || commandType.equals(COMMAND_DELETE)
+                || commandType.equals(COMMAND_DONE)
+                || commandType.equals(COMMAND_EVENT)
+                || commandType.equals(COMMAND_FIND)
+                || commandType.equals(COMMAND_LIST)
+                || commandType.equals(COMMAND_LOGIN)
+                || commandType.equals(COMMAND_LOVE)
+                || commandType.equals(COMMAND_TAG)
+                || commandType.equals(COMMAND_TODO)) {
             return false;
         }
         return true;
