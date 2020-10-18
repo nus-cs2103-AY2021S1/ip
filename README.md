@@ -1,4 +1,4 @@
-# Duke project template
+# Duke project
 
 This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
 
@@ -174,7 +174,7 @@ bye
 
 Expected Outcome:
 ```
-Bye. Hope to see you again soon!
+Bye!
 
 The main window of the application closes.
 The programme stops and you will exit from the application.
