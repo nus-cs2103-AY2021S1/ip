@@ -1,7 +1,6 @@
 package emily.command;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
@@ -185,7 +184,7 @@ public class Logic {
             }
             int index = Character.getNumericValue(input.charAt(5));
 
-            if(index >= currentTasklistSize){
+            if (index > currentTasklistSize) {
                 throw new DukeException("Index given is out of bounds");
             }
             c = Command.EDIT;
