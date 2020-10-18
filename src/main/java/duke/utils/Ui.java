@@ -137,7 +137,7 @@ public class Ui {
                 + "\n"
                 + "event <content> /at <time> \n"
                 + "\n"
-                + "deadline <content> /by <time> \n"
+                + "deadline <content> /by <d/MM/yyyy HH:mm> \n"
                 + "\n"
                 + "todo <content>\n"
                 + "\n"

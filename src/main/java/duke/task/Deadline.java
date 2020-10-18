@@ -1,10 +1,10 @@
 package duke.task;
 
-import duke.exceptions.DukeException;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
+import duke.exceptions.DukeException;
 
 /**
  * Represents a Deadline Task.
@@ -29,7 +29,7 @@ public class Deadline extends Task {
             date = LocalDate.parse(parts[0], DateTimeFormatter.ofPattern("d/MM/yyyy"));
             dateTime = date.atTime(hour, minute);
         } catch (Exception e) {
-             throw new DukeException("create deadline object failed");
+            throw new DukeException("invalid datetime format, you should use d/MM/yyyy HH:mm. eg:22/12/2020 15:22");
         }
     }
 

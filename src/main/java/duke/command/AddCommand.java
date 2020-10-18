@@ -43,11 +43,19 @@ public class AddCommand extends Command {
         if (taskType.equals("todo")) {
             task = new ToDo(info);
         } else if (taskType.equals("deadline")) {
-            String[] deadlineParts = info.split(" /by ");
-            task = new Deadline(deadlineParts[0], deadlineParts[1]);
+            try {
+                String[] deadlineParts = info.split(" /by ");
+                task = new Deadline(deadlineParts[0], deadlineParts[1]);
+            } catch (Exception e ) {
+                throw new DukeException("invalid deadline command format");
+            }
         } else { // event
-            String[] eventParts = info.split(" /at ");
-            task = new Event(eventParts[0], eventParts[1]);
+            try {
+                String[] eventParts = info.split(" /at ");
+                task = new Event(eventParts[0], eventParts[1]);
+            } catch (Exception e ) {
+                throw new DukeException("invalid event command format");
+            }
         }
 
         tasks.addTask(task);

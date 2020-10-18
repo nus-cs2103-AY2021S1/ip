@@ -26,32 +26,30 @@ public class Parser {
      * @throws DukeException  If the input string is not in the correct format.
      */
     public static Command parse(String command) throws DukeException {
-        if (command.equals("bye")) {
+        String[] parts = command.split(" ", 2);
+        String keyword = parts[0];
+        if (keyword.equals("bye")) {
             return new ExitCommand();
-        } else if (command.equals("list")) {
+        } else if (keyword.equals("list")) {
             return new ListCommand();
-        } else if (command.equals("help")) {
+        } else if (keyword.equals("help")) {
             return new HelpCommand();
-        } else if (command.length() >= 6 && command.substring(0, 5).equals("done ")) {
+        } else if (keyword.equals("done")) {
             int num = Integer.parseInt(command.split(" ")[1]);
             return new DoneCommand(num - 1);
-        } else if (command.length() >= 8 && command.substring(0, 7).equals("delete ")) {
+        } else if (keyword.equals("delete")) {
             int num = Integer.parseInt(command.split(" ")[1]);
             return new DeleteCommand(num - 1);
-        } else if (command.length() >= 6 && command.substring(0, 5).equals("find ")) {
+        } else if (keyword.equals("find")) {
             return new FindCommand(command.split(" ")[1]);
-        } else {
-            String[] parts = command.split(" ", 2);
-            String taskType = parts[0];
-            if (TaskType.isTask(taskType)) {
-                if (parts.length < 2 || parts[1].isEmpty()) {
-                    throw new DukeException(String.format("OOPS!!! The description of %s cannot be empty.", parts[0]));
-                } else {
-                    return new AddCommand(parts[0], parts[1]);
-                }
+        } else if (TaskType.isTask(keyword)) {
+            if (parts.length < 2 || parts[1].isEmpty()) {
+                throw new DukeException(String.format("OOPS!!! The description of %s cannot be empty.", parts[0]));
             } else {
-                throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+                return new AddCommand(parts[0], parts[1]);
             }
+        } else {
+            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 }
