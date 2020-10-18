@@ -53,32 +53,24 @@ public class TaskList {
      * @throws DukeException when there is an error with the user input
      */
     public Task addEvent(String specifications) throws DukeException {
-        if (!specifications.contains("/at")) {
-            throw new DukeException("Please use /at to specify a date and time!");
+        try {
+            if (!specifications.contains("/at")) {
+                throw new DukeException("Please use /at to specify a date and time!");
+            }
+            String[] specificationsArray = specifications.split("/at ", 2);
+            String[] dateTimeArray = specificationsArray[1].split(" ", 2);
+            String[] timeArray = dateTimeArray[1].split("-", 2);
+            String date = dateTimeArray[0];
+            String startTime = timeArray[0];
+            String endTime = timeArray[1];
+            String startDateTime = date + " " + startTime;
+            String endDateTime = date + " " + endTime;
+            Task newTask = new Events(specificationsArray[0], startDateTime, endDateTime);
+            tasks.add(newTask);
+            return newTask;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("Please specify a date and time range! \nEg. /at 18/10/2020 10pm - 11pm");
         }
-        String[] specificationsArray = specifications.split("/at ", 2);
-        if (specificationsArray.length < 2) {
-            throw new DukeException("Please specify a date and time range! \nEg. 25/12/2020 10pm - 11pm");
-        }
-        String[] dateTimeArray = specificationsArray[1].split(" ", 2);
-        if (dateTimeArray.length < 2) {
-            throw new DukeException("Please specify a date and time range! \nEg. 25/12/2020 10pm - 11pm");
-        }
-        String[] timeArray = dateTimeArray[1].split("-", 2);
-        if (timeArray.length < 2) {
-            throw new DukeException("Please use - to specify the time range! \nEg. 10pm - 11pm");
-        }
-        String date = dateTimeArray[0];
-        String startTime = timeArray[0];
-        String endTime = timeArray[1];
-        String startDateTime = date + " " + startTime;
-        String endDateTime = date + " " + endTime;
-        if (dateTimeArray.length <= 1) {
-            throw new DukeException("You need to specify a time!");
-        }
-        Task newTask = new Events(specificationsArray[0], startDateTime, endDateTime);
-        tasks.add(newTask);
-        return newTask;
     }
 
 
@@ -110,6 +102,7 @@ public class TaskList {
      * done method which sets a task as done
      * @param numString the integer of the task which the user wants to set as done
      * @return returns the completed task
+     * @throws DukeException when input is incorrect
      */
     public Task done(String numString) throws DukeException {
         try {

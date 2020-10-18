@@ -67,6 +67,7 @@ public class Task {
     /**
      * completedTask method which marks the task as completed
      * @return the completed task
+     * @throws DukeException when task is already completed
      */
     public Task completeTask() throws DukeException {
         if (isDone) {
@@ -110,47 +111,87 @@ public class Task {
      */
     public LocalTime parseTime (String timeString) throws DukeException {
         try {
+            if (timeString.contains("PM") || timeString.contains("pm")) {
+                return parsePm(timeString);
+            }
+            if (timeString.contains("AM") || timeString.contains("am")) {
+                return parseAm(timeString);
+            }
             timeString = timeString.replaceAll("\\s+", "");
             int hour = 0;
             int minute = 0;
-            if (timeString.contains("PM") || timeString.contains("pm")) {
-                String timeNum = timeString.substring(0, timeString.length() - 2);
-                String[] timeArray = timeNum.split("[:]|[.]|[-]", 2);
-                if (timeArray.length == 2) {
-                    hour = Integer.parseInt(timeArray[0]) + 12;
-                    minute = Integer.parseInt(timeArray[1]);
-                } else {
-                    hour = Integer.parseInt(timeArray[0]) + 12;
-                }
-            } else if (timeString.contains("AM") || timeString.contains("am")) {
-                String timeNum = timeString.substring(0, timeString.length() - 2);
-                String[] timeArray = timeNum.split("[:]|[.]", 2);
-                if (timeArray.length == 2) {
-                    hour = Integer.parseInt(timeArray[0]);
-                    minute = Integer.parseInt(timeArray[1]);
-                } else {
-                    hour = Integer.parseInt(timeArray[0]);
-                }
-            } else if (timeString.length() < 4) {
-                throw new DukeException("Please key in a valid time!");
+            String[] timeArray = timeString.split("[:]|[.]|[-]", 2);
+            if (timeArray.length == 1) {
+                hour = Integer.parseInt(timeString.substring(0, 2));
+                minute = Integer.parseInt(timeString.substring(2));
             } else {
-                String[] timeArray = timeString.split("[:]|[.]|[-]", 2);
-                if (timeArray.length == 1) {
-                    hour = Integer.parseInt(timeString.substring(0, 2));
-                    minute = Integer.parseInt(timeString.substring(2));
-                } else {
-                    hour = Integer.parseInt(timeArray[0]);
-                    minute = Integer.parseInt(timeArray[1]);
-                }
+                hour = Integer.parseInt(timeArray[0]);
+                minute = Integer.parseInt(timeArray[1]);
             }
             if (hour == 24) {
                 hour = 12;
             }
             return LocalTime.of(hour, minute);
-        } catch (DateTimeException | NumberFormatException e) {
+        } catch (DateTimeException | NumberFormatException | ArrayIndexOutOfBoundsException e) {
             throw new DukeException("Please key in a valid time!");
         }
 
+    }
+
+    /**
+     * parseAm, method which takes in a time in AM string form and converts it to a LocalTime object
+     * @param timeString time in AM string format
+     * @return returns the LocalTime
+     * @throws DukeException when input cannot be processed
+     */
+    public LocalTime parseAm (String timeString) throws DukeException {
+        try {
+            int hour = 0;
+            int minute = 0;
+            timeString = timeString.replaceAll("\\s+", "");
+            timeString = timeString.substring(0, timeString.length() - 2);
+            String[] timeArray = timeString.split("[:]|[.]|[-]", 2);
+            if (timeArray.length == 2) {
+                hour = Integer.parseInt(timeArray[0]);
+                minute = Integer.parseInt(timeArray[1]);
+            } else {
+                hour = Integer.parseInt(timeArray[0]);
+            }
+            if (hour == 24) {
+                hour = 12;
+            }
+            return LocalTime.of(hour, minute);
+        } catch (DateTimeException | NumberFormatException | ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("Please key in a valid time!");
+        }
+    }
+
+    /**
+     * parsePm method which takes in a time in PM string form and converts it to a LocalTime object
+     * @param timeString time in PM string format
+     * @return returns the LocalTime
+     * @throws DukeException when input cannot be processed
+     */
+    public LocalTime parsePm (String timeString) throws DukeException {
+        try {
+            int hour = 0;
+            int minute = 0;
+            timeString = timeString.replaceAll("\\s+", "");
+            timeString = timeString.substring(0, timeString.length() - 2);
+            String[] timeArray = timeString.split("[:]|[.]|[-]", 2);
+            if (timeArray.length == 2) {
+                hour = Integer.parseInt(timeArray[0]) + 12;
+                minute = Integer.parseInt(timeArray[1]);
+            } else {
+                hour = Integer.parseInt(timeArray[0]) + 12;
+            }
+            if (hour == 24) {
+                hour = 12;
+            }
+            return LocalTime.of(hour, minute);
+        } catch (DateTimeException | NumberFormatException | ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("Please key in a valid time!");
+        }
     }
 
     /**
@@ -230,5 +271,4 @@ public class Task {
             return new Events(name, startDateTime, endDateTime);
         }
     }
-
 }

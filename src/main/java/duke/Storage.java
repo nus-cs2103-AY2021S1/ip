@@ -89,16 +89,15 @@ public class Storage {
         List<Task> tasks = new ArrayList<>();
         while (sc.hasNextLine()) {
             String type = sc.nextLine();
-            assert !type.isBlank();
             String done = sc.nextLine();
             String name = sc.nextLine();
+            assert !type.isBlank() && !done.isBlank();
             if (type.equals("ToDo")) {
                 Task temp = new ToDo(name);
                 if (done.equals("true")) {
                     temp.completeTask();
                 }
                 tasks.add(temp);
-                sc.nextLine();
             } else if (type.equals("Deadlines")) {
                 String startDateTime = sc.nextLine();
                 Task temp = new Deadlines(name, startDateTime);
@@ -106,7 +105,6 @@ public class Storage {
                     temp.completeTask();
                 }
                 tasks.add(temp);
-                sc.nextLine();
             } else {
                 String startDateTime = sc.nextLine();
                 String endDateTime = sc.nextLine();
@@ -115,8 +113,8 @@ public class Storage {
                     temp.completeTask();
                 }
                 tasks.add(temp);
-                sc.nextLine();
             }
+            sc.nextLine();
         }
         return tasks;
     }
