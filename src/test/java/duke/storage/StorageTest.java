@@ -1,22 +1,25 @@
 package duke.storage;
 
-import duke.exceptions.DukeException;
-import duke.tasks.Task;
-import duke.tasks.TaskType;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+import duke.exceptions.DukeException;
+import duke.tasks.Task;
+import duke.tasks.TaskType;
 
 /**
  * Represents a storage test.
  * @version 1.0
  */
 public class StorageTest {
-    Storage storage1 = new Storage("./src/test/tasks.txt");
-    Storage storage2 = new Storage("./tasks.txt");
+    private Storage storage1 = new Storage("./src/test/tasks.txt");
+    private Storage storage2 = new Storage("./tasks.txt");
 
     @Test
     void load() {

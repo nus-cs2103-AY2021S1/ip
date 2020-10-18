@@ -54,7 +54,8 @@ public class Ui {
      * @param task The task specified to be snoozed
      */
     public void showSnooze(Task task) {
-        System.out.println(task.getDescription() + " is snoozed to new date: " + task.getDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+        System.out.println(task.getDescription() + " is snoozed to new date: "
+                + task.getDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
     }
 
     /**

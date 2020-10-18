@@ -1,12 +1,12 @@
 package duke.commands;
 
+import java.time.LocalDate;
+
 import duke.exceptions.DukeException;
 import duke.storage.Storage;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
-
-import java.time.LocalDate;
 
 /**
  * Represents a command that snooze a deadline or an evnet.
@@ -56,7 +56,7 @@ public class SnoozeCommand extends Command {
         if (task.getDate() == null) {
             throw new DukeException("Target task cannot have a due date.");
         }
-        Task newTask = new Task(task.getType(),task.getDescription(), newDate);
+        Task newTask = new Task(task.getType(), task.getDescription(), newDate);
         return newTask;
     }
 }
