@@ -1,0 +1,19 @@
+blah
+what
+todo
+todo borrow book
+deadline return book
+deadline return book /by Sunday
+event project meeting
+event project meeting /at Mon 2-4pm
+deadline homework /by today
+list
+done 9
+done 2
+todo return book
+event lesson /at Friday 10-12am
+list
+delete 7
+delete 4
+list
+bye
