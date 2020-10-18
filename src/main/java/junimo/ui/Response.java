@@ -21,7 +21,7 @@ public class Response {
      * Returns the response message.
      * @return The response message.
      */
-    public String getMesssage() {
+    public String getMessage() {
         return this.messsage;
     }
 

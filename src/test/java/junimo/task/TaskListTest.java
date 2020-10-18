@@ -11,7 +11,7 @@ public class TaskListTest {
 
     public enum SampleTask {
         DEADLINE(new Deadline("Math Test", "2020-08-31", true)),
-        EVENT(new Event("Pool Party", "Matt's House", false)),
+        EVENT(new Event("Pool Party", "2020-12-12 12:00", "2020-12-12 18:00", false)),
         TODO(new Todo("Write English Essay", false));
 
         final Task task;

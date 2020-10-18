@@ -8,8 +8,8 @@ public abstract class Task {
     protected Boolean isDone;
 
     private enum TaskType {
-        DEADLINE("deadline <task description> /by <yyyy-mm-dd>"),
-        EVENT("event <event description> /at <event location>"),
+        DEADLINE("deadline <task description> /by <yyyy-MM-dd>"),
+        EVENT("event <event description> /start <yyyy-MM-dd HH:mm> /end <yyyy-MM-dd HH:mm>"),
         TODO("todo <task description>");
 
         private final String format;

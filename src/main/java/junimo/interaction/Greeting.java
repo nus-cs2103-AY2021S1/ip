@@ -18,7 +18,7 @@ public class Greeting {
                 + "\n* To add a deadline, say:"
                 + "\n       'deadline <task description> /by <yyyy-mm-dd>'."
                 + "\n* To add an event, say:"
-                + "\n       'event <event description> /at <event location>'."
+                + "\n       'event <event description> /start <yyyy-mm-dd HH:mm> /end <yyyy-mm-dd HH:mm>'."
                 + "\n* To view your tasks, say: 'list'."
                 + "\n* To check off a task, say: 'done <task number>'."
                 + "\n* To find tasks, say: 'find <word>'."

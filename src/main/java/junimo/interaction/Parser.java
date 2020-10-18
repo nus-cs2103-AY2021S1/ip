@@ -22,8 +22,10 @@ public class Parser {
         CORRECT_DEADLINE("deadline (\\S+\\s?)+ /by (\\S+\\s?)+"),
         BLANK_DEADLINE_DATE("deadline.+/by\\p{Blank}?"),
         BLANK_DEADLINE_DESC("deadline\\p{Blank}+/by.?"),
-        CORRECT_EVENT("event (\\S+\\s?)+ /at (\\S+\\s?)+"),
-        BLANK_EVENT_LOC("event.+/at\\p{Blank}?"),
+        CORRECT_EVENT("event (\\S+\\s?)+ /start (\\S+\\s?)+ /end (\\S+\\s?)+"),
+        BLANK_EVENT_START1("event.+/start\\p{Blank}?"),
+        BLANK_EVENT_START2("event.+/start /end (\\S+\\s?)+"),
+        BLANK_EVENT_END("event.+/start (\\S+\\s?)+ /end\\p{Blank}?"),
         BLANK_EVENT_DESC("event\\p{Blank}+/at.?");
 
         private final String pattern;
@@ -202,16 +204,19 @@ public class Parser {
 
         case "event":
             if (input.matches(TaskInputPattern.CORRECT_EVENT.pattern)) {
-                String[] splitEvent = splitInput[1].split(" /at ");
+                String[] splitEvent = splitInput[1].split(" /start ");
                 String eventDesc = splitEvent[0];
-                String at = splitEvent[1];
-                Task newTask = new Event(eventDesc, at, isDone);
+                String startAt = splitEvent[1].split(" /end ")[0];
+                String endAt = splitEvent[1].split(" /end ")[1];
+                Task newTask = new Event(eventDesc, startAt, endAt, isDone);
                 return isArchive
                         ? taskList.addArchivedTask(newTask)
                         : taskList.addTask(newTask);
             } else if (input.matches(TaskInputPattern.BLANK_EVENT_DESC.pattern)
-                    || input.matches(TaskInputPattern.BLANK_EVENT_LOC.pattern)) {
-                throwEmptyFieldException("event", "description", "location");
+                    || input.matches(TaskInputPattern.BLANK_EVENT_START1.pattern)
+                    || input.matches(TaskInputPattern.BLANK_EVENT_START2.pattern)
+                    || input.matches(TaskInputPattern.BLANK_EVENT_END.pattern)) {
+                throwEmptyFieldException("event", "description", "start date time", "end date time");
             } else {
                 throwInvalidTaskSyntaxException("event");
             }

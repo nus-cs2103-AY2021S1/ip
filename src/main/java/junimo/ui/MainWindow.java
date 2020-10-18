@@ -52,12 +52,12 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         Response response = getResponse(userInput.getText());
-        String responseMesssage = response.getMesssage();
+        String responseMessage = response.getMessage();
         boolean isErrorMessage = response.getIsErrorMessage();
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getJunimoDialog(
-                        responseMesssage,
+                        responseMessage,
                         isErrorMessage ? redJunimoImage : junimoImage
                 )
         );

@@ -22,7 +22,7 @@ public class Deadline extends Task {
             this.by = LocalDate.parse(by);
         } catch (DateTimeParseException e) {
             throw new IllegalArgumentException("OOPS! The deadline in an incorrect format! "
-                    + "Please indicate the date as <yyyy-mm-dd>");
+                    + "Please indicate the date as <yyyy-MM-dd>");
         }
     }
 

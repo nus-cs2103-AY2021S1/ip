@@ -18,8 +18,8 @@ There are in total 10 features on Junimo for users for you to use. <br/>
 | Feature | Description |
 | :------ | :---------- |
 | `todo DESCRIPTION` | Adds a todo to the task list. |
-| `deadline DESCRIPTION /by YYYY-MM-DD` | Adds a deadline to the task list. |
-| `event DESCRIPTION /at LOCATION` | Adds an event to the task list. |
+| `deadline DESCRIPTION /by yyyy-MM-dd` | Adds a deadline to the task list. |
+| `event DESCRIPTION /start yyyy-MM-dd HH:mm /end yyyy-MM-dd HH:mm` | Adds an event to the task list. |
 | `list` | Displays the current task list. |
 | `done TASK_INDEX` | Marks the task at specified index in task list as done. |
 | `find KEYWORD` | Displays the list of tasks with the keyword found in their descriptions. |
@@ -67,17 +67,27 @@ Now you have 6 tasks in the list.
 ### 3. Adding an event: `event`
 Adds an event to the task list.
 
-Format: `event DESCRIPTION /at LOCATION`
+Format: `event DESCRIPTION /start yyyy-MM-dd HH:mm /end yyyy-MM-dd HH:mm`
 
-Example: 
+Example (same start and end date): 
 ```
-event party /at the beach
+event party /start 2020-12-12 12:00 /end 2020-12-12 15:00
 ```
 
 Expected outcome: 
 ```
-added: [E][✘] party (at: the beach).
+added: [E][✘] party (at: Dec 12 2020 12:00PM to 3:00PM).
 Now you have 7 tasks in the list.
+```
+Example (different start and end date): 
+```
+event concert /start 2020-12-12 12:00 /end 2020-12-13 12:00
+```
+
+Expected outcome: 
+```
+added: [E][✘] concert (at: Dec 12 2020 12:00PM to Dec 13 2020 12:00PM).
+Now you have 8 tasks in the list.
 ```
 <br />
 
@@ -95,12 +105,13 @@ Expected outcome:
 ```
 Here are the tasks in your list:
 1. [T][✘] eat ice cream
-2. [E][✘] book event (at: library)
+2. [E][✘] book event (at: Nov 25 2020 8:00AM to 12:00PM)
 3. [D][✓] write book (by: Dec 12 2020)
 4. [T][✓] sleep
 5. [T][✘] read book
 6. [D][✘] do project (by: Sep 26 2020)
-7. [E][✘] party (at: the beach)
+7. [E][✘] party (at: Dec 12 2020 12:00PM to 3:00PM)
+8. [E][✘] concert (at: Dec 12 2020 12:00PM to Dec 13 2020 12:00PM)
 ```
 <br />
 
@@ -134,7 +145,7 @@ find book
 Expected outcome: 
 ```
 Here are the matching tasks in your list:
-1. [E][✘] book event (at: library)
+1. [E][✘] book event (at: Nov 25 2020 8:00AM to 12:00PM)
 2. [D][✓] write book (by: Dec 12 2020)
 3. [T][✓] read book
 ```
