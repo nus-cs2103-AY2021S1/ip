@@ -1,0 +1,7 @@
+deadline return book /by Monday
+todo Math
+event book reading /at 430pm Tuesday
+list
+done 1
+list
+bye
