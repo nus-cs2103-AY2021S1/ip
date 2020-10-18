@@ -51,7 +51,7 @@ public class EventCommand extends Command {
         if (!containsKeyword(super.input)) {
             throw new InvalidInputException("OOPS!!! Please use '/at' keyword\n");
         }
-        if (!super.input.substring(6, 7).equals(" ")) {
+        if (!super.input.substring(5, 6).equals(" ")) {
             throw new InvalidInputException("OOPS!!! Event format is incorrect.\n");
         }
         try {

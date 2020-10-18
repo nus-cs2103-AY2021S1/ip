@@ -2,6 +2,7 @@ package duke;
 
 import duke.command.*;
 import duke.exceptions.DukeException;
+import duke.exceptions.InvalidInputException;
 
 /**
  * Parser class to parse user input into respective command lines.
@@ -28,6 +29,8 @@ public class Parser {
             return new FindCommand(userInput);
         } else if (userInput.startsWith("help")) {
             return new HelpCommand(userInput);
+        } else if (userInput.contains("|")) {
+            throw new InvalidInputException("'|' character not allowed.");
         } else {
             return addCommand(userInput);
         }

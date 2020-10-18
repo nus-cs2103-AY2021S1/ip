@@ -51,7 +51,7 @@ public class DeadlineCommand extends Command {
         if (!containsKeyword(super.input)) {
             throw new InvalidInputException("OOPS!!! Please use '/by' keyword.\n");
         }
-        if (!super.input.substring(9, 10).equals(" ")) {
+        if (!super.input.substring(8, 9).equals(" ")) {
             throw new InvalidInputException("OOPS!!! Deadline format is incorrect.\n");
         }
         try {
