@@ -17,5 +17,6 @@ bin/
 text-ui-test/EXPECTED-UNIX.TXT
 /caches/
 /daemon/
-wrapper/
+/wrapper/
+wrapper/dists/gradle-6.2-bin/6zaomcc3lf3gnwxgkllci1muk
 
