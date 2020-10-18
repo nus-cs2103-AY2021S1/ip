@@ -1,17 +1,17 @@
 package emily.storage;
 
-import emily.exception.DukeException;
-import emily.task.Task;
-import emily.task.Deadline;
-import emily.task.Event;
-import emily.task.ToDos;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import emily.exception.DukeException;
+import emily.task.Deadline;
+import emily.task.Event;
+import emily.task.Task;
+import emily.task.ToDos;
 
 /**
  * Saves and loads data

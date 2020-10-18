@@ -1,10 +1,10 @@
 package emily.storage;
 
+import java.util.ArrayList;
+
 import emily.task.Deadline;
 import emily.task.Event;
 import emily.task.Task;
-
-import java.util.ArrayList;
 
 /**
  * Modifies the arraylist of tasks and contains the most updated list
@@ -53,6 +53,12 @@ public class TaskList {
         return ls;
     }
 
+    /**
+     * Find tasks with the given date
+     *
+     * @param keydate that the user wish to view the task on
+     * @return an arraylist of task with the given date
+     */
     public ArrayList<Task> findSameDate(String keydate) {
         ArrayList<Task> ls = new ArrayList<>();
         for (Task t : this.taskArrayList) {
@@ -62,7 +68,7 @@ public class TaskList {
             } else if (t instanceof Event) {
                 d = ((Event) t).getAt();
             } else {
-                assert false: "List has an unknown task type";
+                assert false : "List has an unknown task type";
             }
 
             if (d.contains(keydate)) {

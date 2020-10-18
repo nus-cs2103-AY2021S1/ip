@@ -20,6 +20,9 @@ public class DialogBox extends HBox {
     private Label text;
     private ImageView displayPicture;
 
+    /**
+     * Provide a structure to the information passed between user and bot
+     */
     public DialogBox(Label l, ImageView iv, Boolean bot) {
         text = l;
         displayPicture = iv;
@@ -27,9 +30,9 @@ public class DialogBox extends HBox {
         text.setWrapText(true);
         displayPicture.setFitWidth(100.0);
         displayPicture.setFitHeight(100.0);
-        if(bot){
+        if (bot) {
             text.setStyle("-fx-background-color: aliceblue");
-        } else{
+        } else {
             text.setStyle("-fx-background-color: mistyrose");
         }
 

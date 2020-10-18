@@ -9,6 +9,10 @@ public class Task {
     protected char type;
     protected boolean hasFinished;
 
+    /**
+     * Task with description, default is marked as not done
+     * @param description contains a string of information about the task
+     */
     public Task(String description) {
         this.description = description;
         this.hasFinished = false;
@@ -26,7 +30,7 @@ public class Task {
         return this.description;
     }
 
-    public void modifyDescription(String d){
+    public void modifyDescription(String d) {
         this.description = d;
     }
 

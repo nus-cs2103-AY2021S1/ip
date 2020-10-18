@@ -1,12 +1,12 @@
 package emily.command;
 
-import emily.exception.DukeException;
-import emily.storage.Storage;
-import emily.storage.TaskList;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
+
+import emily.exception.DukeException;
+import emily.storage.Storage;
+import emily.storage.TaskList;
 
 
 /**
@@ -30,6 +30,21 @@ public class Emily {
             tasks = new TaskList(storage.loadData());
         } catch (DukeException e) {
             File f = new File(FILE_PATH);
+            f.getParentFile().mkdirs();
+        }
+    }
+
+    /**
+     * Copy constructor with preloaded txt file path
+     * @param filePath where the data text is loaded from
+     */
+    public Emily(String filePath) {
+        logic = new Logic();
+        storage = new Storage(filePath);
+        try {
+            tasks = new TaskList(storage.loadData());
+        } catch (DukeException e) {
+            File f = new File(filePath);
             f.getParentFile().mkdirs();
         }
     }
