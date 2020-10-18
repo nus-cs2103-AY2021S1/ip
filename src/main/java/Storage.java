@@ -42,6 +42,11 @@ public class Storage {
         return this.storeFile;
     }
 
+    /**
+     * Loads data file
+     * @param filePath path of file to be loaded
+     * @throws IOException exception thrown when loading a file
+     */
     public void loadFile(String filePath) throws IOException {
         if (filePath == null) {
             filePath = "data/data.txt";
@@ -58,6 +63,11 @@ public class Storage {
         this.updatePointerFile(filePath);
     }
 
+    /**
+     * Saves data file
+     * @param tasks Task list to be saveed to file
+     * @throws IOException exception thrown when saving a file
+     */
     public void saveFile(TaskList tasks) throws IOException {
         FileOutputStream fos = new FileOutputStream(this.storeFile);
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
@@ -70,6 +80,10 @@ public class Storage {
         bw.close();
     }
 
+    /**
+     * Prompts the user to choose a storage file
+     * @return String path of the file chosen
+     */
     public static String promptForFile() {
         JFileChooser fc = new JFileChooser("./data");
         fc.setFileFilter(new FileNameExtensionFilter("*.txt", "txt"));

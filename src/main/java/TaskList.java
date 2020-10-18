@@ -14,6 +14,11 @@ public class TaskList {
         this.loadTaskFile(file);
     }
 
+    /**
+     * Loads task file into task list
+     * @param file Storage file
+     * @throws IOException exception thrown when reading storage file
+     */
     public void loadTaskFile(File file) throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(file));
         String line = br.readLine();
@@ -29,26 +34,51 @@ public class TaskList {
         }
     }
 
+    /**
+     * Sets task as done
+     * @param doneTask index of task
+     */
     public void done(int doneTask) {
         taskList.get(doneTask).setDone();
     }
 
+    /**
+     * Deletes task
+     * @param deleteTask index of task
+     */
     public void delete(int deleteTask) {
         taskList.remove(deleteTask);
     }
 
+    /**
+     * Adds a deadline task
+     * @param task Task name
+     * @param deadline Task deadline
+     * @return Task object
+     */
     public Task addDeadline(String task, String deadline) {
         Deadline dl = new Deadline(task, deadline);
         taskList.add(dl);
         return dl;
     }
 
+    /**
+     * Adds a todo task
+     * @param task Task name
+     * @return Task object
+     */
     public Task addTodo(String task) {
         Todo td = new Todo(task);
         taskList.add(td);
         return td;
     }
 
+    /**
+     * Adds a event task
+     * @param task Task name
+     * @param at Task date
+     * @return Task object
+     */
     public Task addEvent(String task, String at) {
         Event e = new Event(task, at);
         taskList.add(e);
@@ -77,6 +107,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Finds tasks matching a given key
+     * @param key Key to be found
+     * @return List of tasks found
+     */
     public String find(String key) {
         String rtn = taskList.stream()
                 .map(task -> task.toString())
