@@ -2,7 +2,7 @@
 
 ## Features 
 
-### Add Task
+### A) Add Task
 To add tasks to list
 
 1. ### `Todo` 
@@ -34,7 +34,7 @@ Example of usage:
 
 `delete 1`
 
-Expected outcome:
+Expected Outcome:
 
 `I have deleted this task for you: {task}`
 
@@ -45,7 +45,7 @@ Find all tasks with matching keyword given
 
 Example of usage: 
 
-`find (math)`
+`find math`
 
 Expected outcome:
 
@@ -56,7 +56,7 @@ To mark task as finished
 
 ### `Done` 
 
-Describe action and its outcome.
+Mark the task at the given index as done with a tick
 
 Example of usage: 
 
@@ -64,14 +64,14 @@ Example of usage:
 
 Expected outcome:
 
-`I have marked this task as done: {task1}`
+`I have marked this task as done: {task1 [✓] }`
 
 ### View Schedule
 To view the task on the given date
 
 ### `View` 
 
-Describe action and its outcome.
+The bot will filter and show the list of task with the given date
 
 Example of usage: 
 
@@ -86,7 +86,7 @@ To modify task description
 
 ### `Edit` 
 
-Describe action and its outcome.
+The bot will retrieve the task at the given index and edit the description
 
 Example of usage: 
 
@@ -95,3 +95,18 @@ Example of usage:
 Expected outcome:
 
 `I have changed the description for you: {newTaskName}`
+
+### B) Exit Emily Bot
+To exit the application
+
+### `Bye` 
+
+The program will close
+
+Example of usage: 
+
+`bye`
+
+Expected outcome:
+
+`Program will close`
