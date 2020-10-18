@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-
+export LC_ALL=en_GB.UTF-8
 # create bin directory if it doesn't exist
 if [ ! -d "../bin" ]
 then
@@ -13,7 +13,11 @@ then
 fi
 
 # compile the code into the bin folder, terminates if error occurred
-if ! javac -cp ../src -Xlint:none -d ../bin ../src/main/java/Duke.java
+if
+  ! (
+    find ../src -name "*.java" >sources.txt
+    javac -cp ../src -Xlint:none -d ../bin @sources.txt
+  )
 then
     echo "********** BUILD FAILURE **********"
     exit 1

@@ -1,0 +1,7 @@
+todo homework
+todo project
+event team meeting /at Tuesday
+delete 1
+done 1
+done 2
+bye
