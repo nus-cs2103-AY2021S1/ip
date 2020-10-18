@@ -1,12 +1,27 @@
 # Duke User Guide
 ![Duke](Ui.png)
 
+## Features summary
+
+Feature | Description | Example
+-------------|---------- | --------
+todo|Adds a Todo task to your list|todo buy dinner
+deadline|Adds a Deadline task to your list|deadline return book /by 25/9/2020 21:00
+event|Adds an Event task to your list|event cca cohesion /at 30/9/2020 19:00
+delete|Deletes a task in your list|delete 1
+done|Marks a task in your list as done|done 2
+list|Lists out all current tasks to the user|list
+find|Finds all tasks matching the specified keyword(s)|find book birthday
+sort|Sorts all current tasks in chronological order|sort
+bye|Exits Duke and closes the program|bye
+
 ## Features
 
-### Add Todo Task
-Adds a Todo Task to your list.
+### Feature 1
 
-## Usage
+<h4>Add Todo Task</h4>
+
+Adds a Todo Task to your list.
 
 ### `todo DESCRIPTION`
 Adds a Todo task where `DESCRIPTION` is the task name.
@@ -19,10 +34,11 @@ Expected outcome:
 
 ![Todo](./images/todo.png)
 
-### Add Deadline Task
-Adds a Deadline Task to your list.
+### Feature 2
 
-## Usage
+<h4>Add Deadline Task</h4>
+
+Adds a Deadline Task to your list.
 
 ### `deadline DESCRIPTION /by dd/MM/yyyy HH:mm`
 Adds a Deadline task where `DESCRIPTION` is the task name and `dd/MM/yyyy HH:mm` is the date time.
@@ -36,10 +52,11 @@ Expected outcome:
 
 ![Deadline](./images/deadline.png)
 
-### Add Event Task
-Adds an Event Task to your list.
+### Feature 3
 
-## Usage
+<h4>Add Event Task</h4>
+
+Adds an Event Task to your list.
 
 ### `event DESCRIPTION /at dd/MM/yyyy HH:mm`
 Adds an Event task where `DESCRIPTION` is the task name and `dd/MM/yyyy HH:mm` is the date time.
@@ -53,10 +70,11 @@ Expected outcome:
 
 ![Event](./images/event.png)
 
-### Delete Task
-Deletes a task in your list.
+### Feature 4
 
-## Usage
+<h4>Delete Task</h4>
+
+Deletes a task in your list.
 
 ### `delete INDEX`
 Deletes the task where `INDEX` represents the task number in the list.
@@ -69,10 +87,11 @@ Expected outcome:
 
 ![Delete](./images/delete.png)
 
-### Mark task as done
-Marks a task in your list as done.
+### Feature 5
 
-## Usage
+<h4>Mark Task as done</h4>
+
+Marks a task in your list as done.
 
 ### `done INDEX`
 Marks the task as done where `INDEX` represents the task number in the list.
@@ -85,10 +104,11 @@ Expected outcome:
 
 ![Done](./images/done.png)
 
-### List tasks
-Lists out all current tasks to the user.
+### Feature 6
 
-## Usage
+<h4>List tasks</h4>
+
+Lists out all current tasks to the user.
 
 ### `list`
 
@@ -100,10 +120,11 @@ Expected outcome:
 
 ![List](./images/list.png)
 
-### Find tasks using keywords
-Finds all tasks matching the specified keyword.
+### Feature 7
 
-## Usage
+<h4>Find tasks using keywords</h4>
+
+Finds all tasks matching the specified keyword(s).
 
 ### `find KEYWORDS`
 Finds all matching tasks to the specified `KEYWORDS`,
@@ -117,10 +138,11 @@ Expected outcome:
 
 ![Find](./images/find.png)
 
-### Sort tasks
-Sorts all current tasks in chronological order.
+### Feature 8
 
-## Usage
+<h4>Sort tasks</h4>
+
+Sorts all current tasks in chronological order.
 
 ### `sort`
 Sorts all tasks according to their type in the following order: Todo, Deadline, Event.
@@ -134,9 +156,9 @@ Expected outcome:
 
 ![Sort](./images/sort.png)
 
-### Exit programme
+### Feature 9
 
-## Usage
+<h4>Exit programme</h4>
 
 ### `bye`
 Exits the programme.
