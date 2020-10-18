@@ -24,7 +24,8 @@ public class Greeting {
                 + "\n* To find tasks, say: 'find <word>'."
                 + "\n* To archive tasks, say: 'archive <task number>'."
                 + "\n* To unarchive tasks, say: 'unarchive <task number>'."
-                + "\n* To view your archived tasks, say: 'archives'.\n"
+                + "\n* To view your archived tasks, say: 'archives'."
+                + "\n* To leave, say: 'bye'.\n"
                 + STAR_LINE;
         System.out.println(welcomeMessage);
         return welcomeMessage;
