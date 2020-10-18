@@ -36,6 +36,9 @@ public class DoCommand extends Command {
      */
     @Override
     public void execute(TaskList list, Ui ui, Storage storage) throws DukeException {
+        if (taskIndex > list.getActiveTasks()) {
+            throw new DukeException("Task at index does not exist or already marked as done.");
+        }
         Task task = list.getTaskAtIndex(taskIndex);
         list.markTaskAsDone(task);
         storage.write(list.getList());

@@ -36,6 +36,9 @@ public class DeleteCommand extends Command {
      */
     @Override
     public void execute(TaskList list, Ui ui, Storage storage) throws DukeException {
+        if (taskIndex > list.getActiveTasks()) {
+            throw new DukeException("Task at index does not exist.");
+        }
         Task task = list.getTaskAtIndex(taskIndex);
         list.deleteTask(task);
         storage.write(list.getList());

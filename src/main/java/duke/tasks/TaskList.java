@@ -28,10 +28,18 @@ public class TaskList {
         this.list = list;
         activeTasks = 0;
         for (Task t : list) {
-            if (t.getStatus()) {
+            if (!t.getStatus()) {
                 activeTasks++;
             }
         }
+    }
+
+    /**
+     * Returns the current position of the last incomplete task.
+     * @return index of the last incomplete task.
+     */
+    public int getActiveTasks() {
+        return activeTasks;
     }
 
     /**

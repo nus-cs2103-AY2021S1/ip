@@ -1,165 +1,254 @@
-# DoLah User Guide [![Status](https://travis-ci.org/BobbyZhouZijian/ip.svg?branch=master)](https://travis-ci.org/BobbyZhouZijian/ip)
+# N Chat Bot User Guide
 
-<p align="center">
-    <img src="./Ui.png" alt="App Image" width="400" height="600">
-</p>
+![UiWindow](Ui.png)
 
 ## Features
 
-DoLah is a task managing application that helps you too keep track of what you list of tasks.
-
+N Chat Bot is an application that helps you maintain your todo tasks.
 
 ## Usage
 
-### Build and Run
-
-To use the the Do Lah, simply compile and run the Duke.java file at `src/main/java/duke/Duke.java`.
-
-You can also build the application and run it using gradle.
-
-A packaged jar file has been attached in the latest stable release. Feel free to download it
-and enjoy DoLah by type the command `java -jar dolah.jar`
-
 ### 1. `list` - List out all current tasks
 
-DoLah will return you a list of the tasks currently inside the application.
+N Chat Bot will return you a list of all tasks you currently have stored in N Chat bot, regardless of its status.
 
 Format: `list`
 
 Example: 
-```$xslt
+```
 list
 ```
 
 Expected Outcome:
 ```
 Here are the tasks in your list:
-1. [T][✓] do work~
-2. [D][✗] submit ip (by: Sep 16 2020)
+1. [T][✗] return books
+2. [T][✓] borrow books
 ```
 
 ### 2. `todo` - Add a todo task
 
-Add a todo task with the specified content to DoLah.
+Add a todo task with the given description in N Chat Bot. The task will be added before the first task with status 
+done. 
 
-Format: `todo CONTENT`
+Format: `todo DESCRIPTION`
 
 Example: 
-```$xslt
-todo submit individual project
+```
+todo do assignment 1
 ```
 
 Expected Outcome:
 ```
-Got it. I've added this task:
-    [T][✗] submit individual project
-Now you have 3 tasks in the list.
+You have added [T][✗] do assignment 1!
+Now you have these tasks:
+    1. [T][✗] return books
+    2. [T][✗] do assignment 1
+    3. [T][✓] borrow books
 ```
 
 ### 3. `deadline` - Add a Deadline Task
 
-Add a deadline task with the specified content and deadline to DoLah.
+Add a deadline task with the given description and due date.
 
-Format: `deadline CONTENT /by YYYY-MM-DD`
+Format: `deadline DESCRIPTION /by YYYY-MM-DD`
 
 Example: 
-```$xslt
-deadline revise for midterm /by 2020-09-25
+```
+deadline programming assignment /by 2020-11-24
 ```
 
 Expected Outcome:
-```$xslt
-Got it. I've added this task:
-    [D][✗] revise for midterm (by: Sep 25 2020)
-Now you have 4 tasks in the list.
+```
+You have added [D][✗] programming assignment (by: Nov 24 2020)!
+Now you have these tasks:
+    1. [T][✗] return books
+    2. [T][✗] do assignment 1
+    3. [D][✗] programming assignment (by: Nov 24 2020)
+    4. [T][✓] borrow books
 ```
 
-### 4. `event` - Add an event
+### 4. `event` - Add an event task
 
-Add an event with the specified content and event date to DoLah.
+Add an event task with the given description and due date.
 
-Format: `event CONTENT /at YYYY-MM-DD`
+Format: `event DESCRIPTION /at YYYY-MM-DD`
 
 Example: 
-```$xslt
-event go for CS2103 lecture /at 2020-09-15
+```
+event birthday party /at 2020-10-13
 ```
 
 Expected Outcome:
-```$xslt
-Got it. I've added this task:
-    [E][✗] go for CS2103 lecture (on: Sep 15 2020)
-Now you have 5 tasks in the list.
+```
+You have added E][✗] birthday party (at: Oct 13 2020)!
+Now you have these tasks:
+    1. [T][✗] return books
+    2. [T][✗] do assignment 1
+    3. [D][✗] programming assignment (by: Nov 24 2020)
+    4. [E][✗] birthday party (at: Oct 13 2020)
+    5. [T][✓] borrow books
 ```
 
 
-### 5. `done` - Mark task as done
+### 5. `done` - Mark a task as done
 
-Mark a given task (todo, deadline, event) as completed.
+Mark the task at the specified index as done. The marked task will be moved to the last of the list. <br>
+After the task is marked as done, N Chat Bot will display all tasks with status incomplete. 
 
-Format: `done INDEX` where index is the index of the task displayed by DoLah.
+Format: `done INDEX` where `INDEX` refer to the index of the previous displayed list of tasks.
 
-Example:
+Example:<br>
+Previously displayed list:
+```
+You have added E][✗] birthday party (at: Oct 13 2020)!
+Now you have these tasks:
+    1. [T][✗] return books
+    2. [T][✗] do assignment 1
+    3. [D][✗] programming assignment (by: Nov 24 2020)
+    4. [E][✗] birthday party (at: Oct 13 2020)
+    5. [T][✓] borrow books
+```
+1st Command:
 ```
 done 2
 ```
-
+Expected Outcome (with displayed list for the next command):
+```
+You have finished do assignment 1!
+Move on to the next one:
+    1. [T][✗] return books
+    2. [D][✗] programming assignment (by: Nov 24 2020)
+    3. [E][✗] birthday party (at: Oct 13 2020)
+```
+2nd Command:
+```
+done 2
+```
 Expected Outcome:
-```$xslt
-Nice! I've marked this task as done:
-    [D][✓] submit ip (by: Sep 16 2020)
+```
+You have finished programming assignment 1!
+Move on to the next one:
+    1. [T][✗] return books
+    2. [E][✗] birthday party (at: Oct 13 2020)
 ```
 
 ### 6. `delete` - Delete a task
 
-Delete a given task by its index.
+Delete the task with the specified index. <br>
+After the task is deleted, N Chat Bot will display all the tasks stored in N Chat Bot. 
 
-Format: `delete INDEX` where index is the index of the task displayed by DoLah.
+Format: `delete INDEX` where `INDEX` refer to the index of the previous displayed list of tasks.
+
+Example:<br>
+Previously displayed list:
+```
+Here are the tasks in your list:
+    1. [T][✗] return books
+    2. [E][✗] birthday party (at: Oct 13 2020)
+    3. [T][✓] borrow books
+    4. [T][✓] do assignment 1
+    5. [D][✓] programming assignment (by: Nov 24 2020)
+```
+1st Command:
+```
+delete 4
+```
+Expected Outcome (with displayed list for the next command):
+```
+do assignment 1 deleted.
+Check out other tasks:
+    1. [T][✗] return books
+    2. [E][✗] birthday party (at: Oct 13 2020)
+    3. [T][✓] borrow books
+    4. [D][✓] programming assignment (by: Nov 24 2020)
+```
+2nd Command:
+```
+done 4
+```
+Expected Outcome:
+```
+programming assignment deleted.
+Check out other tasks:
+    1. [T][✗] return books
+    2. [E][✗] birthday party (at: Oct 13 2020)
+    3. [T][✓] borrow books
+```
+
+### 7. `find` - Find a task by description
+
+Find tasks containing the search phrase in the description. 
+
+Format: `find SEARCH_PHRASE`
 
 Example:
-```$xslt
-delete 2
+```
+find return
 ```
 
 Expected Outcome:
-```$xslt
-Noted. I've removed this task:
-    [D][✓] submit ip (by: Sep 16 2020)
-Now you have 4 tasks in the list.
+```
+You hvae these tasks containing "return":
+    1. [T][✗] return books
 ```
 
-### 7. `find` - Find a task
+### 8. `on` - Find a task on a specific date
 
-Find a task according to a search keyword. The find function supports fuzzy search (i.e. you can make
-some typos in your search phrase and the app will make a best effort to find a match).
+Find tasks with the specified date.
 
-Fuzzy match rule: there is a tolerance level of the number of typos that can be made. All tasks that match
-at least 80% of the search phrase (i.e. less than 20% are typos) will be displayed in the find result.
-
-Format: `find SEARCH_KEYWORD`
+Format: `on DATE`
 
 Example:
-```$xslt
-find lexture
 ```
-(Note: here `lexture` is a typo)
+on 2020-10-13
+```
 
 Expected Outcome:
-```$xslt
-Here are the matching tasks in your list:
-1. [E][✗] go for CS2103 lecture (on: Sep 15 2020)
 ```
-(Note: the app matches the word `lecture` despite of the typo made in the search phrase)
+You hvae these tasks on this date:
+    1. [E][✗] birthday party (at: Oct 13 2020)
+```
 
-### 8. `bye` - Exit the application
+### 9. `snooze` - Postpone a task to a later date
 
-Exit the application. A popup will be shown to ask if you want to 
-quit with the progress saved.
+Postpone a task to the specified new date. <br>
+After the task is postponed, N Chat Bot will display all the tasks stored in N Chat Bot. 
+
+Format: `snooze INDEX NEW_DATE` where `INDEX` refer to the index of the previous displayed list of tasks.
+
+Example:<br>
+Previously displayed list:
+```
+programming assignment deleted.
+Check out other tasks:
+    1. [T][✗] return books
+    2. [E][✗] birthday party (at: Oct 13 2020)
+    3. [T][✓] borrow books
+```
+
+Command
+
+```
+snooze 2 2020-12-23
+```
+
+Expected Outcome:
+```
+birthday party is snoozed to new date: 2020-12-23
+    1. [T][✗] return books
+    2. [E][✗] birthday party (at: Dec 23 2020)
+    3. [T][✓] borrow books
+```
+
+### 10. `bye` - Exit the application
+
+Exit the application. 
 
 Format: `bye`
 
 Example:
-```$xslt
+```
 bye
 ```
 

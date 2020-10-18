@@ -40,16 +40,22 @@ public class SnoozeCommand extends Command {
      */
     @Override
     public void execute(TaskList list, Ui ui, Storage storage) throws DukeException {
+        if (taskIndex > list.getActiveTasks()) {
+            throw new DukeException("Task at index does not exist or already done.");
+        }
         Task task = list.getTaskAtIndex(taskIndex);
         list.deleteTask(task);
         Task newTask = update(task, newDate);
         list.addTask(newTask);
         storage.write(list.getList());
-        ui.showSnooze(task);
+        ui.showSnooze(newTask);
         list.printList("All");
     }
 
-    private Task update(Task task, LocalDate newDate) {
+    private Task update(Task task, LocalDate newDate) throws DukeException {
+        if (task.getDate() == null) {
+            throw new DukeException("Target task cannot have a due date.");
+        }
         Task newTask = new Task(task.getType(),task.getDescription(), newDate);
         return newTask;
     }

@@ -1,6 +1,7 @@
 package duke.parser;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 import duke.commands.*;
 import duke.exceptions.DukeException;
@@ -88,9 +89,21 @@ public class Parser {
             throw new DukeException("\tCannot recognise task number.");
         } else {
             String[] indexDatePair = commandParaPair[1].split(" ");
+            if (indexDatePair.length != 2) {
+                throw new DukeException("\tInvalid number of arguments. ");
+            }
+
+            if (!indexDatePair[0].matches("\\d+")) {
+                throw new DukeException("\tIndex needs to be an integer.");
+            }
+
             int taskIndex = Integer.parseInt(indexDatePair[0]);
-            LocalDate newDate = LocalDate.parse(indexDatePair[1]);
-            return new SnoozeCommand(taskIndex, newDate);
+            try {
+                LocalDate newDate = LocalDate.parse(indexDatePair[1]);
+                return new SnoozeCommand(taskIndex, newDate);
+            } catch (DateTimeParseException e) {
+                throw new DukeException("Wrong date time format.");
+            }
         }
     }
 
