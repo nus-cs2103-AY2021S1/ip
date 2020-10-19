@@ -5,7 +5,7 @@ plugins {
     id "com.github.johnrengelman.shadow" version "5.1.0"
 }
 
-mainClassName = "duke.Duke"
+mainClassName = "duke.Launcher"
 
 test {
     useJUnitPlatform()
@@ -16,6 +16,18 @@ repositories {
 }
 
 dependencies {
+    shadow localGroovy()
+    shadow gradleApi()
+
+    compile 'org.jdom:jdom2:2.0.6'
+    compile 'org.ow2.asm:asm:6.0'
+    compile 'org.ow2.asm:asm-commons:6.0'
+    compile 'commons-io:commons-io:2.4'
+    compile 'org.apache.ant:ant:1.9.4'
+    compile 'org.codehaus.plexus:plexus-utils:2.0.6'
+    compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
+    compile group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.25'
+
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.4.0'
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.4.0'
 
@@ -37,4 +49,14 @@ dependencies {
 
 checkstyle {
     toolVersion = '8.23'
+}
+
+jar {
+    manifest {
+        attributes "Main-Class": "com.baeldung.fatjar.Application"
+    }
+
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
 }
