@@ -10,13 +10,19 @@ import java.util.List;
  * Implements a task that can be completed
  */
 public class Task implements Serializable {
-    private String name;
-    private Boolean isDone;
+    protected String name;
+    protected Boolean isDone;
     private List<Tag> tags;
 
     public Task (String s) {
         name = s;
         isDone = false;
+        tags = new ArrayList<Tag>();
+    }
+
+    public Task (String s, Boolean b) {
+        name = s;
+        isDone = b;
         tags = new ArrayList<Tag>();
     }
 
@@ -39,6 +45,7 @@ public class Task implements Serializable {
     public List<Tag> getTags() {
         return tags;
     }
+
 
 
 }
