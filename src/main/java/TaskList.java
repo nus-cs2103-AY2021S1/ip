@@ -82,11 +82,12 @@ public class TaskList {
             ui.addResponse("Sorry there is no matching task :-(");
         }
 
-        ui.addResponse("Here are the matching tasks in your list:\n");
+        String findList = "";
         for(int i = 0; i < keyTasks.size(); i++){
             Integer listNum = i + 1;
-            ui.addResponse(listNum.toString() + "." + keyTasks.get(i).toString());
+            findList += listNum.toString() + "." + keyTasks.get(i).toString() + "\n";
         }
+        ui.addResponse("Here are the matching tasks in your list:\n" + findList);
     }
 
     public void snooze(int taskIndex, LocalDate newDate, Ui ui){

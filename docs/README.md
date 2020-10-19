@@ -53,7 +53,7 @@ Expected outcome:
   [D][✘] return books (by: Sep 18 2020)
  Now you have 2 tasks in the list`
  
- ### `event (description of tasks) /at (date in yyyy-MM-dd formatt)` - add an event task
+### `event (description of tasks) /at (date in yyyy-MM-dd formatt)` - add an event task
  
  This adds an event task to task list. If user did not state descriptions, there will be reminder suggesting that an event task cannot be empty.
  
@@ -67,7 +67,7 @@ Expected outcome:
    [E][✘] read books (at: Sep 15 2020)
   Now you have 3 tasks in the list`
   
-  ### `list` - list out all current tasks
+### `list` - list out all current tasks
   
   This lists out all tasks in the task list.
   
@@ -83,7 +83,7 @@ Expected outcome:
   `2.[D][✘] return books (by: Sep 18 2020)`
   `3.[E][✘] read books (at: Sep 15 2020)`
   
-  ### `done (index)` - denote a task as done
+### `done (index)` - denote a task as done
     
   The task with specified index in the list will be marked as done.
     
@@ -101,7 +101,7 @@ Expected outcome:
    `2.[D][✘] return books (by: Sep 18 2020)`
    `3.[E][✘] read books (at: Sep 15 2020)`
     
-  ### `delete (index)` - delete a specified task
+### `delete (index)` - delete a specified task
       
    The task with specified index in the list will be deleted.
       
@@ -115,7 +115,7 @@ Expected outcome:
    `[T][✓] borrow books`
    `Now you have 2 tasks in the list.`
    
-  ### `find (keyword)` - finds a task with specified keyword
+### `find (keyword)` - finds a task with specified keyword
          
    The task(s) with specified keyword in the list will be listed.
          
@@ -127,7 +127,7 @@ Expected outcome:
          
    `1.[D][✘] return books (by: Sep 18 2020)`
   
-  ### `snooze (index) (new timing)` - snooze a task of specifed index with a new timing
+### `snooze (index) (new timing)` - snooze a task of specifed index with a new timing
            
   The timing of the task with specified index in the list will be snoozed if it is a deadline or event task.
            
@@ -139,7 +139,7 @@ Expected outcome:
            
   `Okay! You have snoozed task 1 to Oct 01 2020`
   
-  ### `bye` - exits the program
+### `bye` - exits the program
              
   The program will be exited
              

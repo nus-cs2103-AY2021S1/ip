@@ -1,2 +1,0 @@
-D|✘|return books|2020-10-01
-E|✘|read books|2020-09-10

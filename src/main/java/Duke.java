@@ -23,6 +23,7 @@ public class Duke extends Application{
     private final Image user = new Image(this.getClass().getResourceAsStream("/images/Duke.png"));
     private final Image duke = new Image(this.getClass().getResourceAsStream("/images/User.png"));
 
+
     /**
      * Duke constructor
      */

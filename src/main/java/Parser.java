@@ -17,7 +17,11 @@ public class Parser {
         int taskIndex;
         switch (commandline[0]) {
         case "list":
-            command = new ListCommand();
+            if(input.length() == 4) {
+                command = new ListCommand();
+            }else{
+                throw new DukeException("☹ OOPS!!! You cannot type other things except for 'list'!");
+            }
             break;
         case "done":
             taskIndex = Integer.parseInt(commandline[1]);
