@@ -11,6 +11,10 @@ public class ToDo extends Task implements Serializable {
         super(s);
     }
 
+    public ToDo(String s, Boolean b) {
+        super(s, b);
+    }
+
     @Override
     public String toString() {
         List<Tag> tags = super.getTags();
@@ -23,4 +27,23 @@ public class ToDo extends Task implements Serializable {
         }
         return "[T]" + "[" + (super.isDone() ? "O" : "X") + "] " + super.getName() + s;
     }
+
+    /**
+     * Returns true if both ToDos have the same name and boolean.
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof Task)) {
+            return false;
+        }
+
+        Task otherConsultation = (Task) other;
+        return otherConsultation.getName().equals(getName())
+                && otherConsultation.isDone().equals(isDone());
+    }
+
 }
