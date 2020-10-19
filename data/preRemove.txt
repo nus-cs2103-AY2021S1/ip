@@ -1,0 +1,12 @@
+D~1~return book~2019-11-13 1800
+T~0~funny
+T~0~nani what is happening to me
+E~0~omomomo~2019-11-15 1900
+T~0~add a random task to see if there is a separation
+D~0~funkydeadline~2019-10-15 1800
+D~0~added deadline for testing~2020-12-19 1800
+E~0~added event for testing~2020-12-19 1800
+T~0~added task for testing~2020-12-19 1800
+N~What is the meaning of life?~Well, its 42.
+N~note?~omom?
+N~Added Note for testing?~Yaz.
