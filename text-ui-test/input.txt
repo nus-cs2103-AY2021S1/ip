@@ -1,0 +1,43 @@
+todo borrow book
+deadline return book /by 2020-09-04
+event project meeting /at 2020-10-15
+find book
+find nothing
+list
+done 2 3 99
+done 1 2
+list
+done
+done 9
+done u
+todo
+deadline
+deadline return book
+deadline return book /by
+deadline return book /by today
+event
+event project meeting
+event project meeting /at
+hello
+delete 3
+delete 1
+list
+delete
+delete 9
+delete u
+delete 1
+event test1 /at 2020-08-03
+deadline test2 /by 2020-02-02
+deadline test3 /by 2020-09-09
+todo test4
+event test5 /at 2020-02-02
+todo test6
+done 82 2 1 4
+done 2 5
+list
+done 1 6 4
+list
+delete 1 2 3 8
+delete 1 2
+delete 4 2 3 1
+bye
