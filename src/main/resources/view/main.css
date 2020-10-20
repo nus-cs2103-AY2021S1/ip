@@ -1,0 +1,15 @@
+.dialog {
+    -fx-padding: 20px;
+    -fx-background-color: derive(skyblue, 25%);
+    -fx-background-radius: 10px 10px 0px 10px;
+}
+
+.responseContainer {
+    -fx-border-insets: 5px;
+    -fx-background-insets: 5px;
+    -fx-max-width: 350px;
+}
+
+#dialogContainer {
+    -fx-background-color: grey;
+}
