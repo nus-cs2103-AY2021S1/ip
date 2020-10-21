@@ -1,0 +1,24 @@
+hi!
+list
+todo
+todo this task
+deadline
+deadline this
+deadline this /by
+deadline this /by that
+event
+event this /by that
+event this /at
+event this /at that
+list
+done
+done x
+done the first task
+done 4
+done 1
+list
+delete
+delete first
+delete 1
+list
+bye
