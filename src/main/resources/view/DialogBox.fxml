@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.Shadow?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+      <StackPane maxHeight="1.7976931348623157E308" maxWidth="400.0">
+         <children>
+              <Label fx:id="dialog" alignment="CENTER" contentDisplay="CENTER" ellipsisString="" graphicTextGap="0.0" opacity="0.8" style="-fx-background-color: #33adff; -fx-font-family: monospace; -fx-background-radius: 10;" text="Label" textFill="WHITE" wrapText="true">
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+               <font>
+                  <Font name="Monospaced Regular" size="11.5" />
+               </font>
+            </Label>
+         </children>
+      </StackPane>
+      <StackPane>
+         <children>
+            <Rectangle arcHeight="20.0" arcWidth="20.0" height="110.0" stroke="TRANSPARENT" strokeType="INSIDE" width="110.0">
+               <fill>
+                  <RadialGradient centerX="0.5" centerY="0.5" radius="0.6976744186046512">
+                     <stops>
+                        <Stop color="#4f4f5900" />
+                        <Stop color="AQUA" offset="1.0" />
+                     </stops>
+                  </RadialGradient>
+               </fill>
+                <effect>
+                    <Shadow color="AQUA" />
+                </effect>
+            </Rectangle>
+              <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true">
+               <viewport>
+                  <Rectangle2D />
+               </viewport>
+            </ImageView>
+         </children>
+         <HBox.margin>
+            <Insets left="10.0" right="10.0" />
+         </HBox.margin>
+      </StackPane>
+    </children>
+    <padding>
+        <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
+    </padding>
+</fx:root>
