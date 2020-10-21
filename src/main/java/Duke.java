@@ -1,10 +1,34 @@
+import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.geometry.Insets;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
+/**
+ * main class
+ */
 public class Duke {
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+
+    // Initialise my variables for duke backend data handling
+    Ui myDukeBot = new Ui();
+    Storage myStorage = new Storage();
+    Parser myParser = new Parser();
+    TaskList myTaskList = new TaskList();
+
+
+    public String getResponse(String input) {
+        String response = myParser.listenerForUI(myTaskList, myDukeBot,input);
+        myStorage.updateDirectory(myTaskList);
+        return response;
     }
+
+
 }

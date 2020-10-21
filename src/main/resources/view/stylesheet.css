@@ -1,0 +1,20 @@
+
+.button{
+    -fx-background-color: #5F3313;
+    -fx-text-fill: white;
+}
+
+#userInput {
+   -fx-background-color: #330C0F;
+   -fx-text-fill: white;
+}
+
+#dialogContainer {
+    -fx-background-color:#400F13;
+    -fx-background-size: cover;
+}
+
+#dialog{
+    -fx-text-fill: white;
+
+}
