@@ -1,0 +1,3 @@
+Manifest-Version: 1.0
+clippy.ui.Main-Class: clippy.clippy
+

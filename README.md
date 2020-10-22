@@ -1,26 +1,20 @@
-# Duke project template
+# Clippy Project
+Clippy is a desktop app made by Wang Jun Hao under the module CS2103T AY20/21-S1. Clippy assists you in 
+managing your tasks, and it is optimized for use via a Command Line Interface (CLI). You can keep track of 
+your day-to-day tasks, search for specific tasks by keywords and update details of tasks. If you can type fast, Clippy 
+can help you keep track of your tasks faster than traditional GUI apps.
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+![ui](./docs/Ui.png)
 
-## Setting up in Intellij
+## Quick start
+1. Ensure you have Java 11 or above installed in your Computer.
+2. Download the latest `duke.jar` release from https://github.com/wang-jun-hao/ip.
+3. Copy the file to the folder you want to use as the home folder for your Clippy.
+4. To launch the application, type `java -jar duke.jar` in Command Prompt (Windows) or 
+Terminal (macOS). The GUI similar to the below should appear in a few seconds. 
+<br> ![start up](UG_images/quick-start-illustration.png)
+5. Type the command in the command box and press Enter to execute it. 
+<br>e.g. typing `help` and pressing Enter will open the help window.
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
-
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project dialog first)
-1. Set up the correct JDK version, as follows:
-   1. Click `Configure` > `Structure for New Projects` and then `Project Settings` > `Project` > `Project SDK`
-   1. If JDK 11 is listed in the drop down, select it. If it is not, click `New...` and select the directory where you installed JDK 11
-   1. Click `OK`
-1. Import the project into Intellij as follows:
-   1. Click `Open or Import`.
-   1. Select the project directory, and click `OK`
-   1. If there are any further prompts, accept the defaults.
-1. After the importing is complete, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()`. If the setup is correct, you should see something like the below:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+## Acknowledgement
+This is a green-field project with GUI template taken from [Prof Damith](https://github.com/damithc).
