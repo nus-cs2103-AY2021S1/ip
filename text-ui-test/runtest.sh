@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 # create bin directory if it doesn't exist
 if [ ! -d "../bin" ]
 then
@@ -13,13 +12,17 @@ then
 fi
 
 # compile the code into the bin folder, terminates if error occurred
-if ! javac -cp ../src -Xlint:none -d ../bin ../src/main/java/Duke.java
+if ! javac -cp ../src -Xlint:none -d ../bin ../src/main/java/duke/tasks/*.java ../src/main/java/duke/classes/*.java ../src/main/java/duke/exceptions/*.java ../src/main/java/duke/gui/*.java
+#if ! (
+#    find ../src/main/java -name "*.java" > sources.txt
+#    javac -cp ../src -Xlint:none -d ../bin @sources.txt
+#  )
 then
     echo "********** BUILD FAILURE **********"
     exit 1
 fi
 
-# run the program, feed commands from input.txt file and redirect the output to the ACTUAL.TXT
+# run the program, feed command from input.txt file and redirect the output to the ACTUAL.TXT
 java -classpath ../bin Duke < input.txt > ACTUAL.TXT
 
 # convert to UNIX format
@@ -27,7 +30,7 @@ cp EXPECTED.TXT EXPECTED-UNIX.TXT
 dos2unix ACTUAL.TXT EXPECTED-UNIX.TXT
 
 # compare the output to the expected output
-diff ACTUAL.TXT EXPECTED-UNIX.TXT
+diff -u --ignore-space-change --strip-trailing-cr --ignore-blank-lines ACTUAL.TXT EXPECTED-UNIX.TXT
 if [ $? -eq 0 ]
 then
     echo "Test result: PASSED"

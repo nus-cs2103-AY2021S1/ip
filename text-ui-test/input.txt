@@ -1,0 +1,17 @@
+todo borrow book
+deadline return book /by 2019-10-15 18:00
+event interview at Google /by 2021-01-31 21:00
+list
+event
+deadline
+workout
+done 3
+run
+done 5
+list
+event interview at Amazon /by 4325243523452345243
+delete 3
+list
+todo
+blah
+bye
