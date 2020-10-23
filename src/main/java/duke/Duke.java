@@ -103,22 +103,22 @@ public class Duke {
         } else if (instructionType.equals("todo")) {
             // make todo
             Command todoCommand = new TodoCommand();
-            todoCommand.execute(userInput, ui, tasks, isLoading);
+            response = todoCommand.execute(userInput, ui, tasks, isLoading);
 
         } else if (instructionType.equals("deadline")) {
             // make deadline
             Command deadlineCommand = new DeadlineCommand();
-            deadlineCommand.execute(userInput, ui, tasks, isLoading);
+            response = deadlineCommand.execute(userInput, ui, tasks, isLoading);
 
         } else if (instructionType.equals("event")) {
             // make event
             Command eventCommand = new EventCommand();
-            eventCommand.execute(userInput, ui, tasks, isLoading);
+            response = eventCommand.execute(userInput, ui, tasks, isLoading);
 
         } else if (instructionType.equals("priority")) {
             // add priority to the task
             Command priorityCommand = new PriorityCommand();
-            priorityCommand.execute(userInput, ui, tasks, isLoading);
+            response = priorityCommand.execute(userInput, ui, tasks, isLoading);
 
         } else {
             // invalid input
@@ -145,6 +145,7 @@ public class Duke {
             response = duke.ui.showError(e.getMessage());
         }
         assert response != "" : "response should not be empty";
+
         return "Duke heard: \n"
                 + response;
     }

@@ -104,7 +104,7 @@ public class Parser {
         }
 
         // get data
-        String description = userInput.split(" /at ", 2)[0];
+        String description = task.split(" /at ", 2)[0];
         String time = task.split(" /at ")[1];
         LocalDate localTime = LocalDate.parse(time);
         HashMap<String, Object> parsedData = new HashMap<String, Object>() {
@@ -134,7 +134,7 @@ public class Parser {
         if (!(1 <= priorityLevel && priorityLevel <= 3)) {
             throw new DukeException("\"☹ OOPS!!! Priority level can only be either 1, 2, or 3.");
         }
-        Integer taskIndex = Integer.parseInt(splitUserInput[4]);
+        Integer taskIndex = Integer.parseInt(splitUserInput[4]) - 1;
         HashMap<String, Object> parsedData = new HashMap<String, Object>() {
             {
                 put("priorityLevel", priorityLevel);

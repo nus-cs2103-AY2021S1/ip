@@ -1,2 +1,5 @@
-todo homework
-deadline math homework /by 2020-10-22
+todo hello
+priority 3 to task 1
+event test /at 2020-10-10
+done 2
+priority 2 to task 2
