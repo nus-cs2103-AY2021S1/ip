@@ -97,7 +97,7 @@ public class Duke {
 
         } else if (instructionType.equals("find")) {
             // find task
-            Command findCommand = new DeleteCommand();
+            Command findCommand = new FindCommand();
             response = findCommand.execute(userInput, ui, tasks, isLoading);
 
         } else if (instructionType.equals("todo")) {

@@ -1,4 +1,7 @@
 # User Guide
+This is user guide of task manager desktop application, Duke.
+**NOTE**: 
+In duke, there are 3 types of task. Those are todo, event, and deadline.
 
 ## Features 
 
@@ -21,94 +24,93 @@ Got it. I've added this task:
 Now you have 3 tasks in the list.`
 
 ### 2. Add event
--> Create todo and add it to Duke.
+-> Create event and add it to Duke. 
 
 Format:
 
-`todo [description]` 
+`event [description] /at [YYYY-MM-DD]` 
 
 Example of usage: 
 
-`todo homework`
+`event CS2103 /at 2020-10-15`
 
 Expected outcome:
 
 `Duke heard:
 Got it. I've added this task: 
-[T][✘] homework
-Now you have 3 tasks in the list.`
+[E][✘] CS2103 (at: 10月 15 2020)
+Now you have 2 tasks in the list.`
 
 ### 3. Add deadline
--> Create todo and add it to Duke.
+-> Create deadline and add it to Duke.
 
 Format:
 
-`todo [description]` 
+`deadline [description] /by [YYYY-MM-DD]` 
 
 Example of usage: 
 
-`todo homework`
+`deadline homework /by 2020-10-15`
 
 Expected outcome:
 
 `Duke heard:
 Got it. I've added this task: 
-[T][✘] homework
-Now you have 3 tasks in the list.`
+[D][✘] homework (by: 10月 15 2020)
+Now you have 5 tasks in the list.`
 
 ### 4. Mark task as done
--> Create todo and add it to Duke.
+-> Mark task indicated by index as done
 
 Format:
 
-`todo [description]` 
+`done [index]` 
 
 Example of usage: 
 
-`todo homework`
+`done 1`
 
 Expected outcome:
 
 `Duke heard:
-Got it. I've added this task: 
-[T][✘] homework
-Now you have 3 tasks in the list.`
+Nice! I've marked this task as done: 
+[T][✓] hello`
 
 ### 5. Delete task
--> Create todo and add it to Duke.
+-> Delete task indicated by index.
 
 Format:
 
-`todo [description]` 
+`delete [index]` 
 
 Example of usage: 
 
-`todo homework`
+`delete 1`
 
 Expected outcome:
 
 `Duke heard:
-Got it. I've added this task: 
-[T][✘] homework
-Now you have 3 tasks in the list.`
+Noted. I've removed this task: 
+[T][✓] hello
+Now you have 4 tasks in the list.`
 
 ### 6. Find task
--> Create todo and add it to Duke.
+-> Find task by keyword.
 
 Format:
 
-`todo [description]` 
+`find [keyword]` 
 
 Example of usage: 
 
-`todo homework`
+`find homework`
 
 Expected outcome:
 
 `Duke heard:
-Got it. I've added this task: 
-[T][✘] homework
-Now you have 3 tasks in the list.`
+Here are the matching tasks in your list: 
+1. [T][✘] homework 
+2. [D][✘] math homework (by: 10月 22 2020) `
 
 ### 7. List tasks
 -> Create todo and add it to Duke.
