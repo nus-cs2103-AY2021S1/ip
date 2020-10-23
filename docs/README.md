@@ -180,7 +180,7 @@ Here are the tasks in your list:
    
 -> [!] symbol will be used to show the priority of the task.
    
--> Number of ! increase as priroity increase.
+-> Number of ! increase as priority increase.
 
 Format:
 
