@@ -3,22 +3,22 @@
 ## Features 
 
 ### 1. Add todo
--> Create todo and add it to Duke.
+   -> Create todo and add it to Duke.
 
-Format:
+   Format:
 
-`todo [description]` 
+   `todo [description]` 
 
-Example of usage: 
+   Example of usage: 
 
-`todo homework`
+   `todo homework`
 
-Expected outcome:
+   Expected outcome:
 
-`Duke heard:
-Got it. I've added this task: 
-[T][✘] homework
-Now you have 3 tasks in the list.`
+   `Duke heard:
+   Got it. I've added this task: 
+   [T][✘] homework
+   Now you have 3 tasks in the list.`
 
 ### Feature 2 
 List all the tasks in Duke.
