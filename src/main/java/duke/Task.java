@@ -7,8 +7,8 @@ import java.util.HashMap;
  * They are different types of task.
  */
 public class Task {
+    public boolean isDone;
     protected String description;
-    protected boolean isDone;
     protected Integer priorityLevel;
     private HashMap<Integer, String> priorityIcons = new HashMap<Integer, String> () {
         {

@@ -5,6 +5,11 @@ plugins {
     id 'com.github.johnrengelman.shadow' version '5.1.0'
 }
 
+//compileJava {
+////    options.fork = true
+////    options.forkOptions.executable = '/Library/Java/JavaVirtualMachines/jdk-11.0.6.jdk/Contents/Home/bin/javac'
+////}
+
 repositories {
     mavenCentral()
 }

@@ -1,4 +1,6 @@
 package duke;
+import duke.commands.*;
+
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -66,137 +68,61 @@ public class Duke {
      * Return response and take action according to the user input.
      *
      * @param userInput input from user, run tasks according to this.
-     * @param loading indicates whether input is from saved data or user.
+     * @param isLoading indicates whether input is from saved data or user.
      */
-    public String handleUserInput(String userInput, boolean loading) throws DukeException, IOException {
+    public String handleUserInput(String userInput, boolean isLoading) throws DukeException, IOException {
         String instructionType = Parser.parseInstruction(userInput);
         String response = "";
         assert instructionType != "" : "instructionType cannot be empty string";
 
         if (instructionType.equals("bye")) {
             // quit
-            response = ui.showGoodBye();
-            System.exit(0);
+            Command exitCommand = new ExitCommand();
+            response = exitCommand.execute(userInput, ui, tasks, isLoading);
 
         } else if (instructionType.equals("list")) {
             // list task
-            response = ui.showListOfTask(tasks.taskList);
+            Command listCommand = new ListCommand();
+            response = listCommand.execute(userInput, ui, tasks, isLoading);
 
         } else if (instructionType.equals("done")) {
             // mark done
-            // parse instruction
-            int index = Parser.parseMarkDoneInstr(userInput);
-
-            // execute
-            Task chosenTask = tasks.getTask(index);
-            chosenTask.markAsDone();
-            assert chosenTask.isDone : "task is not marked as done";
-            if (!loading){
-                response = ui.showMarkedDoneTask(chosenTask);
-            }
+            Command doneCommand = new DoneCommand();
+            response = doneCommand.execute(userInput, ui, tasks, isLoading);
 
         } else if (instructionType.equals("delete")) {
             // delete task
-            // parse instruction
-            int index = Parser.parseDeleteInstr(userInput);
-
-            // execute
-            Task chosenTask = tasks.getTask(index);
-            tasks.deleteTask(index);
-            assert !tasks.taskList.contains(chosenTask) : "task is not deleted deleted from taskList";
-            if (!loading){
-                response = ui.showDeletedTask(chosenTask, tasks.taskList);
-            }
+            Command deleteCommand = new DeleteCommand();
+            response = deleteCommand.execute(userInput, ui, tasks, isLoading);
 
         } else if (instructionType.equals("find")) {
             // find task
-            // parse instruction
-            String keyword = Parser.parseFindInstr(userInput);
-
-            // execute
-            ArrayList<Task> foundTasks = tasks.find(keyword);
-            if (!loading) {
-                response = ui.showFoundTask(foundTasks);
-            }
+            Command findCommand = new DeleteCommand();
+            response = findCommand.execute(userInput, ui, tasks, isLoading);
 
         } else if (instructionType.equals("todo")) {
             // make todo
-            try {
-                // parse instruction
-                String description = Parser.parseAddTodoInstr(userInput);
-
-                // execute
-                Task todo = new Todo(description);
-                tasks.addTask(todo);
-                assert tasks.taskList.contains(todo) : "todo is not added to taskList";
-                if (!loading){
-                    response = ui.showAddedTask(todo, tasks.taskList);
-                }
-            } catch (DukeException e) {
-                response = ui.showError(e.getMessage());
-            }
+            Command todoCommand = new TodoCommand();
+            todoCommand.execute(userInput, ui, tasks, isLoading);
 
         } else if (instructionType.equals("deadline")) {
             // make deadline
-            try {
-                // parse instruction
-                HashMap<String, Object> parsedData = Parser.parseAddDeadlineInstr(userInput);
-                String description = (String) parsedData.get("description");
-                LocalDate localTime = (LocalDate) parsedData.get("time");
-
-                // execute
-                Task deadline = new Deadline(description, localTime);
-                tasks.addTask(deadline);
-                assert tasks.taskList.contains(deadline) : "deadline is not added to taskList";
-                if (!loading) {
-                    response = ui.showAddedTask(deadline, tasks.taskList);
-                }
-            } catch (DukeException e) {
-                response = ui.showError(e.getMessage());
-            }
+            Command deadlineCommand = new DeadlineCommand();
+            deadlineCommand.execute(userInput, ui, tasks, isLoading);
 
         } else if (instructionType.equals("event")) {
             // make event
-            try {
-                // parse instruction
-                HashMap<String, Object> parsedData = Parser.parseAddEventInstr(userInput);
-                String description = (String) parsedData.get("description");
-                LocalDate localTime = (LocalDate) parsedData.get("time");
-
-                // execute
-                Task event = new Event(description, localTime);
-                tasks.addTask(event);
-                assert tasks.taskList.contains(event) : "event is not added to taskList";
-                if (!loading) {
-                    response = ui.showAddedTask(event, tasks.taskList);
-                }
-            } catch (DukeException e) {
-                response = ui.showError(e.getMessage());
-            }
+            Command eventCommand = new EventCommand();
+            eventCommand.execute(userInput, ui, tasks, isLoading);
 
         } else if (instructionType.equals("priority")) {
             // add priority to the task
-            // ex) priority 1 to task 1 (priority levels are 1, 2, and 3)
-            try {
-                // parse instruction
-                HashMap<String, Object> parsedData = Parser.parseSetPriorityInstr(userInput);
-                Integer priorityLevel = (Integer) parsedData.get("priorityLevel");
-                Integer taskIndex = (Integer) parsedData.get("taskIndex");
-
-                // execute
-                Task task = tasks.getTask(taskIndex);
-                task.setPriorityLevel(priorityLevel);
-                assert task.getPriorityLevel() != null : "priority is not added to the task";
-                if (!loading) {
-                    response = ui.showSetPriorityOfTask(task);
-                }
-            } catch (DukeException e) {
-                response = ui.showError(e.getMessage());
-            }
+            Command priorityCommand = new PriorityCommand();
+            priorityCommand.execute(userInput, ui, tasks, isLoading);
 
         } else {
             // invalid input
-            if (!loading) {
+            if (!isLoading) {
                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         }

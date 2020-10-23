@@ -23,7 +23,7 @@ public class Parser {
      * @param userInput Input give from user.
      * @return Index of task which will be marked as done.
      */
-    static int parseMarkDoneInstr(String userInput) {
+    static public int parseMarkDoneInstr(String userInput) {
         int index = Integer.parseInt(userInput.split(" ")[1]) - 1;
         assert index >= 0 : "index cannot be nagative";
         return index;
@@ -35,7 +35,7 @@ public class Parser {
      * @param userInput Input give from user.
      * @return Index of task which will be deleted.
      */
-    static int parseDeleteInstr(String userInput) {
+    static public int parseDeleteInstr(String userInput) {
         int index = Integer.parseInt(userInput.split(" ")[1]) - 1;
         assert index >= 0 : "index cannot be nagative";
         return index;
@@ -47,7 +47,7 @@ public class Parser {
      * @param userInput Input give from user.
      * @return Description of todo.
      */
-    static String parseAddTodoInstr(String userInput) throws DukeException {
+    static public String parseAddTodoInstr(String userInput) throws DukeException {
         // check if input is valid
         if (userInput.split(" ", 2).length == 1) {
             throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
@@ -64,7 +64,7 @@ public class Parser {
      * @param userInput iInput give from user.
      * @return HashMap containing description and deadline of task.
      */
-    static HashMap<String, Object> parseAddDeadlineInstr(String userInput) throws DukeException {
+    static public HashMap<String, Object> parseAddDeadlineInstr(String userInput) throws DukeException {
         // check if input is valid
         if (userInput.split(" ", 2).length == 1) {
             throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
@@ -93,7 +93,7 @@ public class Parser {
      * @param userInput Input give from user.
      * @return HashMap containing description and eventTime of event.
      */
-    static HashMap<String, Object> parseAddEventInstr(String userInput) throws DukeException {
+    static public HashMap<String, Object> parseAddEventInstr(String userInput) throws DukeException {
         // check if input is valid
         if (userInput.split(" ", 2).length == 1) {
             throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
@@ -116,12 +116,12 @@ public class Parser {
         return parsedData;
     }
 
-    static String parseFindInstr(String userInput) {
+    static public String parseFindInstr(String userInput) {
         String keyword = userInput.split(" ")[1];
         return keyword;
     }
 
-    static HashMap<String, Object> parseSetPriorityInstr(String userInput) throws DukeException{
+    static public HashMap<String, Object> parseSetPriorityInstr(String userInput) throws DukeException{
         // check if input is valid
         String[] splitUserInput = userInput.split(" ");
         if (splitUserInput.length != 5) {
@@ -143,6 +143,5 @@ public class Parser {
         };
         return parsedData;
     }
-
 
 }
