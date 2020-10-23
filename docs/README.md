@@ -1,5 +1,6 @@
 # User Guide
 This is user guide of task manager desktop application, Duke.
+
 **NOTE**: 
 In duke, there are 3 types of task. Those are todo, event, and deadline.
 
