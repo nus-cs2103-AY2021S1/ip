@@ -107,10 +107,12 @@ Example of usage:
 
 Expected outcome:
 
-`Duke heard:
+```
+Duke heard:
 Here are the matching tasks in your list: 
 1. [T][✘] homework 
-2. [D][✘] math homework (by: 10月 22 2020) `
+2. [D][✘] math homework (by: 10月 22 2020) 
+```
 
 ### 7. List tasks
 -> Create todo and add it to Duke.
