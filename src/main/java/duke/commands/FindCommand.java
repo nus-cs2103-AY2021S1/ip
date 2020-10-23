@@ -1,16 +1,13 @@
 package duke.commands;
 
-import duke.Parser;
-import duke.Task;
-import duke.TaskList;
-import duke.Ui;
+import duke.*;
 
 import java.util.ArrayList;
 
 public class FindCommand extends Command{
 
     @Override
-    public String execute(String userInput, Ui ui, TaskList tasks, boolean isLoading) {
+    public String execute(String userInput, Ui ui, TaskList tasks, boolean isLoading) throws DukeException {
         // parse instruction
         String keyword = Parser.parseFindInstr(userInput);
 

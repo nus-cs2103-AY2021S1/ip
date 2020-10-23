@@ -23,8 +23,13 @@ public class Parser {
      * @param userInput Input give from user.
      * @return Index of task which will be marked as done.
      */
-    static public int parseMarkDoneInstr(String userInput) {
-        int index = Integer.parseInt(userInput.split(" ")[1]) - 1;
+    static public int parseMarkDoneInstr(String userInput) throws DukeException {
+        int index;
+        try {
+            index = Integer.parseInt(userInput.split(" ")[1]) - 1;
+        } catch (Exception e) {
+            throw new DukeException("☹ OOPS!!! Right format is 'done [index]'. \n Check the index using list command.");
+        }
         assert index >= 0 : "index cannot be nagative";
         return index;
     }
@@ -35,8 +40,13 @@ public class Parser {
      * @param userInput Input give from user.
      * @return Index of task which will be deleted.
      */
-    static public int parseDeleteInstr(String userInput) {
-        int index = Integer.parseInt(userInput.split(" ")[1]) - 1;
+    static public int parseDeleteInstr(String userInput) throws DukeException {
+        int index;
+        try {
+            index = Integer.parseInt(userInput.split(" ")[1]) - 1;
+        } catch (Exception e) {
+            throw new DukeException("☹ OOPS!!! Right format is 'delete [index]'. \n Check the index using list command.");
+        }
         assert index >= 0 : "index cannot be nagative";
         return index;
     }
@@ -50,12 +60,15 @@ public class Parser {
     static public String parseAddTodoInstr(String userInput) throws DukeException {
         // check if input is valid
         if (userInput.split(" ", 2).length == 1) {
-            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+            throw new DukeException("☹ OOPS!!! Right format is 'todo [description]'");
         }
 
         // get data
         String description = userInput.split(" ", 2)[1];
-        return description;
+        if (description.trim().length() == 0) {
+            throw new DukeException("☹ OOPS!!! Description cannot be empty");
+        }
+         return description;
     }
 
     /**
@@ -67,17 +80,22 @@ public class Parser {
     static public HashMap<String, Object> parseAddDeadlineInstr(String userInput) throws DukeException {
         // check if input is valid
         if (userInput.split(" ", 2).length == 1) {
-            throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+            throw new DukeException("☹ OOPS!!! Right format is\n'deadline [description] /by [YYYY-MM-DD]'");
         }
         String task = userInput.split(" ", 2)[1];
         if (task.split(" /by ", 2).length < 2) {
-            throw new DukeException("☹ OOPS!!! The description and time is required for deadline");
+            throw new DukeException("☹ OOPS!!! Right format is\n'deadline [description] /by [YYYY-MM-DD]'");
         }
 
         // get data
         String description = task.split(" /by ", 2)[0];
         String time = task.split(" /by ")[1];
-        LocalDate localTime = LocalDate.parse(time);
+        LocalDate localTime;
+        try{
+            localTime = LocalDate.parse(time);
+        } catch (java.time.format.DateTimeParseException e) {
+            throw new DukeException("☹ OOPS!!! Right format is\n'event [description] /at [YYYY-MM-DD]'");
+        }
         HashMap<String, Object> parsedData = new HashMap<String, Object>() {
             {
                 put("description", description);
@@ -96,17 +114,22 @@ public class Parser {
     static public HashMap<String, Object> parseAddEventInstr(String userInput) throws DukeException {
         // check if input is valid
         if (userInput.split(" ", 2).length == 1) {
-            throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
+            throw new DukeException("☹ OOPS!!! Right format is\n'event [description] /at [YYYY-MM-DD]'");
         }
         String task = userInput.split(" ", 2)[1];
         if (task.split(" /at ", 2).length < 2) {
-            throw new DukeException("☹ OOPS!!! The description and time is required for event");
+            throw new DukeException("☹ OOPS!!! Right format is\n'event [description] /at [YYYY-MM-DD]'");
         }
 
         // get data
         String description = task.split(" /at ", 2)[0];
         String time = task.split(" /at ")[1];
-        LocalDate localTime = LocalDate.parse(time);
+        LocalDate localTime;
+        try{
+            localTime = LocalDate.parse(time);
+        } catch (java.time.format.DateTimeParseException e) {
+            throw new DukeException("☹ OOPS!!! Right format is\n'event [description] /at [YYYY-MM-DD]'");
+        }
         HashMap<String, Object> parsedData = new HashMap<String, Object>() {
             {
                 put("description", description);
@@ -116,8 +139,13 @@ public class Parser {
         return parsedData;
     }
 
-    static public String parseFindInstr(String userInput) {
-        String keyword = userInput.split(" ")[1];
+    static public String parseFindInstr(String userInput) throws DukeException {
+        String keyword = "";
+        try {
+            keyword = userInput.split(" ")[1];
+        } catch (Exception e) {
+            throw new DukeException("☹ OOPS!!! Right format is 'find [keyword]'");
+        }
         return keyword;
     }
 

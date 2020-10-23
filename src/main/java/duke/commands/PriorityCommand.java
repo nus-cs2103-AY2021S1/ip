@@ -16,6 +16,14 @@ public class PriorityCommand extends Command {
             HashMap<String, Object> parsedData = Parser.parseSetPriorityInstr(userInput);
             Integer priorityLevel = (Integer) parsedData.get("priorityLevel");
             Integer taskIndex = (Integer) parsedData.get("taskIndex");
+            // check if taskIndex is valid
+            if (!(0 <= taskIndex && taskIndex < tasks.taskList.size())) {
+                if (tasks.taskList.size() == 1) {
+                    throw new DukeException("☹ OOPS!!! index have to be 1");
+                } else {
+                    throw new DukeException("☹ OOPS!!! index have to be between 1 and " + (tasks.taskList.size()));
+                }
+            }
 
             // execute
             Task task = tasks.getTask(taskIndex);
