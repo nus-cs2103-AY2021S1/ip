@@ -175,8 +175,11 @@ Here are the tasks in your list:
 
 ### 8. Set priority to task
 -> Set priority to task task using number 1, 2, 3. 
+   
    1 is lowest priority and 3 is highest priority.
+   
    [!] symbol will be used to show the priority of the task.
+   
    Number of ! increase as priroity increase.
 
 Format:
