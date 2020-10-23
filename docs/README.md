@@ -4,11 +4,17 @@
 
 ### 1. Add todo
 -> Create todo and add it to Duke.
+
 Format:
+
 `todo [description]` 
+
 Example of usage: 
+
 `todo homework`
+
 Expected outcome:
+
 `Duke heard:
 Got it. I've added this task: 
 [T][✘] homework
