@@ -1,0 +1,9 @@
+todo homework
+priority 3 to task 1
+todo 3 3
+todo a
+todo     a    
+event this /at 2020-02-27
+deadline aa /by 2020-10-10
+todo aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+todo apple
