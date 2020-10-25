@@ -1,0 +1,11 @@
+.background {
+    -fx-background-image: url("/images/background.jpg");
+    -fx-background-size: 100% 180%;
+    -fx-background-position: bottom center;
+}
+
+.dialogBox {
+    -fx-background-color: rgba(0, 0, 50.2, 0.8);
+    -fx-background-radius: 10;
+    -fx-padding: 15;
+}

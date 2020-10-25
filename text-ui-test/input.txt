@@ -1,0 +1,7 @@
+hello
+deadline finish CS2103T iP /by today
+event block event /at 8pm every Tuesday
+done 3
+list
+list read book
+bye
