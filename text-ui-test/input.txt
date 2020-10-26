@@ -1,0 +1,10 @@
+todo watch a movie
+list
+deadline finish the program /by tomorrow
+done 1
+list
+event supper with friends /at 11pm
+done 3
+done 2
+list
+bye
