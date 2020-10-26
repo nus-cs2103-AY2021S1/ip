@@ -1,10 +1,10 @@
+import java.io.IOException;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-
-import java.io.IOException;
 
 /**@@author SE-EDU student project guide, a sub-project of the se-education.org.
  * Point of contact: Damith C. Rajapakse https://www.comp.nus.edu.sg/~damithch/
@@ -26,7 +26,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            stage.setTitle("DUKE_ip_v2.0");
+            stage.setTitle("DUKE_ip_v1.0");
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
             String reminders = duke.getReminder();
