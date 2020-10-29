@@ -1,0 +1,22 @@
+clear
+deadline submit assignment /by tues 9pm
+list
+event meeting /at monday 2pm
+list
+todo finish assignment
+list
+done 1
+list
+done 2
+list
+done 3
+list
+delete 3
+list
+delete 2
+list
+delete 1
+list
+todo final task
+list
+bye

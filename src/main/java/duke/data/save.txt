@@ -1,0 +1,8 @@
+6
+todo Assignment
+todo Resume
+deadline Send Email /by 3 Sep 2020, 03:00 PM
+event Google Career Talk /at U-Town
+event Software Engineering Class /at 3pm
+deadline Submit Essay /by 6pm on Thursday
+0 
