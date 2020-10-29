@@ -1,0 +1,28 @@
+.root{
+    -fx-font-size: 10pt;
+    -fx-font-family: "Courier New";
+}
+
+#dialogContainer {
+    -fx-background-image: url("/images/wolf-background.jpg");
+    -fx-background-size: cover;
+}
+
+#dialog{
+    -fx-background-color: #15233F;
+    -fx-text-fill: white;
+    -fx-padding: 10pt;
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+    -fx-border-color: white;
+    -fx-border-width: 2 2 2 2;
+}
+
+#userDialog{
+    -fx-background-color: lightskyblue;
+    -fx-padding: 10pt;
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+    -fx-border-color: white;
+    -fx-border-width: 2 2 2 2;
+}
