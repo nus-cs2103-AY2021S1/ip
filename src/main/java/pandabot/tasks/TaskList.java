@@ -1,0 +1,120 @@
+package pandabot.tasks;
+
+import java.util.ArrayList;
+
+import pandabot.exceptions.PandaBotOutOfRangeException;
+
+/**
+ *  Represents Tasks in a TaskList object and stores the various Tasks in a TaskList.
+ */
+public class TaskList {
+    private ArrayList<Task> taskList;
+
+    /**
+     * Creates a TaskList object that stores the tasks.
+     *
+     * @param taskList an ArrayList of tasks to be stored
+     */
+    public TaskList(ArrayList<Task> taskList) {
+        this.taskList = taskList;
+    }
+
+    /**
+     * Returns the list of tasks stored.
+     *
+     * @return an ArrayList of tasks stored
+     */
+    public ArrayList<Task> getTaskList() {
+        return taskList;
+    }
+
+    /**
+     * Returns the task in the list based on the index given.
+     *
+     * @param index the index of the task in the list of tasks
+     * @return the task requested
+     * @throws PandaBotOutOfRangeException If the index given is negative or
+     * greater than the number of tasks stored
+     */
+    public Task getTaskAt(int index) throws PandaBotOutOfRangeException {
+        try {
+            return taskList.get(index);
+        } catch (IndexOutOfBoundsException e) {
+            throw new PandaBotOutOfRangeException();
+        }
+    }
+
+    /**
+     * Returns the number of tasks in the list.
+     *
+     * @return the number of tasks in the list
+     */
+    public int size() {
+        return taskList.size();
+    }
+
+    /**
+     * Deletes the task from the list at the given index.
+     *
+     * @param index the index of the task in the list of tasks
+     * @throws PandaBotOutOfRangeException If the index given is negative or
+     * greater than the number of tasks stored
+     */
+    public void deleteTask(int index) throws PandaBotOutOfRangeException {
+        try {
+            int originalSize = taskList.size();
+            taskList.remove(index);
+            assert taskList.size() < originalSize : "Failed to delete task.";
+        } catch (IndexOutOfBoundsException e) {
+            throw new PandaBotOutOfRangeException();
+        }
+    }
+
+    /**
+     * Adds a task to the list
+     *
+     * @param task the task to be added
+     */
+    public void addTask(Task task) {
+        int originalSize = taskList.size();
+        taskList.add(task);
+        assert taskList.size() > originalSize : "Failed to add task.";
+    }
+
+    /**
+     * Finds the tasks among the list of tasks, where their descriptions
+     * contains the given input keyword.
+     *
+     * @param keyword the word used in the search for tasks with matching descriptions
+     * @return a TaskList containing the list of tasks with matching descriptions
+     */
+    public TaskList findTask(String keyword) {
+        assert keyword.length() > 0 : "The keyword to search for should not be empty.";
+        ArrayList<Task> matchingTasks = new ArrayList<>();
+
+        for (Task t : taskList) {
+            if (t.getDescription().contains(keyword)) {
+                matchingTasks.add(t);
+            }
+        }
+
+        return new TaskList(matchingTasks);
+    }
+
+    /**
+     * Returns a String representation of the current list of tasks.
+     *
+     * @return a String representation of the current list of tasks
+     */
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder();
+        int i = 0;
+        for (Task t : taskList) {
+            result.append(i + 1).append(". ").append(t.toString()).append("\n");
+            i++;
+        }
+
+        return result.toString();
+    }
+}

@@ -1,0 +1,19 @@
+todo read book
+todo return book
+todo
+deadline cs2103t /by 26/08/2020 2359
+todo buy bread
+event project meeting /at sun 4pm
+list
+done 4
+done 7
+done 2
+list
+event /at today
+deadline today
+delete 2
+list
+delete 3
+list
+bbye
+bye

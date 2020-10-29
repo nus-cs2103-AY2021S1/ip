@@ -1,0 +1,22 @@
+.scroll-pane .viewport {
+     -fx-background-image: url('/images/background1.jpg');
+     -fx-background-size: auto 100%;
+}
+
+.label-text {
+    -fx-font-family: 'Cambria';
+    -fx-font-size: 13px;
+    -fx-font-weight: bolder;
+    -fx-margin: 30;
+    -fx-background-color: white;
+    -fx-background-radius: 20;
+    -fx-padding: 15 20 15 20;
+    -fx-border-insets: 5px;
+    -fx-background-insets: 5px;
+}
+
+.send-button {
+    -fx-font-family: 'Cambria';
+    -fx-font-size: 15px;
+    -fx-background-radius: 10;
+}

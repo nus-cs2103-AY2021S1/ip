@@ -1,7 +1,100 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+ ____                    _
+|  _ \                  | |
+| |_| |___  _ _  __  ___| | ___  _
+| ___/  _ \| | |/  |/ _   |/ _ \| |
+| |  | |_|   |  _  | |_|  | |_|   |
+|_|  \____,__|_| |_|\___,_|\___,__| bot
 
+Hello! I'm PandaBot.
+What can I do for you?
+
+ ___________________________________________________
+Noted! I've added this task:
+[T][✘] read book
+Now you have 1 task(s) in this list.
+ ___________________________________________________
+ ___________________________________________________
+Noted! I've added this task:
+[T][✘] return book
+Now you have 2 task(s) in this list.
+ ___________________________________________________
+ ___________________________________________________
+OOPS! Insufficient arguments given. Make sure you give me all the details!
+ ___________________________________________________
+ ___________________________________________________
+Noted! I've added this task:
+[D][✘] cs2103t (by: 26th of August 2020, 11.59PM)
+Now you have 3 task(s) in this list.
+ ___________________________________________________
+ ___________________________________________________
+Noted! I've added this task:
+[T][✘] buy bread
+Now you have 4 task(s) in this list.
+ ___________________________________________________
+ ___________________________________________________
+Noted! I've added this task:
+[E][✘] project meeting (at: sun 4pm)
+Now you have 5 task(s) in this list.
+ ___________________________________________________
+ ___________________________________________________
+These are the task(s) you have:
+1. [T][✘] read book
+2. [T][✘] return book
+3. [D][✘] cs2103t (by: 26th of August 2020, 11.59PM)
+4. [T][✘] buy bread
+5. [E][✘] project meeting (at: sun 4pm)
+ ___________________________________________________
+ ___________________________________________________
+Great! I've marked this task as done:
+[T][✓] buy bread
+ ___________________________________________________
+ ___________________________________________________
+Task number given is not in range. Which task are you referring to?
+ ___________________________________________________
+ ___________________________________________________
+Great! I've marked this task as done:
+[T][✓] return book
+ ___________________________________________________
+ ___________________________________________________
+These are the task(s) you have:
+1. [T][✘] read book
+2. [T][✓] return book
+3. [D][✘] cs2103t (by: 26th of August 2020, 11.59PM)
+4. [T][✓] buy bread
+5. [E][✘] project meeting (at: sun 4pm)
+ ___________________________________________________
+ ___________________________________________________
+:c OOPS! The description of the Event cannot be empty.
+ ___________________________________________________
+ ___________________________________________________
+OOPS! Insufficient arguments given. Make sure you give me all the details!
+ ___________________________________________________
+ ___________________________________________________
+Will do! I've removed this task:
+[T][✓] return book
+Now you have 4 task(s) in this list.
+ ___________________________________________________
+ ___________________________________________________
+These are the task(s) you have:
+1. [T][✘] read book
+2. [D][✘] cs2103t (by: 26th of August 2020, 11.59PM)
+3. [T][✓] buy bread
+4. [E][✘] project meeting (at: sun 4pm)
+ ___________________________________________________
+ ___________________________________________________
+Will do! I've removed this task:
+[T][✓] buy bread
+Now you have 3 task(s) in this list.
+ ___________________________________________________
+ ___________________________________________________
+These are the task(s) you have:
+1. [T][✘] read book
+2. [D][✘] cs2103t (by: 26th of August 2020, 11.59PM)
+3. [E][✘] project meeting (at: sun 4pm)
+ ___________________________________________________
+ ___________________________________________________
+OOPS! I'm sorry, but I don't know what that means :c
+ ___________________________________________________
+ ___________________________________________________
+Bye! Remember to finish the rest of your work! See you soon~
+ ___________________________________________________
