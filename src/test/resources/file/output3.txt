@@ -1,0 +1,46 @@
+Here are the tasks in your list:
+☹ OOPS!!! I can't recognize the date provided
+☹ OOPS!!! I'm sorry, but I don't know what that means :-(
+☹ OOPS!!! I'm sorry, but I don't know what that means :-(
+Got it. I've added this task:
+[D][✗] sample (by: Oct 15 2019)
+Now you have 1 tasks in the list.
+
+Nice! I've marked this task as done:
+[D][✓] sample (by: Oct 15 2019)
+Got it. I've added this task:
+[E][✗] sample (between: Oct 15 2019 and Oct 16 2019)
+Now you have 2 tasks in the list.
+
+Nice! I've marked this task as done:
+[E][✓] sample (between: Oct 15 2019 and Oct 16 2019)
+Got it. I've added this task:
+[D][✗] sample (by: Oct 15 2019)
+Now you have 3 tasks in the list.
+
+Got it. I've added this task:
+[D][✗] sample (by: Oct 19 2020)
+Now you have 4 tasks in the list.
+
+☹ OOPS!!! I can't recognize the date provided
+Got it. I've added this task:
+[T][✗] sample
+Now you have 5 tasks in the list.
+
+Here are the tasks in your list:
+1.[D][✓] sample (by: Oct 15 2019)
+2.[E][✓] sample (between: Oct 15 2019 and Oct 16 2019)
+3.[D][✗] sample (by: Oct 15 2019)
+4.[D][✗] sample (by: Oct 19 2020)
+5.[T][✗] sample
+Noted. I've removed this task:
+[D][✗] sample (by: Oct 15 2019)
+Now you have 4 tasks in the list.
+
+Nice! I've marked this task as done:
+[D][✓] sample (by: Oct 19 2020)
+Here are the tasks in your list:
+1.[D][✓] sample (by: Oct 15 2019)
+2.[E][✓] sample (between: Oct 15 2019 and Oct 16 2019)
+3.[D][✓] sample (by: Oct 19 2020)
+4.[T][✗] sample
