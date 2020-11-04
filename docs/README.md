@@ -24,9 +24,9 @@ Duke is a **desktop app for tracking down todos, deadlines and events for use vi
 3. Copy the file to the folder you want to use as the home folder for your AddressBook.
 4. Double-click the file to start the app. The GUI similar to the one below should appear in a few seconds. **If not able to, you can open terminal in that directory and run: `java -jar <filename>`**
 
-<div align = "center">
-	<img src="https://fh-30.github.io/ip/Ui.png" />
-</div>
+	<div align = "center">
+		<img src="https://fh-30.github.io/ip/Ui.png" />
+	</div>
 
 5. Type the command in the command box and press Enter or click Send to execute it. e.g. typing `list` and pressing Enter or clicking Send will list all your current tasks.
 Some example commands you can try:
