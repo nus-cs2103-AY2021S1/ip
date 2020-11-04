@@ -25,7 +25,7 @@ Duke is a **desktop app for tracking down todos, deadlines and events for use vi
 4. Double-click the file to start the app. The GUI similar to the one below should appear in a few seconds. **If not able to, you can open terminal in that directory and run: `java -jar <filename>`**
 
 <div align = "center">
-  	<img src="https://github.com/FH-30/ip/blob/master/docs/Ui.PNG"/>
+  	<img src="https://github.com/FH-30/ip/blob/master/docs/Ui.PNG/>
 </div>
 
 {:start="5"}
