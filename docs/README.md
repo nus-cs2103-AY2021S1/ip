@@ -28,7 +28,6 @@ Duke is a **desktop app for tracking down todos, deadlines and events for use vi
 	<img src="https://github.com/FH-30/ip/blob/master/docs/Ui.PNG"/>
 </div>
 
-{:start="5"}
 5. Type the command in the command box and press Enter or click Send to execute it. e.g. typing `list` and pressing Enter or clicking Send will list all your current tasks.
 Some example commands you can try:
 	* `todo wash car` : Adds a task called wash car into your list.
