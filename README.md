@@ -19,22 +19,22 @@ Duke is a **desktop app for tracking down todos, deadlines and events for use vi
 * [Command Summary](#command-summary)
 
 ## Quick Start
-1. Ensure you have Java `11` or above installed in your Computer.
-2. Download the latest Duke.jar from [here](https://github.com/FH-30/ip/releases/tag/v0.3).
-3. Copy the file to the folder you want to use as the home folder for your AddressBook.
-4. Double-click the file to start the app. The GUI similar to the one below should appear in a few seconds. **If not able to, you can open terminal in that directory and run: `java -jar <filename>`**
-
+<ul>
+	<li>Ensure you have Java `11` or above installed in your Computer.</li>
+	<li>Download the latest Duke.jar from [here](https://github.com/FH-30/ip/releases/tag/v0.3).</li>
+	<li>Copy the file to the folder you want to use as the home folder for your AddressBook.</li>
+	<li>Double-click the file to start the app. The GUI similar to the one below should appear in a few seconds. **If not able to, you can open terminal in that directory and run: `java -jar <filename>`**</li>
 	<div align = "center">
   		<img src="https://github.com/FH-30/ip/blob/master/docs/Ui.PNG"/>
 	</div>
-
-5. Type the command in the command box and press Enter or click Send to execute it. e.g. typing `list` and pressing Enter or clicking Send will list all your current tasks.
+  	<li>Type the command in the command box and press Enter or click Send to execute it. e.g. typing `list` and pressing Enter or clicking Send will list all your current tasks.
 Some example commands you can try:
 	* `todo wash car` : Adds a task called wash car into your list.
 	* `done 1`: Marks the 1st task in the current list.
 	* `delete 1`: Deletes the 1st task in the current list.
-	* `bye`: Exits the app.
-6. Refer to the Features below for details of each command.
+	* `bye`: Exits the app.</li>
+  	<li>Refer to the Features below for details of each command.</li>
+</ul>
 
 ## Features
 
