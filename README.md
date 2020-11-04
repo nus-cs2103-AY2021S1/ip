@@ -21,7 +21,7 @@ Duke is a **desktop app for tracking down todos, deadlines and events for use vi
 ## Quick Start
 1. Ensure you have Java `11` or above installed in your Computer.
 2. Download the latest Duke.jar from [here](https://github.com/FH-30/ip/releases/tag/v0.3).
-3. Copy the file to the folder you want to use as the home folder for your AddressBook.
+3. Copy the file to the folder you want to use as the home folder for Duke.
 4. Double-click the file to start the app. The GUI similar to the one below should appear in a few seconds. **If not able to, you can open terminal in that directory and run: `java -jar <filename>`**
 
 	<div align = "center">
