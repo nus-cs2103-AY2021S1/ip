@@ -39,10 +39,10 @@ Some example commands you can try:
 ## Features
 
 <div markdown="block" class="alert alert-info">
-	<strong>
-		<img class="emoji" title=":information_source:" alt=":information_source:" src="https://			github.githubassets.com/images/icons/emoji/unicode/2139.png" height="20" width="20">
-	</strong>
-	 "Notes about the command format:"<br>
+<strong>
+	<img class="emoji" title=":information_source:" alt=":information_source:" src="https://			github.githubassets.com/images/icons/emoji/unicode/2139.png" height="20" width="20">
+	Notes about the command format:<br>
+</strong>
 	 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `todo TASK`, `TASK` is a parameter which can be used as `todo wash car`.
