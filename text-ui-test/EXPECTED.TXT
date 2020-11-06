@@ -5,3 +5,43 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+--------------------------------------------------
+added: [T][✗] CS2103
+Now you have 1 tasks in the list.
+--------------------------------------------------
+added: [D][✗] ip  (by: 27 Aug 2020, 11:59PM)
+Now you have 2 tasks in the list.
+--------------------------------------------------
+added: [E][✗] tutorial  (at: 28 Aug 2020, 4:00PM to 6:00PM)
+Now you have 3 tasks in the list.
+--------------------------------------------------
+1.[T][✗] CS2103
+2.[D][✗] ip  (by: 27 Aug 2020, 11:59PM)
+3.[E][✗] tutorial  (at: 28 Aug 2020, 4:00PM to 6:00PM)
+--------------------------------------------------
+Noted. I've removed this task: 
+[D][✗] ip  (by: 27 Aug 2020, 11:59PM)
+Now you have 2 tasks in the list.
+--------------------------------------------------
+1.[T][✗] CS2103
+2.[E][✗] tutorial  (at: 28 Aug 2020, 4:00PM to 6:00PM)
+--------------------------------------------------
+Nice! I've marked this task as done: 
+[E][✓] tutorial  (at: 28 Aug 2020, 4:00PM to 6:00PM)
+Now you have 2 tasks in the list.
+--------------------------------------------------
+1.[T][✗] CS2103
+2.[E][✓] tutorial  (at: 28 Aug 2020, 4:00PM to 6:00PM)
+--------------------------------------------------
+Nice! I've marked this task as done: 
+[T][✓] CS2103
+Now you have 2 tasks in the list.
+--------------------------------------------------
+1.[T][✓] CS2103
+2.[E][✓] tutorial  (at: 28 Aug 2020, 4:00PM to 6:00PM)
+--------------------------------------------------
+All tasks have been deleted!
+Now you have 0 tasks in the list.
+--------------------------------------------------
+--------------------------------------------------
+Bye. Hope to see you again soon!
