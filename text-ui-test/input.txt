@@ -1,0 +1,72 @@
+hello
+done
+delete
+todo
+deadline
+event
+done me too
+done 1
+delete me too
+delete 1
+deadline nope
+deadline wrong/athaha
+event nope
+event wrong/bywahaha
+todo readbook
+deadline return book /by 06062020 2359
+event project meeting /from 06082020 1400 /till 06082020 1600
+todo join sports club
+todo borrow book
+deadline drink coffee/by07062020 2359
+event drink tea/from07082020 1600/till07082020 1800
+list
+done 0
+done 8
+delete 0
+delete 8
+list
+done 2
+list
+done 4
+list
+delete 3
+list
+delete 4
+list
+todo say goodbye
+list
+help
+save save.txt
+delete 6
+done 5
+delete 4
+done 3
+delete 2
+list
+load save.txt
+list
+find
+find lkaksdjfl
+find 12342341234
+find book
+find ts cl
+todo one
+todo two
+list
+done 7
+done 8
+undo
+list
+todo three
+redo
+undo
+todo four
+list
+load save.txt
+undo
+todo 123
+undo
+undo
+redo
+redo
+bye

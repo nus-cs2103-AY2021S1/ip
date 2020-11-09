@@ -1,7 +1,8 @@
 # IDEA files
 /.idea/
-/out/
 /*.iml
+/out/
+/bin/
 
 # Gradle build files
 /.gradle/
@@ -11,7 +12,10 @@ src/main/resources/docs/
 # MacOS custom attributes files created by Finder
 .DS_Store
 *.iml
-bin/
 
 /text-ui-test/ACTUAL.txt
-text-ui-test/EXPECTED-UNIX.TXT
+save.txt
+save2.txt
+save3.txt
+duke.log
+duke.log.lck
