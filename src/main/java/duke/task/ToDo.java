@@ -1,0 +1,28 @@
+package duke.task;
+
+/**
+ * Represents a ToDo Task.
+ */
+public class ToDo extends Task {
+
+    public ToDo(String description) {
+        super(description);
+    }
+
+    public ToDo(boolean isDone, String description) {
+        super(isDone, description);
+    }
+
+    @Override
+    public String toString() {
+        return "[T]" + super.toString();
+    }
+
+    @Override
+    public String toStoreFormat() {
+        String type = "T";
+        String status = super.isDone ? "1" : "0";
+        String connect = " | ";
+        return type + connect + status + connect + description;
+    }
+}
