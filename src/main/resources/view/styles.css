@@ -1,0 +1,33 @@
+.root {
+    -fx-background-color: rgba(114, 205, 247, 0.0);
+}
+
+.userInput {
+    -fx-font-size: 16px;
+    -fx-font-family: Calibri;
+}
+
+.sendButton {
+    -fx-padding: 5px;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-background-color: #ECEC48;
+}
+
+.dialog {
+    -fx-font-family: Consolas;
+    -fx-font-size: 14px;
+    -fx-background-radius: 15;
+    -fx-padding: 10px;
+}
+
+.dialogContainer {
+    -fx-padding: 30, 10, 10, 10;
+}
+
+.scrollPane {
+     -fx-background-image: url('../images/background.jpg');
+     -fx-background-position: bottom center;
+     -fx-background: transparent;
+     -fx-background-size: cover;
+}
