@@ -1,10 +1,25 @@
+import parser.Parser;
+import ui.UI;
+
+/**
+ * Main class / Entry point of Duke Personal Assistant Chatbot (Kim Jong Duke).
+ */
 public class Duke {
+    /**
+     * Starts Kim Jong Duke.
+     */
+    public static void run() {
+        UI.summonSupremeLeaderAndGreet();
+        Parser.run();
+        UI.farewell();
+    }
+
+    /**
+     * Code entry point.
+     *
+     * @param args Entry point argument.
+     */
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        Duke.run();
     }
 }
