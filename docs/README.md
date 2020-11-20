@@ -1,5 +1,8 @@
 # Duke NUS User Guide
 
+Hi, this is my individual project written for a software engineering module. It is a task manager app written in Java with JavaFx.
+
+
 ## Features
 
 ### Clear Command 
