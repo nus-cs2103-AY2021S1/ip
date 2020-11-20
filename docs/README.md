@@ -1,20 +1,40 @@
 # User Guide
+Duke is a chatbot that helps you to keep track of your various tasks.
 
 ## Features 
+List of commands include:
 
-### Feature 1 
-Description of feature.
+### Feature 1 - ```list```
+Shows a list of all tasks currently in the task list.
 
-## Usage
+Format: `list`
 
-### `Keyword` - Describe action
+### Feature 2 - ```todo```
+Adds a To-do task, with a given description.
 
-Describe action and its outcome.
+Format: `todo` TASK_DESCRIPTION
 
-Example of usage: 
+### Feature 3 - ```deadline```
+Adds a Deadline task, with a given description, and a given date-time.
 
-`keyword (optional arguments)`
+Format: `deadline` TASK_DESCRIPTION /by yyyy-MM-ddTHH:mm
 
-Expected outcome:
+### Feature 4 - ```event```
+Adds an Event task, with a given description, and a given date-time.
 
-`outcome`
+Format: `event` TASK_DESCRIPTION /by yyyy-MM-ddTHH:mm
+
+### Feature 5 - ```delete```
+Deletes a task from the task list based on index.
+
+Format: `delete` TASK_INDEX
+
+### Feature 6 - ```done```
+Marks a task as done based on index.
+
+Format: `done` TASK_INDEX
+
+### Feature 7 - ```undo```
+Undoes the previous command.
+
+Format: `undo`
