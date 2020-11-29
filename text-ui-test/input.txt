@@ -1,0 +1,13 @@
+todo read book
+event walk dog /Monday Morning
+deadline finish homework /8pm today
+done 1
+delete 1
+done 2
+list
+done 2
+delete 2
+done 1
+delete 1
+list
+bye

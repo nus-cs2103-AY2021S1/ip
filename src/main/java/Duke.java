@@ -1,10 +1,44 @@
+import java.io.File;
+import java.io.IOException;
+
+/**
+ * Class which represents the duke bot.
+ * @author vanGoghhh
+ */
+
 public class Duke {
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+
+    private Storage dukeStorage;
+    private TaskList dukeTaskList;
+    private UI dukeUI;
+    private Parser dukeParser;
+
+    /**
+     * Initiates the bot.
+     * @throws DukeException
+     * @throws IOException
+     */
+    public Duke() throws IOException {
+        dukeStorage = new Storage("data" + File.separator + "duke.txt");
+        dukeTaskList = new TaskList(dukeStorage.loadData());
+        dukeUI = new UI();
+        dukeParser = new Parser();
+    }
+
+    /**
+     * Gets a response from the user input.
+     * @param input user input
+     * @return Bot's response.
+     */
+    public String getResponse(String input) {
+        try {
+            String userCommand = input;
+            Command cmd = dukeParser.parseCommand(userCommand);
+            String dukeResponse = cmd.execute(dukeTaskList, dukeUI);
+            dukeStorage.writeData(dukeTaskList);
+            return dukeResponse;
+        } catch (DukeException | IOException e) {
+            return e.getMessage();
+        }
     }
 }
