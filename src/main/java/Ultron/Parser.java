@@ -1,5 +1,7 @@
 package ultron;
 
+import java.util.HashMap;
+import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -20,6 +22,17 @@ public final class Parser {
     /** The regex pattern for checking the commands and inputs. */
     private static final Pattern PATTERN =
         Pattern.compile("(^\\s?\\w+\\b) ?(.*)?$");
+    private static HashMap<String, Function<String, Command>> mp;
+
+    static {
+        mp = new HashMap<>();
+        Parser.mp.put("bye", ByeCommand::new);
+        Parser.mp.put("find", FindCommand::new);
+        Parser.mp.put("list", ListCommand::new);
+        Parser.mp.put("help", HelpCommand::new);
+        Parser.mp.put("done", DoneCommand::new);
+        Parser.mp.put("delete", DeleteCommand::new);
+    }
 
     private Parser() {
     }
@@ -32,26 +45,12 @@ public final class Parser {
      * @return Command corresponding to the input given by user.
      * @throws UltronException if there are errors in getting the command.
      */
-    private static Command checkInput(final String command,
-            final String arguments)
-            throws UltronException {
-        switch (command) {
-        case "bye":
-            return new ByeCommand(arguments);
-        case "find":
-            return new FindCommand(arguments);
-        case "list":
-            return new ListCommand(arguments);
-        case "help":
-            return new HelpCommand(arguments);
-        case "delete":
-            return new DeleteCommand(arguments);
-        case "done":
-            return new DoneCommand(arguments);
-        default:
+    private static Command checkInput(final String command, final String arguments) throws UltronException {
+        Function<String, Command> cmd = mp.getOrDefault(command, null);
+        if (cmd == null) {
             return new TaskAllocator(command, arguments);
         }
-
+        return cmd.apply(arguments);
     }
 
     /**
