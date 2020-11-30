@@ -1,0 +1,10 @@
+list
+deadline do laundry /by tomorrow
+list
+deadline have something to eat /by lunch time
+list
+done 1
+list
+done 2
+list
+bye

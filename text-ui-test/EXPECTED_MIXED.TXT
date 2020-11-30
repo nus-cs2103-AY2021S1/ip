@@ -1,0 +1,92 @@
+　　＼　　　　　／
+　　　＼∧∧∧／
+　　　＜　 Ｃ ＞
+　　　＜ 　Ａ ＞
+　　　＜　 Ｔ ＞
+　 ───＜ Ｂ　 ＞───
+　　　＜ Ｏ　 ＞
+　　　＜ Ｔ　 ＞
+　　　／∨∨∨＼
+　　／ ∧_∧　　＼
+　／　( ･ω･)　　 ＼
+／　＿(_つ/￣￣￣/　＼
+　　 　＼/＿＿＿/
+
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+∴‥	Hi I'm Cat Bot.
+∴‥	What can I do for you?
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+∴‥	Oops! Looks like there's no task in the list!
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+∴‥	Got it. I've added this task:
+∴‥		[T][✗] coding
+∴‥	Now you have 1 task(s) in the list.
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+∴‥	Here are the tasks in your list:
+∴‥	 1. [T][✗] coding
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+∴‥	Got it. I've added this task:
+∴‥		[D][✗] lab1 (by: tomorrow)
+∴‥	Now you have 2 task(s) in the list.
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+∴‥	Here are the tasks in your list:
+∴‥	 1. [T][✗] coding
+∴‥	 2. [D][✗] lab1 (by: tomorrow)
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+∴‥	Got it. I've added this task:
+∴‥		[E][✗] weeee~ (at: next year)
+∴‥	Now you have 3 task(s) in the list.
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+∴‥	Here are the tasks in your list:
+∴‥	 1. [T][✗] coding
+∴‥	 2. [D][✗] lab1 (by: tomorrow)
+∴‥	 3. [E][✗] weeee~ (at: next year)
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+∴‥	Naisu! I've marked this task done!
+∴‥	[T][✓] coding
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+∴‥	Naisu! I've marked this task done!
+∴‥	[D][✓] lab1 (by: tomorrow)
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+∴‥	Here are the tasks in your list:
+∴‥	 1. [T][✓] coding
+∴‥	 2. [D][✓] lab1 (by: tomorrow)
+∴‥	 3. [E][✗] weeee~ (at: next year)
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+∴‥	Naisu! I've marked this task done!
+∴‥	[E][✓] weeee~ (at: next year)
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+∴‥	Here are the tasks in your list:
+∴‥	 1. [T][✓] coding
+∴‥	 2. [D][✓] lab1 (by: tomorrow)
+∴‥	 3. [E][✓] weeee~ (at: next year)
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+∴‥	Bye! Hope to see you again!
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+

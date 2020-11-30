@@ -1,0 +1,81 @@
+　　＼　　　　　／
+　　　＼∧∧∧／
+　　　＜　 Ｃ ＞
+　　　＜ 　Ａ ＞
+　　　＜　 Ｔ ＞
+　 ───＜ Ｂ　 ＞───
+　　　＜ Ｏ　 ＞
+　　　＜ Ｔ　 ＞
+　　　／∨∨∨＼
+　　／ ∧_∧　　＼
+　／　( ･ω･)　　 ＼
+／　＿(_つ/￣￣￣/　＼
+　　 　＼/＿＿＿/
+
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+∴‥	Hi I'm Cat Bot.
+∴‥	What can I do for you?
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+∴‥	Got it. I've added this task:
+∴‥		[T][✗] myTodo
+∴‥	Now you have 1 task(s) in the list.
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+∴‥	Got it. I've added this task:
+∴‥		[D][✗] myDeadline (by: today)
+∴‥	Now you have 2 task(s) in the list.
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+∴‥	Got it. I've added this task:
+∴‥		[E][✗] myEvent (at: today)
+∴‥	Now you have 3 task(s) in the list.
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+∴‥	Here are the tasks in your list:
+∴‥	 1. [T][✗] myTodo
+∴‥	 2. [D][✗] myDeadline (by: today)
+∴‥	 3. [E][✗] myEvent (at: today)
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+∴‥	Hmmm~! I've removed this task:
+∴‥		[D][✗] myDeadline (by: today)
+∴‥	 Now you have 2 task(s) in the list.
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+∴‥	Here are the tasks in your list:
+∴‥	 1. [T][✗] myTodo
+∴‥	 2. [E][✗] myEvent (at: today)
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+∴‥	Hmmm~! I've removed this task:
+∴‥		[T][✗] myTodo
+∴‥	 Now you have 1 task(s) in the list.
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+∴‥	Here are the tasks in your list:
+∴‥	 1. [E][✗] myEvent (at: today)
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+∴‥	Hmmm~! I've removed this task:
+∴‥		[E][✗] myEvent (at: today)
+∴‥	 Now you have 0 task(s) in the list.
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+∴‥	Oops! Looks like there's no task in the list!
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+∴‥	Bye! Hope to see you again!
+∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴
+

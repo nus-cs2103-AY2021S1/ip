@@ -1,0 +1,15 @@
+.bodyBackground {
+    -fx-background-image: url("/images/background.jpg");
+    -fx-background-size: 100% auto;
+}
+
+.label {
+    -fx-background-color: white;
+    -fx-background-radius: 4;
+    -fx-background-insets: -5;
+    -fx-opacity: 0.90;
+}
+
+.image {
+
+}
