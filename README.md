@@ -3,11 +3,6 @@ Marco is a desktop app for task management, optimized for use via a Command Line
 
 ## Ui
 
-### Greeting from Marco at initialization
-![Ui for initialization](docs/Greeting Ui.png)
-
-<br>
-
 ### Sample Ui of Marco in use
 ![Sample Uo](docs/Ui.png)
 
