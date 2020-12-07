@@ -1,5 +1,16 @@
 # User Guide
 Marco is a desktop app for task management, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Marco can get your contact management tasks done faster than traditional GUI apps.
+
+## Ui
+
+### Greeting from Marco at initialization
+![Ui for initialization](Greeting Ui.png)
+
+<br>
+
+### Sample Ui of Marco in use
+![Sample Uo](Ui.png)
+
 ## Features 
 
 ### Feature 1 
@@ -78,8 +89,6 @@ Here are the tasks in your list:
 ```
 Oops, your list is currently empty. Add some tasks first!
 ```
-
-
 #### 4. `find KEY_WORD` 
 - Search for tasks that contains certain keyword in their description.
 
