@@ -1,0 +1,13 @@
+todo read
+deadline math homework /by Monday
+deadline cs homework /by Tuesday
+deadline sci homework /by Wednesday
+event pillow party /at 9th August 2020
+event funeral /at 8th August 2020
+event eat /at 10th August 2020
+list
+done 1
+done 2
+list
+done 3
+bye
