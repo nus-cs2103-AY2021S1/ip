@@ -22,8 +22,9 @@ public final class Parser {
     /** The regex pattern for checking the commands and inputs. */
     private static final Pattern PATTERN =
         Pattern.compile("(^\\s?\\w+\\b) ?(.*)?$");
-    private static HashMap<String, Function<String, Command>> mp;
+    private static final HashMap<String, Function<String, Command>> mp;
 
+    //Initialise the commands into a hashmap.
     static {
         mp = new HashMap<>();
         Parser.mp.put("bye", ByeCommand::new);
