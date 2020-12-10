@@ -1,0 +1,15 @@
+#dialog {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 25px;
+    -fx-padding-left: 50px;
+}
+
+#dialogContainer {
+    -fx-border-radius: 25px;
+}
+
+#displayPicture {
+    -fx-background-radius: 25px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+    -fx-padding: 10px;
+}
