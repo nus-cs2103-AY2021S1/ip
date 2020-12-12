@@ -1,0 +1,90 @@
+@font-face {
+  src: url("/style/Cutes.otf");
+}
+
+ScrollPane{
+    -fx-background-image: url("/images/background.png");
+    -fx-background-size: cover;
+}
+
+Stage{
+    -fx-background-color: #f6e4da;
+}
+
+AnchorPane{
+
+    -fx-background-color: #f6e4da;
+    -fx-background: transparent;
+}
+
+Scene{
+    -fx-background-color: #f6e4da;
+}
+
+VBox{
+    -fx-background: transparent;
+}
+
+HBox{
+    -fx-background: transparent;
+}
+
+TextField{
+    -fx-font-family: "Cutes";
+    -fx-font-size: 20;
+    -fx-border-width: 5;
+    -fx-background-insets: 3, 0.0, 0.0;
+    -fx-background-radius: 2.0em;
+    -fx-background-color: #FEF7B4;
+}
+
+Button{
+    -fx-font-family: "Cutes";
+    -fx-font-size: 20;
+    -fx-text-fill: #B57946;
+    -fx-border-width: 5;
+    -fx-background-insets: 3, 0.0, 0.0;
+    -fx-background-radius: 2.0em;
+    -fx-background-color: #FEF7B4;
+}
+
+Label{
+    -fx-font-family: "Cutes";
+    -fx-font-size: 20;
+    -fx-text-fill: #B57946;
+    -fx-padding: 10;
+    -fx-spacing: 5.0;
+    -fx-background-radius: 15;
+    -fx-background-color: #FEF7B4;
+    -fx-border-width: 5;
+    -fx-border-color: #f0b159;
+    -fx-border-radius: 10.0;
+    -fx-background: transparent;
+}
+
+.scroll-bar:vertical .track{
+	-fx-background-color: #faf2b6;
+	-fx-background-size: 100% 99.9%;
+    -fx-background-radius: 0em;
+    -fx-background-position: right;
+    -fx-border-radius: 2.0em;
+}
+
+.scroll-bar:vertical .increment-button,
+.scroll-bar:vertical .decrement-button{
+    -fx-background-color: transparent;
+    -fx-background-radius: 0.0em;
+    -fx-padding: 0 19 0 0;
+}
+
+.scroll-bar:vertical .increment-arrow,
+.scroll-bar:vertical .decrement-arrow{
+   -fx-shape: "";
+   -fx-padding: 0em;
+}
+
+.scroll-bar:vertical .thumb {
+    -fx-background-color: #f0b159;
+    -fx-background-insets: 3, 0.0, 0.0;
+    -fx-background-radius: 2.0em;
+}

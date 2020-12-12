@@ -1,0 +1,10 @@
+todo abc
+event def /at 123
+deadline ghi /by 456
+list
+done 3
+done 1
+list
+deadline jkl /by 789
+list
+bye
