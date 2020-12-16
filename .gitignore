@@ -1,17 +1,20 @@
-# IDEA files
-/.idea/
-/out/
-/*.iml
-
-# Gradle build files
-/.gradle/
-/build/
-src/main/resources/docs/
-
-# MacOS custom attributes files created by Finder
 .DS_Store
-*.iml
+.gradle/
+.idea/
 bin/
-
-/text-ui-test/ACTUAL.txt
+build/
+config/.DS_Store
+data/.DS_Store
+ip.iml
+javafx-sdk-11.0.2/
+javafx-sdk-14.0.2.1/
+out/
+src/.DS_Store
+src/main/.DS_Store
+src/main/java/.DS_Store
+src/main/resources/.DS_Store
+src/test/.DS_Store
+src/test/test.iml
+text-ui-test/.DS_Store
+text-ui-test/ACTUAL.TXT
 text-ui-test/EXPECTED-UNIX.TXT
