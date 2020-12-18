@@ -1,0 +1,27 @@
+todo borrow book
+todo read book
+deadline return book /by Sunday
+event project meeting /at Mon 2-4pm
+list
+done 1
+deadline project 1 /by Thursday
+list
+delete 5
+delete
+blah
+todo
+event
+event project meeting /at 2020-08-24
+list
+deadline iP week 3 /by 2020-08-27
+list
+delete 1
+deadline reading /by 2020-08-27
+show 2020-08-27
+todo reading book
+find reading
+list
+done 1
+pending
+completed
+bye
