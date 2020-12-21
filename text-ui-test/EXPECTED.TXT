@@ -1,7 +1,7 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+Hello I'm Greg!
+How may I be of service today?
+Sorry I do not understand that command.
+Got it. I've added this task:
+  [E][✘] event soccer match  (at:tomorrow)
+Now you have 5 tasks in the list.
+Bye. Hope to see you again soon!
