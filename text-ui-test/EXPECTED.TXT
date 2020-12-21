@@ -1,7 +1,117 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+Bob: Hey there! I'm Bob
+What can I do for you today?
 
+You: 
+
+Bob: 
+Noted! I have added the following task to your list:
+[T][✘] borrow book
+You now have 1 task(s) in your list
+
+You: 
+
+Bob: 
+Here is your current list of tasks:
+1.[T][✘] borrow book
+
+You: 
+
+Bob: 
+Noted! I have added the following task to your list:
+[D][✘] return book (by: Sunday)
+You now have 2 task(s) in your list
+
+You: 
+
+Bob: 
+Noted! I have added the following task to your list:
+[E][✘] project meeting (at: Mon 2-4pm)
+You now have 3 task(s) in your list
+
+You: 
+
+Bob: 
+Here is your current list of tasks:
+1.[T][✘] borrow book
+2.[D][✘] return book (by: Sunday)
+3.[E][✘] project meeting (at: Mon 2-4pm)
+
+You: 
+
+Bob: 
+Good job completing this task! I've marked this task as done:
+[D][✓] return book (by: Sunday)
+Keep up the good work :)
+
+You: 
+
+Bob: 
+OOPS. It seems like this task has already been completed:
+[D][✓] return book (by: Sunday)
+
+You: 
+
+Bob: 
+Here is your current list of tasks:
+1.[T][✘] borrow book
+2.[D][✓] return book (by: Sunday)
+3.[E][✘] project meeting (at: Mon 2-4pm)
+
+You: 
+
+Bob: 
+OOPS! Task 10 does not exist.
+Please make sure task index is correct.
+
+You: 
+
+Bob: 
+Sorry I am unable to create this task :(
+Please make sure that the task has a description and has the correct format
+
+You: 
+
+Bob: 
+Sorry I am unable to create this task :(
+Please make sure that the task has a description and has the correct format
+
+You: 
+
+Bob: 
+Noted! I have added the following task to your list:
+[D][✘] independent project (by: monday)
+You now have 4 task(s) in your list
+
+You: 
+
+Bob: 
+Here is your current list of tasks:
+1.[T][✘] borrow book
+2.[D][✓] return book (by: Sunday)
+3.[E][✘] project meeting (at: Mon 2-4pm)
+4.[D][✘] independent project (by: monday)
+
+You: 
+
+Bob: 
+Noted! I have deleted this task from your list:
+[D][✓] return book (by: Sunday)
+You now have 3 task(s) in your list
+
+You: 
+
+Bob: 
+Here is your current list of tasks:
+1.[T][✘] borrow book
+2.[E][✘] project meeting (at: Mon 2-4pm)
+3.[D][✘] independent project (by: monday)
+
+You: 
+
+Bob: 
+OOPS! Task 10 does not exist.
+Please make sure task index is correct.
+
+You: 
+
+Bob: Goodbye! Have a nice day :D
