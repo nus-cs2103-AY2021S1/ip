@@ -1,0 +1,26 @@
+list
+done 0
+read book
+todo
+deadline
+event
+deadline /by
+deadline /by when
+deadline return book
+event /at
+event /at when
+event book launch
+list all
+todo borrow english book
+todo read book
+deadline return book /by Sunday 10pm
+event book launch /at Monday 2-4pm
+list
+done 1
+done 2
+done 5
+delete 1
+delete 2
+delete 0
+list
+bye
