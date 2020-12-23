@@ -1,0 +1,12 @@
+.imageView {
+    -fx-background-radius: 100px;
+    -fx-background-color: #b19cd9;
+
+}
+
+.label {
+     -fx-background-radius: 10px;
+     -fx-font-size: 15px;
+     -fx-label-padding: 10px;
+     -fx-background-color: #b19cd9;
+}
