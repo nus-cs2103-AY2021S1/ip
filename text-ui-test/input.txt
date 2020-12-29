@@ -1,0 +1,14 @@
+list
+todo return book
+event eat dinner /at 7pm
+deadline finish quiz /by tonight
+list
+done 3
+list
+todo
+blank
+done 5
+delete -1
+delete 2
+list
+bye
