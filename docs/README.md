@@ -1,4 +1,4 @@
-# User Guide
+# Mushy User Guide
 
 Mushy is a **Personal Assistant Chatbot for keeping track 
 of tasks, optimized for use via a Command Line Interface** 
