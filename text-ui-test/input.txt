@@ -1,0 +1,8 @@
+todo eat
+deadline finish eating /by noon
+list
+done 2
+delete 2
+list
+delete a
+bye
