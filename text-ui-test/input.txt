@@ -1,0 +1,44 @@
+list
+todo borrow book
+done 1
+deadline return book /by 30 Aug 0000
+list
+event dinner with friends /at 25 Aug 1100
+event exercise /at monday, wednesday, friday
+deadline CS2103 project tasks /by this thursday
+todo do my laundry
+list
+done 6
+done 4
+list
+done 7
+done 0
+done
+done abc
+todo
+deadline
+deadline /by
+deadline buy coffee /by
+deadline buy coffee /by 4 aug
+event
+event /at
+event watch movie /at
+event watch movie /at 5 aug
+delete
+delete abc
+delete 0
+delete 10
+list
+delete 3
+list
+blah
+event coffee chat /at 2019-03-05
+event tea chat /at 2019-03-06T00:05:01
+deadline cs2103 project /by 2020-08-20
+deadline cs2103 project /by 2020-08-20T12:05:20
+list 2019-03-05
+list abc
+find chat
+find random things
+find cs2103 project
+bye
