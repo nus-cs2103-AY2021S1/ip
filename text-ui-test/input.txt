@@ -1,0 +1,17 @@
+list
+done
+done string
+done 5
+todo
+todo borrow book
+deadline
+deadline IP
+deadline IP /at
+deadline IP /by today 2359
+event
+event project meeting
+event project meeting /at 2pm-4pm
+done string
+done 100
+done 1
+bye
