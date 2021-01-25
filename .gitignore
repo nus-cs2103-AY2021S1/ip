@@ -14,4 +14,6 @@ src/main/resources/docs/
 bin/
 
 /text-ui-test/ACTUAL.txt
+/text-ui-test/input.txt
+/text-ui-test/sources.txt
 text-ui-test/EXPECTED-UNIX.TXT

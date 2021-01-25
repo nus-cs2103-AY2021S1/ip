@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE suppressions PUBLIC
+        "-//Checkstyle//DTD SuppressionFilter Configuration 1.2//EN"
+        "https://checkstyle.org/dtds/suppressions_1_2.dtd">
+
+<suppressions>
+    <suppress checks="JavadocType" files=".*Test\.java"/>
+    <suppress checks="MissingJavadocMethodCheck" files=".*Test\.java"/>
+    <suppress checks="JavadocType" files="./test/java/duke/task/EventStub.java"/>
+    <suppress checks="MissingJavadocMethodCheck" files="./test/java/duke/task/EventStub.java"/>
+    <suppress checks="JavadocType" files="./test/java/duke/ParserStub.java"/>
+    <suppress checks="MissingJavadocMethodCheck" files="./test/java/duke/ParserStub.java"/>
+    <suppress checks="JavadocType" files="./test/java/duke/StorageStub.java"/>
+    <suppress checks="MissingJavadocMethodCheck" files="./test/java/duke/StorageStub.java"/>
+    <suppress checks="JavadocType" files="./test/java/duke/task/DeadlineStub.java"/>
+    <suppress checks="MissingJavadocMethodCheck" files="./test/java/duke/task/DeadlineStub.java"/>
+</suppressions>
