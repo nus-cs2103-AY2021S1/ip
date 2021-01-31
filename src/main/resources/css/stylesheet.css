@@ -1,0 +1,45 @@
+.root {
+    -fx-font: 16px "Courier New";
+    -fx-background-image: url("/images/background.PNG");
+    -fx-background-size: stretch;
+}
+
+.scroll-pane {
+   -fx-background-color: transparent;
+}
+
+// Reused from https://stackoverflow.com/questions/40253661
+.scroll-pane > .viewport {
+   -fx-background-color: transparent;
+}
+
+.scroll-bar .thumb {
+   -fx-background-color: #303030;
+}
+
+.dialog-label {
+    -fx-text-fill: white;
+    -fx-padding: 10px;
+    -fx-background-radius: 10px;
+}
+
+.user-label {
+    -fx-background-color: #408040;
+}
+
+.bot-label {
+    -fx-background-color: #404080;
+}
+
+.text-field {
+    -fx-background-radius: 10px;
+}
+
+.button {
+    -fx-background-color: white;
+    -fx-background-radius: 10px;
+}
+
+.button:pressed {
+    -fx-background-color: lightsteelblue;
+}
