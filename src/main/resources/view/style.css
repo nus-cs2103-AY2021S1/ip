@@ -1,0 +1,10 @@
+.root {
+    -fx-background-image: url('back.jpg');
+    -fx-background-size: 100% 100%;
+}
+.scroll-pane {
+    -fx-background-color: transparent;
+}
+.scroll-pane > .viewport {
+    -fx-background-color: transparent;
+}

@@ -1,0 +1,8 @@
+7
+T|buy a new laptop|false
+E|x|true|y
+T|eat dinner|false
+T|eat breakfast|true
+T|eat eat|true
+T|add x|false
+T|add y|false
