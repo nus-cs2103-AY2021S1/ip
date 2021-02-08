@@ -15,12 +15,16 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
    1. Click `Open or Import`.
    1. Select the project directory, and click `OK`
    1. If there are any further prompts, accept the defaults.
-1. After the importing is complete, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()`. If the setup is correct, you should see something like the below:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+1. After the importing is complete, locate the `src/main/java/nite.Nite.java` file, right-click it, and choose `Run nite.Nite.main()`. If the setup is correct, you should see something like the below:
+   
+![Welcome Screen](docs/images/welcome.png)
+
+## Acknowledgements
+src/main/resources/audio/meow2.wav uses this sound from freesound:
+Cat meow by wesleyextreme_gamer (https://freesound.org/people/wesleyextreme_gamer/sounds/530341/)
+
+src/main/resources/images/blackcat_circle.png is edited from iStockPhoto:
+Black cat by sarayut (https://www.istockphoto.com/photo/closeup-portrait-black-cat-the-face-in-front-of-eyes-is-yellow-halloween-black-cat-gm901574784-248725535)
+
+src/main/resources/images/usercat_circle.png is edited from pixabay:
+Cat by ArtTower (https://pixabay.com/illustrations/fractal-cat-feline-portrait-animal-681584/)
