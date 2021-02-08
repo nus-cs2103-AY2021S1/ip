@@ -1,0 +1,32 @@
+AnchorPane {
+    -fx-font-size: 12px;
+    -fx-font-family: "Avenir";
+    -fx-background-color: #FFFFFF;
+    -fx-cursor: crosshair;
+}
+
+#userInput {
+    -fx-padding: 10px;
+    -fx-font-size: 12px;
+    -fx-background-color: #FFFFFF;
+}
+
+#sendButton {
+    -fx-border-radius: 2px;
+    -fx-border-color: #FFFFFF;
+    -fx-background-insets: 2px;
+    -fx-text-fill: #FFFFFF;
+    -fx-background-color: #4CAF50;
+}
+
+#sendButton:hover {
+    -fx-background-color: #3e8e41;
+    -fx-cursor: hand;
+}
+
+#dialogContainer {
+    -fx-padding: 10px;
+    -fx-background-color: #FFFFE0;
+    -fx-border-radius: 1px;
+    -fx-border-color: #8E9192;
+}
