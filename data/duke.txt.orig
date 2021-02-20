@@ -1,0 +1,9 @@
+T | 1 | a b c
+<<<<<<< HEAD
+E | 1 | a b c | sometime
+D | 1 | a b c | sometime
+T | 1 | a b c
+=======
+T | 1 | a b c
+E | 1 | a | 2014-12-07
+>>>>>>> branch-Level-8
