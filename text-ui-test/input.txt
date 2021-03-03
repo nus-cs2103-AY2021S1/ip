@@ -1,0 +1,4 @@
+todo wake up
+deadline eat lunch /by 12pm
+event work /at 2pm
+bye
