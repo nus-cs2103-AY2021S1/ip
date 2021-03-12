@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <Label fx:id="dialog" style="-fx-background-image: url('/images/g1.png'); -fx-border-color: #00FDFF; -fx-border-radius: 10; -fx-border-width: 1.3;" text="Label" wrapText="true">
+         <font>
+            <Font name="Consolas Bold" size="12.0" />
+         </font>
+         <HBox.margin>
+            <Insets left="5.0" right="5.0" />
+         </HBox.margin>
+         <padding>
+            <Insets left="5.0" right="5.0" />
+         </padding>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="1.0" />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.18666667">
+                     <color>
+                        <Color red="0.949999988079071" green="1.0" />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.35333333">
+                     <color>
+                        <Color red="0.08501805365085602" green="1.0" />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.52">
+                     <color>
+                        <Color green="0.9921568632125854" blue="1.0" />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.68666667">
+                     <color>
+                        <Color red="0.15000000596046448" blue="1.0" />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.85333334">
+                     <color>
+                        <Color red="1.0" blue="0.7166666388511658" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="1.0" blue="0.7166666388511658" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
+         <effect>
+            <ColorAdjust contrast="1.0" saturation="1.0" />
+         </effect></Label>
+        <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" />
+    </children>
+    <padding>
+        <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
+    </padding>
+   <effect>
+      <Glow />
+   </effect>
+</fx:root>
