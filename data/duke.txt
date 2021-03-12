@@ -1,0 +1,3 @@
+[T][0] watch anime
+[E][1] birthday party (at: Jun 17 2020)
+[D][0] assignment 1 (by: Sep 20 2020)
