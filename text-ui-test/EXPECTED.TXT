@@ -1,7 +1,165 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+File successfully loaded!
+ _____  _     _____ _____  _____
+/  _  \| |   |_   _/  __ \|  ___|
+| |_| || |     | | | /  \/| |__
+|  _  || |     | | | |    |  __|
+| | | || |_____| |_| \__/\| |___
+\_| |_/\_____/\___/ \____/\____/
 
+Hello! I'm Alice
+How can I help you today?
+____________________________________________________________
+ > ____________________________________________________________
+Are you sure you want to clear all tasks? [Y/N]
+____________________________________________________________
+ > ____________________________________________________________
+All tasks successfully cleared!
+____________________________________________________________
+ > ____________________________________________________________
+Are you sure you want to clear all tasks? [Y/N]
+____________________________________________________________
+ > ____________________________________________________________
+Clear command aborted!
+____________________________________________________________
+ > ____________________________________________________________
+You have no tasks at the moment.
+____________________________________________________________
+ > ____________________________________________________________
+Roger. I've added the task to your list:
+    [T][X] borrow book
+Now you have 1 tasks in your list
+____________________________________________________________
+ > ____________________________________________________________
+Roger. I've added the deadline to your list:
+    [D][X] return book (by: Monday, Dec 14 2020, 2am)
+Now you have 2 tasks in your list
+____________________________________________________________
+ > ____________________________________________________________
+Roger. I've added the event to your list:
+    [E][X] project meeting (on: Tuesday, Dec 03 2019)
+Now you have 3 tasks in your list
+____________________________________________________________
+ > ____________________________________________________________
+Roger. I've added the deadline to your list:
+    [D][X] homework (by: Sunday, Aug 02 2020, 11pm)
+Now you have 4 tasks in your list
+____________________________________________________________
+ > ____________________________________________________________
+Here are the tasks in your list:
+1. [T][X] borrow book
+2. [D][X] return book (by: Monday, Dec 14 2020, 2am)
+3. [E][X] project meeting (on: Tuesday, Dec 03 2019)
+4. [D][X] homework (by: Sunday, Aug 02 2020, 11pm)
+____________________________________________________________
+ > ____________________________________________________________
+Great work! I've marked this task as done:
+    [E][O] project meeting (on: Tuesday, Dec 03 2019)
+____________________________________________________________
+ > ____________________________________________________________
+Great work! I've marked this task as done:
+    [T][O] borrow book
+____________________________________________________________
+ > ____________________________________________________________
+Here are the tasks that matches your search:
+1. [T][O] borrow book
+2. [D][X] return book (by: Monday, Dec 14 2020, 2am)
+____________________________________________________________
+ > ____________________________________________________________
+Here are the tasks that matches your search:
+1. [T][O] borrow book
+2. [D][X] return book (by: Monday, Dec 14 2020, 2am)
+3. [E][O] project meeting (on: Tuesday, Dec 03 2019)
+____________________________________________________________
+ > ____________________________________________________________
+!! Sorry I cannot register that command!
+Use 'help' command to see the lists of available command
+____________________________________________________________
+ > ____________________________________________________________
+!! Sorry I cannot register that command!
+Use 'help' command to see the lists of available command
+____________________________________________________________
+ > ____________________________________________________________
+Great work! I've marked this task as done:
+    [D][O] homework (by: Sunday, Aug 02 2020, 11pm)
+____________________________________________________________
+ > ____________________________________________________________
+!! Failed to mark task as done. That task number does not exist.
+____________________________________________________________
+ > ____________________________________________________________
+!! Don't play around. Give me a proper number!
+____________________________________________________________
+ > ____________________________________________________________
+!! The todo description cannot be left empty.
+____________________________________________________________
+ > ____________________________________________________________
+!! The deadline description cannot be left empty.
+____________________________________________________________
+ > ____________________________________________________________
+!! You cannot create an deadline without the date.
+____________________________________________________________
+ > ____________________________________________________________
+!! Invalid datetime! Please use 24h format for time
+____________________________________________________________
+ > ____________________________________________________________
+!! I can't find the deadline date. Did you forget to add '/by'?
+____________________________________________________________
+ > ____________________________________________________________
+!! The event description cannot be left empty.
+____________________________________________________________
+ > ____________________________________________________________
+!! I can't find the date/time of the event. Did you forget to add '/on'?
+____________________________________________________________
+ > ____________________________________________________________
+!! I can't find the date/time of the event. Did you forget to add '/on'?
+____________________________________________________________
+ > ____________________________________________________________
+Here are the tasks in your list:
+1. [T][O] borrow book
+2. [D][X] return book (by: Monday, Dec 14 2020, 2am)
+3. [E][O] project meeting (on: Tuesday, Dec 03 2019)
+4. [D][O] homework (by: Sunday, Aug 02 2020, 11pm)
+____________________________________________________________
+ > ____________________________________________________________
+Roger. I've added the task to your list:
+    [T][X] return book
+Now you have 5 tasks in your list
+____________________________________________________________
+ > ____________________________________________________________
+Here are the tasks in your list:
+1. [T][O] borrow book
+2. [D][X] return book (by: Monday, Dec 14 2020, 2am)
+3. [E][O] project meeting (on: Tuesday, Dec 03 2019)
+4. [D][O] homework (by: Sunday, Aug 02 2020, 11pm)
+5. [T][X] return book
+____________________________________________________________
+ > ____________________________________________________________
+These are the commands in my dictionary:
+    [list, ls]                          | Lists all tasks
+    [find, search] <keyword(s)>         | Find tasks using keywords
+    [clear, clr]                        | Clear all tasks
+    [done] <task number>                | Mark a task as done
+    [delete] <task number>              | Delete a task
+    [todo] <desc>                       | Create a todo task. Example: todo homework1
+    [deadline] <desc> /by <datetime>    | Create a task with a deadline. Example: deadline assignment /by 10-Aug 2359
+    [event] <desc> /on <datetime>       | Create an event. Example: event party /on 13-Feb-2020 2359
+    [help]                              | Gets the list of commands
+    [bye, exit]                         | Exits ALICE program
+____________________________________________________________
+ > ____________________________________________________________
+Roger. I've removed this task from your list:
+    [T][O] borrow book
+Now you have 4 task in your list
+____________________________________________________________
+ > ____________________________________________________________
+!! Don't play around. Give me a proper number!
+____________________________________________________________
+ > ____________________________________________________________
+Here are the tasks in your list:
+1. [D][X] return book (by: Monday, Dec 14 2020, 2am)
+2. [E][O] project meeting (on: Tuesday, Dec 03 2019)
+3. [D][O] homework (by: Sunday, Aug 02 2020, 11pm)
+4. [T][X] return book
+____________________________________________________________
+ > ____________________________________________________________
+Goodbye. Hope to see you again soon!
+____________________________________________________________
