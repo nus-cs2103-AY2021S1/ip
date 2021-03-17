@@ -1,26 +1,132 @@
-# Duke project template
+# User Guide
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+## Features 
 
-## Setting up in Intellij
+### Dynamic operations
+Ability to add, delete, update as well as find tasks
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+## Usage
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project dialog first)
-1. Set up the correct JDK version, as follows:
-   1. Click `Configure` > `Structure for New Projects` and then `Project Settings` > `Project` > `Project SDK`
-   1. If JDK 11 is listed in the drop down, select it. If it is not, click `New...` and select the directory where you installed JDK 11
-   1. Click `OK`
-1. Import the project into Intellij as follows:
-   1. Click `Open or Import`.
-   1. Select the project directory, and click `OK`
-   1. If there are any further prompts, accept the defaults.
-1. After the importing is complete, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()`. If the setup is correct, you should see something like the below:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+### `LIST` - LISTS ALL TASKS
+
+Lists all the tasks inputted by the user.
+
+Example of usage: 
+
+`list`
+
+Expected outcome:
+
+`1. [T][Not Done] help me out`
+
+`2. [D][Donezo] buy groceries (by: Jul 20 2020, 3:00pm)`
+
+`3. [E][Not Done] party hard (at: Jul 20 2020, 3:00pm)` 
+
+
+
+### `DONE [INT]` - MARKS A TASK AS DONE
+
+Marks a task as done based on the number provided by the user
+
+Example of usage:
+
+`done 1`
+
+Expected outcome:
+
+`Nice! I've marked this task as done: 
+[D][Donezo]update todos (by: 23/02/2020 21:22).`
+` Now you have 7 tasks in the list` 
+
+### `DELETE [INT]` - DELETES A TASK FROM THE LIST
+
+Deletes the task found at the number provided by the user
+
+Example of usage:
+
+`delete 1`
+
+Expected outcome:
+
+`The event has been removed as per your request:`
+
+`[D][Donezo]update todos (by: 23/02/2020 21:22).`
+
+`Now you have 6 tasks to the list`
+
+### `DEADLINE [STRING] /BY DD-MM-YYYY HH:MM `- CREATE A DEADLINE TASK
+
+Creates and adds a deadline task at the given date and time
+
+Example of usage:
+
+`deadline get out in front /by  22/02/2020 23:45`
+
+Expected outcome:
+
+`[D][Not Done] get out in front (by: 22/02/2020 23:45) has been added to the list. You have 7 tasks left to do.`
+
+### `EVENT [STRING] /AT DD-MM-YYYY HH:MM `- CREATE AN EVENT TASK
+
+Creates and adds an event task at the given date and time
+
+Example of usage:
+
+`event get out in front /at  22/02/2020 23:45`
+
+Expected outcome:
+
+`[E][Not Done] get out in front (at: 22/02/2020 23:45) has been added to the list. You have 8 tasks left to do` 
+
+### `TODO [STRING]`- CREATE A TODO TASK
+
+Creates and adds a todo task with given description
+
+Example of usage:
+
+`todo get groceries`
+
+Expected outcome:
+
+`[T][Not Done] get groceries has been added to the list. You have 9 tasks left to do`
+
+### `FIND[STRING] `- FIND TASKS BASED ON KEYWORD
+
+Finds and displays all the tasks which contain an user-inputted keyword
+
+Example of usage:
+
+`find portfolio`
+
+Expected outcome:
+
+`[D][Not Done] portfolio now (by: 23/02/2020 12:12) contain portolio`
+
+### `UPDATE [INT][STRING] `- UPDATE TASKS
+
+Updates task at the integer provided by the within the user input
+
+Example of usage:
+
+`update 2 date 24/2/2020 23:23`
+
+Expected outcome:
+
+`[E][Donezo] portfolio now (at: 23/02/2020 12:12) has been updated to`
+
+`[E][Donezo] portfolio now (at: 24/02/2020 23:23)`
+
+ `
+
+### `NUMBER`- NUMBER OF TASKS IN THE LIST
+
+Displays the number of tasks in the list
+
+Example of usage:
+
+`number`
+
+Expected outcome:
+
+`Number of tasks to do is 7`
