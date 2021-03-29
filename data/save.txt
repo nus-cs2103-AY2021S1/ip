@@ -1,0 +1,3 @@
+T | 0 | mop the floor
+D | 0 | finish assignment | 2020-05-19 2000
+T | 0 | empty the trash

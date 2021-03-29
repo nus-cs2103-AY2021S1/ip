@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Main-Class: 
+Class-Path: junit-jupiter-engine-5.5.0.jar javafx-base-11.jar javafx-bas
+ e-11-mac.jar javafx-fxml-11-mac.jar javafx-graphics-11.jar javafx-graph
+ ics-11-win.jar javafx-controls-11-mac.jar junit-platform-commons-1.5.0.
+ jar javafx-base-11-win.jar javafx-base-11-linux.jar javafx-controls-11.
+ jar apiguardian-api-1.1.0.jar javafx-fxml-11-linux.jar javafx-graphics-
+ 11-linux.jar javafx-controls-11-linux.jar javafx-controls-11-win.jar ja
+ vafx-fxml-11-win.jar junit-platform-engine-1.5.0.jar opentest4j-1.2.0.j
+ ar javafx-graphics-11-mac.jar junit-jupiter-api-5.5.0.jar
+

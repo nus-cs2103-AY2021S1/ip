@@ -5,3 +5,16 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+Hello! I'm Bob
+What can I do for you?
+Got it! I have added a new task to the list.
+added: [✘] borrow book
+Got it! I have added a new task to the list.
+added: [✘] return book  (by: Sunday)
+Got it! I have added a new task to the list.
+added: [✘] project meeting  (at: Mon 2-4pm)
+1.[✘] borrow book
+2.[✘] return book  (by: Sunday)
+3.[✘] project meeting  (at: Mon 2-4pm)
+Sorry, I do not understand your request.
+Bye! Hope to see you again.
