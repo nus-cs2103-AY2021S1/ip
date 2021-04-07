@@ -1,0 +1,8 @@
+D, 0, CS2105 Assignment , 2020-09-18
+D, 1, CS2100 Assignment , 2020-09-12
+D, 0, Submit iP , 2020-09-18
+D, 0, Feedback Triangulation , 2020-09-19
+T, 0, Send email to prof
+E, 0, House Gathering , 2020-09-16 2100
+T, 0, Buy present for brother
+E, 0, CS2103 Assignment Meeting , 2020-09-17 1400
