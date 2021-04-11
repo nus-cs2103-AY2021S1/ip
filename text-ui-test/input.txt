@@ -1,0 +1,12 @@
+todo todo
+event event at 2020-08-10
+event event /at some date
+deadline deadline /by some date
+done 0
+done two
+done 2
+list
+delete 200
+delete 1
+list
+bye
