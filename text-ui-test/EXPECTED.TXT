@@ -1,7 +1,165 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+-------------------------------------
+Greetings! I am Duke.
+What can I do for you?
+-------------------------------------
+-------------------------------------
+Hmm I didn't quite catch that.
+Was the command valid?
+-------------------------------------
+-------------------------------------
+Hmm I didn't quite catch that.
+Did you provide any description for this todo task?
+-------------------------------------
+-------------------------------------
+Successfully added todo:
+[✘] | T | test
+-------------------------------------
+-------------------------------------
+Successfully added todo:
+[✘] | T | read book
+-------------------------------------
+-------------------------------------
+You have 2 items.
 
+1: [✘] | T | test
+2: [✘] | T | read book
+-------------------------------------
+-------------------------------------
+Successfully added event:
+[✘] | E | meeting | At: 30 Jul 20 15:00
+-------------------------------------
+-------------------------------------
+Successfully added event:
+[✘] | E | lunch with friends | At: 17 Jul 20 15:00
+-------------------------------------
+-------------------------------------
+Hmm I didn't quite catch that.
+Please provide a valid event date in DD/MM/YYYY HH:mm format.
+-------------------------------------
+-------------------------------------
+You have 4 items.
+
+1: [✘] | T | test
+2: [✘] | T | read book
+3: [✘] | E | meeting | At: 30 Jul 20 15:00
+4: [✘] | E | lunch with friends | At: 17 Jul 20 15:00
+-------------------------------------
+-------------------------------------
+Successfully added deadline:
+[✘] | D | quiz1 | By: 30 Aug 20 23:59
+-------------------------------------
+-------------------------------------
+Successfully added deadline:
+[✘] | D | quiz2 submission | By: 29 Aug 20 22:00
+-------------------------------------
+-------------------------------------
+Hmm I didn't quite catch that.
+Please provide a valid deadline in DD/MM/YYYY HH:mm format."
+-------------------------------------
+-------------------------------------
+You have 6 items.
+
+1: [✘] | T | test
+2: [✘] | T | read book
+3: [✘] | E | meeting | At: 30 Jul 20 15:00
+4: [✘] | E | lunch with friends | At: 17 Jul 20 15:00
+5: [✘] | D | quiz1 | By: 30 Aug 20 23:59
+6: [✘] | D | quiz2 submission | By: 29 Aug 20 22:00
+-------------------------------------
+-------------------------------------
+Hmm I didn't quite catch that.
+Did you provide a valid index?
+-------------------------------------
+-------------------------------------
+Hmm I didn't quite catch that.
+Did you provide a valid index?
+-------------------------------------
+-------------------------------------
+Nice! I've marked this task as done:
+[✓] | T | test
+-------------------------------------
+-------------------------------------
+You have 6 items.
+
+1: [✓] | T | test
+2: [✘] | T | read book
+3: [✘] | E | meeting | At: 30 Jul 20 15:00
+4: [✘] | E | lunch with friends | At: 17 Jul 20 15:00
+5: [✘] | D | quiz1 | By: 30 Aug 20 23:59
+6: [✘] | D | quiz2 submission | By: 29 Aug 20 22:00
+-------------------------------------
+-------------------------------------
+Nice! I've marked this task as done:
+[✓] | E | meeting | At: 30 Jul 20 15:00
+-------------------------------------
+-------------------------------------
+You have 6 items.
+
+1: [✓] | T | test
+2: [✘] | T | read book
+3: [✓] | E | meeting | At: 30 Jul 20 15:00
+4: [✘] | E | lunch with friends | At: 17 Jul 20 15:00
+5: [✘] | D | quiz1 | By: 30 Aug 20 23:59
+6: [✘] | D | quiz2 submission | By: 29 Aug 20 22:00
+-------------------------------------
+-------------------------------------
+Nice! I've marked this task as done:
+[✓] | T | test
+-------------------------------------
+-------------------------------------
+You have 6 items.
+
+1: [✓] | T | test
+2: [✘] | T | read book
+3: [✓] | E | meeting | At: 30 Jul 20 15:00
+4: [✘] | E | lunch with friends | At: 17 Jul 20 15:00
+5: [✘] | D | quiz1 | By: 30 Aug 20 23:59
+6: [✘] | D | quiz2 submission | By: 29 Aug 20 22:00
+-------------------------------------
+-------------------------------------
+Hmm I didn't quite catch that.
+Did you provide a valid index?
+-------------------------------------
+-------------------------------------
+Hmm I didn't quite catch that.
+Did you provide a valid index?
+-------------------------------------
+-------------------------------------
+Noted. I've deleted this task:
+[✓] | T | test
+-------------------------------------
+-------------------------------------
+You have 5 items.
+
+1: [✘] | T | read book
+2: [✓] | E | meeting | At: 30 Jul 20 15:00
+3: [✘] | E | lunch with friends | At: 17 Jul 20 15:00
+4: [✘] | D | quiz1 | By: 30 Aug 20 23:59
+5: [✘] | D | quiz2 submission | By: 29 Aug 20 22:00
+-------------------------------------
+-------------------------------------
+Noted. I've deleted this task:
+[✘] | E | lunch with friends | At: 17 Jul 20 15:00
+-------------------------------------
+-------------------------------------
+You have 4 items.
+
+1: [✘] | T | read book
+2: [✓] | E | meeting | At: 30 Jul 20 15:00
+3: [✘] | D | quiz1 | By: 30 Aug 20 23:59
+4: [✘] | D | quiz2 submission | By: 29 Aug 20 22:00
+-------------------------------------
+-------------------------------------
+Noted. I've deleted this task:
+[✘] | D | quiz1 | By: 30 Aug 20 23:59
+-------------------------------------
+-------------------------------------
+You have 3 items.
+
+1: [✘] | T | read book
+2: [✓] | E | meeting | At: 30 Jul 20 15:00
+3: [✘] | D | quiz2 submission | By: 29 Aug 20 22:00
+-------------------------------------
+-------------------------------------
+Bye! See you around!
+-------------------------------------

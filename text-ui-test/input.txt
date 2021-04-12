@@ -1,0 +1,30 @@
+this should be rejected
+todo
+todo test
+todo read book
+list
+event meeting /at 30/07/2020 15:00
+event lunch with friends /at 17/07/2020 15:00
+event dinner with friends /at unknown time
+list
+deadline quiz1 /by 30/08/2020 23:59
+deadline quiz2 submission /by 29/08/2020 22:00
+deadline quiz3 submission /by unknown time
+list
+done 0
+done 100
+done 1
+list
+done 3
+list
+done 1
+list
+delete 0
+delete 100
+delete 1
+list
+delete 3
+list
+delete 3
+list
+bye
