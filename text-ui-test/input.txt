@@ -1,0 +1,7 @@
+todo borrow book
+deadline return book /by 08/10/2020 1800
+list
+event project meeting /at 08/10/2020 2000
+delete 1
+list
+bye
