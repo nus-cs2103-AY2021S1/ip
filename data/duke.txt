@@ -1,0 +1,68 @@
+T | 1 | live life
+T | 1 | enjoy life
+E | 1 | concert | Sep 2 2020
+T | 0 | cum
+T | 1 | enjoy life
+E | 1 | concert | Sep 2 2020
+T | 1 | enjoy life
+T | 1 | live life
+T | 1 | enjoy life
+T | 1 | live life
+T | 1 | enjoy life
+T | 1 | live life
+T | 1 | enjoy life
+D | 0 | homework | Sep 2 2020
+T | 1 | live life
+T | 1 | live life
+T | 1 | enjoy life
+T | 1 | read a book
+T | 0 | borrow book
+T | 1 | enjoy life
+T | 1 | enjoy life
+T | 1 | enjoy life
+T | 1 | live life
+D | 0 | homework Aug 8 2020E | 1 | concert Aug 8 2019
+T | 1 | live life
+D | 0 | homework Aug 8 2020E | 0 | concert Jul 7 2020T | 1 | enjoy life
+T | 1 | live life
+T | 1 | live life
+T | 1 | live life
+T | 1 | live life
+T | 1 | live life
+T | 1 | live life
+T | 1 | live life
+T | 1 | live life
+T | 1 | enjoy life
+T | 1 | enjoy life
+T | 1 | live life
+T | 1 | live life
+T | 1 | live life
+T | 1 | enjoy life
+D | 0 | homework Aug 8 2020T | 1 | enjoy life
+T | 0 | Austin 3:16 says I just whooped your ass
+T | 1 | live life
+T | 1 | live life
+T | 1 | enjoy life
+T | 0 | live life
+T | 0 | live life
+T | 1 | Get abs
+D | 0 | CS2103 homework Aug 8 2020E | 0 | Concert Aug 10 2020
+T | 0 | live life
+T | 0 | live life
+T | 0 | live life
+T | 0 | read book
+T | 0 | Read book
+D | 0 | Homework Aug 8 2020D | 0 | Do CS2100 homework Aug 8 2020E | 0 | Foo Fighters concert Jul 12 2020T | 0 | live life
+T | 0 | live life
+T | 0 | royal rumble
+T | 0 | read book
+T | 0 | read book
+T | 0 | read book
+D | 0 | return book Aug 8 2020T | 0 | read book
+T | 0 | return book
+T | 0 | read book
+T | 0 | return book
+T | 0 | read book
+T | 0 | read book
+T | 0 | Read book
+D | 0 | Return books Aug 8 2020E | 0 | Concert May 5 2021
