@@ -1,0 +1,11 @@
+todo read
+deadline return book /by Sunday
+event go out /at Sunday 4-5pm
+list
+done 2
+list
+delete 2
+list
+todo
+asdf
+bye
