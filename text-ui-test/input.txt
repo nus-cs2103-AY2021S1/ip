@@ -1,0 +1,9 @@
+todo CS2103T indiv project
+todo sleep
+list
+deadline CS3243 tut /by Sunday
+event project meeting /at Thursday 2-4pm
+list
+done 1
+list
+bye
