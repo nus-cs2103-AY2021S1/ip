@@ -1,10 +1,20 @@
 public class Duke {
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+
+    private static TaskList taskList = new TaskList();
+
+    /**
+     * Initialises the application by attempting to load a savefile and assign a new taskList from it.
+     */
+    public void initialise() {
+        try {
+            taskList = Storage.loadFromMem();
+        } catch (DukeException e) {
+            Ui.printWithLines(e.toString() + "\n");
+        }
     }
+
+    public void getResponse() {
+        Ui.startInput(taskList);
+    }
+
 }
