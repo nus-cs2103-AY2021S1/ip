@@ -1,7 +1,184 @@
-Hello from
+
+ Always at your service, 
  ____        _        
 |  _ \ _   _| | _____ 
 | | | | | | | |/ / _ \
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
+
+
+Your Majesty, I am your loyal Duke.
+I offer a range of administrative services. Do type 'assist' to see the comprehensive list.
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Greetings, Your Majesty. 
+
+Use any of the commands on the left to access my quality services:
+	todo [TASK]: Adds a todo to your scroll
+	deadline [TASK] /by [DATE AND/OR TIME]: Adds a deadline to your scroll
+	event [TASK] /on [DATE AND/OR TIME]: Adds an event to your scroll
+	scroll: Displays your scroll - your list of tasks
+	conquer [NUMBER]: Marks the particular item on your scroll as DONE
+	delete [NUMBER]: Deletes the particular item from your scroll
+	find [KEYWORD]: Returns a list of relevant items on your scroll
+	dismiss: This will be my cue to leave.
+
+Now, how may I serve you?
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Your Majesty, I've added the writing:
+	[T][✘] read book
+You have 1 writing(s) on your scroll as of now. 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Your Majesty, I've added the writing:
+	[D][✘] return book  (by: Jan 1 2020)
+You have 2 writing(s) on your scroll as of now. 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Your current scroll, Your Majesty:
+	1.[T][✘] read book
+	2.[D][✘] return book  (by: Jan 1 2020)
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Your current scroll, Your Majesty:
+	1.[T][✘] read book
+	2.[D][✘] return book  (by: Jan 1 2020)
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+As you wish, Your Majesty. I have marked this as conquered.
+	[T][✓] read book
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Your current scroll, Your Majesty:
+	1.[T][✓] read book
+	2.[D][✘] return book  (by: Jan 1 2020)
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+As you wish, Your Majesty. I have marked this as conquered.
+	[D][✓] return book  (by: Jan 1 2020)
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Your current scroll, Your Majesty:
+	1.[T][✓] read book
+	2.[D][✓] return book  (by: Jan 1 2020)
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+Your Majesty, there's no such agenda in my detailed records.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Your Majesty, I've added the writing:
+	[E][✘] arts experience  (by: Apr 2 2020, 6:00 pm)
+You have 3 writing(s) on your scroll as of now. 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Your current scroll, Your Majesty:
+	1.[T][✓] read book
+	2.[D][✓] return book  (by: Jan 1 2020)
+	3.[E][✘] arts experience  (by: Apr 2 2020, 6:00 pm)
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+I'm afraid I do not understand that command, Your Majesty.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+Do give me more details about this event, Your Majesty.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+Do give me more details about this todo, Your Majesty.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+Do give me more details about this deadline, Your Majesty.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+Use /by for deadlines, Your Majesty.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+Use /on for events, Your Majesty.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+Do give me more details about this deadline, Your Majesty.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+Do give me more details about this event, Your Majesty.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+Please enter valid numbers after your command, Your Majesty.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+Please enter valid numbers after your command, Your Majesty.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+Please enter valid numbers after your command, Your Majesty.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+Please enter valid numbers after your command, Your Majesty.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+Please enter valid numbers after your command, Your Majesty.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+Please enter valid numbers after your command, Your Majesty.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+Do give me more details about this todo, Your Majesty.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+Come again, Your Majesty?
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+As you wish, Your Majesty. I have removed this writing.
+	[D][✓] return book  (by: Jan 1 2020)
+You have 2 writing(s) on your scroll as of now. 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+As you wish, Your Majesty. I have marked this as conquered.
+	[T][✓] read book
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Your current scroll, Your Majesty:
+	1.[T][✓] read book
+	2.[E][✘] arts experience  (by: Apr 2 2020, 6:00 pm)
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+Do give me more details about this todo, Your Majesty.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Your Majesty, I've added the writing:
+	[T][✘] return book
+You have 3 writing(s) on your scroll as of now. 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+As you wish, Your Majesty. I have marked this as conquered.
+	[E][✓] arts experience  (by: Apr 2 2020, 6:00 pm)
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+As you wish, Your Majesty. I have removed this writing.
+	[T][✓] read book
+You have 2 writing(s) on your scroll as of now. 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Your current scroll, Your Majesty:
+	1.[E][✓] arts experience  (by: Apr 2 2020, 6:00 pm)
+	2.[T][✘] return book
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Your wish is my command, Your Majesty. Till I see you again. 
 

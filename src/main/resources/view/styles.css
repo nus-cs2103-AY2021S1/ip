@@ -1,0 +1,25 @@
+#anchor {
+    -fx-background-image: url("../images/Background.jpg");
+    -fx-background-size: cover;
+ }
+
+ #welcomeMessage {
+    -fx-text-fill: white;
+    -fx-text-alignment: center;
+    -fx-font-family: 'Rye';
+ }
+
+
+#dialog {
+    -fx-text-fill: white;
+    -fx-font-family: 'Rye';
+    -fx-font-size: 12;
+}
+
+.scroll-pane {
+    -fx-background-color: transparent;
+}
+
+.scroll-pane .viewport {
+    -fx-background-color: transparent;
+}

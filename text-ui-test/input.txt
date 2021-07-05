@@ -1,0 +1,37 @@
+assist
+todo read book
+deadline return book /by 2020-01-01
+scroll
+scROLL
+conquer 1
+scroll
+conquer 2
+scroll 
+conquer 3
+event arts experience /on 2020-04-02 18:00
+scroll
+list
+event
+todo
+deadline
+deadline code /for Monday
+event hackathon /by Tuesday
+deadline     
+event    
+conquer $$$
+delete fbeg
+conquer
+delete
+conquer 
+delete 
+todo   
+       
+delete 2
+conquer 1
+scroll 
+  todo 
+  todo return book
+  conquer   2
+  delete  1
+ scroll
+dismiss
