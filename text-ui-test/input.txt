@@ -1,0 +1,7 @@
+todo cs2107 assignment
+deadline cs2100 lab /by Sunday
+event cs2101 project meeting /at Tues 10-12pm
+list
+done 1
+list
+bye

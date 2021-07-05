@@ -1,7 +1,20 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+Hello, I'm Eggy!
+How may I help you?
+Added this task to your list:
+[T][✘] cs2107 assignment
+You now have 1 task in the list!
+Added this task to your list:
+[D][✘] cs2100 lab (by: Sunday)
+You now have 2 tasks in the list!
+Added this task to your list:
+[E][✘] cs2101 project meeting (at: Tues 10-12pm)
+You now have 3 tasks in the list!
+1: [T][✘] cs2107 assignment
+2: [D][✘] cs2100 lab (by: Sunday)
+3: [E][✘] cs2101 project meeting (at: Tues 10-12pm)
+Nice! I've marked this task as done: 
+[T][✓] cs2107 assignment
+1: [T][✓] cs2107 assignment
+2: [D][✘] cs2100 lab (by: Sunday)
+3: [E][✘] cs2101 project meeting (at: Tues 10-12pm)
+Bye, see you soon!
