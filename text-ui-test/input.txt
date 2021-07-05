@@ -1,0 +1,25 @@
+list
+date 27-08-2020
+todo cs2105 lecture
+event cs2030 TA meeting /at 24-08-2020 16:00
+list
+deadline cs2030 /by 27-08-2020 09:00
+list
+date 27-08-2020
+event test /at 27-08-2020
+event test /at 27-08-2020 7:00
+event test /at 27-08-2020 07:00
+event test /at 27-8-2020 7:00
+event test /at 27-08-2020 7:00
+event test /at 7-08-2020 7:00
+event test /at 07-08-2020 7:00
+list
+date 07-08-2020
+date 27-08-2020
+list
+delete 9
+list
+date 07-8-2020
+date 7-8-2020
+date 7-08-2020
+bye
