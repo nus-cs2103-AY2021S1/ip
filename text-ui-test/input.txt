@@ -1,0 +1,17 @@
+todo go to fairprice
+event CS2103 lecture / 2020-08-01
+deadline CS2103 project submission /    2020-08-01
+deadline CS2103 tP /2020-08-01
+list
+done 1
+list
+todo 
+event CS2103
+deadline a
+done
+hahahhahahhahaa
+delete 2
+find CS2103
+find
+list
+bye
