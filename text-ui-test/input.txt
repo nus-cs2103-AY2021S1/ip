@@ -1,0 +1,27 @@
+todo read book
+deadline return book /by 2000-06-06
+event project meeting /at 2010-08-06
+todo join sports club
+done 1
+done 4
+todo buy book
+list
+deadline borrow book /by 2020-04-22
+event birthday /at 2010-08-06
+view 2010-08-06
+find book
+todo
+deadline
+event
+deadline /by 
+deadline test /by
+event /at 
+event test /at
+done      
+done qqqq
+done 80
+delete 3
+delete        
+delete 45
+
+bye
