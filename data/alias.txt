@@ -1,0 +1,10 @@
+b|bye
+t|todo
+d|deadline
+e|event
+f|find
+md|done
+del|delete
+l|list
+da|deletealias
+li|list
