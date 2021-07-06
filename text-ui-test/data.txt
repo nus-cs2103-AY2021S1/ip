@@ -1,0 +1,2 @@
+T | false |  borrow book
+D | true |  return book | Sunday
