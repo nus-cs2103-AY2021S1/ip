@@ -1,0 +1,26 @@
+list
+todo
+go running
+event
+concert /at 02/02/20 18:00
+deadline
+cs2103 proj /by 02/03/20 23:59
+list
+done
+3 1
+list
+blah
+delete
+2 99
+delete
+1 2
+list
+help
+event
+briefing at 07/01/20 14:00
+briefing /at
+briefing /at 07/01/20 14:00
+list
+find
+briefing
+bye
