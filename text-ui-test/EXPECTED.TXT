@@ -1,7 +1,156 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+    ________________________________________________________
+     Gomen nasai~ Neko-chan thinks she lost her memory... Let me start afresh.
+    ________________________________________________________
+
+    ________________________________________________________
+     Konnichinyaa!
+     What can Neko-chan do for you?
+    ________________________________________________________
+
+    ________________________________________________________
+     Hai hai~ Neko-chan has added this task:
+     [T][✘] borrow book
+     Neko-chan now knows 1 thing.
+    ________________________________________________________
+
+    ________________________________________________________
+     Hai hai~ Neko-chan has added this task:
+     [T][✘] read book
+     Neko-chan now knows 2 things.
+    ________________________________________________________
+
+    ________________________________________________________
+     Hai hai~ Neko-chan has added this task:
+     [D][✘] return book (by: 14 Aug 2019)
+     Neko-chan now knows 3 things.
+    ________________________________________________________
+
+    ________________________________________________________
+     Here's everything Neko-chan knows:
+     1. [T][✘] borrow book
+     2. [T][✘] read book
+     3. [D][✘] return book (by: 14 Aug 2019)
+    ________________________________________________________
+
+    ________________________________________________________
+     Hai hai~ Neko-chan has added this task:
+     [E][✘] celebrate birthday (on 22 Aug 2020 for all day)
+     Neko-chan now knows 4 things.
+    ________________________________________________________
+
+    ________________________________________________________
+     Hai hai~ Neko-chan has added this task:
+     [E][✘] CS2103T lecture (from 28 Aug 2020 16:00 to 28 Aug 2020 18:00)
+     Neko-chan now knows 5 things.
+    ________________________________________________________
+
+    ________________________________________________________
+     Hai hai~ Neko-chan has added this task:
+     [E][✘] weekend (from 29 Aug 2020 to 31 Aug 2020)
+     Neko-chan now knows 6 things.
+    ________________________________________________________
+
+    ________________________________________________________
+     Here's everything Neko-chan knows:
+     1. [T][✘] borrow book
+     2. [T][✘] read book
+     3. [D][✘] return book (by: 14 Aug 2019)
+     4. [E][✘] celebrate birthday (on 22 Aug 2020 for all day)
+     5. [E][✘] CS2103T lecture (from 28 Aug 2020 16:00 to 28 Aug 2020 18:00)
+     6. [E][✘] weekend (from 29 Aug 2020 to 31 Aug 2020)
+    ________________________________________________________
+
+    ________________________________________________________
+     Gomen nasai~ Wakarimasen~
+    ________________________________________________________
+
+    ________________________________________________________
+     Here's everything Neko-chan knows:
+     1. [T][✘] borrow book
+     2. [T][✘] read book
+     3. [D][✘] return book (by: 14 Aug 2019)
+     4. [E][✘] celebrate birthday (on 22 Aug 2020 for all day)
+     5. [E][✘] CS2103T lecture (from 28 Aug 2020 16:00 to 28 Aug 2020 18:00)
+     6. [E][✘] weekend (from 29 Aug 2020 to 31 Aug 2020)
+    ________________________________________________________
+
+    ________________________________________________________
+     Gomen nasai~ Wakarimasen~
+    ________________________________________________________
+
+    ________________________________________________________
+     Here's everything Neko-chan knows:
+     1. [T][✘] borrow book
+     2. [T][✘] read book
+     3. [D][✘] return book (by: 14 Aug 2019)
+     4. [E][✘] celebrate birthday (on 22 Aug 2020 for all day)
+     5. [E][✘] CS2103T lecture (from 28 Aug 2020 16:00 to 28 Aug 2020 18:00)
+     6. [E][✘] weekend (from 29 Aug 2020 to 31 Aug 2020)
+    ________________________________________________________
+
+    ________________________________________________________
+     Gomen nasai~ Wakarimasen~
+    ________________________________________________________
+
+    ________________________________________________________
+     Gomen nasai~ Are you hiding something from me?
+    ________________________________________________________
+
+    ________________________________________________________
+     Gomen nasai~ Are you going somewhere without me?
+    ________________________________________________________
+
+    ________________________________________________________
+     Gomen nasai~ I know your life is empty but your todo can't be empty.
+    ________________________________________________________
+
+    ________________________________________________________
+     Gomen nasai~ Something's missing, oh right I lost track of time.
+    ________________________________________________________
+
+    ________________________________________________________
+     Gomen nasai~ Does this thing ever end???
+    ________________________________________________________
+
+    ________________________________________________________
+     Gomen nasai~ So you never did plan on doing it huh...
+    ________________________________________________________
+
+    ________________________________________________________
+     Here's everything Neko-chan knows:
+     1. [T][✘] borrow book
+     2. [T][✘] read book
+     3. [D][✘] return book (by: 14 Aug 2019)
+     4. [E][✘] celebrate birthday (on 22 Aug 2020 for all day)
+     5. [E][✘] CS2103T lecture (from 28 Aug 2020 16:00 to 28 Aug 2020 18:00)
+     6. [E][✘] weekend (from 29 Aug 2020 to 31 Aug 2020)
+    ________________________________________________________
+
+    ________________________________________________________
+     Hai! Neko-chan has removed this task:
+     [D][✘] return book (by: 14 Aug 2019)
+     Neko-chan now knows 5 things.
+    ________________________________________________________
+
+    ________________________________________________________
+     Gomen nasai~ What do you want to remove exactly?
+    ________________________________________________________
+
+    ________________________________________________________
+     Hai! Neko-chan has removed this task:
+     [E][✘] CS2103T lecture (from 28 Aug 2020 16:00 to 28 Aug 2020 18:00)
+     Neko-chan now knows 4 things.
+    ________________________________________________________
+
+    ________________________________________________________
+     Here's everything Neko-chan knows:
+     1. [T][✘] borrow book
+     2. [T][✘] read book
+     3. [E][✘] celebrate birthday (on 22 Aug 2020 for all day)
+     4. [E][✘] weekend (from 29 Aug 2020 to 31 Aug 2020)
+    ________________________________________________________
+
+    ________________________________________________________
+     Ja ne!
+    ________________________________________________________
 

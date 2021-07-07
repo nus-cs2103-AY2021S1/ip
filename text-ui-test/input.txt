@@ -1,0 +1,25 @@
+todo borrow book
+todo read book
+deadline return book by 14 Aug 2019
+list
+event celebrate birthday from 22 Aug 2020 for all day
+event CS2103T lecture from 28 Aug 2020 16:00 to 28 Aug 2020 18:00
+event weekend from 29 Aug 2020 for 2 days
+list
+done 1
+list
+done -3
+list
+done 10
+deadline
+event
+todo
+event missing end time from 10 Sept 2020
+event missing time
+deadline missing duedate
+list
+delete 3
+delete 1.5
+delete 4
+list
+exit
