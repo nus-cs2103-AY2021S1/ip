@@ -1,0 +1,23 @@
+todo borrow book
+deadline return book /by 2020-09-03
+event project meeting /at Mon 2-4pm
+list
+done 2
+blah
+event project meeting at Mon 2-4pm
+todo
+deadline project
+done 3
+find book
+list
+done
+find meeting
+done one
+done 0
+done 1
+delete one
+delete
+delete 1
+delete 2
+delete 1
+bye
