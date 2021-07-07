@@ -1,0 +1,17 @@
+todo first todo
+deadline return book /by 18/09/2020 1600
+event project meeting /at 18/09/2020 1600
+list
+done 1
+deadline going out /by i 18/09/2020 1600
+done 3
+list
+done 2
+list
+done 4
+list
+done 5
+deadline
+delete 1
+list
+bye
