@@ -1,0 +1,4 @@
+E , 0 , eat book , 2015-04-12
+D , 1 , drink bleach , 2020-09-13
+E , 0 , bday , 2020-10-01
+D , 0 , book taxi , 2020-09-15
