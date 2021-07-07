@@ -1,10 +1,40 @@
+import java.io.File;
+
+import Command.Command;
+import DukeComponent.Parser;
+import TaskList.Storage;
+import TaskList.TaskList;
+
+/**
+ * Duke asks user for their todos and makes a todo list.
+ * Tasks can be viewed in a list, marked as done and deleted.
+ */
 public class Duke {
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+    private TaskList tasks;
+    private Storage storage;
+
+    /**
+     * The default constructor for a Duke object.
+     */
+    public Duke() {
+        storage = new Storage();
+        tasks = new TaskList(storage);
+    }
+
+
+    /**
+     * This constructor takes in the file to save data.
+     */
+    public Duke(File file) {
+        storage = new Storage(file);
+        tasks = new TaskList(storage);
+    }
+
+    /**
+     * Gets the response for user input.
+     */
+    public String getResponse(String input) {
+        Command command = Parser.parse(input, tasks.size());
+        return command.act(tasks);
     }
 }
