@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<fx:root alignment="BOTTOM_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <Label fx:id="userText" alignment="TOP_RIGHT" text="Label" textFill="WHITE" wrapText="true">
+         <font>
+            <Font name="Courier" size="12.0" />
+         </font>
+         <HBox.margin>
+            <Insets />
+         </HBox.margin>
+         <padding>
+            <Insets right="5.0" />
+         </padding></Label>
+        <ImageView fx:id="profilePic" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true">
+         <HBox.margin>
+            <Insets />
+         </HBox.margin></ImageView>
+    </children>
+    <padding>
+        <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
+    </padding>
+</fx:root>
