@@ -1,0 +1,11 @@
+.text-area {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-text-alignment: right;
+    -fx-padding: 0, 10, 0, 10;
+    -fx-text-fill: #ffffff;
+}
+
+.text-area .content {
+    -fx-background-color: #4b4b4b;
+}

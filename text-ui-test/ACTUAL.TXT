@@ -77,17 +77,17 @@ Please put /at followed by the date.
 1
     ____________________________________________________________
      Nice! I've marked this task as done:
-       [✓] s
+       [✓] s     
     ____________________________________________________________
 2
     ____________________________________________________________
      Nice! I've marked this task as done:
-       [✓] correct
+       [✓] correct 
     ____________________________________________________________
 3
     ____________________________________________________________
      Nice! I've marked this task as done:
-       [✓] asdfasdfasdf
+       [✓] asdfasdfasdf 
     ____________________________________________________________
 Done must be followed by a space and an integer!
 Done must be followed by a space and an integer!
