@@ -1,0 +1,7 @@
+../src/main/java/ConsoleColors.java
+../src/main/java/duke.Event.java
+../src/main/java/duke.Task.java
+../src/main/java/duke.Ui.java
+../src/main/java/duke.Duke.java
+../src/main/java/duke.Deadline.java
+../src/main/java/duke.ToDo.java
