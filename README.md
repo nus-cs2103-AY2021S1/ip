@@ -24,3 +24,47 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
    | |_| | |_| |   <  __/
    |____/ \__,_|_|\_\___|
    ```
+
+## Testing
+
+```shell script
+cd text-ui-test
+# chmod +x # Only needed first time
+./runtest.sh
+```
+
+## Running Jar file
+
+Simply recompile the program.
+
+The run:
+
+```shell script
+java -jar out/artifacts/ip_jar/ip.jar
+```
+
+## Input commands
+
+##### Misc
+```
+bye/b # exit program
+```
+
+##### Viewing & querying tasks
+```
+list/l # List task details: id, description, time stamp etc...
+find/f,<keywords> # Search for matches in tasks, return the id
+```
+
+##### Updating tasks
+```
+done/do,<task id> # Indicate a task is complete
+delete/del,<task id> # Delete a task
+```
+
+##### Creating tasks
+```
+todo/t,<task name> # Add a task to todos
+deadline/de,<task name>,<time>
+event/e,<task name>,<time>
+```
