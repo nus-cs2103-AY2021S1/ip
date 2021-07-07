@@ -1,7 +1,52 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+✰ hi! im conundrum boy :) ✰
+✰ this list doesn't contain any tasks! ✰
+⚠ that is not the number of a task in the list! ⚠
+✰ i've added this task for you: 
+	[T] [✗] read the bible
+now you have 1 items in your tasklist. ✰
+✰ 1. [T] [✗] read the bible ✰
+✰ congrats on finishing your task :) it's marked as done:
+	[T] [✓] read the bible ✰
+⚠ you have already completed read the bible! ⚠
+⚠ the task description cannot be nothing D: ⚠
+✰ i've added this task for you: 
+	[D] [✗] 2103T homework (by: 25 Aug 2020 11.59pm)
+now you have 2 items in your tasklist. ✰
+✰ 1. [T] [✓] read the bible ✰
+✰ 2. [D] [✗] 2103T homework (by: 25 Aug 2020 11.59pm) ✰
+✰ i've added this task for you: 
+	[E] [✗] 2101 tutorial (at: 27 Aug 2020 4.00pm)
+now you have 3 items in your tasklist. ✰
+✰ 1. [T] [✓] read the bible ✰
+✰ 2. [D] [✗] 2103T homework (by: 25 Aug 2020 11.59pm) ✰
+✰ 3. [E] [✗] 2101 tutorial (at: 27 Aug 2020 4.00pm) ✰
+✰ congrats on finishing your task :) it's marked as done:
+	[D] [✓] 2103T homework (by: 25 Aug 2020 11.59pm) ✰
+⚠ you have already completed 2103T homework! ⚠
+⚠ i don't know what that means :( ⚠
+⚠ i don't know what that means :( ⚠
+⚠ you haven't entered a task number to complete! ⚠
+⚠ you haven't entered a time that this task happens at. you can do that by typing "event xxx /at dd/mm/yy hhmm". 
+e.g.: event read textbook /at 12/3/20 1500 ⚠
+⚠ you haven't entered a time that this task happens at. you can do that by typing "event xxx /at dd/mm/yy hhmm". 
+e.g.: event read textbook /at 12/3/20 1500 ⚠
+⚠ you haven't entered a time that this task is due by. you can do that by typing "deadline xxx /by dd/mm/yy hhmm". 
+e.g.: deadline read textbook /by 12/3/20 1500 ⚠
+⚠ you haven't entered a time that this task is due by. you can do that by typing "deadline xxx /by dd/mm/yy hhmm". 
+e.g.: deadline read textbook /by 12/3/20 1500 ⚠
+⚠ the task description cannot be nothing D: ⚠
+⚠ the task description cannot be nothing D: ⚠
+⚠ you haven't entered a task number to delete! ⚠
+✰ i've removed the following task from the list:
+	[D] [✓] 2103T homework (by: 25 Aug 2020 11.59pm)
+now you have 2 items in your tasklist. ✰
+✰ 1. [T] [✓] read the bible ✰
+✰ 2. [E] [✗] 2101 tutorial (at: 27 Aug 2020 4.00pm) ✰
+⚠ i don't know what that means :( ⚠
+⚠ i don't know what that means :( ⚠
+⚠ you haven't entered a search keyword! ⚠
+✰ here's the list of tasks that contain the keyword! ✰
+✰ this list doesn't contain any tasks! ✰
+✰ here's the list of tasks that contain the keyword! ✰
+✰ 1. [T] [✓] read the bible ✰
+✰ bye bye! ✰
