@@ -1,0 +1,28 @@
+todo CS2100
+todo CS2101
+event rotaract club presentation /at 2019-12-20 09:10
+done 1
+list
+done -1
+done 5
+done 1
+deadline CS2103 quiz /by mon 19:10
+deadline CS2103 quiz /by 2019-12-21 19:10
+done 2
+list
+done s
+done
+delete
+delete 5
+todo
+event /at Tues 8am
+deadline /at Mon 12am
+done 3
+done 4
+delete 3
+list
+blah
+event
+bye 2
+list 33
+bye
