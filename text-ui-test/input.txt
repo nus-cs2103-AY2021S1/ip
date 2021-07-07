@@ -1,0 +1,14 @@
+todo read book
+deadline return book /by 6 Sep
+event meeting /at mon 2-4 pm
+done 1
+list
+blah
+todo
+deadline
+event
+deadline do something
+event meeting
+done 5
+done
+bye
