@@ -1,0 +1,4 @@
+T | 1 | LOW | Buy bread
+D | 0 | HIGH | Submit report | null
+D | 0 | LOW | Complete essay | Tomorrow
+E | 0 | LOW | Take out the trash | Tonight 10pm
