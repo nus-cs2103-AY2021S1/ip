@@ -7,7 +7,8 @@ REM delete output from previous run
 del ACTUAL.TXT
 
 REM compile the code into the bin folder
-javac  -cp ..\src -Xlint:none -d ..\bin ..\src\main\java\Duke.java
+set JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF-8
+javac  -cp ..\src\main\java\ -Xlint:none -d ..\bin ..\src\main\java\Duke.java
 IF ERRORLEVEL 1 (
     echo ********** BUILD FAILURE **********
     exit /b 1
@@ -19,3 +20,5 @@ java -classpath ..\bin Duke < input.txt > ACTUAL.TXT
 
 REM compare the output to the expected output
 FC ACTUAL.TXT EXPECTED.TXT
+
+@pause
