@@ -1,38 +1,22 @@
-#!/usr/bin/env bash
+@ECHO OFF
 
-# create bin directory if it doesn't exist
-if [ ! -d "../bin" ]
-then
-    mkdir ../bin
-fi
+REM create bin directory if it doesn't exist
+if not exist C:\Users\e0316059\Desktop\cs2103 ip\bin mkdir C:\Users\e0316059\Desktop\cs2103 ip\bin
 
-# delete output from previous run
-if [ -e "./ACTUAL.TXT" ]
-then
-    rm ACTUAL.TXT
-fi
+REM delete output from previous run
+del ACTUAL.TXT
 
-# compile the code into the bin folder, terminates if error occurred
-if ! javac -cp ../src -Xlint:none -d ../bin ../src/main/java/Duke.java
-then
-    echo "********** BUILD FAILURE **********"
-    exit 1
-fi
+REM compile the code into the bin folder
+javac  -cp C:\Users\e0316059\Desktop\cs2103 ip\src\main\java -Xlint:none -d C:\Users\e0316059\Desktop\cs2103 ip\bin C:\Users\e0316059\Desktop\cs2103 ip\src\main\java\Duke.java
 
-# run the program, feed commands from input.txt file and redirect the output to the ACTUAL.TXT
-java -classpath ../bin Duke < input.txt > ACTUAL.TXT
+IF ERRORLEVEL 1 (
+    echo ********** BUILD FAILURE **********
+    exit /b 1
+)
+REM no error here, errorlevel == 0
 
-# convert to UNIX format
-cp EXPECTED.TXT EXPECTED-UNIX.TXT
-dos2unix ACTUAL.TXT EXPECTED-UNIX.TXT
+REM run the program, feed commands from input.txt file and redirect the output to the ACTUAL.TXT
+java -classpath ..\bin Duke < input.txt > ACTUAL.TXT
 
-# compare the output to the expected output
-diff ACTUAL.TXT EXPECTED-UNIX.TXT
-if [ $? -eq 0 ]
-then
-    echo "Test result: PASSED"
-    exit 0
-else
-    echo "Test result: FAILED"
-    exit 1
-fi
+REM compare the output to the expected output
+FC ACTUAL.TXT EXPECTED.TXT
