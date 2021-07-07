@@ -1,7 +1,75 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+   ----------------------------
+   Hello I'm duke.Duke, your favourite chatbot!
+   
+   Type 'help' to see the list of command I support. 
+   ----------------------------
+   
+   ----------------------------
+   Got it. I've added this task: 
+      [D][✘] do 2103 homework (by: May 25 2020)
+   Now you have 1 task in the list.
+   ----------------------------
+   
+   ----------------------------
+   Got it. I've added this task: 
+      [E][✘] meet jason leo (at: May 6 2020 12:23 to May 6 2020 14:45)
+   Now you have 2 tasks in the list.
+   ----------------------------
+   
+   ----------------------------
+   Here are the tasks in your list:
+   1. [D][✘] do 2103 homework (by: May 25 2020)
+   2. [E][✘] meet jason leo (at: May 6 2020 12:23 to May 6 2020 14:45)
+   ----------------------------
+   
+   ----------------------------
+   Got it. I've added this task: 
+      [T][✘] write resume
+   Now you have 3 tasks in the list.
+   ----------------------------
+   
+   ----------------------------
+   Nice! I've marked this task as done: 
+      [E][✓] meet jason leo (at: May 6 2020 12:23 to May 6 2020 14:45)
+   ----------------------------
+   
+   ############################
+   OOPS! The description of a deadline cannot be empty!
+   ############################
+   
+   ############################
+   OOPS! The time of an event cannot be empty!
+   ############################
+   
+   ############################
+   OOPS! The description of a todo cannot be empty!
+   ############################
+   
+   ############################
+   OOPS! I'm sorry, but I don't know what that means :-(
+   ############################
+   
+   ############################
+   OOPS! duke.task.Task number is invalid!
+   ############################
+   
+   ############################
+   OOPS! duke.task.Task number is invalid!
+   ############################
+   
+   ----------------------------
+   Got it. I've deleted this task: 
+      [E][✓] meet jason leo (at: May 6 2020 12:23 to May 6 2020 14:45)
+   Now you have 2 tasks in the list.
+   ----------------------------
+   
+   ----------------------------
+   Here are the tasks in your list:
+   1. [D][✘] do 2103 homework (by: May 25 2020)
+   2. [T][✘] write resume
+   ----------------------------
+   
+   ----------------------------
+   Bye! Hope to see you again soon! 
+   ----------------------------
+   
