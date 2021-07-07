@@ -1,0 +1,41 @@
+package duke.command;
+
+import duke.Storage;
+import duke.Ui;
+import duke.task.TaskList;
+
+/**
+ * ShowListCommand class that represents show list commands
+ */
+public class ShowListCommand extends Command {
+
+    /**
+     * ShowListCommand Class constructor
+     *
+     * @param command the command from the user
+     */
+    public ShowListCommand(String command) {
+        super(command);
+    }
+
+    /**
+     * Method that execute the current ShowListCommand object
+     *
+     * @param list     TaskList object from the current Duke instance
+     * @param ui       UI object from the current Duke instance
+     * @param saveData Storage object from the current Duke instance
+     */
+    public String execute(TaskList list, Ui ui, Storage saveData) {
+        ui.saySomthing(ui.showList(list));
+        return ui.showList(list);
+    }
+
+    /**
+     * Method that return isExit of the current Command
+     *
+     * @return boolean object showing if Duke should terminate
+     */
+    public boolean isExit() {
+        return getIsExit();
+    }
+}
