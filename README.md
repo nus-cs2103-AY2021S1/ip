@@ -1,26 +1,15 @@
-# Duke project template
+# ATAS
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+![Ui](docs/Ui.png)
 
-## Setting up in Intellij
+**Duke** is a desktop application that aims to *elevate* user's efficiency and make their experience of handling everyday tasks less mundane by acting as both a task manager and a chatbot at the same time.
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+With **Duke**, users can add todos, deadlines and events!
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project dialog first)
-1. Set up the correct JDK version, as follows:
-   1. Click `Configure` > `Structure for New Projects` and then `Project Settings` > `Project` > `Project SDK`
-   1. If JDK 11 is listed in the drop down, select it. If it is not, click `New...` and select the directory where you installed JDK 11
-   1. Click `OK`
-1. Import the project into Intellij as follows:
-   1. Click `Open or Import`.
-   1. Select the project directory, and click `OK`
-   1. If there are any further prompts, accept the defaults.
-1. After the importing is complete, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()`. If the setup is correct, you should see something like the below:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+* If you are interested in using **Duke**, head over to the [_Quick Start_ section of the **User Guide**](https://nweiyue.github.io/ip/#quick-start).
+
+## Site Map
+* [User Guide](https://nweiyue.github.io/ip/)
+
+## Acknowledgments
+* This project is based on the project created by the [SE-EDU initiative](https://se-education.org).

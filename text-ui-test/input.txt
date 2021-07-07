@@ -1,0 +1,48 @@
+blah
+todo
+todo2
+todo borrow book
+deadline
+deadline read book
+deadline read book /by August 24th
+deadline read book /by 24/08/2020 12:30
+event
+event lesson
+event lesson /at Mon 6-8pm
+event lesson /at 24/08/2020 15:00
+todo ip
+done 0
+done one
+done 1
+done 10
+todo play basketball
+list
+list hello
+done 3
+list
+event project meeting /at 02/08/2020 22:15
+deadline survey /by 12/10/2021 00:00
+done 5
+done 4
+list
+delete
+delete 0
+delete 1
+list
+delete one
+delete 10
+delete 2
+list
+delete 5
+list
+retrieve
+retrieve blah
+retrieve 24 Aug
+retrieve 24/08/2020
+retrieve 12/08/2020
+find
+find
+find sleep
+find basketball
+find meeting
+bye

@@ -15,3 +15,5 @@ bin/
 
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT
+
+/Users/weiyue/Documents/CS2103T/ip/out/artifacts/ip_jar/ip.jar
