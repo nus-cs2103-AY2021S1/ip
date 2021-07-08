@@ -1,20 +1,65 @@
 # User Guide
+Welcome to the User Guide for the Duke chatbox!
 
 ## Features 
 
-### Feature 1 
-Description of feature.
+### Add a Todo : `todo`
 
-## Usage
+Adds a todo to the list of tasks
 
-### `Keyword` - Describe action
+syntax: `todo [DESCRIPTION]`
 
-Describe action and its outcome.
+Example: `todo homework1`
 
-Example of usage: 
+### Add an event : `event`
 
-`keyword (optional arguments)`
+Adds an event to the list of tasks. Time must be formatted in DD/MM/YYYY HHmm
 
-Expected outcome:
+syntax: `event [DESCRIPTION] /at [TIME]`
 
-`outcome`
+Example: `event lecture /at 20/10/2020 1800`
+
+### Add an deadline : `deadline`
+
+Adds a deadline to the list of tasks. Time must be formatted in DD/MM/YYYY HHmm
+
+syntax: `deadline [DESCRIPTION] /by [TIME]`
+
+Example: `deadline CS2103IP /by 20/10/2020 1800`
+
+### List all task : `list`
+
+Show all the tasks.
+
+syntax: `list`
+
+### Delete a task : `delete`
+
+Delete a task
+
+syntax: `delete [INDEX]`
+
+Example: `delete 1`
+
+### Finish a task : `done`
+
+Mark a task as complete
+
+syntax: `done [INDEX]`
+
+Example: `done 1`
+
+
+### Find a task : `find`
+
+Find a task with the given keyword
+
+syntax: `find [KEYWORD]`
+
+Example: `find homework`
+
+### Close the program : `bye`
+
+Close the program and save your data
+
+syntax: `bye`
