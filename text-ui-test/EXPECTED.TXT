@@ -1,7 +1,39 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+   ----------------------------
+   Hello! I'm Best2103/TBot
+   ----------------------------
+   What can I do for you?
+   ----------------------------
+   ----------------------------
+   New todo task added: [T][✘] borrow book
+   ----------------------------
+   ----------------------------
+   Display a list of tasks: 
+   1.[E][✘] mark homework(at: Feb 12 2019 18:00)
+   2.[T][✘] asdfasf
+   3.[E][✘] mark homework(at: Feb 12 2019 18:00)
+   4.[T][✘] borrow book
+   ----------------------------
+   ----------------------------
+   New event task added: [E][✘] mark homework(at: Feb 12 2019 18:00)
+   ----------------------------
+   ----------------------------
+   New deadline task added: [D][✘] do homework(by: Feb 12 2019 18:00)
+   ----------------------------
+   ----------------------------
+   Display a list of tasks: 
+   1.[E][✘] mark homework(at: Feb 12 2019 18:00)
+   2.[T][✘] asdfasf
+   3.[E][✘] mark homework(at: Feb 12 2019 18:00)
+   4.[T][✘] borrow book
+   5.[E][✘] mark homework(at: Feb 12 2019 18:00)
+   6.[D][✘] do homework(by: Feb 12 2019 18:00)
+   ----------------------------
+   ----------------------------
+   Deleted Task: 3
+   ----------------------------
+   ----------------------------
+   Saving files and exiting Best2103/TBot as requested ...
+   ----------------------------
+   ----------------------------
+   Goodbye :(
+   ----------------------------

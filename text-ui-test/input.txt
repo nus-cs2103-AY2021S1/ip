@@ -1,0 +1,7 @@
+todo borrow book
+list
+event mark homework /at 2019-02-12 18:00
+deadline do homework /by 2019-02-12 18:00
+list
+delete 3
+bye

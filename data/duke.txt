@@ -1,0 +1,6 @@
+T  | 0 | exercise
+D  | 0 | workout | 2019-02-12 18:00
+T  | 0 | complete work
+T  | 0 | homework
+E  | 0 | mark homework | 2019-02-18 18:00
+D  | 0 | do homework | 2019-02-18 18:00
