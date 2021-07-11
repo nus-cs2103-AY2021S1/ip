@@ -1,4 +1,4 @@
-# Mushy User Guide
+# [Mushy User Guide](https://gabrielteo.github.io/ip/)
 
 Mushy is a **Personal Assistant Chatbot for keeping track 
 of tasks, optimized for use via a Command Line Interface** 
@@ -24,9 +24,9 @@ tasks management done faster than traditional GUI apps.
 ---
 
 ## Quick start
-1. Ensure you have Java `11` or above installed in your Computer.  
+1. Ensure you have [`Java JDK 11`](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html) or above installed in your Computer.  
 
-2. Download the latest `Mushy.jar` from [here](https://github.com/GabrielTeo/ip/releases/tag/v0.4)  
+2. Download the latest `Mushy.jar` from [here](https://github.com/GabrielTeo/ip/releases)  
 
 3. Copy the file to the folder you want to use as the *home folder* for your Mushy program.  
 
