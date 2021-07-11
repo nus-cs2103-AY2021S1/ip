@@ -1,0 +1,9 @@
+todo borrow book
+deadline return book /by 2020-05-24
+event project meeting /at 2020-09-11
+list
+done 2
+list
+delete 3
+list
+bye
