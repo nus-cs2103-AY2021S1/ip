@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class Duke {
 
-    private static ArrayList<String> inputList = new ArrayList<String>();
+    private static ArrayList<Task> taskList = new ArrayList<Task>();
 
     public static void main(String[] args) {
         String sectionBreak = "------------------------------------------";
@@ -26,9 +26,14 @@ public class Duke {
             if (input.equals("bye")) {
                 break;
             } else if (input.equals("list")) {
-                printList();
+                printTaskList();
+            } else if (input.startsWith("done ")) {
+                int index = Integer.parseInt(input.substring(5));
+                Task t = taskList.get(index - 1);
+                t.markAsDone();
+                System.out.println("Cool, I've marked this task as done\n" + t);
             } else {
-                inputList.add(input);
+                taskList.add(new Task(input));
                 System.out.printf("added: %s\n", input);
             }
 
@@ -39,9 +44,9 @@ public class Duke {
         System.out.println(sectionBreak);
     }
 
-    private static void printList() {
-        for (int i = 0; i < inputList.size(); i++) {
-            System.out.printf("%d. %s\n", i, inputList.get(i));
+    private static void printTaskList() {
+        for (int i = 0; i < taskList.size(); i++) {
+            System.out.printf("%d. %s\n", i + 1, taskList.get(i));
         }
     }
 }
