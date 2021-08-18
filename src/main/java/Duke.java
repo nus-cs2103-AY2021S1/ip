@@ -1,10 +1,12 @@
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.Scanner;
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 public class Duke {
 
-    private static ArrayList<Task> taskList = new ArrayList<Task>();
+    private static final ArrayList<Task> taskList = new ArrayList<>();
 
     public static void main(String[] args) {
         String sectionBreak = "------------------------------------------";
@@ -21,28 +23,29 @@ public class Duke {
 
         Scanner sc=new Scanner(System.in);
 
+        Hashtable<String, Consumer<String>> commandTable = new Hashtable<>();
+        commandTable.put("list", (x) -> printTaskList());
+        commandTable.put("event", (x) -> AddTask(x, Event::create));
+        commandTable.put("deadline", (x) -> AddTask(x, Deadline::create));
+        commandTable.put("todo", (x) -> AddTask(x, ToDo::create));
+        commandTable.put("done", Duke::MarkTask);
+        commandTable.put("delete", Duke::DeleteTask);
+
+
         while (true) {
             String input = sc.nextLine();
 
-            if (input.equals("bye")) {
-                break;
-            } else if (input.equals("list")) {
-                printTaskList();
-            } else if (input.startsWith("done")) {
-                MarkTask(input);
-            } else if (input.startsWith("event")) {
-                AddTask(input, Event::create);
-            } else if (input.startsWith("deadline")) {
-                AddTask(input, Deadline::create);
-            } else if (input.startsWith("todo")) {
-                AddTask(input, ToDo::create);
-            } else if (input.startsWith("delete")) {
-                DeleteTask(input);
-            } else {
-                System.out.println(new DukeException("I'm not sure what you mean"));
+            if (input.equals("bye")) break;
+
+            String keyword = input.split(" ", 1)[0];
+            try {
+                if (commandTable.containsKey(keyword))
+                    commandTable.get(keyword).accept(input);
+                else
+                    throw new DukeException("I'm not sure what you mean");
+            } catch (DukeException e) {
+                System.out.println(e);
             }
-
-
             System.out.println(sectionBreak);
         }
 
@@ -51,13 +54,9 @@ public class Duke {
     }
 
     private static void AddTask(String formattedString, Function<String, ? extends Task> create) {
-        try {
-            Task e = create.apply(formattedString);
-            taskList.add(e);
-            System.out.printf("added: %s\n", e);
-        } catch (DukeException e) {
-            System.out.println(e);
-        }
+        Task e = create.apply(formattedString);
+        taskList.add(e);
+        System.out.printf("added: %s\n", e);
     }
 
     private static void printTaskList() {
@@ -69,7 +68,7 @@ public class Duke {
     private static int getId(String input, String prefix) throws DukeException {
         String idString = "";
         try {
-            if (input.indexOf(prefix) == -1 || input.length() <= prefix.length())
+            if (!input.startsWith(prefix) || input.length() <= prefix.length())
                 throw new DukeException("you did not specify a task id");
 
             idString = input.substring(prefix.length());
@@ -88,8 +87,6 @@ public class Duke {
             Task t = taskList.get(taskId - 1);
             t.markAsDone();
             System.out.println("Cool, I've marked this task as done\n" + t);
-        } catch (DukeException e) {
-            System.out.println(e);
         } catch (IndexOutOfBoundsException e) {
             System.out.printf("Oops, Task #%d doesn't exist\n", taskId);
         }
@@ -102,8 +99,6 @@ public class Duke {
             Task t = taskList.get(taskId - 1);
             taskList.remove(taskId);
             System.out.println("Okay, I've removed this task\n" + t);
-        } catch (DukeException e) {
-            System.out.println(e);
         } catch (IndexOutOfBoundsException e) {
             System.out.printf("Oops, Task #%d doesn't exist\n", taskId);
         }
