@@ -1,11 +1,5 @@
-import java.util.IllegalFormatException;
-import java.util.IllegalFormatFlagsException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 public class Event extends Task {
 
-    private static final Pattern descriptionFormat = Pattern.compile("event [^/]* /on .*");
     private String on;
 
     public Event(String description, String on) {

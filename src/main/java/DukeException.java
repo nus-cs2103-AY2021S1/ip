@@ -1,5 +1,3 @@
-import javax.management.RuntimeErrorException;
-
 public class DukeException extends RuntimeException {
 
     public DukeException(String message) {

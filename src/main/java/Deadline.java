@@ -1,10 +1,5 @@
-import java.util.IllegalFormatFlagsException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 public class Deadline extends Task {
 
-    private static final Pattern format = Pattern.compile("deadline [^/]* /by .*");
     private String by;
 
     public Deadline(String description, String by) {
