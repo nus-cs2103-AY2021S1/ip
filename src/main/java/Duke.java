@@ -28,10 +28,7 @@ public class Duke {
             } else if (input.equals("list")) {
                 printTaskList();
             } else if (input.startsWith("done ")) {
-                int index = Integer.parseInt(input.substring(5));
-                Task t = taskList.get(index - 1);
-                t.markAsDone();
-                System.out.println("Cool, I've marked this task as done\n" + t);
+                MarkTask(input.substring(5));
             } else {
                 taskList.add(new Task(input));
                 System.out.printf("added: %s\n", input);
@@ -47,6 +44,19 @@ public class Duke {
     private static void printTaskList() {
         for (int i = 0; i < taskList.size(); i++) {
             System.out.printf("%d. %s\n", i + 1, taskList.get(i));
+        }
+    }
+
+    private static void MarkTask(String indexString) {
+        try {
+            int index = Integer.parseInt(indexString);
+            Task t = taskList.get(index - 1);
+            t.markAsDone();
+            System.out.println("Cool, I've marked this task as done\n" + t);
+        } catch (NumberFormatException e) {
+            System.out.printf("Oops, \"%s\" is not a valid integer\n", indexString);
+        } catch (IndexOutOfBoundsException e) {
+            System.out.printf("Oops, Task #%s doesn't exist\n", indexString);
         }
     }
 }
