@@ -1,7 +1,41 @@
-Hello from
+
+Hello buddy! I am
  ____        _        
 |  _ \ _   _| | _____ 
 | | | | | | | |/ / _ \
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+What can I do for you?
+------------------------------------------
+added: [ ] Event: dinner (on: 27th March)
+------------------------------------------
+1. [ ] Event: dinner (on: 27th March)
+------------------------------------------
+added: [ ] Deadline: homework (by: 30th April)
+------------------------------------------
+1. [ ] Event: dinner (on: 27th March)
+2. [ ] Deadline: homework (by: 30th April)
+------------------------------------------
+added: [ ] ToDo: visit the gym
+------------------------------------------
+1. [ ] Event: dinner (on: 27th March)
+2. [ ] Deadline: homework (by: 30th April)
+3. [ ] ToDo: visit the gym
+------------------------------------------
+Cool, I've marked this task as done
+[X] Event: dinner (on: 27th March)
+------------------------------------------
+1. [X] Event: dinner (on: 27th March)
+2. [ ] Deadline: homework (by: 30th April)
+3. [ ] ToDo: visit the gym
+------------------------------------------
+Cool, I've marked this task as done
+[X] Deadline: homework (by: 30th April)
+------------------------------------------
+1. [X] Event: dinner (on: 27th March)
+2. [X] Deadline: homework (by: 30th April)
+3. [ ] ToDo: visit the gym
+------------------------------------------
+Bye. Hope to see you soon!
+------------------------------------------
