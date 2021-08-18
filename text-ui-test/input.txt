@@ -8,4 +8,14 @@ done 1
 list
 done 2
 list
+event lunch
+event lunch /on
+event
+deadline project
+deadline project /by
+deadline
+todo
+done
+done a
+done 4
 bye

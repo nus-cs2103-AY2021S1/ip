@@ -37,5 +37,25 @@ Cool, I've marked this task as done
 2. [X] Deadline: homework (by: 30th April)
 3. [ ] ToDo: visit the gym
 ------------------------------------------
+Oops, the [/on] time of event cannot be empty :(
+------------------------------------------
+Oops, the [/on] time of event cannot be empty :(
+------------------------------------------
+Oops, the description of event cannot be empty :(
+------------------------------------------
+Oops, the [/by] time of deadline cannot be empty :(
+------------------------------------------
+Oops, the [/by] time of deadline cannot be empty :(
+------------------------------------------
+Oops, the description of deadline cannot be empty :(
+------------------------------------------
+Oops, the description of todo cannot be empty :(
+------------------------------------------
+Oops, you did not specify the task id :(
+------------------------------------------
+Oops, "a" is not a valid integer
+------------------------------------------
+Oops, Task #4 doesn't exist
+------------------------------------------
 Bye. Hope to see you soon!
 ------------------------------------------
