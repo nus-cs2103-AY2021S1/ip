@@ -17,12 +17,17 @@ public class Duke {
 
         while(!isEnded) {
             String userInput = sc.nextLine();
+            System.out.println("____________________________________________________________");
+            String[] parsedInput = userInput.split(" ", 2);
 
             if(userInput.equals("bye")){
                 System.out.println("Bye. Hope to see you again soon!");
                 isEnded = true;
-            } else if (userInput.equals("list")) {
+            } else if (userInput.equals("list")){
                 taskList.printList();
+            } else if (parsedInput[0].equals("done")) {
+                int itemRank = Integer.parseInt(parsedInput[1]);
+                taskList.updateTaskStatus(itemRank);
             } else {
                 taskList.addTask(userInput);
                 System.out.println("added: " + userInput);
