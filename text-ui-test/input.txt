@@ -8,6 +8,8 @@ done 1
 list
 done 2
 list
+delete 2
+list
 event lunch
 event lunch /on
 event
@@ -18,4 +20,7 @@ todo
 done
 done a
 done 4
+delete
+delete 3.14
+delete 8
 bye
