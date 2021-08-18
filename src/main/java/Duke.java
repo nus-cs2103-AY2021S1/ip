@@ -40,6 +40,9 @@ public class Duke {
             } else if (parsedInput[0].equals("done")) {
                 int itemRank = Integer.parseInt(parsedInput[1]);
                 taskList.updateTaskStatus(itemRank);
+            } else if (parsedInput[0].equals("remove")){
+                int itemRank = Integer.parseInt(parsedInput[1]);
+                taskList.removeTask(itemRank - 1 );
             } else {
                 System.out.println("Please give an appropriate response.");
                 throw new DukeException("generic");
