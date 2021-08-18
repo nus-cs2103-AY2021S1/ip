@@ -37,9 +37,12 @@ public class Duke {
                 AddTask(input, Deadline::create);
             } else if (input.startsWith("todo")) {
                 AddTask(input, ToDo::create);
+            } else if (input.startsWith("delete")) {
+                DeleteTask(input);
             } else {
                 System.out.println(new DukeException("I'm not sure what you mean"));
             }
+
 
             System.out.println(sectionBreak);
         }
@@ -64,21 +67,46 @@ public class Duke {
         }
     }
 
-    private static void MarkTask(String input) {
+    private static int getId(String input, String prefix) throws DukeException {
+        String idString = "";
         try {
-            if (input.indexOf("done ") == -1 || input.length() < 6)
-                throw new DukeException("you did not specify the task id");
+            if (input.indexOf(prefix) == -1 || input.length() <= prefix.length())
+                throw new DukeException("you did not specify a task id");
 
-            int taskId = Integer.parseInt(input.substring(5));
+            idString = input.substring(prefix.length());
+            return Integer.parseInt(idString);
+
+        } catch (NumberFormatException e) {
+            String msg = String.format("\"%s\" is not a valid integer", idString);
+            throw new DukeException(msg);
+        }
+    }
+
+    private static void MarkTask(String input) {
+        int taskId = -1;
+        try {
+            taskId = getId(input, "done ");
             Task t = taskList.get(taskId - 1);
             t.markAsDone();
             System.out.println("Cool, I've marked this task as done\n" + t);
-        } catch (NumberFormatException e) {
-            System.out.printf("Oops, \"%s\" is not a valid integer\n", input.substring(5));
-        } catch (IndexOutOfBoundsException e) {
-            System.out.printf("Oops, Task #%s doesn't exist\n", input.substring(5));
         } catch (DukeException e) {
             System.out.println(e);
+        } catch (IndexOutOfBoundsException e) {
+            System.out.printf("Oops, Task #%d doesn't exist\n", taskId);
+        }
+    }
+
+    private static void DeleteTask(String input) {
+        int taskId = -1;
+        try {
+            taskId = getId(input, "delete ");
+            Task t = taskList.get(taskId - 1);
+            taskList.remove(taskId);
+            System.out.println("Okay, I've removed this task\n" + t);
+        } catch (DukeException e) {
+            System.out.println(e);
+        } catch (IndexOutOfBoundsException e) {
+            System.out.printf("Oops, Task #%d doesn't exist\n", taskId);
         }
     }
 }
