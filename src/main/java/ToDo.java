@@ -5,9 +5,9 @@ public class ToDo extends Task {
     }
 
     private static void checkFormat(String formattedString) throws DukeException {
-        String keyword = formattedString.split(" ", 1)[0];
+        String keyword = formattedString.split(" ", 2)[0];
 
-        if (!keyword.startsWith("todo"))
+        if (!keyword.equals("todo"))
             throw new DukeException("I can't seem to find the todo keyword");
         else if (formattedString.length() <= 5 || formattedString.substring(5).isEmpty())
             throw new DukeException("the description of todo cannot be empty");

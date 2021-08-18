@@ -37,7 +37,7 @@ public class Duke {
 
             if (input.equals("bye")) break;
 
-            String keyword = input.split(" ", 1)[0];
+            String keyword = input.split(" ", 2)[0];
             try {
                 if (commandTable.containsKey(keyword))
                     commandTable.get(keyword).accept(input);

@@ -12,7 +12,7 @@ public class Event extends Task {
         if (onIndex == -1)
             onIndex = formattedString.length();
 
-        String keyword = formattedString.split(" ", 1)[0];
+        String keyword = formattedString.split(" ", 2)[0];
 
         if (!keyword.startsWith("event"))
             throw new DukeException("I can't seem to find the event keyword");

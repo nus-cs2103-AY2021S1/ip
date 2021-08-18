@@ -13,7 +13,7 @@ public class Deadline extends Task {
         if (byIndex == -1)
             byIndex = formattedString.length();
 
-        String keyword = formattedString.split(" ", 1)[0];
+        String keyword = formattedString.split(" ", 2)[0];
 
         if (!keyword.startsWith("deadline"))
             throw new DukeException("I can't seem to find the deadline keyword");
