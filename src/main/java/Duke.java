@@ -1,5 +1,7 @@
 import java.util.ArrayList;
+import java.util.IllegalFormatException;
 import java.util.Scanner;
+import java.util.function.Function;
 
 public class Duke {
 
@@ -29,9 +31,12 @@ public class Duke {
                 printTaskList();
             } else if (input.startsWith("done ")) {
                 MarkTask(input.substring(5));
-            } else {
-                taskList.add(new Task(input));
-                System.out.printf("added: %s\n", input);
+            } else if (input.startsWith("event ")) {
+                AddTask(input, Event::create);
+            } else if (input.startsWith("deadline ")) {
+                AddTask(input, Deadline::create);
+            } else if (input.startsWith("todo ")) {
+                AddTask(input, ToDo::create);
             }
 
             System.out.println(sectionBreak);
@@ -39,6 +44,16 @@ public class Duke {
 
         System.out.println("Bye. Hope to see you soon!");
         System.out.println(sectionBreak);
+    }
+
+    private static void AddTask(String formattedString, Function<String, ? extends Task> create) {
+        try {
+            Task e = create.apply(formattedString);
+            taskList.add(e);
+            System.out.printf("added: %s\n", e);
+        } catch (IllegalFormatException e) {
+            System.out.println("Oops, I don't quite understand the task's format");
+        }
     }
 
     private static void printTaskList() {
