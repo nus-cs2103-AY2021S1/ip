@@ -1,6 +1,13 @@
 import java.util.Scanner;
 
 public class Duke {
+
+    public enum Tasks {
+        DEADLINE,
+        EVENT,
+        TODO
+    }
+
     public static void main(String[] args) {
         String logo = " ____        _lis\n"
                 + "|  _ \\ _   _| | _____\n"

@@ -1,3 +1,6 @@
+/**
+ * DukeException is an ArrayIndexOutOfBoundsException that are caused by errors in the Duke program.
+ */
 public class DukeException extends ArrayIndexOutOfBoundsException {
     private String cause;
 

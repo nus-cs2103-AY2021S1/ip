@@ -1,3 +1,7 @@
+/**
+ * Deadlines are tasks that have a deadline.
+ */
+
 public class Deadlines extends Task{
     private String deadline;
     String TASKINDICATOR = "[D]";

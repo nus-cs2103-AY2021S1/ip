@@ -1,3 +1,6 @@
+/**
+ * Events are tasks that have a timeline.
+ */
 public class Event extends Task{
     private String timeline;
     String TASKINDICATOR = "[E]";

@@ -1,3 +1,6 @@
+/**
+ * Todos are generic tasks.
+ */
 public class Todos extends Task{
     String TASKINDICATOR = "[T]";
 

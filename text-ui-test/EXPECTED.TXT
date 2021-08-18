@@ -1,5 +1,5 @@
 Hello from
- ____        _
+ ____        _lis
 |  _ \ _   _| | _____
 | | | | | | | |/ / _ \
 | |_| | |_| |   <  __/
@@ -19,4 +19,31 @@ Got it. I've added this task:
 [D][UNCOMPLETED]application(by: 4th August)
 Now you have 2 tasks in the list.
 ____________________________________________________________
+____________________________________________________________
+Got it. I've added this task:
+[E][UNCOMPLETED]carnival(at: January 4-5pm)
+Now you have 3 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+Here are the tasks in your list:
+1. [T][UNCOMPLETED]meeting
+2. [D][UNCOMPLETED]application(by: 4th August)
+3. [E][UNCOMPLETED]carnival(at: January 4-5pm)
+____________________________________________________________
+____________________________________________________________
+Noted. I've removed the task:
+[E][UNCOMPLETED]carnival(at: January 4-5pm)
+Now you have 2 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+Here are the tasks in your list:
+1. [T][UNCOMPLETED]meeting
+2. [D][UNCOMPLETED]application(by: 4th August)
+____________________________________________________________
+____________________________________________________________
+Nice! I've marked this task as done:
+[D][COMPLETED]application(by: 4th August)
+____________________________________________________________
+____________________________________________________________
+Bye. Hope to see you again soon!
 ____________________________________________________________

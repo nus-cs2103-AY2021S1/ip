@@ -1,3 +1,7 @@
+/**
+ * List refers to a task list that is used in the Duke program.
+ */
+
 import java.util.ArrayList;
 
 public class List {

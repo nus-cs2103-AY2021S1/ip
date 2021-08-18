@@ -1,6 +1,6 @@
 todo meeting
 deadline application /by 4th August
-event /at January 4-5pm
+event carnival /at January 4-5pm
 list
 remove 3
 list
