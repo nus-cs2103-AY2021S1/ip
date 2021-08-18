@@ -20,7 +20,16 @@ public class Duke {
             System.out.println("____________________________________________________________");
             String[] parsedInput = userInput.split(" ", 2);
 
-            if(userInput.equals("bye")){
+            if (parsedInput[0].equals("todo")) {
+                taskList.addTodo(parsedInput[1]);
+
+            } else if (parsedInput[0].equals("deadline")) {
+                String[] furtherParsed = parsedInput[1].split(" /by ", 2);
+                taskList.addDeadline(furtherParsed[0], furtherParsed[1]);
+            } else if (parsedInput[0].equals("event")){
+                String[] furtherParsed = parsedInput[1].split(" /at ",2);
+                taskList.addEvent(furtherParsed[0],furtherParsed[1]);
+            } else if(userInput.equals("bye")){
                 System.out.println("Bye. Hope to see you again soon!");
                 isEnded = true;
             } else if (userInput.equals("list")){
@@ -29,8 +38,7 @@ public class Duke {
                 int itemRank = Integer.parseInt(parsedInput[1]);
                 taskList.updateTaskStatus(itemRank);
             } else {
-                taskList.addTask(userInput);
-                System.out.println("added: " + userInput);
+                System.out.println("Please give an appropriate response.");
             }
             System.out.println("____________________________________________________________");
         }

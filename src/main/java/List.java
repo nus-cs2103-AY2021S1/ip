@@ -30,4 +30,28 @@ public class List {
         System.out.println("Nice! I've marked this task as done: ");
         System.out.println(task.printName());
     }
+
+    public void addTodo(String userInput) {
+        Task task = new Todos(userInput);
+        taskList.add(task);
+        System.out.println("Got it. I've added this task: ");
+        System.out.println(task.printName());
+        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+    }
+
+    public void addEvent(String name, String timeline) {
+        Task task = new Event(name, timeline);
+        taskList.add(task);
+        System.out.println("Got it. I've added this task: ");
+        System.out.println(task.printName());
+        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+    }
+
+    public void addDeadline(String name, String deadline) {
+        Task task = new Deadlines(name, deadline);
+        taskList.add(task);
+        System.out.println("Got it. I've added this task: ");
+        System.out.println(task.printName());
+        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+    }
 }
