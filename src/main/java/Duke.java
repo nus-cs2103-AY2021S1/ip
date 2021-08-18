@@ -2,13 +2,13 @@ import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
+        String logo = " ____        _lis\n"
+                + "|  _ \\ _   _| | _____\n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-        System.out.println("____________________________________________________________ \nHello! I'm Duke\nWhat can I do for you? \n____________________________________________________________");
+        System.out.println("____________________________________________________________\nHello! I'm Duke\nWhat can I do for you?\n____________________________________________________________");
 
         boolean isEnded = false;
         List taskList = new List();
@@ -21,6 +21,9 @@ public class Duke {
             String[] parsedInput = userInput.split(" ", 2);
 
             if (parsedInput[0].equals("todo")) {
+                if (parsedInput.length == 1 ) {
+                    throw new DukeException("empty");
+                }
                 taskList.addTodo(parsedInput[1]);
 
             } else if (parsedInput[0].equals("deadline")) {
@@ -39,6 +42,7 @@ public class Duke {
                 taskList.updateTaskStatus(itemRank);
             } else {
                 System.out.println("Please give an appropriate response.");
+                throw new DukeException("generic");
             }
             System.out.println("____________________________________________________________");
         }

@@ -2,8 +2,8 @@ public class Task {
     private String name;
     private boolean completed;
 
-    private String COMPLETED = "[✓]";
-    private String UNCOMPLETED = "[✗]";
+    private String COMPLETED = "[COMPLETED]";
+    private String UNCOMPLETED = "[UNCOMPLETED]";
 
 
     public Task(String name) {
