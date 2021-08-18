@@ -29,14 +29,16 @@ public class Duke {
                 break;
             } else if (input.equals("list")) {
                 printTaskList();
-            } else if (input.startsWith("done ")) {
-                MarkTask(input.substring(5));
-            } else if (input.startsWith("event ")) {
+            } else if (input.startsWith("done")) {
+                MarkTask(input);
+            } else if (input.startsWith("event")) {
                 AddTask(input, Event::create);
-            } else if (input.startsWith("deadline ")) {
+            } else if (input.startsWith("deadline")) {
                 AddTask(input, Deadline::create);
-            } else if (input.startsWith("todo ")) {
+            } else if (input.startsWith("todo")) {
                 AddTask(input, ToDo::create);
+            } else {
+                System.out.println(new DukeException("I'm not sure what you mean"));
             }
 
             System.out.println(sectionBreak);
@@ -51,8 +53,8 @@ public class Duke {
             Task e = create.apply(formattedString);
             taskList.add(e);
             System.out.printf("added: %s\n", e);
-        } catch (IllegalFormatException e) {
-            System.out.println("Oops, I don't quite understand the task's format");
+        } catch (DukeException e) {
+            System.out.println(e);
         }
     }
 
@@ -62,16 +64,21 @@ public class Duke {
         }
     }
 
-    private static void MarkTask(String indexString) {
+    private static void MarkTask(String input) {
         try {
-            int index = Integer.parseInt(indexString);
-            Task t = taskList.get(index - 1);
+            if (input.indexOf("done ") == -1 || input.length() < 6)
+                throw new DukeException("you did not specify the task id");
+
+            int taskId = Integer.parseInt(input.substring(5));
+            Task t = taskList.get(taskId - 1);
             t.markAsDone();
             System.out.println("Cool, I've marked this task as done\n" + t);
         } catch (NumberFormatException e) {
-            System.out.printf("Oops, \"%s\" is not a valid integer\n", indexString);
+            System.out.printf("Oops, \"%s\" is not a valid integer\n", input.substring(5));
         } catch (IndexOutOfBoundsException e) {
-            System.out.printf("Oops, Task #%s doesn't exist\n", indexString);
+            System.out.printf("Oops, Task #%s doesn't exist\n", input.substring(5));
+        } catch (DukeException e) {
+            System.out.println(e);
         }
     }
 }
