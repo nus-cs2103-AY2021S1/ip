@@ -1,3 +1,11 @@
+/**
+ * Duke is a chatbot that takes in tasks, which includes todos, deadlines and events, and compiles them
+ * in a list. Tasks can be removed from the list and be marked as completed.
+ *
+ * @author Dominic Siew Zhen Yu
+ *
+ */
+
 import java.util.Scanner;
 
 public class Duke {
