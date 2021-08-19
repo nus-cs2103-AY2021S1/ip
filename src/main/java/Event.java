@@ -8,7 +8,7 @@ public class Event extends Task{
     String TASKINDICATOR = "[E]";
 
     /**
-     * The constructor of the events class
+     * The constructor of the events class.
      *
      * @param userInput the name of the task
      * @param timeline the period of which the event is taking place
