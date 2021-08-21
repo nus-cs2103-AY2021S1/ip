@@ -1,0 +1,26 @@
+event dinner /on 27th March
+list
+deadline homework /by 30th April
+list
+todo visit the gym
+list
+done 1
+list
+done 2
+list
+delete 2
+list
+event lunch
+event lunch /on
+event
+deadline project
+deadline project /by
+deadline
+todo
+done
+done a
+done 4
+delete
+delete 3.14
+delete 8
+bye
