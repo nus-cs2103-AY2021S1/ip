@@ -1,2 +1,5 @@
-[T] [✕] homework
+[T] [✓] homework
 [D] [✕] yay (by: yay )
+[T] [✕] helo me
+[T] [✕] i hate cs
+[D] [✕] help (by: today )
