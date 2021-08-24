@@ -24,6 +24,6 @@ public class Todos extends Task{
      */
 
     public String printName() {
-        return TASKINDICATOR + super.printName();
+        return TASKINDICATOR + " " + super.printName();
     }
 }

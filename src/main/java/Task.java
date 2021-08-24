@@ -7,8 +7,8 @@ public class Task {
     private String name;
     private boolean completed;
 
-    private String COMPLETED = "[COMPLETED]";
-    private String UNCOMPLETED = "[UNCOMPLETED]";
+    private String COMPLETED = "[✓]";
+    private String UNCOMPLETED = "[✕]";
 
     /**
      * the constructor of the Task class.
@@ -29,7 +29,7 @@ public class Task {
 
     public String printName() {
         String completionStatus = completed? COMPLETED: UNCOMPLETED;
-        return completionStatus + this.name;
+        return completionStatus + " " + this.name;
     }
 
     /**

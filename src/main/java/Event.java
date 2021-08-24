@@ -24,6 +24,6 @@ public class Event extends Task{
      * @return a string representation of a Event object
      */
     public String printName() {
-        return TASKINDICATOR + super.printName() + "(at: " + this.timeline + ")";
+        return TASKINDICATOR + " " + super.printName() + " (at: " + this.timeline + " )";
     }
 }

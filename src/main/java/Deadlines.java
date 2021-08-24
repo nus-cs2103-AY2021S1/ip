@@ -28,6 +28,6 @@ public class Deadlines extends Task{
      */
 
     public String printName() {
-        return TASKINDICATOR + super.printName() + "(by: " + this.deadline + ")";
+        return TASKINDICATOR + " " + super.printName() + " (by: " + this.deadline + " )";
     }
 }

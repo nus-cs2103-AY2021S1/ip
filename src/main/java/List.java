@@ -1,3 +1,4 @@
+
 /**
  * List refers to a task list that is used in the Duke program.
  * An List object contains the tasks and several methods that work on the task.
@@ -5,17 +6,27 @@
  * @author Dominic Siew Zhen Yu
  */
 
+import java.io.*;
 import java.util.ArrayList;
 
 public class List {
     private ArrayList<Task> taskList;
+    private FileWriter taskFile;
+    private boolean isFirstTimeOpening;
 
     /**
      * The constructor for the List class that instantiates a List object.
      */
 
-    public List() {
+    public List() throws IOException {
         this.taskList = new ArrayList<Task>();
+        File file = new File("src/main/memory.txt");
+//        System.out.println(file.exists());
+//        if (!(file.exists())){
+//            PrintWriter writer = new PrintWriter("src/main/memory.txt");
+//            writer.print("");
+//            writer.close();
+//        } else {
     }
 
     /**
@@ -54,9 +65,38 @@ public class List {
             return ;
         }
         Task task = taskList.get(userInput - 1);
+
+        String lineToRemove = task.printName();
         task.toggleComplete();
         System.out.println("Nice! I've marked this task as done:");
         System.out.println(task.printName());
+
+        try {
+            File input = new File("src/main/memory.txt");
+            File updated = new File("src/main/updated.txt");
+
+            BufferedReader reader = new BufferedReader(new FileReader(input));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(updated));
+
+            String currentLine = "";
+
+            while ((currentLine = reader.readLine()) != null) {
+
+                if (currentLine.equals(lineToRemove)) {
+                    writer.write(task.printName() + "\n");
+                    continue;
+                }
+                writer.write(currentLine + "\n");
+            }
+            writer.close();
+            reader.close();
+
+            boolean successful = updated.renameTo(input);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     /**
@@ -65,12 +105,25 @@ public class List {
      * @param userInput the name of the todo task
      */
 
-    public void addTodo(String userInput) {
+    public void addTodo(String userInput, boolean isInput) {
         Task task = new Todos(userInput);
         taskList.add(task);
-        System.out.println("Got it. I've added this task:");
-        System.out.println(task.printName());
-        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+
+        if (isInput) {
+            System.out.println("Got it. I've added this task:");
+            System.out.println(task.printName());
+            System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+            try {
+                FileWriter fw = new FileWriter("src/main/memory.txt", true);
+                fw.write(task.printName() + "\n");
+                fw.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+
+        }
+
     }
     /**
      * the addEvent() method adds Events task into the list object.
@@ -78,12 +131,23 @@ public class List {
      * @param name the name of the event
      * @param timeline the period that the event is taking place
      */
-    public void addEvent(String name, String timeline) {
+    public void addEvent(String name, String timeline, boolean isInput) {
         Task task = new Event(name, timeline);
         taskList.add(task);
-        System.out.println("Got it. I've added this task:");
-        System.out.println(task.printName());
-        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+        if (isInput) {
+            System.out.println("Got it. I've added this task:");
+            System.out.println(task.printName());
+            System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+
+            try {
+                FileWriter fw = new FileWriter("src/main/memory.txt", true);
+                fw.write(task.printName() + "\n");
+                fw.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
     }
     /**
      * the addDeadline() method adds Events task into the list object.
@@ -91,12 +155,22 @@ public class List {
      * @param name the name of the deadline
      * @param deadline the deadline of the deadline task
      */
-    public void addDeadline(String name, String deadline) {
+    public void addDeadline(String name, String deadline, boolean isInput) {
         Task task = new Deadlines(name, deadline);
         taskList.add(task);
-        System.out.println("Got it. I've added this task:");
-        System.out.println(task.printName());
-        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+
+        if (isInput) {
+            System.out.println("Got it. I've added this task:");
+            System.out.println(task.printName());
+            System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+            try {
+                FileWriter fw = new FileWriter("src/main/memory.txt", true);
+                fw.write(task.printName() + "\n");
+                fw.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
     /**
      * the removeTask() method removes the task from the list object.
@@ -109,5 +183,33 @@ public class List {
         System.out.println(task.printName());
         taskList.remove(userInput);
         System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+
+        String lineToRemove = task.printName();
+
+        try {
+            File input = new File("src/main/memory.txt");
+            File updated = new File("src/main/updated.txt");
+
+            BufferedReader reader = new BufferedReader(new FileReader(input));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(updated));
+
+            String currentLine = "";
+
+            while ((currentLine = reader.readLine()).equals(null)) {
+
+                if (currentLine.equals(lineToRemove)) {
+                    continue;
+                }
+                writer.write(currentLine + "\n");
+            }
+            writer.close();
+            reader.close();
+
+            boolean successful = updated.renameTo(input);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+
 }
