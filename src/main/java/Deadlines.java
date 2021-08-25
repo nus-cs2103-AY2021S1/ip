@@ -3,6 +3,9 @@
  * @author Dominic Siew Zhen Yu
  *
  */
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 public class Deadlines extends Task{
     private String deadline;
@@ -18,7 +21,8 @@ public class Deadlines extends Task{
 
     public Deadlines(String userInput, String deadline) {
         super(userInput);
-        this.deadline = deadline;
+        LocalDate date = LocalDate.parse(deadline);
+        this.deadline = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
     /**
