@@ -59,7 +59,7 @@ public class List {
      * @param userInput the rank of the task in a list
      */
 
-    public void updateTaskStatus(int userInput) {
+    public void updateTaskStatus(int userInput, boolean isInput) {
         if (userInput > taskList.size()) {
             System.out.println("please enter a number that's between 1 and " + taskList.size());
             return ;
@@ -68,34 +68,38 @@ public class List {
 
         String lineToRemove = task.printName();
         task.toggleComplete();
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(task.printName());
 
-        try {
-            File input = new File("src/main/memory.txt");
-            File updated = new File("src/main/updated.txt");
+        if (isInput) {
+            System.out.println("Nice! I've marked this task as done:");
+            System.out.println(task.printName());
 
-            BufferedReader reader = new BufferedReader(new FileReader(input));
-            BufferedWriter writer = new BufferedWriter(new FileWriter(updated));
+            try {
+                File input = new File("src/main/memory.txt");
+                File updated = new File("src/main/updated.txt");
 
-            String currentLine = "";
+                BufferedReader reader = new BufferedReader(new FileReader(input));
+                BufferedWriter writer = new BufferedWriter(new FileWriter(updated));
 
-            while ((currentLine = reader.readLine()) != null) {
+                String currentLine = "";
 
-                if (currentLine.equals(lineToRemove)) {
-                    writer.write(task.printName() + "\n");
-                    continue;
+                while ((currentLine = reader.readLine()) != null) {
+
+                    if (currentLine.equals(lineToRemove)) {
+                        writer.write(task.printName() + "\n");
+                        continue;
+                    }
+                    writer.write(currentLine + "\n");
                 }
-                writer.write(currentLine + "\n");
+                writer.close();
+                reader.close();
+
+                boolean successful = updated.renameTo(input);
+
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-            writer.close();
-            reader.close();
-
-            boolean successful = updated.renameTo(input);
-
-        } catch (IOException e) {
-            e.printStackTrace();
         }
+
 
     }
 

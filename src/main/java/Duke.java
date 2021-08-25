@@ -83,7 +83,7 @@ public class Duke {
                 }
 
                 if (isCompleted){
-                    taskList.updateTaskStatus(numberAdded);
+                    taskList.updateTaskStatus(numberAdded, false);
                 }
                 numberAdded++;
             }
@@ -120,7 +120,7 @@ public class Duke {
                 taskList.printList();
             } else if (parsedInput[0].equals("done")) {
                 int itemRank = Integer.parseInt(parsedInput[1]);
-                taskList.updateTaskStatus(itemRank);
+                taskList.updateTaskStatus(itemRank, true);
 
             } else if (parsedInput[0].equals("remove")){
                 int itemRank = Integer.parseInt(parsedInput[1]);
