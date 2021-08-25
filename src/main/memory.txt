@@ -1,5 +1,3 @@
-[T] [✓] homework
-[D] [✕] yay (by: yay )
-[T] [✕] helo me
-[T] [✕] i hate cs
-[D] [✕] help (by: today )
+[T] [✕] hello
+[D] [✓] hello (by: Jan 1 2021 )
+[E] [✕] hello (at: hello )

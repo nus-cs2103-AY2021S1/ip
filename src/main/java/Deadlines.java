@@ -19,10 +19,16 @@ public class Deadlines extends Task{
      * @param deadline the time you have to complete the Deadlines
      */
 
-    public Deadlines(String userInput, String deadline) {
+    public Deadlines(String userInput, String deadline, boolean newInput) {
         super(userInput);
-        LocalDate date = LocalDate.parse(deadline);
-        this.deadline = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+
+        if (newInput) {
+            LocalDate date = LocalDate.parse(deadline);
+            this.deadline = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        } else {
+            this.deadline = deadline;
+        }
+
     }
 
     /**

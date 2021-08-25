@@ -13,20 +13,70 @@ public class List {
     private ArrayList<Task> taskList;
     private FileWriter taskFile;
     private boolean isFirstTimeOpening;
+    private Storage memory;
 
     /**
      * The constructor for the List class that instantiates a List object.
      */
 
-    public List() throws IOException {
+    public List() {
         this.taskList = new ArrayList<Task>();
         File file = new File("src/main/memory.txt");
-//        System.out.println(file.exists());
-//        if (!(file.exists())){
-//            PrintWriter writer = new PrintWriter("src/main/memory.txt");
-//            writer.print("");
-//            writer.close();
-//        } else {
+        this.memory = new Storage("src/main/memory.txt");
+    }
+
+
+    public List(File memory)  {
+        this.taskList = new ArrayList<Task>();
+        File file = new File("src/main/memory.txt");
+        this.memory = new Storage("src/main/memory.txt");
+
+        try {
+            File updated = new File("src/main/updated.txt");
+            BufferedReader reader = null;
+            reader = new BufferedReader(new FileReader(memory));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(updated));
+            String currentLine = "";
+            int numberAdded = 1;
+
+            while ((currentLine = reader.readLine()) != null) {
+                String[] seperate1 = currentLine.toString().split(" ", 2);
+                String taskTypeText = seperate1[0];
+                String taskType;
+
+                String[] seperate2 = seperate1[1].toString().split(" ", 2);
+                boolean isCompleted = (seperate2[0].equals("[✓]"))? true: false;
+                String eventInfo = seperate2[1];
+
+                switch(taskTypeText) {
+                    case "[T]":
+                        String eventname = eventInfo;
+                        this.addTodo(eventname, false);
+                        break;
+                    case "[D]":
+                        String[] seperateAgain = seperate2[1].split(" \\(by: ", 2);
+                        String eventName = seperateAgain[0];
+                        String deadline = seperateAgain[1].split("\\)", 2)[0];
+                        this.addDeadline(eventName, deadline, false);
+                        break;
+                    case "[E]":
+                        String[] seperateAgaining = seperate2[1].split(" \\(at: ", 2);
+                        String event = seperateAgaining[0];
+                        String timeline = seperateAgaining[1].split("\\)", 2)[0];
+                        this.addEvent(event, timeline, false);
+                        break;
+                }
+
+                if (isCompleted){
+                    this.updateTaskStatus(numberAdded, false);
+                }
+                numberAdded++;
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -117,13 +167,7 @@ public class List {
             System.out.println("Got it. I've added this task:");
             System.out.println(task.printName());
             System.out.println("Now you have " + taskList.size() + " tasks in the list.");
-            try {
-                FileWriter fw = new FileWriter("src/main/memory.txt", true);
-                fw.write(task.printName() + "\n");
-                fw.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            this.memory.addTaskToMemory(task.printName());
         } else {
 
         }
@@ -142,14 +186,7 @@ public class List {
             System.out.println("Got it. I've added this task:");
             System.out.println(task.printName());
             System.out.println("Now you have " + taskList.size() + " tasks in the list.");
-
-            try {
-                FileWriter fw = new FileWriter("src/main/memory.txt", true);
-                fw.write(task.printName() + "\n");
-                fw.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            this.memory.addTaskToMemory(task.printName());
         }
 
     }
@@ -160,20 +197,14 @@ public class List {
      * @param deadline the deadline of the deadline task
      */
     public void addDeadline(String name, String deadline, boolean isInput) {
-        Task task = new Deadlines(name, deadline);
+        Task task = new Deadlines(name, deadline, isInput);
         taskList.add(task);
 
         if (isInput) {
             System.out.println("Got it. I've added this task:");
             System.out.println(task.printName());
             System.out.println("Now you have " + taskList.size() + " tasks in the list.");
-            try {
-                FileWriter fw = new FileWriter("src/main/memory.txt", true);
-                fw.write(task.printName() + "\n");
-                fw.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            this.memory.addTaskToMemory(task.printName());
         }
     }
     /**
