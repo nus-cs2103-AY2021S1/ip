@@ -1,3 +1,4 @@
+package duke;
 /**
  * Events are tasks that have a timeline.
  *

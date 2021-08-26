@@ -1,3 +1,4 @@
+package duke;
 /**
  * Deadlines is a task that have a deadline which is a string.
  * @author Dominic Siew Zhen Yu

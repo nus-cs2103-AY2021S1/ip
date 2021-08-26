@@ -1,3 +1,4 @@
+package duke;
 /**
  * Todos are generic tasks, with a "Todo" indicator.
  *

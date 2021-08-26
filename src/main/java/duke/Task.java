@@ -1,3 +1,4 @@
+package duke;
 /**
  * Task are work that has a name (that's a string) and a boolean which is true when a task is completed.
  *
