@@ -9,7 +9,7 @@ package duke;
 import java.io.*;
 import java.util.ArrayList;
 
-public class List {
+public class taskList {
     private ArrayList<Task> taskList;
     private FileWriter taskFile;
     private boolean isFirstTimeOpening;
@@ -19,14 +19,14 @@ public class List {
      * The constructor for the List class that instantiates a List object.
      */
 
-    public List() {
+    public taskList() {
         this.taskList = new ArrayList<Task>();
         File file = new File("src/main/memory.txt");
         this.memory = new Storage("src/main/memory.txt");
     }
 
 
-    public List(File memory)  {
+    public taskList(File memory)  {
         this.taskList = new ArrayList<Task>();
         File file = new File("src/main/memory.txt");
         this.memory = new Storage("src/main/memory.txt");

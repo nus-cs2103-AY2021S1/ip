@@ -29,8 +29,8 @@ public class Duke {
         System.out.println("____________________________________________________________\nHello! I'm Duke\nWhat can I do for you?\n____________________________________________________________");
 
         boolean isEnded = false;
-        List taskList = null;
-        taskList = new List();
+        taskList taskList = null;
+        taskList = new taskList();
 
         File file = new File("src/main/memory.txt");
 

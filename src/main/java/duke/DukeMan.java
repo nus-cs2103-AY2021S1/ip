@@ -4,17 +4,17 @@ import java.util.Scanner;
 public class DukeMan {
 
     private Storage storage;
-    private List tasks;
+    private taskList tasks;
     private Ui ui;
 
     public DukeMan(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
-            tasks = new List(storage.load());
+            tasks = new taskList(storage.load());
         } catch (DukeException e) {
             ui.showLoadingError();
-            tasks = new List();
+            tasks = new taskList();
         }
     }
 
