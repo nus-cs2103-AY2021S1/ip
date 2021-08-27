@@ -2,6 +2,7 @@ package duke;
 
 /**
  * Parser class parses the commands given by the users.
+ * @author Dominic Siew Zhen Yu
  */
 
 public class Parser {
@@ -9,6 +10,10 @@ public class Parser {
     private String taskName;
     private String command;
     private String deadlineOrTimeline;
+
+    /**
+     * constructor for the Parser class
+     */
 
     public Parser() {
     }

@@ -3,11 +3,23 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * DukeMan is a new update from the Duke program previously. It manages the tasks of the user.
+ *
+ * @author Dominic Siew Zhen Yu
+ */
+
 public class DukeMan {
 
     private Storage storage;
     private taskList tasks;
     private Ui ui;
+
+    /**
+     * this is the constructor for the DukeMan function. the input of the program is the
+     * file path of the .txt file that contains the previous tasks inputted by the user.
+     * @param filePath the file path of the user's previously entered tasks
+     */
 
     public DukeMan(String filePath) {
         ui = new Ui();
@@ -21,6 +33,10 @@ public class DukeMan {
             tasks = new taskList();
         }
     }
+
+    /**
+     * run() is a method that runs the program.
+     */
 
     public void run() {
         String logo = " ____        _\n"
