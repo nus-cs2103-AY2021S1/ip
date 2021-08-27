@@ -260,8 +260,8 @@ public class taskList {
         for(Task task: taskList) {
             if (task.getName().contains(keyWord)) {
                 System.out.println(numb + ". " + task.printName());
+                numb++;
             }
-            numb++;
         }
     }
 }
