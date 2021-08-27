@@ -34,6 +34,18 @@ public class Task {
     }
 
     /**
+     * getName() just returns the name of the tasks
+     *
+     * @return the name of the task
+     */
+
+    public String getName() {
+        return this.name;
+    }
+
+
+
+    /**
      * the toggleComplete() method toggles the boolean "completed" when the task is completed,
      * or if the user wishes to indicate that a task is incompleted if it is indicated as
      * otherwise.

@@ -72,6 +72,10 @@ public class DukeMan {
                     int removeRank = Integer.parseInt(parser.getTaskName());
                     tasks.removeTask(removeRank - 1 );
                     break;
+                case "find":
+                    String keyWord = parser.getTaskName();
+                    tasks.findWord(keyWord);
+                    break;
                 default:
                     System.out.println("Please give an appropriate response.");
                     throw new DukeException("generic");

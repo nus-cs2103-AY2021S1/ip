@@ -252,4 +252,19 @@ public class taskList {
         }
     }
 
+    /**
+     * findWord() method finds methods with the keyword inputted by users.
+     *
+     */
+
+    public void findWord(String keyWord) {
+        System.out.println("Here are the matching tasks in your list:");
+        int numb = 1;
+        for(Task task: taskList) {
+            if (task.getName().contains(keyWord)) {
+                System.out.println(numb + ". " + task.printName());
+            }
+            numb++;
+        }
+    }
 }

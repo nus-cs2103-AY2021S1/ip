@@ -40,6 +40,8 @@ public class Parser {
             this.taskName = parsedInput[1];
         } else if (this.command.equals("remove")) {
             this.taskName = parsedInput[1];
+        } else if (this.command.equals("find")) {
+            this.taskName = parsedInput[1];
         }
     }
 
