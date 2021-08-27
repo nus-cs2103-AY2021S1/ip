@@ -6,7 +6,6 @@ package duke;
  */
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 
 public class Deadlines extends Task{
     private String deadline;
