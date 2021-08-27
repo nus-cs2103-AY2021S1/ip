@@ -4,9 +4,19 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ * Storage class handleds the interaction with the DukeMan's memory.
+ * @author Dominic Siew Zhen Yu
+ */
+
 public class Storage {
 
     private File memory;
+
+    /**
+     *
+     * @param filePath
+     */
 
     public Storage(String filePath) {
         File file = new File(filePath);

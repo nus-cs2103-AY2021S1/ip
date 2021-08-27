@@ -2,6 +2,7 @@ package duke;
 
 /**
  * Ui is a class that contains the user interface of the DukeMan program.
+ * @author Dominic Siew Zhen Yu
  */
 
 public class Ui {
