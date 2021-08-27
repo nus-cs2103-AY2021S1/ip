@@ -21,18 +21,23 @@ public class taskList {
 
     public taskList() {
         this.taskList = new ArrayList<Task>();
-        File file = new File("src/main/memory.txt");
-        this.memory = new Storage("src/main/memory.txt");
+        File file = new File("data/memory.txt");
+        this.memory = new Storage("data/memory.txt");
     }
 
 
     public taskList(File memory)  {
         this.taskList = new ArrayList<Task>();
-        File file = new File("src/main/memory.txt");
-        this.memory = new Storage("src/main/memory.txt");
+        this.memory = new Storage(memory.getPath());
 
         try {
-            File updated = new File("src/main/updated.txt");
+            memory.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            File updated = new File("data/updated.txt");
             BufferedReader reader = null;
             reader = new BufferedReader(new FileReader(memory));
             BufferedWriter writer = new BufferedWriter(new FileWriter(updated));
@@ -124,10 +129,10 @@ public class taskList {
             System.out.println(task.printName());
 
             try {
-                File input = new File("src/main/memory.txt");
-                File updated = new File("src/main/updated.txt");
+//                File input = new File("data/memory.txt");
+                File updated = new File("data/updated.txt");
 
-                BufferedReader reader = new BufferedReader(new FileReader(input));
+                BufferedReader reader = new BufferedReader(new FileReader(this.memory.load()));
                 BufferedWriter writer = new BufferedWriter(new FileWriter(updated));
 
                 String currentLine = "";
@@ -143,7 +148,7 @@ public class taskList {
                 writer.close();
                 reader.close();
 
-                boolean successful = updated.renameTo(input);
+                boolean successful = updated.renameTo(this.memory.load());
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -222,17 +227,17 @@ public class taskList {
         String lineToRemove = task.printName();
 
         try {
-            File input = new File("src/main/memory.txt");
-            File updated = new File("src/main/updated.txt");
+//            File input = new File("data/memory.txt");
+            File updated = new File("data/updated.txt");
 
-            BufferedReader reader = new BufferedReader(new FileReader(input));
+            BufferedReader reader = new BufferedReader(new FileReader(this.memory.load()));
             BufferedWriter writer = new BufferedWriter(new FileWriter(updated));
 
             String currentLine = "";
 
-            while ((currentLine = reader.readLine()).equals(null)) {
-
+            while ((currentLine = reader.readLine()) != null) {
                 if (currentLine.equals(lineToRemove)) {
+
                     continue;
                 }
                 writer.write(currentLine + "\n");
@@ -240,7 +245,7 @@ public class taskList {
             writer.close();
             reader.close();
 
-            boolean successful = updated.renameTo(input);
+            boolean successful = updated.renameTo(memory.load());
 
         } catch (IOException e) {
             e.printStackTrace();

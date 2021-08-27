@@ -1,4 +1,6 @@
 package duke;
+import java.io.File;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class DukeMan {
@@ -9,7 +11,9 @@ public class DukeMan {
 
     public DukeMan(String filePath) {
         ui = new Ui();
+        File file = new File(filePath);
         storage = new Storage(filePath);
+
         try {
             tasks = new taskList(storage.load());
         } catch (DukeException e) {
@@ -37,8 +41,6 @@ public class DukeMan {
             Parser parser = new Parser();
             parser.parsing(userInput);
             String command = parser.getCommand();
-
-            System.out.println(command);
 
             switch(command) {
                 case "todo":
@@ -82,6 +84,6 @@ public class DukeMan {
     }
 
     public static void main(String[] args) {
-        new DukeMan("src/main/memory.txt").run();
+        new DukeMan("data/memory.txt").run();
     }
 }

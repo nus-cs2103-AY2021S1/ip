@@ -10,17 +10,28 @@ public class Storage {
 
     public Storage(String filePath) {
         File file = new File(filePath);
-        memory = file;
+
+
+        try {
+            if (!file.exists()){
+                file.getParentFile().mkdir();
+                file.createNewFile();System.out.println("hello");
+            }
+            this.memory = file;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public File load() {
-        return memory;
+        return this.memory;
     }
 
     public void addTaskToMemory(String event) {
         try {
             FileWriter fw = null;
-            fw = new FileWriter(memory, true);
+            fw = new FileWriter(this.memory, true);
             fw.write(event + "\n");
             fw.close();
         } catch (IOException e) {
