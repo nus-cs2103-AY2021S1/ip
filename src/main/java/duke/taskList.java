@@ -117,7 +117,6 @@ public class taskList {
     public void updateTaskStatus(int userInput, boolean isInput) {
         if (userInput > taskList.size()) {
             System.out.println("please enter a number that's between 1 and " + taskList.size());
-            return ;
         }
         Task task = taskList.get(userInput - 1);
 
@@ -129,7 +128,6 @@ public class taskList {
             System.out.println(task.printName());
 
             try {
-//                File input = new File("data/memory.txt");
                 File updated = new File("data/updated.txt");
 
                 BufferedReader reader = new BufferedReader(new FileReader(this.memory.load()));
@@ -227,7 +225,6 @@ public class taskList {
         String lineToRemove = task.printName();
 
         try {
-//            File input = new File("data/memory.txt");
             File updated = new File("data/updated.txt");
 
             BufferedReader reader = new BufferedReader(new FileReader(this.memory.load()));

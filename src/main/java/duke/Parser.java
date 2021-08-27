@@ -16,6 +16,7 @@ public class Parser {
     /**
      * parsing(String input) takes in a string from the given input and parses the string
      * into the taskName, command and deadlineOrTimeline variables.
+     *
      * @param input the given input by the user
      */
 
@@ -45,6 +46,7 @@ public class Parser {
 
     /**
      * getCommand() returns the command of the user's input.
+     *
      * @return the command of the user's input
      */
 
@@ -62,8 +64,8 @@ public class Parser {
     }
 
     /**
-     * getTimeline() returns the timeline or the deadline of
-     * the event/deadline respectively.
+     * getTimeline() returns the timeline or the deadline of the event/deadline respectively.
+     *
      * @return the timeline/deadline of the task
      */
 
