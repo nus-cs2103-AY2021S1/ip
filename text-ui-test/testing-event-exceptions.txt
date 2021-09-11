@@ -1,0 +1,6 @@
+event
+event /at friday 4pm
+event lecture /at
+event lecture /at friday 4pm
+list
+bye
