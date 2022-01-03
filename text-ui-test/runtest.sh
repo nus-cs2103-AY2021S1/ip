@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+export LC_ALL=en_GB.UTF-8
 
 # create bin directory if it doesn't exist
 if [ ! -d "../bin" ]
@@ -12,8 +13,21 @@ then
     rm ACTUAL.TXT
 fi
 
+# delete output from previous run
+if [ -e "./data/dukeData.txt" ]
+then
+    rm data/dukeData.txt
+fi
+
 # compile the code into the bin folder, terminates if error occurred
-if ! javac -cp ../src -Xlint:none -d ../bin ../src/main/java/Duke.java
+if
+! javac -cp ../src -Xlint:none -d ../bin ../src/main/java/duke/CommonString.java
+! javac -cp ../src -Xlint:none -d ../bin ../src/main/java/duke/CommonMethod.java
+! javac -cp ../src -Xlint:none -d ../bin ../src/main/java/duke/task/*.java
+! javac -cp ../src -Xlint:none -d ../bin ../src/main/java/duke/exception/*.java
+! javac -cp ../src -Xlint:none -d ../bin ../src/main/java/duke/command/*.java
+! javac -cp ../src -Xlint:none -d ../bin ../src/main/java/duke/logic/*.java
+! javac -cp ../src -Xlint:none -d ../bin ../src/main/java/duke/*.java
 then
     echo "********** BUILD FAILURE **********"
     exit 1
