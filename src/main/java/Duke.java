@@ -12,6 +12,9 @@ public class Duke {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
+
+        List<String> ls = new ArrayList<>();
+
         Scanner scan = new Scanner(System.in);
         printLine();
         System.out.println("Hello! I'm Duke");
@@ -22,8 +25,18 @@ public class Duke {
             if (input.equals("bye")) {
                 break;
             }
+
+            if (input.equals("list")) {
+                for (int i = 0; i < ls.size(); i++) {
+                    System.out.println((i + 1) + ". " + ls.get(i));
+                }
+                printLine();
+                continue;
+            }
+
             printLine();
-            System.out.println(input);
+            System.out.println("added: " + input);
+            ls.add(input);
             printLine();
         }
         printLine();
