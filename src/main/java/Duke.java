@@ -65,7 +65,7 @@ public class Duke {
                 }
             } else if (input.startsWith("todo")) {
                 try {
-                    Task task = new Todo(input.split("todo")[1]);
+                    Task task = new Todo(input.split("todo")[1].trim());
                     ls.add(task);
                     printLine();
                     System.out.println("Got it. I've added this task: ");
@@ -108,7 +108,24 @@ public class Duke {
                     System.out.println("Oops! The correct format is : `event /at <type time here>`");
 
                 }
-             } else {
+             } else if (input.startsWith("delete")) {
+                try {
+                    String[] splitted = input.split(" ");
+                    int index = Integer.valueOf(splitted[1]);
+                    Task removedTask = ls.get(index - 1);
+                    ls.remove(index - 1);
+                    printLine();
+                    System.out.println("Noted. I've removed this task: ");
+                    System.out.println(removedTask);
+                    System.out.println("Now you have " + ls.size() + " tasks in the list.");
+                    printLine();
+                    continue;
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println("The index you have provided is invalid");
+                    printLine();
+                    continue;
+                }
+            } else {
                 System.out.println("OOPS!!! I'm sorry, but I do not know what that means :-(");
                 printLine();
             }
