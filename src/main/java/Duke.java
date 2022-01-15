@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.nio.charset.Charset;
 import java.util.*;
 
@@ -25,18 +26,14 @@ public class Duke {
             String input = scan.nextLine();
             if (input.startsWith("bye")) {
                 break;
-            }
-
-            if (input.startsWith("list")) {
+            } else if (input.startsWith("list")) {
                 System.out.println("Here are the tasks in your list:");
                 for (int i = 0; i < ls.size(); i++) {
                     System.out.println((i + 1) + ". " + ls.get(i));
                 }
                 printLine();
                 continue;
-            }
-
-            if (input.startsWith("mark")) {
+            } else if (input.startsWith("mark")) {
                 try {
                     String[] splitted = input.split(" ");
                     int index = Integer.valueOf(splitted[1]);
@@ -51,8 +48,7 @@ public class Duke {
                     printLine();
                     continue;
                 }
-            }
-            if (input.startsWith("unmark")) {
+            } else if (input.startsWith("unmark")) {
                 try {
                     String[] splitted = input.split(" ");
                     int index = Integer.valueOf(splitted[1]);
@@ -67,42 +63,54 @@ public class Duke {
                     printLine();
                     continue;
                 }
-            }
+            } else if (input.startsWith("todo")) {
+                try {
+                    Task task = new Todo(input.split("todo")[1]);
+                    ls.add(task);
+                    printLine();
+                    System.out.println("Got it. I've added this task: ");
+                    System.out.println(task);
+                    System.out.println("Now you have " + ls.size() + " tasks in the list.");
+                    printLine();
+                    continue;
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
+                    printLine();
+                    continue;
+                }
+            } else if (input.startsWith("deadline")) {
+                try {
+                    String[] splitted = input.split("deadline")[1].split("/by");
+                    Deadline toAdd = new Deadline(splitted[0].trim(), splitted[1].trim());
+                    ls.add(toAdd);
+                    printLine();
+                    System.out.println("Got it. I've added this task: ");
+                    System.out.println(toAdd);
+                    System.out.println("Now you have " + ls.size() + " tasks in the list.");
+                    printLine();
+                    continue;
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println("Oops! The correct format is : `deadline /by <type time here>`");
+                }
 
-            if (input.startsWith("todo")) {
-                Task task = new Todo(input.split("todo")[1]);
+            } else if (input.startsWith("event")) {
+                try {
+                    String[] splitted = input.split("event")[1].split("/at");
+                    Event toAdd = new Event(splitted[0].trim(), splitted[1].trim());
+                    ls.add(toAdd);
+                    printLine();
+                    System.out.println("Got it. I've added this task: ");
+                    System.out.println(toAdd);
+                    System.out.println("Now you have " + ls.size() + " tasks in the list.");
+                    printLine();
+                    continue;
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println("Oops! The correct format is : `event /at <type time here>`");
 
-                ls.add(task);
+                }
+             } else {
+                System.out.println("OOPS!!! I'm sorry, but I do not know what that means :-(");
                 printLine();
-                System.out.println("Got it. I've added this task: ");
-                System.out.println(task);
-                System.out.println("Now you have " + ls.size() + " tasks in the list.");
-                printLine();
-                continue;
-            }
-
-            if (input.startsWith("deadline")) {
-                String[] splitted = input.split("deadline")[1].split("/by");
-                Deadline toAdd = new Deadline(splitted[0].trim(), splitted[1].trim());
-                ls.add(toAdd);
-                printLine();
-                System.out.println("Got it. I've added this task: ");
-                System.out.println(toAdd);
-                System.out.println("Now you have " + ls.size() + " tasks in the list.");
-                printLine();
-                continue;
-            }
-
-            if (input.startsWith("event")) {
-                String[] splitted = input.split("event")[1].split("/at");
-                Event toAdd = new Event(splitted[0].trim(), splitted[1].trim());
-                ls.add(toAdd);
-                printLine();
-                System.out.println("Got it. I've added this task: ");
-                System.out.println(toAdd);
-                System.out.println("Now you have " + ls.size() + " tasks in the list.");
-                printLine();
-                continue;
             }
 
         }
