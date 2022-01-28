@@ -7,13 +7,15 @@ then
 fi
 
 # delete output from previous run
-if [ -e "./ACTUAL.TXT" ]
+if [ -e "./ACTUAL.TXT" ]time
 then
     rm ACTUAL.TXT
 fi
 
+set JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF-8
+
 # compile the code into the bin folder, terminates if error occurred
-if ! javac -cp ../src -Xlint:none -d ../bin ../src/main/java/Duke.java
+if ! javac -cp ../src -Xlint:none -d ../bin ../src/main/java/*.java
 then
     echo "********** BUILD FAILURE **********"
     exit 1
