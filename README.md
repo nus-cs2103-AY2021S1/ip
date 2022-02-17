@@ -23,4 +23,15 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
    | | | | | | | |/ / _ \
    | |_| | |_| |   <  __/
    |____/ \__,_|_|\_\___|
+   1. list
+   2. done {item number}
+   3. todo {description}
+   4. deadline {description} /by {dd/mm/yyyy} {hhmm}
+       e.g. deadline return book /by 1/12/2020 1800
+   5. event {description} /at {dd/mm/yyyy} {hhmm}-{hhmm}
+       e.g. event meeting /at 1/12/2020 1800-1900
+   6. delete {item number}
+   7. find {item to find}
+   8. update {item number} /{desc OR date} {value}
+   9. bye
    ```
