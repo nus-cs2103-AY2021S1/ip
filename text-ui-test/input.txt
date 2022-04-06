@@ -1,0 +1,4 @@
+todo Buy Dinner
+todo Eat Chicken
+deadline /by friday
+done 2
