@@ -24,3 +24,7 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
    | |_| | |_| |   <  __/
    |____/ \__,_|_|\_\___|
    ```
+
+## Acknowledgements
+
+1. JavaFX code was adapted from the boilerplate code in https://se-education.org/guides/tutorials/javaFx.html
