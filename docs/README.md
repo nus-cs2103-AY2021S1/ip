@@ -1,12 +1,12 @@
-# Duke(Chatty-Bot) User Guide
+# Chatty-Bot User Guide
 
 ## Introduction
-Duke(Chatty-Bot) is a bot that keeps track of your to do list. It is optimised to be used via a command-line interface (CLI) although a GUI is also provided for clarity. Duke is suitable for those who wish to keep track of their tasks using CLI.
+Chatty-Bot is a bot that keeps track of your to do list. It is optimised to be used via a command-line interface (CLI) although a GUI is also provided for clarity. Chatty-Bot is suitable for those who wish to keep track of their tasks using CLI.
 
 ![Ui image](Ui.png)
 
-## Features supported by Duke(Chatty-Bot)
-Duke(Chatty-Bot) supports a list of features as shown below. 
+## Features supported by Chatty-Bot
+Chatty-Bot supports a list of features as shown below. 
 
 * Display help message with how to use the bot for first time 
 * Add tasks to current task list
