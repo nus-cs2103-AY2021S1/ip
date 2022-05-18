@@ -1,0 +1,9 @@
+todo sleep
+deadline wake up /by 21 Aug 2020 1000
+event do work /at 21 Aug 2020 1045
+list
+event efwfw /at 9pm
+done 3
+delete 2
+list
+bye
