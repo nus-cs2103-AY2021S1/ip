@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.List;
@@ -5,7 +6,8 @@ import java.util.ArrayList;
 
 public class Duke {
     private static String line = "___________________________________";
-    private static List<String> words = new ArrayList<>();
+    private static ArrayList<String> words = new ArrayList<>();
+    private static ArrayList<Boolean> finished = new ArrayList<>();
 
     public static void greet() {
         System.out.println(line);
@@ -14,35 +16,56 @@ public class Duke {
         System.out.println(line);
     }
 
-    public static void echo(String word) {
-        if (word.equals("bye") || word.equals("Bye")) {
-            System.out.println(line);
-            System.out.println("Bye. Hope to see you again soon!");
-            System.out.println(line);
-            System.exit(0);
-        } else {
-            System.out.println(line);
-            System.out.println(word);
-            System.out.println(line);
-        }
+    public static void addWord(String word) {
+        System.out.println(line);
+        words.add(word);
+        finished.add(false);
+        System.out.println("added: " + word);
+        System.out.println(line);
     }
 
-    public static void addList(String word) {
-        if (word.equals("bye") || word.equals("Bye")) {
-            System.out.println(line);
-            System.out.println("Bye. Hope to see you again soon!");
-            System.out.println(line);
-            System.exit(0);
-        } else if (word.equals("list") || word.equals("List")) {
-            for (int i = 0; i < words.size(); i++) {
-                int counter = i + 1;
-                System.out.println(counter + ". " + words.get(i));
+    public static void bye() {
+        System.out.println(line);
+        System.out.println("Bye. Hope to see you again soon!");
+        System.out.println(line);
+        System.exit(0);
+    }
+
+    public static void addlist() {
+        System.out.println(line);
+        System.out.println("Here are the tasks in your list:");
+        for (int i = 0; i < words.size(); i++) {
+            int counter = i + 1;
+            String checkBox = finished.get(i) ? "[/]" : "[x]";
+            System.out.println(counter + ". " + checkBox + " " + words.get(i));
+        }
+        System.out.println(line);
+    }
+
+    public static void handleDone(String word) {
+        System.out.println(line);
+        System.out.println("Nice! I've marked this task as done:");
+        String[] doneTasks = word.split(" ");
+        for (int i = 1; i < doneTasks.length; i++) {
+            int taskNo = Integer.parseInt(doneTasks[i]);
+            if (taskNo - 1 < words.size()) {
+                finished.set(taskNo - 1, true);
+                String checkBox = "[/]";
+                System.out.println(checkBox + " " + words.get(taskNo - 1));
             }
+        }
+        System.out.println(line);
+    }
+
+    public static void handle(String word) {
+        if (word.equals("bye") || word.equals("Bye")) {
+            bye();
+        } else if (word.equals("list") || word.equals("List")) {
+            addlist();
+        } else if (word.contains("done") || word.contains("Done")) {
+            handleDone(word);
         } else {
-            System.out.println(line);
-            words.add(word);
-            System.out.println("added: " + word);
-            System.out.println(line);
+            addWord(word);
         }
     }
 
@@ -59,7 +82,7 @@ public class Duke {
         while (sc.hasNextLine()) {
             String nextWord = sc.nextLine();
             if (!nextWord.equals("")) {
-                addList((nextWord));
+                handle((nextWord));
             }
         }
     }
