@@ -28,3 +28,21 @@ Got it. I've added this task:
   [E][X] project meeting  (at:  Mon 2-4pm)
 Now you have 3 tasks in your list
 _______________________________________
+_______________________________________
+OHNOOOOOO!!! The description of a event cannot be empty.
+_______________________________________
+_______________________________________
+OHNOOOOOO!!! The description of a todo cannot be empty.
+_______________________________________
+_______________________________________
+ Oh no, the format of a event is: event <YOUR TASK HERE> /at <DATE>
+_______________________________________
+_______________________________________
+Nice! I've marked this task as done:
+[T][/] borrow book
+_______________________________________
+_______________________________________
+Got it. I've added this task:
+  [D][X] return to home  (by:  idk)
+Now you have 4 tasks in your list
+_______________________________________

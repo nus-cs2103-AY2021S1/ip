@@ -5,26 +5,45 @@ public class Interact {
     private static String line = "_______________________________________";
     private static ArrayList<Task> tasks = new ArrayList<>();
 
-    public static void handle(String word) {
+    public static void handle(String word) throws DukeException {
         if (word.startsWith("bye") || word.startsWith("Bye")) {
             bye();
         } else if (word.startsWith("list") || word.startsWith("List")) {
             showList();
         } else if (word.startsWith("done") || word.startsWith("Done")) {
             handleDone(word);
-        } else if (word.startsWith("todo")) {
-            String[] splitted = word.split(" ", 2);
-            addTask(splitted[1], null, 'T');
-        } else if (word.startsWith("deadline")) {
-            String[] splitted = word.split(" ", 2);
-            String[] stringAndDate = splitted[1].split("/by");
-            addTask(stringAndDate[0], stringAndDate[1], 'D');
-        } else if (word.startsWith("event")) {
-            String[] splitted = word.split(" ", 2);
-            String[] stringAndDate = splitted[1].split("/at");
-            addTask(stringAndDate[0], stringAndDate[1], 'E');
+        } else if (word.startsWith("todo") || word.startsWith("deadline") || word.startsWith("event")) {
+            handleTasks(word);
         } else {
-            System.out.println("Please give proper input");
+            throw new DukeException("bad input");
+        }
+    }
+
+    public static void handleTasks(String word) throws DukeException{
+        String[] splitted = word.split(" ", 2);
+        if (splitted.length < 2) {
+            throw new EmptyDescException(splitted[0]);
+        }
+
+        if (splitted[0].equals("todo")) {
+            addTask(splitted[1], null, 'T');
+        } else {
+            String[] stringAndDate;
+            if (splitted[0].equals("deadline")) {
+                stringAndDate = splitted[1].split("/by");
+            } else {
+                stringAndDate = splitted[1].split("/at");
+            }
+
+            if (stringAndDate.length < 2) {
+                throw new BadFormatException("incorrect format", splitted[0]);
+            }
+
+            if (splitted[0].equals("deadline")) {
+                addTask(stringAndDate[0], stringAndDate[1], 'D');
+            } else {
+                addTask(stringAndDate[0], stringAndDate[1], 'E');
+            }
         }
     }
 
@@ -97,8 +116,13 @@ public class Interact {
         while (sc.hasNextLine()) {
             String nextWord = sc.nextLine();
             if (!nextWord.equals("")) {
-                handle((nextWord));
+                try {
+                    handle(nextWord);
+                } catch (DukeException e) {
+                    System.out.println(e.toString());
+                }
             }
         }
     }
 }
+
