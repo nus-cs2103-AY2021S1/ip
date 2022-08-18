@@ -25,7 +25,17 @@ public class Duke {
                     Task currentTask = tasks.get(completedIndex - 1);
                     currentTask.setComplete(true);
                     System.out.println("Nice! I've marked this task as done: [✓] " + currentTask.getTaskName());
-                } else {
+
+                    //delete task
+                } else if (command.length() >= 6 && command.substring(0,6).equals("delete")) {
+                    int deleteIndex = Character.getNumericValue(command.charAt(7));
+                    Task deletedTask = tasks.get(deleteIndex - 1);
+                    tasks.remove(deleteIndex - 1);
+                    System.out.println("Noted. I've removed this task:" + deletedTask.toString()
+                    + "\nNow you have " +  tasks.size() +  " tasks in the list.");
+
+                }
+                else {
                     //Todo
                     if (command.length() >= 4 && command.substring(0,4).equals("todo")) {
                         try {
