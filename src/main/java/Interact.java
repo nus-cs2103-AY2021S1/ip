@@ -12,6 +12,8 @@ public class Interact {
             showList();
         } else if (word.startsWith("done") || word.startsWith("Done")) {
             handleDone(word);
+        } else if (word.startsWith("delete") || word.startsWith("Delete")) {
+            handleDelete(word);
         } else if (word.startsWith("todo") || word.startsWith("deadline") || word.startsWith("event")) {
             handleTasks(word);
         } else {
@@ -88,11 +90,29 @@ public class Interact {
         System.out.println(line);
     }
 
-    public static void handleDone(String word) {
+    public static boolean isValidNum(String num) {
+        char[] charas = num.toCharArray();
+        for (int i = 0; i < num.length(); i++) {
+            if (!Character.isDigit(charas[i])) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static void handleDone(String word) throws DukeException {
         System.out.println(line);
-        System.out.println("Nice! I've marked this task as done:");
         String[] doneTasks = word.split(" ");
+        if (doneTasks.length < 2) {
+            throw new BadFormatException("done", "done");
+        }
+
+        System.out.println("Nice! I've marked this task as done:");
+
         for (int i = 1; i < doneTasks.length; i++) {
+            if (!isValidNum(doneTasks[i])) {
+                throw new DukeException("invalid done format");
+            }
             int taskNo = Integer.parseInt(doneTasks[i]);
             if (taskNo - 1 < tasks.size()) {
                 tasks.get(taskNo - 1).markAsDone();
@@ -102,10 +122,36 @@ public class Interact {
         System.out.println(line);
     }
 
+    public static void handleDelete(String word) throws DukeException {
+        System.out.println(line);
+        String[] deleteTasks = word.split(" ");
+
+        if (deleteTasks.length < 2) {
+            throw new BadFormatException("failed delete", "delete");
+        }
+
+        System.out.println("The following task has been deleted:");
+
+        for (int i = 1; i < deleteTasks.length; i++) {
+            if (!isValidNum(deleteTasks[i])) {
+                throw new DukeException("invalid task");
+            }
+
+            int taskNo = Integer.parseInt(deleteTasks[i]);
+            if (taskNo - 1 < tasks.size()) {
+                Task removed = tasks.remove(taskNo - 1);
+                System.out.println(removed);
+            } else {
+                System.out.println("hi");
+            }
+        }
+        System.out.println(line);
+    }
+
 
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
+        String logo = " ____        _\n"
+                + "|  _ \\ _   _| | _____\n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
@@ -119,7 +165,7 @@ public class Interact {
                 try {
                     handle(nextWord);
                 } catch (DukeException e) {
-                    System.out.println(e.toString());
+                    System.out.println(e);
                 }
             }
         }

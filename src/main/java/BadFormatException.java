@@ -9,9 +9,15 @@ public class BadFormatException extends DukeException {
 
     @Override
     public String toString() {
-        String separator = taskType.equals("deadline") ? "/by" : "/at";
-        String ret = line + "\n Oh no, the format of a " + this.taskType + " is: " + this.taskType
-                + " <YOUR TASK HERE> " + separator + " <DATE>\n" + line;
-        return ret;
+        if (this.taskType.equals("deadline") || this.taskType.equals("event")) {
+            String separator = taskType.equals("deadline") ? "/by" : "/at";
+            String ret = line + "\n Oh no, the format of a " + this.taskType + " is: " + this.taskType
+                    + " <YOUR TASK HERE> " + separator + " <DATE>\n" + line;
+            return ret;
+        } else {
+            String ret = line + "\n Oh no, the format of a " + this.taskType + " is: " + this.taskType
+                    + " <YOUR TASK HERE> " + " <ALL TASK IDs>\n" + line;
+            return ret;
+        }
     }
 }

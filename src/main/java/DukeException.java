@@ -7,7 +7,7 @@ public class DukeException extends Exception {
 
     @Override
     public String toString() {
-        String ret = line + "\n ohai, please provide proper input :<<<<< \n" + line;
+        String ret = line + "\nohai, please provide proper input :<<<<<\n" + line;
         return ret;
     }
 }
