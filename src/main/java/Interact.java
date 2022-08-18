@@ -1,10 +1,7 @@
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.List;
-import java.util.ArrayList;
 
-public class Duke {
+public class Interact {
     private static String line = "_______________________________________";
     private static ArrayList<Task> tasks = new ArrayList<>();
 
