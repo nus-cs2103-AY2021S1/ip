@@ -11,8 +11,9 @@ public class Duke {
     public static void main(String[] args) {
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
         Scanner nextCommand = new Scanner(System.in);
-        ArrayList<Task> tasks = Duke.readFile();
+        Duke.checkDirectory();
         Duke.createFile();
+        ArrayList<Task> tasks = Duke.readFile();
         while (true) {
             String command = nextCommand.nextLine();
             boolean taskAdded = false;
@@ -40,7 +41,8 @@ public class Duke {
                     tasks.remove(deleteIndex - 1);
                     System.out.println("Noted. I've removed this task:" + deletedTask.toString()
                     + "\nNow you have " +  tasks.size() +  " tasks in the list.");
-
+                    //save the tasks in hard disk
+                    Duke.writeFile(tasks);
                 }
                 else {
                     //Add a todo
@@ -86,30 +88,35 @@ public class Duke {
                         throw new DukeException("Sorry, I don't know what that means");
                     }
             }
-               if(taskAdded) {
+               if (taskAdded) {
                    Task addedTask = tasks.get(tasks.size() - 1);
                    System.out.println("Got it. I've added this task: \n" + addedTask.toString() +
                            "\nNow you have " +  tasks.size() +  " tasks in the list.");
+                   //save the tasks in hard disk
+                   Duke.writeFile(tasks);
                }
 
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
             }
 
-
-
         }
-        //save the tasks in hard disk
-        Duke.writeFile(tasks);
+
         System.out.println("Bye. Hope to see you again soon!");
+    }
+    public static void checkDirectory() {
+        String PATH = "./data";
+        File directory = new File(PATH);
+        if (!directory.exists()) {
+            directory.mkdir();
+        }
     }
     public static void createFile() {
         try {
+
             File myObj = new File("data/filename.txt");
             if (myObj.createNewFile()) {
                 System.out.println("File created: " + myObj.getName());
-            } else {
-                System.out.println("File already exists.");
             }
         } catch (IOException e) {
             System.out.println("An error has occured");
