@@ -2,17 +2,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
-<<<<<<< HEAD
-    private String date;
-    public Event (String s, boolean isCompleted) {
-        super(s.split("/at")[0].substring(5).strip(),isCompleted);
-        date = s.split("/at")[1].strip();
-=======
     private LocalDate date;
-    public Event (String s) {
-        super(s.split("/at")[0].substring(5).strip());
+    public Event (String s, boolean isCompleted) {
+        super(s.split("/at")[0].substring(5).strip(), isCompleted);
         date = LocalDate.parse(s.split("/at")[1].strip());
->>>>>>> branch-Level-8
     }
     @Override
     public String toString() {
