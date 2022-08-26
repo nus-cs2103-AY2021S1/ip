@@ -1,11 +1,3 @@
-import java.util.Scanner;
-
-import java.io.File;
-import java.io.IOException;
-import java.io.FileWriter;
-import java.io.FileNotFoundException;  // Import this class to handle errors
-import java.util.Scanner; // Import the Scanner class to read text files
-
 
 public class Duke {
     private Storage storage;
