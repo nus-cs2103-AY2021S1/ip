@@ -9,7 +9,7 @@ public class Event extends Task {
     }
     @Override
     public String toString() {
-        String completion = this.isComplete() ? "[✓]" : "[✗]";
+        String completion = this.isComplete() ? "[X]" : "[ ]";
         return "[E]" + completion + " " + this.getTaskName() + " (at: "
             + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }

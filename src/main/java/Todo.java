@@ -4,7 +4,7 @@ public class Todo extends Task {
     }
     @Override
     public String toString() {
-        String completion = this.isComplete() ? "[✓]" : "[✗]";
+        String completion = this.isComplete() ? "[X]" : "[ ]";
         return "[T]" + completion + " " + this.getTaskName();
     }
     public String toFormattedString() {

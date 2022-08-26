@@ -19,7 +19,7 @@ public class Parser {
             int completedIndex = Character.getNumericValue(command.charAt(5));
             Task currentTask = tasks.get(completedIndex - 1);
             currentTask.setComplete(true);
-            System.out.println("Nice! I've marked this task as done: [✓] " + currentTask.getTaskName());
+            System.out.println("Nice! I've marked this task as done: [X] " + currentTask.getTaskName());
             s.writeFile(tasks);
 
             //delete task

@@ -10,7 +10,7 @@ public class Deadline extends Task {
     }
 
     public String toString() {
-        String completion = this.isComplete() ? "[✓]" : "[✗]";
+        String completion = this.isComplete() ? "[X]" : "[ ]";
         return "[D]" + completion + " " + this.getTaskName() + " (by: " +
                 date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
