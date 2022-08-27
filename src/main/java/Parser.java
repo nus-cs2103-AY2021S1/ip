@@ -1,3 +1,6 @@
+/**
+ * Used to parse user's commands entered and execute the command
+ */
 public class Parser {
     private Storage s;
     private Ui ui;

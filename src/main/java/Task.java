@@ -1,6 +1,14 @@
+/**
+ * Represents a task that can be created by the user.
+ */
 public class Task {
     private String taskName;
     private boolean isComplete;
+    /**
+     * Constructor used to create a new Task object
+     * @param s Command containing task message and time
+     * @param isComplete whether the task is completed
+     */
     public Task (String s, boolean isComplete) {
         this.taskName = s;
         this.isComplete = isComplete;
