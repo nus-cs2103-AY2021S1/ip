@@ -42,6 +42,7 @@ public class Duke {
         }
         ui.showGoodbye();
     }
+
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
 

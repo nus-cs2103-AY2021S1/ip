@@ -9,6 +9,7 @@ public class Ui {
     public static void showWelcome() {
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
     }
+
     /**
      * Prints error message for user
      */
@@ -24,6 +25,7 @@ public class Ui {
         Scanner nextCommand = new Scanner(System.in);
         return nextCommand.nextLine();
     }
+
     /**
      * Prints exit message for user
      */

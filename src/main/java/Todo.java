@@ -10,11 +10,13 @@ public class Todo extends Task {
     public Todo (String s, boolean isCompleted) {
         super(s.substring(5), isCompleted);
     }
+
     @Override
     public String toString() {
         String completion = this.isComplete() ? "[X]" : "[ ]";
         return "[T]" + completion + " " + this.getTaskName();
     }
+
     /**
      * Returns a formatted version of the task to store in memory
      * @return formatted string representation of task

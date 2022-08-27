@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
     private LocalDate date;
+
     /**
      * Constructor used to create a new deadline object
      * @param s Command containing task message and time
