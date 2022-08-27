@@ -37,6 +37,14 @@ public class Parser {
                     + "\nNow you have " +  tasks.getSize() +  " tasks in the list.");
             //save the tasks in hard disk
             s.writeFile(tasks);
+        } else if (command.startsWith("find")) {
+            System.out.println("Here are the matching tasks in your list");
+            String keyword = command.substring(5);
+            for (int i = 0; i < tasks.getSize(); i++) {
+                if(tasks.get(i).toString().contains(keyword)) {
+                    System.out.println(tasks.get(i).toString());
+                }
+            }
         }
         else {
             //Add a todo

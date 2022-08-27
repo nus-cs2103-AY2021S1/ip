@@ -30,4 +30,5 @@ public class Task {
         String completion = this.isComplete() ? "1" : "0";
         return "- | " + completion + " | " + this.getTaskName();
     }
+
 }
