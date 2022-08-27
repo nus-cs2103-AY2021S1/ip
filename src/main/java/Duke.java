@@ -1,10 +1,16 @@
-
+/**
+ * Main java class to create a new Duke object
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
     private Parser parser;
 
+    /**
+     * Consturctor to create new Duke object
+     * @param filePath the specified filepath to store Tasks after the program exits
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -16,6 +22,10 @@ public class Duke {
         }
         parser = new Parser(storage, ui, tasks);
     }
+
+    /**
+     * Runs the Duke program
+     */
     public void run() {
         ui.showWelcome();
         while (true) {

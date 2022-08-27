@@ -1,3 +1,4 @@
+
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -6,7 +7,6 @@ public class TaskListTest {
     @Test
     public void testAddingItem() {
         tasks.add(new Todo("todo testing", false));
-
         assertEquals(1, tasks.getSize());
         }
 
