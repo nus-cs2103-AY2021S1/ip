@@ -4,6 +4,7 @@ import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
     private LocalDate date;
+
     public Deadline (String s , boolean isCompleted) {
         super(s.split("/by")[0].substring(8).strip(), isCompleted);
         date = LocalDate.parse(s.split("/by")[1].strip());

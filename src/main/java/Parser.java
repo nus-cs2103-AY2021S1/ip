@@ -2,11 +2,13 @@ public class Parser {
     private Storage s;
     private Ui ui;
     private TaskList tasks;
+
     public Parser(Storage s, Ui ui, TaskList taskList) {
         this.s = s;
         this.ui = ui;
         this.tasks = taskList;
     }
+
     public void parse(String command) throws DukeException {
         boolean taskAdded = false;
         if (command.equals("list")) {
@@ -14,15 +16,16 @@ public class Parser {
                 Task nextTask = tasks.get(i);
                 System.out.println((i + 1) + ". " + nextTask.toString());
             }
-            //else if command is done
-        } else if (command.startsWith("done")){
+
+        //else if command is done
+        } else if (command.startsWith("done")) {
             int completedIndex = Character.getNumericValue(command.charAt(5));
             Task currentTask = tasks.get(completedIndex - 1);
             currentTask.setComplete(true);
             System.out.println("Nice! I've marked this task as done: [X] " + currentTask.getTaskName());
             s.writeFile(tasks);
 
-            //delete task
+        //delete task
         } else if (command.startsWith("delete")) {
             int deleteIndex = Character.getNumericValue(command.charAt(7));
             Task deletedTask = tasks.get(deleteIndex - 1);
@@ -45,7 +48,7 @@ public class Parser {
                 } catch (DukeException e) {
                     System.out.println(e.getMessage());
                 }
-                //event
+            //event
             } else if (command.startsWith("event")) {
                 try {
                     if (command.length() == 5) {
@@ -58,7 +61,7 @@ public class Parser {
                     System.out.println(e.getMessage());
                 }
 
-                //deadline
+            //deadline
             } else if (command.startsWith("deadline")) {
                 try {
                     if (command.length() == 8) {
@@ -70,7 +73,6 @@ public class Parser {
                 } catch (DukeException e) {
                     System.out.println(e.getMessage());
                 }
-
             } else {
                 throw new DukeException("Sorry, I don't know what that means");
             }

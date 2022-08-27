@@ -1,4 +1,3 @@
-
 public class Duke {
     private Storage storage;
     private TaskList tasks;
@@ -16,6 +15,7 @@ public class Duke {
         }
         parser = new Parser(storage, ui, tasks);
     }
+
     public void run() {
         ui.showWelcome();
         while (true) {
@@ -32,6 +32,7 @@ public class Duke {
         }
         ui.showGoodbye();
     }
+
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
 
