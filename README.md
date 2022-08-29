@@ -1,6 +1,13 @@
-# Duke project template
+# Introduction
+Duke is a chatbot to keep all your ToDos, Events and Deadlines at your fingertips. It comes with a Graphical user interface (GUI) and is optimized for Command-line interface (CLI) users.
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+<p align="center">
+  <img width="650" height="1000" src="./docs/Ui.png">
+</p>
+
+## Duke project template
+
+This project can serve as a template for a greenfield Java project. Instructions on how to use it are included below.
 
 ## Setting up in Intellij
 
