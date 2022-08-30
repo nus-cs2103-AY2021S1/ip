@@ -13,6 +13,12 @@ public class Duke {
         System.out.println("Hello! I'm Duke What can I do for you?");
     }
 
+    public static void removeItem (int ItemIndex){
+        ListofMessages.remove(ItemIndex);
+    }
+
+
+
     public static void DisplayListOfMessages() {
         int LengthOfArrayList;
         LengthOfArrayList = ListofMessages.size();
@@ -63,8 +69,46 @@ public class Duke {
                 String message = input.next();
 
                 //Make sure message is valid
-                if(!(message.equals("list")) &&!(message.equals("todo"))&& !(message.equals("event"))&&!(message.equals("deadline"))){
+                if(!(message.equals("list")) &&!(message.equals("todo"))&& !(message.equals("event"))&&
+                        !(message.equals("deadline"))&&!(message.equals("delete"))){
                     throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-();");
+                }
+
+                String ToDelete = "delete";
+                if (message.equals(ToDelete)) {
+                    int nextvalue = input.nextInt() - 1;
+                    Task tasktobehandled = ListofMessages.get(nextvalue);
+
+                    if(tasktobehandled instanceof ToDos) {
+                        String task = (((ToDos) tasktobehandled).getItem());
+                        String item = ((tasktobehandled).getTask());
+                        System.out.println("Noted. I've removed this task:");
+                        String Tobedisplayed = "  " + task + "[ ]" + item;
+                        System.out.println(Tobedisplayed);
+                        removeItem(nextvalue);
+                        System.out.println(NumberOfItemsInList());
+                    }else if(tasktobehandled instanceof Deadlines){
+                        String deadline = (((Deadlines) tasktobehandled).getDeadLine());
+                        String deadlinetask = (((Deadlines) tasktobehandled).getDeadLineTask());
+                        String item = (((Deadlines) tasktobehandled).getItem());
+                        System.out.println("Noted. I've removed this task:");
+                        String Tobedisplayed = "  " + item + "[ ]" + deadlinetask + " (by: "+ deadline + ")";
+                        System.out.println(Tobedisplayed);
+                        removeItem(nextvalue);
+                        System.out.println(NumberOfItemsInList());
+                    }else{ //instance of event
+                        String eventdescription = (((Events) tasktobehandled).getEventsDescription());  //Task
+                        String symbol = (((Events) tasktobehandled).getItem()); //Symbol
+                        String item = (((Events) tasktobehandled).getEventsDescription()); //Due deate
+                        System.out.println("Noted. I've removed this task:");
+                        String Tobedisplayed = "  " + symbol + "[ ]" + eventdescription + " (at: "+ item + ")";
+                        System.out.println(Tobedisplayed);
+                        removeItem(nextvalue);
+                        System.out.println(NumberOfItemsInList());
+
+                    }
+                    //Remove at the end
+
                 }
 
                 String ToDoItem = "todo";
