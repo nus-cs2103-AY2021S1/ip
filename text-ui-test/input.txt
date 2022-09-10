@@ -1,0 +1,7 @@
+todo buy milk
+todo buy fish
+deadline cs2103 assignment /by 20th August
+event QR lecture /at 20th August 2pm
+done 1
+bleh
+bye

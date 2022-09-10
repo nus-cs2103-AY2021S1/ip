@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.effect.Bloom?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Text?>
+
+<fx:root alignment="TOP_RIGHT" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <Text fx:id="dialog" lineSpacing="0.2" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+         <effect>
+            <Bloom />
+         </effect>
+         <HBox.margin>
+            <Insets top="10.0" />
+         </HBox.margin></Text>
+        <ImageView fx:id="displayPicture" fitHeight="78.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true">
+         <HBox.margin>
+            <Insets right="10.0" />
+         </HBox.margin></ImageView>
+    </children>
+    <padding>
+        <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
+    </padding>
+   <opaqueInsets>
+      <Insets bottom="10.0" top="10.0" />
+   </opaqueInsets>
+</fx:root>
