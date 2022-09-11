@@ -1,4 +1,6 @@
-// TOGA's output analysis RQ2 (With integration with evosuite)
+// TOGA's output analysis RQ2 (With integration with evosuite generated testcases)
+
+
 // good: true for except_corrent and true for assert_correct
 //i,e, either correctly generated assertion or correctly generated exceptional assertion
 TestName:com.google.gson.stream.JsonReader_ESTest::test28;
