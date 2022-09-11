@@ -151,7 +151,7 @@ TestName: org.jfree.chart.plot.CategoryPlot_ESTest::test049;
         }
         ",0,
 
-//false, false
+//false, false 0，1  1，0
 TestName: com.google.gson.stream.JsonReader_ESTest::test37;
         public void test37()  throws Throwable  {
         StringReader stringReader0 = new StringReader(""&S"");
@@ -181,3 +181,7 @@ TestName: jfree.data.time.TimeSeries_ESTest::test59;
         assertNotSame(timeSeries0, timeSeries1);
         }
         ",1,
+
+//哪些情况下，无需DESCRIPTION 辅助也可以？LIKE TRUE/FALSE assertions -> 降低我们的方法对于DESCRIPTION 的依赖，用 CLASSIFER
+//整理APACHE 2个库手写的测试用例，想得到的是：有多少比例的ASSERT NULL, NOT NULL, VS 别的ASSERTIONS
+// "blah " ".getDescription()"
