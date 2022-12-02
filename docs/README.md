@@ -6,9 +6,9 @@ Duke is a revolutionary **chatbot desktop app that keeps track of your tasks for
 * Quick Start
 * Features
 	1.  Adding a task : 
-		1.  Todo : [``` todo```](https://avalionnet.github.io/ip/#todo)
-		2. Event : [```event```](https://avalionnet.github.io/ip/#event)
-		3. Deadline : [```deadline```](https://avalionnet.github.io/ip/#deadline)
+		1.  Todo : [``` todo```](https://avalionnet.github.io/Project-Duke/#todo)
+		2. Event : [```event```](https://avalionnet.github.io/Project-Duke/#event)
+		3. Deadline : [```deadline```](https://avalionnet.github.io/Project-Duke/#deadline)
 	2.	Viewing tasks :
 			1.	View all saved tasks : ``` list```
 			2.	View all tasks on a particular date : ```view```
@@ -26,7 +26,7 @@ Installing Duke is fairly simple and 5 minutes is all you will need. Mark the li
   
  - To find out the Java version you have installed, click [here](https://www.java.com/en/download/help/version_manual.xml). 
  - If Java is not installed on your computer, click [here](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html) to download it. 
- - Download the latest `duke.jar` software from [here](https://github.com/avalionnet/ip/releases).
+ - Download the latest `duke.jar` software from [here](https://github.com/avalionnet/Project-Duke/releases).
  
  2. Save the file to the folder you want Duke to be installed in. 
  
@@ -35,7 +35,7 @@ Installing Duke is fairly simple and 5 minutes is all you will need. Mark the li
  - **Note that Duke will automatically create an additional `data` folder in this 	directory to save your tasks upon starting the program for the first time.
  - You should observe the following GUI appearing :
  
-![Intro Image of Duke Chatbot](https://avalionnet.github.io/ip/Demo.png)
+![Intro Image of Duke Chatbot](https://avalionnet.github.io/Project-Duke/Demo.png)
 
 # Tutorial
 Here are some features you can try upon your first launch of duke. Type the following commands in the input field at the bottom of the GUI and hit enter or click on the send button. Observe what happens.
@@ -67,7 +67,7 @@ Here are some features you can try upon your first launch of duke. Type the foll
 
 ### `Todo`
 
-Calling the **todo** command adds a todo task to the task list. A **todo** task contains only requires a description and will not accept an accompanying date or time. To add tasks with date and time, refer to the [deadline](https://avalionnet.github.io/ip/#Deadline) or [event](https://avalionnet.github.io/ip/#Event) commands.
+Calling the **todo** command adds a todo task to the task list. A **todo** task contains only requires a description and will not accept an accompanying date or time. To add tasks with date and time, refer to the [deadline](https://avalionnet.github.io/Project-Duke/#Deadline) or [event](https://avalionnet.github.io/Project-Duke/#Event) commands.
 
 Format: `todo DESCRIPTION`
 
@@ -76,7 +76,7 @@ Format: `todo DESCRIPTION`
 > -   `todo Celebrate Teacher's Day`
 > -   `todo Complete GEQ1000 Quiz`
 >
-![Image of Todo Command](https://avalionnet.github.io/ip/Todo.png)
+![Image of Todo Command](https://avalionnet.github.io/Project-Duke/Todo.png)
 
 ### `Event`
 
@@ -89,7 +89,7 @@ Format: `event DESCRIPTION /at DATE TIME`
 -   `event CS2101 OP1 /at 15.09.20 1000`
 -   `event Hackathon Finale /at 19.09.20 0900` 
 
-![Event Image of Duke Chatbot](https://avalionnet.github.io/ip/Event.png)
+![Event Image of Duke Chatbot](https://avalionnet.github.io/Project-Duke/Event.png)
 
  >**Important Note :** 
 > - The delimiter **/at must be added** between the `DESCRIPTION` and `DATE` of the event.
@@ -112,7 +112,7 @@ Format: `deadline DESCRIPTION /by DATE TIME`
 -   `deadline CS2100 lab 2 /by 20.09.20 1000`
 -   `deadline Art competition submission /by 30.10.20 2100` 
 
-![Deadline Image of Duke Chatbot](https://avalionnet.github.io/ip/Deadline.png)
+![Deadline Image of Duke Chatbot](https://avalionnet.github.io/Project-Duke/Deadline.png)
 
  >**Important Note :** 
 > - The delimiter **/by must be added** between the `DESCRIPTION` and `DATE` of the event.
@@ -134,7 +134,7 @@ Format:  `list`
 > **Note:**
 > Do not add any other parameters or descriptions behind the list word to trigger this command successfully.
 
-![Image of List Command](https://avalionnet.github.io/ip/List.png)
+![Image of List Command](https://avalionnet.github.io/Project-Duke/List.png)
 
 ### b. View all tasks on a particular date : `view`
 
@@ -151,7 +151,7 @@ Format:  `view DATE`
 -   `view 18.09.20`  returns  task **3**
 -    task 1 will never be returned 
 
-![Image of View Command](https://avalionnet.github.io/ip/View.png)
+![Image of View Command](https://avalionnet.github.io/Project-Duke/View.png)
 
 
 > **Note:** 
@@ -172,7 +172,7 @@ Format:  `find KEYWORD [MORE_KEYWORDS]`
 -   `find iPhone cable`  returns task 1
 -   `find dinner` returns no task 
 
-![Image of Find Command](https://avalionnet.github.io/ip/List.png)
+![Image of Find Command](https://avalionnet.github.io/Project-Duke/List.png)
 
 > **Note:**
 > -   The search only works on task descriptions.
@@ -196,7 +196,7 @@ Format:  **`done`**`TASK_INDEX`
 > **Note:**
 >  The task index must reference an existing task in the task list.
 
-![Image of Done Command](https://avalionnet.github.io/ip/Done.png)
+![Image of Done Command](https://avalionnet.github.io/Project-Duke/Done.png)
 
 
 ## 4. Deleting a task : `delete`
@@ -210,7 +210,7 @@ Format:  **`delete`**`TASK_INDEX`
 -   The `TASK_INDEX` here refers to the number shown beside the accompanying task in the task list after displaying it with the`list` command.
 -   Please use a  **positive integer**  (eg. 1, 2, 3 …) for the index value to successfully mark a task as done.
 
-![Image of Done Command](https://avalionnet.github.io/ip/Delete.png)
+![Image of Done Command](https://avalionnet.github.io/Project-Duke/Delete.png)
 
 > **Note:**
 >  The task index must reference an existing task in the task list.
