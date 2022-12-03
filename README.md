@@ -1,6 +1,11 @@
 # Project Duke
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+Duke is a revolutionary **chatbot desktop app that keeps track of your tasks for you.** **Optimised for use via a Command Line Interface** (CLI), Duke also supports a beautiful Graphical User Interface (GUI) to brighten up your day and help you get things done faster.
+
+<p align="center">
+   <img src="https://avalionnet.github.io/Project-Duke/View.png" width="330" class="center">
+</p>
+
 
 ## Setting up in Intellij
 
