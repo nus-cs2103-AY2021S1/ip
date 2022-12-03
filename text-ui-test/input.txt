@@ -1,0 +1,16 @@
+todo read book
+done -1
+deadline return book /by 06.06.20 1200
+event project meeting /at 06.08.20 1000
+list
+done 1
+carrots
+todo join sports club
+todo borrow book
+done 4
+list
+event cca meeting /at 03.06.20 2000
+deadline go to bed /by 28.08.20 0100
+done 3
+list
+bye
