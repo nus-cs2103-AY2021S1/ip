@@ -1,0 +1,4 @@
+D | 0 | return book | 06-06-2020 0900
+T | 1 | join sports club
+D | 1 | return book | 07-06-2020 0900
+E | 0 | birthday party | 12-12-2020 1200
